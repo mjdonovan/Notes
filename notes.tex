@@ -1,5 +1,6 @@
 \documentclass[11pt]{article}
 %\usepackage{cancel}
+\usepackage{fullpage}
 \usepackage{amsmath,amsthm,amssymb}
 \usepackage{mathrsfs,nicefrac}
 \usepackage{amssymb}
@@ -32,6 +33,7 @@
 \newcommand{\Der}{\textup{Der}}
 \newcommand{\End}{\mbox{End\ }}
 \newcommand{\im}{\mbox{im}}
+\newcommand{\Gr}{\textup{Gr}}
 \newcommand{\pim}{\mbox{pim}}
 \newcommand{\supp}{\mbox{supp\,}}
 \newcommand{\Ker}{\mbox{ker\ }}
@@ -124,9 +126,104 @@
 
 \newcommand{\calL}{\mathcal{L}}
 
-\newcommand{\myheading}[1]{\section*{#1}}
+\newcommand{\myheading}[1]%{\section*{#1}}
+{{\noindent\Large #1}
+
+}
+
+\newcommand{\theexp}[4]{\raisebox{-.1cm}[.5cm][0cm]{\mbox{$\begin{array}{c}H_{#1}(\frac{F_{#2}}{F_{#3}}) \\=E^1_{#4} \end{array}$}}}%used in the Filtered chain complex SS
 
 \begin{document}
+\myheading{The Spectral Sequence Associated with a Filtered Chain Complex}
+
+
+Suppose that $C_*=\varinjlim(F_0C_*\hookrightarrow F_1C_*\hookrightarrow F_2C_*\hookrightarrow\cdots)$ is a filtered chain complex. Then there is a spectral sequence $\{E^r_{s,t}\}$ converging to $H_{s+t}(C_*)$, such that $E^1_{s,t}=H_{s+t}(F_sC_*/F_{s-1}C_*)$. Here the target of convergence is graded via $F_s(H_{s+t}(C_*))=\im(H_{s+t}(F_sC_*)\to H_{s+t}(C_*))$. Thus it is claimed that $E^\infty_{s,t}\simeq F_s(H_{s+t}(C_*))/F_{s-1}(H_{s+t}(C_*))$. Consider the following diagram:
+% \[\xymatrix{
+% &&&0\ar@{.>}[d]&\\
+% &&&H_{s+t-1}(F_{s-r-1})\ar[d]^\alpha \ar[r]&\theexp{s+t-1}{s-r-1}{s-r-2}{s-r-1,t+r}\\
+% &&&H_{s+t-1}(F_{s-r})\ar@{.>}[d] \ar[r]^{g'}&\theexp{s+t-1}{s-r}{s-r-1}{s-r,t+r-1}\\
+% &&&H_{s+t-1}(F_{s-2}) \ar[d]\ar[r]&\theexp{s+t-1}{s-2}{s-3}{s-2,t+1}\\
+% \theexp{s+t+1}{s+1}{s}{s+1,t}\ar[r]&H_{s+t}(F_s)\ar[r]^g\ar[d]&
+% \theexp{s+t}{s}{s-1}{s,t}\ar[r]^\partial\ar@/^2pc/[rruu]^(.3){\text{``$d_r$''}}
+% &H_{s+t-1}(F_{s-1}) \ar[r]&\theexp{s+t-1}{s-1}{s-2}{s-1,t}\\
+% \theexp{s+t+1}{s+2}{s+1}{s+2,t-1}\ar[r]&H_{s+t}(F_{s+1})\ar@{.>}[d]\\
+% \theexp{s+t+1}{s+r}{s+r-1}{s+r,t-r+2}\ar[r]^{\partial'}&H_{s+t}(F_{s+r-1})\ar[d]^{\beta}\\
+% \theexp{s+t+1}{s+r+1}{s+r}{s+r,t-r+1}\ar[r]&H_{s+t}(F_{s+r})\ar@{.>}[d]\\
+% &H_{s+t}(C_*)
+% }\]
+%
+\[\xymatrix{
+&&&0\ar@{.>}[d]&\\
+&&&H_{s+t-1}(F_{s-r-1})\ar[d]^\alpha \ar[r]&\theexp{s+t-1}{s-r-1}{s-r-2}{s-r-1,t+r}\\
+&H_{s+t}(F_{s-1})\ar[d]^\gamma&&H_{s+t-1}(F_{s-r})\ar@{.>}[d] \ar[r]^{g'\ \ }&\theexp{s+t-1}{s-r}{s-r-1}{s-r,t+r-1}\\
+%&&&H_{s+t-1}(F_{s-2}) \ar[d]\ar[r]&\theexp{s+t-1}{s-2}{s-3}{s-2,t+1}\\
+%the bendy arrow was:\ar@/^2pc/[rruu]^(.3){\text{``$d_r$''}}
+\theexp{s+t+1}{s+1}{s}{s+1,t}\ar[r]&H_{s+t}(F_s)\ar[r]^{g\ \ }\ar@{.>}[d]&
+\theexp{s+t}{s}{s-1}{s,t}\ar[r]_\partial\ar[rru]^(.4){\text{``$d_r$''}}
+&H_{s+t-1}(F_{s-1}) \ar[r]&\theexp{s+t-1}{s-1}{s-2}{s-1,t}\\
+%\theexp{s+t+1}{s+2}{s+1}{s+2,t-1}\ar[r]&H_{s+t}(F_{s+1})\ar@{.>}[d]\\
+\theexp{s+t+1}{s+r}{s+r-1}{s+r,t-r+2}\ar[r]_{\ \ \partial'}\ar[rru]^(.4){\text{``$d_r$''}}&H_{s+t}(F_{s+r-1})\ar[d]^{\beta}\\
+\theexp{s+t+1}{s+r+1}{s+r}{s+r,t-r+1}\ar[r]&H_{s+t}(F_{s+r})\ar@{.>}[d]\\
+&H_{s+t}(C_*)
+}\]
+\begin{alignat*}{2}
+\text{Define:\qquad } E^r_{s,t}&:=Z^r_{s,t}/B^r_{s,t}\text{, where:}\\
+Z^r_{s,t}&:=\partial^{-1}(\im(H_{s+t-1}(F_{s-r})\to H_{s+t-1}(F_{s-1})))\subseteq E^1_{s,t}\\
+B^r_{s,t}&:=g(\ker(H_{s+t}(F_{s})\to H_{s+t}(F_{s+r-1})))\subseteq E^1_{s,t}
+\end{alignat*}
+Given an element $x\in Z^r_{s,t}$, there is an element $a\in H_{s+t-1}(F_{s-r})$ such that $x$ and $a$ have the same image in $H_{s+t-1}(F_{s-1})$. Then $g'(a)$ is an element of $Z^r_{s-r,t+r-1}$. Different choices for $a$ differ by elements of $\ker(H_{s+t-1}(F_{s-r})\to H_{s+t-1}(F_{s-1}))$, so that the class of $g'(a)$ in $E^r_{s-r,t+r-1}$ is well defined. Then the map $\partial_r:E^r_{s,t}\to E^r_{s-r,t+r-1}$ is defined via this process, and $\partial_r^2=0$.
+
+Now the elements of $E^1_{s,t}$ which represent an element of the kernel of $d_r$ are exactly the elements of $Z^{r+1}_{s,t}$, since $\ker(g')=\im(\alpha)$. Similarly, the elements of $E^1_{s,t}$ which represent an element of the image of $d_r$ are exactly the elements of $B^{r+1}_{s,t}$, since $\ker(\beta)=\im(\partial')$. Thus $H_{s,t}(E^r_{*,*},\partial_r)\simeq E^{r+1}_{s,t}$ as desired.
+
+Finally, we should find an isomorphism $E^\infty_{s,t}\to F_s(H_{s+t}(C_*))/F_{s-1}(H_{s+t}(C_*))$. For this, note that $Z^\infty_{s,t}=\ker\partial=\im(g)$ and $B^\infty_{s,t}=g(\ker(H_{s+t}(F_s)\to H_{s+t}(C_*)))$. So given $x=g(y)\in Z^\infty_{s,t}$, $y$ maps via the vertical arrows to an element of $F_s(H_{s+t}(C_*))$. As $\ker(g)=\im(\gamma)$, this is well defined up to an element of $F_{s-1}(H_{s+t}(C_*))$, so we have defined a map $Z^\infty_{s,t}\to F_s(H_{s+t}(C_*))/F_{s-1}(H_{s+t}(C_*))$. A brief diagram chase reveals that the kernel is $B^\infty_{s,t}$ and that the map is onto.
+
+\begin{flushright}
+ {\small Transcribed  by Michael Donovan from a lecture of Mark Behrens, 29 March, 2011.}
+\end{flushright}
+\pagebreak
+
+\newcommand{\shrt}[1]{\makebox[0cm]{\ensuremath{#1}}}
+
+\myheading{A Derivation of the Leray-Serre-Atiyah-Hirzebruch Spectral Sequence}
+Suppose that $\pi:E\to B$ is a Hurewicz fibration, with fiber $F$, where $B$ is a (finite?) connected CW-complex. Let $B^n$ be the $n$-skeleton of $B$, and define $E^n:=\pi^{-1}B^n$. Let $h_*$ be an unreduced homology theory. The long exact sequences for the pairs $(E^p,E^{p-1})$ can be written as in the following diagram. Here, wavy arrows indicate a map with degree $-1$, and each triangle is exact.
+\[\xymatrix{
+0\ar[rr]|{\ \cdot\ \cdot\ \cdot\ }&&h_*(E^{p-1})\ar[rr]^i\ar[ld]_\rho&&h_*(E^{p})\ar[rr]^i \ar[ld]_\rho&&h_*(E^{p+1})\ar[ld]_\rho
+\ar[rr]|{\ \cdot\ \cdot\ \cdot\ }&&h_*(E)\\
+%&\cdots\ar[r]&h_*(E)\\
+&\ \ \ \ \shrt{h_*(E^{p-1},E^{p-2})}\phantom{{5\choose3}}&&
+\shrt{h_*(E^{p},E^{p-1})}\phantom{{5\choose3}}\ar@{~>}[lu]_\partial&&
+\shrt{h_*(E^{p+1},E^{p})}\phantom{{5\choose3}}\ar@{~>}[lu]_\partial&&
+\shrt{h_*(E^{p+2},E^{p+1})}\phantom{{5\choose3}}\ar@{~>}[lu]_\partial
+}\]
+Define, for $r\geq0$:
+\begin{alignat*}{2}
+Z_{pq}^r:=&\left\{x\in h_{p+q}(E^p,E^{p-1})\ \middle|\ \partial x\in\im(i^{r})\right\}\\
+=&\left\{\text{relative classes $x$ whose boundary comes from $h_{p+q-1}(E^{p-r-1})$}\right\}.\\
+B_{pq}^r:=&\left.\rho(\ker(i^r))\right.\\
+=&\left\{\rho(y)\ \middle|\ y\in h_{p+q}(E^p),\ i^r(y)=0\in h_{p+q}(E^{p+r})\right\}\\
+=&\left\{\text{restrictions $\rho(y)$ of classes $y\in h_{p+q}(E^p)$ which are nullhomologous in $E^{p+r}$}\right\}.\\
+E_{pq}^{r+1}:=&\left.Z_{pq}^r/B_{pq}^r.\right.
+\end{alignat*}
+As each triangle is exact, $B_{pq}^r\subseteq E_{pq}^r$ for all $p,q,r$, so that the definition of $E_{pq}^{r+1}$ makes sense.
+Note that $Z_{pq}^0=h_{p+q}(E^p,E^{p-1})$ and $B_{pq}^0=0$, so that $E_{pq}^1=h_{p+q}(E^p,E^{p-1})$.
+
+For each $p,q\geq0$, let $i_{pq}:h_{p+q}(E^p)\to h_{p+q}(E)$ be the map on homology induced by the inclusion. Then there is an increasing filtration on $h_{p+q}(E)$ defined by $F_{p}h_{p+q}(E):=\im(i_{pq})$. Let $\Gr_{pq}$ be the $p^\text{th}$ subquotient $F_{p}h_{p+q}(E)/F_{p-1}h_{p+q}(E)$. Also, define $Z^\infty_{pq}$ and $B^\infty_{pq}$ as follows:
+\begin{alignat*}{2}
+Z_{pq}^\infty:=&\left.\bigcap_r Z_{pq}^r\right.=\left\{x\in h_{p+q}(E^p,E^{p-1})\ \middle|\ \partial x=0\right\}\\
+%=&\left.\im(\rho:h_{p+q}(E^p)\to h_{p+q}(E^p,E^{p-1}))\right.\\
+=&\left.\rho(h_{p+q}(E^p)).\right.\\
+B_{pq}^\infty:=&\left.\bigcup_r B_{pq}^r\right.=\left\{\rho(y)\ \middle|\ y\in h_{p+q}(E^p),\ i_{pq}(y)=0\in h_{p+q}(E)\right\}\\
+=&\left.\rho(\ker (i_{pq})).\right.\\
+\Gr_{pq}=&\left.\im\bigl(h_{p+q}(E^p)\rightarrow h_{p+q}(E)\bigr)/\im\bigl(h_{p+q}(E^{p-1})\rightarrow h_{p+q}(E)\bigr).\right.
+\end{alignat*}
+
+Define a isomorphism $E^\infty_{pq}:=Z_{pq}^\infty/B_{pq}^\infty\to \Gr_{pq}$
+by $[\rho(y)]\mapsto[i_{pq}(y)]$, for $y\in h_{p+q}(E^p)$. A diagram chase reveals that this is well defined and an isomorphism.
+
+Finally, we can define differentials $d_{r+1}:E^{r+1}_{pq}\to E^{r+1}_{p-r-1,q+r}$ by the recipe $[x]\mapsto [\rho i^{-r}\partial(x)]$, for $x\in Z_{pq}^{r}$. A rather larger diagram chase reveals that this gives a differential on the groups $E^{r+1}_{pq}$ of bidegree $(-r-1,r)$, whose homology at $E^{r+1}_{pq}$ is $E^{r+2}_{pq}$, so that we have defined a spectral sequence converging to $h_{p+q}(E^p)$.
+
+\pagebreak
+
 \myheading{Principal $G$-bundles on $\Sigma A$ --- clutching v.\ classifying}
 Let $A$ be a pointed space, and $G$ a topological group. Suppose that $\beta:A\to \Omega BG$ and $\gamma:\Sigma A\to BG$ are adjoint maps. We can produce a principal $G$-bundle on $\Sigma A$ by either using a clutching construction with $\beta$, or pulling back $EG$ along $\gamma$. This note shows that the two bundles obtained are isomorphic.
 
@@ -154,5 +251,21 @@ E_c\beta\ar[rr]\ar[d]&&EG\ar[d]&
 (t,a)\ar@{|->}[r]&(t,\beta(a))\ar@{|->}[r]&\beta(a)(t)
 }\]
 As $\gamma=\epsilon_{BG}\circ\Sigma\beta$, this shows that $E_cB$ (obtained from $\beta$ by clutching) is isomorphic to $\gamma^*EG$.
+\pagebreak
+
+\myheading{The Projective Bundle Theorem}
+Suppose that $\xi\downarrow B$ is a complex $n$-plane bundle. Let $\PP(\xi)\downarrow B$ be the associated $\PP^{n-1}$-bundle. Then $H^*(\PP(\xi))$ is a free $H^*(B)$-module on generators $1,e,e^2,\ldots,e^{n-1}$, where $e\in H^*(\PP(\xi))$ is the Euler class of the tautologous line bundle $L\downarrow \PP(\xi)$.
+
+For each $x\in B$, let $F_x$ be the fiber above $x$, and let $L_x$ be the restriction of $L$ to that fiber. Thus $L_x$ is the tautologous line bundle over $F_x$, and $H^*(F_x)$ is generated by the euler class $e(L_x)=e|_{F_x}$. Thus the coefficient system is trivial. Moreover, the homomorphism $H^*(\PP(\xi))\to H^*(F)$ is surjective, where $F$ is the fiber over the basepoint of $B$.
+
+Consider now the fibration $F \rightarrow\PP(\xi)\downarrow B$. The transgression is defined on all of $H^*(F)$, as we have the following diagram which describes the transgression:
+\[\xymatrix{
+H^*(\PP(\xi))\ar@{->>}[r]&H^*(F)\ar[r]^{0\ \ \ \ \ }&H^{*+1}(\PP(\xi),F)\\
+&&H^{*+1}(B,*)\ar[u]\ar[r]&H^{*+1}(B)
+}\]
+Moreover, this shows that $H^*(F)$ consists only of permanent cycles, so the Serre Spectral Sequence collapses at $E_2$. Thus the $E_\infty$ is a free $H^*(B)$-module, compatibly with the filtering on $B$, so that $H^*(\PP(\xi))$ is a free $H^*(B)$-module.
+
+%To see this, c We should check first that the coefficient system $H^*(\PP(\xi)_x)$ on $B$ is trivial. It is enough to show that $\pi_1(B)$ acts trivially on $H^2(\PP(\xi))$, as each coefficient group is generated by $H^2$.
+
 \end{document}
 
