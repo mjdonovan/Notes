@@ -1,0 +1,1 @@
+A collection of notes taken from books I'm reading or have read.

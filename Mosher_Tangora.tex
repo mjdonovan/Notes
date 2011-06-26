@@ -128,8 +128,9 @@
 \newcommand{\COMMENT}[1]{}
 
 \newcommand{\calL}{\mathcal{L}}
-\newcommand{\RP}{\R\PP}
-\newcommand{\CP}{\C\PP}
+\newcommand{\RP}{{\R\PP}}
+\newcommand{\CP}{{\C\PP}}
+\newcommand{\Steen}{\mathscr{A}}
 
 \title{Cohomology Operations}
 \author{Mosher \& Tangora}
@@ -208,7 +209,51 @@ If $i$ is a power of two, consider the action of $\Squ$ on $\alpha^i\in H^i(\RP^
 \begin{lem*}
 If $p$ is prime, and $a=\sum a_ip^i$ and $b=\sum b_ip^i$ are $p$-adic expressions for $a$ and $b$, then modulo $p$, we have ${b\choose a}=\prod{b_i\choose a_i}$.
 \end{lem*}
-\subsection*{Non-existence of elements of Hopf invariant one}
+\subsection{Non-existence of elements of Hopf invariant one}
 If $\pi_{2n-1}S^n$ contains an element of odd Hopf invariant, then $n$ is a power of two, as otherwise $\Squ^n$ is decomposable, and so squaring the $n$ dimensional class in the relevant CW complex returns zero, modulo 2.
+
+\section{Application: Vector fields on spheres}
+Having $k$ linearly independent fields on $S^{n-1}$ is the same as having a section for the map $V_{n,k+1}\downarrow S^{n-1}$, where $V_{n,k+1}$ is the Steifel manifold, whose points are orthonormal $k+1$-frames in $\R^n$. 
+
+Now let $P_{n,k}$ be the stunted projective space $\RP^n/\RP^{n-k}$. It is shown that when $2k\leq n$, $P_{n,k}$ is the $n$-skeleton of $V_{n,k}$. Moreover, $\widetilde H^q(P_{n,k};\Z_2)$ is $\Z_2$ for $(n-k)\leq q<n$, and otherwise zero. By direct calculation, $\Squ^{k-1}v_{n-k}={n-k\choose k-1}v_{n-1}$, where $v_q$ is the generator of $\widetilde H^q$.
+\begin{thm*}
+If we write $n=(2s+1)2^m$, then $S^{n-1}$ does not admit a $2^m$-field.
+\end{thm*}
+\begin{proof}
+This is trivial when $s=0$, or when $m=0$, so assume $s,m\geq1$. Then, writing $k=2^m+1$, we have $2k\leq n$, so that $P_{n,k}$ is the $n$-skeleton of $V_{n,k}$. In particular: \[\widetilde H^{n-k}(V_{n,k};\Z_2)=\Z_2\langle v_{n-k}\rangle,\ \ \widetilde H^{n-1}(V_{n,k};\Z_2)=\Z_2\langle v_{n-1}\rangle,\text{ and }\Squ^{k-1}v_{n-k}=v_{n-1}.\]
+Note that the binomial coefficient involved is odd, by the above lemma.
+Having a $2^m$-field would guarantee a section $f$ for $V_{n,k}\downarrow S^{n-1}$, inducing an  isomorphism $\widetilde H^{n-1}(V_{n,k};\Z_2)\to\widetilde H^{n-1}(S^{n-1};\Z_2)$. This would imply that the top cohomology class of $S^{n-1}$ is in the image of $\Squ^{k-1}$, which is false.
+\end{proof}
+
+\section{The Steenrod algebra}
+\subsection{Graded modules and algebras}
+Suppose $R$ is a commutative ring with unit. The \emph{tensor product} of graded $R$-modules $M,N$ has $(M\otimes N)_t=\oplus M_{i}\otimes N_{t-i}$. A \emph{graded $R$-algebra} is a graded $R$-module $A$ with a module homomorphism $\phi:A\otimes A\to A$. It's \emph{associative} if the obvious diagram commutes. It's \emph{commutative} if $\phi\circ T=\phi$, where $T:M\otimes N\to N\otimes M$ sends $m\otimes n\mapsto (-1)^{|m||n|}n\otimes m$.
+
+An \emph{augmentation} is a graded $R$-algebra homomorphism $\epsilon:A\to R$ (where $R$ is a graded $R$-algebra concentrated in degree zero). An augmented $R$-algebra is \emph{connected} if $\epsilon:A_0\to R$ is an isomorphism.
+
+The \emph{tensor product of algebras} $A$ and $B$ is formed using the multiplication $(\phi_A\otimes\phi_b)\circ(1\otimes T\otimes 1)$. That is, $(a_1\otimes b_1)(a_2\otimes b_2)=(-1)^{|b_1||a_2|}(a_1a_2)\otimes(b_1b_2)$. Given an $R$-module $M$, let $\Gamma(M)$ be the graded module with $\Gamma(M)_r=M^{\otimes r}$. This is an associative but \textbf{non}-commutative graded $R$-algebra, the \emph{tensor algebra}, with multiplication using the isomorphisms $M^{\otimes a}\otimes M^{\otimes b}=M^{\otimes (a+b)}$.
+
+\subsection{The Steenrod algebra $\Steen$}
+Let $R=\Z_2$, so $M_i=\Z_2\langle\Squ^i\rangle$ for $i\geq0$ specifies a graded $\Z_2$-module $M$. The \emph{Steenrod algebra} $\Steen$ is the quotient of $\Gamma(M)$ be the Adem relations (and $\Squ^0=1$).
+\begin{thm*}[Serre-Cartan basis]
+The monomials $\Squ^I$ form a basis for $\Steen$ over $\Z_2$.
+\end{thm*}
+We have already seen, via the action of $\Steen$ on the cohomology of $K(\Z_2,1)^n$, that these monomials are linearly independent. That they span follows by use of the Adem relations, keeping track of the \emph{moment} $m(I):=\sum i_ss$ of a sequence $I$.
+
+Note that $\Steen$ is generated as an algebra by the $\Squ^{2^i}$, but not freely.
+\setcounter{subsection}{3}
+\subsection{The diagonal map of $\Steen$}
+There's an algebra homomorphism $\psi:\Gamma(M)\to\Gamma(M)\otimes\Gamma(M)$ defined by $\psi(\Squ^i)=\sum_j \Squ^j\otimes\Squ^{i-j}$. That is, extended by the requirement that $\psi$ is an algebra homomorphism.
+\begin{thm*}
+$\psi$ descends to an algebra homomorphism $\Steen\to\Steen\otimes\Steen$.
+\end{thm*}
+\begin{proof}
+We have maps $w_n:\Steen\to H^*(K_n;\Z_2)$ ($K_n=K(\Z_2,1)^n$) defined by $\theta\mapsto\theta(\sigma_n)$. Moreover, $w_n$ is injective on elements of degree at most $n$. It is shown  that the following commutes:
+\[\xymatrix{
+\Gamma(M)\ar[r]_p\ar[d]^\psi&\Steen\ar[d]_{w_n\times w_n}\ar[rd]^{w_{2n}}\\
+\Steen\otimes\Steen\ar[r]^{w\otimes w\qquad \ }&H^*(K_n)\otimes H^*(K_n)\ar@{=}[r]&H^*(K_{2n})
+}\]
+Then, given an element $z\in\Gamma(M)$ of maximum degree $n$ such that $p(z)=0$, we must have $\psi(z)=0$ (by the diagram). This shows that the map $\psi$ descends.% Note that the commutativity of the diagram follows formally from the Cartan formula on elements $\Squ^i$, see the text for the extension to all of $\Gamma(M)$.
+\end{proof}
 \end{document}
 
