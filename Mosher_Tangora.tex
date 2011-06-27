@@ -78,6 +78,7 @@
 \newtheorem*{prop*}{Proposition}
 %\newtheorem*{prop}{Proposition}
 \newtheorem{cor}[thm]{Corollary}
+\newtheorem*{cor*}{Corollary}
 \newtheorem{defprop}[thm]{Definition-Proposition}
 
 
@@ -132,6 +133,21 @@
 \newcommand{\RP}{{\R\PP}}
 \newcommand{\CP}{{\C\PP}}
 \newcommand{\Steen}{\mathscr{A}}
+\newcommand{\Orth}{\textup{\textbf{O}}}
+\newcommand{\bigrightsquig}{\scalebox{2}{\ensuremath{\rightsquigarrow}}}
+
+%\newenvironment{packed_enum}{
+%\begin{enumerate}
+%  \setlength{\itemsep}{1pt}
+%  \setlength{\parskip}{0pt}
+%  \setlength{\parsep}{0pt}
+%}{\end{enumerate}}
+\newcommand{\squishlist}{
+  \setlength{\itemsep}{1pt}
+  \setlength{\parskip}{0pt}
+  \setlength{\parsep}{0pt}
+}
+
 
 \title{Cohomology Operations}
 \author{Mosher \& Tangora}
@@ -162,6 +178,7 @@ $\RP^\infty$ is a $K(\Z_2,1)$, and $S^\infty\downarrow\RP^\infty$ is a model for
 
 \section{Properties of the squares}
 \begin{enumerate}
+\squishlist
 \item[0.] $\Squ^i$ is a natural homomorphism $H^p(K,L;\Z_2)\to H^{p+i}(K,L;\Z_2)$
 \item[1.] $\Squ^i(x)=0$ when $i>|x|$
 \item[2.] $\Squ^i(x)=x^2$ when $i=|x|$
@@ -193,6 +210,7 @@ In particular, this means that the elements $\Squ^I(\imath_n)\in H^*(K(\Z_2,n);\
 \subsection{The Adem Relations}
 Some memorable Adem relations:
 \begin{itemize}
+\squishlist
 \item $\Squ^1\Squ^{2n+1}=0$
 \item $\Squ^1\Squ^{2n}=\Squ^{2n+1}$
 \item $\Squ^{2n-1}\Squ^{n}=0$
@@ -282,5 +300,80 @@ For example, $H^*(X;\Z_2)$ is a module over $\Steen$, and by the Cartan formula 
 For any sequence $R$ of nonnegative integers (all but finitely many zero), we have an element $\xi^R$ of $\Steen^*$. These elements are a basis of $\Steen^*$, and the dual basis $\{\Squ^R\}$ of $\Steen$ is referred to as the Milnor basis. It is very different from the Serre-Cartan basis, but we do have $\Squ^{\{i,0,\ldots\}}=\Squ^i$.
 
 \section{Exact couples and spectral sequences}
+
+\section{Fiber Spaces}
+\begin{enumerate}
+\squishlist
+\item By fibration, we mean 'Serre fibration'.
+\item In a Hurewicz fibration, all fibres are homotopic, while in a Serre fibration, we can only assert this when both fibres are finite complexes.
+\item If $C\downarrow B$ is a covering space ($C$ connected), then the fiber is the discrete group $G$ of covering transformations. Moreover, the LES gives $\pi_n(C)=\pi_n(B)$ for $n\geq2$, and a short exact sequence $0\to\pi_1(C)\to\pi_1(B)\to G\to0$.
+\item $p:\Orth(n+1)\to S^n$ given by evaluation at a fixed point of $S^n$, has fibre $\Orth(n)$. Then the LES gives $\pi_{i+1}(S^n)\to\pi_i(\Orth(n))\to\pi_i(\Orth(n+1))\to\pi_i(S^n)$, and the middle map is an isomorphism when $i<n-1$. Thus the groups $\pi_i(\Orth(n))$ are isomorphic for $n>i+1$. The stable values are known, and satisfy Bott periodicity.
+\end{enumerate}
+\setcounter{subsection}{3}
+\subsection{Serre's exact sequence}
+Suppose that $F\rightarrow E\downarrow B$ is a fibre space, with $B$ simply connected. Suppose further that $H_i(B)=0$ for $0<i<p$ and $H_j(F)=0$ for $0<j<q$. Then there is a (finite) exact sequence
+\[\xymatrix{
+H_{p+q-1}(F)\ar[r]^{i_*}&H_{p+q-1}(E)\ar[r]^{p_*}&H_{p+q-1}(B)\ar[r]^{\tau}&H_{p+q-2}(F)\ar[r]&\cdots\ar[r]&H_1(E)\ar[r]&0
+}\]
+This can be used to prove the Hurewicz and relative Hurewicz theorems.
+\begin{thm*}
+Suppose $f:X\hookrightarrow Y$ is an inclusion, where $X$ is arc-connected, $Y$ is simply connected, and $\pi_2(Y,X)$ is abelian. Then the following are equivalent (for any $n\geq1$):
+\begin{enumerate}
+\squishlist
+\item $f_*:H_i(X)\to H_i(Y)$ is iso for $i<n$ and epi for $i=n$;
+\item $f_\#:\pi_i(X)\to \pi_i(Y)$ is iso for $i<n$ and epi for $i=n$;
+\item The pair $(Y,X)$ is $n$-connected; and
+\item $H_i(Y,X)=0$ for $i\leq n$.
+\end{enumerate}
+\end{thm*}
+\begin{proof}
+2 and 3 are equivalent, as are 1 and 4, by exactness in the long exact sequences. Moreover, 3 and 4 are equivalent by the relative Hurewicz theorem, as long as $\pi_2(Y,X)$ is abelian.
+\end{proof}
+\begin{cor*} If $X$ and $Y$ are simply connected, and $f:X\to Y$, then $f$ is a homology isomorphism if and only if it is a homotopy isomorphism.
+\begin{proof}
+Replace $f$ by an inclusion. We need $\pi_2(Y,X)$ abelian, but have exact sequence $\pi_2(Y)\to\pi_2(Y,X)\to0$.
+\end{proof}
+\end{cor*}
+\setcounter{subsection}{5}
+\subsection{The cohomology spectral sequence of a fibre space}
+\begin{enumerate}
+\squishlist
+\item Each $E_r$ is a bigraded ring.
+\item In $E_r$, $d_r$ is an anti-derivation (with respect to \emph{total} degree): $d(ab)=d(a)b+(-1)^{|a|}ad(b)$.
+\item The product on $E_{r+1}$ is induced by that of $E_r$, and that on $E^\infty$ is induced by that in $H^*(E;R)$.
+\item When $B$ and $F$ are $(p-1)$- and $(q-1)$-connected, respectively, we get:
+\[\xymatrix{
+\cdots\ar[r]&H^{p+q-2}(F)\ar[r]^\tau&H^{p+q-1}(B)\ar[r]^{p^*}&H^{p+q-1}(E)\ar[r]^{i^*}&H^{p+q-1}(F).
+}\]
+\item If $x$ is transgressive, then so is $\Squ^i(x)$, and if $\tau(x)=[y]$, $\tau(\Squ^i(x))=[\Squ^i(y)]$.
+\end{enumerate}
+To see the last point, consider the following diagram which describes the transgression:
+\[\xymatrix{
+H^*(F)\ar[r]&H^{*+1}(E,F)&E_\infty^{*+1,0}\\
+E_\infty^{0*}\ar@{^{(}->}[u]\ar@{.>}[rur]&H^{*+1}(B,*)\ar[u]\ar[r]&H^{*+1}(B)\ar@{->>}[u]
+}\]
+By the naturality of $\Squ^i$, and compatibility with the coboundary, we have:
+\[\xymatrix{
+x\ar@{|->}[r]&\delta x&[y]\\
+x\ar@{|.>}[rur]\ar@{|->}[u]&z\ar@{|->}[u]\ar@{|->}[r]&y\ar@{|->}[u]
+}\raisebox{-.8cm}{\qquad\bigrightsquig\qquad }
+\xymatrix{
+\Squ^ix\ar@{|->}[r]&\delta\,\Squ^ix&[\Squ^iy]\\
+\Squ^ix\ar@{|.>}[rur]\ar@{|->}[u]&\Squ^iz\ar@{|->}[u]\ar@{|->}[r]&\Squ^iy\ar@{|->}[u]
+}\]
 \end{document}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
