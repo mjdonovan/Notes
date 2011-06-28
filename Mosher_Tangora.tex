@@ -169,8 +169,12 @@
 
 \section{Introduction of Cohomology Operations}
 \subsection{Cohomology Operations and $K(\pi,n)$ spaces}
-There is a natural equivalence of functors $[\DASH,K(\pi,n)]\simeq H^n(\DASH,\pi)$ given by $[f]\longleftrightarrow f^*(\imath_n)$, so:
-\[H^m(K(\pi,n);\pi')\longleftrightarrow [K(\pi,n),K(\pi',m)]\longleftrightarrow \textup{Nat}( H^n(\DASH,\pi), H^{m}(\DASH,\pi'))\]
+There is a natural equivalence of functors $[\DASH,K(\pi,n)]\simeq H^n(\DASH;\pi)$ given by $[f]\longleftrightarrow f^*(\imath_n)$. Here the \emph{fundamental class} $\imath_n\in H^n(K(\pi,n);\pi)$ is defined to be the cohomology class corresponding to $\text{id}_\pi$ under:
+\[\xymatrix{
+H^n(K(\pi,n);\pi)\ar[r]^{\simeq\ \ \ \ }_{\textup{UCT}\ \ \ \ }&\Hom(H_n(K(\pi,n)),\pi)\ar[r]_{\ \ \ \ \ \ \text{Hur.}}^{\ \ \ \ \ \ \simeq}&\Hom(\pi,\pi).
+}\]
+In summary:
+\[H^m(K(\pi,n);\pi')\longleftrightarrow [K(\pi,n),K(\pi',m)]\longleftrightarrow \textup{Nat}( H^n(\DASH,\pi), H^{m}(\DASH,\pi')).\]
 
 %\subsection{The Machinery of obstruction theory $\otimes$}
 %\subsection{Applications of obstruction theory $\otimes$}
@@ -489,6 +493,37 @@ That is, to calculate the $p$-component of $\pi_i(X)$, it is enough to find a ma
 \begin{proof}
 $1\Leftrightarrow 2$ by duality, noting finite generation. $2\Leftrightarrow 3$ using the LES. $3\Rightarrow 4$ as $H_i(X,A)\otimes\Z_p\subset H_i(X,A;\Z_p)$ by the UCT. $3\Leftarrow 4$ using the UCT an axiom 2B. $4\Leftrightarrow 5$ by relative Hurewicz. $5\Leftrightarrow 6$ using the exact homotopy sequence. To see that these imply 7, note that $\pi_i(A)$ and $\pi_i(X)$ are finitely generated, by Hurewicz mod $\SerreClass_{FG}$. So there is a $\SerreClass_p$-iso between the groups in question, which are finitely generated. Thus the $p$-components are the same.
 \end{proof}
+
+\section{More about fiber spaces}
+Homotopic maps induce fiber homotopy equivalent pullback fiber spaces.
+\begin{prop*}
+Suppose that $E\downarrow B$ is a Hurewicz fibration, and we have maps $Y\to X\to B$:
+\[\xymatrix{
+&f^*E\ar[r]\ar[d]&E\ar[d]\\
+Y\ar[r]^g\ar@{-->}[ur]^h&X\ar[r]^f&B
+}\]
+Then if $fg$ is null, a lifting $h$ of $g$ exists. If $E$ is contractible, the converse holds. (This works given a Serre fibration $E\downarrow B$, as long as $Y$ is a finite complex).
+\end{prop*}
+
+\setcounter{subsection}{1}
+\subsection{The transgression of the fundamental class}
+Consider  the fibration $F\rightarrow E\downarrow B$, where $F=K(\pi,n)$, $E$ is contractible and $B=K(\pi,n+1)$. We have the following isomorphisms from Hurewicz and long exact sequences:%LESs:
+\[\xymatrix{
+\pi_n(F)\ar[d]_h^\simeq&\pi_{n+1}(E,F)\ar[d]_h^\simeq\ar[l]^\simeq\ar[r]_\simeq&\pi_{n+1}(B,*)\ar[d]_h^\simeq\\
+H_n(F)&H_{n+1}(E,F)\ar[l]_\simeq\ar[r]^\simeq&H_{n+1}(B,*)
+}\]
+Then entries on the top row are all canonically isomorphic to $\pi$. Applying $\Hom(\DASH,\pi)$ to the bottom row, we obtain (using the UCT and the definition of $\imath_n$):
+\[\xymatrix@C=.7cm{
+\Hom(H_n(F),\pi)\ar[d]^\simeq\ar[r]_{\simeq\ \ }&
+\Hom(H_{n+1}(E,F),\pi)\ar[d]&
+\Hom(H_{n+1}(B,*),\pi)\ar[d]^\simeq\ar[l]^\simeq&
+h^{-1}\ar@{|->}[r]\ar@{|->}[d]&
+h^{-1}\ar@{|->}[d]&
+h^{-1}\ar@{|->}[l]\ar@{|->}[d]\\
+H^n(F;\pi)\ar[r]^{\simeq\ \ }&H^{n+1}(E,F;\pi)&H^{n+1}(B,*;\pi)\ar[l]_\simeq&
+\imath_n\ar@{|->}[r]&\jmath&\imath_{n+1}\ar@{|->}[l]
+}\]
+This shows that in the SSS for this fibration, with $\pi$ coefficients, the fundamental class $\imath_n$ transgresses to the fundamental class $\imath_{n+1}$.
 \end{document}
 
 
