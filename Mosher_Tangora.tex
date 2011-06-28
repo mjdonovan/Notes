@@ -136,19 +136,24 @@
 \newcommand{\Steen}{\mathscr{A}}
 \newcommand{\Orth}{\textup{\textbf{O}}}
 \newcommand{\bigrightsquig}{\scalebox{2}{\ensuremath{\rightsquigarrow}}}
-\newcommand{\SerreClass}{\mathcal{C}}
+\newcommand{\SerreClass}{\mathscr{C}}
 
-%\newenvironment{packed_enum}{
-%\begin{enumerate}
-%  \setlength{\itemsep}{1pt}
-%  \setlength{\parskip}{0pt}
-%  \setlength{\parsep}{0pt}
-%}{\end{enumerate}}
+
 \newcommand{\squishlist}{
   \setlength{\itemsep}{1pt}
   \setlength{\parskip}{0pt}
   \setlength{\parsep}{0pt}
 }
+\newenvironment{itemise}{
+\begin{list}{\textup{$\rightsquigarrow$}}
+   {
+      \setlength{\topsep}{.1cm}
+      \setlength{\itemsep}{1pt}
+      \setlength{\parskip}{0pt}
+      \setlength{\parsep}{0pt}
+   }
+}{\end{list}\vspace{-.2cm}}
+
 
 
 \title{Cohomology Operations\small{ --- Mosher and Tangora}}
@@ -179,8 +184,7 @@ $\RP^\infty$ is a $K(\Z_2,1)$, and $S^\infty\downarrow\RP^\infty$ is a model for
 %The acyclic carrier theorem. Construction of the cup-$i$ products. The squaring operations. Compatibility with coboundary and suspension.
 
 \section{Properties of the squares}
-\begin{enumerate}
-\squishlist
+\begin{itemise}
 \item[0.] $\Squ^i$ is a natural homomorphism $H^p(K,L;\Z_2)\to H^{p+i}(K,L;\Z_2)$
 \item[1.] $\Squ^i(x)=0$ when $i>|x|$
 \item[2.] $\Squ^i(x)=x^2$ when $i=|x|$
@@ -189,7 +193,7 @@ $\RP^\infty$ is a $K(\Z_2,1)$, and $S^\infty\downarrow\RP^\infty$ is a model for
 \item[5.] $\Squ^i$ is compatible with the coboundary (and thus also with suspension)
 \item[6.] $\Squ(xy)=\Squ(x)\Squ(y)$, where $\Squ$ denoted the total Steenrod square
 \item[7.] For $a<2b$, $\Squ^a\Squ^b=\sum{b-c-1\choose a-2c}\Squ^{a+b-c}\Squ^c$. Note that in this sum only involves $0\leq c\leq a/2$. In particular, the terms on the right have $a+b-c\geq 2c$.
-\end{enumerate}
+\end{itemise}
 \setcounter{subsection}{2}
 \subsection{Squares in the $n$-fold Cartesian product of $K(\Z_2,1)$}
 Let $K_n$ be the product of $n$ copies of $K(\Z_2,1)$. Then 
@@ -211,12 +215,12 @@ In particular, this means that the elements $\Squ^I(\imath_n)\in H^*(K(\Z_2,n);\
 
 \subsection{The Adem Relations}
 Some memorable Adem relations:
-\begin{itemize}
-\squishlist
+\begin{itemise}
 \item $\Squ^1\Squ^{2n+1}=0$
 \item $\Squ^1\Squ^{2n}=\Squ^{2n+1}$
 \item $\Squ^{2n-1}\Squ^{n}=0$
-\end{itemize}
+\end{itemise}
+Hello. I am a robot from the planet Future.
 
 \section{Application: The Hopf invariant}
 The hopf invariant is a homomorphism $H:\pi_{2n-1}(S^n)\to\Z$. It is zero whenever $n$ is odd, and surjective when $n=2,4,8$. When $n$ is even, there is always an element of Hopf invariant $2$, so that $\pi_{2n-1}(S^n)$ contains a free summand.
@@ -304,13 +308,12 @@ For any sequence $R$ of nonnegative integers (all but finitely many zero), we ha
 \section{Exact couples and spectral sequences}
 
 \section{Fiber Spaces}
-\begin{enumerate}
-\squishlist
+\begin{itemise}
 \item By fibration, we mean 'Serre fibration'.
 \item In a Hurewicz fibration, all fibres are homotopic, while in a Serre fibration, we can only assert this when both fibres are finite complexes.
 \item If $C\downarrow B$ is a covering space ($C$ connected), then the fiber is the discrete group $G$ of covering transformations. Moreover, the LES gives $\pi_n(C)=\pi_n(B)$ for $n\geq2$, and a short exact sequence $0\to\pi_1(C)\to\pi_1(B)\to G\to0$.
 \item $p:\Orth(n+1)\to S^n$ given by evaluation at a fixed point of $S^n$, has fibre $\Orth(n)$. Then the LES gives $\pi_{i+1}(S^n)\to\pi_i(\Orth(n))\to\pi_i(\Orth(n+1))\to\pi_i(S^n)$, and the middle map is an isomorphism when $i<n-1$. Thus the groups $\pi_i(\Orth(n))$ are isomorphic for $n>i+1$. The stable values are known, and satisfy Bott periodicity.
-\end{enumerate}
+\end{itemise}
 \setcounter{subsection}{3}
 \subsection{Serre's exact sequence}
 Suppose that $F\rightarrow E\downarrow B$ is a fibre space, with $B$ simply connected. Suppose further that $H_i(B)=0$ for $0<i<p$ and $H_j(F)=0$ for $0<j<q$. Then there is a (finite) exact sequence
@@ -318,15 +321,14 @@ Suppose that $F\rightarrow E\downarrow B$ is a fibre space, with $B$ simply conn
 H_{p+q-1}(F)\ar[r]^{i_*}&H_{p+q-1}(E)\ar[r]^{p_*}&H_{p+q-1}(B)\ar[r]^{\tau}&H_{p+q-2}(F)\ar[r]&\cdots\ar[r]&H_1(E)\ar[r]&0
 }\]
 This can be used to prove the Hurewicz and relative Hurewicz theorems.
-\begin{thm*}
+\begin{thm*}\label{Whthd}
 Suppose $f:X\hookrightarrow Y$ is an inclusion, where $X$ is arc-connected, $Y$ is simply connected, and $\pi_2(Y,X)$ is abelian. Then the following are equivalent (for any $n\geq1$):
-\begin{enumerate}
-\squishlist
-\item $f_*:H_i(X)\to H_i(Y)$ is iso for $i<n$ and epi for $i=n$;
-\item $f_\#:\pi_i(X)\to \pi_i(Y)$ is iso for $i<n$ and epi for $i=n$;
-\item The pair $(Y,X)$ is $n$-connected; and
-\item $H_i(Y,X)=0$ for $i\leq n$.
-\end{enumerate}
+\begin{itemise}
+\item[1.] $f_*:H_i(X)\to H_i(Y)$ is iso for $i<n$ and epi for $i=n$;
+\item[2.] $f_\#:\pi_i(X)\to \pi_i(Y)$ is iso for $i<n$ and epi for $i=n$;
+\item[3.] The pair $(Y,X)$ is $n$-connected; and
+\item[4.] $H_i(Y,X)=0$ for $i\leq n$. \hfill (Compare with section \ref{WhthdModC})
+\end{itemise}
 \end{thm*}
 \begin{proof}
 2 and 3 are equivalent, as are 1 and 4, by exactness in the long exact sequences. Moreover, 3 and 4 are equivalent by the relative Hurewicz theorem, as long as $\pi_2(Y,X)$ is abelian.
@@ -338,7 +340,7 @@ Replace $f$ by an inclusion. We need $\pi_2(Y,X)$ abelian, but have exact sequen
 \end{cor*}
 \setcounter{subsection}{5}
 \subsection{The cohomology spectral sequence of a fibre space}
-\begin{enumerate}
+\begin{itemise}
 \squishlist
 \item Each $E_r$ is a bigraded ring.
 \item In $E_r$, $d_r$ is an anti-derivation (with respect to \emph{total} degree): $d(ab)=d(a)b+(-1)^{|a|}ad(b)$.
@@ -348,7 +350,7 @@ Replace $f$ by an inclusion. We need $\pi_2(Y,X)$ abelian, but have exact sequen
 \cdots\ar[r]&H^{p+q-2}(F)\ar[r]^\tau&H^{p+q-1}(B)\ar[r]^{p^*}&H^{p+q-1}(E)\ar[r]^{i^*}&H^{p+q-1}(F).
 }\]
 \item If $x$ is transgressive, then so is $\Squ^i(x)$, and if $\tau(x)=[y]$, $\tau(\Squ^i(x))=[\Squ^i(y)]$.
-\end{enumerate}
+\end{itemise}
 To see the last point, consider the following diagram which describes the transgression:
 \[\xymatrix{
 H^*(F)\ar[r]&H^{*+1}(E,F)&E_\infty^{*+1,0}\\
@@ -434,13 +436,59 @@ A \emph{class of abelian groups} is a collection $\SerreClass$ of abelian groups
 
 A homomorphism $f:A\to B$ is a \emph{$\SerreClass$-monomorphism} if its kernel lies in $\SerreClass$, a \emph{$\SerreClass$-epimorphism} if its cokernel lies in $\SerreClass$, and a \emph{$\SerreClass$-isomorphism} if both its kernel and cokernel lie in $\SerreClass$. Say two groups are $\SerreClass$-isomorphic if they are connected by a chain of $\SerreClass$-isomorphisms (which needn't be composable).
 
-Further axioms that classes may satisfy include:
-\begin{itemize}
-\squishlist
+Further axioms that Serre classes may satisfy include:
+\begin{itemise}
 \item[2A.] being closed under formation of tensor products and $\Tor$;
-\item[2B.] Absorbing tensor products: for $A\in\SerreClass$, $A\otimes B\in\C$ for all abelian groups $B$ (implies 2A); and
+\item[2B.] if  $A\in\SerreClass$ then $A\otimes B\in\C$ for all abelian groups $B$ (this implies 2A); and
 \item[3.] if $A\in\SerreClass$ then $H_n(K(A,1);\Z)\in\SerreClass$ for all $n>0$.
-\end{itemize}
+\end{itemise}
+Examples of Serre classes include:
+\begin{itemise}
+\item $\SerreClass_{FG}$, the finitely generated abelian groups, which satisfy 2A and 3 (but not 2B).
+\item $\SerreClass_{p}$ for $p$ prime, the class of abelian torsion groups of finite exponent $n$ coprime to $p$. Here, the exponent of $A$ is the infimum of those $n$ such that $na=0$ for all $a\in A$. If $(n,p)=1$ then all elements have order coprime to $p$. This class satisfies 2B and 3.
+\item The countable abelian groups. These satisfy 2A (but not 2B) and I haven't thought about 3.
+\end{itemise}
+\setcounter{subsection}{1}
+\subsection{Topological theorems mod $\SerreClass$}
+\begin{thm*}[Hurewicz mod $\SerreClass$]
+Suppose that $X$ is simply connected, and that a Serre class $\SerreClass$ satisfies \textup{2A} and \textup{3}. Then if $\pi_i(X)\in\SerreClass$ for $i<n$ then $H_i(X)\in\SerreClass$ for $i<n$ and $h:\pi_n(X)\to H_n(X)$ is a $\SerreClass$-isomorphism.
+\end{thm*}
+This has the immediate consequence that the homotopy groups of a $1$-connected complex with only finitely many cells in each dimension are finitely generated (using $\SerreClass_{FG}$).
+\begin{thm*}[Relative Hurewicz mod $\SerreClass$]
+Suppose that $A\subseteq X$, that both $A$ and $X$ are simply connected, and that $\pi_2(A)\to\pi_2(X)$ is an epimorphism. Suppose that $\SerreClass$ satisfies \textup{2B} and \textup{3}. Then if $\pi_i(X,A)\in\SerreClass$ for $i<n$ then $H_i(X,A)\in\SerreClass$ for $i<n$ and $h:\pi_n(X,A)\to H_n(X,A)$ is a $\SerreClass$-isomorphism.
+\end{thm*}
+Note that this is a little weaker than the standard Relative Hurewicz theorem (immediately below). Mod $\SerreClass$, we need both $A$ and $X$ simply connected.
+\begin{thm*}[Standard Relative Hurewicz]
+Suppose that $(X,A)$ is an $(n-1)$-connected pair of path-connected spaces with $n\geq2$ and $A\neq\emptyset$. Then $H_i(X,A)=0$ for $i<n$ and $h:\pi_n(X,A)\to H_n(X,A)$ is an isomorphism.
+\end{thm*}
+\begin{thm*}[Whitehead's theorem mod $\SerreClass$]\label{WhthdModC}
+Suppose that $f:A\to X$ is a map of simply connected spaces that induces an isomorphism on $\pi_2$. Suppose that $\SerreClass$ satisfies \textup{2B} and \textup{3}. Then TFAE:
+\begin{itemise}
+\item[1.] $f_*:H_i(X)\to H_i(Y)$ is $\SerreClass$-iso for $i<n$ and $\SerreClass$-epi for $i=n$; and
+\item[2.] $f_\#:\pi_i(X)\to \pi_i(Y)$ is $\SerreClass$-iso for $i<n$ and $\SerreClass$-epi for $i=n$. \hfill (Compare with section \ref{Whthd}).
+%\item[3.] The pair $(Y,X)$ is $n$-connected; and
+%\item[4.] $H_i(Y,X)=0$ for $i\leq n$.
+\end{itemise}
+\end{thm*}
+Note that this is a corollary of the relative Hurewicz theorem mod $\SerreClass$.
+
+
+\setcounter{subsection}{5}
+\subsection{The $\SerreClass_p$ approximation theorem}
+Let $X$ and $A$ be simply connected (nice) spaces with $H^i(X)$ and $H^i(A)$ finitely generated for each $i$. Suppose $f:A\to X$ is a map inducing an epimorphism on $\pi_2$ (and assume without loss of generality that $f$ is an inclusion). Then conditions 1--6 are equivalent, and imply 7:
+\begin{itemise}
+\item[1.] $f^*:H^i(X;\Z_p)\to H^i(A;\Z_p)$ is iso for $i<n$ and mono for $i=n$;
+\item[2.] $f_*:H_i(A;\Z_p)\to H_i(X;\Z_p)$ is iso for $i<n$ and epi for $i=n$;
+\item[3.] $H_i(X,A;\Z_p)=0$ for $i\leq n$;
+\item[4.] $H_i(X,A;\Z)\in\SerreClass_p$ for $i\leq n$;
+\item[5.] $\pi_i(X,A)\in\SerreClass_p$ for $i\leq n$;
+\item[6.] $f_*:\pi_i(A)\to \pi_i(X)$ is $\SerreClass_p$-iso for $i<n$ and $\SerreClass_p$-epi for $i=n$;
+\item[7.] $\pi_i(A)$ and $\pi_i(X)$ have the same $p$-components for $i<n$.
+\end{itemise}
+That is, to calculate the $p$-component of $\pi_i(X)$, it is enough to find a map $A\to X$ where inducing isomorphisms on $H^*(\DASH;\Z_p)$ (as long as both spaces are nice, etc).
+\begin{proof}
+$1\Leftrightarrow 2$ by duality, noting finite generation. $2\Leftrightarrow 3$ using the LES. $3\Rightarrow 4$ as $H_i(X,A)\otimes\Z_p\subset H_i(X,A;\Z_p)$ by the UCT. $3\Leftarrow 4$ using the UCT an axiom 2B. $4\Leftrightarrow 5$ by relative Hurewicz. $5\Leftrightarrow 6$ using the exact homotopy sequence. To see that these imply 7, note that $\pi_i(A)$ and $\pi_i(X)$ are finitely generated, by Hurewicz mod $\SerreClass_{FG}$. So there is a $\SerreClass_p$-iso between the groups in question, which are finitely generated. Thus the $p$-components are the same.
+\end{proof}
 \end{document}
 
 
