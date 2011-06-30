@@ -139,6 +139,8 @@
 \newcommand{\bigrightsquig}{\scalebox{2}{\ensuremath{\rightsquigarrow}}}
 \newcommand{\SerreClass}{\mathscr{C}}
 
+\newcommand{\pullbackcorner}[1][dr]{\save*!/#1+1.2pc/#1:(1,-1)@^{|-}\restore}
+\newcommand{\pushoutcorner}[1][dr]{\save*!/#1-1.2pc/#1:(-1,1)@^{|-}\restore}
 
 \newcommand{\squishlist}{
   \setlength{\itemsep}{1pt}
@@ -166,7 +168,7 @@
 
 \begin{document}
 %\maketitle
-\tableofcontents
+%\tableofcontents
 
 \section{Introduction of Cohomology Operations}
 \subsection{Cohomology Operations and $K(\pi,n)$ spaces}
@@ -225,8 +227,6 @@ Some memorable Adem relations:
 \item $\Squ^1\Squ^{2n}=\Squ^{2n+1}$
 \item $\Squ^{2n-1}\Squ^{n}=0$
 \end{itemise}
-Hello. I am a robot from the planet Future.
-
 \section{Application: The Hopf invariant}
 The hopf invariant is a homomorphism $H:\pi_{2n-1}(S^n)\to\Z$. It is zero whenever $n$ is odd, and surjective when $n=2,4,8$. When $n$ is even, there is always an element of Hopf invariant $2$, so that $\pi_{2n-1}(S^n)$ contains a free summand.
 \setcounter{subsection}{1}
@@ -525,6 +525,40 @@ H^n(F;\pi)\ar[r]^{\simeq\ \ }&H^{n+1}(E,F;\pi)&H^{n+1}(B,*;\pi)\ar[l]_\simeq&
 \imath_n\ar@{|->}[r]&\jmath&\imath_{n+1}\ar@{|->}[l]
 }\]
 This shows that in the SSS for this fibration, with $\pi$ coefficients, the fundamental class $\imath_n$ transgresses to the fundamental class $\imath_{n+1}$.
+
+Next, suppose that we are given a map $f:X\to K(\pi,n+1)$, corresponding to $\psi\in H^{n+1}(X;\pi)$ (so that $\psi=f^*(\imath_n)$). Then we have a map of fiber sequences:
+\[\xymatrix{
+%K(\pi,n+1)\ar[r]&{*}\ar[r]&K(\pi,n)
+K(\pi,n)\ar[r]\ar@{=}[d]&f^*(\star)\ar[d]\ar[r]&X\ar[d]^f\\
+K(\pi,n)\ar[r]&\star\ar[r]&K(\pi,n+1)
+}\]
+This induces a map of cohomology Serre exact sequences, which show that:
+\begin{equation*}
+\tag{Formula 1}\psi=f^*(\imath_{n+1})=\tau(\imath_n)
+\end{equation*}
+That is, in the SSS for the top row fibre sequence, the fundamental class (in the cohomology of the fibre) transgresses to the element $\psi$ (in that of the base $X$).
+
+\subsection{Bocksteins and the Bockstein lemma}
+We have the Bockstein exact couple:
+\[\xymatrix{
+H^*(\DASH;\Z)\ar[rr]^{\times2}&&H^*(\DASH;\Z)\ar[dl]^\rho\\
+&H^*(\DASH;\Z_2)\ar@{~>}[ul]^{\beta}
+}\]
+The operator $d_r$ is defined to be the $r^\textup{th}$ differential in the corresponding spectral sequence. In particular, one applies $\beta:H^*(\DASH;\Z_2)\to H^*(\DASH;\Z)$, divides the result by $2^{r-1}$ (which can be done iff the previous $d_i$ vanished), and reduces modulo $2$.
+
+Now $d_i$ vanishes on any class in the image of $\rho:H^*(\DASH;\Z_{2^{i+1}})\to H^*(\DASH;\Z_{2})$. Thus we get maps:
+\[d_i\rho:H^*(\DASH;\Z_{2^{i}})\to H^{*+1}(\DASH;\Z_{2})\text{ corresp.\ to }f_i:K(\Z_{2^i},n)\to K(\Z_{2},n+1).\]
+\begin{lem*}
+The pullback construction mentioned above gives
+\[\xymatrix{
+%K(\pi,n+1)\ar[r]&{*}\ar[r]&K(\pi,n)
+K(\Z_2,n)\ar[r]\ar@{=}[d]&K(\Z_{2^{i+1}},n)\ar[d]\ar[r]&K(\Z_{2^i},n)\ar[d]^{f_i}\\
+K(\Z_2,n)\ar[r]&\star\ar[r]&K(\Z_2,n+1)
+}\]
+\end{lem*}
+\begin{proof}
+The total space is the only thing in doubt. It's a $K(G,n)$ by the LES. Suppose that $G$ was $\Z_2\times\Z_{2^i}$. Then the fibration would be trivial -- a Cartesian product. In this case, the transgression is zero, as the SSS has zero differentials from page 2 onwards. However, the map $f_i$ is not null, so corresponds to a nonzero cohomology class $\psi$, so the transgression is nonzero.
+\end{proof}
 \end{document}
 
 
