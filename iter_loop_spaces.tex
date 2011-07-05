@@ -14,8 +14,104 @@
 %\tableofcontents
 
 \section{Operads and \texorpdfstring{$\scrC$}{C}-spaces}
+Let $\scrU$ be the category of compactly generated Hausdorff spaces and continuous
+ maps. 
+Let $\scrT$ be the same with nondegenerate basepoints.
 
+An \emph{operad} $\scrC$ consists of spaces $\scrC(j)\in\scrU$ for $j\geq0$,
+ with $\scrC(0)=*$, and maps
+\[\gamma:\scrC(k)\times\scrC(j_1)\times\cdots\times\scrC(j_k)\to\scrC(j)
+\text{ whenever }j=\sum j_i,\]
+subject to certain restrictions. We should interpret the points of $\scrC(j)$ as
+$j$-adic operations, and the restrictions reflect this interpretation.
+$\gamma(c;d_1,\ldots,d_k)$ should be viewed as the operation which takes $j$
+inputs, applies $d_1,\ldots,d_k$ to them in order, and then hits the list of
+results with $c$.
+\begin{itemise}
+\item An associativity formula holds.
+\item There's an identity $1\in\scrC(1)$ such that $\gamma(c;1^k)=c$ for all $c$.
+\item There's a right action of $\Sigma_j$ on $\scrC(j)$ which should be viewed as
+permutation of the arguments of an operation. There's an equivariance formula on
+the function $\gamma$. An operad is $\Sigma$-free is $\Sigma_j$ acts freely for
+each $j$.
+\end{itemise}
+A morphism of operads is the only thing it could be. The \emph{endomorphism
+operad} $\xi_X$ of $X\in\scrT$ has $\xi_X(j)$ the space of based maps $X^j\to
+X$, with the only operad structure it could have. The axioms for an operad are
+modeled on the obvious properties of $\xi_X$.
 
+An operation $\theta$ of an operad $\scrC$ on a space is a morphism
+$\theta:\scrC\to\xi_X$, and $(X,\theta)$ is then said to be a $\scrC$-space. These
+form a category $\scrC[\scrT]$, whose morphisms consist of maps in $\scrT$ which
+commute with the action.
+\begin{thm*}[1.3]
+There exist $\Sigma$-free operads $\scrC_n$ ($1\leq n\leq\infty$) such that every
+$n$-fold loop space is a $\scrC_n$-space, and every connected $\scrC_n$-space
+is weakly equivalent to an $n$-fold loop space. (The spaces $\scrC_n(j)$ are 
+$(n-2)$-connected).
+\end{thm*}
+When $n=1$  (resp.\ $n=\infty$), $\scrC_1$ can be any $A_\infty$ 
+(resp.\ $E_\infty$) operad, as defined later.
+
+Let $\scrC$ be any operad and $X$ a $\scrC$-space. For any point
+$c\in\scrC(1)$, $\theta_2(c):X^2\to X$ is a candidate multiplication.
+Now if $\scrC(1)$ is connected, then $*$ is a two-sided homotopy identity, as
+we can use any paths from $\gamma(c;1,*)$ to $1$, etc.
+If moreover $\Sigma_2$ is connected, using the transposition we have that
+$\theta_2(c)$ is homotopy commutative.
+
+Note that Stasheff's $A_\infty$-space theory states that an $H$-space is of
+the homotopy type of a loop space iff it has all possible higher coherence
+homotopies for associativity.
+\begin{lem*}[1.4]
+An action $\theta:\scrC\to\xi_X$ determines and is determined by maps 
+$\theta_j:\scrC(j)\times X^j\to X$ (adjoint to the maps $\scrC(j)\to\xi_X(j)$)
+satisfying some coherences and equivariances, and morphisms of $\scrC$-spaces 
+can be easily described in this language.
+\end{lem*}
+\begin{lem*}[1.5]
+If $X\in\scrC[\scrT]$, and $(Y,A)$ is an NDR-pair in $\scrU$, then 
+$\Map((Y,A),(X,*))=:X^{(Y,A)}$ is also a $\scrC$-space. (Note that operations
+on $X$ give rise to operations on $X^{(Y,A)}$). In particular, $\scrC[\scrT]$ is
+closed under taking path and loop spaces.
+\end{lem*}
+\begin{lem*}[1.6]
+The one point space $*$ is a zero object in $\scrC[\scrT]$.
+\end{lem*}
+\begin{lem*}[1.7]
+Given maps $X\to B$ and $Y\to B$ of $\scrC$-spaces, the fiber product is a 
+$\scrC$-space, and is the fiber product in the category $\scrC[\scrT]$.
+\end{lem*}
+\begin{lem*}[1.8] We get a bunch of nice $\scrC$-morphisms from a $\scrC$-morphism
+$X\to Y$ by taking a homotopy fiber-type diagram:
+\[\xymatrix{
+\makebox[2cm][r]{$\widetilde X=X\times_Y(Y^I)$}\ar[r]\ar[d]&Y^I\ar[d]\\
+X\ar[r]&Y
+}\]
+In particular, we get an inclusion $i:X\to \widetilde X$,
+retraction $r:\widetilde X\to X$, and fibration 
+$\widetilde f:\widetilde X\to Y$.
+\end{lem*}
+\begin{lem*}[1.9]
+Suppose $X\in\scrC[\scrT]$, and $c\in\scrC(2)$ is fixed, giving 
+$\oldphi:=\theta(c):X^2\to X$. Let 
+$\oldphi_j=\oldphi(1\times \oldphi_{j-1}):X^j\to X$ be the iterated product 
+for each $j$.
+\begin{itemise}
+\item If $\scrC(j)$ is connected and $d\in\scrC(j)$, then $\theta(d)$ is 
+homotopic to the iterated product $\oldphi_j$.
+\item If $\scrC(j)$ is $\Sigma_j$-free and $\scrC(2j)$ is contractible, then given
+$2j$ points of $X$ and a point $d\in\scrC(j)$, it is equivalent to either ``first
+multiply the points in pairs using $\oldphi$, then apply $\theta(d)$'', or to apply 
+$\theta(d)$ to the points in groups of $d$, and the multiply the results with
+$\oldphi$. More precisely, the following is $\Sigma_j$-equivariantly homotopy
+commutative:
+\[\xymatrix@C=3cm{\scrC(j)\times(X\times X)^j
+\ar[r]^{(\theta\times\theta)_j}\ar[d]^{1\times\oldphi^j}&X\times X\ar[d]^\oldphi\\
+\scrC(j)\times X\ar[r]^{\theta_j}&X
+}\]
+\end{itemise}
+\end{lem*}
 \end{document}
 
 
