@@ -857,12 +857,13 @@ $\pi_i(K^n)\to\pi_i(L^n)$ for $i<n$. Then $K$ and $L$ have the same $n$-type.
 
 \subsection{Postnikov systems}
 If $X$ is an $n-1$-connected complex, a Postnikov system for $X$ is a diagram
-\[\xymatrix@C=1.5cm{
+\[\xymatrix@C=1.2cm{
 &\vdots\ar[d]\\
 X\ar[r]^{\rho_{m+1}}\ar[rd]^{\rho_m}&X_{m+1}\ar[d]\\
 &X_m\ar[r]^{k_m(X)\ \ \ \ \ \ \ \ \ }\ar[d]&K(\pi_{m+1}(X),m+2)\\
 &\vdots\ar[d]\\
-&X_n\makebox[0cm][l]{$\,=K(\pi_n(X),n)$}
+&\makebox[0cm][r]{$K(\pi_n(X),n)=\,$}X_n\ar[r]^{k_n(X)\ \ \ \ \ \ \ \ \ }\ar[d]&K(\pi_{n+1}(X),n+2)\\
+&{*}\ar[r]^{k_{n-1}(X)=*\ \ \ \ \ \ \ \ \ \ \ }&K(\pi_{n}(X),n+1)
 }\]
 where
 \begin{itemise}
@@ -876,6 +877,91 @@ isomorphisms on $\pi_i$ for $i\leq m$.
 They exist. Read later.
 \subsection{Naturality and Uniqueness \texorpdfstring{$\bigotimes$}{}}
 They are and they are. Read later.
+
+\section{The fiber mapping sequence}
+Given a Hurewicz fibration $F\rightarrow E\downarrow B$, we can continue the
+fiber sequence ad infinitum. Applying $[K,\DASH]$ to the sequence, we get a LES,
+ending with
+\[\rightarrow[K,\Omega B]\rightarrow [K,F]\rightarrow [K,E]\rightarrow [K,B].\]
+The last three terms are not obviously groups. However,
+\begin{prop*}
+If $K$ is a complex of dimension $2n-2$, and $X$ is $n-1$-connected, then
+$[K,X]$ has a natural group structure.
+\end{prop*}
+\begin{proof}
+$X\to\Omega\Sigma X$ is a map inducing isomorphisms on the low homotopy groups,
+by the suspension theorem. Whitehead's theorem shows that these spaces have the
+same $2n-1$-type, implying the result, via
+$[K,X]=[K,\Omega\Sigma X]=[\Sigma K,\Sigma X]$.
+\end{proof}
+Any $\theta\in H^{n+k}(\pi,n;G)$ may be viewed as a map $K(\pi,n)\to K(G,n+k)$.
+Then applying $\Omega$, we get $\Omega\theta\in H^{n+k-1}(\pi,n-1;G)$. This
+is called the \emph{cohomology suspension}, written $\theta\mapsto {^1\theta}$.
+\begin{lem*}[Not in text]
+In the Serre long exact sequence for $K(\pi,n-1)\to*\to K(\pi,n)$ with
+coefficients in $G$, the transgression is inverse to the cohomology suspension. In particular:
+\[^1(\ \ ):H^{n+k}(\pi,n;G)\to H^{n+k-1}(\pi,n-1;G)\]
+is an isomorphism for $k\leq n-2$.
+\end{lem*}
+\begin{proof}
+We use an alternative (but equivalent) definition of the transgression:
+\[\xymatrix{
+H^{*-1}(F;G)\ar[r]&
+H^{*-1}(\Omega B;G)\ar@{=}[r]&
+H^{*}(\Sigma\Omega B;G)&
+\ar[l] H^{*}(B;G)
+}\]
+Suppose that $\theta:K(\pi,n)\to K(G,*)$ is any map. Its cohomology suspension
+is $\Omega\theta:\Omega K(\pi,n)\to \Omega K(G,*)$, in $H^{*-1}(F,G)$. This is
+identified exactly with the same map in $H^{*-1}(\Omega B;G)$. Under the
+equality, this maps to its adjoint $\Sigma\Omega K(\pi,n)\to K(G,*)$.
+
+It remains to see that $\theta\in H^*(B;G)$ maps to this adjoint under
+$\epsilon^*$, where $\epsilon:\Sigma\Omega B\to B$ is the counit. However, this
+is clear from basic principles of adjunctions. In particular, passing from
+$\theta$ to $\Omega\theta$ is the reverse of performing the transgression, which
+is essentially just taking an adjoint.
+\end{proof}
+The following commutative diagrams justify calling the $\Squ^i$ `stable':
+\[\xymatrix{
+K(\Z,n-1)\ar[r]^{\Squ^i\ \ \ }\ar@{=}[d]& K(\Z_2,n+i-1)\ar@{=}[d]\\
+\Omega K(\Z,n)\ar[r]^{^1\Squ^i\ \ \ }& \Omega K(\Z_2,n+i)
+}
+\raisebox{-.6cm}{\qquad\text{and}\qquad}
+\xymatrix{
+K(\Z_2,n-1)\ar[r]^{\Squ^i\ \ \ }\ar@{=}[d]& K(\Z_2,n+i-1)\ar@{=}[d]\\
+\Omega K(\Z_2,n)\ar[r]^{^1\Squ^i\ \ \ }& \Omega K(\Z_2,n+i)
+}
+\]
+\subsection{Mappings of low dimensional complexes into a sphere}
+Consider mapping a complex $K$ into the sphere $S^n$. If $\dim K\leq n$, then as
+$S^n$ and $K(\Z,n)$ have the same $n+1$-type, $[K,S^n]=[K,K(\Z,n)]=H^n(K)$. This
+classical result, the Hopf classification theorem, is dual to the Hurewicz
+theorem.
+
+Now suppose that $\dim K=n+1$. Then $[K,S^n]=[K,X_{n+1}]$, where $X_{n+1}$ is
+the next space up in a Postnikov tower, and $X_n=K(\Z,n)$. We have a fiber
+sequence, where $F_1=K(\Z_2,n+1)$:
+\[\xymatrix{
+\Omega X_n\ar[r]^{\Omega\Squ^2}&F_1\ar[r]^i&X_{n+1}\ar[d]^p\\
+&&X_n\ar[r]^{\Squ^2}&K(\Z_2,n+2)
+}\]
+The gives a long exact sequence:
+\[\xymatrix{
+[K,\Omega B]\ar[r]^f&
+[K,F_1]\ar[r]^g&
+[K,X_{n+1}]\ar[r]^h&
+[K,B]\ar[r]^{k\qquad}&
+[K,K(\Z_2,n+2)]
+}\]
+This determines a short exact sequence: 
+$0\to\coker f\to [K,X_{n+1}]\to\ker k\to0$, and here
+\[f=\Squ^2:H^{n-1}(K;\Z)\to H^{n+1}(K;\Z_2)\text{ and }
+k=\Squ^2:H^{n}(K;\Z)\to H^{n+2}(K;\Z_2).\]
+The text does a further example when $\dim K=n+2$, but really, it's all headed
+towards:
+\subsection{The spectral sequence for \texorpdfstring{$[K,X]$}{[K,X]}}
+\subsection{The skeleton mapping and the inclusion mapping sequence}
 
 \end{document}
 
