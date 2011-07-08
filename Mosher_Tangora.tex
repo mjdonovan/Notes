@@ -11,7 +11,7 @@
 %% >>> header
 
 \begin{document}
-\tableofcontents
+%\tableofcontents
 
 \section{Introduction to Cohomology Operations}
 \subsection{Cohomology Operations and \texorpdfstring{$K(\pi,n)$}{K(G,n)} spaces}
@@ -670,11 +670,20 @@ to reduction $H^q(\DASH;\Z_{2^m})\to H^q(\DASH;\Z_{2})$, and $\Squ^1\imath_q=0$.
 %\end{figure}
 
 \subsubsection{\texorpdfstring{The cohomology of $X_1$}{The cohomology of X1}}
-The cohomology of $X_1$ is easy to calculate. We calculate the transgression 
-for $K(\Z_2,n+1)\rightarrow X_1\downarrow X_0$, simply using the Adem relations.
-Then the cohomology is recorded under $X_1$ in the third column.
+We define $X_1$ by the following pullback:
+\[\xymatrix@R=5mm{
+%K(\pi,n+1)\ar[r]&{*}\ar[r]&K(\pi,n)
+F_1\ar[r]\ar@{=}[d]&
+X_1\ar[d]\ar[r]&
+X_{0}\ar[d]^{\Squ^2\imath_n}\\
+K(\Z_2,n+1)\ar[r]&\star\ar[r]&K(\Z_2,n+2)
+}\]
+The cohomology of $X_1$ is easy to calculate from the Serre LES. We calculate
+the transgression for $K(\Z_2,n+1)\rightarrow X_1\downarrow X_0$, simply using
+the Adem relations. Then the cohomology is recorded under $X_1$ in the third
+column.
 
-However, it will be useful to know that $d_2(\Squ^4\imath_n)=\beta$ and that
+It will be useful to know that $d_2(\Squ^4\imath_n)=\beta$ and that
 $d_2(\Squ^8\imath_n)=\kappa$. For these, apply the Bockstein lemma, which looks
 like
 \[\xymatrix{
@@ -696,6 +705,13 @@ like
 We used ``$\Squ^{1,2n}=\Squ^{2n+1}$'', ``$\Squ^{121}=\Squ^{31}$'' and
 ``$\Squ^{1421}+\Squ^{17}=\Squ^{521}$''.
 \subsubsection{\texorpdfstring{The cohomology of $X_2$}{The cohomology of X2}}
+\[\xymatrix@R=5mm{
+%K(\pi,n+1)\ar[r]&{*}\ar[r]&K(\pi,n)
+F_2\ar[r]\ar@{=}[d]&
+X_2\ar[d]\ar[r]&
+X_{1}\ar[d]^{\alpha}\\
+K(\Z_2,n+2)\ar[r]&\star\ar[r]&K(\Z_2,n+3)
+}\]
 This calculation is more difficult. As we calculate the transgression, we often
 will not need to determine certain coefficients. These undetermined coefficients
 are marked with dotted lines. We list the considerations when calculating the
@@ -740,6 +756,44 @@ $d_3(\Squ^8\imath_n)=D$. For these, apply Bockstein:
 We used ``$\Squ^{12}=\Squ^{3}$'' and
 ``$\Squ^{142}=\Squ^{52}$''.
 \subsubsection{\texorpdfstring{The cohomology of $X_3$}{The cohomology of X3}}
+\[\xymatrix@R=5mm{
+%K(\pi,n+1)\ar[r]&{*}\ar[r]&K(\pi,n)
+F_3\ar[r]\ar@{=}[d]&
+X_3\ar[d]\ar[r]&
+X_{2}\ar[d]^{\text{``$\Squ^4\imath_n$''}}\\
+K(\Z_8,n+3)\ar[r]&\star\ar[r]&K(\Z_8,n+4)
+}\]
+Here $``\Squ^4\imath_n$'' refers to a class in $H^{n+4}(X_2;\Z_8)$ which reduces
+to $\Squ^4\imath_n$ under the reduction map to $H^{n+4}(X_2;\Z_2)$. We should
+really see that such a class exists. To do so, it's enough to see that the real
+$\Squ^4\imath_n\in H^n(X_2;\Z_2)$ maps to zero under the coboundary
+$H^{n+3}(X_2;\Z_2)\to H^{n+4}(X_2;\Z_4)$ coming from the short exact sequence
+$0\to \Z_4\to\Z_8\to\Z_2\to0$. Now this coboundary is defined by representing
+$\Squ^4\imath_n$ as a $\Z_8$-cochain, taking its coboundary, and observing that
+this is the image of a $\Z_4$ cocycle. However, we have seen that the \THIRD
+Bockstein operation is defined on $\Squ^4\imath_n$. Thus, if we represent it as
+an integral cochain, its coboundary is divisible by 8. Thus $\Squ^4\imath_n$
+indeed maps to zero under the aforementioned coboundary.
+
+Now noting that the fundamental class goes to the fundamental class under the
+reduction, we apply the principle of the transgression of the fundamental class
+to the SSS for $\Z_8$ coefficients, and use naturality to see that
+$\imath_{n+3}$ transgresses as claimed. That $d_3(\imath_{n+3})$ transgresses to
+$A$ follows from:
+\begin{lem*}
+Suppose that $d_r$ is defined on both $y$ and $\tau(y)$ (where $\tau$ is that
+found in the Serre exact sequence, with everything highly connected). Then
+$\tau(d_ry)=d_r\tau(y)$.
+\end{lem*}
+\begin{proof}
+we have 
+$\xymatrix{y\ar@{|->}[r]&x&\tau'(y)\ar@{|->}[r]^\simeq\ar@{|->}[l]&\tau(y)}$
+in the standard diagram for the transgression. Now by naturality of $d_r$, the
+result follows.
+
+\end{proof}
+
+
 Somehow this is set up so that $\imath_{n+3}$ and $d_3$ transgress as claimed.
 Investigate this tomorrow. That being said, we can continue our analysis:
 \begin{itemise}
@@ -756,13 +810,72 @@ $\Squ^5d_3\imath_{n+3}=\Squ^1\Squ^4d_3\imath_{n+3}$. So $\tau(5d_3)=d_1\tau(4d_3
  + \Squ^{9 1} + \Squ^{8 2} + \Squ^{10}$).
 \end{itemise}
 \subsubsection{\texorpdfstring{The cohomology of $X_4$}{The cohomology of X4}}
-is easy.
+\[\xymatrix@R=5mm{
+%K(\pi,n+1)\ar[r]&{*}\ar[r]&K(\pi,n)
+F_4\ar[r]\ar@{=}[d]&
+X_4\ar[d]\ar[r]&
+X_{3}\ar[d]^{P}\\
+K(\Z_2,n+6)\ar[r]&\star\ar[r]&K(\Z_2,n+7)
+}\]
+The calculations are all easy.
 \subsubsection{\texorpdfstring{The cohomology of $X_5$}{The cohomology of X5}}
 Has a tricky choice of cohomology class for killing.
 
+\section{\texorpdfstring{$n$}{n}-type and Postnikov systems}
+\setcounter{subsection}{1}
+\subsection{\texorpdfstring{$n$}{n}-type}
+Maps $X\to Y$ are \emph{$n$-homotopic} if for every map from an $n$-dimensional
+cell complex $K$ to $X$, the composites $K\to Y$ are homotopic. By cellular
+approximation:
+\begin{prop*}
+If $f,g:K\to X$ are maps from a cell complex, $f \simeq_n g$ iff 
+$f|_{K^n}\simeq g|_{K^n}$.
+\end{prop*}
+Two cell complexes have the same \emph{$n$-type} if their $n$-skeleta have the
+same $(n-1)$-homotopy type. By convention (not theorem), we say that
+$\infty$-type is simply homotopy type. $n$-type is then a homotopy invariant, in
+light of the following, which also uses cellular approximation:
+\begin{prop*}
+If two cell complexes have the same $n$-type (for any $n\leq\infty$), they have
+the same $m$-type for any $m<n$.
+\end{prop*}
+\begin{lem*}
+If $X$ and $Y$ are $n$-homotopy equivalent, and $K$ is an $n$-dimensional
+complex, $[K,X]=[K,Y]$.
+\end{lem*}
+\begin{thm*}
+If complexes $L_1$ and $L_2$ have the same $n$-type, and $K$ is an
+$n-1$-dimensional complex, $[K,L_1]=[K,L_2]$.
+\end{thm*}
+\begin{cor*}
+If $K$ and $L$ have the same $n$-type, $\pi_i(K)=\pi_i(L)$ for $i<n$.
+\end{cor*}
+\begin{thm*}[Whitehead]
+Given complexes $K$ and $L$ and a map $f:K^n\to L^n$ inducing isomorphisms
+$\pi_i(K^n)\to\pi_i(L^n)$ for $i<n$. Then $K$ and $L$ have the same $n$-type.
+\end{thm*}
 
-
-
+\subsection{Postnikov systems}
+If $X$ is an $n-1$-connected complex, a Postnikov system for $X$ is a diagram
+\[\xymatrix@C=1.5cm{
+&\vdots\ar[d]\\
+X\ar[r]^{\rho_{m+1}}\ar[rd]^{\rho_m}&X_{m+1}\ar[d]\\
+&X_m\ar[r]^{k_m(X)\ \ \ \ \ \ \ \ \ }\ar[d]&K(\pi_{m+1}(X),m+2)\\
+&\vdots\ar[d]\\
+&X_n\makebox[0cm][l]{$\,=K(\pi_n(X),n)$}
+}\]
+where
+\begin{itemise}
+\item $X_m$ as the same $(m+1)$-type as $X$, and $\rho_m$ induces the
+isomorphisms on $\pi_i$ for $i\leq m$.
+\item All higher homotopy groups of $\pi_iX_m$ are trivial ($i>m$).
+\item $X_{m+1}$ is the induced fiber space over $X_m$ induced by $k_m(X)$.
+\item The triangles are homotopy commutative.
+\end{itemise}
+\subsection{Existence of Postnikov systems \texorpdfstring{$\bigotimes$}{}}
+They exist. Read later.
+\subsection{Naturality and Uniqueness \texorpdfstring{$\bigotimes$}{}}
+They are and they are. Read later.
 
 \end{document}
 
