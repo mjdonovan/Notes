@@ -11,8 +11,8 @@
 %% >>> header
 
 \begin{document}
-\tableofcontents
-%\comment{
+%\tableofcontents
+\comment{
 \section{Introduction to Cohomology Operations}
 \subsection{Cohomology Operations and \texorpdfstring{$K(\pi,n)$}{K(G,n)} spaces}
 There is a natural equivalence of functors $[\DASH,K(\pi,n)]\simeq H^n(\DASH;\pi)$ given by $[f]\longleftrightarrow f^*(\imath_n)$. Here the \emph{fundamental class} $\imath_n\in H^n(K(\pi,n);\pi)$ is defined to be the cohomology class corresponding to $\text{id}_\pi$ under:
@@ -823,7 +823,7 @@ The calculations are all easy.
 \subsubsection{\texorpdfstring{The cohomology of $X_5$}{The cohomology of X5}}
 Has a tricky choice of cohomology class for killing.
 
-%} %%%% end comment %%%%
+} %%%% end comment %%%%
 
 \section{\texorpdfstring{$n$}{n}-type and Postnikov systems}
 \setcounter{subsection}{1}
@@ -1088,6 +1088,77 @@ applies, as $Y$ is $n$-connected.
 Finally it is noted that in the stable range, cofibre and fibre agree up to a
 dimension shift, in their low homotopy groups. Passing to spectra, this shows
 that cofibre and fibre sequences coincide.
+
+\section{Higher cohomology operations}
+\subsection{Functional cohomology operations}
+Suppose that $f:Y\to X$ is a map (which may be viewed as a cofibration), and 
+$\theta:H^n(\DASH;G)\to H^q(\DASH;\pi)$ is a cohomology operation in the stable
+range ($q\leq2n-2$), so that it is additive.
+Then we have a diagram:
+\[\xymatrix{
+&H^{n-1}(Y;G)\ar[r]^\delta\ar@{~>}[d]^{^1\theta}&
+H^n(Cf;G)\ar[r]^{j^*}\ar[d]^\theta&
+H^n(X;G)\ar@{.>}[r]^{f^*}\ar@{.>}[d]^\theta&
+H^n(Y;G)\\
+H^{q-1}(X;\pi)\ar@{~>}[r]^{f^*}&
+H^{q-1}(Y;\pi)\ar[r]^\delta&
+H^q(Cf;\pi)\ar[r]^{j^*}&
+H^q(X;\pi)
+}\]
+Now by a simple diagram chase, given $u\in H^n(X;G)$ in the kernel of the dotted
+arrows ($f^*u=0,\,\theta(u)=0$), we can produce an element of $H^{q-1}(Y;G)$ up
+to indeterminacy the image of the wavy arrows. Call it $\theta_f(u)$, defined up
+to indeterminacy $f^*H^{q-1}(X;\pi)+{^1\theta}H^{n-1}(Y;G)$.
+
+This association is natural in $f$, in the following sense. If the following
+square commutes,
+\[\xymatrix{
+Y\ar[r]_f& X\\
+Y'\ar[r]^{f'}\ar[u]_\eta&X'\ar[u]^\xi
+}\]
+and $\theta_f$ is defined on $u\in H^n(X;G)$, then $\theta_{f'}$ is defined on
+$\xi^*u\in H^n(X';G)$, and moreover, $\eta^*\theta_f(u)=\theta_{f'}(\xi^*u)$.
+More precisely, the left hand side of this equation is contained in the right
+hand side, as cosets in $H^{q-1}(Y';\pi)$.
+\begin{prop*}
+If there is a cohomology class $u$ such that $\theta_f(u)\neq0$, then $f$ is
+essential.
+\end{prop*}
+For example, lef $f=\Sigma^{n-2}\eta:S^{n+1}\to S^n$. We wish to see that this
+is not null. Let $\theta=\Squ^2$. Then the diagram shows that $f$ is essential:
+\[\xymatrix{
+&\cancel{H^{n-1}(S^{n+1};G)}\ar[r]^\delta\ar@{~>}[d]^{\Squ^2}&
+H^n(Cf;\Z_2)\ar[r]^{j^*}\ar[d]^{\Squ^2}&
+H^n(S^n;\Z_2)\ar@{.>}[r]^{f^*}\ar@{.>}[d]^{\Squ^2}&
+\cancel{H^n(S^{n+1};\Z_2)}\\
+\cancel{H^{n+1}(S^n;\Z_2)}\ar@{~>}[r]^{f^*}&
+H^{n+1}(S^{n+1};\Z_2)\ar[r]^\delta&
+H^{n+2}(Cf;\Z_2)\ar[r]^{j^*}&
+\cancel{H^{n+2}(S^n;\Z_2)}
+}\]
+\subsection{Another formulation of \texorpdfstring{$\theta_f$}{theta f}}
+We can summarise the fact that $\theta_f$ is defined on $u$ be stating that in
+the following diagram, both length 2 composites are null:
+\[\xymatrix{
+Y\ar[r]^f&X\ar[r]^{u\ \ \ }&K(G,n)\ar[r]^\theta&K(\pi,q)
+}\]
+Now use $\theta$ to define a fibre space $E$ over $K(G,n)$ by pulling back the
+path-loop fibration over $K(\pi,q)$. That is, let $E$ be the homotopy fibre of
+$\theta$. Then we have a diagram:
+\[\xymatrix{
+K(\pi,q-1)\ar[rr]^i&&E\ar[d]^p\\
+Y\ar[r]^f\ar@{.>}[u]^{\theta_f(u)}&
+X\ar[r]^{u\ \ \ }\ar@{-->}[ru]^{\widetilde u}&
+K(G,n)\ar[r]^\theta&K(\pi,q)
+}\]
+We obtain the dashed arrow $\widetilde u$ since the composite $\theta u$ is
+null. We obtain the dotted arrow, which we define to be $\theta_f(u)$, as
+$\widetilde u f\simeq puf$ is null. This has the same indeterminacy as the old
+definition. In particular, the difference between any two liftings
+$\widetilde u$ arises from maps $X\to K(\pi,q-1)$. Moreover, the difference
+between further liftings $\theta_f(u)$ arises from maps 
+$Y\to K(G,n-1)$, via $^1\theta$. This all makes sense as the homsets are
+additive, as we are in the stable range (?).
 \end{document}
 
 
