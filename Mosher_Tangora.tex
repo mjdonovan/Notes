@@ -11,8 +11,8 @@
 %% >>> header
 
 \begin{document}
-%\tableofcontents
-\comment{
+\tableofcontents
+%\comment{
 \section{Introduction to Cohomology Operations}
 \subsection{Cohomology Operations and \texorpdfstring{$K(\pi,n)$}{K(G,n)} spaces}
 There is a natural equivalence of functors $[\DASH,K(\pi,n)]\simeq H^n(\DASH;\pi)$ given by $[f]\longleftrightarrow f^*(\imath_n)$. Here the \emph{fundamental class} $\imath_n\in H^n(K(\pi,n);\pi)$ is defined to be the cohomology class corresponding to $\text{id}_\pi$ under:
@@ -823,7 +823,7 @@ The calculations are all easy.
 \subsubsection{\texorpdfstring{The cohomology of $X_5$}{The cohomology of X5}}
 Has a tricky choice of cohomology class for killing.
 
-} %%%% end comment %%%%
+%} %%%% end comment %%%%
 
 \section{\texorpdfstring{$n$}{n}-type and Postnikov systems}
 \setcounter{subsection}{1}
@@ -1137,10 +1137,10 @@ H^{n+2}(Cf;\Z_2)\ar[r]^{j^*}&
 \cancel{H^{n+2}(S^n;\Z_2)}
 }\]
 \subsection{Another formulation of \texorpdfstring{$\theta_f$}{theta f}}
-We can summarise the fact that $\theta_f$ is defined on $u$ be stating that in
-the following diagram, both length 2 composites are null:
+$\theta_f$ is defined on $u$ iff both length 2 composites are null in the
+following diagram:
 \[\xymatrix{
-Y\ar[r]^f&X\ar[r]^{u\ \ \ }&K(G,n)\ar[r]^\theta&K(\pi,q)
+Y\ar[r]^f&X\ar[r]^{u\ \ \ \ \ }&K(G,n)\ar[r]^\theta&K(\pi,q)
 }\]
 Now use $\theta$ to define a fibre space $E$ over $K(G,n)$ by pulling back the
 path-loop fibration over $K(\pi,q)$. That is, let $E$ be the homotopy fibre of
@@ -1159,6 +1159,155 @@ $\widetilde u$ arises from maps $X\to K(\pi,q-1)$. Moreover, the difference
 between further liftings $\theta_f(u)$ arises from maps 
 $Y\to K(G,n-1)$, via $^1\theta$. This all makes sense as the homsets are
 additive, as we are in the stable range (?).
+\subsection{Secondary cohomology operations}
+Suppose that $\theta:K(G,n)\to K(\pi,q)$ is a cohomology operation, and that
+$E=F(\theta)$ is the fibre space over $K(G,n)$ pulled back from the standard
+contractible space over $K(\pi,q)$. Let $\phi:E\to K(H,m)$ be some cohomology
+class in $H^m(E;H)$. This is enough data to specify a two-stage Postnikov
+system:
+\[\xymatrix{
+K(\pi,q-1)\ar[r]^{\ \ \ \ \ i}&E\ar[r]^{\phi\ \ \ }\ar[d]^p&K(H,m)\\
+X\ar@{-->}[ru]^{\widetilde u}\ar[r]^{u\ \ \ }&K(G,n)\ar[r]^\theta&K(\pi,q)
+}\]
+Now if $u\in H^n(X;G)$ is in the kernel of $\theta$, we can lift it to
+$\widetilde u:X\to E$. This lifting is determined up to a map $X\to K(\pi,q-1)$
+in some sense. If the operation $\phi i$ is stable, then we have constructed a
+map $\Phi$  from $\ker\theta\subseteq H^n(X;G)$ to $H^m(X;H)$, defined up to
+indeterminacy the subgroup $\im(\phi i)$.
+
+To have everything additive, we should assume:
+\begin{itemise}
+\item $q\leq 2n-1$ so that $\theta$ is additive, and $\ker\theta$ is a subgroup.
+\item $m\leq 2q-3$ so that $\phi i$ is additive, and the indeterminacy is a
+subgroup.
+\item $m\leq q+n-2$ so that $H^m(K(G,n);H)\to H^m(E;H)\to H^m(K(\pi,q-1);H)$ is
+part of a Serre long exact sequence (for the following reason).
+\end{itemise}
+Suppose now that $\phi i$ is null, so that there can never be any indeterminacy.
+Then by the Serre exact sequence just mentioned, $\phi=p^*\theta'$ for some
+$\theta':K(G,n)\to K(H,m)$. Adding this map to the diagram above, we realise
+that the secondary cohomology operation defined is precisely the primary
+operation $\theta'$. Thus we'll always assume that $\phi i$ is not null.
+\subsection{Secondary operations and relations}
+Suppose that $m\leq 2q-3$. Then the composite $\phi i$ is in the image of $\psi$
+under the cohomology suspension, and we can extend the diagram to:
+\[\xymatrix{
+K(G,n-1)\ar[r]^{^1\theta}&
+K(\pi,q-1)\ar[r]_{\ \ \ \ \ i}\ar@/^.8pc/[rr]^{^1\psi}&
+E\ar[r]_{\phi\ \ \ }\ar[d]^p&K(H,m)\\
+&&%X\ar@{-->}[ru]^{\widetilde u}\ar[r]^{u\ \ \ }&
+K(G,n)\ar[r]^\theta&K(\pi,q)\ar[r]^{\psi\ \ \ \ }&
+K(H,m+1)
+}\]
+Now if $m\leq 2n-3$, as ${^1\psi}{^1\theta}$ is null, $\psi\theta$ is also null,
+which constitutes a realtion between primary cohomology operations.
+
+On the other hand, suppose that we instead start only with operations $\theta$
+and $\psi$ such that $\psi\theta=0$. In this case, we can recreate every map but
+$\phi$ in the diagram. Yet then, as ${^1\psi}{^1\theta}$ is null, from the Serre
+long exact sequence at $H^m(K(\pi,q-1);H)$ we see that ${^1\psi}$ factors into a
+composite $\phi i$, as hoped. This $\phi$ is determined up to primary cohomology
+operations, which are those that factor through $p^*$ (an insight from the LES).
+This argument works when $m\leq q+n-3$, as then the long exact sequence has
+enough terms.
+
+For a fantastic example of the obtaining an operation from a relation, we'll get
+an operation $\Phi$ (as shown) from the relation $\Squ^3\Squ^1+\Squ^2\Squ^2=0$:
+\[\xymatrix@C=2cm{
+\ker(\alpha)\ar@{^{(}->}[r]\ar[d]^\Phi&
+H^n(X;\Z_2)\ar[r]_{\alpha\qquad\qquad}^{(\Squ^1,\Squ2)\qquad\qquad}&
+H^{n+1}(X;\Z_2)\oplus H^{n+2}(X;\Z_2)\\
+\coker(\beta)&H^{n+3}(X;\Z_2)\ar@{->>}[l]&
+\ar[l]_{(\Squ^3,\Squ^2)\qquad\qquad}^{\beta\qquad\qquad}
+H^{n}(X;\Z_2)\oplus H^{n+1}(X;\Z_2)
+}\]
+The relevant diagram for making this definition is as follows. Note that we may
+replace $\theta$ with a \emph{family} of primary cohomology operations.
+\[\xymatrix@C=2.3cm{
+*\txt{$K(\Z_2,n)\times$\\$K(\Z_2,n+1)$}\ar[r]
+\ar@/^.8pc/[rr]^{^1\psi=\Squ^3\otimes1+1\otimes\Squ^2}&
+E\ar@{.>}[r]_{\phi\ \ \ }\ar[d]^p&K(\Z_2,n+3)\\
+&
+K(\Z_2,n)\ar[r]^\theta_{(\Squ^1,\Squ^2)}&
+*\txt{$K(\Z_2,n+1)\times$\\$K(\Z_2,n+2)$}
+\ar[r]^\psi_{\Squ^3\otimes1+1\otimes\Squ^2}&
+K(\Z_2,n+4)
+}\]
+We can fill in the map $\phi$ because of the fact that $\psi\theta=0$. Moreover,
+in this case, we have that $p^*:H^{n+3}(K(\Z_2,n);\Z_2)\to H^{n+3}(E;\Z_2)$ is
+zero, so that $\phi$ is uniquely determined. To see this, note that:
+\[H^{n+3}(K(\Z_2,n);\Z_2)=\Z_2\langle\Squ^2\Squ^1\imath_B,\Squ^3\imath_B\rangle
+=\Z_2\langle\tau(\Squ^2\imath_{n}\otimes1),
+\tau(1\otimes\Squ^1\imath_{n+1})\rangle
+\]
+
+\subsection{The Peterson-Stein formulas}
+We would like to relate the two constructions --- secondary operations and
+functional operations. In particular, we want formulae which allow us to
+calculate secondary operations using functional and primary operations. The
+three theorems of this chapter do just that. A diagram that summarises our two
+constructions is as follows:
+\[\xymatrix{
+&K(\pi,q-1)\ar[r]_{\ \ \ \ \ i}\ar@{.>}@/^.8pc/[rr]^{^1\psi}&
+E\ar@{~>}[r]_{\phi\ \ \ \ \ \ \ \ \ }\ar[d]&K(H,m)\\
+Y\ar@{~>}[r]^f\ar@{-->}[ru]^{\theta_f(u)}&
+X\ar@{-->}[ru]^(.4){\widetilde u}
+\ar@{-->}[r]_{u\ \ \ }\ar@{-->}[rru]_(.65){\Phi(u)}&
+K(G,n)\ar[r]^\theta&K(\pi,q)\ar@{.>}[r]^{\psi\ \ \ \ }&
+K(H,m+1)
+}\]
+\begin{itemise}
+\item To discuss either construction, we need the specify $\theta$, which
+specifies all the full arrows in the diagram. We also need to give a candidate
+element $u:X\to K(G,n)$ such that $\theta u=0$. This is lifted to $\widetilde
+u$.
+\item To define a secondary operation, we need to give $\phi$, which induces the
+dotted arrows in the diagram. Then composing with $\phi$ gives $\Phi(u)$.
+\item To define a functional operation, we need to give $f$, and $u$ must
+satisfy $u f=0$. Then we pull $\widetilde u$ back to $\theta_f(u)$.
+\end{itemise}
+The following theorem essentially states that the two paths from $Y$ to $K(H,m)$
+in this diagram are the same, which we knew, as the diagram is commutative:
+\begin{thm*}[\FIRST Peterson-Stein formula]
+$f^*(\Phi(u))={^1\psi}\theta_f(u)$ is $H^m(Y;H)/Q'$. Here the indeterminacy $Q'$
+is $f^*(\im({^1\psi}))$, where we write $^1\psi:H^{q-1}(X;\pi)\to H^{m}(X;H)$.
+\end{thm*}
+Suppose that the composite
+$\xymatrix{Y\ar[r]^f&X\ar[r]^{v\ \ \ \ } &K(G,n)\ar[r]^\theta&K(\pi,q)}$
+is null, but neither $\theta v$ or $vf$ are necessarily null.
+\begin{itemise}
+\item We can calculate $\Phi(f^*v)$, a secondary operation, which lies in a
+quotient of $H^m(Y;H)$.
+\item We can calculate a functional operation, $\psi_f(\theta v)$, which lies in
+a different quotient of $H^m(Y;H)$.
+\end{itemise}
+\begin{thm*}[\SECOND Peterson-Stein formula]
+$\Phi(f^*v)=\psi_f(\theta v)\in H^m(Y;H)/Q$, where the indeterminacy 
+$Q={^1\psi}(H^{q-1}(Y;\pi))+f^*(H^m(X;H))$.
+\end{thm*}
+Suppose that:
+\begin{itemise}
+\item $\xymatrix{F'\ar[r]^j&E'\ar[r]^r&B'}$ is a fiber space;
+\item $\theta:H^n(\DASH;G)\to H^q(\DASH;\pi)$ is an operation as before, and the
+class $\phi\in H^m(E;H)$ and operation $\psi:H^q(\DASH;\pi)\to H^{m+1}(\DASH;H)$
+are as usual in the construction of the secondary operation $\Phi$;
+\item there are classes $u\in H^n(B';G)$ and $v\in H^{n-1}(F';G)$ such that
+$\theta(u)=\tau(v)$; and
+\item the following diagram commutes:
+\[\xymatrix{
+E'\ar[r]_r\ar@/^1.2pc/[rrr]^0&
+B'\ar[r]_{\ \ u\qquad}&
+K(G,n)\ar[r]_\theta\ar@/^1.2pc/[rr]^0&
+K(\pi,q)\ar[r]_{\psi\ \ \ \ }&
+K(H,m+1)
+}\]
+\end{itemise}
+\begin{thm*}[\THIRD formula]In these circumstances,
+\[j^*(\psi_r(\theta u))={^1\psi}(v)=j^*(\Phi(r^*u))\text{ \ in \ }
+H^m(F';H)/Q\text{ \ where \ }Q=j^*(\im({^1\psi})).\]
+That is, $Q$ is the image of 
+$\xymatrix{H^{q-1}(E';\pi)\ar[r]^{^1\psi}&H^m(E';H)\ar[r]^{j^*}&H^m(F';H)}$
+\end{thm*}
 \end{document}
 
 
