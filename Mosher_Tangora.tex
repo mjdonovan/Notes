@@ -14,7 +14,7 @@
 %% >>> header
 
 \begin{document}
-%\tableofcontents
+\tableofcontents
 \comment{
 \section{Introduction to Cohomology Operations}
 \subsection{Cohomology Operations and \texorpdfstring{$K(\pi,n)$}{K(G,n)} spaces}
@@ -614,7 +614,7 @@ to reduction $H^q(\DASH;\Z_{2^m})\to H^q(\DASH;\Z_{2})$, and $\Squ^1\imath_q=0$.
 
 
 \pagebreak
-\vspace*{-1.5cm}
+\vspace*{-2cm}
 %\begin{figure}
 \begin{adjustwidth}{-5em}{-5em}
 %\changetext{0cm}{0cm}{0cm}{0cm}{}
@@ -630,9 +630,16 @@ to reduction $H^q(\DASH;\Z_{2^m})\to H^q(\DASH;\Z_{2})$, and $\Squ^1\imath_q=0$.
 \newcommand{\KWhatWhat}[2]{\makebox[3cm][r]{$K(#1,#2)$}\!\!\!\MyVRuLe{}\!\!\!\!\!}
 \renewcommand{\KWhatWhat}[2]{\jableft{1.7cm}{$K(#1,#2)$}\MyVRuLe{}\!\!\!\!\!}
 \renewcommand{\KWhatWhat}[2]{\jableft{1.7cm}{$K(#1,#2)$}\MyVRuLe{}}
+\newcommand{\Lar}[1]{\ar@/_4mm/[l]_{#1}}
+\newcommand{\Rar}[1]{\ar@/_4mm/[rr]_(.68){#1}}
 \[\xymatrix@R=.1cm@C=.051cm{ 
 \MyRuLe\raisebox{-.5mm}{\MyRuLe} k\MyVRuLe{\ \ }
-			& X_0 				&\KWhatWhat{\Z_2}{n\Splus1}&X_1				&\KWhatWhat{\Z_2}{n\Splus2}&X_2 				&\KWhatWhat{\Z_8}{n\Splus3}&X_3 			&\KWhatWhat{\Z_2}{n\Splus6}&X_4 			&K(\Z_{16},n\Splus7)\\%\KWhatWhat{\Z_{16}}{n\Splus6}\\
+&X_0\Rar{p^*}	&\KWhatWhat{\Z_2}{n\Splus1}\Lar{\tau}
+&X_1\Lar{i^*}\Rar{p^*}&\KWhatWhat{\Z_2}{n\Splus2}\Lar{\tau}&
+X_2\Lar{i^*}\Rar{p^*} 				&\KWhatWhat{\Z_8}{n\Splus3}\Lar{\tau}&
+X_3\Lar{i^*}\Rar{p^*} 			&\KWhatWhat{\Z_2}{n\Splus6}\Lar{\tau}&
+X_4 \Lar{i^*}			&K(\Z_{16},n\Splus7)\Lar{\tau}\\
+%\KWhatWhat{\Z_{16}}{n\Splus6}\\
 \MyRuLe0  		&\imath_n 				&					&\imath_n				&					&\imath_n				&					&\imath_n				&					&\imath_n				&\\
 \MyRuLe1  		&					&\imath_{n\Splus1}\ar[ld]	&					&					&					&					&					&\\
 \MyRuLe2  		&2					&1		\ar[ld]		&					&\imath_{n\Splus2}\ar[ld]	&					&					&					&\\
@@ -1529,9 +1536,9 @@ with zero indeterminacy:
 Of course, if the bracket were null, this could not hold.
 \end{proof}
 \subsection{The 3-stem}
-We know that $G_3=\pi_3^s\simeq\Z_8$...
 \begin{prop*}[4]
-The Hopf map $\nu:S^{n+3}\to S^n$ generates $G_3$.
+The Hopf map $\nu:S^{n+3}\to S^n$ generates the (2-primary component of)
+$G_3\simeq\Z_8$.
 \end{prop*}
 \begin{proof}
 By the suspension theorem, $E:\pi_7(S^4)\to\pi_8(S^5)$ is an epimorphism onto a
@@ -1540,6 +1547,59 @@ $Ev=2\alpha$, then by surjectivity, $E\beta=\alpha$ for some $\beta$, and so
 $E(v-2\beta)=0$. However, the Hopf invariant is a homomorphism, whose parity is
 detected in this case by $\Squ^4$. Thus $v-2\beta$ has even Hopf invariant,
 which contradicts the fact that $v$ has odd Hopf invariant.
+\end{proof}
+Recall the secondary operation $\Phi$ defined by $\Squ^2\underline{\Squ}^2=0$ 
+(ignore wavy arrows):
+\[\xymatrix{
+K(\Z_2,n+1)\ar[r]_{\ \ \ \ \ i}\ar@/^.8pc/[rr]^{^1\psi=\Squ^2}&
+X_1\ar[r]_{\phi\,=\,\alpha\ \ \ \ \ \ \ \ }\ar[d]^p&
+K(\Z_2,n+3)\ar@{~>}[r]^{\Squ^2}&K(\Z_2,n+5)\\
+%X\ar@{-->}[ru]^{\widetilde u}\ar[r]^{u\ \ \ }&
+K\ar[r]^u\ar@{-->}[ru]&K(\Z,n)
+\ar[r]^{\theta\ \ \ }_{\underline{\Squ}^2\ \ \ }&
+K(\Z_2,n+2)\ar[r]^{\psi}_{\Squ^2}&
+K(\Z_2,n+4)
+}\]
+\begin{lem*}[1]
+$\Squ^2(\Phi(u))=d_2(\underline{\Squ}^4(u))
+\in H^{n+5}(K;\Z_2)/\Squ^1H^{n+4}(K;\Z_2)$, for
+any $u\in H^{n}(K;\Z)$ such that $\underline{\Squ}^2(u)=0$.
+\end{lem*}
+\begin{proof}
+For a universal example, take $K=X_1$ and $u=\imath_n=p$. Then the LHS of the
+desired equation is obtained as the composite from $K$ to $K(\Z_2,n+5)$. That is
+exactly $\Squ^2\alpha=\gamma$ (as can be seen by looking at transgressions for
+the second fibration. Note that there is no indeterminacy, as
+$H^{n+1}(X_1;\Z_2)=0$. The right hand side also equals $\gamma$, and again there
+is no indeterminacy, as the indeterminacy in $d_2$ is the image of $d_1$, and
+$\Squ^1\beta=\Squ^1\tau(\Squ^1\imath_{n+2})=0$.
+
+Now by naturality, we obtain the result, up to the indeterminacy of the
+naturality formula and that the $d_2$ differential. We can check that this
+indeterminacy is as stated.
+\end{proof}
+\begin{prop*}[5]
+$\eta^3=4\nu$ in the stable 3-stem.
+\end{prop*}
+\begin{proof}
+As $\nu$ generates $G_3\simeq\Z_8$, and $2\eta=0$, it's enough to see that
+$\eta^3\neq0$. So assume that $\eta^3=0$. Then we can form a co-extension:
+\[\xymatrix@R=.3cm{
+\ar[dd]S^{n+3}\ar[r]^\eta&S^{n+2}\ar[r]^{\eta^2}&S^n\ar[d]^i\\
+%C^+\!W\ar[d]\ar[rr]^(.35){C^+\!\gamma}
+&&K\ar[r]\ar[d]&L\makebox[0cm][l]{\ $=C\widetilde\eta$}\\
+S^{n+4}\ar@{-->}[rru]^(.45){\widetilde\eta}
+\ar[rr]^(.7){\eta}&&S^{n+3}
+}\]
+We have seen already that $\Phi$ detects $\eta^2$, so that
+$\Phi(\sigma^n_{L,\Z_2})=\sigma^{n+3}_{L,\Z_2}$, without indeterminacy.
+Moreover, $\Squ^2\sigma^{n+3}_{L,\Z_2}=\sigma^{n+5}_{L,\Z_2}$, as the top
+attaching map is $\eta$, which is detected by $\Squ^2$.
+
+Thus $\Squ^2(\Phi(\sigma^{n}_{L,\Z_2}))=\sigma^{n+5}_{L,\Z_2}\neq$. However,
+$\Squ^4(\sigma^{n}_{L,\Z_2})$ lands in a zero group. Thus (by the lemma)
+$d_2\Squ^4(\sigma^{n}_{L,\Z_2})=0$, with no indeterminacy. This contradicts the
+lemma.
 \end{proof}
 \end{document}
 
