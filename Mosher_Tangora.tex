@@ -14,8 +14,8 @@
 %% >>> header
 
 \begin{document}
-\tableofcontents
-\comment{
+%\tableofcontents
+\notacomment{
 \section{Introduction to Cohomology Operations}
 \subsection{Cohomology Operations and \texorpdfstring{$K(\pi,n)$}{K(G,n)} spaces}
 There is a natural equivalence of functors $[\DASH,K(\pi,n)]\simeq H^n(\DASH;\pi)$ given by $[f]\longleftrightarrow f^*(\imath_n)$. Here the \emph{fundamental class} $\imath_n\in H^n(K(\pi,n);\pi)$ is defined to be the cohomology class corresponding to $\text{id}_\pi$ under:
@@ -158,10 +158,45 @@ For example, $H^*(X;\Z_2)$ is a module over $\Steen$, and by the Cartan formula 
 For any sequence $R$ of nonnegative integers (all but finitely many zero), we have an element $\xi^R$ of $\Steen^*$. These elements are a basis of $\Steen^*$, and the dual basis $\{\Squ^R\}$ of $\Steen$ is referred to as the Milnor basis. It is very different from the Serre-Cartan basis, but we do have $\Squ^{\{i,0,\ldots\}}=\Squ^i$.
 
 \section{Exact couples and spectral sequences}
-
+\setcounter{subsection}{5}
+\subsection{Appendix: the homotopy exact couple \& Whitehead LES}
+Given a CW-complex $K$, consider the exact couple associated to the various 
+homotopy LESs:
+\[
+\raisebox{-.6cm}
+{$D_{pq}^1=\pi_{p+q}(K^p),\ \ E_{pq}^1=\pi_{p+q}(K^p,K^{p-1})$.\qquad}
+\xymatrix@R=.6cm@C=.1cm{
+D^1_{**}\ar[rr]_{i}^{(1,-1)}&&D^1_{**}\ar[dl]_j^{(0,0)}\\
+&E^1_{**}\ar[lu]_k^{(-1,0)}
+}
+\raisebox{-.7cm}{\ \ \bigrightsquig\ \ }
+\xymatrix@R=.6cm@C=.1cm{
+D^2_{**}\ar[rr]_{i}^{(1,-1)}&&D^2_{**}\ar[dl]_j^{(-1,1)}\\
+&E^2_{**}\ar[lu]_k^{(-1,0)}
+}
+\]
+By the relative Hurewicz theorem, 
+\[E^1_{pq}=0\text{ for $q<0$, and }
+E^1_{p0}=H_p(K^p,K^{p-1})=C^\text{cell}_p(K).\]
+Now the differential on the $E^1_{*,0}$ is the cellular differential, so that
+$E^2_{p,0}=H_p(K)$. Moreover, by cellular approximation:
+\[D^2_{p+1,-1}=\im(\pi_p(K^p)\to \pi_p(K^{p+1}))=\pi_p(K^{p+1})=\pi_p(K).\]
+Finally, the map $\pi_p(K)=D^2_{p+1,-1}\to E^2_{p,0}=H_p(K)$ is the Hurewicz
+homomorphism:
+\[\xymatrix{
+\pi_p(K)\ar[r]^\simeq\ar[rrrd]&\pi_p(K^p)\ar[r]&
+\pi_p(K^p,K^{p-1})\ar[r]^\simeq_{\text{Hur.}}&H_p(K^p,K^{p-1})\\
+&&&Z_p^\text{cell}(K)\ar@{^{(}->}[u]\ar@{->>}[r]&H_p(K)
+}\]
+Thus, from the derived exact couple we obtain a long exact sequence which gives
+the failure of the Hurewicz homomorphism to be exact, where
+$\Gamma_p(K)=D_{p0}^2=\im(\pi_p(K^{p-1})\to\pi_p(K^p))$:
+\[\cdots\to H_{p+1}(K)\to \Gamma_p(K)\to\pi_p(K)\to H_p(K)\to\cdots\]
+Note: $\Gamma_p(K)=0$ for $p\leq n$ whenever $K$ is $(n-1)$-connected, `by
+obstruction theory'.
 \section{Fiber Spaces}
 \begin{itemise}
-\item By fibration, we mean 'Serre fibration'.
+\item By fibration, we mean `Serre fibration'.
 \item In a Hurewicz fibration, all fibres are homotopic, while in a Serre fibration, we can only assert this when both fibres are finite complexes.
 \item If $C\downarrow B$ is a covering space ($C$ connected), then the fiber is the discrete group $G$ of covering transformations. Moreover, the LES gives $\pi_n(C)=\pi_n(B)$ for $n\geq2$, and a short exact sequence $0\to\pi_1(C)\to\pi_1(B)\to G\to0$.
 \item $p:\Orth(n+1)\to S^n$ given by evaluation at a fixed point of $S^n$, has fibre $\Orth(n)$. Then the LES gives $\pi_{i+1}(S^n)\to\pi_i(\Orth(n))\to\pi_i(\Orth(n+1))\to\pi_i(S^n)$, and the middle map is an isomorphism when $i<n-1$. Thus the groups $\pi_i(\Orth(n))$ are isomorphic for $n>i+1$. The stable values are known, and satisfy Bott periodicity.
@@ -1596,7 +1631,7 @@ $\Phi(\sigma^n_{L,\Z_2})=\sigma^{n+3}_{L,\Z_2}$, without indeterminacy.
 Moreover, $\Squ^2\sigma^{n+3}_{L,\Z_2}=\sigma^{n+5}_{L,\Z_2}$, as the top
 attaching map is $\eta$, which is detected by $\Squ^2$.
 
-Thus $\Squ^2(\Phi(\sigma^{n}_{L,\Z_2}))=\sigma^{n+5}_{L,\Z_2}\neq$. However,
+Thus $\Squ^2(\Phi(\sigma^{n}_{L,\Z_2}))=\sigma^{n+5}_{L,\Z_2}\neq0$. However,
 $\Squ^4(\sigma^{n}_{L,\Z_2})$ lands in a zero group. Thus (by the lemma)
 $d_2\Squ^4(\sigma^{n}_{L,\Z_2})=0$, with no indeterminacy. This contradicts the
 lemma.
