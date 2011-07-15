@@ -1,4 +1,7 @@
 % !TEX root = z_output/_notes.tex
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%% 80 characters %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \documentclass[11pt]{article}
 \input{../macros.tex}
 
@@ -28,7 +31,7 @@ Suppose that $C_*=\varinjlim(F_0C_*\hookrightarrow F_1C_*\hookrightarrow F_2C_*\
 % &H_{s+t}(C_*)
 % }\]
 %
-\[\xymatrix{
+\[\xymatrix@C=.5cm@R=.7cm{
 &&&0\ar@{.>}[d]&\\
 &&&H_{s+t-1}(F_{s-r-1})\ar[d]^\alpha \ar[r]&\theexp{s+t-1}{s-r-1}{s-r-2}{s-r-1,t+r}\\
 &H_{s+t}(F_{s-1})\ar[d]^\gamma&&H_{s+t-1}(F_{s-r})\ar@{.>}[d] \ar[r]^{g'\ \ }&\theexp{s+t-1}{s-r}{s-r-1}{s-r,t+r-1}\\
@@ -65,7 +68,7 @@ Finally, we should find an isomorphism $E^\infty_{s,t}\to F_s(H_{s+t}(C_*))/F_{s
 
 \myheading{A Derivation of the Leray-Serre-Atiyah-Hirzebruch Spectral Sequence}
 Suppose that $\pi:E\to B$ is a Hurewicz fibration, with fiber $F$, where $B$ is a (finite?) connected CW-complex. Let $B^n$ be the $n$-skeleton of $B$, and define $E^n:=\pi^{-1}B^n$. Let $h_*$ be an unreduced homology theory. The long exact sequences for the pairs $(E^p,E^{p-1})$ can be written as in the following diagram. Here, wavy arrows indicate a map with degree $-1$, and each triangle is exact.
-\[\xymatrix{
+\[\xymatrix@C=.5cm{
 0\ar[rr]|{\ \cdot\ \cdot\ \cdot\ }&&h_*(E^{p-1})\ar[rr]^i\ar[ld]_\rho&&h_*(E^{p})\ar[rr]^i \ar[ld]_\rho&&h_*(E^{p+1})\ar[ld]_\rho
 \ar[rr]|{\ \cdot\ \cdot\ \cdot\ }&&h_*(E)\\
 %&\cdots\ar[r]&h_*(E)\\
@@ -170,7 +173,7 @@ When $q$ is $0$, $h_*\sigma$ is an element of the stable $0$-stem, and thus a ge
 \pagebreak
 
 \myheading{A couple of applications of the Steenrod squares}
-First, we show that $\eta^2:S^2\to S^0$ is not stably null, where $\eta$ is the
+\textbf{Application 1:} we show that $\eta^2:S^2\to S^0$ is not stably null, where $\eta$ is the
 Hopf fibration. Whenever we have a homotopy commuting square, we can complete it
 to a larger grid with rows and columns cofiber sequences. Note that we need to
 use the same choice of homotopy to induce the two squiggly maps:
@@ -186,7 +189,7 @@ so for $*=2,4$. Thus if $\phi_0,\phi_2,\phi_4$ are the various generators, we
 have $\Squ^2\phi_0=\phi_2$ and $\Squ^2\phi_2=\phi_4$. This contradicts the Adem
 relation $\Squ^{22}=\Squ^{31}$.
 
-For another application, let $M$ be the cofiber of the map $2:S^0\to S^0$ (of
+\textbf{Application 2:}  let $M$ be the cofiber of the map $2:S^0\to S^0$ (of
 spectra). We would like to see that $2\id_M:M\to M$ is not null. For this,
 suppose that it is in fact null. Then, as $2\id_M=2\wedge\id_M$, we have
 $C(2\id_M)=M\wedge M$.
@@ -197,6 +200,51 @@ first that $H^*(M;\Z_2)$ is $\Z_2$ in $*=0,1$. Thus $\Squ^2$ acts as zero on the
 cohomology of $M\vee \Sigma M$. On the other hand, we can calculate directly
 that $\Squ^2$ is nonzero on the base class in $M\wedge M$.
 
+\pagebreak
+
+\myheading{The existence of an $A$-Adams resolution}
+In this note we show that $A$-Adams resolutions exist. The context is the paper
+``On relations between Adams spectral sequences'' by Haynes Miller, page 289.
+
+Suppose that we have a chosen $A$-resolution $*\to X\to I^0\to I^1\to\cdots$ of
+$X$. Suppose by induction on $s$ that we have a partial $A$-Adams resolution of
+length $s$:
+\[\xymatrix@C=.2cm{
+&X^{s-2}\ar[dr]&&X^{s-1}\ar[dr]\ar[ll]&&X^s\ar[ll]\\
+&&\Sigma^{s-2}I^{s-2}\ar@{-->}[rr]\ar@{-->}[ur]
+&&\Sigma^{s-1}I^{s-1}\ar@{-->}[rr]\ar@{-->}[ur]&&\Sigma^{s}I^{s}
+}\]
+The dashed maps lower degree by one. The bottom row should be the resolution of
+$X$ (and $X=X_0\to I^0$ should be the initial map in the resolution). Moreover,
+the sequences $*\to X^i\to\Sigma^iI^i\to\Sigma X^{i+1}\to*$ should be $A$-exact,
+and of course, the top triangles must be extended (co)-fiber sequences, and the
+bottom triangles should commute.
+
+It is enough to show that there is a map $X^s\to \Sigma^sI^s$ making the
+rightmost triangle commute, and to demonstrate that this map is $A$-monic. For
+then, by lemma 1.5, we can define $X^{s+1}$ to be the fiber of this map. For
+existence, we do a little diagram chasing:
+\[\xymatrix{
+\bullet\ar[rd]_5\ar[rrrrrd]_3&&\bullet\ar[rrrd]^1\ar[ll]_4&&\bullet\\
+&\bullet\ar[ru]_2\ar@/_.31pc/[rrrr]^(.3){6}&&\bullet&&\bullet
+}\]
+The map exists iff the composite $1$ is null, by exactness in the upper right
+triangle. Now $1\circ2$ is null, so that there exists a map $3$ such that
+$1=3\circ4$. The map $5$ is $A$-monic, and the target is $A$-injective, so that
+there exists a map $6$ such that $3=6\circ5$. Then $1=6\circ5\circ4$, and
+$5\circ4$ is null.
+
+To check that the map is $A$-monic, now that it is known to exist, we map
+everything into an arbitrary $A$-injective object $I$, giving the following
+purely algebraic situation (where numbers represent homsets), in which the
+bottom row is exact, both triangles commute, and the middle vertical map is
+injective:
+\[\xymatrix{
+&&&2\ar[lldl]_0\ar@{^{(}->}[ld]\\
+3&&\ar[ll]4&&1\ar[ll]\ar[lu]_{\text{epi?}}
+}\]
+Now anything in $2$ maps to zero in 3, so $\im(2\to4)\subseteq\im(1\to4)$ by
+exactness of the bottom row. Yet then, as $2\to4$ is monic, $1\to2$ is epic.
 \end{document}
 
 
