@@ -3,8 +3,26 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%% 80 characters %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \documentclass[11pt]{article}
+\makeatletter
+\newcommand{\dont@load@definitions@of@theorem@environments}{}
+\makeatother
 \input{../macros.tex}
+\swapnumbers
+\theoremstyle{plain}
+\newtheorem{thm}{Theorem}[section]
+\newtheorem*{thm*}{Theorem}
+\newtheorem{lem}[thm]{Lemma}
+\newtheorem*{lem*}{Lemma}
+\newtheorem{prop}[thm]{Proposition}
+\newtheorem*{prop*}{Proposition}
+\newtheorem{cor}[thm]{Corollary}
+\newtheorem*{cor*}{Corollary}
+\theoremstyle{definition}
+\newtheorem{defn}[thm]{Definition}
+\newtheorem*{defn*}{Definition}
+\newtheorem{exmp}[thm]{Example}
 
+\newcommand{\HS}{\scrH\!\scrS}
 
 \title{On Thom Spectra, Orientability, and Cobordism\small{ --- Rudyak}}
 \author{}
@@ -16,10 +34,146 @@
 \begin{document}
 %\tableofcontents
 \section{Spectra and (Co)homology Theories}
-
+\begin{defn}[The objects of $\scrS$]\hfil
+\begin{itemise}
+\itm[(a)]A spectrum is a sequence of pointed CW-complexes $E_n$ and pointed
+CW-inclusions $s_n:SE_n\to E_{n+1}$.
+\itm[(b)]A subspectrum is a sequence of sub-CW-complexes $E'_n$ such that $s_n$
+maps $SE'_n$ into $E'_{n+1}$.
+\itm[(c)]A filtration of $E$ is a sequence 
+$\cdots\subset E(i)\subset E(i+1)\subset\cdots$ of subspectra such that the
+union (levelwise) of the $E(i)$ equals $E$
+\itm[(d)]$(\Sigma^kE)_n:=E_{k+n}$.
+\itm[(e)]$(\Sigma^\infty X)_n:=S^nX$ if $n\geq0$, and $*$ is $n<0$.
+\end{itemise}
+\end{defn}
+\begin{defn}\hfil
+\begin{itemise}
+\itm[(a)]
+A cell of $E$ is $\{e,Se,S^2e,\ldots\}$, where $e$ is a $d$-cell of $E_n$ which is not
+a suspension of a cell of $E_{n-1}$. It then has dimension $d-n$.
+\itm[(b)]A subspectrum $E'\subset E$ is cofinal if all cells of $E$ are
+eventually in $E'$.
+\itm[(c)]The $n$-skeleton $E^{(n)}$ consists of all cells of dimension at most
+$n$.
+\itm[(d)]$E$ is finite if it has finitely many cells.
+\itm[(e)]$E$ is of finite type if it has finitely many cells in each dimension.
+\itm[(f)]$E$ is finite dimensional if $E=E^{(n)}$ for some $n$.
+\itm[(g)]$E$ is a suspension spectrum if it equals $\Sigma^k\Sigma^\infty X$.
+\end{itemise}
+\end{defn}
+\begin{defn}[The morphisms in $\scrS$]\hfil
+\begin{itemise}
+\itm[(a)]A map of spectra is just a family of compatible maps.
+\itm[(b)]A morphism of spectra $E\to F$ is an equivalence class of maps out of
+cofinal subspectra $E'$. Two such maps are equivalent if they agree on some
+subspectrum of the (levelwise) intersection $E'\cap E''$ which is cofinal in
+$E$.
+\end{itemise}
+\end{defn}
+Given a spectrum $E$ there are maps $S^kE_n\to E_{n+k}$ by composition. For any
+$n$, there is a map $i_n:\Sigma^{-n}\Sigma^\infty E_n\to E$, as the proposed
+domain $(n+k)\fourth$ space $S^kE_n$ (when $k\geq0$). Thus $i_n$ is the
+inclusion of a subspectrum.
+\setcounter{thm}{4}
+\begin{prop}\hfil
+\begin{itemise}
+\itm[(i)] For any fixed $k$, the map $s_n$ sends $S((E_n)^{(n+k)})$ into
+$(E_{n+1})^{(n+k+1)}$, as the maps $s_n$ are cellular. Thus $\{E_n^{n+k}\}$ is a
+subspectrum of $E^{(k)}$. This subspectrum is in fact cofinal in $E^{(k)}$.
+\itm[(ii)]If $E$ is finite, the spaces $E_n$ are all finite.
+\itm[(iii)]If $E$ is finite, there exists $N$ such that 
+$\Sigma^{-N}\Sigma^\infty E_N$ is cofinal in $E$.
+\end{itemise}
+\end{prop}
+\begin{prop}\hfil
+\begin{itemise}
+\itm[(i)] If maps $f,g:E\to F$ agree on cofinal $B\subset E$ then $f=g$.
+\itm[(ii)] If $E',E''\subset E$ are cofinal and $f':E'\to F$ and $f'':E''\to F$
+are equivalent, then $f'=f''$ on restriction to $E'\cap E''$.
+\itm[(iii)] Any two maps representing the same morphism agree on the
+intersection of their domains. In particular there is a unique map in every
+morphism with support containing the support of all the others, and all the
+others are restrictions thereof. Call this the greatest element of the morphism.
+\end{itemise}
+\end{prop}
+\begin{defn}\hfil
+\begin{itemise}
+\itm[(a)] Given a map $f:E\to F$ define the cone $Cf=\{C(f_n)\}$. This is a
+spectrum as $S(C(f_n))$ decomposes as $SF_n\cup C(SE_n)$. Note that $C(f_n)$ is
+the unreduced mapping cone.
+\itm[(b)] If $\phi:E\to F$ is a morphism with greatest element $f':E'\to F$,
+the cone $C\phi$ is defined to be the cone $Cf'$, and called the cofiber.
+\end{itemise}
+\end{defn}
+\begin{prop}
+The cone of a morphism of finite spectra is a finite spectrum. The cone of a
+morphism of spectra of finite type is of finite type.
+\end{prop}
+Given a CW-complex $X$, define the smash product $E\wedge X$ levelwise. Then
+\begin{defn}\hfil
+\begin{itemise}
+\itm[(a)] Given maps $g_0,g_1:E\to F$, a homotopy $g_0\simeq g_1$ is a map
+$G:E\wedge I^+\to F$ such that $G|_{E\wedge\{i,*\}}=g_i$.
+\itm[(b)] We say that morphisms $\phi_0,\phi_1:E\to F$ are homotopic if for
+cofinal spectrum $E'$, there are maps $g_i:E'\to F$ such that $g_i\in\phi_i$ and
+$g_0\simeq g_1$.
+\end{itemise}
+\end{defn}
+Thus we can form the homotopy category $\HS$ with objects spectra and
+morphisms homotopy classes of morphisms. The isomorphisms here are called
+equivalences. The cones of homotopic morphisms are equivalences.
+\begin{thm}[Whitehead]
+A morphism is an equivalence iff it induces isomorphisms on homotopy groups 
+$\pi_*(\DASH):=[\Sigma^kS,\DASH]$ for all $k\in\Z$.
+\end{thm}
+\begin{prop}
+The spectra $S^1\wedge E$ and $\Sigma E$ are equivalent.
+\end{prop}
+\begin{defn} 
+A sequence $X\to Y\to Z$ in $\scrS$ is a \emph{cofiber sequence} if it admits a
+homotopy commuting diagram as follows, with vertical arrows equivalences:
+\[\xymatrix{
+X\ar[r]\ar[d]&Y\ar[r]\ar[d]&Z\ar[d]\\
+E\ar[r]^\phi&F\ar[r]&C\phi
+}\]
+\end{defn}
+\begin{lem}\hfil
+\begin{itemise}
+\itm[(i)]If $X\to Y\to Z$ is a cofiber sequence, there is a map $Z\to \Sigma X$
+such that $X\to Y\to Z\to \Sigma X$ is a long cofiber sequence.
+\itm[(ii)]The construction of this map is somehow natural: given two cofiber
+sequences and the full arrows, such that the left square is homotopy
+commutative, we can find dotted arrows such that everything is homotopy
+commutative (with rows\ long cofiber sequences):
+\[\xymatrix{
+X\ar[r]\ar[d]^\alpha&
+Y\ar[r]\ar[d]&Z\ar@{.>}[d]\ar@{.>}[r]&
+\Sigma X\ar[d]^{\Sigma\alpha}\\
+X\ar[r]&Y\ar[r]&Z\ar@{.>}[r]&\Sigma X'
+}\]
+\itm[(iii)]$\Sigma^\infty$ maps cofiber sequences of CW-complexes to cofiber
+sequences of spectra.
+\end{itemise}
+\end{lem}
+As suspension distributes over wedge, the levelwise wedge of spectra is a
+spectrum, and
+\begin{prop}
+The wedge of spectra is the coproduct in $\HS$.
+\end{prop}
+As $[E,F]=[S^2\wedge E,\Sigma^2F]$ all the homsets have an abelian group
+structure from the comulitplication on $S^2$. Moreover, composition is
+biadditive, and $\HS$ is an additive category. As we can desuspend we can form long cofiber sequences in both directions, and:
+\begin{thm}
+For any spectrum $E$, applying $\Hom(\DASH,E)$ to the long cofiber sequence
+\[\xymatrix{
+\cdots\ar[r]&\Sigma^{-1}Y\ar[r]^{\Sigma^{-1}g}&
+\Sigma^{-1}Z\ar[r]&X\ar[r]^f&
+Y\ar[r]^g&Z\ar[r]&\Sigma X\ar[r]^{\Sigma f}&\Sigma Y\ar[r]&\cdots
+}\]
+gives a long exact sequence, \textbf{and so does applying} $\Hom(E,\DASH)$.
+\end{thm}
 \end{document}
-
-
 
 
 
