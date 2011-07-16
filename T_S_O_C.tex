@@ -9,7 +9,7 @@
 \input{../macros.tex}
 \swapnumbers
 \theoremstyle{plain}
-\newtheorem{thm}{Theorem}[section]
+\newtheorem{thm}{Theorem}[subsection]
 \newtheorem*{thm*}{Theorem}
 \newtheorem{lem}[thm]{Lemma}
 \newtheorem*{lem*}{Lemma}
@@ -17,10 +17,12 @@
 \newtheorem*{prop*}{Proposition}
 \newtheorem{cor}[thm]{Corollary}
 \newtheorem*{cor*}{Corollary}
+\newtheorem{lemdef}[thm]{Lemma-Definition}
 \theoremstyle{definition}
 \newtheorem{defn}[thm]{Definition}
 \newtheorem*{defn*}{Definition}
 \newtheorem{exmp}[thm]{Example}
+
 
 \newcommand{\HS}{\scrH\!\scrS}
 
@@ -33,8 +35,10 @@
 
 \begin{document}
 %\tableofcontents
+\setcounter{section}{1}
 \section{Spectra and (Co)homology Theories}
-\begin{defn}[The objects of $\scrS$]\hfil
+\subsection{Preliminaries on Spectra}
+\begin{defn}[objects of $\scrS$]\hfil
 \begin{itemise}
 \itm[(a)]A spectrum is a sequence of pointed CW-complexes $E_n$ and pointed
 CW-inclusions $s_n:SE_n\to E_{n+1}$.
@@ -50,8 +54,8 @@ union (levelwise) of the $E(i)$ equals $E$
 \begin{defn}\hfil
 \begin{itemise}
 \itm[(a)]
-A cell of $E$ is $\{e,Se,S^2e,\ldots\}$, where $e$ is a $d$-cell of $E_n$ which is not
-a suspension of a cell of $E_{n-1}$. It then has dimension $d-n$.
+A cell of $E$ is $\{e,Se,S^2e,\ldots\}$, where $e$ is a $d$-cell of $E_n$ which
+is not a suspension of a cell of $E_{n-1}$. It then has dimension $d-n$.
 \itm[(b)]A subspectrum $E'\subset E$ is cofinal if all cells of $E$ are
 eventually in $E'$.
 \itm[(c)]The $n$-skeleton $E^{(n)}$ consists of all cells of dimension at most
@@ -62,7 +66,7 @@ $n$.
 \itm[(g)]$E$ is a suspension spectrum if it equals $\Sigma^k\Sigma^\infty X$.
 \end{itemise}
 \end{defn}
-\begin{defn}[The morphisms in $\scrS$]\hfil
+\begin{defn}[morphisms in $\scrS$]\hfil
 \begin{itemise}
 \itm[(a)]A map of spectra is just a family of compatible maps.
 \itm[(b)]A morphism of spectra $E\to F$ is an equivalence class of maps out of
@@ -120,7 +124,7 @@ cofinal spectrum $E'$, there are maps $g_i:E'\to F$ such that $g_i\in\phi_i$ and
 $g_0\simeq g_1$.
 \end{itemise}
 \end{defn}
-Thus we can form the homotopy category $\HS$ with objects spectra and
+\noindent Thus we can form the homotopy category $\HS$ with objects spectra and
 morphisms homotopy classes of morphisms. The isomorphisms here are called
 equivalences. The cones of homotopic morphisms are equivalences.
 \begin{thm}[Whitehead]
@@ -163,7 +167,8 @@ The wedge of spectra is the coproduct in $\HS$.
 \end{prop}
 As $[E,F]=[S^2\wedge E,\Sigma^2F]$ all the homsets have an abelian group
 structure from the comulitplication on $S^2$. Moreover, composition is
-biadditive, and $\HS$ is an additive category. As we can desuspend we can form long cofiber sequences in both directions, and:
+biadditive, and $\HS$ is an additive category (see 1.16). As we can desuspend we
+can form long cofiber sequences in both directions, and:
 \begin{thm}
 For any spectrum $E$, applying $\Hom(\DASH,E)$ to the long cofiber sequence
 \[\xymatrix{
@@ -172,6 +177,89 @@ For any spectrum $E$, applying $\Hom(\DASH,E)$ to the long cofiber sequence
 Y\ar[r]^g&Z\ar[r]&\Sigma X\ar[r]^{\Sigma f}&\Sigma Y\ar[r]&\cdots
 }\]
 gives a long exact sequence, \textbf{and so does applying} $\Hom(E,\DASH)$.
+\end{thm}
+\begin{prop}\hfil
+\begin{itemise}
+\itm[(i)]For all $F$ there is an isomorphism of abelian groups:
+\[\{i^*_\lambda\}:[\vee_\lambda E(\lambda)]\to\prod_\lambda[E(\lambda),F],
+\qquad\{i^*_\lambda\}(f)=\{fi_\lambda\}.\]
+\itm[(ii)]For all $F$ there is an isomorphism of abelian groups:
+\[\langle(i_k)_*\rangle:\bigoplus_{k=1}^m\lambda[F,E(k)]\to
+[F,\vee_{k=1}^m E(k)]\]
+\itm[(iii)]For all finite $F$ there is an isomorphism of abelian groups:
+\[\langle(i_k)_*\rangle:\oplus_\lambda[F,E(\lambda)]\to
+[F,\vee_\lambda E(\lambda)]\]
+\end{itemise}
+\end{prop}
+\noindent By 1.16(ii), $[X,X\vee X]\simeq[X,X]\oplus[X,X]$. Under this
+isomorphism, $(\id_X,\id_X)$ corresponds to a homotopy class $\nabla:X\to X\vee
+X$, called \emph{coaddition}. Moreover, addition in $[X,E]$ is given by
+\[\xymatrix{[X,E]\oplus[X,E]\ar[r]^{\ \ \simeq}&
+[X\vee X,E]\ar[r]^{\ \ \ \nabla^*}&[X,E].}\]
+\begin{prop}
+Let $\xymatrix{X\ar[r]^f&Y\ar[r]^g&Z}$ be a cofiber sequence. Then TFAE:
+\begin{itemise}
+\itm[(i)]The morphisms $g$ us innessential; and
+\itm[(ii)]There is a splitting $s:Y\to X$ such that $fs\simeq\id_Y$.
+\end{itemise}
+If these hold then $X\simeq \Sigma^{-1}Z\vee Y$.
+\end{prop}
+\begin{defn}\hfil
+\begin{itemise}
+\itm A \emph{prespectrum} is simply a sequence of pointed spaces and pointed
+maps.
+\itm A CW-\emph{prespectrum} is one in which the spaces are pointed
+CW-complexes, and the maps are cellular, but not CW-inclusions.
+\end{itemise}
+\end{defn}
+\begin{lemdef}[spectral substitute]
+For every prespectrum $X=\{X_n,t_n\}$ there is a spectrum $\{E_n,s_n\}$ and
+pointed homotopy equivalences $f_n:E_n\to X_n$ forming a map of prespectra. Any
+such $E$ is called a \emph{spectral substitute} for the prespectrum $X$.
+
+If $X$ is a CW-spectrum in which for some $k$, $(X_n)^{(n+k)}=*$ for all $n$,
+then we can choose $E$ such that $E^{(k)}=*$.
+\end{lemdef}
+\begin{defn}
+A prespectrum $X$ is called an $\Omega$-\emph{prespectrum} if each adjoint
+$X_n\to \Omega X_{n+1}$ is a homotopy equivalence. A spectrum is called an
+$\Omega$-\emph{spectrum} if it is an $\Omega$-prespectrum.
+\end{defn}
+\begin{prop}[Adams]
+Every spectrum is equivalent to an $\Omega$-spectrum.
+\end{prop}
+\begin{prop}
+If $A,B\subset E$ are subspectra such that $A\cup B=E$, and $h:A\vee B\to E$ is
+the wedge of inclusions, then $Ch\simeq\Sigma(A\cap B)$.
+\end{prop}
+\noindent A mapping telescope construction is given for spectra. To appear.
+\subsection{The smash product, duality, ring and module spectra}
+\begin{thm}
+There is a construction $E,F\mapsto E\wedge F$ of smash product such that
+\begin{itemise}
+\itm[(i)]It is a covariant functor in each argument.
+\itm[(ii)]The are the expected natural equivalences ``$a,\tau,l,r,\Sigma$'':
+\[(E\wedge F)\wedge G\simeq E\wedge(F\wedge G),\ E\wedge F\simeq F\wedge E,\
+S\wedge E\simeq E\simeq E\wedge S,\ \Sigma E\wedge F\simeq \Sigma(E\wedge F).\]
+\itm[(iii)]There are natural equivalences $E\wedge X\simeq E\wedge \Sigma^\infty
+X$ for CW-complexes $X$.
+\itm[(iv)]If $f:E\to F$ is an equivalence, so is $f\wedge \id_G$.
+\itm[(v)]The natural morphism $\vee_\lambda(E_\lambda\wedge
+F)\to(\vee_\lambda(E_\lambda))\wedge F$ is an equivalence.
+\itm[(vi)]If $A\to B\to C$ is a cofiber sequence, so is $A\wedge E\to B\wedge
+E\to C\wedge E$.
+\end{itemise}
+\end{thm}
+\begin{thm}
+There are compatibilities up to homotopy between:
+\begin{itemise}
+\itm[(i)] Different ways to associate a quadruple smash;
+\itm[(ii)] $\tau^2$ and the identity (swapping order twice does nothing);
+\itm[(iii)] Associating and commuting terms;
+\itm[(iv)] Smashing with $S$ and associating in various ways;
+\itm[(vii)] Smashing with $S$ and commuting;
+\itm[(viii)] $\tau:S\wedge S\to S\wedge S$ and $\id_s$.
+\end{itemise}
 \end{thm}
 \end{document}
 
