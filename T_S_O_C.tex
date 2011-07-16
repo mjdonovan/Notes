@@ -17,7 +17,9 @@
 \newtheorem*{prop*}{Proposition}
 \newtheorem{cor}[thm]{Corollary}
 \newtheorem*{cor*}{Corollary}
+\newtheorem*{statement*}{Statement}
 \newtheorem{lemdef}[thm]{Lemma-Definition}
+\newtheorem{condef}[thm]{Construction-Definition}
 \theoremstyle{definition}
 \newtheorem{defn}[thm]{Definition}
 \newtheorem*{defn*}{Definition}
@@ -51,7 +53,7 @@ union (levelwise) of the $E(i)$ equals $E$
 \itm[(e)]$(\Sigma^\infty X)_n:=S^nX$ if $n\geq0$, and $*$ is $n<0$.
 \end{itemise}
 \end{defn}
-\begin{defn}\hfil
+\begin{defn}[cells, skeleta, \ldots]\hfil
 \begin{itemise}
 \itm[(a)]
 A cell of $E$ is $\{e,Se,S^2e,\ldots\}$, where $e$ is a $d$-cell of $E_n$ which
@@ -68,7 +70,7 @@ $n$.
 \end{defn}
 \begin{defn}[morphisms in $\scrS$]\hfil
 \begin{itemise}
-\itm[(a)]A map of spectra is just a family of compatible maps.
+\itm[(a)]A map of spectra is just a family of compatible pointed cellular maps.
 \itm[(b)]A morphism of spectra $E\to F$ is an equivalence class of maps out of
 cofinal subspectra $E'$. Two such maps are equivalent if they agree on some
 subspectrum of the (levelwise) intersection $E'\cap E''$ which is cofinal in
@@ -88,9 +90,11 @@ subspectrum of $E^{(k)}$. This subspectrum is in fact cofinal in $E^{(k)}$.
 \itm[(ii)]If $E$ is finite, the spaces $E_n$ are all finite.
 \itm[(iii)]If $E$ is finite, there exists $N$ such that 
 $\Sigma^{-N}\Sigma^\infty E_N$ is cofinal in $E$.
+\itm[NB:]Note also that if $E$ is finite, then every cofinal $E'$ contains
+$\Sigma^{-N}\Sigma^\infty E_N$ for $N\gg0$.
 \end{itemise}
 \end{prop}
-\begin{prop}\hfil
+\begin{prop}[greatest element of a morphism]\hfil
 \begin{itemise}
 \itm[(i)] If maps $f,g:E\to F$ agree on cofinal $B\subset E$ then $f=g$.
 \itm[(ii)] If $E',E''\subset E$ are cofinal and $f':E'\to F$ and $f'':E''\to F$
@@ -101,7 +105,7 @@ morphism with support containing the support of all the others, and all the
 others are restrictions thereof. Call this the greatest element of the morphism.
 \end{itemise}
 \end{prop}
-\begin{defn}\hfil
+\begin{defn}[cofiber]\hfil
 \begin{itemise}
 \itm[(a)] Given a map $f:E\to F$ define the cone $Cf=\{C(f_n)\}$. This is a
 spectrum as $S(C(f_n))$ decomposes as $SF_n\cup C(SE_n)$. Note that $C(f_n)$ is
@@ -115,13 +119,14 @@ The cone of a morphism of finite spectra is a finite spectrum. The cone of a
 morphism of spectra of finite type is of finite type.
 \end{prop}
 Given a CW-complex $X$, define the smash product $E\wedge X$ levelwise. Then
-\begin{defn}\hfil
+\begin{defn}[homotopy]\hfil
 \begin{itemise}
 \itm[(a)] Given maps $g_0,g_1:E\to F$, a homotopy $g_0\simeq g_1$ is a map
-$G:E\wedge I^+\to F$ such that $G|_{E\wedge\{i,*\}}=g_i$.
-\itm[(b)] We say that morphisms $\phi_0,\phi_1:E\to F$ are homotopic if for
-cofinal spectrum $E'$, there are maps $g_i:E'\to F$ such that $g_i\in\phi_i$ and
-$g_0\simeq g_1$.
+$G:E\wedge I^+\to F$ such that $G|_{E\wedge\{i,*\}}=g_i$. This is just a 
+levelwise homotopy compatible with the suspension structure.
+\itm[(b)] We say that morphisms $\phi_0,\phi_1:E\to F$ are homotopic if for some
+cofinal spectrum $E'$, there are homotopic maps $g_i:E'\to F$ such that
+$g_i\in\phi_i$.
 \end{itemise}
 \end{defn}
 \noindent Thus we can form the homotopy category $\HS$ with objects spectra and
@@ -261,6 +266,126 @@ There are compatibilities up to homotopy between:
 \itm[(viii)] $\tau:S\wedge S\to S\wedge S$ and $\id_s$.
 \end{itemise}
 \end{thm}
+\begin{defn}
+A map $u:S\to A\wedge A^\perp$ is called a duality if for all $E$, the maps
+%\[[A,E]\to[S,E\wedge A^\perp],\qquad (A\to E)\mapsto (S\to A\wedge A^\perp\to 
+\begin{alignat*}{2}
+u_E:[A,E]\to[S,E\wedge A^\perp],&\qquad &
+(A\to E)\mapsto (S\to A\wedge A^\perp\to E\wedge A^\perp)\\
+u^E:[A^\perp,E]\to[S,A\wedge E],&\qquad &
+(A^\perp\to E)\mapsto (S\to A\wedge A^\perp\to A\wedge E)
+\end{alignat*}
+are isomorphisms. Duality is symmetric, as smash product is homotopy
+commutative. Moreover, given two dualities, we have isomorphisms
+$[A,B]\longrightarrow[S,B\wedge A^\perp]\longleftarrow[B^\perp,A^\perp]$, so
+that we can define the adjoint $f^\perp:B^\perp\to A^\perp$ of a map $f:A\to B$.
+\end{defn}
+\begin{lem}
+Given a map $f:A\to B$ there is a compatibility
+\[\xymatrix{
+\ar[d]^{f^*}[B,E]\ar[r]^{\cong\ \ \ }&
+[S,E\wedge B^\perp]\ar[d]^{(\id_E\wedge f^\perp)_*}\\
+[A,E]\ar[r]^{\cong\ \ \ }&[S,E\wedge A^\perp]
+}\]
+which shows that the dual is unique up to equivalence when it exists, and that
+$(A^\perp)^\perp\simeq A$.
+\end{lem}
+\begin{lem}
+Let $A$ and $A^\perp$ be two finite spectra.
+\begin{itemise}
+\itm[(i)]Suppose $u:S\to A\wedge A^\perp$ is such that $u_E$ and $u^E$ are
+isomorphisms for $E=\Sigma^k S$. Then $u$ is a duality.
+\itm[(ii)]If $u$ is a duality, then for any $E,F$ the homomorphisms
+\begin{alignat*}{2}
+_Fu_E:[F\wedge A,E]\to[F,E\wedge A^\perp],&\qquad &
+(F\wedge A\to E)\mapsto (F\to F\wedge A\wedge A^\perp\to E\wedge A^\perp)\\
+^Fu^E:[A^\perp\wedge F,E]\to[F,A\wedge E],&\qquad &
+(A^\perp\wedge F\to E)\mapsto (F\to A\wedge A^\perp\wedge F\to A\wedge E)
+\end{alignat*}
+are isomorphisms, so that internal hom objects exist in this setting.
+\itm[(iii)]Given a dual for $A$ and $B$, a dual for $A\wedge B$ is
+$B^\perp\!\wedge A^\perp$, via:
+\[S\to A\wedge A^\perp\to A\wedge S\wedge A^\perp\to 
+A\wedge B\wedge B^\perp\!\wedge A^\perp.\]
+\end{itemise}
+\end{lem}
+\setcounter{thm}{6}
+\begin{defn}
+Spectra $A$ and $B$ are called \emph{$n$-dual} if $A$ and $\Sigma^{-n}B$ are
+dual (a symmetric relation). Spaces are called \emph{stably $n$-dual} if their
+suspension spectra are $n$-dual.
+\end{defn}
+\begin{exmp}
+Let $X$ be a finite cellular subspace of $\R^n$, and let $U$ be a regular
+neighbourhood (one that admits a deformation retract onto $X$). Then $X$ is
+stably $n$-dual to $\R^n\setminus U$. This is Spanier-Whitehead duality, and the
+map is explicitly constructed here.
+
+Let a finite CW-complex $X$ be cellularly embedded in a sphere $S^n$ and let $U$
+be a regular neighbourhood of $X$ therein. They construct explicity a duality
+morphism showing that $X^+$ is stably $n$-dual to $\overline U/\partial U$.
+\end{exmp}
+\begin{cor}
+Every finite CW-space admits an $n$-dual finite CW-space for $n\gg0$, and every
+finite spectrum admits a finite dual.
+\end{cor}
+\begin{proof}
+The first claim follows as every finite CW-space can be embedded in some large
+sphere. The next follows as a finite spectrum $A$ has $A\simeq
+\Sigma^{-m}\Sigma^\infty A_m$ for $m\gg0$, then finding some $n$-dual space to
+$A_m$, we're done.
+\end{proof}
+\begin{prop}
+The dual of a cofiber sequence is a cofiber sequence.
+\end{prop}
+\begin{statement*}
+If $X$ and $Y$ are finite CW-complexes such that 
+$\Sigma^\infty X\simeq\Sigma^\infty Y$ then $S^NX\simeq S^NY$ for $N\gg0$.
+If $f,g:X\to Y$ are maps of finite CW-complexes and $\Sigma^\infty
+f\simeq\Sigma^\infty g$, then $S^Nf\simeq S^Ng$ for $N\gg0$.
+\end{statement*}
+\begin{proof}
+Fix homotopy inverse morphisms $\Sigma^\infty X\longleftrightarrow\Sigma^\infty
+Y$. Consider the composite of these, a self map of $\Sigma^\infty X$ homotopic
+to $\id_{\Sigma^{\infty}X}$. The homotopy is a \emph{map}
+$\Sigma^r\Sigma^{\infty}S^rX\wedge I^+\to\Sigma^\infty X$ for some $r$, by
+1.5(iii) and 1.5(NB). In particular, the homotopy to the identity is defined
+eventually.
+
+The second statement follows from a similar argument, or, according to the text,
+from the Freudenthal suspension theorem.
+\end{proof}
+\begin{thm}[duals of finite complexes {\small(follows from above statement)}]
+Fix $n$.
+\begin{itemise}
+\itm[(i)]Suppose $X$ is a finite CW-space with a finite CW $n$-dual $X'$. Then
+the homotopy type of $S^NX'$ is determined by that of $X$ for $N\gg0$.
+\itm[(ii)] Let $f:X\to Y$ be a map of finite CW-spaces with $n$-duals as above.
+Then for some $N$ there is a map $f':S^NY'\to S^NX'$ such that
+$\Sigma^{-N}\Sigma^\infty \Sigma^Nf$ and $\Sigma^{-N}\Sigma^\infty f'$ are dual
+morphisms. Moreover, $f'$ is unique up to homotopy for $N\gg0$.
+\itm[(iii)]If we perform the process in (ii) on both maps in a cofiber sequence
+$X\to Y\to Z$ of finite CW-spaces, then $S^NZ'\to S^NY'\to S^NX'$ is a cofiber
+sequence for $n\gg0$.
+\end{itemise}
+\end{thm}
+\begin{defn}
+A \emph{ring spectrum} is a triple $(E,\mu,\imath)$ where $\mu:E\wedge E\to E$
+and $\imath:S\to E$ satisfy the ring axioms up to homotopy. It may be or may not
+be commutative. A \emph{module spectrum} over a ring spectrum is a pair $(F,m)$
+satisfying the module axioms up to homotopy (with a unitarity condition).
+\end{defn}
+\setcounter{thm}{13}
+\begin{condef}
+Given a module $F$ over a ring $E$, and a morphism $a:S^d\to E$, the morphism
+\[a_\#:S^d\wedge F\xrightarrow{\ a\wedge 1\ }
+E\wedge F\xrightarrow{\ \ m\ \ } F\]
+is called multiplication by $a$.
+\end{condef}
+\begin{prop}
+Let $E\to E'$ be a ring morphism. If $\xymatrix{S^d\ar[r]^a&E\ar[r]&E'}$ is
+inessential then so is the morphism $a_\#:S^d\wedge E'\to E'$.
+\end{prop}
 \end{document}
 
 
