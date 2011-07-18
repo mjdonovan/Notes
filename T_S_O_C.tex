@@ -19,14 +19,24 @@
 \newtheorem*{cor*}{Corollary}
 \newtheorem*{statement*}{Statement}
 \newtheorem{lemdef}[thm]{Lemma-Definition}
-\newtheorem{condef}[thm]{Construction-Definition}
 \theoremstyle{definition}
+\newtheorem{condef}[thm]{Construction-Definition}
+\newtheorem{const}[thm]{Construction}
 \newtheorem{defn}[thm]{Definition}
 \newtheorem*{defn*}{Definition}
 \newtheorem{exmp}[thm]{Example}
+\newtheorem{nonexample}[thm]{Non-example}
 
 
 \newcommand{\HS}{\scrH\!\scrS}
+\newcommand{\CW}{\scrC}
+\newcommand{\AG}{\scrA\!\scrG}
+\newcommand{\CWf}{\scrC_\textup{f}}
+\newcommand{\CWfd}{\scrC_\textup{fd}}
+\newcommand{\Specf}{\scrC_\textup{f}}
+\newcommand{\Specfd}{\scrC_\textup{fd}}
+\newcommand{\Specs}{\scrC_\textup{s}}
+\newcommand{\Specsfd}{\scrC_\textup{sfd}}
 
 \title{On Thom Spectra, Orientability, and Cobordism\small{ --- Rudyak}}
 \author{}
@@ -385,6 +395,184 @@ is called multiplication by $a$.
 \begin{prop}
 Let $E\to E'$ be a ring morphism. If $\xymatrix{S^d\ar[r]^a&E\ar[r]&E'}$ is
 inessential then so is the morphism $a_\#:S^d\wedge E'\to E'$.
+\end{prop}
+\subsection{(Co)homology theories and their connection with spectra}
+Write $\CW$ for the category of CW-spaces (spaces homeomorphic to CW-complexes),
+and $\CWf$ and $\CWfd$ for the full subcategories of finite and finite
+dimensional CW-complexes. With a `2' superscript, we mean the category of pairs,
+and $\scrK$ denotes any one of these categories. We have $R:\scrK^2\to\scrK^2$
+defined by $R(X,A)=(A,\emptyset)$.
+\begin{defn}
+An unreduced homology theory on $\scrK^2$ is a family of functors
+$h_n:\scrK^2\to\AG$ and natural transformations $\partial_n:h_n\to h_{n-1}\circ
+R$:
+\begin{itemise}
+\itm Satisfying homotopy invariance;
+\itm Giving a long exact sequence;
+\itm Satisfying the collapse axiom (as $\scrK$ is a nice category of spaces):
+the collapse map $c:(X,A)\to (X/A,\{*\})$ induces an isomorphism $h_n(X,A)\to
+h_n(X/A,\{*\})$.
+\end{itemise}
+\end{defn}
+\noindent Any such with a dimension axiom ($h_n(\textup{pt},\emptyset)=0$ for
+$n\neq0$) is a classical homology theory.
+\begin{prop}For any unreduced homology theory:
+\begin{itemise}
+\itm The inclusion $t:(X\cup CA,*)\xrightarrow{\ \simeq\ }(X\cup CA,CA)$ induces
+an isomorphism $h_n(t)$.
+%\itm If $i:A\subset X$ is a homotopy equivalence, then $h_*(X,A)=0$. In
+particular, if $X$ is contractible, $h_*(X,*)=0$.
+%\itm
+\itm For every CW-triple $A\subset X\subset Y$, we have a long exact sequence:
+\[\xymatrix{
+\cdots\ar[r]&
+h_{n+1}(Y,X)\ar[r]^d&h_{n}(X,A)\ar[r]&
+h_{n}(Y,A)\ar[r]&h_{n}(Y,X)\ar[r]^{\ \ d}&\cdots
+}\]
+where $d$ is the composition $\xymatrix{h_{n+1}(Y,X)\ar[r]^{\ \ \partial_{i+1}}&
+h_n(X,\emptyset)\ar[r]&h_n(X,A)}$.
+\itm For every CW-triad $(X;A,B)$ (i.e. $A\cup B=X$) with $A\cap B=C$ we have a
+Mayer-Vietoris sequence:
+\[\xymatrix@C=1.3cm{
+\ar@{.>}[r]&
+h_{n}(C,\emptyset)\ar[r]_{(i_1)_*\oplus (i_2)_*\ \ \ \ \ }&
+h_{n}(A,\emptyset)\oplus h_n(B,\emptyset)\ar[r]_{\qquad \ \ (j_1)_*-(j_2)_*}&
+h_{n}(X,\emptyset)\ar[r]_{\Delta\ \ }&h_{n-1}(C,\emptyset)\ar@{.>}[r]&
+}\]
+defining $\Delta:h_n(X,\emptyset)\to h_n(X,A)\cong
+h_n(X/A,*)=h_n(B/C,*)\cong h_n(B,C)\to h_{n-1}(C,\emptyset)$.
+\end{itemise}
+\end{prop}
+\noindent The LES of a triple to $*\subset X\subset CX$ gives the
+suspension isomorphism: $t_n:h_{n+1}S\to h_n$:
+\[0\to h_n(CX,X)\to h_{n-1}(X,*)\to0,\text{ \ yet \ }h_{n}(CX,X)=h_{n}(SX,*).\]
+So letting $\scrK^\bullet$ stand for the pointed category:
+\setcounter{thm}{3}
+\begin{condef}
+Given an unreduced cohomology theory on $\scrK^2$, the functors $\widetilde h_n$
+induced on $\scrK^\bullet$ taken with the natural equivalences $t_n:\widetilde
+h_{n+1}S\to\widetilde h_n$ are the \emph{reduced cohomology theory}
+corresponding to $h_n$. The following properties of the $\widetilde h_n$ are the
+axioms for a reduced cohomology theory:
+\begin{itemise}
+\itm The functors $\widetilde h_n$ are pointed homotopy invariant.
+\itm For any pointed pair, 
+$\widetilde h_n(A,x_0)\to\widetilde h_n(X,x_0)\to\widetilde h_n(X/A,*)$
+is exact.
+\end{itemise}
+\end{condef}
+\setcounter{thm}{5}
+\begin{prop}
+Every reduced cohomology theory is the reduced cohomology theory corresponding
+to an unreduced cohomology theory which is unique up to equivalence.
+\end{prop}
+\begin{prop} For any reduced cohomology theory:
+\begin{itemise}
+\itm Cofiber sequences map to exact sequences under each $\widetilde h_n$.
+\itm For every pointed CW-pair $A\subset X$, we have a long exact sequence:
+\[\xymatrix{
+\ar@{.>}[r]&
+\widetilde h_n(A)\ar[r]&\widetilde h_{n}(X)\ar[r]&\widetilde h_{n}(X/A)
+\ar[r]^{\widetilde\partial_n}&\widetilde h_{n-1}(A)\ar@{.>}[r]&
+}\]
+defining: $\widetilde\partial_n:\xymatrix{\widetilde h_n(X/A)\ar[r]&
+\widetilde h_n(X\cup CA)\ar[r]&\widetilde h_n(SA)\ar[r]&\widetilde h_{n-1}(A)}$.
+\itm For every CW-triad $(X;A,B)$ (i.e. $A\cup B=X$) with $A\cap B=C$ we have a
+Mayer-Vietoris sequence:
+\[\xymatrix@C=1.3cm{
+\ar@{.>}[r]&
+\widetilde h_{n}(C)\ar[r]_{(i_1)_*\oplus (i_2)_*\ \ \ \ \ }&
+\widetilde h_{n}(A)\oplus \widetilde h_n(B)\ar[r]_{\qquad \ \ (j_1)_*-(j_2)_*}&
+\widetilde h_{n}(X)\ar[r]_{\Delta\ \ }&\widetilde h_{n-1}(C)\ar@{.>}[r]&
+}\]
+defining $\Delta:\widetilde h_n(X)\to \widetilde h_n(X/A)=\widetilde
+h_n(B/C)\xrightarrow{\ \widetilde\partial_n\ }\widetilde h_{n-1}(C)$. 
+\itm $\widetilde h_n(X\vee Y)=\widetilde h_n(X)\oplus\widetilde h_n(Y)$.
+\end{itemise}
+\end{prop}
+\noindent Exactly the same story holds for (un)reduced cohomology theories. Now
+we have some full subcategories of $\scrS$: $\Specfd$ (finite dimensional
+spectra), $\Specs$ (suspension spectra), $\Specsfd$ (suspensions of finite
+dimensional CW complexes), and $\Specf$ (finite spectra). Let $\scrL$ be $\scrS$
+or one of these subcategories.
+\setcounter{thm}{9}
+\begin{defn}
+A homology theory on $\scrL$ is a family $h_n:\scrL\to\AG$ of functors and a
+family $\hat\fraks:h_n\to h_{n+1}\Sigma$ of natural equivalences. The $h_n$ must
+satisfy a homotopy axiom, and must send cofiber sequences to exact sequences.
+Cohomology theories are defined analogously.
+\end{defn}
+\begin{prop}
+From these axioms we can derive that $h_n(X\vee Y)=h_n(X)\oplus h_n(Y)$, that
+cofiber sequences give long exact sequences, and a Mayer-Vietoris sequence. The
+same goes for cohomology.
+\end{prop}
+\setcounter{thm}{12}
+\begin{const}
+Given a (co)homology theory on $\scrS$, we obtain a reduced (co)homology theory
+on $\scrK^\bullet$ by composing with $\Sigma^\infty$.
+\end{const}
+\begin{lem}
+Let $X(1)\to X(2)\to \cdots\to X(n)$ be a sequence of maps of spectra. Then
+there exists a set $\Omega$ and finite subspectra $X(i)_\omega\subset X(i)$ for
+all $\omega\in\Omega$ such that:
+\begin{itemise}
+\itm For each $i\leq n$, every finite subspectrum of $X(i)$ is contained in some
+$X(i)_\omega$.
+\itm For each $i<n$ and $\omega\in\Omega$, $X(i)_\omega$ maps into
+$X(i+1)_\omega$ under the map $X(i)\to X(i+1)$.
+\end{itemise}
+\end{lem}
+\begin{lem}
+Given a strict cofiber sequence $X\to Y\to Z$, the family as above can be chosen
+so that $X_\omega\to Y_\omega\to Z_\omega$ are strict cofiber sequences.
+\end{lem}
+\begin{defn}
+Let $\scrL$ be one of the above categories of spectra. A (co)homology theory on
+$\scrL$ is called \emph{additive} if whenever $\{X_\lambda\}\subset\scrL$ is a
+family whose wedge is still inside $\scrL$:
+\[\oplus_\lambda h_*(X_\lambda)\xrightarrow{\ \cong\ }h_*(\vee X_\lambda)
+\text{ \ for homology, and \ }h^*(\vee X_\lambda)
+\xrightarrow{\ \cong\ }\prod h^*(X_\lambda) \text{\  for cohomology}.\]
+We make the same definitions for reduced (co)homology theories on
+$\scrK^\bullet$. An unreduced (co)homology theory is additive when the
+corresponding reduced theory is, which is to say that the isomorphisms occur
+with disjoint union in place of wedge. (As these isomorphisms always hold for
+finite wedges, additivity is no restriction on theories on
+$\scrC_\textup{f}^\bullet$ or $\Specf$.)
+\end{defn}
+\begin{nonexample}
+Set $\widetilde h_k(X):=\prod_{n=0}^\infty\widetilde H_n(X)
+/\bigoplus_{n=0}^\infty\widetilde H_n(X)$, and apply to $\vee_{n=1}^\infty S^n$.
+\end{nonexample}
+\begin{prop}
+Every reduced (co)homology theory $\widetilde h$ on $\scrC^\bullet$,
+$\scrC_\textup{fd}^\bullet$ or $\scrC_\textup{f}^\bullet$ is obtained from a
+(co)homology theory $h$ on $\scrS$, $\Specf$ or $\Specfd$ via construction 3.13
+(composition with $\Sigma^\infty$). $h$ is unique up to equivalence, and it
+additive iff $\widetilde h$ is.
+\end{prop}
+\begin{prop}\hfil
+\begin{itemise}
+\itm[(i)] Let $\phi$ be a morphism of reduced (co)homology theories on
+$\scrC_\textup{f}^\bullet$. If $\phi$ is an isomorphism on $S^0$ then it is an
+equivalence.
+\itm[(ii)] Let $\phi$ be a morphism of reduced \textbf{additive} (co)homology
+theories on any of the above categories $\scrK^\bullet$ or $\scrL$ of spaces or
+spectra. If $\phi$ is an isomorphism on $S^0$ then it is an equivalence.
+\end{itemise}
+\end{prop}
+\begin{prop}Let $\{X_\lambda\}$ be the set of all finite subspectra of $X$.
+\begin{itemise}
+\itm[(i)] Let $h_*$ be a homology theory on $\Specf$. Set $k_*(X):=\varinjlim
+h_*(X\lambda)$ for any $X\in\scrS$. Then $k_*$ is an additive homology theory on
+$\scrS$.
+\itm[(ii)] If $h$ were already defined on $\scrS$, the natural map $h\to k$ is
+an equivalence.
+\end{itemise}
+Thus there is no difference between homology theories on $\Specf$ and additive
+homology theories on $\scrS$. This does \textbf{not} hold for cohomology
+theories.
 \end{prop}
 \end{document}
 
