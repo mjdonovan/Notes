@@ -19,6 +19,7 @@
 \newtheorem*{cor*}{Corollary}
 \newtheorem*{statement*}{Statement}
 \newtheorem{lemdef}[thm]{Lemma-Definition}
+\newtheorem{propdef}[thm]{Proposition-Definition}
 \theoremstyle{definition}
 \newtheorem{condef}[thm]{Construction-Definition}
 \newtheorem{const}[thm]{Construction}
@@ -31,6 +32,7 @@
 
 
 \newcommand{\HS}{\scrH\!\scrS}
+\newcommand{\HC}{\scrH\!\scrC}
 \newcommand{\CW}{\scrC}
 \newcommand{\AG}{\scrA\!\scrG}
 \newcommand{\CWf}{\scrC_\textup{f}}
@@ -50,7 +52,7 @@
 \begin{document}
 %\tableofcontents
 \setcounter{section}{1}
-\section{Spectra and \lparen co\rparen homology Theories}
+\section{Spectra and \lparen co\rparen homology theories}
 \subsection{Preliminaries on Spectra}
 \begin{defn}[objects of $\scrS$]\hfil
 \begin{itemise}
@@ -393,13 +395,15 @@ satisfying the module axioms up to homotopy (with a unitarity condition).
 Given a module $F$ over a ring $E$, and a morphism $a:S^d\to E$, the morphism
 \[a_\#:S^d\wedge F\xrightarrow{\ a\wedge 1\ }
 E\wedge F\xrightarrow{\ \ m\ \ } F\]
-is called multiplication by $a$.
+is called multiplication by $a$. This induces a map $F_n(X)\to F_{n+d}(X)$,
+which is multiplication by $a\in\pi_*(E)$ on the $\pi_*(E)$-module $\pi_*(F)$.
+See page \pageref{modulestructures}.
 \end{condef}
 \begin{prop}
 Let $E\to E'$ be a ring morphism. If $\xymatrix{S^d\ar[r]^a&E\ar[r]&E'}$ is
 inessential then so is the morphism $a_\#:S^d\wedge E'\to E'$.
 \end{prop}
-\subsection{\lparen co\rparen homology theories and their connection with
+\subsection{\lparen Co\rparen homology theories and their connection with
 spectra}
 Write $\CW$ for the category of CW-spaces (spaces homeomorphic to CW-complexes),
 and $\CWf$ and $\CWfd$ for the full subcategories of finite and finite
@@ -573,19 +577,166 @@ equivalence.
 \itm[(i)] Let $h_*$ be a homology theory on $\Specf$. Set $k_*(X):=\varinjlim
 h_*(X\lambda)$ for any $X\in\scrS$. Then $k_*$ is an additive homology theory on
 $\scrS$.
-\itm[(ii)] If $h$ were already defined on $\scrS$, the natural map $h\to k$ is
-an equivalence.
+\itm[(ii)] If $h_*$ is already defined on $\scrS$, the natural map $h_*\to k_*$
+is an equivalence.
 \end{itemise}
 Thus there is no difference between homology theories on $\Specf$ and additive
 homology theories on $\scrS$. This does \textbf{not} hold for cohomology
 theories.
 \end{prop}
 \begin{condef}[dual theories]
-Given a cohomology theory $h^*$ on $\Specf$, we can form a homology theory
-thereupon via $h_i(X):=h^{-i}(X^\perp)$. (The minus sign appears so that the
-suspension isomorphisms in $h_*$ are as required. This is well defined as dual
-spectra are unique, and exist by 2.4 and 2.9.)
+Given a cohomology theory $h^*$ on $\Specf$, we can form the \emph{dual homology
+theory} thereupon via $h_i(X):=h^{-i}(X^\perp)$. (The minus sign appears so that
+the suspension isomorphisms in $h_*$ are as required. This is well defined as
+dual spectra are unique, and exist by 2.4 and 2.9.) Thus we have a bijection
+(duality) between homology and cohomology theories.
 \end{condef}
+\begin{const}%[(co)homology theories from spectra]
+Any spectrum $E$ yields a (co)homology theory on $\scrS$ via:
+\[E_n(X):=\pi_n(E\wedge X)\text{\qquad and\qquad}E^n(X):=[X,\Sigma^nE].\]
+\end{const}
+\begin{prop}
+$E^*$ is dual to $E_*$ for any $E$.
+\end{prop}
+\begin{exmp}[Eilenberg-MacLane spectra]
+Let $\pi$ be an abelian group, and let $H\pi$ be a spectrum such that
+$\pi_*(H\pi)$ is $\pi$ concentrated in degree zero. Letting $(H\pi)_n=K(\pi,n)$
+for each $n\geq0$, and using the homotopy equivalences $K(\pi,n)\to\Omega
+K(\pi,n+1)$ gives an $\Omega$-prespectrum (defining $(H\pi)_{r}$ to be
+$\Omega^{-r}K(\pi,0)$ for $r\leq0$). Replace it with an $\Omega$-spectrum to get
+$H\pi$. (As $\pi_i(H\pi)=\varinjlim \pi_{i+N}H\pi_N$, this works). $H\pi$ is
+unique up to equivalence, as we may always take it to be an $\Omega$-spectrum
+$F$, and $\pi_i(F)=\pi_{i+j}(F_j)$ for any $j$. Thus any two...COME BACK LATER, having thought about the next few propositions.
+
+By looking at coefficients, we see that $H\pi$ represents ordinary (co)homology
+with coefficients in $\pi$. We also obtain:
+$H_i(X;\pi)=\varinjlim\pi_{i+N}(K(\pi,N)\wedge X^+)$.
+\end{exmp}
+\begin{prop}
+If $E$ is an $\Omega$-spectrum, then for every space $X$,
+$\widetilde E^i(X)\simeq[X,E_i]^\bullet$.
+\end{prop}
+\begin{cor}
+For every spectrum $E$, the functors $\widetilde E^i:\HC^\bullet\to\AG$ are
+representable.
+\end{cor}
+\begin{propdef}
+Given a spectrum $E$, let $\Omega^\infty E$ denote a representing space for
+$\widetilde E^0$, or equivalently the \ZEROTH space of an $\Omega$ replacement.
+This is called the \emph{infinite delooping}. By Yoneda's lemma, it is unique up
+to equivalence, and functorial once an infinite delooping is chosen for each
+spectrum.
+\end{propdef}
+\setcounter{thm}{28}
+\begin{cor}
+Let $F$ be an $\Omega$-spectrum equivalent to $E$. Then $\Omega^\infty E\simeq
+F_0$. Moreover, the functors $\Sigma^\infty$ and $\Omega^\infty$ are adjoint.
+\end{cor}
+\noindent On homotopy groups: $\pi_k(E)=\pi_K(\Omega^\infty E)$. However:
+\[i_*:\pi_k(X)\to\pi_k(\Omega^\infty\Sigma^\infty X)=
+\pi_k(\Sigma^\infty X)=\pi^s_k(X)\text{ \ is stabilisation.}\]
+Moreover, if $X$ is an infinite loop space, then by standard adjoint functor
+formalism, the map $X\to\Omega^\infty\Sigma^\infty X$ has a homotopy left
+inverse, so that
+\begin{prop}
+If $X$ is an infinite loop space, $\pi_k(X)$ is a direct summand of
+$\pi_k^s(X)$.
+\end{prop}
+Given a morphism $\alpha:S\to E$ we obtain a \emph{Hurewicz homomorphism} with
+respect to $\alpha$:
+\[h_\alpha:\pi_*(X)\to E_*(X),\ \ \ f\mapsto \alpha\wedge f=
+E_*(f)(\hat\fraks^d[\alpha]).\]
+Given a ring spectrum $E=(E,\mu,\imath)$ write $h$ for $h_\imath$. We have
+a cohomology pairing:
+\[\mu^{X,Y}:E^m(X)\otimes E^n(Y)\to E^{m+n}(X\wedge Y),\ \ 
+[f]\otimes[g]\mapsto \left[\Sigma^{-m}X\wedge\Sigma^{-n}Y\xrightarrow{f\wedge
+g}E\wedge E\xrightarrow{\mu}E\right].\]
+Similarly, we have a homoology pairing 
+$\mu_{X,Y}:E_m(X)\otimes E_n(Y)\to E_{m+n}(X\wedge Y)$:
+\[[f]\otimes[g]\mapsto\left[\Sigma^mS\wedge\Sigma^nS\xrightarrow{f\wedge
+g}(E\wedge X)\wedge(E\wedge X)\to(E\wedge E)\wedge(X\wedge
+Y)\xrightarrow{\mu\wedge\id}E\wedge X\wedge Y\right].\]
+These pairings are associative and compatible with suspension. Moreover, if $E$
+is a commutative ring spectrum, then $\mu^{X,Y}$ and $\mu_{X,Y}$ are both
+commutative, in the sense that $\tau_*\mu(a\otimes b)=(-1)^{|a||b|}\mu(b\otimes
+a)$.
+
+There is a pairing 
+$\mu^X_{\bullet,Y}:E^m(X)\otimes E_n(X\wedge Y)\to E_{n-m}(Y)$:
+\[[f]\otimes[g]\mapsto\left[\Sigma^nS\xrightarrow{g}(E\wedge X\wedge
+Y)\xrightarrow{\id\wedge f\wedge\id}(E\wedge \Sigma^mE\wedge
+Y)\xrightarrow{\Sigma^m\mu\wedge\id}\Sigma^mE\wedge Y\right].\]
+Similarly, there is a pairing 
+$\mu_X^{\bullet,Y}:E^m(X\wedge Y)\otimes E_n(X)\to E^{m-n}(Y)$:
+\[[f]\otimes[g]\mapsto\left[\Sigma^nY\xrightarrow{g\wedge\id_Y}(X\wedge E\wedge
+Y)\to(X\wedge Y\wedge E)\xrightarrow{f\wedge\id}(\Sigma^mE\wedge E
+)\xrightarrow{\Sigma^m\mu}\Sigma^mE\right].\]
+Finally, putting $Y=S$ in either of these, we obtain the \emph{Kronecker
+pairing}:
+\[\langle\DASH,\DASH\rangle:E^m(X)\otimes E_n(X)\to \pi_{n-m}(E).\]
+This all gives extra structure. For example, $E_*(Y)$ is a graded left
+$\pi_*(E)$-module, and $E^*(Y)$ is a graded left $E^*(S)$-module. If $X$ is a
+ring spectrum with multiplication $\nu$ then there is a pairing: $E_*(X)\otimes
+E_*(X)\xrightarrow{\mu_{X,X}}E_*(X\wedge X)\xrightarrow{\ \nu_* \ }E_*(X)$,
+making $E_*(X)$ a ring. Thus $E_*(E)$ is a ring.
+
+\refstepcounter{dummyforrefstepcounter}\label{modulestructures}
+In fact as long as $(F,m)$ is a module spectrum over $E$, we have pairings:
+\begin{alignat*}{2}
+m^{X,Y}&:\,\,&E^m(X)\otimes F^n(Y)&\to F^{m+n}(X\wedge Y)\\
+m_{X,Y}&:&E_m(X)\otimes F_n(Y)&\to F_{m+n}(X\wedge Y)\\
+m^X_{\bullet,Y}&:&E^m(X)\otimes F_n(X\wedge Y)&\to F_{n-m}(Y)\\
+m_X^{\bullet,Y}&:&E^m(X\wedge Y)\otimes F_n(X)&\to F^{m-n}(Y)\\
+'m_X^{\bullet,Y}&:&E^m(X\wedge Y)\otimes F_n(X)&\to F^{m-n}(Y)\\
+\langle\DASH,\DASH\rangle&:&E^m(X)\otimes F_n(X)&\to \pi_{n-m}(F)\\
+\langle\DASH,\DASH\rangle&:&F^m(X)\otimes E_n(X)&\to \pi_{n-m}(F)
+\end{alignat*}
+It is easy to replace $X$ and $Y$ by spaces, to get formulae in reduced
+(co)homology. Adapting them for unreduced cohomology, we obtain a \emph{cup
+product}:
+\[\cup:E^m(X,A)\otimes E^n(X,B)\xrightarrow{\mu}E^{m+n}(X\times X,X\times B\cup
+A\times X)\xrightarrow{d^*}E^{m+n}(X,A\cup B),\]
+and when $A=B$ this gives a graded ring structure, which is graded commutative
+if $E$ is commutative. Moreover we have a \emph{cap product}:
+\[\cap:E^m(X,A)\otimes E_n(X,A\cup B)\xrightarrow{1\otimes d_*}E^m(X,A)\otimes
+E_n(X\times X,X\times B\cup A\times X)\xrightarrow{\mu}E_{n-m}(X,B).\]
+
+Now let $Y$ be a module spectrum over the ring spectrum $X$. The pairing:
+\[E_*(X)\otimes F_*(Y)\xrightarrow{m_{X,Y}}F_*(X\wedge Y)\to F_*(Y)\]
+makes $F_*(Y)$ a graded $E_*(X)$-module. Similarly, $F_*(E)$ is an
+$E_*(E)$-module.
+
+A morphism $a:S^d\to X$ induces $a_\#:\Sigma^dY\to Y$, which induces
+$a_*:F_{i-d}(Y)\to F_i(Y)$.
+\setcounter{thm}{43}
+\begin{lem}
+$a_*$ is multiplication by $h(a)\in E_*(X)$.
+\end{lem}
+Let $X$ be a spectrum, $E$ a ring spectrum and $F$ a module spectrum over $E$.
+Then the Kronecker pairing gives an evaluation homomorphism:
+\[\textup{ev}:F^n(X)\to\Hom^n_{\pi_*(E)}(E_*(X),\pi_*(F))\text{\ \
+(homomorphisms reducing degree by $n$)}.\]
+\begin{thm}
+Suppose that for some $N$, $\pi_i(X)=0$ for $i<N$. Then if the Atiyah-Hirzebruch
+spectral sequence for $E_*(X)$ collapses ($d_r=0$ for $r\geq2$), and if the
+$\pi_*(E)$-module $E^2_{**}$ is free, then the above evaluation homomorphism is
+an isomorphism.
+\end{thm}
+\begin{thm}
+Let $X$ be a ring spectrum, and let $E$ be a commutative ring spectrum. Consider
+the evaluation
+\[\textup{ev}:E^n(X)\to\Hom^n_{\pi_*(E)}(E_*(X),\pi_*(E)),\]
+and suppose that all the conditions of 3.54 hold for $X$ and $X\wedge X$. Then a
+morphism $f:X\to E$ is a ring morphism iff the homomorphism $\textup{ev}(f)$ is
+a homomorphism of $\pi_*(E)$-algebras.
+\end{thm}
+\begin{condef}
+If $E$ is any spectrum, $E^*(E)$ is a ring under composition of morphisms $E\to
+\Sigma^?E$. Moreover, $E^*(X)$ is naturally an $E^*(E)$-module via
+postcomposition. By Yoneda's lemma, $E^*(E)$ is exactly the ring of
+$E$-operations.
+\end{condef}
+\subsection{Homotopy properties of Spectra}
 \end{document}
 
 
