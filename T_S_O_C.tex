@@ -50,11 +50,13 @@
 
 %% >>> header
 
+%\renewcommand{\comment}{}
 \begin{document}
 %\tableofcontents
 \setcounter{section}{1}
 \section{Spectra and \lparen co\rparen homology theories}
-\subsection{Preliminaries on Spectra}
+\subsection{Preliminaries on spectra}
+\comment{
 \begin{defn}[objects of $\scrS$]\hfil
 \begin{itemise}
 \itm[(a)]A spectrum is a sequence of pointed CW-complexes $E_n$ and pointed
@@ -252,8 +254,11 @@ Every spectrum is equivalent to an $\Omega$-spectrum.
 If $A,B\subset E$ are subspectra such that $A\cup B=E$, and $h:A\vee B\to E$ is
 the wedge of inclusions, then $Ch\simeq\Sigma(A\cap B)$.
 \end{prop}
-\noindent A mapping telescope construction is given for spectra. To appear.
+\noindent A useful mapping telescope construction is given for spectra. To
+appear.
+}   %%% End comment %%%
 \subsection{The smash product, duality, ring and module spectra}
+\comment{
 \begin{thm}
 There is a construction $E,F\mapsto E\wedge F$ of smash product such that
 \begin{itemise}
@@ -404,8 +409,10 @@ See page \pageref{modulestructures}.
 Let $E\to E'$ be a ring morphism. If $\xymatrix{S^d\ar[r]^a&E\ar[r]&E'}$ is
 inessential then so is the morphism $a_\#:S^d\wedge E'\to E'$.
 \end{prop}
+}   %%% End comment %%%
 \subsection{\lparen Co\rparen homology theories and their connection with
 spectra}
+\comment{
 Write $\CW$ for the category of CW-spaces (spaces homeomorphic to CW-complexes),
 and $\CWf$ and $\CWfd$ for the full subcategories of finite and finite
 dimensional CW-complexes. With a `2' superscript, we mean the category of pairs,
@@ -440,7 +447,7 @@ h_{n}(Y,A)\ar[r]&h_{n}(Y,X)\ar[r]^{\ \ d}&\cdots
 }\]
 where $d$ is the composition $\xymatrix{h_{n+1}(Y,X)\ar[r]^{\ \ \partial_{i+1}}&
 h_n(X,\emptyset)\ar[r]&h_n(X,A)}$.
-\itm For every CW-triad $(X;A,B)$ \lparen i.e.\ $A\cup B=X$\rparen with $A\cap
+\itm For every CW-triad $(X;A,B)$ \lparen i.e.\ $A\cup B=X$\rparen\ with $A\cap
 B=C$ we have a Mayer-Vietoris sequence:
 \[\xymatrix@C=1.3cm{
 \ar@{.>}[r]&
@@ -486,7 +493,7 @@ to an unreduced cohomology theory which is unique up to equivalence.
 }\]
 defining: $\widetilde\partial_n:\xymatrix{\widetilde h_n(X/A)\ar[r]&
 \widetilde h_n(X\cup CA)\ar[r]&\widetilde h_n(SA)\ar[r]&\widetilde h_{n-1}(A)}$.
-\itm For every CW-triad $(X;A,B)$ \lparen i.e.\ $A\cup B=X$\rparen with $A\cap
+\itm For every CW-triad $(X;A,B)$ \lparen i.e.\ $A\cup B=X$\rparen\ with $A\cap
 B=C$ we have a Mayer-Vietoris sequence:
 \[\xymatrix@C=1.3cm{
 \ar@{.>}[r]&
@@ -737,7 +744,8 @@ If $E$ is any spectrum, $E^*(E)$ is a ring under composition of morphisms $E\to
 postcomposition. By Yoneda's lemma, $E^*(E)$ is exactly the ring of
 $E$-operations.
 \end{condef}
-\subsection{Homotopy properties of Spectra}
+}   %%% End comment %%%
+\subsection{Homotopy properties of spectra}
 \setcounter{thm}{3}
 \begin{defn}
 A spectrum or space is $n$-\emph{connected} is $\pi_i(E)=0$ for $i\leq n$. A
@@ -768,12 +776,12 @@ Let $h_*$ be an additive homology theory on $\scrS$ with $h_i(S)=0$ for $i\leq
 m$. Let $X\in\scrS$ be $n$-connected. Then $h_i(X)=0$ for $i\leq m+n+1$.
 \end{prop}
 \setcounter{thm}{4}
-\begin{prop}
+\begin{prop}\hfil
 \begin{itemise}
 \itm[(i)] If $E$ is $m$-connected and $F$ is $n$ connected, $E\wedge F$ is
 $m+n+1$-connected.
 \itm[(ii)] If $E$ is $m$-connected and $\phi:F\to G$ is an $n$-equivalence, than
-$\id_E\wedge \phi$ is an $m+n+1$-equivalence.
+$\id_E\wedge \phi$ is an $(m+n+1)$-equivalence.
 \itm[(iii)] Suppose that $f:E\to F$ is a \textbf{map} of spectra such that
 $f_n:E_n\to F_n$ is an $(n+k)$-equivalence for all sufficiently large $n$. Then
 $f$ is a $k$-equivalence.
@@ -823,6 +831,58 @@ finite type.
 \end{thm}
 %\[\mu_{E,F}:H_*(E;R)\otimes H_*(F;R)\to H_*(E\wedge F;R)
 %\text{ and }\mu_{E,F}:H_*(E;R)\otimes H_*(F;R)\to H_*(E\wedge F;R)\]
+\begin{defn}
+A \emph{Postnikov tower} of a spectrum $E$ is a homotopy commutative diagram:
+\[\xymatrix{
+\cdots\ar@{=}[r]&
+E\ar[d]^{\tau_{n+1}}\ar@{=}[r]&
+E\ar[d]^{\tau_{n}}\ar@{=}[r]&
+E\ar[d]^{\tau_{n-1}}\ar@{=}[r]&\cdots\\
+\cdots\ar[r]&
+E_{(n+1)}\ar[r]^{\rho_{n+1}}&
+E_{(n)}\ar[r]^{\rho_{n}}&
+E_{(n-1)}\ar[r]&\cdots
+}\]
+where $\pi_i(E_{(n)})=0$ for $i>n$, and $\pi_{i}(\tau_n)$ is an isomorphism for
+$i\leq n$. $E_{(n)}$ is called the $n$-\emph{coskeleton} or the \nTH
+\emph{Postnikov stage}. It is unique up to equivalence.
+\end{defn}
+\begin{thm}Every spectrum has a Postnikov tower.
+\end{thm}
+\begin{defn}
+A morphism $q=q^E_n:F\to E$ is called an $(n-1)$-\emph{connective covering} if
+$F$ is $(n-1)$-connected, and $\pi_{\geq n}(q)$ is isomorphic. Any such $F$ is
+called an $(n-1)$-\emph{killing spectrum}, denoted $E|n$. It is unique up to
+equivalence.
+\end{defn}
+\begin{thm}
+Every spectrum has $n$-connective coverings.
+\end{thm}
+\begin{thm}
+The $(n-1)$-connected covering $F|n\to F$ is homotopy universal as a morphism
+$D\to F$ where $D$ is $(n-1)$-connected.
+\end{thm}
+\begin{thm}
+The \nTH Postnikov stage $F\to F_{(n)}$ is homotopy universal as a morphism
+$F\to G$ where $G$ has $\pi_{>n}(G)=0$.
+\end{thm}
+\begin{cor}
+A morphism of spectra induces a morphism of \lparen any chosen\rparen\ Postnikov
+towers.
+\end{cor}
+\begin{defn}
+There is a cofiber sequence $E_{(n)}\xrightarrow{p_n}
+E_{(n-1)}\xrightarrow{\kappa_n}\Sigma^{n+1}H(\pi_n(E))$, and the element
+$\kappa_n\in H^{n+1}(E_{(n-1)};\pi_n(E))$ is called the \emph{\nTH Postnikov
+invariant} of $E$. Note that $\kappa_n$ is only truly defined up to the action
+of self-equivalences of $E_{(n-1)}$ and $\Sigma^{n+1}H(\pi_n(E))$.
+\end{defn}
+\begin{prop}
+The Postnikov invariant $\kappa_n$ is trivial iff $p_n$ admits a homotopy right
+inverse \lparen i.e.\ a homotopy section\rparen\ $s:E_{(n-1)}\to E_{(n)}$ such
+that $p_ns=\id_{E_{(n-1)}}$.
+\end{prop}
+
 \end{document}
 
 
