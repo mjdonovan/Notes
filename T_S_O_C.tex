@@ -3,10 +3,11 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%% 80 characters %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \documentclass[11pt]{article}
-\makeatletter
-\newcommand{\dont@load@definitions@of@theorem@environments}{}
-\makeatother
+\newcommand{\dontloaddefinitionsoftheoremenvironments}{}
+\newcommand{\dontloadhyperref}{}
 \input{../macros.tex}
+%\renewcommand{\comment}{}
+
 \swapnumbers
 \theoremstyle{plain}
 \newtheorem{thm}{Theorem}[subsection]
@@ -29,7 +30,6 @@
 \newtheorem{exmp}[thm]{Example}
 \newtheorem{rmk}[thm]{Remark}
 \newtheorem{nonexample}[thm]{Non-example}
-%\numberwithin{thm}{section}
 \renewcommand{\thesection}{\Roman{section}}
 
 
@@ -45,13 +45,7 @@
 \newcommand{\Specsfd}{\scrC_\textup{sfd}}
 
 \title{On Thom Spectra, Orientability, and Cobordism\small{ --- Rudyak}}
-\author{}
-\date{}
-% >>>
 
-%% >>> header
-
-%\renewcommand{\comment}{}
 \begin{document}
 %\tableofcontents
 \setcounter{section}{1}
@@ -747,6 +741,7 @@ $E$-operations.
 \end{condef}
 }   %%% End comment %%%
 \subsection{Homotopy properties of spectra}
+\comment{
 \setcounter{thm}{3}
 \begin{defn}
 A spectrum or space is $n$-\emph{connected} is $\pi_i(E)=0$ for $i\leq n$. A
@@ -928,13 +923,181 @@ then $X$ is equivalenct to a spectrum of finite type.
 \end{prop}
 \noindent\textbf{Section not completed.} More material follows on equipping
 connective coverings and Postnikov towers of ring spectra with ring structures.
+}   %%% End comment %%%
+\subsection{Localization}
+If $p$ is a prime let $\Z[p]=\Z$ be the subring of $\Q$ whose irreducible
+fractions have denominator coprime to $p$. Let $\Z[1/p]$ be the subring of $\Q$
+whose irreducible fractions have denominator a power of $p$. In general, let
+$\Lambda$ be any subring of $\Q$, and write $\Lambda$ for its additive group as
+well. Let $\pi$ be any abelian group.
+\begin{defn}
+The map $l:\pi\to\pi\otimes \Lambda$ is called the $\Lambda$-\emph{localization}
+of $\pi$. $\pi$ is called $\Lambda$-\emph{local} if it is an isomorphism. Any
+map $\pi\to\tau$ is said to $\Lambda$-\emph{localize} $\pi$ if $\tau\cong
+\pi\otimes\Lambda$ compatibly with $l$.
+\end{defn}
+Let $\imath:S\to M(\Lambda)$ be the morphism given by the unit
+$1\in\Lambda=\pi_0(M(\Lambda))$, where $M(\Lambda)$ is the Moore spectrum. Set
+$E_\Lambda:=E\wedge M(\Lambda)$ for any spectrum $E$.
+\begin{defn}
+The morphism $j:E\wedge S\xrightarrow{\id\wedge \imath}E\wedge
+M(\Lambda)=E_\Lambda$ is called the $\Lambda$-\emph{localization} of $E$.
+\end{defn}
+\begin{prop}
+$\Lambda$-localization is a functor which preserves cofiber sequences.
+\end{prop}
+\begin{thm}
+For all $X,E$ there is an isomorphism $t:(E\Lambda)_*(X)\simeq E_*(X)\otimes
+\Lambda$, and it can be chosen so that the following commutes, so that $j_*$
+$\Lambda$-localizes $E_*(X)$:
+\[\xymatrix{
+E_*(X)\ar[r]_{j_*}\ar[d]^l&(E_\Lambda)_*(X)\ar[d]_t^\cong\\
+E_*(X)\otimes\Lambda&E_*(X)\otimes\Lambda\ar@{=}[l]
+}\]
+Analogously, $j_*:E^*(X)\to E_\Lambda^*(X)$ $\Lambda$-localizes $E^*(X)$.
+We fix such $t$ from now on without mention.
+\end{thm}
+\begin{cor}
+There are natural isomorphisms $\pi_i(E_\Lambda)\cong \pi_i(E)\otimes\Lambda$
+and $H_i(E_\Lambda)\cong H_i(E)\otimes\Lambda$ such that the maps
+$\pi_i(E)\xrightarrow{j_*}\pi_i(E_\Lambda)\cong\pi_i(E)\otimes\Lambda$ and
+$H_i(E)\xrightarrow{j_*}H_i(E_\Lambda)\cong H_i(E)\otimes\Lambda$ are of the
+form $x\mapsto x\otimes1$. Thus a $\Lambda$-local spectrum has $\Lambda$-local
+homotopy and homology.
+\end{cor}
+\begin{lem}Let $\tau$ be a flat abelian group \lparen e.g.\ an additive subgroup
+of $\Q$\rparen. Then:
+\begin{itemise}
+\itm[(i)]$H\tau\wedge M(\pi)\simeq H(\tau\otimes\pi)\simeq H\pi\wedge M(\tau)$
+for any $\pi\in\AG$. In particular, $H\Z\wedge M(\pi)\simeq H\pi$.
+\itm[(ii)] $M(\tau)\wedge M(\pi)\simeq M(\tau\otimes\pi)$. In particular,
+$M(\Lambda)\wedge M(\Lambda)\simeq M(\Lambda)$.
+\itm[(iii)] If $\pi$ is a $\Lambda$-local group, $H\pi$ and $M(\pi)$ are
+$\Lambda$-local spectra, in that the $\Lambda$-localizations $j^H:H\pi\to
+(H\pi)_\Lambda$ and $j^M:M(\pi)\to M(\pi)_\Lambda$ are equivalences.
+\end{itemise}
+\end{lem}
+\begin{lem}
+Let $Cj$ be the cone of the localization $j:E\to E_\Lambda$. Then
+$H^*(Cj;\pi)=0$ for every $\Lambda$-local abelian group $\pi$.
+\end{lem}
+\begin{thm}Let $E$ be an arbitrary spectrum, and let $F$ be a $\Lambda$-local
+spectrum.
+\begin{itemise}
+\itm[(i)]$E_\Lambda$ is $\Lambda$-local, as localization
+$E_\Lambda\to(E_\Lambda)_\Lambda$ is an equivalence
+\itm[(ii)] For every morphism $f:E\to F$ there is a morphism $g:E_\lambda\to F$
+with $gj_\Lambda^E=f$. Thus $j^*:[E_\Lambda,F]\to[E,F]$ is epic, and $E_\Lambda$
+is `versal' for maps from $E$ to a $\Lambda$-local spectrum.
+\itm[(iii)] If in (ii) either $E$ or $F$ is bounded below, $j^*$ is an
+isomorphism. In particular, if $E$ is bounded below, $E_\Lambda$ is universal
+for maps from $E$ to a $\Lambda$-local spectrum.
+\end{itemise}
+\end{thm}
+\begin{cor}Let $E$ be any spectrum, and let $F$ be a $\Lambda$-local spectrum.
+Fix $f:E\to F$.
+\begin{itemise}
+\itm[(i)]$f$ $\Lambda$-localizes $E$ iff $\pi_*(f)$ $\Lambda$-localizes homotopy
+groups.
+\itm[(ii)]If $E$ and $F$ are \textbf{bounded below}, $f$ $\Lambda$-localizes $E$
+iff $H_*(f)$ $\Lambda$-localizes homology groups.
+\end{itemise}
+\end{cor}
+\begin{cor}
+If either all the $\pi_i(E)$ are $\Lambda$-local, or $E$ is bounded below and
+all the $H_i(E)$ are $\Lambda$-local, then $E$ is a $\Lambda$-local spectrum. In
+particular, if $F$ is $\Lambda$-local, so are all the $F_{(n)}$ and $F|n$.
+\end{cor}
+\begin{prop}
+The Postnikov tower of $E_\Lambda$ is the localization of the Postnikov tower of
+$E$.
+\end{prop}
+\begin{thmdef}
+For every simple space $X$ there is a simple space $X_\Lambda$ and $j:X\to
+X_\Lambda$ such that $\pi_i(X)\xrightarrow{j_*}\pi_i(X_\Lambda)\cong
+\pi_i(X)\otimes\Lambda$ and $H_i(X)\xrightarrow{j_*}H_i(X_\Lambda)\cong
+H_i(X)\otimes\Lambda$ both have the form $x\mapsto x\otimes1$, so that $j$
+localizes homotopy and homology groups, and is called a \emph{localization} of
+$X$.
+\end{thmdef}
+\begin{thmdef}
+For every map $f:X\to Y$ of simple spaces, TFAE:
+\begin{itemise}
+\itm[(i)]$f$ $\Lambda$-localizes homotopy groups.
+\itm[(ii)]$f$ $\Lambda$-localizes homology groups.
+\itm[(iii)]For every $\Lambda$-local space $Z$, $f^*:[Y,Z]\to[X,Z]$ is a
+bijection.
+\end{itemise}
+If these equivalent conditions hold there is a homotopy equivalence
+$h:X_\Lambda\to Y$ with $f=hj$, so we say that $f$ \emph{localizes} $X$.
+\end{thmdef}
+If $f:X\to Y$ localizes $X$ then $\Sigma^\infty f$ localizes $\Sigma^\infty X$,
+by 5.9. Thus $j^*:E^*(X_\Lambda)\to E^*(X)$ is an isomorphism for any
+$\Lambda$-local spectrum $E$. Similarly, if $\phi:E\to F$ localizes the spectrum
+$E$, $\Omega^\infty\phi$ localizes $\Omega^\infty E$.
+\begin{lem}
+There is an equivalence $(E\wedge F)_\Lambda\to E_\Lambda\wedge F_\Lambda$
+compatible with localisation maps.
+\end{lem}
+\begin{thm} Let $E$ be a ring spectrum and $F$ be a module spectrum over $E$.
+\begin{itemise}
+\itm $E_\Lambda$ admits a ring structure such that $E\to E_\Lambda$ is a ring
+morphism. This structure is unique up to ring equivalence.
+\itm If $E$ and $F$ are both \textbf{bounded below}, there is a pairing
+$\overline m:E_\Lambda\wedge F_\Lambda\to F_\Lambda$ turning $F_\Lambda$ into an
+$E_\Lambda$-module such that $\overline m(j^E\wedge j^F)=j^Fm$, and this
+$\overline m$ is unique up to homotopy.
+\end{itemise}
+\end{thm}
+We write $X[0]$, $X[p]$ and $X[1/p]$ for $X_\Lambda$ when $\Lambda$ is $\Z[0]$,
+$\Z[p]$ and $\Z[1/p]$ respectively.
+\begin{defn}
+A spectrum $E$ has \emph{finite $\Lambda$-type} if it is bounded below and every
+group $\pi_i(E)$ is a finitely generated $\Lambda$-module.
+\end{defn}
+\begin{rmk}[on $\Lambda$-modules]\hfil
+\begin{itemise}
+\itm A spectrum has finite $\Z$-type iff it is equivalent to one of finite type
+(by 4.26). A spectrum of finite $\Lambda$-type is $\Lambda$-local.
+\itm A submodule of a finitely generated $\Lambda$-module is finitely generated
+(as this property characterises noetherian rings), so a $\Lambda$-module is
+finitely generated iff it is finitely presented. As $\Lambda$ is a PID, every
+finitely presented $\Lambda$-module splits into a direct sum of cyclic
+submodules. Thus, every finitely generated $\Z[p]$-module splits into copies of
+$\Z[p]$ and $\Z/p^k$.
+\end{itemise}
+\end{rmk}
+\begin{lem}Let $p$ be a prime, and let $E,F$ be spectra of finite $\Z[p]$-type.
+\begin{itemise}
+\itm[(i)] If $H^i(E;\Z/p)=0$ for $i\leq n$, then $E$ is $n$-connected. Thus $E$
+is contractible iff $H^i(E;\Z_p)=0$ for all $i$.
+\itm[(ii)] $f:E\to F$ is an equivalence iff it is a $\Z/p$-cohomology
+isomorphism.
+\end{itemise}
+\end{lem}
+\begin{prop}Let $E,F$ be spectra such that all the $\pi_i(E),\pi_i(F)$ are
+finitely generated.
+\begin{itemise}
+\itm[(i)] If $E[p]$ is contractible for all primes $p$ then $E$ is contractible.
+\itm[(ii)] $f:E\to F$ is such that $f[p]$ is an equivalence for all $p$, then
+$f$ is an equivalence.
+\end{itemise}
+\begin{prop}
+Suppose that $E$ is a ring spectrum such that $1\in\pi_0(E)$ has order $p$ a
+prime. Then $E$ is a $\Z[p]$-local spectrum.
+\end{prop}
+\begin{proof}
+As the $\pi_i(E)$ are $\pi_0(E)$-modules, they are modules for
+$\Z/p\subseteq\pi_0(E)$. Apply 5.10.
+\end{proof}
+\end{prop}
 \end{document}
 
 
 
 
 
-
+ehdi 8579194209
 
 
 
