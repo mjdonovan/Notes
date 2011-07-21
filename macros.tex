@@ -5,19 +5,22 @@
 \usepackage{epsfig}
 \usepackage[all]{xy}
 \usepackage{sseq}
-\usepackage[pdftex]{hyperref}
 \usepackage{tocloft}
 \usepackage{cancel}
 \usepackage[strict]{changepage}
+%Used for disabling hyperref
+\ifx\dontloadhyperref\undefined
+\usepackage[pdftex]{hyperref}
+\else
+\providecommand{\texorpdfstring}[2]{#1}
+\fi
 
 \newcounter{dummyforrefstepcounter}
 
 %>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 %<<<  Theorem Environments  <<<
 %>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-\makeatletter
-\ifx\dont@load@definitions@of@theorem@environments\undefined
-
+\ifx\dontloaddefinitionsoftheoremenvironments\undefined
 \theoremstyle{plain}
 \newtheorem{thm}{Theorem}[section]
 \newtheorem*{thm*}{Theorem}
@@ -36,11 +39,8 @@
 \newtheorem{asspt}{Assumption}[section]
 \newtheorem{notation}{Notation}[section]
 \newtheorem{exercise}{Exercise}[section]
+\else\relax\fi
 
-\else
-\relax
-\fi
-\makeatother
 %>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 %<<<      Fields, etc.      <<<
 %>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
