@@ -25,6 +25,7 @@
 \theoremstyle{definition}
 \newtheorem{condef}[thm]{Construction-Definition}
 \newtheorem{const}[thm]{Construction}
+\newtheorem*{const*}{Construction}
 \newtheorem{defn}[thm]{Definition}
 \newtheorem*{defn*}{Definition}
 \newtheorem{exmp}[thm]{Example}
@@ -1205,7 +1206,106 @@ $M\otimes^{\Lambda\DASH\Lambda'}N:=\varprojlim M_\lambda\otimes N_{\lambda'}$.
 The inverse limit is a left exact covariant functor from the category of inverse
 systems (over a fixed poset) to abelian groups. It is not right exact. We hope
 to construct right derived functors.
-
+\setcounter{thm}{4}
+\begin{defn}
+An inverse $\Lambda$-system $\scrA$ is called \emph{flabby} if the homomorphism
+$\scrA_{\Lambda'}^\Lambda:\varprojlim_\Lambda A\to\varprojlim_{\Lambda'} A$ is
+surjective for all $\Lambda'\subseteq \Lambda$. (That is, if every string in the
+sparser inverse limit $\varprojlim_{\Lambda'}$ can be completed to a string in
+the larger inverse limit $\varprojlim_{\Lambda}$).
+\end{defn}
+\begin{thm}
+Let $0\to\scrA\to\scrB\to\scrC\to0$ be an exact sequence of inverse systems. If
+$\scrA$ is flabby, the sequence
+$0\to\varprojlim\scrA\to\varprojlim\scrB\to\varprojlim\scrC\to0$ is exact.
+\end{thm}
+\begin{cor}
+If $\scrA$ and $\scrB$ above are flabby, so is $\scrC$.
+\end{cor}
+\begin{cor}
+If $0\to\scrA^0\to\scrA^1\to\scrA^2\to\cdots$ is an exact sequence of flabby
+inverse systems, the sequence
+$0\to\varprojlim\scrA^0\to\varprojlim\scrA^1\to\varprojlim\scrA^2\to\cdots$ is
+exact.
+\end{cor}
+\begin{const*}[Roos' injection into a flabby system]
+Let $\scrA$ be an inverse system, and define an inverse system
+$\scrR(\scrA):=\{\scrR_\lambda(\scrA)\}$ by
+$\scrR_\lambda(A):=\prod_{\alpha\leq\lambda}A_\alpha$. The maps in the system
+are simply given by `restriction' (where elements of a product are viewed as
+functions). There is a natural embedding $r:\scrA\to\scrR(\scrA)$, $\scrR$ is an
+autofunctor on the category of inverse $\Lambda$-systems, and $r:\id\to\scrR$ is
+a natural transformation.
+\end{const*}
+\begin{prop}
+$\scrR(\scrA)$ is flabby for all $\scrA$, so that every inverse system can be
+embedded in a flabby one.
+\end{prop}
+\begin{defn}
+The \emph{Roos resolution} of an inverse system $\scrA$ is the exact sequence:
+\[0\to\scrA\xrightarrow{\ \,r\,\ }\scrR^0(\scrA)\xrightarrow{\ e^0\ }
+\scrR^1(\scrA)\xrightarrow{\ e^1\ }\scrR^2(\scrA)\xrightarrow{\ e^2\ }\cdots,
+\textup{ \ defining:}\]
+$\scrR^{-2}(\scrA)=0$, $\scrR^{-1}(\scrA)=\scrA$, and
+$\scrR^n(\scrA):=\scrR(\coker (e^{n-2}))$ for
+$n\geq0$.
+\end{defn}
+\begin{prop}
+If $0\to\scrA^0\to\scrA^1\to\scrA^2\to\cdots$ is exact, then for every $n$, the
+sequence $0\to\scrR(\scrA^0)\to\scrR(\scrA^1)\to\scrR(\scrA^2)\to\cdots$ is
+exact.
+\end{prop}
+\begin{proof}We need only prove this for short exact sequences. Now for $n=0$ we
+are noting that $\scrR$ is an exact functor, which is obvious from its
+definition. Now by induction, suppose that all but the last column of the
+following is known to be short exact, for some $n\geq1$:
+\[\xymatrix@R=.5cm{
+0\ar[r]&\scrA\ar[r]\ar@{^{(}->}[d]&\cdots\ar[r]&\scrR^{n-2
+}(\scrA)\ar[r]^{e^{n-2}}\ar@{^{(}->}[d]&\ar@{^{(}->}[d]\scrR^{n-1}
+(\scrA)\ar[r]&\coker(e^{n-2})\ar[d]\ar[r]&0\\
+0\ar[r]&\scrB\ar[r]\ar@{->>}[d]   &\cdots\ar[r]&\scrB^{n-2}
+(\scrB)\ar[r]^{e^{n-2}}\ar@{->>}[d]   &\ar@{->>}[d]   \scrR^{n-1}
+(\scrB)\ar[r]&\coker(e^{n-2})\ar[d]\ar[r]&0\\
+0\ar[r]&\scrC\ar[r]&\cdots\ar[r]&\scrR^{n-1}(\scrC)\ar[r]^{e^{n-2}}&
+\scrR^{n-1}(\scrC)\ar[r]&\coker(e^{n-2})\ar[r]&0
+}\]
+Now by construction of the Roos resolution, the rows here are exact. Applying
+the nine-lemma to the final block, we have that the final column is exact. Thus
+it remains exact after applying $\scrR$, and doing so returns $\scrR^{n}$.
+\end{proof}
+\begin{defn}
+Given an arbitrary inverse system $\scrA$ we set:
+\[\delta^n:=\varprojlim\{e^n\}:
+\varprojlim\scrR^n(\scrA)\to\varprojlim\scrR^{n+1}(\scrA).\]
+This gives a cochain complex which is natural in $\scrA$, whose homology defines
+the derived functors:
+\[0\xrightarrow{\ \phantom{\delta^0}\ }
+\varprojlim\scrR^0(\scrA)\xrightarrow{\ \delta^0\ }
+\varprojlim\scrR^1(\scrA)\xrightarrow{\ \delta^1\ }
+\varprojlim\scrR^2(\scrA)\xrightarrow{\ \delta^2\ }
+\varprojlim\scrR^3(\scrA)\xrightarrow{\ \delta^3\ }\cdots\]
+\end{defn}
+\begin{prop}
+$\varprojlim^0\scrA=\varprojlim\scrA$; there is a natural long exact sequence of
+derived functors arising from any short exact sequence of inverse systems:
+\[0\to\varprojlim\scrA\to\varprojlim\scrB\to\varprojlim\scrC\to\varprojlim^1
+\scrA\to\varprojlim^1\scrB\to\cdots;\]
+and a flabby inverse system is acyclic.
+\end{prop}
+\begin{proof}We have a short exact sequence of long exact sequences:
+\[\xymatrix@R=.5cm{
+0\ar[r]&\scrA\ar[r]\ar[d]&\scrR^0(\scrA)\ar[r]\ar[d]&\scrR^1(\scrA)\ar[r]\ar[d]&
+\scrR^2(\scrA)\ar[r]\ar[d]&\cdots\\
+0\ar[r]&\scrB\ar[r]\ar[d]&\scrR^0(\scrB)\ar[r]\ar[d]&\scrR^1(\scrB)\ar[r]\ar[d]&
+\scrR^2(\scrB)\ar[r]\ar[d]&\cdots\\
+0\ar[r]&\scrC\ar[r]&\scrR^0(\scrC)\ar[r]&\scrR^1(\scrC)\ar[r]&\scrR^2(\scrC)
+\ar[r]&\cdots
+}\]
+to which we apply $\varprojlim$, drop the first column, and take homology. But
+$\varprojlim$ is left exact, so that $\varprojlim^0=\varprojlim$. The long exact
+sequence is standard. Finally, III.2.8 shows that if $\scrA$ (say) is flabby,
+its row in the above diagram is exact, so that it is acyclic.
+\end{proof}
 \end{document}
 
 
