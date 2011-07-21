@@ -6,7 +6,7 @@
 \newcommand{\dontloaddefinitionsoftheoremenvironments}{}
 \newcommand{\dontloadhyperref}{}
 \input{../macros.tex}
-%\renewcommand{\comment}{}
+%\renewcommand{\comment}{} % comment to suppress previous chapters
 
 \swapnumbers
 \theoremstyle{plain}
@@ -925,6 +925,7 @@ then $X$ is equivalenct to a spectrum of finite type.
 connective coverings and Postnikov towers of ring spectra with ring structures.
 }   %%% End comment %%%
 \subsection{Localization}
+\comment{
 If $p$ is a prime let $\Z[p]=\Z$ be the subring of $\Q$ whose irreducible
 fractions have denominator coprime to $p$. Let $\Z[1/p]$ be the subring of $\Q$
 whose irreducible fractions have denominator a power of $p$. In general, let
@@ -1091,6 +1092,120 @@ As the $\pi_i(E)$ are $\pi_0(E)$-modules, they are modules for
 $\Z/p\subseteq\pi_0(E)$. Apply 5.10.
 \end{proof}
 \end{prop}
+}   %%% End comment %%%
+\subsection{Algebras, coalgebras, and Hopf algebras
+\texorpdfstring{$\bigotimes$}{}}
+\subsection{Graded Eilenberg-MacLane spectra \texorpdfstring{$\bigotimes$}{}}
+\section{Phantoms}
+\subsection{Phantoms and the inverse limit functor}
+\comment{
+Let $\scrK$ be a family $\{X_\alpha\}$ of subobjects of a space or spectrum $X$.
+Maps $X\to Y$ are $\scrK$-homotopic if their restrictions to each $X_\alpha$ are
+homotopic. Elements of $E^*(X)$ are $\scrK$-equivalent if their restrictions to
+each $X_\alpha$ are equal. The classes of $\scrK$-homotopic maps (or elements)
+for a pointed set $[X,Y]_\scrK$ (or a group $E^*_\scrK(X)$), and there are
+quotient maps $\sigma:[X,Y]\to[X,Y]_\scrK$ and $\sigma:E^*(X)\to E^*_\scrK(X)$.
+\begin{defn}
+A map $f:X\to Y$ or class $f\in E^*(X)$ is a \emph{phantom} if $f$ is nontrivial
+yet $\sigma(f)$ is trivial.
+\end{defn}
+\begin{defn}
+Given a CW-complex (spectrum) $X$, let $\scrK$ be the family of all skeleta of
+$X$, and let $\scrK'$ be the family of all finite subcomplexes (subspectra) of
+$X$. Then a $\scrK$-phantom is just called a \emph{phantom}, and a
+$\scrK'$-phantom is called a \emph{weak phantom}.
+\end{defn}
+\begin{prop}
+Equivalences of spaces (spectra) map phantoms to phantoms and weak phantoms to
+weak phantoms.
+\end{prop}
+\begin{proof}
+Exercise using II.3.14.
+\end{proof}
+\begin{prop}
+Let $X,E$ be spectra. Then every phantom in $E^*(X)$ is a weak phantom. If $X$
+has finite $\Z$-type then every weak phantom is a phantom.
+\end{prop}
+\setcounter{thm}{11}
+\begin{exmp}
+Let $E$ be a spectrum and $X$ be a CW-complex (resp.\ spectrum). Let
+$\scrK=\{X_\lambda:\lambda\in\Lambda\}$ be a family of CW-subcomplexes (resp.\
+subspectra) ordered by inclusion, and let $i_\lambda$ be the inclusions. Assume
+$\scrK$ is closed under finite intersections and finite unions. From the maps
+$i^*\lambda:E^*(X)\to E^*(X_\lambda)$ we obtain a map $\rho:E^*(X)\to\varprojlim
+E^*(X_\lambda)$.
+\end{exmp}
+\begin{prop}
+The epio-mono factorisation of $\rho$ is
+$\xymatrix@C=.7cm{E^*(X)\ar@{->>}[r]^\sigma&E^*_\scrK(X)
+\ar@{^{(}->}[r]^{\chi\ \ }&\varprojlim E^*(X_\lambda)}$. Thus $\ker
+\sigma=\ker\rho$, and $\scrK$-phantoms are just nontrivial elements of
+$\ker\rho$.
+\end{prop}
+\begin{const}
+Suppose $f:X\to Y$ is a \textbf{map} of spectra. Let $\{X_\lambda\}$ and
+$\{Y_\mu\}$ be the families of finite subspectra. We construct a morphism
+$f^*:\varprojlim E^*(Y_\mu)\to\varprojlim E^*(X_\lambda)$ as follows. By II.3.14
+there are cofinal subfamilies families $\{X_\omega\}\subseteq \{X_\lambda\}$ and
+$\{Y_\omega\subseteq\{Y_\mu\}\}$ such that $f(X_\omega)\subseteq Y_\omega$.
+These maps induce a map of direct limits over $\omega$, and cofinality gives us
+what we need. If instead $f$ is a morphism of spectra, we can represent it by a
+map from a cofinal subspectrum, and the perform this construction to the same
+effect.
+\end{const}
+\begin{prop}
+The morphism $f^*$ defined above does not depend on the choice of cofinal
+subfamilies, and so the group $\varprojlim E^*(X_\lambda)$ is natural in $X$.
+Moreover, homotopic maps of spectra induce equal maps of groups.
+\end{prop}
+\begin{prop}
+Let $X_n$ be the $n$-skeleton of a CW-complex $X$. Then for every space $Y$,
+$\rho:[X,Y]\to \varprojlim[X_n,Y]$ is surjective. The same holds for pointed
+spaces and maps.
+\end{prop}
+\begin{lem}
+If $\cdots\rightarrow K_n\rightarrow K_{n-1}\rightarrow\cdots$ is an inverse
+system of finite sets, $\varprojlim K_n\neq\emptyset$.
+\end{lem}
+\begin{thm}Let $Y$ be a pointed, connected simple topological space.
+\begin{itemise}
+\itm[(i)]Let $(Z,A)$ be a CW-pair such that $H^k(Z,A;\pi_k(Y))$ is finite for
+$k>0$. Then a map $u:A\to Y$ extends to a map $Z\to Y$ iff it extends to a map
+$Z^{(n)}\to Y$ for all $n$.
+\itm[(ii)]Let $X$ be a pointed CW-complex such that $H^{k-1}(X;\pi_k(Y))$ is
+finite for all $k>0$. Then both functions
+$\rho:[X,Y]^\bullet\to\varprojlim[X^{(n)},Y]^\bullet$ and
+$\rho:[X,Y]\to\varprojlim[X^{(n)},Y]$ are bijections.
+\end{itemise}
+\end{thm}
+\begin{lem}
+If $\Lambda'\subset\Lambda$ is a subset of a poset given the induced poset
+structure, then there is a natural map
+$\scrM_{\Lambda'}^\Lambda:\varprojlim_\Lambda M_\lambda\to\varprojlim_{\Lambda'}
+M_\lambda$. It is an isomorphism if $\Lambda'$ is cofinal.
+\end{lem}
+\begin{lem}
+Direct limits commute, in the sense that if $\Lambda,\Lambda'$ are two posets:
+\[\varprojlim_{\Lambda\times\Lambda'}A_{\lambda,\lambda'}
+=\varprojlim_{\Lambda}\biggl\{\varprojlim_{\Lambda'}A_{\lambda,\lambda'}\biggr\}
+=\varprojlim_{\Lambda'}\biggl\{\varprojlim_{\Lambda}A_{\lambda,\lambda'}\biggr\}
+.\]
+In particular, direct limits commute with products. Here, the poset
+$\Lambda\times\Lambda'$ has $(\lambda,\lambda')\leq(\mu,\mu')$ iff
+$\lambda\leq\mu$ and $\lambda'\leq\mu'$.
+\end{lem}
+\begin{defn}
+Given a commutative ring $R$ and inverse systems $\{M_\lambda\}$,
+$\{N_{\lambda'}\}$ of $R$-modules, we can form the
+$\Lambda\DASH\Lambda'$-\emph{completed tensor product}
+$M\otimes^{\Lambda\DASH\Lambda'}N:=\varprojlim M_\lambda\otimes N_{\lambda'}$.
+\end{defn}
+}   %%% End comment %%%
+\subsection{Derived functors of the inverse limit functor}
+The inverse limit is a left exact covariant functor from the category of inverse
+systems (over a fixed poset) to abelian groups. It is not right exact. We hope
+to construct right derived functors.
+
 \end{document}
 
 
