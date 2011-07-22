@@ -6,7 +6,7 @@
 \newcommand{\dontloaddefinitionsoftheoremenvironments}{}
 \newcommand{\dontloadhyperref}{}
 \input{../macros.tex}
-\renewcommand{\comment}{} % comment to suppress previous chapters
+%\renewcommand{\comment}{} % comment to suppress previous chapters
 
 \swapnumbers
 \theoremstyle{plain}
@@ -14,6 +14,7 @@
 \newtheorem*{thm*}{Theorem}
 \newtheorem{lem}[thm]{Lemma}
 \newtheorem*{lem*}{Lemma}
+\newtheorem{sublem}[thm]{Sublemma}
 \newtheorem{prop}[thm]{Proposition}
 \newtheorem*{prop*}{Proposition}
 \newtheorem{cor}[thm]{Corollary}
@@ -612,7 +613,8 @@ K(\pi,n+1)$ gives an $\Omega$-prespectrum (defining $(H\pi)_{r}$ to be
 $\Omega^{-r}K(\pi,0)$ for $r\leq0$). Replace it with an $\Omega$-spectrum to get
 $H\pi$. (As $\pi_i(H\pi)=\varinjlim \pi_{i+N}H\pi_N$, this works). $H\pi$ is
 unique up to equivalence, as we may always take it to be an $\Omega$-spectrum
-$F$, and $\pi_i(F)=\pi_{i+j}(F_j)$ for any $j$. Thus any two...COME BACK LATER, having thought about the next few propositions.
+$F$, and $\pi_i(F)=\pi_{i+j}(F_j)$ for any $j$. Thus any two...
+COME BACK LATER, having thought about the next few propositions.
 
 By looking at coefficients, we see that $H\pi$ represents ordinary (co)homology
 with coefficients in $\pi$. We also obtain:
@@ -1100,9 +1102,12 @@ $\Z/p\subseteq\pi_0(E)$. Apply 5.10.
 }   %%% End comment %%%
 \subsection{Algebras, coalgebras, and Hopf algebras
 \texorpdfstring{$\bigotimes$}{}}
+\comment{
 \begin{ToFollow}
-A lot of material I don't know well on the Steenrod algebra, and generalities on all the topics listed.
+A lot of material I don't know well on the Steenrod algebra, and generalities on
+all the topics listed.
 \end{ToFollow}
+}   %%% End comment %%%
 \subsection{Graded Eilenberg-MacLane spectra \texorpdfstring{$\bigotimes$}{}}
 \section{Phantoms}
 \subsection{Phantoms and the inverse limit functor}
@@ -1187,18 +1192,18 @@ $\rho:[X,Y]\to\varprojlim[X^{(n)},Y]$ are bijections.
 \end{itemise}
 \end{thm}
 \begin{lem}
-If $\Lambda'\subset\Lambda$ is a subset of a poset given the induced poset
+If $\Lambda'\subset\Lambda$ is a subset of a quasi-ordered set given the induced 
 structure, then there is a natural map
 $\scrM_{\Lambda'}^\Lambda:\varprojlim_\Lambda M_\lambda\to\varprojlim_{\Lambda'}
 M_\lambda$. It is an isomorphism if $\Lambda'$ is cofinal.
 \end{lem}
 \begin{lem}
-Direct limits commute, in the sense that if $\Lambda,\Lambda'$ are two posets:
+Direct limits commute, in the sense that if $\Lambda,\Lambda'$ are two quasi-ordered sets:
 \[\varprojlim_{\Lambda\times\Lambda'}A_{\lambda,\lambda'}
 =\varprojlim_{\Lambda}\biggl\{\varprojlim_{\Lambda'}A_{\lambda,\lambda'}\biggr\}
 =\varprojlim_{\Lambda'}\biggl\{\varprojlim_{\Lambda}A_{\lambda,\lambda'}\biggr\}
 .\]
-In particular, direct limits commute with products. Here, the poset
+In particular, direct limits commute with products. Here, the quasi-ordered set
 $\Lambda\times\Lambda'$ has $(\lambda,\lambda')\leq(\mu,\mu')$ iff
 $\lambda\leq\mu$ and $\lambda'\leq\mu'$.
 \end{lem}
@@ -1209,13 +1214,19 @@ $\Lambda\DASH\Lambda'$-\emph{completed tensor product}
 $M\otimes^{\Lambda\DASH\Lambda'}N:=\varprojlim M_\lambda\otimes N_{\lambda'}$.
 \end{defn}
 \begin{ToFollow}
-A couple of examples of this construction --- a completed graded tensor product (of two graded abelian groups), and the profinitely completed tensor product $E^*(X)\hat\otimes F^*(Y)$.
+A couple of examples of this construction --- a completed graded tensor product
+(of two graded abelian groups), and the profinitely completed tensor product
+$E^*(X)\hat\otimes F^*(Y)$.
 \end{ToFollow}
 }   %%% End comment %%%
 \subsection{Derived functors of the inverse limit functor}
-The inverse limit is a left exact covariant functor from the category of inverse
-systems (over a fixed poset) to abelian groups. It is not right exact. We hope
-to construct right derived functors.
+\comment{
+Being a quasi-ordered set is weaker than being partially ordered --- it may be
+that $\mu\neq\lambda$ yet $\mu\leq\lambda\leq\mu$. In an inverse system the maps
+are $j^\mu_\lambda:A_\mu\to A_\lambda$ whenever $u\geq\lambda$ --- from large to
+small. The inverse limit is a left exact covariant functor from the category of
+inverse systems (over a fixed quasi-ordered set) to abelian groups. It is not
+right exact, giving right derived functors.
 \setcounter{thm}{4}
 \begin{defn}
 An inverse $\Lambda$-system $\scrA$ is called \emph{flabby} if the homomorphism
@@ -1332,11 +1343,11 @@ We can form, from an acyclic resolution $\scrA^i$ of $\scrA$, a bicomplex:
 \s\scrR^1(\scrA)\ar[r]\ar[u]&\s\scrR^2(\scrA)\ar[r]\ar[u]&\cdots\\
 &0\ar[u]&0\ar[u]&0\ar[u]&0\ar[u]
 }\]
-Now there are two spectral sequences both converging to the cohomology to the
-cohomology of the total complex. In the spectral sequence in which $d_1$ takes
-cohomology along each row, the $E_2$ page consists of the cohomology of $\scrA$
-lined up along the bottom row. The $E_2$ page of the other spectral sequence
-consists of the cohomology of the first column, all else having vanished.
+Now there are two spectral sequences both converging to the cohomology of the
+total complex. In the spectral sequence in which $d_1$ takes cohomology along
+each row, the $E_2$ page consists of the cohomology of $\scrA$ lined up along
+the bottom row. The $E_2$ page of the other spectral sequence consists of the
+cohomology of the first column, all else having vanished.
 \end{proof}
 \begin{defn*}%[a two step flabby resolution when $\Lambda=\Z$]
 Given an inverse system $\scrA=\{A_n,j_n\}$ over $\Z$ with $j_n:A_{n+1}\to A_n$.
@@ -1360,6 +1371,126 @@ systems are $\varprojlim$-acyclic. A canonical a-compactific embedding exists
 providing a cononical a-campact resolution, which can be used to compute the
 derived functors.
 \end{ToFollow}
+}   %%% End comment %%%
+\subsection{Representability theorems}
+\setcounter{thm}{2}
+Let $\scrK^\bullet$ be one of the categories of pointed CW-spaces as in II.3,
+and let $\scrL$ be one of the categories of spectra.
+\begin{defn}
+Two morphisms $f,g:E\to F$ of spectra (resp.\ spaces) are called
+$\scrL$-\emph{homotopic} ($\scrK^\bullet$-\emph{homotopic}) iff $fi\simeq
+gi:A\to F$ for every morphism $i:A\to E$, for $A\in\scrL$ ($A\in\scrK^\bullet$).
+(That is, if they cannot be detected as non-homotopic using maps from the
+category of interest).
+
+$\Specf$-homotopic morphisms ($\CWf$-homotopic maps) are called \emph{weakly
+homotopic}, written $f\simeq^wg$. Clearly, $f\simeq^wg:E\to F$ iff
+$f|E_\lambda\simeq g|E_\lambda$ for every finite subspectrum (subspace)
+$E_\lambda\subseteq E$.
+\end{defn}
+\begin{thmdef}
+Let $h^*$ be an additive cohomology theory on $\scrS$. Suppose that $\cdots\to
+X(n)\xrightarrow{\,f_n\,}X(n+1)\to\cdots$ is a sequence of maps of spectra. Then
+there is a spectrum $X$ and morphisms $in:X_n\to X$ such that:
+\begin{itemise}
+\itm[(i)] $i_{n+1}f_n\simeq i_n$;
+\itm[(ii)] The induced map $\varinjlim\pi_*(X(n))\to\pi_*(X)$ is an isomorphism;
+\itm[(iii)]There is an exact sequence: $0\to\varprojlim^1 h^{k-1}(X(n))\to
+h^k(X)\to \varprojlim h^k(X(n))\to0$.
+\end{itemise}
+$X$ is called a \emph{weak homotopy direct limit} of the sequence $X(n)$.
+\end{thmdef}
+\setcounter{thm}{5}
+\begin{thm}
+Every additive cohomology theory on $\scrS$ can be represented by a spectrum. By
+Yoneda's lemma, any morphism $E^*(\DASH)\to F^*(\DASH)$ is represented by a
+unique map up to homotopy $E\to F$, so that representing spectra are unique up
+to equivalence.
+\end{thm}
+\begin{defn}
+An inverse $\Lambda$-system $\scrI$ of sets is \emph{totally surjective} if
+every function $I_\mu\to I_\lambda$ is surjective and every $I_\lambda$ is
+nonempty.
+\end{defn}
+\begin{defn}
+A \emph{quasi-ordered sequence} is a quasi-ordered set $\{b_i\}_{i=1}^\infty$
+such that $b_i\leq b_{i+1}$. (Note here that a quasi-ordered set is only a small
+category such that there is at most one morphism between any two objects, so
+that we may have $b_i\geq b_{i+1}$ sometimes.)
+\end{defn}
+\begin{lem}
+If $\scrI$ is a totally surjective inverse system over a quasi-ordered sequence
+then $\varprojlim\scrI\neq\emptyset$.
+\end{lem}
+\begin{lem}
+Every countable directed quasi-ordered set $\scrA$ contains a co-final
+quasi-ordered sequence.
+\end{lem}
+\begin{proof}
+Enumerate $\scrA=\{a_n\}$, and choose $b_1=a_1$ and $b_n$ satisfying
+$b_{n+1}\geq b_n$ and $b_n\geq a_n$.
+\end{proof}
+\begin{lem}
+Let $\scrI$ be a totally surjective inverse $\Lambda$-system of sets, where
+$\Lambda$ contains a countable cofinite subset. Then
+$\varprojlim\scrI\neq\emptyset$.
+\end{lem}
+\begin{const}
+Suppose that $\scrI=\{I_\lambda,j_\lambda^\mu\}$ is a totally surjective inverse
+$\Lambda$-system of sets. Given $\lambda,\mu\in\Lambda$, say that
+$\lambda\preceq\mu$ iff there exists $\nu\in\Lambda$ and a function
+$k^\mu_\lambda$ such that:
+\[\xymatrix{
+I_\nu\ar[d]_{j^\nu_\mu}&I_\nu\ar@{=}[l]\ar[d]^{j^\nu_\lambda}\\
+I_\mu\ar[r]^{k_\lambda^\mu}&I_\lambda
+}\]
+The set $\Lambda$ with this new quasiordering is called $\overline\Lambda$, and
+as the map $k^\mu_\nu$ is unique (by surjectivity) $\scrI$ extends uniquely to a
+totally surjective inverse $\overline\Lambda$-system $\overline\scrI$ of sets.
+\end{const}
+\begin{lem}
+If $\overline\Lambda$ contains a countable cofinal subset then
+$\varprojlim\scrI\neq\emptyset$.
+\end{lem}
+\begin{lem}
+Let $\scrA\xrightarrow{\ f\ }\scrB\xrightarrow{\ g\ }\scrC\xrightarrow{\ h\
+}\scrD$ be an exact sequence of inver $\Lambda$-systems of abelian groups.
+Suppose that $A_\lambda=A$ and $j_\lambda^\mu=\id_A$ for all $\lambda\leq\mu$.
+Set $P_\lambda:=\ker\{A=A_\lambda\xrightarrow{\ f_\lambda\ } B_\lambda\}$.
+Suppose that there is some countable set $\{\lambda_i\}$ such that every
+$P_\lambda$ contains some $P_{\lambda_i}$. Then the sequence $\varprojlim
+\scrB\to\varprojlim \scrC\to\varprojlim \scrD$ is exact.
+\end{lem}
+%\begin{sublem}
+%\end{sublem}
+\setcounter{thm}{15}
+\begin{lem}\hfil
+\begin{itemise}
+\itm[(i)]There is a countable family of spectra $\scrF$ such that every finite
+spectrum is equivalent to some spectrum of $\scrF$.
+\itm[(ii)]For every pair of finite spectra $F,A$, the set $[A,F]$ is countable.
+\end{itemise}
+\end{lem}
+\begin{proof}
+A finite spectrum is equivalent to a suspension spectrum of some
+$X\in\CWf^\bullet$ (by II.1.5). Every finite CW-space is homotopic to a finite
+polyhedron, and any such is determined up to hoememorphism by its scheme of
+vertices, giving (i).
+
+For (ii), we may assume that $F=\Sigma^\infty X$ and $G=\Sigma^\infty Y$ such
+that $[X,Y]^\bullet$ is in the stable rangle, and $X,Y$ are finite polyhedra.
+Thus it is enough to show that $[X,Y]^\bullet$ is countable. But any such map is
+homotopic to a simplicial map $X^r\to Y$, where $X^r$ is the $r\fourth$
+barycentric subdivision of $X$. There are countably many simplicial maps for
+each $r$, as each is determined by its values on vertices.
+\end{proof}
+\begin{cor}
+
+\end{cor}
+\begin{prop}
+
+\end{prop}
+
 \end{document}
 
 
