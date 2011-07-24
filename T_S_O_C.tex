@@ -31,6 +31,7 @@
 \newtheorem*{defn*}{Definition}
 \newtheorem*{ReadersNote}{Reader's note}
 \newtheorem{exmp}[thm]{Example}
+\newtheorem*{exmp*}{Example}
 \newtheorem{rmk}[thm]{Remark}
 \newtheorem{nonexample}[thm]{Non-example}
 \newtheorem*{ToFollow}{To Follow}
@@ -1383,7 +1384,7 @@ Then $0\to\scrA\xrightarrow{\ r\ }\scrR(\scrA) \xrightarrow{\ \phi\
 \begin{ToFollow}
 Algebraically compact groups and inverse systems are introduced. A-compact
 systems are $\varprojlim$-acyclic. A canonical a-compactific embedding exists
-providing a cononical a-campact resolution, which can be used to compute the
+providing a cononical a-compact resolution, which can be used to compute the
 derived functors.
 \end{ToFollow}
 }   %%% End comment %%%
@@ -1600,7 +1601,116 @@ $[X\wedge\DASH,E]=[\DASH,F(X,E)]$, the \emph{functional spectrum}. Indeed,
 $F(X,E)$ is representing the cohomology theory $[X\wedge\DASH,E]$.
 \end{exmp}
 }   %%% End comment %%%
+\subsection{A spectral sequence}
+Throughout, $\{X_\lambda\}$ denotes the family of finite subspectra of $X$. By
+3.20(ii), the natural homomorphism $\rho:E^*(X)\to\varprojlim E^*(X_\lambda)$ is
+always surjective.
+\begin{defn}
+A cohomology theory $E$ on $\Specf$ is called \emph{compact} if all the groups
+$E^n(X)$ for $X\in\Specf$ are compact topological groups, and induced
+homomorphisms are continuous. It is called \emph{algebraically compact} if it
+can be obtained from a compact theory by forgetting the topology. A spectrum $F$
+is called \emph{a-compact} if its associated cohomology theory on $\Specf$ is
+a-compact.
+\end{defn}
+\begin{exmp*}
+$F$ is a-compact if all the $\pi_i(F)$ are finite (by II.4.25(ii)).
+\end{exmp*}
+\begin{thm}
+If $F$ is a-compact, the map $\rho:F^*(X)\to\varprojlim F^*(X_\lambda)$ is an
+isomorphism for all $X\in\scrS$. I.e.\ $E^*(X)$ does not contain weak phantoms.
+\end{thm}
+\begin{cor}
+For $F,X$ as in 4.2, suppose that $\{X_\mu\}$ is a family of subspectra such
+that every finite subspectrum of $X$ is contained in some $X_\mu$. Then
+$F^*(X)=\varprojlim F^*(X_\lambda)$. In particular, $F^*(X)=\varprojlim
+F^*(X^{(n)})$.
+\end{cor}
+For any group $A$, let $c:A\to\widehat A$ be the canonical a-compactification
+introduced in 2.21. Recall that a-compact groups are $\varprojlim$-acyclic.
+\begin{lem}
+The a-compactification functor $c$ is exact.
+\end{lem}
+\begin{thm}
+For every spectrum $F$ there is a morphism $c:F\to\widehat F$ such that
+$\widehat F$ is a-compact and $c$ induces the canonical a-compactification
+$F^*(X)\to \widehat F^*(X)$ for all $X\in\Specf$. \lparen That is, there is a
+natural isomorphism $a:\widehat F^n(\DASH)\to\widehat{F^n(\DASH)}$ such that
+$ac_*:F^*(\DASH)\to\widehat{F^*(\DASH)}$ is the canonical
+a-compactification\rparen.
+\end{thm}
+\begin{defn}
+A morphism $c:F\to\widehat F$ as in 4.5 is called an \emph{a-compactification}.
+\end{defn}
+\setcounter{thm}{7}
+\begin{lem}
+Let $G$ be a spectrum with the property that the canonical epimorphism
+$\rho:G^*(\DASH)\to \varprojlim G^*(\DASH_\lambda)$ splits naturally. Then in
+fact $\rho$ is an isomorphism.
+\end{lem}
+\begin{lem}
+Let $F$ be a spectrum such that $\varprojlim^1 F^*(X_\lambda)=0$ for all
+$X\in\scrS$. Then $\rho:F^*(\DASH)\to \varprojlim F^*(\DASH_\lambda)$ is an
+isomorphism.
+\end{lem}
+\begin{thm}
+For suitable $F$, for every $X\in\scrS$ \lparen resp.\ $\CW$\rparen\ there is a
+spectral sequence:
+\[E_2^{pq}={\textstyle\varprojlim^p}F^q(X_\lambda)\implies F^*(X).\]
+`Suitable $F$' includes any $F$ for which there is some $N$ such that
+$\varprojlim^p F^*(X_\lambda)=0$ for all $q>N$ and all $X\in\scrS$ \lparen
+resp.\ $\CW$\rparen.
+\end{thm}
+\begin{proof}
+Build a tower down to $F$, by letting $c_n$ be the canonical a-compactification
+of $G_n$, and letting $G_{n+1}$ be the fiber of $c_n$. For any $Y\in\scrS$ we
+have then a tower over $F^*(Y)$, in which squiggly arrows raise degree by one
+(and the triangles are exact):
+\[\xymatrix{
+\cdots\ar[r]^{p_1}&
+G_1\ar[r]^{p_0}\ar[d]^(.65){c_1}&
+G_0\ar[d]^(.65){c_0}\makebox[0cm][l]{\,$=F$}\\
+&F_1\ar@{~>}[lu]_{\delta_1}
+&F_0\ar@{~>}[lu]_{\delta_0}
+}\ \ \ \ \ \ \ \raisebox{-.78cm}{\bigrightsquig}\ \ \ 
+\xymatrix{
+\cdots\ar[r]&
+G^*_2(Y)\ar[r]^{{p_1}_*}\ar[d]^(.65){{c_2}_*}&
+G^*_1(Y)\ar[r]^{{p_0}_*}\ar[d]^(.65){{c_1}_*}&
+G^*_0(Y)\ar[d]^(.65){{c_0}_*}&\ar@{=}[l]F^*(Y)\\
+%\makebox[0cm][l]{\,$=F^*(Y)$}\\
+&F^*_2(Y)\ar@{~>}[lu]_{{\delta_2}_*}
+&F^*_1(Y)\ar@{~>}[lu]_{{\delta_1}_*}\ar@{-->}[l]
+&F^*_0(Y)\ar@{~>}[lu]_{{\delta_0}_*}\ar@{-->}[l]
+&\ar@{.>}[l]F^*(Y)\ar@{=}[lu]&\ar@{.>}[l]0
+}\]
+Now recall that the map $c_i$ only induces the canonical a-compactification
+${c_n}_*:G_n^*(Y)\to F_n^*(Y)$ when $Y\in\Specf$. Thus, if $Y\in\Specf$, we have
+short exact sequences $0\to G_n^*(Y)\to F_n^*(Y)\to G_{n+1}^{*+1}(Y)\to0$, which
+stitch together to form a long exact sequence, drawn with dotted and dashed
+arrows. The dashed arrows raise degree by one. In fact, this long exact sequence
+is an a-compact resolution of $F^*(Y)$.
 
+Now we can form the above diagram with $X$ in place of $Y$, for any $X\in\scrS$.
+As the spectra $F_n$ are all a-compact, we obtain:
+\[\xymatrix{
+\cdots\ar[r]&
+G^*_2(X)\ar[r]^{{p_1}_*}\ar[d]^(.65){{c_2}_*}&
+G^*_1(X)\ar[r]^{{p_0}_*}\ar[d]^(.65){{c_1}_*}&
+G^*_0(X)\ar[d]^(.65){{c_0}_*}&\ar@{=}[l]F^*(X)\\
+%\makebox[0cm][l]{\,$=F^*(Y)$}\\
+&\varprojlim F^*_2(X_\lambda)\ar@{~>}[lu]_{{\delta_2}_*}
+&\varprojlim F^*_1(X_\lambda)\ar@{~>}[lu]_{{\delta_1}_*}\ar@{-->}[l]
+&\varprojlim F^*_0(X_\lambda)\ar@{~>}[lu]_{{\delta_0}_*}\ar@{-->}[l]
+%&\ar@{.>}[l]F^*(X)\ar@{=}[lu]&\ar@{.>}[l]0
+}\]
+Now the bottom row here is obtained by applying $\varprojlim$ to an a-compact
+resolution of the inverse system $\{F^*(X_\lambda)\}$. Thus its cohomology,
+which is the $E_2$ page of the resulting spectral sequence, consists of the
+various derived functors.
+
+Discuss convergence.
+\end{proof}
 \end{document}
 
 
