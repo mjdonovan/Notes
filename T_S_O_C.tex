@@ -3,10 +3,18 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%% 80 characters %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \documentclass[11pt]{article}
+%\newcommand{\VIEWtheWHOLEdocument}{} % comment to suppress previous chapters
+
 \newcommand{\dontloaddefinitionsoftheoremenvironments}{}
+\ifx\VIEWtheWHOLEdocument\undefined
 \newcommand{\dontloadhyperref}{}
+\fi
 \input{../macros.tex}
-%\renewcommand{\comment}{} % comment to suppress previous chapters
+\ifx\VIEWtheWHOLEdocument\undefined
+\else
+\renewcommand{\comment}{}
+\fi
+
 
 \swapnumbers
 \theoremstyle{plain}
@@ -53,7 +61,11 @@
 \title{On Thom Spectra, Orientability, and Cobordism\small{ --- Rudyak}}
 
 \begin{document}
-%\tableofcontents
+\ifx\VIEWtheWHOLEdocument\undefined
+\else
+\tableofcontents
+\fi
+
 \setcounter{section}{1}
 \section{Spectra and \lparen co\rparen homology theories}
 \subsection{Preliminaries on spectra}
@@ -570,11 +582,10 @@ $\{X_\lambda\}\subset\scrL$ is a family whose wedge is still inside $\scrL$:
 }h^*\Bigl(\,\bigvee\!X_\lambda\Bigr) \xrightarrow{\ \cong\ }\prod h^*(X_\lambda)
 \text{\ for cohomology}.\]
 We make the same definitions for reduced \lparen co\rparen homology theories on
-$\scrK^\bullet$. An unreduced \lparen co\rparen homology theory is additive when
-the corresponding reduced theory is, which is to say that the isomorphisms occur
-with disjoint union in place of wedge. (As these isomorphisms always hold for
-finite wedges, additivity is no restriction on theories on
-$\scrC_\textup{f}^\bullet$ or $\Specf$.)
+$\scrK^\bullet$. An unreduced theory is additive when the corresponding reduced
+theory is, which is to say that the isomorphisms occur with disjoint union in
+place of wedge. (As these isomorphisms always hold for finite wedges, additivity
+is no restriction on theories on $\scrC_\textup{f}^\bullet$ or $\Specf$.)
 \end{defn}
 \begin{ReadersNote}
 By II.1.16(i), any representable cohomology theory $X\mapsto E^*(X)=[X,E]$ is
@@ -1538,9 +1549,9 @@ $\widehat h^*(Cf)\to\widehat h^*(Y)\to\widehat h^*(X)$ is exact.
 \begin{thm}\hfil
 \begin{itemise}
 \itm[(i)] Every cohomology theory on $\Specf$ can be represented by a spectrum.
-\itm[(ii)] For every cohomology theory $h^*$ on $\scrS$ and every spectrum $X$,
+\itm[(ii)] For every cohomology theory $h^*$ on $\scrS$ and $X\in\scrS$,
 the natural map $\rho:h^*(X)\to\widehat h^*(X)$ is surjective.
-\itm[(iii)]\lparen By a little more than Yoneda's lemma\upcol\rparen\ Every
+\itm[(iii)]\lparen By a little more than Yoneda's lemma\upcol\rparen\ every
 morphism $\phi:E^*(\DASH)\to\F^*(\DASH)$ of cohomology theories on $\Specf$ is
 induced by a morphism of spectra, which is unique up to \textbf{weak} homotopy.
 A representing spectrum is unique up to equivalence.
@@ -1617,6 +1628,7 @@ $F(X,E)$ is representing the cohomology theory $[X\wedge\DASH,E]$.
 \end{exmp}
 }   %%% End comment %%%
 \subsection{A spectral sequence}
+\comment{
 Throughout, $\{X_\lambda\}$ denotes the family of finite subspectra of $X$. By
 3.20(ii), the natural homomorphism $\rho:E^*(X)\to\varprojlim E^*(X_\lambda)$ is
 always surjective.
@@ -1835,6 +1847,8 @@ $X\in\scrS$ there is an exact sequence
 \begin{ToFollow}
 Some interesting remarks on sheaf cohomology.
 \end{ToFollow}
+}   %%% End comment %%%
+
 \end{document}
 
 
