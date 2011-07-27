@@ -421,9 +421,10 @@ cofiber sequence for $n\gg0$.
 \end{thm}
 \begin{defn}
 A \emph{ring spectrum} is a triple $(E,\mu,\imath)$ where $\mu:E\wedge E\to E$
-and $\imath:S\to E$ satisfy the ring axioms up to homotopy. It may be or may not
-be commutative. A \emph{module spectrum} over a ring spectrum is a pair $(F,m)$
-satisfying the module axioms up to homotopy (with a unitarity condition).
+and $\imath:S\to E$ satisfy the ring axioms up to homotopy (begin associative
+and unital). It may be or may not be commutative. A \emph{module spectrum} over
+a ring spectrum is a pair $(F,m)$ satisfying the module axioms up to homotopy
+(again, begin associative and unital).
 \end{defn}
 \setcounter{thm}{13}
 \begin{condef}
@@ -619,8 +620,8 @@ equivalence.
 \begin{prop}Let $\{X_\lambda\}$ be the set of all finite subspectra of $X$.
 \begin{itemise}
 \itm[(i)] Let $h_*$ be a homology theory on $\Specf$. Set $k_*(X):=\varinjlim
-h_*(X\lambda)$ for any $X\in\scrS$. Then $k_*$ is an additive homology theory on
-$\scrS$.
+h_*(X_\lambda)$ for any $X\in\scrS$. Then $k_*$ is an additive homology theory
+on $\scrS$.
 \itm[(ii)] If $h_*$ is already defined on $\scrS$, the natural map $h_*\to k_*$
 is an equivalence.
 \end{itemise}
@@ -806,8 +807,8 @@ $E^0(X)=0$.
 \end{itemise}
 \end{lem}
 \begin{lem}
-A spectrum is equivalent to a spectrum $F$ with $F^{(n)}=*$ iff it is $n$
-connected.
+A spectrum is equivalent to a spectrum $F$ with $F^{(n)}=*$ iff it is 
+$n$-connected.
 \end{lem}
 \begin{prop}
 Let $h_*$ be an additive homology theory on $\scrS$ with $h_i(S)=0$ for $i\leq
@@ -1100,10 +1101,11 @@ $\Z[p]$ and $\Z[1/p]$ respectively.
 A spectrum $E$ has \emph{finite $\Lambda$-type} if it is bounded below and every
 group $\pi_i(E)$ is a finitely generated $\Lambda$-module.
 \end{defn}
-\begin{rmk}[on $\Lambda$-modules]\hfil
+\begin{rmk}\hfil
 \begin{itemise}
-\itm A spectrum has finite $\Z$-type iff it is equivalent to one of finite type
-(by 4.26). A spectrum of finite $\Lambda$-type is $\Lambda$-local.
+\itm A spectrum has finite $\Z$-type iff it is equivalent to one \textbf{bounded
+below (?)} of finite type (by 4.26).
+\itm A spectrum of finite $\Lambda$-type is $\Lambda$-local.
 \itm A submodule of a finitely generated $\Lambda$-module is finitely generated
 (as this property characterises noetherian rings), so a $\Lambda$-module is
 finitely generated iff it is finitely presented. As $\Lambda$ is a PID, every
@@ -1995,14 +1997,136 @@ $E\xrightarrow{\,\phi\,}F\xrightarrow{\,\alpha\,}G$ is a cofiber sequence.
 \end{itemise}
 \end{thm}
 }   %%% End comment %%%
+\subsection{Multiplications and quasi-multiplications}
+Given a ring spectrum $E$ we obtain a natural family of multiplications for
+$(X,A),(Y,B)\in\CW^2$:
+\[\mu_{(X,A),(Y,B)}:E_i(X,A)\otimes E_j(Y,B)\to E_{i+j}(X\times Y,X\times B\cup
+A\times Y)\]
+These come from the associating to $f:\Sigma^iS\to E\wedge X/A$ and
+$g:\Sigma^jS\to E\wedge Y/B$ the composite:%=\Sigma^iS\wedge \Sigma^j S
+\[\Sigma^{i+j}S\xrightarrow{f\wedge g}(E\wedge X/A)\wedge(E\wedge
+Y/B)\simeq(E\wedge E)\wedge(X\times Y/(X\times B\cup A\times
+Y))\xrightarrow{\mu\wedge\id}E\wedge(\cdots).\]
+(Note that here we should be inserting $\Sigma^\infty$ here and there.)
+Such a family of multiplications which does not come from a ring spectrum
+structure will be called a \emph{quasi-multiplication}.
 
+Now every spectrum $E$ is an $S$-module spectrum, so there is a natural pairing:
+\[\phi_{(X,A),(Y,B)}:\Pi_i(X,A)\otimes E_j(Y,B)\to E_{i+j}(X\times Y,X\times
+B\cup A\times Y)\]
+which associates to $\alpha:\Sigma^iS\to X/A$ and
+$\beta:\Sigma^jS\to E\wedge Y/B$ the composite:%=\Sigma^iS\wedge \Sigma^j S
+\[\Sigma^{i+j}S\xrightarrow{\alpha\wedge\beta}X/A\wedge(E\wedge
+Y/B)\simeq E\wedge(X\times Y/(X\times B\cup A\times
+Y)).\]
+Similarly, we have pairings $\psi_{(X,A),(Y,B)}:E_i(X,A)\otimes \Pi_j(Y,B)\to
+E_{i+j}(X\times Y,X\times B\cup A\times Y)$.
+\begin{defn}
+A \emph{quasi-ring spectrum} is a triple $(E,\{\mu_{(X,A),(Y,B)}\},\imath)$
+where $E$ is a spectrum, the maps $\mu$ as above are a quasi-multiplication of
+natural pairings, and $\imath:S\to E$ is a morphism called the \emph{unit},
+where we require the following compatibilities:
+\[\xymatrix{
+\Pi_i(X,A)\otimes E_j(Y,B)\ar[r]_{\phi\qquad}\ar[d]^{\imath_*\otimes\id}&
+E_{i+j}(X\times Y,X\times B\cup A\times Y)\ar@{=}[d]\\
+E_i(X,A)\otimes E_j(Y,B)\ar[r]^{\mu\qquad}&
+E_{i+j}(X\times Y,X\times B\cup A\times Y)\\
+}\]
+and the same for $\psi$, the version of $\phi$ from the other side. Also:
+%\[\xymatrix{
+%E_i(X,A)\otimes E_j(Y,B)\ar[r]^{\mu\qquad}\ar[dd]^{\partial\otimes\id}&
+%E_{i+j}(X\times Y,X\times B\cup A\times Y)\ar[d]^d\\
+%&E_{i+j-1}(X\times B\cup A\times Y,X\times B)
+%\ar[d]_\cong^{\textup{collapse}_*}\\
+%E_{i-1}(A)\otimes E_j(Y,B)\ar[r]^{\mu\qquad}&
+%E_{i+j-1}(A\times Y,A\times B)
+%}\]
+\[\xymatrix{
+E_i(X,A)\otimes E_j(Y,B)\ar[r]^{\mu\qquad}\ar[d]^{\partial\otimes\id}&
+E_{i+j}(X\times Y,X\times B\cup A\times Y)\ar[d]^d\\
+E_{i-1}(A)\otimes E_j(Y,B)\ar[d]^{\mu\qquad}&
+E_{i+j-1}(X\times B\cup A\times Y,X\times B)\ar[d]^\cong\\
+E_{i+j-1}(A\times Y,A\times B)&
+\widetilde E_{i+j-1}(A\times Y/A\times B)\ar[l]_\cong
+}\]
+and a similar compatibility for $\id\otimes\partial$ on the other side.
+
+A quasi-muliplication is \emph{commutative} if it intertwines the switching of
+factors. That is, if $\chi(a\otimes b)=b\otimes a$ and $\tau:X\times Y\to
+Y\times X$ is the switching map, we have:
+\[\xymatrix{
+E_i(X,A)\otimes E_j(Y,B)\ar[r]^{\mu\qquad}\ar[d]^{\chi}&
+E_{i+j}(X\times Y,X\times B\cup A\times Y)\ar[d]^{\tau_*}\\
+E_i(Y,B)\otimes E_j(X,A)\ar[r]^{\mu\qquad}&
+E_{i+j}(Y\times X,Y\times A\cup B\times X)
+}\]
+There is also a sensible definition of \emph{associative}.
+
+If $E,F$ are quasi-ring spectra, a collection
+$\phi=\{\phi^{(X,A)}:E_*(X,A)\to F_*(X,A)\}$ of homomorphisms is a
+\emph{quasi-ring homomorphism} if the following diagrams commute:
+\[\xymatrix{
+\Pi_*(X,A)\ar[r]^{\imath_*}\ar@{=}[d]&E_*(X,A)\ar[d]_{\phi^{(X,A)}}\\
+\Pi_*(X,A)\ar[r]^{\imath_*}&F_*(X,A)
+}\textup{\qquad \qquad\qquad}
+\xymatrix{
+E_i(X,A)\otimes E_j(Y,B)\ar[r]^{\mu}\ar[d]^{\phi^{(X,A)}\otimes\phi^{(Y,B)}}&
+E_{i+j}((X,A)\times (Y,B))\ar[d]^{\phi^{(X,A)\times(Y,B)}}\\
+F_i(X,A)\otimes F_j(Y,B)\ar[r]^{\mu}&F_{i+j}((X,A)\times (Y,B))
+}\]
+\end{defn}
+\begin{const}
+Let $(E,\{\mu\},\imath)$ be a quasi-ring spectrum.
+\begin{itemise}
+\itm[(a)] Now $\mu_{(X,*),(Y,*)}$ is a pairing $\widetilde E_i(X)\otimes
+\widetilde E_j(Y)\to\widetilde E_{i+j}(X\wedge Y)$ for pointed CW-spaces $X,Y$.
+This pairing commutes with the two suspension isomorphisms.
+\itm[(b)]By (a), we have a pairing $\mu_{A,B}:E_i(A)\otimes E_j(B)\to
+E_{i+j}(A\wedge B)$ for any finite spectra $A,B$. By II.3.20(ii), there is a
+canonical isomorphism $E_i(X)\cong\varinjlim E_i(X_\lambda)$ for $X\in\scrS$.
+Thus we can define a natural pairing $\mu_{X,Y}:E_i(X)\otimes E_j(Y)\to
+E_{i+j}(X\wedge Y)$ for any $X,Y\in\scrS$:
+\begin{alignat*}{2}
+\mu_{X,Y}:E_i(X)\otimes E_j(Y)&=\varinjlim E_i(X_\lambda)\otimes\varinjlim
+E_j(Y_{\lambda'})=\varinjlim\{E_i(X_\lambda)\otimes E_i(Y_{\lambda'})\}\\
+&\to\varinjlim \{E_{i+j}(X_\lambda\wedge Y_{\lambda'})\}
+\to E_{i+j}(X\wedge Y).
+\end{alignat*}
+(Note here that we have used the fact that $\varinjlim$ and $\otimes$ commute.)
+\end{itemise}
+\end{const}
+\begin{thm}
+Let $(E,\{\mu_{(X,A),(Y,B)}\},\imath)$ be a quasi-ring spectrum of finite
+$\Z$-type with $k$-skeleton $E^k$. Then\upcol
+\begin{itemise}
+\itm[(i)]There exists a pairing $\mu:E\wedge E\to E$ inducing the pairings
+$\{\mu_{(X,A),(Y,B)}\}$.
+\itm[(ii)]If $\varprojlim^1\{E^{-1}(E^n\wedge E^n)\}=0$ then the pairing $\mu$
+as in \textup{(i)} is unique up to homotopy.
+\itm[(iii)]If $\varprojlim^1\{E^{-1}(E^n)\}=0$ then the morphism $S\wedge
+E\xrightarrow{\imath\wedge \id}E\wedge E\xrightarrow{\,\mu\,}E$ \lparen$\mu$ as
+in \textup{(i))} is homotopic to $l:S\wedge E\simeq E$. Thus the diagrams as in
+7.1 commute for every $\mu$ as in \textup{(i)}. \textup{(What does this mean?)}
+\itm[(iv)] If $\varprojlim^1\{E^{-1}(E^n\wedge E^n\wedge E^n)\}=0$ and the
+quasi-multiplication on $E$ is associative then every pairing $\mu$ as in
+\textup{(i)} is associative \lparen and so makes $E$ into a ring
+spectrum\rparen.
+\itm[(v)] If $\varprojlim^1\{E^{-1}(E^n\wedge E^n\wedge E^n)\}=0$ and the
+quasi-multiplication on $E$ is commutative then every pairing $\mu$ as in
+\textup{(i)} is commutative.
+\end{itemise}
+In particular, if $E$ is a spectrum of finite $\Z$-type with finite groups
+$\pi_i(E)$ for all $i$ then every associative quasi-multiplication on $E$ is
+induced by a ring multiplication $\mu:E\wedge E\to E$ \lparen with unit
+$\imath$\rparen. This multiplication is unique up to homotopy and is commutative
+iff the quasi-multiplication is.
+\end{thm}
 \end{document}
 
 
 
 
 
-ehdi 8579194209
 
 
 
