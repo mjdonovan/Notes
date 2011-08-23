@@ -14,9 +14,50 @@
 \renewcommand{\myheading}[1]{\subsection{#1}}
 \setcounter{secnumdepth}{1}
 \begin{document}
-\tableofcontents
+%\tableofcontents
 
-\pagebreak
+%\pagebreak
+ {\color{red}In order to write your exact couple how you do,
+ nice things need to happen with filtrations. Otherwise the triangles may
+ not happen. In the case in mind obviously each of those is coming from a
+ LES.}
+
+\noindent Yeah, this setup works really well when it's coming from a bunch of exact triangles. In general, if you have an exact couple $A\to A\to E\to A$ (with any indices and shifts implicit), you can form a diagram 
+\[\xymatrix@C=.5cm{
+0\ar[rr]&&A\ar[rr]\ar@{=}[ld]&&A\ar[rr] \ar[ld]&&A\ar[ld]
+\ar[rr]&&\cdots\\
+%&\cdots\ar[r]&h_*(E)\\
+&A\ar[ul]&&
+E\ar@{~>}[lu]&&
+E\ar@{~>}[lu]&&
+E\ar@{~>}[lu]
+}\]
+Anyway, hitting this diagram with the same procedure gives a spectral sequence converging to the direct limit of the top row. I really don't know if that's useful, but I might if I knew the answer to the following question:
+{
+\color{blue} What are the terms $E^r$ in the sequence of derived exact couples supposed to converge to, in complete generality?
+}
+
+{\color{red}
+ For the $Z^r$ and $B^r$ terms to "reach" the $Z^\infty$, $B^\infty$ terms we need
+ two conditions to hold.
+\begin{enumerate}
+\item Every person living in the $i^\text{th}$ period has an age below some number
+\item Every person living in the $i^\text{th}$ period who eventually dies, dies before
+ a certain age
+\end{enumerate}
+The condition you give makes sure $b_i:\Gr_i P\to E_i^{\infty}$ is an
+ isomorphism but $E^r$ may still not reach $E^\infty$.
+}
+
+\noindent Quite so --- I hadn't thought of that. What you're saying is: if you want $Z_i^r=Z_i^\infty$ and $B_i^r=B_i^\infty$ for $r\gg0$, then you need your two conditions.
+
+Here's a thought: although it's great when $E_i^r=E_i^\infty$ for $r\gg0$, if you have a spectral sequence in which this doesn't happen, you can still discuss its convergence in some (natural) way. %$Is that actually necessary for the whole thing to make sense? I suppose if you want it to be like a traditional spectral sequence, you want it all to stabilise, but maybe there's a more general setting when you mightn't care that you need to take the union and intersection of these groups.
+
+Suppose you have abelian groups $I^r, O^r, E_r$ for each $r>0$, that there are maps $I^r\to E^r\to O^r$ with composite zero, and that $E^{r+1}$ is defined to be the homology at $E^r$. Then each $E^r$ is a subquotient of $E^1$, and you can identify it with $Z^r/B^r$ for some subgroups $Z^r,B^r$ of $E^1$, with the $Z^r$ decreasing and the $B^r$ increasing. Then it's not too unnatural to consider the subgroups $Z^\infty=\cap Z^r$ and $B^\infty=\cup B^r$ of $E^1$, and define $E^\infty:=Z^\infty/B^\infty$.
+
+Thus, if we don't demand the above convergence conditions, we'll not get a stabilisation to $E^\infty_i$, but $E^\infty_i$ in determined in a natural way from the $E^r_i$, so as long as you know that's going to happen, you should be ok. {\color{blue} Does that make sense?}
+
+
 \myheading{Births, Deaths, and Marriages}% \'a la 1984}
 Ok, fine, so there might not be any marriages, but check this out\,\ldots
 
@@ -25,43 +66,55 @@ consisting of those people which are alive at the start of the $i^\text{th}$
 time period. There is a map $T_{i}:P_{i-1}\to P_{i}$, representing the passing
 of the $(i-1)^\text{st}$ period. Of course, as this is a graded \emph{abelian}
 population, a person in $P_{i-1}$ can be mapped to zero under $T_{i}$, in which
-case they must have \emph{died} during the $(i-1)^\text{st}$ period. Similarly,
-a person $p\in P_i$ need not be in the image of $T_{i}$, in which case they must
-have been \emph{born} during the $i^\text{th}$ period.
+case they must have \emph{died} during the $(i-1)^\text{st}$ period. We will say
+that they \emph{died at $P_{i-1}$}, as $P_{i-1}$ was the last place they were
+seen alive. We will also say that their time of death was $i-1$.
 
-We will assume that only the zero person $p\in P_i$ is in the image of
-$T_{j}\cdots T_i$ for all $j\leq i$. That is, every nonzero person must have
-been born some finite time ago. However, we will not rule out the possibility
-that people live for ever.
+Similarly, a person $p\in P_i$ need not be in the image of $T_{i}$,
+in which case they must have been \emph{born} during the $(i-1)^\text{st}$
+period. We will say that they were \emph{born on $P_i$}.
+
+We will not rule out the possibility that some nonzero people live for ever.
+That is, we will allow for the possibility of \emph{immortals}. We will,
+however, assume that only the zero person $p\in P_i$ is in the image of
+$T_{j}\cdots T_i$ for all $j\leq i$. That is, there are no (nonzero)
+\emph{co-immortals}: every nonzero person must have been born some finite time
+ago. That is to say that the inverse limit of the $P_i$ is zero.
 
 Now $C_*$ is the graded abelian database consisting of birth and death
-\emph{certificates}. If a person $p\in P_{i}$ is born during the
-$(i-1)^\text{st}$ year, they report this to the government by submitting a
-nonzero birth cirtificate $B_{i}(p)$. Any $p\in P_{i}$ who was not born in that
-year submits the zero birth certificate.
+\emph{certificates}. If a person $p\in P_{i}$ was born on $P_i$, they report
+this to the government by submitting a nonzero birth cirtificate $B_{i}(p)$.
+Naturally, any $p\in P_{i}$ who was not born on $P_i$ submits the zero birth
+certificate.
 
 Now there is a map $M_{i}:C_{i}\to P_{i-1}$, the `death certificate'
 map.\footnote{$M$ for `mortality' --- $D$ is reserved for `differential'} Any
 person in the image of $M_{i}$ has received a death certificate, and will die
-during the $(i-1)^\text{st}$ period.
+during on $P_{i-1}$. That is, people receive their death certificate at the
+start of the period in which they die --- a strange feature of the society we
+are discussing.
 
 Thus we have a triangle of maps $T_{i},\,B_{i},\,M_{i}$ as in the diagram below.
 Now it must be the case that this triangle is exact at each vertex. It's exact
-at the upper left, as the people who die during the $(i-1)\first$ period are
-exactly those who received death certificates. It's exact at the upper right, as
-those people $p$ who were already alive at time $(i-1)$ are exactly those who
-submit the zero birth certificate. It's exact at the bottom, as the database
-does not contain any redundant certificates, and of course, all birth
-cirtificates map to zero under the `death certificate' map.
+at $P_{i-1}$, as the people who die at $P_{i-1}$ are
+exactly those who received death certificates. It's exact at $P_i$, as
+those people $p\in P_i$ who were not born there are exactly those who
+submit the zero birth certificate. It's exact at $C_i$, as the database
+does not contain any redundant certificates, and, of course, all birth
+certificates map to zero under the `death certificate' map $M_i$.
 
-In particular, we have an exact couple, consisting of the straight arrows in the
-following:
+In particular, we have a collection of exact triangles, consisting of the
+straight arrows in the following:
 \[\xymatrix@!0@C=1.1cm@R=1.28cm{
-\makebox[0cm][r]{$\cdots$\ \ }P_{i-1}\ar[rrrr]^{T_{i  }}&&&&\ar[dll]_{B_{i  }}
+\makebox[0cm][r]{$\cdots$\ \ }
+P_{i-1}\ar[rrrr]_{T_{i  }}^{\text{$(i-1)^\text{st}$ period}}
+&&&&\ar[dll]_{B_{i  }}
 \ar@{..>>}[ddl]_{b_{i  }}
-P_{i  }\ar[rrrr]^{T_{i+1}}&&&&\ar[dll]_{B_{i+1}}
+P_{i  }\ar[rrrr]_{T_{i+1}}^{\text{$ i   ^\text{th}$ period}}
+&&&&\ar[dll]_{B_{i+1}}
 \ar@{..>>}[ddl]_{b_{i+1}}
-P_{i+1}\ar[rrrr]^{T_{i+2}}&&&&\ar[dll]_{B_{i+2}}
+P_{i+1}\ar[rrrr]_{T_{i+2}}^{\text{$(i+1)^\text{st}$ period}}
+&&&&\ar[dll]_{B_{i+2}}
 \ar@{..>>}[ddl]_{b_{i+2}}
 P_{i+2}\makebox[0cm][l]{\ \ $\cdots$}\\
 &&C_{i  }\ar[ull]_{M_{i  }}\ar@{~>}[dl]^\pi&&
@@ -83,54 +136,83 @@ Now the database is not particularly organised, so the group $C_{i}$ does not
 split into the direct sum of the birth certificates and death certificates.
 However, there are the above short exact sequences, drawn with wavy arrows.
 Here, $\im(B_{i})$ is the subgroup consisting of birth certificates, and the
-quotient group $\coim(M_{i}):=C_i/\ker(M_i)$ consists of the death certificates.
-Moreover, the birth and death certificate maps factorise: $B_i=\beta b_i$ and
-$M_i=m_i\pi$.
+quotient group $\coim(M_{i}):=C_i/\ker(M_i)\cong\coker(B_i)$ consists of the
+death certificates. Moreover, the birth and death certificate maps factorise:
+$B_i=\beta b_i$ and $M_i=m_i\pi$.
+
+Now we can form a spectral sequence out of these exact triangles in the usual
+way, whose terms are defined as follows:
 \begin{alignat*}{2}
 Z_{i}^r:=&\left\{x\in \coim(M_i)\ \middle|\ m_i(x)\in\im(T_{i-1}\circ\cdots\circ
 T_{i-r})\right\}\\
-=&\left\{\text{death certificates $x$ for people at least $r$ periods
-old}\right\}.\\%\footnotemark\\
+%=&\left\{\text{death certificates $x$ for people at least $r$ periods
+%old}\right\}.\\%\footnotemark\\
+=&\left\{\text{death certificates $x$ for people $m_i(x)\in P_{i-1}$ who were
+born on $P_{i-r}$ or before}\right\}.\\%\footnotemark\\
 B_{i}^r:=&\left.b_i(\ker(T_{i+1}\circ\cdots\circ T_{i+r}))\right.\\
-=&\left\{\text{birth certificates $b_i(p)$ for people who will die in the next
-$r$ periods}\right\}.\\
-E_{pq}^{r+1}:=&\left.\pi^{-1}(Z_{pq}^r)/\beta(B_{pq}^r).\right.
+=&\left\{\text{birth certificates $b_i(p)$ for people $p\in P_i$ who will die at
+or before $P_{i+r-1}$}\right\}.\\
+E_{i}^{r+1}:=&\left.\pi^{-1}(Z_{i}^r)/\beta(B_{i}^r).\right.
 \end{alignat*}
+Now the differential $d_r$ on $E^{r}$ takes a certificate $c\in\pi^{-1}(Z_i^r)$,
+and maps it to $M_i(c)\in P_{i-1}$, pulls it back to a person $p\in P_{i-r}$,
+and takes their birth certificate $B_{i-r}(p)$. The only way this certificate
+can be nonzero in $E_r$ is when $p$ was actually born on $P_{i-r}$. In which
+case, surveying the life of $p$, we see that their death certificate $c$ maps to
+their birth certificate $B_{i-r}(p)$ under $d_r$. Taking homology to get from
+$E_*^r$ to $E_*^{r+1}$ has the effect of annihilating both the birth and the
+death certificate of each such $p$ simultaneously.
+% does not die before the end of the $(i-2)^\text{nd}$ period, i.e.\ iff 
+
 %\footnotetext{Of course, zero is alwa}
-We note that under these definitions,
+Moreover, we make the following obvious extensions of these definitions, letting
+$Z^\infty_i$ be the limit (intersection) of the $Z^r_i$, and $B^\infty_i$ be the
+colimit (union) of the $B^r_i$:
 \begin{alignat*}{2}
 Z_{i}^\infty
 =&\left\{\text{death certificates $x$ for people who have been alive
  forever}\right\}=0.\\
-B_{i}^\infty=&\left\{\text{birth certificates $b_i(p)$ for people who are not
- immortal}\right\}.\\
+B_{i}^\infty=&\left\{\text{birth certificates $b_i(p)$ for mortals $p\in
+ P_i$}\right\}.\\
 E_{i}^{\infty}=&\left.\im(B_i)\,/\left\{\text{birth certificates $b_i(p)$ for
  mortals $p\in P_i$}\right\}.\right.
 \end{alignat*}
 Now let $P=\varinjlim P_i$ be the direct limit of the population under the maps
-$T_i$. Then $P$ can be viewed as the collection of immortal people modulo
-eventual equality. There is an increasing filtration on $P$ defined by
+$T_i$. Then $P$ can be viewed as the collection of immortal people (modulo
+eventual equality). There is an increasing filtration on $P$ defined by
 $F_{i}P:=\im(P_i\to P)$. Let $\Gr_{i}P$ be the $i^\text{th}$ subquotient
 $F_{i}P/F_{i-1}P$. One finds that $b_i:\Gr_iP\to E^\infty_i$ is well defined and
 an isomorphism.
 
 Thus we can summarise the convergence of the spectral sequence by saying --- the
 population of immortals is filtered by time of birth, and the subquotient
-consisting of those immortals born during the $i^\text{th}$ period is isomorphic
-to the quotient:
+consisting of those immortals born on $P_i$ is isomorphic to the quotient:
 \[\left\{\text{all birth certificates issued at time
  $i$}\right\}/\left\{\text{those issued to mortals}\right\}.\]
 
-Now I claim that in passing from $E^{r-1}$ to $E^{r}$, we kill off all of the
-mortals which lived for exactly $r$ years.\footnote{We say that a mortal who was
-born at $P_i$ but first goes to zero in $P_{i+r+1}$ lived for $r$ years
-exactly.} To be more precise, we discard both the birth and death certificates
-of these mortals as we pass from $E^{r-1}$ to $E^r$.
+Now in passing from $E_*^{r}$ to $E_*^{r+1}$, we kill off all of the mortals
+whose birth and death were exactly $r-1$ periods apart. To clarify, to
+restricting to the kernel of the differential $d_r$ out of $E^r_i$, is to
+restrict interest only to death certificates for people whose birth and death
+are at least $r$ years apart. Dually, to quotient by the image of $d_r$ coming
+in to $E^r_i$ is to elect to ignore the birth certificates of those people born
+on $P_i$ who die at $P_{i+r-1}$ precisely --- the same story.
+%\footnote{We say that a mortal who was
+%born at $P_i$ but first goes to zero in $P_{i+r+1}$ lived for $r$ years
+%exactly.} 
+%To be more precise, we discard both the birth and death certificates
+%of these mortals as we pass from $E^{r-1}$ to $E^r$.
 
-To be even more precise, we claim that for each mortal that lives for exactly
-$r$ years, the differential $d_{r-1}$ sends its death certificate to its birth
-certificate. Taking homology groups in order to pass from $E^{r-1}$ to $E^r$
-then kills both the birth and death certificate of this element.
+As we pass from $E_*^1$ to $E_*^2$ to $E_*^3$, and so on, we are allowing the
+birth and death certificates of the shortest lived members of society mutally
+annihilate. When we reach $E_*^\infty$, all the the mortals' certificates will
+have been annihilated, and we are only left with the birth certificates of the
+immortals.
+%
+%To be even more precise, we claim that for each mortal that lives for exactly
+%$r$ years, the differential $d_{r-1}$ sends its death certificate to its birth
+%certificate. Taking homology groups in order to pass from $E^{r-1}$ to $E^r$
+%then kills both the birth and death certificate of this element.
 %Next we should interpret the group 
 %$E_i^r$ is a quotient of the group $\pi^{-1}(Z_i^r)$. Now the groups
 %$\pi^{-1}(Z_i^r)$ are a decreasing series of subgroups of $C_i$, and this
@@ -143,6 +225,7 @@ then kills both the birth and death certificate of this element.
 %$d_r[x]=[b_i((T_{i-1 }\circ\cdots\circ T_{i-r})^{-1}m_i(x))]$. If this formula
 %gives a nonzero result, then it takes a
 
+\end{document}
 \myheading{The Spectral Sequence Associated with a Filtered Chain Complex}
 \newcommand{\theexp}[4]{\raisebox{-.1cm}[.5cm][0cm]{\mbox{$\begin{array}{c}H_{#1}(\frac{F_{#2}}{F_{#3}}) \\=E^1_{#4} \end{array}$}}}%used in the Filtered chain complex SS
 Suppose that $C_*=\varinjlim(F_0C_*\hookrightarrow F_1C_*\hookrightarrow F_2C_*\hookrightarrow\cdots)$ is a filtered chain complex. Then there is a spectral sequence $\{E^r_{s,t}\}$ converging to $H_{s+t}(C_*)$, such that $E^1_{s,t}=H_{s+t}(F_sC_*/F_{s-1}C_*)$. Here the target of convergence is graded via $F_s(H_{s+t}(C_*))=\im(H_{s+t}(F_sC_*)\to H_{s+t}(C_*))$. Thus it is claimed that $E^\infty_{s,t}\simeq F_s(H_{s+t}(C_*))/F_{s-1}(H_{s+t}(C_*))$. Consider the following diagram:
