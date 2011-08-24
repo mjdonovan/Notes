@@ -6,11 +6,33 @@
 \input{../macros.tex}
 \usepackage{makeidx}
 
+\usepackage{multicol}
+\makeatletter
+\renewenvironment{theindex}
+  {\if@twocolumn
+      \@restonecolfalse
+   \else
+      \@restonecoltrue
+   \fi
+   \setlength{\columnseprule}{0pt}
+   \setlength{\columnsep}{10pt}% I CHANGED THIS from 35pt
+   \begin{multicols}{3}[\section*{\indexname}]
+   \markboth{\MakeUppercase\indexname}%
+            {\MakeUppercase\indexname}%
+   \thispagestyle{plain}
+   \setlength{\parindent}{0pt}
+   \setlength{\parskip}{0pt plus 0.3pt}
+   \relax
+   \let\item\@idxitem
+   \small}% I ADDED THIS
+  {\end{multicols}\if@restonecol\onecolumn\else\clearpage\fi}
+\makeatother
+
 
 \makeindex
 \newcommand{\INDENT}{\textbf{}\hspace{4mm}}
 \newcommand{\Index}[1]{\index{#1}#1}
-\newcommand{\indexThm}[1]{\index{Hartshorne!Theorems, Propositions, etc.!#1}}
+\newcommand{\indexThm}[1]{\index{Hartshorne!Theorems, etc.!#1}}
 
 \begin{document}
 \section*{Hartshorne I.1 --- Affine Varieties}
@@ -39,16 +61,16 @@ degree} of $K(B)/k$. \ \ \Bullet $\text{height}\,\frakp+\dim B/\frakp=\dim B$.
 neither zero divisor nor unit. Then if $\scrI$ is the set of prime ideals
 containing $f$, any minimal ideal in $\scrI$ in fact has height one.
 
-\INDENT\emph{Interpretation if $A$ is a UFD --- $Z(f)$ can be written uniquely
+\INDENT\emph{Interpretation if $A$ is a UFD} --- $Z(f)$ can be written uniquely
 as a union of hypersurfaces $Z(f_i)$. Any maximal closed irreducible subset of
 $Z(f)$ has codimension one in $\Spec A$ --- the only larger irreducible is all
-of $A$.}
+of $A$.
 \item \textbf{Proposition 1.12A:}\indexThm{I.1.12A} A noetherian domain $A$ is a
 UFD iff every prime ideal of height one is principal.
 
-\INDENT\emph{Interpretation --- a noetherian domain $A$ is a UFD iff every
+\INDENT\emph{Interpretation} --- a noetherian domain $A$ is a UFD iff every
 maximal proper closed irreducible subset of $\Spec A$ is a hypersurface, the
-zero set of one element.}
+zero set of one element.
 
 \item A variety $Y\in \A^n$ has dimension $n-1$ iff it is a
 \Index{hypersurface}: $Z(f)$ for some nonconstant irreducible $f$. The same
@@ -170,9 +192,134 @@ completion of $M$. $\dim \hat A=\dim A$ and $\hat A$ is regular \Iff $A$ is
 regular.
 \item $p\in X$ and $q\in Y$ are \Index{analytically isomorphic} if
 $\hat\calO_{p,X}\cong\hat\calO_{q,Y}$ as $k$-algebras.
-\item \textbf{Theorem 5.5A:}\indexThm{I.5.5A}\index{Cohen Structure Theorem} The
-only complete regular local ring of dimension $n$ containing a field $k$ is the
-power series ring in $n$ variables over $k$.
+\item \textbf{Theorem 5.5A:}\indexThm{I.5.5A}(\Index{Cohen Structure Theorem}) 
+The only complete regular local ring of dimension $n$ containing a field $k$ is
+the power series ring in $n$ variables over $k$. In particular, any two
+nonsingular points of the same dimension are analytically isomorphic.
+\item \textbf{Theorem 5.7A:}\indexThm{I.5.7A}(\Index{elimination theory}) 
+Given homogeoneous polynomials $f_1,\ldots,f_r\in k[x_0,\ldots,x_n]$ with
+indeterminate coefficients $a_{ij}$, we want to know when they have a common
+root other than $(0,0,\ldots,0)$. There a polynomials
+$g_1,\ldots,g_t\in\Z[a_{ij}]$, homogeneous in the coefficients of each $f_i$
+separately, such that there is a common nonzero root for the $f_i$ \Iff there is
+a common root for the $g_t$.
+\end{itemise}
+\section*{Hartshorne I.6 --- Nonsingular Curves}
+\index{Hartshorne!I.6: Nonsingular Curves}
+\begin{itemise}
+\item There is a unique nonsingular projective curve in each birational
+equivalence class of curves. For each finitely generated field extension $K/k$
+of transcendence degree one, there is then a unique nonsingular projective curve
+$C_K$ with function field $K$.
+\item Moreover, and homomorphism $K_2\to K_1$ over $k$ is represented by a
+morphism $C_{K_1}\to C_{K_2}$.
+\item Let $K$ be a field and $G$ be a totally ordered abelian group. A
+\Index{valuation} on $K$ with values in $G$ is homomorphism $v:K^\times\to G$
+such that for all nonzero $x,y$: $v(x+y)\geq\min\{v(x),v(y)\}$. The
+\Index{valuation ring} of $v$ is then $\{0\}\cup v^{-1}({\geq0})$, a local ring
+whose units are $\ker v$. The valuation ring always has quotient
+field $K$. Call $v$ a valuation of $K/k$ if $v(k^\times)=\{0\}$.
+\item If $A,B$ are local rings in a field $K$, then $B$ dominates $A$ if
+$A\subseteq B$ and $\frakm_B\cap A=\frakm_A$.
+\item \textbf{Theorem 6.1A:}\indexThm{I.6.1A}
+A local ring $R$ contained in a field $K$ is a valuation ring of $K$ \Iff it is
+a maximal local ring w.r.t.\ dominanation. Every local ring inside $K$ is
+dominated by some valuation ring of $K$.
+\item \textbf{Theorem 6.2A:}\indexThm{I.6.2A}
+Let $A$ be a noetherian local domain of dimension one. TFAE: 
+\begin{enumerate}\squishlist
+\item $A$ is a discrete valuation ring (i.e.\ comes from a valuation with values
+in $\Z$);
+\item $A$ is integrally closed (i.e.\ normal);
+\item $A$ is a regular local ring (implied by 2, even in higher dimensions);
+\item The maximal ideal of $A$ is principal.
+\end{enumerate}
+\item A \Index{Dedekind domain} is an integrally closed noetherian domain of
+dimension one. As integral closure\index{Integrally closed} is a local property,
+every localisation of a Dedekind domain is a DVR.
+\item For $K/k$ a finitely generated extension of transcendence degree one, let
+$C_K$\index{abstract nonsingular curve} be the set of all discrete valuation
+rings of $K/k$.
+\item Given a point $y$ on a nonsingular curve $Y$ with function field $K$,
+there's an \emph{injective} function $Y\to C_K$ given by $p\mapsto\calO_{p}\in
+C_K$.
+\item \textbf{Theorem 6.5:}\indexThm{I.6.5}
+For any $x\in K$, all but finitely map $R\in C_K$ contain $x$.
+
+\INDENT\emph{Interpretation} --- $x\notin R$ means that $x$ will have a pole at
+$R$ (as an element of the `curve' $C_K$). As $K$ is one dimensional, each $x$
+has only finitely many poles.
+\item \textbf{Corollary 6.6:}\indexThm{I.6.6}
+Any DVR of $K/k$ is the local ring of a point on a nonsingular affine curve.
+\item Make $C_K$ a topological space using the cofinite topology. If $U\subseteq
+C_K$ is open, define $\calO(U):=\cap_{P\in U}R_P$. An element $f\in\calO(U)$
+defines a function $U\to k$ by taking $P$ to the image of $f$ in the residue
+field of $\calO_P$, which must be $k$ by 6.6.
+\item $f\in\calO(U)$ can be recovered from its function $U\to k$, as if $0\neq
+f\mapsto 0$, $f\in\frakm_p$ for all $p$, so $f^{-1}\notin R_p$ for all $p$,
+contradicting 6.5, as there must be infinitely many $R_p$ by 6.6. By 6.5, any
+$f\in K$ is a regular function on some open $U$. Thus the quotient field of
+$C_K$ is $K$. 
+\item An \Index{abstract nonsingular curve} is an open subset of $C_K$ with the
+induced topology and sheaf of regular functions. A morphism of such is a
+continuous map such that regular functions pull back to regular functions.
+\item \textbf{Proposition 6.7:}\indexThm{I.6.7} Every nonsigular
+quasi-projective curve is isomorphic to an abstract nonsingular curve.
+\item \textbf{Theorem 6.9:}\indexThm{I.6.9} $C_K$ is isomorphic to a nonsingular
+projective curve.
+\item \textbf{Corollary 6.10:}\indexThm{I.6.10} Every abstract nonsingular curve
+is isomorphic to a quasi-projective curve. Every nonsingular quasi-projective
+curve is isomorphic to an open subset of a nonsingular projective curve.
+\item \textbf{Corollary 6.11:}\indexThm{I.6.11} Every curve is birationally
+equivalent to a nonsingular projective curve.
+\item \textbf{Corollary 6.12:}\indexThm{I.6.12} The following categories are
+equivalent:
+\begin{enumerate}\squishlist
+\item[(i)] Nonsingular projective curves and \emph{dominant morphisms};
+\item[(ii)] Quasi-projective curves and \emph{dominant rational maps};
+\item[(iii)] function fields of dimension 1 over $k$ and $k$-homomorphisms.
+\end{enumerate}
+\item \textbf{Proposition 6.8:}\indexThm{I.6.8} Let $X$ be a nonsingular curve,
+$p\in X$, let $Y$ be a projective variety, and let $\phi:X-\{p\}\to Y$ be a
+morphism. Then there is a unique extension of $\phi$ to a morphism $X\to Y$.
+{\small (This fails if $Y$ is not projective, or if $\dim X>1$.)}
+\item Using proposition 6.8, one can show that every automorphism of $\PP^1$ is
+in $\PGL(1)$.
+\end{itemise}
+\section*{Hartshorne I.7 --- Intersections in Projective Space}
+\index{Hartshorne!I.7: Intersections in Projective Space}
+\section*{Hartshorne II.1 --- Sheaves}
+\index{Hartshorne!II.1: Sheaves}
+\begin{itemise}
+\item A \Index{presheaf} on $X$ is a contravariant functor from the category of
+open subsets of $X$ to abelian groups. There is some contention (Bjorn) as to
+whether to require $\emptyset\mapsto0$. It's a sheaf if:
+\begin{enumerate}\squishlist
+\item[(3)] If $U$ is open with open cover $\{V_i\}$, and $s\in\scrF(U)$ has $s|_{V_i}=0$ for all $i$, then $s=0$.
+\item[(4)] If $s_i\in\scrF(V_i)$ agree on overlaps, then they glue (uniquely).
+\end{enumerate}
+%\item A presheaf is a \Index{sheaf} if ``being zero can be determined using an
+%open cover'' and if ``gluing sections is possible''.
+\item A morphism of sheaves is an isomorphism iff it is an isomorphism on the
+stalks.
+\item The presheaf kernel, cokernel and image are exactly as one would hope.
+\item Given a presheaf $\scrF$ there is a universal morphism $\scrF\to\scrF^+$
+into a sheaf $\scrF^+$ called the \Index{sheafification}. $\scrF$ and $\scrF^+$
+have the same stalks. The sections of $\scrF^+(U)$ can be viewed as sections of
+$\cup_{p\in U} \scrF_p\downarrow U$ which are locally induced by sections of
+$\scrF$. If $\scrF$ is a sub-presheaf of a sheaf $\scrG$, then
+its sheafification is the intersection of all subsheaves of $\scrG$ containing
+$\scrF$. Any presheaf with (3) embeds in its sheaf of discontinuous sections,
+explaining the initial definition.
+\item Given a morphism of sheaves $\scrF\to\scrG$, the kernel is a sheaf. The
+image need not be a sheaf, so we define the \Index{sheaf image} to be the
+smallest subsheaf of $\scrG$ containing the presheaf image of $\scrF$. We are
+thus already equipped to discuss exact sequences of sheaves, by demanding that
+kernel equals \emph{sheaf} image.
+\item If $\scrF'\subset\scrF$ is an inclusion of sheaves, the \Index{quotient sheaf} $\scrF/\scrF'$ is defined to be the sheafification of the quotient presheaf. The quotient presheaf has (3) but not (4), as if $[f_i]\in\scrF(V_i)/\scrF'(V_i)$ agree on $V_i\cap V_j$, this only means that they $f_i-f_j\in \scrF'(V_i\cap V_j)$, and this element may not extend to $\scrF'(V_i\cup V_j)$.
+
+\INDENT Sections of $(\scrF/\scrF')(U)$ are equivalence classes of collections of sections of the presheaf on coverings of $U$ which agree on overlaps.
+\item A sequence of sheaves is \Index{exact} \Iff it is exact on the stalks.
 \end{itemise}
 \printindex
 \end{document}
