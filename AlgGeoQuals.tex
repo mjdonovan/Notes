@@ -30,9 +30,17 @@
 
 
 \makeindex
+\newcommand{\indexThmCode}{}
 \newcommand{\INDENT}{\textbf{}\hspace{4mm}}
 \newcommand{\Index}[1]{\index{#1}#1}
 \newcommand{\indexThm}[1]{\index{Hartshorne!Theorems, etc.!#1}}
+\newcommand{\Entry}[3][notcustom]{\Bullet
+\ifthenelse{\equal{#1}{}}{}
+{
+\ifthenelse{\equal{#1}{notcustom}}{\index{#2}}{\index{#1}}
+}
+ \textbf{#2:}&#3}
+
 
 \begin{document}
 \section*{Hartshorne I.1 --- Affine Varieties}
@@ -44,11 +52,12 @@ irreducible and dense.\index{dense}
 \item For $\fraka\subset A$, $I(Z(\fraka))=\sqrt\fraka$, by the
 Nullstellensatz.\index{Nullstellensatz} $Z(I(Y))=\overline Y$.
 \item Closed sets correspond to radical\index{radical} ideals. A closed set is
-irreducible\index{irreducible} iff it corresponds to a prime\index{prime}
-ideals.
+irreducible\index{irreducible} \Iff it corresponds to a prime\index{prime}
+ideal. (A topological space is irreducible if it is not the union of two proper
+closed subsets).
 \item Affine varieties\index{variety} correspond to finitely generated
 $k$-algebras which are domains.
-\item In a noetherian\index{noetherian} topological space, closed sets are
+\item In a noetherian\index{noetherian!space} topological space, closed sets are
 uniquely finite unions of irreducible ones.
 \item The dimension\index{dimension} of a space is one less than the length of
 the longest chain of distinct irreducible closed subsets. This coincides with
@@ -66,13 +75,13 @@ as a union of hypersurfaces $Z(f_i)$. Any maximal closed irreducible subset of
 $Z(f)$ has codimension one in $\Spec A$ --- the only larger irreducible is all
 of $A$.
 \item \textbf{Proposition 1.12A:}\indexThm{I.1.12A} A noetherian domain $A$ is a
-UFD iff every prime ideal of height one is principal.
+UFD \Iff every prime ideal of height one is principal.
 
-\INDENT\emph{Interpretation} --- a noetherian domain $A$ is a UFD iff every
+\INDENT\emph{Interpretation} --- a noetherian domain $A$ is a UFD \Iff every
 maximal proper closed irreducible subset of $\Spec A$ is a hypersurface, the
 zero set of one element.
 
-\item A variety $Y\in \A^n$ has dimension $n-1$ iff it is a
+\item A variety $Y\in \A^n$ has dimension $n-1$ \Iff it is a
 \Index{hypersurface}: $Z(f)$ for some nonconstant irreducible $f$. The same
 holds for a projective variety in $\PP^n$ of dimension $n-1$.
 \end{itemise}
@@ -104,11 +113,11 @@ $\PP^1\times\PP^1\to\PP^3$.
 \item A function $f:Y\to k$ is regular\index{regular function} if it is locally
 a quotient of (homogeneous in projective case) polynomials of the same degree
 with nonvanishing denominator. A regular function is continuous.
-\item A morphism\index{morphism!of varieties} of varieties is a continuous map $f:X\to Y$ such that
-if $\phi:V\to k$ is a regular function for open $V\subset Y$, then $\phi\circ f$
-is regular of $f^{-1}(V)$. That is, $f$ must map the sheaf $\calO_Y$ of
-\Index{regular functions} on $Y$ into $\calO_X$ (as subsheaves of the sheaves of
-discontinuous functions).
+\item A morphism\index{morphism!of varieties} of varieties is a continuous map
+$f:X\to Y$ such that if $\phi:V\to k$ is a regular function for open $V\subset
+Y$, then $\phi\circ f$ is regular of $f^{-1}(V)$. That is, $f$ must map the
+sheaf $\calO_Y$ of \Index{regular functions} on $Y$ into $\calO_X$ (as
+subsheaves of the sheaves of discontinuous functions).
 \item For $p\in Y$, have the \Index{local ring} $\calO_{p,Y}$, the stalk of
 $\calO_Y$ at $p$. The \Index{function field} is the local ring at the generic
 point --- here we should define it to be the direct limit of the $\calO_Y(U)$
@@ -304,7 +313,7 @@ Any subpresheaf of a sheaf has (3). Any presheaf maps to the sheaf of its
 which violate (3).
 %\item A presheaf is a \Index{sheaf} if ``being zero can be determined using an
 %open cover'' and if ``gluing sections is possible''.
-\item A morphism of sheaves is an isomorphism iff it is an isomorphism on the
+\item A morphism of sheaves is an isomorphism \Iff it is an isomorphism on the
 stalks.
 \item The presheaf kernel, cokernel and image are exactly as one would hope.
 \item Given a presheaf $\scrF$ there is a universal morphism $\scrF\to\scrF^+$
@@ -354,9 +363,9 @@ in the category of sheaves on $X$.
 \item \textbf{\Index{extension by zero}:} Let $i:Z\to X$ be the inclusion of a
 closed subset, and $j:U\to X$ be the inclusion of its complement.
 \begin{itemize}\squishlist
-\item \textbf{\Index{from sheaf on closed subset}:} Suppose $\scrF$ is a sheaf
+\item \textbf{{from sheaf on closed subset}:} Suppose $\scrF$ is a sheaf
 on $Z$. Then its extension by zero is simply $i_*\scrF$.
-\item \textbf{\Index{from sheaf on open subset}:} Suppose $\scrF$ is a sheaf on
+\item \textbf{{from sheaf on open subset}:} Suppose $\scrF$ is a sheaf on
 $U$. Then its extension by zero is the sheafification $j_!\scrF$ of
 $j_!^-\!\scrF\in\Presheaves_X$, where
 $j^-_!\!\scrF(V):=
@@ -371,6 +380,8 @@ $Z$. In this sense, there are fewer sections of $j_!\scrF$ than of $\scrF$.
 $\shfHom(\scrF,\scrG)\in\Sheaves_X$ by $U\mapsto \Hom(\scrF|_U,\scrG|_U)$.
 \item The functor $\Gamma(U,\DASH)$ is left exact from $\Sheaves_X\to \AbGp$. It
 is exact on short exact sequences where the kernel is \Index{flasque}.
+\item The \Index{support} of a section of a sheaf is the set of points at which
+it is nonzero in the stalk. This is a \emph{closed} set!
 \end{itemise}
 \section*{Hartshorne II.2 --- Schemes}
 \index{Hartshorne!II.2: Schemes}
@@ -420,6 +431,126 @@ closed field. There is a natural fully faithful functor
 $\Varieties(k)\to\Schemes(k)$. For any variety $V$, its topological space is
 homeomorphic to the subspace of closed points of $t(V)$, and its sheaf of
 regular functions is obtained by restricting the structure sheaf of $t(V)$.
+
+\textbf{Proposition 4.10:}\indexThm{II.4.10} The image of $t$ is exactly the set
+of quasi-projective integral schemes over $k$. The image of the set of
+projective varieties is the set of integral projective schemes. If $V$ is a
+projective variety with homogeneous coordinate ring $S$, then $t(V)\cong \Proj
+S$.
+\item A scheme is reduced\index{reduced scheme} if $\calO_X(U)$ has no nilpotent
+elements for every open subset $U$, or equivalently if $\calO_{X,P}$ has no
+nilpotent elements for every $P\in X$. Given a scheme $X$, there is a universal
+reduced scheme $X_\textup{red}$ mapping to $X$. The map is a homeomorphism on
+spaces.
+\item The functor $\Spec$ is right adjoint to global sections, 
+$\Gamma:\Schemes\longleftrightarrow\Rings^\op:\Spec$, i.e.:
+\[\Hom_{\Schemes}(X,\Spec A)\overset{\cong}{\to}
+\Hom_{\Rings}(A,\Gamma(\calO_X)).\]
+In particular $\Spec\Z$ is terminal in $\Schemes$.
+\item To give a map $\Spec K\to X$, it is equivalent to choose a point of $x$
+and specify an inclusion $k(x)\to K$, the \Index{residue field}
+$\calO_x/\frakm_x$ at $x$.% Thus the $K$-points\index{K-points} of $X$, the
+%morphisms $\Spec K\to X$, capture which points can be defined over $K$.
+\item For $x\in X$, define the Zariski \Index{tangent space} at $x$ to be the
+$k(x)$-vector space $T_x$ dual to $\frakm_x/\frakm_x^2$. Let
+$D=k[\epsilon]/\epsilon^2$ be the ring of \Index{dual numbers} over $k$. If $X$
+is a scheme over $k$, then to give a $k$-morphism $\Spec D\to X$ is to give a
+point $x\in X$ \Index{rational} over $k$ (i.e.\ $k(x)=k$), and an element of
+$T_x$. In particular, rational points map to rational points under $k$-maps.
+\item Every nonempty irreducible closed subset $Z$ of $X$ has a unique
+\Index{generic point}, a point $\zeta$ such that $\{\zeta\}^-=Z$.
+\item A scheme is called \Index{quasi-compact} if its underlying topological
+space is so. Any affine scheme is quasi-compact.
+\item A space is \Index{noetherian} \Iff all of its closed subsets are
+quasi-compact. The spectrum of a noetherian ring is a noetherian topological
+space.
+\item $\Proj S$ is empty \Iff $\Rad(S)\supseteq S_+$. Given a map $\phi:S\to T$
+of graded rings, we only get a map $f:U\to \Proj S$, where $U$ is the set of
+homogeneous prime ideals in $\Proj T$ whose preimage is not all of $S_+$. $f$
+only depends of the $\phi_d$ for $d\gg0$, so can be an isomorphism even if
+$\phi$ is not.
+\item Suppose $\phi:A\to B$ corresponds to $f:Y=\Spec B\to \Spec A=X$. Then:
+
+\Bullet $\phi$ is injective \Iff $f^\#:\calO_X\to f_*\calO_Y$ is injective, in
+which case $f$ is dominant.
+
+\Bullet $\phi$ is surjective \Iff $f$ is a homeomorphism onto a closed subset
+and $f^\#$ is surjective.
+\end{itemise}
+\section*{Hartshorne II.3 --- First Properties of Schemes}
+\index{Hartshorne!II.2: First Properties}
+\begin{itemise}
+\item A scheme $X$ is:\\
+\begin{tabular}{p{.2\textwidth}p{.7\textwidth}}
+\Entry{connected}{if its topological space is connected.}\\
+\Entry{reduced}{if none of the rings $\calO_X(U)$ (equiv.\ $\calO_{X,p}$) have
+nilpotent elements.}\\
+\Entry{integral}{if $\calO_X(U)$ is a domain for all open $U\subseteq X$.\\&
+\Iff it is reduced and irreducible.}\\
+\Entry[locally noetherian]{locally noeth.}{if it can be covered by open affine
+$\Spec A_i$ with $A_i$ noetherian rings.\\{\ \ \small(a local property)}&
+\Iff whenever $\spec A$ is an open subscheme of $X$, $A$ is
+noetherian\indexThm{II.3.2} \textbf{(3.2)}}\\
+\Entry{noetherian}{if it is locally noetherian and quasi-compact.}
+\end{tabular}
+%\begin{itemize}\squishlist
+%\item \makebox[3cm][l]{\textbf{\Index{connected}:}}
+%if its topological space is connected.
+%\item \makebox[3cm][l]{\textbf{\Index{irreducible}:}}
+%if its topological space is irreducible.
+%\item \makebox[3cm][l]{\textbf{\Index{reduced}:}}
+%if none of the rings $\calO_X(U)$ (equiv.\ $\calO_{X,p}$) have nilpotent
+%elements.
+%\item \makebox[3cm][l]{\textbf{\Index{integral}:}}
+%if $\calO_X(U)$ is a domain for all open $U\subseteq X$.
+%
+%\makebox[3cm][l]{\textbf{}}
+%\Iff it is reduced and irreducible.
+%\item \makebox[3cm][l]{\textbf{\Index{locally noeth.}:}}
+%if it can be covered by open affine $\Spec A_i$ with $A_i$ noetherian rings.
+%
+%\makebox[3cm][l]{\textbf{}}
+%\Iff whenever $\spec A$ is an open subscheme of $X$, $A$ is
+%noetherian\indexThm{II.3.2} \textbf{(3.2)}
+%\item \makebox[3cm][l]{\textbf{\Index{noetherian}:}}
+%if it is locally noetherian and quasi-compact.
+%\end{itemize}
+\item A morphism $X\to Y$ of schemes is:\\
+\begin{tabular}{p{.2\textwidth}p{.7\textwidth}}
+\Entry{locally of finite type}{if $Y$ can be covered by open affine $V_i=\spec
+B_i$ such that each $f^{-1}(V_i)$ can be covered by $\spec A_{ij}$ making
+$A_{ij}$ a finitely generated $B_i$-algebra.}\\
+\Entry{of finite type}{if only finitely many $A_{ij}$ are required for each $i$
+in the previous.}\\
+\Entry{quasi-compact}{if $Y$ can be covered with open affines each with compact
+preimage.}\\
+\Entry{finite}{if $Y$ can be covered by open affine $V_i=\spec B_i$ such that
+each $f^{-1}(V_i)$ is affine equal to $\spec A_{i}$, making $A_{ij}$ a finitely
+generated $B_i$-module.\\&A finite morphism is closed, and quasi-compact.}
+\end{tabular}
+All four of these properties are local on the base --- the requirements end up
+satisfied for \emph{any} open cover $V_i$.
+\item An \Index{open immersion} is simply the inclusion of an open subscheme.
+\item A \Index{closed immersion} is a morphism $f:Y\to X$ such that $f$ is a
+homeomorphism onto a closed subset of $X$, and $f^\#:\calO_X\to f_*\calO_Y$ is
+surjective. Note that the surjectivity condition simply says that any function
+on $Y$ should lift to a function on $X$ \emph{locally}.
+
+\INDENT A \Index{closed subscheme} of a scheme $X$ is an equivalence class of
+closed immersions, where closed immersions $f_i:Y_i\to X$ are equivalent if
+there is an isomorphism $Y_1\to Y_2$ making the triangle commute.
+
+\INDENT For $X$ affine, the closed subsets are the $V(\fraka)$. There is a
+different closed subscheme structure on $V(\fraka)$ for each $\fraka'$ with
+$\sqrt{\fraka}=\sqrt{\fraka'}$. In fact, every closed subscheme arises in this
+way.
+\item Given a scheme $X$ and closed subset $Y$, there is a `smallest' closed
+subscheme structure for $Y$, the \index{closed subscheme!reduced induced}reduced
+induced closed subscheme structure. We construct this when $X$ is affine and
+glue. If $X=\Spec A$ and $Y=V(\fraka)$, take $\Spec (X/\sqrt\fraka)\to\Spec X$.
+{\small (Note that $\sqrt\fraka$ is the largest ideal available, so there are no
+redundant functions in the structure. Allowing a function in
+$\sqrt\fraka\setminus\fraka$ allows a nilpotent section.)}
 \end{itemise}
 \printindex
 \end{document}
