@@ -95,7 +95,7 @@ relevant to the time period from $(i-1)$ to $i$. More on this later.
 population, a person in $P_{i-1}$ can be mapped to zero under $T_{i}$, in which
 case they must have \emph{died} during the period $(i-1)$ to $i$. We will say
 that they \emph{died at $P_{i-1}$}, as $P_{i-1}$ was the last place they were
-seen alive. We will also say that their time of death was $i-1$.
+seen alive. We will also say that their time of death was $(i-1)$.
 
 \Bullet \textbf{Birth:} Similarly, a person $p\in P_i$ need not be in the image
 of $T_{i}$, in which case they must have been \emph{born} between $(i-1)$ and
@@ -109,10 +109,10 @@ died at $P_i$ was ``seen at $i-j+1$ times''. This is how we measure age.
 \emph{immortals}.
 
 \Bullet \textbf{Co-immortals:} We will, however, assume that only the zero
-person $p\in P_i$ is in the image of $T_{j}\cdots T_i$ for all $j\leq i$. That
-is, there are no (nonzero) \emph{co-immortals}: every nonzero person must have
-been born some finite time ago. That is to say that the inverse limit of the
-$P_i$ is zero.
+person $p\in P_i$ is in the image of $T_{j}\circ\cdots\circ T_i$ for all $j\leq
+i$. That is, there are no (nonzero) \emph{co-immortals}: every nonzero person
+must have been born some finite time ago. That is to say that the inverse limit
+of the $P_i$ is zero.
 
 \Bullet \textbf{Birth certificates:} If a person $p\in P_{i}$ was born on $P_i$,
 they report this to the government by submitting a nonzero birth cirtificate
@@ -139,28 +139,55 @@ certificates, and, of course, all birth certificates map to zero under the
 
 In particular, we have a collection of exact triangles, consisting of the
 straight arrows in the following:
+%\[\xymatrix@!0@C=1.1cm@R=1.28cm{
+%\makebox[0cm][r]{$\cdots$\ \ }
+%P_{i-1}\ar[rrrr]^{T_{i  }}%^{\text{$(i-1)^\text{st}$ period}}
+%&&&&\ar[dll]_{B_{i  }}
+%\ar@{..>>}[ddl]_{b_{i  }}
+%P_{i  }\ar[rrrr]^{T_{i+1}}%^{\text{$ i   ^\text{th}$ period}}
+%&&&&\ar[dll]_{B_{i+1}}
+%\ar@{..>>}[ddl]_{b_{i+1}}
+%P_{i+1}\ar[rrrr]^{T_{i+2}}%^{\text{$(i+1)^\text{st}$ period}}
+%&&&&\ar[dll]_{B_{i+2}}
+%\ar@{..>>}[ddl]_{b_{i+2}}
+%P_{i+2}\makebox[0cm][l]{\ \ $\cdots$}\\
+%&&C_{i  }\ar[ull]_{M_{i  }}\ar@{~>}[dl]^\mu&&
+%&&C_{i+1}\ar[ull]_{M_{i+1}}\ar@{~>}[dl]^\mu&&
+%&&C_{i+2}\ar[ull]_{M_{i+2}}\ar@{~>}[dl]^\mu&&
+%\\
+%&\coim(M_{i  })\ar@{~>}[d]\ar@{_{(}..>}[uul]_{m_{i  }}
+%&&\im(B_{i  })\ar@{~>}[ul]^\beta&
+%&\coim(M_{i+1})\ar@{~>}[d]\ar@{_{(}..>}[uul]_{m_{i+1}}
+%&&\im(B_{i+1})\ar@{~>}[ul]^\beta&
+%&\coim(M_{i+2})\ar@{~>}[d]\ar@{_{(}..>}[uul]_{m_{i+2}}
+%&&\im(B_{i+2})\ar@{~>}[ul]^\beta&
+%\\
+%&0&&0\ar@{~>}[u]&
+%&0&&0\ar@{~>}[u]&
+%&0&&0\ar@{~>}[u]&
+%}\]
 \[\xymatrix@!0@C=1.1cm@R=1.28cm{
 \makebox[0cm][r]{$\cdots$\ \ }
-P_{i-1}\ar[rrrr]_{T_{i  }}^{\text{$(i-1)^\text{st}$ period}}
+P_{i-2}\ar[rrrr]^{T_{i-1}}%^{\text{$(i-2)^\text{st}$ period}}
+&&&&\ar[dll]_{B_{i-1}}
+\ar@{..>>}[ddl]_{b_{i-1}}
+P_{i-1}\ar[rrrr]^{T_{i  }}%^{\text{$ i-1 ^\text{th}$ period}}
 &&&&\ar[dll]_{B_{i  }}
 \ar@{..>>}[ddl]_{b_{i  }}
-P_{i  }\ar[rrrr]_{T_{i+1}}^{\text{$ i   ^\text{th}$ period}}
+P_{i  }\ar[rrrr]^{T_{i+1}}%^{\text{$(i  )^\text{st}$ period}}
 &&&&\ar[dll]_{B_{i+1}}
 \ar@{..>>}[ddl]_{b_{i+1}}
-P_{i+1}\ar[rrrr]_{T_{i+2}}^{\text{$(i+1)^\text{st}$ period}}
-&&&&\ar[dll]_{B_{i+2}}
-\ar@{..>>}[ddl]_{b_{i+2}}
-P_{i+2}\makebox[0cm][l]{\ \ $\cdots$}\\
-&&C_{i  }\ar[ull]_{M_{i  }}\ar@{~>}[dl]^\pi&&
-&&C_{i+1}\ar[ull]_{M_{i+1}}\ar@{~>}[dl]^\pi&&
-&&C_{i+2}\ar[ull]_{M_{i+2}}\ar@{~>}[dl]^\pi&&
+P_{i+1}\makebox[0cm][l]{\ \ $\cdots$}\\
+&&C_{i-1}\ar[ull]_{M_{i-1}}\ar@{~>}[dl]^\mu&&
+&&C_{i  }\ar[ull]_{M_{i  }}\ar@{~>}[dl]^\mu&&
+&&C_{i+1}\ar[ull]_{M_{i+1}}\ar@{~>}[dl]^\mu&&
 \\
+&\coim(M_{i-1})\ar@{~>}[d]\ar@{_{(}..>}[uul]_{m_{i-1}}
+&&\im(B_{i-1})\ar@{~>}[ul]^\beta&
 &\coim(M_{i  })\ar@{~>}[d]\ar@{_{(}..>}[uul]_{m_{i  }}
 &&\im(B_{i  })\ar@{~>}[ul]^\beta&
 &\coim(M_{i+1})\ar@{~>}[d]\ar@{_{(}..>}[uul]_{m_{i+1}}
 &&\im(B_{i+1})\ar@{~>}[ul]^\beta&
-&\coim(M_{i+2})\ar@{~>}[d]\ar@{_{(}..>}[uul]_{m_{i+2}}
-&&\im(B_{i+2})\ar@{~>}[ul]^\beta&
 \\
 &0&&0\ar@{~>}[u]&
 &0&&0\ar@{~>}[u]&
@@ -173,7 +200,8 @@ and death certificates. However, there are the above short exact sequences,
 drawn with wavy arrows. Here, $\im(B_{i})$ is the subgroup consisting of birth
 certificates, and the quotient group
 $\coim(M_{i}):=C_i/\ker(M_i)\cong\coker(B_i)$ consists of the death
-certificates. Moreover, the birth and death certificate maps factorise as shown.
+certificates. Moreover, the birth and death certificate maps factorise as shown
+with dotted arrows.
 
 \Bullet \textbf{A spectral sequence:} We can form a spectral sequence out of
 these exact triangles in the usual way, whose terms are defined as follows (for
@@ -192,13 +220,13 @@ B_{i}^{r-1}:=&\left.b_i(\ker(P_i\to P_{i+r-1}))\right.\\
 or before $P_{i+r-2}$}\right\}.\\
 =&\left\{\text{birth certificates $b_i(p)$ for people $p\in P_i$ seen at $r-1$
 or fewer times}\right\}.\\
-E_{i}^{r}:=&\left.\pi^{-1}(Z_{i}^{r-1})/\beta(B_{i}^{r-1}).\right.
+E_{i}^{r}:=&\left.\mu^{-1}(Z_{i}^{r-1})/\beta(B_{i}^{r-1}).\right.
 \end{alignat*}
 Note also that in the quotient $\im(B_i)/B_i^{r-1}$, the birth certificates that
 remain are those of people who were seen at $r$ or more times.
 
 \Bullet \textbf{Differentials:} The differential $d_r$ on $E^{r}$ takes a
-certificate $c\in\pi^{-1}(Z_i^{r-1})$, and maps it to $M_i(c)\in P_{i-1}$, pulls
+certificate $c\in\mu^{-1}(Z_i^{r-1})$, and maps it to $M_i(c)\in P_{i-1}$, pulls
 it back to a person $p\in P_{i-r}$, and takes their birth certificate
 $B_{i-r}(p)$. The only way this certificate can be nonzero in $E_r$ is when $p$
 was actually born on $P_{i-r}$. That is, when $p$ was seen at exactly $r$ times.
@@ -208,8 +236,8 @@ times. These certificates lie in $B_{i-r}^{r-1}$.
 
 Surveying the life of our chosen pullback $p$, we see that their death
 certificate $c$ maps to their birth certificate $B_{i-r}(p)$ under $d_r$. Taking
-homology to get from $E_*^r=\pi^{-1}(Z_{i}^{r-1})/\beta(B_{i}^{r-1})$ to
-$E_*^{r+1}=\pi^{-1}(Z_{i}^{r})/\beta(B_{i}^{r})$ has the effect of
+homology to get from $E_*^r=\mu^{-1}(Z_{i}^{r-1})/\beta(B_{i}^{r-1})$ to
+$E_*^{r+1}=\mu^{-1}(Z_{i}^{r})/\beta(B_{i}^{r})$ has the effect of
 simultaneously annihilating both the birth and the death certificate of every
 person seen at exactly $r$ times simultaneously.
 % does not die before the end of the $(i-2)^\text{nd}$ period, i.e.\ iff 
@@ -271,8 +299,8 @@ certificates of the immortals.
 %certificate. Taking homology groups in order to pass from $E^{r-1}$ to $E^r$
 %then kills both the birth and death certificate of this element.
 %Next we should interpret the group 
-%$E_i^r$ is a quotient of the group $\pi^{-1}(Z_i^r)$. Now the groups
-%$\pi^{-1}(Z_i^r)$ are a decreasing series of subgroups of $C_i$, and this
+%$E_i^r$ is a quotient of the group $\mu^{-1}(Z_i^r)$. Now the groups
+%$\mu^{-1}(Z_i^r)$ are a decreasing series of subgroups of $C_i$, and this
 %decrease corresponds to the fact that in passing from , a group which decreases
 %as $r$ increases. This group consits of (all birth cirtificates) and of death
 %certificates for people at least $r$ years old --- a group --- as we run each
@@ -281,6 +309,24 @@ certificates of the immortals.
 % differentials $d_r:E_i^r\to E_{i-r}^r$. Of course, the `formula' for $d_r$ is
 %$d_r[x]=[b_i((T_{i-1 }\circ\cdots\circ T_{i-r})^{-1}m_i(x))]$. If this formula
 %gives a nonzero result, then it takes a
+
+\myheading{Discussion of the EHP spectral sequence}
+For every integer $p$, at the prime 2, there is a fibre sequence: $\xymatrix{S^p\ar[r]^e&\Omega S^{p+1}\ar[r]^h& \Omega S^{2p+1}}$. Stringing these together for $0\leq p<M$, we have a diagram of fibrations:
+\[\xymatrix{
+\textup{pt}\ar[r]&\Omega S^1\ar[d]\ar[r]&\Omega^2 S^2\ar[d]\ar[r]&\Omega^3 S^3\ar[d]\ar@{.>}[rr]&&\Omega^{p+1}S^{p+1}\ar[d]\ar@{.>}[rr]&&\Omega^{M}S^{M}\ar[d]\\
+&\Omega S^1&\Omega^2 S^3& \Omega^3S^5&&\Omega^{p+1}S^{2p+1}&&\Omega^{M}S^{2M-1}
+}\]
+Applying $\pi_*$ yields an exact couple, and we obtain a spectral sequence. This spectral sequence has exactly $M$ nonzero columns ($0\leq p <M$), and converges to the stem $\pi_{p+q}(\Omega^{M}S^{M})$ of $S^{M}$. Now:
+\[E_{pq}^1=\pi_{p+q}(\Omega^{p+1}S^{2p+1})=\pi_q(\Omega^{2p+1}S^{2p+1})\text{ which is stable for $q< 2p$}.\]
+Moreover:
+\[
+\frac{\im\left(e^{M-p-1}:\pi_{p+q}(\Omega^{p+1}S^{p+1})\to\pi_{p+q}(\Omega^MS^M)\right)}
+{\im\left(\phantom{e^{M-p-1}:}\makebox[0cm][r]{$e^{M-p}\,\ :$}
+\,\makebox[0cm][l]{$\pi_{p+q}(\Omega^{p}S^{p})$}\phantom{\pi_{p+q}(\Omega^{p+1}S^{p+1})}
+\to\pi_{p+q}(\Omega^MS^M)\right)}\simeq E_{pq}^\infty\text{\ \ via \ }e^{M-p-1}(\sigma)\mapsto h_*\sigma.\]%\text{ for }\sigma\in\pi_{p+q}(\Omega^{p+1}S^{p+1}) \]
+Thus $E^\infty_{pq}$ records those classes in the $(p+q)$-stem of $S^M$ which are born on $S^{p+1}$. Moreover, the way such a class in recorded on the $E^\infty$ page is by its Hopf invariant. Thus, if a class $\sigma\in\pi_{p+q}(\Omega^{p+1}S^{p+1})$ is the birthplace of an element in the $(p+q)$-stem of $S^M$, it is recorded as $h_*\sigma\in\pi_q({\Omega^{2p+1}S^{2p+1}})$ in $E^\infty_{pq}$.
+
+When $q$ is $0$, $h_*\sigma$ is an element of the stable $0$-stem, and thus a genuine integer, which happily equals the old-fashioned Hopf invariant. More generally, when $q\leq 2p-2$, $h_*\sigma$ lands in the stable $q$-stem, so terms on the $E^\infty$ page which lie below a line of slope two are recorded by a `Hopf invariant' which lies in a stable homotopy group of spheres.
 
 {\color{red}Discussion with Michael Andrews:}
 There's nothing wrong with having a diagram like:
@@ -306,7 +352,7 @@ That is, if you have an exact couple $A\to A\to E\to A$ of graded modules, and
 each map is graded with a shift, you can still form an awesome diagram with
 birth and death certificate groups all over it.
 
-What's interesting here is that the top row (and thus the abutment) is split
+One interesting thing here is that the top row (and thus the abutment) is split
 into three separate parts, while the body of the spectral sequence is not so
 clearly split up.
 
@@ -345,7 +391,6 @@ Here there are no immortals, and the inverse limit is $H^*(X)$. The filtration
 of $H^*(X)$ is by the kernels of the maps $H^*(X)\to H^*(X_i)$. Of course, these
 two filtrations coincide, by exactness in the long exact sequence for the pair
 $(X,X_i)$.
-
 \myheading{The Spectral Sequence Associated with a Filtered Chain Complex}
 \newcommand{\theexp}[4]{\raisebox{-.1cm}[.5cm][0cm]
 {\mbox{$\begin{array}{c}H_{#1}(\frac{F_{#2}}{F_{#3}}) \\
@@ -421,7 +466,7 @@ Z_{pq}^r:=&\left\{x\in h_{p+q}(E^p,E^{p-1})\ \middle|\ \partial x\in\im(i^{r})\r
 B_{pq}^r:=&\left.\rho(\ker(i^r))\right.\\
 =&\left\{\rho(y)\ \middle|\ y\in h_{p+q}(E^p),\ i^r(y)=0\in h_{p+q}(E^{p+r})\right\}\\
 =&\left\{\text{restrictions $\rho(y)$ of classes $y\in h_{p+q}(E^p)$ which are nullhomologous in $E^{p+r}$}\right\}.\\
-E_{pq}^{r+1}:=&\left.Z_{pq}^r/B_{pq}^r.\right.\textbf{ (is this $E_{pq}^r$?)}
+E_{pq}^{r+1}:=&\left.Z_{pq}^r/B_{pq}^r.\right.%\textbf{ (is this $E_{pq}^r$?)}
 \end{alignat*}
 As each triangle is exact, $B_{pq}^r\subseteq E_{pq}^r$ for all $p,q,r$, so that the definition of $E_{pq}^{r+1}$ makes sense.
 Note that $Z_{pq}^0=h_{p+q}(E^p,E^{p-1})$ and $B_{pq}^0=0$, so that $E_{pq}^1=h_{p+q}(E^p,E^{p-1})$.
@@ -485,27 +530,6 @@ H^*(\PP(\xi))\ar@{->>}[r]&H^*(F)\ar[r]^{0\ \ \ \ \ }&H^{*+1}(\PP(\xi),F)&E_\inft
 Moreover, this shows that $H^*(F)$ consists only of permanent cycles, so the Serre Spectral Sequence collapses at $E_2$. Thus the $E_\infty$ is a free $H^*(B)$-module, compatibly with the filtering on $B$, so that $H^*(\PP(\xi))$ is a free $H^*(B)$-module.
 
 %To see this, c We should check first that the coefficient system $H^*(\PP(\xi)_x)$ on $B$ is trivial. It is enough to show that $\pi_1(B)$ acts trivially on $H^2(\PP(\xi))$, as each coefficient group is generated by $H^2$.
-
-
-
-\myheading{Discussion of the EHP spectral sequence}
-For every integer $p$, at the prime 2, there is a fibre sequence: $\xymatrix{S^p\ar[r]^e&\Omega S^{p+1}\ar[r]^h& \Omega S^{2p+1}}$. Stringing these together for $0\leq p<M$, we have a diagram of fibrations:
-\[\xymatrix{
-\textup{pt}\ar[r]&\Omega S^1\ar[d]\ar[r]&\Omega^2 S^2\ar[d]\ar[r]&\Omega^3 S^3\ar[d]\ar@{.>}[rr]&&\Omega^{p+1}S^{p+1}\ar[d]\ar@{.>}[rr]&&\Omega^{M}S^{M}\ar[d]\\
-&\Omega S^1&\Omega^2 S^3& \Omega^3S^5&&\Omega^{p+1}S^{2p+1}&&\Omega^{M}S^{2M-1}
-}\]
-Applying $\pi_*$ yields an exact couple, and we obtain a spectral sequence. This spectral sequence has exactly $M$ nonzero columns ($0\leq p <M$), and converges to the stem $\pi_{p+q}(\Omega^{M}S^{M})$ of $S^{M}$. Now:
-\[E_{pq}^1=\pi_{p+q}(\Omega^{p+1}S^{2p+1})=\pi_q(\Omega^{2p+1}S^{2p+1})\text{ which is stable for $q< 2p$}.\]
-Moreover:
-\[
-\frac{\im\left(e^{M-p-1}:\pi_{p+q}(\Omega^{p+1}S^{p+1})\to\pi_{p+q}(\Omega^MS^M)\right)}
-{\im\left(\phantom{e^{M-p-1}:}\makebox[0cm][r]{$e^{M-p}\,\ :$}
-\,\makebox[0cm][l]{$\pi_{p+q}(\Omega^{p}S^{p})$}\phantom{\pi_{p+q}(\Omega^{p+1}S^{p+1})}
-\to\pi_{p+q}(\Omega^MS^M)\right)}\simeq E_{pq}^\infty\text{\ \ via \ }e^{M-p-1}(\sigma)\mapsto h_*\sigma.\]%\text{ for }\sigma\in\pi_{p+q}(\Omega^{p+1}S^{p+1}) \]
-Thus $E^\infty_{pq}$ records those classes in the $(p+q)$-stem of $S^M$ which are born on $S^{p+1}$. Moreover, the way such a class in recorded on the $E^\infty$ page is by its Hopf invariant. Thus, if a class $\sigma\in\pi_{p+q}(\Omega^{p+1}S^{p+1})$ is the birthplace of an element in the $(p+q)$-stem of $S^M$, it is recorded as $h_*\sigma\in\pi_q({\Omega^{2p+1}S^{2p+1}})$ in $E^\infty_{pq}$.
-
-When $q$ is $0$, $h_*\sigma$ is an element of the stable $0$-stem, and thus a genuine integer, which happily equals the old-fashioned Hopf invariant. More generally, when $q\leq 2p-2$, $h_*\sigma$ lands in the stable $q$-stem, so terms on the $E^\infty$ page which lie below a line of slope two are recorded by a `Hopf invariant' which lies in a stable homotopy group of spheres.
-% isomorphism is given by $e^{M-p-1}(\sigma)\mapsto h_*\sigma$, when $\sigma$ is in the $(p+q)$-stem of $S^{p+1}$.
 
 
 
