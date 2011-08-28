@@ -4,44 +4,120 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \documentclass[11pt]{article}
 \input{../macros.tex}
+
+
+
+
+
+
+
+
+
+
 \begin{document}
-\hrule
 \begin{center}
-\newcommand{\Inputnum}{5}
-\newcommand{\pntxshift}[2]{2*#1-2*#2+.5}
-\newcommand{\pntyshift}[2]{1.5*#1-1.5*#2+.5}
+
+\newcommand{\Inputnum}{66}
+\newcommand{\gapinx}{2}
+\newcommand{\gapiny}{1}
+\newcommand{\pntxshift}[2]{\gapinx*#1-\gapinx*#2+.5}
+\newcommand{\pntyshift}[2]{\gapiny*#1-\gapiny*#2+.5}
 \newcommand{\pntx}[1]{\pntxshift{#1}{0}}
 \newcommand{\pnty}[1]{\pntyshift{#1}{0}}
 \newcommand{\pnt}[2]{(\pntx{#1},\pnty{#2})}
-\newcommand{\IFexceeds}[2]{\ifthenelse{\Inputnum>#1}{#2}{}}
-\newcommand{\IFexceedsELSE}[3]{\ifthenelse{\Inputnum>#1}{#2}{#3}}
-\newcommand{\MayPhan}[2]{\IFexceedsELSE{#1}{$#2$}{\phantom{$#2$}}}
+\newcommand{\exacttriangleheight}{1.2}
+\newcommand{\tbound}{2}
+\newcommand{\sbound}{4}
+\newcommand{\IFexceeds}[3][]{\ifthenelse{\Inputnum>#2}{#3}{#1}}
+\newcommand{\IFbetween}[4][]{\ifthenelse{\Inputnum>#2 \AND \Inputnum<#3}{#4}{#1}}
+\newcommand{\MayPhan}[2]{\IFexceeds[\phantom{#2}]{#1}{#2}}
+
+
 \begin{tikzpicture}
-    \path (\pntxshift{0}{1},\pnty{5}) node (ATerms0) {$\Omega^{0}S^{0}$};
+    \path (\pntxshift{0}{1},\pntyshift{\tbound}{-1}+\exacttriangleheight) node (ATerms0) {$\Omega^{0}S^{0}$};
     \foreach \x/\y/\z in {1/1/0,2/3/1,3/5/2,4/7/3,5/9/4,6/11/5,7/13/6}
-        {\path (\pntxshift{\x}{1},\pnty{5}) node (ATerms\x) {$\Omega^{\x}S^{\x}$};
-        \path (\pntxshift{\x}{1},\pnty{4}) node (ETerms\x) {$\Omega^{\x}S^{\y}$};
+        {
+\ifthenelse{\z<\sbound \OR \z=\sbound}{
+\path (\pntxshift{\x}{1},\pntyshift{\tbound}{-1}+\exacttriangleheight) node (ATerms\x) {$\Omega^{\x}S^{\x}$};
+        \path (\pntxshift{\x}{1},\pntyshift{\tbound}{-1}) node (ETerms\x) {$\Omega^{\x}S^{\y}$};
         \draw [->] (ATerms\x) edge node[left]{\tiny$h$} (ETerms\x);
         \draw [->] (ATerms\z) edge node[below]{\tiny$e$} (ATerms\x);
         \draw [->,dashed] (ETerms\x) edge node[right]{\tiny$p$} (ATerms\z);
-}
-    \foreach \y in {0,...,3}
+}{}}
+    \foreach \y in {0,...,\tbound}
         \path (-.05,\pnty{\y}) edge node[left] {\y} (.05,\pnty{\y});
-    \draw[->] (0,-0.2) -- (0,\pnty{3}+.4);
-    \foreach \x in {0,...,6}
+    \draw[->] (0,-0.2) -- (0,\pnty{\tbound}+.4);
+    \foreach \x in {0,...,\sbound}
         \path (\pntx{\x},-.05) edge node[below] {\x} (\pntx{\x},.05);
-    \draw[->] (-0.2,0) -- (\pntx{6}+.4,0);
-    %Points
-    %Arrow
-%    \draw [->] (v10) edge node[above]{$\simeq$} (v01);
-%    \draw [->] (v11) edge node[above]{$\simeq$} (v02);
+    \draw[->] (-0.2,0) -- (\pntx{\sbound}+.4,0);
+	\draw[dashed] (\pntx{.5},0)--\pnt{.5}{1.5}--\pnt{1.5}{1.5}--\pnt{1.5}{2.55};%\pnt{1.5}{3.5}--\pnt{2.5}{3.5}--\pnt{2.5}{3.7};%Stable zone
 
-	\draw[dashed] (\pntx{.5},0)--\pnt{.5}{1.5}--\pnt{1.5}{1.5}--\pnt{1.5}{3.5}--\pnt{2.5}{3.5}--\pnt{2.5}{3.7};
 
-    \foreach \x in {0,...,6}
-        \path \pnt{\x}{0} node (v\x0){\MayPhan{1}{\Z}};
-    \foreach \y in {1,...,3}
-        \path \pnt{0}{\y} node (v0\y){\MayPhan{1}{0}};
+    \foreach \x in {0,...,4}
+        \path \pnt{\x}{0} node (v\x0){\MayPhan{10}{$\Z$}};
+    \foreach \x in {5,6}
+        \path \pnt{\x}{0} node (v\x0){\MayPhan{50005}{$\Z$}};
+    \foreach \y in {1,...,2}
+        \path \pnt{0}{\y} node (v0\y){\MayPhan{10}{$0$}};
+	\path \pnt{1}{1} node (v11){\MayPhan{35}{$\Z_2$\tiny\raisebox{.8ex}{$\langle e\eta\rangle$}}};
+	\path \pnt{2}{1} node (v21){\MayPhan{35}{$\Z_2$\tiny\raisebox{.8ex}{$\langle e^3\eta\rangle$}}};
+	\path \pnt{1}{2} node (v12){\MayPhan{45}{$\Z_2$}};
+	\path \pnt{2}{2} node (v22){\MayPhan{50}{$\Z_2$}};
+	\path \pnt{3}{1} node (v31){\MayPhan{55}{$\Z_2$}};
+
+    \IFbetween{15}{25}{
+        \foreach \x [remember=\x as \lastx (initially 0)] in {1,...,6}
+        {\draw[->,dotted] (v\x0)--(v\lastx0);}
+    }
+    \IFexceeds{25}{
+        \foreach \x/\y in {2/1,4/3}
+        {\draw[->] (v\x0)--node[above]{\small$2$}(v\y0);}
+    }
+    \IFexceeds{30}{%1-stem
+        \path (\pntx{-1},-1.25) node {1-stem:};
+        \path (\pntx{0},-1.25) node (1st0){$0$};
+        \path (\pntx{1},-1.25) node (1st1){$\Z$};
+        \path (\pntx{2},-1.25) node (1st2){$\Z_2$};
+        \draw[->] (1st0)--(1st1);
+        \draw[->>] (1st1)--(1st2);
+    }
+    \IFbetween{35}{40}{% map 21->11 which we show vanishes
+        \draw[->,dotted] (v21)--node[above]{\small$a$}(v11);}
+    \IFbetween{35}{45}{% map 30->11 which we show vanishes
+        \draw[->,dotted] (v30)--node[above]{\small$b$}(v11);
+    }
+    \IFexceeds{45}{%2-stem
+        \path (\pntx{-1},-2) node {2-stem:};
+        \path (\pntx{0},-2) node (1st0){$0$};
+        \path (\pntx{1},-2) node (1st1){$\Z_2$};
+        \path (\pntx{2},-2) node (1st2){$\Z_2$};
+        \path (\pntx{3},-2) node (1st3){$\Z_2$};
+        \draw[->] (1st0)--(1st1);
+        \draw[->] (1st1) -- node[above]{\tiny$\simeq$}(1st2);
+        \draw[->] (1st2) -- node[above]{\tiny$\simeq$}(1st3);
+    }
+    \IFbetween{50}{65}{
+        \draw[->,dotted] (v22)--(v12);
+    }
+    \IFexceeds{500005}{
+        {\draw[->] (v60)--node[above]{\small$2$}(v50);}
+    }
+    \IFbetween{55}{65}{
+        \draw[->,dotted] (v31)--(v21);
+        \draw[->,dotted] (v31)--(v12);
+    }
+    \IFexceeds{65}{%3-stem
+        \path (\pntx{-1},-2.75) node {3-stem:};
+        \path (\pntx{0},-2.75) node (2st0){$0$};
+        \path (\pntx{1},-2.75) node (2st1){$\Z_2$};
+        \path (\pntx{2},-2.75) node (2st2){$\Z_4$};
+        \path (\pntx{3},-2.75) node (2st3){$\Z_4\oplus\Z$};
+        \path (\pntx{4},-2.75) node (2st4){$\Z_8$};
+        \draw[->] (2st0)--(2st1);
+        \draw[->] (2st1) -- (2st2);
+        \draw[->] (2st2) -- (2st3);
+        \draw[->] (2st3) -- (2st4);
+    }
 
 
 
@@ -50,6 +126,7 @@
 
 \end{tikzpicture}
 \end{center}
+
 
 \end{document}
 \begin{center}
