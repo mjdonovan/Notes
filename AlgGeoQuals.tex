@@ -302,7 +302,7 @@ in $\PGL(1)$.
 \begin{itemise}
 \item A \Index{presheaf} on $X$ is a contravariant functor from the category of
 open subsets of $X$ to abelian groups. There is some contention (Bjorn) as to
-whether to require $\emptyset\mapsto0$. It's a sheaf if:
+whether to require $\emptyset\mapsto0$. It's a \Index{sheaf} if:
 \begin{enumerate}\squishlist
 \item[(3)] If $U$ is open with open cover $\{V_i\}$, and $s\in\scrF(U)$ has
 $s|_{V_i}=0$ for all $i$, then $s=0$.
@@ -693,6 +693,76 @@ affine when $U$, $V$ and the base are affine.)
 \[\xymatrix@R=.5cm{U\cap V\ar[r]\ar[d] &X\ar[d]\\U\times V\ar[r]&X\times X}\]}
 \item A proper morphism of affine varieties over $k$ is a finite morphism.
 \item A composite of projective morphisms in projective.
+\end{itemise}
+\section*{Hartshorne II.5 --- Sheaves of Modules}
+\index{Hartshorne!II.5: Sheaves of Modules}
+\begin{itemise}
+\item A \index{sheaf!of $\calO_X$-mods}sheaf of $\calO_X$-modules on a ringed
+space $X$ is a sheaf $\scrF$ on $X$ such that $\scrF(U)$ is an
+$\calO_X(U)$-module for each open $U$, compatibly with restrictions.
+\item The category of $\calO_X$-modules is closed under taking kernels,
+cokernels, images, quotients, direct limits, inverse limits, direct sums and
+products. There is a \Index{sheaf Hom} for $\calO_X$-modules, requiring no
+sheafification:
+$\shfHom_{\calO_X}(\scrF,\scrG)(U):=\Hom_{\calO_X|_U}(\scrF|_U,\scrG|_U)$.
+\item The \Index{tensor product} of $\calO_X$-modules is the sheafification of
+$U\mapsto \scrF(U)\otimes_{\calO_X(U)}\scrG(U)$.
+\\{\small\textbf{(I should think about whether the presheaf has (3).)}}
+\item An $\calO_X$-module $\scrF$ is \Index{free} if it is a direct sum of
+copies of $\calO_X$. It is \Index{locally free} if $\scrF|_U$ is a free
+$\calO_X|_U$-module for some open $U$ around any point of $X$. The \Index{rank}
+is well defined on each connected component. If it is locally free of rank one,
+it is called \Index{invertible}.
+\item A \Index{sheaf of ideals} on $X$ is a sheaf of modules $\scrI$ which is a
+sub-$\calO_X$-module of $\calO_X$. That is, $\scrI(U)$ is an ideal of
+$\calO_X(U)$ for all open $U$.
+\item Constructing new sheaves of modules from old, given
+$(f,f^\#):(X,\calO_X)\to (Y,\calO_Y)$:
+\begin{itemize}\squishlist
+\item 
+\makebox[3cm][l]{\textbf{\Index{direct image}:} }
+\makebox[1cm][r]{$f_*:$\ }$\calO_X\Modules\to\calO_Y\Modules$, using the
+following module structure:
+\[\calO_Y\times f_*\scrF\to f_*\calO_X\times f_*\scrF\to f_*\scrF.\]
+\item
+\makebox[3cm][l]{\textbf{\Index{inverse image}:} }
+\makebox[1cm][r]{$f^{*}:$\ }$\calO_Y\Modules\to\calO_X\Modules$:\\
+\phantom{sp} $\calO_X\in(f^{-1}\calO_Y)\Modules$ {\small (via
+$(f^{-1}\calO_Y)\to\calO_X$}),
+and $f^{-1}\scrG\in(f^{-1}\calO_Y)\Modules$. Define:
+\[f^*\scrG:=F^{-1}\scrG\otimes_{f^{-1}\calO_Y}\calO_X.\]
+\end{itemize}
+\item There is an \Index{adjunction}
+$f^*:\calO_Y\Modules\longleftrightarrow\calO_X\Modules:f_*$.
+\item Given an $M\in A\Modules$, we obtain $\widetilde M\in\calO_X\Modules$,
+where $X=\Spec A$. Assign $\frakp$ the stalk $M_\frakp$, and require that a
+section be locally a quotient $m/a$, for $m\in M$ and $a\in A$ nonvanishing.
+\item \textbf{Proposition 5.1:}\indexThm{II.5.1}
+For any $f\in A$, $\widetilde M(D(f))\cong M_f$, and thus $\Gamma(X,\widetilde
+M)=M$.
+\item \textbf{Proposition 5.2:}\indexThm{II.5.2}
+Let $X=\Spec A$. Then $M\mapsto \widetilde M$ gives an exact, fully faithful
+functor $A\Modules\to\calO_X\Modules$, preserving tensor products and direct
+sums. Moreover, for $f:\Spec B\to\Spec A$, $f_*$ and $f^*$ correspond to the
+usual adjunction $f_*:A\Modules\longleftrightarrow B\Modules:f^*$.
+\item A sheaf $\calF$ of $\calO_X$-modules is \Index{quasi-coherent} if $X$ can
+be covered by open affine subsets $\spec A_i$ such that $\calF|_{\spec A_i}$ is
+isomorphic to $\widetilde M_i$ for some $M_i\in A_i\Modules$. It is
+\Index{coherent} if the $M_i$ can be taken to be finitely generated
+$A_i$-modules.
+\item \textbf{Proposition 5.4:}\indexThm{II.5.4} An $\calO_X$-module $\scrF$ is
+quasi-coherent \Iff for every open affine $U=\spec A\subset X$,
+$\scrF|_{U}\cong\widetilde M$ for some $M\in A\Modules$. The corresponding
+test for coherence can be applied when $X$ is noetherian.
+\item \textbf{Proposition 5.5:}\indexThm{II.5.5} If $X=\Spec A$,
+$M\mapsto\widetilde M$ is an equivalence $A\Modules\to\QuasiCoherent_X$. As long
+as $A$ is noetherian, it is also an equivalence
+$A\Modules^\text{f.g.}\to\Coherent_X$.
+\item \textbf{Proposition 5.6:}\indexThm{II.5.6}
+If $0\to\scrF'\to\scrF\to\scrF''\to0$ is an exact sequence of $\calO_X$-modules,
+where $X$ is affine, then
+$0\to\Gamma(\scrF')\to\Gamma(\scrF)\to\Gamma(\scrF'')\to0$ is exact.\\
+{\small(Note that in fact, $H^1(X,\scrF')=0$, when $X$ is affine and $\scrF\in\QuasiCoherent_X$, as we will see later).}
 \end{itemise}
 
 
