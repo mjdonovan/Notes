@@ -1,4 +1,7 @@
 % !TEX root = z_output/_hearsay.tex
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%% 80 characters %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \documentclass[11pt]{article}
 \input{../macros.tex}
 
@@ -10,11 +13,14 @@
 %% >>> header
 
 \begin{document}
-%\tableofcontents
-\newcommand{\HSsection}[2]{\section*{#1 \hfill \small{#2}}}
+\tableofcontents
+%\newcommand{\HSsection}[2]{\section{#1 \protect\ifthenelse{\protect\equal{#2}{}}{}{\small{(#2)}}}}%%%WHAT'S WRONG WITH THIS
+\newcommand{\HSsection}[2]{\section{#1 }}%\ifthenelse{\equal{#2}{}}{}{\small{(#2)}}}}
 
 \HSsection{Preface}{}
-This file is intended only as a repository for mathematical facts I picked up in conversation, and found interesting. Any given entry is likely to be incorrect, nothing found in this document should be relied upon.
+This file is intended only as a repository for mathematical facts I picked up in conversation, and found interesting. I keep this file so that I don't forget \emph{everything} that I've ever been told.
+
+Any given entry is likely to be incorrect; nothing found in this document should be relied upon. Anybody unfortunate enough to be reading this, upon finding an error, should let me know. If you are the person who told me something in here, and want your name at the end let me know. I'm not doing this for now, since stuff in here is likely to be incorrectly transcribed, and nobody wants their name on something that's wrong.
 
 \HSsection{$H_*(X)=\pi_*(\textup{Sp}^\infty X)$ when $X$ is connected}{29/6/11}
 Let $X$ be a connected space. Let $\textup{Sp}^\infty X$ be the free topological commutative monoid on $X$, where the basepoint of $X$ acts as the identity. This is the quotient of the james construction $J(X)$ by the infinite permutation group $\Sigma_\infty$. Let $\overline\Z X$ be the free topological abelian group on $X$ with basepoint the identity. Then $\textup{Sp}^\infty X\to \overline\Z X$ is a weak equivalence (iff $X$ is connected).
@@ -23,9 +29,9 @@ Moreover, there is a homotopy equivalence between the simplicial abelian groups 
 
 
 \HSsection{$Q$ turns cofiber sequences into fiber sequences}{29/6/11}
-This corresponds to the fact that $\overline\pi_*^s=\pi_*Q$ is a reduced homology theory. It should give you a LES for a cofiber sequence, but $\pi_*$ likes fiber sequences!
+This corresponds to the fact that $\overline\pi_*^s=\pi_*Q$ is a reduced homology theory. $\overline\pi_*^s$ should give you a LES for a cofiber sequence, but $\pi_*$ likes fiber sequences! Here, $QX:=\bigcup\Omega^i\Sigma^i X$.
 
-Here, $QX:=\bigcup\Omega^i\Sigma^i X$. Now suppose that $X\to Y\to Z$ is a cofiber sequence of $n$-connected spaces. Let $F\to Y$ be the homotopy fiber of $Y\to Z$.  We obtain the a Serre long exact sequence from the Serre spectral sequence, which starts (approximately) at $2n$:
+Now suppose that $X\to Y\to Z$ is a cofiber sequence of $n$-connected spaces. Let $F\to Y$ be the homotopy fiber of $Y\to Z$.  We obtain the a Serre long exact sequence from the Serre spectral sequence, which starts (approximately) at $2n$:
 \[\xymatrix{
 H_{2n}(F)\ar[r]&H_{2n}(Y)\ar[r]&H_{2n}(Z)\ar[r]^{\tau\ \ }&H_{2n-1}(F)\ar[r]&\cdots
 }\]
@@ -39,6 +45,72 @@ The five lemma will show that $\epsilon$ is an isomorphism on $H_{i}$ for $i$ at
 There's a lot of doubt about this.
 \HSsection{Loads of papers online}{10/8/11}
 \verb|http://www.maths.ed.ac.uk/~aar/cat|
+\HSsection{Perfect fields}{30/8/11}
+A field is said to be perfect if all of its extensions are separable. Any
+characteristic 0 field is perfect. If $k$ has characteristic $p>0$, then it is
+perfect \Iff the Frobenius is an isomorphism.
+
+Suppose that the Frobenius fails to be surjective. Then some element of $k$ has
+no $p^\text{th}$ root (any $p^\text{th}$ root is unique). Adjoining the root
+gives a non-separable extension. The converse...
+
+All finite fields are obviously perfect. An example of an infinite perfect
+field of positive characteristic is
+$\F_p(x,x^{1/p},x^{1/p^2},x^{1/p^3},\ldots)$.
+\HSsection{Some number theory}{30/8/11}
+Suppose you have a field $F$ of characteristic zero. Then the integral closure
+of $\Z\subset F$ is a ring $\calO_F$ called the ring of integers of $F$. The
+field is called local if $\calO_F$ is a complete local ring (?). We write
+$\frakm_F$ for the maximal ideal.
+
+Now suppose that $E$ is an extension of $F$ such that $\calO_E$ is, like, a DVR
+or something (?). Then we have a commuting diagram:
+\[\xymatrix{
+E&\calO_E\ar@{_{(}->}[l]&\frakm_E\ar@{_{(}->}[l]&\calO_E/\frakm_E\\
+F\ar[u]&\calO_F\ar@{_{(}->}[l]\ar[u]&\frakm_F\ar@{_{(}->}
+[l]\ar[u]&\calO_F/\frakm_F\ar[u]
+}\]
+Now the image of $\frakm_F$ in $\calO_E$ generates an ideal, necessarily
+contained in $\frakm_E$. As $\calO_E$ is a DVR, this ideal is $\frakm_E^r$ for
+some $r$, which is the ramification degree. $E/F$ is unramified if $r=1$.
+
+\begin{thm*}
+Suppose that $k$ is a perfect field of characteristic $p$. Then there exists a
+ring $R$, unique up to unique isomorphism \lparen over $k$\rparen, such that:
+\begin{itemize}\squishlist
+\item $R$ is local and complete with maximal ideal $\frakm$;
+\item $\frakm$ is generated by $p$ \lparen the sum $1+\cdots+1$\rparen; and
+\item $R/\frakm\cong k$.
+\end{itemize}
+This is the \textbf{Witt ring} $W(k)$ of $k$.
+
+In fact, $R$ is an initial object in the category of local complete rings with a
+map to $k$.
+\end{thm*}
+\noindent To interpret this, think of the spectrum of a local complete ring as
+somehow a small yet complete neighbourhood of a single closed point. Then $\Spec
+R$ is a universal deformation of a universal $k$-point. Any other small
+neighbourhood of a $k$-point maps into $\Spec R$. That is, $\Spec R$ contains
+every possible deformation of a $k$-point.
+\begin{fact*}
+Suppose that $E/\Q_p$ is a finite extension. Then $[E:\Q_p]$ is the product of
+the residue degree and the ramification degree.
+\end{fact*}
+\begin{cor*}
+There is a unique unramified extension $E$ of $\Q_p$ of a given degree.
+\end{cor*}
+\begin{proof}
+If $E/\Q_p$ is unramified of degree $d$, we get a diagram:
+\[\xymatrix{
+E&\calO_E\ar@{_{(}->}[l]&\frakm_E=p\calO_E\ar@{_{(}->}[l]&\calO_E/\frakm_E\\
+\Q_p\ar[u]&\Z_p\ar@{_{(}->}[l]\ar[u]&p\Z_p\ar@{_{(}->}
+[l]\ar[u]&\Z/p\Z\ar[u]
+}\]
+Now $[\calO_E/\frakm_E:\Z/p\Z]=d$ (see fact), and $\calO_E/\frakm_E$ is a
+perfect field. Thus its Witt ring $R$ must be $\calO_E$. Thus $E$ is determined
+as the field of fractions of the Witt ring of the field of $p^d$ elements.
+\end{proof}
+
 
 
 \end{document}
