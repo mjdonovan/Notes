@@ -47,24 +47,50 @@ There's a lot of doubt about this.
 \verb|http://www.maths.ed.ac.uk/~aar/cat|
 \HSsection{Perfect fields}{30/8/11}
 A field is said to be perfect if all of its extensions are separable. Any
-characteristic 0 field is perfect. If $k$ has characteristic $p>0$, then it is
-perfect \Iff the Frobenius is an isomorphism.
+characteristic zero field is perfect (see below). All finite fields are
+obviously perfect, as the frobenius is the identity on $\F_p$. An example of an
+infinite perfect field of positive characteristic is
+$\F_p(x,x^{1/p},x^{1/p^2},x^{1/p^3},\ldots)$.
 
+\begin{fact*}If $k$ has characteristic $p>0$, then it
+is perfect \Iff the Frobenius is an isomorphism.\end{fact*}
+\begin{proof}
 Suppose that the Frobenius fails to be surjective. Then some element of $k$ has
 no $p^\text{th}$ root (any $p^\text{th}$ root is unique). Adjoining the root
-gives a non-separable extension. The converse...
+gives a non-separable extension.
 
-All finite fields are obviously perfect. An example of an infinite perfect
-field of positive characteristic is
-$\F_p(x,x^{1/p},x^{1/p^2},x^{1/p^3},\ldots)$.
+For the converse, suppose that $F/E$ is an inseparable extension, but that
+$\Frob_E$ is an isomorphism, for a contradiction. Choose an element $\alpha$ of
+$F$ whose minimal polynomial $f$ has a repeated root. Now unless $f'=0$, $f'$
+and $f$ share a factor, and $\gcd(f',f)$ is a polynomial with root $\alpha$, of
+strictly lower degree than $f$. This is impossible, so that $f'=0$, and we
+conclude that $f(x)=g(x^p)$. (This is why any extension is separable in
+characteristic zero).
+
+Now, let $\Gamma=E[\alpha^p]$. Then $\alpha\notin\Gamma$, so that $\Frob_\Gamma$
+is not surjective. To see that $\alpha\notin\Gamma$: if it were, there would be
+a polynomial $h(x)\in E[x]$ such that $h(\alpha^p)=\alpha$. We can assume that
+$\deg(h)$ is less than $\deg(g)$, since $g(\alpha^p)=0$, but then as $\alpha$ is
+a root of $h(x^p)-x$, we must have $h(x^p)=x$, which is absurd.
+
+Now as $\Frob_E$ is an isomorphism, the image of $\Frob_\Gamma$ is a finite
+dimensional $E$-vector space. Moreover, although $\Frob_\Gamma$ is not
+$E$-linear, it does preserve $E$-linearly independent sets. Taking a basis for
+$\Gamma$, its image under $\Frob_\Gamma$ is linearly independent, so
+$\Frob_\Gamma(\Gamma)$ has the same dimension as $\Gamma$. Thus
+$\Frob_\Gamma=\Gamma$, contradicting the fact that $\Frob_\Gamma$ is not
+surjective.
+\end{proof}
+
 \HSsection{Some number theory}{30/8/11}
-Suppose you have a field $F$ of characteristic zero. Then the integral closure
-of $\Z\subset F$ is a ring $\calO_F$ called the ring of integers of $F$. The
-field is called local if $\calO_F$ is a complete local ring (?). We write
-$\frakm_F$ for the maximal ideal.
+Suppose you have a local field $F$ of characteristic zero. Then the integral
+closure of $\Z\subset F$ is a ring $\calO_F$ called the ring of integers of $F$.
+We'll work with local fields such that $\calO_F$ is a complete local ring.
+We write $\frakm_F$ for the maximal ideal.
 
 Now suppose that $E$ is an extension of $F$ such that $\calO_E$ is, like, a DVR
-or something (?). Then we have a commuting diagram:
+or something, so that I can understand how to calculate the ramification degree.
+Then we have a commuting diagram:
 \[\xymatrix{
 E&\calO_E\ar@{_{(}->}[l]&\frakm_E\ar@{_{(}->}[l]&\calO_E/\frakm_E\\
 F\ar[u]&\calO_F\ar@{_{(}->}[l]\ar[u]&\frakm_F\ar@{_{(}->}
@@ -110,9 +136,36 @@ Now $[\calO_E/\frakm_E:\Z/p\Z]=d$ (see fact), and $\calO_E/\frakm_E$ is a
 perfect field. Thus its Witt ring $R$ must be $\calO_E$. Thus $E$ is determined
 as the field of fractions of the Witt ring of the field of $p^d$ elements.
 \end{proof}
+\HSsection{On the $\Proj$ construction}{30/8/11}
+It is pointed out that an action of $k^*$ on a $k$-algebra $A$ corresponds to a
+grading, under some (as yet unknown) circumstances. Given a grading, $k^*$ acts
+by $x\cdot s=x^{|s|}s$. Given an action, it splits up into representations, all
+of which are of this form.
 
+On taking quotients, given an action $a:G\times X\to X$, the (categorical)
+quotient should be the coequaliser:
+\[\xymatrix{
+G\times X\ar@<.5ex>[r]^{\ \ \ a}\ar@<-.5ex>[r]_{\ \ \ \pi_X}&X\ar[r]&X/G
+}\]
+The point is, maybe if you're trying to take the quotient of $\A^{n+1}$ by the
+action of $k^*=\Spec k[x^{\pm1}]$, you should throw away the origin. However,
+maybe if you take this categorical quotient in the category of, say, separated
+schemes, that happens automatically, as the nasty point just doesn't belong in
+an object of this category.
 
-
+One should see a way that the $\Proj$ construction is doing all this for us.
+Presumably, this has something to do with the fact that the homogeneous ideals
+are exactly those which are $k^*$-invariant. Maybe that means that by restricting to these ideals you get generic points of invariant closed subspaces\ldots\ how would I know?
+\HSsection{The Weil Conjectures}{1/9/11}
+Suppose that $X$ is a variety over $\Z$, and $p$ is a prime. Then it has
+finitely many $\F_{p^n}$-points for each $n$, so we can form the generating
+function
+\[\sum_{n=1}^\infty|X(\F_{p^n})|.\]
+One might conjecture that this is a rational function. To prove such a conjecture, somebody showed that this function is of the form:
+\[\prod_{d}\left(\chi(\Frob,H^d(X))\right)^{(-1)^d}.\]
+Here, $\chi(\Frob,H^d(X))$ is the characteristic polynomial of the Frobenius
+acting on $H^d(X)$, the \'etale cohomology. It's over some field of different
+characteristic, or somesuch.
 \end{document}
 
 
