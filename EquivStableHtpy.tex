@@ -5,10 +5,17 @@
 \documentclass[11pt]{article}
 \input{../macros.tex}
 
-\newcommand{\NewLecture}[3]{\section{Introduction {\small(#2/#3/2011)}}}
+\newcommand{\NewLecture}[3]{\section{#1 {\small(#2/#3/2011)}}}
+\makeatletter
+\def\@seccntformat#1{Lecture \csname the#1\endcsname.\quad}
+\makeatother
+\title{Equivariant Stable Homotopy Theory}
+\author{Mike Hopkins}
+\date{}
 
 \begin{document}
-\NewLecture{Introduction}{31}{8}
+\maketitle
+\NewLecture{}{31}{8}
 \begin{thm*}[Hill, Hopkins, Ravanel]
 If $M$ is a stably framed smooth manifold of Kervaire invariant one, then $\dim
 M$ is one of: 2, 6, 14, 30, 62 or 126.
@@ -31,8 +38,9 @@ the suspension homomorphism is compatible with the regular value construction,
 and one obtains:
 \[\pi_k^\text{st}S^0\longleftrightarrow\{\text{stably framed
 $k$-manifolds}\}/\text{cobordism}.\]
+Note that we are only considering compact manifolds in our discussion.
 \subsection*{When \texorpdfstring{$k=0$}{k=0}:}
-Any $0$-manifold embeds in $S^1$, and a framing there means a choice of
+Any $0$-manifold embeds in $\R$, and a framing there means a choice of
 orientation at each point. Opposing points cancel, and the lone cobordism
 invariant of stably framed $0$-manifolds is the number of points, counted with
 sign.
@@ -50,15 +58,41 @@ dimension. On of the sections always points in directions parallel to the plane,
 while the other section always points upward.
 
 Apparently, these two are different, reflecting that $\pi_2^\text{st}=\Z/2$.
+
+{\color{blue}
+Since the tangent bundle of a circle is trivial, the normal bundle of
+the circle embedded into Euclidean space is too. The framings of a circle
+in $\mathbb{R}^{n+1}$ are just given by the fundamental group of $O(n)$.
+For the non-trivial framing I prefer to think of a circle embedded in
+3-space in the standard manner. The circle is a roller-coaster ride and as
+you move once round the circle you turn once clockwise relative to your
+direction of travel. You could have turned around $n$ times in either
+direction. This shows $\pi_3(S^2)=\mathbb{Z}$. Once you're embedded in
+$4$-space, however, you can slide between the roller-coaster ride taking
+you twice around and $0$ times around. So $\pi_4(S^3)=\mathbb{Z}_2$.
+\color{red} Cool --- I'd like to glue this in appropriately, but would like to know the exact statement of Portryagin's result first. We should discuss this some time, again.
+}
+
 \subsection*{When \texorpdfstring{$k=2$}{k=2}:}
-Apparently, when a 2-manifold is framed, it is automatically orientable, so the
-base manifolds are just the various orientable surfaces.
+Suppose that a manifold is embedded in $\R^n$, and given a framing of the normal bundle. This framing orients the normal bundle, and using the ambient orientation of $\R^n$, this induces an orientation on the tangent bundle. Thus, we only need to consider \emph{oriented} 2-manifolds.
 
 Now suppose that the framing $\overrightarrow{e}$ on $S^2$ represents zero. If
 $\overrightarrow{e_1}$ is another framing, then they are related by
-$\overrightarrow{e_1}=t\overrightarrow{e}$ for $T:S^2\to\GL_N(\R)$. Now the
+$\overrightarrow{e_1}=T\overrightarrow{e}$ for $T:S^2\to\GL_N(\R)$. Now the
 second homotopy group of a Lie group is known to be zero, so that $S^2$ with
 \emph{any} framing represents zero.
+
+%If that seemed a little complicated, then it is clear that the framings of
+%$S^2$, embedded in the standard way in $\R^{n+2}$, correspond to homotopy
+%classes of maps $S^2\to O(n)$. That
+{\color{blue} I
+would have said the following. Embedding $S^2$ in
+$\mathbb{R}^{n+2}$ in the standard way it is clear that
+the framings of $S^2$ are given by $\pi_2(O(n))=0$. So the standard framing
+of $S^2\subset\mathbb{R}^3$ is the only one.
+\color{red} I'm not sure that this is really a simplification, and have the following thought: it's not obvious right now that framings actually correspond bijectively with $\pi_2(O(n))$ --- we can see though that there's a surjection from $\pi_2(O(n))$ to the set of framings. It there actually always a bijection between $[X,O(n)]$ and the set of framings? (This is all getting a little silly by now.)}
+
+
 
 Now we'd like to deal with a surface $\Sigma\subset\R^N$ of higher genus. The
 idea is to use surgery. That is, choose a circle $M$ on $\Sigma$. We can cut
@@ -90,17 +124,26 @@ The truth of the matter is that the function $\phi$, being quadratic, has an Arf
 invariant $\ArfInvariant(\phi)\in\Z/2$, and it is this invariant which gives the
 identification with $\pi_2^\text{st}S^0=\Z/2$.
 \begin{question}
-In which dimensions can every element of $\pi_k^\text{st}S^0$ be represented by a homotopy sphere? (As in dimension one, but not in dimension 2.)
+In which dimensions can every element of $\pi_k^\text{st}S^0$ be represented by
+a homotopy sphere? (As in dimension one, but not in dimension 2.)
 \end{question}
 \begin{answer}
 In all dimensions but 2, 6, 14, 30, 62, and possibly 126.
 \end{answer}
-\subsection*{Kervaire (1960)}He constructed a map $\phi:H_{2k+1}(M^{4k+2};\Z/2)\to\Z/2$ which was a quadratic refinement of the intersection pairing, and defined $\Phi(M)=\ArfInvariant(\phi)$. This is the Kervaire invariant. He also showed that if $M$ is a smooth manifold of dimension 10 or 18, then $\Phi(M)=0$.
+\subsection*{Kervaire (1960)}He constructed a map
+$\phi:H_{2k+1}(M^{4k+2};\Z/2)\to\Z/2$ which was a quadratic refinement of the
+intersection pairing, and defined $\Phi(M)=\ArfInvariant(\phi)$. This is the
+Kervaire invariant. He also showed that if $M$ is a smooth manifold of dimension
+10 or 18, then $\Phi(M)=0$.
 
-On the other hand, he constructed a 10-manifold $M$ with $\Phi(M)=1$, and thus produced a manifold with no smooth structure.
-To construct the manifold $M$, let $X$ be a certain gluing of two copies of the disk bundle of the tangent bundle of $S^5$. Then let $N=\partial X\simeq S^9$, and define $M=X\cup\cone(N)$. Then $M$ is a topological 10-manifold with Kervaire invariant one.
+On the other hand, he constructed a 10-manifold $M$ with $\Phi(M)=1$, and thus
+produced a manifold with no smooth structure. To construct the manifold $M$, let
+$X$ be a certain gluing of two copies of the disk bundle of the tangent bundle
+of $S^5$. Then let $N=\partial X\simeq S^9$, and define $M=X\cup\cone(N)$. Then
+$M$ is a topological 10-manifold with Kervaire invariant one.
 \begin{question}
-In which dimensions can $\Phi(M)$ be nonzero (when $M$ is smooth and stably framed)?
+In which dimensions can $\Phi(M)$ be nonzero (when $M$ is smooth and stably
+framed)?
 \end{question}
 \begin{answer}
 Only in dimensions 2, 6, 14, 30, 62, and possibly 126. 
@@ -109,9 +152,129 @@ Only in dimensions 2, 6, 14, 30, 62, and possibly 126.
 Browder cleared a path to answering these questions by showing:
 \begin{itemise}
 \item $\Phi(M)=0$ unless $\dim M=2^{j+1}-2$;
-\item An $M$ exists with $\Phi(M)\neq0$ \Iff there is some $\theta_j\in\pi_{2^{j+1}-2}^\text{st}S^0$ represented by $h_j^2$ at the $E^2$ term of the Adams spectral sequence.
+\item An $M$ exists with $\Phi(M)\neq0$ \Iff there is some
+$\theta_j\in\pi_{2^{j+1}-2}^\text{st}(S^0)$ represented by $h_j^2$ at the $E^2$
+term of the Adams spectral sequence.
 \end{itemise}
-It is in these terms what we will study this question in this course.
+It is in these terms that we will study this question in this course.
+\NewLecture{}{2}{9}
+The HHR result states that an $\theta_j$ does not exist when $j\geq7$. There are
+four main parts of the proof.
+\begin{itemise}
+\item[(1)] Construct a multiplicative cohomology theory $\Omega$.
+\item[(2)] Prove the \textbf{detection theorem}: If $\theta_j$ exists, it is
+detected as a nonzero image in $\Omega_{2^{j+1}-2}(S^0)$.
+
+\INDENT To explain this, we note that there is a distinguished element
+$1\in\Omega_0(S^0)$. In particular, given $\theta_j:S^{2^{j+1}-2}\to S^0$ (a map
+of spectra), we are interested in $\theta_j^*(1)\in\Omega_{2^{j+1}-2}(S^0)$:
+\[\qquad\xymatrix{
+\makebox[0cm][r]{$\Omega_{2^{j+1}-2}(S^0)=$\ }\Omega^0(S^{2^{j+1}-2})&
+\ar[l]_{\theta_j^*}\Omega^0(S^{0})\ni 1
+}\]
+That is, we plan to understand the Kervaire invariant by understanding a
+``degree'' in the cohomology theory $\Omega$.
+
+One might rephrase the above by saying that the composite
+\[\Sigma^{2^{j+1}-2}\mathbb{S}\overset{\theta_j}{\to}\mathbb{S}\overset{\eta}
+{\to}\Omega,\]
+an element of $\pi_{2^{j+1}-2}(\Omega)$, is non-zero (where $\eta$ is the unit
+of the multiplicative theory $\Omega$).
+\item[(3)] Prove the \textbf{gap theorem}: that $\pi_i(\Omega)=0$ for $-4<i<0$.
+\item[(4)] Prove the \textbf{periodicity theorem}: that
+$\pi_i(\Omega)=\pi_{i+256}(\Omega)$ for all $i$.
+\end{itemise}
+These steps together prove the theorem. Suppose that $\theta_j$ exists. Then
+$\pi_{2^{j+1}-2}(\Omega)\neq0$, by (2). However, if $j\geq7$, this group is
+zero, by (3) and (4).
+
+For an example of a theory like this, we need look no further than $\KO$. In
+fact, the gap here is somehow ubiquitous --- by the end of the course, we'll
+have a general construction in which we see these phenomena, and $\KO$ will
+arise in this general setting.
+
+The proof of the detection theorem that we will give is not so natural. This is
+because we do not understand the Kervaire invariant very geometrically. If it
+was given by, say, integrating some characteristic classes of the tangent bundle
+of a manifold, then we might have a more natural proof. {\small(This is the
+least exciting part of the course, and will be left until the end, in case
+something needs to be jettisoned.)}
+
+Note that these techniques were not set up to solve the Arf-Kervaire invariant
+problem, more to develop better understanding of the homotopy groups of sphere.
+Mike descibed what happened: ``It was as if we were trying to invent a highly
+wear-resistant material, but discovered that when we wore it into the bathroom,
+we became invisible.''
+
+\subsection*{Atiyah ``\texorpdfstring{$\K$}{K}-theory and reality''}
+In this paper, Atiyah introduces the $C_2$-equivariant cohomology theory $\KR$
+called `real $\K$-theory' (Mike Hopkins would prefer if it were denoted
+${\K_\C}$). This is a hybrid of $\K$ and $\KO$. In fact, given a space $X$ with
+a $C_2$-action, $C_2$ acts on $\KR^*(X)$, and the fixed points are isomorphic to
+$\KO^*(X)$. On the other hand, $\KR^*(X\times C_2)$ is isomorphic to $\K(X)$.
+
+Moreover, Atiyah used complex Bott periodicity to prove real Bott periodicity
+--- that $\KO$ is periodic. That is, classical Bott periodicity states:
+\[\K^0(X\wedge S^2)\cong \K^0(X).\]
+The same proof applies (\textbf{is this what was said?}) to show that:
+\[\KR^0(X\wedge S^{\rho_2})=\KR^0(X).\]
+Finally, he used this to imply the classical periodicity theorem, $\K^0(X\wedge
+S^8)=\K^0(X)$.
+
+In the above, $S^{\rho_2}$ needs some explanation. Given a representation $\rho$
+of a finite group $G$ on a finite dimensional real vector space $V$, define
+$S^{\rho}$ to be the one point compactification of $V$, with the obvious
+$G$-action. Here, $\rho_2$ stands for the regular representation of $C_2$.
+Note also that $S^{\rho_2}$ can be viewed as $\C\cup\{\infty\}$, where $\C$ has
+a $C_2$-action given by complex conjugation.\footnote{Complex conjugation on
+$\C$ is simply reflection across the real line; writing $C_2=\{\imath,x\}$,
+multiplication by $x$ on $\R C_2$ is also just a reflection --- consider the
+basis $\{\imath+x,\imath-x\}$.}
+
+\subsection*{HHR's analogue}
+HHR contruct an analogue of this situation, in which $\KO$ is replaced with
+$\Omega$, and $\KR$ (which should be called $\K_\C$) is replaced with $\OmegaO$.
+Now by construction, he has
+\[\OmegaO^0(X\wedge S^{\rho_8})\cong\OmegaO^0(X),\]
+and, inspired by Atiyah's work, this is used to prove that $\Omega^0(X\wedge
+S^{256})=\Omega^0(X)$.
+
+We should discuss the use of the character $\Octonions$, which refers to the
+octonions. In the $\KR$ story, $C_2$ is relevant as it is the Galois group
+$\Gal(\C/\R)$. The point is that in the HHR construction, $C_8$ is acting as a
+`Galois group' $\Gal(\Octonions/\R)$.
+
+To justify such a claim, we would need an action of $C_8$ on $\Octonions$, whose
+fixed points are $\R$, and for which a Hilbert basis theorem holds. That is,
+$\Octonions$ is isomorphic to $\rho_8$ as a $C_8$-representation over $\R$.
+Unfortunately, no such action exists, however:
+\begin{fact*}
+There is an antiautomorphism $\sigma:\Octonions\to \Octonions$, unique up to
+inner automorphisms, such that $\sigma^8=\id$, making $\Octonions\cong\rho_8$ as
+a $C_8$-representation. Moreover, we get a Galois correspondence.
+\[\begin{array}{c|c|c|c}
+\{\id\}&\langle\sigma^4\rangle&\langle\sigma^2\rangle&C_8\\\hline
+\Octonions&\Quaternions&\C&\R
+\end{array}\]
+\end{fact*}
+\subsection*{The slice tower}
+This is an analogue of the Postnikov tower of spectra, perhaps the main
+innovation given by HHR's work. Recall that for a spectrum $E$, there are
+fibrations $F^n\to P^nE\to P^{n-1}E$, and compatible maps $E\to P^nE$ such that:
+\begin{itemize}\squishlist
+\item $\pi_{i}(P^n E)=0$ for $i>n$;
+\item the maps $E\to P^nE$ induce isomorphisms on $\pi_{i}$ for $i\leq n$;
+\end{itemize}
+Then by the long exact sequence in homotopy, $F^n=H(\pi_n(E))\wedge S^n$. This
+data is called a Postnikov tower for $E$.
+The associated graded spectrum is the product $\prod_nH(\pi_n(E))\wedge S^n$.
+%Note that this associated graded spectrum is the most na\"ive spectrum with the
+%same coefficients as $E$.
+
+If $E=\K$ is the $\K$-theory spectrum, then one might say that its associated graded spectrum as a particularly na\"ive 2-periodic spectrum --- writing it as $\prod_n {H\Z}\wedge S^{2n}$ makes this periodicity obvious. $\KR$, however, has a period which is not a number, but a representation, and there is a some tower, the slice tower for $\KR$, whose associated graded is the product $\prod_n {H\Z}\wedge S^{n\rho_2}$.
+
+Note that the spectra ${H\Z}\wedge  S^{n\rho_2}$ are not Eilenberg-MacLane spectra in equivariant homotopy, but something different. Constructing the slice tower was `perhaps the main innovation' given by HHR.
+
 \end{document}
 
 
