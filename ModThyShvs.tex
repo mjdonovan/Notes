@@ -1,0 +1,238 @@
+% !TEX root = z_output/_ModThyShvs.tex
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%% 80 characters %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\documentclass[11pt]{article}
+\input{../macros.tex}
+
+\newcommand{\NewLecture}[3]{\section{#1 {\small(#2/#3/2011)}}}
+\makeatletter
+\def\@seccntformat#1{Lecture \csname the#1\endcsname.\quad}
+\makeatother
+\title{Topics in the Moduli Theory of Sheaves}
+\author{Baosen Wu}
+\date{}
+
+\begin{document}
+\maketitle
+\NewLecture{}{31}{8}
+Throughout this class, we'll take $k=\C$. (Much of the material will work for
+other algebraically closed fields, however).
+\begin{exmp*}
+Projective spaces $\PP(V)$. Choose homogeneous coordinates $x_1,\ldots,x_n$ on
+$V$. There is a tautological bundle $\calO_{\PP(V)}(-1)\downarrow \PP(V)$. Its
+dual, $\calO(1)$, has $H^0(\calO(1))=k\{x_1,\ldots,x_n\}$.
+\end{exmp*}
+\begin{exmp*}
+The grassmannian $\Gr(r,n)$. This is the set of $r$-dimensional subspaces of
+$V$, where $\dim V=n$. It too has a tautological locally free sheaf.
+\end{exmp*}
+\begin{exmp*}
+The space of projective lines in $\PP^n$. Equal to $\Gr(2,n+1)$.
+\end{exmp*}
+\begin{thm*}[classical]
+A smooth cubic surface in $\PP^3$ contains 27 lines.
+\end{thm*}
+\begin{proof}[Proof approach]
+Fix the cubic $S$, let $M$ be the set of lines in $S$. Then $M\subset
+\Gr(2,4)=X$. The idea is then to construct a vector bundle $E\downarrow X$ and a
+section of $E$ such that $M=s^{-1}(0)$. Now we'll have $\rank E=\dim X=4$, and
+$M=s^{-1}(0)$ corresponds to the Euler class (when $s$ is `generic enough' --- I
+don't know what this means). The Euler class is the top Chern class, $c_4(E)$,
+so we just need to show that $c_4(E)=27$ {\small(which we will not do in this
+class, at least right now)}.
+
+For a fiberwise indiction of how we'll construct $E$, fix homogeneous
+coordinates $x_0,x_1,x_2,x_3$ of $\PP^3$. Then the cubic equation for $S$ can be
+viewed as a section $f\in\Gamma(\PP^3,\calO(3))$. Moreover, $\ell\subset S$ \Iff
+$f|_\ell=0$. Now any line $\ell$ is isomorphic to $\PP^1$, and we can assign to
+$\ell$ the global sections $H^0(\ell,\calO_\ell(3))$. \textbf{I'm lost.}
+
+Another way to describe $E$ is as follows. Let $U$ be the tautological bundle on
+$\Gr(2,4)$:
+\[\xymatrix{
+\ar[d]^{p_1}\ar[dr]^(.7){p_2}U\ar@{^{(}->}[r]&\Gr(2,4)\times
+\PP^3\ar[d]\ar[dl]\\
+\Gr(2,4)&\PP^3
+}\]
+The bundle $\calO_{\PP^3}(3)$ can be pulled back to $U$ and then pushed down to
+$\Gr(2,4)$. That is, we set $E=p_{1*}p_2^*\calO(3)\downarrow\Gr(2,4)$. To see
+that this is a vector bundle, we compute $(R^1p_{1*})p_2^*\calO(3)=0$
+(\textbf{how? What would this mean?}). (\textbf{I should figure out why this $E$
+works.})
+\end{proof}
+\begin{exmp*}[Moduli space of curves]
+Define:
+\[M_g:=\{\text{connected smooth curves with genus $g$}\}/\sim,\]
+where $\sim$ denotes isomorphism of curves. There is an object $\overline{M_g}$,
+the modular compactification, which is a proper Deligne-Mumford stack.
+\end{exmp*}
+\begin{exmp*}[Moduli of stable maps]
+Fix a projective, smooth variety $X$ and fix $\beta\in H_2(X;\Z)$ (\textbf{what
+kind of $H_2$?}). Define:
+\[M_g(X;\beta):=\{f:C\to X\ |\ \text{$C$ is connected, smooth genus $g$ curve
+with $f_*[C]=\beta$}\}/\sim.\]
+Here $\sim$ means that there exists an isomorphism $C\to C'$ making the evident
+triangle commute. Similarly, we get a proper Deligne-Mumford stack
+$\overline{M_g(X;\beta)}$. We can define Gromov-Witten invariants as integrals
+over $\overline{M_g(X;\beta)}$.
+\end{exmp*}
+\begin{exmp*}[Moduli of stable bundles over $C$]
+\[M(r,d):=\{\text{rank $r$ degree $d$ ``stable bundles'' $E$ on $C$}\}/\sim.\]
+Here, $\sim$ stands for isomorphism of bundles. Firstly, the degree is defined
+to be:
+\[\deg(E)=\chi(E)-r\chi(\calO)=\chi(E)-r(1-g).\]
+The degree can also be defined as the degree of the determinant (\textbf{which I
+don't understand}). A vector bundle $E\downarrow C$ is called stable (a.k.a.\
+semistable) if for every proper subbudle $F\subset E$:
+\[\frac{\deg(F)}{\rank(F)}\leq\frac{\deg(E)}{\rank(E)}=:\mu(E).\]
+We call $\mu(E)$ the slope of $E$.
+
+Note that $M(1,0)=JC$, the moduli space of degree zero line bundles. According
+to wikipedia, it is the connected component of the identity in the Picard group
+of C, hence an abelian variety.
+
+\textbf{At this point I had to leave early. How rude!}
+\end{exmp*}
+\NewLecture{Coherent Sheaves}{2}{9}
+Eventually we'll be interested in both the Harer-Narasimhan filtration and the
+Jordan-H\"older filtration of a coherent sheaf. To follow, in due course.
+
+For today, let $X$ be a smooth projective variety, and let $\scrE$ be a coherent
+sheaf on $X$.
+\begin{defn*}
+$\scrE$ is \emph{torsion free} if $\scrE_x$ is a torsion free $\calO_x$-module
+for all $x\in X$.
+\end{defn*}
+\begin{defn*}
+We define the \emph{dual} $\check\scrE:=\shfHom(\scrE,\calO)$. It is also
+coherent, and there is a natural map $f:\scrE\to\check{\check\scrE}$. $\scrE$ is
+called \emph{reflexive} if $f$ is an isomorphism. $\scrT:=\ker(f)$ is called the
+\emph{torsion subsheaf} of $\scrE$. Of course, $\scrE/\scrT$ is torsion free.
+\end{defn*}
+\begin{defn*}
+$\supp(\scrE):=\{x\in X\,|\,\scrE_x\neq0\}$ is called the \emph{support} of
+$\scrE$. When $\scrE$ is coherent, it is a \textbf{closed} subset of $X$. Note
+that $\supp(\scrT)\neq X$.
+\end{defn*}
+\begin{defn*}
+$\Sing(\scrE):=\{x\in X\,|\, \scrE_x\text{ is not a free
+}\calO_x\text{-module}\}$. This is a proper closed subset of $X$. (Note that
+$\calO_\eta$ is a the function \emph{field}, where $\eta$ is the generic point,
+so that $\eta\notin\Sing(\scrE)$). I suppose that we call $\scrE$ \emph{smooth}
+when $\Sing(\scrE)=\emptyset$. This is a synonym for `locally free' for coherent
+sheaves.
+\end{defn*}
+\begin{thm*}
+If $\scrE$ is torsion free, then $\Sing(\scrE)$ has codimension at least
+two.\footnote{See R. Friedman, `Algebraic Surfaces and Holomorphic Vector
+Bundles'.} In particular, on a curve, a torsion free coherent sheaf is locally
+free.
+\end{thm*}
+\begin{thm*}
+If $\scrE$ is reflexive, then $\Sing(\scrE)$ has codimension at least three. In
+particular, a reflexive coherent sheaf on a curve or surface is locally free.
+\end{thm*}
+\begin{defn*}
+The \emph{rank} $\rank(\scrE)$ of $\scrE$ is defined to be the dimension of
+$\scrE_\eta$ over the function field $\calO_\eta$.
+\end{defn*}
+\begin{thm*}
+Suppose that $\scrE$ is a coherent reflexive sheaf of rank one. Then $\scrE$ is
+invertible (i.e.\ locally free of rank one).
+\end{thm*}
+\begin{proof}
+For some $n\gg0$, we have an injection $\calO\to\scrE(n)$ (\textbf{I don't
+understand why this is an injection. What if the section you use vanishes
+somewhere? Then the map on stalks is zero where it vanishes, right?}). Take the
+kernel, to obtain a short exact sequence
+\[0\to\calO\to\scrE(n)\to T\to 0.\]
+Then $T$ is a torsion sheaf, so $\check T=0$. Thus, dualising, we have an exact
+sequence
+\[0\to\check T\to\check\scrE(-n)\to\calO\to\ldots\textbf{ (what goes here?)}\]
+Thus $\check \scrE(-n)$ is a coherent sheaf of ideals, say $\scrI_Z$ for some
+closed subscheme $Z\subset X$. It is claimed that the dual of any nonzero
+coherent sheaf of ideals is locally free, so that as $\scrE$ is reflexive, it is
+locally free.
+\end{proof}
+\subsection*{Coherent sheaves on smooth curves}
+Let $C$ be a smooth curve.
+\begin{lem*}
+Every torsion free sheaf on $C$ is locally free.
+\end{lem*}
+\begin{proof}
+$\calO_x$ is always a PID, and a torsion free, finitely generated module over a
+PID is free.
+\end{proof}
+\noindent
+For a counterexample when $C$ is not smooth, try a nodal curve, with node $p$.
+Then $\scrI_p$ is torsion free but not locally free.
+\begin{lem*}
+Let $\scrE$ be coherent on $C$. Then $\scrE=\scrG\oplus\scrT$, where $\scrG$ is
+locally free, and $\scrT$ is a torsion sheaf (and thus supported at only
+finitely many points).
+\end{lem*}
+\begin{proof}
+There is a short exact sequence $0\to \scrT\to\scrE\to\scrG\to0$. Now $\scrG$ is
+torsion free, and so locally free, by the previous lemma. We need to see that
+the sequence splits. The obstruction to its splitting lies in
+$\Ext^1(\scrG,\scrT)=H^1(\check\scrG\otimes\scrT)$ (\textbf{presumably by some
+adjunction argument}). This group is zero, as $\check\scrG\otimes\scrT$ is a
+torsion sheaf (\textbf{why?}).
+\end{proof}
+\noindent For a counterexample when $C$ is not smooth, let $C$ be a nodal curve
+in $S=\A^2$. Let $\scrI=\scrI_{p\in S}$ be the ideal sheaf of the node, as a
+point of $S$. Consider $\scrI|_C:=\scrI\otimes_{\calO_S}\calO_C$ an
+$\calO_C$-module. The second lemma should fail for this sheaf. To see why,
+locally at $p$, $C$ is defined by $xy=0$. Then $\scrI_p=(x,y)$, and
+$\scrI_p|_C=(x,y)\otimes_{k[x,y]}k[x,y]/(xy)$, which is gereated by $x\otimes1$
+and $y\otimes1$ as a $k[x,y]/(xy)$-module. Now let $s=xy\otimes1$, a nonzero
+element. Then $x\cdot s=y\cdot s=0$, so that $s$ is a torsion element. But the
+module $\scrI_p|_C$ cannot be written as the direct sum it needs to in order to
+split off this torsion element.
+\subsection*{Vector bundles over curves}
+\begin{thm*}
+Every vector bundle on $\PP^1$ can be written as a direct sum of line bundles
+$\calO(a_i)$.
+\end{thm*}
+\begin{proof}
+By induction on rank. Take a vector bundle $E$. Now $E(-i)$ has no section for
+$i\gg0$, by the following argument. For $i\gg0$, $H^1(\check E(i-2))=0$, by a
+result of Serre\footnote{Hartshorne II.5.2}. However, by Serre duality,
+\[0=H^1(\check E(i-2))=\left[H^{1-\dim\PP^1}(({\check E(i-2)})^*\otimes
+K_{\PP^1})\right]^*=\left[H^0(E(-i))\right]^*,\]
+as the dualising sheaf is $K_{\PP^1}=\calO(-2)$.\footnote{In general, the
+dualising sheaf for $\PP^r$ is $K_{\PP^r}=\calO(-r-1)$, and the theorem is that
+for any vector bundle $E$, $H^n(E)\cong [H^{r-n}(E^*\otimes K_{\PP^r})]^*$}
+Choose the largest $i$ such that $E(-i)$ has a nonzero section. Then there is a
+short exact sequence
+\[0\to\calO\to E(-i)\to F\to 0,\]
+where $F$ is a torsion free sheaf (\textbf{why torsion free?}). By induction,
+$F=\bigoplus \calO(a_i)$. Consider:
+\[0\to\calO(-1)\to E(-i-1)\to\bigoplus\calO(a_i-1)\to 0.\]
+As $H^1(\calO(-1))=[H^0(\calO(1)\otimes\calO(-2))]^*=0$, the short exact
+sequence gives a short exact sequence on $H^0$, and as the first two terms have
+no global sections, neither does the third. Thus each $a_i\leq0$, and
+$\Ext^1(F,\calO)=H^1(\check F\otimes\calO)=\bigoplus H^1(\calO(-a_i))=0$, so the
+sequence splits.
+\end{proof}
+\subsubsection*{Vector bundles over curves of positive genus}
+Suppose that $C$ is an elliptic curve.
+
+
+\end{document}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
