@@ -327,6 +327,71 @@ Theorem: Let $X$ be a real space. Then we have a natural isomorphism
 \[\Omega^{2,1}(\mathbb{Z}\times BU)\simeq\mathbb{Z}\times BU.\]
 This allows us to define a $\mathbb{Z}_2$-equivariant spectrum $\KR$ with $\KR^{\mathbb{Z}_2}=\KO$. Lovely stuff.
 
+\section{Equivariant Homotopy Theory}
+\subsection{Some Useful Adjunctions}
+Let $G$ be a topological group.\\
+\\
+Let $\mathscr{U}$ denote the category of spaces (compactly generated, weakly Hausdorff) with continuous maps and let $G\mathscr{U}$ denote the category of left $G$-spaces with $G$-equivariant continuous maps.\\
+\\
+Let $X$ and $Y$ be $G$-spaces. Then $\mathscr{U}(X,Y)$ is a $G$-space: for $f\in\mathscr{U}(X,Y)$, $(g\cdot f)(x)=g(f(g^{-1}x))$; we see $\mathscr{U}(X,Y)^G=G\mathscr{U}(X,Y)$.\\
+\\
+We have a functor $1_G:\mathscr{U}\to G\mathscr{U}$ which equips a space $X$ with a trivial $G$-action and acts as the identity on morphisms.\\
+\\
+We also have functors
+\[(-)^G:G\mathscr{U}\to\mathscr{U}, \hspace{3pt} X\mapsto X^G; \hspace{10pt}
+(-)/G:G\mathscr{U}\to\mathscr{U}, \hspace{3pt} X\mapsto X/G\]
+\\
+Theorem: $1_G$ is left adjoint to $(-)^G$ and right adjoint to $(-)/G$.\\
+\\
+Proof: Let $K$ be a space, which we endow with a trivial $G$-action and $X$ be a $G$-space. Then we have natural homeomorphisms
+\[G\mathscr{U}(K,X)\cong\mathscr{U}(K,X^G);\hspace{10pt}
+\mathscr{U}(X/G,K)\cong G\mathscr{U}(X,K).\]
+Let $H$ be a subgroup of $G$ and let $Y$ be an $H$-space. Then we have the forgetful functor
+\[U:G\mathscr{U}\to H\mathscr{U}.\]
+We define $G\times_H Y$ to be the coequaliser of the maps $G\times H\times Y\to G\times Y$ given by the right action of $H$ on $G$ and the left action of $G$ on $Y$. The left action of $G$ on itself makes $G\times_H Y$ into a $G$-space.\\
+\\
+We define $\textup{Map}_H(G,Y)$ to be the subset of $\mathscr{U}(G,Y)$ defined by
+\[\{f:G\to Y: f=l_h\circ f\circ r_h\}.\]
+The action $g\cdot f=f\circ l_{g^{-1}}$ makes $\textup{Map}_H(G,Y)$ into a $G$-space.\\
+\\
+These constructions define two functors:
+\[G\times_H(-):H\mathscr{U}\to G\mathscr{U}; \hspace{10pt}
+\textup{Map}_H(G,-):H\mathscr{U}\to G\mathscr{U}\]
+Theorem: $U$ is right adjoint to $G\times_H(-)$ and left adjoint to $\textup{Map}_H(G,-)$.\\
+\\
+Proof: Let $X$ be a $G$-space and $Y$ be an $H$-space. We which to define natural isomorphisms
+\[G\mathscr{U}(G\times_H Y,X)\cong H\mathscr{U}(Y,X);\hspace{10pt}
+H\mathscr{U}(X,Y)\cong G\mathscr{U}(X,\textup{Map}_H(G,Y)).\]
+Given a $G$-map $f:G\times_H Y\to X$, we can define an $H$-map: $Y\to X$, $y\to f[e,y]$. Given an $H$-map $f:Y\to X$ we can define a $G$-map: $G\times_H Y\to X$, $[g,y]\to gf(y)$. We note that the unit of the adjunction is $Y\to G\times_H Y$, $y\to [e,y]$ and the counit is $G\times_H X\to X$, $[g,x]\to x$. Defining the adjunction interms of these maps makes it clear that the adjunction is actually a homeomorphism of topological spaces.\\
+\\
+The unit and counit of the other adjunction are given by $X\to\textup{Map}_H(G,X)$, $x\mapsto (g\mapsto g^{-1}x)$ and $\textup{Map}_H(G,Y)\to Y$, $f\to f(e)$, respectively. Again, one sees that we have a homemorphism.\\
+\\
+Theorem: If $X$ is a $G$-space then we have G-homeomorphisms
+\[G\times_H X\cong (G/H)\times X;\hspace{7pt}
+\textup{Map}_H(G,X)\cong\mathscr{U}(G/H,X).\]
+Proof: Define
+\[G\times_H X\to (G/H)\times X,\hspace{3pt}[g,x]\to ([g],gx)\]
+and
+\[\textup{Map}_H(G,X)\to\mathscr{U}(G/H,X),\hspace{3pt}f\mapsto([g]\mapsto g(f(g))).\]
+\\
+Theorem: $G/H\times(-):\mathscr{U}\to G\mathscr{U}$ is left adjoint to $(-)^H:G\mathscr{U}\to\mathscr{U}$.\\
+\\
+Proof: Let $K$ be a space which we endow with a trivial $G$-action and $X$ be a $G$-space. Then
+\[G\mathscr{U}(G/H\times K, X)\cong G\mathscr{U}(G\times_H K,X)\cong
+H\mathscr{U}(K,X)\cong\mathscr{U}(K,X^H),\]
+and the isomorphism is given by $(G/H\times K\overset{f}{\to} X)\mapsto (k\mapsto f([e],k))$.\\
+\\
+Theorem: $(-)/H:G\mathscr{U}\to\mathscr{U}$ is left adjoint to $\mathscr{U}(G/H,-):\mathscr{U}\to G\mathscr{U}$.\\
+\\
+Proof: Let $K$ be a space which we endow with a trivial $G$-action and $X$ be a $G$-space. Then
+\[\mathscr{U}(X/H,K)\cong H\mathscr{U}(X,K)\cong G\mathscr{U}(X,\textup{Map}_H(G,K))\cong G\mathscr{U}(X,\mathscr{U}(G/H,K)).\]
+\\
+Let $\mathscr{T}$ denote the category of based spaces with basepoint preserving continuous maps and let $G\mathscr{T}$ denote the category of based $G$-spaces with $G$-equivariant basepoint preserving continuous maps.\\
+\\
+All of the above continues to hold in the based setting. We replace $\mathscr{U}$, $G\times_H Y$, $(G/H)\times X$, $\textup{Map}_H(G,Y)$ and $\mathscr{U}(G/H,X)$ with $\mathscr{T}$, $G_+\wedge_H Y$, $(G/H)_+\wedge X$, $\textup{Map}_H(G_+,Y)_*$ and $\mathscr{T}(G/H_+,X)$, respectively.\\
+\\
+Finally, we note that all these adjunctions are sufficiently natural that they pass to homotopy classes of maps between spaces.
+
 
 \end{document}
 
