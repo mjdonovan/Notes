@@ -4,27 +4,192 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \documentclass[11pt]{article}
 \input{../macros.tex}
+\usepackage{fancyhdr}
+\usepackage{lipsum}
+\usepackage{comment}
+\rfoot{\footnotesize Michael Donovan}
 
-\newcommand{\TalkToOutput}{1} %`all' or an integer
+
+\newcommand{\TalkToOutput}{2} %`all' or an integer
 
 \newcommand{\KanSemResponse}[3]%{number}{title}{response}
 {
 \ifthenelse{\equal{\TalkToOutput}{all} \OR \equal{\TalkToOutput}{#1}}
 {
+\thispagestyle{fancy}
 \subsection*{#2}
 #3
 
 \pagebreak
 }
 {}
-
 }
 
 \begin{document}
 \KanSemResponse{1}
-{``Homologie singuliere des espaces fibres'' --- J.\ P.\ Serre}
+{``Homologie singuli\`ere des espaces fibr\'es'' --- J.-P.\ Serre}
 {
+The first part of this paper consists of a clear exposition of the methods used thereafter to produce spectral sequences. All the technology that is to be used is displayed with such clarity that one feels almost equipped to finish the writing oneself. (Strangely,) I hadn't really been familiar with the derivation of a spectral sequence from a filtered differential graded algebra, as I had seen it before I had started to become comforatable with spectral sequences. Thus, reading this derivation was a pleasure.
 
+I had been happy with the `births and deaths' interpretation of the Serre spectral sequence which we discussed, but I hadn't noticed that the differentials therein could be so closely connected with the actual differentials in a singlular (actually cubical) chain complex for the total space. This really does seem reasonable, on reflection.
+
+As I have used the Serre spectral sequence before, it was a pleasure to see how Serre sets up the machinery. For example, the discussion in chapter 1 of the transgression greatly clarifies the standard description of the transgression in the Serre spectral sequence. To me, this description had been a black box, and the derivation given has relieved me of the notion that something complicated was going on.
+
+In the second chapter, Serre defines cubical homology, which seems perfectly suited to his goals. Given a Serre fibration, he filters the cubical chains $u$ on the total space according to how deep a projection $I^n\to I^p$ the projection of $u$ to the base factors through. This has the virtue that a $p+q$-cube which lies in the $p^\text{th}$ filtration induces a $p$-cube on the base and a $q$-cube on the fibre (after assuming the base and fibre connected and adjusting the cubical complexes of total and base spaces to only include those with all corners at the basepoints). The induced chain homotopy between the $E_0$ page and the tensor product of chains on the base with those on the fibre make it much easier to properly understand the early pages of the spectral sequence.
+
+The local coefficients are built seamlessly into the picture --- I had until now been afraid of them. In particular, after reading this, I am happier with the proof I may present on Wednesday regarding the homology of the $\pi$-adic construction, which uses the Serre spectral sequence with base space $B\pi$.
+
+From this point the paper turns to applications, many familiar, some unfamiliar. On particularly charming idea is to take a space and repeatedly take the universal cover and then apply $\Omega$, to drag down the homotopy groups. It is this type of operation which Serre seems to apply often with admirable confidence. Anyhow, this process is used to show that the rational homotopy of odd spheres is zero, which is really a fantastic fact. This too relies on Serre's mod $\calC$ theory.
+
+Along the same lines, it is shown where the first $p$-torsion arises in the homotopy groups of a sphere. Both of these proofs have evaded my complete understanding, as they are in French, and when I have a little more time, I will try to decode them.
+
+Although I'm looking forward to reading about these applications in more detail, along with the other applications that I have not mentioned, I think that the main thing I will get out of this paper is clarity regarding the workings of the Serre spectral sequence. I felt recently that I had for the first time understood the differentials, using the births/deaths analogy which we discussed, coming from an exact triangle. Although this perspective is great when the coefficients are trivial, the $E_1$ page is not really canonical, and the multiplicative structure is a mystery. Now, however, this paper has opened up a route to understanding which is perhaps more direct, ``natural from $E_0$'' (as Michael Andrews will emphasise), and in which the multiplicative structure is finally transparent.
+}
+\KanSemResponse{2}
+{A derivation of the Steenrod Squares}
+{
+Choose $p$ prime, $n>0$, $\pi\subseteq \Sigma_n$. Fix spaces $E\pi\overset{r}{\to} B\pi$, and basepoints $e\mapsto b$.
+\[\xymatrix@R=.3cm{
+X^{(n)}\ar[r]^i\ar@{=}[d]&D_\pi X\ar@{=}[d]&\ar[l]_jB\pi_+\wedge X\ar@{=}[d]\\
+X^n/FW\ar[r]^{\text{incl}}&\frac{E\pi\times_\pi X^n}{E\pi\times_\pi FW}&
+\ar[l]_\Delta\frac{B\pi\times X}{B\pi\times\{*\}}\\
+y\ar@{|->}[r]&(e,y),\ (f,\Delta x)&\ar@{|->}[l](r(f),x)
+}
+\xymatrix@R=.3cm{
+&&\widetilde H^q(X)\ar[lld]_{u\mapsto u^{\wedge n}}\ar[ld]^{P_\pi}
+\ar[dd]_{\text{SQ}}\\
+\widetilde H^{nq}(X^{(n)})&\ar[l]^{i^*}\widetilde H^{nq}(D_\pi X)
+\ar[rd]^{j^*}\\
+&&\widetilde H^{nq}(B\pi_+\wedge X)
+}
+\]
+If $n=p=2$ and $\pi=\Z_2$, we have $\widetilde H^{nq}(B\pi_+\wedge X)=\Z_2[x]\otimes \widetilde H^*(X)$. Thus we can write $\text{SQ}(u)=\sum x^{q-i}\otimes\Squ^iu$, where $\Squ^iu\in \widetilde H^{q+i}(X)$.
+
+We are working over a field, so that homology and cohomology are dual. Thus to understand a cohomology class, it is enough to understand how it pairs with homology classes. So, we should take $s\in H_{q+i}(X)$ and calculate $(\Squ^iu)(s)$. To do so, one takes $t_{q-i}\in H_{q-i}(\RP^\infty)$ dual to $x^{q-i}$,\footnote{$(x^{q-i}\otimes \Squ^i(u))(t_{q-i}\otimes s)=\Squ^i(u)(s)$.}
+and calculates the pairing of $P_\pi(u)$ with $j^*(t_{q-i}\otimes s)$.
+
+\subsection*{Thom class vs.\ Steenrod power}
+If $\xi$ is an ($R$-oriented) $\R^n$-bundle, get an $n$-disk bundle $D(\xi)$ and an $(n-1)$-sphere sub-bundle $S(\xi)$.
+\[\xymatrix@!0@R=12mm@C=2.5cm{
+\iota\\
+\tau(\xi)\ar@{|->}[u]
+}
+\raisebox{-.6cm}{\qquad in $H^n(\DASH;R)$ of\qquad}
+\xymatrix@!0@R=12mm@C=2.5cm{
+(D^n,S^{n-1})\ar[d]\\
+(D(\xi),S(\xi))
+}\]
+Very similarly:
+\[\xymatrix@!0@R=12mm@C=2.5cm{
+u^{(n)}\\
+P_\pi u\ar@{|->}[u]\ar@{|->}[d]\\
+\text{SQ}u
+}
+\raisebox{-.6cm}{\qquad in $H^n(\DASH;R)$ of\qquad}
+\xymatrix@!0@R=12mm@C=2.5cm{
+(X^n,FW)\ar[d]^i\\
+(E\pi\times_\pi X^n,E\pi\times_\pi FW)\\
+(B\pi\times X,B\pi\times\{*\})\ar[u]_j
+}\]
+
+\pagebreak
+\subsection*{Construction of Steenrod Power $P_\pi$}
+\begin{lem*}\label{lemaboutpiadic}
+Suppose that $\widetilde H^i (X) = 0$ for $i < q$ and that $\widetilde H^q (X)$ is finite dimensional.  Then,
+\[\widetilde H^i(D_\pi X)=
+\begin{cases}0;&\textup{if }i<nq;\\(\widetilde H^q(X)^{\otimes n})^\pi;&\textup{if }i=nq,%;\\???;&\textup{if }i>nq
+\end{cases}
+\]
+and $i_X^*:\widetilde H^{nq}(D_\pi X)\to \widetilde H^{np}(X^{(n)})$ is the inclusion of the $\pi$-invariants $(\widetilde H^q(X)^{\otimes n})^\pi\subset\widetilde H^q(X)^{\otimes n}$.
+\end{lem*}
+\begin{proof}
+%One could produce a CW-complex for $D_\pi X$ having no cells of dimension less than $nq$. No, one cannot! What if $X$ is a $K(X/3,d)$ and the field is $X/2$? Then $H^*(X;Z/2)=0$, but there's plenty of cells.
+We have a map (drawn with dotted arrows) of bundle-subbundle pairs:
+\[\xymatrix@!0@C=1.7cm@R=.8cm{
+F_{n-1}X^n\ar[dd]\ar[rd]\ar@{.>}[rr]&&F_{n-1}X^n\ar'[d][dd]\ar[rd]\\
+&X^n\ar[dd]\ar@{.>}[rr]&&\ar[dd]X^n\\
+F_{n-1}X^n\ar[dd]\ar[rd]\ar@{.>}'[r][rr]&&E\pi\times_\pi F_{n-1}X^n\ar'[d][dd]\ar[rd]\\
+&X^n\ar[dd]\ar@{.>}[rr]&&\ar[dd]E\pi\times_\pi X^n\\
+\{b\}\ar@{.>}'[r][rr]\ar@{=}[rd]&&B\pi\ar@{=}[rd]\\
+&\{b\}\ar@{.>}[rr]&&B\pi
+}\]
+\begin{itemize}\squishlist
+\item $H^i(X^n,FW)=\widetilde H^i(X^{(n)})$ is zero for $i<nq$, $H^*(X)^{\otimes n}$ when $i=nq$, and the identification is equivariant w.r.t.\ permutations.
+\item $E_2^{s,t} = H^s(B\pi; \{H^t(X^n, F_{n-1} X^n)\}) \Rightarrow \widetilde H^{s+t}(D_\pi X)$ is zero below row $nq$.
+\item Have edge homomorphism: 
+\[\xymatrix{
+H^{nq}(E\pi\times_\pi X^n,E\pi\times_\pi FW)\ar@{->>}[r]^{\text{\qquad\qquad\qquad \ \ (iso)}} &E^{0,nq}_\infty\ar@{^{(}->}[r]^{\text{(iso)}}&E^{0,nq}_2\ar@{^{(}->}[r]^{\text{(inv)}}&E_1^{0,nq}\ar@{=}[r]&H^q(X^n,FW)
+}\]
+To get from $E_1^{0,nq}$ to $E_2^{0,nq}$ (after which the group is stable) one takes the $\pi$-invariants (recall that in Serre's model, one can take $E_1^{0,nq}$ to be $C^0(B)\otimes H^{nq}(X^n,F_{n-1}X^n)$, and only use cubes with corners at the basepoint).\qedhere
+\end{itemize}
+\end{proof}
+\begin{itemise}
+\item If $X=K_q=K(\F_p,q)$, this applies. Moreover, $K^q(K(\F_p,q);\F_p)$ is the field $\F_p\langle\imath_q\rangle$.
+\item Thus $i^*:\widetilde H^{nq}(D_\pi K_q)\to \widetilde H^{np}(K_q^{(n)})$ is an isomorphism. There is then a unique $P_\pi\imath_q$ mapping to $\imath_q^{\wedge n}$ under $i^*$.
+\item Now suppose that $u:X\to K_q$ represents $u\in \widetilde H^q(X)$. Need
+\[\xymatrix{
+\widetilde H^q(X)\ar[r]^{P_\pi}&\widetilde H^q(D_\pi X)\\
+\widetilde H^q(K_q)\ar[r]^{P_\pi}\ar[u]^{u^*}&\widetilde H^q(D_\pi K_q)\ar[u]_{(D_\pi u)^*}
+}\]
+Thus must have $P_\pi u=(D_\pi u)^*P_\pi\imath_q$. This map is natural, is the only way to extend $P_\mu$ from what it needs to be on $K_q$, and satisfies the formula, since it is satisfied in the universal case.
+\end{itemise}
+
+\pagebreak
+
+\subsection*{Properties}
+\begin{itemize}
+\item $\Squ^i u=0$ for $i<0$ (universality) and for $i>q$ (no negative powers of $x$).
+\item $\Squ^q u=u^2$.
+\[\xymatrix@R=.6cm{
+B\pi_+ \wedge X \ar[r]^j & D_\pi X \\
+S^0 \wedge X  \ar[r]^\Delta\ar[u]^{k\wedge 1} & X^{(2)}\ar[u]^i
+}
+\raisebox{-.5cm}{\textup{\qquad inducing:\qquad}}
+\xymatrix@R=.6cm{
+\sum_{i=0}^q x^{q-i} \otimes \Squ^i u\ar@{|->}[d]&
+\ar@{|->}[l]  Pu \ar@{|->}[d]\\
+u\smile u & u^{\wedge2}\ar@{|->}[l]
+}\raisebox{-.5cm}{\textup{\qquad on $\widetilde H^{2q}(\DASH)$.\qquad}}
+\]
+\item Cartan formula. Have map $\delta:D_\pi(X\wedge Y)\to D_\pi(X)\wedge D_\pi(Y)$ which is $\Delta$ on $E_\pi$ parts.
+\[\xymatrix@!0@C=4.4cm@R=1.8cm{
+%\xymatrix{
+(X\wedge Y)^{(2)}\ar[r]^i\ar[d]_T&D_\pi(X\wedge Y)\ar[d]^{\delta}_{(\Delta_{E\pi_+})}\\
+X^{(2)}\wedge Y^{(2)}\ar[r]^{i\wedge i}&D_\pi X\wedge D_\pi Y
+&B\pi_+\wedge X\wedge Y\ar[ul]_j\ar[d]^{\Delta_{B\pi_+}}\\
+&&B\pi_+\wedge X\wedge B\pi_+\wedge Y\ar[ul]_{j\wedge j}
+}\]
+\[\qquad\qquad\xymatrix@!0@C=4.4cm@R=1.8cm{
+(\imath_p\wedge \imath_q)^{(2)}&
+\ar@{|->}[l]  P(\imath_p\wedge\imath_q)\ar@{|->}[dr]\\
+\imath_p^{(2)}\wedge \imath_q^{(2)} \ar@{|->}[u]& P(\imath_p)\wedge P(\imath_q)\ar@{|->}[l]\ar@{|..>}[u]
+&\sum x^{p+q-k}\otimes\Squ^k(u\wedge v)\\
+&&(\sum x^{p-i}\otimes\Squ^i(u))\wedge(\sum x^{q-j}\otimes\Squ^j(v))\ar@{|..>}[u]\ar@{|->}[ul];[]
+}\]
+If $\delta^*$ does the right thing, then we're winners. It must, as in the universal case, $i^*$ is injective.
+\item Write $\Squ\,u=\sum \Squ^iu$. The Cartan formula says $\Squ(uv)=(\Squ\,u)(\Squ\,v)$.
+\item Exercise: show that $\Squ^0 s = s$, where $s$ is the generator of $\widetilde H^1 (S^1) = \Z_2$.
+\item $\Squ^k$ is stable --- it commutes with suspension. (The suspension is ``smash with $s$''\footnote{$\widetilde H^q (X)=\widetilde H^q (X)\otimes\widetilde H^1(S^1)\xrightarrow{\ \wedge e\ }\widetilde H^{q+1} (\Sigma X)$}, and so $\Squ^k(\sigma u) = \Squ^k(u \wedge e) = \Squ^k u \wedge \Squ^0 e = \sigma \Squ^k u$.)
+In particular, it is additive.
+\item 
+$\Squ^0: \widetilde H^q (X) \to \widetilde H^q (X)$ is the identity. (The map $\widetilde H^q(K^q)\to\widetilde H^q(S^q)$ induced by the fundamental class $s^{\wedge q}\in\widetilde H^q(S^q)$ is an isomorphism. Thus it's enough to check this on $s^{\wedge q}$, which follows from the exercise and Cartan.)
+\item
+$\Squ^1$ is the Bockstein.
+\item The Adem relations are satisfied. For $a<2b$: 
+\[
+\Squ^a \Squ^b = \sum_{j=0}^{\lfloor a/2\rfloor} \binom{b-j-1}{a-2j} \Squ^{a+b-j} \Squ^j.
+\]
+Note that $a<2b\implies a+b-j\geq2j$.
+\item $\Squ^{i_1}\cdots\Squ^{i_r}$ is admmissible if $i_1\geq 2i_2,\,\i_2\geq 2i_3$, etc. The Adem relations let us write any such product as a sum of admissible products.
+\item Let $\Steen$ be the free unital $\Z_2$-algebra on symbols $\Squ^i$ for $i>0$, mod the Adem relations.
+\begin{itemise}
+\item $\Steen$ acts on $\widetilde H^*(X)$ --- the free algebra obviously does, and this action descends to $\Steen$.
+\item $\Steen$ has a basis the admissible products.
+\item $\Steen$ is generated by the $\Squ^{2^i}$, which are indecomposable. (Do it by induction: use admissibility and Adem.)
+\end{itemise}
+\item Application: Suppose that $\widetilde H^*(X;\Z_2)=\Z_2[x]$, with $|x|=q$. Then $q=2^i$. (For $x^2=\Squ^{q}x\neq0$, but the intermidiate cohomology groups between $q$ and $2q$ are zero.)
+\item Application: Suppose that $f:S^{2n-1}\to S^n$ has odd Hopf invariant. Then $n=2^i$.
+\end{itemize}
 }
 
 \end{document}
