@@ -10,7 +10,7 @@
 \rfoot{\footnotesize Michael Donovan}
 
 
-\newcommand{\TalkToOutput}{2} %`all' or an integer
+\newcommand{\TalkToOutput}{3} %`all' or an integer
 
 \newcommand{\KanSemResponse}[3]%{number}{title}{response}
 {
@@ -191,7 +191,143 @@ Note that $a<2b\implies a+b-j\geq2j$.
 \item Application: Suppose that $f:S^{2n-1}\to S^n$ has odd Hopf invariant. Then $n=2^i$.
 \end{itemize}
 }
+\KanSemResponse{3}
+{``Cohomologie modulo 2 des complexes d'Eilenberg-MacLane'' --- J.-P.\ Serre}
+{
+\subsection*{Cohomology Operations}
+\begin{itemise}
+\item $H^p(K(\pi,q);G)$ is in bijection with natural transformations $\widetilde H^{q}(\DASH;\pi)\to\widetilde H^{p}(\DASH;G)$.
+\item The groups $H^{n+q}(K(\pi,q);G)$ are stable when $q>n$. Elements thereof are called ``stable cohomology operations''. The Steenrod algebra is the algebra of stable cohomology operations $H^*(\DASH;\Z_2)$. To see this, we should calculate $H^{n+q}(K(\pi,q);G)$ for large $q$.
+\item We'll use the path-loop fibation $K(\Z_2,q)\to *\to K(\Z_2,q+1)$. By induction:
+\[\text{$H^*(K(\Z_2,q);\Z_2)=\Z_2[\Squ^I(\imath_q)]$, over those admissible $I$ with excess less than $q$.}\]
+\item Need Borel's theorem:
+\begin{itemize}\squishlist
+\item A graded ring $R$ over $\Z_2$ has an order set $x_1,x_2,\ldots$ of homogeneous elements as a \emph{simple system of generators} if the monomials $\{x_{i_1}\cdots x_{i_r}:i_1<\cdots<i_r\}$ form a $\Z_2$-basis, and each graded part is finite dimensional.
+\item
+Suppose $F\rightarrow E\downarrow B$ is a fiber space with $E$ acyclic, and that $H^*(F;\Z_2)$ has a simple system $\{x_\alpha\}$ of transgressive generators. Then $H^*(B;\Z_2)$ is a polynomial ring in the $\{\tau(x_\alpha)\}$.
+\end{itemize}
+\item When $q=1$: have $\RP^\infty$, the poly alg on $\Squ^\emptyset\imath_1$.
+\item Inductive step:
+\begin{itemize}\squishlist
+\item There's a simple system of generators $(\Squ^I\imath_q)^{2^r}$.
+\item This equals $\Squ^{2^{r-1}(q+n(I)),\ldots,2(q+n(I)),(q+n(I))}\Squ^I\imath_q$.
+\item As $I$ runs over all admissibles with $e(I)<q$, ${2^{r-1}(q+n(I)),\ldots,2(q+n(I)),(q+n(I))},I$ runs over all with $e(I)<q+1$.
+\end{itemize}
+\item What about:
+\[\text{$H^*(K(\Z_{2^h},q);\Z_2)=\Z_2[\Squ^I_h(\imath_q)]$, over those admissible $I$ with excess less than $q$.}\]
+Here, we swap $\Squ^1$ for $\Squ^1_h$, the $h^\text{th}$ Bockstein operator.
 
+Here, the starting case is different: $H^*(K(\Z_{2^h},1);\Z_2)=\Lambda(u_1)\otimes\Z_2[\Squ_h^1(u_1)]$.
+\item What about:
+\[\text{$H^*(K(\Z,q);\Z_2)=\Z_2[\Squ^I(\imath_q)]$, over admissible $I$, $e(I)<q$, $I_\text{last}>1$.}\]
+Here, the starting case is different: $H^*(K(\Z,1);\Z_2)=\Lambda(u_1)$.
+\end{itemise}
+\subsection*{Stable Operations}
+Let's consider $H^{n+q}(K(\Z_2,q);G)$ for $q>n$. Basis corresponding to admissible sequences with degree $n$ (and excess less than $q$, but the excess condition is vacuous). Thus you get the whole degree $n$ part of the Steenrod algebra.
+\subsection*{$H^p(K(\pi,q);\Z_2)$ for $\pi$ finitely generated abelian}
+Using the K\"unneth formula to turn $\oplus$ to $\otimes$, only need to know it for $\Z$ and $\Z_{p^r}$. Know when $p=2$. If $p$ is odd, then ($q>1$) you can use mod $\calC$ theory (where $\calC$ is the class of ``abelian torsion groups of finite exponent $n$ coprime to $p$'').
+
+Note that if one is interested in stable groups, the K\"unneth formula turns $\oplus$ to $\oplus$.
+\subsection*{Poincare Polynomials}
+Let $\theta(\pi;q)$ be the Poincare polynomial for $H^*(K(\pi,q),\Z_2)$.
+\subsubsection*{The case $\pi=\Z_{2^h}$}
+\begin{itemize}\squishlist
+\item Have poly alg on an element of dimension $q+n(I)$ for each admissible $I$ with $e(I)<q$.
+\begin{align*}
+\theta(\Z_2;q)&=\prod_{e(I)<q}(1-t^{q+n(I)})^{-1}\\
+&=\prod_{h_1\geq h_2\geq\cdots\geq h_{q}=0}(1-t^{\sum2^{h_j}})^{-1}
+\end{align*}
+\item To see the last equality, take a sequence $I=(i_1,\ldots,i_r)$.
+\begin{itemize}\squishlist
+\item Let $\alpha_1=i_1-2i_2$,\ldots, $\alpha_r=i_r$.
+\item Let $\alpha_0=q-1-\sum\alpha_i$.
+\item $n(I)=\sum (2^i-1)\alpha_i=\sum_{i\geq0}2^i\alpha_i-(q-1)$.
+\item Thus generators of dimension $N$ are in bijection with $(\alpha_0,\ldots,\alpha_r)$ with sum $q-1$ and
+\[N=1+2^1\alpha_1+\cdots+2^r\alpha_r.\]
+There are $q$ summands, each a power of $2$. Let $h_1,\ldots, h_q$ be the powers, from biggest to smallest.
+\end{itemize}
+\end{itemize}
+\subsubsection*{The case $\pi=\Z$}
+\begin{itemize}\squishlist
+\item Have poly alg on an element of dimension $q+n(I)$ where $e(I)<q$, $I_\text{last}\neq1$ (for $q>1$).
+\begin{align*}
+\theta(\Z;q)&=\mathop{\prod_{e(I)<q,\ I_\text{last}\neq1}}(1-t^{q+n(I)})^{-1}\\
+&=\prod_{h_1> h_2\geq\cdots\geq h_{q-1}=0}(1-t^{\sum2^{h_j}})^{-1}
+\end{align*}
+\begin{itemize}\squishlist
+\item Now need $\alpha_r>1$, so that $h_1=h_2$.
+\item But then we can always swap $2^{h_1}+2^{h_2}$ for $2^{h_1+1}$.
+\item Thus we get one less summand and a strict last inequality.
+\end{itemize}
+\item
+\begin{itemize}\squishlist
+\item $\frac{\theta(\Z_2;q-1)}{\theta(\Z;q)}$ has those indexed by $h_1$ to $h_{q-1}$ with $h_1=h_2$.
+\item One can swap $2^{h_1}+2^{h_2}$ for $2^{h_1+1}$ again, and get the product for $\theta(\Z;q-1)$. Thus
+\[\theta(\Z;q)=\frac{\theta(\Z_2;q-1)\cdot\theta(\Z_2;q-3)\cdots}{\theta(\Z_2;q-2)\cdot\theta(\Z_2;q-4)\cdots}\]
+\end{itemize}
+\end{itemize}
+\pagebreak
+\subsubsection*{Convergence}
+\begin{itemize}\squishlist
+\item These converge for $|t|<1$.
+\item They have a ``dominant singularity'' at $t=1$.
+\begin{itemize}\squishlist
+\item Write $t=1-2^{-x}$, so $t\to1$ slowly as $x\to\infty$. Write:
+\[\phi(\pi;q)(x)=\log_2(\theta(\pi;q)(t)).\]
+\item Serre calculates:
+\[\phi(\Z_2;q)\sim x^q/q!\text{\qquad and\qquad}\phi(\Z;q)\sim x^{q-1}/(q-1)!\qquad\qquad\]
+\item As $\oplus\mapsto\otimes$ on $H^*$, $\oplus\mapsto\oplus$ on $\phi$. Thus:
+\begin{thm*}
+Suppose $\pi$ is f.g. with $s$ $\Z$ summands and $r$ $\Z_{2^h}$ summands. Then:
+\[\phi(\pi;q)\sim \begin{cases}
+r\cdot x^q/q! & r\geq1,\\
+s\cdot x^{q-1}/(q-1)! & r=0,\,s\geq1,\\
+0& r=s=0.
+\end{cases}\]
+\end{thm*}
+\end{itemize}
+\end{itemize}
+\subsubsection*{Topological Application}
+\begin{thm*}
+Suppose $X$ is simply connected and:
+\begin{enumerate}\squishlist
+\item The $H_i(X;\Z)$ are finitely generated;
+\item The $H_i(X;\Z_2)$ vanish for $i\gg0$;
+\item $H_i(X;\Z_2)$ is nonzero for some $i\gg0$.
+\end{enumerate}
+Then $\pi_i(X)$ has a $\Z$ or $\Z_2$ subgroup for infinitely many $i$.
+\end{thm*}
+\begin{exmp*}
+In $S^n$ there are finitely many $\Z$ summands, and thus infinitely many $\Z_2$ summands.
+\end{exmp*}
+\begin{proof}
+\begin{itemize}\squishlist
+\item By Hurewicz\footnote{Suppose that $X$ is simply connected, and that a Serre class $\scrC$ satisfies \textup{2A} and \textup{3}. Then if $\pi_i(X)\in\scrC$ for $i<n$ then $H_i(X)\in\scrC$ for $i<n$ and $h:\pi_n(X)\to H_n(X)$ is a $\scrC$-isomorphism.} mod $\calC$,\footnote{$\calC$ is the class of ``finitely generated abelian groups''} the homotopy groups are finitely generated. So it's enough to see that infinitely many $\pi_i\otimes\Z_2$ are nonzero.
+\item For a contradiction, suppose that $q$ is maximal such that $\pi_q\otimes \Z_2\neq0$.
+\item Let $j$ be the least positive integer such that $H_j(X;\Z_2)\neq0$.
+\item By Hurewicz mod $\calC$,\footnote{$\calC$ is the class of ``abelian torsion groups of finite exponent $n$ coprime to $2$''} $j$ is the first index such that $\pi_j\otimes \Z_2\neq0$. Thus $q\geq j\geq2$.
+\item Let $X_i=(X,i)$ be $X$ with the first $i-1$ homotopy groups killed, and let $A(t)$ be the Poincare polynomial for $H^*(A;\Z_2)$, for any space $A$ where these are finite dimensional.
+\item There's a fibration\footnote{Build $X_{i+1}$ from $X_{i}$ by attaching cells to $X_{i}$ to make it a $K(\pi_i,i)$. Then have inclusion $X_{i}\to K(\pi_i,i)$ whose fibre we call $X_{i+1}$.} $X_{q+1}\to X_q\to K(\pi_q,q)$. $H^*(X_{q+1};\Z_2)$ is trivial, by Hurewicz mod $\calC$. Thus the SSS gives $X_{q}(t)=\theta(\pi_q;q)$.
+\item %The mod 2 Serre spectral sequence shows that $H^*(X_q;\Z_2)=H^*(K(\Pi,q);\Z_2)$.
+Now there are fibrations:
+%\[X_{q+1}\to X_{q}\to K(\pi_{q};q),\]
+\[K(\pi_{q-1},q-2)\to X_{q}\to X_{q-1},\]
+\[K(\pi_{q-2},q-3)\to X_{q-1}\to X_{q-2},\]
+\[K(\pi_{q-3},q-4)\to X_{q-2}\to X_{q-3},\cdots\]
+\[K(\pi_{2},1)\to X_{3}\to X_2.\]
+\item Whenever $F\to E\to B$ is a fibration with $B$ simply connected, we have, on \emph{every coefficient}, $E(t)\leq F(t)\cdot B(t)$ (if all the terms make sense). The $E_2$ page has Poincare poly $F(t)\cdot B(t)$, but the differentials cut down dimensions.
+\item Thus, on coefficients:
+\begin{alignat*}{2}
+\theta(\pi_q;q)&= X_q(t)\\
+&\leq X_{q-1}(t)\cdot\theta(\pi_{q-1};q-2)\leq\cdots\\
+&\leq X(t)\cdot \prod_{1<i<q}\theta(\pi_i;i-1).
+\end{alignat*}
+\item $X(t)$ is a polynomial, so its values on $[0,1]$ are bounded by $h$. Taking $\log_2$:
+\[\phi(\pi_q;q)(x)\leq\log_2h+\sum_{i=2}^{q-1}\phi(\pi_i;i-1)(x).\]
+This is a contradiction --- the terms on the right grow at most as fast as $x^{q-2}$ as $x\to\infty$, but those on the right grow as either $x^q$ or $x^{q-1}$.\qedhere
+\end{itemize}
+\end{proof}
+}
 \end{document}
 
 
