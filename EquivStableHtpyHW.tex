@@ -1,0 +1,86 @@
+% !TEX root = z_output/_EquivStableHtpyHW.tex
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%% 80 characters %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\documentclass[11pt]{article}
+\input{../macros.tex}
+
+\newcommand{\rednote}[1]{{\color{red}#1}\scalebox{.1}{rednote}}
+\newcommand{\bluenote}[1]{{\color{blue}#1}\scalebox{.1}{rednote}}
+
+\newcommand{\funcdef}[4]{\begin{align*}
+#1&\to #2\\
+#3&\mapsto#4
+\end{align*}}
+
+\newcommand{\NewLecture}[2]{\section*{#1 {\small(due #2)}}}
+\newcommand{\Extracurricular}[1]{
+\section*{#1 {\small(extracurricular)}}
+}
+%\makeatletter
+%\def\@seccntformat#1{Problem Set \csname the#1\endcsname.\quad}
+%\makeatother
+\title{Equivariant Stable Homotopy Theory --- Math 289x}
+\author{Michael Donovan}
+\date{}
+
+\begin{document}
+\maketitle
+
+\NewLecture{Problem Set 1}{on the 3$^\text{rd}$ of October}
+\setcounter{section}{1}
+\subsection*{Problem 1} A standard proof that any map $f:X\to Y$ of CW-complexes is homotopic to a cellular map runs as follows:
+
+It is enough to prove, for any CW-complex $X$, and any map $f_n:X\to Y$ whose restriction to the $(n-1)$-skeleton $X^{n-1}$ is cellular, that:
+\[\text{ $f_{n-1}|_{X^n}$ is homotopic (rel $X^{n-1}$) to a cellular map $g:X^n\to Y$.} \tag{$\star$}\]
+For then, by the homotopy extension property for $(X,X^n)$, this homotopy extends to one on all of $X$, so we can produce a map $f_n$ homotopic to $f_{n-1}$ (rel $X^{n-1}$) which is cellular on restriction to $X^n$. Starting with $f_{-1}=f$, and repeating this process, we could homotope $f$ repeatedly to make it cellular on higher and higher skeleta, with homotopies fixing higher and higher skeleta. As every point of $x$ lies in some skeleton, and thus eventually stabilises under this sequence of homotopies, we can fit all of these homotopies into the interval $[0,1]$, to homotope $f$ into a cellular map.
+
+Now to show ($\star$),
+%that $f|_{X^n}$ is homotopic (rel $X^{n-1}$) to a cellular map (as in the first sentence above), 
+one needs only see that:
+\[\tag{$\star\star$}
+\text{any map $\gamma:D^n\to Y$ sending $\partial D^n$ into $Y^{n-1}$ is homotopic (rel $S^n$) to a map into $Y^n$}.
+\]
+% any map $\gamma:D^n\to Y$ sending $\partial D^n$ into $Y^{n-1}$ is homotopic (rel $S^n$) to a map into $Y^n$. 
+This will provide a homotopy for each $n$-cell of $X$ which fixes $X^{n-1}$. Performing all these homotopies at once gives the homotopy needed for $(\star)$.
+
+In the equivariant context, all cells $D^n$ are swapped for cells\footnote{This convention on cells is made to make what's coming seem simpler.} of the form $G/H\times D^n$ for $H$ a subgroup of $G$, and all attaching maps must be equivariant. The following observations are enough to adapt the proof to $G$-CW-complexes:
+\begin{itemize}\squishlist
+\item We need to see that there is a $G$-equivariant homotopy extension property for the pair $(X,X^n)$. In fact, to do this, it is enough to see that there is a $G$-equivariant HEP for a pair $(A\cup (G/H\times D^n),A)$, where $A$ is any $G$-space to which we are attaching an $n$-cell. This is the case, as the usual retraction of $D^n\times I$ onto $(D^n\times\{0\})\cup(S^{n-1}\times I)$, used in the proof of the nonequivariant HEP for such a pair (in Hatcher's book, p\. 14) adapts to the $G$-equivariant context simply by applying $G/H\times(\DASH)$.
+\item We need to see that $(\star\star)$ still holds, when $D^n$ is replaced by an equivariant cell, and $Y$ is a $G$-CW-complex. That is, we should see that any $\gamma:G/H\times D^n\to Y$ such that $\gamma(G/H\times\partial D^n)\subseteq Y^{n-1}$ is homotopic (rel $S\times S^n$) to a map into $Y^n$. However, as equivariant maps $G/H\times D^n\to Y$ are equivalent to nonequivariant maps $D^n\to Y^H$, this follows from $(\star\star)$.
+\end{itemize}
+\subsection*{Problem 2(a)}
+\subsection*{Problem 2(b)} We can calculate directly the morphisms $\Burnside_G(S,G)$. Given a $G$-equivariant roof
+\[\xymatrix@R=5mm{&U'\ar[dl]_\gamma\ar[dr]^\delta\\S&&G}\]
+one knows that $U'$ must be a disjoint union of free $G$-sets. Up to equivalence, the roof is of the form
+\[\xymatrix@R=5mm{&\coprod_{i=1}^rG\ar[dl]\ar[dr]^{\coprod(\id)}\\S&&G}\]
+Now an equivariant map $G\to S$ is just a choice of an element of $S$, yielding an isomorphism $\Burnside_G(S,G)\simeq\Z S$, the free abelian group on generators the elements of $S$. To make this more explicit, in the first diagram, let $\{u_1,\ldots, u_n\}=\delta^{-1}(\id)$. Then the element of $\Z S$ corresponding to this roof is $\sum_{i=1}^n\gamma(u_i)$.
+
+Next we should investigate the map $\Z S\to\Z T$ induced by a roof
+\[\xymatrix@R=5mm{&U\ar[dl]_\alpha\ar[dr]^\beta\\T&&S}\]
+To pull back a generator $s\in S$ of $\Z S$ along this morphism is to form a pullback $P$:
+\[\xymatrix@R=5mm{
+&&P\ar[dl]\ar[dr]\\
+&U\ar[dl]_\alpha\ar[dr]^\beta&&G\ar[dl]^{1\shortmapsto s}\ar[dr]\\
+T&&S&&G
+}\]
+The elements of the pullback $P$ which map to $\id\in G$ are in bijection with $\beta^{-1}(s)$.
+\subsection*{Problem 3}
+\subsection*{Problem 4}
+\subsection*{Problem 5}
+\end{document}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
