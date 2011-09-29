@@ -10,7 +10,7 @@
 \rfoot{\footnotesize Michael Donovan}
 
 
-\newcommand{\TalkToOutput}{4} %`all' or an integer
+\newcommand{\TalkToOutput}{5} %`all' or an integer
 
 \newcommand{\KanSemResponse}[3]%{number}{title}{response}
 {
@@ -368,6 +368,33 @@ A couple more cool things that I feel like mentioning:
 
 %somehow it is transverse to $B$ in $n$-dimensions, and in the remaining $k-n$ dimensions, it runs parallel to $B$. Obviously this makes no sense. But anyway, 
 %It seems to me then that the point of the Thom isomorphism is that any
+}
+\KanSemResponse{5}
+{``The Geometric Realization of a Semi-simplicial Complex'' --- John Milnor}
+{
+What I have gained most from this paper, and from Guozhen's talk, is the realisation that simplicial sets and their realisations are not too confusing. Until now, I had a latent belief that the geometric realisation was a strange, `thick' object, somehow with more `mass' than I desired. Instead, it turns out that the relations imply that every point in the realisation belongs to the interior of a unique nondegenerate simplex --- it's all very well organised in there.
+
+In fact, the construction that Milnor uses of the realisation is really very simple --- one just takes a disjoint union of the realisations of all of the simplices, and glues `faces' onto faces, and `degenerate simplices' degenerately onto simplices. The cells of the resulting CW-complex are exactly the simplices who were lucky enough not to get glued degenerately onto a lower dimensional one. Moreover, it is not strange to include degenerate simplices in our definition of simplicial set --- their presence mimics the situation in the singular simplicial set of a topological space (and I suspect there are even better rationales around for this) --- when calculating singular homology groups, we certainly don't discard degenerate simplices before forming the singular chain complex, even though they don't appear to tell us anything about the geometry of the space that the nondegenerate simplices did not. Again, perhaps this discussion seemed a little silly, but it was honest!
+
+I suppose now that one has realised that the geometric realisation isn't such a nasty process, one might expect that it should be compatible with reasonable operations on simplicial sets, such as products. There's a little point here to be made. The natural map $\eta:|K\times K'|\to|K|\times|K'|$ is a bijection, as Milnor verifies by constructing a set-theoretic inverse $\overline\eta$. He constructs $\overline\eta$ through a careful examination of the cells of $|K\times K'|$. Moreover, the map $\overline\eta$ is continuous on each product cell of $|K|\times|K'|$. Thus as long as $|K|\times|K'|$ actually inherits the structure of a CW-complex from its product cells, $\overline\eta$ is a homeomorphism. Fortunately, this happens under various conditions on the `size' of $K$ and $K'$.
+
+I like this point, because it is an example of why CW-complexes are so good to work with. This gave me pause to think about why `compactly generated' is a good adjective to place in front of the noun `space'. The continuity of a map out of such a space is determined `locally', which in this case means `over compact subsets'. 
+
+We would like to see that the `total singular complex' functor $S$ is right adjoint to the realisation functor:
+\[|\DASH|:\sSet\longleftrightarrow\Top:S\]
+My tendency is to try to understand such adjunctions as this by analogy --- there may be better ways --- and I suppose one analogy would be with the adjunction between the free and forgetful functors in various settings. The realisation should be the way to build a topological space which is as `free' as possible using the simplices to hand (while satisfying the relations between then), while applying $S$ should be the clumsiest way to return a simplicial complex given a space. Now write $\phi$ and $\theta$ for the maps
+\[\phi:\Top(|T|,X)\cong\sSet(T,SX): \theta.\]
+The appropriate definition of $\phi$ is obvious, but $\theta$ is a little bit trickier, and to understand it, one needs to understand the counit map $|SX|\to X$. The formula for this counit it clear enough, and chasing through this point of view has made me understand the whole picture far better.
+
+Guozhen, in his talk, gave a perspective on this adjunction which doesn't feature in the paper. It runs as follows: to check that the above adjunction holds, it is enough to observe that $|\DASH|$ preserves colimits (apparently this holds `almost by definition', which I'm beginning to believe as I write this response). Then one checks the adjunction holds when $T=\Delta^n$, and then notes that for any $T\in\sSet$ we may write
+\[K=\colim_{\Delta/K}\Delta^n,\]
+where $\Delta/K$ is the category of simplices $\Delta^n$ over $K$. I still need to really sit down with this and work out the details.
+
+What's cool about this is the idea that $\sSet$ is built from simplices, just as the category of CW-complexes, and so we can understand colimit-preserving functors from $\sSet$ by examining them on simplices. In fact, that the functor $|\DASH|$ is left adjoint to $S$ turned out to be equivalent to the fact that it preserved colimits.
+
+In fact, after writing thus far, one notes that if $F:\calC\to\calD$ is a functor which preserves colimits, and $G:\calD\to\calC$ is any functor, then these are adjoint \Iff there is a collection $\{c_i\}$ of objects of $\calC$, generating $\calC$ under colimits, such that $\calD(Fc_i,d)\cong\calC(c_i,Gd)$. The functor $S$ is of course perfectly designed to play the role of $G$.
+
+At this late stage, one should say a few words about the Dold-Kan correspondence, and about Eilenberg-MacLane complexes. Let it just be said that after this reading and talk, this material seems much less distant.
 }
 \end{document}
 
