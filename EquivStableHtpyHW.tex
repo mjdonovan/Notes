@@ -5,14 +5,6 @@
 \documentclass[11pt]{article}
 \input{../macros.tex}
 
-\newcommand{\rednote}[1]{{\color{red}#1}\scalebox{.1}{rednote}}
-\newcommand{\bluenote}[1]{{\color{blue}#1}\scalebox{.1}{rednote}}
-
-\newcommand{\funcdef}[4]{\begin{align*}
-#1&\to #2\\
-#3&\mapsto#4
-\end{align*}}
-
 \newcommand{\NewLecture}[2]{\section*{#1 {\small(due #2)}}}
 \newcommand{\Extracurricular}[1]{
 \section*{#1 {\small(extracurricular)}}
@@ -50,22 +42,155 @@ In the equivariant context, all cells $D^n$ are swapped for cells\footnote{This 
 \item We need to see that $(\star\star)$ still holds, when $D^n$ is replaced by an equivariant cell, and $Y$ is a $G$-CW-complex. That is, we should see that any $\gamma:G/H\times D^n\to Y$ such that $\gamma(G/H\times\partial D^n)\subseteq Y^{n-1}$ is homotopic (rel $S\times S^n$) to a map into $Y^n$. However, as equivariant maps $G/H\times D^n\to Y$ are equivalent to nonequivariant maps $D^n\to Y^H$, this follows from $(\star\star)$.
 \end{itemize}
 \subsection*{Problem 2(a)}
-\subsection*{Problem 2(b)} We can calculate directly the morphisms $\Burnside_G(S,G)$. Given a $G$-equivariant roof
+\subsubsection*{A note on the cohomology of a $G$-CW-complex}
+Suppose that $X$ is a $G$-CW-complex built by attaching $n$-cells $\vartheta^n_+\wedge D^n$ along an equivariant map $\alpha^n$:
+\[\xymatrix{
+\vartheta^n_+\wedge S^{n-1}\ar[d]\ar[r]^{\quad\alpha^n}&X^{n-1}\ar[d]\\
+\vartheta^n_+\wedge D^{n}\ar[r]&X^{n}
+}\]
+I'm going to assume that the $G$-sets $\vartheta^p$ are finite, at least for the time being --- I don't really know yet how this should extend to when they are not.
+We have a sequence of $G$-CW-inclusions, and thus a sequence of cofibre sequences:
+\[\xymatrix@!0@C=1.6cm@R=1.28cm{%@C=.5cm{
+\makebox[0cm][r]{$\cdots$\
+}\ast\ar[rr]&&X^0\ar[rr]\ar[ld]&&X^1\ar[rr]
+\ar[ld]&&X^2\ar[ld]
+\ar[rr]&&X^3\makebox[0cm][l]{\ $\cdots$}\ar[ld]\\
+%&\cdots\ar[r]&h_*(E)\\
+&X^0&&%\ar@{~>}[ul]&&
+X^1/X^0&&%\ar@{~>}[lu]&&
+X^2/X^1&&%\ar@{~>}[lu]&&
+X^3/X^2%\ar@{~>}[lu]
+}\]
+If we apply the functor $\oplus_{*}\{\DASH,K(M,*)\}^G$ to this diagram, we obtain an exact couple:
+\[\xymatrix@!0@C=1.6cm@R=1.28cm{%@C=.5cm{
+\makebox[0cm][r]{$\cdots$\
+}\widetilde H^*(\ast;M)\ar[rr];[]&&\widetilde H^*(X^0;M)\ar[rr];[]\ar[ld];[]&&\widetilde H^*(X^1;M)\ar[rr];[]
+\ar[ld];[]&&\widetilde H^*(X^2;M)\ar[ld];[]
+\ar[rr];[]&&\widetilde H^*(X^3;M)\makebox[0cm][l]{\ $\cdots$}\ar[ld];[]\\
+%&\cdots\ar[r];[]&h_*(E)\\
+&\widetilde H^*(X^0;M)\ar@{~>}[ul];[]&&
+\widetilde H^*(X^1/X^0;M)\ar@{~>}[lu];[]&&
+\widetilde H^*(X^2/X^1;M)\ar@{~>}[lu];[]&&
+\widetilde H^*(X^3/X^2;M)\ar@{~>}[lu];[]
+}\]
+Here the wiggly arrows raise degree by one, and each triangle is exact at each vertex. Such a structure induces a spectral sequence:
+\[E_1^{pq}:=\widetilde H^{p+q}(X^p/X^{p-1};M)\implies\widetilde H^*(X;M).\]
+Now $X^p/X^{p-1}=\vartheta^p_+\wedge S^p$, and by definition (of $K(n,M)$), this has cohomology group $M(\vartheta^p)$ in dimension $p$, and zero elsewhere. Thus $E_1^{pq}=0$ when $q\neq0$, and the spectral sequence will collapse by $E_2$. The $d_1$ differential $M(\vartheta^p)\to M(\vartheta^{p+1})$, (corresponding to following the maps north-east then south-east), as in the standard non-equivariant calculation, is the same as the map $\widetilde H^p(\vartheta^{p}_+\wedge S^{p})\to\widetilde H^p(\vartheta^{p+1}_+\wedge S^{p})$ induced by the composite:
+\[c_p:\left\{\vartheta_+^{p+1}\wedge S^p\overset{\alpha^{p+1}}{\to} X^p\to X^p/X^{p-1}\simeq\vartheta_+^{p}\wedge S^p\right\}.\]
+This composite, $c_p$ is an unstable map, and as such, cannot be just any map in $\{\vartheta_+^{p+1}\wedge S^p,\vartheta_+^{p}\wedge S^p\}^G\cong\Burnside_G(\vartheta^{p+1},\vartheta^p)$. Writing $\vartheta^{p+1}=\coprod_{i\in I}G/H_i$, we have:
+\begin{alignat*}{2}
+[\vartheta^{p+1}_+\wedge S^p,\vartheta^p_+\wedge S^p]^G&=\prod_{i\in I}[(G/H_i)_+\wedge S^p,\vartheta^p_+\wedge S^p]^G\\
+&=\prod_{i\in I}[S^p,(\vartheta^p)^{H_i}_+\wedge S^p]\\
+&=\prod_{i\in I}\bigoplus_{t\in(\vartheta^p)^{H_i}}[S^p,\{t\}_+\wedge S^p]\\
+&=\prod_{i\in I}\bigoplus_{t\in(\vartheta^p)^{H_i}}\Z
+\end{alignat*}
+In particular, the possible maps $c_p$, which can be viewed as elements of $\Burnside_G(\vartheta^{p+1},\vartheta^p)$, all lie in the $\Z$-span of the image of $\FinGSet(\vartheta^{p+1},\vartheta^p)\to\Burnside_G(\vartheta^{p+1},\vartheta^p)$. This is why we can define cohomology with coefficients in a coefficient system, not only with coefficients in a Mackey functor. Another way to say this is that all the roofs which appear when writing $c_p$ as a morphism in the Burnside category can be taken to have the form:
+\[\xymatrix@R=5mm{&\vartheta^{p+1}\ar@{=}[dl]\ar[dr]^\delta\\
+\vartheta^{p+1}&&\vartheta^p}\]
+The morphisms involved are $\Z$-linear combinations of these.
+\subsection*{Problem 2(b)}
+We can calculate directly the morphisms $\Burnside_G(S,G)$. Given a $G$-equivariant roof
 \[\xymatrix@R=5mm{&U'\ar[dl]_\gamma\ar[dr]^\delta\\S&&G}\]
 one knows that $U'$ must be a disjoint union of free $G$-sets. Up to equivalence, the roof is of the form
 \[\xymatrix@R=5mm{&\coprod_{i=1}^rG\ar[dl]\ar[dr]^{\coprod(\id)}\\S&&G}\]
-Now an equivariant map $G\to S$ is just a choice of an element of $S$, yielding an isomorphism $\Burnside_G(S,G)\simeq\Z S$, the free abelian group on generators the elements of $S$. To make this more explicit, in the first diagram, let $\{u_1,\ldots, u_n\}=\delta^{-1}(\id)$. Then the element of $\Z S$ corresponding to this roof is $\sum_{i=1}^n\gamma(u_i)$.
+Now an equivariant map $G\to S$ is just a choice of an element of $S$, yielding an isomorphism $\Burnside_G(S,G)\simeq\Z S$, the free abelian group on generators the elements of $S$. To make this more explicit, in the first diagram, let $\{u_1,\ldots, u_n\}=\delta^{-1}(1)$. Then the element of $\Z S$ corresponding to this roof is $\sum_{i=1}^n\gamma(u_i)$.
 
-Next we should investigate the map $\Z S\to\Z T$ induced by a roof
-\[\xymatrix@R=5mm{&U\ar[dl]_\alpha\ar[dr]^\beta\\T&&S}\]
-To pull back a generator $s\in S$ of $\Z S$ along this morphism is to form a pullback $P$:
-\[\xymatrix@R=5mm{
-&&P\ar[dl]\ar[dr]\\
-&U\ar[dl]_\alpha\ar[dr]^\beta&&G\ar[dl]^{1\shortmapsto s}\ar[dr]\\
-T&&S&&G
+Now we should consider the map $\Z\vartheta^{p}\to\Z\vartheta^{p+1}$ induced by a roof: $\xymatrix{\vartheta^{p+1}&\ar[l]_=\vartheta^{p+1}\ar[r]^\delta&\vartheta^p}$\!. We note easily that $t\in\vartheta^p$ is mapped to the sum of the elements of $\delta^{-1}(t)$, and with this observation, the map is determined by $\Z$-linearity. This agrees exactly with the map in the non-equivariant integral cellular reduced cochain complex, concluding the proof.
+%Next we should investigate the map $\Z S\to\Z T$ induced by a roof
+%\[\xymatrix@R=5mm{&U\ar[dl]_\alpha\ar[dr]^\beta\\T&&S}\]
+%To pull back a generator $s\in S$ of $\Z S$ along this morphism is to form a pullback $P$:
+%\[\xymatrix@R=5mm{
+%&&P\ar[dl]\ar[dr]\\
+%&U\ar[dl]_\alpha\ar[dr]^\beta&&G\ar[dl]^{1\shortmapsto s}\ar[dr]\\
+%T&&S&&G
+%}\]
+%The elements of the pullback $P$ which map to $\id\in G$ are in bijection with $\beta^{-1}(s)$.
+\subsection*{Problem 3: A $G$-CW-complex structure on $S^{n\sigma}$}
+We'll give a cell structure on $S^{n\sigma}$, being careful about getting the right convention with the $0$-cell. In fact, the best convention is to view the basepoint as a $(-\infty)$-dimensional cell, and that the $0$-skeleton of $S^{n\sigma}$, a pair of fixed points, is formed from the $(-1)$-skeleton by attaching $\ast_+\wedge D^0=D^0$ along the empty set, its boundary.
+%$\ast_+\wedge \emptyset$, the basepoint of $D_0$. 
+This convention best fits the fact that the $E_1^{00}$ term $\widetilde H^0(X^0;M)$ in the above spectral sequence is \emph{reduced}, and the fact that in the filtration of $X$ written above, the basepoint is in arbitrarily negative skeleta. For this insight, I thank Michael Andrews.
+
+There is a cell structure on $S^{n\sigma}$ with
+\[\vartheta^i=\begin{cases} *;&i=0;\\\Z_2;&1\leq i\leq n;\\\emptyset;&\text{otherwise}.\end{cases}\]
+We name all the maps we'll need:
+\begin{alignat*}{2}
+\imath&:\Z_2\to\Z_2&\quad&\text{the identity}\\
+\sigma&:\Z_2\to\Z_2&\quad&\text{interchanging the two points}\\
+\pi&:\Z_2\to *&\quad&\text{the unique map}
+\end{alignat*}
+With this terminology, we can view these as maps in $\Burnside_G$ (or in $\Orb_G$), and then write down linear combinations thereof which induce the equivariant cellular cochain complex for $S^{n\sigma}$:
+\[\xymatrix@C=2cm{
+\Z_2\ar[r]^{\imath+(-1)^{n-1}\sigma}&
+\Z_2\ar[r]^{\imath+(-1)^{n-2}\sigma}&
+\Z_2\ar[r]|{\ \cdots\cdots\ }&
+\Z_2\ar[r]^{\imath+\sigma}&
+\Z_2\ar[r]^{\imath-\sigma}&
+\Z_2\ar[r]^\pi&\ast
 }\]
-The elements of the pullback $P$ which map to $\id\in G$ are in bijection with $\beta^{-1}(s)$.
-\subsection*{Problem 3}
+Thus, to calculate the reduced cohomology with coefficients in $M$, it is enough to calculate $M(\Z_2)$, $M(*)$, $\imath^*$, $\sigma^*$ and $\pi^*$. We tabulate:
+\[\begin{array}{c|ccccc}
+M&M(\Z_2)&M(*)&\imath^*&\sigma^*&\pi^*\\\hline
+\underline\Z&\Z&\Z&\id&\id&\id\\
+R&\Z&\Z^2&\id&\id&(a,b)\shortmapsto a+b\\
+A&\Z&\Z^2&\id&\id&(a,b)\shortmapsto 2a+b
+\end{array}\]
+These claims are obvious for $\underline\Z$. For $R$, it's a bit trickier. A $\Z_2$-equivariant vector bundle over $\Z_2$ is determined by its dimension. On the other hand, there are two non-isomorphic $\Z_2$-equivariant vector bundles over $*$, which generate the Grothendieck group $\Z^2$. This explains the second line.
+
+For $A$, we find that $A(\Z_2)=\Burnside_G(\Z_2,*)$ is infinite cyclic generated by $\Z_2\overset{\imath}{\longleftarrow}\Z_2\overset{\pi}{\longrightarrow}*$, while $A(*)=\Burnside_G(*,*)$ is free abelian generated by $*\overset{\pi}{\longleftarrow}\Z_2\overset{\pi}{\longrightarrow}*$ and $*\longleftarrow*\longrightarrow*$. Then $\imath^*$ are $\sigma^*$ are easy, while the formula for $\pi^*$ is justified by calculating the following composites:
+\[\xymatrix@R=4mm@C=.5cm{
+&&\Z_2^2\ar[dl]\ar[dr]\\
+&\Z_2\ar@{=}[dl]\ar[dr]&&\Z_2\ar[dl]\ar[dr]\\
+\Z_2&&\ast&&\ast
+}\qquad\qquad
+\xymatrix@R=4mm@C=.5cm{
+&&\Z_2\ar[dl]\ar[dr]\\
+&\Z_2\ar@{=}[dl]\ar[dr]&&\ast\ar[dl]\ar[dr]\\
+\Z_2&&\ast&&\ast
+}\]
+In particular, the cochain complexes, with coefficients in $\underline\Z$, $R$ and $A$ respectively, are:
+\[\underline\Z:\ \xymatrix@C=2cm{
+\Z\ar[r];[]_{1+(-1)^{n-1}}&
+\Z\ar[r];[]_{1+(-1)^{n-2}}&
+\Z\ar[r];[]|{\ \cdots\cdots\ }&
+\Z\ar[r];[]_{2}&
+\Z\ar[r];[]_{0}&
+\Z\ar[r];[]_1&
+\Z
+}\]
+\[R:\ \xymatrix@C=2cm{
+\Z\ar[r];[]_{1+(-1)^{n-1}}&
+\Z\ar[r];[]_{1+(-1)^{n-2}}&
+\Z\ar[r];[]|{\ \cdots\cdots\ }&
+\Z\ar[r];[]_{2}&
+\Z\ar[r];[]_{0}&
+\Z\ar[r];[]_{\text{`$a+b$'}}&
+\Z^2
+}\]
+\[A:\ \xymatrix@C=2cm{
+\Z\ar[r];[]_{1+(-1)^{n-1}}&
+\Z\ar[r];[]_{1+(-1)^{n-2}}&
+\Z\ar[r];[]|{\ \cdots\cdots\ }&
+\Z\ar[r];[]_{2}&
+\Z\ar[r];[]_{0}&
+\Z\ar[r];[]_{\text{`$2a+b$'}}&
+\Z^2
+}\]
+\subsection*{Problem 3(a)}
+The cohomology of $S^\sigma$ is concentrated in dimension 0 with each of the three Mackey functors.  When $M=\underline\Z$, $R$, and $A$, we have that $\widetilde H^0(S^\sigma;M)$ is $0$, $\Z$ and $\Z$ respectively.
+\subsection*{Problem 3(b)}
+When we pass to $S^{n\sigma}$ for $n>1$, we do not change the cohomology in dimensions zero and one. Moreover, the cochain complexes are the same for each of the three Mackey functors. When $n$ is odd, we obtain copies of $\Z_2$ in dimensions $3,5,\ldots,n$. When $n$ is even, we obtain copies of $\Z_2$ in dimensions $3,5,\ldots,n-1$, and a copy of $\Z$ in dimension $n$.
+\subsection*{Problem 3(c)}
+We use the cofibre sequence $S(n\sigma)_+\to S^0\to S^{n\sigma}$. As $S^0$ has cohomology concentrated in dimension zero, the LES shows that:
+\[\widetilde H^i(S(n\sigma)_+;M)\cong \widetilde H^{i+1}(S^{n\sigma};M)\text{\quad for $i>0$}\]
+so that we only need to determine $\widetilde H^0(S(n\sigma)_+;M)$, which is the cokernel in a short exact sequence:
+\[\widetilde H^{1}(S^{n\sigma};M)=0\longleftarrow\widetilde H^{0}(S(n\sigma)_+;M)\longleftarrow\widetilde H^{0}(S^{0};M)\longleftarrow\widetilde H^{0}(S^{n\sigma};M)\longleftarrow0\]
+In each case, this cokernel is isomorphic to $\Z$, so that $\widetilde H^0(S(n\sigma)_+;M)=\Z$.
+\subsection*{Problem 3(d)}
+The cofibre $C$ of the map $X^G\to X$ has the $G$-equivariant homotopy type of a $G$-CW-complex with no fixed points but the basepoint. As $G=\Z_2$, $C$ is built only of cells of the form $(\coprod\Z_2)_+\wedge S^n$. Thus it is enough to check (because of the LES of the cofibration) that $\widetilde H^*(C;I)=0$ for any $G$-CW-complex built only of such cells.
+
+It is enough to show (the equivalent statement) that $I(\coprod\Z_2)=0$ for any number of copies of $\Z_2$ in the coproduct, which is equivalent to showing that the augmentation map $A(\coprod\Z_2)\to\underline\Z(\coprod\Z_2)$ is always injective. If one thinks about this augmentation map, one sees that it is an isomorphism between groups isomorphic to $\bigoplus\Z$.
+
+
 \subsection*{Problem 4}
 \subsection*{Problem 5}
 \end{document}
