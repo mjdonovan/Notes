@@ -5,13 +5,13 @@
 \documentclass[11pt]{article}
 \input{../macros.tex}
 
-\newcommand{\rednote}[1]{{\color{red}#1}\scalebox{.1}{rednote}}
-\newcommand{\bluenote}[1]{{\color{blue}#1}\scalebox{.1}{rednote}}
+%\newcommand{\rednote}[1]{{\color{red}#1}\scalebox{.1}{rednote}}
+%\newcommand{\bluenote}[1]{{\color{blue}#1}\scalebox{.1}{rednote}}
 
-\newcommand{\funcdef}[4]{\begin{align*}
-#1&\to #2\\
-#3&\mapsto#4
-\end{align*}}
+%\newcommand{\funcdef}[4]{\begin{align*}
+%#1&\to #2\\
+%#3&\mapsto#4
+%\end{align*}}
 
 \newcommand{\NewLecture}[3]{\section{#1 {\small(#2/#3/2011)}}}
 \newcommand{\Extracurricular}[1]{
@@ -27,11 +27,10 @@
 \begin{document}
 \maketitle
 \begin{abstract}
-These notes are based on a lecture course given by Mike Hopkins at Harvard in
-which he discussed the solution of Arf-Kervaire invariant problem. This theorem
-was proved by Mike Hill, Mike Hopkins and Doug Ravanel after $50$ years of
-mystery.
+These notes are based on a lecture course given by Mike Hopkins at Harvard, Fall 2011. The goal of the course was to discuss the solution of the Arf-Kervaire invariant problem. This theorem was proved by Mike Hill, Mike Hopkins and Doug Ravanel after $50$ years of mystery.
 \end{abstract}
+\tableofcontents
+\pagebreak
 \NewLecture{}{Wednesday 31}{8}
 \begin{thm*}[Hill, Hopkins, Ravanel]
 If $M$ is a stably framed smooth manifold of Kervaire invariant one, then $\dim
@@ -472,7 +471,7 @@ Thus, the $G$-equivariant homotopy theory of spaces is describable in terms of t
 If $X$ is a $G$-CW-complex, then $X^H$ is a CW-complex. Suppose that $\dim X^H<n(H)$, for $n$ a function on conjugacy classes of subgroups of $G$. Suppose that $Y$ is a $G$-space, and $\pi_i(Y^H)=0$ for $i\leq n(H)$. Then $[X,Y]^G=*$.
 \end{thm*}
 \NewLecture{}{Friday 9}{9}
-Now really lecture notes here --- more a summary of some relevant material.
+Not really lecture notes here --- more a summary of some relevant material, written by Michael Andrews.
 \subsection*{Homotopy Groups}
 Suppose that $X$ is a based space and $Y$ is based CW-complex. If we try to define a based map $f:Y\to X$ by induction on the skeleta of $Y$, the obstructions lie in the homotopy groups of $X$. If $X$ is a based $G$-space and $Y$ is a based $G$-CW-complex, we would like to find obstructions to defining equivariant based maps $f:Y\to X$ by induction on the skeleta of $Y$. This desire motivates the definition of the homotopy groups of $X$:
 %\[\underline{\pi}_n(X):(\GSet)^{\textup{op}}\to\AbGp,
@@ -687,7 +686,34 @@ Now $(\Omega S^1\wedge Y)^H=\Omega S^1\wedge Y^H$, and when if $Y^H$ is $(k-1)$-
 \begin{exmp*}
 Suppose $G=\Z_2$ and $V=\sigma$ (the sign representation). Consider $Y\to \Omega^\sigma S^\sigma\wedge Y$ (here, the $\Omega^\sigma$ stands for ``equivariant maps from $S^\sigma$'').
 \end{exmp*}
-\NewLecture{}{Monday 12}{9} Not yet.
+\NewLecture{}{Monday 12}{9}
+There's a bunch of things said early in the lecture that I don't have here yet.
+\subsection*{When is $[X,Y]^G\to[S^V\wedge X,S^V\wedge Y]^G$ an isomorphism?}
+For $G$-spaces $X$ and $Y$, with $X$ a $G$-CW-complex, we define non-negative integer valued functions $d(X),c(Y)$ on the set of conjugacy classes of subgroups of $G$:
+\[d^H(X)=\dim X^H,\quad \text{let $c^H(Y)$ be maximal so that $Y^H$ is $(c^H(Y)-1)$-connected.}\]
+We also have a corresponding relative notion, when $i:A\to Y$ is a map of $G$-spaces:
+\[\text{let $c^H(i)=c^H(Y,A)$ be the least $n$ such that $\pi_n(Y^H,A^H)\neq0$.}\]
+\begin{exmp*}
+If $V$ is a finite-dimensional representation of $G$, $d^H(S^V)=C^H(S^V)=\dim (V^H)$.
+\end{exmp*}
+Now ``by the usual obstruction theory'', $[X,Y]^G\to[S^V\wedge X,S^V\wedge Y]^G$ will be an isomorphism if $d(x)<c(Y\to\Omega^VS^V\wedge Y)-1$, so we'd rather like to understand the function $c(Y\to\Omega^VS^V\wedge Y)$. Classically, we have $c(Y\to\Omega^nS^n\wedge Y)=2c(Y)$.
+
+Let's choose a subgroup $H$ and a representation $V$, write $V_0=V^H$, and ask:
+\[\text{What's the connectivity of }
+Y^H\to(\Omega^VS^V\wedge Y)^H=\Map(S^V,S^V\wedge Y)^H?\]
+Well, we have restriction maps
+\[\Map(S^V,S^V\wedge Y)^H\to\Map(S^{V_0},S^{V_0}\wedge Y)^H=\Map(S^{V_0},S^{V_0}\wedge Y^H),\]
+giving a commuting diagram:
+\[\xymatrix{
+Y^H\ar[r]\ar[dr]_(.4){\text{``$2c^H(Y)$''}}&(\Omega^VS^V\wedge Y)^H\ar[d]\\
+&(\Omega^{V_0}S^{V_0}\wedge Y^H)
+}\]
+As we know (from the classical result) a lower bound on the connectivity of the hypotenuse, to put a lower bound on the connectivity of the horizontal, it is enough to calculate the connectivity of the vertical. This is what we shall do.
+
+Now the $W\subseteq V$ be a complementary $H$-representation to $V_0$, so that $V=V_0\oplus W$ as $H$-representations. The homotopy cofibre sequence $S(W)_+\to S^0\to S^W$ (in pointed $G$-spaces) can be smashed with $S^{V_0}$, to get another cofibre sequence:
+\[S^{V_0}\wedge S(W)_+\to S^{V_0}\to S^V.\]
+Here $S(W)$ is the unit sphere in $W$, and the `$+$' signifies the addition of a disjoint basepoint. Now mapping out of a cofibre sequence gives a fibre sequence, and .........
+
 \NewLecture{}{Wednesday 14}{9}
 The question for this lecture is: ``what is the stable $0$-stem''?
 \subsection*{Degree $S$ maps, for $S$ a $G$-set}
@@ -869,8 +895,8 @@ Today we'll outline two approaches to constructing equivariant spectra.
 Fix a $G$-universe $\scrU$ --- a countably infinite dimensional $G$-inner-product space containing each finite dimensional representation of $G$ with infinite multiplicity (this remedy for the set-theoretical difficulties is due to J.P.\ May). For example, $\scrU$ could be the inner product space sum of countably many copies of the regular representation.
 
 \begin{defn*}
-A $G$-spectrum indexed over $U$ is then to be a collection of spaces 
-\[\{X_V\,|\,V\subset\calU\text{ is finite dimensional and $G$-invariant}\}\]
+A $G$-spectrum indexed over $\scrU$ is then to be a collection of spaces 
+\[\{X_V\,|\,V\subset\scrU\text{ is finite dimensional and $G$-invariant}\}\]
 along with (unstable) maps $S^{W-V}\wedge S_V\to X_W$ whenever $V\subseteq W$ (where $W-V=W\cup V^\perp$), which are associative, in the sense that the following diagram commutes:
 \[\xymatrix{
 \ar[d]S^U\wedge S^V\wedge X_W\ar[r]&S^U\wedge X_{V\oplus W}\ar[d]\\
@@ -904,7 +930,7 @@ Let $\scrT_G$ be the category whose objects are pointed $G$-spaces, and whose mo
 
 Now a $G$-equivariant map $I_G(V,W)\wedge X_V\to X_W$ corresponds to a $G$-equivariant map $I_G(V,W)\to \scrT_G(X_V,X_W)$. That is, for each isometry $f:V\to W$, and each $x\in W-f(V)$, we give a (non-equivariant) map $X_V\to X_W$, such that as $\|x\|$ increases, the map $X_V\to X_W$ tends to the constant map, and we do all this equivariantly. \rednote{(I don't really get the point of the `$x$' in this.)}
 
-Thus an orthogonal $G$-spectrum is the same as a functor between categories enriched over $\scrT_G$:
+Thus an orthogonal $G$-spectrum is the same as a functor between categories enriched over $\scrT^G$:
 \[I_G\to\scrT_G\]
 where $I_G$ is the category whose objects are finite dimensional $G$-representations, whose morphisms are given by the Thom complex constructed above, and whose composition is given by the smash product map constructed. \rednote{I haven't thought long about this, but assume it's what he's getting at.}
 \subsection*{The obvious notion of a map}
@@ -924,6 +950,10 @@ Fix now a representation $U$ of $G$. Define a $G$-spectrum $(S)$ by stipulating
 with the obvious structure maps. This is suppose to correspond to $S^0$ as well --- we have just truncated the beginning of the colimit. But $\GSpectra((S),S^0)$ is now the same as $\scrT^G(S^U,S^U)$, so for $U\gg0$, this will calculate $\{S^0,S^0\}^G$.
 
 The message to take from this is that we should introduce a class of weak equivalences, so that the homotopy theory will not see the difference between $\Sigma^\infty S^0$ and $(S)$. Once we've given the correct model structure, the homotopy category will be correct.
+\NewLecture{}{Monday 26}{9}
+\NewLecture{}{Wednesday 28}{9}
+\NewLecture{}{Friday 30}{9}
+
 \end{document}
 
 
