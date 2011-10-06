@@ -1,0 +1,135 @@
+% !TEX root = z_output/_Juvitop.tex
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%% 80 characters %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\documentclass[11pt]{article}
+\input{../macros.tex}
+\usepackage{fancyhdr}
+
+\includeversion{SaulJuvitop}
+
+\rfoot{\footnotesize Michael Donovan}
+\newcommand{\KanSemResponse}[1]
+{
+\thispagestyle{fancy}
+\subsection*{#1}
+}
+
+\begin{document}
+\begin{SaulJuvitop}
+\KanSemResponse
+{``Simplicial Localisation'' --- Saul Glasman --- 6 October 2010}
+Group completion \rednote{(do it levelwise?)}, classifying spaces, operads, etc.\ are all better in the category of simplicial sets. We have a Quillen adjunction:
+\[|\DASH|:\sSet\longleftrightarrow\Top:\Sing\]
+These form a Quillen equivalence.
+\begin{exmp*}
+The nerve of a category $\calC$ is the simplicial set whose $k$-simplices are chains of $k$ composable morphisms. Forming the realisation of the nerve of a group (as a category) you get the classifying space.
+\end{exmp*}
+\textbf{Drawback:} Not everything is fibrant (unlike in $\Top$).
+
+This is bad, for example if you'd like to calculate, say, self maps of $S^1$, if we view $S^1$ simply as the boundary of the $2$-simplex.
+The fibrant objects in $\sSet$ are the Kan complexes, ``characterised by the fact that they are enormous''.
+\subsection*{Simplicial Localisation}
+Given a category $\calC$ and a class $\scrW$ of ``weak equivalences'' in $\calC$. $\scrW$ should have the 2 of 3 property, and maybe some other stuff. We want to localise $\calC\to\calC[\scrW^{-1}]$ with the obvious universal property.
+
+Let's write a candidate for $\calC[\scrW^{-1}]$. The objects are the same, while the maps are equivalence classes of zigzags (\rednote{under some relation} where we at least allow ourselves to add in pairs of identities):
+\[\xymatrix{
+X\ar[r]&A_0&\ar[l]_\sim A_1\ar[r]&A_2&\ar[l]_\sim\cdots\ar[r]&A_{2n}&A_{2n+1}\ar[l]_\sim\ar[r]&Y
+}\]
+There are computational problems here. The reason for this difficulty is that we've skipped a step.
+\begin{defn*}
+A simplicial category is one in which $\Map(X,Y)$ is a simplicial set, composition is a morphism of simplicial sets. Actually we could just say that a simplicial category is a functor $\Delta^\op\to\Set$, such that for any $I,J\in\Delta$, $S(I)$ and $S(J)$ have the same objects, and $S(I)\to S(J)$ is the identity on objects. The morphisms are free to do as they please.
+\end{defn*}
+There's a universal simplicial category $L^\scrW C$ in which $\scrW$ becomes invertible. I.e.\ if $\calD$ is a simplicial category, and we have a functor sending $\scrW$ to isomorphisms, we get a unique (up to homotopy) factorisation
+\[\xymatrix{
+\ar[d]\calC\ar[r]&\calD\\
+L^\scrW \calC\ar@{..>}[ur]
+}\]
+In particular, $\calD$ could be $\calC[\scrW^{-1}]$, so we have filled in our missing step.
+\[\xymatrix{
+\ar[d]\calC\ar[r]&\calC[\scrW^{-1}]\\
+L^\scrW \calC\ar@{..>}[ur]
+}\]
+Moreover, the map on morphisms given by this factorisation is the projection to $\pi_0$ (after we realise the simplicial set of morphisms $L^\scrW \calC(X,Y)$).
+\subsection*{Constructing the simplicial localisation}
+Suppose we have $X,Y\in\ob\calC$. The $0$-simplices in $\Mor(X,Y)$ are just zig-zags (up to an equivalence relation in which we can add in identities):
+\[\xymatrix{
+X\ar[r]&A_0&\ar[l]_\sim A_1\ar[r]&A_2&\ar[l]_\sim\cdots\ar[r]&A_{2n}&A_{2n+1}\ar[l]_\sim\ar[r]&Y
+}\]
+$1$-simplices are going to be diagrams like:
+\[\xymatrix@R=.4cm{
+&A_0\ar[dd]^\sim&\ar[l]_\sim A_1\ar[dd]^\sim\ar[r]&A_2\ar[dd]^\sim&\ar[l]_\sim\cdots\ar[r]&A_{2n}\ar[dd]^\sim&A_{2n+1}\ar[dd]^\sim\ar[l]_\sim\ar[rd]\\
+X\ar[rd]\ar[ur]&&&&&&&Y\\
+&B_0&\ar[l]_\sim B_1\ar[r]&B_2&\ar[l]_\sim\cdots\ar[r]&B_{2n}&B_{2n+1}\ar[l]_\sim\ar[ru]
+}\]
+Higher simplices come from carrying on in this fashion --- adding more and more rows to the diagram. A $k$-simplex will be a hammock of width $k+1$.
+Thus $\Mor(X,Y)$ is just the nerve of the category of zig-zags from $X$ to $Y$ and weak equivalences of zig-zags.
+
+\subsection*{In a model category}
+I can get a factorisation
+\[\xymatrix{
+X&\ar@{->>}[l]_\sim X'\ar[r]&Y'\ar@{_{(}->}[r];[]_\sim&Y
+}\]
+Where $X'$ is cofibrant, and $Y'$ is fibrant. So actually, we only need hammocks as in diag 3.
+\subsection*{Another model for the simplicial localisation}
+There's a forgetful functor $\Cat\to\mathsf{DirectedGraphs}$, which has a left adjoint, called `Free'. The free category on a directed graph has morphisms given by composable words in the edges of the graph. Now suppose I want to localise $\calC=\text{Free}(V\cup W)$, where $V$ and $W$ are graphs with no shared edges (but probably with shared vertices). Then $\calC[W^{-1}]=\text{AlmostFree}(V\cup W^{\pm1})$:  the morphisms are reduced composable words in the arrows of $V$ and of $W\cup W^{-1}$. That's easy, and if we could replace a category with something like this, we'd win.
+
+Given $\calC$, I can form $F(\calC)$, the free category on $\calC$, by applying forget, then free. $F$ is a monad, and I have natural transformations $FF\to F$ and $1\to F$ satisfying the monoid axioms. So I'll construct a simplicial category $M$, whose category of $k$-simplices is $F^{k+1}(\calC)$, and whose faces and degeneracies are given by the monad maps.
+
+\begin{fact}
+$M$ is equivalent to $\calC$ as  simplical category.
+\end{fact}
+\noindent But now to invert $W$ is achievable levelwise. $M\to M[W^{-1}]$ is the simplicial localisation.
+\subsection*{A simplicial model category}
+should be a model category enriched in simplicial sets, which already has the `right' space of morphisms, at least between its cofibrant and fibrant objects.
+\begin{defn*}
+A simplicial model category is a model category, and a simplicial category, which: 
+\begin{enumerate}
+\item is tensored and cotensored over $\sSet$. [So that given $X\in \calC$ and $K\in\sSet$, can take $X\otimes K$ and $\Hom(K,X)$, and there's an adjunction].
+\item Given a cofibration $A\cofibration B$ and a fibration $X\fibration Y$, there is a natural map:
+\[c:\Hom(B,X)\to\Hom(A,X)\times_{\Hom(A,Y)}\Hom(B,Y).\]
+The codomain is the space of ways to complete the following into a commuting square:
+\[\xymatrix@R=.6cm{
+A\ar@{^{(}->}[d]&X\ar@{->>}[d]\\
+B&Y
+}\]
+We demand that $c$ is a fibration, and if either $X\fibration Y$ or $A\cofibration B$ is acyclic, that $c$ is an acyclic fibration.
+\end{enumerate}
+\begin{punchline}
+If $\calC$ is a simplicial model category, and $\calC'$ is the underlying category (take $0$-simplices as morphisms), then $\calC$ and $L^\scrW(\calC')$ are equivalent and simplicial categories.\footnote{$\scrW$ is the $0$-simplices that are weak equivalences.}
+\end{punchline}
+\subsection*{Post talk ramblings}
+A weak equivalence of simplicial categories is a zig-zag of (simplicial) functors $F_i:\calC_i\to\calC_{i+1}$ such that $\pi_0F_i$ is a weak equivalence (of spaces), and for each $X,Y\in\ob(\calC_i)$, $\Mor(X,Y)\to\Mor(F_iX,F_iY)$ is a weak equivalence in the model category of simplicial sets.
+\end{defn*}
+
+
+\pagebreak
+\end{SaulJuvitop}
+\end{document}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
