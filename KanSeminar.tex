@@ -6,15 +6,17 @@
 \input{../macros.tex}
 \usepackage{fancyhdr}
 
-\includeversion{SerreHomSingFibSpace}
+\excludeversion{SerreHomSingFibSpace}
 \excludeversion{SteenrodTalk}
 \excludeversion{SerreCohModTwoEilMacLane}
 \excludeversion{CharacteristicClasses}
 \excludeversion{MilnorGeometricRealization}
 \excludeversion{ThomGlobalPropertiesPartOne}
 \excludeversion{JeremyThomPracticeTalk}
-\excludeversion{JeremyThomTalk}
+\includeversion{JeremyThomTalk}
 \excludeversion{ThomGlobalPropertiesPartTwo}
+\excludeversion{Kervaire}
+\includeversion{SignatureThmTalk}
 
 \rfoot{\footnotesize Michael Donovan}
 \newcommand{\KanSemResponse}[1]
@@ -519,12 +521,12 @@ $\omega$ is injective in degree $\leq n$, and this is how we see that the Adem r
 Have $\psi:\Steen\to\Steen\otimes\Steen$ the unique algebra homomorphism\footnote{To check it we need to use a bit of knowledge about the Steenrod.} taking $\Squ^i$ to the Whitney sum $\sum \Squ^{i_1}\otimes\Squ^{i_2}$ --- the comultiplication map.
 \end{prop*}
 \begin{proof}
-Let $A$ be the free associative algebra on the $\Squ^i$. There's a projection $\pi:A\to\Steen$. The definition of $\psi$ definitely extends to a map $A\to\Steen\otimes\Steen$. We need to check that $\ker\pi$ contains/contained in $\ker\psi$. But:
+Let $A$ be the free associative algebra on the $\Squ^i$. There's a projection $\pi:A\to\Steen$. The definition of $\psi$ definitely extends to a map $A\to\Steen\otimes\Steen$. We need to check that $\ker\pi$ is contained in $\ker\psi$. But:
 \[\xymatrix{
 A\ar[r]^{\psi\quad}\ar[d]_\pi&\Steen\otimes\Steen\ar[r]^{\omega\otimes\omega\qquad}&H^*(X)\otimes H^*(X)\ar[r]^{\quad\sim}&H^*(X\times X)\\
 \Steen\ar[rrru]_{\omega\times\omega}\ar@{..>}[ur]
 }\]
-And $\omega\otimes\omega$ is injective in a range, depending on how many factors we choose in $X$.
+And $\omega\otimes\omega$ is injective in a range which depends on how many factors we choose in $X$.
 \end{proof}
 Also have a counit map $\epsilon:\Steen\to\Z_2$ which takes $\Squ^0\mapsto 1$ and $\Squ^i\to0$ for $i>0$. These satisfy coherence conditions:
 \[\xymatrix{\Steen\ar[r]\ar[d]&\Steen\otimes\Steen\ar[d]&\\
@@ -622,7 +624,60 @@ My main problem with this paper is that I have found it hard to read. I found my
 I'm sure I'll have an opportunity to take a closer look at this material post-Kan seminar, perhaps from a more modern viewpoint.
 \pagebreak
 \end{ThomGlobalPropertiesPartTwo}
+\begin{SignatureThmTalk}
+\KanSemResponse
+{The Signature Theorem}
+\begin{enumerate}
+\item Bound the rank of $\Omega_n$ below, by defining and calculating Pontrjagin numbers.
+\item Bound the rank of $\Omega_n$ above, by showing that $\pi_{n+k}(T(\widetilde\gamma_p^k))\to\Omega_n$ for $p,k>n$ is a surjection, and comparing the rank of $\pi_{n+k}(T(\widetilde\gamma_p^k))$ to that of $H_{n+k}(T(\widetilde\gamma_p^k))$. As this Thom space is $(k-1)$-connected, the Hurewicz is a $\calC$-iso up to dimension $2k-2$, which shows that the ranks agree where we want them to. Now $H^{n+k}(T(\widetilde\gamma^k);\Z[1/2])$ is calculated by using Pontrjagin classes, and also equals $H^{n}(\widetilde G_k;\Z[1/2])$. This equals $H^{n}(\widetilde G_k(\R^{p+k});\Z[1/2])$ for $p,k> n$ (looking at a CW-decomposition at top of page 81).
 
+\textbf{Summary:} Choose $k,p>n$. (Maybe $k,p\geq n+2$ so that this $\calC$-iso works).
+\[\Omega_n\leftfibration\pi_{n+k}(T(\widetilde\gamma^k_p))\overset{\calC\sim}{\to}H_{n+k}(T(\widetilde\gamma^k_p))=H_{n}(\widetilde G_k(\R^{p+k}))\]
+Now have, with $G'=\widetilde G_k(\R^{p+k})$:
+\[0\to\Ext(H_{n-1}(G'),\Z[1/2])\to H^{n}(G';\Z[1/2])\to \Hom(H_n(G'),\Z[1/2])\to0.\]
+Now the Ext group is finite\footnote{In fact, $\Ext(\Z/(2^r(2s+1))\Z,\Z[1/2])\cong \Z/(2s+1)\Z$, and of course $\Ext(\Z,\Z[1/2])=0$.} as $H_{n-1}(G')$ is finitely generated, and so the $\Z[1/2]$-ranks of the latter groups are equal. The $\Z[1/2]$-rank of the Hom group is just the rank of $H_n(G')$ ($\Z[1/2]$ being torsion free), showing that the rank of $H_n(G')$ is at most the $\Z[1/2]$-rank of $H^n(G';\Z[1/2])$. Now it's shown that:
+\[H^*(\widetilde G_{k};\Z[1/2])=\Z[1/2][p_1,p_2,\ldots,p_{\lfloor k/2\rfloor},e]/
+\begin{cases}
+e=0;&\ \text{$k$ odd};\\
+e^2=p_{k/2};&\ \text{$k$ even},
+\end{cases}\]
+where $p_i$ has dimension $4i$, and $e$ has dimension $k$. Now this in fact equals 
+$H^*(G';\Z[1/2])$ in dimensions less than both $k$ and $p$ (looking at a CW-decomposition at top of page 81). Thus, this group has rank $p(n/4)$ in dimension $n$. So, $\Omega_n$ is finitely generated, and has rank $p(n/4)$, for all $n$.
+
+
+\end{enumerate}
+Assume:
+\begin{itemize}
+\item The cohomology ring $H^*(\widetilde G_{n};\Lambda)$, when $\Lambda$ is a domain containing $1/2$:
+\[H^*(\widetilde G_{n};\Lambda)=\Lambda[p_1,p_2,\ldots,p_{\lfloor n/2\rfloor},e]/
+\begin{cases}
+e=0;&\ \text{$n$ odd};\\
+e^2=p_{n/2};&\ \text{$n$ even},
+\end{cases}\]
+where $p_i$ has dimension $4i$, and $e$ has dimension $n$.
+\end{itemize}
+\begin{enumerate}
+\item Oriented $4k$-dimensional manifolds:
+\begin{enumerate}
+\item There is a nondegenerate symmetric bilinear form on $H^{2k}(M^{4k})$.
+\item The signature is called the signature $\sigma(M^{4k})$ of $M^{4k}$. 
+\item The signature is a \emph{genus} --- a ring homomorphism from $\Omega_*\to\Q$. This can be proven directly, but we won't need to by the end of this talk.
+\item As $\sigma$ is a genus, it must factor through $\Omega_*\to\Omega_*\otimes\Q$. We'll study $\Omega_*\otimes \Q$ using Pontrjagin numbers.
+\end{enumerate}
+\item Pontrjagin numbers
+\begin{enumerate}
+\item Definition
+\item Linear independence of pontrjagin numbers --- the nonsingular matrix. 
+\item The products $\CP^{j_1}\times\cdots\times\CP^{j_r}$ are linearly independent in $\Omega_*$.
+\end{enumerate}
+\item The cobordism ring
+\begin{enumerate}
+\item We know that for $k>n+1$, $\pi_{n+k}(T(\widetilde\gamma^k))\cong\Omega_n$.
+\item The surjection $\pi_{n+k}(T(\widetilde\gamma_p^k))\to\Omega_n$ for $p,k\geq n$. Want to write as $\pi_{n+k}(MSO(k))$ for $k\geq n$.
+\item Now as Haynes explained: For a finite $(k-1)$-connected complex, the homotopy groups stay finite until $\pi_{2k-2}$. Apply Hurewicz mod $\calC$ (the finite abelian groups) to see that the hurewicz map is a $\calC$-iso to this dimension inclusive. This is currently wrong.
+\end{enumerate}
+\end{enumerate}
+\end{SignatureThmTalk}
 
 \end{document}
 
