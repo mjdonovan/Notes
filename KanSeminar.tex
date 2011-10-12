@@ -16,8 +16,9 @@
 \excludeversion{JeremyThomTalk}
 \excludeversion{ThomGlobalPropertiesPartTwo}
 \excludeversion{Kervaire}
-\excludeversion{SignatureThmTalk}
-\includeversion{JandrPracticeKervaire}
+\includeversion{SignatureThmTalk}
+\excludeversion{JandrKervaire}
+\excludeversion{KervaireNoDifferentiableStructure}
 
 
 \rfoot{\footnotesize Michael Donovan}
@@ -634,12 +635,12 @@ I'm sure I'll have an opportunity to take a closer look at this material post-Ka
 \begin{enumerate}
 \item There is a nondegenerate symmetric bilinear form on $H^{2k}(M^{4k})$.
 \item The signature is called the signature $\sigma(M^{4k})$ of $M^{4k}$. 
-\item The signature is a \emph{genus} --- a ring homomorphism from $\Omega_*\to\Q$. This can be proven directly, but we won't need to by the end of this talk.
+\item The signature is a \emph{genus} --- a ring homomorphism from $\Omega_*\to\Q$. This can be proven directly, but we won't, for lack of time.
 \item As $\sigma$ is a genus, it must factor through $\Omega_*\to\Omega_*\otimes\Q$. We'll study $\Omega_*\otimes \Q$ using Pontrjagin numbers.
 \end{enumerate}
 \item Bound the rank of $\Omega_n$ below, by defining and calculating Pontrjagin numbers.
 \begin{enumerate}
-\item Definition of Pontrjagin classes and numbers
+\item Definition of Pontrjagin classes and numbers.
 \item Linear independence of Pontrjagin numbers --- the nonsingular matrix. 
 \item The products $\CP^{j_1}\times\cdots\times\CP^{j_r}$ are linearly independent in $\Omega_*$.
 \end{enumerate}
@@ -700,8 +701,26 @@ Now the Ext group is finite as $H_{n-1}(\widetilde G)$ is finitely generated,\fo
 So, for all $n$, $\Omega_n$ is finitely generated, with rank $p(n/4)$. $\Omega_*\otimes\Q$ is polynomial with generators the even complex projective spaces.
 \end{itemise}
 
+\subsection*{Chern and Pontrjagin classes}
+\begin{itemise}
+\item An $n$-dimensional complex vector bundle $\omega\downarrow X$ has Chern classes: characteristic classes $c_i(\omega)\in H^{2i}(X)$, $i=0,\ldots,n$.
+\item These satisfy a Cartan formula, $c_0=1$, and a normalisation, and are pulled back from:
+\[H^*(BU(n);\Z)=\Z[c_1(\gamma^n),c_2(\gamma^n),\ldots,c_n(\gamma^n)]\text{\quad with $|c_i|=2i$.}\]
+\item Define the Pontrjagin classes of an $n$-dimensional real vector bundle $\xi\downarrow X$ to be the even Chern classes of the complexification $\xi\otimes\C$, with a sign:
+\[p_i(\xi)=(-1)^ic_{2i}(\xi\otimes\C)\in H^{4i}(X;\Z).\]
+We could say $p(\xi):=c_{-ev}(\xi\otimes\C)$.
+\item Ignore the even Chern classes --- they have order 2, as a complexification is isomorphic to its conjugate.
+\item The total Pontrjagin class inherits a Cartan formula which holds modulo elements of order 2.
+\item If $M^{4k}$ is an oriented $4k$-manifold, for each partition $I=(i_1,\ldots,i_r)$ of $k$, we have:
+\[p_I[M]=p_{i_1}\cdots p_{i_r}[M]=\langle p_{i_1}(\tau_M)\cdots p_{i_r}(\tau_M),[M]\rangle\text{\ \ $\leftarrow$ Pontrjagin number}\]
+\item \textbf{Pontrjagin numbers of $\CP^{2n}$:} Write $H^*(\CP^{2n})=\Z[a]/a^{2n+1}$. We know that:
+$c(\tau)=(1+a)^{2n+1}$ and $c(\overline\tau)=(1-a)^{2n+1}$, so that $c(\tau\oplus\overline\tau)=(1-a^2)^{2n+1}$, and:
+%\[p(\tau)=c_{ev}(\tau\otimes\C)=c_{ev}(\tau\oplus\overline\tau)=\sum c_{2j_1}(\tau)c_{2j_2}(\tau)\]
+%Now $c(\tau)=(1+a)^{n+1}\text{ and }c(\overline\tau)=(1-a)^{n+1}\text{, so that }$
+\[p(\tau):=c_{-ev}(\tau\otimes\C)=c_{-ev}(\tau\oplus\overline\tau)=(1+a^2)^{2n+1}.\]
+Unraveling this, we obtain $p_I[\CP^{2n}]={2n+1\choose i_1}\cdots{2n+1\choose i_r}.$
 
-
+\end{itemise}
 %\item Bound the rank of $\Omega_n$ above, by showing that $\pi_{n+k}(T(\widetilde\gamma_p^k))\to\Omega_n$ for $p,k>n$ is a surjection, and comparing the rank of $\pi_{n+k}(T(\widetilde\gamma_p^k))$ to that of $H_{n+k}(T(\widetilde\gamma_p^k))$. As this Thom space is $(k-1)$-connected, the Hurewicz is a $\calC$-iso up to dimension $2k-2$, which shows that the ranks agree where we want them to. Now $H^{n+k}(T(\widetilde\gamma^k);\Z[1/2])$ is calculated by using Pontrjagin classes, and also equals $H^{n}(\widetilde G_k;\Z[1/2])$. This equals $H^{n}(\widetilde G_k(\R^{p+k});\Z[1/2])$ for $p,k> n$ (looking at a CW-decomposition at top of page 81).
 %
 %\textbf{Summary:} Choose $k,p>n$. (Maybe $k,p\geq n+2$ so that this $\calC$-iso works).
@@ -729,11 +748,32 @@ So, for all $n$, $\Omega_n$ is finitely generated, with rank $p(n/4)$. $\Omega_*
 %\end{cases}\]
 %where $p_i$ has dimension $4i$, and $e$ has dimension $n$.
 %\end{itemize}
+
+\pagebreak
 \end{SignatureThmTalk}
 
-\begin{JandrPracticeKervaire}
+\begin{KervaireNoDifferentiableStructure}
 \KanSemResponse
-{Jandr's Practice Talk on Thom's paper}
+{``A Manifold which does not admit any Differentiable Structure'' --- M.\ Kervaire}
+This paper seems to me to be quite remarkable. It consists of the application of a large collection of techniques, in ways perhaps a little unmotivated, to show the existence of a pathological object. Not only does Kervaire give us ``A Manifold which does not admit any Differentiable Structure'', he throws in a set of steak knives and an exotic 9-sphere.
+
+It seems that there is a disparity between the dense computational character of the text, and the relative simplicity of the construction of the manifold $M_0$. Perhaps this is to be expected --- if there were any manifolds not admitting a differentiable structure, there should be an abundance of them, and it need not be a surprise that one can be found by a relatively simple construction. That being said, the non-existence of a differentiable structure sounds like the type of statement that needs to be proven by intricate calculation --- this would explain the density of the exposition. Moreover, the nature of the search for pathological objects explains some of the seemingly arbitrary features of the example given (for example, the appearance of the number `10') and of the calculations (for example, the attachment of a 6-cell to $\Omega S^6$ along a map of degree two).
+
+Reading this paper has given me an opportunity to acquaint myself with the basics of obstruction theory, which seems like a powerful tool when in the right hands. Anyway, it's first use is, for any $X\in H^5(M)$ (where $M$ is a 4-connected 10-manifold) to define a map $f:M\to\Omega:=\Omega S^6$ such that the generator $e_1$ of $H^5(\Omega)$ maps to $X$. Here, one sees that the first difficult obstruction is in dimension 10 --- its coefficients as in $\pi_9(\Omega)=\pi_{10}(S^6)$, which is zero (as it's in the Stable $4$-stem). Lucky?
+
+Anyway, once such a map $f$ is found, one can form $f^*(u_2)$, where $u_2$ is the generator of $H^{10}(\Omega;\Z_2)$. We denote this $\phi(x)$, where $x$ is the reduction mod 2 of $X$. If 5 were an even number, then $\phi(x)$ would equal the reduction mod 2 of $X^2$ (as then the cohomology of $\Omega$ would be divided polynomial). However, 5 is not even, so that we have some trickier `operation'. There must be some good way to understand this geometrically, although I don't know what that would be. However, perhaps if we knew we were searching for an `operation' of this type, $\Omega$ would be a somewhat feasible choice --- the generators $e_1$ and $e_2$ of $H^5(\Omega)$ and $H^{10}(\Omega)$ are not related by a polynomial identity, but by $\pi^*(e_2)=e_2\otimes1+1\otimes e_2+e_1\otimes e_1$, where $\pi^*$ is the Pontrjagin coproduct.
+
+The next thing that struck me in this paper was the use of (or more the existence of) Milnor's technique for killing homotopy groups of a (framed) manifold by ``spherical modifications''. In fact, the idea is very simple. Given a low-dimensional non-trivial homotopy class $S^r\to M$, that one would like to kill, one deforms and fattens it into a codimension 0 embedding $S^r\times D^{q+1}$ into $M$, and then surgically replaces this copy of $D^{r+1}\times S^{q}$. Of course, then, the `hole' given by the homotopy class is filled, and if $r$ is small enough, the new hole is one of strictly higher dimension. That's a clever idea. Moreover, as we kill the lower homotopy groups, the homology of the manifold becomes simpler more quickly than one might expect, by Poincar\'e duality.
+
+It was a pleasure to see the results of the Thom paper appearing in this context. I need practice before feeling completely at easy with them. On thing which I have found a little weird is the way that the Thom collapse works for framed manifolds. It has a rather different flavour than with a non-trivial structure group, as the classifying map can be taken to be to a point. I don't know why this is bugging me, but everything will eventually be alright.
+
+Anyway, there were a number of prerequisites for this paper which I lacked. In particular, I'd like to learn about the handlebody decompositions that Michael discussed in his practise talk, and how they are dualisable. This, along with a better understanding of Morse theory, would give me more confidence with some of the details, for example, in the calculation showing that the Kervaire invariant of $M_0$ is in fact one.
+
+\pagebreak
+\end{KervaireNoDifferentiableStructure}
+\begin{JandrKervaire}
+\KanSemResponse
+{Jandr's Talk on Kervaire's paper}
 The plan:
 \begin{enumerate}
 \item Construct $\Phi$ a (homotopy type) invariant of closed 4-connected 10-manifolds.\footnote{Simply connected implies oriented!}
@@ -743,29 +783,28 @@ The plan:
 \begin{question}
 Is this the standard Kervaire invariant?
 \end{question}
-The normal Kervaire invariant is defined for $(4k-2)$-dim framed manifolds. Define $q:H^{2k+1}(M;\Z)\to\Z_2$ a quadratic refinement ($q(x+y)=q(x)+q(y)+(x\smile y)[M]$) of cup product. Define $\Phi=\text{Arf}(q)$.
+The normal Kervaire invariant is defined for $(4k-2)$-dim framed manifolds. Define a quadratic refinement $q:H^{2k+1}(M;\Z)\to\Z_2$ of the cup product pairing (i.e.\ a function satisfying $q(x+y)=q(x)+q(y)+(x\smile y)[M]$). Define $\Phi=\ArfInvariant(q)$.\footnote{Arf invariant returns which value is taken on more often by $q$.}
 
-%To define $w$, take $M^n\subset \R^{n+N}$ giving $S^{n+N}\to\text{Th](\nu))=\Sigma^NM_+$
-%\[q:(M_+\to K)\to(S^{n+M}\to\Sigma^NM_+\to\Sigma^NK)\]
-%this gives an element of $\pi_n^s(K)=\Z_2$. ($K=K(\Z_2,2k+1)$)
+To define $q$, take $M^n\subset \R^{n+N}$ giving $S^{n+N}\to\text{Th}(\nu)=\Sigma^NM_+$
+\[\left(q:M_+\to K\right)\mapsto(S^{n+M}\to\Sigma^NM_+\to\Sigma^NK)\]
+this gives an element of $\pi_n^s(K)=\Z_2$. ($K=K(\Z_2,2k+1)$)
 
 \subsection*{Defining $\Phi$}
-Define $\phi_0:H^*(M)\to\Z_2$ by letting $e_1,e_2$ be the generators of $H^5(\Omega S^6),H^{10}(\Omega S^6)$, and $u_2$ be the generator $H^{10}(\Omega S^6;\Z_2)$.
+Define $\phi_0:H^5(M)\to\Z_2$ by letting $e_1,e_2$ be the generators of $H^5(\Omega S^6),H^{10}(\Omega S^6)$, and $u_2$ be the generator $H^{10}(\Omega S^6;\Z_2)$. For $X\in H^5(M)$:
 \begin{enumerate}
 \item Find $f_X:M\to\Omega$ such that $f_X^*(e_1)=X$.
-\item $\phi_0(M):=f^*_X(u_2)[M]$.
+\item Define $\phi_0(M):=f^*_X(u_2)[M]$.
 \end{enumerate}
-Can show that $\phi_0$ descends to
+Can show that $\phi_0$ descends (nothing tricky here, by Poincar\'e duality...) to
 \[\phi:H^5(M;\Z_2)\to\Z_2.\]
-Let $\Phi$ be $\text{Arf}(\phi)$.
+Let $\Phi$ be $\ArfInvariant(\phi)$, i.e.\ $\sum\phi(x_i)\phi(y_i)$, where the $x_i,y_i$ are a symplectic basis.
 \subsection*{Constructing $M_0$}
-Start with $S^5$, and let $\tau$ be its tangent bundle.  Pullback:
+Start with $S^5$, and let $\tau$ be its tangent bundle.  Pullback in two ways, with the factors $D^5$ playing opposite roles:
 \[\xymatrix{
 D^5\times D^5\ar[d]_{\pi_1}\ar[r]&D(\tau)_1\ar[d]\\
 D^5\ar[r]^{\text{top hemi}}&S^5
-}\]
-
-\[\xymatrix{
+}\qquad
+\xymatrix{
 D^5\times D^5\ar[d]_{\pi_2}\ar[r]&D(\tau)_2\ar[d]\\
 D^5\ar[r]^{\text{top hemi}}&S^5
 }\]
@@ -774,67 +813,95 @@ Pushout:
 \ar[d]D^5\times D^5\ar[r]&D(\tau)_1\ar[d]\\
 D(\tau)_2\ar[r]&W
 }\]
-Think about Jandr's fat fingers. Need to do some smoothing, unless you're Milnor.
+That is, $W$ is obtained by plumbing two copies of the disc bundle.
+Need to do some smoothing of the boundary $\partial W$, (unless you're Milnor, who's really smart somehow).
 
-By Morse theory, $\partial W=S^9$ (writes down a morse function with only two critical points). Let $M_0$ be the cofibre of $S^9\to W$. Our proof will then also show that $\partial W$ must be exotic.
+By Morse theory, $\partial W=S^9$ (Milnor writes down a Morse function with only two critical points, and applies a theorem of Milnor).\footnote{To construct it, you note that the tangent bundle of $S^5$ has a non-vanishing section, so we can reduce the structure group to $SO(4)$. This comes in handy somehow.} 
+Let $M_0$ be the cofibre of $S^9\to W$. Our proof will then also show that $\partial W$ must be exotic.
 
 \subsection*{Showing that $\Phi(M_0)=1$:}
-Now to $\Phi(M_0)=1$. The 0-sections of the two disk bundles meet transversely at a point. We have $S^5\vee S^5\to W$, which is a homotopy equivalence. So adding a 10-cell, $M_0$ has a CW-structure with one 0-cell, two 5-cells and one 10-cell (which shows that it's 4-connected).
+Now to $\Phi(M_0)=1$. The 0-sections of the two disk bundles meet transversely at a point. We have $S^5\vee S^5\to W$, which is a homotopy equivalence. So adding a 10-cell, $M_0$ has a CW-structure with one 0-cell, two 5-cells and one 10-cell (which shows that it's 4-connected). Haynes: ``so it looks a lot like $S^5\times S^5$, a whole lot! I think then you're plumbing by \emph{not} swapping the roles of the disks.''
 
 The copies of $S^5$ give generators of $H_5(M_0)=\Z\oplus\Z$. Let $X$ and $Y$ be the Poincar\'e dual generators. Let $x$ and $y$ be their reductions mod $2$, and let $K=\text{Th}(\tau)$. Now $x\cdot y=1$ (using the intersection pairing), so that $\{x,y\}$ is a symplectic basis. We need then to show that $\phi(x)\phi(y)=1$.
 
-Let's take $f_X:M_0\to K$ which collapses everything outside $D(\tau)_X$ to the basepoint and takes $D(\tau)_X\to K=D(\tau)/S(\tau)$. This is like a tubular neighbourhood thingo, so that $f_X^*(t)=X$, where $t$ is the Thom class. By some local degree argument, $f_X^*$ is an iso on $H^{10}$.
+Let's take $f_X:M_0\to K$ which collapses everything outside $D(\tau)_X$ (the copy of $D(\tau)$ corresponding to $X$) to the basepoint and takes $D(\tau)_X\to K=D(\tau)/S(\tau)$. This $D(\tau)_X$ is a tubular neighbourhood of the $S^5$ corresponding to $X$, so that $f_X^*(t)=X$, where $t$ is the Thom class. By a local degree argument, $f_X^*$ is an iso on $H^{10}$. We do the same to construct $f_Y$.
 
-If $K$ were equal to $\Omega S^6$, we'd be done. But it's not! Now $K$ has the form $S^5\cup_f e^{10}$. Here, $f=[\imath_5,\imath_5]$, the Whitehead square. Now $\Omega S^6$ has a cell structure (Jandr likes it via Morse theory) with cells of dimension $5k$ for $k\in\N$, so that the 10-skeleton is $S^5\cup e^{10}$ too, and it turns out that you also get the Whitehead square. Thus $K\subset \Omega S^6$ is the 14-skeleton, and you're a winner. We're using $\Omega S^6$, cause it's an H-space, which'll be good.
+If $K$ were equal to $\Omega S^6$, we'd be done. But it's not! Now $K$ has the form $S^5\cup_f e^{10}$. Here, $f=[\imath_5,\imath_5]$, the Whitehead square. Now $\Omega S^6$ has a cell structure (Jandr likes it via Morse theory) with cells of dimension $5k$ for $k\in\N$, so that the 10-skeleton is $S^5\cup e^{10}$ too, and it turns out that you also get the Whitehead square. Thus $K\subset \Omega S^6$ is the 14-skeleton, and you're a winner. 
+
+By the way, we're using $\Omega S^6$, cause it's an H-space, which'll be good when one wants to prove the quadratic refinement formula. We'll form $f_{X+Y}$ as the composite:
+\[\xymatrix{
+M\ar[r]^{M\quad}&M\times M\ar[r]^{\ f_X\times f_Y}&\Omega\times\Omega\ar[r]&\Omega.
+}\]
 \subsection*{Is $\Phi$ well defined?}
 We've gotta show that $f_X$ does exist. We do obstruction theory:
 
-If $(X,A)$ is a relative CW-complex, for each $n+1$-cell $\sigma$, let $g_\sigma:S^n\to X$ be the attaching map. If I'm given $f:X^n\to Y$, I'd like to extend this to the $n+1$-skeleton. To make this make sense, I need $\pi_1(Y)$'s action on $\pi_n(Y)$ to be trivial, so I can forget about basepoints. Let's also have $Y$ connected.
+If $(X,A)$ is a relative CW-complex, for each $(n+1)$-cell $\sigma$, let $g_\sigma:S^n\to X$ be the attaching map. Given $f:X^n\to Y$, one would like to extend this to the $(n+1)$-skeleton. To make the following make sense, one needs $\pi_1(Y)$'s action on $\pi_n(Y)$ to be trivial, in order to disregard basepoints. Let's also have $Y$ connected.
 
-All I really want is for the compositions of $f$ with the $g_\sigma$ to be null. I can define:
-\[c(f)\in C^{n+1}_{cell}(X,A;\pi_n(Y))\text{\ given by }c(f)(\sigma)=[f\circ g_\sigma]\]
+All we really want is for the compositions of $f$ with the $g_\sigma$ to be null. We can define:
+\[c(f)\in C^{n+1}_{CW}(X,A;\pi_n(Y))\text{\ given by }c(f)(\sigma)=[f\circ g_\sigma]\]
 This last thing is supposed to be an element of $\pi_n(Y)$, but the basepoints are mucked up. Who cares --- $Y$ is connected and $\pi_1$ acts trivially.
 \begin{thm*}
-$c(f)=0\iff f$ can be extended to $X^{n+1}$.
-$c(f)$ is a cocycle, and $[c(f)]=0$ \Iff $f|_{X^{n-1}}$ can be extended.
+\begin{itemise}
+\item $c(f)=0\iff f$ can be extended to $X^{n+1}$.
+\item $c(f)$ is a cocycle, and $[c(f)]=0$ \Iff $f|_{X^{n-1}}$ can be extended to $X^{n+1}$.
+\end{itemise}
 \end{thm*}
-\noindent There's a bit left to do for well-defined-ness. We'll talk about why it descends to mod 2 cohomology. How come?
+\noindent There's a bit left to do for well-defined-ness. We'll talk about why it descends to mod 2 cohomology. How come? Well, the relation
 \[\phi_0(X+Y)=\phi_0(X)+\phi_0(Y)+x\cdot y\]
-proven by considering a composite
+is proven by considering a composite
 \[\xymatrix{
-M\ar[r]^M&M\times M\ar[r]^{f_X\times f_Y}&\Omega\times\Omega\ar[r]&\Omega
+M\ar[r]^{M\quad}&M\times M\ar[r]^{\ f_X\times f_Y}&\Omega\times\Omega\ar[r]&\Omega
 }\]
+and exploiting our knowledge of the Pontrjagin coproduct on the cohomology of $\Omega$.
 \subsection*{$M$ smooth implies $\Phi(M)=0$}
-Just use Milnor's paper repeatedly. Milnor has a tool for killing homotopy groups. Given an $N$-manifold $M^N$ and $[f]\in\pi_n(M)$. Have $S^n\to M$, change it to get an embedding $S^n\times D^{N-n}\cofibration M$. Then apply surgery, to get
+Just use Milnor's paper repeatedly. Milnor has a tool for killing homotopy groups of smooth manifolds. Suppose we're given an $N$-manifold $M^N$ and $[f]\in\pi_n(M)$. Have $S^n\to M$, change it to get an embedding $S^n\times D^{N-n}\cofibration M$ (by the tubular neighbourhood theorem, to do this is to embed $S^n$ in $M$ with trivial normal bundle). Then apply surgery, to get
 \[(M-(S^n\times D^{N-n}))\cup (D^{n+1}\times S^{N-n-1})\]
-Two problems, you create a new hole, so can only do half the dimensions, i.e.\ you want $n<N/2$ or so. Also, you need a $\pi$-manifold, in order to choose the embedding (still only get certain dimensions). The killing procedure preserves $\pi$-manifold-ness. Milnor does all this very well.
+Two problems, you create a new hole, so can only do half the dimensions, i.e.\ you want $n<N/2$ or so. Also, you need a $\pi$-manifold, in order to choose the embedding (still only get certain dimensions --- if you can embed $M$ into a Euclidean space, with trivial normal bundle, then you can embed $S$ inside with trivial normal bundle \rednote{how?}).
+
+Using differential topology, we can make $S^n\to M$ an embedding. Moreover, we can embed $M\subset \R^N$ with trivial normal bundle, by as $M$ is a $\pi$-manifold. Then the normal bundle of $S^n$ in $\R^N$ is trivial, as the embedding of $S^n$ in $\R^N$ is isotopic to the standard embedding ($N$ being large). Thus the normal bundle of $S^n$ in $M$ is stably trivial. However, by the proof of the theorem soon to follow on $\pi$-manifolds, as the dimension of $S^n$ is less than the dimension of its normal bundle in $M$, its normal bundle must be trivial.
+
+
+ The killing procedure preserves $\pi$-manifold-ness. Milnor does all this very well.
 \begin{defn*}
 A $\pi$-manifold is one whose tangent bundle $\tau$ has $\tau\oplus\epsilon$ trivial.
 \end{defn*}
-This obviously implies that $\tau$ is stably trivial. It also shows that $\nu_M$ is stably trivial. In fact all these three are equivalent.
+\noindent This obviously implies that $\tau$ is stably trivial. It also shows that $\nu_M$ is stably trivial. In fact all these three are equivalent.
+\begin{thm*}
+If $M$ is a smooth $n$-manifold with tangent bundle $\tau$, TFAE:
+\begin{itemise}\squishlist
+\itm[(a)] $M$ is a $\pi$-manifold.
+\itm[(b)] $\tau$ is stably trivial.
+\itm[(c)] $\tau\oplus\epsilon$ is trivial.
+\itm[(d)] The stable normal bundle of $M$ is trivial.
+\end{itemise}
+Moreover, if $M$ is connected with non-empty connected boundary, these are all equivalent to:
+\begin{itemise}\squishlist
+\itm[(e)] $\tau$ is trivial.
+\end{itemise}
+\end{thm*}
 \begin{proof}
-The $\Gamma$ shapes are all fibrations. The $M\to BO(n)$ classifies the tangent bundle. 
+Consider the following diagram, in which the `$\Gamma$' shapes are all fibrations. Let $M\to BO(n)$ classify the tangent bundle.
 \[\xymatrix{
 M\ar[r]&BO(n)\ar[d]&S^n\ar[l]\\
 &\ar@{..>}[d]BO(n+1)&\ar[l] S^{n+1}\\
 &\ar[d]BO(N-1)&\ar[l] S^{N-1}\\
 &BO(N)
 }\]
-Write me.
+We only need to prove that (b) implies (c) (and that (b) implies (e) under the extra hypothesis). Assuming (b), we see that the composite $M\to BO(N)$ is trivial. Thus, it factors through $S^{N-1}\to BO(N)$. However, by connectivity, the map to $S^{N-1}$ must be null, so that in fact, $M\to BO(N-1)$ is null. This argument works all the way up the ladder, to show that $M\to BO(n+1)$ is null, giving (c). If $M$ has a nonempty connected boundary, it is homotopy equivalent to a CW-complex of lower dimension (using a handlebody decomposition argument), so that we can take this argument one step further. \bluenote{Identify the spectral sequence here...}
 \end{proof}
-Another thing: if $V$ is a manifold with boundary which is connected, then it's homotopic to a CW-complex of lower dimension. So, get triviality on the nose.
+\subsection*{There are three big things left to do:}
 \begin{enumerate}
-\item A smooth 4-connected 10-manifold is $\pi$ (obstruction theory). This is the only place we use smoothness, to apply Milnor's procedure.
+\item A smooth 4-connected 10-manifold is $\pi$ (obstruction theory, involving the injectivity of the $J$ homomorphism on $\pi_9$). This is the only place we use smoothness, in order to apply Milnor's procedure.
 \item Given $(M^{10},f_n)$, get element $\alpha(M,f_n)\in\pi_{n+10}(S^n)$, and if this element is zero, the the Kervaire invariant $\Phi(M)$ is zero.
 \begin{proof}
 The first thing you do is note that Thom shows that there's a $(V^{11},F)$ framed with $\partial V=M$. Can assume $V$ is connected (as $M$ is). Then the tangent bundle of $V$ is trivial, in particular, it's a $\pi$-manifold.
 
-By applying Milnor's killing process, can assume $V$ is 4-connected. Then Poincar\'e duality shows that $V$ only gets homology in dimensions 0, 5, 6, 11. We have the following beautiful diagram from Poincar\'e duality, with $\Z_2$ coefficients:
-\pagebreak
+By applying Milnor's killing process, can assume $V$ is 4-connected. Then Poincar\'e duality shows that $V$ only has nonzero cohomology in dimensions 0, 5, 6, 11. We have the following beautiful diagram from Poincar\'e duality, with $\Z_2$ coefficients:
 \[\xymatrix{
 H^5(V)\ar[d]^\sim\ar[r]^{i^*}& H^5(M)\ar[d]^\sim\ar[r]^\delta&H^6(V,M)\ar[d]^\sim\\
-H_6(V,M)\ar[r]^\partial&H_6(M)\ar[r]^{i_*}&H_5(V)
+H_6(V,M)\ar[r]^\partial&H_5(M)\ar[r]^{i_*}&H_5(V)
 }\]
+(There's a sign in this diagram with $\Z$ coefficients, depending on your sign conventions!)
 Now we have the following equalities:
 \begin{alignat*}{2}
 \dim\ker(\delta)&=\dim\im(i^*)&\quad&\text{(exactness)}\\
@@ -844,6 +911,8 @@ Now we have the following equalities:
 \end{alignat*}
 Thus, $\ker(\delta)$ is a subspace of $H^5(M)$, of half the dimension. Moreover, suppose that $x,y\in\ker(\delta)=\im(i^*)$. Then $x\cup y\in\im(i^*)$, and as $H^{10}(V)=0$ (by Poincar\'e duality), this shows that $x\cup y=0$. Thus, $\ker(\delta)$ is a ``Lagrangian subspace'', and so can be extended to a symplectic basis. In particular, it'll be enough to show that $\phi(x)=0$ for all $x\in\ker(\delta)$.
 
+Haynes: ``This is an important general idea: that if $M$ is the boundary of $V$, the the kernel of $\delta$ gives a Lagrangian subspace.''
+
 So, choose $x\in\ker(\delta)$, and lift it to an integral class $X\in H^5(M)$. Choose $f_X:M\to \Omega$ such that $f_X^*(e_1)=X$. We need only show that $f_X^*(u_2)=0$.
 
 Now if we could form a diagram
@@ -851,11 +920,13 @@ Now if we could form a diagram
 M\ar[r]\ar[d]&\Omega\ar[d]\\
 V\ar[r]&\Omega^*
 }\]
-such that $H^{10}(\Omega;\Z_2)\to H^{10}(\Omega^*;\Z_2)$ is an isomorphism, we'd be happy, since $H^{10}(V;\Z_2)=0$. (Note that it's too hard to do this when $\Omega^*=\Omega$.) If we had a choice of $\Omega^*$, we still need to fill in the map $V\to \Omega^*$, and we approach this problem with obstruction theory. We have a map $M\to\Omega^*$ which we need to extend to all of $V$. \rednote{Is $V,M$ a relative CW-complex, and if not, does that matter?} Now $\Omega$ has a cell structure with one cell in each dimension a multiple of $5$. We'll form $\Omega^*$ by attaching a 6-cell a map of degree 2 to the 5-cell. The map $\Omega\to\Omega^*$ is obviously an isomorphism on $H^{10}$. Somehow, he manages to pin down all the obstructions up to the one in dimension 10, and then brings in a lemma to show that the map can be extended to the (unique) 11-cell of $V$ (This 11-cell can be unique by the dualisaility of handlebody decompositions --- Morse theory).
+such that $H^{10}(\Omega;\Z_2)\to H^{10}(\Omega^*;\Z_2)$ is an isomorphism, we'd be happy, since $H^{10}(V;\Z_2)=0$. (Note that it's too hard to do this when $\Omega^*=\Omega$.) If we had a choice of $\Omega^*$, we still need to fill in the map $V\to \Omega^*$, and we approach this problem with obstruction theory. We have a map $M\to\Omega^*$ which we need to extend to all of $V$. Note that $(V,M)$ can be triangulated into a relative CW-complex. Now $\Omega$ has a cell structure with one cell in each dimension a multiple of $5$. We'll form $\Omega^*$ by attaching a 6-cell a map of degree 2 to the 5-cell. The map $\Omega\to\Omega^*$ is obviously an isomorphism on $H^{10}$. Somehow, he manages to pin down all the obstructions up to the one in dimension 10, and then brings in a lemma to show that the map can be extended to the (unique) 11-cell of $V$ (This 11-cell can be unique by the dualisability of handlebody decompositions --- Morse theory).
 \end{proof}
-
+\item The lemma taking two pages to prove, with $\beta\circ\alpha$ in the statement.
 \end{enumerate}
-\end{JandrPracticeKervaire}
+
+\pagebreak
+\end{JandrKervaire}
 
 \end{document}
 
