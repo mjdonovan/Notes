@@ -6,7 +6,18 @@
 \input{../macros.tex}
 \usepackage{fancyhdr}
 
-\excludeversion{SaulJuvitop}
+\includeversion{PartOne}
+\includeversion{PartTwo}
+\includeversion{PartThree}
+\includeversion{PartFour}
+\includeversion{PartFive}
+\includeversion{PartSix}
+\includeversion{PartSeven}
+\includeversion{PartEight}
+\includeversion{PartNine}
+\includeversion{PartTen}
+
+\includeversion{SaulSimplicialLocalisation}
 \includeversion{AlexandreBausfieldLocalisation}
 
 \rfoot{\footnotesize Michael Donovan}
@@ -17,7 +28,7 @@
 }
 
 \begin{document}
-\begin{SaulJuvitop}
+\begin{SaulSimplicialLocalisation}
 \KanSemResponse
 {``Simplicial Localisation'' --- Saul Glasman --- 6/10/2011}
 \begin{abstract}
@@ -118,7 +129,7 @@ A weak equivalence of simplicial categories is a zig-zag of (simplicial) functor
 
 
 \pagebreak
-\end{SaulJuvitop}
+\end{SaulSimplicialLocalisation}
 \begin{AlexandreBausfieldLocalisation}
 \KanSemResponse
 {``Localization of Model Categories'' --- Luis Alexandre Pereira --- 13/10/2011}
@@ -146,8 +157,113 @@ model for $(\infty,1)$-categories) obtained from localizing simplicial spaces,
 and Dugger's theory of presentations of model categories, which are 
 localizations of the so-called universal model categories.
 \end{abstract}
+\begin{PartOne}
+Let $M$ be a model category. This structure supports the inversion of the weak equivalences. Have $\ho M(X,Y)=M(X_C,Y_F)/\sim$. What if we want to further localise $\ho M$, by a buch of maps $S$. Want:
+\[\xymatrix{
+M\ar[d]\ar@{..>}[r]&N\ar[d]\\
+\ho M\ar[r]&\ho M[S^{-1}]
+}\]
+We'll get a quillen pair, and there'll be a choice of which direction the adjuction goes:
+\[L:M\longleftrightarrow N:R\]
+We'll usually choose version that makes $L$ the left adjoint!
 
+\begin{defn*}
+A localisation of $M$ on a class $S$ of maps should be a quillen pair $L:M\to N$ such that $L$ sends $S$ to weak equivalences, and is initial with this property.
+\end{defn*}
+The first guess is to take $N=M$, and enlarge the weak equivalences by $S$ as necessary,  and, as we want the maps $M\to M$ to be the identity, we try to use the same fibrations. (NB: Left Quillen functors preserve cofibrations, so they have to increase. It'd be nice if we could keep the class of cofibrations unchanged).
+\begin{prop*}
+If such a model structure exists, it satisfies the universal property.
+\end{prop*}
+\begin{defn*}
+These model structures are called left Bausfeild localisations.
+\end{defn*}
+\begin{defn*}
+Let $S$ be a set of maps. Then $X\in M$ is called $S$-local if $X$ is fibrant and $\underline M(B,X)\to\underline M(A,X)$ is a weak equivalence for all $A\to B$ in $S$.
+\end{defn*}
+\begin{defn*}
+A map $\overline A\to\overline B$ is called an $S$-local equivalence if $\underline M(\overline B,X)\to\underline M(\overline A,X)$ is a weak equivalence for all $X\in M$ $S$-local.
+\end{defn*}
+Now we can redefine left Bausfield localisation, calling it $L_SM$:
+\begin{itemise}
+\item The cofibrations are the same as those of $M$.
+\item the weak equivalences are the $S$-local equivalences.
+\item the fibrations are those with the right lifting property.
+\item Note that the fibrant objects are now the $S$-local objects.
+\end{itemise}
+\subsection*{Homotopy function complexes (with a discussion of Reedy model categories)}
+$\underline(X,Y)$ is supposed to be such that $\pi_0=\ho M(X,Y)$. One way to think about it is via Saul's talk. This is the simplicial mapping space. However, there are set-theoretical problems, for large categories, and model categories are always large --- a small category doesn't have enough limits and colimits.
 
+We thus need a new definition. Suppose that $M$ is a simplicial model category. Then define $\underline M(X,Y)$ by $\underline M(X,Y)_m=M(X_C\otimes\Delta^m,Y_F)$. 
+
+But how can we define $\underline M(X,Y)$ for an arbitrary model category? We need analogues of the cosimplicial object $X^*$:
+\[\xymatrix{X_c\ar@<.6ex>[r]\ar@<-.6ex>[r]&\ar[l] X_C\otimes\Delta^1
+\ar[r]\ar@<1.2ex>[r]\ar@<-1.2ex>[r]&
+\ar@<.6ex>[l]\ar@<-.6ex>[l]X_C\otimes\Delta^2
+}\]
+
+The first bit should be a cylinder object, giving $X\sqcup X\cofibration X\otimes \Delta^1\weakequiv X$. Ummm, in general, want $X\otimes\partial \Delta^m\cofibration X\otimes\Delta^M\weakequiv X$ each time.
+
+This is the same as saying that $X^*$ is a cofibrant replacement of the constant diagram at $X$ in the Reedy model structure on $cM$, the category of cosimplical objects in $M$, i.e.\ functors $\Delta\to M$.
+\subsubsection*{The Reedy model structure}
+Consider $\Delta$, and two subcategories: $\Delta^+$ the injecive maps, and $\Delta^-$ the injective maps. Maps in $\Delta$ factor uniquely by a map in $\Delta^1$ then a map in $\Delta^+$.
+\[\xymatrix{
+\Bullet\ar[rr]\ar[rd]_{-}&&\Bullet\\
+&\Bullet\ar[ru]_{+}
+}\]
+Now we can define three model structure on $cM$:
+\begin{enumerate}
+\item $(cM)_{proj}$ in which the weak equivalences (fibrations) are the termwise weak equivalences (fibrations).
+\item $(cM)_{inj}$ in which the weak equivalences (cofibrations) are the termwise weak equivalences (cofibrations).
+\item $(cM)_{Reedy}$. Here the weak equivalences are the termwise weak equivalences. The cofibrations are the natural transformations whose restrictions to $\Delta^+$ are cofibrations in the projective model structure on $M^{\Delta^+}$. The fibrations are the natural transformations whose restrictions to $\Delta^-$ are fibrations in the injective model structure on $M^{\Delta^-}$. 
+\end{enumerate}
+\end{PartOne}
+\begin{PartTwo}
+The upshot: we can define $\underline M(A,X)=M((A^*)_c,X_f)$.
+\begin{prop*}
+For $M$ a model category, a map $A\to B$ is a weak equivalence \Iff the $\underline M(B,X)\to\underline M(A,X)$ are weak equivalences for all $X$.
+\end{prop*}
+Certainly, if $a\to B$ is to be a weak equivalence in $L_SM$, then it must be true that $\underline{L_SM}(B,X)\to\underline{L_SM}(A,X)$ is a weak equivalence. But:
+$\underline{L_SM}(B,X)=\underline M(B,X)$, provided that $X$ is $L_SM$-fibrant.
+\subsubsection*{Do the $L_SM$ exist?}
+Fortunately, the answer is often `yes'.
+\begin{thm*}
+$L_SM$ always exists provided ($S$ is a set, and) $M$ is
+\begin{enumerate}\squishlist
+\item left proper combinatorial; or
+\item left proper cellular.
+\end{enumerate}
+\end{thm*}
+\begin{defn*}
+It's left proper if when you push out a weak equiv along a cofibration, you get a weak equiv.
+\end{defn*}
+\begin{defn*}
+It's combinatorial if it's cofibrantly generated and satisfies some set-theoretic conditions. Cellular is similar.
+\end{defn*}
+\begin{defn*}
+It's cofibrantly generated if there is a \textbf{set} $I$ of cofibrations and a set $J$ of trivial fibrations so that $I$ determines the trivial fibrations by the right lifting property, and $J$ does the same for the (cofibrations?). (the full classes alway determine this stuff, but are proper classes (in general, at least))
+\end{defn*}
+\begin{exmp*}
+\begin{itemise}
+\item $\Top$ is cellular
+\item $\sSet$ is both cellular and combinatorial
+\item $(M^C)_{proj}$ exists and has whatever of these properties $M$ has. \rednote{(What's this?)}
+\item $(M^R)_{reedy}$ exists and has whatever of these properties $M$ has.
+\end{itemise}
+\end{exmp*}
+Lets have some examples
+\begin{enumerate}
+\item Let $M$ be $\sSet$ or $\Top$, and let $S$ be the homology isomorphisms.
+\item ($m$-types) Let $M=\sSet$, and let $S=\partial\Delta^{m+2}\to \Delta^{m+2}$.
+
+What now are the fibrant objects? Should have $\Map(\Delta^{n+2},X)\weakequiv\Map(S^{n+1},X)$, which implies that $\pi_{n+1}(X)=0$.
+
+If you smash $\partial\Delta^{m+2}\to \Delta^{m+2}$ with $\partial\Delta^0\to\Delta^0$, you get that the higher inclusions $S^{m+2}\cofibration \Delta^{m+3}$ are weak equivalences, and so on. So, $L_SM$ is the homotopy theory of $m$-types, and fibrant replacement consists of taking the $m^\text{th}$ stage of the Postnikov tower.
+\item (Dugger) He gets a Quillen equivalence $c_*:M\longleftrightarrow sM_{hc}:(\DASH)_0$, where the right hand side is $((sM)_{reedy})_{\textit{hocolim equivalences}}$.
+\item (Rezk's complete Segal spaces) $M=sSet^{\Delta^\op}$ (the same as bisimplical set, but we want to distinguish a coordinate). A Segal space is $X_*$ such that there's a map $X_m\to X_1\times_{X_0}\cdots\times_{X_0}X_1$. Ummm $X_0$ is supposed to be the space of objects in an $(\infty,1)$-cat. $X_1$ is supposed to be the space of arrows, $X_2$ is the space of composable pairs of arrows, etc. I.e.\ you take a simplex and you look at its spine. (?context?) These `Segal spaces' are supposed to represent $(\infty,1)$-categories.
+
+Ummmmmmmm localise with respect to $F_{\Delta^1}\sqcup_{F_{\Delta^0}}\cdots\sqcup_{F_{\Delta^0}}F_{\Delta^1}\to F_{\Delta^n}$.
+\end{enumerate}
+\end{PartTwo}
 \pagebreak
 \end{AlexandreBausfieldLocalisation}
 \end{document}
