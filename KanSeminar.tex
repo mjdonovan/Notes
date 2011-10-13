@@ -630,31 +630,150 @@ I'm sure I'll have an opportunity to take a closer look at this material post-Ka
 \begin{SignatureThmTalk}
 \KanSemResponse
 {The Signature Theorem}
-\begin{enumerate}
-\item Oriented $4k$-dimensional manifolds:
+%\begin{enumerate}
+%\item
+%Fix $n$. Seek to bound the rank of $\Omega_n$.
+%\begin{itemise}
+%\item Choose $k,p\geq n+2$.
+%\item Let $\widetilde \gamma$ be the universal oriented $k$-bundle over $\widetilde G=B(SO(k))=\widetilde G_k(\R^\infty)$.
+%\item Let $\widetilde \gamma'$ be the tautologous $k$-bundle over $\widetilde G'=\widetilde G_k(\R^{k+p})$.
+%\item $\widetilde G'$ is a subcomplex of $\widetilde G$ containing the $(n+1)$-skeleton.\footnote{For the number of $n$-cells in $G_k(\R^{k+p})$ equals the number of partitions of $n$ into at most $k$ integers, each of which is at most $p$.}
+%\item We thus have maps:
+%\[\Omega_n\leftfibration\pi_{n+k}(T(\widetilde\gamma'))\overset{\calC}{\to}H_{n+k}(T(\widetilde\gamma'))\cong H_{n}(\widetilde G')\cong H_n(\widetilde G)\]
+%\item By the universal coefficient theorem:
+%\[0\to\Ext(H_{n-1}(\widetilde G),\Z[1/2])\to H^{n}(\widetilde G;\Z[1/2])\to \Hom(H_n(\widetilde G),\Z[1/2])\to0.\]
+%Now the Ext group is finite as $H_{n-1}(\widetilde G)$ is finitely generated,\footnote{In fact, $\Ext(\Z/(2^r(2s+1))\Z,\Z[1/2])\cong \Z/(2s+1)\Z$, and of course $\Ext(\Z,\Z[1/2])=0$.} so:
+%%\[p(n/4)=\rank_{\Z[1/2]}\left[H^n(\widetilde G,\Z[1/2])\right]=\rank_{\Z[1/2]}\left[\Hom(H_n(\widetilde G),\Z[1/2])\right]=\rank_\Z H_n(\widetilde G).\]
+%\begin{alignat*}{2}
+%\rank_\Z \left[H_n(\widetilde G)\right]&=\rank_{\Z[1/2]}\left[\Hom(H_n(\widetilde G),\Z[1/2])\right]&\quad&\text{(as $\Z[1/2]$ is torsion free)}\\
+%&=\rank_{\Z[1/2]}\left[H^n(\widetilde G,\Z[1/2])\right]&&\text{(as the $\Ext$ group is finite)}\\
+%&=p(n/4).
+%\end{alignat*}
+%So, for all $n$, $\Omega_n$ is finitely generated, with rank $p(n/4)$. $\Omega_*\otimes\Q$ is polynomial with generators the even complex projective spaces.
+%\end{itemise}
+%\end{enumerate}
+%\pagebreak
+
+\subsection*{Remarks on oriented $4k$-dimensional manifolds:}
 \begin{enumerate}
 \item There is a nondegenerate symmetric bilinear form on $H^{2k}(M^{4k})$.
 \item The signature is called the signature $\sigma(M^{4k})$ of $M^{4k}$. 
-\item The signature is a \emph{genus} --- a ring homomorphism from $\Omega_*\to\Q$. This can be proven directly, but we won't, for lack of time.
-\item As $\sigma$ is a genus, it must factor through $\Omega_*\to\Omega_*\otimes\Q$. We'll study $\Omega_*\otimes \Q$ using Pontrjagin numbers.
+\item The signature is a \emph{genus} --- a ring homomorphism from $\Omega_*\to\Q$.
+\item $\sigma$ must factor through $\Omega_*\to\Omega_*\otimes\Q$. We'll study $\Omega_*\otimes \Q$ using Pontrjagin numbers.
 \end{enumerate}
-\item Bound the rank of $\Omega_n$ below, by defining and calculating Pontrjagin numbers.
-\begin{enumerate}
-\item Definition of Pontrjagin classes and numbers.
-\item Linear independence of Pontrjagin numbers --- the nonsingular matrix. 
-\item The products $\CP^{j_1}\times\cdots\times\CP^{j_r}$ are linearly independent in $\Omega_*$.
-\end{enumerate}
-\item State the calculation of $H^*(\widetilde G_{k};\Z[1/2])$.
-\[H^*(\widetilde G_{k};\Z[1/2])=\Z[1/2][p_1,p_2,\ldots,p_{\lfloor k/2\rfloor},e]/
+\subsection*{Chern and Pontrjagin classes}
+\begin{itemise}
+\item {\color{gray}An $n$-dimensional complex vector bundle $\omega\downarrow X$ has Chern classes: characteristic classes $c_i(\omega)\in H^{2i}(X)$, $i=0,\ldots,n$.}
+\item {\color{gray}These satisfy a Cartan formula, $c_0=1$, and a normalisation, and are pulled back from:}
+\[\text{\color{gray}$H^*(BU(n);\Z)=\Z[c_1(\gamma^n),c_2(\gamma^n),\ldots,c_n(\gamma^n)]\text{\quad with $|c_i|=2i$.}$}\]
+\item Define the Pontrjagin classes of an $n$-dimensional real vector bundle $\xi\downarrow X$ to be the even Chern classes of the complexification $\xi\otimes\C$, with a sign:
+\[p_i(\xi)=(-1)^ic_{2i}(\xi\otimes\C)\in H^{4i}(X;\Z).\]
+We could abbreviate $p(\xi):=c_{\pm ev}(\xi\otimes\C)$.
+\item Ignore the odd Chern classes --- they have order 2, as a complexification is isomorphic to its conjugate.
+\item The total Pontrjagin class inherits a Cartan formula which holds modulo elements of order 2.
+\item If $M^{4k}$ is an oriented $4k$-manifold, for each partition $I=(i_1,\ldots,i_r)\in\calP(k)$, we have:
+\[p_I[M]=p_{i_1}\cdots p_{i_r}[M]=\langle p_{i_1}(\tau_M)\cdots p_{i_r}(\tau_M),[M]\rangle\textit{\ \ $\leftarrow$ Pontrjagin number}\]
+\item \textbf{Pontrjagin numbers of $\CP^{2n}$:} Write $H^*(\CP^{2n})=\Z[a]/a^{2n+1}$.\\
+We know:
+$c(\tau)=(1+a)^{2n+1}$ and $c(\overline\tau)=(1-a)^{2n+1}$, so that $c(\tau\oplus\overline\tau)=(1-a^2)^{2n+1}$.
+%\[p(\tau)=c_{ev}(\tau\otimes\C)=c_{ev}(\tau\oplus\overline\tau)=\sum c_{2j_1}(\tau)c_{2j_2}(\tau)\]
+%Now $c(\tau)=(1+a)^{n+1}\text{ and }c(\overline\tau)=(1-a)^{n+1}\text{, so that }$
+\[p(\tau):=c_{\pm ev}(\tau\otimes\C)=c_{\pm ev}(\tau\oplus\overline\tau)=(1+a^2)^{2n+1}.\]
+Unraveling this, we obtain:
+$p_I[\CP^{2n}]={2n+1\choose i_1}\cdots{2n+1\choose i_r}.$
+\item We have that:
+\[H^*(B(SO(k));\Z[1/2])=\Z[1/2][p_1,p_2,\ldots,p_{\lfloor k/2\rfloor},e]/
 \begin{cases}
 e=0;&\ \text{$k$ odd};\\
 e^2=p_{k/2};&\ \text{$k$ even},
 \end{cases}\]
 where $p_i$ has dimension $4i$, and $e$ has dimension $k$. Thus, this group has rank $p(n/4)$ in dimension $n$, for any $n<k$.
-\item State and prove the theorem about finite $(k-1)$-connected complexes.
+
+\end{itemise}
+
+\pagebreak
+{\color{gray}
+\subsection*{Symmetric functions}
+\begin{itemise}
+\item Choose indeterminates $t_1,\ldots,t_n$. Let $\sigma_1,\ldots,\sigma_n$ be the symmetric polynomials.
+\[\prod(1+t_i)=1+\sum\sigma_i.\]
+\item For each partition $I=(i_1,\ldots,i_r)\in\calP(k)$ with length $r\leq n$, can form
+\[\sum t_1^{i_1}\cdots t_r^{i_r}=:s_I(\sigma_1,\ldots,\sigma_n)\]
+so that $s_I$ is a polynomial in $n$ variables of degree $k$ if its $i^\text{th}$ input has degree $i$.
+\item Note that $s_{(n)}(\sigma_1,\ldots,\sigma_n)=\sigma_n$. By convention, $s_{()}(\sigma_1,\ldots,\sigma_n)=1$.
+\item If $\xi\downarrow X$ is a real vector bundle and $I\in\calP(k)$, write 
+\[s_I(p(\xi)):=s_I(p_1(\xi),\ldots,p_r(\xi))\in H^{4k}(X).\]
+\item For $M$ a $4n$-manifold and $I\in\calP(n)$, write
+\[s_I(p)[M]:=\langle s_I(p(\tau_M)),[M]\rangle.\]
+\item $s_{(n)}(p)[\CP^{2n}]=2n+1$. As $p(\tau)=(1+a^2)^{2n+1}$, each of $t_1,\ldots,t_{2n+1}$  represents $a^2$.\\
+In particular, $s_{(n)}(\sigma_1,\ldots,\sigma_{2n+1}):=\sum t^n_{i_1}$ should then take the value $(2n+1)(a^2)^n$.
+\end{itemise}
+}
+\subsection*{Why is $\sigma$ a genus?}
+That is is additive is easy. Suppose given $V^n$ and $W^m$.
+If $m+n$ is not divisible by $4$, we're clearly done, so write $4k=m+n$. If $m$ and $n$ not both divisible by four, need to show $\sigma(V\times M)=0$. Otherwise, need $\sigma(V)\sigma(W)$. Always use real coefficients. Define
+\[B=\mathop{\bigoplus_{s=0}^{2k}}_{s\neq n/2}H^{s}(V)\otimes H^{2k-s}(W).\]
+Give a basis $\{v_i^s\}$ of the modules $H^s(V)$ that appear in this sum, so that $\langle v_i^s\cup v_j^{n-s},V\rangle=\delta_{ij}$. Give a similar basis $\{w_i^s\}$ of the modules $H^s(W)$ appearing. Then $B$ has a basis $\{v_i^s\otimes w_j^{2k-s}\}$, and the only nontrivial pairings between these basis elements are:
+\[(v_i^s\otimes w_j^{2k-s})\cup(v_i^{n-s}\otimes w_j^{2k-n+s})=(-1)^{n}=(v_i^{n-s}\otimes w_j^{2k-n+s})\cup(v_i^s\otimes w_j^{2k-s}).\]
+So we get antidiagonal $2\times2$ matrices down the diagonal, and can thus disregard $B$.
+
+We are left to deal with $A=H^{m/2}(V)\otimes H^{n/2}(W)$. If $m$ and $n$ are odd, we're done. If $m$ and $n$ are multiples of four, the signatures multiply, and we're done (note that everything is in even dimensions). If $m$ and $n$ are congruent to $2$ (mod $4$), we have the tensor product of skew-symmetric forms, which have zeros on the diagonal.
+
+To see that $\sigma$ vanishes on boundaries, we have, by the same argument as Michael gave on wednesday, if $j:M^{4k}\to V$ is the inclusion of the boundary, an equation 
+\[\dim[\im j^*]=1/2\cdot\dim [H^{2k}(M)],\text{ where }j^*:H^{2k}(V)\to H^{2k}(M)\]
+However, $\langle j^*(x)\cup j^*(y),[M]\rangle=\langle x\cup y,j_*[M]\rangle=0$ as $M$ bounds, so we have a totally isotropic subspace of half the total dimension. Apparently this only happens when the signature is zero.
+\pagebreak
+\subsection*{A lower bound on the rank of $\Omega_*$}
+%\[M\to BSO(n)\overset{\otimes\C}{\to} BU(n)\from (BU(1))^n\]
+\[\xymatrix@R=.2cm@C=2.2cm{
+BSO(n)\ar[r]^{\otimes\C}&BU(n)&\ar[l](BU(1))^n\\
+H^*(BSO(n))&\ar[l]\Z[x_1,\ldots,x_n]^{\Sigma_n}\ar@{^{(}->}[r]&\Z[x_1,\ldots,x_n]\\
+p_i&(-1)^ic_{2i}\ar@{|->}[r]\ar@{|->}[l]&(-1)^i\sigma_{2i}\\
+p_I&(-1)^{|I|}c_{2i_1}\cdots c_{2i_r}\ar@{|->}[r]\ar@{|->}[l]&\overline p_I:=(-1)^{|I|}\sigma_{2i_1}\cdots \sigma_{2i_r}\\
+s_I&(-1)^{|I|}s_I(c_{2},\ldots,c_{n})\ar@{|->}[r]\ar@{|->}[l]&\overline s_I:=(-1)^{|I|} s_I(\sigma_{2},\sigma_4,\ldots,\sigma_{2\lfloor n/2\rfloor})\\
+}\]
+The $\{\overline p_I:I\in\calP(k)\}$ are linearly independent elements of $H^{4k}(BU(1)^n)$. One can choose another basis $\{\overline s_I:I\in\calP(k)\}$ for this span, to obtain new characteristic classes $s_I\in H^{4k}(BSO(n))$. The $p_I$ and the $s_I$ carry all the same information, but the $s_I$ have certain favourable properties.
+%
+%
+%In calculating Pontrjagin numbers of an orientable $4n$-manifold, we classify the tangent bundle via a map $M\to BSO(4n)\to BU(4n)$, and pull back the even Chern classes. Pontrjagin classes $p_I(\widetilde\gamma)$ of the tautological bundle, for $I\in\calP(n)$.
+%
+%There are certain linear combinations $\{s_I:I\in\calP(k)\}$ of the pontrjagin classes $\{p_I:I\in\calP(k)\}$, defined combinatorially, with the following favorable properties:
+%%\begin{itemise}
+%%\item $s_{(k)}[\CP^{2k}]=2k+1$.
+%%\item The $s_I$ are obtained from the $p_I$ by multiplying by an invertible $p(k)\times p(k)$ matrix.
+%%\item There is a formula (derived from the Cartan formula and formal properties of the polynomials $s_I$), stating that if $J=(j_1,\ldots,j_q)\in\calP(n)$:
+%%\[s_I[M^J]=\mathop{\sum_{I_1\cdots I_q=I}}_{I_k\in\calP(j_k)}\prod_{k=1}^q s_{I_k}[M^{4j_k}].\]
+%%\end{itemise}
+\begin{thm*}[16.8]
+Suppose that $M^4,\ldots,M^{4n}$ are oriented manifolds with $s_{(k)}(p)[M^{4k}]\neq0$. Define $M^J=M^{4j_i}\times\cdots\times M^{4j_s}$ for $J\in\calP(n)$. Then the $p(n)\times p(n)$ matrix
+\[\left[p_I[M^J]\right]_{I,J}\]
+of Pontrjagin numbers is non-singular.
+\end{thm*}
+\begin{rmk*}
+Pontrjagin numbers are oriented cobordism invariant.
+\end{rmk*}
+\begin{proof}[Proof of Remark]
+Suppose that $M^{4k}=\partial V$, with inclusion $j:M\to V$. Then $j^*\tau_V=1\oplus\tau_M$, so that $p(\tau_M)=j^*p(\tau_V)$. But $\langle j^*(p(\tau_V)),[M]\rangle=\langle p(\tau_V),j_*[M]\rangle=0$, as $[M]$ is a boundary.
+\end{proof}
+\noindent As it is readily calculated that $s_{(k)}[\CP^{2k}]=2k+1$, we obtain:
+\begin{cor*}
+The manifolds $\CP^2,\CP^4,\CP^6,\ldots$ are algebraically independent in $\Omega_*$. In particular, they generate a polynomial subalgebra whose rank in dimension $n$ is $p(n/4)$.
+\end{cor*}
+\begin{proof}[proof of corollary]
+A homogeneous polynomial relation of dimension $4n$ is a linear relation between the manifolds $M^J$ for $J\in\calP(n)$, using $M^{4i}=\CP^{2i}$. This would give a linear relation between their vectors of Pontrjagin numbers, which is impossible.
+\end{proof}
+\begin{proof}[Proof of Theorem \lparen16.8\rparen]\hfil
+It follows from readily verifiable (but time-costly) properties of the $s_I$ and the Cartan formula that, if $J=(j_1,\ldots,j_q)\in\calP(n)$:
+\[s_I(p)[M^J]=\mathop{\sum_{I_1\cdots I_q=I}}_{I_k\in\calP(j_k)}\prod_{k=1}^q s_{I_k}(p)[M^{4j_k}].\]
+Thus, if $I$ does not refine $J$, this quantity is zero, and if $I=J$, this quantity is nonzero, being the product of certain of the $s_{(k)}(p)[M^{4k}]$. Thus the matrix is triangular with nonzero diagonal, w.r.t.\ refinement.
+\end{proof}
+\pagebreak
+\subsection*{Some preliminaries before proving the converse}
+%\item State and prove the theorem about finite $(k-1)$-connected complexes.
 \begin{thm*}[18.3]
 Let $X$ be a finite $(k-1)$-connected complex ($k\geq2$). Then the Hurewicz homomorphism is a $\calC$-isomorphism up to dimension $2k-2$.
 \end{thm*}
+{\color{gray}
 \begin{proof}Let $\calK$ be the collection of $(k-1)$-connected complexes for which the theorem holds.
 \begin{itemise}
 \item $S^n\in\calK$, by a calculation of Serre.
@@ -679,8 +798,10 @@ Suppose that $f:A\to X$ is a map of simply connected spaces that induces an isom
 $H_*f$ is a $\calC$-iso to dimension $2k-2$. Thus $h'$ must be a $\calC$-iso  to dimension $2k-2$, and $X\in\calK$.\qedhere
 \end{itemise}
 \end{proof}
+}
 
-\item
+\pagebreak
+\subsection*{An upper bound on the rank of $\Omega_n$}
 Fix $n$. Seek to bound the rank of $\Omega_n$.
 \begin{itemise}
 \item Choose $k,p\geq n+2$.
@@ -698,58 +819,71 @@ Now the Ext group is finite as $H_{n-1}(\widetilde G)$ is finitely generated,\fo
 &=\rank_{\Z[1/2]}\left[H^n(\widetilde G,\Z[1/2])\right]&&\text{(as the $\Ext$ group is finite)}\\
 &=p(n/4).
 \end{alignat*}
-So, for all $n$, $\Omega_n$ is finitely generated, with rank $p(n/4)$. $\Omega_*\otimes\Q$ is polynomial with generators the even complex projective spaces.
+So, for all $n$, $\Omega_n$ is finitely generated, with rank at most $p(n/4)$. We conclude:
 \end{itemise}
-
-\subsection*{Chern and Pontrjagin classes}
+\begin{thm*}
+$\Omega_*\otimes\Q$ is polynomial with generators the even complex projective spaces.
+\end{thm*}
+\subsection*{Multiplicative sequences}
 \begin{itemise}
-\item An $n$-dimensional complex vector bundle $\omega\downarrow X$ has Chern classes: characteristic classes $c_i(\omega)\in H^{2i}(X)$, $i=0,\ldots,n$.
-\item These satisfy a Cartan formula, $c_0=1$, and a normalisation, and are pulled back from:
-\[H^*(BU(n);\Z)=\Z[c_1(\gamma^n),c_2(\gamma^n),\ldots,c_n(\gamma^n)]\text{\quad with $|c_i|=2i$.}\]
-\item Define the Pontrjagin classes of an $n$-dimensional real vector bundle $\xi\downarrow X$ to be the even Chern classes of the complexification $\xi\otimes\C$, with a sign:
-\[p_i(\xi)=(-1)^ic_{2i}(\xi\otimes\C)\in H^{4i}(X;\Z).\]
-We could say $p(\xi):=c_{-ev}(\xi\otimes\C)$.
-\item Ignore the even Chern classes --- they have order 2, as a complexification is isomorphic to its conjugate.
-\item The total Pontrjagin class inherits a Cartan formula which holds modulo elements of order 2.
-\item If $M^{4k}$ is an oriented $4k$-manifold, for each partition $I=(i_1,\ldots,i_r)$ of $k$, we have:
-\[p_I[M]=p_{i_1}\cdots p_{i_r}[M]=\langle p_{i_1}(\tau_M)\cdots p_{i_r}(\tau_M),[M]\rangle\text{\ \ $\leftarrow$ Pontrjagin number}\]
-\item \textbf{Pontrjagin numbers of $\CP^{2n}$:} Write $H^*(\CP^{2n})=\Z[a]/a^{2n+1}$. We know that:
-$c(\tau)=(1+a)^{2n+1}$ and $c(\overline\tau)=(1-a)^{2n+1}$, so that $c(\tau\oplus\overline\tau)=(1-a^2)^{2n+1}$, and:
-%\[p(\tau)=c_{ev}(\tau\otimes\C)=c_{ev}(\tau\oplus\overline\tau)=\sum c_{2j_1}(\tau)c_{2j_2}(\tau)\]
-%Now $c(\tau)=(1+a)^{n+1}\text{ and }c(\overline\tau)=(1-a)^{n+1}\text{, so that }$
-\[p(\tau):=c_{-ev}(\tau\otimes\C)=c_{-ev}(\tau\oplus\overline\tau)=(1+a^2)^{2n+1}.\]
-Unraveling this, we obtain $p_I[\CP^{2n}]={2n+1\choose i_1}\cdots{2n+1\choose i_r}.$
-
+\item Let $x_1,x_2,\ldots$ be a sequence of indeterminates with $|x_i|=i$.
+\item Consider a sequence $K_*$ of polynomials (with $\Q$ coefficients):
+\[K_1(x_1), K_2(x_1,x_2),\ldots\]
+such that $|K_i|=i$.
+\item Suppose that $A^*$ is a unital graded $\Q$-algebra. Write $A^\times$ for the group (under multiplication) of formal sequences $1+a_1+a_2+\cdots$, with leading term $1$. 
+\item Then $K_*$ defines a function $K:A^\times\to A^\times$ which is `polynomial':
+\[a=1+a_1+a_2+\cdots\overset{K}{\mapsto}1+K_1(a_1)+K_2(a_1,a_2)+\cdots\]
+\item $K_*$ is called a multiplicative sequence if $K:A^\times\to A^\times$ is a group automorphism for all unital graded $\Q$-algebras $A^*$.
 \end{itemise}
-%\item Bound the rank of $\Omega_n$ above, by showing that $\pi_{n+k}(T(\widetilde\gamma_p^k))\to\Omega_n$ for $p,k>n$ is a surjection, and comparing the rank of $\pi_{n+k}(T(\widetilde\gamma_p^k))$ to that of $H_{n+k}(T(\widetilde\gamma_p^k))$. As this Thom space is $(k-1)$-connected, the Hurewicz is a $\calC$-iso up to dimension $2k-2$, which shows that the ranks agree where we want them to. Now $H^{n+k}(T(\widetilde\gamma^k);\Z[1/2])$ is calculated by using Pontrjagin classes, and also equals $H^{n}(\widetilde G_k;\Z[1/2])$. This equals $H^{n}(\widetilde G_k(\R^{p+k});\Z[1/2])$ for $p,k> n$ (looking at a CW-decomposition at top of page 81).
-%
-%\textbf{Summary:} Choose $k,p>n$. (Maybe $k,p\geq n+2$ so that this $\calC$-iso works).
-%\[\Omega_n\leftfibration\pi_{n+k}(T(\widetilde\gamma^k_p))\overset{\calC\sim}{\to}H_{n+k}(T(\widetilde\gamma^k_p))=H_{n}(\widetilde G_k(\R^{p+k}))\]
-%Now have, with $G'=\widetilde G_k(\R^{p+k})$:
-%\[0\to\Ext(H_{n-1}(G'),\Z[1/2])\to H^{n}(G';\Z[1/2])\to \Hom(H_n(G'),\Z[1/2])\to0.\]
-%Now the Ext group is finite\footnote{In fact, $\Ext(\Z/(2^r(2s+1))\Z,\Z[1/2])\cong \Z/(2s+1)\Z$, and of course $\Ext(\Z,\Z[1/2])=0$.} as $H_{n-1}(G')$ is finitely generated, and so the $\Z[1/2]$-ranks of the latter groups are equal. The $\Z[1/2]$-rank of the Hom group is just the rank of $H_n(G')$ ($\Z[1/2]$ being torsion free), showing that the rank of $H_n(G')$ is at most the $\Z[1/2]$-rank of $H^n(G';\Z[1/2])$. Now it's shown that:
-%\[H^*(\widetilde G_{k};\Z[1/2])=\Z[1/2][p_1,p_2,\ldots,p_{\lfloor k/2\rfloor},e]/
-%\begin{cases}
-%e=0;&\ \text{$k$ odd};\\
-%e^2=p_{k/2};&\ \text{$k$ even},
-%\end{cases}\]
-%where $p_i$ has dimension $4i$, and $e$ has dimension $k$. Now this in fact equals 
-%$H^*(G';\Z[1/2])$ in dimensions less than both $k$ and $p$ (looking at a CW-decomposition at top of page 81). Thus, this group has rank $p(n/4)$ in dimension $n$. So, $\Omega_n$ is finitely generated, and has rank $p(n/4)$, for all $n$.
+\subsection*{The $K$-genus}
+We can obtain a ring homomorphism $K:\Omega_*\to \Q$ as follows.
+\begin{itemise}
+\item Choose $M^m$ a representative of a cobordism class. 
+\item If $m$ is not divisible by 4, set $K(M^m)=0$.
+\item If $m=4n$, write $K[M]=\langle K_n(p_1,\ldots,p_n),M^{4n}\rangle$.
+\end{itemise}
+That this function is additive is obvious. That it vanishes on oriented boundaries follows since Pontrjagin numbers do. That it is multiplicative follows from the Cartan formula which holds (mod order two elements), as $K$ is multiplicative.\footnote{We have $p(M\times M)\equiv p(M)\times p(M')$ (mod elements of order 2), and so $K(p\times p')=K(p)\times K(p')$ (operating in the algebra $H^*(M\times M')$). Then $K[M\times M']=\langle K(p\times p'),\mu\times\mu'\rangle=(-1)^{mm'}\langle K(p),\mu\rangle\langle K(p'),\mu'\rangle=K[M] K[M'].$}
+\subsection*{Classification of multiplicative sequences}
+\begin{lem*}[Hirzebruch]\hfil
+\begin{itemise}
+\item Multiplicative sequences are in bijective correspondence with elements of $\Q[[t]]$.
+\item To obtain a power series from its multiplicative sequence, one considers the $\Q$-algebra $\Q[t]$, and evaluates $K(1+t)$.
+\item If $K$ belongs to $f(t)$, and $a\in A^1$, we always have $K(1+a_1)=f(a_1)$.
+\end{itemise}
+\end{lem*}
+\noindent Note that in our application, $A^1$ will be $H^4(M)$, where $M$ is some $4k$-manifold.
+\subsection*{The signature theorem}
+\begin{thm*}[Hirzebruck signature theorem]
+Let $L_*$ be the multiplicative sequence corresponding to the power series
+\[\sqrt t/\tanh\sqrt t=\sum_{k\geq0}\frac{(-1)^{k-1} 2^{2k}B_k}{(2k)!}t^k,\]
+so that, for example,
+\[L_4=\frac{1}{14175}\left(381\sigma_4-71\sigma_3\sigma_1
+-19\sigma_2^2+22\sigma_2\sigma_1^2-3\sigma_1^4\right).\]
+Then the signature $\sigma(M^{4k})$ equals the $L$-genus $L[M^{4k}]$.
+\end{thm*}
+\noindent(For example, for a smooth compact oriented 16-manifold, its signature is the above $\Q$-linear combination of Pontrjagin numbers.)
+\begin{proof}\hfil
+\begin{itemise}
+\item It's enough to check the generators $\CP^{2k}$ of $\Omega\otimes\Q$, whose signature is obviously one (after getting the right orientation convention for $\CP^{2k}$).
+\item Let $p=p(\tau)=(1+a^2)^{2k+1}$ be the total Pontrjagin class of $\CP^{2k}$.
+\item $L(p)=L(1+a^2)^{2k+1}=(a/\tanh a)^{2k+1}$.
+\item Thus we need only check that the coefficient of $a^{2k}$ in $(a/\tanh a)^{2k+1}$ is one --- an exercise in the theory of residues.\qedhere
+\end{itemise}
+\end{proof}
 
 
-\end{enumerate}
-%Assume:
-%\begin{itemize}
-%\item The cohomology ring $H^*(\widetilde G_{n};\Lambda)$, when $\Lambda$ is a domain containing $1/2$:
-%\[H^*(\widetilde G_{n};\Lambda)=\Lambda[p_1,p_2,\ldots,p_{\lfloor n/2\rfloor},e]/
-%\begin{cases}
-%e=0;&\ \text{$n$ odd};\\
-%e^2=p_{n/2};&\ \text{$n$ even},
-%\end{cases}\]
-%where $p_i$ has dimension $4i$, and $e$ has dimension $n$.
-%\end{itemize}
+
+
+
+
+
 
 \pagebreak
+
+
+
+
+
 \end{SignatureThmTalk}
 
 \begin{KervaireNoDifferentiableStructure}
