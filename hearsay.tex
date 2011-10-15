@@ -5,6 +5,9 @@
 \documentclass[11pt]{article}
 \input{../macros.tex}
 
+\includeversion{FirstTen}
+
+
 \title{Hearsay}
 \author{}
 \date{}
@@ -34,7 +37,7 @@ for now, since stuff in here is likely to be incorrectly transcribed, and nobody
 wants their name on something that's wrong.}
 
 \pagebreak
-
+\begin{FirstTen}
 \HSsection{\texorpdfstring{$H_*(X)=\pi_*(\textup{Sp}^\infty X)$ when $X$}
 {HX=pi(SpX) when X} is connected}{29/6/11}
 Let $X$ be a connected space. Let $\textup{Sp}^\infty X$ be the free topological
@@ -183,7 +186,7 @@ The point is, maybe if you're trying to take the quotient of $\A^{n+1}$ by the
 action of $k^*=\Spec k[x^{\pm1}]$, you should throw away the origin. However,
 maybe if you take this categorical quotient in the category of, say, separated
 schemes, that happens automatically, as the nasty point just doesn't belong in
-an object of this category.
+an object of this category. \textbf{Actually, this is not true --- where is the origin supposed to map to in the coequaliser?}
 
 One should see a way that the $\Proj$ construction is doing all this for us.
 Presumably, this has something to do with the fact that the homogeneous ideals
@@ -322,7 +325,7 @@ $H_*(X,\scrM)$.
 To get the cohomology, one takes $C^*(X;\scrM)=\Hom_{\pi}(C_*(\widetilde
 X),\scrM)$, and take cohomology.
 
-By the way, suppose that $\scrM$ is a trivial system isomorphic to $\Z$. Pick a
+Finally, suppose that $\scrM$ is a trivial system isomorphic to $\Z$. Pick a
 CW-structure on $X$ and lift it to one on $\widetilde X$. Then
 $C^\text{CW}_*(\widetilde X)\otimes_{\Z[\pi]}\Z=C^\text{CW}_*(X;\Z)$.
 \HSsection{A compatibility in the Serre long exact sequence}{9/9/11}
@@ -334,6 +337,49 @@ H_n(E,F)\ar[r]\ar[u]^{p_*}_\cong&H_{n-1}(F)\ar@{=}[u]
 The Serre exact sequence holds in a range, depending on connectivities. This
 diagram commutes (by Serre's construction), and the 5 lemma points out that
 $p_*$ is an isomorphism in (at least most of) this range.
+\end{FirstTen}
+
+\HSsection{Mixed Motives}{14/10/11}
+
+Let $\calC$ be a category. We can form the category $\Delta^\op\Psh(\calC)$ of simplicial presheaves on $\calC$. We'll think of this as the functor category
+\[[\calC^\op,\sSet]\text{ \ i.e.\ presheaves of simplicial sets on $\calC$.}\]
+($\Delta^\op\Psh(\calC)$ is also the category of simplicial objects in $\Psh(\calC)$).
+
+Now suppose that $\calC$ is a site. Then we can define what we mean by a homotopy simplicial sheaf $\scrF$ on $\calC$. It should be a simplicial presheaf which turns pushout diagrams into homotopy pushout diagrams \rednote{[actually, i reckon it should turn coequalisers of covering families into homotopy equalisers (i.e.\ limits), or something. I don't know.}
+
+Anyway, in our application, we'll be having $\calC$ the Nisnevich site. That is, the site whose underlying category is the category of schemes, and whose covering families are the coverings by Nisnevich maps. [A map $X\to Y$ is Nisnevich if it is Etal\'e, and for all $y\in Y$, there is some $x\mapsto y$ such that the extension $k(y)\to k(x)$ is an isomorphism.]
+
+Note that it is very hard for a cover to be Zariski, easier to be Nisnevich, easier still to be Etal\'e, and finally, very easy to be flat. Now the points of the Zariski site are exactly the local rings, however, the points of the Nisnevich site are the Henselian local rings: as there are more coverings, there are more open sets, and so we can get closer to any given point --- thus we get fewer `points'.
+
+By the way, consider the point $0\in\A^1_k$. Then the Zariski local ring is $k[t][\text{nonconstant}]^{-1}$. The Nisnevich local ring is $k[[t]]$. The Etale local ring is $k^{sep}[[t]]$, the power series over the separable closure. That is, since any finite separable field extension is an etale cover, it must be that there are no finite separable field extensions of the residue field. This perhaps is what's better about the Nisnevich --- one doesn't get this effect.
+
+Anyway, note now that $\Delta^\op\Psh(\calC)$ is a category of diagrams in $\sSet$. $\sSet$ is a model category, and we give $\Delta^\op\Psh(\calC)$ the injective model structure --- the cofibrations and weak equivalences are objectwise, and the fibrations are what they have to be. Our plan is to perform a left Bausfield localisation, to add in the weak equivalences $\scrW$, where:
+\[\scrW:=\{\scrF\to\scrG\ |\ \text{for all points $x$, $x^*(\scrF)\weakequiv x^*(\scrG)$}\}.\]
+[By the way: a (simplicial) point of a site is a pair of adjoint functors, representing stalks and skyscraper sheaves $x^*:[\calC^\op,\Set]\longleftrightarrow\sSet:x_*$, satisfying some more axioms.]
+
+Anyway, call an object $\scrH\in\Delta^\op\Psh(\calC)$ $\scrW$-local if for all morphisms $\scrF\to\scrG$, one has $[\scrG,\scrH]\to[\scrF,\scrH]$ a weak equivalence \rednote{(as this map is a map of simplicial sets? What? I'm confused.)}. The $\scrW$-local objects are exactly the sheaves, probably because the Nisnevich site has \emph{enough points}. Anyway, when we Bausfield localise, the new fibrant objects are those which were already fibrant, and are $\scrW$-local, so all fibrant objects are sheaves.
+
+What's called for now is that we perform another left Bausfield localisation --- this time we want to make $\scrW':=\{\A^1\times X\to X\}$ weak equivalences.
+
+By now, we get some coll things, like $\Sigma(\G)=\PP^1$. This holds because we had a pushout diagram:
+\[\xymatrix{\ar[d]\A^1\setminus\{0\}\ar[r]&\A^1\ar[d]\\
+\A^1\ar[r]&\PP^1
+}\]
+and now the $\A^1$ have become contractible.
+
+Now let the category of motivic spectra be the category of sequences $X_i$ of simplicial presheaves on the Nisnevich site, with morphisms $X_i\wedge\PP^i\to X_{i+1}$. Put the appropriate model category structure on this, so that the homotopy category is right. A (mixed) motive is then to be an $H\Z$-module spectrum, where $H\Z$ represents `motivic cohomology'.
+
+Maybe one calls these $\PP^1$-spectra. Whatever. Anyway, we can think of a couple of different spheres. Let $S^{1,0}$ the the sheafification of the constant diagram which takes value a simplicial $S^1$. Let $S^{1,1}$ be $\G_m$, the mulitplicative group of the field. The first coordinate here represents the topological dimension (i.e.\ over $\C$, the dimension of the sphere to which the complex points are homotopic). The second coordinate is the motivic coordinate. 
+
+Smashing these together, we get $S^{pq}$ for $p\geq q$. As $\PP^1=S^{2,1}$, when we stabilise, we get all of the spheres.
+
+Some examples of $\PP^1$-spectra:
+\begin{itemise}
+\item $KGL$. Here, $(KGL)_n:=BGL_\infty(k)$. Note that Bott periodicity states that 
+\[\Map(\PP^1,BGL_\infty)\sim BGL_\infty.\]
+This represents algebraic $K$-theory!
+\item $MGL$. $(MGL)_n=\text{Th}(BGL_n,\omega)$, where $\omega$ is the universal $n$-bundle. This represents algebraic cobordism.
+\end{itemise}
 \end{document}
 
 
