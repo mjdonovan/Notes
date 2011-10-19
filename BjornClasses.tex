@@ -1,0 +1,128 @@
+% !TEX root = z_output/_BjornClasses.tex
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%% 80 characters %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\documentclass[11pt]{article}
+\input{../macros.tex}
+
+
+
+\begin{document}
+\section*{Algebraic Geometry --- 18 October}
+\subsubsection*{Valuative criterion for Separatedness}
+$K[x]_{(x)}$ is a DVR --- the local ring of a point on a curve. Thinking of it this way, a DVR should always have two points, as you take out all the points but the generic and the point zero. The local ring of a point on a curve should always be a DVR, as you can measure the vanishing at zero.
+
+To obtain a criterion for the separatedness of $X$, we'd like to map $C-\{x\}$, for $C$ a curve, into $X$, and see if it extends to $C$ in more than one way. The problem is that $C$ might be too big to fit inside $X$, say if $X$ is missing a bunch of points. Taking the limit of curves with less and less points, you get DVRs. It'll suffice to use DVRs if it's of finite type, but in general we need all valuation rings.
+
+\begin{thm*}
+Let $f:X\to Y$ be
+any morphism where $X$ is noetherian. The $f$ is separated \Iff
+\begin{enumerate}\squishlist
+\item $X\to X\times_Y X$ is quasicompact
+\item whenever $R$ is a valuation ring over $S$, if $K=\text{frac}(R)$, there is at most one lifting (dotted) in any commuting
+diagram of the following form:
+\[\xymatrix@C=0cm{
+(0)\,\makebox[-.05cm][l]{$\in$}\ar@{|->}[d]&&\Spec K\ar[rr]\ar[d]&
+\qquad \qquad &X\ar[d]^f\\
+\xi\,\makebox[-.05cm][l]{\,\,$\in$}&&\Spec R\ar[rr]\ar@{-->}[rru]&&Y
+}\]
+i.e.\ the map $X(R)\to X(K)$ is injective.
+\end{enumerate}
+\end{thm*}
+\begin{defn*}
+A $k$-variety is a separated scheme of finite type over a field $k$.
+\end{defn*}
+\noindent Hartshorne wants $k=\overline k$ and integrality. ``If you want a variety to act like the set of its points, you really want it to be reduced and $k=\overline k$.'' ``In going from a perfect field to its algebraic closure, why not look at the variety over the closure taken with the action of the absolute Galois group?''
+\subsubsection*{Rational Functions}
+\begin{defn*} If $X$ is an integral scheme, a rational function on $X$ is an element of the function field $\calO_{X,\eta}$. Alternatively, it's an equivalence class of functions on open subsets on $X$.
+\end{defn*}
+\noindent Note that in this situation, as $X$ is integral, these are rational maps to something separated, and these can be sewed...
+\begin{defn*} Let $X$, $Y$ be $S$-schemes. A rational map $X\to Y$ is an equivalence class of $S$-maps from a dense open subscheme of $X$ to $Y$.
+\end{defn*}
+Thus usual situation is where $X$ is integral and $Y$ is separated over $S$. In this case, if $(U,\phi)\sim(V,\psi)$, then $\phi$ and $\psi$ agree on $U\cup V$, so we can sew representatives together --- the the pairs in an equivalence class glue. [This fails if $Y$ is not separated --- try mapping $\A^1$ into the bug-eyed line.]
+\begin{exmp*}
+$\A^2\to\PP^1$ given by $(x,y)\mapsto [x:y]$. [Doesn't extend to a morphism, as it takes two different constant values on the two axes.]
+\end{exmp*}
+\begin{prop*}
+Let $k$ be any field, $X$ be an integral $k$-variety and $Y$ a $k$-variety. Let $K=\kappa(X)=\calO_{X,\eta}$ be the function field. Then there is a bijection
+\[\{\text{rational maps $X\to Y$}\}\longleftrightarrow\{\text{$k$-morphisms $\Spec K\to Y$}\}=Y(K)\]
+given by $\phi\mapsto (\spec K\to U\to Y)$.
+\end{prop*}
+\begin{proof}[Sketch]
+Let $(\spec A_i)$ be the inverse system of all nonempty affine open subschemes of $X$, so that $A_i$ is a directed system of rings, with $\varinjlim A_i=K$. Then if $U$ runs over all dense opens in $X$
+\[\{\text{rational maps $X\to Y$}\}:=\varinjlim_U Y(U)=\varinjlim Y(A_i)= Y(\varinjlim A_i)=Y(K)\]
+The second last thing holds in general when $Y$ is locally of finite presentation.
+
+In fact, suppose that $Z$ is an $S$-scheme locally of finite presentation, and suppose for simplicity that both $Z$ and $S$ are affine. Then we want to show that $\varinjlim [\spec A_i,Z]=[\spec K,Z]$. The idea is that given $\phi:\Spec A_n\to Z$, we obtain a map $\Spec K\to Z$ via the composite
+\[\xymatrix{
+\spec A_n\ar[r]^\phi&Z\\
+\spec K\ar[u]
+}\]
+Now $\phi$ as an element of $\varinjlim [\spec A_i,Z]$ determines and is determined by this composite, as to specify $\phi$ is to specify a finite collection of elements of $A_n$ satisfying some relations, allowing ourselves to stabilise by passing deeper into the direct limit, and this is the same as to give the same type of collection of elements of $K$.
+\end{proof}
+\begin{defn*}
+Locally of finite presentation --- you get finitely presented things, as in definition of locally of finite type.
+\end{defn*}
+\begin{defn*}
+A rational map $X\to Y$ is \emph{dominant} if the image of some (hence all) representative is closed in $Y$.
+\end{defn*}
+[There's no way to compose rational maps, so we use dominant ones in the following.]
+\begin{thm*}
+Fix a field $k$. There is a contravariant equivalence of categories, between the category of integral $k$-varieties with DRMs, and the category of finitely generated field extensions of $k$, with $k$-algebra homomorphisms.
+\end{thm*}
+\begin{proof}
+In a dominant rational map, the generic point maps to the generic point! (Otherwise, it couldn't be dominant, as the image would like in the closure of the image of the generic point, which would be closed and proper.) Thus we get a map on local rings at the generic points, i.e.\ a map on function fields.
+
+We should now check that the functor is full, faithful and essentially surjective (everything in the target is isomorphic to something in the image). For full and faithfulness, recally the bijection:
+\[\{\text{rational maps $X\to Y$}\}\longleftrightarrow\{\text{$k$-morphisms $\Spec K\to Y$}\}=Y(K)\]
+If we restrict to \emph{dominant} rational maps, get a bijection
+\begin{alignat*}{2}
+\{\text{dominant rational maps $X\to Y$}\}&\longleftrightarrow\{\text{$k$-morphisms $\Spec K\to Y$ mapping $\eta_K\to \eta_Y$}\}\\
+&\ \qquad=\Hom_k(\kappa(Y),\kappa(X))
+\end{alignat*}
+For essential surjectivity, given $K$ a finitely generated field over $k$, let $t_1,\ldots,t_n$ be the generators, and let $A$ be the $k$-subalgebra generated by $t_1,\ldots,t_n$. Use $\Spec A$.
+\end{proof}
+\begin{defn*}
+Integral $k$-varieties are birational \Iff they are isomorphic in the category of dominant rational maps.
+\end{defn*}
+[The image of a constructible subset is constructible (Chevalley), and a dense const ructible subset contains a dense open subset.]
+\begin{prop*} TFAE:
+\begin{enumerate}\squishlist
+\item $X$ and $Y$ are birational.
+\item $X$ and $Y$ contain dense open subschemes which admit a $k$-isomorphism between them.
+\item $\kappa(X)$ and $\kappa(Y)$ are isomorphic as $k$-algebras.
+\end{enumerate}
+\end{prop*}
+\begin{proof}
+That $2\implies 3$ is easy. $3\iff 1$ is done. Need $1\implies 2$. By definition, we have $X_1\subset X$ and $Y_1\subset Y$ and morphisms $f:X_1\to Y$ and $g:Y_1\to X$ such that $fg$ and $gf$ are the identity where defined. How does one find open subsets that match up? It's sneaky.
+
+Let $X_n=\{x\in X\ :\ \text{$x$ can be mapped $n$ times by $f$ and $g$ alternately without getting stuck}\}$ --- this is an $n$-fold inverse image, and is thus open in $X$. Similarly define $Y_n$. Define $X_\infty$ ($Y_\infty$) to be the intersection of the $X_n$ ($Y_n)$. Then $X_\infty=X_2$! So $f:X_\infty\longleftrightarrow Y_\infty:g$ (and can be viewed as maps to $Y$ and $X$ respectively).
+\end{proof}
+\begin{exmp*}
+$xz(x+z)=yw(y+w)$ is rational --- birational to $\PP^2$.
+\end{exmp*}
+\end{document}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
