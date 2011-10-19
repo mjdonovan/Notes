@@ -17,8 +17,16 @@
 \includeversion{PartNine}
 \includeversion{PartTen}
 
-\includeversion{SaulSimplicialLocalisation}
-\includeversion{AlexandreBausfieldLocalisation}
+%Juvitop Fall 2011
+\excludeversion{SaulSimplicialLocalisation}
+\excludeversion{AlexandreBausfieldLocalisation}
+\includeversion{InnaSimplicalModelCats}
+
+%Babytop Fall 2011
+\excludeversion{GeoffroyTopologicalHochschildHomology}
+
+
+
 
 \rfoot{\footnotesize Michael Donovan}
 \newcommand{\KanSemResponse}[1]
@@ -266,6 +274,193 @@ Ummmmmmmm localise with respect to $F_{\Delta^1}\sqcup_{F_{\Delta^0}}\cdots\sqcu
 \end{PartTwo}
 \pagebreak
 \end{AlexandreBausfieldLocalisation}
+\begin{GeoffroyTopologicalHochschildHomology}
+\newcommand{\THH}{\textup{THH}}
+\newcommand{\HH}{\textup{HH}}
+\KanSemResponse
+{``Topological Hochschild Homology'' --- Geoffroy Horel --- 18/10/2011}
+\begin{abstract}
+In this talk we will try to give an overview of THH
+(Topological Hochschild Homology) which is the analogue in the category of
+spectra of good-old Hochschild homology for associative algebra over field.
+We will give two different construction of THH. The first one through the
+cyclic bar construction has the advantage of being a straightforward
+generalization of the algebraic version. The second one through
+factorization homology is more interesting as it describes THH as an
+example inside a large family of constructions indexed by framed manifolds.
+Finally if time permits we will introduce the Bockstedt spectral sequence
+and make an explicit computation of THH(KU).
+\end{abstract}
+\subsection*{Hochschild Homology}
+Suppose $k$ is a commutative ring and $A$ an associative $k$-algebra. I can define $A\otimes_k A^\op$, and $(A\otimes_k A^\op)^\op=A\otimes_k A^\op$, so that left and right modules coincide. We'll call such things bimodules:
+\[MOD_{A\otimes_k A^\op}:=Bimod{A-A}\]
+For $M\in Bimod{A-A}$, 
+\[\HH_*(A,M):=\Tor^{A\otimes_k A^\op}(A,M)\]
+and 
+\[\HH_*(A):=\Tor^{A\otimes_k A^\op}(A,A).\]
+There's a nice projective resolution called:
+\subsubsection*{Cyclic bar construction}
+Suppose $A$ is prjective over $k$. Define $CB_*^k(A)\in Mod_k^{\Delta^\op}$, $CB_a(A)=A^{\otimes n+1}$.
+\[d_i:CB_m(A)\to CB_{m-1}(A) (i\in\{0,m+1\})\]
+\[d_0(a_0\otimes a_{m+1})=a_0a_1\otimes a_2\otimes\cdots\]
+\[d_m(a_0\otimes a_{m+1})=a_0\otimes a_1\otimes\cdots\otimes a_{m-1}a_{m}\]
+\[d_{m+1}(a_0\otimes a_{m+1})=a_ma_0\otimes a_1\otimes\cdots\otimes a_{m-1}\]
+Taking the alternating sum of the faces, get a chain complex, and
+$H_*(CD_*(A))=\HH_*(A)$.
+Why do people care about Hochschild homology?
+\begin{enumerate}
+\item The Hochschild-Kostant-Rosenbern theorem:
+\begin{thm*}
+If $k\to A$ is a smooth map of commutative algebras then there is a map $\Omega_k^*(A)\weakequiv \HH_*^k(A)$ (left is deRham) which is an isomorphism of DGAs. In degree zero, have the identity $A\to\HH_0(A)=A$. In degree one:
+\[\Omega^1(A)=\{a\cdot db:a,b\in A\}/(a\cdot d(bc)=ac\cdot db+ab\cdot dc)\]
+There's a map $\Omega^1(A)\weakequiv\HH_1(A)=A\otimes A/\langle\rangle$, sending $a\otimes b\mapsto a\cdot db$.
+
+Now $\HH_*^k$ is the right analogue for the DeRham differential forms wh
+
+Now we have a deRham differential $\Omega^*(A)\to\Omega^{*+1}(A)$, and there's a Connes differential $\HH_*^k(A)\to \HH_{*+1}^k(A)$, which is preserved by the isomorphism. That's a plus.
+\end{thm*}
+An easy computation is:
+$\HH_*^k(k[x_1,x_2,\ldots,x_n])=k[x_1,\ldots,x_n]\otimes_k E(\sigma x_1,\ldots,\sigma x_n)$, with $|\sigma x_i|=1$ --- these correspond to $d x_1,\ldots, d x_n$.
+\end{enumerate}
+\subsection*{THH}
+Let's say we're working with a symmetric monoidal model category of spectra, call it $(\spec,\otimes,S)$. (You choose.) Well suppose $R$ is a cofibrant commutative algebra in $\spec$. There is a symmetric monoidal model category of $R$-modules $Mod_R$, with an adjunction $\spec\longleftrightarrow Mod_R$. 
+%Thus I can talk about associative algebras in $R$-models, and this has a model structure, 
+If $A$ is an associative algebra in $Mod_R$, I can still define $CB_m(A)=A^{\otimes m+1}$
+
+My first definition of $\THH$ will be the left derived functor
+\[\THH^R(A)=L|CB_*(A)|=|CB_*(A^c)|.\]
+Let's give a definition where the circle action is more clear, and where we can obviously plug in an $A_\infty$-algebra:
+\begin{defn*} 
+Let $Fin$ be the category of finite sets. Let $E_1$ be the topological category whose objects are finite sets, and $E_1(X,Y)=\coprod_{f\in Fin(X,Y)}\prod_{y\in Y} \scrE_1(f^{-1}(y))$., where $\scrE_1(X)$, for $X$ a finite set, is the space of configurations of intervals in $(0,1)$, with the intervals labeled by $X$.
+ This is monoidall under disjoint union.
+
+An $A_\infty$-algbra is a monoidal topological functor $A^{\otimes\DASH}:E_1\to\spec$. (This $\scrE_1$ is a model of the $A_\infty$-operad).
+
+Let's define a functor $C:E_1^\op\to\Top$ sending $X$ to a configuration of intervals in the circle, labeled by the elements of $X$. It's straightforward to see how to define the action of the functor on maps: need $C(Y)\times E_1(X,Y)\to C(X)$, i.e.\ for all $f:X\to Y$ a map, via the obvious operadic type map.
+\end{defn*}
+Can take the homotopy coend $C\otimes_{E_1}^L A^{\otimes\DASH}=:\THH(A)$. This has an obvious $S^1$-action, as the circle acts on $C$.
+\subsection*{B\"ockstedt spectral sequence}
+Suppose $K_*$ is a multiplicative homology theory with a K\"unneth isomorphism.
+\[E^1_{s,t}=K_t(CB_s(A))\implies K_{s+t}(\THH(A))\]
+The $d^1$ differential is the alternating sum of somesuch. As $K$ has a K\"unneth isomorphism, you realise that
+\[E^1_{s,*}=\HH^{K_*}_s(K_*A)\implies K_*(\THH(A)).\]
+As an application, define $KU$ to be the $p$-completed complex $k$-theory spectrum. Also, Morava $K(1)_*$-theory is a summand of $KU/p$. Then you can do some stuff.
+
+
+
+
+
+
+
+
+
+
+
+
+
+\pagebreak
+\end{GeoffroyTopologicalHochschildHomology}
+\begin{InnaSimplicalModelCats}
+\KanSemResponse
+{``(Simplicial) (model) categories'' --- Inna Zakharevich --- 19/10/2011}
+\begin{abstract}
+We've talked about model categories, we've talked about simplicial categories. Now we must tackle the two monsters... together. This talk will be about the interactions of the simplicial structure and the model structure on the category of simplicial objects in a model category: $SM7$, the Reedy structure, and (if we have time) the $E^2$ model structure.
+\end{abstract}
+We had the rather complicated hammock localisation:
+\[\text{Model Cats}\overset{L_H}{\to}\text{Simplicial Cats}\]
+If $\calC$ is a model category with a simplicial enrichment, we want $\pi_0\underline\Hom(A,B)$ to be the set of homotopy classes $\Hom_{\ho\calC}(A,B)$ of maps $A$ to $B$.
+
+We'd rather like $L_H(A,B)\simeq \Hom_\calC(A,B)$, maybe with some conditions of cofibrancy, etc.
+
+In this talk, $\underline\Hom$ refers to a space of morphisms, but I didn't notice this for a while, so some underlines might be missing.
+\subsection*{Axiom SM7}
+\[\xymatrix{
+A\ar[r]\ar@{^{(}->}[d]^i&X\ar@{->>}[d]^P\\
+B\ar[r]\ar@{..>}[ur]&Y
+}\]
+Have, for $i,P$ fixed, a function 
+ \[\Hom(B,X)\overset{(i^*,p_*)}{\to}\Hom(B,Y)\times_{\Hom(A,Y)}\Hom(X,Y)\]
+expressing the fact that ``for every lift you get a diagram''. Note that
+we didn't say that $i$ or $P$ had to by acyclic.
+
+\noindent \textbf{\Bullet SM7:} $(i^*,p_*)$ is always a fibration. If either $i$ or $P$ is acyclic, then so is $(i^*,p_*)$.
+\begin{itemise}
+\item We want the lift to be well defined, at least up to a contractible choice, when it is guaranteed to exist by the model category axioms.
+\item You want there to be some continuity in the answer to the question ``what lifts exist for a given diagram'', as the diagram varies. For example, if no lift exists, and you deform the diagram slightly, you don't want to suddenly see a lift.
+\end{itemise}
+\begin{defn*}
+A \emph{simplicial model category} is a model category enriched over $\sSet$ satisfying SM7.
+\end{defn*}
+\noindent There are the best things that are both simplicial and model.
+\subsection*{How to simplicially enrich simplicial sets}
+Well, we start be setting 
+\[\underline{\Hom}(A,B)_0:=\Hom(A,B).\]
+We really want the 1-simplices to be homotopies, so define:
+\[\underline{\Hom}(A,B)_1:=\Hom(A\times\Delta^1,B).\]
+We carry on this way, using $\Delta^k$ instead of $(\Delta^1)^k$, the former being more simplicial:
+\[\underline{\Hom}(A,B)_k:=\Hom(A\times\Delta^k,B).\]
+\begin{thm*}[Quillen?]
+This works, making $\sSet$ a simplicial model category.
+\end{thm*}
+\begin{proof} See Goerss and Jardine, chapter II.
+\end{proof}
+We can generalise this. Suppose that $\calC$ has all coproducts (for example, if $\calC$ is model). We construct a functor $\calC\times\sSet\xrightarrow{\otimes}s\calC$, where $s\calC=[\Delta^\op,\calC]$, by setting\footnote{A common alternative way to think of this: it's the diagonal in the bisimplicial set $(X\otimes K)_{ik}=\coprod_{K_i}X_j$.}
+\[(X\otimes K)_n=\coprod_{K_n}X_n.\]
+Now in general, given a functor $\calC\times\sSet\xrightarrow{\otimes}\calC$, (satisfying some conditions), we can give a simplicial enrichment on $\calC$, via the recipe:
+\[\underline{\Hom}(A,B)_k:=\Hom(A\otimes\Delta^k,B).\]
+All the simplicial structure here comes from the $\Delta^k$ coordinate.
+
+\subsection*{$\calC$ is a model category}
+Consider $s\calC$. We have a simplicial structure on $s\calC$ (from previous). We also have the projective and injective model structures
+\subsection*{Why do we care about model structures on diagram categories?}
+Suppose we have a diagram, like $D$: $\Bullet\longrightarrow\Bullet\longleftarrow\Bullet$.  We have the functor
+\[\text{pullback}:\Top^D\to\Top.\]
+Both of these are model categories, but this isn't a Quillen functor [i.e.\ doesn't preserve weak equivs]. Pullback is not compatible with homotopy.\footnote{For example, the pullback of $\ast\longrightarrow S^1\longleftarrow\ast$ is either a point or the empty set.} \emph{However}, if the two maps in are fibrations, even if you change either the objects or the maps up to homotopy, you get a weak equiv on pullbacks.\footnote{In spaces, you get lucky and only need one to be a fibration.}
+
+There is a model structure on $\Top^D$, in particular, it's the injective structure you need for pullbacks. \rednote{(I don't get how some of the comments hereabouts are relating to each other.)}
+
+%We'll look at a theorem of Reedy which will work for any reedy diagram category. 
+The injective and projective structures aren't right \rednote{(for what?)}. To demonstrate this, I'll try to characterise the (acyclic?) cofibrations on the model category $s\calC$ given the projective model structure.
+\[\xymatrix{
+A_0\ar[r]\ar[d]^s_\simeq&X_0\ar@{->>}[d]\\
+B_0\ar[r]\ar@{..>}[ur]&Y_0
+}\]
+Let's try to go a little higher ...
+\subsection*{The Reedy model structure}
+\begin{thm*}
+We have a model structure on $s\calC$, where the weak equivalences are levelwise, and
+\[\textup{proj}\weakequiv\textup{Reedy}\weakequiv\textup{inj}\]
+are left Quillen equivalences.\footnote{Reedy's paper on this is hard to find, Goerss and Jardine's account is hard to read.}
+\end{thm*}
+ The downside is that the Reedy structure is not simplicial.
+\begin{thm*}
+If $\calC\otimes \sSet\to \calC$ ($\calC$ model) satisfies, for all $A\cofibration B\in\calC$:
+\begin{enumerate}\squishlist
+\item $(A\otimes \Delta^n)\cup_{A\otimes\partial\Delta^n}(B\otimes\partial\Delta^n)\to B\otimes\Delta^n$, the ``box product'', is a cofibration, which is acyclic whenever $i$ is acyclic; and
+\item The same box product for $\Delta^0\acycliccofibration\Delta^1$ is always an acyclic cofibration;
+\end{enumerate}
+then $\calC$ is a simplicial model category.
+\end{thm*}
+\noindent In the Reedy structure, it's the easier condition, 2, that fails.
+
+There's another structure, the $E^2$ model structure, for which this works, in a paper by Dwyer, Kan and Stover. They say $X\weakequiv Y$ is a weak equivalence \Iff $\pi_i(\pi_j X)\overset{\cong}{\to}\pi_i(\pi_j  Y)$ is iso for all $i$, $j$ (the homotopy of a simplicial group). (That is, we get an $E^2$-page iso (??)).
+\subsection*{The Reedy structure}
+\begin{defn*}[Formal definition] Let $\Delta_n$ be the full subcat of $\Delta$ of objects $\leq n$. Have inclusion $\Delta_n\to\Delta$, giving
+\[\calC^{\Delta^{op}}\to\calC^{\Delta^{op}_n}\]
+This has a left and right adjoint. The left adjoint is the $n^\text{th}$ skeleton $\Skel_n$ (throw out nondeg simp over dim $n$), and the right is the $n^\text{th}$ coskeleton $\Coskel_n$ (this is the thing where you put in all possible $n+1$-simplices, then all $n+2$ simplices, and so on forever). The skeleton is the minimal thing with the right stuff, the coskel is the maximal [left=minimal right=maximal].
+
+Let $L_nX=(\Skel_{n-1}X)_n\in\calC$, and $M_nX=(\Coskel_{n-1}X)_n\in\calC$ ``latching and matching''. Have $L_nX\to X_n$ and $X_n\to M_nX$. The cofibrations are the maps $A\to B$ where $A_n\sqcup_{L_nA}L_nB\to B_n$ is a cofibration for all $n$.
+The fibrations are the things $A_n\to M_nA\times_{M_nB}B_n$ are fibrations for all $n$.
+\end{defn*}
+\begin{cor*}
+These maps are acyclic for all $n$ \Iff $A\to B$ is.
+\end{cor*}
+The pushout is the map from the first latching object. This model structure is self-dual, halving the number of proofs!
+
+Q: Why's $s\calC$ interesting?
+A: If you wanna define Andre-Quillen cohomology, you really need simplicial objects, which are relevant to resolutions of things in some settings.
+\pagebreak
+\end{InnaSimplicalModelCats}
 \end{document}
 
 
