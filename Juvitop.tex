@@ -375,24 +375,24 @@ We'd rather like $L_H(A,B)\simeq \Hom_\calC(A,B)$, maybe with some conditions of
 In this talk, $\underline\Hom$ refers to a space of morphisms, but I didn't notice this for a while, so some underlines might be missing.
 \subsection*{Axiom SM7}
 \[\xymatrix{
-A\ar[r]\ar@{^{(}->}[d]^i&X\ar@{->>}[d]^P\\
-B\ar[r]\ar@{..>}[ur]&Y
+A\ar@{-->}[r]^\alpha\ar@{^{(}->}[d]_i&X\ar@{->>}[d]^P\\
+B\ar@{-->}[r]_\beta\ar@{..>}[ur]&Y
 }\]
 Have, for $i,P$ fixed, a function 
- \[\Hom(B,X)\overset{(i^*,p_*)}{\to}\Hom(B,Y)\times_{\Hom(A,Y)}\Hom(X,Y)\]
+ \[\Hom(B,X)\xrightarrow{(i^*,P_*)}\Hom(B,Y)\times_{\Hom(A,Y)}\Hom(X,Y)\]
 expressing the fact that ``for every lift you get a diagram''. Note that
 we didn't say that $i$ or $P$ had to by acyclic.
 
-\noindent \textbf{\Bullet SM7:} $(i^*,p_*)$ is always a fibration. If either $i$ or $P$ is acyclic, then so is $(i^*,p_*)$.
+\noindent \textbf{\Bullet SM7:} $(i^*,P_*)$ is always a fibration. If either $i$ or $P$ is acyclic, then so is $(i^*,P_*)$.
 \begin{itemise}
 \item We want the lift to be well defined, at least up to a contractible choice, when it is guaranteed to exist by the model category axioms.
-\item You want there to be some continuity in the answer to the question ``what lifts exist for a given diagram'', as the diagram varies. For example, if no lift exists, and you deform the diagram slightly, you don't want to suddenly see a lift.
+\item You want there to be some continuity in the answer to the question ``what lifts exist for $(\alpha,\beta)$'' to vary smoothly in $(\alpha,\beta)$, where $\alpha:A\to X$ and $\beta:B\to Y$ make the diagram commute. For example, if no lift exists, and you deform the diagram slightly, you don't want to suddenly see a lift.
 \end{itemise}
 \begin{defn*}
 A \emph{simplicial model category} is a model category enriched over $\sSet$ satisfying SM7.
 \end{defn*}
 \noindent There are the best things that are both simplicial and model.
-\subsection*{How to simplicially enrich simplicial sets}
+\subsection*{How to simplicially enrich $\sSet$}
 Well, we start be setting 
 \[\underline{\Hom}(A,B)_0:=\Hom(A,B).\]
 We really want the 1-simplices to be homotopies, so define:
@@ -404,7 +404,7 @@ This works, making $\sSet$ a simplicial model category.
 \end{thm*}
 \begin{proof} See Goerss and Jardine, chapter II.
 \end{proof}
-We can generalise this. Suppose that $\calC$ has all coproducts (for example, if $\calC$ is model). We construct a functor $\calC\times\sSet\xrightarrow{\otimes}s\calC$, where $s\calC=[\Delta^\op,\calC]$, by setting\footnote{A common alternative way to think of this: it's the diagonal in the bisimplicial set $(X\otimes K)_{ik}=\coprod_{K_i}X_j$.}
+We can generalise this. Suppose that $\calC$ has all coproducts (for example, if $\calC$ is a model category). We construct a functor $\calC\times\sSet\xrightarrow{\otimes}s\calC$, where $s\calC=[\Delta^\op,\calC]$, by setting\footnote{A common alternative way to think of this: it's the diagonal in the bisimplicial set $(X\otimes K)_{ik}=\coprod_{K_i}X_j$.} \rednote{(any further identification in this colimit?)}
 \[(X\otimes K)_n=\coprod_{K_n}X_n.\]
 Now in general, given a functor $\calC\times\sSet\xrightarrow{\otimes}\calC$, (satisfying some conditions), we can give a simplicial enrichment on $\calC$, via the recipe:
 \[\underline{\Hom}(A,B)_k:=\Hom(A\otimes\Delta^k,B).\]
@@ -420,23 +420,34 @@ Both of these are model categories, but this isn't a Quillen functor [i.e.\ does
 There is a model structure on $\Top^D$, in particular, it's the injective structure you need for pullbacks. \rednote{(I don't get how some of the comments hereabouts are relating to each other.)}
 
 %We'll look at a theorem of Reedy which will work for any reedy diagram category. 
-The injective and projective structures aren't right \rednote{(for what?)}. To demonstrate this, I'll try to characterise the (acyclic?) cofibrations on the model category $s\calC$ given the projective model structure.
+The injective and projective structures aren't right \rednote{(for what?)}. To demonstrate this, I'll try to characterise the \rednote{(acyclic?)} cofibrations on the model category $s\calC$ given the projective model structure, between objects $A_*$ and $B_*$.
+
+To get a lift, we at least need one on the $0$-level, so we'll need $A_0\to B_0$ to be an acyclic cofibration in $\calC$:
 \[\xymatrix{
-A_0\ar[r]\ar[d]^s_\simeq&X_0\ar@{->>}[d]\\
+A_0\ar[r]\xycofib[d]^\simeq&X_0\ar@{->>}[d]\\
 B_0\ar[r]\ar@{..>}[ur]&Y_0
 }\]
-Let's try to go a little higher ...
+Let's try to go a little higher. The lift on the next level is a rather more complicated piece of cheese:
+\[\xymatrix@!0@R=8mm@C=1cm{
+A_0\ar[dddd]\ar[rrrrrrr]\xycofibdown[drrr]&&&&&&&X_0\ar[dddd]\\
+&&&B_0\ar@{..>}[rrrru]\ar[ldd]\ar[dddd]&&&\\
+\\
+&&\text{Push}\ar@{-->}[ddr]\\%^(.3)\sim\\
+A_1\ar[rrrrrrr]\ar[drrr]\ar[rru]&&&&&&&X_1\\
+&&&B_1\ar@{..>}[rrrru]
+}\]
+Somehow, things work when the dashed map on the left face from the pushout to $B_1$ is a weak equivalence. \rednote{(I haven't figured this out yet.)} Anyway, this is all getting complicated rather quickly, so we should move on instead to:
 \subsection*{The Reedy model structure}
 \begin{thm*}
 We have a model structure on $s\calC$, where the weak equivalences are levelwise, and
 \[\textup{proj}\weakequiv\textup{Reedy}\weakequiv\textup{inj}\]
 are left Quillen equivalences.\footnote{Reedy's paper on this is hard to find, Goerss and Jardine's account is hard to read.}
 \end{thm*}
- The downside is that the Reedy structure is not simplicial.
+\noindent The downside is that the Reedy structure is not simplicial.
 \begin{thm*}
-If $\calC\otimes \sSet\to \calC$ ($\calC$ model) satisfies, for all $A\cofibration B\in\calC$:
+If $\calC\otimes \sSet\to \calC$ ($\calC$ a model category) satisfies, for all $A\cofibration B\in\calC$:
 \begin{enumerate}\squishlist
-\item $(A\otimes \Delta^n)\cup_{A\otimes\partial\Delta^n}(B\otimes\partial\Delta^n)\to B\otimes\Delta^n$, the ``box product'', is a cofibration, which is acyclic whenever $i$ is acyclic; and
+\item $(A\otimes \Delta^n)\cup_{A\otimes\partial\Delta^n}(B\otimes\partial\Delta^n)\to B\otimes\Delta^n$, the ``box product''\footnote{Suppose that $\calC=\Top$ and $\Top\otimes\sSet\to\Top$ is $A\otimes K\mapsto A\times|K|$. Suppose given a cofibration $A\cofibration B$. The ``box product'' maps out of $A\times D^n\cup B\times S^{n-1}$, a cylender $B\times D^n$ with $B\setminus A\times (D^n)^\circ$ removed. It is then the inclusion of this into the full cylender $B\times D^n$. \bluenote{It seems likely that this functor satisfies the criteria of the theorem.}}, is a cofibration, which is acyclic whenever $i$ is acyclic; and
 \item The same box product for $\Delta^0\acycliccofibration\Delta^1$ is always an acyclic cofibration;
 \end{enumerate}
 then $\calC$ is a simplicial model category.
@@ -447,9 +458,12 @@ There's another structure, the $E^2$ model structure, for which this works, in a
 \subsection*{The Reedy structure}
 \begin{defn*}[Formal definition] Let $\Delta_n$ be the full subcat of $\Delta$ of objects $\leq n$. Have inclusion $\Delta_n\to\Delta$, giving
 \[\calC^{\Delta^{op}}\to\calC^{\Delta^{op}_n}\]
-This has a left and right adjoint. The left adjoint is the $n^\text{th}$ skeleton $\Skel_n$ (throw out nondeg simp over dim $n$), and the right is the $n^\text{th}$ coskeleton $\Coskel_n$ (this is the thing where you put in all possible $n+1$-simplices, then all $n+2$ simplices, and so on forever). The skeleton is the minimal thing with the right stuff, the coskel is the maximal [left=minimal right=maximal].
-
-Let $L_nX=(\Skel_{n-1}X)_n\in\calC$, and $M_nX=(\Coskel_{n-1}X)_n\in\calC$ ``latching and matching''. Have $L_nX\to X_n$ and $X_n\to M_nX$. The cofibrations are the maps $A\to B$ where $A_n\sqcup_{L_nA}L_nB\to B_n$ is a cofibration for all $n$.
+This functor has both a left and right adjoint:
+\begin{itemise}
+\item The left adjoint is the $n^\text{th}$ skeleton $\skel_n$. This is the object in which you throw out all the nondegenerate simplices whose dimension exceeds $n$. Note that the skeleton is the minimal object with the correct cells at dimensions $n$ and below, which suits the fact that it is a left adjoint --- it should at least like supporting maps.
+\item The right adjoint is the $n^\text{th}$ coskeleton $\coskel_n$. This is the object in which you add in all possible $(n+1)$-simplices, then all possible $(n+2)$-simplices, and so on forever. Note that the coskeleton is the maximal object with the correct cells at dimensions $n$ and below, which suits the fact that it is a right adjoint --- it should at least like recieving maps.
+\end{itemise}
+Now let $L_nX=(\skel_{n-1}X)_n\in\calC$, and $M_nX=(\coskel_{n-1}X)_n\in\calC$ ``latching and matching''. Have $L_nX\to X_n$ and $X_n\to M_nX$. The cofibrations are the maps $A\to B$ where $A_n\sqcup_{L_nA}L_nB\to B_n$ is a cofibration for all $n$.
 The fibrations are the things $A_n\to M_nA\times_{M_nB}B_n$ are fibrations for all $n$.
 \end{defn*}
 \begin{cor*}
