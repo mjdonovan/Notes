@@ -5,9 +5,18 @@
 \documentclass[11pt]{article}
 \input{../macros.tex}
 
+\includeversion{Oct18}
+\includeversion{Oct20}
+\includeversion{Oct25}
+\includeversion{Oct27}
+\includeversion{Oct1}
+\includeversion{Oct3}
+\includeversion{Oct8}
+\includeversion{Oct10}
 
 
 \begin{document}
+\begin{Oct18}
 \section*{Algebraic Geometry --- 18 October}
 \subsubsection*{Valuative criterion for Separatedness}
 $K[x]_{(x)}$ is a DVR --- the local ring of a point on a curve. Thinking of it this way, a DVR should always have two points, as you take out all the points but the generic and the point zero. The local ring of a point on a curve should always be a DVR, as you can measure the vanishing at zero.
@@ -101,6 +110,109 @@ Let $X_n=\{x\in X\ :\ \text{$x$ can be mapped $n$ times by $f$ and $g$ alternate
 \begin{exmp*}
 $xz(x+z)=yw(y+w)$ is rational --- birational to $\PP^2$.
 \end{exmp*}
+\end{Oct18}
+\begin{Oct20}
+\section*{Algebraic Geometry --- 20 October}
+\begin{exmp*}
+$xz(x+z)=yw(y+w)$ is rational --- birational to $\PP^2$.
+\end{exmp*}
+\begin{proof}
+Let $L$ be the line $x=y=0$ in $\PP^3$, and let $L'$ be $w=z=0$. $L,L'\subset X$, and $L\cap L'=\emptyset$. We'll define a rational map $L\times L'\to X$, taking $(p,p')$ to the third intersection of the line through them with $X$. This works a charm, except when $pp'$ lies entirely in $X$ (problems with double points can be resolved).
+
+For the inverse, any $(a:b:c:d)\in\PP^3$ not on $L\cup L'$ lies on a unique line $pp'$ with $p\in L$, $p'\in L'$, defining the rational map inverse to that above. So is is birational to $P^1\times P^1$, which is birational to $\PP^2$.
+\end{proof}
+\subsubsection*{Projective morphisms}
+\begin{defn*}
+$\PP^n_A:=\proj A[x_0,\ldots,x_n]\simeq \PP^n_\Z\times A$. For $S$ a scheme, $\PP^n_S:= \PP^n_\Z\times S$.
+\end{defn*}
+\begin{lem*}
+If $(X_i)$ is an open cover of an $S$-scheme $X$, and that $R$ is a local ring over $S$ (i.e.\ it's an $S$-algebra). Then $X(R)=\bigcup X_i(R)$.
+\end{lem*}
+[This is obviously not true when $R$ is not local.]
+\begin{proof}
+Let $t\in\spec R$ be the closed point, corresponding to the maximal ideal. Any morphism $f:\spec R\to X$ sends $t$ into some $X_i$. We need to see that all of $\spec R$ maps into $X_i$. Well $f^{-1}X_i$ is open, containing the point $t$, but the only open subset containing the unique maximal ideal is $\spec R$.
+\end{proof}
+\begin{cor*}
+If $R$ is a local ring, then we can describe the $R$-points of projective space:
+\[\PP^n_\Z(R)\simeq\{(a_0,\ldots,a_n)\in R^{n+1}\,|\,\text{some $a_i\in R^\times$}\}/R^\times\]
+\end{cor*}
+[You can make this work for a PID if you demand that the $a_i$ generate the unit ideal, but even for other Dedekind rings, this doesn't work.]
+\begin{proof}
+$\PP^n(R)=\bigcup D_+(x_i)$, and $D_+(x_i)=\A^n_\Z$, and points of $\A^n_\Z$ are $n$-tuples of elements of $R$. Thus 
+\[\PP^n(R)=\bigcup \{a_0,\ldots,a_{i-1},1,a_{i+1},\ldots,a_n\}\qedhere\]
+\end{proof}
+\begin{cor*}
+If $R$ is a valuation ring, and $K$ is its fraction field, then $\PP^n(R)\weakequiv \PP^n(K)$.
+\end{cor*}
+\begin{proof}
+Given $(a_0,\ldots,a_n)\in K^{n+1}\setminus\{0\}$, we can scale up just enough to get all in the valuation ring, but not so far that they all fail to be units. This expression is uniquely determined up to a unit of $R^\times$.
+\end{proof}
+\begin{defn*}
+$X\to S$ is projective \Iff it factors as a composite $X\cofibration \PP^n_S\to S$. That is, the composite of a closed immersion into projective space with the structure map.
+\end{defn*}
+[The definition in EGA is different. Here, $\PP V=\proj\Sym V^*$. To do this relatively, you use a vector bundle on $S$. These are equivalent under mild hypothesis, for example if $S$ is of finite type over a field.]
+\begin{defn*}
+$X\to S$ is quasi-projective if it factors as the composite of an open immersion $X\cofibration Y$ and a projective morphism $Y\to S$.
+\end{defn*}
+\subsubsection*{Proper morphisms}
+\begin{defn*}
+A morphism $f:X\to Y$ is closed if the image of an closed subset of $X$ is closed in $Y$. This property is not preserved under base extension. A morphism $f:X\to Y$ is universally closed if any base extension thereof is closed.
+\end{defn*}
+\begin{nonexmp*} The map $\A^1_k\to \spec k$ is not universally closed. Consider:
+\[\xymatrix{
+\ar[d]\A^2_k\ar[r]&\A^1_k\ar[d]\\
+\A^1_k\ar[r]&\spec k
+}\]
+The hyperbola $xy=1$ maps to a non-closed set.
+\end{nonexmp*}
+\begin{defn*}
+$f:X\to Y$ is proper \Iff it is separated, of finite type, and universally closed.
+\end{defn*}
+\begin{exmp*}
+Closed immersions, compositions of proper maps and base changes of proper maps are all proper. Properness is local on the base.
+\end{exmp*}
+\begin{thm*}[Valuative criterion for properness]
+Suppose $f:X\to S$ is of finite type, where $S$ is noetherian. Then $f$ is proper \Iff for every (discrete)\footnote{It's a pain to go from the VR version to the DVR version.} valuation ring $R$ over $S$, if $K:=\text{frac}(R)$, then the natural restriction map $X(R)\to X(K)$ is bijective.
+\end{thm*}
+\noindent [This is good both for checkinig properness, and for extending morphisms!]
+\begin{thm*} For a morphism of noetherian schemes, projective $\implies$ proper.
+\end{thm*}
+\begin{proof}
+First, we'll prove that $\PP^n_Z\to\spec\Z$ is proper. By the valuative criterion for properness, this comes from a recent corollary. In general, we have to check this for composites of a closed immersion into $\PP^n_S$ and the structure map $\PP^n_S\to S$. The structure map, being a base extension of $\PP^n_Z\to\spec\Z$, is proper. But closed immersions are proper --- they're locally affine, thus separated, clearly finite type, and universally closed, as closed immersions are closed under base change. As compositions of proper morphisms are proper, we're done.
+\end{proof}
+\begin{exmp*}
+Let $A=k[a,b,c,d]$, and $X=\proj \frac{A[x,y]}{(ax+by,cx+dy)}\subseteq\PP^1_A$. There's a map $f:X\to Y=\spec A=\A^4$. Now $f$ is projective, hence proper, hence universally closed, hence closed. Then $f(X)$ is the closed subset defined by $ad-bc=0$ in $\A^4$. 
+
+In general, you get the closed subset defined by the resultant. \emph{This is really a proof of the existence of the resultant, a polynomial characterising when two homogeneous forms have a common zero --- to see that there's only one polynomial, one counts dimensions, and sees that you get a hypersurface.}\footnote{It's Krull's Hauptidealsatz which shows that a closed codimension one subset of affine space is a hypersurface.}
+\end{exmp*}
+\begin{thm*}
+Suppose that $f:X\to Y$ is a morphism of $k$-varieties, and $X$ is projective (over $k$). Then the image $f(X)$ is closed in $Y$.
+\end{thm*}
+\begin{proof}
+\[\xymatrix{
+X\ar[d]_f\ar@/^1cm/[dd]^{\text{proper}}\\%bend me.
+Y\ar[d]_{\text{separated}}\\
+\spec k
+}\]
+Thus $f$ is proper. In particular, $f$ is universally closed, and $f(X)$ is closed in $Y$.
+\end{proof}
+[This is part of elim thy --- if $f$ is the elimination of a variable, what you get is still defined by equations.....]
+\begin{defn*}
+A constructible subset is a Boolean combination of closed sets.
+\end{defn*}
+\begin{thm*}[Chevalley]
+Any morphism of varieties $X\to Y$ sends constructible sets to constructible sets. More generally, this holds for any morphism of finite type of noetherian schemes.
+\end{thm*}
+There's a reinterpretation of this in terms of logic, called elimination of quantifiers, when $k$ is algebraically closed.
+\begin{thm*}[elimination of quantifiers]
+Any first order formula in the language $(+,\cdot,\text{a symbol for each element of $k$})$ is equivalent to a quantifier-free formula.
+\end{thm*}
+\begin{exmp*}
+$(\exists y)\ xy=1\iff \text{not}(x=0)$.
+\end{exmp*}
+\noindent Over the reals, you also need to throw in the symbol $\leq$, and call things ``semi-algebraic''.
+\end{Oct20}
+
 \end{document}
 
 
