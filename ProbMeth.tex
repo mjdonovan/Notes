@@ -1,0 +1,153 @@
+% !TEX root = z_output/_ProbMeth.tex
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%% 80 characters %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\documentclass[11pt]{article}
+\input{../macros.tex}
+\usepackage{makeidx}
+
+
+\usepackage{multicol}
+\makeatletter
+\renewenvironment{theindex}
+  {\if@twocolumn
+      \@restonecolfalse
+   \else
+      \@restonecoltrue
+   \fi
+   \setlength{\columnseprule}{0pt}
+   \setlength{\columnsep}{10pt}% I CHANGED THIS from 35pt
+   \begin{multicols}{3}[\section*{\indexname}]
+   \markboth{\MakeUppercase\indexname}%
+            {\MakeUppercase\indexname}%
+   \thispagestyle{plain}
+   \setlength{\parindent}{0pt}
+   \setlength{\parskip}{0pt plus 0.3pt}
+   \relax
+   \let\item\@idxitem
+   \small}% I ADDED THIS
+  {\end{multicols}\if@restonecol\onecolumn\else\clearpage\fi}
+\makeatother
+
+
+\makeindex
+\newcommand{\indexThmCode}{}
+\newcommand{\Index}[1]{\index{#1}#1}
+\newcommand{\indexThm}[1]{\index{Hartshorne!Theorems, etc.!#1}}
+\newcommand{\Entry}[3][notcustom]{\Bullet
+\ifthenelse{\equal{#1}{}}{}
+{
+\ifthenelse{\equal{#1}{notcustom}}{\index{#2}}{\index{#1}}
+}
+ \textbf{#2:}&#3}
+
+%\newenvironment{INT}{\begin{itemize}\small\item}{\end{itemize}}
+
+\newenvironment{INT}[1][]{\begin{itemize}\small\item\textbf{#1}}{\end{itemize}}
+
+
+
+
+\begin{document}
+\section*{\S1: The basic method}
+\begin{itemise}
+\item The \textbf{Ramsey number} $R(k,l)$ is the least $n$ such that for any 2-colouring of the vertices of the complete graph $K_n$ on $n$ vertices, there is always either a blue $K_k$ or a red $K_l$.
+\begin{INT}[Prop 1.1.1:]
+If ${n\choose k}2^{1-{k\choose 2}}<1$ then $R(k,k)>n$.
+\begin{proof}
+Want to show that there's a chance you fail to get a monochromatic subgraph from a random colouring. Add up the probabilities of getting a monochromatic subgraph at each opportunity, to get ${n\choose k}2^{1-{k\choose 2}}$. It is possible that none of these occur.
+\end{proof}
+\end{INT}
+\item A \textbf{tournament} on a set $V$ of $n$ players is an orientation of the complete graph $K_V$. That is, every pair of players has a unique winner.
+A tournament could have \textbf{property $S_k$}: for every group of $k$ players, there is one that beats them all.
+\begin{INT}[Thm 1.2.1:]
+If ${n\choose k}(1-2^{-k})^{n-k}<1$ then there is a tournament with $S_k$ of size $n$.
+\begin{proof}
+Choose a random tournament. The chance that it fails to have $S_k$ is bounded above by this probability.
+\end{proof}
+\end{INT}
+\item A \textbf{dominating set} in a graph $(V,E)$ is a set $U$ of vertices to which every vertex $v\in V-U$ is connected by an edge.
+\begin{INT}[Thm 1.2.2:]
+A graph on $n$ vertices with minimum degree $\delta>1$ has a dominating set of at most $n[1+\log(\delta+1)]/(\delta+1)$ vertices.
+\begin{proof}
+Fix a probability $p$. Choose vertices of with probability $p$ The expected number of vertices chosen and vertices not neighbouring the chosen set is at most $pn+(1-p)^{\delta+1}n$, by linearity of expectation (also note: alteration). Thus there is a dominating set of size at most this amount. Using $1-p\leq e^{-p}$ to simplify, and then minimizing, we get the result.
+\end{proof}
+\end{INT}
+\item A \textbf{cut} in a graph is simply a partition of the edges into two nonempty disjoint subsets. The \textbf{size} of a cut is the number of edges whose endpoints lie in opposite sides. The \textbf{edge connectivity} is the minimum size of a cut.
+\item A \textbf{hypergraph} $(V,E)$ is a finite set $V$ of vertices, and a subset $E\subset 2^V$. It is \textbf{$n$-uniform} if each edge contains $n$ vertices. It has \textbf{property B}, or is \textbf{two-colourable}, if there is a two-colouring of the vertices so that no edge is monochromatic. Let $m(n)$ be the minimum number of edges of an $n$-uniform hypergraph which is not two-colourable.
+\begin{INT}[Prop 1.3.1:]
+Every $n$-uniform hypergraph with less that $2^{n-1}$ edges is two-colourable, so that $m(n)\geq 2^{n-1}$.
+\begin{proof}
+Randomly colour the vertices. The probability of failing to give a valid 2-colouring is less than $2^{n-1}\cdot 2^{1-n}$.
+\end{proof}
+\item \textbf{Thm 1.3.2:} $m(n)<(1+o(1))\frac{e\log2}{4}n^22^n$.
+\begin{proof}
+We need to construct a small $n$-uniform hypergraph which is not 2-colourable. Let $v$ and $m$ be to be determined. Then choose a set $V$ of size $v$ for the vertices. A random subset $S$ of size $n$ has probability $({a\choose n}+{b\choose n})/{v\choose n}$ of being monochromatic (in a colouring with $a$ and $b$ of each colour), which is at least $p=2{v/2\choose n}/{v\choose n}$, by convexity (if $v$ is even).
+
+\INDENT Now choose $m$ random sets of size $n$ independently. The probability that a given colouring is a 2-colouring is at most $(1-p)^m$, so the probability that there exists a 2-colouring is at most $2^v(1-p)^m$. Thus, if this quantity is less than 1, we have $m(n)\leq m$. Now it's asymptotics.
+\end{proof}
+\end{INT}
+\item A \textbf{$(k,l)$-system} is a family $\calF=\{(A_i,B_i)\}_{i=1}^h$ pairs of sets\footnote{Really, pairs of subsets of an arbitrary set.}, such that $|A_i|=k$, $|B_i|=l$, and $A_i\cap B_j$ is empty \Iff $i=j$, for $1\leq i,j\leq h$.
+\begin{INT}[Thm 1.3.3:]
+If $\calF=\{(A_i,B_i)\}_{i=1}^h$ is a $(k,l)$-system, then $h\leq {k+l\choose k}$.
+\begin{proof}
+Let $X=\bigcup_i (A_i\cup B_i)$, and randomly order $X$. Let $X_i$ be the event that the elements of $A_i$ precede those of $B_i$. If these events are pairwise disjoint, we have $1\geq \sum \PP[X_i]=h/{k+l\choose k}$.
+
+\INDENT Suppose then that both $X_i$ and $X_j$ can occur simultaneously. Then there's an ordering such that $A_i$ precedes $B_i$ and $A_j$ precedes $B_j$. WLOG the last element of $A_i$ precedes that of $A_j$, but then $A_i$ precedes $B_j$, contradicting that $A_i\cap B_j$ is nonempty.
+\end{proof}
+\item This is sharp, writing $\calF=\{(A,X\setminus A) : A\subset X, |A|=k\}$, where $|X|=k+l$.
+\end{INT}
+\item A subset $A$ of an abelian group is \textbf{sum-free} if $(A+A)\cap A$ is empty.
+\begin{INT}[Thm 1.4.1]
+Every set $A$ of $n$ nonzero integers contains a sum-free subset of size at least $n/3$.
+\begin{proof}
+Choose a prime $p=3k+2$ far larger than the largest absolute value of any element of $A$. Embed the question in the field $\F=\Z/p\Z$, where it is unchanged. In this field, there is a large sum-free subset $C=\{k+1,\ldots,2k+1\}$, which has at least $1/3$ of the elements. Choose a random $x\in\F^\times$, and consider $xA\cap C$. The average size of this set is at least $|A|/3$, and it is always sum-free!
+\end{proof}
+\end{INT}
+\item For $\calF$ a family of subsets of $\{1,\ldots,n\}$, let $d(\calF)$ be the number of unordered \textbf{pairs of disjoint elements} of $\calF$.
+\begin{INT}[Thm 1.5.1:]
+Let $\calF$ be a family of $m=2^{(1/2+\delta)n}$ subsets of $\{1,\ldots,n\}$. Then $d(\calF)<m^{2-\delta^2/2}$.
+\begin{proof}
+Suppose for contradiction that $d(\calF)\geq m^{2-\delta^2/2}$. Choose an integer $t$, to be determined. Choose $A_1,\ldots,A_t$ independently and with repetition from $\calF$. The point is that it will be likely that $U=\bigcup A_i$ has at least $n/2$ elements, and that there are at least $2^{n/2}$ distinct subsets of $X$ disjoint from $U$, a contradiction. For the first, it's really unlikely that $U$ will be contained in any given subset $S$ of size $n/2$, so:
+\[\Prob[|U|\leq n/2]\leq \sum_{|S|=n/2}\Prob[\text{all $A_i\subset S$}]\leq 2^n\left(\frac{2^{n/2}}{m}\right)^t=2^{n(1-\delta t)}.\]
+Note: One has that $A_i$ could be any of $m$ options, and at most $2^{n/2}$ of these lie in each $S$. We used a very clumsy approximation $2^n\geq |\{|S|=n/2\}|$.
+
+\INDENT Now to the other side. We have a function $v:\calF\to\N$ which maps $B$ to the number of disjoint pairs its a member of. Then $v$ takes average value $2d(\calF)/m\geq2m^{1-\delta^2/2}$. Let $Y$ be the r.v.\ returning the number of $B\in \calF$ disjoint to $U$. Then we want to see that $Y$ often exceeds $2^{n/2}$. Applying convexity:
+\[E[Y]=
+%\sum\left(\frac{v(b)}{m}\right)^t=
+m^{1-t}\left(\frac{\sum v(b)^t}{m}\right)\geq m^{1-t}\left(2m^{1-\delta^2/2}\right)^t=2^tm^{1-t\delta^2/2}=2^{t+(1/2+\delta)n(1-t\delta^2/2)}.\]
+We'd like to bound $p=\Prob[Y\geq 2^n/2]$. As $Y<m$, we've got an inequality
+\[pm+(1-p)2^{n/2}\geq E[Y].\]
+This shows that $p$ is pretty big, and in fact, for some good $t$, bigger than $2^{n(1-\delta t)}$.
+\end{proof}
+\end{INT}
+\end{itemise}
+
+
+
+
+
+\printindex
+\end{document}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
