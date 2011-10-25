@@ -485,26 +485,28 @@ A: If you want to define Andre-Quillen cohomology, you really need simplicial ob
 \begin{enumerate}\squishlist
 \item Give an overview.
 \item Define $\calD$-model categories, for $\calD$ a symmetric monoidal model category.
-\item Define the category $\Sp^\Sigma(\calC)$ of spectra on $\calC$, whenever $\calC$ is a simplicial model category.
-
-Simultaneously, define the category of symmetric spectra as $\Sp^\Sigma(\sSet_*)$.
-\item Explain that $\Sp(\calC)$ is spectral.
 \item Observe that any spectral category is stable: tensor with $S^{-1}\in\Sp^\Sigma$ to desuspend.
-\item Indicate why if $\calC$ is stable, the $\Sp(\calC)$ is Quillen equivalent.
+
+\item Define the category $\Sp^\Sigma(\calC)$ of spectra on $\calC$, whenever $\calC$ is a simplicial model category.
+Simultaneously, define the category of symmetric spectra as $\Sp^\Sigma(\sSet_*)$.
+Explain that $\Sp(\calC)$ is spectral, and why, if $\calC$ is stable, the two are Quillen equivalent.
+\item Consider discussing the fact that a stable model category is triangulated.
 \end{enumerate}
-At some point I could discuss the fact that a stable model category is triangulated.
+
 \subsection{Overview}
 \begin{itemise}
 \item Define a stable model category. Give some examples.
 \item Say all model categories will be simplicial\footnote{Every cofibrantly generated, proper (\textit{weak equivalences are preserved under pulling back (pushing out) along (co)fibrations}), stable model category is in fact Quillen equivalent to a simplicial model category.}. 
 \item Say that spectral model categories will be the same as stable simplicial model categories.
 \end{itemise}
+
+
 \subsection{$\calD$-model categories}
 \begin{itemise}
 \item Suppose $\calD$ is a \textbf{closed symmetric monoidal category}, i.e.
 \begin{itemise}
-\item Has bifunctor $\otimes:\calD\times\calD\to\calD$ with unit, associativity commutativity and unitality isomorphisms.
-\item Has internal hom functor $\underline{\calD}:\calD^\op\times\calD\to\calD$ giving right adjoints to $\DASH\otimes d$.
+\item $\calD$ has a bifunctor $\otimes:\calD\times\calD\to\calD$ with unit, associativity commutativity and unitality isomorphisms.
+\item $\calD$ has a self-enrichment: $\underline{\calD}:\calD^\op\times\calD\to\calD$ giving right adjoints to $\DASH\otimes d$.
 \end{itemise}
 \item If $\calD$ is also a model category, call it a \textbf{symmetric monoidal model category} if:
 \begin{itemise}
@@ -513,15 +515,15 @@ At some point I could discuss the fact that a stable model category is triangula
 A\ar@{-->}[r]^\alpha\ar@{^{(}->}[d]_i&X\ar@{->>}[d]^P\\
 B\ar@{-->}[r]_\beta\ar@{..>}[ur]&Y
 }\]
- \[\Hom(B,X)\xrightarrow{(i^*,P_*)}\Hom(B,Y)\times_{\Hom(A,Y)}\Hom(X,Y)\]
-is always a fibration in $\calD$, acyclic if either $i$ or $P$ is acyclic. \rednote{[Ask somebody --- these Hom's should be $\underline D$'s, right?]}
+ \[\underline{\calD}(B,X)\xrightarrow{(i^*,P_*)}\underline{\calD}(B,Y)\times_{\underline{\calD}(A,Y)}\underline{\calD}(X,Y)\]
+is always a fibration in $\calD$, acyclic if either $i$ or $P$ is acyclic. %\rednote{[Ask somebody --- these Hom's should be $\underline D$'s, right?]}
 \item If $Q\textbf{1}_\calD\overset{q}{\to}\textbf{1}_\calD$ is the cofibrant replacement for the unit, then for all cofibrant $X$, the natural maps $Q\textbf{1}_\calD\otimes X\overset{q\otimes1}{\to}\textbf{1}_\calD\otimes X$ and $X\otimes Q\textbf{1}_\calD \overset{1\otimes q}{\to}X\otimes \textbf{1}_\calD$ are weak equivalences.
 \end{itemise}
 \item A category $\calM$ is a \textbf{closed $\calD$-module category} if it has natural constructions:
 \begin{itemise}
-\item $\calM\times \calD\to\calM$ written $(X,d)\mapsto X\otimes d$. \rednote{(tensored)}
-\item $\calD^\op\times\calM\to\calM$ written $(d,Z)\mapsto Z^d$. \rednote{(cotensored)}
-\item $\calM^\op\times\calM\to\calD$ written $(X,Z)\mapsto \underline{\calM}_\calD(X,Z)$. \rednote{(enriched?)}
+\item $\calM\times \calD\to\calM$ written $(X,d)\mapsto X\otimes d$. {(tensored)}
+\item $\calD^\op\times\calM\to\calM$ written $(d,Z)\mapsto Z^d$. {(cotensored)}
+\item $\calM^\op\times\calM\to\calD$ written $(X,Z)\mapsto \underline{\calM}_\calD(X,Z)$. {($\calD$-enriched)}
 \end{itemise}
 satisfying
 \[\calM(X\otimes d,Z)\cong \calM(X,Z^d)\cong\calD(d,\underline{\calM}_D(X,Z)),\]
@@ -540,44 +542,63 @@ and the induced map (as follows) is exactly composition in $\calM$:
 \item $\otimes:\calM\times\calD\to\calM$ is a Quillen bifunctor\footnote{Should preserve fibrations and trivial fibrations.}
 \item If $Q\textbf{1}_\calD\overset{q}{\to}\textbf{1}_\calD$ is the cofibrant replacement for the unit, then for all cofibrant $X\in\calM$, the natural maps $Q\textbf{1}_\calD\otimes X\overset{q\otimes1}{\to}\textbf{1}_\calD\otimes X$ and $X\otimes Q\textbf{1}_\calD \overset{1\otimes q}{\to}X\otimes \textbf{1}_\calD$ are weak equivalences.
 \end{itemise}
-\item $\calM$ is a \textbf{spectral model category} if it's a $\Sp^\Sigma$-model category.
+\item $\calM$ is a \textbf{spectral model category} if it's a $\Sp^\Sigma$-model category, where $\Sp^\Sigma$ is the category of symmetric spectra.
 \end{itemise}
-
+\subsection{Spectral model categories are stable}
+Proof me.
 \subsection{Symmetric spectra on a simplicial model category}
 \begin{itemise}
 \item Let $\calC$ be cocomplete, tensored and cotensored over $\sSet_*$.
 \item Define $S^1=\Delta[1]/\partial\Delta[2]$, a simplicial circle, so that $S^n=(S^1)^{\wedge n}$ has $\Sigma_n$-action.
-\item A \textbf{symmetric sequence} over $\calC$ is $X=\{X_n\}$ with a left action of $\Sigma_n$ on $X_n$.
-\item A \textbf{symmetric spectrum} over $\calC$ is such with coherently associative \rednote{[ask]} $\Sigma_p\times\Sigma_q$-equivariant morphisms $S^p\otimes X_q\to X_{p+q}$. A morphism of such is just a compatible collection of $\Sigma_n$-equivariant maps. Call this category $\Sp^\Sigma(\calC)$.
-\end{itemise}
-\subsubsection*{Relationship with $\Sp^\Sigma$}
-\begin{itemise}
-\item Suppose $X\in\Sp^\Sigma(\calC)$ and $K\in\Sp(\sSet_*)=\Sp^\Sigma$. Then define the following colimit:
+\item A \textbf{symmetric sequence} over $\calC$ is $X=\{X_n\}$ with a left action of $\Sigma_n$ on $X_n$. Write $\calC^\Sigma$ for the category of symmetric sequences with equivariant maps.
+\item A \textbf{symmetric spectrum} over $\calC$ is such with coherently associative $\Sigma_p\times\Sigma_q$-equivariant morphisms $S^p\otimes X_q\to X_{p+q}$. A morphism of such is just a compatible collection of $\Sigma_n$-equivariant maps. Call this category $\Sp^\Sigma(\calC)$.
+\item The category $\calC^\Sigma$ is monoidal, and tensored, cotensored and enriched over $\sSet_*^\Sigma$. In fact, we define, by analogy with taking tensor products of chain complexes:
 \[(K\otimes X)_n=\bigvee_{p+q=n}\Sigma_n^+\otimes_{\Sigma_p\times\Sigma_q}(K_p\otimes X_q).\]
-The smash product $K\wedge X\in\Sp(\calC)$ is the coequaliser of the maps in $\calC^\Sigma$
+Now $S=(S^0,S^1,\ldots)$ is a commutative monoid in the symmetric monoidal category $(\sSet_*^\Sigma,\otimes)$.
+\begin{itemise}
+\item The unit is $u=(S^0,*,\ldots)$, and the unit map $\eta:u\to S$ is the obvious. 
+\item We define $m:S\otimes S\to S$   using the $\Sigma_p\times\Sigma_q$-equivariant map $S^p\wedge S^q\to S^n$:
+\[(S\otimes S)_n=\bigvee_{p+q=n}\Sigma_n^+\wedge_{\Sigma_p\times\Sigma_q}(S^p\wedge S^q)\to S^n.\]
+As we've thrown in the $\Sigma_n^+$, this multiplication is \emph{strictly commutative}.
+\end{itemise}
+\item In fact, a symmetric spectrum is just a left $S$-module --- it's the same to give the pairing, 
+\[\text{[which amounts to giving:\quad}\Sigma_n^+\otimes_{\Sigma_p\times\Sigma_q} S^p\otimes X_q\underset{\Sigma_{p+q}}{\to} X_{p+q},\quad\text{i.e.}\quad S^p\otimes X_q\underset{\Sigma_p\times\Sigma_q}{\to} X_{p+q}\text{]},\]
+as to give a symmetric spectrum with these terms.
+\item Define the smash product  $K\wedge X\in\Sp(\calC)$ of $K\in \Sp(\sSet_*)$ and $X\in \Sp(\calC)$ as the coequaliser of the following maps in $\calC^\Sigma$ induced by the actions of $S$ on $K$ and $X$:
 \[\xymatrix{
-K\otimes S\otimes X\ar@<.5ex>[r]\ar@<-.5ex>[r]&K\otimes X
+K\otimes S\otimes X\ar@<.5ex>[r]^{\ \ m\otimes 1}\ar@<-.5ex>[r]_{\ \ 1\otimes m}&K\otimes X
 }\]
-given by the action of $S=(S^0,S^1,\ldots)$ on $X$ and $K$ respectively. \rednote{[I'm not sure how this action works, or what the point is. See 3.6.3.]}
+Define the smash product $X\wedge Y$ of $X,Y\in\Sp(\calC)$ in the same way!
 \item For $X,Y\in\Sp(\calC)$, define $\Hom_{\Sp(\calC)}(X,Y)\in \Sp^\Sigma$ as follows.
 \begin{itemise}
-\item Define $\sh_n:\Sp(\calC)\to\Sp(\calC)$ by $(\sh_n(X))_m=X_{n+m}$. This has a left over $\Sigma_n$ action.
-\item Define $\Hom_\Sigma(X,Y)\in\sSet_*^\Sigma$ by $\Hom_\Sigma(X,Y)_n:=\Map(X,\sh_nY)$, which has a $\Sigma_n$ action.
-\item Define $\Hom_{\Sp(\calC)}(X,Y)\in\Sp^\Sigma$ as the equaliser of the two maps:
-\[\Hom_\Sigma(X,Y)\to\Hom_\Sigma(S\otimes X,Y).\]
+\item Define $\sh_n:\Sp(\calC)\to\Sp(\calC)$ by $(\sh_n(X))_m=X_{n+m}$. This has a $\Sigma_n$ action left over.
+\item Define $\Hom_\Sigma(X,Y)\in\sSet_*^\Sigma$ by $\Hom_\Sigma(X,Y)_n:=\Map(X,\sh_nY)$, which has a $\Sigma_n$ action (this is the enrichment of $\calC^\Sigma$ over $\sSet_*^\Sigma$).
+\item Define $\Hom_{\Sp(\calC)}(X,Y)\in\Sp^\Sigma$ as the equaliser\footnote{Think: $f$ is linear \Iff the following commutes: $\xymatrix@R=1em{
+\ar[d]^{1\otimes f}S\otimes X\ar[r]_{\ \ m_X}&X\ar[d]_f\\
+S\otimes Y\ar[r]^{\ \ m_Y}&N
+}$} of the two maps:
+\[\xymatrix{
+\Hom_\Sigma(X,Y)\ar@<.5ex>[r]^{m^*_X\ \ }\ar@<-.5ex>[r]_{{m_Y}_*\ \ }&\Hom_\Sigma(S\otimes X,Y)
+}\]
+%\[\Hom_\Sigma(X,Y)\to\Hom_\Sigma(S\otimes X,Y).\]
 \end{itemise}
 \item We define the cotensor structure $(\DASH)^K$ as the right adjoint of $K\otimes\DASH$.
-%\textit{More to say. Could just say at this point that $\Sp(\calC)$ ends up tensored and enriched over the symmetric monoidal category of symmetric spectra $\Sp^\Sigma$.}
 \item There's an adjunction:
 \[F_n:\calC\longleftrightarrow\Sp(\calC):\Ev_n.\]
-Set $\Ev_n(X)=X_n$, and $(F_nX)_m=\Sigma_m^+\otimes_{\Sigma_{m-n}}S^{m-n}$. \rednote{[This is some coequaliser?]}
+Set $\Ev_n(X)=X_n$, and $(F_nX)_m=\Sigma_m^+\otimes_{\Sigma_{m-n}}S^{m-n}\otimes X$. 
 \end{itemise}
 \subsubsection*{The level model structure}
 \begin{itemise}
 \item We should suppose that $\calC$ is simplicial model.
 \item A map $f:X\to Y$ is a \textbf{level equivalence} (\textbf{fibration}) if each $f_n$ is a weak equivalence (fibration) in $\calC$ (ignoring the $\Sigma_n$-action). Level cofibrations are those with the LLP wrt acyclic fibrations.
-\item \textit{If $\calC$ is a simplicial, cofibrantly generated model category, this gives a cofibrantly generated model category, with an SP7 in the level model structure on symmetric spectra.} \rednote{This seems weird, as the SP7 doesn't seem to care much for the model category structure of $\calC$. Maybe it shouldn't. Maybe it does, via the assumptions on $\calC$.}
-\item This also makes $\Sp^\Sigma$ a simplicial model category!!!! We'll use this very soon. \rednote{[Figure out the logic here. Are we using what we already have to define the category of Symmetric spectra simultaneously?]}
+\item \textit{If $\calC$ is a simplicial, cofibrantly generated model category, this gives a cofibrantly generated model category. This spectrum is a $(\Sp^\Sigma)^\textup{lv}$-model category (and so has a \textup{(SP$^\text{lv}$)} in the level model structure on symmetric spectra)}.%with an SP7 in the level model structure on symmetric spectra.}
+\begin{itemise}
+\item The first sentence must first be applied to the case $\calC=\sSet_*$, to give a level model structure on symmetric spectra $\Sp^\Sigma$.
+\item Rereading shows that $(\Sp^\Sigma)^\text{lv}$ is self-enriched with an SP$^\text{lv}$.
+\item This also makes $\Sp^\Sigma$ a simplicial model category, under the adjunction $\sSet_*\leftrightarrow\Sp^\Sigma$.
+\end{itemise}
+% \rednote{This seems weird, as the SP7 doesn't seem to care much for the model category structure of $\calC$. Maybe it shouldn't. Maybe it does, via the assumptions on $\calC$.}
+% \rednote{[Figure out the logic here. Are we using what we already have to define the category of Symmetric spectra simultaneously?]}
 \end{itemise}
 \subsubsection*{The stable model structure}
 \begin{itemise}
@@ -586,9 +607,14 @@ Set $\Ev_n(X)=X_n$, and $(F_nX)_m=\Sigma_m^+\otimes_{\Sigma_{m-n}}S^{m-n}$. \red
 \item $g:A\to B$ is a \textbf{stable equivalence} if
 \[\Hom_{\Sp(C)}(A^c,Z)\to\Hom_{\Sp(C)}(B^c,Z)\]
 is a level equivalence of symmetric spectra for all $\Omega$-spectra $Z\in\Sp(\calC)$, where $(\DASH)^c$ is cofibrant replacement.
-\item \textit{Let $\calC$ be a simplicial, cofibrantly generated, proper, stable model category.
-Then $\Sp(\calC)$ supports the structure of a spectral model category such that the adjoint functors $\Sigma^{\infty}$ and evaluation $\Ev_0$ are a Quillen equivalence
-between $\calC$ and $\Sp(\calC)$ with the stable model structure.}
+\item A map is a \textbf{stable cofibration} if it is a cofibration in the level model structure. The stable fibrations follow.
+\item \textit{Let $\calC$ be a simplicial, cofibrantly generated, proper model category.
+Then these specifications define a spectral model category structure on $\Sp(\calC)$, and the functors $\Sigma^{\infty}=F_0$ and $\Omega^\infty=\Ev_0$ give a Quillen adjunction (so that $\Sigma^\infty$ is a stabilisation):
+\[\Sigma^\infty:\calC\longleftrightarrow\Sp(\calC):\Omega^\infty.\]
+In addition, if $\calC$ is already stable, this is a Quillen equivalence.}
+%Then $\Sp(\calC)$ supports the structure of a spectral model category such that the adjoint functors  and evaluation  are a Quillen equivalence
+%between $\calC$ and $\Sp(\calC)$ with the stable model structure.}
+\item \textbf{Disclaimer:} Want to define stable equivalences $f$ to be those maps for whom $Uf$ is a stable equivalence of spectra, where $U:\Sp^\Sigma\to\Sp^\N$ is the forgetful functor. I.e.\ if $Uf$ induces an isomorphism of stable homotopy groups. \emph{This fails!} Instead, $f$ is a stable equivalence \Iff $E^*f$ is an isomorphism for every generalised cohomology theory $E$.
 \item \rednote{[See proof on page 22, second paragraph break.]}
 \end{itemise}
 
