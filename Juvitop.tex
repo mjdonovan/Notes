@@ -480,6 +480,26 @@ A: If you want to define Andre-Quillen cohomology, you really need simplicial ob
 \begin{MichaelStableModelCats}
 \KanSemResponse
 {``Stable and Spectral Model Categories'' --- Michael Donovan --- 26/10/2011}
+
+\subsection*{Bare minima}
+\begin{enumerate}\squishlist
+\item Give an overview.
+\item Define $\calD$-model categories, for $\calD$ a symmetric monoidal model category.
+\item Define the category $\Sp^\Sigma(\calC)$ of spectra on $\calC$, whenever $\calC$ is a simplicial model category.
+
+Simultaneously, define the category of symmetric spectra as $\Sp^\Sigma(\sSet_*)$.
+\item Explain that $\Sp(\calC)$ is spectral.
+\item Observe that any spectral category is stable: tensor with $S^{-1}\in\Sp^\Sigma$ to desuspend.
+\item Indicate why if $\calC$ is stable, the $\Sp(\calC)$ is Quillen equivalent.
+\end{enumerate}
+At some point I could discuss the fact that a stable model category is triangulated.
+\subsection{Overview}
+\begin{itemise}
+\item Define a stable model category. Give some examples.
+\item Say all model categories will be simplicial\footnote{Every cofibrantly generated, proper (\textit{weak equivalences are preserved under pulling back (pushing out) along (co)fibrations}), stable model category is in fact Quillen equivalent to a simplicial model category.}. 
+\item Say that spectral model categories will be the same as stable simplicial model categories.
+\end{itemise}
+\subsection{$\calD$-model categories}
 \begin{itemise}
 \item Suppose $\calD$ is a \textbf{closed symmetric monoidal category}, i.e.
 \begin{itemise}
@@ -488,21 +508,20 @@ A: If you want to define Andre-Quillen cohomology, you really need simplicial ob
 \end{itemise}
 \item If $\calD$ is also a model category, call it a \textbf{symmetric monoidal model category} if:
 \begin{itemise}
-\item The obvious SM7 holds:
+\item An SM7 analogue holds. For fixed cofibration $i$ and fibration $P$:
 \[\xymatrix{
 A\ar@{-->}[r]^\alpha\ar@{^{(}->}[d]_i&X\ar@{->>}[d]^P\\
 B\ar@{-->}[r]_\beta\ar@{..>}[ur]&Y
 }\]
-Have, for $i,P$ fixed, a function 
  \[\Hom(B,X)\xrightarrow{(i^*,P_*)}\Hom(B,Y)\times_{\Hom(A,Y)}\Hom(X,Y)\]
-which is always a fibration in $\calD$, acyclic if either $i$ or $P$ is acyclic. \rednote{Ask Saul what the deal is.}
+is always a fibration in $\calD$, acyclic if either $i$ or $P$ is acyclic. \rednote{[Ask somebody --- these Hom's should be $\underline D$'s, right?]}
 \item If $Q\textbf{1}_\calD\overset{q}{\to}\textbf{1}_\calD$ is the cofibrant replacement for the unit, then for all cofibrant $X$, the natural maps $Q\textbf{1}_\calD\otimes X\overset{q\otimes1}{\to}\textbf{1}_\calD\otimes X$ and $X\otimes Q\textbf{1}_\calD \overset{1\otimes q}{\to}X\otimes \textbf{1}_\calD$ are weak equivalences.
 \end{itemise}
 \item A category $\calM$ is a \textbf{closed $\calD$-module category} if it has natural constructions:
 \begin{itemise}
-\item $\calM\times \calD\to\calM$ written $(X,d)\mapsto X\otimes d$.
-\item $\calD^\op\times\calM\to\calM$ written $(d,Z)\mapsto Z^d$.
-\item $\calM^\op\times\calM\to\calD$ written $(X,Z)\mapsto \underline{\calM}_\calD(X,Z)$.
+\item $\calM\times \calD\to\calM$ written $(X,d)\mapsto X\otimes d$. \rednote{(tensored)}
+\item $\calD^\op\times\calM\to\calM$ written $(d,Z)\mapsto Z^d$. \rednote{(cotensored)}
+\item $\calM^\op\times\calM\to\calD$ written $(X,Z)\mapsto \underline{\calM}_\calD(X,Z)$. \rednote{(enriched?)}
 \end{itemise}
 satisfying
 \[\calM(X\otimes d,Z)\cong \calM(X,Z^d)\cong\calD(d,\underline{\calM}_D(X,Z)),\]
@@ -524,30 +543,63 @@ and the induced map (as follows) is exactly composition in $\calM$:
 \item $\calM$ is a \textbf{spectral model category} if it's a $\Sp^\Sigma$-model category.
 \end{itemise}
 
-\subsection*{Bare minima}
-\begin{enumerate}\squishlist
-\item Give an overview:
+\subsection{Symmetric spectra on a simplicial model category}
 \begin{itemise}
-\item Define a stable model category. Give some examples.
-\item Say all model categories will be simplicial\footnote{Every cofibrantly generated, proper (weak equivalences are preserved under pulling back (pushing out) along (co)fibrations), stable model category is in fact Quillen equivalent to a simplicial model category.}. 
-\item Say that spectral model categories will be the same as stable simplicial model categories.
+\item Let $\calC$ be cocomplete, tensored and cotensored over $\sSet_*$.
+\item Define $S^1=\Delta[1]/\partial\Delta[2]$, a simplicial circle, so that $S^n=(S^1)^{\wedge n}$ has $\Sigma_n$-action.
+\item A \textbf{symmetric sequence} over $\calC$ is $X=\{X_n\}$ with a left action of $\Sigma_n$ on $X_n$.
+\item A \textbf{symmetric spectrum} over $\calC$ is such with coherently associative \rednote{[ask]} $\Sigma_p\times\Sigma_q$-equivariant morphisms $S^p\otimes X_q\to X_{p+q}$. A morphism of such is just a compatible collection of $\Sigma_n$-equivariant maps. Call this category $\Sp^\Sigma(\calC)$.
 \end{itemise}
-\item Define the category $\Sp^\Sigma(\calC)$ of spectra on $\calC$, whenever $\calC$ is a simplicial model category, call it a stabilisation.
-\item Define the category of symmetric spectra as $\Sp^\Sigma(\sSet_+)$.
-\item Define spectral categories. Point out that $\Sp(\calC)$ is spectral.
-\item Indicate why if the category is already stable, the category of spectra is Quillen equivalent.
-\item Observe that any spectral category is stable: tensor with $S^{-1}\in\Sp^\Sigma$ to desuspend.
-\end{enumerate}
-At some point I could discuss the fact that a stable model category is triangulated.
-\subsubsection{Overview}
-\subsubsection{Spectra on a simplicial model category}
-\subsubsection{Symmetric Spectra}
-\subsubsection{Spectral Categories}
-\subsubsection{Spectral Categories are Stable}
-\subsubsection{The Quillen equivalence}
+\subsubsection*{Relationship with $\Sp^\Sigma$}
+\begin{itemise}
+\item Suppose $X\in\Sp^\Sigma(\calC)$ and $K\in\Sp(\sSet_*)=\Sp^\Sigma$. Then define the following colimit:
+\[(K\otimes X)_n=\bigvee_{p+q=n}\Sigma_n^+\otimes_{\Sigma_p\times\Sigma_q}(K_p\otimes X_q).\]
+The smash product $K\wedge X\in\Sp(\calC)$ is the coequaliser of the maps in $\calC^\Sigma$
+\[\xymatrix{
+K\otimes S\otimes X\ar@<.5ex>[r]\ar@<-.5ex>[r]&K\otimes X
+}\]
+given by the action of $S=(S^0,S^1,\ldots)$ on $X$ and $K$ respectively. \rednote{[I'm not sure how this action works, or what the point is. See 3.6.3.]}
+\item For $X,Y\in\Sp(\calC)$, define $\Hom_{\Sp(\calC)}(X,Y)\in \Sp^\Sigma$ as follows.
+\begin{itemise}
+\item Define $\sh_n:\Sp(\calC)\to\Sp(\calC)$ by $(\sh_n(X))_m=X_{n+m}$. This has a left over $\Sigma_n$ action.
+\item Define $\Hom_\Sigma(X,Y)\in\sSet_*^\Sigma$ by $\Hom_\Sigma(X,Y)_n:=\Map(X,\sh_nY)$, which has a $\Sigma_n$ action.
+\item Define $\Hom_{\Sp(\calC)}(X,Y)\in\Sp^\Sigma$ as the equaliser of the two maps:
+\[\Hom_\Sigma(X,Y)\to\Hom_\Sigma(S\otimes X,Y).\]
+\end{itemise}
+\item We define the cotensor structure $(\DASH)^K$ as the right adjoint of $K\otimes\DASH$.
+%\textit{More to say. Could just say at this point that $\Sp(\calC)$ ends up tensored and enriched over the symmetric monoidal category of symmetric spectra $\Sp^\Sigma$.}
+\item There's an adjunction:
+\[F_n:\calC\longleftrightarrow\Sp(\calC):\Ev_n.\]
+Set $\Ev_n(X)=X_n$, and $(F_nX)_m=\Sigma_m^+\otimes_{\Sigma_{m-n}}S^{m-n}$. \rednote{[This is some coequaliser?]}
+\end{itemise}
+\subsubsection*{The level model structure}
+\begin{itemise}
+\item We should suppose that $\calC$ is simplicial model.
+\item A map $f:X\to Y$ is a \textbf{level equivalence} (\textbf{fibration}) if each $f_n$ is a weak equivalence (fibration) in $\calC$ (ignoring the $\Sigma_n$-action). Level cofibrations are those with the LLP wrt acyclic fibrations.
+\item \textit{If $\calC$ is a simplicial, cofibrantly generated model category, this gives a cofibrantly generated model category, with an SP7 in the level model structure on symmetric spectra.} \rednote{This seems weird, as the SP7 doesn't seem to care much for the model category structure of $\calC$. Maybe it shouldn't. Maybe it does, via the assumptions on $\calC$.}
+\item This also makes $\Sp^\Sigma$ a simplicial model category!!!! We'll use this very soon. \rednote{[Figure out the logic here. Are we using what we already have to define the category of Symmetric spectra simultaneously?]}
+\end{itemise}
+\subsubsection*{The stable model structure}
+\begin{itemise}
+\item Let $\lambda:F_1S^1\to F_0S^0\cong S$ be the map of symmetric spectra adjoint to the identity map on the first level \rednote{[understand]}.
+\item $Z\in\Sp(\calC)$ is an \textbf{$\Omega$-spectrum} if it is level-wise fibrant, and $Z\cong Z^{F_0S^0}\to Z^{F_1S^1}$ is a level equivalence.
+\item $g:A\to B$ is a \textbf{stable equivalence} if
+\[\Hom_{\Sp(C)}(A^c,Z)\to\Hom_{\Sp(C)}(B^c,Z)\]
+is a level equivalence of symmetric spectra for all $\Omega$-spectra $Z\in\Sp(\calC)$, where $(\DASH)^c$ is cofibrant replacement.
+\item \textit{Let $\calC$ be a simplicial, cofibrantly generated, proper, stable model category.
+Then $\Sp(\calC)$ supports the structure of a spectral model category such that the adjoint functors $\Sigma^{\infty}$ and evaluation $\Ev_0$ are a Quillen equivalence
+between $\calC$ and $\Sp(\calC)$ with the stable model structure.}
+\item \rednote{[See proof on page 22, second paragraph break.]}
+\end{itemise}
 
 \end{MichaelStableModelCats}
 \end{document}
+
+
+\subsection{Spectral Categories are Stable}
+\subsection{The Quillen equivalence}
+
+
 
 
 
@@ -557,7 +609,7 @@ At some point I could discuss the fact that a stable model category is triangula
 \begin{enumerate}\squishlist
 \item Define the category of symmetric spectra $\Sp^\Sigma$, and spectral categories.
 \begin{itemise}
-\item Define, for $\calC$ a cocomplete category, tensored and cotensored over $\sSet_+$, the category $\calC^\Sigma$ of symmetric sequences and the category $\Sp(\calC)$ of symmetric spectra.
+\item Define, for $\calC$ a cocomplete category, tensored and cotensored over $\sSet_*$, the category $\calC^\Sigma$ of symmetric sequences and the category $\Sp(\calC)$ of symmetric spectra.
 \item Show that $\Sp(\calC)$ is tensored and cotensored over $\Sp^\Sigma$.
 %\item Show that $\Sp^\Sigma(\calC)$ has a spectra enrichment, in fact is tensored and cotensored over $\Sp^\Sigma$.
 \end{itemise}
