@@ -7,17 +7,17 @@
 \usepackage{fancyhdr}
 
 % Others' talks
-\includeversion{JeremyThomTalk}
-\includeversion{JandrKervaire}
-\includeversion{MarkusKtheory}
-\includeversion{GuozhenEqKthy}
+\excludeversion{JeremyThomTalk}
+\excludeversion{JandrKervaire}
+\excludeversion{MarkusKtheory}
+\excludeversion{GuozhenEqKthy}
 \includeversion{MarkusHopfInvOne}
 \excludeversion{KrishanuAdamsStableHtpy}
 
 % My talks
-\includeversion{SteenrodTalk}
-\includeversion{SerreCohModTwoEilMacLane}
-\includeversion{SignatureThmTalk}
+\excludeversion{SteenrodTalk}
+\excludeversion{SerreCohModTwoEilMacLane}
+\excludeversion{SignatureThmTalk}
 
 % Others' practice talks
 \excludeversion{GuozhenEqKthyPractice}
@@ -1519,11 +1519,11 @@ Assume that $\mu$ is odd. Then $2^m|(3^{m}-1)$, but, this only happens when $m=1
 \begin{MarkusHopfInvOne}
 \KanSemResponse
 {Markus's talk on the Hopf Invariant One problem}
-Given $f:S^{2n-1}(S^n)$, for $n>1$, the cone $C(f)$ of $f$ has a CW-structure with one cell in dimensions 0, $n$ and $2n$. Its cohomology ring has a copy of $\Z$ in each of these dimensions. Let $b\in H^{2n}(C(f);\Z)$ be the generator corresponding to a fixed orientation of $S^2n$. Then if $a$ is any generator of $H^{n}(C(f);\Z)$, we have $a\cup a=h(f)\cdot b$ for some unique $h(f)\in\Z$. This is the Hopf invariant. It is necessarily zero unless $n$ is even.
+Given $f:S^{2n-1}(S^n)$, for $n>1$, the cone $C(f)$ of $f$ has a CW-structure with one cell in dimensions 0, $n$ and $2n$. Its cohomology ring has a copy of $\Z$ in each of these dimensions. Let $b\in H^{2n}(C(f);\Z)$ be the generator corresponding to a fixed orientation of $S^{2n}$. Then if $a$ is any generator of $H^{n}(C(f);\Z)$, we have $a\cup a=h(f)\cdot b$ for some unique $h(f)\in\Z$. This is the Hopf invariant.
 
-This descends to a map $h:\pi_{2n-1}(S^n)\to\Z$.
+This descends to a map $h:\pi_{2n-1}(S^n)\to\Z$, which necessarily zero unless $n$ is even.
 \begin{lem*}
-h is a group homomorphism.
+h is a group homomorphism $h:\pi_{2n-1}(S^n)\to\Z$.
 \end{lem*}
 \begin{proof} All the maps in the diagram on the left are isomorphisms on $H^n$. Their action on $H^{2n}$ is recorded on the right:
 \[\xymatrix@!0@R=.9cm@C=2.3cm{
@@ -1532,7 +1532,7 @@ C(f+g)\ar[r]&C(f\vee g)\\
 &&C(g)\ar[lu]
 }\qquad\xymatrix@!0@R=.9cm@C=2.3cm{
 &&\Z\ar[ld];[]^{(1,0)}\\
-\Z\ar[r];[]_{(1,1)}&\Z\\
+\Z\ar[r];[]_{(1,1)}&\Z\oplus\Z\\
 &&\Z\ar[lu];[]_{(0,1)}
 }\]
 \end{proof}
@@ -1547,7 +1547,7 @@ If $\pi_{2n-1}(S^n)$ contains an element of Hopf invariant one, then $n=2,4,8$.
 \end{thm*}
 \noindent (Note we can construct these parallelisations via multiplications from division algebras.)
 
-Our main tool for constructing maps of non-trivial Hopf invariant is the following. Suppose given a map $\phi:S^{n-1}\times S^{n-1}\to S^{n-1}$. Fixing a basepoint in $S^{n-1}$, we can embed
+Our main tool for constructing maps of non-trivial Hopf invariant is the `Hopf construction'. Suppose given a map $\phi:S^{n-1}\times S^{n-1}\to S^{n-1}$. Fixing a basepoint in $S^{n-1}$, we can embed
 \[S^{n-1}\vee S^{n-1}\to S^{n-1}\times S^{n-1}\overset{\phi}{\to} S^{n-1}\]
 Call this composite $\phi_1\vee\phi_2$. Let $\alpha,\beta$ be the degrees of these maps.
 
@@ -1557,50 +1557,52 @@ S^{n-1}\times S^{n-1}\ar[r]\ar[d]\ar[rd]&S^{n-1}\times CS^{n-1}\ar[rd]\\
 CS^{n-1}\times S^{n-1}\ar[rd]&S^{n-1}\ar[r]\ar[d]&CS^{n-1}\\
 &CS^{n-1}
 }\]
-This induces a map $f:S^{2n-1}\to S^n$. We will not prove the following:
+This induces a map $f:S^{2n-1}\to S^n$ (note that the first pushout is a boundary decomposition of $D^n\times D^n$). We will not prove the following:
 \begin{prop*}
 The Hopf invariant of $f$ is equal to $\pm\alpha\beta$.
 \end{prop*}
 
 \begin{proof}[Proof of first proposition]
-The clutching function of the tangent bundle of $S^n$ is
-\[\widetilde\phi:S^{n-1}\to\Omega^{n-1}S^{n-1}\]
-sends $x$ to ``reflection along the hyperplane orthogonal to $x$''. Let $\phi:S\times S\to S$ be the adjoint of this (the unpointed version).
+The clutching function of the tangent bundle of $S^n$ is the adjoint of
+\[\widetilde\phi:S^{n-1}\to\Map(S^{n-1},S^{n-1})\]
+which sends $x$ to ``reflection along the hyperplane orthogonal to $x$''. Let $\phi:S^{n-1}\times S^{n-1}\to S^{n-1}$ be the adjoint of this.
 
 Fixing one component, we're just measuring the degree of a reflection on $S^{n-1}$, which is $-1$ (as $n$ is even).
 
-The other map is ``$x\mapsto x(bpt)$''. Well, any point has two preimages, and they have the same local degree, as the antipode has degree $(-1)^n=1$, so we have total degree either $\pm2$.
+The other map is ``$x\mapsto \widetilde\phi(x)(bpt)$''. Well, any point has two preimages, and they have the same local degree, as the antipode has degree $(-1)^n=1$, so we have total degree either $\pm2$.
 \end{proof}
 \begin{proof}[Proof of second proposition]
-Let $S^{n-1}$ be parallelisable. This means that there is a section $s$ of (the fibre bundle) $O(n)\overset{pr_1}{\to}S^{n-1}$.
-\[\xymatrix{S^{n-1}\times S^{n-1}\ar[r]\ar[d]_{s\times 1}&S^{n-1}\\
+Let $S^{n-1}$ be parallelisable. This means that there is a section $s$ of (the fibre bundle) $O(n)\overset{pr_1}{\to}S^{n-1}$ (using that the normal bundle of $S^{n-1}$ in $\R^n$ is trivial).
+\[\xymatrix{S^{n-1}\times S^{n-1}\ar[r]^\phi\ar[d]_{s\times 1}&S^{n-1}\\
 O(n)\times S^{n-1}\ar[ur]_{act}&
 }\]
-Then $e_1$ is a right unit of this multiplication. Replacing $s$ by $s(e_1)^{-1}s$, we still have a section, and $e_1$ is now an identity for the top multiplication. But now, $\phi_1,\phi_2$ are the identity, and so have degree 1, so that the resulting Hopf construction has Hopf invariant one.
+Then $e_1$ is a right unit of this `multiplication' $\phi$. Replacing $s$ by $s(e_1)^{-1}s$, we still have a section, and $e_1$ is now an identity for $\phi$. But now, $\phi_1,\phi_2$ are the identity, and so have degree 1, so that the resulting Hopf construction has Hopf invariant one.
 \end{proof}
+\noindent This, taken with the theorem, also shows that the only spheres which are $H$-spaces are $S^1$, $S^3$ and $S^7$, putting the required bound on the number of real division algebras that can be!
 \begin{proof}[Proof of theorem]
 Assume $n$ is even, as we may.
 The Hopf invariant, having been defined in singular cohomology, needs to be translated to $K$-theory. We use the Atiyah-Hirzebruch spectral sequence:
 \[\widetilde H^s(C(f),K^t(\ast))\implies \widetilde K^{s+t}(C(f)).\]
 As $n$ is even, there can be no non-trivial differentials by $E_2$. So 
 \[\widetilde K(C(f))\cong\widetilde H^{2n}(C(f);\Z)\oplus \widetilde H^n(C(f);\Z).\]
-Now there is a multiplication on the whole $K$-theory spectrum, and the spectral sequence is multiplicative. So, squaring in $K$-theory corresponds to squaring in singular cohomology.
+In fact this holds as a ring\footnote{using the multiplicatication on $K$-theory, and that the spectral sequence is multiplicative}, where we take an associated graded object on the left hand side. However, one notes that the error terms lie in \emph{lower} gradings, which are zero, so we actually get a ring isomorphism. So, squaring in $K$-theory corresponds to squaring in singular cohomology. That is, if $a,b$ are the relevant generators  in $K$-theory, we still have $a^2=h(f)\cdot b$.
 
-Now recall the Adams operations from the previous lecture. Note also that
+Recall the Adams operations from the previous lecture. One thing that wasn't mentioned:
 \begin{lem*}
 For a prime $p$, $\phi^p(x)\equiv x^p$ modulo multiples of $p$.
 \end{lem*}
 \begin{proof}
-This holds for line bundles. Then use the fact that $(x_1+x_2+\cdots+x_n)^p\equiv x_1^p+\cdots x_n^p$, and apply the splitting principle.
+This holds for line bundles with equality. Then use the fact that %$(x_1+x_2+\cdots+x_n)^p\equiv x_1^p+\cdots x_n^p$,
+\[(x_1+x_2+\cdots+x_n)^p\equiv x_1^p+\cdots x_n^p+p\cdot f(\lambda^1(x),\ldots,\lambda^p(x)),\] (which follows by considering symmetric poynomials...) and apply the splitting principle.
 \end{proof}
 We want to show that $a^2\cong 0\pmod{2}$ if $n\neq2,4,8$. This is equivalent to showing that $\phi^2(a)\cong 0\pmod{2}$. Let $n=2m$. Now
 \[\psi^2(a)=2^ma+\mu b\]
 by the naturality of the AHSS. We also note that
 \[\psi^3(a)=3^ma+\nu b.\]
-As $\psi^3$ and $\psi^2$ commute, have
+As $\psi^3$ and $\psi^2$ commute (and $b$ actually comes from a spherical class), have
 \[3^m(2^ma+\mu b)+\nu 2^{2m}b=2^n(3^ma+\nu b)+\mu2^{2m}b\]
 So $2^m(2^m-1)\nu= 3^m(3^{m}-1)\mu$.
-Assume that $\mu$ is odd. Then $2^m|(3^{m}-1)$, but, this only happens when $m=1,2,4$, by elementary number theory.
+If $\mu$ is odd then $2^m|(3^{m}-1)$, but this only happens when $m=1,2,4$, by elementary number theory.
 \end{proof}
 
 
