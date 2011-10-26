@@ -495,9 +495,21 @@ Explain that $\Sp(\calC)$ is spectral, and why, if $\calC$ is stable, the two ar
 
 \subsection{Overview}
 \begin{itemise}
-\item Define a stable model category. Give some examples.
-\item Say all model categories will be simplicial\footnote{Every cofibrantly generated, proper (\textit{weak equivalences are preserved under pulling back (pushing out) along (co)fibrations}), stable model category is in fact Quillen equivalent to a simplicial model category.}. 
-\item Say that spectral model categories will be the same as stable simplicial model categories.
+\item Most of the material for this talk comes from Schwede and Shipley, ``Stable model categories are categories of modules''.
+\item Define a stable model category.
+\begin{itemise}
+\item A stable model category is a pointed model category $\calC$ in which the evident suspension functor (homotopy push out $\ast\leftarrow X\rightarrow\ast$) is an auto-equivalence of $\ho\calC$.
+\end{itemise}
+\item Schwede and Shipley give lots of examples:
+\begin{itemise}
+\item Any category of spectra (Bousfield Friedlander, symmetric, orthogonal, coordinate free,\ldots).
+\item Equivariant stable homotopy theory --- $G$-eq coordinate-free spectra and $G$-eq orthogonal spectra, for $G$ compact Lie.
+\item Motivic stable homotopy: ``$\A^1$-local model category structure for schemes over a base''.
+\item Unbounded chain complexes of left $R$-modules, $R$ a ring (wk eq the quasi-isos, fibrations the epimorphisms --- projective model structure).
+\item More generally, the homotopy category of any abelian category $\calA$. There's a model structure on the unbounded shain complexes in $\calA$ whose weak equivalences are chain homotopy equivalences.
+\end{itemise}
+\item All model categories will be simplicial\footnote{Every cofibrantly generated, proper (\textit{weak equivalences are preserved under pulling back (pushing out) along (co)fibrations}), stable model category is in fact Quillen equivalent to a simplicial model category.}. 
+\item Our purpose it to see that spectral model categories are the same as stable model categories.
 \end{itemise}
 
 
@@ -545,7 +557,24 @@ and the induced map (as follows) is exactly composition in $\calM$:
 \item $\calM$ is a \textbf{spectral model category} if it's a $\Sp^\Sigma$-model category, where $\Sp^\Sigma$ is the category of symmetric spectra.
 \end{itemise}
 \subsection{Spectral model categories are stable}
-Proof me.
+\begin{itemise}
+\item To form $\Sigma$ (for $X$ cofibrant), normally take a replacement for $X\to \ast$, and push out. 
+\begin{itemise}
+\item Have a cofibration $\partial\Delta[1]\to\Delta[1]$ in $\sSet_*$, and have pushout diagram at left:
+\[\xymatrix{
+\partial\Delta[1]\ar[r]\ar[d]&\Delta[1]\ar[d]\\
+\Delta[1]\ar[r]&S^1
+}\qquad\xymatrix{
+\partial\Delta[1]\otimes X\ar[r]\ar[d]&\Delta[1]\otimes X\ar[d]\\
+\Delta[1]\otimes X\ar[r]&S^1\otimes X
+}\]
+\item The diagram on the right is still a pushout, since $\DASH\otimes X$ is a left adjoint. 
+\item The two maps $\partial\Delta[1]\otimes X\to\Delta[1]\otimes X$ are still cofibrations, by SM7. 
+\item $\partial\Delta^1=S^0$ is the unit for the SMP in $\sSet_*$, so have the diagram for calculating $\Sigma X$.
+\item Thus $\Sigma X=X\otimes S^1$.
+\end{itemise}
+\item $S^1$ is invertible up to stable equivalence in $\Sp^\Sigma$, so smashing with its inverse gives the inverse automorphism.
+\end{itemise}
 \subsection{Symmetric spectra on a simplicial model category}
 \begin{itemise}
 \item Let $\calC$ be cocomplete, tensored and cotensored over $\sSet_*$.
@@ -603,7 +632,7 @@ Set $\Ev_n(X)=X_n$, and $(F_nX)_m=\Sigma_m^+\otimes_{\Sigma_{m-n}}S^{m-n}\otimes
 \subsubsection*{The stable model structure}
 \begin{itemise}
 \item Let $\lambda:F_1S^1\to F_0S^0\cong S$ be the map of symmetric spectra adjoint to the identity map on the first level \rednote{[understand]}.
-\item $Z\in\Sp(\calC)$ is an \textbf{$\Omega$-spectrum} if it is level-wise fibrant, and $Z\cong Z^{F_0S^0}\to Z^{F_1S^1}$ is a level equivalence.
+\item $Z\in\Sp(\calC)$ is an \textbf{$\Omega$-spectrum} if it is level-wise fibrant, and $Z\cong Z^{F_0S^0}\to Z^{F_1S^1}$ is a level equivalence (i.e.\ $Z_n\to\Omega Z_{n+1}$ is a weak equivalence in $\calC$ for all $n$).
 \item $g:A\to B$ is a \textbf{stable equivalence} if
 \[\Hom_{\Sp(C)}(A^c,Z)\to\Hom_{\Sp(C)}(B^c,Z)\]
 is a level equivalence of symmetric spectra for all $\Omega$-spectra $Z\in\Sp(\calC)$, where $(\DASH)^c$ is cofibrant replacement.
@@ -614,10 +643,26 @@ Then these specifications define a spectral model category structure on $\Sp(\ca
 In addition, if $\calC$ is already stable, this is a Quillen equivalence.}
 %Then $\Sp(\calC)$ supports the structure of a spectral model category such that the adjoint functors  and evaluation  are a Quillen equivalence
 %between $\calC$ and $\Sp(\calC)$ with the stable model structure.}
-\item \textbf{Disclaimer:} Want to define stable equivalences $f$ to be those maps for whom $Uf$ is a stable equivalence of spectra, where $U:\Sp^\Sigma\to\Sp^\N$ is the forgetful functor. I.e.\ if $Uf$ induces an isomorphism of stable homotopy groups. \emph{This fails!} Instead, $f$ is a stable equivalence \Iff $E^*f$ is an isomorphism for every generalised cohomology theory $E$.
-\item \rednote{[See proof on page 22, second paragraph break.]}
+\item \textbf{Disclaimer:} Want to define stable equivalences $f$ to be those maps for whom $Uf$ is a stable equivalence of spectra, where $U:\Sp^\Sigma\to\Sp^\N$ is the forgetful functor. I.e.\ if $Uf$ induces an isomorphism of stable homotopy groups. \emph{This fails!} Instead, $f$ is a stable equivalence \Iff $E^*f$ is an isomorphism for every generalised cohomology theory $E$. \textit{This is fixed in the category of orthogonal spectra.}
 \end{itemise}
+\begin{proof}
+It's enough to show:
+\begin{enumerate}
+\item That if $f:X\to Y$ is a map of fibrant objects ($\Omega$-spectra) and $\Ev_0f$ is a weak equivalence, then so is $f$.
+\begin{itemise}
+\item Suppose that $f_0$ is a weak equivalence, for $X,Y$ $\Omega$-spectra. Then have
+\[\xymatrix{
+\ar[d]_{\sim}X_0\ar[r]^{\sim}&Y_0\ar[d]^{\sim}\\
+\Omega^nX_n\ar[r]&\Omega^nY_n
+}\] so that the bottom map $\Omega^nf_n$ is a weak equivalence. As $\Omega$ is part of a Quillen equivalence (\textbf{stability}), this shows $f_n$ is a weak equivalence. Thus $f$ is even a level equivalence!
 
+\end{itemise}
+\item If $A\in\calC$ is fibrant, $A\to \Ev_0 ((\Sigma^\infty A)^f)$ is a weak equivalence (fibrantly replace in $\Sp^\Sigma(\calC)$).
+\begin{itemise}
+\item For 2, as $\calC$ is stable, $\Sigma^\infty_f A$ (take suspension spectrum and level-wise fibrantly replace) is in fact an $\Omega$-spectrum, thus stably fibrant. Then need to look at $A\to\Ev_0\Sigma^\infty_f A=A^f$, which is just fibrant replacement of $A$, a weak equivalence.\qedhere
+\end{itemise}
+\end{enumerate}
+\end{proof}
 \end{MichaelStableModelCats}
 \end{document}
 
