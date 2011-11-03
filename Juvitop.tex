@@ -17,16 +17,19 @@
 \includeversion{PartNine}
 \includeversion{PartTen}
 
+
+%Babytop Fall 2011
+\excludeversion{GeoffroyTopologicalHochschildHomology}
+\excludeversion{RuneBabytop}
+
+%\def\excludeversion#1{\includeversion{#1}}
+
 %Juvitop Fall 2011
 \excludeversion{SaulSimplicialLocalisation}
 \excludeversion{AlexandreBousfieldLocalisation}
 \excludeversion{InnaSimplicalModelCats}
-\includeversion{MichaelStableModelCats}
-
-%Babytop Fall 2011
-\excludeversion{GeoffroyTopologicalHochschildHomology}
-
-
+\excludeversion{MichaelStableModelCats}
+\includeversion{SaulInftyOneCats}
 
 
 \rfoot{\footnotesize Michael Donovan}
@@ -59,8 +62,7 @@ These form a Quillen equivalence.
 \begin{exmp*}
 The nerve of a category $\calC$ is the simplicial set whose $k$-simplices are chains of $k$ composable morphisms. Forming the realisation of the nerve of a group (as a category) you get the classifying space.
 \end{exmp*}
-\textbf{Drawback:} Not everything is fibrant (unlike in $\Top$).
-
+\noindent \textbf{One drawback:} Not everything is fibrant (unlike in $\Top$).
 This is bad, for example if you'd like to calculate, say, self maps of $S^1$, if we view $S^1$ simply as the boundary of the $2$-simplex.
 The fibrant objects in $\sSet$ are the Kan complexes, ``characterised by the fact that they are enormous''.
 \subsection*{Simplicial Localisation}
@@ -92,7 +94,7 @@ X\ar[r]&A_0&\ar[l]_\sim A_1\ar[r]&A_2&\ar[l]_\sim\cdots\ar[r]&A_{2n}&A_{2n+1}\ar
 }\]
 $1$-simplices are going to be diagrams like:
 \[\xymatrix@R=.4cm{
-&A_0\ar[dd]^\sim&\ar[l]_\sim A_1\ar[dd]^\sim\ar[r]&A_2\ar[dd]^\sim&\ar[l]_\sim\cdots\ar[r]&A_{2n}\ar[dd]^\sim&A_{2n+1}\ar[dd]^\sim\ar[l]_\sim\ar[rd]\\
+&A_0\ar[dd]^\sim&\ar[l]_\sim A_1\ar[dd]^\sim\ar[r]&A_2\ar[dd]^\sim&\ar[l]_\sim\cdots\ar[r]&A_{2n}\ar[dd]^\sim &A_{2n+1}\ar[dd]^\sim\ar[l]_\sim\ar[rd]\\
 X\ar[rd]\ar[ur]&&&&&&&Y\\
 &B_0&\ar[l]_\sim B_1\ar[r]&B_2&\ar[l]_\sim\cdots\ar[r]&B_{2n}&B_{2n+1}\ar[l]_\sim\ar[ru]
 }\]
@@ -483,19 +485,19 @@ A: If you want to define Andre-Quillen cohomology, you really need simplicial ob
 \begin{abstract}
 A stable model category is a pointed model category for which the suspension map is an auto-equivalence of the homotopy category. Given a model category enriched over pointed simplicial sets, we'll construct a stabilisation, which is Quillen equivalent when the original category is stable. We'll also have it that the stabilisation is enriched over the category of symmetric spectra, so that every stable model category is spectral. Given time, we'll also discuss a characterisation given by Schwede and Shipley of stable model categories with a set of compact generators.
 \end{abstract}
-\subsection*{Bare minima}
-\begin{enumerate}\squishlist
-\item Give an overview.
-\item Define $\calD$-model categories, for $\calD$ a symmetric monoidal model category.
-\item Observe that any spectral category is stable: tensor with $S^{-1}\in\Sp^\Sigma$ to desuspend.
+%\subsection*{Bare minima}
+%\begin{enumerate}\squishlist
+%\item Give an overview.
+%\item Define $\calD$-model categories, for $\calD$ a symmetric monoidal model category.
+%\item Observe that any spectral category is stable: tensor with $S^{-1}\in\Sp^\Sigma$ to desuspend.
+%
+%\item Define the category $\Sp^\Sigma(\calC)$ of spectra on $\calC$, whenever $\calC$ is a simplicial model category.
+%Simultaneously, define the category of symmetric spectra as $\Sp^\Sigma(\sSet_*)$.
+%Explain that $\Sp(\calC)$ is spectral, and why, if $\calC$ is stable, the two are Quillen equivalent.
+%\item Consider discussing the fact that a stable model category is triangulated.
+%\end{enumerate}
 
-\item Define the category $\Sp^\Sigma(\calC)$ of spectra on $\calC$, whenever $\calC$ is a simplicial model category.
-Simultaneously, define the category of symmetric spectra as $\Sp^\Sigma(\sSet_*)$.
-Explain that $\Sp(\calC)$ is spectral, and why, if $\calC$ is stable, the two are Quillen equivalent.
-\item Consider discussing the fact that a stable model category is triangulated.
-\end{enumerate}
-
-\subsection{Overview}
+\subsection*{Overview}
 \begin{itemise}
 \item Most of the material for this talk comes from Schwede and Shipley, ``Stable model categories are categories of modules''.
 \item Define a stable model category.
@@ -504,52 +506,58 @@ Explain that $\Sp(\calC)$ is spectral, and why, if $\calC$ is stable, the two ar
 \end{itemise}
 \item Schwede and Shipley give lots of examples:
 \begin{itemise}
-\item Any category of spectra (Bousfield Friedlander, symmetric, orthogonal, coordinate free,\ldots).
+\item Any category of spectra (Bousfield Friedlander, symmetric, orthogonal, co-ord free,\ldots).
 \item Equivariant stable homotopy theory --- $G$-eq coordinate-free spectra and $G$-eq orthogonal spectra, for $G$ compact Lie.
 \item Motivic stable homotopy: ``$\A^1$-local model category structure for schemes over a base''.
-\item Unbounded chain complexes of left $R$-modules, $R$ a ring (wk eq the quasi-isos, fibrations the epimorphisms --- projective model structure).
+\item Unbounded chain complexes of left $R$-modules, $R$ a ring.
 \item More generally, the homotopy category of any abelian category $\calA$. There's a model structure on the unbounded shain complexes in $\calA$ whose weak equivalences are chain homotopy equivalences.
 \end{itemise}
-\item All model categories will be simplicial\footnote{Every cofibrantly generated, proper (\textit{weak equivalences are preserved under pulling back (pushing out) along (co)fibrations}), stable model category is in fact Quillen equivalent to a simplicial model category.}. 
-\item Our purpose it to see that spectral model categories are the same as stable model categories.
+\item All model categories will be \textbf{nice}, where by nice we mean cofibrantly generated, proper and simplicial\footnote{Every cofibrantly generated, proper (\textit{weak equivalences are preserved under pulling back (pushing out) along (co)fibrations}), stable model category is in fact Quillen equivalent to a simplicial model category.}. 
+\item Our purpose is to see that spectral model categories are the same as stable model categories, by constructing a stabilisation of any nice model category, Quillen equivalent when the category is stable.
 \end{itemise}
 
 
-\subsection{$\calD$-model categories}
+\subsection*{$\calD$-model categories}
 \begin{itemise}
 \item Suppose $\calD$ is a \textbf{closed symmetric monoidal category}, i.e.
 \begin{itemise}
 \item $\calD$ has a bifunctor $\otimes:\calD\times\calD\to\calD$ with unit, associativity commutativity and unitality isomorphisms.
-\item $\calD$ has a self-enrichment: $\underline{\calD}:\calD^\op\times\calD\to\calD$ giving right adjoints to $\DASH\otimes d$.
+\item $\calD$ has a self-enrichment: $\intHom_\calD:\calD^\op\times\calD\to\calD$ giving right adjoints to $\DASH\otimes d$.
 \end{itemise}
 \item If $\calD$ is also a model category, call it a \textbf{symmetric monoidal model category} if:
 \begin{itemise}
-\item An SM7 analogue holds. For fixed cofibration $i$ and fibration $P$:
+\item An SM7 analogue holds. For fixed cofibration $i$ and fibration $p$:
 \[\xymatrix{
-A\ar@{-->}[r]^\alpha\ar@{^{(}->}[d]_i&X\ar@{->>}[d]^P\\
+A\ar@{-->}[r]^\alpha\ar@{^{(}->}[d]_i&X\ar@{->>}[d]^p\\
 B\ar@{-->}[r]_\beta\ar@{..>}[ur]&Y
 }\]
- \[\underline{\calD}(B,X)\xrightarrow{(i^*,P_*)}\underline{\calD}(B,Y)\times_{\underline{\calD}(A,Y)}\underline{\calD}(X,Y)\]
+ \[\intHom_{\calD}(B,X)\xrightarrow{(i^*,p_*)}\intHom_{\calD}(A,X)\times_{\intHom_{\calD}(A,Y)}\intHom_{\calD}(B,Y)\]
 is always a fibration in $\calD$, acyclic if either $i$ or $P$ is acyclic. %\rednote{[Ask somebody --- these Hom's should be $\underline D$'s, right?]}
-\item If $Q\textbf{1}_\calD\overset{q}{\to}\textbf{1}_\calD$ is the cofibrant replacement for the unit, then for all cofibrant $X$, the natural maps $Q\textbf{1}_\calD\otimes X\overset{q\otimes1}{\to}\textbf{1}_\calD\otimes X$ and $X\otimes Q\textbf{1}_\calD \overset{1\otimes q}{\to}X\otimes \textbf{1}_\calD$ are weak equivalences.
+\item 
+For $X\in\calD$ cofibrant, $\DASH\otimes X$ and $X\otimes \DASH$ both send the cofibrant replacement of $\textbf{1}_\calD$ to a weak equivalence.
+
+[If $Q\textbf{1}_\calD\overset{q}{\to}\textbf{1}_\calD$ is the cofibrant replacement for the unit, then for all cofibrant $X$, the natural maps $Q\textbf{1}_\calD\otimes X\overset{q\otimes1}{\to}\textbf{1}_\calD\otimes X$ and $X\otimes Q\textbf{1}_\calD \overset{1\otimes q}{\to}X\otimes \textbf{1}_\calD$ are weak equivalences.]
 \end{itemise}
 \item A category $\calM$ is a \textbf{closed $\calD$-module category} if it has natural constructions:
 \begin{itemise}
 \item $\calM\times \calD\to\calM$ written $(X,d)\mapsto X\otimes d$. {(tensored)}
 \item $\calD^\op\times\calM\to\calM$ written $(d,Z)\mapsto Z^d$. {(cotensored)}
-\item $\calM^\op\times\calM\to\calD$ written $(X,Z)\mapsto \underline{\calM}_\calD(X,Z)$. {($\calD$-enriched)}
+\item $\calM^\op\times\calM\to\calD$ written $(X,Z)\mapsto \intHom_\calD(X,Z)$. {($\calD$-enriched)}
 \end{itemise}
 satisfying
-\[\calM(X\otimes d,Z)\cong \calM(X,Z^d)\cong\calD(d,\underline{\calM}_D(X,Z)),\]
+\[\calM(X\otimes d,Z)\cong \calM(X,Z^d)\cong\calD(d,\intHom_D(X,Z)),\]
 so that in particular,
-\[\calM(X,Z)\cong \calD(\textbf{1}_\calD,\underline{\calM}_D(X,Z)).\]
+\[\calM(X,Z)\cong \calD(\textbf{1}_\calD,\intHom_\calD(X,Z)).\]
 We get induced\footnote{Take the adjoint of 
-$X\otimes \underline{\calM}_D(X,Y)\otimes\underline{\calM}_D(Y,Z)\to Y\otimes\underline{\calM}_D(Y,Z)\to Z$.} composition morphisms
-\[\underline{\calM}_\calD(Y,Z)\otimes\underline{\calM}_\calD(X,Y)\to
-\underline{\calM}_\calD(X,Z)\]
+$X\otimes \intHom_D(X,Y)\otimes\intHom_D(Y,Z)\to Y\otimes\intHom_D(Y,Z)\to Z$. The map $X\otimes \intHom_\calD(X,Y)\to Y$ is adjoint to the identity of $\intHom_\calD(X,Y)$.} composition morphisms
+\[\intHom_\calD(Y,Z)\otimes\intHom_\calD(X,Y)\to
+\intHom_\calD(X,Z)\]
 and the induced map (as follows) is exactly composition in $\calM$:
-\[\calD(\textbf{1}_\calD,\underline{\calM}_\calD(Y,Z))\otimes\calD(\textbf{1}_\calD,\underline{\calM}_\calD(X,Y))\to
-\calD(\textbf{1}_\calD,\underline{\calM}_\calD(X,Z)).\]
+\[\xymatrix{
+\calD(\textbf{1}_\calD,\intHom_\calD(Y,Z))\times\calD(\textbf{1}_\calD,\intHom_\calD(X,Y))\ar[r]\ar[rd]&\ar[d]\calD(\textbf{1}_\calD,\intHom_\calD(Y,Z)\otimes\intHom_\calD(X,Y))\\&\calD(\textbf{1}_\calD,\intHom_\calD(X,Z))
+}\]
+%\[\calD(\textbf{1}_\calD,\intHom_\calD(Y,Z))\times\calD(\textbf{1}_\calD,\intHom_\calD(X,Y))\to\calD(\textbf{1}_\calD,\intHom_\calD(X,Z)).\]
+%\[\calD(\textbf{1}_\calD,\intHom_\calD(Y,Z))\times\calD(\textbf{1}_\calD,\intHom_\calD(X,Y))\to\to \calD(\textbf{1}_\calD,\intHom_\calD(Y,Z)\otimes\intHom_\calD(X,Y))\to\calD(\textbf{1}_\calD,\intHom_\calD(X,Z)).\]
 \item $\calM$ is a \textbf{$\calD$-model category} if:
 \begin{itemise}
 \item it's a model category and a closed $\calD$-module category
@@ -558,8 +566,9 @@ and the induced map (as follows) is exactly composition in $\calM$:
 \end{itemise}
 \item $\calM$ is a \textbf{spectral model category} if it's a $\Sp^\Sigma$-model category, where $\Sp^\Sigma$ is the category of symmetric spectra.
 \end{itemise}
-\subsection{Spectral model categories are stable}
+\subsection*{Spectral model categories are stable}
 \begin{itemise}
+\item Under the Quillen adjunction $\sSet_*\leftrightarrow\Sp^\Sigma$ (more to follow), have simplicial structure on a spectral model category.
 \item To form $\Sigma$ (for $X$ cofibrant), normally take a replacement for $X\to \ast$, and push out. 
 \begin{itemise}
 \item Have a cofibration $\partial\Delta[1]\to\Delta[1]$ in $\sSet_*$, and have pushout diagram at left:
@@ -577,10 +586,10 @@ and the induced map (as follows) is exactly composition in $\calM$:
 \end{itemise}
 \item $S^1$ is invertible up to stable equivalence in $\Sp^\Sigma$, so smashing with its inverse gives the inverse automorphism.
 \end{itemise}
-\subsection{Symmetric spectra on a simplicial model category}
+\subsection*{Symmetric spectra on a simplicial model category}
 \begin{itemise}
 \item Let $\calC$ be cocomplete, tensored and cotensored over $\sSet_*$.
-\item Define $S^1=\Delta[1]/\partial\Delta[2]$, a simplicial circle, so that $S^n=(S^1)^{\wedge n}$ has $\Sigma_n$-action.
+\item Define $S^1=\Delta[1]/\partial\Delta[1]$, a simplicial circle, so that $S^n=(S^1)^{\wedge n}$ has $\Sigma_n$-action.
 \item A \textbf{symmetric sequence} over $\calC$ is $X=\{X_n\}$ with a left action of $\Sigma_n$ on $X_n$. Write $\calC^\Sigma$ for the category of symmetric sequences with equivariant maps.
 \item A \textbf{symmetric spectrum} over $\calC$ is such with coherently associative $\Sigma_p\times\Sigma_q$-equivariant morphisms $S^p\otimes X_q\to X_{p+q}$. A morphism of such is just a compatible collection of $\Sigma_n$-equivariant maps. Call this category $\Sp^\Sigma(\calC)$.
 \item The category $\calC^\Sigma$ is monoidal, and tensored, cotensored and enriched over $\sSet_*^\Sigma$. In fact, we define, by analogy with taking tensor products of chain complexes:
@@ -593,23 +602,23 @@ Now $S=(S^0,S^1,\ldots)$ is a commutative monoid in the symmetric monoidal categ
 As we've thrown in the $\Sigma_n^+$, this multiplication is \emph{strictly commutative}.
 \end{itemise}
 \item In fact, a symmetric spectrum is just a left $S$-module --- it's the same to give the pairing, 
-\[\text{[which amounts to giving:\quad}\Sigma_n^+\otimes_{\Sigma_p\times\Sigma_q} S^p\otimes X_q\underset{\Sigma_{p+q}}{\to} X_{p+q},\quad\text{i.e.}\quad S^p\otimes X_q\underset{\Sigma_p\times\Sigma_q}{\to} X_{p+q}\text{]},\]
+\[\text{[which amounts to giving:\quad}\Sigma_{p+q}^+\otimes_{\Sigma_p\times\Sigma_q} S^p\otimes X_q\underset{\Sigma_{p+q}}{\to} X_{p+q},\quad\text{i.e.}\quad S^p\otimes X_q\underset{\Sigma_p\times\Sigma_q}{\to} X_{p+q}\text{]},\]
 as to give a symmetric spectrum with these terms.
 \item Define the smash product  $K\wedge X\in\Sp(\calC)$ of $K\in \Sp(\sSet_*)$ and $X\in \Sp(\calC)$ as the coequaliser of the following maps in $\calC^\Sigma$ induced by the actions of $S$ on $K$ and $X$:
 \[\xymatrix{
 K\otimes S\otimes X\ar@<.5ex>[r]^{\ \ m\otimes 1}\ar@<-.5ex>[r]_{\ \ 1\otimes m}&K\otimes X
 }\]
-Define the smash product $X\wedge Y$ of $X,Y\in\Sp(\calC)$ in the same way!
-\item For $X,Y\in\Sp(\calC)$, define $\Hom_{\Sp(\calC)}(X,Y)\in \Sp^\Sigma$ as follows.
+Define the smash product $X\wedge Y$ of $X,Y\in\Sp(\calC)$ in the same way, when $\calC$ is symmetric monoidal!
+\item For $X,Y\in\Sp(\calC)$, define $\intHom_{\Sp(\calC)}(X,Y)\in \Sp^\Sigma$ as follows.
 \begin{itemise}
 \item Define $\sh_n:\Sp(\calC)\to\Sp(\calC)$ by $(\sh_n(X))_m=X_{n+m}$. This has a $\Sigma_n$ action left over.
-\item Define $\Hom_\Sigma(X,Y)\in\sSet_*^\Sigma$ by $\Hom_\Sigma(X,Y)_n:=\Map(X,\sh_nY)$, which has a $\Sigma_n$ action (this is the enrichment of $\calC^\Sigma$ over $\sSet_*^\Sigma$).
-\item Define $\Hom_{\Sp(\calC)}(X,Y)\in\Sp^\Sigma$ as the equaliser\footnote{Think: $f$ is linear \Iff the following commutes: $\xymatrix@R=1em{
+\item Define $\intHom_\Sigma(X,Y)\in\sSet_*^\Sigma$ by $\intHom_\Sigma(X,Y)_n:=\intHom_{\sSet_*}(X,\sh_nY)$, (has $\Sigma_n$ action).% (this is the enrichment of $\calC^\Sigma$ over $\sSet_*^\Sigma$).
+\item Define $\intHom_{\Sp^\Sigma}(X,Y)\in\Sp^\Sigma$ as the equaliser\footnote{Think: $f$ is linear \Iff the following commutes: $\xymatrix@R=1em{
 \ar[d]^{1\otimes f}S\otimes X\ar[r]_{\ \ m_X}&X\ar[d]_f\\
 S\otimes Y\ar[r]^{\ \ m_Y}&N
 }$} of the two maps:
 \[\xymatrix{
-\Hom_\Sigma(X,Y)\ar@<.5ex>[r]^{m^*_X\ \ }\ar@<-.5ex>[r]_{{m_Y}_*\ \ }&\Hom_\Sigma(S\otimes X,Y)
+\intHom_\Sigma(X,Y)\ar@<.5ex>[r]^{(m_X)^*\ \ }\ar@<-.5ex>[r]_{(m_Y)_*\ \ }&\intHom_\Sigma(S\otimes X,Y)
 }\]
 %\[\Hom_\Sigma(X,Y)\to\Hom_\Sigma(S\otimes X,Y).\]
 \end{itemise}
@@ -633,7 +642,7 @@ Set $\Ev_n(X)=X_n$, and $(F_nX)_m=\Sigma_m^+\otimes_{\Sigma_{m-n}}S^{m-n}\otimes
 \end{itemise}
 \subsubsection*{The stable model structure}
 \begin{itemise}
-\item Let $\lambda:F_1S^1\to F_0S^0\cong S$ be the map of symmetric spectra adjoint to the identity map on the first level \rednote{[understand]}.
+\item Let $\lambda:F_1S^1\to F_0S^0\cong S$ be the map of symmetric spectra adjoint to the identity map on the first level.
 \item $Z\in\Sp(\calC)$ is an \textbf{$\Omega$-spectrum} if it is level-wise fibrant, and $Z\cong Z^{F_0S^0}\to Z^{F_1S^1}$ is a level equivalence (i.e.\ $Z_n\to\Omega Z_{n+1}$ is a weak equivalence in $\calC$ for all $n$).
 \item $g:A\to B$ is a \textbf{stable equivalence} if
 \[\Hom_{\Sp(C)}(A^c,Z)\to\Hom_{\Sp(C)}(B^c,Z)\]
@@ -645,7 +654,7 @@ Then these specifications define a spectral model category structure on $\Sp(\ca
 In addition, if $\calC$ is already stable, this is a Quillen equivalence.}
 %Then $\Sp(\calC)$ supports the structure of a spectral model category such that the adjoint functors  and evaluation  are a Quillen equivalence
 %between $\calC$ and $\Sp(\calC)$ with the stable model structure.}
-\item \textbf{Disclaimer:} Want to define stable equivalences $f$ to be those maps for whom $Uf$ is a stable equivalence of spectra, where $U:\Sp^\Sigma\to\Sp^\N$ is the forgetful functor. I.e.\ if $Uf$ induces an isomorphism of stable homotopy groups. \emph{This fails!} Instead, $f$ is a stable equivalence \Iff $E^*f$ is an isomorphism for every generalised cohomology theory $E$. \textit{This is fixed in the category of orthogonal spectra.}
+\item \textbf{Disclaimer:} Want to define stable equivalences $f$ to be those maps for whom $Uf$ is a stable equivalence of spectra, where $U:\Sp^\Sigma\to\Sp^\N$ is the forgetful functor. I.e.\ if $Uf$ induces an isomorphism of stable homotopy groups. \emph{This fails!} Instead, $f$ is a stable equivalence \Iff $E^*f$ is an isomorphism for every generalised cohomology theory $E$. \textit{This gets repaired in the category of orthogonal spectra.}
 \end{itemise}
 \begin{proof}
 It's enough to show:
@@ -665,47 +674,213 @@ It's enough to show:
 \end{itemise}
 \end{enumerate}
 \end{proof}
+%\subsection*{More from the Schwede and Shipley}
+%If $\calC$ is a nice and stable model category with a set $\calP$ of compact generators, there exists a chain of simplicial Quillen equivalences between $\calC$ and the model category of $\calE(\calP)$-modules.
+
+%[$\calE(\calP)$ is the full spectral subcategory of $\Sp(\calC)$ with objects levelwise fibrant replacements of $\Sigma^\infty P$ for $P\in\calP$...]
+\pagebreak
 \end{MichaelStableModelCats}
-\end{document}
+\begin{RuneBabytop}
+\KanSemResponse
+{``A Spectral Sequence for the Cohomology of an Infinite Loop Space'' --- Rune Haugseng --- 1/11/2011}
+\begin{abstract}
+Taking the infinite loop spaces of the mod-2 Adams tower of a
+spectrum gives a spectral sequence converging to the cohomology of the
+infinite loop space of the spectrum, whose $E_2$-term can be identified with
+certain algebraic derived functors. I'll explain how to set this up, then
+say something about the computation of these derived functors.
+\end{abstract}
+Some of this will be sort of new, being joint work with Haynes Miller.
 
+Given a spectrum $X$, on can take $H^*X$, it's \textbf{mod 2} cohomology (everything in the talk is mod 2), which is an $\Steen$-algebra, where $\Steen=\F_2[\Squ^1,\Squ^2,\ldots]$.
 
-\subsection{Spectral Categories are Stable}
-\subsection{The Quillen equivalence}
+We can extract $\Omega^\infty X$, which has cohomology $H^*\Omega^\infty X$, which is an unstable $\Steen$-algebra. That is, $\Squ^ix=0$ for $i>|x|$, and it's a graded commutative $\F_2$-algebra, with $\Squ^i(xy)=\sum\Squ$ 
 
+Thus we have a module and an algebra. One might guess that $H^*\Omega^\infty X=UD(H^*X)$, where $D:\Steen\Modules\to\calU$ (with $\calU$ the unstable modules), given by $D(M)=M/(\Squ^i(x):i>|x|)$. $U:\calU\to\calK$ ($\calK$ the unstable algebras) given by $U(M)=S(M)/(\Squ^{|x|}x=x^2)$.
 
+This is wrong, but correct for EM spaces.
+\begin{thm*}
+This is wrong, but correct for EM spaces.
+\end{thm*}
+The goal of this talk is then to give a spectral sequence for $H^*\Omega^\infty X$ with algebraic input the derived functors of $UD$.
+\subsection*{The spectral sequence}
+Given $X^*$ a cosimplicial space (where by spaces I probably mean simplicial sets), then $C^*X^*$ is a simplicial cochain complex, and we obtain a double cochain complex, giving a spectral sequence:
+\[E_2^{st}:=\pi_{-s}(H^tX^*)\text{ the homotopy of a simplicial abelian group}\]
+converging to
+\[H^{t-s}(Tot X^*)\text{the homotopy limit}\]
+Note that we can define $ToT X^*$ to be the simplicial set of natural transformations $\Delta^*\to X^*$.
 
+Suppose now that $X$ is a spectrum and $E$ is a nice ring spectrum. THen I can form a cosimplicial spectrum by smashing with $E$ a bunch of times. We call this the Adams tower. The homotopy limit of this is (under some conditions, like if $X$ is connective and $E=H\F_2$) is $L_EX$.
+MACRO FOR SIMPLICIAL THINGS
 
+We do take $E=H\F_2$, so taking infinite loop spaces, we get a cosimplicial space. The corresponding spectral sequence is
+\[E_2^{st}=\pi_{-s}(H^t(\Omega^\infty X\wedge H\F_2^{*+1}))\implies H^{t-s}(\Omega^\infty X)\]
+\begin{thm*}[Bousfield]
+This converges for $X$ connective, $H^*X$ is degreewise finite, and $\pi_0X$ is a finite 2-group.
+\end{thm*}
+Now $X\wedge H\F_2^n$ is an EM spectrum, so that 
+\begin{alignat*}{2}
+H^t(\Omega^\infty X\wedge H\F_2^{*}))&=UDH^*(X\wedge H\F_2^{\wedge n})%&\qquad&\text{()}
+\\&=UD(H^*X\otimes A^{\otimes n})%&\qquad&\text{()}
+%\\&=%&\qquad&\text{()}
+%\\&=%&\qquad&\text{()}
+%\\&=%&\qquad&\text{()}
+\end{alignat*}
+$H^*X\otimes A^{\otimes n}$ is simplicial in modules, so UD thereof is simplicial in K..
 
+Now what appears here is a free $\Steen$-module resolution of $H^*X$, so that $E_2^{st}=\mathbb{L}_{-s}(UD)(H^*X)^t$.
+\subsection*{Second goal}
+We'd like to describe $\pi_*(U(M))$ in terms of $\pi_*(M)$ for any simplicial unstable $\Steen$-module $M$.
 
+To discuss this, we need the higher derived square operations. Suppose we have a simplicial commutative $\F_2$-algebra $B$, i.e.\ $A:\Delta^\op\to$ F2algebras. Write $C(A)$ for the associated chain complex. Then
+\begin{prop*}
+There are $\delta_i:C(A)_n\to C(A)_{n+i}$ for $1\leq i\leq n$ such that
+\[\partial\delta_i(a)=\begin{cases}
+\delta_i(\partial a)&n>i,i\neq1\\
+\delta_1(\partial a)+a^2&n>i,i=1\\
+a\partial a&i=n>1\\
+a\partial a+a^2&i=n=1
+\end{cases}\]
+There's something wrong here, but we can't figure it out.
+\end{prop*}
+\begin{cor*}
+There exist $\delta_i:\pi_n A\to \pi_{n+i} A$ when $2\leq i\leq n$. The existence of $\delta_1$ implies that $\pi_*A$ is an exterior algebra for $*>0$, and if $A$ is exterior, we get $\delta_1$ on $\pi_*A$ as well.
+\end{cor*}
+\begin{thm*}
+For $x,y$ of degree $n$, we get
+\[\partial_i(x+y)=\begin{cases}\delta_i x+\delta_i y,&i<n\\\delta_i x+\delta_i y+xy,&i=n\end{cases}\]
+We also get
+\[\partial_i(xy)=\begin{cases}x^2\delta_i y,&|x|=0\\0,&|x|=|y|=>0\end{cases}\]
+and an adem relation.
+\end{thm*}
+In particular, any product $\delta_I=\delta_{i_1}\cdots\delta_{i_k}$ as a sum of admissible composites, so that $i_t\geq2i_{t+1}$ for all $t$.
+\begin{thm*}[Dold]
+If $F:\Vect^{\times n}\to\Vect$, then there's $\calF:gr\Vect^{\times n}\to gr\Vect$ such that if $V_1,\ldots, V_n$ are simplicial vector spaces, then
+\[\pi_*F(V_i)=\scrF(\pi_*V_i).\]
+\end{thm*}
+In particular, writing $s$ for the ungraded symmetric algebra,
+\begin{thm*}
+$\pi_*sV=S(\pi_*V)$, where $sW$ is the graded commutative algebra generated by $w\in W$ and $\delta_Iw$ for $I$ admissible with excess $\leq |w|$, imposing the extra relation that is is exterior (squares are zero) in positive dimensions.
+\end{thm*}
+\begin{defn*}
+A restricted vector space is a graded vector space with operations $\phi_i:V^s\to V^{2s}$ with $\phi_0$ the identity.
+\end{defn*}
+\begin{prop*}
+For $M$ a simplicial restricted vector space, let $UM=SM/(\phi x=x^2)$, then
+\[\pi_*UM=U(\pi_0M)[0]\otimes\frakS(\coker\pi_*\phi)\otimes\frakS(\sum\ker\pi_*\phi)\]
+So consider $\Sigma^\infty X$, for $X$ a connected space, with $H^*X$ degree-wise finite, then $(\mathbb{L}_*D)(H^*X)$ has been described by Lannes-Zarati, and we can show that the spectral sequence collapses by a dimension counting argument.
+\end{prop*}
 
-\subsection*{A vague plan:}
-\begin{enumerate}\squishlist
-\item Define the category of symmetric spectra $\Sp^\Sigma$, and spectral categories.
+\pagebreak
+\end{RuneBabytop}
+\begin{SaulInftyOneCats}
+\KanSemResponse
+{``An Overview Of $(\infty, 1)$-Categories'' --- Saul Glasman --- 2/11/2011}
+\begin{abstract}
+The many-faceted formalism of $(\infty, 1)$-categories is, much like the 
+theory of Quillen adjunctions between model categories, a way of 
+discussing relations between homotopy theories. First I'll discuss why 
+we might want to think of homotopy theories as higher categories, and 
+I'll mention some examples we've already seen. We'll see how this 
+perspective can clarify the concept of homotopy limits. Our camera does 
+not have a big enough lens to take a comprehensive picture of the theory 
+of $(\infty, 1)$-categories, but we'll survey some common models for this 
+theory and sketch the constructions of some functors between them. If 
+time permits, we will mention stable $(\infty, 1)$-categories.
+\end{abstract}
+\subsection*{What's a homotopy theory?}
+Options
 \begin{itemise}
-\item Define, for $\calC$ a cocomplete category, tensored and cotensored over $\sSet_*$, the category $\calC^\Sigma$ of symmetric sequences and the category $\Sp(\calC)$ of symmetric spectra.
-\item Show that $\Sp(\calC)$ is tensored and cotensored over $\Sp^\Sigma$.
-%\item Show that $\Sp^\Sigma(\calC)$ has a spectra enrichment, in fact is tensored and cotensored over $\Sp^\Sigma$.
+\item A model category?
+\item A simplicial model category?
+\item A simplicial category? (It often feels that this is good enough)
+\item A category enriched in topological spaces? (as this should be the same)
 \end{itemise}
-\item Give the stable model structure on $\Sp(\calC)$.
+Common features
+\begin{itemise}
+\item Mapping spaces
+\item Homotopy colimits and limits
+\item being tensored and cotensored over spaces
+\end{itemise}
+The idea of inf1cats is to tie this all together somehow.
+
+To motivate further, we have the notion that spaces shold be the same as $\infty$-groupoids --- infinity categories where all of the morphisms of a certain level are invertible.
+
+By an inftycat I mean any notion where you have $n$-morphisms for each $n$.
+
+Given a space, have its fundamental $\infty$-groupoid, $\underline\pi_1{X}$, whose objects are points, 1-morphisms are paths, 2-morphisms are homotopies, etc. There should be some realisation functor the other way.
+
+Maybe a category enriched over spaces should be an infty1cat:
+\begin{defn*}
+An $(\infty,1)$-category is an $\infty$-category with all $n$-morphisms for $n\geq2$ invertible. [Figuring out what invertible means is a feature of the model.]
+\end{defn*}
+Simplicial categories fit the bill, taking fibrant replacements, but taking homotopy limits is hard. Morally, the problem with simplicial categories is that there is a composition function $\underline{\Map}(X,Y)\times\underline{\Map}(Y,Z)\to\underline{\Map}(X,Z)$, and this is actually defined, not defined up to homotopy. This is too much rigidity, and we must pay the price.
+\subsection*{Kan complexes}
+Kan complexes are the fibrant simplicial sets in the usual model structure, characterised by the following. Define $\Lambda^n_k\subset \Delta^n$ to be $\Delta^n$ less the $k^\text{th}$ codimension one face and everything that attaches to it (i.e.\ the interior). These inclusions form a generating set of acyclic cofibrations.
+\subsection*{Nerves of categories}
+There's a similar characterisation of nerves of categories. A simplicial set $X$ is $N\calC$ for some category $\calC$ \Iff we have a unique lifting property for inner horns ($0<k<n$):
+\[\xymatrix{
+%a1& a2& a3& a4& a5& a6\\
+%b1& b2& b3& b4& b5& b6\\
+ c1& \Lambda^n_k\ar[d]\ar[r]& X& c4& c5& c6\\
+ d1& \Delta^n\ar[ur]^{!}& d3& d4& d5& d6\\
+%e1& e2& e3& e4& e5& e6\\
+%f1& f2& f3& f4& f5& f6\\
+}\]
+Given a simplicial set like this, I can get a category back by saying that the objects are the 0-simplices, the morphisms are the 1-simplices, and then evrything else is determined.
+\begin{defn*}
+A quasicategory (popularised by Joyal, Lurie) is a simplicial set with the inner horn lifting property. We cal the 0-simplices `objects', and the 1-simplices `maps'.
+\end{defn*}
+[We forgot uniqueness, since we don't \emph{want} uniqueness.]
+Every Kan complex is one of these, in fact an $\infty$-groupoid.
+
+We have mapping spaces, which are $\underline{Map}(X,Y)_n$ the $n+1$-simplices with vertices $x,y,y,y,y,$, and the face opposite $x$ totally degenerate --- you get it from a 0-simplex... ?? Think later
+\begin{thm*}[joyal]
+$X$ is a quasicategory \Iff $\underline{Map}(\Delta^2,X)\acyclicfibration\underline{Map}(\Lambda^2_1,X)$ is an acyclic fibration of simplicial sets.
+\end{thm*}
+In particular it has a section, which corresponds to a composition law. There are choices of composition, there's no canonical choice --- just a contractible choice.
+
+\subsection*{Homotopy limits and colimits}
+Imagine we've succeeded in turning some bunch of interesting objects (e.g.\ spaces) into a quasicategory. We'll start with the easiest limit, the ho-terminal object.
+
+Suppose that $a\in\ob X$, define $X/a$ (the Qcat of objects over $a$) so that the $n$-simplices are $n+1$-simplices of $X$ with $n+1$th vertex $a$. There's a map back from here to $X$ given by taking the first $n$ vertices. This is still a qcat.
+\begin{thm*}[ThmDef]
+Suppose $X$ a qcat and $a\in X$. TFAE:
+\begin{enumerate}\squishlist
+\item for any $x\in\ob X$, $\underline{Map}(x,a)$ is contractible.
+\item Say $f:\partial \Delta^n\to X$ has $f(a)=a$. Then $f$ extends to $\Delta^n$.
+\item The natural $X/a\to X$ is a weak equivalence of qcats.
+\end{enumerate}
+In this setting, we call $a$ a terminal object. The dual is true for initial objects.
+\end{thm*}
+This is not unique, but the mapping spaces are contractible, and all the maps therein are `invertible'. [Once you take the homotopy category, all the sections give the same composition law, and a map is an iso if its image in $\underline\pi_0$ is an isomorphism).
+
+Now, defining homotopy limits is not too much more work. Let $D\to X$ be a diagram in $X$ (here, $D$ is the nerve of a category, the one I'd normally think of). We can form the qcat of cones over $D$, in the same spirit as that of the objects over $a$. [Here, a 0-simplex is a cone over $D$ (a map from the projective cone $1*D$ on $D$ (join $D$ with a point as a simp set, which is basically $D$ with an initial object adjoined).] This is still a qcat and we define
+\begin{defn*}
+$holim D$ is defined to be the terminal object of $X/D$, which is defined up to weak equivalence.
+\end{defn*}
+\subsection*{The model structure on qcats}
+This is not a model structure on the cat of qcats, but one on the cat of ssets.
+\begin{thm*}[Thmdef]
+There is a  `Joyal' model structure on $\sSet$ where the cofibrations are the inclusions (as usual), the fibrant objects are the qcats, and the weak equivalences are `the weak equivs according to the quasi-categories'. That is, maps $Y\to  Z$ such that $\underline{Map}(Z,X)\weakequiv\underline{Map}(Y,X)$ (a w.e.\ in usual sSets) for all QCs $X$.
+\end{thm*}
+If you're a weak equiv for QCs you're a weak equiv for kan complexes, so that the condition of being a weak equivalence is stronger than the classical condition. This is a Bousfield delocalisation of the classical model structure. That is, if we B localise w.r.t.\ the classical weak equivalences, we get the standard model structure. Thus there must be more fibrations in the Joyal structure, so that at least the 
+\subsection*{The weak equivalence with simplicial categories}
+We have a model category of simplicial categories, with the Bergner model structure. This is Quillen equivalent to the Joyal model structure on simplicial sets.
+
+The problem with simp cats is that they were strict, so we must destrictify. We'll bring in the `coherent nerve'. The $n$-simplices of the coherent nerve $N_h(\calC)$ are ``paths up to homotopy'' in $\calC$. Define $P^h[n]$ to be the category whose objects are $\{0,\ldots,n\}$, and $\Map(i,j)=N(\calP(i+1,\ldots,j-1))$. A $k$-simplex says `I went from $i$ to $j$ and stopped $k$ times'. I can take the nerve as I'm thinking of this as a poset, and thus a category.
+
+The homotopy coherent nerve $N^h(\calC)$ is the simplicial set with $k$-simplices functors $P^h[n]\to\calC$.
+\begin{thm*}
+If $\calC$ is fibrant, then $N^h(\calC)$ is a QC, and the coherent nerve is the right half of a Quillen equivalence
+\[QC\to sC.\]
+\end{thm*}
+
+
+\pagebreak
+\end{SaulInftyOneCats}
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+\end{document}
