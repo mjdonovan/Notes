@@ -5,14 +5,16 @@
 \documentclass[11pt]{article}
 \input{../macros.tex}
 
-\includeversion{Oct18}
-\includeversion{Oct20}
-\includeversion{Oct25}
-\includeversion{Oct27}
-\includeversion{Oct1}
-\includeversion{Oct3}
-\includeversion{Oct8}
-\includeversion{Oct10}
+%\def\excludeversion#1{\includeversion{#1}}
+
+\excludeversion{Oct18}
+\excludeversion{Oct20}
+\excludeversion{Oct25}
+\excludeversion{Oct27}
+\excludeversion{Nov1}
+\includeversion{Nov3}
+\includeversion{Nov8}
+\includeversion{Nov10}
 
 
 \begin{document}
@@ -82,7 +84,7 @@ Fix a field $k$. There is a contravariant equivalence of categories, between the
 \begin{proof}
 In a dominant rational map, the generic point maps to the generic point! (Otherwise, it couldn't be dominant, as the image would like in the closure of the image of the generic point, which would be closed and proper.) Thus we get a map on local rings at the generic points, i.e.\ a map on function fields.
 
-We should now check that the functor is full, faithful and essentially surjective (everything in the target is isomorphic to something in the image). For full and faithfulness, recally the bijection:
+We should now check that the functor is full, faithful and essentially surjective (everything in the target is isomorphic to something in the image). For full and faithfulness, recall the bijection:
 \[\{\text{rational maps $X\to Y$}\}\longleftrightarrow\{\text{$k$-morphisms $\Spec K\to Y$}\}=Y(K)\]
 If we restrict to \emph{dominant} rational maps, get a bijection
 \begin{alignat*}{2}
@@ -94,7 +96,7 @@ For essential surjectivity, given $K$ a finitely generated field over $k$, let $
 \begin{defn*}
 Integral $k$-varieties are birational \Iff they are isomorphic in the category of dominant rational maps.
 \end{defn*}
-[The image of a constructible subset is constructible (Chevalley), and a dense const ructible subset contains a dense open subset.]
+[The image of a constructible subset is constructible (Chevalley), and a dense constructible subset contains a dense open subset.]
 \begin{prop*} TFAE:
 \begin{enumerate}\squishlist
 \item $X$ and $Y$ are birational.
@@ -174,7 +176,7 @@ Closed immersions, compositions of proper maps and base changes of proper maps a
 \begin{thm*}[Valuative criterion for properness]
 Suppose $f:X\to S$ is of finite type, where $S$ is noetherian. Then $f$ is proper \Iff for every (discrete)\footnote{It's a pain to go from the VR version to the DVR version.} valuation ring $R$ over $S$, if $K:=\text{frac}(R)$, then the natural restriction map $X(R)\to X(K)$ is bijective.
 \end{thm*}
-\noindent [This is good both for checkinig properness, and for extending morphisms!]
+\noindent [This is good both for checking properness, and for extending morphisms!]
 \begin{thm*} For a morphism of noetherian schemes, projective $\implies$ proper.
 \end{thm*}
 \begin{proof}
@@ -196,7 +198,7 @@ Y\ar[d]_{\text{separated}}\\
 }\]
 Thus $f$ is proper. In particular, $f$ is universally closed, and $f(X)$ is closed in $Y$.
 \end{proof}
-[This is part of elim thy --- if $f$ is the elimination of a variable, what you get is still defined by equations.....]
+[This is part of elimination thy --- if $f$ is the elimination of a variable, what you get is still defined by equations.....]
 \begin{defn*}
 A constructible subset is a Boolean combination of closed sets.
 \end{defn*}
@@ -212,10 +214,250 @@ $(\exists y)\ xy=1\iff \text{not}(x=0)$.
 \end{exmp*}
 \noindent Over the reals, you also need to throw in the symbol $\leq$, and call things ``semi-algebraic''.
 \end{Oct20}
-\begin{Oct25}
-\section*{Algebraic Geometry --- 25 October}
+\begin{Oct27}
+\section*{Algebraic Geometry --- 27 October}
+Smooth was defined by local obvious smoothness.
+\begin{fact*}
+If $(A,m)$ is a regular local ring of dimension $n$, and $x_1,\ldots, x_r\in m$, then $A/(x_1,\ldots,x_r)$ is a regular local ring of dimension $n-r$ \Iff the images of $x_1,\ldots,x_r$ in $m/m^2$ are linearly independent.
+\end{fact*}
+\begin{defn*}
+Given $x\in\Spec\frac{ A[t_1,\ldots,t_n]}{(g_{r+1},\ldots,g_n)}\overset{f}{\to} \Spec A$, call $f$ obviously smooth of relative dimension $r$ at $x$ \Iff the matrix $(\partial g_i/\partial t_j(x))\in M_{n-r,n}(k(x))$ has rank $n-r$.
+\end{defn*}
+\begin{defn*}
+Given any morphism of schemes $X\to Y$ and $x\in X$, call $f$ smooth of relative dimension $r$ at $x$ \Iff there are open neighbourhoods mapping into  each other in an obviously smooth way.
+\end{defn*}
+\begin{defn*}
+A morphism is \'etale if it is smooth of relative dimension zero.
+\end{defn*}
+\noindent For $\C$-varieties, $X\to Y$ is \'etale \Iff the corresponding map of analytic spaces is locally biholomorphic. Finite \'etale maps correspond to finite-sheeted covering spaces in algebraic topology.
 
-\end{Oct25}
+\begin{prop*}
+For $k$ any field, suppose that $X=\Spec \frac{k[t_1,\ldots,t_n]}{(g_{r+1},\ldots,g_n)}$, and $x\in X(k)$. Then $X$ is obviously smooth (over $\spec k$) of relative dimension $r$ at $x$ \Iff $\calO_{X,x}$ is a regular local ring.
+\end{prop*}
+\begin{proof}
+We may assume that $x=(0,0,\ldots,0)$. $X$ is obviously smooth of relative dimension $r$ at $x$ \Iff $(\partial g_i/\partial t_j(x))\in M_{n-r,n}(k(x))$ has rank $n-r$, \Iff $\overline g_{r+1},\ldots,\overline g_n\in m_{\A^n,x}/m_{\A^n,x}^2=\langle \overline t_1,\ldots,\overline t_n\rangle $ are linearly independent (as these are the rows of the matrix).
+
+Using the above fact, this happens \Iff $\calO_{\A^n,x}/(g_{r+1},\ldots,g_n)$ is a regular local ring of dimension $r$. But this ring is exactly $\calO_{X,x}$.
+\end{proof}
+Fortunately, anything which is smooth is in fact obviously smooth:
+\begin{prop*}
+Suppose $x\in U:=\spec\frac{A[t_1,\ldots,t_n]}{(g_{r+1},\ldots,g_n)}\subset X$, and $X\downarrow\spec A$.
+Then $X\downarrow \spec A$ is smooth of relative dimension $r$ at $x$ \Iff $U\downarrow\spec A$ is obviously smooth at $x$.
+\end{prop*}
+\begin{proof}
+If it's obviously smooth, then obviously, it's smooth, by definition. For the other direction, let $k=k(x)$, giving a map $\spec k\cofibration X$. If we're given that $X\downarrow \spec A$ is smooth of relative dimension $r$ at $x$, then $U\downarrow\spec A$ is smooth of relative dimension $r$ at $x$. Now as smoothness is preserved by base extension, we have that $U_k\downarrow \spec k$ is smooth at $x$. This implies that $\calO_{U_x,x}$ is a regular local ring of dimension $r$. But now, $U_k\downarrow \spec k$ is obviously smooth of relative dimension $r$, by the above proposition. This implies that $U\downarrow\spec A$ is obviously smooth, as it doesn't make much difference whether we're evaluating at $k$ or what, the matrices are the same.
+\end{proof}
+\begin{fact*}
+Suppose that $X$ is of finite type over any field, of pure dimension $r$. The $X$ is smooth over $\spec k$ \Iff $X$ is geometrically regular. Either of these conditions imply that $X$ is regular. [By regular, we mean that all the local rings are regular local rings. By geometrically regular, we mean regular after extending to an algebraic closure.]
+
+There's a converse if $k$ is perfect --- then $X$ is smooth \Iff it is regular.
+\end{fact*}
+\begin{fact*}
+If you localise a regular local ring at a prime, you get another regular local ring.
+\end{fact*}
+
+\begin{defn*}
+The word `nonsingular' means either smooth or regular, depending on context.
+\end{defn*}
+\begin{defn*}
+The \emph{singular locus} of a scheme $X$ of pure dimension $r$ over $k$ is
+\[X_{\text{sing}}:=\left\{x\in X\,\middle|\,X\text{ is not smooth of relative dimension $r$ at $x$}\right\}\]
+\end{defn*}
+\begin{prop*}
+$X_{\text{sing}}$ is a closed subset of $X$.
+\end{prop*}
+\begin{proof}
+Obvious smoothness is an open condition --- locally it's the common zero locus of the minors of the matrix in the local smoothness condition.
+\end{proof}
+Note that smooth is a relative notion, while regular is absolute.
+\begin{exmp*}
+Consider $X\to Y$ given by $\spec k[x,t,y]/(xy-t)\to k[t]$. Then $X$ is regular, as it's isomorphic to $\A^2$ as a $k$-scheme. However, the map is not smooth at $(0,0,0)$. [To check smoothness, we can check that it's obviously smooth. The Jacobian matrix is $[y\ \ x]$. This has maximal rank when $(x,y)\neq(0,0)$ (recall that one evaluates into the residue field in order to discuss rank). Thus this morphism is smooth away from $(0,0,0)$.]
+\end{exmp*}
+\subsection*{Sheaves of modules}
+\begin{defn*} A sheaf of $\calO_X$-modules is a sheaf of abelian groups $\calF$ on $X$ such that for any open subset $U$ of $X$, $\calF(U)$ is an $\calO(U)$-module, compatibly with restriction. A morphism thereof is the obvious.
+\end{defn*}
+The category $\calO_X\Modules$ of these is an abelian category, which is monoidal and self-enriched. For the tensor product, one needs to sheafify, and a section of the tensor is locally a tensor of sections.
+
+There are the obvious notions of freeness and local freeness. A vector bundle is a locally free sheaf of finite rank. A line bundle (or invertible sheaf) is a locally free sheaf of dimension one.
+
+Recall that given a ring homomorphism $B\from A$, there's an adjunction
+\[B\Modules\longleftrightarrow A\Modules.\]
+Similarly, given a morphism of schemes $f:X\to Y$, we have
+\[f_*:\calO_X\Modules\longleftrightarrow\calO_Y\Modules:f^*.\]
+Given $\calF$ an $\calO_X$-module, take $f_*\calF$, with structure given by the map $\calO_Y\to f_*\calO_X$. Given $\calG$ an $\calO_Y$-module, $f^{-1}\scrG$ is an $f^{-1}\calO_Y$-module, so we form
+\[f^*\calG:=f^{-1}\calG\otimes_{f^{-1}{\calO_Y}}\calO_X.\]
+\end{Oct27}
+\begin{Nov1}
+\section*{Algebraic Geometry --- 1 November}
+Given an affine scheme $\spec A$, there's a functor
+\funcdef{A\Modules}{\calO_X\Modules}{M}{\text{$\widetilde M$, where $\widetilde M(D(f))=M_f$}}
+This functor is fully faithful, exact, and respects tensor product and arbitrary direct sums. Moreover, given a ring hom $B\from A$ and $M\in A\Modules$ and $N\in B\Modules$. We have a map $f:\spec B\to\spec A$. Then $f_*\widetilde N=\widetilde{_AN}$, and $f^*\widetilde M=\widetilde{M\otimes_AB}$.
+\begin{exmp*}
+Suppose $A$ is a Dedekind domain (e.g.\ the integral closure of $\Z$ in a finite extension of $\Q$), and $I$ is a fractional ideal (a nonzero f.g.\ $A$-submodule of $\Frac A$). Then $\widetilde I$ is locally free of rank one on $\spec A$. [As a fractional ideal of a DVR is always free.]  Moreover, $\widetilde I$ is free \Iff $I$ is principal.
+\end{exmp*}
+\begin{defn*}
+An $\calO_x$-module $\calF$ is \emph{quasicoherent} \Iff there's an affine open cover $(X_i)$ with $X_i=\spec A_i$ such that $\calF|_{X_i}$ is isomorphic to $\widetilde {M_i}$ for some $A_i$-module $M_i$. $\calF$ is \emph{coherent} if all of the modules involved are finitely generated (we'll only use this term when the underlying scheme is noetherian).
+\end{defn*}
+\begin{prop*}
+The following are equivalent:
+\begin{itemise}
+\item $\calF$ is quasicoherent
+\item this condition on every affine open in $X$.
+\item For every $\Spec A_f\subset\spec A\subset X$, the natural map
+\[(\calF(\spec A))_f\to\calF(\spec A_f)\]
+is an isomorphism.
+\end{itemise}
+\end{prop*}
+\begin{exmp*}
+If $X=\spec A$, then there are equivalences of categories:
+\[A\Modules\longleftrightarrow\QuasiCoherent_X\ \ \ A\fgModules\longleftrightarrow\Coherent_X\]
+For any scheme, $\QuasiCoherent_X$ is an abelian subcategory of $\calO_X\Modules$, closed under taking extensions. So is $\Coherent_X$ if $X$ is noetherian.
+\end{exmp*}
+\begin{exmp*}
+The sheaf of 1-forms on a variety, whose sections are locally of the form $\sum a_i df_i$, with $a_i,f_i$ in the structure sheaf, is quasi-coherent.
+\end{exmp*}
+\begin{prop*}
+Suppose that $f:X\to Y$,  $\calF\in\calO_X\Modules$, and $\calG\in\calO_Y\Modules$.
+Then
+\begin{itemise}
+\item if $\calG\in\QuasiCoherent_Y$ then $f^*\calG\in\QuasiCoherent_X$.
+\item if $\calG\in\Coherent_Y$ then $f^*\calG\in\Coherent_X$.
+\item Suppose that $X$ is quasi-compact and quasi-separated\footnote{the intersection of two affine opens in $X$ is a finite union of affine opens} (e.g.\ if $X$ is noetherian). If $\calF\in\QuasiCoherent_X$, then $f_*\calF\in\Coherent_Y$.
+\item If $X$ is proper, and if $\calF\in\Coherent_X$, then $f_*\calF\in\Coherent_Y$.
+\end{itemise}
+\end{prop*}
+\begin{fact*}
+It's hard to come up with examples of schemes which aren't quasi-separated. An example is the bug-eyed infinite-dimensional affine space.
+\end{fact*}
+\subsection*{Closed subschemes}
+Recall that closed subschemes of $\spec A$ correspond to ideals of $A$. Given an ideal, one takes $\spec A/I$, and given a closed subscheme $Z\cofibration \spec A$, take $I=\ker\{\Gamma(\calO_{\spec A})\to\Gamma(\calO_Z)\}$.
+
+We seek to generalise this to a bijection between closed subschemes of $X$ and quasi-coherent sheaves of ideals of $\calO_X$. The bijection is just about the same:
+\[Z\mapsto\calI_Z:=\ker\{\calO_X\to i_*\calO_Z\}.\]
+That is, the ideal sheaf $\calI_Z$ of $Z$ in $X$ is the ideal of functions which vanish upon restriction to $\Z$. For this inverse to this map, we send a quasi-coherent sheaf of ideals $\calI$ to $\SPEC\,\calO_X/\calI$. [Here, $\calO_x/\calI$ is a quasiocoherent sheaf ($\calF$) of $\calO_X$-algebras. Over each affine open $\spec A\subset X$, $\calF(\spec A)$ is an $A$-algebra, so that $\spec(\calF(\spec A))$ is a scheme over $\spec A$, and these can be glued to form $\SPEC \calF$.]
+\begin{defn*}
+The \emph{scheme-theoretic image}\footnote{The scheme-theoretic image is like `the closure of the image'.} of a morphism of schemes $f:X\to Y$ is the smallest closed subscheme $Z\cofibration Y$ through which $f$ factors. This corresponds to the largest quasi-coherent sheaf $\calI$ of ideals contained in $\calK=\ker\{\calO_Y\to f_*\calO_X\}$.
+\end{defn*}
+\begin{fact*}
+If $f$ is quasi-compact, then:
+\begin{itemise}
+\item $\scrK$ is quasi-coherent, so that $\calI=\calK$;
+\item the formation of $\calI$ and $Z$ is local on $Y$. That is, for $U$ open in $Y$, $\im(f^{-1}U\to U)=\Z\cap U$.
+\item The underlying topological space of $Z$ is the closure of $f(X)$.
+\end{itemise}
+\end{fact*}
+\subsection*{Quasicoherent sheaves on $\proj S$}
+Given a graded ring $S=\bigoplus _{n\geq 0}S_n$ we can form a scheme $X=\Proj S$. Given a graded $S$-module $M=\bigoplus _{n\in \Z}M_n$, we obtain a quasi-coherent sheaf \reflectbox{$\widetilde {\reflectbox{$M$}}$} on $\proj S$ characterised by $\widetilde M(D_+(f)):=M_{(f)}$ (the degree zero localisation). This is quasi-coherent, as $\widetilde M|_{D_+(f)}\simeq \widetilde{M_{(f)}}$ on $\spec S_{(f)}$. In particular, $\widetilde M$ is coherent if $M$ is finitely generated.
+
+Given a graded $S$-module $M$, we can \emph{twist} it, defining $M(n)$ to be the graded $S$-module with $M(n)_i=M_{n+i}$. The key example is $\calO_X(n):=\widetilde {S(n)}$. From now on, we'll assume that:
+\[\text{ $S$ is generated by $S_1$ as an $S_0$-algebra,}\]
+e.g.\ $S$ is a quotient of a polynomial ring in dimension one.
+\begin{prop*}
+$\calO_X(n)$ is a line bundle.
+\end{prop*}
+\begin{proof}
+$X$ is covered by the $D_+(f)$ for $f\in S_1$. Fix $f\in S_1$. Then $\calO_X(n)|_{D_+(F)}\simeq \widetilde{S(n)_{(f)}}$, and it's enough to see that this module is a free $S_{(f)}$-module of rank one. However, there's an obvious $S_{(f)}$-module isomorphism between $S(n)_{(f)}$ and $S_{(f)}$ given by multiplication by $f^{\pm n}$.
+\end{proof}
+\begin{prop}
+$\widetilde{M\otimes_SN}=\widetilde M\otimes_X\widetilde N$.
+\end{prop}
+\begin{proof}
+On $D_+(f)$ for $f\in S_1$, we have $(M\otimes_S N)_{(f)}\simeq M_{(f)}\otimes_{S_{(f)}}N_{(f)}$.
+\end{proof}
+\begin{cor*}
+$\calO_X(m)\otimes\calO_X(n)=\calO_X(m+n)$.
+\end{cor*}
+\end{Nov1}
+\begin{Nov3}
+\section*{Algebraic Geometry --- 3 November}
+\begin{claim}
+Take $S=k[x_0,\ldots,x_n]$, so that $X=\PP^r$. Then $\Gamma(\PP^r,\calO(n))=S_n$, the module of homogeneous polynomials of degree $n$.
+\begin{proof}
+$\Gamma(D_+(x_i),\calO(n))=S(n)_{(x_i)}$, which is the $k$-span of the monomials $\prod x_j^{a_j}$ where $\sum a_j=n$ and $a_j\geq0$ for $j\neq i$. The result follows.
+\end{proof}
+\end{claim}
+\begin{cor*}
+$\bigoplus_{n\in\Z}\Gamma(\PP^r,\calO(n))$ recovers $S$ as a graded ring.
+\end{cor*}
+\begin{defn*}
+For $\calF$ on $X:=\proj S$, define $\Gamma_*(\calF):=\bigoplus_{n\in\Z}\Gamma(X,\calF(n))$, a graded $S$-module.
+\end{defn*}
+Then there are functors
+\[\widetilde{\DASH}:\text{graded S-modules}\longleftrightarrow\text{quasicoherent $\calO_X$-modules}:\Gamma_*(\DASH)\]
+\begin{prop*}
+$\widetilde{\Gamma_*(\calF)}\simeq\calF$, but $M\to \Gamma_*(\widetilde M)$ need not be an isomorphism. [If $M$ is a sheaf of ideals, then $\Gamma_*(\widetilde M)$ is its saturation.]
+\end{prop*}
+Recall that $\PP^n_Y$ is equipped with a projection to $\PP^n_Z$:
+\[\PP^n_Y:=\PP^n_Z\times Y\overset{\pi}{\to}\PP^n_Z.\]
+We define $\calO(1)$ on $\PP^n_Y$ to be $\pi^*(\calO(1)\text{ on $\PP^n_\Z$})$.
+\begin{defn*}
+Given an immersion $i$, (a composite $X\overset{open}{\cofibration} U\overset{closed}{\cofibration} \PP^n_Y$), we define $\calO_{X}(1):=i^*\calO(1)$. Any line bundle on $X$ arising in this way is called \textit{very ample relative to $Y$}.
+\end{defn*}
+\noindent [Somehow, understanding all of the very ample line bundles on $X$ is tantamount to understanding all of the embeddings of $X$ in projective space.]
+\begin{exmp*}
+Recall the 2-uple embedding of $\PP^2$, a.k.a.\ the Veronese embedding, a closed immersion:
+\[\PP^2\overset{i}{\cofibration} \PP^5\text{\qquad given by\qquad}(x:y:z:\mapsto(x^2:y^2:z^2:xy:xz:yz).\]
+This satisfies $i^*\calO_{\PP^5}(1)=\calO_{\PP^2}(2)$. This shows that $\calO_{\PP^2}(@)$ is very ample relative to $k$.
+\end{exmp*}
+\begin{defn*}
+Suppose that $X$ is a scheme, and $\calF$ is an $\calO_X$-module> Suppose that we are given some global sections $s_i\in\Gamma(X,\calF)$. We say that the $s_i$ \emph{generate} $\calF$ \Iff at each point $x\in X$, the images of the $s_i$ generate the stalk $\calF_{x,X}$ as an $\calO_{x,X}$-module.
+
+This is equivalent to the statement that the  $\calO_X$-module homomorphism $\bigoplus_i\calO_X\to\calF$ corresponding to these sections is surjective.
+
+We say that $\calF$ is \emph{generated by global sections} if such a collection of sections exists.
+\end{defn*}
+\begin{exmp*}
+$x_1,\ldots,x_n\in\Gamma(\PP^n,\calO(1))$ generate $\calO(1)$. $\calO(-1)$ cannot be generated by global sections.
+\end{exmp*}
+\noindent In the special case that $\calF$ is very ample, generating global sections correspond to the coordinates of an embedding, for this reason.
+\begin{exmp*}
+Suppose that $r\geq1$. Then the sheaf $\calO(d)$ on $\PP^r$ is g.b.g.s.\ \Iff $d\geq0$. It is vey ample \Iff $d>0$. Note that we have the $d$-uple embedding, and if $d\leq0$, there aren't enough global sections for it to be very ample.
+\end{exmp*}
+\begin{exmp*}
+Let $X:=\PP^1\times\PP^1$. This has two projections to $\PP^1$. For any $m,n\in\Z$, we form $\calO(m,n):=\pi_1^*\calO(m)\otimes\pi_2^*\calO(n)$, a line bundle. Now
+\[\Gamma(\PP^1\times\PP^1,\calO(m,n))=\{\text{bihomogeneous polynomials of degree $m,n$.}\}.\]
+This has dimension $(m+1)(n+1)$ over $k$.  $\calO(m,n)$ is g.b.g.s.\ \Iff $m,n\geq0$. It is very ample \Iff $m,n\geq1$.
+\end{exmp*}
+\begin{exmp*}
+Under the Segre embedding $\PP^1\times\PP^1\cofibration \PP^3$, we have $\phi^*\calO_{\PP^3}(1)=\calO(1,1)$, and we can get the other very ample ones by mixing in some $m$-uple and $n$-uple embeddings.
+\end{exmp*}
+\begin{thm*}[Serre]
+Suppose $A$ is a noethrian ring, and we have a closed immersion $X\cofibration \PP^n_A$, so that $X$ is projective over $A$, and we have a very ample sheaf $\calO(1)$ on $X$. Suppose that $\calF$ is a coherent $\calO_X$-module. Then for $n\gg1$ (depending on $\calF$), then $\calF(n)$ is g.b.g.s.
+
+Another way to say this is that $\calO(1)$ is \textbf{ample}.
+\end{thm*}
+\begin{proof}
+Over the affine patches, you choose some generators. All this is finite. These have some denominators, which can be cleared by twisting!
+\end{proof}
+\begin{defn*}
+A line bundle $\calL$ on (any scheme) $X$ is \emph{ample} \Iff for any coherent scheme $\calF$, for $n\gg0$, $\calF\otimes\calL^{\otimes n}$ is g.b.g.s.\ for $n\gg1$. 
+\end{defn*}
+\begin{thm*}[II.7.6]
+If $X$ is of finite type over a noetherian ring $A$, $\calF$ is ample \Iff for some $n>0$, $\calL^{\otimes n}$ is very ample over $A$.
+\end{thm*}
+\begin{cor*}
+Suppose that $A$ is a noetherian ring and $X\cofibration \PP^r_A$ is a closed embedding, and that $\calF$ is an $\calO_X$-module. Then $\calF$ is  coherent \Iff there is a surjection
+\[\bigoplus_{i=1}^s\calO(n_i)\fibration\calF.\]
+\end{cor*}
+\begin{proof}
+By the theorem we have a surjection $\bigoplus \calO_X\fibration \calF(n)$. Untwisting is exact!
+\end{proof}
+Recall that if $X$ is a projective variety over an algebraically closed field, then $\Gamma(X,\calO_X)=k$. This `algebraic Liouville theorem' generalises.
+\begin{prop*}
+Suppose that $X$ is any field, $X$ is a projective scheme over $k$, and $\calF$ is a coherent $\calO_X$-module. Then $\dim_k\Gamma(X,\calF)$ is always finite.
+\end{prop*}
+\begin{exmp*}
+$\dim_k\Gamma(\PP^n_K,\calO(d))={n+d\choose d}$.
+\end{exmp*}
+\begin{exmp*}
+$\dim_k(\Gamma(\A^n_k,\calO)=\infty$.
+\end{exmp*}
+An even wider generalisation, in which we view $f_*$ as a relative version of global sections, is:
+\begin{prop*}[Grothendieck]
+Suppose that $Y$ is a noetherian scheme, $f:X\to Y$ is a proper morphism, and $\calF$ is a coherent $\calO_X$-module. Then $f_*\calF$ is a coherent $\calO_Y$-module.
+\end{prop*}
+\end{Nov3}
+
 \end{document}
 
 
