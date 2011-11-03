@@ -7,6 +7,24 @@
 \usepackage{makeidx}
 
 
+\includeversion{prelims}
+\includeversion{chapter1}
+\excludeversion{chapter2}
+\includeversion{chapter3}
+
+
+
+
+%not yet:
+\includeversion{chapter4}
+\includeversion{chapter5}
+\includeversion{chapter6}
+\includeversion{chapter7}
+\includeversion{chapter8}
+\includeversion{chapter9}
+
+
+
 \usepackage{multicol}
 \makeatletter
 \renewenvironment{theindex}
@@ -44,11 +62,33 @@
 %\newenvironment{INT}{\begin{itemize}\small\item}{\end{itemize}}
 
 \newenvironment{INT}[1][]{\begin{itemize}\small\item\textbf{#1}}{\end{itemize}}
-
+\newcommand{\moreINT}[1][]{\item\textbf{#1}}
 
 
 
 \begin{document}
+\begin{prelims}
+\section*{\S$-\infty$: Preliminaries}
+\begin{itemise}
+\item Asymptotic notations
+\begin{itemize}\squishlist
+\item \makebox[4.5em][l]{$f= O(g)$} means ``$f\leq cg$''.
+\item \makebox[4.5em][l]{$f=o(g)$} means ``$f/g\to0$''.
+\item \makebox[4.5em][l]{$f=\Omega(g)$} means ``$f\geq cg$''.
+\item \makebox[4.5em][l]{$f=\Theta(g)$} means ``$c_1 g\leq f\leq c_2 g$''.
+\item \makebox[4.5em][l]{$f\sim g$} means ``$f/g\to1$''.
+\end{itemize}
+\item $1-p\leq e^{-p}$ for all nonnegative $p$, close for small $p$.
+\item The Stirling approximation: $k!\sim \sqrt{2\pi k}(k/e)^k$.
+\item Some bounds on ${n\choose k}$:
+\[\left(\frac{n}{k}\right)^k\leq {n\choose k}\leq\frac{n^k}{k!}\leq\left(\frac{n\cdot e}{k}\right)^k.\]
+\item On central binomial coefficients:
+\[\frac{2^{2n-1}}{\sqrt n}\leq {2n\choose n}\sim\frac{4^n}{\sqrt{\pi n}}.\]
+\item Let $S_n$ be the sum of $n$ iid uniform $\{\pm1\}$ random variables. Then:
+\[\Exp[|S_n|]=n2^{1-n}{n-1\choose\lfloor(n-1)/2\rfloor}=(\sqrt{2/\pi}+o(1))\sqrt n.\]
+\end{itemise}
+\end{prelims}
+\begin{chapter1}
 \section*{\S1: The basic method}
 \begin{itemise}
 \item The \textbf{Ramsey number} $R(k,l)$ is the least $n$ such that for any 2-colouring of the vertices of the complete graph $K_n$ on $n$ vertices, there is always either a blue $K_k$ or a red $K_l$.
@@ -70,7 +110,7 @@ Choose a random tournament. The chance that it fails to have $S_k$ is bounded ab
 \begin{INT}[Thm 1.2.2:]
 A graph on $n$ vertices with minimum degree $\delta>1$ has a dominating set of at most $n[1+\log(\delta+1)]/(\delta+1)$ vertices.
 \begin{proof}
-Fix a probability $p$. Choose vertices of with probability $p$ The expected number of vertices chosen and vertices not neighbouring the chosen set is at most $pn+(1-p)^{\delta+1}n$, by linearity of expectation (also note: alteration). Thus there is a dominating set of size at most this amount. Using $1-p\leq e^{-p}$ to simplify, and then minimizing, we get the result.
+Fix a probability $p$. Choose vertices of with probability $p$. The expected size of the set $\{\text{vertices chosen}\}\cup\{\text{vertices not neighbouring the chosen set}\}$ is at most $pn+(1-p)^{\delta+1}n$, by linearity of expectation (also note: alteration). Thus there is a dominating set of size at most this amount. Using $1-p\leq e^{-p}$ to simplify, and then minimizing, we get the result.
 \end{proof}
 \end{INT}
 \item A \textbf{cut} in a graph is simply a partition of the edges into two nonempty disjoint subsets. The \textbf{size} of a cut is the number of edges whose endpoints lie in opposite sides. The \textbf{edge connectivity} is the minimum size of a cut.
@@ -98,7 +138,7 @@ Let $X=\bigcup_i (A_i\cup B_i)$, and randomly order $X$. Let $X_i$ be the event 
 \item This is sharp, writing $\calF=\{(A,X\setminus A) : A\subset X, |A|=k\}$, where $|X|=k+l$.
 \end{INT}
 \item A subset $A$ of an abelian group is \textbf{sum-free} if $(A+A)\cap A$ is empty.
-\begin{INT}[Thm 1.4.1]
+\begin{INT}[Thm 1.4.1:]
 Every set $A$ of $n$ nonzero integers contains a sum-free subset of size at least $n/3$.
 \begin{proof}
 Choose a prime $p=3k+2$ far larger than the largest absolute value of any element of $A$. Embed the question in the field $\F=\Z/p\Z$, where it is unchanged. In this field, there is a large sum-free subset $C=\{k+1,\ldots,2k+1\}$, which has at least $1/3$ of the elements. Choose a random $x\in\F^\times$, and consider $xA\cap C$. The average size of this set is at least $|A|/3$, and it is always sum-free!
@@ -122,12 +162,160 @@ This shows that $p$ is pretty big, and in fact, for some good $t$, bigger than $
 \end{proof}
 \end{INT}
 \end{itemise}
+\subsection*{The Probabilistic Lens: The Erd\H{o}s-Ko-Rado theorem}
+A family $\calF$ of sets is \textbf{intersecting} if any $A,B\in\calF$ satisfy $A\cap B\neq\emptyset$. We are interested in large intersecting families of $k$-element subsets of $\{0,\ldots, n-1\}$ (where $k\leq n/2$). One option is the set of $k$-element subsets containing a given element.
+\begin{INT}[Erd\H{o}s-Ko-Rado:]
+This is best possible --- any intersecting family of $k$-element subsets of an $n$-element set has size at most ${n-1\choose k-1}$.
+\begin{proof}
+Suppose $\calF$ is such. View $\{0,\ldots, n-1\}$ as $\Z/n\Z$. Let $A_0=\{0,\ldots,k-1\}$ and define translates $A_s=A_0+s$. Then $\calF$ contains at most $k$ of the $A_s$. [Suppose $A_0\in\calF$, the other $A_t$ intersecting can be arranged in $k-1$ pairs which are disjoint.]
+
+Now for any $k$-element subset $A$ of $\Z/n\Z$ and a random $i\in \Z/n\Z$, the probability that $A+i\in\calF$ is at most $k/n$. Thus, if we randomise $A$ uniformly amoungst the $k$-sets, the probability that $A+i\in\calF$ is still at most $k/n$. Now $A+i$ is uniformly chosen from amoungst the $k$-sets, so that the probability a random $k$-element subset is in $\calF$ is at most $k/n$, giving the result.
+\end{proof}
+\end{INT}
+%  Suppose $\calF$ is an intersecting family of 
+\end{chapter1}
+
+\begin{chapter2}
+\section*{\S2: Linearity of expectation}
+\begin{itemise}
+\item A \textbf{hamiltonian path} is a path in a graph which visits each vertex exactly once. A \textbf{hamiltonian cycle} is such which returns to its starting vertex.
+\begin{INT}[Thm 2.1.1:]
+There's a tournament $T$ with $n$ players and at least $n!2^{-(n-1)}$ Hamiltonian paths.
+\begin{proof}
+For this is the expected number of Hamiltonian paths in a random Tournament.
+\end{proof}
+\end{INT}
+\item A \textbf{bipartite graph} is one in which the vertices can be partitioned into two disjoint subsets, such that the induced subgraph on each has no edges.
+\begin{INT}[Thm 2.2.1:]
+Any graph with $e$ edges contains a bipartite subgraph (not necessarily complete) with at least $e/2$ edges.
+\begin{proof}
+For each vertex, randomly assign it to either $A$ or $B$, to give a random partition. On average, there should be $e/2$ crossing edges.
+\end{proof}
+\moreINT[Thm 2.2.2:]
+If $G$ has $2n$ vertices and $e$ edges, then it contains a bipartite subgraph with at least $en/(2n-1)$ edges. [Similarly, get $e(n+1)/(2n+1)$ edges given $2n+1$ vertices.]
+\begin{proof}
+Choose $A$ uniformly from all $n$-element subsets of $V$. Same deal.
+\end{proof}
+\end{INT}
+\item \rednote{There's something nasty which I don't get about 2.2.3 --- what's a $k$-set?}
+\item Let $K_{a,b}$ be the graph $(A\sqcup B,\text{``$A\times B$''})$ where $|A|=a$ and $|B|=b$.
+\begin{INT}[Thm 2.3.1:]
+There's a 2-colouring of $K_n$ with at most ${n\choose a}2^{1-{a\choose 2}}$ monochromatic $K_a$.
+\begin{proof}
+This is the expected number of monochromatics in a random 2-colouring.
+\end{proof}
+\moreINT[Thm 2.3.2:] Similarly, there's a 2-colouring of $K_n$ with at most ${m\choose a}{n\choose b}2^{1-ab}$ monochromatic $K_{a,b}$.
+\end{INT}
+\item \textbf{Balancing vectors:}
+\begin{INT}[Thm 2.4.1:]
+Suppose that $v_1,\ldots,v_n\in\R^n$ all have length one. Then there is a signed sum $\pm\epsilon_1 v_1\pm\epsilon_2v_2\pm\cdots\pm\epsilon_n v_n$ of length at least (and one with length at most) $\sqrt n$.
+\begin{proof}
+For one can calculate that the average norm-squared random signed sum is $n$.
+\end{proof}
+\moreINT[Thm 2.4.2:]
+Let $v_1,\ldots,v_n\in\R^n$ have length at most one. Fix weights $p_1,\ldots,p_n\in[0,1]$, and let $w=\sum p_iv_i$ be the weighted sum. Then there exists $S\subset \{1,\ldots,n\}$ with $|w-\sum_{i\in S} v_i|\leq\sqrt n/2$.
+\begin{proof}
+Let $\epsilon_i$ be one with probability $p_i$, else zero. Let $v=\sum \epsilon_iv_i$, and let $X=|w-v|^2$. The expectation of $X$ is calculated just like the variance of $\sum\epsilon_i$, with a bunch of inner products multiplied in, but all these inner products are less than one in magnitude, so $\Exp[X]\leq n/4$.
+\end{proof}
+\end{INT}
+\item \textbf{Unbalancing lights:} Given an $n\times n$ array of lights, some on and some off, and $2n$ switches, one for each row and column, that toggle each light therein. Then it's possible to flick switches in order to ensure that there are $(\sqrt{2/\pi}+o(1))n^{3/2}$ more lights on than off.
+\begin{INT}
+%Let $a_{ij}=\pm1$ depending whether the corresponding light is on or off. We want to maximise $\sum_{ij}a_{ij}x_iy_j$ for $x_i,y_j$ all $\pm1$, and claim that this quantity can be at least $(\sqrt{2/\pi}+o(1))n^{3/2}$.
+\begin{proof}
+Randomly flick the switches for each column. Let $R_i$ be the difference of the number on and off in the $i^\text{th}$ row. This is has distribution $S_n$ --- the sum of $n$ iid uniform $\{\pm1\}$ random variables. Now $\Exp[|S_n|]=(\sqrt{2/\pi}+o(1))\sqrt n$. Thus $\Exp[\sum|R_i|]$ is the quantity we desire.
+\end{proof}
+\end{INT}
+\end{itemise}
+\subsection*{The Probabilistic Lens: Br\'egman's theorem}
+The \textbf{permanent} of a matrix is the same sum as the determinant, taken without the signs. We want to bound the permanent of an $n\times n$ $\{0,1\}$-matrix $A$ with $r_i$ ones in the $i^\text{th}$ row. Note that one might be interested in doing this as the permanent of the matrix is the number of cycle coverings in the digraph associated with $A$.
+\begin{INT}[Br\'egman's theorem:]
+$\text{per}(A)\leq \prod (r_i!)^{1/r_i}$.
+\begin{proof}
+To solve this problem, we use the \textbf{geometric mean}. That is, if $Y$ is a random variable, we define $\GeomMean(Y):=\exp(\Exp(\log Y))$. Note that $\GeomMean(XY)=\GeomMean(X)\GeomMean(Y)$ even when $X$ and $Y$ are not independent. Note that if $Y$ takes values $a_i$ with probabilities $p_i$, we have $\GeomMean(Y)=\prod a_i^{p_i}$. Just as $\Exp(X)$ is the mean of the conditional expectations, $\GeomMean(Y)$ is the geometric mean of the conditional geometric means.
+
+\INDENT Define an ordered transversal of $A$ to be a pair of permutations $(\alpha,\beta)$ such that $A_{\alpha(i),\beta(i)}=1$ for all $i$. That is, a sequence of ones contributing one to the permanent, taken with an order. Define a transversal to be a permutation $\gamma$ such that $A_{i,\gamma(i)}=1$. Let $\calO$ be the set of ordered transversals, and let $\calT$ be the set of transversals. There's a  function $\pi:\calO\to\calT$ whose fibres each have order $n!$.
+
+
+\INDENT Choose $o=(\alpha,\beta)$ randomly from $\calO$. For $i=1,\ldots, n$, remove the $\alpha(i)^\text{th}$ row and the $\beta(i)^\text{th}$ column (containing the $i^\text{th}$ one in the ordering), and let $R_i$ be the number of ones remaining in the $\alpha(i)^\text{th}$ row just before it is removed. Define $L=\prod R_i$. The random variable $L$ should overestimate $\text{per}(A)$, in the sense that $\text{per}(A)\leq\GeomMean(L)$. \textbf{Come back and prove this.} We calculate:
+\begin{alignat*}{2}
+\GeomMean[L|\pi(o)=\sigma]&=\prod\GeomMean[R_i|\pi(o)=\sigma]%&\qquad&\text{()}
+\\&=\prod(r_i)^{1/r_i}(r_i-1)^{1/r_i}\cdots(1)^{1/r_i}&\qquad&\text{($R_i$ is uniform on $\{1,\ldots, r_i\}$)}
+\\&=\prod(r_i!)^{1/r_i}&\qquad&\text{which is independent of $\sigma$, so}
+\\\GeomMean[L]&=\prod(r_i!)^{1/r_i}&\qquad&\text{(each $\sigma$ is equally likely)}\qedhere
+\end{alignat*}
+\end{proof}
+\end{INT}
+\end{chapter2}
+\begin{chapter3}
+\section*{\S3: Alterations}
+\begin{itemise}
+\item Recall that $R(k,l)>n$ \Iff there is a two-colouring of the edges of $K_n$ with neither a red $K_k$ nor blue $K_l$.
+\begin{INT}[Thm 3.1.1:]
+For any integer $n$, $R(k,k)>n-{n\choose k}2^{1-{k\choose2}}$.
+\begin{proof}
+For choosing a random two-colouring of $K_n$, ${n\choose k}2^{1-{k\choose2}}$ is the average number of monochromatic $K_k$. There's some colouring with at most this many; remove a vertex from each.
+\end{proof}
+There are a couple of analogous results on off-diagonal Ramsey numbers.
+\end{INT}
+\item The \textbf{independence number} $\alpha(G)$ of a graph $G$ is the maximal size of a collection of vertices of $G$ sharing no edges.
+\begin{INT}[Thm 3.2.1:]
+Let $G$ have $n$ vertices and $nd/2$ edges ($d\geq1$). Then $\alpha(G)\geq n/(2d)$.
+\moreINT[Restatement:] In $G$ has $v$ vertices and $e$ edges with $e\geq n/2$, then $\alpha(G)\geq (n/2)^2/e$.
+\begin{proof}
+Assign each vertex independently a probability of $p$ on being put in a set $S$. Then the average number of elements of $S$ is $pn$, and the average number of edges in the induced subgraph is $p^2e$. We thus obtain a randomised method of returning an independent subset of $G$ with an average of $pn-p^2e$ elements. This quantity is maximised at $p=n/(2e)\in[0,1]$.
+\end{proof}
+\end{INT}
+\item \textbf{Combinatorial geometry:} We are interested in finding ways to distribute $n$ points in a unit square such that all of the triangles that can be formed from the $n$ points are large in area. For $S\subset I^2$, let $T(S)$ be the area of the smallest triangle with corners in $S$, and let $T(n)$ be the largest value of $T(S)$ as $S$ ranges over subsets of $I^2$ of size $n$.
+
+\begin{INT}[Thm 3.3.1:]
+There is a set of $n$ points is the unit square such that $T(S)\geq1/(10n)^2$, so that $T(n)=\Omega(n^{-2})$.
+\begin{proof}
+For any $\epsilon>0$, suppose that $P,Q,R$ are chosen uniformly from $I^2$. Then it is an easy exercise to bound $\Prob[\text{Area}(PQR)\leq\epsilon]\leq16\pi\epsilon$.
+
+\INDENT Now choose at random $2n$ points in $I^2$. Then expected number of triangles with area less that $1/(10n)^2$ is at most ${2n\choose3}\cdot16\pi/(10n)^2<n$. There is a configuration with less than $n$ small triangles, and we delete a vertex from each of these.
+\end{proof}
+\moreINT[A construction of Erd\H{o}s:] $T(n)\geq1/(2(n-1)^2)$ when $n$ is prime.
+
+\begin{proof} Graph the parabola $y=x^2$ in $(\Z/n\Z)^2$ after embedding $(\Z/n\Z)^2$ in $[0,n-1]^2$ as the lattice points. As $n$ is prime, no three points are collinear, and each triangle has integer coordinates, so has area a multiple of $1/2$.
+\end{proof}
+\end{INT}
+Note that in fact, $T(n)=\Omega(\log n/n^2)$.
+\item Given a bounded measurable subset $C\subset \R^d$, the \textbf{packing number} of $X$ is 
+\[\delta(C):=\mu(C)\lim_{x\rightarrow\infty} f(x)/x^d\]
+where $f(x)$ is the largest number of copies of $C$ that fit inside $[0,x]^d$.
+\begin{INT}[Thm 3.4.1:]
+Let $C$ be convex and centrally symmetric around the origin. Then $\delta(C)\geq2^{-d-1}$.
+\begin{proof}
+We'd like to choose the centres of the copies of $C$ randomly inside the box $B=[0,x]^d$. Choosing $p,q\in B$ at random, $(C+p)$ intersects $(C+q)$ \Iff $p-q\in2C$, by central symmetry. Conditioning on fixed $q$, this occurs with probability at most $\mu(2C)/x^{d}$, and thus the unconditional probability of an intersection is at most $(2/x)^d\mu(C)$.
+
+\INDENT Now choose $n$ points in $B$ at random, and put a copy of $C$ at each. Then average number of intersections is at most $(n^2/2)(2/x)^d\mu(C)$, so removing some, we obtain $n-(n^2/2)(2/x)^d\mu(C)$ points. Choose $n$ to maximise this quantity, and note that the fact that some of the copies may hang over the side of the box is insignificant in the limit.
+\end{proof}
+\moreINT[A greedy algorithm:] By simply adding new copies of $C$ until we can no longer go on, we see that $\delta(C)\geq 2^{-d}$.
+\begin{proof}
+Note that if we choose $p_1,\ldots,p_m$ a maximal subset of $B$ such that the $C+p_i$ are disjoint. Then by maximality, there can be no point $q$ such that $q-p_i\notin 2c$ for all $i$ (else we can add $q$ to the collection). Thus $n$ copies of $2C$ cover $B$, from which we can derive the result.
+\end{proof}
+\end{INT}
+\item \textbf{Recolouring:}  recall that we wrote $m(n)>m$ \Iff every $n$-uniform hypergraph with $m$ edges is \textbf{2-colourable}, i.e.\ has \textbf{property B}.
+\begin{INT}[Thm 3.5.1:]
+If there is a probability $p$ such that $k(1-p)^n+k^2p<1$, then $m(n)>2^{n-1}k$.
+\moreINT[Cor 3.5.2:] $m(n)=\Omega(2^n\sqrt{n/\log n})$.
+\begin{proof}[Proof of 3.5.2:]
+It's good enough to find the largest $p$ such that $k^2p<1/2$ and then plug it into $k(1-p)^n<1/2$, to see that $k$ satisfying the hypotheses of 3.5.1 can be chosen fairly large.
+\end{proof}
+\begin{proof}[Proof of 3.5.1:]
+It's enough to fix a hypergraph with $2^{n-k}$ edges, and prove that its vertices can be 2-coloured.
+We give three sources of randomness. For each vertex, we flip a fair `red'/`blue' coin and a $(p,1-p)$ `recolour'/`don't recolour' coin. We also randomly order the vertices.
+
+\INDENT The idea is as follows. Colour the vertices according to their red/blue coins. Then go through the vertices in their (random) order and recolour the coin in question \Iff it lies in a monochromatic edge and its second coin displays `recolour'. The point is that we can bound the failure probability by $k(1-p)^n+k^2p$.
+\end{proof}
 
 
 
 
 
-\printindex
+\end{INT}
+\end{itemise}
+\end{chapter3}
 \end{document}
 
 
