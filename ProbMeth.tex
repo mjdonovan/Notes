@@ -6,17 +6,18 @@
 \input{../macros.tex}
 \usepackage{makeidx}
 
+\def\excludeversion#1{\includeversion{#1}}
 
 \includeversion{prelims}
-\includeversion{chapter1}
+\excludeversion{chapter1}
 \excludeversion{chapter2}
-\includeversion{chapter3}
-
+\excludeversion{chapter3}
+\includeversion{chapter4}
 
 
 
 %not yet:
-\includeversion{chapter4}
+
 \includeversion{chapter5}
 \includeversion{chapter6}
 \includeversion{chapter7}
@@ -73,10 +74,10 @@
 \item Asymptotic notations
 \begin{itemize}\squishlist
 \item \makebox[4.5em][l]{$f= O(g)$} means ``$f\leq cg$''.
-\item \makebox[4.5em][l]{$f=o(g)$} means ``$f/g\to0$''.
+\item \makebox[4.5em][l]{$f=o(g)$} means ``$f/g\rightarrow0$''.
 \item \makebox[4.5em][l]{$f=\Omega(g)$} means ``$f\geq cg$''.
 \item \makebox[4.5em][l]{$f=\Theta(g)$} means ``$c_1 g\leq f\leq c_2 g$''.
-\item \makebox[4.5em][l]{$f\sim g$} means ``$f/g\to1$''.
+\item \makebox[4.5em][l]{$f\sim g$} means ``$f/g\rightarrow1$''.
 \end{itemize}
 \item $1-p\leq e^{-p}$ for all nonnegative $p$, close for small $p$.
 \item The Stirling approximation: $k!\sim \sqrt{2\pi k}(k/e)^k$.
@@ -197,7 +198,7 @@ If $G$ has $2n$ vertices and $e$ edges, then it contains a bipartite subgraph wi
 Choose $A$ uniformly from all $n$-element subsets of $V$. Same deal.
 \end{proof}
 \end{INT}
-\item \rednote{There's something nasty which I don't get about 2.2.3 --- what's a $k$-set?}
+\item \rednote{There's something nasty which I don't get about 2.2.3.}
 \item Let $K_{a,b}$ be the graph $(A\sqcup B,\text{``$A\times B$''})$ where $|A|=a$ and $|B|=b$.
 \begin{INT}[Thm 2.3.1:]
 There's a 2-colouring of $K_n$ with at most ${n\choose a}2^{1-{a\choose 2}}$ monochromatic $K_a$.
@@ -233,15 +234,23 @@ $\text{per}(A)\leq \prod (r_i!)^{1/r_i}$.
 \begin{proof}
 To solve this problem, we use the \textbf{geometric mean}. That is, if $Y$ is a random variable, we define $\GeomMean(Y):=\exp(\Exp(\log Y))$. Note that $\GeomMean(XY)=\GeomMean(X)\GeomMean(Y)$ even when $X$ and $Y$ are not independent. Note that if $Y$ takes values $a_i$ with probabilities $p_i$, we have $\GeomMean(Y)=\prod a_i^{p_i}$. Just as $\Exp(X)$ is the mean of the conditional expectations, $\GeomMean(Y)$ is the geometric mean of the conditional geometric means.
 
-\INDENT Define an ordered transversal of $A$ to be a pair of permutations $(\alpha,\beta)$ such that $A_{\alpha(i),\beta(i)}=1$ for all $i$. That is, a sequence of ones contributing one to the permanent, taken with an order. Define a transversal to be a permutation $\gamma$ such that $A_{i,\gamma(i)}=1$. Let $\calO$ be the set of ordered transversals, and let $\calT$ be the set of transversals. There's a  function $\pi:\calO\to\calT$ whose fibres each have order $n!$.
+\INDENT Define an ordered transversal of $A$ to be a pair $(\alpha,\beta)\in\Sigma_n\times\Sigma_n$ of permutations such that $A_{\alpha(i),\beta(i)}=1$ for all $i$. That is, a sequence of ones contributing one to the permanent, taken with an order. Define a transversal to be a permutation $\gamma$ such that $A_{i,\gamma(i)}=1$. Let $\calO$ be the set of ordered transversals, and let $\calT$ be the set of transversals. There's a  function $u:\calO\to\calT$, forgetting the order, whose fibres each have order $n!$. There's a projection $\pi_1:\calO\to \Sigma_n$.
 
 
-\INDENT Choose $o=(\alpha,\beta)$ randomly from $\calO$. For $i=1,\ldots, n$, remove the $\alpha(i)^\text{th}$ row and the $\beta(i)^\text{th}$ column (containing the $i^\text{th}$ one in the ordering), and let $R_i$ be the number of ones remaining in the $\alpha(i)^\text{th}$ row just before it is removed. Define $L=\prod R_i$. The random variable $L$ should overestimate $\text{per}(A)$, in the sense that $\text{per}(A)\leq\GeomMean(L)$. \textbf{Come back and prove this.} We calculate:
+\INDENT Choose $o=(\alpha,\beta)$ randomly from $\calO$. For $i=1,\ldots, n$, remove the $\alpha(i)^\text{th}$ row and the $\beta(i)^\text{th}$ column (containing the $i^\text{th}$ one in the ordering), and let $R_i$ be the number of ones remaining in the $\alpha(i)^\text{th}$ row just before it is removed. Define $L=\prod R_i$. The random variable $L$ should overestimate $\text{per}(A)$, in the sense that $\text{per}(A)\leq\GeomMean(L)$. We'll come back and prove this. We calculate:
 \begin{alignat*}{2}
-\GeomMean[L|\pi(o)=\sigma]&=\prod\GeomMean[R_i|\pi(o)=\sigma]%&\qquad&\text{()}
+\GeomMean[L|u(o)=\sigma]&=\prod\GeomMean[R_i|u(o)=\sigma]%&\qquad&\text{()}
 \\&=\prod(r_i)^{1/r_i}(r_i-1)^{1/r_i}\cdots(1)^{1/r_i}&\qquad&\text{($R_i$ is uniform on $\{1,\ldots, r_i\}$)}
 \\&=\prod(r_i!)^{1/r_i}&\qquad&\text{which is independent of $\sigma$, so}
-\\\GeomMean[L]&=\prod(r_i!)^{1/r_i}&\qquad&\text{(each $\sigma$ is equally likely)}\qedhere
+\\\GeomMean[L]&=\prod(r_i!)^{1/r_i}&\qquad&\text{(each $\sigma$ is equally likely)}
+\end{alignat*}
+\INDENT Now we now should show that $\text{per}(A)\leq\GeomMean(L)$	. We show this conditionally on $\pi_1(o)=\tau$ for any $\tau\in\Sigma_n$. That is, we fix the order of deletion of the rows, and randomise the order of deletion of the columns. Let $r=r_{\tau(1)}$ nonzero entries in the $\tau(1)^\text{th}$ row, in the $e_1,\ldots,e_r$ columns. Let $t_i$ be the perm-cofactor opposite the $i^\text{th}$ nonzero entry. The probability that we first delete the $(e_i)^\text{th}$ column first is $\Prob[\beta(i)=e_i|\pi_1(o)=\tau]=t_i/\text{per}(A)$. Thus (letting $t=\sum t_i/r=\text{per}(A)/r$):
+\begin{alignat*}{3}
+\qquad\GeomMean[L|\pi_1(o)=\tau]&=\prod_{i=1}^r\GeomMean[rR_2\cdots R_n|\pi_1(o)=\tau,\ \beta(1)=e_i]^{t_i/\text{per}(A)}%&\qquad&\text{()}
+\\&\geq r\prod_{i=1}^r(t_i)^{t_i/\text{per}(A)} &\qquad&\text{(by induction)}
+\\&=r\left(\prod_{i=1}^r(t_i)^{t_i}\right)^{1/\text{per}(A)}%&\qquad&\text{()}
+\\&\geq r\left(\left(t^t\right)^r\right)^{1/\text{per}(A)}&\qquad&\text{(convexity)}
+\\&=rt=\text{per}(A)&&&\qquad\qquad\qedhere%&\qquad&\text{()}
 \end{alignat*}
 \end{proof}
 \end{INT}
@@ -304,38 +313,176 @@ It's good enough to find the largest $p$ such that $k^2p<1/2$ and then plug it i
 \end{proof}
 \begin{proof}[Proof of 3.5.1:]
 It's enough to fix a hypergraph with $2^{n-k}$ edges, and prove that its vertices can be 2-coloured.
-We give three sources of randomness. For each vertex, we flip a fair `red'/`blue' coin and a $(p,1-p)$ `recolour'/`don't recolour' coin. We also randomly order the vertices.
+We give three sources of randomness. For each vertex, we flip a fair `red'/`blue' coin and a $(p,1-p)$ `recolour'/`don't recolour' coin. We also randomly order the vertices. All this happens once and for all at the start.
 
-\INDENT The idea is as follows. Colour the vertices according to their red/blue coins. Then go through the vertices in their (random) order and recolour the coin in question \Iff it lies in a monochromatic edge and its second coin displays `recolour'. The point is that we can bound the failure probability by $k(1-p)^n+k^2p$.
+\INDENT The idea is as follows. Colour the vertices according to their red/blue coins. Let $D$ be the set of `dangerous' vertices --- those that lie in a monochromatic edge. Go through the vertices in $D$ in their (random) order and recolour the coin in question \Iff it is `still dangerous' (it still lies in a monochromatic edge) and its second coin displays `recolour'. Note here that coins which are not initially considered dangerous are \emph{never} candidates for recolouration. The point is that we can bound the failure probability by $k(1-p)^n+k^2p$.
+
+\INDENT We'll bound the probability that there is a red edge at the end of the process. The point is that there is a red edge \Iff one of the following occur, for $e\in E$:
+\begin{itemise}
+\item[$A_e$:] $e$ was initially red and remained so forever ($\Prob[A_e]=2^{-n}(1-p)^n$).
+\item[$C_e$:] $e$ was not initially red but became so.
+\end{itemise}
+Now if $C_e$ occurs, one can see that `$e$ blames $f$' (written $B_{ef}$), for some $f\in E$. That is:
+\begin{itemise}
+\item $e$ ends up red; $f$ starts out blue;
+\item $e\cap f=\{v\}$ --- the two edges share exactly one vertex, $v$;
+\item $v$ is the last vertex of $e$ to switch to red;
+\item when $v$ changed colour, $f$ was still blue.
+\end{itemise}
+Now suppose that $e,f$ are edges with $e\cap f=\{v\}$. We wish to bound $\Prob[B_{ef}]$. Fix the order $\sigma$ on the vertices, and calculate conditionally. Write $i$ (resp.\ $j$) for the number of vertices of $e$ (resp.\ $j$) which precede $v$ in $\sigma$. Then
+\[\Prob[B_{ef}|\sigma]\leq\left[\frac{1}{2}\cdot p\right] \left[2^{-n+1}\right] \left[(1-p)^j\right] \left[2^{-(n-i+1)}\right] \left[\left(\frac{1}{2}+\frac{1}{2}\cdot p\right)^i\right]\]
+Here the factors are, in order:
+\begin{enumerate}\squishlist
+\item $v$ must have `blue' and `recolour';
+\item all other vertices of $f$ must have `blue';
+\item the vertices of $f$ which precede $v$ must have `don't recolour';
+\item the vertices of $e$ after $v$ must have `red';
+\item the vertices of $e$ before $v$ must either have `red' or have both `blue' and `recolour'.
+\end{enumerate}
+In particular, we have
+\[\Prob[B_{ef}]\leq 2^{1-2n}p\Exp[(1+p)^i(1-p)^j].\]
+The result will follow if we can see that the expectation is at most one. This is so, by the following trick. Let $I$ be a set of size $n-1$, and let $\phi:T\to e-\{v\}$ and $\psi:T\to f-\{v\}$ be bijections. Let $I_i$ (resp.\ $J_i$) be the indicator random variable for the event that $\phi(i)$ (resp.\ $\psi(i)$) precedes $v$. Then
+\begin{alignat*}{2}
+\Exp[(1+p)^i(1-p)^j]&=\Exp\left[\prod (1+p)^{I_i}(1-p)^{J_i}\right]%&\qquad&\text{()}
+\\&=\prod \Exp\left[(1+p)^{I_i}(1-p)^{J_i}\right]\leq\prod1
+&\qquad&\text{(independence)}
+\end{alignat*}
+As there are less than $(2^{n-1}k)^2$ pairs of edges, the probability of any failure of type $C_e$ is at most $k^2p/2$. Similarly, the probability of any $A_e$ occurring is at most $k(1-p)^n/2$.
 \end{proof}
+\end{INT}
+\item \textbf{There's some stuff here about `continuous time', which I haven't read.}
+\end{itemise}
+\subsection*{The Probabilistic Lens: High Girth and High Chromatic Number}
+The \textbf{girth} of a graph $G$ is the size of its shortest cycle. We'll write $\alpha(G)$ for the independence number (the size of the largest independent set). The \textbf{chromatic number} $\chi(G)$ is the least number of colours needed to colour the vertices so that no edge is monochromatic.
+\begin{INT}[Erd\H{o}s (1959):]
+For all $k,l$ there exists a graph $G$ with $\text{girth}(G)>l$ and $\chi(G)>k$.
+\begin{proof}
+The idea is as follows. Fix $\theta<1/l$, let $p=n^{\theta-1}$, and let $G\sim G(n,p)$. This graph, for large $n$, often has few ($<n/2$) cycles shorter than $l$, and a small ($<(3\log n)/p$) independence number. Removing a vertex for each short cycle, we have a graph $G^*$ of size at least $n/2$ with girth at least $l$, and small independence number. As chromatic number and independence number are `inverse' ($\chi(G^*)\geq|G^*|/\alpha(G^*)$), we see that the resulting graph also has high chromatic number (for $n\gg0$).
 
+ Then if $X$ is the average number of cycles of length at most $l$:
+\[\Exp[X]=\sum_{i=3}^l\frac{n(n-1)\cdots (n-i+1)}{2\cdot i}p^i\leq \sum_{i=3}^l\frac{n^{\theta i}}{2i}=o(n)\textup{\qquad so that\qquad}\Prob[X\geq n/2]=o(1).\]
+Let $x=\lceil (3\log n)/p\rceil$, so that
+\[\Prob[\alpha(G)\geq x]\leq{n\choose x}(1-p)^{x\choose2}<\left[ne^{-p(x-1)/2}\right]^x=o(1)\]
+Then for $n\gg0$ some choice of $G$, we have $\textup{girth}(G^*)\geq l$, $|G^*|\geq n/2$, and $\alpha(G^*)\leq 3n^{1-\theta}\log n$. As $n$ grows even larger, we get $\chi(G^*)$ as large as we like.
+\end{proof}
+\end{INT}
+\end{chapter3}
+\begin{chapter4}
+\section*{\S4: The second moment}
+\begin{itemise}
+\item \begin{INT}[Chebyshev's Inequality:]
+$\Prob[|X-\mu|\geq\lambda\sigma]\leq\lambda^{-2}$.
+\begin{proof}
+$\sigma^2=\Exp[(X-\mu)^2]\geq\lambda^2\sigma^2\Prob[|X-\mu|\geq\lambda\sigma].$
+\end{proof}
+\item If $X=\sum X_i$, then $\Var[X]=\sum_{i,j}\Cov[X_i,X_j]$. If the $X_i$ are indicator random variables, then $\Var[X_i]\leq\Exp[X_i]$, so that $\Var[X]\leq\Exp[X]+\sum_{i\neq j}\Cov[X_i,X_j]$.
+\end{INT}
+\item Let $\nu(n)$ be \textbf{the number of distinct primes dividing $n$}. Then `almost all' $n$ have $\nu(n)$ `close to' $\log\log n$.
+\begin{INT}[Thm 4.2.1:] Let $\omega(n)\rightarrow\infty$ arbitrarily slowly. Then the number of $x$ in $\{1,\ldots,n\}$ such that
+\[|\nu(x)-\log\log n|>\omega(n)\sqrt{\log\log n}\]
+is $o(n)$.
+\begin{proof}
+Choose such $x$ at random. Let $X_p$ be the indicator random variable for $p|x$ for $p\leq n^{1/10}$ and let $X=\sum X_p$. Now
+\[\Exp[X_p]=1/p+O(1/n)\textup{\qquad so that\qquad}\Exp[X]=\sum_{p\leq M}\left(\frac{1}{p}+O\left(\frac{1}{n}\right)\right)=\log\log n+O(1).\]
+And similarly we can see that
+\[\sum_{p\leq M}\Var[X_p]=\log\log n+O(1)\textup{\qquad and\qquad}\Cov[X_p,X_q]\leq\frac{1}{n}\left(\frac{1}{p}+\frac{1}{q}\right).\]
+This shows that $\sum_{p\neq q}\Cov[X_p,X_q]\in[-o(1),o(1)]$, so that the covariances are negligible. Now we can apply Chebyshev's inequality:
+\[\Prob\left[|X-\log\log n|>\omega(n)\sqrt{\log\log n}\right]<\omega(n)^{-2}+o(1)\rightarrow0.\qedhere\]
+\end{proof}
+\moreINT[Thm 4.2.2] is a refinement of this result.
+\end{INT}
+\item \textbf{Non-negative integer valued random variables} have some handy properties. Let $Y$ and $X_1,X_2,\ldots$ be non-negative integer valued random variables, whose `limit' (meaningless) we denote by $X$. When we make a claim about $X$, we mean that the claim tends towards being corret as $n\rightarrow \infty$.
+\begin{INT}
+$\Prob[Y>0]\leq\Exp[Y]$.
+\moreINT If $\Exp[X_n]\rightarrow0$ then $X=0$ almost always.
+\moreINT[Thm 4.3.1:] $\Prob[Y=0]\leq\frac{\Var[Y]}{\Exp[Y]^2}$.
+\begin{proof}
+Chebyshev's inequality gives a stronger result:
+$\Prob[|Y-\mu|\geq\mu]\leq\frac{\sigma^2}{\mu^2}$.
+\end{proof}
+\moreINT[Cor 4.3.2 \& 4.3.3:] If $\Var[X_n]=o(\Exp[X_n]^2)$ then, almost always:
+\[X>0,\textup{\qquad and\qquad}X\sim \Exp[X].\]
+\begin{proof}
+The first is just a restatement of 4.3.1. For the second, note that we could have written, for any $\epsilon>0$, 
+$\Prob[|Y-\mu|\geq\epsilon\mu]\leq\frac{\sigma^2}{\epsilon^2\mu^2}\rightarrow0$.
+\end{proof}
+\end{INT}
+\item \textbf{Sums of indicator random variables:} Let $X=X_1+\cdots+X_m$ be a sum of indicator random variables for events $A_i$. Write $i\sim j$ \Iff $i\neq j$ and $A_i$ and $A_j$ are not independent, in which case, $\Cov[X_i,X_j]\leq\Prob[A_i\wedge A_j]$. Define
+\[\Delta:=\sum_{i\sim j}\Prob[A_i\wedge A_j],\textup{\qquad so that\qquad}\Var[X]\leq\Exp[X]+\Delta.\]
+\begin{INT}[Cor 4.3.4:]
+If $\Exp[X]\rightarrow\infty$ and $\Delta=o(\Exp[X]^2)$ then, almost always:
+\[X>0,\textup{\qquad and\qquad}X\sim \Exp[X].\]
+\end{INT}
+We say that the indicators $X_1,\ldots,X_n$ are \textbf{symmetric} if for each $i\neq j$ there's a measure-preserving autommorphism of the probability space sending $A_i$ to $A_j$. Then
+\[\Delta=\Delta^*\cdot\Exp[X],\textup{\qquad where\qquad}\Delta^*:=\sum_{j\sim i}\Prob[A_j|A_i]\textup{\quad(independent of $i$)}.\]
+\begin{INT}[Cor 4.3.5:]
+If $\Exp[X]\rightarrow\infty$ and $\Delta^*=o(\Exp[X])$ then, almost always:
+\[X>0,\textup{\qquad and\qquad}X\sim \Exp[X].\]
+In particular, this applies when ($\Exp[x]\rightarrow\infty$, and) sufficiently many of the $A_i$ and $A_j$ are independent (or have low probability), that conditioning on one of the $A_i$ doesn't change the expected number of events $A_j$ that occur significantly.
+\end{INT}
+\item %A \textbf{property of graphs} is a family of graphs closed under isomorphism. 
+A function $r$ is a \textbf{threshold function} for a property $P$ of graphs if whenever $p(n)\ll r(n)\ll q(n)$ then $G(n,p)$ almost always fails to have $P$, and $G(n,q)$ almost always has $P$.
 
+The \textbf{clique number} $\omega(G)$ of a graph $G$ is the maximal number of vertices of a clique, where a \textbf{clique} is a subgraph which is a complete graph.
+\begin{INT}[Thm 4.4.1:]
+The property $\omega(G)\geq4$ has threshold function $n^{-2/3}$.
+\end{INT}
+\begin{proof}
+For each $S$ a set of $4$ vertices, let $A_S$ be the event that $S$ is a clique, indicated by $X_S$. Let $X=\sum X_S$, so that $\Exp[X]={n\choose 4}p^6\sim n^4p^6/24$.
 
+\INDENT Suppose first that $p(n)\ll n^{-2/3}$. Then $\Exp[X]=o(1)$ so that $X=0$ almost surely.
 
+\INDENT Suppose instead that $p(n)\gg n^{-2/3}$, in which case $\Exp[X]\rightarrow\infty$. Then we'd like to show that $\Delta^*=o(\Exp[X])$, so that $X\sim \Exp[X]$ almost surely, completing the proof. But this is easy, as there are very few dependencies, as $S\sim S'$ \Iff $|S\cap S'|$ is 2 or 3, and for fixed $S'$, this happens for less than $n^2$ and $n$ $S'$ respectively. We find
+\[\Delta^*\leq n^2p^5+np^3=\left[\frac{1}{n^2p^1}+\frac{1}{n^3p^3}\right]n^4p^6=o(n^4p^6)=o(\Exp[X]).\qedhere\]
+\end{proof}
+\item The \textbf{density} $\rho(H)$ of a graph $H=(V,E)$ is simply $|E|/|V|$. We say that $H$ is \textbf{balanced} if every subgraph of $H$ has density no greater than that of $H$.
+\begin{INT}[Thm 4.4.2:]
+Let $H$ be a balanced graph with $v$ vertices and $e$ edges. Let $A(G)$ be the event that $H$ is a subgraph of $G$ (not necessarily induced). Then $p=n^{-v/e}$ is a threshold function for $A$.
+\begin{proof}
+For each $S$ a set of $v$ vertices, let $A_S$ be the event that $G|_S$ contains $H$ as a subgraph, and let $X_S$ be the indicator. Let $X=\sum X_S$.
+
+\INDENT To see that this almost never occurs for $p\ll n^{-v/e}$, we note that $\Exp[X]=o(1)$ in this case.
+
+\INDENT Suppose instead that $p\gg n^{-v/e}$. Then, like last time, $\Exp[X]=\Theta(n^vp^e)\rightarrow\infty$, and
+\[\Delta^*=\sum_{i=2}^{v-1}\sum_{|T\cap S|=i}\Prob[A_T|A_S]\]
+Now suppose that $|T\cap S|=i$ and we know that every edge possible appears in $S$. Any possible appearance of $H$ with vertices in $T$ (i.e.\ bijection of the vertices $T$ with those of $H$, of which there are $v!$ in some sense) has at most $ie/v$ edges wholly contained in $S$, as $H$ is balanced. Thus there is at most a probability of $p^{e-ie/v}$ that this happens. Thus we have $\Prob[A_T|A_S]=O(p^{e-ie/v})$. As there are $O(n^{v-i})$ choices of such $T$:
+\[\Delta^*=\sum_{i=2}^{v-1}O(n^{v-i}p^{e-ie/v})=\sum_{i=2}^{v-1}O(n^{v}p^{e})^{1-i/v}=o(n^vp^e)\text{\qquad(as $n^vp^e\rightarrow\infty$).}\]
+This is $o(\Exp[X])$, so we're done.
+\end{proof}
+\end{INT}
+\item \textbf{There's some more stuff here, to which I should come back.}
+\item \textbf{Clique number:} Fix edge probability $1/2$ and consider the clique number $\omega(G)$. \textit{The following is quite subtle.} Let $f(k)$ be the expected number of $k$-cliques, ${n\choose k}2^{-{k\choose2}}$. This drops below one at $k\sim 2\log_2n$.
+\begin{INT}[Thm 4.5.1:] Let $k=k(n)$ satisfy $k\sim 2\log_2n$ and $f(k)\rightarrow\infty$ [so that the average number of $k$-cliques is unbounded, but the average number of $rk$-cliques is less than one for some fixed $r$]. Then almost always $\omega(G)\geq k$.
+\begin{proof}
+For each $k$-set $S$, let $A_S$ be the event ``$S$ is a clique'', and $X_S$ the indicator. Let $X=\sum X_S$. We need to see that almost always $X>0$. Well $E[X]=f(k)\rightarrow\infty$, so we consider:
+\[\Delta^*=\sum_{T\sim S}\Prob[A_T|A_S]=\sum_{i=2}^{k-1}{k\choose i}{n-k\choose k-i}2^{-\left({k\choose2}-{i\choose2}\right)}\]
+Detailed calculation shows that $\Delta^*$ is $o(\Exp[X])$, and we're done.
+\end{proof}
+\moreINT[Cor 4.5.2:] There exists $k=k(n)$ so that $\Prob[\omega(G)=k\textup{ or }k+1]\rightarrow1$.
+\begin{proof}
+Let $k(n)$ be as large as possible so that $f(k(n))\geq\sqrt n$. Observe that for $k\sim 2\log_2 n$, $f(k+1)/f(k)=n^{-1+o(1)}$, so that for $n\gg0$, the function $f$ is decreasing by ratios of at least, say, $n^{.9}$. Then $f(k(n)+2)<n^{-.4}\rightarrow0$. Then, almost surely there is no $(k(n)+2)$-clique, and by 4.5.1 there is almost surely a $k(n)$-clique.
+\end{proof}
+\end{INT}
+\item \textbf{Distinct sums:} Let $f(n)$ denote the largest $k$ for which there is a set $\{x_1,\ldots,x_k\}\subset\{1,\ldots,n\}$ with \textbf{distinct sums}. That is, for which the sums $\sum_{i\in X}x_i$, for $S\subset\{1,\ldots,k\}$, are distinct.
+\begin{INT}[Thm 4.6.1:]
+$f(n)<\log_2n+\frac{1}{2}\log_2\log_2n+O(1)$.\footnote{Noting that $2^{f(n)}<nf(n)$, we can show that $f(n)<\log_2n+\log_2\log_2n+O(1)$.}
+\begin{proof}
+Fix a set $\{x_1,\ldots,x_k\}$ in $\{1,\ldots,n\}$ with distict sums, and let $X$ the sum of a random subset. Then:
+\[\mu:=\Exp[X]=\frac{x_1+\cdots+x_k}{2}\textup{\qquad and\qquad}\sigma^:=\Var[X]=\frac{x_1^2+\cdots+x_k^2}{4}\leq\frac{n^2k}{4}\]
+Chebyshev's inequality gives the left hand inequality, and as $X$ takes any given value with probability at most $2^k$, we have the right hand inequality, in:
+\[1-\lambda^{-2}\leq
+\Prob\left[|X-\mu|<\lambda n\sqrt{k}/2\right]\leq
+2^{-k}\left(\lambda n\sqrt{k}+1\right)\textup{\quad which implies\quad }
+n\geq\frac{2^k\left(1-\lambda^{-2}\right)-1}{\lambda\sqrt k}.\]
+This holds for any $\lambda>0$, and choosing any $\lambda>1$, for some fixed $\gamma$ we have $n\geq 2^kk^{-1/2}\gamma$. Now apply ``$\log_2(\DASH)+\frac{1}{2}\log_2\log_2(\DASH)$'' to both sides, and note that $\textup{RHS}>k-\textup{constant}$.
+\end{proof}
 
 \end{INT}
 \end{itemise}
-\end{chapter3}
+
+
+\end{chapter4}
+
 \end{document}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
