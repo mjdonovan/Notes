@@ -6,9 +6,9 @@
 \input{../macros.tex}
 \usepackage{makeidx}
 
-\def\excludeversion#1{\includeversion{#1}}
+%\def\excludeversion#1{\includeversion{#1}}
 
-\includeversion{prelims}
+\excludeversion{prelims}
 \excludeversion{chapter1}
 \excludeversion{chapter2}
 \excludeversion{chapter3}
@@ -179,7 +179,7 @@ Now for any $k$-element subset $A$ of $\Z/n\Z$ and a random $i\in \Z/n\Z$, the p
 \begin{chapter2}
 \section*{\S2: Linearity of expectation}
 \begin{itemise}
-\item A \textbf{hamiltonian path} is a path in a graph which visits each vertex exactly once. A \textbf{hamiltonian cycle} is such which returns to its starting vertex.
+\item A \textbf{Hamiltonian path} is a path in a graph which visits each vertex exactly once. A \textbf{Hamiltonian cycle} is such which returns to its starting vertex.
 \begin{INT}[Thm 2.1.1:]
 There's a tournament $T$ with $n$ players and at least $n!2^{-(n-1)}$ Hamiltonian paths.
 \begin{proof}
@@ -479,8 +479,20 @@ This holds for any $\lambda>0$, and choosing any $\lambda>1$, for some fixed $\g
 
 \end{INT}
 \end{itemise}
+\subsection*{The Probabilistic Lens: Hamiltonian Paths in a tournament}
+Let $P(n)$ denote the \textbf{maximum number of directed Hamiltonian paths in a tournament} of size $n$. We saw that $P(n)\geq n!/2^{n-1}$, and Szele showed that
+\[\frac{1}{2}\leq\lim_{n\rightarrow\infty}\left(\frac{P(n)}{n!}\right)^{1/n}\leq2^{-3/4}.\]
+We've already seen that the limit exceeds $1/2$, and we will see that the limit equals $1/2$ if we can prove the following.
+\begin{INT}[Thm 1:] There exists a positive constant $c$ such that for all $n$,
+$P(n)\leq cn^{3/2}\frac{n!}{2^{n-1}}$.
+\begin{proof}
+For any tournament $T$ with $n$ players, let $P(T)$ be the number of Hamiltonian paths, $C(T)$ be the number of Hamiltonian cycles, and $F(T)=\textup{Per}(A_T)$ be the number of (vertex disjoint) cycle covers, the permanent of the adjacency matrix. If $r_i$ is the outdegree of the $i^\textup{th}$ player, then $\sum r_i={n\choose2}$. By Br\'egman's theorem, we have $F(T)\leq\prod_{i=1}^n(r_i!)^{1/r_i}=:B(\underline{r})$, and we would like to make this bound independent of the $r_i$. It turns out that $B(\underline{r})$ is maximised when the $r_i$ are as close together as possible (i.e.\ all either $\lfloor{n\choose2}/n\rfloor$ or $\lceil{n\choose2}/n\rceil$), and we obtain (post tedium):
+\[C(T)\leq F(T)\leq (1+o(1))\frac{\sqrt\pi}{e\sqrt2}n^{3/2}\frac{(n-1)!}{2^n}.\]
+At this point we are finally called on to use the probabilistic method. Given $S$ an $n$-tournament, form $T$ a (random) $(n+1)$-tournament by adding a vertex to $S$ and directing the new edges randomly. Now $\Exp[C(T)]=P(S)/4$, so that there is some $T$ such that $C(T)\geq P(S)/4$. But by the above equation (which holds for $n$-tournaments), we get what we need:
+\[P(S)\leq 4C(T)\leq 4(1+o(1))\frac{\sqrt\pi}{e\sqrt2}(n+1)^{3/2}\frac{n!}{2^{n+1}}=O\left(n^{3/2}\frac{n!}{2^{n-1}}\right).\qedhere\]
 
-
+\end{proof}
+\end{INT}
 \end{chapter4}
 
 \end{document}
