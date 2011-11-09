@@ -21,16 +21,17 @@
 %Babytop Fall 2011
 \excludeversion{GeoffroyTopologicalHochschildHomology}
 \excludeversion{RuneBabytop}
+\excludeversion{SaulCrystallineCohomology}
 
-\def\excludeversion#1{\includeversion{#1}}
+%\def\excludeversion#1{\includeversion{#1}}
 
 %Juvitop Fall 2011
 \excludeversion{SaulSimplicialLocalisation}
 \excludeversion{AlexandreBousfieldLocalisation}
 \excludeversion{InnaSimplicalModelCats}
 \excludeversion{MichaelStableModelCats}
-\includeversion{SaulInftyOneCats}
-
+\excludeversion{SaulInftyOneCats}
+\includeversion{GeoffroyWeakAssociativityandCompleteSegalSpaces}
 
 \rfoot{\footnotesize Michael Donovan}
 \newcommand{\KanSemResponse}[1]
@@ -879,8 +880,169 @@ If $\calC$ is fibrant, then $N^h(\calC)$ is a QC, and the coherent nerve is the 
 
 \pagebreak
 \end{SaulInftyOneCats}
+\begin{SaulCrystallineCohomology}
+\KanSemResponse
+{``Crystalline Cohomology'' --- Saul Glasman --- 8/11/2011}
+\begin{abstract}
+Crystalline cohomology is the first robust headspace in which one can understand the $p$-torsion in the cohomology of a variety over a field of characteristic $p$, patching a notorious puncture in the great bicycle tyre that is Weil cohomology. I'll begin by laying out a manifesto which states what we want to achieve, and I'll go on to sketch an achievement of it, whose vivid chapters include the functoriality of the crystalline topos and the isomorphism with de Rham cohomology. If permitted by (i) time and (ii) the quantity of knowledge I can guzzle in the next twenty-four hours, I'll serve a portion of the magnificent de Rham-Witt complex, which explicitly computes crystalline cohomology.
+\end{abstract}
+Some references:
+\begin{enumerate}\squishlist
+\item Berthelot `Crystalline Cohomology'. Very technical and terrifying.
+\item Chambet-Loir `Cohomologie cristalline: a survey'.
+\end{enumerate}
+Throughout, we'll work over a finite field $\F_q$ of characteristic $p$.
+\subsection*{Etale Cohomology}
+This takes coefficients in $\Z/l$, $\Z_l$ and $\Q_l$, for $l\neq p$.
 
+Suppose that $q=p$ is prime, and that $X/\F_p$. We have a sequence of sheaves
+\[0\to\Z/p\to\calO_X\overset{1-F}{\to}\calO_X\to0\]
+this is exact, and by general malarchi,
+\[H^i_{et}(\calO_X)\cong H^i_{Zar}(\calO_X)\]
+Suppose that $X$ has dimension $n$. Then $H^i_{Zar}(\calO_X)=0$ for $i>n$. There's a LES including (in etale):
+\[H^{k-1}(\calO_X)\to H^k(\Z/p)\to H^k(\calO_X)\]
+Thus $H^i_{et}(X,\Z/p)=0$ for $i\geq n+2$. This is bad --- we want nontrivial stuff up to dimension $2n$.
 
+Suppose now that $k$ has characteristic zero. Then if $X/k$ is a scheme, deRham cohomology\footnote{$\mathbb{H}^*(X,\Omega^*_{X/k})$ (which can be recovered in the usual way...)} is a \emph{good} cohomology theory (i.e.\ a Weil cohomology theory, satisfying the requirements needed to prove the Weil conjectures).
 
+Idea: Maybe the deRham works over $\Z_p$ as well (not just for $\Q_p$, which we had until now).
 
+Given $X/\F_q$. Suppose we lift $X$ to a smooth $\Z_p$-scheme, exhibiting $X$ as a pullback (probably as formal schemes or something):
+\[\xymatrix{
+ X\ar[r]\ar[d]& \widetilde{X}\ar[d]\\
+ \ar[r]\spec\F_p& \spec\Z_p
+}\]
+Maybe $H^*_{dR}(\widetilde{X})$ is a good model for $H^*(X,\Z_p)$.
+\subsection*{Grothendieck's audacious idea:}
+Maybe:
+\begin{enumerate}\squishlist
+\item $H^*_{dR}(\widetilde{X})$ does not depend on $\widetilde{X}$.
+\item $H^*_{dR}(\widetilde{X})$ can be computed directly from $X$. For this, ``take the inverse limit over all potential lifts''.
+\end{enumerate}
+\subsection*{Why deRham cohomology fails in characteristic $p$}
+Suppose we're interested in the affine line over $\F_q$: $\spec\F_q[t]$. The deRham complex is
+\[0\to\F_q[t]\to\Omega^1_{\F_q[t]/\F_q}\to0\]
+Now $d(t^{qk})=kqt^{kq-1}=0$, so that $H^*_{dR}$ is infinite dimensional! That's bad.
+\subsection*{A new site}
+Let $k$ be of characteristic $0$, and $X$ be a scheme over $k$. Define a category $\calC$ whose objects are closed immersions $U\to T$ defined by an ideal sheaf, all of whose elements are locally nilpotent, where $U\subset X$ is Zariski open. Morphisms are to be commutative squares of these, with $U\to U'$ an open immersion:
+\[\xymatrix{
+%a1& a2& a3& a4& a5& a6\\
+%b1& b2& b3& b4& b5& b6\\
+ U& T\\
+ U'& T'\\
+%e1& e2& e3& e4& e5& e6\\
+%f1& f2& f3& f4& f5& f6\\
+}\]
+A cover is a collection
+\[\xymatrix{
+%a1& a2& a3& a4& a5& a6\\
+%b1& b2& b3& b4& b5& b6\\
+ U_i& T_i\\
+ U& T
+%e1& e2& e3& e4& e5& e6\\
+%f1& f2& f3& f4& f5& f6\\
+}\]
+such that $t_i\to T$ form a Zariski cover of $T$.
+
+In most sites, there's an object that represents the constant sheaf. In the etale or Zariski sites on $X$, $X$ represents the constant sheaf. Computing global sections is just homs out of the constant sheaf, so that
+\[\Gamma(\calF)=\calF(X).\]
+
+In this site, the infinitessimal site, we define
+\[\Gamma(\calF):=\varprojlim_{U\to T}\calF(U\to T)\]
+We have $u:X_{inf}\to X_{Zar}$, given by
+\[u_*(\calF)(U)=\varprojlim_{squares}\calF(U'\to T')\]
+
+\begin{exmp*}
+For $\Delta:X\to X\times X$, we have $J=\langle (f\otimes1-1\otimes f)\rangle$, and the closed subscheme defined by $J^2$ is an infinitessimal thickening, call it the tangent space $TX\to X\times X$.
+\end{exmp*}
+\begin{prop*}
+$Ru_*(\calO_X)\cong\Omega^*(X)$
+\end{prop*}
+\begin{defn*}
+Let $A$ be a ring and $J< A$ an ideal. A PD-structure on $J$ is a sequence of (set) maps $\gamma_i:J\to A$ such that
+\begin{enumerate}\squishlist
+\item $\gamma_0(x)=1$, $\gamma_1=\id$
+\item $\gamma_n(x)\in J$ for $n\geq1$
+\item $\gamma_n(x+y)=\sum \gamma_i(x)\gamma_j(y)$
+\item $\gamma_n(\lambda x)=\lambda^n\gamma_n(x)$
+\item $\gamma_n(x)\gamma_m(x)={m+n\choose n}\gamma_{m+n}(x)$
+\item $\gamma_m(\gamma_n(x))=\frac{(m+n)!}{m!(n!)^m}\gamma_{mn}(x)$
+\end{enumerate}
+\end{defn*}
+\begin{exmp*}
+5 shows that $n!\gamma_n(x)=x^n$ for all $n$. If $\Z\subset A$, must have $\gamma_n(x)=x^n/n!$.
+\end{exmp*}
+\begin{exmp*}
+If $A=\Z_p$ and $J=(p)$. Then for $a\in(p)$, $a^n/n!\in\Z_p$.
+\end{exmp*}
+\begin{exmp*}
+Suppose $A=(\Z/4)$ and $J=(2)$. Set
+\[\gamma_n(2)=\begin{cases}
+1,&\textup{if }n=0;\\
+2,&\textup{if }n\textup{ is a power of 2}.
+\\0,&\textup{otherwise}
+%\\,&\textup{if }
+%\\,&\textup{if }
+\end{cases}\]
+\end{exmp*}
+\begin{defn*}
+A PD-thickening is a closed immersion $U\to T$ defined by an ideal $J$ together with a PD-structure on $J$. (The notion of PD-structure sheafifies easily.)
+\end{defn*}
+\begin{exmp*}
+\begin{enumerate}\squishlist
+\item $\spec\F_p\to\spec(\Z/p^n)$ has this form
+\item $\Delta:X\to X\times X$ defined by $J$. Can add PDs to $J$ in a universal way to give a PD-thickening of $X$, called $\calP$.
+\end{enumerate}
+
+By convention, I'll write $(\Z/p^n\Z)=W_n$, and define the cristalline site ($X/W_n$), whose objects are
+\[\xymatrix{
+%a1& a2& a3& a4& a5& a6\\
+%b1& b2& b3& b4& b5& b6\\
+ U\ar[r]\ar[d]&\ar[d] T\\
+ \F_1\ar[r]&W_n
+%e1& e2& e3& e4& e5& e6\\
+%f1& f2& f3& f4& f5& f6\\
+}\]
+This has a structure sheaf $\calO_X$, which evaluates on such a square as $\gamma(\calO_T)$. This has a map to the Zariski site, and we could push $\calO_X$ down to there.
+\end{exmp*}
+The cristalline topos $(X/W_n)_{cris}$ is the category of sheaves on this site, and given something like this, we can define cohomology. We can define
+\[H^i(X/W_n)=H^i((X/W_n)_{cris},\calO_X)\textup{ and }H^i(X/W)=\varprojlim H^i(X/W_n)\]
+Note that the sites are not functorial, by the topoi are.
+\begin{thm*}[Berthelot]
+If $Z/W_n$ is a smooth lift of $X$, then there's a canonical isomorphism
+\[H^i(Z/W_n)\to H^i_{dR}(Z)\]
+\end{thm*}
+\begin{proof}
+We're going to need a geometric approximation to the constant sheaf. I'll define the Cech-Alexander simplicial scheme $\check{C}A^*(Z)$ with terms:
+\[\check{C}A^m(Z)=Z^{m+1}.\]
+We give divided power structures somehow. Should stop --- we'll just say that as the set of maps from $X$ into this simplicial scheme is contractible, it's enough like the final object to compute cohomology.
+\end{proof}
+
+\pagebreak
+\end{SaulCrystallineCohomology}
+\begin{GeoffroyWeakAssociativityandCompleteSegalSpaces}
+\KanSemResponse
+{``Weak Associativity and Complete Segal Spaces'' --- Geoffroy Horel --- 9/11/2011}
+\begin{abstract}
+In this talk I will try to show that the category $\Delta$ arises very 
+naturally when we want describe homotopy coherent associativity in 
+simplicial categories. After quickly reviewing the equivalence between 
+Segal $\Delta$-spaces and $A_\infty$-spaces, I will describe a model 
+category discovered by Rezk on simplicial spaces that is Quillen 
+equivalent to the model category of quasi-categories. The fibrant 
+objects are called complete Segal spaces and provide another model for 
+$(\infty, 1)$-categories. If there is enough time I will also talk 
+about the higher dimensional version that gives a model for $(\infty, 
+n)$-categories.
+\end{abstract}
+
+\pagebreak
+\end{GeoffroyWeakAssociativityandCompleteSegalSpaces}
 \end{document}
+
+
+
+
+
+
+
