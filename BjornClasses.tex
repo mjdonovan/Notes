@@ -5,14 +5,14 @@
 \documentclass[11pt]{article}
 \input{../macros.tex}
 
-\def\excludeversion#1{\includeversion{#1}}
+%\def\excludeversion#1{\includeversion{#1}}
 
 \excludeversion{Oct18}
 \excludeversion{Oct20}
 \excludeversion{Oct25}
 \excludeversion{Oct27}
 \excludeversion{Nov1}
-\includeversion{Nov3}
+\excludeversion{Nov3}
 \includeversion{Nov8}
 \includeversion{Nov10}
 
@@ -457,6 +457,122 @@ An even wider generalisation, in which we view $f_*$ as a relative version of gl
 Suppose that $Y$ is a noetherian scheme, $f:X\to Y$ is a proper morphism, and $\calF$ is a coherent $\calO_X$-module. Then $f_*\calF$ is a coherent $\calO_Y$-module.
 \end{prop*}
 \end{Nov3}
+\begin{Nov8}
+\section*{8 November}
+\subsection*{Some commutative algebra}
+\begin{prop*}
+For a one-dimensional noetheriana local domain, TFAE:
+\begin{enumerate}\squishlist
+\item[1.] $A$ is a DVR;
+\item[2.] $A$ is regular;
+\item[2'.] $\frakm$ is a principal ideal;
+\item[3] $A$ is integrally closed (in its field of fractions).
+\end{enumerate}
+\end{prop*}
+\noindent Note that 2 and 2' are equivalent by Nakayama's lemma.
+
+Suppose that $X$ is an integral $k$-variety\footnote{separated and of finite type} of dimension $n$.
+\begin{prop*}
+For $y\in X$, TFAE
+\begin{enumerate}\squishlist
+\item $y$ corresponds to a prime ideal of height $r$ in some open affine subscheme;
+\item $\dim\calO_{X,y}=r$;
+\item $y$ is the generic point of an integral subvariety $Y$ of dimension $n-r$.
+\end{enumerate}
+\end{prop*}
+\begin{defn*}
+If any of these equivalent conditions hold, then $y$ is called a point of codimension $r$ in $X$.
+\end{defn*}
+\begin{cor*}
+If $y$ is a point of codimension one in $X$, TFAE:
+\begin{enumerate}\squishlist
+\item $\calO_{X,y}$ is a DVR;
+\item $X$ is regular at $y$;
+\item $X$ is normal at $y$.
+\end{enumerate}
+\end{cor*}
+\noindent In this case, one can think of the valuation $v(f)$, for $f$ a rational function on $X$, as being ``the order of vanishing of $f$ along $Y$''.
+\begin{exmp*}
+Let $X=\A^2=\spec k[x,y]$. Let $Y$ be the $x$-axis, and $f=\frac{x^5}{y^3(x+y)}$. Then $\nu_Y(f)=-3$.\footnote{One should really note that $y$ generates the maximal ideal of the local ring.}
+\end{exmp*}
+\begin{defn*} The following conditions on an itegral $k$-variety increase in strength:
+\begin{itemise}
+\item $X$ is regular in codimension one if $X$ is regular at every point of codimension one.\footnote{ For an example, try $x^2_1+x_2^2+x_3^3=0$. This is normal, but not factorial.}
+\item $X$ is factorial \Iff for all $x\in X$, $\calO_{X,x}$ is a UFD.\footnote{For rings, being factorial is \textbf{not} a local property. Suppose you have the affine part of an elliptic curve. Then this is locally factorial, but the affine coordinate ring is \textbf{not} a UFD --- the class group is not trivial, and relates to the rational points of the curve.}
+\item $X$ is normal \Iff for all $x\in X$, $\calO_{X,x}$ is integrally closed \Iff $\calO_X(U)$ is integrally closed
+\end{itemise}
+Smooth implies regular implies factorial implies normal implies regular in codimension one.
+\end{defn*}
+\begin{thm*}[Normalisation; c.f.\ Ex.\ I.3.17, II.3.17]
+Let $X$ be an integral scheme. Then
+\begin{enumerate}\squishlist
+\item There is a `normalisation' $f:\widetilde{X}\to X$ with $\widetilde{X}$ normal, $f$ dominant, with a universal property for dominant maps to $X$ from a normal scheme.
+\item $\widetilde{X}$ is unique up to isomorphism over $X$.
+\item $f$ is surjective
+\item If $X$ is of finite type over $k$, then $f$ is a finite birational morphism.
+\item If $U\subset X$ is a nonempty affine open subscheme, then 
+\[\xymatrix{
+%a1& a2& a3& a4& a5& a6\\
+%b1& b2& b3& b4& b5& b6\\
+ \ar[r]^\simeq\ar[d]f^{-1}U& \spec\widetilde{A}\ar[d]\\
+ \ar[r]^\simeq U& \spec A\\
+%e1& e2& e3& e4& e5& e6\\
+%f1& f2& f3& f4& f5& f6\\
+}\]
+In fact, this can be done with the $\SPEC$ construction.
+\end{enumerate}
+\end{thm*}
+\subsection*{Resolution of singularities}
+Given an integral $k$-variety $X$, can one find a birational proper morphism $X'\to X$ such that $X'$ is regular?
+\begin{exmp*}
+Let $X=\spec\frac{k[x,y]}{(y^2-x^3)}\simeq\spec k[t^2,t^3]$ be the cuspidal cubic. Using the second presentation, one sees that the ring is not integrally closed, as $t$ misses out. Thus $X$ is not normal, and so $X$ is not regular. To resolve, one takes the map from $\spec k[x]$, which is the normalisation. Note that this is proper, as it is a finite morphism!
+\end{exmp*}
+\subsubsection*{Status}
+\newcommand{\tick}{yes}
+\begin{tabular}{c||c|c|c}
+$\dim X$&char 0& char $p>0$&method\\\hline\hline
+0&\tick&\tick\\\hline
+1&Newton&\tick&(use the normalisation)\\\hline
+2&\tick&Abhyankar 1956&(just blow everything up)\\\hline
+3&Hironaka 1964&Abhyankar (char$>6)$\\
+&&Cossart \& Piltant 2009 (all chars)\\\hline
+4&Hironaka 1964&?
+\end{tabular}
+\subsection*{``The amazing synthesis''}
+\begin{thm*}
+Fix a field $k$. Define categories
+%\[\calP:=\{\textup{regular projective integral $k$-varieties of dimension one with nonconstant morphisms}\}\]
+%\[\calI:=\{\textup{integral $k$-varieties of dimension one, with dominant rational maps}\}\]
+%\[\calF:=\{\textup{f.g.\ field extensions $K$ of $k$ of transcendene degree one, with $k$-algebra homomorphisms}\}\]
+%\[\calR:=\{\textup{compact Riemann surfaces with nonconstant homolmorphic maps}\}\]
+\begin{alignat*}{2}
+\calP&:=\{\textup{regular projective integral $k$-varieties of dimension one with nonconstant morphisms}\}%&\qquad&\text{()}
+\\\calI&:=\{\textup{integral $k$-varieties of dimension one, with dominant rational maps}\}%&\qquad&\text{()}
+\\\calF&:=\{\textup{f.g.\ field extensions $K$ of $k$ of transcendene degree one, with $k$-algebra homomorphisms}\}%&\qquad&\text{()}
+\\\calR&:=\{\textup{compact Riemann surfaces with nonconstant homolmorphic maps}\}%&\qquad&\text{()}
+%\\&=%&\qquad&\text{()}
+\end{alignat*}
+Note that $\calR$ is only defined when $k=\C$. Then there are equivalences
+\[\xymatrix{
+%a1& a2& a3& a4& a5& a6\\
+%b1& b2& b3& b4& b5& b6\\
+ \calP\ar[rd]_{\textup{analytic space}}\ar[r]^{(*)}& \calI\ar[r]& \calF\\
+&\calR\ar[ur]_{\textup{field of meromorphic functions}}
+%e1& e2& e3& e4& e5& e6\\
+%f1& f2& f3& f4& f5& f6\\
+}\]
+\end{thm*}
+\begin{proof}
+Lets start with $(*)$. It's a functor, as every nonconstant morphism between curves must contain an open subset (by Chevalley's theorem on constructible sets, as there are not so many constructible sets on a curve: they're all finite or cofinite).
+
+Now let's check fullness. Suppose that $X,Y$ are regular projective curves (today meaning integral $k$-varieties of dimension one). The question is: ``does every dominant rational map $X\to Y$ extend to a morphism?'' The answer is yes (\emph{using the valuative criterion for properness!!!})!
+
+For faithfulness, note that if $f,g:X\to Y$ are two nonconstant morphisms which are equal as rational maps, then $f=g$, and $Y$ is separated and $X$ is reduced.
+
+For essential surjectivity, given an integral curve $X$, we need a regular projective curve $X'$ birational to $X$. First, replace $X$ by an affine open subscheme to assume that $X\subset\A^n$ is affine. Replace $X$ by its projective closure to assume that $X$ is projective. Take the normalisation $\widetilde{X}\to X$, which is finite and thus proper, so that $\widetilde{X}$ is proper over $k$. Thus $\widetilde{X}$ is normal, hence regular in codimension one, hence regular. Now we can apply Chow's lemma, which says that proper maps are almost projective, and in this case \emph{already} projective.
+\end{proof}
+
+\end{Nov8}
 
 \end{document}
 
