@@ -13,7 +13,7 @@
 \excludeversion{MarkusHopfInvOnePractice}
 \excludeversion{KrishanuAdamsStableHtpyPractice}
 \excludeversion{JeromyQuillenPractice}
-\includeversion{JandrGammaPractice}
+\excludeversion{JandrGammaPractice}
 
 % Reading responses
 \excludeversion{SerreHomSingFibSpace}
@@ -26,6 +26,7 @@
 \excludeversion{AtiyahSegalEqKthy}
 \excludeversion{AdamsStableHtpy}
 \excludeversion{QuillenSpectrumOfEqCohomology}
+\excludeversion{SegalCategoriesAndCohomologyTheories}
 
 %\def\excludeversion#1{\includeversion{#1}}
 
@@ -37,7 +38,7 @@
 \excludeversion{MarkusHopfInvOne}
 \excludeversion{KrishanuAdamsStableHtpy}
 \excludeversion{JeromyQuillen}
-
+\includeversion{JandrGammaSpaces}
 
 % My talks
 \excludeversion{SteenrodTalk}
@@ -1901,7 +1902,7 @@ The neat idea --- from a category with coproducts, one can construct a spectrum.
 
 there are three ways to motivate the constructions. Let's talk about the first. Let $X$ be a set. Then I can define the free monoid on $S$, $\coprod X^n/\Sigma_n$. Similarly, we could ask for the free commutative algebra on a vectorspace $V$.
 
-Given vector spaces, I can embed them in a homotopy theory (cahin complexes) and then instead take homotopy orbits, so I might take, for $X$ a space:
+Given vector spaces, I can embed them in a homotopy theory (chain complexes) and then instead take homotopy orbits, so I might take, for $X$ a space:
 \[M:=\coprod E\Sigma_n\times X^n/\Sigma_n.\]
 [This is the underlying space of a $\Gamma$-space, and we'll see what the multiplication should be later, but you can see it derectly...] This is so good, that it's $A_\infty$. That is, the associahedrons can be filled for all multiplications.
 
@@ -1993,6 +1994,135 @@ There's an adjunction $B:\Gamma\Top\leftrightarrow \scrS:A$.
 
 \pagebreak
 \end{JandrGammaPractice}
+\begin{JandrGammaSpaces}
+\KanSemResponse
+{Jandr's talk on $\Gamma$-categories}
+The neat idea --- from a category with coproducts, one can construct a spectrum.
+
+
+\subsection*{$\Gamma$-categories}
+A $\Gamma$-category is a functor $\calC:\Gamma^{\op}\to\Top\Cat$ ($\Top\Cat$ being the category of topological categories) satisfying the axioms:
+\begin{enumerate}\squishlist
+\item $A(\underline{0})\simeq*$
+\item $A(n)\to A(1)^n$ is a homotopy equivalence, being induced by $i_k:1\to n$ sending $\{1\}\mapsto\{k\}$.
+\end{enumerate}
+
+
+
+
+there are three ways to motivate the constructions. Let's talk about the first. Let $X$ be a set. Then I can define the free monoid on $S$, $\coprod X^n/\Sigma_n$. Similarly, we could ask for the free commutative algebra on a vectorspace $V$.
+
+Given vector spaces, I can embed them in a homotopy theory (chain complexes) and then instead take homotopy orbits, so I might take, for $X$ a space:
+\[M:=\coprod E\Sigma_n\times X^n/\Sigma_n.\]
+[This is the underlying space of a $\Gamma$-space, and we'll see what the multiplication should be later, but you can see it derectly...] This is so good, that it's $A_\infty$. That is, the associahedrons can be filled for all multiplications.
+
+\subsection*{$\Gamma$-spaces}
+$\Gamma$ is the category whose objects are finite sets, and whose morphisms from $S\to T$ are functions on power sets $\calP(S)\to\calP(T)$ preserving disjoint unions. [$\Gamma^\op$ is actually just pointed finite sets!]
+
+A $\Gamma$-space is a contravariant functor $\Gamma^\op\to\Top$, with
+\begin{enumerate}\squishlist
+\item $A(\underline{0})\simeq*$
+\item $A(n)\to A(1)^n$ is a homotopy equivalence, being induced by $i_k:1\to n$ sending $\{1\}\mapsto\{k\}$.
+\end{enumerate}
+$A(1)$ is supposed to be the `underlying space' of a category-like thing.
+
+The composition law is defined up to homotopy, via
+\[\xymatrix{
+%a1& a2& a3& a4& a5& a6\\
+%b1& b2& b3& b4& b5& b6\\
+\ar[d]^{\simeq} A(2)\ar[r]^{\mu^*}& A(1)& c3& c4& 1\ar[r]& 2\\
+ A(1)^2& d2& d3& d4& \{1\}\ar@{|->}[r]& \{1,2\}\\
+%e1& e2& e3& e4& e5& e6\\
+%f1& f2& f3& f4& f5& f6\\
+}\]
+The associativity is encoded by the square
+\[\xymatrix{
+%a1& a2& a3& a4& a5& a6\\
+%b1& b2& b3& b4& b5& b6\\
+ 1\ar[d]\ar[r]&2\ar[d]\\
+ 2\ar[r]& 3
+%e1& e2& e3& e4& e5& e6\\
+%f1& f2& f3& f4& f5& f6\\
+}\]
+Now let $M$ be a topological abelian monoid. Let $A(S)=M^S$, and given $\theta\in\Gamma(S,T)$, write
+\[(\theta^*m)_s=\sum_{t\in \theta(s)}m_t.\]
+This gives a $\Gamma$-space.
+
+Now there's a functor $\Delta\to\Gamma$ which is an inclusion except at the  very bottom, where the two face maps get identified. $\Delta$ stores all the associativity formulae, while $\Gamma$ stores all commutativity and associativity formulae. The functor sends
+$[m]\mapsto \underline{m}$, and a map $f:[m]\to[n]$ to $\{i\}\mapsto \{j\in\underline{n}:f(i-1)<j\leq f(i)\}$.
+
+$\partial_j$ corresponds to multiplying the $j$ and $j+1$th element.
+\subsection*{Realisation and classifying spaces}
+Given $A:\Gamma^\op\to\Top$ a $\Gamma$-space, $|A|$ means the goemetric realisation as a simplicial space.
+
+Have
+\[\Gamma^\op\times\Gamma^\op\to\Gamma^\op,\text{ gvien by }(S,T)\mapsto S\times T\]
+Given a $\Gamma$-space $A$, get $\Gamma^\op\to\Top$ given by $S \mapsto |T\mapsto A(S\times T)|$, and we call this the classifying space $BA$, another $\Gamma$-space.
+
+$A(1)$, $BA(1)$, \ldots is a spectrum called $\mathbb{B}A$. We need structure maps, in particular a map $\Sigma A(1)\to BA(1)=|A|$. Now in fact, $A(0)\subset A(1)$ as a retract (using the unique map $1\to 0$), so we can choose any basepoint in $A(0)$, which is contractible. Some more comments happened in order to construct this map, and we have a functor
+\[\mathbb{B}:\Gamma\Top\to\scrS.\]
+\begin{prop*}
+If $A(1)$ is $k$-connected, then $BA(1)$ is $(k+1)$-connected. If $A(1)$ has a homotopy inverse (i.e.\ $A$ is group like, \Iff $\pi_1A$ is a group, since some technical condition holds), then $A(1)\weakequiv \Omega BA(1)$.
+\end{prop*}
+\noindent In particular, $\pi_0(B^nA(1))$ is a group for $n\geq1$, so that $B^nA(1)\weakequiv \Omega B^{n+1}A(1)$ is a weak equivalence, so that we almost get an $\Omega$-spectrum --- the only problem is the first map. Moreover, $A(1)\to\Omega BA(1)$ is the group completion (a general principle --- take $B$ then loops of a monoid).
+
+\begin{cor*}
+The functor $S\mapsto|\calC(S)|$ is a $\Gamma$-space.
+\end{cor*}
+If $\calC$ is a category with coproducts, one might hope to get a map $\coprod:\calC\times\calC\to\calC$. Given all the choices, you only get commutativity and associativity up to coherent isomorphisms. The trick is, if $S$ is a finite set, to let $\calC(S)$ be the category whose objects are coproduct-preserving functors $\calP(S)\to\calC$ (whiere the power set is a poset with inclusions the maps), and whose morphisms are isomorphisms of functors, i.e.\ natural equivalences.
+
+An object in $\calC(2)$ is $A\rightarrow C\leftarrow B$ where this is a coproduct diagram. I've got a map $\calC(2)\to \calC(1)$, which sends this to $\calC$. I've also got the map $\calC(2)\to\calC(1)^2$, which returns $(A,B)$. We've gotten
+\funcdef{\Gamma^\op}{\Cat}{S}{\calC(S)}
+This is a $\Gamma$-category, so we get a $\Gamma$-space, and thus a spectrum!
+\begin{exmp*}
+Let $G$ be a topological abelian group. Actually, make it strictly an abelian group. I have a $\Gamma$-space $A(S)=G^S$. Then $\mathbb{B}A=HG$, as $A(1)=G$, so that $\Omega BA(1)=G$, etc...
+\end{exmp*}
+\begin{exmp*}[Finite sets]
+Let the category of finite sets be $f\Set$.
+Choose a model with one object for each $n\geq0$. Then coproducts are unique. Then $F\Set(1)=\coprod\Sigma_n$ of the symmetric groups viewed as categories. Then $|F\Set(1)|=\coprod  B\Sigma_n$, which is a topological monoid (maybe it strictifies). Let's call the associated $\Gamma$-space $B\Sigma$ (assoc to the cat with coprods). 
+\end{exmp*}
+\begin{exmp*}
+Let $\calC$ be the category of finitely generated projective $R$-modules. Get a spectrum $K_R=\pi_*(K_R)$, algebraic $K$-theory.
+\end{exmp*}
+I'd like to construct a `free' functor $F:\Top\to\Gamma\Top$. It turns out that $FX(1)=|\calC_X(1)|=\coprod E\Sigma_n\times X^n/\Sigma^n$.
+
+There's a functor $\mathbb{A}:\scrS\to\Gamma\Top$, such that
+\[\mathbb{A}X(T)=\scrS(S^T,X)\]
+This is a $\Gamma$-space, since
+\[AX(n)=\scrS(S^{\times n},X)\simeq \scrS(S^{\vee n},X)=\scrS(S,X)^n=AX(1)^n.\]
+\begin{thm*}
+There's an adjunction $B:\Gamma\Top\leftrightarrow \scrS:A$.
+\begin{enumerate}\squishlist
+\item $BA$ is connective for all $A$;
+\item $AX$ is grouplike for all $X$;
+\item $A\to \mathbb{A}\mathbb{B}A$ is an equivalence (of $\Gamma$-spaces) for all grouplike $A$;
+\item$\mathbb{B}\mathbb{A}X\to X$ is an equivalence for all connective spectra $X$.
+\end{enumerate}
+\end{thm*}
+
+
+\pagebreak
+\end{JandrGammaSpaces}
+\begin{SegalCategoriesAndCohomologyTheories}
+\KanSemResponse
+{``Categories and Cohomology Theories'' --- G.\ Segal}
+I've read as must of this paper as I can get through in a short time, and have enjoyed it. It's nice to read a paper which is less `computational' and more `conceptual', after some of the more difficult reads of late. Perhaps you'd disagree with my choice of `words'.
+
+Obviously, everything in the paper fits together very well indeed. My difficulty at the present time is then, as always, to figure out how the definitions can be motivated. The realisation of a $\Gamma$-space is not too difficult, I suppose. It's as if we were gluing copies of $A(1)^n\times \Delta^n$ together along the maps given by multiplication, were $A(1)$ a monoid. If this were exactly what was being done, we'd end up with a space whose construction mimics that of the classifying space of the monoid via the bar construction. Instead, we use $A(n)$, a fatter version, and turn out something which is \emph{like} the bar construction for the space $A(1)$, but with some extra flab corresponding to the excess of $A(n)$ over $A(1)^n$.
+
+After saying this, it becomes easier to interpret the formula for the classifying space of a $\Gamma$-space $A$ ($BA$ is the $\Gamma$-space whose terms are $BA(S):=|T\mapsto A(S\times T)|$, for $S$ a finite set). Then $BA(1)$ is just the realisation of $A$, and the rest of the terms ($|S|>1$) are pretty relaxed about the process. Perhaps when one becomes deeply comfortable with the bar construction, and is thinking about de-strictifying the notion of monoid, this is actually not such a difficult definition to give.
+
+At this point, Segal notes that there's a natural map $SA(1)\to BA(1)$, which must correspond to the map $M\to\Omega BM$ when $M$ is a monoid. All this makes me wish I had more time at present to think hard about the strict case, but alas, I do not.
+
+Anyway, I'm getting a feel for these $\Gamma$-spaces fairly quickly, I suppose because they're not so difficult. I'll get a lot out of Michael's repeat performance tomorrow, and will pick this up again after quals. As I don't currently have much to say that's coherent, I'll stop here for now.
+%One notes that the `$\pi_0$ problem' that you explained in relation to the theory of operads is present here, too. The spectrum associated with a $\Gamma$-space $A$ is only an $\Omega$-spectrum \Iff $A(1)$ has a homotopy inverse --- it is grouplike.
+
+
+
+%Note that the $\pi_1$ problem is exactly summarised... you get an $\Omega$-spectrum iff its grouplikey, else you get a completion type thingo......
+\pagebreak
+\end{SegalCategoriesAndCohomologyTheories}
+
 \end{document}
 
 
