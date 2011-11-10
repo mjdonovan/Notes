@@ -23,7 +23,7 @@
 \excludeversion{RuneBabytop}
 \excludeversion{SaulCrystallineCohomology}
 
-%\def\excludeversion#1{\includeversion{#1}}
+\def\excludeversion#1{\includeversion{#1}}
 
 %Juvitop Fall 2011
 \excludeversion{SaulSimplicialLocalisation}
@@ -1035,6 +1035,109 @@ $(\infty, 1)$-categories. If there is enough time I will also talk
 about the higher dimensional version that gives a model for $(\infty, 
 n)$-categories.
 \end{abstract}
+\begin{defn*}
+A Segal space is a functor $\Delta^\op\to\scrS=\textup{Fun}(\Delta^\op,\mathsf{Set})$ which is Reedy fibrant and satisfies the Segal condition.
+\end{defn*}
+\begin{exmp*}
+Suppose that $\calC$ is a simplicial category. One can take its nerve, a simplicial space:
+\[N(\calC)_n=\coprod_{x_1,\ldots, x_n}\textup{map}_{\calC}(x_0,x_1)\times\cdots\times\textup{map}_{\calC}(x_{n-1},x_n)\]
+\end{exmp*}
+\begin{lem*}
+The category $\Delta^\op$ is isomorphic to the category $I$ whose objects are totally ordered finite sets with at least two elements, and whose morphisms are order preserving maps which preserve the smallest and largest elements.
+\end{lem*}
+\begin{proof}
+A fun exercise.
+\end{proof}
+The nerve has two properties:
+\begin{enumerate}\squishlist
+\item $(N\calC)_0$ is discrete.
+\item $\phi_n:(N\calC)_n\to(N\calC)_1\times_{(N\calC_0)}\cdots\times_{(N\calC_0)}(N\calC)_1$ is an isomorphism.
+\end{enumerate}
+To construct $\phi_n$, we give $n$ maps $\alpha_i:[n]\to[1]$.  We should think of $[n]$ as $\{0,\ldots,n+1\}$ (!). Then $\alpha_i$ sends $\{0,\ldots,i\}$ to $0$, and the rest to $1$. We can check that $d_0\alpha_i=d_1\alpha_{i-1}$, and so for any object $X_*\in s\scrS$, we obtain such a $\phi_n$.
+
+\begin{thm*}[Segal, May, Thomason]
+$\ho(A_\infty\mathsf{-spaces})$ is the same as the homotopy category of Reedy fibrant simplicial spaces satisfying the Segal condition with $X_0=*$.
+\end{thm*}
+\begin{defn*}
+A Segal space is a Reedy fibrant object of $s\scrS$ with $\phi_n:M_n\weakequiv W_1\times_{W_0}\cdots\times_{W_0}W_1$ a weak equivalence.
+\end{defn*}
+\begin{defn*}
+Let $W$ be a Segal space. Define $\textup{Ob}(W):=(W_0)_0$. For two objects $x,y$ of $W$, as (fact) $(d_0,d_1):W_1\to W_0\times W_0$ is a fibration, we define $\Map_W(x,y)$ to be the fibre over $(x,y)$ of $(d_0,d_1)$.  More generally, given $x_0,\ldots,x_n\in\textup{Ob}(W)$, we can form $(\delta_0,\ldots,\delta_{n}):W_1\to W_0^{n+1}$, a fibration (in the ordinary model structure on simplicial sets), and define
+\[\Map_W(x_0,\ldots,x_n)=\textup{the fiber above $(x_0,\ldots,x_n)$ of this map}.\]
+\end{defn*}
+Now
+\[\xymatrix{
+W_1\ar[rrd];[]&\\
+\Map_W(x_0,x_n)\xycofib[u]\ar[r];[]&\Map_W(x_0,\ldots,x_n)\xycofib[r]\ar[d]&W_n\ar[d]^{\phi_n}_{\sim,fibrat}\\
+&\Map(x_0,x_1)\times\cdots\times\Map(x_{n-1},x_n)\xycofib[r]&W_1\times_{W_0}\cdots\times_{W_0}W_1
+}\]
+The space of sections of $\phi_n$ is contractible, so that there is a well defined composition up to homotopy.
+\subsection*{The homotopy category of a Segal space}
+$\ho W$ has objects $(W_0)_0$, and $\Hom_{\ho W}=\pi_0\Map_W(x,y)$.
+\subsection*{Completeness}
+We need a functor $\mathsf{Cat}\to(\infty,1)\mathsf{-Cat}$. If $\calC$ is an ordinary category, then $\ob\calC$ is not an invariant under equivalence. Weak equivalence between Segal spaces then \emph{cannot} be levelwise.
+
+Taking the connected components of $\calC$ \emph{is} an invariant. More generally, suppose that $(\calC,W)$ is a pair with $\calC$ a category, and $W$ is a subcategory which contains all identities (like a set of weak equivalences). I'd like a `nerve' functor, taking as input such data, and returning a Segal space $N(\calC,W)$. Let's try to write the 0 space. It should be like the space of objects of $\calC$ up to weak equiv.
+\[N(\calC,W)_0:=N(W).\]
+\[N(\calC,W)_1=N\calD\]
+Where the objects of $\calD$ are arrows of $\calC$ (i.e.\ objects of $\calC^{[1]}$), and whose morphisms are commuting squares with verticals lying in $W$. I.e.\ arrows up to weak equivalences.
+
+More generally, $N(\calC,W)_{m,n}$ is the set of $n\times n$ grids whose points represent objects of $\calC$, with vertical arrows in $W$, and horizontal arrows in $\calC$. This is a bisimplicial set, by taking composition in each direction. This gives a construction for the nerve we wanted. One can check that $N(\calC,W)$ is a Segal space, and it is also \textbf{complete}.
+
+If $\calC$ is a category, can form $N(\calC,\textup{identities})$, and $N^h(\calC,\textup{isomorphism})$, which is the equivalence invariant notion.
+\subsection*{Completeness, ctd.}
+
+One has a map $W_1\to(\ho W)^{[1]}$.
+\begin{defn*}
+A point in $W_1$ is a homotopy equivalence if it is sent to an isomorphism in the homotopy category $(\ho W)$. $(W_1)_{hoequiv}\subset W_1$  is the union of all components of $W_1$ containing a homotopy equivalence.
+\end{defn*}
+We have $W_0\overset{s_0}{\to} W_1$, and there's a lift:
+\[\xymatrix{
+W_0\ar@{-->}[r]\ar[dr]&(W_1)_{hoequiv}\ar[d]\\
+&W_1
+}\]
+\begin{defn*}
+A Segal space is complete if this lift is a weak equivalence.
+\end{defn*}
+\begin{thm*}[Rezk]
+There is a model category structure on $s\scrS$ whose cofibrations are monomorphism, whose fibrant objects are complete Segal spaces, and whose weak equivalences are the maps $f:X\to Y$ such that for all complete Segal spaces $W$, $\Map(Y,W)\weakequiv\Map(X,W)$ is a weak equivalence.
+
+If $X,Y$ are complete Segal spaces, then $X\to Y$ is a weak equivalence \Iff it's a levelwise equivalence. If $X,Y$ are Segal spaces, we can characterise weak equivalences $f:X\to Y$ as the maps such that for all $x,y\in\ob(X)$, $\Map_X(x,y)\weakequiv\Map_Y(fx,fy)$ and the induced map $\ho X\to\ho Y$ is an equivalence of categories.
+\end{thm*}
+\begin{thm*}[Joyal, Tierney]
+$p_1:\Delta\times\Delta\to\Delta$ has a right adjoint $i_1$, where $i_1[m]=([m][0])$, taking opposites, one obtains an adjunction
+\[\xymatrix@R=.3cm{
+s\scrS  \ar@<.6ex>[r]^{p_1^*}&
+\scrS \ar@<.4ex>[l]^{i_1^*}
+}\]
+This is a Quillen equivalence between the model category of CSS and quasi-categories.
+\end{thm*}
+
+[All you need to know is the bottom row of your bisimplicial set, and you can reconstruct the rest.\[\xymatrix{
+\mathsf{Top}\ar[r]\ar[dr]&s\mathsf{Set}\ar[d];[]\\
+&s\mathsf{Top}
+}\]
+]
+
+Try Julie Bergner, `a survey of $(\infty,1)$-categories'.
+
+\[\xymatrix{
+A\ar[r]\ar[dr]&B\ar[d]\\
+&C
+}\]
+\[\xymatrix{
+X\ar[r]\ar[d]&Y\ar[d]\\
+Z\ar[r]&W
+}\]
+
+
+
+
+
+
+
+
+
 
 \pagebreak
 \end{GeoffroyWeakAssociativityandCompleteSegalSpaces}
