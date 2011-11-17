@@ -12,16 +12,14 @@
 \excludeversion{chapter1}
 \excludeversion{chapter2}
 \excludeversion{chapter3}
-\includeversion{chapter4}
-
-
+\excludeversion{chapter4}
+\excludeversion{chapter5}
+\includeversion{chapter6}
 
 %not yet:
 
-\includeversion{chapter5}
-\includeversion{chapter6}
+
 \includeversion{chapter7}
-\includeversion{chapter8}
 \includeversion{chapter9}
 
 
@@ -494,7 +492,212 @@ At this point we are finally called on to use the probabilistic method. Given $S
 \end{proof}
 \end{INT}
 \end{chapter4}
+\begin{chapter5}
+\section*{\S5: The local lemma}
+\begin{itemise}
+\item 
+Suppose that there is a criminal to be executed. There is a finite firing squad $\{F_i\}$, and each member $F_j$ is holding either a real or a fake gun, with probabilities $x_j$ and \smash{$1-x_j$}, independently of the other members. Each $F_j$ cannot tell whether or not his gun is real, but he can tell whether or not any other gun that he sees is real.
+
+\INDENT None of the members of the squad want to do the deed. They will only pull the trigger if they cannot see any other squad member who has a real gun. Thus the probability that $F_i$ kills the criminal is \smash{$x_i\prod_j(1-x_j)$}, where the product is taken over those $j$ such that $F_j$ is standing close enough for $F_i$ to see.
+
+\INDENT The probability that the criminal dies is of course at most $\prod(1-x_i)$, as if they all get fake guns, he'll survive.
+
+\item The Lov\'asz Local Lemma states that if the probability that $F_j$ kills the criminal are lower than $x_i\prod(1-x_j)$, then the probability that the criminal dies is still at most $\prod(1-x_i)$.
+\begin{INT}[Thm 5.1.1 {[the local lemma]}:]
+Let $A_1,\ldots,A_n$ be events. Let $D=(V,E)$ be a dependency digraph on $V=\{1,\ldots,n\}$, so that $A_i$ is mutually independent\footnote{An event $A$ is mutually independent of a collection $B_1,\ldots,B_r$ of events if for any subset $S\subset\{1,\ldots,n\}$, $\Prob[A]=\Prob[A|\bigvee_{i\in S} B_i]$. Note that the $B_i$ \textbf{do not} have to be mutually independent.} of the set of $A_j$ such that $(i,j)\notin E$. Suppose that there are $x_i\in[0,1)$ such that \smash{$\Prob[A_i]\leq x_i\prod_{(i,j)\in E}(1-x_j)$}. Then the probability that no $A_i$ occurs is at least \smash{$\prod(1-x_i)$}.
+\moreINT[A stronger version:]
+Let $A_1,\ldots,A_n$ be events, and let $D=(V,E)$ be \emph{any} digraph on $V=\{1,\ldots,n\}$. Make no independence assumptions. Suppose that for each $i$, and every set $S$ of vertices not hit by $i$, we have
+\[\Prob\left[A_i\,\middle|\,\bigwedge_{s\in S}\overline{A_s}\right]\leq x_i\prod_{(i,j)\notin E}(1-x_j).\]
+Then  the probability that no $A_i$ occurs is at least \smash{$\prod(1-x_i)$}.
+
+
+\moreINT[Cor 5.1.2 {[the symmetric case]}:]
+Let $A_1,\ldots,A_n$ be events. Suppose that each is mutally independent of a set of all but $d$ others, and $\Prob[A_i]\leq p$. Then if $ep(d+1)\leq 1$, there is a nonzero probability that none of the \smash{$A_i$} occurs.
+\begin{proof}
+Take \smash{$x_i=\frac{1}{d+1}$}. Need \smash{$p\leq \frac{1}{d+1}\left(1-\frac{1}{d+1}\right)$}.
+\end{proof}
+\end{INT}
+\item \textbf{Property B:} Recall that a hypergraph has property B if its vertices are two-colourable.
+\begin{INT}[Thm 5.2.1:]
+Let $H$ be a hypergraph in which each edge has at least $k$ elements, and each edge meets at most $d$ other edges. If $e(d+1)\leq2^{k-1}$ then $H$ has property B.
+\begin{proof}
+The events are that a given edge is monochromatic. They occur with probability at most $2^{1-k}$. Each depends on at most $d$ others.
+\end{proof}
+\moreINT[Corollary:] For $k\geq9$, and $k$-uniform $k$-regular\footnote{A hypergraph is $k$-uniform if each edge has $k$ vertices, and $k$-regular if each vertex has degree $k$.} hypergraph has property B.
+\begin{proof}
+For each edge meets at most $k(k-1)$ other edges, so we can take $d=k(k-1)$ above.
+\end{proof}
+\end{INT}
+\item \textbf{$k$-colorings of the reals:} Given a $k$-colouring of $\R$, call $T\subset\R$ \textbf{multicolored} if it contains elements of every colour.
+\begin{INT}[Thm 5.2.2:]
+Let $m$ and $k$ be two positive integers satisfying (think: fix $k$, choose $m$ large enough)
+\[e(m(m-1)+1)k\left(1-k^{-1}\right)^m\leq1.\]
+Then for any set $S$ of $m$ real numbers there is a $k$-coloring so that each translation $x+S$ is multicolored.
+\begin{proof}
+First, fix finite $X\subset\R$, and find a colouring such that the translations $x+S$ ($x\in X$) are multicoloured. Colour every element of \smash{$\bigcup_{x\in X}(x+S)$} at random, and let $A_x$ be the event that the translate by $x$ fails to be multicoloured. Each $A_x$ is independent of all but at most $m(m-1)$ of the others. Note that $\Prob[A_x]\leq k\left(1-k^{-1}\right)^m$, and apply the lemma.
+
+\INDENT Extend this to $X=\R$ by the following argument. The set $\{1,\ldots,k\}^{\R}$ is compact, and the set $C_x$ of colourings such that $x+S$ is multicoloured is closed. [A basis of open sets consists of the sets of colourings whose values are prescribed at a given bunch of places, so that $C_x$ and its complement are both a finite union of open subsets.] As any finite intersection of the $C_x$ is nonempty, so is the intersection of all $C_x$.
+\end{proof}
+\end{INT}
+\item \textbf{Lower bounds for Ramsey numbers:} The Ramsey Number $R(k,l)$ is the least $n$ such that any two-colouring of the edges of $K_n$ contains a red $K_k$ of blue $K_l$.
+\begin{INT}[Prop 5.3.1:]
+If $e{k\choose 2}{n-2\choose k-2}\cdot2^{1-{k\choose2}}<1$ then $R(k,k)>n$. In particular \[R(k,k)>(\sqrt2/e)(1+o(1))k2^{k/2}.\]
+\begin{proof}
+For $S$ a set of $k$ vertices, let $A_S$ be the event that the induced complete graph is monochromatic. $\Prob[A_S]=2^{1-k}$, and $A_S$ is independent of all but less than ${k\choose 2}{n-2\choose k-2}$ other events (this being the total number of `dependencies' any edge of $S$ has with other events).
+\end{proof}
+This was only a small improvement, as there are so many dependencies --- \smash{${k\choose 2}{n-2\choose k-2}$} is a large proportion of the total number of events. One does better with such numbers as $R(k,3)$.
+\end{INT}
+\item %\textbf{Coverings: $k$-fold and indecomposable:}
+A family $\calF$ of open unit balls in $\R^3$ is a \textbf{$k$-fold covering} if every point is contained in $k$ balls. It is \textbf{decomposable} if it can be partitioned into two pairwise disjoint families which cover $\R^3$.
+\begin{INT}
+One might be surprised to hear that it is harder to decompose $k$-fold coverings which are not too wasteful than ones which are fairly regular:
+\moreINT[Thm 5.4.1:]
+Suppose that $\calF$ is a $k$-fold covering. Suppose that no point of $\R^3$ is contained in more than $t$ balls. If $et^32^{18}/2^{k-1}\leq1$, then $\calF$ is decomposable.
+\begin{proof}
+The idea will be to randomly colour the family, and for all $x\in\R^3$, let $A_x$ be the event that $x$ is not contained in a ball of each colour. We can only do this for finite collections of $x\in\R^3$ at a time, but can then extend our result to all points at once by a compactness argument.
+
+\INDENT Of course $\Prob[A_x]\leq1/2^{k-1}$. We thus only need to show that the event $A_{x_i}$ is mutually independent from all but $t^32^{18}-1$ of the other events $A_{x_j}$. We can of course assume that none of the events $A_{x_1},\ldots,A_{x_n}$ coincide, which occurs when two of the $x_i$ are contained in exactly the same balls.
+
+\INDENT Now $t^32^{18}=(4^3t)^3$ is an upper bound for the number of regions $4^3t$ unit balls can cut $\R^3$ into. Any ball relevant to $x_i$ lies entirely within the ball of radius 4 around $x_i$, which has volume $4^3$ times the volume of a unit ball, and is being covered at most $t$-fold.
+\end{proof}
+\end{INT}
+\item \textbf{The linear arboricity of graphs:} the least number of linear forests in a graph $G$ required in order to cover the edges is called the \textbf{linear arboricity} $\textup{la}(G)$ of $G$.
+\begin{INT}[The linear arboricity conjecture:]
+The linear arboricity of every $d$-regular graph is $\lceil (d+1)/2\rceil$.
+\end{INT}
+\item \textbf{Latin transversals:} Let $A$ be an $n\times n$ integer matrix. A \textbf{latin transversal} of $A$ is a permutation $\pi$ such that the entries $a_{i\pi(i)}$ are distinct.
+\begin{INT}[Thm 5.6.1:]
+Suppose that $k\leq(n-1)/(4e)$ and suppse that no integer appears in more than $k$ entries of $A$. Then $A$ has a latin transversal.
+\begin{proof}
+\textbf{Read me.}
+\end{proof}
+\end{INT}
+\item \textbf{The algorithmic aspect: Read me.}
+\end{itemise}
+\subsection*{The Probabilistic Lens: Directed Cycles}
+Let $D$ a a simple digraph with minimum outdegree $\delta$ and maximum indegree $\Delta$.
+\begin{INT}[Thm 1:]
+If $e(\Delta\delta+1)(1-k^{-1})^\delta<1$ then $D$ contains a (simple) cycle of length a multiple of $k$.
+\end{INT}
+\begin{proof}
+Restrict to a subgraph $(V,E)$ of outdegree precisely $\delta$. The idea will be to $k$-colour the graph by a function \smash{$c:V\to\Z/k\Z$}, and show that with nonzero probability for all $v\in V$ there's $(v,v')\in E$ such that $c(v')=c(v)+1$.
+
+\INDENT For each $v\in V$, let $A_v$ be the event that there is no such $v'$. $A_v$ is mutually independent of the set of $A_u$ such that $v$ doesn't see $u$, and $v$ and $u$ can't both see any third vertex. $v$ sees $\delta$ vertices, each of which is seen by at most $\Delta-1$ others. So there are at most $\delta+\delta(\Delta-1)$ events of which $A_v$ is not mutually independent. Note $\Prob[A_v]=(1-k^{-1})^\delta$ and apply the local lemma.
+\end{proof}
+\end{chapter5}
+\begin{chapter6}
+\section*{\S6: Correlation Inequalities}
+\begin{itemise}
+\item Let $G\sim G(n,p)$ be a random graph. Let $H$ be the event that $G$ is \textbf{hamiltonian} (admits a hamiltonian cycle). Let $P$ be the event that $G$ is planar. It would seem that $\Prob[P|H]\leq\Prob[P]$, so that $\Prob[P\sprod H]\leq\Prob[P]\Prob[H]$.
+
+\INDENT This is in fact true, and a special case of the FKG inequality. Another example is the following. Suppose that $\calA,\calB$ are order ideals of $\{1,\ldots,n\}$. Then $|\calA\cap \calB|\cdot2^n\geq|\calA|\cdot |\calB|$.
+\item \textbf{The four functions theorem:} let $N=\{1,\ldots,n\}$. For a function $\phi:\calP(N)\to\R^+$, define $\phi:\calP(\calP(N))\to\R^+$ by $\calA\mapsto\sum_{A\in\calA}\phi(A)$. That is, given a function on subsets of $N$, extend it to sets of subsets by summation.
+\begin{INT}[Thm 6.1.1 {[four functions]}:] Let $\alpha,\beta,\gamma,\delta$ be functions $\calP(N)\to\R^+$, and suppose that
+\[\alpha(A)\beta(B)\leq\gamma(A\cup B)\delta(A\cap B)\textup{\quad for all $A,B\in\calP(N)$}.\]
+Then
+\[\alpha(\calA)\beta(\calB)\leq\gamma(\calA\cup \calB)\delta(\calA\cap \calB)\textup{\quad for all $\calA,\calB\subseteq\calP(N)$}.\]
+\end{INT}
+Actually this result is better stated on finite distributive lattices. A \textbf{lattice} is a poset in which any two elements have a unique minimal upper bound, the \emph{meet} $x\vee y$, and a unique maximal lower bound, the \emph{meet} $x\sprod y$. A lattice is \textbf{distributive} if 
+\[x\sprod(y\vee z)=(x\sprod y)\vee (x\sprod z)\textup{\qquad or equivalently\qquad }x\vee(y\sprod z)=(x\vee y)\sprod (x\vee z).\]
+As \emph{every finite distributive lattice is a sublattice of some $\calP\{1,\ldots,n\}$}:
+\begin{INT}[Cor 6.1.2 {[four functions]}:] Let $\alpha,\beta,\gamma,\delta$ be functions $L\to\R^+$, for $L$ a finite distributive lattice. Suppose that
+\[\alpha(A)\beta(B)\leq\gamma(A\vee B)\delta(A\sprod B)\textup{\quad for all $A,B\in\calP(N)$}.\]
+Then
+\[\alpha(\calA)\beta(\calB)\leq\gamma(\calA\vee \calB)\delta(\calA\sprod \calB)\textup{\quad for all $\calA,\calB\subseteq\calP(N)$}.\]
+\moreINT[Cor 6.1.3:] For $X,Y\subset L$, where $L$ is a finite distributive lattice:
+\[|X|\cdot|Y|\leq|X\vee Y|\cdot|X\sprod Y|.\]
+\begin{proof}
+Set the four functions to be identically 1.
+\end{proof}
+\moreINT[Cor 6.1.4:]
+Let $\calA$ be a family of subsets of a finite set $N$. Then $|A\setminus A|\geq|A|$, where we define $|A\setminus A|=\{F\setminus F'\,:\, F,F'\in\calA\}$.
+\begin{proof}
+Let $L$ be the lattice of subsets of $N$. Let $\calB=\{N\setminus A\,:\, A\in\calA\}$. Then:
+\[|\calA|^2=|\calA|\cdot|\calB|\leq|\calA\cup\calB|\cdot|\calA\cap\calB|=|\calA\setminus\calA|^2.\qedhere\]
+\end{proof}
+\end{INT}
+\item \textbf{The FKG inequality:} A function $\mu:L\to\R^+$ is called \textbf{log-supermodular} if:
+\[\mu(x)\mu(y)\leq\mu(x\vee y)\mu(x\sprod y)\textup{\quad for all $x,y\in L$,}\]
+so that, multiplicatively, $\mu$ gives more weight to more `extreme' points in the lattice, so that one has improving multiplicative returns.
+\begin{INT}[Thm 6.2.1 {[FKG]}:]
+If $\mu$ is log-supermodular, and $f,g:L\to\R^+$ are increasing, then:
+\[\left(\sum\mu(x)f(x)\right)\left(\sum\mu(x)g(x)\right)
+\leq\left(\sum\mu(x)f(x)g(x)\right)\left(\sum\mu(x)\right)\textup{\quad i.e.\quad }\langle f\rangle\langle g\rangle\leq\langle fg\rangle,\]
+where $\langle f\rangle$ is the expectation of $f$ using the measure on $L$ induced by $\mu$.
+\end{INT}
+\item \textbf{Monotone properties:} Call a family $\calA$ of subsets of $N=\{1,\ldots,n\}$ \textbf{monotone} decreasing (resp.\ increasing) if it is closed under taking subsets (resp.\ supersets). Define the \textbf{probability} of $\calA$ by $\Prob[\calA]=|\calA|/2^n$, the probability that a random subset of $N$ lies in $\calA$.
+\begin{INT}[Prop 6.3.1:]
+Let $I_1,I_2\in\calP(\calP(N))$ be increasing and $D_1,D_2\in\calP(\calP(N))$ be decreasing. Then:
+\[\Prob[\calI_1\cap\calI_2]\geq\Prob[\calI_1]\cdot\Prob[\calI_2];\quad \Prob[\calD_1\cap\calD_2]\geq\Prob[\calD_1]\cdot\Prob[\calD_2];\quad\textup{and}\quad  \Prob[\calI_1\cap\calD_1]\geq\Prob[\calI_1]\cdot\Prob[\calD_1].\]
+\begin{proof}
+Let $f:\calP(N)\to\R^+$ be the characteristic function of $I_1$, and $g$ that of $I_2$. These are \emph{increasing}, and so, taking $\mu\equiv2^{-n}$:
+\[\Prob[I_1\cap I_2]=\langle fg\rangle\geq\langle f\rangle\langle g\rangle=\Prob[I_1]\cdot\Prob[I_2].\qedhere\]
+\end{proof}
+\end{INT}
+In fact, given a vector \smash{$\frakp=(p_1,\ldots,p_n)\in[0,1]^n$} of probabilities, we can choose a random subset of $N$ but choosing $i$ with probability $p_i$. Let $\Prob_\frakp[\calA]$ be the probability that a random subset chosen in this way is in $\calA$. Then:
+\begin{INT}[Thm 6.3.2:]
+Let $\calI_1,\calI_2\in\calP(\calP(N))$ be increasing and $\calD_1,\calD_2\in\calP(\calP(N))$ be decreasing. Then:
+\[\Prob_\frakp[\calI_1\cap\calI_2]\geq
+\Prob_\frakp[\calI_1]\cdot\Prob_\frakp[\calI_2];\quad \Prob_\frakp[\calD_1\cap\calD_2]\geq
+\Prob_\frakp[\calD_1]\cdot\Prob_\frakp[\calD_2];\quad\textup{and}\quad  \Prob_\frakp[\calI_1\cap\calD_1]\geq
+\Prob_\frakp[\calI_1]\cdot\Prob_\frakp[\calD_1].\]
+\begin{proof}
+For the altered measure $\mu(A)=\prod_{i\in A}p_i\prod_{j\notin A}(1-p_j)$ is log-supermodular.
+\end{proof}
+\moreINT[An example:] Fix subsets $A_1,\ldots,A_k$ of $N$; choose random $A\subset N$ by selecting each $i$ independently with some fixed probability. Then
+\[\Prob[A\textup{ intersects each }A_i]\geq\prod_{i=1}^k\Prob[A\textup{ intersects }A_i].\]
+\moreINT[Thm 6.3.3:] Let $I_1,I_2,D_1,D_2$ be properties of graphs on a fixed set $V$ of vertices, with the $I_i$ increasing and the $D_i$ decreasing, so that adding edges preserves $I_i$, and removing edges preserves $D_i$. Choose a random graph $G$ on vertices $V$ by selecting edges independently with probabilities assigned to each edge individually. Then:
+\begin{alignat*}{2}
+\Prob[G\textup{ has $I_1$ and $I_2$}]&\geq\Prob[G\textup{ has $I_1$}]\cdot\Prob[G\textup{ has $I_2$}];\\
+\Prob[G\textup{ has $D_1$ and $D_2$}]&\geq\Prob[G\textup{ has $D_1$}]\cdot\Prob[G\textup{ has $D_2$}];\\
+\Prob[G\textup{ has $I_1$ and $D_1$}]&\leq\Prob[G\textup{ has $I_1$}]\cdot\Prob[G\textup{ has $D_2$}].
+\end{alignat*}
+This, in particular, proves the claim about being simultaneously Hamiltonian and Planar.
+\begin{proof}
+Let \smash{$n={|V|\choose 2}$}. Let $\calI_i$ be the set of subsets of $N$ such that the corresponding graph has $I_i$. This is monotone increasing.
+\end{proof}
+\end{INT}
+\item \textbf{Linear extensions of partially ordered sets:} Suppose that $P$ is a poset. A \textbf{linear extension} of $P$ is a total ordering on $P$ compatible with the poset structure. There's a probability space of these, all being equally likely, so that we can consider events such as $x\leq y$, etc.
+\begin{INT}[Thm 6.4.1 {[XYZ theorem]}:]
+Let $P$ be a poset with $n$ elements. Choose $x,y,z\in P$. Then
+\[\Prob[x\leq y\textup{ and } x\leq z]\geq\Prob[x\leq y]\Prob[y\leq z].\]
+\begin{proof}
+The idea is to consider a random function \smash{$P\overset{\phi}{\to} M$}, where $M=\{1,\ldots,m\}$, for $m$ large. With high probability, this function will be injective, and when it is, it may provide a linear extension of $P$. All possible linear extensions appear with the same frequency.
+
+\INDENT Let $L$ be the set of functions \smash{$P\overset{\phi}{\to} M$}. We'll make this a distributive lattice later. Define:
+\[\mu:L\to\R^+\qquad \mu(\phi)=\begin{cases}
+1,&\textup{if $\phi$ yields a linear extension};\\
+0,&\textup{otherwise}.
+\end{cases}\]
+so that $\mu$ gives the uniform measure on the linear extensions so obtained. Let $f$ indicate the event that $\phi(x)\leq \phi(y)$, and $g$ indicate the event that $\phi(x)\leq \phi(z)$. Then if $\mu$ is unimodular and $f,g$ are increasing, we'll have it that $\langle fg\rangle\geq\langle f\rangle\langle g\rangle$, completing the proof.
+
+\INDENT %Let $P=\{a_1,\ldots,a_n\}$, where $a_1=x$, $a_2=y$ and $a_3=z$.
+We say that $\phi\leq\phi'$ if $\phi(x)\geq\phi'(x)$ and $\phi(w)-\phi(x)\leq\phi'(w)-\phi'(x)$ for all $w\in P$. That is, the small functions $\phi$ are those with $\phi(x)$ large, and $\phi_i(w)-\phi_i(x)$ small.
+\begin{itemize}\squishlist
+\item $(\phi_1\vee\phi_2)(x)=\min\phi_i(x)$, and $(\phi_1\vee\phi_2)(w)$ exceeds this by $\max (\phi_i(w)-\phi_i(x))$.
+\item $(\phi_1\sprod\phi_2)(x)=\max\phi_i(x)$, and $(\phi_1\sprod\phi_2)(w)$ exceeds this by $\min (\phi_i(w)-\phi_i(x))$.
+%\item The join $\phi_1\vee\phi_2$ then adopts the smaller value $\phi_i(x)$ and then the largest possible gap sizes $\phi_i(w)-(\phi_1\vee\phi_2)(x)$.
+%\item The meet $\phi_1\sprod\phi_2$ then adopts the larger value $\phi_i(x)$ and then the smallest possible gap sizes $\phi_i(w)-(\phi_1\vee\phi_2)(x)$.
+\end{itemize}
+Now if two functions both give a linear extension, then so do their join and meet, so that $\mu$ is log-supermodular. $f$ and $g$ are both obviously increasing.
+\end{proof}
+\end{INT}
+
+\end{itemise}
+\end{chapter6}
 
 \end{document}
+
+
+
+
+
+
+
+
+
+
+
+
 
 
