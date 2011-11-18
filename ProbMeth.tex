@@ -14,12 +14,13 @@
 \excludeversion{chapter3}
 \excludeversion{chapter4}
 \excludeversion{chapter5}
-\includeversion{chapter6}
+\excludeversion{chapter6}
+\includeversion{chapter7}
 
 %not yet:
 
 
-\includeversion{chapter7}
+
 \includeversion{chapter9}
 
 
@@ -682,12 +683,91 @@ We say that $\phi\leq\phi'$ if $\phi(x)\geq\phi'(x)$ and $\phi(w)-\phi(x)\leq\ph
 Now if two functions both give a linear extension, then so do their join and meet, so that $\mu$ is log-supermodular. $f$ and $g$ are both obviously increasing.
 \end{proof}
 \end{INT}
-
 \end{itemise}
+\subsection*{The Probabilistic Lens: Tur\'an's theorem}
+In a graph $G=(V,E)$, let $d_v$ be the degree of $v\in V$, and $\alpha(G)$ the independence number.
+\begin{INT}[Caro and Wei:]
+$\alpha(G)\geq\displaystyle\sum(d_v+1)^{-1}$, with equality \Iff $G$ is a disjoint union of cliques.
+\begin{proof}
+Randomly order the vertices of $G$. The average number ($X$) of vertices smaller than all of their neighbours is this sum.
+
+\INDENT For the comment on equality, it is enough to note that $X$ is constant \Iff $G$ is a {\sc duoc}. If $G$ is a {\sc duoc} then $X$ is constant. If $G$ is not a \textsc{DUOC}, then it contains an induced subgraph, on $V'=\{x,y,z\}\subset V$, of the form $\xymatrix{x\ar@{-}[r]&y\ar@{-}[r]&z}$. Fix an ordering on $V''=V\setminus V'$. Specify that elements of $V'$ are less than elements of $V''$. Then we obtain different values for $X$ from the various orders on $V'$.
+\end{proof}
+\end{INT}
+Consider a graph of the form $(K_{q+1})^{\sqcup m}\sqcup(K_{q})^{\sqcup (m-r)}$. Writing $n$ for its number of vertices and $e$ for its number of edges, denote this graph $G_{n,e}$.
+\begin{INT}[Tur\'an's theorem:]
+Let $H$ have $n$ vertices and $e$ edges. Then $\alpha(H)\geq m$, with equality \Iff $H\cong G_{n,e}$.
+\begin{proof}
+Consider the quantity $\sum(d_v+1)^{-1}$, for graphs with a given number of edges ($e=\sum d_v/2$). By convexity, this is minimised when the $d_v$ are as close together as possible, so that $G_{n,e}$ minimises this quantity, at a value of $m$, so:
+\[\alpha(H)\geq\sum(d_v+1)^{-1}\geq m.\]
+This proves the desired inequality, and if there's equality $\alpha(H)=m$, the inequality of Caro and Wei holds with equality, and we can apply their result.
+\end{proof}
+\end{INT}
+
 \end{chapter6}
+\begin{chapter7}
+\section*{\S7: Matringales and Tight concentration}
+\begin{itemise}
+\item \textbf{The edge exposure martingale:} Let $H\sim G(n,p)$, and order the potential edges $e_1,\ldots,e_m$. Let $f$ be any graph-theoretic function. Define
+\[X_i(H)=\Exp[f(G)\,|\,\textup{the first $i$ edges are as sampled, the rest considered random}]\]
+Thus $X_0(H)=\Exp[f(H)]$, and $X_m(H)=f(H)$. The value at time $i$ is the expected value given you've seen the first $i$ actual outcomes.
+\item \textbf{The vertex exposure martingale:} Similar, but this time, expose the first $i$ vertices and their internal edges. Note that this martingale has values $X_1,\ldots,X_n$, as exposing the first vertex does nothing.
+\begin{INT}[Thm 7.2.1 [Azuma]:]
+Let $0=X_0,\ldots,X_m$ be a martingale with $|X_{i+1}-X_i|\leq1$. Then for all $\lambda>0$:
+\[\Prob[X_m>\lambda\sqrt m]<e^{-\lambda^2/2}.\]
+\moreINT[Cor 7.2.2:]
+Let $c=X_0,\ldots,X_m$ be a martingale with $|X_{i+1}-X_i|\leq1$. Then for all $\lambda>0$:
+\[\Prob[|X_m-c|>\lambda\sqrt m]<2e^{-\lambda^2/2}.\]
+\end{INT}
+\item A graph-theoretic function $f$ is:
+\begin{itemize}\squishlist
+\item  \textbf{edge Lipschitz} if $|f(H)-f(H')|\leq1$ whenever $H$ and $H'$ differ by a single edge;
+\item  \textbf{vertex Lipschitz} if $|f(H)-f(H')|\leq1$ whenever $H$ and $H'$ differ by addition and removal of vertices all connected to a given vertex.
+\end{itemize}
+\begin{INT}[Thm 7.2.3:]
+If $f$ is edge (resp.\ vertex) Lipschitz, the corresponding edge (resp.\ vertex) exposure martingale has $|X_{i+1}-X_i|\leq1$.
+\moreINT[Thm 7.2.4:]
+Fix $n,p$ and let $c=\Exp[\chi(G)]$ where $G\sim G(n,p)$. Then
+\[\Prob[|\chi(G)-c|>\lambda\sqrt{n-1}]<2e^{-\lambda^2/2}.\]
+\begin{proof}
+The vertex exposure martingale for $\chi(G)$, which has initial value $c$, is vertex-Lipschitz.
+\end{proof}
+This shows that the chromatic number is tightly concentrated around its mean.
+\end{INT}
+\item \textbf{Chromatic Number:} There's a proof here that:
+\[\chi(G)\sim n/2\log_2n\textup{ almost surely, where $G\sim G(n,1/2)$}.\]
+\item \textbf{A general setting:}
+Given two sets $A,B$, let $[B,A]$ be the set of functions $B\to A$. Choose probabilities $p_{ab}$ in order to give a measure on {$[B,A]$}, via
+\[\Prob[g(b)=a]=p_{ab}\]
+Fix a gradation $\emptyset=B_0\subset\cdots\subset B_m=B$. Given a functional $L:[B,A]\to \R$, we define a martingale by the obvious:
+\[X_i(h)=\Exp[L(g)\,|\,g(b)=h(b)\textup{ for all }b\in B_i].\]
+There's an obvious notion of being Lipschitz relative to the gradation, in which case:
+\begin{INT}[Thm 7.4.1:]
+The corresponding martingale satisfies $|X_{i+1}-X_i|\leq1$.
+\moreINT[Thm 7.4.2:]
+If $\mu=\Exp[L(g)],$ then $\Prob[L(g)\geq\mu+\lambda\sqrt m]<e^{-\lambda^2/2}$ for all $\lambda>0$.
+\end{INT}
+\item \textbf{Another general setting:}
+Suppose that the probability space is generated by a collection (indexed by $I$) of independent yes/no choices, with $p_i$ the probability that the $i^\textup{th}$ choice is yes.
 
+\INDENT Let $Y$ be random variable, and let $c_i$ be the largest change to $Y$ that occurs if the $i^\textup{th}$ choice is reversed. Call $c_i$ the \textbf{effect} of $i$. Let $C$ be an upper bound on the $c_i$. Call $p_i(1-p_i)c_i^2$ the \textbf{variance} of choice $i$.
+
+\INDENT  Suppose that Paul can ask an oracle the questions, one at a time, as he pleases. A \textbf{line of questioning} is then a list of questions determining the random variable $Y$ exactly. The \textbf{total variance} of a line of questioning is the sum of the variances of the queries in it.
+\begin{INT}[Thm 7.4.3:]
+For all $\epsilon>0$ there exists $\delta>0$ such that the following holds. Suppose that Paul has a strategy for finding $Y$ such that every line of questioning has total variance at most $\sigma^2$. Then
+\[\Prob[|Y-\Exp[Y]|>\alpha\sigma]\leq2e^{-\alpha^2/(2(1+\epsilon))}\]
+for all positive $\alpha$ with $\alpha C<\sigma(1+\epsilon)\delta$.
+\end{INT}
+\item \textbf{Illustration One:} Let $g$ be a random set endomorphism of $\{1,\ldots,n\}$, and let $L$ be the number of values not in the image of $g$. Then
+\[\Exp[L]=n(1-n^{-1})^n\in\left(\frac{n-1}{e},\frac{n}{e}\right).\]
+Let $B_i-\{1,\ldots,i\}$. Then $L$ is Lipschitz relative to this gradation, so that
+\begin{INT}[Thm 7.5.1:]
+$\Prob[|L-\frac{n}{e}|>\lambda\sqrt n+1]<2e^{-\lambda^2/2}$.
+\end{INT}
+\item \textbf{Illustration Two:} Let $B$ be a normed space, and $v_1,\ldots,v_n\in B$, each with $|B_i|\leq1$. Let $\epsilon_1,\ldots,\epsilon_n$ be independent $\pm$ random variables and let $X=|\sum\epsilon_iv_i|$. Then
+\end{itemise}
+\end{chapter7}
 \end{document}
-
 
 
 
