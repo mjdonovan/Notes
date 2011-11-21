@@ -12,15 +12,16 @@
 \excludeversion{I.2 Projective Varieties}
 \excludeversion{I.3 Morphisms}
 \excludeversion{I.4 Rational Maps}
-\excludeversion{I.5 Nonsingular Varieties}
+\includeversion{I.5 Nonsingular Varieties}
 \excludeversion{I.6 Nonsingular Curves}
 \excludeversion{I.7 Intersections in Projective Space}
 
 \excludeversion{II.1 Sheaves}
 \excludeversion{II.2 Schemes}
 \excludeversion{II.3 First Properties of Schemes}
-\includeversion{II.4 Separated and Proper Morphisms}
+\excludeversion{II.4 Separated and Proper Morphisms}
 \excludeversion{II.5 Sheaves of Modules}
+\includeversion{II.6 Divisors}
 
 \usepackage{multicol}
 \makeatletter
@@ -144,6 +145,7 @@ point --- here we should define it to be the direct limit of the $\calO_Y(U)$
 over all nonempty open subsets $U$ of $Y$. Elements of the function field are
 called \Index{rational functions}. Note that by restriction, we have injections
 $\calO_Y(Y)\to\calO_{p,Y}\to K(Y)$.
+\item Note that the function field of a product is the quotient field of the tensor product of the function fields.
 \item \textbf{Theorem 3.2:}\indexThm{I.3.2} For $Y$ affine,
 $\calO_Y(Y)=A(Y)$. $\calO_{p,Y}\cong A(Y)_{\frakm_p}$, and $\dim\calO_{p,y}=\dim
 Y$. $p\mapsto\frakm_p$ gives a bijection between points of $Y$ and
@@ -215,7 +217,7 @@ Thus the notion of nonsigularity is intrinsic and extends to all varieties.
 \item \textbf{Theorem 5.3:}\indexThm{I.5.3}
 For any variety $Y$, the set $\Sing Y$ of singular points is a proper closed
 subset.
-\item To study very local behavior, we take \Index{completion}s. The completion
+\item To study very local behaviour, we take \Index{completion}s. The completion
 of a local ring $(A,\frakm)$ is $\hat A:=\varprojlim
 A/\frakm^n=\varprojlim\{\cdots\rightarrow A/\frakm^3\rightarrow
 A/\frakm^2\rightarrow A/ \frakm\}$. 
@@ -237,6 +239,14 @@ root other than $(0,0,\ldots,0)$. There a polynomials
 $g_1,\ldots,g_t\in\Z[a_{ij}]$, homogeneous in the coefficients of each $f_i$
 separately, such that there is a common nonzero root for the $f_i$ \Iff there is
 a common root for the $g_t$.
+\item \textbf{Exercise 5.4:} We define the intersection multiplicity at $P\in\A^2$ of the curves $C_1$ and $C_2$ defined by $f,g\in k[x,y]$ to be the length of the $\calO_P$-module $\calO_P/(f,g)$. This makes sense, for we are pulling back:
+\[\xymatrix{
+C_1\cap C_2\ar[r]\ar[d]\ar[rd]&C_2\ar[d]\\
+C_1\ar[r]&\A^2
+}\]
+We have a closed immersion $C_1\cap C_2\cofibration \A^2$, and the length of the $\calO_P$-module $\calO_{C_1\cap C_2,P}$ measures the multiplicity at $P$. However, $\calO_{C_1\cap C_2,P}=\calO_{C_1,P}\otimes_{\calO_P}\calO_{C_2,P}$, and $\calO_{C_1,P}=\calO_P/f$, so that $\calO_{C_1\cap C_2,P}=\calO_P/(f,g)$ as desired.
+
+\INDENT In higher dimensions, this is not the correct formula for the intersection multiplicity --- there are some derived functors which get involved. Maybe the intersection itself should really get `derived'.
 \end{itemise}
 \end{I.5 Nonsingular Varieties}
 \begin{I.6 Nonsingular Curves}
@@ -801,7 +811,7 @@ affine when $U$, $V$ and the base are affine.)
 \item The image \index{image!of proper scheme}of a proper scheme is proper, in
 the following sense. Suppose that $X\to Y$ is a morphism of separated schemes of
 finite type over a noetherian scheme $S$. Suppose that $Z$ is a closed subscheme
-of $X$ which is porper over $S$. Then the set-theoretic image of $Z$ is a closed
+of $X$ which is proper over $S$. Then the set-theoretic image of $Z$ is a closed
 subset of $Y$, and the scheme-theoretic image, a closed subscheme of $Y$, is
 proper.
 \end{itemise}
@@ -978,7 +988,7 @@ noetherian. Then a scheme $X$ is projective over $Y$ \Iff it is proper and
 admits an invertible sheaf very ample with respect to $Y$.
 \begin{proof}
 The `only if' is easy. For `if', suppose $X$ is proper and $\scrL$ is very ample
-on $X$ with respect to $Y$. Then by definition there is some imbedding
+on $X$ with respect to $Y$. Then by definition there is some embedding
 $i:X\to\PP^r_Y$. However, the image of a proper scheme is proper, so that $i$ is
 a closed immersion.
 \end{proof}
@@ -1030,6 +1040,10 @@ for all $x\in X$. Moreover, $\scrF$ is \Index{invertible} (locally free of rank
 one) \Iff there exists $\scrG\in\Coherent_X$ such that
 $\scrF\otimes\scrG\cong\calO_X$ {\small (justifying the name `invertible')}. Of
 course, $\scrG=\check\scrF$.
+\begin{proof}
+Suppose that $\scrF$, $\scrG$ are coherent (over a noetherian scheme $X$) such that $\scrF\otimes \scrG\cong\calO_X$. It is enough to prove that $\scrF_x$ is a free $\calO_{X,x}$-module of rank one for all $x$, as this shows that $\scrF_x$ is locally free of rank one. Now write $M=\scrF_x$, $N=\scrG_x$ and $L=\calO_{X,x}$. We know that $L$ is local, and $M\otimes_L N=L$. All we are to do is show that in this setting, $M$ is a free module of rank 1. But we have $(M\otimes_L N)/\frakm(M\otimes_L N)=M/\frakm M\otimes_{L/\frakm}N/\frakm N$, and this tensor product has dimension one! So $M/\frakm M$ has dimension one over the residue field, and Nakayama's lemma shows that $M$ is generated by one element. Of course, this element must have annihilator zero, so that $M$ is free of rank one.
+\end{proof}
+
 \item \textbf{Exercise 5.8:}
 Let $X$ be noetherian, and $\scrF\in\Coherent_X$. Consider
 $\phi(x):=\dim_{k(x)}\scrF_x\otimes_{\calO_x}k(x)$, where
@@ -1085,6 +1099,8 @@ ring is locally free if and only if it is projective, so over an affine
 noetherian scheme $\Spec A$, the vector bundles and the finitely generated
 projective $A$-modules coincide.
 \end{itemise}
+\end{II.5 Sheaves of Modules}
+\begin{II.6 Divisors}
 \section*{Hartshorne II.6 --- Divisors}
 \index{Hartshorne!II.6: Divisors}
 \begin{itemise}
@@ -1114,7 +1130,7 @@ nonnegative linear combination of prime divisors.
 \end{itemize}
 \item Suppose that $X$ satisfies ($*$), and that $f\in K^*$, where $K$ is the
 function field. Each prime divisor $Y$ with generic point $\eta$ gives a DVR
-$\calO_{X,\eta}$ with quoetient field $K$. We denote by $v_Y$ the valuation on
+$\calO_{X,\eta}$ with quotient field $K$. We denote by $v_Y$ the valuation on
 $K$ corresponding to this DVR. {\small (When $v_Y(f)$ is positive, it measures
 the highest power of the maximal ideal $f$ lies in.)} Depending on whether
 $v_Y(f)$ is positive or negative, we say that $f$ has a zero or a pole on $Y$.
@@ -1185,9 +1201,39 @@ Y\rangle$. It was obvious from the beginning that $A$ was not a UFD: $xy=z^2$!
 \item \textbf{Proposition 6.6:}\indexThm{II.6.6}
 If $X$ satisfies ($*$), then so does $X\times \A^1$, and
 $\DivisorClass(X\times\A^1)=\DivisorClass(X)$.
+\begin{proof}
+The key point is to observe that we can reduce to divisors which are the product of a codimension one point of $X$ with $\A^1$. To see this, let $K$ be the function field of $X$. Then we have pullbacks:
+\[\xymatrix@R=.4cm{
+\spec K[t]\ar[r]\ar[d]&X\times\A^1\ar[r]\ar[d]&\spec K[t]\ar[d]\\
+\spec K\xycofib[r]&X\ar[r]&\spec \Z
+}\]
+Now given a prime divisor $Z\subset X\times\A^1$, we intersect with $\spec K[t]$, the fibre of $\eta_X$, to obtain a divisor $Z'$ on $\spec K[t]=\A^1_K$. As $K[t]$ is a UFD, we have that $\DivisorClass(\A^1_K)=0$, so that $Z'$ is principal, equal to $(f)$ for some $f\in K(t)$. In particular, back on $X\times\A^1$, $Z-(f)$ has zero intersection with the fibre of $\eta_X$, so that its components are supported $C\times\A^1$, for $C\subset X$ a proper closed subset. But then, for dimension reasons, we must have $Z-(f)$ equal to a sum of divisors of the form $y\times\A^1$, where $y\in X$ has codimension one.
+
+\INDENT Now we have a map $\pi_1^*:\DivisorClass(X)\to\DivisorClass(X\times\A^1)$ given by taking the preimage under the first projection. This map is surjective, by the previous argument. To see that it is injective, suppose that $\sum n_y(y\times\A^1)$ is zero in $\DivisorClass(X\times\A^1)$. Then  $\sum n_y(y\times\A^1)=(f)$ for $f$ a nonzero element of the function field of $X\times \A$. This function field is in fact the quotient field of $K[t]$, so that $f=g/h$ for $g,h\in K[t]\setminus\{0\}$. We can assume that $(g,h)=1$, so that there is no cancellation when taking the difference $(g)-(h)$. We want to see that $f,g$ are in fact constant polynomials, so that the sum $\sum n_y(y)$ was already zero in $\DivisorClass(X)$.
+
+\INDENT As $(g,h)=1$, we have that $(g)$ contains only prime divisors of the form $y\times\A^1$. But this should imply that $g$ is a constant polynomial. If $g$ is not constant, let $\spec R\in X$ be any open affine subset. Then form the intersection:
+\[\xymatrix@R=.4cm{
+\spec K[t]/g\ar[r]\ar[d]&\spec R[t]/g\ar[d]\\%&X\times\A^1\ar[d]\\
+\spec K\xycofib[r]&\spec R%\xycofib[r]&X
+}\]
+That this intersection (of $(g)$ with $\eta_X\times\A^1$) is nonempty gives a contradiction.
+\end{proof}
+\item \textbf{Exercise 6.1:} Let $X$ satisfy ($*$). Then $X\times\PP^n$ satisfies ($*$), and $\DivisorClass(X\times\PP^n)=\DivisorClass(X)\times\Z$.
+\begin{proof}
+For proposition 6.5, we have an exact sequence, and it splits:
+\[\xymatrix@R=.2cm{
+\Z\ar[r]&
+\DivisorClass(X\times\PP^n)\ar[r]&
+\DivisorClass(X\times\A^n)\ar[r]\ar@{=}[d]&
+0\\
+&&\DivisorClass(X)\ar[ul]^{\pi^*}
+}\]
+All that remains is to check that the image of $1\in\Z$, being the class of $X\times H$ ($H$ a hyperplane), has infinite order. But this will follow by an argument as above, noting that the class of a hyperplane in $\DivisorClass(\PP^n)$ has infinite order, by proposition 6.4.
+\end{proof}
+
 \item To save a bit of time, I'm skipping the next few examples. Note, however,
 that the nonsingular \Index{quadric surface} $xy=zw$ in $\PP^3$, which is just
-the Segre imbedding of $\PP^1\times\PP^1$, has class group $\Z\times\Z$, with
+the Segre embedding of $\PP^1\times\PP^1$, has class group $\Z\times\Z$, with
 the obvious generators.
 \item Let $k$ be algebraically closed. A \Index{curve} over $k$ is an integral
 separated scheme $X$ of finite type over $k$, of dimension one. If $X$ is proper
@@ -1313,7 +1359,7 @@ Let $X$ be an integral, separated noetherian scheme, all of whose local rings
 are UFDs\footnote{A ring all of whose localisations are UFDs is called
 \Index{locally factorial}.} (thus $X$ satisfies ($*$), by ). Then
 $\WeilDivisors(X)\cong\CartierDivisors(X)$, and principal Weil divisors
-correspond to prinicipal Cartier divisors, so that
+correspond to principal Cartier divisors, so that
 $\DivisorClass(X)\cong\CartierClass(X)$.
 
 \INDENT As $X$ is integral, $\scrK^*$ is just the constant sheaf $K^*$. Given a
@@ -1341,7 +1387,7 @@ which are nonzero at $(0,0,0)$. This is true! Thus $\CartierClass=0$ while
 $\DivisorClass=\Z_2$.
 \end{itemise}
 \subsection*{Invertible sheaves}
-\end{II.5 Sheaves of Modules}
+\end{II.6 Divisors}
 \printindex
 \end{document}
 
