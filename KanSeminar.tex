@@ -28,7 +28,7 @@
 \excludeversion{AdamsStableHtpy}
 \excludeversion{QuillenSpectrumOfEqCohomology}
 \excludeversion{SegalCategoriesAndCohomologyTheories}
-\includeversion{BousfieldLoc}
+\excludeversion{BousfieldLoc}
 
 %\def\excludeversion#1{\includeversion{#1}}
 
@@ -41,7 +41,7 @@
 \excludeversion{KrishanuAdamsStableHtpy}
 \excludeversion{JeremyQuillen}
 \excludeversion{JandrGammaSpaces}
-
+\includeversion{MarkusLocalisation}
 % My talks
 \excludeversion{SteenrodTalk}
 \excludeversion{SerreCohModTwoEilMacLane}
@@ -2387,6 +2387,107 @@ Perhaps here one should expect these good properties from generalities on Bousfi
 
 
 \end{BousfieldLoc}
+\begin{MarkusLocalisation}
+\KanSemResponse
+{Localisation of spectra with respect to a homology theory}
+Let $E$ be a spectrum, then $E_*(\DASH):=\pi_*(\DASH\sprod E)$. We'll work in the stable homotopy category. I'd like an adjunction
+\[\xymatrix@R=.3cm@C=2cm{
+\mathsf{shc}  \ar@<.6ex>[r]^{F}&
+\mathsf{shc}[\textup{$E_*$-isos}^{-1}] \ar@<.4ex>[l]^{G}\\
+%X \ar@{|->}[r] & FX\\
+%GY             & Y \ar@{|->}[l]\\
+}\]
+We'll have the right adjoint fully faithful, so that we can actually simply work in a subcategory. The image will be the $E_*$-local spectra.
+\begin{defn*}
+A spectrum $X$ is $E_*$-local if every $E_*$-isomorphism $Y\to Z$ induces an isomorphism $[Z,X]\to[Y,X]$. A spectrum is $E_*$-acyclic if $E_*(X)=0$.
+\end{defn*}
+\begin{lem*}
+A spectrum is $E_*$-local if it admits no maps from $E_*$-acyclic spectra.
+\end{lem*}
+\begin{thm*}
+For every spectrum $X$ there's and $E_*$-local spectrum $X_E$ and an $E_*$-iso $X\overset{\eta_X}{\to} X_E$. This is the unit of the above adjunction.
+\end{thm*}
+We can form a triangle (i.e.\ cofibre sequence):
+\[{_E}X\overset{\theta_X}{\to}X\overset{\eta_X}{\to}X_E\to\Sigma{{_E}X}\]
+with ${_E}X$ acyclic, $\eta_X$ is the initial example of a map from $X$ to an $E_*$-local spectrum, and $_EX\to X$ is the terminal example of a map from an acyclic to $X$. [$\eta_x$ is also terminal for $E$-isos out of $X$.]
+
+The spectrum is not determined by its localisation, for example $E$, $E\vee E$ and $\Sigma^nE$ all give the same localisation.
+\begin{defn*}
+We call $E$ and $F$ equivalent if they give the same localisation. This is equivalent to giving the same acyclic objects. The equivalence classes here \emph{form a set}. This set is partially ordered, as we can say $\langle E\rangle\leq\langle E'\rangle$ if every $E'$-local is also $E$-local.
+\end{defn*}
+\subsection*{Moore spectra}
+
+\begin{exmp*} Given $A\in\AbGp$, $\mathbb{S}A$ is the Moore spectrum of $A$. There is a short exact sequence, for $X$ any spectrum
+\[0\to\pi_*X\otimes A\to\pi_*(X\sprod\mathbb{S}A)=\mathbb{S}A_*(X)\to\Tor(\pi_{*-1}(X),A)\to0\]
+and
+\[0\to\Ext(A,\pi_{*+1}(X))\to[\mathbb{S}A,X]_*\to\Hom(A,\pi_*(X))\to0\]
+Take cofiber sequence defining, and map in or out.
+
+Now $\mathbb{S}A$ is connective and $H_*(\mathbb{S}A)=\begin{cases}
+A,&\textup{if }*=0;\\
+0,&\textup{otherwise}.
+\end{cases}$ This characterises it completely, by the Hurewicz theorem and whitehead theorem.
+
+Note that the second SES shows that there might be more maps between Moore spectra which do not come from maps of groups, but every map of groups can be realised.
+\end{exmp*}
+By the first SES, $\mathbb{S}A$-acyclicness depends only on its homotopy groups. To detect the equivalence class of the Moore spectrum of a group in the above poset, it's enough to consider...
+
+The class of $\mathbb{S}A$-acyclic spectra only depends on whether $A$ is a torsion group and the set of primes it is uniquely divisible by. Thus, it suffices to examine, for $J$ a set of primes,
+\[A=\Z_{(J)}\textup{\quad and\quad }A=\oplus_{p\in J}\Z/p\]
+\begin{enumerate}\squishlist
+\item If $A=\Z_{(J)}$ then $X_{\mathbb{S}A}=X\sprod \mathbb{S}A$, and $\pi_*(X_{\mathbb{S}A})=\pi_*X\otimes A$. A spectrum is $\mathbb{S}A_*$-local if its homotopy is already a module over $\Z_{(J)}$.
+\begin{proof}
+$\mathbb{S}A$ is a ring spectrum, and on $\pi_0$ it induces the ring multiplication of $A$. Then the unit $\mathbb{S}A\weakequiv\mathbb{S}A\sprod\mathbb{S}A$ is actually an isomorphism. As this is a right inverse for the multiplication, we have $\mathbb{S}A\sprod\mathbb{S}A\weakequiv\mathbb{S}A$. In particular, the map $X\to X\sprod \mathbb{S}A$ is an $\mathbb{S}A$-iso...
+\end{proof}
+\item If $A=\Z/p$, then $X_{\mathbb{S}A}\cong F(\Sigma^{-1}\mathbb{S}(\Z/p^\infty),X)$.\footnote{The function spectrum is right adjoint to smash, constructed by Brown representability.} There is a short exact sequence
+\[0\to\Ext(\Z/p^\infty,\pi_{*}X)\to\pi_*(X_{\mathbb{S}A})\to\Hom(\Z/p^\infty,\pi_{*+1}X)\]
+Thus, if $\pi_*X$ is finitely generated for all $*$, then $\pi_*(X_{\mathbb{S}A})=\pi_{*}X\otimes\widehat{\Z_p}$ (as the Hom set is zero).
+A spectrum is $\mathbb{S}A$-local if $\Ext(\Z[1/p],\pi_*X)=0$ and $\Hom(\Z[1/p],\pi_*X)=0$ (which is called being Ext-$p$-complete).
+\begin{proof}
+Consider the short exact
+\[\xymatrix{
+0\ar[r]&
+\Z\ar[r]&
+\Z[1/p]\ar[r]&
+\Z/p^\infty\ar[r]&
+0
+}\]
+this can be realised on moore spectra, giving a triangle
+\[\xymatrix{
+\Sigma^{-1}\mathbb{S}(\Z/p^\infty)\ar[r]&
+\mathbb{S}\ar[r]&
+\mathbb{S}\Z[1/p]\ar[r]&
+\mathbb{S}\Z/p^\infty
+}\]
+applying the function spectrum, we still have a cofibre sequence
+It'll be enough to prove that $F(\mathbb{S}\Z/p^\infty,X)$ is local and $F(\mathbb{S},X)$ is acyclic. To see the localness, for maps in from an acyclic $Y$, we get, by adjunction, $[Y\sprod \Sigma^{-1}\mathbb{S}\Z/p^\infty,X]$ but the source is acyclic, as this only depends on div type.
+
+The next is similar.
+\end{proof}
+Note that $F(\sigma^{-1}\mathbb{S}\Z/p^\infty)$ is the holim of a sequence
+\[\xymatrix{
+X\sprod \mathbb{S}\Z/p&\ar[l]X\sprod \mathbb{S}\Z/p^2&\ar[l]X\sprod \mathbb{S}\Z/p^3&\ar[l]
+}\]
+Note that the hocolim of 
+\[\xymatrix{
+ \mathbb{S}\Z/p&\ar[l];[] \mathbb{S}\Z/p^2&\ar[l];[] \mathbb{S}\Z/p^3&
+}\]
+is $\mathbb{S}\Z/p^\infty$.
+Applying function spectra, we get a holim for $F(\Sigma^{-1}\mathbb{S}\Z/p^\infty,X)$,
+\end{enumerate}
+\begin{thm*}
+If $A=\oplus_{p\in J}\Z/p$ then $X_{\mathbb{S}A}=\prod_{p\in J}X_{\mathbb{S}\Z/p}$.
+\end{thm*}
+\begin{thm*}
+If $E$ and $X$ are connective, then $X_E\cong X_{\mathbb{S}\pi_*E}$.
+\end{thm*}
+\begin{defn*}
+Let $K$ be $K$-theory. Then $\pi_*K$ is $\Z$ in even degrees, so a localisation as in the previous theorem would do nothing. But in fact localising w.r.t.\ $K$-theory is smashing with $S^B$, 
+\end{defn*}
+
+
+\pagebreak
+\end{MarkusLocalisation}
 \end{document}
 
 
