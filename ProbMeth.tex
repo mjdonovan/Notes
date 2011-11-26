@@ -6,16 +6,17 @@
 \input{../macros.tex}
 \usepackage{makeidx}
 
-\def\excludeversion#1{\includeversion{#1}}
+%\def\excludeversion#1{\includeversion{#1}}
 
 \excludeversion{prelims}
 \excludeversion{chapter1}
 \excludeversion{chapter2}
 \excludeversion{chapter3}
-\includeversion{chapter4}
+\excludeversion{chapter4}
 \excludeversion{chapter5}
 \excludeversion{chapter6}
-\includeversion{chapter7}
+\excludeversion{chapter7}
+\includeversion{recent}
 
 %not yet:
 
@@ -834,7 +835,6 @@ In particular, if $\Prob[A]>c$ for some fixed $c$, then as $t$ increases, a rand
 Note that when $\Omega=\{0,1\}^n$, $\rho(A,x)$ is the Euclidean distance from $x$ to the convex hull of $A$.
 \subsection*{Applications of Talagrand's inequality}
 Call a function $h:\Omega\to\R$ \textbf{$K$-Lipschitz} if $|h(x)-h(y)|\leq K$ when $x$ and $y$ differ in only one coordinate. Given a function $f:\N\to\N$, say that $h$ is \textbf{$f$-certifiable} if whenever $h(x)\geq s$ there is a collection $I$ of at most $f(s)$ indices such that $h(y)\geq s$ for all $y$ agreeing with $x$ on $I$.
-\end{chapter7}
 \begin{INT}[Thm 7.7.1:]
 Suppose that $h$ is $K$-Lipschitz, and $f$-certifiable. Then for all $b,t$:
 \[\Prob[X\leq b-tK\sqrt{f(b)}]\Prob[X\geq b]\leq e^{-t^2/4}.\]
@@ -862,7 +862,82 @@ We also saw that $m(Y)=\Omega(n^2k^{-4})$, as this is the mean, and we had a tig
 \\&=\exp\left(-\Omega(n^2/(\log_2n)^6)\right)&\qquad&\text{(an improvement on 7.3.2).}
 \end{alignat*}
 \end{itemise}
+\end{chapter7}
+\begin{recent}
+\begin{itemise}
+\item A Ramsey number is the first point where order emerges from chaos. The probabilistic method can easily be applied to give a lower bound for this point, as choosing a random arrangement often has a nonzero probability of producing chaos.
+\item \textbf{Markov inequality:} if $X$ is a non-negative random variable, then $\Prob[X\geq c]\leq\Exp[X]/c$.
+\begin{proof}
+This is equivalent to an obvious lower bound on $\Exp[X]$.
+\end{proof}
+\item \textbf{Chernoff bounds:} Suppose that $X_1,\ldots,X_n$ are iid uniform $\{\pm1\}$. Then $\Prob[\sum X_i>c\sqrt n]\leq e^{-t^2/2}$.
+\begin{proof}
+We calculate
+\[\Exp[e^{t\sum X_i}]=(\cosh t)^n\leq \left(e^{t^2/2}\right)^n=e^{nt^2/2}.\]
+Then
+\[\Prob[\sum X_i\geq c\sqrt n]=\Prob[e^{t\sum X_i}\geq e^{ct\sqrt n}]\leq e^{nt^2/2-ct\sqrt n}\leq e^{-t^2/2}.\qedhere\]
+\end{proof}
+\item \textbf{High girth ($l$) and chromatic number ($k$):}
+\begin{enumerate}\squishlist
+\item  Choose a large graph with a low density --- $G(n,n^{\theta-1})$ for $\theta<1/k$.
+\item Expect a low independence number, as number of independent sets of size $(3\log n)/p$ is $o(1)$, and can apply Markov bound. [Use ${n\choose x}<n^x$ and $(1-p)<e^{-p}$ to simplify.]
+\item Expect $o(n)$ short cycles. By a Markov bound, almost surely have less than $n/2$ of them.
+\item Remove some vertices, still have small indep number, but get large girth.
+\end{enumerate}
+\item \textbf{Dependant random choice:} 
+The main lemma finds in a dense graph a large subset of vertices in which all (or almost all) small subsets have many common neighbours:
 
+
+\textbf{Lemma 1:} Let $a$, $d$, $m$, $n$, $r$ be positive integers. Let $G = (V, E)$ be a graph with $|V | = n$ vertices and
+average degree $d = 2|E(G)|/n$. If there is a positive integer $t$ such that
+\[\frac{d^t}{n^{t-1}}-{n\choose r}\left(\frac{m}{n}\right)^t\geq a,\]
+then $G$ contains a subset $U$ of at least $a$ vertices such that every $r$ vertices in $U$ have at least $m$ common neighbours.
+\begin{proof}
+Pick a subset $T$ of $t$ vertices, randomly with repetition.  Set $A=N(T)$.
+\[\Exp[|A|]\geq\frac{d^t}{n^{t-1}},\]
+with the only inequality coming from convexity of $z^t$. Let $Y$ be the number of subsets of $A$ with less than $m$ common neighbours. One calculates that $\Exp[Y]<{n\choose r}\left(\frac{m}{n}\right)^t$.
+\end{proof}
+\textbf{Lemma 3.2:} Let $H = (A\cup B, F )$ be a bipartite graph in which $|A| = a$,  $|B| = b$, and the vertices in
+$B$ have degree at most $r$. If $G$ is a graph with a vertex subset $U$ with $|U| = a$ such that all subsets of
+$U$ of size $r$ have at least $a + b$ common neighbors, then $H$ is a subgraph of $G$.
+\begin{proof}
+Define $f:A\to U$ arbitrarily. Label the vertices of $B$ as $v_1,\ldots,v_b$. We can always embed the next vertex of $B$ as needed!
+\end{proof}
+\textbf{Theorem 3.3:}
+ If $G$ is a graph with $n$ vertices and $\epsilon n^2$
+edges, then G contains a 1-subdivision of a
+complete graph with $a = \epsilon^{3/2}n^{1/2}$
+vertices.
+\item \textbf{Maximal Antichains:}
+\begin{INT}[Thm 1:] Let $\calF\subset\calP(\{1,\ldots,n\})$ be an antichain. Then:
+\[\sum_{A\in\calF}{n\choose|A|}^{-1}\leq1.\]
+\begin{proof}
+Let $\calC$ be the obvious large chain: $\calC:=\{\{1\},\{1,2\},\ldots,\{1,\ldots,n\}\}$. Choose a random permutation $\sigma\in\Sigma_n$. Then for $A\in\calF$:%\calP(\{1,\ldots,n\})$:
+\[\Prob[A\in\sigma(\calC)]={n\choose |A|}^{-1}.\]
+In particular, as no two elements of $\calF$ lie in $\sigma(\calC)$:
+\[\sum_{A\in\calF}{n\choose |A|}^{-1}= \sum_{A\in\calF}\Prob[A\in\sigma(\calC)]=\Prob[\textup{some $A$ is in $\sigma(\calC)$}]\leq1.\qedhere\]
+\end{proof}
+\moreINT[Cor 2 {[Sperner's theorem]}:]
+If $\calF$ is an antichain, then
+$|\calF|\leq{n\choose\lfloor n/2\rfloor}$.
+\begin{proof}
+The summand is minimised when $|A|=\lfloor n/2\rfloor$, so there can't be too many summands.
+\end{proof}
+\end{INT}
+\item \textbf{Weierstrass Approximation Theorem:}
+Let $f:[0,1]\to\R$ be continuous. Then define:
+\[\rho(i):={n\choose i}x^i(1-x)^{n-i},\qquad P_n(x):=\sum_{i=0}^{n}\rho(i)f(i/n).\]
+As $\rho(i)$ is the distribution function of a $\textup{Bin}(n,x)$, for all $x$:
+\begin{alignat*}{2}
+|P_n(x)-f(x)|&\leq\sum_{i=0}^{n}\rho(i)|f(i/n)-f(x)|%&\qquad&\text{()}
+\\&=\sum_{|i-nx|\leq n^{2/3}}\rho(i)|f(i/n)-f(x)|+\sum_{|i-nx|\geq n^{2/3}}\textup{same}%&\qquad&\text{()}
+\\&\leq\sum_{|i/n-x|\leq n^{-1/3}}\textup{same}+2\max\{|f(x)|\}\Prob[|B(n,x)-nx|>n^{2/3}]%&\qquad&\text{()}
+\\&\leq1\times\max_{|i/n-x|\leq n^{-1/3}}|f(i/n)-f(x)|+2\max\{|f(x)|\}\cdot n^{-1/3}%&\qquad&\text{()}
+\end{alignat*}
+Here, we used the fact that $\rho(i)$ is a distribution, and also Chebyshev's inequality. Now as the convergence is uniform, so the right hand side (as a function of $x$) converges uniformly to zero.
+\end{itemise}
+
+\end{recent}
 
 \end{document}
 
