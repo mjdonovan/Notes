@@ -23,7 +23,10 @@
 \excludeversion{RuneBabytop}
 \excludeversion{SaulCrystallineCohomology}
 
-\def\excludeversion#1{\includeversion{#1}}
+%Misc Fall 2011
+\includeversion{BehrensGoodwillieCalcIntro}
+
+%\def\excludeversion#1{\includeversion{#1}}
 
 %Juvitop Fall 2011
 \excludeversion{SaulSimplicialLocalisation}
@@ -31,7 +34,7 @@
 \excludeversion{InnaSimplicalModelCats}
 \excludeversion{MichaelStableModelCats}
 \excludeversion{SaulInftyOneCats}
-\includeversion{GeoffroyWeakAssociativityandCompleteSegalSpaces}
+\excludeversion{GeoffroyWeakAssociativityandCompleteSegalSpaces}
 
 \rfoot{\footnotesize Michael Donovan}
 \newcommand{\KanSemResponse}[1]
@@ -1129,18 +1132,122 @@ A\ar[r]\ar[dr]&B\ar[d]\\
 X\ar[r]\ar[d]&Y\ar[d]\\
 Z\ar[r]&W
 }\]
-
-
-
-
-
-
-
-
-
-
 \pagebreak
 \end{GeoffroyWeakAssociativityandCompleteSegalSpaces}
+
+\begin{BehrensGoodwillieCalcIntro}
+\KanSemResponse
+{``Calculus of Functors'' --- Mark Behrens}
+\subsection*{Precalculus}
+Homotopy pullbacks:
+\[\xymatrix{
+P\ar[r]\ar[d]&Y\ar[d]^g\\
+X\ar[r]^f&Z
+} \qquad \qquad \raisebox{-6mm}{$P=\left\{(x,y,\gamma):x\in X,\ y\in Y,\ \gamma\textup{ a path in $Z$ from $f(x)$ to $g(y)$}\right\}$}\]
+Homotopy pullbacks have a MV sequence:
+
+\[\xymatrix{\cdots\ar[r]&
+\pi_i(P)\ar[r]&
+\pi_i(X)\times\pi_i(Y)\ar[r]&
+\pi_i(Z)\ar[r]&
+\pi_{i-1}(P)\ar[r]&
+\cdots}\]
+This gives the connectivity properties of loops.
+\subsection*{Calculus:}
+Suppose given a smooth function $f:\R\to\R$. We'll always take $f(0)=0$, which translates most tidily to topology. Classically, one can
+\begin{enumerate}\squishlist
+\item take derivatives, and form a taylor series $f(x)=\sum a_nx^n$ (which sometimes works) with $a_n=f^{(n)}(0)/n!$.
+\item Discuss linearity, when $f(x+y)=f(x)+f(y)$, so that $f(x)=ax$, where $a=f'(0)=\lim_{h\rightarrow0} \frac{f(h)}{h}$.
+\end{enumerate}
+\subsection*{Calculus of functors:}
+Replace $\R$ with $\Top_*$. Assume that:
+\begin{enumerate}\squishlist
+\item $F(*)$ is contractible;
+\item $F$ preserves weak equivalences; and
+\item $F$ preserves filtered homotopy colimits. That is, whenever $X$ is a CW complex, with a filtration by subcomplexes $X_1\subset X_2\subset\cdots$, then \smash{$\pi_* F(X)\overset{\sim}{\from}\varinjlim \pi_*F(X_i)$} 
+\end{enumerate}
+\begin{defn*}
+$F$ linear? [Interested in $\pi_*F:\Top_*\to\mathsf{GrSet}$, and higher homotopy of the wedge doesn't correspond to the product, so instead we write...] Demanding $F(X\vee Y)\weakequiv F(X)\times F(Y)$ is not strong enough.
+
+Instead we say $F$ is linear if given CW-inclusions from which to form a pushout (left) we obtain a homotopy pullback after applying $F$ (right):
+\[\xymatrix{
+A\xycofib[r]\xycofib[d]&Y\ar[d]\\
+X\ar[r]&Z
+}
+\qquad \qquad 
+\xymatrix{
+F(A)\ar[r]\ar[d]&F(Y)\ar[d]\\
+F(X)\ar[r]&F(Z)
+}
+\]
+If $A$ is a point, you're saying that the pullback of $F(X)$, $F(Y)$ over $F(Z)=F(X\vee Y)$ is contactible. The MV sequence then shows that $\pi_*(F\left(X\right))\times\pi_*(F(Y))\to\pi_*(X\vee Y)$ is an isomorphism.
+\end{defn*}
+\subsection*{Motivation}
+If one looks at $\pi_*F$, $\pi_*(F(X))$ has a MV sequence, and so is like a homology theory.
+\subsection*{Can we classify linear functors?}
+CW complexes arise as $X=\varinjlim X^{[n]}$, built inductively from pushouts (left):
+\[\xymatrix{
+\vee S^{n-1}\ar[r]\ar[d]&X^{[n-1]}\ar[d]\\
+\vee D^n\ar[r]&X^{[n]}
+}
+\qquad \raisebox{-6mm}{applying $F$:}\qquad 
+\xymatrix{
+\prod F(S^{n-1})\ar[r]\ar[d]&F(X^{[n-1]})\ar[d]\\
+{*}\ar[r]&F(X^{[n]})
+}\]
+We obtain a LES from the pullbacks that result:
+\[\xymatrix{\cdots\ar[r]&
+\prod \pi_*(F(S^{n-1}))\ar[r]&
+\pi_*F(X^{[n-1]})\ar[r]&
+\pi_*F(X^{[n]})\ar[r]&
+\ar[r]&
+\cdots}\]
+Thus the functor is somehow determined by its values on spheres.
+\begin{thm*}[Goodwillie; orig.\ Brown, Adams]
+If $F$ is linear, then $F$ is determined by the sequence $F(S^n)$ of spaces, by the formula:
+\[F(X)\simeq \varinjlim\Omega^n(F(S^n)\sprod X).\]
+\end{thm*}
+\begin{proof}
+We'll simplify life by assuming that the $F(S^n)$ are bounded below, in the sense that the connectivity of $F(S^n)$ is $n-K$ for fixed $K$.
+
+We first claim that the right hand side, say $G$, is linear. To prove this we use htpy excision:
+\[\xymatrix{
+A\xycofib[drr]^\alpha\xycofib[ddr]^\beta\ar[rd]\\
+&P\ar[r]\ar[d]&Y\ar[d]\\
+&X\ar[r]&Z=X\cup_AY
+}\]
+If $\alpha$ is an $n$-equiv and $\beta$ is an $m$-equiv then $A\to P$ is an $(n+m-1)$-equiv. So we get a homotopy LES in a range.
+
+Applying $\pi_*$ to $G$, we get that $\pi_*(GX)=\varinjlim\pi_*(\Omega^n(FS^n\sprod X))=\varinjlim\pi_{*+n}((FS^n\sprod X))$ becomes an isomorphism in the colimit, so in the limit, the LES is exact in all degrees.
+
+So, by 5-lemma and excision, can assume that $X$ is a sphere. So we should look at $FS^i$ and compare it to $\varinjlim \Omega^n(F(S^n)\vee S^i)$. This was done, notes were not taken.
+\end{proof}
+Linear functors  $F$ give homology theories $\pi_*(F)$, call this $E^F$. In fact, we argued that the $E_i=F(S^i)$ satisfy $E_i\weakequiv \Omega E_{i+1}$, so we get an $\Omega$-spectrum.
+
+For example, if $F=\widetilde{H}^n$, have $F(S^n)$ a $K(\Z,n)$.
+
+If $F$ is an arbitrary functor, there is a linearisation --- a natural transformation $F(X)\to P_1F(X)=\varinjlim\Omega^n(F(S^n)\sprod X)$. Now you get a spectrum, not an $\Omega$-spectrum. (Think of Omega-spectra as sheafifications of spectra or something.)
+\begin{exmp*}
+The linearisation of $\id:\Top_*\to\Top_*$ gives stable homotopy!
+\end{exmp*}
+
+
+Goodwillie constructs Taylor tower:
+
+\[\xymatrix{
+D_2F\ar[r]&\ar[d]P_2F\\
+D_1F\ar[r]&\ar[d]P_1F\\
+F\ar[r]\ar[ru]\ar[ruu]&P_0F
+}
+\]
+
+Then $F(X)\weakequiv \varinjlim P_iF(X)$ whenever the connectivity of $X$ exceeds the radius of covergence $R$. There's even a formula:
+\[D_2F(X)\simeq\varinjlim \Omega^{2n}\textup{cr}_2(F)(S^n,S^n)\sprod X^{\sprod2}/\Sigma_2.\]
+
+\pagebreak
+\end{BehrensGoodwillieCalcIntro}
+
+
 \end{document}
 
 
