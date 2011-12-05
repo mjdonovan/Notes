@@ -15,6 +15,8 @@
 \excludeversion{JeremyQuillenPractice}
 \excludeversion{JandrGammaPractice}
 \excludeversion{MarkusLocalisationPractice}
+\excludeversion{JeremyModelPractice}
+
 
 % Reading responses
 \excludeversion{SerreHomSingFibSpace}
@@ -29,6 +31,7 @@
 \excludeversion{QuillenSpectrumOfEqCohomology}
 \excludeversion{SegalCategoriesAndCohomologyTheories}
 \excludeversion{BousfieldLoc}
+\excludeversion{MoorePostnikovSystems}
 
 %\def\excludeversion#1{\includeversion{#1}}
 
@@ -42,11 +45,14 @@
 \excludeversion{JeremyQuillen}
 \excludeversion{JandrGammaSpaces}
 \excludeversion{MarkusLocalisation}
+\excludeversion{KrishanuKanComplexes}
+\includeversion{JeremyModelCategories}
+
 % My talks
-\includeversion{SteenrodTalk}
-\includeversion{SerreCohModTwoEilMacLane}
-\includeversion{SignatureThmTalk}
-\includeversion{Operads}
+\excludeversion{SteenrodTalk}
+\excludeversion{SerreCohModTwoEilMacLane}
+\excludeversion{SignatureThmTalk}
+\excludeversion{Operads}
 
 
 
@@ -2488,13 +2494,252 @@ Let $K$ be $K$-theory. Then $\pi_*K$ is $\Z$ in even degrees, so a localisation 
 
 \pagebreak
 \end{MarkusLocalisation}
+\begin{MoorePostnikovSystems}
+\KanSemResponse
+{``Semi-simplicial complexes and Postnikov systems'' --- J.\ Moore}
+Reading this paper has been a pleasure, as it lays out parsimoniously a series of analogies between Kan complexes and spaces. My reading of this paper is the first thing that has justified to me that Kan complexes could/should be the fibrant objects in a model category structure on $s\Set$ Quillen equivalent to the category of spaces.
+
+It seems to me that Kan complexes are rather more convenient than spaces for the study of homotopy groups. For example, it is possible to pare back a Kan complex $X$ to a minimal one $X'$, a deformation retract, after which the homotopy groups $\pi_n(X,x)$ (by lemma 1.20) are just the \emph{set} of maps from $(\Delta^n,\partial\Delta^n)$ to $X'$. I don't know how useful this is for calculation, but it's a nice idea. I can't think of an analogy for this in $\Top$. Given a space $X$, one can take its simplicial complex, and then trim this back to a minimal Kan complex, which seems to summarise exactly the data of 'points', 'paths', 'homotopies of paths', etc.
+
+One thing which is immediately striking is how easy it is to describe the Postnikov stages of a Kan complex. It's not just easy to describe them, but even to see why the description works.
+
+I had intended to write more, on the Dold-Kan correspondence (which is pretty surprising I suppose), but I'm deeply exhausted after the move.
+\pagebreak
+\end{MoorePostnikovSystems}
+\begin{KrishanuKanComplexes}
+\KanSemResponse
+{``Kan Complexes, etc.'' --- Krishanu}
+A Kan fibration is a map of simplicial sets with the RLP with respect to all of the inclusions of horns $\Lambda_n^k\cofibration \Delta_n$. A Kan complex is any simplicial set whose unique map to the point is a Kan fibration. As such, it is clear that $Y$ is Kan implies that $Y^X$ is Kan for any $X$.
+
+Note that we define the mapping simplicial set by the formula $(Y^X)_n=\Hom(X\times\Delta_n,Y)$. To understand this, recall that by Yoneda's lemma, the $n$-simplices of a simplicial set are in bijection with maps from the standard $n$-simplex, and then recall the adjunction.
+
+The Kan condition shows that we can compose paths, etc, so that the homotopy groups $\pi_n(Y,y):=\pi_0((Y,y)^{(\Delta_n,\partial\Delta_n)})$ are indeed groups.
+
+There's a fantastic way to form the Postnikov tower for a Kan complex $Y$. Let $P^n Y$ be formed from $Y$ by identifying two simplices whenever all of their faces of dimension at most $n$ coincide. Using Yoneda's lemma, one sees that the homotopy groups of $P^nY$ vanish above dimension $n$.
+
+\begin{prop*}
+A simplicial group is a Kan complex. Moreover, its homotopy groups are all abelian, and multiplication in the homotopy groups coincides with multiplication in the group.
+\end{prop*}
+\begin{thm*}[Dold-Kan]
+The categories $s\mathsf{Ab}$ and $\mathsf{Ch}_{\geq0}$ are equivalent, with a commuting diagram:
+\[\xymatrix{
+\ar[rd]_{\pi_*}s\mathsf{Ab}\ar@<.1cm>[rr]^{N_*}&&
+\mathsf{Ch}_{\geq0}\ar@<1mm>[ll]^\Gamma\ar[ld]^{H_*}\\
+&\mathsf{Ab}
+}\]
+\end{thm*}
+\noindent One can use this theorem to give nice simplicial models for Eilenberg-MacLane spaces, which have a multiplication which strictifies the loopspace structure\footnote{Recall that the realisation of a product of simplicial sets is homeomorphic to the product of the realisations, so the realisation of a simplicial group is a group.}.
+
+To construct $N_*$ (the \emph{normalised chain complex}\footnote{Haynes ramarked that the simplicial abelian groups which are \emph{minimal} Kan complexes are exactly those for which the differentials all vanish in the normalised chain complex.}), one defines, for $A_*$ a simplicial abelian group:
+\[N_n(A)=\bigcap_{i=0}^{n-1}\ker(\partial_i),\textup{ and uses $\partial_n$ for the differential.}\]
+
+
+\pagebreak
+\end{KrishanuKanComplexes}
+\begin{JeremyModelPractice}
+\KanSemResponse
+{``Model Categories and some other stuff.'' --- Jeremy}
+\subsection*{Philosophy}
+Given a category $\calC$, what does it mean to equip $\calC$ with a homotopy theory? Ideas:
+
+\begin{itemise}
+\item Equip $\calC$ with 2-morphisms (as homotopies), and so obtain the notion of $\infty$-categories.
+\item Take the classical homotopy category, $\ho\calC$, where one simply identifies homotopic morphisms. This sounds like a bad idea --- we shouldn't just identify isomorphic things!
+\item Quillen: form a model category, to generalise the homotopy theories of spaces and chain complexes...
+\end{itemise}
+Not every higher category comes from a model category, and the model category should be thought of as a (non-canonical) presentation of the homotopy theory coming from a higher category.
+\begin{defn*}
+Fix a category $\calC$. Say that $u:A\to Z$ has the LLP with respect to $f:Y\to W$ (equivalently that $f$ has the RLP wrt $u$) if every commuting square as follows has a lift:
+\[\xymatrix{
+A\ar[r]\xycofib[d]_u&Y\ar@{->>}[d]^f\\
+Z\ar@{-->}[ru]\ar[r]&W
+}\]
+If $u$ has the LLP wrt $f$, write $u\pitchfork f$. Given a class $M$ of maps in $\calC$, define $^\pitchfork M$ to be the class of all maps with the LLP wrt every morphism in $M$, and define $ M^\pitchfork$ to be the class of all maps with the RLP wrt every morphism in $M$.
+\end{defn*}
+\begin{defn*}
+A weak factorisation system $(L,R)$ in $\calC$ is...
+\begin{enumerate}\squishlist
+\item Every $f:A\to B$ factors as $A\overset{p}{\to} Z\overset{u}{\to} B$ with $p\in R$ and $u\in L$.
+\item $\calL={^\pitchfork R}$, $R=L^\pitchfork$
+\end{enumerate}
+\end{defn*}
+\begin{defn*}
+A model category $\calC$ is a category with weak equivs $W\subset\Mor\calC$ satisfying
+\begin{enumerate}\squishlist
+\item Two out of three.
+\item There exist classes $\textup{cof,fib}\subset\Mor\calC$ such that the following two pairs are weak factorisation systems: $(\textup{cof},\textup{fib}\cap W)$, $(\textup{cof}\cap W,\textup{fib})$.
+\item $\calC$ is complete and cocomplete.
+\end{enumerate}
+\end{defn*}\begin{prop*}
+If $(L,R)$ is a weak factorisation system, $L$ is closed under pushouts and arbitrary coproducts, and $R$ is closed under pullbacks and products. Both are closed under retracts and both contain all isomorphisms. ($L$ is closed under transfinite composition...)
+\end{prop*}
+Given a model category $\calC$, as it is complete and cocomplete, $\calC$ contains an initial object $\emptyset$, and a terminal object $*$. Call an object $A$ of $\calC$:
+\begin{enumerate}\squishlist
+\item cofibrant if $\emptyset\to A$ is a cofibration
+\item fibrant if $A\to *$ is a fibration
+\end{enumerate}
+The most important objects are the cofibrant-fibrant objects, and the other objects in the category `model' these.
+
+\subsection*{Homotopy theory}
+If $A,B$ are fib-cof, then one can form a factorisation $A\sqcup A\cofibration C \acyclicfibration A$ ($C$ a ``cylinder object''), and this way, we have the usual method of defining homotopy.% So to define homotopy, we could restrict to the full subcategory consisting of cof-fib objects, and ... hrm... (I think the hootopy cat should be the localisation to the thingo... schmeh)
+
+\begin{defn*}
+The correct notion of `morphism of homotopy theories' is that of Quillen adjunction:
+\[\xymatrix@R=.3cm@C=2cm{
+\calC  \ar@<.6ex>[r]^{L}&
+\calD  \ar@<.4ex>[l]^{R}
+}\]
+such that $L$ preserves cofibrations and acyclic cofibrations, and $R$ preserves fibrations and acyclic fibrations.
+\end{defn*}
+\begin{lem*}[Ken Brown]
+$L$ preserves weak equivalences between cofibrant objects.
+\end{lem*}
+\begin{proof}
+Given $f:A\weakequiv B$, chase the following diagram:
+\[\xymatrix@R=0cm{
+&A\xycofib[dr]\\
+\emptyset\xycofib[ur]\xycofib[dr]&&A\sqcup B\xycofib[r]&C\xyfib[r]^\sim&B\\
+&B\xycofib[ur]
+}\qedhere\]
+\end{proof}
+\noindent This implies that the adjunction induces maps of homotopy categories.
+\subsection*{Producing model structures}
+The following is easy to check, easy to compute with, and very prevalent:
+\begin{defn*}
+A combinatorial model category is a model category $\calC$, which is 
+\begin{enumerate}\squishlist
+\item \textbf{Locally presentable:} 
+\begin{itemise}
+\item Locally small (the hom classes are sets);
+\item There exists a set $S$ of objects generating $\calC$ under colimits such that every object of $S$ is ``small''. 
+\begin{itemise}
+\item An object $s$ is small \Iff it is small with respect to some regular cardinal $\kappa$. $s$ is small w.r.t.\ a regular cardinal $\kappa$ (and thus w.r.t.\ all larger regular cardinals) if the following natural map is always bijective.
+Suppose we have a poset $J$ such that every subposet $L\subset J$ of cardinality $<\kappa$ has an upper bound in $J$ (a $\kappa$-filtered category). Then for all diagrams $J\to \calC$, there is a natural map 
+\[\varinjlim_J \Hom_\calC(X,F(j))\to\Hom(X,\varinjlim_J F(j)).\]
+This is the map which we require to be a bijection.
+\end{itemise}
+\end{itemise}
+\item Cofibrantly generated: there exist sets $I,J$ such that $I$ and $J$ generate the cofibrations and trivial cofibrations respectively.
+\begin{itemise}
+\item If $I$ is a set, write $\textup{call}(I)$ for the class of things which can be obtained using pushouts and (transfinite) compositions. Then write $\textup{cof}(I)$ for the set of retracts of $\textup{cell}(I)$. This is what we mean by generate.
+\end{itemise}
+
+\end{enumerate}
+In simplicial sets, $I$ is the set of inclusions $\partial_i\Delta^n\to \Delta^n$.
+
+
+\end{defn*}
+\begin{thm*}[Jeff Smith]
+Suppose that $\calC$ is locally presentable and $\textup{Arr}_W(\calC)\subset\textup{Arr}(\calC)$ is an accessible inclusion. Given weak equivalences $W$ satisfying two out of three, and generating cofibrations $I$ such that $\textup{cof}(I)\cap W$ is closed under pushout and transfinite composition. Suppose also that $I^\pitchfork\subset W$.
+
+Then $\calC$ is a model category.
+\end{thm*}
+
+\pagebreak
+\end{JeremyModelPractice}
+\begin{JeremyModelCategories}
+\KanSemResponse
+{``Model Categories and some other stuff'' --- Jeremy}
+\subsection*{Philosophy}
+Given a category $\calC$, what does it mean to equip $\calC$ with a homotopy theory? Ideas:
+
+\begin{itemise}
+\item Equip $\calC$ with 2-morphisms (as homotopies), and so obtain the notion of $\infty$-categories.
+\item Take the classical homotopy category, $\ho\calC$, where one simply identifies homotopic morphisms. This sounds like a bad idea --- we shouldn't just identify isomorphic things!
+\item Quillen: form a model category, to generalise the homotopy theories of spaces and chain complexes...
+\end{itemise}
+Not every higher category comes from a model category, and the model category should be thought of as a (non-canonical) presentation of the homotopy theory coming from a higher category.
+\begin{defn*}
+Fix a category $\calC$. Say that $u:A\to Z$ has the LLP with respect to $f:Y\to W$ (equivalently that $f$ has the RLP wrt $u$) if every commuting square as follows has a lift:
+\[\xymatrix{
+A\ar[r]\xycofib[d]_u&Y\ar@{->>}[d]^f\\
+Z\ar@{-->}[ru]\ar[r]&W
+}\]
+If $u$ has the LLP wrt $f$, write $u\pitchfork f$. Given a class $M$ of maps in $\calC$, define $^\pitchfork M$ to be the class of all maps with the LLP wrt every morphism in $M$, and define $ M^\pitchfork$ to be the class of all maps with the RLP wrt every morphism in $M$.
+\end{defn*}
+\begin{defn*}
+A weak factorisation system $(L,R)$ in $\calC$ is...
+\begin{enumerate}\squishlist
+\item Every $f:A\to B$ factors as $A\overset{p}{\to} Z\overset{u}{\to} B$ with $p\in R$ and $u\in L$.
+\item $\calL={^\pitchfork R}$, $R=L^\pitchfork$
+\end{enumerate}
+\end{defn*}
+\begin{defn*}
+A model category $\calC$ is a category with weak equivs $W\subset\Mor\calC$ satisfying
+\begin{enumerate}\squishlist
+\item Two out of three.
+\item There exist classes $\textup{cof,fib}\subset\Mor\calC$ such that the following two pairs are weak factorisation systems: $(\textup{cof},\textup{fib}\cap W)$, $(\textup{cof}\cap W,\textup{fib})$.
+\item $\calC$ is complete and cocomplete.
+\end{enumerate}
+\end{defn*}\begin{prop*}
+If $(L,R)$ is a weak factorisation system, $L$ is closed under pushouts and arbitrary coproducts, and $R$ is closed under pullbacks and products. Both are closed under retracts and both contain all isomorphisms. ($L$ is closed under transfinite composition...)
+\end{prop*}
+Given a model category $\calC$, as it is complete and cocomplete, $\calC$ contains an initial object $\emptyset$, and a terminal object $*$. Call an object $A$ of $\calC$:
+\begin{enumerate}\squishlist
+\item cofibrant if $\emptyset\to A$ is a cofibration
+\item fibrant if $A\to *$ is a fibration
+\end{enumerate}
+The most important objects are the cofibrant-fibrant objects, and the other objects in the category `model' these.
+
+\subsection*{Homotopy theory}
+If $A,B$ are fib-cof, then one can form a factorisation $A\sqcup A\cofibration C \acyclicfibration A$ ($C$ a ``cylinder object''), and this way, we have the usual method of defining homotopy.% So to define homotopy, we could restrict to the full subcategory consisting of cof-fib objects, and ... hrm... (I think the hootopy cat should be the localisation to the thingo... schmeh)
+
+\begin{defn*}
+The correct notion of `morphism of homotopy theories' is that of Quillen adjunction:
+\[\xymatrix@R=.3cm@C=2cm{
+\calC  \ar@<.6ex>[r]^{L}&
+\calD  \ar@<.4ex>[l]^{R}
+}\]
+such that $L$ preserves cofibrations and acyclic cofibrations, and $R$ preserves fibrations and acyclic fibrations.
+\end{defn*}
+\begin{lem*}[Ken Brown]
+$L$ preserves weak equivalences between cofibrant objects.
+\end{lem*}
+\begin{proof}
+Given $f:A\weakequiv B$, chase the following diagram:
+\[\xymatrix@R=0cm{
+&A\xycofib[dr]\\
+\emptyset\xycofib[ur]\xycofib[dr]&&A\sqcup B\xycofib[r]&C\xyfib[r]^\sim&B\\
+&B\xycofib[ur]
+}\qedhere\]
+\end{proof}
+\noindent This implies that the adjunction induces maps of homotopy categories.
+\subsection*{Producing model structures}
+The following is easy to check, easy to compute with, and very prevalent:
+\begin{defn*}
+A combinatorial model category is a model category $\calC$, which is 
+\begin{enumerate}\squishlist
+\item \textbf{Locally presentable:} 
+\begin{itemise}
+\item Locally small (the hom classes are sets);
+\item There exists a set $S$ of objects generating $\calC$ under colimits such that every object of $S$ is ``small''. 
+\begin{itemise}
+\item An object $s$ is small \Iff it is small with respect to some regular cardinal $\kappa$. $s$ is small w.r.t.\ a regular cardinal $\kappa$ (and thus w.r.t.\ all larger regular cardinals) if the following natural map is always bijective.
+Suppose we have a poset $J$ such that every subposet $L\subset J$ of cardinality $<\kappa$ has an upper bound in $J$ (a $\kappa$-filtered category). Then for all diagrams $J\to \calC$, there is a natural map 
+\[\varinjlim_J \Hom_\calC(X,F(j))\to\Hom(X,\varinjlim_J F(j)).\]
+This is the map which we require to be a bijection.
+\end{itemise}
+\end{itemise}
+\item Cofibrantly generated: there exist sets $I,J$ such that $I$ and $J$ generate the cofibrations and trivial cofibrations respectively.
+\begin{itemise}
+\item If $I$ is a set, write $\textup{call}(I)$ for the class of things which can be obtained using pushouts and (transfinite) compositions. Then write $\textup{cof}(I)$ for the set of retracts of $\textup{cell}(I)$. This is what we mean by generate.
+\end{itemise}
+
+\end{enumerate}
+In simplicial sets, $I$ is the set of inclusions $\partial_i\Delta^n\to \Delta^n$.
+
+
+\end{defn*}
+\begin{thm*}[Jeff Smith]
+Suppose that $\calC$ is locally presentable and $\textup{Arr}_W(\calC)\subset\textup{Arr}(\calC)$ is an accessible inclusion. Given weak equivalences $W$ satisfying two out of three, and generating cofibrations $I$ such that $\textup{cof}(I)\cap W$ is closed under pushout and transfinite composition. Suppose also that $I^\pitchfork\subset W$.
+
+Then $\calC$ is a model category.
+\end{thm*}
+
+\pagebreak
+\end{JeremyModelCategories}
+
 \end{document}
-
-
-
-
-
-
 
 
 
