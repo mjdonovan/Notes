@@ -22,9 +22,10 @@
 \excludeversion{GeoffroyTopologicalHochschildHomology}
 \excludeversion{RuneBabytop}
 \excludeversion{SaulCrystallineCohomology}
+\includeversion{LuisKoszulDuality}
 
 %Misc Fall 2011
-\includeversion{BehrensGoodwillieCalcIntro}
+\excludeversion{BehrensGoodwillieCalcIntro}
 
 %\def\excludeversion#1{\includeversion{#1}}
 
@@ -1072,7 +1073,8 @@ Now
 \[\xymatrix{
 W_1\ar[rrd];[]&\\
 \Map_W(x_0,x_n)\xycofib[u]\ar[r];[]&\Map_W(x_0,\ldots,x_n)\xycofib[r]\ar[d]&W_n\ar[d]^{\phi_n}_{\sim,fibrat}\\
-&\Map(x_0,x_1)\times\cdots\times\Map(x_{n-1},x_n)\xycofib[r]&W_1\times_{W_0}\cdots\times_{W_0}W_1
+&\Map(x_0,x_1)\times\cdots\times\Map(x_{n-1},x_n)\xycofib[r]&
+W_1\times_{W_0}\cdots\times_{W_0}W_1
 }\]
 The space of sections of $\phi_n$ is contractible, so that there is a well defined composition up to homotopy.
 \subsection*{The homotopy category of a Segal space}
@@ -1232,7 +1234,7 @@ The linearisation of $\id:\Top_*\to\Top_*$ gives stable homotopy!
 \end{exmp*}
 
 
-Goodwillie constructs Taylor tower:
+Goodwillie constructs a Taylor tower:
 
 \[\xymatrix{
 D_2F\ar[r]&\ar[d]P_2F\\
@@ -1246,9 +1248,54 @@ Then $F(X)\weakequiv \varinjlim P_iF(X)$ whenever the connectivity of $X$ exceed
 
 \pagebreak
 \end{BehrensGoodwillieCalcIntro}
+\begin{LuisKoszulDuality}
+\KanSemResponse
+{``Koszul Duality for $E_n$-operads'' --- Luis Pereira}
+To an operad $\calO$, we can associate its Koszul dual $\calO'$, a co-operad (?). The claim in this talk is that $E_n'=E_n[-n]$, where $E_n[-n](m)=\Sigma^{m-n}E_n(m)$ (or something like that).
+\subsection*{Definitions of `operad'}
+\begin{itemize}\squishlist
+\item If $(\calC,\otimes,1)$ is a monoidal category, and operal $\calO$ in $\calC$ is a sequence $\calO(m)$ of objects with actions of $\Sigma_m$ and maps
+\[\calO(m)\otimes\calO(n_1)\otimes\cdots\otimes\calO(n_m)\to\calO(\sum n_i),\]
+and a unit map $1\to\calO(1)$, satisfying unitality, associativity and symmetry.
+\item 
+Let $\mathsf{fin}$ be the category of finite sets and isomorphisms. Then let $\calC^{\mathsf{fin}}=\Fun(\mathsf{fin},\calC)$ be the category of symmetric sequences in $\calC$. There's a monoidal structure on $\calC^{\mathsf{fin}}$ given by
+\[(P\circ Q)(n):=\coprod_{T\in\textup{Tree}^2(n)}(P,Q)(T),\]
+taken over all two-level rooted trees with non-root leaves 
+where for a two-level rooted tree $T$ with levels $\ell_1$ and $\ell_2$, we set \[(P,Q)(T):=\bigotimes_{v\in\ell_1}P(\textup{incoming}(v))\otimes\bigotimes_{w\in\ell_2}P(\textup{incoming}(w))\]
+Then an operad is a monoid for $\circ$.
+
+\textbf{Haynes:} wrote this as
+\[(P\circ Q)(S)=
+\coprod_{[f:S\to T]}P(T)\otimes\bigotimes_{t\in T}Q(f^{-1}(t)),\]
+and claimed that $\calC$ should be a closed symmetric monoidal category with a zero object.
+
+An algebra is a left module for $\calO$ which is concentrated in degree zero. \textbf{Haynes:} It might be interesting to consider left modules which are concentrated in degrees zero and one. What appears in degree zero is still an algebra, but there is more action to be considered in degree one!
+
+\item There is a third description in terms of partial composition products $\calO(n)\otimes\calO(m)\overset{\circ_i}{\to}\calO(n+m-1)$, yielding a description in terms of unleveled rooted trees without unary vertices.
+
+We can define an algebra for $\calO$ to be an object $X$ of $\calC$ with maps $\calO(m)\otimes X^{\otimes m}\to X$ satisfying some axioms.
+\end{itemize}
+
+
+
+
+
+
+
+
+
+
+
+\pagebreak
+\end{LuisKoszulDuality}
 
 
 \end{document}
+
+
+
+
+
 
 
 
