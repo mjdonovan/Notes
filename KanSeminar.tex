@@ -2646,7 +2646,7 @@ Given a category $\calC$, what does it mean to equip $\calC$ with a homotopy the
 \begin{itemise}
 \item Equip $\calC$ with 2-morphisms (as homotopies), and so obtain the notion of $\infty$-categories.
 \item Take the classical homotopy category, $\ho\calC$, where one simply identifies homotopic morphisms. This sounds like a bad idea --- we shouldn't just identify isomorphic things!
-\item Quillen: form a model category, to generalise the homotopy theories of spaces and chain complexes...
+\item Quillen: form a model category, to generalise the homotopy theories of spaces and chain complexes. This is a strong thing to do --- to give a model structure can be difficult, but once you have one, it's a very powerful computational tool.
 \end{itemise}
 Not every higher category comes from a model category, and the model category should be thought of as a (non-canonical) presentation of the homotopy theory coming from a higher category.
 \begin{defn*}
@@ -2655,15 +2655,25 @@ Fix a category $\calC$. Say that $u:A\to Z$ has the LLP with respect to $f:Y\to 
 A\ar[r]\xycofib[d]_u&Y\ar@{->>}[d]^f\\
 Z\ar@{-->}[ru]\ar[r]&W
 }\]
-If $u$ has the LLP wrt $f$, write $u\pitchfork f$. Given a class $M$ of maps in $\calC$, define $^\pitchfork M$ to be the class of all maps with the LLP wrt every morphism in $M$, and define $ M^\pitchfork$ to be the class of all maps with the RLP wrt every morphism in $M$.
+If $u$ has the LLP wrt $f$, write $u\pitchfork f$. Given a class $M$ of maps in $\calC$, define $^\pitchfork M$ to be the class of all maps with the LLP wrt every morphism in $M$ (the \emph{left compliment}), and define $ M^\pitchfork$ to be the class of all maps with the RLP wrt every morphism in $M$ (the \emph{right compliment}).
 \end{defn*}
 \begin{defn*}
-A weak factorisation system $(L,R)$ in $\calC$ is...
+A weak factorisation system in $\calC$ is a pair $(L,R)$ of subclasses of $\Mor\calC$ such that:
 \begin{enumerate}\squishlist
 \item Every $f:A\to B$ factors as $A\overset{p}{\to} Z\overset{u}{\to} B$ with $p\in R$ and $u\in L$.
 \item $\calL={^\pitchfork R}$, $R=L^\pitchfork$
 \end{enumerate}
 \end{defn*}
+\begin{prop*}
+For any subclass $M\subset\Mor\calC$, the left complement ${^\pitchfork M}$:
+\begin{enumerate}\squishlist
+\item contains all isomorphisms;
+\item is closed under retracts;
+\item is closed under coproducts (taken in the arrow category);
+\item is closed under co-base change (with respect to arbitrary maps);
+\item is closed under transfinite composition.\footnote{Given a sequence of maps $x_0\to x_1\to\cdots$, the transfinite composition is the map $x_0\to\varinjlim x_i$. In fact, we can form a transfinite induction with any ordinal in place of $\omega$.}
+\end{enumerate}
+\end{prop*}
 \begin{defn*}
 A model category $\calC$ is a category with weak equivs $W\subset\Mor\calC$ satisfying
 \begin{enumerate}\squishlist
@@ -2671,29 +2681,59 @@ A model category $\calC$ is a category with weak equivs $W\subset\Mor\calC$ sati
 \item There exist classes $\textup{cof,fib}\subset\Mor\calC$ such that the following two pairs are weak factorisation systems: $(\textup{cof},\textup{fib}\cap W)$, $(\textup{cof}\cap W,\textup{fib})$.
 \item $\calC$ is complete and cocomplete.
 \end{enumerate}
+\noindent The power of such a structure comes from the interaction of the two weak factorisation systems. Note that the class $W$ is determined as the set of composites of an acyclic cofibration and an acyclic fibration.
+\begin{exmps*}
+\begin{enumerate}\squishlist
+\item $s\mathsf{Set}$, with cofibrations the monomorphisms, fibrations the Kan fibrations, and weak equivalences trickier.
+\item $\mathsf{Top}$, with cofibrations the retracts of generalised CW pairs, fibrations the (not necessarily surjective) Serre fibrations, and weak equivalences the normal weak equivalences.
+\item $\mathsf{Top}$, with an alternative model structure is which the cofibrations the NDR-pairs, the fibrations are the Hurewicz fibrations, and the weak equivalences the homotopy equivalences.\footnote{Although perhaps not as useful as the other model structure, this structure is nice because one can specify the three classes very explicitly.}
+\end{enumerate}
+
+\end{exmps*}
+
 \end{defn*}\begin{prop*}
 If $(L,R)$ is a weak factorisation system, $L$ is closed under pushouts and arbitrary coproducts, and $R$ is closed under pullbacks and products. Both are closed under retracts and both contain all isomorphisms. ($L$ is closed under transfinite composition...)
 \end{prop*}
-Given a model category $\calC$, as it is complete and cocomplete, $\calC$ contains an initial object $\emptyset$, and a terminal object $*$. Call an object $A$ of $\calC$:
+Given a model category $\calC$, as it is complete and cocomplete, $\calC$ contains an initial object $\emptyset$ (the empty limit), and a terminal object $*$ (the empty colimit). Call an object $A$ of $\calC$:
 \begin{enumerate}\squishlist
 \item cofibrant if $\emptyset\to A$ is a cofibration
 \item fibrant if $A\to *$ is a fibration
 \end{enumerate}
-The most important objects are the cofibrant-fibrant objects, and the other objects in the category `model' these.
+The most important objects are the cofibrant-fibrant objects, and the other objects in the category `model' these. In $s\mathsf{Set}$, these are the Kan complexes, and in $\mathsf{Top}$, these are the retracts of CW complexes.
 
 \subsection*{Homotopy theory}
-If $A,B$ are fib-cof, then one can form a factorisation $A\sqcup A\cofibration C \acyclicfibration A$ ($C$ a ``cylinder object''), and this way, we have the usual method of defining homotopy.% So to define homotopy, we could restrict to the full subcategory consisting of cof-fib objects, and ... hrm... (I think the hootopy cat should be the localisation to the thingo... schmeh)
+Given a category $\calC$ with weak equivalences, we could think about $\ho\calC=\calC[W^{-1}]$. To construct this naiively, we need to `pass to a higher universe'. 
 
+An alternative would be to form the full subcategory $\calC_{\textup{cf}}$ of fibrant-cofibrant objects of $\calC$, and take the homotopy category $\ho\calC_{\textup{cf}}$. This turns out to be an equivalent category, but we have not avoided the set-theoretic difficulties.
+
+Instead, we proceed as in $\mathsf{Top}$. If $A,B$ are fib-cof, then one can form a factorisation $A\sqcup A\cofibration C \acyclicfibration A$ ($C$ a ``cylinder object''), and this way, we have the usual method of defining homotopy. That is, we say that $f,g:A\sqcup A\to B$ are homotopic if $f\sqcup g:A\sqcup A\to B$ factors through $C$. We can this way define $\ho\calC:=\calC_{\textup{cf}}/\sim$, and we see that this definition gives an \emph{equivalent} category to those above, but without set-theoretic difficulties.
+
+% So to define homotopy, we could restrict to the full subcategory consisting of cof-fib objects, and ... hrm... (I think the hootopy cat should be the localisation to the thingo... schmeh)
+\subsection*{Morphisms of model categories}
+%The correct notion of `morphism of homotopy theories' is that of Quillen adjunction:
 \begin{defn*}
-The correct notion of `morphism of homotopy theories' is that of Quillen adjunction:
-\[\xymatrix@R=.3cm@C=2cm{
-\calC  \ar@<.6ex>[r]^{L}&
-\calD  \ar@<.4ex>[l]^{R}
-}\]
-such that $L$ preserves cofibrations and acyclic cofibrations, and $R$ preserves fibrations and acyclic fibrations.
+An adjunction \smash{$\xymatrix@R=.3cm@C=1cm{
+\calC  \ar@<.6ex>[r]^{F}&
+\calD  \ar@<.4ex>[l]^{G}
+}$} is called a \emph{Quillen adjunction} if any of the following equivalent conditions hold:
+\begin{enumerate}\squishlist
+\item $F$ preserves cofibrations and acyclic cofibrations;
+\item $G$ preserves fibrations and acyclic fibrations; or
+\item $F$ preserves cofibrations and $G$ preserves fibrations.
+\end{enumerate}
+It is called a \emph{Quillen equivalence} if in addition, a map $F(c)\to d$ is a weak equivalence \Iff its adjoint $c\to G(d)$ is a weak equivalence.
 \end{defn*}
+\begin{exmp*} There is a Quillen equivalence:
+\[\xymatrix@R=.3cm@C=2cm{
+s\mathsf{Set}  \ar@<.6ex>[r]^{|\cdot|}&
+\mathsf{Top}  \ar@<.4ex>[l]^{\textup{Sing}}\\
+%X \ar@{|->}[r] & FX\\
+%GY             & Y \ar@{|->}[l]
+}\]
+In fact, the realisation of a Kan fibration is a Serre fibration (the content of a paper of Quillen), so that this adjunction preserves more than is to be expected.
+\end{exmp*}
 \begin{lem*}[Ken Brown]
-$L$ preserves weak equivalences between cofibrant objects.
+$F$ preserves weak equivalences between cofibrant objects.
 \end{lem*}
 \begin{proof}
 Given $f:A\weakequiv B$, chase the following diagram:
@@ -2703,11 +2743,18 @@ Given $f:A\weakequiv B$, chase the following diagram:
 &B\xycofib[ur]
 }\qedhere\]
 \end{proof}
-\noindent This implies that the adjunction induces maps of homotopy categories.
+\noindent This implies that the adjunction induces maps of homotopy categories. Specifically, it shows that the derived functors are well defined on Hom-sets, generalising the fundamental theorem of homological algebra.
+\begin{thm*}
+A Quillen adjunction induces a total derived adjunction \smash{$\xymatrix@R=.3cm@C=1cm{
+\ho\calC  \ar@<.6ex>[r]^{LF}&
+\ho\calD  \ar@<.4ex>[l]^{RG}
+}$} which is an equivalence when the Quillen adjunction is a Quillen equivalence.
+\end{thm*}
+
 \subsection*{Producing model structures}
-The following is easy to check, easy to compute with, and very prevalent:
+The hypotheses in the following definition are easy to check. Combinatorial model categories are easy to compute with, and very prevalent:
 \begin{defn*}
-A combinatorial model category is a model category $\calC$, which is 
+A combinatorial model category is a model category $\calC$, which is:
 \begin{enumerate}\squishlist
 \item \textbf{Locally presentable:} 
 \begin{itemise}
@@ -2720,22 +2767,27 @@ Suppose we have a poset $J$ such that every subposet $L\subset J$ of cardinality
 This is the map which we require to be a bijection.
 \end{itemise}
 \end{itemise}
-\item Cofibrantly generated: there exist sets $I,J$ such that $I$ and $J$ generate the cofibrations and trivial cofibrations respectively.
+\item \textbf{Cofibrantly generated}: there exist sets $I,J$ such that $I$ and $J$ `generate' the cofibrations and trivial cofibrations respectively.
 \begin{itemise}
 \item If $I$ is a set, write $\textup{call}(I)$ for the class of things which can be obtained using pushouts and (transfinite) compositions. Then write $\textup{cof}(I)$ for the set of retracts of $\textup{cell}(I)$. This is what we mean by generate.
 \end{itemise}
-
+For example, in $s\mathsf{Set}$, $I$ can be taken to be the set of boundary inclusions $\partial\Delta^n\to \Delta^n$ of simplices.
 \end{enumerate}
-In simplicial sets, $I$ is the set of inclusions $\partial_i\Delta^n\to \Delta^n$.
-
-
 \end{defn*}
 \begin{thm*}[Jeff Smith]
-Suppose that $\calC$ is locally presentable and $\textup{Arr}_W(\calC)\subset\textup{Arr}(\calC)$ is an accessible inclusion. Given weak equivalences $W$ satisfying two out of three, and generating cofibrations $I$ such that $\textup{cof}(I)\cap W$ is closed under pushout and transfinite composition. Suppose also that $I^\pitchfork\subset W$.
-
-Then $\calC$ is a model category.
+Suppose that $\calC$ is a locally presentable bicomplete category with a specified \textbf{set} $I\subset\Mor\calC$, and \textbf{class} $W\subset\Mor\calC$.\footnote{The hypotheses up to this footnote are not difficult to check.} Suppose also that:
+\begin{enumerate}\squishlist
+\item $\textup{Arr}_W(\calC)\subset\textup{Arr}(\calC)$ is an accessible inclusion;
+\item $W$ satisfies two out of three;
+\item $I^\pitchfork\subset W$; and
+\item $\textup{cof}(I)\cap W$ is closed under co-base changes and transfinite composition.
+\end{enumerate}
+Then $\calC$ is a model category with weak equivalences $W$ and cofibrations $\textup{cof}(I)$.
 \end{thm*}
-
+\begin{proof}
+The small object argument.
+\end{proof}
+\noindent The class of such model categories is a very favorable place in which to work. In particular, there is a nice theory of Bousfield localisation for such model categories.
 \pagebreak
 \end{JeremyModelCategories}
 
