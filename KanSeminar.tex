@@ -16,7 +16,7 @@
 \excludeversion{JandrGammaPractice}
 \excludeversion{MarkusLocalisationPractice}
 \excludeversion{JeremyModelPractice}
-
+\includeversion{JeremyRationalHomotopyPractice}
 
 % Reading responses
 \excludeversion{SerreHomSingFibSpace}
@@ -46,7 +46,7 @@
 \excludeversion{JandrGammaSpaces}
 \excludeversion{MarkusLocalisation}
 \excludeversion{KrishanuKanComplexes}
-\includeversion{JeremyModelCategories}
+\excludeversion{JeremyModelCategories}
 
 % My talks
 \excludeversion{SteenrodTalk}
@@ -2790,7 +2790,123 @@ The small object argument.
 \noindent The class of such model categories is a very favorable place in which to work. In particular, there is a nice theory of Bousfield localisation for such model categories.
 \pagebreak
 \end{JeremyModelCategories}
+\begin{JeremyRationalHomotopyPractice}
+\KanSemResponse
+{``Rational Homotopy Theory'' --- Jeremy}
+The idea: homotopy theory is hard, but using Bousfield localisation, we might be able to make it more tractable, albeit less sensitive.
 
+We'll study homotopy groups tensored with $\Q$. However, it's strange to try and form $\pi_1(X)\otimes\Q$ when $\pi_1(X)$ is non-abelian. So, we'll only study simply connected pointed spaces $X$.
+
+That is, we'd like to use the category $\mathsf{Top}_2$, consisting of simply-connected pointed spaces. However, this cannot be a model category --- it does not admit (even finite) limits.\footnote{The equaliser of the two hemisphere inclusions $\xymatrix{D^2\ar@<1mm>[r]\ar@<-.5mm>[r]&S^2}$ is the circle.}
+In order to fix this problem, we'll study the category $s\mathsf{Set}_2$ of ``2-reduced simplicial sets'':. 
+\begin{defn*}
+The category $s\mathsf{Set}_2$ of ``2-reduced simplicial sets'' is the full subcategory of $s\mathsf{Set}$ whose objects are those simplicial sets with exactly one 0-simplex and one 1-simplex.
+\end{defn*}
+\noindent This is not so inappropriate, as given a simply-connected space, a minimal subcomplex of the singular complex will be an object of this category.
+\begin{prop*}
+There is a model structure on $s\mathsf{Set}_2$, whose cofibrations are monomorphisms, whose weak equivalences are as in $s\mathsf{Set}$ (maps whose realisation is a weak equivalence), and whose fibrations are those Kan fibrations with the right lifting property with respect to $*\to\Delta^1/\partial\Delta^1$. 
+\end{prop*}
+\subsection*{Bousfield localisation}
+Suppose that $M$ is a model category (e.g.\ $s\mathsf{Set}_2$), and $S$ is a class in $\Mor M$, (e.g.\ the rational equivalences). We can construct a new model category $M_{\textup{loc}}$ with the same objects, same cofibrations, more weak equivalences (including the elements of $S$) and fewer fibrations. 
+\begin{prop*}
+The Bousfield localisation has the following properties:
+\begin{enumerate}\squishlist
+\item $(M_{\textup{loc}})_{\textup{cf}}$ embeds in $M_{\textup{cf}}$ as a subcategory.
+\item Every weak equivalence in  $(M_{\textup{loc}})_{\textup{cf}}$ is in fact a weak equivalence in $M$.
+\item There's a Quillen adjunction:
+\smash{$\xymatrix@R=.3cm@C=1cm{
+M  \ar@<.6ex>[r]^{\id}&
+M_\textup{loc}  \ar@<.4ex>[l]^{\id}\\
+%X \ar@{|->}[r] & FX\\
+%GY             & Y \ar@{|->}[l]
+}$}
+\end{enumerate}
+\end{prop*}
+\begin{defn*}
+$X$ is \emph{rational} if $\pi_*(X)$ is a $Q$-vector space (i.e.\ if $X$ is cofibrant-fibrant in the localised model structure \rednote{In what category?}.)
+\end{defn*}
+The following demonstrates why the problem of computing rationally is so tractable.
+\begin{thm*}
+The following are equivalent:
+\begin{enumerate}\squishlist
+\item $X$ is rational;
+\item $\pi_*(X)$ is a $\Q$-vector space;
+\item $\widetilde{H}_{*}(X;\Z)$ is a $\Q$-vector space;
+\item $\widetilde{H}_{*}(\Omega X;\Z)$ is a $\Q$-vector space;
+\end{enumerate}
+\end{thm*}
+\begin{proof}
+$2\iff 3$ is the only interesting part. For this, we note that ${H}^{*}(K(\Q,1);\F_p)$ is trivial for all primes $p$, which implies, via the SSS, that ${H}^{*}(K(\Q,n);\F_p)$ is trivial for all primes $p$. To finish to proof, we look hard at the Postnikov tower.
+\end{proof}
+\begin{exmps*}
+\begin{enumerate}\squishlist
+\item The rational circle: the mapping telescope of the maps
+\[S^1\overset{1}{\to}S^1\overset{2}{\to}S^1\overset{3}{\to}S^1\overset{4}{\to}\cdots\]
+Each stage $X_r$ of the telescope retracts onto $S^1$, but the map $X_r\to X_{r+1}$ is multiplication by $r$. As homotopy (and homology) commute with colimits along cofibrations, we must then obtain a rational space, in fact a $K(\Q,1)$.
+\item This can also be done with higher spheres, to obtain a spcae $S^n_0$.
+\item We can form a ``rational $(n+1)$-disk'' via $D_0^{n+1}:=CS^n_0$. Given a CW-complex $X$, we can then replace every cell with rational cells, to obtain a space $X_0$ which is rational. There's a map $X\to X_0$, universal for maps from $X$ to a rational space \rednote{category of spaces here?}. Moreover, $X\to X_0$ is cofibrant-fibrant replacement. \rednote{again, what cat?}
+\end{enumerate}
+\end{exmps*}
+\begin{thm*}
+A map $f:X\to Y$ is a rational equivalence \Iff $H_{*}(f;\Q)$ is an isomorphism.
+\end{thm*}
+\begin{proof}
+CW-approximate $X$ and $Y$. Use the universal property to obtain a map $X_0\to Y_0$. Use the above theorem: $2\iff 3$.
+\end{proof}
+\subsection*{A zig-zag of Quillen equivalences}
+We would like to find a purely algebraic category to which $s\mathsf{Set}_2$ is Quillen equivalent. Quillen obtains the following Quillen equivalences, in which the left adjoint is always drawn as the top arrow:
+\[\xymatrix@R=.3cm@C=1cm{
+(s\mathsf{Set}_2)_\textup{loc}  \ar@<.6ex>[r]^{G}
+&(s\mathsf{Gp}_1)_\textup{loc}  \ar@<.4ex>[l]^{\overline{W}}\ar@<.6ex>[r]^{\hat\Q}
+&s\mathsf{CHA}_1  \ar@<.4ex>[l]^{\scrG}\ar@<-.4ex>[r]_{\scrP}
+&s\mathsf{LA}_1  \ar@<-.6ex>[l]_{\hat U}\ar@<-.4ex>[r]_{N}
+&\mathsf{DGL}_1  \ar@<-.6ex>[l]_{N^*}\ar@<-.4ex>[r]_{\scrC}
+&\mathsf{DGC}_2  \ar@<-.6ex>[l]_{\scrL}
+}\]
+These categories are, in order:
+\begin{itemise}
+\item the localisation of 2-reduced simplicial sets, 
+\item the localisation of reduced simplicial groups (simplicial groups $G_*$ s.t.\ $G_0=\{e\}$),
+\item reduced simplicial complete Hopf algebras over $\Q$ ($R_*$ s.t.\ $R_0\simeq\Q$).
+\item reduced simplicial Lie algebras over $\Q$.
+\item reduced differential graded Lie algebras over $\Q$.
+\item 2-reduced differential graded (cocommutative coassociative) coalgebras over $\Q$.
+\end{itemise}
+Moreover, there is an adjunction {$\xymatrix@R=.3cm@C=1.5cm{
+\mathsf{Top}_2  \ar@<-.4ex>[r];[]_{|\cdot|}&
+s\mathsf{Set}_2  \ar@<-.6ex>[l];[]_{E_2\Sing}
+}
+$} inducing an isomorphism on rational homotopy categories, even though $\mathsf{Top}_2$ is not model. The functor $E_2:s\mathsf{Set}\to s\mathsf{Set}_2$ is the 2-reduction of a simplicial set, which returns the sub-simplicial set of simplices whose 1-skeleton lies at the basepoint.
+\subsection*{The five adjunctions}
+\begin{enumerate}\squishlist
+\item $G$ is the Kan loop group, and $\overline{W}$ is its right adjoint, analogous to the classifying space functor.
+\item Given a group $G$, one can form the rational group algebra $A=\Q[G]$, which is a cocommutative Hopf algebra with coproduct sending $g\mapsto g\otimes g$, and counit sending $g\mapsto1$. We can recover $G$ from $A$ as the set of grouplike elements: $\{x\in A\,|\,\Delta x=x\otimes x,\,\epsilon x=1\}$.
+
+In general, taking the grouplike elements of a cocommutative Hopf algebra returns a group (the antipode provides the inverse of a grouplike element), providing a functor $\scrG:\mathsf{CHA}\to\mathsf{Gp}$.
+
+\INDENT The adjoint functor in the other direction is the group algebra functor followed by completion at the augmentation ideal.
+\item Given a Lie algebra $L$, one can form the universal enveloping algebra $U(L)$. This can be made into a Hopf algebra by defining $\Delta(l)=l\otimes1+1\otimes l$, and $\epsilon(l)=0$. We can recover the Lie algebra as those elements satisfying these two equations.
+
+\INDENT In general, the set of elements satisfying these equations forms a Lie algebra, providing another of the above functors. Its adjoint is the universal enveloping algebra followed by completion.
+\item This is some kind of beefed up Dold-Kan correspondence, which restricts to an equivalence between $s(\mathsf{Mod}_\Q)$ and $\mathsf{Ch}^{\Q}_{\geq0}$. The challenge is to drag the extra structure from one side to the other. This is the part where we really need to be working in characteristic zero. You need to do something clever with the Eilenberg-Zilber map.
+\item A little mysterious at the moment.
+\end{enumerate}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\pagebreak
+\end{JeremyRationalHomotopyPractice}
 \end{document}
 
 
