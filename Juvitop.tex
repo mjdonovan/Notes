@@ -1,4 +1,17 @@
 % !TEX root = z_output/_Juvitop.tex
+%%% BEGIN NEW ENTRY FORMAT
+%
+%\begin{}
+%\KanSemResponse
+%{``Title'' --- Speaker --- DD/MM/2011}
+%\begin{abstract}
+%
+%\end{abstract}
+%
+%
+%
+%\pagebreak
+%%% END NEW ENTRY FORMAT
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%% 80 characters %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -6,37 +19,29 @@
 \input{../macros.tex}
 \usepackage{fancyhdr}
 
-\includeversion{PartOne}
-\includeversion{PartTwo}
-\includeversion{PartThree}
-\includeversion{PartFour}
-\includeversion{PartFive}
-\includeversion{PartSix}
-\includeversion{PartSeven}
-\includeversion{PartEight}
-\includeversion{PartNine}
-\includeversion{PartTen}
 
+%Not so good:
+\excludeversion{LuisKoszulDuality} % very incomplete
+\excludeversion{OlgaLevelStructuresAndAutomorphisms} % will never finish
+
+\def\excludeversion#1{\includeversion{#1}}
 
 %Babytop Fall 2011
-\excludeversion{GeoffroyTopologicalHochschildHomology}
-\excludeversion{RuneBabytop}
-\excludeversion{SaulCrystallineCohomology}
-\excludeversion{LuisKoszulDuality}
-\includeversion{OlgaLevelStructuresAndAutomorphisms}
+\excludeversion{GeoffroyTopologicalHochschildHomology} %ok
+\excludeversion{RuneBabytop} %ok
+\excludeversion{SaulCrystallineCohomology} %ok
 
 %Misc Fall 2011
-\excludeversion{BehrensGoodwillieCalcIntro}
-
-%\def\excludeversion#1{\includeversion{#1}}
+\excludeversion{BehrensGoodwillieCalcIntro} %ok
 
 %Juvitop Fall 2011
-\excludeversion{SaulSimplicialLocalisation}
-\excludeversion{AlexandreBousfieldLocalisation}
-\excludeversion{InnaSimplicalModelCats}
-\excludeversion{MichaelStableModelCats}
-\excludeversion{SaulInftyOneCats}
-\excludeversion{GeoffroyWeakAssociativityandCompleteSegalSpaces}
+\excludeversion{SaulSimplicialLocalisation} %ok
+\excludeversion{AlexandreBousfieldLocalisation} %ok
+\excludeversion{InnaSimplicalModelCats} %ok
+\excludeversion{MichaelStableModelCats} %ok
+\excludeversion{SaulInftyOneCats} %ok
+\excludeversion{GeoffroyWeakAssociativityandCompleteSegalSpaces} %unchecked, looks ok-ish
+\includeversion{InnaKTheory} %ok
 
 \rfoot{\footnotesize Michael Donovan}
 \newcommand{\KanSemResponse}[1]
@@ -62,19 +67,19 @@ of a category. I'll make a few remarks on how great this is and apply it
 to the theory of model categories. Most of the material on this talk is 
 based on three seminal 1980 papers by Dwyer and Kan.
 \end{abstract}
-Group completion \rednote{(do it levelwise?)}, classifying spaces, operads, etc.\ are all better in the category of simplicial sets. We have a Quillen adjunction:
-\[|\DASH|:\sSet\longleftrightarrow\Top:\Sing\]
-These form a Quillen equivalence.
+Group completion, classifying spaces, operads, etc.\ are all better in the category of simplicial sets. 
 \begin{exmp*}
 The nerve of a category $\calC$ is the simplicial set whose $k$-simplices are chains of $k$ composable morphisms. Forming the realisation of the nerve of a group (as a category) you get the classifying space.
 \end{exmp*}
+Meanwhile, we have a Quillen equivalence \smash{$|\DASH|:\sSet\longleftrightarrow\Top:\Sing.$}
+
 \noindent \textbf{One drawback:} Not everything is fibrant (unlike in $\Top$).
 This is bad, for example if you'd like to calculate, say, self maps of $S^1$, if we view $S^1$ simply as the boundary of the $2$-simplex.
 The fibrant objects in $\sSet$ are the Kan complexes, ``characterised by the fact that they are enormous''.
 \subsection*{Simplicial Localisation}
 Given a category $\calC$ and a class $\scrW$ of ``weak equivalences'' in $\calC$. $\scrW$ should have the 2 of 3 property, and maybe some other stuff. We want to localise $\calC\to\calC[\scrW^{-1}]$ with the obvious universal property.
 
-Let's write a candidate for $\calC[\scrW^{-1}]$. The objects are the same, while the maps are equivalence classes of zigzags (\rednote{under some relation} where we at least allow ourselves to add in pairs of identities):
+Let's write a candidate for $\calC[\scrW^{-1}]$. The objects are the same, while the maps are equivalence classes of zigzags ({under some relation} where we at least allow ourselves to add in pairs of identities):
 \[\xymatrix{
 X\ar[r]&A_0&\ar[l]_\sim A_1\ar[r]&A_2&\ar[l]_\sim\cdots\ar[r]&A_{2n}&A_{2n+1}\ar[l]_\sim\ar[r]&Y
 }\]
@@ -174,7 +179,6 @@ model for $(\infty,1)$-categories) obtained from localizing simplicial spaces,
 and Dugger's theory of presentations of model categories, which are 
 localizations of the so-called universal model categories.
 \end{abstract}
-\begin{PartOne}
 Let $M$ be a model category. This structure supports the inversion of the weak equivalences. Have $\ho M(X,Y)=M(X_C,Y_F)/\sim$. What if we want to further localise $\ho M$, by a bunch of maps $S$. Want:
 \[\xymatrix{
 M\ar[d]\ar@{..>}[r]&N\ar[d]\\
@@ -208,15 +212,16 @@ Now we can redefine left Bousfield localisation, calling it $L_SM$:
 \item Note that the fibrant objects are now the $S$-local objects.
 \end{itemise}
 \subsection*{Homotopy function complexes (with a discussion of Reedy model categories)}
-$\underline(X,Y)$ is supposed to be such that $\pi_0=\ho M(X,Y)$. One way to think about it is via Saul's talk. This is the simplicial mapping space. However, there are set-theoretical problems, for large categories, and model categories are always large --- a small category doesn't have enough limits and colimits.
+$\underline(X,Y)$ is supposed to be such that $\pi_0=\ho\,M(X,Y)$. One way to think about it is via Saul's talk. This is the simplicial mapping space. However, there are set-theoretical problems, for large categories, and model categories are always large --- a small category doesn't have enough limits and colimits.
 
-We thus need a new definition. Suppose that $M$ is a simplicial model category. Then define $\underline M(X,Y)$ by $\underline M(X,Y)_m=M(X_C\otimes\Delta^m,Y_F)$. 
+We thus need a new definition. Suppose that $M$ is a simplicial model category. Then define $\underline M(X,Y)$ by $\underline M(X,Y)_m=M(X_C\otimes\Delta^m,Y_f)$. 
 
 But how can we define $\underline M(X,Y)$ for an arbitrary model category? We need analogues of the cosimplicial object $X^*$:
-\[\xymatrix{X_c\ar@<.6ex>[r]\ar@<-.6ex>[r]&\ar[l] X_C\otimes\Delta^1
+\[\xymatrix{X_C\ar@<.6ex>[r]\ar@<-.6ex>[r]&\ar[l] X_C\otimes\Delta^1
 \ar[r]\ar@<1.2ex>[r]\ar@<-1.2ex>[r]&
 \ar@<.6ex>[l]\ar@<-.6ex>[l]X_C\otimes\Delta^2
 }\]
+whose simplicial set of maps to $Y_f$ is the simplicial mapping space.
 
 The first bit should be a cylinder object, giving $X\sqcup X\cofibration X\otimes \Delta^1\weakequiv X$. Ummm, in general, want $X\otimes\partial \Delta^m\cofibration X\otimes\Delta^M\weakequiv X$ each time.
 
@@ -233,8 +238,6 @@ Now we can define three model structure on $cM$:
 \item $(cM)_{inj}$ in which the weak equivalences (cofibrations) are the termwise weak equivalences (cofibrations).
 \item $(cM)_{Reedy}$. Here the weak equivalences are the termwise weak equivalences. The cofibrations are the natural transformations whose restrictions to $\Delta^+$ are cofibrations in the projective model structure on $M^{\Delta^+}$. The fibrations are the natural transformations whose restrictions to $\Delta^-$ are fibrations in the injective model structure on $M^{\Delta^-}$. 
 \end{enumerate}
-\end{PartOne}
-\begin{PartTwo}
 The upshot: we can define $\underline M(A,X)=M((A^*)_c,X_f)$.
 \begin{prop*}
 For $M$ a model category, a map $A\to B$ is a weak equivalence \Iff the $\underline M(B,X)\to\underline M(A,X)$ are weak equivalences for all $X$.
@@ -280,7 +283,6 @@ If you smash $\partial\Delta^{m+2}\to \Delta^{m+2}$ with $\partial\Delta^0\to\De
 
 Ummmmmmmm localise with respect to $F_{\Delta^1}\sqcup_{F_{\Delta^0}}\cdots\sqcup_{F_{\Delta^0}}F_{\Delta^1}\to F_{\Delta^n}$.
 \end{enumerate}
-\end{PartTwo}
 \pagebreak
 \end{AlexandreBousfieldLocalisation}
 \begin{GeoffroyTopologicalHochschildHomology}
@@ -302,14 +304,14 @@ and make an explicit computation of THH(KU).
 \end{abstract}
 \subsection*{Hochschild Homology}
 Suppose $k$ is a commutative ring and $A$ an associative $k$-algebra. I can define $A\otimes_k A^\op$, and $(A\otimes_k A^\op)^\op=A\otimes_k A^\op$, so that left and right modules coincide. We'll call such things bimodules:
-\[MOD_{A\otimes_k A^\op}:=Bimod{A-A}\]
-For $M\in Bimod{A-A}$, 
+\[\mathsf{Mod}_{A\otimes_k A^\op}:=\mathsf{Bimod}_{A-A}\]
+For $M\in \mathsf{Bimod}_{A-A}$, 
 \[\HH_*(A,M):=\Tor^{A\otimes_k A^\op}(A,M)\]
 and 
 \[\HH_*(A):=\Tor^{A\otimes_k A^\op}(A,A).\]
 There's a nice projective resolution called:
-\subsubsection*{Cyclic bar construction}
-Suppose $A$ is projective over $k$. Define $CB_*^k(A)\in Mod_k^{\Delta^\op}$, $CB_a(A)=A^{\otimes n+1}$.
+\subsubsection*{The cyclic bar construction}
+Suppose $A$ is projective over $k$. Define $CB_*^k(A)\in \mathsf{Mod}_k^{\Delta^\op}$, $CB_a(A)=A^{\otimes n+1}$.
 \[d_i:CB_m(A)\to CB_{m-1}(A) (i\in\{0,m+1\})\]
 \[d_0(a_0\otimes a_{m+1})=a_0a_1\otimes a_2\otimes\cdots\]
 \[d_m(a_0\otimes a_{m+1})=a_0\otimes a_1\otimes\cdots\otimes a_{m-1}a_{m}\]
@@ -324,7 +326,7 @@ If $k\to A$ is a smooth map of commutative algebras then there is a map $\Omega_
 \[\Omega^1(A)=\{a\cdot db:a,b\in A\}/(a\cdot d(bc)=ac\cdot db+ab\cdot dc)\]
 There's a map $\Omega^1(A)\weakequiv\HH_1(A)=A\otimes A/\langle\rangle$, sending $a\otimes b\mapsto a\cdot db$.
 
-Now $\HH_*^k$ is the right analogue for the deRham differential forms wh
+Now $\HH_*^k$ is the right analogue for the deRham differential forms.
 
 Now we have a deRham differential $\Omega^*(A)\to\Omega^{*+1}(A)$, and there's a Connes differential $\HH_*^k(A)\to \HH_{*+1}^k(A)$, which is preserved by the isomorphism. That's a plus.
 \end{thm*}
@@ -332,18 +334,18 @@ An easy computation is:
 $\HH_*^k(k[x_1,x_2,\ldots,x_n])=k[x_1,\ldots,x_n]\otimes_k E(\sigma x_1,\ldots,\sigma x_n)$, with $|\sigma x_i|=1$ --- these correspond to $d x_1,\ldots, d x_n$.
 \end{enumerate}
 \subsection*{THH}
-Let's say we're working with a symmetric monoidal model category of spectra, call it $(\spec,\otimes,S)$. (You choose.) Well suppose $R$ is a cofibrant commutative algebra in $\spec$. There is a symmetric monoidal model category of $R$-modules $Mod_R$, with an adjunction $\spec\longleftrightarrow Mod_R$. 
+Let's say we're working with a symmetric monoidal model category of spectra, call it $(\mathsf{Spec},\otimes,S)$. (You choose.) Well suppose $R$ is a cofibrant commutative algebra in $\mathsf{Spec}$. There is a symmetric monoidal model category of $R$-modules $\mathsf{Mod}_R$, with an adjunction $\mathsf{Spec}\longleftrightarrow \mathsf{Mod}_R$. 
 %Thus I can talk about associative algebras in $R$-models, and this has a model structure, 
-If $A$ is an associative algebra in $Mod_R$, I can still define $CB_m(A)=A^{\otimes m+1}$
+If $A$ is an associative algebra in $\mathsf{Mod}_R$, I can still define $CB_m(A)=A^{\otimes m+1}$
 
 My first definition of $\THH$ will be the left derived functor
 \[\THH^R(A)=L|CB_*(A)|=|CB_*(A^c)|.\]
 Let's give a definition where the circle action is more clear, and where we can obviously plug in an $A_\infty$-algebra:
 \begin{defn*} 
-Let $Fin$ be the category of finite sets. Let $E_1$ be the topological category whose objects are finite sets, and $E_1(X,Y)=\coprod_{f\in Fin(X,Y)}\prod_{y\in Y} \scrE_1(f^{-1}(y))$., where $\scrE_1(X)$, for $X$ a finite set, is the space of configurations of intervals in $(0,1)$, with the intervals labelled by $X$.
- This is monoidall under disjoint union.
+Let $\mathsf{Fin}$ be the category of finite sets. Let $E_1$ be the topological category whose objects are finite sets, and $E_1(X,Y)=\coprod_{f\in Fin(X,Y)}\prod_{y\in Y} \scrE_1(f^{-1}(y))$., where $\scrE_1(X)$, for $X$ a finite set, is the space of configurations of intervals in $(0,1)$, with the intervals labelled by $X$.
+ This is monoidal under disjoint union.
 
-An $A_\infty$-algbra is a monoidal topological functor $A^{\otimes\DASH}:E_1\to\spec$. (This $\scrE_1$ is a model of the $A_\infty$-operad).
+An $A_\infty$-algebra is a monoidal topological functor $A^{\otimes\DASH}:E_1\to\mathsf{Spec}$. (This $\scrE_1$ is a model of the $A_\infty$-operad).
 
 Let's define a functor $C:E_1^\op\to\Top$ sending $X$ to a configuration of intervals in the circle, labelled by the elements of $X$. It's straightforward to see how to define the action of the functor on maps: need $C(Y)\times E_1(X,Y)\to C(X)$, i.e.\ for all $f:X\to Y$ a map, via the obvious operadic type map.
 \end{defn*}
@@ -713,11 +715,10 @@ The goal of this talk is then to give a spectral sequence for $H^*\Omega^\infty 
 Given $X^*$ a cosimplicial space (where by spaces I probably mean simplicial sets), then $C^*X^*$ is a simplicial cochain complex, and we obtain a double cochain complex, giving a spectral sequence:
 \[E_2^{st}:=\pi_{-s}(H^tX^*)\text{ the homotopy of a simplicial abelian group}\]
 converging to
-\[H^{t-s}(Tot X^*)\text{the homotopy limit}\]
-Note that we can define $ToT X^*$ to be the simplicial set of natural transformations $\Delta^*\to X^*$.
+\[H^{t-s}(\textup{Tot}\, X^*)\text{the homotopy limit}\]
+Note that we can define $\textup{Tot}\, X^*$ to be the simplicial set of natural transformations $\Delta^*\to X^*$.
 
-Suppose now that $X$ is a spectrum and $E$ is a nice ring spectrum. THen I can form a cosimplicial spectrum by smashing with $E$ a bunch of times. We call this the Adams tower. The homotopy limit of this is (under some conditions, like if $X$ is connective and $E=H\F_2$) is $L_EX$.
-MACRO FOR SIMPLICIAL THINGS
+Suppose now that $X$ is a spectrum and $E$ is a nice ring spectrum. Then one can form a cosimplicial spectrum by smashing with $E$ a bunch of times. We call this the Adams tower. The homotopy limit of this is (under some conditions, like if $X$ is connective and $E=H\F_2$) is $L_EX$.
 
 We do take $E=H\F_2$, so taking infinite loop spaces, we get a cosimplicial space. The corresponding spectral sequence is
 \[E_2^{st}=\pi_{-s}(H^t(\Omega^\infty X\wedge H\F_2^{*+1}))\implies H^{t-s}(\Omega^\infty X)\]
@@ -738,7 +739,7 @@ Now what appears here is a free $\Steen$-module resolution of $H^*X$, so that $E
 \subsection*{Second goal}
 We'd like to describe $\pi_*(U(M))$ in terms of $\pi_*(M)$ for any simplicial unstable $\Steen$-module $M$.
 
-To discuss this, we need the higher derived square operations. Suppose we have a simplicial commutative $\F_2$-algebra $B$, i.e.\ $A:\Delta^\op\to$ F2algebras. Write $C(A)$ for the associated chain complex. Then
+To discuss this, we need the higher derived square operations. Suppose we have a simplicial commutative $\F_2$-algebra $B$, i.e.\ $A:\Delta^\op\to\mathsf{\F_2-Algebras}$. Write $C(A)$ for the associated chain complex. Then
 \begin{prop*}
 There are $\delta_i:C(A)_n\to C(A)_{n+i}$ for $1\leq i\leq n$ such that
 \[\partial\delta_i(a)=\begin{cases}
@@ -795,28 +796,28 @@ theory and sketch the constructions of some functors between them. If
 time permits, we will mention stable $(\infty, 1)$-categories.
 \end{abstract}
 \subsection*{What's a homotopy theory?}
-Options
+Options:
 \begin{itemise}
 \item A model category?
 \item A simplicial model category?
 \item A simplicial category? (It often feels that this is good enough)
 \item A category enriched in topological spaces? (as this should be the same)
 \end{itemise}
-Common features
+Common features:
 \begin{itemise}
 \item Mapping spaces
 \item Homotopy colimits and limits
 \item being tensored and cotensored over spaces
 \end{itemise}
-The idea of inf1cats is to tie this all together somehow.
+The idea of $(\infty,1)$-category is to tie this all together somehow.
 
-To motivate further, we have the notion that spaces shold be the same as $\infty$-groupoids --- infinity categories where all of the morphisms of a certain level are invertible.
+To motivate further, we have the notion that spaces should be the same as $\infty$-groupoids --- infinity categories where all of the morphisms of a certain level are invertible.
 
-By an inftycat I mean any notion where you have $n$-morphisms for each $n$.
+By an $\infty$-category, I mean any notion where you have $n$-morphisms for each $n$.
 
 Given a space, have its fundamental $\infty$-groupoid, $\underline\pi_1{X}$, whose objects are points, 1-morphisms are paths, 2-morphisms are homotopies, etc. There should be some realisation functor the other way.
 
-Maybe a category enriched over spaces should be an infty1cat:
+Maybe a category enriched over spaces should be an $(\infty,1)$-category:
 \begin{defn*}
 An $(\infty,1)$-category is an $\infty$-category with all $n$-morphisms for $n\geq2$ invertible. [Figuring out what invertible means is a feature of the model.]
 \end{defn*}
@@ -826,30 +827,26 @@ Kan complexes are the fibrant simplicial sets in the usual model structure, char
 \subsection*{Nerves of categories}
 There's a similar characterisation of nerves of categories. A simplicial set $X$ is $N\calC$ for some category $\calC$ \Iff we have a unique lifting property for inner horns ($0<k<n$):
 \[\xymatrix{
-%a1& a2& a3& a4& a5& a6\\
-%b1& b2& b3& b4& b5& b6\\
- c1& \Lambda^n_k\ar[d]\ar[r]& X& c4& c5& c6\\
- d1& \Delta^n\ar[ur]^{!}& d3& d4& d5& d6\\
-%e1& e2& e3& e4& e5& e6\\
-%f1& f2& f3& f4& f5& f6\\
+\Lambda^n_k\ar[d]\ar[r]& X\\
+\Delta^n\ar[ur]^{!}
 }\]
-Given a simplicial set like this, I can get a category back by saying that the objects are the 0-simplices, the morphisms are the 1-simplices, and then evrything else is determined.
+Given a simplicial set like this, I can get a category back by saying that the objects are the 0-simplices, the morphisms are the 1-simplices, and then everything else is determined.
 \begin{defn*}
-A quasicategory (popularised by Joyal, Lurie) is a simplicial set with the inner horn lifting property. We cal the 0-simplices `objects', and the 1-simplices `maps'.
+A quasicategory (popularised by Joyal, Lurie) is a simplicial set with the inner horn lifting property. We cal the 0-simplices `objects', and the 1-simplices `maps'.\footnote{We forgot uniqueness, since we don't \emph{want} uniqueness.}
+
 \end{defn*}
-[We forgot uniqueness, since we don't \emph{want} uniqueness.]
-Every Kan complex is one of these, in fact an $\infty$-groupoid.
+\noindent Every Kan complex is one of these, in fact an $\infty$-groupoid.
 
 We have mapping spaces, which are $\underline{Map}(X,Y)_n$ the $n+1$-simplices with vertices $x,y,y,y,y,$, and the face opposite $x$ totally degenerate --- you get it from a 0-simplex... ?? Think later
-\begin{thm*}[joyal]
+\begin{thm*}[Joyal]
 $X$ is a quasicategory \Iff $\underline{Map}(\Delta^2,X)\acyclicfibration\underline{Map}(\Lambda^2_1,X)$ is an acyclic fibration of simplicial sets.
 \end{thm*}
-In particular it has a section, which corresponds to a composition law. There are choices of composition, there's no canonical choice --- just a contractible choice.
+\noindent In particular this map has a section, which corresponds to a composition law. There is no canonical choice of section --- instead, the whole space of choices is contractible.
 
 \subsection*{Homotopy limits and colimits}
 Imagine we've succeeded in turning some bunch of interesting objects (e.g.\ spaces) into a quasicategory. We'll start with the easiest limit, the ho-terminal object.
 
-Suppose that $a\in\ob X$, define $X/a$ (the Qcat of objects over $a$) so that the $n$-simplices are $n+1$-simplices of $X$ with $n+1$th vertex $a$. There's a map back from here to $X$ given by taking the first $n$ vertices. This is still a qcat.
+Suppose that $a\in\ob X$, define $X/a$ (the Qcat of objects over $a$) so that the $n$-simplices are $n+1$-simplices of $X$ with $n+1^{\textup{st}}$ vertex $a$. There's a map back from here to $X$ given by taking the first $n$ vertices. This is still a qcat.
 \begin{thm*}[ThmDef]
 Suppose $X$ a qcat and $a\in X$. TFAE:
 \begin{enumerate}\squishlist
@@ -933,8 +930,8 @@ Let $k$ be of characteristic $0$, and $X$ be a scheme over $k$. Define a categor
 \[\xymatrix{
 %a1& a2& a3& a4& a5& a6\\
 %b1& b2& b3& b4& b5& b6\\
- U& T\\
- U'& T'\\
+ U\ar[r]\ar[d]& T\ar[d]\\
+ U'\ar[r]& T'\\
 %e1& e2& e3& e4& e5& e6\\
 %f1& f2& f3& f4& f5& f6\\
 }\]
@@ -942,14 +939,14 @@ A cover is a collection
 \[\xymatrix{
 %a1& a2& a3& a4& a5& a6\\
 %b1& b2& b3& b4& b5& b6\\
- U_i& T_i\\
- U& T
+ U_i\ar[r]\ar[d]& T_i\ar[d]\\
+ U\ar[r]& T
 %e1& e2& e3& e4& e5& e6\\
 %f1& f2& f3& f4& f5& f6\\
 }\]
-such that $t_i\to T$ form a Zariski cover of $T$.
+such that $T_i\to T$ form a Zariski cover of $T$.
 
-In most sites, there's an object that represents the constant sheaf. In the etale or Zariski sites on $X$, $X$ represents the constant sheaf. Computing global sections is just homs out of the constant sheaf, so that
+In most interesting sites, there's an object that represents the constant sheaf. In the etale or Zariski sites on $X$, $X$ represents the constant sheaf. Computing global sections is just homs out of the constant sheaf, so that
 \[\Gamma(\calF)=\calF(X).\]
 
 In this site, the infinitessimal site, we define
@@ -1020,7 +1017,7 @@ If $Z/W_n$ is a smooth lift of $X$, then there's a canonical isomorphism
 \begin{proof}
 We're going to need a geometric approximation to the constant sheaf. I'll define the Cech-Alexander simplicial scheme $\check{C}A^*(Z)$ with terms:
 \[\check{C}A^m(Z)=Z^{m+1}.\]
-We give divided power structures somehow. Should stop --- we'll just say that as the set of maps from $X$ into this simplicial scheme is contractible, it's enough like the final object to compute cohomology.
+We get divided power structures somehow. Should stop --- we'll just say that as the set of maps from $X$ into this simplicial scheme is contractible, it's enough like the final object to compute cohomology.
 \end{proof}
 
 \pagebreak
@@ -1127,14 +1124,6 @@ This is a Quillen equivalence between the model category of CSS and quasi-catego
 
 Try Julie Bergner, `a survey of $(\infty,1)$-categories'.
 
-\[\xymatrix{
-A\ar[r]\ar[dr]&B\ar[d]\\
-&C
-}\]
-\[\xymatrix{
-X\ar[r]\ar[d]&Y\ar[d]\\
-Z\ar[r]&W
-}\]
 \pagebreak
 \end{GeoffroyWeakAssociativityandCompleteSegalSpaces}
 
@@ -1249,6 +1238,140 @@ Then $F(X)\weakequiv \varinjlim P_iF(X)$ whenever the connectivity of $X$ exceed
 
 \pagebreak
 \end{BehrensGoodwillieCalcIntro}
+
+\begin{InnaKTheory}
+\KanSemResponse
+{``A short introduction to algebraic K-theory'' --- Inna Zacharevich --- 30/11/2011}
+\begin{abstract}
+"Exactly what it says on the tin."
+\end{abstract}
+
+\subsection*{Introduction}
+For $(\calC,\otimes,1)$ a monoidal category, we could define $K(\calC):=\textup{Groth}(\pi_0(\textup{iso\,}\calC),\otimes)$. From this it is not clear how to define the higher $K$-groups. Instead, we'd prefer a definition that looked like
+\[K_i=\pi_i(\textup{something}).\]
+For $R$ a ring, we can also define $K_1(R):=\textup{GL}(R)^{\textup{ab}}$. This seems like the right idea, as for $R$ a Dedekind domain with function field $F$, we have an exact sequence
+\[\xymatrix{
+\displaystyle\bigoplus_{\frakm}K_1(R/\frakm)\ar[r]&
+K_1(R)\ar[r]&
+K_1(F)\ar[r]&
+\displaystyle\bigoplus_{\frakm}K_0(R/\frakm)\ar[r]&
+K_0(R)\ar[r]&
+K_0(F),}\]
+with direct sums taken over the maximal ideals $\frakm$ of $R$.
+\subsection*{Group completion}
+Suppose that $M$ is a topological monoid. Then a map $M\to Y$ is called a \textbf{group completion} if:
+\begin{enumerate}\squishlist
+\item it is a group completion on $\pi_0$; and
+\item the natural map\footnote{For this, note that $H_*(M)$ has an action of the monoid $\pi_0(M)$ via the monoid multiplication, and this action is compatible with the action of $\pi_0(Y)$ on $H^{*}(Y)$.} $H_*(M)[\pi_0(M)^{-1}]\overset{}{\to} H_*(Y)$ is an isomorphism.
+\end{enumerate}
+That is, the map should (1) effect a group completion on $\pi_0$, and (2) change as little else as possible.
+\begin{thm*}[Group competion]
+The map $M\to\Omega BM$ is a group completion.
+\end{thm*}
+\noindent So, we dare to define
+\[K_i(\calC):=\pi_i(\Omega B(B\textup{\,iso\,}\calC))\]
+where $B\textup{\,iso\,}\calC$ is the realisation of the nerve.
+
+Now we have good ways to deal with $B\,\textup{iso}\,\calC$, for example Quillen's theorems A and B, but working with the leftmost `$B$' is more difficult.
+
+\subsection*{Quillen's `$Q$' construction}
+Suppose we are given an \textbf{exact category}, that is, a small category $\calE$ with a notion of exact sequence. In such a category, we call a monomorphism \textbf{admissible} if it fits into a short exact sequence, and \emph{we want to construct formal splittings of the admissibles}.
+
+We do this by constructing a new category, whose objects are the same as those of $\calE$, but in which the morphisms $X\to Y$ are the descriptions of $X$ as a subquotient of $Y$.\footnote{One might hope that this would split short exact sequences, after all, in a short exact sequence \smash{$\xymatrix{
+0\ar[r]&
+A\ar[r]&
+B\ar[r]&
+C\ar[r]&
+0,
+}$}
+$A$ and $C$ are subquotients of $B$.
+}
+So, the morphisms $X\to Y$ in the category $Q\calE$ are
+\[\raisebox{-6mm}{rooves:\qquad }\xymatrix@R=.4cm{
+&Z\xyfib[dl]\xycofib[dr]\\
+X&&Y
+} \raisebox{-6mm}{\qquad taken up to equivalence:\qquad }
+\xymatrix@R=.1cm{
+&Z\xyfib[dl]\xycofib[dr]\ar[dd]^\cong\\
+X&&Y\\
+&Z'\xyfib[ul]\xycofib[ur]\\
+}\]
+and the composition is by taking fibred products.
+\begin{claim}
+One can define $K_i(\calE):=\pi_{i+1}BQ(\calE)$, and when there is both an exact stucture and a monoidal structure, compatible in the correct sense, the two definitions will coincide.
+\end{claim}
+\subsection*{Splitting short exact sequences; $K_0$}
+Given an object $A$ of $\calE$, $0$ appears as a subquotient in two different ways:
+\[\xymatrix@R=-.2cm{
+&&&0\ar@{=}[ddl]\xycofib[ddr]\\
+0\ar[r]&A:\\
+&&0&&A\\
+}
+\raisebox{-2.5mm}{\quad \qquad \underline{and}\qquad\quad  }
+\xymatrix@R=-.2cm{
+&&&0\ar@{=}[ddl]\xycofib[ddr]\\
+0\ar@{~>}[r]&A:\\
+&&0&&A\\
+}
+\]
+So, we have a map $\ell:\ob(\calE)\to\pi_1(BQ(\calE),0)$ which sends $A$ to the loop ``$\xymatrix{
+0\ar[r]&A&0\ar@{~>}[l]
+}$'' in $BQ(\calE)$. Now we can draw the following diagram:
+\[\xymatrix{
+&0\ar@{~>}[dl]\ar@{->}[dr]\\
+A\ar[r]&B&C\ar[l]\\
+&0\ar@{~>}[ur]\ar@{->}[ul]\ar@<-.5ex>@{~>}[u]\ar@<.5ex>@{->}[u]
+}\]
+The claim now is that the top square and the two triangles commute, so that we have $\ell(B)$ homotopic to $\ell(A)\cdot\ell(C)$. This provides some evidence that $\pi_1(Q(\calE))$ is mimicking the traditional definitions of $K_0(\calE)$.
+\subsection*{Quillen's theorems A and B}
+\begin{thm*}[A]
+If $F:\calC\to\calD$ satisfies certain conditions, then $BF:B\calC\to B\calD$ is a homotopy equivalence.
+\end{thm*}
+\begin{thm*}[B]
+If $F:\calC\to\calD$ satisfies certain conditions, then $B(F/X)\to B\calC\to B\calD$ is a homotopy fibre sequence. (???)
+\end{thm*}
+Theorem (B) gives the long exact sequence of homotopy groups that we would like.
+
+\begin{exmp*}
+Suppose that $\calC$ is the category of finite sets. Then
+\begin{alignat*}{2}
+K_i(\calC)&=\pi_i(\Omega B(B(\textup{iso}\,\calC)))%&\qquad&\text{()}
+\\&=\pi_{i+1}\left(B\left(\coprod_{n\geq0}B\Sigma_n\right)\right)%&\qquad&\text{()}
+\\&=\pi_i^s%&\qquad&\text{()}
+%\\&=%&\qquad&\text{()}
+%\\&=%&\qquad&\text{()}
+\end{alignat*}
+This is the Barratt-Priddy-Quillen theorem.
+\end{exmp*}
+\subsection*{Serre classes:}
+Suppose that $\calA$ is an abelian category, and $\calB$ is a Serre subcategory. Then we have a homotopy fibre sequence:
+\[B(BQ(\calB))\to B(BQ(\calA))\to B(BQ(\calA/\calB))\]
+This is called Quillen localisation.
+\subsection*{Devissage:}
+Applying devissage, we can often simplify whichever of the categories in this fibre sequence is causing difficulty.
+\begin{thm*}[Devissage]
+Suppose that $\calA$ is abelian, and that $\calB$ is a (sufficiently closed) subcategory such that every object of $\calA$ has a finite filtration with relative quotients in $\calC$, then $K_i(\calB)=K_i(\calA)$ for all $i$.
+\end{thm*}
+To apply this, recall that when we wished to relate the $K$-theory of 
+a Dedekind domain $R$ to that of its function field $F$, to obtain a long an exact sequence
+\[\xymatrix{
+\cdots\ar[r]&\displaystyle\bigoplus_{\frakm}K_1(R/\frakm)\ar[r]&
+K_1(R)\ar[r]&
+K_1(F)\ar[r]&
+\displaystyle\bigoplus_{\frakm}K_0(R/\frakm)\ar[r]&
+K_0(R)\ar[r]&
+K_0(F),}\]
+with direct sums taken over the maximal ideals $\frakm$ of $R$. Here we define $K_*(R)$, for $R$ a ring, to be the $K$-theory of the category of finitely generated projective $R$-modules.
+
+ Let $\calA$ be the category of finitely generated projective $R$-modules, and $\calB$ the full subcategory of torsion modules. Then $\calA/\calB$ is equivalent to the category of finitely generated (projective) $F$-modules, so that $K_*(\calA/\calB)$ with $K_*(F)$. Devissage identifies $K_*(\calB)$ with \smash{$\displaystyle\bigoplus_{\frakm}K_*(R/\frakm)$}.
+
+
+
+
+
+
+\pagebreak
+\end{InnaKTheory}
 \begin{LuisKoszulDuality}
 \KanSemResponse
 {``Koszul Duality for $E_n$-operads'' --- Luis Pereira}
