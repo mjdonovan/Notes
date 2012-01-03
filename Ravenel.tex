@@ -1,0 +1,109 @@
+% !TEX root = z_output/_Ravenel.tex
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%% 80 characters %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\documentclass[11pt]{article}
+\input{../macros.tex}
+
+\begin{document}
+\subsection*{The Adams Spectral Sequence (pages 7-8)}
+Choose a space $X=X_0$. Work only in the stable range \rednote{(?)} and on the $p$-component. We always use $\F_p$ coefficients, and write $A$ for the mod $p$ Steenrod algebra.
+
+Define spaces $X_i$ and $K_i$ inductively by writing $K_i=\prod_{j>0}K(H^j(X_i),j)$, and letting $X_{i+1}$ be the fibre of the obvious map $X_i\to K_i$. We have a system of fibrations, with wavy arrows denoting maps $\phi:\Omega K_i\to X_{i+1}$:
+\[\xymatrix{
+\cdots\ar[r]&
+X_2\ar[r]\ar[d]&
+X_1\ar[r]\ar[d]&
+X_0\ar@{=}[r]\ar[d]&
+X_0\ar@{=}[r]\ar[d]&
+\cdots\\
+&
+K_2\ar@{~>}[ul]&
+K_1\ar@{~>}[ul]&
+K_0\ar@{~>}[ul]&
+\ast\ar@{~>}[ul]&
+}\]
+This yields an exact couple, after applying $\pi_*$, whose wavy arrows lower degree by one:
+\[\xymatrix{
+\cdots\ar[r]&
+\pi_*X_2\ar[r]\ar[d]&
+\pi_*X_1\ar[r]\ar[d]&
+\pi_*X_0\ar@{=}[r]\ar[d]&
+\pi_*X_0\ar@{=}[r]\ar[d]&
+\cdots\\
+&
+\pi_*K_2\ar@{~>}[ul]&
+\pi_*K_1\ar@{~>}[ul]&
+\pi_*K_0\ar@{~>}[ul]&
+0\ar@{~>}[ul]&
+}
+\]
+From this we obtain a spectral sequence:
+\[E_1^{st}=\pi_{s+t}(K_s)\implies \pi_{s+t}(X_0)\textup{\qquad (when there are \textit{no ancients}).}\]
+Now consider the map $\psi:K_i\to\Sigma X_{i+1}$ adjoint to $\phi:\Omega K_i\to X_{i+1}$. Then we have a commuting diagram:
+\[\xymatrix{
+X_{i+1}\ar[d]\\
+K_{i+1}\ar[d]^\eta&\Omega K_i\ar[l]_\phi\ar[ld]^{\Omega\psi}\ar@{~>}[lu]\\
+\Omega\Sigma K_{i+1}
+}
+\qquad 
+\xymatrix{
+\pi_{*-1}(X_{i+1})\ar[d]\\
+\pi_{*-1}(K_{i+1})\ar[d]^\Sigma&\pi_{*} (K_i)\ar[l]\ar[ld]^{\psi_*}\ar@{~>}[lu]\\
+\pi_{*}(\Sigma K_{i+1})
+}
+\]
+In the stable range, suspension is an isomorphism, so we only need to consider the map $\psi_*$ in order to calculate the $E_2$ page. Here's where it gets interesting. We consider instead the map $\psi^*$ on cohomology. It is the long diagonal in the following commuting diagram:
+\[\xymatrix{
+H^{*-1}(X_{i+1})\ar@{=}[d]\ar[r]^{\phi^*}&H^{*-1}(\Omega K_i)\ar@{=}[r]&H^*(\Sigma\Omega K_i)& H^*(K_i)\ar[l]_{\quad  \eta^*}\\
+H^{*}(\Sigma X_{i+1})\ar[rru]_{(\Sigma\phi)^*}&\\
+H^*(\Sigma K_{i+1})\ar[uurrr]^{\psi^*}\xyfib[u]
+}\]
+Now the top row of this diagram represents the transgression map in the cohomology Serre spectral sequence for the fibration $X_{i+1}\to X_i\to K_i$. By design, every third map in the Serre short exact sequence is surjective, so we obtain short exact sequences:
+\[\xymatrix{
+0&
+H^*(X_i)\ar[l]&
+H^*(K_i)\ar[l]&
+H^{*-1}(X_{i+1})\ar[l]_\tau&
+0\ar[l]
+}\]
+Splicing these short exact sequences together, we obtain an exact sequence:
+\[\xymatrix@!0@R=12mm@C=1.2cm{
+0&&H^*(X_0)\ar[ll]&&
+H^*(K_0)\ar[ll]&&
+H^*(\Sigma K_1)\ar[ll]_{\psi^*}\xyfib[ld]&&
+H^*(\Sigma^2 K_2)\ar[ll]_{\psi^*}\xyfib[ld]&&
+\cdots\ar[ll]\\
+&&&&&H^*(\Sigma X_1)\xycofibdown[lu]_\tau&&
+H^*(\Sigma^2 X_2)\xycofibdown[lu]_\tau&&
+}\]
+We have that the differential is $\psi^*$ because of the previous commuting diagram.
+
+Now the cohomology groups $H^*(K_*)$ are all free $A$-modules \rednote{(in a range, or something)}. Thus, the above exact sequence gives a free resolution of $H^*(X_0)$. The idea is that after applying $\Hom_A(\DASH,\F_p)$ to this exact sequence {(with $H^*(X)$ removed)} we should get a cochain complex isomorphic to the $E_1$ page of the spectral sequence, so that the $E_2$-page is $\Ext_A^{**}(H^*(X),\F_p)$, as desired.
+
+There is a map \[\pi_*(K(\F_p,i))\to\Hom_{\F_p}(H^*(K(\F_p,i)),\F_p)\textup{\qquad sending\qquad }\sigma\mapsto\langle \DASH,h(\sigma)\rangle.\]
+Now we note that this map factors as
+\[\xymatrix{
+\ar[r]\ar[dr]^\theta_\exists\pi_*(K(\F_p,i))&
+\Hom_{\F_p}(H^*(K(\F_p,i)),\F_p)\\
+&\Hom_{A}(H^*(K(\F_p,i)),\F_p)\xycofib[u]
+}\]
+Moreover, the map $\theta$ is an isomorphism \rednote{(some stable stuff happens here?)}. So there is such an isomorphism $\theta$ whenever the EM space is replaced by a product of EM spaces. This gives an isomorphism of cochain complexes between $(\pi_*K_*,\psi_*)$ and $(\Hom_A(H^*(K_*),\F_p),(\psi^*)^*)$, which shows that the $E_2$-page of the spectral sequence is $\Ext_A^{**}(H^*(X),\F_p)$.
+
+\end{document}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
