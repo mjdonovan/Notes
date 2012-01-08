@@ -90,6 +90,107 @@ Now we note that this map factors as
 }\]
 Moreover, the map $\theta$ is an isomorphism \rednote{(some stable stuff happens here?)}. So there is such an isomorphism $\theta$ whenever the EM space is replaced by a product of EM spaces. This gives an isomorphism of cochain complexes between $(\pi_*K_*,\psi_*)$ and $(\Hom_A(H^*(K_*),\F_p),(\psi^*)^*)$, which shows that the $E_2$-page of the spectral sequence is $\Ext_A^{**}(H^*(X),\F_p)$.
 
+\subsection*{Hopf Algebriods}
+\newcommand\OB{\textup{OB}}
+\newcommand\ARR{\textup{ARR}}
+\newcommand\COMP{\textup{COMP}}
+From the text: A Hopf algebroid over a commutative ring $K$ is a cogroupoid object in the category of (graded or bigraded) commutative $K$-algebras,
+i.e., a pair $(A, \Gamma)$ of commutative $K$-algebras with structure maps such that for
+any other commutative $K$-algebra $B$, the sets $\Hom(A, B)$ and $\Hom(\Gamma, B)$ are the
+objects and morphisms of a groupoid.
+
+We use the following abbreviations for certain co-representable functors:
+\begin{itemize}\squishlist
+\item $\OB:=\Hom(A,\DASH)$
+\item $\ARR:=\Hom(\Gamma,\DASH)$
+\item $\COMP:=\Hom(\Gamma\otimes_A\Gamma,\DASH)=\ARR\times_{\OB}\ARR$
+\end{itemize}
+We tabulate the structure maps, and what they correspond to under the co-Yoneda embedding.
+\[\xymatrix@R=.1cm{
+A\ar[r]^{\eta_L}&\Gamma&&\ARR\ar[r]&\OB&& \textit{left unit or source} \\
+A\ar[r]^{\eta_R}&\Gamma&&\ARR\ar[r]&\OB&& \textit{right unit or target} \\
+\Gamma\ar[r]^-{\Delta}&\Gamma\otimes_A\Gamma
+&&\ARR\ar[r]&\COMP&&\textit{coproduct or composition} \\
+\Gamma\ar[r]^{\epsilon}&A&&
+\OB\ar[r]&\ARR&&\textit{counit or identity} \\
+\Gamma\ar[r]^{c}&\Gamma&&
+\ARR\ar[r]&\ARR&&\textit{conjugation or inverse} 
+&
+}\]
+We demand that
+\begin{itemize}\squishlist
+\item $\Gamma$ is a left $A$-module via $\eta_L$;
+\item $\Gamma$ is a right $A$-module via $\eta_R$;
+\item $\Delta$ and $\epsilon$ are $A$-bimodule maps.
+\end{itemize}
+We also demand the following:
+\begin{itemise}
+\item The source (likewise, target) of an
+identity morphism are the object on which it is defined:
+\[\xymatrix{
+A\ar@{=}[d]\ar[r]^{\eta_{L}}& \Gamma\ar[ld]^\epsilon&&
+%
+A\ar@{=}[d];[] \ar[r];[]_{\textup{src}}&\Gamma\ar[ld];[]_{\textup{iden}}
+\\
+A&&&
+A
+}\]
+\item Pre-composition (likewise, post-composition) with the identity leaves a morphism
+unchanged:
+\[\xymatrix{
+\Gamma\ar@{=}[dr]\ar[r]^-{\Delta}& \Gamma\otimes_A\Gamma
+\ar[d]^{(\eta_L\epsilon)\otimes 1}&&
+%
+\ARR\ar@{=}[dr]\ar[r];[]_-{\circ}& \COMP\ar[d];[]_{((\textup{iden}\circ\textup{src}),\id_{\ARR})}&&\\
+&\Gamma&&
+&\ARR
+}\]
+\item Composition of morphisms is associative:
+\[\xymatrix{
+\Gamma\ar[r]^-{\Delta}\ar[d]^{\Delta}&
+\Gamma\otimes\Gamma\ar[d]^{1\otimes\Delta}&&
+\ARR\ar[r];[]_-{\circ}\ar[d];[]_{\circ}&
+\ARR\times_{\OB}\ARR\ar[d];[]_{\id\times\circ}
+\\
+\Gamma\otimes\Gamma\ar[r]^-{\Delta\otimes1}&
+\Gamma\otimes\Gamma\otimes\Gamma&&
+\ARR\times_{\OB}\ARR\ar[r];[]_-{\circ\times\id}&
+\ARR\times_{\OB}\ARR\times_{\OB}\ARR
+}\]
+\item Inverting a morphism interchanges source and
+target:\quad 
+($c\eta_R = \eta_L\textup{ \emph{and} }c\eta_L = \eta_R$).
+\[\xymatrix{
+A\ar[r]^{\eta_R}\ar[rd]_{\eta_L}&\Gamma\ar[d]^c&&
+\OB\ar[r];[]_{\textup{targ}}\ar[rd];[]^{\textup{src}}&\ARR\ar[d];[]_{\textup{inv}}\\
+&\Gamma&&
+&\ARR
+}\]
+
+\item The inverse of the inverse is the original morphism:
+\[\textup{The composites }
+\xymatrix{\Gamma\ar[r]^c&\Gamma\ar[r]^c&\Gamma}\textup{ and }\xymatrix{\ARR\ar[r];[]_{\textup{inv}}&\ARR\ar[r];[]_{\textup{inv}}&\ARR}\textup{ are the identity.}\]
+
+\item Composition of a
+morphism with its inverse on either side gives an identity morphism:
+\[\xymatrix@C=2.5cm{
+\Gamma&\Gamma\otimes_K\Gamma\ar@{->>}[d]
+\ar[l]_-%
+{c(\gamma_1)\gamma_2\,\reflectbox{\tiny$\mapsto$}\, \gamma_1\otimes\gamma_2}&
+\ARR&\ARR\times\ARR\xycofib[d];[]
+\ar[l];[]^-%
+{\phi\,\mbox{\tiny$\mapsto$}\,(\phi^{-1}\!,\,\phi)}
+\\
+%\ar[l];[]^-{(\textup{inv,id})}\\
+%
+&\Gamma\otimes_A\Gamma\ar@{-->}[ul]^{\exists!}&
+&\ARR\times_{\OB}\ARR\ar@{-->}[ul];[]_{\exists!}\\
+%
+A\ar[uu]^{\eta_R}&\Gamma\ar[u]^\Delta \ar[l]_\epsilon&
+\OB\ar[uu];[]_{\textup{targ}}&\ARR\ar[u];[]_{\circ}\ar[l];[]^{\textup{iden}}
+}\]
+\end{itemise}
+
 \end{document}
 
 
