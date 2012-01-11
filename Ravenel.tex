@@ -5,7 +5,13 @@
 \documentclass[11pt]{article}
 \input{../macros.tex}
 
+\excludeversion{ASSp7-8}
+\excludeversion{Algebroid Definition}
+\includeversion{Gamma-comodules}
+\includeversion{Maps of algebroids}
 \begin{document}
+\begin{ASSp7-8}
+
 \subsection*{The Adams Spectral Sequence (pages 7-8)}
 Choose a space $X=X_0$. Work only in the stable range \rednote{(?)} and on the $p$-component. We always use $\F_p$ coefficients, and write $A$ for the mod $p$ Steenrod algebra.
 
@@ -89,8 +95,9 @@ Now we note that this map factors as
 &\Hom_{A}(H^*(K(\F_p,i)),\F_p)\xycofib[u]
 }\]
 Moreover, the map $\theta$ is an isomorphism \rednote{(some stable stuff happens here?)}. So there is such an isomorphism $\theta$ whenever the EM space is replaced by a product of EM spaces. This gives an isomorphism of cochain complexes between $(\pi_*K_*,\psi_*)$ and $(\Hom_A(H^*(K_*),\F_p),(\psi^*)^*)$, which shows that the $E_2$-page of the spectral sequence is $\Ext_A^{**}(H^*(X),\F_p)$.
-
-\subsection*{Hopf Algebriods}
+\end{ASSp7-8}
+\begin{Algebroid Definition}
+\subsection*{Hopf Algebroids}
 \newcommand\OB{\textup{OB}}
 \newcommand\ARR{\textup{ARR}}
 \newcommand\COMP{\textup{COMP}}
@@ -107,33 +114,30 @@ We use the following abbreviations for certain co-representable functors:
 \end{itemize}
 We tabulate the structure maps, and what they correspond to under the co-Yoneda embedding.
 \[\xymatrix@R=.1cm{
-A\ar[r]^{\eta_L}&\Gamma&&\ARR\ar[r]&\OB&& \textit{left unit or source} \\
-A\ar[r]^{\eta_R}&\Gamma&&\ARR\ar[r]&\OB&& \textit{right unit or target} \\
+A\ar[r]^{\eta_L}&\Gamma&& \ARR\ar[r]^{\textup{src}}&\OB&& \textit{left unit or source} \\
+A\ar[r]^{\eta_R}&\Gamma&& \ARR\ar[r]^{\textup{targ}}&\OB&& \textit{right unit or target} \\
 \Gamma\ar[r]^-{\Delta}&\Gamma\otimes_A\Gamma
-&&\ARR\ar[r]&\COMP&&\textit{coproduct or composition} \\
+&&\ARR\ar[r]^\circ&\COMP&&\textit{coproduct or composition} \\
 \Gamma\ar[r]^{\epsilon}&A&&
-\OB\ar[r]&\ARR&&\textit{counit or identity} \\
+\OB\ar[r]^{\textup{iden}}&\ARR&&\textit{counit or identity} \\
 \Gamma\ar[r]^{c}&\Gamma&&
-\ARR\ar[r]&\ARR&&\textit{conjugation or inverse} 
+\ARR\ar[r]^{\textup{inv}}&\ARR&&\textit{conjugation or inverse} 
 &
 }\]
-We demand that
+We demand that:
 \begin{itemize}\squishlist
 \item $\Gamma$ is a left $A$-module via $\eta_L$;
 \item $\Gamma$ is a right $A$-module via $\eta_R$;
-\item $\Delta$ and $\epsilon$ are $A$-bimodule maps.
-\end{itemize}
-We also demand the following:
-\begin{itemise}
+\item $\Delta$ and $\epsilon$ are $A$-bimodule maps;
 \item The source (likewise, target) of an
 identity morphism are the object on which it is defined:
 \[\xymatrix{
 A\ar@{=}[d]\ar[r]^{\eta_{L}}& \Gamma\ar[ld]^\epsilon&&
 %
-A\ar@{=}[d];[] \ar[r];[]_{\textup{src}}&\Gamma\ar[ld];[]_{\textup{iden}}
+\OB\ar@{=}[d];[] \ar[r];[]_{\textup{src}} &\ARR\ar[ld];[]_{\textup{iden}}
 \\
 A&&&
-A
+\OB
 }\]
 \item Pre-composition (likewise, post-composition) with the identity leaves a morphism
 unchanged:
@@ -157,19 +161,19 @@ unchanged:
 \ARR\times_{\OB}\ARR\ar[r];[]_-{\circ\times\id}&
 \ARR\times_{\OB}\ARR\times_{\OB}\ARR
 }\]
+
+\item The inverse of the inverse is the original morphism:
+\[\textup{The composites }
+\xymatrix{\Gamma\ar[r]^c& \Gamma\ar[r]^c&\Gamma}\textup{ and }\xymatrix{\ARR\ar[r];[]_{\textup{inv}}& \ARR\ar[r];[]_{\textup{inv}}&\ARR}\textup{ are the identity.}\]
 \item Inverting a morphism interchanges source and
-target:\quad 
-($c\eta_R = \eta_L\textup{ \emph{and} }c\eta_L = \eta_R$).
+target:
 \[\xymatrix{
 A\ar[r]^{\eta_R}\ar[rd]_{\eta_L}&\Gamma\ar[d]^c&&
-\OB\ar[r];[]_{\textup{targ}}\ar[rd];[]^{\textup{src}}&\ARR\ar[d];[]_{\textup{inv}}\\
+\OB\ar[r];[]_{\textup{targ}}\ar[rd];[]^{\textup{src}}& \ARR\ar[d];[]_{\textup{inv}}\\
 &\Gamma&&
 &\ARR
 }\]
 
-\item The inverse of the inverse is the original morphism:
-\[\textup{The composites }
-\xymatrix{\Gamma\ar[r]^c&\Gamma\ar[r]^c&\Gamma}\textup{ and }\xymatrix{\ARR\ar[r];[]_{\textup{inv}}&\ARR\ar[r];[]_{\textup{inv}}&\ARR}\textup{ are the identity.}\]
 
 \item Composition of a
 morphism with its inverse on either side gives an identity morphism:
@@ -187,24 +191,101 @@ morphism with its inverse on either side gives an identity morphism:
 &\ARR\times_{\OB}\ARR\ar@{-->}[ul];[]_{\exists!}\\
 %
 A\ar[uu]^{\eta_R}&\Gamma\ar[u]^\Delta \ar[l]_\epsilon&
-\OB\ar[uu];[]_{\textup{targ}}&\ARR\ar[u];[]_{\circ}\ar[l];[]^{\textup{iden}}
+\OB\ar[uu];[]_{\textup{targ}}& \ARR\ar[u];[]_{\circ}\ar[l];[]^{\textup{iden}}
 }\]
-\end{itemise}
+\end{itemize}
+\end{Algebroid Definition}
+\begin{Gamma-comodules}
+\subsection*{$\Gamma$-comodules}
+
+\begin{itemize}\squishlist
+\item A \textbf{left $\Gamma$-comodule} $M$ is:
+\begin{itemize}\squishlist
+\item a left $A$-module $M$;
+\item a left $A$-module map $\psi:M\to\Gamma\otimes_A M$ which is counitary and coassociative:
+\[\xymatrix{
+M\ar[r]^-{\psi}&\Gamma\otimes M\ar[d]^{\epsilon\otimes1}&&
+M\ar[d]^{\psi}\ar[r]^-{\psi}&\Gamma\otimes M\ar[d]^{\Delta\otimes1}\\
+&A\otimes M\ar@{=}[ul]&&
+\Gamma\otimes M\ar[r]^-{1\otimes\psi}& \Gamma\otimes\Gamma\otimes M
+}\]
+\begin{shaded}
+I think that if $M=\Gamma$, $\eta_L:A\to \Gamma$ is one of these --- you have the right hand diagram corresponding to $\Delta$ being a module map, and the left hand diagram is replicated above.
+\end{shaded}
+
+\end{itemize}
+\item A \textbf{comodule algebra} $M$ is:
+\begin{itemize}\squishlist
+\item a commutative associative $A$-algebra;
+\item a left $\Gamma$-comodule via an \emph{algebra map} $\psi:M\to\Gamma\otimes_A M$.
+\end{itemize}
+
+\item The \textbf{tensor product} of left $\Gamma$-comodules has an obvious structure of left $\Gamma$-comodule.
+\item If $\Gamma$ is flat as a (right) $A$-module, then the category of left $\Gamma$-comodules is abelian. Thus we'll always assume that $\Gamma$ is flat over $A$.
+\item We can define a cotensor product $M\Box_\Gamma N$ whenever $M$ (resp.\ $N$) is a right (resp.\ left) $\Gamma$-comodule. This fails to be a comodule, or even an $A$-module.
+\item We can turn left comodules into right comodules using the inverse map $c:\Gamma\to\Gamma$, so it makes sense to claim that $M\square_\Gamma N=N\Box_\Gamma M$.
+
+
+
+
+\begin{shaded}
+\item For any $A$-modules $M$ and $N$, we have a natural map $\gamma_M:\Hom_A(M,A)\otimes_AN\to\Hom_A(M,N)$. This is an isomorphism when $M$ is projective.
+
+\INDENT To see this, write \smash{$F=M\oplus M'$} with $F$ free. Then $\gamma_F=\gamma_M\oplus\gamma_{M'}$, and $\gamma_F$ is obviously an isomorphism, so that $\gamma_M$ must be an isomorphism.
+\end{shaded}
+\item In light of the previous, if $M$ is a left $\Gamma$-comodule that is projective over $A$, then $\Hom_A(M,A)$ is a left comodule, via (I suppose):
+\[\Hom_A(M,A)\overset{(\eta_L)_*}{\to}\Hom_A(M,\Gamma)\overset{\cong}{\from} \Hom_A(M,A)\otimes\Gamma\]
+In particular, we can form the cotensor product in the following isomorphism, for left $\Gamma$-modules $M$ and $N$ with $M$ projective:
+\[\Hom_\Gamma(M,N)=\Hom_{A}(M,A)\square_\Gamma N.\]
+\end{itemize}
+\end{Gamma-comodules}
+\begin{Maps of algebroids}
+\begin{itemize}\squishlist
+\item A map of Hopf algebroids is the obvious.
+\item Suppose that $f=(f_1,f_2):(A,\Gamma)\to(B,\Sigma)$ is a map of Hopf algebroids. Then
+\begin{itemize}\squishlist
+\item $B$ is a left $A$-module via $f_1$.
+\item $\Sigma$ is a left $A$-module by restriction along $f_1$.
+\item For any left $\Sigma$-comodule $N$, $\Gamma\otimes_AN$ is a left $\Gamma$-comodule, via: %by co-restricting along $f_2$:
+\smash{$\Gamma\otimes_AN\overset{\Delta\otimes N}{\to}\Gamma\otimes_A\Gamma\otimes_AN$}.
+\[\xymatrix{
+A\ar[r]^-{\eta_R}\ar[d]^-{f_1}&%r1c1
+\Gamma\ar[d]\ar[r]^-{(1\otimes f_2)\circ\Delta}&%r1c2
+\Gamma\otimes_A\Sigma\ar@{=}[d]\\%r2c1
+B\ar@/_1em/[rr]\ar[r]&%r3c1
+\Gamma\otimes_AB\ar@{-->}[r]&%r3c2
+\Gamma\otimes_A B\otimes_B\Sigma
+}\]
+(note that $B$ (obviously) maps into any tensor product over $B$...)
+\end{itemize}
+
+\end{itemize}
+
+\end{Maps of algebroids}
 
 \end{document}
 
 
+A-adams resolution:
+\[\xymatrix{
+X_0\ar[d]^-{f_0}&%r1c1
+X_1\ar[l]_-{g_0}\ar[d]^-{f_1}&%r1c2
+X_2\ar[d]^-{f_2}\ar[l]_-{g_1}&%r1c3
+X_3\ar[l]_-{g_2}\\%r1c4
+K_0&%r2c1
+K_1&%r2c2
+K_2&%r2c3
+%r2c4
+}\]
 
-
-
-
-
-
-
-
-
-
-
-
+Jandr Claims:
+\[\xymatrix{
+\pi_n(X)\ar[rr]\ar[d]^-{\sim}&%r1c1
+&%r1c2
+H_n(X)\\%r1c3
+\pi_{n-1}(\Omega X)\ar[r]&%r2c1
+H_{n-1}{(\Omega X)}\ar[r]^-{\sim}&%r2c2
+H_n(\Sigma\Omega X)\ar[u]%r2c3
+}\]
 
 
