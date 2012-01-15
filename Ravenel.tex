@@ -6,9 +6,17 @@
 \input{../macros.tex}
 
 \excludeversion{ASSp7-8}
-\excludeversion{Algebroid Definition}
-\includeversion{Gamma-comodules}
-\includeversion{Maps of algebroids}
+\includeversion{Algebroid Definition}
+\excludeversion{Gamma-comodules}
+\excludeversion{Maps of algebroids}
+\includeversion{Formal Group Laws}
+
+
+\newcommand\OB{\textup{OB}}
+\newcommand\ARR{\textup{ARR}}
+\newcommand\COMP{\textup{COMP}}
+
+
 \begin{document}
 \begin{ASSp7-8}
 
@@ -98,9 +106,6 @@ Moreover, the map $\theta$ is an isomorphism \rednote{(some stable stuff happens
 \end{ASSp7-8}
 \begin{Algebroid Definition}
 \subsection*{Hopf Algebroids}
-\newcommand\OB{\textup{OB}}
-\newcommand\ARR{\textup{ARR}}
-\newcommand\COMP{\textup{COMP}}
 From the text: A Hopf algebroid over a commutative ring $K$ is a cogroupoid object in the category of (graded or bigraded) commutative $K$-algebras,
 i.e., a pair $(A, \Gamma)$ of commutative $K$-algebras with structure maps such that for
 any other commutative $K$-algebra $B$, the sets $\Hom(A, B)$ and $\Hom(\Gamma, B)$ are the
@@ -117,7 +122,7 @@ We tabulate the structure maps, and what they correspond to under the co-Yoneda 
 A\ar[r]^{\eta_L}&\Gamma&& \ARR\ar[r]^{\textup{src}}&\OB&& \textit{left unit or source} \\
 A\ar[r]^{\eta_R}&\Gamma&& \ARR\ar[r]^{\textup{targ}}&\OB&& \textit{right unit or target} \\
 \Gamma\ar[r]^-{\Delta}&\Gamma\otimes_A\Gamma
-&&\ARR\ar[r]^\circ&\COMP&&\textit{coproduct or composition} \\
+&&\COMP\ar[r]^\circ&\ARR&&\textit{coproduct or composition} \\
 \Gamma\ar[r]^{\epsilon}&A&&
 \OB\ar[r]^{\textup{iden}}&\ARR&&\textit{counit or identity} \\
 \Gamma\ar[r]^{c}&\Gamma&&
@@ -143,7 +148,7 @@ A&&&
 unchanged:
 \[\xymatrix{
 \Gamma\ar@{=}[dr]\ar[r]^-{\Delta}& \Gamma\otimes_A\Gamma
-\ar[d]^{(\eta_L\epsilon)\otimes 1}&&
+\ar[d]^{\epsilon\otimes 1}&&
 %
 \ARR\ar@{=}[dr]\ar[r];[]_-{\circ}& \COMP\ar[d];[]_{((\textup{iden}\circ\textup{src}),\id_{\ARR})}&&\\
 &\Gamma&&
@@ -211,6 +216,11 @@ M\ar[d]^{\psi}\ar[r]^-{\psi}&\Gamma\otimes M\ar[d]^{\Delta\otimes1}\\
 }\]
 \begin{shaded}
 I think that if $M=\Gamma$, $\eta_L:A\to \Gamma$ is one of these --- you have the right hand diagram corresponding to $\Delta$ being a module map, and the left hand diagram is replicated above.
+\begin{itemize}\squishlist
+\item $\Gamma$ is a left $\Gamma$-comodule via $\Delta:\Gamma\to\Gamma\otimes_A\Gamma$.
+\item I think that: $A$ is a right $\Gamma$-comodule via $\eta_L:A\to\Gamma$.
+\end{itemize}
+
 \end{shaded}
 
 \end{itemize}
@@ -219,14 +229,24 @@ I think that if $M=\Gamma$, $\eta_L:A\to \Gamma$ is one of these --- you have th
 \item a commutative associative $A$-algebra;
 \item a left $\Gamma$-comodule via an \emph{algebra map} $\psi:M\to\Gamma\otimes_A M$.
 \end{itemize}
-
+Note that we have an algebra map $A\to M$, giving a map $h^M\to\OB$. Thus, applying the co-Yoneda lemma, we get what looks like an action of $\ARR$ on $h^M:=[M,\DASH]$:
+\[\xymatrix{
+h^M\ar[r];[]_-{\psi^*}&\ARR\times_\OB h^M\ar[d];[]_{\textup{iden}\times1}&&
+h^M\ar[d];[]_{\psi^*}\ar[r];[]_-{\psi^*}&\ARR\times_\OB h^M\ar[d];[]_{\circ\times1}\\
+&\OB\times_\OB h^M\ar@{=}[ul];[]&&
+\ARR\times_\OB h^M\ar[r];[]_-{1\times\psi^*}& \COMP\times_\OB h^M
+}\]
 \item The \textbf{tensor product} of left $\Gamma$-comodules has an obvious structure of left $\Gamma$-comodule.
 \item If $\Gamma$ is flat as a (right) $A$-module, then the category of left $\Gamma$-comodules is abelian. Thus we'll always assume that $\Gamma$ is flat over $A$.
-\item We can define a cotensor product $M\Box_\Gamma N$ whenever $M$ (resp.\ $N$) is a right (resp.\ left) $\Gamma$-comodule. This fails to be a comodule, or even an $A$-module.
+\item We can define a \textbf{cotensor product} $M\Box_\Gamma N$ whenever $M$ (resp.\ $N$) is a right (resp.\ left) $\Gamma$-comodule. This fails to be a comodule, or even an $A$-module. It's defined by:
+\[\xymatrix{
+0\ar[r]&
+M\square_\Gamma N\ar[r]&
+M\otimes_AN\ar[r]&
+M\otimes_A\Gamma\otimes_AN
+}\]
+
 \item We can turn left comodules into right comodules using the inverse map $c:\Gamma\to\Gamma$, so it makes sense to claim that $M\square_\Gamma N=N\Box_\Gamma M$.
-
-
-
 
 \begin{shaded}
 \item For any $A$-modules $M$ and $N$, we have a natural map $\gamma_M:\Hom_A(M,A)\otimes_AN\to\Hom_A(M,N)$. This is an isomorphism when $M$ is projective.
@@ -246,8 +266,8 @@ In particular, we can form the cotensor product in the following isomorphism, fo
 \begin{itemize}\squishlist
 \item $B$ is a left $A$-module via $f_1$.
 \item $\Sigma$ is a left $A$-module by restriction along $f_1$.
-\item For any left $\Sigma$-comodule $N$, $\Gamma\otimes_AN$ is a left $\Gamma$-comodule, via: %by co-restricting along $f_2$:
-\smash{$\Gamma\otimes_AN\overset{\Delta\otimes N}{\to}\Gamma\otimes_A\Gamma\otimes_AN$}.
+\item
+The following diagram displays $\Gamma\otimes_A B$ as a right $\Sigma$-comodule.
 \[\xymatrix{
 A\ar[r]^-{\eta_R}\ar[d]^-{f_1}&%r1c1
 \Gamma\ar[d]\ar[r]^-{(1\otimes f_2)\circ\Delta}&%r1c2
@@ -256,12 +276,45 @@ B\ar@/_1em/[rr]\ar[r]&%r3c1
 \Gamma\otimes_AB\ar@{-->}[r]&%r3c2
 \Gamma\otimes_A B\otimes_B\Sigma
 }\]
-(note that $B$ (obviously) maps into any tensor product over $B$...)
+\item For any left $\Sigma$-comodule $N$:
+\begin{itemize}\squishlist
+\item  $\Gamma\otimes_AN$ is a left $\Gamma$-comodule, via: %by co-restricting along $f_2$:
+\smash{$\Gamma\otimes_AN\overset{\Delta\otimes N}{\to}\Gamma\otimes_A\Gamma\otimes_AN$}.
+\item There is an inclusion $(\Gamma\otimes_AB)\square_\Sigma N\to\Gamma\otimes_AN$ of left $\Gamma$-comodules.
+\end{itemize}
+
+\end{itemize}
+\item The Hopf algebra associated with an algebroid $(A,\Gamma)$ is $\Gamma'=\Gamma/(\eta_L(a)-\eta_R(a))$.
+\item A map $f=(f_1,f_2):(A,\Gamma)\to(A,\Sigma)$ is \textbf{normal} if:
+\begin{itemize}\squishlist
+\item $f_1:A\to A$ is the identity;
+\item $f_2:\Gamma\to\Sigma$ is surjective;
+\item $\Gamma\square_{\Sigma'}A=A\square_{\Sigma'}\Gamma$ in $\Gamma$.
+\begin{shaded}
+Should understand the last requirement.
+\end{shaded}
 \end{itemize}
 
 \end{itemize}
 
 \end{Maps of algebroids}
+\begin{Formal Group Laws}
+\subsection*{Formal group laws}
+\newcommand{\FGL}{\textup{FGL}}
+\newcommand{\SI}{\textup{SI}}
+\newcommand{\Ring}{\textsf{Rings}}
+Let $\Ring$ be the category of commutative unital rings. Let $\FGL:\Ring\to\Set$ be the functor sending a ring to the set of FGLs over $R$. Let $\SI:\Ring\to\Set$ be the functor sending a ring to the set of triples $(F,f,G)$ where $R,G\in\FGL(R)$ and $f:F\to G$ is a strict isomorphism.
+
+We have natural transformations:
+\begin{itemise}
+\item $\textup{src},\textup{targ}:\SI\to\FGL$;
+\item composition $\circ:\SI\times_\FGL\SI\to \SI$;
+\item $\textup{iden}:\FGL\to\SI$; and
+\item $\textup{inv}:\SI\to\SI$.
+\end{itemise}
+Thus, these two functors give a functor $\Ring\to\mathsf{Groupoids}$. If we could only see that $\FGL$ and $\SI$ were co-representable, say by $L$ and $LB$, we would have shown that $(L,LB)$ is a Hopf algebroid.
+
+\end{Formal Group Laws}
 
 \end{document}
 
