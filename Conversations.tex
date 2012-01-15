@@ -2,11 +2,11 @@
 %%% BEGIN NEW ENTRY FORMAT
 %
 %\pagebreak
-%\CONVERSATION{What?}{Who?}{?/12/2011}
+%\CONVERSATION{What?}{Who?}{?/1/2012}
 %%% END NEW ENTRY FORMAT
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%% 80 characters %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 \documentclass[11pt]{article}
 \input{../macros.tex}
 
@@ -64,7 +64,7 @@ Well, this element acts on any adams spectral sequence. In particular, there is,
 \[\Ext^{s,t}_\calA(H^*(X),\F_p)\to q_0^{-1}\Ext^{s,t}_\calA(H^*(X),\F_p).\]
 This map is an isomorphism above the line. Moreover, we have an equality:
 \[q_0^{-1}\Ext^{s,t}_\calA(H^*(X),\F_p)\cong H(H^*(X,\F_p);\beta)\otimes\F_p[q_0^{\pm1}],\]
-so that above the line, the spectral sequence in determined by the Bockstein spectral sequence for $X$, which we can calculate!
+so that above the line, the spectral sequence is determined by the Bockstein spectral sequence for $X$, which we can calculate!
 \item There's a conjecture related to all this on Haynes' website.
 \end{itemize}
 \end{itemise}
@@ -97,6 +97,130 @@ That is, the homotopy of $H_*X$ is in fact a functor in the homotopy of $X$.
 All this could be stitched together to give a spectral sequence going from the homology of $X$ to the homotopy. See Curtis, ``Simplicial homotopy theory'' (Advances in Math.\ 6 1971 107).
 
 \textbf{Problem}: Kan and Bousfield have another spectral sequence with this source and target, and the relationship between these is not fully understood.
+
+\pagebreak
+\CONVERSATION{The Adams Spectral sequence}{Haynes}{12/1/2012}
+\newcommand{\Pproj}{\calP_{\textup{proj}}}
+\newcommand{\Pseq}{\calP_{\textup{seq}}}
+Suppose that $\calA$ is a triangulated (an in particular, additive) category. Call a pair of composable maps $A'\to A\to A''$ a \emph{sequence} if it has composite zero.
+
+We're going to give a definition of ``relative homological algebra''. This will be relative to a pair $(\Pproj,\Pseq)$, where $\Pproj$ is a class of objects called `relative projectives', and $\Pseq$ is a class of sequences called `relative sequences', satisfying:
+\begin{itemize}\squishlist
+\item A sequence $A'\to A\to A''$ is a relative sequence \Iff the following is exact for every $P\in\Pproj$:
+\[\calA(P,A')\to\calA(P,A)\to\calA(P,A'')\]
+\item An object $P$ is a relative projective \Iff for all relative sequences $A'\to A\to A''$, the above is exact.
+\item There are enough projectives, in the sense that for every object $X$, we can find a relative projective $P$ and a relative sequence $P\to X\to0$.
+\end{itemize}
+Such a structure is enough to give a model category structure on the category of positively graded chain complexes on $\calA$.
+
+\begin{exmp*}
+Given a ring homomorphism $f:A\to B$, we can give such a structure on the category of $B$-modules. Say that a $B$-module $P$ is $f$-projective \Iff it's a retract of a module $B\otimes_AQ$.\footnote{Note that if $P$ is $f$-projective, then $P$ is in fact a retract of $B\otimes_AP|_A$.} The relative sequences are then determined as those sequences $M'\to M\to M''$ which are split exact when restricted to $A$.
+\end{exmp*}
+\begin{exmp*}
+Hochschild homology is a relative $\Tor$ group.
+\end{exmp*}
+
+Now, suppose that $\calA$ is a triangulated category with a \textbf{stable} injective class. That is, with all the same structure dualised, and such that an object is injective \Iff all of its suspensions are injective.
+
+\begin{shaded}
+I don't know if we're going with projective or injective right now.
+\end{shaded}
+
+Let $\calA=\ho(\scrS)$, and let $R$ be a ring spectrum (i.e.\ a tensor monoid) such that $\pi_{*}(R)$ is commutative. 
+\begin{itemize}\squishlist
+\item We'll say that $P\in\calA$ is $R$-projective \Iff it's a retract of some spectrum of the form $R\sprod X$. That is, \Iff the map $P\to R\sprod P$ has a section.
+\item We'll say that $X'\to X\to X''$ is an $R$-sequence if it is split exact (what does this mean?????) after smashing with $R$. At very least we want each three term sequence $\pi_{n}(R\sprod X')\to\pi_{n}(R\sprod X)\to\pi_{n}(R\sprod X'')$ to be exact.\footnote{For an example, suppose that $R=HA$, the Eilenberg-MacLane spactrum associated with an abelian group $A$. Then $R\sprod X$ is a new spectrum whose homotopy is the homology of $X$.}
+\end{itemize}
+Now take an injective resolution
+\[\xymatrix@R=.5cm@C=.5cm@!C{
+X\ar[dr]&%r1c1
+&%r1c2
+&%r1c3
+&%r1c4
+&%r1c5
+&%r1c6
+&%r1c7
+\\%r1c8
+&%r2c1
+I^0\ar[rr]&%r2c2
+&%r2c3
+I^1\ar[rr]&%r2c4
+&%r2c5
+I^2\ar[rr]&%r2c6
+&%r2c7
+\cdots%r2c8
+}\]
+and complete it to an $R$-Adams resolution:
+\[\xymatrix@R=.5cm@C=.5cm@!C{
+X\ar[dr]&%r1c1
+&%r1c2
+X^1\ar@{~>}[ll]\ar[dr]&%r1c3
+&%r1c4
+X^2\ar@{~>}[ll]\ar@{..>}[dr]&%r1c5
+&%r1c6
+&%r1c7
+\\%r1c8
+&%r2c1
+\ar[ur]I^0\ar[rr]&%r2c2
+&%r2c3
+\ar[ur]I^1\ar[rr]&%r2c4
+&%r2c5
+I^2\ar[rr]&%r2c6
+&%r2c7
+\cdots%r2c8
+}\]
+Note that at this stage, we can form the dotted arrow, as the composite $X^1\to I^2$ is null.
+
+Now the fibre in a triangulated category is not canonically defined, instead it is only defined up to non-canonical isomorphism. However, any two of these resolutions are isomorphic, and the failure of the isomorphism to be canonical dies by the $E_2$ page of the spectral sequence.
+
+
+Now \textbf{assume} that $R_*R$ is flat over $R_*:=\pi_{*}(R)$. This happens when $R$ is any of $H\F$ ($\F$ any field), $K$ and $\textup{MU}$, but not for $H\Z$. With this assumption, we obtain co-operations on the $R$ homology of any spectrum
+\[R_*(X)\to R_*(R)\otimes_{R_*}R_*(X).\]
+Putting $X=R$, we obtain the diagonal map making $(R_*,R_*R)$ a Hopf algebroid.
+
+Now by our flatness assumption, the category of $R_*R$-comodules is abelian. We define:
+\begin{itemize}\squishlist
+\item the relative injectives to be the retracts of extended modules $R_*R\otimes_{R_*}(?)$
+\item the relative sequences to be... the same as last time?
+\end{itemize}
+Via these definitions, we have relative homological algebra.
+
+Now we have a Hurewicz map 
+\[\pi_{*}(X)\to\Hom_{R_*R}(R_*,R_*(X))\]
+ obtained as follows. Given $f:\mathbb{S}\to \Sigma^{-n}X$ and $g:\mathbb{S}\to \Sigma^{-m}R$, we produce:
+\[
+\xymatrix@1{
+\mathbb{S}\ar@{=}[r]&%r1c1
+\mathbb{S}\sprod\mathbb{S}\ar[r]^-{f\sprod g}&%r1c2
+\Sigma^{-n}X\sprod \Sigma^{-m}R\ar@{=}[r]&%r1c3
+\Sigma^{-n-m}X\sprod R
+}\]
+Moreover, if $X$ is $R$-injective, this is an isomorphism. So, if we apply homotopy to obtain an exact couple:
+\[\xymatrix@R=.5cm@C=.5cm@!C{
+\pi_*X\ar[dr]&%r1c1
+&%r1c2
+\pi_*X^1\ar@{~>}[ll]\ar[dr]&%r1c3
+&%r1c4
+\pi_*X^2\ar@{~>}[ll]\ar[dr]&%r1c5
+&%r1c6
+&%r1c7
+\\%r1c8
+&%r2c1
+\ar[ur]\pi_*I^0\ar[rr]&%r2c2
+&%r2c3
+\ar[ur]\pi_*I^1\ar[rr]&%r2c4
+&%r2c5
+\pi_*I^2\ar[rr]&%r2c6
+&%r2c7
+\cdots%r2c8
+}\]
+we find that the bottom row can be replaced with
+\[\Hom_{R_*R}(R_*,R_*(I^0))\to\Hom_{R_*R}(R_*,R_*(I^1))\to\Hom_{R_*R}(R_*,R_*(I^2))\to\cdots.\]
+So as long as $R_*$ maps resolutions of spectra to resolutions of comodules, we will be able to identify the  $E_2$ page with some derived functor (Ext, right? Or is this Cotor or something!?)
+
+\begin{rmk*}
+Convergence is trivial when $R=MU$ and $X$ is connective. In this case, we can make the map $X\to I^0$ an isomorphism on the bottom homotopy group, and thus, push the connectivity of the $X^i$ higher and higher.
+\end{rmk*}
 
 \end{document}
 
