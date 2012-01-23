@@ -14,6 +14,11 @@
 \newcommand\ARR{\textup{ARR}}
 \newcommand\COMP{\textup{COMP}}
 \newcommand\Fsum{\sideset{}{^F}\sum}
+\newcommand{\FGL}{\textup{FGL}}
+\newcommand{\FGLp}{\textup{FGL}^{p}}
+\newcommand{\SI}{\textup{SI}}
+\newcommand{\Ring}{\textsf{Rings}}
+\newcommand{\ZpAlg}{\textsf{Alg}_{\Z_{(p)}}}
 
 \begin{document}
 \begin{ASSp7-8}
@@ -299,10 +304,6 @@ I should understand the last requirement.
 \end{Maps of algebroids}
 \begin{Formal Group Laws}
 \section*{Formal group laws}
-\newcommand{\FGL}{\textup{FGL}}
-\newcommand{\FGLp}{\textup{FGL}^{(p)}}
-\newcommand{\SI}{\textup{SI}}
-\newcommand{\Ring}{\textsf{Rings}}
 Let $\Ring$ be the category of commutative unital rings. Let $\FGL:\Ring\to\Set$ be the functor sending a ring $R$ to the set of FGLs over $R$. Let $\SI:\Ring\to\Set$ be the functor sending a ring to the set of triples $(F,f,G)$ where $R,G\in\FGL(R)$ and $f:F\to G$ is a strict isomorphism.
 
 We have natural transformations:
@@ -584,6 +585,7 @@ Because the pair $(\FGL(R),\SI(R))$ gives a groupoid, we have that $(L,LB)$ is a
 \item The formulae for the Hopf algebroid structure on $(L,LB)$ are given in (\textbf{A2.1.16}). It is noted that these formulae are the same as those for $(MU_*,MU_*MU)$, and that this Hopf algebroid is split.
 \end{itemise}
 \subsection*{$p$-typicality}
+From now on, we'll be thinking about formal group laws over $\Z_{(p)}$-algebras, so we'll write $\ZpAlg$ for the category of unital $\Z_{(p)}$-algebras.
 \begin{itemise}
 \item We wish to give a definition of $p$-typicality, which we imagine to mean `the logarithm only has terms $x^{p^i}$', when we are over a general $\Z_{(p)}$-algebra $R$.
 \begin{itemize}\squishlist
@@ -595,13 +597,104 @@ where $\zeta$ is a primitive $q^\textup{th}$ root of unity. This is defined over
 \[\log(x)=\sum_{i\geq0}m_ix^{i+1}\implies \log(f_q(x))=\sum_{j>0}m_{qj-1}x^{qj}.\]
 \item It is then natural to define:
 \begin{defn*}
-If $R$ is a $\Z_{(p)}$-algebra, $F\in\FGL(R)$ is \textbf{$p$-typical} is $f_{q}(x)=0$ for all primes $q\neq p$.
+If $R$ is a $\Z_{(p)}$-algebra, $F\in\FGL(R)$ is \textbf{$p$-typical} if $f_{q}(x)=0$ for all primes $q\neq p$.
 \end{defn*}
 \end{itemize}
+\item  We'd like to prove the following theorem of Cartier:
+\begin{thm*}[A2.1.18]
+Every formal group law over a $\Z_{(p)}$-algebra is canonically strictly isomorphic to a $p$-typical one.
+\end{thm*}
+To prove this, it'll be enough to give a strict isomorphism from the universal FGL $F$ over $L\otimes \Z_{(p)}$, to $p$-typical FGL $\widetilde{F}$. To see this, suppose that $G\in\FGL(R)$, for \smash{$R\in\ZpAlg$}. Then there is a unique map $\theta:L\to R$ such that $\theta(F)=R$. Now given a strict isomorphism $f:F\to\widetilde{F}$, we obtain a strict isomorphism $\theta(f):G\to\widetilde{G}$.
+\begin{shaded}
+We'll need the M\"obius function $\mu:\N\to\{-1,0,1\}$.\footnote{Here $\N=\{1,2,\ldots\}$.} Given an arithmetic function $\alpha$, we can form another arithmetic function $\beta$ by the formula below, which determines $\alpha$ using the M\"obius function $\mu$:
+\[\alpha\quad \rightsquigarrow \quad \beta(n):=\sum_{q|n}\alpha(q)\quad \rightsquigarrow\quad  \alpha(n)=\sum_{q|n}\mu(q)\beta(n/q).\]
+This is the \emph{M\"obius inversion formula}. The M\"obius function $\mu$ is the function $\alpha$ needed so that $\beta(n)=\delta_{n1}$. Explicitly:
+\[\mu(n)=\begin{cases}
+0,&\textup{if $n$ is divisible by a square};\\
+(-1)^r,&\textup{if $n$ is the product of $r$ distinct primes.}
+\end{cases}
+\]
+It is not hard to see by direct inspection of $\mu$ that 
+\[\sum_{p\nmid q\mid n}\mu(q)=\begin{cases}
+1,&\textup{if }n=p^k;\\
+0,&\textup{otherwise}.
+%\\,&\textup{if }
+\end{cases}
+\]
+\end{shaded}
+Now we are looking for a strict isomorphism $f$ (dotted) such that we have
+\[\textup{mog}(x):=\log_{F'}=\log_{F}(f^{-1}(x))=\sum_{i\geq0}m_{p^i-1}x^{p^{i}}\textup{\qquad in\qquad }
+\vcenter{\xymatrix@R=.3cm@C=.4cm{
+\ar[rd]_-(.0){\textup{log}_F}F\ar@{..>}[rr]^-{f}&%r1c1
+&%r1c2
+\widetilde{F}\ar[ld]^-(.0){\textup{mog}=\textup{log}\circ f^{-1}}\\%r1c3
+&%r2c1
+\textup{Add}&%r2c2
+%r2c3
+}}\]
+We define $f$ by the following {formal} sum, whose logarithm we understand:
+\begin{alignat*}{2}
+f^{-1}(x)
+&:=
+\Fsum_{p\nmid q}[\mu(q)]_F(f_q(x))%
+\\
+\log_F(f^{-1}(x))
+&=
+\sum_{p\nmid q}\mu(q)\cdot\log_F(f_q(x))%
+&\qquad&\text{(applying $\log_F$)}\\
+&=
+\sum_{p\nmid q}\mu(q)\cdot\sum_{j>0}m_{qj-1}x^{qj}%
+&\qquad&\text{(by definition of $f_q$)}\\
+&=
+\sum_{n>0}\left(\sum_{p\nmid q\mid n}\mu(q)\right)m_{n-1}x^{n}%
+&\qquad&\text{(collecting like terms)}\\
+% Left hand side
+% Relation
+&=
+% Right hand side
+\sum_{i\geq0}m_{p^i-1}x^{p^{i}}%
+% Comment
+&\qquad&\text{(by the formula above)}
+\end{alignat*}
+This proves A2.1.18, as $L\otimes\Z_{(p)}$ is a \emph{torsion free} $\Z_{(p)}$-algebra.
 \item 
-
-
-
+At this point, we need to be clear:
+\begin{itemize}\squishlist
+\item $L\otimes\Z_{(p)}$ corepresents $\FGL:\ZpAlg\to\Set$.
+\item $\FGL$ has a sub-functor $\FGLp:\ZpAlg\to\Set$, which sends a $\Z_{(p)}$-algebra to the set of $p$-typical FGLs over it.
+\item We have chosen a strict isomorphism $f:F\to\widetilde{F}$ of FGLs on $L\otimes\Z_{(p)}$. \item $f$ induces a natural assignment of a strict isomorphism $G\to\widetilde{G}$, whenever $G\in\FGL(R)$, for $R\in\ZpAlg$.
+\item Sending $G$ to $\widetilde{G}$ gives a natural transformation $\sim:\FGL\to\FGL$, which must be induced by an endomorphism $\phi$ of $L\otimes\Z_{(p)}$.
+\item $\phi$ is determined by its action on the generators $m_i$ of ${L}\otimes{\Q}$, and as we know the logarithm of $\widetilde{F}$, we see that
+\[\phi(m_i)=\begin{cases}
+m_i,&\textup{if }i=p^k-1;\\
+0,&\textup{otherwise}.
+%\\,&\textup{if }
+\end{cases}
+\]
+\item This $\phi$ is idempotent, so that we have an idempotent natural endomorphism of $\FGL$, whose image lies in $\FGLp$.
+\item $\sim$ acts as the identity on the set of $p$-typical FGLs, \rednote{(I don't see why exactly, as I don't see clearly how to translate our construction into the non-torsion-free case)}, so that $\FGLp$ is the image of $\sim$.
+%\item The $p$-typical FGL $\widetilde{F}$ on $L\otimes\Z_{(p)}$ is 
+\end{itemize}
+We have almost proven
+\begin{thm*}
+Let $V=\Z_{(p)}[v_1,v_2,\ldots]$ with $|v_n|=2(p^n-1)$. Then:
+\begin{itemize}\squishlist
+\item  $V$ corepresents $\FGLp$ --- there is a universal $p$-typical formal group law $\widetilde{F}\in\FGLp(V)$.
+\item $V$ is the image of the idempotent $\phi:{L}\otimes{\Z_{(p)}}\to{L}\otimes{\Z_{(p)}}$.
+\item As such, the map ${L}\otimes{\Z_{(p)}}\to V$ corresponding to $\widetilde{F}\in\FGL(V)$ is the projection onto a direct summand.
+\end{itemize}
+\end{thm*}
+\begin{proof}
+Suppose that $G\in\FGLp(R)$. Then $G$ is also an element of $\FGL(R)$, represented by a map $g:L\otimes\Z_{(p)}\to R$. As $G=\widetilde{G}$, we have a commuting diagram, the full arrows below:
+\[\xymatrix@R=1cm{
+L\otimes\Z_{(p)}\ar[r]^-{\phi}\ar[dr]_-{g}&%r1c1
+L\otimes\Z_{(p)}\ar[d]^-{g}&
+\im(\phi)\ar@{_{(}->}[l]\ar@{-->}[ld]^-{\exists !}\\
+&%r2c1
+R%r2c2
+}\]
+As $\phi$ is an idempotent, there is a unique map completing the right hand triangle. Thus, $V:=\im(\phi)$ corepresents $\FGLp(R)$.
+\end{proof}
 
 \end{itemise}
 \end{Formal Group Laws}
