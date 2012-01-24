@@ -17,6 +17,7 @@
 \newcommand{\FGL}{\textup{FGL}}
 \newcommand{\FGLp}{\textup{FGL}^{p}}
 \newcommand{\SI}{\textup{SI}}
+\newcommand{\SIp}{\textup{SI}^p}
 \newcommand{\Ring}{\textsf{Rings}}
 \newcommand{\ZpAlg}{\textsf{Alg}_{\Z_{(p)}}}
 
@@ -584,7 +585,7 @@ Because the pair $(\FGL(R),\SI(R))$ gives a groupoid, we have that $(L,LB)$ is a
 \begin{itemise}
 \item The formulae for the Hopf algebroid structure on $(L,LB)$ are given in (\textbf{A2.1.16}). It is noted that these formulae are the same as those for $(MU_*,MU_*MU)$, and that this Hopf algebroid is split.
 \end{itemise}
-\subsection*{$p$-typicality}
+\subsection*{$p$-typical formal group laws}
 From now on, we'll be thinking about formal group laws over $\Z_{(p)}$-algebras, so we'll write $\ZpAlg$ for the category of unital $\Z_{(p)}$-algebras.
 \begin{itemise}
 \item We wish to give a definition of $p$-typicality, which we imagine to mean `the logarithm only has terms $x^{p^i}$', when we are over a general $\Z_{(p)}$-algebra $R$.
@@ -672,7 +673,7 @@ m_i,&\textup{if }i=p^k-1;\\
 \end{cases}
 \]
 \item This $\phi$ is idempotent, so that we have an idempotent natural endomorphism of $\FGL$, whose image lies in $\FGLp$.
-\item $\sim$ acts as the identity on the set of $p$-typical FGLs, \rednote{(I don't see why exactly, as I don't see clearly how to translate our construction into the non-torsion-free case)}, so that $\FGLp$ is the image of $\sim$.
+\item $\sim$ acts as the identity on the set of $p$-typical FGLs, as it is defined by the same formula on a general FGL, and we have the correct definition of $p$-typical. Thus $\FGLp$ is the image of $\sim$.
 %\item The $p$-typical FGL $\widetilde{F}$ on $L\otimes\Z_{(p)}$ is 
 \end{itemize}
 We have almost proven
@@ -693,9 +694,74 @@ L\otimes\Z_{(p)}\ar[d]^-{g}&
 &%r2c1
 R%r2c2
 }\]
-As $\phi$ is an idempotent, there is a unique map completing the right hand triangle. Thus, $V:=\im(\phi)$ corepresents $\FGLp(R)$.
+As $\phi$ is an idempotent, there is a unique map completing the right hand triangle. Thus, $V:=\im(\phi)$ corepresents $\FGLp(R)$. The calculation of the structure of $V$ is similar to that for $L$, apparently.
 \end{proof}
+\end{itemise}
+\subsection*{$p$-typical matched pairs}
+\begin{itemise}
+\item We're going to need a ring $VT$ which corepresents the functor $\SIp$ of $p$-typical matched pairs:
+\[\SIp:\ZpAlg\to\Set\qquad \SIp(R):=\left\{(F,f,G)\in\SI(R)\,\middle|\,F,G\in\FGLp(R)\right\}.\]
+Now in the $\FGL$ story, it happened that one could choose $f$ independently of $F$, but this is no longer true --- in order to ensure that $G$ is $p$-typical, one must choose $f$ in a way that depends on $F$. For this reason, the resulting Hopf algebroid $(V,VT)$ will not be split.
+\begin{lem*}[A2.1.26]
+Suppose $F\in\FGLp(R)$, $G\in\FGL(R)$ and $f:F\to G$ is an isomorphism. Then
+\[G\textup{\ is $p$-typical\ }\iff f^{-1}(x)=\Fsum_{i\geq0}t_ix^{p^i}\textup{\ for $t_i\in R$, $t_0$ invertible.}\]
+Of course, if $f$ is a strict isomorphism, then $t_0=1$.
+\end{lem*}
+That is, the power series that we can use in a $p$-typical matched pair $(F,f,G)$ are the $F$-formal sums of power series $t_ix^{p^{i}}$.
+\item From this, it follows that $VT=V\otimes\Z_{(p)}[t_1,\ldots]$, with $|t_n|=|v_n|=2(p^n-1)$. One can determine the structure maps of the Hopf algebroid $(V,VT)$, as is described in A2.1.27.
 
+\INDENT The structure maps are described in terms of the elements $\ell_i\in V\otimes\Q$, which are defined to be the image of $m_{p^i-1}\in {L}\otimes{\Q}$ under $\phi:L\to V$.
+
+\INDENT The resulting Hopf algebroid is isomorphic to $(BP_*,BP_*(BP))$.
+\end{itemise}
+\subsection*{Choice of generators for $V$}
+\begin{itemise}
+\item 
+Hazewinkel's generators $v_n$ of $V$ are defined recursively by:
+\[p\ell_n=\sum_{0\leq i<n}\ell_iv_{n-i}^{p^i}\textup{,\quad i.e.\quad }v_n=p\ell_n-\sum_{0< i<n}\ell_iv_{n-i}^{p^i}\]
+One must prove that $v_n\in V$, and that the $v_n$ generate.
+\item 
+Araki's generators $v_n$ of $V$ are defined recursively, starting with $v_0:=p$, by:
+\[p\ell_n=\sum_{0\leq i\leq n}\ell_iv_{n-i}^{p^i}\textup{,\quad i.e.\quad }v_n=p\ell_n-\sum_{0< i\leq n}\ell_iv_{n-i}^{p^i}\]
+These give worse formulae for $\ell_n$, but better ones for $\eta_R$. We also have a defining formula:
+\[[p]_F(x)=\Fsum_{i\geq0}v_ix^{p^i}.\]
+\item From now on, $v_n$ will mean the corresponding Araki generator. Note, however:
+ \begin{thm*}[A2.2.3]
+The Hazewinkel and Araki generators are congruent mod $(p)$.
+\end{thm*}
+\item A formula is given A2.2.5 for $\eta_R$ in terms of the Araki generators.
+\end{itemise}
+\subsection*{The height of a FGL over an $\F_p$-algebra}
+\begin{itemise}
+\item The following lemma will help us to define the height of a FGL over an $\F_p$-algebra.
+\begin{lem*}[A2.2.6]
+Let $F$ be an FGL over a commutative $\F_p$-algebra, and let $f:F\to F$ be a nontrivial endomorphism. Then for some $n$, $f(x)$ is a power series in $x^{p^n}$ with leading term $ax^{p^n}$.
+\end{lem*}
+\item We have the endomorphism $[p]_F:F\to F$, which then has leading coefficient $ax^{p^n}$, and we say that $F$ has \textbf{height} $n$. If $[p]_F=0$, we say that the height is $\infty$.
+\item \rednote{Over any $\F_p$-algebra R} we can define a formal group law $F_n$ of each height $n\leq\infty$:
+\begin{itemize}\squishlist
+\item Let $F_{\infty}(x,y)=x+y$.
+\item Let $F_n$ be the FGL induced by the map
+\[\theta:V\to R,\qquad v_i\mapsto\begin{cases}
+1,&\textup{if }i=n;\\
+0,&\textup{otherwise}.
+%\\,&\textup{if }
+\end{cases}
+\]
+\end{itemize}
+\item When $K$ is a separably closed field of characteristic $p>0$, any FGL over $K$ is isomorphic to one of these.
+\end{itemise}
+\subsection*{Endomorphism rings}
+\begin{itemise}
+\item If $F\in\FGL(K)$, where $K$ is a field of characteristic $p$, the set $E$ of endomorphisms of $F$ is an integral domain under composition and formal sum.
+\item It also happens that $E$ is a $\Z_p$-algebra, where $\Z_p$ is the $p$-adic integers. To give the structure, note that a $p$-adic integer $a$ can be written as $a=\sum a_ip^i$ for $a_i\in\Z$. Then we may define the image of $a$ in $E$ to be $[a]_F$ where:
+\[[a]_F(x):=\Fsum [a_i]_F([p^i]_F(x)).\]
+Note that $[p^i]_F(x)=[p]_F([p]_F([p]_F( \cdots([p]_F(x))\cdots)))$, and $[p]_F(x)$ is a power series with leading term $ax^{p^n}$, where $n>0$ is the height of $F$. Thus, this definition makes sense.
+
+\INDENT When $F$ has finite height, $E$ is free as a $\Z_p$-module \rednote{(I don't get why...)}
+
+\INDENT When $F$ has height $\infty$, $[p]_F(x)=0$, so that $F$ is an $\F_p$-vector space.
+\item It remains for me to read pp357--358.
 \end{itemise}
 \end{Formal Group Laws}
 
