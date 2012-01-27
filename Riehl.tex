@@ -1,0 +1,201 @@
+% !TEX root = z_output/_Riehl.tex
+
+\documentclass[11pt]{article}
+\input{../macros.tex}
+\includeversion{solutions}
+\UseAllTwocells
+\begin{document}
+\begin{solutions}
+\subsection*{Exercise 2.2}
+Suppose that we have the following data
+\begin{itemize}\squishlist
+\item Categories $\scrD$ and $E$;
+\item An object $d\in \scrD$;
+\item A functor $H:\scrD\to \scrE$;
+\end{itemize}
+This data can be viewed as giving a commuting diagram of functors
+\[\xymatrix{
+\textbf{1}\ar[rr]^-{Hd}_-{}="1" \ar[rd]_-{d}&%r1c1
+&%r1c2
+\scrE\\%r1c3
+&%r2c1
+\scrD\ar@{->}[ru]_H&%r2c2
+%r2c3
+}\]
+Suppose further that we are given:
+\begin{itemize}\squishlist
+\item A functor $G:\scrD\to \scrE$.
+\item A map $f\in \scrE(Hd,Gd)$.
+\end{itemize}
+This further data supplies a diagram
+\[\xymatrix{
+\textbf{1}\ar[rr]^-{Hd}_-{}="arF"="1" \ar[rd]_-{d}&%r1c1
+&%r1c2
+\scrE\\%r1c3
+&%r2c1
+\scrD\ar@{->}[ru]_G\ar@{=>}"arF";[]_-{f}&%r2c2
+%r2c3
+}\]
+If $(H,1_{Hd})$ was a left Kan extension, then there would be a unique natural transformation $\gamma:H\nt G$ such that $\gamma_d:Hd\nt Gd$ is the map $f$.
+\[\xymatrix@R=.4cm@C=3cm{
+\bullet\ar@{|->}[r]^-{H}\ar@{|->}[rd]_-{G}&%r1c1
+\bullet\ar@/^1em/[d]\ar@/_1em/[d]\\%r1c2
+&%r2c1
+\bullet\\%r2c2
+d\ar@{|->}[r]^-{G,H}&%r3c1
+Hd%r3c2
+}\]
+\end{solutions}
+
+\section*{All concepts are Kan extensions}
+\subsection*{Left Kan extensions}
+Suppose we have a functor $K:\scrC\to\scrD$, and we are interested in extending functors $F:\scrC\to\scrE$ along $K$. We don't expect to be able to extend just any functor along $K$, i.e.\ to fill the diagram
+\[\xymatrix{
+\scrC\ar[rr]^-{F}_-{}="1" \ar[rd]_-{K}&%r1c1
+&%r1c2
+\scrE\\%r1c3
+&%r2c1
+\scrD\ar@{-->}[ru]&%r2c2
+%r2c3
+}\]
+Instead, we hope to find a functor $\Lan_KF$, and a natural transformation as follows
+\[\xymatrix{
+\scrC\ar[rd]_-{K}\ar[rr]^-{F}_-{}="arF"&%r1c1
+&%r1c2
+\scrE\\%r1c3
+&%r2c1
+\scrD\ar@{->}[ur]_{\Lan_KF}\ar@{=>}"arF";[]_-{\eta}&%r2c2
+%r2c3
+}\]
+which is universal in the sense that any other similar diagram factors as
+\[\xymatrix{
+\scrC\ar[rd]_-{K}\ar[rr]^-{F}_-{}="arF"&%r1c1
+&%r1c2
+\scrE\\%r1c3
+&%r2c1
+\scrD\ar@{=>}"arF";[]_-{\eta}
+\xtwocell[ur]{}^{L}{{\exists!}}&%r2c2
+%r2c3
+}\]
+Now a choice of functors $K$ and $F$ gives a functor 
+\[\scrE^\scrC(F,\DASH\circ K):\scrE^\scrD\to\Set\]
+and to represent this functor is to give an object $L$ of $\scrE^\scrD$, and an element $e\in \scrE^\scrC(F,L\circ K)$ such that the natural map
+\[\scrE^\scrD(L,G)\to \scrE^\scrC(F,G\circ K),\qquad \chi\mapsto \chi_*(e)=\chi e\]
+is an isomorphism for all functors $G\in\ob(\scrE^\scrD)$.
+
+One sees then that we have an adjunction $\scrE^\scrD(\Lan_KF,G)\to \scrE^\scrC(F,G\circ K)$, and in fact the same happens for right Kan extensions:
+\[\xymatrix@C=1.5cm{
+\scrE^\scrC\ar@/^1.2em/[r]^-{\Lan_K}_-{\perp} \ar@/_1.2em/[r]_-{\Ran_K}^-{\perp}&%r1c1
+\scrE^\scrD\ar[l]|{K^*}%r1c2
+}\]
+\subsection*{A formula for left Kan extensions}
+It is claimed that when $\scrE$ is cocomplete, we can compute $\Lan_KF$ objectwise, by the formula:
+\[\Lan_KF(d)=\int^{c\in\scrC}\scrD(Kc,d)\cdot Fc=
+\colim\left(\vcenter{\xymatrix{
+{\displaystyle\coprod_{f:c\to c'}}\scrD(Kc',d)\cdot Fc\ar[r]^-{f^*\cdot1}\ar[d]_-{1\cdot f_*}&%r1c1
+{\displaystyle\coprod_{c}}\scrD(Kc,d)\cdot Fc\\%r1c2
+{\displaystyle\coprod_{c'}}\scrD(Kc',d)\cdot Fc'&%r2c1
+%r2c2
+}}\right)
+.\]
+Here, the dot stands for the copower, which is just the colimit of a diagram with no arrows. In order to get the natural transformation, for each $c_0\in\scrC$, we need a map from $Fc_0$ to this colimit with $d=Kc_0$. 
+Note that there is a distinguished copy of $Fc_0$ in the upper left term, where we set $f=\id_{c_0}$, and use the copy of $Fc_0$  corresponding to $\id_{Kc_0}$.
+
+We'll spend the rest of this section showing that this is actually a left Kan extension. We need %suppose that we are given a functor $G:\scrD\to\scrC$, and a natural transformation $\gamma:F\nt GK$, as at the left below. 
+to find a unique factorisation of $\gamma$ as $\delta\circ\eta$:
+\[\vcenter{\xymatrix{
+\scrC\ar[rd]_-{K}\ar[rr]^-{F}_-{}="arF"&%r1c1
+&%r1c2
+\scrE\\%r1c3
+&%r2c1
+\scrD\ar@{=>}"arF";[]_-{\gamma}
+\ar[ur]_-{G}
+%r2c3
+}}
+=
+\vcenter{\xymatrix{
+\scrC\ar[rd]_-{K}\ar[rr]^-{F}_-{}="arF"&%r1c1
+&%r1c2
+\scrE\\%r1c3
+&%r2c1
+\scrD\ar@{=>}"arF";[]_-{\eta}
+\xtwocell[ur]{}_{G}^{L}{{\delta}}&%r2c2
+%r2c3
+}}
+\]
+To give the natural transformation $\delta$, it is enough to give, for each $d\in\scrD$ the dotted maps in $\scrE$ making the following diagram commute, naturally in $d$:
+\[\vcenter{\xymatrix{
+{\displaystyle\coprod_{f:c\to c'}}\scrD(Kc',d)\cdot Fc\ar[r]^-{f^*\cdot1}\ar[d]_-{1\cdot f_*}&%r1c1
+\ar@{-->}[d]{\displaystyle\coprod_{c}}\scrD(Kc,d)\cdot Fc\\%r1c2
+\ar@{-->}[r]{\displaystyle\coprod_{c'}}\scrD(Kc',d)\cdot Fc'&%r2c1
+Gd%r2c2
+}}\]
+%For the vertical arrow, for each map $f:Kc\to d$, we need to give a map $Fc\to Gd$. We use the composite:
+We define the vertical dashed arrow by the composite:
+\[\{Kc\overset{h}{\to}d\}\cdot Fc\overset{\gamma_c}{\to}GKc\overset{Gh}{\to}Gd,\]
+and define the horizontal dashed arrow similarly. Now to see when this diagram commutes, we expand out the diagram starting at a `summand' of the northeast corner:
+\[\vcenter{\xymatrix{
+(c\overset{f}{\to}c',Kc'\overset{h}{\to}d)\cdot Fc\ar@{->}[r]^-{\textup{`id'}}\ar[d]_-{\textup{`$Ff$'}}&%r1c1
+\ar@{->}[r]^-{\gamma_c}(Kc\overset{Kf}{\to}Kc'\overset{h}{\to}d)\cdot Fc&%r1c2
+GKc\ar[r]^-{GKf}&
+GKc'\ar[d]^-{Gh}\\
+\ar@{->}[rr]^-{\gamma_{c'}}(Kc'\overset{h}{\to}d)\cdot Fc'&&
+GKc'\ar[r]^-{Gh}&Gd
+}}\]
+Now this diagram always commutes \Iff it commutes whenever $h=\id_{Kc'}$, so we reduce to a diagram
+\[\vcenter{\xymatrix{
+Fc\ar@{->}[rr]^-{\gamma_c}\ar[d]_-{\textup{`$Ff$'}}&&%r1c1
+GKc\ar[d]^-{GKf}\\
+\ar@{->}[rr]^-{\gamma_{c'}}Fc'&&
+GKc'
+}}\]
+which encodes exactly that $\gamma$ is a natural transformation. We could probably even work out the opposite direction.
+\subsection*{Pointwise Kan extensions}
+We'll say that a functor $L$ as below \textbf{preserves} the Kan extension drawn at left if the composite at right is a Kan extension.
+\[
+\vcenter{\xymatrix{
+\scrC\ar[rd]_-{K}\ar[rr]^-{F}_-{}="arF"&%r1c1
+&%r1c2
+\scrE\ar[rr]^L&&\scrF\\%r1c3
+&%r2c1
+\scrD\ar@{->}[ur]_{\Lan_KF}\ar@{=>}"arF";[]_-{\eta}&%r2c2
+%r2c3
+}}
+\qquad \qquad 
+\vcenter{\xymatrix{
+\scrC\ar[rd]_-{K}\ar[rr]^-{LF}_-{}="arF"&%r1c1
+&%r1c2
+\scrE\\%r1c3
+&%r2c1
+\scrD\ar@{->}[ur]_{L\Lan_KF}\ar@{=>}"arF";[]_-{L\eta}&%r2c2
+%r2c3
+}}
+\]
+\begin{lem*}
+Left adjoints preserve left Kan extensions.
+\end{lem*}
+\begin{defn*}
+When $\scrE$ is locally small, a \textit{right} Kan extension is \textbf{pointwise} if it is preserved by all representable functors $\scrE(e,\DASH )$.
+\end{defn*}
+Now $\scrE(e,\DASH )$ preserves limits (by definition), so that a Kan extension given by the (dual of the) formula above is pointwise, as is one given by the following formula, which I don't yet understand:
+\[\Ran_KF(d)=\lim\left(d/K\overset{U}{\to}\scrC\overset{F}{\to}\scrE\right)\]
+Thus, whenever $\scrE$ is complete, every right Kan extension is pointwise \rednote{(right?)}.
+Suprisingly, though:
+\begin{thm*}
+This most recent limit exists whenever $\Ran_KF$ is pointwise, in which case it defines $\Ran_KF$. (If $\Ran_KF$ can be defined by any limit, it is pointwise, and can be defined by this one.)
+\end{thm*}
+
+\end{document}
+
+
+
+
+
+
+
+
+
+
+
+
+
