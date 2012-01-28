@@ -2,51 +2,73 @@
 
 \documentclass[11pt]{article}
 \input{../macros.tex}
+
+
+\includeversion{1. Kan Extensions}
+\includeversion{2. Derived functors via deformations}
 \includeversion{solutions}
+
+
+
 \UseAllTwocells
 \begin{document}
 \begin{solutions}
 \subsection*{Exercise 2.2}
-Suppose that we have the following data
-\begin{itemize}\squishlist
-\item Categories $\scrD$ and $E$;
-\item An object $d\in \scrD$;
-\item A functor $H:\scrD\to \scrE$;
-\end{itemize}
-This data can be viewed as giving a commuting diagram of functors
-\[\xymatrix{
-\textbf{1}\ar[rr]^-{Hd}_-{}="1" \ar[rd]_-{d}&%r1c1
-&%r1c2
-\scrE\\%r1c3
-&%r2c1
-\scrD\ar@{->}[ru]_H&%r2c2
-%r2c3
-}\]
-Suppose further that we are given:
-\begin{itemize}\squishlist
-\item A functor $G:\scrD\to \scrE$.
-\item A map $f\in \scrE(Hd,Gd)$.
-\end{itemize}
-This further data supplies a diagram
-\[\xymatrix{
-\textbf{1}\ar[rr]^-{Hd}_-{}="arF"="1" \ar[rd]_-{d}&%r1c1
-&%r1c2
-\scrE\\%r1c3
-&%r2c1
-\scrD\ar@{->}[ru]_G\ar@{=>}"arF";[]_-{f}&%r2c2
-%r2c3
-}\]
-If $(H,1_{Hd})$ was a left Kan extension, then there would be a unique natural transformation $\gamma:H\nt G$ such that $\gamma_d:Hd\nt Gd$ is the map $f$.
-\[\xymatrix@R=.4cm@C=3cm{
-\bullet\ar@{|->}[r]^-{H}\ar@{|->}[rd]_-{G}&%r1c1
+%Suppose that we have the following data
+%\begin{itemize}\squishlist
+%\item Categories $\scrD$ and $E$;
+%\item An object $d\in \scrD$;
+%\item A functor $H:\scrD\to \scrE$;
+%\end{itemize}
+%This data can be viewed as giving a commuting diagram of functors
+%\[\xymatrix{
+%\textbf{1}\ar[rr]^-{Hd}_-{}="1" \ar[rd]_-{d}&%r1c1
+%&%r1c2
+%\scrE\\%r1c3
+%&%r2c1
+%\scrD\ar@{->}[ru]_H&%r2c2
+%%r2c3
+%}\]
+%Suppose further that we are given:
+%\begin{itemize}\squishlist
+%\item A functor $G:\scrD\to \scrE$.
+%\item A map $f\in \scrE(Hd,Gd)$.
+%\end{itemize}
+%This further data supplies a diagram
+%\[\xymatrix{
+%\textbf{1}\ar[rr]^-{Hd}_-{}="arF"="1" \ar[rd]_-{d}&%r1c1
+%&%r1c2
+%\scrE\\%r1c3
+%&%r2c1
+%\scrD\ar@{->}[ru]_G\ar@{=>}"arF";[]_-{f}&%r2c2
+%%r2c3
+%}\]
+%If $(H,1_{Hd})$ was a left Kan extension, then there would be a unique natural transformation $\gamma:H\nt G$ such that $\gamma_d:Hd\nt Gd$ is the map $f$.
+%\[\xymatrix@R=.4cm@C=3cm{
+%\bullet\ar@{|->}[r]^-{H}\ar@{|->}[rd]_-{G}&%r1c1
+%\bullet\ar@/^1em/[d]\ar@/_1em/[d]\\%r1c2
+%&%r2c1
+%\bullet\\%r2c2
+%d\ar@{|->}[r]^-{G,H}&%r3c1
+%Hd%r3c2
+%}\]
+Consider the following three categories, and four functors.
+\[\xymatrix@R=.4cm@C=3cm@ur{
+\bullet\ar@{|->}[ddddd]^K\ar@{|->}[dddrdd]^F
+\\\\\\
+\\
+\\
+\bullet\ar@{|->}[r]^-{L,H}&%r3c1
+\bullet\\%r3c2\\
+\bullet\ar@{|->}[r]^-{H}\ar@{|->}[dr]_-{L}&%r1c1
 \bullet\ar@/^1em/[d]\ar@/_1em/[d]\\%r1c2
 &%r2c1
-\bullet\\%r2c2
-d\ar@{|->}[r]^-{G,H}&%r3c1
-Hd%r3c2
+\bullet
 }\]
+Now $F=LK$, so that one might hope that $(L,\id_F)$ was a left Kan extension, but this is not so. We also have $F=HK$, and the identity natural transformation $F\nt HL$ would have to equal $K\gamma$ for a \emph{unique} natural transformation $\gamma:H\nt L$. Of course, there are exactly two natural transformations $H\nt L$, and $\gamma$ may be either.
+\subsection*{Exercise 2.2}
 \end{solutions}
-
+\begin{1. Kan Extensions}
 \section*{All concepts are Kan extensions}
 \subsection*{Left Kan extensions}
 Suppose we have a functor $K:\scrC\to\scrD$, and we are interested in extending functors $F:\scrC\to\scrE$ along $K$. We don't expect to be able to extend just any functor along $K$, i.e.\ to fill the diagram
@@ -93,7 +115,7 @@ It is claimed that when $\scrE$ is cocomplete, we can compute $\Lan_KF$ objectwi
 \[\Lan_KF(d)=\int^{c\in\scrC}\scrD(Kc,d)\cdot Fc=
 \colim\left(\vcenter{\xymatrix{
 {\displaystyle\coprod_{f:c\to c'}}\scrD(Kc',d)\cdot Fc\ar[r]^-{f^*\cdot1}\ar[d]_-{1\cdot f_*}&%r1c1
-{\displaystyle\coprod_{c}}\scrD(Kc,d)\cdot Fc\\%r1c2
+{\displaystyle\coprod_{c}}\scrD(Kc,d)\cdot Fc\ar@{=}[ld]\\%r1c2
 {\displaystyle\coprod_{c'}}\scrD(Kc',d)\cdot Fc'&%r2c1
 %r2c2
 }}\right)
@@ -126,7 +148,7 @@ to find a unique factorisation of $\gamma$ as $\delta\circ\eta$:
 To give the natural transformation $\delta$, it is enough to give, for each $d\in\scrD$ the dotted maps in $\scrE$ making the following diagram commute, naturally in $d$:
 \[\vcenter{\xymatrix{
 {\displaystyle\coprod_{f:c\to c'}}\scrD(Kc',d)\cdot Fc\ar[r]^-{f^*\cdot1}\ar[d]_-{1\cdot f_*}&%r1c1
-\ar@{-->}[d]{\displaystyle\coprod_{c}}\scrD(Kc,d)\cdot Fc\\%r1c2
+\ar@{-->}[d]{\displaystyle\coprod_{c}}\scrD(Kc,d)\cdot Fc\ar@{=}[ld]\\%r1c2
 \ar@{-->}[r]{\displaystyle\coprod_{c'}}\scrD(Kc',d)\cdot Fc'&%r2c1
 Gd%r2c2
 }}\]
@@ -177,13 +199,117 @@ Left adjoints preserve left Kan extensions.
 \begin{defn*}
 When $\scrE$ is locally small, a \textit{right} Kan extension is \textbf{pointwise} if it is preserved by all representable functors $\scrE(e,\DASH )$.
 \end{defn*}
-Now $\scrE(e,\DASH )$ preserves limits (by definition), so that a Kan extension given by the (dual of the) formula above is pointwise, as is one given by the following formula, which I don't yet understand:
+Now $\scrE(e,\DASH )$ preserves limits (by definition), so that a Kan extension given by the (dual of the) formula above is pointwise, as is one given by the following formula, (motivated in next section):
 \[\Ran_KF(d)=\lim\left(d/K\overset{U}{\to}\scrC\overset{F}{\to}\scrE\right)\]
 Thus, whenever $\scrE$ is complete, every right Kan extension is pointwise \rednote{(right?)}.
 Suprisingly, though:
 \begin{thm*}
 This most recent limit exists whenever $\Ran_KF$ is pointwise, in which case it defines $\Ran_KF$. (If $\Ran_KF$ can be defined by any limit, it is pointwise, and can be defined by this one.)
 \end{thm*}
+\begin{thm*}
+When $\scrE$ is complete and $K$ is fully faithful, the right Kan extension is literally just an extension of functors!
+\end{thm*}
+From trivial Kan extensions we can deduce both the Yoneda lemma and the coYoneda lemma, the latter allows us to prove the density theorem (any presheaf is canonically a colimit of representable presheaves.)
+\subsubsection*{`All adjunctions on simplicial sets are the same'}
+Let $\scrE$ be cocomplete and locally small. Let $\Delta^\bullet:\Delta\to\scrE$ be a functor, writing $\Delta^n$ for the image of $[n]$. Then define $L:\sSet\to\calE$ to be the left Kan extension:
+\[\xymatrix{
+\Delta\ar[rd]_-{\textup{Yoneda}} 
+\ar[rr]^-{\Delta^\bullet}_-{}="arF"&%r1c1
+&%r1c2
+\scrE\\%r1c3
+&%r2c1
+\sSet\ar@{->}[ur]_{L}\ar@{=>}"arF";[]_-{\eta}&%r2c2
+%r2c3
+}\]
+As the Yoneda embedding is fully faithful, we have that this Kan extension is a genuine extension of functors, so that the triangle commutes. $L$ is defined by a coend, in particular a colimit, and so commutes with colimits. By an adjoint functor theorem (see coming box), it has a right adjoint (whose simplices can be computed as maps in $\scrE$, like the usual `singular' construction).
+\begin{shaded}
+Now left adjoints preserve colimits, but not all colimit-preserving functors are left adjoints. However, when $F:C\to D$ preserves colimits, $C$ is cocomplete, and some smallness conditions are satisfied, $F$ is a left adjoint.
+\end{shaded}
+
+
+
+
+\begin{shaded}
+\subsection*{Discussion 27 January 2012}
+
+\subsubsection*{Pullback of a presheaf}
+ Suppose that we have a map $f:X\to Y$ of topological spaces. Then letting $\calX=\textup{open}(X)$ and $\calY=\textup{open}(Y)$ be the associated sites, we have a functor $f^{-1}:\calY\to\calX$. This can also be viewed as a functor $f^{-1}:\calY^\op\to\calX^\op$. Now we'll consider the push forward and pull back of presheaves along $f$.
+
+\paragraph*{Push forward:} given a presheaf $\calF$ on $X$, we obtain a presheaf $f_*\calF$ on $Y$ by composition with $f^{-1}$:
+\[\vcenter{\xymatrix{
+\calY^\op\ar[rd]_-{f^{-1}} \ar[rr]^-{f_*\calF}_-{}="arF"&%r1c1
+&%r1c2
+\Set\\%r1c3
+&%r2c1
+\calX^\op\ar@{->}[ur]_{\calF}%\ar@{=>}"arF";[]_-{L\eta}&%r2c2
+%r2c3
+}}
+\]
+
+\paragraph*{Pull back:} we are supposed to have an adjunction 
+\smash{$\xymatrix@R=.3cm@C=2cm{
+\Psh Y  \ar@<.6ex>[r]^{f^*}&
+\Psh X  \ar@<.14ex>[l]^{f_*}\\
+%X \ar@{|->}[r] & FX\\
+%GY             & Y \ar@{|->}[l]
+}$}
+so we suspect that $f^*$ should be given by the left Kan extension. That is, for $\calG\in\Psh Y$, we take the Kan extension
+\[\vcenter{\xymatrix{
+\calY^\op\ar[rd]_-{f^{-1}} \ar[rr]^-{\calG}_-{}="arF"&%r1c1
+&%r1c2
+\Set\\%r1c3
+&%r2c1
+\calX^\op\ar@{-->}[ur]_{f^*\calG=\Lan_{f^{-1}}\calG} %\ar@{=>}"arF";[]_-{L\eta}&%r2c2
+%r2c3
+}}
+\]
+To see how this relates to the classical definition, we use the second pointwise colimit formula, to calculate at $U\subseteq X$:
+\[(f^*\calG)(U):=(\Lan_{f^{-1}}\calG)(U)=\colim\left(f^{-1}/U\overset{\textup{forget}}{\to}\calY^\op\overset{\calG}{\to}\Set\right)\]
+Here, the slice category $f^{-1}/U$ has 
+\begin{itemize}\squishlist
+\item Objects: pairs $(W,\alpha)$ such that $W\in\calY^{\op}$ and $\alpha:f^{-1}W\to U$ a map in $\calX^{\op}$;
+\item Morphisms $(W,\alpha)$ to $(W',\alpha')$: morphisms $\beta:W\to W'$ giving a commuting diagram \[
+\vcenter{\xymatrix@1{
+f^{-1}W\ar[rd]^-{\alpha}
+\ar[rr]^-{f^{-1}(\beta)}
+&&%r1c1
+f^{-1}W'\ar[ld]_-{\alpha'}\\%r1c2
+&U&%r2c1
+%r2c2
+}}\]
+\end{itemize}
+and admits a forgetful functor to $\calY^{\op}$.
+
+So, the colimit is actually being taken over all maps $f^{-1}W\to U$, which are the same as inclusions $U\subseteq f^{-1}W$, and the value of the composite at such an inclusion is simply $\calG(W)$, as we had in the classical definition: $(f^*\calG)(U):=\varinjlim_{f^{-1}W\supseteq U}\calG(W)$.
+\subsubsection*{The tensor product of functors}
+Suppose that $\calC$ and $\calD$ are symmetric monoidal categories, and $F,G:\calC\to\calD$ are functors. We'd like to give the correct definition of a functor $F\otimes G:\calC\to\calD$. The claim is that the correct functor is the following left Kan extension, known as the \textbf{Day convolution}:
+\[\xymatrix{
+\calC\times\calC\ar[r]^-{(F,G)}\ar[d]_-{\otimes}&%r1c1
+\calD\times\calD\ar[d]^-{\otimes}\\%r1c2
+\calC\ar@{-->}[r]^-{F\otimes G}&%r2c1
+\calD%r2c2
+}\]
+Over an element $c$ of $\calC$, this can be computed by
+\[(\calF\otimes\calG)(c)= \colim\left(\otimes_\calC/c\overset{\textup{forget}}{\to}\calC\times\calC \overset{\otimes_D\circ(\calF\times\calG)}{\to}\calD\right)=\colim_{c'\otimes c''\to c}F(c')\otimes G(c'')\]
+\paragraph*{Smash product of spectra}
+Given a spectrum $E$, we obtain a functor
+\[E:\Top\to\Top\qquad X\mapsto \Omega^\infty(X\wedge E).\]
+This functor has certain properties, and there is a category of such functors which gives a model for spectra. In this model, the smash product is given by the Day convolution:
+\[\xymatrix{
+\Top\times\Top\ar[r]^-{(E,F)}\ar[d]_-{\wedge }&%r1c1
+\Top\times\Top\ar[d]^-{\wedge }\\%r1c2
+\Top\ar@{-->}[r]^-{E\wedge F}&%r2c1
+\Top%r2c2
+}\]
+\paragraph*{Tensor product of chain complexes}
+Consider the poset category $\Z$, which has a unique map $n\to m$ whenever $n\leq m$. Well, a cochain complex $C$ can be viewed as a functor $\Z\to\AbGp$ with the special property that the image of the map $m\to n$ is zero whenever $m<n-1$. This is a symmetric monoidal category under addition.
+
+We can almost say that the tensor product $C\otimes D$ of cochain complexes is the tensor product of functors. The problem is that without doing something tricky with the signs, we won't actually get a chain complex out, while doing something tricky with the signs, we won't actually be extending a \emph{functor}. Thus I am a bit stuck, save to say that viewing a cochain complex as an $\AbGp$-enriched functor from a suitable enriched version of the category $\Z$ might save the day.
+\end{shaded}
+\end{1. Kan Extensions}
+\begin{2. Derived functors via deformations}
+
+\end{2. Derived functors via deformations}
 
 \end{document}
 
