@@ -66,7 +66,76 @@ Consider the following three categories, and four functors.
 \bullet
 }\]
 Now $F=LK$, so that one might hope that $(L,\id_F)$ was a left Kan extension, but this is not so. We also have $F=HK$, and the identity natural transformation $F\nt HL$ would have to equal $K\gamma$ for a \emph{unique} natural transformation $\gamma:H\nt L$. Of course, there are exactly two natural transformations $H\nt L$, and $\gamma$ may be either.
-\subsection*{Exercise 2.2}
+\subsection*{Exercise 2.16}
+Suppose that $F,G:\scrC\to\scrE$ are two functors, with $\scrC$ small and $\scrE$ locally small.
+Then the end of $\scrE(F\DASH ,G\DASH )$ is the following equaliser in $\Set$:
+\[\vcenter{\xymatrix{
+\displaystyle\prod_{f:c\to c'}\scrE(Fc',Gc)&%r1c1
+\displaystyle\prod_{c\in\ob\scrC}\scrE(Fc,Gc)
+\ar@<-1ex>[l]_-{\{f\}^*}
+\ar@<.51ex>[l]^-{\{f\}^*}
+%r1c2
+}}\]
+We should describe these maps. An element $\alpha$ of the right hand product is the assignment of a map $\alpha_c:Fc\to Gc$ to each $c\in\ob\scrC$. To describe  the map $\{f\}^*$, we need to give the component of $(\{f\}^*(\alpha))$ at a map $f\in\arr\scrC$. This should be the composite
+\[Fc'\overset{Ff}{\to}Fc\overset{\alpha_c}{\to}Gc.\]
+The corresponding component in $(\{f\}_*(\alpha))$ is the composite
+\[Fc'\overset{\alpha_{c'}}{\to}Gc'\overset{Gf}{\to}Gc.\]
+Thus an element of the equaliser, that is, an assignment $\alpha$ such that these two composites agree for all $f\in\arr\scrC$, is exactly a natural transformation.
+\subsection*{Exercise 2.16}
+Let $\scrD$ be the category 
+$\vcenter{\xymatrix@1{
+E
+\ar@<-.35ex>[r]
+\ar@<.5ex>[r]
+&%r1c1
+V%r1c2
+}}$
+and let $K:\textbf{1}\to \scrD$ be the functor picking out $V$. Recall that we have adjunctions
+\[\xymatrix@C=1.5cm{
+\Set^\textbf{1}\ar@/^1.2em/[r]^-{\Lan_K}_-{\perp} \ar@/_1.2em/[r]_-{\Ran_K}^-{\perp}&%r1c1
+\Set^\scrD\ar[l]|{K^*}%r1c2
+}\]
+We may calculate $\Lan_KX$ and $\Ran_KX$ pointwise, as $\Set$ is complete and cocomplete, where we may view $X$ either as a set or a functor $\textbf{1}\to\Set$. We'll calculate at a point $d\in\scrD$:
+\begin{alignat*}{2}
+(\Lan_KX)(d)
+&=
+\int^{c\in\textbf{1}}\scrD(Kc,d)\cdot X%
+\\
+&=
+\scrD(V,d)\cdot X%
+\\
+% Left hand side
+% Relation
+&=
+% Right hand side
+\begin{cases}
+X,&\textup{if }d=V;\\
+\emptyset,&\textup{if }d=E.
+%\\,&\textup{if }
+\end{cases}
+% Comment
+\end{alignat*}
+Thus, the left adjoint takes a set to the digraph with those vertices and no edges. Dually:
+\begin{alignat*}{2}
+(\Ran_KX)(d)
+&=
+\int_{c\in\textbf{1}}X^{\scrD(d,Kc)}%
+\\
+&=
+X^{\scrD(d,V)}%
+\\
+% Left hand side
+% Relation
+&=
+% Right hand side
+\begin{cases}
+X,&\textup{if }d=V;\\
+X\times X,&\textup{if }d=E.
+%\\,&\textup{if }
+\end{cases}
+% Comment
+\end{alignat*}
+As the `source' and `target' maps $X\times X\to X$ are induced in the obvious way, we see that the right adjoint takes a set to the complete digraph with those vertices.
 \end{solutions}
 \begin{1. Kan Extensions}
 \section*{All concepts are Kan extensions}
