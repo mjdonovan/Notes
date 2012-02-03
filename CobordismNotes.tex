@@ -3,12 +3,6 @@
 \documentclass[11pt]{article}
 \input{../macros.tex}
 
-\excludeversion{ASSp7-8}
-\excludeversion{Algebroid Definition}
-\excludeversion{Gamma-comodules}
-\excludeversion{Maps of algebroids}
-\includeversion{Formal Group Laws}
-
 \renewcommand{\Steen}{\calA}
 
 \begin{document}
@@ -286,7 +280,7 @@ Using this $\Steen$-module structure on the tensor product, the cross product ma
 \[H^*(X)\otimes H^*(Y)\overset{\times }{\to}H^*(X\times Y)\]
 is an $\Steen$-module map, and $H^*(X)$ is an $\Steen$-module algebra.
 \end{itemize}
-\begin{prop*}
+\begin{prop*}[Milnor-Moore]
 Let $k$ be a field, $A$ a connected Hopf algebra thereover, and $M$ a connected $A$-module coalgebra such that $i$ is monic, where
 \[i:A\to M\quad a\mapsto a\cdot 1.\]
  Then $M$ is a free $A$-module.
@@ -306,8 +300,135 @@ Now write $\theta (x)=\sum \xi_i(\theta)\,x^{2^i}$, we have defined linear funct
 \[\theta (x^{2^n})=\xi_k^{2^n}(\theta)x^{2^{n+k}}\textup{\quad for $\theta\in\Steen^{2^n(2^k-1)}$.}\]
 \item The formula for the diagonal in $\Steen_*$ is 
 \[\psi(\xi_n)=\sum_{i+j=n}\xi_i^{2^j}\otimes \xi_j.\]
+Let's understand $\psi$ a little better first. Note that if $V$ is a vector space, there is a natural map \smash{$V^*\otimes V^*\overset{c}{\to}(V\otimes V)^*$}, which is an isomorphism when $V$ is finite dimensional. The inverse is not so easy to write down.
+
+\INDENT Now $\psi(\xi_n)$ should be an element of $\Steen_*\otimes \Steen_*$. However, it is easy to define an element 
+\[c(\psi(\xi_n))\in(\Steen\otimes \Steen)^*\qquad c(\psi(\xi_n))(\theta\otimes\phi)=\xi_n(\theta\phi),\]
+and to give a formula for $\psi(\xi_n)$ as an element of $\Steen_*\otimes \Steen_*$, one feels that it may be easiest to first make a guess, and then verify the guess! \rednote{(Is this silly?)}
+Thus, we'd like to show that 
+\[c\left(\sum \xi_i^{2^j}\otimes \xi_j\right)=\left(\theta\otimes\phi\mapsto \xi_n(\theta\phi)\right):\Steen\otimes \Steen\to\F_2.\]
+That is, for all $\phi,\theta\in\Steen$, that
+\[\sum_{i+j=n} \xi_i^{2^j}(\theta)\xi_j(\phi)=\xi_n(\theta\phi).\]
+\rednote{This is all a bit confusing for some reason.}
 
 \end{itemize}
+\subsection{The Answer to the Question}
+\begin{thm*}
+$\Steen$ acts freely through degree $n$ on the Thom class $u\in H^n(MO(n))$.
+\end{thm*}
+\begin{proof}
+We saw that it acts freely on the Euler class on $(\RP^\infty)^n$ in this range. By definition of Euler classes, we have
+\[\xymatrix@R=0mm{
+MO(n)
+&%r1c1
+BO(n)
+\ar[l]_-{s}
+&%r1c2
+(\RP^\infty)^n
+\ar[l]
+\\%r1c3
+u
+\ar@{|->}[r]
+&%r2c1
+e(\xi_n)
+\ar@{|->}[r]
+&%r2c2
+e(\lambda\times \cdots \times \lambda)
+%r2c3
+}\] and $\Steen$ acts freely in this range on $e(\lambda\times \cdots \times \lambda)$.
+\end{proof}
+\noindent  Now from our understanding of the Thom isomorphism, we have that $H^0(\MO)=\F_2\langle u\rangle$, and that $H^{i}(\MO)=0$ for $i<0$. Moreover, $\Steen$ acts freely on $u\in H^0(\MO)$.
+\begin{thm*}
+$H^*(\MO)$ is a free $\Steen$-module.
+\end{thm*}
+\begin{proof}
+By the proposition of Milnor and Moore, it's enough to see that $H^*(\MO)$ is an $\Steen$-module coalgebra --- we have just seen that $H^*(\MO)$ is connected and that `$i$' is monic.
+
+The coalgebra structure comes from the fact that $\MO$ is a ring spectrum, and from the K\"unneth isomorphism \rednote{(which is define how?)}. Recall that the classifying map for the cross product bundle gives maps $MO(k)\wedge MO(k')\to MO(k+k')$, and there is always an inclusion $S^k\to MO(k)$ of the fibre at the basepoint. These maps give ring spectrum structure maps which along with the K\"unneth isomorphism give coalgebra structure maps:
+\[\xymatrix@R=.4cm{
+&%r1c1
+\MO\wedge \MO
+\ar[r]
+&%r1c3
+\MO&%r1c4
+&
+\mathbb{S}
+\ar[r]
+&%r1c5
+\MO\\%r1c6
+H^*(\MO)\otimes H^*(\MO)
+&%r2c1
+H^*(\MO\wedge \MO)
+\ar[l]
+&%r2c2
+H^*(\MO)
+\ar[l]
+&%r2c3
+&%r2c4
+\F_2&%r2c5
+H^*(\MO)
+\ar[l]
+%r2c6
+\\
+x\otimes y
+\ar@{|->}[d]^-{\Squ^i}
+&
+x\wedge y\ar@{|->}[l]
+\ar@{|->}[d]^-{\Squ^i}
+\\
+\sum \Squ^{i'}x\otimes \Squ^{i''}y&
+\Squ^i(x\wedge y)\ar@{|->}[l]
+}\]
+The little box in the bottom right demonstrates that as the coalgebra structure on $\Steen$ is defined using the Cartan formula, the K\"unneth map is $\Steen$-linear as needed.
+\end{proof}
+Choose free $\Steen$-module generators $\{v_\alpha\}$ for $H^*(\MO)$ of degree $|\alpha|$. We will show that:
+\begin{thm*}
+The induced map
+\[v:\MO\to \prod_{\alpha}\Sigma^{|\alpha|}H=\bigvee_{\alpha}\Sigma^{|\alpha|}H\]
+is a weak homotopy equivalence, so that $\MO$ is a graded Eilenberg-MacLane spectrum.
+\end{thm*}
+\begin{proof}
+We'll need to recall a little bit of theory:
+\begin{itemize}\squishlist
+\item Associated with each abelian group is a $(-1)$-connected spectrum $M_G$ with integral homology $G$ concentrated in degree 0, the \textbf{Moore spectrum}. Now we write $EG$ for $E\wedge M_G$, and in particular, use the notation $SG$ for $M_G$ itself from now on.
+
+We now have a homology theory $\pi_{*}(\DASH ;G)$, with terms
+\[\pi_{n}(X;G):=[S^n,X\wedge SG]=[S^n,XG],\]
+and long exact sequences
+\[\xymatrix{\cdots\ar[r]&
+\pi_n(X;\Z/p^{k-1})\ar[r]&
+\pi_n(X;\Z/p^{k})\ar[r]&
+\pi_n(X;\Z/p)\ar[r]&
+\cdots}\]
+which shows inductively that if a map of spectra is a $\pi(\DASH ,\Z/p)$ isomorphism, then it's a $\pi(\DASH ,\Z/p^k)$ isomorphism for all $k\leq\infty$.
+\item There's a Whitehead theorem for spectra, stating that a map of spectra which is a mod $p$ homology isomorphism is a mod $p$ homotopy isomorphism.
+\end{itemize}
+Now we can write the proof:
+\begin{itemise}
+\item As $\frakN_*\cong\pi_{*}(\MO)$, the latter is an $\F_2$-vector space. Thus $\pi_{*}(\MO;\Z/p)$ is trivial for $p$ an odd prime (by the long exact sequence coming from $0\to \Z\to \Z\to \Z/p\to 0$). Thus $v$ is an isomorphism in $\Z/p^\infty$ homotopy for odd primes $p$.
+\item Also, $v$ is an isomorphism in $\Q$ homotopy.
+\item We saw above that $v$ is an isomorphism in mod 2 cohomology, thus in mod 2 homology, thus in $\Z/2^\infty$ homotopy.
+\item We can now use the long exact sequence associated with
+\[0\to\Z\to \Q\to \bigoplus\Z/p^\infty\to0\]
+to see that $v$ is a weak homotopy equivalence.\qedhere
+\end{itemise}
+
+\end{proof}
+To finally answer the question, we can show that the diagram
+\[\xymatrix{
+\frakN_*(X)
+\ar[r]^-{\cong }
+\ar[dr]_-{(f:M\to X)\mapsto f_*[M]}
+&%r1c1
+\MO_*(X)
+\ar[d]^-{u_*}
+\\%r1c2
+&%r2c1
+H_*(X)%r2c2
+}\]
+commutes, and as $u_*$ is surjective (as $u$ may be taken to be a generator $v_\alpha$), we see that \textbf{every} element of $H_*(X;\F_2)$ can be realised by a singular manifold.
+
+
 
 \end{document}
 
