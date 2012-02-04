@@ -3,32 +3,36 @@
 \documentclass[11pt]{article}
 \input{../macros.tex}
 
-\newcommand{\Ralg}{\mathsf{Alg}_R}
+\newcommand{\RAlg}{\mathsf{Alg}_R}
+\newcommand{\RNil}{\mathsf{Nil}_R}
+\newcommand{\SAlg}{\mathsf{Alg}_S}
+\newcommand{\SNil}{\mathsf{Nil}_S}
+\newcommand{\FSR}{\mathsf{FS}_R}
+\newcommand{\FSS}{\mathsf{FS}_S}
 \DeclareMathOperator{\SPec}{Sp}
+\DeclareMathOperator{\SPf}{Spf}
 
 \begin{document}
 \section{Formal Geometry}
 \subsection{$R$-sets and formal $R$-sets}
 \begin{itemise}
-\item An $R$-set is a functor $\Ralg\to\Set$. As the prime example, one takes the functor of points of a scheme.
+\setlength{\parindent}{.25in}
+\item An $R$-set is a functor $\RAlg\to\Set$. As the prime example, one takes the functor of points of a scheme.
 \item Given an $R$-set $X$ and an element $x\in X(S)$, there is a natural evaluation map
 \[\xymatrix@R=0mm{
 \ar[r]^-{e_{S,x}}%Name of map
-\Ralg(S,T)&%Source
+\RAlg(S,T)&%Source
 X(T)\\%Target
 f%x
 \ar@{|->}[r]&
 (Xf)(x)%f(x)
 %\ar@{}[ul];[l]|{\rotatebox{90}{\tiny$\in$}} \ar@{}[u];[]|{\rotatebox{90}{\tiny$\in$}} 
 }\]
-
 If this map is an isomorphism of functors, we say that $X$ is represented by $(S,x)$.
-\item Given $S\in\Ralg$, define the spectrum $\SPec S$ of $S$ to be the functor of points of $\spec S$:
-\[\SPec S:\Ralg\to\Set\qquad T\mapsto \Ralg(S,T).\]
+\item Given $S\in\RAlg$, define the spectrum $\SPec S$ of $S$ to be the functor of points of $\spec S$:
+\[\SPec S:\RAlg\to\Set\qquad T\mapsto \RAlg(S,T).\]
 We'll say that an $R$-set is an \textbf{affine scheme} if it is represented by an $R$-algebra in this way. For example, we have the affine line, $\SPec(R[x])$, whose functor of points is $T\mapsto T$.
 \item $R$-sets form a category which is not in general locally small, with morphisms the natural transformations. There is the evident \textbf{Yoneda lemma}, that the map
-\[X(S)\to\Map_R(\SPec S,X)\quad x\mapsto \left(\left(S\overset{f}{\to}T\right)\mapsto f(x)\right)\]
-is an isomorphism.
 \[\xymatrix@R=0mm{
 \ar[r]^-{}%Name of map
 X(S)&%Source
@@ -37,10 +41,175 @@ x%x
 \ar@{|->}[r]&
 \left(\left(S\overset{f}{\to}T\right)\mapsto f(x)\right)%f(x)
 }\]
+is an isomorphism.
+\hrule
+\item
+\begin{itemize}\squishlist
+\item Let $\RNil$ be the category of augmented (unital) $R$-algebras whose augmentation ideal is nilpotent. We'll call these \textbf{augmented $R$-algebras}.
+\item Let $\RNil'$ be the category of non-unital $R$-algebras which are themselves nilpotent. We'll call these \textbf{nilpotent $R$-algebras}.
+\end{itemize}
+\noindent These two categories are equivalent.
+\[\xymatrix@R=0mm{
+\ar[r]^-{}%Name of map
+\RNil&%Source
+\RNil'\\%Target
+(S,\epsilon)%x
+\ar@{|->}[r]&
+\ker(\epsilon)%f(x)
+%\ar@{}[ul];[l]|{\rotatebox{90}{\tiny$\in$}} \ar@{}[u];[]|{\rotatebox{90}{\tiny$\in$}} 
+}\qquad \xymatrix@R=0mm{
+\ar[r]^-{}%Name of map
+\RNil'&%Source
+\RNil\\%Target
+I%x
+\ar@{|->}[r]&
+(R\oplus I,\pi_1)%f(x)
+%\ar@{}[ul];[l]|{\rotatebox{90}{\tiny$\in$}} \ar@{}[u];[]|{\rotatebox{90}{\tiny$\in$}} 
+}\]
+To understand this, note that the composite $\RNil'\to\RNil'$ equals the identity, while the composite $\RNil\to\RNil$, sending $(S,\epsilon)$ to $(R\oplus \ker\epsilon,\pi_1)$, is naturally isomorphic to the identity, as $\epsilon$ is always a splitting of the structure map $R\to S$.
+\item Taking the set of augmented algebras gives a contravariant functor $\Rings\to\Cat$.
+\[\xymatrix@R=0mm{
+\ar[r]^-{f}%Name of map
+R&%Source
+S\\%Target
+\ar[r];[]_-{f^*}%Name of map
+\RNil&%Source
+\SNil\\%Target
+\makebox[0cm][r]{$T\times_S R=$\,}f^*T
+\ar[r]
+\ar@/^.5em/[dd]_{}="2"
+&
+T\ar@/^.5em/[dd]
+\\\rule{0mm}{6mm}\\
+R\ar@/^.5em/[uu]\ar[r]^-{f}
+&
+S\ar@/^.5em/[uu]^{}="1"
+\ar@{|->}"1";"2"_-{f^*}
+}\]
+\item A \textbf{formal $R$-set} is a functor $X:\RNil\to\Set$ under which $0\mapsto \{*\}$. These form a category $\FSR$ whose arrows are the natural transformations.
 
+As $0\in\RNil$ is initial, there is a natural distinguished point in $X(T)$, for any $X\in\FSR$.
+
+\item Given a map $f:R\to S$, one obtains a map $f:\FSR\to\FSS$ by composing with $f^*$.
+\item We have a construction, called the `formal spectrum' :
+\[\xymatrix@R=0mm{
+\ar[r]^-{\SPf}%Name of map
+\RAlg/R&%Source
+\FSR\\%Target
+(S,\epsilon)%x
+\ar@{|->}[r]&
+\SPf(S,\epsilon)\makebox[0cm][l]{\,$:=\RAlg((S,\epsilon),\DASH )$}%f(x)
+%\ar@{}[ul];[l]|{\rotatebox{90}{\tiny$\in$}} \ar@{}[u];[]|{\rotatebox{90}{\tiny$\in$}} 
+}\qquad \qquad \]
+and a \textbf{formal Yoneda lemma}, that when we write $\kappa=\ker (\epsilon:S\to R),$ the natural map:
+\[\xymatrix@R=0mm{
+\ar[r]^-{}%Name of map
+\Map_R(\SPf(S,\epsilon),X)&%Source
+\varprojlim X\left(S/\kappa^{n+1}\right)\\%Target
+\gamma%x
+\ar@{|->}[r]&
+\{\gamma(\pi_n)\}%f(x)
+%\ar@{}[ul];[l]|{\rotatebox{90}{\tiny$\in$}} \ar@{}[u];[]|{\rotatebox{90}{\tiny$\in$}} 
+}\]
+is an isomorphism. 
+To describe the natural map, consider the top half of the following diagram. Here, $\pi_n\in\SPf(S,\epsilon)(S/\kappa^{n+1})$, and applying $\gamma$ gives us a compatible sequence of points in $X(S/\kappa^{n+1})$.
+
+The second part of the diagram is supposed to motivate this when $X$ is a scheme. [I'm not sure what should be formal and what should not in such a motivation.] Note then that the inverse limit can be viewed as the intersection of the sets of $S/\kappa^{n+1}$-points as $n$ varies.
+\[\xymatrix{
+&%r1c1
+&%r1c2
+S
+\ar@{->>}[d]|-{\pi_{n+1}}
+\ar@{->>}[dl]|-{\pi_{n}}
+\ar@{->>}[dr]|-{\pi_{n+2}}
+&%r1c3
+&%r1c4
+\\%r1c5
+\cdots 
+&%r2c1
+S/\kappa^{n+1}
+\ar@{->>}[l]
+&%r2c2
+S/\kappa^{n+2}
+\ar@{->>}[l]^-{\rho_{n+1}}
+&%r2c3
+S/\kappa^{n+3}
+\ar@{->>}[l]^-{\rho_{n+2}}
+&%r2c4
+\cdots 
+\ar@{->>}[l]
+%r2c5
+\\%r1c5
+\cdots 
+&%r2c1
+\Spec(S/\kappa^{n+1})
+\ar@{^{(}->}[l];[]
+\ar@{-->}[dr]^{}="1"_{}="2"
+&%r2c2
+\Spec(S/\kappa^{n+2})
+\ar@{^{(}->}[l];[]^-{\rho_{n+1}^*}
+\ar@{-->}[d]^{}="3"_{}="4"
+&%r2c3
+\Spec(S/\kappa^{n+3})
+\ar@{^{(}->}[l];[]^-{\rho_{n+2}^*}
+\ar@{-->}[dl]^{}="5"_{}="6"
+&%r2c4
+\cdots 
+\ar@{^{(}->}[l];[]
+%r2c5
+\\
+&&X
+\ar@{|->}"3";"2"_-{\rho_{n+1}}
+\ar@{|->}"5";"4"_-{\rho_{n+2}}
+}\]
+\item As an example of a formal spectrum, we have the formal line:
+\[D=\SPf(R[[x]],\epsilon)\qquad \epsilon(x)=0.\qquad \qquad D(S,\epsilon)=\ker(\epsilon)\textup{ i.e.\ }D(I)=I.\]
+\item $\Map_R(X,D)$ can be given the structure of a (possibly non-nilpotent) $R$-algebra without unit. To do this, it's best to think about nilpotent $R$-algebras. Suppose we are given $f,g:X\to D$. Then for any $I\in\RNil'$, we have maps $f_I,g_I:X(I)\to D(I)=I$ which can be added and multiplied pointwise. We define
+\[\xymatrix@R=0mm{
+\ar[r]^-{\calO}%Name of map
+\FSR&%Source
+\RAlg/R\\%Target
+X%x
+\ar@{|->}[r]&
+R\oplus \Map_R(X,D)%f(x)
+%\ar@{}[ul];[l]|{\rotatebox{90}{\tiny$\in$}} \ar@{}[u];[]|{\rotatebox{90}{\tiny$\in$}} 
+}\]
+So the situation is that we have functors
+\[\xymatrix@R=.3cm{
+&%r1c1
+\RNil
+\ar@/_1em/[ld]_-{\SPf}
+\ar@{^{(}->}[d]
+\\%r1c2
+\FSR
+\ar@<+.51ex>[r]^-{\calO}
+&%r2c1
+\RAlg/R
+\ar@<+.51ex>[l]^-{\SPf}
+%r2c2
+}\]
+Which form a contravariant adjunction --- there are maps:
+\[
+\vcenter{\xymatrix@1{
+X
+\ar[r]^-{\alpha_X}
+&%r1c1
+\SPf\calO_X
+&%r1c2
+&%r1c3
+S
+\ar[r]^-{\beta_S}
+&%r1c4
+\calO_{\SPf S}
+%r1c5
+}}\]
+satisfying (contravariant) unit/counit identities.
+To define $\alpha_X(S)$, for $(S,\epsilon)\in\RNil$, note that
+\[(\SPf\calO_X)(S):=[\Map_R(X,D),\ker(\epsilon)]\]
+and given $f:X\to D$, one has $f_S:X(S)\to D(S)=\ker(\epsilon)$. So given $x\in X(S)$, one has `evaluation at $x$', an element of $(\SPf\calO_X)(S)$. \rednote{I haven't written down how to define $\beta_S$ yet.}
+\item A \textbf{formal scheme} is a formal $R$-set $X$ for which $\alpha_X$ is an isomorphism. This occurs \Iff $X$ is isomorphic to a the formal spectrum of some augmented $R$-algebra.
 \end{itemise}
 \end{document}
-
 
 
 
