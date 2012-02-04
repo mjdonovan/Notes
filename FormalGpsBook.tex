@@ -1,4 +1,5 @@
 % !TEX root = z_output/_FormalGpsBook.tex
+%%%USINGsubsectionNUMBERS
 
 \documentclass[11pt]{article}
 \input{../macros.tex}
@@ -9,6 +10,7 @@
 \newcommand{\SNil}{\mathsf{Nil}_S}
 \newcommand{\FSR}{\mathsf{FS}_R}
 \newcommand{\FSS}{\mathsf{FS}_S}
+\newcommand{\FGR}{\mathsf{FG}_R}
 \DeclareMathOperator{\SPec}{Sp}
 \DeclareMathOperator{\SPf}{Spf}
 
@@ -42,6 +44,25 @@ x%x
 \left(\left(S\overset{f}{\to}T\right)\mapsto f(x)\right)%f(x)
 }\]
 is an isomorphism.
+\hrule
+\begin{shaded}
+\item Consider the coslice (i.e.\ under) category $\calC_R:=(\spec R)/(R\mathsf{-Sch})$ of $R$-schemes $X$ equipped with a section $s$ of the structure map $X\to\Spec R$:
+\[\xymatrix{
+X
+\ar[d]
+\\%r1c2
+\Spec R
+\ar@/^1em/[u]^-{s}
+}\]
+The coYoneda embedding $\calC_R\to[\calC_R,\Set]^{\op}$, sending $X$ to its functor of points, is fully faithful.
+
+Now there is a fully faithful functor $(\RAlg/R)^{\op}\overset{\spec}{\to}\calC_R$, whose essential image is the full subcategory of affine schemes in $\calC_R$. Now \rednote{I'm not sure whether the composite functor}:
+\[\calC_R\to[\calC_R,\Set]^{\op}\overset{\spec^*}{\to}[(\RAlg/R)^{\op},\Set]^{\op}\]
+is fully faithful. However, it's certain that  the composite with restriction
+\[\calC_R\to[\calC_R,\Set]^{\op}\overset{\spec^*}{\to}[(\RAlg/R)^{\op},\Set]^{\op}\to[(\RNil)^{\op},\Set]^{\op}\]
+is not faithful,
+where $\RNil\subset \RAlg/R$ is the full subcategory of augmented $R$-algebras whose augmentation ideal is nilpotent. That is, we clearly cannot detect those parts of $X$ which are not close to the image of $s$ with maps from infinitessimal thickenings of $\spec R$!
+\end{shaded}
 \hrule
 \item
 \begin{itemize}\squishlist
@@ -208,12 +229,112 @@ To define $\alpha_X(S)$, for $(S,\epsilon)\in\RNil$, note that
 \[(\SPf\calO_X)(S):=[\Map_R(X,D),\ker(\epsilon)]\]
 and given $f:X\to D$, one has $f_S:X(S)\to D(S)=\ker(\epsilon)$. So given $x\in X(S)$, one has `evaluation at $x$', an element of $(\SPf\calO_X)(S)$. \rednote{I haven't written down how to define $\beta_S$ yet.}
 \item A \textbf{formal scheme} is a formal $R$-set $X$ for which $\alpha_X$ is an isomorphism. This occurs \Iff $X$ is isomorphic to a the formal spectrum of some augmented $R$-algebra.
+\item By the formal Yoneda lemma, we have an equality
+\[S\overset{\beta_S}{\to}\calO_{\SPf S}\cong \varprojlim S/I^n.\]
+Fortunately, the composite is the map to the $I$-completion of $S$.
+\end{itemise}
+\subsection{Formal groups}
+\begin{itemise}
+\setlength{\parindent}{.25in}
+\item A \textbf{$R$-group} is:
+\begin{itemize}\squishlist
+\setlength{\parindent}{.25in}
+\item  a group in the category of $R$-sets, i.e.
+\item a functor $\RAlg\to\mathsf{Groups}$.
+\end{itemize}
+For example, we have the general linear group-scheme $\GL_n$, sending $S\mapsto \GL_n(S)$. This is an \textbf{affine group-scheme}, as it is represented by the algebra $R[a_{ij},d]/(d\det[a_{ij}]-1)$.
+
+Affine group schemes are the same thing as Hopf algebras.
+\item A \textbf{formal $R$-group functor} is:
+\begin{itemize}\squishlist
+\setlength{\parindent}{.25in}
+\item  a group in the Category of formal $R$-sets, i.e.
+\item a functor $\RNil\to\mathsf{Groups}$.
+\end{itemize}
+\item A \textbf{formal group-scheme} is a formal $R$-group functor which underlying formal $R$-set is a formal scheme.
+\item A formal $R$-group functor is a \textbf{formal group} if it is:
+\begin{itemize}\squishlist
+\setlength{\parindent}{.25in}
+\item commutative; and
+\item isomorphic as a formal set to the formal line $D$.
+\end{itemize}
+Write $\FGR$ for the category of formal groups over $R$.
+An isomorphism $x:D\to G$ is called a \textbf{parameter} on $G$.
+\item For example, we have the \textbf{additive} formal group, the functor
+\[\xymatrix@R=4mm{
+&%r1c1
+{{_R}\mathsf{Mod}}
+\ar[d]^-{U}
+&%r1c2
+&%r1c3
+&%r1c4
+\ker(\epsilon)\ar@{|->}[d]
+\\%r1c5
+\ar[ur]^-{{G}_a}
+\RNil
+\ar[r]_-{{G}_a}
+&%r2c1
+\Set
+&%r2c2
+&%r2c3
+(S,\epsilon)
+\ar@{|->}[r]
+\ar@{|->}[ur]
+&%r2c4
+\ker(\epsilon)%r2c5
+}\]
+Anything isomorphic to a composite $\RNil\overset{{G}_a}{\to}{{_R}\mathsf{Mod}}\overset{{M}\otimes_{R}{\DASH }}{\to}{{_R}\mathsf{Mod}}$ is called \textbf{additive}.
+
+We also have the \textbf{multiplicative} formal group law: ${G}_m(S,\epsilon):=1+\ker(\epsilon)$. As $I$ is nilpotent, this is a subgroup of the multiplicative monoid $S$.
+\end{itemise}
+\subsection{Completion}
+\begin{itemise}
+\setlength{\parindent}{.25in}
+\item \rednote{(I suppose that)} a \textbf{point} of an $R$-set $X$ is a map from the constant functor $\ast:\RAlg\to\Set$ to $X$. \textbf{Completion} will be a way to obtain a formal $R$-set $\hat{X}$ from a $R$-set $X$ and a point $a$ of $X$. We define it by taking a pullback. $\hat X$ assigns to an augmented $R$-algebra $(S,\epsilon)$ the pullback in
+\[\xymatrix{
+\hat X(S) %Top Left
+\ar[r]   %Top arrow
+\ar[d]   %Left arrow
+\ar@{}[rd]|{\textup{p.b.}}&
+X(S) %Top Right
+\ar[d]^-{X(\epsilon)}\\ %Right arrow
+\ast %Bottom Left
+\ar[r]_-{a_R}&  %Bottom arrow
+X(R)  %Bottom right
+}\]
+To motivate this, if $X$ is the functor of points of an $R$-scheme $X$, then a point of $X$ includes a map $\spec R\uparrow X$ which is a section of the structure map $X\downarrow\spec R$. Then:% this pullback consists of those maps
+\[\hat X(S):=\left\{\spec S\to X\ \middle|\ 
+\vcenter{\xymatrix@R=4mm@1{
+\spec S
+\ar[r]
+&%r1c1
+X\\%r1c2
+\spec R
+\ar[u]^-{\epsilon^\#}
+\ar[ur]_-{a_R}
+&%r2c1
+%r2c2
+}}\textup{\ commutes}\right\}\]
+That is, $\hat X(S)$ is the set of $S$-points of $X$ which preserve the copy of $R$ living in $X$.
+\item In particular, given an augmented algebra $(S,\epsilon)$, $\epsilon$ determines a point $a$ of $\SPec S$, and the completion at that point is $\SPf(S,\epsilon)$.
+\item Completion preserves limits, and so given an $R$-group, taking completions, one obtains a formal $R$-group functor.
+\item Fortunately:
+\[\hat{\mathbb{G}}_a=G_a\qquad \textup{and}\qquad \hat{\mathbb{G}}_m=G_m.\]
+\end{itemise}
+\subsection{Jets}
+\begin{itemise}
+\setlength{\parindent}{.25in}
+\item Let $\RNil(n)\subset \RNil$ be the full subcategory in which $(\ker\epsilon)^{n+1}=0$.
+\item If $f,g:X\to Y$ are maps of formal $R$-sets, write $f\sim_n g$ if $f$ and $g$ induce the same map on $S$-points for $S\in\RNil(n)$. That is, if $f|_{\RNil(n)}=g|_{\RNil(n)}$. Write
+\[J^n_R(X,Y)=\Map_R(S,Y)/\sim_n\textup{\quad the set of \textbf{$n$-jets of maps $X$ to $Y$}.}\]
+\begin{shaded}
+One should think here that given two maps $f,g:X\to Y$ in the category $\calC_R$, views the maps as giving the same $n$-jet if whenever $Z$ is a thickening of $\spec R$ of \rednote{height/length/depth/whatever} $n$, the two composites $Z\to X\to Y$ are equal.
+\end{shaded}
+This gives a tower
+\[\ast=J^0(X,Y)\leftarrow J^1(X,Y)\leftarrow J^2(X,Y)\leftarrow\cdots, \]
+and categories whose morphisms are the $n$-jets.
 \end{itemise}
 \end{document}
-
-
-
-
 
 
 
