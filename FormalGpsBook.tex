@@ -11,6 +11,7 @@
 \newcommand{\FSR}{\mathsf{FS}_R}
 \newcommand{\FSS}{\mathsf{FS}_S}
 \newcommand{\FGR}{\mathsf{FG}_R}
+\newcommand{\FGLR}{\calF(R)}
 \DeclareMathOperator{\SPec}{Sp}
 \DeclareMathOperator{\SPf}{Spf}
 
@@ -107,10 +108,9 @@ R\ar@/^.5em/[uu]\ar[r]^-{f}
 S\ar@/^.5em/[uu]^{}="1"
 \ar@{|->}"1";"2"_-{f^*}
 }\]
-\item A \textbf{formal $R$-set} is a functor $X:\RNil\to\Set$ under which $0\mapsto \{*\}$. These form a category $\FSR$ whose arrows are the natural transformations.
+\item A \textbf{formal $R$-set} is a functor $X:\RNil\to\Set$ such that $X(R)=\{*\}$. These form a category $\FSR$ whose arrows are the natural transformations.
 
-As $0\in\RNil$ is initial, there is a natural distinguished point in $X(T)$, for any $X\in\FSR$.
-
+The point here is that $\textup{pt}$, then constant functor $\textup{pt}(S)=\{*\}$ is represented by the initial object $R\in\RNil$. By Yoneda's lemma, natural transformations $\textup{pt}\nt X$ are the same as elements of $X(R)$. We would rather like it if there was only one $R$-point of a formal $R$-scheme.
 \item Given a map $f:R\to S$, one obtains a map $f:\FSR\to\FSS$ by composing with $f^*$.
 \item We have a construction, called the `formal spectrum' :
 \[\xymatrix@R=0mm{
@@ -134,8 +134,6 @@ and a \textbf{formal Yoneda lemma}, that when we write $\kappa=\ker (\epsilon:S\
 }\]
 is an isomorphism. 
 To describe the natural map, consider the top half of the following diagram. Here, $\pi_n\in\SPf(S,\epsilon)(S/\kappa^{n+1})$, and applying $\gamma$ gives us a compatible sequence of points in $X(S/\kappa^{n+1})$.
-
-The second part of the diagram is supposed to motivate this when $X$ is a scheme. [I'm not sure what should be formal and what should not in such a motivation.] Note then that the inverse limit can be viewed as the intersection of the sets of $S/\kappa^{n+1}$-points as $n$ varies.
 \[\xymatrix{
 &%r1c1
 &%r1c2
@@ -183,6 +181,8 @@ S/\kappa^{n+3}
 \ar@{|->}"3";"2"_-{\rho_{n+1}}
 \ar@{|->}"5";"4"_-{\rho_{n+2}}
 }\]
+\noindent The second part of the diagram is supposed to motivate this when $X$ is a scheme. [I'm not sure what should be formal and what should not in such a motivation.] Note then that the inverse limit can be viewed as the intersection of the sets of $S/\kappa^{n+1}$-points as $n$ varies.
+
 \item As an example of a formal spectrum, we have the formal line:
 \[D=\SPf(R[[x]],\epsilon)\qquad \epsilon(x)=0.\qquad \qquad D(S,\epsilon)=\ker(\epsilon)\textup{ i.e.\ }D(I)=I.\]
 \item $\Map_R(X,D)$ can be given the structure of a (possibly non-nilpotent) $R$-algebra without unit. To do this, it's best to think about nilpotent $R$-algebras. Suppose we are given $f,g:X\to D$. Then for any $I\in\RNil'$, we have maps $f_I,g_I:X(I)\to D(I)=I$ which can be added and multiplied pointwise. We define
@@ -333,10 +333,63 @@ One should think here that given two maps $f,g:X\to Y$ in the category $\calC_R$
 This gives a tower
 \[\ast=J^0(X,Y)\leftarrow J^1(X,Y)\leftarrow J^2(X,Y)\leftarrow\cdots, \]
 and categories whose morphisms are the $n$-jets.
+\item We define the \textbf{tangent space} of a \textbf{formal} $R$-set $Y$ to be $TY=J_R^1(D,Y)$.
+\begin{itemize}\squishlist
+\setlength{\parindent}{.25in}
+\item $Y$ being formal has only one point, so there's no need to specify it.
+\item By formal Yoneda, we have an isomorphism
+\[\xymatrix@R=0mm{
+\ar[r]^-{}%Name of map
+\Map_R(D,Y)&%Source
+\varprojlim Y\left(R[x]/x^{n+1}\right)
+}\]
+and moreover, $J^n_R(D,Y)=Y(R[x]/x^{n+1})$. Thus
+$TY= Y(R[x]/x^2)$.
+\item $TY$ is an $R$-module. To define the structure, note that for $r\in R$, one obtains an $R$-algebra endomorphism of $R[x]/x^2$ by multiplying $x$ by $r$. Applying $Y$ to these endomorphisms give the module structure.
+\end{itemize}
+\rednote{There's some discussion here which I'm not following. In fact, I'll return to the stuff to chapter 2 later.}
+\end{itemise}
+\section{Formal Group Laws}
+\subsection{Formal Group Laws}
+\begin{itemise}
+\setlength{\parindent}{.25in}
+\item A \textbf{formal group law} is a formal group whose underlying formal scheme \textbf{\underline{is}} $D$. Thus formal group laws form a \emph{full subcategory} $\FGLR$ of the category $\FGR$ of formal groups.
+\item As the product $D\times D$ in $\FGR$ is $\SPf(R[[u,v]])$ \rednote{(is it?)}, a formal group law in the above sense gives a power series $F(u,v)$ as expected.
+\end{itemise}
+\rednote{Is the obvious definition of homomorphism actually the definition in the category of formal groups? At the start of 2.3, it doesn't seem as though this is obvious.}
+\subsection{Formal Groups over $\Q$-algebras}
+\begin{itemise}
+\setlength{\parindent}{.25in}
+\item There is a universal `strict conjugate' of the additive formal group law given by
+\[G_a^{\log}(x,y)=\exp(\log(x)+\log(y))\]
+Over $M=\Z[l_1,l_2,\ldots]$, where $\log(t)=\sum_{i\geq1}l_{i-1}t^i$ (and $l_0=1$).
+\item If $R$ is a $\Q$-algebra, and FGL $G$ over $R$ is isomorphic to $G_a$ by a unique strict isomorphism $\log_G:G\to G_a$.
+\item For any two formal group laws $F,G$ over a $\Q$-algebra $R$, we have an isomorphism
+\[\Hom_R(F,G)\to R\qquad \theta\mapsto\theta'(0).\]
+\end{itemise}
+\subsection{The endomorphism ring of $G_a$}
+\begin{itemise}
+\setlength{\parindent}{.25in}
+\item Although there's  \rednote{something foggy} here, automorphisms of $G_a$ are determined by additive power series.
+\item Over a $\Q$-algebra, any endomorphism of $G_a$ reduces (by differentiation) to $ax$, so that as a functor $E:\mathsf{Alg}_\Q\to\Rings$, `the endomorphism ring of $G_a$' is just the inclusion of categories.
+\item This inclusion of categories is represented by the ring $\Q(t)$, giving $\Q(t)$ the structure of co-ring object in $\Rings$. This needs two diagonal maps, one for each of addition and multiplication. One finds that
+\begin{alignat*}{2}
+\Delta_+(t)
+&=
+1\otimes t+t\otimes 1%
+&\qquad&\text{(primitive)}\\
+% Left hand side
+\Delta_\times (t)
+% Relation
+&=
+% Right hand side
+t\otimes t%
+% Comment
+&\qquad&\text{(grouplike)}
+\end{alignat*}
+
 \end{itemise}
 \end{document}
-
-
 
 
 
