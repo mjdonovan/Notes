@@ -4,9 +4,10 @@
 \input{../macros.tex}
 
 
-\excludeversion{1. Kan Extensions}
-\excludeversion{2. Derived functors via deformations}
-\includeversion{solutions}
+\excludeversion{2. Kan Extensions}
+\includeversion{3. Derived functors via deformations}
+\includeversion{4. Basic concepts in enriched category theory}
+\excludeversion{solutions}
 
 
 
@@ -98,7 +99,8 @@ V%r1c2
 }}$
 and let $K:\textbf{1}\to \scrD$ be the functor picking out $V$. Recall that we have adjunctions
 \[\xymatrix@C=1.5cm{
-\Set^\textbf{1}\ar@/^1.2em/[r]^-{\Lan_K}_-{\perp} \ar@/_1.2em/[r]_-{\Ran_K}^-{\perp}&%r1c1
+\Set^\textbf{1}
+\ar@/^1.2em/[r]^-{\Lan_K}_-{\perp} \ar@/_1.2em/[r]_-{\Ran_K}^-{\perp}&%r1c1
 \Set^\scrD\ar[l]|{K^*}%r1c2
 }\]
 We may calculate $\Lan_KX$ and $\Ran_KX$ pointwise, as $\Set$ is complete and cocomplete, where we may view $X$ either as a set or a functor $\textbf{1}\to\Set$. We'll calculate at a point $d\in\scrD$:
@@ -146,7 +148,7 @@ As the `source' and `target' maps $X\times X\to X$ are induced in the obvious wa
 Perhaps I'm missing a key point here, but it seems to me that this just follows from what was written above. Let $\Delta^\bullet:\Delta\to\Top$ be the standard cosimplicial object. Then the construction (2.31) of the functor $L$ is the geometric realisation, and the adjoint $R$ constructed is the total singular complex functor. None of this depends on our choice of the category $\Top$ or the functor $\Delta^\bullet$.
 
 \end{solutions}
-\begin{1. Kan Extensions}
+\begin{2. Kan Extensions}
 \section*{All concepts are Kan extensions}
 \subsection*{Left Kan extensions}
 Suppose we have a functor $K:\scrC\to\scrD$, and we are interested in extending functors $F:\scrC\to\scrE$ along $K$. We don't expect to be able to extend just any functor along $K$, i.e.\ to fill the diagram
@@ -235,7 +237,8 @@ We define the vertical dashed arrow by the composite:
 \[\{Kc\overset{h}{\to}d\}\cdot Fc\overset{\gamma_c}{\to}GKc\overset{Gh}{\to}Gd,\]
 and define the horizontal dashed arrow similarly. Now to see when this diagram commutes, we expand out the diagram starting at a `summand' of the northeast corner:
 \[\vcenter{\xymatrix{
-(c\overset{f}{\to}c',Kc'\overset{h}{\to}d)\cdot Fc\ar@{->}[r]^-{\textup{`id'}}\ar[d]_-{\textup{`$Ff$'}}&%r1c1
+(c\overset{f}{\to}c',Kc'\overset{h}{\to}d)\cdot Fc\ar@{->}[r]^-{\textup{`id'}}
+\ar[d]_-{\textup{`$Ff$'}}&%r1c1
 \ar@{->}[r]^-{\gamma_c}(Kc\overset{Kf}{\to}Kc'\overset{h}{\to}d)\cdot Fc&%r1c2
 GKc\ar[r]^-{GKf}&
 GKc'\ar[d]^-{Gh}\\
@@ -244,7 +247,8 @@ GKc'\ar[r]^-{Gh}&Gd
 }}\]
 Now this diagram always commutes \Iff it commutes whenever $h=\id_{Kc'}$, so we reduce to a diagram
 \[\vcenter{\xymatrix{
-Fc\ar@{->}[rr]^-{\gamma_c}\ar[d]_-{\textup{`$Ff$'}}&&%r1c1
+Fc\ar@{->}[rr]^-{\gamma_c}
+\ar[d]_-{\textup{`$Ff$'}}&&%r1c1
 GKc\ar[d]^-{GKf}\\
 \ar@{->}[rr]^-{\gamma_{c'}}Fc'&&
 GKc'
@@ -263,11 +267,13 @@ We'll say that a functor $L$ as below \textbf{preserves} the Kan extension drawn
 }}
 \qquad \qquad 
 \vcenter{\xymatrix{
-\scrC\ar[rd]_-{K}\ar[rr]^-{LF}_-{}="arF"&%r1c1
+\scrC\ar[rd]_-{K}
+\ar[rr]^-{LF}_-{}="arF"&%r1c1
 &%r1c2
 \scrE\\%r1c3
 &%r2c1
-\scrD\ar@{->}[ur]_{L\Lan_KF}\ar@{=>}"arF";[]_-{L\eta}&%r2c2
+\scrD\ar@{->}[ur]_{L\Lan_KF}
+\ar@{=>}"arF";[]_-{L\eta}&%r2c2
 %r2c3
 }}
 \]
@@ -342,7 +348,7 @@ so we suspect that $f^*$ should be given by the left Kan extension. That is, for
 }}
 \]
 To see how this relates to the classical definition, we use the second pointwise colimit formula, to calculate at $U\subseteq X$:
-\[(f^*\calG)(U):=(\Lan_{f^{-1}}\calG)(U)=\colim\left(f^{-1}/U\overset{\textup{forget}}{\to}\calY^\op\overset{\calG}{\to}\Set\right)\]
+\[(f^*\calG)(U):=(\Lan_{f^{-1}}\calG)(U)= \colim\left(f^{-1}/U \overset{\textup{forget}}{\to}\calY^\op\overset{\calG}{\to}\Set\right)\]
 Here, the slice category $f^{-1}/U$ has 
 \begin{itemize}\squishlist
 \item Objects: pairs $(W,\alpha)$ such that $W\in\calY^{\op}$ and $\alpha:f^{-1}W\to U$ a map in $\calX^{\op}$;
@@ -362,13 +368,13 @@ So, the colimit is actually being taken over all maps $f^{-1}W\to U$, which are 
 \subsubsection*{The tensor product of functors}
 Suppose that $\calC$ and $\calD$ are symmetric monoidal categories, and $F,G:\calC\to\calD$ are functors. We'd like to give the correct definition of a functor $F\otimes G:\calC\to\calD$. The claim is that the correct functor is the following left Kan extension, known as the \textbf{Day convolution}:
 \[\xymatrix{
-\calC\times\calC\ar[r]^-{(F,G)}\ar[d]_-{\otimes}&%r1c1
+\calC\times\calC\ar[r]^-{(F,G)} \ar[d]_-{\otimes}&%r1c1
 \calD\times\calD\ar[d]^-{\otimes}\\%r1c2
 \calC\ar@{-->}[r]^-{F\otimes G}&%r2c1
 \calD%r2c2
 }\]
 Over an element $c$ of $\calC$, this can be computed by
-\[(\calF\otimes\calG)(c)= \colim\left(\otimes_\calC/c\overset{\textup{forget}}{\to}\calC\times\calC \overset{\otimes_D\circ(\calF\times\calG)}{\to}\calD\right)=\colim_{c'\otimes c''\to c}F(c')\otimes G(c'')\]
+\[(\calF\otimes\calG)(c)= \colim\left(\otimes_\calC/c \overset{\textup{forget}}{\to}\calC\times\calC \overset{\otimes_D\circ(\calF\times\calG)}{\to}\calD\right)=\colim_{c'\otimes c''\to c}F(c')\otimes G(c'')\]
 \paragraph*{Smash product of spectra}
 Given a spectrum $E$, we obtain a functor
 \[E:\Top\to\Top\qquad X\mapsto \Omega^\infty(X\wedge E).\]
@@ -384,12 +390,278 @@ Consider the poset category $\Z$, which has a unique map $n\to m$ whenever $n\le
 
 We can almost say that the tensor product $C\otimes D$ of cochain complexes is the tensor product of functors. The problem is that without doing something tricky with the signs, we won't actually get a chain complex out, while doing something tricky with the signs, we won't actually be extending a \emph{functor}. Thus I am a bit stuck, save to say that viewing a cochain complex as an $\AbGp$-enriched functor from a suitable enriched version of the category $\Z$ might save the day.
 \end{shaded}
-\end{1. Kan Extensions}
-\begin{2. Derived functors via deformations}
+\end{2. Kan Extensions}
+\begin{3. Derived functors via deformations}
+\section*{Derived functors via deformations}
+\begin{itemise}
+\setlength{\parindent}{.25in}
+\item We're interested in functors between \textbf{homotopical categories}, which are those with areasonable notion of weak equivalence. We'd like to approximate such a functor by a \emph{derived functor}, which \emph{is} \textbf{homotopical} (i.e.\ preserves weak equivalence).
+\item A \textbf{homotopical category} is a category equipped with a wide subcategory satisfying the 2-of-6 property (which implies the 2-of-3 property).
+\item The \textbf{homotopy category} $\ho\scrM$ of a homotopical category $(\scrM,\scrW)$ is the formal localisation of $\scrM$ at $\scrW$. There's an identity-on-objects functor \smash{$\scrM\overset{\gamma}{\to}\ho\scrM$} with the universal property
+\[\xymatrix{
+\scrM
+\ar[d]^-{\gamma}
+\ar[dr]^-{\scrW\mapsto\textup{iso}(\scrN)}_{}="top"
+&%r1c1
+\\%r1c2
+\ho\scrM
+\ar[r]^{}="bottom"
+&%r2c1
+\scrN%r2c2
+\ar@{<=>}"top";"bottom"
+}\]
+This universal property is 2-categorical, not only do the functors indicated correspond bijectively, but natural transformations between pairs of functors enjoy a bijective correspondence.
+\item 
+\begin{itemize}\squishlist
+\setlength{\parindent}{.25in}
+\item If $\gamma$ \emph{reflects} weak equivalences then we say that $\scrM$ is \textbf{saturated}. This is true of closed model categories.
+\item If $\scrW$ satisfies 2-of-3, and the localisation makes $\scrM$ saturated, then $\scrW$ satisfies 2-of-6.
+\end{itemize}
+\item A \textbf{homotopical} functor is one that preserves weak equivalences. It then induces a unique functor on homotopy categories giving a commuting square:
+\[\xymatrix@R=4mm{
+\scrM
+\ar[r]^-{F}
+\ar[d]_-{\gamma}
+&%r1c1
+\scrN
+\ar[d]^-{\delta}
+\\%r1c2
+\ho\scrM
+\ar@{-->}[r]^-{F}
+&%r2c1
+\ho\scrN%r2c2
+}\]
+Natural transformations upstairs induce natural transformations downstairs, but the converse need not be true.
+\item Any functor naturally weakly equivalent to the identity is homotopical, for example fibrant and cofibrant replacement functors in model categories with functorial factorisations.
+\item Important non-examples include:\begin{itemize}\squishlist
+\setlength{\parindent}{.25in}
+\item The functor $F_\bullet:\textbf{Ch}_\bullet(\calA)\to \textbf{Ch}_\bullet(\calB)$, when $\calA,\calB$ are abelian categories, $F:\calA\to\calB$ is an additive functor, and $\textbf{Ch}_\bullet$ is `bounded below chain complexes'.
+\item The functor `pushout' from $\mathsf{Top}^\scrD\to\mathsf{Top}$, where $\scrD$ is the category $\bullet \leftarrow\bullet \rightarrow\bullet$, and the source category has weak equivalences defined pointwise.
+\end{itemize}
+\item A \textbf{total left defived functor} $\textup{L}F$ is a \underline{right} Kan extension
+\[\xymatrix@R=4mm{
+\scrM
+\ar[r]^-{F}_{}="t"
+\ar[d]_-{\gamma}
+&%r1c1
+\scrN
+\ar[d]^-{\delta}
+\\%r1c2
+\ho\scrM
+\ar@{-->}[r]_-{\textup{L}F}^{}="b"
+&%r2c1
+\ho\scrN%r2c2
+\ar@{=>}"b";"t"
+}\]
+which is the same as a homotopical functor $\textup{L}F:\scrM\to\ho\scrN$, (along with a universal natural transformation).
+\item A \textbf{point-set derived functor} (or just \emph{derived functor}) is to be a lift of a left derived functor along $\delta$. That is, a functor $\mathbb{L}F:\scrM\to\scrM$ and natural transformation $\lambda:\mathbb{L}F\nt F$ such that the composite $\scrM\to\ho\scrN$ (along with the whiskered natural transformation) corresponds to a total left derived functor.
+\[
+\vcenter{\xymatrix@1{
+\scrM
+\ar@/^1em/[r]^-{F}_{}="1"
+\ar@/_1em/[r]_-{\mathbb{L}F}^{}="2"
+&%r1c1
+\scrN
+\ar@{=>}"2";"1"
+%r1c2
+}}
+\quad \overset{\textup{whisker}}{\mapsto}\quad 
+\vcenter{\xymatrix@1@R=4mm{
+\scrM
+\ar[r]^-{F}_{}="t"
+\ar@{-->}[dr]_-{\delta\circ\mathbb{L}F}^{}="b"
+&%r1c1
+\scrN
+\ar[d]^\delta
+\\%r1c2
+&%r2c1
+\ho\scrN%r2c2
+\ar@{=>}"b";[u]
+}}
+\quad \overset{\textup{same as}}{\longleftrightarrow}\quad 
+\vcenter{\xymatrix@1@R=4mm{
+\scrM
+\ar[r]^-{F}_{}="t"
+\ar[d]_\gamma
+&%r1c1
+\scrN
+\ar[d]^\delta
+\\%r1c2
+\ho\scrM
+\ar@{->}[r]_-{\textbf{L}F}^{}="b"
+&%r2c1
+\ho\scrN%r2c2
+\ar@{=>}"b";"t"
+}}\]
+\end{itemise}
+\subsection*{Derived functors via deformations}
+\begin{itemise}
+\setlength{\parindent}{.25in}
+\item A \textbf{left deformation} is an endofunctor $Q$ with a natural weak equivalence $q:Q\overset{\sim}{\nt}1$.
+\item Write $\scrM_Q$ for a subcategory of $\scrM$ containing the image of $Q$. The inclusion and the left deformation induce an equivalence between $\ho\scrM$ and $\ho\scrM_Q$. We'll call $\scrM_Q$ the `subcategory of cofibrant objects'.
 
-\end{2. Derived functors via deformations}
+It's good to choose $\scrM_Q$ small enough that the functor $F:\scrM\to\scrN$ of interest is homotopical on $M_Q$. If this is so, we'll say that $F$ is \textbf{left deformable}.
+\item Recall \textbf{Ken Brown's lemma}: A left quillen functor preserves weak equivalences between cofibrant objects.
+
+This shows the any left Quillen functor is left deformable.
+\item \textbf{Theorem 3.22}: If $F$ has a left deformation $q:Q\overset{\sim}{\nt}1$, then $\mathbb{L}F=FQ$ is a left derived functor of $F$.
+\item If we write $\mathsf{LDef}$ for the 2-category of homotopical categories with chosen left deformations, taking homotopy categories and left derived functors gives a pseudofunctor $\textbf{L}:\mathsf{LDef}\to\Cat$.
+
+It is \textbf{not} the case that the composite of two total left derived functors is a total left derived functor.
+\item Suppose that we have an adjunction 
+\[\xymatrix@R=.3cm@C=2cm{
+\scrM  \ar@<.6ex>[r]^{F}&
+\scrN  \ar@<.4ex>[l]^{G}\\
+%X \ar@{|->}[r] & FX\\
+%GY             & Y \ar@{|->}[l]
+}\]
+and $F$ is left deformable and $G$ is right deformable\footnote{This is called a \textbf{deformable adjunction}.}. Then the total defived functors form a unique adjunction
+\[\xymatrix@R=.3cm@C=2cm{
+\ho\scrM  \ar@<.6ex>[r]^{\textbf{L}F}&
+\ho\scrN  \ar@<.4ex>[l]^{\textbf{R}G}\\
+%X \ar@{|->}[r] & FX\\
+%GY             & Y \ar@{|->}[l]
+}\]
+compatibly with the localisations.
+\item Finally:
+\begin{itemize}\squishlist
+\setlength{\parindent}{.25in}
+\item The total left derived functor of a left deformable functor is an \textbf{absolute} kan extension.
+\item Given an adjunction $F\dashv G$ between homotopical categories, such that $F$ (resp.\ $G$) has a total left (resp.\ right) derived functor, and that these derived functors are \textbf{absolute} Kan extensions. Then $\textbf{L}F\dashv\textbf{R}G$. [So we obtain a derived adjunction no matter how the derived functors are obtained, as long as they are absolute.]
+\end{itemize}
+\item There's a section reconciling all this with classical derived functors between of functors between abelian categories.
+\end{itemise}
+\end{3. Derived functors via deformations}
+\begin{4. Basic concepts in enriched category theory}
+\section*{Basic concepts in enriched category theory}
+\subsection*{The base for enrichment}
+\begin{itemise}
+\setlength{\parindent}{.25in}
+\item We enrich over a base category which is symmetric monoidal, which we'll write as $(\scrV,\times ,*)$.
+\begin{itemize}\squishlist
+\setlength{\parindent}{.25in}
+\item $\sSet$ is symmetric monoidal under cartesian product, with unit $*=\Delta^0$. The same holds for any other category with finite products.
+\item ${{_R}\mathsf{Mod}}$ is symmetric monoidal under $\otimes_R$, \emph{when $R$ is commutative}.
+\item Symmetric spectra, orthogonal spectra, etc., are all symmetric monoidal (homotopical) categories.
+\end{itemize}
+\item We'll always take $\scrV$ to be complete and cocomplete.
+\end{itemise}
+
+\subsection*{$\scrV$-categories}
+\begin{itemise}
+\setlength{\parindent}{.25in}
+\item A $\scrV$-category $\underline{\scrD}$ consists of
+\begin{itemize}\squishlist
+\setlength{\parindent}{.25in}
+\item a collection of objects, e.g.\ $x,y,z\in\underline{\scrD}$;
+\item hom objects $\underline{\scrD}(x,y)\in\scrV$;
+\item a morphism $\id_x:*\to\underline{\scrD}(x,x)$ in $\scrV$;
+\item a morphism $\underline{\scrD}(y,z)\times \underline{\scrD}(x,y)\overset{\circ}{\to}\underline{\scrD}(x,z)$;
+\end{itemize}
+subject to certain constraints.
+
+In many examples, the unit object corepresents a forgetful functor to $\Set$. This forgetful functor, being a right adjoint, preserves products, so that it is monoidal when the monoidal structure is actually given by taking products in $\scrV$. A monoidal functor can be used to change enrichment, and so we obtain an underlying unenriched category.
+
+Even when this is not the situation, we still have an underlying category, by taking the functor to $\Set$ corepresented by the unit object.
+\item $\sSet$ is self-enriched using $\underline{\sSet}(X,Y):=Y^X$, whose $n$-simplices are maps $\Delta^n\times X\to Y$.
+
+If one thinks of these as $n$-fold homotopies of maps $X\to Y$, it is apparrent that that composite should be given on $n$-simplices by
+\[\left(\Delta^n\times X\overset{f}{\to}Y,\Delta^n\times Y\overset{g}{\to}Z\right)\mapsto
+\left(\vcenter{\xymatrix@1{
+\Delta^n\times X
+\ar[r]^-{\Delta\times1}
+&%r1c1
+\Delta^n\times \Delta^n\times X
+\ar[r]^-{1\times f}
+&%r1c2
+\Delta^n\times Y
+\ar[r]^-{g}
+&%r1c3
+Z%r1c4
+}}\right)\]
+\item When each $\scrV\overset{\DASH \times v}{\to}\scrV$ admits a right adjoint $\underline{\scrV(v,\DASH )}$, these `parameterized adjunctions' form an \textbf{internal hom} functor
+\[\underline{\scrV}(\DASH ,\DASH ):\scrV^{\op}\times \scrV\to\scrV,\]
+and we call $\scrV$ \textbf{closed} symmetric monoidal. If the monoidal structure is the product, we call $\scrV$ \textbf{cartesian closed}.
+\item 
+\begin{itemize}\squishlist
+\setlength{\parindent}{.25in}
+\item $\sSet$ is cartesian closed.
+\item ${{_R}\mathsf{Mod}}$ is closed when $R$ is commutative.
+\item $\mathsf{Cat}$ is cartesian closed.
+\item The full category $\mathsf{Top}$ is not cartesian closed. Certain \textbf{convenient} categories of spaces are cartesian closed, complete and cocomplete, and contain CW-complexes.
+\item Given a cartesian closed symmetric monoidal $(\scrV,\times ,*)$, the slice category category $\scrV_*:=*/\scrV$ can be made into a (non-cartesian) closed symmetric monoidal category $(\scrV_*,\wedge ,S^0)$ exactly as one might hope, and there's an adjunction
+\[\xymatrix@R=.3cm@C=2cm{
+\makebox[0cm][r]{$(\DASH )_+:$\,}\scrV  \ar@<.6ex>[r]^{\textup{strong monoidal}}&
+\scrV_*\makebox[0cm][l]{\,$:U$}  \ar@<.4ex>[l]\\
+%X \ar@{|->}[r] & FX\\
+%GY             & Y \ar@{|->}[l]
+}\]
+with the left adjoint strongly monoidal.
+\end{itemize}
+\end{itemise}
+\subsection*{Underlying categories}
+\begin{itemise}
+\setlength{\parindent}{.25in}
+\item $\mathsf{Top}^G$ has two natural enrichments. It is:
+\begin{itemize}\squishlist
+\setlength{\parindent}{.25in}
+\item $\mathsf{Top}$-enriched, taking equivariant maps $\underline{\mathsf{Top}}^G(X,Y)$;
+\item $\mathsf{Top}^G$-enriched, taking all maps $\underline{\mathsf{Top}}_G(X,Y)$, acted on by conjugation. Note that $\mathsf{Top}^G$ is symmetric monoidal, taking cartesian products with diagonal action.
+\end{itemize}
+When we take the underlying category, we have $\mathsf{Top}(X,Y):=\scrV(*,\underline{\scrV}(X,Y))$, where $\scrV$ is either of the two enriching categories. In either case we recover the set of equivariant maps, so that the two enrichments give the same underlying category.
+\item A functor $F:\scrV\to\scrU$ is \textbf{lax monoidal} if there are associative and unital natural transformations
+\[Fv\otimes Fv'\to F(v\otimes v') \quad \textup{and}\quad \textbf{1}_\scrU\to F(\textbf{1}_\scrV).\]
+This is exactly the type of functor needed to turn a $\scrV$-category into a $\scrU$-category. 
+\item The point is that $\scrV(*,\DASH ):\scrV\to\Set$ is always lax monoidal, so we have a notion of the underlying ordinary category $\scrC_0$ of a $\scrV$-category $\scrC$.
+\item If $\scrV$ is closed symmetric monoidal, then it is self-enriched via its internal homs. The underlying category of $\underline{\scrV}$ is, fortunately, $\scrV$.
+\item Given a $\scrV$-category $\underline{\scrD}$, we'd like to define pre- and ppost-composition maps on hom-objects by maps in $\scrD_0$. This is not difficult. Given $*\overset{g}{\to}\underline{\scrD}(x,y)$, i.e.\ an element of $\scrD_0(x,y)$, one forms the composite, called $g_*$:
+\[\underline{\scrD}(x,y)=*\times\underline{\scrD}(x,y)\overset{g\times 1}{\to}\underline{\scrD}(y,z)\times\underline{\scrD}(x,y)\overset{\circ}{\to}\underline{\scrD}(x,z) \]
+This `representable' functor $\underline{\scrD}(x,\DASH ):\scrD_0\to\scrV$ yields the ordinary representable functor $\scrD_0(x,\DASH )$ as the composite
+\[\scrD_0\overset{\scrD(x,\DASH )}{\to}\scrV\overset{\scrV(*,\DASH )}{\to}\Set.\]
+\end{itemise}
+\subsection*{$\scrV$-functors, $\scrV$-natural transformations}
+\begin{itemise}
+\setlength{\parindent}{.25in}
+\item A $\scrV$-functor is a map on objects and a map on hom objects, such that a certain square commutes (performing composition before ander after applying the functor), and a triangle commutes (preservation of the identity $*\to\underline{\scrC}(x,x)$).
+\item A \textbf{$\scrV$-natural transformation} $F\overset{\alpha}{\nt}G$ of $\scrV$-functors $\underline{\scrC}\to\underline{\scrD}$ is an assignment of an arrow $\alpha_x$ \textbf{{in the underlying category $\scrD_0$}} to each object $x$ of $\scrC$, satisfying certain conditions. That is, we demand that the diagram
+\[\xymatrix{
+\underline{\scrC}(x,y)
+\ar[r]^-{F}
+\ar[d]_-{G}
+&%r1c1
+\underline{\scrD}(Fx,Gy)
+\ar[d]^-{(\alpha_y)_*}
+\\%r1c2
+\underline{\scrD}(Gx,Gy)
+\ar[r]^-{(\alpha_x)^*}
+&%r2c1
+\underline{\scrD}(Fx,Gy)%r2c2
+}\]
+commutes. [The two ways around this diagram correspond to the functions returning the two composites around the `naturality' square we expect. They should agree.]
+\item Fortunately, `underlying' is a 2-functor $(\DASH )_0:\scrV\mathsf{Cat}\to\mathsf{Cat}$.
+\item Although there's no a priori concept of isomorphism of objects in $\scrC$, TFAE:
+\begin{itemize}\squishlist
+\setlength{\parindent}{.25in}
+\item $x,y\in\underline{\scrC}$ are isomorphic in $\scrC$;
+\item $\scrC(x,\DASH )$ and $\scrC(y,\DASH )$ are naturally isomorphic functors $\scrC\to\Set$;
+\item  $\underline{\scrC}(x,\DASH )$ and $\underline{\scrC}(y,\DASH )$ are naturally isomorphic (unenriched) functors $\scrC\to\scrV$;
+\item  $\underline{\scrC}(x,\DASH )$ and $\underline{\scrC}(y,\DASH )$ are naturally isomorphic $\scrV$-functors $\underline{\scrC}\to\underline{\scrV}$.
+\end{itemize}
+\item Now we can define \textbf{$\scrV$-equivalence} of categories to be a $\scrV$-functor $F:\underline{\scrC}\to\underline{\scrD}$ which is
+\begin{itemize}\squishlist
+\setlength{\parindent}{.25in}
+\item essentially surjective, in the sense that every $d\in\underline{\scrD}$ is isomorphic (in the above sense) to something in the image of $F$; and
+\item $\scrV$-fully faithful, in that $F$ induces isomorphisms on hom-objects.
+\end{itemize}
+A \textbf{Dwyer-Kan equivalence} of $\sSet$-categories is a functor whose resulting $\ho(\sSet)$-functor is a $\ho(\sSet)$-equivalence. [We'll see that $\sSet\to\ho(\sSet)$ is lax monoidal.]
+\item A $\scrV$-adjunction is defined as a normal adjunction, but with the natural transformations replaced by $\scrV$-natural transformations.
+\end{itemise}
+\end{4. Basic concepts in enriched category theory}
 
 \end{document}
+
+
+
 
 
 
