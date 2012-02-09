@@ -5,10 +5,10 @@
 
 
 \excludeversion{2. Kan Extensions}
-\includeversion{3. Derived functors via deformations}
+\excludeversion{3. Derived functors via deformations}
 \includeversion{4. Basic concepts in enriched category theory}
 \excludeversion{solutions}
-
+\includeversion{5. The unreasonably effective (co)bar construction}
 
 
 \UseAllTwocells
@@ -656,7 +656,132 @@ commutes. [The two ways around this diagram correspond to the functions returnin
 A \textbf{Dwyer-Kan equivalence} of $\sSet$-categories is a functor whose resulting $\ho(\sSet)$-functor is a $\ho(\sSet)$-equivalence. [We'll see that $\sSet\to\ho(\sSet)$ is lax monoidal.]
 \item A $\scrV$-adjunction is defined as a normal adjunction, but with the natural transformations replaced by $\scrV$-natural transformations.
 \end{itemise}
+\subsection*{Simplicial categories}
+\begin{itemise}
+\setlength{\parindent}{.25in}
+\item By a \textbf{simplicial category}, we mean a category enriched in simplicial sets.
+\item Simplicial categories are the same as simplicial objects in (large) categories in which all the face and degeneracy functors are identity-on-objects:
+\[\vcenter{
+\def\labelstyle{\scriptstyle}
+\xymatrix@C=1.5cm@1{
+\scrC_0
+\ar[r]|(.65){s_0}
+&
+\scrC_1
+\ar@<-1ex>[l]|(.65){d_0}
+\ar@<+1ex>[l]|(.65){d_1}
+\ar@<+1ex>[r]|(.65){s_0}
+\ar@<-1ex>[r]|(.65){s_1}
+&
+\scrC_2
+\ar[l]|(.65){d_1}
+\ar@<-2ex>[l]|(.65){d_0}
+\ar@<+2ex>[l]|(.65){d_2}
+\ar[r]|(.65){s_1}
+\ar@<+2ex>[r]|(.65){s_0}
+\ar@<-2ex>[r]|(.65){s_2}
+&
+\scrC_3\makebox[0cm][l]{\,$\cdots $}
+\ar@<-3ex>[l]|(.65){d_0}
+\ar@<-1ex>[l]|(.65){d_1}
+\ar@<+1ex>[l]|(.65){d_2}
+\ar@<+3ex>[l]|(.65){d_3}
+}}\]
+Fortunately, the underlying category is then $\scrC_0$.
+\item A simplicial functor $F:\underline{\scrC}\to\underline{\scrD}$ is a collection of functors $F_n:\underline{\scrC}_n\to\underline{\scrD}_n$ which commute with the face and degeneracy functors. Note that then $F_0,F_1,\ldots$ all act the same on objects.
+\item The data of a simplicial natural transformation of simplicial functors $F,G:\underline{\scrC}\to\underline{\scrD}$ is just an arrow $\alpha_x\in\scrD_0(Fx,Gx)$ for each $x\in\scrC_0$.
+The naturality condition states that the maps $s_0^n\alpha_x\in\scrD_n(Fx,Gx)$ form a natural transformation $f_n\nt G_n$ for each $n$. [Note that all the degeneracies $s_{i_1}\cdots s_{i_n}$ coincide.]
+\end{itemise}
+\subsection*{Tensors and cotensors}
+\begin{itemise}
+\setlength{\parindent}{.25in}
+\item We already discussed the adjunctions that exist in a closed monoidal category:
+\[\scrV(u\times v,w)\cong\scrV(u,\underline{\scrV}(v,w)).\]
+We'd like to interpret this \textbf{internally}, as:
+\[\underline{\scrV}(u\times v,w)\cong\underline{\scrV}(u,\underline{\scrV}(v,w)).\]
+Everybody knows that we should use the Yoneda lemma:
+\[\scrV(x,\underline{\scrV}(u\times v,w))\cong\scrV(x\times u\times v,w)\cong\scrV(x\times u,\underline{\scrV}(v,w))\cong\scrV(x,\underline{\scrV}(u,\underline{\scrV}(v,w))).\]
+\item Now $\underline{\scrV}(v,\DASH ):\scrV\to \scrV$ is a $\scrV$-functor, and thus $\DASH \times v:\scrV\to \scrV$ is too.
+\item $\underline{\scrM}$ is \textbf{tensored} if there is a bifunctor $\DASH \otimes \DASH :\scrV\times \scrM\to\scrM$ giving natural isomorphisms
+\[\underline{\scrM}(v\otimes m,n)\cong\underline{\scrV}(v,\underline{\scrM}(m,n)).\]
+This gives a $\scrV$-adjunction
+\[\xymatrix@R=.3cm@C=2cm{
+\underline{\scrV}  \ar@<.6ex>[r]^{\DASH \otimes m}&
+\underline{\scrM}  \ar@<.4ex>[l]^{\underline{\scrM}(m,\DASH )}\\
+%X \ar@{|->}[r] & FX\\
+%GY             & Y \ar@{|->}[l]
+}\]
+[In particular, a closed symmetric monoidal category is tensored over itself: it's self-enriched using the internal hom, and tensored simply using the tensor structure.]
+\item $\underline{\scrM}$ is \textbf{cotensored} if there is a bifunctor $(\DASH)^\DASH  :\scrV^{\op}\times \scrM\to\scrM$ giving natural isomorphisms
+\[\underline{\scrM}(m,n^v)\cong\underline{\scrV}(v,\underline{\scrM}(m,n)).\]
+In this case, the contravariant $\scrV$-functor $\underline{\scrM}(\DASH ,n):\underline{\scrM}^{\op}\to\underline{\scrV}$ admits a mutual right $\scrV$-adjoint $n^\DASH :\underline{\scrV}^{\op}\to\underline{\scrM}$.
+
+[A closed symmetric monoidal category is cotensored over itself, using the internal hom.]
+\item When $\underline{\scrM}$ is tensored and cotensored over $\scrV$, we have a \emph{two-variable} $\scrV$-adjunction
+\[\underline{\scrM}(v\otimes m,n)\cong\underline{\scrV}(v,\underline{\scrM}(m,n))\cong\underline{\scrM}(m,n^v).\]
+\item Any locally small category with products and coproducts is enriched, tensored, and cotensored over $\Set$. The tensor is given by the copower operation, and the cotensor is given by the power operation.
+\item If $\scrM$ is a tensored $\scrV$-category, then $\DASH \otimes \DASH :\scrV\times \scrM\to\scrM$ is unital and associative:
+\[*\otimes m\cong m\qquad\textup{and} \qquad (v\times w)\otimes m\cong v\otimes (w\otimes m).\]
+This fact \textbf{has a converse}.
+\item \textbf{Enrichment of adjunctions.} Suppose that $\underline{\scrM}$ and $\underline{\scrN}$ are tensored and cotensored $\scrV$-categories, and that 
+$\xymatrix@C=.41cm@1{
+F:\scrM  \ar@<.6ex>[r]&
+\scrN:G  \ar@<.4ex>[l]
+}$
+ is an (unenriched) adjunction of the underlying categories. Then any of the following determines the others:
+\begin{itemize}\squishlist
+\setlength{\parindent}{.25in}
+\item a $\scrV$-adjunction $\underline{\scrN}(Fm,n)\cong\underline{\scrM}(m,Gn)$;
+\item a $\scrV$-functor $F$ with isomorphisms $F(v\otimes m)\cong v\otimes Fm$;
+\item a $\scrV$-functor $G$ with isomorphisms $G(n^v)\cong (Gm)^v$.
+\end{itemize}
+\item \textbf{Transport of tensored and cotensored structures.} Suppose that we have an adjunction  $\xymatrix@C=.41cm@1{
+F:\scrV  \ar@<.6ex>[r]&
+\scrU:G  \ar@<.4ex>[l]
+}$ of \emph{closed} symmetric monoidal categories, such that $F$ is strong monoidal. Then we can turn tensored, cotensored and $\scrU$-enriched categories into tensored, cotensored and $\scrV$-enriched categories.
+
+Firstly, the adjunction makes $G$ lax monoidal, so that we could already turn $\scrU$-categories into $\scrV$-categories. We define the tensor, cotensor and enrichment by:
+\[v\star m:=Fv\otimes m,\qquad \{v,m\}:=F(m^v)\rednote{\textup{not $m^{Fv}$?}} \qquad \underline{\scrV}_\scrV(m,n)= G\underline{\scrU}_\scrV(m,n)\]
+\item Consider the adjunction
+\[\xymatrix@R=.3cm@C=2cm{
+\sSet  \ar@<.6ex>[r]^{|\DASH |}&
+\Top  \ar@<.4ex>[l]^{S}\\
+%X \ar@{|->}[r] & FX\\
+%GY             & Y \ar@{|->}[l]
+}\]
+If by $\Top$ we mean a convenient category, then $|\DASH |$ is strong monoidal. $S$ is always strong monoidal. In particular, we can always switch between topologically enriched and simplicially enriched functors using these functors.
+
+However, if a topologically enriched category is tensored and cotensored, we can obtain a tensored and cotensored simplicial category, but not the other way.
+\item If $\scrM$ is cocomplete, then $\scrM^{\Delta^{\op}}$ is simplicially enriched and tensored as follows. We have a cosimplicial comonad $\Delta^\bullet$ in $\scrM^{\Delta^{\op}}$ defined by:
+\[(\Delta^nX_\bullet)_m=(\Delta^n)_m\cdot X_m.\]
+This is a \emph{cosimplicial comonad} because there are natural transformations $\Delta^n\overset{\Delta}{\nt} \Delta^n\Delta^n$ for each $n$ reflecting the diagonal map, and natural transformations $\Delta^n\overset{\epsilon}{\nt} 1$ reflecting the collapse to a point.
+
+Now we can define
+\[\underline{\scrM}(X,Y ):=\scrM(\Delta^\bullet X,Y).\]
+This is a simplicial set, and the composition is given using the diagonal map in the comonod structure. The unit is given by the composite $\Delta^0\overset{\id_x}{\to}\scrM(x,x)\overset{\epsilon^*}{\to}\scrM(\Delta^\bullet X,X)$, where the middle term is the constant simplicial set on $\scrM(x,x)$.
+
+This has given the enrichment. The tensor structure is simply given by the same formula as above.
+\item \textbf{The Dold-Kan correspondence.} 
+Recall that all adjunctions from $\Delta$ are the same. We apply the $\mathsf{Ab}$-enriched version of this.
+
+First, we need to know what the normalised Moore complex of a simplicial set is. One takes the free abelian group at each level, then forms a differential using the face maps with alternating signs. Then to normalise, one quotients at each level by the degenerate simplices. \rednote{I should think more about this.}
+\item Suppose that $\underline{\scrM}$ and $\underline{\scrN}$ are cocomplete, and that 
+$\xymatrix@C=.41cm@1{
+F:\scrM  \ar@<.6ex>[r]&
+\scrN:G  \ar@<.4ex>[l]
+}$
+ is an adjunction. Then $F$ and $G$ applied levelwise gives a \textbf{simplicial} adjunction $\xymatrix@C=.41cm@1{
+F_*:\scrM^{\Delta^{\op}}  \ar@<.6ex>[r]&
+\scrN^{\Delta^{\op}}:G_*  \ar@<.4ex>[l]
+}$
+\end{itemise}
+\rednote{There's some more stuff to do on simplicial homotopy. I'll be back.}
 \end{4. Basic concepts in enriched category theory}
+\begin{5. The unreasonably effective (co)bar construction}
+\section*{The unreasonably effective (co)bar construction}
+
+\end{5. The unreasonably effective (co)bar construction}
+
 
 \end{document}
 
