@@ -4,10 +4,10 @@
 \input{../macros.tex}
 
 
+\excludeversion{solutions}
 \excludeversion{2. Kan Extensions}
 \excludeversion{3. Derived functors via deformations}
-\includeversion{4. Basic concepts in enriched category theory}
-\excludeversion{solutions}
+\excludeversion{4. Basic concepts in enriched category theory}
 \includeversion{5. The unreasonably effective (co)bar construction}
 
 
@@ -779,9 +779,98 @@ F_*:\scrM^{\Delta^{\op}}  \ar@<.6ex>[r]&
 \end{4. Basic concepts in enriched category theory}
 \begin{5. The unreasonably effective (co)bar construction}
 \section*{The unreasonably effective (co)bar construction}
-
+\begin{itemise}
+\setlength{\parindent}{.25in}
+\item For what follows, one should imagine that $\scrV=\sSet$, and $\scrM$ is some simplicially enriched, tensored and cotensored category. In any case, we should have a bifunctor $\scrV\times \scrM\overset{\otimes }{\to}\scrM$.
+\item Functors to $\Set$ can be thought of as functors to $\sSet$ taking values in discrete simplicial sets.
+\item \textbf{Functor tensor products.} Suppose that $\scrD$ is some diagram shape, and we have functors
+\begin{alignat*}{2}
+F
+&:
+\scrD\to\scrM%
+&\qquad&\text{(the `catalogue')}\\
+% Left hand side
+G
+% Relation
+&:
+% Right hand side
+\scrD^{\op}\to\scrV%
+% Comment
+&\qquad&\text{(the `instructions')}
+\end{alignat*}
+Then we may form the \textbf{functor tensor product} ${G}\otimes_{\scrD}{F}$, defined by
+\[{G}\otimes_{\scrD}{F}:=\int^{\scrD}G\otimes F=\colim\left(\vcenter{\xymatrix@C=1.4cm{
+\displaystyle\coprod_{f:d\to d'}Gd'\otimes Fd
+\ar[r]^-{Gf\otimes 1}
+\ar[d]_-{1\otimes Ff}
+&%r1c1
+\displaystyle\coprod_{d}Gd\otimes Fd
+\\%r1c2
+\displaystyle\coprod_{d'}Gd'\otimes Fd'
+\ar@{=}[ur]
+&%r2c1
+%r2c2
+}}\right)\]
+The idea here must be that we start with $Gd$ lots of each piece $Fd$ we find in the catalogue. Now maps $d\to d'$ are inclusions in the catalogue --- whenever a copy of $Fd'$ appears, it needs a copy of $Fd$ plugging into it for each map $f:d\to d'$. The map $Gf:Gd'\to Gd$ tells us which copy of $Fd$ to plug into a given copy of $Fd'$.
+\item \textbf{Examples:}
+\begin{itemize}\squishlist
+\setlength{\parindent}{.25in}
+\item If $G:\scrD^{\op}\to\sSet$ is constant at $*$, then we only order one of each piece $Fd$. They all have to get glued together, so that $*\otimes _\scrD F\cong\colim F$.
+\item Suppose that the instructions $G$ are actually a representable functor $\scrD(\DASH ,d)$. You order a copy of $Fe$ for each map $f:e\to d$, but then one notes that $f^*(\id_d)=f$, so that you're supposed to glue this $Fe$ to the copy of $Fd$ corresponding to $\id_d$ along $f_*:Fe\to Fd$. Thus, everything gets glued to one copy of $Fd$, and $\scrD(\DASH ,d)\otimes_\scrD F=Fd$.
+\item Pointwise Kan extensions are functor tensor products. In fact:
+\[\textup{in}\quad \vcenter{\xymatrix{
+\scrC\ar[rd]_-{K}\ar[rr]^-{F}_-{}="arF"&%r1c1
+&%r1c2
+\scrE\\%r1c3
+&%r2c1
+\scrD\ar@{->}[ur]_{\Lan_KF}\ar@{=>}"arF";[]_-{\eta}&%r2c2
+%r2c3
+}}\textup{\quad we have\quad }\Lan_KF(d)=\scrD(K\DASH ,d)\otimes_\scrC F.\]
+That is, $F$ is the catelogue of elements of $\scrE$, and we take a copy of $Fc$ every time $c\in\scrC$ lies over $d$.
+\item Geometric realisation is given by
+\[|X|:=\Delta^\bullet \otimes_{\Delta^{\op}}X_\bullet = X_\bullet\otimes_{\Delta} \Delta^\bullet.\]
+This is nice. We can think of $|X|$ as:
+\begin{itemize}\squishlist
+\setlength{\parindent}{.25in}
+\item gluing a $\Delta^n$'s worth of copies of $X_n$ together for each $n$; or
+\item gluing $X_n$'s worth of $n$-simplices together for each $n$.
+\end{itemize}
+\end{itemize}
+\end{itemise}
+\subsection*{The bar construction}
+Suppose that we have the same functors as before. We'll define the \textbf{two-sided simplicial bar construction} to be the simplicial object $B_\bullet (G,\scrD,F)$ in $\scrM$ defined by
+\[B_n(G,\scrD,F)=\coprod_{[n]\to\scrD}Gd_n\otimes Fd_0.\]
+To examine this, suppose that $a\overset{f}{\to}b\overset{g}{\to}c$ is a pair of composable arrows in $\scrD$. Then we have a diagram of sorts:
+\[{\def\objectstyle{\scriptstyle}
+\xymatrix@C=3cm@!C{
+Ga\otimes Fa
+\ar@{..>}[r]^{[a\overset{f}{\to}b]}="1"_{Gb\otimes Fa}="2"
+\ar@{..>}@/_7.1em/[rr]^{Gc\otimes Fa}="3"_{[a\overset{f}{\to}b\overset{g}{\to}c]}="4"
+\ar@{..>}@/_3em/[rr]^{[a\overset{gf}{\to}c]}="7"_{Gc\otimes Fa}="8"
+&%r1c1
+Gb\otimes Fb
+\ar@{..>}[r]^{[b\overset{g}{\to}c]}="5"_{Gc\otimes Fb}="6"
+&%r1c2
+Gc\otimes Fc
+%r1c3
+\ar"2";[ll]^-{Gf}
+\ar"2";[l]_-{Ff}
+\ar"6";[l]^-{Gg}
+\ar"6";[]_-{Fg}
+\ar"3";"2"^-{Gg}
+\ar"3";"6"_-{Ff}
+\ar"3";"8"_-{\id}
+%
+}}\]
 \end{5. The unreasonably effective (co)bar construction}
-
+\[{
+\def\objectstyle{\scriptstyle}
+\xymatrix{
+►&%r1c1
+▐▌►\\%r1c2
+▐▌►&%r2c1
+▐▌%r2c2
+}}\]
 
 \end{document}
 
