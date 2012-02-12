@@ -10,6 +10,10 @@
 \excludeversion{4. Basic concepts in enriched category theory}
 \includeversion{5. The unreasonably effective (co)bar construction}
 
+\newcommand{\Dminus}{\scrD^\textup{\tiny$-$}}
+\newcommand{\Dplus}{\scrD^\textup{\tiny$+$}}
+
+
 
 \UseAllTwocells
 \begin{document}
@@ -817,6 +821,39 @@ The idea here must be that we start with $Gd$ lots of each piece $Fd$ we find in
 \setlength{\parindent}{.25in}
 \item If $G:\scrD^{\op}\to\sSet$ is constant at $*$, then we only order one of each piece $Fd$. They all have to get glued together, so that $*\otimes _\scrD F\cong\colim F$.
 \item Suppose that the instructions $G$ are actually a representable functor $\scrD(\DASH ,d)$. You order a copy of $Fe$ for each map $f:e\to d$, but then one notes that $f^*(\id_d)=f$, so that you're supposed to glue this $Fe$ to the copy of $Fd$ corresponding to $\id_d$ along $f_*:Fe\to Fd$. Thus, everything gets glued to one copy of $Fd$, and $\scrD(\DASH ,d)\otimes_\scrD F=Fd$.
+\item Perhaps a more specialised example is when $\scrM=\scrV=\sSet$, and we have an object $d\in\scrD$. Set:
+\begin{alignat*}{2}
+F=\scrD(d,\DASH )
+&:
+\scrD\to\sSet%
+&\qquad&\text{representable (the `catalogue')}\\
+% Left hand side
+G
+% Relation
+&:
+% Right hand side
+\scrD^{\op}\to\sSet%
+% Comment
+&\qquad&\text{any functor (the `instructions')}
+\end{alignat*}
+We view $F$ as taking values in $\sSet$. \rednote{The following half makes sense:} Inside the coequaliser diagram, for each $f:d\to e$, we have a section like
+\[
+{
+\def\objectstyle{\scriptstyle}
+\xymatrix{
+&%r1c1
+Ge\otimes \scrD(d,d)
+\ar[ld]_-{1\otimes f_*}
+\ar[rd]^-{Gf\otimes 1}
+&%r1c2
+\\%r1c3
+Fe\otimes \scrD(d,e)
+&%r2c1
+&%r2c2
+Gd\otimes \scrD(d,d)%r2c3
+}}\]
+It's as if the $Ge\otimes f$ is being glued to $Gd\otimes \id_d$. So we find that:
+$G\otimes_\scrD\scrD(d,\DASH )=Gd$.
 \item Pointwise Kan extensions are functor tensor products. In fact:
 \[\textup{in}\quad \vcenter{\xymatrix{
 \scrC\ar[rd]_-{K}\ar[rr]^-{F}_-{}="arF"&%r1c1
@@ -826,7 +863,7 @@ The idea here must be that we start with $Gd$ lots of each piece $Fd$ we find in
 \scrD\ar@{->}[ur]_{\Lan_KF}\ar@{=>}"arF";[]_-{\eta}&%r2c2
 %r2c3
 }}\textup{\quad we have\quad }\Lan_KF(d)=\scrD(K\DASH ,d)\otimes_\scrC F.\]
-That is, $F$ is the catelogue of elements of $\scrE$, and we take a copy of $Fc$ every time $c\in\scrC$ lies over $d$.
+That is, $F$ is the catalogue of elements of $\scrE$, and we take a copy of $Fc$ every time $c\in\scrC$ lies over $d$.
 \item Geometric realisation is given by
 \[|X|:=\Delta^\bullet \otimes_{\Delta^{\op}}X_\bullet = X_\bullet\otimes_{\Delta} \Delta^\bullet.\]
 This is nice. We can think of $|X|$ as:
@@ -842,35 +879,99 @@ Suppose that we have the same functors as before. We'll define the \textbf{two-s
 \[B_n(G,\scrD,F)=\coprod_{[n]\to\scrD}Gd_n\otimes Fd_0.\]
 To examine this, suppose that $a\overset{f}{\to}b\overset{g}{\to}c$ is a pair of composable arrows in $\scrD$. Then we have a diagram of sorts:
 \[{\def\objectstyle{\scriptstyle}
-\xymatrix@C=3cm@!C{
+\xymatrix@!0@=3cm@!C{
 Ga\otimes Fa
-\ar@{..>}[r]^{[a\overset{f}{\to}b]}="1"_{Gb\otimes Fa}="2"
-\ar@{..>}@/_7.1em/[rr]^{Gc\otimes Fa}="3"_{[a\overset{f}{\to}b\overset{g}{\to}c]}="4"
-\ar@{..>}@/_3em/[rr]^{[a\overset{gf}{\to}c]}="7"_{Gc\otimes Fa}="8"
-&%r1c1
+\ar@{}[rr]|{Gb\otimes Fa}="2"
+\ar@{}[rd]|{Gc\otimes Fa}="8"
+&&%r1c1
 Gb\otimes Fb
-\ar@{..>}[r]^{[b\overset{g}{\to}c]}="5"_{Gc\otimes Fb}="6"
-&%r1c2
+\ar@{}[ld]|{Gc\otimes Fb}="6"
+\\&%r1c2
+\ar@{}"2"|(.657){Gc\otimes Fa}="3"
 Gc\otimes Fc
 %r1c3
-\ar"2";[ll]^-{Gf}
-\ar"2";[l]_-{Ff}
-\ar"6";[l]^-{Gg}
-\ar"6";[]_-{Fg}
+\ar"2";[lu]^-{Gf}
+\ar"2";[ru]_-{Ff}
+\ar"6";[ru]_-{Gg}
+\ar"6";[]^-{Fg}
 \ar"3";"2"^-{Gg}
-\ar"3";"6"_-{Ff}
+\ar"3";"6"^-{Ff}
 \ar"3";"8"_-{\id}
+\ar"8";[]_-{F(gf)}
+\ar"8";[lu]^-{G(gf)}
 %
 }}\]
-\end{5. The unreasonably effective (co)bar construction}
-\[{
-\def\objectstyle{\scriptstyle}
-\xymatrix{
-►&%r1c1
-▐▌►\\%r1c2
-▐▌►&%r2c1
-▐▌%r2c2
+with an object for each simplex of the nerve:
+\[{\def\objectstyle{\scriptstyle}
+\xymatrix@!0@=3cm@!C{
+[a]
+\ar@{}[rr]|{[a\overset{f}{\to}b]}="2"
+\ar@{}[rd]|{[a\overset{gf}{\to}c]}="8"
+&&%r1c1
+[b]
+\ar@{}[ld]|{[b\overset{g}{\to}c]}="6"
+\\&%r1c2
+\ar@{}"2"|(.657){[a\overset{f}{\to}b\overset{g}{\to}c]}="3"
+[c]
+%r1c3
+\ar"2";[lu]^-{s_1}
+\ar"2";[ru]_-{s_0}
+\ar"6";[ru]_-{s_1}
+\ar"6";[]^-{s_0}
+\ar"3";"2"^-{s_2}
+\ar"3";"6"^-{s_0}
+\ar"3";"8"_-{s_1}
+\ar"8";[]_-{s_0}
+\ar"8";[lu]^-{s_1}
+%
 }}\]
+\begin{itemise}
+\setlength{\parindent}{.25in}
+\item If $F$ and $G$ are both constant at $*$, then $B_{\bullet }(*,\scrD,*)=N\scrD$, the usual nerve of $\scrD$.
+\item The \textbf{bar construction} is the geometric realisation of the simplicial bar construction:
+\[B(G,\scrD,F):=B_\bullet (G,\scrD,F)\otimes _{\Delta^{\op}}\Delta^\bullet\to B_\bullet (G,\scrD,F)\otimes _{\Delta^{\op}}*=G\otimes _\scrD F.\]
+The tensor product is in fact the colimit of the simplicial bar construction, which is by definition just the colimit of the diagram
+$\vcenter{
+\def\labelstyle{\scriptstyle}
+\xymatrix@C=1.5cm@1{
+B_0(G,\scrD,F)
+\ar[r]|-(.65){s_0}
+&
+B_1(G,\scrD,F).
+\ar@<-1ex>[l]|-(.65){d_0}
+\ar@<+1ex>[l]|-(.65){d_1}
+}}$
+\item 
+\begin{itemize}\squishlist
+\setlength{\parindent}{.25in}
+\item Define a functor:
+\[\xymatrix@R=0mm{
+\ar[r]^-{\Dminus}%Name of map
+\scrD&%Source
+\sSet^{\scrD^{\op}}\\%Target
+d%x
+\ar@{|->}[r]&
+\scrD(\DASH ,d)%f(x)
+%\ar@{}[ul];[l]|{\rotatebox{90}{\tiny$\in$}} \ar@{}[u];[]|{\rotatebox{90}{\tiny$\in$}} 
+}\]
+\item Write $B(\scrD,\scrD,F)$ as a shorthand for $B(\scrD^-,\scrD,F)$, which is a functor $\scrD\to\scrM$, the simplicial bar construction on a catalogue consisting of a fixed catalogue $F$, and instructions $\Dminus(d)=\scrD(\DASH ,d)$, as a functor of $d$.
+\item This is functorial in $F$, giving a functor
+\[\xymatrix@R=0mm{
+\ar[r]^-{B(\scrD,\scrD,\DASH )}%Name of map
+\scrM^\scrD&%Source
+\scrM^\scrD\\%Target
+F%x
+\ar@{|->}[r]&
+B(\scrD,\scrD,F)%f(x)
+%\ar@{}[ul];[l]|{\rotatebox{90}{\tiny$\in$}} \ar@{}[u];[]|{\rotatebox{90}{\tiny$\in$}} 
+}\]
+This is an endofunctor of the category of $\scrD$-shaped diagrams in $\scrM$, and will prove to be a deformation for the colimit functor.
+\end{itemize}
+\end{itemise}
+\rednote{There's a lot more here to read.}
+
+\end{5. The unreasonably effective (co)bar construction}
+
 
 \end{document}
 
