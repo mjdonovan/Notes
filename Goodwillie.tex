@@ -1,0 +1,303 @@
+% !TEX root = z_output/_Goodwillie.tex
+
+\documentclass[11pt]{article}
+\input{../macros.tex}
+
+
+\includeversion{Calculus I}
+
+
+
+
+\UseAllTwocells
+\begin{document}
+\begin{Calculus I}
+\begin{itemise}
+\setlength{\parindent}{.25in}
+\item A homotopical functor $\scru\to\scrt$ is:
+\begin{itemize}\squishlist
+\setlength{\parindent}{.25in}
+\item  \textbf{excisive} if it sends (homotopy) pushouts to (homotopy) pullbacks.
+\item \textbf{reduced} if it sends the final object to a contractible space. (?)
+\end{itemize}
+\item We can  form the reduction $\widetilde{F}$ of a functor $F$ by defining $\widetilde{F}:Y\mapsto\fiber(F(Y)\to F(*))$.
+\item If the (homotopical) functor is excisive and reduced, we call it \textbf{linear}, and the spaces $F(S^i)$ form an $\Omega$-spectrum, called the coefficient spectrum.
+\item If $F$ is only reduced, the $F(S^i)$ form a prespectrum, whose associated spectrum is $\partial F(*)$, the derivative of $F$ at $*$.
+\item The differential of $F$ at $*$ is the (possibly nonlinear) functor
+\[D_*F:Y\mapsto\hocolim\left(\widetilde{F}(Y)\to\Omega\widetilde{F}(SY)\to\Omega^2\widetilde{F}(S^2Y)\to\cdots \right)\]
+When $F$ is \emph{stably excisive}, $D_*F$ is linear with coefficient spectrum $\partial F(*)$, and is the best linear approximation to $\widetilde{F}$: there's a natural transformation $\widetilde{F}\nt D_*F$, and its fiber, a functor $\scru\to\scrt$, approximately \emph{doubles connectivity}.
+
+$F$ is \textbf{stably excisive} if for some constant $c$, we have connectivities as marked in:
+\[\xymatrix{
+&%r1c1
+&%r1c2
+&%r1c3
+\textup{p.b.}
+\ar[rrd]
+\ar[rdd]
+&%r1c4
+&%r1c5
+\\%r1c6
+X\ar[r]_-{k_1}
+\ar[d]_-{k_2}
+&%r2c1
+X_1
+\ar[d]
+&%r2c2
+\makebox[0cm][l]{\,$\overset{F}{\mapsto}$}&%r2c3
+&
+FX
+\ar@{..>}[ul]^-{k_1+k_2-c}
+\ar[r]
+\ar[d]
+&%r2c4
+FX_1
+\ar[d]
+%r2c5
+\\%r2c6
+X_2\ar[r]
+&%r3c1
+X_{12}
+&%r3c2
+&&%r3c3
+FX_{2}
+\ar[r]
+&%r3c4
+FX_{12}
+}\]
+\item In general, we can form the derivative at a based space $(X,x)$, the spectrum:
+\[\partial_xF(X)= \left\{\fiber\left(F(X\vee S^i)\to F(X)\right)\right\}_\Omega\]
+and the differential, a functor on spaces over $X$:
+\[D_XF:\scru_X\to\scrT\textup{\qquad approximating the functor\qquad }y\mapsto\fiber(F(Y)\to F(X)).\]
+\item There is a notion of analytic, which means `stably $n$-excisive for every $n$'. If a functor is analytic, one can construct a Taylor tower:
+\[\xymatrix{
+\textup{homog deg 2}\ar[r]&\ar[d]P_2X\\
+D_XF(Y)\ar[r]&\ar[d]P_1X\\
+X\ar@{=}[r]
+&P_0X
+}
+\]
+with fibers \emph{homogeneous} of the relevant degree, and layers $P_n$ the best $n$-excisive approximation (?). When $Y\to X$ is $(\rho+1)$-connected, the tower converges to $F(Y)$. (Somehow, a number $\rho$ gets involved.)
+\end{itemise}
+\paragraph*{Conventions}
+\begin{itemize}\squishlist
+\setlength{\parindent}{.25in}
+\item We define $\hocolim$s via a simplicial bar construction and geometric realisation.
+\item Use the term `prespectrum' for any sequence of  pointed spaces and maps $C_i\to\Omega C_{i+1}$, and `spectrum' when these are equivalences. To $\Omega$-fy, one uses the spectrum $\left\{ \hocolim_j\Omega^jC_{j+i}\right\}$:
+\[\xymatrix@=3mm{
+\makebox[0cm][r]{$\hocolim($}C_0
+\ar[r]
+&
+\Omega C_1
+\ar[r]
+&%r1c1
+\Omega^2 C_2
+\ar[r]
+&%r1c2
+\Omega^3C_3
+\ar[r]
+&%r1c3
+\makebox[0cm][l]{$\cdots )$}&%r1c4
+\\
+&
+\makebox[0cm][r]{$\hocolim($}C_1
+\ar[r]
+&
+\Omega C_2
+\ar[r]
+&%r1c1
+\Omega^2 C_3
+\ar[r]
+&%r1c3
+\makebox[0cm][l]{$\cdots )$}&%r1c4
+\\
+&&
+\makebox[0cm][r]{$\hocolim($}C_2
+\ar[r]
+&
+\Omega C_3
+\ar[r]
+&%r1c3
+\makebox[0cm][l]{$\cdots )$}&%r1c4
+}\]
+Equivalence of spectra is defined levelwise, equivalence of prespectra is defined by equivalence on $\Omega$-fications.
+\item Suppose we want to form a prespectrum, but only have maps
+\[C_j\to D_j\overset{\sim}{\from}E_j\to\Omega C_{j+1}.\]
+Then we can form a prespectrum whose $j^\textup{th}$ term is
+\[\holimit\left(C_j\to D_j\overset{\sim}{\from}E_j\to\Omega C_{j+1}\to D_{j+1}\overset{\sim}{\from}E_{j+1}\to\Omega C_{j+2}\to\cdots \right).\]
+The hocolim doesn't see the fact that one of the maps goes the wrong way, so that this is essentially just $C_j$, but now has an evident map to loops on the term above it, giving a prespectrum.
+\end{itemize}
+\subsection*{Differentiation of functors}
+\begin{itemise}
+\setlength{\parindent}{.25in}
+\item We with to turn suitable functors $F:\scru\to\scrt$ into linear functors $D_XF:\scrU_X\to\scrt$. By linear, we mean:
+\begin{enumerate}\squishlist
+\setlength{\parindent}{.25in}
+\item homotopical;
+\item excisive: sending cartesian squares to cocartesian squares;
+\item reduced: sending the terminal element $X$ to a contractible space.
+\end{enumerate}
+\item (Take $X=*$.) Given a linear functor $L:\scru\to\scrt$, we have diagrams
+\[\vcenter{\xymatrix{
+Y
+\ar[r]
+\ar[d]
+&%r1c1
+CY
+\ar[d]
+\\%r1c2
+CY
+\ar[r]
+&%r2c1
+SY%r2c2
+}}\qquad \mapsto\qquad 
+\vcenter{\xymatrix{
+L(Y)
+\ar[r]
+\ar[d]
+&%r1c1
+\ast
+\ar[d]
+\\%r1c2
+\ast
+\ar[r]
+&%r2c1
+L(SY)%r2c2
+}}\qquad \implies \qquad \Omega L(SY)\overset{\sim}{\to}L(Y).
+\]
+Thus we obtain a spectrum $\textbf{L}(Y)$ with terms $L(S^jY)$, and a generalised homotopy theory by defining $h_*(Y)=\pi_{*+i}L(S^iY)$.
+\begin{itemize}\squishlist
+\item In fact, each $L_j:\scru\to\scrt$ is linear, as is $\textbf{L}:\scru\to\scrs$, the category of spectra.
+\setlength{\parindent}{.25in}
+\item A linear functor $\textbf{L}:\scru\to\scrs$ can be recovered from $\textbf{L}_0:\scru\to\scrt$ via a chain of weak equivalences between $\left\{L_j(Y)\right\}$ and $\{L_0(S^jY)\}$.
+\item There are functors as follows, and a comparison natural transformation
+\[\xymatrix{
+\textup{Linear}(\scru,\scrs)
+\ar[r]^-{\textup{ev}_{S^0}}
+\ar@{=}[d]^{}="mideq"
+&%r1c1
+\scrs
+\ar[dl]^-{\textbf{L}_\DASH }
+\\%r1c2
+\textup{Linear}(\scru,\scrs)
+&%r2c1
+%r2c2
+\ar@{}[u];"mideq"|(.7){\Longleftarrow}
+}\]
+Now the natural transformation is an equivalence on finite complexes, and there's a limit axiom which a linear functor may satisfy in order that it is always an equivalence.
+
+In particular, a linear functor is determined on finite complexes by the coefficient spectrum $\{L(S^j)\}$.
+\end{itemize}
+\item Define endofunctors $C_X,S_X:\scru_X\to\scru_X$, by letting $C_X$ be the mapping cone on the structure map $Y\to X$, and defining $S_X$ by the evident pushout. Then one may think of a linear functor $\scru_X\to\scrt$ as a `homology theory on $\scru_X$'.
+\item \textbf{Examples:} 
+\begin{itemize}\squishlist
+\setlength{\parindent}{.25in}
+\item The functor $Q_+:\scru\to\scrt$ defined by $Y\mapsto\colim(\Omega^i(S^i\wedge Y_+))$ is an excisive homotopy functor. Its reduction is linear, with coefficients the sphere spectrum $\Sigma^\infty_+(*)$.
+\item Given any fibration $E\downarrow X$, one may define an excisive homotopy functor $\scru_X\to \scrt$, given by $Y\mapsto Q_+(E\times _XY)$. The reduction is again linear.
+\end{itemize}
+\item A linear functor $L:\scru_X\to \scru$ has a coefficient spectrum $\{L(X\vee _ xS^i)\}$ at \textbf{each} point $x\in X$.\\
+\textbf{Proposition 1.7:} If a map $L\nt M$ of linear functors $\scru_X\to\scrt$ induces an equivalence of coefficient spectra at all $x\in X$, and the functors satisfy the limit axiom, the $L(Y)\to M(Y)$ is an equivalence for all $Y\in\scrU_X$.
+\item \textbf{Stable excision}: a functor satisfies `stable excision' if $E(c,\kappa)$ holds for some $c,\kappa$: whenever $k_1,k_2\geq\kappa$, we have connectivities:
+\[\xymatrix{
+&%r1c1
+&%r1c2
+&%r1c3
+\textup{p.b.}
+\ar[rrd]
+\ar[rdd]
+&%r1c4
+&%r1c5
+\\%r1c6
+X\ar[r]_-{k_1}
+\ar[d]_-{k_2}
+\ar@{}[rd]|{\textup{p.o.}}
+&%r2c1
+X_1
+\ar[d]
+&%r2c2
+\makebox[0cm][l]{\,$\overset{F}{\mapsto}$}&%r2c3
+&
+FX
+\ar@{..>}[ul]^-{k_1+k_2-c}
+\ar[r]
+\ar[d]
+&%r2c4
+FX_1
+\ar[d]
+%r2c5
+\\%r2c6
+X_2\ar[r]
+&%r3c1
+X_{12}
+&%r3c2
+&&%r3c3
+FX_{2}
+\ar[r]
+&%r3c4
+FX_{12}
+}\]
+The Blakers-Massey theorem states that the identity functor has $E(1,0)$.
+\item If $\Phi:\scru_X\to\scrt$ is a homotopy functor, define
+\[\xymatrix@R=0mm{
+\ar[r]^-{T\Phi}%Name of map
+\scru_X&%Source
+\scrt\qquad \qquad \qquad \qquad \qquad \qquad \qquad \qquad \qquad \\%Target
+Y%x
+\ar@{|->}[r]&
+\holimit\left(\Phi(C_XY)\to \Phi(S_XY)\from\Phi(C_XY)\right)%f(x)
+%\ar@{}[ul];[l]|{\rotatebox{90}{\tiny$\in$}} \ar@{}[u];[]|{\rotatebox{90}{\tiny$\in$}} 
+}\]
+This is another homotopy functor, and if $\Phi$ has $E(c,\kappa)$, $T\Phi$ has $E(c-1,\kappa-1)$. There's a natural map $t:\Phi\nt T\Phi$, which is an isomorphism when $\Phi$ is excisive. In particular, the functor
+\[\xymatrix@R=0mm{
+\ar[r]^-{P\Phi}%Name of map
+\scru_X&%Source
+\scrt\qquad \qquad \qquad \qquad \qquad \qquad \qquad \qquad \qquad\qquad\quad  \\%Target
+Y%x
+\ar@{|->}[r]&
+\hocolim(\Phi(Y)\to (T\Phi)(Y)\to (T^2\Phi)(Y)\to\cdots )%f(x)
+%\ar@{}[ul];[l]|{\rotatebox{90}{\tiny$\in$}} \ar@{}[u];[]|{\rotatebox{90}{\tiny$\in$}} 
+}\]
+is excisive whenever $\Phi$ is stably excisive.
+\item If $F:\scru\to\scrt$ is any functor, and $X$ is a space, we have a restriction $\Phi:\scru_X\to\scrt$. We define
+\begin{itemize}\squishlist
+\setlength{\parindent}{.25in}
+\item the \textbf{1-jet} of $F$ at $X$ to be $P_XF=P\Phi:\scru_X\to \scrt$;
+\item the \textbf{differential} of $F$ at $X$ to be the reduction $D_XF=\overline{D_XF}$.
+\end{itemize}
+Both are excisive homotopy functors, while only the differential need be linear.
+\item Two functors $\Phi,\Psi:\scru_X\to \scrt$ \textbf{agree to first order} via $f:\Phi\nt\Psi$ if
+\[\calO(c,\kappa):\quad \textup{whenever $Y\downarrow X$ is $k$-connected and $k\geq\kappa$, $\Phi(X)\to \Psi(Y)$ is $(2k-c)$-connected}.\]
+If $\Phi:\scru_X\to\scrt$ is stably excisive:
+\begin{itemize}\squishlist
+\setlength{\parindent}{.25in}
+\item $P\Phi$ is excisive; $D\Phi$ is linear;
+\item $\Phi$ agrees with $P\Phi$ to first order, as does $\overline{\Phi}$ with $D\Phi$
+\end{itemize}
+If $F:\scru\to\scrt$ is stably excisive and $X$ is any space:
+\begin{itemize}\squishlist
+\setlength{\parindent}{.25in}
+\item $P_XF$ is excisive; $D_XF$ is linear;
+\item As functors $\scru_X\to\scrt$, $F$ agrees with $P_XF$ to first order, as does $\overline{F}$ with $D_XF$
+\end{itemize}
+We define the \textbf{derivative} of $F$ at $(X,x)$ to be the coefficient spectrum of $D_XF$ at $x$, written $\partial_xF(X)$.
+\end{itemise}
+\rednote{There's a little more stuff here, mostly on the meaning of the term `best approximation', but I feel like doing something else.}
+\end{Calculus I}
+
+\end{document}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
