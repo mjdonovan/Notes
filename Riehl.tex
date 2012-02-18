@@ -971,8 +971,185 @@ This is an endofunctor of the category of $\scrD$-shaped diagrams in $\scrM$, an
 \rednote{There's a lot more here to read.}
 
 \end{5. The unreasonably effective (co)bar construction}
+\[\begin{array}{rcl}
+\textup{simplicial:}\quad &
+\vcenter{
+\def\labelstyle{\scriptstyle}
+\xymatrix@C=1.5cm@1{
+\scrC_0
+\ar[r]|(.65){s_0}
+&
+\scrC_1
+\ar@<-1ex>[l]|(.65){d_0}
+\ar@<+1ex>[l]|(.65){d_1}
+\ar@<+1ex>[r]|(.65){s_0}
+\ar@<-1ex>[r]|(.65){s_1}
+&
+\scrC_2
+\ar[l]|(.65){d_1}
+\ar@<-2ex>[l]|(.65){d_0}
+\ar@<+2ex>[l]|(.65){d_2}
+\ar[r]|(.65){s_1}
+\ar@<+2ex>[r]|(.65){s_0}
+\ar@<-2ex>[r]|(.65){s_2}
+&
+\scrC_3\makebox[0cm][l]{\,$\cdots $}
+\ar@<-3ex>[l]|(.65){d_0}
+\ar@<-1ex>[l]|(.65){d_1}
+\ar@<+1ex>[l]|(.65){d_2}
+\ar@<+3ex>[l]|(.65){d_3}
+}}
+\qquad &
+\begin{cases}
+s_i:&\textup{degeneracies};\\
+d_i:&\textup{faces};
+\end{cases}
+\\
+\textup{cosimplicial:}\quad &
+\vcenter{
+\def\labelstyle{\scriptstyle}
+\xymatrix@C=1.5cm@1{
+\Delta^0
+\ar[r];[]|(.65){\sigma_0}
+&
+\Delta^1
+\ar@<-1ex>[l];[]|(.65){\delta_0}
+\ar@<+1ex>[l];[]|(.65){\delta_1}
+\ar@<+1ex>[r];[]|(.65){\sigma_0}
+\ar@<-1ex>[r];[]|(.65){\sigma_1}
+&
+\Delta^2
+\ar[l];[]|(.65){\delta_1}
+\ar@<-2ex>[l];[]|(.65){\delta_0}
+\ar@<+2ex>[l];[]|(.65){\delta_2}
+\ar[r];[]|(.65){\sigma_1}
+\ar@<+2ex>[r];[]|(.65){\sigma_0}
+\ar@<-2ex>[r];[]|(.65){\sigma_2}
+&
+\Delta^3\makebox[0cm][l]{\,$\cdots $}
+\ar@<-3ex>[l];[]|(.65){\delta_0}
+\ar@<-1ex>[l];[]|(.65){\delta_1}
+\ar@<+1ex>[l];[]|(.65){\delta_2}
+\ar@<+3ex>[l];[]|(.65){\delta_3}
+}}
+\qquad &
+\begin{cases}
+\sigma_i:&\textup{codegeneracies};\\
+\delta_i:&\textup{cofaces}.
+\end{cases}
+\end{array}\]
+Restricting along a coface map $\delta_i$ we obtain a face of a singular simplex. Restricting along a codegeneracy map we obtain a degenerate singular simplex.
 
+Let's break down the definition of the bar construction a little. Suppose that we have a diagram $F:\scrd\to\scrm$. We'll take the tensor product over $\Delta^{\op}$ of the Yoneda embedding:
+\[\Delta^\bullet :\Delta\to\sSet
+\]
+and the bar construction:
+\[\qquad \vcenter{\xymatrix@R=0mm{
+\makebox[0cm][r]{ $B_\bullet (*,\scrd,F):$\,}\ar[r]%Name of map
+\Delta^{\op}&%Source
+\scrm&\textup{ given by }&%Target
+n%x
+\ar@{|->}[r]&
+\displaystyle \coprod_{\vec\partial :[n]\to\scrd}F\vec\partial_0.%f(x)
+%\ar@{}[ul];[l]|{\rotatebox{90}{\tiny$\in$}} \ar@{}[u];[]|{\rotatebox{90}{\tiny$\in$}} 
+}}
+%\qquad :\Delta^{\op}\to\scrm,\ n\mapsto\displaystyle\coprod_{d:[n]\to\scrd}Fd_0.
+\]
+Note that the only standard generating morphism in $\Delta^{\op}$ which alters the summand $F\vec\partial_0$ is $d_0$, the $0^\textup{th}$ face map. This drops the first map $\vec\partial_{01}$ from the simplex $\vec\partial$, and maps $F\vec\partial_0$ to $F\vec\partial_1$ using $F\vec\partial_{01}$. In the end, we have a coequaliser describing the functor tensor product:
+\[
+\vcenter{\xymatrix@1{
+\displaystyle\coprod_{f\in\Delta^{\op}(m,n)}\displaystyle \coprod_{\vec\partial:[m]\to\scrd}\Delta^n\otimes F\vec\partial_0
+\ar@<+.5ex>[r]
+\ar@<-.5ex>[r]
+&%r1c1
+\displaystyle\coprod_{m} \displaystyle\coprod_{\vec\partial :[m]\to\scrd}\Delta^n\otimes F\vec\partial_0%r1c2
+}}\]
+In fact, it's enough to restrict the left hand side to the generators $s_i,d_i$ of $\Delta^{\op}$. We can summarise the relations so imposed thus:
+\[\begin{array}{rll}
+\textup{(a)}:\quad &
+n\overset{s_i}{\to}n+1\ (0\leq i\leq n)\quad &
+\vcenter{\xymatrix@R=.43cm@C=4cm@!0@1{
+&%r1c1
+\Delta^m\otimes \left(F\vec\partial_0\right)_{\vec\partial}
+\\%r1c2
+\Delta^{m+1}\otimes F\vec\partial_0
+\ar[ur]^-{\sigma_i\otimes 1}
+\ar[dr]_-{=}
+&%r2c1
+\\%r2c2
+&%r3c1
+\Delta^{m+1}\otimes \left(F\vec\partial_0\right) _{s_i\vec\partial}%r3c2
+}}\\
+\textup{(b)}:\quad &
+n\overset{d_i}{\to}n+1\ (0<i\leq n)\qquad &
+\vcenter{\xymatrix@R=.43cm@C=4cm@!0@1{
+&%r1c1
+\Delta^m\otimes \left(F\vec\partial_0\right)_{\vec\partial}
+\\%r1c2
+\Delta^{m-1}\otimes F\vec\partial_0
+\ar[ur]^-{\delta_i\otimes 1}
+\ar[dr]_-{=}
+&%r2c1
+\\%r2c2
+&%r3c1
+\Delta^{m-1}\otimes \left(F\vec\partial_0\right) _{d_i\vec\partial}%r3c2
+}}\\
+\textup{(c)}:\quad &
+n\overset{d_0}{\to}n+1\qquad &
+\vcenter{\xymatrix@R=.43cm@C=4cm@!0@1{
+&%r1c1
+\Delta^m\otimes \left(F\vec\partial_0\right)_{\vec\partial}
+\\%r1c2
+\Delta^{m-1}\otimes F\vec\partial_0
+\ar[ur]^-{\delta_0\otimes 1}
+\ar[dr]_-{1\otimes F\vec\partial_{01}}
+&%r2c1
+\\%r2c2
+&%r3c1
+\Delta^{m-1}\otimes \left(F\vec\partial_1\right) _{d_0\vec\partial}%r3c2
+}}
+\end{array}\]
+That is:
+\begin{itemise}
+\setlength{\parindent}{.25in}
+\item[(a):] Any summands corresponding to degenerate simplices $s_i\vec\partial$ are collapsed.
+\item[(b):] To apply the inner $d_i$ is to compose maps; the first codomain doesn't change. We identify the lower dimensional simplex corresponding to $d_i\vec\partial$ with the corresponding edge of that corresponding to $\vec\partial$.
 
+To apply $d_n$ is to drop the last map in $\vec\partial$. We perform a similar gluing.
+\item[(c):] To apply $d_0$ is to drop the first map in $\vec\partial$. The first codomain in $d_0\vec\partial$ is $\vec\partial_1$, and we perform a mapping-cylinder type construction along $F\vec\partial_{01}$.
+\end{itemise}
+The gluings in (b) and (c) can be described by the following diagram, where $\vec\partial$ is the 2-simplex $\bullet \overset{f}{\to}\bullet \overset{g}{\to}\bullet $ in the nerve.
+\begin{center}
+\begin{tikzpicture}
+\path (0,0) node[above left,font=\scriptsize] (v00) {$0$};
+\path (1,0) node[above right,font=\scriptsize] {$1$};
+\path (1,-1) node[below right,font=\scriptsize] {$2$};
+\draw[-] (0,0) -- (1,0) -- (1,-1) -- cycle;
+
+\path (.65,-.250) node[font=\scriptsize] {$A_{f,g}$};
+
+\path (0-.5,-1) node[left,font=\scriptsize] {$0$};
+\path (1-.5,-2) node[right,font=\scriptsize] {$1$};
+\draw[-] (0-.5,-1)-- (1-.5,-2);
+
+\path (0,1) node[left,font=\scriptsize] (v00) {$0$};
+\path (1,1) node[right,font=\scriptsize] {$1$};
+\draw[-] (0,1)-- (1,1);
+
+\path (2,0) node[above,font=\scriptsize] {$0$};
+\path (2,-1) node[below,font=\scriptsize] {$1$};
+\draw[-] (2,0)-- (2,-1);
+\path (2.25,-.50) node[font=\scriptsize] {$B_{g}$};
+\path (.5,1.20) node[font=\scriptsize] {$A_{f}$};
+\path (.25-.5,-1.620) node[font=\scriptsize] {$A_{gf}$};
+\path[->,font=\tiny] (.55,.1) edge node[right]{$1_A$} (.55,.9);
+\path[->,font=\tiny] (.45,.9) edge node[left]{$\delta_2$} (.45,.1);
+\path[->] (1.9,-.45) edge node[above,font=\tiny]{$\delta_0$} (1.1,-.45);
+\path[->] (1.1,-.55) edge node[below,font=\tiny]{$f$} (1.9,-.55);
+\path[->,font=\tiny] (.55-.5,.1-1.55) edge node[right]{$\delta_1$} (.55,.9-1.55);
+\path[->,font=\tiny] (.45,.9-1.45) edge node[left]{$1_A$} (.45-.5,.1-1.45);
+\end{tikzpicture}
+\end{center}
 \end{document}
 
 
