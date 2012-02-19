@@ -3,8 +3,10 @@
 \documentclass[11pt]{article}
 \input{../macros.tex}
 
-
 \excludeversion{solutions}
+
+\def\excludeversion#1{\includeversion{#1}}
+
 \excludeversion{2. Kan Extensions}
 \excludeversion{3. Derived functors via deformations}
 \excludeversion{4. Basic concepts in enriched category theory}
@@ -297,7 +299,7 @@ This most recent limit exists whenever $\Ran_KF$ is pointwise, in which case it 
 \begin{thm*}
 When $\scrE$ is complete and $K$ is fully faithful, the right Kan extension is literally just an extension of functors!
 \end{thm*}
-From trivial Kan extensions we can deduce both the Yoneda lemma and the coYoneda lemma, the latter allows us to prove the density theorem (any presheaf is canonically a colimit of representable presheaves.)
+From trivial Kan extensions we can deduce both the Yoneda lemma and the coYoneda lemma, the latter allows us to prove the density theorem (any presheaf is canonically a colimit of representable presheaves).
 \subsubsection*{`All adjunctions on simplicial sets are the same'}
 Let $\scrE$ be cocomplete and locally small. Let $\Delta^\bullet:\Delta\to\scrE$ be a functor, writing $\Delta^n$ for the image of $[n]$. Then define $L:\sSet\to\calE$ to be the left Kan extension:
 \[\xymatrix{
@@ -820,7 +822,11 @@ The idea here must be that we start with $Gd$ lots of each piece $Fd$ we find in
 \begin{itemize}\squishlist
 \setlength{\parindent}{.25in}
 \item If $G:\scrD^{\op}\to\sSet$ is constant at $*$, then we only order one of each piece $Fd$. They all have to get glued together, so that $*\otimes _\scrD F\cong\colim F$.
-\item Suppose that the instructions $G$ are actually a representable functor $\scrD(\DASH ,d)$. You order a copy of $Fe$ for each map $f:e\to d$, but then one notes that $f^*(\id_d)=f$, so that you're supposed to glue this $Fe$ to the copy of $Fd$ corresponding to $\id_d$ along $f_*:Fe\to Fd$. Thus, everything gets glued to one copy of $Fd$, and $\scrD(\DASH ,d)\otimes_\scrD F=Fd$.
+\item Suppose that the instructions $G$ are actually a representable functor $\scrD(\DASH ,d)$. You order a copy of $Fe$ for each map $f:e\to d$, but then one notes that $f^*(\id_d)=f$, so that you're supposed to glue this $Fe$ to the copy of $Fd$ corresponding to $\id_d$ along $f_*:Fe\to Fd$. Thus, everything gets glued to one copy of $Fd$, and $\scrD(\DASH ,d)\otimes_\scrD F=Fd$. This is precisely the \textbf{coYoneda lemma}.
+\begin{itemize}\squishlist
+\setlength{\parindent}{.25in}
+\item Suppose now that $F:\scrd\to\Set$, viewed as a presheaf on $\scrd^{\op}$. Then by this isomorphism, $F$ is the functor $d\mapsto\int^{c\in\scrd}\scrd(c ,d)\otimes  Fc=\int^{c\in\scrd}Fc\cdot\scrd(c ,d)$, a colimit of representable functors. This is the \textbf{density theorem}.
+\end{itemize}
 \item Perhaps a more specialised example is when $\scrM=\scrV=\sSet$, and we have an object $d\in\scrD$. Set:
 \begin{alignat*}{2}
 F=\scrD(d,\DASH )
@@ -968,77 +974,7 @@ B(\scrD,\scrD,F)%f(x)
 This is an endofunctor of the category of $\scrD$-shaped diagrams in $\scrM$, and will prove to be a deformation for the colimit functor.
 \end{itemize}
 \end{itemise}
-\rednote{There's a lot more here to read.}
-
-\end{5. The unreasonably effective (co)bar construction}
-\[\begin{array}{rcl}
-\textup{simplicial:}\quad &
-\vcenter{
-\def\labelstyle{\scriptstyle}
-\xymatrix@C=1.5cm@1{
-\scrC_0
-\ar[r]|(.65){s_0}
-&
-\scrC_1
-\ar@<-1ex>[l]|(.65){d_0}
-\ar@<+1ex>[l]|(.65){d_1}
-\ar@<+1ex>[r]|(.65){s_0}
-\ar@<-1ex>[r]|(.65){s_1}
-&
-\scrC_2
-\ar[l]|(.65){d_1}
-\ar@<-2ex>[l]|(.65){d_0}
-\ar@<+2ex>[l]|(.65){d_2}
-\ar[r]|(.65){s_1}
-\ar@<+2ex>[r]|(.65){s_0}
-\ar@<-2ex>[r]|(.65){s_2}
-&
-\scrC_3\makebox[0cm][l]{\,$\cdots $}
-\ar@<-3ex>[l]|(.65){d_0}
-\ar@<-1ex>[l]|(.65){d_1}
-\ar@<+1ex>[l]|(.65){d_2}
-\ar@<+3ex>[l]|(.65){d_3}
-}}
-\qquad &
-\begin{cases}
-s_i:&\textup{degeneracies};\\
-d_i:&\textup{faces};
-\end{cases}
-\\
-\textup{cosimplicial:}\quad &
-\vcenter{
-\def\labelstyle{\scriptstyle}
-\xymatrix@C=1.5cm@1{
-\Delta^0
-\ar[r];[]|(.65){\sigma_0}
-&
-\Delta^1
-\ar@<-1ex>[l];[]|(.65){\delta_0}
-\ar@<+1ex>[l];[]|(.65){\delta_1}
-\ar@<+1ex>[r];[]|(.65){\sigma_0}
-\ar@<-1ex>[r];[]|(.65){\sigma_1}
-&
-\Delta^2
-\ar[l];[]|(.65){\delta_1}
-\ar@<-2ex>[l];[]|(.65){\delta_0}
-\ar@<+2ex>[l];[]|(.65){\delta_2}
-\ar[r];[]|(.65){\sigma_1}
-\ar@<+2ex>[r];[]|(.65){\sigma_0}
-\ar@<-2ex>[r];[]|(.65){\sigma_2}
-&
-\Delta^3\makebox[0cm][l]{\,$\cdots $}
-\ar@<-3ex>[l];[]|(.65){\delta_0}
-\ar@<-1ex>[l];[]|(.65){\delta_1}
-\ar@<+1ex>[l];[]|(.65){\delta_2}
-\ar@<+3ex>[l];[]|(.65){\delta_3}
-}}
-\qquad &
-\begin{cases}
-\sigma_i:&\textup{codegeneracies};\\
-\delta_i:&\textup{cofaces}.
-\end{cases}
-\end{array}\]
-Restricting along a coface map $\delta_i$ we obtain a face of a singular simplex. Restricting along a codegeneracy map we obtain a degenerate singular simplex.
+\begin{shaded}
 
 Let's break down the definition of the bar construction a little. Suppose that we have a diagram $F:\scrd\to\scrm$. We'll take the tensor product over $\Delta^{\op}$ of the Yoneda embedding:
 \[\Delta^\bullet :\Delta\to\sSet
@@ -1150,6 +1086,8 @@ The gluings in (b) and (c) can be described by the following diagram, where $\ve
 \path[->,font=\tiny] (.45,.9-1.45) edge node[left]{$1_A$} (.45-.5,.1-1.45);
 \end{tikzpicture}
 \end{center}
+\end{shaded}
+\end{5. The unreasonably effective (co)bar construction}
 \end{document}
 
 
