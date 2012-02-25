@@ -2,9 +2,9 @@
 
 \documentclass[11pt]{article}
 \input{../macros.tex}
+\usepackage{amscd}
 
-
-\includeversion{Calculus I}
+\excludeversion{Calculus I}
 
 
 
@@ -65,6 +65,7 @@ FX_{2}
 &%r3c4
 FX_{12}
 }\]
+
 \item In general, we can form the derivative at a based space $(X,x)$, the spectrum:
 \[\partial_xF(X)= \left\{\fiber\left(F(X\vee S^i)\to F(X)\right)\right\}_\Omega\]
 and the differential, a functor on spaces over $X$:
@@ -307,13 +308,321 @@ Now, to form an analogy with the previous formula, one starts by linearising $F$
 %
 %Here, instead of being defined on a tangent space, the differential $D_XF$ is defined for spaces close to $X$, that is, spaces $Y$ with a map to $X$. This probably isn't the best way to say this, but I don't know what is.
 \end{shaded}
+
+\subsection*{III.1 The Taylor tower}
+\[\xymatrix{
+P(n+1)\times P_0(n+1)^i
+&%r1c1
+P_0(n+1)^{i+1}
+\ar[l]
+&%r1c2
+T_n^i
+\ar[r]
+\ar[d]_{}="1"
+&%r1c3
+T_n^{i+1}
+\ar[d]
+\\%r1c4
+P(n+1)\times P_0(n)^i
+\ar[u]
+&%r2c1
+P_0(n)^{i+1}
+\ar[l]
+\ar[u]_{}="2"
+&%r2c2
+T^i_{n-1}
+\ar[r]
+&%r2c3
+T^{i+1}_{n-1}
+%r2c4
+}\]
+\subsection*{III.2 Delooping homogeneous functors}
+\begin{thm*}[\textbf{2.1}]
+The functor
+$
+\calH_n(\calC,\calS p)\overset{\Omega^\infty}{\to}\calH_n(\calC,\calT)
+$
+has an inverse up to weak equivalence.
+\end{thm*}
+This will be easy enough given a delooping on $\calh_n(\calc,\calt)$, written $F\mapsto BF$:
+\begin{lem*}[\textbf{2.2}]
+Let $n>0$. If $F:\calC_Y\to\calT$ is
+any reduced ($F(Y)\sim *$) homotopy functor, then up to natural equivalence
+there is a fibration sequence
+$$\CD
+                            P_nF @>{q_nF}>> P_{n-1}F @>>> R_nF
+\endCD
+$$
+in which the functor $R_nF$ is $n$-homogeneous.
+\end{lem*}
+
+
+
+
+More precisely, we will obtain a
+natural  diagram of homotopy functors
+\[
+\CD
+P_nF @>{q_nF}>> P_{n-1}F\\
+@A{\sim}AA @AA{\sim}A\\
+\hat P_nF @>>> \tilde P_{n-1}F\\
+@VVV @VVV\\
+K_nF @>>> R_nF
+%\endCD
+\endCD\tag{2.3}
+\]
+in which the marked arrows are equivalences, the lower square
+is cartesian,
+$R_nF$ is
+$n$-homogeneous, and $K_nF$ is contractible. (If $F$ were not reduced,
+then in fact $K_nF$ would be equivalent to the constant functor
+$F(Y)$.)
+
+{
+%%% BEGIN: \usebox{\saveboxKPH}
+\newsavebox{\saveboxKPH}
+\sbox{\saveboxKPH}{
+$\vcenter{\def\objectstyle{\scriptstyle} \xymatrix@!0@R=.5cm@C=.5cm{
+\circ    &&%\ar[dd]\ar[rd]\ar[rr] &&
+\bullet   \ar'[d][dd]\ar[rd]\\&
+\bullet  \ar[dd]\ar[rr] &&
+\bullet  \ar[dd] \\
+\bullet   \ar'[r][rr]\ar[rd] &&
+\bullet   \ar[rd] \\&
+\bullet  \ar[rr] &&
+\bullet 
+}}$
+}%%% END:  \usebox{\saveboxKPH}
+%%% BEGIN: \usebox{\saveboxCJR}
+\newsavebox{\saveboxCJR}
+\sbox{\saveboxCJR}{
+$\vcenter{\def\objectstyle{\scriptstyle} \xymatrix@!0@R=.5cm@C=.5cm{
+\circ    &&%\ar[dd]\ar[rd]\ar[rr] &&
+\bullet   \ar[dd]\ar[rd]\\&
+\circ  &&%\ar[dd]\ar[rr] &&
+\bullet  \ar[dd] \\
+\bullet   \ar[rr]\ar[rd] &&
+\bullet   \ar[rd] \\&
+\bullet  \ar[rr] &&
+\bullet 
+}}$
+}%%% END:  \usebox{\saveboxCJR}
+%%% BEGIN: \usebox{\saveboxXWC}
+\newsavebox{\saveboxXWC}
+\sbox{\saveboxXWC}{
+$\vcenter{\def\objectstyle{\scriptstyle} \xymatrix@!0@R=.5cm@C=.5cm{
+\circ    &&%\ar[dd]\ar[rd]\ar[rr] &&
+\bullet   \ar[dd]\\&
+  &&%\ar[dd]\ar[rr] &&
+  &&\\%\ar[dd] \\
+\bullet   \ar[rr] &&
+\bullet    \\&
+  &&%\ar[rr] &&
+\textup{}
+}}$
+}%%% END:  \usebox{\saveboxXWC}
+\[\xymatrix{
+\usebox{\saveboxKPH}
+►&%r1c1
+\usebox{\saveboxCJR}
+▐▌►&%r1c2
+\usebox{\saveboxXWC}
+▐▌►\\%r1c3
+▐▌►&%r2c1
+▐▌►&%r2c2
+▐▌%r2c3
+}\]
+}
+\[{
+\def\objectstyle{\scriptstyle}
+\def\labelstyle{\scriptstyle}
+\xymatrix@R=8mm@C=12mm@!0{
+|n+1|^{i}
+\ar@{=}[ddd]
+\ar[rrrr]
+&%r1c1
+&%r1c2
+&%r1c3
+&%r1c4
+\|n+1\||n+1|^{i}
+\ar@{=}'[d][ddd]
+&%r1c5
+&%r1c6
+&%r1c7
+&%r1c8
+|n+1|^{i+1}
+\ar@{=}'[d][ddd]
+\ar@{=}[rrrr]
+\ar[llll]
+&%r1c9
+&%r1c10
+&%r1c11
+&%r1c12
+|n+1|^{i+1}
+\ar@{=}'[d][ddd]
+&%r1c13
+\\%r1c14
+&%r2c1
+&%r2c2
+|n|^i
+\ar[ull]
+\ar[ddd]
+\ar[rrrr]
+&%r2c3
+&%r2c4
+&%r2c5
+&%r2c6
+\|n+1\||n|^i
+\ar[ddd]
+\ar[ull]
+&%r2c7
+&%r2c8
+&%r2c9
+&%r2c10
+|n+1||n|^i
+\ar[ddd]
+\ar[ull]
+\ar[llll]
+\ar[rrrr]
+►&%r2c11
+▐▌►&%r2c12
+▐▌►&%r2c13
+▐▌►&%r2c14
+|n|^{i+1}
+\ar[ull]
+\ar[ddd]
+\\%r2c15
+▐▌►&%r3c1
+▐▌►&%r3c2
+▐▌►&%r3c3
+▐▌►&%r3c4
+▐▌►&%r3c5
+▐▌►&%r3c6
+▐▌►&%r3c7
+▐▌►&%r3c8
+▐▌►&%r3c9
+▐▌►&%r3c10
+▐▌►&%r3c11
+▐▌►&%r3c12
+▐▌►&%r3c13
+▐▌►\\%r3c14
+|n+1|^{i}
+\ar'[rr][rrrr]
+&%r1c1
+&%r1c2
+&%r1c3
+&%r1c4
+\|n+1\||n+1|^{i}
+&%r1c5
+&%r1c6
+&%r1c7
+&%r1c8
+|n+1|^{i+1}
+\ar@{=}'[rr][rrrr]
+\ar'[ll][llll]
+&%r1c9
+&%r1c10
+&%r1c11
+&%r1c12
+|n+1|^{i+1}
+&%r1c13
+\\%r1c14
+&%r2c1
+&%r2c2
+B_n^i
+\ar[ull]
+\ar[rrrr]
+&%r2c3
+&%r2c4
+&%r2c5
+&%r2c6
+\|n+1\|B_n^i
+\ar[ull]
+&%r2c7
+&%r2c8
+&%r2c9
+&%r2c10
+|n+1|B_n^i
+\ar[ull]
+\ar[llll]
+\ar[rrrr]
+►&%r2c11
+▐▌►&%r2c12
+▐▌►&%r2c13
+▐▌►&%r2c14
+B_n^{i+1}
+\ar[ull]
+\\%r2c15
+▐▌►&%r6c1
+▐▌►&%r6c2
+▐▌►&%r6c3
+▐▌►&%r6c4
+▐▌►&%r6c5
+▐▌►&%r6c6
+▐▌►&%r6c7
+▐▌►&%r6c8
+▐▌►&%r6c9
+▐▌►&%r6c10
+▐▌►&%r6c11
+▐▌►&%r6c12
+▐▌►&%r6c13
+▐▌►\\%r6c14
+A_{n,i}
+\ar[uuu]
+\ar'[rr][rrrr]
+&%r1c1
+&%r1c2
+&%r1c3
+&%r1c4
+\|n+1\|A_{n,i}
+\ar'[uu][uuu]
+&%r1c5
+&%r1c6
+&%r1c7
+&%r1c8
+|n+1|A_{n,i}
+\ar'[uu][uuu]
+\ar'[rr][rrrr]
+\ar'[ll][llll]
+&%r1c9
+&%r1c10
+&%r1c11
+&%r1c12
+A_{n,i+1}
+\ar'[uu][uuu]
+&%r1c13
+\\%r1c14
+&%r2c1
+&%r2c2
+C_{n,i}
+\ar[ull]
+\ar[uuu]
+\ar[rrrr]
+&%r2c3
+&%r2c4
+&%r2c5
+&%r2c6
+\|n+1\|C_{n,i}
+\ar[uuu]
+\ar[ull]
+&%r2c7
+&%r2c8
+&%r2c9
+&%r2c10
+|n+1|C_{n,i}
+\ar[uuu]
+\ar[ull]
+\ar[llll]
+\ar[rrrr]
+►&%r2c11
+▐▌►&%r2c12
+▐▌►&%r2c13
+▐▌►&%r2c14
+C_{n,i+1}
+\ar[ull]
+\ar[uuu]
+}}\]
 \end{document}
-
-
-
-
-
-
 
 
 
