@@ -5,13 +5,14 @@
 
 \excludeversion{solutions}
 
-\def\excludeversion#1{\includeversion{#1}}
+%\def\excludeversion#1{\includeversion{#1}}
 
 \excludeversion{2. Kan Extensions}
 \excludeversion{3. Derived functors via deformations}
-\excludeversion{4. Basic concepts in enriched category theory}
-\includeversion{5. The unreasonably effective (co)bar construction}
-
+\includeversion{4. Basic concepts in enriched category theory}
+\excludeversion{5. The unreasonably effective (co)bar construction}
+\excludeversion{6. Homotopy limits and colimits, the theory}
+\includeversion{7. Homotopy limits and colimits, the practice}
 \newcommand{\Dminus}{\scrD^\textup{\tiny$-$}}
 \newcommand{\Dplus}{\scrD^\textup{\tiny$+$}}
 
@@ -84,7 +85,7 @@ Suppose that $F,G:\scrC\to\scrE$ are two functors, with $\scrC$ small and $\scrE
 Then the end of $\scrE(F\DASH ,G\DASH )$ is the following equaliser in $\Set$:
 \[\vcenter{\xymatrix{
 \displaystyle\prod_{f:c\to c'}\scrE(Fc',Gc)&%r1c1
-\displaystyle\prod_{c\in\ob\scrC}\scrE(Fc,Gc)
+\displaystyle\prod_{c\in\ob\scrC} \scrE(Fc,Gc)
 \ar@<-1ex>[l]_-{\{f\}^*}
 \ar@<.51ex>[l]^-{\{f\}^*}
 %r1c2
@@ -168,7 +169,8 @@ Suppose we have a functor $K:\scrC\to\scrD$, and we are interested in extending 
 }\]
 Instead, we hope to find a functor $\Lan_KF$, and a natural transformation as follows
 \[\xymatrix{
-\scrC\ar[rd]_-{K}\ar[rr]^-{F}_-{}="arF"&%r1c1
+\scrC
+\ar[rd]_-{K}\ar[rr]^-{F}_-{}="arF"&%r1c1
 &%r1c2
 \scrE\\%r1c3
 &%r2c1
@@ -177,7 +179,8 @@ Instead, we hope to find a functor $\Lan_KF$, and a natural transformation as fo
 }\]
 which is universal in the sense that any other similar diagram factors as
 \[\xymatrix{
-\scrC\ar[rd]_-{K}\ar[rr]^-{F}_-{}="arF"&%r1c1
+\scrC
+\ar[rd]_-{K}\ar[rr]^-{F}_-{}="arF"&%r1c1
 &%r1c2
 \scrE\\%r1c3
 &%r2c1
@@ -193,12 +196,13 @@ is an isomorphism for all functors $G\in\ob(\scrE^\scrD)$.
 
 One sees then that we have an adjunction $\scrE^\scrD(\Lan_KF,G)\to \scrE^\scrC(F,G\circ K)$, and in fact the same happens for right Kan extensions:
 \[\xymatrix@C=1.5cm{
-\scrE^\scrC\ar@/^1.2em/[r]^-{\Lan_K}_-{\perp} \ar@/_1.2em/[r]_-{\Ran_K}^-{\perp}&%r1c1
+\scrE^\scrC
+\ar@/^1.2em/[r]^-{\Lan_K}_-{\perp} \ar@/_1.2em/[r]_-{\Ran_K}^-{\perp}&%r1c1
 \scrE^\scrD\ar[l]|{K^*}%r1c2
 }\]
 \subsection*{A formula for left Kan extensions}
 It is claimed that when $\scrE$ is cocomplete, we can compute $\Lan_KF$ objectwise, by the formula:
-\[\Lan_KF(d)=\int^{c\in\scrC}\scrD(Kc,d)\cdot Fc=
+\[\Lan_KF(d)= \int^{c\in\scrC}\scrD(Kc,d)\cdot Fc=
 \colim\left(\vcenter{\xymatrix{
 {\displaystyle\coprod_{f:c\to c'}}\scrD(Kc',d)\cdot Fc\ar[r]^-{f^*\cdot1}\ar[d]_-{1\cdot f_*}&%r1c1
 {\displaystyle\coprod_{c}}\scrD(Kc,d)\cdot Fc\ar@{=}[ld]\\%r1c2
@@ -805,7 +809,7 @@ G
 &\qquad&\text{(the `instructions')}
 \end{alignat*}
 Then we may form the \textbf{functor tensor product} ${G}\otimes_{\scrD}{F}$, defined by
-\[{G}\otimes_{\scrD}{F}:=\int^{\scrD}G\otimes F=\colim\left(\vcenter{\xymatrix@C=1.4cm{
+\[\left(\textup{ins}\otimes _\scrd\textup{cat}\right)={G}\otimes_{\scrD}{F}:=\int^{\scrD}G\otimes F=\colim\left(\vcenter{\xymatrix@C=1.4cm{
 \displaystyle\coprod_{f:d\to d'}Gd'\otimes Fd
 \ar[r]^-{Gf\otimes 1}
 \ar[d]_-{1\otimes Ff}
@@ -858,8 +862,8 @@ Fe\otimes \scrD(d,e)
 &%r2c2
 Gd\otimes \scrD(d,d)%r2c3
 }}\]
-It's as if the $Ge\otimes f$ is being glued to $Gd\otimes \id_d$. So we find that:
-$G\otimes_\scrD\scrD(d,\DASH )=Gd$.
+It's as if the $Ge\otimes f$ is being glued to $Gd\otimes \id_d$. So we find that
+$G\otimes_\scrD\scrD(d,\DASH )=Gd$, which could also be called the \textbf{coYoneda lemma}.
 \item Pointwise Kan extensions are functor tensor products. In fact:
 \[\textup{in}\quad \vcenter{\xymatrix{
 \scrC\ar[rd]_-{K}\ar[rr]^-{F}_-{}="arF"&%r1c1
@@ -869,7 +873,44 @@ $G\otimes_\scrD\scrD(d,\DASH )=Gd$.
 \scrD\ar@{->}[ur]_{\Lan_KF}\ar@{=>}"arF";[]_-{\eta}&%r2c2
 %r2c3
 }}\textup{\quad we have\quad }\Lan_KF(d)=\scrD(K\DASH ,d)\otimes_\scrC F.\]
-That is, $F$ is the catalogue of elements of $\scrE$, and we take a copy of $Fc$ every time $c\in\scrC$ lies over $d$.
+That is, $F$ is the catalogue of elements of $\scrE$, and we take a copy of $Fc$ every time $c\in\scrC$ lies over $d$. \rednote{(This is not yet intuitive for me.)}
+
+Let's analyse this a little more closely. The coequaliser diagram looks like
+\[\Lan_KF(d)=\colim \left(\vcenter{\xymatrix@C=1.4cm{
+\displaystyle\coprod_{c\rightarrow c'\downarrow d}Fc
+\ar[r]
+\ar[d]
+&%r1c1
+\displaystyle\coprod_{c\downarrow d} Fc
+\\%r1c2
+\displaystyle\coprod_{c'\downarrow d} Fc'
+\ar@{=}[ur]
+&%r2c1
+%r2c2
+}}\right)\textup{ containing }
+\vcenter{\xymatrix{
+\left(Fc\right)_{c\rightarrow c'\downarrow d}\ar@{=}[r]
+\ar[d]
+&%r1c1
+\left(Fc\right)_{c\downarrow d}\\%r1c2
+\left(Fc'\right)_{c'\downarrow d}&%r2c1
+%r2c2
+}}\]
+That is, one gives a copy of $Fc$ for each $c\downarrow d$, but:
+\[
+\textup{for each morphism }\vcenter{\xymatrix@R=1.3cm@C=.64cm@!0{
+c
+\ar[rr]
+\ar[dr]
+&%r1c1
+&%r1c2
+c'
+\ar[dl]\\%r1c3
+&%r2c1
+d&%r2c2
+%r2c3
+}}\textup{ in $K/d$, we amalgamate along }Fc\to Fc'.\]
+
 \item Geometric realisation is given by
 \[|X|:=\Delta^\bullet \otimes_{\Delta^{\op}}X_\bullet = X_\bullet\otimes_{\Delta} \Delta^\bullet.\]
 This is nice. We can think of $|X|$ as:
@@ -878,6 +919,7 @@ This is nice. We can think of $|X|$ as:
 \item gluing a $\Delta^n$'s worth of copies of $X_n$ together for each $n$; or
 \item gluing $X_n$'s worth of $n$-simplices together for each $n$.
 \end{itemize}
+I suppose that the second description is a little more consitent with my reading of this chapter.
 \end{itemize}
 \end{itemise}
 \subsection*{The bar construction}
@@ -934,9 +976,10 @@ with an object for each simplex of the nerve:
 \begin{itemise}
 \setlength{\parindent}{.25in}
 \item If $F$ and $G$ are both constant at $*$, then $B_{\bullet }(*,\scrD,*)=N\scrD$, the usual nerve of $\scrD$.
-\item The \textbf{bar construction} is the geometric realisation of the simplicial bar construction:
-\[B(G,\scrD,F):=B_\bullet (G,\scrD,F)\otimes _{\Delta^{\op}}\Delta^\bullet\to B_\bullet (G,\scrD,F)\otimes _{\Delta^{\op}}*=G\otimes _\scrD F.\]
-The tensor product is in fact the colimit of the simplicial bar construction, which is by definition just the colimit of the diagram
+\item The \textbf{bar construction} is the geometric realisation of the simplicial bar construction, and maps to the functor tensor product:%footnote:
+\footnote{Alternatively: $B(G,\scrD,F):=B_\bullet (G,\scrD,F)\otimes _{\Delta}\Delta^\bullet\to B_\bullet (G,\scrD,F)\otimes _{\Delta}*=G\otimes _\scrD F$.}
+\[B(G,\scrD,F):=\Delta^\bullet\otimes _{\Delta^{\op}}B_\bullet (G,\scrD,F)\to *\otimes _{\Delta^{\op}}B_\bullet (G,\scrD,F)=G\otimes _\scrD F.\]
+The tensor product is in fact the colimit of the simplicial bar construction, which is by cofinality just the colimit of the diagram
 $\vcenter{
 \def\labelstyle{\scriptstyle}
 \xymatrix@C=1.5cm@1{
@@ -947,31 +990,34 @@ B_1(G,\scrD,F).
 \ar@<-1ex>[l]|-(.65){d_0}
 \ar@<+1ex>[l]|-(.65){d_1}
 }}$
+\item Suppose that $f:\scrd\to\scre$ is a functor, in whose colimit we are interested. As:
+\begin{itemize}\squishlist
+\setlength{\parindent}{.25in}
+\item $\scrd(\DASH ,d)\otimes_\scrd F=Fd$; and
+\item geometric realisation is some kind of fattened up colimit of simplicial objects,
+\end{itemize}
+it makes sense to consider
+\[B(*,\scrd,F):=\Delta^\bullet \otimes _{\Delta^{\op}}B_\bullet (*,\scrd,F)\to *\otimes _\scrd F=\colim F.\]
+
 \item 
 \begin{itemize}\squishlist
 \setlength{\parindent}{.25in}
-\item Define a functor:
+\item Define functors:
 \[\xymatrix@R=0mm{
 \ar[r]^-{\Dminus}%Name of map
 \scrD&%Source
-\sSet^{\scrD^{\op}}\\%Target
+\sSet^{\scrD^{\op}}&
+\ar[r]^-{\Dplus}%Name of map
+\scrD&%Source
+\sSet^{\scrD}\\%Target
 d%x
 \ar@{|->}[r]&
-\scrD(\DASH ,d)%f(x)
-%\ar@{}[ul];[l]|{\rotatebox{90}{\tiny$\in$}} \ar@{}[u];[]|{\rotatebox{90}{\tiny$\in$}} 
+\scrD(\DASH ,d)&d%x
+\ar@{|->}[r]&
+\scrD(d,\DASH )
 }\]
 \item Write $B(\scrD,\scrD,F)$ as a shorthand for $B(\scrD^-,\scrD,F)$, which is a functor $\scrD\to\scrM$, the simplicial bar construction on a catalogue consisting of a fixed catalogue $F$, and instructions $\Dminus(d)=\scrD(\DASH ,d)$, as a functor of $d$.
-\item This is functorial in $F$, giving a functor
-\[\xymatrix@R=0mm{
-\ar[r]^-{B(\scrD,\scrD,\DASH )}%Name of map
-\scrM^\scrD&%Source
-\scrM^\scrD\\%Target
-F%x
-\ar@{|->}[r]&
-B(\scrD,\scrD,F)%f(x)
-%\ar@{}[ul];[l]|{\rotatebox{90}{\tiny$\in$}} \ar@{}[u];[]|{\rotatebox{90}{\tiny$\in$}} 
-}\]
-This is an endofunctor of the category of $\scrD$-shaped diagrams in $\scrM$, and will prove to be a deformation for the colimit functor.
+\item Similarly, when $\scrm=\Set$, write $B(G,\scrd,\scrd)$ as shorthand for $B(G,\scrd,\Dplus)$ --- fixed instructions, and a catelogue $d\mapsto\Dplus(d)=\scrd(d,\DASH )$.
 \end{itemize}
 \end{itemise}
 \begin{shaded}
@@ -989,12 +1035,12 @@ n%x
 \displaystyle \coprod_{\vec\partial :[n]\to\scrd}F\vec\partial_0.%f(x)
 %\ar@{}[ul];[l]|{\rotatebox{90}{\tiny$\in$}} \ar@{}[u];[]|{\rotatebox{90}{\tiny$\in$}} 
 }}
-%\qquad :\Delta^{\op}\to\scrm,\ n\mapsto\displaystyle\coprod_{d:[n]\to\scrd}Fd_0.
+%\qquad :\Delta^{\op}\to\scrm,\ n\mapsto\displaystyle \coprod_{d:[n]\to\scrd}Fd_0.
 \]
 Note that the only standard generating morphism in $\Delta^{\op}$ which alters the summand $F\vec\partial_0$ is $d_0$, the $0^\textup{th}$ face map. This drops the first map $\vec\partial_{01}$ from the simplex $\vec\partial$, and maps $F\vec\partial_0$ to $F\vec\partial_1$ using $F\vec\partial_{01}$. In the end, we have a coequaliser describing the functor tensor product:
 \[
 \vcenter{\xymatrix@1{
-\displaystyle\coprod_{f\in\Delta^{\op}(m,n)}\displaystyle \coprod_{\vec\partial:[m]\to\scrd}\Delta^n\otimes F\vec\partial_0
+\displaystyle\coprod_{f\in\Delta^{\op}(m,n)}\displaystyle \coprod_{\vec\partial:[m]\to\scrd} \Delta^n\otimes F\vec\partial_0
 \ar@<+.5ex>[r]
 \ar@<-.5ex>[r]
 &%r1c1
@@ -1087,7 +1133,234 @@ The gluings in (b) and (c) can be described by the following diagram, where $\ve
 \end{tikzpicture}
 \end{center}
 \end{shaded}
+\subsection*{(Co)simplicial replacement and (co)limits}
+\begin{itemise}
+\setlength{\parindent}{.25in}
+\item $\scrc$ is a reflective subcategory of $\scrd$ if there is an adjunction
+$\xymatrix@R=.3cm@C=1.5cm{
+R:\scrd  \ar@<.6ex>[r]&
+\scrc:i  \ar@{^{(}->}@<.4ex>[l]
+}$
+where the right adjoint $i$ is a full inclusion. Then the counit $Ri\nt 1_\scrc$ is a natural isomorphism%footnote:
+\footnote{By Yoneda: $(RiX,Y)=(iX,iY)=(X,Y)$.}.
+\item Given a simplicial set $X:\Delta^{\op}\to\Set$, we can form $\textbf{el}X\downarrow\Delta$, a category fibered in sets, called the \textbf{category of simplices}. The objects are just $\coprod X_n$, and
+\[\textup{objects}(\textbf{el}X)=\coprod X_n,\quad \textup{hom}_{\textbf{el}X}(\sigma\in X_n,\sigma'\in X_m)=\left\{\textup{$[n]\overset{f}{\to}[m]$ in $\Delta$ sending $\sigma\overset{f^*}{\mapsfrom}\sigma'$}\right\}.\]
+$\textup{el}X$ is fibered in sets over $\Delta$, with the fiber over $[n]$ just being $X_n$.
+\begin{itemize}\squishlist
+\setlength{\parindent}{.25in}
+\item When $X=N\scrd$ is the nerve of $\scrd$, there is a functor $S:(\textup{el}N\scrd)^{\op}\to\scrd$, given by taking a chain of morphisms to its first object.
+\item In this case, precomposition $S^*:\scrm^\scrd\to \scrm^{(\textup{el}N\scrD)^{\op}}$ is fully faithful, with left adjoint $\Lan_S$. Thus $S^*$ is the inclusion of a reflective subcategory, and the counit $\Lan_SS^*F\to F$ is an isomorphism for any $F:\scrd\to\scrM$.
+\end{itemize}
+\item Given a left Kan extension as at left, we have an equation of colimits:%footnote:
+\footnote{By Yoneda: $C(\colim F,c)=C^A(F,\Delta c)=C^A(F,\Delta c\circ K)=C^B(\Lan_KF,\Delta c)=C(\colim \Lan_KF,c)$.}
+\[\vcenter{\xymatrix{
+A\ar[rd]_-{K}\ar[rr]^-{F}_-{}="arF"&%r1c1
+&%r1c2
+C\\%r1c3
+&%r2c1
+B\ar@{->}[ur]_{\Lan_KF}\ar@{=>}"arF";[]_-{\eta}&%r2c2
+%r2c3
+}}\qquad\implies\qquad  \colim_AF=\colim_D\Lan_KF\]
+\end{itemise}
+Suppose now that we have a functor $F:\scrd\to\scrm$. Then we have a diagram:
+\[\xymatrix@!C{
+&%r1c1
+\Delta^{\op}
+\ar[rd]^-{\Lan_\Sigma S^*F}
+&%r1c2
+\\%r1c4
+(\textbf{el}N\scrd)^{\op}
+\ar[ur]^-{\Sigma}
+\ar[r]^-{S}
+&%r2c1
+\scrd
+\ar[r]^-{F}
+&%r2c2
+\scrm%r2c4
+}\]
+And we find that
+\[\colim_{\scrd}F=\colim_{\scrd}\Lan_S S^*F= \colim_{(\textbf{el}N\scrd)^{\op}}S^*F= \colim_{\Delta^{\op}}\Lan_\Sigma S^*F. \]
+All that remains is to analyse the $\Lan_\Sigma S^*F$. We find that it is $B_\bullet (*,\scrd,F)$.
 \end{5. The unreasonably effective (co)bar construction}
+\begin{6. Homotopy limits and colimits, the theory}
+\section*{Homotopy limits and colimits, the theory}
+Suppose that $\scrm$ is a \textbf{simplicial model category}. We have an  endofunctor of the category of $\scrD$-shaped diagrams in $\scrM$:
+\[\xymatrix@R=0mm{
+\ar[r]^-{B(\scrD,\scrD,Q\DASH )}%Name of map
+\scrM^\scrD&%Source
+\scrM^\scrD\\%Target
+F%x
+\ar@{|->}[r]&
+B(\scrD,\scrD,QF)%f(x)
+%\ar@{}[ul];[l]|{\rotatebox{90}{\tiny$\in$}} \ar@{}[u];[]|{\rotatebox{90}{\tiny$\in$}} 
+}\]
+\begin{thm*}[6.1]
+The pair 
+\[B(\scrd,\scrd,Q\DASH ):\scrm^\scrd\to\scrm^d,\qquad B(\scrd,\scrd,Q\DASH )\nt Q\nt 1\]
+is a left deformation for $\colim:\scrm^\scrd\to\scrm$, giving a left derived functor
+\[\hocolim_\scrd:=\mathbb{L}\colim_\scrD \simeq B(*,\scrd,Q\DASH )\]
+called the homotopy colimit.
+\end{thm*}
+\begin{itemise}
+\setlength{\parindent}{.25in}
+\item To obtain the expression $B(*,\scrd,Q\DASH )$, we note that
+\[\colim_\scrd B(\scrd,\scrd,Q\DASH )=*\otimes _\scrd B(\scrd,\scrd,Q\DASH )=B(*\otimes _\scrd\scrd,\scrd,Q\DASH )=B(*,\scrd,Q\DASH ),\]
+so it is enough to see that we indeed have a left deformation.
+\item Using what we have, the proof is not too long.
+\end{itemise}
+\end{6. Homotopy limits and colimits, the theory}
+\begin{7. Homotopy limits and colimits, the practice}
+\section*{Homotopy limits and colimits, the practice}
+\begin{itemise}
+\setlength{\parindent}{.25in}
+\item We \textbf{really} need a convenient category of spaces. We find one, and call it $\Top$.
+\item Homotopy colimits are in general \textbf{not} colimits in the homotopy category. In fact, it is generally useless to think about diagrams in the homotopy category (and many of these don't even have colimits).
+\item In $\Top$, we do not need the $Q$ in the above formula for homotopy colimits. \rednote{(Is this so for limits?)}
+\item Formulas are given comparing pointed homotopy limits and colimits with unpointed ones.
+\end{itemise}
+\begin{thm*}[7.40]
+There are natural isomorphisms
+\[B(*,\scrd,F)\simeq N(\DASH /\scrd)\otimes_\scrd F\quad \textup{and}\quad C(*,\scrd,F)\simeq \left\{N(\scrd/\DASH),F\right\}^\scrd\]
+\end{thm*}
+\begin{proof}We'll be done if we know that $B(*,\scrd,\scrd)\cong N(-/\scrd)$, since then:
+\[B(*,\scrd,F)\cong B(*,\scrd,\scrd\otimes _\scrD F)=B(*,\scrd,\scrd)\otimes _\scrD F=N(\DASH /\scrd)\otimes_\scrd F\]
+Now \emph{the geometric realisation of a bisimplicial set} $X_{\bullet \bullet }$ is its diagonal. To see this, note that colimits in $\sSet$ are formed levelwise, so that the $n$-simplices of the realisation are:
+\[|X_{\bullet \bullet }|_n=X_{\bullet n}\otimes _\Delta \Delta^\bullet _n=X_{\bullet n}\otimes _\Delta \Delta(n,\bullet )=X_{nn} \textup{\quad (by coYoneda).}\]
+Now it happens that $B_\bullet (*,\scrd,\scrd(d,\DASH ))=N(d/\scrd)$. Viewing this as a bisimplicial set which is discrete in one variable, we have that its geometric realisation is the diagonal. This is just the simplicial set $N(d/\scrd)$, and this was a little tautological.
+\end{proof}
+\end{7. Homotopy limits and colimits, the practice}
+\section*{Homotopy limits and colimits, the practice}
+\subsection*{Weighted limits in unenriched category theory}
+\begin{itemise}
+\setlength{\parindent}{.25in}
+\item We can reformulate the concept of the limit/colimit of $F:\scrc\to\scrm$ as:
+\[\scrm(m,\limit F)=\Set^\scrc(*,\scrm(m,F\DASH )),\ \qquad \,\scrm(\colim F,m)=\Set^\scrc(*,\scrm(F\DASH,m )).\]
+A limit of $F$ \textbf{weighted} by $W:\scrC\to\Set$ is a representation
+\[\scrm(m,\textstyle\limit^W\! F)=\Set^\scrc(W,\scrm(m,F\DASH )).\]
+A colimit of $F$ \textbf{weighted} by $W:\scrC^{\op}\to\Set$ is a representation
+\[\scrm(\textstyle\colim^W\! F,m)=\Set^{\scrc^{\op}}(W,\scrm(F\DASH,m )).\]
+\item When enough limits exist, we calculate:
+\begin{alignat*}{2}
+\Set^\scrc(W,\scrm(m,F\DASH )) 
+&\cong
+\int_{c\in\scrc}\Set(Wc,\scrm(m,Fc))%
+\\
+&\cong
+\int_{c\in\scrc}\scrm(m,Fc^{Wc})%
+&\qquad&\text{($\scrm$ cotensored over $\Set$)}\\
+\scrm(m,\textstyle\limit^W\! F)
+&\cong
+\scrm\left(m,\int_{c\in\scrc}Fc^{Wc}\right)%
+&\qquad&\text{(representables preserve limits)}\\
+% Left hand side
+\textstyle\limit^W\! F
+% Relation
+&\cong
+% Right hand side
+\int_{c\in\scrc}Fc^{Wc}%
+% Comment
+&\qquad&\text{(Yoneda)}
+\end{alignat*}
+\begin{itemize}\squishlist
+\setlength{\parindent}{.25in}
+\item By Yoneda, $Fc=\limit^{\scrc(c,\DASH )}F$.
+\item When $\scrm$ is complete, given 
+\smash{$\vcenter{\xymatrix@R=3mm@C=1.5cm@!0{
+&%r1c1
+\scrm\\%r1c2
+\scrc
+\ar[ur]^-{F}
+\ar[dr]_-{K}
+&%r2c1
+\\%r2c2
+&%r3c1
+\scrd%r3c2
+}}$} there is a pointwise Kan extension:
+\[\Ran_KF(d)=\int_{c\in\scrc} Fc^{\scrd(d,Kc)}= \textstyle\limit^{\scrd(d,K\DASH )}F.\]
+\end{itemize}
+\item We have a diagram 
+${\xymatrix@1{
+\textbf{el}W
+\ar[r]^-{\Sigma}
+&%r1c1
+\scrc
+\ar[r]^-{W}
+&%r1c2
+\Set%r1c3
+}}$, and calculate:
+\begin{alignat*}{2}
+\textstyle\limit^W\!F
+&=
+\int_{c\in\scrc}Fc^{Wc}%
+&\qquad&\text{(above)}\\
+&=
+\textup{eq} \left(\prod_{c}\prod_{Wc}Fc \rightrightarrows \prod_{c\to c'}\prod_{Wc}Fc'\right)%
+&\qquad&\text{(expanding)}\\
+&=
+\textup{eq} \left(\prod_{(c,x)\in\ob(\textbf{el}W)} F\Sigma(c,x) \rightrightarrows \prod_{{{c\rightarrow c'}\atop{x\shortmapsto x'}}\in \arr(\textbf{el}W)}F\Sigma(c',x') \right)%
+&\qquad&\text{(inspection)}\\
+% Left hand side
+% Relation
+&=
+% Right hand side
+\limit_{\textbf{el}W}F\Sigma% Comment
+&\qquad&\text{(formula for limits)}
+\end{alignat*}
+Thus we can write an unenriched wieghted limit as a standard limit over the category of elements of the weight.%footnote:
+\footnote{$\textbf{el}W$ has objects pairs $(c,x)$ with $x\in Wc$, and $\Mor((c,x),(c',x'))$ those arrows $c\rightarrow c'$ under which $x\shortmapsto x'$.} This can be used to (finally) justify the formula:
+\[\Ran_KF(d)=\lim\left(d/K\overset{U}{\to}\scrC\overset{F}{\to}\scrE\right).\]
+\end{itemise}
+\subsection*{Weighted limits and colimits}
+\begin{itemise}
+\setlength{\parindent}{.25in}
+\item The category $\scrv\mathsf{Cat}$ of $\scrv$-categories and $\scrv$-functors is \textbf{closed symmetric monoidal}.
+\begin{itemize}\squishlist
+\setlength{\parindent}{.25in}
+\item The tensor product of $\scrv$-categories takes the cartesian product on objects, but tensor products on hom-objects. To get a $\scrv$-category structure we repeatedly use the symmetry isomorphism in $\scrv$.
+\item Given a \textbf{small} $\scrv$-category $\underline{\scrd}$ and any $\scrv$-category $\underline{\scrm}$, we can define $\underline{\scrm}^{\underline{\scrd}}$ with:
+\begin{itemize}\squishlist
+\setlength{\parindent}{.25in}
+\item objects the $\scrv$-functors $\underline{\scrd}\to\underline{\scrm}$;
+\item hom-objects via an \textbf{enriched} functor cotensor product:
+\[\underline{\scrm}^{\underline{\scrd}}(F,G)=\int_{d\in\underline{\scrd}} \underline{\scrM}(Fd,Gd):=\textup{eq}\left(
+\prod_{d}\underline{\scrm}(Fd,Gd)\rightrightarrows \prod_{d,d'}\underline{\scrv} \left(\underline{\scrd}(d,d'),\underline{\scrm}(Fd,Gd')\right)
+\right)\]
+\end{itemize}
+We can describe the underlying set of ${\underline{\scrm}^{\underline{\scrd}}(F,G)}$ as follows. To give a point of this set is to give a map from $*$ to this equaliser, which is to give maps $\eta_d:*\to\underline{\scrm}(Fd,Gd)$ such that the following square commutes:
+\[\vcenter{\xymatrix@R=6mm@C=45mm@!0{
+&%r1c1
+\underline{\scrm}(Fd,Gd)\otimes \underline{\scrd}(d,d')\ar[dr]^-{\DASH \circ (F\DASH)}
+&%r1c2
+\\%r1c3
+\underline{\scrd}(d,d')
+\ar[ur]^-{\eta_d\otimes 1}
+\ar[dr]_-{1\otimes \eta_{d'}}
+&%r2c1
+&%r2c2
+\underline{\scrm}(Fd,Gd')\\%r2c3
+&%r3c1
+\underline{\scrd}(d,d')\otimes \underline{\scrm}(Fd',Gd') \ar[uudr]_-{(F\DASH) \circ \DASH }&%r3c2
+%r3c3
+}}\]
+That is, an element of the underlying set consists of unenriched data, with an enriched compatibility. \rednote{This appears to say that the underlying set is just the set of $\scrv$-natural transformations.} [If $\underline{\scrd}$ is the free $\scrv$-category on an unenriched category, $\underline{\scrM}^{\underline{\scrd}}(F,G)$ reduces to the unenriched end.]
+
+\end{itemize}
+\item We obtain a $\scrv$-\textbf{Yoneda lemma}:
+\begin{lem*}
+Given a small $\scrv$-category 
+$\underline{\scrd}$, $d\in\underline{\scrd}$, and $F:\underline{\scrD}\to\underline{\scrv}$, the natural map is a $\scrv$-natural isomorphism:
+\[Fd\overset{\cong}{\to}\underline{\scrv}^{\underline{\scrd}}(\underline{\scrd}(d,\DASH ),F).\]
+\end{lem*}
+\item We can define \textbf{weighted limits and colimits} of a $\scrv$-functor $\underline{\scrd}\to\underline{\scrv}$.
+\begin{itemize}\squishlist
+\setlength{\parindent}{.25in}
+\item A limit of $F$ \textbf{weighted} by $W:\scrC\to\Set$ is a $\scrv$-natural isomorphism:
+\[\underline{\scrm}(m,\textstyle\limit^W\! F)=\underline{\scrv}^{\underline{\scrd}}(W,\underline{\scrm}(m,F\DASH ))\quad \textup{(which equals $\limit^W\!\underline{\scrm}(m,F\DASH )$)}\]
+\item A colimit of $F$ \textbf{weighted} by $W:\scrC^{\op}\to\Set$ is a representation
+\[\underline{\scrm}(m,\textstyle\colim^W\! F)= \underline{\scrv}^{ \underline{\scrd}^{\op}}(W,\underline{\scrm}(F\DASH,m ))\quad \textup{(which equals $\limit^W\!\underline{\scrm}(F\DASH ,m)$)}\]
+\end{itemize}
+By these parenthesised comments, we see that enriched representable functors preserve limits and colimits appropriately.
+\end{itemise}
 \end{document}
 
 
