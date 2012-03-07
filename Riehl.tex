@@ -12,7 +12,9 @@
 \includeversion{4. Basic concepts in enriched category theory}
 \excludeversion{5. The unreasonably effective (co)bar construction}
 \excludeversion{6. Homotopy limits and colimits, the theory}
-\includeversion{7. Homotopy limits and colimits, the practice}
+\excludeversion{7. Homotopy limits and colimits, the practice}
+\includeversion{8. Weighted limits and colimits}
+
 \newcommand{\Dminus}{\scrD^\textup{\tiny$-$}}
 \newcommand{\Dplus}{\scrD^\textup{\tiny$+$}}
 
@@ -762,7 +764,7 @@ Firstly, the adjunction makes $G$ lax monoidal, so that we could already turn $\
 If by $\Top$ we mean a convenient category, then $|\DASH |$ is strong monoidal. $S$ is always strong monoidal. In particular, we can always switch between topologically enriched and simplicially enriched functors using these functors.
 
 However, if a topologically enriched category is tensored and cotensored, we can obtain a tensored and cotensored simplicial category, but not the other way.
-\item If $\scrM$ is cocomplete, then $\scrM^{\Delta^{\op}}$ is simplicially enriched and tensored as follows. We have a cosimplicial comonad $\Delta^\bullet$ in $\scrM^{\Delta^{\op}}$ defined by:
+\item \textbf{Exercise 4.61:} If $\scrM$ is cocomplete, then $\scrM^{\Delta^{\op}}$ is simplicially enriched and tensored as follows. We have a cosimplicial comonad $\Delta^\bullet$ in $\scrM^{\Delta^{\op}}$ defined by:
 \[(\Delta^nX_\bullet)_m=(\Delta^n)_m\cdot X_m.\]
 This is a \emph{cosimplicial comonad} because there are natural transformations $\Delta^n\overset{\Delta}{\nt} \Delta^n\Delta^n$ for each $n$ reflecting the diagonal map, and natural transformations $\Delta^n\overset{\epsilon}{\nt} 1$ reflecting the collapse to a point.
 
@@ -774,7 +776,9 @@ This has given the enrichment. The tensor structure is simply given by the same 
 \item \textbf{The Dold-Kan correspondence.} 
 Recall that all adjunctions from $\Delta$ are the same. We apply the $\mathsf{Ab}$-enriched version of this.
 
-First, we need to know what the normalised Moore complex of a simplicial set is. One takes the free abelian group at each level, then forms a differential using the face maps with alternating signs. Then to normalise, one quotients at each level by the degenerate simplices. \rednote{I should think more about this.}
+First, we need to know what the normalised Moore complex of a simplicial set is. One takes the free abelian group at each level, then forms a differential using the face maps with alternating signs. Then to normalise, one quotients at each level by the degenerate simplices. 
+
+The point is that this gives an adjoint equivalence of categories $\mathsf{Ab}^{\Delta^{\op}}\rightleftarrows \mathsf{Ch}_{\geq0}(\Z)$. \rednote{(I should think more about this).}
 \item Suppose that $\underline{\scrM}$ and $\underline{\scrN}$ are cocomplete, and that 
 $\xymatrix@C=.41cm@1{
 F:\scrM  \ar@<.6ex>[r]&
@@ -785,7 +789,51 @@ F_*:\scrM^{\Delta^{\op}}  \ar@<.6ex>[r]&
 \scrN^{\Delta^{\op}}:G_*  \ar@<.4ex>[l]
 }$
 \end{itemise}
-\rednote{There's some more stuff to do on simplicial homotopy. I'll be back.}
+\subsection*{Simplicial homotopy and simplicial model categories}
+Suppose that $\underline{\scrm}$ is \textit{simplicially enriched and tensored}. Then there's a notion of homotopy on the underlying category $\scrm$. We'll say that $f,g:m\rightrightarrows m'$ are homotopic if there is a diagram:
+\[\xymatrix@!C@R=4mm{
+\Delta^0
+\ar[dr]^-{f}
+\ar[d]_-{d^1}
+&%r1c1
+\textup{(in $\sSet$)}&%r1c2
+&%r1c3
+m
+\ar[dr]^-{f}
+\ar[d]
+&%r1c4
+\textup{(in $\scrm$)}
+\\%r1c5
+\Delta^1
+\ar[r]^-{H}
+&%r2c1
+\underline{\scrm}(m,m')
+&%r2c2
+\textup{i.e.}&%r2c3
+\Delta^1\otimes m
+\ar[r]^-{H}
+&%r2c4
+m'\\%r2c5
+\Delta^0
+\ar[u]^-{d^0}
+\ar[ur]_-{g}
+&%r3c1
+&%r3c2
+&%r3c3
+m
+\ar[u]
+\ar[ur]_-{g}
+&%r3c4
+%r3c5
+}\]
+In this generality we can define the \textbf{geometric realisation} $|\DASH |:\scrm^{\Delta^{\op}}\to\scrm$.
+\begin{lem*}[4.66]
+Suppose that $\scrm$ is simplicially enriched, tensored and cotensored, and admits geometric realisations. Then geometric realisation preserves tensors.
+\end{lem*}
+\begin{cor*}
+Under these hypotheses, geometric realisation preserves homotopy equivalences.
+\end{cor*}
+In fact, we'll see in \S8 that under these hypotheses, geometric realisation is a simplicial functor, where we \rednote{(probably?)} use the simplicial structure on $\scrm^{\Delta^{\op}}$ given by exercise 4.61: taking levelwise copowers for the tensor structure (and giving the enrichment by adjunction).
 \end{4. Basic concepts in enriched category theory}
 \begin{5. The unreasonably effective (co)bar construction}
 \section*{The unreasonably effective (co)bar construction}
@@ -1229,7 +1277,8 @@ Now \emph{the geometric realisation of a bisimplicial set} $X_{\bullet \bullet }
 Now it happens that $B_\bullet (*,\scrd,\scrd(d,\DASH ))=N(d/\scrd)$. Viewing this as a bisimplicial set which is discrete in one variable, we have that its geometric realisation is the diagonal. This is just the simplicial set $N(d/\scrd)$, and this was a little tautological.
 \end{proof}
 \end{7. Homotopy limits and colimits, the practice}
-\section*{Homotopy limits and colimits, the practice}
+\begin{8. Weighted limits and colimits}
+\section*{Weighted limits and colimits}
 \subsection*{Weighted limits in unenriched category theory}
 \begin{itemise}
 \setlength{\parindent}{.25in}
@@ -1361,6 +1410,140 @@ $\underline{\scrd}$, $d\in\underline{\scrd}$, and $F:\underline{\scrD}\to\underl
 \end{itemize}
 By these parenthesised comments, we see that enriched representable functors preserve limits and colimits appropriately.
 \end{itemise}
+\subsection*{Conical limits and colimits}
+\begin{itemise}
+\setlength{\parindent}{.25in}
+\item Recall that when $\scrv$ is cocomplete and closed, there is an adjunction: 
+\[\scrv[\DASH ]:\Cat\rightleftarrows\mathsf{\mathscr{V}Cat}:(\DASH )_0.\]
+The objects of $\scrv[\scrc]$ are the those of $\scrc$, but $\scrv[\scrc](x,y):=\coprod_{\scrc(x,y)}*$.
+\item An unenriched functor $\scrd\to\underline{\scrm}$ corresponds to an enriched functor $\scrv[\scrd]\to \scrm$. We may take the limit weighted by $*:\scrd\to\scrv$. A limit $\limit^*\!F$ of this form is a \textbf{conical limit}:
+\[\underline{\scrm}(m,\textstyle\limit^*\!F)=
+\underline{\scrv}^{\scrd}(*,\underline{\scrm}(m,F\DASH ))=
+\textstyle\limit^*\underline{\scrm}(m,F\DASH )\]
+\begin{itemize}\squishlist
+\setlength{\parindent}{.25in}
+\item Taking underlying sets, we see that $\limit^*\!F$ is in fact the ordinary limit of $F$ in $\scrm$.
+\item The converse holds when $\underline{\scrm}$ is tensored over $\scrv$.
+\end{itemize}
+\end{itemise}
+\subsection*{$\scrv$-completeness and $\scrv$-cocompleteness}
+\rednote{I haven't really read this part.}
+\subsection*{Homotopy (co)limits as weighted (co)limits}
+\begin{itemise}
+\setlength{\parindent}{.25in}
+\item Suppose for simplicity that $\scrm$ is a simplicial model category will all objects cofibrant. Then
+\[\hocolim_\scrd F=N(\DASH /\scrd)\otimes _\scrd F=\textstyle\colim^{N(\DASH /\scrd)}F.\]
+That is, we have the defining universal property:
+\[\underline{\scrm}(\hocolim_\scrd F,m)\cong\underline{\sSet}^{\scrd}(N(\DASH /\scrd),\underline{\scrm}(F\DASH ,m))\qquad 
+\vcenter{\xymatrix@R=4mm@C=1.8cm@!0{
+\hocolim F\ar[dd]
+&%r1c3
+\\%r1c3
+&%r2c1
+\makebox[0cm][r]{$\leftrightarrow$\quad }\scrd
+\ar@/^1em/[r]^-{N(\DASH/\scrd)}_{}="1"
+\ar@/_1em/[r]^{}="2"_-{\underline{\scrm}(F\DASH ,m)}&\underline{\sSet}%r2c2
+\\%r2c3
+m
+\ar@{=>}"1";"2"
+}}\]
+That is, there is a universal simplicial natural transformation $N(\DASH /\scrd)\nt\underline{\scrm}(F\DASH ,\hocolim F)$. 
+\begin{shaded}
+I suppose that the idea is this. Suppose that one has chosen $d\in\scrd$ such that the objects with a map from $d$ look as simple as
+\[\vcenter{\xymatrix@R=3mm@C=5mm{
+&%r1c1
+d\ar[ld]
+\ar[rd]
+&%r1c2
+\\%r1c3
+d'\ar[rr]
+&%r2c1
+&%r2c2
+d''%r2c3
+}}\textup{\quad so that\quad }d/\scrd\cong\Delta^2.\]
+We may draw the simplices as:
+\[0:\vcenter
+{\def\objectstyle{\scriptstyle}
+\xymatrix@R=8mm@C=8mm@!0{
+d\ar@{=}[d]
+&%r1c1
+d\ar[d]
+&%r1c2
+d\ar[d]
+\\%r1c3
+d&%r2c1
+d'&%r2c2
+d''%r2c3
+}}
+\qquad 
+1:
+\vcenter{
+\def\objectstyle{\scriptstyle}
+\xymatrix@C=4mm@R=8mm@!0{
+&%r1c1
+d\ar[dr]
+\ar@{=}[dl]
+&%r1c2
+&%r1c3
+&%r1c4
+d\ar[dr]
+\ar[dl]
+&%r1c5
+&%r1c6
+&%r1c7
+d\ar[dr]
+\ar@{=}[dl]
+&%r1c8
+\\%r1c9
+d\ar[rr]
+&%r2c1
+&%r2c2
+d'&%r2c3
+d'\ar[rr]
+&%r2c4
+&%r2c5
+d''&%r2c6
+d\ar[rr]
+&%r2c7
+&%r2c8
+d''%r2c9
+}}\qquad 
+2:
+\vcenter{
+\def\objectstyle{\scriptstyle}
+\xymatrix@C=4mm@R=8mm@!0{
+&&%r1c1
+d\ar[drr]\ar[d]
+\ar@{=}[dll]
+\\%r1c9
+d\ar[rr]
+&%r2c1
+&%r2c2
+d'\ar[rr]
+&%r2c4
+&%r2c5
+d''
+}}\]
+Now we obtain, from the universal natural transformation, a 2-simplex in the mapping simplicial set $\underline{\scrm}(Fd,H)$, where we write $H$ for $\hocolim F$.
+\begin{itemize}\squishlist
+\setlength{\parindent}{.25in}
+\item The 0-simplices are genuine maps $Fd\to H$:
+\begin{itemize}\squishlist
+\setlength{\parindent}{.25in}
+\item The first is supposed to be the inclusion of $Fd$ in $H$;
+\item the second is that obtained by first mapping $Fd\to Fd'$ and then including $Fd'$ in $H$;
+\item the second is that obtained by first mapping $Fd\to Fd''$ and then including $Fd''$ in $H$.
+\end{itemize}
+\item The 1-simplices are homotopies of maps $Fd\to H$, or maps $|\Delta^1|\times Fd\to H$. These are obtained by sliding along the homotopy used to identify $Fd$ with $Fd'$, $Fd'$ with $Fd''$ and $Fd$ with $Fd''$ respectively.
+\item The 2-simplex is a homotopy between the composite of the first two 1-simplices and the third 1-simplex.
+\end{itemize}
+Any object $H'$ equipped with such maps, i.e.\ a natural transformation $N(\DASH /\scrd)\nt\underline{\scrm}(F\DASH ,H')$ admits a corresponding simplicial map from $\hocolim F$.
+\end{shaded}
+\item The \textbf{fat geometric realisation}: suppose that $\underline{\scrm}$ is a tensored and cotensored simplicial category. Then we can take the fat geometric realisation by taking tensor products with the cosimplicial simplicial set $N(\Delta/\DASH ):\Delta\to\sSet$. This maps to the Yoneda embedding, so that there is a natural map from the fat geometric realisation to the geometric realisation, called the \textbf{Bousfield Kan map}. If $X$ is Reedy cofibrant, this is a weak equivalence.
+
+To describe the map to the Yoneda embedding, one takes an $m$-simplex $[n_0]\to[n_1]\to\cdots \to[n_m]\to[n]$, and looks at the images in $[n]$ of the last vertices in each of $[n_0]$, $[n_1]$, etc. This gives a map $[m]\to[n]$, i.e.\ an $m$-simplex of $\Delta^n$.
+\end{itemise}
+\end{8. Weighted limits and colimits}
 \end{document}
 
 
