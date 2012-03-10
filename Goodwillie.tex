@@ -8,8 +8,8 @@
 \includeversion{Calculus II}
 \excludeversion{Calculus III}
 
-
-
+\newcommand{\TF}{\raisebox{.091em}{$\therefore$}\,}
+\newcommand\ST{\rule[-.25em]{0pt}{1.25em}}
 
 \UseAllTwocells
 \begin{document}
@@ -313,18 +313,18 @@ Now, to form an analogy with the previous formula, one starts by linearising $F$
 \end{shaded}
 \begin{Calculus II}
 \section*{Calculus II}
-\begin{prop*}
+\begin{prop*}[II.1.5]
 \[\vcenter{
 \def\objectstyle{\scriptstyle}
 \xymatrix{
 \bullet 
 \ar[r]^-{k}
-\ar@/_.5em/[rr]_-{\raisebox{.3mm}{$\therefore$}\,k\ }
+\ar@/_.5em/[rr]_-{\TF k\ }
 &%r1c1
 \bullet \ar[r]^-{k}
 &%r1c2
 \bullet &\bullet 
-\ar[r]^-{\raisebox{.3mm}{$\therefore$}\,k\ }
+\ar[r]^-{\TF k\ }
 \ar@/_.5em/[rr]_-{k}
 &%r1c1
 \bullet \ar[r]^-{k+1}
@@ -332,10 +332,24 @@ Now, to form an analogy with the previous formula, one starts by linearising $F$
 \bullet 
 }}\]
 \end{prop*}
-\begin{prop*}
-\[\underbrace{\overset{\raisebox{.3mm}{$\therefore$}\,k}{X}\to \overset{k}{Y}}_{k}\qquad \qquad \underbrace{\overset{k}{X}\to \overset{k+1}{Y}}_{\raisebox{.3mm}{$\therefore$}\,k}\]
+\begin{prop*}[II.1.6]
+\[\underbrace{\overset{\TF k}{X}\to \overset{k}{Y}}_{k}\qquad \qquad \underbrace{\overset{k}{X}\to \overset{k+1}{Y}}_{\TF k}\]
 \end{prop*}
 \begin{proof}
+%%% BEGIN: \usebox{\saveboxLKR}
+\newsavebox{\saveboxLKR}
+\sbox{\saveboxLKR}{
+$\vcenter{\def\objectstyle{\scriptstyle} \xymatrix@!0@R=.5cm@C=.5cm{
+\bullet   \ar[rr]\ar[rd]\ar[dd] &&%\ar[dd]\ar[rd]\ar[rr] &&
+\bullet   \ar'[d][dd]\ar[rd]\\&
+\bullet  \ar[dd]\ar[rr] &&
+\bullet  \ar[dd] \\
+\bullet   \ar'[r][rr]\ar[rd] &&
+\bullet   \ar[rd] \\&
+\bullet  \ar[rr] &&
+\bullet 
+}}$
+}%%% END:  \usebox{\saveboxLKR}
 %%% BEGIN: \usebox{\saveboxQMZ}
 \newsavebox{\saveboxQMZ}
 \sbox{\saveboxQMZ}{
@@ -393,7 +407,8 @@ $\vcenter{\def\objectstyle{\scriptstyle} \xymatrix@!0@R=.5cm@C=.5cm{
 }}$
 }%%% END:  \usebox{\saveboxFEF}
 \[\xymatrix{
-\fbox{\usebox{\saveboxQMZ}}&%r1c1
+\fbox{\usebox{\saveboxLKR}}&
+\fbox{\usebox{\saveboxQMZ}}\ar[l]&%r1c1
 \fbox{\usebox{\saveboxDRJ}}\ar[l]
 &
 X(\emptyset)\ar[r]^-{a_Z}
@@ -404,7 +419,7 @@ h_0(Z)\ar[d]
 &
 Y(\emptyset)\ar[d]_-{a_Y}
 \\%r1c2
-\fbox{\usebox{\saveboxIHI}}\ar[u]
+&\fbox{\usebox{\saveboxIHI}}\ar[u]\ar[ul]
 &%r2c1
 \fbox{\usebox{\saveboxFEF}}\ar[u]
 \ar[l]
@@ -412,6 +427,269 @@ Y(\emptyset)\ar[d]_-{a_Y}
 &&h_0(X)\ar[r]
 &h_0(Y)
 }\]
+\end{proof}
+\begin{prop*}[II.1.20]
+\[ 
+\left.\vcenter{\xymatrix@R=.4cm@C=.6cm{
+\framebox[9mm][c]{\TF \tiny$k$\ST} \ar[dd]\ar[rd]\ar[rr] &&
+\framebox[9mm][c]{\tiny$k$\ST}   \ar'[d][dd]\ar[rd]\\&
+\framebox[9mm][c]{\tiny$k$\ST} \ar[dd]\ar[rr] &&
+\framebox[9mm][c]{\tiny$k+1$\ST} \ar[dd] \\
+\framebox[9mm][c]{\tiny$k$\ST}  \ar'[r][rr]\ar[rd] &&
+\framebox[9mm][c]{\tiny$k+1$\ST}  \ar[rd] \\&
+\framebox[9mm][c]{\tiny$k+1$\ST} \ar[rr] &&
+\framebox[9mm][c]{\tiny$k+2$\ST}
+}}\right\}\textup{\tiny $k$}\]
+\end{prop*}
+\begin{proof}
+Use II.1.6(b) to reduce to
+\[ 
+\left.
+\vcenter{\xymatrix@R=.4cm@C=.6cm{
+\framebox[25mm][c]{\tiny?\ST} \ar[dd]\ar[rd]\\
+&
+\framebox[25mm][c]{\tiny$k$\ST} \ar[dd]\\
+\framebox[25mm][c]{\tiny$k$\ST}  \ar[rd] \\&
+\framebox[25mm][c]{\tiny$k+1$\ST} 
+}}
+\right\}\textup{\tiny $k$}\]
+Then apply induction on the dimension of the cube of cubes.
+\end{proof}
+\begin{prop*}[II.1.22]
+Given a diagram of cubes which are variously cartesian as marked:
+\[ 
+\vcenter{\xymatrix@R=.4cm@C=.6cm{
+&&
+\framebox[9mm][c]{\tiny$k_1$\ST}   \ar'[d][dd]\ar[rd]\\&
+\framebox[9mm][c]{\tiny$k_2$\ST} \ar[dd]\ar[rr] &&
+\framebox[9mm][c]{\tiny$k_{12}$\ST} \ar[dd] \\
+\framebox[9mm][c]{\tiny$k_3$\ST}  \ar'[r][rr]\ar[rd] &&
+\framebox[9mm][c]{\tiny$k_{13}$\ST}  \ar[rd] \\&
+\framebox[9mm][c]{\tiny$k_{23}$\ST} \ar[rr] &&
+\framebox[9mm][c]{\tiny$k_{123}$\ST}
+}}\]
+then the cube of pullbacks is $\min\left\{1-|U|+k_U\right\}$-cartesian.
+\end{prop*}
+\begin{proof}
+Pull back corner-wise to get a cartesian cube: \rednote{(there's some replacement stuff here, which I don't think is particlarly important, but maybe I'm missing the point.)}
+\[ 
+\left.\vcenter{\xymatrix@R=.4cm@C=.6cm{
+\framebox[9mm][c]{\tiny p.b.\ST} \ar[dd]\ar[rd]\ar[rr] &&
+\framebox[9mm][c]{\tiny$k_1$\ST}   \ar'[d][dd]\ar[rd]\\&
+\framebox[9mm][c]{\tiny$k_2$\ST} \ar[dd]\ar[rr] &&
+\framebox[9mm][c]{\tiny$k_{12}$\ST} \ar[dd] \\
+\framebox[9mm][c]{\tiny$k_3$\ST}  \ar'[r][rr]\ar[rd] &&
+\framebox[9mm][c]{\tiny$k_{13}$\ST}  \ar[rd] \\&
+\framebox[9mm][c]{\tiny$k_{23}$\ST} \ar[rr] &&
+\framebox[9mm][c]{\tiny$k_{123}$\ST}
+}}\right\}\textup{\tiny$\infty$}\]
+The smallest $k$ with which we can apply II.1.20 is $\min\left\{1-|U|+k_U\right\}$.
+\end{proof}
+
+
+\[{
+\def\objectstyle{\scriptstyle}
+\xymatrix@R=1.1cm@C=17mm@!0{
+\{\emptyset\}
+\ar[r]
+&%r1c1
+{\|n\|}
+&&%r1c2
+\ar[ll]
+{|n|}
+\ar[r]
+&%r1c3
+{\|n\|\times|n|}
+&&%r1c4
+\ar[ll]
+{|n|^2}\ar[r]
+&%r1c3
+{\|n\|\times|n|^2}
+&&%r1c4
+\ar[ll]
+{|n|^3}
+\\
+\{\emptyset\}
+\ar@{..>}[u]
+\ar[r]
+&%r1c1
+{\|3\|}
+\ar@{..>}[u]
+&&%r1c2
+\ar[ll]
+{|3|}
+\ar@{..>}[u]
+\ar[r]
+&%r1c3
+{\|3\|\times|3|}
+\ar@{..>}[u]
+&&%r1c4
+\ar[ll]
+{|3|^2}\ar[r]
+\ar@{..>}[u]
+&%r1c3
+{\|3\|\times|3|^2}
+\ar@{..>}[u]
+&&%r1c4
+\ar[ll]
+{|3|^3}
+\ar@{..>}[u]
+\\
+\{\emptyset\}
+\ar[u]
+\ar[r]
+&%r1c1
+{\|2\|}
+\ar[u]
+&&%r1c2
+\ar[ll]
+{|2|}
+\ar[u]
+\ar[r]
+&%r1c3
+{\|2\|\times|2|}
+\ar[u]
+&&%r1c4
+\ar[ll]
+{|2|^2}\ar[r]
+\ar[u]
+&%r1c3
+{\|2\|\times|2|^2}
+\ar[u]
+&&%r1c4
+\ar[ll]
+{|2|^3}
+\ar[u]
+\\
+F
+\ar@{::}[d]
+\ar@<.2ex>[r]
+&
+F'
+\ar@{..>}[d]
+\ar@<.4ex>[l]
+\ar[rr]
+&&
+T_{n-1}F
+\ar@<.2ex>[r]
+\ar@{..>}[d]
+&
+(T_{n-1}F)'
+\ar@<.4ex>[l]
+\ar[rr]
+\ar@{..>}[d]
+&&
+T_{n-1}^2F
+\ar@<.2ex>[r]
+\ar@{..>}[d]
+&
+(T_{n-1}^2F)'
+\ar@<.4ex>[l]
+\ar[rr]
+\ar@{..>}[d]
+&&
+T_{n-1}^3F
+\ar@{..>}[d]
+\\
+F
+\ar@{=}[d]
+\ar@<.2ex>[r]
+&
+F'
+\ar[d]
+\ar@<.4ex>[l]
+\ar[rr]
+&&
+T_2F
+\ar@<.2ex>[r]
+\ar[d]
+&
+(T_2F)'
+\ar@<.4ex>[l]
+\ar[rr]
+\ar[d]
+&&
+T_2^2F
+\ar@<.2ex>[r]
+\ar[d]
+&
+(T_2^2F)'
+\ar@<.4ex>[l]
+\ar[rr]
+\ar[d]
+&&
+T_2^3F
+\ar[d]
+\\
+F
+\ar@<.2ex>[r]
+&
+F'
+\ar@<.4ex>[l]
+\ar[rr]
+&&
+T_1F
+\ar@<.2ex>[r]
+&
+(T_1F)'
+\ar@<.4ex>[l]
+\ar[rr]
+&&
+T_1^2F
+\ar@<.2ex>[r]
+&
+(T_1^2F)'
+\ar@<.4ex>[l]
+\ar[rr]
+&&
+T_1^3F
+}}\]
+\paragraph*{Stable $n^\textup{th}$ order excision --- $E_n(c,\kappa)$:}
+$F$ has $E_n(c,\kappa)$ if given a \textbf{strictly} co-cartesian $(n+1)$-cube with connectivities as marked:
+\[\vcenter{\def\objectstyle{\scriptstyle} \xymatrix@!0@R=1cm@C=1cm{
+\bullet   \ar[rr]|{\,k_1\,}\ar[rd]|{\,k_2\,}\ar[dd]|{k_3} &&%\ar[dd]\ar[rd]\ar[rr] &&
+\bullet   \ar'[d][dd]\ar[rd]\\&
+\bullet  \ar[dd]\ar[rr] &&
+\bullet  \ar[dd] \\
+\bullet   \ar'[r][rr]\ar[rd] &&
+\bullet   \ar[rd] \\&
+\bullet  \ar[rr] &&
+\bullet 
+}}\textup{\quad where $k_i\geq\kappa$}\]
+the image under $F$ is $(-c+\sum k_s)$-cartesian.
+\paragraph*{Agreement to order $n$ --- $O_n(c,\kappa)$:}
+$u:F\nt G$ has $O_n(c,\kappa)$ if whenever $\conn(X\downarrow Y)\geq \kappa$:
+\[\conn(FX\downarrow FY)\geq -c+(n+1)\cdot\conn(X\downarrow Y).\]
+\begin{prop*}[III.1.4]
+If $F$ satisfies $E_n(c,\kappa)$, then
+\begin{enumerate}\squishlist
+\setlength{\parindent}{.25in}
+\item $T_nF$ satisfies
+$E_n({c-1},\kappa -1)$ and
+\item $t_nF:F\to T_nF$ satisfies
+$O_n(c,\kappa)$.
+\end{enumerate}
+\end{prop*}
+\begin{proof} \textbf{(1)}
+Start with a strongly cocartesian test $(n+1)$-cube $X:\underline{n+1}\to\cald$ as above, with $k_i\geq\kappa-1$. The cube $(T_nF)(X)$ is the cube of pullbacks of the $(n+1)$-cube (here $n=2$):
+\[ 
+F\left(\vcenter{\xymatrix@R=.4cm@C=.6cm{
+&&
+\framebox[15mm][c]{\tiny$X_U\star\{1\}$\ST}   \ar'[d][dd]\ar[rd]\\&
+\framebox[15mm][c]{\tiny$X_U\star\{2\}$\ST} \ar[dd]\ar[rr] &&
+\framebox[15mm][c]{\tiny$X_U\star\{12\}$\ST} \ar[dd] \\
+\framebox[15mm][c]{\tiny$X_U\star\{3\}$\ST}  \ar'[r][rr]\ar[rd] &&
+\framebox[15mm][c]{\tiny$X_U\star\{13\}$\ST}  \ar[rd] \\&
+\framebox[15mm][c]{\tiny$X_U\star\{23\}$\ST} \ar[rr] &&
+\framebox[15mm][c]{\tiny$X_U\star\{123\}$\ST}
+}}\right)\]
+Now each $X_U\star T$ is still strongly cocartesian, but each of the initial maps have connectivity $k_i+1$.
+
+By hypothesis on $F$ every corner becomes at least $(-c+\sum(k_i+1))$-cartesian. We calculate: 
+\[\min\left\{1-(n+1)+\left(-c+\sum_{i=1}^{n+1} (k_i+1)\right)\right\} =-(c-1)+\sum_{i=1}^{n+1} k_i.\]
+\textbf{(2)} We need to check that $\conn(t_nF(X))\geq-c+(n+1)\cdot\conn(X\downarrow Y)$ whenever $\conn(X\downarrow Y)\geq\kappa$.
+
+By definition, this connectivity is the cartesian-ness of the $(n+1)$-cube $U\mapsto F(X\star U)$. The initial arrows of this cube are $X\star\emptyset\to X\star\{i\}=M(X\downarrow Y)$, and so have connectivity $\conn(X\downarrow Y)$. The inequality then follows precisely from $E_n(c,\kappa)$.
 \end{proof}
 \end{Calculus II}
 \begin{Calculus III}
