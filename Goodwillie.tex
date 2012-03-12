@@ -10,7 +10,8 @@
 
 \newcommand{\TF}{\raisebox{.091em}{$\therefore$}\,}
 \newcommand\ST{\rule[-.25em]{0pt}{1.25em}}
-
+\DeclareMathOperator{\dist}{dist}
+\DeclareMathOperator{\cartesianness}{cart}
 \UseAllTwocells
 \begin{document}
 \begin{Calculus I}
@@ -313,6 +314,53 @@ Now, to form an analogy with the previous formula, one starts by linearising $F$
 \end{shaded}
 \begin{Calculus II}
 \section*{Calculus II}
+\section*{Analogies:}
+If $D\subset \R$ is a domain, $f:D\to\R$ is analytic \Iff condition (A) holds:\\
+\textbf{Condition (A):} 
+for every compact set $K\subset D$ there exists a constant $C$ such that for every $x_0\in K$ and every non-negative integer $n$ the following estimate holds:
+\[\left|\frac{d^nf }{dx^n}(x_0)\right|\leq C^{n+1}n!.\]
+\textbf{Condition (B):} There exist constants $q\in\Z$ and $\rho\in\Z_{\geq0}$ such that for all $x_\emptyset\in D$:
+\[\left|\frac{d^nf }{dx^n}(x_\emptyset)\right|
+\leq e^{-q}\cdot e^{(n-1)\rho}
+.\]
+\emph{This would be stronger than \textup{(A)}, except that the constant $q$ could be negative.}\\
+\textbf{Condition (C):}
+For $q,\rho$ as above, for all $x_\emptyset,x_1,\ldots,x_n$ such that $|x_i-x_\emptyset|\leq e^{-{(\rho+1)}}$:
+\[\left|\sum_{U\in \calP(n)}(-1)^{n-|U|}f\left(x_\emptyset+\sum_{i\in U}(x_i-x_\emptyset)\right)\right|
+\leq e^{-q}\cdot e^{(n-1)\rho}
+\cdot\prod_{i=1}^n|x_i-x_\emptyset|\]
+\emph{This is actually stronger than \textup{(B)} under the assumption that all the derivatives actually exist.}
+\subsection*{Measuring distances in $\Top$}
+\begin{itemize}\squishlist
+\setlength{\parindent}{.25in}
+\item We measure the distance between topological spaces \emph{along maps}.
+\item The distance $\dist(f)$ from $X$ to $Y$ along $f:X\to Y$ should vary inversely with $\conn(f)$:
+\[\dist(f):=e^{-\conn(f)}.\]
+\end{itemize}
+\subsection*{An analogue of condition (C)}
+\begin{itemise}
+\setlength{\parindent}{.25in}
+\item $x_\emptyset,x_1,\ldots,x_n$ by CW-compexes with CW-inclusions $\alpha_i:X_\emptyset\to X_i$ for each $i$, such that:
+\[\dist(\alpha_i)\leq e^{-(\rho+1)}\quad \textup{i.e.}\quad \textup{$\alpha_i$ is $k_i$-connected where $k_i\geq\rho+1$.}\]
+\item $x_\emptyset+\sum_{i\in U}(x_i-x_\emptyset)$ by $\scrx_U$, where $\scrx$ is the corresponding pushout cube.
+\item The alternating sum by the total fibre $\widetilde{f}(F(\scrx))$.%footnote:
+\footnote{After all, the total fibre can be defined by taking fibres repeatedly, while the sum here can be formed by repeatedly taking differences upon including a new variable.}
+\item The absolute value (on the LHS) by the distance from the total fibre to the terminal object ($Y$). That is, $e^{-\cartesianness(\widetilde{f}(F(\scrx)))}$.
+\item Each absolute value (on the RHS) by the distance $\dist(\alpha_i)$.
+\end{itemise}
+Condition (C) becomes:
+\[e^{-\cartesianness(\widetilde{f}(F(\scrx)))}
+\leq e^{-q}\cdot e^{(n-1)\rho}
+\cdot\prod_{i=1}^n\dist(\alpha_i),\quad \textup{i.e.}\quad \cartesianness(\widetilde{f}(F(\scrx)))\geq q-(n-1)\rho+\sum_{i=1}^nk_i.\]
+\subsection*{The definition of $\rho$-analyticity}
+\begin{defn*}
+$F$ is $\rho$-analytic if there is a number $q$ such that for all $n$, $F$ satisfies $E_n(n\rho-q,\rho+1)$. That is, if $F$ sends strongly cartesian $n$-cubes to $(-(n-1)\rho+q+\sum k_s)$-cartesian cubes, whenever the initial arrows have connectivities $k_s\geq \rho+1$.
+\end{defn*}
+\noindent Thus we have seen that $F$ is $\rho$-analytic \Iff it satisfies an appropriate analogue of condition (C), (as in the definition, the test cube can always be taken to be a pushout cube%footnote:
+\footnote{\textbf{Proposition II.2.2a:} 
+Any strongly cocartesian cube $Y$ admits an equivalence $X\to Y$ from a pushout cube $X$, based on cellular inclusions $X(\emptyset)\to X(s)$.}).
+
+\section*{Connectivity and cubes}
 \begin{prop*}[II.1.5]
 \[\vcenter{
 \def\objectstyle{\scriptstyle}
@@ -406,27 +454,30 @@ $\vcenter{\def\objectstyle{\scriptstyle} \xymatrix@!0@R=.5cm@C=.5cm{
 \bullet 
 }}$
 }%%% END:  \usebox{\saveboxFEF}
-\[\xymatrix{
-\fbox{\usebox{\saveboxLKR}}&
-\fbox{\usebox{\saveboxQMZ}}\ar[l]&%r1c1
+\[\xymatrix@R=-8mm{
+&
+\fbox{\usebox{\saveboxQMZ}}\ar[dl]&%r1c1
 \fbox{\usebox{\saveboxDRJ}}\ar[l]
 &
-X(\emptyset)\ar[r]^-{a_Z}
-\ar[rd]_-{a_X}
 &
-h_0(Z)\ar[d]
+h_0(Z)\ar[dd]_-\gamma
 \ar[r]
 &
-Y(\emptyset)\ar[d]_-{a_Y}
+Y(\emptyset)\ar[dd]^-{a_Y}
 \\%r1c2
-&\fbox{\usebox{\saveboxIHI}}\ar[u]\ar[ul]
+\fbox{\usebox{\saveboxLKR}}&&&
+X(\emptyset)\ar[ru]^-{a_Z}
+\ar[rd]_-{a_X}&&&&&&&&\\
+&\fbox{\usebox{\saveboxIHI}}\ar[uu]\ar[ul]
 &%r2c1
-\fbox{\usebox{\saveboxFEF}}\ar[u]
+\fbox{\usebox{\saveboxFEF}}\ar[uu]
 \ar[l]
 %r2c2
 &&h_0(X)\ar[r]
 &h_0(Y)
+\ar@{}[uul]|{\textup{p.b.}}
 }\]
+The square is a pullback, and thus $\gamma$ is at least as connected as $a_Y$. As cartesianness of $W$ is the same as connectivity of $a_W$, the result follows from proposition II.1.5.
 \end{proof}
 \begin{prop*}[II.1.20]
 \[ 
@@ -660,13 +711,16 @@ the image under $F$ is $(-c+\sum k_s)$-cartesian.
 \paragraph*{Agreement to order $n$ --- $O_n(c,\kappa)$:}
 $u:F\nt G$ has $O_n(c,\kappa)$ if whenever $\conn(X\downarrow Y)\geq \kappa$:
 \[\conn(FX\downarrow FY)\geq -c+(n+1)\cdot\conn(X\downarrow Y).\]
+
+
+
 \begin{prop*}[III.1.4]
 If $F$ satisfies $E_n(c,\kappa)$, then
 \begin{enumerate}\squishlist
 \setlength{\parindent}{.25in}
-\item $T_nF$ satisfies
+\item[\textup{(1)}] $T_nF$ satisfies
 $E_n({c-1},\kappa -1)$ and
-\item $t_nF:F\to T_nF$ satisfies
+\item[\textup{(2)}] $t_nF:F\to T_nF$ satisfies
 $O_n(c,\kappa)$.
 \end{enumerate}
 \end{prop*}
@@ -691,6 +745,40 @@ By hypothesis on $F$ every corner becomes at least $(-c+\sum(k_i+1))$-cartesian.
 
 By definition, this connectivity is the cartesian-ness of the $(n+1)$-cube $U\mapsto F(X\star U)$. The initial arrows of this cube are $X\star\emptyset\to X\star\{i\}=M(X\downarrow Y)$, and so have connectivity $\conn(X\downarrow Y)$. The inequality then follows precisely from $E_n(c,\kappa)$.
 \end{proof}
+\begin{prop*}[1.5]
+If $F$ is stably
+$n$-excisive (having $E_n(c,\kappa)$), then
+\begin{enumerate}\squishlist
+\setlength{\parindent}{.25in}
+\item[\textup{(1)}] $P_nF$ is $n$-excisive and
+\item[\textup{(2)}] $F$ agrees with
+  $P_nF$ to order $n$ (via $p_nF$, which has $O_n(c,\kappa)$).
+\end{enumerate}
+\begin{proof}
+We have excisivitites and agreements:
+\[
+\vcenter{\xymatrix@1@C=2.5cm{
+\overset{\makebox[0cm][c]{\scriptsize$E_n(c,\kappa)$}}{\phantom{T_n^2}F}
+\ar[r]_-{O_n(c,\kappa)}
+&%r1c1
+\overset{\makebox[0cm][c]{\scriptsize$E_n(c-1,\kappa-1)$}}{T_n^{\phantom{1}}F}
+\ar[r]_-{O_n(c-1,\kappa-1)}
+&%r1c1
+\overset{\makebox[0cm][c]{\scriptsize$E_n(c-2,\kappa-2)$}}{T_n^2F}
+\ar[r]_-{O_n(c-2,\kappa-2)}
+&%r1c1
+\overset{\makebox[0cm][c]{\scriptsize$E_n(c-3,\kappa-3)$}}{T_n^3F}
+\ar[r]_-{O_n(c-3,\kappa-3)}
+&%r1c1
+\cdots
+}}\]
+%Now given a strongly cocartesian $(n+1)$-cube $X$, whose leaving arrows are $k_1,\ldots,k_{n+1}$-connected, for $i\gg0$, $(T_n^iF)(X)$ is $K_i=i-c+\sum k_j$-cartesian. That is to say that its total fiber is $K_i$-connected. 
+\textbf{(1)} As total fiber $\widetilde{f}$ commutes with filtered colimits:
+\[\widetilde{f}((P_nF)(X))=\hocolim_i\widetilde{f}((T_n^iF)(X))\]
+the connectivity of the right hand side grows at speed at least $1$, so that the LHS is weakly contractible.
+\textbf{(2)} follows as linear hocolimits preserve connectivity. \rednote{What's the best thing here?}
+\end{proof}
+\end{prop*}
 \end{Calculus II}
 \begin{Calculus III}
 \section*{Calculus III}
@@ -762,63 +850,61 @@ $R_nF$ is
 $n$-homogeneous, and $K_nF$ is contractible. (If $F$ were not reduced,
 then in fact $K_nF$ would be equivalent to the constant functor
 $F(Y)$.)
-
-{
-%%% BEGIN: \usebox{\saveboxKPH}
-\newsavebox{\saveboxKPH}
-\sbox{\saveboxKPH}{
-$\vcenter{\def\objectstyle{\scriptstyle} \xymatrix@!0@R=.5cm@C=.5cm{
-\circ    &&%\ar[dd]\ar[rd]\ar[rr] &&
-\bullet   \ar'[d][dd]\ar[rd]\\&
-\bullet  \ar[dd]\ar[rr] &&
-\bullet  \ar[dd] \\
-\bullet   \ar'[r][rr]\ar[rd] &&
-\bullet   \ar[rd] \\&
-\bullet  \ar[rr] &&
-\bullet 
-}}$
-}%%% END:  \usebox{\saveboxKPH}
-%%% BEGIN: \usebox{\saveboxCJR}
-\newsavebox{\saveboxCJR}
-\sbox{\saveboxCJR}{
-$\vcenter{\def\objectstyle{\scriptstyle} \xymatrix@!0@R=.5cm@C=.5cm{
-\circ    &&%\ar[dd]\ar[rd]\ar[rr] &&
-\bullet   \ar[dd]\ar[rd]\\&
-\circ  &&%\ar[dd]\ar[rr] &&
-\bullet  \ar[dd] \\
-\bullet   \ar[rr]\ar[rd] &&
-\bullet   \ar[rd] \\&
-\bullet  \ar[rr] &&
-\bullet 
-}}$
-}%%% END:  \usebox{\saveboxCJR}
-%%% BEGIN: \usebox{\saveboxXWC}
-\newsavebox{\saveboxXWC}
-\sbox{\saveboxXWC}{
-$\vcenter{\def\objectstyle{\scriptstyle} \xymatrix@!0@R=.5cm@C=.5cm{
-\circ    &&%\ar[dd]\ar[rd]\ar[rr] &&
-\bullet   \ar[dd]\\&
-  &&%\ar[dd]\ar[rr] &&
-  &&\\%\ar[dd] \\
-\bullet   \ar[rr] &&
-\bullet    \\&
-  &&%\ar[rr] &&
-\textup{}
-}}$
-}%%% END:  \usebox{\saveboxXWC}
-\[\xymatrix{
-\usebox{\saveboxKPH}
-&%r1c1
-\usebox{\saveboxCJR}
-&%r1c2
-\usebox{\saveboxXWC}
-\\%r1c3
-&%r2c1
-&%r2c2
-%r2c3
-}\]
-}
-
+%{
+%%%% BEGIN: \usebox{\saveboxKPH}
+%\newsavebox{\saveboxKPH}
+%\sbox{\saveboxKPH}{
+%$\vcenter{\def\objectstyle{\scriptstyle} \xymatrix@!0@R=.5cm@C=.5cm{
+%\circ    &&%\ar[dd]\ar[rd]\ar[rr] &&
+%\bullet   \ar'[d][dd]\ar[rd]\\&
+%\bullet  \ar[dd]\ar[rr] &&
+%\bullet  \ar[dd] \\
+%\bullet   \ar'[r][rr]\ar[rd] &&
+%\bullet   \ar[rd] \\&
+%\bullet  \ar[rr] &&
+%\bullet 
+%}}$
+%}%%% END:  \usebox{\saveboxKPH}
+%%%% BEGIN: \usebox{\saveboxCJR}
+%\newsavebox{\saveboxCJR}
+%\sbox{\saveboxCJR}{
+%$\vcenter{\def\objectstyle{\scriptstyle} \xymatrix@!0@R=.5cm@C=.5cm{
+%\circ    &&%\ar[dd]\ar[rd]\ar[rr] &&
+%\bullet   \ar[dd]\ar[rd]\\&
+%\circ  &&%\ar[dd]\ar[rr] &&
+%\bullet  \ar[dd] \\
+%\bullet   \ar[rr]\ar[rd] &&
+%\bullet   \ar[rd] \\&
+%\bullet  \ar[rr] &&
+%\bullet 
+%}}$
+%}%%% END:  \usebox{\saveboxCJR}
+%%%% BEGIN: \usebox{\saveboxXWC}
+%\newsavebox{\saveboxXWC}
+%\sbox{\saveboxXWC}{
+%$\vcenter{\def\objectstyle{\scriptstyle} \xymatrix@!0@R=.5cm@C=.5cm{
+%\circ    &&%\ar[dd]\ar[rd]\ar[rr] &&
+%\bullet   \ar[dd]\\&
+%  &&%\ar[dd]\ar[rr] &&
+%  &&\\%\ar[dd] \\
+%\bullet   \ar[rr] &&
+%\bullet    \\&
+%  &&%\ar[rr] &&
+%\textup{}
+%}}$
+%}%%% END:  \usebox{\saveboxXWC}
+%\[\xymatrix{
+%\usebox{\saveboxKPH}
+%&%r1c1
+%\usebox{\saveboxCJR}
+%&%r1c2
+%\usebox{\saveboxXWC}
+%\\%r1c3
+%&%r2c1
+%&%r2c2
+%%r2c3
+%}\]
+%}
 \[{
 \def\objectstyle{\scriptstyle}
 \def\labelstyle{\scriptstyle}
