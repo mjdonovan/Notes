@@ -8,6 +8,8 @@
 \includeversion{Calculus II}
 \excludeversion{Calculus III}
 
+\excludeversion{Note on derivatives}
+
 \newcommand{\TF}{\raisebox{.091em}{$\therefore$}\,}
 \newcommand\ST{\rule[-.25em]{0pt}{1.25em}}
 \DeclareMathOperator{\dist}{dist}
@@ -288,6 +290,7 @@ We define the \textbf{derivative} of $F$ at $(X,x)$ to be the coefficient spectr
 \end{itemise}
 \rednote{There's a little more stuff here, mostly on the meaning of the term `best approximation', but I feel like doing something else.}
 \end{Calculus I}
+\begin{Note on derivatives}
 \begin{shaded}
 \paragraph*{Differentials and derivatives}
 Now in the calculus of functions $f:\R^n\to \R$, we calculate the directional derivative at $Y\in\R^n$ along a vector $v\in\R^n$ by the formula:
@@ -300,7 +303,7 @@ Now we'd like to calculate derivatives in various `directions', but \emph{which 
 \[\pi_{n-1}(Y)\to \pi_{n-1}(X)\to \pi_{n-1}(Y)\qquad \alpha\mapsto0\mapsto\alpha.\]
 Thus, \emph{we only really need to think about} terms $X=Y\vee _yS^n$ for points $y\in Y$. That is, the points of $Y$ are like the directions one can travel from $Y$ --- they are the places at which you can glue the a `lowest cell'.
 
-Now, to form an analogy with the previous formula, one starts by linearising $F$, to form $D_XF$. The question of what the deriviates should be is still interesting --- it has not vanished just because we have straightened out the functor a little. Thus we are led to consider, for each $y\in Y$, the object:
+Now, to form an analogy with the previous formula, one starts by linearising $F$, to form $D_XF$. The question of what the derivatives should be is still interesting --- it has not vanished just because we have straightened out the functor a little. Thus we are led to consider, for each $y\in Y$, the object:
 \[\partial_yF(Y):=\colim \left\{\Omega^nD_XF(Y\vee _yS^n)\right\}.\]
 %
 %
@@ -312,14 +315,95 @@ Now, to form an analogy with the previous formula, one starts by linearising $F$
 %
 %Here, instead of being defined on a tangent space, the differential $D_XF$ is defined for spaces close to $X$, that is, spaces $Y$ with a map to $X$. This probably isn't the best way to say this, but I don't know what is.
 \end{shaded}
+\end{Note on derivatives}
+
+
+
 \begin{Calculus II}
 \section*{Calculus II}
-\section*{Analogies:}
-If $D\subset \R$ is a domain, $f:D\to\R$ is analytic \Iff condition (A) holds:\\
+We'll discuss functors $\calc_Y\to\cald$, for some (unpointed) base topological space $Y$. Here $\calc_Y$ is either $\calu_Y$ or $\calt_Y$, and $\cald$ is $\calu$, $\calt$ or $\cals p$.
+\subsection*{Measuring distances in $\Top$:}
+\begin{itemize}\squishlist
+\setlength{\parindent}{.25in}
+\item We measure the distance between topological spaces \emph{along maps}.
+\item The distance $\dist(f)$ from $X$ to $X'$ along $f:X\to X'$ should vary inversely with $\conn(f)$:
+\[\dist(f):=e^{-\conn(f)}.\]
+\end{itemize}
+\subsection*{Analogies:}
+\subsubsection*{Derivatives}
+Suppose for simplicity that $F$ is reduced.
+\begin{itemize}\squishlist
+\setlength{\parindent}{.25in}
+\item For each $y\in Y$, we have the sequence of maps $Y\vee _y S^n\downarrow Y$, each of which is $n$-connected.
+\item The distance along this map is $e^{-n}$. To scale a topogical space by $e^n$, one can apply $\Omega^n$.
+\end{itemize}
+It is then natural to consider
+\[\colim_{n}\Omega^nF(Y\vee _yS^n)\quad \textup{\ coming \makebox[-1cm][l]{from}}
+\vcenter{\xymatrix{
+\Omega F(Y\vee S^{n+1})
+\ar[drr]
+\ar[drrld]
+&%r1c1
+&%r1c2
+\\%r1c3
+&
+F(Y\vee S^{n})
+\ar[r]
+\ar[d]
+\ar@{-->}[ul]
+&%r2c1
+F(Y\vee D^n)
+\ar[d]
+\\%r2c3
+&
+F(Y\vee D^n)\ar[r]
+&%r3c1
+F(Y\vee S^{n+1})
+}}\]
+It is this colimit which is the first derivative of $F$ at $y\in Y$.
+\begin{shaded}
+\begin{itemise}
+\setlength{\parindent}{.25in}
+\item Taking a colimit seems like the right thing to do \textbf{when $F$ is stably 1-excisive}. In this case, its terms get closer and closer to it.
+\item To see that we don't need to first apply $P_1$ to $F$:
+\begin{alignat*}{2}
+\colim_n\Omega^nP_1F(Y\vee S^n)
+&=
+\colim_{n,i}\Omega^n T_1^iF(Y\vee S^n)%
+&\qquad&\text{(by definition)}\\
+&=
+\colim_{n,i}\Omega^{n+i} F(Y\vee S^{n+i})%
+&\qquad&\text{(inspection of $T_1$)}\\
+&=
+\colim_{N}\Omega^N F(Y\vee S^{N})%
+&\qquad&\text{($+:\N\times\N\to\N$ homotopy cofinal)}
+\end{alignat*}
+\end{itemise}
+\end{shaded}
+
+\subsubsection*{$f$ and $g$ agree to $n^\textup{th}$ order at $y$}
+Let $C\subset\R$ be a domain and $f,g:C\to\R$ be functions.
+$f$ and $g$ agree to $n^\textup{th}$ order at $y$ if, for some $c,\kappa\in\Z$, whenever $x\in C$ is such that $|x-y|\leq e^{-\kappa}$:
+\[|f(x)-g(x)|\leq e^c|x-y|^{n+1}.\]
+\begin{itemize}\squishlist
+\setlength{\parindent}{.25in}
+\item In Goodwillie calculus, we should be taking functors $F,G:\calc\to\cald$.
+\item To consider agreement at $Y$, we should restrict them to functors $\calC_Y\to \cald$. (Or we could just start with such functors).
+\item In order to compare them, we need a natural transformation $u:F\nt G$.
+\end{itemize}
+We demand then, that whenever $\dist(X\downarrow Y)\leq e^{-\kappa}$:
+\[\dist(F(X)\overset{u_X}{\to} G(X))\leq e^c\dist(X\downarrow Y)^{n+1}\]
+That is, whenever $\conn(X\downarrow Y)\geq\kappa$:
+\[\conn(F(X)\overset{u_X}{\to} G(X))\geq -c+(n+1)\conn(X\downarrow Y)\]
+\paragraph*{Agreement to order $n$ --- $O_n(c,\kappa)$:}
+$u:F\nt G$ has $O_n(c,\kappa)$ if whenever $\conn(X\downarrow Y)\geq \kappa$:
+\[\conn(FX\to GX)\geq -c+(n+1)\cdot\conn(X\downarrow Y).\]
+\subsubsection*{$f$ is analytic}
+$f:C\to\R$ is analytic \Iff condition \textbf{(A)} holds:\\
 \textbf{Condition (A):} 
-for every compact set $K\subset D$ there exists a constant $C$ such that for every $x_0\in K$ and every non-negative integer $n$ the following estimate holds:
+for every compact set $K\subset C$ there exists a constant $C$ such that for every $x_0\in K$ and every non-negative integer $n$ the following estimate holds:
 \[\left|\frac{d^nf }{dx^n}(x_0)\right|\leq C^{n+1}n!.\]
-\textbf{Condition (B):} There exist constants $q\in\Z$ and $\rho\in\Z_{\geq0}$ such that for all $x_\emptyset\in D$:
+\textbf{Condition (B):} There exist constants $q\in\Z$ and $\rho\in\Z_{\geq0}$ such that for all $x_\emptyset\in C$:
 \[\left|\frac{d^nf }{dx^n}(x_\emptyset)\right|
 \leq e^{-q}\cdot e^{(n-1)\rho}
 .\]
@@ -330,14 +414,7 @@ For $q,\rho$ as above, for all $x_\emptyset,x_1,\ldots,x_n$ such that $|x_i-x_\e
 \leq e^{-q}\cdot e^{(n-1)\rho}
 \cdot\prod_{i=1}^n|x_i-x_\emptyset|\]
 \emph{This is actually stronger than \textup{(B)} under the assumption that all the derivatives actually exist.}
-\subsection*{Measuring distances in $\Top$}
-\begin{itemize}\squishlist
-\setlength{\parindent}{.25in}
-\item We measure the distance between topological spaces \emph{along maps}.
-\item The distance $\dist(f)$ from $X$ to $Y$ along $f:X\to Y$ should vary inversely with $\conn(f)$:
-\[\dist(f):=e^{-\conn(f)}.\]
-\end{itemize}
-\subsection*{An analogue of condition (C)}
+\subsubsection*{An analogue of condition (C)}
 \begin{itemise}
 \setlength{\parindent}{.25in}
 \item $x_\emptyset,x_1,\ldots,x_n$ by CW-compexes with CW-inclusions $\alpha_i:X_\emptyset\to X_i$ for each $i$, such that:
@@ -352,7 +429,6 @@ Condition (C) becomes:
 \[e^{-\cartesianness(\widetilde{f}(F(\scrx)))}
 \leq e^{-q}\cdot e^{(n-1)\rho}
 \cdot\prod_{i=1}^n\dist(\alpha_i),\quad \textup{i.e.}\quad \cartesianness(\widetilde{f}(F(\scrx)))\geq q-(n-1)\rho+\sum_{i=1}^nk_i.\]
-\subsection*{The definition of $\rho$-analyticity}
 \begin{defn*}
 $F$ is $\rho$-analytic if there is a number $q$ such that for all $n$, $F$ satisfies $E_n(n\rho-q,\rho+1)$. That is, if $F$ sends strongly cartesian $n$-cubes to $(-(n-1)\rho+q+\sum k_s)$-cartesian cubes, whenever the initial arrows have connectivities $k_s\geq \rho+1$.
 \end{defn*}
@@ -360,7 +436,23 @@ $F$ is $\rho$-analytic if there is a number $q$ such that for all $n$, $F$ satis
 \footnote{\textbf{Proposition II.2.2a:} 
 Any strongly cocartesian cube $Y$ admits an equivalence $X\to Y$ from a pushout cube $X$, based on cellular inclusions $X(\emptyset)\to X(s)$.}).
 
-\section*{Connectivity and cubes}
+\paragraph*{Stable $n^\textup{th}$ order excision --- $E_n(c,\kappa)$:}
+$F$ has $E_n(c,\kappa)$ if given a \textbf{strictly} co-cartesian $(n+1)$-cube with connectivities as marked:
+\[\vcenter{\def\objectstyle{\scriptstyle} \xymatrix@!0@R=1cm@C=1cm{
+\bullet   \ar[rr]|{\,k_1\,}\ar[rd]|{\,k_2\,}\ar[dd]|{k_3} &&%\ar[dd]\ar[rd]\ar[rr] &&
+\bullet   \ar'[d][dd]\ar[rd]\\&
+\bullet  \ar[dd]\ar[rr] &&
+\bullet  \ar[dd] \\
+\bullet   \ar'[r][rr]\ar[rd] &&
+\bullet   \ar[rd] \\&
+\bullet  \ar[rr] &&
+\bullet 
+}}\textup{\quad where $k_i\geq\kappa$}\]
+the image under $F$ is $(-c+\sum k_s)$-cartesian.
+
+\pagebreak
+
+\subsection*{Connectivity and cubes}
 \begin{prop*}[II.1.5]
 \[\vcenter{
 \def\objectstyle{\scriptstyle}
@@ -695,22 +787,8 @@ T_1^2F
 &&
 T_1^3F
 }}\]
-\paragraph*{Stable $n^\textup{th}$ order excision --- $E_n(c,\kappa)$:}
-$F$ has $E_n(c,\kappa)$ if given a \textbf{strictly} co-cartesian $(n+1)$-cube with connectivities as marked:
-\[\vcenter{\def\objectstyle{\scriptstyle} \xymatrix@!0@R=1cm@C=1cm{
-\bullet   \ar[rr]|{\,k_1\,}\ar[rd]|{\,k_2\,}\ar[dd]|{k_3} &&%\ar[dd]\ar[rd]\ar[rr] &&
-\bullet   \ar'[d][dd]\ar[rd]\\&
-\bullet  \ar[dd]\ar[rr] &&
-\bullet  \ar[dd] \\
-\bullet   \ar'[r][rr]\ar[rd] &&
-\bullet   \ar[rd] \\&
-\bullet  \ar[rr] &&
-\bullet 
-}}\textup{\quad where $k_i\geq\kappa$}\]
-the image under $F$ is $(-c+\sum k_s)$-cartesian.
-\paragraph*{Agreement to order $n$ --- $O_n(c,\kappa)$:}
-$u:F\nt G$ has $O_n(c,\kappa)$ if whenever $\conn(X\downarrow Y)\geq \kappa$:
-\[\conn(FX\downarrow FY)\geq -c+(n+1)\cdot\conn(X\downarrow Y).\]
+
+
 
 
 
@@ -754,6 +832,7 @@ $n$-excisive (having $E_n(c,\kappa)$), then
 \item[\textup{(2)}] $F$ agrees with
   $P_nF$ to order $n$ (via $p_nF$, which has $O_n(c,\kappa)$).
 \end{enumerate}
+\end{prop*}
 \begin{proof}
 We have excisivitites and agreements:
 \[
@@ -778,7 +857,7 @@ We have excisivitites and agreements:
 the connectivity of the right hand side grows at speed at least $1$, so that the LHS is weakly contractible.
 \textbf{(2)} follows as linear hocolimits preserve connectivity. \rednote{What's the best thing here?}
 \end{proof}
-\end{prop*}
+Turn to page 665.
 \end{Calculus II}
 \begin{Calculus III}
 \section*{Calculus III}
