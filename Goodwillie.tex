@@ -2,8 +2,8 @@
 
 \documentclass[11pt]{article}
 \input{../macros.tex}
-\usepackage{amscd}
 
+%\def\excludeversion#1{\includeversion{#1}}
 \excludeversion{Calculus I}
 \includeversion{Calculus II}
 \excludeversion{Calculus III}
@@ -321,14 +321,25 @@ Now, to form an analogy with the previous formula, one starts by linearising $F$
 
 \begin{Calculus II}
 \section*{Calculus II}
-We'll discuss functors $\calc_Y\to\cald$, for some (unpointed) base topological space $Y$. Here $\calc_Y$ is either $\calu_Y$ or $\calt_Y$, and $\cald$ is $\calu$, $\calt$ or $\cals p$.
+We'll discuss functors $\calc\to\cald$, for some (unpointed) base topological space $Y$. Here $\calc=\calc_Y$ is either $\calu_Y$ or $\calt_Y$, and $\cald$ is $\calu$, $\calt$ or $\cals p$.
 \subsection*{Measuring distances in $\Top$:}
 \begin{itemize}\squishlist
 \setlength{\parindent}{.25in}
 \item We measure the distance between topological spaces \emph{along maps}.
 \item The distance $\dist(f)$ from $X$ to $X'$ along $f:X\to X'$ should vary inversely with $\conn(f)$:
 \[\dist(f):=e^{-\conn(f)}.\]
+Here, $\conn(f)$ is the least $k$ such that \textbf{every} fiber of $f$ is $(k-1)$-connected.
 \end{itemize}
+\subsection*{Cubical diagrams}
+Given a cubical diagram $X:\calP(n)\to\calc$, %we'd like to be able to compare $X(\emptyset)$ with the homotopy limit of $X|_{\calP_{0}(n)}$. Define:
+define:
+\[a_X:X(\emptyset )\to h_0(X):=\holimit X|_{\calP_{0}(n)}.\]
+We say that $X$ is $k$-cartesian when $a_X$ is $k$-connected.
+
+Note that when the cube is a cube of based spaces, $h_0(X)$ is based, and the homotopy fiber of $a_X$ is the total fiber $\widetilde{f}X$ --- an iterated difference taken over the cube.
+
+\pagebreak
+
 \subsection*{Analogies:}
 \subsubsection*{Derivatives}
 Suppose for simplicity that $F$ is reduced.
@@ -364,7 +375,7 @@ It is this colimit which is the first derivative of $F$ at $y\in Y$.
 \begin{shaded}
 \begin{itemise}
 \setlength{\parindent}{.25in}
-\item Taking a colimit seems like the right thing to do \textbf{when $F$ is stably 1-excisive}. In this case, its terms get closer and closer to it.
+\item Taking a colimit seems like the right thing to do \textbf{when $F$ is stably 1-excisive}. In this case, the terms $\Omega^nF(\vee _yS^n)$ indeed get closer and closer to their colimit.
 \item To see that we don't need to first apply $P_1$ to $F$:
 \begin{alignat*}{2}
 \colim_n\Omega^nP_1F(Y\vee S^n)
@@ -380,6 +391,95 @@ It is this colimit which is the first derivative of $F$ at $y\in Y$.
 \end{alignat*}
 \end{itemise}
 \end{shaded}
+
+\pagebreak
+
+\subsection*{An $(n+1)$-fold Lipschitz condition: $E_n(c,\kappa)$}
+Suppose that $f:C\to \R$ is a function, where $C\subset\R$ is a domain. We could (try to) define:
+%
+%One way to define the $(n+1)^\textup{st}$ derivative of $f$ at $x_\emptyset \in C$ is as the limit:
+\[\frac{d^{n+1}f}{dx^{n+1}}(x_{\emptyset }):=\lim_{|x_\emptyset -x_i|\rightarrow0}\frac{\displaystyle\sum_{U\in \calP(n+1)}(-1)^{n+1+|U|}f\left(x_\emptyset+\sum_{i\in U}(x_i-x_\emptyset)\right)}{\displaystyle\prod_{i=1}^{n+1}(x_\emptyset -x_i)}\]
+\begin{defn*}
+ $f$ has $E_n(c,\kappa)$ if, for all $x_\emptyset ,x_1,\ldots,x_{n+1}\in C$ such that $|x_\emptyset -x_i|\leq e^{-\kappa}$, we have 
+\[\left|\sum_{U\in \calP(n+1)}(-1)^{|U|}f\left(x_\emptyset+\sum_{i\in U}(x_i-x_\emptyset)\right)\right|
+\leq e^{c}\cdot\prod_{i=1}^{n+1} \left| x_\emptyset -x_i\right|\]
+%``On disks of radius at most $e^{-\kappa}$, $f$ has $e^c$ as an $n+1$-fold Lipschitz number'' ($c,\kappa$ fixed integers).
+That is, if \emph{$f$ has $e^c$ as a uniform $e^{-\kappa}$-local $(n+1)$-fold Lipschitz number.}
+\end{defn*}
+\begin{observation}
+If $f$ has $E_n(c,\kappa)$, then $\left|\frac{d^{n+1}f}{dx^{n+1}}\right|\leq e^c$, wherever this derivative is defined.
+\end{observation}
+The correct generalisation of this to functor calculus is:
+\begin{defn*}
+$F:\calc\to\cald$ has $E_n(c,\kappa)$ if, for all $X_\emptyset ,X_1,\ldots,X_{n+1}\in \calc$ with CW-inclusions $X_\emptyset\rightarrow X_i$ such that $\dist(X_\emptyset\rightarrow X_i)\leq e^{-\kappa}$, we have 
+%\[\left|\sum_{U\in \calP(n+1)}(-1)^{|U|}f\left(x_\emptyset+\sum_{i\in U}(x_i-x_\emptyset)\right)\right|
+%\leq e^{c}\cdot\prod_{i=1}^{n+1} \left| x_\emptyset -x_i\right|\]
+\[\dist\left(FX_\emptyset\overset{a_{\scrx}}{\to} h_0(F\scrX)\right)\leq e^{c}
+\cdot\prod_{i=1}^{n+1} \dist\left(X_\emptyset{\rightarrow} X_i\right)\quad \textup{i.e.}\quad \cartesianness(F(\scrx))\geq -c+\sum_{i=1}^{n+1}\conn(X_{\emptyset }\rightarrow X_i).\]
+Here, $\scrx$ is the pushout $(n+1)$-cube with initial arrows that $X_\emptyset \rightarrow X_i$.
+\end{defn*}
+This makes sense, as the fiber of $a_\scrx$ is indeed the total fiber of $\scrx$, which is analogous to the alternating sum above.
+
+\pagebreak
+
+\subsection*{An analyticity condition}
+$f:C\to\R$ is analytic \Iff \textbf{(An)} holds:\\
+\textbf{(An):} 
+for every compact set $K\subset C$ there exists a constant $c_K$ such that for every $x_0\in K$ and every non-negative integer $n$ the following estimate holds:
+\[\left|\frac{d^nf }{dx^n}(x_0)\right|\leq c_K^{n+1}n!.\]
+\textbf{(G-An):} There exist constants $q\in\Z$ and $\rho\in\Z_{\geq0}$ such that for all $x_\emptyset\in C$:
+\[\left|\frac{d^nf }{dx^n}(x_\emptyset)\right|
+\leq e^{-q}\cdot e^{(n-1)\rho}
+.\]
+\emph{This is stronger than \textbf{\textup{(An)}}, as we could take $c_K=\max\left\{e^{-q},e^\rho\right\}$ for all $K$.}\\
+\textbf{(G-$\infty$-L):}
+For some $q,\rho$, $f$ has $E_n(n\rho-q,\rho+1)$ for all $n$.\\
+\emph{This is stronger than \textbf{\textup{(G-An)}} under the assumption that all the derivatives actually exist.}\\
+This definition used to look a little different, for some reason.%footnote:
+\footnote{\textbf{(G-$\infty$-L)$^\textup{oldest}$:}
+For $q,\rho$ as above, for all $x_\emptyset,x_1,\ldots,x_n$ such that $|x_i-x_\emptyset|\leq e^{-{(\rho+1)}}$:
+\[\left|\sum_{U\in \calP(n)}(-1)^{|U|}f\left(x_\emptyset+\sum_{i\in U}(x_i-x_\emptyset)\right)\right|
+\leq e^{-q}\cdot e^{(n-1)\rho}
+\cdot\prod_{i=1}^n|x_i-x_\emptyset|\]
+}%footnote:
+\footnote{\textbf{(G-$\infty$-L)$^\textup{old}$:} For $q,\rho$ as above, for all $x_\emptyset,x_1,\ldots,x_n$ such that $|x_\emptyset-x_i|\leq e^{-{(\rho+1)}}$:
+\[\left|\sum_{U\in \calP(n)}(-1)^{|U|}f\left(x_\emptyset+\sum_{i\in U}(x_i-x_\emptyset)\right)\right|
+\leq e^{-q}\cdot e^{(n-1)\rho}
+\cdot\prod_{i=1}^n \left| x_i-x_\emptyset\right|\]}
+
+\begin{itemize}\squishlist
+\setlength{\parindent}{.25in}
+\item The fact that the identity function is 1-analytic in part justifies this analogy.
+\end{itemize}
+
+\pagebreak
+
+\subsubsection*{An analogue of (G-$\infty$-L)}
+To obtain a Goodwillie calculus analogue of \textbf{(G-$\infty$-L)}, we replace:
+\begin{itemise}
+\item $f$ by a functor $F:\calc\to\cald$.
+\setlength{\parindent}{.25in}
+\item $x_\emptyset,x_1,\ldots,x_n$ by CW-compexes with CW-inclusions $\alpha_i:X_\emptyset\rightarrow X_i$ for each $i$, such that:
+\[\dist(X_\emptyset\rightarrow X_i)\leq e^{-(\rho+1)}\quad \textup{i.e.}\quad \textup{$\alpha_i$ is $k_i$-connected where $k_i\geq\rho+1$.}\]
+\item $x_\emptyset+\sum_{i\in U}(x_i-x_\emptyset)$ by $\scrx_U$, where $\scrx$ is the pushout cube corresponding to the above CW-inclusions.
+\item The alternating sum by $h_0(\scrx)$.%footnote:
+\footnote{After all, the total fibre can be defined by taking fibres repeatedly, while the sum here can be formed by repeatedly taking differences upon including a new variable.}
+\end{itemise}
+\textbf{\textup{(G-$\infty$-L)}} becomes:
+\[\dist\left(FX_\emptyset\rightarrow h_0(F\scrX)\right)\leq e^{-q}\cdot e^{(n-1)\rho}
+\cdot\prod_{i=1}^n \dist\left(X_\emptyset\rightarrow X_i\right)\quad \textup{i.e.}\quad \cartesianness(F(\scrx))\geq q-(n-1)\rho+\sum_{i=1}^nk_i.\]
+%
+%\[e^{-\cartesianness(\widetilde{f}(F(\scrx)))}
+%\leq e^{-q}\cdot e^{(n-1)\rho}
+%\cdot\prod_{i=1}^n\dist(\alpha_i),\quad \textup{i.e.}\quad \cartesianness(\widetilde{f}(F(\scrx)))\geq q-(n-1)\rho+\sum_{i=1}^nk_i.\]
+\begin{defn*}
+$F$ is $\rho$-analytic if there is a number $q$ such that for all $n$, $F$ satisfies $E_n(n\rho-q,\rho+1)$. That is, if $F$ sends strongly cartesian $n$-cubes to $(-(n-1)\rho+q+\sum k_s)$-cartesian cubes, whenever the initial arrows have connectivities $k_s\geq \rho+1$.
+\end{defn*}
+\noindent Thus we have seen that $F$ is $\rho$-analytic \Iff it satisfies an appropriate analogue of \textbf{\textup{(G-$\infty$-L)}}, (as in the definition, the test cube can always be taken to be a pushout cube%footnote:
+\footnote{\textbf{Proposition II.2.2a:} 
+Any strongly cocartesian cube $Y$ admits an equivalence $X\to Y$ from a pushout cube $X$, based on cellular inclusions $X(\emptyset)\to X(s)$.}).
+
+\pagebreak
 
 \subsubsection*{$f$ and $g$ agree to $n^\textup{th}$ order at $y$}
 Let $C\subset\R$ be a domain and $f,g:C\to\R$ be functions.
@@ -398,43 +498,7 @@ That is, whenever $\conn(X\downarrow Y)\geq\kappa$:
 \paragraph*{Agreement to order $n$ --- $O_n(c,\kappa)$:}
 $u:F\nt G$ has $O_n(c,\kappa)$ if whenever $\conn(X\downarrow Y)\geq \kappa$:
 \[\conn(FX\to GX)\geq -c+(n+1)\cdot\conn(X\downarrow Y).\]
-\subsubsection*{$f$ is analytic}
-$f:C\to\R$ is analytic \Iff condition \textbf{(A)} holds:\\
-\textbf{Condition (A):} 
-for every compact set $K\subset C$ there exists a constant $C$ such that for every $x_0\in K$ and every non-negative integer $n$ the following estimate holds:
-\[\left|\frac{d^nf }{dx^n}(x_0)\right|\leq C^{n+1}n!.\]
-\textbf{Condition (B):} There exist constants $q\in\Z$ and $\rho\in\Z_{\geq0}$ such that for all $x_\emptyset\in C$:
-\[\left|\frac{d^nf }{dx^n}(x_\emptyset)\right|
-\leq e^{-q}\cdot e^{(n-1)\rho}
-.\]
-\emph{This would be stronger than \textup{(A)}, except that the constant $q$ could be negative.}\\
-\textbf{Condition (C):}
-For $q,\rho$ as above, for all $x_\emptyset,x_1,\ldots,x_n$ such that $|x_i-x_\emptyset|\leq e^{-{(\rho+1)}}$:
-\[\left|\sum_{U\in \calP(n)}(-1)^{n-|U|}f\left(x_\emptyset+\sum_{i\in U}(x_i-x_\emptyset)\right)\right|
-\leq e^{-q}\cdot e^{(n-1)\rho}
-\cdot\prod_{i=1}^n|x_i-x_\emptyset|\]
-\emph{This is actually stronger than \textup{(B)} under the assumption that all the derivatives actually exist.}
-\subsubsection*{An analogue of condition (C)}
-\begin{itemise}
-\setlength{\parindent}{.25in}
-\item $x_\emptyset,x_1,\ldots,x_n$ by CW-compexes with CW-inclusions $\alpha_i:X_\emptyset\to X_i$ for each $i$, such that:
-\[\dist(\alpha_i)\leq e^{-(\rho+1)}\quad \textup{i.e.}\quad \textup{$\alpha_i$ is $k_i$-connected where $k_i\geq\rho+1$.}\]
-\item $x_\emptyset+\sum_{i\in U}(x_i-x_\emptyset)$ by $\scrx_U$, where $\scrx$ is the corresponding pushout cube.
-\item The alternating sum by the total fibre $\widetilde{f}(F(\scrx))$.%footnote:
-\footnote{After all, the total fibre can be defined by taking fibres repeatedly, while the sum here can be formed by repeatedly taking differences upon including a new variable.}
-\item The absolute value (on the LHS) by the distance from the total fibre to the terminal object ($Y$). That is, $e^{-\cartesianness(\widetilde{f}(F(\scrx)))}$.
-\item Each absolute value (on the RHS) by the distance $\dist(\alpha_i)$.
-\end{itemise}
-Condition (C) becomes:
-\[e^{-\cartesianness(\widetilde{f}(F(\scrx)))}
-\leq e^{-q}\cdot e^{(n-1)\rho}
-\cdot\prod_{i=1}^n\dist(\alpha_i),\quad \textup{i.e.}\quad \cartesianness(\widetilde{f}(F(\scrx)))\geq q-(n-1)\rho+\sum_{i=1}^nk_i.\]
-\begin{defn*}
-$F$ is $\rho$-analytic if there is a number $q$ such that for all $n$, $F$ satisfies $E_n(n\rho-q,\rho+1)$. That is, if $F$ sends strongly cartesian $n$-cubes to $(-(n-1)\rho+q+\sum k_s)$-cartesian cubes, whenever the initial arrows have connectivities $k_s\geq \rho+1$.
-\end{defn*}
-\noindent Thus we have seen that $F$ is $\rho$-analytic \Iff it satisfies an appropriate analogue of condition (C), (as in the definition, the test cube can always be taken to be a pushout cube%footnote:
-\footnote{\textbf{Proposition II.2.2a:} 
-Any strongly cocartesian cube $Y$ admits an equivalence $X\to Y$ from a pushout cube $X$, based on cellular inclusions $X(\emptyset)\to X(s)$.}).
+
 
 \paragraph*{Stable $n^\textup{th}$ order excision --- $E_n(c,\kappa)$:}
 $F$ has $E_n(c,\kappa)$ if given a \textbf{strictly} co-cartesian $(n+1)$-cube with connectivities as marked:
@@ -630,6 +694,81 @@ The smallest $k$ with which we can apply II.1.20 is $\min\left\{1-|U|+k_U\right\
 \end{proof}
 
 
+
+
+
+
+\begin{prop*}[III.1.4]
+If $F$ satisfies $E_n(c,\kappa)$, then
+\begin{enumerate}\squishlist
+\setlength{\parindent}{.25in}
+\item[\textup{(1)}] $T_nF$ satisfies
+$E_n({c-1},\kappa -1)$ and
+\item[\textup{(2)}] $t_nF:F\to T_nF$ satisfies
+$O_n(c,\kappa)$.
+\end{enumerate}
+\end{prop*}
+\begin{proof} \textbf{(1)}
+Start with a strongly cocartesian test $(n+1)$-cube $X:\underline{n+1}\to\cald$ as above, with $k_i\geq\kappa-1$. The cube $(T_nF)(X)$ is the cube of pullbacks of the $(n+1)$-cube (here $n=2$):
+\[ 
+F\left(\vcenter{\xymatrix@R=.4cm@C=.6cm{
+&&
+\framebox[15mm][c]{\tiny$X_U\star\{1\}$\ST}   \ar'[d][dd]\ar[rd]\\&
+\framebox[15mm][c]{\tiny$X_U\star\{2\}$\ST} \ar[dd]\ar[rr] &&
+\framebox[15mm][c]{\tiny$X_U\star\{12\}$\ST} \ar[dd] \\
+\framebox[15mm][c]{\tiny$X_U\star\{3\}$\ST}  \ar'[r][rr]\ar[rd] &&
+\framebox[15mm][c]{\tiny$X_U\star\{13\}$\ST}  \ar[rd] \\&
+\framebox[15mm][c]{\tiny$X_U\star\{23\}$\ST} \ar[rr] &&
+\framebox[15mm][c]{\tiny$X_U\star\{123\}$\ST}
+}}\right)\]
+Now each $X_U\star T$ is still strongly cocartesian, but each of the initial maps have connectivity $k_i+1$.
+
+By hypothesis on $F$ every corner becomes at least $(-c+\sum(k_i+1))$-cartesian. We calculate: 
+\[\min\left\{1-(n+1)+\left(-c+\sum_{i=1}^{n+1} (k_i+1)\right)\right\} =-(c-1)+\sum_{i=1}^{n+1} k_i.\]
+\textbf{(2)} We need to check that $\conn(t_nF(X))\geq-c+(n+1)\cdot\conn(X\downarrow Y)$ whenever $\conn(X\downarrow Y)\geq\kappa$.
+
+By definition, this connectivity is the cartesian-ness of the $(n+1)$-cube $U\mapsto F(X\star U)$. The initial arrows of this cube are $X\star\emptyset\to X\star\{i\}=M(X\downarrow Y)$, and so have connectivity $\conn(X\downarrow Y)$. The inequality then follows precisely from $E_n(c,\kappa)$.
+\end{proof}
+\begin{prop*}[1.5]
+If $F$ is stably
+$n$-excisive (having $E_n(c,\kappa)$), then
+\begin{enumerate}\squishlist
+\setlength{\parindent}{.25in}
+\item[\textup{(1)}] $P_nF$ is $n$-excisive and
+\item[\textup{(2)}] $F$ agrees with
+  $P_nF$ to order $n$ (via $p_nF$, which has $O_n(c,\kappa)$).
+\end{enumerate}
+\end{prop*}
+\begin{proof}
+We have excisivitites and agreements:
+\[
+\vcenter{\xymatrix@1@C=2.5cm{
+\overset{\makebox[0cm][c]{\scriptsize$E_n(c,\kappa)$}}{\phantom{T_n^2}F}
+\ar[r]_-{O_n(c,\kappa)}
+&%r1c1
+\overset{\makebox[0cm][c]{\scriptsize$E_n(c-1,\kappa-1)$}}{T_n^{\phantom{1}}F}
+\ar[r]_-{O_n(c-1,\kappa-1)}
+&%r1c1
+\overset{\makebox[0cm][c]{\scriptsize$E_n(c-2,\kappa-2)$}}{T_n^2F}
+\ar[r]_-{O_n(c-2,\kappa-2)}
+&%r1c1
+\overset{\makebox[0cm][c]{\scriptsize$E_n(c-3,\kappa-3)$}}{T_n^3F}
+\ar[r]_-{O_n(c-3,\kappa-3)}
+&%r1c1
+\cdots
+}}\]
+%Now given a strongly cocartesian $(n+1)$-cube $X$, whose leaving arrows are $k_1,\ldots,k_{n+1}$-connected, for $i\gg0$, $(T_n^iF)(X)$ is $K_i=i-c+\sum k_j$-cartesian. That is to say that its total fiber is $K_i$-connected. 
+\textbf{(1)} As total fiber $\widetilde{f}$ commutes with filtered colimits:
+\[\widetilde{f}((P_nF)(X))=\hocolim_i\widetilde{f}((T_n^iF)(X))\]
+the connectivity of the right hand side grows at speed at least $1$, so that the LHS is weakly contractible.
+\textbf{(2)} follows as linear hocolimits preserve connectivity. \rednote{What's the best thing here?}
+\end{proof}
+Turn to page 665.
+\end{Calculus II}
+\begin{Calculus III}
+\section*{Calculus III}
+\subsection*{III.1 The Taylor tower}
+
 \[{
 \def\objectstyle{\scriptstyle}
 \xymatrix@R=1.1cm@C=17mm@!0{
@@ -788,80 +927,6 @@ T_1^2F
 T_1^3F
 }}\]
 
-
-
-
-
-\begin{prop*}[III.1.4]
-If $F$ satisfies $E_n(c,\kappa)$, then
-\begin{enumerate}\squishlist
-\setlength{\parindent}{.25in}
-\item[\textup{(1)}] $T_nF$ satisfies
-$E_n({c-1},\kappa -1)$ and
-\item[\textup{(2)}] $t_nF:F\to T_nF$ satisfies
-$O_n(c,\kappa)$.
-\end{enumerate}
-\end{prop*}
-\begin{proof} \textbf{(1)}
-Start with a strongly cocartesian test $(n+1)$-cube $X:\underline{n+1}\to\cald$ as above, with $k_i\geq\kappa-1$. The cube $(T_nF)(X)$ is the cube of pullbacks of the $(n+1)$-cube (here $n=2$):
-\[ 
-F\left(\vcenter{\xymatrix@R=.4cm@C=.6cm{
-&&
-\framebox[15mm][c]{\tiny$X_U\star\{1\}$\ST}   \ar'[d][dd]\ar[rd]\\&
-\framebox[15mm][c]{\tiny$X_U\star\{2\}$\ST} \ar[dd]\ar[rr] &&
-\framebox[15mm][c]{\tiny$X_U\star\{12\}$\ST} \ar[dd] \\
-\framebox[15mm][c]{\tiny$X_U\star\{3\}$\ST}  \ar'[r][rr]\ar[rd] &&
-\framebox[15mm][c]{\tiny$X_U\star\{13\}$\ST}  \ar[rd] \\&
-\framebox[15mm][c]{\tiny$X_U\star\{23\}$\ST} \ar[rr] &&
-\framebox[15mm][c]{\tiny$X_U\star\{123\}$\ST}
-}}\right)\]
-Now each $X_U\star T$ is still strongly cocartesian, but each of the initial maps have connectivity $k_i+1$.
-
-By hypothesis on $F$ every corner becomes at least $(-c+\sum(k_i+1))$-cartesian. We calculate: 
-\[\min\left\{1-(n+1)+\left(-c+\sum_{i=1}^{n+1} (k_i+1)\right)\right\} =-(c-1)+\sum_{i=1}^{n+1} k_i.\]
-\textbf{(2)} We need to check that $\conn(t_nF(X))\geq-c+(n+1)\cdot\conn(X\downarrow Y)$ whenever $\conn(X\downarrow Y)\geq\kappa$.
-
-By definition, this connectivity is the cartesian-ness of the $(n+1)$-cube $U\mapsto F(X\star U)$. The initial arrows of this cube are $X\star\emptyset\to X\star\{i\}=M(X\downarrow Y)$, and so have connectivity $\conn(X\downarrow Y)$. The inequality then follows precisely from $E_n(c,\kappa)$.
-\end{proof}
-\begin{prop*}[1.5]
-If $F$ is stably
-$n$-excisive (having $E_n(c,\kappa)$), then
-\begin{enumerate}\squishlist
-\setlength{\parindent}{.25in}
-\item[\textup{(1)}] $P_nF$ is $n$-excisive and
-\item[\textup{(2)}] $F$ agrees with
-  $P_nF$ to order $n$ (via $p_nF$, which has $O_n(c,\kappa)$).
-\end{enumerate}
-\end{prop*}
-\begin{proof}
-We have excisivitites and agreements:
-\[
-\vcenter{\xymatrix@1@C=2.5cm{
-\overset{\makebox[0cm][c]{\scriptsize$E_n(c,\kappa)$}}{\phantom{T_n^2}F}
-\ar[r]_-{O_n(c,\kappa)}
-&%r1c1
-\overset{\makebox[0cm][c]{\scriptsize$E_n(c-1,\kappa-1)$}}{T_n^{\phantom{1}}F}
-\ar[r]_-{O_n(c-1,\kappa-1)}
-&%r1c1
-\overset{\makebox[0cm][c]{\scriptsize$E_n(c-2,\kappa-2)$}}{T_n^2F}
-\ar[r]_-{O_n(c-2,\kappa-2)}
-&%r1c1
-\overset{\makebox[0cm][c]{\scriptsize$E_n(c-3,\kappa-3)$}}{T_n^3F}
-\ar[r]_-{O_n(c-3,\kappa-3)}
-&%r1c1
-\cdots
-}}\]
-%Now given a strongly cocartesian $(n+1)$-cube $X$, whose leaving arrows are $k_1,\ldots,k_{n+1}$-connected, for $i\gg0$, $(T_n^iF)(X)$ is $K_i=i-c+\sum k_j$-cartesian. That is to say that its total fiber is $K_i$-connected. 
-\textbf{(1)} As total fiber $\widetilde{f}$ commutes with filtered colimits:
-\[\widetilde{f}((P_nF)(X))=\hocolim_i\widetilde{f}((T_n^iF)(X))\]
-the connectivity of the right hand side grows at speed at least $1$, so that the LHS is weakly contractible.
-\textbf{(2)} follows as linear hocolimits preserve connectivity. \rednote{What's the best thing here?}
-\end{proof}
-Turn to page 665.
-\end{Calculus II}
-\begin{Calculus III}
-\section*{Calculus III}
-\subsection*{III.1 The Taylor tower}
 \[\xymatrix{
 P(n+1)\times P_0(n+1)^i
 &%r1c1
