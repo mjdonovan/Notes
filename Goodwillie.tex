@@ -2,10 +2,19 @@
 
 \documentclass[11pt]{article}
 \input{../macros.tex}
+\usetikzlibrary{arrows,positioning}
+\usetikzlibrary{decorations.markings}
+\usetikzlibrary{calc}
+\tikzset{
+ >=stealth',
+ shorten <=-5pt,
+ shorten >=-5pt,
+ shape=circle
+}
 
 %\def\excludeversion#1{\includeversion{#1}}
 \excludeversion{Calculus I}
-\includeversion{Calculus II}
+\excludeversion{Calculus II}
 \excludeversion{Calculus III}
 
 \excludeversion{Note on derivatives}
@@ -1406,7 +1415,285 @@ R_{n,i+1}
 \ar[llu];[]
 }}\]
 \end{Calculus III}
+
+
+
+%\begin{center}
+%Have: $f:\R^n\to\R^n$. Seek: $\partial_v\partial_uf(x_{\emptyset })$\\
+%\vspace{.5cm}
+%\begin{tikzpicture}[scale=1.2]
+%\path (0.3,0) node[name=2] {$\bullet $};
+%\path (1.3,0) node[name=12] {$\bullet $};
+%\path (0,1) node[name=phi] {$\bullet $};
+%\path (1,1) node[name=1] {$\bullet $};
+%
+%\path (phi) node[above left] {$x_{\emptyset }$};
+%\path (1) node[above right] {$x_{1}$};
+%\path (2) node[below left] {$x_{2}$};
+%\path (12) node[below right] {$x_{1}+x_2-x_\emptyset$};
+%
+%\path[->,very thick] (phi) edge node[above,font=\footnotesize]{$u$} (1);
+%\path[->,very thick] (phi) edge node[left,font=\footnotesize]{$v$} (2);
+%\path[->] (1) edge (12);
+%\path[->] (2) edge (12);
+%
+%\draw [ |->, decoration={markings,mark=at position 1 with {\arrow[scale=1.7]{>}}},
+%    postaction={decorate},
+%    shorten >=0.4pt
+%] (3,0.5) -- node[above]{$f$} (5,.5);
+%
+%\path (7+0.3,-0.2) node[name=2] {$\bullet $};
+%\path (7+1.3,0) node[name=12] {$\bullet $};
+%\path (7-1,1.5) node[name=phi] {$\bullet $};
+%\path (7+1.3,1) node[name=1] {$\bullet $};
+%\path (7+0.3,-0.2+1) node[name=pull] {$\circ $};
+%
+%\path (phi) node[above left] {$f(x_{\emptyset })$};
+%\path (1) node[above right] {$f(x_{1})$};
+%\path (2) node[below left] {$f(x_{2})$};
+%\path (12) node[right] {$f(x_{1}+x_2-x_\emptyset)$};
+%\path (pull) node[below right] {$p$};
+%
+%\path[->] (phi) edge (1);
+%\path[->] (phi) edge (2);
+%\path[->] (1) edge (12);
+%\path[->] (2) edge (12);
+%\path[->] (pull) edge (1);
+%\path[->] (pull) edge (2);
+%\path[->,very thick,densely dotted] (phi) edge (pull);
+%\end{tikzpicture}\\
+%The dotted vector approximates $-\partial_v\partial_uf(x_{\emptyset })$.
+%\end{center}
+
+
+\begin{center}
+Have: $f:\R^n\to\R^n$. Seek: $\partial_w\partial_v\partial_uf(x_{\emptyset })$\\
+\vspace{.5cm}
+\begin{tikzpicture}[scale=1.2]
+\path (0.3,0) node[name=2] {$\bullet $};
+\path (1.3,0) node[name=12] {$\bullet $};
+\path (0,1) node[name=0d] {$\bullet $};
+\path (1,1) node[name=1] {$\bullet $};
+\path (1.5,1)+(0.3,0) node[name=23] {$\bullet $};
+\path (1.5,1)+(1.3,0) node[name=123] {$\bullet $};
+\path (1.5,1)+(0,1) node[name=3] {$\bullet $};
+\path (1.5,1)+(1,1) node[name=13] {$\bullet $};
+
+
+
+\path[->,very thick] (0d) edge node[below,font=\footnotesize]{$u$} (1);
+\path[->,very thick] (0d) edge node[left,font=\footnotesize]{$v$} (2);
+\path[->,very thick] (0d) edge node[left,font=\footnotesize]{$w$} (3);
+\path[->] (1) edge (12);
+\path[->] (2) edge (12);
+
+\path[->] (3) edge  (23);
+\path[->] (3) edge  (13);
+\path[->] (13) edge (123);
+\path[->] (23) edge (123);
+
+\path[->] (1) edge  (13);
+\path[->] (2) edge  (23);
+\path[->] (12) edge  (123);
+
+\draw [ |->,dashed, decoration={markings,mark=at position 1 with {\arrow[scale=1.7]{>}}},
+    postaction={decorate},
+    shorten >=0.4pt
+] (3.5,1) -- node[above]{$f$} (5.5,1);
+
+
+%\path let \p1 = (0d), \p2 = (7,0), \p3=(-1,.5) in node[name=ok]  (\x1+\x2+\x3,\y1+\y2+\y3) {$\bullet $}; 
+
+\path (7-1,1.5) node[name=0] {$\bullet $};
+
+\path (7+1.3+.2+.3,1-.5-.1) node[name=1] {$\bullet $};
+\path (7+0.3,-0.42) node[name=2] {$\bullet $};
+\path (1.5,1)+(7-1+.7,1.8-.3) node[name=3] {$\bullet $};
+
+\path (7+1.3+.2+.3,0-.5) node[name=12] {$\bullet $};
+\path (1.5,1)+(7+0.3,.1) node[name=23] {$\bullet $};
+\path (1.5,1)+(7+1.3+.5,.7) node[name=13] {$\bullet $};
+
+\path (1.5,1)+(7+1.3+.5,-.2) node[name=123] {$\bullet $};
+
+
+\path let \p1 = (2), \p2 = (1), \p3=(12) in node[name=pull]  at (\x1+\x2-\x3,\y1+\y2-\y3) {$\circ$};
+\path let \p1 = (23), \p2 = (13), \p3=(123) in node[name=pull3]  at (\x1+\x2-\x3,\y1+\y2-\y3) {$\circ$};
+\path let \p1 = (3), \p2 = (pull), \p3=(pull3) in node[name=pullpull]  at (\x1+\x2-\x3,\y1+\y2-\y3) {$\circ$};
+
+\path[->] (0) edge (1);
+\path[->] (0) edge (2);
+\path[->] (1) edge (12);
+\path[->] (2) edge (12);
+\path[->] (pull) edge (1);
+\path[->] (pull) edge (2);
+\path[->,very thick,densely dotted] (0) edge (pullpull);
+
+\path[->] (3) edge (13);
+\path[->] (3) edge (23);
+\path[->] (13) edge (123);
+\path[->] (23) edge (123);
+\path[->] (pull3) edge (13);
+\path[->] (pull3) edge (23);
+\path[->,densely dotted] (pull) edge (pull3);
+\path[->,densely dotted] (3) edge (pull3);
+\path[->,densely dotted] (pullpull) edge (pull);
+\path[->,densely dotted] (pullpull) edge (3);
+
+\path[->] (0) edge (3);
+\path[->] (1) edge (13);
+\path[->] (2) edge (23);
+\path[->] (12) edge (123);
+
+
+\end{tikzpicture}\\
+The dotted vector approximates $\partial_w \partial_v \partial_uf(x_{\emptyset })$.
+\end{center}
+
+\pagebreak
+
+\begin{center}
+Have: $f:\R^n\to\R^n$. Seek: $\partial_v\partial_uf(x_{\emptyset })$\\
+\vspace{.5cm}
+\begin{tikzpicture}[scale=1.2]
+
+\path (1.5,1)+(7-1+.7,1.8-.3) node[name=3] {$\phantom{\bullet} $};
+\path (1.5,1)+(7+1.3+.5,-.2) node[name=123] {$\phantom{\bullet} $};
+\path (7+1.3+.2+.3,0-.5) node[name=12] {$\phantom{\bullet} $};
+
+
+
+\path (0.3,0) node[name=2] {$\bullet $};
+\path (1.3,0) node[name=12] {$\bullet $};
+\path (0,1) node[name=0d] {$\bullet $};
+\path (1,1) node[name=1] {$\bullet $};
+
+
+
+
+\path[->,very thick] (0d) edge node[below,font=\footnotesize]{$u$} (1);
+\path[->,very thick] (0d) edge node[left,font=\footnotesize]{$v$} (2);
+
+\path[->] (1) edge (12);
+\path[->] (2) edge (12);
+
+
+\draw [ |->,dashed, decoration={markings,mark=at position 1 with {\arrow[scale=1.7]{>}}},
+    postaction={decorate},
+    shorten >=0.4pt
+] (3,0.5) -- node[above]{$f$} (5,.5);
+
+
+\path (7-1,1.5) node[name=0] {$\bullet $};
+
+\path (7+1.3+.2+.3,1-.5-.1) node[name=1] {$\bullet $};
+\path (7+0.3,-0.42) node[name=2] {$\bullet $};
+
+\path (7+1.3+.2+.3,0-.5) node[name=12] {$\bullet $};
+
+\path let \p1 = (2), \p2 = (1), \p3=(12) in node[name=pull]  at (\x1+\x2-\x3,\y1+\y2-\y3) {$\circ$};
+
+\path[->] (0) edge (1);
+\path[->] (0) edge (2);
+\path[->] (1) edge (12);
+\path[->] (2) edge (12);
+\path[->] (pull) edge (1);
+\path[->] (pull) edge (2);
+\path[->,very thick,densely dotted] (0) edge (pull);
+
+
+\end{tikzpicture}\\
+The dotted vector approximates $- \partial_v \partial_uf(x_{\emptyset })$.
+\end{center}
+
+\pagebreak
+
+\begin{center}
+Have: $f:\R^n\to\R^n$. Seek: $\partial_uf(x_{\emptyset })$\\
+\vspace{.5cm}
+\begin{tikzpicture}[scale=1.2]
+
+\path (0.3,0) node[name=2] {$\phantom{\bullet} $};
+\path (1.5,1)+(7-1+.7,1.8-.3) node[name=3] {$\phantom{\bullet} $};
+\path (1.5,1)+(7+1.3+.5,-.2) node[name=123] {$\phantom{\bullet} $};
+\path (7+1.3+.2+.3,0-.5) node[name=12] {$\phantom{\bullet} $};
+
+
+\path (0,1) node[name=0d] {$\bullet $};
+\path (1,1) node[name=1] {$\bullet $};
+
+\path[->,very thick,white] (0d) edge node[left,font=\footnotesize]{$\phantom{v}$} (2);
+
+
+\path[->,very thick] (0d) edge node[below,font=\footnotesize]{$u$} (1);
+
+\draw [ |->,dashed, decoration={markings,mark=at position 1 with {\arrow[scale=1.7]{>}}},
+    postaction={decorate},
+    shorten >=0.4pt
+] (3,1) -- node[above]{$f$} (5,1);
+
+
+\path (7-1,1.5) node[name=0] {$\bullet $};
+
+\path (7+1.3+.2+.3,1-.5-.1) node[name=1] {$\bullet $};
+
+
+\path[->,very thick,densely dotted] (0) edge (1);
+
+
+\end{tikzpicture}\\
+The dotted vector approximates $ \partial_uf(x_{\emptyset })$.
+\end{center}
+
 \end{document}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
