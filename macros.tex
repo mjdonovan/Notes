@@ -1,11 +1,27 @@
+\ifx\BEAMERMODE\undefined
+\relax
+\else
+\providecommand{\dontloadtocloft}{}
+\providecommand{\dontloaddefinitionsoftheoremenvironments}{}
+\fi
+%%%To use beamermode, the first four lines should be:
+%%%\documentclass{beamer}
+%%%\usepackage{etex}
+%%%\newcommand{\BEAMERMODE}{}
+%%%\input{../macros.tex}
+
+\ifx\BEAMERMODE\undefined
 \usepackage{fullpage}
+\else\relax\fi
 \usepackage{amsmath,amsthm,amssymb}
 \usepackage{mathrsfs,nicefrac}
 \usepackage{amssymb}
 \usepackage{epsfig}
 \usepackage[all,2cell]{xy}
 \usepackage{sseq}
+\ifx\dontloadtocloft\undefined
 \usepackage{tocloft}
+\else\relax\fi
 \usepackage{cancel}
 \usepackage[strict]{changepage}
 \usepackage{color}
@@ -15,7 +31,7 @@
 \usepackage{framed}
 \definecolor{shadecolor}{rgb}{.925,0.925,0.925}
 
-%\usepackage{ifthen}
+\ifx\BEAMERMODE\undefined
 %Used for disabling hyperref
 \ifx\dontloadhyperref\undefined
 %\usepackage[pdftex,pdfborder={0 0 0 [1 1]}]{hyperref}
@@ -43,6 +59,9 @@
 \newcommand{\labelRIGHTHERE}[1]
 {\refstepcounter{dummyforrefstepcounter}\label{#1}}
 
+\else
+\providecommand{\texorpdfstring}[2]{#1}
+\fi
 
 %>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 %<<<  Theorem Environments  <<<
