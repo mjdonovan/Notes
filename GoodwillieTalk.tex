@@ -18,12 +18,17 @@
 \newcommand{\cartesianness}{\textup{cart}}
 \excludeversion{push vs pull}
 
-%\def\excludeversion#1{\includeversion{#1}}
+\def\excludeversion#1{\includeversion{#1}}
 \excludeversion{partial derivatives}
-\includeversion{Iterated Lipschitz conditions}
-\includeversion{functors appear}
-\includeversion{distances in Top}
+\excludeversion{Iterated Lipschitz conditions}
+\excludeversion{functors appear}
+\excludeversion{distances in Top}
 \includeversion{Excisivity and Analyticity}
+\includeversion{II.1.6}
+\includeversion{II.1.20}
+\includeversion{II.1.22}
+\includeversion{III.1.4 and III.1.5}
+\includeversion{III.1.13}
 \begin{document}
 \title{Calc 101}   
 \author{Michael Donovan} 
@@ -218,7 +223,7 @@
 
 \end{partial derivatives}
 \begin{Iterated Lipschitz conditions}
-\frame{\frametitle{Iterated Lipschitz conditions; $E_n(c,\kappa)$}
+\frame{\frametitle{An iterated Lipschitz condition}
 \tallstrut Can demand: $|a_{(f\scrx)}|\leq L\cdot|u|\cdot|v|\cdot|w|$ for all short $u,v,w$.\\ %$\partial_w\partial_v\partial_uf(x_{\emptyset })$\\
 \vspace{.5cm}
 \begin{tikzpicture}[scale=1.2]
@@ -321,7 +326,7 @@ and $\scrx$ is the cube with $x_\emptyset \rightarrow x_i$ as initial arrows:\pa
 \end{center}\pause
 Then all $(n+1)^\textup{st}$ derivatives are bounded by $e^c$ (where they exist).\pause
 
-\begin{center}{\color{blue}This will define ``stably analytic functor''!}\end{center}
+\begin{center}{\color{blue}This will define ``stably $n$-excisive functor''!}\end{center}
 }
 
 \frame{\frametitle{Iterated Lipschitz conditions; $An(\rho)$}
@@ -340,108 +345,6 @@ For $f$ a $C^\infty$ function $C\to \R$, where $y\in C\subset \R$:
 }
 \end{Iterated Lipschitz conditions}
 %<2pc>
-
-
-
-\begin{functors appear}
-\frame{\frametitle{$F\scrx_\emptyset\overset{a_\scrx}{\to}h_0(F\scrx)$} 
-\tallstrut Have $F:\calc\to\cald$, and (strongly cocartesian) $n$-cube $\scrx$:\\ %$\partial_w\partial_v\partial_uf(x_{\emptyset })$\\
-\vspace{.5cm}
-\begin{tikzpicture}[scale=1.2]
-\path (0.3,0) node[name=2] {$\bullet $};
-\path (1.3,0) node[name=12] {$\bullet $};
-\path (0,1) node[name=0d] {$\bullet $};
-\path (0d) node[shape=rectangle,left] {\makebox[0cm][r]{$\scrx_{\emptyset }$}};
-\path (1,1) node[name=1] {$\bullet $};
-\path (1.5,1)+(0.3,0) node[name=23] {$\bullet $};
-\path (1.5,1)+(1.3,0) node[name=123] {$\bullet $};
-\path (1.5,1)+(0,1) node[name=3] {$\bullet $};
-\path (1.5,1)+(1,1) node[name=13] {$\bullet $};
-
-\path[->,very thick] (0d) edge node[below,font=\footnotesize]{$u$} (1);
-\path[->,very thick] (0d) edge node[left,font=\footnotesize]{$v$} (2);
-\path[->,very thick] (0d) edge node[left,font=\footnotesize]{$w$} (3);
-
-\path[->] (2) edge (12);
-
-\path[->] (3) edge  (23);
-\path[->] (3) edge  (13);
-\path[->] (13) edge (123);
-\path[->] (23) edge (123);
-
-
-\path[->] (2) edge  (23);
-\path[->] (12) edge  (123);
-
-\path[->] (1) edge [-,line width=3pt,draw=white] (12)
-			edge (12);
-\path[->] (1) edge [-,line width=3pt,draw=white] (13)
-			edge (13);
-
-\draw [ |->,dashed, decoration={markings,mark=at position 1 with {\arrow[scale=1.7]{>}}},
-    postaction={decorate},
-    shorten >=0.4pt
-] (3.25,1) -- (4,1);
-
-\path (7-1-1.5,1.5) node[name=0] {$\bullet $};
-\path (0) node[above left] {$F\scrx_\emptyset $};
-
-\path (7+1.3+.2+.3-1.5,1-.5-.1) node[name=1] {$\bullet $};
-\path (7+0.3-1.5,-0.42) node[name=2] {$\bullet $};
-\path (1.5-1.5,1)+(7-1+.7,1.8-.3) node[name=3] {$\bullet $};
-
-\path (7+1.3+.2+.3-1.5,0-.5) node[name=12] {$\bullet $};
-\path (1.5-1.5,1)+(7+0.3,.1) node[name=23] {$\bullet $};
-\path (1.5-1.5,1)+(7+1.3+.5,.7) node[name=13] {$\bullet $};
-
-\path (1.5-1.5,1)+(7+1.3+.5,-.2) node[name=123] {$\bullet $};
-
-\path let \p1 = (2), \p2 = (1), \p3=(12) in node[name=pull]  at (\x1+\x2-\x3,\y1+\y2-\y3) {$\circ$};
-\path let \p1 = (23), \p2 = (13), \p3=(123) in node[name=pull3]  at (\x1+\x2-\x3,\y1+\y2-\y3) {$\circ$};
-\path let \p1 = (3), \p2 = (pull), \p3=(pull3) in node[name=pullpull]  at (\x1+\x2-\x3,\y1+\y2-\y3) {$\circ$};
-
-\path[->] (0) edge (2);
-\path[->] (1) edge (12);
-\path[->] (2) edge (12);
-\path[->] (pull) edge (2);
-\path[->,very thick,densely dotted] (0) edge node[name=midedge]{} (pullpull);
-
-\path[->] (3) edge (13);
-\path[->] (3) edge (23);
-\path[->] (13) edge (123);
-\path[->] (23) edge (123);
-\path[->] (pull3) edge (13);
-\path[->] (pull3) edge (23);
-\path[->,densely dotted] (3) edge (pull3);
-\path[->,densely dotted] (pullpull) edge (pull);
-\path[->,densely dotted] (pullpull) edge (3);
-
-\path[->] (0) edge (3);
-\path[->] (2) edge (23);
-\path[->] (12) edge (123);
-
-\path[->] (pull) edge [-,line width=3pt,draw=white] (pull3);
-\path[->,densely dotted] (pull) edge (pull3);
-\path[->] (pull) edge [-,line width=3pt,draw=white] (1) edge (1);
-
-\path[->, shorten >=.25cm, shorten <=.25cm] (0) edge [-,line width=3pt,draw=white] (1);
-\path[->] (0) edge (1);
-\path[->] (1) edge [-,line width=3pt,draw=white] (13) edge (13);
-
-\path[->] (4,-.21) node[shape=rectangle] {$h_0(F\scrx)$} edge (pullpull);
-\path[->, shorten >=-2mm] (3.6,.21) node {$a_\scrx$} edge (midedge);
-
-\path (0,2.5) node[shape=rectangle] {{$\underline\scrx$}};
-\path (4.5,2.5) node[shape=rectangle] {\underline{$F\scrx$}};
-\end{tikzpicture}\\
-\pause
-\tallstrut $\textup{`parallelograms}:=\textup{pullbacks'} \implies \textup{`$h_0(f\scrx):=\lim F\scrx|_{\calp_0(n)}$'}$.
-}
-\end{functors appear}
-
-
-
-
 
 
 \begin{push vs pull}
@@ -549,7 +452,8 @@ For $f$ a $C^\infty$ function $C\to \R$, where $y\in C\subset \R$:
 \end{push vs pull}
 
 \begin{distances in Top}
-\frame{\frametitle{Distances in $\Top$}
+\frame{\frametitle{Distances in $\calc$ and $\cald$}
+Interested in functors $\calc\to\cald$, where $\begin{cases}\calc=\calu_Y,\calt_Y\\\cald=\calu,\calt,\cals p\end{cases}$\pause
 \begin{itemize}\squishlist
 \setlength{\parindent}{.25in}
 \item Should measure distance between topological spaces \emph{along maps}:
@@ -561,19 +465,206 @@ For $f$ a $C^\infty$ function $C\to \R$, where $y\in C\subset \R$:
 }
 \end{distances in Top}
 
+\begin{functors appear}
+\frame{\frametitle{$F\scrx_\emptyset\overset{a_\scrx}{\to}h_0(F\scrx)$} 
+\tallstrut Have $F:\calc\to\cald$, and (strongly cocartesian) $n$-cube $\scrx$:\\ %$\partial_w\partial_v\partial_uf(x_{\emptyset })$\\
+\vspace{.5cm}
+\begin{tikzpicture}[scale=1.2]
+\path (0.3,0) node[name=2] {$\bullet $};
+\path (1.3,0) node[name=12] {$\bullet $};
+\path (0,1) node[name=0d] {$\bullet $};
+\path (0d) node[shape=rectangle,left] {\makebox[0cm][r]{$\scrx_{\emptyset }$}};
+\path (1,1) node[name=1] {$\bullet $};
+\path (1.5,1)+(0.3,0) node[name=23] {$\bullet $};
+\path (1.5,1)+(1.3,0) node[name=123] {$\bullet $};
+\path (1.5,1)+(0,1) node[name=3] {$\bullet $};
+\path (1.5,1)+(1,1) node[name=13] {$\bullet $};
 
+\path[->,very thick] (0d) edge node[below,font=\footnotesize]{$u$} (1);
+\path[->,very thick] (0d) edge node[left,font=\footnotesize]{$v$} (2);
+\path[->,very thick] (0d) edge node[left,font=\footnotesize]{$w$} (3);
+
+\path[->] (2) edge (12);
+
+\path[->] (3) edge  (23);
+\path[->] (3) edge  (13);
+\path[->] (13) edge (123);
+\path[->] (23) edge (123);
+
+
+\path[->] (2) edge  (23);
+\path[->] (12) edge  (123);
+
+\path[->] (1) edge [-,line width=3pt,draw=white] (12)
+			edge (12);
+\path[->] (1) edge [-,line width=3pt,draw=white] (13)
+			edge (13);
+
+\draw [ |->,dashed, decoration={markings,mark=at position 1 with {\arrow[scale=1.7]{>}}},
+    postaction={decorate},
+    shorten >=0.4pt
+] (3.25,1) -- (4,1);
+
+\path (7-1-1.5,1.5) node[name=0] {$\bullet $};
+\path (0) node[above left] {$F\scrx_\emptyset $};
+
+\path (7+1.3+.2+.3-1.5,1-.5-.1) node[name=1] {$\bullet $};
+\path (7+0.3-1.5,-0.42) node[name=2] {$\bullet $};
+\path (1.5-1.5,1)+(7-1+.7,1.8-.3) node[name=3] {$\bullet $};
+
+\path (7+1.3+.2+.3-1.5,0-.5) node[name=12] {$\bullet $};
+\path (1.5-1.5,1)+(7+0.3,.1) node[name=23] {$\bullet $};
+\path (1.5-1.5,1)+(7+1.3+.5,.7) node[name=13] {$\bullet $};
+
+\path (1.5-1.5,1)+(7+1.3+.5,-.2) node[name=123] {$\bullet $};
+
+\path let \p1 = (2), \p2 = (1), \p3=(12) in node[name=pull]  at (\x1+\x2-\x3,\y1+\y2-\y3) {$\circ$};
+\path let \p1 = (23), \p2 = (13), \p3=(123) in node[name=pull3]  at (\x1+\x2-\x3,\y1+\y2-\y3) {$\circ$};
+\path let \p1 = (3), \p2 = (pull), \p3=(pull3) in node[name=pullpull]  at (\x1+\x2-\x3,\y1+\y2-\y3) {$\circ$};
+
+\path[->] (0) edge (2);
+\path[->] (1) edge (12);
+\path[->] (2) edge (12);
+\path[->] (pull) edge (2);
+\path[->,very thick,densely dotted] (0) edge node[name=midedge]{} (pullpull);
+
+\path[->] (3) edge (13);
+\path[->] (3) edge (23);
+\path[->] (13) edge (123);
+\path[->] (23) edge (123);
+\path[->] (pull3) edge (13);
+\path[->] (pull3) edge (23);
+\path[->,densely dotted] (3) edge (pull3);
+\path[->,densely dotted] (pullpull) edge (pull);
+\path[->,densely dotted] (pullpull) edge (3);
+
+\path[->] (0) edge (3);
+\path[->] (2) edge (23);
+\path[->] (12) edge (123);
+
+\path[->] (pull) edge [-,line width=3pt,draw=white] (pull3);
+\path[->,densely dotted] (pull) edge (pull3);
+\path[->] (pull) edge [-,line width=3pt,draw=white] (1) edge (1);
+
+\path[->, shorten >=.25cm, shorten <=.25cm] (0) edge [-,line width=3pt,draw=white] (1);
+\path[->] (0) edge (1);
+\path[->] (1) edge [-,line width=3pt,draw=white] (13) edge (13);
+
+\path[->] (4,-.21) node[shape=rectangle] {$h_0(F\scrx)$} edge (pullpull);
+\path[->, shorten >=-2mm] (3.6,.21) node {$a_\scrx$} edge (midedge);
+
+\path (0,2.5) node[shape=rectangle] {{$\underline\scrx$}};
+\path (4.5,2.5) node[shape=rectangle] {\underline{$F\scrx$}};
+\end{tikzpicture}\\
+\pause
+\tallstrut $\textup{`parallelograms}:=\textup{pullbacks'} \implies \textup{`$h_0(f\scrx):=\lim F\scrx|_{\calp_0(n)}$'}$.
+}
+\end{functors appear}
 
 
 \begin{Excisivity and Analyticity}
-\frame{\frametitle{Distances in $\Top$}
-$F:\calc\to\cald$ has $E_n(c,\kappa)$ if, for all $X_\emptyset ,X_1,\ldots,X_{n+1}\in \calc$ with CW-inclusions $X_\emptyset\rightarrow X_i$ such that $\dist(X_\emptyset\rightarrow X_i)\leq e^{-\kappa}$, we have 
-%\[\left|\sum_{U\in \calP(n+1)}(-1)^{|U|}f\left(x_\emptyset+\sum_{i\in U}(x_i-x_\emptyset)\right)\right|
-%\leq e^{c}\cdot\prod_{i=1}^{n+1} \left| x_\emptyset -x_i\right|\]
-\[\dist\left(FX_\emptyset\overset{a_{\scrx}}{\to} h_0(F\scrX)\right)\leq e^{c}
-\cdot\prod_{i=1}^{n+1} \dist\left(X_\emptyset{\rightarrow} X_i\right)\quad \textup{i.e.}\quad \cartesianness(F(\scrx))\geq -c+\sum_{i=1}^{n+1}\conn(X_{\emptyset }\rightarrow X_i).\]
-Here, $\scrx$ is the pushout $(n+1)$-cube with initial arrows that $X_\emptyset \rightarrow X_i$.
+\frame{\frametitle{Stable $n$-excision ($E_n(c,\kappa)$)}
+$F:\calc\to\cald$ has \underline{$E_n(c,\kappa)$} if\ \ \ \pause $\xcancel{\textup{($F$ is $C^\infty$, and)}}$
+\begin{center}
+\pause
+whenever $\scrX_\emptyset\rightarrow \scrX_{i}$ ($i=1,\ldots,n+1$) are maps in $\calc$,\\
+and $\scrx$ is the corresponding pushout $(n+1)$-cube:
+
+\pause
+
+$\txt{$\dist\left(F\scrx_\emptyset \overset{a_{F(\scrx)}}{\to}h_0(F\scrx)\right)\leq
+e^c\displaystyle\prod_{i=1}^{n+1}\dist\left(\scrx_\emptyset \rightarrow \scrx_i\right)$\\$\textup{whenever}\ \ell({\scrX_\emptyset\rightarrow \scrX_{i}})\leq e^{-\kappa}\textup{ for all $i$}.$}$
+
+\pause
+\phantom{mover}
+
+{\color{blue}$F$ is ``stably $n$-excisive''!}
+\pause
+
+\phantom{mover}
+
+$\left(\raisebox{2mm}{\txt{$\cartesianness\left(F\scrx\right)\geq -c+\displaystyle\sum_{i=1}^{n+1}\conn\left(\scrx_\emptyset \rightarrow \scrx_i\right)$\\$\textup{whenever}\ {\scrX_\emptyset\rightarrow \scrX_{i}}\textup{ is $\kappa$-connected for all $i$}.$}}\right)$
+\end{center}
 }
+
+\frame{\frametitle{$\rho$-analyticity}
+$F$ is \underline{$\rho$-analytic} if: 
+\[\textup{$F$ has $E_n(n\rho-q,\rho+1)$ for all $n$.}\]
+%\begin{thm*}
+%If $F$ is
+%$\rho$-analytic and $X\downarrow Y$ is $(\rho +1)$-connected,
+%then the connectivity of the map
+%$F(X)\to(P_nF)(X)$ tends to $+\infty$ with $n$, so
+%that $F(X)$ is equivalent to the homotopy limit 
+%$(P_{\infty}F)(X\rightarrow Y)$ of the
+%tower.
+%\end{thm*}
+\pause
+\begin{thm*}
+If $F$ is
+$\rho$-analytic and $\dist(X\downarrow Y)\leq e^{-\rho -1}$, then
+\[\dist\Bigl(F(X)\to P_nF(X)\Bigr)\rightarrow0\textup{ as $n\rightarrow\infty$},\]
+so that $F(X)\sim \holimit P_{n}F(X)$.
+\end{thm*}\pause
+\begin{thm*}[restatement]
+If $F$ is
+$\rho$-analytic and $\conn(X\downarrow Y)\geq\rho +1$, then
+\[\conn\Bigl(F(X)\to P_nF(X)\Bigr)\rightarrow\infty\textup{ as $n\rightarrow\infty$},\]
+so that $F(X)\sim \holimit P_{n}F(X)$.
+\end{thm*}
+}
+
+
+
+\frame{\frametitle{Agreement to $n^\textup{th}$ order at $Y$ ($O_n(c,\kappa)$)}
+A natural transformation $u:F\nt G$ has \underline{$O_n(c,\kappa)$} if\pause
+\begin{center}
+$\txt{$\dist(F(X)\overset{u_X}{\to} G(X))\leq e^c\dist(X\downarrow Y)^{n+1}$\\$\textup{whenever}\ \dist(X\downarrow Y)\leq e^{-\kappa}$}$
+
+\pause
+\phantom{mover}
+
+{\color{blue}$F$ and $G$ ``agree to  $n^\textup{th}$ order at $Y$'' via $u$!}
+\pause
+
+\phantom{mover}
+
+$\left(\raisebox{1.2mm}{\txt{$\conn(F(X)\overset{u_X}{\to} G(X))\geq -c+(n+1)\conn(X\downarrow Y)$\\$\textup{whenever}\ \conn(X\downarrow Y)\geq\kappa.$}}\right)$
+\end{center}
+}
+
 \end{Excisivity and Analyticity}
+
+
+\begin{II.1.6}
+\frame{\frametitle{II.1.6}
+
+}
+\end{II.1.6}
+
+\begin{II.1.20}
+\frame{\frametitle{II.1.20}
+
+}
+\end{II.1.20}
+
+\begin{II.1.22}
+\frame{\frametitle{II.1.22}
+
+}
+\end{II.1.22}
+
+\begin{III.1.4 and III.1.5}
+\frame{\frametitle{II.1.4 and II.1.5}
+
+}
+\end{III.1.4 and III.1.5}
+
+\begin{III.1.13}
+\frame{\frametitle{II.1.13}
+
+}
+\end{III.1.13}
 
 
 
