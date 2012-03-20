@@ -20,17 +20,17 @@
 \newcommand{\cartesianness}{\textup{cart}}
 \excludeversion{push vs pull}
 
-%\def\excludeversion#1{\includeversion{#1}}
+\def\excludeversion#1{\includeversion{#1}}
 \excludeversion{partial derivatives}
 \excludeversion{Iterated Lipschitz conditions}
-\excludeversion{functors appear}
 \excludeversion{distances in Top}
+\includeversion{functors appear}
 \excludeversion{Excisivity and Analyticity}
-\includeversion{II.1.6}
-\includeversion{II.1.20}
-\includeversion{II.1.22}
+\excludeversion{II.1.6}
+\excludeversion{II.1.20}
+\excludeversion{II.1.22}
 \includeversion{III.1.4}
-\includeversion{III.1.5}
+\excludeversion{III.1.5}
 \includeversion{III.1.13}
 
 %
@@ -116,7 +116,7 @@
 
 \section{Section no.1} 
 \frame{\frametitle{Partial derivatives} 
-\tallstrut Have: $f:\R^n\to\R^n$. Seek: $\partial_uf(x_{\emptyset })$\\
+\tallstrut Have: $f:\R^n\to\R^n$. Seek: $\Delta_uf(x_{\emptyset })$\\
 \vspace{.5cm}
 \begin{tikzpicture}[scale=1.2]
 
@@ -150,11 +150,11 @@
 \path (0,2.5) node[shape=rectangle] {\underline{$\scrx$}};
 \path (4.5,2.5) node[shape=rectangle] {\underline{$f\scrx$}};
 \end{tikzpicture}\\
-\tallstrut The dotted vector %(call me $a_X$, and add $x_1,x_2,x_{12}$)
+\tallstrut The dotted vector $a_{{(f\scrx)}}$ %(call me $a_X$, and add $x_1,x_2,x_{12}$)
  approximates $ \partial_uf(x_{\emptyset })$.
 }
 \frame{\frametitle{Partial derivatives} 
-\tallstrut Have: $f:\R^n\to\R^n$. Seek: $\partial_v\partial_uf(x_{\emptyset })$\\
+\tallstrut Have: $f:\R^n\to\R^n$. Seek: $\Delta_v\Delta_uf(x_{\emptyset })$\\
 \vspace{.5cm}
 \begin{tikzpicture}[scale=1.2]
 
@@ -202,11 +202,11 @@
 \path (0,2.5) node[shape=rectangle] {\underline{$\scrx$}};
 \path (4.5,2.5) node[shape=rectangle] {\underline{$f\scrx$}};
 \end{tikzpicture}\\
-\tallstrut The dotted vector approximates $- \partial_v \partial_uf(x_{\emptyset })$.
+\tallstrut The dotted vector $a_{{(f\scrx)}}$ approximates $- \partial_v \partial_uf(x_{\emptyset })$.
 }
 
 \frame{\frametitle{Partial derivatives} 
-\tallstrut Have: $f:\R^n\to\R^n$. Seek: $\partial_w\partial_v\partial_uf(x_{\emptyset })$\\
+\tallstrut Have: $f:\R^n\to\R^n$. Seek: $\Delta_w\Delta_v\Delta_uf(x_{\emptyset })$\\
 \vspace{.5cm}
 \begin{tikzpicture}[scale=1.2]
 \path (0.3,0) node[name=2] {$\bullet $};
@@ -292,13 +292,13 @@
 \path (0,2.5) node[shape=rectangle] {\underline{$\scrx$}};
 \path (4.5,2.5) node[shape=rectangle] {\underline{$f\scrx$}};
 \end{tikzpicture}\\
-\tallstrut The dotted vector approximates $\partial_w \partial_v \partial_uf(x_{\emptyset })$.
+\tallstrut The dotted vector $a_{{(f\scrx)}}$ approximates $\partial_w \partial_v \partial_uf(x_{\emptyset })$.
 }
 
 \end{partial derivatives}
 \begin{Iterated Lipschitz conditions}
-\frame{\frametitle{An iterated Lipschitz condition}
-\tallstrut \uncover<2->{Can demand: $|a_{(f\scrx)}|\leq L\cdot|u|\cdot|v|\cdot|w|$ for all short $u,v,w$.}\\ %$\partial_w\partial_v\partial_uf(x_{\emptyset })$\\
+\frame{\frametitle{A 3-fold Lipschitz condition}
+\tallstrut \uncover<1->{Can demand: $|a_{(f\scrx)}|\leq L\cdot|u|\cdot|v|\cdot|w|$ for all \emph{short} $u,v,w$.}\\ %$\partial_w\partial_v\partial_uf(x_{\emptyset })$\\
 \vspace{.5cm}
 \begin{tikzpicture}[scale=1.2]
 \path (0.3,0) node[name=2] {$\bullet $};
@@ -386,7 +386,7 @@
 \path (0,2.5) node[shape=rectangle] {\underline{$\scrx$}};
 \path (4.5,2.5) node[shape=rectangle] {\underline{$f\scrx$}};
 \end{tikzpicture}\\
-\tallstrut \uncover<1->{Then $|\partial_w\partial_v\partial_uf|\leq L$ (where it exists) whenever $|u|,|v|,|w|\leq1$.}
+\tallstrut \uncover<2->{Then $|\partial_w\partial_v\partial_uf|\leq L$ (where it exists) whenever $|u|,|v|,|w|\leq1$.}
 %The dotted vector should still approximate $\partial_w \partial_v \partial_uf(x_{\emptyset })$.
 }
 %
@@ -562,22 +562,24 @@ For $f$ a $C^\infty$ function $C\to \R$, where $y\in C\subset \R$:
 \end{push vs pull}
 
 \begin{distances in Top}
-\frame{\frametitle{Distances in $\calc$ and $\cald$}
-Interested in functors $\calc\to\cald$, where $\begin{cases}\calc=\calu_Y,\calt_Y\\\cald=\calu,\calt,\cals p\end{cases}$\pause
+\frame{\frametitle{Calculus of \emph{functors}}
+Interested in functors $\calc\to\cald$, where $\begin{cases}\calc=\calu_Y,\calt_Y;\\\cald=\calu,\calt,\cals p.\end{cases}$\pause
 \begin{itemize}\squishlist
 \setlength{\parindent}{.25in}
 \item Should measure distance between topological spaces \emph{along maps}:
 \[X\overset{f}{\to}X'\quad \leadsto\quad \dist(f)\]
 \pause
 \item $\dist(f)$ should vary inversely with $\conn(f)$:\pause
-\[\dist(f):=e^{-\conn(f)}.\]
+\[\dist(f):=e^{-\conn(f)}.\]\pause
+\item Construct parallelograms in $\calc$ as pushouts.\pause
+\item Construct parallelograms in $\cald$ as pullbacks.
 \end{itemize}
 }
 \end{distances in Top}
 
 \begin{functors appear}
 \frame{\frametitle{$F\scrx_\emptyset\overset{a_\scrx}{\to}h_0(F\scrx)$} 
-\tallstrut Have $F:\calc\to\cald$, and (strongly cocartesian) $n$-cube $\scrx$:\\ %$\partial_w\partial_v\partial_uf(x_{\emptyset })$\\
+\tallstrut Have $F:\calc\to\cald$, and strongly cocartesian $n$-cube $\scrx$:\pause\\ %$\partial_w\partial_v\partial_uf(x_{\emptyset })$\\
 \vspace{.5cm}
 \begin{tikzpicture}[scale=1.2]
 \path (0.3,0) node[name=2] {$\bullet $};
@@ -714,12 +716,12 @@ $F$ has $E_n(n\rho-q,\rho+1)$ for all $n$.
 %tower.
 %\end{thm*}
 \pause
-\begin{thm*}
+\begin{block}{Theorem III.1.13}
 If $F$ is
 $\rho$-analytic and $\dist(X\downarrow Y)\leq e^{-\rho -1}$, then
 \[\dist\Bigl(F(X)\to P_nF(X)\Bigr)\rightarrow0\textup{ as $n\rightarrow\infty$},\]
 so that $F(X)\sim \holimit P_{n}F(X)$.
-\end{thm*}\pause
+\end{block}\pause
 %\begin{thm*}[restatement]
 %If $F$ is
 %$\rho$-analytic and $\conn(X\downarrow Y)\geq\rho +1$, then
@@ -828,9 +830,10 @@ $\vcenter{\def\objectstyle{\scriptstyle} \xymatrix@!0@R=.5cm@C=.5cm{
 }}$
 }%%% END:  \usebox{\saveboxFEF}
 \frame{
-\begin{prop*}[II.1.6]
+%\begin{prop*}[II.1.6]
+\begin{block}{Proposition II.1.6}
 \[\textup{In cartesianness:\qquad }\underbrace{\overset{\TF k}{X}\to \overset{k}{Y}}_{k}\quad\textup{and}\quad  \underbrace{\overset{k}{X}\to \overset{k+1}{Y}}_{\TF k}\]
-\end{prop*}\pause
+\end{block}\pause
 \begin{center}$\xymatrix@R=-8mm{
 &
 \fbox{\usebox{\saveboxQMZ}}\ar[dl]&%r1c1
@@ -847,7 +850,7 @@ $\vcenter{\def\objectstyle{\scriptstyle} \xymatrix@!0@R=.5cm@C=.5cm{
 
 \begin{II.1.20}
 \frame{
-\begin{prop*}[II.1.20]
+\begin{block}{Proposition II.1.20}
 In cartesianness:
 \[ 
 \left.\vcenter{\xymatrix@R=.4cm@C=.6cm{
@@ -860,13 +863,13 @@ In cartesianness:
 \framebox[9mm][c]{\tiny$k+1$\ST} \ar[rr] &&
 \framebox[9mm][c]{\tiny$k+2$\ST}
 }}\right\}\textup{\tiny $k$}\]
-\end{prop*}
+\end{block}
 }
 \end{II.1.20}
 
 \begin{II.1.22}
 \frame{
-\begin{prop*}[II.1.22]
+\begin{block}{Proposition II.1.22}
 Given a diagram of cubes which are variously cartesian as marked:
 \[ 
 \vcenter{\xymatrix@R=.4cm@C=.6cm{
@@ -880,7 +883,7 @@ Given a diagram of cubes which are variously cartesian as marked:
 \framebox[9mm][c]{\tiny$k_{123}$\ST}
 }}\]
 then the cube of pullbacks is $\min\left\{1-|U|+k_U\right\}$-cartesian.
-\end{prop*}
+\end{block}
 }
 \end{II.1.22}
 
@@ -936,7 +939,7 @@ then the cube of pullbacks is $\min\left\{1-|U|+k_U\right\}$-cartesian.
 %}
 
 \frame{
-\begin{prop*}[III.1.4]
+\begin{block}{Proposition III.1.4}
 If $F$ satisfies $E_n(c,\kappa)$, then
 \begin{enumerate}\squishlist
 \setlength{\parindent}{.25in}
@@ -945,7 +948,7 @@ $E_n({c-1},\kappa -1)$ and
 \item[\textup{(2)}] $t_nF:F\to T_nF$ satisfies
 $O_n(c,\kappa)$.
 \end{enumerate}
-\end{prop*}
+\end{block}
 \begin{center}
 \begin{enumerate}\squishlist
 \setlength{\parindent}{.25in}
@@ -968,7 +971,7 @@ Each cube is $(-c+\sum(k_i+1))$-cartesian.\pause\pause
 
 
 \frame{
-\begin{prop*}[III.1.4]
+\begin{block}{Proposition III.1.4}
 If $F$ satisfies $E_n(c,\kappa)$, then
 \begin{enumerate}\squishlist
 \setlength{\parindent}{.25in}
@@ -977,7 +980,7 @@ $E_n({c-1},\kappa -1)$ and
 \item[\textup{(2)}] $t_nF:F\to T_nF$ satisfies
 $O_n(c,\kappa)$.
 \end{enumerate}
-\end{prop*}
+\end{block}
 \begin{center}
 \begin{enumerate}\squishlist
 \setlength{\parindent}{.25in}
@@ -1039,7 +1042,7 @@ X\ar[r]&M(X\downarrow Y)
 
 \begin{III.1.5}
 \frame{
-\begin{prop*}[III.1.5]
+\begin{block}{Proposition III.1.5}
 If $F$ satisfies $E_n(c,\kappa)$, then
 \begin{enumerate}\squishlist
 \setlength{\parindent}{.25in}
@@ -1047,53 +1050,56 @@ If $F$ satisfies $E_n(c,\kappa)$, then
 \item[\textup{(2)}] $p_nF:F\to T_nF$ satisfies
 $O_n(c,\kappa)$.
 \end{enumerate}
-\end{prop*}\vspace{-3mm}\pause
+\end{block}\vspace{-3mm}\pause
+%
+%\uncover<3->
+%
 \[
 \vcenter{\xymatrix@1@C=2.3cm{
 \overset{\makebox[0cm][c]{\scriptsize$E_n(c,\kappa)$}}{\phantom{T_n^2}F}
-\ar[r]_-{O_n(c,\kappa)}
+\ar[r]_-{\uncover<3->{O_n(c,\kappa)}}
 &%r1c1
-\overset{\makebox[0cm][c]{\scriptsize$E_n(c-1,\kappa-1)$}}{T_n^{\phantom{1}}F}
-\ar[r]_-{O_n(c-1,\kappa-1)}
+\overset{\uncover<3->{\makebox[0cm][c]{\scriptsize$E_n(c-1,\kappa-1)$}}}{T_n^{\phantom{1}}F}
+\ar[r]_-{\uncover<4->{O_n(c-1,\kappa-1)}}
 &%r1c1
-\overset{\makebox[0cm][c]{\scriptsize$E_n(c-2,\kappa-2)$}}{T_n^2F}
-\ar[r]_-{O_n(c-2,\kappa-2)}
+\overset{\uncover<4->{\makebox[0cm][c]{\scriptsize$E_n(c-2,\kappa-2)$}}}{T_n^2F}
+\ar[r]_-{\uncover<5->{O_n(c-2,\kappa-2)}}
 &%r1c1
-\overset{\makebox[0cm][c]{\scriptsize$E_n(c-3,\kappa-3)$}}{T_n^3F\makebox[0cm][l]{\ \ $\cdots$}}
+\overset{\uncover<5->{\makebox[0cm][c]{\scriptsize$E_n(c-3,\kappa-3)$}}}{T_n^3F\makebox[0cm][l]{\ \ $\cdots$}}
 %\ar[r]_-{O_n(c-3,\kappa-3)}
 &%r1c1
 %\cdots
-}}\]\pause
+}}\]\pause\pause\pause\pause
 \begin{enumerate}\squishlist
 \setlength{\parindent}{.25in}
 \item[\textup{(1)}]
 \ST Given $\scrX$ a strongly cocartesian $(n+1)$-cube:
 \end{enumerate}
 \[\xymatrix@C=5mm{
-F (\scrX_\emptyset )
-\ar[d]^-{a_{T_nF(\scrX)}}
-\ar[r]
+\uncover<7->{F (\scrX_\emptyset )}
+\only<7->{\ar[d]^-{a_{T_nF(\scrX)}}}
+\only<7->{\ar[r]}
 &%r1c1
-T^2_nF (\scrX_\emptyset )
-\ar[d]^-{a_{T_nF(\scrX)}}\ar[r]
+\uncover<7->{T^2_nF (\scrX_\emptyset )}
+\only<7->{\ar[d]^-{a_{T_nF(\scrX)}}\ar[r]}
 &%r1c2
-T^3_nF (\scrX_\emptyset) 
-\ar[d]^-{a_{T_n^2F(\scrX)}}\ar@{..>}[rr]
+\uncover<7->{T^3_nF (\scrX_\emptyset) }
+\only<7->{\ar[d]^-{a_{T_n^2F(\scrX)}}\ar@{..>}[rr]}
 &%r1c3
 %\cdots\ar[r]
 &%r1c4
-P_nF(\scrX_\emptyset )\ar[d]^-{a_{P_nF(\scrX)}}
+P_nF(\scrX_\emptyset )\ar[d]^-{a_{P_nF(\scrX)}}_-{\sim?\ }
 \\%r1c5
-h_0(F(\scrX))\ar[r]
+\uncover<7->{h_0(F(\scrX))}\only<7->{\ar[r]}
 &%r2c1
-h_0(T_nF(\scrX))\ar[r]
+\uncover<7->{h_0(T_nF(\scrX))}\only<7->{\ar[r]}
 &%r2c2
-h_0(T^2_nF(\scrX))\ar@{..>}[rr]
+\uncover<7->{h_0(T^2_nF(\scrX))}\only<7->{\ar@{..>}[rr]}
 &%r2c3
 %\cdots\ar[r]
 &%r2c4
 h_0(P_nF(\scrX))%r2c5
-}\]
+}\]\pause\pause
 \begin{enumerate}\squishlist
 \setlength{\parindent}{.25in}
 \item[\textup{(2)}] Follows by ultrametric inequality: $\ell(f\circ g)\leq \max(\ell(f),\ell(g))$.
@@ -1102,94 +1108,42 @@ h_0(P_nF(\scrX))%r2c5
 \end{III.1.5}
 
 \begin{III.1.13}
+\frame{
+\begin{block}{Theorem III.1.13}
+If $F$ is
+$\rho$-analytic and $\dist(X\downarrow Y)\leq e^{-\rho -1}$, then
+\[\dist\Bigl(F(X)\to P_nF(X)\Bigr)\rightarrow0\textup{ as $n\rightarrow\infty$},\]
+so that $F(X)\sim \holimit P_{n}F(X)$.
+\end{block}
+\begin{center}\pause
+%\begin{itemize}\squishlist
+%\setlength{\parindent}{.25in}
+%\item $F$ has $E_n(n\rho-q,\rho+1)$ (for all $n$).\pause
+%\item $p_n:F(X)\to P_nF(X)$ has $O_n(n\rho-q,\rho+1)$.\pause
+%\end{itemize}
+$F$ has $E_n(n\rho-q,\rho+1)$ (for all $n$).\\\pause
 
+\phantom{sd}
 
+$p_n:F(X)\to P_nF(X)$ has $O_n(n\rho-q,\rho+1)$.\\\pause
+\begin{alignat*}{2}
+\uncover<4->{\conn(p_n)}
+&\uncover<4->{\geq}
+\uncover<4->{-(n\rho-q)+(n+1)\cdot\conn(X\downarrow Y)}%
+&\qquad&\uncover<5->{\text{(definition)}}\\
+&\uncover<5->{\geq}
+\uncover<5->{\textup{const}+n\cdot(\conn(X\downarrow Y)-\rho)}\\
+% Left hand side
+% Relation
+&\uncover<6->{\rightarrow}
+% Right hand side
+\uncover<6->{\infty}% Comment
+\end{alignat*}
 
-\frame{\frametitle{III.1.13}
-
+\end{center}
 }
 \end{III.1.13}
 
 
 
 \end{document}
-\section{Section no. 2} 
-\subsection{Lists I}
-\frame{\frametitle{unnumbered lists}
-\begin{itemize}
-\item Introduction to  \LaTeX  
-\item Course 2 
-\item Termpapers and presentations with \LaTeX 
-\item Beamer class
-\end{itemize} 
-}
-
-\frame{\frametitle{lists with pause}
-\begin{itemize}
-\item Introduction to  \LaTeX \pause 
-\item Course 2 \pause 
-\item Termpapers and presentations with \LaTeX \pause 
-\item Beamer class
-\end{itemize} 
-}
-
-\subsection{Lists II}
-\frame{\frametitle{numbered lists}
-\begin{enumerate}
-\item Introduction to  \LaTeX  
-\item Course 2 
-\item Termpapers and presentations with \LaTeX 
-\item Beamer class
-\end{enumerate}
-}
-\frame{\frametitle{numbered lists with pause}
-\begin{enumerate}
-\item Introduction to  \LaTeX \pause 
-\item Course 2 \pause 
-\item Termpapers and presentations with \LaTeX \pause 
-\item Beamer class
-\end{enumerate}
-}
-
-\section{Section no.3} 
-\subsection{Tables}
-\frame{\frametitle{Tables}
-\begin{tabular}{|c|c|c|}
-\hline
-\textbf{Date} & \textbf{Instructor} & \textbf{Title} \\
-\hline
-WS 04/05 & Sascha Frank & First steps with  \LaTeX  \\
-\hline
-SS 05 & Sascha Frank & \LaTeX \ Course serial \\
-\hline
-\end{tabular}}
-
-
-\frame{\frametitle{Tables with pause}
-\begin{tabular}{c c c}
-A & B & C \\ 
-\pause 
-1 & 2 & 3 \\  
-\pause 
-A & B & C \\ 
-\end{tabular} }
-
-
-\section{Section no. 4}
-\subsection{blocs}
-\frame{\frametitle{blocs}
-
-\begin{block}{title of the bloc}
-bloc text
-\end{block}
-
-\begin{exampleblock}{title of the bloc}
-bloc text
-\end{exampleblock}
-
-
-\begin{alertblock}{title of the bloc}
-bloc text
-\end{alertblock}
-}
-
