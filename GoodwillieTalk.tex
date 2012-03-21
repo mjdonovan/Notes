@@ -20,18 +20,18 @@
 \newcommand{\cartesianness}{\textup{cart}}
 \excludeversion{push vs pull}
 
-\def\excludeversion#1{\includeversion{#1}}
+%\def\excludeversion#1{\includeversion{#1}}
 \excludeversion{partial derivatives}
 \excludeversion{Iterated Lipschitz conditions}
 \excludeversion{distances in Top}
-\includeversion{functors appear}
+\excludeversion{functors appear}
 \excludeversion{Excisivity and Analyticity}
 \excludeversion{II.1.6}
 \excludeversion{II.1.20}
 \excludeversion{II.1.22}
-\includeversion{III.1.4}
+\excludeversion{III.1.4}
 \excludeversion{III.1.5}
-\includeversion{III.1.13}
+\excludeversion{III.1.13}
 
 %
 %\setbeamercolor{block title}{bg=light blue,fg=blue}%bg=background, fg= foreground
@@ -112,11 +112,66 @@
 
 %\frame{\frametitle{Table of contents}\tableofcontents} 
 
+
+
+
+
+
+
+\frame{\frametitle{Partial derivatives --- $1^\textup{st}$ order} 
+\tallstrut Have: $f:\R^n\to\R^n$. Seek: $\Delta_uf(x_{\emptyset })$\\\pause
+\vspace{.5cm}
+\begin{tikzpicture}[scale=1.2]
+
+\path (0.3,0) node[name=2] {$\phantom{\bullet} $};
+\path (1.5-1.5,1)+(7-1+.7,1.8-.3) node[name=3] {$\phantom{\bullet} $};
+\path (1.5-1.5,1)+(7+1.3+.5,-.2) node[name=123] {$\phantom{\bullet} $};
+\path (7+1.3+.2+.3-1.5,0-.5) node[name=12] {$\phantom{\bullet} $};
+
+\path (0,1) node[name=0d] {$\bullet $};
+\path (1,1) node[name=1] {$\bullet $};
+\path (0d) node[shape=rectangle,left] {\makebox[0cm][r]{$x_{\emptyset }$}};
+\path (1) node[shape=rectangle,right] {$x_{1}$};
+
+\path[->,very thick,white] (0d) edge node[left,font=\footnotesize]{$\phantom{v}$} (2);
+
+\path[->,very thick] (0d) edge node[below,font=\footnotesize]{$u$} (1);
+\pause
+\draw [ |->,dashed, decoration={markings,mark=at position 1 with {\arrow[scale=1.7]{>}}},
+    postaction={decorate},
+    shorten >=0.4pt
+] (3.25,1) -- (4,1);
+
+\path (7-1-1.5,1.5) node[name=0] {$\bullet $};
+
+\path (7+1.3+.2+.3-1.5,1-.5-.1) node[name=1] {$\bullet $};
+
+\path[->,very thick,densely dotted] (0) edge node[above right] {$a_{(f\scrx)}$} (1);
+
+\path (0) node[shape=rectangle,above] {$f(x_{\emptyset })$};
+\path (1) node[shape=rectangle,below] {$f(x_{1})$};
+\path (0,2.5) node[shape=rectangle] {\underline{$\scrx$}};
+\path (4.5,2.5) node[shape=rectangle] {\underline{$f\scrx$}};
+\end{tikzpicture}\\
+\tallstrut The dotted vector $a_{{(f\scrx)}}$ %(call me $a_X$, and add $x_1,x_2,x_{12}$)
+ approximates $ \partial_uf(x_{\emptyset })$.
+}
+
+
+
+
+
+
+
+
+
+
+
 \begin{partial derivatives}
 
 \section{Section no.1} 
-\frame{\frametitle{Partial derivatives} 
-\tallstrut Have: $f:\R^n\to\R^n$. Seek: $\Delta_uf(x_{\emptyset })$\\
+\frame{\frametitle{Partial derivatives --- $1^\textup{st}$ order} 
+\tallstrut Have: $f:\R^n\to\R^n$. Seek: $\Delta_uf(x_{\emptyset })$\\\pause
 \vspace{.5cm}
 \begin{tikzpicture}[scale=1.2]
 
@@ -153,8 +208,8 @@
 \tallstrut The dotted vector $a_{{(f\scrx)}}$ %(call me $a_X$, and add $x_1,x_2,x_{12}$)
  approximates $ \partial_uf(x_{\emptyset })$.
 }
-\frame{\frametitle{Partial derivatives} 
-\tallstrut Have: $f:\R^n\to\R^n$. Seek: $\Delta_v\Delta_uf(x_{\emptyset })$\\
+\frame{\frametitle{Partial derivatives --- $2^\textup{nd}$ order} 
+\tallstrut Have: $f:\R^n\to\R^n$. Seek: $\Delta_v\Delta_uf(x_{\emptyset })$\\\pause
 \vspace{.5cm}
 \begin{tikzpicture}[scale=1.2]
 
@@ -205,8 +260,8 @@
 \tallstrut The dotted vector $a_{{(f\scrx)}}$ approximates $- \partial_v \partial_uf(x_{\emptyset })$.
 }
 
-\frame{\frametitle{Partial derivatives} 
-\tallstrut Have: $f:\R^n\to\R^n$. Seek: $\Delta_w\Delta_v\Delta_uf(x_{\emptyset })$\\
+\frame{\frametitle{Partial derivatives --- $3^\textup{rd}$ order} 
+\tallstrut Have: $f:\R^n\to\R^n$. Seek: $\Delta_w\Delta_v\Delta_uf(x_{\emptyset })$\\\pause
 \vspace{.5cm}
 \begin{tikzpicture}[scale=1.2]
 \path (0.3,0) node[name=2] {$\bullet $};
@@ -409,9 +464,13 @@ whenever $x_\emptyset ,x_1,\ldots,x_{n+1}\in \R^n$ satisfy $|x_\emptyset -x_i|\l
 and $\scrx$ is the cube with $x_\emptyset \rightarrow x_i$ as initial arrows:\pause
 \[|a_{f(\scrx)}|\leq e^c\prod_{i=1}^{n+1}|x_\emptyset -x_i|.\]
 \end{center}\end{block}\pause
-Then all $(n+1)^\textup{st}$ derivatives are bounded by $e^c$.\pause
 
-\begin{center}{\color{blue}This will define ``stably $n$-excisive functor''!}\end{center}
+\begin{itemise}
+\setlength{\parindent}{.25in}
+\item Implies that all $(n+1)^\textup{st}$ derivatives are bounded by $e^c$.\pause
+\item A local Lipschitz condition with \textbf{globally defined} constants.\pause
+\end{itemise}
+\begin{center}{\color{blue}This will define ``stably $n$-excisive functor''}\end{center}
 
 }
 
@@ -423,7 +482,7 @@ Then all $(n+1)^\textup{st}$ derivatives are bounded by $e^c$.\pause
 %%% BEGIN: \usebox{\saveboxXLZ}
 \newsavebox{\saveboxXLZ}
 \sbox{\saveboxXLZ}{
-\fbox{\txt{For some $\alpha>0$:\rule[-.5em]{0pt}{.1em}\\$\left|\frac{d^kf}{dx^k}(x)\right|\leq \alpha^{k+1}k!$\\whenever $|x-y|\leq \alpha^{-1}$}}
+\fbox{\txt{For some $\alpha>0$:\rule[-.5em]{0pt}{.1em}\\$\left|\frac{d^{n+1}f}{dx^{n+1}}(x)\right|\leq \alpha^{n+2}{(n+1)}!$\\whenever $|x-y|\leq \alpha^{-1}$}}
 }%%% END:  \usebox{\saveboxXLZ}
 %%% BEGIN: \usebox{\saveboxQWW}
 \newsavebox{\saveboxQWW}
@@ -435,19 +494,32 @@ Then all $(n+1)^\textup{st}$ derivatives are bounded by $e^c$.\pause
 \sbox{\saveboxZVB}{
 \fbox{\txt{For some $q\in\Z$, $\rho\in\Z_{\geq0}$:\rule[-.5em]{0pt}{.1em}\\$f$ has $E_n(n\rho-q,\rho+1)$\\for all $n\geq0$.}}
 }%%% END:  \usebox{\saveboxZVB}
+%%% BEGIN: \usebox{\saveboxVSL}
+\newsavebox{\saveboxVSL}
+\sbox{\saveboxVSL}{
+\fbox{\txt{\underline{All} $(n+1)^\textup{st}$ derivatives\\$\leq e^{n\rho-q}$}}
+}%%% END:  \usebox{\saveboxVSL}
 
-\frame{\frametitle{Iterated Lipschitz conditions; $An(\rho)$}
-For $f$ a $C^\infty$ function $C\to \R$, where $y\in C\subset \R$:
+
+\frame{\frametitle{Iterated Lipschitz conditions and analyticity}
+For $f:\R\to\R$ a $C^\infty$ function, given $y\in \R$:
 \[\xymatrix{\uncover<1->{\usebox{\saveboxVUS}}
 \only<2->{\ar@{<=>}[rr]}
 &&\uncover<2->{\usebox{\saveboxXLZ}}
 \only<3->{\ar@{=>}[lld]}
 \\
 \uncover<3->{\usebox{\saveboxQWW}}&&
-\uncover<4->{\usebox{\saveboxZVB}}
-\only<4->{\ar@{=>}[u]}%_-{\textup{($\alpha\approx e^{\rho+1}$)}}
-\\&\uncover<5->{\makebox[.10cm][c]{{\color{blue}This will define ``$\rho$-analytic functor''!}}}
-\only<5->{\ar@(u,l)[ur]}
+\uncover<5->{\usebox{\saveboxVSL}}
+%\only<5->{\ar@{=>}[u]}%_-{\textup{($\alpha\approx e^{\rho+1}$)}}
+\only<6->{\ar@<-2ex>@{=>}[u]_-{\makebox[0cm][l]{\,\scriptsize$\alpha=\max\left\{e^\rho,e^{-q}\right\}$}}}
+\only<6->{\ar@<-2ex>@{=>}[u];[]|-{\textup{\huge\smash{$\raisebox{-1.62mm}{$\times$}$}}}}
+%\only<5->{\ar@{=>}[dll]}
+\\
+\uncover<7->{{\textup{\color{blue}%Will define
+``$\rho$-analytic functor''}}}
+\only<7->{\ar[rr]}&&\uncover<4->{\usebox{\saveboxZVB}}
+\only<5->{\ar@<-2ex>@{=>}[u]}
+\only<5->{\ar@<-2ex>@{=>}[u];[]|-{\textup{\huge\smash{$\raisebox{-1.62mm}{$\times$}$}}}}
 }\]
 }
 \end{Iterated Lipschitz conditions}
@@ -690,7 +762,7 @@ e^c\displaystyle\prod_{i=1}^{n+1}\dist\left(\scrx_\emptyset \rightarrow \scrx_i\
 \end{center}
 \end{block}
 \pause
-\begin{center}{\color{blue}$F$ is ``stably $n$-excisive''!}\end{center}
+\begin{center}{\color{blue}$F$ is ``stably $n$-excisive''}\end{center}
 \pause
 \begin{beamercolorbox}[sep=0em]{block body}
 \begin{center}
@@ -745,7 +817,7 @@ $\txt{$\dist\left(F(X)\overset{u_X}{\to} G(X)\right)\leq e^c\cdot\dist\left(X\do
 \end{block}
 \pause
 \begin{center}
-{\color{blue}$F$ and $G$ ``agree to  $n^\textup{th}$ order at $Y$'' via $u$!}\end{center}
+{\color{blue}$F$ and $G$ ``agree to  $n^\textup{th}$ order at $Y$'' via $u$}\end{center}
 \pause
 \begin{beamercolorbox}[sep=0em]{block body}
 \begin{center}
@@ -869,23 +941,45 @@ In cartesianness:
 
 \begin{II.1.22}
 \frame{
-\begin{block}{Proposition II.1.22}
-Given a diagram of cubes which are variously cartesian as marked:
+\begin{block}{Corollary}
+Given a $\calp_0(n+1)$-shaped diagram of $a$-cartesian cubes:
 \[ 
 \vcenter{\xymatrix@R=.4cm@C=.6cm{
 &&
-\framebox[9mm][c]{\tiny$k_1$\ST}   \ar'[d][dd]\ar[rd]\\&
-\framebox[9mm][c]{\tiny$k_2$\ST} \ar[dd]\ar[rr] &&
-\framebox[9mm][c]{\tiny$k_{12}$\ST} \ar[dd] \\
-\framebox[9mm][c]{\tiny$k_3$\ST}  \ar'[r][rr]\ar[rd] &&
-\framebox[9mm][c]{\tiny$k_{13}$\ST}  \ar[rd] \\&
-\framebox[9mm][c]{\tiny$k_{23}$\ST} \ar[rr] &&
-\framebox[9mm][c]{\tiny$k_{123}$\ST}
+\framebox[9mm][c]{\small$a$\tiny\ST}   \ar'[d][dd]\ar[rd]\\&
+\framebox[9mm][c]{\small$a$\tiny\ST} \ar[dd]\ar[rr] &&
+\framebox[9mm][c]{\small$a$\tiny\ST} \ar[dd] \\
+\framebox[9mm][c]{\small$a$\tiny\ST}  \ar'[r][rr]\ar[rd] &&
+\framebox[9mm][c]{\small$a$\tiny\ST}  \ar[rd] \\&
+\framebox[9mm][c]{\small$a$\tiny\ST} \ar[rr] &&
+\framebox[9mm][c]{\small$a$\tiny\ST}
 }}\]
-then the cube of pullbacks is $\min\left\{1-|U|+k_U\right\}$-cartesian.
+the cube of pullbacks is $(a-n)$-cartesian.
 \end{block}
+\pause
+Apply the previous with $k=l-n$.
 }
 \end{II.1.22}
+
+%\begin{II.1.22}
+%\frame{
+%\begin{block}{Proposition II.1.22}
+%Given a diagram of cubes which are variously cartesian as marked:
+%\[ 
+%\vcenter{\xymatrix@R=.4cm@C=.6cm{
+%&&
+%\framebox[9mm][c]{\tiny$k_1$\ST}   \ar'[d][dd]\ar[rd]\\&
+%\framebox[9mm][c]{\tiny$k_2$\ST} \ar[dd]\ar[rr] &&
+%\framebox[9mm][c]{\tiny$k_{12}$\ST} \ar[dd] \\
+%\framebox[9mm][c]{\tiny$k_3$\ST}  \ar'[r][rr]\ar[rd] &&
+%\framebox[9mm][c]{\tiny$k_{13}$\ST}  \ar[rd] \\&
+%\framebox[9mm][c]{\tiny$k_{23}$\ST} \ar[rr] &&
+%\framebox[9mm][c]{\tiny$k_{123}$\ST}
+%}}\]
+%then the cube of pullbacks is $\min\left\{1-|U|+k_U\right\}$-cartesian.
+%\end{block}
+%}
+%\end{II.1.22}
 
 %\begin{III.1.4}
 %\frame{
@@ -984,14 +1078,16 @@ $O_n(c,\kappa)$.
 \begin{center}
 \begin{enumerate}\squishlist
 \setlength{\parindent}{.25in}
-\item[\textup{(2)}] Let $X\downarrow Y$ be $k$-connected with $k\geq\kappa$.\pause
+\item[\textup{(2)}] Let $X\downarrow Y$ be $k$-connected with $k\geq\kappa$. \pause Must show:
+\[\conn(t_n:F(X)\to T_nF(X))\geq -c+(n+1)k.\]\vspace{-2mm}\pause
 \begin{itemize}\squishlist
 \setlength{\parindent}{.25in}
-\item Let $\scry$ be the $(n+1)$-cube $U\mapsto X\star_Y U$.\pause
+\item Let $\scry$ be the $(n+1)$-cube $U\mapsto F(X\star_Y U)$.\pause
 \item $FX\overset{t_n}{\to}T_nF(X)$ \textbf{is} $a_\scry$.\pause
-\item The initial arrows are $k$-connected:
+\item $\conn(t_n:F(X)\to T_nF(X))=\cartesianness(\scry)$.\pause
+\item The initial arrows are $k$-connected:\vspace{-1mm}
 \[
-\xymatrix@R=.3cm{
+\xymatrix@R=.2cm{
 \scry_\emptyset \ar[r]
 \ar@{=}[d]
 &%r1c1
@@ -1003,8 +1099,8 @@ X\star_Y\emptyset \ar[r]
 X\star_Y \{i\}\ar@{=}[d]
 \\
 X\ar[r]&M(X\downarrow Y)
-}\]\pause
-\item $F$ has $E_n(c,\kappa)$ $\implies$ $\scry$ is $(-c+\sum_{i=1}^{n+1}k)$-cartesian.
+}\]\pause \vspace{-2mm}
+\item $F$ has $E_n(c,\kappa)$ $\implies$ $\cartesianness(\scry)\geq(-c+\sum_{i=1}^{n+1}k)$.
 \end{itemize}
 \end{enumerate}
 %Let $\scry$ be the $(n+1)$-cube $U\mapsto X\star_Y U$.\\\pause
@@ -1047,7 +1143,7 @@ If $F$ satisfies $E_n(c,\kappa)$, then
 \begin{enumerate}\squishlist
 \setlength{\parindent}{.25in}
 \item[\textup{(1)}] $P_nF$ is $n$-excisive and
-\item[\textup{(2)}] $p_nF:F\to T_nF$ satisfies
+\item[\textup{(2)}] $p_nF:F\to P_nF$ satisfies
 $O_n(c,\kappa)$.
 \end{enumerate}
 \end{block}\vspace{-3mm}\pause
@@ -1080,10 +1176,10 @@ $O_n(c,\kappa)$.
 \only<7->{\ar[d]^-{a_{T_nF(\scrX)}}}
 \only<7->{\ar[r]}
 &%r1c1
-\uncover<7->{T^2_nF (\scrX_\emptyset )}
+\uncover<7->{T_nF (\scrX_\emptyset )}
 \only<7->{\ar[d]^-{a_{T_nF(\scrX)}}\ar[r]}
 &%r1c2
-\uncover<7->{T^3_nF (\scrX_\emptyset) }
+\uncover<7->{T^2_nF (\scrX_\emptyset) }
 \only<7->{\ar[d]^-{a_{T_n^2F(\scrX)}}\ar@{..>}[rr]}
 &%r1c3
 %\cdots\ar[r]
