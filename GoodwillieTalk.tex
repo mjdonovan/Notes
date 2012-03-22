@@ -20,13 +20,13 @@
 \newcommand{\cartesianness}{\textup{cart}}
 \excludeversion{push vs pull}
 
-%\def\excludeversion#1{\includeversion{#1}}
-\includeversion{partial derivatives}
+\def\excludeversion#1{\includeversion{#1}}
+\excludeversion{partial derivatives}
 \excludeversion{Iterated Lipschitz conditions}
 \excludeversion{distances in Top}
 \excludeversion{functors appear}
 \excludeversion{Excisivity and Analyticity}
-\excludeversion{II.1.6}
+\includeversion{II.1.6}
 \excludeversion{II.1.20}
 \excludeversion{II.1.22}
 \excludeversion{III.1.4}
@@ -66,9 +66,9 @@
 
 
 
-\begin{partial derivatives}
 
-\section{Partial Derivatives} 
+\section{Partial Derivatives 1} 
+\begin{partial derivatives}
 \frame{\frametitle{Partial derivatives --- $1^\textup{st}$ order} 
 \tallstrut Given $f:\R^n\to\R^n$, let's find $\Delta_uf(x_{\emptyset })$:\\\pause
 \begin{tikzpicture}[scale=1.2]
@@ -91,7 +91,7 @@
 \draw [ |->,dashed, decoration={markings,mark=at position 1 with {\arrow[scale=1.7]{>}}},
     postaction={decorate},
     shorten >=0.4pt
-] (3.25,1) -- (4,1);
+] (3.25-.5,1) -- (4-.5,1);
 
 \path (7-1-1.5,1.5) node[name=0] {$\bullet $};
 
@@ -109,7 +109,7 @@
 \begin{block}{A local Lipschitz condition:}\tallstrut If $|a_{(f\scrx)}|\leq L\cdot|u|$ for all \emph{short} $u$, then:\vspace{-3.73mm}
 \begin{center}
 \tallstrut $|\partial_u f(x_\emptyset )|\leq L$ for all unit vectors $u$.
-\end{center}\end{block}}
+\end{center}   \end{block} }
 }
 %\frame{\frametitle{Partial derivatives --- $1^\textup{st}$ order} 
 %\tallstrut Have: $f:\R^n\to\R^n$. Seek: $\Delta_uf(x_{\emptyset })$\\\pause
@@ -150,6 +150,7 @@
 % approximates $ \partial_uf(x_{\emptyset })$.
 %%}
 
+\section{Partial Derivatives 2} 
 \frame{\frametitle{Partial derivatives --- $2^\textup{nd}$ order} 
 \tallstrut Given $f:\R^n\to\R^n$, let's find $\Delta_v\Delta_uf(x_{\emptyset })$:\\\pause
 \begin{tikzpicture}[scale=1.2]
@@ -180,7 +181,7 @@
 \draw [ |->,dashed, decoration={markings,mark=at position 1 with {\arrow[scale=1.7]{>}}},
     postaction={decorate},
     shorten >=0.4pt
-] (3.25,1) -- (4,1);
+] (3.25-.5,1) -- (4-.5,1);
 \path (4.5,2.2) node[shape=rectangle] {\underline{$f\scrx$}};
 \path (7-1-1.5,1.5) node[name=0] {$\bullet $};
 \path (0) node[left] {$f(x_\emptyset) $};
@@ -203,10 +204,11 @@
 \uncover<5->{\path[-,color=yellow,line width=3pt] (pull) edge (1);}
 \path[->] (pull) edge (1);
 \path[->] (pull) edge (2);
+\path[->] (4,-.21) node[shape=rectangle] {$h_0(f\scrx)$} edge[color=gray] (pull);
 \pause
 \path[->,very thick,densely dotted] (0) edge node[name=midedge]{} (pull);
 \path[->, shorten >=-2mm] (3.6,.21) node {$a_{(f\scrx)}$} edge [color=gray] (midedge);
-\path[->] (4,-.21) node[shape=rectangle] {$h_0(f\scrx)$} edge[color=gray] (pull);
+
 
 %\path (4.5,2.2) node[shape=rectangle] {\underline{$f\scrx$}};
 \end{tikzpicture}\\
@@ -273,23 +275,24 @@
 %\tallstrut The dotted vector $a_{{(f\scrx)}}$ approximates $- \partial_v \partial_uf(x_{\emptyset })$.
 %}
 
+\section{Partial Derivatives 3} 
 \frame{\frametitle{Partial derivatives --- $3^\textup{rd}$ order} 
 \tallstrut %Have: $f:\R^n\to\R^n$. Seek: $\Delta_w\Delta_v\Delta_uf(x_{\emptyset })$
 Given $f:\R^n\to\R^n$, let's find $\Delta_w\Delta_v\Delta_uf(x_{\emptyset })$:\\\pause
 \begin{tikzpicture}[scale=1.2]
 \path (0.3,0) node[name=2] {$\bullet $};
-\path (1.3,0) node[name=12] {$\bullet $};
 \path (0,1) node[name=0d] {$\bullet $};
 \path (0d) node[shape=rectangle,left] {\makebox[0cm][r]{$x_{\emptyset }$}};
 \path (1,1) node[name=1] {$\bullet $};
-\path (1.5,1)+(0.3,0) node[name=23] {$\bullet $};
-\path (1.5,1)+(1.3,0) node[name=123] {$\bullet $};
 \path (1.5,1)+(0,1) node[name=3] {$\bullet $};
-\path (1.5,1)+(1,1) node[name=13] {$\bullet $};
-
 \path[->,very thick] (0d) edge node[below,font=\footnotesize]{$u$} (1);
 \path[->,very thick] (0d) edge node[left,font=\footnotesize]{$v$} (2);
 \path[->,very thick] (0d) edge node[left,font=\footnotesize]{$w$} (3);
+\pause
+\path (1.3,0) node[name=12] {$\bullet $};
+\path (1.5,1)+(0.3,0) node[name=23] {$\bullet $};
+\path (1.5,1)+(1.3,0) node[name=123] {$\bullet $};
+\path (1.5,1)+(1,1) node[name=13] {$\bullet $};
 
 \path[->] (2) edge (12);
 
@@ -306,104 +309,9 @@ Given $f:\R^n\to\R^n$, let's find $\Delta_w\Delta_v\Delta_uf(x_{\emptyset })$:\\
 			edge (12);
 \path[->] (1) edge [-,line width=3pt,draw=white] (13)
 			edge (13);
-
-\draw [ |->,dashed, decoration={markings,mark=at position 1 with {\arrow[scale=1.7]{>}}},
-    postaction={decorate},
-    shorten >=0.4pt
-] (3.25,1) -- (4,1);
-
-\path (7-1-1.5,1.5) node[name=0] {$\bullet $};
-
-\path (7+1.3+.2+.3-1.5,1-.5-.1) node[name=1] {$\bullet $};
-\path (7+0.3-1.5,-0.42) node[name=2] {$\bullet $};
-\path (1.5-1.5,1)+(7-1+.7,1.8-.3) node[name=3] {$\bullet $};
-
-\path (7+1.3+.2+.3-1.5,0-.5) node[name=12] {$\bullet $};
-\path (1.5-1.5,1)+(7+0.3,.1) node[name=23] {$\bullet $};
-\path (1.5-1.5,1)+(7+1.3+.5,.7) node[name=13] {$\bullet $};
-
-\path (1.5-1.5,1)+(7+1.3+.5,-.2) node[name=123] {$\bullet $};
-
-\path let \p1 = (2), \p2 = (1), \p3=(12) in node[name=pull]  at (\x1+\x2-\x3,\y1+\y2-\y3) {$\circ$};
-\path let \p1 = (23), \p2 = (13), \p3=(123) in node[name=pull3]  at (\x1+\x2-\x3,\y1+\y2-\y3) {$\circ$};
-\path let \p1 = (3), \p2 = (pull), \p3=(pull3) in node[name=pullpull]  at (\x1+\x2-\x3,\y1+\y2-\y3) {$\circ$};
-
-\path[->] (0) edge (2);
-\path[->] (1) edge (12);
-\path[->] (2) edge (12);
-\path[->] (pull) edge (2);
-\path[->,very thick,densely dotted] (0) edge (pullpull);
-
-\path[->] (3) edge (13);
-\path[->] (3) edge (23);
-\path[->] (13) edge (123);
-\path[->] (23) edge (123);
-\path[->] (pull3) edge (13);
-\path[->] (pull3) edge (23);
-\path[->,densely dotted] (3) edge (pull3);
-\path[->,densely dotted] (pullpull) edge (pull);
-\path[->,densely dotted] (pullpull) edge (3);
-
-\path[->] (0) edge (3);
-\path[->] (2) edge (23);
-\path[->] (12) edge (123);
-
-\path[->] (pull) edge [-,line width=3pt,draw=white] (pull3);
-\path[->,densely dotted] (pull) edge (pull3);
-\path[->] (pull) edge [-,line width=3pt,draw=white] (1) edge (1);
-
-\path[->, shorten >=.25cm, shorten <=.25cm] (0) edge [-,line width=3pt,draw=white] (1);
-\path[->] (0) edge (1);
-\path[->] (1) edge [-,line width=3pt,draw=white] (13) edge (13);
-
-
 \path (0,2.2) node[shape=rectangle] {\underline{$\scrx$}};
+\pause
 \path (4.5,2.2) node[shape=rectangle] {\underline{$f\scrx$}};
-\end{tikzpicture}\\
-\tallstrut The vector $a_{{(f\scrx)}}=\Delta_w\Delta_v\Delta_uf(x_{\emptyset })$ approximates $\partial_w \partial_v \partial_uf(x_{\emptyset })$.
-\uncover<4->{
-\begin{block}{A 3-fold local Lipschitz condition:}\tallstrut If $|a_{(f\scrx)}|\leq L\cdot|u|\cdot|v|\cdot|w|$ for all \emph{short} $u,v,w$, then:\vspace{-3.73mm}
-\begin{center}
-\tallstrut $|\partial_w\partial_v\partial_u f(x_\emptyset )|\leq L$ for all unit vectors $u,v,w$.
-\end{center}\end{block}}
-}
-
-\end{partial derivatives}
-\begin{Iterated Lipschitz conditions}
-\frame{\frametitle{A 3-fold Lipschitz condition}
-\tallstrut \uncover<1->{Can demand: $|a_{(f\scrx)}|\leq L\cdot|u|\cdot|v|\cdot|w|$ for all \emph{short} $u,v,w$.}\\ %$\partial_w\partial_v\partial_uf(x_{\emptyset })$\\
-\vspace{.5cm}
-\begin{tikzpicture}[scale=1.2]
-\path (0.3,0) node[name=2] {$\bullet $};
-\path (1.3,0) node[name=12] {$\bullet $};
-\path (0,1) node[name=0d] {$\bullet $};
-\path (0d) node[shape=rectangle,left] {\makebox[0cm][r]{$x_{\emptyset }$}};
-\path (1,1) node[name=1] {$\bullet $};
-\path (1.5,1)+(0.3,0) node[name=23] {$\bullet $};
-\path (1.5,1)+(1.3,0) node[name=123] {$\bullet $};
-\path (1.5,1)+(0,1) node[name=3] {$\bullet $};
-\path (1.5,1)+(1,1) node[name=13] {$\bullet $};
-
-\path[->,very thick] (0d) edge node[below,font=\footnotesize]{$u$} (1);
-\path[->,very thick] (0d) edge node[left,font=\footnotesize]{$v$} (2);
-\path[->,very thick] (0d) edge node[left,font=\footnotesize]{$w$} (3);
-
-\path[->] (2) edge (12);
-
-\path[->] (3) edge  (23);
-\path[->] (3) edge  (13);
-\path[->] (13) edge (123);
-\path[->] (23) edge (123);
-
-
-\path[->] (2) edge  (23);
-\path[->] (12) edge  (123);
-
-\path[->] (1) edge [-,line width=3pt,draw=white] (12)
-			edge (12);
-\path[->] (1) edge [-,line width=3pt,draw=white] (13)
-			edge (13);
-
 \draw [ |->,dashed, decoration={markings,mark=at position 1 with {\arrow[scale=1.7]{>}}},
     postaction={decorate},
     shorten >=0.4pt
@@ -414,7 +322,7 @@ Given $f:\R^n\to\R^n$, let's find $\Delta_w\Delta_v\Delta_uf(x_{\emptyset })$:\\
 
 \path (7+1.3+.2+.3-1.5,1-.5-.1) node[name=1] {$\bullet $};
 \path (7+0.3-1.5,-0.42) node[name=2] {$\bullet $};
-\path (1.5-1.5,1)+(7-1+.7,1.8-.3) node[name=3] {$\bullet $};
+\path (1.5-1.5+.2,1)+(7-1+.7,1.8-.3) node[name=3] {$\bullet $};
 
 \path (7+1.3+.2+.3-1.5,0-.5) node[name=12] {$\bullet $};
 \path (1.5-1.5,1)+(7+0.3,.1) node[name=23] {$\bullet $};
@@ -422,59 +330,272 @@ Given $f:\R^n\to\R^n$, let's find $\Delta_w\Delta_v\Delta_uf(x_{\emptyset })$:\\
 
 \path (1.5-1.5,1)+(7+1.3+.5,-.2) node[name=123] {$\bullet $};
 
-\path let \p1 = (2), \p2 = (1), \p3=(12) in node[name=pull]  at (\x1+\x2-\x3,\y1+\y2-\y3) {$\circ$};
-\path let \p1 = (23), \p2 = (13), \p3=(123) in node[name=pull3]  at (\x1+\x2-\x3,\y1+\y2-\y3) {$\circ$};
-\path let \p1 = (3), \p2 = (pull), \p3=(pull3) in node[name=pullpull]  at (\x1+\x2-\x3,\y1+\y2-\y3) {$\circ$};
-
 \path[->] (0) edge (2);
 \path[->] (1) edge (12);
 \path[->] (2) edge (12);
-\path[->] (pull) edge (2);
-\path[->,very thick,densely dotted] (0) edge node[name=midedge]{} (pullpull);
-
 \path[->] (3) edge (13);
 \path[->] (3) edge (23);
 \path[->] (13) edge (123);
 \path[->] (23) edge (123);
-\path[->] (pull3) edge (13);
-\path[->] (pull3) edge (23);
-\path[->,densely dotted] (3) edge (pull3);
-\path[->,densely dotted] (pullpull) edge (pull);
-\path[->,densely dotted] (pullpull) edge (3);
 
 \path[->] (0) edge (3);
 \path[->] (2) edge (23);
 \path[->] (12) edge (123);
+\alt<4>{}{\path[->, shorten >=.25cm, shorten <=.25cm] (0) edge [-,line width=3pt,draw=white] (1);}
+\uncover<4>{\path[->] (0) edge (1);}
+\only<5>{\path[->] (0) edge (1);}
+\only<6>{\path[->] (0) edge (1);}
+\path[->] (1) edge [-,line width=3pt,draw=white] (13) edge (13);
+\pause
+\only<5->{\path[->] (0) edge (1);}
+\path let \p1 = (2), \p2 = (1), \p3=(12) in node[name=pull]  at (\x1+\x2-\x3,\y1+\y2-\y3) {$\circ$};
+\path let \p1 = (23), \p2 = (13), \p3=(123) in node[name=pull3]  at (\x1+\x2-\x3,\y1+\y2-\y3) {$\circ$};
+
+
+\path[->] (pull) edge (2);
+\path[->] (pull3) edge (13);
+\path[->] (pull3) edge (23);
+\path[->] (pull) edge [-,line width=3pt,draw=white] (1) edge (1);
+
+\path[->,color=green] (3) edge (pull3);
+\path[->,color=green] (0) edge (pull);
+\pause
+
+
+
+\path let \p1 = (3), \p2 = (pull), \p3=(pull3) in node[name=pullpull]  at (\x1+\x2-\x3,\y1+\y2-\y3) {$\circ$};
+
+\path[->,densely dotted] (3) edge (pull3);
+\path[->,densely dotted] (pullpull) edge (pull);
+\path[->,densely dotted] (pullpull) edge (3);
+\path[->] (4,-.21) node[shape=rectangle] {$h_0(f\scrx)$} edge[color=gray] (pullpull);
 
 \path[->] (pull) edge [-,line width=3pt,draw=white] (pull3);
 \path[->,densely dotted] (pull) edge (pull3);
-\path[->] (pull) edge [-,line width=3pt,draw=white] (1) edge (1);
+
 
 \path[->, shorten >=.25cm, shorten <=.25cm] (0) edge [-,line width=3pt,draw=white] (1);
-\path[->] (0) edge (1);
-\path[->] (1) edge [-,line width=3pt,draw=white] (13) edge (13);
 
-\path[->] (4,-.21) node[shape=rectangle] {$h_0(f\scrx)$} edge[color=gray] (pullpull);
+\only<5->{\path[->] (0) edge (1);}
+\pause
+\path[->,very thick,densely dotted] (0) edge node[name=midedge]{} (pullpull);
 \path[->, shorten >=-2mm] (3.6,.21) node {$a_{(f\scrx)}$} edge[color=gray] (midedge);
-\path (0,2.2) node[shape=rectangle] {\underline{$\scrx$}};
-\path (4.5,2.2) node[shape=rectangle] {\underline{$f\scrx$}};
+\pause
 \end{tikzpicture}\\
-\tallstrut \uncover<2->{Then $|\partial_w\partial_v\partial_uf|\leq L$ (where it exists) whenever $|u|,|v|,|w|\leq1$.}
-%The dotted vector should still approximate $\partial_w \partial_v \partial_uf(x_{\emptyset })$.
+\tallstrut \uncover<8->{The vector $a_{{(f\scrx)}}=\Delta_w\Delta_v\Delta_uf(x_{\emptyset })$ approximates $\partial_w \partial_v \partial_uf(x_{\emptyset })$.}
+\uncover<9->{
+\begin{block}{A 3-fold local Lipschitz condition:}\tallstrut If $|a_{(f\scrx)}|\leq L\cdot|u|\cdot|v|\cdot|w|$ for all \emph{short} $u,v,w$, then:\vspace{-3.73mm}
+\begin{center}
+\tallstrut $|\partial_w\partial_v\partial_u f(x_\emptyset )|\leq L$ for all unit vectors $u,v,w$.
+\end{center}\end{block}}
 }
+
+
+%\frame{\frametitle{Partial derivatives --- $3^\textup{rd}$ order} 
+%\tallstrut %Have: $f:\R^n\to\R^n$. Seek: $\Delta_w\Delta_v\Delta_uf(x_{\emptyset })$
+%Given $f:\R^n\to\R^n$, let's find $\Delta_w\Delta_v\Delta_uf(x_{\emptyset })$:\\\pause
+%\begin{tikzpicture}[scale=1.2]
+%\path (0.3,0) node[name=2] {$\bullet $};
+%\path (0,1) node[name=0d] {$\bullet $};
+%\path (0d) node[shape=rectangle,left] {\makebox[0cm][r]{$x_{\emptyset }$}};
+%\path (1,1) node[name=1] {$\bullet $};
+%\pause
+%\path (1.3,0) node[name=12] {$\bullet $};
+%\path (1.5,1)+(0.3,0) node[name=23] {$\bullet $};
+%\path (1.5,1)+(1.3,0) node[name=123] {$\bullet $};
+%\path (1.5,1)+(0,1) node[name=3] {$\bullet $};
+%\path (1.5,1)+(1,1) node[name=13] {$\bullet $};
 %
-%\frame{\frametitle{Iterated Lipschitz conditions; $E_n(c,\kappa)$}
-%$f$ has \underline{$E_n(c,\kappa)$} if ($f$ is $C^\infty$, and)\pause\\
+%\path[->,very thick] (0d) edge node[below,font=\footnotesize]{$u$} (1);
+%\path[->,very thick] (0d) edge node[left,font=\footnotesize]{$v$} (2);
+%\path[->,very thick] (0d) edge node[left,font=\footnotesize]{$w$} (3);
+%
+%\path[->] (2) edge (12);
+%
+%\path[->] (3) edge  (23);
+%\path[->] (3) edge  (13);
+%\path[->] (13) edge (123);
+%\path[->] (23) edge (123);
+%
+%
+%\path[->] (2) edge  (23);
+%\path[->] (12) edge  (123);
+%
+%\path[->] (1) edge [-,line width=3pt,draw=white] (12)
+%			edge (12);
+%\path[->] (1) edge [-,line width=3pt,draw=white] (13)
+%			edge (13);
+%
+%\draw [ |->,dashed, decoration={markings,mark=at position 1 with {\arrow[scale=1.7]{>}}},
+%    postaction={decorate},
+%    shorten >=0.4pt
+%] (3.25,1) -- (4,1);
+%
+%\path (7-1-1.5,1.5) node[name=0] {$\bullet $};
+%\path (0) node[left] {$f(x_\emptyset) $};
+%
+%\path (7+1.3+.2+.3-1.5,1-.5-.1) node[name=1] {$\bullet $};
+%\path (7+0.3-1.5,-0.42) node[name=2] {$\bullet $};
+%\path (1.5-1.5,1)+(7-1+.7,1.8-.3) node[name=3] {$\bullet $};
+%
+%\path (7+1.3+.2+.3-1.5,0-.5) node[name=12] {$\bullet $};
+%\path (1.5-1.5,1)+(7+0.3,.1) node[name=23] {$\bullet $};
+%\path (1.5-1.5,1)+(7+1.3+.5,.7) node[name=13] {$\bullet $};
+%
+%\path (1.5-1.5,1)+(7+1.3+.5,-.2) node[name=123] {$\bullet $};
+%
+%\path let \p1 = (2), \p2 = (1), \p3=(12) in node[name=pull]  at (\x1+\x2-\x3,\y1+\y2-\y3) {$\circ$};
+%\path let \p1 = (23), \p2 = (13), \p3=(123) in node[name=pull3]  at (\x1+\x2-\x3,\y1+\y2-\y3) {$\circ$};
+%\path let \p1 = (3), \p2 = (pull), \p3=(pull3) in node[name=pullpull]  at (\x1+\x2-\x3,\y1+\y2-\y3) {$\circ$};
+%
+%\path[->] (0) edge (2);
+%\path[->] (1) edge (12);
+%\path[->] (2) edge (12);
+%\path[->] (pull) edge (2);
+%\path[->,very thick,densely dotted] (0) edge node[name=midedge]{} (pullpull);
+%
+%\path[->] (3) edge (13);
+%\path[->] (3) edge (23);
+%\path[->] (13) edge (123);
+%\path[->] (23) edge (123);
+%\path[->] (pull3) edge (13);
+%\path[->] (pull3) edge (23);
+%\path[->,densely dotted] (3) edge (pull3);
+%\path[->,densely dotted] (pullpull) edge (pull);
+%\path[->,densely dotted] (pullpull) edge (3);
+%
+%\path[->] (0) edge (3);
+%\path[->] (2) edge (23);
+%\path[->] (12) edge (123);
+%
+%\path[->] (pull) edge [-,line width=3pt,draw=white] (pull3);
+%\path[->,densely dotted] (pull) edge (pull3);
+%\path[->] (pull) edge [-,line width=3pt,draw=white] (1) edge (1);
+%
+%\path[->, shorten >=.25cm, shorten <=.25cm] (0) edge [-,line width=3pt,draw=white] (1);
+%\path[->] (0) edge (1);
+%\path[->] (1) edge [-,line width=3pt,draw=white] (13) edge (13);
+%
+%\path[->] (4,-.21) node[shape=rectangle] {$h_0(f\scrx)$} edge[color=gray] (pullpull);
+%\path[->, shorten >=-2mm] (3.6,.21) node {$a_{(f\scrx)}$} edge[color=gray] (midedge);
+%\path (0,2.2) node[shape=rectangle] {\underline{$\scrx$}};
+%\path (4.5,2.2) node[shape=rectangle] {\underline{$f\scrx$}};
+%\end{tikzpicture}\\
+%\tallstrut The vector $a_{{(f\scrx)}}=\Delta_w\Delta_v\Delta_uf(x_{\emptyset })$ approximates $\partial_w \partial_v \partial_uf(x_{\emptyset })$.
+%\uncover<4->{
+%\begin{block}{A 3-fold local Lipschitz condition:}\tallstrut If $|a_{(f\scrx)}|\leq L\cdot|u|\cdot|v|\cdot|w|$ for all \emph{short} $u,v,w$, then:\vspace{-3.73mm}
 %\begin{center}
-%whenever $x_\emptyset ,x_1,\ldots,x_{n+1}\in \R^n$ satisfy $|x_\emptyset -x_i|\leq e^{-\kappa}$,\pause\\
-%and $\scrx$ is the cube with $x_\emptyset \rightarrow x_i$ as initial arrows:\pause
-%\[|a_{f(\scrx)}|\leq e^c\prod_{i=1}^{n+1}|x_\emptyset -x_i|.\]
-%\end{center}\pause
-%Then all $(n+1)^\textup{st}$ derivatives are bounded by $e^c$ (where they exist).\pause
-%
-%\begin{center}{\color{blue}This will define ``stably $n$-excisive functor''!}\end{center}
+%\tallstrut $|\partial_w\partial_v\partial_u f(x_\emptyset )|\leq L$ for all unit vectors $u,v,w$.
+%\end{center}\end{block}}
 %}
 
+\end{partial derivatives}
+\section{Iterated Lipschitz for functions} 
+\begin{Iterated Lipschitz conditions}
+%\frame{\frametitle{A 3-fold Lipschitz condition}
+%\tallstrut \uncover<1->{Can demand: $|a_{(f\scrx)}|\leq L\cdot|u|\cdot|v|\cdot|w|$ for all \emph{short} $u,v,w$.}\\ %$\partial_w\partial_v\partial_uf(x_{\emptyset })$\\
+%\vspace{.5cm}
+%\begin{tikzpicture}[scale=1.2]
+%\path (0.3,0) node[name=2] {$\bullet $};
+%\path (1.3,0) node[name=12] {$\bullet $};
+%\path (0,1) node[name=0d] {$\bullet $};
+%\path (0d) node[shape=rectangle,left] {\makebox[0cm][r]{$x_{\emptyset }$}};
+%\path (1,1) node[name=1] {$\bullet $};
+%\path (1.5,1)+(0.3,0) node[name=23] {$\bullet $};
+%\path (1.5,1)+(1.3,0) node[name=123] {$\bullet $};
+%\path (1.5,1)+(0,1) node[name=3] {$\bullet $};
+%\path (1.5,1)+(1,1) node[name=13] {$\bullet $};
+%
+%\path[->,very thick] (0d) edge node[below,font=\footnotesize]{$u$} (1);
+%\path[->,very thick] (0d) edge node[left,font=\footnotesize]{$v$} (2);
+%\path[->,very thick] (0d) edge node[left,font=\footnotesize]{$w$} (3);
+%
+%\path[->] (2) edge (12);
+%
+%\path[->] (3) edge  (23);
+%\path[->] (3) edge  (13);
+%\path[->] (13) edge (123);
+%\path[->] (23) edge (123);
+%
+%
+%\path[->] (2) edge  (23);
+%\path[->] (12) edge  (123);
+%
+%\path[->] (1) edge [-,line width=3pt,draw=white] (12)
+%			edge (12);
+%\path[->] (1) edge [-,line width=3pt,draw=white] (13)
+%			edge (13);
+%
+%\draw [ |->,dashed, decoration={markings,mark=at position 1 with {\arrow[scale=1.7]{>}}},
+%    postaction={decorate},
+%    shorten >=0.4pt
+%] (3.25,1) -- (4,1);
+%
+%\path (7-1-1.5,1.5) node[name=0] {$\bullet $};
+%\path (0) node[left] {$f(x_\emptyset) $};
+%
+%\path (7+1.3+.2+.3-1.5,1-.5-.1) node[name=1] {$\bullet $};
+%\path (7+0.3-1.5,-0.42) node[name=2] {$\bullet $};
+%\path (1.5-1.5,1)+(7-1+.7,1.8-.3) node[name=3] {$\bullet $};
+%
+%\path (7+1.3+.2+.3-1.5,0-.5) node[name=12] {$\bullet $};
+%\path (1.5-1.5,1)+(7+0.3,.1) node[name=23] {$\bullet $};
+%\path (1.5-1.5,1)+(7+1.3+.5,.7) node[name=13] {$\bullet $};
+%
+%\path (1.5-1.5,1)+(7+1.3+.5,-.2) node[name=123] {$\bullet $};
+%
+%\path let \p1 = (2), \p2 = (1), \p3=(12) in node[name=pull]  at (\x1+\x2-\x3,\y1+\y2-\y3) {$\circ$};
+%\path let \p1 = (23), \p2 = (13), \p3=(123) in node[name=pull3]  at (\x1+\x2-\x3,\y1+\y2-\y3) {$\circ$};
+%\path let \p1 = (3), \p2 = (pull), \p3=(pull3) in node[name=pullpull]  at (\x1+\x2-\x3,\y1+\y2-\y3) {$\circ$};
+%
+%\path[->] (0) edge (2);
+%\path[->] (1) edge (12);
+%\path[->] (2) edge (12);
+%\path[->] (pull) edge (2);
+%\path[->,very thick,densely dotted] (0) edge node[name=midedge]{} (pullpull);
+%
+%\path[->] (3) edge (13);
+%\path[->] (3) edge (23);
+%\path[->] (13) edge (123);
+%\path[->] (23) edge (123);
+%\path[->] (pull3) edge (13);
+%\path[->] (pull3) edge (23);
+%\path[->,densely dotted] (3) edge (pull3);
+%\path[->,densely dotted] (pullpull) edge (pull);
+%\path[->,densely dotted] (pullpull) edge (3);
+%
+%\path[->] (0) edge (3);
+%\path[->] (2) edge (23);
+%\path[->] (12) edge (123);
+%
+%\path[->] (pull) edge [-,line width=3pt,draw=white] (pull3);
+%\path[->,densely dotted] (pull) edge (pull3);
+%\path[->] (pull) edge [-,line width=3pt,draw=white] (1) edge (1);
+%
+%\path[->, shorten >=.25cm, shorten <=.25cm] (0) edge [-,line width=3pt,draw=white] (1);
+%\path[->] (0) edge (1);
+%\path[->] (1) edge [-,line width=3pt,draw=white] (13) edge (13);
+%
+%\path[->] (4,-.21) node[shape=rectangle] {$h_0(f\scrx)$} edge[color=gray] (pullpull);
+%\path[->, shorten >=-2mm] (3.6,.21) node {$a_{(f\scrx)}$} edge[color=gray] (midedge);
+%\path (0,2.2) node[shape=rectangle] {\underline{$\scrx$}};
+%\path (4.5,2.2) node[shape=rectangle] {\underline{$f\scrx$}};
+%\end{tikzpicture}\\
+%\tallstrut \uncover<2->{Then $|\partial_w\partial_v\partial_uf|\leq L$ (where it exists) whenever $|u|,|v|,|w|\leq1$.}
+%%The dotted vector should still approximate $\partial_w \partial_v \partial_uf(x_{\emptyset })$.
+%}
+%%
+%%\frame{\frametitle{Iterated Lipschitz conditions; $E_n(c,\kappa)$}
+%%$f$ has \underline{$E_n(c,\kappa)$} if ($f$ is $C^\infty$, and)\pause\\
+%%\begin{center}
+%%whenever $x_\emptyset ,x_1,\ldots,x_{n+1}\in \R^n$ satisfy $|x_\emptyset -x_i|\leq e^{-\kappa}$,\pause\\
+%%and $\scrx$ is the cube with $x_\emptyset \rightarrow x_i$ as initial arrows:\pause
+%%\[|a_{f(\scrx)}|\leq e^c\prod_{i=1}^{n+1}|x_\emptyset -x_i|.\]
+%%\end{center}\pause
+%%Then all $(n+1)^\textup{st}$ derivatives are bounded by $e^c$ (where they exist).\pause
+%%
+%%\begin{center}{\color{blue}This will define ``stably $n$-excisive functor''!}\end{center}
+%%}
 \frame{\frametitle{Iterated Lipschitz conditions; $E_n(c,\kappa)$}
 \begin{block}{Definition}$f$ has \underline{$E_n(c,\kappa)$} if \pause ($f$ is $C^\infty$, and)\pause\\
 \begin{center}
@@ -518,7 +639,7 @@ and $\scrx$ is the cube with $x_\emptyset \rightarrow x_i$ as initial arrows:\pa
 \fbox{\txt{\underline{All} $(n+1)^\textup{st}$ derivatives\\$\leq e^{n\rho-q}$}}
 }%%% END:  \usebox{\saveboxVSL}
 
-
+\section{Analyticity of functions} 
 \frame{\frametitle{Iterated Lipschitz conditions and analyticity}
 For $f:\R\to\R$ a $C^\infty$ function, given $y\in \R$:
 \[\xymatrix{\uncover<1->{\usebox{\saveboxVUS}}
@@ -651,6 +772,7 @@ For $f:\R\to\R$ a $C^\infty$ function, given $y\in \R$:
 }
 \end{push vs pull}
 
+\section{Calculus of functors} 
 \begin{distances in Top}
 \frame{\frametitle{Calculus of \emph{functors}}
 Interested in functors $\calc\to\cald$, where $\begin{cases}\calc=\calu_Y,\calt_Y;\\\cald=\calu,\calt,\cals p.\end{cases}$\pause
@@ -667,9 +789,10 @@ Interested in functors $\calc\to\cald$, where $\begin{cases}\calc=\calu_Y,\calt_
 }
 \end{distances in Top}
 
+\section{Derivative diagrams for functors}
 \begin{functors appear}
-\frame{\frametitle{$F\scrx_\emptyset\overset{a_\scrx}{\to}h_0(F\scrx)$} 
-\tallstrut Have $F:\calc\to\cald$, and strongly cocartesian $n$-cube $\scrx$:\pause\\ %$\partial_w\partial_v\partial_uf(x_{\emptyset })$\\
+\frame{\frametitle{{Derivative diagrams for functors} } 
+\tallstrut Start with $F:\calc\to\cald$, and strongly cocartesian $n$-cube $\scrx$ in $\calc$ (equivalently a pushout cube, built from maps $\scrx_\emptyset \to\scrx_i$):\pause\\ %$\partial_w\partial_v\partial_uf(x_{\emptyset })$\\
 \vspace{.5cm}
 \begin{tikzpicture}[scale=1.2]
 \path (0.3,0) node[name=2] {$\bullet $};
@@ -708,7 +831,7 @@ Interested in functors $\calc\to\cald$, where $\begin{cases}\calc=\calu_Y,\calt_
 ] (3.25,1) -- (4,1);
 
 \path (7-1-1.5,1.5) node[name=0] {$\bullet $};
-\path (0) node[above left] {$F\scrx_\emptyset $};
+\path (0) node[left,shape=rectangle] {$F\scrx_\emptyset $};
 
 \path (7+1.3+.2+.3-1.5,1-.5-.1) node[name=1] {$\bullet $};
 \path (7+0.3-1.5,-0.42) node[name=2] {$\bullet $};
@@ -763,7 +886,7 @@ Interested in functors $\calc\to\cald$, where $\begin{cases}\calc=\calu_Y,\calt_
 }
 \end{functors appear}
 
-
+\section{Stable n-excision}
 \begin{Excisivity and Analyticity}
 \frame{\frametitle{Stable $n$-excision ($E_n(c,\kappa)$)}
 
@@ -787,10 +910,8 @@ e^c\displaystyle\prod_{i=1}^{n+1}\dist\left(\scrx_\emptyset \rightarrow \scrx_i\
 \makebox[0cm][r]{i.e.\ }$\left(\raisebox{2mm}{\txt{$\cartesianness\left(F\scrx\right)\geq -c+\displaystyle\sum_{i=1}^{n+1}\conn\left(\scrx_\emptyset \rightarrow \scrx_i\right)$\\$\textup{whenever}\ {\scrX_\emptyset\rightarrow \scrX_{i}}\textup{ is $\kappa$-connected for all $i$}.$}}\right)$
 \end{center}
 \end{beamercolorbox}
-
-
 }
-
+\section{analyticity}
 \frame{\frametitle{$\rho$-analyticity}
 \begin{block}{Definition}
 $F$ is \underline{$\rho$-analytic} if 
@@ -826,7 +947,7 @@ so that $F(X)\sim \holimit P_{n}F(X)$.
 }
 
 
-
+\section{agreement to nth order}
 \frame{\frametitle{Agreement to $n^\textup{th}$ order at $Y$ ($O_n(c,\kappa)$)}
 \begin{block}{Definition}
 A natural transformation $u:F\nt G$ has \underline{$O_n(c,\kappa)$} if:\pause
@@ -846,7 +967,7 @@ $\txt{$\dist\left(F(X)\overset{u_X}{\to} G(X)\right)\leq e^c\cdot\dist\left(X\do
 
 \end{Excisivity and Analyticity}
 
-
+\section{Proposition II.1.6}
 \begin{II.1.6}
 {
 %%% BEGIN: \usebox{\saveboxLKR}
@@ -922,26 +1043,36 @@ $\vcenter{\def\objectstyle{\scriptstyle} \xymatrix@!0@R=.5cm@C=.5cm{
 \frame{
 %\begin{prop*}[II.1.6]
 \begin{block}{Proposition II.1.6}
-\[\textup{In cartesianness:\qquad }\underbrace{\overset{\TF k}{X}\to \overset{k}{Y}}_{k}\quad\textup{and}\quad  \underbrace{\overset{k}{X}\to \overset{k+1}{Y}}_{\TF k}\]
-\end{block}\pause
-\begin{center}$\xymatrix@R=-8mm{
+%\[\textup{In cartesianness:\qquad }\underbrace{\overset{\TF k}{X}\to \overset{k}{Y}}_{k}\quad\textup{and}\quad  \underbrace{\overset{k}{X}\to \overset{k+1}{Y}}_{\TF k}\]
+For maps of cubes, variously cartesian as marked:
+\[\underbrace{\xymatrix@R=.4cm@C=.6cm{
+\framebox[9mm][c]{\TF \tiny$k$\ST} \ar[rr] &&
+\framebox[9mm][c]{\tiny$k$\ST}}}_{k}\qquad \raisebox{-1mm}{\textup{and}}\qquad \underbrace{\xymatrix@R=.4cm@C=.6cm{
+\framebox[9mm][c]{\tiny$k$\ST} \ar[rr] &&
+\framebox[9mm][c]{\tiny$k+1$\ST}}}_{\TF k}\]
+\end{block}
+\pause
+\begin{center}
+$\xymatrix@R=-8mm{
 &
-\fbox{\usebox{\saveboxQMZ}}\ar[dl]&%r1c1
+\fbox{\usebox{\saveboxQMZ}}{\alt<2>{\ar[dl]^-{k}}{\ar[dl]_-{\TF k}}}&%r1c1
 \fbox{\usebox{\saveboxDRJ}}\ar[l]
 \\%r1c2
 \fbox{\usebox{\saveboxLKR}}\\
-&\fbox{\usebox{\saveboxIHI}}\ar[uu]\ar[ul]
+&\fbox{\usebox{\saveboxIHI}}\alt<2>{\ar[uu]^-{\geq k}}{\ar[uu]_-{\geq k+1}}\alt<2>{\ar[ul]_-{\TF k}}{\ar[ul]^-{k}}
 &%r2c1
-\fbox{\usebox{\saveboxFEF}}\ar[uu]
+\fbox{\usebox{\saveboxFEF}}\alt<2>{\ar[uu]^-{k}}{\ar[uu]_-{k+1}}
 \ar[l]
-}$\end{center}
-}}
+}$\end{center}\pause
+}
+}
 \end{II.1.6}
 
+\section{Proposition II.1.20}
 \begin{II.1.20}
 \frame{
 \begin{block}{Proposition II.1.20}
-In cartesianness:
+For a cube of cubes, variously cartesian as marked:
 \[ 
 \left.\vcenter{\xymatrix@R=.4cm@C=.6cm{
 \framebox[9mm][c]{\TF \tiny$k$\ST} \ar[dd]\ar[rd]\ar[rr] &&
@@ -953,10 +1084,16 @@ In cartesianness:
 \framebox[9mm][c]{\tiny$k+1$\ST} \ar[rr] &&
 \framebox[9mm][c]{\tiny$k+2$\ST}
 }}\right\}\textup{\tiny $k$}\]
-\end{block}
+\end{block}\pause\vspace{-4mm}
+\[\underbrace{\xymatrix@R=.4cm@C=.6cm{
+\framebox[9mm][c]{\tiny$k$\ST} \ar[rr] &&
+\framebox[9mm][c]{\tiny$k+1$\ST}}}_{\TF k}\quad \raisebox{-1mm}{\textup{induction,  and}}\quad 
+\underbrace{\xymatrix@R=.4cm@C=.6cm{
+\framebox[9mm][c]{\TF \tiny$k$\ST} \ar[rr] &&
+\framebox[9mm][c]{\tiny$k$\ST}}}_{k}\]
 }
 \end{II.1.20}
-
+\section{II.1.22}
 \begin{II.1.22}
 \frame{
 \begin{block}{Corollary}
@@ -975,7 +1112,7 @@ Given a $\calp_0(n+1)$-shaped diagram of $a$-cartesian cubes:
 the cube of pullbacks is $(a-n)$-cartesian.
 \end{block}
 \pause
-Apply the previous with $k=l-n$.
+The previous with $k=a-n$.
 }
 \end{II.1.22}
 
@@ -1018,7 +1155,7 @@ Apply the previous with $k=l-n$.
 %}
 %\end{III.1.4}
 
-
+\section{III.1.4}
 \begin{III.1.4}
 %\frame{
 %\begin{prop*}[III.1.4]
@@ -1060,12 +1197,14 @@ $E_n({c-1},\kappa -1)$ and
 \item[\textup{(2)}] $t_nF:F\to T_nF$ satisfies
 $O_n(c,\kappa)$.
 \end{enumerate}
-\end{block}
+\end{block}\vspace{-1mm}
 \begin{center}
 \begin{enumerate}\squishlist
 \setlength{\parindent}{.25in}
 \item[\textup{(1)}] \pause$\scrx$ s.cocart.\ $(n+1)$-cube with $\conn(\scrx_\emptyset \rightarrow \scrx_i)=k_i\geq\kappa-1$.\pause
-\end{enumerate}\vspace{-.32cm}
+\end{enumerate}
+%Investigate $\cartesianness{T_nF(\scrx)}$ via 
+Have $\calp_0(n+1)$-shaped diagram of $(n+1)$-cubes: \pause (here $n=2$)
 \[ 
 \qquad  \vcenter{\xymatrix@R=.2cm@C=.6cm{
 \uncover<5->{\makebox[0cm][r]{\small pullbacks:\ }\framebox[17mm][c]{{\scriptsize$T_nF(\scrx_U)$}\tiny\ST}}   \only<5->{\ar@{..>}[dd]\ar@{..>}[rd]\ar@{..>}[rr]}&&
@@ -1076,9 +1215,11 @@ $O_n(c,\kappa)$.
 \framebox[17mm][c]{\tiny$F(\scrx_U\star\{13\})$\ST}  \ar[rd] \\&
 \framebox[17mm][c]{\tiny$F(\scrx_U\star\{23\})$\ST} \ar[rr] &&
 \framebox[17mm][c]{\tiny$F(\scrx_U\star\{123\})$\ST}
-}}\]\pause
-Each cube is $(-c+\sum(k_i+1))$-cartesian.\pause\pause
-\[\min\left\{1-(n+1)+\left(-c+\sum_{i=1}^{n+1} (k_i+1)\right)\right\} =-(c-1)+\sum_{i=1}^{n+1} k_i.\]\end{center}
+}}\]\pause\pause
+Each (outer) cube is $a=(-c+\sum_{i=1}^{n+1}(k_i+1))$-cartesian.\\\pause\vspace{1mm}
+Cube of pullbacks is $(n-a)=(-(c-1)+\sum_{i=1}^{n+1} k_i)$-cartesian.
+%\[\min\left\{1-(n+1)+\left(-c+\sum_{i=1}^{n+1} (k_i+1)\right)\right\} =-(c-1)+\sum_{i=1}^{n+1} k_i.\]
+\end{center}
 }
 
 
@@ -1153,7 +1294,7 @@ X\ar[r]&M(X\downarrow Y)
 %&&\uncover<2->{\usebox{\saveboxXLZ}}
 
 
-
+\section{III.1.5}
 \begin{III.1.5}
 \frame{
 \begin{block}{Proposition III.1.5}
@@ -1216,11 +1357,11 @@ h_0(P_nF(\scrX))%r2c5
 }\]\pause\pause
 \begin{enumerate}\squishlist
 \setlength{\parindent}{.25in}
-\item[\textup{(2)}] Follows by ultrametric inequality: $\ell(f\circ g)\leq \max(\ell(f),\ell(g))$.
+\item[\textup{(2)}] Compositions preserve connectedness of maps, so they preserve $O_n(c,\kappa)$.%Follows by ultrametric inequality: $\ell(f\circ g)\leq \max(\ell(f),\ell(g))$.
 \end{enumerate}
 }
 \end{III.1.5}
-
+\section{III.1.13}
 \begin{III.1.13}
 \frame{
 \begin{block}{Theorem III.1.13}
@@ -1244,8 +1385,8 @@ $p_n:F(X)\to P_nF(X)$ has $O_n(n\rho-q,\rho+1)$.\\\pause
 \uncover<4->{\conn(p_n)}
 &\uncover<4->{\geq}
 \uncover<4->{-(n\rho-q)+(n+1)\cdot\conn(X\downarrow Y)}%
-&\qquad&\uncover<5->{\text{(definition)}}\\
-&\uncover<5->{\geq}
+&\qquad&\uncover<5->{\text{(by $O_n(c,\kappa)$)}}\\
+&\uncover<5->{=}
 \uncover<5->{\textup{const}+n\cdot(\conn(X\downarrow Y)-\rho)}\\
 % Left hand side
 % Relation
