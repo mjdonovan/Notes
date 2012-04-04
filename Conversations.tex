@@ -10,6 +10,8 @@
 \documentclass[11pt]{article}
 \input{../macros.tex}
 
+\excludeversion{don't show}
+
 %\CONVERSATION{Title}{person}{date}
 \newcommand{\CONVERSATION}[3]{
 \subsection*{#1}
@@ -19,7 +21,7 @@
 }
 
 \begin{document}
-
+\begin{don't show}
 \CONVERSATION{$E_{\infty}$-operads and algebras; localising a ring spectrum at a homotopy class}{Haynes}{8/11/2011}
 The space of long knots in an $E_2$-algebra.
 
@@ -222,11 +224,135 @@ So as long as $R_*$ maps resolutions of spectra to resolutions of comodules, we 
 Convergence is trivial when $R=MU$ and $X$ is connective. In this case, we can make the map $X\to I^0$ an isomorphism on the bottom homotopy group, and thus, push the connectivity of the $X^i$ higher and higher.
 \end{rmk*}
 
-
+\end{don't show}
 \pagebreak
-\CONVERSATION{Formal Group Laws}{Haynes}{19/1/2012}
+\CONVERSATION{Orientations of Thom Spectra}{Haynes}{4/4/2012}
+\paragraph*{Orientations of vector bundles via cohomology:}
+What does it mean to orient a closed $n$-manifold $M^n$? We often think about it in terms of cohomology, giving a certain class in $H^n(M)$.
 
+Instead, one might think about embedding $M^n\cofibration \R^{n+k}$. Then an orientation of the normal bundle is the same as an orientation of the tangent bundle (once one chooses some conventions). We also like to think about the normal bundle as it brings us closer to the Pontrjagin-Thom story.
 
+To orient the normal bundle is to give a Thom class $\Thom(\nu)\to K(Z,k)$ --- a class whose pullbacks to $\Thom(\nu_x)$ are generators of $H^k(S^k)$ for each $x\in M$.
+
+For another perspective, one can view orientations of $\nu$ as factorisations $\overline{\nu}$
+\[
+\xymatrix@R=4mm{
+&%r1c1
+BSO(k)
+\ar[d]^-{\textup{2 to 1}}
+\\%r1c2
+M
+\ar@{..>}[ur]^-{\overline{\nu}}
+\ar[r]^-{\nu}
+&%r2c1
+BO(k)%r2c2
+}\]
+From $\overline{\nu}$ we have a map on thom spaces (left arrow), and on $MSO(k)$ we have the universal Thom class in dimension $k$ (right arrow):
+\[\xymatrix@R=4mm{
+\Thom(\nu)
+\ar[r]
+&%r1c1
+MSO(k)
+\ar[r]^-{U}
+&%r1c2
+K(\Z,k)\\%r1c3
+\makebox[0cm][c]{induces:}&%r2c1
+MSO
+\ar[r]
+&%r2c2
+H\Z%r2c3
+}\]
+Now $MSO$ is a ring spectrum%footnote:
+\footnote{Via maps $MSO(k)\wedge MSO(k')\to MSO(k+k')$ induced by the bundle map $ESO(k)\times ESO(k')\to ESO(k+k')$ that classifies the external direct sum of the two universal bundles.}, and this induced map on spectra is a ring map%footnote:
+\footnote{Presumably as we have a commuting diagram
+\[\xymatrix@R=4mm{
+MSO(k)\wedge MSO(k')
+\ar[r]
+\ar[d]
+&%r1c1
+MSO(k+k')
+\ar[d]
+\\%r1c2
+K(\Z,k)\wedge K(\Z,k')
+\ar[r]
+&%r2c1
+K(\Z,k+k')%r2c2
+}\] as the orientation class on $MSO(k+k')$ restricts to the smash product of the orientation classes on the factors.}.
+\paragraph*{The Thom isomorphism:} 
+[There were some comments about how to produce genuine bundles on skeleta given a map from a space to $BO$, or was it $BGL_1\mathbb{S}$...]
+
+The Thom isomorphism, when $\nu$ is oriented, is
+\[\widetilde{H}_{*}(\Thom(\nu))\cong\widetilde{H}_{*}(\Sigma^kM_+).\]
+In fact, there is an equivalence of spectra: \rednote{(what kind of equivalence do we mean here)}
+\[\Thom(\nu)\wedge H\Z\simeq \Sigma^k M_+\wedge H\Z.\]
+\begin{proof}
+All that remains is to produce a map implementing the Thom isomorphism. Here is where it's good that $M$ is a \textbf{space}, so that it has a diagonal map. Pulling back $(0\times \nu)\downarrow(M\times M)$ along $\Delta$ gives a map $\Thom(\nu)\to M_+\wedge \Thom(\nu)$. Then form the top row in:
+\[\xymatrix@R=4mm{
+\Thom(\nu)
+\ar[r]
+\ar[d]
+&%r1c1
+M_+\wedge \Thom(\nu)
+\ar[r]^-{\textup{T.class}}
+&%r1c2
+M_+\wedge \Sigma^kH\Z
+\\%r1c3
+\Thom(\nu)\wedge H\Z\ar@{..>}[rru]
+&%r2c1
+&%r2c2
+%r2c3
+}\]
+The dotted arrow, formed using the ring structure on $H\Z$ (which can be viewed as the extension of the top row to the free $H\Z$-module on $\Thom(\nu)$) is the map inducing the homology isomorphism.
+\end{proof}
+Now given an $R$-orientation, which should just be a map $\Thom(\nu)\to\Sigma^kR$ for some ring spectrum $R$, \rednote{(right?)} we can do exactly the same thing.
+\paragraph*{On the diagram (2.11) in ABGHR:}
+From a map $X\to BGL_1\mathbb{S}$ one can form \emph{genuine} sphere bundles on the skeleta of $X$. Wait a minute...\ how was that supposed to go?
+
+Anyway, if we could, then we have a bundle of sphere spectra $\xi\downarrow X$. Smashing fiberwise with $R$, we expect to get a bundle of free rank one $R$-modules $(R\wedge _\textup{fib}\xi)\downarrow X$, classified by the composite $X\to BGL_1\mathbb{S}\to BGL_{1}R$. If this system is null, we should view the bundle $\xi$ as orientable. We should view trivialisations of $R\wedge _\textup{fib}\xi$ as orientations of $\xi$.
+Now the dotted lifting in
+\[\xymatrix@R=4mm{
+&%r1c1
+B(\mathbb{S},R)
+\ar[d]
+\ar[r]
+&%r1c2
+\ast\ar[d]
+\\%r1c3
+X
+\ar@{..>}[ur]
+\ar[r]
+&%r2c1
+BGL_1\mathbb{S}
+\ar[r]
+&%r2c2
+\ar@{}[ul]|-{\textup{pull}}
+BGL_1R%r2c3
+}\]
+is the same as a trivialisation of $R\wedge_{\textup{fib}}\xi$, so should be viewed as an $R$-orientation of $\xi$.
+
+By the way, given a fibration $F\to E\to B$, $\Omega B$ acts on $F$ (by gluing the loop on the end of the path which is part of the data of a point of $F$). Then, $E$ is the homotopy orbit space of $E$ under this action. (Note that $\Omega B$ is only a grouplike $A_\infty$ space, so that you don't actually get a group action, only an $A_\infty$ type thing.)
+
+\paragraph*{Which connective spectra are Thom spectra:}
+Both $H\Z$ and $H\Z_2$ are... Let the top map in the following diagram be a generator of $\pi_1(BO)=\pi_0(O)=\Z_2$:
+\[\xymatrix@R=4mm{
+S^1\ar[r]
+\ar[d]
+&%r1c1
+BO\\%r1c2
+\Omega^2S^3\ar[r]
+&%r2c1
+\ar[u]
+\Omega^2\Sigma^2BO%r2c2
+}\]
+[this extension exists as $BO$ is a 2-fold loopspace. ????]
+
+Then $H_*(\Omega^1 S^3)$ is a tensor algebra, so $H_*(\Omega^1 S^3)$ is a divided polynomial algebra, and 
+\[H_*(\Omega^1 S^3;\Z_2)=E[x_2,x_4,x_8,\ldots]\]
+Now by the Borel comparison theorem,
+\[H_*(\Omega^2 S^3;\Z_2)=\F_2[x_1,x_3,x_7,\ldots]\]
+which is the Milnor form of the dual of the Steenrod algebra. In particular, we obtain an algebra mp $H_*(\Omega^2 S^3)\to H_*(BO)$, as \emph{the Thom spectrum of a bundle classified by a ring map is a Ring spectrum, and the Thom isomorphism is then an isomorphism of algebras}.
+
+We then have to do something clever with SW classes, ...
 \end{document}
 
 
