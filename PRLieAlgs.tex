@@ -1,0 +1,87 @@
+% !TEX root = z_output/_PRLieAlgs.tex
+\documentclass[11pt]{article}
+\input{../macros.tex}
+\newcommand{\Aff}{\textup{Aff}}
+
+
+\begin{document}
+
+\section*{The Koszul complex for partially restricted Lie algebras}
+
+\subsection*{Set-theoretic preliminaries}
+
+\begin{itemize}
+\setlength{\parindent}{.25in}
+\item $\Z^n:=\{\textbf{z}=(z_1,\ldots,z_n);\ z_i\in\Z\}$
+\item $r_i:\Z^n\to\Z^n$ given by $(z_1,\ldots,z_n)\mapsto(z_1,\ldots,z_i-1,\ldots,z_n)$
+\item $r_{ij}:=r_i\circ r_j:\Z^n\to\Z^n$
+\item $\sigma:\Z^n\to\Z$ given by summing entries
+\item for $\textbf{z}\in\Z^n$ write $\calP(\textbf{z})$ for the set of permutations of the multiset $\{i^{z_i};i=1,\ldots,n\}$, written as sequences $\textbf{p}=(p_1,\ldots,p_{\sigma \textbf{z}})$. This set is empty if $\textbf{z}$ has a negative entry. For such a $\textbf{p}$, write $p\sigma_i$ for $(p_1,\ldots,p_{i-1},p_{i+1},p_{i},p_{i+2},\ldots,p_{\sigma \textbf{z}})$.
+\item $d_k:\calP(\textbf{z})\to\calP((r_{p_kp_{k+1}}\textbf{z})*(1))$ (the star denotes concatenation), in which $(p_1,\ldots,p_{\sigma \textbf{z}})$ is sent to $(p_1,\ldots,p_{k-1},\ell(\textbf{z})+1,p_{k+2},\ldots,p_{\sigma \textbf{z}})$. That is, two entries are removed, and in their position we place a single entry, $\ell(\textbf{z})+1$.
+\end{itemize}
+\begin{prop*}
+Choose $\textbf{z}\in\Z^n$, and $i$ satisfying $1\leq i\leq n$. Then as $k$ ranges from $1$ to $\sigma \textbf{z}-1$, and $\textbf{p}$ ranges through those elements of $\calP(\textbf{z})$ satisfying $(p_k,p_{k+1})=(i,i)$, then $d_kp$ assumes each value in $\calP((r_{ii}\textbf{z})*(1))$ exactly once.
+\end{prop*}
+\begin{prop*}
+Choose $\textbf{z}\in\Z^n$, and $i\neq j$ satisfying $1\leq i,j\leq n$. Then as $k$ ranges from $1$ to $\sigma \textbf{z}-1$, and $\textbf{p}$ ranges through those elements of $\calP(\textbf{z})$ satisfying $(p_k,p_{k+1})=(i,j)$, then $d_k\textbf{p}$ assumes each value in $\calP((r_{ij}\textbf{z})*(1))$ exactly once. This occurs symmetrically in $i$ and $j$, which is to say that for such a pair $(k,\textbf{p})$, the pair $(k,\textbf{p}\sigma_k)$ works with $i$ and $j$ swapped, and we have $d_k(\textbf{p}\sigma_k)=d_k(\textbf{p})$.
+\end{prop*}
+
+\subsection*{The Koszul complex}
+The PBW theorem states that $E^0VL=A(L^u)\otimes E(L^r)$, and the homology of this algebra (see Priddy) is thus $E(L^u)\otimes \Gamma(L^r)$. (I think) we'll think of this as the sub-coalgebra of $\Gamma(L)$ in which there are no $\gamma_i$ for $i>1$ applied to unrestrictable elements. It's the shuffle product that produces representatives in $\overline{B}(E^0V(L))$ --- we may send a product $\prod_{i=1}^{n}\gamma_{z_i}(x_i)$ to $\left\langle \textbf{z},\textbf{x}\right\rangle$, a quantity we now define:
+
+\begin{itemize}
+\setlength{\parindent}{.25in}
+\item $(hL)^n:=\{\textbf{x}=(x_1,\ldots,x_n);\ x_i\textup{ homogeneous in }V(L)\}$
+%\item $d_{ij}:(hL)^n\to(hL)^{n+1}$ given by $\textbf{x}\mapsto\textbf{x}*(x_ix_j)$
+%\item $b_{ij}:(hL)^n\to(hL)^{n+1}$ given by $\textbf{x}\mapsto\textbf{x}*([x_i,x_j])$
+\item Choose $\textbf{x}\in(hL)^n$, $\textbf{z}\in\Z^n$ and $\textbf{p}\in\calP(\textbf{z}).$ Then define $\left\langle \textbf{p},\textbf{x}\right\rangle\in\overline{B}_{\sigma\textbf{z},*}(E^0V(L))$ to be the bar $[x_{p_1},\ldots,x_{p_{\sigma\textbf{z}}}]$. Then define $\left\langle \textbf{z},\textbf{x}\right\rangle:=\sum_{\textbf{p}\in\calP(\textbf{z})}\left\langle \textbf{p},\textbf{x}\right\rangle$. 
+\end{itemize}
+Now $\overline{K}_*(V(L)):=H_{*=*}(E^0V(L))$ is spanned by the bars $\left\langle \textbf{z},\textbf{x}\right\rangle$ where each $x_i$ is a homogeneous element of $L$, which must be restrictable if $z_i>1$ (here, $\sigma\textbf{z}$ is the homological degree). In fact, there's a basis consisting of the $\left\langle \textbf{z},\textbf{x}\right\rangle$ where $\textbf{x}$ runs over (stictly) increasing sequences of elements of an ordered basis chosen for $L$, and the same restrictability condition holds.
+
+Finally we may calculate the differential on $\overline{K}_*(V(L))$. Here goes:
+\begin{alignat*}{2}
+d\left\langle \textbf{z},\textbf{x}\right\rangle
+&=
+\sum_{k=1}^{\sigma\textbf{z}-1}\sum_{\textbf{p}\in\calP(\textbf{z})}d_k\left\langle \textbf{p},\textbf{x}\right\rangle%
+\\
+%&=
+%\sum_{k}\sum_{\textbf{p}}\left\langle d_k\textbf{p},d_{p_kp_{k+1}}\textbf{x}\right\rangle%
+%\\
+&=
+\sum_{i=1}^{n}\sum_{j=1}^{n}\sum_{k}\sum_{\textbf{p}:{p_k=i\atop p_{k+1}=j}}\left\langle d_k\textbf{p},\textbf{x}*(x_{p_k}x_{p_{k+1}})\right\rangle%
+\\
+&=
+\sum_{i}\sum_{k}\sum_{\textbf{p}:{p_k=i\atop p_{k+1}=i}}\left\langle d_k\textbf{p},\textbf{x}*(x_ix_i)\right\rangle+\sum_{i<j}\sum_{k}\sum_{\textbf{p}:{p_k=i\atop p_{k+1}=j}}\left\langle d_k\textbf{p},\textbf{x}*(x_ix_j+x_jx_i)\right\rangle%
+\\
+&=
+\sum_{i}\sum_{k}\sum_{\textbf{p}:{p_k=i\atop p_{k+1}=i}}\left\langle d_k\textbf{p},\textbf{x}*\left(x_i^{[2]}\right)\right\rangle+\sum_{i<j}\sum_{k}\sum_{\textbf{p}:{p_k=i\atop p_{k+1}=j}}\left\langle d_k\textbf{p},\textbf{x}*\left([x_i,x_j]\right)\right\rangle%
+\\
+&=
+\sum_{i}\sum_{\textbf{q}\in\calP((r_{ii}\textbf{z})*(1))}\left\langle \textbf{q},\textbf{x}*\left(x_i^{[2]}\right)\right\rangle+\sum_{i<j} \sum_{\textbf{q}\in\calP((r_{ij}\textbf{z})*(1))}\left\langle \textbf{q},\textbf{x}*\left([x_i,x_j]\right)\right\rangle%
+\\
+% Left hand side
+% Relation
+&=
+% Right hand side
+\sum_{i}\left\langle (r_{ii}\textbf{z})*(1),\textbf{x}*\left(x_i^{[2]}\right)\right\rangle+\sum_{i<j} \left\langle (r_{ij}\textbf{z})*(1),\textbf{x}*\left([x_i,x_j]\right)\right\rangle%
+% Comment
+\end{alignat*}
+This is the obvious restriction of May's $\overline{X}$, see page 141 of ``The cohomology of restricted Lie algebras and of Hopf algebras'' (J.\ Alg.\ 3). We use the subspace with fewer $\gamma_i$, and the differential he gives makes sense on and preserves this subspace, and coincides with that here.
+
+\end{document}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
