@@ -3,8 +3,85 @@
 \input{../macros.tex}
 \newcommand{\Aff}{\textup{Aff}}
 
+\newcommand{\LL}[1]{{\scrK}^{#1}}%{{\mu\scrL}^{#1}}
+\newcommand{\PR}[1]{\scrR^{#1}}%{{\xi\scrL}^{#1}}
+\newcommand{\GR}[1]{\scrG^{#1}}%{\mathsf{gr}^{#1}}
+\newcommand{\nontop}[1]{\scrU^{#1}}%{\mu_{\mathsf{nt}}^{#1}}
+\newcommand{\PiAlg}[1]{\textup{{\ensuremath #1}-$\Pi$-alg}}
+\newcommand{\produces}[1]{\overset{#1}{\rightsquigarrow}}
+\newcommand{\restn}[1]{\xi{#1}}
+\newcommand{\Ind}[2][]{\mathbf{I}{#2}_{#1}}%[internal indices]{category name}{n}
+\newcommand{\forget}{\mathrm{fg}}
+\newcommand{\derived}{\mathbb{L}}
 
 \begin{document}
+
+\section*{Grothendieck Spectral Sequences}
+\begin{itemize}
+\setlength{\parindent}{.25in}
+\item For $n\geq2$, let $\LL{n}$ be the following category of $n$-graded Lie algebras with left action of the $\mu$-algebra. An object of $\LL{n}$ is a Lie algebra $L=\bigoplus L_{a_n,\ldots,a_1}$, under a $(0,\ldots,0,1)$-shifted bracket:
+\[[\DASH,\DASH]:L_{a_n,\ldots,a_1}\otimes L_{b_n,\ldots,b_1}\to L_{a_n+b_n,\ldots,a_2+b_2,a_1+b_1+1}\]
+admitting $\mu$ operations
+\[\mu_i:L_{a_n,\ldots,a_1}\to L_{a_n+i,2a_{n-1},\ldots,2a_2,2a_1+1}\]
+defined whenever $i\leq a_n$ and not all of $i,a_{n-1},\ldots,a_{2}$ are zero.
+The graded part $L_{a_n,\ldots,a_1}$ is assumed to be zero whenever $a_1=0$, and for $x\in L_{a_n,\ldots,a_1}$ we write $|x|:=a_n$. The $\mu$ operations are assumed to satisfy the following $\mu$-Adem relations wherever they make sense. That is, if $i>2j$, and $\mu_i\mu_jx$ is defined (i.e.\ $j\leq|x|$, not all of $j,a_{n-1},\ldots,a_2$ are zero, and $i\leq|x|+j$):
+\[\mu_i\mu_jx=\sum_{k=0}^{(i-2j)/2-1}{i-2j-2-k\choose k}\mu_{2j+1+k}\mu_{i-j-1-k}x.\]
+The operation $\mu_i$ is assumed linear on classes $x$ with $i<|x|$, while the top operation, 
+\[\mu_i:L_{i, a_{n-1},\ldots,a_1}\to L_{2i, 2a_{n-1},\ldots,2a_2,2a_1+1}\]
+acts as a partially defined restriction for $L$, satsfying, for $x,y\in L_{i, a_{n-1},\ldots,a_1}$ and $z\in L$,
+\[\mu_i(x+y)=\mu_ix+\mu_iy+[x,y]\textup{ and }[\mu_{i}x,z]=[x,[x,z]].\]
+
+\begin{shaded}\noindent
+The $\mu$-Adem relations above make sense, as they preserve definedness:
+\[\textup{if $(i,j)\produces{\mu}(i',j')$, then $i>j+i/2\geq i'\geq2j+1$, and $i-j-1\geq j'\geq i/2>j$.}\]
+Thus, if $\mu_i\mu_jx$ is defined, so is $\mu_{i'}\mu_{j'}x$ --- neither of $i'$ or $j'$ are zero, and one notes that $j'\leq i-j-1<|x|$ and $i'-j'\leq (j+i/2)-(i/2)<i/2\leq(|x|+j)/2\leq |x|$, so that it makes sense to write $\mu_{j'}x$, and $\mu_{i'}\mu_{j'}x$ respectively. In fact, as each of these chains involved a strict inequality, the composite $\mu_{i'}\mu_{j'}$ makes sense on \emph{strictly more} degrees than $\mu_{i}\mu_{j}$ does.
+\end{shaded}
+
+\item For $n\geq2$, let $\nontop{n}$ be the following category of $n$-graded unstable $\mu$-modules. An object of $\nontop{n}$ is a graded module $M=\bigoplus M_{a_n,\ldots,a_1}$,
+admitting $\mu$ operations
+\[\mu_i:M_{a_n,\ldots,a_1}\to M_{a_n+i,2a_{n-1},\ldots,2a_2,2a_1+1}\]
+defined whenever $i< a_n$ (note the strict inequality) and not all of $i,a_{n-1},\ldots,a_{2}$ are zero.
+The graded part $M_{a_n,\ldots,a_1}$ is assumed to be zero whenever $a_1=0$, and for $x\in M_{a_n,\ldots,a_1}$ we write $|x|:=a_n$. The $\mu$ operations are assumed to satisfy the same $\mu$-Adem relations as in $\LL{n}$, wherever they make sense in $\nontop{n}$. The same discussion shows that this too is a meaningful definition. Every operation $\mu_i$ is assumed linear.
+
+\item 
+For $n\geq1$, let $\PR{n}$ be the following category of partially restricted $n$-graded Lie algebras. An object of $\PR{n}$ is a Lie algebra $L=\bigoplus L_{a_n,\ldots,a_1}$, under a $(0,\ldots,0,1)$-shifted bracket as above
+and restriction operations:
+\[\restn{}:L_{a_n,\ldots,a_1}\to L_{2a_n,2a_{n-1},\ldots,2a_2,2a_1+1}\]
+defined whenever not all of $a_n,\ldots,a_{2}$ are zero. The graded part $L_{a_n,\ldots,a_1}$ is assumed to be zero whenever $a_1=0$, and we write $|x|$ as above. For $x,y\in L_{a_n,\ldots,a_1}$ and $z\in L$ the restriction operations satisfy \[\restn{(x+y)}=\restn{x}+\restn{y}+[x,y]\textup{ and }[\restn{x},z]=[x,[x,z]].\]
+\begin{shaded}\noindent
+We can define $\restn{}$ on the the direct sum of those $L_{a_n,\ldots,a_1}$ with not all $a_i$ zero, using the above formula for $\restn{(x+y)}$. Then both of the above two formulae will still hold for non-homogeneous $x,y,z$. Thus, we could equally have defined $\PR{n}$ by giving a restriction on the entiretly of this ideal.
+\end{shaded}
+
+\item For $n\geq1$, let $\GR{n}$ be the category of $n$-graded $\F_2$-vector spaces whose graded part $M_{a_n,\ldots,a_1}$ is zero whenever $a_1=0$.
+\end{itemize}
+
+Now for each category $\mathsf{C}$ amoungst $\LL{n}$, $\PR{n}$ and $\nontop{n}$, there is a functor $\Ind{\mathsf{C}}:\mathsf{C\overset{}{\to}\GR{n}}$, which takes the quotient of the underlying vector space by the subspace spanned by the image of all of the structure maps. There are also free/forget adjunctions $F(\mathsf{C}):\GR{n} \rightleftarrows \mathsf{C}:\forget$ (or maybe the actual adjunction needs to come from graded pointed sets). Finally, there's a forgetful functor $\forget:\LL{n}\to\nontop{n}$, which, importantly, preserves  free objects. These functors give the solid maps in the following diagram:
+\[\xymatrix@R=8mm@C=15mm@!C{
+\LL{n}
+\ar@/^1.5em/[rr]^-{\Ind{\LL{n}}}
+\ar[d]_-{\forget}
+\ar@{-->}[r]_-{\Ind{\nontop{n}}}
+&%r1c1
+\PR{n}
+\ar[d]^-{\forget}
+\ar[r]_-{\Ind{\PR{n}}}
+&%r1c2
+\GR{n}
+\\%r1c3
+\nontop{n}
+\ar[r]_-{\Ind{\nontop{n}}}
+&%r2c1
+\GR{n}
+&%r2c2
+%r2c3
+}\]
+The point is that there is a functor $\LL{n}\to\PR{n}$ which completes this diagram to a commuting square and triangle, which we also name $\Ind{\nontop{n}}$. On underlying vector spaces, this functor must simply quotient the underlying vector space by the images $\mu_ix$ for $i<|x|$. There is a structure of $\PR{n}$-object on this quotient, where the bracket is induced by the bracket, and the restriction is induced by the top $\mu$ operations: $\restn{x}:=\mu_{|x|}x$ whenever defined. It is important to note that $\Ind{\nontop{n}}$ sends free objects in $\LL{n}$ to free objects in $\PR{n}$.
+
+Now for $X\in\LL{n}$, we are interested in the derived functors $(\derived\Ind{\LL{n}})(X)\in\GR{n+1}$ --- it is convenient for us to omit the customary asterisk in $\derived_*$, and to think of the derived functors as a single object with a one more grading than $X$ has. Then there's a spectral sequence... it has dr of degree $(?,?,0,\ldots,0)$, it converges to the associated graded via summing the front two indices....
+
+
+
+\end{document}
 
 \section*{The Koszul complex for partially restricted Lie algebras}
 
