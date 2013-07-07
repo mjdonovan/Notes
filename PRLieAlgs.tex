@@ -6,8 +6,9 @@
 \newcommand{\LL}[1]{{\scrK}^{#1}}%{{\mu\scrL}^{#1}}
 \newcommand{\PR}[1]{\scrR^{#1}}%{{\xi\scrL}^{#1}}
 \newcommand{\GR}[1]{\scrG^{#1}}%{\mathsf{gr}^{#1}}
+\newcommand{\GS}[1]{\scrG\!\scrS^{#1}_*}
 \newcommand{\nontop}[1]{\scrU^{#1}}%{\mu_{\mathsf{nt}}^{#1}}
-\newcommand{\PiAlg}[1]{\textup{{\ensuremath #1}-$\Pi$-alg}}
+\newcommand{\PiAlg}[1]{#1\textup{-$\Pi$-alg}}
 \newcommand{\produces}[1]{\overset{#1}{\rightsquigarrow}}
 \newcommand{\restn}[1]{\xi{#1}}
 \newcommand{\Ind}[2][]{\mathbf{I}{#2}_{#1}}%[internal indices]{category name}{n}
@@ -17,16 +18,19 @@
 \begin{document}
 
 \section*{Grothendieck Spectral Sequences}
+\subsection*{Categories of interest}
 \begin{itemize}
 \setlength{\parindent}{.25in}
-\item For $n\geq2$, let $\LL{n}$ be the following category of $n$-graded Lie algebras with left action of the $\mu$-algebra. An object of $\LL{n}$ is a Lie algebra $L=\bigoplus L_{a_n,\ldots,a_1}$, under a $(0,\ldots,0,1)$-shifted bracket:
+\item For $n\geq2$, let $\LL{n}$ be the following category of $n$-graded Lie algebras with left action of the $\mu$-algebra. An object of $\LL{n}$ is a good Lie algebra $L=\bigoplus L_{a_n,\ldots,a_1}$, under a $(0,\ldots,0,1)$-shifted bracket:
 \[[\DASH,\DASH]:L_{a_n,\ldots,a_1}\otimes L_{b_n,\ldots,b_1}\to L_{a_n+b_n,\ldots,a_2+b_2,a_1+b_1+1}\]
 admitting $\mu$ operations
 \[\mu_i:L_{a_n,\ldots,a_1}\to L_{a_n+i,2a_{n-1},\ldots,2a_2,2a_1+1}\]
-defined whenever $i\leq a_n$ and not all of $i,a_{n-1},\ldots,a_{2}$ are zero.
-The graded part $L_{a_n,\ldots,a_1}$ is assumed to be zero whenever $a_1=0$, and for $x\in L_{a_n,\ldots,a_1}$ we write $|x|:=a_n$. The $\mu$ operations are assumed to satisfy the following $\mu$-Adem relations wherever they make sense. That is, if $i>2j$, and $\mu_i\mu_jx$ is defined (i.e.\ $j\leq|x|$, not all of $j,a_{n-1},\ldots,a_2$ are zero, and $i\leq|x|+j$):
+defined whenever $i\leq a_n$ and not all of $i,a_{n-1},\ldots,a_{2}$ are zero. By `good' Lie algebra, we mean that the bracket satisfies the Jacobi identity, and is alternating (``$[x,x]=0$ for all $x$'').
+The graded part $L_{a_n,\ldots,a_1}$ is assumed to be zero whenever $a_1=0$, and for $x\in L_{a_n,\ldots,a_1}$ we write $|x|:=a_n$. The $\mu$ operations are assumed to satisfy the following $\mu$-Adem relations wherever they make sense. If $i>2j$, and $\mu_i\mu_jx$ is defined (i.e.\ $j\leq|x|$, not all of $j,a_{n-1},\ldots,a_2$ are zero, and $i\leq|x|+j$):
 \[\mu_i\mu_jx=\sum_{k=0}^{(i-2j)/2-1}{i-2j-2-k\choose k}\mu_{2j+1+k}\mu_{i-j-1-k}x.\]
-The operation $\mu_i$ is assumed linear on classes $x$ with $i<|x|$, while the top operation, 
+The non-top operations are linear and are killed by the bracket.
+That is, for $x,y\in L_{a_n,\ldots,a_1}$ and $z\in L$: \[\mu_i{(x+y)}=\mu_i{x}+\mu_i{y}\textup{ and }[\mu_i{x},z]=0.\]
+On the other hand, the top operation, 
 \[\mu_i:L_{i, a_{n-1},\ldots,a_1}\to L_{2i, 2a_{n-1},\ldots,2a_2,2a_1+1}\]
 acts as a partially defined restriction for $L$, satsfying, for $x,y\in L_{i, a_{n-1},\ldots,a_1}$ and $z\in L$,
 \[\mu_i(x+y)=\mu_ix+\mu_iy+[x,y]\textup{ and }[\mu_{i}x,z]=[x,[x,z]].\]
@@ -37,25 +41,46 @@ The $\mu$-Adem relations above make sense, as they preserve definedness:
 Thus, if $\mu_i\mu_jx$ is defined, so is $\mu_{i'}\mu_{j'}x$ --- neither of $i'$ or $j'$ are zero, and one notes that $j'\leq i-j-1<|x|$ and $i'-j'\leq (j+i/2)-(i/2)<i/2\leq(|x|+j)/2\leq |x|$, so that it makes sense to write $\mu_{j'}x$, and $\mu_{i'}\mu_{j'}x$ respectively. In fact, as each of these chains involved a strict inequality, the composite $\mu_{i'}\mu_{j'}$ makes sense on \emph{strictly more} degrees than $\mu_{i}\mu_{j}$ does.
 \end{shaded}
 
-\item For $n\geq2$, let $\nontop{n}$ be the following category of $n$-graded unstable $\mu$-modules. An object of $\nontop{n}$ is a graded module $M=\bigoplus M_{a_n,\ldots,a_1}$,
+\item Let $\LL{1}$ be the full subcategory of connected objects in $\calW$. We already have the definition for these in Goerss' book, but I'll spell this out here, to emphasise certain interesting aspects of the character of $\LL{1}$.
+An object of $\LL{1}$ is a bad graded Lie algebra $L=\bigoplus L_{a_1}$, under a $1$-shifted bracket:
+\[[\DASH,\DASH]:L_{a_1}\otimes L_{b_1}\to L_{a_1+b_1+1}\]
+admitting $P$ operations
+\[P^i:L_{a_1}\to L_{a_1+i+1}\]
+which are \emph{always} defined, but \emph{equal zero} unless $2\leq i\leq a_n$. By `bad' Lie algebra, we mean that the bracket satisfies the Jacobi identity, and is skew symmetric (``$[x,y]=[y,x]$ for all $x,y$'').
+The graded part $L_{0}$ is assumed to be zero, and for $x\in L_{a_1}$ we write $|x|:=a_1$. The $P$ operations are assumed to satisfy the following $P$-Adem relations. If $i\geq 2j$:
+\[P^iP^jx=\sum_{s=i-j+1}^{i+j-2}{2s-i-1\choose s-j}P^{i+j-s}P^sx.\]
+Every $P$ operation is assumed linear, and $[x,P^iy]=0$ for all $i,x,y$. Additionally, the top $P$ operation is the `self-square': for $x\in L_{a_1}$, $P^{a_1}x=[x,x]$.
+
+
+\item For $n\geq2$, let $\nontop{n}$ be the following category of $n$-graded unstable $\mu$-modules. An object of $\nontop{n}$ is an $n$-graded module $M=\bigoplus M_{a_n,\ldots,a_1}$,
 admitting $\mu$ operations
 \[\mu_i:M_{a_n,\ldots,a_1}\to M_{a_n+i,2a_{n-1},\ldots,2a_2,2a_1+1}\]
 defined whenever $i< a_n$ (note the strict inequality) and not all of $i,a_{n-1},\ldots,a_{2}$ are zero.
 The graded part $M_{a_n,\ldots,a_1}$ is assumed to be zero whenever $a_1=0$, and for $x\in M_{a_n,\ldots,a_1}$ we write $|x|:=a_n$. The $\mu$ operations are assumed to satisfy the same $\mu$-Adem relations as in $\LL{n}$, wherever they make sense in $\nontop{n}$. The same discussion shows that this too is a meaningful definition. Every operation $\mu_i$ is assumed linear.
 
+\item Let $\nontop{1}$ be the following category of graded unstable $P$-modules. An object of $\nontop{1}$ is a graded module $M=\bigoplus M_{a_1}$,
+admitting $P$ operations
+\[P^i:M_{a_1}\to M_{a_1+i+1}\]
+which are always defined, but are zero unless $2\leq i\leq a_n$ (note that the inequality does not become strict as for $n>1$).
+The graded part $M_{0}$ is assumed to be zero, and for $x\in M_{a_n,\ldots,a_1}$ we write $|x|:=a_n$. The $P$ operations are assumed to satisfy the same $P$-Adem relations as in $\LL{1}$. Every operation $P^i$ is assumed linear.
+
 \item 
-For $n\geq1$, let $\PR{n}$ be the following category of partially restricted $n$-graded Lie algebras. An object of $\PR{n}$ is a Lie algebra $L=\bigoplus L_{a_n,\ldots,a_1}$, under a $(0,\ldots,0,1)$-shifted bracket as above
+For $n\geq1$, let $\PR{n}$ be the following category of partially restricted $n$-graded Lie algebras. An object of $\PR{n}$ is a good Lie algebra $L=\bigoplus L_{a_n,\ldots,a_1}$, under a $(0,\ldots,0,1)$-shifted bracket as above
 and restriction operations:
 \[\restn{}:L_{a_n,\ldots,a_1}\to L_{2a_n,2a_{n-1},\ldots,2a_2,2a_1+1}\]
 defined whenever not all of $a_n,\ldots,a_{2}$ are zero. The graded part $L_{a_n,\ldots,a_1}$ is assumed to be zero whenever $a_1=0$, and we write $|x|$ as above. For $x,y\in L_{a_n,\ldots,a_1}$ and $z\in L$ the restriction operations satisfy \[\restn{(x+y)}=\restn{x}+\restn{y}+[x,y]\textup{ and }[\restn{x},z]=[x,[x,z]].\]
+Note that when $n=1$ the restriction is not defined anywhere.
 \begin{shaded}\noindent
-We can define $\restn{}$ on the the direct sum of those $L_{a_n,\ldots,a_1}$ with not all $a_i$ zero, using the above formula for $\restn{(x+y)}$. Then both of the above two formulae will still hold for non-homogeneous $x,y,z$. Thus, we could equally have defined $\PR{n}$ by giving a restriction on the entiretly of this ideal.
+We can define $\restn{}$ on the the direct sum of those $L_{a_n,\ldots,a_1}$ for which not all of $a_n,\ldots,1_2$ are zero, using the above formula for $\restn{(x+y)}$. Then both of the above two formulae will still hold for non-homogeneous $x,y,z$. Thus, we could equally have defined $\PR{n}$ by giving a restriction on this entire ideal.
 \end{shaded}
 
 \item For $n\geq1$, let $\GR{n}$ be the category of $n$-graded $\F_2$-vector spaces whose graded part $M_{a_n,\ldots,a_1}$ is zero whenever $a_1=0$.
+\item For $n\geq1$, let $\GS{n}$ be the category of $n$-graded pointed sets whose graded part $X_{a_n,\ldots,a_1}$ is a single point whenever $a_1=0$.
 \end{itemize}
 
-Now for each category $\mathsf{C}$ amoungst $\LL{n}$, $\PR{n}$ and $\nontop{n}$, there is a functor $\Ind{\mathsf{C}}:\mathsf{C\overset{}{\to}\GR{n}}$, which takes the quotient of the underlying vector space by the subspace spanned by the image of all of the structure maps. There are also free/forget adjunctions $F(\mathsf{C}):\GR{n} \rightleftarrows \mathsf{C}:\forget$ (or maybe the actual adjunction needs to come from graded pointed sets). Finally, there's a forgetful functor $\forget:\LL{n}\to\nontop{n}$, which, importantly, preserves  free objects. These functors give the solid maps in the following diagram:
+\subsection*{A diagram of functors}
+Now for each category $\mathsf{C}$ amoungst $\LL{n}$, $\PR{n}$ and $\nontop{n}$, there is a functor $\Ind{\mathsf{C}}:\mathsf{C\overset{}{\to}\GR{n}}$, which takes the quotient of the underlying vector space by the subspace spanned by the image of all of the structure maps. There are also free/forget adjunctions $\GS{n} \rightleftarrows \mathsf{C}$. Finally, there's a forgetful functor $\forget:\LL{n}\to\nontop{n}$, which, importantly, preserves  free objects%footnote:
+\footnote{I think that the adjunction does need to come from graded pointed sets, but that that's no problem for Blanc-Stover. The only thing that matters is that $\forget$ preserves frees, but it does --- frees in $\nontop{n}$ are easy to describe.}. These functors give the solid maps in the following diagram:
 \[\xymatrix@R=8mm@C=15mm@!C{
 \LL{n}
 \ar@/^1.5em/[rr]^-{\Ind{\LL{n}}}
@@ -75,9 +100,30 @@ Now for each category $\mathsf{C}$ amoungst $\LL{n}$, $\PR{n}$ and $\nontop{n}$,
 &%r2c2
 %r2c3
 }\]
-The point is that there is a functor $\LL{n}\to\PR{n}$ which completes this diagram to a commuting square and triangle, which we also name $\Ind{\nontop{n}}$. On underlying vector spaces, this functor must simply quotient the underlying vector space by the images $\mu_ix$ for $i<|x|$. There is a structure of $\PR{n}$-object on this quotient, where the bracket is induced by the bracket, and the restriction is induced by the top $\mu$ operations: $\restn{x}:=\mu_{|x|}x$ whenever defined. It is important to note that $\Ind{\nontop{n}}$ sends free objects in $\LL{n}$ to free objects in $\PR{n}$.
+The point is that there is a functor $\LL{n}\to\PR{n}$ which completes this diagram to a commuting square and triangle, which we also name $\Ind{\nontop{n}}$. It will be important to note that $\Ind{\nontop{n}}$ sends free objects in $\LL{n}$ to free objects in $\PR{n}$.
 
-Now for $X\in\LL{n}$, we are interested in the derived functors $(\derived\Ind{\LL{n}})(X)\in\GR{n+1}$ --- it is convenient for us to omit the customary asterisk in $\derived_*$, and to think of the derived functors as a single object with a one more grading than $X$ has. Then there's a spectral sequence... it has dr of degree $(?,?,0,\ldots,0)$, it converges to the associated graded via summing the front two indices....
+When $n=1$, $\Ind{\nontop{n}}$ quotients the underlying vector space by the images of all of the $P$ operations. The result inherits the structure of an element of $\PR{n}$ from the bracket in $\LL{1}$. This is well defined due to the axioms ``$[x,P^iy]=0$'' and ``$P^{|x|}x=[x,x]$''. 
+
+When $n\geq2$, $\Ind{\nontop{n}}$ quotients the underlying vector space by the images of all of the non-top $\mu$ operations. That is, by the span of the $\mu_ix$ for $i<|x|$. The result inherits the structure of an element of $\PR{n}$ as follows. The Lie bracket is induced by that in $\LL{n}$; well defined by the axiom ``$[\mu_i{x},z]=0$ for $i<|x|$''. The restriction is induced by the top $\mu$ operations, being defined by the formula $\restn{x}:=\mu_{|x|}x$. It is a little less obvious that this is in fact well defined. One must check, for homogeneous $x,y\in L$, and $0\leq i<|y|$ such that $\mu_iy$ is defined and $i+|y|=|x|$, that $\mu_{|x|}x$ and $\mu_{|x|}(x+\mu_iy)$ differ by a sum of images of non-top $\mu$ operations. But
+\[\mu_{|x|}(x+\mu_iy)-\mu_{|x|}x=\mu_{|x|}(\mu_iy)+[x,\mu_iy]=\mu_{|x|}\mu_iy,\]
+and the above calcuation regarding indices in the $\mu$-Adem relations shows that $\mu_{|x|}\mu_iy$ can be rewritten without the appearance of a top $\mu$.
+
+\subsection*{Grothendieck spectral sequences}
+We are interested in the derived functors $(\derived\Ind{\LL{n}})X\in\GR{n+1}$ for $X\in\LL{n}$. It is convenient for us to omit the customary asterisk in $\derived_*$, and to think of the derived functors as a single object with a one more grading than $X$ has. We always write the new grading to the left of the previous gradings, as is customary. To study $(\derived\Ind{\LL{n}})(X)$ we have a Grothendieck spectral sequence, thanks for Blanc-Stover, or some other approach. As Blanc and Stover write it, the spectral sequence takes the form:
+\[E^2_{st}=(\derived_s(\overline{\Ind{\PR{n}}}_t))(\derived\Ind{\nontop{n}})X\implies(\derived_{s+t}\Ind{\LL{n}})X\textup{ with }d^{r}:E_{st}\to E_{s-r,t+r-1}.\]
+To explain this, note that $\derived\Ind{\nontop{n}}\in\PiAlg{\PR{n}}$, and $\overline{\Ind{\PR{n}}}$ is the functor $\PiAlg{\PR{n}}\to\GR{n+1}$ induced by $\Ind{\PR{n}}$. The $t$ subscript picks out the part with (new) grading $t$. It might be simpler to write:
+\[E^2=(\derived\overline{\Ind{\PR{n}}})(\derived\Ind{\nontop{n}})X\implies(\derived\Ind{\LL{n}})X\textup{ with }\deg(d^r)=(-r,r-1,0,\ldots,0).\]
+Here, each $E^r$ is $(n+2)$-graded, while $(\derived\Ind{\LL{n}})X$ is $(n+1)$-graded. Each page $E^r$ has two homological degrees in addition to the $n$ internal degrees of $X$, and these extra two degrees on $E^\infty$ sum to the single homological degree in $(\derived\Ind{\LL{n}})X$.
+
+The final piece of information here is that $\PiAlg{\PR{n}}\simeq\LL{n+1}$, and under this isomorphism, $\overline{\Ind{\PR{n}}}$ is identified with $\Ind{\LL{n+1}}$. Thus, we may write the spectral sequence as:
+\[E^2=(\derived{\Ind{\LL{n+1}}})(\derived\Ind{\nontop{n}})X\implies(\derived\Ind{\LL{n}})X.\]
+
+\subsection*{Koszul complexes}
+
+
+
+
+%Then there's a spectral sequence... it has dr of degree $(?,?,0,\ldots,0)$, it converges to the associated graded via summing the front two indices....
 
 
 
