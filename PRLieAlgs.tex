@@ -3,15 +3,15 @@
 \input{../../Dropbox/logbook/_LOGBOOK/macros.tex}
 
 
-\includeversion{PRlieKoszulComplexCalculation}
+\excludeversion{PRlieKoszulComplexCalculation}
 
-\def\excludeversion#1{\includeversion{#1}}
-\excludeversion{SteenrodAlgebrasAndTheirKoszulDuals}
+%\def\excludeversion#1{\includeversion{#1}}
+\includeversion{SteenrodAlgebrasAndTheirKoszulDuals}
 \excludeversion{CategoriesOfInterest}
-\includeversion{DiagramOfFunctors}
-\includeversion{GrothendieckSpectralSequences}
-
-
+\excludeversion{DiagramOfFunctors}
+\excludeversion{GrothendieckSpectralSequences}
+\includeversion{DerivedFunctorsLowDimension}
+\includeversion{KoszulComplexes}
 
 \newcommand{\GS}[1]{\scrE^{#1}}
 \newcommand{\GpS}[1]{\scrE^{#1}_\star}
@@ -40,6 +40,8 @@
 \newcommand{\LieSteen}{\calA(\calL)}
 \newcommand{\Palgebra}{\calA(\calC)}
 \newcommand{\deltaAlgebra}{\Delta}
+
+\newcommand{\minDim}{m}
 
 
 
@@ -481,8 +483,84 @@ As $\forget:\LL{n}\to\nontop{n}$ preserves free objects and weak equivalences, t
 \end{proof}
 \end{GrothendieckSpectralSequences}
 
+\begin{DerivedFunctorsLowDimension}
+\subsection*{Calculating $\derived\Ind{\LL{n}}$ in low internal dimension}
+%\subsubsection*{$\derived\Ind{\LL{1}}$}
+Choose $n\geq 1$, and define 
+\[d=\begin{cases}
+4,&\textup{if }n=1;\\
+1,&\textup{if }n=2;
+\\0,&\textup{if }n\geq3.
+\end{cases}
+\]
+We will here present a method to calculate the object $(\derived\Ind{\LL{n}})X=((\derived\Ind{\LL{n}})X)_{a_{n+1},\ldots,a_1}$ in dimensions with $a_n\leq d$. Consider the diagram:
+\[\xymatrix@R=2mm@C=13mm{
+&%r1c1
+\ar[dd]^-{\Ind{\nontop{n}}}
+\ar@<.5ex>[dl]%^-{\forget}
+\LL{n}\\%r1c2
+\ar@<.5ex>[ur]^-{\LL{n}}
+\ar@<.5ex>[dr]^-{\PRLie{n}}
+\GR{n}&%r2c1
+\\%r2c2
+&%r3c1
+\PRLie{n}
+\ar@<.5ex>[ul]%^-{\forget}
+%r3c2
+}\]
+In this diagram, $\Ind{\nontop{n}}$ does not change the underlying vector space in dimensions $(a_n,\ldots,a_1)$ with $a_n\leq d$. Moreover, the free constructions $\Fr{\LL{n}}$ and $\Fr{\PRLie{n}}$ agree in these dimensions, as do the structure maps of the free/forget adjunctions. Thus, there is an isomorphism between $(\derived\Ind{\LL{n}})(X)$ and $(\derived\Ind{\PRLie{n}})(\Ind{\nontop{n}}(X))$ in dimensions with $a_n\leq d$. [Note that these are objects of $\GR{n+1}$, and so have gradings $a_{n+1},\ldots,a_1$ --- our inequality involves $a_n$, the outermost grading of an object of $\LL{n}$.]
 
+There is a complex that computes $\derived\Ind{\PRLie{n}}$ --- it interpolates between the Cartan-Eilenberg resolution for the homology of good Lie algebras, and May's $\overline{X}$ complex for  restricted Lie algebra homology.
+\end{DerivedFunctorsLowDimension}
+\begin{KoszulComplexes}
+\subsection*{Koszul complexes for $\derived\Ind{\nontop{n}}$ for $n\geq2$}
+We will define Koszul complexes calculating $\derived\Ind{\nontop{n}}$ for all $n$. The techniques we will use originate in \cite{PriddyKoszul.pdf}. It will be useful to record here a customized version of Priddy's arguments, as his results do not apply to our situation without modification, and as we will require a technique from his proof of \cite[Thm 5.3]{PriddyKoszul.pdf} in what follows.
+%We Due to the fact that we are working with categories of unstable modules, there are straightforward changes to be made to Priddy's exposition. We make these changes here. The other benefit to covering this material is that we will
+%Moreover, for certain calculations to follow we will need to refer to certain techniques found in the proof of \cite[Thm 5.3]{PriddyKoszul.pdf}. In order that our reader may understand these techniques, we 
 
+For $I=(i_1,\ldots,i_\ell)$ a sequence of nonnegative integers, define
+\[\minDim(I):=\begin{cases}
+-\infty,&\textup{if }I=\emptyset;\\
+\min\{(i_{\ell}),\,(i_{\ell-1}-i_\ell),\,\ldots,\,(i_{1}-i_2-\cdots i_\ell)\},&\textup{otherwise}.
+%\\,&\textup{if }
+\end{cases}
+\]
+Thus, for $n\geq2$:
+\begin{itemise}
+\setlength{\parindent}{.25in}
+\item  for $I\neq\emptyset$, $\minDim(I)$ is the lowest dimension $d\geq0$ such that $\LambdaOp^I$ may act on a $d$-dimensional element of an object in $\LL{n}$, if we ignore the extra restrictions on $\LambdaOp^0$; and
+\item $m(I)$ is the unique element of $\{-\infty,0,1,2,\ldots\}$ such that for any $X\in\nontop{n}$ and any $x\in X$, $\LambdaOp^Ix$ is defined if and only if $m(I)<|x|$, if we ignore the extra restrictions on $\LambdaOp^0$.
+\end{itemise}
+\subsubsection*{The unstable bar construction}
+For any object $X\in\nontop{n}$, the bar construction ${B}_\bullet(\Fr{\nontop{n}},\Fr{\nontop{n}},X)=(\Fr{\nontop{n}})^{\bullet+1}X$ is a free simplicial resolution of $X$. Now $\Ind{\nontop{n}}(\Fr{\nontop{n}}(X))$ is isomorphic to $X$ as a vector space. Thus $(\derived\Ind{\nontop{n}})X$ may be calculated as the homotopy of the bar construction $B_\bullet(\id,\Fr{\nontop{n}},X)=(\Fr{\nontop{n}})^\bullet X$. Normalizing this complex by taking the quotient by degenerate simplices, one obtains the reduced Bar construction $\overline{B}_*(\id,\Fr{\nontop{n}},X)$, a chain complex calculating $(\derived\Ind{\nontop{n}})X$, which we now describe.
+\begin{prop*}
+For $r\geq0$, $\overline{B}_r(\id,\Fr{\nontop{n}},X)$ is spanned by symbols
+\[\left[\LambdaOp^{i_\ell}\cdots \LambdaOp^{i_{k_{r-1}+1}}
+\middle|\cdots 
+\middle|\LambdaOp^{i_{k_2}}\cdots \LambdaOp^{i_{k_1+1}}
+\middle|\LambdaOp^{i_{k_1}}\cdots \LambdaOp^{i_1}\right]
+x\]
+where:
+\begin{itemize}
+\setlength{\parindent}{.25in}
+\item $x\in X_{a_n,\ldots,a_1}$ is a homogeneous element of $X$;
+\item $0<k_1<k_2<\cdots <k_{r-1}<\ell$ is increasing, so that each bar is nonempty;
+\item $I=(i_\ell,\ldots,i_1)$ is a sequence of nonnegative integers with $m(I)<a_n$; and
+\item if all of $a_{n-1},\ldots,a_2$ equal zero, $0$ does not appear in $I$.
+\end{itemize}
+As Adem relations may be applied between each pair of bars, a basis of $\overline{B}_r(\id,\Fr{\nontop{n}},X)$ consists of all the above symbols in which each of the $r$ subsequences of $I$ is $\LambdaOp$-admissible, as $x$ runs through a homogeneous basis for $X$. The formula for the differential is the standard one.
+\end{prop*}
+\begin{prop*}
+Any cycle in $\overline{B}_r$ is homologous to a cycle which is a sum of bars in which  $\ell=r$.
+\end{prop*}
+\begin{proof}
+
+\end{proof}
+%The degeneracies are defined by inserting the unit in the free construction, while the face maps are defined by multiplication  As $(\derived\Ind{\nontop{n}})X$ 
+%
+%Suppose that $X\in\nontop{n}$ is a trivial object, so that every $\LambdaOp$ operation defined on $X$ is zero. Consider the reduced bar construction $\overline{B}_*(\id,\Fr{\nontop{n}},X)$ which calculates $\derived\Ind{\nontop{n}}X$. This is the normalized complex of the simplicial object ${B}_m(\id,\Fr{\nontop{n}},X)=(\Fr{\nontop{n}})^mX$
+
+\end{KoszulComplexes}
 \begin{PRlieKoszulComplexCalculation}
 \section*{The Koszul complex for partially restricted Lie algebras}
 \subsection*{Set-theoretic preliminaries}
@@ -550,7 +628,7 @@ He writes the differential on $f=\prod_{i=1}^{n}\gamma_{z_i}(y_i)$ as
 Here, the parenthetical term vanishes in $\overline{K}$ --- it's there in case we're using nontrivial coefficients.
 \end{PRlieKoszulComplexCalculation}
 
-\printbibliography
+%\printbibliography
 \end{document}
 
 
@@ -565,6 +643,6 @@ Here, the parenthetical term vanishes in $\overline{K}$ --- it's there in case w
 
 
 
-
+Turn around; every now and the we get a little bit closer. Turn around, bright eyes! Every now and then we fall apart! And I need you now tonight, and I need you more than ever. And I
 
 
