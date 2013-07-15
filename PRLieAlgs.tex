@@ -5,14 +5,14 @@
 
 \excludeversion{PRlieKoszulComplexCalculation}
 
-%\def\excludeversion#1{\includeversion{#1}}
+\def\excludeversion#1{\includeversion{#1}}
 \excludeversion{SteenrodAlgebrasAndTheirKoszulDuals}
 \excludeversion{CategoriesOfInterest}
 \excludeversion{DiagramOfFunctors}
-\includeversion{GrothendieckSpectralSequences}
+\excludeversion{GrothendieckSpectralSequences}
 \excludeversion{DerivedFunctorsLowDimension}
-\excludeversion{KoszulComplexes2plus}
-\excludeversion{KoszulComplexes1}
+\includeversion{KoszulComplexes2plus}
+\includeversion{KoszulComplexes1}
 
 \newcommand{\GS}[1]{\scrE^{#1}}
 \newcommand{\GpS}[1]{\scrE^{#1}_\star}
@@ -58,6 +58,8 @@
 &%r1c1
 {#2}%r1c2
 }}}
+
+
 
 
 
@@ -695,19 +697,19 @@ We will define Koszul complexes calculating $\derived\Ind{\nontop{n}}$ for all $
 %We Due to the fact that we are working with categories of unstable modules, there are straightforward changes to be made to Priddy's exposition. We make these changes here. The other benefit to covering this material is that we will
 %Moreover, for certain calculations to follow we will need to refer to certain techniques found in the proof of \cite[Thm 5.3]{PriddyKoszul.pdf}. In order that our reader may understand these techniques, we 
 
-\textbf{remove }For $I=(i_\ell,\ldots,i_1)$ a sequence of nonnegative integers, define
-\[\minDim(I):=\begin{cases}
--\infty,&\textup{if }I=\emptyset;\\
-\max\{(i_1),\,(i_2-i_1),\,\ldots,\,(i_{\ell}-i_{\ell-1}-\cdots i_1)\},&\textup{otherwise}.
-%\\,&\textup{if }
-\end{cases}
-\]
-Thus, for $n\geq2$:
-\begin{itemise}
-\setlength{\parindent}{.25in}
-\item  for $I\neq\emptyset$, $\minDim(I)$ is the lowest dimension $d\geq0$ such that $\LambdaOp^I$ may act on a $d$-dimensional element of an object in $\LL{n}$, if we ignore the extra restrictions on $\LambdaOp^0$; and
-\item $\minDim(I)$ is the unique element of $\{-\infty,0,1,2,\ldots\}$ such that for any $X\in\nontop{n}$ and any $x\in X$, $\LambdaOp^Ix$ is defined if and only if $\minDim(I)<|x|$, if we ignore the extra restrictions on $\LambdaOp^0$.
-\end{itemise}
+%\textbf{remove }For $I=(i_\ell,\ldots,i_1)$ a sequence of nonnegative integers, define
+%\[\minDim(I):=\begin{cases}
+%-\infty,&\textup{if }I=\emptyset;\\
+%\max\{(i_1),\,(i_2-i_1),\,\ldots,\,(i_{\ell}-i_{\ell-1}-\cdots i_1)\},&\textup{otherwise}.
+%%\\,&\textup{if }
+%\end{cases}
+%\]
+%Thus, for $n\geq2$:
+%\begin{itemise}
+%\setlength{\parindent}{.25in}
+%\item  for $I\neq\emptyset$, $\minDim(I)$ is the lowest dimension $d\geq0$ such that $\LambdaOp^I$ may act on a $d$-dimensional element of an object in $\LL{n}$, if we ignore the extra restrictions on $\LambdaOp^0$; and
+%\item $\minDim(I)$ is the unique element of $\{-\infty,0,1,2,\ldots\}$ such that for any $X\in\nontop{n}$ and any $x\in X$, $\LambdaOp^Ix$ is defined if and only if $\minDim(I)<|x|$, if we ignore the extra restrictions on $\LambdaOp^0$.
+%\end{itemise}
 \subsubsection*{The unstable bar construction and Koszul complex for $\nontop{n}$, $n\geq2$}
 For any object $X\in\nontop{n}$, the bar construction ${B}_\bullet(\Fr{\nontop{n}},\Fr{\nontop{n}},X)=(\Fr{\nontop{n}})^{\bullet+1}X$ is a free simplicial resolution of $X$. Now there is an isomorphism of graded vector spaces $\Ind{\nontop{n}}(\Fr{\nontop{n}}(X))\cong\forget(X)$. Thus $(\derived\Ind{\nontop{n}})X$ may be calculated as the homotopy of the bar construction $B_\bullet(\forget,\Fr{\nontop{n}},X)=(\Fr{\nontop{n}})^\bullet X$. Normalizing this complex by taking the quotient by degenerate simplices, one obtains the reduced Bar construction $\overline{B}_*(\forget,\Fr{\nontop{n}},X)$, a chain complex calculating $(\derived\Ind{\nontop{n}})X$, which we now describe.
 \begin{prop*}
@@ -778,22 +780,24 @@ Then, we have a basis $\{\BarMonomial{I}{\textbf{k}}{x}^*\}$ for $\overline{C}^{
 
 Now $\delta:\overline{C}^{r-1,r}\to\overline{C}^{r,r}$ may be described as follows. A basis for $\overline{C}^{r-1,r}$ is given by elements of the form
 \[\left(\left[\LambdaOp^{i_r}\middle|\cdots\middle|\LambdaOp^{i_{m+2}}  \middle|\LambdaOp^{i_{m+1}}\LambdaOp^{i_m}\middle|\LambdaOp^{i_{m-1}}\middle|\cdots \middle|\LambdaOp^{i_1} \right]x\right)^*\]
-for $1\leq m<r$, $(i_{m+1},i_m)\in\admis{\LambdaOp}$. The image under $\delta$ of this class is readily seen to equal
+which are duals of bar-admissible monomials. The image under $\delta$ of this class is
 \[
 \left(\left[\LambdaOp^{i_r}\middle|\cdots \middle|\LambdaOp^{i_1} \right]x\right)^*
 +
 \sum_{\produces{(\alpha,\beta)}{(i_{m+1},i_m)}{\LambdaOp}}\left(\left[\LambdaOp^{i_r}\middle|\cdots\middle|\LambdaOp^{i_{m+2}}  \middle|\LambdaOp^{\alpha}\middle|\LambdaOp^{\beta}\middle|\LambdaOp^{i_{m-1}}\middle|\cdots \middle|\LambdaOp^{i_1} \right]x\right)^*\]
-Where, if $x\in X_{a_n,\ldots,a_1}$:
-\begin{itemise}
-\setlength{\parindent}{.25in}
-\item we omit those summands in which $\minDim(i_{r},\ldots,i_1)\geq a_n$; and
-\item if all of $a_{n-1},\ldots,a_2$ are zero, we omit any summands with $i_m=0$ or $i_{m+1}=0$.
-\end{itemise}
+We are working in the cobar construction, which is naturally viewed as the \emph{quotient} of the standard cobar construction $C(\F_2,\DyerLashov,X)$ by those cobars not satisfying our unstable condition. Thus, in the right hand side of the above expression, any summands with $\minDim(I)\geq|x|$ or which fail the condition on $\LambdaOp^0$ are taken to be zero.
+%
+%Where, if $x\in X_{a_n,\ldots,a_1}$:
+%\begin{itemise}
+%\setlength{\parindent}{.25in}
+%\item we omit those summands in which $\minDim(i_{r},\ldots,i_1)\geq a_n$; and
+%\item if all of $a_{n-1},\ldots,a_2$ are zero, we omit any summands with $i_m=0$ or $i_{m+1}=0$.
+%\end{itemise}
 The term with $(i_{m+1},i_m)=(\alpha,\beta)$ is not omitted. Moreover, for length 2 sequences $K$ and $L$, as $\LambdaOp$ and $\SqShift$ are Koszul dual, $\produces{K}{L}{\LambdaOp}$ if and only if $\produces{L}{K}{\SqShift}$. Thus, we obtain a relation:
 \[\left(\left[\LambdaOp^{i_r}\middle|\cdots \middle|\LambdaOp^{i_1} \right]x\right)^*
 =
 \sum_{\produces{(i_{m+1},i_m)}{(\alpha,\beta)}{\SqShift}}\left(\left[\LambdaOp^{i_r}\middle|\cdots\middle|\LambdaOp^{i_{m+2}}  \middle|\LambdaOp^{\alpha}\middle|\LambdaOp^{\beta}\middle|\LambdaOp^{i_{m-1}}\middle|\cdots \middle|\LambdaOp^{i_1} \right]x\right)^*\]
-where we make the same omissions on the right hand side. Thus, the relation here is simply the $\SqShift$-Adem relation (with the stated omissions).
+where we make the same omissions on the right hand side. Thus, the relation here is simply the $\SqShift$-Adem relation.
 Using this relation, we see that a basis of $H^{r,r}\overline{C}$ is represented by the cocycles $\BarMonomial{I}{\textbf{k}}{x}^*$, where $I$, and $x$ are as in the statement of of this proposition (and $\textbf{k}=(1,\ldots,1)$).
 
 As long as each $\LambdaOp(I)x$ is a cycle, they will form the dual basis for $H_{rr}\overline{B}$, as in the sum defining $\LambdaOp(I)x$, the only $\SqShift$-admissible $J$ appearing is $J=I$. In order to check that each $\LambdaOp(I)x$ is a cycle, it only remains to check that they pair to zero with each relation in the dual. But that is not hard to see. On $\overline{C}^{r,r}$, by definition of $\LambdaOp(I)x$, the operation `pair with $\LambdaOp(I)x$' \emph{equals} the operation `reduce to $\SqShift$-admissible form using $\SqShift$-Adem relations, and take the coefficient of $(\left[\LambdaOp^{i_\ell}\middle|\cdots\middle|\LambdaOp^{i_1} \right]x)^*$'. This second operation obviously returns zero on Adem relations, and these are precisely the image of $\delta$.
@@ -821,26 +825,26 @@ Now as $E^1_{r,r}\subseteq E^0_{r,r}$, in order to write this in terms of the $\
 \subsection*{Koszul complexes for $\derived\Ind{\nontop{1}}$}
 We'll record here the necessary changes to the previous theory required when $n=1$.
 
-\textup{remove} For $I=(i_\ell,\ldots,i_1)$ a sequence of integers with each $i_j\geq2$, define
-\[\minDimP(I):=\begin{cases}
--\infty,&\textup{if }I=\emptyset;\\
-\max\{(i_1),\,(i_2-i_1-1)\,(i_3-i_2-i_1-2),\,\ldots,\,(i_{\ell}-i_{\ell-1}-\cdots i_1-\ell+1)\},&\textup{otherwise}.
-%\\,&\textup{if }
-\end{cases}
-\]
-Thus, for $I\neq\emptyset$, $\minDimP(I)$ is the lowest dimension $d\geq0$ such that $P^Ix$ may be nonzero, for $x$ a $d$-dimensional element of an object in either $\LL{1}$ or $\nontop{1}$.
+%\textbf{remove} For $I=(i_\ell,\ldots,i_1)$ a sequence of integers with each $i_j\geq2$, define
+%\[\minDimP(I):=\begin{cases}
+%-\infty,&\textup{if }I=\emptyset;\\
+%\max\{(i_1),\,(i_2-i_1-1)\,(i_3-i_2-i_1-2),\,\ldots,\,(i_{\ell}-i_{\ell-1}-\cdots i_1-\ell+1)\},&\textup{otherwise}.
+%%\\,&\textup{if }
+%\end{cases}
+%\]
+%Thus, for $I\neq\emptyset$, $\minDimP(I)$ is the lowest dimension $d\geq0$ such that $P^Ix$ may be nonzero, for $x$ a $d$-dimensional element of an object in either $\LL{1}$ or $\nontop{1}$.
 \subsubsection*{The unstable bar construction and Koszul complex for $\nontop{1}$}
 We are again interested in the reduced Bar construction $\overline{B}_*(\forget,\Fr{\nontop{1}},X)$, which computes $(\derived\Ind{\nontop{1}})X$.
 
-\begin{lem*}
-Suppose that $i\geq2j$, and $\produces{(i,j)}{(i',j')}{P}$. Then $\minDimP(i',j') > \minDimP(i,j)$.
-\end{lem*}
-\begin{proof}
-$j'\geq i-j+1=
-j+(i-2j+1)=
-i-j-1+(2)
-$, so that $j'>\max\{j,i-j-1\}$.
-\end{proof}
+%\begin{lem*}
+%Suppose that $i\geq2j$, and $\produces{(i,j)}{(i',j')}{P}$. Then $\minDimP(i',j') > \minDimP(i,j)$.
+%\end{lem*}
+%\begin{proof}
+%$j'\geq i-j+1=
+%j+(i-2j+1)=
+%i-j-1+(2)
+%$, so that $j'>\max\{j,i-j-1\}$.
+%\end{proof}
 
 \begin{prop*}
 As a vector space each $\overline{B}_r$ is graded, with $\overline{B}_{r,\ell}$
@@ -877,9 +881,13 @@ The inclusion of $\overline{K}_*X$ into $\overline{B}_*(\forget,\Fr{\nontop{1}},
 where the sum is taken over those $J=(j_{\ell},\ldots,j_1)$ such that $(j_{\ell},\ldots,j_2)$ is $\delta$-admissible.
 \end{prop*}
 \begin{proof}
-The proof of this proposition is the same as the proof of the corresponding propositions in the $n\geq2$ case. We use the same algorithm to compress to the diagonal, and the same spectral sequence.
+The proof of this proposition is the same as the proof of the corresponding propositions in the $n\geq2$ case. We use the same algorithm to compress to the diagonal, and the same spectral sequence. There are two main differences between the two cases:
 
-Note that in the $n=1$ case, there are no summands to omit in the formula for $\delta:\overline{C}^{r-1,r}\to\overline{C}^{r,r}$. [Really, in the $n\geq2$ case, the formula for $\delta$ lands in the quotient by inadmissible terms, while in the $n=1$ case, $\delta$ lands in the subcomplex of admissible terms. This is, of course, dual to the situation in the Bar construction or in the free $\nontop{n}$ construction.] For example, in the $n=1$ case, if $\produces{J}{I}{\delta}$, then $\minDimP(J)\geq\minDimP(I)$, which is the opposite to the inequality in the $n\geq2$ case. However, all of the above summands are defined, even those with $\minDimP(J)>|x|$ --- it's just that those summands are zero, due to the unstable condition for $P$. Thus, when in the above, we include a second subscript on the sums, it's just that the sum would contain extra terms, all automatically zero, if we didn't.
+In the $n\geq2$ case, the structure of an element of $\nontop{n}$ only has non-top $\LambdaOp$ operations, so that the various constraints on $\minDim(I)$ were strict. On the other hand, elements of $\nontop{1}$ support all the $P$ operations, so that the inequalities are not strict.
+
+In the $n\geq2$ case, the bar construction was the subobject of a stable bar construction, and the cobar was a quotient. Thus, our final formula didn't contain any extraneous terms, but our interim calculation with the cobar construction did. When $n=1$, this situation is reversed, so that our results land in a quotient, and certain summands therein are zero.
+%
+%Note that in the $n=1$ case, there are no summands to omit in the formula for $\delta:\overline{C}^{r-1,r}\to\overline{C}^{r,r}$. [Really, in the $n\geq2$ case, the formula for $\delta$ lands in the quotient by inadmissible terms, while in the $n=1$ case, $\delta$ lands in the subcomplex of admissible terms. This is, of course, dual to the situation in the Bar construction or in the free $\nontop{n}$ construction.] For example, in the $n=1$ case, if $\produces{J}{I}{\delta}$, then $\minDimP(J)\geq\minDimP(I)$, which is the opposite to the inequality in the $n\geq2$ case. However, all of the above summands are defined, even those with $\minDimP(J)>|x|$ --- it's just that those summands are zero, due to the unstable condition for $P$. Thus, when in the above, we include a second subscript on the sums, it's just that the sum would contain extra terms, all automatically zero, if we didn't.
 \end{proof}
 \end{KoszulComplexes1}
 
