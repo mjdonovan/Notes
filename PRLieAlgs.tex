@@ -3,16 +3,20 @@
 \input{../../Dropbox/logbook/_LOGBOOK/macros.tex}
 
 
-\excludeversion{PRlieKoszulComplexCalculation}
+
+
 
 \def\excludeversion#1{\includeversion{#1}}
+\includeversion{FrontmatterAndEndmatter}
 \excludeversion{SteenrodAlgebrasAndTheirKoszulDuals}
 \excludeversion{CategoriesOfInterest}
 \excludeversion{DiagramOfFunctors}
 \excludeversion{GrothendieckSpectralSequences}
+\excludeversion{KoszulComplexes2plus}
+\excludeversion{KoszulComplexes1}
 \excludeversion{DerivedFunctorsLowDimension}
-\includeversion{KoszulComplexes2plus}
-\includeversion{KoszulComplexes1}
+\excludeversion{PRlieKoszulComplexCalculation}
+\includeversion{LieLambdaStructureOnKoszul}
 
 \newcommand{\GS}[1]{\scrE^{#1}}
 \newcommand{\GpS}[1]{\scrE^{#1}_\star}
@@ -65,7 +69,9 @@
 
 \bibliography{../../Dropbox/logbook/_LOGBOOK/papers}
 \begin{document}
-
+\begin{FrontmatterAndEndmatter}
+\tableofcontents\newpage
+\end{FrontmatterAndEndmatter}
 
 
 
@@ -74,7 +80,7 @@
 
 
 \begin{SteenrodAlgebrasAndTheirKoszulDuals}
-\section*{Some homogeneous Koszul algebras}
+\section{Some homogeneous Koszul algebras}
 In what follows, we will make heavy use of four algebras, each of which is a `homogeneous Koszul algebra' in the sense of \cite{PriddyKoszul.pdf}. The algebras of interest are the following:
 \begin{enumerate}\squishlist
 \setlength{\parindent}{.25in}
@@ -94,10 +100,10 @@ According to \cite[\S7]{PriddySimplicialLie.pdf}, $\LieSteen$ is the quotient of
 \[\LambdaOp^i\LambdaOp^j=\sum_{k=0}^{(i-2j)/2-1}{i-2j-2-k\choose k}\LambdaOp^{2j+1+k}\LambdaOp^{i-j-1-k}\textup{\ for $i>2j$.}\]
 This algebra is the opposite of the $\Lambda$-algebra, under an anti-isomorphism defined by $Q^i\longleftrightarrow \lambda_i$.
 \end{enumerate}
-\subsection*{Actions of the above algebras on homotopy and Quillen cohomology}
+\subsection{Unstable actions on homotopy and Quillen cohomology}
 In what follows, let $A$ be a simplicial augmented commutative $\F_2$-algebra $A$, and let $\frakg$ be a simplicial restricted Lie algebra over $\F_2$.
 
-\subsubsection*{$\CommSteen$ acting on the cohomology of $\F_2$-algebras}
+\subsubsection{$\CommSteen$ acting on the cohomology of $\F_2$-algebras}
 %The Andr\'e-Quillen cohomology groups $H^*_Q(A)$ of a simplicial $\F_2$-algebra $A$ support the following structure:
 \begin{enumerate}\squishlist
 \setlength{\parindent}{.25in}
@@ -108,7 +114,7 @@ In what follows, let $A$ be a simplicial augmented commutative $\F_2$-algebra $A
 $[x,P^iy]=0$.
 \end{enumerate}
 
-\subsubsection*{$\LieSteen$ acting on the cohomology of restricted Lie algebras}
+\subsubsection{$\LieSteen$ acting on the cohomology of restricted Lie algebras}
 %The Andr\'e-Quillen cohomology groups $H^*_Q(\frakg)$ of $\frakg$ support the following structure:
 \begin{enumerate}\squishlist
 \setlength{\parindent}{.25in}
@@ -119,7 +125,7 @@ $[x,P^iy]=0$.
 \[\SqShift^k(x\cdot y)=\sum_{k'+k''=k-1}\SqShift^{k'}(x)\cdot \SqShift^{k''}(y).\]
 \end{enumerate}
 
-\subsubsection*{$\Delta$ operations on the homotopy of $\F_2$-algebras}
+\subsubsection{$\Delta$ operations on the homotopy of $\F_2$-algebras}
 %The homotopy groups $\pi_*(A)$ of $A$ support the following structure:
 \begin{enumerate}\squishlist
 \setlength{\parindent}{.25in}
@@ -138,7 +144,7 @@ y^2\delta_i(x),&\textup{if }|y|=0\textup{ and }|x|\geq2;\\
 \end{cases}
 \]
 \end{enumerate}
-\subsubsection*{$\LambdaOp$ operations on the homotopy of restricted Lie algebras}
+\subsubsection{$\LambdaOp$ operations on the homotopy of restricted Lie algebras}
 %The homotopy groups $\pi_*(\frakg)$ of $\frakg$ support the following structure:
 \begin{enumerate}\squishlist
 \setlength{\parindent}{.25in}
@@ -157,14 +163,23 @@ y^2\delta_i(x),&\textup{if }|y|=0\textup{ and }|x|\geq2;\\
 
 Note that it is not immediately obvious that the $\delta$-Adem ($\LambdaOp$-Adem) relations are well defined when viewed as relations that hold between operations on the homotopy of commuatative algebras (Lie algebras). That is, we are supposed to have $\LambdaOp^i\LambdaOp^jx=\cdots $ whenever $i>2j$ and $\LambdaOp^i\LambdaOp^jx$ is defined, but we haven't checked that every term in the right hand side is defined. This does indeed happen, by a lemma to follow. 
 
-\subsection*{Admissibles, etc.}
+\subsection{The combinatorics of admissible sequences}
 
 Now each of these algebras, being homogeneous, is bigraded%footnote:
 \footnote{I'm not sure what the point is in bigrading things, really, but there's some cool stuff happening. For example, if you make $P$ act on something that's only singly graded, it makes sense to demand that degrees change via the associtated singly graded algebra, in which $|P^i|=i+1$, and viewing $P$ as bigraded makes the unstable condition seem more natural. Moreover, whenever you see a $\delta_j$ in this context, it does change internal degree by $i$, and homological degree by $1$. What it does to deeper degrees is just spooky. I guess the same thing holds for $\SqShift^i$, which is intense, given that it equals $\Sq^{i+1}$! I don't know.}, setting (\textbf{I guess}) 
 \[\|P^i\|=\|\delta_i\|=\|\SqShift^i\|=\|\LambdaOp^i\|=(1,i).\]
-Now let $b$ be any of the symbols $P$, $\delta$, $\SqShift$, or $\LambdaOp$. For a sequence $I=(i_{\ell},\ldots,i_1)$ of positive integers (with $i_j\geq2$ if $b$ is $P$ or $\delta$), write $b^I$ for the product $b^{i_\ell}\cdots b^{i_1}$. Say that $I$ is $b$-admissible if no $b$-Adem relations can be applied directly to $b^I$.
+Now let $b$ be any of the symbols $P$, $\delta$, $\SqShift$, or $\LambdaOp$. For a sequence $I=(i_{\ell},\ldots,i_1)$ of positive integers (with $i_j\geq2$ if $b$ is $P$ or $\delta$), write $b^I$ for the product $b^{i_\ell}\cdots b^{i_1}$. Say that $I$ is $b$-admissible if no $b$-Adem relations can be applied directly to $b^I$, so that one of the four evident inequalities hold between adjacent indices in $I$.
+\begin{lem*}
+All of the Adem relations listed above express the inadmissible length 2 sequence on the left hand side as a sum of admissible length 2 sequences. All four of the algebras are homogeneous Koszul algebras. The algebras $\CommSteen$ and $\Delta$ are Koszul dual, under $P^i\longleftrightarrow\delta_i$. The algebras $\LieSteen$ and $R$ are Koszul dual, under $\SqShift^i\longleftrightarrow\LambdaOp^i$. In particular, for length 2 sequences $K$ and $L$:
+\[\produces{K}{L}{P}\iff\produces{L}{K}{\delta}\textup{ \ and \ }\produces{K}{L}{\SqShift}\iff\produces{L}{K}{\LambdaOp}\]
 
-For all four of these algebras, the $b$-Adem relations can be used iteratively to write any expression as a sum of terms $b^I$ with $I$ $b$-admissible. We'll write $\produces{I}{J}{b}$ if $I\neq J$, and when $b^I$ is written as a sum of $b$-admissible expressions, $b^J$ appears therein (an odd number of times). Trivially, if $\produces{I}{J}{b}$, then $J$ is $b$-admissible, and $I$ is $b$-inadmissible.
+\end{lem*}
+\begin{proof}
+The first statement is checked manually from the Adem relations in each case.
+
+Priddy's PBW stuff, along with the fact that none of the above Adem relations do any more than expected, shows that everything is Koszul. To check that the algebras are indeed Koszul dual to each other, one just looks closely at the Adem relations and checks the above `$\iff$' statements
+\end{proof}
+Thus, for all four of these algebras, the $b$-Adem relations can be used iteratively to write any expression as a sum of terms $b^I$ with $I$ $b$-admissible. We'll write $\produces{I}{J}{b}$ if $I\neq J$, and when $b^I$ is written as a sum of $b$-admissible expressions, $b^J$ appears therein (an odd number of times). Trivially, if $\produces{I}{J}{b}$, then $J$ is $b$-admissible, and $I$ is $b$-inadmissible.
 
 It will be important to have a criterion for when $\delta_Ix$ is defined for an element $x\in\pi_*(A)$, or when $P^Ix$ can be nonzero, for $x\in H^*_Q(A)$, etc.
 To answer such questions, we make the following two definitions. For $I=(i_\ell,\ldots,i_1)$ a sequence of nonnegative integers, we define
@@ -195,44 +210,51 @@ If $I=(i_{\ell},\ldots,i_1)$ with all $i_j\geq0$, then:
 
 %With this notation in hand, we may finally discuss whether or not the Adem relations that the $\delta$ operations and and $\Delta$ are well defined.
 \begin{lem*}
-In the following statements, $K=(i,j)$ and $L=(i',j')$ are to be two length 2 sequences, with entries nonnegative in cases (i) and (ii), and entries at least 2 in cases (iii) and (iv).
-\begin{itemise}
+In the following statements, $K$ and $L$ are each length 2 sequences:%, with entries nonnegative in cases (i) and (ii), and entries at least 2 in cases (iii) and (iv).
+%
+%In the following statements, $K=(i,j)$ and $L=(i',j')$ are to be two length 2 sequences, with entries nonnegative in cases (i) and (ii), and entries at least 2 in cases (iii) and (iv).
+\begin{enumerate}[i)]
 \setlength{\parindent}{.25in}
 \item Suppose that $\produces{K}{L}{\LambdaOp}$. Then $\minDim(L)<\minDim(K)$, and $L$ has positive entries.
-\item Suppose that $\produces{K}{L}{\SqShift}$. Then $\minDim(L)>\minDim(K)$, and $K$ has positive entries. (shrug)
+%\item Suppose that $\produces{K}{L}{\SqShift}$. Then $\minDim(L)>\minDim(K)$, and $K$ has positive entries. (shrug)
 \item Suppose that $\produces{K}{L}{P}$. Then $\minDimP(L) > \minDimP(K)$.
-\item Suppose that $\produces{K}{L}{\delta}$. Then $\minDimP(L) < \minDimP(K)$. (shrug)
-\end{itemise}
+%\item Suppose that $\produces{K}{L}{\delta}$. Then $\minDimP(L) < \minDimP(K)$. (shrug)
+\end{enumerate}
+In (ii), the entries of $K$ and $L$ should be at least 2.
 \end{lem*}
 \begin{proof}
-In all of these proofs, let $K=(i,j)$ and $L=(i',j')$.
+In both of the proofs, let $K=(i,j)$ and $L=(i',j')$.
+
+For (i), we wish to show that $\max\{j',i'-j'\}<\max\{j,i-j\}$, but we must have that $i'\leq 2j'$, and $i>2j$. Thus, we need only show that $j'<i-j$, but this is immediate from the indexing of the Adem relation. That $L$ has positive entries is also immediate.
+
+For (ii), we wish to show that $\max\{j',i'-j'-1\}>\max\{j,i-j-1\}$, but we must have that $i'> 2j'$, and $i\geq2j$. Thus $\max\{j,i-j-1\}$ at most $i-j$ (which happens when $i=2j$). Thus, we need only show that $j'>i-j$; again, easy.
 \end{proof}
-\begin{lem*}
-Suppose that %$i>2j$, and 
-$\produces{(i,j)}{(i',j')}{\LambdaOp}$. Then $\minDim(i,j)>
-\minDim(i',j')$, and $i',j'>0$.
+%\begin{lem*}
+%Suppose that %$i>2j$, and 
+%$\produces{(i,j)}{(i',j')}{\LambdaOp}$. Then $\minDim(i,j)>
+%\minDim(i',j')$, and $i',j'>0$.
 %
 %In particular, if $\LambdaOp^i\LambdaOp^jx$ is defined, and $i>2j$, it can be rewritten as a sum of terms $\LambdaOp^{i'}\LambdaOp^{j'}x$ in which neither of the $\LambdaOp^{i'}$ and $\LambdaOp^{j'}$ that appear are top operations.
-\end{lem*}
-\begin{proof}
-It must be that $(i,j)$ is $\LambdaOp$-inadmissible, so that $i>2j$. Then,
-by inspection, $i>j+i/2\geq i'\geq2j+1$, and $i-j-1\geq j'\geq i/2>j$. These inequalities demonstrate (i). For (ii), note that (i) shows that we needn't worry about $\LambdaOp^0$ failing to be defined, as it won't appear. Our only concern is that either $i'$ or $j'$ will be too large. Suppose then that $\LambdaOp^i\LambdaOp^j$ is defined on an $n$-dimensional class, so that $j\leq n$ and $i\leq n+j$. Then one notes that $j'\leq i-j-1\leq n-1$, and $i'-j'\leq (j+i/2)-(i/2)<i/2\leq(n+j)/2\leq n$. The first chain gives $j'\leq n-1$, and the second $i'\leq n-1+j'$, as the quantities involved are integers. These inequalities demonstrate (ii) and the final comment.
-\end{proof}
-
-\begin{lem*}
-Suppose that $\produces{(i,j)}{(i',j')}{P}$. Then $\minDimP(i',j') > \minDimP(i,j)$.
-\end{lem*}
-\begin{proof}
-Since $i\geq2j$, 
-$j'\geq i-j+1=
-j+(i-2j+1)=
-i-j-1+(2)
-$, so that $j'>\max\{j,i-j-1\}$.
-\end{proof}
+%\end{lem*}
+%\begin{proof}
+%It must be that $(i,j)$ is $\LambdaOp$-inadmissible, so that $i>2j$. Then,
+%by inspection, $i>j+i/2\geq i'\geq2j+1$, and $i-j-1\geq j'\geq i/2>j$. These inequalities demonstrate (i). For (ii), note that (i) shows that we needn't worry about $\LambdaOp^0$ failing to be defined, as it won't appear. Our only concern is that either $i'$ or $j'$ will be too large. Suppose then that $\LambdaOp^i\LambdaOp^j$ is defined on an $n$-dimensional class, so that $j\leq n$ and $i\leq n+j$. Then one notes that $j'\leq i-j-1\leq n-1$, and $i'-j'\leq (j+i/2)-(i/2)<i/2\leq(n+j)/2\leq n$. The first chain gives $j'\leq n-1$, and the second $i'\leq n-1+j'$, as the quantities involved are integers. These inequalities demonstrate (ii) and the final comment.
+%\end{proof}
+%
+%\begin{lem*}
+%Suppose that $\produces{(i,j)}{(i',j')}{P}$. Then $\minDimP(i',j') > \minDimP(i,j)$.
+%\end{lem*}
+%\begin{proof}
+%Since $i\geq2j$, 
+%$j'\geq i-j+1=
+%j+(i-2j+1)=
+%i-j-1+(2)
+%$, so that $j'>\max\{j,i-j-1\}$.
+%\end{proof}
 
 
 %
-%\subsection*{The Steenrod algebra for simplicial Lie algebras and its Koszul dual}
+%\subsection{The Steenrod algebra for simplicial Lie algebras and its Koszul dual}
 %Let  $\LieSteen$ be the Steenrod algebra for simplicial restricted Lie algebras \cite[\S7]{PriddySimplicialLie.pdf}. This is the quotient of the standard Steenrod algebra by the two-sided ideal generated by $\Sq^0$. We'll introduce the notation $\SqShift^i:=\Sq^{i+1}$, so that $\LieSteen$ is generated by $\SqShift^i$ for $i\geq-1$, subject to relations:
 %\[\SqShift^{-1}=0\textup{ and }\SqShift^i\SqShift^j=\sum_{k=0}^{(i-1)/2}{j-k-1\choose i-2k-1}\SqShift^{i+j-k}\SqShift^k\textup{\ for $i\leq2j$.}\]
 %This is a homogeneous Koszul algebra in the sense of \cite{PriddyKoszul.pdf}. Its cohomology algebra $H^*\LieSteen:=\Ext_{\LieSteen}^{**}(\F_2,\F_2)$ is also a homogeneous Koszul algebra, generated by the $\LambdaOp^i$ for $i\geq0$, where $\LambdaOp^i$ is dual to $\SqShift^i$ \cite[\S8]{PriddySimplicialLie.pdf}. These classes satisfy their own Adem relations%footnote:
@@ -240,7 +262,7 @@ $, so that $j'>\max\{j,i-j-1\}$.
 %\[\LambdaOp^i\LambdaOp^j=\sum_{k=0}^{(i-2j)/2-1}{i-2j-2-k\choose k}\LambdaOp^{2j+1+k}\LambdaOp^{i-j-1-k}\textup{\ for $i>2j$.}\]
 %Importantly, $H^*\LieSteen$ is isomorphic to the opposite of the $\Lambda$-algebra, and $\LambdaOp^i\longleftrightarrow\lambda_i$ under this anti-isomorphism. While it is not precisely true that the $\Lambda$-algebra has an unstable right action on the homotopy of any simplicial Lie algebra, there are various $\lambda$ operators acting thereupon, satisfying the Adem relations in the $\Lambda$-algebra when written on the right \cite[Prop 8.6]{CurtisSimplicialHtpy.pdf}. We prefer to think of this as a left action of various $\LambdaOp$ operators, in order to simplify notation. Details to follow.
 %
-%\subsection*{The Steenrod algebra for simplicial commutative algebras and its Koszul dual}
+%\subsection{The Steenrod algebra for simplicial commutative algebras and its Koszul dual}
 %It follows from Goerss' determination \cite[p.14]{MR1089001} of the cohomology of Eilenberg-Mac Lane objects in simplicial augmented commutative $\F_2$-algebras that the corresponding Steenrod algebra, $\CommSteen$ may be described thus.
 %Let $\CommSteen$ be the algebra generated by $P^i$ for $i\geq0$ subject to relations:
 %\[P^0=0,\ P^1=0\textup{ and }P^iP^jx=\sum_{s=i-j+1}^{i+j-2}{2s-i-1\choose s-j}P^{i+j-s}P^sx\textup{ for $i\geq2j$}.\]
@@ -250,9 +272,9 @@ $, so that $j'>\max\{j,i-j-1\}$.
 \end{SteenrodAlgebrasAndTheirKoszulDuals}
 
 \begin{CategoriesOfInterest}
-\section*{Categories of interest}
+\section{Categories of interest}
 In the following subsections we detail a number of algebraic categories relevant to our study.
-\subsection*{Categories of graded sets and vector spaces}
+\subsection{Categories of graded sets and vector spaces}
 \begin{itemize}
 \setlength{\parindent}{.25in}
 \item For $n\geq1$, let $\GpS{n}$ be the category of $n$-times non-negatively graded pointed sets $X$ whose graded part $X_{a_n,\ldots,a_1}$ is a single point whenever $a_1=0$. That is, an object $X\in\GpS{n}$ is a collection $X_{a_n,\ldots,a_1}$ of pointed sets, one for each $n$-tuple $(a_n,\ldots,a_1)$ of non-negative integers, such that $X_{a_n,\ldots,a_2,0}=\{\star\}$ for all $a_n,\ldots,a_2$. For $x\in X_{a_n,\ldots,a_1}$, we write $|x|:=a_n$.
@@ -264,7 +286,7 @@ All the categories $\mathsf{C}=\mathsf{C}^n$ to be defined below will consist of
 Moreover, for any of the following categories there are free/forget adjunctions $\GS{n} \rightleftarrows \mathsf{C}$ and $\GpS{n} \rightleftarrows \mathsf{C}$. We'll denote either of these free functors simply by $X\mapsto\Fr{\mathsf{C}}(X)$.
 
 
-\subsection*{Categories of graded Lie algebras}
+\subsection{Categories of graded Lie algebras}
 
 \begin{itemize}
 \setlength{\parindent}{.25in}
@@ -310,7 +332,7 @@ For (iii), the proposed basis again must span $\Fr{\PRLie{n}}(X)$, and can be se
 \end{proof}
 
 
-\subsection*{Homotopy operations for simplicial Lie algebras}
+\subsection{Homotopy operations for simplicial Lie algebras}
 The goal of this section is to determine the natural operations on the homotopy of a simplicial object in the category $\mathsf{C}$, for $\mathsf{C}=\mathsf{C}^n$ any of the above categories of graded Lie algebras. This is equivalent to calculating the homotopy of `wedges of spheres'.
 
 That is, suppose that $X\in\GS{n+1}$ is a graded set. Then one can form a simplicial pointed graded set $S(X)\in s\GpS{n}$ by the formula
@@ -434,7 +456,7 @@ in $\pi_*(\Fr{\PRLie{n}}S(X))$ using the same formulae as in $\pi_*(\Fr{\RestLie
 
 
 
-\subsection*{Categories of graded Lie algebras with unstable operations}
+\subsection{Categories of graded Lie algebras with unstable operations}
 \begin{itemize}
 \setlength{\parindent}{.25in}
 %\item Let $\LL{1}$ be the full subcategory of connected objects in $\calW$. We already have the definition for these in Goerss' book, but I'll spell this out here, to emphasise certain interesting aspects of the character of $\LL{1}$.
@@ -541,7 +563,8 @@ When $n=1$, $\Fr{\LL{1}}(X)$ is free on $B$ as an object of $\nontop{n}$. For $n
 
 
 \begin{DiagramOfFunctors}
-\section*{A diagram of functors}
+\section{Grothendieck spectral sequences}
+\subsection{A diagram of functors}
 Now for each category $\mathsf{C}$ amongst $\LL{n}$, $\PRLie{n}$ and $\nontop{n}$, there is a functor $\Ind{\mathsf{C}}:\mathsf{C\overset{}{\to}\GR{n}}$, which takes the quotient of the underlying vector space by the subspace spanned by the image of all of the structure maps. These provide the solid horizontal arrows in the following diagram, while the vertical maps are the evident forgetful functors: %There are also free/forget adjunctions $\GS{n} \rightleftarrows \mathsf{C}$. %Finally, there's a forgetful functor $\forget:\LL{n}\to\nontop{n}$, which, importantly, preserves  free objects%footnote:
 %\footnote{I think that the adjunction does need to come from graded pointed sets, but that that's no problem for Blanc-Stover. The only thing that matters is that $\forget$ preserves frees, but it does --- frees in $\nontop{n}$ are easy to describe.}. These functors give the solid maps in the following diagram:
 \[\xymatrix@R=8mm@C=15mm@!C{
@@ -607,7 +630,7 @@ in which the functors $\forget$ and $\Ind{\nontop{n}}$ with domain $\LL{n}$ both
 %When $n\geq2$, $\Ind{\nontop{n}}$ quotients the underlying vector space by the images of all of the non-top $\LambdaOp$ operations. That is, by the span of the $\LambdaOp^ix$ for $i<|x|$. The result inherits the structure of an element of $\PRLie{n}$ as follows. The Lie bracket is induced by that in $\LL{n}$; well defined by the axiom ``$[\LambdaOp^i{x},z]=0$ for $i<|x|$''. The restriction is induced by the top $\LambdaOp$ operations, being defined by the formula $\restn{x}:=\LambdaOp^{|x|}x$. It is a little less obvious that this is in fact well defined. One must check, for homogeneous $x,y\in L$, and $0\leq i<|y|$ such that $\LambdaOp^iy$ is defined and $i+|y|=|x|$, that $\LambdaOp^{|x|}x$ and $\LambdaOp^{|x|}(x+\LambdaOp^iy)$ differ by a sum of images of non-top $\LambdaOp$ operations. But\[\LambdaOp^{|x|}(x+\LambdaOp^iy)-\LambdaOp^{|x|}x=\LambdaOp^{|x|}(\LambdaOp^iy)+[x,\LambdaOp^iy]=\LambdaOp^{|x|}\LambdaOp^iy,\]and the above calcuation regarding indices in the $\LambdaOp$-Adem relations shows that $\LambdaOp^{|x|}\LambdaOp^iy$ can be rewritten without the appearance of a top $\LambdaOp$.
 \end{DiagramOfFunctors}
 \begin{GrothendieckSpectralSequences}
-\section*{Grothendieck spectral sequences}
+\subsection{Grothendieck spectral sequences}
 We are interested in the derived functors $(\derived\Ind{\LL{n}})X\in\GR{n+1}$ for $X\in\LL{n}$. It is convenient for us to omit the customary asterisk in $\derived_*$, and to think of the derived functors as a single object with a one more grading than $X$ has. We always write the new grading to the left of the previous gradings, as is customary. To study $(\derived\Ind{\LL{n}})(X)$ we use the Grothendieck spectral sequence derived in \cite{Blanc_Stover-Groth_SS.pdf}. The spectral sequence takes the form:
 \[E^2_{st}=(\derived_s(\overline{\Ind{\PRLie{n}}}_t))(\derived\Ind{\nontop{n}})X\implies(\derived_{s+t}\Ind{\LL{n}})X\textup{ with }d^{r}:E_{st}\to E_{s-r,t+r-1}.\]
 To explain this, note that $\derived\Ind{\nontop{n}}\in\PiAlg{\PRLie{n}}$, and $\overline{\Ind{\PRLie{n}}}$ is the functor $\PiAlg{\PRLie{n}}\to\GR{n+1}$ induced by $\Ind{\PRLie{n}}$. The $t$ subscript picks out the part with (new) grading $t$. It might be simpler to write:
@@ -662,37 +685,10 @@ As $\forget:\LL{n}\to\nontop{n}$ preserves free objects and weak equivalences, t
 \end{proof}
 \end{GrothendieckSpectralSequences}
 
-\begin{DerivedFunctorsLowDimension}
-\subsection*{Calculating $\derived\Ind{\LL{n}}$ in low internal dimension}
-%\subsubsection*{$\derived\Ind{\LL{1}}$}
-Choose $n\geq 1$, and define 
-\[d=\begin{cases}
-4,&\textup{if }n=1;\\
-1,&\textup{if }n=2;
-\\0,&\textup{if }n\geq3.
-\end{cases}
-\]
-We will here present a method to calculate the object $(\derived\Ind{\LL{n}})X=((\derived\Ind{\LL{n}})X)_{a_{n+1},\ldots,a_1}$ in dimensions with $a_n\leq d$. Consider the diagram:
-\[\xymatrix@R=2mm@C=13mm{
-&%r1c1
-\ar[dd]^-{\Ind{\nontop{n}}}
-\ar@<.5ex>[dl]%^-{\forget}
-\LL{n}\\%r1c2
-\ar@<.5ex>[ur]^-{\LL{n}}
-\ar@<.5ex>[dr]^-{\PRLie{n}}
-\GR{n}&%r2c1
-\\%r2c2
-&%r3c1
-\PRLie{n}
-\ar@<.5ex>[ul]%^-{\forget}
-%r3c2
-}\]
-In this diagram, $\Ind{\nontop{n}}$ does not change the underlying vector space in dimensions $(a_n,\ldots,a_1)$ with $a_n\leq d$. Moreover, the free constructions $\Fr{\LL{n}}$ and $\Fr{\PRLie{n}}$ agree in these dimensions, as do the structure maps of the free/forget adjunctions. Thus, there is an isomorphism between $(\derived\Ind{\LL{n}})(X)$ and $(\derived\Ind{\PRLie{n}})(\Ind{\nontop{n}}(X))$ in dimensions with $a_n\leq d$. [Note that these are objects of $\GR{n+1}$, and so have gradings $a_{n+1},\ldots,a_1$ --- our inequality involves $a_n$, the outermost grading of an object of $\LL{n}$.]
 
-There is a complex that computes $\derived\Ind{\PRLie{n}}$ --- it interpolates between the Cartan-Eilenberg resolution for the homology of good Lie algebras, and May's $\overline{X}$ complex for  restricted Lie algebra homology.
-\end{DerivedFunctorsLowDimension}
 \begin{KoszulComplexes2plus}
-\subsection*{Koszul complexes for $\derived\Ind{\nontop{n}}$ for $n\geq2$}
+\section{Unstable Koszul complexes and Priddy's algorithm}
+\subsection{Koszul complexes for $\derived\Ind{\nontop{n}}$ for $n\geq2$}
 We will define Koszul complexes calculating $\derived\Ind{\nontop{n}}$ for all $n$. The techniques we will use originate in \cite{PriddyKoszul.pdf}. It will be useful to record here a customized version of Priddy's arguments, for three reasons: his results do not apply to our situation without minor modification to accomodate unstable conditions; we will require a technique from his proof of \cite[Thm 5.3]{PriddyKoszul.pdf} in what follows; we prefer to work with the Koszul complex, not the coKoszul complex.
 %We Due to the fact that we are working with categories of unstable modules, there are straightforward changes to be made to Priddy's exposition. We make these changes here. The other benefit to covering this material is that we will
 %Moreover, for certain calculations to follow we will need to refer to certain techniques found in the proof of \cite[Thm 5.3]{PriddyKoszul.pdf}. In order that our reader may understand these techniques, we 
@@ -710,7 +706,8 @@ We will define Koszul complexes calculating $\derived\Ind{\nontop{n}}$ for all $
 %\item  for $I\neq\emptyset$, $\minDim(I)$ is the lowest dimension $d\geq0$ such that $\LambdaOp^I$ may act on a $d$-dimensional element of an object in $\LL{n}$, if we ignore the extra restrictions on $\LambdaOp^0$; and
 %\item $\minDim(I)$ is the unique element of $\{-\infty,0,1,2,\ldots\}$ such that for any $X\in\nontop{n}$ and any $x\in X$, $\LambdaOp^Ix$ is defined if and only if $\minDim(I)<|x|$, if we ignore the extra restrictions on $\LambdaOp^0$.
 %\end{itemise}
-\subsubsection*{The unstable bar construction and Koszul complex for $\nontop{n}$, $n\geq2$}
+
+%\subsubsection{The unstable bar construction and Koszul complex for $\nontop{n}$, $n\geq2$}
 For any object $X\in\nontop{n}$, the bar construction ${B}_\bullet(\Fr{\nontop{n}},\Fr{\nontop{n}},X)=(\Fr{\nontop{n}})^{\bullet+1}X$ is a free simplicial resolution of $X$. Now there is an isomorphism of graded vector spaces $\Ind{\nontop{n}}(\Fr{\nontop{n}}(X))\cong\forget(X)$. Thus $(\derived\Ind{\nontop{n}})X$ may be calculated as the homotopy of the bar construction $B_\bullet(\forget,\Fr{\nontop{n}},X)=(\Fr{\nontop{n}})^\bullet X$. Normalizing this complex by taking the quotient by degenerate simplices, one obtains the reduced Bar construction $\overline{B}_*(\forget,\Fr{\nontop{n}},X)$, a chain complex calculating $(\derived\Ind{\nontop{n}})X$, which we now describe.
 \begin{prop*}
 As a vector space each $\overline{B}_r$ is graded, with $\overline{B}_{r,\ell}$
@@ -822,7 +819,7 @@ Now as $E^1_{r,r}\subseteq E^0_{r,r}$, in order to write this in terms of the $\
 
 
 \begin{KoszulComplexes1}
-\subsection*{Koszul complexes for $\derived\Ind{\nontop{1}}$}
+\subsection{Koszul complexes for $\derived\Ind{\nontop{1}}$}
 We'll record here the necessary changes to the previous theory required when $n=1$.
 
 %\textbf{remove} For $I=(i_\ell,\ldots,i_1)$ a sequence of integers with each $i_j\geq2$, define
@@ -833,7 +830,8 @@ We'll record here the necessary changes to the previous theory required when $n=
 %\end{cases}
 %\]
 %Thus, for $I\neq\emptyset$, $\minDimP(I)$ is the lowest dimension $d\geq0$ such that $P^Ix$ may be nonzero, for $x$ a $d$-dimensional element of an object in either $\LL{1}$ or $\nontop{1}$.
-\subsubsection*{The unstable bar construction and Koszul complex for $\nontop{1}$}
+
+%\subsubsection{The unstable bar construction and Koszul complex for $\nontop{1}$}
 We are again interested in the reduced Bar construction $\overline{B}_*(\forget,\Fr{\nontop{1}},X)$, which computes $(\derived\Ind{\nontop{1}})X$.
 
 %\begin{lem*}
@@ -892,10 +890,41 @@ In the $n\geq2$ case, the bar construction was the subobject of a stable bar con
 \end{KoszulComplexes1}
 
 
-\begin{PRlieKoszulComplexCalculation}
-\section*{The Koszul complex for partially restricted Lie algebras}
-\subsection*{Set-theoretic preliminaries}
+\begin{DerivedFunctorsLowDimension}
+\section{Lie algebra homology and low dimensional calculations}
+\subsection{Calculating $\derived\Ind{\LL{n}}$ in low internal dimension}
+%\subsubsection{$\derived\Ind{\LL{1}}$}
+Choose $n\geq 1$, and define 
+\[d=\begin{cases}
+4,&\textup{if }n=1;\\
+1,&\textup{if }n=2;
+\\0,&\textup{if }n\geq3.
+\end{cases}
+\]
+We will here present a method to calculate the object $(\derived\Ind{\LL{n}})X=((\derived\Ind{\LL{n}})X)_{a_{n+1},\ldots,a_1}$ in dimensions with $a_n\leq d$. Consider the diagram:
+\[\xymatrix@R=2mm@C=13mm{
+&%r1c1
+\ar[dd]^-{\Ind{\nontop{n}}}
+\ar@<.5ex>[dl]%^-{\forget}
+\LL{n}\\%r1c2
+\ar@<.5ex>[ur]^-{\LL{n}}
+\ar@<.5ex>[dr]^-{\PRLie{n}}
+\GR{n}&%r2c1
+\\%r2c2
+&%r3c1
+\PRLie{n}
+\ar@<.5ex>[ul]%^-{\forget}
+%r3c2
+}\]
+In this diagram, $\Ind{\nontop{n}}$ does not change the underlying vector space in dimensions $(a_n,\ldots,a_1)$ with $a_n\leq d$. Moreover, the free constructions $\Fr{\LL{n}}$ and $\Fr{\PRLie{n}}$ agree in these dimensions, as do the structure maps of the free/forget adjunctions. Thus, there is an isomorphism between $(\derived\Ind{\LL{n}})(X)$ and $(\derived\Ind{\PRLie{n}})(\Ind{\nontop{n}}(X))$ in dimensions with $a_n\leq d$. [Note that these are objects of $\GR{n+1}$, and so have gradings $a_{n+1},\ldots,a_1$ --- our inequality involves $a_n$, the outermost grading of an object of $\LL{n}$.]
 
+There is a complex that computes $\derived\Ind{\PRLie{n}}$ --- it interpolates between the Cartan-Eilenberg resolution for the homology of good Lie algebras, and May's $\overline{X}$ complex for  restricted Lie algebra homology.
+\end{DerivedFunctorsLowDimension}
+
+\begin{PRlieKoszulComplexCalculation}
+
+\subsection{The Cartan-Eilenberg-May complex for partially restricted Lie algebra homology}
+The PBW theorem states that $E^0VL=A(L^u)\otimes E(L^r)$, and the homology of this algebra (see \cite[\S7]{PriddyKoszul.pdf}) is thus $E(L^u)\otimes \Gamma(L^r)$. We'll think of this as the sub-coalgebra of $\Gamma(L)$ in which there are no $\gamma_i$ for $i>1$ applied to unrestrictable elements. It's the shuffle product that produces representatives in $\overline{B}(E^0V(L))$ for classes in $E(L^u)\otimes \Gamma(L^r)$, and in order to calculate with these representatives, we first introduce some notation.
 \begin{itemize}
 \setlength{\parindent}{.25in}
 \item $\Z^n:=\{\textbf{z}=(z_1,\ldots,z_n);\ z_i\in\Z\}$
@@ -912,8 +941,8 @@ Choose $\textbf{z}\in\Z^n$, and $i$ satisfying $1\leq i\leq n$. Then as $k$ rang
 Choose $\textbf{z}\in\Z^n$, and $i\neq j$ satisfying $1\leq i,j\leq n$. Then as $k$ ranges from $1$ to $\sigma \textbf{z}-1$, and $\textbf{p}$ ranges through those elements of $\calP(\textbf{z})$ satisfying $(p_k,p_{k+1})=(i,j)$, then $d_k\textbf{p}$ assumes each value in $\calP((r_{ij}\textbf{z})*(1))$ exactly once. This occurs symmetrically in $i$ and $j$, which is to say that for such a pair $(k,\textbf{p})$, the pair $(k,\textbf{p}\sigma_k)$ works with $i$ and $j$ swapped, and we have $d_k(\textbf{p}\sigma_k)=d_k(\textbf{p})$.
 \end{prop*}
 
-\subsection*{The Koszul complex}
-The PBW theorem states that $E^0VL=A(L^u)\otimes E(L^r)$, and the homology of this algebra (see Priddy) is thus $E(L^u)\otimes \Gamma(L^r)$. (I think) we'll think of this as the sub-coalgebra of $\Gamma(L)$ in which there are no $\gamma_i$ for $i>1$ applied to unrestrictable elements. It's the shuffle product that produces representatives in $\overline{B}(E^0V(L))$ --- we may send a product $\prod_{i=1}^{n}\gamma_{z_i}(x_i)$ to $\left\langle \textbf{z},\textbf{x}\right\rangle$, a quantity we now define:
+
+We can respresent a product $\prod_{i=1}^{n}\gamma_{z_i}(x_i)$ in $E(L^u)\otimes \Gamma(L^r)$ by a class $\left\langle \textbf{z},\textbf{x}\right\rangle$ in $\overline{B}(E^0V(L))$ which we now define:
 
 \begin{itemize}
 \setlength{\parindent}{.25in}
@@ -959,7 +988,16 @@ He writes the differential on $f=\prod_{i=1}^{n}\gamma_{z_i}(y_i)$ as
 Here, the parenthetical term vanishes in $\overline{K}$ --- it's there in case we're using nontrivial coefficients.
 \end{PRlieKoszulComplexCalculation}
 
-%\printbibliography
+\begin{LieLambdaStructureOnKoszul}
+\section{Calculations}
+
+\end{LieLambdaStructureOnKoszul}
+
+
+
+\begin{FrontmatterAndEndmatter}
+\printbibliography
+\end{FrontmatterAndEndmatter}
 \end{document}
 
 
@@ -973,7 +1011,5 @@ Here, the parenthetical term vanishes in $\overline{K}$ --- it's there in case w
 
 
 
-
-Turn around; every now and the we get a little bit closer. Turn around, bright eyes! Every now and then we fall apart! And I need you now tonight, and I need you more than ever. And I
 
 
