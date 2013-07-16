@@ -6,13 +6,13 @@
 
 
 
-\def\excludeversion#1{\includeversion{#1}}
+%\def\excludeversion#1{\includeversion{#1}}
 \includeversion{Frontmatter}
 \excludeversion{Endmatter}
 \excludeversion{SteenrodAlgebrasAndTheirKoszulDuals}
 \excludeversion{CategoriesOfInterest}
-\includeversion{DiagramOfFunctors}
-\includeversion{GrothendieckSpectralSequences}
+\excludeversion{DiagramOfFunctors}
+\excludeversion{GrothendieckSpectralSequences}
 \excludeversion{KoszulComplexes2plus}
 \excludeversion{KoszulComplexes1}
 \excludeversion{DerivedFunctorsLowDimension}
@@ -685,7 +685,7 @@ For $n\geq1$, and any $X\in\LL{n}$,
 That is, as vector spaces, both $(\Ind{\nontop{n}})X$ and $(\derived{\Ind{\nontop{n}}})X$ are unambiguous.
 \end{lem*}
 \begin{proof}
-As $\forget:\LL{n}\to\nontop{n}$ preserves free objects and weak equivalences, there's a one-line Grothendieck spectral sequence proving the result.
+As $\forget:\LL{n}\to\nontop{n}$ preserves free objects and weak equivalences, there's a one-line Grothendieck spectral sequence proving the result. Or should I say: ``the obvious inclusion map $\overline{B}_*(\nontop{n},\nontop{n},X)\to\overline{B}_*(\LL{n},\LL{n},X)$ is a map of almost free objects realising the identity on $X$''? Is the latter actually almost free in $s\nontop{n}$?
 \end{proof}
 \end{GrothendieckSpectralSequences}
 
@@ -995,10 +995,10 @@ Here, the parenthetical term vanishes in $\overline{K}$ --- it's there in case w
 \begin{LieLambdaStructureOnKoszul}
 \section{Structure on $\derived\Ind{\nontop{n}}$}
 \subsection{Constructions in the homotopy of simplicial Lie algebras}
-We showed above that $\PiAlg{\PRLie{n}}$ is in fact $\LL{n+1}$, which is to say that the homotopy of a simplicial object of $\PRLie{n}$ in fact supports both $\Q$ operations and a Lie bracket, giving the structure of an element of $\LL{n+1}$. These constructions are standard, and we record them here for convenience:
+We showed above that $\PiAlg{\PRLie{n}}$ is in fact $\LL{n+1}$, which is to say that the homotopy of a simplicial object of $\PRLie{n}$ in fact supports both $\Q$ operations and a Lie bracket, giving the structure of an element of $\LL{n+1}$. The chain level constructions of these operations are standard, and we record them here for convenience:
 
 Let $\frakg$ be a simplicial Lie algebra over $\F_2$. Let $N\frakg_*$ be the Moore complex of $\frakg$, defined as
-\[N\frakg_n:=\bigcap_{i=1}^{n}\ker(d_i:\frakg_n\to\frakg_{n-1})\textup{ with differential }\partial:=d_0|_{N\frakg}.\]
+\[N\frakg_n:=\bigcap_{i=0}^{n-1}\ker(d_i:\frakg_n\to\frakg_{n-1})\textup{ with differential }\partial:=d_n|_{{N\frakg}_n}.\]
 Then $N\frakg_*$ is a differential graded Lie algebra, under the map
 \[N\frakg_*\otimes N\frakg_*\overset{\nabla}{\to}N(\frakg_*\otimes \frakg_*)\to N\frakg_*.\]
 Here, $\Delta$ is the Eilenberg-Zilber map, or `shuffle map'. Thus, when $|x|=n$ and $|y|=m$:
@@ -1007,13 +1007,36 @@ Here, $\Shuffles{p}{q}$ is the set of $(p,q)$-shuffles, pairs $(\alpha,\beta)$ w
 
 Next, we have operations $\Q^i:N\frakg_n\to N\frakg_{n+i}$, defined for $0<i\leq n$, by the following formula:
 \[x\mapsto \sum_{{(\alpha,\beta)\in\HalfShuffles{i}{i}}}[s_\beta x, s_\alpha x].\]
-Here, $\HalfShuffles{i}{i}$ consists of those elements $(\alpha,\beta)$ of $\Shuffles{i}{i}$ such that $\alpha_i<\beta_i$.
+Here, $\HalfShuffles{i}{i}$ consists of those elements $(\alpha,\beta)$ of $\Shuffles{i}{i}$ such that $\alpha_1=0$.
 One notes that as $i\leq n$, the expressions $s_\alpha x$ and $s_\beta x$ both still make sense, and that when $i=n$, this formula is one half of the formula for $[x,x]$ (in $N\frakg_*$).
 
 Finally, if $\frakg$ supports a partial restriction on a subspace $\frakg^r$, we have an operation $\Q^0:N\frakg^r_n\to N\frakg_n$, defined simply by $x\mapsto\restn(x)$.
 
 \subsection*{$\LL{n+1}$ structure on $(\derived\Ind{\nontop{n}})X$}
-We have calculated 
+For this discussion, fix an object $X\in\LL{n}$.
+The Koszul complex $\overline{K}_*(X)$ is a subcomplex of the bar construction $\overline{B_*}(\forget,\nontop{n},X)$. However, we would prefer to work in the Moore complex $N{B_*}(\forget,\nontop{n},X)$. That is, for any simplicial abelian group $A$, in this case $A=B(\forget,\nontop{n},X)$, there are natural weak equivalences
+\[NA_*\to A_*\to (A/DA)_*\]
+of which the first is an inclusion, the second is a surjection, and the composite is an isomorphism. Giving the inverse isomorphism could be a little difficult: this theorem shows that for any $a\in A_n$, there is a unique degenerate element $b$ such that $a+b\in NA_n$, but one must find this $b$.
+
+Fortunately, it happens that the Koszul complex already maps happily into $N{B_*}(\forget,\nontop{n},X)$. To understand this, one thinks that an element of the Koszul complex is an element of the Bar construction which survives to $E^1$ in the length filtration spectral sequence for $\overline{B}_*$. However, $d^0$ implements the sum of all the face maps but the last one, so that a generic element of $\overline{K}_r$ is the image in $\overline{B}_{rr}$ of an expression
+\[a=\sum_{j}\left[\Q^{i_{j,r}} \middle|\cdots\middle|\Q^{i_{j,1}} \right]x_j\textup{ in }B_{r}\]
+such that 
+\[\sum_{k=0}^{r-1}d_ka:=\sum_{k=1}^{r-1}\sum_{j}\left[\Q^{i_{j,r}} \middle|\cdots\middle|\Q^{i_{j,r-k+1}}\Q^{i_{j,r-k}}\middle|\cdots\middle|\Q^{i_{j,1}} \right]x_j=0\textup{ in }\overline{B}_{r-1,r}.\]
+However, the fact that we quotient by degenerate elements in forming $\overline{B}$ is irrelevant to this condition, so that for $k<r$, $d_ka=0$ in $B_{r-1}$, not only in $\overline{B}_{r-1}$, and $a\in NB_r$, no `$b$' required. One swaps $\Q$ for $P$ when $n=1$.
+
+Moreover, there is a natural map \textbf{(???)} ${B_*}(\forget,\nontop{n},X)\to {B_*}(\PRLie{n},\LL{n},X)$. Let $\j$ be the following composite of inclusions which are homology equivalences:
+\[\j:\left(\overline{K}_*(X)\to  NB_*(\forget,\nontop{n},X)\to N{B_*}(\PRLie{n},\LL{n},X)\right).\]
+
+\textbf{flesh}
+
+We are then in a position to calculate the $\LL{n+1}$ structure on $(\derived\Ind{\nontop{n}})X$ in certain cases, since we can write down chain-level formulae. For $x\in Z\overline{K}_p(X)$ and $y\in Z\overline{K}_q(X)$, representing classes $\overline{x},\overline{y}\in(\derived\Ind{\nontop{n}})X$
+\begin{itemise}
+\setlength{\parindent}{.25in}
+\item $[\overline{x},\overline{y}]$ is represented by $\sum_{(\alpha,\beta)\in\Shuffles{p}{q}}[s_\beta(\j x), s_\alpha(\j y)]$;
+\item $Q^i\overline{x}$ is represented by $\sum_{(\alpha,\beta)\in\HalfShuffles{p}{q}}[s_\beta(\j x), s_\alpha(\j y)]$ for $0<i\leq p$;
+\item $Q^0\overline{x}$ is represented by $\restn{(x)}$
+\end{itemise}
+
 
 \end{LieLambdaStructureOnKoszul}
 
