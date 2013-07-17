@@ -6,7 +6,7 @@
 
 
 
-%\def\excludeversion#1{\includeversion{#1}}
+\def\excludeversion#1{\includeversion{#1}}
 \includeversion{Frontmatter}
 \excludeversion{Endmatter}
 \excludeversion{SteenrodAlgebrasAndTheirKoszulDuals}
@@ -17,7 +17,8 @@
 \excludeversion{KoszulComplexes1}
 \excludeversion{DerivedFunctorsLowDimension}
 \excludeversion{PRlieKoszulComplexCalculation}
-\includeversion{LieLambdaStructureOnKoszul}
+\excludeversion{LieLambdaStructureOnKoszul}
+\includeversion{CalculatingRepeatedKoszul}
 
 \newcommand{\GS}[1]{\scrE^{#1}}
 \newcommand{\GpS}[1]{\scrE^{#1}_\star}
@@ -45,7 +46,7 @@
 
 
 \newcommand{\derived}{\mathbb{L}}
-\newcommand{\LambdaOp}{Q}
+%\newcommand{\LambdaOp}{Q}
 \renewcommand{\Q}{Q}
 \newcommand{\SqShift}{\Sq_{+}}
 \newcommand{\Sq}{\mathrm{Sq}}
@@ -1005,16 +1006,16 @@ Let $\frakg$ be a simplicial Lie algebra over $\F_2$. Let $N\frakg_*$ be the Moo
 \[N\frakg_n:=\bigcap_{i=0}^{n-1}\ker(d_i:\frakg_n\to\frakg_{n-1})\textup{ with differential }\partial:=d_n|_{{N\frakg}_n}.\]
 Then $N\frakg_*$ is a differential graded Lie algebra, under the map
 \[N\frakg_*\otimes N\frakg_*\overset{\nabla}{\to}N(\frakg_*\otimes \frakg_*)\to N\frakg_*.\]
-Here, $\Delta$ is the Eilenberg-Zilber map, or `shuffle map'. Thus, when $|x|=n$ and $|y|=m$:
-\[x\otimes y\overset{\nabla}{\mapsto}\sum_{(\alpha,\beta)\in\Shuffles{p}{q}}s_\beta x\otimes s_\alpha y\mapsto \sum_{(\alpha,\beta)}[s_\beta x, s_\alpha y].\]
+Here, $\Delta$ is the Eilenberg-Zilber map, or `shuffle map'. Thus, when $|z|=n$ and $|w|=m$:
+\[z\otimes w\overset{\nabla}{\mapsto}\sum_{(\alpha,\beta)\in\Shuffles{p}{q}}s_\beta z\otimes s_\alpha w\mapsto \sum_{(\alpha,\beta)}[s_\beta z, s_\alpha w].\]
 Here, $\Shuffles{p}{q}$ is the set of $(p,q)$-shuffles, pairs $(\alpha,\beta)$ with $\alpha=(\alpha_p,\ldots,\alpha_1)$ and $\beta=(\beta_q,\ldots,\beta_1)$ monotonically decreasing sequences that together partition the set $\{0,\ldots,p+q-1\}$.
 
 Next, we have operations $\Q^i:N\frakg_n\to N\frakg_{n+i}$, defined for $0<i\leq n$, by the following formula:
-\[x\mapsto \sum_{{(\alpha,\beta)\in\HalfShuffles{i}{i}}}[s_\beta x, s_\alpha x].\]
+\[z\mapsto \sum_{{(\alpha,\beta)\in\HalfShuffles{i}{i}}}[s_\beta z, s_\alpha z].\]
 Here, $\HalfShuffles{i}{i}$ consists of those elements $(\alpha,\beta)$ of $\Shuffles{i}{i}$ such that $\alpha_1=0$.
-One notes that as $i\leq n$, the expressions $s_\alpha x$ and $s_\beta x$ both still make sense, and that when $i=n$, this formula is one half of the formula for $[x,x]$ (in $N\frakg_*$).
+One notes that as $i\leq n$, the expressions $s_\alpha z$ and $s_\beta z$ both still make sense, and that when $i=n$, this formula is one half of the formula for ``$[z,z]$'' (in $N\frakg_*$).
 
-Finally, if $\frakg$ supports a partial restriction on a subspace $\frakg^r$, we have an operation $\Q^0:N\frakg^r_n\to N\frakg_n$, defined simply by $x\mapsto\restn(x)$.
+Finally, if $\frakg$ supports a partial restriction on a subspace $\frakg^r$, we have an operation $\Q^0:N\frakg^r_n\to N\frakg_n$, defined simply by $z\mapsto\restn(z)$.
 
 \begin{lem*}
 Choose $i\geq0$ and $\alpha=(\alpha_p,\ldots,\alpha_1)$ with $\alpha_p>\cdots >\alpha_1\geq0$.
@@ -1035,13 +1036,13 @@ Here, $c$ is the index such that $\alpha_{c+1}>i\geq\alpha_{c}$, after setting  
 For this discussion, fix an object $X\in\LL{n}$.
 The Koszul complex $\overline{K}_*(X)$ is a subcomplex of the bar construction $\overline{B_*}(\forget,\nontop{n},X)$. However, we would prefer to work in the Moore complex $N{B_*}(\forget,\nontop{n},X)$. That is, for any simplicial abelian group $A$, in this case $A=B(\forget,\nontop{n},X)$, there are natural weak equivalences
 \[NA_*\to A_*\to (A/DA)_*\]
-of which the first is an inclusion, the second is a surjection, and the composite is an isomorphism. Giving the inverse isomorphism could be a little difficult: this theorem shows that for any $a\in A_n$, there is a unique degenerate element $b$ such that $a+b\in NA_n$, but one must find this $b$.
+of which the first is an inclusion, the second is a surjection, and the composite is an isomorphism. Giving the inverse isomorphism could be a little difficult: this theorem shows that for any $z\in A_n$, there is a unique degenerate element $b$ such that $z+b\in NA_n$, but one must find this $b$.
 
 Fortunately, it happens that the Koszul complex already maps happily into $N{B_*}(\forget,\nontop{n},X)$. To understand this, one thinks that an element of the Koszul complex is an element of the Bar construction which survives to $E^1$ in the length filtration spectral sequence for $\overline{B}_*$. However, $d^0$ implements the sum of all the face maps but one, so that a generic element of $\overline{K}_r$ is the image in $\overline{B}_{rr}$ of an expression
-\[a=\sum_{j}\left[\Q^{i_{j,r}} \middle|\cdots\middle|\Q^{i_{j,1}} \right]x_j\textup{ in }B_{r}\]
+\[z=\sum_{j}\left[\Q^{i_{j,r}} \middle|\cdots\middle|\Q^{i_{j,1}} \right]x_j\textup{ in }B_{r}\]
 such that 
-\[\sum_{k=1}^{r}d_ka:=\sum_{k=1}^{r-1}\sum_{j}\left[\Q^{i_{j,r}} \middle|\cdots\middle|\Q^{i_{j,k+1}}\Q^{i_{j,k}}\middle|\cdots\middle|\Q^{i_{j,1}} \right]x_j=0\textup{ in }\overline{B}_{r-1,r}.\]
-However, the fact that we quotient by degenerate elements in forming $\overline{B}$ is irrelevant to this condition, so that for $k\neq 0$, $d_ka=0$ in $B_{r-1}$, not only in $\overline{B}_{r-1}$, and $a\in NB_r$, no `$b$' required. One swaps $\Q$ for $P$ when $n=1$.
+\[\sum_{k=1}^{r}d_kz:=\sum_{k=1}^{r-1}\sum_{j}\left[\Q^{i_{j,r}} \middle|\cdots\middle|\Q^{i_{j,k+1}}\Q^{i_{j,k}}\middle|\cdots\middle|\Q^{i_{j,1}} \right]x_j=0\textup{ in }\overline{B}_{r-1,r}.\]
+However, the fact that we quotient by degenerate elements in forming $\overline{B}$ is irrelevant to this condition, so that for $k\neq 0$, $d_kz=0$ in $B_{r-1}$, not only in $\overline{B}_{r-1}$, and $z\in NB_r$, no `$b$' required. One swaps $\Q$ for $P$ when $n=1$.
 
 Moreover, there is a natural map \textbf{(???)} ${B_*}(\forget,\nontop{n},X)\to {B_*}(\PRLie{n},\LL{n},X)$. Let $\j$ be the following composite of inclusions which are homology equivalences:
 \[\j:\left(\overline{K}_*(X)\to  NB_*(\forget,\nontop{n},X)\to N{B_*}(\PRLie{n},\LL{n},X)\right).\]
@@ -1058,25 +1059,25 @@ Here, $out$ stands for `outer'. We'll index the faces and degeneracies in the op
 \end{itemize}
 
 
-We'll also include the subscripts in notation for the elements of $B_r$, for example, here are two elements of $B_3$ (when $n\geq2$):
-\[[[x,\Q^3_2y]_3,\Q^5_1z]_{out}\textup{\quad and\quad }\restn[out]{([\Q^4_2\Q^3_1x,y]_3)}.\]
+We'll also include the subscripts in notation for the elements of $B_r$, for example, here are two elements of $B_3$ (when $n\geq2$), if $x,y\in X$ are of sufficiently large degrees:
+\[[[x,\Q^3_2y]_3,\Q^5_1x]_{out}\textup{\quad and\quad }\restn[out]{([\Q^4_2\Q^3_1x,y]_3)}.\]
 %The second expression means, for $x,y\in X$, form $\Q^3_1x\in\Fr{\LL{n}}X$.....
 Then we may describe $\j$ simply as
 \[\left[\Q^{i_{r}} \middle|\cdots\middle|\Q^{i_{1}} \right]x\mapsto\Q^{i_{r}}_r\cdots \Q^{i_{1}}_1x.\]
 
 
-We are then in a position to calculate the $\LL{n+1}$ structure on $(\derived\Ind{\nontop{n}})X$ in certain cases, since we can write down chain-level formulae. For $x\in Z\overline{K}_p(X)$ and $y\in Z\overline{K}_q(X)$, representing classes $\overline{x},\overline{y}\in(\derived\Ind{\nontop{n}})X$:
+We are then in a position to calculate the $\LL{n+1}$ structure on $(\derived\Ind{\nontop{n}})X$ in certain cases, since we can write down chain-level formulae. For $z\in Z\overline{K}_p(X)$ and $w\in Z\overline{K}_q(X)$, representing classes $\overline{z},\overline{w}\in(\derived\Ind{\nontop{n}})X$:
 \begin{itemise}
 \setlength{\parindent}{.25in}
-\item $[\overline{x},\overline{y}]$ is represented by $\sum_{(\alpha,\beta)\in\Shuffles{p}{q}}[s_\beta(\j x), s_\alpha(\j y)]_{out}$;
-\item $Q^i\overline{x}$ is represented by $\sum_{(\alpha,\beta)\in\HalfShuffles{i}{i}}[s_\beta(\j x), s_\alpha(\j y)]_{out}$ for $0<i\leq p$; and
-\item $Q^0\overline{x}$ is represented by $\restn[out]{(x)}$ if not all of $a_n,\ldots,a_2$ are zero, where $\overline{x}\in((\derived_{p}\Ind{\nontop{n}})X)_{a_n,\ldots,a_1}$.
+\item $[\overline{z},\overline{w}]$ is represented by $\sum_{(\alpha,\beta)\in\Shuffles{p}{q}}[s_\beta(\j z), s_\alpha(\j w)]_{out}$;
+\item $Q^i\overline{z}$ is represented by $\sum_{(\alpha,\beta)\in\HalfShuffles{i}{i}}[s_\beta(\j z), s_\alpha(\j z)]_{out}$ for $0<i\leq p$; and
+\item $Q^0\overline{z}$ is represented by $\restn[out]{(z)}$ if not all of $a_n,\ldots,a_2$ are zero, where $\overline{z}\in((\derived_{p}\Ind{\nontop{n}})X)_{a_n,\ldots,a_1}$.
 \end{itemise}
 \subsection{Lie brackets on $(\derived\Ind{\nontop{n}})X$ are trivial}
 \begin{prop*}
-Suppose that $x\in Z\overline{K}_p(X)$ and $y\in Z\overline{K}_q(X)$ are cycles. Then on homotopy classes:% representing classes $\overline{x}$ and $\overline{y}$. Then
-\[[\overline{x},\overline{y}]=\begin{cases}
-\overline{[x,y]},&\textup{if }p=q=0;\\
+Suppose that $z\in Z\overline{K}_p(X)$ and $w\in Z\overline{K}_q(X)$ are cycles. Then on homotopy classes:% representing classes $\overline{x}$ and $\overline{y}$. Then
+\[[\overline{z},\overline{w}]=\begin{cases}
+\overline{[z,w]},&\textup{if }p=q=0;\\
 0,&\textup{otherwise}.
 %\\,&\textup{if }
 \end{cases}
@@ -1088,84 +1089,107 @@ Here, $Z\overline{K}_0(X)=X$ has the Lie bracket supplied by the $\LL{n}$ struct
 We perform the proof for $n\geq2$, but it works the same way for $n=1$, when one substitutes $\Q$ operations for $P$ operations and ignores all discussion of top and non-top operations.
 
 Consider the following element of $B_{p+q+1}$:
-\[a:=\sum_{(\alpha,\beta)\in\Shuffles{p}{q}}[s_{p+q}s_\beta(\j x), s_{p+q}s_\alpha(\j y)]_{p+q+1}\]
-We'll calculate $d_ia$ for $i=0,\ldots,p+q+1$, and find that $d_ia=0$ for $i<p+q+1$ (except if $p=q=0$), and $d_{p+q+1}a$ is our formula for $[\overline{x},\overline{y}]$. Firstly, as $d_{p+q+1}$ applies $\Fr[out]{\PRLie{n}}\Fr[p+q+1]{\LL{n}}\to\Fr[out]{\PRLie{n}}$, $d_{p+q+1}a$ represents $[\overline{x},\overline{y}]$:
-\[d_{p+q+1}a=\sum [d_{p+q+1}s_{p+q}s_\beta(\j x), d_{p+q+1}s_{p+q}s_\alpha(\j y)]_{out}=\sum [s_\beta(\j x), s_\alpha(\j y)]_{out}.\]
+\[a:=\sum_{(\alpha,\beta)\in\Shuffles{p}{q}}[s_{p+q}s_\beta(\j z), s_{p+q}s_\alpha(\j w)]_{p+q+1}\]
+We'll calculate $d_ia$ for $i=0,\ldots,p+q+1$, and find that $d_ia=0$ for $i<p+q+1$ (except if $p=q=0$), and $d_{p+q+1}a$ is our formula for $[\overline{z},\overline{w}]$. Firstly, as $d_{p+q+1}$ applies $\Fr[out]{\PRLie{n}}\Fr[p+q+1]{\LL{n}}\to\Fr[out]{\PRLie{n}}$, $d_{p+q+1}a$ represents $[\overline{z},\overline{w}]$:
+\[d_{p+q+1}a=\sum [d_{p+q+1}s_{p+q}s_\beta(\j z), d_{p+q+1}s_{p+q}s_\alpha(\j w)]_{out}=\sum [s_\beta(\j z), s_\alpha(\j w)]_{out}.\]
 Next, we calculate $d_{p+q}a$. As $d_{p+q}$ applies $\Fr[p+q+1]{\LL{n}}\Fr[p+q]{\LL{n}}\to\Fr[p+q]{\LL{n}}$:
-\[d_{p+q}a=\sum [d_{p+q}s_{p+q}s_\beta(\j x), d_{p+q}s_{p+q}s_\alpha(\j y)]_{p+q}=\sum [s_\beta(\j x), s_\alpha(\j y)]_{p+q}.\]
-Now in each term of this sum, one of $s_\beta(\j x)$ and $s_\alpha(\j y)$ will have a $\Q_{p+q}^i$ term (as long as $p+q>0$). This $\Q$ operation will be non-top, due to the strict inequality on $\minDim(I)$ imposed on the basis elements, and the fact that $\SqShift$-Adem relations do not decrease $\minDim(I)$. Thus, the ``$[Q^iw,z]=0$ for $Q^i$ non-top'' axiom in $\Fr[p+q]{\LL{n}}$ implies that each term in the sum vanishes, so that $d_{p+q}a=0$. If $p=q=0$, there is only a single term, which is $[x,y]$ as calculated inside $X$.
+\[d_{p+q}a=\sum [d_{p+q}s_{p+q}s_\beta(\j z), d_{p+q}s_{p+q}s_\alpha(\j w)]_{p+q}=\sum [s_\beta(\j z), s_\alpha(\j w)]_{p+q}.\]
+Now in each term of this sum, one of $s_\beta(\j z)$ and $s_\alpha(\j w)$ will have a $\Q_{p+q}^i$ term (as long as $p+q>0$). This $\Q$ operation will be non-top, due to the strict inequality on $\minDim(I)$ imposed on the basis elements, and the fact that $\SqShift$-Adem relations do not decrease $\minDim(I)$. Thus, the ``$[Q^iw,z]=0$ for $Q^i$ non-top'' axiom in $\Fr[p+q]{\LL{n}}$ implies that each term in the sum vanishes, so that $d_{p+q}a=0$. If $p=q=0$, there is only a single term, which is $[z,w]$ as calculated inside $X$.
 
 Next, we calculate $d_{i}a$ for $0\leq i< p+q$:
-\[d_{i}a=\sum [s_{p+q-1}d_{i}s_\beta(\j x), s_{p+q-1}d_{i}s_\alpha(\j y)]_{p+q}.\]
+\[d_{i}a=\sum [s_{p+q-1}d_{i}s_\beta(\j z), s_{p+q-1}d_{i}s_\alpha(\j w)]_{p+q}.\]
 %Now consider a given shuffle $(\alpha,\beta)$. If $i$ and $i-1$ both lie in $\beta$, say, then $d_is_\alpha(\j y)=s_{\alpha'}d_{i'}(\j y)=0$, as $\j y$ is a cycle in $NB_*$. Thus we can ignore all summands in which $i$ and $i-1$ lie in the same half of the shuffle.
 %If $i$ and $i-1$ do not lie in the same half of the shuffle, then let $(\gamma,\epsilon)$ be the shuffle obtained from $(\alpha,\beta)$ by swapping the positions of $i$ and $i-1$. But then, $d_is_\beta=d_is_{\epsilon}$, and $d_is_\alpha=d_is_{\gamma}$, so that this pair of summands cancel with each other. 
-Now consider a given shuffle $(\alpha,\beta)$. If, say, $\alpha$ contains neither of $i$ and $i-1$, then $d_is_\alpha(\j y)=s_{\alpha'}d_{i'}(\j y)=0$, as $\j y$ is a cycle in $NB_*$. Thus we can ignore all summands in which $\alpha$ and $\beta$ do not contain one each of $i$ and $i-1$.
+Now consider a given shuffle $(\alpha,\beta)$. If, say, $\alpha$ contains neither of $i$ and $i-1$, then $d_is_\alpha(\j w)=s_{\alpha'}d_{i'}(\j w)=0$, as $\j w$ is a cycle in $NB_*$. Thus we can ignore all summands in which $\alpha$ and $\beta$ do not contain one each of $i$ and $i-1$.
 If $\alpha$ and $\beta$ contain one each of $i$ and $i-1$, then let $(\gamma,\epsilon)$ be the shuffle obtained from $(\alpha,\beta)$ by swapping the positions of $i$ and $i-1$. But then, $d_is_\beta=d_is_{\epsilon}$, and $d_is_\alpha=d_is_{\gamma}$, so that the summands corresponding to $(\alpha,\beta)$ and to $(\gamma,\epsilon)$ cancel with each other.
 \end{proof}
-\subsection{$\Q^i$ operations on $(\derived\Ind{\nontop{n}})X$ for $i\geq1$}
+\subsection{$\Q^k$ operations on $(\derived\Ind{\nontop{n}})X$ for $k\geq1$}
+In the previous section, we produced an element $a\in B_{p+q+1}(\Fr{\PRLie{n}},\Fr{\LL{n}},X)$, and showed that it was actually an element of $NB_{p+q+1}$, whose boundary was represented the homotopy class we were trying to nullhomotope. In the next two sections, we will choose such an $a$ again, but in some cases, the top \emph{two} face maps will be nonzero on $a$. Thus we will move outside of the normalised complex to construct a homotopy between two nonzero elements. This makes no difference to our calculations, especially since we in the end will always map down to $\overline{K}_*$, which doesn't see the distinction anyway.
 \begin{prop*}
-Suppose that $x\in Z\overline{K}_p(X)$. Then:
+Suppose that $z\in Z\overline{K}_p(X)_{a_n,\ldots,a_1}$. Then:
 \begin{itemize}\squishlist
 \setlength{\parindent}{.25in}
-\item  if $n\geq2$, $\LambdaOp^a\overline{x}=0$ for $1\leq a\leq p$;
-\item  if $n=1$, $\LambdaOp^a\overline{x}=0$ for $2\leq a\leq p$; and
-\item  if $n=1$, and $P(I)y$ is a basis element (which is also a cycle - fix up this statement) for $\overline{K}_*X$ (so that $I=(i_\ell,\ldots,i_1)$ is $\delta$-admissible, and $\minDimP(I)\leq |y|$), with $\ell\geq1$, we have:
-\[\LambdaOp^1(P(I)y)=P((|P^{i_\ell}\cdots P^{i_1}y|,i_{\ell},\ldots,i_1))y.\]
-That is, $\LambdaOp^1$ adjoins a top $P$ operation to the left of the sequence $I$.
+\item  if $n\geq2$, $\Q^k\overline{z}=0$ for $1\leq k\leq p$;
+\item  if $n=1$, $\Q^k\overline{z}=0$ for $2\leq k\leq p$; and
+\item if $n=1$, write $z\in Z\overline{K}_p(X)_{a_1}$ as a sum 
+\[z=\sum_{j}P(I^{(j)})x^{(j)}\]
+where each $I^{(j)}=(i_p^{(j)},\ldots,i_1^{(j)})$ is $\delta$-admissible with $\minDimP(I^{(j)})\leq |x^{(j)}|$. Then
+\[\Q^1\overline{z}\textup{ is represented by }\sum_{j}P((a_{n},i_p^{(j)},\ldots,i_1^{(j)}))x^{(j)}.\]
+%%\item  if $n=1$, and $P(I)y$ is a basis element (which is also a cycle - fix up this statement) for $\overline{K}_*X$ (so that $I=(i_\ell,\ldots,i_1)$ is $\delta$-admissible, and $\minDimP(I)\leq |y|$), with $\ell\geq1$, we have:
+%%\[\LambdaOp^1(P(I)y)=P((|P^{i_\ell}\cdots P^{i_1}y|,i_{\ell},\ldots,i_1))y.\]
+That is, $\Q^1$ adjoins a top $P$ operation to the left of each sequence $I^{(j)}$.
 \end{itemize}
 \end{prop*}
 \begin{proof}
-The class $\Q^k\overline{x}$ is represented by $\sum_{(\alpha,\beta)\in\HalfShuffles{k}{k}}[s_\beta(\j x), s_\alpha(\j x)]_{out}$. As in the previous proof, we use the element
-\[a:=\sum_{(\alpha,\beta)\in\HalfShuffles{k}{k}}[s_{p+k}s_\beta(\j x), s_{p+k}s_\alpha(\j x)]_{p+k+1}.\]
-The same argument shows that $d_{p+k+1}a$ represents $\Q^k\overline{x}$, and that $d_{p+k}a=0$. We are left to calculate $d_ia$ for $0\leq i<p+k$, where 
-\[d_ia:=\sum_{(\alpha,\beta)\in\HalfShuffles{k}{k}}[s_{p+k-1}d_is_\beta(\j x), s_{p+k}d_is_\alpha(\j x)]_{p+k}\]
-Now if $i\geq 2k$, at least one of $\alpha$ and $\beta$, say $\alpha$, will not include either $i$ or $i-1$, so that $d_is_\alpha(\j x)=s_{\alpha'}d_{i'}(\j x)=0$, as $\j x$ is a cycle. Thus, we are left to consider the cases $0\leq i< 2k$.
+The class $\Q^k\overline{z}$ is represented by $\sum_{(\alpha,\beta)\in\HalfShuffles{k}{k}}[s_\beta(\j z), s_\alpha(\j z)]_{out}$. As in the previous proof, we use the element
+\[a:=\sum_{(\alpha,\beta)\in\HalfShuffles{k}{k}}[s_{p+k}s_\beta(\j z), s_{p+k}s_\alpha(\j z)]_{p+k+1}.\]
+The same argument shows that $d_{p+k+1}a$ represents $\Q^k\overline{z}$, and that $d_{p+k}a=0$. We are left to calculate $d_ia$ for $0\leq i<p+k$, where 
+\[d_ia:=\sum_{(\alpha,\beta)\in\HalfShuffles{k}{k}}[s_{p+k-1}d_is_\beta(\j z), s_{p+k}d_is_\alpha(\j z)]_{p+k}\]
+Now if $i\geq 2k$, at least one of $\alpha$ and $\beta$, say $\alpha$, will not include either $i$ or $i-1$, so that $d_is_\alpha(\j z)=s_{\alpha'}d_{i'}(\j z)=0$, as $\j z$ is a cycle. Thus, we are left to consider the cases $0\leq i< 2k$.
 
 In the previous proof, the method in this range was to construct a fixed-point free involution (`swap $i$ and $i-1$') of the set indexing the sum, under which the summands were invariant. The same involution works here, as long as it preserves the subset $\HalfShuffles{i}{i}$ of $\Shuffles{i}{i}$, which it does when $2\leq i<2k$. The $i=0$ case is moot, as no shuffle $(\alpha,\beta)$ involves $-1$.
 
 %Again the only nonzero summands correspond to pairs $(\alpha,\beta)$ in which each of $\alpha$ and $\beta$ contain one each of $i$ and $i-1$. If $i=0$ there are obviously no such pairs. If $i\geq2$, the same involution of the shuffles preserves the subset $\HalfShuffles{i}{i}$ of $\Shuffles{i}{i}$, and so gives the cancellation desired.
 
-The final case is $d_1$, in which case, the involution of $\Shuffles{i}{i}$ used above does not preserve the subset $\HalfShuffles{i}{i}$. Fortunately, since our summand uses $x$ twice, not both $x$ and $y$, the summands are invariant under a new involution, `swap $\alpha$ and $\beta$'. The composite of these two involutions preserves $\HalfShuffles{i}{i}$, and is fixed-point free unless $k=1$. In case $k=1$, $\HalfShuffles{i}{i}$ contains only $((1),(2))$, and we are left with a single term:
-\[d_1a=[s_{p}d_1s_0(\j x), s_{p}d_1s_1(\j x)]_{p+2}=[s_{p}(\j x), s_{p}(\j x)]_{p+1}.\]
-This self-square is zero when $n\geq2$. However, objects of $\LL{1}$ may have non-zero self-squares, and the self-square is given by the top $P$ operation. Thus a top $P$ operation is applied to $s_p(\j x)$ in $\Fr[p+1]{\LL{n}}$. As all $P$ operations are linear, a cycle $P(I)y$, defined by
-\[P(I)y:=\left[P^{i_r} \middle|\cdots\middle|P^{i_1} \right]y+\sum_{\substack{\produces{J}{I}{\delta} \\ \minDimP(J)\leq|y|}}\left[P^{j_r} \middle|\cdots\middle|P^{j_1} \right]y\]
-receives the same top $P$ operation as a new bar in each of the bars in the above definition. There is only the one $\delta$-admissible sequence appearing in the new sum, completing the proof. \textbf{Sometime, think about what happens here in a little more detail.}
+The final case is $d_1$, in which case, the involution of $\Shuffles{i}{i}$ used above does not preserve the subset $\HalfShuffles{i}{i}$. Fortunately, since our summand uses $z$ twice, not both $z$ and $w$, the summands are invariant under a new involution, `swap $\alpha$ and $\beta$'. The composite of these two involutions preserves $\HalfShuffles{i}{i}$, and is fixed-point free unless $k=1$. In case $k=1$, $\HalfShuffles{i}{i}$ contains only $((1),(2))$, and we are left with a single term:
+\[d_1a=[s_{p}d_1s_0(\j z), s_{p}d_1s_1(\j z)]_{p+2}=[s_{p}(\j z), s_{p}(\j z)]_{p+1}=\begin{cases}
+0,&\textup{if }n\geq2;\\
+P^{a_1}_{p+1}s_{p}(\j z),&\textup{if }n=1,
+%\\,&\textup{if }
+\end{cases}
+.\]
+as self-squares in $\LL{n}$ are zero when $n\geq2$, and equal the top $P$ operation when $n=1$. As the top $P$ operation is linear, in the $n=1$ case $d_1a$ is then the result of adding a $P^{a_1}$ to the front of every bar involved in the sum defining $z$. Recall that this sum is not just indexed over $j$, but rather,
+\[z:=\sum_j\left(\BarMonomial{I^{(j)}}{\textbf{1}}{x^{(j)}}+\sum_{\produces{K}{I^{(j)}}{\delta}}\BarMonomial{K}{\textbf{1}}{x^{(j)}}\right)\]
+using the notation from the description of Priddy's algorithm, and writing $\textbf{1}:=(1,\ldots,1)$. Thus
+\[d_1a:=\sum_j\left(\BarMonomial{(a_1)\star I^{(j)}}{\textbf{1}}{x^{(j)}}+\sum_{\produces{K}{I^{(j)}}{\delta}}\BarMonomial{(a_1)\star K}{\textbf{1}}{x^{(j)}}\right)\]
+where $\star$ denotes concatenation. None of the $(a_1)\star K$ could hope to be $\delta$-admissible, but all of the $(a_1)\star I^{(j)}$ \emph{are} $\delta$-admissible, simply as $P^{a_1}$ is a top operation. Thus, the image of $d_1a$ in $\overline{B}_*$ can be none other than that which we propose.
+%
+% also over all the $J$ such that $\produces{J}{I^{(j)}}{\delta}$. After making these concatenations, the bars which are $\delta$-admissible are exactly those which are of the form 
+%\[d_1a=P^{a_1}_{p+1}s_{p}(\j z)=\sum_{j}\sum_{\produces{K}{I^{(j)}}{\delta}}P^{a_1}_{p+1}s_{p}(\j z)\]
+% %However, objects of $\LL{1}$ may have non-zero self-squares, and the self-square is given by the top $P$ operation. Thus a top $P$ operation is applied to $s_p(\j z)$ in $\Fr[p+1]{\LL{n}}$. As all $P$ operations are linear, a cycle $P(I)y$, defined by
+%\[P(I)y:=\left[P^{i_r} \middle|\cdots\middle|P^{i_1} \right]y+\sum_{\substack{\produces{J}{I}{\delta} \\ \minDimP(J)\leq|y|}}\left[P^{j_r} \middle|\cdots\middle|P^{j_1} \right]y\]
+%receives the same top $P$ operation as a new bar in each of the bars in the above definition. There is only the one $\delta$-admissible sequence appearing in the new sum, completing the proof. \textbf{Sometime, think about what happens here in a little more detail.}
 \end{proof}
 
 \subsection{$\Q^0$ operations on $(\derived\Ind{\nontop{n}})X$}
 Assume for this section that $n\geq2$, so that objects of $\LL{n+1}$ support a $\Q^0$ operation, defined when $a_n,\ldots,a_2$ are not all zero. We'll now go some way towards calculating these operations.
 \begin{lem*}
-Suppose that $x\in Z\overline{K}_p(X)_{a_n,\ldots,a_1}$, where not all of $a_n,\ldots,a_2$ are zero. Then, $Q^0\overline{x}$ is represented by the cycle $\Q^{a_n}_p\j x$ in the bar construction.
+Suppose that $z\in Z\overline{K}_p(X)_{a_n,\ldots,a_1}$, where not all of $a_n,\ldots,a_2$ are zero. 
+\begin{itemise}
+\setlength{\parindent}{.25in}
+\item If $p>0$, $Q^0\overline{z}$ is represented by the cycle $\Q^{a_n}_p\j z$ in the bar construction $NB_p(\Fr{\PRLie{n}},\Fr{\LL{n}},X)$.
+\item If $p=0$, $Q^0\overline{z}$ is represented by the cycle $\Q^{a_n}z$, as calculated in $X=Z\overline{K}_0(X)$.% in the bar construction $NB_p(\Fr{\PRLie{n}},\Fr{\LL{n}},X)$
+\end{itemise}
 \end{lem*}
 \begin{proof}
-We use the same homotopy $a$ as in the previous cases. That is%footnote:
-\footnote{unless you think it's polite to stay in the normalised complex at this point}, write
-$a:=\restn[p+1]{(s_{p}(\j x))}$. Then $d_{p+1}a=\restn[out]{(s_{p}(\j x))}$ represents $Q^0\overline{x}$, $d_pa=\restn[p]{(\j x)}$, and for $0\leq i<p$, $d_ia=0$. The result follows by recalling that the restriction in $\LL{n}$ is the top $\Q$ operation.
+We use the same homotopy $a$ as in the previous cases. That is, write
+$a:=\restn[p+1]{(s_{p}(\j z))}$. Then $d_{p+1}a=\restn[out]{(s_{p}(\j z))}$ represents $Q^0\overline{z}$, $d_pa=\restn[p]{(\j z)}$, and for $0\leq i<p$, $d_ia=0$. The result follows by recalling that the restriction in $\LL{n}$ is the top $\Q$ operation.
 \end{proof}
 \begin{lem*}
-Suppose that $x\in Z\overline{K}_p(X)_{a_n,\ldots,a_1}$ is a sum
-\[\sum_{j}\left[\Q^{i^{{(j)}}_p}\middle|\cdots \middle|\Q^{i^{{(j)}}_1}\right]y^{(j)}\]
+Suppose that $z\in Z\overline{K}_p(X)_{a_n,\ldots,a_1}$, for $p>0$, is written as a sum
+\[z=\sum_{j}\left[\Q^{i^{{(j)}}_p}\middle|\cdots \middle|\Q^{i^{{(j)}}_1}\right]x^{(j)}\]
 such that for all $j$, 
 %such that all of the $i^{(j)}_k$ satisfy $i^{(j)}_k>d$, and 
-$\Q^iy^{(j)}=0$ whenever $i\geq i^{{(j)}}_1$. Then $\Q^0\overline{x}=0$.
+$\Q^ix^{(j)}=0$ whenever $i\geq i^{{(j)}}_1$. Then $\Q^0\overline{z}=0$.
 
-In particular, suppose that $I^{(j)}=(i^{(j)}_{p},\ldots,i^{(j)}_{1})$ is a collection of $\SqShift$-Admissible sequences, and $y^{(j)}$ is a sequence of homogeneous elements of $X$, such that
+In particular, suppose that $I^{(j)}=(i^{(j)}_{p},\ldots,i^{(j)}_{1})$ is a collection of $\SqShift$-Admissible sequences, and $x^{(j)}$ is a sequence of homogeneous elements of $X$, such that
 \[z=\sum_{j}Q(I^{(j)})x^{(j)}\]
-is a cycle in $\overline{K}_p(X)$, and that for all $j$, $\Q^iy^{(j)}=0$ whenever $i\geq i^{{(j)}}_1$. Then $\Q^0\overline{z}=0$.
+is a cycle in $\overline{K}_p(X)$, and that for all $j$, $\Q^ix^{(j)}=0$ whenever $i\geq i^{{(j)}}_1$. Then $\Q^0\overline{z}=0$.
 \end{lem*}
 \begin{proof}
 The second statement follows from the first, as whenever $\produces{J}{I}{\SqShift}$, the final entry of $J$ is at least as large that of $I$.
 
-We've seen that $\Q^0\overline{x}$ is represented by the cycle
-\[\sum_{j}\Q^{a_n}_p\Q^{i^{{(j)}}_p}_p\cdots \Q^{i^{{(j)}}_1}_1y^{(j)}\]
+We've seen that $\Q^0\overline{z}$ is represented by the cycle
+\[\sum_{j}\Q^{a_n}_p\Q^{i^{{(j)}}_p}_p\cdots \Q^{i^{{(j)}}_1}_1x^{(j)}\]
 in the bar construction $N{B_*}(\PRLie{n},\LL{n},X)$. This cycle is the image of a cycle in $NB_*(\forget,\nontop{n},X)$ which, after mapping down to the quotient by degenerate simplices, we dare write as:
-\[\sum_{j}\left[\Q^{a_n}\Q^{i^{{(j)}}_p}\middle|\cdots \middle|\Q^{i^{{(j)}}_1}\right]y^{(j)}\in\overline{B}_{p,p+1}.\]
-Now in order to compress this into the Koszul complex, we must apply Priddy's algorithm. But one observes readily from the $\Q$-Adem relation that if $\produces{(i,j)}{(i',j')}{\Q}$, then $j'>j$, so that as we perform Priddy's algorithm, we only ever decrease the index of the final $\Q$ appearing in each bar. Then the hypothesis on the $y^{{j}}$ guarantees that as we run the algorithm, every term that ends up in $\overline{B}_{p,p}$ willl vanish. Thus Priddy's algorithm constructs a null-homotopy.
+\[\sum_{j}\left[\Q^{a_n}\Q^{i^{{(j)}}_p}\middle|\cdots \middle|\Q^{i^{{(j)}}_1}\right]x^{(j)}\in\overline{B}_{p,p+1}.\]
+Now in order to compress this into the Koszul complex, we must apply Priddy's algorithm. But one observes readily from the $\Q$-Adem relation that if $\produces{(i,j)}{(i',j')}{\Q}$, then $j'>j$, so that as we perform Priddy's algorithm, we only ever decrease the index of the final $\Q$ appearing in each bar. Then the hypothesis on the $x^{{j}}$ guarantees that as we run the algorithm, every term that ends up in $\overline{B}_{p,p}$ willl vanish. Thus Priddy's algorithm constructs a null-homotopy.
 \end{proof}
 
 \end{LieLambdaStructureOnKoszul}
+\begin{CalculatingRepeatedKoszul}
 
-
+\end{CalculatingRepeatedKoszul}
 
 \begin{Endmatter}
 \printbibliography
