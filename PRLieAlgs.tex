@@ -6,7 +6,7 @@
 
 
 
-\def\excludeversion#1{\includeversion{#1}}
+%\def\excludeversion#1{\includeversion{#1}}
 \includeversion{Frontmatter}
 \excludeversion{Endmatter}
 \excludeversion{SteenrodAlgebrasAndTheirKoszulDuals}
@@ -1007,7 +1007,7 @@ Then $N\frakg_*$ is a differential graded Lie algebra, under the map
 \[N\frakg_*\otimes N\frakg_*\overset{\nabla}{\to}N(\frakg_*\otimes \frakg_*)\to N\frakg_*.\]
 Here, $\Delta$ is the Eilenberg-Zilber map, or `shuffle map'. Thus, when $|x|=n$ and $|y|=m$:
 \[x\otimes y\overset{\nabla}{\mapsto}\sum_{(\alpha,\beta)\in\Shuffles{p}{q}}s_\beta x\otimes s_\alpha y\mapsto \sum_{(\alpha,\beta)}[s_\beta x, s_\alpha y].\]
-Here, $\Shuffles{p}{q}$ is the set of $(p,q)$-shuffles, pairs $(\alpha,\beta)$ with $\alpha=(\alpha_p,\ldots,\alpha_1)$ and $\beta=(\beta_q,\ldots,\beta_1)$ a pair of monotonically decreasing sequences such that $\alpha$ and $\beta$ together partition the set $\{0,\ldots,p+q-1\}$.
+Here, $\Shuffles{p}{q}$ is the set of $(p,q)$-shuffles, pairs $(\alpha,\beta)$ with $\alpha=(\alpha_p,\ldots,\alpha_1)$ and $\beta=(\beta_q,\ldots,\beta_1)$ monotonically decreasing sequences that together partition the set $\{0,\ldots,p+q-1\}$.
 
 Next, we have operations $\Q^i:N\frakg_n\to N\frakg_{n+i}$, defined for $0<i\leq n$, by the following formula:
 \[x\mapsto \sum_{{(\alpha,\beta)\in\HalfShuffles{i}{i}}}[s_\beta x, s_\alpha x].\]
@@ -1030,8 +1030,8 @@ Here, $c$ is the index such that $\alpha_{c+1}>i\geq\alpha_{c}$, after setting  
 \item[iv)] if exactly one of $i$ and $i-1$ appears in $\alpha$, then  $d_is_\alpha$ does not depend on which of $i$ and $i-1$ appeared.
 \end{enumerate}
 \end{lem*}
+\subsection{Chain level operations and the Koszul complex}
 
-\subsection{$\LL{n+1}$ structure on $(\derived\Ind{\nontop{n}})X$}
 For this discussion, fix an object $X\in\LL{n}$.
 The Koszul complex $\overline{K}_*(X)$ is a subcomplex of the bar construction $\overline{B_*}(\forget,\nontop{n},X)$. However, we would prefer to work in the Moore complex $N{B_*}(\forget,\nontop{n},X)$. That is, for any simplicial abelian group $A$, in this case $A=B(\forget,\nontop{n},X)$, there are natural weak equivalences
 \[NA_*\to A_*\to (A/DA)_*\]
@@ -1072,7 +1072,7 @@ We are then in a position to calculate the $\LL{n+1}$ structure on $(\derived\In
 \item $Q^i\overline{x}$ is represented by $\sum_{(\alpha,\beta)\in\HalfShuffles{i}{i}}[s_\beta(\j x), s_\alpha(\j y)]_{out}$ for $0<i\leq p$; and
 \item $Q^0\overline{x}$ is represented by $\restn[out]{(x)}$ if not all of $a_n,\ldots,a_2$ are zero, where $\overline{x}\in((\derived_{p}\Ind{\nontop{n}})X)_{a_n,\ldots,a_1}$.
 \end{itemise}
-
+\subsection{Lie brackets on $(\derived\Ind{\nontop{n}})X$ are trivial}
 \begin{prop*}
 Suppose that $x\in Z\overline{K}_p(X)$ and $y\in Z\overline{K}_q(X)$ are cycles. Then on homotopy classes:% representing classes $\overline{x}$ and $\overline{y}$. Then
 \[[\overline{x},\overline{y}]=\begin{cases}
@@ -1102,17 +1102,16 @@ Next, we calculate $d_{i}a$ for $0\leq i< p+q$:
 Now consider a given shuffle $(\alpha,\beta)$. If, say, $\alpha$ contains neither of $i$ and $i-1$, then $d_is_\alpha(\j y)=s_{\alpha'}d_{i'}(\j y)=0$, as $\j y$ is a cycle in $NB_*$. Thus we can ignore all summands in which $\alpha$ and $\beta$ do not contain one each of $i$ and $i-1$.
 If $\alpha$ and $\beta$ contain one each of $i$ and $i-1$, then let $(\gamma,\epsilon)$ be the shuffle obtained from $(\alpha,\beta)$ by swapping the positions of $i$ and $i-1$. But then, $d_is_\beta=d_is_{\epsilon}$, and $d_is_\alpha=d_is_{\gamma}$, so that the summands corresponding to $(\alpha,\beta)$ and to $(\gamma,\epsilon)$ cancel with each other.
 \end{proof}
-
+\subsection{$\Q^i$ operations on $(\derived\Ind{\nontop{n}})X$ for $i\geq1$}
 \begin{prop*}
 Suppose that $x\in Z\overline{K}_p(X)$. Then:
 \begin{itemize}\squishlist
 \setlength{\parindent}{.25in}
-\item  if $n\geq2$, $\lambda_a\overline{x}=0$ for $1\leq a\leq p$;
-\item  if $n=1$, $\lambda_a\overline{x}=0$ for $2\leq a\leq p$; and
-\item  if $n=1$, and $P(I)y$ is a basis element for $\overline{K}_*X$ (so that $I=(i_\ell,\ldots,i_1)$ is $\delta$-admissible, and $\minDimP(I)\leq |y|$), with $\ell\geq1$, we have:
-\[\lambda_1(P(I)y)=P((|P^{i_\ell}\cdots P^{i_1}y|,i_{\ell},\ldots,i_1))y.\]
-That is, $\lambda_1$ adjoins a top $P$ operation to the left of the sequence $I$.
-\item \textbf{Say what happens with $\lambda_0$, both in $n=1$ where there's nothing, and in $n\geq2$.}
+\item  if $n\geq2$, $\LambdaOp^a\overline{x}=0$ for $1\leq a\leq p$;
+\item  if $n=1$, $\LambdaOp^a\overline{x}=0$ for $2\leq a\leq p$; and
+\item  if $n=1$, and $P(I)y$ is a basis element (which is also a cycle - fix up this statement) for $\overline{K}_*X$ (so that $I=(i_\ell,\ldots,i_1)$ is $\delta$-admissible, and $\minDimP(I)\leq |y|$), with $\ell\geq1$, we have:
+\[\LambdaOp^1(P(I)y)=P((|P^{i_\ell}\cdots P^{i_1}y|,i_{\ell},\ldots,i_1))y.\]
+That is, $\LambdaOp^1$ adjoins a top $P$ operation to the left of the sequence $I$.
 \end{itemize}
 \end{prop*}
 \begin{proof}
@@ -1133,6 +1132,36 @@ This self-square is zero when $n\geq2$. However, objects of $\LL{1}$ may have no
 receives the same top $P$ operation as a new bar in each of the bars in the above definition. There is only the one $\delta$-admissible sequence appearing in the new sum, completing the proof. \textbf{Sometime, think about what happens here in a little more detail.}
 \end{proof}
 
+\subsection{$\Q^0$ operations on $(\derived\Ind{\nontop{n}})X$}
+Assume for this section that $n\geq2$, so that objects of $\LL{n+1}$ support a $\Q^0$ operation, defined when $a_n,\ldots,a_2$ are not all zero. We'll now go some way towards calculating these operations.
+\begin{lem*}
+Suppose that $x\in Z\overline{K}_p(X)_{a_n,\ldots,a_1}$, where not all of $a_n,\ldots,a_2$ are zero. Then, $Q^0\overline{x}$ is represented by the cycle $\Q^{a_n}_p\j x$ in the bar construction.
+\end{lem*}
+\begin{proof}
+We use the same homotopy $a$ as in the previous cases. That is%footnote:
+\footnote{unless you think it's polite to stay in the normalised complex at this point}, write
+$a:=\restn[p+1]{(s_{p}(\j x))}$. Then $d_{p+1}a=\restn[out]{(s_{p}(\j x))}$ represents $Q^0\overline{x}$, $d_pa=\restn[p]{(\j x)}$, and for $0\leq i<p$, $d_ia=0$. The result follows by recalling that the restriction in $\LL{n}$ is the top $\Q$ operation.
+\end{proof}
+\begin{lem*}
+Suppose that $x\in Z\overline{K}_p(X)_{a_n,\ldots,a_1}$ is a sum
+\[\sum_{j}\left[\Q^{i^{{(j)}}_p}\middle|\cdots \middle|\Q^{i^{{(j)}}_1}\right]y^{(j)}\]
+such that for all $j$, 
+%such that all of the $i^{(j)}_k$ satisfy $i^{(j)}_k>d$, and 
+$\Q^iy^{(j)}=0$ whenever $i\geq i^{{(j)}}_1$. Then $\Q^0\overline{x}=0$.
+
+In particular, suppose that $I^{(j)}=(i^{(j)}_{p},\ldots,i^{(j)}_{1})$ is a collection of $\SqShift$-Admissible sequences, and $y^{(j)}$ is a sequence of homogeneous elements of $X$, such that
+\[z=\sum_{j}Q(I^{(j)})x^{(j)}\]
+is a cycle in $\overline{K}_p(X)$, and that for all $j$, $\Q^iy^{(j)}=0$ whenever $i\geq i^{{(j)}}_1$. Then $\Q^0\overline{z}=0$.
+\end{lem*}
+\begin{proof}
+The second statement follows from the first, as whenever $\produces{J}{I}{\SqShift}$, the final entry of $J$ is at least as large that of $I$.
+
+We've seen that $\Q^0\overline{x}$ is represented by the cycle
+\[\sum_{j}\Q^{a_n}_p\Q^{i^{{(j)}}_p}_p\cdots \Q^{i^{{(j)}}_1}_1y^{(j)}\]
+in the bar construction $N{B_*}(\PRLie{n},\LL{n},X)$. This cycle is the image of a cycle in $NB_*(\forget,\nontop{n},X)$ which, after mapping down to the quotient by degenerate simplices, we dare write as:
+\[\sum_{j}\left[\Q^{a_n}\Q^{i^{{(j)}}_p}\middle|\cdots \middle|\Q^{i^{{(j)}}_1}\right]y^{(j)}\in\overline{B}_{p,p+1}.\]
+Now in order to compress this into the Koszul complex, we must apply Priddy's algorithm. But one observes readily from the $\Q$-Adem relation that if $\produces{(i,j)}{(i',j')}{\Q}$, then $j'>j$, so that as we perform Priddy's algorithm, we only ever decrease the index of the final $\Q$ appearing in each bar. Then the hypothesis on the $y^{{j}}$ guarantees that as we run the algorithm, every term that ends up in $\overline{B}_{p,p}$ willl vanish. Thus Priddy's algorithm constructs a null-homotopy.
+\end{proof}
 
 \end{LieLambdaStructureOnKoszul}
 
