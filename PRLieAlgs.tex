@@ -774,6 +774,7 @@ $(\derived_r\Ind{\nontop{n}})X$ has a basis $\{\Q(I)x\}$, where
 \item $I=(i_r,\ldots,i_1)$ is a $\SqShift$-admissible sequence with $\minDim(I)<a_n$; and
 \item if all of $a_{n-1},\ldots,a_2$ equal zero, $0$ does not appear in $I$.
 \end{itemize}
+That is, the sequences involved are those $\SqShift$-admissible $I$ such that $Q^Ix$ is defined in $X\in\nontop{n}$.
 These classes are defined by the following sum taken over certain non-negative integer sequences $J=(j_{r},\ldots,j_1)$:
 \[\Q(I)x:=\left[\Q^{i_r}\middle|\cdots\middle|\Q^{i_1} \right]x+\sum_{\produces{J}{I}{\SqShift}}\left[\Q^{j_r} \middle|\cdots\middle|\Q^{j_1} \right]x.\]%\textup{ (sum over nonnegative sequences $J=(j_{r},\ldots,j_1)$)}\]
 \end{prop*}
@@ -1191,7 +1192,7 @@ Now in order to compress this into the Koszul complex, we must apply Priddy's al
 \section{Calculations on positive spheres}
 Choose a positive integer $d$, and write $H:=H^*_Q(S^d)$ for the Andr\'e-Quillen cohomology of the $d$-dimensional sphere. It is our goal to compute $(\derived\Ind{\LL{1}})H$, the $E_2$-page for the Adams spectral sequence. For this, it might be useful to calculate, for each $N\geq1$, the derived functors
 \[H^{(N)}:=(\derived\Ind{\nontop{N}})(\derived\Ind{\nontop{N-1}})\cdots (\derived\Ind{\nontop{1}})H\in\LL{N+1}.\]
-This we do, one step at a time. To parameterize a basis of $H^{(N)}$ we will use $N$ admissible sequences, which we shall always write as $I^N,\ldots,I^1$. To further simplify notation, we'll employ the following shorthand:
+This we do, one step at a time. To parameterize a basis of $H^{(N)}\in\LL{N+1}$ we will use $N$ admissible sequences, which we shall always write as $I^N,\ldots,I^1$. To further simplify notation, we'll employ the following shorthand:
 \begin{itemise}
 \setlength{\parindent}{.25in}
 \item $\ell^i$ is the number of entries of $I^i$;
@@ -1199,11 +1200,11 @@ This we do, one step at a time. To parameterize a basis of $H^{(N)}$ we will use
 \item $\minDimP^1$ is $\minDimP(I^1)$.
 \item $\minDim^i$ is $\minDim(I^i)$ for $i\geq2$; and
 \end{itemise}
-Moreover, whenever we index a set of generators over $I^n,\ldots,I^1$, we will impose the following conditions on the $I^i$ without mention:
+Moreover, whenever we index a set of generators over $I^N,\ldots,I^1$, we will impose the following conditions on the $I^i$ without mention:
 \begin{itemise}
 \setlength{\parindent}{.25in}
 \item $I^1$ is $\delta$-admissible (with entries at least 2) and satisfies $\minDimP^1\leq d$;
-\item for $i>1$, $I^i$ is $\SqShift$-admissible (with entries nonnegative) and satisfies $\minDim^i<\ell^{i-1}$ [and in particular, if any $\ell^i=0$, then $0=\ell^{i+1}=\ell^{i+2}=\ell^{i+3}=\cdots $]; and
+\item for $i>1$, $I^i$ is $\SqShift$-admissible (with entries nonnegative) and satisfies $\minDim^i<\ell^{i-1}$; and% [and in particular, if any $\ell^i=0$, then $0=\ell^{i+1}=\ell^{i+2}=\ell^{i+3}=\cdots $]
 \item $I^2$ does not contain zero.
 \end{itemise}
 %\begin{itemise}
@@ -1212,56 +1213,89 @@ Moreover, whenever we index a set of generators over $I^n,\ldots,I^1$, we will i
 %\end{itemise}
 All other restrictions on the $I^i$ will be made explicit. A basis element corresponding to such a sequence of admissible sequences will be written $\Q(I^N)\cdots \Q(I^2)P(I^1)\imath$, and will have grading
 \[\left(\ell^N,\ell^{N-1}+n^N,2^{\ell^N}\!\left(\ell^{N-2}+n^{N-1}\right),2^{\ell^N+\ell^{N-1}}\!\left(\ell^{N-3}+n^{N-2}\right),\ldots,2^{\ell^N+\cdots+\ell^{3}}(\ell^1+n^2),\ ?\ \right)\]
-where this pattern continues up until the final grading, where the $+1$-shift muddies the water.
+where this pattern continues up until the final grading, at which point the $+1$-shift muddies the water. We note some immediate consequences of the conditions just imposed on the $I^i$:
+\begin{itemise}
+\setlength{\parindent}{.25in}
+\item Suppose that $\ell^i=0$, then $0=\ell^{i+1}=\ell^{i+2}=\ell^{i+3}=\cdots $;
+\item if $\ell^N>0$ for $N\geq3$, then both $a_N=\ell^{N-1}+n^N\neq0$ and $a_{N-1}=2^{\ell^N}\!\left(\ell^{N-2}+n^{N-1}\right)\neq0$
+\end{itemise}
 \begin{lem*}
-Suppose that $N>1$, and $X$ is any object of $\nontop{N+1}$, containing a homogeneous element $x\in X$ of the same degree as $\Q(I^N)\cdots \Q(I^2)P(I^1)\imath$. Then $\Q^0x$ is defined if and only if both $\ell^N$ and $\ell^{N-1}$ are nonzero.%$\ell^N$ is nonzero and one of $\ell^{N-1},\ldots,\ell^1$ is nonzero.
+The conditions we have put on the $I^i$ in $\Q(I^N)\cdots \Q(I^2)P(I^1)\imath$ are equivalent to the following requirements:
+\begin{itemise}
+\setlength{\parindent}{.25in}
+\item $I^1$ is $\delta$-admissible (with entries at least 2) and satisfies $\minDimP^1\leq d$;
+%\item for $i>1$, $I^i$ is $\SqShift$-admissible (with entries nonnegative) and satisfies $\minDim^i<\ell^{i-1}$; and
+%\item $I^1$ is $\delta$-admissible (with entries at least 2) and for $i>1$, $I^i$ is $\SqShift$-admissible (with entries nonnegative);
+%\item there exists an object $X$ of $\LL{1}$, and an element $x\in X$ with $|x|=d$, such that $P^{I^1}x$ is nonzero;
+\item for each $i$ satisfying $2\leq i\leq N$, $I^i$ is $\SqShift$-admissible (with entries nonnegative), and the operation $\Q^{I^i}$ is defined on classes of dimension $\|\Q(I^{i-1})\cdots \Q(I^2)P(I^1)\imath\|$ in objects of $\nontop{i}$.
+%
+% there exists an object $X$ of $\LL{i}$, and an element $x\in X$ with $\|x\|=\|\Q(I^{i-1})\cdots \Q(I^2)P(I^1)\imath\|$, such that $\Q^{I^i}x$ is defined, and none of the $\Q$ in this expression act as a top operation.
+\end{itemise}
 \end{lem*}
+The point of this lemma is that we do not need an extra condition on when the $I^i$, for $i\geq3$, can contain zero, in order that the second statement of the lemma holds --- this is already wrapped up in the condition $m^i<\ell^{i-1}$ and the condition that $I^2$ doesn't contain zero.
 \begin{proof}
-The \emph{if} part of this claim is easy. For the \emph{only if}, suppose that $\Q^0x$ is defined. Then $\ell^N$ is nonzero, in order that $Q^0$ is non-top. But then, as $I^N$ is nonempty, $0\leq \minDim^N<\ell^{N-1}$.
+The first condition is common to the two sets of conditions we are comparing, so can be ignored.
+The case $i=2$ is easy, as no $\Q^0$ operations are ever defined in $\nontop{2}$, leaving us those cases with $i\geq3$. Now in order that $\Q^{I^i}$ is defined on classes of dimension $\|\Q(I^{i-1})\cdots \Q(I^2)P(I^1)\imath\|$ in objects of $\nontop{i}$, we must have $\minDim^i<|\Q(I^{i-1})\cdots \Q(I^2)P(I^1)|=\ell^{i-1}$. Finally we must check that the conditions $\minDim^j<\ell^{j-1}$ for all $j$ imply that there is no zero appearing in $\Q^{I^i}$, for $i\geq3$, is erroneous. But if $I^i$ contains a zero, then $\ell^i>0$, so that $\ell^{i-1},\ell^{i-2}>0$, and writing $\|\Q(I^{i-1})\cdots \Q(I^2)P(I^1)\imath\|=(a_i,\ldots,a_1)$, we have that $a_{i}=\ell^{i-1}>0$ and $a_{i-1}=\ell^{i-2}+n^{i-1}>0$, so that $\Q^0$ is indeed defined on such classes.
 \end{proof}
 
-\begin{prop*}
-As a graded vector space,
-\[H^{(0)}=\left\langle \imath\right\rangle\]
-where $\|\imath\|=d$. As an object of $\LL{1}$, all the structure maps are trivial.
-\end{prop*}
+What remains to be done then is to calculate the $H^{(i)}$, first by calculating the Koszul complex on $H^{(i-1)}$ as a vector space, then finding the differential and taking homology. If there were no differentials at any stage, $H^{(i)}$ would simply be $\left\langle \Q(I^i)\cdots \Q(I^2)P(I^1)\imath\right\rangle$. This is almost true, as except for the Koszul complex on $H^{(1)}$ which calculates $H^{(2)}$, all of the Koszul complexes have zero differential. Thus, the correct subquotient of the above vectorspace takes a rather simple form.
+
+In order to state our results we need one last piece of notation. Namely, define $t(I^1):=(d+n^1+\ell^1)\star I^1$. That is $t(I^1)$ is the result of adding a top $P$ operation to $I^1$ on the left. Note that if, as we always assume, $I^1$ is $\delta$-admissible with $\minDimP(I^1)\leq d$, then $t(I^1)$ satisfies the same conditions.
+
+%\begin{prop*}
+%As a graded vector space,
+%\[H^{(0)}=\left\langle \imath\right\rangle\]
+%where $\|\imath\|=d$. As an object of $\LL{1}$, all the structure maps are trivial.
+%\end{prop*}
 
 \begin{prop*}
 As a graded vector space,
 \[H^{(1)}=\left\langle P(I^1)\imath\right\rangle\]
 where $\|P(I^1)\imath\|=(\ell^1,d+n^1+\ell^1)$. As an object of $\LL{2}$, all the structure maps are trivial except for $\Q^1$, which is defined whenever $\ell^1>0$, and given by the formula
-\[\Q^1:P(I^1)\imath\mapsto P((d+n^1+\ell^1)\star I^1)\imath.\]
+\[\Q^1:P(I^1)\imath\mapsto P(t(I^1))\imath.\]
 \end{prop*}
 \begin{proof}
-As $H^{(0)}$ has all structure trivial, the Koszul complex has zero differential, and so \emph{equals} $H^{(1)}$. The calculation of $\LL{2}$ structure was made above.
+As $H^{(0)}=\left\langle \imath\right\rangle$ has all structure trivial, the Koszul complex has zero differential, and so \emph{equals} $H^{(1)}$. The calculation of $\LL{2}$ structure was made above.
 \end{proof}
 
 \begin{prop*}
 As a graded vector space,
-\[H^{(2)}=\frac{\left\langle \Q(I^2)P(I^1)\imath\ \middle|\ 1\notin I^2\right\rangle}{\left\langle \Q(I^2)P(I^1)\imath\ \middle|\ 1,2\notin I^2,\ I^1\textup{ has a top $P$ at left, and $\ell^1>2$}\right\rangle}\]
-where $\|\Q(I^2)P(I^1)\imath\|=(\ell^2,\ell^1+n^2,\,?\,)$. As an object of $\LL{3}$, all the structure maps are trivial except for $\Q^0$, which is defined whenever $\ell^1+n^2>0$, zero unless $\ell^2=0$ and $\ell^1=1$, in which case it is given by the formula $\Q(\emptyset)P((i))\imath\mapsto \Q(\emptyset)P((d+i+1,i))\imath$.
+\[H^{(2)}=\frac{\left\langle \Q(I^2)P(I^1)\imath\ \middle|\ 1\notin I^2\right\rangle}{\left\langle \Q(I^2)P(I^1)\imath\ \middle|\ 1,2\notin I^2,\ I^1\in\im(t)\textup{, and $\ell^1>2$}\right\rangle}.\]
+As an object of $\LL{3}$, all the structure maps are trivial except for $\Q^0$, which is defined whenever $\ell^1+n^2>0$, zero unless $\ell^2=0$ and $\ell^1=1$, in which case it is given by the formula $\Q(\emptyset)P(I^1)\imath\mapsto \Q(\emptyset)P(t(I^1))\imath$.
 \end{prop*}
 \begin{proof}
-The Koszul complex, as a vector space, is $\left\langle \Q(I^2)P(I^1)\imath\right\rangle$ --- as $H^{(1)}$ is an object of $\LL{2}$, it supports no $\Q^0$ operations, explaining why $I^2$ mustn't contain zero. Now to calculate the differential, we use the following formula, setting $x=P(I^1)\imath$ and $I^2=(i_{\ell^2},\ldots,i_2,i_1)$
-\[\partial(\Q(I)x)=\Q((i_{\ell^2},\ldots,i_2))(\Q^{i_1}x)+\!\!\!\!\!\!\!\!\!\!\!\!\!\!\!\!\!\sum_{\substack{\produces{J}{I^2}{\SqShift}\\(j_{\ell^2},\ldots,j_2)\in\admis{\SqShift}}}\!\!\!\!\!\!\!\!\!\!\!\! \Q((j_{\ell^2},\ldots,j_2))(\Q^{j_1}x).\]
-Now the format of the $\SqShift$-adem relations shows that in each summand, $j_1$ exceeds $i_1$. As $i_1$ cannot be zero, $j_1$ must then be at least two, so that $Q^{j_1}x=0$ by our calculation of the $\LL{2}$ structure of $H^{(1)}$. Thus, at most one term appears on the right hand side, and even this term vanishes if $i_1>1$. If $i_1=1$, then $\Q^{i_1}x=\Q^1x$ is obtained by adding a top operation to $I^1$. That is, the differential is
-\[\Q((i^2_{\ell^2},i^2_{\ell^2-1},\ldots,i^2_{2},1))P(I^1)\imath\mapsto \Q((i^2_{\ell^2},i^2_{\ell^2-1},\ldots,i^2_{2}))P((d+n^1+\ell^1)\star I^1)\imath,\]
-where any $\Q(I^2)P(I^1)\imath$ in which $I^2$ does not end in 1 is sent to zero. As all of these images are linearly independent, the kernel of $\delta$ is spanned by those basis elements in which $I^2$ contains no 1, explaining the restriction on the numerator. Evidently, the denominator is the image of $\delta$. We explain the conditions in order that $\Q(I^2)P(I^1)\imath$ is in the image. It is in the image iff $I^1$ has a top operation at the left, say $t$, and $\Q(I^2\star(1))P(I^1\setminus \{t\})\imath$ is a valid element of $H^{(1)}$. In order for it to be valid, the $\SqShift$-admissibility condition implies that $I^2$ is either empty, or has rightmost entry at least 3. If $I^2$ is empty, in order that $\Q(I^2\star(1))P(I^1\setminus \{t\})\imath$ is allowable we need  $\minDim((1))=1<\ell^1-1$, explaining the condition on $\ell^1$. If $I^2$ is nonempty, one finds that the two inequalities $m(I^2\star(1))<\ell^1-1$ and $m(I^2)<\ell^1$ are equivalent, and as $I^2$ has a 3 or greater at right, $3\leq\minDim(I^2)<\ell^1$ implies the extra condition ``$\ell^1>2$'' anyway, so that we can leave the condition $\ell^1>2$ on the denominator without adding the caveat ``when $I^2$ is empty''. This completes the identification of the underlying vector space.
+The Koszul complex, as a vector space, is $\left\langle \Q(I^2)P(I^1)\imath\right\rangle$. % --- as $H^{(1)}$ is an object of $\LL{2}$, it supports no $\Q^0$ operations, explaining why $I^2$ mustn't contain zero. 
+Now to calculate the differential, we use the following formula, setting $x=P(I^1)\imath$ and $I^2=(i_{\ell^2},\ldots,i_2,i_1)$
+\[\partial(\Q(I^2)x)=\Q((i_{\ell^2},\ldots,i_2))(\Q^{i_1}x)+\!\!\!\!\!\!\!\!\!\!\!\!\!\!\!\!\!\sum_{\substack{\produces{J}{I^2}{\SqShift}\\(j_{\ell^2},\ldots,j_2)\in\admis{\SqShift}}}\!\!\!\!\!\!\!\!\!\!\!\! \Q((j_{\ell^2},\ldots,j_2))(\Q^{j_1}x).\]
+Now the format of the $\SqShift$-Adem relations shows that in each summand, $j_1$ exceeds $i_1$. As $i_1$ cannot be zero, $j_1$ must then be at least two, so that $Q^{j_1}x=0$ by our calculation of the $\LL{2}$ structure of $H^{(1)}$. Thus, only the first term can be nonzero, and even this term vanishes if $i_1>1$. If $i_1=1$, then $\Q^{i_1}x=\Q^1x=P(t(I^1))\imath$, so that the differential is
+\[\Q((i^2_{\ell^2},i^2_{\ell^2-1},\ldots,i^2_{2},1))P(I^1)\imath\mapsto \Q((i^2_{\ell^2},i^2_{\ell^2-1},\ldots,i^2_{2}))P(t( I^1))\imath,\]
+where any $\Q(I^2)P(I^1)\imath$ in which $I^2$ does not end in 1 is sent to zero. As all of these images are linearly independent (when nenzero), the kernel of $\partial$ is spanned by those basis elements in which $I^2$ contains no 1, explaining the restriction on the numerator. Evidently, the denominator is to be the image of $\partial$. We explain the conditions in order that $\Q(I^2)P(I^1)\imath$ is in the image.
 
-Next, by the results of the revious section, all operations but $\Q^0$ are zero. Consider the operation $Q^0$ on classes $\Q(I^2)P(I^1)\imath$ with $\ell^2>0$. As we look only at cycles, none of the $I^2$ appearing contain a 1. However, it is only $\Q^1$ which can be nonzero on $H^{(1)}$, so our lemma above on $\Q^0$ applies, so that the operation vanishes there. Finally, if $\ell^2=0$ we are supposed to simply apply $\Q^{\ell^1}$ to $P(I^1)\imath$, and this is only nonzero when $\ell^1=1$, finishing the proof.
+It must be that $I^1=t(J)$, with the following conditions satisfied:
+\begin{itemise}
+\setlength{\parindent}{.25in}
+\item[a)] $J$ is $\delta$-admissible and $\minDimP(J)\leq d$;
+\item[b)] $I^2\star(1)$ is $\SqShift$-admissible, with $\minDim(I^2\star(1))<\ell(J)$.
+\end{itemise}
+When $I^1=t(J)$, condition (a) is equivalent to the standard condition ``$I^1$ is $\delta$-admissible and $\minDimP^1\leq d$''. Condition (b) is more interesting, and we consider two cases. Firstly, if $I^2=\emptyset$, (b) becomes $1<\ell(J)$, i.e.\ $\ell^1>2$. Secondly, if $I^2$ is nonempty, the admissibility condition in (b) demands that $I^2$ contains no 1 or 2, in which case $\minDim(I^2\star(1))=\minDim(I^2)-1$, so that $\minDim(I^2\star(1))<\ell(J)$ is equivalent to the standard condition $\minDim^2<\ell^1$. Note finally that we don't have to explicitly remove the condition $\ell^1>2$ in this case, as it holds automatically when $I^2$ is nonempty but contains no 1 or 2. This completes our identification of the image of $\partial$.
+
+
+%$J$ is $\delta$-admissible and $\minDimP(J)\leq d$, and It is in the image iff $I^1$ has a top operation at the left, say $t$, and $\Q(I^2\star(1))P(I^1\setminus \{t\})\imath$ is a valid element of $H^{(1)}$. In order for it to be valid, the $\SqShift$-admissibility condition implies that $I^2$ is either empty, or has rightmost entry at least 3. If $I^2$ is empty, in order that $\Q(I^2\star(1))P(I^1\setminus \{t\})\imath$ is allowable we need  $\minDim((1))=1<\ell^1-1$, explaining the condition on $\ell^1$. If $I^2$ is nonempty, one finds that the two inequalities $m(I^2\star(1))<\ell^1-1$ and $m(I^2)<\ell^1$ are equivalent, and as $I^2$ has a 3 or greater at right, $3\leq\minDim(I^2)<\ell^1$ implies the extra condition ``$\ell^1>2$'' anyway, so that we can leave the condition $\ell^1>2$ on the denominator without adding the caveat ``when $I^2$ is empty''. This completes the identification of the underlying vector space.
+
+Next, by the results of the revious section, all operations but $\Q^0$ are zero. Consider the operation $Q^0$ on cycles $\Q(I^2)P(I^1)\imath$ with $\ell^2>0$. As we look only at cycles, none of the $I^2$ appearing contain a 1. However, it is only $\Q^1$ which can be nonzero on $H^{(1)}$, so our lemma above applies, and these operations vanish. Finally, if $\ell^2=0$ we are supposed to simply apply $\Q^{\ell^1}$ to $P(I^1)\imath$, and this is only nonzero when $\ell^1=1$, finishing the proof.
 \end{proof}
 
 \begin{prop*}
-As a graded vector space,
-\[H^{(3)}=\frac{\left\langle \Q(I^3)\Q(I^2)P(I^1)\imath\ \middle|\ 1\notin I^2\right\rangle}{\left\langle \Q(I^3)\Q(I^2)P(I^1)\imath\ \middle|\ 1,2\notin I^2,\ I^1\textup{ has a top $P$ at left, and $\ell^1>2$}\right\rangle}.\]
-As an object of $\LL{4}$, all the structure maps are trivial except for $\Q^0$, which is zero unless $\ell^3=\ell^2=0$ and $\ell^1=1$, in which case it is given by the formula $\Q(\emptyset)\Q(\emptyset)P((i))\imath\mapsto \Q(\emptyset)\Q(\emptyset)P((d+i+1,i))\imath$.
+For $N\geq3$, as a graded vector space,
+\[H^{(N)}=\frac{\left\langle \Q(I^N)\cdots \Q(I^2)P(I^1)\imath\ \middle|\ 1\notin I^2\right\rangle}{\left\langle \Q(I^N)\cdots \Q(I^2)P(I^1)\imath\ \middle|\ 1,2\notin I^2,\ I^1\in\im(t)\textup{, and $\ell^1>2$}\right\rangle}.\]
+As an object of $\LL{N+1}$, all the structure maps are trivial except for $\Q^0$, which is zero unless $\ell^N=\cdots =\ell^2=0$ and $\ell^1=1$, in which case it is given by the formula $\Q(\emptyset)\cdots \Q(\emptyset)P(I^1)\imath\mapsto \Q(\emptyset)\cdots \Q(\emptyset)P(t(I^1))\imath$.
 \end{prop*}
 \begin{proof}
-$I^3$ may contain zero, since if $\ell^3\neq0$, then $0\geq \minDim^3<\ell^2$, so that $0\leq\minDim^2<\ell^1$, and so the operation $\Q^0$ \emph{is} allowed on $\Q(I^2)P(I^1)\imath$ in the $\nontop{3}$ structure on $H^{(2)}$.
+In order to obtain this description of the underlying vectorspace, we must show that none of the Koszul complexes have nonzero differential from this point on. This is true of that calculating $H^{(3)}$, as the only nonzero operation on $H^{(2)}$ is a \emph{top} operation. If this pattern continues, we'll never see any differentials.
 
-There is no differential, as the only nonzero operation is obviously a top operation.
+By our theorems above, the only operations with a chance of being nonzero are the $Q^0$. As before, consider the operation $Q^0$ on cycles $\Q(I^3)\Q(I^2)P(I^1)\imath$ with $\ell^3>0$. As $\ell^3=0$, $\minDim^3\geq0$, so that $\ell^2>0$. Thus, $\Q(I^2)P(I^1)\imath$ is in the kernel of $\Q$ operation defined thereupon. Our lemma above then shows that $Q^0$ vanishes on such cycles. Next, consider $\Q^0$ on cycles $\Q(\emptyset)\Q(I^2)P(I^1)\imath$. This takes value $\Q(\emptyset)\Q^0\Q(I^2)P(I^1)\imath$, which is only nonzero if $\ell^2=0$ and $\ell^1=1$. This confirms all our claims for $N=3$.
 
-There are no further operations than the deepest $\Q^0$, for some reason.
+These arguments become a simple mathematical induction, proving the claims for larger $N$.
 \end{proof}
 
 \end{CalculatingRepeatedKoszul}
