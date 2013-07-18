@@ -18,7 +18,8 @@
 \excludeversion{DerivedFunctorsLowDimension}
 \excludeversion{PRlieKoszulComplexCalculation}
 \excludeversion{LieLambdaStructureOnKoszul}
-\includeversion{CalculatingRepeatedKoszul}
+\excludeversion{CalculatingRepeatedKoszul}
+\includeversion{KoszulSequenceCombinatorics}
 
 \newcommand{\GS}[1]{\scrE^{#1}}
 \newcommand{\GpS}[1]{\scrE^{#1}_\star}
@@ -1192,7 +1193,10 @@ Now in order to compress this into the Koszul complex, we must apply Priddy's al
 \section{Calculations on positive spheres}
 Choose a positive integer $d$, and write $H:=H^*_Q(S^d)$ for the Andr\'e-Quillen cohomology of the $d$-dimensional sphere. It is our goal to compute $(\derived\Ind{\LL{1}})H$, the $E_2$-page for the Adams spectral sequence. For this, it might be useful to calculate, for each $N\geq1$, the derived functors
 \[H^{(N)}:=(\derived\Ind{\nontop{N}})(\derived\Ind{\nontop{N-1}})\cdots (\derived\Ind{\nontop{1}})H\in\LL{N+1}.\]
-This we do, one step at a time. To parameterize a basis of $H^{(N)}\in\LL{N+1}$ we will use $N$ admissible sequences, which we shall always write as $I^N,\ldots,I^1$. To further simplify notation, we'll employ the following shorthand:
+This we do, one step at a time, but before we start, we'll take care to accurately set out the combinatorics involved in describing a basis of $H^{(n)}$.
+
+\subsection{Restrictions on the sequences $I^N,\ldots,I^1$}
+To parameterize a basis of $H^{(N)}\in\LL{N+1}$ we will use $N$ admissible sequences, which we shall always write as $I^N,\ldots,I^1$. To further simplify notation, we'll employ the following shorthand:
 \begin{itemise}
 \setlength{\parindent}{.25in}
 \item $\ell^i$ is the number of entries of $I^i$;
@@ -1238,9 +1242,15 @@ The first condition is common to the two sets of conditions we are comparing, so
 The case $i=2$ is easy, as no $\Q^0$ operations are ever defined in $\nontop{2}$, leaving us those cases with $i\geq3$. Now in order that $\Q^{I^i}$ is defined on classes of dimension $\|\Q(I^{i-1})\cdots \Q(I^2)P(I^1)\imath\|$ in objects of $\nontop{i}$, we must have $\minDim^i<|\Q(I^{i-1})\cdots \Q(I^2)P(I^1)|=\ell^{i-1}$. Finally we must check that the conditions $\minDim^j<\ell^{j-1}$ for all $j$ imply that there is no zero appearing in $\Q^{I^i}$, for $i\geq3$, is erroneous. But if $I^i$ contains a zero, then $\ell^i>0$, so that $\ell^{i-1},\ell^{i-2}>0$, and writing $\|\Q(I^{i-1})\cdots \Q(I^2)P(I^1)\imath\|=(a_i,\ldots,a_1)$, we have that $a_{i}=\ell^{i-1}>0$ and $a_{i-1}=\ell^{i-2}+n^{i-1}>0$, so that $\Q^0$ is indeed defined on such classes.
 \end{proof}
 
-What remains to be done then is to calculate the $H^{(i)}$, first by calculating the Koszul complex on $H^{(i-1)}$ as a vector space, then finding the differential and taking homology. If there were no differentials at any stage, $H^{(i)}$ would simply be $\left\langle \Q(I^i)\cdots \Q(I^2)P(I^1)\imath\right\rangle$. This is almost true, as except for the Koszul complex on $H^{(1)}$ which calculates $H^{(2)}$, all of the Koszul complexes have zero differential. Thus, the correct subquotient of the above vectorspace takes a rather simple form.
 
-In order to state our results we need one last piece of notation. Namely, define $t(I^1):=(d+n^1+\ell^1)\star I^1$. That is $t(I^1)$ is the result of adding a top $P$ operation to $I^1$ on the left. Note that if, as we always assume, $I^1$ is $\delta$-admissible with $\minDimP(I^1)\leq d$, then $t(I^1)$ satisfies the same conditions.
+
+
+\subsection{Calculation of $(\derived\Ind{\nontop{N}})\cdots (\derived\Ind{\nontop{1}})H$}
+
+What remains to be done then is to calculate the $H^{(i)}$, first by calculating the Koszul complex on $H^{(i-1)}$ as a vector space, then finding the differential and taking homology. If there were no differentials at any stage, $H^{(i)}$ would simply be $\left\langle \Q(I^i)\cdots \Q(I^2)P(I^1)\imath\right\rangle$. This is almost true, as except for the Koszul complex on $H^{(1)}$ which calculates $H^{(2)}$, all of the Koszul complexes have zero differential. Thus, the correct subquotient of the above vector space takes a rather simple form.
+
+In order to state our results we need one last piece of notation. Define $t(I^1):=(d+n^1+\ell^1)\star I^1$, so that $t(I^1)$ is the result of adding a top $P$ operation to $I^1$ on the left. Note that if, as we always assume, $I^1$ is $\delta$-admissible with $\minDimP(I^1)\leq d$, then $t(I^1)$ satisfies the same conditions.
+
 
 %\begin{prop*}
 %As a graded vector space,
@@ -1291,15 +1301,43 @@ For $N\geq3$, as a graded vector space,
 As an object of $\LL{N+1}$, all the structure maps are trivial except for $\Q^0$, which is zero unless $\ell^N=\cdots =\ell^2=0$ and $\ell^1=1$, in which case it is given by the formula $\Q(\emptyset)\cdots \Q(\emptyset)P(I^1)\imath\mapsto \Q(\emptyset)\cdots \Q(\emptyset)P(t(I^1))\imath$.
 \end{prop*}
 \begin{proof}
-In order to obtain this description of the underlying vectorspace, we must show that none of the Koszul complexes have nonzero differential from this point on. This is true of that calculating $H^{(3)}$, as the only nonzero operation on $H^{(2)}$ is a \emph{top} operation. If this pattern continues, we'll never see any differentials.
+In order to obtain this description of the underlying vector space, we must show that none of the Koszul complexes have nonzero differential from this point on. This is true of that calculating $H^{(3)}$, as the only nonzero operation on $H^{(2)}$ is a \emph{top} operation. If this pattern continues, we'll never see any differentials.
 
-By our theorems above, the only operations with a chance of being nonzero are the $Q^0$. As before, consider the operation $Q^0$ on cycles $\Q(I^3)\Q(I^2)P(I^1)\imath$ with $\ell^3>0$. As $\ell^3=0$, $\minDim^3\geq0$, so that $\ell^2>0$. Thus, $\Q(I^2)P(I^1)\imath$ is in the kernel of $\Q$ operation defined thereupon. Our lemma above then shows that $Q^0$ vanishes on such cycles. Next, consider $\Q^0$ on cycles $\Q(\emptyset)\Q(I^2)P(I^1)\imath$. This takes value $\Q(\emptyset)\Q^0\Q(I^2)P(I^1)\imath$, which is only nonzero if $\ell^2=0$ and $\ell^1=1$. This confirms all our claims for $N=3$.
-
-These arguments become a simple mathematical induction, proving the claims for larger $N$.
+By our theorems above, the only operations with a chance of being nonzero are the $Q^0$. As before, consider the operation $Q^0$ on cycles $\Q(I^3)\Q(I^2)P(I^1)\imath$ with $\ell^3>0$. On these classes, $\ell^2>0$, so that $\Q(I^2)P(I^1)\imath$ is in the kernel of $\Q$ operation defined thereupon. Our lemma above then shows that $Q^0$ vanishes on such cycles. Next, consider $\Q^0$ on cycles $\Q(\emptyset)\Q(I^2)P(I^1)\imath$. This takes value $\Q(\emptyset)\Q^{\ell^2}\Q(I^2)P(I^1)\imath$, which is only nonzero if $\ell^2=0$ and $\ell^1=1$. This confirms all our claims for $N=3$, and these arguments can be repeated for larger $N$.
 \end{proof}
 
 \end{CalculatingRepeatedKoszul}
+\begin{KoszulSequenceCombinatorics}
+\subsection{Combinatorics of  the sequences $I^N,\ldots,I^1$}
+We define the following two quantities, for $k\geq2$, which relate to the question `which sequences $I^k$ are permitted given that $I^{k-1}$ has already been chosen?'
+\begin{itemise}
+\setlength{\parindent}{.25in}
+\item Let $\widetilde{e}^k=\minDim^k-\ell^{k}+1$. This is a nonnegative integer, as if we write $I^k=(i_{\ell^k},\ldots,i_1)$, then, as $I^k$ is $\SqShift$-admissible:
+\[\minDim^k-(\ell^k-1)=(i_{\ell^k}-2i_{\ell^k-1}-1)+ (i_{\ell^k-1}-2i_{\ell^k-2}-1)+\cdots + (i_{2}-2i_{1}-1)+(i_1).\]
+\item Let $f^k=\ell^{k-1}-1-\minDim^k$. This too is nonnegative, as $\minDim^k<\ell^{k-1}$.
+\end{itemise}
+These two quantities measure how wasteful we have been in choosing $I^k$, if our objective is to make $\ell^k$ as large as possible:
+\begin{itemise}
+\setlength{\parindent}{.25in}
+\item $\widetilde{e}^k$ is the total amount of waste caused, first by choosing $i_1$ unnecessarily high, then by choosing $i_2$ unnecessarily high (subject to the admissibility constraint imposed by $i_1$), etc. [Note that choosing the entries of $I^k$ higher than they need to be cramps us for space, leading to shorter sequences being allowed.]
+\item $f^k$ is the waste caused by choosing $I^k$ an unnecessarily short sequence. [Note that given a $\SqShift$-admissible sequence $I$, one can always create another $\SqShift$-admissible sequence $I'$ by adding a single entry onto the left which is as small as possible. This increases both $\ell$ and $\minDim$ by one. If we are trying to maximise $\ell$, we should really do this to $I^k$ whenever $\minDim^k$ is any less than $\ell^{k-1}-1$.]
+\end{itemise}
+The point, then, is that for $k\geq2$, $\ell^k=\ell^{k-1}-\widetilde{e}^k-f^k$. This proves:
+\begin{lem*}
+The sequence $(\ell^N,\ell^{N-1},\ldots,\ell^1)$ is nondecreasing, and whenever $\ell^k=\ell^{k-1}$, it must be that $I^k=(\ldots,7,3,1,0)$.
+\end{lem*}
+%\begin{lem*}
+%Suppose that $I=(i_{\ell},\ldots,i_1)$ is a nonempty $\SqShift$-admissible sequence. Then either
+%\[I=(\ldots,7,3,1,0), \textup{ in which case $\minDim(I)=\ell-1$,}\]
+%or $\minDim(I)\geq\ell$.
+%\end{lem*}
+%\begin{proof}
+%As $I$ is $\SqShift$-admissible, $\minDim(I)=i_{\ell}-i_{\ell-1}-\cdots -i_1$, and we calculate:
+%\[\minDim(I)-(\ell-1)=(i_{\ell}-2i_{\ell-1}-1)+ (i_{\ell-1}-2i_{\ell-2}-1)+\cdots + (i_{2}-2i_{1}-1)+(i_1).\]
+%Each of the parenthesized quantities on the right hand side is nonnegative. If they are all to equal zero, then $I$ must equal $(\ldots,7,3,1,0)$.
+%\end{proof}
 
+\end{KoszulSequenceCombinatorics}
 \begin{Endmatter}
 \printbibliography
 \end{Endmatter}
