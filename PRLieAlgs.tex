@@ -19,7 +19,8 @@
 \excludeversion{PRlieKoszulComplexCalculation}
 \excludeversion{LieLambdaStructureOnKoszul}
 \excludeversion{CalculatingRepeatedKoszul}
-\includeversion{KoszulSequenceCombinatorics}
+\excludeversion{KoszulSequenceCombinatorics}
+\includeversion{InternalDimZeroPart}
 
 \newcommand{\GS}[1]{\scrE^{#1}}
 \newcommand{\GpS}[1]{\scrE^{#1}_\star}
@@ -398,7 +399,7 @@ Suppose that $X\in\GS{n+1}$ is a graded set. Let $B$ be a Hall basis for the fre
 \setlength{\parindent}{.25in}
 \item $\pi_*(\Fr{\GoodLie{n}}S(X))$ has basis $\{\Q^Ib\,:\,b\in B,\,I\in\admis{\Q},\ 0<i_1\leq|b|\}$;
 \item $\pi_*(\Fr{\RestLie{n}}S(X))$ has basis $\{\Q^Ib\,:\,b\in B,\,I\in\admis{\Q},\ 0\leq i_1\leq|b|\}$; and
-\item $\pi_*(\Fr{\PRLie{n}}S(X))$ has basis $\{\Q^Ix\,:\,b\in B_{a_{n+1},\ldots,a_1},\,I\in\admis{\Q},\ i_1\leq|b|,\ i_1,a_{n},\ldots,a_2\textup{ not all zero}\}$.
+\item $\pi_*(\Fr{\PRLie{n}}S(X))$ has basis $\{\Q^Ib\,:\,b\in B_{a_{n+1},\ldots,a_1},\,I\in\admis{\Q},\ i_1\leq|b|,\ i_1,a_{n},\ldots,a_2\textup{ not all zero}\}$.
 \end{enumerate}
 We always allow $I$ to be the empty sequence in the above bases, in which case the condition on $i_{1}$ is to be ignored. If $I$ is nonempty, we mean that $I=(i_\ell,\ldots,i_1)$, so $i_{1}$ is the rightmost entry of $I$.
 \end{prop*}
@@ -903,8 +904,29 @@ In the $n\geq2$ case, the bar construction was the subobject of a stable bar con
 
 \begin{DerivedFunctorsLowDimension}
 \section{Lie algebra homology and low dimensional calculations}
-\subsection{Calculating $\derived\Ind{\LL{n}}$ in low internal dimension}
+\subsection{Calculating $\derived\Ind{\LL{n}}$ in internal dimension zero}
+Suppose that $n\geq2$. Then the dimension zero part of an object $X$ of $\LL{n}$ is a partially restricted Lie algebra, in $\PRLie{n-1}$. That is: 
+\begin{lem*}
+There is a `zeroth part' functor $\LL{n}\to\PRLie{n-1}$, written $X\mapsto X_0$, where $X_0\in\PRLie{n-1}$ by
+\[(X_0)_{a_{n-1},\ldots,a_1}:=X_{0,a_{n-1},\ldots,a_1}\]
+with bracket inherited from the on $X$, and restriction $\restn{}$ given by $\Q^0$. Moreover, taking zeroth parts commutes with the two free constructions, which is to say that for $S\in\GS{n}$, we have $(\Fr{\LL{n}}S)_0\cong\Fr{\PRLie{n-1}}(S_0)$, writing $S_0\in\GS{n-1}$ for the zeroth part of $S$.
+\end{lem*}
+\begin{proof}
+As objects of $\LL{n}$ are themselves objects of $\PRLie{n}$, with restriction given by $\Q^0$ in dimension zero, it's enough just to check that $\Q^0$ is defined on $X_{0,a_{n-1},\ldots,a_1}$ whenever $\restn{}$ is supposed to be defined on a dimension $(a_{n-1},\ldots,a_1)$ element of an object of $\PRLie{n-1}$. This follows from the definition.
+
+Now to check that the free constructions agree, recall that  $\Fr{\LL{n}}S$ has basis 
+\[\{\Q^Ib\,:\,b\in B_{a_{n},\ldots,a_1},\,I\in\admis{\Q},\ i_1\leq|b|,\ i_1,a_{n-1},\ldots,a_2\textup{ not all zero}\}\]
+where $b$ runs over a homogeneous Hall basis. The only basis elements in the zeroth part are those where $b$ is zero dimensional and in which $I$ only contains zeros, and these classes are exactly a basis for $\Fr{\PRLie{n-1}}(S_0)$.
+\end{proof}
+\begin{prop*}
+There is a natural isomorphism
+\[((\derived_{p}\Ind{\LL{n}})X)_{0,a_{n-1},\ldots,a_1}\cong ((\derived_p\Ind{\PRLie{n-1}})X_0)_{a_{n-1},\ldots,a_1}\]
+\begin{proof}
+Consider the bar construction used to define $((\derived_{p}\Ind{\LL{n}})X)_{0,a_{n-1},\ldots,a_1}$, constructed by repeated application of the free ${\LL{n}}$ functor. In dimension zero, this amounts to repeated application of the free $\PRLie{n-1}$ functor, and we obtain the bar construction for $X_0$ as an object of $\PRLie{n-1}$.
+\end{proof}
+\end{prop*}
 %\subsubsection{$\derived\Ind{\LL{1}}$}
+\begin{shaded}
 Choose $n\geq 1$, and define 
 \[d=\begin{cases}
 4,&\textup{if }n=1;\\
@@ -928,6 +950,7 @@ We will here present a method to calculate the object $(\derived\Ind{\LL{n}})X=(
 %r3c2
 }\]
 In this diagram, $\Ind{\nontop{n}}$ does not change the underlying vector space in dimensions $(a_n,\ldots,a_1)$ with $a_n\leq d$. Moreover, the free constructions $\Fr{\LL{n}}$ and $\Fr{\PRLie{n}}$ agree in these dimensions, as do the structure maps of the free/forget adjunctions. Thus, there is an isomorphism between $(\derived\Ind{\LL{n}})(X)$ and $(\derived\Ind{\PRLie{n}})(\Ind{\nontop{n}}(X))$ in dimensions with $a_n\leq d$. [Note that these are objects of $\GR{n+1}$, and so have gradings $a_{n+1},\ldots,a_1$ --- our inequality involves $a_n$, the outermost grading of an object of $\LL{n}$.]
+\end{shaded}
 
 There is a complex that computes $\derived\Ind{\PRLie{n}}$ --- it interpolates between the Cartan-Eilenberg resolution for the homology of good Lie algebras, and May's $\overline{X}$ complex for  restricted Lie algebra homology.
 \end{DerivedFunctorsLowDimension}
@@ -1338,6 +1361,9 @@ The sequence $(\ell^N,\ell^{N-1},\ldots,\ell^1)$ is nondecreasing, and whenever 
 %\end{proof}
 
 \end{KoszulSequenceCombinatorics}
+\begin{InternalDimZeroPart}
+
+\end{InternalDimZeroPart}
 \begin{Endmatter}
 \printbibliography
 \end{Endmatter}
