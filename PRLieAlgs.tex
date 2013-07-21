@@ -6,7 +6,7 @@
 
 
 
-%\def\excludeversion#1{\includeversion{#1}}
+\def\excludeversion#1{\includeversion{#1}}
 \excludeversion{Frontmatter}
 \excludeversion{Endmatter}
 \excludeversion{SteenrodAlgebrasAndTheirKoszulDuals}
@@ -1307,11 +1307,41 @@ The only if part is immediate, as removing the leftmost entry of a sequence only
 We should check that $t_dI^1$ is $\delta$-admissible. We only need to check that $d+n^1+\ell^1\geq2i_{\ell^1}$, or $d+1\geq2i_{\ell^1}-n^1-\ell^1+1$, but the right hand side of this inequality is one of the terms in the max defining $d$, so this last inequality holds (even strictly).
 \end{proof}
 
+\begin{KoszulSequenceCombinatorics}
+\subsection{Combinatorics of  the sequences $I^N,\ldots,I^1$}
+We define the following two quantities, for $k\geq2$, which relate to the question `which sequences $I^k$ are permitted given that $I^{k-1}$ has already been chosen?'
+\begin{itemise}
+\setlength{\parindent}{.25in}
+\item Let $\widetilde{e}^k=\minDim^k-\ell^{k}+1$. This is a nonnegative integer, as if we write $I^k=(i_{\ell^k},\ldots,i_1)$, then, as $I^k$ is $\SqShift$-admissible:
+\[\minDim^k-(\ell^k-1)=(i_{\ell^k}-2i_{\ell^k-1}-1)+ (i_{\ell^k-1}-2i_{\ell^k-2}-1)+\cdots + (i_{2}-2i_{1}-1)+(i_1).\]
+\item Let $f^k=\ell^{k-1}-1-\minDim^k$. This too is nonnegative, as $\minDim^k<\ell^{k-1}$.
+\end{itemise}
+These two quantities measure how wasteful we have been in choosing $I^k$, if our objective is to make $\ell^k$ as large as possible:
+\begin{itemise}
+\setlength{\parindent}{.25in}
+\item $\widetilde{e}^k$ is the total amount of waste caused, first by choosing $i_1$ unnecessarily high, then by choosing $i_2$ unnecessarily high (subject to the admissibility constraint imposed by $i_1$), etc. [Note that choosing the entries of $I^k$ higher than they need to be cramps us for space, leading to shorter sequences being allowed.]
+\item $f^k$ is the waste caused by choosing $I^k$ an unnecessarily short sequence. [Note that given a $\SqShift$-admissible sequence $I$, one can always create another $\SqShift$-admissible sequence $I'$ by adding a single entry onto the left which is as small as possible. This increases both $\ell$ and $\minDim$ by one. If we are trying to maximise $\ell$, we should really do this to $I^k$ whenever $\minDim^k$ is any less than $\ell^{k-1}-1$.]
+\end{itemise}
+The point, then, is that for $k\geq2$, $\ell^k=\ell^{k-1}-\widetilde{e}^k-f^k$. This proves:
+\begin{lem*}
+The sequence $(\ell^N,\ell^{N-1},\ldots,\ell^1)$ is nondecreasing, and whenever $\ell^k=\ell^{k-1}$, it must be that $I^k=(\ldots,7,3,1,0)$.
+\end{lem*}
+%\begin{lem*}
+%Suppose that $I=(i_{\ell},\ldots,i_1)$ is a nonempty $\SqShift$-admissible sequence. Then either
+%\[I=(\ldots,7,3,1,0), \textup{ in which case $\minDim(I)=\ell-1$,}\]
+%or $\minDim(I)\geq\ell$.
+%\end{lem*}
+%\begin{proof}
+%As $I$ is $\SqShift$-admissible, $\minDim(I)=i_{\ell}-i_{\ell-1}-\cdots -i_1$, and we calculate:
+%\[\minDim(I)-(\ell-1)=(i_{\ell}-2i_{\ell-1}-1)+ (i_{\ell-1}-2i_{\ell-2}-1)+\cdots + (i_{2}-2i_{1}-1)+(i_1).\]
+%Each of the parenthesized quantities on the right hand side is nonnegative. If they are all to equal zero, then $I$ must equal $(\ldots,7,3,1,0)$.
+%\end{proof}
 
+\end{KoszulSequenceCombinatorics}
 
 \subsection{Calculation of $H^{(N)}:=(\derived\Ind{\nontop{N}})\cdots (\derived\Ind{\nontop{1}})H$}
 
-What remains to be done then is to calculate the $H^{(i)}$, first by calculating the Koszul complex on $H^{(i-1)}$, along with its differential and taking homology. If there were no differentials at any stage, $H^{(i)}$ would simply be $\left\langle \Q(I^i)\cdots \Q(I^2)P(I^1)\imath\right\rangle$. This is almost true, as except for the Koszul complex on $H^{(1)}$ which calculates $H^{(2)}$, all of the Koszul complexes have zero differential. Thus, the correct subquotient of the above vector space takes a rather simple form.
+What remains to be done then is to calculate the $H^{(i)}$, by calculating the Koszul complex on $H^{(i-1)}$ along with its differential, and taking homology. If there were no differentials at any stage, $H^{(i)}$ would have basis the $\Q(I^N)\cdots \Q(I^2)P(I^1)\imath$ for which $(I^N,\ldots,I^1)$ satisfies (A)-(C). This is almost true: except for the Koszul complex on $H^{(1)}$ which calculates $H^{(2)}$, all of the Koszul complexes have zero differential. Thus, the correct subquotient of the above vector space takes a rather simple form.
 
 
 
@@ -1356,9 +1386,9 @@ Now to calculate the differential, we use the following formula, setting $x=P(I^
 \[\partial(\Q(I^2)x)=\Q((i_{\ell^2},\ldots,i_2))(\Q^{i_1}x)+\!\!\!\!\!\!\!\!\!\!\!\!\!\!\!\!\!\sum_{\substack{\produces{J}{I^2}{\SqShift}\\(j_{\ell^2},\ldots,j_2)\in\admis{\SqShift}}}\!\!\!\!\!\!\!\!\!\!\!\! \Q((j_{\ell^2},\ldots,j_2))(\Q^{j_1}x).\]
 Now the format of the $\SqShift$-Adem relations shows that in each summand, $j_1$ exceeds $i_1$. As $i_1$ cannot be zero, $j_1$ must then be at least two, so that $Q^{j_1}x=0$ by our calculation of the $\LL{2}$ structure of $H^{(1)}$. Thus, only the first term can be nonzero, and even this term vanishes if $i_1>1$. If $i_1=1$, then $\Q^{i_1}x=\Q^1x=P(I^1)\imath$, so that the differential is
 \[\Q((i^2_{\ell^2},i^2_{\ell^2-1},\ldots,i^2_{2},1))P(I^1)\imath\mapsto \Q((i^2_{\ell^2},i^2_{\ell^2-1},\ldots,i^2_{2}))P(t_dI^1)\imath,\]
-where any $\Q(I^2)P(I^1)\imath$ in which $I^2$ does not end in 1 is sent to zero. As all of these images are linearly independent (when nenzero), the kernel of $\partial$ is spanned by those basis elements in which $I^2$ contains no 1, explaining the restriction on the numerator. Evidently, the denominator is to be the image of $\partial$. We explain the conditions in order that $\Q(I^2)P(I^1)\imath$ is in the image.
+where any $\Q(I^2)P(I^1)\imath$ in which $I^2$ does not end in 1 is sent to zero. As all of these images are linearly independent (when nenzero), the kernel of $\partial$ is spanned by those basis elements in which $I^2$ contains no 1, explaining the presence of condition (D) in the numerator.
 
-It must be that $I^1=t_dJ$, with the following conditions satisfied:
+Evidently, the denominator is to be the image of $\partial$. In order that $\Q(I^2)P(I^1)\imath$ is in the image, it must be that $I^1=t_dJ$, with the following conditions satisfied:
 \begin{enumerate}[A)]
 \squishlist
 \setlength{\parindent}{.25in}
@@ -1423,16 +1453,14 @@ and finally:
 Then for $N\geq2$, if we decompose $H^{(N)}$ as
 %Then we can further decompose $H^{(N)}$ as follows:
 %\[H^{(n)}=\langle \imath\rangle\oplus \left\langle b(S)\ \middle|\ S\in\calS_3^{(N)}\cup \calS_1^{(N)}\right\rangle \oplus \left\langle b(S)\ \middle|\ S\in\calS_2^{(N)}\right\rangle\]
-\[H^{(n)}=\langle \imath\rangle\oplus \left\langle b(S)\ \middle|\ S\in\calS_3^{(N)}\right\rangle \oplus \left\langle b(S)\ \middle|\ S\in\calS_2^{(N)}\right\rangle \oplus\left\langle b(S)\ \middle|\ S\in\calS_1^{(N)}\right\rangle\]
-then the first, second and fourth summands consist of indecomposable elements, while the third summand is the isomorphic image of the fourth under the operation $\Q^0$.
+\[H^{(n)}=\langle \imath\rangle\oplus \left\langle b(S)\ \middle|\ S\in\calS_1^{(N)}\right\rangle \oplus \left\langle b(S)\ \middle|\ S\in\calS_2^{(N)}\right\rangle \oplus\left\langle b(S)\ \middle|\ S\in\calS_3^{(N)}\right\rangle\]
+then the first, second and fourth summands consist of indecomposable elements, while the third summand is the isomorphic image of the second under the operation $\Q^0$.
 
 Next, for $N=1$, if we decompose $H^{(1)}$ as
-\[H^{(1)}= \left\langle b(S)\ \middle|\ S=(I^1)\textup{ satisfies (A), and $\ell^1\geq2$}\right\rangle\]
+\[H^{(1)}= \left\langle b(S)\ \middle|\ S\textup{ satisfies (A), $S\notin\im(t_d)$}\right\rangle\oplus \left\langle b(S)\ \middle|\ S\textup{ satisfies (A), $S\in\im(t_d)$}\right\rangle\]
+then $\Q^1$, the only operation which is even nonzero, has image the second summand. Recall that $t_d$ is only defined in $I^1$ such that $\ell^1\geq1$.
 
 
-then everything in the first two summands is inde
-
-\[\langle \imath\rangle\oplus \left\langle b(S)\ \middle|\ S\in\calS_3^{(N)}\right\rangle \oplus \left\langle b(S)\ \middle|\ S\in\calS_2^{(N)}\right\rangle \oplus\left\langle b(S)\ \middle|\ S\in\calS_1^{(N)}\right\rangle\]
 
 
 
@@ -1461,37 +1489,7 @@ then everything in the first two summands is inde
 %\item Define $\calS^{(N)}_3:=\calS^{(N)}\setminus(\calS^{(N)}_1\cup \calS^{(N)}_2\cup\{(\emptyset,\ldots,\emptyset)\})$.
 %\end{itemize}
 \end{CalculatingRepeatedKoszul}
-\begin{KoszulSequenceCombinatorics}
-\subsection{Combinatorics of  the sequences $I^N,\ldots,I^1$}
-We define the following two quantities, for $k\geq2$, which relate to the question `which sequences $I^k$ are permitted given that $I^{k-1}$ has already been chosen?'
-\begin{itemise}
-\setlength{\parindent}{.25in}
-\item Let $\widetilde{e}^k=\minDim^k-\ell^{k}+1$. This is a nonnegative integer, as if we write $I^k=(i_{\ell^k},\ldots,i_1)$, then, as $I^k$ is $\SqShift$-admissible:
-\[\minDim^k-(\ell^k-1)=(i_{\ell^k}-2i_{\ell^k-1}-1)+ (i_{\ell^k-1}-2i_{\ell^k-2}-1)+\cdots + (i_{2}-2i_{1}-1)+(i_1).\]
-\item Let $f^k=\ell^{k-1}-1-\minDim^k$. This too is nonnegative, as $\minDim^k<\ell^{k-1}$.
-\end{itemise}
-These two quantities measure how wasteful we have been in choosing $I^k$, if our objective is to make $\ell^k$ as large as possible:
-\begin{itemise}
-\setlength{\parindent}{.25in}
-\item $\widetilde{e}^k$ is the total amount of waste caused, first by choosing $i_1$ unnecessarily high, then by choosing $i_2$ unnecessarily high (subject to the admissibility constraint imposed by $i_1$), etc. [Note that choosing the entries of $I^k$ higher than they need to be cramps us for space, leading to shorter sequences being allowed.]
-\item $f^k$ is the waste caused by choosing $I^k$ an unnecessarily short sequence. [Note that given a $\SqShift$-admissible sequence $I$, one can always create another $\SqShift$-admissible sequence $I'$ by adding a single entry onto the left which is as small as possible. This increases both $\ell$ and $\minDim$ by one. If we are trying to maximise $\ell$, we should really do this to $I^k$ whenever $\minDim^k$ is any less than $\ell^{k-1}-1$.]
-\end{itemise}
-The point, then, is that for $k\geq2$, $\ell^k=\ell^{k-1}-\widetilde{e}^k-f^k$. This proves:
-\begin{lem*}
-The sequence $(\ell^N,\ell^{N-1},\ldots,\ell^1)$ is nondecreasing, and whenever $\ell^k=\ell^{k-1}$, it must be that $I^k=(\ldots,7,3,1,0)$.
-\end{lem*}
-%\begin{lem*}
-%Suppose that $I=(i_{\ell},\ldots,i_1)$ is a nonempty $\SqShift$-admissible sequence. Then either
-%\[I=(\ldots,7,3,1,0), \textup{ in which case $\minDim(I)=\ell-1$,}\]
-%or $\minDim(I)\geq\ell$.
-%\end{lem*}
-%\begin{proof}
-%As $I$ is $\SqShift$-admissible, $\minDim(I)=i_{\ell}-i_{\ell-1}-\cdots -i_1$, and we calculate:
-%\[\minDim(I)-(\ell-1)=(i_{\ell}-2i_{\ell-1}-1)+ (i_{\ell-1}-2i_{\ell-2}-1)+\cdots + (i_{2}-2i_{1}-1)+(i_1).\]
-%Each of the parenthesized quantities on the right hand side is nonnegative. If they are all to equal zero, then $I$ must equal $(\ldots,7,3,1,0)$.
-%\end{proof}
 
-\end{KoszulSequenceCombinatorics}
 \begin{DimZeroPart}
 \subsection{Calculation of $E^{2,N}=(\derived\Ind{\LL{N+1}})H^{(N)}$ in zero homological dimension}
 Suppose that $N\geq1$, so that $E^{2,N}:=(\derived\Ind{\LL{N+1}})H^{(N)}$ is the $E^2$ page of the $N^\textup{th}$ Grothendieck spectral sequence. In this section we'll completely calculate the groups
