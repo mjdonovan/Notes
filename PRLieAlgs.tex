@@ -1212,7 +1212,7 @@ Now in order to compress this into the Koszul complex, we must apply Priddy's al
 \end{proof}
 
 \end{LieLambdaStructureOnKoszul}
-\begin{CalculatingRepeatedKoszul}
+\begin{KoszulSequenceCombinatorics}
 \section{Calculations on positive spheres}
 Choose a positive integer $d$, and write $H:=H^*_Q(S^d)$ for the Andr\'e-Quillen cohomology of the $d$-dimensional sphere. It is our goal to compute $(\derived\Ind{\LL{1}})H$, the $E_2$-page for the Adams spectral sequence. For this, it might be useful to calculate, for each $N\geq1$, the derived functors
 \[H^{(N)}:=(\derived\Ind{\nontop{N}})(\derived\Ind{\nontop{N-1}})\cdots (\derived\Ind{\nontop{1}})H\in\LL{N+1}.\]
@@ -1312,7 +1312,6 @@ The only if part is immediate, as removing the leftmost entry of a sequence only
 We should check that $t_dI^1$ is $\delta$-admissible. We only need to check that $d+n^1+\ell^1\geq2i_{\ell^1}$, or $d+1\geq2i_{\ell^1}-n^1-\ell^1+1$, but the right hand side of this inequality is one of the terms in the max defining $d$, so this last inequality holds (even strictly).
 \end{proof}
 
-\begin{KoszulSequenceCombinatorics}
 \subsection{Combinatorics of  the sequences $I^N,\ldots,I^1$}
 We define the following two quantities, for $k\geq2$, which relate to the question ``which sequences $I^k$ are permitted given that $I^{k-1}$ has already been chosen?'' under constraints (A)-(C) as always.
 \begin{itemise}
@@ -1328,9 +1327,9 @@ These two quantities measure how wasteful we have been in choosing $I^k$, if our
 \item $f^k$ is the waste caused by choosing $I^k$ an unnecessarily short sequence. [Note that given a $\SqShift$-admissible sequence $I$, one can always create another $\SqShift$-admissible sequence $I'$ by adding a single entry onto the left which is as small as possible. This increases both $\ell$ and $\minDim$ by one. If we are trying to maximise $\ell$, we should really do this to $I^k$ whenever $\minDim^k$ is any less than $\ell^{k-1}-1$.]
 \end{itemise}
 The point, then, is that for $k\geq2$, $\ell^k=\ell^{k-1}-\widetilde{e}^k-f^k$. This proves:
-\begin{lem*}
+\begin{prop*}
 The sequence $(\ell^N,\ell^{N-1},\ldots,\ell^1)$ is nondecreasing, and whenever $\ell^k=\ell^{k-1}$, it must be that $I^k=(\ldots,7,3,1,0)$.
-\end{lem*}
+\end{prop*}
 %\begin{lem*}
 %Suppose that $I=(i_{\ell},\ldots,i_1)$ is a nonempty $\SqShift$-admissible sequence. Then either
 %\[I=(\ldots,7,3,1,0), \textup{ in which case $\minDim(I)=\ell-1$,}\]
@@ -1342,8 +1341,44 @@ The sequence $(\ell^N,\ell^{N-1},\ldots,\ell^1)$ is nondecreasing, and whenever 
 %Each of the parenthesized quantities on the right hand side is nonnegative. If they are all to equal zero, then $I$ must equal $(\ldots,7,3,1,0)$.
 %\end{proof}
 
+\begin{lem*}
+For $I\in\admis{\SqShift}$,\ \ $2^{\ell(I)}-\ell(I)-1\leq n(I)\leq2^{\minDim(I)+1}-\minDim(I)-2$.
+\end{lem*}
+\begin{proof}
+Note first that there is a bijection
+\[\gamma:\left\{(m_{\ell},\ldots,m_1)\ \middle|\ \ell,m_\ell,\ldots,m_2\geq1,\ m_1\geq0\right\}\overset{\cong}{\to}\admis{\SqShift}\]
+given by the formulae
+\begin{alignat*}{2}
+\gamma:(m_\ell,\ldots,m_1)
+&\mapsto
+(\ldots,2^2m_1+2m_2+m_3,2m_1+m_2,m_1)\\
+\gamma^{-1}:(i_\ell,\ldots,i_1)
+&\mapsto
+(i_\ell-2i_{\ell-1},\ldots,i_2-2i_1,i_1)%
+\end{alignat*}
+under which, for $\textbf{m}=(m_\ell,\ldots,m_1)$:
+\[\minDim(\gamma(\textbf{m}))=\Sigma_im_i\textup{\ and\ }n(\gamma(\textbf{m}))=\sum_{i=0}^{\ell-1}\left(2^{i+1}-1\right)m_{\ell-i}.\]
+The first inequality is easy, as the sum on the right satisfies
+\[n(\gamma(\textbf{m}))=\sum_{i=0}^{\ell-1}\left(2^{i+1}-1\right)m_{\ell-i}\geq\sum_{i=0}^{\ell-2}\left(2^{i+1}-1\right)=2^\ell-\ell-1.\]
+For the next inequality, fix $M$, and consider those $\textbf{m}$ for which $\minDim(\gamma(\textbf{m}))=M$, so that $M=\sum_im_i$. Then $n(\gamma(\textbf{m}))$ cannot exceed $n(\gamma((1,\ldots,1,0)))$, where the $1$ is repeated $M$ times. To see this, note that $n(\gamma(\textbf{m}))$ increases as $\textbf{m}$ becomes more weighted towards $m_i$ for $i$ low, so that the maximum must occur when $\textbf{m}$ is of the form $(1,\ldots,1,a)$. But $n(\gamma((1,\ldots,1,a)))<n(\gamma((1,\ldots,1,a,0)))$ (appending a single zero), so that we settle on $\textbf{m}=(1,\ldots,1,0)$. Then $\ell=M+1$, and:
+\[n(\gamma(\textbf{m}))=\sum_{i=0}^{(M+1)-2}(2^{i+1}-1)=2^{M+1}-M-2\qedhere\]
+\end{proof}
+\begin{cor*}
+The sequence $(n^N,\ldots,n^1)$ is nondecreasing.%, and whenever $n^k=n^{k-1}$, it must be that $\ell^k=\ell^{k-1}$, and $I^k=(\ldots,7,3,1,0)$.
+\end{cor*}
+\begin{proof}
+Write $g$ for the integer sequence $i\mapsto 2^i-i-1$. Then $g(0)=g(1)=0$, and $g(i-1)<g(i)$ for $i\geq2$, and also, $g(i)\leq 2^{i+2}-2$ for $i\geq0$. We've seen that $g(\ell^k)\leq n^k\leq g(\minDim^k+1)$ for all $k\geq2$. That $g$ is nondecreasing, taken with the inequality from constraint (C), gives a chain
+\[\cdots \leq g(\ell^k)\leq n^k\leq g(\minDim^k+1)\leq g(\ell^{k-1})\leq\cdots\leq n^2\leq g(\minDim^2+1)\leq g(\ell^{1}). \]
+Finally, $I^1$ is only $\delta$-admissible, and so doesn't fit into the same pattern. However, $n^1$ can be no less than $\sum_{i=1}^{\ell^1}2^i=2^{\ell^1+1}-2$, as a $\delta$-admissible sequence only involves indices of size \emph{at least $2$}. We can then complete the above chain with further inequalities $g(\ell^1)\leq2^{\ell^1+1}-2\leq n^1$.
+\end{proof}
+\begin{prop*}
+Writing $\left\|\Q(I^N)\cdots \Q(I^1)\imath\right\|=(a_{N+1},\ldots,a_{1})$, suppose that $\ell^N\neq0$. Then $a_i\geq 2a_{i+1}$ for all $i$ with $2\leq i\leq N-1$. Moreover, $a_{N}\geq2a_{N+1}$ unless $I^N=I^{N-1}=(0)$, when $a_{N+1}=a_N=1$.
+\end{prop*}
+\begin{proof}
+When $i=N$, it's enough to note that $n^N\geq\ell^N$ unless $\ell^N=0$. For the cases $2\leq i\leq N-1$, one uses the fact that the sequences $(n^N,\ldots,n^1)$ and $(\ell^N,\ldots,\ell^1)$ are nondecreasing.
+\end{proof}
 \end{KoszulSequenceCombinatorics}
-
+\begin{CalculatingRepeatedKoszul}
 \subsection{Calculation of $H^{(N)}:=(\derived\Ind{\nontop{N}})\cdots (\derived\Ind{\nontop{1}})H$}
 
 What remains to be done then is to calculate the $H^{(N)}$, by calculating the Koszul complex on $H^{(N-1)}$ along with its differential, and taking homology. If there were no differentials at any stage, $H^{(N)}$ would have basis the $\Q(I^N)\cdots \Q(I^2)P(I^1)\imath$ for which $(I^N,\ldots,I^1)$ satisfies (A)-(C). This is almost true: except for the Koszul complex on $H^{(1)}$ which calculates $H^{(2)}$, all of the Koszul complexes have zero differential. Thus, the correct subquotient of the above vector space takes a rather simple form.
@@ -1545,13 +1580,13 @@ using partially restricted Lie algebra homology. From the section on low dimensi
 %\[\Q(\emptyset)\cdots \Q(\emptyset)P(I^1)\imath\overset{\restn{}}{\mapsto}\Q(\emptyset)\cdots \Q(\emptyset)P(t_dI^1)\imath.\]
 %Note that all of the classes $\Q(\emptyset)\cdots \Q(\emptyset)P(t_dI^1)\imath$, where $\ell^1=1$, are linearly independant in $H^{(N)}_0$. Moreover, there is only one basis element in non-restrictable dimensions, and that is $\Q(\emptyset)\cdots \Q(\emptyset)P(\emptyset)\imath$.
 \begin{prop*}
-The graded vector space $E^{2,N}_{a_{N+2},0,a_N,\ldots,a_1}\in\GR{N+1}$ is isomorphic (as a graded vector space only) to the positive part of the algebra
-\[E\left\langle \imath\rule{0mm}{\heightof{$\calS_1^{(N)}$}}\right\rangle \otimes \Gamma_\textup{ev}\left\langle b(S)\ \middle|\ S\in\calS_1^{(N-1)}\right\rangle\otimes E\left\langle b(S)\ \middle|\ S\in\calS_2^{(N-1)}\right\rangle\otimes \Gamma\left\langle b(S)\ \middle|\ S\in\calS_3^{(N-1)}\right\rangle \]
-where by $\Gamma_{\textup{ev}}$ we mean the even divided powers. To calculate the degree of an expression $\prod_j\gamma_{i_j}(x_j)$, one takes $a_{N+2}$ to be $\sum_ji_j-1$, $a_{N+1}$ to be 0, and $(a_N,\ldots,a_1)$ to be $\sum_ji_j\|x_j\|$. That is, to calculate the degree $a_{N+2}$ part, we need to look at monomials of total power $a_{N+2}+1$. \textup{\textbf{(restate)}}
+The graded vector space $E^{2,N}_{a_{N+2},0,a_N,\ldots,a_1}\in\GR{N+1}$ is isomorphic (as a graded vector space only) to the augmentation ideal of the algebra
+\[E\left\langle \imath\rule{0mm}{\heightof{$\calS_1^{(N)}$}}\right\rangle \otimes E\left\langle b(S)\ \middle|\ S\in\calS_1^{(N-1)}\right\rangle\otimes \Gamma_\textup{ev}\left\langle b(S)\ \middle|\ S\in\calS_2^{(N-1)}\right\rangle\otimes \Gamma\left\langle b(S)\ \middle|\ S\in\calS_3^{(N-1)}\right\rangle \]
+where by $\Gamma_{\textup{ev}}$ we mean the even divided powers. To calculate the degree of an expression $\prod_j\gamma_{i_j}(x_j)$, one takes $a_{N+2}$ to be $\sum_ji_j-1$, $a_{N+1}$ to be 0, and $(a_N,\ldots,a_1)$ to be $\sum_ji_j\|x_j\|$. That is, to calculate the degree $a_{N+2}$ part, we need to look at monomials of total power $a_{N+2}+1$.
 \end{prop*}
-\begin{proof} For the course of this proof, we will supress the $(N-1)$ superscripts that normally appear on the $\calS^{(N-1)}$, and also the parentheses that usually appear in $b(S)$.
-The Eilenberg-Cartan-May complex is $E\langle \imath\rangle\otimes \Gamma\left\langle bS\ \middle|\ S\in \calS_1\cup\calS_2\cup\calS_3\right\rangle$ as a vector space. However, there are so few operations nonzero that it splits into a tensor product of complexes
-\[E\langle \imath\rangle\otimes \bigotimes_{S\in\calS_1}\Gamma\langle bS,b\overline{t}_dS\rangle\otimes \Gamma\left\langle bS\ \middle|\ S\in \calS_3\right\rangle\]
+\begin{proof} %For the course of this proof, we will supress the $(N-1)$ superscripts that normally appear on the $\calS^{(N-1)}$, and also the parentheses that usually appear in $b(S)$.
+The Eilenberg-Cartan-May complex is $E\langle \imath\rangle\otimes \Gamma\left\langle bS\ \middle|\ S\in \calS_1^{(N-1)}\cup\calS_2^{(N-1)}\cup\calS_3^{(N-1)}\right\rangle$ as a vector space. As so few operations are nonzero, it splits into a tensor product of complexes
+\[E\langle \imath\rule{0mm}{\heightof{$\calS_1^{(N)}$}}\rangle\otimes \!\!\!\!\!\bigotimes_{S\in\calS_1^{(N-1)}}\!\!\!\!\!\Gamma\langle\rule{0mm}{\heightof{$\calS_1^{(N)}$}} bS,b\overline{t}_dS\rangle\otimes \Gamma\left\langle bS\ \middle|\ S\in \calS_3^{(N-1)}\right\rangle\]
 where only the factors $\Gamma\langle bS,b\overline{t}_dS\rangle$ have nonzero differential. The differential on $\Gamma\langle bS,b\overline{t}_dS\rangle$ is
 \[\gamma_i( bS)\cdot\gamma_j(b\overline{t}_dS)\mapsto\gamma_{i-2}( bS)\cdot b\overline{t}_dS\cdot\gamma_j(b\overline{t}_dS)=\begin{cases}
 \gamma_{i-2}(bS)\cdot\gamma_{j+1}(b\overline{t}_dS),&\textup{if }j\textup{ is even};\\
@@ -1561,7 +1596,7 @@ where only the factors $\Gamma\langle bS,b\overline{t}_dS\rangle$ have nonzero d
 \]
 so that $H_*(\Gamma\langle bS,b\overline{t}_dS\rangle)$ has basis the expressions $\gamma_i(bS)\cdot\gamma_j(b\overline{t}_dS)$ for $i\leq1$ and $j$ even.
 
-Finally note that the CEM complex calculates partially restricted Lie algebra homology, which is only Quillen homology up to a shift, which is why $a_{N-2}$ is $(\sum i_j)-1$.
+Finally note that the CEM complex calculates partially restricted Lie algebra homology, which is only Quillen homology up to a shift, explaining why $a_{N+2}$ is $(\sum i_j)-1$.
 \end{proof}
 
 
