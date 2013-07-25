@@ -6,7 +6,7 @@
 
 
 
-%\def\excludeversion#1{\includeversion{#1}}
+\def\excludeversion#1{\includeversion{#1}}
 \excludeversion{Frontmatter}
 \excludeversion{Endmatter}
 \excludeversion{SteenrodAlgebrasAndTheirKoszulDuals}
@@ -18,9 +18,11 @@
 \excludeversion{DerivedFunctorsLowDimension}
 \excludeversion{PRlieKoszulComplexCalculation}
 \excludeversion{LieLambdaStructureOnKoszul}
+\excludeversion{SequenceOfSequencesIntro}
 \includeversion{KoszulSequenceCombinatorics}
 \excludeversion{CalculatingRepeatedKoszul}
-\excludeversion{DimZeroPart}
+\includeversion{DimZeroPart}
+\includeversion{VanishingLine}
 
 \newcommand{\GS}[1]{\scrE^{#1}}
 \newcommand{\GpS}[1]{\scrE^{#1}_\star}
@@ -1212,7 +1214,11 @@ Now in order to compress this into the Koszul complex, we must apply Priddy's al
 \end{proof}
 
 \end{LieLambdaStructureOnKoszul}
-\begin{KoszulSequenceCombinatorics}
+
+
+
+\begin{SequenceOfSequencesIntro}
+
 \section{Calculations on positive spheres}
 Choose a positive integer $d$, and write $H:=H^*_Q(S^d)$ for the Andr\'e-Quillen cohomology of the $d$-dimensional sphere. It is our goal to compute $(\derived\Ind{\LL{1}})H$, the $E_2$-page for the Adams spectral sequence. For this, it might be useful to calculate, for each $N\geq1$, the derived functors
 \[H^{(N)}:=(\derived\Ind{\nontop{N}})(\derived\Ind{\nontop{N-1}})\cdots (\derived\Ind{\nontop{1}})H\in\LL{N+1}.\]
@@ -1317,7 +1323,10 @@ The only if part is immediate, as removing the leftmost entry of a sequence only
 \[\minDimP(t_dI)=\max\{\minDimP(I),(d+n^1+\ell^1-i_{\ell^1}-\cdots -i_1-\ell^1)\}=\max\{\minDimP(I),d\}=d.\]
 We should check that $t_dI^1$ is $\delta$-admissible. We only need to check that $d+n^1+\ell^1\geq2i_{\ell^1}$, or $d+1\geq2i_{\ell^1}-n^1-\ell^1+1$, but the right hand side of this inequality is one of the terms in the max defining $d$, so this last inequality holds (even strictly).
 \end{proof}
+\end{SequenceOfSequencesIntro}
 
+
+\begin{KoszulSequenceCombinatorics}
 \subsection{Combinatorics of  the sequences $(I^N,\ldots,I^1)$}
 Suppose that $k\geq2$, and that we've already chosen $(I^{k-1},\ldots,I^1)$ satisfying \textup{(A)}-\textup{(C)}. One may ask the question ``which sequences $I^k$ can we choose so that \textup{(A)}-\textup{(C)} hold for $(I^{k},\ldots,I^1)$?'' To investigate this question, for a given choice $I^k$ with $\ell^{k}>0$, we define the following two quantities:
 %We define the following two quantities, for $k\geq2$, which relate to the question ``which sequences $I^k$ are permitted given that $I^{k-1}$ has already been chosen?'' under constraints \textup{(A)}-\textup{(C)} as always. Define the following two quantities when $\ell^k>0$:
@@ -1559,7 +1568,7 @@ As an object of $\LL{N+1}$, all the structure maps are trivial except for $\Q^0$
 %$\Q(\emptyset)\cdots \Q(\emptyset)P(I^1)\imath\mapsto \Q(\emptyset)\cdots \Q(\emptyset)P(t_dI^1)\imath$.
 \end{prop*}
 \begin{proof}
-In order to obtain this description of the underlying vector space, we must show that none of the Koszul complexes have nonzero differential from this point on. This is true of that calculating $H^{(3)}$, as the only nonzero operation on $H^{(2)}$ is a \emph{top} operation. If this pattern continues, we'll never see any differentials.
+In order to obtain this description of the underlying vector space, we must show that none of the Koszul complexes have nonzero differential from this point on. This is true of the Koszul complex calculating $H^{(3)}$, as the only nonzero operation on $H^{(2)}$ is a \emph{top} operation. If this pattern continues, we'll never see any differentials.
 
 By our theorems above, the only operations with a chance of being nonzero are the $Q^0$. As before, consider the operation $Q^0$ on cycles $\Q(I^3)\Q(I^2)P(I^1)\imath$ with $\ell^3>0$. On these classes, $\ell^2>0$, so that $\Q(I^2)P(I^1)\imath$ is in the kernel of $\Q$ operation defined thereupon. Our lemma above then shows that $Q^0$ vanishes on such cycles. Next, consider $\Q^0$ on cycles $\Q(\emptyset)\Q(I^2)P(I^1)\imath$. This takes value $\Q(\emptyset)\Q^{\ell^2}\Q(I^2)P(I^1)\imath$, which is only nonzero if $\ell^2=0$ and $\ell^1=1$. This confirms all our claims for $N=3$, and these arguments can be repeated for larger $N$.
 \end{proof}
@@ -1598,10 +1607,11 @@ and let $\overline{t}_d:\calS_1^{(N)}\to\calS^{(N)}$ be the function $(\emptyset
 \{(\emptyset,\ldots,\emptyset,(d+i+1,i))\ |\ 2\leq i\leq d\}% Comment
 &\qquad&\text{(if $N>0$)}
 \end{alignat*}
-
 and finally:
 \[\calS^{(N)}_3:=\calS^{(N)}\setminus(\calS^{(N)}_1\cup \calS^{(N)}_2\cup\{(\emptyset,\ldots,\emptyset)\}).\]
-In case $N=0$, $\calS^{(N)}_1$, $\calS^{(N)}_2$ and $\calS^{(N)}_3$ are all empty.
+In case $N=0$, $\calS^{(N)}_1$, $\calS^{(N)}_2$ and $\calS^{(N)}_3$ are all empty. For all $N\geq0$, $\calS^{(N)}$ is the disjoint union:
+\[\calS^{(N)}=\{(\emptyset,\ldots,\emptyset)\}\cup\calS^{(N)}_1\cup\calS^{(N)}_2\cup\calS^{(N)}_3.\]
+
 \begin{thm*}
 If we decompose $H^{(1)}\in\LL{2}$ as
 %\[H^{(1)}= \left\langle b(S)\ \middle|\ S\textup{ satisfies \textup{(A)}, $S\notin\im(t_d)$}\right\rangle\oplus \left\langle b(S)\ \middle|\ S\textup{ satisfies \textup{(A)}, $S\in\im(t_d)$}\right\rangle\]
@@ -1616,7 +1626,7 @@ For $N\geq2$, if we decompose $H^{(N)}\in\LL{N+1}$ as
 \left\langle b(S)\ \middle|\ S\in\calS_1^{(N)}\right\rangle \oplus \left\langle b(S)\ \middle|\ S\in\calS_2^{(N)}\right\rangle \oplus\left\langle b(S)\ \middle|\ S\in\calS_3^{(N)}\right\rangle\]
 then the first, second and fourth summands consist of indecomposable elements, while the third summand is the isomorphic image of the second under the operation $\Q^0$.
 
-For $N\geq1$, we can decompose $H^{(N)}_0\in\PRLie{N}$ as 
+For $N\geq1$, if we decompose $H^{(N)}_0\in\PRLie{N}$ as 
 \[H^{(N)}_0=\left\langle \imath\rule{0mm}{\heightof{$\calS_1^{(N)}$}}\right\rangle\oplus \left\langle b(S)\ \middle|\ S\in\calS_1^{(N-1)}\right\rangle \oplus \left\langle b(S)\ \middle|\ S\in\calS_2^{(N-1)}\right\rangle \oplus\left\langle b(S)\ \middle|\ S\in\calS_3^{(N-1)}\right\rangle,\]
 and the restriction, defined on the last three summands, sends the second isomorphically onto the third, and vanishes on the third and fourth summands.
 \end{thm*}
@@ -1705,10 +1715,33 @@ so that $H_*(\Gamma\langle bS,b\overline{t}_dS\rangle)$ has basis the expression
 Finally note that the CEM complex calculates partially restricted Lie algebra homology, which is only Quillen homology up to a shift, explaining why $a_{N+2}$ is $(\sum i_j)-1$.
 \end{proof}
 
-
-
-
 \end{DimZeroPart}
+
+\begin{VanishingLine}
+\subsection{A vanishing line}
+We've seen above that there are vector space epimorphisms
+\[\left\langle b(S)\ \middle|\ S\in\calS^{(N)}\right\rangle\to E^{2,N}_{0,a_{N+1},a_N,\ldots,a_1}\]
+and vector space monomorphisms
+\[E^{2,N}_{a_{N+2},0,a_N,\ldots,a_1}\to \Gamma_{a_{N+2}+1}\left\langle \Q(\emptyset)b(S)\ \middle|\ S\in\calS^{(N-1)}\right\rangle_{0,a_N,\ldots,a_1}\]
+And for every element $S\in\calS^{(N)}$, we know that $a_1\geq\tfrac{9}{4}(a_2+\cdots +a_{N+1})+2^{N-1}(d+1)-1$. If we write
+\[t:=a_1,\ s:=a_2+\cdots +a_{N+1},\]
+this translates into an inequality $t-s\geq\tfrac{5}{4}s+2^{N-1}(d+1)-1$. In fact, as $d>0$, this implies
+\[t-s\geq\tfrac{5}{4}s+1.\]
+\begin{thm*}
+The Adams spectral sequence for a positive sphere admits a vanishing line of slope $\tfrac{4}{5}$. That is, 
+\[E_2^{s,t}=0\textup{\ for $s> \tfrac{4}{5}(t-s)$.}\]
+In particular, the Adams spectral sequence converges on positive spheres.
+\end{thm*}
+\begin{proof}
+To follow.%Every class in the ASS comes from one of the first two axes in some Grothendieck spectral sequence. If it comes from $\Ind{}$, that's fine. If it comes from $\Gamma$, well, 
+\end{proof}
+
+
+\end{VanishingLine}
+
+
+
+
 \begin{Endmatter}
 \printbibliography
 \end{Endmatter}
