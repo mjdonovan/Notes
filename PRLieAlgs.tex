@@ -6,7 +6,7 @@
 
 
 
-\def\excludeversion#1{\includeversion{#1}}
+%\def\excludeversion#1{\includeversion{#1}}
 \excludeversion{Frontmatter}
 \excludeversion{Endmatter}
 \excludeversion{SteenrodAlgebrasAndTheirKoszulDuals}
@@ -21,8 +21,9 @@
 \excludeversion{SequenceOfSequencesIntro}
 \includeversion{KoszulSequenceCombinatorics}
 \excludeversion{CalculatingRepeatedKoszul}
-\includeversion{DimZeroPart}
-\includeversion{VanishingLine}
+\excludeversion{DimZeroPart}
+\excludeversion{VanishingLines}
+\includeversion{SkippableProofs}
 
 \newcommand{\GS}[1]{\scrE^{#1}}
 \newcommand{\GpS}[1]{\scrE^{#1}_\star}
@@ -1328,7 +1329,13 @@ We should check that $t_dI^1$ is $\delta$-admissible. We only need to check that
 
 \begin{KoszulSequenceCombinatorics}
 \subsection{Combinatorics of  the sequences $(I^N,\ldots,I^1)$}
-Suppose that $k\geq2$, and that we've already chosen $(I^{k-1},\ldots,I^1)$ satisfying \textup{(A)}-\textup{(C)}. One may ask the question ``which sequences $I^k$ can we choose so that \textup{(A)}-\textup{(C)} hold for $(I^{k},\ldots,I^1)$?'' To investigate this question, for a given choice $I^k$ with $\ell^{k}>0$, we define the following two quantities:
+Suppose that $k\geq2$, and that we've already chosen $(I^{k-1},\ldots,I^1)$ satisfying \textup{(A)}-\textup{(C)}. One may ask the question ``which sequences $I^k$ can we choose so that \textup{(A)}-\textup{(C)} hold for $(I^{k},\ldots,I^1)$?''
+\begin{prop*}
+Suppose that $S=(I^N,\ldots,I^1)$ satisfies \textup{(A)}-\textup{(C)}. Then the sequence $(\ell^N,\ell^{N-1},\ldots,\ell^1)$ is nondecreasing, and $I^k=(\ldots,7,3,1,0)$ whenever $\ell^k=\ell^{k-1}$.%, it must be that $I^k=(\ldots,7,3,1,0)$.
+\end{prop*}
+\begin{proof}
+\begin{SkippableProofs}
+To investigate this question, for a given choice $I^k$ with $\ell^{k}>0$, we define the following two quantities:
 %We define the following two quantities, for $k\geq2$, which relate to the question ``which sequences $I^k$ are permitted given that $I^{k-1}$ has already been chosen?'' under constraints \textup{(A)}-\textup{(C)} as always. Define the following two quantities when $\ell^k>0$:
 \begin{itemise}
 \setlength{\parindent}{.25in}
@@ -1342,41 +1349,47 @@ These two quantities measure how wasteful we have been in choosing $I^k$, if our
 \item $\widetilde{e}^k$ is the total amount of waste caused, first by choosing $i_1$ unnecessarily high, then by choosing $i_2$ unnecessarily high (subject to the admissibility constraint imposed by $i_1$), etc. [Note that choosing the entries of $I^k$ higher than they need to be cramps us for space, leading to shorter sequences being allowed.]
 \item $f^k$ is the waste caused by choosing $I^k$ an unnecessarily short sequence. [Note that given a $\SqShift$-admissible sequence $I$, one can always create another $\SqShift$-admissible sequence $I'$ by adding a single entry onto the left which is as small as possible. This increases both $\ell$ and $\minDim$ by one. If we are trying to maximise $\ell$, we should really do this to $I^k$ whenever $\minDim^k$ is any less than $\ell^{k-1}-1$.]
 \end{itemise}
-The point, then, is that whenever $\ell^k>0$ for $k\geq2$, $\ell^k=\ell^{k-1}-\widetilde{e}^k-f^k$, and thus:
-\begin{prop*}
-The sequence $(\ell^N,\ell^{N-1},\ldots,\ell^1)$ is nondecreasing, and whenever $\ell^k=\ell^{k-1}$, it must be that $I^k=(\ldots,7,3,1,0)$.
-\end{prop*}
+The point, then, is that whenever $\ell^k>0$ for $k\geq2$, $\ell^k=\ell^{k-1}-\widetilde{e}^k-f^k$.
+\end{SkippableProofs}\end{proof}
 
 \begin{lem*}
 For $I\in\admis{\SqShift}$ with $\ell(I)>0$,
-\[2^{\ell(I)}-\ell(I)-1\leq n(I)\leq2^{\minDim(I)+1}-\minDim(I)-2\]
-and if $I$ does not contain either 0 or 1, these inequalities can be strengthened to
+\begin{equation}
+2^{\ell(I)}-1-\ell(I)\leq n(I)\leq2^{\minDim(I)+1}-\minDim(I)-2.\tag{i.1) \& (i.2}
+\end{equation}
+If $I$ does not contain 0, then \textup{(i.1)} can be strengthened:
+\[2(2^{\ell(I)}-1)-\ell(I)\leq n(I),\]
+and if $I$ does not contain either 0 or 1, both \textup{(i.1)} and \textup{(i.2)} can be strengthened:
 \[3(2^{\ell(I)}-1)-\ell(I)\leq n(I)\leq 3\cdot2^{\minDim(I)-1}-\minDim(I)-2.\]
 %the first inequality can be strengthened to $n(I)\geq 3(2^{\ell(I)}-1)-\ell(I)$.
 \end{lem*}
 \begin{proof}
+\begin{SkippableProofs}
 Note first that there is a bijection, for $\ell\geq1$:
 %\[\gamma:\left\{(m_{\ell},\ldots,m_1)\ \middle|\ \ell,m_\ell,\ldots,m_2\geq1,\ m_1\geq0\right\}\overset{\cong}{\to}\admis{\SqShift}\]
 \[\gamma:\left\{(m_{\ell},\ldots,m_1)\ \middle|\ m_\ell,\ldots,m_2\geq1,\ m_1\geq0\right\}\overset{\cong}{\to}\left\{\textup{$\SqShift$-admissible sequences of length $\ell$}\right\}\]
 given by the formulae
+
+
 \begin{alignat*}{2}
-\gamma:(m_\ell,\ldots,m_1)
-&\mapsto
+\gamma:\left\{(m_{\ell},\ldots,m_1)\ \middle|\ m_\ell,\ldots,m_2\geq1,\ m_1\geq0\right\}&\overset{\cong}{\to}\left\{\textup{$\SqShift$-admissible sequences of length $\ell$}\right\}
+\\
+(m_\ell,\ldots,m_1)
+&\overset{\gamma}{\mapsto}
 (\ldots,2^2m_1+2m_2+m_3,2m_1+m_2,m_1)\\
-\gamma^{-1}:(i_\ell,\ldots,i_1)
-&\mapsto
-(i_\ell-2i_{\ell-1},\ldots,i_2-2i_1,i_1)%
+(i_\ell-2i_{\ell-1},\ldots,i_2-2i_1,i_1)
+&\overset{\gamma^{-1}}{\mapsfrom}
+(i_\ell,\ldots,i_1)%
 \end{alignat*}
-under which, for $\textbf{m}=(m_\ell,\ldots,m_1)$:
-\[\minDim(\gamma(\textbf{m}))=\Sigma_im_i\textup{\ and\ }n(\gamma(\textbf{m}))=\sum_{i=0}^{\ell-1}\left(2^{i+1}-1\right)m_{\ell-i},\]
-and the condition that $\gamma(\textbf{m})$ contains no 0 or 1 translates simply to $m_1\geq2$.
-Both the first inequality and its strengthening are easy:
+The condition that $\gamma(\textbf{m})$ contains no 0 (resp.\ no 0 or 1) translates simply to $m_1\geq1$ (resp.\ $m_1\geq2$).
+Both \textup{(i.1)} and its two strengthenings are easy:
 \[n(\gamma(\textbf{m}))=\sum_{i=0}^{\ell-1}\left(2^{i+1}-1\right)m_{\ell-i}\geq(2^{\ell}-1)m_1+ \sum_{i=0}^{\ell-2}\left(2^{i+1}-1\right)
-=(2^{\ell}-1)m_1+2^\ell-\ell-1.\]
-For the next inequality, fix $M$, and consider those $\textbf{m}$ for which $\minDim(\gamma(\textbf{m}))=M$, so that $M=\sum_im_i$. Then $n(\gamma(\textbf{m}))$ cannot exceed $n(\gamma((1,\ldots,1,0)))$, where the $1$ is repeated $M$ times. To see this, note that $n(\gamma(\textbf{m}))$ increases as $\textbf{m}$ becomes more weighted towards $m_i$ for $i$ low, so that the maximum must occur when $\textbf{m}$ is of the form $(1,\ldots,1,a)$. But $n(\gamma((1,\ldots,1,a)))<n(\gamma((1,\ldots,1,a,0)))$ (appending a single zero), so that we settle on $\textbf{m}=(1,\ldots,1,0)$. Then $\ell=M+1$, and:
-\[n(\gamma(\textbf{m}))=\sum_{i=0}^{(M+1)-2}(2^{i+1}-1)=2^{M+1}-M-2.\]
-To prove the strengthening, a similar argument, after restricting to those $\textbf{m}$ with $m_1\geq2$, shows that $n(\gamma(\textbf{m}))$ is maximised when $\textbf{m}=(1,\ldots,1,2)$, with $\ell=M-1$. Then
+=(2^{\ell}-1)m_1+(2^\ell-1)-\ell.\]
+For \textup{(i.2)}, fix $M$, and consider those $\textbf{m}$ for which $\minDim(\gamma(\textbf{m}))=M$, so that $M=\sum_im_i$. Then $n(\gamma(\textbf{m}))$ cannot exceed $n(\gamma((1,\ldots,1)))$, where the $1$ is repeated $M$ times. To see this, note that $n(\gamma(\textbf{m}))$ increases as $\textbf{m}$ becomes more weighted towards $m_i$ for $i$ low, so that the maximum must occur when $\textbf{m}$ is of the form $(1,\ldots,1,a)$. But $n(\gamma((1,\ldots,1,a)))\leq n(\gamma((1,\ldots,1,1,a-1)))$ whenever $a\geq1$, with equality iff $a=1$, so $\minDim(\gamma(\textbf{m}))$ is maximised on $\textbf{m}=(1,\ldots,1)$, with $\ell=M$, and:
+\[n(\gamma(\textbf{m}))=\sum_{i=0}^{M-1}(2^{i+1}-1)=2^{M+1}-M-2.\]
+To prove the strengthening of \textup{(i.2)}, a similar argument, after restricting to those $\textbf{m}$ with $m_1\geq2$, shows that $n(\gamma(\textbf{m}))$ is maximised when $\textbf{m}=(1,\ldots,1,2)$, with $\ell=M-1$. Then
 \[n(\gamma(\textbf{m}))=(2^{M-1}-1)\cdot2+\sum_{i=0}^{(M-1)-2}(2^{i+1}-1)=3\cdot2^{M-1}-M-2.\qedhere\]
+\end{SkippableProofs}
 \end{proof}
 %\begin{cor*}Suppose that $N\geq2$ and $(I^N,\ldots,I^1)$ satisfies \textup{(A)}-\textup{(D)}.
 %Then the sequence $(n^N,\ldots,n^1)$ is nondecreasing.%, and whenever $n^k=n^{k-1}$, it must be that $\ell^k=\ell^{k-1}$, and $I^k=(\ldots,7,3,1,0)$.
@@ -1415,73 +1428,105 @@ To prove the strengthening, a similar argument, after restricting to those $\tex
 %When $i=N$, it's enough to note that $n^N\geq\ell^N$ unless $I^N=(0)$. For the cases $2\leq i\leq N-1$, one uses the fact that the sequences $(n^N,\ldots,n^1)$ and $(\ell^N,\ldots,\ell^1)$ are nondecreasing.
 %\end{proof}
 
-\begin{cor*}Suppose that $N\geq1$ and that $(I^N,\ldots,I^1)$ satisfies \textup{(A)}-\textup{(D)} with $\ell^N>0$.
+%\begin{cor*}Suppose that $N\geq1$ and that $(I^N,\ldots,I^1)$ satisfies \textup{(A)}-\textup{(C)} with $\ell^N>0$.
+%Then if $N\geq2$ there is a chain of $N-1$ inequalities:
+%\[n^N\leq n^{N-1}\leq\cdots \leq n^2\leq \tfrac{1}{2}n^1,\]
+%and a chain of $N$ inequalities:
+%\[(\ell^N)\leq(\ell^{N-1}+n^N)\leq(\ell^{N-2}+n^{N-1})\leq\cdots \leq (\ell^2+n^3)\leq\tfrac{1}{2}(\ell^1+n^2)\leq \tfrac{1}{3}(n^1+\ell^1).\]
+%When $S$ also satisfies \textup{(D)}, we can strengthen the second last inequality:
+%\[(\ell^N)\leq(\ell^{N-1}+n^N)\leq(\ell^{N-2}+n^{N-1})\leq\cdots \leq (\ell^2+n^3)\leq\tfrac{1}{3}(\ell^1+n^2)\leq \tfrac{2}{9}(n^1+\ell^1).\]
+%%$(n^N,\ldots,n^2,n^1/2)$ is nondecreasing, and there's a chain of inequalities, for $N\geq3$:
+%%\[\ell^N\leq\ell^{N-1}+n^N\leq\ell^{N-2}+n^{N-1}\leq\cdots \leq \ell^2+n^3\leq(\ell^1+n^2)/3.\]
+%%\[\ell^1+n^2\geq3(\ell^2+n^3),\]
+%If $N=1$, the stronger inequality $\ell^1\leq\tfrac{1}{3}(n^1+\ell^1)$ is satisfied.
+%\end{cor*}
+
+
+\begin{cor*}Suppose that $N\geq1$ and that $(I^N,\ldots,I^1)$ satisfies \textup{(A)}-\textup{(C)} with $\ell^N>0$.
 Then if $N\geq2$ there is a chain of $N-1$ inequalities:
-\[n^N\leq n^{N-1}\leq\cdots \leq n^2\leq \tfrac{1}{2}n^1,\]
-and a chain of $N$ inequalities:
-\[(\ell^N)\leq(\ell^{N-1}+n^N)\leq(\ell^{N-2}+n^{N-1})\leq\cdots \leq (\ell^2+n^3)\leq\tfrac{1}{3}(\ell^1+n^2)\leq \tfrac{2}{9}(n^1+\ell^1).\]
-%$(n^N,\ldots,n^2,n^1/2)$ is nondecreasing, and there's a chain of inequalities, for $N\geq3$:
-%\[\ell^N\leq\ell^{N-1}+n^N\leq\ell^{N-2}+n^{N-1}\leq\cdots \leq \ell^2+n^3\leq(\ell^1+n^2)/3.\]
-%\[\ell^1+n^2\geq3(\ell^2+n^3),\]
-If $N=1$, the stronger inequality $\ell^1\leq\tfrac{1}{3}(n^1+\ell^1)$ is satisfied.
+\begin{equation}
+n^N\leq n^{N-1}\leq\cdots \leq n^2\leq \tfrac{1}{2}n^1,\tag{c.1}
+\end{equation}
+and a chain of $N-2$ inequalities:
+\begin{equation}
+(\ell^N)\leq(\ell^{N-1}+n^N)\leq(\ell^{N-2}+n^{N-1})\leq\cdots \leq (\ell^2+n^3)\tag{c.2}
+\end{equation}
+Moreover (reading $n^3$ as zero when $N=2$):
+\begin{equation}
+3(\ell^1+n^2)\leq 2(n^1+\ell^1)\textup{\ and\ }2(\ell^2+n^3)\leq(\ell^1+n^2).\tag{i.3) \& (i.4}
+\end{equation}
+When $S$ also satisfies \textup{(D)}, we have a stronger version of \textup{(i.4)}, $3(\ell^2+n^3)\leq(\ell^1+n^2)$.
+Finally, when $N=1$, we obtain only one inequality, a stronger version $3\ell^1\leq(n^1+\ell^1)$ of \textup{(i.3)}.
 \end{cor*}
 
 \begin{proof}
-Write $g$ for the integer sequence $i\mapsto 2^i-i-1$. Then $g(0)=g(1)=0$, and $g(i-1)<g(i)$ for $i\geq2$.
+\begin{SkippableProofs}
+Write $g(i):=2^i-i-1$. Evidently, $g(0)=g(1)=0$, and $g(i-1)<g(i)$ for $i\geq2$.
 %, and also, $g(i)\leq 2^{i+1}-2$ for $i\geq0$. 
-We've seen that $g(\ell^k)\leq n^k\leq g(\minDim^k+1)$ for all $k\geq2$. That $g$ is nondecreasing, taken with the inequality from constraint \textup{(C)}, gives a chain
+Inequalities \textup{(i.1)} and \textup{(i.2)} state that $g(\ell^k)\leq n^k\leq g(\minDim^k+1)$ for all $k\geq2$. That $g$ is nondecreasing, taken with the inequality $m^i<\ell^{i-1}$ from \textup{(C)}, gives a chain
 \[\cdots \leq n^k\leq g(\minDim^k+1)\leq g(\ell^{k-1})\leq n^{k-1}\leq\cdots\leq n^2\leq g(\minDim^2+1)\leq g(\ell^{1}). \]
-Although $I^1$ doesn't fit into the same pattern, $n^1$ can be no less than $\sum_{i=1}^{\ell^1}2^i=2^{\ell^1+1}-2$, as a $\delta$-admissible sequence only involves indices of size \emph{at least $2$}. We can then complete the above chain with further inequalities $g(\ell^1)\leq2^{\ell^1}-1\leq n^1/2$, giving the first chain we wished to prove. As $(\ell^N,\ldots,\ell^1)$ is nondecreasing, this shows all but the final two inequalities of the second chain, and the $N=1$ case.
+Although $I^1$ doesn't fit into the same pattern, $n^1$ can be no less than $\sum_{i=1}^{\ell^1}2^i=2^{\ell^1+1}-2$, as a $\delta$-admissible sequence only involves indices of size \emph{at least $2$}. We can then augment the above chain with further inequalities $g(\ell^1)\leq2^{\ell^1}-1\leq n^1/2$, verifying \textup{(c.1)}. As $(\ell^N,\ldots,\ell^1)$ is nondecreasing, \textup{(c.1)} implies \textup{(c.2)}.%, and also the $N=1$ case of \textup{(i.3)}.
 
-The inequality $\ell^1\leq\tfrac{1}{3}(n^1+\ell^1)$ in fact holds for all $N$, and follows from the observation that $n^1\geq2\ell^1$ (as $n^1\geq 2^{\ell^1+1}-2\geq 2\ell^1$).
-
-Let's demonstrate that $(\ell^1+n^2)\geq3(\ell^2+n^3)$ when $N\geq2$ (where if $N=2$, we read $n^3$ as zero). As $I^2$ can contain no 0 or 1, the stronger inequality $3(2^{\ell^2}-1)-\ell^2\leq n^2$ holds. Moreover, we've just shown that $n^3\leq g(\ell^2)=2^{\ell^2}-\ell^2-1$.
-Then $(\ell^1+n^2)\geq (n^2+\ell^2)\geq3(2^{\ell^2}-1)\geq3(\ell^2+n^3)$.
-
-That $3(\ell^1+n^2)\leq2(n^1+\ell^1)$ when $N\geq2$ follows from established inequalities:
-\[2(n^1+\ell^1)-3(\ell^1+n^2)=\tfrac{3}{2}(n^1-2n^2)+\tfrac{1}{2}(n^1-2\ell^1)\geq0+0=0.\qedhere\]
+The inequality $3\ell^1\leq(n^1+\ell^1)$ in fact holds for all $N$, and follows from the observation that $n^1\geq2\ell^1$ (as $n^1\geq 2^{\ell^1+1}-2\geq 2\ell^1$). This proves the version of \textup{(i.3)} relevant when $N=1$. When $N\geq2$, \textup{(i.3)} follows from established inequalities:
+\[2(n^1+\ell^1)-3(\ell^1+n^2)=\tfrac{3}{2}(n^1-2n^2)+\tfrac{1}{2}(n^1-2\ell^1)\geq0+0=0.\]
+This leaves the two versions of \textup{(i.4)}. Write $\rho=3$ when \textup{(D)} holds, and $\rho=2$ otherwise. Then
+%Let's demonstrate that $(\ell^1+n^2)\geq3(\ell^2+n^3)$ when $N\geq2$ (where if $N=2$, we read $n^3$ as zero). As $I^2$ can contain no 0 or 1, 
+the relevant version of \textup{(i.1)} is $\rho(2^{\ell^2}-1)-\ell^2\leq n^2$. Moreover, we've just shown that $n^3\leq g(\ell^2)=2^{\ell^2}-\ell^2-1$.
+Then $(\ell^1+n^2)\geq (n^2+\ell^2)\geq\rho(2^{\ell^2}-1)\geq\rho(\ell^2+n^3)$.
+\end{SkippableProofs}
 \end{proof}
 \begin{prop*}
-Suppose that $N\geq1$ and that $S=(I^N,\ldots,I^1)$ satisfies \textup{(A)}-\textup{(D)} with $\ell^N>0$. Let $(a_{N+1},\ldots,a_1)$ be the degree of $b(S)$.
-\begin{itemize}
+Suppose that $N\geq1$ and that $S=(I^N,\ldots,I^1)$ satisfies \textup{(A)}-\textup{(C)} with $\ell^N>0$. Let $(a_{N+1},\ldots,a_1)$ be the degree of $b(S)$.
+\begin{enumerate}[i)]
 \setlength{\parindent}{.25in}
 \squishlist
 \item Suppose that $N=1$. Then
 \[a_1\geq3a_2+d.\]
 \item Suppose that $N\geq2$. Then 
+\[a_1\geq2(a_2+\cdots +a_{N+1})+2^{N-1}(d+1)-1\textup{ \ and \ }a_2\geq2(a_3+\cdots +a_{N+1}).\]
+and when $S$ also satisfies \textup{(D)}, these inequalities may be strengthened:
 \[a_1\geq\tfrac{9}{4}(a_2+\cdots +a_{N+1})+2^{N-1}(d+1)-1\textup{ \ and \ }a_2\geq3(a_3+\cdots +a_{N+1}).\]
 \item Suppose that $N\geq3$. Then for $i$ satisfying $3\leq i\leq N$,
 \[a_i\geq a_{i+1}+\cdots +a_{N+1}.\]
-\end{itemize}
+\end{enumerate}
 \end{prop*}
 \begin{proof}
-Suppose that $N=1$, so that $(a_2,a_1)=(\ell^1,d+n^1+\ell^1)$. Then the inequality required is equivalent to $n^1\geq2\ell^1$, which we've established.
+\begin{SkippableProofs}
+Suppose that $N=1$, so that $(a_2,a_1)=(\ell^1,d+n^1+\ell^1)$. Then the inequality required is equivalent to $n^1\geq2\ell^1$, which we established in the previous proof, demonstrating (i).
 
-Now suppose that $N\geq2$. As all of the $\ell^i$ are at least 1, the chain of inequalities of the previous corollary implies:
+Now suppose that $N\geq2$, and as before, write $\rho=3$ when \textup{(D)} holds, and $\rho=2$ otherwise. As all of the $\ell^i$ are at least 1, \textup{(c.2)} and \textup{(i.4)} imply:
 \begin{itemise}
 %\setlength{\parindent}{.25in}
-\item $3a_3\leq a_2$ when $N=2$;
-\item $a_4\leq a_3$ and $6a_3\leq a_2$ when $N=3$;
-\item $a_5\leq a_4$, $2a_4\leq a_3$ and $6a_3\leq a_2$ when $N=4$;
-\item $a_6\leq a_5$, $2a_5\leq a_4$, $2a_4\leq a_3$ and $6a_3\leq a_2$ when $N=5$; etc.
+\item $\rho a_3\leq a_2$ when $N=2$;
+\item $a_4\leq a_3$ and $2\rho a_3\leq a_2$ when $N=3$;
+\item $a_5\leq a_4$, $2a_4\leq a_3$ and $2\rho a_3\leq a_2$ when $N=4$;
+\item $a_6\leq a_5$, $2a_5\leq a_4$, $2a_4\leq a_3$ and $2\rho a_3\leq a_2$ when $N=5$; etc.
 \end{itemise}
-When $N=2$, the inequality $a_2\geq3(a_3+\cdots +a_{N+1})$ is already in this list, and for $N\geq3$, we proceed as follows. For $3\leq i\leq N$:
-\[a_i\geq 2a_{i+1}\geq a_{i+1}+2a_{i+2}\geq\cdots \geq a_{i+1}+\cdots +a_{N+1}.\]
-This proves the final set of inequalities in the statement, and setting $i=3$, we derive
-\[a_2\geq 6a_3\geq 3a_3+3(a_4+\cdots +a_{N+1})=3(a_3+\cdots +a_{N+1}).\]
-%\[a_2/3\geq 2a_3\geq a_3+2a_4\geq a_3+a_4+2a_5\geq\cdots \geq a_3+\cdots +a_{N+1}.\]
-%In any case, one readily derives that $a_2\geq3(a_3+\cdots +a_{N+1})$, for example, when $N=5$:
-%\[\frac{1}{3}a_2\geq2a_3\geq a_3+2a_4\geq a_3+a_4+2a_5\geq a_3+a_4+a_5+a_6.\]
-%%\[a_{N+1}\leq a_N,\quad 2a_{N}\leq a_{N-1},\ldots, 2a_{4}\leq a_{3},\quad 6a_3\leq a_2\]
-%The inequalities $a_i\geq a_{i+1}+\cdots +a_{N+1}$ for $i\geq3$ are proven as above.
-For brevity, write $\overline{a}_1:=a_1-(2^{\ell^N+\cdots +\ell^2}(d+1)-1)=2^{\ell^N+\cdots +\ell^2}(n^1+\ell^1)$. As $\ell^N,\ldots,\ell^2\geq1$, it's enough to show that $\overline{a}_1>\tfrac{9}{4}(a_2+\cdots +a_{N+1})$. But the previous corollary states that $n^1+\ell^1\geq\tfrac{3}{2}(\ell^1+n^2)$, so that $\overline{a}_1\geq3\cdot2^{\ell^N+\cdots +\ell^2-1}(\ell^1+n^2)\geq 3a_2$. Thus, we derive:
-\[4\overline{a}^1\geq 12a_2\geq9a_2+3\cdot3(a_3+\cdots +a_{N+1})=9(a_2+\cdots +a_{N+1}).\qedhere\]
-%Evidently, the same method proves the remaining inequality $a_i\geq a_{i+1}+\cdots +a_{N+1}$ for $i\geq3$.
-%\[a_2/3\geq 2a_3\geq a_3+2a_4\geq a_3+a_4+2a_5\geq\cdots \geq a_3+\cdots +a_{N+1}.\qedhere\]
+These imply (iii), as when $3\leq i\leq N$:
+\[a_i\geq 2a_{i+1}\geq a_{i+1}+2a_{i+2}\geq\cdots \geq a_{i+1}+\cdots +a_{N+1},\]
+and when $N\geq3$, it proves the second inequality in each case of (ii):
+\[a_2\geq 2\rho a_3\geq \rho a_3+\rho (a_4+\cdots +a_{N+1})=\rho (a_3+\cdots +a_{N+1}).\]
+Note that when $N=2$, the second inequality in each case of (ii) is simply $\rho a_3\leq a_2$, which is already present in the above list.
+
+All that remains is the first inequality in (ii) in each case, which relates $(a_2+\cdots a_{N+1})$ with $\overline{a}_1$, where, for brevity, we write $\overline{a}_1:=a_1-(2^{\ell^N+\cdots +\ell^2}(d+1)-1)$.
+%\[\overline{a}_1:=a_1-(2^{\ell^N+\cdots +\ell^2}(d+1)-1)=2^{\ell^N+\cdots +\ell^2}(n^1+\ell^1).\]
+By \textup{(i.3)}, and as $\ell^2>0$:%, and the relevant version of \textup{(i.4)}:
+\[\overline{a}_1=2^{\ell^N+\cdots \ell^2}(n^1+\ell^1)\geq 3\cdot2^{\ell^N+\cdots +\ell^2-1}(\ell^1+n^2)\geq 3\cdot2^{\ell^N+\cdots +\ell^3}(\ell^1+n^2) =3a_2.\]
+We've also shown that $a_2\geq\rho (a_3+\cdots +a_{N+1})$. Thus:
+\[(\rho+1)\overline{a}_1\geq 3\rho a_2+3a_2 \geq 3\rho a_2+3\rho (a_3+\cdots a_{N+1})=3\rho(a_2+\cdots a_{N+1}),\]
+proving that $\overline{a}_1\geq\frac{3\rho}{\rho+1}(a_2+\cdots a_{N+1})$, the first inequality in (ii) in either case.
+\end{SkippableProofs}
 \end{proof}
-%\begin{prop*}
 
-
+\begin{cor*}Suppose that $N\geq1$ and that $S=(I^N,\ldots,I^1)$ satisfies \textup{(A)}-\textup{(C)}. Suppose further that $S\neq(\emptyset,\ldots,\emptyset)$. Then (without assuming that $\ell^N>0$):
+\[a_1\geq2(a_2+\cdots +a_{N+1}+1).\]
+If $S$ also satisfies \textup{(D)}, then the factor $2$ can be improved to $\tfrac{9}{4}$.
+\end{cor*}
+\begin{proof}
+We can assume, without loss of generality, that $\ell^N>0$. Now when $d=1$, \textup{(A)} cannot be satisfied unless $I^1=\emptyset$, but this implies that $S=(\emptyset,\ldots,\emptyset)$, so the statement is vacuous unless $d\geq2$. If $N=1$, since $a_2=\ell^1>0$, whether or not $S$ satisfies \textup{(D)}, one finds
+\[a_1\geq \tfrac{9}{4}a_2+ \tfrac{3}{4}+d\geq\tfrac{9}{4}a_2+\tfrac{11}{4}.\]
+This leaves those cases when $N\geq2$ and $d\geq2$, but then $2^{N-1}(d+1)-1\geq5>\tfrac{9}{4}$.
+\end{proof}
 \end{KoszulSequenceCombinatorics}
 
 
@@ -1717,7 +1762,7 @@ Finally note that the CEM complex calculates partially restricted Lie algebra ho
 
 \end{DimZeroPart}
 
-\begin{VanishingLine}
+\begin{VanishingLines}
 \subsection{A vanishing line}
 We've seen above that there are vector space epimorphisms
 \[\left\langle b(S)\ \middle|\ S\in\calS^{(N)}\right\rangle\to E^{2,N}_{0,a_{N+1},a_N,\ldots,a_1}\]
@@ -1737,7 +1782,7 @@ To follow.%Every class in the ASS comes from one of the first two axes in some G
 \end{proof}
 
 
-\end{VanishingLine}
+\end{VanishingLines}
 
 
 
