@@ -5,9 +5,12 @@
 
 \excludeversion{Omitted}
 
-\def\excludeversion#1{\includeversion{#1}}
+%\def\excludeversion#1{\includeversion{#1}}
 \excludeversion{Frontmatter}
 \excludeversion{Endmatter}
+
+\includeversion{AdamsDerivation}
+
 \excludeversion{SteenrodAlgebrasAndTheirKoszulDuals}
 \excludeversion{CategoriesOfInterest}
 \excludeversion{DiagramOfFunctors}
@@ -17,16 +20,16 @@
 \excludeversion{DerivedFunctorsLowDimension}
 \excludeversion{PRlieKoszulComplexCalculation}
 \excludeversion{LieLambdaStructureOnKoszul}
-\includeversion{SequenceOfSequencesIntro}
-\includeversion{KoszulSequenceCombinatorics}
-\includeversion{CalculatingRepeatedKoszul}
+\excludeversion{SequenceOfSequencesIntro}
+\excludeversion{KoszulSequenceCombinatorics}
+\excludeversion{CalculatingRepeatedKoszul}
 \excludeversion{DimZeroPart}
-\includeversion{VanishingLines}
+\excludeversion{VanishingLines}
 \excludeversion{SkippableProofs}
 
 \newcommand{\GS}[1]{\scrE^{#1}}
 \newcommand{\GpS}[1]{\scrE^{#1}_\star}
-\renewcommand{\Set}{\scrE}
+\renewcommand{\Set}{Set}
 
 \newcommand{\RestLie}[1]{\mathsf{r}{\scrL}^{#1}}%{{\mu\scrL}^{#1}}
 \newcommand{\GoodLie}[1]{\mathsf{g}{\scrL}^{#1}}%{{\mu\scrL}^{#1}}
@@ -54,8 +57,9 @@
 \renewcommand{\Q}{Q}
 \newcommand{\SqShift}{\Sq_{+}}
 \newcommand{\Sq}{\mathrm{Sq}}
+\newcommand{\Comm}{\calC}
 \newcommand{\LieSteen}{\calA(\calL)}
-\newcommand{\CommSteen}{\calA(\calC)}
+\newcommand{\CommSteen}{\calA(\Comm)}
 \newcommand{\deltaAlgebra}{\Delta}
 \newcommand{\DyerLashov}{R}
 
@@ -87,10 +91,66 @@
 \end{Frontmatter}
 
 
+\begin{AdamsDerivation}
+\section{The Adams Spectral sequence for commutative $\F_2$-algebras}
+Let $\Comm$ be the category of augmented commutative $\F_2$-algebras. For $X\in \Comm$, one defines:
+\[IX:=\ker(\epsilon:X\to\F_2)\subset X\textup{\quad and\quad }QX:=IX/(IX)^2.\]
+Then the functor $Q:\Comm\to\Vect$ admits a right adjoint $K:\Vect\to\Comm$ defined by $V\mapsto \F_2\oplus V$, with multiplication characterised by $V^2=0$.
+
+An analysis (see \cite[\S4]{MR1089001}) of the category of abelian objects in $s\Comm$ reveals that the abelian objects of are precisely the image of $K$, and the prolongation $Q:s\Comm\rightleftarrows s\Vect:K$ of the above adjunction models the adjunction between `abelianization' and `the inclusion of the abelian objects'. Thus we define the Quillen homology $H_*^Q(X_{\bullet})$ of $X_{\bullet}\in s\Comm$ to be $\mathbb{L}_*Q(X_{\bullet}):=\pi_*Q(cX_\bullet)$, where $c$ denotes a cofibrant replacement in $s\Comm$.
 
 
 
 
+
+\subsection{A Bousfield-Kan construction in $s\Comm$}
+In \cite{MR0365573}, Bousfield and Kan construct, for a space (i.e.\ simplicial set) $X$, the $\F_2$-completion $\check X$ to be the totalisation of the cosimplicial resolution of $X$ arising from the monad of the adjunction $\F_2:s\Set_*\rightleftarrows s\Vect:\forget$. By virtue of $\check X$ having been constructed as a totalisation, there is a totalisation spectral sequence converging to $\pi_*(\check X)$. This is known as the unstable Adams spectral sequence for $X$.
+
+As pointed out by Blumberg and Riehl in \cite{BlumRiehlResolutions.pdf}, this process is aided by the fact that the construction of $\check X$ is homotopically well behaved --- in $s\Set_*$, all objects are cofibrant, and in $s\Vect$, all objects are fibrant, so that the monad of the adjunction preserves weak equivalences, and fortunately, the Bousfield-Kan tower is already Reedy fibrant.
+
+In our context, the right adjoint in $Q:s\Comm\rightleftarrows s\Vect:K$ fails to land in the subcategory of cofibrant simplicial algebras. In order to remedy this, Blumberg and Riehl show how to mix appropriate cofibrant replacements into the iteration of the monad\footnote{As every object of $s\Vect$ is fibrant, we need not mention a monadic fibrant replacement on that category, although there is no such asymmetry in the treatment of \cite{BlumRiehlResolutions.pdf}.}. That is, they show that if one can choose a functorial cofibrant replacement $c$ on $\ensuremath{s\calA}$ which additionally has structure of a homotopical comonad, then one can give a homotopically correct cosimplicial resolution of the type we desire. Writing $\overline{Q}$ for $Qc:s\Comm\to s\Vect$, their resolution takes the form:
+\[
+\vcenter{
+\def\labelstyle{\scriptstyle}
+\xymatrix@C=1.5cm@1{
+cX_\bullet\,
+\ar[r]
+&
+\,cK\overline{Q}X_\bullet\,
+\ar[r];[]
+&
+\,c(K\overline{Q})^2X_\bullet\,
+\ar@<-1ex>[l];[]
+\ar@<+1ex>[l];[]
+\ar@<+1ex>[r];[]
+\ar@<-1ex>[r];[]
+&
+\,c(K\overline{Q})^3X_\bullet\,
+\ar[l];[]
+\ar@<-2ex>[l];[]
+\ar@<+2ex>[l];[]
+\ar[r];[]
+\ar@<+2ex>[r];[]
+\ar@<-2ex>[r];[]
+&
+\,c(K\overline{Q})^4X_\bullet\,\makebox[0cm][l]{\,$\cdots $}
+\ar@<-3ex>[l];[]
+\ar@<-1ex>[l];[]
+\ar@<+1ex>[l];[]
+\ar@<+3ex>[l];[]
+}}\]
+%For $X\in\Comm$, write $\underline{X}_\bullet^\bullet$ for the cosimplicial object $c(K\overline{Q})^\bullet A$.
+The Blumberg-Riehl approach augments Bousfield's work on cosimplicial resolutions \cite{BousCosimpResnHtpySS.pdf},  allowing us to define a homotopical `derived completion' endofunctor on $\Comm$ by $X_\bullet\mapsto\hat X_\bullet:=\textup{Tot}((c(K\overline{Q})^\bullet X_\bullet)^{\textup{rf}})$, where `$\textup{rf}$' denotes a Reedy fibrant replacement.
+
+Bousfield shows how to obtain a spectral sequence $\pi^s\pi_t(\underline{A}^\bullet;S^0)\Rightarrow\pi_{t-s}(\hat A;S^0)$ by applying the well established Bousfield-Kan spectral sequence to the evident cosimplicial space of Dwyer-Kan mapping complexes. It serves our purposes best to dualize, and rewrite:
+\[\pi_s\pi^t((Ic(K\overline{Q})^\bullet A)^*)\Rightarrow \pi^{t-s}((I\hat A)^*)\]
+A complete derivation would at this point include a detailed examination of the dual Hurewicz homomorphism $H^*_Q(X)\to \pi^*((IX)^*)$, in particular when $X$ is an abelian object. One shows that:
+\begin{prop*}
+When $H^*_Q(A)$ is of finite type (for example when $A$ is connected and of finite type) the spectral sequence has $E_2^{st}=(\mathbb{L}_s\textup{Ind}_\calW)(H_Q^*A)^t=(\Ext^s_{\calW}(H_Q^*A,H_Q^*S^t))^*$.
+\end{prop*}
+
+
+\end{AdamsDerivation}
 
 \begin{SteenrodAlgebrasAndTheirKoszulDuals}
 \section{Some homogeneous Koszul algebras}
