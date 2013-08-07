@@ -1,20 +1,19 @@
 % !TEX root = z_output/_PRLieAlgs.tex
-\documentclass[11pt]{article}
+\documentclass[10pt]{article}
+\newcommand{\NOFULLPAGE}{\relax}
 \input{../../Dropbox/logbook/_LOGBOOK/macros.tex}
-
-
 \excludeversion{Omitted}
+%\excludeversion{SkippableProofs}
 
+
+\excludeversion{AdamsDerivation}
 %\def\excludeversion#1{\includeversion{#1}}
-\excludeversion{Frontmatter}
+\excludeversion{Frontmatters}
 \excludeversion{Endmatter}
-
-\includeversion{AdamsDerivation}
-
 \excludeversion{SteenrodAlgebrasAndTheirKoszulDuals}
 \excludeversion{CategoriesOfInterest}
 \excludeversion{DiagramOfFunctors}
-\excludeversion{GrothendieckSpectralSequences}
+\includeversion{GrothendieckSpectralSequences}
 \excludeversion{KoszulComplexes2plus}
 \excludeversion{KoszulComplexes1}
 \excludeversion{DerivedFunctorsLowDimension}
@@ -25,7 +24,7 @@
 \excludeversion{CalculatingRepeatedKoszul}
 \excludeversion{DimZeroPart}
 \excludeversion{VanishingLines}
-\excludeversion{SkippableProofs}
+\excludeversion{TotalisationInSAlg}
 
 \newcommand{\GS}[1]{\scrE^{#1}}
 \newcommand{\GpS}[1]{\scrE^{#1}_\star}
@@ -86,9 +85,9 @@
 
 \bibliography{../../Dropbox/logbook/_LOGBOOK/papers}
 \begin{document}
-\begin{Frontmatter}
+\begin{Frontmatters}
 \tableofcontents\newpage
-\end{Frontmatter}
+\end{Frontmatters}
 
 
 \begin{AdamsDerivation}
@@ -142,11 +141,11 @@ cX_\bullet\,
 %For $X\in\Comm$, write $\underline{X}_\bullet^\bullet$ for the cosimplicial object $c(K\overline{Q})^\bullet A$.
 The Blumberg-Riehl approach augments Bousfield's work on cosimplicial resolutions \cite{BousCosimpResnHtpySS.pdf},  allowing us to define a homotopical `derived completion' endofunctor on $\Comm$ by $X_\bullet\mapsto\hat X_\bullet:=\textup{Tot}((c(K\overline{Q})^\bullet X_\bullet)^{\textup{rf}})$, where `$\textup{rf}$' denotes a Reedy fibrant replacement.
 
-Bousfield shows how to obtain a spectral sequence $\pi^s\pi_t(\underline{A}^\bullet;S^0)\Rightarrow\pi_{t-s}(\hat A;S^0)$ by applying the well established Bousfield-Kan spectral sequence to the evident cosimplicial space of Dwyer-Kan mapping complexes. It serves our purposes best to dualize, and rewrite:
-\[\pi_s\pi^t((Ic(K\overline{Q})^\bullet A)^*)\Rightarrow \pi^{t-s}((I\hat A)^*)\]
+Bousfield shows how to obtain a spectral sequence $\pi^s\pi_t(\underline{X}^\bullet;S^0)\Rightarrow\pi_{t-s}(\hat X;S^0)$ by applying the well established Bousfield-Kan spectral sequence to the evident cosimplicial space of Dwyer-Kan mapping complexes. It serves our purposes best to dualize, and rewrite:
+\[\pi_s\pi^t((I(c(K\overline{Q})^\bullet X)^{\textup{rf}})^*)\Rightarrow \pi^{t-s}((I\hat X)^*)\]
 A complete derivation would at this point include a detailed examination of the dual Hurewicz homomorphism $H^*_Q(X)\to \pi^*((IX)^*)$, in particular when $X$ is an abelian object. One shows that:
 \begin{prop*}
-When $H^*_Q(A)$ is of finite type (for example when $A$ is connected and of finite type) the spectral sequence has $E_2^{st}=(\mathbb{L}_s\textup{Ind}_\calW)(H_Q^*A)^t=(\Ext^s_{\calW}(H_Q^*A,H_Q^*S^t))^*$.
+When $H^*_Q(X)$ is of finite type (for example when $X$ is connected and of finite type) the spectral sequence has $E_2^{st}=(\mathbb{L}_s\textup{Ind}_\calW)(H_Q^*X)^t=(\Ext^s_{\calW}(H_Q^*X,H_Q^*S^t))^*$.
 \end{prop*}
 
 
@@ -750,12 +749,39 @@ For $n\geq1$, and any $X\in\LL{n}$, there is a spectral sequence:
 %\[\fbox{$E^2=(\derived{\Ind{\LL{n+1}}})(\derived\Ind{\nontop{n}})X\implies(\derived\Ind{\LL{n}})X.$}\]
 The following observation explains why there's little danger in having two functors named $\Ind{\nontop{n}}$.
 \begin{lem*}
-For $n\geq1$, and any $X\in\LL{n}$,
-\[(\derived{\Ind{\nontop{n}}})X\cong(\derived{\Ind{\nontop{n}}})(\forget(X))\textup{ as a vector space.}\]
-That is, as vector spaces, both $(\Ind{\nontop{n}})X$ and $(\derived{\Ind{\nontop{n}}})X$ are unambiguous.
+For $n\geq1$, and any $X\in\LL{n}$, there's an isomorphism of vector spaces
+\[(\derived{\Ind{\nontop{n}}})X\cong(\derived{\Ind{\nontop{n}}})(\forget(X)),\]
+induced by the evident inclusion $B_\bullet(\forget,\Fr{\nontop{n}},\forget(X))\to B_\bullet(\PRLie{n},\Fr{\LL{n}},X)$.
+\end{lem*}
+\noindent In light of this result, we write $(\derived{\Ind{\nontop{n}}})X$ for either $(\derived{\Ind{\nontop{n}}})X$ or $(\derived{\Ind{\nontop{n}}})\forget(X)$, without ambiguity. DISCUSS the meaning of the fg and Rn in the bar construction.
+\begin{proof}
+As $\forget:\LL{n}\to\nontop{n}$ preserves free objects and weak equivalences, there's a one-line Grothendieck spectral sequence producing the isomorphism, but this argument does not show that the isomorphism is induced by the inclusion of bar constructions. If $\forget(B_\bullet(\LL{n},\LL{n},X))$ were almost free in $s\nontop{n}$, the map ${B}_\bullet(\nontop{n},\nontop{n},\forget(X))\to{B}_\bullet(\LL{n},\LL{n},X)$ would be a map of cofibrant replacements of $\forget(X)$ in $s\nontop{n}$, and thus 
+
+Or should I say: ``the obvious inclusion map $\overline{B}_*(\nontop{n},\nontop{n},X)\to\overline{B}_*(\LL{n},\LL{n},X)$ is a map of almost free objects realising the identity on $X$''? Is the latter actually almost free in $s\nontop{n}$?
+\end{proof}
+\begin{lem*}
+For any $X$ in $s\LL{n}$, $(\derived{\Ind{\nontop{n}}})(\forget(X))$ may be calculated as the homotopy of the object 
+\[\forget(\Ind{\nontop{n}}(B_\bullet(\Fr{\LL{n}},\Fr{\LL{n}},X)))=\forget(B_\bullet(\Fr{\PRLie{n}},\Fr{\LL{n}},X))\in s\GR{n}.\]
 \end{lem*}
 \begin{proof}
-As $\forget:\LL{n}\to\nontop{n}$ preserves free objects and weak equivalences, there's a one-line Grothendieck spectral sequence proving the result. Or should I say: ``the obvious inclusion map $\overline{B}_*(\nontop{n},\nontop{n},X)\to\overline{B}_*(\LL{n},\LL{n},X)$ is a map of almost free objects realising the identity on $X$''? Is the latter actually almost free in $s\nontop{n}$?
+Although $B:=B_\bullet(\Fr{\LL{n}},\Fr{\LL{n}},X)$ is an acyclic levelwise free object in $s\nontop{n}$, with $\pi_0(B)=X$, it may fail to be `almost free'. The point here is that $B$ can be used to calculate the derived functors of $\Ind{\nontop{n}}$ anyway. To see this, consider the bisimplicial object $A:=\Ind{\nontop{n}}(B_\bullet(\Fr{\nontop{n}},\Fr{\nontop{n}},B))$ formed by applying $\Ind{\nontop{n}}$ to the levelwise bar construction on $B$, so that
+\[A_{s,t}=(\Ind{\nontop{n}})((\Fr{\nontop{n}})^{s+1})B_t\cong (\Fr{\nontop{n}})^sB_t.\]
+Now there are two first-quadrant spectral sequences converging to $\pi_*(\Delta A)$, one with ${E}^{2,I}=\pi_s\pi^e_tA$ and one with $E^{2,II}=\pi_t\pi^i_sA$. We'll show that they are both one-line spectral sequences by $E^2$, with ${E}^{2,I}_{s,0}=(\derived_s\Ind{\nontop{n}})\forget(X)$, and ${E}^{2,II}_{0,t}=\pi_t(\Ind{\nontop{n}}B)$, proving the result.
+
+
+To identify ${E}^{2,I}_{s,t}$, write $A_{s,\bullet}$ for the singly simplicial object obtained by fixing the inner coordinate in $A$. Then by the lemma, $A_{s,\bullet}$ is acyclic, with $\pi_0 A_{s,\bullet}=(\Fr{\nontop{n}})^s\pi_0(B_\bullet)= (\Fr{\nontop{n}})^sX$. Now $\pi_0 A_{s,\bullet}$ is simplicial in $s$, and can be identified with the bar construction computing $(\derived_s{\Ind{\nontop{n}}})\forget(X)$.
+
+On the other hand, for fixed $t$, $A_{\bullet,t}$ is simply the bar construction calculating $(\derived\Ind{\nontop{n}})B_t$. As $B_t$ is free for each $t$, $(\derived_0\Ind{\nontop{n}})B_t=\Ind{\nontop{n}}(B_t)$, and the higher derived functors vanish, identifying $E^{2,II}$.
+\end{proof}
+\begin{lem*}
+Suppose that $W\in s\nontop{n}$ is acyclic. Then for each $s\geq0$,  $(\Fr{\nontop{n}})^sW\in s\nontop{n}$ is acyclic, with $\pi_0((\Fr{\nontop{n}})^sW)=(\Fr{\nontop{n}})^s(\pi_0(W))$.
+\end{lem*}
+\begin{proof}
+By induction on $s$ it is enough to prove the statement when $s=1$. The calculation of $\pi_0$ is immediate from the fact that $\Fr{\nontop{n}}$, being a left adjoint, preserves colimits.
+
+To approach the acyclicity question, we'll use unreduced chain complexes, writing $\partial:W_r\to W_{r-1}$ for the sum of the face maps. Now suppose that $a\in(\Fr{\nontop{n}}W)_r$ is a cycle. Without loss of generality, we may write
+$a:=\sum_j Q^{I_j}x_j$
+where all of the $I_j$ are distinct, and the $x_j$ are (potentially inhomogeneous) elements of $W_r$ (such that $Q^{I_j}x_j$ is defined). Then $\partial (a)=\sum Q^{I_j}\partial(x_j)=0$, which implies that each $\partial(x_j)$ is zero, so that $x_j=\partial(y_j)$ for some $y_j\in W_{r+1}$. Note that the internal dimensions of the homogeneous summands of $y_j$ may be taken to be the same as those of $x_j$, in which case $\sum Q^{I_j}y_j$ is defined in $\Fr{\nontop{n}}W_{r+1}$, and has boundary $a$.
 \end{proof}
 \end{GrothendieckSpectralSequences}
 
@@ -1850,6 +1876,33 @@ Suppose that $X$ is a simplicial commutative algebra which is connected, and is 
 
 \end{VanishingLines}
 
+
+\begin{TotalisationInSAlg}
+\section{The Adams Spectral Sequence}
+\subsection{Cosimplicial objects in $s\Comm$}
+\begin{prop*}
+Suppose that $X^\bullet$ is a cosimplicial object in $s\Comm$. Then for $0\leq m\leq\infty$, $I\Tot_m(X^\bullet)\cong\Tot_m(IX^\bullet)$, where $I$ is the right adjoint in the adjunction $\textup{Sym}:s\Vect\rightleftarrows s\Comm:I$, and the second totalization is that of a cosimplicial simplicial vector space.
+\end{prop*}
+\begin{proof}
+The totalization of a cosimplicial object in $s\Comm$ is defined by the end
+\[\Tot_m(X^\bullet):= \int_{[k]\in\Delta}\left(X^k\right)^{\textup{sk}_m\Delta[k]}\]
+where for each $k$, the cotensor within the end is defined by taking various powers of the $X^k_t$ in each simplicial dimension $t$. As $I$ is the prolongation of the right adjoint in $\Vect\rightleftarrows\Comm$, it commutes with all of these limits.
+\end{proof}
+Following \cite{BousfieldHSSCS.pdf}, for $\textbf{B}$ a cosimplicial simplicial vector space, let $N^*N_*\textbf{B}$ be the normalized double complex. The total complex $T\textbf{B}$ is then defined by
+\[(T\textbf{B})_n=\prod_{t-s=n}N^sN_t\textbf{B},\ \textup{with filtration }(F^mT\textbf{B})_n=\prod_{\substack{t-s=n\\t\geq m}}N^sN_t\textbf{B}.\]
+Now if we write
+\[(T_m\textbf{B})_n:=(T\textbf{B}/F^{m+1} T\textbf{B})_n\cong\prod_{\substack{t-s=n\\t\leq m}}N^sN_t\textbf{B}, \]
+then $F^mT\textbf{B}$ is a decreasing filtration and the $T_m\textbf{B}$ form a tower of surjections of chain complexes with inverse limit $T_\infty\textbf{B}=T\textbf{B}$. 
+\begin{lem*}[{\cite[Lemma 2.2]{BousfieldHSSCS.pdf}}]
+There are natural chain maps $\phi_m:N_*\Tot_m\textbf{B}\to T_m\textbf{B}$ for $m\leq\infty$ which induce isomorphisms $\pi_*\Tot_m\textbf{B}\to H_*T_m\textbf{B}$ and are compatible with the tower maps $\Tot_{s}\textbf{B}\to\Tot_m\textbf{B}$ and $T_{s}\textbf{B}\to T_m\textbf{B}$ for $s\geq m$.
+\end{lem*}
+\begin{cor*}
+Suppose that $X^\bullet$ is a cosimplicial object in $s\Comm$. Then there is a map of spectral sequences, which is an isomorphism from $E^1$, from the homotopy spectral sequence of the $\Tot$ tower $\{I\Tot_mX^\bullet\}$ to the spectral sequence of the bicomplex underlying $IX^\bullet$. Moreover, there is an isomorphism $\pi_*I\Tot X^\bullet\to H_*TIX^\bullet$ (to the homology of the total complex of the bicomplex), which is compatible with the map of spectral sequences.
+\end{cor*}
+\begin{cor*}
+Suppose that $X$ is a connected element of $s\Comm$. Then the Adams spectral sequence for $X$ is the spectral sequence of the bicomplex underlying the cosimplicial simplicial vector space $I((c(K\overline{Q})^\bullet X)^{\textup{rf}})$. This spectral sequence admits a vanishing line from $E^2$, and so converges strongly to its target, $\pi_{t-s}(I\hat X)$.
+\end{cor*}
+\end{TotalisationInSAlg}
 
 
 
