@@ -6,10 +6,11 @@
 %\excludeversion{SkippableProofs}
 
 
-\excludeversion{AdamsDerivation}
-%\def\excludeversion#1{\includeversion{#1}}
+
+\def\excludeversion#1{\includeversion{#1}}
 \excludeversion{Frontmatters}
 \excludeversion{Endmatter}
+\excludeversion{AdamsDerivation}
 \excludeversion{SteenrodAlgebrasAndTheirKoszulDuals}
 \includeversion{CategoriesOfInterest}
 \excludeversion{DiagramOfFunctors}
@@ -144,9 +145,9 @@ The Blumberg-Riehl approach augments Bousfield's work on cosimplicial resolution
 Bousfield shows how to obtain a spectral sequence $\pi^s\pi_t(\underline{X}^\bullet;S^0)\Rightarrow\pi_{t-s}(\hat X;S^0)$ by applying the well established Bousfield-Kan spectral sequence to the evident cosimplicial space of Dwyer-Kan mapping complexes. It serves our purposes best to dualize, and rewrite:
 \[\pi_s\pi^t((I(c(K\overline{Q})^\bullet X)^{\textup{rf}})^*)\Rightarrow \pi^{t-s}((I\hat X)^*)\]
 A complete derivation would at this point include a detailed examination of the dual Hurewicz homomorphism $H^*_Q(X)\to \pi^*((IX)^*)$, in particular when $X$ is an abelian object. One shows that:
-\begin{prop*}
+\begin{prop}
 When $H^*_Q(X)$ is of finite type (for example when $X$ is connected and of finite type) the spectral sequence has $E_2^{st}=(\mathbb{L}_s\textup{Ind}_\calW)(H_Q^*X)^t=(\Ext^s_{\calW}(H_Q^*X,H_Q^*S^t))^*$.
-\end{prop*}
+\end{prop}
 
 
 \end{AdamsDerivation}
@@ -223,7 +224,7 @@ y^2\delta_i(x),&\textup{if }|y|=0\textup{ and }|x|\geq2;\\
 \item $\pi_*(\frakg)$ is a restricted Lie algebra under a bracket $\pi_i(\frakg)\otimes \pi_j(\frakg)\to \pi_{i+j}(\frakg)$;
 \item there are operations $\Q^i:\pi_n(\frakg)\to \pi_{n+i}(\frakg)$, defined only for $0\leq i\leq n$. As the operations $\Q^i$ are only partially defined, $\pi_*(\frakg)$ does \emph{not} become a left module over the Dyer-Lashov algebra. However, when these operations are written on the left, they satisfy the $\Q$-Adem relations whenever one can be applied.
 \item The non-top operations, $\Q^i:\pi_n(\frakg)\to \pi_{n+i}(\frakg)$ for $i<n$, are linear. The top operation, $\Q^n:\pi_n(\frakg)\to \pi_{2n}(\frakg)$ equals the restriction, and is thus quadratic:
-\[\textup{if $|x|=|y|=n\geq0$, then }\Q^n(x)=\restn{x}\textup{ and }\Q^n(x+y)=\Q^n(x)+\Q^n(y)+[x,y].\]
+\[\textup{if $|x|=|y|=n$, then }\Q^n(x)=\restn{x}\textup{ and }\Q^n(x+y)=\Q^n(x)+\Q^n(y)+[x,y].\]
 \item The $\Q$ operations satisfy the following Cartan formula. For $|x|\leq |y|$:
 \[[\Q^i(x),y]=\begin{cases}
 [x,[x,y]],&\textup{if }i=|x|;\\
@@ -233,7 +234,7 @@ y^2\delta_i(x),&\textup{if }|y|=0\textup{ and }|x|\geq2;\\
 \]
 \end{enumerate}
 
-Note that it is not immediately obvious that the $\delta$-Adem ($\Q$-Adem) relations are well defined when viewed as relations that hold between operations on the homotopy of commuatative algebras (Lie algebras). That is, we are supposed to have $\Q^i\Q^jx=\cdots $ whenever $i>2j$ and $\Q^i\Q^jx$ is defined, but we haven't checked that every term in the right hand side is defined. This does indeed happen, by a lemma to follow. 
+Note that it is not immediately obvious that the $\delta$-Adem ($\Q$-Adem) relations are well defined when viewed as relations that hold between operations on the homotopy of commuatative algebras (Lie algebras). That is, we are supposed to have $\Q^i\Q^jx=\cdots $ whenever $i>2j$ and $\Q^i\Q^jx$ is defined, but we haven't checked that every term in the right hand side is defined. This does indeed happen, by lemma \ref{lemOnAdemChangeInM} (to follow). 
 
 \subsection{The combinatorics of admissible sequences}
 
@@ -241,11 +242,11 @@ Now each of these algebras, being homogeneous, is bigraded%footnote:
 \footnote{I'm not sure what the point is in bigrading things, really, but there's some cool stuff happening. For example, if you make $P$ act on something that's only singly graded, it makes sense to demand that degrees change via the associtated singly graded algebra, in which $|P^i|=i+1$, and viewing $P$ as bigraded makes the unstable condition seem more natural. Moreover, whenever you see a $\delta_j$ in this context, it does change internal degree by $i$, and homological degree by $1$. What it does to deeper degrees is just spooky. I guess the same thing holds for $\SqShift^i$, which is intense, given that it equals $\Sq^{i+1}$! I don't know.}, setting (\textbf{I guess}) 
 \[\|P^i\|=\|\delta_i\|=\|\SqShift^i\|=\|\Q^i\|=(1,i).\]
 Now let $b$ be any of the symbols $P$, $\delta$, $\SqShift$, or $\Q$. For a sequence $I=(i_{\ell},\ldots,i_1)$ of positive integers (with $i_j\geq2$ if $b$ is $P$ or $\delta$), write $b^I$ for the product $b^{i_\ell}\cdots b^{i_1}$. Say that $I$ is $b$-admissible if no $b$-Adem relations can be applied directly to $b^I$, so that one of the four evident inequalities hold between adjacent indices in $I$.
-\begin{lem*}
+\begin{lem}
 All of the Adem relations listed above express the inadmissible length 2 sequence on the left hand side as a sum of admissible length 2 sequences. All four of the algebras are homogeneous Koszul algebras. The algebras $\CommSteen$ and $\Delta$ are Koszul dual, under $P^i\longleftrightarrow\delta_i$. The algebras $\LieSteen$ and $R$ are Koszul dual, under $\SqShift^i\longleftrightarrow\Q^i$. In particular, for length 2 sequences $K$ and $L$:
 \[\produces{K}{L}{P}\iff\produces{L}{K}{\delta}\textup{ \ and \ }\produces{K}{L}{\SqShift}\iff\produces{L}{K}{\Q}\]
 
-\end{lem*}
+\end{lem}
 \begin{proof}
 The first statement is checked manually from the Adem relations in each case.
 
@@ -281,7 +282,7 @@ If $I=(i_{\ell},\ldots,i_1)$ with all $i_j\geq0$, then:
 \end{itemize}
 
 %With this notation in hand, we may finally discuss whether or not the Adem relations that the $\delta$ operations and and $\Delta$ are well defined.
-\begin{lem*}
+\begin{lem}\label{lemOnAdemChangeInM}
 In the following statements, $K$ and $L$ are each length 2 sequences:%, with entries nonnegative in cases (i) and (ii), and entries at least 2 in cases (iii) and (iv).
 %
 %In the following statements, $K=(i,j)$ and $L=(i',j')$ are to be two length 2 sequences, with entries nonnegative in cases (i) and (ii), and entries at least 2 in cases (iii) and (iv).
@@ -293,7 +294,7 @@ In the following statements, $K$ and $L$ are each length 2 sequences:%, with ent
 %\item Suppose that $\produces{K}{L}{\delta}$. Then $\minDimP(L) < \minDimP(K)$. (shrug)
 \end{enumerate}
 In (ii), the entries of $K$ and $L$ should be at least 2.
-\end{lem*}
+\end{lem}
 \begin{proof}
 In both of the proofs, let $K=(i,j)$ and $L=(i',j')$.
 
@@ -301,21 +302,21 @@ For (i), we wish to show that $\max\{j',i'-j'\}<\max\{j,i-j\}$, but we must have
 
 For (ii), we wish to show that $\max\{j',i'-j'-1\}>\max\{j,i-j-1\}$, but we must have that $i'> 2j'$, and $i\geq2j$. Thus $\max\{j,i-j-1\}$ at most $i-j$ (which happens when $i=2j$). Thus, we need only show that $j'>i-j$; again, easy.
 \end{proof}
-%\begin{lem*}
+%\begin{lem}
 %Suppose that %$i>2j$, and 
 %$\produces{(i,j)}{(i',j')}{\Q}$. Then $\minDim(i,j)>
 %\minDim(i',j')$, and $i',j'>0$.
 %
 %In particular, if $\Q^i\Q^jx$ is defined, and $i>2j$, it can be rewritten as a sum of terms $\Q^{i'}\Q^{j'}x$ in which neither of the $\Q^{i'}$ and $\Q^{j'}$ that appear are top operations.
-%\end{lem*}
+%\end{lem}
 %\begin{proof}
 %It must be that $(i,j)$ is $\Q$-inadmissible, so that $i>2j$. Then,
 %by inspection, $i>j+i/2\geq i'\geq2j+1$, and $i-j-1\geq j'\geq i/2>j$. These inequalities demonstrate (i). For (ii), note that (i) shows that we needn't worry about $\Q^0$ failing to be defined, as it won't appear. Our only concern is that either $i'$ or $j'$ will be too large. Suppose then that $\Q^i\Q^j$ is defined on an $n$-dimensional class, so that $j\leq n$ and $i\leq n+j$. Then one notes that $j'\leq i-j-1\leq n-1$, and $i'-j'\leq (j+i/2)-(i/2)<i/2\leq(n+j)/2\leq n$. The first chain gives $j'\leq n-1$, and the second $i'\leq n-1+j'$, as the quantities involved are integers. These inequalities demonstrate (ii) and the final comment.
 %\end{proof}
 %
-%\begin{lem*}
+%\begin{lem}
 %Suppose that $\produces{(i,j)}{(i',j')}{P}$. Then $\minDimP(i',j') > \minDimP(i,j)$.
-%\end{lem*}
+%\end{lem}
 %\begin{proof}
 %Since $i\geq2j$, 
 %$j'\geq i-j+1=
@@ -366,7 +367,7 @@ Moreover, for any of the following categories there are free/forget adjunctions 
 \item For $n\geq1$, let $\BadLie{n}$ be the following category of $n$-graded Lie algebras over $\F_2$. An object of $\BadLie{n}$ is to be an object $L$ of $\GR{n}$ with (skew-)symmetric maps
 \[[\DASH,\DASH]:L_{a_n,\ldots,a_1}\otimes L_{b_n,\ldots,b_1}\to L_{a_n+b_n,\ldots,a_2+b_2,a_1+b_1+1}\]
 satisfying the Jacobi identity. Note that this Lie bracket has degree $(0,\ldots,0,1)$. As the ground field has characteristic 2, the concepts of symmetry and skew-symmetry coincide. More importantly, skew-symmetry does not imply the `alternating' relation, so that there may be $x\in L$ with $[x,x]$ nonzero. This explains the $\mathsf{b}$ in the notation --- we refer to such Lie algebras as \emph{bad} Lie algebras.
-
+Note that the `self-bracket' operation $x\mapsto [x,x]$ is linear in any bad Lie algebra.
 \item For $n\geq1$, let $\GoodLie{n}$ be the full subcategory of $\BadLie{n}$ consisting of those Lie algebras which are \emph{good}. That is, those $L\in\BadLie{n}$ for which $[x,x]=0$ for all $x\in L$.
 \item For $n\geq1$, let $\RestLie{n}$ be the category of restricted Lie algebras in $\GoodLie{n}$. That is, an object of $\RestLie{n}$ is an object $L\in\GoodLie{n}$ along with `restriction' operations
 \[\restn{}:L_{a_n,\ldots,a_1}\to L_{2a_n,2a_{n-1},\ldots,2a_2,2a_1+1}\]
@@ -381,16 +382,13 @@ Note that when $n=1$ the restriction is not defined anywhere.
 \end{itemize}
 We have defined the bracket and restrictions on homogeneous elements only, but there is no problem extending these operations definition to non-homogeneous elements using the bilinearity of the bracket and the above formula for the restriction of a sum.
 %We can define $\restn{}$ on the the direct sum of those $L_{a_n,\ldots,a_1}$ for which not all of $a_n,\ldots,a_2$ are zero, using the above formula for $\restn{(x+y)}$. Then both of the above two formulae will still hold for non-homogeneous $x,y,z$. Thus, we could equally have defined $\PRLie{n}$ by giving a restriction on this entire ideal.
-%\begin{prop*}
+%\begin{prop}
 %If $X\in\GS{n}$ a graded set, the `Hall basis' of $\Fr{\GoodLie{n}}(X)$ \cite{MR0038336} consists of certain `standard monomials' $b$ in the elements of $X$. Then $\Fr{\BadLie{n}}(X)$ has a basis $\{b\}\cup\{[b,b]\}$.
-%\end{prop*}
+%\end{prop}
 
 If $X\in\GS{n}$ a graded set, one may choose a `Hall basis derived from $X$' \cite{MR0038336} for the free good Lie algebra $\Fr{\GoodLie{n}}(X)$ consisting of certain (homogeneous) `standard monomials' $b$ in the elements of $X$.
 
-\newpage
-
-
-\begin{prop*}
+\begin{prop}
 For $n\geq1$, suppose that $X\in\GS{n}$ is a graded set. Let $B$ be a Hall basis derived from $X$ for the free good Lie algebra $\Fr{\GoodLie{n}}(X)$. Note that $B\subset \Fr{\GoodLie{n}}(X)$ is in particular a graded set. Then
 \begin{alignat*}{2}
 \Fr{\BadLie{n}}(X)
@@ -408,8 +406,8 @@ B,\,r\geq0\right\rangle\textup{, \ and}%
 B,\,r\geq0,\textup{ and if }a_{n}\!=\!\cdots\!=\!a_2\!=\!0\textup{ then $r=0$}\right\rangle,%
 \end{alignat*}
 where by $a_n,\ldots,a_2$ we mean all but the rightmost index in $\|b\|=(a_{n},\ldots,a_1)$.
-\end{prop*}
-%\begin{prop*}
+\end{prop}
+%\begin{prop}
 %Let $X\in\GS{n}$ be a graded set, and let $B$ be a Hall basis derived from $X$ for $\Fr{\GoodLie{n}}(X)$. Note that $B\subset \Fr{\GoodLie{n}}(X)$ is actually a graded set. Then:
 %\begin{enumerate}[i)]\squishlist
 %\setlength{\parindent}{.25in}
@@ -417,7 +415,7 @@ where by $a_n,\ldots,a_2$ we mean all but the rightmost index in $\|b\|=(a_{n},\
 %\item $\Fr{\RestLie{n}}(X)$ has a basis $\{\iteratedrestn{b}{r}\,:\,b\in B,\,r\geq0\}$; and
 %\item $\Fr{\PRLie{n}}(X)$ has a basis $B\cup \{\iteratedrestn{b}{r}\,:\,b\in B_{a_{n},\ldots,a_1},\,r\geq1,\textup{ not all of $a_n,\ldots,a_2$ are zero}\}$.
 %\end{enumerate}
-%\end{prop*}
+%\end{prop}
 \begin{proof}
 To calculate $\Fr{\BadLie{n}}(X)$,  note that the Jacobi identity implies that any self-bracket $[y,y]$ in a bad Lie algebra is central. Thus, the proposed basis spans $\Fr{\BadLie{n}}(X)$.  On the other hand, as one easily defines a Lie algebra structure on the vector space $\langle B\rangle\oplus \langle [b,b]\rangle$, all of the elements of $B$ and all of the $[b,b]$ are linearly independent in $\Fr{\BadLie{n}}(X)$. The calculation of $\Fr{\RestLie{n}}(X)$ is standard \cite[Proposition 14, p.66]{MR886063}.
 To calculate $\Fr{\PRLie{n}}(X)$, note again that the proposed basis must span $\Fr{\PRLie{n}}(X)$, and can be seen to be linearly independent by considering the map $\Fr{\PRLie{n}}(X)\to \Fr{\RestLie{n}}(X)$ of partially restricted Lie algebras.
@@ -435,7 +433,7 @@ Then $\Fr{\mathsf{C}}S(X)\in s\mathsf{C}$ represents the following functor $s\ma
 where $\pi_d(C)_{a_n,\ldots,a_1}$ is the grading $a_n,\ldots,a_1$ part of $\pi_d(C)$. In particular, by Yoneda's lemma:
 \[\left\{\prod_{x\in X_{d,a_n,\ldots,a_1}}\pi_d(\DASH)_{a_n,\ldots,a_1}\overset{\textup{nat}}{\to}\pi_D(\DASH)_{A_n,\ldots,A_1}\right\}\cong\pi_D\left(\Fr{\mathsf{C}}S(X)\right)_{A_n,\ldots,A_1}\]
 Thus we're interested in the homotopy groups of $\mathsf{C}S(X)$. These are well known when $\mathsf{C}$ is $\GoodLie{n}$ or $\RestLie{n}$, and from these calculations we will deduce the result when $\mathsf{C}=\PRLie{n}$. Before stating the results, we recall certain well known operations on the homotopy of good and restricted Lie algebras, as discussed in \cite[Thm 7.12, Prop 8.8]{CurtisSimplicialHtpy.pdf}:
-\begin{prop*}
+\begin{prop}
 For $X$ a simplicial object either in $\GoodLie{n}$ or $\RestLie{n}$, $\pi_{*}(X)$ naturally becomes a good Lie algebra (in $\GoodLie{n+1}$) under a bracket induced by the shuffle map. Moreover, $\pi_{*}(X)$ has natural operations
 \[\Q^i:\pi_{a_{n+1}}(X)_{a_n,\ldots,a_1}\to \pi_{a_{n+1}+i}(X)_{2a_n,\ldots,2a_2,2a_1+1}
 \]
@@ -459,10 +457,10 @@ acts as a (partially defined) restriction, so that, for $x,y\in \pi_i(X)_{ a_{n}
 %That is, for $x,y\in L_{a_n,\ldots,a_1}$, $i<a_n$ (with not all of $i,a_{n-1},\ldots,a_{2}$ being zero) and $z\in L$: \[\Q^i{(x+y)}=\Q^i{x}+\Q^i{y}\textup{ and }[\Q^i{x},z]=0.\]
 %Finally, the $\Q$ operations are assumed to satisfy the following $\Q$-Adem relations wherever they make sense. If $i>2j$, and $\Q^i\Q^jx$ is defined (i.e.\ $j\leq|x|$, not all of $j,a_{n-1},\ldots,a_2$ are zero, and $i\leq|x|+j$):
 %\[\Q^i\Q^jx=\sum_{k=0}^{(i-2j)/2-1}{i-2j-2-k\choose k}\Q^{2j+1+k}\Q^{i-j-1-k}x.\]
-\end{prop*}
+\end{prop}
 
 \noindent Again, it is not immediately obvious that $\Q$-Adem relations are well defined, but this follows from the same lemma as previously, even with the restrictions on $\Q^0$. 
-%\begin{lem*}
+%\begin{lem}
 %Suppose that %$i>2j$, and 
 %$\produces{(i,j)}{(i',j')}{\Q}$. Then
 %\begin{enumerate}[i)]\squishlist
@@ -472,14 +470,14 @@ acts as a (partially defined) restriction, so that, for $x,y\in \pi_i(X)_{ a_{n}
 %\minDim(i,j)$.
 %\end{enumerate}
 %In particular, if $\Q^i\Q^jx$ is defined, and $i>2j$, it can be rewritten as a sum of terms $\Q^{i'}\Q^{j'}x$ in which neither of the $\Q^{i'}$ and $\Q^{j'}$ that appear are top operations.
-%\end{lem*}
+%\end{lem}
 With these operations in hand, we can express the homotopy groups of spheres as follows:
 
 
 
 
 
-\begin{prop*}
+\begin{prop}
 For $n\geq1$, suppose that $X\in\GS{n+1}$ is a graded set. Let $B$ be a Hall basis derived from $X$ for the free good Lie algebra $\Fr{\GoodLie{n+1}}(X)$. Note that $B\subset \Fr{\GoodLie{n+1}}(X)$ is in particular a graded set.
 \begin{alignat*}{2}
 \pi_*(\makebox[\widthof{$\Fr{\GoodLie{n}}S(X)$}][c]{$\Fr{\GoodLie{n}}S(X)$})
@@ -507,7 +505,7 @@ where by $a_n,\ldots,a_2$ we mean all but the outermost indices in $\|b\|=(a_{n+
 %\[\left\{\Q^Ib\,:\,\genfrac{}{}{0pt}{}{b\in B_{a_{n+1},\ldots,a_1},\,I\in\admis{\Q},\ i_1\leq|b|=a_{n+1},}{\textup{if }a_{n}=\cdots=a_2=0\textup{ then $I$ doesn't contain 0}}\right\}\]
 %\end{enumerate}
 %We always allow $I$ to be the empty sequence in the above bases, in which case the condition on $i_{1}$ is to be ignored. If $I$ is nonempty, we mean that $i_{1}$ is the rightmost entry of $I=(i_\ell,\ldots,i_1)$.
-\end{prop*}
+\end{prop}
 \noindent The first two parts assert that the natural homotopy operations in the
 homotopy of a simplicial good or restricted Lie algebra are generated by
 the operations of the previous proposition, and are subject only to those
@@ -657,7 +655,7 @@ defined whenever $i< a_n$ (note the strict inequality) and not all of $i,a_{n-1}
 The $\Q$ operations are assumed to satisfy the same $\Q$-Adem relations as in $\LL{n}$, wherever they make sense in $\nontop{n}$. %The same discussion shows that this too is a meaningful definition. %Every operation $\Q^i$ is assumed linear.
 \end{itemize}
 
-\begin{prop*}
+\begin{prop}
 For $n\geq1$, suppose that $X\in\GS{n}$ is a graded set. Let $B$ be a Hall basis derived from $X$ for the free good Lie algebra $\Fr{\GoodLie{n}}(X)$. Note that $B\subset \Fr{\GoodLie{n}}(X)$ is in particular a graded set. Then when $n=1$:
 \begin{alignat*}{2}
 {\Fr{\LL{1}}(X)}
@@ -679,8 +677,8 @@ and when $n\geq2$:
 \left\langle \Q^Ix\,:\,\genfrac{}{}{0pt}{}{x\in X,\,I\in\admis{\Q},\ i_1<|x|,}{\textup{if }a_{n-1}\!=\!\cdots\!=\!a_2\!=\!0\textup{ then $I$ doesn't contain 0}}\right\rangle,%
 \end{alignat*}
 where by $a_{n-1},\ldots,a_2$ we mean all but the outermost indices in whichever of the degrees $\|b\|=(a_{n},\ldots,a_1)$ or $\|x\|=(a_{n},\ldots,a_1)$ is relevant, by $i_1$ we mean the rightmost entry of $I=(i_\ell,\ldots,i_1)$, and we ignore the condition on $i_1$ when $I$ is empty. Note that the strictness of the inequality on $i_1$ differs according to whether $n=1$ or $n\geq2$.
-\end{prop*}
-%\begin{prop*}
+\end{prop}
+%\begin{prop}
 %For $n\geq1$, let $X\in\GS{n}$ be a graded set, and let $B$ be a Hall basis derived from $X$ for $\Fr{\GoodLie{n}}(X)$. Note that $B\subset \Fr{\GoodLie{n}}(X)$ is in particular a graded set. Then when $n=1$:
 %\begin{enumerate}[i)]\squishlist
 %\setlength{\parindent}{.25in}
@@ -695,14 +693,14 @@ where by $a_{n-1},\ldots,a_2$ we mean all but the outermost indices in whichever
 %\end{enumerate}
 %We always allow $I$ to be the empty sequence in the above bases, in which case the condition on $i_{1}$ is to be ignored. If $I$ is nonempty, we mean that $I=(i_\ell,\ldots,i_1)$, so that $i_{1}$ is the rightmost entry of $I$.
 %Note that the inequalities involved differ according to whether $n=1$ or $n\geq2$.
-%\end{prop*}
-%\begin{prop*}
+%\end{prop}
+%\begin{prop}
 %If I ever use this, I'll swap the `i_ell's
 %For $n\geq2$, for $X\in\GS{n}$ a graded set, $\Fr{\LL{n}}(X)$ has basis the compositions $\Q^{I}b$, where $b$ runs over a homogeneous Hall basis for the free (unrestricted, good) Lie algebra $\Fr{\GoodLie{n}}(X)$, and $I=(i_1,\ldots,i_\ell)$ is a $\Q$-admissible sequence with $i_\ell\leq|b|$ and not all of $i_{\ell},a_{n-1},\ldots,a_2$ are zero if $b$ has grading $(a_n,\ldots,a_1)$. 
 %
 %$\Fr{\nontop{n}}(X)$ has basis the compositions $\Q^{I}x$ where $x\in X$ and $I=(i_1,\ldots,i_\ell)$ is a $\Q$-admissible sequence with $i_\ell<|x|$ and not all of $i_{\ell},a_{n-1},\ldots,a_2$ are zero if $x$ has grading $(a_n,\ldots,a_1)$.
 %%Here, $L^uX$ is an object of $\GoodLie{n}$ if we stipulate that the bracket shifts degrees as appropriate.
-%\end{prop*}
+%\end{prop}
 \begin{proof}
 The identification of $\Fr{\LL{1}}(X)$ is \cite[Thm F, p.15]{MR1089001}.
 For each of the remaining three calculations, it is clear that the proposed bases span the free constructions. It remains to show that the elements are linearly independent.
@@ -712,9 +710,9 @@ For any $n\geq1$, the proposed bases of $\Fr{\LL{n}}(X)$ is seen to be linearly 
 %
 %Consider then the morphism $\Fr{\LL{n}}(X)\to \pi_*(\Fr{\RestLie{n}}(V))$ induced by the universal property of the free construction. The images of the proposed basis for $\Fr{\LL{n}}(X)$ map to linearly independent elements in $\pi_*(\Fr{\RestLie{n}}(V))$, showing that $\Fr{\LL{n}}(X)$ is as described. The same argument will prove (iv), this time viewing $\pi_*(\Fr{\RestLie{n}}(V))$ as an element of $\nontop{n}$.
 \end{proof}
-\begin{cor*}
+\begin{cor}
 For all $n\geq 1$, the forgetful functor $\forget:\LL{n}\to\nontop{n}$ preserves free objects.
-\end{cor*}
+\end{cor}
 \begin{proof}
 When $n=1$, $\Fr{\LL{1}}(X)$ is free on $B$ as an object of $\nontop{n}$. For $n\geq2$, $\Fr{\LL{n}}(X)$  is free on $B\cup \{\iteratedrestn{b}{n}\,:\,b\in B_{a_{n},\ldots,a_1},\,n\geq1,\textup{ not all of $a_n,\ldots,a_2$ are zero}\}$ as an object of $\nontop{n}$, since
 \[\iteratedrestn{b}{n}=\Q^{(2^{n-1}|b|)}\cdots \Q^{(2|b|)}\Q^{|b|}b.\qedhere\]
@@ -749,9 +747,9 @@ Now for each category $\mathsf{C}$ amongst $\LL{n}$, $\PRLie{n}$ and $\nontop{n}
 &%r2c2
 %r2c3
 }\]
-\begin{prop*}
+\begin{prop}
 For all $n\geq1$ there exists a functor $\LL{n}\to\PRLie{n}$ which preserves free objects, and completing the diagram above to a commuting square and triangle.
-\end{prop*}
+\end{prop}
 \begin{proof}
 For all $n$, the bracket and restrictions that are required to define an object of $\nontop{n}$ are well defined after quotienting out the image of the operations in $\Ind{\nontop{n}}$.
 
@@ -799,7 +797,7 @@ We are interested in the derived functors $(\derived\Ind{\LL{n}})X\in\GR{n+1}$ f
 To explain this, note that $\derived\Ind{\nontop{n}}\in\PiAlg{\PRLie{n}}$, and $\overline{\Ind{\PRLie{n}}}$ is the functor $\PiAlg{\PRLie{n}}\to\GR{n+1}$ induced by $\Ind{\PRLie{n}}$. The $t$ subscript picks out the part with (new) grading $t$. It might be simpler to write:
 \[E^2=(\derived\overline{\Ind{\PRLie{n}}})(\derived\Ind{\nontop{n}})X\implies(\derived\Ind{\LL{n}})X\textup{ with }\deg(d^r)=(-r,r-1,0,\ldots,0).\]
 Here, each $E^r$ is $(n+2)$-graded, while $(\derived\Ind{\LL{n}})X$ is $(n+1)$-graded. Each page $E^r$ has two homological degrees in addition to the $n$ internal degrees of $X$, and these extra two degrees on $E^\infty$ sum to the single homological degree in $(\derived\Ind{\LL{n}})X$.
-\begin{prop*}
+\begin{prop}
 There's a commuting diagram of functors:
 \[\xymatrix@R=0mm@C=14mm{
 \PiAlg{\PRLie{n}}
@@ -815,14 +813,14 @@ There's a commuting diagram of functors:
 %r3c2
 }\]
 %Under the isomorphism $\PiAlg{\PRLie{n}}\cong\LL{n+1}$, the functor $\overline{\Ind{\PRLie{n}}}:\PiAlg{\PRLie{n}}\to \GR{n+1}$ is identified with 
-\end{prop*}
+\end{prop}
 \begin{proof}
 As $\overline{\Ind{\PRLie{n}}}$ is a $0^\textup{th}$ left derived functor, and $\Ind{\LL{n+1}}$ preserves colimits, it is enough to check that this diagram commutes on free objects in $\PiAlg{\PRLie{n}}$. All such objects are of the form $\pi_*(\Fr{\PRLie{n}}SX)$ for some $X\in\GS{n+1}$, and
 \[\overline{\Ind{\PRLie{n}}}(\pi_*(\Fr{\PRLie{n}}SX)):=\pi_*(\Ind{\PRLie{n}}(\Fr{\PRLie{n}}SX))=\pi_*(SX)=X=\Ind{\LL{n+1}}(\pi_*(\Fr{\PRLie{n}}SX)).\qedhere\]
 %The functor $\overline{\Ind{\PRLie{n}}}$ is the $0^\textup{th}$ left derived functor of the functor $\textup{free}(\PiAlg{\PRLie{n}})\to\GR{n+1}$ defined by $\pi_*(\Fr{\PRLie{n}}SX)\mapsto \pi_*(\Ind{\PRLie{n}}(\Fr{\PRLie{n}}SX))$ for $X\in\GS{n+1}$. One calculates $\pi_*(\Ind{\PRLie{n}}(\Fr{\PRLie{n}}SX))=\pi_*(SX)=X$
 \end{proof}
 %Finally, we should recall that $\PiAlg{\PRLie{n}}\simeq\LL{n+1}$, and under this isomorphism, $\overline{\Ind{\PRLie{n}}}$ is identified with $\Ind{\LL{n+1}}$. 
-\begin{cor*}
+\begin{cor}
 For $n\geq1$, and any $X\in\LL{n}$, there is a spectral sequence:
 \[E^2=(\derived{\Ind{\LL{n+1}}})(\derived\Ind{\nontop{n}})X\implies(\derived\Ind{\LL{n}})X.\]
 \begin{itemise}
@@ -834,25 +832,25 @@ For $n\geq1$, and any $X\in\LL{n}$, there is a spectral sequence:
 \[E^\infty_{a_{n+2},\ldots,a_1}=(F_{a_{n+2}}/F_{a_{n+2}-1})((\derived\Ind{\LL{n}})X)_{a_{n+2}+a_{n+1},a_n,\ldots,a_1}.\]
 \end{itemise}
 %The pages $E^r$ ($r\leq\infty$) are $(n+2)$-graded, with $\deg(d^r)=(-r,r-1,0,\ldots,0)$. The term $E^\infty_{a_{n+2},\ldots,a_1}$ is a subquotient of the degree $(a_{n+2}+a_{n+1},a_n,\ldots,a_1)$ part of the target.
-\end{cor*}
+\end{cor}
 %Thus, we may write the spectral sequence as:
 %\[\fbox{$E^2=(\derived{\Ind{\LL{n+1}}})(\derived\Ind{\nontop{n}})X\implies(\derived\Ind{\LL{n}})X.$}\]
 The following observation explains why there's little danger in having two functors named $\Ind{\nontop{n}}$.
-\begin{lem*}
+\begin{lem}
 For $n\geq1$, and any $X\in\LL{n}$, there's an isomorphism of vector spaces
 \[(\derived{\Ind{\nontop{n}}})X\cong(\derived{\Ind{\nontop{n}}})(\forget(X)),\]
 induced by the evident inclusion $B_\bullet(\forget,\Fr{\nontop{n}},\forget(X))\to B_\bullet(\PRLie{n},\Fr{\LL{n}},X)$.
-\end{lem*}
+\end{lem}
 \noindent In light of this result, we write $(\derived{\Ind{\nontop{n}}})X$ for either $(\derived{\Ind{\nontop{n}}})X$ or $(\derived{\Ind{\nontop{n}}})\forget(X)$, without ambiguity. DISCUSS the meaning of the fg and Rn in the bar construction.
 \begin{proof}
 As $\forget:\LL{n}\to\nontop{n}$ preserves free objects and weak equivalences, there's a one-line Grothendieck spectral sequence producing the isomorphism, but this argument does not show that the isomorphism is induced by the inclusion of bar constructions. If $\forget(B_\bullet(\LL{n},\LL{n},X))$ were almost free in $s\nontop{n}$, the map ${B}_\bullet(\nontop{n},\nontop{n},\forget(X))\to{B}_\bullet(\LL{n},\LL{n},X)$ would be a map of cofibrant replacements of $\forget(X)$ in $s\nontop{n}$, and thus 
 
 Or should I say: ``the obvious inclusion map $\overline{B}_*(\nontop{n},\nontop{n},X)\to\overline{B}_*(\LL{n},\LL{n},X)$ is a map of almost free objects realising the identity on $X$''? Is the latter actually almost free in $s\nontop{n}$?
 \end{proof}
-\begin{lem*}
+\begin{lem}
 For any $X$ in $s\LL{n}$, $(\derived{\Ind{\nontop{n}}})(\forget(X))$ may be calculated as the homotopy of the object 
 \[\forget(\Ind{\nontop{n}}(B_\bullet(\Fr{\LL{n}},\Fr{\LL{n}},X)))=\forget(B_\bullet(\Fr{\PRLie{n}},\Fr{\LL{n}},X))\in s\GR{n}.\]
-\end{lem*}
+\end{lem}
 \begin{proof}
 Although $B:=B_\bullet(\Fr{\LL{n}},\Fr{\LL{n}},X)$ is an acyclic levelwise free object in $s\nontop{n}$, with $\pi_0(B)=X$, it may fail to be `almost free'. The point here is that $B$ can be used to calculate the derived functors of $\Ind{\nontop{n}}$ anyway. To see this, consider the bisimplicial object $A:=\Ind{\nontop{n}}(B_\bullet(\Fr{\nontop{n}},\Fr{\nontop{n}},B))$ formed by applying $\Ind{\nontop{n}}$ to the levelwise bar construction on $B$, so that
 \[A_{s,t}=(\Ind{\nontop{n}})((\Fr{\nontop{n}})^{s+1})B_t\cong (\Fr{\nontop{n}})^sB_t.\]
@@ -863,9 +861,9 @@ To identify ${E}^{2,I}_{s,t}$, write $A_{s,\bullet}$ for the singly simplicial o
 
 On the other hand, for fixed $t$, $A_{\bullet,t}$ is simply the bar construction calculating $(\derived\Ind{\nontop{n}})B_t$. As $B_t$ is free for each $t$, $(\derived_0\Ind{\nontop{n}})B_t=\Ind{\nontop{n}}(B_t)$, and the higher derived functors vanish, identifying $E^{2,II}$.
 \end{proof}
-\begin{lem*}
+\begin{lem}
 Suppose that $W\in s\nontop{n}$ is acyclic. Then for each $s\geq0$,  $(\Fr{\nontop{n}})^sW\in s\nontop{n}$ is acyclic, with $\pi_0((\Fr{\nontop{n}})^sW)=(\Fr{\nontop{n}})^s(\pi_0(W))$.
-\end{lem*}
+\end{lem}
 \begin{proof}
 By induction on $s$ it is enough to prove the statement when $s=1$. The calculation of $\pi_0$ is immediate from the fact that $\Fr{\nontop{n}}$, being a left adjoint, preserves colimits.
 
@@ -899,7 +897,7 @@ We will define Koszul complexes calculating $\derived\Ind{\nontop{n}}$ for all $
 
 %\subsubsection{The unstable bar construction and Koszul complex for $\nontop{n}$, $n\geq2$}
 For any object $X\in\nontop{n}$, the bar construction ${B}_\bullet(\Fr{\nontop{n}},\Fr{\nontop{n}},X)=(\Fr{\nontop{n}})^{\bullet+1}X$ is a free simplicial resolution of $X$. Now there is an isomorphism of graded vector spaces $\Ind{\nontop{n}}(\Fr{\nontop{n}}(X))\cong\forget(X)$. Thus $(\derived\Ind{\nontop{n}})X$ may be calculated as the homotopy of the bar construction $B_\bullet(\forget,\Fr{\nontop{n}},X)=(\Fr{\nontop{n}})^\bullet X$. Normalizing this complex by taking the quotient by degenerate simplices, one obtains the reduced Bar construction $\overline{B}_*(\forget,\Fr{\nontop{n}},X)$, a chain complex calculating $(\derived\Ind{\nontop{n}})X$, which we now describe.
-\begin{prop*}
+\begin{prop}
 As a vector space each $\overline{B}_r$ is graded, with $\overline{B}_{r,\ell}$
 %For $r\geq0$, $\overline{B}_r(\forget,\Fr{\nontop{n}},X)$ is 
 spanned by monomials
@@ -919,11 +917,11 @@ where:
 \end{itemize}
 As Adem relations may be applied between each pair of bars, a basis of $\overline{B}_r(\forget,\Fr{\nontop{n}},X)$ consists of all the above monomials in which each of the $r$ subsequences of $I$ is $\Q$-admissible, as $x$ runs through a homogeneous basis for $X$. The formula for the differential is the standard one, making %under the $\ell$ grading on each $\overline{B}_r$ makes
  $\overline{B}_*$ a chain complex with increasing filtration, $F_p\overline{B}_r=\bigoplus_{\ell\geq p}\overline{B}_{r,\ell}$. 
-\end{prop*}
+\end{prop}
 \noindent We'll say that a monomial $\BarMonomial{I}{\textbf{k}}{x}\in\overline{B}_r$ is bar-admissible if each of the evident $r$ subsequences of $I$ are $\Q$-admissible. Thus a basis for $\overline{B}_{r,\ell}$ consists of the bar-admissible monomials on a basis of $X$. Note that for any fixed element $x$ and any fixed internal grading $\ell$, the condition on $\minDim(I)$ implies that there are only finitely many monomials of the form $\BarMonomial{I}{\textbf{k}}{x}$ in $\overline{B}_{r,\ell}$.
-\begin{prop*}
+\begin{prop}
 Any cycle in $\overline{B}_{r,\ell}$, for $\ell>r$ is homologous to a cycle in $\overline{B}_{r,r}$.
-\end{prop*}
+\end{prop}
 \begin{proof}
 First, a construction. For any bar-admissible monomial $\BarMonomial{I}{\textbf{k}}{x}\in\overline{B}_{r,\ell}$ with $\ell>r$, choose the unique integer $e$ such that $k_r=k_{r-1}=\cdots =k_{r-e+1}=1<k_{r-e}$, so that
 \[\BarMonomial{I}{\textbf{k}}{x}=\left[\Q^{i_\ell}\middle|\Q^{i_{\ell-1}} \middle|\Q^{i_{\ell-2}}\middle|\cdots \middle|\Q^{i_{\ell-e+1}}\middle|\Q^{i_{\ell-e}}\Q^{i_{\ell-e-1}}\cdots \middle|\cdots \right]x.\]
@@ -946,7 +944,7 @@ Now suppose that $z\in Z\overline{B}_r$ is a cycle which is not already in $\ove
 $z=\sum_i a_i + \sum_j b_j$ where the $a_i$ and $b_j$ are bar-admissible monomials, all of the $a_i$ are equivalent under $\gtrsim$, but $a_i\gnsim b_j$ for all $i$ and $j$. Then $z+\sum_i\partial\Psi(a_i)$ is a homologous cycle in which every monomial appearing (when written as a sum of bar-admissibles) is strictly less than the $a_i$. We may iterate this process, reducing the largest equivalence class of monomials appearing in $z$ at each step. As there are only finitely many possible sequences $I$ appearing, eventually a cycle in $\overline{B}_{r,r}$ is reached.
 \end{proof}
 
-\begin{prop*}
+\begin{prop}
 Suppose that $X\in\nontop{n}$ is trivial, so that all of the $\Q$ operations act as zero. Then %the differential $\partial $ of $\overline{B}_r$ respects the $\ell$ grading, so that 
 $(\derived_r\Ind{\nontop{n}})X$ has a basis $\{\Q(I)x\}$, where
 \begin{itemize}
@@ -958,7 +956,7 @@ $(\derived_r\Ind{\nontop{n}})X$ has a basis $\{\Q(I)x\}$, where
 That is, the sequences involved are those $\SqShift$-admissible $I$ such that $Q^Ix$ is defined in $X\in\nontop{n}$.
 These classes are defined by the following sum taken over certain non-negative integer sequences $J=(j_{r},\ldots,j_1)$:
 \[\Q(I)x:=\left[\Q^{i_r}\middle|\cdots\middle|\Q^{i_1} \right]x+\sum_{\produces{J}{I}{\SqShift}}\left[\Q^{j_r} \middle|\cdots\middle|\Q^{j_1} \right]x.\]%\textup{ (sum over nonnegative sequences $J=(j_{r},\ldots,j_1)$)}\]
-\end{prop*}
+\end{prop}
 \noindent Note that if $\produces{J}{I}{\SqShift}$, then $\minDim(J)<\minDim(I)$, and also that if $0$ appears in $I$, it must also appear in $J$ [these facts are Koszul dual to those described in the lemma above for $\Q$]. Thus, all the terms in the definition of $\Q(I)x$ are indeed valid in the bar construction.
 \begin{proof}
 As $X$ is trivial, the differential of $\overline{B}_r$ respects the $\ell$ grading, so that even the derived functors $(\derived_r\Ind{\nontop{n}})X$ have the extra $\ell$ grading. By the previous proposition, they are concentrated along the diagonal $r=\ell$.
@@ -990,11 +988,11 @@ Using this relation, we see that a basis of $H^{r,r}\overline{C}$ is represented
 
 As long as each $\Q(I)x$ is a cycle, they will form the dual basis for $H_{rr}\overline{B}$, as in the sum defining $\Q(I)x$, the only $\SqShift$-admissible $J$ appearing is $J=I$. In order to check that each $\Q(I)x$ is a cycle, it only remains to check that they pair to zero with each relation in the dual. But that is not hard to see. On $\overline{C}^{r,r}$, by definition of $\Q(I)x$, the operation `pair with $\Q(I)x$' \emph{equals} the operation `reduce to $\SqShift$-admissible form using $\SqShift$-Adem relations, and take the coefficient of $(\left[\Q^{i_\ell}\middle|\cdots\middle|\Q^{i_1} \right]x)^*$'. This second operation obviously returns zero on Adem relations, and these are precisely the image of $\delta$.
 \end{proof}
-\begin{prop*}
+\begin{prop}
 Suppose instead that $X$ is any object in $\nontop{n}$, the Koszul complex $\overline{K}_*X$ is the subcomplex of $\overline{B}_*(\forget,\Fr{\nontop{n}},X)$ with basis the classes $\Q(I)x$ (for the same $I$ and $x$ as above). The inclusion of $\overline{K}_*X$ into $\overline{B}_*(\forget,\Fr{\nontop{n}},X)$ is a homology equivalence, the restriction of the differential to $\overline{K}_*X$ is given by the following formula:
 \[\partial(\Q(I)x)=\Q((i_{\ell},\ldots,i_2))(\Q^{i_1}x)+\!\!\!\!\!\!\!\!\!\!\!\!\!\!\!\!\!\sum_{\substack{\produces{J}{I}{\SqShift}\\(j_{\ell},\ldots,j_2)\in\admis{\SqShift}}}\!\!\!\!\!\!\!\!\!\!\!\! \Q((j_{\ell},\ldots,j_2))(\Q^{j_1}x),\]
 where the sum is taken over those $J=(j_{\ell},\ldots,j_1)$ such that $(j_{\ell},\ldots,j_2)$ is $\SqShift$-admissible.
-\end{prop*}
+\end{prop}
 \begin{proof}
 The spectral sequence associated to the filtered complex has $E^0_{r,\ell}=\overline{B}_{r,\ell}(\forget,\Fr{\nontop{n}},X^\textup{Triv})$, where $X^\textup{Triv}$ is a trivial object of $\nontop{n}$ on the same underlying vector space as $X$. The differential $d^0$ implements the differential on this reduced bar construction, so that $E^1_{r,\ell}=(\derived_{r,\ell}\Ind{\nontop{n}})X$. This is concentrated on $r=\ell$, so that $d^1$ is the last nonzero differential, after which the spectral sequence collapses.
 
@@ -1025,9 +1023,9 @@ We'll record here the necessary changes to the previous theory required when $n=
 %\subsubsection{The unstable bar construction and Koszul complex for $\nontop{1}$}
 We are again interested in the reduced Bar construction $\overline{B}_*(\forget,\Fr{\nontop{1}},X)$, which computes $(\derived\Ind{\nontop{1}})X$.
 
-%\begin{lem*}
+%\begin{lem}
 %Suppose that $i\geq2j$, and $\produces{(i,j)}{(i',j')}{P}$. Then $\minDimP(i',j') > \minDimP(i,j)$.
-%\end{lem*}
+%\end{lem}
 %\begin{proof}
 %$j'\geq i-j+1=
 %j+(i-2j+1)=
@@ -1035,7 +1033,7 @@ We are again interested in the reduced Bar construction $\overline{B}_*(\forget,
 %$, so that $j'>\max\{j,i-j-1\}$.
 %\end{proof}
 
-\begin{prop*}
+\begin{prop}
 As a vector space each $\overline{B}_r$ is graded, with $\overline{B}_{r,\ell}$
 %For $r\geq0$, $\overline{B}_r(\forget,\Fr{\nontop{n}},X)$ is 
 spanned by monomials
@@ -1053,10 +1051,10 @@ where:
 \end{itemize}
 As Adem relations may be applied between each pair of bars, a basis of $\overline{B}_r(\forget,\Fr{\nontop{1}},X)$ consists of all the above monomials in which each of the $r$ subsequences of $I$ is $P$-admissible, as $x$ runs through a homogeneous basis for $X$. The formula for the differential is the standard one, making %under the $\ell$ grading on each $\overline{B}_r$ makes
  $\overline{B}_*$ a chain complex with increasing filtration, $F_p\overline{B}_r=\bigoplus_{\ell\geq p}\overline{B}_{r,\ell}$. 
-\end{prop*}
+\end{prop}
 
 
-\begin{prop*}
+\begin{prop}
 Suppose that $X$ is any object in $\nontop{1}$, the Koszul complex $\overline{K}_*X$ is the subcomplex of $\overline{B}_*(\forget,\Fr{\nontop{1}},X)$ with basis the classes $P(I)x$, where 
 \begin{itemize}
 \setlength{\parindent}{.25in}
@@ -1068,7 +1066,7 @@ and where
 The inclusion of $\overline{K}_*X$ into $\overline{B}_*(\forget,\Fr{\nontop{1}},X)$ is a homology equivalence, the restriction of the differential to $\overline{K}_*X$ is given by the following formula:
 \[\partial(P(I)x)=P((i_{\ell},\ldots,i_2))(P^{i_1}x)+\sum_{\substack{\produces{J}{I}{\delta} \\ \minDimP(J)\leq|x|}} P((j_{\ell},\ldots,j_2))(P^{j_1}x),\]
 where the sum is taken over those $J=(j_{\ell},\ldots,j_1)$ such that $(j_{\ell},\ldots,j_2)$ is $\delta$-admissible.
-\end{prop*}
+\end{prop}
 \begin{proof}
 The proof of this proposition is the same as the proof of the corresponding propositions in the $n\geq2$ case. We use the same algorithm to compress to the diagonal, and the same spectral sequence. There are two main differences between the two cases:
 
@@ -1085,11 +1083,11 @@ In the $n\geq2$ case, the bar construction was the subobject of a stable bar con
 \section{Lie algebra homology and low dimensional calculations}
 \subsection{Calculating $\derived\Ind{\LL{n}}$ in internal dimension zero}
 Suppose that $n\geq2$. Then the dimension zero part of an object $X$ of $\LL{n}$ is a partially restricted Lie algebra, in $\PRLie{n-1}$. That is: 
-\begin{lem*}
+\begin{lem}
 There is a `zeroth part' functor $\LL{n}\to\PRLie{n-1}$, written $X\mapsto X_0$, where $X_0\in\PRLie{n-1}$ is defined by
 \[(X_0)_{a_{n-1},\ldots,a_1}:=X_{0,a_{n-1},\ldots,a_1}\]
 with bracket inherited from the bracket on $X$, and restriction $\restn{}$ given by $\Q^0$. Moreover, taking zeroth parts commutes with the two free constructions, which is to say that for $S\in\GS{n}$, we have $(\Fr{\LL{n}}S)_0\cong\Fr{\PRLie{n-1}}(S_0)$, writing $S_0\in\GS{n-1}$ for the zeroth part of $S$.
-\end{lem*}
+\end{lem}
 \begin{proof}
 As objects of $\LL{n}$ are themselves objects of $\PRLie{n}$, with restriction given by $\Q^0$ in dimension zero, it's enough just to check that $\Q^0$ is defined on $X_{0,a_{n-1},\ldots,a_1}$ whenever $\restn{}$ is supposed to be defined on a dimension $(a_{n-1},\ldots,a_1)$ element of an object of $\PRLie{n-1}$. This follows from the definition.
 
@@ -1100,13 +1098,13 @@ Now to check that the free constructions agree, recall that  $\Fr{\LL{n}}S$ has 
 %\[\{\Q^Ib\,:\,b\in B_{a_{n},\ldots,a_1},\,I\in\admis{\Q},\ i_1\leq|b|,\ i_1,a_{n-1},\ldots,a_2\textup{ not all zero}\}\] this was wrong
 where $b$ runs over a homogeneous Hall basis. The only basis elements in the zeroth part are those where $b$ is zero dimensional and in which $I$ only contains zeros, and these classes are exactly a basis for $\Fr{\PRLie{n-1}}(S_0)$.
 \end{proof}
-\begin{prop*}
+\begin{prop}
 There is a natural isomorphism
 \[((\derived_{p}\Ind{\LL{n}})X)_{0,a_{n-1},\ldots,a_1}\cong ((\derived_p\Ind{\PRLie{n-1}})X_0)_{a_{n-1},\ldots,a_1}\]
 \begin{proof}
 Consider the bar construction used to define $((\derived_{p}\Ind{\LL{n}})X)_{0,a_{n-1},\ldots,a_1}$, constructed by repeated application of the free ${\LL{n}}$ functor. In dimension zero, this amounts to repeated application of the free $\PRLie{n-1}$ functor, and we obtain the bar construction for $X_0$ as an object of $\PRLie{n-1}$.
 \end{proof}
-\end{prop*}
+\end{prop}
 %\subsubsection{$\derived\Ind{\LL{1}}$}
 \begin{shaded}
 Choose $n\geq 1$, and define 
@@ -1150,12 +1148,12 @@ The PBW theorem states that $E^0VL=A(L^u)\otimes E(L^r)$, and the homology of th
 \item for $\textbf{z}\in\Z^n$ write $\calP(\textbf{z})$ for the set of permutations of the multiset $\{i^{z_i};i=1,\ldots,n\}$, written as sequences $\textbf{p}=(p_1,\ldots,p_{\sigma \textbf{z}})$. This set is empty if $\textbf{z}$ has a negative entry. For such a $\textbf{p}$, write $p\sigma_i$ for $(p_1,\ldots,p_{i-1},p_{i+1},p_{i},p_{i+2},\ldots,p_{\sigma \textbf{z}})$.
 \item $d_k:\calP(\textbf{z})\to\calP((r_{p_kp_{k+1}}\textbf{z})*(1))$ (the star denotes concatenation), in which $(p_1,\ldots,p_{\sigma \textbf{z}})$ is sent to $(p_1,\ldots,p_{k-1},\ell(\textbf{z})+1,p_{k+2},\ldots,p_{\sigma \textbf{z}})$. That is, two entries are removed, and in their position we place a single entry, $\ell(\textbf{z})+1$.
 \end{itemize}
-\begin{prop*}
+\begin{prop}
 Choose $\textbf{z}\in\Z^n$, and $i$ satisfying $1\leq i\leq n$. Then as $k$ ranges from $1$ to $\sigma \textbf{z}-1$, and $\textbf{p}$ ranges through those elements of $\calP(\textbf{z})$ satisfying $(p_k,p_{k+1})=(i,i)$, then $d_kp$ assumes each value in $\calP((r_{ii}\textbf{z})*(1))$ exactly once.
-\end{prop*}
-\begin{prop*}
+\end{prop}
+\begin{prop}
 Choose $\textbf{z}\in\Z^n$, and $i\neq j$ satisfying $1\leq i,j\leq n$. Then as $k$ ranges from $1$ to $\sigma \textbf{z}-1$, and $\textbf{p}$ ranges through those elements of $\calP(\textbf{z})$ satisfying $(p_k,p_{k+1})=(i,j)$, then $d_k\textbf{p}$ assumes each value in $\calP((r_{ij}\textbf{z})*(1))$ exactly once. This occurs symmetrically in $i$ and $j$, which is to say that for such a pair $(k,\textbf{p})$, the pair $(k,\textbf{p}\sigma_k)$ works with $i$ and $j$ swapped, and we have $d_k(\textbf{p}\sigma_k)=d_k(\textbf{p})$.
-\end{prop*}
+\end{prop}
 
 
 We can respresent a product $\prod_{i=1}^{n}\gamma_{z_i}(x_i)$ in $E(L^u)\otimes \Gamma(L^r)$ by a class $\left\langle \textbf{z},\textbf{x}\right\rangle$ in $\overline{B}(E^0V(L))$ which we now define:
@@ -1224,7 +1222,7 @@ One notes that as $i\leq n$, the expressions $s_\alpha z$ and $s_\beta z$ both s
 
 Finally, if $\frakg$ supports a partial restriction on a subspace $\frakg^r$, we have an operation $\Q^0:N\frakg^r_n\to N\frakg_n$, defined simply by $z\mapsto\restn(z)$.
 
-\begin{lem*}
+\begin{lem}
 Choose $i\geq0$ and $\alpha=(\alpha_p,\ldots,\alpha_1)$ with $\alpha_p>\cdots >\alpha_1\geq0$.
 \begin{enumerate}[i)]\squishlist
 \setlength{\parindent}{.25in}
@@ -1237,7 +1235,7 @@ Here, $c$ is the index such that $\alpha_{c+1}>i\geq\alpha_{c}$, after setting  
 \item[iii)] if neither $i$ nor $i-1$ appear in $\alpha$, then  $d_is_\alpha=s_{\alpha'}d_{i'}$ for some $\alpha'$ and $i'$; and
 \item[iv)] if exactly one of $i$ and $i-1$ appears in $\alpha$, then  $d_is_\alpha$ does not depend on which of $i$ and $i-1$ appeared.
 \end{enumerate}
-\end{lem*}
+\end{lem}
 \subsection{Chain level operations and the Koszul complex}
 
 For this discussion, fix an object $X\in\LL{n}$.
@@ -1281,7 +1279,7 @@ We are then in a position to calculate the $\LL{n+1}$ structure on $(\derived\In
 \item $Q^0\overline{z}$ is represented by $\restn[out]{(z)}$ if not all of $a_n,\ldots,a_2$ are zero, where $\overline{z}\in((\derived_{p}\Ind{\nontop{n}})X)_{a_n,\ldots,a_1}$.
 \end{itemise}
 \subsection{Lie brackets on $(\derived\Ind{\nontop{n}})X$ are trivial}
-\begin{prop*}
+\begin{prop}
 Suppose that $z\in Z\overline{K}_p(X)$ and $w\in Z\overline{K}_q(X)$ are cycles. Then on homotopy classes:% representing classes $\overline{x}$ and $\overline{y}$. Then
 \[[\overline{z},\overline{w}]=\begin{cases}
 \overline{[z,w]},&\textup{if }p=q=0;\\
@@ -1291,7 +1289,7 @@ Suppose that $z\in Z\overline{K}_p(X)$ and $w\in Z\overline{K}_q(X)$ are cycles.
 \]
 Here, $Z\overline{K}_0(X)=X$ has the Lie bracket supplied by the $\LL{n}$ structure of $X$.
 %Suppose that $p>0$ and $q>0$. Then $[\overline{x},\overline{y}]=0$ for cycles $x\in Z\overline{K}_p(X)$ and $y\in Z\overline{K}_q(X)$.
-\end{prop*}
+\end{prop}
 \begin{proof}
 We perform the proof for $n\geq2$, but it works the same way for $n=1$, when one substitutes $\Q$ operations for $P$ operations and ignores all discussion of top and non-top operations.
 
@@ -1312,7 +1310,7 @@ If $\alpha$ and $\beta$ contain one each of $i$ and $i-1$, then let $(\gamma,\ep
 \end{proof}
 \subsection{$\Q^k$ operations on $(\derived\Ind{\nontop{n}})X$ for $k\geq1$}
 In the previous section, we produced an element $a\in B_{p+q+1}(\Fr{\PRLie{n}},\Fr{\LL{n}},X)$, and showed that it was actually an element of $NB_{p+q+1}$, whose boundary was represented the homotopy class we were trying to nullhomotope. In the next two sections, we will choose such an $a$ again, but in some cases, the top \emph{two} face maps will be nonzero on $a$. Thus we will move outside of the normalised complex to construct a homotopy between two nonzero elements. This makes no difference to our calculations, especially since we in the end will always map down to $\overline{K}_*$, which doesn't see the distinction anyway.
-\begin{prop*}
+\begin{prop}
 Suppose that $z\in Z\overline{K}_p(X)_{a_n,\ldots,a_1}$. Then:
 \begin{itemize}\squishlist
 \setlength{\parindent}{.25in}
@@ -1326,7 +1324,7 @@ where each $I^{(j)}=(i_p^{(j)},\ldots,i_1^{(j)})$ is $\delta$-admissible with $\
 %%\[\LambdaOp^1(P(I)y)=P((|P^{i_\ell}\cdots P^{i_1}y|,i_{\ell},\ldots,i_1))y.\]
 That is, $\Q^1$ adjoins a top $P$ operation to the left of each sequence $I^{(j)}$.
 \end{itemize}
-\end{prop*}
+\end{prop}
 \begin{proof}
 The class $\Q^k\overline{z}$ is represented by $\sum_{(\alpha,\beta)\in\HalfShuffles{k}{k}}[s_\beta(\jmath z), s_\alpha(\jmath z)]_{out}$. As in the previous proof, we use the element
 \[a:=\sum_{(\alpha,\beta)\in\HalfShuffles{k}{k}}[s_{p+k}s_\beta(\jmath z), s_{p+k}s_\alpha(\jmath z)]_{p+k+1}.\]
@@ -1360,19 +1358,19 @@ where $\star$ denotes concatenation. None of the $(a_1)\star K$ could hope to be
 
 \subsection{$\Q^0$ operations on $(\derived\Ind{\nontop{n}})X$}
 Assume for this section that $n\geq2$, so that objects of $\LL{n+1}$ support a $\Q^0$ operation, defined when $a_n,\ldots,a_2$ are not all zero. We'll now go some way towards calculating these operations.
-\begin{lem*}
+\begin{lem}
 Suppose that $z\in Z\overline{K}_p(X)_{a_n,\ldots,a_1}$, where not all of $a_n,\ldots,a_2$ are zero. 
 \begin{itemise}
 \setlength{\parindent}{.25in}
 \item If $p>0$, $Q^0\overline{z}$ is represented by the cycle $\Q^{a_n}_p\jmath z$ in the bar construction $NB_p(\Fr{\PRLie{n}},\Fr{\LL{n}},X)$.
 \item If $p=0$, $Q^0\overline{z}$ is represented by the cycle $\Q^{a_n}z$, as calculated in $X=Z\overline{K}_0(X)$.% in the bar construction $NB_p(\Fr{\PRLie{n}},\Fr{\LL{n}},X)$
 \end{itemise}
-\end{lem*}
+\end{lem}
 \begin{proof}
 We use the same homotopy $a$ as in the previous cases. That is, write
 $a:=\restn[p+1]{(s_{p}(\jmath z))}$. Then $d_{p+1}a=\restn[out]{(s_{p}(\jmath z))}$ represents $Q^0\overline{z}$, $d_pa=\restn[p]{(\jmath z)}$, and for $0\leq i<p$, $d_ia=0$. The result follows by recalling that the restriction in $\LL{n}$ is the top $\Q$ operation.
 \end{proof}
-\begin{lem*}
+\begin{lem}
 Suppose that $z\in Z\overline{K}_p(X)_{a_n,\ldots,a_1}$, for $p>0$, is written as a sum
 \[z=\sum_{j}\left[\Q^{i^{{(j)}}_p}\middle|\cdots \middle|\Q^{i^{{(j)}}_1}\right]x^{(j)}\]
 such that for all $j$, 
@@ -1382,7 +1380,7 @@ $\Q^ix^{(j)}=0$ whenever $i\geq i^{{(j)}}_1$. Then $\Q^0\overline{z}=0$.
 In particular, suppose that $I^{(j)}=(i^{(j)}_{p},\ldots,i^{(j)}_{1})$ is a collection of $\SqShift$-Admissible sequences, and $x^{(j)}$ is a sequence of homogeneous elements of $X$, such that
 \[z=\sum_{j}Q(I^{(j)})x^{(j)}\]
 is a cycle in $\overline{K}_p(X)$, and that for all $j$, $\Q^ix^{(j)}=0$ whenever $i\geq i^{{(j)}}_1$. Then $\Q^0\overline{z}=0$.
-\end{lem*}
+\end{lem}
 \begin{proof}
 The second statement follows from the first, as whenever $\produces{J}{I}{\SqShift}$, the final entry of $J$ is at least as large that of $I$.
 
@@ -1440,7 +1438,7 @@ We note some immediate consequences of the conditions just imposed on the $I^i$,
 %\item Suppose that $\ell^i=0$, then $0=\ell^{i+1}=\ell^{i+2}=\ell^{i+3}=\cdots $;
 %\item if $\ell^N>0$ for $N\geq3$, then both $a_N=\ell^{N-1}+n^N\neq0$ and $a_{N-1}=2^{\ell^N}\!\left(\ell^{N-2}+n^{N-1}\right)\neq0$.
 %\end{itemise}
-%\begin{lem*}
+%\begin{lem}
 %The conditions we have put on the $I^i$ in $\Q(I^N)\cdots \Q(I^2)P(I^1)\imath$ are equivalent to the following requirements:
 %\begin{itemise}
 %\setlength{\parindent}{.25in}
@@ -1452,13 +1450,13 @@ We note some immediate consequences of the conditions just imposed on the $I^i$,
 %%
 %% there exists an object $X$ of $\LL{i}$, and an element $x\in X$ with $\|x\|=\|\Q(I^{i-1})\cdots \Q(I^2)P(I^1)\imath\|$, such that $\Q^{I^i}x$ is defined, and none of the $\Q$ in this expression act as a top operation.
 %\end{itemise}
-%\end{lem*}
+%\end{lem}
 \begin{enumerate}[A)]
 \squishlist
 %%%%%%%%%%%%% A2 is a silly misconception! Don't put it in here. \item[(A2)] \textbf{WRONG}for some $X\in\nontop{1}$ (or equivalently $\LL{1}$) and some element $x\in X_d$, $P^{I^1}x$ is nonzero.
 \item[(C2)] for each $i$ satisfying $2\leq i\leq N$, and each object $X\in\nontop{i}$ the operation $\Q^{I^i}$ is defined on classes of dimension $\|\Q(I^{i-1})\cdots \Q(I^2)P(I^1)\imath\|$ in $X$.
 \end{enumerate}
-\begin{lem*}
+\begin{lem}
 Suppose that $N\geq1$ and that $S=(I^N,\ldots,I^1)$. Write $\left\|b(S)\right\|=(a_{N+1},\ldots,a_1)$. Then
 \begin{itemise}
 %\setlength{\parindent}{.25in}
@@ -1466,7 +1464,7 @@ Suppose that $N\geq1$ and that $S=(I^N,\ldots,I^1)$. Write $\left\|b(S)\right\|=
 \item[ii)]  If $S$ satisfies \textup{(A)}-\textup{(C)}, then $\ell^i\neq0$ iff $a_{i+1}\neq0$ iff none of $a_{i+1},\ldots,a_1$ are zero; %the final $i+1$ gradings of $\Q(I^{N})\cdots \Q(I^2)P(I^1)\imath$ are all nonzero;%both $a_N=\ell^{N-1}+n^N\neq0$ and $a_{N-1}=2^{\ell^N}\!\left(\ell^{N-2}+n^{N-1}\right)\neq0$.
 \item[iii)] If $S$ satisfies \textup{(A)} and \textup{(B)}, then $S$ satisfies \textup{(C)} iff $S$ satisfies \textup{(C2)}.
 \end{itemise}
-\end{lem*}
+\end{lem}
 \noindent Statement (iii) would be obvious if \textup{(C)} contained appropriate conditions on the appearance of zeros in $I^i$ for $i\geq3$. The point then is that \textup{(A)}-\textup{(C)} together make these conditions redundant.
 %
 %\noindent The point of the final statement is that we do not need an extra condition on when the $I^i$, for $i\geq3$, can contain zero, in order that the second statement of the lemma holds --- this is already wrapped up in the condition $m^i<\ell^{i-1}$ and the condition that $I^2$ doesn't contain zero.
@@ -1497,9 +1495,9 @@ Before we go on, it is convenient to introduce two more conditions that $S=(I^N,
 \item[E)] $I^2$ doesn't contain 1 or 2, $I^1\in\im(t_d)$, and $\ell^1>2$.
 \end{itemise}
 Here, $t_d$ is the function which adds a top $P$ operation to a \emph{nonempty} $\delta$-admissible sequence:
-\begin{lem*}
+\begin{lem}
 Consider the operation $t_d$ which sends a nonempty sequence  $I^1$ to $(d+n^1+\ell^1)\star I^1$. Then $t_dI^1$ satisfies \textup{(A)} if and only if $I^1$ satisfies \textup{(A)}.
-\end{lem*}
+\end{lem}
 \begin{proof}
 The only if part is immediate, as removing the leftmost entry of a sequence only makes it more likely to be admissible, and cannot increase $\minDimP$. Assume then that $I^1=(i_{\ell^1},\ldots,i_1)$ satisfies \textup{(A)}, with $\ell^1\geq1$. Then:%Now by definition of $\minDimP$,
 \[\minDimP(t_dI)=\max\{\minDimP(I),(d+n^1+\ell^1-i_{\ell^1}-\cdots -i_1-\ell^1)\}=\max\{\minDimP(I),d\}=d.\]
@@ -1512,9 +1510,9 @@ We should check that $t_dI^1$ is $\delta$-admissible. We only need to check that
 \subsection{Combinatorics of  the sequences $(I^N,\ldots,I^1)$}
 \begin{Omitted}
 Suppose that $k\geq2$, and that we've already chosen $(I^{k-1},\ldots,I^1)$ satisfying \textup{(A)}-\textup{(C)}. One may ask the question ``which sequences $I^k$ can we choose so that \textup{(A)}-\textup{(C)} hold for $(I^{k},\ldots,I^1)$?''
-\begin{prop*}
+\begin{prop}
 Suppose that $S=(I^N,\ldots,I^1)$ satisfies \textup{(A)}-\textup{(C)}. Then the sequence $(\ell^N,\ell^{N-1},\ldots,\ell^1)$ is nondecreasing, and $I^k=(\ldots,7,3,1,0)$ whenever $\ell^k=\ell^{k-1}$.%, it must be that $I^k=(\ldots,7,3,1,0)$.
-\end{prop*}
+\end{prop}
 \begin{proof}
 To investigate this question, for a given choice $I^k$ with $\ell^{k}>0$, we define the following two quantities:
 %We define the following two quantities, for $k\geq2$, which relate to the question ``which sequences $I^k$ are permitted given that $I^{k-1}$ has already been chosen?'' under constraints \textup{(A)}-\textup{(C)} as always. Define the following two quantities when $\ell^k>0$:
@@ -1534,7 +1532,7 @@ The point, then, is that whenever $\ell^k>0$ for $k\geq2$, $\ell^k=\ell^{k-1}-\w
 \end{proof}
 \end{Omitted}
 
-\begin{lem*}
+\begin{lem}
 Suppose that $I\in\admis{\SqShift}$ with $\ell(I)>0$. Then $\ell(I)\leq \minDim(I)+1$, with equality iff $I=(\ldots,7,3,1,0)$. Moreover, $\minDim(I)=e(I)$, the Serre excess of $I$. The following inequalities hold:
 \begin{equation}
 2^{\ell(I)}-1-\ell(I)\leq n(I)\leq2^{\minDim(I)+1}-1-(\minDim(I)+1).\tag{i.1) \& (i.2}
@@ -1544,7 +1542,7 @@ If $I$ does not contain 0, then \textup{(i.1)} can be strengthened:
 and if $I$ does not contain either 0 or 1, both \textup{(i.1)} and \textup{(i.2)} can be strengthened:
 \[3(2^{\ell(I)}-1)-\ell(I)\leq n(I)\leq 3\cdot2^{\minDim(I)-1}-\minDim(I)-2.\]
 %the first inequality can be strengthened to $n(I)\geq 3(2^{\ell(I)}-1)-\ell(I)$.
-\end{lem*}
+\end{lem}
 \begin{proof}
 Note first that there is a bijection, for $\ell\geq1$:
 \begin{alignat*}{2}
@@ -1571,15 +1569,15 @@ For \textup{(i.2)}, fix $M$, and consider those $\textbf{m}$ for which $\minDim(
 To prove the strengthening of \textup{(i.2)}, a similar argument, after restricting to those $\textbf{m}$ with $m_1\geq2$, shows that $n(\gamma(\textbf{m}))$ is maximised when $\textbf{m}=(1,\ldots,1,2)$, with $\ell=M-1$. Then
 \[n(\gamma(\textbf{m}))=(2^{M-1}-1)\cdot2+\sum_{i=0}^{(M-1)-2}(2^{i+1}-1)=3\cdot2^{M-1}-M-2.\qedhere\]
 \end{proof}
-%\begin{cor*}Suppose that $N\geq2$ and $(I^N,\ldots,I^1)$ satisfies \textup{(A)}-\textup{(D)}.
+%\begin{cor}Suppose that $N\geq2$ and $(I^N,\ldots,I^1)$ satisfies \textup{(A)}-\textup{(D)}.
 %Then the sequence $(n^N,\ldots,n^1)$ is nondecreasing.%, and whenever $n^k=n^{k-1}$, it must be that $\ell^k=\ell^{k-1}$, and $I^k=(\ldots,7,3,1,0)$.
-%\end{cor*}
-%\begin{cor*}Suppose that $N\geq2$ and that $(I^N,\ldots,I^1)$ satisfies \textup{(A)}-\textup{(D)} with $\ell^N>0$.
+%\end{cor}
+%\begin{cor}Suppose that $N\geq2$ and that $(I^N,\ldots,I^1)$ satisfies \textup{(A)}-\textup{(D)} with $\ell^N>0$.
 %Then the sequence $(n^N,\ldots,n^2,n^1/2)$ is nondecreasing, and there's a chain of inequalities, for $N\geq3$:
 %\[\ell^N\leq\ell^{N-1}+n^N\leq\ell^{N-2}+n^{N-1}\leq\cdots \leq \ell^2+n^3\leq(\ell^1+n^2)/3.\]
 %%\[\ell^1+n^2\geq3(\ell^2+n^3),\]
 %If $N=2$ we just obtain $\ell^2\leq(\ell^1+n^2)/3$.
-%\end{cor*}
+%\end{cor}
 %
 %\begin{proof}
 %Write $g$ for the integer sequence $i\mapsto 2^i-i-1$. Then $g(0)=g(1)=0$, and $g(i-1)<g(i)$ for $i\geq2$.
@@ -1592,23 +1590,23 @@ To prove the strengthening of \textup{(i.2)}, a similar argument, after restrict
 %%Combine these two inequalities with $\ell^1\geq \ell^2$ to get the last result.
 %Then $\ell^1+n^2\geq n^2+\ell^2\geq3(2^{\ell^2}-1)\geq3(\ell^2+n^3)$.
 %\end{proof}
-%\begin{prop*}
+%\begin{prop}
 %Suppose that $N\geq2$ and that $(I^N,\ldots,I^1)$ satisfies \textup{(A)}-\textup{(D)} with $\ell^N>0$. Then $a_2\geq 3(a_3+\cdots +a_{N+1})$.
-%\end{prop*}
+%\end{prop}
 %\begin{proof}
 %When $N=2$, this is just the final inequality in the previous corollary, so assume $N\geq3$. In this case, the same corollary's chain of inequalities may be restated as:
 %\[a_N\geq a_{N+1},\  a_{N-1}\geq 2^{\ell^{N}}a_N,\ \ldots,\ a_3\geq 2^{\ell^{4}}a_4,\ a_2/3\geq 2^{\ell^{3}}a_3,\]
 %and all of the $\ell^i$ are at least 1. Thus
 %\[a_2/3\geq 2a_3\geq a_3+2a_4\geq a_3+a_4+2a_5\geq\cdots \geq a_3+\cdots +a_{N+1}.\qedhere\]
 %\end{proof}
-%\begin{prop*}
+%\begin{prop}
 %Writing $\left\|\Q(I^N)\cdots \Q(I^2)P(I^1)\imath\right\|=(a_{N+1},\ldots,a_{1})$, suppose that $\ell^N\neq0$. Then $a_i\geq 2a_{i+1}$ for all $i$ with $2\leq i\leq N-1$. Moreover, $a_{N}\geq2a_{N+1}$ unless $I^N=(0)$ and $\ell^{N-1}=1$, when $a_{N+1}=a_N=1$.
-%\end{prop*}
+%\end{prop}
 %\begin{proof}
 %When $i=N$, it's enough to note that $n^N\geq\ell^N$ unless $I^N=(0)$. For the cases $2\leq i\leq N-1$, one uses the fact that the sequences $(n^N,\ldots,n^1)$ and $(\ell^N,\ldots,\ell^1)$ are nondecreasing.
 %\end{proof}
 
-%\begin{cor*}Suppose that $N\geq1$ and that $(I^N,\ldots,I^1)$ satisfies \textup{(A)}-\textup{(C)} with $\ell^N>0$.
+%\begin{cor}Suppose that $N\geq1$ and that $(I^N,\ldots,I^1)$ satisfies \textup{(A)}-\textup{(C)} with $\ell^N>0$.
 %Then if $N\geq2$ there is a chain of $N-1$ inequalities:
 %\[n^N\leq n^{N-1}\leq\cdots \leq n^2\leq \tfrac{1}{2}n^1,\]
 %and a chain of $N$ inequalities:
@@ -1619,10 +1617,10 @@ To prove the strengthening of \textup{(i.2)}, a similar argument, after restrict
 %%\[\ell^N\leq\ell^{N-1}+n^N\leq\ell^{N-2}+n^{N-1}\leq\cdots \leq \ell^2+n^3\leq(\ell^1+n^2)/3.\]
 %%\[\ell^1+n^2\geq3(\ell^2+n^3),\]
 %If $N=1$, the stronger inequality $\ell^1\leq\tfrac{1}{3}(n^1+\ell^1)$ is satisfied.
-%\end{cor*}
+%\end{cor}
 
 
-\begin{cor*}Suppose that $N\geq1$ and that $(I^N,\ldots,I^1)$ satisfies \textup{(A)}-\textup{(C)}. % with $\ell^N>0$.
+\begin{cor}Suppose that $N\geq1$ and that $(I^N,\ldots,I^1)$ satisfies \textup{(A)}-\textup{(C)}. % with $\ell^N>0$.
 Then if $N\geq2$ there are two chains of $N-1$ inequalities and two chains of $N-2$ inequalities:
 \begin{equation}
 \ell^N\leq \ell^{N-1}\leq\cdots \leq \ell^2\leq \ell^1;\tag{c.0}
@@ -1642,7 +1640,7 @@ Moreover (reading $n^3$ as zero when $N=2$):
 \end{equation}
 When $N=1$, we obtain only one inequality, a stronger version $3\ell^1\leq(n^1+\ell^1)$ of \textup{(i.4)}.
 Finally, when $N\geq2$ and $S$ also satisfies \textup{(D)}, we have a stronger version $3(\ell^2+n^3)\leq(\ell^1+n^2)$ of \textup{(i.3)}.
-\end{cor*}
+\end{cor}
 
 \begin{proof}
 Write $g(i):=2^i-i-1$ for $i\geq0$, and $g(-\infty)=0$. Then
@@ -1664,7 +1662,7 @@ This leaves the two versions of \textup{(i.3)}. Write $\rho=3$ when \textup{(D)}
 the relevant version of \textup{(i.1)} is $\rho(2^{\ell^2}-1)-\ell^2\leq n^2$. Moreover, we've just shown that $n^3\leq g(\ell^2)=2^{\ell^2}-\ell^2-1$.
 Then $(\ell^1+n^2)\geq (n^2+\ell^2)\geq\rho(2^{\ell^2}-1)\geq\rho(\ell^2+n^3)$.
 \end{proof}
-\begin{prop*}
+\begin{prop}
 Suppose that $N\geq1$ and that $S=(I^N,\ldots,I^1)$ satisfies \textup{(A)}-\textup{(C)} with $\ell^N>0$. Let $(a_{N+1},\ldots,a_1)$ be the degree of $b(S)$.
 \begin{enumerate}[i)]
 \setlength{\parindent}{.25in}
@@ -1678,7 +1676,7 @@ and when $S$ also satisfies \textup{(D)}, these inequalities may be strengthened
 \item Suppose that $N\geq3$. Then for $i$ satisfying $3\leq i\leq N$,
 \[a_i\geq a_{i+1}+\cdots +a_{N+1}.\]
 \end{enumerate}
-\end{prop*}
+\end{prop}
 \begin{proof}
 Suppose that $N=1$, so that $(a_2,a_1)=(\ell^1,d+n^1+\ell^1)$. Then the inequality required is equivalent to $n^1\geq2\ell^1$, which we established in the previous proof, demonstrating (i).
 
@@ -1705,10 +1703,10 @@ We've also shown that $a_2\geq\rho (a_3+\cdots +a_{N+1})$. Thus:
 proving that $\overline{a}_1\geq\frac{3\rho}{\rho+1}(a_2+\cdots a_{N+1})$, the first inequality in (ii) in either case.
 \end{proof}
 
-\begin{cor*}Suppose that $N\geq1$ and that $S=(I^N,\ldots,I^1)$ satisfies \textup{(A)}-\textup{(C)}. Suppose further that $S\neq(\emptyset,\ldots,\emptyset)$. Then (without assuming that $\ell^N>0$):
+\begin{cor}Suppose that $N\geq1$ and that $S=(I^N,\ldots,I^1)$ satisfies \textup{(A)}-\textup{(C)}. Suppose further that $S\neq(\emptyset,\ldots,\emptyset)$. Then (without assuming that $\ell^N>0$):
 \[a_1\geq2(a_2+\cdots +a_{N+1}+1).\]
 If $S$ also satisfies \textup{(D)}, then the factor $2$ can be improved to $\tfrac{9}{4}$.
-\end{cor*}
+\end{cor}
 \begin{proof}
 We can assume, without loss of generality, that $\ell^N>0$. Now when $d=1$, \textup{(A)} cannot be satisfied unless $I^1=\emptyset$, but this implies that $S=(\emptyset,\ldots,\emptyset)$, so the statement is vacuous unless $d\geq2$. If $N=1$, since $a_2=\ell^1>0$, whether or not $S$ satisfies \textup{(D)}, one finds
 \[a_1\geq 3a_2+d \geq \tfrac{9}{4}a_2+ \tfrac{3}{4}+d\geq\tfrac{9}{4}a_2+\tfrac{11}{4}.\]
@@ -1725,24 +1723,24 @@ What remains to be done then is to calculate the $H^{(N)}$, by calculating the K
 
 
 
-%\begin{prop*}
+%\begin{prop}
 %As a graded vector space,
 %\[H^{(0)}=\left\langle \imath\right\rangle\]
 %where $\|\imath\|=d$. As an object of $\LL{1}$, all the structure maps are trivial.
-%\end{prop*}
+%\end{prop}
 
-\begin{prop*}
+\begin{prop}
 As a graded vector space,
 \[H^{(1)}=\left\langle P(I^1)\imath\ \middle|\ (I^1)\textup{ satisfies \textup{(A)}}\right\rangle\]
 %where $\|P(I^1)\imath\|=(\ell^1,d+n^1+\ell^1)$. 
 As an object of $\LL{2}$, all the structure maps are trivial except for $\Q^1$, which is defined whenever $\ell^1>0$, and given by the formula
 \[\Q^1:P(I^1)\imath\overset{\Q^1}{\mapsto} P(t_dI^1)\imath\textup{ when $\ell^1>0$}.\]
-\end{prop*}
+\end{prop}
 \begin{proof}
 As $H^{(0)}=\left\langle \imath\right\rangle$ has all structure trivial, the Koszul complex has zero differential, and so \emph{equals} $H^{(1)}$. The calculation of $\LL{2}$ structure was made above.
 \end{proof}
 
-\begin{prop*}
+\begin{prop}
 As a graded vector space,
 %\[H^{(2)}=\frac{\left\langle \Q(I^2)P(I^1)\imath\ \middle|\ 1\notin I^2\right\rangle}{\left\langle \Q(I^2)P(I^1)\imath\ \middle|\ 1,2\notin I^2,\ I^1\in\im(t_d)\textup{, and $\ell^1>2$}\right\rangle}.\]
 %\[H^{(2)}=\frac{\left\langle \Q(I^2)P(I^1)\imath\ \middle|\  (I^2,I^1)\textup{ satisfies \textup{(A)}-\textup{(D)}}\right\rangle}{\left\langle \Q(I^2)P(I^1)\imath\ \middle|\  (I^2,I^1)\textup{ satisfies \textup{(A)}-\textup{(E)}}\right\rangle}.\]
@@ -1759,7 +1757,7 @@ H^{(2)}
 % Comment
 \end{alignat*}
 As an object of $\LL{3}$, all the structure maps are trivial except for $\Q^0$, which is defined whenever $\ell^1+n^2>0$, and is zero unless $\ell^2=0$ and $\ell^1=1$, in which case it is given by the formula \[\Q(\emptyset)P(I^1)\imath \overset{\Q^0}{\mapsto} \Q(\emptyset)P(t_dI^1)\imath\textup{ when $(\ell^2,\ell^1)=(0,1)$}.\]
-\end{prop*}
+\end{prop}
 \begin{proof}
 The Koszul complex, as a vector space, is $\left\langle \Q(I^2)P(I^1)\imath\ \middle|\ (I^2,I^1)\textup{ satisfies \textup{(A)}-\textup{(C)}}\right\rangle$. % --- as $H^{(1)}$ is an object of $\LL{2}$, it supports no $\Q^0$ operations, explaining why $I^2$ mustn't contain zero. 
 Now to calculate the differential, we use the following formula, setting $x=P(I^1)\imath$ and $I^2=(i_{\ell^2},\ldots,i_2,i_1)$
@@ -1791,14 +1789,14 @@ The condition on $\ell(J)$ is more interesting, and we consider two cases. First
 Next, by the results of the previous section, all operations but $\Q^0$ are zero. Consider the operation $Q^0$ on cycles $\Q(I^2)P(I^1)\imath$ with $\ell^2>0$. As we look only at cycles, none of the $I^2$ appearing contain a 1. However, it is only $\Q^1$ which can be nonzero on $H^{(1)}$, so our lemma above applies, and these operations vanish. Finally, if $\ell^2=0$ we are supposed to simply apply $\Q^{\ell^1}$ to $P(I^1)\imath$, and this is only nonzero when $\ell^1=1$, finishing the proof.
 \end{proof}
 
-\begin{prop*}
+\begin{prop}
 For $N\geq2$, as a graded vector space,
 %\[H^{(N)}=\frac{\left\langle \Q(I^N)\cdots \Q(I^2)P(I^1)\imath\ \middle|\ 1\notin I^2\right\rangle}{\left\langle \Q(I^N)\cdots \Q(I^2)P(I^1)\imath\ \middle|\ 1,2\notin I^2,\ I^1\in\im(t_d)\textup{, and $\ell^1>2$}\right\rangle}.\]
 \[H^{(N)}={\left\langle \Q(I^N)\cdots \Q(I^2)P(I^1)\imath\ \middle|\  (I^N,\ldots,I^1)\textup{ satisfies \textup{(A)}-\textup{(D)} but not \textup{(E)}}\right\rangle}.\]
 As an object of $\LL{N+1}$, all the structure maps are trivial except for $\Q^0$, which is zero unless $\ell^N=\cdots =\ell^2=0$ and $\ell^1=1$, in which case it is given by the formula
 \[\Q(\emptyset)\cdots \Q(\emptyset)P(I^1)\imath \overset{\Q^0}{\mapsto} \Q(\emptyset)\cdots \Q(\emptyset)P(t_dI^1)\imath\textup{ when $(\ell^N,\ldots,\ell^1)=(0,\ldots,0,1)$}.\]
 %$\Q(\emptyset)\cdots \Q(\emptyset)P(I^1)\imath\mapsto \Q(\emptyset)\cdots \Q(\emptyset)P(t_dI^1)\imath$.
-\end{prop*}
+\end{prop}
 \begin{proof}
 In order to obtain this description of the underlying vector space, we must show that none of the Koszul complexes have nonzero differential from this point on. This is true of the Koszul complex calculating $H^{(3)}$, as the only nonzero operation on $H^{(2)}$ is a \emph{top} operation. If this pattern continues, we'll never see any differentials.
 
@@ -1844,7 +1842,7 @@ and finally:
 In case $N=0$, $\calS^{(N)}_1$, $\calS^{(N)}_2$ and $\calS^{(N)}_3$ are all empty. For all $N\geq0$, $\calS^{(N)}$ is the disjoint union:
 \[\calS^{(N)}=\{(\emptyset,\ldots,\emptyset)\}\cup\calS^{(N)}_1\cup\calS^{(N)}_2\cup\calS^{(N)}_3.\]
 
-\begin{thm*}
+\begin{thm}
 If we decompose $H^{(1)}\in\LL{2}$ as
 %\[H^{(1)}= \left\langle b(S)\ \middle|\ S\textup{ satisfies \textup{(A)}, $S\notin\im(t_d)$}\right\rangle\oplus \left\langle b(S)\ \middle|\ S\textup{ satisfies \textup{(A)}, $S\in\im(t_d)$}\right\rangle\]
 \[H^{(1)}= \left\langle \Q(I^1)\imath\ \middle|\ I^1\textup{ satisfies \textup{(A)}, $I^1\notin\im(t_d)$}\right\rangle\oplus \left\langle \Q(I^1)\imath\ \middle|\ I^1\textup{ satisfies \textup{(A)}, $I^1\in\im(t_d)$}\right\rangle\]
@@ -1861,7 +1859,7 @@ then the first, second and fourth summands consist of indecomposable elements, w
 For $N\geq1$, if we decompose $H^{(N)}_0\in\PRLie{N}$ as 
 \[H^{(N)}_0=\left\langle \imath\rule{0mm}{\heightof{$\calS_1^{(N)}$}}\right\rangle\oplus \left\langle b(S)\ \middle|\ S\in\calS_1^{(N-1)}\right\rangle \oplus \left\langle b(S)\ \middle|\ S\in\calS_2^{(N-1)}\right\rangle \oplus\left\langle b(S)\ \middle|\ S\in\calS_3^{(N-1)}\right\rangle,\]
 and the restriction, defined on the last three summands, sends the second isomorphically onto the third, and vanishes on the third and fourth summands.
-\end{thm*}
+\end{thm}
 %Then for $N\geq2$, if we decompose $H^{(N)}$ as
 %%Then we can further decompose $H^{(N)}$ as follows:
 %%\[H^{(n)}=\langle \imath\rangle\oplus \left\langle b(S)\ \middle|\ S\in\calS_3^{(N)}\cup \calS_1^{(N)}\right\rangle \oplus \left\langle b(S)\ \middle|\ S\in\calS_2^{(N)}\right\rangle\]
@@ -1913,10 +1911,10 @@ and the restriction, defined on the last three summands, sends the second isomor
 
 Suppose that $N\geq1$, so that $E^{2,N}:=(\derived\Ind{\LL{N+1}})H^{(N)}\in\GR{N+2}$ is the $E^2$ page of the $N^\textup{th}$ Grothendieck spectral sequence. The results of the previous section allow a complete calculation of the groups
 \[E^{2,N}_{0,a_{N+1},a_N,\ldots,a_1}=\Ind{\LL{N+1}}H^{(N)}.\]
-\begin{prop*}
+\begin{prop}
 The graded vector space $E^{2,N}_{0,a_{N+1},a_N,\ldots,a_1}\in\GR{N+1}$ is
 \[\left\langle \imath\rule{0mm}{\heightof{$\calS_1^{(N)}$}}\right\rangle\oplus\left\langle b(S)\ \middle|\ S\in\calS_3^{(N)}\cup\calS_1^{(N)}\right\rangle.\]
-\end{prop*}
+\end{prop}
 %\subsection{Calculation of $E^{2,N}=(\derived\Ind{\LL{N+1}})H^{(N)}$ in zero internal dimension}
 
 We can also completely calculate the groups
@@ -1927,11 +1925,11 @@ using partially restricted Lie algebra homology. From the section on low dimensi
 %$\ell^N=\cdots =\ell^2=0$ and $\ell^1=1$, in which case:
 %\[\Q(\emptyset)\cdots \Q(\emptyset)P(I^1)\imath\overset{\restn{}}{\mapsto}\Q(\emptyset)\cdots \Q(\emptyset)P(t_dI^1)\imath.\]
 %Note that all of the classes $\Q(\emptyset)\cdots \Q(\emptyset)P(t_dI^1)\imath$, where $\ell^1=1$, are linearly independant in $H^{(N)}_0$. Moreover, there is only one basis element in non-restrictable dimensions, and that is $\Q(\emptyset)\cdots \Q(\emptyset)P(\emptyset)\imath$.
-\begin{prop*}
+\begin{prop}
 The graded vector space $E^{2,N}_{a_{N+2},0,a_N,\ldots,a_1}\in\GR{N+1}$ is isomorphic (as a graded vector space only) to the kernel of the counit of the coalgebra
 \[E\left\langle \imath\rule{0mm}{\heightof{$\calS_1^{(N)}$}}\right\rangle \otimes E\left\langle b(S)\ \middle|\ S\in\calS_1^{(N-1)}\right\rangle\otimes \Gamma_\textup{ev}\left\langle b(S)\ \middle|\ S\in\calS_2^{(N-1)}\right\rangle\otimes \Gamma\left\langle b(S)\ \middle|\ S\in\calS_3^{(N-1)}\right\rangle \]
 where by $\Gamma_{\textup{ev}}$ we mean the even divided powers. To calculate the degree of an expression $\prod_j\gamma_{i_j}(x_j)$, one takes $a_{N+2}$ to be $\sum_ji_j-1$, $a_{N+1}$ to be 0, and $(a_N,\ldots,a_1)$ to be $\sum_ji_j\|x_j\|$. That is, to calculate the degree $a_{N+2}$ part, we need to look at monomials of total exponent $a_{N+2}+1$.
-\end{prop*}
+\end{prop}
 \begin{proof} %For the course of this proof, we will supress the $(N-1)$ superscripts that normally appear on the $\calS^{(N-1)}$, and also the parentheses that usually appear in $b(S)$.
 The Eilenberg-Cartan-May complex is $E\langle \imath\rangle\otimes \Gamma\left\langle bS\ \middle|\ S\in \calS_1^{(N-1)}\cup\calS_2^{(N-1)}\cup\calS_3^{(N-1)}\right\rangle$ as a vector space. As so few operations are nonzero, it splits into a tensor product of complexes
 \[E\langle \imath\rule{0mm}{\heightof{$\calS_1^{(N)}$}}\rangle\otimes \!\!\!\!\!\bigotimes_{S\in\calS_1^{(N-1)}}\!\!\!\!\!\Gamma\langle\rule{0mm}{\heightof{$\calS_1^{(N)}$}} bS,b\overline{t}_dS\rangle\otimes \Gamma\left\langle bS\ \middle|\ S\in \calS_3^{(N-1)}\right\rangle\]
@@ -1957,15 +1955,15 @@ so that any homogeneous class therein satisfies $t\geq\tfrac{9}{4}s$.
 Next, $E^{2,N}_{a_{N+2},0,a_N,\ldots,a_1}$ is a subquotient of
 \[\left(\Sigma^{-1}\left(E\left\langle s\imath\rule{0mm}{\heightof{$\calS_1^{(N)}$}}\right\rangle\otimes \Gamma\left\langle sb(S)\ \middle|\ S\in\calS^{(N-1)}\right\rangle\right)\right)_{a_{N+2},0,a_N,\ldots,a_1}\]
 Now an expression in this algebra is $\gamma_a(s\imath)\cdot\prod_{j}\gamma_{b_j}(sb(S))$, where $a$ is either 0 or 1, and the $b_j$ are positive integers. Every $sb(S)$ has degree $(1,0,a_N,\ldots,a_1)$, where we've proven that $a_1\geq \tfrac{9}{4}(a_2+\cdots +a_{N+1})$. On the other hand, $s\imath$ has degree $(1,0,\ldots,0,d)$, which does not satisfy that inequality unless $d\geq3$. Thus that the dimension of a product $\gamma_a(s\imath)\cdot\prod_{j}\gamma_{b_j}(sb(S))$, when viewed as being in $E^{2,N}$, satisfies $t\geq\tfrac{9}{4}s-1-\tfrac{5}{4}$. Here, the $-1$ comes from the desuspension, and the $-\tfrac{5}{4}$ comes from the possible appearance of the class $s\imath$. This proves
-\begin{thm*}
+\begin{thm}
 The Adams spectral sequence for a positive sphere admits a vanishing line of slope $\tfrac{4}{5}$: 
 \[E_2^{s,t}=0\textup{\ for $s> \tfrac{4}{5}(t-s)+\tfrac{9}{5}$.}\]
 %In particular, the Adams spectral sequence converges on positive spheres.
-\end{thm*}
+\end{thm}
 In fact, the same arguments will prove the following
-\begin{thm*}
+\begin{thm}
 Suppose that $X$ is a simplicial commutative algebra which is connected, and is of finite type in dimension 1. That is, $H^0_Q(X)=0$ and $H^1_Q(X)$ is a finite dimensional $\F_2$-vector space. Then the Adams spectral sequence for $X$ has a vanishing line of slope 1.
-\end{thm*}
+\end{thm}
 
 \end{VanishingLines}
 
@@ -1973,9 +1971,9 @@ Suppose that $X$ is a simplicial commutative algebra which is connected, and is 
 \begin{TotalisationInSAlg}
 \section{The Adams Spectral Sequence}
 \subsection{Cosimplicial objects in $s\Comm$}
-\begin{prop*}
+\begin{prop}
 Suppose that $X^\bullet$ is a cosimplicial object in $s\Comm$. Then for $0\leq m\leq\infty$, $I\Tot_m(X^\bullet)\cong\Tot_m(IX^\bullet)$, where $I$ is the right adjoint in the adjunction $\textup{Sym}:s\Vect\rightleftarrows s\Comm:I$, and the second totalization is that of a cosimplicial simplicial vector space.
-\end{prop*}
+\end{prop}
 \begin{proof}
 The totalization of a cosimplicial object in $s\Comm$ is defined by the end
 \[\Tot_m(X^\bullet):= \int_{[k]\in\Delta}\left(X^k\right)^{\textup{sk}_m\Delta[k]}\]
@@ -1986,15 +1984,15 @@ Following \cite{BousfieldHSSCS.pdf}, for $\textbf{B}$ a cosimplicial simplicial 
 Now if we write
 \[(T_m\textbf{B})_n:=(T\textbf{B}/F^{m+1} T\textbf{B})_n\cong\prod_{\substack{t-s=n\\t\leq m}}N^sN_t\textbf{B}, \]
 then $F^mT\textbf{B}$ is a decreasing filtration and the $T_m\textbf{B}$ form a tower of surjections of chain complexes with inverse limit $T_\infty\textbf{B}=T\textbf{B}$. 
-\begin{lem*}[{\cite[Lemma 2.2]{BousfieldHSSCS.pdf}}]
+\begin{lem}[{\cite[Lemma 2.2]{BousfieldHSSCS.pdf}}]
 There are natural chain maps $\phi_m:N_*\Tot_m\textbf{B}\to T_m\textbf{B}$ for $m\leq\infty$ which induce isomorphisms $\pi_*\Tot_m\textbf{B}\to H_*T_m\textbf{B}$ and are compatible with the tower maps $\Tot_{s}\textbf{B}\to\Tot_m\textbf{B}$ and $T_{s}\textbf{B}\to T_m\textbf{B}$ for $s\geq m$.
-\end{lem*}
-\begin{cor*}
+\end{lem}
+\begin{cor}
 Suppose that $X^\bullet$ is a cosimplicial object in $s\Comm$. Then there is a map of spectral sequences, which is an isomorphism from $E^1$, from the homotopy spectral sequence of the $\Tot$ tower $\{I\Tot_mX^\bullet\}$ to the spectral sequence of the bicomplex underlying $IX^\bullet$. Moreover, there is an isomorphism $\pi_*I\Tot X^\bullet\to H_*TIX^\bullet$ (to the homology of the total complex of the bicomplex), which is compatible with the map of spectral sequences.
-\end{cor*}
-\begin{cor*}
+\end{cor}
+\begin{cor}
 Suppose that $X$ is a connected element of $s\Comm$. Then the Adams spectral sequence for $X$ is the spectral sequence of the bicomplex underlying the cosimplicial simplicial vector space $I((c(K\overline{Q})^\bullet X)^{\textup{rf}})$. This spectral sequence admits a vanishing line from $E^2$, and so converges strongly to its target, $\pi_{t-s}(I\hat X)$.
-\end{cor*}
+\end{cor}
 \end{TotalisationInSAlg}
 
 
@@ -2003,11 +2001,6 @@ Suppose that $X$ is a connected element of $s\Comm$. Then the Adams spectral seq
 \printbibliography
 \end{Endmatter}
 \end{document}
-
-
-
-
-
 
 
 
