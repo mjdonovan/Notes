@@ -5,17 +5,18 @@
 \excludeversion{Omitted}
 %\excludeversion{SkippableProofs}
 
-
+\excludeversion{ConversationWithHaynes_InclusionOfBarConstructions}
 \excludeversion{GrothendieckSpectralSequencestake2}
-%\def\excludeversion#1{\includeversion{#1}}
+\def\excludeversion#1{\includeversion{#1}}
 \excludeversion{Frontmatters}
 \excludeversion{Endmatter}
 \excludeversion{AdamsDerivation}
 \excludeversion{SteenrodAlgebrasAndTheirKoszulDuals}
 \excludeversion{CategoriesOfInterest}
+\excludeversion{HomotopicalAlgebra}
 \includeversion{DiagramOfFunctors}
 \includeversion{GrothendieckSpectralSequences}
-\excludeversion{KoszulComplexes2plus}
+\excludeversion{KoszulComplexes_n>1}
 \excludeversion{KoszulComplexes1}
 \excludeversion{DerivedFunctorsLowDimension}
 \excludeversion{PRlieKoszulComplexCalculation}
@@ -217,9 +218,9 @@ An analysis (see \cite[\S4]{MR1089001}) of the category of abelian objects in $s
 
 
 \subsection{A Bousfield-Kan construction in $s\Comm$}
-In \cite{MR0365573}, Bousfield and Kan construct, for a space (i.e.\ simplicial set) $X$, the $\F_2$-completion $\check X$ to be the totalisation of the cosimplicial resolution of $X$ arising from the monad of the adjunction $\F_2:s\Set_*\rightleftarrows s\Vect:\forget$. By virtue of $\check X$ having been constructed as a totalisation, there is a totalisation spectral sequence converging to $\pi_*(\check X)$. This is known as the unstable Adams spectral sequence for $X$.
+In \cite{MR0365573}, Bousfield and Kan construct, for a space (i.e.\ simplicial set) $X$, the $\F_2$-completion $\hat X$ to be the totalisation of the cosimplicial resolution of $X$ arising from the monad of the adjunction $\F_2:s\Set_*\rightleftarrows s\Vect:\forget$. By virtue of $\hat X$ having been constructed as a totalisation, there is a totalisation spectral sequence converging to $\pi_*(\hat X)$. This is known as the unstable Adams spectral sequence for $X$.
 
-As pointed out by Blumberg and Riehl in \cite{BlumRiehlResolutions.pdf}, this process is aided by the fact that the construction of $\check X$ is homotopically well behaved --- in $s\Set_*$, all objects are cofibrant, and in $s\Vect$, all objects are fibrant, so that the monad of the adjunction preserves weak equivalences, and fortunately, the Bousfield-Kan tower is already Reedy fibrant.
+As pointed out by Blumberg and Riehl in \cite{BlumRiehlResolutions.pdf}, this process is aided by the fact that the construction of $\hat X$ is homotopically well behaved --- in $s\Set_*$, all objects are cofibrant, and in $s\Vect$, all objects are fibrant, so that the monad of the adjunction preserves weak equivalences, and fortunately, the Bousfield-Kan tower is already Reedy fibrant.
 
 In our context, the right adjoint in $Q:s\Comm\rightleftarrows s\Vect:K$ fails to land in the subcategory of cofibrant simplicial algebras. In order to remedy this, Blumberg and Riehl show how to mix appropriate cofibrant replacements into the iteration of the monad\footnote{As every object of $s\Vect$ is fibrant, we need not mention a monadic fibrant replacement on that category, although there is no such asymmetry in the treatment of \cite{BlumRiehlResolutions.pdf}.}. That is, they show that if one can choose a functorial cofibrant replacement $c$ on $\ensuremath{s\calA}$ which additionally has structure of a homotopical comonad, then one can give a homotopically correct cosimplicial resolution of the type we desire. Writing $\overline{Q}$ for $Qc:s\Comm\to s\Vect$, their resolution takes the form:
 \[
@@ -238,19 +239,10 @@ cX_\bullet\,
 \ar@<+1ex>[r];[]
 \ar@<-1ex>[r];[]
 &
-\,c(K\overline{Q})^3X_\bullet\,
+\,c(K\overline{Q})^3X_\bullet\,\makebox[0cm][l]{\,$\cdots $}
 \ar[l];[]
 \ar@<-2ex>[l];[]
 \ar@<+2ex>[l];[]
-\ar[r];[]
-\ar@<+2ex>[r];[]
-\ar@<-2ex>[r];[]
-&
-\,c(K\overline{Q})^4X_\bullet\,\makebox[0cm][l]{\,$\cdots $}
-\ar@<-3ex>[l];[]
-\ar@<-1ex>[l];[]
-\ar@<+1ex>[l];[]
-\ar@<+3ex>[l];[]
 }}\]
 %For $X\in\Comm$, write $\underline{X}_\bullet^\bullet$ for the cosimplicial object $c(K\overline{Q})^\bullet A$.
 The Blumberg-Riehl approach augments Bousfield's work on cosimplicial resolutions \cite{BousCosimpResnHtpySS.pdf},  allowing us to define a homotopical `derived completion' endofunctor on $\Comm$ by $X_\bullet\mapsto\hat X_\bullet:=\textup{Tot}((c(K\overline{Q})^\bullet X_\bullet)^{\textup{rf}})$, where `$\textup{rf}$' denotes a Reedy fibrant replacement.
@@ -261,9 +253,33 @@ A complete derivation would at this point include a detailed examination of the 
 \begin{prop}
 When $H^*_Q(X)$ is of finite type (for example when $X$ is connected and of finite type) the spectral sequence has $E_2^{st}=(\mathbb{L}_s\textup{Ind}_\calW)(H_Q^*X)^t=(\Ext^s_{\calW}(H_Q^*X,H_Q^*S^t))^*$.
 \end{prop}
-
-
 \end{AdamsDerivation}
+
+\begin{TotalisationInSAlg}
+\subsection{Cosimplicial objects in $s\Comm$}
+\begin{prop}
+Suppose that $X^\bullet$ is a cosimplicial object in $s\Comm$. Then for $0\leq m\leq\infty$, $I\Tot_m(X^\bullet)\cong\Tot_m(IX^\bullet)$, where $I$ is the right adjoint in the adjunction $\textup{Sym}:s\Vect\rightleftarrows s\Comm:I$, and the second totalization is that of the cosimplicial simplicial vector space $IX^\bullet$.
+\end{prop}
+\begin{proof}
+The totalization of a cosimplicial object in $s\Comm$ is defined by the end
+\[\Tot_m(X^\bullet):= \int_{[k]\in\Delta}\left(X^k\right)^{\textup{sk}_m\Delta[k]}\]
+where for each $k$, the cotensor within the end is defined by taking various powers of the $X^k_t$ in each simplicial dimension $t$. As $I$ is the prolongation of the right adjoint in $\Vect\rightleftarrows\Comm$, it commutes with all of these limits.
+\end{proof}
+Following \cite{BousfieldHSSCS.pdf}, for $\textbf{B}$ a cosimplicial simplicial vector space, let $N^*N_*\textbf{B}$ be the normalized double complex. The total complex $T\textbf{B}$ is then defined by
+\[(T\textbf{B})_n=\prod_{t-s=n}N^sN_t\textbf{B},\ \textup{with filtration }(F^mT\textbf{B})_n=\prod_{\substack{t-s=n\\t\geq m}}N^sN_t\textbf{B}.\]
+Now if we write
+\[(T_m\textbf{B})_n:=(T\textbf{B}/F^{m+1} T\textbf{B})_n\cong\prod_{\substack{t-s=n\\t\leq m}}N^sN_t\textbf{B}, \]
+then $F^mT\textbf{B}$ is a decreasing filtration and the $T_m\textbf{B}$ form a tower of surjections of chain complexes with inverse limit $T_\infty\textbf{B}=T\textbf{B}$. 
+\begin{lem}[{\cite[Lemma 2.2]{BousfieldHSSCS.pdf}}]
+There are natural chain maps $\phi_m:N_*\Tot_m\textbf{B}\to T_m\textbf{B}$ for $m\leq\infty$ which induce isomorphisms $\pi_*\Tot_m\textbf{B}\to H_*T_m\textbf{B}$ and are compatible with the tower maps $\Tot_{s}\textbf{B}\to\Tot_m\textbf{B}$ and $T_{s}\textbf{B}\to T_m\textbf{B}$ for $s\geq m$.
+\end{lem}
+\begin{cor}
+Suppose that $X^\bullet$ is a cosimplicial object in $s\Comm$. Then there is a map of spectral sequences, which is an isomorphism from $E^1$, from the homotopy spectral sequence of the $\Tot$ tower $\{I\Tot_mX^\bullet\}$ to the spectral sequence of the bicomplex underlying $IX^\bullet$. Moreover, there is an isomorphism $\pi_*I\Tot X^\bullet\to H_*TIX^\bullet$ (to the homology of the total complex of the bicomplex), which is compatible with the map of spectral sequences.
+\end{cor}
+\begin{cor}
+Suppose that $X$ is a connected element of $s\Comm$. Then the Adams spectral sequence for $X$ is the spectral sequence of the bicomplex underlying the cosimplicial simplicial vector space $I((c(K\overline{Q})^\bullet X)^{\textup{rf}})$. This spectral sequence admits a vanishing line from $E^2$, and so converges strongly to its target, $\pi_{t-s}(I\hat X)$.
+\end{cor}
+\end{TotalisationInSAlg}
 
 \begin{SteenrodAlgebrasAndTheirKoszulDuals}
 \section{Some homogeneous Koszul algebras}
@@ -460,7 +476,7 @@ For (ii), we wish to show that $\max\{j',i'-j'-1\}>\max\{j,i-j-1\}$. As $i'< 2j'
 \end{SteenrodAlgebrasAndTheirKoszulDuals}
 
 \begin{CategoriesOfInterest}
-\section{Categories of interest}
+\section{Categories of interest}\label{ChapterCategoriesOfInterest}
 In the following subsections we detail a number of algebraic categories relevant to our study.
 \subsection{Categories of graded sets and vector spaces}
 \begin{itemize}
@@ -851,6 +867,7 @@ When $n=1$, $\forget(\Fr{\LL{1}}(X))\in\nontop{1}$ is free on $B$. For $n\geq2$,
 \noindent Due to the choices involved in taking a Hall basis, I see no reason that $\forget$ should preserve free maps of free objects.
 \end{CategoriesOfInterest}
 
+\begin{HomotopicalAlgebra}
 \section{Grothendieck spectral sequences}
 \subsection{Homotopical algebra}
 
@@ -867,10 +884,10 @@ Suppose that $X\in s\mathsf{C}$ is any simplicial object. Then we can form the b
 \item As $\Delta bX\to X$ is a weak equivalence, in order that it is a surjection on basepoint components, it is enough that it is simply a surjection, which it is by construction.
 \end{enumerate}
 The construction $bX$ is a bisimplicial version of the simplicial bar construction $B_\bullet(\Fr{\mathsf{C}},\Fr{\mathsf{C}},Y):=(\Fr{\mathsf{C}})^{\bullet+1}Y$ on an object $Y\in\mathsf{C}$. In fact, $B_\bullet(\Fr{\mathsf{C}},\Fr{\mathsf{C}},Y)=\Delta b\,\textup{const}(Y)$, where $\textup{const}(Y)\in s\mathsf{C}$ is the constant object on $Y$.
+\end{HomotopicalAlgebra}
 \begin{DiagramOfFunctors}
 \subsection{Indecomposables}
-
-For each of the above categories, there is a functor $\Ind{\mathsf{C^n}}:\mathsf{C^n}\to\GR{n}$ which sends $X\in\mathsf{C}^n$ to the quotient of the underlying vector space of $X$ by the subspace generated by the images of all the operations defining $X$.
+For each of the categories of \S\ref{ChapterCategoriesOfInterest}, there is a functor $\Ind{\mathsf{C^n}}:\mathsf{C^n}\to\GR{n}$ which sends $X\in\mathsf{C}^n$ to the quotient of the underlying vector space of $X$ by the subspace generated by the images of all the operations defining $X$.
 
 The functor $\Ind{\mathsf{C}^n}$ is always left adjoint to a functor $K:\GR{n}\to\mathsf{C}^n$ which sends a graded vector space $V$ to the corresponding trivial object in $\mathsf{C}^n$. That is, $KV$ has $V$ as underlying vector space, and all operations in $KV$ are zero. Note then that the right adjoint, $K$, preserves weak equivalences and fibrations, both of which are determined on the level of underlying simplicial groups. Thus, $\Ind{\mathsf{C}^n}$ is a left Quillen functor, so that we can easily define the left derived functors $\derived_*\Ind{\mathsf{C}^n}$.
 
@@ -911,7 +928,7 @@ The indecomposables functors described above provide the solid horizontal arrows
 &%r2c2
 %r2c3
 }\]
-\begin{prop}
+\begin{prop}\label{PropOnTheCommutingDiagramOfIndFunctors}
 For all $n\geq1$ there exists a functor $\Psi:\LL{n}\to\PRLie{n}$ which completes the diagram above to a commuting square and triangle. This functor %, which we also name $\Ind{\nontop{n}}:\LL{n}\to\PRLie{n}$,
 preserves free objects.
 \end{prop}
@@ -940,7 +957,7 @@ The $n=1$ case is much easier, as $\Ind{\nontop{1}}$ kills \emph{all} the $P$ op
 \end{DiagramOfFunctors}
 
 \begin{GrothendieckSpectralSequences}
-\subsection{The derived functors $\derived\Ind{\nontop{n}}$}
+\subsection{The derived functors of $\Ind{\nontop{n}}$}
 \begin{lem}\label{LemLevelwiseFreeWillSuffice}
 Suppose that $R$ is a levelwise free object in $s\nontop{n}$. Let ${bR}$ be the bisimplicial object which is the levelwise bar construction on $R$, defined by ${bR}_{s,t}=U^{t+1}R_s$. Then %the natural map $\Delta {bR}\to R$ is a cofibrant replacement \textbf{really? what's needed?}, and 
 $\pi_*(I\Delta {bR})\to\pi_*(IR)$ is an isomorphism. %That is, the complex $IR$ already calculates $(\derived I)R$.
@@ -1018,97 +1035,117 @@ For any $X\in\LL{n}$, the map $\Ind{\nontop{n}}(i)$ induces an isomorphism of ve
 \end{prop*}
 
 In light of this result, it seems reasonable to begin writing $\Ind{\nontop{n}}$ for the functor $\Psi$. Then we have two commuting squares:
-\[\xymatrix@1@R=8mm@C=15mm@!C{
+\[\vcenter{\xymatrix@R=12mm@C=24mm@!0{
 \LL{n}
 \ar[d]_-{\forget_{\nontop{}}}
 \ar@{->}[r]_-{\Ind{\nontop{n}}}
 &%r1c1
 \PRLie{n}
-\ar[d]^-{\forget}
+\ar[d]^-{\forget_{\GR{}}}
 \\%r1c2
 \nontop{n}
 \ar[r]^-{\Ind{\nontop{n}}}
 &%r2c1
 \GR{n}
-}
-\]
-
-\noindent It should cause no confusion when we denote the functor of this proposition $\Ind{\nontop{n}}:\LL{n}\to \PRLie{n}$ as well, giving a commuting diagram
-\[\xymatrix@R=8mm@C=15mm@!C{
+}}
+\textup{ \ and \ }
+\vcenter{\xymatrix@R=12mm@C=24mm@!0{
 \LL{n}
-\ar@/^1.5em/[rr]^-{\Ind{\LL{n}}}
 \ar[d]_-{\forget_{\nontop{}}}
-\ar@{->}[r]_-{\Ind{\nontop{n}}}
+\ar@{->}[r]_-{\derived\Ind{\nontop{n}}}
 &%r1c1
-\PRLie{n}
-\ar[d]^-{\forget}
-\ar[r]_-{\Ind{\PRLie{n}}}
-&%r1c2
-\GR{n}
-\\%r1c3
+\LL{n+1}\makebox[0pt][l]{\,\small$=\PiAlg{\PRLie{n}}$}
+\ar[d]^-{\forget_{\GR{}}}
+\\%r1c2
 \nontop{n}
-\ar[r]^-{\Ind{\nontop{n}}}
+\ar[r]^-{\derived\Ind{\nontop{n}}}
 &%r2c1
-\GR{n}
-&%r2c2
-%r2c3
-}\]
-in which the functors $\forget$ and $\Ind{\nontop{n}}$ with domain $\LL{n}$ both preserve free objects.
+\GR{n+1}\makebox[0pt][l]{\,\small$=\PiAlg{\GR{n}}$}
+}}
+\hspace{1.5cm}
+\]
+It will be important in what follows, for various $X\in\LL{n}$ to know the values of $\derived\Ind{\nontop{n}}$ as an object of $\LL{n+1}$. On the other hand, the values as a graded vector space in $\GR{n+1}$ can be calculated by a Koszul complex. The plan is to map representing cycles in the Koszul complex into the large resolution, perform the $\LL{n+1}$ operations of interest at the chain level, and homotope back into the Koszul complex.
+
+%%%%%%\noindent It should cause no confusion when we denote the functor of this proposition $\Ind{\nontop{n}}:\LL{n}\to \PRLie{n}$ as well, giving a commuting diagram
+%%%%%%\[\xymatrix@R=8mm@C=15mm@!C{
+%%%%%%\LL{n}
+%%%%%%\ar@/^1.5em/[rr]^-{\Ind{\LL{n}}}
+%%%%%%\ar[d]_-{\forget_{\nontop{}}}
+%%%%%%\ar@{->}[r]_-{\Ind{\nontop{n}}}
+%%%%%%&%r1c1
+%%%%%%\PRLie{n}
+%%%%%%\ar[d]^-{\forget_{\GR{}}}
+%%%%%%\ar[r]_-{\Ind{\PRLie{n}}}
+%%%%%%&%r1c2
+%%%%%%\GR{n}
+%%%%%%\\%r1c3
+%%%%%%\nontop{n}
+%%%%%%\ar[r]^-{\Ind{\nontop{n}}}
+%%%%%%&%r2c1
+%%%%%%\GR{n}
+%%%%%%&%r2c2
+%%%%%%%r2c3
+%%%%%%}\]
+%%%%%%in which the functors $\forget$ and $\Ind{\nontop{n}}$ with domain $\LL{n}$ both preserve free objects.
 
 
 
 \subsection{Grothendieck spectral sequences}
-We are interested in the derived functors $(\derived\Ind{\LL{n}})X\in\GR{n+1}$ for $X\in\LL{n}$, most of all when $n=1$. It is convenient for us to omit the customary asterisk in $\derived_*$, and to think of the derived functors as a single object with a one more grading than $X$ has. We always write the new grading to the left of the previous gradings, as is customary. To study $(\derived\Ind{\LL{n}})(X)$ we use the Grothendieck spectral sequence derived in \cite{Blanc_Stover-Groth_SS.pdf}, which takes the form:
-\[E^2_{st}=(\derived_s(\overline{\Ind{\PRLie{n}}}_t))(\derived\Psi)X\implies(\derived_{s+t}\Ind{\LL{n}})X\textup{ with }d^{r}:E_{st}\to E_{s-r,t+r-1}.\]
-Here, $(\derived\Psi)X\in\PiAlg{\PRLie{n}}$, and $\overline{\Ind{\PRLie{n}}}$ is the functor $\PiAlg{\PRLie{n}}\to\GR{n+1}$ induced by $\Ind{\PRLie{n}}$. The $t$ subscript indicates the value of the second grading from the left, which arose as the homological degree in $(\derived\Psi)X$. It is simpler to write:
-\[E^2=(\derived\overline{\Ind{\PRLie{n}}})(\derived\Psi)X\implies(\derived\Ind{\LL{n}})X\textup{ with }\deg(d^r)=(-r,r-1,0,\ldots,0).\]
-Here, each $E^r$ is $(n+2)$-graded, while $(\derived\Ind{\LL{n}})X$ is $(n+1)$-graded. Each page $E^r$ has two homological degrees in addition to the $n$ internal degrees of $X$, and the leftmost two degrees on $E^\infty$ sum to the leftmost degree in $(\derived\Ind{\LL{n}})X$.
+We are interested in the derived functors $(\derived\Ind{\LL{n}})X\in\GR{n+1}$ for $X\in\LL{n}$, most of all when $n=1$. It is convenient for us to omit the customary asterisk in $\derived_*$, and to think of the derived functors as a single object with a one more grading than $X$ has. We always write the new grading to the left of the previous gradings, as is customary.
+
+Proposition \ref{PropOnTheCommutingDiagramOfIndFunctors} included the fact that ${\Ind{\nontop{n}}}:\LL{n}\to\PRLie{n}$ preserves free objects. Thus, for $X\in\LL{n}$, we may study $(\derived\Ind{\LL{n}})(X)$ using the Grothendieck spectral sequence derived in \cite{Blanc_Stover-Groth_SS.pdf}, which takes the form:
+\[E^2_{st}=(\derived_s(\overline{\Ind{\PRLie{n}}}_t))(\derived{\Ind{\nontop{n}}})X\implies(\derived_{s+t}\Ind{\LL{n}})X\textup{ with }d^{r}:E_{st}\to E_{s-r,t+r-1}.\]
+Here, $(\derived{\Ind{\nontop{n}}})X\in\PiAlg{\PRLie{n}}$, and $\overline{\Ind{\PRLie{n}}}$ is the functor $\PiAlg{\PRLie{n}}\to\GR{n+1}$ induced by $\Ind{\PRLie{n}}$. The $t$ subscript indicates the value of the second grading from the left, which arose as the homological degree in $(\derived{\Ind{\nontop{n}}})X$. It is simpler to write:
+\[E^2=(\derived\overline{\Ind{\PRLie{n}}})(\derived{\Ind{\nontop{n}}})X\implies(\derived\Ind{\LL{n}})X\textup{ with }\deg(d^r)=(-r,r-1,0,\ldots,0).\]
+Here, each $E^r$ is $(n+2)$-graded, while $(\derived\Ind{\LL{n}})X$ is $(n+1)$-graded. Each page $E^r$ has two homological degrees in addition to the $n$ internal degrees of $X$, and the leftmost two degrees on $E^\infty$ sum to the leftmost degree in $(\derived\Ind{\LL{n}})X$. It isn't difficult to identify $\overline{\Ind{\PRLie{n}}}$:
 \begin{prop}
-There's a commuting diagram of functors:
-\[\xymatrix@R=0mm@C=14mm{
-\PiAlg{\PRLie{n}}
-\ar[dr]^-{\overline{\Ind{\PRLie{n}}}}
-\ar[dd]_-{\cong}
-&%r1c1
-\\%r1c2
-&%r2c1
-\GR{n+1}\\%r2c2
-\LL{n+1}
-\ar[ur]_-{\Ind{\LL{n+1}}}
-&%r3c1
-%r3c2
-}\]
-%Under the isomorphism $\PiAlg{\PRLie{n}}\cong\LL{n+1}$, the functor $\overline{\Ind{\PRLie{n}}}:\PiAlg{\PRLie{n}}\to \GR{n+1}$ is identified with 
+Under the identifiction of $\PiAlg{\PRLie{n}}$ with $\LL{n+1}$, the functor $\overline{\Ind{\PRLie{n}}}:\PiAlg{\PRLie{n}}\to\GR{n+1}$ coincides with ${\Ind{\LL{n+1}}}:\LL{n+1}\to\GR{n+1}$.
+%%%%%There's a commuting diagram of functors:
+%%%%%\[\xymatrix@R=0mm@C=14mm{
+%%%%%\PiAlg{\PRLie{n}}
+%%%%%\ar[dr]^-{\overline{\Ind{\PRLie{n}}}}
+%%%%%\ar[dd]_-{\cong}
+%%%%%&%r1c1
+%%%%%\\%r1c2
+%%%%%&%r2c1
+%%%%%\GR{n+1}\\%r2c2
+%%%%%\LL{n+1}
+%%%%%\ar[ur]_-{\Ind{\LL{n+1}}}
+%%%%%&%r3c1
+%%%%%%r3c2
+%%%%%}\]
 \end{prop}
 \begin{proof}
 As $\overline{\Ind{\PRLie{n}}}$ is a $0^\textup{th}$ left derived functor, and $\Ind{\LL{n+1}}$ preserves colimits, it is enough to check that this diagram commutes on free objects in $\PiAlg{\PRLie{n}}$. All such objects are of the form $\pi_*(\Fr{\PRLie{n}}SX)$ for some $X\in\GS{n+1}$, and
 \[\overline{\Ind{\PRLie{n}}}(\pi_*(\Fr{\PRLie{n}}SX)):=\pi_*(\Ind{\PRLie{n}}(\Fr{\PRLie{n}}SX))=X=\Ind{\LL{n+1}}(\pi_*(\Fr{\PRLie{n}}SX)).\qedhere\]
 %The functor $\overline{\Ind{\PRLie{n}}}$ is the $0^\textup{th}$ left derived functor of the functor $\textup{free}(\PiAlg{\PRLie{n}})\to\GR{n+1}$ defined by $\pi_*(\Fr{\PRLie{n}}SX)\mapsto \pi_*(\Ind{\PRLie{n}}(\Fr{\PRLie{n}}SX))$ for $X\in\GS{n+1}$. One calculates $\pi_*(\Ind{\PRLie{n}}(\Fr{\PRLie{n}}SX))=\pi_*(SX)=X$
 \end{proof}
-%Finally, we should recall that $\PiAlg{\PRLie{n}}\simeq\LL{n+1}$, and under this isomorphism, $\overline{\Ind{\PRLie{n}}}$ is identified with $\Ind{\LL{n+1}}$. 
-\begin{cor}
-For $n\geq1$, and any $X\in\LL{n}$, there is a spectral sequence:
-\[E^2=(\derived{\Ind{\LL{n+1}}})(\derived\Psi)X\implies(\derived\Ind{\LL{n}})X.\]
-\begin{itemise}
-\setlength{\parindent}{.25in}
-\item For $r\leq\infty$, the $E^r$ page is an object of $\GR{n+2}$.
-\item For $r<\infty$, $d^r:E^r\to E^r$ has degree $(-r,r-1,0,\ldots,0)$.
-\item The target, $(\derived\Ind{\LL{n}})X$, is an object of $\GR{n+1}$.
-\item There is an increasing filtration $F$ on $(\derived\Ind{\LL{n}})X$ such that
+\noindent We can now describe the Grothendieck spectral sequence relatively tidily:
+\[E^2=(\derived{\Ind{\LL{n+1}}})(\derived{\Ind{\nontop{n}}})X\implies(\derived\Ind{\LL{n}})X.\]
+For emphasis, each page $E^r$, for $r\leq\infty$ is (at least) an element of  $\GR{n+2}$, with $d^r$ of degree $(-r,r-1,0,\ldots,0)$. The target, $(\derived\Ind{\LL{n}})X$, is (at least) an object of $\GR{n+1}$. The spectral sequence is convergent, which is to say that there is a positive, increasing, exhaustive filtration $F$ on $(\derived\Ind{\LL{n}})X$ such that
 \[E^\infty_{a_{n+2},\ldots,a_1}=(F_{a_{n+2}}/F_{a_{n+2}-1})((\derived\Ind{\LL{n}})X)_{a_{n+2}+a_{n+1},a_n,\ldots,a_1}.\]
-\end{itemise}
-%The pages $E^r$ ($r\leq\infty$) are $(n+2)$-graded, with $\deg(d^r)=(-r,r-1,0,\ldots,0)$. The term $E^\infty_{a_{n+2},\ldots,a_1}$ is a subquotient of the degree $(a_{n+2}+a_{n+1},a_n,\ldots,a_1)$ part of the target.
-\end{cor}
-%Thus, we may write the spectral sequence as:
-%\[\fbox{$E^2=(\derived{\Ind{\LL{n+1}}})(\derived\Ind{\nontop{n}})X\implies(\derived\Ind{\LL{n}})X.$}\]
+%%%%%\begin{cor}
+%%%%%For $n\geq1$, and any $X\in\LL{n}$, there is a spectral sequence:
+%%%%%\[E^2=(\derived{\Ind{\LL{n+1}}})(\derived{\Ind{\nontop{n}}})X\implies(\derived\Ind{\LL{n}})X.\]
+%%%%%\begin{itemise}
+%%%%%\setlength{\parindent}{.25in}
+%%%%%\item For $r\leq\infty$, the $E^r$ page is an object of $\GR{n+2}$.
+%%%%%\item For $r<\infty$, $d^r:E^r\to E^r$ has degree $(-r,r-1,0,\ldots,0)$.
+%%%%%\item The target, $(\derived\Ind{\LL{n}})X$, is an object of $\GR{n+1}$.
+%%%%%\item There is an increasing filtration $F$ on $(\derived\Ind{\LL{n}})X$ such that
+%%%%%\[E^\infty_{a_{n+2},\ldots,a_1}=(F_{a_{n+2}}/F_{a_{n+2}-1})((\derived\Ind{\LL{n}})X)_{a_{n+2}+a_{n+1},a_n,\ldots,a_1}.\]
+%%%%%\end{itemise}
+%%%%%%The pages $E^r$ ($r\leq\infty$) are $(n+2)$-graded, with $\deg(d^r)=(-r,r-1,0,\ldots,0)$. The term $E^\infty_{a_{n+2},\ldots,a_1}$ is a subquotient of the degree $(a_{n+2}+a_{n+1},a_n,\ldots,a_1)$ part of the target.
+%%%%%\end{cor}
+
+\end{GrothendieckSpectralSequences}
 
 
-
-\begin{shaded}
-\textbf{The following observation explains why there's little danger in having two functors named $\Ind{\nontop{n}}$.}
+\begin{ConversationWithHaynes_InclusionOfBarConstructions}
+The stuff in here is what I wrote after a brief chat with Haynes about the inclusion of bar constructions that was causing me some confusion. There's a newer version in play.
 \begin{prop}
 For $n\geq1$, and any $X\in\LL{n}$, there's an isomorphism of vector spaces
-\[(\derived{\Ind{\nontop{n}}})(\forget_{\nontop{}}X)\cong\forget_{\GR{}}(\derived{\Psi})X,\]
+\[(\derived\Psi)(\forget_{\nontop{}}X)\cong\forget_{\GR{}}(\derived{{\Ind{\nontop{n}}}})X,\]
 induced by the evident inclusion 
 \[\Ind{\nontop{n}}B_\bullet(\Fr{\nontop{n}},\Fr{\nontop{n}},\forget_{\nontop{}}X)\to \forget_{\GR{}}\Psi B_\bullet(\Fr{\LL{n}},\Fr{\LL{n}},X).\]
 You might write this as $B_\bullet(\forget,\Fr{\nontop{n}},\forget_{\nontop{}}X)\to B_\bullet(\PRLie{n},\Fr{\LL{n}},X)$.
@@ -1143,10 +1180,10 @@ To approach the acyclicity question, we'll use unreduced chain complexes, writin
 $a:=\sum_j Q^{I_j}x_j$
 where all of the $I_j$ are distinct, and the $x_j$ are (potentially inhomogeneous) elements of $W_r$ (such that $Q^{I_j}x_j$ is defined). Then $\partial (a)=\sum Q^{I_j}\partial(x_j)=0$, which implies that each $\partial(x_j)$ is zero, so that $x_j=\partial(y_j)$ for some $y_j\in W_{r+1}$. Note that the internal dimensions of the homogeneous summands of $y_j$ may be taken to be the same as those of $x_j$, in which case $\sum Q^{I_j}y_j$ is defined in $\Fr{\nontop{n}}W_{r+1}$, and has boundary $a$.
 \end{proof}
-\end{shaded}
-\end{GrothendieckSpectralSequences}
+\end{ConversationWithHaynes_InclusionOfBarConstructions}
 
-\begin{KoszulComplexes2plus}
+
+\begin{KoszulComplexes_n>1}
 \section{Unstable Koszul complexes and Priddy's algorithm}
 \subsection{Koszul complexes for $\derived\Ind{\nontop{n}}$ for $n\geq2$}
 We will define Koszul complexes calculating $\derived\Ind{\nontop{n}}$ for all $n$. The techniques we will use originate in \cite{PriddyKoszul.pdf}. It will be useful to record here a customized version of Priddy's arguments, for three reasons: his results do not apply to our situation without minor modification to accomodate unstable conditions; we will require a technique from his proof of \cite[Thm 5.3]{PriddyKoszul.pdf} in what follows; we prefer to work with the Koszul complex, not the coKoszul complex.
@@ -1276,7 +1313,7 @@ Now as $E^1_{r,r}\subseteq E^0_{r,r}$, in order to write this in terms of the $\
 \end{proof}
 
 
-\end{KoszulComplexes2plus}
+\end{KoszulComplexes_n>1}
 
 
 \begin{KoszulComplexes1}
@@ -2240,32 +2277,7 @@ Suppose that $X$ is a simplicial commutative algebra which is connected, and is 
 \end{VanishingLines}
 
 
-\begin{TotalisationInSAlg}
-\section{The Adams Spectral Sequence}
-\subsection{Cosimplicial objects in $s\Comm$}
-\begin{prop}
-Suppose that $X^\bullet$ is a cosimplicial object in $s\Comm$. Then for $0\leq m\leq\infty$, $I\Tot_m(X^\bullet)\cong\Tot_m(IX^\bullet)$, where $I$ is the right adjoint in the adjunction $\textup{Sym}:s\Vect\rightleftarrows s\Comm:I$, and the second totalization is that of the cosimplicial simplicial vector space $IX^\bullet$.
-\end{prop}
-\begin{proof}
-The totalization of a cosimplicial object in $s\Comm$ is defined by the end
-\[\Tot_m(X^\bullet):= \int_{[k]\in\Delta}\left(X^k\right)^{\textup{sk}_m\Delta[k]}\]
-where for each $k$, the cotensor within the end is defined by taking various powers of the $X^k_t$ in each simplicial dimension $t$. As $I$ is the prolongation of the right adjoint in $\Vect\rightleftarrows\Comm$, it commutes with all of these limits.
-\end{proof}
-Following \cite{BousfieldHSSCS.pdf}, for $\textbf{B}$ a cosimplicial simplicial vector space, let $N^*N_*\textbf{B}$ be the normalized double complex. The total complex $T\textbf{B}$ is then defined by
-\[(T\textbf{B})_n=\prod_{t-s=n}N^sN_t\textbf{B},\ \textup{with filtration }(F^mT\textbf{B})_n=\prod_{\substack{t-s=n\\t\geq m}}N^sN_t\textbf{B}.\]
-Now if we write
-\[(T_m\textbf{B})_n:=(T\textbf{B}/F^{m+1} T\textbf{B})_n\cong\prod_{\substack{t-s=n\\t\leq m}}N^sN_t\textbf{B}, \]
-then $F^mT\textbf{B}$ is a decreasing filtration and the $T_m\textbf{B}$ form a tower of surjections of chain complexes with inverse limit $T_\infty\textbf{B}=T\textbf{B}$. 
-\begin{lem}[{\cite[Lemma 2.2]{BousfieldHSSCS.pdf}}]
-There are natural chain maps $\phi_m:N_*\Tot_m\textbf{B}\to T_m\textbf{B}$ for $m\leq\infty$ which induce isomorphisms $\pi_*\Tot_m\textbf{B}\to H_*T_m\textbf{B}$ and are compatible with the tower maps $\Tot_{s}\textbf{B}\to\Tot_m\textbf{B}$ and $T_{s}\textbf{B}\to T_m\textbf{B}$ for $s\geq m$.
-\end{lem}
-\begin{cor}
-Suppose that $X^\bullet$ is a cosimplicial object in $s\Comm$. Then there is a map of spectral sequences, which is an isomorphism from $E^1$, from the homotopy spectral sequence of the $\Tot$ tower $\{I\Tot_mX^\bullet\}$ to the spectral sequence of the bicomplex underlying $IX^\bullet$. Moreover, there is an isomorphism $\pi_*I\Tot X^\bullet\to H_*TIX^\bullet$ (to the homology of the total complex of the bicomplex), which is compatible with the map of spectral sequences.
-\end{cor}
-\begin{cor}
-Suppose that $X$ is a connected element of $s\Comm$. Then the Adams spectral sequence for $X$ is the spectral sequence of the bicomplex underlying the cosimplicial simplicial vector space $I((c(K\overline{Q})^\bullet X)^{\textup{rf}})$. This spectral sequence admits a vanishing line from $E^2$, and so converges strongly to its target, $\pi_{t-s}(I\hat X)$.
-\end{cor}
-\end{TotalisationInSAlg}
+
 
 
 
