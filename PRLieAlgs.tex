@@ -13,7 +13,7 @@
 \excludeversion{AdamsDerivation}
 \excludeversion{SteenrodAlgebrasAndTheirKoszulDuals}
 \excludeversion{CategoriesOfInterest}
-\excludeversion{DiagramOfFunctors}
+\includeversion{DiagramOfFunctors}
 \includeversion{GrothendieckSpectralSequences}
 \excludeversion{KoszulComplexes2plus}
 \excludeversion{KoszulComplexes1}
@@ -851,23 +851,55 @@ When $n=1$, $\forget(\Fr{\LL{1}}(X))\in\nontop{1}$ is free on $B$. For $n\geq2$,
 \noindent Due to the choices involved in taking a Hall basis, I see no reason that $\forget$ should preserve free maps of free objects.
 \end{CategoriesOfInterest}
 
-
-
-
-
-\begin{DiagramOfFunctors}
 \section{Grothendieck spectral sequences}
-\subsection{A diagram of functors}
-Now for each category $\mathsf{C}$ amongst $\LL{n}$, $\PRLie{n}$ and $\nontop{n}$, there is a functor $\Ind{\mathsf{C}}:\mathsf{C\overset{}{\to}\GR{n}}$, which takes the quotient of the underlying vector space by the subspace spanned by the image of all of the structure maps. These provide the solid horizontal arrows in the following diagram, while the vertical maps are the evident forgetful functors: %There are also free/forget adjunctions $\GS{n} \rightleftarrows \mathsf{C}$. %Finally, there's a forgetful functor $\forget:\LL{n}\to\nontop{n}$, which, importantly, preserves  free objects%footnote:
-%\footnote{I think that the adjunction does need to come from graded pointed sets, but that that's no problem for Blanc-Stover. The only thing that matters is that $\forget$ preserves frees, but it does --- frees in $\nontop{n}$ are easy to describe.}. These functors give the solid maps in the following diagram:
+\subsection{Homotopical algebra}
+
+
+Every category $\mathsf{C}=\mathsf{C}^n$ that we defined above is an example of an (underlying abelian) category of universal graded algebras, in the sense of \cite{Blanc_Stover-Groth_SS.pdf}. In particular, $s\mathsf{C}$ is a model category, in which the weak equivalences are the weak equivalences of underlying sets, and the fibrations are those maps which are surjections on the basepoint components of the underlying simplicial groups. The cofibrant objects are exactly the retracts of the almost free objects%footnote:
+\footnote{Note that for cofibrant objects, Quillen, page 4.11, states that the cofibrant objects are retracts of the free objects. Now as we have constructed $\Delta bX$, it is free up from vector spaces, but maybe not up from sets. Hrm. Miller does up from vector spaces. Presumably this is no big deal --- Miller gets around it without mention. That the adjunction doesn't go as far down should be countered by the fact that we've got $\F_2$-vector spaces to map to!}. See \cite{Blanc_Stover-Groth_SS.pdf}, \cite[II\S4]{QuillenHomAlg.pdf} and \cite[\S3]{MillerSullivanConjecture.pdf}.
+%If $\mathsf{C}$ is any category of universal graded algebras (or CUGA, see \cite{Blanc_Stover-Groth_SS.pdf}), $s\mathsf{C}$ is a model category, in which the weak equivalences are the weak equivalences of underlying sets, and the fibrations are those maps which are surjections on the basepoint components of the underlying simplicial groups. See \cite{Blanc_Stover-Groth_SS.pdf} and \cite[II\S4]{QuillenHomAlg.pdf}.
+
+Suppose that $X\in s\mathsf{C}$ is any simplicial object. Then we can form the bisimplicial object $bX\in ss\mathsf{C}$ defined by $(bX)_{s,t}=\Fr{\mathsf{C}}^{t+1}X_s$. For each $s$, the singly simplicial object $(bX)_{s,\bullet}$ is augmented to $X_s$ via the structure map $\mathsf{C}X_s\to X_s$. As such there is a map $\Delta bX\to X$. One may alter the proof of \cite[Thm 3.4(i)]{MillerSullivanConjecture.pdf} to see that this is a functorial acyclic fibration from a cofibrant object. In summary:
+\begin{enumerate}\squishlist
+\setlength{\parindent}{.25in}
+\item  $\Delta bX$ is almost free by construction, thus cofibrant.
+\item Consider the map $bX\to \textup{const}^e(X)$ in $ss\mathsf{C}$, where $ \textup{const}^e(X)_{s,t}:=X_s$. This induces a map of the spectral sequences obtained by filtering the associated total chain complexes by the first variable. This is an isomorphism from $E^1$, so that $\Delta bX\to\Delta\, \textup{const}^e(X)=X$ is a weak equivalence.
+\item As $\Delta bX\to X$ is a weak equivalence, in order that it is a surjection on basepoint components, it is enough that it is simply a surjection, which it is by construction.
+\end{enumerate}
+The construction $bX$ is a bisimplicial version of the simplicial bar construction $B_\bullet(\Fr{\mathsf{C}},\Fr{\mathsf{C}},Y):=(\Fr{\mathsf{C}})^{\bullet+1}Y$ on an object $Y\in\mathsf{C}$. In fact, $B_\bullet(\Fr{\mathsf{C}},\Fr{\mathsf{C}},Y)=\Delta b\,\textup{const}(Y)$, where $\textup{const}(Y)\in s\mathsf{C}$ is the constant object on $Y$.
+\begin{DiagramOfFunctors}
+\subsection{Indecomposables}
+
+For each of the above categories, there is a functor $\Ind{\mathsf{C^n}}:\mathsf{C^n}\to\GR{n}$ which sends $X\in\mathsf{C}^n$ to the quotient of the underlying vector space of $X$ by the subspace generated by the images of all the operations defining $X$.
+
+The functor $\Ind{\mathsf{C}^n}$ is always left adjoint to a functor $K:\GR{n}\to\mathsf{C}^n$ which sends a graded vector space $V$ to the corresponding trivial object in $\mathsf{C}^n$. That is, $KV$ has $V$ as underlying vector space, and all operations in $KV$ are zero. Note then that the right adjoint, $K$, preserves weak equivalences and fibrations, both of which are determined on the level of underlying simplicial groups. Thus, $\Ind{\mathsf{C}^n}$ is a left Quillen functor, so that we can easily define the left derived functors $\derived_*\Ind{\mathsf{C}^n}$.
+
+
+This analysis extends to the case where $\mathsf{C}$ is the category of non-unital commutative $\F_2$-algebras, which is evidently equivalent to $\Comm$. Under this equivalence, $\derived_*\Ind{\Comm}$ recovers the definition of the Quillen homology $H_*^Q$.
+
+
+
+
+
+
+
+
+
+
+%\subsection{A diagram of functors}
+%%%%%Now for each category $\mathsf{C}$ amongst $\LL{n}$, $\PRLie{n}$ and $\nontop{n}$, there is a functor $\Ind{\mathsf{C}}:\mathsf{C\overset{}{\to}\GR{n}}$, which takes the quotient of the underlying vector space by the subspace spanned by the image of all of the structure maps. These provide the solid horizontal arrows in the following diagram, while the vertical maps are the evident forgetful functors: %There are also free/forget adjunctions $\GS{n} \rightleftarrows \mathsf{C}$. %Finally, there's a forgetful functor $\forget:\LL{n}\to\nontop{n}$, which, importantly, preserves  free objects%footnote:
+%%%%%%\footnote{I think that the adjunction does need to come from graded pointed sets, but that that's no problem for Blanc-Stover. The only thing that matters is that $\forget$ preserves frees, but it does --- frees in $\nontop{n}$ are easy to describe.}. These functors give the solid maps in the following diagram:
+
+The indecomposables functors described above provide the solid horizontal arrows in the following diagram, while the vertical maps are the evident forgetful functors:
+
 \[\xymatrix@R=8mm@C=15mm@!C{
 \LL{n}
 \ar@/^1.5em/[rr]^-{\Ind{\LL{n}}}
-\ar[d]_-{\forget}
+\ar[d]_-{\forget_{\nontop{}}}
 \ar@{-->}[r]_-{\Psi}%\Ind{\nontop{n}}}
 &%r1c1
 \PRLie{n}
-\ar[d]^-{\forget}
+\ar[d]^-{\forget_{\GR{}}}
 \ar[r]_-{\Ind{\PRLie{n}}}
 &%r1c2
 \GR{n}
@@ -899,6 +931,8 @@ Proposition \ref{PropFreeKandUconstructions} will show that $\Ind{\nontop{n}}(\F
 
 The $n=1$ case is much easier, as $\Ind{\nontop{1}}$ kills \emph{all} the $P$ operations, leaving only the elements of a Hall basis for $\Fr{\GoodLie{1}}(X)\cong \Fr{\PRLie{1}}(X)$.
 \end{proof}
+\begin{shaded}
+
 \noindent It should cause no confusion when we denote the functor of this proposition $\Ind{\nontop{n}}:\LL{n}\to \PRLie{n}$ as well, giving a commuting diagram
 \[\xymatrix@R=8mm@C=15mm@!C{
 \LL{n}
@@ -920,17 +954,20 @@ The $n=1$ case is much easier, as $\Ind{\nontop{1}}$ kills \emph{all} the $P$ op
 %r2c3
 }\]
 in which the functors $\forget$ and $\Ind{\nontop{n}}$ with domain $\LL{n}$ both preserve free objects.
+\end{shaded}
 %The point is that there is a functor $\LL{n}\to\PRLie{n}$ which completes this diagram to a commuting square and triangle, which we also name $\Ind{\nontop{n}}$. It will be important to note that $\Ind{\nontop{n}}$ sends free objects in $\LL{n}$ to free objects in $\PRLie{n}$.
 %
 %When $n=1$, $\Ind{\nontop{n}}$ quotients the underlying vector space by the images of all of the $P$ operations. The result inherits the structure of an element of $\PRLie{n}$ from the bracket in $\LL{1}$. This is well defined due to the axioms ``$[x,P^iy]=0$'' and ``$P^{|x|}x=[x,x]$''. 
 %
 %When $n\geq2$, $\Ind{\nontop{n}}$ quotients the underlying vector space by the images of all of the non-top $\Q$ operations. That is, by the span of the $\Q^ix$ for $i<|x|$. The result inherits the structure of an element of $\PRLie{n}$ as follows. The Lie bracket is induced by that in $\LL{n}$; well defined by the axiom ``$[\Q^i{x},z]=0$ for $i<|x|$''. The restriction is induced by the top $\Q$ operations, being defined by the formula $\restn{x}:=\Q^{|x|}x$. It is a little less obvious that this is in fact well defined. One must check, for homogeneous $x,y\in L$, and $0\leq i<|y|$ such that $\Q^iy$ is defined and $i+|y|=|x|$, that $\Q^{|x|}x$ and $\Q^{|x|}(x+\Q^iy)$ differ by a sum of images of non-top $\Q$ operations. But\[\Q^{|x|}(x+\Q^iy)-\Q^{|x|}x=\Q^{|x|}(\Q^iy)+[x,\Q^iy]=\Q^{|x|}\Q^iy,\]and the above calcuation regarding indices in the $\Q$-Adem relations shows that $\Q^{|x|}\Q^iy$ can be rewritten without the appearance of a top $\Q$.
 \end{DiagramOfFunctors}
+
 \begin{GrothendieckSpectralSequences}
 \subsection{The derived functors $\derived\Ind{\nontop{n}}$}
-\begin{lem*}\label{LemLevelwiseFreeWillSuffice}
-Suppose that $R$ is a levelwise free object in $s\nontop{n}$. Let ${bR}$ be the bisimplicial object which is the levelwise bar construction on $R$, defined by ${bR}_{s,t}=U^{t+1}R_s$. Then the natural map $\Delta {bR}\to R$ is a cofibrant replacement, and $\pi_*(I\Delta {bR})\to\pi_*(IR)$ is an isomorphism. That is, the complex $IR$ already calculates $(\derived I)R$.
-\end{lem*}
+\begin{lem}\label{LemLevelwiseFreeWillSuffice}
+Suppose that $R$ is a levelwise free object in $s\nontop{n}$. Let ${bR}$ be the bisimplicial object which is the levelwise bar construction on $R$, defined by ${bR}_{s,t}=U^{t+1}R_s$. Then %the natural map $\Delta {bR}\to R$ is a cofibrant replacement \textbf{really? what's needed?}, and 
+$\pi_*(I\Delta {bR})\to\pi_*(IR)$ is an isomorphism. %That is, the complex $IR$ already calculates $(\derived I)R$.
+\end{lem}
 \begin{proof}
 The proof will proceed by factoring the map $\pi_*(I\Delta {bR})\to\pi_*(IR)$ as the composite of three isomorphisms:
 \[\xymatrix@R=4mm{
@@ -970,8 +1007,7 @@ The edge homomorphism sends the class of an $s$-cycle in $\Tot CI{bR}$, say,
 \[\sum_{i=0}^s z_{i,s-i},\textup{ where }z_{i,s-i}\in I{bR}_{i,s-i}\]
 to the class $z_{s,0}$ in $E^2_{s,0}$. Suppose then that $w\in I{bR}_{ss}$ is a cycle in $CI\Delta {bR}$. Then $\textup{edge}(\textup{AW}(w))$ is represented simply by $(I(\textup{id},(d_0)^s))(w)$. Thus, the effect of the composite of the three isomorphisms on a cycle is $w\mapsto (I(\textup{id},(d_0)^{s+1}))(w)$, but $(\textup{id},(d_0)^{s+1})$ is exactly the natural map $\Delta {bR}\to R$, demonstrating that the above diagram commutes.
 \end{proof}
-\newpage
-Consider then the following diagram:
+From the above preparations, for any $X\in\LL{n}$, we can construct the solid arrows in the following diagram in the model category $s\nontop{n}$:
 \[{
 %\def\objectstyle{\scriptstyle}
 \xymatrix{
@@ -981,8 +1017,8 @@ Consider then the following diagram:
 &%r1c1
 B_\bullet(\Fr{\nontop{n}},\Fr{\nontop{n}},\forget_{\nontop{}}X)
 \ar@{->>}[r]^-{\sim}_-{a_1}
-\ar[d]^-{i}
-\ar@{-->}[dl]_-{\exists}
+\ar@{-->}[d]_-{i}
+\ar@{-->}[dl]^-{\exists}_-{\widetilde{i}}
 &%r1c2
 \textup{const}(\forget_{\nontop{}}X)
 \ar@{=}[d]
@@ -996,15 +1032,21 @@ B_\bullet(\Fr{\nontop{n}},\Fr{\nontop{n}},\forget_{\nontop{}}X)
 \forget_{\nontop{}}\textup{const}(X)
 %r2c3
 }}\]
+Here, $a_2$ is an acyclic fibration because $\forget_{\nontop{}}$ preserves acyclic fibrations, and all other decorations come directly from the above discussion. The ``$\Delta b$'' used in the cofibrant replacement $a$ is taken in $s\nontop{n}$. The lemma \ref{LemLevelwiseFreeWillSuffice} shows that $a$ remains a weak equivalence after applying $\Ind{\nontop{n}}$. Supposing then that we can find a map $i$ making the right hand square commute, it will lift to a map $\widetilde{i}$. By 2-of-3, $\widetilde{i}$ will be a weak equivalence of cofibrant objects, so that it too will remain an equivalence after applying the left Quillen functor $\Ind{\nontop{n}}$. Thus $i$ too will remain an equivalence after applying $\Ind{\nontop{n}}$.
+
+There is a simple choice for the map $i$ such that $a_2i=a_1$. One just takes an expression in $(\Fr{\nontop{n})}^{\bullet+1}(\forget_{\nontop{}}X)$ and views it as an expression in $(\Fr{\LL{n})}^{\bullet+1}(X)$ via the natural map $\Fr{\nontop{n}}W\to \Fr{\LL{n}}W$ adjoint to the inclusion $W\to \forget_{\nontop{n}}\Fr{\LL{n}}W$ for any $W\in\GR{n}$.
+
+
+
+
 \begin{shaded}
-Here, $a$ may be taken to be the cofibrant replacement of lemma \ref{LemLevelwiseFreeWillSuffice}, and $\Ind{\nontop{n}}(a)$ is a homotopy equivalence. Now \textbf{HOPEFULLY!!!} $\Ind{\nontop{n}}$ is left Quillen or something (along with everything else we're deriving --- actually, it's not too bad by comments I made on BS, and also because Ind IS left quillen, having right adjoint `triv' from vectors to algebras/modules), so that... yeah.
+Here, $a$ may be taken to be the cofibrant replacement of lemma \ref{LemLevelwiseFreeWillSuffice} (gone), and $\Ind{\nontop{n}}(a)$ is a homotopy equivalence. Now \textbf{HOPEFULLY!!!} $\Ind{\nontop{n}}$ is left Quillen or something (along with everything else we're deriving --- actually, it's not too bad by comments I made on BS, and also because Ind IS left quillen, having right adjoint `triv' from vectors to algebras/modules), so that... yeah.
 
 Back to what was happening --- you get that the diagonal map is a $\pi_*\Ind{\nontop{n}}$-equivalence, my model category stuff. As $a$ is one of those, so too must $i$ be.
 \end{shaded}
-
-
-
-What this has proven is that $Ii$ is a weak equivalence, in the following diagram. The domain $B_\bullet(\Fr{\nontop{n}},\Fr{\nontop{n}},\forget_{\nontop{}}X)$  of $i$ is almost free by construction, and thus cofibrant. Moreover, $\forget_{\GR{}}(B_\bullet(\Fr{\nontop{n}},\Fr{\nontop{n}},\forget_{\nontop{}}X))$ is augmented via $a_1$, with extra degeneracies, so that $a_1$ is a weak equivalence and a surjection of simplicial sets. Thus $a_1$ is an acyclic fibration in the model structure on $s\nontop{n}$. The same comments hold for $B_\bullet(\Fr{\LL{n}},\Fr{\LL{n}},X)$ in the model structure on $s\LL{n}$, but while $\forget_{\nontop{}}$ preserves weak equivalences and fibrations, it does not preserve cofibrations, nor is it clear whether $\forget_{\nontop{}} B_\bullet(\Fr{\LL{n}},\Fr{\LL{n}},X)$ is almost free.
+\begin{shaded}
+What this has proven is that $Ia$ is a weak equivalence, in the following diagram. The domain $B_\bullet(\Fr{\nontop{n}},\Fr{\nontop{n}},\forget_{\nontop{}}X)$  of $i$ is almost free by construction, and thus cofibrant. Moreover, $\forget_{\GR{}}(B_\bullet(\Fr{\nontop{n}},\Fr{\nontop{n}},\forget_{\nontop{}}X))$ is augmented via $a_1$, with extra degeneracies, so that $a_1$ is a weak equivalence and a surjection of simplicial sets. Thus $a_1$ is an acyclic fibration in the model structure on $s\nontop{n}$. The same comments hold for $B_\bullet(\Fr{\LL{n}},\Fr{\LL{n}},X)$ in the model structure on $s\LL{n}$, but while $\forget_{\nontop{}}$ preserves weak equivalences and fibrations, it does not preserve cofibrations, nor is it clear whether $\forget_{\nontop{}} B_\bullet(\Fr{\LL{n}},\Fr{\LL{n}},X)$ is almost free.
+\end{shaded}
 
 
 
