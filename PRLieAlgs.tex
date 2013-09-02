@@ -7,7 +7,7 @@
 
 \excludeversion{ConversationWithHaynes_InclusionOfBarConstructions}
 \excludeversion{GrothendieckSpectralSequencestake2}
-\def\excludeversion#1{\includeversion{#1}}
+%\def\excludeversion#1{\includeversion{#1}}
 \excludeversion{Frontmatters}
 \excludeversion{Endmatter}
 \excludeversion{AdamsDerivation}
@@ -20,7 +20,7 @@
 \excludeversion{KoszulComplexes1}
 \excludeversion{DerivedFunctorsLowDimension}
 \excludeversion{PRlieKoszulComplexCalculation}
-\excludeversion{LieLambdaStructureOnKoszul}
+\includeversion{LieLambdaStructureOnKoszul}
 \excludeversion{SequenceOfSequencesIntro}
 \excludeversion{KoszulSequenceCombinatorics}
 \excludeversion{CalculatingRepeatedKoszul}
@@ -32,27 +32,50 @@
 \newcommand{\GpS}[1]{\scrE^{#1}_\star}
 \renewcommand{\Set}{Set}
 
-\newcommand{\RestLie}[1]{\mathsf{r}{\scrL}^{#1}}%{{\mu\scrL}^{#1}}
-\newcommand{\GoodLie}[1]{\mathsf{g}{\scrL}^{#1}}%{{\mu\scrL}^{#1}}
-\newcommand{\BadLie}[1]{\mathsf{b}{\scrL}^{#1}}%{{\mu\scrL}^{#1}}
-\newcommand{\PRLie}[1]{\scrR^{#1}}%{{\xi\scrL}^{#1}}
+%\newcommand{\RestLie}[1]{\mathsf{r}{\scrL}^{#1}}%{{\mu\scrL}^{#1}}
+%\newcommand{\GoodLie}[1]{\mathsf{g}{\scrL}^{#1}}%{{\mu\scrL}^{#1}}
+%\newcommand{\BadLie}[1]{\mathsf{b}{\scrL}^{#1}}%{{\mu\scrL}^{#1}}
+%\newcommand{\PRLie}[1]{\scrR^{#1}}%{{\xi\scrL}^{#1}}
+
+
+\newcommand{\RestLie}[1]%
+{\ifblank{#1}{\mathsf{r}{\scrL}}{\mathsf{r}{\scrL}^{#1}}}
+\newcommand{\GoodLie}[1]%
+{\ifblank{#1}{\mathsf{g}{\scrL}}{\mathsf{g}{\scrL}^{#1}}}
+\newcommand{\BadLie}[1]%
+{\ifblank{#1}{\mathsf{b}{\scrL}}{\mathsf{b}{\scrL}^{#1}}}
+\newcommand{\PRLie}[1]%
+{\ifblank{#1}{\scrR}{\scrR^{#1}}}
+
 
 \newcommand{\LL}[1]{\ifblank{#1}{\scrK}{\scrK^{#1}}}
 \newcommand{\GR}[1]{\ifblank{#1}{\scrV}{\scrV^{#1}}}
 \newcommand{\nontop}[1]{\ifblank{#1}{\scrU}{\scrU^{#1}}}
 \newcommand{\PiAlg}[1]{#1\textup{-$\Pi$-alg}}
+\newcommand{\PiAlgebra}[1]{#1\textup{-$\Pi$-algebra}}
 \newcommand{\produces}[3]{{#1}{#3}{#2}}
 
 \newcommand{\admis}[1]{\mathrm{adm}(#1)}%{{\mu\scrL}^{#1}}
 
 \newcommand{\iteratedrestn}[2]{\xi^{#2}{#1}}
-\newcommand{\Ind}[2][]{\mathbf{I}{#2}_{#1}}%[internal indices]{category name}
+
+
+
+
+
+
+
+\newcommand{\Ind}[2][]{\ifblank{#1}{\mathbf{I}^{\mbox{\tiny $#2$}}}{\mathbf{I}^{\mbox{\tiny $#2$}}_{#1}}}%[internal indices]{category name}
 \newcommand{\forget}{\mathrm{fg}}
+\newcommand{\Forget}[1]{\mathrm{fg}_{\mbox{\tiny $#1$}}}
+\newcommand{\BarConst}[1]{B^{\mbox{\tiny $#1$}}}
+
+
 \newcommand{\Fr}[2][]{\ifblank{#1}{#2}{#2_{#1}}}
 \newcommand{\restn}[2][]{\ifblank{#1}{\xi{#2}}{\xi_{#1}{#2}}}%{\xi{#1}}
 
 
-\newcommand{\BarConst}[1]{B^{#1}}
+
 \DeclareMathOperator{\Constant}{con}
 
 \newcommand{\derived}{\mathbb{L}}
@@ -72,6 +95,8 @@
 
 \newcommand{\Shuffles}[2]{\textup{Sh}_{#1#2}}
 \newcommand{\HalfShuffles}[2]{\textup{Sh}_{#1#2}/2}
+
+\newcommand{\ModDegeneracies}[1]{(#1/\textup{Degens})}
 
 \renewcommand{\produces}[3]{
 {
@@ -101,87 +126,87 @@
 
 
 \begin{GrothendieckSpectralSequencestake2}
-\subsection{Grothendieck spectral sequence fiddles}
-\begin{lem*}
-Suppose that $X$ is a levelwise free object in $s\nontop{n}$. Let $A$ be the bisimplicial object which is the levelwise bar construction on $X$, defined by $A_{s,t}=U^{t+1}X_s$. Then the natural map $\Delta A\to X$ is a cofibrant replacement, and $\pi_*(I\Delta A)\to\pi_*(IX)$ is an isomorphism. That is, the complex $IX$ already calculates $(\derived I)X$.
-\end{lem*}
-\begin{proof}
-The proof will proceed by factoring the map $\pi_*(I\Delta A)\to\pi_*(IX)$ as the composite of three isomorphisms:
-\[\xymatrix@R=4mm{
-\pi_*(I\Delta A)
-\ar[r]_-{}
-\ar[d]_-{\textup{AW}}
-&%r1c1
-\pi_*(IX)
-\\%r1c2
-H_*(\Tot CIA)\ar[r]^-{\textup{edge}}
-&%r2c1
-E^2_{*,0}\ar[u]_-{\tau}
-%r2c2
-}\]
-The first will be homology isomorphism induced by the Alexander-Whitney map $C\Delta IA\to\Tot CIA$. The second map will be an edge homomorphism in the spectral sequence obtained by filtering $\Tot CIA$ by `$s$':
-\begin{alignat*}{2}
-E^0_{st}
-&=
-IU^{t+1}X_s%
-\\
-E^1_{st}
-&=
-(\derived_t I)(X_s)=\begin{cases}
-IX_s,&\textup{if }t=0;\\
-0,&\textup{otherwise}.
-\end{cases}
-&\qquad&\text{(as $X_s$ is free)}\\
-E^2_{st}
-&=
-\begin{cases}
-\pi_s(IX),&\textup{if }t=0;\\
-0,&\textup{otherwise}.
-\end{cases}
-\end{alignat*}
-The isomorphism $\tau$ is induced, for each $s$, by the augmentation in the $t$ direction, $(I(\textup{id},d_0)):IUX_s\to IX_s$ %$I\rho:IUX_s\to IX_s$, where $\rho$ is the structure morphism $UX_s\to X_s$. 
-The edge homomorphism sends the class of an $s$-cycle in $\Tot CIA$, say,
-\[\sum_{i=0}^s z_{i,s-i},\textup{ where }z_{i,s-i}\in IA_{i,s-i}\]
-to the class $z_{s,0}$ in $E^2_{s,0}$. Suppose then that $w\in IA_{ss}$ is a cycle in $CI\Delta A$. Then $\textup{edge}(\textup{AW}(w))$ is represented simply by $(I(\textup{id},(d_0)^s))(w)$. Thus, the effect of the composite of the three isomorphisms on a cycle is $w\mapsto (I(\textup{id},(d_0)^{s+1}))(w)$, but $(\textup{id},(d_0)^{s+1})$ is exactly the natural map $\Delta A\to X$, demonstrating that the above diagram commutes.
-
-\end{proof}
-\begin{prop}
-For $n\geq1$, and any $X\in\LL{n}$, there's an isomorphism of vector spaces
-\[(\derived{\Ind{\nontop{n}}})(\forget_{\nontop{}}X)\cong\forget_{\GR{}}(\derived{\Psi})X,\]
-induced by the evident inclusion 
-\[\Ind{\nontop{n}}B_\bullet(\Fr{\nontop{n}},\Fr{\nontop{n}},\forget_{\nontop{}}X)\to \forget_{\GR{}}\Psi B_\bullet(\Fr{\LL{n}},\Fr{\LL{n}},X).\]
-You might write this as $B_\bullet(\forget,\Fr{\nontop{n}},\forget_{\nontop{}}X)\to B_\bullet(\PRLie{n},\Fr{\LL{n}},X)$.
-\end{prop}
-\noindent In light of this result, we write $(\derived{\Ind{\nontop{n}}})X$ for either $(\derived{\Ind{\nontop{n}}})X$ or $(\derived{\Ind{\nontop{n}}})\forget(X)$, without ambiguity. \textbf{Discuss} the meaning of the fg and Rn in the bar construction.
-\begin{proof}
-As $\forget:\LL{n}\to\nontop{n}$ preserves free objects and weak equivalences, there's a one-line Grothendieck spectral sequence producing the isomorphism, but this argument does not show that the isomorphism is induced by the inclusion of bar constructions. If $\forget(B_\bullet(\LL{n},\LL{n},X))$ were almost free in $s\nontop{n}$, the map ${B}_\bullet(\nontop{n},\nontop{n},\forget(X))\to{B}_\bullet(\LL{n},\LL{n},X)$ would be a map of cofibrant replacements of $\forget(X)$ in $s\nontop{n}$, and thus 
-
-Or should I say: ``the obvious inclusion map $\overline{B}_*(\nontop{n},\nontop{n},X)\to\overline{B}_*(\LL{n},\LL{n},X)$ is a map of almost free objects realising the identity on $X$''? Is the latter actually almost free in $s\nontop{n}$?
-\end{proof}
-\begin{lem}
-For any $X$ in $s\LL{n}$, $(\derived{\Ind{\nontop{n}}})(\forget_{\nontop{}}(X))$ may be calculated as the homotopy of the object 
-\[\forget(\Ind{\nontop{n}}(B_\bullet(\Fr{\LL{n}},\Fr{\LL{n}},X)))=\forget(B_\bullet(\Fr{\PRLie{n}},\Fr{\LL{n}},X))\in s\GR{n}.\]
-\end{lem}
-\begin{proof}
-Although $B:=B_\bullet(\Fr{\LL{n}},\Fr{\LL{n}},X)$ is an acyclic levelwise free object in $s\nontop{n}$, with $\pi_0(B)=X$, it may fail to be `almost free'. The point here is that $B$ can be used to calculate the derived functors of $\Ind{\nontop{n}}$ anyway. To see this, consider the bisimplicial object $A:=\Ind{\nontop{n}}(B_\bullet(\Fr{\nontop{n}},\Fr{\nontop{n}},B))$ formed by applying $\Ind{\nontop{n}}$ to the levelwise bar construction on $B$, so that
-\[A_{s,t}=(\Ind{\nontop{n}})((\Fr{\nontop{n}})^{s+1})B_t\cong (\Fr{\nontop{n}})^sB_t.\]
-Now there are two first-quadrant spectral sequences converging to $\pi_*(\Delta A)$, one with ${E}^{2,I}=\pi_s\pi^e_tA$ and one with $E^{2,II}=\pi_t\pi^i_sA$. We'll show that they are both one-line spectral sequences by $E^2$, with ${E}^{2,I}_{s,0}=(\derived_s\Ind{\nontop{n}})\forget(X)$, and ${E}^{2,II}_{0,t}=\pi_t(\Ind{\nontop{n}}B)$, proving the result.
-
-
-To identify ${E}^{2,I}_{s,t}$, write $A_{s,\bullet}$ for the singly simplicial object obtained by fixing the inner coordinate $s$. Then by lemma \ref{lemIteratedFreeUobjectPreservesAcyclicity}, $A_{s,\bullet}$ is acyclic, with $\pi_0 A_{s,\bullet}=(\Fr{\nontop{n}})^s\pi_0(B_\bullet)= (\Fr{\nontop{n}})^sX$. Now $\pi_0 A_{s,\bullet}$ is simplicial in $s$, and can be identified with the bar construction computing $(\derived_s{\Ind{\nontop{n}}})\forget(X)$.
-
-On the other hand, for fixed $t$, $A_{\bullet,t}$ is simply the bar construction calculating $(\derived\Ind{\nontop{n}})B_t$. As $B_t$ is free for each $t$, $(\derived_0\Ind{\nontop{n}})B_t=\Ind{\nontop{n}}(B_t)$, and the higher derived functors vanish, identifying $E^{2,II}$.
-\end{proof}
-\begin{lem}\label{lemIteratedFreeUobjectPreservesAcyclicity}
-Suppose that $W\in s\nontop{n}$ is acyclic. Then for each $s\geq0$,  $(\Fr{\nontop{n}})^sW\in s\nontop{n}$ is acyclic, with $\pi_0((\Fr{\nontop{n}})^sW)=(\Fr{\nontop{n}})^s(\pi_0(W))$.
-\end{lem}
-\begin{proof}
-By induction on $s$ it is enough to prove the statement when $s=1$. The calculation of $\pi_0$ is immediate from the fact that $\Fr{\nontop{n}}$, being a left adjoint, preserves colimits.
-
-To approach the acyclicity question, we'll use unreduced chain complexes, writing $\partial:W_r\to W_{r-1}$ for the sum of the face maps. Now suppose that $a\in(\Fr{\nontop{n}}W)_r$ is a cycle. Without loss of generality, we may write
-$a:=\sum_j Q^{I_j}x_j$
-where all of the $I_j$ are distinct, and the $x_j$ are (potentially inhomogeneous) elements of $W_r$ (such that $Q^{I_j}x_j$ is defined). Then $\partial (a)=\sum Q^{I_j}\partial(x_j)=0$, which implies that each $\partial(x_j)$ is zero, so that $x_j=\partial(y_j)$ for some $y_j\in W_{r+1}$. Note that the internal dimensions of the homogeneous summands of $y_j$ may be taken to be the same as those of $x_j$, in which case $\sum Q^{I_j}y_j$ is defined in $\Fr{\nontop{n}}W_{r+1}$, and has boundary $a$.
-\end{proof}
+%%%%\subsection{Grothendieck spectral sequence fiddles}
+%%%%\begin{lem*}
+%%%%Suppose that $X$ is a levelwise free object in $s\nontop{n}$. Let $A$ be the bisimplicial object which is the levelwise bar construction on $X$, defined by $A_{s,t}=U^{t+1}X_s$. Then the natural map $\Delta A\to X$ is a cofibrant replacement, and $\pi_*(I\Delta A)\to\pi_*(IX)$ is an isomorphism. That is, the complex $IX$ already calculates $(\derived I)X$.
+%%%%\end{lem*}
+%%%%\begin{proof}
+%%%%The proof will proceed by factoring the map $\pi_*(I\Delta A)\to\pi_*(IX)$ as the composite of three isomorphisms:
+%%%%\[\xymatrix@R=4mm{
+%%%%\pi_*(I\Delta A)
+%%%%\ar[r]_-{}
+%%%%\ar[d]_-{\textup{AW}}
+%%%%&%r1c1
+%%%%\pi_*(IX)
+%%%%\\%r1c2
+%%%%H_*(\Tot CIA)\ar[r]^-{\textup{edge}}
+%%%%&%r2c1
+%%%%E^2_{*,0}\ar[u]_-{\tau}
+%%%%%r2c2
+%%%%}\]
+%%%%The first will be homology isomorphism induced by the Alexander-Whitney map $C\Delta IA\to\Tot CIA$. The second map will be an edge homomorphism in the spectral sequence obtained by filtering $\Tot CIA$ by `$s$':
+%%%%\begin{alignat*}{2}
+%%%%E^0_{st}
+%%%%&=
+%%%%IU^{t+1}X_s%
+%%%%\\
+%%%%E^1_{st}
+%%%%&=
+%%%%(\derived_t I)(X_s)=\begin{cases}
+%%%%IX_s,&\textup{if }t=0;\\
+%%%%0,&\textup{otherwise}.
+%%%%\end{cases}
+%%%%&\qquad&\text{(as $X_s$ is free)}\\
+%%%%E^2_{st}
+%%%%&=
+%%%%\begin{cases}
+%%%%\pi_s(IX),&\textup{if }t=0;\\
+%%%%0,&\textup{otherwise}.
+%%%%\end{cases}
+%%%%\end{alignat*}
+%%%%The isomorphism $\tau$ is induced, for each $s$, by the augmentation in the $t$ direction, $(I(\textup{id},d_0)):IUX_s\to IX_s$ %$I\rho:IUX_s\to IX_s$, where $\rho$ is the structure morphism $UX_s\to X_s$. 
+%%%%The edge homomorphism sends the class of an $s$-cycle in $\Tot CIA$, say,
+%%%%\[\sum_{i=0}^s z_{i,s-i},\textup{ where }z_{i,s-i}\in IA_{i,s-i}\]
+%%%%to the class $z_{s,0}$ in $E^2_{s,0}$. Suppose then that $w\in IA_{ss}$ is a cycle in $CI\Delta A$. Then $\textup{edge}(\textup{AW}(w))$ is represented simply by $(I(\textup{id},(d_0)^s))(w)$. Thus, the effect of the composite of the three isomorphisms on a cycle is $w\mapsto (I(\textup{id},(d_0)^{s+1}))(w)$, but $(\textup{id},(d_0)^{s+1})$ is exactly the natural map $\Delta A\to X$, demonstrating that the above diagram commutes.
+%%%%
+%%%%\end{proof}
+%%%%\begin{prop}
+%%%%For $n\geq1$, and any $X\in\LL{n}$, there's an isomorphism of vector spaces
+%%%%\[(\derived{\Ind{\nontop{}}})(\Forget{\nontop{}}X)\cong\Forget{\GR{}}(\derived{\Psi})X,\]
+%%%%induced by the evident inclusion 
+%%%%\[\Ind{\nontop{}}B_\bullet(\Fr{\nontop{n}},\Fr{\nontop{n}},\Forget{\nontop{}}X)\to \Forget{\GR{}}\Psi B_\bullet(\Fr{\LL{n}},\Fr{\LL{n}},X).\]
+%%%%You might write this as $B_\bullet(\forget,\Fr{\nontop{n}},\Forget{\nontop{}}X)\to B_\bullet(\PRLie{n},\Fr{\LL{n}},X)$.
+%%%%\end{prop}
+%%%%\noindent In light of this result, we write $(\derived{\Ind{\nontop{}}})X$ for either $(\derived{\Ind{\nontop{}}})X$ or $(\derived{\Ind{\nontop{}}})\forget(X)$, without ambiguity. \textbf{Discuss} the meaning of the fg and Rn in the bar construction.
+%%%%\begin{proof}
+%%%%As $\forget:\LL{n}\to\nontop{n}$ preserves free objects and weak equivalences, there's a one-line Grothendieck spectral sequence producing the isomorphism, but this argument does not show that the isomorphism is induced by the inclusion of bar constructions. If $\forget(B_\bullet(\LL{n},\LL{n},X))$ were almost free in $s\nontop{n}$, the map ${B}_\bullet(\nontop{n},\nontop{n},\forget(X))\to{B}_\bullet(\LL{n},\LL{n},X)$ would be a map of cofibrant replacements of $\forget(X)$ in $s\nontop{n}$, and thus 
+%%%%
+%%%%Or should I say: ``the obvious inclusion map $\overline{B}_*(\nontop{n},\nontop{n},X)\to\overline{B}_*(\LL{n},\LL{n},X)$ is a map of almost free objects realising the identity on $X$''? Is the latter actually almost free in $s\nontop{n}$?
+%%%%\end{proof}
+%%%%\begin{lem}
+%%%%For any $X$ in $s\LL{n}$, $(\derived{\Ind{\nontop{}}})(\Forget{\nontop{}}(X))$ may be calculated as the homotopy of the object 
+%%%%\[\forget(\Ind{\nontop{}}(B_\bullet(\Fr{\LL{n}},\Fr{\LL{n}},X)))=\forget(B_\bullet(\Fr{\PRLie{n}},\Fr{\LL{n}},X))\in s\GR{n}.\]
+%%%%\end{lem}
+%%%%\begin{proof}
+%%%%Although $B:=B_\bullet(\Fr{\LL{n}},\Fr{\LL{n}},X)$ is an acyclic levelwise free object in $s\nontop{n}$, with $\pi_0(B)=X$, it may fail to be `almost free'. The point here is that $B$ can be used to calculate the derived functors of $\Ind{\nontop{}}$ anyway. To see this, consider the bisimplicial object $A:=\Ind{\nontop{}}(B_\bullet(\Fr{\nontop{n}},\Fr{\nontop{n}},B))$ formed by applying $\Ind{\nontop{}}$ to the levelwise bar construction on $B$, so that
+%%%%\[A_{s,t}=(\Ind{\nontop{}})((\Fr{\nontop{n}})^{s+1})B_t\cong (\Fr{\nontop{n}})^sB_t.\]
+%%%%Now there are two first-quadrant spectral sequences converging to $\pi_*(\Delta A)$, one with ${E}^{2,I}=\pi_s\pi^e_tA$ and one with $E^{2,II}=\pi_t\pi^i_sA$. We'll show that they are both one-line spectral sequences by $E^2$, with ${E}^{2,I}_{s,0}=(\derived_s\Ind{\nontop{}})\forget(X)$, and ${E}^{2,II}_{0,t}=\pi_t(\Ind{\nontop{}}B)$, proving the result.
+%%%%
+%%%%
+%%%%To identify ${E}^{2,I}_{s,t}$, write $A_{s,\bullet}$ for the singly simplicial object obtained by fixing the inner coordinate $s$. Then by lemma \ref{lemIteratedFreeUobjectPreservesAcyclicity}, $A_{s,\bullet}$ is acyclic, with $\pi_0 A_{s,\bullet}=(\Fr{\nontop{n}})^s\pi_0(B_\bullet)= (\Fr{\nontop{n}})^sX$. Now $\pi_0 A_{s,\bullet}$ is simplicial in $s$, and can be identified with the bar construction computing $(\derived_s{\Ind{\nontop{}}})\forget(X)$.
+%%%%
+%%%%On the other hand, for fixed $t$, $A_{\bullet,t}$ is simply the bar construction calculating $(\derived\Ind{\nontop{}})B_t$. As $B_t$ is free for each $t$, $(\derived_0\Ind{\nontop{}})B_t=\Ind{\nontop{}}(B_t)$, and the higher derived functors vanish, identifying $E^{2,II}$.
+%%%%\end{proof}
+%%%%\begin{lem}\label{lemIteratedFreeUobjectPreservesAcyclicity}
+%%%%Suppose that $W\in s\nontop{n}$ is acyclic. Then for each $s\geq0$,  $(\Fr{\nontop{n}})^sW\in s\nontop{n}$ is acyclic, with $\pi_0((\Fr{\nontop{n}})^sW)=(\Fr{\nontop{n}})^s(\pi_0(W))$.
+%%%%\end{lem}
+%%%%\begin{proof}
+%%%%By induction on $s$ it is enough to prove the statement when $s=1$. The calculation of $\pi_0$ is immediate from the fact that $\Fr{\nontop{n}}$, being a left adjoint, preserves colimits.
+%%%%
+%%%%To approach the acyclicity question, we'll use unreduced chain complexes, writing $\partial:W_r\to W_{r-1}$ for the sum of the face maps. Now suppose that $a\in(\Fr{\nontop{n}}W)_r$ is a cycle. Without loss of generality, we may write
+%%%%$a:=\sum_j Q^{I_j}x_j$
+%%%%where all of the $I_j$ are distinct, and the $x_j$ are (potentially inhomogeneous) elements of $W_r$ (such that $Q^{I_j}x_j$ is defined). Then $\partial (a)=\sum Q^{I_j}\partial(x_j)=0$, which implies that each $\partial(x_j)$ is zero, so that $x_j=\partial(y_j)$ for some $y_j\in W_{r+1}$. Note that the internal dimensions of the homogeneous summands of $y_j$ may be taken to be the same as those of $x_j$, in which case $\sum Q^{I_j}y_j$ is defined in $\Fr{\nontop{n}}W_{r+1}$, and has boundary $a$.
+%%%%\end{proof}
 \end{GrothendieckSpectralSequencestake2}
 
 
@@ -859,13 +884,13 @@ For any $n\geq1$, the proposed basis of $\Fr{\LL{n}}(X)$ is seen to be linearly 
 %Consider then the morphism $\Fr{\LL{n}}(X)\to \pi_*(\Fr{\RestLie{n}}(V))$ induced by the universal property of the free construction. The images of the proposed basis for $\Fr{\LL{n}}(X)$ map to linearly independent elements in $\pi_*(\Fr{\RestLie{n}}(V))$, showing that $\Fr{\LL{n}}(X)$ is as described. The same argument will prove (iv), this time viewing $\pi_*(\Fr{\RestLie{n}}(V))$ as an element of $\nontop{n}$.
 \end{proof}
 \begin{cor}
-For all $n\geq 1$, the forgetful functor $\forget_{\nontop{}}:\LL{n}\to\nontop{n}$ preserves free objects.
+For all $n\geq 1$, the forgetful functor $\Forget{\nontop{}}:\LL{n}\to\nontop{n}$ preserves free objects.
 \end{cor}
 \begin{proof}
-When $n=1$, $\forget_{\nontop{}}(\Fr{\LL{1}}(X))\in\nontop{1}$ is free on $B$. For $n\geq2$, $\forget_{\nontop{}}(\Fr{\LL{n}}(X))\in\nontop{n}$  is free on $B\cup \{\iteratedrestn{b}{n}\,:\,b\in B_{a_{n},\ldots,a_1},\,n\geq1,\textup{ not all of $a_n,\ldots,a_2$ are zero}\}$, since
+When $n=1$, $\Forget{\nontop{}}(\Fr{\LL{1}}(X))\in\nontop{1}$ is free on $B$. For $n\geq2$, $\Forget{\nontop{}}(\Fr{\LL{n}}(X))\in\nontop{n}$  is free on $B\cup \{\iteratedrestn{b}{n}\,:\,b\in B_{a_{n},\ldots,a_1},\,n\geq1,\textup{ not all of $a_n,\ldots,a_2$ are zero}\}$, since
 \[\iteratedrestn{b}{n}=\Q^{(2^{n-1}|b|)}\cdots \Q^{(2|b|)}\Q^{|b|}b.\qedhere\]
 \end{proof}
-\noindent Due to the choices involved in taking a Hall basis, I see no reason that $\forget_{\nontop{}}$ should preserve free maps of free objects.
+\noindent Due to the choices involved in taking a Hall basis, I see no reason that $\Forget{\nontop{}}$ should preserve free maps of free objects.
 \end{CategoriesOfInterest}
 
 \begin{HomotopicalAlgebra}
@@ -884,7 +909,7 @@ $(\BarConst{\mathsf{C}}X)_{s,t}=\Fr{\mathsf{C}}^{t+1}X_s$ and $(\Constant{\maths
 \end{HomotopicalAlgebra}
 \begin{DiagramOfFunctors}
 \subsection{Indecomposables}
-For each of the categories of \S\ref{ChapterCategoriesOfInterest}, there is a functor $\Ind{\mathsf{C^n}}:\mathsf{C^n}\to\GR{n}$ which sends $X\in\mathsf{C}^n$ to the quotient of the underlying vector space of $X$ by the subspace generated by the images of all the operations defining $X$.
+For each of the categories of \S\ref{ChapterCategoriesOfInterest}, there is a functor $\Ind{\mathsf{C}}:\mathsf{C^n}\to\GR{n}$ which sends $X\in\mathsf{C}^n$ to the quotient of the underlying vector space of $X$ by the subspace generated by the images of all the operations defining $X$.
 
 The functor $\Ind{\mathsf{C}^n}$ is always left adjoint to a functor $K:\GR{n}\to\mathsf{C}^n$ which sends a graded vector space $V$ to the corresponding trivial object in $\mathsf{C}^n$. That is, $KV$ has $V$ as underlying vector space, and all operations in $KV$ are zero. Note then that the right adjoint, $K$, preserves weak equivalences and fibrations, as membership of these classes is determined on the level of underlying simplicial groups. Thus, $\Ind{\mathsf{C}^n}$ is a left Quillen functor, so that we can easily define the left derived functors $\derived_*\Ind{\mathsf{C}^n}$.
 
@@ -908,29 +933,29 @@ The indecomposables functors described above provide the solid horizontal arrows
 
 \[\xymatrix@R=8mm@C=15mm@!C{
 \LL{n}
-\ar@/^1.5em/[rr]^-{\Ind{\LL{n}}}
-\ar[d]_-{\forget_{\nontop{}}}
-\ar@{-->}[r]_-{\Psi}%\Ind{\nontop{n}}}
+\ar@/^1.5em/[rr]^-{\Ind{\LL{}}}
+\ar[d]_-{\Forget{\nontop{}}}
+\ar@{-->}[r]_-{\Psi}%\Ind{\nontop{}}}
 &%r1c1
 \PRLie{n}
-\ar[d]^-{\forget_{\GR{}}}
-\ar[r]_-{\Ind{\PRLie{n}}}
+\ar[d]^-{\Forget{\GR{}}}
+\ar[r]_-{\Ind{\PRLie{}}}
 &%r1c2
 \GR{n}
 \\%r1c3
 \nontop{n}
-\ar[r]_-{\Ind{\nontop{n}}}
+\ar[r]_-{\Ind{\nontop{}}}
 &%r2c1
 \GR{n}
 &%r2c2
 %r2c3
 }\]
 \begin{prop}\label{PropOnTheCommutingDiagramOfIndFunctors}
-For all $n\geq1$ there exists a functor $\Psi:\LL{n}\to\PRLie{n}$ which completes the diagram above to a commuting square and triangle. This functor %, which we also name $\Ind{\nontop{n}}:\LL{n}\to\PRLie{n}$,
+For all $n\geq1$ there exists a functor $\Psi:\LL{n}\to\PRLie{n}$ which completes the diagram above to a commuting square and triangle. This functor %, which we also name $\Ind{\nontop{}}:\LL{n}\to\PRLie{n}$,
 preserves free objects.
 \end{prop}
 \begin{proof}
-If we are to choose $\Psi$ such that the square commutes, the vector space underlying $\Psi(X)$ must be the quotient of $X$ by the image of the $\nontop{n}$-operations in $X$. We'll show that the bracket and restriction operations defined on $X$ descend to the quotient to give an $\PRLie{n}$ structure. %that are required to define an object of $\nontop{n}$ are well defined after quotienting out the image of the operations in $\Ind{\nontop{n}}$.
+If we are to choose $\Psi$ such that the square commutes, the vector space underlying $\Psi(X)$ must be the quotient of $X$ by the image of the $\nontop{n}$-operations in $X$. We'll show that the bracket and restriction operations defined on $X$ descend to the quotient to give an $\PRLie{n}$ structure. %that are required to define an object of $\nontop{n}$ are well defined after quotienting out the image of the operations in $\Ind{\nontop{}}$.
 
 When $n=1$ we are to quotient by the image of all of the $P$ operations. There are no restriction operations to be defined on an object of $\PRLie{1}$, and the bracket is well defined due to the axiom ``$[x,P^iy]=0$ for \emph{all} $i$''. Although we started with a bad Lie algebra, the axiom ``$P^{|x|}x=[x,x]$'' shows that the quotient is a good lie algebra, as required.
 
@@ -939,23 +964,23 @@ suppose that $\Q^iy$ is the image of a well-defined non-top operation, so that $
 \[\restn{(x+\Q^iy)}=\restn{(x)}+\restn{(\Q^iy)}+[x,\Q^iy]=\restn{(x)}+\Q^{|y|+i}\Q^iy+0.\]
 The term $\Q^{|y|+i}\Q^iy$ admits the application of an Adem relation, as $|y|+i>2i$, but lemma \ref{lemOnAdemChangeInM} implies that $\Q$-Adem relations never return top $\Q$ operations, so that $\Q^{|y|+i}\Q^iy$ vanishes in the quotient. Thus we've shown that $\Psi$ is a functor, and that the square commutes.
 
-To check that the triangle commutes is the note that we didn't fail to kill any of the $\LL{n}$-operations over the course of applying the two functors $\Psi$ and $\Ind{\PRLie{n}}$. This is easy both in case $n=1$ and in case $n\geq2$. Finally, we'll check that $\Psi(\Fr{\LL{n}}(X))\cong\Fr{\PRLie{n}}(X)$ in either case.
+To check that the triangle commutes is the note that we didn't fail to kill any of the $\LL{n}$-operations over the course of applying the two functors $\Psi$ and $\Ind{\PRLie{}}$. This is easy both in case $n=1$ and in case $n\geq2$. Finally, we'll check that $\Psi(\Fr{\LL{n}}(X))\cong\Fr{\PRLie{n}}(X)$ in either case.
 
 When $n\geq2$, if $Q^Ib\in\Fr{\LL{n}}(X)$ is one of the basis elements of proposition \ref{PropFreeKandUconstructions}, then $\Q^Ib$ will be the image of a non-top operation except possibly when $I=(2^{\ell-1}|b|,\ldots,|b|)$, in which case $\Q^Ib=\iteratedrestn{b}{\ell}$. In fact, none of the $\iteratedrestn{b}{\ell}$ are involved in the image of a nontop operation, as no $\Q$-Adem relation produces a top $\Q$ operation. Thus, $\Psi(\Fr{\LL{n}}(X))$ has basis those $\iteratedrestn{b}{\ell}$ appearing in the basis given in proposition \ref{PropFreeKandUconstructions}, i.e.\ such that either $\ell=0$, or $\ell>0$ and not all of $a_n,\ldots,a_2$ are zero, after writing $\|b\|=(a_n,\ldots,a_1)$. This is exactly the basis of $\Fr{\PRLie{n}}(X)$ given in proposition \ref{PropBasesOfFreeLieAlgs}.
 
 The $n=1$ case is simpler: $\Psi$ kills \emph{all} the $P$ operations in $\Fr{\LL{1}}(X)$, leaving only the elements of a Hall basis for $\Fr{\GoodLie{1}}(X)\cong \Fr{\PRLie{1}}(X)$.
 \end{proof}
 
-%The point is that there is a functor $\LL{n}\to\PRLie{n}$ which completes this diagram to a commuting square and triangle, which we also name $\Ind{\nontop{n}}$. It will be important to note that $\Ind{\nontop{n}}$ sends free objects in $\LL{n}$ to free objects in $\PRLie{n}$.
+%The point is that there is a functor $\LL{n}\to\PRLie{n}$ which completes this diagram to a commuting square and triangle, which we also name $\Ind{\nontop{}}$. It will be important to note that $\Ind{\nontop{}}$ sends free objects in $\LL{n}$ to free objects in $\PRLie{n}$.
 %
-%When $n=1$, $\Ind{\nontop{n}}$ quotients the underlying vector space by the images of all of the $P$ operations. The result inherits the structure of an element of $\PRLie{n}$ from the bracket in $\LL{1}$. This is well defined due to the axioms ``$[x,P^iy]=0$'' and ``$P^{|x|}x=[x,x]$''. 
+%When $n=1$, $\Ind{\nontop{}}$ quotients the underlying vector space by the images of all of the $P$ operations. The result inherits the structure of an element of $\PRLie{n}$ from the bracket in $\LL{1}$. This is well defined due to the axioms ``$[x,P^iy]=0$'' and ``$P^{|x|}x=[x,x]$''. 
 %
-%When $n\geq2$, $\Ind{\nontop{n}}$ quotients the underlying vector space by the images of all of the non-top $\Q$ operations. That is, by the span of the $\Q^ix$ for $i<|x|$. The result inherits the structure of an element of $\PRLie{n}$ as follows. The Lie bracket is induced by that in $\LL{n}$; well defined by the axiom ``$[\Q^i{x},z]=0$ for $i<|x|$''. The restriction is induced by the top $\Q$ operations, being defined by the formula $\restn{x}:=\Q^{|x|}x$. It is a little less obvious that this is in fact well defined. One must check, for homogeneous $x,y\in L$, and $0\leq i<|y|$ such that $\Q^iy$ is defined and $i+|y|=|x|$, that $\Q^{|x|}x$ and $\Q^{|x|}(x+\Q^iy)$ differ by a sum of images of non-top $\Q$ operations. But\[\Q^{|x|}(x+\Q^iy)-\Q^{|x|}x=\Q^{|x|}(\Q^iy)+[x,\Q^iy]=\Q^{|x|}\Q^iy,\]and the above calcuation regarding indices in the $\Q$-Adem relations shows that $\Q^{|x|}\Q^iy$ can be rewritten without the appearance of a top $\Q$.
+%When $n\geq2$, $\Ind{\nontop{}}$ quotients the underlying vector space by the images of all of the non-top $\Q$ operations. That is, by the span of the $\Q^ix$ for $i<|x|$. The result inherits the structure of an element of $\PRLie{n}$ as follows. The Lie bracket is induced by that in $\LL{n}$; well defined by the axiom ``$[\Q^i{x},z]=0$ for $i<|x|$''. The restriction is induced by the top $\Q$ operations, being defined by the formula $\restn{x}:=\Q^{|x|}x$. It is a little less obvious that this is in fact well defined. One must check, for homogeneous $x,y\in L$, and $0\leq i<|y|$ such that $\Q^iy$ is defined and $i+|y|=|x|$, that $\Q^{|x|}x$ and $\Q^{|x|}(x+\Q^iy)$ differ by a sum of images of non-top $\Q$ operations. But\[\Q^{|x|}(x+\Q^iy)-\Q^{|x|}x=\Q^{|x|}(\Q^iy)+[x,\Q^iy]=\Q^{|x|}\Q^iy,\]and the above calcuation regarding indices in the $\Q$-Adem relations shows that $\Q^{|x|}\Q^iy$ can be rewritten without the appearance of a top $\Q$.
 \end{DiagramOfFunctors}
 
 
 \begin{GrothendieckSpectralSequences}
-\subsection{The derived functors of $\Ind{\nontop{n}}$}
+\subsection{The derived functors of $\Ind{\nontop{}}$}
 \begin{lem}\label{LemLevelwiseFreeWillSuffice}
 Suppose that $X$ is a levelwise free object in $s\nontop{n}$. Then the map $I\Delta a:\Ind{\nontop{}}\Delta {\BarConst{\nontop{}}X}\to \Ind{\nontop{}}X$ is a weak equivalence in $s\GR{n}$.
 \end{lem}
@@ -1017,22 +1042,22 @@ From the above preparations, for any $X\in\LL{n}$, we can construct the solid ar
 \ar@{^{(}->}[r]
 \ar@{^{(}->}[d]
 &%r1c1
-\BarConst{\nontop{}}(\forget_{\nontop{}}X)
+\BarConst{\nontop{}}(\Forget{\nontop{}}X)
 \ar@{->>}[r]^-{\sim}_-{a_1}
 \ar@{-->}[d]_-{i}
 \ar@{-->}[dl]^-{\exists}_-{j}
 &%r1c2
-\Constant(\forget_{\nontop{}}X)
+\Constant(\Forget{\nontop{}}X)
 \ar@{=}[d]
 \\%r1c3
-\Delta \BarConst{\nontop{}}(\forget_{\nontop{}} \BarConst{\LL{}}(X))
+\Delta \BarConst{\nontop{}}(\Forget{\nontop{}} \BarConst{\LL{}}(X))
 \ar@{->>}[r]^-{\sim}_-{a}
 &%r2c1
-\forget_{\nontop{}} \BarConst{\LL{}}(X)
+\Forget{\nontop{}} \BarConst{\LL{}}(X)
 %B_\bullet(\Fr{\LL{n}},\Fr{\LL{n}},X)
 \ar@{->>}[r]^-{\sim}_-{a_2}
 &%r2c2
-\forget_{\nontop{}}\Constant(X)
+\Forget{\nontop{}}\Constant(X)
 %r2c3
 }}\]
 %%%%Old version of this diagram without updated bar constn notation
@@ -1043,99 +1068,99 @@ From the above preparations, for any $X\in\LL{n}$, we can construct the solid ar
 %%%\ar@{^{(}->}[r]
 %%%\ar@{^{(}->}[d]
 %%%&%r1c1
-%%%B_\bullet(\Fr{\nontop{n}},\Fr{\nontop{n}},\forget_{\nontop{}}X)
+%%%B_\bullet(\Fr{\nontop{n}},\Fr{\nontop{n}},\Forget{\nontop{}}X)
 %%%\ar@{->>}[r]^-{\sim}_-{a_1}
 %%%\ar@{-->}[d]_-{i}
 %%%\ar@{-->}[dl]^-{\exists}_-{\widetilde{i}}
 %%%&%r1c2
-%%%\textup{const}(\forget_{\nontop{}}X)
+%%%\textup{const}(\Forget{\nontop{}}X)
 %%%\ar@{=}[d]
 %%%\\%r1c3
-%%%\Delta b(\forget_{\nontop{}} B_\bullet(\Fr{\LL{n}},\Fr{\LL{n}},X))
+%%%\Delta b(\Forget{\nontop{}} B_\bullet(\Fr{\LL{n}},\Fr{\LL{n}},X))
 %%%\ar@{->>}[r]^-{\sim}_-{a}
 %%%&%r2c1
-%%%\forget_{\nontop{}} B_\bullet(\Fr{\LL{n}},\Fr{\LL{n}},X)
+%%%\Forget{\nontop{}} B_\bullet(\Fr{\LL{n}},\Fr{\LL{n}},X)
 %%%\ar@{->>}[r]^-{\sim}_-{a_2}
 %%%&%r2c2
-%%%\forget_{\nontop{}}\textup{const}(X)
+%%%\Forget{\nontop{}}\textup{const}(X)
 %%%%r2c3
 %%%}}\]
-Here, $a_2$ is an acyclic fibration because $\forget_{\nontop{}}$ preserves acyclic fibrations, and all other decorations (on solid arrows) come directly from the above discussion. 
+Here, $a_2$ is an acyclic fibration because $\Forget{\nontop{}}$ preserves acyclic fibrations, and all other decorations (on solid arrows) come directly from the above discussion. 
 %The ``$\Delta b$'' used in the cofibrant replacement $a$ is taken in $s\nontop{n}$. 
-Lemma \ref{LemLevelwiseFreeWillSuffice} shows that $a$ remains a weak equivalence after applying $\Ind{\nontop{n}}$. Supposing then that we can find a map $i$ such that $a_2i=a_1$, $i$ will lift to a map $j$. By 2-of-3, $j$ will be a weak equivalence of cofibrant objects, so that it too will remain an equivalence after applying the left Quillen functor $\Ind{\nontop{n}}$. Thus $i$ too will remain an equivalence after applying $\Ind{\nontop{n}}$.
+Lemma \ref{LemLevelwiseFreeWillSuffice} shows that $a$ remains a weak equivalence after applying $\Ind{\nontop{}}$. Supposing then that we can find a map $i$ such that $a_2i=a_1$, $i$ will lift to a map $j$. By 2-of-3, $j$ will be a weak equivalence of cofibrant objects, so that it too will remain an equivalence after applying the left Quillen functor $\Ind{\nontop{}}$. Thus $i$ too will remain an equivalence after applying $\Ind{\nontop{}}$.
 
-There is a simple choice for the map $i$ such that $a_2i=a_1$. One just takes an expression in $(\Fr{\nontop{n})}^{\bullet+1}(\forget_{\nontop{}}X)$ and views it as an expression in $(\Fr{\LL{n})}^{\bullet+1}(X)$ via the natural map $\Fr{\nontop{n}}W\to \Fr{\LL{n}}W$ adjoint to the inclusion $W\to \forget_{\nontop{n}}\Fr{\LL{n}}W$ for any $W\in\GR{n}$.
-Recalling that $\Ind{\nontop{n}}\forget_{\nontop{}}=\forget_{\GR{}}\Psi$, we have shown 
+There is a simple choice for the map $i$ such that $a_2i=a_1$. One just takes an expression in $(\Fr{\nontop{n})}^{\bullet+1}(\Forget{\nontop{}}X)$ and views it as an expression in $(\Fr{\LL{n})}^{\bullet+1}(X)$ via the natural map $\Fr{\nontop{n}}W\to \Fr{\LL{n}}W$ adjoint to the inclusion $W\to \Forget{\nontop{n}}\Fr{\LL{n}}W$ for any $W\in\GR{n}$.
+Recalling that $\Ind{\nontop{}}\Forget{\nontop{}}=\Forget{\GR{}}\Psi$, we have shown 
 \begin{prop*}
-For any $X\in\LL{n}$, the map $\Ind{\nontop{n}}(i)$ induces an isomorphism of vector spaces between $(\derived\Ind{\nontop{n}})(\forget_{\nontop{n}}X)$ and $(\derived\Psi)X$.
+For any $X\in\LL{n}$, the map $\Ind{\nontop{}}(i)$ induces an isomorphism of vector spaces between $(\derived\Ind{\nontop{}})(\Forget{\nontop{n}}X)$ and $(\derived\Psi)X$.
 \end{prop*}
 
-In light of this result, it seems reasonable to begin writing $\Ind{\nontop{n}}$ for the functor $\Psi$. Then we have two commuting squares:
+In light of this result, it seems reasonable to begin writing $\Ind{\nontop{}}$ for the functor $\Psi$. Then we have two commuting squares:
 \[\vcenter{\xymatrix@R=12mm@C=24mm@!0{
 \LL{n}
-\ar[d]_-{\forget_{\nontop{}}}
-\ar@{->}[r]_-{\Ind{\nontop{n}}}
+\ar[d]_-{\Forget{\nontop{}}}
+\ar@{->}[r]_-{\Ind{\nontop{}}}
 &%r1c1
 \PRLie{n}
-\ar[d]^-{\forget_{\GR{}}}
+\ar[d]^-{\Forget{\GR{}}}
 \\%r1c2
 \nontop{n}
-\ar[r]^-{\Ind{\nontop{n}}}
+\ar[r]^-{\Ind{\nontop{}}}
 &%r2c1
 \GR{n}
 }}
 \textup{ \ and \ }
 \vcenter{\xymatrix@R=12mm@C=24mm@!0{
 \LL{n}
-\ar[d]_-{\forget_{\nontop{}}}
-\ar@{->}[r]_-{\derived\Ind{\nontop{n}}}
+\ar[d]_-{\Forget{\nontop{}}}
+\ar@{->}[r]_-{\derived\Ind{\nontop{}}}
 &%r1c1
 \LL{n+1}\makebox[0pt][l]{\,\small$=\PiAlg{\PRLie{n}}$}
-\ar[d]^-{\forget_{\GR{}}}
+\ar[d]^-{\Forget{\GR{}}}
 \\%r1c2
 \nontop{n}
-\ar[r]^-{\derived\Ind{\nontop{n}}}
+\ar[r]^-{\derived\Ind{\nontop{}}}
 &%r2c1
 \GR{n+1}\makebox[0pt][l]{\,\small$=\PiAlg{\GR{n}}$}
 }}
 \hspace{1.5cm}
 \]
-It will be important in what follows, for various $X\in\LL{n}$, to know the values of $\derived\Ind{\nontop{n}}$ as an object of $\LL{n+1}$. On the other hand, the values as a graded vector space in $\GR{n+1}$ can be calculated by a Koszul complex. The plan is to map representing cycles in the Koszul complex into the large resolution, perform the $\LL{n+1}$ operations of interest at the chain level, and homotope back into the Koszul complex.
+It will be important in what follows, for various $X\in\LL{n}$, to know the values of $\derived\Ind{\nontop{}}$ as an object of $\LL{n+1}$. On the other hand, the values as a graded vector space in $\GR{n+1}$ can be calculated by a Koszul complex. The plan is to map representing cycles in the Koszul complex into the large resolution, perform the $\LL{n+1}$ operations of interest at the chain level, and homotope back into the Koszul complex.
 
-%%%%%%\noindent It should cause no confusion when we denote the functor of this proposition $\Ind{\nontop{n}}:\LL{n}\to \PRLie{n}$ as well, giving a commuting diagram
+%%%%%%\noindent It should cause no confusion when we denote the functor of this proposition $\Ind{\nontop{}}:\LL{n}\to \PRLie{n}$ as well, giving a commuting diagram
 %%%%%%\[\xymatrix@R=8mm@C=15mm@!C{
 %%%%%%\LL{n}
 %%%%%%\ar@/^1.5em/[rr]^-{\Ind{\LL{n}}}
-%%%%%%\ar[d]_-{\forget_{\nontop{}}}
-%%%%%%\ar@{->}[r]_-{\Ind{\nontop{n}}}
+%%%%%%\ar[d]_-{\Forget{\nontop{}}}
+%%%%%%\ar@{->}[r]_-{\Ind{\nontop{}}}
 %%%%%%&%r1c1
 %%%%%%\PRLie{n}
-%%%%%%\ar[d]^-{\forget_{\GR{}}}
+%%%%%%\ar[d]^-{\Forget{\GR{}}}
 %%%%%%\ar[r]_-{\Ind{\PRLie{n}}}
 %%%%%%&%r1c2
 %%%%%%\GR{n}
 %%%%%%\\%r1c3
 %%%%%%\nontop{n}
-%%%%%%\ar[r]^-{\Ind{\nontop{n}}}
+%%%%%%\ar[r]^-{\Ind{\nontop{}}}
 %%%%%%&%r2c1
 %%%%%%\GR{n}
 %%%%%%&%r2c2
 %%%%%%%r2c3
 %%%%%%}\]
-%%%%%%in which the functors $\forget$ and $\Ind{\nontop{n}}$ with domain $\LL{n}$ both preserve free objects.
+%%%%%%in which the functors $\forget$ and $\Ind{\nontop{}}$ with domain $\LL{n}$ both preserve free objects.
 
 
 
 \subsection{Grothendieck spectral sequences}
-We are interested in the derived functors $(\derived\Ind{\LL{n}})X\in\GR{n+1}$ for $X\in\LL{n}$, most of all when $n=1$. It is convenient for us to omit the customary asterisk in $\derived_*$, and to think of the derived functors as a single object with one more grading than $X$ has. We always write the new grading to the left of the previous gradings, as is customary.
+We are interested in the derived functors $(\derived\Ind{\LL{}})X\in\GR{n+1}$ for $X\in\LL{n}$, most of all when $n=1$. It is convenient for us to omit the customary asterisk in $\derived_*$, and to think of the derived functors as a single object with one more grading than $X$ has. We always write the new grading to the left of the previous gradings, as is customary.
 
-Proposition \ref{PropOnTheCommutingDiagramOfIndFunctors} included the fact that ${\Ind{\nontop{n}}}:\LL{n}\to\PRLie{n}$ preserves free objects. Thus, for $X\in\LL{n}$, we may study $(\derived\Ind{\LL{n}})(X)$ using the Grothendieck spectral sequence derived in \cite{Blanc_Stover-Groth_SS.pdf}, which takes the form:
-\[E^2_{st}=(\derived_s(\overline{\Ind{\PRLie{n}}}_t))(\derived{\Ind{\nontop{n}}})X\implies(\derived_{s+t}\Ind{\LL{n}})X\textup{ with }d^{r}:E_{st}\to E_{s-r,t+r-1}.\]
-Here, $(\derived{\Ind{\nontop{n}}})X\in\PiAlg{\PRLie{n}}$, and $\overline{\Ind{\PRLie{n}}}$ is the functor $\PiAlg{\PRLie{n}}\to\GR{n+1}$ induced by $\Ind{\PRLie{n}}$. The $t$ subscript indicates the value of the second grading from the left, which arose as the homological degree in $(\derived{\Ind{\nontop{n}}})X$. It is simpler to write:
-\[E^2=(\derived\overline{\Ind{\PRLie{n}}})(\derived{\Ind{\nontop{n}}})X\implies(\derived\Ind{\LL{n}})X\textup{ with }\deg(d^r)=(-r,r-1,0,\ldots,0).\]
-Here, each $E^r$ is $(n+2)$-graded, while $(\derived\Ind{\LL{n}})X$ is $(n+1)$-graded. Each page $E^r$ has two homological degrees in addition to the $n$ internal degrees of $X$, and the leftmost two degrees on $E^\infty$ sum to the leftmost degree in $(\derived\Ind{\LL{n}})X$. It isn't difficult to identify $\overline{\Ind{\PRLie{n}}}$:
+Proposition \ref{PropOnTheCommutingDiagramOfIndFunctors} included the fact that ${\Ind{\nontop{}}}:\LL{n}\to\PRLie{n}$ preserves free objects. Thus, for $X\in\LL{n}$, we may study $(\derived\Ind{\LL{}})(X)$ using the Grothendieck spectral sequence derived in \cite{Blanc_Stover-Groth_SS.pdf}, which takes the form:
+\[E^2_{st}=(\derived_s(\overline{\Ind{\PRLie{}}}_t))(\derived{\Ind{\nontop{}}})X\implies(\derived_{s+t}\Ind{\LL{}})X\textup{ with }d^{r}:E_{st}\to E_{s-r,t+r-1}.\]
+Here, $(\derived{\Ind{\nontop{}}})X\in\PiAlg{\PRLie{n}}$, and $\overline{\Ind{\PRLie{}}}$ is the functor $\PiAlg{\PRLie{n}}\to\GR{n+1}$ induced by $\Ind{\PRLie{}}$. The $t$ subscript indicates the value of the second grading from the left, which arose as the homological degree in $(\derived{\Ind{\nontop{}}})X$. It is simpler to write:
+\[E^2=(\derived\overline{\Ind{\PRLie{}}})(\derived{\Ind{\nontop{}}})X\implies(\derived\Ind{\LL{}})X\textup{ with }\deg(d^r)=(-r,r-1,0,\ldots,0).\]
+Here, each $E^r$ is $(n+2)$-graded, while $(\derived\Ind{\LL{}})X$ is $(n+1)$-graded. Each page $E^r$ has two homological degrees in addition to the $n$ internal degrees of $X$, and the leftmost two degrees on $E^\infty$ sum to the leftmost degree in $(\derived\Ind{\LL{}})X$. It isn't difficult to identify $\overline{\Ind{\PRLie{}}}$:
 \begin{prop}
-Under the identifiction of $\PiAlg{\PRLie{n}}$ with $\LL{n+1}$, the functor $\overline{\Ind{\PRLie{n}}}:\PiAlg{\PRLie{n}}\to\GR{n+1}$ coincides with ${\Ind{\LL{n+1}}}:\LL{n+1}\to\GR{n+1}$.
+Under the identification of $\PiAlg{\PRLie{}}$ with $\LL{n+1}$, the functor $\overline{\Ind{\PRLie{}}}:\PiAlg{\PRLie{}}\to\GR{n+1}$ coincides with ${\Ind{\LL{}}}:\LL{n+1}\to\GR{n+1}$.
 %%%%%There's a commuting diagram of functors:
 %%%%%\[\xymatrix@R=0mm@C=14mm{
 %%%%%\PiAlg{\PRLie{n}}
@@ -1152,17 +1177,17 @@ Under the identifiction of $\PiAlg{\PRLie{n}}$ with $\LL{n+1}$, the functor $\ov
 %%%%%}\]
 \end{prop}
 \begin{proof}
-As $\overline{\Ind{\PRLie{n}}}$ is a $0^\textup{th}$ left derived functor, and $\Ind{\LL{n+1}}$ preserves colimits, it is enough to check this claim on free objects in $\PiAlg{\PRLie{n}}$. All free objects are isomorphic to $\pi_*(\Fr{\PRLie{n}}SX)$ for some $X\in\GS{n+1}$, and
-\[\overline{\Ind{\PRLie{n}}}(\pi_*(\Fr{\PRLie{n}}SX)):=\pi_*(\Ind{\PRLie{n}}(\Fr{\PRLie{n}}SX))=X=\Ind{\LL{n+1}}(\pi_*(\Fr{\PRLie{n}}SX)).\qedhere\]
+As $\overline{\Ind{\PRLie{}}}$ is a $0^\textup{th}$ left derived functor, and $\Ind{\LL{}}$ preserves colimits, it is enough to check this claim on free objects in $\PiAlg{\PRLie{n}}$. All free objects are isomorphic to $\pi_*(\Fr{\PRLie{n}}SX)$ for some $X\in\GS{n+1}$, and
+\[\overline{\Ind{\PRLie{}}}(\pi_*(\Fr{\PRLie{n}}SX)):=\pi_*(\Ind{\PRLie{}}(\Fr{\PRLie{n}}SX))=X=\Ind{\LL{}}(\pi_*(\Fr{\PRLie{n}}SX)).\qedhere\]
 %The functor $\overline{\Ind{\PRLie{n}}}$ is the $0^\textup{th}$ left derived functor of the functor $\textup{free}(\PiAlg{\PRLie{n}})\to\GR{n+1}$ defined by $\pi_*(\Fr{\PRLie{n}}SX)\mapsto \pi_*(\Ind{\PRLie{n}}(\Fr{\PRLie{n}}SX))$ for $X\in\GS{n+1}$. One calculates $\pi_*(\Ind{\PRLie{n}}(\Fr{\PRLie{n}}SX))=\pi_*(SX)=X$
 \end{proof}
 \noindent We can now describe the Grothendieck spectral sequence relatively tidily:
-\[E^2=(\derived{\Ind{\LL{n+1}}})(\derived{\Ind{\nontop{n}}})X\implies(\derived\Ind{\LL{n}})X.\]
-For emphasis, each page $E^r$, for $r\leq\infty$ is (at least) an element of  $\GR{n+2}$, with $d^r$ of degree $(-r,r-1,0,\ldots,0)$. The target, $(\derived\Ind{\LL{n}})X$, is (at least) an object of $\GR{n+1}$. The spectral sequence is convergent, which is to say that there is a positive, increasing, exhaustive filtration $F$ on $(\derived\Ind{\LL{n}})X$ such that
-\[E^\infty_{a_{n+2},\ldots,a_1}=(F_{a_{n+2}}/F_{a_{n+2}-1})((\derived\Ind{\LL{n}})X)_{a_{n+2}+a_{n+1},a_n,\ldots,a_1}.\]
+\[E^2=(\derived{\Ind{\LL{}}})(\derived{\Ind{\nontop{}}})X\implies(\derived\Ind{\LL{}})X.\]
+For emphasis, each page $E^r$, for $r\leq\infty$ is (at least) an element of  $\GR{n+2}$, with $d^r$ of degree $(-r,r-1,0,\ldots,0)$. The target, $(\derived\Ind{\LL{}})X$, is (at least) an object of $\GR{n+1}$. The spectral sequence is convergent, which is to say that there is a positive, increasing, exhaustive filtration $F$ on $(\derived\Ind{\LL{}})X$ such that
+\[E^\infty_{a_{n+2},\ldots,a_1}=(F_{a_{n+2}}/F_{a_{n+2}-1})((\derived\Ind{\LL{}})X)_{a_{n+2}+a_{n+1},a_n,\ldots,a_1}.\]
 %%%%%\begin{cor}
 %%%%%For $n\geq1$, and any $X\in\LL{n}$, there is a spectral sequence:
-%%%%%\[E^2=(\derived{\Ind{\LL{n+1}}})(\derived{\Ind{\nontop{n}}})X\implies(\derived\Ind{\LL{n}})X.\]
+%%%%%\[E^2=(\derived{\Ind{\LL{n+1}}})(\derived{\Ind{\nontop{}}})X\implies(\derived\Ind{\LL{n}})X.\]
 %%%%%\begin{itemise}
 %%%%%\setlength{\parindent}{.25in}
 %%%%%\item For $r\leq\infty$, the $E^r$ page is an object of $\GR{n+2}$.
@@ -1179,50 +1204,50 @@ For emphasis, each page $E^r$, for $r\leq\infty$ is (at least) an element of  $\
 
 \begin{ConversationWithHaynes_InclusionOfBarConstructions}
 The stuff in here is what I wrote after a brief chat with Haynes about the inclusion of bar constructions that was causing me some confusion. There's a newer version in play.
-\begin{prop}
-For $n\geq1$, and any $X\in\LL{n}$, there's an isomorphism of vector spaces
-\[(\derived\Psi)(\forget_{\nontop{}}X)\cong\forget_{\GR{}}(\derived{{\Ind{\nontop{n}}}})X,\]
-induced by the evident inclusion 
-\[\Ind{\nontop{n}}B_\bullet(\Fr{\nontop{n}},\Fr{\nontop{n}},\forget_{\nontop{}}X)\to \forget_{\GR{}}\Psi B_\bullet(\Fr{\LL{n}},\Fr{\LL{n}},X).\]
-You might write this as $B_\bullet(\forget,\Fr{\nontop{n}},\forget_{\nontop{}}X)\to B_\bullet(\PRLie{n},\Fr{\LL{n}},X)$.
-\end{prop}
-\noindent In light of this result, we write $(\derived{\Ind{\nontop{n}}})X$ for either $(\derived{\Ind{\nontop{n}}})X$ or $(\derived{\Ind{\nontop{n}}})\forget(X)$, without ambiguity. \textbf{Discuss} the meaning of the fg and Rn in the bar construction.
-\begin{proof}
-As $\forget:\LL{n}\to\nontop{n}$ preserves free objects and weak equivalences, there's a one-line Grothendieck spectral sequence producing the isomorphism, but this argument does not show that the isomorphism is induced by the inclusion of bar constructions. If $\forget(B_\bullet(\LL{n},\LL{n},X))$ were almost free in $s\nontop{n}$, the map ${B}_\bullet(\nontop{n},\nontop{n},\forget(X))\to{B}_\bullet(\LL{n},\LL{n},X)$ would be a map of cofibrant replacements of $\forget(X)$ in $s\nontop{n}$, and thus 
-
-Or should I say: ``the obvious inclusion map $\overline{B}_*(\nontop{n},\nontop{n},X)\to\overline{B}_*(\LL{n},\LL{n},X)$ is a map of almost free objects realising the identity on $X$''? Is the latter actually almost free in $s\nontop{n}$?
-\end{proof}
-\begin{lem}
-For any $X$ in $s\LL{n}$, $(\derived{\Ind{\nontop{n}}})(\forget(X))$ may be calculated as the homotopy of the object 
-\[\forget(\Ind{\nontop{n}}(B_\bullet(\Fr{\LL{n}},\Fr{\LL{n}},X)))=\forget(B_\bullet(\Fr{\PRLie{n}},\Fr{\LL{n}},X))\in s\GR{n}.\]
-\end{lem}
-\begin{proof}
-Although $B:=B_\bullet(\Fr{\LL{n}},\Fr{\LL{n}},X)$ is an acyclic levelwise free object in $s\nontop{n}$, with $\pi_0(B)=X$, it may fail to be `almost free'. The point here is that $B$ can be used to calculate the derived functors of $\Ind{\nontop{n}}$ anyway. To see this, consider the bisimplicial object $A:=\Ind{\nontop{n}}(B_\bullet(\Fr{\nontop{n}},\Fr{\nontop{n}},B))$ formed by applying $\Ind{\nontop{n}}$ to the levelwise bar construction on $B$, so that
-\[A_{s,t}=(\Ind{\nontop{n}})((\Fr{\nontop{n}})^{s+1})B_t\cong (\Fr{\nontop{n}})^sB_t.\]
-Now there are two first-quadrant spectral sequences converging to $\pi_*(\Delta A)$, one with ${E}^{2,I}=\pi_s\pi^e_tA$ and one with $E^{2,II}=\pi_t\pi^i_sA$. We'll show that they are both one-line spectral sequences by $E^2$, with ${E}^{2,I}_{s,0}=(\derived_s\Ind{\nontop{n}})\forget(X)$, and ${E}^{2,II}_{0,t}=\pi_t(\Ind{\nontop{n}}B)$, proving the result.
-
-
-To identify ${E}^{2,I}_{s,t}$, write $A_{s,\bullet}$ for the singly simplicial object obtained by fixing the inner coordinate $s$. Then by lemma \ref{lemIteratedFreeUobjectPreservesAcyclicity}, $A_{s,\bullet}$ is acyclic, with $\pi_0 A_{s,\bullet}=(\Fr{\nontop{n}})^s\pi_0(B_\bullet)= (\Fr{\nontop{n}})^sX$. Now $\pi_0 A_{s,\bullet}$ is simplicial in $s$, and can be identified with the bar construction computing $(\derived_s{\Ind{\nontop{n}}})\forget(X)$.
-
-On the other hand, for fixed $t$, $A_{\bullet,t}$ is simply the bar construction calculating $(\derived\Ind{\nontop{n}})B_t$. As $B_t$ is free for each $t$, $(\derived_0\Ind{\nontop{n}})B_t=\Ind{\nontop{n}}(B_t)$, and the higher derived functors vanish, identifying $E^{2,II}$.
-\end{proof}
-\begin{lem}\label{lemIteratedFreeUobjectPreservesAcyclicity}
-Suppose that $W\in s\nontop{n}$ is acyclic. Then for each $s\geq0$,  $(\Fr{\nontop{n}})^sW\in s\nontop{n}$ is acyclic, with $\pi_0((\Fr{\nontop{n}})^sW)=(\Fr{\nontop{n}})^s(\pi_0(W))$.
-\end{lem}
-\begin{proof}
-By induction on $s$ it is enough to prove the statement when $s=1$. The calculation of $\pi_0$ is immediate from the fact that $\Fr{\nontop{n}}$, being a left adjoint, preserves colimits.
-
-To approach the acyclicity question, we'll use unreduced chain complexes, writing $\partial:W_r\to W_{r-1}$ for the sum of the face maps. Now suppose that $a\in(\Fr{\nontop{n}}W)_r$ is a cycle. Without loss of generality, we may write
-$a:=\sum_j Q^{I_j}x_j$
-where all of the $I_j$ are distinct, and the $x_j$ are (potentially inhomogeneous) elements of $W_r$ (such that $Q^{I_j}x_j$ is defined). Then $\partial (a)=\sum Q^{I_j}\partial(x_j)=0$, which implies that each $\partial(x_j)$ is zero, so that $x_j=\partial(y_j)$ for some $y_j\in W_{r+1}$. Note that the internal dimensions of the homogeneous summands of $y_j$ may be taken to be the same as those of $x_j$, in which case $\sum Q^{I_j}y_j$ is defined in $\Fr{\nontop{n}}W_{r+1}$, and has boundary $a$.
-\end{proof}
+%\begin{prop}
+%For $n\geq1$, and any $X\in\LL{n}$, there's an isomorphism of vector spaces
+%\[(\derived\Psi)(\Forget{\nontop{}}X)\cong\Forget{\GR{}}(\derived{{\Ind{\nontop{}}}})X,\]
+%induced by the evident inclusion 
+%\[\Ind{\nontop{}}B_\bullet(\Fr{\nontop{n}},\Fr{\nontop{n}},\Forget{\nontop{}}X)\to \Forget{\GR{}}\Psi B_\bullet(\Fr{\LL{n}},\Fr{\LL{n}},X).\]
+%You might write this as $B_\bullet(\forget,\Fr{\nontop{n}},\Forget{\nontop{}}X)\to B_\bullet(\PRLie{n},\Fr{\LL{n}},X)$.
+%\end{prop}
+%\noindent In light of this result, we write $(\derived{\Ind{\nontop{}}})X$ for either $(\derived{\Ind{\nontop{}}})X$ or $(\derived{\Ind{\nontop{}}})\forget(X)$, without ambiguity. \textbf{Discuss} the meaning of the fg and Rn in the bar construction.
+%\begin{proof}
+%As $\forget:\LL{n}\to\nontop{n}$ preserves free objects and weak equivalences, there's a one-line Grothendieck spectral sequence producing the isomorphism, but this argument does not show that the isomorphism is induced by the inclusion of bar constructions. If $\forget(B_\bullet(\LL{n},\LL{n},X))$ were almost free in $s\nontop{n}$, the map ${B}_\bullet(\nontop{n},\nontop{n},\forget(X))\to{B}_\bullet(\LL{n},\LL{n},X)$ would be a map of cofibrant replacements of $\forget(X)$ in $s\nontop{n}$, and thus 
+%
+%Or should I say: ``the obvious inclusion map $\overline{B}_*(\nontop{n},\nontop{n},X)\to\overline{B}_*(\LL{n},\LL{n},X)$ is a map of almost free objects realising the identity on $X$''? Is the latter actually almost free in $s\nontop{n}$?
+%\end{proof}
+%\begin{lem}
+%For any $X$ in $s\LL{n}$, $(\derived{\Ind{\nontop{}}})(\forget(X))$ may be calculated as the homotopy of the object 
+%\[\forget(\Ind{\nontop{}}(B_\bullet(\Fr{\LL{n}},\Fr{\LL{n}},X)))=\forget(B_\bullet(\Fr{\PRLie{n}},\Fr{\LL{n}},X))\in s\GR{n}.\]
+%\end{lem}
+%\begin{proof}
+%Although $B:=B_\bullet(\Fr{\LL{n}},\Fr{\LL{n}},X)$ is an acyclic levelwise free object in $s\nontop{n}$, with $\pi_0(B)=X$, it may fail to be `almost free'. The point here is that $B$ can be used to calculate the derived functors of $\Ind{\nontop{}}$ anyway. To see this, consider the bisimplicial object $A:=\Ind{\nontop{}}(B_\bullet(\Fr{\nontop{n}},\Fr{\nontop{n}},B))$ formed by applying $\Ind{\nontop{}}$ to the levelwise bar construction on $B$, so that
+%\[A_{s,t}=(\Ind{\nontop{}})((\Fr{\nontop{n}})^{s+1})B_t\cong (\Fr{\nontop{n}})^sB_t.\]
+%Now there are two first-quadrant spectral sequences converging to $\pi_*(\Delta A)$, one with ${E}^{2,I}=\pi_s\pi^e_tA$ and one with $E^{2,II}=\pi_t\pi^i_sA$. We'll show that they are both one-line spectral sequences by $E^2$, with ${E}^{2,I}_{s,0}=(\derived_s\Ind{\nontop{}})\forget(X)$, and ${E}^{2,II}_{0,t}=\pi_t(\Ind{\nontop{}}B)$, proving the result.
+%
+%
+%To identify ${E}^{2,I}_{s,t}$, write $A_{s,\bullet}$ for the singly simplicial object obtained by fixing the inner coordinate $s$. Then by lemma \ref{lemIteratedFreeUobjectPreservesAcyclicity}, $A_{s,\bullet}$ is acyclic, with $\pi_0 A_{s,\bullet}=(\Fr{\nontop{n}})^s\pi_0(B_\bullet)= (\Fr{\nontop{n}})^sX$. Now $\pi_0 A_{s,\bullet}$ is simplicial in $s$, and can be identified with the bar construction computing $(\derived_s{\Ind{\nontop{}}})\forget(X)$.
+%
+%On the other hand, for fixed $t$, $A_{\bullet,t}$ is simply the bar construction calculating $(\derived\Ind{\nontop{}})B_t$. As $B_t$ is free for each $t$, $(\derived_0\Ind{\nontop{}})B_t=\Ind{\nontop{}}(B_t)$, and the higher derived functors vanish, identifying $E^{2,II}$.
+%\end{proof}
+%\begin{lem}\label{lemIteratedFreeUobjectPreservesAcyclicity}
+%Suppose that $W\in s\nontop{n}$ is acyclic. Then for each $s\geq0$,  $(\Fr{\nontop{n}})^sW\in s\nontop{n}$ is acyclic, with $\pi_0((\Fr{\nontop{n}})^sW)=(\Fr{\nontop{n}})^s(\pi_0(W))$.
+%\end{lem}
+%\begin{proof}
+%By induction on $s$ it is enough to prove the statement when $s=1$. The calculation of $\pi_0$ is immediate from the fact that $\Fr{\nontop{n}}$, being a left adjoint, preserves colimits.
+%
+%To approach the acyclicity question, we'll use unreduced chain complexes, writing $\partial:W_r\to W_{r-1}$ for the sum of the face maps. Now suppose that $a\in(\Fr{\nontop{n}}W)_r$ is a cycle. Without loss of generality, we may write
+%$a:=\sum_j Q^{I_j}x_j$
+%where all of the $I_j$ are distinct, and the $x_j$ are (potentially inhomogeneous) elements of $W_r$ (such that $Q^{I_j}x_j$ is defined). Then $\partial (a)=\sum Q^{I_j}\partial(x_j)=0$, which implies that each $\partial(x_j)$ is zero, so that $x_j=\partial(y_j)$ for some $y_j\in W_{r+1}$. Note that the internal dimensions of the homogeneous summands of $y_j$ may be taken to be the same as those of $x_j$, in which case $\sum Q^{I_j}y_j$ is defined in $\Fr{\nontop{n}}W_{r+1}$, and has boundary $a$.
+%\end{proof}
 \end{ConversationWithHaynes_InclusionOfBarConstructions}
 
 
 \begin{KoszulComplexes_n>1}
-\section{Unstable Koszul complexes for $\derived\Ind{\nontop{n}}$}
-\subsection{Koszul complexes for $\derived\Ind{\nontop{n}}$ for $n\geq2$}
-We will define Koszul complexes calculating $\derived\Ind{\nontop{n}}$ for all $n$, using techniques originating in in \cite{PriddyKoszul.pdf}. It will be useful to record here a customized version of Priddy's arguments, for three reasons: his results do not apply to our situation without minor modification to accomodate unstable conditions; we will require a technique from his proof of \cite[Thm 5.3]{PriddyKoszul.pdf} in what follows; we prefer to work with the Koszul complex, not the coKoszul complex.
+\section{Unstable Koszul complexes for $\derived\Ind{\nontop{}}$} \label{sectionOnUnstableKoszulComplexes}
+\subsection{Koszul complexes for $\derived\Ind{\nontop{}}$ for $n\geq2$}
+We will define Koszul complexes calculating $\derived\Ind{\nontop{}}$ for all $n$, using the techniques of \cite{PriddyKoszul.pdf}. It will be useful to record here a customized version of Priddy's arguments, for three reasons: his results do not apply to our situation without minor modification to accomodate unstable conditions; we will require a technique from his proof of \cite[Thm 5.3]{PriddyKoszul.pdf} in what follows; we prefer to work with the Koszul complex, not the coKoszul complex.
 %We Due to the fact that we are working with categories of unstable modules, there are straightforward changes to be made to Priddy's exposition. We make these changes here. The other benefit to covering this material is that we will
 %Moreover, for certain calculations to follow we will need to refer to certain techniques found in the proof of \cite[Thm 5.3]{PriddyKoszul.pdf}. In order that our reader may understand these techniques, we 
 
@@ -1242,9 +1267,9 @@ We will define Koszul complexes calculating $\derived\Ind{\nontop{n}}$ for all $
 
 %\subsubsection{The unstable bar construction and Koszul complex for $\nontop{n}$, $n\geq2$}
 %%%%\begin{shaded}
-%%%%For any object $X\in\nontop{n}$, the bar construction ${B}_\bullet(\Fr{\nontop{n}},\Fr{\nontop{n}},X)=(\Fr{\nontop{n}})^{\bullet+1}X$ is a free simplicial resolution of $X$. Now there is an isomorphism of graded vector spaces $\Ind{\nontop{n}}(\Fr{\nontop{n}}(X))\cong\forget(X)$. Thus $(\derived\Ind{\nontop{n}})X$ may be calculated as the homotopy of the bar construction $B_\bullet(\forget,\Fr{\nontop{n}},X)=(\Fr{\nontop{n}})^\bullet X$. Normalizing this complex by taking the quotient by degenerate simplices, one obtains the reduced Bar construction $\overline{B}_*(\forget,\Fr{\nontop{n}},X)$, a chain complex calculating $(\derived\Ind{\nontop{n}})X$, which we now describe.
+%%%%For any object $X\in\nontop{n}$, the bar construction ${B}_\bullet(\Fr{\nontop{n}},\Fr{\nontop{n}},X)=(\Fr{\nontop{n}})^{\bullet+1}X$ is a free simplicial resolution of $X$. Now there is an isomorphism of graded vector spaces $\Ind{\nontop{}}(\Fr{\nontop{n}}(X))\cong\forget(X)$. Thus $(\derived\Ind{\nontop{}})X$ may be calculated as the homotopy of the bar construction $B_\bullet(\forget,\Fr{\nontop{n}},X)=(\Fr{\nontop{n}})^\bullet X$. Normalizing this complex by taking the quotient by degenerate simplices, one obtains the reduced Bar construction $\overline{B}_*(\forget,\Fr{\nontop{n}},X)$, a chain complex calculating $(\derived\Ind{\nontop{}})X$, which we now describe.
 %%%%\end{shaded}
-For any object $X\in\nontop{n}$, write $\overline{B}_*:= N(\Ind{\nontop{n}}(\BarConst{\nontop{n}}X))$. This is the normalized complex, obtained by taking the quotient by degenerate simplices, of the simplicial bar construction calculating $(\derived\Ind{\nontop{n}})X$.
+For any object $X\in\nontop{n}$, write $\overline{B}_*:= \ModDegeneracies{\Ind{\nontop{}}(\BarConst{\nontop{}}X)}_*$. This is the normalized complex, obtained by taking the quotient by degenerate simplices, of the simplicial bar construction $\Ind{\nontop{}}(\BarConst{\nontop{}}X)$ calculating $(\derived\Ind{\nontop{}})X$.
 \begin{prop}
 As a vector space each $\overline{B}_r$ is graded, with $\overline{B}_{r,\ell}$
 %For $r\geq0$, $\overline{B}_r(\forget,\Fr{\nontop{n}},X)$ is 
@@ -1295,7 +1320,7 @@ $z=\sum_i a_i + \sum_j b_j$ where the $a_i$ and $b_j$ are bar-admissible monomia
 
 \begin{prop}\label{propDerivedIndTrivialUobject}
 Suppose that $X\in\nontop{n}$ is trivial, so that all of the $\Q$ operations act as zero. Then %the differential $\partial $ of $\overline{B}_r$ respects the $\ell$ grading, so that 
-$(\derived_r\Ind{\nontop{n}})X$ has a basis $\{\Q(I)x\}$, where
+$(\derived_r\Ind{\nontop{}})X$ has a basis $\{\Q(I)x\}$, where
 \begin{itemize}
 \setlength{\parindent}{.25in}
 \item $x\in X_{a_n,\ldots,a_1}$ runs through the elements $x$ of a chosen basis of $X$;
@@ -1308,7 +1333,7 @@ These classes are defined by the following sum taken over certain sequences $J=(
 \end{prop}
 \noindent Lemma \ref{lemOnAdemChangeInM} demonstrates that if $I$ and $J$ are sequences of non-negative integers (of any length), such that $\produces{J}{I}{\SqShift}$, then $\minDim(J)\leq\minDim(I)$, and if $0$ appears in $J$, it must also appear in $I$. Thus, all the terms appearing in the above definition of $\Q(I)x$ are indeed valid in the bar construction.
 \begin{proof}
-As $X$ is trivial, the differential of $\overline{B}_r$ respects the $\ell$ grading, so that even the derived functors $(\derived_r\Ind{\nontop{n}})X$ have the extra $\ell$ grading. By the previous proposition, they are concentrated along the diagonal $r=\ell$.
+As $X$ is trivial, the differential of $\overline{B}_r$ respects the $\ell$ grading, so that even the derived functors $(\derived_r\Ind{\nontop{}})X$ have the extra $\ell$ grading. By the previous proposition, they are concentrated along the diagonal $r=\ell$.
 
 It appears to be easier at this stage to work with the duals $\overline{C}^{r,\ell}$ of the $\overline{B}_{r,\ell}$, and determine the cokernel of $\delta:\overline{C}^{r-1,r}\to\overline{C}^{r,r}$. There is no danger in dualizing twice: as $X$ is trivial, it is the union of its finite dimensional subobjects, so that we may assume that $X$ is finite dimensional. Fix a basis $\{x\}$ of $X$. %, inducing a dual basis $\{x^*\}$ of $X^*$. 
 Then, we have a basis $\{\BarMonomial{I}{\textbf{k}}{x}^*\}$ for $\overline{C}^{*,*}$ dual to the above basis for $\overline{B}_{*,*}$.
@@ -1338,7 +1363,7 @@ Using this relation, we see that a basis of $H^{r,r}\overline{C}$ is represented
 As long as each of the $\Q(I)x$ are cycles, they will form the dual basis for $H_{rr}\overline{B}$. %, as in the sum defining $\Q(I)x$, the only $\SqShift$-admissible $J$ appearing is $J=I$. 
 In order to check that $\Q(I)x$ is a cycle, it only remains to check that it pairs to zero with the image of $\delta$, i.e.\ with the $\SqShift$-Adem relations displayed above. But that is not hard to see. By definition of $\Q(I)x$, the functional `pair with $\Q(I)x$' on $\overline{C}^{r,r}$ \emph{equals} the functional `reduce to $\SqShift$-admissible form using $\SqShift$-Adem relations, and pair with $\left[\Q^{i_\ell}\middle|\cdots\middle|\Q^{i_1} \right]x$'. This second functional obviously returns zero on the $\SqShift$-Adem relations.
 \end{proof}
-Now we are in a position to describe a complex calculating $(\derived\Ind{\nontop{n}})X$. For any $X\in\nontop{n}$, define the \emph{Koszul complex} $\overline{K}_*X$, for $X\in\nontop{n}$, to be the subspace of $\overline{B}_*X$ spanned by the classes $\Q(I)x$, for $I$ and $x$ as in proposition \ref{propDerivedIndTrivialUobject}.
+Now we are in a position to describe a complex calculating $(\derived\Ind{\nontop{}})X$. For any $X\in\nontop{n}$, define the \emph{Koszul complex} $\overline{K}_*X$, for $X\in\nontop{n}$, to be the subspace of $\overline{B}_*X$ spanned by the classes $\Q(I)x$, for $I$ and $x$ as in proposition \ref{propDerivedIndTrivialUobject}.
 \begin{prop}\label{KoszulComplexN>2}
 %Suppose instead that $X$ is any object in $\nontop{n}$, 
 The Koszul complex $\overline{K}_*X$ is a subcomplex of $\overline{B}_*X$, whose inclusion is a homology equivalence. The differential of $\overline{K}_*X$ is given by the following formula:
@@ -1355,7 +1380,7 @@ Consider the spectral sequence associated to the filtered complex $\overline{B}_
 %The inclusion $\overline{K}_*X\to \overline{B}_*X$ is exactly
 
 %The spectral sequence associated to the filtration on $\overline{B}_*X$ has $E^0$ the bar construction $\overline{B}_{r,\ell}(KX)$, with $d^0$ its differential, where $KX$ is a trivial object of $\nontop{n}$ on the same underlying vector space as $X$. Precisely, $E^0_{r,\ell}=\overline{B}_{r,\ell}(KX)$. %The differential $d^0$ implements the differential on this reduced bar construction, so that
-%Thus, $E^1_{r,\ell}=(\derived_{r,\ell}\Ind{\nontop{n}})(KX)$ is  zero except when $r=\ell$, so that $d^1$ is the last nonzero differential, after which the spectral sequence collapses.
+%Thus, $E^1_{r,\ell}=(\derived_{r,\ell}\Ind{\nontop{}})(KX)$ is  zero except when $r=\ell$, so that $d^1$ is the last nonzero differential, after which the spectral sequence collapses.
 
 The formula for $d^1:E^1_{r,r}\to E^1_{r-1,r-1}$ is simply:
 \[\sum_j \left[\Q^{i_r^{(j)}}\middle|\cdots \middle|\Q^{i_1^{(j)}}\right]x^{(j)}
@@ -1369,7 +1394,7 @@ Now as $E^1_{r,r}\subseteq E^0_{r,r}$, in order to write this in terms of the $\
 
 \begin{KoszulComplexes1}
 \subsection{Koszul complexes for $\derived\Ind{\nontop{1}}$}
-We'll record here the changes to the above required when $n=1$. As before, for any object $X\in\nontop{1}$, write $\overline{B}_*:= N(\Ind{\nontop{1}}(\BarConst{\nontop{1}}X))$.
+We'll record here the changes to the above required when $n=1$. As before, for any object $X\in\nontop{1}$, write $\overline{B}_*:= \ModDegeneracies{\Ind{\nontop{1}}(\BarConst{\nontop{1}}X)}_*$.
 
 %\textbf{remove} For $I=(i_\ell,\ldots,i_1)$ a sequence of integers with each $i_j\geq2$, define
 %\[\minDimP(I):=\begin{cases}
@@ -1405,7 +1430,7 @@ A basis of $\overline{B}_r$ consists of all the above monomials in which each of
 Note that in $\overline{B}_*$, any $I$, $\textbf{k}$ and $x$ will produce a well-defined monomial; those violating the inequality $\minDimP(I)\leq a_1$ are simply zero, rather than undefined.
 
 \begin{prop}
-Suppose that $X$ is any object in $\nontop{1}$, the Koszul complex $\overline{K}_*X$ is the subcomplex of $\overline{B}_*(\forget,\Fr{\nontop{1}},X)$ with basis the classes $P(I)x$, where 
+Suppose that $X$ is any object in $\nontop{1}$, the Koszul complex $\overline{K}_*X$ is the subcomplex of $\overline{B}_*(\Forget{\GR{}},\Fr{\nontop{1}},X)$ with basis the classes $P(I)x$, where 
 \begin{itemize}
 \setlength{\parindent}{.25in}
 \item $x\in X_{a_1}$  runs through the elements $x$ of a chosen basis of $X$; and
@@ -1413,7 +1438,7 @@ Suppose that $X$ is any object in $\nontop{1}$, the Koszul complex $\overline{K}
 \end{itemize}
 and where 
 \[P(I)x:=\left[P^{i_r} \middle|\cdots\middle|P^{i_1} \right]x+\sum_{\substack{\produces{J}{I}{\delta} \\ \minDimP(J)\leq|x|}}\left[P^{j_r} \middle|\cdots\middle|P^{j_1} \right]x.\]
-The inclusion of $\overline{K}_*X$ into $\overline{B}_*(\forget,\Fr{\nontop{1}},X)$ is a homology equivalence, the restriction of the differential to $\overline{K}_*X$ is given by the following formula:
+The inclusion of $\overline{K}_*X$ into $\overline{B}_*(\Forget{\GR{}},\Fr{\nontop{1}},X)$ is a homology equivalence, the restriction of the differential to $\overline{K}_*X$ is given by the following formula:
 \[\partial(P(I)x)=P((i_{\ell},\ldots,i_2))(P^{i_1}x)+\sum_{\substack{\produces{J}{I}{\delta} \\ \minDimP(J)\leq|x|}} P((j_{\ell},\ldots,j_2))(P^{j_1}x),\]
 where the sum is taken over those $J=(j_{\ell},\ldots,j_1)$ such that $(j_{\ell},\ldots,j_2)$ is $\delta$-admissible, and $\minDimP(J)\leq|x|$.
 \end{prop}
@@ -1432,7 +1457,7 @@ The proof of this proposition is essentially the same as the proof of propositio
 
 \begin{DerivedFunctorsLowDimension}
 \section{Lie algebra homology and low dimensional calculations}
-\subsection{Calculating $\derived\Ind{\LL{n}}$ in internal dimension zero}
+\subsection{Calculating $\derived\Ind{\LL{}}$ in internal dimension zero}
 Suppose that $n\geq2$. Then the dimension zero part of an object $X$ of $\LL{n}$ is a partially restricted Lie algebra, in $\PRLie{n-1}$. That is: 
 \begin{lem}
 There is a `zeroth part' functor $\LL{n}\to\PRLie{n-1}$, written $X\mapsto X_0$, where $X_0\in\PRLie{n-1}$ is defined by
@@ -1451,9 +1476,9 @@ where $b$ runs over a homogeneous Hall basis. The only basis elements in the zer
 \end{proof}
 \begin{prop}
 There is a natural isomorphism
-\[((\derived_{p}\Ind{\LL{n}})X)_{0,a_{n-1},\ldots,a_1}\cong ((\derived_p\Ind{\PRLie{n-1}})X_0)_{a_{n-1},\ldots,a_1}\]
+\[((\derived_{p}\Ind{\LL{}})X)_{0,a_{n-1},\ldots,a_1}\cong ((\derived_p\Ind{\PRLie{n-1}})X_0)_{a_{n-1},\ldots,a_1}\]
 \begin{proof}
-Consider the bar construction used to define $((\derived_{p}\Ind{\LL{n}})X)_{0,a_{n-1},\ldots,a_1}$, constructed by repeated application of the free ${\LL{n}}$ functor. In dimension zero, this amounts to repeated application of the free $\PRLie{n-1}$ functor, and we obtain the bar construction for $X_0$ as an object of $\PRLie{n-1}$.
+Consider the bar construction used to define $((\derived_{p}\Ind{\LL{}})X)_{0,a_{n-1},\ldots,a_1}$, constructed by repeated application of the free ${\LL{n}}$ functor. In dimension zero, this amounts to repeated application of the free $\PRLie{n-1}$ functor, and we obtain the bar construction for $X_0$ as an object of $\PRLie{n-1}$.
 \end{proof}
 \end{prop}
 %\subsubsection{$\derived\Ind{\LL{1}}$}
@@ -1465,14 +1490,14 @@ Choose $n\geq 1$, and define
 \\0,&\textup{if }n\geq3.
 \end{cases}
 \]
-We will here present a method to calculate the object $(\derived\Ind{\LL{n}})X=((\derived\Ind{\LL{n}})X)_{a_{n+1},\ldots,a_1}$ in dimensions with $a_n\leq d$. Consider the diagram:
+We will here present a method to calculate the object $(\derived\Ind{\LL{}})X=((\derived\Ind{\LL{}})X)_{a_{n+1},\ldots,a_1}$ in dimensions with $a_n\leq d$. Consider the diagram:
 \[\xymatrix@R=2mm@C=13mm{
 &%r1c1
-\ar[dd]^-{\Ind{\nontop{n}}}
+\ar[dd]^-{\Ind{\nontop{}}}
 \ar@<.5ex>[dl]%^-{\forget}
 \LL{n}\\%r1c2
-\ar@<.5ex>[ur]^-{\LL{n}}
-\ar@<.5ex>[dr]^-{\PRLie{n}}
+\ar@<.5ex>[ur]^-{\Fr{\LL{n}}}
+\ar@<.5ex>[dr]^-{\Fr{\PRLie{n}}}
 \GR{n}&%r2c1
 \\%r2c2
 &%r3c1
@@ -1480,10 +1505,10 @@ We will here present a method to calculate the object $(\derived\Ind{\LL{n}})X=(
 \ar@<.5ex>[ul]%^-{\forget}
 %r3c2
 }\]
-In this diagram, $\Ind{\nontop{n}}$ does not change the underlying vector space in dimensions $(a_n,\ldots,a_1)$ with $a_n\leq d$. Moreover, the free constructions $\Fr{\LL{n}}$ and $\Fr{\PRLie{n}}$ agree in these dimensions, as do the structure maps of the free/forget adjunctions. Thus, there is an isomorphism between $(\derived\Ind{\LL{n}})(X)$ and $(\derived\Ind{\PRLie{n}})(\Ind{\nontop{n}}(X))$ in dimensions with $a_n\leq d$. [Note that these are objects of $\GR{n+1}$, and so have gradings $a_{n+1},\ldots,a_1$ --- our inequality involves $a_n$.] %, the outermost grading of an object of $\LL{n}$.]
+In this diagram, $\Ind{\nontop{}}$ does not change the underlying vector space in dimensions $(a_n,\ldots,a_1)$ with $a_n\leq d$. Moreover, the free constructions $\Fr{\LL{n}}$ and $\Fr{\PRLie{n}}$ agree in these dimensions, as do the structure maps of the free/forget adjunctions. Thus, there is an isomorphism between $(\derived\Ind{\LL{}})(X)$ and $(\derived\Ind{\PRLie{}})(\Ind{\nontop{}}(X))$ in dimensions with $a_n\leq d$. [Note that these are objects of $\GR{n+1}$, and so have gradings $a_{n+1},\ldots,a_1$ --- our inequality involves $a_n$.] %, the outermost grading of an object of $\LL{n}$.]
 \end{shaded}
 
-There is a complex that computes $\derived\Ind{\PRLie{n}}$ --- it interpolates between the Cartan-Eilenberg resolution for the homology of good Lie algebras, and May's $\overline{X}$ complex for  restricted Lie algebra homology.
+There is a complex that computes $\derived\Ind{\PRLie{}}$ --- it interpolates between the Cartan-Eilenberg resolution for the homology of good Lie algebras, and May's $\overline{X}$ complex for  restricted Lie algebra homology.
 \end{DerivedFunctorsLowDimension}
 
 \begin{PRlieKoszulComplexCalculation}
@@ -1554,8 +1579,8 @@ Here, the parenthetical term vanishes in $\overline{K}$ --- it's there in case w
 \end{PRlieKoszulComplexCalculation}
 
 \begin{LieLambdaStructureOnKoszul}
-\section{Structure on the derived functors $(\derived\Ind{\nontop{n}})X$}
-\subsection{Constructions in the homotopy of simplicial Lie algebras}
+\section{Structure on the derived functors $(\derived\Ind{\nontop{}})X$} 
+\subsection{Constructions in the homotopy of simplicial Lie algebras} \label{SectionHtpyOpnsOnLieAlgs}
 We showed above that $\PiAlg{\PRLie{n}}$ is in fact $\LL{n+1}$, which is to say that the homotopy of a simplicial object of $\PRLie{n}$ in fact supports both $\Q$ operations and a Lie bracket, giving the structure of an element of $\LL{n+1}$. The chain level constructions of these operations are standard, and we record them here for convenience:
 
 Let $\frakg$ be a simplicial Lie algebra over $\F_2$. Let $N\frakg_*$ be the Moore complex of $\frakg$, defined as
@@ -1590,46 +1615,87 @@ Here, $c$ is the index such that $\alpha_{c+1}>i\geq\alpha_{c}$, after setting  
 \subsection{Chain level operations and the Koszul complex}
 
 For this discussion, fix an object $X\in\LL{n}$.
-The Koszul complex $\overline{K}_*(X)$ is a subcomplex of the bar construction $\overline{B_*}(\forget,\nontop{n},X)$. However, we would prefer to work in the Moore complex $N{B_*}(\forget,\nontop{n},X)$. That is, for any simplicial abelian group $A$, in this case $A=B(\forget,\nontop{n},X)$, there are natural weak equivalences
-\[NA_*\to A_*\to (A/DA)_*\]
-of which the first is an inclusion, the second is a surjection, and the composite is an isomorphism. Giving the inverse isomorphism could be a little difficult: this theorem shows that for any $z\in A_n$, there is a unique degenerate element $b$ such that $z+b\in NA_n$, but one must find this $b$.
+The Koszul complex $\overline{K}_*(X)$, as constructed in \S\ref{sectionOnUnstableKoszulComplexes}, is a subcomplex of the reduced bar construction $\overline{B}_*:= \ModDegeneracies{\Ind{\nontop{}}(\BarConst{\nontop{}}X)}_*$, thought of as the quotient of the unreduced bar construction by the subcomplex of degenerate simplices. The operations defined in \S\ref{SectionHtpyOpnsOnLieAlgs} are defined, at chain level, in the Moore complex of a simplicial Lie algebra, considered as a subcomplex. These two definitions of the Moore complex are isomorphic: for any simplicial abelian group $A$, in this case $A=\Ind{\nontop{}}(\BarConst{\nontop{}}X)$, there are natural homology equivalences
+\[NA_*\to A_*\to \ModDegeneracies{A}_*\]
+of which the first is an inclusion, the second is a surjection, and the composite is an isomorphism. Giving the inverse isomorphism could cause difficulty: for any $z\in A_n$, there is a unique degenerate element $b$ such that $z+b\in NA_n$, but one must find this `$b$'.
 
-Fortunately, it happens that the Koszul complex already maps happily into $N{B_*}(\forget,\nontop{n},X)$. To understand this, one thinks that an element of the Koszul complex is an element of the Bar construction which survives to $E^1$ in the length filtration spectral sequence for $\overline{B}_*$. However, $d^0$ implements the sum of all the face maps but one, so that a generic element of $\overline{K}_r$ is the image in $\overline{B}_{rr}$ of an expression
-\[z=\sum_{j}\left[\Q^{i_{j,r}} \middle|\cdots\middle|\Q^{i_{j,1}} \right]x_j\textup{ in }B_{r}\]
+Fortunately, it happens that the inclusion of the Koszul complex factors through this isomorphism \emph{explicitly}. To understand this, one thinks that an element of the Koszul complex is an element of $\overline{B}_{rr}$ which survives to $E^1$ in the length filtration spectral sequence for $\overline{B}_*$. However, $d^0$ implements the sum of all the face maps but one, so that any element $z$ of $\overline{K}_r$ can be written as the image in $\ModDegeneracies{\Ind{\nontop{}}(\BarConst{\nontop{}}X)}_r$ of a unique expression in $\Ind{\nontop{}}(\BarConst{\nontop{}}X)_r$ of the form
+\[z=\sum_{j}\left[\Q^{i_{j,r}} \middle|\cdots\middle|\Q^{i_{j,1}} \right]x_j\]
 such that 
-\[\sum_{k=1}^{r}d_kz:=\sum_{k=1}^{r-1}\sum_{j}\left[\Q^{i_{j,r}} \middle|\cdots\middle|\Q^{i_{j,k+1}}\Q^{i_{j,k}}\middle|\cdots\middle|\Q^{i_{j,1}} \right]x_j=0\textup{ in }\overline{B}_{r-1,r}.\]
-However, the fact that we quotient by degenerate elements in forming $\overline{B}$ is irrelevant to this condition, so that for $k\neq 0$, $d_kz=0$ in $B_{r-1}$, not only in $\overline{B}_{r-1}$, and $z\in NB_r$, no `$b$' required. One swaps $\Q$ for $P$ when $n=1$.
+\[\sum_{k=1}^{r-1}d_kz:=\sum_{k=1}^{r-1}\sum_{j}\left[\Q^{i_{j,r}} \middle|\cdots\middle|\Q^{i_{j,k+1}}\Q^{i_{j,k}}\middle|\cdots\middle|\Q^{i_{j,1}} \right]x_j=0\textup{ in }\overline{B}_{r-1,r}.\]
+However, the fact that we quotient by degenerate elements in forming $\overline{B}$ is irrelevant to this condition, so that for $k\neq 0$, $d_kz=0$ in $B_{r-1}$, not only in $\overline{B}_{r-1}$, and $z\in NB_r$, no `$b$' required. One swaps `$\Q$' for `$P$' when $n=1$.
 
-Moreover, there is a natural map \textbf{(???)} ${B_*}(\forget,\nontop{n},X)\to {B_*}(\PRLie{n},\LL{n},X)$. Let $\jmath$ be the following composite of inclusions which are homology equivalences:
-\[\jmath:\left(\overline{K}_*(X)\to  NB_*(\forget,\nontop{n},X)\to N{B_*}(\PRLie{n},\LL{n},X)\right).\]
+\newpage
 
-At this point we need to be explicit about the maps inside the bar construction. Moreover, we'll need notation for elements of $B(\PRLie{n},\LL{n},X)$, and the bar notation we've used so far will not suffice. The bar construction is given by the formula $B_r:=\Fr{\PRLie{n}}\left(\Fr{\LL{n}}\right)^rX$, and we'll add subscripts to the various free constructions here in order to disambiguate them in what follows, writing
-\[B_r:=\Fr[out]{\PRLie{n}}\Fr[r]{\LL{n}}\cdots\Fr[1]{\LL{n}} X.\]
-Here, $out$ stands for `outer'. We'll index the faces and degeneracies in the opposite order to the usual one, and inexpensive way to keep notation simple. Thus:
+Thus we've constructed homology isomorphisms, for $X\in\LL{n}$:
+%\[\overline{K}_*X\to N(\Ind{\nontop{}}(\BarConst{\nontop{}}(\Forget{\nontop{}}X)))\overset{N(\Ind{\nontop{}}(i))}{\to} N(\Ind{\nontop{}}(\Forget{\nontop{}}\BarConst{\LL{n}}(X)))\]
+\begin{alignat*}{2}
+\overline{K}_*(\Forget{\nontop{}}X)
+&\xrightarrow{\phantom{N(\Ind{\nontop{}}(i))}}
+N(\Ind{\nontop{}}(\BarConst{\nontop{}}(\Forget{\nontop{}}X)))%
+\\
+&\xrightarrow{N(\Ind{\nontop{}}(i))}
+N(\Ind{\nontop{}}(\Forget{\nontop{}}\BarConst{\LL{}}(X)))\\
+% Left hand side
+% Relation
+&\phantom{\xrightarrow{{N(\Ind{\nontop{}}(i))}}}\ =
+% Right hand side
+\Forget{\GR{}}N(\Ind{\nontop{}}(\BarConst{\LL{}}(X)))% Comment
+\end{alignat*}
+\newpage
+These two maps are inclusions, so that $\overline{K}_*(\Forget{\nontop{}}X)$ is a homology-equivalent subcomplex of $N(\Ind{\nontop{}}(\BarConst{\LL{}}(X)))$, the differential graded partially restricted Lie algebra which calculates the $\PiAlgebra{\PRLie{n}}$ $(\derived\Ind{\nontop{}})X$. Suppressing the forgetful functors, let 
+\[\jmath:\overline{K}_*(X)\to N(\Ind{\nontop{}}(\BarConst{\LL{}}(X)))\]
+be this composite inclusion. In order to calculate with this larger complex, we'll need to be explicit about the bar construction $\Ind{\nontop{}}(\BarConst{\LL{}}(X))$. As $\Ind{\nontop{}}(\Fr{\LL{n}})W=\Fr{\PRLie{n}}W$ for $W\in\GR{n}$, we can write:
+\[B^\textup{L}_rX:=\Ind{\nontop{}}(\BarConst{\LL{}}(X))_r=\Fr[out]{\PRLie{n}}\Fr[r]{\LL{n}}\cdots\Fr[1]{\LL{n}} X.\]
+Here, we've introduced the notation ``$B^\textup{L}_\bullet$'' for this \emph{large} bar construction, and added subscripts to the various free constructions involved, in order to disambiguate them in what follows. The structure maps in this simplicial object are defined by the following natural transformations:
 \begin{itemize}\squishlist
 \setlength{\parindent}{.25in}
-\item $d_0:B_r\to B_{r-1}$ is induced by $\Fr[1]{\LL{n}}X\to X$;
-\item $d_i:B_r\to B_{r-1}$ is induced by $\Fr[i+1]{\LL{n}}\Fr[i]{\LL{n}}\to \Fr[i]{\LL{n}}$ for $0<i<r$;
-\item $d_r:B_r\to B_{r-1}$ is induced by $\Fr[out]{\PRLie{n}}\Fr[r]{\LL{n}}\to \Fr[out]{\PRLie{n}}$ (which, for $n\geq2$, kills nontop $\Q^i$ terms and identifies the top $\Q$ with $\restn{}$, and when $n=1$, kills all $P$ operations);
-\item $s_i:B_r\to B_{r+1}$ is induced by the unit map, after inserting another $\Fr{\LL{n}}$ between $\Fr[i+1]{\LL{n}}$ and $\Fr[i]{\LL{n}}$ , for $0\leq i\leq r$.
+\item $d_0:B^\textup{L}_r\to B^\textup{L}_{r-1}$ is induced by $\Fr[1]{\LL{n}}X\to X$;
+\item $d_i:B^\textup{L}_r\to B^\textup{L}_{r-1}$ is induced by $\Fr[i+1]{\LL{n}}\Fr[i]{\LL{n}}\to \Fr[i]{\LL{n}}$ for $0<i<r$;
+\item $d_r:B^\textup{L}_r\to B^\textup{L}_{r-1}$ is induced by $\Fr[out]{\PRLie{n}}\Fr[r]{\LL{n}}\to \Fr[out]{\PRLie{n}}$ (which, for $n\geq2$, kills nontop $\Q^i$ terms and identifies the top $\Q$ with $\restn{}$, and when $n=1$, kills all $P$ operations);
+\item $s_i:B^\textup{L}_r\to B^\textup{L}_{r+1}$ is induced by the unit map, after inserting another $\Fr{\LL{n}}$ between $\Fr[i+1]{\LL{n}}$ and $\Fr[i]{\LL{n}}$ , for $0\leq i\leq r$.
 \end{itemize}
-
-
-We'll also include the subscripts in notation for the elements of $B_r$, for example, here are two elements of $B_3$ (when $n\geq2$), if $x,y\in X$ are of sufficiently large degrees:
+The bar notation used until now will not suffice to describe elements of $B^\textup{L}_\bullet$. Instead, we add subscripts corresponding to those added to the free constructions above. For example, here are two elements of $B^\textup{L}_3$ (when $n\geq2$), if $x,y\in X$ are of sufficiently large degrees:
 \[[[x,\Q^3_2y]_3,\Q^5_1x]_{out}\textup{\quad and\quad }\restn[out]{([\Q^4_2\Q^3_1x,y]_3)}.\]
-%The second expression means, for $x,y\in X$, form $\Q^3_1x\in\Fr{\LL{n}}X$.....
 Then we may describe $\jmath$ simply as
 \[\left[\Q^{i_{r}} \middle|\cdots\middle|\Q^{i_{1}} \right]x\mapsto\Q^{i_{r}}_r\cdots \Q^{i_{1}}_1x.\]
 
 
-We are then in a position to calculate the $\LL{n+1}$ structure on $(\derived\Ind{\nontop{n}})X$ in certain cases, since we can write down chain-level formulae. For $z\in Z\overline{K}_p(X)$ and $w\in Z\overline{K}_q(X)$, representing classes $\overline{z},\overline{w}\in(\derived\Ind{\nontop{n}})X$:
+We are now in a position to calculate the $\LL{n+1}$ structure on $(\derived\Ind{\nontop{}})X$ in certain cases, since we can write down chain-level formulae. For $z\in Z\overline{K}_p(X)$ and $w\in Z\overline{K}_q(X)$, representing classes $\overline{z},\overline{w}\in(\derived\Ind{\nontop{}})X$:
 \begin{itemise}
 \setlength{\parindent}{.25in}
-\item $[\overline{z},\overline{w}]$ is represented by $\sum_{(\alpha,\beta)\in\Shuffles{p}{q}}[s_\beta(\jmath z), s_\alpha(\jmath w)]_{out}$;
-\item $Q^i\overline{z}$ is represented by $\sum_{(\alpha,\beta)\in\HalfShuffles{i}{i}}[s_\beta(\jmath z), s_\alpha(\jmath z)]_{out}$ for $0<i\leq p$; and
-\item $Q^0\overline{z}$ is represented by $\restn[out]{(z)}$ if not all of $a_n,\ldots,a_2$ are zero, where $\overline{z}\in((\derived_{p}\Ind{\nontop{n}})X)_{a_n,\ldots,a_1}$.
+\item $[\overline{z},\overline{w}]$ is represented by $\sum_{(\alpha,\beta)\in\Shuffles{p}{q}}[s_\beta(\jmath z), s_\alpha(\jmath w)]_{out}\in B^\textup{L}_{p+q}X$;
+\item $Q^i\overline{z}$ is represented by $\sum_{(\alpha,\beta)\in\HalfShuffles{i}{i}}[s_\beta(\jmath z), s_\alpha(\jmath z)]_{out}\in B^\textup{L}_{p+i}X$ for $0<i\leq p$; and
+\item $Q^0\overline{z}$ is represented by $\restn[out]{(z)}\in B^\textup{L}_{p}X$ as long as $Q^i\overline{z}$ is defined, (i.e.\ when not all of $a_n,\ldots,a_2$ are zero, where $\overline{z}\in((\derived_{p}\Ind{\nontop{}})X)_{a_n,\ldots,a_1}$).
 \end{itemise}
-\subsection{Lie brackets on $(\derived\Ind{\nontop{n}})X$ are trivial}
+%%%%%%%
+%%%%%%%At this point we need to be explicit about the maps inside the bar construction. Moreover, we'll need notation for elements of $B(\PRLie{n},\LL{n},X)$, and the bar notation we've used so far will not suffice. The bar construction is given by the formula $B_r:=\Fr{\PRLie{n}}\left(\Fr{\LL{n}}\right)^rX$, and we'll add subscripts to the various free constructions here in order to disambiguate them in what follows, writing
+%%%%%%%\[B_r:=\Fr[out]{\PRLie{n}}\Fr[r]{\LL{n}}\cdots\Fr[1]{\LL{n}} X.\]
+%%%%%%%Here, $out$ stands for `outer'. We'll index the faces and degeneracies in the opposite order to the usual one, and inexpensive way to keep notation simple. Thus:
+%%%%%%%\begin{itemize}\squishlist
+%%%%%%%\setlength{\parindent}{.25in}
+%%%%%%%\item $d_0:B_r\to B_{r-1}$ is induced by $\Fr[1]{\LL{n}}X\to X$;
+%%%%%%%\item $d_i:B_r\to B_{r-1}$ is induced by $\Fr[i+1]{\LL{n}}\Fr[i]{\LL{n}}\to \Fr[i]{\LL{n}}$ for $0<i<r$;
+%%%%%%%\item $d_r:B_r\to B_{r-1}$ is induced by $\Fr[out]{\PRLie{n}}\Fr[r]{\LL{n}}\to \Fr[out]{\PRLie{n}}$ (which, for $n\geq2$, kills nontop $\Q^i$ terms and identifies the top $\Q$ with $\restn{}$, and when $n=1$, kills all $P$ operations);
+%%%%%%%\item $s_i:B_r\to B_{r+1}$ is induced by the unit map, after inserting another $\Fr{\LL{n}}$ between $\Fr[i+1]{\LL{n}}$ and $\Fr[i]{\LL{n}}$ , for $0\leq i\leq r$.
+%%%%%%%\end{itemize}
+%%%%%%%
+%%%%%%%
+%%%%%%%We'll also include the subscripts in notation for the elements of $B_r$, for example, here are two elements of $B_3$ (when $n\geq2$), if $x,y\in X$ are of sufficiently large degrees:
+%%%%%%%\[[[x,\Q^3_2y]_3,\Q^5_1x]_{out}\textup{\quad and\quad }\restn[out]{([\Q^4_2\Q^3_1x,y]_3)}.\]
+%%%%%%%%The second expression means, for $x,y\in X$, form $\Q^3_1x\in\Fr{\LL{n}}X$.....
+%%%%%%%Then we may describe $\jmath$ simply as
+%%%%%%%\[\left[\Q^{i_{r}} \middle|\cdots\middle|\Q^{i_{1}} \right]x\mapsto\Q^{i_{r}}_r\cdots \Q^{i_{1}}_1x.\]
+%%%%%%%
+%%%%%%%
+%%%%%%%We are then in a position to calculate the $\LL{n+1}$ structure on $(\derived\Ind{\nontop{}})X$ in certain cases, since we can write down chain-level formulae. For $z\in Z\overline{K}_p(X)$ and $w\in Z\overline{K}_q(X)$, representing classes $\overline{z},\overline{w}\in(\derived\Ind{\nontop{}})X$:
+%%%%%%%\begin{itemise}
+%%%%%%%\setlength{\parindent}{.25in}
+%%%%%%%\item $[\overline{z},\overline{w}]$ is represented by $\sum_{(\alpha,\beta)\in\Shuffles{p}{q}}[s_\beta(\jmath z), s_\alpha(\jmath w)]_{out}$;
+%%%%%%%\item $Q^i\overline{z}$ is represented by $\sum_{(\alpha,\beta)\in\HalfShuffles{i}{i}}[s_\beta(\jmath z), s_\alpha(\jmath z)]_{out}$ for $0<i\leq p$; and
+%%%%%%%\item $Q^0\overline{z}$ is represented by $\restn[out]{(z)}$ if not all of $a_n,\ldots,a_2$ are zero, where $\overline{z}\in((\derived_{p}\Ind{\nontop{}})X)_{a_n,\ldots,a_1}$.
+%%%%%%%\end{itemise}
+\subsection{Lie brackets on $(\derived\Ind{\nontop{}})X$ are trivial}
 \begin{prop}
 Suppose that $z\in Z\overline{K}_p(X)$ and $w\in Z\overline{K}_q(X)$ are cycles. Then on homotopy classes:% representing classes $\overline{x}$ and $\overline{y}$. Then
 \[[\overline{z},\overline{w}]=\begin{cases}
@@ -1659,7 +1725,7 @@ Next, we calculate $d_{i}a$ for $0\leq i< p+q$:
 Now consider a given shuffle $(\alpha,\beta)$. If, say, $\alpha$ contains neither of $i$ and $i-1$, then $d_is_\alpha(\jmath w)=s_{\alpha'}d_{i'}(\jmath w)=0$, as $\jmath w$ is a cycle in $NB_*$. Thus we can ignore all summands in which $\alpha$ and $\beta$ do not contain one each of $i$ and $i-1$.
 If $\alpha$ and $\beta$ contain one each of $i$ and $i-1$, then let $(\gamma,\epsilon)$ be the shuffle obtained from $(\alpha,\beta)$ by swapping the positions of $i$ and $i-1$. But then, $d_is_\beta=d_is_{\epsilon}$, and $d_is_\alpha=d_is_{\gamma}$, so that the summands corresponding to $(\alpha,\beta)$ and to $(\gamma,\epsilon)$ cancel with each other.
 \end{proof}
-\subsection{$\Q^k$ operations on $(\derived\Ind{\nontop{n}})X$ for $k\geq1$}
+\subsection{$\Q^k$ operations on $(\derived\Ind{\nontop{}})X$ for $k\geq1$}
 In the previous section, we produced an element $a\in B_{p+q+1}(\Fr{\PRLie{n}},\Fr{\LL{n}},X)$, and showed that it was actually an element of $NB_{p+q+1}$, whose boundary was represented the homotopy class we were trying to nullhomotope. In the next two sections, we will choose such an $a$ again, but in some cases, the top \emph{two} face maps will be nonzero on $a$. Thus we will move outside of the normalised complex to construct a homotopy between two nonzero elements. This makes no difference to our calculations, especially since we in the end will always map down to $\overline{K}_*$, which doesn't see the distinction anyway.
 \begin{prop}
 Suppose that $z\in Z\overline{K}_p(X)_{a_n,\ldots,a_1}$. Then:
@@ -1707,7 +1773,7 @@ where $\star$ denotes concatenation. None of the $(a_1)\star K$ could hope to be
 %receives the same top $P$ operation as a new bar in each of the bars in the above definition. There is only the one $\delta$-admissible sequence appearing in the new sum, completing the proof. \textbf{Sometime, think about what happens here in a little more detail.}
 \end{proof}
 
-\subsection{$\Q^0$ operations on $(\derived\Ind{\nontop{n}})X$}
+\subsection{$\Q^0$ operations on $(\derived\Ind{\nontop{}})X$}
 Assume for this section that $n\geq2$, so that objects of $\LL{n+1}$ support a $\Q^0$ operation, defined when $a_n,\ldots,a_2$ are not all zero. We'll now go some way towards calculating these operations.
 \begin{lem}
 Suppose that $z\in Z\overline{K}_p(X)_{a_n,\ldots,a_1}$, where not all of $a_n,\ldots,a_2$ are zero. 
@@ -1737,7 +1803,7 @@ The second statement follows from the first, as whenever $\produces{J}{I}{\SqShi
 
 We've seen that $\Q^0\overline{z}$ is represented by the cycle
 \[\sum_{j}\Q^{a_n}_p\Q^{i^{{(j)}}_p}_p\cdots \Q^{i^{{(j)}}_1}_1x^{(j)}\]
-in the bar construction $N{B_*}(\PRLie{n},\LL{n},X)$. This cycle is the image of a cycle in $NB_*(\forget,\nontop{n},X)$ which, after mapping down to the quotient by degenerate simplices, we dare write as:
+in the bar construction $N{B_*}(\PRLie{n},\LL{n},X)$. This cycle is the image of a cycle in $NB_*(\Forget{\GR{}},\nontop{n},X)$ which, after mapping down to the quotient by degenerate simplices, we dare write as:
 \[\sum_{j}\left[\Q^{a_n}\Q^{i^{{(j)}}_p}\middle|\cdots \middle|\Q^{i^{{(j)}}_1}\right]x^{(j)}\in\overline{B}_{p,p+1}.\]
 Now in order to compress this into the Koszul complex, we must apply \textbf{Priddy's algorithm}. But one observes readily from the $\Q$-Adem relation that if $\produces{(i,j)}{(i',j')}{\Q}$, then $j'>j$, so that as we perform \textbf{Priddy's algorithm}, we only ever decrease the index of the final $\Q$ appearing in each bar. Then the hypothesis on the $x^{{j}}$ guarantees that as we run the algorithm, every term that ends up in $\overline{B}_{p,p}$ willl vanish. Thus \textbf{Priddy's algorithm} constructs a null-homotopy.
 \end{proof}
