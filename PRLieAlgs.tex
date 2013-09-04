@@ -1270,7 +1270,7 @@ We will define Koszul complexes calculating $\derived\Ind{\nontop{}}$ for all $n
 %%%%For any object $X\in\nontop{n}$, the bar construction ${B}_\bullet(\Fr{\nontop{n}},\Fr{\nontop{n}},X)=(\Fr{\nontop{n}})^{\bullet+1}X$ is a free simplicial resolution of $X$. Now there is an isomorphism of graded vector spaces $\Ind{\nontop{}}(\Fr{\nontop{n}}(X))\cong\forgetSymbol(X)$. Thus $(\derived\Ind{\nontop{}})X$ may be calculated as the homotopy of the bar construction $B_\bullet(\forgetSymbol,\Fr{\nontop{n}},X)=(\Fr{\nontop{n}})^\bullet X$. Normalizing this complex by taking the quotient by degenerate simplices, one obtains the reduced Bar construction $\Boverline_*(\forgetSymbol,\Fr{\nontop{n}},X)$, a chain complex calculating $(\derived\Ind{\nontop{}})X$, which we now describe.
 %%%%\end{shaded}
 For any object $X\in\nontop{n}$, write $\Boverline_*:= \ModDegeneracies{\Ind{\nontop{}}(\BarConst{\nontop{}}X)}_*$. This is the normalized complex, obtained by taking the quotient by degenerate simplices, of the simplicial bar construction $\Ind{\nontop{}}(\BarConst{\nontop{}}X)$ calculating $(\derived\Ind{\nontop{}})X$.
-\begin{prop}
+\begin{prop}\label{PropDescnOfReducedBarConstruction}
 As a vector space each $\Boverline_r$ is graded, with $\Boverline_{r,\ell}$
 %For $r\geq0$, $\Boverline_r(\forgetSymbol,\Fr{\nontop{n}},X)$ is 
 spanned by monomials
@@ -1580,15 +1580,94 @@ Here, the parenthetical term vanishes in $\Koverline$ --- it's there in case we'
 
 \begin{LieLambdaStructureOnKoszul}
 \section{Structure on the derived functors $(\derived\Ind{\nontop{}})X$} 
-\subsection{Constructions in the homotopy of simplicial Lie algebras} \label{SectionHtpyOpnsOnLieAlgs}
-We showed above that $\PiAlg{\PRLie{n}}$ is in fact $\LL{n+1}$, which is to say that the homotopy of a simplicial object of $\PRLie{n}$ in fact supports both $\Q$ operations and a Lie bracket, giving the structure of an element of $\LL{n+1}$. The chain level constructions of these operations are standard, and we record them here for convenience.
+\subsection{Chain level operations and the Koszul complex} \label{SectionHtpyOpnsOnLieAlgs}
+
 
 For any simplicial abelian group $A$, %in this case $A=\Ind{\nontop{}}(\BarConst{\nontop{}}X)$, 
-there are natural homology equivalences of chain complexes
+there are three associated chain complexes calculating $\pi_*A$, connected by natural homology equivalences
 \[NA_*\to CA_*\to \ModDegeneracies{A}_*\]
-of which the first is an inclusion, the second is a surjection, and the composite is an isomorphism. Each has homology the homotopy of $A$. If $A=\frakg$ is a simplicial Lie algebra over $\F_2$, then there are readily defined operations in $N\frakg_*$ which on homology give $\pi_*\frakg$ its algebraic structure. %Giving the inverse isomorphism could cause difficulty: for any $z\in A_n$, there is a unique degenerate element $b$ such that $z+b\in NA_n$, but one must find this `$b$'.
+of which the first is an inclusion, the second is a surjection, and the composite is an isomorphism. The complex $CA_*$ has $CA_r=A_r$, with the sum of the face maps as boundary. The subcomplex $NA_*$ is defined by $NA_r=\cap_{i=1}^r\ker(d_i)$, and the quotient is by the subcomplex of $CA_*$ spanned by degenerate simplices.
+
+If $A$ is a simplicial object in $\PRLie{n}$, then there are readily defined (see \cite[\S8]{CurtisSimplicialHtpy.pdf}) operations in $NA_*$ which when applied to cycles give $\pi_*A$ its $\PiAlgebra{\PRLie{n}}$ structure. %Giving the inverse isomorphism could cause difficulty: for any $z\in A_n$, there is a unique degenerate element $b$ such that $z+b\in NA_n$, but one must find this `$b$'.
+To calculate these operations on homotopy, our approach will be to use the constructions in $NA_*$, but to produce homologies in the larger complex $CA_*$. We can do this freely, as $NA_*\to CA_*$ is a homology equivalence.
+
+Now for $X\in\nontop{n}$, with $n\geq2$, the Koszul complex $\Koverline_*(X)$ was defined as a subcomplex of $\Boverline_*(X):=\ModDegeneracies{\Ind{\nontop{}}\BarConst{\nontop{}}(X)}_*$. We'll explain this a little further for clarity, in the $n\geq2$ case%footnote:
+\footnote{This analysis is unchanged in the $n=1$ case, except that one swaps `$\Q$' for `$P$' in each bar construction.}. The $r^\textup{th}$ simplicial level $(\Ind{\nontop{}}\BarConst{\nontop{}}(X))_r$
+is spanned by the monomials of proposition \ref{PropDescnOfReducedBarConstruction}, except that here we \emph{allow} empty bars. The restriction that no bar should be empty is the result of taking the quotient by degenerate simplices to form $\Boverline_*(X)$. The face maps are defined by
+\begin{alignat*}{2}
+d_0([e_r|\cdots |e_1]x)
+&=
+[e_r|\cdots |e_2]e_1x%
+\\
+d_i([e_r|\cdots |e_1]x)
+&=
+[e_r|\cdots|e_{r+1}e_r|\cdots  |e_1]x
+&\qquad&\text{(for $0<i<r$)}\\
+% Left hand side
+d_r([e_r|\cdots |e_1]x)
+% Relation
+&=
+% Right hand side
+0% Comment
+&\qquad&\text{(unless $e_r$ is an empty bar)}
+\end{alignat*}
+Now an element of the Koszul complex is an element of $\Boverline_{rr}(X)$ which survives to $E^1$ in the length filtration spectral sequence for $\Boverline_*(X)$. However, the differential on $E^0$ implements the sum of all the face maps but $d_0$, so that any element of $\Koverline_r$ can be written as the image in $\ModDegeneracies{\Ind{\nontop{}}(\BarConst{\nontop{}}X)}_r$ of a unique expression in $\Ind{\nontop{}}(\BarConst{\nontop{}}X)_r$ of the form
+\[z=\sum_{j}\left[\Q^{i_{j,r}} \middle|\cdots\middle|\Q^{i_{j,1}} \right]x_j\]
+such that 
+\[\sum_{k=1}^{r}d_kz:=\sum_{k=1}^{r-1}\sum_{j}\left[\Q^{i_{j,r}} \middle|\cdots\middle|\Q^{i_{j,k+1}}\Q^{i_{j,k}}\middle|\cdots\middle|\Q^{i_{j,1}} \right]x_j=0\textup{ in }\Boverline_{r-1,r}(X).\]
+%However, the fact that we quotient by degenerate elements in forming $\Boverline_*(X)$ is irrelevant to this condition, so 
+This condition implies that $d_kz$ is zero in ${\Ind{\nontop{}}(\BarConst{\nontop{}}X)}_{r-1}$ for each $k>0$, not just zero in the quotient. Thus $z$ lies in the subcomplex $NB_r$.
+
+Thus we've constructed homology isomorphisms, for $X\in\LL{n}$:
+%\[\Koverline_*X\to N(\Ind{\nontop{}}(\BarConst{\nontop{}}(\forget{\nontop{}}X)))\overset{N(\Ind{\nontop{}}(i))}{\to} N(\Ind{\nontop{}}(\forget{\nontop{}}\BarConst{\LL{n}}(X)))\]
+\begin{alignat*}{2}
+\Koverline_*(\forget{\nontop{}}X)
+&\xrightarrow{\hphantom{N(\Ind{\nontop{}}(i))}}
+N(\Ind{\nontop{}}(\BarConst{\nontop{}}(\forget{\nontop{}}X)))_*\overset{\cong}{\to}\Boverline_*(\forget{\nontop{}}X)%
+\\
+&\xrightarrow{\smash{N(\Ind{\nontop{}}(i))}}
+N(\Ind{\nontop{}}(\forget{\nontop{}}\BarConst{\LL{}}(X)))_*\\
+% Left hand side
+% Relation
+&\hphantom{\xrightarrow{{N(\Ind{\nontop{}}(i))}}}\ =
+% Right hand side
+\forget{\GR{}}N(\Ind{\nontop{}}(\BarConst{\LL{}}(X)))_*=:\forget{\GR{}}\Boverline{}_*^\textup{L}(X)
+\end{alignat*}
+Here we've introduced the notation $\Boverline_*^\textup{L}(X)$ for $N(\Ind{\nontop{}}(\BarConst{\LL{}}(X)))_*$, on which we'll define operations inducing the $\PiAlgebra{\PRLie{n}}$ structure on $(\derived\Ind{\nontop{}})X$.
+These two maps are inclusions, so that $\Koverline_*(\forget{\nontop{}}X)$ is a homology-equivalent subcomplex of $\Boverline_*^\textup{L}(X)$. Suppressing the forgetful functors, let 
+\[\jmath:\Koverline_*(X)\to \Boverline_*^\textup{L}(X)\]
+be this composite inclusion. In order to calculate with this larger complex, we'll need to be explicit about the stucture maps in the larger simplicial bar construction $\Ind{\nontop{}}\BarConst{\LL{}}(X)$. Using the natural isomorphism $\Ind{\nontop{}}(\Fr{\LL{n}})W\cong\Fr{\PRLie{n}}W$ for $W\in\GR{n}$, we can write:
+\[(\Ind{\nontop{}}\BarConst{\LL{}}(X))_r=\Fr[out]{\PRLie{n}}\Fr[r]{\LL{n}}\cdots\Fr[1]{\LL{n}} X.\]
+Here, we've %introduced the notation ``$\Boverline^\textup{L}_\bullet$'' for this \emph{large} bar construction, and 
+added subscripts to the various free constructions involved, in order to disambiguate them in what follows. The simplicial structure maps are defined by the following natural transformations:
+\begin{itemize}\squishlist
+\setlength{\parindent}{.25in}
+\item $d_0:(\Ind{\nontop{}}\BarConst{\LL{}}(X))_r\to (\Ind{\nontop{}}\BarConst{\LL{}}(X))_{r-1}$ is induced by $\Fr[1]{\LL{n}}X\to X$;
+\item $d_i:(\Ind{\nontop{}}\BarConst{\LL{}}(X))_r\to (\Ind{\nontop{}}\BarConst{\LL{}}(X))_{r-1}$ is induced by the natural transformation $\Fr[i+1]{\LL{n}}\Fr[i]{\LL{n}}\to \Fr[i]{\LL{n}}$ for $0<i<r$;
+\item $d_r:(\Ind{\nontop{}}\BarConst{\LL{}}(X))_r\to (\Ind{\nontop{}}\BarConst{\LL{}}(X))_{r-1}$ is induced by the natural transformation $\Fr[out]{\PRLie{n}}\Fr[r]{\LL{n}}\to \Fr[out]{\PRLie{n}}$ which kills nontop $\Q^i$ terms and identifies the top $\Q$ with $\restn{}$ (and when $n=1$, kills all $P$ operations);
+\item $s_i:(\Ind{\nontop{}}\BarConst{\LL{}}(X))_r\to (\Ind{\nontop{}}\BarConst{\LL{}}(X))_{r+1}$ is induced by the unit map of an instance of $\Fr{\LL{n}}$ inserted between $\Fr[i+1]{\LL{n}}$ and $\Fr[i]{\LL{n}}$, for $0\leq i\leq r$.
+\end{itemize}
+The bar notation used in \S\ref{sectionOnUnstableKoszulComplexes} is suitable to describe elements of $\Koverline_*(\forget{\nontop{}}X)$ and $\Boverline_*(\forget{\nontop{}}X)$, but is not rich enough to describe elements of $\Boverline^\textup{L}_*(X)$. Instead, we add subscripts corresponding to those added to the free constructions above. For example, we exhibit two elements of $(\Ind{\nontop{}}\BarConst{\LL{}}(X))_3$ (defined only if $x,y\in X$ are of sufficiently large degrees):
+\[[[x,\Q^3_2y]_3,\Q^5_1x]_{out}\textup{\quad and\quad }\restn[out]{([\Q^4_2\Q^3_1x,y]_3)}.\]
+Then we may describe $\jmath$ simply as the linear extension of the assignment
+\[\left[\Q^{i_{r}} \middle|\cdots\middle|\Q^{i_{1}} \right]x\mapsto\Q^{i_{r}}_r\cdots \Q^{i_{1}}_1x.\]
 
 
+We are now in a position to calculate the $\LL{n+1}$ structure on $(\derived\Ind{\nontop{}})X$ in certain cases, using the formulae of \cite[\S8]{CurtisSimplicialHtpy.pdf}. For $z\in Z\Koverline_p(X)$ and $w\in Z\Koverline_q(X)$ cycles representing classes $\overline{z},\overline{w}\in(\derived\Ind{\nontop{}})X$:
+\begin{itemize}
+\setlength{\parindent}{.25in}
+\squishlist
+\item $[\overline{z},\overline{w}]$ is represented by $\sum_{(\alpha,\beta)\in\Shuffles{p}{q}}[s_\beta(\jmath z), s_\alpha(\jmath w)]_{out}\in \Boverline^\textup{L}_{p+q}X$;
+\item $Q^i\overline{z}$ is represented by $\sum_{(\alpha,\beta)\in\HalfShuffles{i}{i}}[s_\beta(\jmath z), s_\alpha(\jmath z)]_{out}\in \Boverline^\textup{L}_{p+i}X$ for $0<i\leq p$; and
+\item $Q^0\overline{z}$ is represented by $\restn[out]{(z)}\in \Boverline^\textup{L}_{p}X$ as long as $Q^0\overline{z}$ is defined, (i.e.\ when not all of $a_n,\ldots,a_2$ are zero, where $\overline{z}\in((\derived_{p}\Ind{\nontop{}})X)_{a_n,\ldots,a_1}$).
+\end{itemize}
+\noindent Here, $\Shuffles{p}{q}$ is the set of $(p,q)$-shuffles, pairs $(\alpha,\beta)$ with $\alpha=(\alpha_p,\ldots,\alpha_1)$ and $\beta=(\beta_q,\ldots,\beta_1)$ monotonically decreasing sequences that together partition the set $\{0,\ldots,p+q-1\}$, and $s_{\alpha}$ denotes the repeated degeneracy $s_{\alpha_p}\cdots s_{\alpha_1}$.
+Finally, $\HalfShuffles{i}{i}$ consists of those shuffles $(\alpha,\beta)\in\Shuffles{i}{i}$ such that $\alpha_1=0$.
+
+
+
+
+\begin{Omitted}
 Let $\frakg$ be a simplicial Lie algebra over $\F_2$. Let $N\frakg_*$ be the Moore complex of $\frakg$, defined as
 \[N\frakg_n:=\bigcap_{i=0}^{n-1}\ker(d_i:\frakg_n\to\frakg_{n-1})\textup{ with differential }\partial:=d_n|_{{N\frakg}_n}.\]
 Then $N\frakg_*$ is a differential graded Lie algebra, under the map
@@ -1603,103 +1682,104 @@ Here, $\HalfShuffles{i}{i}$ consists of those elements $(\alpha,\beta)$ of $\Shu
 One notes that as $i\leq n$, the expressions $s_\alpha z$ and $s_\beta z$ both still make sense, and that when $i=n$, this formula is one half of the formula for ``$[z,z]$'' (in $N\frakg_*$).
 
 Finally, if $\frakg$ supports a partial restriction $\restn{}$ on a subspace $\frakg^\textup{r}$, we have an operation $\Q^0:N\frakg^\textup{r}_n\to N\frakg_n$, defined simply by $z\mapsto\restn(z)$.
-
+\end{Omitted}
+Before we work with these definitions, we include a handy technical lemma, which is immediate from the simplicial relations:
 \begin{lem}
 Choose $i\geq0$ and $\alpha=(\alpha_p,\ldots,\alpha_1)$ with $\alpha_p>\cdots >\alpha_1\geq0$.
 \begin{enumerate}[i)]\squishlist
 \setlength{\parindent}{.25in}
-\item If neither $i$ nor $i-1$ appear in $\alpha$, then  $d_is_\alpha=s_{\alpha_p-1}\cdots s_{\alpha_{c+1}-1}s_{\alpha_c}\cdots s_{\alpha_1}d_{i-c}$; and
-\item if one of $i$ and $i-1$ appears in $\alpha$, then  $d_is_\alpha=s_{\alpha_p-1}\cdots s_{\alpha_{c+1}-1}s_{\alpha_{c-1}}\cdots s_{\alpha_1}$.
+\item If neither $i$ nor $i-1$ appear in $\alpha$, then  $d_is_\alpha=s_{\alpha_p-1}\cdots s_{\alpha_{c+1}-1}s_{\alpha_c}\cdots s_{\alpha_1}d_{i-c}$.
+\item If one of $i$ and $i-1$ appears in $\alpha$, then  $d_is_\alpha=s_{\alpha_p-1}\cdots s_{\alpha_{c+1}-1}s_{\alpha_{c-1}}\cdots s_{\alpha_1}$.
 \end{enumerate}
 Here, $c$ is the index such that $\alpha_{c+1}>i\geq\alpha_{c}$, after setting  $\alpha_{p+1}=\infty$ and $\alpha_0=-\infty$. More crudely:
 \begin{enumerate}[i)]\squishlist
 \setlength{\parindent}{.25in}
-\item[iii)] if neither $i$ nor $i-1$ appear in $\alpha$, then  $d_is_\alpha=s_{\alpha'}d_{i'}$ for some $\alpha'$ and $i'$; and
-\item[iv)] if exactly one of $i$ and $i-1$ appears in $\alpha$, then  $d_is_\alpha$ does not depend on which of $i$ and $i-1$ appeared.
+\item[iii)] If neither $i$ nor $i-1$ appear in $\alpha$, then  $d_is_\alpha=s_{\alpha'}d_{i'}$ for some $\alpha'$ and $i'$.
+\item[iv)] If exactly one of $i$ and $i-1$ appears in $\alpha$, then  $d_is_\alpha$ does not depend on which of $i$ and $i-1$ appeared.
 \end{enumerate}
 \end{lem}
-\subsection{Chain level operations and the Koszul complex}
-
-For this discussion, fix an object $X\in\LL{n}$.
-The Koszul complex $\Koverline_*(X)$, as constructed in \S\ref{sectionOnUnstableKoszulComplexes}, is a subcomplex of the reduced bar construction $\Boverline_*:= \ModDegeneracies{\Ind{\nontop{}}(\BarConst{\nontop{}}X)}_*$, thought of as the quotient of the unreduced bar construction by the subcomplex of degenerate simplices. The operations defined in \S\ref{SectionHtpyOpnsOnLieAlgs} are defined, at chain level, in the Moore complex of a simplicial Lie algebra, considered as a subcomplex. These two definitions of the Moore complex are isomorphic: for any simplicial abelian group $A$, in this case $A=\Ind{\nontop{}}(\BarConst{\nontop{}}X)$, there are natural homology equivalences
-\[NA_*\to CA_*\to \ModDegeneracies{A}_*\]
-of which the first is an inclusion, the second is a surjection, and the composite is an isomorphism. Giving the inverse isomorphism could cause difficulty: for any $z\in A_n$, there is a unique degenerate element $b$ such that $z+b\in NA_n$, but one must find this `$b$'.
-
-Fortunately, it happens that the inclusion of the Koszul complex factors through this isomorphism \emph{explicitly}. To understand this, one thinks that an element of the Koszul complex is an element of $\Boverline_{rr}$ which survives to $E^1$ in the length filtration spectral sequence for $\Boverline_*$. However, $d^0$ implements the sum of all the face maps but one, so that any element $z$ of $\Koverline_r$ can be written as the image in $\ModDegeneracies{\Ind{\nontop{}}(\BarConst{\nontop{}}X)}_r$ of a unique expression in $\Ind{\nontop{}}(\BarConst{\nontop{}}X)_r$ of the form
-\[z=\sum_{j}\left[\Q^{i_{j,r}} \middle|\cdots\middle|\Q^{i_{j,1}} \right]x_j\]
-such that 
-\[\sum_{k=1}^{r}d_kz:=\sum_{k=1}^{r-1}\sum_{j}\left[\Q^{i_{j,r}} \middle|\cdots\middle|\Q^{i_{j,k+1}}\Q^{i_{j,k}}\middle|\cdots\middle|\Q^{i_{j,1}} \right]x_j=0\textup{ in }\Boverline_{r-1,r}(X).\]
-However, the fact that we quotient by degenerate elements in forming $\Boverline_*(X)$ is irrelevant to this condition, so that for $k\neq 0$, $d_kz$ is zero in ${\Ind{\nontop{}}(\BarConst{\nontop{}}X)}_{r-1}$, not only in the quotient $\Boverline_{r-1}(X)$, so that $z$ lies in the subcomplex $NB_r$, with no correction `$b$' required. One swaps `$\Q$' for `$P$' when $n=1$.
-
-Thus we've constructed homology isomorphisms, for $X\in\LL{n}$:
-%\[\Koverline_*X\to N(\Ind{\nontop{}}(\BarConst{\nontop{}}(\forget{\nontop{}}X)))\overset{N(\Ind{\nontop{}}(i))}{\to} N(\Ind{\nontop{}}(\forget{\nontop{}}\BarConst{\LL{n}}(X)))\]
-\begin{alignat*}{2}
-\Koverline_*(\forget{\nontop{}}X)
-&\xrightarrow{\hphantom{N(\Ind{\nontop{}}(i))}}
-N(\Ind{\nontop{}}(\BarConst{\nontop{}}(\forget{\nontop{}}X)))_*=:\Boverline_*(\forget{\nontop{}}X)%
-\\
-&\xrightarrow{N(\Ind{\nontop{}}(i))}
-N(\Ind{\nontop{}}(\forget{\nontop{}}\BarConst{\LL{}}(X)))_*\\
-% Left hand side
-% Relation
-&\hphantom{\xrightarrow{{N(\Ind{\nontop{}}(i))}}}\ =
-% Right hand side
-\forget{\GR{}}N(\Ind{\nontop{}}(\BarConst{\LL{}}(X)))_*=:\forget{\GR{}}\Boverline{}_*^\textup{L}(X)
-\end{alignat*}
-Here we've introduced the notation $\Boverline_*^\textup{L}(X)$ for $N(\Ind{\nontop{}}(\BarConst{\LL{}}(X)))_*$, the differential graded partially restricted Lie algebra which calculates the $\PiAlgebra{\PRLie{n}}$ $(\derived\Ind{\nontop{}})X$.
-These two maps are inclusions, so that $\Koverline_*(\forget{\nontop{}}X)$ is a homology-equivalent subcomplex of $\Boverline_*^\textup{L}(X)$. Suppressing the forgetful functors, let 
-\[\jmath:\Koverline_*(X)\to \Boverline_*^\textup{L}(X)\]
-be this composite inclusion. In order to calculate with this larger complex, we'll need to be explicit about the stucture maps in the larger simplicial bar construction $\Ind{\nontop{}}\BarConst{\LL{}}(X)$. Using the natural isomorphism $\Ind{\nontop{}}(\Fr{\LL{n}})W\cong\Fr{\PRLie{n}}W$ for $W\in\GR{n}$, we can write:
-\[(\Ind{\nontop{}}\BarConst{\LL{}}(X))_r=\Fr[out]{\PRLie{n}}\Fr[r]{\LL{n}}\cdots\Fr[1]{\LL{n}} X.\]
-Here, we've %introduced the notation ``$\Boverline^\textup{L}_\bullet$'' for this \emph{large} bar construction, and 
-added subscripts to the various free constructions involved, in order to disambiguate them in what follows. The simplicial structure maps are defined by the following natural transformations:
-\begin{itemize}\squishlist
-\setlength{\parindent}{.25in}
-\item $d_0:(\Ind{\nontop{}}\BarConst{\LL{}}(X))_r\to (\Ind{\nontop{}}\BarConst{\LL{}}(X))_{r-1}$ is induced by $\Fr[1]{\LL{n}}X\to X$;
-\item $d_i:(\Ind{\nontop{}}\BarConst{\LL{}}(X))_r\to (\Ind{\nontop{}}\BarConst{\LL{}}(X))_{r-1}$ is induced by $\Fr[i+1]{\LL{n}}\Fr[i]{\LL{n}}\to \Fr[i]{\LL{n}}$ for $0<i<r$;
-\item $d_r:(\Ind{\nontop{}}\BarConst{\LL{}}(X))_r\to (\Ind{\nontop{}}\BarConst{\LL{}}(X))_{r-1}$ is induced by $\Fr[out]{\PRLie{n}}\Fr[r]{\LL{n}}\to \Fr[out]{\PRLie{n}}$ (which, for $n\geq2$, kills nontop $\Q^i$ terms and identifies the top $\Q$ with $\restn{}$, and when $n=1$, kills all $P$ operations);
-\item $s_i:(\Ind{\nontop{}}\BarConst{\LL{}}(X))_r\to (\Ind{\nontop{}}\BarConst{\LL{}}(X))_{r+1}$ is induced by the unit map of an instance of $\Fr{\LL{n}}$ inserted between $\Fr[i+1]{\LL{n}}$ and $\Fr[i]{\LL{n}}$, for $0\leq i\leq r$.
-\end{itemize}
-The bar notation used in \S\ref{sectionOnUnstableKoszulComplexes} is suitable to describe elements of $\Koverline_*(\forget{\nontop{}}X)$ and $\Boverline_*(\forget{\nontop{}}X)$, but is not rich enough to describe elements of $\Boverline^\textup{L}_*(X)$. Instead, we add subscripts corresponding to those added to the free constructions above. For example, here are two elements of $(\Ind{\nontop{}}\BarConst{\LL{}}(X))_3$ (when $n\geq2$), if $x,y\in X$ are of sufficiently large degrees:
-\[[[x,\Q^3_2y]_3,\Q^5_1x]_{out}\textup{\quad and\quad }\restn[out]{([\Q^4_2\Q^3_1x,y]_3)}.\]
-Then we may describe $\jmath$ simply as the linear extension of the assignment
-\[\left[\Q^{i_{r}} \middle|\cdots\middle|\Q^{i_{1}} \right]x\mapsto\Q^{i_{r}}_r\cdots \Q^{i_{1}}_1x.\]
-
-
-We are now in a position to calculate the $\LL{n+1}$ structure on $(\derived\Ind{\nontop{}})X$ in certain cases, since we can write down chain-level formulae. For $z\in Z\Koverline_p(X)$ and $w\in Z\Koverline_q(X)$ cycles representing classes $\overline{z},\overline{w}\in(\derived\Ind{\nontop{}})X$:
-\begin{itemise}
-\setlength{\parindent}{.25in}
-\item $[\overline{z},\overline{w}]$ is represented by $\sum_{(\alpha,\beta)\in\Shuffles{p}{q}}[s_\beta(\jmath z), s_\alpha(\jmath w)]_{out}\in \Boverline^\textup{L}_{p+q}X$;
-\item $Q^i\overline{z}$ is represented by $\sum_{(\alpha,\beta)\in\HalfShuffles{i}{i}}[s_\beta(\jmath z), s_\alpha(\jmath z)]_{out}\in \Boverline^\textup{L}_{p+i}X$ for $0<i\leq p$; and
-\item $Q^0\overline{z}$ is represented by $\restn[out]{(z)}\in \Boverline^\textup{L}_{p}X$ as long as $Q^0\overline{z}$ is defined, (i.e.\ when not all of $a_n,\ldots,a_2$ are zero, where $\overline{z}\in((\derived_{p}\Ind{\nontop{}})X)_{a_n,\ldots,a_1}$).
-\end{itemise}
-%%%%%%%
-%%%%%%%At this point we need to be explicit about the maps inside the bar construction. Moreover, we'll need notation for elements of $B(\PRLie{n},\LL{n},X)$, and the bar notation we've used so far will not suffice. The bar construction is given by the formula $B_r:=\Fr{\PRLie{n}}\left(\Fr{\LL{n}}\right)^rX$, and we'll add subscripts to the various free constructions here in order to disambiguate them in what follows, writing
-%%%%%%%\[B_r:=\Fr[out]{\PRLie{n}}\Fr[r]{\LL{n}}\cdots\Fr[1]{\LL{n}} X.\]
-%%%%%%%Here, $out$ stands for `outer'. We'll index the faces and degeneracies in the opposite order to the usual one, and inexpensive way to keep notation simple. Thus:
-%%%%%%%\begin{itemize}\squishlist
-%%%%%%%\setlength{\parindent}{.25in}
-%%%%%%%\item $d_0:B_r\to B_{r-1}$ is induced by $\Fr[1]{\LL{n}}X\to X$;
-%%%%%%%\item $d_i:B_r\to B_{r-1}$ is induced by $\Fr[i+1]{\LL{n}}\Fr[i]{\LL{n}}\to \Fr[i]{\LL{n}}$ for $0<i<r$;
-%%%%%%%\item $d_r:B_r\to B_{r-1}$ is induced by $\Fr[out]{\PRLie{n}}\Fr[r]{\LL{n}}\to \Fr[out]{\PRLie{n}}$ (which, for $n\geq2$, kills nontop $\Q^i$ terms and identifies the top $\Q$ with $\restn{}$, and when $n=1$, kills all $P$ operations);
-%%%%%%%\item $s_i:B_r\to B_{r+1}$ is induced by the unit map, after inserting another $\Fr{\LL{n}}$ between $\Fr[i+1]{\LL{n}}$ and $\Fr[i]{\LL{n}}$ , for $0\leq i\leq r$.
-%%%%%%%\end{itemize}
-%%%%%%%
-%%%%%%%
-%%%%%%%We'll also include the subscripts in notation for the elements of $B_r$, for example, here are two elements of $B_3$ (when $n\geq2$), if $x,y\in X$ are of sufficiently large degrees:
-%%%%%%%\[[[x,\Q^3_2y]_3,\Q^5_1x]_{out}\textup{\quad and\quad }\restn[out]{([\Q^4_2\Q^3_1x,y]_3)}.\]
-%%%%%%%%The second expression means, for $x,y\in X$, form $\Q^3_1x\in\Fr{\LL{n}}X$.....
-%%%%%%%Then we may describe $\jmath$ simply as
-%%%%%%%\[\left[\Q^{i_{r}} \middle|\cdots\middle|\Q^{i_{1}} \right]x\mapsto\Q^{i_{r}}_r\cdots \Q^{i_{1}}_1x.\]
-%%%%%%%
-%%%%%%%
-%%%%%%%We are then in a position to calculate the $\LL{n+1}$ structure on $(\derived\Ind{\nontop{}})X$ in certain cases, since we can write down chain-level formulae. For $z\in Z\Koverline_p(X)$ and $w\in Z\Koverline_q(X)$, representing classes $\overline{z},\overline{w}\in(\derived\Ind{\nontop{}})X$:
-%%%%%%%\begin{itemise}
-%%%%%%%\setlength{\parindent}{.25in}
-%%%%%%%\item $[\overline{z},\overline{w}]$ is represented by $\sum_{(\alpha,\beta)\in\Shuffles{p}{q}}[s_\beta(\jmath z), s_\alpha(\jmath w)]_{out}$;
-%%%%%%%\item $Q^i\overline{z}$ is represented by $\sum_{(\alpha,\beta)\in\HalfShuffles{i}{i}}[s_\beta(\jmath z), s_\alpha(\jmath z)]_{out}$ for $0<i\leq p$; and
-%%%%%%%\item $Q^0\overline{z}$ is represented by $\restn[out]{(z)}$ if not all of $a_n,\ldots,a_2$ are zero, where $\overline{z}\in((\derived_{p}\Ind{\nontop{}})X)_{a_n,\ldots,a_1}$.
-%%%%%%%\end{itemise}
+%%%%%\subsection{Chain level operations and the Koszul complex}
+%%%%%
+%%%%%For this discussion, fix an object $X\in\LL{n}$.
+%%%%%The Koszul complex $\Koverline_*(X)$, as constructed in \S\ref{sectionOnUnstableKoszulComplexes}, is a subcomplex of the reduced bar construction $\Boverline_*:= \ModDegeneracies{\Ind{\nontop{}}(\BarConst{\nontop{}}X)}_*$, thought of as the quotient of the unreduced bar construction by the subcomplex of degenerate simplices. The operations defined in \S\ref{SectionHtpyOpnsOnLieAlgs} are defined, at chain level, in the Moore complex of a simplicial Lie algebra, considered as a subcomplex. These two definitions of the Moore complex are isomorphic: for any simplicial abelian group $A$, in this case $A=\Ind{\nontop{}}(\BarConst{\nontop{}}X)$, there are natural homology equivalences
+%%%%%\[NA_*\to CA_*\to \ModDegeneracies{A}_*\]
+%%%%%of which the first is an inclusion, the second is a surjection, and the composite is an isomorphism. Giving the inverse isomorphism could cause difficulty: for any $z\in A_n$, there is a unique degenerate element $b$ such that $z+b\in NA_n$, but one must find this `$b$'.
+%%%%%
+%%%%%Fortunately, it happens that the inclusion of the Koszul complex factors through this isomorphism \emph{explicitly}. To understand this, one thinks that an element of the Koszul complex is an element of $\Boverline_{rr}$ which survives to $E^1$ in the length filtration spectral sequence for $\Boverline_*$. However, $d^0$ implements the sum of all the face maps but one, so that any element $z$ of $\Koverline_r$ can be written as the image in $\ModDegeneracies{\Ind{\nontop{}}(\BarConst{\nontop{}}X)}_r$ of a unique expression in $\Ind{\nontop{}}(\BarConst{\nontop{}}X)_r$ of the form
+%%%%%\[z=\sum_{j}\left[\Q^{i_{j,r}} \middle|\cdots\middle|\Q^{i_{j,1}} \right]x_j\]
+%%%%%such that 
+%%%%%\[\sum_{k=1}^{r}d_kz:=\sum_{k=1}^{r-1}\sum_{j}\left[\Q^{i_{j,r}} \middle|\cdots\middle|\Q^{i_{j,k+1}}\Q^{i_{j,k}}\middle|\cdots\middle|\Q^{i_{j,1}} \right]x_j=0\textup{ in }\Boverline_{r-1,r}(X).\]
+%%%%%However, the fact that we quotient by degenerate elements in forming $\Boverline_*(X)$ is irrelevant to this condition, so that for $k\neq 0$, $d_kz$ is zero in ${\Ind{\nontop{}}(\BarConst{\nontop{}}X)}_{r-1}$, not only in the quotient $\Boverline_{r-1}(X)$, so that $z$ lies in the subcomplex $NB_r$, with no correction `$b$' required. One swaps `$\Q$' for `$P$' when $n=1$.
+%%%%%
+%%%%%Thus we've constructed homology isomorphisms, for $X\in\LL{n}$:
+%%%%%%\[\Koverline_*X\to N(\Ind{\nontop{}}(\BarConst{\nontop{}}(\forget{\nontop{}}X)))\overset{N(\Ind{\nontop{}}(i))}{\to} N(\Ind{\nontop{}}(\forget{\nontop{}}\BarConst{\LL{n}}(X)))\]
+%%%%%\begin{alignat*}{2}
+%%%%%\Koverline_*(\forget{\nontop{}}X)
+%%%%%&\xrightarrow{\hphantom{N(\Ind{\nontop{}}(i))}}
+%%%%%N(\Ind{\nontop{}}(\BarConst{\nontop{}}(\forget{\nontop{}}X)))_*=:\Boverline_*(\forget{\nontop{}}X)%
+%%%%%\\
+%%%%%&\xrightarrow{N(\Ind{\nontop{}}(i))}
+%%%%%N(\Ind{\nontop{}}(\forget{\nontop{}}\BarConst{\LL{}}(X)))_*\\
+%%%%%% Left hand side
+%%%%%% Relation
+%%%%%&\hphantom{\xrightarrow{{N(\Ind{\nontop{}}(i))}}}\ =
+%%%%%% Right hand side
+%%%%%\forget{\GR{}}N(\Ind{\nontop{}}(\BarConst{\LL{}}(X)))_*=:\forget{\GR{}}\Boverline{}_*^\textup{L}(X)
+%%%%%\end{alignat*}
+%%%%%Here we've introduced the notation $\Boverline_*^\textup{L}(X)$ for $N(\Ind{\nontop{}}(\BarConst{\LL{}}(X)))_*$, the differential graded partially restricted Lie algebra which calculates the $\PiAlgebra{\PRLie{n}}$ $(\derived\Ind{\nontop{}})X$.
+%%%%%These two maps are inclusions, so that $\Koverline_*(\forget{\nontop{}}X)$ is a homology-equivalent subcomplex of $\Boverline_*^\textup{L}(X)$. Suppressing the forgetful functors, let 
+%%%%%\[\jmath:\Koverline_*(X)\to \Boverline_*^\textup{L}(X)\]
+%%%%%be this composite inclusion. In order to calculate with this larger complex, we'll need to be explicit about the stucture maps in the larger simplicial bar construction $\Ind{\nontop{}}\BarConst{\LL{}}(X)$. Using the natural isomorphism $\Ind{\nontop{}}(\Fr{\LL{n}})W\cong\Fr{\PRLie{n}}W$ for $W\in\GR{n}$, we can write:
+%%%%%\[(\Ind{\nontop{}}\BarConst{\LL{}}(X))_r=\Fr[out]{\PRLie{n}}\Fr[r]{\LL{n}}\cdots\Fr[1]{\LL{n}} X.\]
+%%%%%Here, we've %introduced the notation ``$\Boverline^\textup{L}_\bullet$'' for this \emph{large} bar construction, and 
+%%%%%added subscripts to the various free constructions involved, in order to disambiguate them in what follows. The simplicial structure maps are defined by the following natural transformations:
+%%%%%\begin{itemize}\squishlist
+%%%%%\setlength{\parindent}{.25in}
+%%%%%\item $d_0:(\Ind{\nontop{}}\BarConst{\LL{}}(X))_r\to (\Ind{\nontop{}}\BarConst{\LL{}}(X))_{r-1}$ is induced by $\Fr[1]{\LL{n}}X\to X$;
+%%%%%\item $d_i:(\Ind{\nontop{}}\BarConst{\LL{}}(X))_r\to (\Ind{\nontop{}}\BarConst{\LL{}}(X))_{r-1}$ is induced by $\Fr[i+1]{\LL{n}}\Fr[i]{\LL{n}}\to \Fr[i]{\LL{n}}$ for $0<i<r$;
+%%%%%\item $d_r:(\Ind{\nontop{}}\BarConst{\LL{}}(X))_r\to (\Ind{\nontop{}}\BarConst{\LL{}}(X))_{r-1}$ is induced by $\Fr[out]{\PRLie{n}}\Fr[r]{\LL{n}}\to \Fr[out]{\PRLie{n}}$ (which, for $n\geq2$, kills nontop $\Q^i$ terms and identifies the top $\Q$ with $\restn{}$, and when $n=1$, kills all $P$ operations);
+%%%%%\item $s_i:(\Ind{\nontop{}}\BarConst{\LL{}}(X))_r\to (\Ind{\nontop{}}\BarConst{\LL{}}(X))_{r+1}$ is induced by the unit map of an instance of $\Fr{\LL{n}}$ inserted between $\Fr[i+1]{\LL{n}}$ and $\Fr[i]{\LL{n}}$, for $0\leq i\leq r$.
+%%%%%\end{itemize}
+%%%%%The bar notation used in \S\ref{sectionOnUnstableKoszulComplexes} is suitable to describe elements of $\Koverline_*(\forget{\nontop{}}X)$ and $\Boverline_*(\forget{\nontop{}}X)$, but is not rich enough to describe elements of $\Boverline^\textup{L}_*(X)$. Instead, we add subscripts corresponding to those added to the free constructions above. For example, here are two elements of $(\Ind{\nontop{}}\BarConst{\LL{}}(X))_3$ (when $n\geq2$), if $x,y\in X$ are of sufficiently large degrees:
+%%%%%\[[[x,\Q^3_2y]_3,\Q^5_1x]_{out}\textup{\quad and\quad }\restn[out]{([\Q^4_2\Q^3_1x,y]_3)}.\]
+%%%%%Then we may describe $\jmath$ simply as the linear extension of the assignment
+%%%%%\[\left[\Q^{i_{r}} \middle|\cdots\middle|\Q^{i_{1}} \right]x\mapsto\Q^{i_{r}}_r\cdots \Q^{i_{1}}_1x.\]
+%%%%%
+%%%%%
+%%%%%We are now in a position to calculate the $\LL{n+1}$ structure on $(\derived\Ind{\nontop{}})X$ in certain cases, since we can write down chain-level formulae. For $z\in Z\Koverline_p(X)$ and $w\in Z\Koverline_q(X)$ cycles representing classes $\overline{z},\overline{w}\in(\derived\Ind{\nontop{}})X$:
+%%%%%\begin{itemise}
+%%%%%\setlength{\parindent}{.25in}
+%%%%%\item $[\overline{z},\overline{w}]$ is represented by $\sum_{(\alpha,\beta)\in\Shuffles{p}{q}}[s_\beta(\jmath z), s_\alpha(\jmath w)]_{out}\in \Boverline^\textup{L}_{p+q}X$;
+%%%%%\item $Q^i\overline{z}$ is represented by $\sum_{(\alpha,\beta)\in\HalfShuffles{i}{i}}[s_\beta(\jmath z), s_\alpha(\jmath z)]_{out}\in \Boverline^\textup{L}_{p+i}X$ for $0<i\leq p$; and
+%%%%%\item $Q^0\overline{z}$ is represented by $\restn[out]{(z)}\in \Boverline^\textup{L}_{p}X$ as long as $Q^0\overline{z}$ is defined, (i.e.\ when not all of $a_n,\ldots,a_2$ are zero, where $\overline{z}\in((\derived_{p}\Ind{\nontop{}})X)_{a_n,\ldots,a_1}$).
+%%%%%\end{itemise}
+%%%%%%%%%%%%
+%%%%%%%%%%%%At this point we need to be explicit about the maps inside the bar construction. Moreover, we'll need notation for elements of $B(\PRLie{n},\LL{n},X)$, and the bar notation we've used so far will not suffice. The bar construction is given by the formula $B_r:=\Fr{\PRLie{n}}\left(\Fr{\LL{n}}\right)^rX$, and we'll add subscripts to the various free constructions here in order to disambiguate them in what follows, writing
+%%%%%%%%%%%%\[B_r:=\Fr[out]{\PRLie{n}}\Fr[r]{\LL{n}}\cdots\Fr[1]{\LL{n}} X.\]
+%%%%%%%%%%%%Here, $out$ stands for `outer'. We'll index the faces and degeneracies in the opposite order to the usual one, and inexpensive way to keep notation simple. Thus:
+%%%%%%%%%%%%\begin{itemize}\squishlist
+%%%%%%%%%%%%\setlength{\parindent}{.25in}
+%%%%%%%%%%%%\item $d_0:B_r\to B_{r-1}$ is induced by $\Fr[1]{\LL{n}}X\to X$;
+%%%%%%%%%%%%\item $d_i:B_r\to B_{r-1}$ is induced by $\Fr[i+1]{\LL{n}}\Fr[i]{\LL{n}}\to \Fr[i]{\LL{n}}$ for $0<i<r$;
+%%%%%%%%%%%%\item $d_r:B_r\to B_{r-1}$ is induced by $\Fr[out]{\PRLie{n}}\Fr[r]{\LL{n}}\to \Fr[out]{\PRLie{n}}$ (which, for $n\geq2$, kills nontop $\Q^i$ terms and identifies the top $\Q$ with $\restn{}$, and when $n=1$, kills all $P$ operations);
+%%%%%%%%%%%%\item $s_i:B_r\to B_{r+1}$ is induced by the unit map, after inserting another $\Fr{\LL{n}}$ between $\Fr[i+1]{\LL{n}}$ and $\Fr[i]{\LL{n}}$ , for $0\leq i\leq r$.
+%%%%%%%%%%%%\end{itemize}
+%%%%%%%%%%%%
+%%%%%%%%%%%%
+%%%%%%%%%%%%We'll also include the subscripts in notation for the elements of $B_r$, for example, here are two elements of $B_3$ (when $n\geq2$), if $x,y\in X$ are of sufficiently large degrees:
+%%%%%%%%%%%%\[[[x,\Q^3_2y]_3,\Q^5_1x]_{out}\textup{\quad and\quad }\restn[out]{([\Q^4_2\Q^3_1x,y]_3)}.\]
+%%%%%%%%%%%%%The second expression means, for $x,y\in X$, form $\Q^3_1x\in\Fr{\LL{n}}X$.....
+%%%%%%%%%%%%Then we may describe $\jmath$ simply as
+%%%%%%%%%%%%\[\left[\Q^{i_{r}} \middle|\cdots\middle|\Q^{i_{1}} \right]x\mapsto\Q^{i_{r}}_r\cdots \Q^{i_{1}}_1x.\]
+%%%%%%%%%%%%
+%%%%%%%%%%%%
+%%%%%%%%%%%%We are then in a position to calculate the $\LL{n+1}$ structure on $(\derived\Ind{\nontop{}})X$ in certain cases, since we can write down chain-level formulae. For $z\in Z\Koverline_p(X)$ and $w\in Z\Koverline_q(X)$, representing classes $\overline{z},\overline{w}\in(\derived\Ind{\nontop{}})X$:
+%%%%%%%%%%%%\begin{itemise}
+%%%%%%%%%%%%\setlength{\parindent}{.25in}
+%%%%%%%%%%%%\item $[\overline{z},\overline{w}]$ is represented by $\sum_{(\alpha,\beta)\in\Shuffles{p}{q}}[s_\beta(\jmath z), s_\alpha(\jmath w)]_{out}$;
+%%%%%%%%%%%%\item $Q^i\overline{z}$ is represented by $\sum_{(\alpha,\beta)\in\HalfShuffles{i}{i}}[s_\beta(\jmath z), s_\alpha(\jmath z)]_{out}$ for $0<i\leq p$; and
+%%%%%%%%%%%%\item $Q^0\overline{z}$ is represented by $\restn[out]{(z)}$ if not all of $a_n,\ldots,a_2$ are zero, where $\overline{z}\in((\derived_{p}\Ind{\nontop{}})X)_{a_n,\ldots,a_1}$.
+%%%%%%%%%%%%\end{itemise}
 \subsection{Lie brackets on $(\derived\Ind{\nontop{}})X$ are trivial}
 \begin{prop}
 Suppose that $z\in Z\Koverline_p(X)$ and $w\in Z\Koverline_q(X)$ are cycles. Then on homotopy classes:% representing classes $\overline{x}$ and $\overline{y}$. Then
@@ -1731,7 +1811,9 @@ Now consider a given shuffle $(\alpha,\beta)$. If, say, $\alpha$ contains neithe
 If $\alpha$ and $\beta$ contain one each of $i$ and $i-1$, then let $(\gamma,\epsilon)$ be the shuffle obtained from $(\alpha,\beta)$ by swapping the positions of $i$ and $i-1$. But then, $d_is_\beta=d_is_{\epsilon}$, and $d_is_\alpha=d_is_{\gamma}$, so that the summands corresponding to $(\alpha,\beta)$ and to $(\gamma,\epsilon)$ cancel with each other.
 \end{proof}
 \subsection{$\Q^k$ operations on $(\derived\Ind{\nontop{}})X$ for $k\geq1$}
+\begin{Omitted}
 In the previous section, we produced an element $a\in B_{p+q+1}(\Fr{\PRLie{n}},\Fr{\LL{n}},X)$, and showed that it was actually an element of $NB_{p+q+1}$, whose boundary was represented the homotopy class we were trying to nullhomotope. In the next two sections, we will choose such an $a$ again, but in some cases, the top \emph{two} face maps will be nonzero on $a$. Thus we will move outside of the normalised complex to construct a homotopy between two nonzero elements. This makes no difference to our calculations, especially since we in the end will always map down to $\Koverline_*$, which doesn't see the distinction anyway.
+\end{Omitted}
 \begin{prop}
 Suppose that $z\in Z\Koverline_p(X)_{a_n,\ldots,a_1}$. Then:
 \begin{itemize}\squishlist
@@ -1741,7 +1823,7 @@ Suppose that $z\in Z\Koverline_p(X)_{a_n,\ldots,a_1}$. Then:
 \item if $n=1$, write $z\in Z\Koverline_p(X)_{a_1}$ as a sum 
 \[z=\sum_{j}P(I^{(j)})x^{(j)}\]
 where each $I^{(j)}=(i_p^{(j)},\ldots,i_1^{(j)})$ is $\delta$-admissible with $\minDimP(I^{(j)})\leq |x^{(j)}|$. Then
-\[\Q^1\overline{z}\textup{ is represented by }\sum_{j}P((a_{n},i_p^{(j)},\ldots,i_1^{(j)}))x^{(j)}.\]
+\[\Q^1\overline{z}\textup{ is represented by }\sum_{j}P((a_{1},i_p^{(j)},\ldots,i_1^{(j)}))x^{(j)}.\]
 %%\item  if $n=1$, and $P(I)y$ is a basis element (which is also a cycle - fix up this statement) for $\Koverline_*X$ (so that $I=(i_\ell,\ldots,i_1)$ is $\delta$-admissible, and $\minDimP(I)\leq |y|$), with $\ell\geq1$, we have:
 %%\[\LambdaOp^1(P(I)y)=P((|P^{i_\ell}\cdots P^{i_1}y|,i_{\ell},\ldots,i_1))y.\]
 That is, $\Q^1$ adjoins a top $P$ operation to the left of each sequence $I^{(j)}$.
@@ -1750,7 +1832,7 @@ That is, $\Q^1$ adjoins a top $P$ operation to the left of each sequence $I^{(j)
 \begin{proof}
 The class $\Q^k\overline{z}$ is represented by $\sum_{(\alpha,\beta)\in\HalfShuffles{k}{k}}[s_\beta(\jmath z), s_\alpha(\jmath z)]_{out}$. As in the previous proof, we use the element
 \[a:=\sum_{(\alpha,\beta)\in\HalfShuffles{k}{k}}[s_{p+k}s_\beta(\jmath z), s_{p+k}s_\alpha(\jmath z)]_{p+k+1}.\]
-The same argument shows that $d_{p+k+1}a$ represents $\Q^k\overline{z}$, and that $d_{p+k}a=0$. We are left to calculate $d_ia$ for $0\leq i<p+k$, where 
+The same argument shows that $d_{p+k+1}a$ is the above representative for $\Q^k\overline{z}$, and that $d_{p+k}a=0$. We are left to calculate $d_ia$ for $0\leq i<p+k$, where 
 \[d_ia:=\sum_{(\alpha,\beta)\in\HalfShuffles{k}{k}}[s_{p+k-1}d_is_\beta(\jmath z), s_{p+k}d_is_\alpha(\jmath z)]_{p+k}\]
 Now if $i\geq 2k$, at least one of $\alpha$ and $\beta$, say $\alpha$, will not include either $i$ or $i-1$, so that $d_is_\alpha(\jmath z)=s_{\alpha'}d_{i'}(\jmath z)=0$, as $\jmath z$ is a cycle. Thus, we are left to consider the cases $0\leq i< 2k$.
 
