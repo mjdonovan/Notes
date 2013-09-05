@@ -7,7 +7,7 @@
 
 \excludeversion{ConversationWithHaynes_InclusionOfBarConstructions}
 \excludeversion{GrothendieckSpectralSequencestake2}
-%\def\excludeversion#1{\includeversion{#1}}
+\def\excludeversion#1{\includeversion{#1}}
 \excludeversion{Frontmatters}
 \excludeversion{Endmatter}
 \excludeversion{AdamsDerivation}
@@ -1581,8 +1581,6 @@ Here, the parenthetical term vanishes in $\Koverline$ --- it's there in case we'
 \begin{LieLambdaStructureOnKoszul}
 \section{Structure on the derived functors $(\derived\Ind{\nontop{}})X$} 
 \subsection{Chain level operations and the Koszul complex} \label{SectionHtpyOpnsOnLieAlgs}
-
-
 For any simplicial abelian group $A$, %in this case $A=\Ind{\nontop{}}(\BarConst{\nontop{}}X)$, 
 there are three associated chain complexes calculating $\pi_*A$, connected by natural homology equivalences
 \[NA_*\to CA_*\to \ModDegeneracies{A}_*\]
@@ -1832,29 +1830,36 @@ That is, $\Q^1$ adjoins a top $P$ operation to the left of each sequence $I^{(j)
 \begin{proof}
 The class $\Q^k\overline{z}$ is represented by $\sum_{(\alpha,\beta)\in\HalfShuffles{k}{k}}[s_\beta(\jmath z), s_\alpha(\jmath z)]_{out}$. As in the previous proof, we use the element
 \[a:=\sum_{(\alpha,\beta)\in\HalfShuffles{k}{k}}[s_{p+k}s_\beta(\jmath z), s_{p+k}s_\alpha(\jmath z)]_{p+k+1}.\]
-The same argument shows that $d_{p+k+1}a$ is the above representative for $\Q^k\overline{z}$, and that $d_{p+k}a=0$. We are left to calculate $d_ia$ for $0\leq i<p+k$, where 
-\[d_ia:=\sum_{(\alpha,\beta)\in\HalfShuffles{k}{k}}[s_{p+k-1}d_is_\beta(\jmath z), s_{p+k-1}d_is_\alpha(\jmath z)]_{p+k}\]
-Now if $i\geq 2k$, at least one of $\alpha$ and $\beta$, say $\alpha$, will not include either $i$ or $i-1$, so that $d_is_\alpha(\jmath z)=s_{\alpha'}d_{i'}(\jmath z)=0$, as $\jmath z$ is a cycle. Thus, we are left to consider the cases $0\leq i< 2k$.
+The same argument shows that $d_{p+k+1}a$ is the above representative for $\Q^k\overline{z}$, and that $d_{p+k}a=0$. We are left to calculate $d_ia$ for $0\leq i<p+k$, that is
+\[d_ia=\sum_{(\alpha,\beta)\in\HalfShuffles{k}{k}}[s_{p+k-1}d_is_\beta(\jmath z), s_{p+k-1}d_is_\alpha(\jmath z)]_{p+k}\]
+Now if $i\geq 2k$ or $i=0$, at least one of $\alpha$ and $\beta$, say $\alpha$, will not include either $i$ or $i-1$, so that $d_is_\alpha(\jmath z)=s_{\alpha'}d_{i'}(\jmath z)=0$, as $\jmath z$ is a cycle in $ZN\Ind{\nontop{}}\BarConst{\LL{}}X$. Thus, we are left to consider the cases $0< i< 2k$.
 
-In the previous proof, the method in this range was to construct a fixed-point free involution (`swap $i$ and $i-1$') of the set indexing the sum, under which the summands were invariant. The same involution works here, as long as it preserves the subset $\HalfShuffles{i}{i}$ of $\Shuffles{i}{i}$, which it does when $2\leq i<2k$. The $i=0$ case is moot, as no shuffle $(\alpha,\beta)$ involves $-1$.
+In the previous proof, the method in this range was to construct a fixed-point free involution (`swap $i$ and $i-1$') of the set indexing the sum, under which the summands were invariant. The same involution works here, as long as it preserves the subset $\HalfShuffles{i}{i}$ of $\Shuffles{i}{i}$, which it does when $2\leq i<2k$.
 
 %Again the only nonzero summands correspond to pairs $(\alpha,\beta)$ in which each of $\alpha$ and $\beta$ contain one each of $i$ and $i-1$. If $i=0$ there are obviously no such pairs. If $i\geq2$, the same involution of the shuffles preserves the subset $\HalfShuffles{i}{i}$ of $\Shuffles{i}{i}$, and so gives the cancellation desired.
 
-The final case is $d_1$, in which case, the involution of $\Shuffles{i}{i}$ used above does not preserve the subset $\HalfShuffles{i}{i}$. Fortunately, since our summand uses $z$ twice, not both $z$ and $w$, the summands are invariant under a new involution, `swap $\alpha$ and $\beta$'. The composite of these two involutions preserves $\HalfShuffles{i}{i}$, and is fixed-point free unless $k=1$. In case $k=1$, $\HalfShuffles{i}{i}$ contains only $((1),(2))$, and we are left with a single term:
+The final case is $d_1$, in which case, the involution of $\Shuffles{i}{i}$ used above does not preserve the subset $\HalfShuffles{i}{i}$. Fortunately, since our summand uses $z$ twice, not both $z$ and $w$, the summands are invariant under a new involution, `swap $\alpha$ and $\beta$'. The composite of these two involutions preserves $\HalfShuffles{i}{i}$, and is fixed-point free unless $k=1$, proving, for all $n$, that the operations $\Q^k$ are zero on homotopy unless $k=1$.
+
+In case $k=1$, $\HalfShuffles{i}{i}$ contains only $((1),(2))$, and we are left with a single term:
 \[d_1a=[s_{p}d_1s_0(\jmath z), s_{p}d_1s_1(\jmath z)]_{p+2}=[s_{p}(\jmath z), s_{p}(\jmath z)]_{p+1}=\begin{cases}
 0,&\textup{if }n\geq2;\\
 P^{a_1}_{p+1}s_{p}(\jmath z),&\textup{if }n=1,
 %\\,&\textup{if }
 \end{cases}
-.\]
-as self-squares in $\LL{n}$ are zero when $n\geq2$, and equal the top $P$ operation when $n=1$. As the top $P$ operation is linear, in the $n=1$ case $d_1a$ is then the result of adding a $P^{a_1}$ to the front of every bar involved in the sum defining $z$. Recall that this sum is not just indexed over $j$, but rather,
-\[z:=\sum_j\Bigl(\BarMonomial{I^{(j)}}{\textbf{1}}{x^{(j)}}+\sum_{\substack{\produces{K}{I^{(j)}}{\delta}\\\minDimP(K)\leq|x^{(j)}|}}\BarMonomial{K}{\textbf{1}}{x^{(j)}}\Bigr)\]
-using the notation from the description of \textbf{Priddy's algorithm}, and writing $\textbf{1}:=(1,\ldots,1)$. 
+\]
+as self-brackets in $\LL{n}$ are zero when $n\geq2$, and equal the top $P$ operation when $n=1$. As the top $P$ operation is linear, in the $n=1$ case $d_1a$ is then the result of adding a $P^{a_1}$ to the front of every bar involved in the sum defining $z$, so that
+\[d_1a:=\sum_j\left(\BarMonomial{(a_1)\star I^{(j)}}{\textbf{1}}{x^{(j)}}+\sum_{\substack{\produces{K}{I^{(j)}}{\delta}\\\minDimP(K)\leq|x^{(j)}|}}\BarMonomial{(a_1)\star K}{\textbf{1}}{x^{(j)}}\right)\]
+Where we use the notation from proposition \ref{PropDescnOfReducedBarConstruction}, and write $\textbf{1}:=(1,\ldots,1)$.
 
-
-Thus
-\[d_1a:=\sum_j\left(\BarMonomial{(a_1)\star I^{(j)}}{\textbf{1}}{x^{(j)}}+\sum_{\produces{K}{I^{(j)}}{\delta}}\BarMonomial{(a_1)\star K}{\textbf{1}}{x^{(j)}}\right)\]
-where $\star$ denotes concatenation. None of the $(a_1)\star K$ could hope to be $\delta$-admissible, but all of the $(a_1)\star I^{(j)}$ \emph{are} $\delta$-admissible, simply as $P^{a_1}$ is a top operation. Thus, the image of $d_1a$ in $\Boverline_*$ can be none other than that which we propose.
+Thus we've seen that $\Q^1\overline{z}$ is represented in $C(\Ind{\nontop{}}(\BarConst{\LL{}}(X)))_*$ by the cycle $d_1a$, but $d_1a$ actually lives in the subcomplex $C(\Ind{\nontop{}}(\BarConst{\nontop{}}(X)))_*$. Its image in the quotient $\Boverline_*(X)_{p+1,p+1}$ is a cycle, which as $X$ is trivial, must be in the image of $\Koverline_*(X)_{p+1}$. To determine its unique preimage in $\Koverline_*(X)_{p+1}$, one only needs to consider those monomials in which the underlying sequence is $\delta$-admissible, and amoungst our formula for $d_1a$, there are only the $(a_1)\star I^{(j)}$.
+%%%%Recall that this sum is not just indexed over $j$, but rather,
+%%%%\[z:=\sum_j\Bigl(\BarMonomial{I^{(j)}}{\textbf{1}}{x^{(j)}}+\sum_{\substack{\produces{K}{I^{(j)}}{\delta}\\\minDimP(K)\leq|x^{(j)}|}}\BarMonomial{K}{\textbf{1}}{x^{(j)}}\Bigr)\]
+%%%%using the notation from the description of \textbf{Priddy's algorithm}, and writing $\textbf{1}:=(1,\ldots,1)$. 
+%%%%
+%%%%
+%%%%Thus
+%%%%\[d_1a:=\sum_j\left(\BarMonomial{(a_1)\star I^{(j)}}{\textbf{1}}{x^{(j)}}+\sum_{\produces{K}{I^{(j)}}{\delta}}\BarMonomial{(a_1)\star K}{\textbf{1}}{x^{(j)}}\right)\]
+%%%%where $\star$ denotes concatenation. None of the $(a_1)\star K$ could hope to be $\delta$-admissible, but all of the $(a_1)\star I^{(j)}$ \emph{are} $\delta$-admissible, simply as $P^{a_1}$ is a top operation. Thus, the image of $d_1a$ in $\Boverline_*$ can be none other than that which we propose.
 %
 % also over all the $J$ such that $\produces{J}{I^{(j)}}{\delta}$. After making these concatenations, the bars which are $\delta$-admissible are exactly those which are of the form 
 %\[d_1a=P^{a_1}_{p+1}s_{p}(\jmath z)=\sum_{j}\sum_{\produces{K}{I^{(j)}}{\delta}}P^{a_1}_{p+1}s_{p}(\jmath z)\]
@@ -1869,8 +1874,8 @@ Assume for this section that $n\geq2$, so that objects of $\LL{n+1}$ support a $
 Suppose that $z\in Z\Koverline_p(X)_{a_n,\ldots,a_1}$, where not all of $a_n,\ldots,a_2$ are zero. 
 \begin{itemise}
 \setlength{\parindent}{.25in}
-\item If $p>0$, $Q^0\overline{z}$ is represented by the cycle $\Q^{a_n}_p\jmath z$ in the bar construction $NB_p(\Fr{\PRLie{n}},\Fr{\LL{n}},X)$.
-\item If $p=0$, $Q^0\overline{z}$ is represented by the cycle $\Q^{a_n}z$, as calculated in $X=Z\Koverline_0(X)$.% in the bar construction $NB_p(\Fr{\PRLie{n}},\Fr{\LL{n}},X)$
+\item If $p>0$, $Q^0\overline{z}$ is represented by the cycle $\Q^{a_n}_p\jmath z$ in $C(\Ind{\nontop{}}\BarConst{\LL{}}X)_*$. %the bar construction $NB_p(\Fr{\PRLie{n}},\Fr{\LL{n}},X)$.
+\item If $p=0$, $Q^0\overline{z}$ is represented by the cycle $\Q^{a_n}z$, as calculated in $X$.%=Z\Koverline_0(X)$.% in the bar construction $NB_p(\Fr{\PRLie{n}},\Fr{\LL{n}},X)$
 \end{itemise}
 \end{lem}
 \begin{proof}
@@ -1893,9 +1898,9 @@ The second statement follows from the first, as whenever $\produces{J}{I}{\SqShi
 
 We've seen that $\Q^0\overline{z}$ is represented by the cycle
 \[\sum_{j}\Q^{a_n}_p\Q^{i^{{(j)}}_p}_p\cdots \Q^{i^{{(j)}}_1}_1x^{(j)}\]
-in the bar construction $N{B_*}(\PRLie{n},\LL{n},X)$. This cycle is the image of a cycle in $NB_*(\forget{\GR{}},\nontop{n},X)$ which, after mapping down to the quotient by degenerate simplices, we dare write as:
+in the bar construction $C(\Ind{\nontop{}}\BarConst{\LL{}}X)_*$. This cycle is the image of a cycle in $C(\Ind{\nontop{}}\BarConst{\nontop{}}X)_*$ which, after mapping down to the quotient by degenerate simplices, we dare write as:
 \[\sum_{j}\left[\Q^{a_n}\Q^{i^{{(j)}}_p}\middle|\cdots \middle|\Q^{i^{{(j)}}_1}\right]x^{(j)}\in\Boverline_{p,p+1}.\]
-Now in order to compress this into the Koszul complex, we must apply \textbf{Priddy's algorithm}. But one observes readily from the $\Q$-Adem relation that if $\produces{(i,j)}{(i',j')}{\Q}$, then $j'>j$, so that as we perform \textbf{Priddy's algorithm}, we only ever decrease the index of the final $\Q$ appearing in each bar. Then the hypothesis on the $x^{{j}}$ guarantees that as we run the algorithm, every term that ends up in $\Boverline_{p,p}$ willl vanish. Thus \textbf{Priddy's algorithm} constructs a null-homotopy.
+Now in order to compress this into the Koszul complex, we must apply \textbf{Priddy's algorithm}. But one observes readily that if $\produces{(i,j)}{(i',j')}{\Q}$, then $j'>j$, so that as we perform \textbf{Priddy's algorithm}, we never decrease the index of the final $\Q$ appearing in each bar. Then the hypothesis on the $x^{{j}}$ guarantees that as we run the algorithm, every term that ends up in $\Boverline_{p,p}$ willl vanish. Thus \textbf{Priddy's algorithm} constructs a null-homotopy.
 \end{proof}
 
 \end{LieLambdaStructureOnKoszul}
