@@ -1,0 +1,335 @@
+% !TEX root = z_output/_simpAlgsTalk.tex
+\documentclass{beamer}
+\usepackage{etex}
+\newcommand{\BEAMERMODE}{}
+\input{../macros.tex}
+\usetikzlibrary{arrows,positioning}
+\usetikzlibrary{decorations.markings}
+\usetikzlibrary{calc}
+\tikzset{
+ >=stealth',
+ shorten <=-5pt,
+ shorten >=-5pt,
+ shape=circle
+}
+\usepackage{centernot}
+
+\newcommand{\tallstrut}{\rule[-.5em]{0pt}{1.75em}}
+\newcommand{\TF}{\raisebox{.091em}{$\therefore$}\,}
+\newcommand\ST{\rule[-.25em]{0pt}{1.25em}}
+\newcommand{\dist}{\ell}
+\newcommand{\cartesianness}{\textup{cart}}
+\excludeversion{push vs pull}
+
+\def\excludeversion#1{\includeversion{#1}}
+\excludeversion{partial derivatives}
+\excludeversion{Iterated Lipschitz conditions}
+\excludeversion{distances in Top}
+\excludeversion{functors appear}
+\excludeversion{Excisivity and Analyticity}
+\includeversion{II.1.6}
+\excludeversion{II.1.20}
+\excludeversion{II.1.22}
+\excludeversion{III.1.4}
+\excludeversion{III.1.5}
+\excludeversion{III.1.13}
+
+
+\usecolortheme{orchid}
+
+
+
+
+
+\begin{document}
+\title{Calc 101}   
+\author{Michael Donovan} 
+\date{\today} 
+%\frame{\titlepage} 
+%\frame{\frametitle{Table of contents}\tableofcontents} 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\section{Partial Derivatives 1} 
+%\begin{partial derivatives}
+\frame{\frametitle{simplicial algebras} 
+\begin{alignat*}{2}
+\calC
+&=
+\textup{nonunital commutative algebras which are $\F_2$-modules}\pause
+\\
+% Left hand side
+% Relation
+&
+% Right hand side
+\uncover<2->{\cong\textup{unital commutative algebras under and over $\F_2$}}%
+% Comment
+\end{alignat*}
+\uncover<3->{$s\calC$ is a closed model category.} \uncover<4->{$f:X_{\bullet}\to Y_\bullet$ is:
+\begin{itemise}
+\setlength{\parindent}{.25in}
+\item 
+a weak equivalence
+%$\xymatrix@1@R=4mm{
+%X_\bullet
+%\ar[r]^-{\sim}
+%&%r1c1
+%Y_\bullet%r1c2
+%}$
+\emph{iff} $\pi_*(f)$ is an iso
+%$\xymatrix@1@R=4mm{
+%\pi_*X
+%\ar[r]^-{\cong}
+%&%r1c1
+%\pi_*Y%r1c2
+%}$ 
+\item 
+%$\xymatrix@1@R=4mm{
+%X_\bullet
+%\ar@{->>}[r]
+%&%r1c1
+%Y_\bullet%r1c2
+%}$
+%\emph{iff}
+a fibration
+\emph{iff} 
+$f$ is surjective on basepoint components 
+%\item 
+%$\xymatrix@1@R=4mm{
+%X_\bullet
+%&%r1c1
+%Y_\bullet%r1c2
+%}$ by lifting
+%\item a cofibration \emph{iff} $f$ is a retract of an almost free map
+\end{itemise}
+}
+}
+
+\frame{\frametitle{simplicial algebras --- structure on homotopy} 
+structure on $\pi_*(X_{\bullet})$:
+\begin{itemise}
+\setlength{\parindent}{.25in}
+\item commutative multiplication:
+\[[x][y]=\left[\sum_{(\alpha,\beta)\in\textup{Sh}_{|x|,|y|}}s_{\beta}x\cdot s_{\alpha}y\right]\]
+\item divided square operations, $2\leq|x|$:
+\[\gamma_2[x]=\left[\sum_{(\alpha,\beta)\in\tfrac{1}{2}\textup{Sh}_{|x|,|x|}}s_{\beta}x\cdot s_{\alpha}x\right]\]
+\item higher divided squares, $2\leq i\leq |x|$:
+\[\delta_i[x]=\left[\sum_{(\alpha,\beta)\in\tfrac{1}{2}\textup{Sh}_{i,i}}s_{\beta}x\cdot s_{\alpha}x\right]\]
+\end{itemise}
+}
+
+\frame{\frametitle{simplicial algebras --- indecoposables} 
+\uncover<2->{Eckmann-Hilton $\implies$} all group objects have 0 multiplication
+
+\uncover<3->{Model abelianization as:}
+\[\xymatrix@R=.12cm@C=1.2cm{
+\uncover<3->{\calC } \only<3->{\ar@<.6ex>[r]^{\smash{Q}}}&
+\uncover<3->{\textup{Vec}}  \only<3->{\ar@<.4ex>[l]^{{(\DASH)_+}}}\\
+\uncover<4->{X} \only<4->{\ar@{|->}[r]} & \uncover<4->{X/X^2}\\
+\uncover<4->{Y}  & \uncover<4->{Y} \only<4->{\ar@{|->}[l]}
+}\]
+
+\uncover<5->{Define
+\begin{alignat*}{2}
+H^Q_*(X)
+&=
+(\mathbb{L}_*Q)X%
+\\
+H_Q^*(X)
+&=
+((\mathbb{L}_*Q)X)\,\check{}
+\end{alignat*}}
+
+}
+
+\frame{\frametitle{The Bousfield-Kan tower} 
+$X\in s\textup{Set}_*$
+
+iterate the comonad from
+\[\xymatrix@R=.3cm@C=2cm{
+s\textup{Set}_*  \ar@<.6ex>[r]^{\overline{\F_2}}&
+s\textup{Vec}  \ar@<.4ex>[l]\\
+%X \ar@{|->}[r] & FX\\
+%GY             & Y \ar@{|->}[l]
+}\]
+$\overline{X}^{\bullet}:=\overline{\F_2}^{\bullet+1}X$ has $\textup{Tot}(\overline{X}^{\bullet}):=X{_2\!\!\!\hat{\phantom{e}}}$
+
+Homotopy spectral sequence
+\[E_2^{st}=\Ext^s_{\scrK}(H^*X,H^*S^t)\implies \pi_{t-s}(X{_2\!\!\!\hat{\phantom{e}}})\]
+\begin{itemise}
+\setlength{\parindent}{.25in}
+\item Massey-Peterson: if $H^*X\in\scrK$ is $U(M)$ for $M\in\scrU$:
+\[E_2^{st}=\Ext^s_{\scrK}(H^*X,H^*S^t)=\Ext^s_{\scrU}(M,H^*S^t)\]
+unstable $\Lambda$-algebra resolutions is an $E^1$ for spheres!
+\end{itemise}
+}
+
+\frame{\frametitle{A Grothendieck SS}
+\[E_2^{st}=\Ext^s_{\scrK}(H^*X,H^*S^t)\implies \pi_{t-s}(X{_2\!\!\!\hat{\phantom{e}}})\]
+
+For $W^*\in\scrK$:
+
+Cartan formula $\implies$ $\textup{Sq}^i(W^2)\subset W^2$
+$\implies$ $\textup{Sq}^i$ descends to $Q_{\textup{alg}}W$
+$\textup{Sq}(xy)=\textup{Sq}(x)\textup{Sq}(y)$ $\implies$  $Q_{\textup{alg}}(W)$ an unstable module!
+
+{\small ($\textup{Sq}^{|x|}(x)=x^2$ $\implies$  $Q_{\textup{alg}}(H^*X)$ a suspension!)}
+\[\xymatrix@R=4mm{
+\scrK
+\ar[rr]^-{\textup{Hom}_{\scrK}(\DASH,H^*S^{t})}
+\ar[dr]_-{\Sigma^{-1}Q_{\textup{alg}}}
+&%r1c1
+&%r1c2
+\textup{Vec}\\%r1c3
+&%r2c1
+\scrU
+\ar[ur]_-{\quad \textup{Hom}_{\scrU}(\DASH,H^*S^{t-1})}
+&%r2c2
+%r2c3
+}\]
+${^1}E^2_{pqt}=\Ext_{\scrU}^p(\Sigma^{-1}H_q^Q(H^*X),H^*S^{t-1})\implies E^{p+q,t}_2$
+}
+
+%\frame{\frametitle{dually}
+%\[E^2_{st}=(\mathbb{L}_sQ_{\scrK})(H^*X)^t\implies \pi_{t-s}(X{_2\!\!\!\hat{\phantom{e}}})\,\check{ }\]
+%$\textup{Sq}(xy)=\textup{Sq}(x)\textup{Sq}(y)$ $\implies$  $Q_{\textup{alg}}(H^*X)$ an unstable module!
+%\[\xymatrix@R=4mm{
+%\scrK
+%\ar[rr]^-{Q_{\scrK}}
+%\ar[dr]_-{Q_{\textup{alg}}}
+%&%r1c1
+%&%r1c2
+%\textup{grVec}\\%r1c3
+%&%r2c1
+%\scrU
+%\ar[ur]_-{Q_{\scrU}}
+%&%r2c2
+%%r2c3
+%}\]
+%
+%\[\xymatrix@R=4mm{
+%\scrK
+%\ar[rr]^-{\textup{Hom}_{\scrK}(\DASH,H^*S^{t+1})}
+%\ar[dr]_-{Q_{\textup{alg}}}
+%&%r1c1
+%&%r1c2
+%\textup{Vec}\\%r1c3
+%&%r2c1
+%\scrU
+%\ar[ur]_-{Q_{\scrU}}
+%&%r2c2
+%%r2c3
+%}\]
+%}
+
+\frame{\frametitle{Adams sseq for simplicial algebras} 
+
+For $X\in s\calC$:
+\[E_2^{st}=\Ext^s_{\scrK^1}(H^*_QX,H^*_QS^t)\implies \pi_{t-s}(X{\hat{\phantom{e}}})\]
+
+$\scrK^1$ is category with objects $W^*$:
+\begin{itemise}
+\setlength{\parindent}{.25in}
+\item $[\DASH,\DASH]:W^n\otimes W^m \to W^{n+m+1}$
+\begin{enumerate}\squishlist
+\setlength{\parindent}{.25in}
+\item Jacobi identity
+\item (anti)-symmetric, \emph{not alternating}
+\end{enumerate}
+\item linear operations $P^i:W^n\to W^{n+i+1}$
+\begin{enumerate}\squishlist
+\setlength{\parindent}{.25in}
+\item zero unless $2\leq i\leq n$
+\item $P^{|x|}x=[x,x]$
+\item an Adem relation
+\end{enumerate}
+\item ``Cartan relation'': $[x,P^iy]=0$
+\end{itemise}
+
+}
+
+\frame{\frametitle{Adams SS for simplcial algebras} 
+
+For $X\in s\calC$:
+\[E^2_{st}=(\mathbb{L}_sQ_{\scrK^1})(H^*_QX)^t\implies \pi_{t-s}(X{\hat{\phantom{e}}})\,\check{ }\]
+
+\[\xymatrix@R=4mm{
+\scrK^1
+\ar[rr]^-{Q_{\scrK^1}}
+\ar[dr]_-{Q_{\textup{Lie}}}
+&%r1c1
+&%r1c2
+g\textup{Vec}\\%r1c3
+&%r2c1
+\scrU^1
+\ar[ur]_-{Q_{\scrU^1}}
+&%r2c2
+%r2c3
+}\uncover<2->{\raisebox{-.4cm}{\raisebox{-.4cm}[0cm][0cm]{\makebox[0cm][r]{\scalebox{4}{X\ \ \ \,}}}\textup{\quad $P^i[W,W]\not\subset [W,W]$!}}}\]
+%$P^i$ does \emph{not} preserve $[W,W]$!
+
+Brackets \emph{do} preserve the image of the $P$ operations:
+\[\xymatrix@R=4mm{
+\scrK^1
+\ar[rr]^-{Q_{\scrK^1}}
+\ar[dr]_-{Q_{\textup{P}}}
+&%r1c1
+&%r1c2
+g\textup{Vec}\\%r1c3
+&%r2c1
+\scrL^1
+\ar[ur]_-{Q_{\scrL^1}}
+&%r2c2
+%r2c3
+}\]
+But $\scrL^1$ is not abelian!
+}
+
+
+
+\frame{\frametitle{plan} 
+page on unstable adams spectral sequences via BK
+
+Page on E2 of unstable adams for a sphere with and without peterson
+
+page on miller's derived functor sseq
+
+Page on my first grothendieck spectral sequence
+}
+\end{document}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
