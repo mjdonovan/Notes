@@ -38,6 +38,10 @@
 \usecolortheme{orchid}
 
 
+\providecommand{\PiAlg}[1]{\textup{$\Pi$}(#1)}
+
+
+
 
 
 
@@ -47,8 +51,6 @@
 \date{\today} 
 %\frame{\titlepage} 
 %\frame{\frametitle{Table of contents}\tableofcontents} 
-
-
 
 
 
@@ -123,42 +125,42 @@ $f$ is surjective on basepoint components
 }
 }
 
-\frame{\frametitle{simplicial algebras --- structure on homotopy} 
-structure on $\pi_*(X_{\bullet})$:
-\begin{itemise}
-\setlength{\parindent}{.25in}
-\item commutative multiplication:
-\[[x][y]=\left[\sum_{(\alpha,\beta)\in\textup{Sh}_{|x|,|y|}}s_{\beta}x\cdot s_{\alpha}y\right]\]
-\item divided square operations, $2\leq|x|$:
-\[\gamma_2[x]=\left[\sum_{(\alpha,\beta)\in\tfrac{1}{2}\textup{Sh}_{|x|,|x|}}s_{\beta}x\cdot s_{\alpha}x\right]\]
-\item higher divided squares, $2\leq i\leq |x|$:
-\[\delta_i[x]=\left[\sum_{(\alpha,\beta)\in\tfrac{1}{2}\textup{Sh}_{i,i}}s_{\beta}x\cdot s_{\alpha}x\right]\]
-\end{itemise}
-}
-
-\frame{\frametitle{simplicial algebras --- indecoposables} 
-\uncover<2->{Eckmann-Hilton $\implies$} all group objects have 0 multiplication
-
-\uncover<3->{Model abelianization as:}
-\[\xymatrix@R=.12cm@C=1.2cm{
-\uncover<3->{\calC } \only<3->{\ar@<.6ex>[r]^{\smash{Q}}}&
-\uncover<3->{\textup{Vec}}  \only<3->{\ar@<.4ex>[l]^{{(\DASH)_+}}}\\
-\uncover<4->{X} \only<4->{\ar@{|->}[r]} & \uncover<4->{X/X^2}\\
-\uncover<4->{Y}  & \uncover<4->{Y} \only<4->{\ar@{|->}[l]}
-}\]
-
-\uncover<5->{Define
-\begin{alignat*}{2}
-H^Q_*(X)
-&=
-(\mathbb{L}_*Q)X%
-\\
-H_Q^*(X)
-&=
-((\mathbb{L}_*Q)X)\,\check{}
-\end{alignat*}}
-
-}
+%\frame{\frametitle{simplicial algebras --- structure on homotopy} 
+%structure on $\pi_*(X_{\bullet})$:
+%\begin{itemise}
+%\setlength{\parindent}{.25in}
+%\item commutative multiplication:
+%\[[x][y]=\left[\sum_{(\alpha,\beta)\in\textup{Sh}_{|x|,|y|}}s_{\beta}x\cdot s_{\alpha}y\right]\]
+%\item divided square operations, $2\leq|x|$:
+%\[\gamma_2[x]=\left[\sum_{(\alpha,\beta)\in\tfrac{1}{2}\textup{Sh}_{|x|,|x|}}s_{\beta}x\cdot s_{\alpha}x\right]\]
+%\item higher divided squares, $2\leq i\leq |x|$:
+%\[\delta_i[x]=\left[\sum_{(\alpha,\beta)\in\tfrac{1}{2}\textup{Sh}_{i,i}}s_{\beta}x\cdot s_{\alpha}x\right]\]
+%\end{itemise}
+%}
+%
+%\frame{\frametitle{simplicial algebras --- indecoposables} 
+%\uncover<2->{Eckmann-Hilton $\implies$} all group objects have 0 multiplication
+%
+%\uncover<3->{Model abelianization as:}
+%\[\xymatrix@R=.12cm@C=1.2cm{
+%\uncover<3->{\calC } \only<3->{\ar@<.6ex>[r]^{\smash{Q}}}&
+%\uncover<3->{\textup{Vec}}  \only<3->{\ar@<.4ex>[l]^{{(\DASH)_+}}}\\
+%\uncover<4->{X} \only<4->{\ar@{|->}[r]} & \uncover<4->{X/X^2}\\
+%\uncover<4->{Y}  & \uncover<4->{Y} \only<4->{\ar@{|->}[l]}
+%}\]
+%
+%\uncover<5->{Define
+%\begin{alignat*}{2}
+%H^Q_*(X)
+%&=
+%(\mathbb{L}_*Q)X%
+%\\
+%H_Q^*(X)
+%&=
+%((\mathbb{L}_*Q)X)\,\check{}
+%\end{alignat*}}
+%
+%}
 
 \frame{\frametitle{The Bousfield-Kan tower} 
 $X\in s\textup{Set}_*$
@@ -266,7 +268,7 @@ $\scrK^1$ is category with objects $W^*$:
 
 }
 
-\frame{\frametitle{Adams SS for simplcial algebras} 
+\frame{\frametitle{Adams sseq for simplcial algebras} 
 
 For $X\in s\calC$:
 \[E^2_{st}=(\mathbb{L}_sQ_{\scrK^1})(H^*_QX)^t\implies \pi_{t-s}(X{\hat{\phantom{e}}})\,\check{ }\]
@@ -286,6 +288,10 @@ g\textup{Vec}\\%r1c3
 }\uncover<2->{\raisebox{-.4cm}{\raisebox{-.4cm}[0cm][0cm]{\makebox[0cm][r]{\scalebox{4}{X\ \ \ \,}}}\textup{\quad $P^i[W,W]\not\subset [W,W]$!}}}\]
 %$P^i$ does \emph{not} preserve $[W,W]$!
 
+
+}
+
+\frame{\frametitle{Adams sseq for simplcial algebras} 
 Brackets \emph{do} preserve the image of the $P$ operations:
 \[\xymatrix@R=4mm{
 \scrK^1
@@ -300,19 +306,106 @@ g\textup{Vec}\\%r1c3
 &%r2c2
 %r2c3
 }\]
-But $\scrL^1$ is not abelian!
+
+$\scrL^1$ not abelian!
+
+\[\xymatrix@R=4mm@C=13mm{
+\scrK^1
+\ar[rr]^-{\mathbb{L}Q_{\scrK^1}}
+\ar[dr]_-{\mathbb{L}Q_{\textup{P}}}
+&%r1c1
+&%r1c2
+gg\textup{Vec}\\%r1c3
+&%r2c1
+\PiAlg{\scrL^1}
+\ar[r]^-{\mathbb{L}Q_{\PiAlg{\scrL^1}}}
+&%r2c2
+\ar@{=>}[u]_-{\textup{sseq}}
+ggg\textup{Vec}%r2c3
+}\]
+$\PiAlg{\scrL^{1}}:=$ natural target for $\pi_*:s\scrL^1\to(?)$
 }
 
 
 
-\frame{\frametitle{plan} 
-page on unstable adams spectral sequences via BK
 
-Page on E2 of unstable adams for a sphere with and without peterson
 
-page on miller's derived functor sseq
 
-Page on my first grothendieck spectral sequence
+
+
+
+\frame{\frametitle{spectral sequence(s) so far} 
+\[\xymatrix@!0@R=7mm@C=23mm{
+s\calC
+\ar[r]^-{\pi_*(\hat{\rule{0pt}{2mm}\DASH})\check{\phantom{i}}}
+&%r1c1
+\textup{Vec}^1&%r1c2
+\\
+\\%r1c5
+\ar[uu];[]_-{H^*_Q}
+P\scrL^1
+\ar[r]^-{\mathbb{L}Q_{P\scrL^1}}
+&%r2c1
+\textup{V}^2
+\ar@{=>}[uu]_-{\textup{Adams}}
+&%r2c2
+P\scrL^1
+\ar[d]_-{Q_P}
+\ar[r]^-{Q_{P\scrL^1}}
+&%r2c4
+\textup{V}^1\\
+&&\scrL^1\ar[ur]_-{Q_{\scrL^1}}
+\\%r2c5
+\ar[uu];[]_-{\mathbb{L}Q_P}
+\makebox[0cm][r]{$\PiAlg{\scrL^1}\cong\textup{}$}\scrL^2\Lambda
+\ar[r]^-{\mathbb{L}Q_{\scrL^2\Lambda}}
+&%r2c1
+\textup{V}^3
+\ar@{=>}[uu]_-{\textup{Gr.}}
+&%r2c2
+\scrL^2\Lambda
+\ar[d]_-{Q_P}
+\ar[r]^-{Q_{\scrL^2\Lambda}}
+&%r2c4
+\textup{V}^2\\
+&&\scrL^2\ar[ur]_-{Q_{\scrL^2}}
+\\%r2c5
+\ar[uu];[]_-{\mathbb{L}Q_\Lambda}
+\makebox[0cm][r]{$\PiAlg{\scrL^2}\cong\textup{}$}\scrL^3\Lambda
+\ar[r]^-{\mathbb{L}Q_{\scrL^3\Lambda}}
+&%r2c1
+\textup{V}^4
+\ar@{=>}[uu]_-{\textup{Gr.}}
+&%r2c2
+\scrL^3\Lambda
+\ar[d]_-{Q_\Lambda}
+\ar[r]^-{Q_{\scrL^3\Lambda}}
+&%r2c4
+\textup{V}^3\\
+&&\scrL^3\ar[ur]_-{Q_{\scrL^3}}
+\\%r2c5
+\ar[uu];[]_-{\mathbb{L}Q_\Lambda}
+\makebox[0cm][r]{$\PiAlg{\scrL^3}\cong\textup{}$}\scrL^4\Lambda
+\ar[r]^-{\mathbb{L}Q_{\scrL^4\Lambda}}
+&%r2c1
+\textup{V}^5
+\ar@{=>}[uu]_-{\textup{Gr.}}
+&%r2c2
+\scrL^4\Lambda
+\ar[d]_-{Q_\Lambda}
+\ar[r]^-{Q_{\scrL^4\Lambda}}
+&%r2c4
+\textup{V}^4\\
+&&\scrL^4\ar[ur]_-{Q_{\scrL^4}}
+\\%r2c5
+\ar[uu];[]_-{\mathbb{L}Q_\Lambda}
+\makebox[0cm][r]{$\PiAlg{\scrL^4}\cong\textup{}$}\scrL^5\Lambda
+\ar[r]^-{\mathbb{L}Q_{\scrL^5\Lambda}}
+&%r3c1
+\textup{V}^6
+\ar@{=>}[uu]_-{\textup{Gr.}}
+&&
+}\]
 }
 \end{document}
 
