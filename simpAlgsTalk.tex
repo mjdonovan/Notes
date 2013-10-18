@@ -22,18 +22,8 @@
 \excludeversion{push vs pull}
 
 \def\excludeversion#1{\includeversion{#1}}
-\excludeversion{partial derivatives}
-\excludeversion{Iterated Lipschitz conditions}
-\excludeversion{distances in Top}
-\excludeversion{functors appear}
-\excludeversion{Excisivity and Analyticity}
-\includeversion{II.1.6}
-\excludeversion{II.1.20}
-\excludeversion{II.1.22}
-\excludeversion{III.1.4}
-\excludeversion{III.1.5}
-\excludeversion{III.1.13}
-
+\excludeversion{first section}
+\excludeversion{middle section}
 
 \usecolortheme{orchid}
 
@@ -45,14 +35,14 @@
 \renewcommand{\calC}{\scrK}
 
 \begin{document}
-\title{Calc 101}   
+\title{Adams sseq in simplicial algebras}   
 \author{Michael Donovan} 
 \date{\today} 
 %\frame{\titlepage} 
 %\frame{\frametitle{Table of contents}\tableofcontents} 
 
 
-
+\begin{first section}
 
 \frame{\frametitle{Simplicial algebras --- Intro} 
 \begin{alignat*}{2}
@@ -122,15 +112,15 @@ $f$ is surjective on basepoint components
 %
 \frame{\frametitle{Algebra indecomposables \& Andre-Quillen homology} 
 %\uncover<2->{Eckmann-Hilton $\implies$} all group objects have 0 multiplication
-\uncover<3->{Model abelianization in $\calC$ as:}
+\uncover<2->{Abelianization in $\calC$:}
 \[\xymatrix@R=.12cm@C=1.2cm{
-\uncover<3->{\calC } \only<3->{\ar@<.6ex>[r]^{\smash{Q_\calC}}}&
-\uncover<3->{\textup{V}}  \only<3->{\ar@<.4ex>[l]^{{(\DASH)_+}}}\\
-\uncover<4->{X} \only<4->{\ar@{|->}[r]} & \uncover<4->{X/X^2}\\
-\uncover<4->{Y}  & \uncover<4->{Y} \only<4->{\ar@{|->}[l]}
+\uncover<2->{\calC } \only<2->{\ar@<.6ex>[r]^{\smash{Q_\calC}}}&
+\uncover<2->{\textup{V}}  \only<2->{\ar@<.4ex>[l]^{{(\DASH)_+}}}\\
+\uncover<3->{X} \only<3->{\ar@{|->}[r]} & \uncover<3->{X/X^2}\\
+\uncover<3->{Y}  & \uncover<3->{Y} \only<3->{\ar@{|->}[l]}
 }\]
 
-\uncover<5->{Define
+\uncover<4->{Define
 \begin{alignat*}{2}
 H^Q_*(X)
 &=
@@ -315,23 +305,24 @@ s\textup{Set}_*\ar[r]^-{\pi_*(\hat{\rule{0pt}{2mm}\DASH})\check{\phantom{i}}}
 \\
 &&%\scrA^1\ar[ur]_-{Q_{\calA^1}}
 \\
-\ar[uu];[]_-{\sigma^{-1}\mathbb{L}Q_{\calC^1}}
-\textup{grad}(\calA^1)
-\ar[r]^-{\sigma\mathbb{L}Q_{\calA^1}}
+\only<2->{\ar[uu];[]_-{\makebox[0mm][r]{\scriptsize$\sigma^{-1}\mathbb{L}Q_{\calC^1}$}}}
+\only<3->{\ar[uu];[]^-{\sigma^{-1}H^Q_*}}
+\uncover<2->{\textup{grad}(\calA^1)}
+\only<2->{\ar[r]_-{\sigma\mathbb{L}Q_{\calA^1}}}
 &
-\textup{V}^3
-\ar@{=>}[uu]_-{\textup{Gr.}}
+\uncover<2->{\textup{V}^3}
+\only<2->{\ar@{=>}[uu]_-{\textup{Gr.}}}
 &\calA^1\ar[uru]_-{\sigma Q_{\calA^1}}
 %&
 %\scrL^2\Lambda
-%\ar[d]_-{Q_{\Lambda^{-}}}
+%\ar[d]_-{Q_{\overline{\Lambda}}}
 %\ar[r]^-{Q_{\scrL^2\Lambda}}
 %&
 %\textup{V}^2
 \\
 %&&\scrL^2\ar[ur]_-{Q_{\scrL^2}}
 \\
-%\ar[uu];[]_-{\mathbb{L}Q_{\Lambda^{-}}}
+%\ar[uu];[]_-{\mathbb{L}Q_{\overline{\Lambda}}}
 %\makebox[0cm][r]{$\PiAlg{\scrL^2}\cong\textup{}$}\scrL^3\Lambda
 %\ar[r]^-{\mathbb{L}Q_{\scrL^3\Lambda}}
 %&
@@ -339,14 +330,14 @@ s\textup{Set}_*\ar[r]^-{\pi_*(\hat{\rule{0pt}{2mm}\DASH})\check{\phantom{i}}}
 %\ar@{=>}[uu]_-{\textup{Gr.}}
 %&
 %\scrL^3\Lambda
-%\ar[d]_-{Q_{\Lambda^{-}}}
+%\ar[d]_-{Q_{\overline{\Lambda}}}
 %\ar[r]^-{Q_{\scrL^3\Lambda}}
 %&
 %\textup{V}^3
 \\
 %&&\scrL^3\ar[ur]_-{Q_{\scrL^3}}
 \\
-%\ar[uu];[]_-{\mathbb{L}Q_{\Lambda^{-}}}
+%\ar[uu];[]_-{\mathbb{L}Q_{\overline{\Lambda}}}
 %\makebox[0cm][r]{$\PiAlg{\scrL^3}\cong\textup{}$}\scrL^4\Lambda
 %\ar[r]^-{\mathbb{L}Q_{\scrL^4\Lambda}}
 %&
@@ -354,30 +345,40 @@ s\textup{Set}_*\ar[r]^-{\pi_*(\hat{\rule{0pt}{2mm}\DASH})\check{\phantom{i}}}
 %\ar@{=>}[uu]_-{\textup{Gr.}}
 %&
 %\scrL^4\Lambda
-%\ar[d]_-{Q_{\Lambda^{-}}}
+%\ar[d]_-{Q_{\overline{\Lambda}}}
 %\ar[r]^-{Q_{\scrL^4\Lambda}}
 %&
 %\textup{V}^4
 \\
 %&&\scrL^4\ar[ur]_-{Q_{\scrL^4}}
 \\\makebox[0cm][r]{\phantom{$\PiAlg{\scrL^4}\cong\textup{}$}}\phantom{\scrL^5\Lambda}
-%\ar[uu];[]_-{\mathbb{L}Q_{\Lambda^{-}}}
+%\ar[uu];[]_-{\mathbb{L}Q_{\overline{\Lambda}}}
 %\makebox[0cm][r]{$\PiAlg{\scrL^4}\cong\textup{}$}\scrL^5\Lambda
 %\ar[r]^-{\mathbb{L}Q_{\scrL^5\Lambda}}
 %&
 %\textup{V}^6
 %\ar@{=>}[uu]_-{\textup{Gr.}}
 %&&
-}\]
+}\]\pause\pause
+\raisebox{3.5cm}[0cm]{ \qquad \qquad \qquad $\mathbb{L}Q_{\calC^1}$ is just $H^Q_*$!}\pause
+
+\raisebox{3.1cm}[0cm]{Miller: control $H^Q_*$ $\rightsquigarrow$ Sullivan conjecture:}\pause
+
+\raisebox{2.9cm}[0cm]{ \qquad \qquad \qquad for $G$ a finite group, $X$ a finite complex:}
+
+\raisebox{2.9cm}[0cm]{\qquad  \qquad \qquad \qquad \qquad \qquad $\textup{map}_*(BG,X)\sim *$}
+  
 }
 
 
 
 
-\frame{\frametitle{Bousfield-Kan \& Adams for simplicial algebras} 
+\frame{\frametitle{Bousfield-Kan \& Adams for simplicial algebras}
+%\only<1-3>{\phantom{d} }
 \[\makebox[0cm][r]{Abelianization:\qquad} \xymatrix@R=.3cm@C=1.5cm{
 s\calC  
-\ar@{->}@(ul,ur)^{c}
+\only<4->{\ar@{->}@(ul,ur)^{c}}
+\only<1-3>{\ar@{{ }{ }}@(ul,ur)^{\phantom{c}}}
 \ar@<.6ex>[r]^{Q_\calC}&
 s\textup{V}  \ar@<.4ex>[l]^{K:={(\DASH)_+}}\\
 %X \ar@{|->}[r] & FX\\
@@ -491,7 +492,8 @@ $\calP\scrL^1$ is category with objects $W^*$:
 \end{itemise}
 
 }
-
+\end{first section}
+\begin{middle section}
 \frame{\frametitle{Calculating $\mathbb{L}Q_{\calP\scrL^1}$} 
 
 \[\xymatrix@!0@R=7mm@C=23mm{
@@ -597,14 +599,14 @@ s\calC\ar[r]^-{\pi_*(\hat{\rule{0pt}{2mm}\DASH})\check{\phantom{i}}}&
 &\scrL^1\ar[uur]_-{Q_{\scrL^1}}
 %&
 %\scrL^2\Lambda
-%\ar[d]_-{Q_{\Lambda^{-}}}
+%\ar[d]_-{Q_{\overline{\Lambda}}}
 %\ar[r]^-{Q_{\scrL^2\Lambda}}
 %&
 %\textup{V}^2
 \\
 %&&\scrL^2\ar[ur]_-{Q_{\scrL^2}}
 \\
-%\ar[uu];[]_-{\mathbb{L}Q_{\Lambda^{-}}}
+%\ar[uu];[]_-{\mathbb{L}Q_{\overline{\Lambda}}}
 %\makebox[0cm][r]{$\PiAlg{\scrL^2}\cong\textup{}$}\scrL^3\Lambda
 %\ar[r]^-{\mathbb{L}Q_{\scrL^3\Lambda}}
 %&
@@ -612,14 +614,14 @@ s\calC\ar[r]^-{\pi_*(\hat{\rule{0pt}{2mm}\DASH})\check{\phantom{i}}}&
 %\ar@{=>}[uu]_-{\textup{Gr.}}
 %&
 %\scrL^3\Lambda
-%\ar[d]_-{Q_{\Lambda^{-}}}
+%\ar[d]_-{Q_{\overline{\Lambda}}}
 %\ar[r]^-{Q_{\scrL^3\Lambda}}
 %&
 %\textup{V}^3
 \\
 %&&\scrL^3\ar[ur]_-{Q_{\scrL^3}}
 \\
-%\ar[uu];[]_-{\mathbb{L}Q_{\Lambda^{-}}}
+%\ar[uu];[]_-{\mathbb{L}Q_{\overline{\Lambda}}}
 %\makebox[0cm][r]{$\PiAlg{\scrL^3}\cong\textup{}$}\scrL^4\Lambda
 %\ar[r]^-{\mathbb{L}Q_{\scrL^4\Lambda}}
 %&
@@ -627,14 +629,14 @@ s\calC\ar[r]^-{\pi_*(\hat{\rule{0pt}{2mm}\DASH})\check{\phantom{i}}}&
 %\ar@{=>}[uu]_-{\textup{Gr.}}
 %&
 %\scrL^4\Lambda
-%\ar[d]_-{Q_{\Lambda^{-}}}
+%\ar[d]_-{Q_{\overline{\Lambda}}}
 %\ar[r]^-{Q_{\scrL^4\Lambda}}
 %&
 %\textup{V}^4
 \\
 %&&\scrL^4\ar[ur]_-{Q_{\scrL^4}}
 \\\makebox[0cm][r]{\phantom{$\PiAlg{\scrL^4}\cong\textup{}$}}\phantom{\scrL^5\Lambda}
-%\ar[uu];[]_-{\mathbb{L}Q_{\Lambda^{-}}}
+%\ar[uu];[]_-{\mathbb{L}Q_{\overline{\Lambda}}}
 %\makebox[0cm][r]{$\PiAlg{\scrL^4}\cong\textup{}$}\scrL^5\Lambda
 %\ar[r]^-{\mathbb{L}Q_{\scrL^5\Lambda}}
 %&
@@ -647,7 +649,7 @@ s\calC\ar[r]^-{\pi_*(\hat{\rule{0pt}{2mm}\DASH})\check{\phantom{i}}}&
 
 %\raisebox{3cm}[0cm]{($\mathbb{L}Q_{\calP})(W):=\pi_*(Q_{\calP}\textup{Bar}_{\calP\scrL^1}(W))$ with $Q_{\calP}\textup{Bar}_{\calP\scrL^1}(W)\in s(\scrL^1)$.}
 
-\raisebox{3cm}[0cm]{\qquad $W\in\calP\scrL^1\rightsquigarrow (\mathbb{L}Q_{\calP})(W):=\pi_*(\underbrace{Q_{\calP}\textup{Bar}_{\calP\scrL^1}(W)}_{\in s\scrL^1})$.}
+\raisebox{3cm}[0cm]{\qquad $W\in\calP\scrL^1\rightsquigarrow (\mathbb{L}Q_{\calP})(W):=\pi_*(\underbrace{Q_{\calP}\textup{Bar}_{\calP\scrL^1}(W)}_{ s\scrL^1})$.}
 \pause
 
 \raisebox{2.3cm}[0cm]{$(?)=\PiAlg{\scrL^1}$ --- bigraded vector spaces with action of all natural}
@@ -754,14 +756,14 @@ s\calC\ar[r]^-{\pi_*(\hat{\rule{0pt}{2mm}\DASH})\check{\phantom{i}}}&
 \ar@{=>}[uu]_-{\textup{Gr.}}
 %&
 %\scrL^2\Lambda
-%\ar[d]_-{Q_{\Lambda^{-}}}
+%\ar[d]_-{Q_{\overline{\Lambda}}}
 %\ar[r]^-{Q_{\scrL^2\Lambda}}
 %&
 %\textup{V}^2
 \\
 %&&\scrL^2\ar[ur]_-{Q_{\scrL^2}}
 \\
-%\ar[uu];[]_-{\mathbb{L}Q_{\Lambda^{-}}}
+%\ar[uu];[]_-{\mathbb{L}Q_{\overline{\Lambda}}}
 %\makebox[0cm][r]{$\PiAlg{\scrL^2}\cong\textup{}$}\scrL^3\Lambda
 %\ar[r]^-{\mathbb{L}Q_{\scrL^3\Lambda}}
 %&
@@ -769,14 +771,14 @@ s\calC\ar[r]^-{\pi_*(\hat{\rule{0pt}{2mm}\DASH})\check{\phantom{i}}}&
 %\ar@{=>}[uu]_-{\textup{Gr.}}
 %&
 %\scrL^3\Lambda
-%\ar[d]_-{Q_{\Lambda^{-}}}
+%\ar[d]_-{Q_{\overline{\Lambda}}}
 %\ar[r]^-{Q_{\scrL^3\Lambda}}
 %&
 %\textup{V}^3
 \\
 %&&\scrL^3\ar[ur]_-{Q_{\scrL^3}}
 \\
-%\ar[uu];[]_-{\mathbb{L}Q_{\Lambda^{-}}}
+%\ar[uu];[]_-{\mathbb{L}Q_{\overline{\Lambda}}}
 %\makebox[0cm][r]{$\PiAlg{\scrL^3}\cong\textup{}$}\scrL^4\Lambda
 %\ar[r]^-{\mathbb{L}Q_{\scrL^4\Lambda}}
 %&
@@ -784,14 +786,14 @@ s\calC\ar[r]^-{\pi_*(\hat{\rule{0pt}{2mm}\DASH})\check{\phantom{i}}}&
 %\ar@{=>}[uu]_-{\textup{Gr.}}
 %&
 %\scrL^4\Lambda
-%\ar[d]_-{Q_{\Lambda^{-}}}
+%\ar[d]_-{Q_{\overline{\Lambda}}}
 %\ar[r]^-{Q_{\scrL^4\Lambda}}
 %&
 %\textup{V}^4
 \\
 %&&\scrL^4\ar[ur]_-{Q_{\scrL^4}}
 \\\makebox[0cm][r]{\phantom{$\PiAlg{\scrL^4}\cong\textup{}$}}\phantom{\scrL^5\Lambda}
-%\ar[uu];[]_-{\mathbb{L}Q_{\Lambda^{-}}}
+%\ar[uu];[]_-{\mathbb{L}Q_{\overline{\Lambda}}}
 %\makebox[0cm][r]{$\PiAlg{\scrL^4}\cong\textup{}$}\scrL^5\Lambda
 %\ar[r]^-{\mathbb{L}Q_{\scrL^5\Lambda}}
 %&
@@ -799,7 +801,41 @@ s\calC\ar[r]^-{\pi_*(\hat{\rule{0pt}{2mm}\DASH})\check{\phantom{i}}}&
 %\ar@{=>}[uu]_-{\textup{Gr.}}
 %&&
 }\]
+\textup{}\pause
+
+\vspace{-4.5cm}
+
+Grothendieck sseq for $\mathbb{L}Q_{\scrL^2\Lambda}$:
+\[\xymatrix@R=4mm{
+\scrL^2\Lambda
+\ar[rr]^-{Q_{\calP\scrL^1}}
+\ar[dr]_-{Q_{\Lambda}}
+&%r1c1
+&%r1c2
+\textup{V}^2\\%r1c3
+&%r2c1
+\scrL^2
+\ar[ur]_-{Q_{\scrL^2}}
+&%r2c2
+%r2c3
+}\uncover<3->{\raisebox{-.4cm}{\raisebox{-.4cm}[0cm][0cm]{\makebox[0cm][r]{\scalebox{4}{X\ \ \,}}}\textup{\quad $\lambda_i:W_{i,*}\to W_{2i,*}$ not linear!}}}\]\pause\pause
+%$P^i$ does \emph{not} preserve $[W,W]$!
+\[\xymatrix@R=4mm{
+\scrL^2\Lambda
+\ar[rr]^-{Q_{\calP\scrL^1}}
+\ar[dr]_-{Q_{\overline{\Lambda}}}
+&%r1c1
+&%r1c2
+\textup{V}^2\\%r1c3
+&%r2c1
+\scrL^2
+\ar[ur]_-{Q_{\scrL^2}}
+&%r2c2
+%r2c3
+}{\raisebox{-.4cm}[0cm][0cm]{\textup{\qquad $Q_{\overline{\Lambda}}$ kills all but \emph{top} $\lambda_i$.}}}\]
+
 }
+
 
 
 
@@ -835,56 +871,67 @@ s\calC\ar[r]^-{\pi_*(\hat{\rule{0pt}{2mm}\DASH})\check{\phantom{i}}}&
 \ar@{=>}[uu]_-{\textup{Gr.}}
 &
 \scrL^2\Lambda
-\ar[d]_-{Q_{\Lambda^{-}}}
+\ar[d]_-{Q_{\overline{\Lambda}}}
 \ar[r]^-{Q_{\scrL^2\Lambda}}
 &
 \textup{V}^2
 \\
 &&\scrL^2\ar[ur]_-{Q_{\scrL^2}}
 \\
-\ar[uu];[]_-{\mathbb{L}Q_{\Lambda^{-}}}
-\makebox[0cm][r]{$\PiAlg{\scrL^2}\cong\textup{}$}\scrL^3\Lambda
-\ar[r]^-{\mathbb{L}Q_{\scrL^3\Lambda}}
+%%%%%%%%before L3 line
+\only<2->{\ar[uu];[]_-{\mathbb{L}Q_{\overline{\Lambda}}}}
+\uncover<2->{\makebox[0cm][r]{$\PiAlg{\scrL^2}\cong\textup{}$}\scrL^3\Lambda}
+\only<2->{\ar[r]^-{\mathbb{L}Q_{\scrL^3\Lambda}}}
 &
-\textup{V}^4
-\ar@{=>}[uu]_-{\textup{Gr.}}
+\uncover<2->{\textup{V}^4}
+\only<2->{\ar@{=>}[uu]_-{\textup{Gr.}}}
 &
-\scrL^3\Lambda
-\ar[d]_-{Q_{\Lambda^{-}}}
-\ar[r]^-{Q_{\scrL^3\Lambda}}
+%%%%%%%%before third factorisation
+\uncover<3->{\scrL^3\Lambda}
+\only<3->{\ar[d]_-{Q_{\overline{\Lambda}}}}
+\only<3->{\ar[r]^-{Q_{\scrL^3\Lambda}}}
 &
-\textup{V}^3
+\uncover<3->{\textup{V}^3}
 \\
-&&\scrL^3\ar[ur]_-{Q_{\scrL^3}}
+&&\uncover<3->{\scrL^3}\only<3->{\ar[ur]_-{Q_{\scrL^3}}}
 \\
-\ar[uu];[]_-{\mathbb{L}Q_{\Lambda^{-}}}
-\makebox[0cm][r]{$\PiAlg{\scrL^3}\cong\textup{}$}\scrL^4\Lambda
-\ar[r]^-{\mathbb{L}Q_{\scrL^4\Lambda}}
+%%%%%%%%before L4 line
+\only<4->{\ar[uu];[]_-{\mathbb{L}Q_{\overline{\Lambda}}}}
+\uncover<4->{\makebox[0cm][r]{$\PiAlg{\scrL^3}\cong\textup{}$}\scrL^4\Lambda}
+\only<4->{\ar[r]^-{\mathbb{L}Q_{\scrL^4\Lambda}}}
 &
-\textup{V}^5
-\ar@{=>}[uu]_-{\textup{Gr.}}
+\uncover<4->{\textup{V}^5}
+\only<4->{\ar@{=>}[uu]_-{\textup{Gr.}}}
 &
-\scrL^4\Lambda
-\ar[d]_-{Q_{\Lambda^{-}}}
-\ar[r]^-{Q_{\scrL^4\Lambda}}
+%%%%%%%%before fourth factorisation
+\uncover<5->{\scrL^4\Lambda}
+\only<5->{\ar[d]_-{Q_{\overline{\Lambda}}}}
+\only<5->{\ar[r]^-{Q_{\scrL^4\Lambda}}}
 &
-\textup{V}^4
+\uncover<5->{\textup{V}^4}
 \\
-&&\scrL^4\ar[ur]_-{Q_{\scrL^4}}
+&&\uncover<5->{\scrL^4}
+\only<5->{\ar[ur]_-{Q_{\scrL^4}}}
 \\%\makebox[0cm][r]{\phantom{$\PiAlg{\scrL^4}\cong\textup{}$}}\phantom{\scrL^5\Lambda}
-\ar[uu];[]_-{\mathbb{L}Q_{\Lambda^{-}}}
-\makebox[0cm][r]{$\PiAlg{\scrL^4}\cong\textup{}$}\scrL^5\Lambda
-\ar[r]^-{\mathbb{L}Q_{\scrL^5\Lambda}}
+%%%%%%%%before L5 line
+\only<6->{\ar[uu];[]_-{\mathbb{L}Q_{\overline{\Lambda}}}}
+\uncover<6->{\makebox[0cm][r]{$\PiAlg{\scrL^4}\cong\textup{}$}\scrL^5\Lambda}
+\only<6->{\ar[r]^-{\mathbb{L}Q_{\scrL^5\Lambda}}}
 &
-\textup{V}^6
-\ar@{=>}[uu]_-{\textup{Gr.}}
+\uncover<6->{\textup{V}^6}
+\only<6->{\ar@{=>}[uu]_-{\textup{Gr.}}}
 &&
 }\]
 }
 
+\end{middle section}
 
-
-
+\frame{\frametitle{spectral sequence(s) so far} 
+\begin{gather*}
+\pi_*(X)\\
+you
+\end{gather*}
+}
 
 \end{document}
 
@@ -899,6 +946,82 @@ s\calC\ar[r]^-{\pi_*(\hat{\rule{0pt}{2mm}\DASH})\check{\phantom{i}}}&
 
 
 
+
+\frame{\frametitle{spectral sequence(s) so far} 
+\[\xymatrix@!0@R=7mm@C=23mm{
+s\calC\ar[r]^-{\pi_*(\hat{\rule{0pt}{2mm}\DASH})\check{\phantom{i}}}&
+\textup{V}^1&
+\\
+\\
+\ar[uu];[]_-{H^*_Q}
+\calP\scrL^1
+\ar[r]^-{\mathbb{L}Q_{\calP\scrL^1}}
+&
+\textup{V}^2
+\ar@{=>}[uu]_-{\textup{Adams}}
+&
+\calP\scrL^1
+\ar[d]_-{Q_\calP}
+\ar[r]^-{Q_{\calP\scrL^1}}
+&
+\textup{V}^1
+\\
+&&\scrL^1\ar[ur]_-{Q_{\scrL^1}}
+\\
+\ar[uu];[]_-{\mathbb{L}Q_\calP}
+\makebox[0cm][r]{$\PiAlg{\scrL^1}\cong\textup{}$}\scrL^2\Lambda
+\ar[r]^-{\mathbb{L}Q_{\scrL^2\Lambda}}
+&
+\textup{V}^3
+\ar@{=>}[uu]_-{\textup{Gr.}}
+&
+\scrL^2\Lambda
+\ar[d]_-{Q_{\overline{\Lambda}}}
+\ar[r]^-{Q_{\scrL^2\Lambda}}
+&
+\textup{V}^2
+\\
+&&\scrL^2\ar[ur]_-{Q_{\scrL^2}}
+\\
+\ar[uu];[]_-{\mathbb{L}Q_{\overline{\Lambda}}}
+\makebox[0cm][r]{$\PiAlg{\scrL^2}\cong\textup{}$}\scrL^3\Lambda
+\ar[r]^-{\mathbb{L}Q_{\scrL^3\Lambda}}
+&
+\textup{V}^4
+\ar@{=>}[uu]_-{\textup{Gr.}}
+&
+\scrL^3\Lambda
+\ar[d]_-{Q_{\overline{\Lambda}}}
+\ar[r]^-{Q_{\scrL^3\Lambda}}
+&
+\textup{V}^3
+\\
+&&\scrL^3\ar[ur]_-{Q_{\scrL^3}}
+\\
+\ar[uu];[]_-{\mathbb{L}Q_{\overline{\Lambda}}}
+\makebox[0cm][r]{$\PiAlg{\scrL^3}\cong\textup{}$}\scrL^4\Lambda
+\ar[r]^-{\mathbb{L}Q_{\scrL^4\Lambda}}
+&
+\textup{V}^5
+\ar@{=>}[uu]_-{\textup{Gr.}}
+&
+\scrL^4\Lambda
+\ar[d]_-{Q_{\overline{\Lambda}}}
+\ar[r]^-{Q_{\scrL^4\Lambda}}
+&
+\textup{V}^4
+\\
+&&\scrL^4\ar[ur]_-{Q_{\scrL^4}}
+\\%\makebox[0cm][r]{\phantom{$\PiAlg{\scrL^4}\cong\textup{}$}}\phantom{\scrL^5\Lambda}
+\ar[uu];[]_-{\mathbb{L}Q_{\overline{\Lambda}}}
+\makebox[0cm][r]{$\PiAlg{\scrL^4}\cong\textup{}$}\scrL^5\Lambda
+\ar[r]^-{\mathbb{L}Q_{\scrL^5\Lambda}}
+&
+\textup{V}^6
+\ar@{=>}[uu]_-{\textup{Gr.}}
+&&
+}\]
+}
 
 
 
