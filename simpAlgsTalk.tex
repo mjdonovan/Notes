@@ -21,9 +21,12 @@
 \newcommand{\cartesianness}{\textup{cart}}
 \excludeversion{push vs pull}
 
-%\def\excludeversion#1{\includeversion{#1}}
+\def\excludeversion#1{\includeversion{#1}}
 \excludeversion{first section}
+\includeversion{first section AB}
+\excludeversion{first section B}
 \excludeversion{middle section}
+\excludeversion{final section}
 
 \usecolortheme{orchid}
 
@@ -35,10 +38,10 @@
 \renewcommand{\calC}{\scrK}
 
 \begin{document}
-\title{Adams sseq in simplicial algebras}   
+\title{The Adams spectral sequence for simplicial $\F_2$-algebras}   
 \author{Michael Donovan} 
 \date{\today} 
-%\frame{\titlepage} 
+\frame{\titlepage} 
 %\frame{\frametitle{Table of contents}\tableofcontents} 
 
 
@@ -57,7 +60,10 @@
 \uncover<2->{\cong\textup{unital commutative algebras under and over $\F_2$}}%
 % Comment
 \end{alignat*}
-\uncover<3->{$s\calC$ is a closed model category.} \uncover<4->{$f\in\textup{Mor}(s\calC)$ is:
+
+\textup{}
+
+\uncover<3->{$s\calC$ is a closed simplicial model category.} \uncover<4->{$f\in\textup{Mor}(s\calC)$ is:
 \begin{itemise}
 \setlength{\parindent}{.25in}
 \item 
@@ -126,18 +132,28 @@ H^Q_*(X)
 &=
 (\mathbb{L}_*Q_\calC)X%
 \\
-H_Q^*(X)
-&=
-((\mathbb{L}_*Q_\calC)X)\,\check{}
+\uncover<5->{H_Q^*(X)}
+&\uncover<5->{=((\mathbb{L}_*Q_\calC)X)\,\check{}}
 \end{alignat*}}
 
 }
 
 
 
-\frame{\frametitle{Bousfield-Kan tower \& unstable Adams sseq} 
-Basis facts about the homotopy theory
-Spheres, K(pi,n)s, hurewicz theorem, homology whitehead, homotopy of spheres known
+\frame{\frametitle{Basic facts} 
+\begin{itemise}
+\setlength{\parindent}{.25in}
+\pause\item $S^n=\textup{Fr}(\Delta^n/\partial\Delta^n)$ represents $\pi_n(\DASH)$
+\pause\item $\pi_*(\coprod S^{n_i})$ is \emph{known}\hfill (Cartan, Bousfield, Dwyer, Lada)
+\pause\item $K_n:=(K(\F_2,n))_+$ represents $H^*_Q(\DASH)$
+\pause\item $H^*_Q(\prod K_{n_i})$ is \emph{known}\hfill (Goerss)
+\pause\item Hurewicz theorem (``$H_1=(\pi_1)^{ab}$'' $\rightsquigarrow$ ``$H_0^Q=Q(\pi_0)$'')
+\pause\item Homology Whitehead for \emph{connected} objects\hfill (Miller)
+\pause\item a LCS-type sseq $H_*^Q\implies \pi_*$\hfill (Quillen)
+\pause\item a reverse Adams sseq $\pi_*\implies H^*_Q$\hfill (Miller)
+\pause
+\item and more\,\ldots
+\end{itemise}
 }
 
 
@@ -151,7 +167,8 @@ Spheres, K(pi,n)s, hurewicz theorem, homology whitehead, homotopy of spheres kno
 
 
 
-\frame{\frametitle{Bousfield-Kan tower \& unstable Adams sseq} 
+\frame{\frametitle{\textbf{Classical} Bousfield-Kan tower \& unstable Adams sseq} 
+\pause
 \[\makebox[0cm][r]{$\F_2$-module-ization:\qquad} \xymatrix@R=.3cm@C=1.5cm{
 s\textup{Set}_*  \ar@<.6ex>[r]^{\overline{\F_2}}&
 s\textup{V}  \ar@<.4ex>[l]\\
@@ -198,14 +215,14 @@ s\textup{Set}_*\ar[r]^-{\pi_*(\hat{\rule{0pt}{2mm}\DASH})\check{\phantom{i}}}
 %&
 }\]
 }
-\frame{\frametitle{Massey-Peterson} 
-\begin{itemise}
-\setlength{\parindent}{.25in}
-\item Massey-Peterson: if $H^*X\in\calA\calC^1$ is $U(M)$ for $M\in\calA$:
-\[E_2^{st}=\Ext^s_{\calA\calC^1}(H^*X,H^*S^t)=\Ext^s_{\calA}(M,H^*S^t)\]
-unstable $\Lambda$-algebra resolution is an $E^1$ for spheres!
-\end{itemise}
-}
+%%%%%%\frame{\frametitle{Massey-Peterson} 
+%%%%%%\begin{itemise}
+%%%%%%\setlength{\parindent}{.25in}
+%%%%%%\item Massey-Peterson: if $H^*X\in\calA\calC^1$ is $U(M)$ for $M\in\calA$:
+%%%%%%\[E_2^{st}=\Ext^s_{\calA\calC^1}(H^*X,H^*S^t)=\Ext^s_{\calA}(M,H^*S^t)\]
+%%%%%%unstable $\Lambda$-algebra resolution is an $E^1$ for spheres!
+%%%%%%\end{itemise}
+%%%%%%}
 %
 %\frame{\frametitle{Grothendieck sseq $\implies$ Adams $E_2$}
 %\[E_2^{st}=\Ext^s_{\calA\calC^1}(H^*X,H^*S^t)\implies \pi_{t-s}(X{_2\!\!\!\hat{\phantom{e}}})\]
@@ -243,19 +260,26 @@ unstable $\Lambda$-algebra resolution is an $E^1$ for spheres!
 %${^1}E^2_{pqt}=\Ext_{\calA}^p(\sigma^{-1}H_q^Q(H^*X),H^*S^{t-1})\implies E^{p+q,t}_2$
 %}
 
+\end{first section}
+\begin{first section AB}
+
 \frame{\frametitle{Grothendieck sseq $\implies$ Adams $E_2$}
 %\[E_2^{st}=\Ext^s_{\calA\calC^1}(H^*X,H^*S^t)\implies \pi_{t-s}(X{_2\!\!\!\hat{\phantom{e}}})\]
+\vspace{-.3cm}
 \[E^2_{st}=(\mathbb{L}_sQ_{\calA\calC^1})^t(H^*X)\implies \pi_{t-s}(X{_2\!\!\!\hat{\phantom{e}}})\,\check{ }\]
 
+\textup{}\pause
+
 For $W^*\in\calA\calC^1$:
+\vspace{-.8cm}
+
 \begin{alignat*}{2}
-% Left hand side
-\textup{Cartan formula}
-&\implies \textup{Sq}^i(W^2)\subset W^2\\
-&\implies \textup{$\textup{Sq}^i$ descends to $Q_{\calC^1}W$}\\
-&\implies \textup{$Q_{\calC^1}W$ is an unstable $\calA$-module}\\
-\textup{Sq}^{|x|}(x)=x^2
-&\implies \textup{$\sigma^{-1}Q_{\calC^1}(W)$ still unstable!}
+\uncover<3->{\textup{Cartan formula}}
+&\uncover<3->{\implies \textup{Sq}^i(W^2)\subset W^2}\\
+&\uncover<4->{\implies \textup{$\textup{Sq}^i$ descends to $Q_{\calC^1}W$}}\\
+&\uncover<4->{\implies \textup{$Q_{\calC^1}W$ is an unstable $\calA$-module}}\\
+\uncover<5->{\textup{Sq}^{|x|}(x)=x^2}
+&\uncover<5->{\implies \textup{$\sigma^{-1}Q_{\calC^1}(W)$ still unstable!}}
 \end{alignat*}
 %
 %
@@ -264,7 +288,8 @@ For $W^*\in\calA\calC^1$:
 %$\textup{Sq}(xy)=\textup{Sq}(x)\textup{Sq}(y)$ $\implies$  $Q_{\calC^1}(W)$ an unstable module!
 %
 %{\small ($\textup{Sq}^{|x|}(x)=x^2$ $\implies$  $Q_{\calC^1}(W)$ a suspension!)}
-\[\xymatrix@R=4mm{
+\vspace{-.5cm}
+\uncover<6->{\[\xymatrix@R=4mm{
 \calA\calC^1
 \ar[rr]^-{Q_{\calA\calC^1}}
 \ar[dr]_-{\sigma^{-1}Q_{\calC^1}}
@@ -276,9 +301,9 @@ For $W^*\in\calA\calC^1$:
 \ar[ur]_-{\sigma Q_{\calA}}
 &%r2c2
 %r2c3
-}\]
-
-\[{^1}E^2_{pqt}=(\sigma\mathbb{L}_pQ_{\calA})(\sigma^{-1}H_q^Q(H^*X))^t\implies E_{p+q,t}^2\]
+}\]}
+\uncover<7->{$\rightsquigarrow$ Grothendieck sseq:
+\[E^2_{pqt}=(\sigma\mathbb{L}_pQ_{\calA})(\sigma^{-1}H_q^Q(H^*X))^t\implies E_{p+q,t}^2\]}
 
 %
 %${^1}E^2_{pqt}=\Ext_{\calA}^p(\sigma^{-1}H_q^Q(H^*X),H^*S^{t-1})\implies E^{p+q,t}_2$
@@ -365,7 +390,7 @@ s\textup{Set}_*\ar[r]^-{\pi_*(\hat{\rule{0pt}{2mm}\DASH})\check{\phantom{i}}}
 }\]\pause\pause
 \raisebox{3.5cm}[0cm]{ \qquad \qquad \qquad $\mathbb{L}Q_{\calC^1}$ is just $H^Q_*$!}\pause
 
-\raisebox{3.1cm}[0cm]{Miller: control $H^Q_*$ $\rightsquigarrow$ Sullivan conjecture:}\pause
+\raisebox{3.1cm}[0cm]{Miller: ``control $H^Q_*$ $\rightsquigarrow$ Sullivan conjecture'':}\pause
 
 \raisebox{2.9cm}[0cm]{ \qquad \qquad \qquad for $G$ a finite group, $X$ a finite complex:}
 
@@ -374,7 +399,8 @@ s\textup{Set}_*\ar[r]^-{\pi_*(\hat{\rule{0pt}{2mm}\DASH})\check{\phantom{i}}}
 }
 
 
-
+\end{first section AB}
+\begin{first section B}
 
 \frame{\frametitle{Bousfield-Kan \& Adams for simplicial algebras}
 %\only<1-3>{\phantom{d} }
@@ -390,18 +416,21 @@ s\textup{V}  \ar@<.4ex>[l]^{K:={(\DASH)_+}}\\
 \pause
 $X\in s\calC$ $\rightsquigarrow$ $\overline{X}^{\bullet}:=(K\circ Q_{\calC})^{\bullet+1}X$ $\rightsquigarrow$ $X{_{\phantom{2}}\!\!\!\hat{\phantom{e}}}:=\textup{Tot}(\overline{X}^{\bullet})$. \pause \!\!\!\!\raisebox{.95mm}{\makebox[0mm][r]{\rule{67mm}{.25mm}}} \pause
 
-$c=\textbf{}$cofibrant replacement comonad \pause
+\textbf{}
+
+\textbf{\qquad \qquad \quad }$c=\textbf{}$cofibrant replacement comonad \pause
+
+\textbf{}
 
 $X\in s\calC$ $\rightsquigarrow$ $\overline{X}^{\bullet}:=(c\circ K\circ Q_{\calC})^{\bullet+1}cX$ $\rightsquigarrow$ $X{_{\phantom{2}}\!\!\!\hat{\phantom{e}}}:=\textup{Tot}((\overline{X}^{\bullet})^{\textup{r.f.}})$.
 
 \pause
 
-Adams spectral sequence:
 %\[E_2^{st}=\Ext^s_{\calA\textup{-coalgs}}(H_*S^t,H_*X)\implies \pi_{t-s}(X{_2\!\!\!\hat{\phantom{e}}})\]
 % \pause dually:
 %\[E_2^{st}=\Ext^s_{\calA\calC^1}(H^*X,H^*S^t)\implies \pi_{t-s}(X{_2\!\!\!\hat{\phantom{e}}})\]
 % \pause dually$^2$:
-\[E^2_{st}=(\mathbb{L}_sQ_{\textbf{\large ?}})^t(H^*_QX)\implies \pi_{t-s}(X{_{\phantom{2}}\!\!\!\hat{\phantom{e}}})\,\check{ }\] \pause 
+\[\makebox[0cm][r]{Adams sseq:\qquad  }E^2_{st}=(\mathbb{L}_sQ_{\textbf{\large ?}})^t(H^*_QX)\implies \pi_{t-s}(X{_{\phantom{2}}\!\!\!\hat{\phantom{e}}})\,\check{ }\] \pause 
 \[\xymatrix@!0@R=7mm@C=23mm{
 s\calC\ar[r]^-{\pi_*(\hat{\rule{0pt}{2mm}\DASH})\check{\phantom{i}}}
 &
@@ -495,7 +524,7 @@ $\calP\scrL^1$ is category with objects $W^*$:
 \end{itemise}
 
 }
-\end{first section}
+\end{first section B}
 \begin{middle section}
 \frame{\frametitle{Calculating $\mathbb{L}Q_{\calP\scrL^1}$} 
 
@@ -840,7 +869,7 @@ Grothendieck sseq for $\mathbb{L}Q_{\scrL^2\Lambda}$:
 }
 
 \end{middle section}
-
+\begin{final section}
 
 
 
@@ -949,6 +978,8 @@ s\calC\ar[r]^-{\pi_*(\hat{\rule{0pt}{2mm}\DASH})\check{\phantom{i}}}&
 \end{gather*}
 \only<1-1>{\phantom{.}}
 }
+
+\end{final section}
 
 \end{document}
 
