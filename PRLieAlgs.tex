@@ -13,6 +13,7 @@
 \excludeversion{AdamsDerivation}
 \excludeversion{TotalisationInSAlg}
 \includeversion{convergence}
+\excludeversion{convergenceOLD}
 \excludeversion{SteenrodAlgebrasAndTheirKoszulDuals}
 \excludeversion{CategoriesOfInterest}
 \excludeversion{HomotopicalAlgebra}
@@ -337,92 +338,247 @@ Suppose that $X$ is a connected element of $s\Comm$. Then the Adams spectral seq
 \end{TotalisationInSAlg}
 
 \begin{convergence}
-\subsection{Convergence of the spectral sequence}
-Following \cite{BousKanSSeq.pdf}, for any functor $F:s\Comm\to s\Comm$, we'll define the $r^\textup{th}$ derived functor $(D^sF)$ of $F$ with respect to Andr\'e-Quillen homology. The definition is inductive: one sets $(D^0F)=F$, and
-\[(D^sF)(X):=\ker((D^{s-1}F)(cY)\to (D^{s-1}F)(QcY)).\]
-Here, $Q$ is the indecomposables functor, and $c:s\Comm\to s\Comm$ is (the diagonal of) the standard bar construction, $(cX)_n:=T^{n+1}X_n$, where $T$ is the monad from the free/forget adjunction between vector spaces and nucas.
+\subsection{Functors derived with respect to Quillen homology}
+Let $\mathsf{CR(s\Comm)}$ be the category of cofibrant replacement functors in $s\Comm$. That is, an object of $\mathsf{CR(s\Comm)}$ is an augmented endofunctor $(c,\epsilon)$, such that $c:s\Comm\to s\Comm$ is a functor whose consists only of cofibrant objects, and $\epsilon:c\Rightarrow I$ is a natural acyclic fibration. Morphisms in $\mathsf{CR(s\Comm)}$ are to be natural transformations which commute with the augmentations.
 
-There is a natural transformation $\delta:(D^sF)\to (D^{s-1}F)$ given by the following composite:
-\[(D^sF)(X)\to (D^{s-1}F)(cX)\to (D^{s-1}F)(X).\]
+[Following \cite{BousKanSSeq.pdf}, Sinha, BR, RB, Harper] Fix a functor $F:s\Comm\to s\Comm$, and a cofibrant replacement functor $(c,\epsilon)\in\mathsf{CR(s\Comm)}$.
+
+We'll define the $r^\textup{th}$ derived functor $(D^r_cF)$ of $F$ with respect to Andr\'e-Quillen homology. The definition is inductive: one sets $(D^0F)(X)=F(cX)$, and
+\[(D^sF)(X):=\hofib((D^{s-1}F)(cX)\to (D^{s-1}F)(QcX)),\]
+where $Q$ is the indecomposables functor, and $\hofib$ is some fixed functorial construction of the homotopy fibre. These functors fit into a tower, via the following composite natural transformation:
+\[(D^sF)(X)\to (D^{s-1}F)(cX)\overset{(D^{s-1}F)(\epsilon)}{\to} (D^{s-1}F)(X).\]
+For clarity, we'll record the construction of $(D^1F)(X)$, $(D^2F)(X)$ and the map between them, in the following diagram. Note that every composable pair of  parallel arrows is to be a homotopy fibre sequence.
+
+
+%@=50pt
+\[\def\labelstyle{\scriptstyle}
+\xymatrix@!0@R=30pt@C=50pt{
+(D^2F)(X)\ar[dr]\ar[dd]\\
+&(D^1F)(cX) \ar[rr]\ar[rd]\ar[dd]         &           &FcccX \ar[rr]\ar[rd]\ar'[d][dd]^{Fcc\epsilon}         &           &   FcQccX \ar'[d][dd]^{FcQc\epsilon}           \ar[dr]  &                  \\
+(D^1F)(X)\ar[dr]&        &  (D^1F)(QcX) \ar[rr] \ar[dd]  &                     &  FccQcX \ar[rr] \ar[dd]  &             & FcQcQcX
+         \ar[dd] \\
+&(D^1F)(X) \ar'[r][rr] \ar[dr] &        &   FccX \ar'[r][rr] \ar[dr] &        &   FcQcX
+\ar[dr] &                   \\
+&        &   0 \ar[rr]      &               &   0 \ar[rr]      &                    &
+0
+}\]
+We have thus constructed a tower
+\[\xymatrix@R=4mm{
+\cdots 
+\ar[r]
+&%r1c1
+(D^{t}F)X
+\ar[r]
+&%r1c3
+\cdots \ar[r]
+&%r1c4
+(D^1F)X
+\ar[r]&%r1c5
+(D^0F)X=FcX,
+}\]
+which is natural in $X$.
+Moreover, this construction is natural in the functor $F$, is homotopical as long as $F$ preserves weak equivalences between cofibrant objects. Finally, given a morphism $(c,\epsilon)\to (c',\epsilon')$ of cofibrant replacements, one obtains natural weak equivalences $(D^t_c)X\to(D^t_{c'})X$.
+
+Suppose that $(c,\epsilon)$ and $(c',\epsilon')$ are any two competing cofibrant replacement functors. Then we can form a third cofibrant replacement, $(cc',\epsilon\epsilon')$, which maps to each of them, via the natural transformations $c\overset{\epsilon'}{\from}cc'\overset{\epsilon}{\to}c'$. Thus we have natural weak equivalences of towers:
+\[\xymatrix@R=4mm{
+\cdots 
+\ar[r]
+&%r1c1
+(D^{t}_cF)X
+\ar[r]
+&%r1c3
+\cdots \ar[r]
+&%r1c4
+(D^1_cF)X
+\ar[r]&%r1c5
+(D^0_cF)X\makebox[0pt][l]{$\mbox{}=FcX$}\\
+\cdots 
+\ar[r]
+&%r1c1
+(D^{t}_{cc'}F)X
+\ar[u]_-{\sim}
+\ar[d]^-{\sim}
+\ar[r]
+&%r1c3
+\cdots \ar[r]
+&%r1c4
+(D^1_{cc'}F)X
+\ar[u]_-{\sim}
+\ar[d]^-{\sim}
+\ar[r]&%r1c5
+(D^0_{cc'}F)X\makebox[0pt][l]{$\mbox{}=Fcc'X$}
+\ar[u]_-{\sim}
+\ar[d]^-{\sim}\\
+\cdots 
+\ar[r]
+&%r1c1
+(D^{t}_{c'}F)X
+\ar[r]
+&%r1c3
+\cdots \ar[r]
+&%r1c4
+(D^1_{c'}F)X
+\ar[r]&%r1c5
+(D^0_{c'}F)X\makebox[0pt][l]{$\mbox{}=Fc'X$}
+}\]
+It is in this sense that the tower is independent of the cofibrant replacement used.
+
+
+
+%A MAP INDUCED ON TFIBRES OF 2-CUBES
+%\[\xymatrix@=20pt{
+%f\ar[dr]\ar[dd]\\
+%&X^{[-1]} \ar[rr]\ar[rd]\ar[dd]         &           &X^{[-1]} \ar[rr]\ar[rd]\ar'[d][dd]         &           &   X^{[0]} \ar'[d][dd]           \ar[dr]  &                  \\
+%f\ar[dr]&        &  X^{[0]} \ar[rr] \ar[dd]  &                     &  X^{[0]} \ar[rr] \ar[dd]  &             & X^{[1]}
+%         \ar[dd] \\
+%&X^{[0]} \ar'[r][rr] \ar[dr] &        &   X^{[0]} \ar'[r][rr] \ar[dr] &        &   X^{[1]}
+%\ar[dr] &                   \\
+%&        &   X^{[1]} \ar[rr]      &               &   X^{[1]} \ar[rr]      &                    &
+%X^{[2]}
+%}\]
+
+\subsection{Functors derived using the bar construction}
+For this section, we will always use the cofibrant replacement functor $(c,\epsilon)$ in which $c:s\Comm\to s\Comm$ is (the diagonal of) the standard bar construction, $(cX)_n:=T^{n+1}X_n$. Here, $T$ is the monad from the free/forget adjunction between vector spaces and nucas. We'll only be interested in deriving two different endofunctors of $s\Comm$, the identity $I$, and the ``$s^\textup{th}$ power'' functor $P^sX:=X^s$.
+
+As these functors are particularly well behaved, we will be able to use a modified version of the derived functor construction, which we'll write $(\calD^sF)$, for $F$ either $I$ or $P^s$. Again, the definition is inductive: one sets $(\calD^0F)=F$ \textbf{(NOTE: one fewer replacement)}, and
+\[(\calD^sF)(X):=\ker((\calD^{s-1}F)(cX)\to (\calD^{s-1}F)(QcX)).\]
+Now there are evident maps of towers
+\[\xymatrix@R=4mm{
+\cdots 
+\ar[r]
+&%r1c1
+(D^{t}_cI)X
+\ar[r]
+&%r1c3
+\cdots \ar[r]
+&%r1c4
+(D^1_cI)X
+\ar[r]&%r1c5
+(D^0_cI)X\makebox[0pt][l]{$\mbox{}=cX$}\\
+\cdots 
+\ar[r]
+&%r1c1
+(\calD^{t}Ic)X
+\ar[u]_-{}
+\ar[d]^-{}
+\ar[r]
+&%r1c3
+\cdots \ar[r]
+&%r1c4
+(\calD^1Ic)X
+\ar[u]_-{}
+\ar[d]^-{}
+\ar[r]&%r1c5
+(\calD^0Ic)X\makebox[0pt][l]{$\mbox{}=cX$}
+\ar[u]_-{}
+\ar[d]^-{}\\
+\cdots 
+\ar[r]
+&%r1c1
+(\calD^{t}I)X
+\ar[r]
+&%r1c3
+\cdots \ar[r]
+&%r1c4
+(\calD^1I)X
+\ar[r]&%r1c5
+(\calD^0I)X\makebox[0pt][l]{$\mbox{}=IX$}
+}\]
+in which the upward maps result from mapping strict fibres to homotopy fibres, and the downward maps are induced by $\epsilon:Ic\to I$.
+
+\textbf{We'll show that these vertical maps are all weak equivalences.}
+
+
+
+
+
+
+
+
+
+
+
+
+
 Our purpose in this section will be to prove the following, where we write $I$ for the identity functor $s\Comm\to s\Comm$:
 \begin{prop}\label{convergenceProp}
-The functors $(D^sI):s\Comm\to s\Comm$ preserve weak equivalences.
+The functors $(\calD^sI):s\Comm\to s\Comm$ preserve weak equivalences.
 For $X\in s\Comm$ a connected simplicial algebra, consider the tower:
 \[\xymatrix@R=4mm{
 \cdots 
 \ar[r]
 &%r1c1
-(D^{t}I)X
+(\calD^{t}I)X
 \ar[r]
 &%r1c3
 \cdots \ar[r]
 &%r1c4
-(D^1I)X
+(\calD^1I)X
 \ar[r]&%r1c5
-(D^0I)X=X.
+(\calD^0I)X=X.
 }\]
-For integers $t\geq2$ and $q\geq0$, the map $\pi_q(D^{2t+q-1}I)X\to\pi_q(D^{t}I)X$ is zero.
+For integers $t\geq2$ and $q\geq0$, the map $\pi_q(\calD^{2t+q-1}I)X\to\pi_q(\calD^{t}I)X$ is zero.
 \end{prop}
 \begin{proof}%[Proof of \ref{convergenceProp}]
-The first claim is \ref{towerIsHomotopical}. Apply $(D^t\DASH)X$ to the diagram of functors to constructed in \ref{towerWithPowers}, to obtain the following diagram in $s\Comm$:
+The first claim is \ref{towerIsHomotopical}. Apply $(\calD^t\DASH)X$ to the diagram of functors constructed in \ref{towerWithPowers}, to obtain the following diagram in $s\Comm$:
 \[\xymatrix@R=4mm{
 \cdots 
 \ar[r]
 &%r1c1
-(D^{2t+q-1}I)X
+(\calD^{2t+q-1}I)X
 \ar[r]
 \ar[d]
 &
 \cdots \ar[r]
 &%r1c4
-(D^{t+1}I)X
+(\calD^{t+1}I)X
 \ar[r]
 \ar[d]&%r1c5
-(D^tI)X
+(\calD^tI)X
 \ar@{=}[d]
 \\%r1c6
 \cdots
 \ar[r]
 &%r2c1
-(D^tP^{t+q})X
+(\calD^tP^{t+q})X
 \ar[r]
 &%r2c3
 \cdots 
 \ar[r]&%r2c4
-(D^tP^2)X
+(\calD^tP^2)X
 \ar[r]
 &%r2c5
-(D^tI)X%r2c6
+(\calD^tI)X%r2c6
 }\]
-By \ref{connectivityOfDerivedPowers}, $(D^tP^{t+q})(A)$ is $q$-connected, and the result follows.
+By \ref{connectivityOfDerivedPowers}, $(\calD^tP^{t+q})(A)$ is $q$-connected, and the result follows.
 \end{proof}
 
 
 Before proving this fact, we'll perform a little analysis of the derived functors of the identity functor $I$, and of the ``$s^\textup{th}$ power'' functor $P^sX:=X^s$.
 \begin{enumerate}\squishlist
 \setlength{\parindent}{.25in}
-\item For any functor $F$, there is a natural isomorphism $(D^s(D^tF))\cong (D^{s+t}F)$ so that the evident diagram commutes:
+\item For any functor $F$, there is a natural isomorphism $(\calD^s(\calD^tF))\cong (\calD^{s+t}F)$ so that the evident diagram commutes:
 \[\xymatrix@R=4mm{
-(D^s(D^tF))
+(\calD^s(\calD^tF))
 \ar[r]^-{\cong}
-\ar[d]^-{(D^s\delta)}
+\ar[d]^-{(\calD^s\delta)}
 &%r1c1
-(D^{s+t}F)
+(\calD^{s+t}F)
 \ar[d]^-{\delta}
 \\%r1c2
-(D^s(D^{t-1}F))
+(\calD^s(\calD^{t-1}F))
 \ar[r]^-{\cong}&%r1c1
-(D^{s+t-1}F)
+(\calD^{s+t-1}F)
 }\]
-\item If $F$ is the prolongation of a functor $\Comm\to\Comm$, one notes that $(D^sF)$ can be defined one level at a time. That is,  we may define functors $(D^s_nF):\Comm\to\Comm$ such that $(D^sF)(X)_n=(D^s_nF)(X_n)$, by defining $(D^0_nF):=F$, and
-\[(D^s_nF)(Y):=\ker((D^{s-1}_nF)(T^{n+1}Y)\to (D^{s-1}_nF)(QT^{n+1}Y)).\]
+\item If $F$ is the prolongation of a functor $\Comm\to\Comm$, one notes that $(\calD^sF)$ can be defined one level at a time. That is,  we may define functors $(\calD^s_nF):\Comm\to\Comm$ such that $(\calD^sF)(X)_n=(\calD^s_nF)(X_n)$, by defining $(\calD^0_nF):=F$, and
+\[(\calD^s_nF)(Y):=\ker((\calD^{s-1}_nF)(T^{n+1}Y)\to (\calD^{s-1}_nF)(QT^{n+1}Y)).\]
 \end{enumerate}
 \begin{lem}
 For $Y\in\Comm$, and integers $r,n\geq0$ and $s>0$:
 \begin{itemise}
 \setlength{\parindent}{.25in}
-\item $(D^r_nI)Y\subset (\calT_1T^n_1)\cdots (\calT_rT^n_r)Y$ is the subset consiting of those mega\-monomials which have a doubling in each of the $\calT_1,\ldots,\calT_r$ functors.
-\item $(D^r_nP^{s})Y\subset (\calT_1T^n_1)\cdots (\calT_rT^n_r)Y$ is the subset consiting of those mega\-monomials which have a doubling in each of the $\calT_2,\ldots,\calT_r$ functors, and a power of $s$ in the $\calT_1$ functor.
+\item $(\calD^r_nI)Y\subset (\calT_1T^n_1)\cdots (\calT_rT^n_r)Y$ is the subset consiting of those mega\-monomials which have a doubling in each of the $\calT_1,\ldots,\calT_r$ functors.
+\item $(\calD^r_nP^{s})Y\subset (\calT_1T^n_1)\cdots (\calT_rT^n_r)Y$ is the subset consiting of those mega\-monomials which have a doubling in each of the $\calT_2,\ldots,\calT_r$ functors, and a power of $s$ in the $\calT_1$ functor.
 \end{itemise}
 
 \end{lem}
@@ -430,12 +586,12 @@ For $Y\in\Comm$, and integers $r,n\geq0$ and $s>0$:
 %We now have enough notation to prove this claim, which is really a claim about $D^r_nY$, by induction on $r$. 
 This is trivial when $r=0$. Supposing an inductive hypothesis:
 \begin{alignat*}{2}
-(D^r_nI)(Y)
+(\calD^r_nI)(Y)
 &:=
-\ker((D^{r-1}_nI)(\calT_r T_r^n Y)\to (D^{r-1}_nI) (Q\calT_rT_r^n X_n))%
+\ker((\calD^{r-1}_nI)(\calT_r T_r^n Y)\to (\calD^{r-1}_nI) (Q\calT_rT_r^n X_n))%
 \\
 &=
-(D^{r-1}_nI)(\calT_r T_r^n Y)\cap\langle \textup{meganomials with a doubling in $\calT_r$}\rangle\\
+(\calD^{r-1}_nI)(\calT_r T_r^n Y)\cap\langle \textup{meganomials with a doubling in $\calT_r$}\rangle\\
 &=
 \langle \textup{meganomials with a doubling in $\calT_1,\ldots,\calT_{r-1}$}\rangle\cap\langle \textup{doubling in $\calT_r$}\rangle\\
 &=
@@ -444,25 +600,25 @@ This is trivial when $r=0$. Supposing an inductive hypothesis:
 The proof for derived functors of $P^{s}$ is identical.
 \end{proof}
 \begin{cor}\label{towerWithPowers}
-The functors $(D^rI)$ and $(D^rP^{s})$ preserve surjective maps, and there is a commuting diagram of functors:
+The functors $(\calD^rI)$ and $(\calD^rP^{s})$ preserve surjective maps, and there is a commuting diagram of functors:
 \[\xymatrix@R=4mm{
 \cdots 
 \ar[r]
 &%r1c1
-(D^rI)
+(\calD^rI)
 \ar[r]
 \ar[d]
 &%r1c2
 \cdots \ar[r]
 &%r1c4
-(D^2I)
+(\calD^2I)
 \ar[r]
 \ar[d]
 &%r1c4
-(D^1I)
+(\calD^1I)
 \ar[r]
 \ar[d]&%r1c5
-(D^0I)
+(\calD^0I)
 \ar@{=}[d]
 \\%r1c6
 \cdots
@@ -482,22 +638,22 @@ I%r2c6
 }\]
 \end{cor}
 \begin{cor}\label{towerIsHomotopical}
-The functors $(D^rI):s\Comm\to s\Comm$ preserve all weak equivalences.
+The functors $(\calD^rI):s\Comm\to s\Comm$ preserve all weak equivalences.
 \end{cor}
 \begin{proof}
-This is trivial when $r=0$. Suppose, by induction on $r$, that $(D^{r-1}I)$ preserves weak equivalences, and that $f:X\to X'$ is a weak equivalence in $s\Comm$. Then we have a commutative diagram in $s\Comm$:
+This is trivial when $r=0$. Suppose, by induction on $r$, that $(\calD^{r-1}I)$ preserves weak equivalences, and that $f:X\to X'$ is a weak equivalence in $s\Comm$. Then we have a commutative diagram in $s\Comm$:
 \[\xymatrix@R=4mm{
 0\ar[r]&
-(D^rI)X\ar[d]^{(D^rI)(f)}\ar[r]&
-(D^{r-1}I)(cX)\ar[d]^{(D^{r-1}I)(cf)}\ar[r]&
-(D^{r-1}I)(QcX)\ar[d]^{(D^{r-1}I)(Qcf)}\ar[r]&
+(\calD^rI)X\ar[d]^{(\calD^rI)(f)}\ar[r]&
+(\calD^{r-1}I)(cX)\ar[d]^{(\calD^{r-1}I)(cf)}\ar[r]&
+(\calD^{r-1}I)(QcX)\ar[d]^{(\calD^{r-1}I)(Qcf)}\ar[r]&
 0\\0\ar[r]&
-(D^rI)X'\ar[r]&
-(D^{r-1}I)(cX')\ar[r]&
-(D^{r-1}I)(QcX')\ar[r]&
+(\calD^rI)X'\ar[r]&
+(\calD^{r-1}I)(cX')\ar[r]&
+(\calD^{r-1}I)(QcX')\ar[r]&
 0
 }\]
-Now the rows are short exact sequences, as $(D^{r-1}I)$ preserves surjective maps. The maps $cf$ and $Qcf$ are weak equivalences, as $c$ is a cofibrant replacement, and $Q$ is left Quillen. Thus, the induction hypothesis implies that the $(D^{r-1}I)(cf)$ and $(D^{r-1}I)(Qcf)$ are weak equivalences. The homotopy long exact sequence and the 5-lemma together imply that ${(D^rI)(f)}$ is a weak equivalence.
+Now the rows are short exact sequences, as $(\calD^{r-1}I)$ preserves surjective maps. The maps $cf$ and $Qcf$ are weak equivalences, as $c$ is a cofibrant replacement, and $Q$ is left Quillen. Thus, the induction hypothesis implies that the $(\calD^{r-1}I)(cf)$ and $(\calD^{r-1}I)(Qcf)$ are weak equivalences. The homotopy long exact sequence and the 5-lemma together imply that ${(\calD^rI)(f)}$ is a weak equivalence.
 \end{proof}
 
 \begin{prop}\label{connectivityOfPowerQuillen}
@@ -507,146 +663,153 @@ For $A\in s\Comm$ almost free and connected, and any $s\geq0$, $P^{s}A$ is $(s-1
 Truncate Quillen's fundamental spectral sequence, as presented in \cite[thm 6.2]{MR1089001}.
 \end{proof}
 \begin{cor}\label{connectivityOfDerivedPowers}
-For $A\in s\Comm$ connected, and any $t>0$ and $s\geq2$, $(D^tP^{s})(A)$ is $(s-t)$-connected.
+For $A\in s\Comm$ connected, and any $t>0$ and $s\geq2$, $(\calD^tP^{s})(A)$ is $(s-t)$-connected.
 \end{cor}
 \begin{proof}
 We'll prove this by induction on $t$. When $t=1$:
-\[(D^1P^{s})A:=\ker(P^{s}(cA)\to P^{s}(QcA))=P^{s}(cA)\]
-Thus $(D^1P^{s})A$ is $(s-1)$-connected, by \ref{connectivityOfPowerQuillen}.
+\[(\calD^1P^{s})A:=\ker(P^{s}(cA)\to P^{s}(QcA))=P^{s}(cA)\]
+Thus $(\calD^1P^{s})A$ is $(s-1)$-connected, by \ref{connectivityOfPowerQuillen}.
 
-Now suppose, by induction, that $(D^{t-1}P^{s})(B)$ is $(s-(t-1))$-connected for any connected $B$. Then by \ref{towerWithPowers}, there's a short exact sequence:
+Now suppose, by induction, that $(\calD^{t-1}P^{s})(B)$ is $(s-(t-1))$-connected for any connected $B$. Then by \ref{towerWithPowers}, there's a short exact sequence:
 \[\xymatrix{
 0\ar[r]&
-(D^{t}P^{s})(A)\ar[r]&
-(D^{t-1}P^{s})(cA)\ar[r]&
-(D^{t-1}P^{s})(QcA)\ar[r]&
+(\calD^{t}P^{s})(A)\ar[r]&
+(\calD^{t-1}P^{s})(cA)\ar[r]&
+(\calD^{t-1}P^{s})(QcA)\ar[r]&
 0
 }\]
-in which the rightmost two objects are each $(s-t+1)$-connected. The associated long exact sequence shows that $(D^{t}P^{s})(A)$ is $(s-t)$-connected.
+in which the rightmost two objects are each $(s-t+1)$-connected. The associated long exact sequence shows that $(\calD^{t}P^{s})(A)$ is $(s-t)$-connected.
 \end{proof}
 
-%\begin{itemise}
-%\setlength{\parindent}{.25in}
-%\item need connectivity of $P^s$ on cofibrant dudes i.e.\ a curtis theorem
-%\item need to make an easy argument on the connectivity of $D^{t}P^{s+1}$ as s grows - it's easy because we've shown that the maps involved are all surjections, so that there are long exact sequences. The connectivity loss invoked by $t$ is at most $t$, and we can push $s+1$ way up.
-%\item we'd like the $D^s$ to be homotopical - I think that's easy enough.
-%\end{itemise}
+\subsection{Fibres in the $\Tot$ tower}
+Now we'll write $\sigma $ for the cofibrant replacement that Radelescu-Banu proves is a comonad.
+\[\def\labelstyle{\scriptstyle}
+\xymatrix@!0@R=30pt@C=50pt{
+\sigma X \ar[rr]\ar[rd]\ar[dd]         &           &   \sigma Q\sigma X \ar'[d][dd]           \ar[dr]  &                  \\
+ &  \sigma Q\sigma X \ar[rr] \ar[dd]  &             & \sigma Q\sigma Q\sigma X
+         \ar[dd] \\
+\sigma \sigma \sigma X \ar'[r][rr] \ar[dr] &        &   \sigma Q\sigma \sigma X
+\ar[dr] &                   \\
+           &   \sigma \sigma Q\sigma X \ar[rr]      &                    &
+\sigma Q\sigma Q\sigma X
+}\]
+The verticals in this diagram constitute a pointwise weak equivalence between those diagrams from which we obtain $\widetilde{X}^2:=\hofib(X\to \Tot_2\overline{X})$ and $(D^2_\sigma I)(X)$ respectively.
 
 
-%%%%%
-%%%%%\subsection*{The whole point}
-%%%%%
-%%%%%
-%%%%%\begin{proof}[Proof of \ref{convergenceProp}]
-%%%%%Apply $(D^t\DASH)X$ to the ladder from \ref{towerWithPowers}
-%%%%%to obtain a ladder in $s\Comm$:
-%%%%%\[\xymatrix@R=4mm{
-%%%%%\cdots 
-%%%%%\ar[r]
-%%%%%&%r1c1
-%%%%%(D^{s+t}I)X
-%%%%%\ar[r]
-%%%%%\ar[d]
-%%%%%&
-%%%%%\cdots \ar[r]
-%%%%%&%r1c4
-%%%%%(D^{t+1}I)X
-%%%%%\ar[r]
-%%%%%\ar[d]&%r1c5
-%%%%%(D^tI)X
-%%%%%\ar@{=}[d]
-%%%%%\\%r1c6
-%%%%%\cdots
-%%%%%\ar[r]
-%%%%%&%r2c1
-%%%%%(D^tP^{s+1})X
-%%%%%\ar[r]
-%%%%%&%r2c3
-%%%%%\cdots 
-%%%%%\ar[r]&%r2c4
-%%%%%(D^tP^2)X
-%%%%%\ar[r]
-%%%%%&%r2c5
-%%%%%(D^tI)X%r2c6
-%%%%%}\]
-%%%%%The result follows by noting that, for any fixed $t$, the connectivity of $(D^tP^{s+1})X$ grows without bound as $s$ increases (quantify and include).
-%%%%%\end{proof}
-%%%%%
-%%%%%
-%%%%%\subsection*{old stuff}
-%%%%%
-%%%%%
-%%%%%
-%%%%%
-%%%%%Define, inductively, functors $D^s:s\Comm\to s\Comm$, by setting $D^0X:=X$, and writing
-%%%%%\[D^s(X):=\ker(D^{s-1}(cX)\to D^{s-1}(QcX)).\]
-%%%%%One notes that $D^s(X)$ is a subalgebra of $c^sX$. We'll be able to identify exactly which subalgebra it is. Write $(cX)_n:=T^{n+1}X_n$, where $T$ is the non-unital tensor algebra functor from vector spaces to nucas. The construction is performed levelwise, so we may fix $n$. That is to say that we may define functors $D^s_n:\Comm\to\Comm$ such that $D^s(X)_n=D^s_n(X_n)$, by defining 
-%%%%%\[D^0_n(Y):=Y\textup{ and }D^s_n(Y):=\ker(D^{s-1}_n(T^{n+1}Y)\to D^{s-1}_n(QT^{n+1}Y)).\]
-%%%%%\begin{lem}
-%%%%%$D^s_n(Y)\subset (\calT_1T^n_1)\cdots (\calT_sT^n_s)Y$ is the subset consiting of those mega\-monomials which have a doubling in each of the $\calT_1,\ldots,\calT_s$ functors.
-%%%%%\end{lem}
-%%%%%\begin{proof}
-%%%%%%We now have enough notation to prove this claim, which is really a claim about $D^s_nY$, by induction on $s$. 
-%%%%%This is trivial when $s=0$. Supposing an inductive hypothesis:
-%%%%%\begin{alignat*}{2}
-%%%%%D^s_n(Y)
-%%%%%&:=
-%%%%%\ker(D^{s-1}_n(\calT_s T_s^n Y)\to D^{s-1}_n (Q\calT_sT_s^n X_n))%
-%%%%%\\
-%%%%%&=
-%%%%%D^{s-1}_n(\calT_s T_s^n Y)\cap\langle \textup{meganomials with a doubling in $\scrT_s$}\rangle\\
-%%%%%&=
-%%%%%\langle \textup{meganomials with a doubling in $\scrT_1,\ldots,\scrT_{s-1}$}\rangle\cap\langle \textup{doubling in $\scrT_s$}\rangle\\
-%%%%%&=
-%%%%%\langle \textup{meganomials with a doubling in $\scrT_1,\ldots,\scrT_{s-1},\scrT_{s}$}\rangle\qedhere
-%%%%%\end{alignat*}
-%%%%%\end{proof}
-%%%%%It is no more difficult than this to prove the following:
-%%%%%\begin{prop}
-%%%%%For $s,t\geq0$, $D^tP^{s+1}(X)_n\subset (\calT_1T^n_1)\cdots (\calT_tT^n_t)X_n$ is the subset consiting of those mega\-monomials which have a 2-fold product in each of the $\calT_2,\ldots,\calT_t$ functors, and which have a $\min\{s,2\}$-fold product in $\calT^1$.
-%%%%%\end{prop}
-%%%%%\begin{cor}
-%%%%%The natural map $D^tD^{s}(X)_n$
-%%%%%\end{cor}
-%%%%%
-%%%%%As $cX\to QcX$ is always surjective, this kernel is also the homotopy fibre. Now there are natural maps $D^s(X)\to c^sX\to X$, forming a tower above $X$, which factors through the tower of inclusions of powers of $X$:
-%%%%%\[\xymatrix@R=4mm{
-%%%%%\cdots 
-%%%%%\ar[r]
-%%%%%&%r1c1
-%%%%%D^s(X)
-%%%%%\ar[r]
-%%%%%\ar[d]
-%%%%%&%r1c2
-%%%%%D^{s-1}(X)
-%%%%%\ar[r]
-%%%%%\ar[d]&%r1c3
-%%%%%\cdots \ar[r]
-%%%%%&%r1c4
-%%%%%D^1(X)
-%%%%%\ar[r]
-%%%%%\ar[d]&%r1c5
-%%%%%D^0(X)
-%%%%%\ar@{=}[d]
-%%%%%\\%r1c6
-%%%%%\cdots
-%%%%%\ar[r]
-%%%%%&%r2c1
-%%%%%X^{s+1}
-%%%%%\ar[r]
-%%%%%&%r2c2
-%%%%%X^{s}
-%%%%%\ar[r]
-%%%%%&%r2c3
-%%%%%\cdots 
-%%%%%\ar[r]&%r2c4
-%%%%%X^2
-%%%%%\ar[r]
-%%%%%&%r2c5
-%%%%%X%r2c6
-%%%%%}\]
-%%%%%% which we'll show factor through $X^{s+1}$, the $(s+1)^{\textup{st}}$ power of $X$. 
-%%%%%In particular, for any given $n$, there exists $s=s(n)$ such that $\pi_nD^s(X)\to\pi_n(X)$ is zero.
+
+\[\xymatrix@R=4mm{
+\cdots 
+\ar[r]
+&%r1c1
+\Tot_{t-1}(\overline{X}^\bullet)
+\ar[r]
+&%r1c3
+\cdots \ar[r]
+&%r1c4
+\Tot_0(\overline{X}^\bullet)
+\ar[r]&%r1c5
+0\makebox[0pt][l]{$\mbox{}=\sigma X$}
+\\
+\cdots
+\ar[r]
+&%r1c1
+X
+\ar[u]
+\ar[r]
+&%r1c3
+\cdots \ar[r]
+&%r1c4
+X
+\ar[u]
+\ar[r]&%r1c5
+X\makebox[0pt][l]{$\mbox{}=\sigma X$}\ar[u]
+\\
+\cdots 
+\ar[r]
+&%r1c1
+\widetilde{X}^t
+\ar[u]_-{}
+\ar[d]^-{\sim}
+\ar[r]
+&%r1c3
+\cdots \ar[r]
+&%r1c4
+\widetilde{X}^1
+\ar[u]_-{}
+\ar[d]^-{\sim}
+\ar[r]&%r1c5
+\widetilde{X}^0\makebox[0pt][l]{$\mbox{}=\sigma X$}
+\ar[u]_-{}
+\ar[d]^-{\sim}\\
+\cdots 
+\ar[r]
+&%r1c1
+(D^{t}_\sigma I)X
+\ar[r]
+&%r1c3
+\cdots \ar[r]
+&%r1c4
+(D^1_\sigma I)X
+\ar[r]&%r1c5
+(D^0_\sigma I)X\makebox[0pt][l]{$\mbox{}=\sigma X$}\\
+\cdots 
+\ar[r]
+&%r1c1
+(D^{t}_{c\sigma} I)X
+\ar[u]_-{\sim}
+\ar[d]^-{\sim}
+\ar[r]
+&%r1c3
+\cdots \ar[r]
+&%r1c4
+(D^1_{c\sigma} I)X
+\ar[u]_-{\sim}
+\ar[d]^-{\sim}
+\ar[r]&%r1c5
+(D^0_{c\sigma} I)X\makebox[0pt][l]{$\mbox{}={c\sigma} X$}
+\ar[u]_-{\sim}
+\ar[d]^-{\sim}\\
+\cdots 
+\ar[r]
+&%r1c1
+(D^{t}_cI)X
+\ar[r]
+&%r1c3
+\cdots \ar[r]
+&%r1c4
+(D^1_cI)X
+\ar[r]&%r1c5
+(D^0_cI)X\makebox[0pt][l]{$\mbox{}=cX$}\\
+\cdots 
+\ar[r]
+&%r1c1
+(\calD^{t}Ic)X
+\ar[u]_-{\sim}
+\ar[d]^-{\sim}
+\ar[r]
+&%r1c3
+\cdots \ar[r]
+&%r1c4
+(\calD^1Ic)X
+\ar[u]_-{\sim}
+\ar[d]^-{\sim}
+\ar[r]&%r1c5
+(\calD^0Ic)X\makebox[0pt][l]{$\mbox{}=cX$}
+\ar[u]_-{\sim}
+\ar[d]^-{\sim}\\
+\cdots 
+\ar[r]
+&%r1c1
+(\calD^{t}I)X
+\ar[r]
+&%r1c3
+\cdots \ar[r]
+&%r1c4
+(\calD^1I)X
+\ar[r]&%r1c5
+(\calD^0I)X\makebox[0pt][l]{$\mbox{}=IX$}
+}\]
+
 
 \end{convergence}
 
@@ -3023,6 +3186,320 @@ In particular, on a sphere $S^d$ with $d\geq2$, the indices of nonzero groups mu
 
 \end{VanishingLines}
 
+
+\begin{convergenceOLD}
+\subsection{Convergence of the spectral sequence}
+Following \cite{BousKanSSeq.pdf}, for any functor $F:s\Comm\to s\Comm$, we'll define the $r^\textup{th}$ derived functor $(D^sF)$ of $F$ with respect to Andr\'e-Quillen homology. The definition is inductive: one sets $(D^0F)=F$, and
+\[(D^sF)(X):=\ker((D^{s-1}F)(cX)\to (D^{s-1}F)(QcX)).\]
+Here, $Q$ is the indecomposables functor, and $c:s\Comm\to s\Comm$ is (the diagonal of) the standard bar construction, $(cX)_n:=T^{n+1}X_n$, where $T$ is the monad from the free/forget adjunction between vector spaces and nucas.
+
+There is a natural transformation $\delta:(D^sF)\to (D^{s-1}F)$ given by the following composite:
+\[(D^sF)(X)\to (D^{s-1}F)(cX)\to (D^{s-1}F)(X).\]
+Our purpose in this section will be to prove the following, where we write $I$ for the identity functor $s\Comm\to s\Comm$:
+\begin{prop}\label{convergenceProp}
+The functors $(D^sI):s\Comm\to s\Comm$ preserve weak equivalences.
+For $X\in s\Comm$ a connected simplicial algebra, consider the tower:
+\[\xymatrix@R=4mm{
+\cdots 
+\ar[r]
+&%r1c1
+(D^{t}I)X
+\ar[r]
+&%r1c3
+\cdots \ar[r]
+&%r1c4
+(D^1I)X
+\ar[r]&%r1c5
+(D^0I)X=X.
+}\]
+For integers $t\geq2$ and $q\geq0$, the map $\pi_q(D^{2t+q-1}I)X\to\pi_q(D^{t}I)X$ is zero.
+\end{prop}
+\begin{proof}%[Proof of \ref{convergenceProp}]
+The first claim is \ref{towerIsHomotopical}. Apply $(D^t\DASH)X$ to the diagram of functors constructed in \ref{towerWithPowers}, to obtain the following diagram in $s\Comm$:
+\[\xymatrix@R=4mm{
+\cdots 
+\ar[r]
+&%r1c1
+(D^{2t+q-1}I)X
+\ar[r]
+\ar[d]
+&
+\cdots \ar[r]
+&%r1c4
+(D^{t+1}I)X
+\ar[r]
+\ar[d]&%r1c5
+(D^tI)X
+\ar@{=}[d]
+\\%r1c6
+\cdots
+\ar[r]
+&%r2c1
+(D^tP^{t+q})X
+\ar[r]
+&%r2c3
+\cdots 
+\ar[r]&%r2c4
+(D^tP^2)X
+\ar[r]
+&%r2c5
+(D^tI)X%r2c6
+}\]
+By \ref{connectivityOfDerivedPowers}, $(D^tP^{t+q})(A)$ is $q$-connected, and the result follows.
+\end{proof}
+
+
+Before proving this fact, we'll perform a little analysis of the derived functors of the identity functor $I$, and of the ``$s^\textup{th}$ power'' functor $P^sX:=X^s$.
+\begin{enumerate}\squishlist
+\setlength{\parindent}{.25in}
+\item For any functor $F$, there is a natural isomorphism $(D^s(D^tF))\cong (D^{s+t}F)$ so that the evident diagram commutes:
+\[\xymatrix@R=4mm{
+(D^s(D^tF))
+\ar[r]^-{\cong}
+\ar[d]^-{(D^s\delta)}
+&%r1c1
+(D^{s+t}F)
+\ar[d]^-{\delta}
+\\%r1c2
+(D^s(D^{t-1}F))
+\ar[r]^-{\cong}&%r1c1
+(D^{s+t-1}F)
+}\]
+\item If $F$ is the prolongation of a functor $\Comm\to\Comm$, one notes that $(D^sF)$ can be defined one level at a time. That is,  we may define functors $(D^s_nF):\Comm\to\Comm$ such that $(D^sF)(X)_n=(D^s_nF)(X_n)$, by defining $(D^0_nF):=F$, and
+\[(D^s_nF)(Y):=\ker((D^{s-1}_nF)(T^{n+1}Y)\to (D^{s-1}_nF)(QT^{n+1}Y)).\]
+\end{enumerate}
+\begin{lem}
+For $Y\in\Comm$, and integers $r,n\geq0$ and $s>0$:
+\begin{itemise}
+\setlength{\parindent}{.25in}
+\item $(D^r_nI)Y\subset (\calT_1T^n_1)\cdots (\calT_rT^n_r)Y$ is the subset consiting of those mega\-monomials which have a doubling in each of the $\calT_1,\ldots,\calT_r$ functors.
+\item $(D^r_nP^{s})Y\subset (\calT_1T^n_1)\cdots (\calT_rT^n_r)Y$ is the subset consiting of those mega\-monomials which have a doubling in each of the $\calT_2,\ldots,\calT_r$ functors, and a power of $s$ in the $\calT_1$ functor.
+\end{itemise}
+
+\end{lem}
+\begin{proof}
+%We now have enough notation to prove this claim, which is really a claim about $D^r_nY$, by induction on $r$. 
+This is trivial when $r=0$. Supposing an inductive hypothesis:
+\begin{alignat*}{2}
+(D^r_nI)(Y)
+&:=
+\ker((D^{r-1}_nI)(\calT_r T_r^n Y)\to (D^{r-1}_nI) (Q\calT_rT_r^n X_n))%
+\\
+&=
+(D^{r-1}_nI)(\calT_r T_r^n Y)\cap\langle \textup{meganomials with a doubling in $\calT_r$}\rangle\\
+&=
+\langle \textup{meganomials with a doubling in $\calT_1,\ldots,\calT_{r-1}$}\rangle\cap\langle \textup{doubling in $\calT_r$}\rangle\\
+&=
+\langle \textup{meganomials with a doubling in $\calT_1,\ldots,\calT_{r-1},\calT_{r}$}\rangle
+\end{alignat*}
+The proof for derived functors of $P^{s}$ is identical.
+\end{proof}
+\begin{cor}\label{towerWithPowers}
+The functors $(D^rI)$ and $(D^rP^{s})$ preserve surjective maps, and there is a commuting diagram of functors:
+\[\xymatrix@R=4mm{
+\cdots 
+\ar[r]
+&%r1c1
+(D^rI)
+\ar[r]
+\ar[d]
+&%r1c2
+\cdots \ar[r]
+&%r1c4
+(D^2I)
+\ar[r]
+\ar[d]
+&%r1c4
+(D^1I)
+\ar[r]
+\ar[d]&%r1c5
+(D^0I)
+\ar@{=}[d]
+\\%r1c6
+\cdots
+\ar[r]
+&%r2c1
+P^{r+1}
+\ar[r]
+&%r2c3
+\cdots 
+\ar[r]&%r2c4
+P^3
+\ar[r]
+&P^2
+\ar[r]
+&%r2c5
+I%r2c6
+}\]
+\end{cor}
+\begin{cor}\label{towerIsHomotopical}
+The functors $(D^rI):s\Comm\to s\Comm$ preserve all weak equivalences.
+\end{cor}
+\begin{proof}
+This is trivial when $r=0$. Suppose, by induction on $r$, that $(D^{r-1}I)$ preserves weak equivalences, and that $f:X\to X'$ is a weak equivalence in $s\Comm$. Then we have a commutative diagram in $s\Comm$:
+\[\xymatrix@R=4mm{
+0\ar[r]&
+(D^rI)X\ar[d]^{(D^rI)(f)}\ar[r]&
+(D^{r-1}I)(cX)\ar[d]^{(D^{r-1}I)(cf)}\ar[r]&
+(D^{r-1}I)(QcX)\ar[d]^{(D^{r-1}I)(Qcf)}\ar[r]&
+0\\0\ar[r]&
+(D^rI)X'\ar[r]&
+(D^{r-1}I)(cX')\ar[r]&
+(D^{r-1}I)(QcX')\ar[r]&
+0
+}\]
+Now the rows are short exact sequences, as $(D^{r-1}I)$ preserves surjective maps. The maps $cf$ and $Qcf$ are weak equivalences, as $c$ is a cofibrant replacement, and $Q$ is left Quillen. Thus, the induction hypothesis implies that the $(D^{r-1}I)(cf)$ and $(D^{r-1}I)(Qcf)$ are weak equivalences. The homotopy long exact sequence and the 5-lemma together imply that ${(D^rI)(f)}$ is a weak equivalence.
+\end{proof}
+
+\begin{prop}\label{connectivityOfPowerQuillen}
+For $A\in s\Comm$ almost free and connected, and any $s\geq0$, $P^{s}A$ is $(s-1)$-connected.
+\end{prop}
+\begin{proof}
+Truncate Quillen's fundamental spectral sequence, as presented in \cite[thm 6.2]{MR1089001}.
+\end{proof}
+\begin{cor}\label{connectivityOfDerivedPowers}
+For $A\in s\Comm$ connected, and any $t>0$ and $s\geq2$, $(D^tP^{s})(A)$ is $(s-t)$-connected.
+\end{cor}
+\begin{proof}
+We'll prove this by induction on $t$. When $t=1$:
+\[(D^1P^{s})A:=\ker(P^{s}(cA)\to P^{s}(QcA))=P^{s}(cA)\]
+Thus $(D^1P^{s})A$ is $(s-1)$-connected, by \ref{connectivityOfPowerQuillen}.
+
+Now suppose, by induction, that $(D^{t-1}P^{s})(B)$ is $(s-(t-1))$-connected for any connected $B$. Then by \ref{towerWithPowers}, there's a short exact sequence:
+\[\xymatrix{
+0\ar[r]&
+(D^{t}P^{s})(A)\ar[r]&
+(D^{t-1}P^{s})(cA)\ar[r]&
+(D^{t-1}P^{s})(QcA)\ar[r]&
+0
+}\]
+in which the rightmost two objects are each $(s-t+1)$-connected. The associated long exact sequence shows that $(D^{t}P^{s})(A)$ is $(s-t)$-connected.
+\end{proof}
+
+%\begin{itemise}
+%\setlength{\parindent}{.25in}
+%\item need connectivity of $P^s$ on cofibrant dudes i.e.\ a curtis theorem
+%\item need to make an easy argument on the connectivity of $D^{t}P^{s+1}$ as s grows - it's easy because we've shown that the maps involved are all surjections, so that there are long exact sequences. The connectivity loss invoked by $t$ is at most $t$, and we can push $s+1$ way up.
+%\item we'd like the $D^s$ to be homotopical - I think that's easy enough.
+%\end{itemise}
+
+
+%%%%%
+%%%%%\subsection*{The whole point}
+%%%%%
+%%%%%
+%%%%%\begin{proof}[Proof of \ref{convergenceProp}]
+%%%%%Apply $(D^t\DASH)X$ to the ladder from \ref{towerWithPowers}
+%%%%%to obtain a ladder in $s\Comm$:
+%%%%%\[\xymatrix@R=4mm{
+%%%%%\cdots 
+%%%%%\ar[r]
+%%%%%&%r1c1
+%%%%%(D^{s+t}I)X
+%%%%%\ar[r]
+%%%%%\ar[d]
+%%%%%&
+%%%%%\cdots \ar[r]
+%%%%%&%r1c4
+%%%%%(D^{t+1}I)X
+%%%%%\ar[r]
+%%%%%\ar[d]&%r1c5
+%%%%%(D^tI)X
+%%%%%\ar@{=}[d]
+%%%%%\\%r1c6
+%%%%%\cdots
+%%%%%\ar[r]
+%%%%%&%r2c1
+%%%%%(D^tP^{s+1})X
+%%%%%\ar[r]
+%%%%%&%r2c3
+%%%%%\cdots 
+%%%%%\ar[r]&%r2c4
+%%%%%(D^tP^2)X
+%%%%%\ar[r]
+%%%%%&%r2c5
+%%%%%(D^tI)X%r2c6
+%%%%%}\]
+%%%%%The result follows by noting that, for any fixed $t$, the connectivity of $(D^tP^{s+1})X$ grows without bound as $s$ increases (quantify and include).
+%%%%%\end{proof}
+%%%%%
+%%%%%
+%%%%%\subsection*{old stuff}
+%%%%%
+%%%%%
+%%%%%
+%%%%%
+%%%%%Define, inductively, functors $D^s:s\Comm\to s\Comm$, by setting $D^0X:=X$, and writing
+%%%%%\[D^s(X):=\ker(D^{s-1}(cX)\to D^{s-1}(QcX)).\]
+%%%%%One notes that $D^s(X)$ is a subalgebra of $c^sX$. We'll be able to identify exactly which subalgebra it is. Write $(cX)_n:=T^{n+1}X_n$, where $T$ is the non-unital tensor algebra functor from vector spaces to nucas. The construction is performed levelwise, so we may fix $n$. That is to say that we may define functors $D^s_n:\Comm\to\Comm$ such that $D^s(X)_n=D^s_n(X_n)$, by defining 
+%%%%%\[D^0_n(Y):=Y\textup{ and }D^s_n(Y):=\ker(D^{s-1}_n(T^{n+1}Y)\to D^{s-1}_n(QT^{n+1}Y)).\]
+%%%%%\begin{lem}
+%%%%%$D^s_n(Y)\subset (\calT_1T^n_1)\cdots (\calT_sT^n_s)Y$ is the subset consiting of those mega\-monomials which have a doubling in each of the $\calT_1,\ldots,\calT_s$ functors.
+%%%%%\end{lem}
+%%%%%\begin{proof}
+%%%%%%We now have enough notation to prove this claim, which is really a claim about $D^s_nY$, by induction on $s$. 
+%%%%%This is trivial when $s=0$. Supposing an inductive hypothesis:
+%%%%%\begin{alignat*}{2}
+%%%%%D^s_n(Y)
+%%%%%&:=
+%%%%%\ker(D^{s-1}_n(\calT_s T_s^n Y)\to D^{s-1}_n (Q\calT_sT_s^n X_n))%
+%%%%%\\
+%%%%%&=
+%%%%%D^{s-1}_n(\calT_s T_s^n Y)\cap\langle \textup{meganomials with a doubling in $\scrT_s$}\rangle\\
+%%%%%&=
+%%%%%\langle \textup{meganomials with a doubling in $\scrT_1,\ldots,\scrT_{s-1}$}\rangle\cap\langle \textup{doubling in $\scrT_s$}\rangle\\
+%%%%%&=
+%%%%%\langle \textup{meganomials with a doubling in $\scrT_1,\ldots,\scrT_{s-1},\scrT_{s}$}\rangle\qedhere
+%%%%%\end{alignat*}
+%%%%%\end{proof}
+%%%%%It is no more difficult than this to prove the following:
+%%%%%\begin{prop}
+%%%%%For $s,t\geq0$, $D^tP^{s+1}(X)_n\subset (\calT_1T^n_1)\cdots (\calT_tT^n_t)X_n$ is the subset consiting of those mega\-monomials which have a 2-fold product in each of the $\calT_2,\ldots,\calT_t$ functors, and which have a $\min\{s,2\}$-fold product in $\calT^1$.
+%%%%%\end{prop}
+%%%%%\begin{cor}
+%%%%%The natural map $D^tD^{s}(X)_n$
+%%%%%\end{cor}
+%%%%%
+%%%%%As $cX\to QcX$ is always surjective, this kernel is also the homotopy fibre. Now there are natural maps $D^s(X)\to c^sX\to X$, forming a tower above $X$, which factors through the tower of inclusions of powers of $X$:
+%%%%%\[\xymatrix@R=4mm{
+%%%%%\cdots 
+%%%%%\ar[r]
+%%%%%&%r1c1
+%%%%%D^s(X)
+%%%%%\ar[r]
+%%%%%\ar[d]
+%%%%%&%r1c2
+%%%%%D^{s-1}(X)
+%%%%%\ar[r]
+%%%%%\ar[d]&%r1c3
+%%%%%\cdots \ar[r]
+%%%%%&%r1c4
+%%%%%D^1(X)
+%%%%%\ar[r]
+%%%%%\ar[d]&%r1c5
+%%%%%D^0(X)
+%%%%%\ar@{=}[d]
+%%%%%\\%r1c6
+%%%%%\cdots
+%%%%%\ar[r]
+%%%%%&%r2c1
+%%%%%X^{s+1}
+%%%%%\ar[r]
+%%%%%&%r2c2
+%%%%%X^{s}
+%%%%%\ar[r]
+%%%%%&%r2c3
+%%%%%\cdots 
+%%%%%\ar[r]&%r2c4
+%%%%%X^2
+%%%%%\ar[r]
+%%%%%&%r2c5
+%%%%%X%r2c6
+%%%%%}\]
+%%%%%% which we'll show factor through $X^{s+1}$, the $(s+1)^{\textup{st}}$ power of $X$. 
+%%%%%In particular, for any given $n$, there exists $s=s(n)$ such that $\pi_nD^s(X)\to\pi_n(X)$ is zero.
+
+\end{convergenceOLD}
 
 
 \begin{Endmatter}
