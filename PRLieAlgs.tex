@@ -12,7 +12,7 @@
 \excludeversion{Endmatter}
 \excludeversion{AdamsDerivation}
 \excludeversion{TotalisationInSAlg}
-\includeversion{convergence}
+\excludeversion{convergence}
 \excludeversion{convergenceOLD}
 \excludeversion{SteenrodAlgebrasAndTheirKoszulDuals}
 \excludeversion{CategoriesOfInterest}
@@ -342,15 +342,15 @@ Suppose that $X$ is a connected element of $s\Comm$. Then the Adams spectral seq
 \newcommand{\caldup}[1]{\calD^{\smash{#1}}}
 \newcommand{\caldupdown}[2]{\calD^{\smash{#1}}_{\smash{#2}}}
 \subsection{Functors derived with respect to Quillen homology}
-Let $\mathsf{CR(s\Comm)}$ be the category of cofibrant replacement functors in $s\Comm$. That is, an object of $\mathsf{CR(s\Comm)}$ is an augmented endofunctor $(c,\epsilon)$, such that $c:s\Comm\to s\Comm$ is a functor whose consists only of cofibrant objects, and $\epsilon:c\Rightarrow I$ is a natural acyclic fibration. Morphisms in $\mathsf{CR(s\Comm)}$ are to be natural transformations which commute with the augmentations.
+Let $\mathsf{CR(s\Comm)}$ be the category of cofibrant replacement functors in $s\Comm$. That is, an object of $\mathsf{CR(s\Comm)}$ is a pair, $(c,\epsilon)$, such that $c:s\Comm\to s\Comm$ is a functor whose image consists only of cofibrant objects, and $\epsilon:c\Rightarrow I$ is a natural acyclic fibration. Morphisms in $\mathsf{CR(s\Comm)}$ are to be natural transformations which commute with the augmentations.
 
 [Following \cite{BousKanSSeq.pdf}, Sinha, BR, RB, Harper] Fix a functor $F:s\Comm\to s\Comm$, and a cofibrant replacement functor $(c,\epsilon)\in\mathsf{CR(s\Comm)}$.
 
-We'll define the $r^\textup{th}$ derived functor $(\dupdown{r}{c}F)$ of $F$ with respect to Andr\'e-Quillen homology. The definition is inductive: one sets $(\dupdown{0}{b}F)(X)=F(cX)$, and
+We'll define the $r^\textup{th}$ derived functor $(\dupdown{r}{b}F)$ of $F$ with respect to Andr\'e-Quillen homology. The definition is inductive: one sets $(\dupdown{0}{b}F)(X)=F(cX)$, and
 \[(\dupdown{s}{c}F)(X):=\hofib((\dupdown{s-1}{c}F)(cX)\overset{(\dupdown{s-1}{c}F)(\eta_{cX})}{\to} (\dupdown{s-1}{c}F)(QcX)),\]
 where $Q$ is the indecomposables functor, $\eta:I\Rightarrow Q$ is the natural surjection onto indecomposables, and $\hofib$ is any fixed  functorial construction of the homotopy fiber. These functors fit into a tower, via the following composite natural transformation:
 \[(\dupdown{s}{c}F)(X)\to (\dupdown{s-1}{c}F)(cX)\overset{(\dupdown{s-1}{c}F)(\epsilon)}{\to} (\dupdown{s-1}{c}F)(X).\]
-For clarity, we'll record the construction of $(\dupdown{1}{c}F)(X)$, $(\dupdown{2}{c}F)(X)$ and the map between them, in the following diagram. Note that every composable pair of  parallel arrows is to be a homotopy fiber sequence.
+For clarity, we'll record the construction of $(\dupdown{1}{c}F)(X)$, $(\dupdown{2}{c}F)(X)$ and the map between them, in the following diagram. Note that every composable pair of  parallel arrows is defined to be a homotopy fiber sequence.
 
 
 %@=50pt
@@ -379,9 +379,9 @@ We have thus constructed a tower
 (\dupdown{0}{c}F)X=FcX,
 }\]
 which is natural in $X$.
-Moreover, this construction is natural in the functor $F$ and homotopical as long as $F$ preserves weak equivalences between cofibrant objects. Finally, given a morphism $(c,\epsilon)\to (c',\epsilon')$ of cofibrant replacements, one obtains natural weak equivalences $(\dupdown{t}{c})X\to(\dupdown{t}{c'})X$.
+Moreover, this construction is natural in the functor $F$ and homotopical as long as $F$ preserves weak equivalences between cofibrant objects. Finally, given a morphism $(c,\epsilon)\to (c',\epsilon')$ of cofibrant replacements, one obtains natural weak equivalences $(\dupdown{t}{c})X\to(\dupdown{t}{c'})X$ for $t\geq0$.
 
-Suppose that $(c,\epsilon)$ and $(c',\epsilon')$ are any two competing cofibrant replacement functors. Then we can form a third cofibrant replacement, $(cc',\epsilon\epsilon')$, which maps to each of them, via the natural transformations $c\overset{\epsilon'}{\from}cc'\overset{\epsilon}{\to}c'$. Thus we have natural weak equivalences of towers:
+Suppose that $(c,\epsilon)$ and $(c',\epsilon')$ are any two competing cofibrant replacement functors. Then we can form a third cofibrant replacement, $(cc',\epsilon\circ c\epsilon')$, which maps to each of $(c,\epsilon)$ and $(c',\epsilon')$, via the natural transformations $c\epsilon$ and $\epsilon'$ respectively. Thus we have natural weak equivalences of towers:
 \[\xymatrix@R=4mm{
 \cdots 
 \ar[r]
@@ -439,12 +439,9 @@ It is in this sense that the tower is independent of the cofibrant replacement u
 \subsection{Functors derived using the bar construction}
 For this section, we will always use the standard bar construction $(b,\epsilon)$ as cofibrant replacement functor. That is, $(bX)_n:=T^{n+1}X_n$, where $T$ is the monad from the free/forget adjunction between vector spaces and nucas.
 
-We'll modify the construction of $(\dupdown{s}{b}F)$ only for the following functors $F$: the identity $I$, the ``$s^\textup{th}$ power'' functor $(P^sX)_n:=(X_n)^s$, and $b$, the bar construction functor itself.
-%
-%As these functors are particularly well behaved, we will be able to use a modified version of the derived functor construction, which we'll write $(\caldup{s}F)$, for $F$ either $I$ or $P^s$. 
-Again, the definition is inductive: one sets $(\caldup{0}F)=F$ and
+We'll now define a modification $(\caldup{s}F)(X)$ of $(\dupdown{s}{b}F)$. There will two differences: in the definition of $(\caldup{s}F)(X)$ there will be one fewer cofibrant replacement applied, and we will take \emph{strict} fibers, not \emph{homotopy} fibers. Again, the definition is inductive: one sets $(\caldup{0}F)=F$ and
 \[(\caldup{s}F)(X):=\ker((\caldup{s-1}F)(cX)\to (\caldup{s-1}F)(QcX)).\]
-There are two differences between this definition and the definition of $(\dupdown{s}{b}F)$ --- there is one fewer application of the replacement $b$, and we take strict fibers (i.e.\ kernels) instead of homotopy fibers. Fortunately, there's a zigzag of towers
+Fortunately, there's a zigzag of towers
 \[\xymatrix@R=4mm{
 \cdots 
 \ar[r]
@@ -483,10 +480,14 @@ There are two differences between this definition and the definition of $(\dupdo
 \ar[r]&%r1c5
 (\caldup{0}I)X\makebox[0pt][l]{$\mbox{}=X$}
 }\]
-in which the upward maps result from mapping strict fibers to homotopy fibers, and the downward maps are induced by $\epsilon:b\to I$.
-\begin{prop*}
+in which the upward maps result from mapping strict fibers to homotopy fibers, and the downward maps are induced by $\epsilon:b\to I$. [In the middle tower, we're taking the derived functors of the cofibrant replacement itself, $b$.]
+%
+%As these functors are particularly well behaved, we will be able to use a modified version of the derived functor construction, which we'll write $(\caldup{s}F)$, for $F$ either $I$ or $P^s$. 
+
+%%%There are two differences between this definition and the definition of $(\dupdown{s}{b}F)$ --- there is one fewer application of the replacement $b$, and we take strict fibers (i.e.\ kernels) instead of homotopy fibers. 
+\begin{prop}\label{verticalsEquivsInDvCALD}
 The vertical maps in the above zigzag are all weak equivalences.
-\end{prop*}
+\end{prop}
 \begin{proof}
 That the maps between $0^\textup{th}$ derived functors are weak equivalences is clear. Suppose then, by induction on $r$, that the maps of $(r-1)^\textup{st}$ derived functors are weak equivalences. Then we may form the diagram:
 \[\xymatrix@R=4mm{
@@ -506,7 +507,8 @@ That the maps between $0^\textup{th}$ derived functors are weak equivalences is 
 (\caldup{r-1}I)(QbX)\ar[r]&
 0
 }\]
-Now the bottom two rows are both short exact, using the fact (\ref{towerWithPowers}) that the functors $(\caldup{r}I)$ and $(\caldup{r}b)$ both preserve surjections. The top row is defined to be a homotopy fibre sequence. The induction hypothesis shows that 4 of the six verticals are weak equivalences, and two applications of the 5-lemma finish the job.
+in which four of the vertical arrows are known to be weak equivalences by induction.
+Now the bottom two rows are both short exact, using the fact (\ref{towerWithPowers}) that the functors $(\caldup{r}I)$ and $(\caldup{r}b)$ both preserve surjections. The top row is defined to be a homotopy fibre sequence. Thus each row has a homotopy long exact sequence, and we may apply the 5-lemma.
 \end{proof}
 
 
@@ -519,8 +521,7 @@ Now the bottom two rows are both short exact, using the fact (\ref{towerWithPowe
 
 
 
-
-
+Now let $P^s:s\Comm\to s\Comm$ be the ``$s^\textup{th}$ power'' functor, the prolongation of the endofunctor $Y\mapsto Y^s$ of $\Comm$.
 %Our purpose in this section will be to prove the following, where we write $I$ for the identity functor $s\Comm\to s\Comm$:
 \begin{prop}\label{convergenceProp}
 %%%The functors $(\caldup{s}I):s\Comm\to s\Comm$ preserve weak equivalences.
@@ -542,7 +543,7 @@ For integers $t\geq2$ and $q\geq0$, the map $\pi_q(\caldup{2t+q-1}I)X\to\pi_q(\c
 \end{prop}
 \begin{proof}%[Proof of \ref{convergenceProp}]
 %The first claim is \ref{towerIsHomotopical}. 
-Apply $(\caldup{t}\DASH)X$ to the diagram of functors constructed in \ref{towerWithPowers}. In light of \ref{DsDt=Dt+s}, one obtains the following diagram in $s\Comm$:
+Apply $(\caldup{t}\DASH)X$ to the diagram of functors constructed in \ref{towerWithPowers}. In light of \ref{DsDt=Dt+s}, one obtains the following homotopy commuting diagram in $s\Comm$:
 \[\xymatrix@R=4mm{
 \cdots 
 \ar[r]
@@ -575,21 +576,21 @@ Apply $(\caldup{t}\DASH)X$ to the diagram of functors constructed in \ref{towerW
 By \ref{connectivityOfDerivedPowers}, $(\caldup{t}P^{t+q})(A)$ is $q$-connected, and the result follows.
 \end{proof}
 The remainder of this section consists of the constructions required to complete the proofs of these two propositions.
-\begin{lem}\label{DsDt=Dt+s}
-For any functor $F$, there is a natural isomorphism $(\caldup{s}(\caldup{t}F))\cong (\caldup{s+t}F)$ so that the evident diagram commutes:
-\[\xymatrix@R=4mm{
-(\caldup{s}(\caldup{t}F))
-\ar[r]^-{\cong}
-\ar[d]^-{(\caldup{s}\delta)}
-&%r1c1
-(\caldup{s+t}F)
-\ar[d]^-{\delta}
-\\%r1c2
-(\caldup{s}(\caldup{t-1}F))
-\ar[r]^-{\cong}&%r1c1
-(\caldup{s+t-1}F)
-}\]
-\end{lem}
+%%%\begin{lem}\label{DsDt=Dt+s}
+%%%For any functor $F$, there is a natural isomorphism $(\caldup{s}(\caldup{t}F))\cong (\caldup{s+t}F)$ so that the evident diagram commutes:
+%%%\[\xymatrix@R=4mm{
+%%%(\caldup{s}(\caldup{t}F))
+%%%\ar[r]^-{\cong}
+%%%\ar[d]^-{(\caldup{s}\delta)}
+%%%&%r1c1
+%%%(\caldup{s+t}F)
+%%%\ar[d]^-{\delta}
+%%%\\%r1c2
+%%%(\caldup{s}(\caldup{t-1}F))
+%%%\ar[r]^-{\cong}&%r1c1
+%%%(\caldup{s+t-1}F)
+%%%}\]
+%%%\end{lem}
 %\begin{lem}
 %For $Y\in\Comm$, and integers $r,n\geq0$ and $s>0$:
 %\begin{enumerate}
@@ -713,6 +714,48 @@ Now suppose, by induction, that $(\caldup{t-1}P^{s})(B)$ is $(s-(t-1))$-connecte
 in which the rightmost two objects are each $(s-t+1)$-connected. The associated long exact sequence shows that $(\caldup{t}P^{s})(A)$ is $(s-t)$-connected.
 \end{proof}
 
+\begin{lem}\label{DsDt=Dt+s}
+By construction, $(\caldup{s}(\caldup{t}I))(X)$ and $(\caldup{s+t}I){(X)}$ are equal. Moreover, the following two maps are naturally homotopic:
+\begin{gather*}
+(\caldup{s}\delta_t):(\caldup{s}(\caldup{t}I))(X)\to (\caldup{s}(\caldup{t-1}I))(X)\\
+\delta_{s+t}:(\caldup{s+t}I){(X)}\to (\caldup{s+t-1}I){(X)}
+\end{gather*}
+%$(\caldup{s}\delta_t):(\caldup{s}(\caldup{t}I))(X)\to (\caldup{s}(\caldup{t-1}I))(X)$ and $\delta_{s+t}:(\caldup{s+t}I){(X)}\to (\caldup{s+t-2}I){(X)}$ are homotopic.so that the evident diagram commutes:
+%\[\xymatrix@R=4mm{
+%(\caldup{s}(\caldup{t}F))
+%\ar[r]^-{\cong}
+%\ar[d]^-{(\caldup{s}\delta)}
+%&%r1c1
+%(\caldup{s+t}F)
+%\ar[d]^-{\delta}
+%\\%r1c2
+%(\caldup{s}(\caldup{t-1}F))
+%\ar[r]^-{\cong}&%r1c1
+%(\caldup{s+t-1}F)
+%}\]
+\end{lem}
+\begin{proof}
+It will be enough to construct an explicit simplicial homotopy between the maps $f:=(\caldup{s}\delta_t)$ and $g:=(\caldup{s-1}\delta_{t+1})$ for each fixed $s,t\geq0$. The maps $f$ and $g$ are just the restrictions of maps $\overline{f}$ and $\overline{g}$ defined on all of $c^{s+t}X$, as indicated by the following diagram:
+\[\xymatrix@R=7mm{
+c^{s+t}X
+\ar@<.5ex>[r]^-{\overline{f}:=c^s\epsilon c^{t-1}}
+\ar@<-.5ex>[r]_-{\overline{g}:=c^{s-1}\epsilon c^{t}}
+&%r1c1
+c^{s+t-1}X\\%r1c2
+(\caldup{s+t}I)(X)
+\ar@<.5ex>[r]^-{f}
+\ar@<-.5ex>[r]_-{g}
+\ar[u]
+&%r2c1
+(\caldup{s+t-1}I)(X)
+\ar[u]
+%r2c2
+}\]
+We'll actually construct an explicit simplicial homotopy between $\overline{f}$ and $\overline{g}$, and note that this homotopy descends to a homotopy between $f$ and $g$.
+
+Too annoying to type for now.
+\end{proof}
+
 \newpage
 
 \subsection{Fibres in the $\Tot$ tower}
@@ -727,7 +770,7 @@ Now we'll write $\sigma $ for the cofibrant replacement that Radelescu-Banu prov
            &   \sigma \sigma Q\sigma X \ar[rr]      &                    &
 \sigma Q\sigma Q\sigma X
 }\]
-The verticals in this diagram constitute a pointwise weak equivalence between those diagrams from which we obtain $\widetilde{X}^2:=\hofib(X\to \Tot_2\overline{X}^\bullet)$ and $(\dupdown{2}{\sigma} I)(X)$ respectively.
+The verticals in this diagram constitute a pointwise weak equivalence between two squares. The homotopy total fibers of these squares are $\widetilde{X}^2:=\hofib(X\to \Tot_1\overline{X}^\bullet)$ and $(\dupdown{2}{\sigma} I)(X)$ respectively.
 %%%\[\xymatrix@R=4mm{
 %%%\cdots 
 %%%\ar[r]
@@ -947,6 +990,122 @@ X\ar[u]
 
 
 \end{convergence}
+
+
+
+
+\newcommand{\trip}[3]{{#1}_{\smash{#2}}^{\smash{#3}}}
+
+
+
+$K=b^{s+t}X$, $L=b^{s+t-1}X$, so that
+\[K_q=(T^{q+1})^{s+t}X_q\qquad L_q=(T^{q+1})^{s+t-1}X_q\]
+writing $\frakd_{iq}$ for $(T^{i}\rho T^{q-i})$ and $\fraks_{iq}$ for $(T^{i+1}\imath T^{q-i})$,
+\[\xymatrix@R=2mm@C=65mm{
+\makebox[0cm][r]{$\trip{d}{iq}{K}:\,$}K_q
+\ar[r]^-{(\frakd_{iq})^{s+t}\trip{d}{iq}{X}}
+&
+K_{q-1}\\
+\makebox[0cm][r]{$\trip{s}{iq}{K}:\,$}K_q
+\ar[r]^-{(\fraks_{iq})^{s+t}\trip{s}{iq}{X}}
+&
+K_{q+1}\\
+\makebox[0cm][r]{$\trip{d}{iq}{L}:\,$}L_q
+\ar[r]^-{(\frakd_{iq})^{s+t-1}\trip{d}{iq}{X}}
+&
+L_{q-1}\\
+\makebox[0cm][r]{$\trip{s}{iq}{L}:\,$}L_q
+\ar[r]^-{(\fraks_{iq})^{s+t-1}\trip{s}{iq}{X}}
+&
+L_{q+1}\\
+\makebox[0cm][r]{$\trip{h}{jq}{}:\,$}K_q
+\ar[r]^-{(\fraks_{jq})^{s-1}T^{j+1}\rho^{q}T^{q-j+1}(\fraks_{jq})^{t-1}\trip{s}{jq}{X}}
+&
+L_{q+1}\\
+}\]
+
+\newpage
+
+writing $\frakd_{iq}$ for $(T^{i}\rho T^{q-i})$ and $\fraks_{iq}$ for $(T^{i+1}\imath T^{q-i})$,
+
+
+\begin{align}
+ d_id_j&=d_{j-1}d_i\quad \text{ if $i<j$}, \notag\\
+ d_i s_j &= s_{j-1} d_i\quad\text{ if $i < j$},\notag \\
+d_j s_j &= d_{j+1} s_j=\text{id},\label{E: axioms}\\
+ d_i s_j &= s_j d_{i-1}\quad  \text{ if $i > j + 1$},\notag\\
+  s_is_j&=s_{j+1}s_i\quad \text{ if $i\leq j$}.\notag
+\end{align}
+
+\subsection*{identities}
+We must check, for $0\leq i<j\leq q$ that $\trip{d}{i,q+1}{L}\trip{h}{jq}{}=\trip{h}{j-1,q-1}{}\trip{d}{i,q}{K}$
+\[\xymatrix@R=5mm@C=65mm{
+K_q
+\ar[r]^-{\trip{h}{jq}{}}_-{(\fraks_{jq})^{s-1}T^{j+1}\rho^{q}T^{q-j+1}(\fraks_{jq})^{t-1}\trip{s}{jq}{X}}
+\ar[d]_-{(\frakd_{iq})^{s+t}\trip{d}{iq}{X}}
+&
+L_{q+1}
+\ar[d]^-{(\frakd_{i,q+1})^{s+t-1}\trip{d}{i,q+1}{X}}
+\\
+K_{q-1}
+\ar[r]_-{\trip{h}{j-1,q-1}{}}^-{(\fraks_{j-1,q-1})^{s-1}T^{j}\rho^{q-1}T^{q-j+1}(\fraks_{j-1,q-1})^{t-1}\trip{s}{j-1,q-1}{X}}
+&
+L_{q}\\
+}\]
+For $0\leq j\leq q-1$, we need $\trip{d}{j+1,q+1}{L}$ to coequalize $\trip{h}{j,q}{}$ and $\trip{h}{j+1,q}{}$.
+\[\xymatrix@R=5mm@C=65mm{
+K_q
+\ar@<.5ex>[r]^-{\trip{h}{j,q}{}=(\fraks_{jq})^{s-1}T^{j+1}\rho^{q}T^{q-j+1}(\fraks_{jq})^{t-1}\trip{s}{jq}{X}}
+\ar@<-.5ex>[r]_-{\trip{h}{j+1,q}{}=(\fraks_{j+1,q})^{s-1}T^{j+2}\rho^{q}T^{q-j}(\fraks_{j+1,q})^{t-1}\trip{s}{j+1,q}{X}}
+&
+L_{q+1}
+\ar[d]^-{(\frakd_{j+1,q+1})^{s+t-1}\trip{d}{j+1,q+1}{X}}
+\\
+&
+L_{q}\\
+}\]
+We must check, for $0\leq j<i-1\leq q$ that $\trip{d}{i,q+1}{L}\trip{h}{jq}{}=\trip{h}{j,q-1}{}\trip{d}{i-1,q}{K}$
+\[\xymatrix@R=5mm@C=65mm{
+K_q
+\ar[r]^-{\trip{h}{jq}{}}_-{(\fraks_{jq})^{s-1}T^{j+1}\rho^{q}T^{q-j+1}(\fraks_{jq})^{t-1}\trip{s}{jq}{X}}
+\ar[d]_-{(\frakd_{i-1,q})^{s+t}\trip{d}{i-1,q}{X}}
+&
+L_{q+1}
+\ar[d]^-{(\frakd_{i,q+1})^{s+t-1}\trip{d}{i,q+1}{X}}
+\\
+K_{q-1}
+\ar[r]_-{\trip{h}{j,q-1}{}}^-{(\fraks_{j,q-1})^{s-1}T^{j+1}\rho^{q-1}T^{q-j}(\fraks_{j,q-1})^{t-1}\trip{s}{j,q-1}{X}}
+&
+L_{q}\\
+}\]
+If $0\leq i\leq j\leq q$, then $\trip{s}{i,q+1}{L}\trip{h}{jq}{}=\trip{h}{j+1,q+1}{}\trip{s}{i,q}{K}$
+\[\xymatrix@R=5mm@C=65mm{
+K_q
+\ar[r]^-{\trip{h}{jq}{}}_-{(\fraks_{jq})^{s-1}T^{j+1}\rho^{q}T^{q-j+1}(\fraks_{jq})^{t-1}\trip{s}{jq}{X}}
+\ar[d]_-{(\fraks_{iq})^{s+t}\trip{s}{iq}{X}}
+&
+L_{q+1}
+\ar[d]^-{(\fraks_{i,q+1})^{s+t-1}\trip{s}{i,q+1}{X}}
+\\
+K_{q+1}
+\ar[r]_-{\trip{h}{j+1,q+1}{}}^-{(\fraks_{j+1,q+1})^{s-1}T^{j+2}\rho^{q+1}T^{q-j+1}(\fraks_{j+1,q+1})^{t-1}\trip{s}{j+1,q+1}{X}}
+&
+L_{q+2}\\
+}\]
+If $0\leq j<i\leq q+1$, then $\trip{s}{i,q+1}{L}\trip{h}{jq}{}=\trip{h}{j,q+1}{}\trip{s}{i-1,q}{K}$
+\[\xymatrix@R=5mm@C=65mm{
+K_q
+\ar[r]^-{\trip{h}{jq}{}}_-{(\fraks_{jq})^{s-1}T^{j+1}\rho^{q}T^{q-j+1}(\fraks_{jq})^{t-1}\trip{s}{jq}{X}}
+\ar[d]_-{(\fraks_{i-1,q})^{s+t}\trip{s}{i-1,q}{X}}
+&
+L_{q+1}
+\ar[d]^-{(\fraks_{i,q+1})^{s+t-1}\trip{s}{i,q+1}{X}}
+\\
+K_{q+1}
+\ar[r]_-{\trip{h}{j,q+1}{}}^-{(\fraks_{j,q+1})^{s-1}T^{j+1}\rho^{q+1}T^{q-j+2}(\fraks_{j,q+1})^{t-1}\trip{s}{j,q+1}{X}}
+&
+L_{q+2}\\
+}\]
 
 \begin{SteenrodAlgebrasAndTheirKoszulDuals}
 \section{Some homogeneous Koszul algebras}
