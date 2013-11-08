@@ -992,15 +992,18 @@ X\ar[u]
 \end{convergence}
 
 \newcommand{\trip}[3]{{#1}_{\smash{#2}}^{\smash{#3}}}
+Write $\frakd_{iq}:=(T^{i}\rho T^{q-i}):T^{q+1}\Rightarrow T^q$ and $\fraks_{iq}:=(T^{i+1}\imath T^{q-i}):T^{q+1}\Rightarrow T^{q+2}$. Given natural transformations $\alpha:F\Rightarrow F'$ and $\beta:G\Rightarrow G'$, write $[\alpha][\beta]$ for horizontal composition $F\circ G\Rightarrow F'\circ G'$. Use the symbol $\circ$ for vertical composition, as ever.
 
-
+It will be useful to note the following two equations
+\[[\frakd_{iq}]^2=[\frakd_{q+i,2q}\circ\frakd_{i,2q+1}]\ \textup{and}\  [\fraks_{iq}]^2=[\fraks_{q+i+2,2q+2}\circ\fraks_{i,2q+1}]\]
+In light of these, we can write formulae for the differentials on the various bar constructions as follows:
 \[\xymatrix@R=5mm@C=65mm{
 \makebox[0cm][r]{$\trip{d}{iq}{K}:\,$}K_q
-\ar[r]^-{[\frakd_{iq}]^{s+t}\trip{d}{iq}{X}}_-{[\frakd_{iq}]^{s-1}[\frakd_{q+i,2q}\circ\frakd_{i,2q+1}][\frakd_{iq}]^{t-1}\trip{d}{iq}{X}}
+\ar[r]^-{[\frakd_{iq}]^{s-1}[\frakd_{q+i,2q}\circ\frakd_{i,2q+1}][\frakd_{iq}]^{t-1}\trip{d}{iq}{X}}%^-{[\frakd_{iq}]^{s+t}\trip{d}{iq}{X}}
 &
 K_{q-1}\\
 \makebox[0cm][r]{$\trip{s}{iq}{K}:\,$}K_q
-\ar[r]^-{[\fraks_{iq}]^{s+t}\trip{s}{iq}{X}}_-{[\fraks_{iq}]^{s-1}[\fraks_{q+i+1,2q+2}\circ\fraks_{i,2q+1}][\fraks_{iq}]^{t-1}\trip{s}{iq}{X}}
+\ar[r]^-{[\fraks_{iq}]^{s-1}[\fraks_{q+i+2,2q+2}\circ\fraks_{i,2q+1}][\fraks_{iq}]^{t-1}\trip{s}{iq}{X}}%^-{[\fraks_{iq}]^{s+t}\trip{s}{iq}{X}}
 &
 K_{q+1}\\
 \makebox[0cm][r]{$\trip{d}{iq}{L}:\,$}L_q
@@ -1012,10 +1015,141 @@ L_{q-1}\\
 &
 L_{q+1}\\
 \makebox[0cm][r]{$\trip{h}{jq}{}:\,$}K_q
-\ar[r]_-{([\fraks_{jq}]^{s-1}T^{j+1}\rho^{q}T^{q-j+1}[\fraks_{jq}]^{t-1}\trip{s}{jq}{X})}^-{[\fraks_{jq}]^{s-1}[\frakd_{j+1,2q+1}\circ\cdots \circ\frakd_{j+1,q+2}][\fraks_{jq}]^{t-1}\trip{s}{jq}{X}}
+\ar[r]^-{[\fraks_{jq}]^{s-1}[\frakd_{j+1,q+2}\circ\cdots \circ\frakd_{j+1,2q+1}][\fraks_{jq}]^{t-1}\trip{s}{jq}{X}}%_-{([\fraks_{jq}]^{s-1}T^{j+1}\rho^{q}T^{q-j+1}[\fraks_{jq}]^{t-1}\trip{s}{jq}{X})}
 &
 L_{q+1}\\
 }\]
+
+\[\trip{d}{i,q}{K}=\frakd_{q+i,2q}\circ\frakd_{i,2q+1}\]
+\[\trip{d}{i-1,q}{K}=\frakd_{q+i-1,2q}\circ\frakd_{i-1,2q+1}\]
+
+
+
+\[\trip{s}{i,q}{K}=\fraks_{q+i+2,2q+2}\circ\fraks_{i,2q+1}\]
+\[\trip{s}{i-1,q}{K}=\fraks_{q+i+1,2q+2}\circ\fraks_{i-1,2q+1}\]
+
+\[\trip{d}{i,q}{L}=\frakd_{i,q}\]
+\[\trip{d}{i,q+1}{L}=\frakd_{i,q+1}\]
+\[\trip{d}{j+1,q+1}{L}=\frakd_{j+1,q+1}\]
+
+
+\[\trip{s}{iq}{L}=\fraks_{iq}\]
+\[\trip{s}{i,q+1}{L}=\fraks_{i,q+1}\]
+
+
+\[\trip{h}{j,q}{}=\frakd_{j+1,q+2}\circ\cdots \circ\frakd_{j+1,2q+1}\]
+\[\trip{h}{j,q-1}{}=\frakd_{j+1,q+1}\circ\cdots \circ\frakd_{j+1,2q-1}\]
+\[\trip{h}{j-1,q-1}{}=\frakd_{j,q+1}\circ\cdots \circ\frakd_{j,2q-1}\]
+\[\trip{h}{j+1,q}{}=\frakd_{j+2,q+2}\circ\cdots \circ\frakd_{j+2,2q+1}\]
+\[\trip{h}{j,q+1}{}=\frakd_{j+1,q+3}\circ\cdots \circ\frakd_{j+1,2q+3}\]
+\[\trip{h}{j+1,q+1}{}=\frakd_{j+2,q+3}\circ\cdots \circ\frakd_{j+2,2q+3}\]
+
+
+
+{\renewcommand{\circ}{\relax}
+\begin{enumerate}\squishlist
+\setlength{\parindent}{.25in}
+\item $\trip{d}{i,q+1}{L}\circ \trip{h}{j,q}{}=\trip{h}{j-1,q-1}{}\circ \trip{d}{i,q}{K}$ whenever $0\leq i<j\leq q$
+\begin{enumerate}\squishlist
+\setlength{\parindent}{.25in}
+\item $\trip{d}{i,q+1}{X}\circ \trip{s}{j,q}{X}=\trip{s}{j-1,q-1}{X}\circ \trip{d}{i,q}{X}$ and $\trip{\frakd}{i,q+1}{}\circ \trip{\fraks}{j,q}{}=\trip{\fraks}{j-1,q-1}{}\circ \trip{\frakd}{i,q}{}$
+\item 
+$\frakd_{i,q+1}\circ
+\frakd_{j+1,q+2}\circ\cdots \circ\frakd_{j+1,2q+1}=
+\frakd_{j,q+1}\circ\cdots \circ\frakd_{j,2q-1}\circ
+\frakd_{q+i,2q}\circ\frakd_{i,2q+1}$
+\end{enumerate}
+\item $\trip{d}{j+1,q+1}{L}\circ \trip{h}{j,q}{}=\trip{d}{j+1,q+1}{L}\circ \trip{h}{j+1,q}{}$ whenever $0\leq j\leq q-1$
+\begin{enumerate}\squishlist
+\setlength{\parindent}{.25in}
+\item $\trip{d}{j+1,q+1}{X}\circ \trip{s}{j,q}{X}=\trip{d}{j+1,q+1}{X}\circ \trip{s}{j+1,q}{X}$ and $\trip{\frakd}{j+1,q+1}{}\circ \trip{\fraks}{j,q}{}=\trip{\frakd}{j+1,q+1}{}\circ \trip{\fraks}{j+1,q}{}$
+\item 
+$\frakd_{j+1,q+1}\circ
+\frakd_{j+1,q+2}\circ\cdots \circ\frakd_{j+1,2q+1}=
+\frakd_{j+1,q+1}\circ
+\frakd_{j+2,q+2}\circ\cdots \circ\frakd_{j+2,2q+1}$
+\end{enumerate}
+\item $\trip{d}{i,q+1}{L}\circ \trip{h}{j,q}{}=\trip{h}{j,q-1}{}\circ \trip{d}{i-1,q}{K}$ whenever $0\leq j<i-1\leq q$
+\begin{enumerate}\squishlist
+\setlength{\parindent}{.25in}
+\item $\trip{d}{i,q+1}{X}\circ \trip{s}{j,q}{X}=\trip{s}{j,q-1}{X}\circ \trip{d}{i-1,q}{X}$ and $\trip{\frakd}{i,q+1}{}\circ \trip{\fraks}{j,q}{}=\trip{\fraks}{j,q-1}{}\circ \trip{\frakd}{i-1,q}{}$
+\item 
+$\frakd_{i,q+1}\circ
+\frakd_{j+1,q+2}\circ\cdots \circ\frakd_{j+1,2q+1}=
+\frakd_{j+1,q+1}\circ\cdots \circ\frakd_{j+1,2q-1}\circ
+\frakd_{q+i-1,2q}\circ\frakd_{i-1,2q+1}$
+\end{enumerate}
+\item $\trip{s}{i,q+1}{L}\circ \trip{h}{j,q}{}=\trip{h}{j+1,q+1}{}\circ \trip{s}{i,q}{K}$ whenever $0\leq i\leq j\leq q$
+\begin{enumerate}\squishlist
+\setlength{\parindent}{.25in}
+\item $\trip{s}{i,q+1}{X}\circ \trip{s}{j,q}{X}=\trip{s}{j+1,q+1}{X}\circ \trip{s}{i,q}{X}$ and $\trip{\fraks}{i,q+1}{}\circ \trip{\fraks}{j,q}{}=\trip{\fraks}{j+1,q+1}{}\circ \trip{\fraks}{i,q}{}$
+\item 
+$\fraks_{i,q+1}\circ
+\frakd_{j+1,q+2}\circ\cdots \circ\frakd_{j+1,2q+1}=
+\frakd_{j+2,q+3}\circ\cdots \circ\frakd_{j+2,2q+3}\circ
+\fraks_{q+i+2,2q+2}\circ\fraks_{i,2q+1}$
+\end{enumerate}
+\item $\trip{s}{i,q+1}{L}\circ \trip{h}{j,q}{}=\trip{h}{j,q+1}{}\circ \trip{s}{i-1,q}{K}$ whenever $0\leq j<i\leq q+1$
+\begin{enumerate}\squishlist
+\setlength{\parindent}{.25in}
+\item $\trip{s}{i,q+1}{X}\circ \trip{s}{j,q}{X}=\trip{s}{j,q+1}{X}\circ \trip{s}{i-1,q}{X}$ and $\trip{\fraks}{i,q+1}{}\circ \trip{\fraks}{j,q}{}=\trip{\fraks}{j,q+1}{}\circ \trip{\fraks}{i-1,q}{}$
+\item 
+$\fraks_{i,q+1}\circ
+\frakd_{j+1,q+2}\circ\cdots \circ\frakd_{j+1,2q+1}=
+\frakd_{j+1,q+3}\circ\cdots \circ\frakd_{j+1,2q+3}\circ
+\fraks_{q+i+1,2q+2}\circ\fraks_{i-1,2q+1}$
+\end{enumerate}
+\end{enumerate}
+}
+
+\begin{align*}
+ d_id_j&=d_{j-1}d_i\quad \text{ if $i<j$}, \notag\\
+ d_i s_j &= s_{j-1} d_i\quad\text{ if $i < j$},\notag \\
+d_j s_j &= d_{j+1} s_j=\text{id},\label{E: axioms}\\
+ d_i s_j &= s_j d_{i-1}\quad  \text{ if $i > j + 1$},\notag\\
+  s_is_j&=s_{j+1}s_i\quad \text{ if $i\leq j$}.\notag
+\end{align*}
+
+
+\end{document}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+We must check, for $0\leq i<j\leq q$ that $\trip{d}{i,q+1}{L}\trip{h}{jq}{}=\trip{h}{j-1,q-1}{}\trip{d}{i,q}{K}$, i.e.
+in almost all of the brackets, $\trip{d}{i,q+1}{}\trip{s}{jq}{}=\trip{s}{j-1,q-1}{}\trip{d}{i,q}{}$, and
+\[\frakd_{i,q+1}\circ
+\frakd_{j+1,q+2}\circ\cdots \circ\frakd_{j+1,2q+1}=
+\frakd_{j,q+1}\circ\cdots \circ\frakd_{j,2q-1}\circ
+\frakd_{q+i,2q}\circ\frakd_{i,2q+1}
+\]
+
+For $0\leq j\leq q-1$, we need $\trip{d}{j+1,q+1}{L}\trip{h}{j,q}{}=\trip{d}{j+1,q+1}{L}\trip{h}{j+1,q}{}$. In most brackets, $\trip{d}{j+1,q+1}{}\trip{s}{j,q}{}=\trip{d}{j+1,q+1}{}\trip{s}{j+1,q}{}$, and otherwise:
 
 
 
@@ -1072,6 +1206,8 @@ d_j s_j &= d_{j+1} s_j=\text{id},\label{E: axioms}\\
 \end{align}
 
 \subsection*{identities}
+
+
 We must check, for $0\leq i<j\leq q$ that $\trip{d}{i,q+1}{L}\trip{h}{jq}{}=\trip{h}{j-1,q-1}{}\trip{d}{i,q}{K}$
 \[\xymatrix@R=5mm@C=65mm{
 K_q
@@ -1086,6 +1222,8 @@ K_{q-1}
 &
 L_{q}\\
 }\]
+
+
 For $0\leq j\leq q-1$, we need $\trip{d}{j+1,q+1}{L}$ to coequalize $\trip{h}{j,q}{}$ and $\trip{h}{j+1,q}{}$.
 \[\xymatrix@R=5mm@C=65mm{
 K_q
