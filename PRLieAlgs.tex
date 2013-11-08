@@ -13,6 +13,7 @@
 \excludeversion{AdamsDerivation}
 \excludeversion{TotalisationInSAlg}
 \excludeversion{convergence}
+\includeversion{iteratedBarConstructions}
 \excludeversion{convergenceOLD}
 \excludeversion{SteenrodAlgebrasAndTheirKoszulDuals}
 \excludeversion{CategoriesOfInterest}
@@ -39,6 +40,7 @@
 %\newcommand{\GoodLie}[1]{\mathsf{g}{\scrL}^{#1}}%{{\mu\scrL}^{#1}}
 %\newcommand{\BadLie}[1]{\mathsf{b}{\scrL}^{#1}}%{{\mu\scrL}^{#1}}
 %\newcommand{\PRLie}[1]{\scrR^{#1}}%{{\xi\scrL}^{#1}}
+
 
 
 \newcommand{\RestLie}[1]%
@@ -77,6 +79,9 @@
 \newcommand{\Fr}[2][]{\ifblank{#1}{#2}{#2_{#1}}}
 \newcommand{\restn}[2][]{\ifblank{#1}{\xi{#2}}{\xi_{#1}{#2}}}%{\xi{#1}}
 
+
+\newcommand{\algCat}{\calA}
+\newcommand{\trip}[3]{{#1}_{\smash{#2}}^{\smash{#3}}}
 
 
 \DeclareMathOperator{\Constant}{con}
@@ -991,61 +996,135 @@ X\ar[u]
 
 \end{convergence}
 
-\newcommand{\trip}[3]{{#1}_{\smash{#2}}^{\smash{#3}}}
-Write $\frakd_{iq}:=(T^{i}\rho T^{q-i}):T^{q+1}\Rightarrow T^q$ and $\fraks_{iq}:=(T^{i+1}\imath T^{q-i}):T^{q+1}\Rightarrow T^{q+2}$. Given natural transformations $\alpha:F\Rightarrow F'$ and $\beta:G\Rightarrow G'$, write $[\alpha][\beta]$ for horizontal composition $F\circ G\Rightarrow F'\circ G'$. Use the symbol $\circ$ for vertical composition, as ever.
-
-It will be useful to note the following two equations
-\[[\frakd_{iq}]^2=[\frakd_{q+i,2q}\circ\frakd_{i,2q+1}]\ \textup{and}\  [\fraks_{iq}]^2=[\fraks_{q+i+2,2q+2}\circ\fraks_{i,2q+1}]\]
-In light of these, we can write formulae for the differentials on the various bar constructions as follows:
-\[\xymatrix@R=5mm@C=65mm{
-\makebox[0cm][r]{$\trip{d}{iq}{K}:\,$}K_q
-\ar[r]^-{[\frakd_{iq}]^{s-1}[\frakd_{q+i,2q}\circ\frakd_{i,2q+1}][\frakd_{iq}]^{t-1}\trip{d}{iq}{X}}%^-{[\frakd_{iq}]^{s+t}\trip{d}{iq}{X}}
-&
-K_{q-1}\\
-\makebox[0cm][r]{$\trip{s}{iq}{K}:\,$}K_q
-\ar[r]^-{[\fraks_{iq}]^{s-1}[\fraks_{q+i+2,2q+2}\circ\fraks_{i,2q+1}][\fraks_{iq}]^{t-1}\trip{s}{iq}{X}}%^-{[\fraks_{iq}]^{s+t}\trip{s}{iq}{X}}
-&
-K_{q+1}\\
-\makebox[0cm][r]{$\trip{d}{iq}{L}:\,$}L_q
-\ar[r]^-{[\frakd_{iq}]^{s+t-1}\trip{d}{iq}{X}}
-&
-L_{q-1}\\
-\makebox[0cm][r]{$\trip{s}{iq}{L}:\,$}L_q
-\ar[r]^-{[\fraks_{iq}]^{s+t-1}\trip{s}{iq}{X}}
-&
-L_{q+1}\\
-\makebox[0cm][r]{$\trip{h}{jq}{}:\,$}K_q
-\ar[r]^-{[\fraks_{jq}]^{s-1}[\frakd_{j+1,q+2}\circ\cdots \circ\frakd_{j+1,2q+1}][\fraks_{jq}]^{t-1}\trip{s}{jq}{X}}%_-{([\fraks_{jq}]^{s-1}T^{j+1}\rho^{q}T^{q-j+1}[\fraks_{jq}]^{t-1}\trip{s}{jq}{X})}
-&
-L_{q+1}\\
+\begin{iteratedBarConstructions}
+In this section we will be concerned with iterated simplicial bar constructions. Before getting into the details, let's establish a little notation. Fix a category of universal algebras $\algCat$. For any simplicial object $X$ in $\algCat$, we'll write 
+\[\trip{d}{i,q}{X}:X_q\to X_{q-1}\textup{\ and\ }\trip{s}{i,q}{X}:X_q\to X_{q+1}\]
+for the $i^\textup{th}$ face and degeneracy maps out of $X_q$. Suppose $F,G\in\algCat^\algCat$ are endofunctors, $\Phi:F\to G$ is a natural transformation, and $A,B\in\algCat$ are objects. Write $[\Phi]:\algCat(A,B)\to\algCat(FA,GB)$ for the operator sending $m:A\to B$ to the diagonal composite in the commuting square
+\[\xymatrix@R=4mm{
+FA
+\ar[r]^-{\Phi_A}
+\ar[d]_-{Fm}
+\ar[dr]|-{[\Phi]m}
+&%r1c1
+GA
+\ar[d]^-{Gm}
+\\%r1c2
+FB
+\ar[r]_-{\Phi_B}
+&%r2c1
+GB
+%r2c2
 }\]
+Write $T:\algCat\to \algCat$ for the comonad of the free/forgetful adjunction down to sets. Then there is an (augmented) simplicial endofunctor, $\frakb\in s\algCat^\algCat$, derived from the unit and counit of the adjunction:
+\[\vcenter{
+\def\labelstyle{\scriptstyle}
+\xymatrix@C=1.65cm@1{
+{\ I\,}
+&
+\,T^1\,
+\ar@{..>}[l]|(.65){\frakd_{0,0}}
+\ar[r]|(.65){\fraks_{0,0}}
+&
+\,T^2\,
+\ar@<-1ex>[l]|(.65){\frakd_{0,1}}
+\ar@<+1ex>[l]|(.65){\frakd_{1,1}}
+\ar@<+1ex>[r]|(.65){\fraks_{0,1}}
+\ar@<-1ex>[r]|(.65){\fraks_{1,1}}
+&
+\,T^3\,
+\ar[l]|(.65){\frakd_{1,2}}
+\ar@<-2ex>[l]|(.65){\frakd_{0,2}}
+\ar@<+2ex>[l]|(.65){\frakd_{2,2}}
+\ar[r]|(.65){\fraks_{1,2}}
+\ar@<+2ex>[r]|(.65){\fraks_{0,2}}
+\ar@<-2ex>[r]|(.65){\fraks_{2,2}}
+&
+\,T^4\,\makebox[0cm][l]{\,$\cdots $}
+\ar@<-3ex>[l]|(.65){\frakd_{0,3}}
+\ar@<-1ex>[l]|(.65){\frakd_{1,3}}
+\ar@<+1ex>[l]|(.65){\frakd_{2,3}}
+\ar@<+3ex>[l]|(.65){\frakd_{3,3}}
+}}\]
 
-\[\trip{d}{i,q}{K}=\frakd_{q+i,2q}\circ\frakd_{i,2q+1}\]
-\[\trip{d}{i-1,q}{K}=\frakd_{q+i-1,2q}\circ\frakd_{i-1,2q+1}\]
 
 
 
-\[\trip{s}{i,q}{K}=\fraks_{q+i+2,2q+2}\circ\fraks_{i,2q+1}\]
-\[\trip{s}{i-1,q}{K}=\fraks_{q+i+1,2q+2}\circ\fraks_{i-1,2q+1}\]
-
-\[\trip{d}{i,q}{L}=\frakd_{i,q}\]
-\[\trip{d}{i,q+1}{L}=\frakd_{i,q+1}\]
-\[\trip{d}{j+1,q+1}{L}=\frakd_{j+1,q+1}\]
+The simplicial bar construction is the cofibrant replacement functor $(b,\epsilon)$ on $s\algCat$ which is the diagonal of the bisimplicial object obtained by application of $\frakb$ levelwise. That is, for $X\in s\algCat$, $bX$ is the simplicial object with $(bX)_q:=T^{q+1}X_q$, and with
+\[\trip{d}{i,q}{bX}:=[\frakd_{i,q}]\trip{d}{i,q}{X}.\]
+The augmentation $\epsilon:b\to I$ is defined on level $q$ by 
+\[\epsilon_q=\frakd_{0,0}\frakd_{0,1}\cdots \frakd_{0,q}:T^{q+1}\to I\]
 
 
-\[\trip{s}{iq}{L}=\fraks_{iq}\]
-\[\trip{s}{i,q+1}{L}=\fraks_{i,q+1}\]
+%\[\vcenter{
+%\def\labelstyle{\scriptstyle}
+%\xymatrix@C=1.65cm@1{
+%\,T^1X_0\,
+%\ar[r]|(.65){\fraks_{0,0}\trip{s}{0,0}{X}}
+%&
+%\,T^2X_1\,
+%\ar@<-1ex>[l]|(.65){\frakd_{0,1}}
+%\ar@<+1ex>[l]|(.65){\frakd_{1,1}}
+%\ar@<+1ex>[r]|(.65){\fraks_{0,1}}
+%\ar@<-1ex>[r]|(.65){\fraks_{1,1}}
+%&
+%\,T^3X_2\,
+%\ar[l]|(.65){\frakd_{1,2}}
+%\ar@<-2ex>[l]|(.65){\frakd_{0,2}}
+%\ar@<+2ex>[l]|(.65){\frakd_{2,2}}
+%\ar[r]|(.65){\fraks_{1,2}}
+%\ar@<+2ex>[r]|(.65){\fraks_{0,2}}
+%\ar@<-2ex>[r]|(.65){\fraks_{2,2}}
+%&
+%\,T^4X_3\,\makebox[0cm][l]{\,$\cdots $}
+%\ar@<-3ex>[l]|(.65){\frakd_{0,3}}
+%\ar@<-1ex>[l]|(.65){\frakd_{1,3}}
+%\ar@<+1ex>[l]|(.65){\frakd_{2,3}}
+%\ar@<+3ex>[l]|(.65){\frakd_{3,3}}
+%}}\]
+%
+%
+%\[(bX)_n:=(\frakb(X_n))_n\]
+%where we may write the 
+%, is obtained by applying the simplicial endofunctor above to $X\in s\algCat$ levelwise, and taking the diagonal.
 
 
-\[\trip{h}{j,q}{}=\frakd_{j+1,q+2}\circ\cdots \circ\frakd_{j+1,2q+1}\]
-\[\trip{h}{j,q-1}{}=\frakd_{j+1,q+1}\circ\cdots \circ\frakd_{j+1,2q-1}\]
-\[\trip{h}{j-1,q-1}{}=\frakd_{j,q+1}\circ\cdots \circ\frakd_{j,2q-1}\]
-\[\trip{h}{j+1,q}{}=\frakd_{j+2,q+2}\circ\cdots \circ\frakd_{j+2,2q+1}\]
-\[\trip{h}{j,q+1}{}=\frakd_{j+1,q+3}\circ\cdots \circ\frakd_{j+1,2q+3}\]
-\[\trip{h}{j+1,q+1}{}=\frakd_{j+2,q+3}\circ\cdots \circ\frakd_{j+2,2q+3}\]
 
 
-
+\begin{prop}
+For any integers $s,t\geq1$, there is a simplicial homotopy $b^{s-1}\epsilon_{(b^{t}X)}\simeq b^{s}\epsilon_{(b^{t-1}X)}$ of maps $b^{s+t}X\to b^{s+t-1}X$, natural in $X\in s\algCat$.
+\end{prop}
+\begin{proof}
+Write $K=b^{s+t}X$ and $L=b^{s+t-1}X$ for the source and target of these maps respectively. Noting the formulae
+\[[\frakd_{iq}]^2=[\frakd_{q+i,2q}\circ\frakd_{i,2q+1}]\ \textup{and}\  [\fraks_{iq}]^2=[\fraks_{q+i+2,2q+2}\circ\fraks_{i,2q+1}],\]
+we can describe the simplicial structure maps in $K$ and $L$ as follows:
+\begin{alignat*}{2}
+\trip{d}{iq}{L}&=[\frakd_{iq}]^{s+t-1}\trip{d}{iq}{X}\\
+\trip{s}{iq}{L}&=[\fraks_{iq}]^{s+t-1}\trip{s}{iq}{X}\\
+\trip{d}{iq}{K}&=[\frakd_{iq}]^{s-1}[\frakd_{q+i,2q}\circ\frakd_{i,2q+1}][\frakd_{iq}]^{t-1}\trip{d}{iq}{X}\\
+\trip{s}{iq}{K}&=[\fraks_{iq}]^{s-1}[\fraks_{q+i+2,2q+2}\circ\fraks_{i,2q+1}][\fraks_{iq}]^{t-1}\trip{s}{iq}{X}
+\end{alignat*}
+We can now state an explicity simplicial homotopy between the two maps of interest. Using precisely the notation of \cite[\S5]{MaySimpObj.pdf}, we define $\trip{h}{jq}{}:K_q\to L_{q+1}$, for $0\leq i\leq q$, by the formula
+\[\trip{h}{jq}{}:=[\fraks_{jq}]^{s-1}[\frakd_{j+1,q+2}\circ\cdots \circ\frakd_{j+1,2q+1}][\fraks_{jq}]^{t-1}\trip{s}{jq}{X}\]
+If the $\trip{h}{jq}{}$ in fact form a valid homotopy $f\simeq g$, then: %$f_q=\trip{d}{0,q+1}{L}\trip{h}{0,q}{}$, and $f_q=\trip{d}{q+1,q+1}{L}\trip{h}{q,q}{}$. We may calculate these composites as follows:
+\begin{alignat*}{2}
+f_q&=\trip{d}{0,q+1}{L}\trip{h}{0,q}{}\\
+&=
+[\frakd_{0,q+1}\fraks_{0q}]^{s-1}[\frakd_{0,q+1}\frakd_{1,q+2}\circ\cdots \circ\frakd_{1,2q+1}][\frakd_{0,q+1}\fraks_{0q}]^{t-1}(\trip{d}{0,q+1}{X}\trip{s}{0q}{X})%
+\\
+&=
+[\trip{\textup{id}}{T^{q+1}}{}]^{s-1}[\frakd_{0,q+1}\frakd_{0,q+2}\circ\cdots \circ\frakd_{0,2q+1}][\trip{\textup{id}}{T^{q+1}}{}]^{t-1}\trip{\textup{id}}{X_q}{}%
+\end{alignat*}
+which is exactly the action of  $b^{s-1}\epsilon_{(b^{t}X)}$ in level $q$. Similarly,
+\begin{alignat*}{2}
+g_q&=\trip{d}{q+1,q+1}{L}\trip{h}{q,q}{}\\
+&=
+[\frakd_{q+1,q+1}\fraks_{qq}]^{s-1}[\frakd_{q+1,q+1}\frakd_{q+1,q+2}\circ\cdots \circ\frakd_{q+1,2q+1}][\frakd_{q+1,q+1}\fraks_{qq}]^{t-1}(\trip{d}{q+1,q+1}{X}\trip{s}{qq}{X})
+\\
+&=
+[\trip{\textup{id}}{T^{q+1}}{}]^{s-1}[\frakd_{q+1,q+1}\frakd_{q+1,q+2}\circ\cdots \circ\frakd_{q+1,2q+1}][\trip{\textup{id}}{T^{q+1}}{}]^{t-1}\trip{\textup{id}}{X_q}{}%
+\end{alignat*}
+is exactly the action of $b^{s}\epsilon_{(b^{t-1}X)}$ in level $q$.
+All that remains is to verify that the $h_{i,q}$ satisfy the defining identities for the notion of simplicial homotopy. While forming each of the composites of interest, none of the groupings provided by the square brackets are disturbed. Thus, each identity (numbered 1-5) can be checked one piece at a time:
 {\renewcommand{\circ}{\relax}
 \begin{enumerate}\squishlist
 \setlength{\parindent}{.25in}
@@ -1101,183 +1180,293 @@ $\fraks_{i,q+1}\circ
 \end{enumerate}
 \end{enumerate}
 }
-
-\begin{align*}
- d_id_j&=d_{j-1}d_i\quad \text{ if $i<j$}, \notag\\
- d_i s_j &= s_{j-1} d_i\quad\text{ if $i < j$},\notag \\
-d_j s_j &= d_{j+1} s_j=\text{id},\label{E: axioms}\\
- d_i s_j &= s_j d_{i-1}\quad  \text{ if $i > j + 1$},\notag\\
-  s_is_j&=s_{j+1}s_i\quad \text{ if $i\leq j$}.\notag
-\end{align*}
-
-
-\end{document}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-We must check, for $0\leq i<j\leq q$ that $\trip{d}{i,q+1}{L}\trip{h}{jq}{}=\trip{h}{j-1,q-1}{}\trip{d}{i,q}{K}$, i.e.
-in almost all of the brackets, $\trip{d}{i,q+1}{}\trip{s}{jq}{}=\trip{s}{j-1,q-1}{}\trip{d}{i,q}{}$, and
-\[\frakd_{i,q+1}\circ
-\frakd_{j+1,q+2}\circ\cdots \circ\frakd_{j+1,2q+1}=
-\frakd_{j,q+1}\circ\cdots \circ\frakd_{j,2q-1}\circ
-\frakd_{q+i,2q}\circ\frakd_{i,2q+1}
-\]
-
-For $0\leq j\leq q-1$, we need $\trip{d}{j+1,q+1}{L}\trip{h}{j,q}{}=\trip{d}{j+1,q+1}{L}\trip{h}{j+1,q}{}$. In most brackets, $\trip{d}{j+1,q+1}{}\trip{s}{j,q}{}=\trip{d}{j+1,q+1}{}\trip{s}{j+1,q}{}$, and otherwise:
-
-
-
-
-
-
-
-
-
-
-\newpage
-
-
-
-
-
-$K=b^{s+t}X$, $L=b^{s+t-1}X$, so that
-\[K_q=(T^{q+1})^{s+t}X_q\qquad L_q=(T^{q+1})^{s+t-1}X_q\]
-writing $\frakd_{iq}$ for $(T^{i}\rho T^{q-i})$ and $\fraks_{iq}$ for $(T^{i+1}\imath T^{q-i})$,
-\[\xymatrix@R=2mm@C=65mm{
-\makebox[0cm][r]{$\trip{d}{iq}{K}:\,$}K_q
-\ar[r]^-{(\frakd_{iq})^{s+t}\trip{d}{iq}{X}}
-&
-K_{q-1}\\
-\makebox[0cm][r]{$\trip{s}{iq}{K}:\,$}K_q
-\ar[r]^-{(\fraks_{iq})^{s+t}\trip{s}{iq}{X}}
-&
-K_{q+1}\\
-\makebox[0cm][r]{$\trip{d}{iq}{L}:\,$}L_q
-\ar[r]^-{(\frakd_{iq})^{s+t-1}\trip{d}{iq}{X}}
-&
-L_{q-1}\\
-\makebox[0cm][r]{$\trip{s}{iq}{L}:\,$}L_q
-\ar[r]^-{(\fraks_{iq})^{s+t-1}\trip{s}{iq}{X}}
-&
-L_{q+1}\\
-\makebox[0cm][r]{$\trip{h}{jq}{}:\,$}K_q
-\ar[r]^-{(\fraks_{jq})^{s-1}T^{j+1}\rho^{q}T^{q-j+1}(\fraks_{jq})^{t-1}\trip{s}{jq}{X}}
-&
-L_{q+1}\\
-}\]
-
-\newpage
-
-writing $\frakd_{iq}$ for $(T^{i}\rho T^{q-i})$ and $\fraks_{iq}$ for $(T^{i+1}\imath T^{q-i})$,
-
-
-\begin{align}
- d_id_j&=d_{j-1}d_i\quad \text{ if $i<j$}, \notag\\
- d_i s_j &= s_{j-1} d_i\quad\text{ if $i < j$},\notag \\
-d_j s_j &= d_{j+1} s_j=\text{id},\label{E: axioms}\\
- d_i s_j &= s_j d_{i-1}\quad  \text{ if $i > j + 1$},\notag\\
-  s_is_j&=s_{j+1}s_i\quad \text{ if $i\leq j$}.\notag
-\end{align}
-
-\subsection*{identities}
-
-
-We must check, for $0\leq i<j\leq q$ that $\trip{d}{i,q+1}{L}\trip{h}{jq}{}=\trip{h}{j-1,q-1}{}\trip{d}{i,q}{K}$
-\[\xymatrix@R=5mm@C=65mm{
-K_q
-\ar[r]^-{\trip{h}{jq}{}}_-{(\fraks_{jq})^{s-1}T^{j+1}\rho^{q}T^{q-j+1}(\fraks_{jq})^{t-1}\trip{s}{jq}{X}}
-\ar[d]_-{(\frakd_{iq})^{s+t}\trip{d}{iq}{X}}
-&
-L_{q+1}
-\ar[d]^-{(\frakd_{i,q+1})^{s+t-1}\trip{d}{i,q+1}{X}}
-\\
-K_{q-1}
-\ar[r]_-{\trip{h}{j-1,q-1}{}}^-{(\fraks_{j-1,q-1})^{s-1}T^{j}\rho^{q-1}T^{q-j+1}(\fraks_{j-1,q-1})^{t-1}\trip{s}{j-1,q-1}{X}}
-&
-L_{q}\\
-}\]
-
-
-For $0\leq j\leq q-1$, we need $\trip{d}{j+1,q+1}{L}$ to coequalize $\trip{h}{j,q}{}$ and $\trip{h}{j+1,q}{}$.
-\[\xymatrix@R=5mm@C=65mm{
-K_q
-\ar@<.5ex>[r]^-{\trip{h}{j,q}{}=(\fraks_{jq})^{s-1}T^{j+1}\rho^{q}T^{q-j+1}(\fraks_{jq})^{t-1}\trip{s}{jq}{X}}
-\ar@<-.5ex>[r]_-{\trip{h}{j+1,q}{}=(\fraks_{j+1,q})^{s-1}T^{j+2}\rho^{q}T^{q-j}(\fraks_{j+1,q})^{t-1}\trip{s}{j+1,q}{X}}
-&
-L_{q+1}
-\ar[d]^-{(\frakd_{j+1,q+1})^{s+t-1}\trip{d}{j+1,q+1}{X}}
-\\
-&
-L_{q}\\
-}\]
-We must check, for $0\leq j<i-1\leq q$ that $\trip{d}{i,q+1}{L}\trip{h}{jq}{}=\trip{h}{j,q-1}{}\trip{d}{i-1,q}{K}$
-\[\xymatrix@R=5mm@C=65mm{
-K_q
-\ar[r]^-{\trip{h}{jq}{}}_-{(\fraks_{jq})^{s-1}T^{j+1}\rho^{q}T^{q-j+1}(\fraks_{jq})^{t-1}\trip{s}{jq}{X}}
-\ar[d]_-{(\frakd_{i-1,q})^{s+t}\trip{d}{i-1,q}{X}}
-&
-L_{q+1}
-\ar[d]^-{(\frakd_{i,q+1})^{s+t-1}\trip{d}{i,q+1}{X}}
-\\
-K_{q-1}
-\ar[r]_-{\trip{h}{j,q-1}{}}^-{(\fraks_{j,q-1})^{s-1}T^{j+1}\rho^{q-1}T^{q-j}(\fraks_{j,q-1})^{t-1}\trip{s}{j,q-1}{X}}
-&
-L_{q}\\
-}\]
-If $0\leq i\leq j\leq q$, then $\trip{s}{i,q+1}{L}\trip{h}{jq}{}=\trip{h}{j+1,q+1}{}\trip{s}{i,q}{K}$
-\[\xymatrix@R=5mm@C=65mm{
-K_q
-\ar[r]^-{\trip{h}{jq}{}}_-{(\fraks_{jq})^{s-1}T^{j+1}\rho^{q}T^{q-j+1}(\fraks_{jq})^{t-1}\trip{s}{jq}{X}}
-\ar[d]_-{(\fraks_{iq})^{s+t}\trip{s}{iq}{X}}
-&
-L_{q+1}
-\ar[d]^-{(\fraks_{i,q+1})^{s+t-1}\trip{s}{i,q+1}{X}}
-\\
-K_{q+1}
-\ar[r]_-{\trip{h}{j+1,q+1}{}}^-{(\fraks_{j+1,q+1})^{s-1}T^{j+2}\rho^{q+1}T^{q-j+1}(\fraks_{j+1,q+1})^{t-1}\trip{s}{j+1,q+1}{X}}
-&
-L_{q+2}\\
-}\]
-If $0\leq j<i\leq q+1$, then $\trip{s}{i,q+1}{L}\trip{h}{jq}{}=\trip{h}{j,q+1}{}\trip{s}{i-1,q}{K}$
-\[\xymatrix@R=5mm@C=65mm{
-K_q
-\ar[r]^-{\trip{h}{jq}{}}_-{(\fraks_{jq})^{s-1}T^{j+1}\rho^{q}T^{q-j+1}(\fraks_{jq})^{t-1}\trip{s}{jq}{X}}
-\ar[d]_-{(\fraks_{i-1,q})^{s+t}\trip{s}{i-1,q}{X}}
-&
-L_{q+1}
-\ar[d]^-{(\fraks_{i,q+1})^{s+t-1}\trip{s}{i,q+1}{X}}
-\\
-K_{q+1}
-\ar[r]_-{\trip{h}{j,q+1}{}}^-{(\fraks_{j,q+1})^{s-1}T^{j+1}\rho^{q+1}T^{q-j+2}(\fraks_{j,q+1})^{t-1}\trip{s}{j,q+1}{X}}
-&
-L_{q+2}\\
-}\]
+\noindent Each of these equations follows from the simplicial identities.
+\end{proof}
+\end{iteratedBarConstructions}
+%
+%
+%Before giving the proof, we'll introduce a little notation for the maps involved in these iterated bar constructions. Whenever $0\leq i\leq q$, there are natural transformations write $\frakd_{iq}:=(T^{i}\rho T^{q-i}):T^{q+1}\Rightarrow T^q$ and $\fraks_{iq}:=(T^{i+1}\imath T^{q-i}):T^{q+1}\Rightarrow T^{q+2}$.
+%
+%
+%
+%
+%
+%
+%
+%$K=b^{s+t}X$, $L=b^{s+t-1}X$, so that
+%\[K_q=(T^{q+1})^{s+t}X_q\qquad L_q=(T^{q+1})^{s+t-1}X_q\]
+%
+%
+%
+%Write $\frakd_{iq}:=(T^{i}\rho T^{q-i}):T^{q+1}\Rightarrow T^q$ and $\fraks_{iq}:=(T^{i+1}\imath T^{q-i}):T^{q+1}\Rightarrow T^{q+2}$. Given natural transformations $\alpha:F\Rightarrow F'$ and $\beta:G\Rightarrow G'$, write $[\alpha][\beta]$ for horizontal composition $F\circ G\Rightarrow F'\circ G'$. Use the symbol $\circ$ for vertical composition, as ever.
+%
+%It will be useful to note the following two equations
+%\[[\frakd_{iq}]^2=[\frakd_{q+i,2q}\circ\frakd_{i,2q+1}]\ \textup{and}\  [\fraks_{iq}]^2=[\fraks_{q+i+2,2q+2}\circ\fraks_{i,2q+1}]\]
+%In light of these, we can write formulae for the differentials on the various bar constructions as follows:
+%\[\xymatrix@R=5mm@C=65mm{
+%\makebox[0cm][r]{$\trip{d}{iq}{K}:\,$}K_q
+%\ar[r]^-{[\frakd_{iq}]^{s-1}[\frakd_{q+i,2q}\circ\frakd_{i,2q+1}][\frakd_{iq}]^{t-1}\trip{d}{iq}{X}}%^-{[\frakd_{iq}]^{s+t}\trip{d}{iq}{X}}
+%&
+%K_{q-1}\\
+%\makebox[0cm][r]{$\trip{s}{iq}{K}:\,$}K_q
+%\ar[r]^-{[\fraks_{iq}]^{s-1}[\fraks_{q+i+2,2q+2}\circ\fraks_{i,2q+1}][\fraks_{iq}]^{t-1}\trip{s}{iq}{X}}%^-{[\fraks_{iq}]^{s+t}\trip{s}{iq}{X}}
+%&
+%K_{q+1}\\
+%\makebox[0cm][r]{$\trip{d}{iq}{L}:\,$}L_q
+%\ar[r]^-{[\frakd_{iq}]^{s+t-1}\trip{d}{iq}{X}}
+%&
+%L_{q-1}\\
+%\makebox[0cm][r]{$\trip{s}{iq}{L}:\,$}L_q
+%\ar[r]^-{[\fraks_{iq}]^{s+t-1}\trip{s}{iq}{X}}
+%&
+%L_{q+1}\\
+%\makebox[0cm][r]{$\trip{h}{jq}{}:\,$}K_q
+%\ar[r]^-{[\fraks_{jq}]^{s-1}[\frakd_{j+1,q+2}\circ\cdots \circ\frakd_{j+1,2q+1}][\fraks_{jq}]^{t-1}\trip{s}{jq}{X}}%_-{([\fraks_{jq}]^{s-1}T^{j+1}\rho^{q}T^{q-j+1}[\fraks_{jq}]^{t-1}\trip{s}{jq}{X})}
+%&
+%L_{q+1}\\
+%}\]
+%
+%\[\trip{d}{i,q}{K}=\frakd_{q+i,2q}\circ\frakd_{i,2q+1}\]
+%\[\trip{d}{i-1,q}{K}=\frakd_{q+i-1,2q}\circ\frakd_{i-1,2q+1}\]
+%
+%
+%
+%\[\trip{s}{i,q}{K}=\fraks_{q+i+2,2q+2}\circ\fraks_{i,2q+1}\]
+%\[\trip{s}{i-1,q}{K}=\fraks_{q+i+1,2q+2}\circ\fraks_{i-1,2q+1}\]
+%
+%\[\trip{d}{i,q}{L}=\frakd_{i,q}\]
+%\[\trip{d}{i,q+1}{L}=\frakd_{i,q+1}\]
+%\[\trip{d}{j+1,q+1}{L}=\frakd_{j+1,q+1}\]
+%
+%
+%\[\trip{s}{iq}{L}=\fraks_{iq}\]
+%\[\trip{s}{i,q+1}{L}=\fraks_{i,q+1}\]
+%
+%
+%\[\trip{h}{j,q}{}=\frakd_{j+1,q+2}\circ\cdots \circ\frakd_{j+1,2q+1}\]
+%\[\trip{h}{j,q-1}{}=\frakd_{j+1,q+1}\circ\cdots \circ\frakd_{j+1,2q-1}\]
+%\[\trip{h}{j-1,q-1}{}=\frakd_{j,q+1}\circ\cdots \circ\frakd_{j,2q-1}\]
+%\[\trip{h}{j+1,q}{}=\frakd_{j+2,q+2}\circ\cdots \circ\frakd_{j+2,2q+1}\]
+%\[\trip{h}{j,q+1}{}=\frakd_{j+1,q+3}\circ\cdots \circ\frakd_{j+1,2q+3}\]
+%\[\trip{h}{j+1,q+1}{}=\frakd_{j+2,q+3}\circ\cdots \circ\frakd_{j+2,2q+3}\]
+%
+%
+%
+%{\renewcommand{\circ}{\relax}
+%\begin{enumerate}\squishlist
+%\setlength{\parindent}{.25in}
+%\item $\trip{d}{i,q+1}{L}\circ \trip{h}{j,q}{}=\trip{h}{j-1,q-1}{}\circ \trip{d}{i,q}{K}$ whenever $0\leq i<j\leq q$
+%\begin{enumerate}\squishlist
+%\setlength{\parindent}{.25in}
+%\item $\trip{d}{i,q+1}{X}\circ \trip{s}{j,q}{X}=\trip{s}{j-1,q-1}{X}\circ \trip{d}{i,q}{X}$ and $\trip{\frakd}{i,q+1}{}\circ \trip{\fraks}{j,q}{}=\trip{\fraks}{j-1,q-1}{}\circ \trip{\frakd}{i,q}{}$
+%\item 
+%$\frakd_{i,q+1}\circ
+%\frakd_{j+1,q+2}\circ\cdots \circ\frakd_{j+1,2q+1}=
+%\frakd_{j,q+1}\circ\cdots \circ\frakd_{j,2q-1}\circ
+%\frakd_{q+i,2q}\circ\frakd_{i,2q+1}$
+%\end{enumerate}
+%\item $\trip{d}{j+1,q+1}{L}\circ \trip{h}{j,q}{}=\trip{d}{j+1,q+1}{L}\circ \trip{h}{j+1,q}{}$ whenever $0\leq j\leq q-1$
+%\begin{enumerate}\squishlist
+%\setlength{\parindent}{.25in}
+%\item $\trip{d}{j+1,q+1}{X}\circ \trip{s}{j,q}{X}=\trip{d}{j+1,q+1}{X}\circ \trip{s}{j+1,q}{X}$ and $\trip{\frakd}{j+1,q+1}{}\circ \trip{\fraks}{j,q}{}=\trip{\frakd}{j+1,q+1}{}\circ \trip{\fraks}{j+1,q}{}$
+%\item 
+%$\frakd_{j+1,q+1}\circ
+%\frakd_{j+1,q+2}\circ\cdots \circ\frakd_{j+1,2q+1}=
+%\frakd_{j+1,q+1}\circ
+%\frakd_{j+2,q+2}\circ\cdots \circ\frakd_{j+2,2q+1}$
+%\end{enumerate}
+%\item $\trip{d}{i,q+1}{L}\circ \trip{h}{j,q}{}=\trip{h}{j,q-1}{}\circ \trip{d}{i-1,q}{K}$ whenever $0\leq j<i-1\leq q$
+%\begin{enumerate}\squishlist
+%\setlength{\parindent}{.25in}
+%\item $\trip{d}{i,q+1}{X}\circ \trip{s}{j,q}{X}=\trip{s}{j,q-1}{X}\circ \trip{d}{i-1,q}{X}$ and $\trip{\frakd}{i,q+1}{}\circ \trip{\fraks}{j,q}{}=\trip{\fraks}{j,q-1}{}\circ \trip{\frakd}{i-1,q}{}$
+%\item 
+%$\frakd_{i,q+1}\circ
+%\frakd_{j+1,q+2}\circ\cdots \circ\frakd_{j+1,2q+1}=
+%\frakd_{j+1,q+1}\circ\cdots \circ\frakd_{j+1,2q-1}\circ
+%\frakd_{q+i-1,2q}\circ\frakd_{i-1,2q+1}$
+%\end{enumerate}
+%\item $\trip{s}{i,q+1}{L}\circ \trip{h}{j,q}{}=\trip{h}{j+1,q+1}{}\circ \trip{s}{i,q}{K}$ whenever $0\leq i\leq j\leq q$
+%\begin{enumerate}\squishlist
+%\setlength{\parindent}{.25in}
+%\item $\trip{s}{i,q+1}{X}\circ \trip{s}{j,q}{X}=\trip{s}{j+1,q+1}{X}\circ \trip{s}{i,q}{X}$ and $\trip{\fraks}{i,q+1}{}\circ \trip{\fraks}{j,q}{}=\trip{\fraks}{j+1,q+1}{}\circ \trip{\fraks}{i,q}{}$
+%\item 
+%$\fraks_{i,q+1}\circ
+%\frakd_{j+1,q+2}\circ\cdots \circ\frakd_{j+1,2q+1}=
+%\frakd_{j+2,q+3}\circ\cdots \circ\frakd_{j+2,2q+3}\circ
+%\fraks_{q+i+2,2q+2}\circ\fraks_{i,2q+1}$
+%\end{enumerate}
+%\item $\trip{s}{i,q+1}{L}\circ \trip{h}{j,q}{}=\trip{h}{j,q+1}{}\circ \trip{s}{i-1,q}{K}$ whenever $0\leq j<i\leq q+1$
+%\begin{enumerate}\squishlist
+%\setlength{\parindent}{.25in}
+%\item $\trip{s}{i,q+1}{X}\circ \trip{s}{j,q}{X}=\trip{s}{j,q+1}{X}\circ \trip{s}{i-1,q}{X}$ and $\trip{\fraks}{i,q+1}{}\circ \trip{\fraks}{j,q}{}=\trip{\fraks}{j,q+1}{}\circ \trip{\fraks}{i-1,q}{}$
+%\item 
+%$\fraks_{i,q+1}\circ
+%\frakd_{j+1,q+2}\circ\cdots \circ\frakd_{j+1,2q+1}=
+%\frakd_{j+1,q+3}\circ\cdots \circ\frakd_{j+1,2q+3}\circ
+%\fraks_{q+i+1,2q+2}\circ\fraks_{i-1,2q+1}$
+%\end{enumerate}
+%\end{enumerate}
+%}
+%
+%\begin{align*}
+% d_id_j&=d_{j-1}d_i\quad \text{ if $i<j$}, \notag\\
+% d_i s_j &= s_{j-1} d_i\quad\text{ if $i < j$},\notag \\
+%d_j s_j &= d_{j+1} s_j=\text{id},\label{E: axioms}\\
+% d_i s_j &= s_j d_{i-1}\quad  \text{ if $i > j + 1$},\notag\\
+%  s_is_j&=s_{j+1}s_i\quad \text{ if $i\leq j$}.\notag
+%\end{align*}
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%%%%%%%%%%%%
+%%%%%%%%%%%%
+%%%%%%%%%%%%
+%%%%%%%%%%%%
+%%%%%%%%%%%%
+%%%%%%%%%%%%
+%%%%%%%%%%%%
+%%%%%%%%%%%%
+%%%%%%%%%%%%
+%%%%%%%%%%%%
+%%%%%%%%%%%%
+%%%%%%%%%%%%
+%%%%%%%%%%%%
+%%%%%%%%%%%%
+%%%%%%%%%%%%
+%%%%%%%%%%%%
+%%%%%%%%%%%%
+%%%%%%%%%%%%
+%%%%%%%%%%%%
+%%%%%%%%%%%%
+%%%%%%%%%%%%
+%%%%%%%%%%%%
+%%%%%%%%%%%%
+%%%%%%%%%%%%
+%%%%%%%%%%%%
+%%%%%%%%%%%%\newpage
+%%%%%%%%%%%%
+%%%%%%%%%%%%
+%%%%%%%%%%%%
+%%%%%%%%%%%%
+%%%%%%%%%%%%
+%%%%%%%%%%%%$K=b^{s+t}X$, $L=b^{s+t-1}X$, so that
+%%%%%%%%%%%%\[K_q=(T^{q+1})^{s+t}X_q\qquad L_q=(T^{q+1})^{s+t-1}X_q\]
+%%%%%%%%%%%%writing $\frakd_{iq}$ for $(T^{i}\rho T^{q-i})$ and $\fraks_{iq}$ for $(T^{i+1}\imath T^{q-i})$,
+%%%%%%%%%%%%\[\xymatrix@R=2mm@C=65mm{
+%%%%%%%%%%%%\makebox[0cm][r]{$\trip{d}{iq}{K}:\,$}K_q
+%%%%%%%%%%%%\ar[r]^-{(\frakd_{iq})^{s+t}\trip{d}{iq}{X}}
+%%%%%%%%%%%%&
+%%%%%%%%%%%%K_{q-1}\\
+%%%%%%%%%%%%\makebox[0cm][r]{$\trip{s}{iq}{K}:\,$}K_q
+%%%%%%%%%%%%\ar[r]^-{(\fraks_{iq})^{s+t}\trip{s}{iq}{X}}
+%%%%%%%%%%%%&
+%%%%%%%%%%%%K_{q+1}\\
+%%%%%%%%%%%%\makebox[0cm][r]{$\trip{d}{iq}{L}:\,$}L_q
+%%%%%%%%%%%%\ar[r]^-{(\frakd_{iq})^{s+t-1}\trip{d}{iq}{X}}
+%%%%%%%%%%%%&
+%%%%%%%%%%%%L_{q-1}\\
+%%%%%%%%%%%%\makebox[0cm][r]{$\trip{s}{iq}{L}:\,$}L_q
+%%%%%%%%%%%%\ar[r]^-{(\fraks_{iq})^{s+t-1}\trip{s}{iq}{X}}
+%%%%%%%%%%%%&
+%%%%%%%%%%%%L_{q+1}\\
+%%%%%%%%%%%%\makebox[0cm][r]{$\trip{h}{jq}{}:\,$}K_q
+%%%%%%%%%%%%\ar[r]^-{(\fraks_{jq})^{s-1}T^{j+1}\rho^{q}T^{q-j+1}(\fraks_{jq})^{t-1}\trip{s}{jq}{X}}
+%%%%%%%%%%%%&
+%%%%%%%%%%%%L_{q+1}\\
+%%%%%%%%%%%%}\]
+%%%%%%%%%%%%
+%%%%%%%%%%%%\newpage
+%%%%%%%%%%%%
+%%%%%%%%%%%%writing $\frakd_{iq}$ for $(T^{i}\rho T^{q-i})$ and $\fraks_{iq}$ for $(T^{i+1}\imath T^{q-i})$,
+%%%%%%%%%%%%
+%%%%%%%%%%%%
+%%%%%%%%%%%%\begin{align}
+%%%%%%%%%%%% d_id_j&=d_{j-1}d_i\quad \text{ if $i<j$}, \notag\\
+%%%%%%%%%%%% d_i s_j &= s_{j-1} d_i\quad\text{ if $i < j$},\notag \\
+%%%%%%%%%%%%d_j s_j &= d_{j+1} s_j=\text{id},\label{E: axioms}\\
+%%%%%%%%%%%% d_i s_j &= s_j d_{i-1}\quad  \text{ if $i > j + 1$},\notag\\
+%%%%%%%%%%%%  s_is_j&=s_{j+1}s_i\quad \text{ if $i\leq j$}.\notag
+%%%%%%%%%%%%\end{align}
+%%%%%%%%%%%%
+%%%%%%%%%%%%\subsection*{identities}
+%%%%%%%%%%%%
+%%%%%%%%%%%%
+%%%%%%%%%%%%We must check, for $0\leq i<j\leq q$ that $\trip{d}{i,q+1}{L}\trip{h}{jq}{}=\trip{h}{j-1,q-1}{}\trip{d}{i,q}{K}$
+%%%%%%%%%%%%\[\xymatrix@R=5mm@C=65mm{
+%%%%%%%%%%%%K_q
+%%%%%%%%%%%%\ar[r]^-{\trip{h}{jq}{}}_-{(\fraks_{jq})^{s-1}T^{j+1}\rho^{q}T^{q-j+1}(\fraks_{jq})^{t-1}\trip{s}{jq}{X}}
+%%%%%%%%%%%%\ar[d]_-{(\frakd_{iq})^{s+t}\trip{d}{iq}{X}}
+%%%%%%%%%%%%&
+%%%%%%%%%%%%L_{q+1}
+%%%%%%%%%%%%\ar[d]^-{(\frakd_{i,q+1})^{s+t-1}\trip{d}{i,q+1}{X}}
+%%%%%%%%%%%%\\
+%%%%%%%%%%%%K_{q-1}
+%%%%%%%%%%%%\ar[r]_-{\trip{h}{j-1,q-1}{}}^-{(\fraks_{j-1,q-1})^{s-1}T^{j}\rho^{q-1}T^{q-j+1}(\fraks_{j-1,q-1})^{t-1}\trip{s}{j-1,q-1}{X}}
+%%%%%%%%%%%%&
+%%%%%%%%%%%%L_{q}\\
+%%%%%%%%%%%%}\]
+%%%%%%%%%%%%
+%%%%%%%%%%%%
+%%%%%%%%%%%%For $0\leq j\leq q-1$, we need $\trip{d}{j+1,q+1}{L}$ to coequalize $\trip{h}{j,q}{}$ and $\trip{h}{j+1,q}{}$.
+%%%%%%%%%%%%\[\xymatrix@R=5mm@C=65mm{
+%%%%%%%%%%%%K_q
+%%%%%%%%%%%%\ar@<.5ex>[r]^-{\trip{h}{j,q}{}=(\fraks_{jq})^{s-1}T^{j+1}\rho^{q}T^{q-j+1}(\fraks_{jq})^{t-1}\trip{s}{jq}{X}}
+%%%%%%%%%%%%\ar@<-.5ex>[r]_-{\trip{h}{j+1,q}{}=(\fraks_{j+1,q})^{s-1}T^{j+2}\rho^{q}T^{q-j}(\fraks_{j+1,q})^{t-1}\trip{s}{j+1,q}{X}}
+%%%%%%%%%%%%&
+%%%%%%%%%%%%L_{q+1}
+%%%%%%%%%%%%\ar[d]^-{(\frakd_{j+1,q+1})^{s+t-1}\trip{d}{j+1,q+1}{X}}
+%%%%%%%%%%%%\\
+%%%%%%%%%%%%&
+%%%%%%%%%%%%L_{q}\\
+%%%%%%%%%%%%}\]
+%%%%%%%%%%%%We must check, for $0\leq j<i-1\leq q$ that $\trip{d}{i,q+1}{L}\trip{h}{jq}{}=\trip{h}{j,q-1}{}\trip{d}{i-1,q}{K}$
+%%%%%%%%%%%%\[\xymatrix@R=5mm@C=65mm{
+%%%%%%%%%%%%K_q
+%%%%%%%%%%%%\ar[r]^-{\trip{h}{jq}{}}_-{(\fraks_{jq})^{s-1}T^{j+1}\rho^{q}T^{q-j+1}(\fraks_{jq})^{t-1}\trip{s}{jq}{X}}
+%%%%%%%%%%%%\ar[d]_-{(\frakd_{i-1,q})^{s+t}\trip{d}{i-1,q}{X}}
+%%%%%%%%%%%%&
+%%%%%%%%%%%%L_{q+1}
+%%%%%%%%%%%%\ar[d]^-{(\frakd_{i,q+1})^{s+t-1}\trip{d}{i,q+1}{X}}
+%%%%%%%%%%%%\\
+%%%%%%%%%%%%K_{q-1}
+%%%%%%%%%%%%\ar[r]_-{\trip{h}{j,q-1}{}}^-{(\fraks_{j,q-1})^{s-1}T^{j+1}\rho^{q-1}T^{q-j}(\fraks_{j,q-1})^{t-1}\trip{s}{j,q-1}{X}}
+%%%%%%%%%%%%&
+%%%%%%%%%%%%L_{q}\\
+%%%%%%%%%%%%}\]
+%%%%%%%%%%%%If $0\leq i\leq j\leq q$, then $\trip{s}{i,q+1}{L}\trip{h}{jq}{}=\trip{h}{j+1,q+1}{}\trip{s}{i,q}{K}$
+%%%%%%%%%%%%\[\xymatrix@R=5mm@C=65mm{
+%%%%%%%%%%%%K_q
+%%%%%%%%%%%%\ar[r]^-{\trip{h}{jq}{}}_-{(\fraks_{jq})^{s-1}T^{j+1}\rho^{q}T^{q-j+1}(\fraks_{jq})^{t-1}\trip{s}{jq}{X}}
+%%%%%%%%%%%%\ar[d]_-{(\fraks_{iq})^{s+t}\trip{s}{iq}{X}}
+%%%%%%%%%%%%&
+%%%%%%%%%%%%L_{q+1}
+%%%%%%%%%%%%\ar[d]^-{(\fraks_{i,q+1})^{s+t-1}\trip{s}{i,q+1}{X}}
+%%%%%%%%%%%%\\
+%%%%%%%%%%%%K_{q+1}
+%%%%%%%%%%%%\ar[r]_-{\trip{h}{j+1,q+1}{}}^-{(\fraks_{j+1,q+1})^{s-1}T^{j+2}\rho^{q+1}T^{q-j+1}(\fraks_{j+1,q+1})^{t-1}\trip{s}{j+1,q+1}{X}}
+%%%%%%%%%%%%&
+%%%%%%%%%%%%L_{q+2}\\
+%%%%%%%%%%%%}\]
+%%%%%%%%%%%%If $0\leq j<i\leq q+1$, then $\trip{s}{i,q+1}{L}\trip{h}{jq}{}=\trip{h}{j,q+1}{}\trip{s}{i-1,q}{K}$
+%%%%%%%%%%%%\[\xymatrix@R=5mm@C=65mm{
+%%%%%%%%%%%%K_q
+%%%%%%%%%%%%\ar[r]^-{\trip{h}{jq}{}}_-{(\fraks_{jq})^{s-1}T^{j+1}\rho^{q}T^{q-j+1}(\fraks_{jq})^{t-1}\trip{s}{jq}{X}}
+%%%%%%%%%%%%\ar[d]_-{(\fraks_{i-1,q})^{s+t}\trip{s}{i-1,q}{X}}
+%%%%%%%%%%%%&
+%%%%%%%%%%%%L_{q+1}
+%%%%%%%%%%%%\ar[d]^-{(\fraks_{i,q+1})^{s+t-1}\trip{s}{i,q+1}{X}}
+%%%%%%%%%%%%\\
+%%%%%%%%%%%%K_{q+1}
+%%%%%%%%%%%%\ar[r]_-{\trip{h}{j,q+1}{}}^-{(\fraks_{j,q+1})^{s-1}T^{j+1}\rho^{q+1}T^{q-j+2}(\fraks_{j,q+1})^{t-1}\trip{s}{j,q+1}{X}}
+%%%%%%%%%%%%&
+%%%%%%%%%%%%L_{q+2}\\
+%%%%%%%%%%%%}\]
 
 \begin{SteenrodAlgebrasAndTheirKoszulDuals}
 \section{Some homogeneous Koszul algebras}
