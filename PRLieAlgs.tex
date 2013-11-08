@@ -7,14 +7,14 @@
 \excludeversion{wedding}
 \excludeversion{ConversationWithHaynes_InclusionOfBarConstructions}
 \excludeversion{GrothendieckSpectralSequencestake2}
-%\def\excludeversion#1{\includeversion{#1}}
+\excludeversion{convergenceOLD}
+\def\excludeversion#1{\includeversion{#1}}
 \excludeversion{Frontmatters}
 \excludeversion{Endmatter}
 \excludeversion{AdamsDerivation}
 \excludeversion{TotalisationInSAlg}
 \excludeversion{convergence}
 \includeversion{iteratedBarConstructions}
-\excludeversion{convergenceOLD}
 \excludeversion{SteenrodAlgebrasAndTheirKoszulDuals}
 \excludeversion{CategoriesOfInterest}
 \excludeversion{HomotopicalAlgebra}
@@ -123,7 +123,7 @@
 \bibliography{../../Dropbox/logbook/_LOGBOOK/papers}
 \begin{document}
 \begin{Frontmatters}
-\tableofcontents\newpage
+\tableofcontents%\newpage
 \end{Frontmatters}
 
 
@@ -756,12 +756,8 @@ c^{s+t-1}X\\%r1c2
 \ar[u]
 %r2c2
 }\]
-We'll actually construct an explicit simplicial homotopy between $\overline{f}$ and $\overline{g}$, and note that this homotopy descends to a homotopy between $f$ and $g$.
-
-Too annoying to type for now.
+It is enough to note that the simplicial homotopy between $\overline{f}$ and $\overline{g}$ provided by \ref{IteratedBarConstructionHomotopy} descends to a homotopy between $f$ and $g$.
 \end{proof}
-
-\newpage
 
 \subsection{Fibres in the $\Tot$ tower}
 Now we'll write $\sigma $ for the cofibrant replacement that Radelescu-Banu proves is a comonad.
@@ -997,6 +993,7 @@ X\ar[u]
 \end{convergence}
 
 \begin{iteratedBarConstructions}
+\subsection{Iterated simplicial bar constructions}
 In this section we will be concerned with iterated simplicial bar constructions. Before getting into the details, let's establish a little notation. Fix a category of universal algebras $\algCat$. For any simplicial object $X$ in $\algCat$, we'll write 
 \[\trip{d}{i,q}{X}:X_q\to X_{q-1}\textup{\ and\ }\trip{s}{i,q}{X}:X_q\to X_{q+1}\]
 for the $i^\textup{th}$ face and degeneracy maps out of $X_q$. Suppose $F,G\in\algCat^\algCat$ are endofunctors, $\Phi:F\to G$ is a natural transformation, and $A,B\in\algCat$ are objects. Write $[\Phi]:\algCat(A,B)\to\algCat(FA,GB)$ for the operator sending $m:A\to B$ to the diagonal composite in the commuting square
@@ -1090,7 +1087,7 @@ The augmentation $\epsilon:b\to I$ is defined on level $q$ by
 
 
 
-\begin{prop}
+\begin{prop}\label{IteratedBarConstructionHomotopy}
 For any integers $s,t\geq1$, there is a simplicial homotopy $b^{s-1}\epsilon_{(b^{t}X)}\simeq b^{s}\epsilon_{(b^{t-1}X)}$ of maps $b^{s+t}X\to b^{s+t-1}X$, natural in $X\in s\algCat$.
 \end{prop}
 \begin{proof}
@@ -1103,7 +1100,7 @@ we can describe the simplicial structure maps in $K$ and $L$ as follows:
 \trip{d}{iq}{K}&=[\frakd_{iq}]^{s-1}[\frakd_{q+i,2q}\circ\frakd_{i,2q+1}][\frakd_{iq}]^{t-1}\trip{d}{iq}{X}\\
 \trip{s}{iq}{K}&=[\fraks_{iq}]^{s-1}[\fraks_{q+i+2,2q+2}\circ\fraks_{i,2q+1}][\fraks_{iq}]^{t-1}\trip{s}{iq}{X}
 \end{alignat*}
-We can now state an explicity simplicial homotopy between the two maps of interest. Using precisely the notation of \cite[\S5]{MaySimpObj.pdf}, we define $\trip{h}{jq}{}:K_q\to L_{q+1}$, for $0\leq i\leq q$, by the formula
+We can now state an explicit simplicial homotopy between the two maps of interest. Using precisely the notation of \cite[\S5]{MaySimpObj.pdf}, we define $\trip{h}{jq}{}:K_q\to L_{q+1}$, for $0\leq i\leq q$, by the formula
 \[\trip{h}{jq}{}:=[\fraks_{jq}]^{s-1}[\frakd_{j+1,q+2}\circ\cdots \circ\frakd_{j+1,2q+1}][\fraks_{jq}]^{t-1}\trip{s}{jq}{X}\]
 If the $\trip{h}{jq}{}$ in fact form a valid homotopy $f\simeq g$, then: %$f_q=\trip{d}{0,q+1}{L}\trip{h}{0,q}{}$, and $f_q=\trip{d}{q+1,q+1}{L}\trip{h}{q,q}{}$. We may calculate these composites as follows:
 \begin{alignat*}{2}
@@ -1124,7 +1121,7 @@ g_q&=\trip{d}{q+1,q+1}{L}\trip{h}{q,q}{}\\
 [\trip{\textup{id}}{T^{q+1}}{}]^{s-1}[\frakd_{q+1,q+1}\frakd_{q+1,q+2}\circ\cdots \circ\frakd_{q+1,2q+1}][\trip{\textup{id}}{T^{q+1}}{}]^{t-1}\trip{\textup{id}}{X_q}{}%
 \end{alignat*}
 is exactly the action of $b^{s}\epsilon_{(b^{t-1}X)}$ in level $q$.
-All that remains is to verify that the $h_{i,q}$ satisfy the defining identities for the notion of simplicial homotopy. While forming each of the composites of interest, none of the groupings provided by the square brackets are disturbed. Thus, each identity (numbered 1-5) can be checked one piece at a time:
+All that remains is to verify that the $h_{i,q}$ satisfy the defining identities for the notion of simplicial homotopy. While forming each of the composites of interest, none of the groupings provided by the square brackets are disturbed. Thus, each identity (labeled 1-5) can be checked one piece (labeled a-b) at a time:
 {\renewcommand{\circ}{\relax}
 \begin{enumerate}\squishlist
 \setlength{\parindent}{.25in}
