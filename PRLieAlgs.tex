@@ -8,13 +8,13 @@
 \excludeversion{ConversationWithHaynes_InclusionOfBarConstructions}
 \excludeversion{GrothendieckSpectralSequencestake2}
 \excludeversion{convergenceOLD}
-\def\excludeversion#1{\includeversion{#1}}
+%\def\excludeversion#1{\includeversion{#1}}
 \excludeversion{Frontmatters}
 \excludeversion{Endmatter}
 \excludeversion{AdamsDerivation}
 \excludeversion{TotalisationInSAlg}
 \excludeversion{convergence}
-\includeversion{iteratedBarConstructions}
+\excludeversion{iteratedBarConstructions}
 \excludeversion{SteenrodAlgebrasAndTheirKoszulDuals}
 \excludeversion{CategoriesOfInterest}
 \excludeversion{HomotopicalAlgebra}
@@ -126,13 +126,149 @@
 \tableofcontents%\newpage
 \end{Frontmatters}
 
+\newcommand{\PuncCube}[1]{\calP_{0}[#1]}
+\newcommand{\FullCube}[1]{\calP[#1]}
+\newcommand{\TruncSimplex}[1]{{\Delta_{\leq#1}}}
+\newcommand{\TruncAugSimplex}[1]{{\Delta^{+}_{\geq#1}}}
 
 
+There is a diagram of inclusions of categories
+\[\xymatrix@R=4mm{
+\Delta&%r1c1
+\PuncCube{\infty}
+\ar[l]_-{G_\infty}
+\\%r1c2
+{\vdots}
+\ar[u]
+&%r2c1
+\vdots
+\ar[u]
+\\%r2c2
+\TruncSimplex{n}
+\ar[u]_-{\tau}
+&%r3c1
+\PuncCube{n}
+\ar[u]_-{\tau}
+\ar[l]_-{G_n}
+\\%r3c2
+\TruncSimplex{n-1}
+\ar[u]_-{\tau}
+&%r3c1
+\PuncCube{n-1}
+\ar[u]_-{\tau}
+\ar[l]_-{G_{n-1}}
+\\%r3c2
+{\vdots}
+\ar[u]
+&%r2c1
+\vdots
+\ar[u]
+}\textup{ including into }
+\xymatrix@R=4mm{
+\Delta^+&%r1c1
+\FullCube{\infty}
+\ar[l]_-{G_\infty^+}
+\\%r1c2
+{\vdots}
+\ar[u]
+&%r2c1
+\vdots
+\ar[u]
+\\%r2c2
+\TruncAugSimplex{n}
+\ar[u]_-{\tau}
+&%r3c1
+\FullCube{n}
+\ar[u]_-{\tau}
+\ar[l]_-{G_n^+}
+\\%r3c2
+\TruncAugSimplex{n-1}
+\ar[u]_-{\tau}
+&%r3c1
+\FullCube{n-1}
+\ar[u]_-{\tau}
+\ar[l]_-{G_{n-1}^+}
+\\%r3c2
+{\vdots}
+\ar[u]
+&%r2c1
+\vdots
+\ar[u]
+}
+\]
+Here, $\TruncSimplex{n}$ is the truncation of the simplex category $\Delta=\TruncSimplex{\infty}$, and $\PuncCube{n}$ is the poset of finite nonempty subsets of $[n]=\{0,\ldots,n\}$, for $n\leq\infty$.
+Sinha, in \cite{SinhaSpacesOfKnots.pdf}, shows that the functors $G_n$, for $n\leq\infty$, are homotopy final.
 
+The Bousfield-Kan map see \cite{Hirschhorn.pdf} is a map $N(\Delta\downarrow\DASH)\to \Delta$ of cosimplicial spaces, where we write $N$ for the nerve of a category, and the seconds $\Delta$ here means the Yoneda embedding of the category $\Delta$, the standard cosimplicial simplex. Hirschhorn demonstrates that this is a weak equivalence of Reedy cofibrant cosimplicial spaces. One may, for any $n< m\leq\infty$, restrict $N(\TruncSimplex{m}\downarrow\DASH)\in(s\Set)^{\TruncSimplex{m}}$ to an object of $(s\Set)^\TruncSimplex{n}$, and there is a commuting diagram
+\[\xymatrix@R=4mm{
+N(\Delta\downarrow\DASH)|_{\TruncSimplex{n}}
+\ar[r]
+&%r1c1
+\Delta|_{\TruncSimplex{n}}
+\ar@{=}[d]\\%r1c2
+N(\TruncSimplex{n}\downarrow\DASH)\ar[u]
+\ar[r]
+&%r2c1
+\TruncSimplex{n}%r2c2
+}\]
+of objects in $(s\Set)^{\TruncSimplex{n}}$. In fact, by the proof in \cite{Hirschhorn.pdf}, all the objects in this diagram are cofibrant, and all the maps are weak equivalences.
 
+Now, by results of \cite[X,4.9]{YellowMonster}, all (truncated) cosimplicial groups are Reedy fibrant. In particular, all of the following constructions are homotopical for any cosimplicial object in one of our categories of interest.
 
+We may define the homotopy limit of a functor $X:\calD\to s\algCat$ to be the end $\hom^\calD(N(\calD\downarrow\DASH),X)$. The partial totalization of a functor $X:\TruncSimplex{n}\to s\algCat$ is defined as the end $\hom^\TruncSimplex{n}(\TruncSimplex{n},X)$. Suppose now that $X:\Delta^+\to s\algCat$ is augmented (and whenever you take a totalisation, restrict implicitly to nonempty). By \cite[X,4.9]{YellowMonster}, all (truncated) cosimplicial groups are Reedy fibrant, and so $X|_\Delta$ is Reedy fibrant. Thus we have the following diagram:
+\[\xymatrix@R=4mm{
+\hotfib(X|_{\FullCube{\infty}})\ar[d]\ar[r]&
+X^{-1}\ar[r]\ar[d]&
+\Tot X
+\ar[d]
+\ar[r]^-{\sim}
+&%r1c1
+\holim (X|_{\Delta})
+\ar[d]
+\ar[r]^-{\sim}
+&%r1c2
+\holim(X|_{\PuncCube{\infty}})
+\ar[d]
+\\%r1c3
+\vdots\ar[d]&%r2c1
+\vdots\ar[d]&%r2c1
+\vdots\ar[d]&%r2c1
+\vdots\ar[d]&%r2c2
+\vdots\ar[d]
+\\%r2c3
+\hotfib(X|_{\FullCube{n}})\ar[d]\ar[r]&
+X^{-1}\ar[r]\ar[d]&
+\Tot_n X
+\ar[d]
+\ar[r]^-{\sim}
+&%r1c1
+\holim (X|_{\TruncSimplex{n}})
+\ar[d]
+\ar[r]^-{\sim}
+&%r1c2
+\holim(X|_{\PuncCube{n}})
+\ar[d]
+\\
+\hotfib(X|_{\FullCube{n-1}})\ar[d]\ar[r]&
+X^{-1}\ar[r]\ar[d]&
+\Tot_{n-1} X
+\ar[d]
+\ar[r]^-{\sim}
+&%r1c1
+\holim (X|_{\TruncSimplex{n-1}})
+\ar[d]
+\ar[r]^-{\sim}
+&%r1c2
+\holim(X|_{\PuncCube{n-1}})
+\ar[d]
+\\
+\cdots&\cdots&\cdots&\cdots&\cdots
+}\]
+Here, $\hotfib(X|_{\FullCube{n}})$ is defined to be the homotopy fiber of the map $X^{-1}\to \holim(X|_{\PuncCube{n}})$. This is the first definition of the homotopy fibre of a cube that Goodwillie gives. This definition is is equivalent, however, to an iterative definition which we'll give now. Suppose that one has defined the notion of total fibre for diagrams indexed by $\FullCube{n-1}$. Then for $C:\FullCube{n}\to s\algCat$, one defines
+\[\hotfib(C):=\hofib(\hotfib(C|_{\FullCube{n-1}})\to \hotfib(\psi_n^*C))\]
+where $\psi_n:\FullCube{n-1}\to\FullCube{n}$ is the functor $T\mapsto T\cup\{n\}$.
 
-
+\textbf{Put $C=X|_?$ and then comment that the tower maps become the inclusions of the hofib in this definition.}
 \begin{GrothendieckSpectralSequencestake2}
 %%%%\subsection{Grothendieck spectral sequence fiddles}
 %%%%\begin{lem*}
