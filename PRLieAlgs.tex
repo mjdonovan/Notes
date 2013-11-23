@@ -1,5 +1,6 @@
 % !TEX root = z_output/_PRLieAlgs.tex
 \documentclass[10pt]{article}
+%%%USINGsubsectionNUMBERS
 \newcommand{\NOFULLPAGE}{\relax}
 \input{../../Dropbox/logbook/_LOGBOOK/macros.tex}
 \excludeversion{Omitted}
@@ -8,7 +9,8 @@
 \excludeversion{ConversationWithHaynes_InclusionOfBarConstructions}
 \excludeversion{GrothendieckSpectralSequencestake2}
 \excludeversion{convergenceOLD}
-%\def\excludeversion#1{\includeversion{#1}}
+\excludeversion{hiltonMilnorQuestionable}
+\def\excludeversion#1{\includeversion{#1}}
 \excludeversion{Frontmatters}
 \excludeversion{Endmatter}
 \excludeversion{AdamsDerivation}
@@ -29,6 +31,7 @@
 \excludeversion{KoszulSequenceCombinatorics}
 \excludeversion{CalculatingRepeatedKoszul}
 \excludeversion{DimZeroPart}
+\includeversion{AxisComputationSummary}
 \excludeversion{VanishingLines}
 
 
@@ -89,7 +92,7 @@
 \newcommand{\derived}{\mathbb{L}}
 %\newcommand{\LambdaOp}{Q}
 \renewcommand{\Q}{Q}
-\newcommand{\SqShift}{\Sq_{+}}
+\newcommand{\SqShift}{\Sq_{\smash{+}}}
 \newcommand{\Sq}{\mathrm{Sq}}
 \newcommand{\Comm}{\calC}
 \newcommand{\LieSteen}{\calA(\calL)}
@@ -103,6 +106,11 @@
 
 \newcommand{\Shuffles}[2]{\textup{Sh}_{#1#2}}
 \newcommand{\HalfShuffles}[2]{\textup{Sh}_{#1#2}/2}
+
+\newcommand{\PuncCube}[1]{\calP_{0}[#1]}
+\newcommand{\FullCube}[1]{\calP[#1]}
+\newcommand{\TruncSimplex}[1]{{\Delta_{\leq#1}}}
+\newcommand{\TruncAugSimplex}[1]{{\Delta^{\smash{+}}_{\smash{\geq#1}}}}
 
 \newcommand{\ModDegeneracies}[1]{(#1/\textup{Degens})}
 
@@ -126,149 +134,36 @@
 \tableofcontents%\newpage
 \end{Frontmatters}
 
-\newcommand{\PuncCube}[1]{\calP_{0}[#1]}
-\newcommand{\FullCube}[1]{\calP[#1]}
-\newcommand{\TruncSimplex}[1]{{\Delta_{\leq#1}}}
-\newcommand{\TruncAugSimplex}[1]{{\Delta^{+}_{\geq#1}}}
+
+\begin{hiltonMilnorQuestionable}
+\subsection{Hilton-Milnor theorems}
+Suppose that $\algCat$ is a category of finitary universal algebras in $k$-modules, with no nullary or unary operations, for $k$ a field.
+\begin{defn}
+$\calA$ is \emph{graded by arity} if the natural filtration of $F(A)$ by total arity splits, naturally in the set $A$.
+\end{defn}
+\begin{defn}
+$\algCat$ is \emph{Hilton-Milnor} if, for all finite sets $B$, there is a subset $S\subset F(B)$ with the following property. Whenever we are given a collection $\{A_\beta\}_{\beta\in B}$ of $k$-modules, the natural map
+\[\bigoplus_{L\in S}L^{\otimes}(\{FA_\beta\})\to F(\oplus A_\beta)\]
+is an isomorphism.
+\end{defn}
+\begin{prop}\label{HiltonMilnorTheoriesConverge}
+If $\algCat$ is Hilton-Milnor and graded by arity, then whenever $X\in s\algCat$ is 0-connected, the power $X^s$ of $X$ is $s$-connected.
+\end{prop}
+\begin{exmp}
+If $\algCat=\Comm$, then $S\subset F(B)$ is just $\{b_ib_j|i<j\}$. If $\algCat$ is the category of non-unital associative algebras over $k$, then $S=\{b_{i_1}\cdots b_{i_\ell}|i_j\neq i_{j+1}\textup{ for }1\leq j<\ell\}$. If $\algCat$ is the category of (good) Lie algebras, then $S$ is a basis of the free Lie algebra on $B$.
+\end{exmp}
+\begin{proof}[Proof of \ref{HiltonMilnorTheoriesConverge}]
+Filter an almost free $X$. Then, $X^s/X^{s+1}$ is isomorphic to $F^{s/s+1}(QX)$, which has homotopy groups given by $\calF^{s/s+1}(H^Q_*X)$, where $\calF^{s/s+1}$ is the Dold functor for $F^{s/s+1}$. I guess that $H^Q_*X=0$ since $X$ can be replaced by a reduced object. Thus we only need to see that $\calF^{s/s+1}(W)$, for $W$ a connected graded $k$-module, starts at grading $s$.
+
+By the proof Dold's theorem, it's enough to look at the homotopy of $F^{s/s+1}$ applied to wedges of positive spheres. These can be understood using the Hilton-Milnor condition, and the K\"unneth theorem. The point is that these homotopy groups are the sum, according to a Hilton-Milnor decomposition, of various $s$-ary operations on the homotopy of $F$ on a single sphere.
+\end{proof}
+
+\end{hiltonMilnorQuestionable}
 
 
-There is a diagram of inclusions of categories
-\[\xymatrix@R=4mm{
-\Delta&%r1c1
-\PuncCube{\infty}
-\ar[l]_-{G_\infty}
-\\%r1c2
-{\vdots}
-\ar[u]
-&%r2c1
-\vdots
-\ar[u]
-\\%r2c2
-\TruncSimplex{n}
-\ar[u]_-{\tau}
-&%r3c1
-\PuncCube{n}
-\ar[u]_-{\tau}
-\ar[l]_-{G_n}
-\\%r3c2
-\TruncSimplex{n-1}
-\ar[u]_-{\tau}
-&%r3c1
-\PuncCube{n-1}
-\ar[u]_-{\tau}
-\ar[l]_-{G_{n-1}}
-\\%r3c2
-{\vdots}
-\ar[u]
-&%r2c1
-\vdots
-\ar[u]
-}\textup{ including into }
-\xymatrix@R=4mm{
-\Delta^+&%r1c1
-\FullCube{\infty}
-\ar[l]_-{G_\infty^+}
-\\%r1c2
-{\vdots}
-\ar[u]
-&%r2c1
-\vdots
-\ar[u]
-\\%r2c2
-\TruncAugSimplex{n}
-\ar[u]_-{\tau}
-&%r3c1
-\FullCube{n}
-\ar[u]_-{\tau}
-\ar[l]_-{G_n^+}
-\\%r3c2
-\TruncAugSimplex{n-1}
-\ar[u]_-{\tau}
-&%r3c1
-\FullCube{n-1}
-\ar[u]_-{\tau}
-\ar[l]_-{G_{n-1}^+}
-\\%r3c2
-{\vdots}
-\ar[u]
-&%r2c1
-\vdots
-\ar[u]
-}
-\]
-Here, $\TruncSimplex{n}$ is the truncation of the simplex category $\Delta=\TruncSimplex{\infty}$, and $\PuncCube{n}$ is the poset of finite nonempty subsets of $[n]=\{0,\ldots,n\}$, for $n\leq\infty$.
-Sinha, in \cite{SinhaSpacesOfKnots.pdf}, shows that the functors $G_n$, for $n\leq\infty$, are homotopy final.
 
-The Bousfield-Kan map see \cite{Hirschhorn.pdf} is a map $N(\Delta\downarrow\DASH)\to \Delta$ of cosimplicial spaces, where we write $N$ for the nerve of a category, and the seconds $\Delta$ here means the Yoneda embedding of the category $\Delta$, the standard cosimplicial simplex. Hirschhorn demonstrates that this is a weak equivalence of Reedy cofibrant cosimplicial spaces. One may, for any $n< m\leq\infty$, restrict $N(\TruncSimplex{m}\downarrow\DASH)\in(s\Set)^{\TruncSimplex{m}}$ to an object of $(s\Set)^\TruncSimplex{n}$, and there is a commuting diagram
-\[\xymatrix@R=4mm{
-N(\Delta\downarrow\DASH)|_{\TruncSimplex{n}}
-\ar[r]
-&%r1c1
-\Delta|_{\TruncSimplex{n}}
-\ar@{=}[d]\\%r1c2
-N(\TruncSimplex{n}\downarrow\DASH)\ar[u]
-\ar[r]
-&%r2c1
-\TruncSimplex{n}%r2c2
-}\]
-of objects in $(s\Set)^{\TruncSimplex{n}}$. In fact, by the proof in \cite{Hirschhorn.pdf}, all the objects in this diagram are cofibrant, and all the maps are weak equivalences.
 
-Now, by results of \cite[X,4.9]{YellowMonster}, all (truncated) cosimplicial groups are Reedy fibrant. In particular, all of the following constructions are homotopical for any cosimplicial object in one of our categories of interest.
 
-We may define the homotopy limit of a functor $X:\calD\to s\algCat$ to be the end $\hom^\calD(N(\calD\downarrow\DASH),X)$. The partial totalization of a functor $X:\TruncSimplex{n}\to s\algCat$ is defined as the end $\hom^\TruncSimplex{n}(\TruncSimplex{n},X)$. Suppose now that $X:\Delta^+\to s\algCat$ is augmented (and whenever you take a totalisation, restrict implicitly to nonempty). By \cite[X,4.9]{YellowMonster}, all (truncated) cosimplicial groups are Reedy fibrant, and so $X|_\Delta$ is Reedy fibrant. Thus we have the following diagram:
-\[\xymatrix@R=4mm{
-\hotfib(X|_{\FullCube{\infty}})\ar[d]\ar[r]&
-X^{-1}\ar[r]\ar[d]&
-\Tot X
-\ar[d]
-\ar[r]^-{\sim}
-&%r1c1
-\holim (X|_{\Delta})
-\ar[d]
-\ar[r]^-{\sim}
-&%r1c2
-\holim(X|_{\PuncCube{\infty}})
-\ar[d]
-\\%r1c3
-\vdots\ar[d]&%r2c1
-\vdots\ar[d]&%r2c1
-\vdots\ar[d]&%r2c1
-\vdots\ar[d]&%r2c2
-\vdots\ar[d]
-\\%r2c3
-\hotfib(X|_{\FullCube{n}})\ar[d]\ar[r]&
-X^{-1}\ar[r]\ar[d]&
-\Tot_n X
-\ar[d]
-\ar[r]^-{\sim}
-&%r1c1
-\holim (X|_{\TruncSimplex{n}})
-\ar[d]
-\ar[r]^-{\sim}
-&%r1c2
-\holim(X|_{\PuncCube{n}})
-\ar[d]
-\\
-\hotfib(X|_{\FullCube{n-1}})\ar[d]\ar[r]&
-X^{-1}\ar[r]\ar[d]&
-\Tot_{n-1} X
-\ar[d]
-\ar[r]^-{\sim}
-&%r1c1
-\holim (X|_{\TruncSimplex{n-1}})
-\ar[d]
-\ar[r]^-{\sim}
-&%r1c2
-\holim(X|_{\PuncCube{n-1}})
-\ar[d]
-\\
-\cdots&\cdots&\cdots&\cdots&\cdots
-}\]
-Here, $\hotfib(X|_{\FullCube{n}})$ is defined to be the homotopy fiber of the map $X^{-1}\to \holim(X|_{\PuncCube{n}})$. This is the first definition of the homotopy fibre of a cube that Goodwillie gives. This definition is is equivalent, however, to an iterative definition which we'll give now. Suppose that one has defined the notion of total fibre for diagrams indexed by $\FullCube{n-1}$. Then for $C:\FullCube{n}\to s\algCat$, one defines
-\[\hotfib(C):=\hofib(\hotfib(C|_{\FullCube{n-1}})\to \hotfib(\psi_n^*C))\]
-where $\psi_n:\FullCube{n-1}\to\FullCube{n}$ is the functor $T\mapsto T\cup\{n\}$.
-
-\textbf{Put $C=X|_?$ and then comment that the tower maps become the inclusions of the hofib in this definition.}
 \begin{GrothendieckSpectralSequencestake2}
 %%%%\subsection{Grothendieck spectral sequence fiddles}
 %%%%\begin{lem*}
@@ -479,6 +374,152 @@ Suppose that $X$ is a connected element of $s\Comm$. Then the Adams spectral seq
 \end{TotalisationInSAlg}
 
 \begin{convergence}
+
+\subsection{Cosimplicial objects and cubical diagrams}
+
+There is a diagram of inclusions of categories
+\[\xymatrix@R=4mm{
+\Delta&%r1c1
+\PuncCube{\infty}
+\ar[l]_-{G_\infty}
+\\%r1c2
+{\vdots}
+\ar[u]
+&%r2c1
+\vdots
+\ar[u]
+\\%r2c2
+\TruncSimplex{n}
+\ar[u]_-{\tau}
+&%r3c1
+\PuncCube{n}
+\ar[u]_-{\tau}
+\ar[l]_-{G_n}
+\\%r3c2
+\TruncSimplex{n-1}
+\ar[u]_-{\tau}
+&%r3c1
+\PuncCube{n-1}
+\ar[u]_-{\tau}
+\ar[l]_-{G_{n-1}}
+\\%r3c2
+{\vdots}
+\ar[u]
+&%r2c1
+\vdots
+\ar[u]
+}\textup{ including into }
+\xymatrix@R=4mm{
+\Delta^+&%r1c1
+\FullCube{\infty}
+\ar[l]_-{G_\infty^+}
+\\%r1c2
+{\vdots}
+\ar[u]
+&%r2c1
+\vdots
+\ar[u]
+\\%r2c2
+\TruncAugSimplex{n}
+\ar[u]_-{\tau}
+&%r3c1
+\FullCube{n}
+\ar[u]_-{\tau}
+\ar[l]_-{G_n^+}
+\\%r3c2
+\TruncAugSimplex{n-1}
+\ar[u]_-{\tau}
+&%r3c1
+\FullCube{n-1}
+\ar[u]_-{\tau}
+\ar[l]_-{G_{n-1}^+}
+\\%r3c2
+{\vdots}
+\ar[u]
+&%r2c1
+\vdots
+\ar[u]
+}
+\]
+Here, $\TruncSimplex{n}$ is the truncation of the simplex category $\Delta=\TruncSimplex{\infty}$, and $\PuncCube{n}$ is the poset of finite nonempty subsets of $[n]=\{0,\ldots,n\}$, for $n\leq\infty$.
+Sinha, in \cite{SinhaSpacesOfKnots.pdf}, shows that the functors $G_n$, for $n\leq\infty$, are homotopy final.
+
+The Bousfield-Kan map see \cite{Hirschhorn.pdf} is a map $N(\Delta\downarrow\DASH)\to \Delta$ of cosimplicial spaces, where we write $N$ for the nerve of a category, and the seconds $\Delta$ here means the Yoneda embedding of the category $\Delta$, the standard cosimplicial simplex. Hirschhorn demonstrates that this is a weak equivalence of Reedy cofibrant cosimplicial spaces. One may, for any $n< m\leq\infty$, restrict $N(\TruncSimplex{m}\downarrow\DASH)\in(s\Set)^{\TruncSimplex{m}}$ to an object of $(s\Set)^\TruncSimplex{n}$, and there is a commuting diagram
+\[\xymatrix@R=4mm{
+N(\Delta\downarrow\DASH)|_{\TruncSimplex{n}}
+\ar[r]
+&%r1c1
+\Delta|_{\TruncSimplex{n}}
+\ar@{=}[d]\\%r1c2
+N(\TruncSimplex{n}\downarrow\DASH)\ar[u]
+\ar[r]
+&%r2c1
+\TruncSimplex{n}%r2c2
+}\]
+of objects in $(s\Set)^{\TruncSimplex{n}}$. In fact, by the proof in \cite{Hirschhorn.pdf}, all the objects in this diagram are cofibrant, and all the maps are weak equivalences.
+
+Now, by results of \cite[X,4.9]{YellowMonster}, all (truncated) cosimplicial groups are Reedy fibrant. In particular, all of the following constructions are homotopical for any cosimplicial object in one of our categories of interest.
+
+We may define the homotopy limit of a functor $X:\calD\to s\algCat$ to be the end $\hom^\calD(N(\calD\downarrow\DASH),X)$. The partial totalization of a functor $X:\TruncSimplex{n}\to s\algCat$ is defined as the end $\hom^\TruncSimplex{n}(\TruncSimplex{n},X)$. Suppose now that $X:\Delta^+\to s\algCat$ is augmented (and whenever you take a totalisation, restrict implicitly to nonempty). By \cite[X,4.9]{YellowMonster}, all (truncated) cosimplicial groups are Reedy fibrant, and so $X|_\Delta$ is Reedy fibrant. Thus we have the following diagram:
+\[\xymatrix@R=4mm{
+\hotfib(X|_{\FullCube{\infty}})\ar[d]\ar[r]&
+X^{-1}\ar[r]\ar[d]&
+\Tot X
+\ar[d]
+\ar[r]^-{\sim}
+&%r1c1
+\holim (X|_{\Delta})
+\ar[d]
+\ar[r]^-{\sim}
+&%r1c2
+\holim(X|_{\PuncCube{\infty}})
+\ar[d]
+\\%r1c3
+\vdots\ar[d]&%r2c1
+\vdots\ar[d]&%r2c1
+\vdots\ar[d]&%r2c1
+\vdots\ar[d]&%r2c2
+\vdots\ar[d]
+\\%r2c3
+\hotfib(X|_{\FullCube{n}})\ar[d]\ar[r]&
+X^{-1}\ar[r]\ar[d]&
+\Tot_n X
+\ar[d]
+\ar[r]^-{\sim}
+&%r1c1
+\holim (X|_{\TruncSimplex{n}})
+\ar[d]
+\ar[r]^-{\sim}
+&%r1c2
+\holim(X|_{\PuncCube{n}})
+\ar[d]
+\\
+\hotfib(X|_{\FullCube{n-1}})\ar[d]\ar[r]&
+X^{-1}\ar[r]\ar[d]&
+\Tot_{n-1} X
+\ar[d]
+\ar[r]^-{\sim}
+&%r1c1
+\holim (X|_{\TruncSimplex{n-1}})
+\ar[d]
+\ar[r]^-{\sim}
+&%r1c2
+\holim(X|_{\PuncCube{n-1}})
+\ar[d]
+\\
+\cdots&\cdots&\cdots&\cdots&\cdots
+}\]
+Here, $\hotfib(X|_{\FullCube{n}})$ is defined to be the homotopy fiber of the map $X^{-1}\to \holim(X|_{\PuncCube{n}})$. This is the first definition of the homotopy fibre of a cube that Goodwillie gives. This definition is weakly equivalent (see \cite{LuisGoodwillie.pdf}), however, to an iterative definition which we'll give now. The total homotopy fiber of a $0$-cube should simply be its unique object. Suppose that one has defined the notion of total fibre for diagrams indexed by $\FullCube{n-1}$. Then for $C:\FullCube{n}\to s\algCat$, one defines
+\[\hotfib(C):=\hofib(\hotfib(C|_{\FullCube{n-1}})\to \hotfib(\psi_n^*C))\]
+where $\psi_n:\FullCube{n-1}\to\FullCube{n}$ is the functor $T\mapsto T\cup\{n\}$.
+
+Interpreting the leftmost tower in the above diagram using the iterative definition of $\hotfib$, the defining fiber sequence for $\hotfib(X|_{\FullCube{n}})$ is
+\[\hotfib(X|_{\FullCube{n}})\to \hotfib(X|_{\FullCube{n-1}})\to\hotfib(\psi_n^*(X|_{\FullCube{n-1}}))+,\]
+and the tower map coincides with the fiber inclusion.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%\textbf{Maybe I should sweep the stuff with comparing the tot tower to the tower of holimits under the rug, given that it's well known. Instead, work with the injective model structure on diagrams.}
+
+
 \newcommand{\dupdown}[2]{D^{\smash{#1}}_{\smash{#2}}}
 \newcommand{\caldup}[1]{\calD^{\smash{#1}}}
 \newcommand{\caldupdown}[2]{\calD^{\smash{#1}}_{\smash{#2}}}
@@ -487,7 +528,7 @@ Let $\mathsf{CR(s\Comm)}$ be the category of cofibrant replacement functors in $
 
 [Following \cite{BousKanSSeq.pdf}, Sinha, BR, RB, Harper] Fix a functor $F:s\Comm\to s\Comm$, and a cofibrant replacement functor $(c,\epsilon)\in\mathsf{CR(s\Comm)}$.
 
-We'll define the $r^\textup{th}$ derived functor $(\dupdown{r}{b}F)$ of $F$ with respect to Andr\'e-Quillen homology. The definition is inductive: one sets $(\dupdown{0}{b}F)(X)=F(cX)$, and
+We'll define the $r^\textup{th}$ derived functor $(\dupdown{r}{b}F)$ of $F$ with respect to Andr\'e-Quillen homology. The definition is recursive: one sets $(\dupdown{0}{b}F)(X)=F(cX)$, and
 \[(\dupdown{s}{c}F)(X):=\hofib((\dupdown{s-1}{c}F)(cX)\overset{(\dupdown{s-1}{c}F)(\eta_{cX})}{\to} (\dupdown{s-1}{c}F)(QcX)),\]
 where $Q$ is the indecomposables functor, $\eta:I\Rightarrow Q$ is the natural surjection onto indecomposables, and $\hofib$ is any fixed  functorial construction of the homotopy fiber. These functors fit into a tower, via the following composite natural transformation:
 \[(\dupdown{s}{c}F)(X)\to (\dupdown{s-1}{c}F)(cX)\overset{(\dupdown{s-1}{c}F)(\epsilon)}{\to} (\dupdown{s-1}{c}F)(X).\]
@@ -1749,10 +1790,10 @@ In (ii), the entries of $K$ and $L$ should be at least 2.
 \begin{proof}
 In both of the proofs, let $K=(i,j)$ and $L=(i',j')$.
 
-For (i), we wish to show that $\max\{j',i'-j'\}<\max\{j,i-j\}$. As $i'\leq 2j'$ and $i>2j$, this is to show that $j'<i-j$ which is immediate from the indexing of the Adem relation. That $L$ has positive entries is also immediate.
+For (i), we wish to show that $\max\{j',i'-j'\}<\max\{j,i-j\}$. As $i'\leq 2j'$ and $i>2j$, this is to show that $j'<i-j$ which is immediate from the indexing of the $\Q$-Adem relation. That $L$ has positive entries is also immediate.
 
 For (ii), we wish to show that $\max\{j',i'-j'-1\}>\max\{j,i-j-1\}$. 
-As $i\geq2j$, $\max\{j,i-j-1\}\leq i-j$, and $i-j<j'$ by inspection of the Adem relation.
+As $i\geq2j$, $\max\{j,i-j-1\}\leq i-j$, and $i-j<j'$ by inspection of the $P$-Adem relation.
 %As $i'< 2j'$ and $i\geq2j$, it happens that $\max\{j,i-j-1\}$ is at most $i-j$ (one distinguishes the cases $i=2j$ and $i>2j$). Thus, we need only show that $j'>i-j$, which is again immediate from the Adem relation.
 \end{proof}
 %\begin{lem}
@@ -1873,7 +1914,7 @@ where by $a_n,\ldots,a_2$ we mean all but the rightmost index in $\|b\|=(a_{n},\
 \begin{proof}
 %To calculate $\Fr{\BadLie{n}}(X)$,  note that the Jacobi identity implies that any self-bracket $[y,y]$ in a bad Lie algebra is central. Thus, the proposed basis spans $\Fr{\BadLie{n}}(X)$.  On the other hand, as one easily defines a Lie algebra structure on the vector space $\langle B\rangle\oplus \langle [b,b]\,:\,b\in B\rangle$ by declaring the $[b,b]$ to be central, all of the elements of $B$ and all of the $[b,b]$ are linearly independent in $\Fr{\BadLie{n}}(X)$.
 The calculation of $\Fr{\RestLie{n}}(X)$ is standard \cite[Proposition 14, p.66]{MR886063}.
-To calculate $\Fr{\PRLie{n}}(X)$, note that the proposed basis must span $\Fr{\PRLie{n}}(X)$, and can be seen to be linearly independent by considering the map $\Fr{\PRLie{n}}(X)\to \Fr{\RestLie{n}}(X)$ of partially restricted Lie algebras.
+To calculate $\Fr{\PRLie{n}}(X)$, note that the proposed basis must span $\Fr{\PRLie{n}}(X)$, and can be seen to be linearly independent by considering the map $\Fr{\PRLie{n}}(X)\to \forget{\PRLie{}}(\Fr{\RestLie{n}}(X))$ of partially restricted Lie algebras.
 \end{proof}
 
 
@@ -1947,12 +1988,11 @@ With these operations in hand, we can express the homotopy groups of spheres as 
 
 
 \begin{prop}
-For $n\geq1$, suppose that $X\in\GS{n+1}$ is a graded set. Let $B$ be a Hall basis derived from $X$ for the free good Lie algebra $\Fr{\GoodLie{n+1}}(X)$. Note that $B\subset \Fr{\GoodLie{n+1}}(X)$ is in particular a graded set.
+For $n\geq1$, suppose that $X\in\GS{n+1}$ is a graded set. Let $B$ be a Hall basis derived from $X$ for the free good Lie algebra $\Fr{\GoodLie{n+1}}(X)$. Note that $B\subset \Fr{\GoodLie{n+1}}(X)$ is in particular a graded set. \textbf{(roman numerals?)}
 \begin{alignat*}{2}
 \pi_*(\makebox[\widthof{$\Fr{\GoodLie{n}}S(X)$}][c]{$\Fr{\GoodLie{n}}S(X)$})
 &=
-\left\langle \Q^Ib\,:\,b\in
-B,\,I\in\admis{\Q},\ i_1\leq|b|,\ I\textup{ doesn't contain zero}\right\rangle%
+\left\langle \Q^Ib\,:\,\genfrac{}{}{0pt}{}{b\in B,\,I\in\admis{\Q},\ i_1\leq|b|,}{\textup{$I$ doesn't contain 0}}\right\rangle,%
 \\
 \pi_*(\makebox[\widthof{$\Fr{\GoodLie{n}}S(X)$}][c]{$\Fr{\RestLie{n}}S(X)$})
 &=
@@ -2174,7 +2214,7 @@ where by $a_{n-1},\ldots,a_2$ we mean all but the outermost indices in $\|b\|=(a
 \begin{proof}
 The identification of $\Fr{\LL{1}}(X)$ is \cite[Thm F, p.15]{MR1089001}.
 For each of the remaining three calculations, it is clear that the proposed bases span the free constructions. It remains to show that the elements are linearly independent.
-For any $n\geq1$, the proposed basis of $\Fr{\nontop{n}}(X)$ will be seen to be linearly independent using the map $\Fr{\nontop{n}}(X)\to \Fr{\LL{n}}(X)$, as long as $\Fr{\LL{n}}(X)$ is known. To calculate $\Fr{\LL{n}}(X)$ when $n\geq2$, note that we have calculated the object $\pi_*(\Fr{\PRLie{n-1}}S(X))\in\PiAlg{\PRLie{n-1}}\cong\LL{n}$, and that the elements of our proposed basis of $\Fr{\LL{n}}(X)$ map to a basis of $\pi_*(\Fr{\PRLie{n-1}}S(X))$ under the canonical map $\Fr{\LL{n}}(X)\to \pi_*(\Fr{\PRLie{n-1}}S(X))$. %This proves the linear independence statement we require.
+For any $n\geq1$, the proposed basis of $\Fr{\nontop{n}}(X)$ can be seen to be linearly independent using the map $\Fr{\nontop{n}}(X)\to \forget{\nontop{}}\Fr{\LL{n}}(X)$, as long as $\Fr{\LL{n}}(X)$ is known. To calculate $\Fr{\LL{n}}(X)$ when $n\geq2$, note that we have calculated the object $\pi_*(\Fr{\PRLie{n-1}}S(X))\in\PiAlg{\PRLie{n-1}}\cong\LL{n}$, and that the elements of our proposed basis of $\Fr{\LL{n}}(X)$ map to a basis of $\pi_*(\Fr{\PRLie{n-1}}S(X))$ under the canonical map $\Fr{\LL{n}}(X)\to \pi_*(\Fr{\PRLie{n-1}}S(X))$. %This proves the linear independence statement we require.
 %sequences I here are back to front again
 %For part (iii), choose a simplicial object of $\GR{n-1}$, say $V\in s(\GR{n-1})$, such that $\pi_{*}V=\Fr{\GR{n}}(X)$. Then \cite[Thm 8.6, Thm 8.8]{CurtisSimplicialHtpy.pdf} shows that $\pi_*(\Fr{\RestLie{n}}(V))$ is an element of $\LL{n}$, and has a basis consisting of tensors $\Q^{I}\otimes b$, for $b\in B$, and $I\in\admis{\Q}$ with $i_\ell\leq|b|$. The `not all zero' condition is dropped here, so that $\pi_*(\Fr{\RestLie{n}}(V))$ is larger than our proposed $\LL{n}(X)$.
 %
@@ -2387,7 +2427,7 @@ From the above preparations, for any $X\in\LL{n}$, we can construct the solid ar
 %%%}}\]
 Here, $a_2$ is an acyclic fibration because $\forget{\nontop{}}$ preserves acyclic fibrations, and all other decorations (on solid arrows) come directly from the above discussion. 
 %The ``$\Delta b$'' used in the cofibrant replacement $a$ is taken in $s\nontop{n}$. 
-Lemma \ref{LemLevelwiseFreeWillSuffice}, with $W=\forget{\nontop{}} \BarConst{\LL{}}(X)$, shows that $a$ remains a weak equivalence after applying $\Ind{\nontop{}}$. Supposing then that we can find a map $i$ such that $a_2i=a_1$, $i$ will lift to a map $j$. By 2-of-3, $j$ will be a weak equivalence of cofibrant objects, so that it too will remain an equivalence after applying the left Quillen functor $\Ind{\nontop{}}$. Thus $i$ will also remain an equivalence after applying $\Ind{\nontop{}}$.
+Lemma \ref{LemLevelwiseFreeWillSuffice}, with $W=\forget{\nontop{}} \BarConst{\LL{}}(X)$, shows that $a$ remains a weak equivalence after applying $\Ind{\nontop{}}$. Supposing then that we can find a map $i$ such that $a_2i=a_1$, $i$ will lift to a map $j$. By 2-of-3, $j$ will be a weak equivalence of cofibrant objects, so that it too will remain an equivalence after applying the left Quillen functor $\Ind{\nontop{}}$. Thus $i$ too will remain an equivalence after applying $\Ind{\nontop{}}$.
 
 There is a simple choice for the map $i$ such that $a_2i=a_1$. One just takes an expression in $(\Fr{\nontop{n})}^{\bullet+1}(\forget{\nontop{}}X)$ and views it as an expression in $(\Fr{\LL{n})}^{\bullet+1}(X)$ via the natural map $\Fr{\nontop{n}}W\to \Fr{\LL{n}}W$ adjoint to the inclusion $W\to \forget{\nontop{}}\Fr{\LL{n}}W$ for any $W\in\GR{n}$.
 Recalling that $\Ind{\nontop{}}\forget{\nontop{}}=\forget{\GR{}}\Psi$, we have shown 
@@ -2600,7 +2640,7 @@ Any cycle in $\Boverline_{r,\ell}$, for $\ell>r$ is homologous to a cycle in $\B
 \end{prop}
 \begin{proof}
 First, a construction. For any \emph{bar-admissible} monomial $\BarMonomial{I}{\textbf{k}}{x}\in\Boverline_{r,\ell}$ with $\ell>r$, choose the unique integer $e$ such that
-the leftmost $e$ bars have length 1, but not the leftmost $e+1$ bars, 
+the leftmost $e$ bars of $\BarMonomial{I}{\textbf{k}}{x}$ have length 1, but not the leftmost $e+1$ bars, 
 % $k_r=k_{r-1}=\cdots =k_{r-e+1}=1<k_{r-e}$, 
 so that
 \[\BarMonomial{I}{\textbf{k}}{x}=\left[\Q^{i_\ell}\middle|\Q^{i_{\ell-1}} \middle|\Q^{i_{\ell-2}}\middle|\cdots \middle|\Q^{i_{\ell-e+1}}\middle|\Q^{i_{\ell-e}}\Q^{i_{\ell-e-1}}\cdots \middle|\cdots \right]x.\]
@@ -2616,7 +2656,7 @@ Thus $\Gamma$ either returns zero or adds a single bar to produce a new bar-admi
 
 
 Define a total preorder%footnote:
-\footnote{A total preorder on a set $M$ is simply a transitive relation $\gtrsim$ which is transitive, and such that for any $m,m'\in M$, either $m\gtrsim m'$ or $m'\gtrsim m$.  One writes $m\sim m'$ whenever $m\gtrsim m'$ and $m'\gtrsim m$. This defines an equivalence relation on $M$, and $M/\sim$ is totally ordered. One writes $m\gnsim m'$ whenever $m\gtrsim m'$ but $m'\nsim m$, saying that $m$ is \emph{strictly greater} than $m'$.
+\footnote{A total preorder on a set $M$ is simply a transitive relation $\gtrsim$ on $M$ such that for any $m,m'\in M$, either $m\gtrsim m'$ or $m'\gtrsim m$.  One writes $m\sim m'$ whenever $m\gtrsim m'$ and $m'\gtrsim m$. This defines an equivalence relation on $M$, and $M/\sim$ is totally ordered. One writes $m\gnsim m'$ whenever $m\gtrsim m'$ but $m'\nsim m$, saying that $m$ is \emph{strictly greater} than $m'$.
 } on the bar-admissible monomials by declaring%footnote:
 \footnote{When comparing distinct words $I$ and $I'$ of equal length lexicographically, one writes $I\geq I'$ if $I$ has the larger entry in the leftmost position of disagreement.}
 \[\BarMonomial{I}{\textbf{k}}{x}\gtrsim \BarMonomial{I'}{\textbf{k}'}{x'}\textup{ if either } \ell>\ell'\textup{ or }\ell=\ell'\textup{ and }I\geq I'\textup{ lexicographically}.\]
@@ -2773,7 +2813,7 @@ Suppose that $n\geq2$. Then the dimension zero part of an object $X$ of $\LL{n}$
 \begin{lem}
 For $n\geq2$, there is a `zeroth part' functor $\LL{n}\to\PRLie{n-1}$, written $X\mapsto X_0$, where $X_0\in\PRLie{n-1}$ is defined by
 \[(X_0)_{a_{n-1},\ldots,a_1}:=X_{0,a_{n-1},\ldots,a_1}\]
-with bracket and restrictions inherited from those on $X$. The restriction is also given by $\Q^0$. Moreover, taking zeroth parts commutes with the two free constructions, which is to say that for $S\in\GS{n}$, we have $(\Fr{\LL{n}}S)_0\cong\Fr{\PRLie{n-1}}(S_0)$, writing $S_0\in\GS{n-1}$ for the zeroth part of $S$.
+with bracket and restrictions on $X_0$ inherited from those on $X$. Equivalently, the restriction on $X_0$ is given by the operator $\Q^0$ on $X$. Moreover, taking zeroth parts commutes with the two free constructions, which is to say that for $S\in\GS{n}$, we have $(\Fr{\LL{n}}S)_0\cong\Fr{\PRLie{n-1}}(S_0)$, writing $S_0\in\GS{n-1}$ for the zeroth part of $S$.
 \end{lem}
 \begin{proof}
 As objects of $\LL{n}$ are themselves objects of $\PRLie{n}$, with restriction given by $\Q^0$ in dimension zero, it's enough just to check that $\Q^0$ is defined on $X_{0,a_{n-1},\ldots,a_1}$ whenever $\restn{}$ is supposed to be defined on a dimension $(a_{n-1},\ldots,a_1)$ element of an object of $\PRLie{n-1}$. This follows from the definition.
@@ -2783,7 +2823,7 @@ To check that the free constructions agree, recall (\ref{PropFreeKandUconstructi
 =
 \left\langle \Q^Ib\,:\,\genfrac{}{}{0pt}{}{b\in B_{a_n,\ldots,a_1},\,I\in\admis{\Q},\ i_1\leq|b|,}{\textup{if }a_{n-1}\!=\!\cdots\!=\!a_2\!=\!0\textup{ then $I$ doesn't contain 0}}\right\rangle\]
 %\[\{\Q^Ib\,:\,b\in B_{a_{n},\ldots,a_1},\,I\in\admis{\Q},\ i_1\leq|b|,\ i_1,a_{n-1},\ldots,a_2\textup{ not all zero}\}\] this was wrong
-where $b$ runs over a homogeneous Hall basis, $B$. The only basis elements $\Q^Ib$ in the zeroth part $(\Fr{\LL{n}}S)_0$ are those where $|b|=0$ and in which $I$ only contains zeros, and these classes are exactly the basis for $\Fr{\PRLie{n-1}}(S_0)$ in \ref{PropBasesOfFreeLieAlgs}.
+where $b$ runs over a homogeneous Hall basis, $B$. The only basis elements $\Q^Ib$ in the zeroth part $(\Fr{\LL{n}}S)_0$ are those where $|b|=0$ and in which $I$ only contains zeros. These classes are exactly the basis for $\Fr{\PRLie{n-1}}(S_0)$ in \ref{PropBasesOfFreeLieAlgs}.
 \end{proof}
 \begin{prop}
 There is a natural isomorphism
@@ -3458,7 +3498,7 @@ Note first that there is a bijection, for $\ell\geq1$:
 \end{alignat*}
 %The expression for $m(\gamma(\textbf{m}))$ is
 Formulae for $m(\gamma(\textbf{m}))$ and $n(\gamma(\textbf{m}))$ are easy to write down:
-\[m(\gamma(\textbf{m}))=\max\left\{m_j+\cdots +m_1\right\}_{j=1}^\ell=m_\ell+\cdots +m_1=e(\gamma(\textbf{m}));\]
+\[m(\gamma(\textbf{m}))=\max\left\{m_j+\cdots +m_1\right\}_{j=1}^\ell=m_\ell+\cdots +m_1=:e(\gamma(\textbf{m}));\]
 \[%\minDim(\gamma(\textbf{m})):=\max\{m_{\ell}+\cdots +m_1,\ldots,m_2+m_1,m_1\}=\sum_{i=1}^{\ell}m_i;\quad
 n(\gamma(\textbf{m}))=\sum_{i=0}^{\ell-1}\left(2^{i+1}-1\right)m_{\ell-i}.\]
 In particular, as all of $m_\ell,\ldots,m_2$ are positive, $\minDim(\gamma(\textbf{m}))\geq\ell-1$, with equality iff $\textbf{m}=(1,\ldots,1,0)$, proving the first claim.
@@ -3600,7 +3640,7 @@ Now suppose that $N\geq2$, and as before, write $\rho=3$ when \textup{(D)} holds
 \end{itemise}
 These imply (iii), as when $3\leq i\leq N$:
 \[a_i\geq 2a_{i+1}\geq a_{i+1}+2a_{i+2}\geq\cdots \geq a_{i+1}+\cdots +a_{N+1}.\]
-This also proves the second inequality in each part of (ii), which is simply $\rho a_3\leq a_2$ when $N=2$, and when $N\geq3$ follows from (iii):
+This also proves the second inequality in each part of (ii), which is simply $\rho a_3\leq a_2$ when $N=2$, and follows from (iii) when $N\geq3$:
 \[a_2\geq 2\rho a_3\geq \rho a_3+\rho (a_4+\cdots +a_{N+1})=\rho (a_3+\cdots +a_{N+1}).\]
 %Note that when $N=2$, the second inequality in each case of (ii) is simply $\rho a_3\leq a_2$, which is already present in the above list.
 
@@ -3738,13 +3778,13 @@ In order to help simplify the continuing exposition, define, for $N\geq 1$:
 %\{(\emptyset,\ldots,\emptyset,(i))\ |\ 2\leq i\leq d\},&\textup{if }N>0;\\
 %\emptyset,&\textup{if }N=0.
 %\end{cases}
-(\emptyset,\ldots,\emptyset,(i))\ |\ 2\leq i\leq d\}\\
+\{(\emptyset,\ldots,\emptyset,(i))\ |\ 2\leq i\leq d\}\\
 \calS^{(N)}_2&:=
 %\begin{cases}
 %\{(\emptyset,\ldots,\emptyset,(d+i+1,i))\ |\ 2\leq i\leq d\},&\textup{if }N>0;\\
 %\emptyset,&\textup{if }N=0.
 %\end{cases}
-(\emptyset,\ldots,\emptyset,(d+i+1,i))\ |\ 2\leq i\leq d\}\\
+\{(\emptyset,\ldots,\emptyset,(d+i+1,i))\ |\ 2\leq i\leq d\}\\
 %\{(\emptyset,\ldots,\emptyset,(i))\ |\ 2\leq i\leq d\}&\qquad&\text{(if $N>0$)}
 \calS^{(N)}_3&:=\calS^{(N)}\setminus(\calS^{(N)}_0 \cup\calS^{(N)}_1\cup \calS^{(N)}_2)
 \end{alignat*}
@@ -3799,7 +3839,7 @@ $H^{(1)}_0\in\PRLie{1}\cong \GoodLie{1}$ is the one dimensional abelian Lie alge
 
 For $N\geq2$, if we decompose $H^{(N)}_0\in\PRLie{N}$ as 
 \[H^{(N)}_0=\left\langle \imath\rule{0mm}{\heightof{$\calS_1^{(N)}$}}\right\rangle\oplus \left\langle b(S)\ \middle|\ S\in\calS_1^{(N-1)}\right\rangle \oplus \left\langle b(S)\ \middle|\ S\in\calS_2^{(N-1)}\right\rangle \oplus\left\langle b(S)\ \middle|\ S\in\calS_3^{(N-1)}\right\rangle,\]
-the restriction, defined on the last three summands, sends the second isomorphically onto the third, and vanishes on the third and fourth summands. In particular, $H^{(1)}_0$ is the trivial element $\langle \imath\rangle$ of 
+the restriction, defined on the last three summands, sends the second isomorphically onto the third, and vanishes on the third and fourth summands. %In particular, $H^{(1)}_0$ is the trivial element $\langle \imath\rangle$ of 
 \end{thm}
 %Then for $N\geq2$, if we decompose $H^{(N)}$ as
 %%Then we can further decompose $H^{(N)}$ as follows:
@@ -3883,10 +3923,11 @@ Finally, note that the C-E-M complex calculates partially restricted Lie algebra
 \end{proof}
 
 \end{DimZeroPart}
-\begin{VanishingLines}
+\begin{AxisComputationSummary}
 
 \begin{shaded}
-Here we include a summary of the $E^2$ pages of the Grothendieck spectral sequences along the first two axes.
+%Here we include a summary of the $E^2$ pages of the Grothendieck spectral sequences along the first two axes.
+\noindent \textbf{Homological degree zero} on $N^\textup{th}$ gss, for $N\geq1$:
 \begin{alignat*}{2}
 E^{2,N}_{0,a_{N+1},a_N,\ldots,a_1}
 &=
@@ -3902,9 +3943,10 @@ E^{2,N}_{0,a_{N+1},a_N,\ldots,a_1}&=
 \left\langle b(S)\ \middle|\ S\in\calS_1^{(N)}\cup\calS_3^{(N)}\right\rangle,&\textup{if }N\geq2.
 %\\,&\textup{if }
 \end{cases}\\
+\intertext{\textbf{Internal degree zero} on $N^\textup{th}$ gss, for $N\geq1$:}
 E^{2,N}_{a_{N+2},0,a_N,\ldots,a_1}
 &=
-H_{a_{N+2}+1}\left(H^{(N)}_0\right)_{a_N,\ldots,a_1}\\
+H_{a_{N+2}+1}\left(H^{(N)}_0\right)\phantom{H\!\!\!\!\!\!\!}_{a_N,\ldots,a_1}\\
 H_{*}\left(H^{(N)}_0\right)&=%E\left\langle \imath\rule{0mm}{\heightof{$\calS_1^{(N)}$}}\right\rangle \otimes E\left\langle b(S)\ \middle|\ S\in\calS_1^{(N-1)}\right\rangle\\
 %&\qquad \otimes\Gamma_\textup{ev}\left\langle b(S)\ \middle|\ S\in\calS_2^{(N-1)}\right\rangle\otimes \Gamma\left\langle b(S)\ \middle|\ S\in\calS_3^{(N-1)}\right\rangle\\
 \left(\genfrac{}{}{0pt}{}{E\left\langle \imath\rule{0mm}{\heightof{$\calS_1^{(N)}$}}\right\rangle \otimes E\left\langle b(S)\ \middle|\ S\in\calS_1^{(N-1)}\right\rangle\otimes}{\Gamma_\textup{ev}\left\langle b(S)\ \middle|\ S\in\calS_2^{(N-1)}\right\rangle\otimes \Gamma\left\langle b(S)\ \middle|\ S\in\calS_3^{(N-1)}\right\rangle}\right)
@@ -3926,7 +3968,57 @@ using the convention that $\calS^{(0)}_1=\calS^{(0)}_2=\calS^{(0)}_3=\emptyset$.
 % &\qquad \otimes\Gamma_\textup{ev}\left\langle b(S)\ \middle|\ S\in\calS_2^{(N-1)}\right\rangle\otimes \Gamma\left\langle b(S)\ \middle|\ S\in\calS_3^{(N-1)}\right\rangle 
 %\end{split}
 %\end{equation*}
+
+
+\begin{enumerate}[A)]
+\squishlist
+\setlength{\parindent}{.25in}
+\item[\textup{(A)}] $I^1$ is $\delta$-admissible (with entries at least 2) and satisfies $\minDimP^1\leq d$;
+\item[\textup{(B)}] for $i\geq2$, $I^i$ is $\SqShift$-admissible (with entries nonnegative);
+\item[\textup{(C)}] $I^2$ does not contain zero, and $\minDim^i<\ell^{i-1}$ for all $i\geq2$.
+\item[(D)] $I^2$ doesn't contain 1.
+\item[(E)] $I^1\in\im(t_d)$, $\ell^1>2$, and $I^2$ doesn't contain 1 or 2.
+\end{enumerate}
+\begin{itemize}
+\squishlist
+\item Let $\calS^{(0)}=\{\emptyset\}$ be the set which contains only the empty sequence.
+\item Let $\calS^{(1)}$ be the set of length 1 sequences $(I^1)$, where $I^1$ is a sequence satisfying \textup{(A)}.
+%\item For $N\geq2$, let $\calS^{(N)}$ be the set of (length $N$) sequences of sequences $(I^{N},\ldots,I^1)$ satisfying conditions \textup{(A)}-\textup{(C)}, such that $1\notin I^2$, and for which it is not true that ``$1,2\notin I^2,\ I^1\in\im(t_d)\textup{, and $\ell^1>2$}$''.
+\item For $N\geq2$, let $\calS^{(N)}$ be the set of length $N$ sequences $(I^{N},\ldots,I^1)$ of sequences satisfying conditions \textup{(A)}-\textup{(D)} but not \textup{(E)}.
+%\item Write $b(S):=\Q(I^{N})\cdots \Q(I^2)P(I^1)\imath\in H^{(N)}$, for $S=(I^{N},\ldots,I^1)\in \calS^{(N)}$.
+\end{itemize}
+Then we've proven that for all $N\geq0$, $H^{(N)}=\langle b(S)\ |\ S\in\calS^{(N)}\rangle$.
+\begin{alignat*}{2}
+\calS^{(N)}_0
+&:=
+\{(\emptyset,\ldots,\emptyset)\}%
+\\
+\calS^{(N)}_1
+%&:=\{S\in \calS^{(N)}\ |\ \ell^{N}=\cdots =\ell^2=0,\ \ell^1=1\}\\
+&:=%\hphantom{:}=
+%\begin{cases}
+%\{(\emptyset,\ldots,\emptyset,(i))\ |\ 2\leq i\leq d\},&\textup{if }N>0;\\
+%\emptyset,&\textup{if }N=0.
+%\end{cases}
+\{(\emptyset,\ldots,\emptyset,(i))\ |\ 2\leq i\leq d\}\\
+\calS^{(N)}_2&:=
+%\begin{cases}
+%\{(\emptyset,\ldots,\emptyset,(d+i+1,i))\ |\ 2\leq i\leq d\},&\textup{if }N>0;\\
+%\emptyset,&\textup{if }N=0.
+%\end{cases}
+\{(\emptyset,\ldots,\emptyset,(d+i+1,i))\ |\ 2\leq i\leq d\}\\
+%\{(\emptyset,\ldots,\emptyset,(i))\ |\ 2\leq i\leq d\}&\qquad&\text{(if $N>0$)}
+\calS^{(N)}_3&:=\calS^{(N)}\setminus(\calS^{(N)}_0 \cup\calS^{(N)}_1\cup \calS^{(N)}_2)
+\end{alignat*}
+The degree $ (a_{N+1},\ldots,a_1) $ of a sequence $(I^N,\ldots,I^1)\in\calS^{(N)}$ is:
+\begin{align*}
+& \left( \ell^N,\ell^{N-1}+n^N,2^{\ell^N}\!\left(\ell^{N-2}+n^{N-1}\right),2^{\ell^N+\ell^{N-1}}\!\left(\ell^{N-3}+n^{N-2}\right),\ldots \right.\\
+ &\qquad \left.{}\ldots,2^{\ell^N+\cdots+\ell^{3}}(\ell^1+n^2),2^{\ell^N+\cdots+\ell^{2}}(d+n^1+\ell^1+1)-1 \right).
+\end{align*}
 \end{shaded}
+\end{AxisComputationSummary}
+
+\begin{VanishingLines}
 \subsection{A vanishing line}
 A class in $E^{2,N}_{a_{N+2},\ldots,a_1}$ which survives all the way to the $E_2$ page of the Adams spectral sequence represents a class in $E_2^{s,t}$ with dimensions $s=a_{N+2}+\cdots +a_2$ and $t=a_1$. Now we've seen above that $E^{2,N}_{0,a_{N+1},a_N,\ldots,a_1}$ is a subquotient of
 \[\left\langle b(S)\ \middle|\ S\in\calS^{(N)}\right\rangle_{a_{N+1},\ldots,a_1}\]
