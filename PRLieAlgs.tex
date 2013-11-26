@@ -3757,13 +3757,16 @@ Of course we must understand $H^{(2)}$ as an element of $\LL{3}$. As before, the
 In order to simplify notation, we'll organise the relevant sequences $(I^{N},\ldots,I^1)$ of admissible sequences parameterising a basis of $H^{{(N)}}$ as follows.
 \begin{itemize}
 \squishlist
-\item Let $\calS^{(0)}=\{\emptyset\}$ be the set which contains only the empty sequence.
-\item Let $\calS^{(1)}$ be the set of length 1 sequences $(I^1)$, where $I^1$ is a sequence satisfying \textup{(A)}.
+%\item Let $\calS^{(0)}=\{\emptyset\}$ be the set which contains only the empty sequence.
+%\item Let $\calS^{(1)}$ be the set of length 1 sequences $(I^1)$, where $I^1$ is a sequence satisfying \textup{(A)}.
 %\item For $N\geq2$, let $\calS^{(N)}$ be the set of (length $N$) sequences of sequences $(I^{N},\ldots,I^1)$ satisfying conditions \textup{(A)}-\textup{(C)}, such that $1\notin I^2$, and for which it is not true that ``$1,2\notin I^2,\ I^1\in\im(t_d)\textup{, and $\ell^1>2$}$''.
-\item For $N\geq2$, let $\calS^{(N)}$ be the set of length $N$ sequences $(I^{N},\ldots,I^1)$ of sequences satisfying conditions \textup{(A)}-\textup{(D)} but not \textup{(E)}.
+\item For $N\geq0$, let $\calS^{(N)}$ be the set of length $N$ sequences $(I^{N},\ldots,I^1)$ of sequences satisfying conditions \textup{(A)}-\textup{(D)} but not \textup{(E)}.
 %\item Write $b(S):=\Q(I^{N})\cdots \Q(I^2)P(I^1)\imath\in H^{(N)}$, for $S=(I^{N},\ldots,I^1)\in \calS^{(N)}$.
 \end{itemize}
-Then we've proven that for all $N\geq0$, $H^{(N)}=\langle b(S)\ |\ S\in\calS^{(N)}\rangle$.
+Then we've proven that for all $N\neq1$, $H^{(N)}=\langle b(S)\ |\ S\in\calS^{(N)}\rangle$, while
+\[H^{(1)}=
+\langle b(S)\ |\ S\in\calS^{(1)}\rangle\oplus\langle b(S)\ |\ S=(I^1)\textup{ satisfies (A) and (E)}\rangle
+\]
 %Note also that for $N\geq1$ we have $H^{(N)}_0=\langle b(S)\ |\ S\in\calS^{(N-1)}\rangle$. Next we form three subsets of $\calS^{(N)}$ (what range on $N$?).
 In order to help simplify the continuing exposition, define, for $N\geq 1$:
 \begin{alignat*}{2}
@@ -3790,7 +3793,10 @@ In order to help simplify the continuing exposition, define, for $N\geq 1$:
 \end{alignat*}
 %and define
 %\[\calS^{(0)}_0=\{\emptyset\},\ \calS^{(0)}_1=\calS^{(0)}_2=\calS^{(0)}_3=\emptyset,\]
-so that $\calS^{(N)}$ is the disjoint union $\calS^{(N)}_0\cup\calS^{(N)}_1\cup\calS^{(N)}_2\cup\calS^{(N)}_3$ of four nonempty subsets.
+so that $\calS^{(N)}$ is the disjoint union $\calS^{(N)}_0\cup\calS^{(N)}_1\cup\calS^{(N)}_2\cup\calS^{(N)}_3$ of four nonempty subsets. Write $\calS^{(N)}_{ab}$ for the (disjoint) union $\calS^{(N)}_{a}\cup\calS^{(N)}_{b}$, and so on.
+
+We'll use the convention that each of $\calS^{(0)}_1$, $\calS^{(0)}_2$ and $\calS^{(0)}_3$ are the empty set, while $\calS^{(0)}_0=\{\emptyset\}$, the one element set containing the empty sequence.
+With this convenction, these graded sets have the property that for any $N\geq1$ and $i\in\{0,1,2,3\}$ there is a bijection $(\calS^{(N)}_i)_0\cong\calS^{(N-1)}_i$ given by $(\emptyset,I^{N-1},\ldots,I^1)\mapsto(I^{N-1},\ldots,I^1)$.
 %Next, define
 %%\[\calS^{(N)}_2=\im(\overline{t}_d)=\{(\emptyset,\ldots,\emptyset,(d+i+1,i))\ |\ 2\leq i\leq d\},\]
 %\begin{alignat*}{2}
@@ -3808,36 +3814,42 @@ so that $\calS^{(N)}$ is the disjoint union $\calS^{(N)}_0\cup\calS^{(N)}_1\cup\
 %and finally:
 %\[\calS^{(N)}_3:=\calS^{(N)}\setminus(\calS^{(N)}_1\cup \calS^{(N)}_2\cup\{(\emptyset,\ldots,\emptyset)\}).\]
 %For $N\geq1$, all four of the subsets $\calS^{(N)}_i$ is nonempty.
-Let $\overline{t}_d:\calS_1^{(N)}\to\calS^{(N)}_2$ be the bijection $(\emptyset,\ldots,\emptyset,I^1)\mapsto (\emptyset,\ldots,\emptyset,t_dI^1)$. 
 
-\begin{thm}
+
+\begin{thm}\label{longDescriptionOfHN}
 If we decompose $H^{(1)}\in\LL{2}$ as
 %\[H^{(1)}= \left\langle b(S)\ \middle|\ S\textup{ satisfies \textup{(A)}, $S\notin\im(t_d)$}\right\rangle\oplus \left\langle b(S)\ \middle|\ S\textup{ satisfies \textup{(A)}, $S\in\im(t_d)$}\right\rangle\]
 %\[H^{(1)}= \left\langle \Q(I^1)\imath\ \middle|\ I^1\textup{ satisfies \textup{(A)}, $I^1\notin\im(t_d)$}\right\rangle\oplus \left\langle \Q(I^1)\imath\ \middle|\ I^1\textup{ satisfies \textup{(A)}, $I^1\in\im(t_d)$}\right\rangle\]
 \begin{alignat*}{2}
 H^{(1)}
 &=
-\left\langle \Q(I^1)\imath\ \middle|\ I^1\textup{ satisfies \textup{(A)}, $I^1\notin\im(t_d)$}\right\rangle%
+\left\langle b(S)\ \middle|\ S\in\calS_{013}^{(N)}\right\rangle\oplus\left\langle b(S)\ \middle|\ S\in\calS_{2}^{(N)}\right\rangle
 \\
-% Left hand side
-% Relation
 &
-% Right hand side
-\quad\quad  \oplus\left\langle \Q(I^1)\imath\ \middle|\ I^1\textup{ satisfies \textup{(A)}, $I^1\in\im(t_d)$}\right\rangle% Comment
+\quad\quad  \oplus\langle b(S)\ |\ S=(I^1)\textup{ satisfies (A) and (E)}\rangle% Comment
 \end{alignat*}
-then $\Q^1$, the only operation which is ever nonzero, has image the second summand. [Recall that $t_d$ is only defined when $\ell^1\geq1$, just as $Q^1$ is only defined on $Q(I^1)\imath$ when $\ell^1\geq1$.]
+%%%\begin{alignat*}{2}
+%%%H^{(1)}
+%%%&=
+%%%\left\langle \Q(I^1)\imath\ \middle|\ I^1\textup{ satisfies \textup{(A)}, $I^1\notin\im(t_d)$}\right\rangle%
+%%%\\
+%%%&
+%%%\quad\quad  \oplus\left\langle \Q(I^1)\imath\ \middle|\ I^1\textup{ satisfies \textup{(A)}, $I^1\in\im(t_d)$}\right\rangle% Comment
+%%%\end{alignat*}
+then $\Q^1$, the only operation which is ever nonzero, has image the second and third summands.%footnote:
+\footnote{The following became gramatically incorrect: [Recall that $t_d$ is only defined when $\ell^1\geq1$, just as $Q^1$ is only defined on $Q(I^1)\imath$ when $\ell^1\geq1$.]}
 
-For $N\geq2$, if we decompose $H^{(N)}\in\LL{N+1}$ as
+For $N\neq1$, if we decompose $H^{(N)}\in\LL{N+1}$ as
 %Then we can further decompose $H^{(N)}$ as follows:
 %\[H^{(n)}=\langle \imath\rangle\oplus \left\langle b(S)\ \middle|\ S\in\calS_3^{(N)}\cup \calS_1^{(N)}\right\rangle \oplus \left\langle b(S)\ \middle|\ S\in\calS_2^{(N)}\right\rangle\]
 \[H^{(N)}=
-\left\langle \imath\rule{0mm}{\heightof{$\calS_1^{(N)}$}}\right\rangle\oplus 
-\left\langle b(S)\ \middle|\ S\in\calS_1^{(N)}\right\rangle \oplus \left\langle b(S)\ \middle|\ S\in\calS_2^{(N)}\right\rangle \oplus\left\langle b(S)\ \middle|\ S\in\calS_3^{(N)}\right\rangle\]
-then the first, second and fourth summands consist of indecomposable elements, while the third summand is the isomorphic image of the second under the operation $\Q^0$.
+\left\langle b(S)\ \middle|\ S\in\calS_{03}^{(N)}\right\rangle\oplus
+%\left\langle \imath\rule{0mm}{\heightof{$\calS_1^{(N)}$}}\right\rangle\oplus 
+\left\langle b(S)\ \middle|\ S\in\calS_1^{(N)}\right\rangle \oplus \left\langle b(S)\ \middle|\ S\in\calS_2^{(N)}\right\rangle\]
+then the first and second summands consist of indecomposable elements, while the third summand is the isomorphic image of the second under the operation $\Q^0$.
 
 $H^{(1)}_0\in\PRLie{1}\cong \GoodLie{1}$ is the one dimensional abelian Lie algebra  $\langle \imath\rangle$.
-
-For $N\geq2$, if we decompose $H^{(N)}_0\in\PRLie{N}$ as 
+More broadly, for $N\geq1$, if we decompose $H^{(N)}_0\in\PRLie{N}$ as 
 \[H^{(N)}_0=\left\langle \imath\rule{0mm}{\heightof{$\calS_1^{(N)}$}}\right\rangle\oplus \left\langle b(S)\ \middle|\ S\in\calS_1^{(N-1)}\right\rangle \oplus \left\langle b(S)\ \middle|\ S\in\calS_2^{(N-1)}\right\rangle \oplus\left\langle b(S)\ \middle|\ S\in\calS_3^{(N-1)}\right\rangle,\]
 the restriction, defined on the last three summands, sends the second isomorphically onto the third, and vanishes on the third and fourth summands. %In particular, $H^{(1)}_0$ is the trivial element $\langle \imath\rangle$ of 
 \end{thm}
@@ -3883,12 +3895,16 @@ the restriction, defined on the last three summands, sends the second isomorphic
 
 \begin{DimZeroPart}
 \subsection{Calculation of $E^{2,N}=(\derived\Ind{\LL{N+1}})H^{(N)}$ along the first two axes}
-Suppose that $N\geq1$, so that $E^{2,N}:=(\derived\Ind{\LL{N+1}})H^{(N)}\in\GR{N+2}$ is the $E^2$ page of the $N^\textup{th}$ Grothendieck spectral sequence. The results of the previous section allow a complete calculation of the groups
+Suppose that $N\geq0$, so that $E^{2,N}:=(\derived\Ind{\LL{N+1}})H^{(N)}\in\GR{N+2}$ is the $E^2$ page of the $N^\textup{th}$ Grothendieck spectral sequence%footnote:
+\footnote{Recall that the $0^\textup{th}$ Grothendieck spectral sequence is the Adams spectral sequence itself.}. The results of the previous section allow a complete calculation of the groups
 \[E^{2,N}_{0,a_{N+1},a_N,\ldots,a_1}=\Ind{\LL{N+1}}H^{(N)}.\]
 \begin{prop}
-For $N\geq2$, the graded vector space $E^{2,N}_{0,a_{N+1},a_N,\ldots,a_1}\in\GR{N+1}$ is
-\[\left\langle \imath\rule{0mm}{\heightof{$\calS_1^{(N)}$}}\right\rangle\oplus\left\langle b(S)\ \middle|\ S\in\calS_3^{(N)}\cup\calS_1^{(N)}\right\rangle.\]
+For $N\geq0$, the graded vector space $E^{2,N}_{0,a_{N+1},a_N,\ldots,a_1}\in\GR{N+1}$ is
+\[\left\langle b(S)\ \middle|\ S\in\calS_{013}^{(N)}\right\rangle.\]
 \end{prop}
+\begin{proof}
+This follows from \ref{longDescriptionOfHN}.
+\end{proof}
 %\subsection{Calculation of $E^{2,N}=(\derived\Ind{\LL{N+1}})H^{(N)}$ in zero internal dimension}
 
 We can also completely calculate the groups
@@ -3900,8 +3916,8 @@ using partially restricted Lie algebra homology. From the section on low dimensi
 %\[\Q(\emptyset)\cdots \Q(\emptyset)P(I^1)\imath\overset{\restn{}}{\mapsto}\Q(\emptyset)\cdots \Q(\emptyset)P(t_dI^1)\imath.\]
 %Note that all of the classes $\Q(\emptyset)\cdots \Q(\emptyset)P(t_dI^1)\imath$, where $\ell^1=1$, are linearly independant in $H^{(N)}_0$. Moreover, there is only one basis element in non-restrictable dimensions, and that is $\Q(\emptyset)\cdots \Q(\emptyset)P(\emptyset)\imath$.
 \begin{prop}
-The graded vector space $E^{2,N}_{a_{N+2},0,a_N,\ldots,a_1}\in\GR{N+1}$ is isomorphic (as a graded vector space only) to the kernel of the counit of the coalgebra
-\[E\left\langle \imath\rule{0mm}{\heightof{$\calS_1^{(N)}$}}\right\rangle \otimes E\left\langle b(S)\ \middle|\ S\in\calS_1^{(N-1)}\right\rangle\otimes \Gamma_\textup{ev}\left\langle b(S)\ \middle|\ S\in\calS_2^{(N-1)}\right\rangle\otimes \Gamma\left\langle b(S)\ \middle|\ S\in\calS_3^{(N-1)}\right\rangle \]
+For $N\geq1$, the graded vector space $E^{2,N}_{a_{N+2},0,a_N,\ldots,a_1}\in\GR{N+1}$ is isomorphic (as a graded vector space only) to the kernel of the counit of the coalgebra
+\[E\left\langle b(S)\ \middle|\ S\in\calS_{01}^{(N-1)}\right\rangle\otimes \Gamma_\textup{ev}\left\langle b(S)\ \middle|\ S\in\calS_2^{(N-1)}\right\rangle\otimes \Gamma\left\langle b(S)\ \middle|\ S\in\calS_3^{(N-1)}\right\rangle \]
 %where by $\Gamma_{\textup{ev}}$ we mean the even divided powers.
 The degree $\|a_{N+2},0,a_{N}\ldots,a_1\|$ of an expression $\prod_j\gamma_{i_j}(x_j)$ is determined by:
 \[a_{{N+2}}=-1+\sum_{\smash j}i_j,\quad (a_N,\ldots,a_1)=(0,\ldots,0,a_{N+2})+\sum_{\smash j}i_j\|x_j\|,\]
@@ -3909,7 +3925,8 @@ which is to say that $E^{2,N}_{a_{N+2},0,*,*,\ldots}$ is calculated by monomials
 %one takes $a_{N+2}$ to be $\sum_ji_j-1$, $a_{N+1}$ to be 0, and $(a_N,\ldots,a_1)$ to be $\sum_ji_j\|x_j\|$. That is, to calculate the degree $a_{N+2}$ part, we need to look at monomials of total exponent $a_{N+2}+1$.
 \end{prop}
 \begin{proof} %For the course of this proof, we will supress the $(N-1)$ superscripts that normally appear on the $\calS^{(N-1)}$, and also the parentheses that usually appear in $b(S)$.
- As a vector space, the Eilenberg-Cartan-May complex is \[E\langle \imath\rangle\otimes \Gamma\left\langle bS\ \middle|\ S\in \calS_1^{(N-1)}\cup\calS_2^{(N-1)}\cup\calS_3^{(N-1)}\right\rangle.\] As so few operations are nonzero, it splits into a tensor product of complexes
+In this proof, write $\overline{t}_d:\calS_1^{(N)}\to\calS^{(N)}_2$ for the bijection $(\emptyset,\ldots,\emptyset,I^1)\mapsto (\emptyset,\ldots,\emptyset,t_dI^1)$. 
+As a vector space, the Eilenberg-Cartan-May complex is \[E\langle \imath\rangle\otimes \Gamma\left\langle bS\ \middle|\ S\in \calS_1^{(N-1)}\cup\calS_2^{(N-1)}\cup\calS_3^{(N-1)}\right\rangle.\] As so few operations are nonzero, it splits into a tensor product of complexes
 \[E\langle \imath\rule{0mm}{\heightof{$\calS_1^{(N)}$}}\rangle\otimes \!\!\!\!\!\bigotimes_{S\in\calS_1^{(N-1)}}\!\!\!\!\!\Gamma\langle\rule{0mm}{\heightof{$\calS_1^{(N)}$}} bS,b\overline{t}_dS\rangle\otimes \Gamma\left\langle bS\ \middle|\ S\in \calS_3^{(N-1)}\right\rangle\]
 where only the factors $\Gamma\langle bS,b\overline{t}_dS\rangle$ have nonzero differential. The differential on $\Gamma\langle bS,b\overline{t}_dS\rangle$ is
 \[\gamma_i( bS)\cdot\gamma_j(b\overline{t}_dS)\mapsto\gamma_{i-2}( bS)\cdot b\overline{t}_dS\cdot\gamma_j(b\overline{t}_dS)=\begin{cases}
@@ -3926,50 +3943,6 @@ Finally, note that the C-E-M complex calculates partially restricted Lie algebra
 \begin{AxisComputationSummary}
 
 \begin{shaded}
-%Here we include a summary of the $E^2$ pages of the Grothendieck spectral sequences along the first two axes.
-\noindent \textbf{Homological degree zero} on $N^\textup{th}$ gss, for $N\geq1$:
-\begin{alignat*}{2}
-E^{2,N}_{0,a_{N+1},a_N,\ldots,a_1}
-&=
-(\Ind{\LL{N+1}}H^{(N)})_{a_{N+1},\ldots,a_1}%
-\\
-% Left hand side
-% Relation
-E^{2,N}_{0,a_{N+1},a_N,\ldots,a_1}&=
-% Right hand side
-\begin{cases}
-\left\langle \Q(I^1)\imath\rule{0mm}{\heightof{$\calS_1^{(N)}$}}\ \middle|\ (I^1)\in\calS^{(1)},\ I^1\notin\im(t_d)\right\rangle,&\textup{if }N=1;\\
-\left\langle \imath\rule{0mm}{\heightof{$\calS_1^{(N)}$}}\right\rangle\oplus 
-\left\langle b(S)\ \middle|\ S\in\calS_1^{(N)}\cup\calS_3^{(N)}\right\rangle,&\textup{if }N\geq2.
-%\\,&\textup{if }
-\end{cases}\\
-\intertext{\textbf{Internal degree zero} on $N^\textup{th}$ gss, for $N\geq1$:}
-E^{2,N}_{a_{N+2},0,a_N,\ldots,a_1}
-&=
-H_{a_{N+2}+1}\left(H^{(N)}_0\right)\phantom{H\!\!\!\!\!\!\!}_{a_N,\ldots,a_1}\\
-H_{*}\left(H^{(N)}_0\right)&=%E\left\langle \imath\rule{0mm}{\heightof{$\calS_1^{(N)}$}}\right\rangle \otimes E\left\langle b(S)\ \middle|\ S\in\calS_1^{(N-1)}\right\rangle\\
-%&\qquad \otimes\Gamma_\textup{ev}\left\langle b(S)\ \middle|\ S\in\calS_2^{(N-1)}\right\rangle\otimes \Gamma\left\langle b(S)\ \middle|\ S\in\calS_3^{(N-1)}\right\rangle\\
-\left(\genfrac{}{}{0pt}{}{E\left\langle \imath\rule{0mm}{\heightof{$\calS_1^{(N)}$}}\right\rangle \otimes E\left\langle b(S)\ \middle|\ S\in\calS_1^{(N-1)}\right\rangle\otimes}{\Gamma_\textup{ev}\left\langle b(S)\ \middle|\ S\in\calS_2^{(N-1)}\right\rangle\otimes \Gamma\left\langle b(S)\ \middle|\ S\in\calS_3^{(N-1)}\right\rangle}\right)
-%%
-%
-%
-%&\left(\genfrac{}{}{0pt}{}{E\left\langle \imath\rule{0mm}{\heightof{$\calS_1^{(N)}$}}\right\rangle \otimes E\left\langle b(S)\ \middle|\ S\in\calS_1^{(N-1)}\right\rangle\otimes}{\Gamma_\textup{ev}\left\langle b(S)\ \middle|\ S\in\calS_2^{(N-1)}\right\rangle\otimes \Gamma\left\langle b(S)\ \middle|\ S\in\calS_3^{(N-1)}\right\rangle}\right)_{a_{N+2}+1,0,a_N,\ldots,a_1}
-\end{alignat*}
-using the convention that $\calS^{(0)}_1=\calS^{(0)}_2=\calS^{(0)}_3=\emptyset$.
-%\[E^{2,N}_{0,a_{N+1},a_N,\ldots,a_1}=(\Ind{\LL{N+1}}H^{(N)})_{a_{N+1},\ldots,a_1}.\]
-%\[\Ind{\LL{N+1}}H^{(N)}=
-%\left\langle \imath\rule{0mm}{\heightof{$\calS_1^{(N)}$}}\right\rangle\oplus 
-%\left\langle b(S)\ \middle|\ S\in\calS_1^{(N)}\right\rangle \oplus\left\langle b(S)\ \middle|\ S\in\calS_3^{(N)}\right\rangle\]
-%\[E^{2,N}_{a_{N+2},0,a_N,\ldots,a_1}=H_{a_{N+2}+1}\left(H^{(N)}_0\right)_{a_N,\ldots,a_1}\]
-%\[H_{*}\left(H^{(N)}_0\right)=E\left\langle \imath\rule{0mm}{\heightof{$\calS_1^{(N)}$}}\right\rangle \otimes E\left\langle b(S)\ \middle|\ S\in\calS_1^{(N-1)}\right\rangle\otimes \Gamma_\textup{ev}\left\langle b(S)\ \middle|\ S\in\calS_2^{(N-1)}\right\rangle\otimes \Gamma\left\langle b(S)\ \middle|\ S\in\calS_3^{(N-1)}\right\rangle \]
-%\begin{equation*}
-%\begin{split}
-%H_{*}\left(H^{(N)}_0\right) = E\left\langle \imath\rule{0mm}{\heightof{$\calS_1^{(N)}$}}\right\rangle &\otimes E\left\langle b(S)\ \middle|\ S\in\calS_1^{(N-1)}\right\rangle \\
-% &\qquad \otimes\Gamma_\textup{ev}\left\langle b(S)\ \middle|\ S\in\calS_2^{(N-1)}\right\rangle\otimes \Gamma\left\langle b(S)\ \middle|\ S\in\calS_3^{(N-1)}\right\rangle 
-%\end{split}
-%\end{equation*}
-
-
 \begin{enumerate}[A)]
 \squishlist
 \setlength{\parindent}{.25in}
@@ -3979,15 +3952,11 @@ using the convention that $\calS^{(0)}_1=\calS^{(0)}_2=\calS^{(0)}_3=\emptyset$.
 \item[(D)] $I^2$ doesn't contain 1.
 \item[(E)] $I^1\in\im(t_d)$, $\ell^1>2$, and $I^2$ doesn't contain 1 or 2.
 \end{enumerate}
-\begin{itemize}
-\squishlist
-\item Let $\calS^{(0)}=\{\emptyset\}$ be the set which contains only the empty sequence.
-\item Let $\calS^{(1)}$ be the set of length 1 sequences $(I^1)$, where $I^1$ is a sequence satisfying \textup{(A)}.
-%\item For $N\geq2$, let $\calS^{(N)}$ be the set of (length $N$) sequences of sequences $(I^{N},\ldots,I^1)$ satisfying conditions \textup{(A)}-\textup{(C)}, such that $1\notin I^2$, and for which it is not true that ``$1,2\notin I^2,\ I^1\in\im(t_d)\textup{, and $\ell^1>2$}$''.
-\item For $N\geq2$, let $\calS^{(N)}$ be the set of length $N$ sequences $(I^{N},\ldots,I^1)$ of sequences satisfying conditions \textup{(A)}-\textup{(D)} but not \textup{(E)}.
-%\item Write $b(S):=\Q(I^{N})\cdots \Q(I^2)P(I^1)\imath\in H^{(N)}$, for $S=(I^{N},\ldots,I^1)\in \calS^{(N)}$.
-\end{itemize}
-Then we've proven that for all $N\geq0$, $H^{(N)}=\langle b(S)\ |\ S\in\calS^{(N)}\rangle$.
+For $N\geq0$, let $\calS^{(N)}$ be the set of length $N$ sequences $(I^{N},\ldots,I^1)$ of sequences satisfying conditions \textup{(A)}-\textup{(D)} but not \textup{(E)}.
+
+Then we've proven that for all $N\neq1$, $H^{(N)}=\langle b(S)\ |\ S\in\calS^{(N)}\rangle$.
+
+Let $\calS^{(0)}_1=\{\emptyset\}$ and $\calS^{(0)}_1=\calS^{(0)}_2=\calS^{(0)}_3=\emptyset$. For $N\geq1$ define
 \begin{alignat*}{2}
 \calS^{(N)}_0
 &:=
@@ -4015,6 +3984,41 @@ The degree $ (a_{N+1},\ldots,a_1) $ of a sequence $(I^N,\ldots,I^1)\in\calS^{(N)
 & \left( \ell^N,\ell^{N-1}+n^N,2^{\ell^N}\!\left(\ell^{N-2}+n^{N-1}\right),2^{\ell^N+\ell^{N-1}}\!\left(\ell^{N-3}+n^{N-2}\right),\ldots \right.\\
  &\qquad \left.{}\ldots,2^{\ell^N+\cdots+\ell^{3}}(\ell^1+n^2),2^{\ell^N+\cdots+\ell^{2}}(d+n^1+\ell^1+1)-1 \right).
 \end{align*}
+
+
+%Here we include a summary of the $E^2$ pages of the Grothendieck spectral sequences along the first two axes.
+\noindent \textbf{Homological degree zero} on $N^\textup{th}$ gss, for $N\geq0$:
+\begin{alignat*}{2}
+E^{2,N}_{0,a_{N+1},a_N,\ldots,a_1}
+&=
+(\Ind{\LL{N+1}}H^{(N)})_{a_{N+1},\ldots,a_1}%
+\\
+% Left hand side
+% Relation
+E^{2,N}_{0,a_{N+1},a_N,\ldots,a_1}&=
+% Right hand side
+%%%%\begin{cases}
+%%%%\left\langle \Q(I^1)\imath\rule{0mm}{\heightof{$\calS_1^{(N)}$}}\ \middle|\ (I^1)\in\calS^{(1)},\ I^1\notin\im(t_d)\right\rangle,&\textup{if }N=1;\\
+%%%%\left\langle \imath\rule{0mm}{\heightof{$\calS_1^{(N)}$}}\right\rangle\oplus 
+%%%%\left\langle b(S)\ \middle|\ S\in\calS_1^{(N)}\cup\calS_3^{(N)}\right\rangle,&\textup{if }N\geq2.
+%%%%%\\,&\textup{if }
+%%%%\end{cases}
+\left\langle b(S)\ \middle|\ S\in\calS_{013}^{(N)}\right\rangle\\
+\intertext{\textbf{Internal degree zero} on $N^\textup{th}$ gss, for $N\geq1$:}
+E^{2,N}_{a_{N+2},0,a_N,\ldots,a_1}
+&=
+H_{a_{N+2}+1}\left(H^{(N)}_0\right)\phantom{H\!\!\!\!\!\!\!}_{a_N,\ldots,a_1}\\
+H_{*}\left(H^{(N)}_0\right)&=%E\left\langle \imath\rule{0mm}{\heightof{$\calS_1^{(N)}$}}\right\rangle \otimes E\left\langle b(S)\ \middle|\ S\in\calS_1^{(N-1)}\right\rangle\\
+%&\qquad \otimes\Gamma_\textup{ev}\left\langle b(S)\ \middle|\ S\in\calS_2^{(N-1)}\right\rangle\otimes \Gamma\left\langle b(S)\ \middle|\ S\in\calS_3^{(N-1)}\right\rangle\\
+\left(\genfrac{}{}{0pt}{}{E\left\langle \imath\rule{0mm}{\heightof{$\calS_1^{(N)}$}}\right\rangle \otimes E\left\langle b(S)\ \middle|\ S\in\calS_1^{(N-1)}\right\rangle\otimes}{\Gamma_\textup{ev}\left\langle b(S)\ \middle|\ S\in\calS_2^{(N-1)}\right\rangle\otimes \Gamma\left\langle b(S)\ \middle|\ S\in\calS_3^{(N-1)}\right\rangle}\right)
+%%
+%
+%
+%&\left(\genfrac{}{}{0pt}{}{E\left\langle \imath\rule{0mm}{\heightof{$\calS_1^{(N)}$}}\right\rangle \otimes E\left\langle b(S)\ \middle|\ S\in\calS_1^{(N-1)}\right\rangle\otimes}{\Gamma_\textup{ev}\left\langle b(S)\ \middle|\ S\in\calS_2^{(N-1)}\right\rangle\otimes \Gamma\left\langle b(S)\ \middle|\ S\in\calS_3^{(N-1)}\right\rangle}\right)_{a_{N+2}+1,0,a_N,\ldots,a_1}
+\end{alignat*}
+The degree $\|a_{N+2},0,a_{N}\ldots,a_1\|$ of an expression $\prod_j\gamma_{i_j}(x_j)$ is determined by:
+\[a_{{N+2}}=-1+\sum_{\smash j}i_j,\quad (a_N,\ldots,a_1)=(0,\ldots,0,a_{N+2})+\sum_{\smash j}i_j\|x_j\|,\]
+which is to say that $E^{2,N}_{a_{N+2},0,*,*,\ldots}$ is calculated by monomials of total exponent $a_{N+2}+1$, that $a_{N},\ldots,a_2$ are all additive, and that $a_1$ is additive with a $+1$-shift.
 \end{shaded}
 \end{AxisComputationSummary}
 
