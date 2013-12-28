@@ -4020,6 +4020,10 @@ H_{*}\left(H^{(N)}_0\right)&=%E\left\langle \imath\rule{0mm}{\heightof{$\calS_1^
 The degree $\|a_{N+2},0,a_{N}\ldots,a_1\|$ of an expression $\prod_j\gamma_{i_j}(x_j)$ is determined by:
 \[a_{{N+2}}=-1+\sum_{\smash j}i_j,\quad (a_N,\ldots,a_1)=(0,\ldots,0,a_{N+2})+\sum_{\smash j}i_j\|x_j\|,\]
 which is to say that $E^{2,N}_{a_{N+2},0,*,*,\ldots}$ is calculated by monomials of total exponent $a_{N+2}+1$, that $a_{N},\ldots,a_2$ are all additive, and that $a_1$ is additive with a $+1$-shift.
+
+In particular, to calculate the dimension $t$ of a monomial $(b(S))^{2^k}$, one calculates $2^{k+\ell^N+\cdots+\ell^{2}}(d+n^1+\ell^1+1)-1$. As the Adams differential $d_r$ has $r=t_{\textup{tar}}-t_{\textup{src}}+1$, a differential $(b(S_\textup{src}))^{2^{k_\textup{src}}}\mapsto b(S_\textup{tar})$ has
+\[r=2^{\ell_\textup{tar}^N+\cdots+\ell_\textup{tar}^{2}}(d+n_\textup{tar}^1+\ell_\textup{tar}^1+1)-
+    2^{k_\textup{src}+\ell_\textup{src}^N+\cdots+\ell_\textup{src}^{2}}(d+n_\textup{src}^1+\ell_\textup{src}^1+1)+1\]
 \end{shaded}
 \end{AxisComputationSummary}
 
@@ -4428,15 +4432,49 @@ To understand the page number of this differential, note that the equation for c
 \subsection*{Effect so far:}
 \begin{itemise}
 \setlength{\parindent}{.25in}
-\item All $(\SqShift^0)^{n}\SqShift^a\delta_{i_{\ell^1},\ldots,i_1}\imath$ with  $a\leq\ell^1-2$ are gone? Extras are those with $\ell>a\geq\ell-[i_\ell-(d+i_1+\cdots +i_{\ell-1}+2)]$, as written on envelope. Looks better with excess notation:
-\[\ell>a\geq\ell-[e(i_\ell,\ldots,i_1)-(d+2)]\]
+\item Not all $(\SqShift^0)^{n}\SqShift^a\delta_{i_{\ell^1},\ldots,i_1}\imath$ with  $a\leq\ell^1-2$ are gone: extras are those with $\ell>a\geq\ell-[i_\ell-(d+i_1+\cdots +i_{\ell-1}+2)]$. This looks better with excess notation:
+\[\ell>a\geq 2+d+\ell^1-e^1\]
 \item All $\delta_{i_\ell,\ldots,i_1}$ are gone, except the exterior generators which are permanent cycles.
 \end{itemise}
 
 \subsection{Second round}
-Let's try differentials on the class $\SqShift^j\delta_{m_\ell,\ldots,m_1}\imath$, whenever it hasn't been hit (so that $\ell>j\geq\ell-[e(i_\ell,\ldots,i_1)-(d+2)]=2+d+\ell-e$). It turns out that this class supports a $d_?$ which hits $\SqShift^{j-1-(d+\ell-e),d+\ell-e}\delta_{m_{\ell-1},\ldots,m_1}\imath$
+Whenever $\ell>j\geq2+d+\ell-e$, there's a differential
+\[d_{2(d+\ell^1-e^1-1)+1}:\SqShift^j\delta_{m_\ell,\ldots,m_1}\imath\mapsto\SqShift^{j-1-(d+\ell-e),d+\ell-e}\delta_{m_{\ell-1},\ldots,m_1}\imath\]
+To explain the index of the differential:
+\begin{alignat*}{2}
+r
+&=
+2^2(d+n_\textup{tar}^1+\ell^1)-2^1(d+n^1+\ell^1+1)+1%
+\\
+&=
+(2^2-2^1)(d+\ell^1)-(2^1-1)-2^1(n^1-2n^1_\textup{tar})%
+\\
+&=
+(2^2-2^1)(d+\ell^1)-(2^1-1)-2^1(i^{\ell^1}-i^{\ell^1-1}-\cdots -i^{1})%
+\\
+&=
+(2^2-2^1)(d+\ell^1)-(2^1-1)-2^1e^1%
+\end{alignat*}
+We've written this is this way to demonstrate that if we modify this differential by altering both source and target, without changing final sequences, and adding k `doublings and extra operators' to both sides, we get a differential of length
+\[r=(2^{1+k})(d+\ell^1-e^1-1)+1.\]
+It's $r-1$ that does the doubling, as $r-1=\Delta t$.
 
-% The degrees of these two elements are $(\ell,d+n^1+\ell)$ and $(1,a+\ell-1,2(d+n^1-i_\ell+\ell)-1)$. Thus, in order for them to be connected by $d_r$, which has degree $(r,r-1)$, we'll need $r=a$, and $a-1=d+n^1+\ell-2i_\ell-1$, or
+We have postulated the following further differentials:
+\begin{itemise}
+\setlength{\parindent}{.25in}
+\item For $k\geq1$, with $r=2^{1+k}(d+\ell^1-e^1-1)+1$:
+\[\left(\SqShift^j\delta_{m_\ell,\ldots,m_1}\imath\right)^{2^k}\mapsto\SqShift^0\cdots \SqShift^0\SqShift^1\SqShift^{j-1-(d+\ell-e),d+\ell-e}\delta_{m_{\ell-1},\ldots,m_1}\imath\]
+where there are $k$ symbols in `$\SqShift^0\cdots \SqShift^0\SqShift^1$'.
+\item With $r=2^{2}(d+\ell^1-e^1-1)+1$:
+\[\SqShift^0\SqShift^j\delta_{m_\ell,\ldots,m_1}\imath\mapsto\SqShift^0\SqShift^{j-1-(d+\ell-e),d+\ell-e}\delta_{m_{\ell-1},\ldots,m_1}\imath\]
+\item With $r=2^{3}(d+\ell^1-e^1-1)+1$:
+\[\left(\SqShift^0\SqShift^j\delta_{m_\ell,\ldots,m_1}\imath\right)^2\mapsto\SqShift^0\SqShift^0\SqShift^{j-1-(d+\ell-e),d+\ell-e}\delta_{m_{\ell-1},\ldots,m_1}\imath\]
+\item With $r=2^{3}(d+\ell^1-e^1-1)+1$ (all in excess notation):
+\[\SqShift^0\SqShift^0\SqShift^j\delta_{m_\ell,\ldots,m_1}\imath\mapsto\SqShift^{1,0}\SqShift^{j-1-(d+\ell-e),d+\ell-e}\delta_{m_{\ell-1},\ldots,m_1}\imath\]
+\item When $j=4$ and $\ell^1>5$ you seem to get ($r=2^{2}(d+\ell^1-e^1-1)+1$)
+\[\SqShift^{1,j}\delta_{m_\ell,\ldots,m_1}\imath\mapsto\SqShift^{1,j-1-(d+\ell-e),d+\ell-e}\delta_{m_{\ell-1},\ldots,m_1}\imath\]
+\end{itemise}
+
 
 \subsection{A discussion of $t-s$}
 The degree $ (a_{N+1},\ldots,a_1) $ of a sequence $(I^N,\ldots,I^1)\in\calS^{(N)}$ is:
