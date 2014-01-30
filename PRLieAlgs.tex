@@ -4414,8 +4414,10 @@ Now $i_\ell\geq i_{\ell-1}+\cdots +i_2+2i_1$ with equality iff the sequence only
 \setlength{\parindent}{.25in}
 \item $a=1$: $i_\ell$ is a top operation. That (E) cannot hold shows that the only example of this (with $I^2$ empty) is $\delta_{5,2}\imath$ ($\delta_{2}\imath$ is a fringe case).
 \item $2\leq a\leq\ell-2$: $i_\ell$ is sub-top (by a distance of $a-1$), with excess profile not 0102 or 0002.
-\item $a=\ell-1$: excess profile 0102.
-\item $a=\ell$: excess profile 0002.
+\item $a=\ell-1$: occurs iff $e^1=d+1$. These are the classes that have excess one too high.
+\item $a\geq\ell$:  occurs iff $e^1\leq d$. These classes are supposed to be exterior in the abutment, so you want them to have their squares hit (and never to fire).
+
+One wonders: what will hit the nonsensical class $\SqShift^{\ell-1}\delta_{i_{\ell-1},\ldots,i_1}\imath$? It should be $\delta_{i_{\ell},\ldots,i_1}\imath$ so that $d-\sum_{i=1}^\ell m_i=-1$. Thus, all of the abutment classes can have their squares hit by an obvious candidate.
 \end{itemise}
 Now, of course, $\SqShift^{\ell-1}\delta_{i_{\ell-1},\ldots,i_1}\imath$ isn't unstable, and $\SqShift^{\ell}\delta_{i_{\ell-1},\ldots,i_1}\imath$ is catastrophically non-unstable. Whenever we see $\SqShift^{\ell-1}\delta_{i_{\ell-1},\ldots,i_1}\imath$, replace it with $(\delta_{i_{\ell-1},\ldots,i_1}\imath)^2$, and hope never to see the even worse version. Here's a collection of differentials we conjecture:
 \[\cdots, \delta_{20,10,5,2}\overset{d_{3}}{\to}(\delta_{10,5,2})^2,\ 
@@ -4537,6 +4539,9 @@ t_r-s_r
 \section{Propagation of differentials}
 I believe that I've found all of the differentials in the spectral sequence. This appears to be being verified by \verb|investigate_tree(1)|,..,\verb|investigate_tree(3)|. I think that one does all the differentials one can, subject to the below constraints, deciding whether the target should add or app according to a preference for adding. The algorithm is coded in \verb|possible_upgrades(...)|.
 
+What's the method? First, see what we can add to the source --- try to add $\SqShift^{k_0}$ for each $k_0>0$. One calculates $k_1$ under an (add,add), and if it's nonnegative, one adds it in. If $k_1<0$, swap to (add,app) mode, and do that.
+
+Next, unless $\ell^{N_1}+\ell^{N_1-1}-e^{N_1}-(\ell^{N_0}+\ell^{N_0-1}-e^{N_0})-1=0$ we just stop. If this equality holds, we simply see what we can app to the source --- we'll need $j_0$ to be positive and to not increase $e^{N_0}$ as high as $\ell^{N_0-1}$. Other than this constraint, we go for the (app,add), or if this fails, the (app,app).
 
 \subsection{The effect of adding a new bar containing `$\SqShift^k$'}
 \[t_{N_0+1}-s_{N_0+1}=
@@ -4594,6 +4599,20 @@ The relation $B_1-B_0=1$ becomes
 \[j_1=j_0+\ell^{N_1}+\ell^{N_1-1}-{e}^{N_1}-(\ell^{N_0}+\ell^{N_0-1}-{e}^{N_0})-1\]
 That said, I've only ever witnessed these when $j_1=j_0$, so maybe these are `rare'.
 
+\subsection{Can one strip off squares?}
+Does (app,add)-propagation ever add a top $\SqShift^{k_1}=\ell^{N_1}-1$ to the target? Well, for this we would need
+\[0=j_0-(\ell^{N_0}+\ell^{N_0-1}-{e}^{N_0})=(j_0+e^{N_0}-\ell^{N_0-1})-\ell^{N_0}\]
+which is a negative number minus a positive one. This cannot occur.
+
+Does (add,add)-propagation ever add a top $\SqShift^{k_1}$ to the target? Well, for this we would need
+\[0=k_0-\ell^{N_0}\]
+which is negative as well, impossible.
+
+What about add-propagation adding a top $\SqShift^{k_1}$ to the source? That is $k_0=\ell^{N_0}-1$. If so, then
+\[k_1=\ell^{N_1}-2\]
+which works just fine.
+
+I guess this last one isn't such a big deal, since we're interested mainly in seeing whether things are fundamentally sources or targets --- the answer to that question is invariant under stripping off a lonesome top $\SqShift^{k}$.
 \subsection{iterating the relation}
 \begin{alignat*}{2}
 t_N-s_N
