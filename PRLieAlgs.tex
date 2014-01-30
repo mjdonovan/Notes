@@ -10,7 +10,7 @@
 \excludeversion{GrothendieckSpectralSequencestake2}
 \excludeversion{convergenceOLD}
 \excludeversion{hiltonMilnorQuestionable}
-\def\excludeversion#1{\includeversion{#1}}
+%\def\excludeversion#1{\includeversion{#1}}
 \excludeversion{Frontmatters}
 \excludeversion{Endmatter}
 \excludeversion{AdamsDerivation}
@@ -4533,6 +4533,80 @@ t_r-s_r
 &\geq
 2^{\ell^r}(t_{r-1}-s_{r-1})+(2^{\ell^r}-1)\,\ell^r
 \text{\ for $2\leq r\leq N$.}
+\end{alignat*}
+\subsection{The effect of applying $\SqShift^0$}
+\[t_N-s_N=
+2(t_{N-1}-s_{N-1})+\ell^{N-1}\]
+\subsection{The effect of adding a bar, `$\SqShift^k$'}
+\[t_{N_0+1}-s_{N_0+1}=
+2(t_{N_0}-s_{N_0})+\ell^{N_0}-k\]
+Thus, the bonus is $B_0=\ell^{N_0}-k$.
+
+\subsection{The effect of appending `$\SqShift^j$'}
+\begin{alignat*}{2}
+t_{N_1}'
+&=
+2(t_{N_1}+1)-1%
+\\
+s_{N_1}'&=
+2(s_{N_1}-(\ell^{N_1}+\ell^{N_1-1}+n^{N_1}))+(\ell^{N_1}+1)+\ell^{N_1-1}+{n'}^{N_1}\\
+t_{N_1}'-s_{N_1}'&=2(t_{N_1}-s_{N_1})+2(\ell^{N_1}+\ell^{N_1-1}+n^{N_1})-(\ell^{N_1}+\ell^{N_1-1}+{n'}^{N_1})\\
+&=2(t_{N_1}-s_{N_1})+\ell^{N_1}+\ell^{N_1-1}-({n'}^{N_1}-2n^{N_1})\\
+&=2(t_{N_1}-s_{N_1})+\ell^{N_1}+\ell^{N_1-1}-{e'}^{N_1}\\
+&=2(t_{N_1}-s_{N_1})+\ell^{N_1}+\ell^{N_1-1}-{e}^{N_1}-j\\
+\end{alignat*}
+Thus, the bonus is $B_1=\ell^{N_1}+\ell^{N_1-1}-{e}^{N_1}-j$.
+Here, we've used the important fact that the excess satisfies $e=n-2n(1\textup{ removed})$.
+\subsection{$(\textup{add},\textup{app})$-propagation}
+Suppose that there's a differential from 0 to 1 so that the source dimension is one larger than the target dimension:
+\[d_1-d_0+1=0\]
+Then we'll need that the bonuses $B_0$ and $B_1$ satisfy
+\[1=d'_1-d'_0+2=2(d_1-d_0+1)+B_1-B_0=B_1-B_0.\]
+That is,
+\[\ell^{N_1}+\ell^{N_1-1}-{e}^{N_1}-j-\ell^{N_0}+k=1\]
+In particular:
+\[j_1=k_0+\ell^{N_1}+\ell^{N_1-1}-{e}^{N_1}-\ell^{N_0}-1\]
+
+\subsection{$(\textup{add},\textup{add})$-propagation}
+The relation $B_1-B_0=1$ becomes
+\[\ell^{N_1}-k_1-(\ell^{N_0}-k_0)=1\]
+\[k_1=k_0+\ell^{N_1}-\ell^{N_0}-1\]
+
+\subsection{$(\textup{app},\textup{add})$-propagation}
+The relation $B_1-B_0=1$ becomes
+\[\ell^{N_1}-k_1-(\ell^{N_0}+\ell^{N_0-1}-{e}^{N_0}-j_0)=1\]
+\[k_1=j_0+\ell^{N_1}-(\ell^{N_0}+\ell^{N_0-1}-{e}^{N_0})-1\]
+I've only witnessed these when $j_1=j_0$ when attempting app-app. In this case, one finds a negative gain: $e^{N_1}-\ell^{N_1-1}$.
+\subsection{$(\textup{app},\textup{app})$-propagation}
+The relation $B_1-B_0=1$ becomes
+\[\ell^{N_1}+\ell^{N_1-1}-{e}^{N_1}-j_1-(\ell^{N_0}+\ell^{N_0-1}-{e}^{N_0}-j_0)=1\]
+\[j_1=j_0+\ell^{N_1}+\ell^{N_1-1}-{e}^{N_1}-(\ell^{N_0}+\ell^{N_0-1}-{e}^{N_0})-1\]
+That said, I've only ever witnessed these when $j_1=j_0$, so maybe these are `rare'.
+
+For example, [[1,0],[1,0],[1,1,0]]$\to$[[1,2,0],[1,1,1,0]] came from 
+[[0],[1,0],[1,1,0]]$\to$[[2,0],[1,1,1,0]]
+
+\subsection{iterating the relation}
+\begin{alignat*}{2}
+t_N-s_N
+&=
+2^{\ell^N}(t_{N-1}-s_{N-1})+(2^{\ell^N}-1)(\ell^{N-1}+1)-[\ell^{N}+n^N]%
+\\
+&=
+2^{\ell^N}\left(2^{\ell^{N-1}}(t_{N-2}-s_{N-2})+(2^{\ell^{N-1}}-1)(\ell^{N-2}+1)-[\ell^{N-1}+n^{N-1}]\right)+(2^{\ell^N}-1)(\ell^{N-1}+1)-[\ell^{N}+n^N]%
+%
+\\
+&=
+2^{\ell^N}\left((2^{\ell^{N-1}}-1)(\ell^{N-2}+1)-[\ell^{N-1}+n^{N-1}]\right)+(2^{\ell^N}-1)(\ell^{N-1}+1)-[\ell^{N}+n^N]%
+%
+\\
+% Left hand side
+% Relation
+&=
+% Right hand side
+-(2^{\ell^N}n^{N-1}+n^N)+(2^{\ell^N}(2^{\ell^{N-1}}-1)\ell^{N-2}+(2^{\ell^{N}}-1)\ell^{N-1}+\ell^N)
++(2^{\ell^N}+2^{\ell^{N-1}}-2)►% Comment
+&\qquad&\text{(ᾮ)}©
 \end{alignat*}
 
 
