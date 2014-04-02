@@ -10,7 +10,7 @@
 \excludeversion{GrothendieckSpectralSequencestake2}
 \excludeversion{convergenceOLD}
 \excludeversion{hiltonMilnorQuestionable}
-%\def\excludeversion#1{\includeversion{#1}}
+\def\excludeversion#1{\includeversion{#1}}
 \excludeversion{Frontmatters}
 \excludeversion{Endmatter}
 \excludeversion{AdamsDerivation}
@@ -25,7 +25,7 @@
 \excludeversion{KoszulComplexes_n>1}
 \excludeversion{KoszulComplexes1}
 \excludeversion{DerivedFunctorsLowDimension}
-\excludeversion{PRlieKoszulComplexCalculation}
+\includeversion{PRlieKoszulComplexCalculation}
 \excludeversion{LieLambdaStructureOnKoszul}
 \excludeversion{SequenceOfSequencesIntro}
 \excludeversion{KoszulSequenceCombinatorics}
@@ -34,7 +34,7 @@
 \excludeversion{AxisComputationSummary}
 \excludeversion{VanishingLines}
 \excludeversion{conjectured differentials}
-\includeversion{grothendieck collapse}
+\excludeversion{grothendieck collapse}
 
 \newcommand{\GS}[1]{\scrE^{#1}}
 \newcommand{\GpS}[1]{\scrE^{#1}_\star}
@@ -100,6 +100,9 @@
 \newcommand{\CommSteen}{\calA(\Comm)}
 \newcommand{\deltaAlgebra}{\Delta}
 \newcommand{\DyerLashov}{R}
+
+\newcommand{\dual}{\,\check{\,}}
+\newcommand{\dualLie}{\scrL\dual}
 
 \newcommand{\minDim}{m}
 \newcommand{\minDimP}{\overline{m}}
@@ -2975,6 +2978,25 @@ This is the obvious restriction of May's $\overline{X}$, see page 141 of ``The c
 He writes the differential on $f=\prod_{i=1}^{n}\gamma_{z_i}(y_i)$ as
 \[d(f)=\left(\sum_{i=1}^{n}f_iy_i\right)+ \sum_{i=1}^{n}f_{i,i}\gamma_1(\restn{(y_i)})+\sum_{1\leq i<j\leq n}f_{i,j}\gamma_1([y_i,y_j]).\]
 Here, the parenthetical term vanishes in $\Koverline$ --- it's there in case we're using nontrivial coefficients.
+
+\subsection{The Koszul homology complex $\overline{K}^c(\dualLie)\circ G$}
+Suppose one has a corestricted co-Lie coalgebra $G$, that is, a left comodule $G$ over the cooperad $\dualLie$, which as a symmetric sequence is concentrated in degree zero. We'd like to see that this complex is dual to May's complex for the homology of the restricted Lie algebra $G\dual$. We'll assume that $G$ is finite dimensional (or graded and locally finite).
+
+The reduced Koszul construction $\overline{K}^c(\dualLie)$ itself has no differential (as it is concentrated in degrees $\overline{K}^c_{-a+1}(\dualLie)(a)$). Thus, the differential of $\overline{K}^c_{-a+1}(I,\dualLie,G)$ is given solely by application of the coaction $G\to\dualLie\circ G$. However, understanding that only reduced \emph{binary} trees are nonzero in $\overline{K}^c(\dualLie)$, identifying $G$ with $G(0)$, only the summand $G\to(\dualLie(2)\otimes G\otimes G)_{\Sigma_2}$ of the coaction is not sent to zero. This is equivalent to the map $\Delta:G\to(G\otimes G)_{\Sigma_2}$ which defines the corestricted co-Lie coalgebra $G$.
+
+Thus, the Koszul complex is given by the symmetric algebra: $\overline{K}^c_{-n+1}(I,\dualLie,G)=(G^{\otimes n})_{\Sigma_n}$, and the differential $(G^{\otimes n})_{\Sigma_n}\to (G^{\otimes n+1})_{\Sigma_{n+1}}$ is induced by the sum of the maps $(G^{\otimes i-1}\otimes\Delta\otimes G^{\otimes n-i})$ for $1\leq i\leq n$. This map evidently satisfies the Liebnitz rule for the multiplication on the symmetric algebra.
+
+For notational simplicity, let $L=G\dual$. Then the dual complex is $(L^{\otimes n})^{\Sigma_n}$, with differential induced $(L^{\otimes n+1})^{\Sigma_{n+1}}\to (L^{\otimes n})^{\Sigma_n}$ is induced by the sum of the maps $L^{\otimes i-1}\otimes\lambda\otimes L^{\otimes n-i}$ for $1\leq i\leq n$, where $\lambda:(L\otimes L)^{\Sigma_2}\to L$ is the structure map for the restricted Lie algebra $L$. This map is tricky to understand, but at very least, it's a coderivation for the coproduct on this divided power algebra.
+
+Now May's complex is a differential on the same underlying vector space, the divided power algebra, after a shift in homological dimension. Our goal is simply to show that the differentials coincide. The challenge is mainly in taming the notation. We'll calculate the Koszul differential on $e:=\prod_{i=1}^k\gamma_{r_i}(x_1)$, where $\sum r_i=n+1$. This element is the class
+\[e=\sum_{p\in{n+1\choose r_1,\ldots,r_k}}[x_{p_1}|\cdots| x_{p_{n+1}}],\]
+where the sum is taken over sequences $p=(p_1,\ldots,p_{n+1})$ in which $i$ appears $r_i$ times (for $1\leq i\leq k$), and we use bars instead of tensor symbols for compactness. We can rewrite $e$ as a sum of two terms:
+\[\sum_{a=1}^n\sum_{i=1}^k\sum_{p\in{n-1\choose \ldots,r_i-2,\ldots}}[x_{p_1}|\cdots | x_{p_{a-1}}| x_i| x_i| x_{p_{a}}|  \cdots| x_{p_{n-1}}], \textup{ and}\]
+\[\sum_{a=1}^n\sum_{i<j}\sum_{p\in{n-1\choose \ldots,r_i-1,\ldots,r_j-1,\ldots}}[x_{p_1}|\cdots | x_{p_{a-1}}| (x_i| x_j+x_j| x_i)| x_{p_{a}}|  \cdots| x_{p_{n-1}}].\]
+As $\lambda(x_i\otimes x_i)=\restn{(x_i)}$ and $\lambda(x_i\otimes x_j+x_j\otimes x_i)=[x_i,x_j]$, the images of these two summands under the differential are
+\[\sum_{a=1}^n\sum_{i=1}^k\sum_{p\in{n-1\choose \ldots,r_i-2,\ldots}}[x_{p_1}|\cdots | x_{p_{a-1}}| \restn{(x_i)}| x_{p_{a}}|  \cdots| x_{p_{n-1}}], \textup{ and}\]
+\[\sum_{a=1}^n\sum_{i<j}\sum_{p\in{n-1\choose \ldots,r_i-1,\ldots,r_j-1,\ldots}}[x_{p_1}|\cdots | x_{p_{a-1}}| [x_i,x_j]| x_{p_{a}}|  \cdots| x_{p_{n-1}}].\]
+These are the two components of the formula for May's differential (with trivial coefficients).
 \end{PRlieKoszulComplexCalculation}
 
 \begin{LieLambdaStructureOnKoszul}
