@@ -25,6 +25,7 @@
 \excludeversion{KoszulComplexes_n>1}
 \excludeversion{KoszulComplexes1}
 \excludeversion{DerivedFunctorsLowDimension}
+\excludeversion{PRlieKoszulComplexCalculationOriginalWithSSeq}
 \includeversion{PRlieKoszulComplexCalculation}
 \excludeversion{LieLambdaStructureOnKoszul}
 \excludeversion{SequenceOfSequencesIntro}
@@ -102,7 +103,10 @@
 \newcommand{\DyerLashov}{R}
 
 \newcommand{\dual}{\,\check{\,}}
-\newcommand{\dualLie}{\scrL\dual}
+\newcommand{\LieOperad}{\scrL}
+\newcommand{\dualLieOperad}{\LieOperad\dual}
+\newcommand{\CommOperad}{\scrC}
+\newcommand{\dualCommOperad}{\CommOperad\dual}
 
 \newcommand{\minDim}{m}
 \newcommand{\minDimP}{\overline{m}}
@@ -2876,7 +2880,7 @@ In this diagram, $\Ind{\nontop{}}$ does not change the underlying vector space i
 There is a complex that computes $\derived\Ind{\PRLie{}}$ --- it interpolates between the Cartan-Eilenberg resolution for the homology of Lie algebras, and May's $\overline{X}$ complex for the homology of restricted Lie algebraa.
 \end{DerivedFunctorsLowDimension}
 
-\begin{PRlieKoszulComplexCalculation}
+\begin{PRlieKoszulComplexCalculationOriginalWithSSeq}
 \subsection{Partially restricted Lie algebra homology}
 We're interested in derived abelianization of partially restricted Lie algebras. For a PR Lie algebra $L$, write $L^r$ for the ideal of restrictable elements and $L^u$ for the linear subspace of unrestrictable elements (which is well defined as long as restrictability is defined by a degree condition). Write $UL$ for the PR universal enveloping algebra of $L$ --- this is the initial associative algebra with a PRL map from $L$. To make sense of partial restrictions, recall that restrictability is always defined by nonvanishing of certain gradings.
 
@@ -2979,12 +2983,62 @@ He writes the differential on $f=\prod_{i=1}^{n}\gamma_{z_i}(y_i)$ as
 \[d(f)=\left(\sum_{i=1}^{n}f_iy_i\right)+ \sum_{i=1}^{n}f_{i,i}\gamma_1(\restn{(y_i)})+\sum_{1\leq i<j\leq n}f_{i,j}\gamma_1([y_i,y_j]).\]
 Here, the parenthetical term vanishes in $\Koverline$ --- it's there in case we're using nontrivial coefficients.
 
-\subsection{The Koszul homology complex $\overline{K}^c(\dualLie)\circ G$}
-Suppose one has a corestricted co-Lie coalgebra $G$, that is, a left comodule $G$ over the cooperad $\dualLie$, which as a symmetric sequence is concentrated in degree zero. We'd like to see that this complex is dual to May's complex for the homology of the restricted Lie algebra $G\dual$. We'll assume that $G$ is finite dimensional (or graded and locally finite).
+\end{PRlieKoszulComplexCalculationOriginalWithSSeq}
+\begin{PRlieKoszulComplexCalculation}
 
-The reduced Koszul construction $\overline{K}^c(\dualLie)$ itself has no differential (as it is concentrated in degrees $\overline{K}^c_{-a+1}(\dualLie)(a)$). Thus, the differential of $\overline{K}^c_{-a+1}(I,\dualLie,G)$ is given solely by application of the coaction $G\to\dualLie\circ G$. However, understanding that only reduced \emph{binary} trees are nonzero in $\overline{K}^c(\dualLie)$, identifying $G$ with $G(0)$, only the summand $G\to(\dualLie(2)\otimes G\otimes G)_{\Sigma_2}$ of the coaction is not sent to zero. This is equivalent to the map $\Delta:G\to(G\otimes G)_{\Sigma_2}$ which defines the corestricted co-Lie coalgebra $G$.
+\section{Corestricted Lie coalgebras }
+We'll define a corestricted Lie coalgebra to be a left comodule $G$ over the cooperad $\dualLieOperad$, which as a symmetric sequence is concentrated in degree zero. That is, a coalgebra for the comonad $S(\dualLieOperad)$. Instead of working simply with a corestricted Lie coalgebra, we'll work with a left $\dualLieOperad$-comodule $R$.
+%The purpose of this section will be to identify the Koszul homology of such with the May complex for the cohomology of $G^$
 
-Thus, the Koszul complex is given by the symmetric algebra: $\overline{K}^c_{-n+1}(I,\dualLie,G)=(G^{\otimes n})_{\Sigma_n}$, and the differential $(G^{\otimes n})_{\Sigma_n}\to (G^{\otimes n+1})_{\Sigma_{n+1}}$ is induced by the sum of the maps $(G^{\otimes i-1}\otimes\Delta\otimes G^{\otimes n-i})$ for $1\leq i\leq n$. This map evidently satisfies the Liebnitz rule for the multiplication on the symmetric algebra.
+Our goal will be to construct a commuting diagram
+\[\xymatrix@R=4mm{
+\CommOperad\circ \overline{K}^c(\dualLieOperad)\circ R
+\ar[d]^-{\mu_{\CommOperad}\circ R}
+&%r1c1
+\Omega\circ \overline{B}(\dualLieOperad)\circ R
+\ar@{->>}[l]_-{\rho\circ\pi\circ R}
+\ar[d]^-{\sigma\circ R}
+&%r1c2
+\Omega\circ \overline{N}(\dualLieOperad)\circ R
+\ar[d]^-{f}
+\ar@{->>}[l]_-{\Omega\circ\oldphi\circ R}
+\\%r1c3
+\overline{K}^c(\dualLieOperad)\circ R
+&%r1c1
+\overline{B}(\dualLieOperad)\circ R
+\ar@{->>}[l]_-{\pi\circ R}
+&%r1c2
+\overline{N}(\dualLieOperad)\circ R
+\ar@{->>}[l]_-{\oldphi\circ R}
+}\]
+of dg symmetric modules, in which the three vertical maps are all structure maps for left modules over either the commutative operad $\CommOperad$ or the free operad $\Omega$ on a binary generator.
+
+The objects in this diagram are defined as follows. The operad $\Omega$ is free on the dg symmetric sequence $(0,0,\F_2[\Sigma_2]\langle x\rangle,0,\ldots)$, where the generating binary operation $x$ has grading $-1$. The operad $\CommOperad$ is the commutative operator, with binary generator in degree -1.  This is isomorphic to the Koszul construction $\overline{K}^c(\dualLieOperad)$. Moreover, the projection $\pi:\overline{K}^c(\dualLieOperad)\to \overline{K}^c(\dualLieOperad)$ sends all non-binary trees to zero, and all binary trees to the generator of the relevant level of $\overline{K}^c(\dualLieOperad)$.
+
+The cosimplicial cobar construction $\overline{N}(\dualLieOperad)\circ R=N(I,\dualLieOperad,R)$ is the  normalization (formed by taking the kernel of the codegeneracies) of the cosimplicial symmetric sequence $C^n(I,\dualLieOperad,R):=I\circ (\dualLieOperad)^{\circ n}\circ R$ formed using the left comodule structure of $R$ and the right comodule structure of $I$ given by the unique cooperad map $I\to \dualLieOperad$. We think of the normalization as living in negative degrees: $N_{-n}(I,\dualLieOperad,R)\subset C^n(I,\dualLieOperad,R)$.
+
+Now $\phi:\overline{N}(\dualLieOperad)\to \overline{B}(\dualLieOperad)$ is the delevelization map. It sends all trees to zero that do not have exactly one non-unit vertex in each level (there are $n$ levels in a tree in $\overline{N}_{-n}(\dualLieOperad)$). For trees which are not sent to zero for this reason, $\phi$ strips away the nonunit vertices (and adds in the necessary desuspension operators) to obtain an element of $\overline{B}(\dualLieOperad)$.
+
+All that remains is to define the maps $\sigma$ and $f$. For a symmetric sequence $S$, a left module structure map $\Omega\circ S\to S$ is equivalent to maps $S(n)\otimes S(m)\to S(n+m)$ for each $n,m\geq0$. If $S$ is a dg symmetric sequence, then $S$ becomes a dg module iff these maps are dg. Anyway, we let $\sigma$ correspond to the maps $\overline{B}(\dualLieOperad)(n)\otimes \overline{B}(\dualLieOperad)(m)\to \overline{B}(\dualLieOperad)(n+m)$ which take a pair of trees and attaches them to the entries of the `Y' shaped tree with $l\dual$ at the vertex (where $l\dual$ is the generator of $\dualLieOperad(2)$). As $l\dual$ is appropriately primitive, this pairing satisfies the Liebnitz rule.
+
+It's a little trickier to define $f$. 
+%: one uses the cosimplicial Alexander-Whitney map. Moreover,  That is, writing $N_{-n}=N_{-n}(I,\dualLieOperad,R)$, etc.:
+There is a pairing
+\[\psi:(C^p(I,\dualLieOperad,R))^{\otimes 2}\to C^{p+1}(I,\dualLieOperad,R)\]
+which takes a pair of trees and attaches them to the entries of the `Y' shaped tree with $l\dual$ at the vertex. One must add a level for the new vertex, which causes the shift. Moreover, the map $\psi$ restricts to Moore complexes, as it preserves the property of `having at least one non-unit vertex in each level'. Thus we obtain a map
+\[\psi:(N_{-p}(I,\dualLieOperad,R))^{\otimes 2}\to N_{-p-1}(I,\dualLieOperad,R)\]
+ The left action of $\Omega$ on $N(I,\dualLieOperad,R)$ is then given by the composite
+\[(N(I,\dualLieOperad,R)^{\otimes 2})_{-p}\overset{\textup{AW}}{\to} (N_{-p}(I,\dualLieOperad,R))^{\otimes 2}\overset{\psi}{\to}N_{-p-1}(I,\dualLieOperad,R).\]
+By formal properties of the Alexander-Whitney map, and again as $l\dual$ is appropriately primitive, this pairing satisfies the Liebnitz rule.
+
+All that remains, I suppose, is to show that the right hand square commutes...
+
+\section{The Koszul homology complex $\overline{K}^c(\dualLieOperad)\circ G$}
+Suppose one has a corestricted co-Lie coalgebra $G$, that is, a left comodule $G$ over the cooperad $\dualLieOperad$, which as a symmetric sequence is concentrated in degree zero. We'd like to see that this complex is dual to May's complex for the homology of the restricted Lie algebra $G\dual$. We'll assume that $G$ is finite dimensional (or graded and locally finite).
+
+The reduced Koszul construction $\overline{K}^c(\dualLieOperad)$ itself has no differential (as it is concentrated in degrees $\overline{K}^c_{-a+1}(\dualLieOperad)(a)$). Thus, the differential of $\overline{K}^c_{-a+1}(I,\dualLieOperad,G)$ is given solely by application of the coaction $G\to\dualLieOperad\circ G$. However, understanding that only reduced \emph{binary} trees are nonzero in $\overline{K}^c(\dualLieOperad)$, identifying $G$ with $G(0)$, only the summand $G\to(\dualLieOperad(2)\otimes G\otimes G)_{\Sigma_2}$ of the coaction is not sent to zero. This is equivalent to the map $\Delta:G\to(G\otimes G)_{\Sigma_2}$ which defines the corestricted co-Lie coalgebra $G$.
+
+Thus, the Koszul complex is given by the symmetric algebra: $\overline{K}^c_{-n+1}(I,\dualLieOperad,G)=(G^{\otimes n})_{\Sigma_n}$, and the differential $(G^{\otimes n})_{\Sigma_n}\to (G^{\otimes n+1})_{\Sigma_{n+1}}$ is induced by the sum of the maps $(G^{\otimes i-1}\otimes\Delta\otimes G^{\otimes n-i})$ for $1\leq i\leq n$. This map evidently satisfies the Liebnitz rule for the multiplication on the symmetric algebra.
 
 For notational simplicity, let $L=G\dual$. Then the dual complex is $(L^{\otimes n})^{\Sigma_n}$, with differential induced $(L^{\otimes n+1})^{\Sigma_{n+1}}\to (L^{\otimes n})^{\Sigma_n}$ is induced by the sum of the maps $L^{\otimes i-1}\otimes\lambda\otimes L^{\otimes n-i}$ for $1\leq i\leq n$, where $\lambda:(L\otimes L)^{\Sigma_2}\to L$ is the structure map for the restricted Lie algebra $L$. This map is tricky to understand, but at very least, it's a coderivation for the coproduct on this divided power algebra.
 
