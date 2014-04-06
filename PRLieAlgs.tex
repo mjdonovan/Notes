@@ -10,7 +10,7 @@
 \excludeversion{GrothendieckSpectralSequencestake2}
 \excludeversion{convergenceOLD}
 \excludeversion{hiltonMilnorQuestionable}
-\def\excludeversion#1{\includeversion{#1}}
+%\def\excludeversion#1{\includeversion{#1}}
 \excludeversion{Frontmatters}
 \excludeversion{Endmatter}
 \excludeversion{AdamsDerivation}
@@ -2986,7 +2986,7 @@ Here, the parenthetical term vanishes in $\Koverline$ --- it's there in case we'
 \end{PRlieKoszulComplexCalculationOriginalWithSSeq}
 \begin{PRlieKoszulComplexCalculation}
 
-\section{Corestricted Lie coalgebras }
+\subsection{Corestricted Lie coalgebras }
 We'll define a corestricted Lie coalgebra to be a left comodule $G$ over the cooperad $\dualLieOperad$, which as a symmetric sequence is concentrated in degree zero. That is, a coalgebra for the comonad $S(\dualLieOperad)$. Instead of working simply with a corestricted Lie coalgebra, we'll work with a left $\dualLieOperad$-comodule $R$.
 %The purpose of this section will be to identify the Koszul homology of such with the May complex for the cohomology of $G^$
 
@@ -3013,7 +3013,7 @@ Our goal will be to construct a commuting diagram
 }\]
 of dg symmetric modules, in which the three vertical maps are all structure maps for left modules over either the commutative operad $\CommOperad$ or the free operad $\Omega$ on a binary generator.
 
-The objects in this diagram are defined as follows. The operad $\Omega$ is free on the dg symmetric sequence $(0,0,\F_2[\Sigma_2]\langle x\rangle,0,\ldots)$, where the generating binary operation $x$ has grading $-1$. The operad $\CommOperad$ is the commutative operator, with binary generator in degree -1.  This is isomorphic to the Koszul construction $\overline{K}^c(\dualLieOperad)$. Moreover, the projection $\pi:\overline{K}^c(\dualLieOperad)\to \overline{K}^c(\dualLieOperad)$ sends all non-binary trees to zero, and all binary trees to the generator of the relevant level of $\overline{K}^c(\dualLieOperad)$.
+The objects in this diagram are defined as follows. The operad $\Omega$ is free on the dg symmetric sequence $(0,0,\F_2[\Sigma_2]\langle x\rangle,0,\ldots)$, where the generating binary operation $x$ has grading $-1$. The operad $\CommOperad$ is the commutative operator, with binary generator in degree $-1$.  This is isomorphic to the Koszul construction $\overline{K}^c(\dualLieOperad)$. Moreover, the projection $\pi:\overline{K}^c(\dualLieOperad)\to \overline{K}^c(\dualLieOperad)$ sends all non-binary trees to zero, and all binary trees to the generator of the relevant level of $\overline{K}^c(\dualLieOperad)$.
 
 The cosimplicial cobar construction $\overline{N}(\dualLieOperad)\circ R=N(I,\dualLieOperad,R)$ is the  normalization (formed by taking the kernel of the codegeneracies) of the cosimplicial symmetric sequence $C^n(I,\dualLieOperad,R):=I\circ (\dualLieOperad)^{\circ n}\circ R$ formed using the left comodule structure of $R$ and the right comodule structure of $I$ given by the unique cooperad map $I\to \dualLieOperad$. We think of the normalization as living in negative degrees: $N_{-n}(I,\dualLieOperad,R)\subset C^n(I,\dualLieOperad,R)$.
 
@@ -3031,9 +3031,39 @@ which takes a pair of trees and attaches them to the entries of the `Y' shaped t
 \[(N(I,\dualLieOperad,R)^{\otimes 2})_{-p}\overset{\textup{AW}}{\to} (N_{-p}(I,\dualLieOperad,R))^{\otimes 2}\overset{\psi}{\to}N_{-p-1}(I,\dualLieOperad,R).\]
 By formal properties of the Alexander-Whitney map, and again as $l\dual$ is appropriately primitive, this pairing satisfies the Liebnitz rule.
 
-All that remains, I suppose, is to show that the right hand square commutes...
+All that remains is to show that the right hand square commutes, for which it is enough to show that the map $\oldphi\circ R$ commutes with the products corresponding to $x\in\Omega(2)$ induced by the maps $f$ and $\sigma\circ R$. Thus, we consider a pair of elements $t_1\in \overline{N}_{-r}(\dualLieOperad)\circ R$ and $t_2\in \overline{N}_{-s}(\dualLieOperad)\circ R$, where $r+s=p$. Then $\textup{AW}(t_1\otimes t_2)=(\delta^{p}\cdots \delta^{s+1}t_1)\otimes (\delta^{s-1}\cdots \delta^{0}t_2)$, which is to say that on $t_1$ one applies the coaction map $\rho:R\to\dualLieOperad\circ R$, $r$ times, and on $t_2$ one applies the coaction map $I\to I\circ \dualLieOperad$, $s$ times. The second of these processes in uninteresting, while repeated application of $\rho$ is a complicated process. However, after composing with $\psi$ (which is to finish applying $f$), and applying $\oldphi\circ R$, we will drop all summands in which application of $\rho^r$ introduces a non-unit vertex. The axiom $(\epsilon\circ R) \rho=1$ for a left coaction demonstrates that in the only summand in $\delta^{p}\cdots \delta^{s+1}t_1$ in which the created rows contain only unit vertices is the obvious summand. Thus, after applying the delevelization function $\oldphi$, all the extra material coming from application of $\textup{AW}$ is sent to zero.
 
-\section{The Koszul homology complex $\overline{K}^c(\dualLieOperad)\circ G$}
+\subsection{Products and Steenrod operations}
+Assume that we have a collection of higher cosimplicial Alexander-Whitney maps $\{\Delta_k\}$. Then we have defined a product on $N(I,\dualLieOperad,R)$ by the composite
+\[(N(I,\dualLieOperad,R)^{\otimes 2})_{-p}\overset{\textup{AW}}{\to} (N_{-p}(I,\dualLieOperad,R))^{\otimes 2}\overset{\psi}{\to}N_{-p-1}(I,\dualLieOperad,R).\]
+Next, for each $i\geq0$, we can form a chain map $\Sq^{i}:N(I,\dualLieOperad,R)\to N(I,\dualLieOperad,R)$ of grading $i$, as the sum of the following two composites (minus signs went missing starting here):
+\[\xymatrix@R=4mm{
+&%r1c1
+(N\otimes N)_{2n}
+\ar[dr]^-{\Delta_{n+1-i}}
+&%r1c2
+&%r1c3
+\\%r1c4
+N_n
+\ar[ur]^-{\textup{`$x\mapsto x\otimes x$'}}
+\ar[dr]_-{\textup{`$x\mapsto x\otimes dx$'}}&%r2c1
++&%r2c2
+N_{n+i-1}(C\otimes C)
+\ar[r]^-{\psi}
+&%r2c3
+N_{n+i}\\%r2c4
+&%r3c1
+(N\otimes N)_{2n+1}
+\ar[ur]_-{\Delta_{n+2-i}}
+&%r3c2
+&%r3c3
+%r3c4
+}\]
+I guess we mean that $\Delta_k=0$ for $k<0$. It's a formal consequence of the defining property of the $\{\Delta_k\}$, and the fact that $\psi=\psi T$, that the map $\Sq^i$ is a chain map, and that $\Sq^{n+1}:N_{n}\to N_{2n+1}$ is equal to the squaring map.
+
+It's not obvious that these (natural) operations are the Steenrod operations on the cohomology of a Lie algebra, so that $\Sq^0=0$, the Adem relations are satisfied, etc. I would be disappointed if this were not so.
+
+\subsection{The Koszul homology complex $\overline{K}^c(\dualLieOperad)\circ G$}
 Suppose one has a corestricted co-Lie coalgebra $G$, that is, a left comodule $G$ over the cooperad $\dualLieOperad$, which as a symmetric sequence is concentrated in degree zero. We'd like to see that this complex is dual to May's complex for the homology of the restricted Lie algebra $G\dual$. We'll assume that $G$ is finite dimensional (or graded and locally finite).
 
 The reduced Koszul construction $\overline{K}^c(\dualLieOperad)$ itself has no differential (as it is concentrated in degrees $\overline{K}^c_{-a+1}(\dualLieOperad)(a)$). Thus, the differential of $\overline{K}^c_{-a+1}(I,\dualLieOperad,G)$ is given solely by application of the coaction $G\to\dualLieOperad\circ G$. However, understanding that only reduced \emph{binary} trees are nonzero in $\overline{K}^c(\dualLieOperad)$, identifying $G$ with $G(0)$, only the summand $G\to(\dualLieOperad(2)\otimes G\otimes G)_{\Sigma_2}$ of the coaction is not sent to zero. This is equivalent to the map $\Delta:G\to(G\otimes G)_{\Sigma_2}$ which defines the corestricted co-Lie coalgebra $G$.
