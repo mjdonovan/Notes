@@ -12,7 +12,7 @@
 \excludeversion{hiltonMilnorQuestionable}
 %\def\excludeversion#1{\includeversion{#1}}
 \excludeversion{Frontmatters}
-\excludeversion{Endmatter}
+\includeversion{Endmatter}
 \excludeversion{AdamsDerivation}
 \excludeversion{TotalisationInSAlg}
 \excludeversion{convergence}
@@ -26,7 +26,8 @@
 \excludeversion{KoszulComplexes1}
 \excludeversion{DerivedFunctorsLowDimension}
 \excludeversion{PRlieKoszulComplexCalculationOriginalWithSSeq}
-\includeversion{PRlieKoszulComplexCalculation}
+\includeversion{Corestricted Lie coalgebras Executive Summary}
+\excludeversion{PRlieKoszulComplexCalculation}
 \excludeversion{LieLambdaStructureOnKoszul}
 \excludeversion{SequenceOfSequencesIntro}
 \excludeversion{KoszulSequenceCombinatorics}
@@ -2984,6 +2985,82 @@ He writes the differential on $f=\prod_{i=1}^{n}\gamma_{z_i}(y_i)$ as
 Here, the parenthetical term vanishes in $\Koverline$ --- it's there in case we're using nontrivial coefficients.
 
 \end{PRlieKoszulComplexCalculationOriginalWithSSeq}
+
+\begin{Corestricted Lie coalgebras Executive Summary}
+Dear Benoit,
+
+\textbf{}
+
+Thankyou very much for your help at MSRI, and by email the other day. By talking to you, and reading your `Koszul duality of operads' paper, I've learned a lot of very relevant and exciting mathematics - thanks! I should have thanked you sooner, but I preferred to take a little longer to form my thoughts before spending any more of your time.
+
+In case you're interested, after your advice, I see that one can make the following constructions.
+
+I'm interested in chain-level structure on the derived primitives of a `corestricted Lie coalgebra' (in characteristic 2). By `corestricted Lie coalgebra' I mean a left comodule over the dual of the Lie operad ($\dualLieOperad$) which is concentrated in arity zero. More generally, let $R$ be any left $\dualLieOperad$-comodule. The structure which is described in your paper includes maps:
+\[K(I,\dualLieOperad,R) \from B(I,\dualLieOperad,R) \from N(I,\dualLieOperad,R)\]
+where $N(I,\dualLieOperad,R)$ is the normalized complex of $C(I,\dualLieOperad,R)$.
+From now on I'll write $K$, $B$ and $N$ for the three complexes, and $C$ for the cosimplicial object $C(I,\dualLieOperad,R)$.
+
+There are degree $-1$ maps $K\otimes K\to K$ and $B\otimes B\to B$ defined on treewise tensor products by joining two trees at a single extra vertex at the bottom, and labeling this vertex with the unique nonzero class in $\dualLieOperad(2)$. This defines an action of the commutative operad on K, but only an action of $\Omega$ on B, where by $\Omega$ we mean the free operad on a binary operation (in grading $-1$). The two operations are compatible under the projection $\Omega\to \CommOperad$.
+
+We'll also be able to define an action of $\Omega$ on N, but it's not quite as easy. We have a map 
+\[\psi: C^p\otimes C^p \to C^{p+1}\]
+which is defined on levelwise tree modules by the same process as the maps on $K$ and $B$. One needs to add a new level for the new vertex. If $T$ swaps the factors of $C^p\otimes C^p$, then we have $\psi=\psi T$. Given $\psi$, one can construct a degree $-1$ map $N\otimes N \to N$ to be the composite
+\[(N\otimes N)_{-p} \overset{\textup{AW}}{\to} C^p\otimes C^p \overset{\psi}{\to} C^{p+1}\]
+of $\psi$ with the standard cosimplicial Alexander-Whitney map,
+\[\textup{AW}(t_1\otimes t_2)=(\delta^{p}\cdots \delta^{s+1}t_1)\otimes (\delta^{s-1}\cdots \delta^{0}t_2)\textup{ if $t_1\in N_{-s}$ and $t_2\in N_{-(p-s)}$.}\]
+It's easy to check that this map lands in $N_{-p-1}$, and satisfies a Liebnitz rule (as the class in $\dualLieOperad(2)$ is primitive). Moreover, the square
+\[\xymatrix@R=4mm{
+B\otimes B
+\ar[d]
+&%r1c1
+\ar[d]
+\ar[l]
+N\otimes N\\%r1c2
+B
+&%r2c1
+\ar[l]
+N%r2c2
+}\]
+commutes, so that the three multiplications are all compatible. (The square commutes since the dual levelisation map is so destructive -- the $\delta^p\cdots \delta^{s+1}$ in the definition of $\textup{AW}$ introduces many summands, but the counitality of the left coaction means that all but the most trivial of these terms is sent to zero by dual levelization.)
+
+Now specialise to the case when $R$ is a finite-dimensional corestricted Lie coalgebra $G$ (i.e.\ $R=G$ is concentrated in arity 0). I've checked in this case that the not only is $K(I,\dualLieOperad,G)$ equal as a vector space to May's complex for the cohomology of the restricted Lie algebra $G\dual$, but that the two are equal as DGAs. This shows that the composite
+\[K(I,\dualLieOperad,G) \from B(I,\dualLieOperad,G) \from N(I,\dualLieOperad,G)\]
+is a weak equivalence, even though $G$ is evidently not connected.
+
+Something I'm unsure about is as follows. The cohomology of a restricted Lie algebra should posess Steenrod operations. I can write down candidates for these, using what seems to be a standard method.
+For each $i\geq0$, we can form a chain map $\Sq^{i}:N(I,\dualLieOperad,R)\to N(I,\dualLieOperad,R)$ of grading $i$, as the sum of the following two composites:
+\[\xymatrix@R=4mm{
+&%r1c1
+(N\otimes N)_{-2n}
+\ar[dr]^-{\Delta_{n+1-i}}
+&%r1c2
+&%r1c3
+\\%r1c4
+N_{-n}
+\ar[ur]^-{\textup{`$x\mapsto x\otimes x$'}}
+\ar[dr]_-{\textup{`$x\mapsto x\otimes dx$'}}&%r2c1
++&%r2c2
+N_{-n-i+1}(C\otimes C)
+\ar[r]^-{\psi}
+&%r2c3
+N_{-n-i}\\%r2c4
+&%r3c1
+(N\otimes N)_{-2n-1}
+\ar[ur]_-{\Delta_{n+2-i}}
+&%r3c2
+&%r3c3
+%r3c4
+}\]
+Where by $\Delta_k$ we mean higher cosimplicial Alexander-Whitney maps, satisfying $d\Delta_k+\Delta_k d=\Delta_{k-1}+T\Delta_{k-1}T$, in the spirit of  \cite{DwyerHigherDividedSquares.pdf}.
+It's a formal consequence of the defining property of the $\{\Delta_k\}$, and the fact that $\psi=\psi T$, that the map $\Sq^i$ is a chain map, and that $\Sq^{n+1}:N_{-n}\to N_{-2n-1}$ is equal to the squaring map.
+
+The other properties are less clear to me at present. In particular, I haven't yet seen why this definition should give the same operations on homotopy as the definition one might obtain by lifting the $\Omega$-action to an $E_{\infty}$-action, and forming the standard construction. It's also not clear to me whether the standard Adem relations imply Adem relations between these operations.
+
+Thanks again,
+
+Michael Donovan.
+\end{Corestricted Lie coalgebras Executive Summary}
+
 \begin{PRlieKoszulComplexCalculation}
 
 \subsection{Corestricted Lie coalgebras }
