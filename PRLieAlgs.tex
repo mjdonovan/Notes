@@ -10,9 +10,9 @@
 \excludeversion{GrothendieckSpectralSequencestake2}
 \excludeversion{convergenceOLD}
 \excludeversion{hiltonMilnorQuestionable}
-%\def\excludeversion#1{\includeversion{#1}}
+\def\excludeversion#1{\includeversion{#1}}
 \excludeversion{Frontmatters}
-\includeversion{Endmatter}
+\excludeversion{Endmatter}
 \excludeversion{AdamsDerivation}
 \excludeversion{TotalisationInSAlg}
 \excludeversion{convergence}
@@ -22,11 +22,12 @@
 \excludeversion{HomotopicalAlgebra}
 \excludeversion{DiagramOfFunctors}
 \excludeversion{GrothendieckSpectralSequences}
+\includeversion{backgroundOnMultiplicativity}
 \excludeversion{KoszulComplexes_n>1}
 \excludeversion{KoszulComplexes1}
 \excludeversion{DerivedFunctorsLowDimension}
 \excludeversion{PRlieKoszulComplexCalculationOriginalWithSSeq}
-\includeversion{Corestricted Lie coalgebras Executive Summary}
+\excludeversion{Corestricted Lie coalgebras Executive Summary}
 \excludeversion{PRlieKoszulComplexCalculation}
 \excludeversion{LieLambdaStructureOnKoszul}
 \excludeversion{SequenceOfSequencesIntro}
@@ -2604,6 +2605,51 @@ The stuff in here is what I wrote after a brief chat with Haynes about the inclu
 %\end{proof}
 \end{ConversationWithHaynes_InclusionOfBarConstructions}
 
+\begin{backgroundOnMultiplicativity}
+\section{Background on multiplicativity}
+\subsection{Smash products}
+Suppose that $\mathsf{C}$ is one of the above categories of Lie algebras, or something. Then for $X,Y\in\mathsf{C}$ define $X\wedge Y$ to be the kernel of the natural map $X\sqcup Y\to X\times Y$. There is a natural map $j:Q(X\wedge Y)\to QX\otimes QY$, defined by
+\[\lambda_{i_1}\cdots \lambda_{i_r}[a_1,\cdots ,a_s]\mapsto0,\textup{ if }r>0\textup{ or }s>2
+\]
+where each of $a_1,\ldots,a_s$ is an element of either $X$ or $Y$, and $[a_1,\ldots,a_s]$ represents some choice of bracketing, and by
+\[[x,y]\mapsto x\otimes y\textup{ where }x\in X,\ y\in Y.\]
+ Note that being in the subalgebra $X\wedge Y$ of $X\sqcup Y$ is the condition that \emph{something} from both $X$ and $Y$ appears. Thus, we have completely described the map $j$. It's well defined.
+\subsection{Homotopy of a smash}
+Suppose that $X$ and $Y$ are models in simplicial Lie algebras, which is to say that $Z$ is (almost free, and) weakly equivalent to a wedge of spheres.
+
+The short exact sequence of simplicial Lie algebras $X\wedge Y\to X\sqcup Y\to X\times Y$ induces a long exact sequence on homotopy. However, $\pi(X\sqcup Y)\cong (\pi X)\sqcup(\pi Y)$ and $\pi(X\times Y)\cong (\pi X)\times(\pi Y)$ (where the second coproduct/product is taken in Lie-$\Pi$-algebras in each formula). The first formula follows since both sides represent the free Lie-$\Pi$-algebra on generators corresponding to the wedge summands of $X$ and $Y$ taken together. In particular, the map $\pi(X\sqcup Y)\to \pi(X\times Y)$ is surjective, so that there's a natural isomorphism $i:\pi(X\wedge Y)\to (\pi X)\wedge(\pi Y)$.
+\subsection{A commuting diagram}
+Supposing still that $X$ and $Y$ are models in simplicial Lie algebras, we now have a commuting diagram:
+\[\xymatrix@R=4mm@C=3mm{
+Q\pi(X\wedge Y)
+\ar[d]^-{\cong}_-{Q(i)}
+\ar[r]^-{\gamma}
+&%r1c1
+\pi Q(X\wedge Y)
+\ar[rrr]^-{\pi(j)}
+&%r1c2
+&%r1c3
+&%r1c4
+\pi(QX\otimes QY)
+\ar[d]_-{\textup{AW}}^-{\cong}
+\\%r1c5
+Q((\pi X)\wedge (\pi Y))
+\ar[rrr]^-{j}
+&%r2c1
+&%r2c2
+\textup{\phantom{hey}}&%r2c3
+(Q\pi X)\otimes (Q\pi Y)
+\ar@{=}[r]
+&%r2c4
+(\pi QX)\otimes (\pi QY)%r2c5
+}\]
+For notational convenience, write $\textup{br}:\pi X\otimes \pi Y\to \pi X\wedge \pi Y$ for the bracket $a\otimes b\mapsto [a,b]$ on homotopy, and similarly write $\textup{br}:X\otimes Y\to X\wedge Y$ for the chain level bracket.
+
+In order to see that the above diagram commutes, we choose to start with a class $z\in Q((\pi X)\wedge (\pi Y))$. Any such may be written as $z=\textup{br}(\overline{x}\otimes\overline{y})+h$ where $\overline{x}$ and $\overline{y}$ are represented by $x\in N_nX$ and $y\in N_mY$, and $h$ is a sum of terms which are $Q$-operations applied to 3-fold brackets and higher. One may pull this class back to $Q\pi(X\wedge Y)$ using the Eilenberg-Zilber formula for the bracket on homotopy.
+\[\textup{br}(\overline{x}\otimes\overline{y})\overset{\gamma\circ(Q(i))^{-1}}{\mapsto}\overline{\textup{br}(\textup{EZ}(x\otimes y))}\overset{\pi(j)}{\mapsto}\overline{(\textup{EZ}(x\otimes y))}\overset{\textup{AW}}{\mapsto}\overline{x}\otimes \overline{y}.\]
+The last mapping follows from the fact that $\textup{AW}\circ\textup{EZ}=\textup{id}$.
+Similar considerations show that $h$ is annihilated by $\pi(j)\circ\gamma\circ(Q(i))^{-1}$. As $h$ is also annihilated by $j$, and $j(\textup{br}(\overline{x}\otimes\overline{y}))=\overline{x}\otimes\overline{y}$, the diagram commutes.
+\end{backgroundOnMultiplicativity}
 
 \begin{KoszulComplexes_n>1}
 \section{Unstable Koszul complexes for $\derived\Ind{\nontop{}}$} \label{sectionOnUnstableKoszulComplexes}
@@ -2987,14 +3033,7 @@ Here, the parenthetical term vanishes in $\Koverline$ --- it's there in case we'
 \end{PRlieKoszulComplexCalculationOriginalWithSSeq}
 
 \begin{Corestricted Lie coalgebras Executive Summary}
-Dear Benoit,
-
-\textbf{}
-
-Thankyou very much for your help at MSRI, and by email the other day. By talking to you, and reading your `Koszul duality of operads' paper, I've learned a lot of very relevant and exciting mathematics - thanks! I should have thanked you sooner, but I preferred to take a little longer to form my thoughts before spending any more of your time.
-
-In case you're interested, after your advice, I see that one can make the following constructions.
-
+\subsection{Executive Summary}
 I'm interested in chain-level structure on the derived primitives of a `corestricted Lie coalgebra' (in characteristic 2). By `corestricted Lie coalgebra' I mean a left comodule over the dual of the Lie operad ($\dualLieOperad$) which is concentrated in arity zero. More generally, let $R$ be any left $\dualLieOperad$-comodule. The structure which is described in your paper includes maps:
 \[K(I,\dualLieOperad,R) \from B(I,\dualLieOperad,R) \from N(I,\dualLieOperad,R)\]
 where $N(I,\dualLieOperad,R)$ is the normalized complex of $C(I,\dualLieOperad,R)$.
@@ -3055,10 +3094,6 @@ Where by $\Delta_k$ we mean higher cosimplicial Alexander-Whitney maps, satisfyi
 It's a formal consequence of the defining property of the $\{\Delta_k\}$, and the fact that $\psi=\psi T$, that the map $\Sq^i$ is a chain map, and that $\Sq^{n+1}:N_{-n}\to N_{-2n-1}$ is equal to the squaring map.
 
 The other properties are less clear to me at present. In particular, I haven't yet seen why this definition should give the same operations on homotopy as the definition one might obtain by lifting the $\Omega$-action to an $E_{\infty}$-action, and forming the standard construction. It's also not clear to me whether the standard Adem relations imply Adem relations between these operations.
-
-Thanks again,
-
-Michael Donovan.
 \end{Corestricted Lie coalgebras Executive Summary}
 
 \begin{PRlieKoszulComplexCalculation}
