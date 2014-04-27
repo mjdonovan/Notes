@@ -10,7 +10,7 @@
 \excludeversion{GrothendieckSpectralSequencestake2}
 \excludeversion{convergenceOLD}
 \excludeversion{hiltonMilnorQuestionable}
-\def\excludeversion#1{\includeversion{#1}}
+%\def\excludeversion#1{\includeversion{#1}}
 \excludeversion{Frontmatters}
 \excludeversion{Endmatter}
 \excludeversion{AdamsDerivation}
@@ -2649,6 +2649,36 @@ In order to see that the above diagram commutes, we choose to start with a class
 \[\textup{br}(\overline{x}\otimes\overline{y})\overset{\gamma\circ(Q(i))^{-1}}{\mapsto}\overline{\textup{br}(\textup{EZ}(x\otimes y))}\overset{\pi(j)}{\mapsto}\overline{(\textup{EZ}(x\otimes y))}\overset{\textup{AW}}{\mapsto}\overline{x}\otimes \overline{y}.\]
 The last mapping follows from the fact that $\textup{AW}\circ\textup{EZ}=\textup{id}$.
 Similar considerations show that $h$ is annihilated by $\pi(j)\circ\gamma\circ(Q(i))^{-1}$. As $h$ is also annihilated by $j$, and $j(\textup{br}(\overline{x}\otimes\overline{y}))=\overline{x}\otimes\overline{y}$, the diagram commutes.
+\subsection{A folding map for $W$}
+Following \cite{Blanc_Stover-Groth_SS.pdf}, we define a comonad $W$ on $s\PRLie{}$ by defining $WZ$ to be the pushout
+\[\xymatrix@R=4mm{
+\bigvee_{h}S^n
+\ar[r]\ar[d]
+&%r1c1
+\bigvee_{f}S^n_f\ar[d]\\%r1c2
+\bigvee_{h}CS^n_h
+\ar[r]&%r2c1
+WX%r2c2
+}\]
+Then for each map $f:S^n\to X$ that extends to a map $CS^n\to X$, choose an extension $h_0(f)$, so that $h_0(f)\imath=f$, writing $\imath:S^n\to CS^n$ for the standard inclusion. Then $WX$ contains the contractible subobject $C_0:=\bigvee_f CS^n_{h_0(f)}$. Moreover, $WX/C_0$ is a wedge of spheres:
+\[WX/C_0\cong \left(\bigvee_{h\textup{ not chosen}}CS^n_h/\partial(CS^n_h)\right)\vee\left(\bigvee_{f\textup{ not null}}S^n_f\right)\]
+In particular, $\pi(WX)$ is a free object in $\LL{}$ with generators in bijection with the above wedge summands. Now there is a bisimplicial object $W^{n+1}X$ using the comonad structure, and we may choose the contractible subojects of each $W^{n+1}X$ in such a way that the degeneracies $W^{n+1}X\to W^{n+2}X$ are homotopic to wedge inclusions of spheres, c.f.\ \cite{StoverVanKampen.pdf}. In particular, the degeneracies of $\pi(W^{n+1}X)\in s\LL{}$ preserve generators.
+
+Now suppose that $a:X\to Y$ is a map in $s\PRLie{}$. Then the natural map $WX\to WY$ sends $S^n_f$ and $CS^n_h$ identically onto $S^n_{af}$ and $CS^n_{ah}$ respectively. Representatives for the generators of $\pi(WX)$ are 
+\[\{CS^n_h-CS^n_{h_0(h\imath)}\ |\ \textup{$h$ was not chosen}\}\sqcup\{S^n_f\ |\ \textup{$f$ not null}\}.\]
+Evidently $Wa$ sends each $S^n_f$ either to a generator of $\pi(WY)$ or zero (depending on whether $af$ is null). Moreover,
+\begin{alignat*}{2}
+Wa(CS^n_h-CS^n_{h_0(h\imath)})
+&=
+CS^n_{ah}-CS^n_{ah_0(h\imath)}%
+\\
+&=
+\left(CS^n_{ah}-CS^n_{h_0(ah\imath)}\right)-\left(CS^n_{ah_0(h\imath)}-CS^n_{h_0(ah\imath)}\right)%
+\\
+&=
+\left(CS^n_{ah}-CS^n_{h_0(ah\imath)}\right)-\left(CS^n_{ah_0(h\imath)}-CS^n_{h_0(ah_0(h\imath)\imath)}\right)%
+\end{alignat*}
+is a difference of two generators of $\pi(WY)$. So, if by almost free we mean that there are vector spaces of generators which are preserved by everything except $d_0$, we have shown that $\pi(W^{\bullet+1}X)$ is an almost free object in $s\LL{}$.
 \end{backgroundOnMultiplicativity}
 
 \begin{KoszulComplexes_n>1}
