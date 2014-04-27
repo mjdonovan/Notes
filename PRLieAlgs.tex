@@ -10,7 +10,7 @@
 \excludeversion{GrothendieckSpectralSequencestake2}
 \excludeversion{convergenceOLD}
 \excludeversion{hiltonMilnorQuestionable}
-%\def\excludeversion#1{\includeversion{#1}}
+\def\excludeversion#1{\includeversion{#1}}
 \excludeversion{Frontmatters}
 \excludeversion{Endmatter}
 \excludeversion{AdamsDerivation}
@@ -2618,38 +2618,25 @@ where each of $a_1,\ldots,a_s$ is an element of either $X$ or $Y$, and $[a_1,\ld
 Suppose that $X$ and $Y$ are models in simplicial Lie algebras, which is to say that $Z$ is (almost free, and) weakly equivalent to a wedge of spheres.
 
 The short exact sequence of simplicial Lie algebras $X\wedge Y\to X\sqcup Y\to X\times Y$ induces a long exact sequence on homotopy. However, $\pi(X\sqcup Y)\cong (\pi X)\sqcup(\pi Y)$ and $\pi(X\times Y)\cong (\pi X)\times(\pi Y)$ (where the second coproduct/product is taken in Lie-$\Pi$-algebras in each formula). The first formula follows since both sides represent the free Lie-$\Pi$-algebra on generators corresponding to the wedge summands of $X$ and $Y$ taken together. In particular, the map $\pi(X\sqcup Y)\to \pi(X\times Y)$ is surjective, so that there's a natural isomorphism $i:\pi(X\wedge Y)\to (\pi X)\wedge(\pi Y)$.
+
 \subsection{A commuting diagram}
 Supposing still that $X$ and $Y$ are models in simplicial Lie algebras, we now have a commuting diagram:
-\[\xymatrix@R=4mm@C=3mm{
-Q\pi(X\wedge Y)
-\ar[d]^-{\cong}_-{Q(i)}
-\ar[r]^-{\gamma}
-&%r1c1
-\pi Q(X\wedge Y)
-\ar[rrr]^-{\pi(j)}
-&%r1c2
-&%r1c3
-&%r1c4
-\pi(QX\otimes QY)
-\ar[d]_-{\textup{AW}}^-{\cong}
-\\%r1c5
-Q((\pi X)\wedge (\pi Y))
-\ar[rrr]^-{j}
-&%r2c1
-&%r2c2
-\textup{\phantom{hey}}&%r2c3
-(Q\pi X)\otimes (Q\pi Y)
-\ar@{=}[r]
-&%r2c4
-(\pi QX)\otimes (\pi QY)%r2c5
-}\]
+\[
+\xymatrix@C-2em{
+& \pi Q(X\wedge Y) \ar[rr]^{\pi(j)} && \pi(QX\otimes QY) \ar[dr]^{\textup{AW}}_{\cong} \\
+Q\pi(X\wedge Y) \ar[ur]^{\gamma} &&&& (\pi QX)\otimes (\pi QY) \ar[dl];[]^{\gamma\otimes\gamma}_{\cong} \\
+& Q((\pi X)\wedge (\pi Y)) \ar[ul];[]_{\cong}^{Q(i)} && (Q\pi X)\otimes (Q\pi Y) \ar[ll];[]^{j}
+}
+\]
+
+
 For notational convenience, write $\textup{br}:\pi X\otimes \pi Y\to \pi X\wedge \pi Y$ for the bracket $a\otimes b\mapsto [a,b]$ on homotopy, and similarly write $\textup{br}:X\otimes Y\to X\wedge Y$ for the chain level bracket.
 
 In order to see that the above diagram commutes, we choose to start with a class $z\in Q((\pi X)\wedge (\pi Y))$. Any such may be written as $z=\textup{br}(\overline{x}\otimes\overline{y})+h$ where $\overline{x}$ and $\overline{y}$ are represented by $x\in N_nX$ and $y\in N_mY$, and $h$ is a sum of terms which are $Q$-operations applied to 3-fold brackets and higher. One may pull this class back to $Q\pi(X\wedge Y)$ using the Eilenberg-Zilber formula for the bracket on homotopy.
 \[\textup{br}(\overline{x}\otimes\overline{y})\overset{\gamma\circ(Q(i))^{-1}}{\mapsto}\overline{\textup{br}(\textup{EZ}(x\otimes y))}\overset{\pi(j)}{\mapsto}\overline{(\textup{EZ}(x\otimes y))}\overset{\textup{AW}}{\mapsto}\overline{x}\otimes \overline{y}.\]
 The last mapping follows from the fact that $\textup{AW}\circ\textup{EZ}=\textup{id}$.
 Similar considerations show that $h$ is annihilated by $\pi(j)\circ\gamma\circ(Q(i))^{-1}$. As $h$ is also annihilated by $j$, and $j(\textup{br}(\overline{x}\otimes\overline{y}))=\overline{x}\otimes\overline{y}$, the diagram commutes.
-\subsection{A folding map for $W$}
+\subsection{The $W$ construction on simplicial Lie algebras}
 Following \cite{Blanc_Stover-Groth_SS.pdf}, we define a comonad $W$ on $s\PRLie{}$ by defining $WZ$ to be the pushout
 \[\xymatrix@R=4mm{
 \bigvee_{h}S^n
@@ -2679,6 +2666,19 @@ CS^n_{ah}-CS^n_{ah_0(h\imath)}%
 \left(CS^n_{ah}-CS^n_{h_0(ah\imath)}\right)-\left(CS^n_{ah_0(h\imath)}-CS^n_{h_0(ah_0(h\imath)\imath)}\right)%
 \end{alignat*}
 is a difference of two generators of $\pi(WY)$. So, if by almost free we mean that there are vector spaces of generators which are preserved by everything except $d_0$, we have shown that $\pi(W^{\bullet+1}X)$ is an almost free object in $s\LL{}$.
+\subsection{A folding map for $W$}
+We showed that $\pi(WX)\in\LL{}$ is a free object, say $\pi(WX)\cong\Fr{\LL{}}(V)$, where $V$ is the vector space spanned by the classes of the representatives above. We'll now define a natural map $\psi:WX\to WX\sqcup WX$ which on homotopy induces the same map $\Fr{\LL{}}(V)\to \Fr{\LL{}}(V)\sqcup \Fr{\LL{}}(V)\cong \Fr{\LL{}}(V\oplus V)$ as is induced by the diagonal map $V\mapsto V\oplus V$. It is enough to construct a commuting diagram
+\[\xymatrix@R=4mm{
+S^n\ar[r]^-{\psi_1}
+\ar[d]^-{\imath}
+&%r1c1
+S^n\sqcup S^n\ar[d]^-{\imath\sqcup\imath}
+\\%r1c2
+CS^n\ar[r]^-{\psi_2}
+&%r2c1
+CS^n\sqcup CS^n%r2c2
+}\]
+In fact, this diagram can be formed in $s\GR{}$, before application of $\Fr{\PRLie{}}:\GR{}\to\PRLie{}$, and $\psi_1$ and $\psi_2$ are just the levelwise application of the diagonal map on a simplicial vector space. To understand the effect of $\psi$ on homotopy, it is enough to identify where the generators of $\pi(WX)$ are sent in $\pi(WX)\sqcup\pi(WX)$, which is easy.
 \end{backgroundOnMultiplicativity}
 
 \begin{KoszulComplexes_n>1}
