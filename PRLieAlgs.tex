@@ -2658,6 +2658,14 @@ This shows that the long exact sequence coming from $X\wedge Y\to X\sqcup Y\to X
 &%r1c4
 0
 }\]
+\subsection{Commuting $Q$ and $\pi$}
+For any simplicial object $A\in s\PRLie{}$, there's a natural map $\gamma:Q\pi A\to \pi QA$.
+\begin{lem}
+If $A$ is a model, then $\gamma:Q\pi A\to \pi QA$ is an isomorphism.
+\end{lem}
+\begin{proof}
+$A$ is homotopic to a wedge of spheres, and $\pi A$ is free on generators in correspondence with the wedge summands...
+\end{proof}
 \subsection{A commuting diagram}
 Supposing still that $X$ and $Y$ are models in simplicial Lie algebras, we now have a commuting diagram:
 \[
@@ -2758,29 +2766,59 @@ This follows from the easy observation that both composites $(\textup{id}\sqcup0
 \end{proof}
 In particular, $\overline{\xi}_{\textup{ch}}$ factors through the smash product, defining a natural map $\xi_{\textup{ch}}:W^2X\to (WX)^{\wedge 2}$.
 \subsection{A commuting diagram}
+\begin{thm}
+For $X\in s\PRLie{}$, write $Y\in ss\PRLie{}$ for the bisimplicial object obtained from $X$ by repeated application of $W$. There is a commuting diagram
+\[\xymatrix@C=13mm@R=4mm{
+((N\pi^{\textup{in}}QY)^{\otimes2})_n&%r1c1
+((NQ\pi^{\textup{in}}Y)^{\otimes2})_{n}
+\ar[l]_-{N(\gamma)\otimes N(\gamma)}
+\\%r1c2
+N_n((\pi^{\textup{in}}QY)^{\otimes2})
+\ar[u]^-{\textup{AW}^\textup{out}}
+&%r2c1
+N_n((Q\pi^{\textup{in}}Y)^{\otimes2})
+\ar[u]_-{\textup{AW}}
+\ar[l]_-{\gamma\otimes\gamma}
+\\%r2c2
+N_n(\pi((QY)^{\otimes2}))
+\ar[u]^-{\pi(\textup{AW}^\textup{in})}
+&%r3c1
+\\%r3c2
+N_{n+1}(\pi QY)
+\ar[u]^-{\pi(j\circ Q(\xi_\textup{ch}))}
+&%r4c1
+N_{n+1}(Q\pi Y)
+\ar[uu]_-{j\circ Q(\xi_{\LL{}})}
+\ar[l]_-{\gamma}
+%r4c2
+}\]
+with all the horizontal maps isomorphisms, and with the two vertical composites chain maps. This demonstrates that the products on $E_2$ coincide with those defined on the whole spectral sequence using $j\circ Q(\xi_\textup{ch})$.
+\end{thm}
+\begin{proof}
+The top square is easy. The bottom square may be expanded into the following larger but simpler commuting diagram:
 \[
 \def\objectstyle{\scriptstyle}
-\xymatrix@R=13mm@C=13mm@!0{
-&%r1c1
-(\pi (QW^{n+1}X))^{\otimes2}\ar[rrrrrr];[]_-{=}
-&%r1c2
-&%r1c3
-&%r1c4
-&%r1c5
-&%r1c6
-&%r1c7
-(\pi (QW^{n+1}X))^{\otimes2}\\%r1c8
+\xymatrix@R=8mm@C=13mm@!0{
+%&%r1c1
+%(\pi (QW^{n+1}X))^{\otimes2}\ar[rrrrrr];[]_-{=}
+%&%r1c2
+%&%r1c3
+%&%r1c4
+%&%r1c5
+%&%r1c6
+%&%r1c7
+%(\pi (QW^{n+1}X))^{\otimes2}\\\\%r1c8
 &%r2c1
-\pi((QW^{n+1}X)^{\otimes2})\ar[u]^-{\textup{AW}_{\textup{in}}}
+\pi((QW^{n+1}X)^{\otimes2})\ar[rrr]^-{\textup{AW}_{\textup{in}}}
 &%r2c2
 &%r2c3
 &%r2c4
-&%r2c5
+(\pi (QW^{n+1}X))^{\otimes2}&%r2c5
 &%r2c6
 &%r2c7
-(Q\pi(W^{n+1}X))^{\otimes2}\ar[u]_-{\gamma^{\otimes2}}\\%r2c8
+(Q\pi(W^{n+1}X))^{\otimes2}\ar[lll]_-{\gamma^{\otimes2}}\\\\%r2c8
 &%r3c1
-\pi Q((W^{n+1}X)^{\wedge 2})\ar[u]^-{\pi(j)}
+\pi Q((W^{n+1}X)^{\wedge 2})\ar[uu]^-{\pi(j)}
 \ar[dl]
 &%r3c2
 &%r3c3
@@ -2790,7 +2828,7 @@ Q\pi((W^{n+1}X)^{\wedge 2})\ar[lll]_-{\gamma}\ar[dl]
 &%r3c6
 &%r3c7
 Q((\pi( W^{n+1}X))^{\wedge 2})\ar[dl]
-\ar[u]_-{j}
+\ar[uu]_-{j}
 \ar[lll]_-{Q(i)}
 \\
 %r3c1
@@ -2805,27 +2843,28 @@ Q\pi((W^{n+1}X)^{\sqcup 2})\ar[lll]_-(.3){\gamma}
 Q((\pi( W^{n+1}X))^{\sqcup 2})
 \ar[lll]_-(.3){Q(i)}
 %r3c8
-\\
+\\\\
 &%r3c1
 \pi Q(W^{n+2}X)
-\ar@/_.5em/[uu]_-(.25){\pi Q(\xi_{\textup{ch}})}
-\ar[ul]^-(.65){\pi Q(\overline{\xi}_{\textup{ch}})}
+\ar@/_.5em/[uuu]_-(.25){\pi Q(\xi_{\textup{ch}})}
+\ar[uul]^-(.65){\pi Q(\overline{\xi}_{\textup{ch}})}
 &%r3c2
 &%r3c3
 &%r3c4
 Q\pi(W^{n+2}X)\ar[lll]_-{\gamma}
-\ar@/_.5em/[uu]_-(.25){Q\pi(\xi_{\textup{ch}})}
-\ar[ul]^-(.65){Q\pi(\overline{\xi}_{\textup{ch}})}
+\ar@/_.5em/[uuu]_-(.25){Q\pi(\xi_{\textup{ch}})}
+\ar[uul]^-(.65){Q\pi(\overline{\xi}_{\textup{ch}})}
 &%r3c5
 &%r3c6
 &%r3c7
 Q(\pi( W^{n+2}X))
-\ar@/_.5em/[uu]_-(.25){Q(\xi_{\LL{}})}
+\ar@/_.5em/[uuu]_-(.25){Q(\xi_{\LL{}})}
 \ar[lll]_-{=}
-\ar[ul]^-(.65){Q(\overline{\xi}_{\LL{}})}
+\ar[uul]^-(.65){Q(\overline{\xi}_{\LL{}})}
 }\]
+The top hexagon is from above. The left triangular prism commutes simply by naturality of $\gamma$. The right prism's commutativity reduces to checking the fact that the composite $\pi(WZ)\overset{\psi_{\LL{}}}{\to}\pi(WZ)^{\sqcup2}\overset{i}{\to}\pi((WZ)^{\sqcup2})$ equals $\pi(\psi_{\textup{ch}})$. One may check this on generators, where it is obvious.
+\end{proof}
 \end{backgroundOnMultiplicativity}
-
 \begin{KoszulComplexes_n>1}
 \section{Unstable Koszul complexes for $\derived\Ind{\nontop{}}$} \label{sectionOnUnstableKoszulComplexes}
 \subsection{Koszul complexes for $\derived\Ind{\nontop{}}$ for $n\geq2$}
