@@ -10,7 +10,7 @@
 \excludeversion{GrothendieckSpectralSequencestake2}
 \excludeversion{convergenceOLD}
 \excludeversion{hiltonMilnorQuestionable}
-\def\excludeversion#1{\includeversion{#1}}
+%\def\excludeversion#1{\includeversion{#1}}
 \excludeversion{Frontmatters}
 \excludeversion{Endmatter}
 \excludeversion{AdamsDerivation}
@@ -2615,27 +2615,68 @@ where each of $a_1,\ldots,a_s$ is an element of either $X$ or $Y$, and $[a_1,\ld
 \[[x,y]\mapsto x\otimes y\textup{ where }x\in X,\ y\in Y.\]
  Note that being in the subalgebra $X\wedge Y$ of $X\sqcup Y$ is the condition that \emph{something} from both $X$ and $Y$ appears. Thus, we have completely described the map $j$. It's well defined.
 \subsection{Homotopy of a smash}
-Suppose that $X$ and $Y$ are models in simplicial Lie algebras, which is to say that $Z$ is (almost free, and) weakly equivalent to a wedge of spheres.
+Suppose that $X$ and $Y$ are models in simplicial Lie algebras, which is to say that $X$ and $Y$ are each (almost free, and) weakly equivalent to a wedge of spheres. 
 
-The short exact sequence of simplicial Lie algebras $X\wedge Y\to X\sqcup Y\to X\times Y$ induces a long exact sequence on homotopy. However, $\pi(X\sqcup Y)\cong (\pi X)\sqcup(\pi Y)$ and $\pi(X\times Y)\cong (\pi X)\times(\pi Y)$ (where the second coproduct/product is taken in Lie-$\Pi$-algebras in each formula). The first formula follows since both sides represent the free Lie-$\Pi$-algebra on generators corresponding to the wedge summands of $X$ and $Y$ taken together. In particular, the map $\pi(X\sqcup Y)\to \pi(X\times Y)$ is surjective, so that there's a natural isomorphism $i:\pi(X\wedge Y)\to (\pi X)\wedge(\pi Y)$.
-
+The natural map $i:(\pi X)\sqcup (\pi Y)\to \pi(X\sqcup Y)$ is an isomorphism, since both source and target represent the free Lie-$\Pi$-algebra on generators corresponding to the wedge summands of $X$ and $Y$ taken together. Moreover, the natural map $\pi(X\times Y)\to (\pi X)\times (\pi Y)$ is an isomorphism (as products of Lie algebras are taken in vector spaces). Thus we have a commuting square
+\[\xymatrix@R=4mm{
+(\pi X)\sqcup (\pi Y)
+\ar[r]
+\ar[d]^-{i}_-{\cong}
+&%r1c3
+(\pi X)\times (\pi Y)
+\ar[d]_-{\cong}\\
+\pi (X\sqcup Y)
+\ar[r]
+&%r1c3
+\pi (X\times Y)
+}\]
+This shows that the long exact sequence coming from $X\wedge Y\to X\sqcup Y\to X\times Y$ is just a short exact sequence, and that there is a commuting diagram
+\[\xymatrix@R=4mm{
+0\ar[r]&%r1c1
+(\pi X)\wedge (\pi Y)
+\ar[r]
+\ar[d]^-{i}_-{\cong}
+&%r1c2
+(\pi X)\sqcup (\pi Y)
+\ar[r]
+\ar[d]^-{i}_-{\cong}
+&%r1c3
+(\pi X)\times (\pi Y)
+\ar[r]
+\ar[d]_-{\cong}
+&%r1c4
+0\\%r1c5
+0\ar[r]&%r1c1
+\pi (X\wedge  Y)
+\ar[r]
+&%r1c2
+\pi (X\sqcup Y)
+\ar[r]
+&%r1c3
+\pi (X\times Y)
+\ar[r]
+&%r1c4
+0
+}\]
 \subsection{A commuting diagram}
 Supposing still that $X$ and $Y$ are models in simplicial Lie algebras, we now have a commuting diagram:
 \[
 \xymatrix@C-2em{
 & \pi Q(X\wedge Y) \ar[rr]^{\pi(j)} && \pi(QX\otimes QY) \ar[dr]^{\textup{AW}}_{\cong} \\
 Q\pi(X\wedge Y) \ar[ur]^{\gamma} &&&& (\pi QX)\otimes (\pi QY) \ar[dl];[]^{\gamma\otimes\gamma}_{\cong} \\
-& Q((\pi X)\wedge (\pi Y)) \ar[ul];[]_{\cong}^{Q(i)} && (Q\pi X)\otimes (Q\pi Y) \ar[ll];[]^{j}
+& Q((\pi X)\wedge (\pi Y)) \ar[ul]^{\cong}_{Q(i)} && (Q\pi X)\otimes (Q\pi Y) \ar[ll];[]^{j}
 }
 \]
 
 
 For notational convenience, write $\textup{br}:\pi X\otimes \pi Y\to \pi X\wedge \pi Y$ for the bracket $a\otimes b\mapsto [a,b]$ on homotopy, and similarly write $\textup{br}:X\otimes Y\to X\wedge Y$ for the chain level bracket.
 
-In order to see that the above diagram commutes, we choose to start with a class $z\in Q((\pi X)\wedge (\pi Y))$. Any such may be written as $z=\textup{br}(\overline{x}\otimes\overline{y})+h$ where $\overline{x}$ and $\overline{y}$ are represented by $x\in N_nX$ and $y\in N_mY$, and $h$ is a sum of terms which are $Q$-operations applied to 3-fold brackets and higher. One may pull this class back to $Q\pi(X\wedge Y)$ using the Eilenberg-Zilber formula for the bracket on homotopy.
-\[\textup{br}(\overline{x}\otimes\overline{y})\overset{\gamma\circ(Q(i))^{-1}}{\mapsto}\overline{\textup{br}(\textup{EZ}(x\otimes y))}\overset{\pi(j)}{\mapsto}\overline{(\textup{EZ}(x\otimes y))}\overset{\textup{AW}}{\mapsto}\overline{x}\otimes \overline{y}.\]
+\begin{proof}
+Any class $z\in Q((\pi X)\wedge (\pi Y))$ may be written as $z=\textup{br}(\overline{x}\otimes\overline{y})+h$ where $\overline{x}$ and $\overline{y}$ are represented by $x\in N_nX$ and $y\in N_mY$, and $h$ is a sum of terms which are $Q$-operations applied to 3-fold brackets and higher. One may pull this class back to $Q\pi(X\wedge Y)$ using the Eilenberg-Zilber formula for the bracket on homotopy.
+\[\textup{br}(\overline{x}\otimes\overline{y})\overset{\gamma\circ Q(i)}{\mapsto}\overline{\textup{br}(\textup{EZ}(x\otimes y))}\overset{\pi(j)}{\mapsto}\overline{(\textup{EZ}(x\otimes y))}\overset{\textup{AW}}{\mapsto}\overline{x}\otimes \overline{y}.\]
 The last mapping follows from the fact that $\textup{AW}\circ\textup{EZ}=\textup{id}$.
-Similar considerations show that $h$ is annihilated by $\pi(j)\circ\gamma\circ(Q(i))^{-1}$. As $h$ is also annihilated by $j$, and $j(\textup{br}(\overline{x}\otimes\overline{y}))=\overline{x}\otimes\overline{y}$, the diagram commutes.
+Similar considerations show that $h$ is annihilated by $\pi(j)\circ\gamma\circ Q(i)$. As $h$ is also annihilated by $j$, and $j(\textup{br}(\overline{x}\otimes\overline{y}))=\overline{x}\otimes\overline{y}$, the diagram commutes.
+\end{proof}
 \subsection{The $W$ construction on simplicial Lie algebras}
 Following \cite{Blanc_Stover-Groth_SS.pdf}, we define a comonad $W$ on $s\PRLie{}$ by defining $WZ$ to be the pushout
 \[\xymatrix@R=4mm{
@@ -2666,8 +2707,8 @@ CS^n_{ah}-CS^n_{ah_0(h\imath)}%
 \left(CS^n_{ah}-CS^n_{h_0(ah\imath)}\right)-\left(CS^n_{ah_0(h\imath)}-CS^n_{h_0(ah_0(h\imath)\imath)}\right)%
 \end{alignat*}
 is a difference of two generators of $\pi(WY)$. So, if by almost free we mean that there are vector spaces of generators which are preserved by everything except $d_0$, we have shown that $\pi(W^{\bullet+1}X)$ is an almost free object in $s\LL{}$.
-\subsection{A folding map for $W$}
-We showed that $\pi(WX)\in\LL{}$ is a free object, say $\pi(WX)\cong\Fr{\LL{}}(V)$, where $V$ is the vector space spanned by the classes of the representatives above. We'll now define a natural map $\psi:WX\to WX\sqcup WX$ which on homotopy induces the same map $\Fr{\LL{}}(V)\to \Fr{\LL{}}(V)\sqcup \Fr{\LL{}}(V)\cong \Fr{\LL{}}(V\oplus V)$ as is induced by the diagonal map $V\mapsto V\oplus V$. It is enough to construct a commuting diagram
+\subsection{A chain level fold map, etc.}
+We showed that $\pi(WX)\in\LL{}$ is a free object, say $\pi(WX)\cong\Fr{\LL{}}(V)$, where $V$ is the vector space spanned by the classes of the representatives above. We'll now define a natural map $\psi_{\textup{ch}}:WX\to WX\sqcup WX$ which on homotopy induces the same map $\Fr{\LL{}}(V)\to \Fr{\LL{}}(V)\sqcup \Fr{\LL{}}(V)\cong \Fr{\LL{}}(V\oplus V)$ as is induced by the diagonal map $V\mapsto V\oplus V$. It is enough to construct a commuting diagram
 \[\xymatrix@R=4mm{
 S^n\ar[r]^-{\psi_1}
 \ar[d]^-{\imath}
@@ -2678,7 +2719,111 @@ CS^n\ar[r]^-{\psi_2}
 &%r2c1
 CS^n\sqcup CS^n%r2c2
 }\]
-In fact, this diagram can be formed in $s\GR{}$, before application of $\Fr{\PRLie{}}:\GR{}\to\PRLie{}$, and $\psi_1$ and $\psi_2$ are just the levelwise application of the diagonal map on a simplicial vector space. To understand the effect of $\psi$ on homotopy, it is enough to identify where the generators of $\pi(WX)$ are sent in $\pi(WX)\sqcup\pi(WX)$, which is easy.
+In fact, this diagram can be formed in $s\GR{}$, before application of $\Fr{\PRLie{}}:\GR{}\to\PRLie{}$, and $\psi_1$ and $\psi_2$ are just the levelwise application of the diagonal map on a simplicial vector space. To understand the effect of $\psi_{\textup{ch}}$ on homotopy, it is enough to identify where the generators of $\pi(WX)$ are sent in $\pi(WX)\sqcup\pi(WX)$, which is easy.
+\begin{lem}
+The composite 
+$\xymatrix@R=4mm@1{
+WX\ar[r]^-{\psi_{\textup{ch}}}
+&%r1c1
+WX\sqcup WX\ar[r]^-{\textup{id}\sqcup0}
+&%r1c2
+WX%r1c3
+}$ is the identity.
+\end{lem}
+\begin{proof}
+This follows since $(\textup{id}\sqcup0)\psi_1$ is the identity of $S^n$ and $(\textup{id}\sqcup0)\psi_2$ is the identity of $CS^n$.
+\end{proof}
+Now let $\overline{\xi}_{\textup{ch}}$ denote the following composite:
+%\[W^2X\overset{\psi_{\textup{ch}}}{\to}(W^2X)^{\sqcup2}\overset{\psi_{\textup{ch}}\sqcup \epsilon}{\to}(W^2X)^{\sqcup2}\sqcup(WX)\overset{\epsilon^{\sqcup2}\sqcup\psi_{ch}}{\to}((WX)^{\sqcup2})^{\sqcup2}\overset{\textup{fold}}{\to}(WX)^{\sqcup2}\]
+\[\makebox[0mm][r]{$\overline{\xi}_{\textup{ch}}:\ $}W^2X\overset{\psi_{\textup{ch}}}{\to}(W^2X)^{\sqcup2}\overset{a\sqcup b}{\to}(WX)^{\sqcup2}\]
+where $a,b:W^2X\to(WX)^{\sqcup2}$ are the composites
+\[\xymatrix@R=2mm{
+\makebox[0mm][r]{$a:\ $}W^2X\ar[r]^-{\psi_{\textup{ch}}}
+&%r1c1
+(W^2X)^{\sqcup2}\ar[r]^-{\epsilon^{\sqcup2}}
+&%r1c2
+(WX)^{\sqcup2}\\
+\makebox[0mm][r]{$b:\ $}W^2X\ar[r]^-{\epsilon}
+&%r1c1
+(WX)\ar[r]^-{\psi_{\textup{ch}}}
+&%r1c2
+(WX)^{\sqcup2}
+}\]
+\begin{lem}
+The composite 
+$W^2X\overset{\overline{\xi}_{\textup{ch}}}{\to}(WX)^{\sqcup2}\to(WX)^{\times2}$ is zero.
+\end{lem}
+\begin{proof}
+This follows from the easy observation that both composites $(\textup{id}\sqcup0)\overline{\xi}_{\textup{ch}}$ and $(0\sqcup\textup{id})\overline{\xi}_{\textup{ch}}$ equal $\epsilon:W^2X\to WX$.
+\end{proof}
+In particular, $\overline{\xi}_{\textup{ch}}$ factors through the smash product, defining a natural map $\xi_{\textup{ch}}:W^2X\to (WX)^{\wedge 2}$.
+\subsection{A commuting diagram}
+\[
+\def\objectstyle{\scriptstyle}
+\xymatrix@R=13mm@C=13mm@!0{
+&%r1c1
+(\pi (QW^{n+1}X))^{\otimes2}\ar[rrrrrr];[]_-{=}
+&%r1c2
+&%r1c3
+&%r1c4
+&%r1c5
+&%r1c6
+&%r1c7
+(\pi (QW^{n+1}X))^{\otimes2}\\%r1c8
+&%r2c1
+\pi((QW^{n+1}X)^{\otimes2})\ar[u]^-{\textup{AW}_{\textup{in}}}
+&%r2c2
+&%r2c3
+&%r2c4
+&%r2c5
+&%r2c6
+&%r2c7
+(Q\pi(W^{n+1}X))^{\otimes2}\ar[u]_-{\gamma^{\otimes2}}\\%r2c8
+&%r3c1
+\pi Q((W^{n+1}X)^{\wedge 2})\ar[u]^-{\pi(j)}
+\ar[dl]
+&%r3c2
+&%r3c3
+&%r3c4
+Q\pi((W^{n+1}X)^{\wedge 2})\ar[lll]_-{\gamma}\ar[dl]
+&%r3c5
+&%r3c6
+&%r3c7
+Q((\pi( W^{n+1}X))^{\wedge 2})\ar[dl]
+\ar[u]_-{j}
+\ar[lll]_-{Q(i)}
+\\
+%r3c1
+\pi Q((W^{n+1}X)^{\sqcup 2})
+&%r3c2
+&%r3c3
+&%r3c4
+Q\pi((W^{n+1}X)^{\sqcup 2})\ar[lll]_-(.3){\gamma}
+&%r3c5
+&%r3c6
+&%r3c7
+Q((\pi( W^{n+1}X))^{\sqcup 2})
+\ar[lll]_-(.3){Q(i)}
+%r3c8
+\\
+&%r3c1
+\pi Q(W^{n+2}X)
+\ar@/_.5em/[uu]_-(.25){\pi Q(\xi_{\textup{ch}})}
+\ar[ul]^-(.65){\pi Q(\overline{\xi}_{\textup{ch}})}
+&%r3c2
+&%r3c3
+&%r3c4
+Q\pi(W^{n+2}X)\ar[lll]_-{\gamma}
+\ar@/_.5em/[uu]_-(.25){Q\pi(\xi_{\textup{ch}})}
+\ar[ul]^-(.65){Q\pi(\overline{\xi}_{\textup{ch}})}
+&%r3c5
+&%r3c6
+&%r3c7
+Q(\pi( W^{n+2}X))
+\ar@/_.5em/[uu]_-(.25){Q(\xi_{\LL{}})}
+\ar[lll]_-{=}
+\ar[ul]^-(.65){Q(\overline{\xi}_{\LL{}})}
+}\]
 \end{backgroundOnMultiplicativity}
 
 \begin{KoszulComplexes_n>1}
