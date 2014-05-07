@@ -2715,7 +2715,7 @@ CS^n_{ah}-CS^n_{ah_0(h\imath)}%
 \left(CS^n_{ah}-CS^n_{h_0(ah\imath)}\right)-\left(CS^n_{ah_0(h\imath)}-CS^n_{h_0(ah_0(h\imath)\imath)}\right)%
 \end{alignat*}
 is a difference of two generators of $\pi(WY)$. So, if by almost free we mean that there are vector spaces of generators which are preserved by everything except $d_0$, we have shown that $\pi(W^{\bullet+1}X)$ is an almost free object in $s\LL{}$.
-\subsection{A chain level fold map, etc.}
+\subsection{A chain level cogroup structure}
 We showed that $\pi(WX)\in\LL{}$ is a free object, say $\pi(WX)\cong\Fr{\LL{}}(V)$, where $V$ is the vector space spanned by the classes of the representatives above. We'll now define a natural map $\psi_{\textup{ch}}:WX\to WX\sqcup WX$ which on homotopy induces the same map $\Fr{\LL{}}(V)\to \Fr{\LL{}}(V)\sqcup \Fr{\LL{}}(V)\cong \Fr{\LL{}}(V\oplus V)$ as is induced by the diagonal map $V\mapsto V\oplus V$. It is enough to construct a commuting diagram
 \[\xymatrix@R=4mm{
 S^n\ar[r]^-{\psi_1}
@@ -2729,18 +2729,26 @@ CS^n\sqcup CS^n%r2c2
 }\]
 In fact, this diagram can be formed in $s\GR{}$, before application of $\Fr{\PRLie{}}:\GR{}\to\PRLie{}$, and $\psi_1$ and $\psi_2$ are just the levelwise application of the diagonal map on a simplicial vector space. To understand the effect of $\psi_{\textup{ch}}$ on homotopy, it is enough to identify where the generators of $\pi(WX)$ are sent in $\pi(WX)\sqcup\pi(WX)$, which is easy.
 \begin{lem}
-The composite 
-$\xymatrix@R=4mm@1{
+$WX$ is naturally a (strict) commutative cogroup object, having comultiplication map $\psi_{\textup{ch}}$, counit map $0:WX\to 0$, and inverse map $\textup{id}:WX\to WX$. In particular, $\hom(WX,\DASH)$ takes values in $\ensuremath{\F_2}$-vectorspaces. %The map $\psi$, along with the zero map $WX\to0$.
+\end{lem}
+\begin{proof}
+There are a few axioms to check, for example, left counitality: that the composite 
+\[\xymatrix@R=4mm@1{
 WX\ar[r]^-{\psi_{\textup{ch}}}
 &%r1c1
 WX\sqcup WX\ar[r]^-{\textup{id}\sqcup0}
 &%r1c2
 WX%r1c3
-}$ is the identity.
+}\] is the identity. This follows since $(\textup{id}\sqcup0)\psi_1$ is the identity of $S^n$ and $(\textup{id}\sqcup0)\psi_2$ is the identity of $CS^n$. The other axioms follow similarly.
+\end{proof}
+Using the notation $*$ for the group operation on $\hom_{s\PRLie{}}(WX,Y)$, we have the following:
+\begin{lem}
+For maps $f,g:WX\to Y$ we have $Q(f*g)=Qf+Qg$.
 \end{lem}
 \begin{proof}
-This follows since $(\textup{id}\sqcup0)\psi_1$ is the identity of $S^n$ and $(\textup{id}\sqcup0)\psi_2$ is the identity of $CS^n$.
+It's enough to check that $Q(\psi_\textup{ch}):QWX\to Q(WX\sqcup WX)$ equals the diagonal map $QWX\to QWX\oplus QWX$. For this, $Q$ converts all the colimits involved in the construction of $WX$ to colimits in $s\GR{}$, and $\psi_1$ and $\psi_2$ are both precisely the diagonal map.
 \end{proof}
+
 Now let $\overline{\xi}_{\textup{ch}}$ denote the following composite:
 %\[W^2X\overset{\psi_{\textup{ch}}}{\to}(W^2X)^{\sqcup2}\overset{\psi_{\textup{ch}}\sqcup \epsilon}{\to}(W^2X)^{\sqcup2}\sqcup(WX)\overset{\epsilon^{\sqcup2}\sqcup\psi_{ch}}{\to}((WX)^{\sqcup2})^{\sqcup2}\overset{\textup{fold}}{\to}(WX)^{\sqcup2}\]
 \[\makebox[0mm][r]{$\overline{\xi}_{\textup{ch}}:\ $}W^2X\overset{\psi_{\textup{ch}}}{\to}(W^2X)^{\sqcup2}\overset{a\sqcup b}{\to}(WX)^{\sqcup2}\]
@@ -2765,6 +2773,39 @@ $W^2X\overset{\overline{\xi}_{\textup{ch}}}{\to}(WX)^{\sqcup2}\to(WX)^{\times2}$
 This follows from the easy observation that both composites $(\textup{id}\sqcup0)\overline{\xi}_{\textup{ch}}$ and $(0\sqcup\textup{id})\overline{\xi}_{\textup{ch}}$ equal $\epsilon:W^2X\to WX$.
 \end{proof}
 In particular, $\overline{\xi}_{\textup{ch}}$ factors through the smash product, defining a natural map $\xi_{\textup{ch}}:W^2X\to (WX)^{\wedge 2}$.
+\subsection{The resolution $\scrW_\bullet X$ and the chain map $Q\xi_\textup{ch}$}
+For $X\in s\PRLie{}$, we have a bisimplicial object $\scrW X$ defined by $\scrW_\bullet X=W^{\bullet+1} X$, the comonadic bar construction. Then the maps $\xi_\textup{ch}:\scrW_\bullet X\to (\scrW_{\bullet-1} X)^{\wedge 2}$ are maps in $s\PRLie{}$, but evidently do not assemble to a map of bisimplicial objects -- they don't respect the filtration degree. To control this, we'll need the following lemma, importing \cite[lemma 5.5]{MR1089001}:
+\begin{lem}
+$(d_i)^{\wedge 2}\xi_\textup{ch}=\xi_\textup{ch}d_{i+1}$ for $i\geq1$, and $(d_0)^{\wedge 2}\xi_\textup{ch}=(\xi_\textup{ch}d_{0})*(\xi_\textup{ch}d_{1})$.
+\end{lem}
+\begin{proof}
+Comm diagrams, for $i\geq1$:
+\[\xymatrix@R=4mm{
+\calW_{\bullet}X
+\ar[r]^-{a}
+\ar[d]^-{d_{i+1}}
+&%r1c1
+(\calW_{\bullet-1}X)^{\sqcup2}
+\ar[d]^-{(d_i)^{\sqcup2}}
+&%r1c2
+\calW_{\bullet}X
+\ar[r]^-{b}
+\ar[d]^-{d_{i+1}}
+&%r1c1
+(\calW_{\bullet-1}X)^{\sqcup2}
+\ar[d]^-{(d_i)^{\sqcup2}}\\%r1c5
+\calW_{\bullet-1}X
+\ar[r]^-{a}
+&%r2c1
+(\calW_{\bullet-2}X)^{\sqcup2}&%r2c2
+\calW_{\bullet-1}X
+\ar[r]^-{b}
+&%r2c1
+(\calW_{\bullet-2}X)^{\sqcup2}
+}\]
+That does the first part. For the second,
+\end{proof}
+
 \subsection{A commuting diagram}
 \begin{thm}
 For $X\in s\PRLie{}$, write $Y\in ss\PRLie{}$ for the bisimplicial object obtained from $X$ by repeated application of $W$. There is a commuting diagram
