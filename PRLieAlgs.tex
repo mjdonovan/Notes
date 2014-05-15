@@ -2614,6 +2614,47 @@ Suppose that $\mathsf{C}$ is one of the above categories of Lie algebras, or som
 where each of $a_1,\ldots,a_s$ is an element of either $X$ or $Y$, and $[a_1,\ldots,a_s]$ represents some choice of bracketing, and by
 \[[x,y]\mapsto x\otimes y\textup{ where }x\in X,\ y\in Y.\]
  Note that being in the subalgebra $X\wedge Y$ of $X\sqcup Y$ is the condition that \emph{something} from both $X$ and $Y$ appears. Thus, we have completely described the map $j$. It's well defined.
+\subsection{Coproducts in the simplicial bar construction}
+Suppose that $X\in\LL{}$. We may construct a coproduct (although I'm not sure if it's homotopy coassociative, etc.) on the simplicial bar construction $\Q_{\LL{}}[\Fr{\LL{}}]^{\bullet+1}X$, using Goerss' method. First we'll construct a map $\overline{\xi}_{\LL{}}$ with a factoring $\xi_{\LL{}}$ as follows:
+\[\xymatrix@R=4mm{
+[\Fr{\LL{}}]^{n+1}X\ar[rr]^-{\overline{\xi}_{\LL{}}}
+\ar@{-->}[rd]_-{\xi_{\LL{}}}
+&&%r1c1
+([\Fr{\LL{}}]^{n}X)^{\sqcup2}\\%r1c3
+&%r2c1
+([\Fr{\LL{}}]^{n}X)^{\wedge 2}
+\ar@{>->}[ur]
+}\]
+Then the chain level coproduct will be given by 
+\[\Q_{\LL{}}[\Fr{\LL{}}]^{n+1}X\overset{Q(\xi_{\LL{}})}{\to} \Q_{\LL{}}([\Fr{\LL{}}]^{n}X)^{\wedge 2}\overset{j}{\to} (\Q_{\LL{}}[\Fr{\LL{}}]^{n}X)^{\otimes 2}.\]
+One constructs the map $\overline{\xi}_{\LL{}}$ using a diagonal on the free construction, the map $\psi_{\LL{}}$ induced, for $Y\in \GR{}$, by the diagonal $Y\to Y^{\oplus2}$:
+\[\psi_{\LL{}}:\Fr{\LL{}}Y\to (\Fr{\LL{}}Y)^{\sqcup2}\]
+\begin{lem}
+For $Y\in\GR{}$, $\Fr{\LL{}}Y$ is naturally a (strict) commutative cogroup object, having comultiplication map $\psi_{\LL{}}$, counit map $0:\Fr{\LL{}}Y\to 0$, and inverse map $\textup{id}:\Fr{\LL{}}Y\to \Fr{\LL{}}Y$. In particular, $\hom(\Fr{\LL{}}Y,\DASH)$ takes values in $\ensuremath{\F_2}$-vectorspaces. %The map $\psi$, along with the zero map $WX\to0$.
+\end{lem}
+We then may define $\overline{\xi}_{\LL{}}$ to be the sum of the maps $((d_0)^{\wedge 2})\psi_{\LL{}}$ and $\psi_{\LL{}}d_0$ in the group $\Hom({[\Fr{\LL{}}]}^{n+1}X,({[\Fr{\LL{}}]}^{n}X)^{\sqcup2})$. Then, following Goerss, one shows that the image of $\overline{\xi}_{\LL{}}$ is contained in the smash power, giving a factorization $\xi_{\LL{}}$.
+\begin{prop}
+The image of $f^0(g^1_{i_1}(h^2_{i_1i_2}(\cdots )))\in \Q_{\LL{}}[\Fr{\LL{}}]^{n+1}X$ under the map $j\circ Q(\xi_{\LL{}})$ is given by $q(u(f)(g_{i_1}))(h^1_{i_1i_2}(\cdots ))$.
+\end{prop}
+\begin{proof}
+The element $f^0(g^1_{i_1}(h^2_{i_1i_2}(\cdots )))\in \Q_{\LL{}}[\Fr{\LL{}}]^{n+1}X$ equals the element $u(f)(g^1_{i_1}(h^2_{i_1i_2}(\cdots )))$, since we are calculating in the indecomposables. Thus, we may assume that $f$ is just the identity, so that there is only one index $i_1$, and show that
+\[\textup{elt}:=g^1_{i_1}(h^2_{i_1i_2}(\cdots ))\mapsto q(g^1_{i_1})(h^1_{i_1i_2}(\cdots )).\]
+Now that we've assumed that $\textup{elt}$ is in the image of $s_{-1}$, $\overline{\xi}_{\LL{}}(\textup{elt})$ may be calculated as the sum of $(d_0)^{\sqcup 2}(\psi_{\LL{}}(\textup{elt}))$ and $\psi_{\LL{}}(d_0(\textup{elt}))$. In order to denote elements of the self-coproduct, we'll write expressions like $\overline{x}+\overline{\overline{x}}$. Then
+\[\textup{elt}\overset{\psi_{\LL{}}}{\mapsto}\overline{\textup{elt}}+\overline{\overline{\textup{elt}}} \overset{(d_0)^{\sqcup 2}}{\to}\overline{g^0_{i_1}(h^1_{i_1i_2})}+ \overline{\overline{g^0_{i_1}(h^1_{i_1i_2})}},\]
+\[\textup{elt}\overset{d_0}{\mapsto} g^0_{i_1}(h^1_{i_1i_2})\overset{\psi_{\LL{}}}{\to} g^0_{i_1}\left(\overline{h^1_{i_1i_2}}+ \overline{\overline{h^1_{i_1i_2}}}\right)\]
+The image of $\textup{elt}$ is then $j(\textup{cr}(g^0_{i_1})(h^1_{i_1i_2}))$, where
+\[\textup{cr}(g^0_{i_1})(h^1_{i_1i_2}):=
+g^0_{i_1}\left(\overline{h^1_{i_1i_2}} +\overline{\overline{h^1_{i_1i_2}}}\right)
+-\overline{g^0_{i_1}(h^1_{i_1i_2})}- \overline{\overline{g^0_{i_1}(h^1_{i_1i_2})}}.\]
+Now $j:Q(A\wedge B)\to QA\otimes QB$ picks out the simple brackets $[a,b]$ for $a\in A$ and $b\in B$, and in the expression $\textup{cr}(g^0_{i_1})(h^1_{i_1i_2})$, there are only two sources for such brackets. Firstly, if $g^0_{i_1}$ contains a bracket $[h^1_{i_1i_2},h^1_{i_1i'_2}]$ then $\textup{cr}(g^0_{i_1})(h^1_{i_1i_2})$ contains terms
+\[[\overline{h^1_{i_1i_2}},\overline{\overline{h^1_{i_1i'_2}}}]+[\overline{\overline{h^1_{i_1i_2}}},\overline{h^1_{i_1i'_2}}]\overset{j}{\mapsto}h^1_{i_1i_2}\otimes h^1_{i_1i'_2}+h^1_{i_1i'_2}\otimes h^1_{i_1i_2}.\]
+Secondly, if $g^0_{i_1}$ contains a restriction $(h^1_{i_1i_2})^{[2]}$, then $\textup{cr}(g^0_{i_1})(h^1_{i_1i_2})$ contains
+\[(\overline{h^1_{i_1i_2}}+\overline{\overline{h^1_{i_1i_2}}})^{[2]}-
+(\overline{h^1_{i_1i_2}})^{[2]}
+-(\overline{\overline{h^1_{i_1i_2}}})^{[2]}
+=[\overline{h^1_{i_1i_2}},\overline{\overline{h^1_{i_1i_2}}}]\overset{j}{\mapsto}h^1_{i_1i_2}\otimes h^1_{i_1i_2}.\qedhere\]
+\end{proof}
+
 \subsection{Homotopy of a smash}
 Suppose that $X$ and $Y$ are models in simplicial Lie algebras, which is to say that $X$ and $Y$ are each (almost free, and) weakly equivalent to a wedge of spheres. 
 
@@ -5110,7 +5151,7 @@ The relation $B_1-B_0=1$ becomes
 
 \subsection{app-propagation}
 I'm guessing that we only propagate from an `app' when
-\[\ell^{N_1}+\ell^{N_1-1}-{e}^{N_1}-(\ell^{N_0}+\ell^{N_0-1}-{e}^{N_0})-1=0.\]
+\[\ell^{N_1}+\ell^{N_1-1}-{e}^{N_1} -(\ell^{N_0}+\ell^{N_0-1}-{e}^{N_0})-1=0.\]
 We can choose to (app,add) with a gain of $e^{N_1}-\ell^{N_1-1}$ (a negative quantity), or to (app,app) with zero gain. We choose (app,add) whenever we can, which is to say whenever what is added to the target is still a non-negative operation.
 
 \subsubsection{$(\textup{app},\textup{add})$-propagation}
