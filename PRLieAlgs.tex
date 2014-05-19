@@ -10,7 +10,7 @@
 \excludeversion{GrothendieckSpectralSequencestake2}
 \excludeversion{convergenceOLD}
 \excludeversion{hiltonMilnorQuestionable}
-\def\excludeversion#1{\includeversion{#1}}
+%\def\excludeversion#1{\includeversion{#1}}
 \excludeversion{Frontmatters}
 \excludeversion{Endmatter}
 \excludeversion{AdamsDerivation}
@@ -2608,12 +2608,87 @@ The stuff in here is what I wrote after a brief chat with Haynes about the inclu
 \begin{backgroundOnMultiplicativity}
 \section{Background on multiplicativity}
 \subsection{Smash products}
-Suppose that $\mathsf{C}$ is one of the above categories of Lie algebras, or something. Then for $X,Y\in\mathsf{C}$ define $X\wedge Y$ to be the kernel of the natural map $X\sqcup Y\to X\times Y$. There is a natural map $j:Q(X\wedge Y)\to QX\otimes QY$, defined by
-\[\lambda_{i_1}\cdots \lambda_{i_r}[a_1,\cdots ,a_s]\mapsto0,\textup{ if }r>0\textup{ or }s>2
+Suppose that $\mathsf{C}$ is one of the above categories of Lie algebras, or something. Then for $X,Y\in\mathsf{C}$ define $X\wedge Y$ to be the kernel of the natural map $X\sqcup Y\to X\times Y$. 
+\begin{prop}
+There is a unique map $j:Q(X\wedge Y)\to QX\otimes QY$ such that
+\[\lambda_{i_1}\cdots \lambda_{i_r}[z_1,\cdots ,z_a]\overset{j}{\mapsto}\begin{cases}
+%0,&\textup{if }r>0\textup{ or }s>2;\\
+z_1\otimes z_2,&\textup{if }r=0,\,a=2,\,z_1\in X\textup{ and } z_2\in Y,
+\\0,&\textup{otherwise, }
+\end{cases}
 \]
-where each of $a_1,\ldots,a_s$ is an element of either $X$ or $Y$, and $[a_1,\ldots,a_s]$ represents some choice of bracketing, and by
-\[[x,y]\mapsto x\otimes y\textup{ where }x\in X,\ y\in Y.\]
- Note that being in the subalgebra $X\wedge Y$ of $X\sqcup Y$ is the condition that \emph{something} from both $X$ and $Y$ appears. Thus, we have completely described the map $j$. It's well defined.
+where each of $z_1,\ldots,z_a$ is an element of either $X$ or $Y$, and $[z_1,\ldots,z_s]$ represents some choice of bracketing. It is natural in $X$ and $Y$.
+\end{prop}
+%, and by
+%\[[x,y]\mapsto x\otimes y\textup{ where }x\in X,\ y\in Y.\]
+\begin{proof}
+There's a commuting diagram in $\mathsf{C}$
+\[\xymatrix@R=4mm{
+\mathsf{C}\mathsf{C}X\wedge \mathsf{C}\mathsf{C}Y
+\ar[d]^-{\textup{in}_{\mathsf{C}\mathsf{C}}}
+\ar@<.3ex>[r]^-{\alpha_{\wedge }}
+\ar@<-.3ex>[r]_-{\beta_{\wedge }}
+&%r1c1
+\mathsf{C}X\wedge \mathsf{C}Y
+\ar[d]^-{\textup{in}_{\mathsf{C}}}
+\ar[r]^-{\rho\wedge \rho}
+&%r1c2
+X\wedge Y
+\ar[d]%^-{\textup{in}}
+\ar[r]
+\ar@{..>}[dr]_-{j'}
+&
+Q(X\wedge Y)
+\ar@{..>}[d]^-{j}
+\\
+\mathsf{C}(\mathsf{C}X\oplus\mathsf{C}Y)
+\ar[d]
+\ar@<.3ex>[r]^-{\alpha_{\sqcup}}
+\ar@<-.3ex>[r]_-{\beta_{\sqcup}}
+&%r1c1
+\mathsf{C}(X\oplus Y)
+\ar@{..>}@/_1em/[rr]_-(.85){j''}
+\ar[d]
+\ar[r]^-{\rho\sqcup \rho}
+&%r1c2
+X\sqcup Y
+\ar[d]
+&
+QX\otimes QY
+\\
+\mathsf{C}\mathsf{C}X\times \mathsf{C}\mathsf{C}Y
+\ar@<.3ex>[r]^-{\alpha_{\times}}
+\ar@<-.3ex>[r]_-{\beta_{\times}}
+&%r1c1
+\mathsf{C}X\times \mathsf{C}Y
+\ar[r]^-{\rho\times \rho}
+&%r1c2
+X\times Y
+}\]
+Here, $\alpha_{\sqcup}$ is induced by the inclusion $\mathsf{C}(X)\oplus\mathsf{C}(Y)\to\mathsf{C}(X\oplus Y)$ and $\alpha_{\times}=\mu\times\mu$ (writing $\mu:\mathsf{C}\mathsf{C}\to\mathsf{C}$), while $\beta_{\sqcup}$ is induced by $\rho\oplus\rho:\mathsf{C}(X)\oplus\mathsf{C}(Y)\to X\oplus Y$ and $\beta_{\times}=\mathsf{C}(\rho)\times\mathsf{C}(\rho)$ (writing $\rho:\mathsf{C}X\to X$ for the action map). Finally, $\alpha_{\wedge }$ and $\beta_{\wedge }$ are just the restrictions of $\alpha_{\sqcup }$ and $\beta_{\sqcup }$.
+
+The specifications in the proposition's statement define a map $j''$.
+The point will be that the top row is a coequaliser diagram of vectorspaces, so that $j''$ induces a map $j'$ as long as $j''$ vanishes on $\textup{im}((\alpha_{\sqcup}-\beta_{\sqcup})\circ \textup{in}_{\mathsf{C}\mathsf{C}})$. The map $\overline{j}$ is exactly that defined in the statement of the proposition.
+
+The smash product $X\wedge Y$ is a subalgebra of $X\sqcup Y$, which can be described using the following coequaliser of vectorspaces:
+\[\xymatrix@R=4mm@1{
+\mathsf{C}(\mathsf{C}(X)\oplus\mathsf{C}(Y))
+\ar@<.5ex>[r]^-{\mathsf{C}(\rho\oplus\rho)}
+\ar@<-.5ex>[r]_-{\beta}
+&%r1c1
+\mathsf{C}(X\oplus Y)
+\ar[r]
+&%r1c2
+X\sqcup Y%r1c3
+}\]
+where $\beta$ is the unique $\mathsf{C}$-map induced by the sum of the inclusions $\mathsf{C}(X)\to\mathsf{C}(X\oplus Y)$ and $\mathsf{C}(Y)\to\mathsf{C}(X\oplus Y)$. Here $\mathsf{C}(X\oplus Y)$ is spanned by formal expressions $e^0(x_i,y_k)$, which guarantees the unicity of the map $j$. The vector space $\mathsf{C}(\mathsf{C}(X)\oplus\mathsf{C}(Y))$ is spanned by doubly-formal expressions $e^0(e^1_{i_1}(x_{i_1i_2}),e^1_{k_1}(y_{k_1k_2}))$. The image of this expression under the map $(\mathsf{C}(\rho\oplus\rho)-\beta)$ is
+\[e^0(e_{i_1}(x_{i_1i_2}),e_{k_1}(y_{k_1k_2}))-e(e^0_{i_1}(x_{i_1i_2}),e^0_{k_1}(y_{k_1k_2}))\]
+
+
+
+Note that being in the subalgebra $X\wedge Y$ of $X\sqcup Y$ is the condition that \emph{something} from both $X$ and $Y$ appears. Thus, we have completely described the map $j$. It's well defined.
+\end{proof}
+
 \subsection{Coproducts in the simplicial bar construction}
 Suppose that $X\in\LL{}$. We may construct a coproduct (although I'm not sure if it's homotopy coassociative, etc.) on the simplicial bar construction $\Q_{\LL{}}[\Fr{\LL{}}]^{\bullet+1}X$, using Goerss' method. First we'll construct a map $\overline{\xi}_{\LL{}}$ with a factoring $\xi_{\LL{}}$ as follows:
 \[\xymatrix@R=4mm{
