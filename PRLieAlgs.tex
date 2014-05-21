@@ -22,7 +22,8 @@
 \excludeversion{HomotopicalAlgebra}
 \excludeversion{DiagramOfFunctors}
 \excludeversion{GrothendieckSpectralSequences}
-\includeversion{backgroundOnMultiplicativity}
+\includeversion{Grothendieck Multiplicativity}
+\includeversion{Thoughts on Adams Multiplicativity}
 \excludeversion{KoszulComplexes_n>1}
 \excludeversion{KoszulComplexes1}
 \excludeversion{DerivedFunctorsLowDimension}
@@ -2605,7 +2606,7 @@ The stuff in here is what I wrote after a brief chat with Haynes about the inclu
 %\end{proof}
 \end{ConversationWithHaynes_InclusionOfBarConstructions}
 
-\begin{backgroundOnMultiplicativity}
+\begin{Grothendieck Multiplicativity}
 \section{Multiplicativity of the Grothendieck spectral sequence}
 \subsection{Smash products}
 Suppose that $\mathsf{C}$ is one of the above categories of Lie algebras, or something. Then for $X,Y\in\mathsf{C}$ define $X\wedge Y$ to be the kernel of the natural map $X\sqcup Y\to X\times Y$. 
@@ -2636,7 +2637,7 @@ There's a commuting diagram in $\mathsf{C}$
 X\wedge Y
 \ar[d]%^-{\textup{in}}
 \ar[r]
-\ar@{..>}[dr]_-{j'}
+%\ar@{..>}[dr]_-{j'}
 &
 Q(X\wedge Y)
 \ar@{..>}[d]^-{j}
@@ -2653,6 +2654,7 @@ Q(X\wedge Y)
 &%r1c2
 X\sqcup Y
 \ar[d]
+\ar@{..>}[r]^-{j'}
 &
 QX\otimes QY
 \\
@@ -2673,16 +2675,18 @@ Here, $\alpha_{\sqcup}$ is induced by the inclusion $\mathsf{C}(X)\oplus\mathsf{
 The three-by-three square above has columns short exact sequences which commute with the horizontal maps. The columns have an evident splitting (of vectorspaces), which also commutes with the horizontal maps. The middle two rows are evidently coequalizers (of vectorspaces), and in light of the splittings, the tow row must be a coequalizer.
 
 The specifications in the proposition's statement define a map $j''$.
-As the top row is a coequaliser diagram of vectorspaces, $j''$ induces a map $j'$ as long as $j''\circ(\alpha_{\sqcup}-\beta_{\sqcup})\circ \textup{in}_{\mathsf{C}\mathsf{C}}=0$. Then $j'$ will induce a map $j$ as long as $j'$ vanishes on nontrivial operations in $X\wedge Y$.
+As the top row is a coequaliser diagram of vectorspaces, $j''$ induces%footnote:
+\footnote{I once thought that actually only the composite with $\textup{in}_{\mathsf{C}\mathsf{C}}$ was zero. Was I right all along?} a map $j'$ as long as $j''\circ(\alpha_{\sqcup}-\beta_{\sqcup})=0$. Then $j'$ will induce a map $j$ as long as $j'$ vanishes on nontrivial operations in $X\wedge Y$.
 
-The vectorspace $\mathsf{C}(X\oplus Y)$ is spanned by formal expressions $e^0(x_i,y_k)$. The vectorspace $\mathsf{C}(\mathsf{C}(X)\oplus\mathsf{C}(Y))$ is spanned by doubly-formal expressions $E=e^0(e^1_{i_1}(x_{i_1i_2}),e^1_{k_1}(y_{k_1k_2}))$, and its subspace $\mathsf{C}\mathsf{C}X\wedge \mathsf{C}\mathsf{C}Y$ is spanned by those in which $e^0$ only contains terms which involve some element of both $X$ and $Y$. The image of this expression under the map $(\alpha_{\sqcup}-\beta_{\sqcup})$ is
+The vectorspace $\mathsf{C}(X\oplus Y)$ is spanned by formal expressions $e^0(x_i,y_k)$. The vectorspace $\mathsf{C}(\mathsf{C}(X)\oplus\mathsf{C}(Y))$ is spanned%footnote:
+\footnote{Now irrelevant: its subspace $\mathsf{C}\mathsf{C}X\wedge \mathsf{C}\mathsf{C}Y$ is spanned by those in which $e^0$ only contains terms which involve some element of both $X$ and $Y$.} by doubly-formal expressions $E=e^0(e^1_{i_1}(x_{i_1i_2}),e^1_{k_1}(y_{k_1k_2}))$. The image of this expression under the map $(\alpha_{\sqcup}-\beta_{\sqcup})$ is
 \[e^0(e^0_{i_1}(x_{i_1i_2}),e^0_{k_1}(y_{k_1k_2}))-e^0(e_{i_1}(x_{i_1i_2}),e_{k_1}(y_{k_1k_2})).\]
-Consider then a monomial summand of $e^0$, when $E\in \mathsf{C}\mathsf{C}X\wedge \mathsf{C}\mathsf{C}Y$. If this summand is not simply of the form $[?,?]$, then it has no contribution to the value of $(j''\circ(\alpha_{\sqcup}-\beta_{\sqcup})\circ \textup{in}_{\mathsf{C}\mathsf{C}})(E)$. Thus we may consider only those summands of the form $[e^1_{i_1}(x_{i_1i_2}),e^1_{k_1}(y_{k_1k_2})]^0$, which under $(\alpha_{\sqcup}-\beta_{\sqcup})\circ \textup{in}_{\mathsf{C}\mathsf{C}}$ maps to
-\[[e^0_{i_1}(x_{i_1i_2}),e^0_{k_1}(y_{k_1k_2})]^0-[e_{i_1}(x_{i_1i_2}),e_{k_1}(y_{k_1k_2})]^0.\]
-Unless both of $e_{i_1}$ and $e_{k_1}$ are just the identity, both of these terms are sent to zero by $j''$. When both are the identity, so that the element we're looking at is $[x,y]^0$, we're calculating
-\[j''([x,y]^0-[x,y]^0)=j''(0)=0.\]
+Consider then a monomial summand of $e^0$, when $E\in \mathsf{C}(\mathsf{C}X\oplus \mathsf{C}Y)$. If this summand is not simply of the form $[e_1^1(x_i),e_2^1(y_k)]^0$, then it has no contribution to the value of $(j''\circ(\alpha_{\sqcup}-\beta_{\sqcup}))(E)$. Thus we may consider only summands of this form, which under $j''\circ (\alpha_{\sqcup}-\beta_{\sqcup})\circ $ map to
+\[[e^0_{i}(x_{i}),e^0_{k}(y_{k})]^0-[e_{i}(x_{i}),e_{k}(y_{k})]^0.\]
+Unless both of $e_{i}$ and $e_{k}$ are just the identity, both of these terms are sent to zero by $j''$. If both are the identity, so that the element we're looking at is $[x,y]^0$, it happens that $(\alpha_{\sqcup}-\beta_{\sqcup})E=0$.
 This demonstrates that the extension $j'$ exists.
-That $j'$ extends to $j$ follows from the fact that $\rho\wedge \rho$ is surjective and the observation that any nontrivial operation on elements of $\mathsf{C}X\wedge \mathsf{C}Y$ will create more complicated expressions than those of the form $[x,y]^0$.
+That $j'$ extends to $j$ follows from the fact that $\rho\wedge \rho$ is surjective and the observation that any nontrivial operation on elements of $\mathsf{C}X\wedge \mathsf{C}Y$ will create more complicated%footnote:
+\footnote{Complexity should be measured by quadratic grading.} expressions than those of the form $[x,y]^0$.
 \end{proof}
 
 \subsection{Coproducts in the simplicial bar construction}
@@ -3132,7 +3136,164 @@ d^\textup{fil}(K')
 \end{alignat*}
 To explain further the removal of the $s_{\alpha_{ji_0}}$, note that the quantity $\sum ue_j(s_{\cdots }k_{\cdots })$ is an element of the normalized chain complex of $QWX$, and as such, no nontrivial degeneracies may appear therein. That is, it must happen that after restricting the the identity part $ue_j$ of $e_j$, no nontrivial degeneracies remain, and it makes sense to remove the symbol. It similarly makes sense to replace the symbol after applying $\Phi$.
 \end{proof}
-\end{backgroundOnMultiplicativity}
+\end{Grothendieck Multiplicativity}
+
+\begin{Thoughts on Adams Multiplicativity}
+\subsection{Adams multiplicativity}
+Let $\widetilde{A}^n:=c(K\overline{Q})^{n+1}A$, for $A$ a simplicial algebra. Then $\widetilde{A}^\bullet$ is a levelwise cofibrant cosimplicial object, with a Hurewicz morphism to $Q\widetilde{A}^\bullet$. However, $Q\widetilde{A}^\bullet$ is contractible, and the cosimplicial homology coalgebra $\pi_*(Q\widetilde{A}^\bullet)$ is thus a cofree resolution of $H_*(A)$. However, the Hurewicz morphism is in each level an isomorphism onto the primitives, so that
+\[\pi_*(\widetilde{A}^\bullet)\overset{\simeq}{\to}P\pi_*(Q\widetilde{A}^\bullet)\overset{}{\to}\pi_*(Q\widetilde{A}^\bullet).\]
+Thus, the $E^2$ term is derived primitives on $H_*(A)$. As such, it should admit a product. In fact, the product should shift both gradings by 1, the internal grading $*$ and the filtration grading $\bullet$.
+This product on $E^2$ may be defined using a map $\overline{\xi}:(\pi_*(Q\widetilde{A}^{\bullet}))^{\times2}\overset{}{\to}\pi_*(Q\widetilde{A}^{\bullet-1})$ and its factoring $\xi$:
+%
+%
+%
+%
+%First we'll construct a map $\overline{\xi}_{\LL{}}$ with a factoring $\xi_{\LL{}}$ as follows:
+%\[\xymatrix@R=4mm{
+%\pi_*(\widetilde{A}^{\bullet-1})
+%\ar[r]^-{h}
+%\ar@{-->}[dr];[]^-{\pi_*(\xi_\textup{res})}
+%&
+%\pi_*(Q\widetilde{A}^{\bullet-1})
+%\ar[rr];[]_-{\overline{\xi}}
+%\ar@{-->}[rd];[]_-{\xi}
+%&&%r1c1
+%\pi_*(Q\widetilde{A}^{\bullet})^{\times2}\\%r1c3
+%&
+%\pi_*(\widetilde{A}^{\bullet-1})
+%\ar[r]^-{h}&%r2c1
+%\pi_*(Q\widetilde{A}^{\bullet})^{\wedge 2}
+%\ar@{->>}[ur];[]○
+%}\]
+\[\xymatrix@R=4mm{
+&&&\pi((\widetilde{A}^\bullet)^{\sqcup2})
+\ar[dl]
+\\
+\pi(\widetilde{A}^{\bullet-1})
+\ar[rr];[]_-{\pi(\overline{\xi}_\textup{res})}
+\ar@{->}[rd];[]_-{\pi(\xi_\textup{res})}
+\ar[d]^-{h}_\simeq
+&&%r1c1
+\pi(c((\widetilde{A}^\bullet)^{\times2}))
+\ar@{=}[r]
+\ar[dd]^-{h}
+&
+\pi(\widetilde{A}^{\bullet})^{\oplus2}\\%r1c3
+P\pi(Q\widetilde{A}^{\bullet-1})
+\ar[d]
+&%r2c1
+\pi(\textup{cof})
+\ar@{->}[ur];[]○
+\ar[d]^{h}
+&
+&
+\pi(Q((\widetilde{A}^\bullet)^{\sqcup2}))
+\ar@{=}[r]
+\ar@{>->}[ld]
+&
+\pi(Q\widetilde{A}^{\bullet})^{\sqcup2}
+\ar@{>->}[ld]
+\\
+\pi(Q\widetilde{A}^{\bullet-1})
+\ar@/^1em/[rr];[]_-(.9){\overline{\xi}}
+\ar@{->}[rd];[]^-{\xi}
+&
+P\pi(Q\textup{cof})
+\ar[ul]^-(.8){P(\xi)}
+\ar[d]
+&%r1c1
+\pi(Qc((\widetilde{A}^\bullet)^{\times2}))
+\ar@{=}[r]
+&
+\pi(Q\widetilde{A}^{\bullet})^{\times2}
+\ar@{->>}[ld]\\%r1c3
+&%r2c1
+\pi(Q\textup{cof})
+\ar@{->>}[ur];[]○
+\ar@{=}[r]
+&
+\pi(Q\widetilde{A}^{\bullet})^{\wedge 2}
+}\]
+We'd like to use the map $P(\xi):P\pi(Q\textup{cof})\to P\pi(Q\widetilde{A}^{\bullet-1})$, and it would be awesome if $(P(\xi)\circ h)$ could actually be defined on the simplicial level. It'll be enough to define a map $\overline{\xi}_{\textup{res}}$ that corresponds to $\overline{\xi}$ under the Hurewicz, and then to note that it factors through the cofibre.
+\[\xymatrix@R=4mm@C=3mm{
+\pi(A\otimes A)
+\ar@{=}[r]
+\ar@{-->}[d]_-{?}
+&%r1c1
+(P\pi(QA))^{\otimes 2}
+\ar[drrrr]^-{j'}
+\ar[dr]_-{j}
+&%r1c2
+&%r1c3
+&%r1c4
+&%r1c5
+\\%r1c6
+\pi(\textup{cof})
+\ar@/^1em/[dddr]^-(.625){\pi(\xi_\textup{res})}
+\ar[rr]
+&%r2c1
+&%r2c2
+P\pi(Q\textup{cof})
+\ar[rr]
+\ar@/^1em/[dddr]^-(.625){P\pi(\xi_\textup{res})}
+&%r2c3
+&%r2c4
+\pi(Q\textup{cof})\ar@{=}[r]
+&%r2c5
+\pi(QA)^{\wedge 2}
+\ar@/^1em/[dddr]^-(.625){\xi}
+\\
+\pi(c(A^{\times2}))
+\ar@/^1em/[ddr]_-(.8){\pi(\overline{\xi}_\textup{res})}
+\ar[rr]
+\ar[u]
+&%r2c1
+&%r2c2
+P\pi(Qc(A^{\times2}))
+\ar@/^1em/[ddr]_-(.8){P\pi(\overline{\xi}_\textup{res})}
+\ar[rr]
+\ar[u]
+&%r2c3
+&%r2c4
+\ar[u]
+\pi(Qc(A^{\times2}))\ar@{=}[r]
+&%r2c5
+\pi(QA)^{\times 2}
+\ar[u]
+\ar@/^1em/[ddr]_-(.8){\overline{\xi}}
+\\
+\pi(A^{\sqcup2})
+\ar[rr]
+\ar[u]
+&%r2c1
+&%r2c2
+P\pi(QA^{\sqcup2})
+\ar[rr]
+\ar[u]
+&%r2c3
+&%r2c4
+\ar[u]
+\pi(QA^{\sqcup2})\ar@{=}[r]
+&%r2c5
+\pi(QA)^{\sqcup 2}
+\ar[u]
+\\
+&
+\pi(A^{\sqcup2})
+\ar[rr]
+&%r2c1
+&%r2c2
+P\pi(QA^{\sqcup2})
+\ar[rrr]
+&%r2c3
+&%r2c4
+&
+\pi(QA^{\sqcup2})
+}\]
+I guess the map $?$ will need to shift degrees up by 1, to keep up with $j'$, and to keep products on $E^2$ having shift $(+1,+1)$. It could have the properties that Goerss likes. It's enough for it simply to commute with $j'$, and not $j$, although that's trivial.
+
+
+\end{Thoughts on Adams Multiplicativity}
 \begin{KoszulComplexes_n>1}
 \section{Unstable Koszul complexes for $\derived\Ind{\nontop{}}$} \label{sectionOnUnstableKoszulComplexes}
 \subsection{Koszul complexes for $\derived\Ind{\nontop{}}$ for $n\geq2$}
@@ -5422,7 +5583,7 @@ The most general source is $\SqShift^L?$, to be found in
 One concludes that (with $r\geq3$), $\ell(L)=\textstyle\sum\ell(I_i)+\textstyle\sum\ell(J_j)+(r-2)$, while
 \[\left(\textstyle\sum2^{\ell(I_i)}+\textstyle\sum2^{\ell(J_j)+1}\right) =2^{\ell(L)+1?0}.\]
 Combining these equations,
-\[\left(\textstyle\sum2^{\ell(I_i)}+\textstyle\sum2^{\ell(J_j)+1}\right) =2^{\left(\textstyle\sum\ell(I_i)+\textstyle\sum\ell(J_j)+(r-2)+1?0\right)}.\]
+\[\left(\textstyle\sum2^{\ell(I_i)}+\textstyle\sum2^{\ell(J_j)+1}\right) =2^{\left(\textstyle\sum\ell(I_i)+ \textstyle\sum\ell(J_j)+(r-2)+1?0\right)}.\]
 The occurrences of length combinations satisfying these conditions can be checked using the maple code to follow. It will rule out almost everything, and then one needs to think about the remaining grading...
 
 \textbf{}
