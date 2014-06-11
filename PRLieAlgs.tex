@@ -146,6 +146,10 @@
 \end{Frontmatters}
 
 
+
+
+
+
 \begin{hiltonMilnorQuestionable}
 \subsection{Hilton-Milnor theorems}
 Suppose that $\algCat$ is a category of finitary universal algebras in $k$-modules, with no nullary or unary operations, for $k$ a field.
@@ -3262,18 +3266,18 @@ P\pi(Qc(A^{\times2}))
 \ar[u]
 \ar@/^1em/[ddr]_-(.8){\overline{\xi}}
 \\
-\pi(A^{\sqcup2})
+\pi(c(A^{\sqcup2}))
 \ar[rr]
 \ar[u]
 &%r2c1
 &%r2c2
-P\pi(QA^{\sqcup2})
+P\pi(Qc(A^{\sqcup2}))
 \ar[rr]
 \ar[u]
 &%r2c3
 &%r2c4
 \ar[u]
-\pi(QA^{\sqcup2})\ar@{=}[r]
+\pi(Qc(A^{\sqcup2}))\ar@{=}[r]
 &%r2c5
 \pi(QA)^{\sqcup 2}
 \ar[u]
@@ -3291,8 +3295,64 @@ P\pi(QA_+)
 \pi(QA_+)
 }\]
 I guess the map $?$ will need to shift degrees up by 1, to keep up with $j'$, and to keep products on $E^2$ having shift $(+1,+1)$. It could have the properties that Goerss likes. It's enough for it simply to commute with $j'$, and not $j$, although that's trivial.
+\subsection{A general construction}
+Let $f:X\to Y$ be a map of simplicial algebras, and write `$\textup{ker}$' for the (strict) kernel of $f$, and `$\textup{cof}$' for the homotopy cofibre of $f$, built using the small object argument (i.e.\ $\textup{cof}:=m(sf)\sqcup_{sA}0$). Then there's a commuting diagram:
+\[\xymatrix@C=16mm@R=6mm@!0{
+\overline{W}(c(\textup{ker}))\ar@{-->}[rr]
+&%r1c1
+&%r1c2
+\Sigma(\textup{ker})\ar[rr]
+&%r1c3
+&%r1c4
+\textup{cof}\\\\%r1c5
+W(c(\textup{ker}))\ar@{-->}[rr]\ar[uu]
+&%r2c1
+&%r2c2
+m''\ar[rr]\ar@{->>}[dr]_-{\sim}
+\ar[uu]
+&%r2c3
+&%r2c4
+m'\ar@{->>}[dr]^-{\sim}
+\ar[uu]
+\\%r2c5
+&%r3c1
+&%r3c2
+&%r3c3
+0\ar[rr]
+&%r3c4
+&c(Y)
+\\%r3c5
+c(\textup{ker})\ar@{ >->}[uu]
+\ar@{=}[rr]
+&%r4c1
+&%r4c2
+c(\textup{ker})\ar@{ >->}[uu]
+\ar[rr]\ar[ru]
+&%r4c3
+&%r4c4
+c(X)\ar@{ >->}[uu]
+\ar[ur]
+}\]
+Note that the lower dotted map is that filling the commuting square
+\[\xymatrix@R=4mm{
+c(\textup{ker})\ar@{ >->}[d]\ar@{ >->}[r]
+&%r1c1
+m''\ar@{->>}[d]^-{\sim}
+\\%r1c2
+W(c(\textup{ker}))\ar[r]\ar@{-->}[ru]
+&%r2c1
+0%r2c2
+}\]
+This furnishes us with a map $N_*(c(\textup{ker}))\to N_*(\textup{cof})$. Now if we use a back-to-front version of the $W$-construction, there is a natural map $N_*Z\to N_{*+1}\overline{W}Z$ for any simplicial NUCA $Z$, constructed by mapping $Z_n$ isomorphically onto the final summand of $\overline{W}^{n+1}Z=Z_0\sqcup\cdots \sqcup Z_n$. This is trivially a chain map.
 
+Using $X=A^{\sqcup2}$ and $Y=A^{\times2}$, and $Z=\textup{ker(f)}=A^{\otimes2}$, we get a zig-zag on normalized complexes
+\[N_*(A^{\otimes2})\overset{\sim}{\from}N_*(c(A^{\otimes2}))\to N_{*+1}(\overline{W}(c(A^{\otimes2})))\to N_{*+1}(\textup{cof}).\]
+\subsection{Finishing the proof}
+We just need to see that the right hand square commutes up to homotopy. That's because the middle backwards maps (trivially preserve filtration and) are levelwise weak equivalences. Thus, whatever cycle pops up in $N(A^{\otimes2})$, you can hit it (up to a boundary therein) with a cycle in $N(A^{\otimes2})$. But after mapping out to the right hand copy of $N(A^{\otimes2})$, your error is exactly the same cycle!
 
+The $E_r$ level product will be given by ``apply AWEZ, pull back to something in TcA2, and then apply the monster map.'' \textbf{Actually I'm not sure whether or not that's well defined. There might be something to check.}
+
+\subsection{The construction of $\xi_\textup{res}$}
 \[\xymatrix@R=0mm{
 (HA)^{\wedge 2}
 \ar@{-->}@/^3em/[rrrrdd]^-(.9){\xi}
@@ -3308,7 +3368,8 @@ I guess the map $?$ will need to shift degrees up by 1, to keep up with $j'$, an
 \ar@{}[dd]|{\times}="timesThree"
 HA_+&%r1c4
 \\%r1c5
-(HA)^{\times2}\ar;"timesOne"^-{\textup{diag}}
+(HA)^{\times2}\ar;"timesOne"_-{\textup{diag}}
+\ar@{-->}@/^3.9em/[rrrr]^-(.1){\overline{\xi}}
 \ar@{->>}[uu]
 &%r2c1
 &%r2c2
@@ -3331,24 +3392,25 @@ HA_+&%r3c4
 \textup{cof}
 \ar@{-->}@/^1em/[rrrrdd]^-(.9){\xi_\textup{res}}
 \\\\%r3c5
-c(A^2)\ar[r]^-{c(\textup{diag})}
 \ar[uu]
+\ar@{-->}@/^1.3em/[rrrr]^-(.1){\overline{\xi}_\textup{res}}
+c(A^2)\ar[r]_-{c(\textup{diag})}
 &%r4c1
-c(A^4)\ar[dd]^-{\beta}
+c(A^2\times A^2)\ar[dd]^-{\beta}
 &%r4c2
 c(A_+^2\times A)
 \ar[dd]^-{\beta}
 &%r4c3
-c(A_+^2)\ar[dd]^-{\beta}
+c(A_+\times A_+)\ar[dd]^-{\beta}
 &%r4c4
 c(A_+)\\\\%r4c5
 c(A^{\sqcup2})\ar[uu]
 &%r5c1
-c(c(A^4))\ar[dd]
+c(c(A^2\times A^2))\ar[dd]
 &%r5c2
 c(c(A_+^2\times A))\ar[dd]
 &%r5c3
-c(c(A^2_+))\ar[uur]_-{c(h)}
+c(c(A_+\times A_+))\ar[uur]_-{c(h)}
 &%r5c4
 %r5c5
 \\\\%r4c5
@@ -3476,7 +3538,7 @@ sB\ar@{->}@/^.41em/@<.25ex>[ur]^\delta
 }\]
 \subsubsection{A map from the bar construction to the SOA}
 There is one! In fact, there's a map from the $n$-skeleton of the bar construction to the $n^\textup{th}$ stage of the SOA.
-\subsubsection{A universal(?) cofibration}
+\subsubsection{A cofibration}
 Write $S^n$ for (the free construction on) $\Delta^n/\partial\Delta^n$, and $CS^n$ for (the free construction on) the reduced cone thereupon. Now there's a map $S^{n+m}\to S^n\sqcup S^m$ sending the fundamental class to the Eilenberg-Zilber formula. That is, if $\mu:(S^n\sqcup S^m)^{\otimes 2}\to S^n\sqcup S^m$ is multiplication, the map we are describing sends $\imath_{n+m}\mapsto \mu(\textup{EZ}(\imath_n,\imath_m))$. Now consider the complex $C_{n,m}$ formed by coning off the corresponding homotopy class:
 \[\xymatrix@R=4mm{
 S^{n+m}\ar[r]
