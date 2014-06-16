@@ -10,7 +10,7 @@
 \excludeversion{GrothendieckSpectralSequencestake2}
 \excludeversion{convergenceOLD}
 \excludeversion{hiltonMilnorQuestionable}
-\def\excludeversion#1{\includeversion{#1}}
+%\def\excludeversion#1{\includeversion{#1}}
 \excludeversion{Frontmatters}
 \excludeversion{Endmatter}
 \excludeversion{AdamsDerivation}
@@ -3348,9 +3348,34 @@ This furnishes us with a map $N_*(c(\textup{ker}))\to N_*(\textup{cof})$. Now if
 Using $X=A^{\sqcup2}$ and $Y=A^{\times2}$, and $Z=\textup{ker(f)}=A^{\otimes2}$, we get a zig-zag on normalized complexes
 \[N_*(A^{\otimes2})\overset{\sim}{\from}N_*(c(A^{\otimes2}))\to N_{*+1}(\overline{W}(c(A^{\otimes2})))\to N_{*+1}(\textup{cof}).\]
 \subsection{Finishing the proof}
+Consider the following diagram:
+\[\xymatrix@R=4mm{
+(T_*(\widetilde{A}))^{\otimes 2}\ar[r]^-{\textup{AWEZ}}
+&%r1c1
+T_*(\widetilde{A}^{\otimes 2})&%r1c2
+T_*(c(\widetilde{A}^{\otimes 2}))\ar[l]_-{\epsilon}
+\ar[r]^-{\textup{monster}}
+&%r1c3
+T_*(\widetilde{A})\\%r1c4
+(N_*(A))^{\otimes 2}\ar[r]^-{\textup{EZ}}\ar[u]
+&%r1c1
+N_*({A}^{\otimes 2})\ar[u]&%r1c2
+T_*(c({A}^{\otimes 2}))\ar[l]_-{\epsilon}\ar[u]
+\ar[r]^-{\textup{mult}\circ\epsilon}
+&%r1c3
+N_*(A)\ar[u]
+}\]
+\subsubsection{An $E^r$-level product for $r\geq1$}
+The three top horizontal maps are perfectly decent maps of filtered complexes, with the `monster' map increasing filtration by one.
+\subsubsection{the rest}
+The maps $\textup{AWEZ}$ and $\epsilon$ are both induced by maps of double complexes.
+
 We just need to see that the right hand square commutes up to homotopy. That's because the middle backwards maps (trivially preserve filtration and) are levelwise weak equivalences. Thus, whatever cycle pops up in $N(A^{\otimes2})$, you can hit it (up to a boundary therein) with a cycle in $N(A^{\otimes2})$. But after mapping out to the right hand copy of $N(A^{\otimes2})$, your error is exactly the same cycle!
 
 The $E_r$ level product will be given by ``apply AWEZ, pull back to something in TcA2, and then apply the monster map.'' \textbf{Actually I'm not sure whether or not that's well defined. There might be something to check.}
+
+
+
 
 \subsection{The construction of $\xi_\textup{res}$}
 \[\xymatrix@R=0mm{
@@ -3401,16 +3426,17 @@ c(A^2\times A^2)\ar[dd]^-{\beta}
 c(A_+^2\times A)
 \ar[dd]^-{\beta}
 &%r4c3
-c(A_+\times A_+)\ar[dd]^-{\beta}
+c(A_+\times A_+)\ar[r]_-{h}
+%\ar[dd]^-{\beta}
 &%r4c4
-c(A_+)\\\\%r4c5
+A_+\\\\%r4c5
 c(A^{\sqcup2})\ar[uu]
 &%r5c1
 c(c(A^2\times A^2))\ar[dd]
 &%r5c2
 c(c(A_+^2\times A))\ar[dd]
 &%r5c3
-c(c(A_+\times A_+))\ar[uur]_-{c(h)}
+%c(c(A_+\times A_+))\ar[uur]_-{c(h)}
 &%r5c4
 %r5c5
 \\\\%r4c5
@@ -3429,6 +3455,77 @@ c(c(A^2_+)\times A)
 \ar@/_0em/[uuuur]^-(.7){c(h\times d_0)}&%r5c3
 &%r5c4
 %r5c5
+}\]
+\[\xymatrix@R=0mm{
+\textup{cof}
+\ar@{-->}@/^1em/[rrrrdd]^-(.9){\xi_\textup{res}}
+\\\\%r3c5
+\ar[uu]
+\ar@{-->}@/^1.3em/[rrrr]^-(.1){\overline{\xi}_\textup{res}}
+c(A^2)\ar[r]_-{\beta^2\circ c(\textup{diag})}
+&%r4c1
+ccc(A^2\times A^2)\ar[ddd]
+&%r4c2
+cc(A_+^2\times A)
+\ar[ddd]
+&%r4c3
+c(A_+\times A_+)\ar[r]_-{h}
+%\ar[dd]^-{\beta}
+&%r4c4
+A_+\\\\%r4c5
+c(A^{\sqcup2})\ar[uu]
+\\
+&%r5c1
+%r5c1
+cc(A^2\times c(A^2))
+\ar@/_0em/[uuur]^-(.45){cc(d_0^2\times h)}
+&%r5c2
+c(c(A^2_+)\times A)
+\ar@/_0em/[uuur]^-(.45){c(h\times d_0)}&%r5c3
+&%r5c4
+%r5c5
+}\]
+\[\xymatrix@R=0mm{
+\textup{cof}
+\ar@{-->}@/^1em/[rrrrdd]^-(.9){\xi_\textup{res}}
+\\\\%r3c5
+\ar[uu]
+\ar@{-->}@/^1.3em/[rrrr]^-(.1){\overline{\xi}_\textup{res}}
+c(A^2)\ar[r]_-{c(\textup{diag})\circ\beta}
+&%r4c1
+c(c(A^2)\times c(A^2))\ar[r]_-{c(c(d_0^2)\times h)}
+%\ar[ddd]
+&%r4c2
+c(c(A_+^2)\times A)
+\ar[r]_-{c(h\times d_0)}
+%\ar[ddd]
+&%r4c3
+c(A_+\times A_+)\ar[r]_-{h}
+%\ar[dd]^-{\beta}
+&%r4c4
+A_+\\\\%r4c5
+c(A^{\sqcup2})\ar[uu]
+}\]
+\[\xymatrix@R=0mm{
+\textup{cof}
+\ar@{-->}@/^1em/[rrrrdd]^-(.9){\xi_\textup{res}}
+\\\\%r3c5
+\ar[uu]
+\ar@{-->}@/^1.3em/[rrrr]^-(.1){\overline{\xi}_\textup{res}}
+c(A^2)\ar[r]_-{c(\textup{diag})\circ\beta}
+&%r4c1
+c(A^2\times c(A^2))\ar[r]_-{c((d_0^2)\times h)}
+%\ar[ddd]
+&%r4c2
+c(A_+^2\times A)
+\ar[r]_-{c(h\times (\epsilon\circ d_0))}
+%\ar[ddd]
+&%r4c3
+c(K_+\times K_+)\ar[r]_-{h}
+%\ar[dd]^-{\beta}
+&%r4c4
+A_+\\\\%r4c5
+c(A^{\sqcup2})\ar[uu]
 }\]
 Here, $A$ was being used as a *terrible* shorthand for $\widetilde{A}^n:=c(K\overline{Q})^{n+1}A$, and unadorned superscripts were used to indicate iterated products. The cofibre `$\textup{cof}$' is that of the map $A^{\sqcup2}\to A^2$. If we just write $k$ for the zero-square algebra $(K\overline{Q})^{n+1}A$, then the map $h:c(A^2)\to A$ is defined to be the composite:
 \[c(A^{2})=c((ck)^{2})\overset{c(\epsilon^{2})}{\to}c(k^2)\overset{c(\textup{add})}{\to}ck=A,\]
