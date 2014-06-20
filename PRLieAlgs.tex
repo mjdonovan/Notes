@@ -10,7 +10,7 @@
 \excludeversion{GrothendieckSpectralSequencestake2}
 \excludeversion{convergenceOLD}
 \excludeversion{hiltonMilnorQuestionable}
-%\def\excludeversion#1{\includeversion{#1}}
+\def\excludeversion#1{\includeversion{#1}}
 \excludeversion{Frontmatters}
 \excludeversion{Endmatter}
 \excludeversion{AdamsDerivation}
@@ -24,6 +24,7 @@
 \excludeversion{GrothendieckSpectralSequences}
 \excludeversion{Grothendieck Multiplicativity}
 \includeversion{Thoughts on Adams Multiplicativity}
+\includeversion{Thoughts on Adams Multiplicativity II}
 \excludeversion{KoszulComplexes_n>1}
 \excludeversion{KoszulComplexes1}
 \excludeversion{DerivedFunctorsLowDimension}
@@ -3699,6 +3700,124 @@ C{n,m}\ar@{..>}[r]
 &k^{\times2}}\]
 where the outer rectangle commutes since in $k^{\times2}$, $(a,0)\cdot(0,b)=(0,0)$. This gives a map $C_{n,m}\to c_2(k^{\times2})$ whose restriction to the subcomplex $S^n\sqcup S^m$ gives the homotopy classes $\alpha$ and $\beta$. The image $g_{\alpha,\beta}$ of the class $g\in(C_{n,m})_{n+m+1}$ is then an explicit representative for the homology class sought.
 \end{Thoughts on Adams Multiplicativity}
+\begin{Thoughts on Adams Multiplicativity II}
+\section{Reimagining multiplicativity}
+It seems that to use the construction of Bousfield-Kan \cite{BK_pairings_products.pdf,BK_pairings.pdf}, we'll need to understand the construction of $D^1X$, for cosimplicial objects $X$:
+\[\xymatrix@R=4mm{
+D^1X\ar[r]
+\ar[d]^-{\delta}
+&%r1c1
+\Lambda VX\ar[d]^-{\lambda}
+\\%r1c2
+X\ar[r]^-{\nu}
+&%r2c1
+VX%r2c2
+}\]
+Now $VX$ is the cosimplicial object given by shifting $X$ down and forgetting the 0th face and degeneracy. $d_0$ induces a map $\nu:X\to VX$. Amazing. Next the endofunctor $\Lambda:s\Comm\to s\Comm$ is applied in each cosimplicial level. This is the ``standard simplicial path fibration'' (c.f.\ \cite[p.82]{BousKanSSeq.pdf}), which acts on $Y\in s\Comm$ by shifting down and restricting to a kernel: $\Lambda Y_s=\ker(d_{s+1}\cdots d_1:Y_{s+1}\to Y_0)$; again we forget the 0th face and degeneracy. This time, $d_0:\Lambda Y\to Y$ is a fibration from an acyclic object.
+
+The game will be to somehow create a factorization
+\[\xymatrix@R=4mm{
+\widetilde{A}\otimes \widetilde{A}\ar[r]\ar@{~>}[d]
+&%r1c1
+\widetilde{A}\\%r1c2
+D^1\widetilde{A}\ar[ur]_-{\delta}
+&%r2c1
+%r2c2
+}\textup{\ \ \ or\ \ \ }
+\xymatrix@R=4mm{
+c(\widetilde{A}\otimes \widetilde{A})\ar[r]\ar@{~>}[d]
+&%r1c1
+\widetilde{A}\\%r1c2
+D^1\widetilde{A}\ar[ur]_-{\delta}
+&%r2c1
+%r2c2
+}\]
+where the wavy map is a (zigzag of) cosimplicial maps.
+
+We'll seek to use a few insights into the functors $\Lambda$ and $W$. Indeed they're adjoint, I hope, giving a correspondence between nullhomotopies given by factorizations through $W(\textup{domain})$ and factorizations through $\Lambda(\textup{codomain})$. This'll give a $\Sigma$-$\Omega$ adjunction which we'll be able to use. It's also time that we reassess how we define the cofibre and the map out of it. I'm thinking that the correct method is to use a pushout
+\[\xymatrix@R=4mm{
+W(c(\widetilde{A}^{\sqcup2}))\ar[r]
+\ar@{-->}[rrd]&%r1c1
+\textup{cof}\ar@{-->}[rd]
+&%r1c2
+\\%r1c3
+c(\widetilde{A}^{\sqcup2})\ar[r]
+\ar@{ >->}[u]
+&%r2c1
+c(\widetilde{A}^{\times2})\ar@{ >->}[u]
+\ar[r]_-{\xi_\textup{res}}
+&%r2c2
+V\widetilde{A}%r2c3
+}\]
+Indeed \textbf{we'll need} to have $\xi_\textup{res}$ a map to $V\widetilde{A}$, so that it'll turn the cosimplicial $d^i$ into $d^{i+1}$ (I think it does), and we'll \textbf{also need} to choose a nullhomotopy of the composite $c(\widetilde{A}^{\sqcup2})\to V\widetilde{A}$ consistently in the cosimplicial direction. Once this is achieved, there's a map to this pushout diagram from the diagram
+\[\xymatrix@R=4mm{
+W(c(\widetilde{A}^{\otimes2}))\ar[r]
+&%r1c1
+\overline{W}(c(\widetilde{A}^{\otimes2}))
+\\%r1c3
+c(\widetilde{A}^{\otimes2})\ar[r]
+\ar@{ >->}[u]
+&%r2c1
+0\ar@{ >->}[u]
+}\]
+giving a composite
+\[\overline{W}(c(\widetilde{A}^{\otimes2}))\to\textup{cof}\to V\widetilde{A}\]
+or by adjunction, the top map in a diagram
+\[\xymatrix@R=4mm{
+c(\widetilde{A}^{\otimes2})\ar[r]
+\ar[d]^-{\mu}
+&%r1c1
+\Lambda V\widetilde{A}\ar[d]^-{\lambda}
+\\%r1c2
+\widetilde{A}\ar[r]^-{\nu}
+&%r2c1
+V\widetilde{A}%r2c2
+}\]
+which (\textbf{if this diagram commutes}) will give the desired factorisation.
+\subsection{On $E_1$}
+Why do I want to involve the map $\xi_\textup{res}$? Well the $E_1$-level pairing is given by the top composite in
+\[\xymatrix@!0@R=10mm@C=31mm{
+\pi'_t\widetilde{A}^s\otimes \pi'_{t}\widetilde{A}^{s'}\ar[r]^-{\textup{EZAW}}_-{\textup{zig}}
+&%r1c1
+\pi'_{t+t'}(c(\widetilde{A}^{s+s'})^{\otimes 2})\ar[r]
+&%r1c2
+\pi'_{t+t'}(D^1\widetilde{A}^{s+s'})\ar[rd]
+&%r1c3
+\ar@{..>}[l]_-{\partial}
+\pi'_{t+t'+1}(\widetilde{A}^{s+s'+1})\\%r1c4
+&%r2c1
+&%r2c2
+&%r2c3
+\pi'_{*}(\widetilde{A}^{s+s'}\times\Lambda (\widetilde{A}^{s+s'+1}))\ar[u]_-{\nu\times\lambda}
+%r2c4
+}\]
+I can't quite figure out the formal stuff with the loops and connecting homomorphisms, but surely it helps to have the component $c(A^{\otimes 2})\to \Lambda \widetilde{A}^{s+s'+1}\to \widetilde{A}^{s+s'+1}$ equaling the map which gives the pairing on primitive elements that you want to see on $E^1$. This is especially compelling since we're looking at a situation in which the connecting homomorphism is dominating. Perhaps one can make this make sense by drawing in the loops LES for $cA^{\otimes 2}$ and mapping between the two LESs.
+\subsection{At $E_\infty$}
+I guess one uses what's known about smash pairings in the sseq of a cosimplicial \emph{space} to get a pairing of sseqs
+\[\pi'_{t}\widetilde{A}^{s}\wedge \pi'_{t'}\widetilde{A}^{s'}\overset{\textup{AW}}{\to}\pi'_{t}\widetilde{A}^{s+s'}\wedge \pi'_{t'}\widetilde{A}^{s+s'}\overset{\wedge =\textup{`EZ'}}{\to}\pi'_{t+t'}((\widetilde{A}^{s+s'})^{\otimes 2}),\]
+and then notes that this descends to the version in which you stick tensor products everywhere. You can also zig-zag this with the collapse $c\widetilde{A}^{\otimes 2}\to\widetilde{A}^{\otimes 2}$.
+\[\xymatrix@R=4mm{
+E(\widetilde{A})\otimes E(\widetilde{A})\ar[r]
+\ar@{=>}@<2.5ex>[d]
+\ar@{=>}@<-2.5ex>[d]
+&%r1c1
+E(\widetilde{A}\otimes \widetilde{A})
+\ar@{=>}[d]
+&
+E(c(\widetilde{A}\otimes \widetilde{A}))
+\ar[l]^-{\cong}\ar@{=>}[d]
+\\%r1c2
+\pi(\widetilde{A})\otimes \pi(\widetilde{A})\ar[r]&%r2c1
+\pi(\widetilde{A}\otimes \widetilde{A})%r2c2
+&
+\pi(c(\widetilde{A}\otimes \widetilde{A}))
+\ar[l]_-{\cong}
+}\]
+Then you follow the map of spectral sequences with the maps induced by $\delta$ and the found factorisation of $\mu$ through $\delta$.
+
+Moreover, I bet you can do more using ``second quadrant tricks'', not only to create an external product of spectral sequences, but also an external `cup-$i$ product(?)' of spectral sequences, in order to construct some nice operations. To be done after you get products to work!
+
+\end{Thoughts on Adams Multiplicativity II}
 \begin{KoszulComplexes_n>1}
 \section{Unstable Koszul complexes for $\derived\Ind{\nontop{}}$} \label{sectionOnUnstableKoszulComplexes}
 \subsection{Koszul complexes for $\derived\Ind{\nontop{}}$ for $n\geq2$}
