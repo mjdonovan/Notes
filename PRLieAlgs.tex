@@ -10,6 +10,8 @@
 \excludeversion{GrothendieckSpectralSequencestake2}
 \excludeversion{convergenceOLD}
 \excludeversion{hiltonMilnorQuestionable}
+\excludeversion{Thoughts on Adams Multiplicativity}
+\excludeversion{Thoughts on Adams Multiplicativity II}
 %\def\excludeversion#1{\includeversion{#1}}
 \excludeversion{Frontmatters}
 \excludeversion{Endmatter}
@@ -23,8 +25,7 @@
 \excludeversion{DiagramOfFunctors}
 \excludeversion{GrothendieckSpectralSequences}
 \excludeversion{Grothendieck Multiplicativity}
-\excludeversion{Thoughts on Adams Multiplicativity}
-\includeversion{Thoughts on Adams Multiplicativity II}
+\includeversion{prereqs for Thoughts III}
 \includeversion{Thoughts on Adams Multiplicativity III}
 \excludeversion{KoszulComplexes_n>1}
 \excludeversion{KoszulComplexes1}
@@ -3702,7 +3703,7 @@ C{n,m}\ar@{..>}[r]
 where the outer rectangle commutes since in $k^{\times2}$, $(a,0)\cdot(0,b)=(0,0)$. This gives a map $C_{n,m}\to c_2(k^{\times2})$ whose restriction to the subcomplex $S^n\sqcup S^m$ gives the homotopy classes $\alpha$ and $\beta$. The image $g_{\alpha,\beta}$ of the class $g\in(C_{n,m})_{n+m+1}$ is then an explicit representative for the homology class sought.
 \end{Thoughts on Adams Multiplicativity}
 \begin{Thoughts on Adams Multiplicativity II}
-\section{Reimagining multiplicativity}
+\section{Reimagining multiplicativity --- mostly obsolete}
 It seems that to use the construction of Bousfield-Kan \cite{BK_pairings_products.pdf,BK_pairings.pdf}, we'll need to understand the construction of $D^1X$, for cosimplicial objects $X$:
 \[\xymatrix@R=4mm{
 D^1X\ar[r]
@@ -3938,6 +3939,212 @@ D^1\widetilde{A}\ar[dd]
 V\widetilde{A}%r4c4
 }\]
 \end{Thoughts on Adams Multiplicativity II}
+\begin{prereqs for Thoughts III}
+\section{Prerequisites for Adams multiplicativity}
+%\section{Adams multiplicativity}
+Let $\widetilde{A}^n:=c(K\overline{Q})^{n+1}A$, for $A$ a simplicial algebra. Then $\widetilde{A}^\bullet$ is a levelwise cofibrant cosimplicial object, with a Hurewicz morphism to $Q\widetilde{A}^\bullet$. However, $Q\widetilde{A}^\bullet$ is contractible, and the cosimplicial homology coalgebra $\pi_*(Q\widetilde{A}^\bullet)$ is thus a cofree resolution of $H_*(A)$. The Hurewicz morphism is in each level an isomorphism onto the primitives:
+\[\pi_*(\widetilde{A}^\bullet)\overset{\simeq}{\to}P\pi_*(Q\widetilde{A}^\bullet)\overset{}{\to}\pi_*(Q\widetilde{A}^\bullet)\]
+so that the $E^2$ term is derived primitives on $H_*(A)$. As such, it should admit a product. In fact, the product should shift both gradings by 1, the internal grading $*$ and the filtration grading $\bullet$.
+
+\subsection{Bousfield-Kan $D^1$-construction blurb}
+It seems that to use the construction of Bousfield-Kan \cite{BK_pairings_products.pdf,BK_pairings.pdf}, we'll need to understand the construction of $D^1X$, for cosimplicial objects $X$:
+\[\xymatrix@R=4mm{
+D^1X\ar[r]
+\ar[d]^-{\delta}
+&%r1c1
+\Lambda VX\ar[d]^-{\lambda}
+\\%r1c2
+X\ar[r]^-{\nu}
+&%r2c1
+VX%r2c2
+}\]
+Now $VX$ is the cosimplicial object given by shifting $X$ down and forgetting the 0th face and degeneracy. $d_0$ induces a map $\nu:X\to VX$. Amazing. Next the endofunctor $\Lambda:s\Comm\to s\Comm$ is applied in each cosimplicial level. This is the ``standard simplicial path fibration'' (c.f.\ \cite[p.82]{BousKanSSeq.pdf}), which acts on $Y\in s\Comm$ by shifting down and restricting to a kernel: $\Lambda Y_s=\ker(d_{s+1}\cdots d_1:Y_{s+1}\to Y_0)$; again we forget the 0th face and degeneracy. This time, $d_0:\Lambda Y\to Y$ is a fibration from an acyclic object.
+
+The game will be to create a factorization
+\[\xymatrix@R=4mm{
+\widetilde{A}\otimes \widetilde{A}\ar[r]\ar@{~>}[d]
+&%r1c1
+\widetilde{A}\\%r1c2
+D^1\widetilde{A}\ar[ur]_-{\delta}
+&%r2c1
+%r2c2
+}
+%\textup{\ \ \ or\ \ \ }
+%\xymatrix@R=4mm{
+%c(\widetilde{A}\otimes \widetilde{A})\ar[r]\ar@{~>}[d]
+%&%r1c1
+%\widetilde{A}\\%r1c2
+%D^1\widetilde{A}\ar[ur]_-{\delta}
+%&%r2c1
+%%r2c2
+%}
+\]
+where the wavy map is a (zigzag of) cosimplicial maps.
+
+\subsection{The construction of $\xi_\textup{res}$}
+\[\xymatrix@R=0mm{
+(HA)^{\wedge 2}
+\ar@{-->}@/^3em/[rrrrdd]^-(.9){\xi}
+\\
+&%r1c1
+(HA)^{\times2}
+\ar[r]^-{d_0\times d_0}
+\ar@{}[dd]|{\times}="timesOne"
+&%r1c2
+(HA_+)^{\times2}
+\ar[r]^-{\textup{hopf}}
+\ar@{}[dd]|{\times}="timesTwo"&%r1c3
+\ar@{}[dd]|{\times}="timesThree"
+HA_+&%r1c4
+\\%r1c5
+(HA)^{\times2}\ar;"timesOne"_-{\textup{diag}}
+\ar@{-->}@/^3.9em/[rrrr]^-(.1){\overline{\xi}}
+\ar@{->>}[uu]
+&%r2c1
+&%r2c2
+&%r2c3
+&%r2c4
+HA_+\ar"timesThree";[]^-{\textup{hopf}}
+\\%r2c5
+&%r3c1
+(HA)^{\times2}\ar[r]_-{\textup{hopf}}
+&%r3c2
+HA\ar[r]_-{d_0}
+&%r3c3
+HA_+&%r3c4
+\\
+(HA)^{\sqcup2}
+\ar[uu]
+\\\\
+&&\makebox[0cm][c]{\,\textup{is $\pi(Q\DASH)$ applied to}}
+\\
+\textup{cof}
+\ar@{-->}@/^1em/[rrrrdd]^-(.9){\xi_\textup{res}}
+\\\\%r3c5
+\ar[uu]
+\ar@{-->}@/^1.3em/[rrrr]^-(.1){\overline{\xi}_\textup{res}}
+c(A^2)\ar[r]_-{c(\textup{diag})\circ\beta}
+&%r4c1
+c(A^2\times c(A^2))\ar[r]_-{c((d_0^2)\times h)}
+%\ar[ddd]
+&%r4c2
+c(A_+^2\times A)
+\ar[r]_-{c(h\times (\epsilon\circ d_0))}
+%\ar[ddd]
+&%r4c3
+c(K_+\times K_+)\ar[r]_-{h}
+%\ar[dd]^-{\beta}
+&%r4c4
+A_+\\\\%r4c5
+c(A^{\sqcup2})\ar[uu]
+}\]
+Here, $A$ was being used as a *terrible* shorthand for $\widetilde{A}^n:=c(K\overline{Q})^{n+1}A$, and unadorned superscripts were used to indicate iterated products. The cofibre `$\textup{cof}$' is that of the map $A^{\sqcup2}\to A^2$. If we just write $k$ for the zero-square algebra $(K\overline{Q})^{n+1}A$, then the map $h:c(A^2)\to A$ is defined to be the composite:
+\[c(A^{2})=c((ck)^{2})\overset{c(\epsilon^{2})}{\to}c(k^2)\overset{c(\textup{add})}{\to}ck=A,\]
+the point being that this is an algebra map, where $\textup{add}:A^2\to A$ is not.
+\begin{lem}
+The map $\overline{\xi}_\textup{res}$ factors through the cofibre.
+\end{lem}
+\begin{proof}
+It's enough to check that the composite $c(A^{\sqcup2})\to c(A^{\times2})\to c(A_+)$ is null. However, the codomain $c(A_+)$ is a GEM, so that a map to $c(A_+)$ is null if it is zero on cohomology. Fortunately, we have already described the maps on homology induced by these two maps --- they are the inclusion $(HA)^{\sqcup2}\to(HA)^{\times}2$ and $\overline{\xi}:(HA)^{\times}2\to HA_+$ respectively, and the composite of these two maps is zero.
+\end{proof}
+
+
+\subsection{A cofibration}
+Write $S^n$ for (the free construction on) $\Delta^n/\partial\Delta^n$, and $CS^n$ for (the free construction on) the reduced cone thereupon. Now there's a map $S^{n+m}\to S^n\sqcup S^m$ sending the fundamental class to the Eilenberg-Zilber formula. That is, if $\mu:(S^n\sqcup S^m)^{\otimes 2}\to S^n\sqcup S^m$ is multiplication, the map we are describing sends $\imath_{n+m}\mapsto \mu(\textup{EZ}(\imath_n,\imath_m))$. Now consider the complex $C_{n,m}$ formed by coning off the corresponding homotopy class:
+\[\xymatrix@R=4mm{
+S^{n+m}\ar[r]
+\ar@{ >->}[d]
+&%r1c1
+S^n\sqcup S^m\ar@{ >->}[d]
+\\%r1c2
+CS^{n+m}\ar[r]
+&%r2c1
+C{n,m}%r2c2
+}\]
+Now $C_{n,m}$ has an $n+m+1$-dimensional generator $g$, the image of the cone on the fundamental class of $S^{n+m}$. The homology LES shows that $H_*(C_{n,m})$ is three-dimensional, containing classes $\imath_n$, $\imath_m$ and $g$.
+\begin{prop}
+The diagonal of $g$ is $\imath_n\otimes\imath_m+\imath_m\otimes\imath_n$.
+\end{prop}
+\begin{proof}
+The representative $g$ has the property that $d_0(g)=\mu(\textup{EZ}(\imath_n,\imath_m))$ and $d_i(g)=0$ for $i>0$. We calculate 
+\begin{alignat*}{2}
+\psi(d_0(g))
+&=
+\mu(\textup{EZ}(\overline{\imath_n}+\overline{\overline{\imath_n}},\overline{\imath_m}+\overline{\overline{\imath_m}}))%
+\\
+\xi(g)
+&=
+\mu(\textup{EZ}(\overline{\imath_n},\overline{\overline{\imath_m}})+\textup{EZ}(\overline{\overline{\imath_n}},\overline{\imath_m}))\in Q((C_{n,m})_{n+m}^{\wedge 2})%
+\\
+% Left hand side
+j(\xi(g))
+% Relation
+&=
+% Right hand side
+\textup{EZ}^\otimes ({\imath_n},{{\imath_m}})+\textup{EZ}^\otimes ({\imath_m},{{\imath_n}})\in (Q((C_{n,m})_{n+m}))^{\otimes 2}%
+% Comment
+\end{alignat*}
+This class represents $\imath_n\otimes\imath_m+\imath_m\otimes\imath_n$.
+\end{proof}
+Now suppose that $k$ is a (not zero-square) algebra, and that $\alpha,\beta$ are homotopy classes in $\pi_n (k)$ and $\pi_m (k)$ respectively. Then we'll be able to use the complex $C_{n,m}$ to construct a homology class $g_{\alpha,\beta}\in H_{n+m+1}(k)$ whose diagonal is $\alpha\otimes\beta+\beta\otimes\alpha$. Firstly, note that there is a commuting diagram
+\[\xymatrix@R=4mm{
+0\ar[r]
+\ar@{ >->}[d]
+&%r1c1
+0\ar[d]
+\\%r1c2
+S^n\sqcup S^m\ar[r]^-{\alpha\sqcup\beta}
+&%r2c1
+k^{\times2}%r2c2
+}\]
+which furnishes $c_1(k^{\times2})$ with a map from of $S^n\sqcup S^m$. Next, there's a diagram %\newdir{ >}{{}*!/-7pt/\dir{>}}
+\[\xymatrix@R=4mm{
+S^{n+m}\ar@{->}[r]_-{\textup{EZ}^\mu(\imath_n,\imath_m)}
+\ar@{ >->}[d]
+&%r1c1
+S^n\sqcup S^m\ar@{ >->}[d]
+\ar[r]
+&c_1(k^{\times2})\ar[d]
+\\%r1c2
+CS^{n+m}\ar[r]\ar@/_1em/[rr]_-{0}
+&%r2c1
+C{n,m}\ar@{..>}[r]
+%r2c2
+&k^{\times2}}\]
+where the outer rectangle commutes since in $k^{\times2}$, $(a,0)\cdot(0,b)=(0,0)$. This gives a map $C_{n,m}\to c_2(k^{\times2})$ whose restriction to the subcomplex $S^n\sqcup S^m$ gives the homotopy classes $\alpha$ and $\beta$. The image $g_{\alpha,\beta}$ of the class $g\in(C_{n,m})_{n+m+1}$ is then an explicit representative for the homology class sought.
+
+
+\subsection{A left inverse for the Hurewicz}
+Suppose that $k$ is a zero-square simplicial algebra. Then $Qk=k$, giving a commuting diagram
+\[\xymatrix@R=4mm{
+k\ar@{=}[r]
+&%r1c1
+Qk&%r1c2
+&%r1c3
+\pi_*(k)\ar@{=}[r]\ar[ddr]_-(.75){\ \ \textup{hur}}
+&%r1c1
+\pi_*(Qk)\\%r1c5
+ck\ar[u]^-{\epsilon}
+\ar[r]
+&%r2c1
+Qck\ar[u]^-{Q\epsilon}
+&%r2c2
+\textup{yielding}&%r2c3
+\pi_*(ck)\ar[u]^-{\pi_*(\epsilon)}_-{\cong}
+\ar[r]
+\ar[d]^-{\cong}
+&%r2c1
+\pi_*(Qck)\ar[u]_-{\pi_*(Q\epsilon)}\ar@{=}[d]
+\\%r2c5
+&%r3c1
+&%r3c2
+&%r3c3
+\textup{Pr}(H_*k)\ar@{ >->}[r]
+&%r3c4
+H_*k%r3c5
+}\]
+which is to say that $\pi_*(Q\epsilon)$ provides a left inverse for the Hurewicz.
+\end{prereqs for Thoughts III}
 \begin{Thoughts on Adams Multiplicativity III}
 \section{The crucial commuting diagram}
 Throughout, I'll write $\fraks=s+s'$ and $\frakt=t+t'$ in order to save a bit of space. We're going to need the following commutative diagram, where $X$ is the standard cosimplicial resolution of a simplicial algebra, and $\epsilon:X\to X_\textup{fl}$ is collapsing off the outermost cofibrant replacement:
@@ -3994,49 +4201,94 @@ X\ar[u]_-{d^0}\ar@{=}[l]%r3c4
 This diagram constructs both a map $X^\fraks\otimes X^\fraks\to\overline{D}^1X$ and a zig-zag of weak equivalences from $\overline{D}^1X$ to $D^1X$. This also shows that the small square in the to right corner of the diagram of interest commutes.
 
 At this moment, it is opportune to extend the diagram of interest a little.
+%\[\xymatrix@R=4mm{
+%\pi_t(X^\fraks)\otimes \pi_{t'}(X^\fraks)\ar@{~>}[drd]^-{j\circ(h\otimes h)}
+%\ar[r]^-{\textup{sEZ}}
+%\ar@{..>}[ddddr]_-(.3){A}
+%&%r1c1
+%\pi_{\frakt}(X^\fraks\otimes X^\fraks)\ar[r]
+%&%r1c2
+%\pi_{\frakt}((\overline{D}^1X)^\fraks)&%r1c3
+%\pi_{\frakt+1}(X_\textup{fl}^{\fraks+1})\ar[l]^-{\cong}_-{\partial}
+%\ar@{~}[dd]^-{\textup{zig-zag}}_-{\cong}
+%\\%r1c4
+%&%r2c1
+%&%r2c2
+%&%r2c3
+%%\pi_{\frakt+1}(X^{\fraks+1})\ar[u]_-{\cong}
+%%\ar[d]^-{\cong}
+%\\%r2c4
+%%\textup{Pr}_t(HX^{\fraks})\otimes \textup{Pr}_{t'}(HX^{\fraks})\ar[r]^-{j}
+%&%r3c1
+%\textup{Pr}_{\frakt+1}(HX^\fraks\wedge HX^\fraks)
+%\ar@{~>}[rr]_-(.82){\xi_\textup{alg}}
+%\ar@{ >->}[dl]
+%\ar@{ >->}[d]
+%&%r3c2
+%&%r3c3
+%\textup{Pr}_{\frakt+1}(HX^{\fraks+1})\ar@{ >->}[d]
+%\\%r3c4
+%(HX^\fraks\wedge HX^\fraks)_{\frakt+1}\ar@{=}[r]
+%&\pi_{\frakt+1}Q(\textup{cof})
+%\ar[rr]^-(.8){(\xi_\textup{res})_*}
+%&
+%&
+%H_{\frakt+1}X^{\fraks+1}
+%\\
+%(HX^\fraks\times HX^\fraks)_{\frakt+1}\ar@{=}[r]\ar@{->>}[u]
+%&\pi_{\frakt+1}Qc(X^\fraks\times X^\fraks)\ar@{->>}[u]
+%\ar[urr]_-(.76){(\overline{\xi}_\textup{res})_*}
+%\ar@{..>}[uuuurr]^-(.75){B}
+%\\
+%(HX^\fraks\oplus HX^\fraks)_{\frakt+1}\ar@{=}[r]\ar@{ >->}[u]
+%&\pi_{\frakt+1}Q(X^\fraks\sqcup X^\fraks)\ar@{ >->}[u]
+%}\]
+%The method will be to introduce the dotted maps $A$ and $B$ and show that the composite $B\circ A$ equals the composite of the wavy maps. Then we will be able to calculate the composite $\partial\circ B\circ A$, and compare it with the composite along the top row.
 \[\xymatrix@R=4mm{
-\pi_t(X^\fraks)\otimes \pi_{t'}(X^\fraks)\ar@{~>}[drd]^-{j\circ(h\otimes h)}
+\pi_t(X^\fraks)\otimes \pi_{t'}(X^\fraks)\ar@{~>}[dd]_-{j\circ(h\otimes h)}
 \ar[r]^-{\textup{sEZ}}
-\ar@{..>}[ddddr]_-(.3){A}
+\ar@{..>}[ddddr]^-(.2){A}
 &%r1c1
 \pi_{\frakt}(X^\fraks\otimes X^\fraks)\ar[r]
 &%r1c2
 \pi_{\frakt}((\overline{D}^1X)^\fraks)&%r1c3
-\pi_{\frakt+1}(X_\textup{fl}^{\fraks+1})\ar[l]^-{\cong}_-{\partial}
+\pi_{\frakt+1}(X_\textup{fl}^{\fraks+1})\ar[l]_-{\partial}
 \ar@{~}[dd]^-{\textup{zig-zag}}_-{\cong}
 \\%r1c4
 &%r2c1
 &%r2c2
-&%r2c3
+\pi_{\frakt+1}(QX_\textup{fl}^{\fraks+1})\ar@{..>}[ur]_-{=}&%r2c3
 %\pi_{\frakt+1}(X^{\fraks+1})\ar[u]_-{\cong}
 %\ar[d]^-{\cong}
 \\%r2c4
 %\textup{Pr}_t(HX^{\fraks})\otimes \textup{Pr}_{t'}(HX^{\fraks})\ar[r]^-{j}
-&%r3c1
+%r3c1
 \textup{Pr}_{\frakt+1}(HX^\fraks\wedge HX^\fraks)
-\ar@{~>}[rr]_-(.82){\xi_\textup{alg}}
-\ar@{ >->}[dl]
+\ar@{~>}[rrr]_-{\xi_\textup{alg}}
 \ar@{ >->}[d]
+%\ar@{ >->}[dr]
+&
 &%r3c2
 &%r3c3
 \textup{Pr}_{\frakt+1}(HX^{\fraks+1})\ar@{ >->}[d]
 \\%r3c4
 (HX^\fraks\wedge HX^\fraks)_{\frakt+1}\ar@{=}[r]
 &\pi_{\frakt+1}Q(\textup{cof})
-\ar[rr]^-(.8){(\xi_\textup{res})_*}
+\ar[r]^-{\pi_*(Q\xi_\textup{res})}
 &
+\pi_{\frakt+1}QX^{\fraks+1}\ar@{=}[r]
+\ar@{..>}[uu]^-(.75){\pi_*(Q\epsilon)}
 &
 H_{\frakt+1}X^{\fraks+1}
 \\
 (HX^\fraks\times HX^\fraks)_{\frakt+1}\ar@{=}[r]\ar@{->>}[u]
 &\pi_{\frakt+1}Qc(X^\fraks\times X^\fraks)\ar@{->>}[u]
-\ar[urr]_-(.76){(\overline{\xi}_\textup{res})_*}
-\ar@{..>}[uuuurr]^-(.75){B}
+\ar@{..>}[ur]_-(.6){\pi_*(Q\overline{\xi}_\textup{res})}
 \\
 (HX^\fraks\oplus HX^\fraks)_{\frakt+1}\ar@{=}[r]\ar@{ >->}[u]
 &\pi_{\frakt+1}Q(X^\fraks\sqcup X^\fraks)\ar@{ >->}[u]
 }\]
-The method will be to introduce the dotted maps $A$ and $B$ and show that the composite $B\circ A$ equals the composite of the wavy maps. Then we will be able to calculate the composite $\partial\circ B\circ A$, and compare it with the composite along the top row.
+Although some arrows are decorated for emphasis, all of the arrows in this diagram have already been defined [although I haven't given $A$ a name]. The composite of the dotted maps equals the composite of the wavy maps
 
 \end{Thoughts on Adams Multiplicativity III}
 \begin{KoszulComplexes_n>1}
