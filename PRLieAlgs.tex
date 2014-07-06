@@ -10,7 +10,7 @@
 \excludeversion{GrothendieckSpectralSequencestake2}
 \excludeversion{convergenceOLD}
 \excludeversion{hiltonMilnorQuestionable}
-\def\excludeversion#1{\includeversion{#1}}
+%\def\excludeversion#1{\includeversion{#1}}
 \excludeversion{Frontmatters}
 \excludeversion{Endmatter}
 \excludeversion{AdamsDerivation}
@@ -23,8 +23,9 @@
 \excludeversion{DiagramOfFunctors}
 \excludeversion{GrothendieckSpectralSequences}
 \excludeversion{Grothendieck Multiplicativity}
-\includeversion{Thoughts on Adams Multiplicativity}
+\excludeversion{Thoughts on Adams Multiplicativity}
 \includeversion{Thoughts on Adams Multiplicativity II}
+\includeversion{Thoughts on Adams Multiplicativity III}
 \excludeversion{KoszulComplexes_n>1}
 \excludeversion{KoszulComplexes1}
 \excludeversion{DerivedFunctorsLowDimension}
@@ -3937,6 +3938,107 @@ D^1\widetilde{A}\ar[dd]
 V\widetilde{A}%r4c4
 }\]
 \end{Thoughts on Adams Multiplicativity II}
+\begin{Thoughts on Adams Multiplicativity III}
+\section{The crucial commuting diagram}
+Throughout, I'll write $\fraks=s+s'$ and $\frakt=t+t'$ in order to save a bit of space. We're going to need the following commutative diagram, where $X$ is the standard cosimplicial resolution of a simplicial algebra, and $\epsilon:X\to X_\textup{fl}$ is collapsing off the outermost cofibrant replacement:
+\[\xymatrix@R=4mm{
+\pi_t(X^\fraks)\otimes \pi_{t'}(X^\fraks)\ar[dd]^-{h\otimes h}
+\ar[r]^-{\textup{sEZ}}
+&%r1c1
+\pi_{\frakt}(X^\fraks\otimes X^\fraks)\ar[r]
+&%r1c2
+\pi_{\frakt}((\overline{D}^1X)^\fraks)&%r1c3
+\pi_{\frakt+1}(X_\textup{fl}^{\fraks+1})\ar[l]^-{\cong}_-{\partial}
+\\%r1c4
+&%r2c1
+&%r2c2
+\pi_{\frakt}((D^1X)^\fraks)\ar@{-}[u]^-{\textup{zig-zag}}_-{\cong}
+&%r2c3
+\pi_{\frakt+1}(X^{\fraks+1})\ar[u]_-{\cong}
+\ar[l]^-{\cong}_-{\partial}
+\ar[d]^-{\cong}
+\\%r2c4
+\textup{Pr}_t(HX^{\fraks})\otimes \textup{Pr}_{t'}(HX^{\fraks})\ar[r]^-{j}
+&%r3c1
+\textup{Pr}_{\frakt+1}(HX^\fraks\wedge HX^\fraks)\ar[rr]^-{\xi_\textup{alg}}
+&%r3c2
+&%r3c3
+\textup{Pr}_{\frakt+1}(HX^{\fraks+1})%r3c4
+}\]
+Here, $\overline{D}^1X$ is the pullback of the first column in the following diagram:
+\[\xymatrix@R=4mm{
+&%r1c1
+0\ar[d]
+\ar[r]
+&%r1c2
+\Lambda X^{\fraks+1}_\textup{fl}\ar[d]
+&%r1c3
+\Lambda X^{\fraks+1}\ar[l]^-{\lambda(\epsilon)}
+\ar[d]
+\\%r1c4
+X^\fraks\otimes X^\fraks\ar[ur]^-{0}
+\ar[dr]_-{\mu}
+&%r2c1
+X^{\fraks+1}_\textup{fl}\ar@{=}[r]
+&%r2c2
+X^{\fraks+1}_\textup{fl}&%r2c3
+X^{\fraks+1}\ar[l]^-{\epsilon}
+\\%r2c4
+&%r3c1
+X\ar[u]_-{\epsilon\circ d^0}
+\ar@{=}[r]
+&%r3c2
+X\ar[u]_-{\epsilon\circ d^0}&%r3c3
+X\ar[u]_-{d^0}\ar@{=}[l]%r3c4
+}\]
+This diagram constructs both a map $X^\fraks\otimes X^\fraks\to\overline{D}^1X$ and a zig-zag of weak equivalences from $\overline{D}^1X$ to $D^1X$. This also shows that the small square in the to right corner of the diagram of interest commutes.
+
+At this moment, it is opportune to extend the diagram of interest a little.
+\[\xymatrix@R=4mm{
+\pi_t(X^\fraks)\otimes \pi_{t'}(X^\fraks)\ar@{~>}[drd]^-{j\circ(h\otimes h)}
+\ar[r]^-{\textup{sEZ}}
+\ar@{..>}[ddddr]_-(.3){A}
+&%r1c1
+\pi_{\frakt}(X^\fraks\otimes X^\fraks)\ar[r]
+&%r1c2
+\pi_{\frakt}((\overline{D}^1X)^\fraks)&%r1c3
+\pi_{\frakt+1}(X_\textup{fl}^{\fraks+1})\ar[l]^-{\cong}_-{\partial}
+\ar@{~}[dd]^-{\textup{zig-zag}}_-{\cong}
+\\%r1c4
+&%r2c1
+&%r2c2
+&%r2c3
+%\pi_{\frakt+1}(X^{\fraks+1})\ar[u]_-{\cong}
+%\ar[d]^-{\cong}
+\\%r2c4
+%\textup{Pr}_t(HX^{\fraks})\otimes \textup{Pr}_{t'}(HX^{\fraks})\ar[r]^-{j}
+&%r3c1
+\textup{Pr}_{\frakt+1}(HX^\fraks\wedge HX^\fraks)
+\ar@{~>}[rr]_-(.82){\xi_\textup{alg}}
+\ar@{ >->}[dl]
+\ar@{ >->}[d]
+&%r3c2
+&%r3c3
+\textup{Pr}_{\frakt+1}(HX^{\fraks+1})\ar@{ >->}[d]
+\\%r3c4
+(HX^\fraks\wedge HX^\fraks)_{\frakt+1}\ar@{=}[r]
+&\pi_{\frakt+1}Q(\textup{cof})
+\ar[rr]^-(.8){(\xi_\textup{res})_*}
+&
+&
+H_{\frakt+1}X^{\fraks+1}
+\\
+(HX^\fraks\times HX^\fraks)_{\frakt+1}\ar@{=}[r]\ar@{->>}[u]
+&\pi_{\frakt+1}Qc(X^\fraks\times X^\fraks)\ar@{->>}[u]
+\ar[urr]_-(.76){(\overline{\xi}_\textup{res})_*}
+\ar@{..>}[uuuurr]^-(.75){B}
+\\
+(HX^\fraks\oplus HX^\fraks)_{\frakt+1}\ar@{=}[r]\ar@{ >->}[u]
+&\pi_{\frakt+1}Q(X^\fraks\sqcup X^\fraks)\ar@{ >->}[u]
+}\]
+The method will be to introduce the dotted maps $A$ and $B$ and show that the composite $B\circ A$ equals the composite of the wavy maps. Then we will be able to calculate the composite $\partial\circ B\circ A$, and compare it with the composite along the top row.
+
+\end{Thoughts on Adams Multiplicativity III}
 \begin{KoszulComplexes_n>1}
 \section{Unstable Koszul complexes for $\derived\Ind{\nontop{}}$} \label{sectionOnUnstableKoszulComplexes}
 \subsection{Koszul complexes for $\derived\Ind{\nontop{}}$ for $n\geq2$}
