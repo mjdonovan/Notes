@@ -4200,7 +4200,7 @@ H_{\frakt+1}(S^t\times S^{t'})\ar[r]^-{r}
 &%r2c2
 (HS^t\wedge  HS^{t'})_{\frakt+1}
 }}\]
-However, the rightmost four vector spaces in this diagram are 1-dimensional, and the maps $j$, $\textup{inc}$ and $\textup{proj}$ connecting them are isomorphisms. As $\textup{hur}^{\otimes2}(\imath_t,\imath_{t'})$ is nonzero, it's enough to check that the image of $(\imath_{t},\imath_{t'})$ down in $((HX\times HY)^{\otimes2})_\frakt$ is nonzero, but given that the triangle commutes, this image is $\imath_t\otimes\imath_{t'}+\imath_{t'}\otimes\imath_{t}$, which is evidently nonzero.
+The rightmost four vector spaces in this diagram are 1-dimensional, and the maps $j$, $\textup{inc}$ and $\textup{proj}$ connecting them are isomorphisms, so it's enough to check that $r(F(\imath_t,\imath_{t'}))$ is nonzero. However, using the commuting square and triangle already established, we may calculate that $\Delta(r(F(\imath_t,\imath_{t'})))=\imath_t\otimes\imath_{t'}+\imath_{t'}\otimes\imath_{t}$, which is nonzero.
 \end{proof}
 
 \subsection{A left inverse for the Hurewicz}
@@ -4287,9 +4287,9 @@ X\ar[u]_-{\epsilon\circ d^0}
 X\ar[u]_-{\epsilon\circ d^0}&%r3c3
 X\ar[u]_-{d^0}\ar@{=}[l]%r3c4
 }\]
-This diagram constructs both a map $X^\fraks\otimes X^\fraks\to\overline{D}^1X$ and a zig-zag of weak equivalences from $\overline{D}^1X$ to $D^1X$. This also shows that the small square in the top right corner of the diagram of interest commutes.
+This diagram constructs both a map $\overline{\mu}:X^\fraks\otimes X^\fraks\to(\overline{D}^1X)^\fraks$ and a zig-zag of weak equivalences from $\overline{D}^1X$ to $D^1X$. This also shows that the small square in the top right corner of the diagram of interest commutes.
 
-At this moment, it is opportune to extend the diagram of interest a little.
+At this moment, it is opportune to extend the diagram of interest a little. We change the source to $\hom_{s\Comm}(S^t,X^\fraks)\times\hom_{s\Comm}(S^{t'},X^\fraks)$, removing the symbols `$\hom_{s\Comm}$' for abbreviation. We'll decorate some of the arrows for emphasis, alhough all of the arrows in this diagram have already been defined:
 %\[\xymatrix@R=4mm{
 %\pi_t(X^\fraks)\otimes \pi_{t'}(X^\fraks)\ar@{~>}[drd]^-{j\circ(h\otimes h)}
 %\ar[r]^-{\textup{sEZ}}
@@ -4334,14 +4334,16 @@ At this moment, it is opportune to extend the diagram of interest a little.
 %}\]
 %The method will be to introduce the dotted maps $A$ and $B$ and show that the composite $B\circ A$ equals the composite of the wavy maps. Then we will be able to calculate the composite $\partial\circ B\circ A$, and compare it with the composite along the top row.
 \[\mathclap{\xymatrix@R=4mm{
-\pi_t(X^\fraks)\otimes \pi_{t'}(X^\fraks)\ar@{~>}[dd]_-{j\circ(h\otimes h)}
+(S^t,X^\fraks)\times (S^{t'},X^\fraks)
+%\pi_t(X^\fraks)\otimes \pi_{t'}(X^\fraks)
+\ar@{~>}[dd]_-{j\circ(h\otimes h)}
 \ar[r]^-{\textup{sEZ}}
-\ar@{..>}[ddddr]^-(.2){A}
+\ar@{..>}[ddddr]^-(.2){F}
 &%r1c1
-\pi_{\frakt}(X^\fraks\otimes X^\fraks)\ar[r]
+\pi_{\frakt}(X^\fraks\otimes X^\fraks)\ar[r]^-{\overline{\mu}_*}
 &%r1c2
 \pi_{\frakt}((\overline{D}^1X)^\fraks)&%r1c3
-\pi_{\frakt+1}(X_\textup{fl}^{\fraks+1})\ar[l]_-{\partial}
+\pi_{\frakt+1}(X_\textup{fl}^{\fraks+1})\ar[l]_-{\partial_\textup{conn}}
 \ar@{~}[dd]^-{\textup{zig-zag}}_-{\cong}
 \\%r1c4
 &%r2c1
@@ -4377,7 +4379,7 @@ H_{\frakt+1}X^{\fraks+1}
 (HX^\fraks\oplus HX^\fraks)_{\frakt+1}\ar@{=}[r]\ar@{ >->}[u]
 &\pi_{\frakt+1}Q(X^\fraks\sqcup X^\fraks)\ar@{ >->}[u]
 }}\]
-Although some arrows are decorated for emphasis, all of the arrows in this diagram have already been defined [although I haven't given $A$ a name, and maybe $A$ isn't actually well defined, but instead is only defined on pure tensors]. The composite of the dotted maps equals the composite of the wavy maps, so it serves to investigate the composite
+The composite of the dotted maps equals the composite of the wavy maps, so it serves to investigate the composite
 \[Qc(X^\fraks\times X^\fraks)\overset{Q\overline{\xi}_\textup{res}}{\to}QX^{\fraks+1}\overset{Q\epsilon}{\to}QX^{\fraks+1}_\textup{fl}=X^{\fraks+1}_\textup{fl}.\]
 Fortunately, postcomposition with $Q\epsilon$ is pretty destructive:
 \[\newcommand{\Times}{{\cdot}}
@@ -4428,22 +4430,133 @@ QcA\ar@/^.55em/[dr]^-{Q\epsilon}
 &%r1c3
 &%r1c4
 \\%r1c5
-Qc(A^2)\ar[rr]^-{h}
+Qc(A^2)\ar[rr]^-{Qh}
 \ar@/^.5em/[ur]^-{Qc(\pi_1)}
 \ar@/_.5em/[dr]_-{Qc(\pi_2)}
 &%r2c1
 &%r2c2
 QA\ar[r]^-{Q\eta}
 &%r2c3
-QK_+\ar@{=}[r]
-&%r2c4
-K_+\\%r2c5
+QK_+\makebox[0cm][l]{$\,=K_+$}%\ar@{=}[r]
+\\%r2c5
 &%r3c1
 QcA\ar@/_.55em/[ur]_-{Q\epsilon}&%r3c2
 &%r3c3
-&%r3c4
-%r3c5
 }\]
+We must be getting close. Indeed, write `$\textup{wavy}$' for the composite of the wavy maps, and write $g\in QC_{t,t'}$ for the a representative of $g\in\pi_{\frakt+1}(QC_{t,t'})$. Choosing $(\alpha,\beta)\in (S^t,X^\fraks)\times (S^{t'},X^\fraks)$, a representative for $\textup{wavy}(\alpha,\beta)$ is given by the image of $g$ under the composite
+\[QC_{t,t'}\overset{Q\overline{F}(\alpha,\beta)}{\to}Qc(X^\fraks\times X^\fraks)\overset{Q\overline{\xi}_\textup{res}}{\to}QX^{\fraks+1}\overset{Q\epsilon}{\to}QX^{\fraks+1}_\textup{fl}=X^{\fraks+1}_\textup{fl},\]
+which is the sum of the images of $g$ under the three composites
+\[\xymatrix@R=4mm{
+&
+&%r1c1
+QcA\ar@/^.55em/[dr]^-{Q\epsilon}
+&%r1c2
+&%r1c3
+&%r1c4
+\\%r1c5
+QC_{t,t'}
+\ar[r]^-{Q\overline{F}(\alpha,\beta)}
+&Qc(A^2)\ar[rr]^-{Qh}
+\ar@/^.5em/[ur]^-{Qc(\pi_1)}
+\ar@/_.5em/[dr]_-{Qc(\pi_2)}
+&%r2c1
+&%r2c2
+QA\ar[r]^-{Q\eta}
+&%r2c3
+QK_+\makebox[0cm][l]{$\,=K_+$}%\ar@{=}[r]
+\\%r2c5
+&
+&%r3c1
+QcA\ar@/_.55em/[ur]_-{Q\epsilon}&%r3c2
+&%r3c3
+}\]
+Let's do the top composite first (the bottom composite is similar). Firstly, by naturality of $\overline{F}$, we have that $c(\pi_1)\circ\overline{F}(\alpha,\beta)=\overline{F}(\alpha,0):C_{t,t'}\to c(A\times 0)$. As such, $\epsilon\circ c(\pi_1)\circ\overline{F}(\alpha,\beta):C_{t,t'}\to A$ is the map out of the pushout in the diagram:
+\[\xymatrix@R=4mm@C=15mm{
+S^{\frakt}\ar@{->}[r]_-{\textup{EZ}^\mu(\imath_t,\imath_{t'})}
+\ar@{ >->}[d]
+&%r1c1
+S^t\sqcup S^{t'}\ar@{ >->}[d]
+\ar[dr]^{\alpha\sqcup0}
+%&c_1(X\times Y)\ar[d]
+\\%r1c2
+CS^{\frakt}\ar[r]\ar@/_1em/[rr]_-{0}
+&%r2c1
+C{t,t'}\ar@{..>}[r]
+%r2c2
+&A}\]
+The point then is that $g\in CS^\frakt$ is a chain with the property that $\partial(g)$ is the image of the fundamental class in $S^\frakt$. In $C_{t,t'}$, $\partial(g)$ is identified with $EZ^\mu(\imath_t,\imath_{t'})$, which is decomposable, so that $g$ becomes a cycle in $QC_{t,t'}$, representing the $(t+t'+1)$-dimensional homology class. As this $g$ is in the image of the map $CS^\frakt\to C_{t,t'}$, it maps to $0$ in $A$, and on homology, $g$ is annihilated by the top (and bottom) composite.
+\begin{lem}
+The composite 
+\[S^t\sqcup S^{t'}\to C_{t,t'}\overset{\overline{F}(\alpha,\beta)}{\to}c(X^\fraks\times X^\fraks)\overset{h}{\to}X^\fraks\]
+equals $\widetilde{(\epsilon\alpha)}\sqcup \widetilde{(\epsilon\beta)}$.
+\end{lem}
+\begin{proof}
+Using naturality of $\overline{F}$ and the fact that $h=c(\textup{add}\circ(\epsilon\times\epsilon))$:
+\[\xymatrix@R=4mm{
+S^t\sqcup S^{t'}\ar@{ >->}[d]
+%\ar[rrd]_-{\widetilde{(\epsilon\alpha,0)}\sqcup \widetilde{(0,\epsilon\beta)}}
+\ar@/^1em/[rrd]_-{\widetilde{(\epsilon\alpha,0)}\sqcup \widetilde{(0,\epsilon\beta)}}
+\ar@/^1em/[rrrd]^-{\widetilde{\epsilon\alpha}\sqcup\widetilde{\epsilon\beta}}
+&%r1c1
+&%r1c2
+&%r1c3
+\\%r1c4
+C_{t,t'}\ar[r]^-{\overline{F}(\alpha,\beta)}
+\ar@/_1em/[rr]_-{\overline{F}(\epsilon\alpha,\epsilon\beta)}
+&%r2c1
+c(X^\fraks\times X^\fraks)\ar[r]^-{c(\epsilon\times\epsilon)}
+&%r2c2
+c(X_\textup{fr}^\fraks\times X_\textup{fr}^\fraks)\ar[r]_-{c(\textup{add})}
+&%r2c3
+cX_\textup{fl}^\fraks%r2c4
+}\qedhere\]
+\end{proof}
+
+\begin{thm}
+The monster diagram commutes.
+\end{thm}
+\begin{proof}
+We only need to show that the diagram commutes on a single $(\alpha,\beta)$ for each pair of homotopy classes that $\alpha,\beta$ represent. In particular, one can choose $\alpha:S^t\to X^\fraks=cX^\fraks_\textup{fl}$ in such a way that $\alpha=\widetilde{\epsilon\alpha}$ (by choosing $\alpha$ to be the canonical lift of whatever homotopy class $S^t\to X^\fraks_\textup{fl}$ you're interested in). The same applies to $\beta$. In summary, suppose given $\alpha$ and $\beta$ such that $\alpha=\widetilde{\epsilon\alpha}$ and $\beta=\widetilde{\epsilon\beta}$. Then we must show that $\partial_\textup{conn}(\textup{dotted}(\alpha,\beta))=\overline{\mu}_*(\textup{sEZ}(\alpha,\beta))$.
+
+All of the previous discussion together has shown $\textup{dotted}(\alpha,\beta)$ is the image in $QX^{\fraks+1}_\textup{fl}$ of the cycle $g\in Qc_{t,t'}$ under the top row of the following commuting diagram:
+\[\xymatrix@R=4mm{
+\makebox[0cm][r]{$g\in\,$}QC_{t,t'}\ar[r]^-{Q\overline{F}(\alpha,\beta)}
+&%r1c2
+Qc(X^\fraks)^2\ar[r]^-{Qh}
+&%r1c3
+QX^\fraks\ar[r]^-{Q(\epsilon d^0)}
+&%r1c4
+QX^{\fraks+1}_\textup{fl}\\%r1c5
+\makebox[0cm][r]{$g\in\,$}
+C_{t,t'}\ar[r]^-{\overline{F}(\alpha,\beta)}
+\ar@{->>}[u]
+\ar[d]_-{\partial}
+&%r1c2
+c(X^\fraks)^2\ar[r]^-{h}
+\ar@{->>}[u]
+\ar[d]_-{\partial}
+&%r1c3
+X^\fraks\ar@{->>}[r]^-{\epsilon d^0}
+\ar@{->>}[u]
+\ar[d]_-{\partial}
+&%r1c4
+X^{\fraks+1}_\textup{fl}\makebox[0cm][l]{$\,\ni\textup{dotted}(\alpha,\beta)$}\ar@{=}[u]
+\\%r2c5
+\makebox[0cm][r]{$\textup{EZ}^\mu(\imath_t,\imath_t')\in\,$}C_{t,t'}\ar[r]^-{\overline{F}(\alpha,\beta)}
+\ar@{ >->}[d]
+&%r1c2
+c(X^\fraks)^2\ar[r]^-{h}
+&%r1c3
+X^\fraks\makebox[0cm][l]{$\,\ni\partial_\textup{conn}(\textup{dotted}(\alpha,\beta))$}
+&%r1c4
+\\%r3c5
+\makebox[0cm][r]{$\textup{EZ}^\mu(\imath_t,\imath_t')\in\,$}S^t\sqcup S^{t'}\ar[urr]_-{\widetilde{\epsilon\alpha}\sqcup\widetilde{\epsilon\beta}=\alpha\sqcup\beta}
+►&%r4c2
+▐▌►&%r4c3
+▐▌►&%r4c4
+▐▌%r4c5
+}\]
+\end{proof}
 \end{Thoughts on Adams Multiplicativity III}
 \begin{KoszulComplexes_n>1}
 \section{Unstable Koszul complexes for $\derived\Ind{\nontop{}}$} \label{sectionOnUnstableKoszulComplexes}
