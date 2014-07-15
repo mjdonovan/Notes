@@ -14,7 +14,7 @@
 \excludeversion{Thoughts on Adams Multiplicativity II}
 \excludeversion{prereqs for Thoughts III}
 \excludeversion{Thoughts on Adams Multiplicativity III}
-%\def\excludeversion#1{\includeversion{#1}}
+\def\excludeversion#1{\includeversion{#1}}
 \excludeversion{Frontmatters}
 \excludeversion{Endmatter}
 \excludeversion{AdamsDerivation}
@@ -27,7 +27,8 @@
 \excludeversion{DiagramOfFunctors}
 \excludeversion{GrothendieckSpectralSequences}
 \excludeversion{Grothendieck Multiplicativity}
-\includeversion{Adams Muliplicativity}
+\excludeversion{Adams Muliplicativity}
+\includeversion{Adams sseq operations}
 \excludeversion{KoszulComplexes_n>1}
 \excludeversion{KoszulComplexes1}
 \excludeversion{DerivedFunctorsLowDimension}
@@ -4611,7 +4612,7 @@ X\ar@{->>}[u]_-{\overline{v}}
 X\ar@{->>}[u]_-{\overline{v}}&%r3c3
 X\ar[u]_-{v}\ar@{=}[l]%r3c4
 }\]
-This diagram constructs both a map $\overline{\mu}:X\wedge  X \to \overline{D}^1X$ and a zig-zag of levelwise (write $E^2$?) weak equivalences from $\overline{D}^1X$ to $D^1X$. To understand why $\overline{v}\circ\mu=0$ in this diagram, note that $\mu:X\wedge X\to X$ factors through $P_2X$, so that $\overline{v}\circ\mu$ factors through $P_2(\overline{V}X)$, which is zero, as $\overline{V}X$ is abelian. [Recall (not yet written) that $Y\wedge Z$ is just $Y\otimes Z$ as a vector space, being the kernel of the natural surjection $Y\sqcup Z\to Y\times Z$]. Of course, the resulting connecting homomorphisms commute:
+This diagram constructs both a factorisation $\overline{\mu}:X\wedge  X \to \overline{D}^1X$ (and even $X\wedge_{\Sigma_2} X\to \overline{D}^1X$) and a zig-zag of levelwise (write $E^2$?) weak equivalences from $\overline{D}^1X$ to $D^1X$. To understand why $\overline{v}\circ\mu=0$ in this diagram, note that $\mu:X\wedge X\to X$ factors through $P_2X$, so that $\overline{v}\circ\mu$ factors through $P_2(\overline{V}X)$, which is zero, as $\overline{V}X$ is abelian. [Recall (not yet written) that $Y\wedge Z$ is just $Y\otimes Z$ as a vector space, being the kernel of the natural surjection $Y\sqcup Z\to Y\times Z$]. Of course, the resulting connecting homomorphisms commute:
 \[\mathclap{\xymatrix@R=4mm{
 \pi_{\frakt}(\overline{D}^1X)&%r1c3
 \pi_{\frakt+1}(\overline{V}X)\ar[l]^-{\cong\textup{-ish}}_-{\partial_\textup{conn}}
@@ -4621,6 +4622,11 @@ This diagram constructs both a map $\overline{\mu}:X\wedge  X \to \overline{D}^1
 \pi_{\frakt+1}(VX)\ar[u]_-{\cong}
 \ar[l]^-{\cong\textup{-ish}}_-{\partial_\textup{conn}}
 }}\]
+I \textbf{guess} that what is meant by `$\cong$-ish' is actually that the composite
+\[N^\fraks\pi_\frakt(D^1X)\overset{\partial_\textup{conn}}{\from}N^\fraks\pi_{\frakt+1}(VX)\supset N^{\fraks+1}\pi_{\frakt+1}(X)\]
+is an isomorphism, where we note that the condition to lie in $N^{s+1}(O)\subset O^{s+1}$ is stricter than the condition to lie in $N^s(VO)\subset O^{s+1}$, for $O$ a cosimplicial module. Note that this composite is a cochain map, the reason being that the extra ``$d^0$'' in the coboundary out of $N^{\fraks+1}\pi_{\frakt+1}(X)$ that does not appear in the coboundary out of $N^{\fraks}\pi_{\frakt+1}(VX)$ becomes null after application of $\partial_\textup{conn}$, which is to say that the composite
+\[\pi_{\frakt+1}(X^{\fraks+1})\overset{d^0}{\to}\pi_{\frakt+1}(X^{\fraks+2})\overset{\partial_\textup{conn}}{\to}\pi_\frakt((D^1X)^{\fraks+1})\]
+is zero, which is clear, as we're just looking at adjacent maps in the homotopy LES.
 
 
 \subsection{A chain-level construction $\xi_\textup{res}$ of $\xi_\textup{alg}$}
@@ -5342,7 +5348,37 @@ This confirms that $\partial_\textup{conn}(\textup{dot}(\alpha,\beta))$ is the i
 
 
 \end{Adams Muliplicativity}
+\begin{Adams sseq operations}
+\section{Operations in the Adams spectral sequence}
+\[\mathclap{\xymatrix@R=4mm{
+\pi_t(X)\otimes \pi_{t'}(X)
+\ar[r]^-{\textup{sEZ}}
+&%r1c1
+\pi_{\frakt}(X\wedge  X)\ar[r]
+&%r1c2
+\pi_{\frakt}(\overline{D}^1X)&%r1c3
+\pi_{\frakt+1}(\overline{V}X)
+\ar[l]^-{\cong\textup{-ish}}_-{\partial_\textup{conn}}
+}}\]
 
+\subsection{Divided squares algebraically defined on $E^2$}
+The formula for the $E^2$ page is $E^2_{st}=\pi^s\pi_t(X)$. We'll now define divided square operations $\delta_i^\textup{alg}:E^2_{s,t}\to E^2_{s+1,t+i+1}$ defined when $2\leq i \leq t$. Indeed, we may define these by the formula
+\[N^s\pi_t(X)\overset{N^s(\gamma_i)}{\to}N^s\pi_{t+i}(X\wedge_{\Sigma_2} X)\overset{N^s(\overline{\mu})}{\to}N^s\pi_{t+i}(\overline{D}^1X)\cong N^{s+1}\pi_{t+i+1}(X)\]
+where $\gamma_i:\pi_t(X^s)\to\pi_{t+i}(X^s\wedge_{\Sigma_2} X^s)$ is induced by the chain map $\Theta_i:N_t(X^s)\to N_{t+i}(X^s\wedge_{\Sigma_2} X^s)$ defined by
+\[\Theta_i(x):=\Delta^{t-i}(x\otimes x)+\Delta^{t-i-1}(x\otimes dx).\]
+Now $\gamma_i$ and $\overline{\mu}$ commute with the cosimplicial structure maps, and the final isomorphism is a chain map, so that the whole composite is a chain map, and so defines operations one $E^2$ as hoped.
+
+\textbf{It should be formal now that the top $\delta^\textup{alg}$ operation is the square. It's a bit confusing whether or not they satisfy the Adem relations, due to the lift, but hopefully the proof of the Adem relations can be externalised to a fact about iterated $\gamma_i$, and there is some diagram involving iterated $\overline{\mu}$. Moreover, the product derived in this way will coincide with the spectral sequence product that we defined earlier (which agrees with the Lie coalgebra homology product). We haven't yet extended the $\delta$ operations to higher pages.}
+\subsection{Steenrod operations algebraically defined on $E^2$}
+Define Steenrod operations $\Sq^\textup{alg}_i:E^2_{s,t}\to E^2_{s+i+1,2t+1}$ for all $i\geq 0$ using the composite:
+\[N^s\pi_tX\overset{\Gamma^i}{\to}N^{s+i}((\pi_tX)^{\otimes2})\overset{N^{s+i}(\Delta^0)}{\to}N^{s+i}\pi_{2t}(X\wedge X)\to N^{s+i+1}\pi_{2t+1}(X)\]
+where (for want of a naming convention) $\Gamma^i$ is induced by the cochain map $N^s\pi_t(X)\to N^{s+i}(\pi_t(X)^{\otimes 2})$ defined by the following expression involving higher cosimplicial AW maps:
+\[x\mapsto \Delta_{t-i}(x\otimes x)+\Delta_{t-i+1}(x\otimes dx)\]
+Using the monster diagram, these are the same operations that one might define on Lie coalgebra homology. The same holds for the pairing, and the pairing here will coincide with the pairing defined in the previous subsection, which is to say that any two pairings you can think of coincide.
+\textbf{See that $\Sq^0=0$ as we're looking at Lie coalgebra homology.}
+\subsection{What remains}
+We need to deform the obvious definition of $\delta$ operations on the total complex, which is filtration doubling. The deformation will end up being the Steenrod operations. Then the unstablising differentials will presumably follow formally, and we'll presumably know how to strip off the extra $\delta$ sequences. I should try to emulate 2.7, and figure out what it implies.
+\end{Adams sseq operations}
 \begin{KoszulComplexes_n>1}
 \section{Unstable Koszul complexes for $\derived\Ind{\nontop{}}$} \label{sectionOnUnstableKoszulComplexes}
 \subsection{Koszul complexes for $\derived\Ind{\nontop{}}$ for $n\geq2$}
