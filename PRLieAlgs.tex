@@ -3,6 +3,8 @@
 %%%USINGsubsectionNUMBERS
 \newcommand{\NOFULLPAGE}{\relax}
 \input{../../Dropbox/logbook/_LOGBOOK/macros.tex}
+\DeclareFieldFormat{postnote}{#1}
+\DeclareFieldFormat{multipostnote}{#1}
 \excludeversion{Omitted}
 
 \excludeversion{wedding}
@@ -14,7 +16,7 @@
 \excludeversion{Thoughts on Adams Multiplicativity II}
 \excludeversion{prereqs for Thoughts III}
 \excludeversion{Thoughts on Adams Multiplicativity III}
-\def\excludeversion#1{\includeversion{#1}}
+%\def\excludeversion#1{\includeversion{#1}}
 \excludeversion{Frontmatters}
 \excludeversion{Endmatter}
 \excludeversion{AdamsDerivation}
@@ -480,9 +482,9 @@ N(\TruncSimplex{n}\downarrow\DASH)\ar[u]
 }\]
 of objects in $(s\Set)^{\TruncSimplex{n}}$. In fact, by the proof in \cite{Hirschhorn.pdf}, all the objects in this diagram are cofibrant, and all the maps are weak equivalences.
 
-Now, by results of \cite[X,4.9]{YellowMonster}, all (truncated) cosimplicial groups are Reedy fibrant. In particular, all of the following constructions are homotopical for any cosimplicial object in one of our categories of interest.
+Now, by results of \cite[{X.4.9}]{YellowMonster}, all (truncated) cosimplicial groups are Reedy fibrant. In particular, all of the following constructions are homotopical for any cosimplicial object in one of our categories of interest.
 
-We may define the homotopy limit of a functor $X:\calD\to s\algCat$ to be the end $\hom^\calD(N(\calD\downarrow\DASH),X)$. The partial totalization of a functor $X:\TruncSimplex{n}\to s\algCat$ is defined as the end $\hom^\TruncSimplex{n}(\TruncSimplex{n},X)$. Suppose now that $X:\Delta^+\to s\algCat$ is augmented (and whenever you take a totalisation, restrict implicitly to nonempty). By \cite[X,4.9]{YellowMonster}, all (truncated) cosimplicial groups are Reedy fibrant, and so $X|_\Delta$ is Reedy fibrant. Thus we have the following diagram:
+We may define the homotopy limit of a functor $X:\calD\to s\algCat$ to be the end $\hom^\calD(N(\calD\downarrow\DASH),X)$. The partial totalization of a functor $X:\TruncSimplex{n}\to s\algCat$ is defined as the end $\hom^\TruncSimplex{n}(\TruncSimplex{n},X)$. Suppose now that $X:\Delta^+\to s\algCat$ is augmented (and whenever you take a totalisation, restrict implicitly to nonempty). By \cite[X.4.9]{YellowMonster}, all (truncated) cosimplicial groups are Reedy fibrant, and so $X|_\Delta$ is Reedy fibrant. Thus we have the following diagram:
 \[\xymatrix@R=4mm{
 \hotfib(X|_{\FullCube{\infty}})\ar[d]\ar[r]&
 X^{-1}\ar[r]\ar[d]&
@@ -5350,6 +5352,48 @@ This confirms that $\partial_\textup{conn}(\textup{dot}(\alpha,\beta))$ is the i
 \end{Adams Muliplicativity}
 \begin{Adams sseq operations}
 \section{Operations in the Adams spectral sequence}
+Let's list the various maps we'll need.
+\subsubsection*{Higher cosimplicial Alexander-Whitney maps}
+For cosimplicial vectorspaces $R,S$, let $\{D^k\}$ be a collection of higher cosimplicial Alexander-Whitney maps, i.e.\ maps
+\[D^k:(CR\otimes CS)^{i+k}\to N(R\otimes S)^i\textup{\ \ for $i,k\geq0$}\]
+such that $dD^k+D^kd=D^{k-1}+TD^{k-1}T$ for $k>1$, and $D^0$ is a chain homotopy equivalence inducing the identity in dimension zero. It is a useful convention to define $D^i=0$ for $i<0$.
+\subsubsection*{Higher simplicial Eilenberg-Zilber maps}
+For simplicial vectorspaces $U,V$, let $\{\Delta_k\}$ be a collection of higher cosimplicial Alexander-Whitney maps, i.e.\ maps
+\[\Delta_k:(CU\otimes CV)_{i+k}\to N(U\otimes V)_i\textup{\ \ for $0\leq k\leq i$}\]
+such that
+\[\Delta_k+T\Delta_kT=\phi_k+\begin{cases}
+\Delta_{k-1}\partial+\partial\Delta_{k-1},&\textup{if }k\geq1;\\
+D,&\textup{if }k=0.
+%\\,&\textup{if }
+\end{cases}
+\]
+where $D:CU\otimes CV\to C(U\times V)$ is a chain homotopy equivalence inducing the identity in dimension zero, and $\phi_k$ is the map $(CU\otimes CV)_{i+k}\to C(U\otimes V)_i$ which vanishes except on $U_k\otimes V_k$, where its value is just the projection $U_k\otimes V_k\to N(U\times V)_k$. It is not wise to define $\Delta_i$ for $i<0$.
+\[\mathclap{\xymatrix@R=4mm{
+\pi_t(X)\otimes \pi_{t'}(X)\ar[dd]^-{h\otimes h}
+\ar[r]^-{\textup{sEZ}}
+&%r1c1
+\pi_{\frakt}(X\wedge  X)\ar[r]
+&%r1c2
+\pi_{\frakt}(\overline{D}^1X)&%r1c3
+\pi_{\frakt+1}(\overline{V}X)
+\ar[l]^-{\cong\textup{-ish}}_-{\partial_\textup{conn}}
+\\%r1c4
+&%r2c1
+&%r2c2
+\pi_{\frakt}(D^1X)\ar@{-}[u]^-{\textup{zig-zag}}_-{\cong}
+&%r2c3
+\pi_{\frakt+1}(VX)\ar[u]_-{\cong}
+\ar[l]^-{\cong\textup{-ish}}_-{\partial_\textup{conn}}
+\ar[d]^-{\cong}
+\\%r2c4
+\textup{Pr}_t(HX)\otimes \textup{Pr}_{t'}(HX)\ar[r]^-{j}
+&%r3c1
+\textup{Pr}_{\frakt+1}(HX\wedge HX)\ar[rr]^-{\xi_\textup{alg}}
+&%r3c2
+&%r3c3
+\textup{Pr}_{\frakt+1}(HVX)%r3c4
+}}\]
+
 \[\mathclap{\xymatrix@R=4mm{
 \pi_t(X)\otimes \pi_{t'}(X)
 \ar[r]^-{\textup{sEZ}}
@@ -5364,8 +5408,9 @@ This confirms that $\partial_\textup{conn}(\textup{dot}(\alpha,\beta))$ is the i
 \subsection{Divided squares algebraically defined on $E^2$}
 The formula for the $E^2$ page is $E^2_{st}=\pi^s\pi_t(X)$. We'll now define divided square operations $\delta_i^\textup{alg}:E^2_{s,t}\to E^2_{s+1,t+i+1}$ defined when $2\leq i \leq t$. Indeed, we may define these by the formula
 \[N^s\pi_t(X)\overset{N^s(\gamma_i)}{\to}N^s\pi_{t+i}(X\wedge_{\Sigma_2} X)\overset{N^s(\overline{\mu})}{\to}N^s\pi_{t+i}(\overline{D}^1X)\cong N^{s+1}\pi_{t+i+1}(X)\]
-where $\gamma_i:\pi_t(X^s)\to\pi_{t+i}(X^s\wedge_{\Sigma_2} X^s)$ is induced by the chain map $\Theta_i:N_t(X^s)\to N_{t+i}(X^s\wedge_{\Sigma_2} X^s)$ defined by
-\[\Theta_i(x):=\Delta^{t-i}(x\otimes x)+\Delta^{t-i-1}(x\otimes dx).\]
+where $\gamma_i:\pi_t(X^s)\to\pi_{t+i}(X^s\wedge_{\Sigma_2} X^s)$ is induced by the function on cycles $ZN_t(X^s)\to ZN_{t+i}(X^s\wedge_{\Sigma_2} X^s)$ defined by
+\[x\mapsto\Delta_{t-i}(x\otimes x).\]
+The map $\gamma_i$ is well defined, is linear when $i<t$, and is a quadratic refinement of the product pairing when $i=n$ (c.f.\ \cite[4.1,4.2]{DwyerHtpyOpsSimpComAlg.pdf}).
 Now $\gamma_i$ and $\overline{\mu}$ commute with the cosimplicial structure maps, and the final isomorphism is a chain map, so that the whole composite is a chain map, and so defines operations one $E^2$ as hoped.
 
 \textbf{It should be formal now that the top $\delta^\textup{alg}$ operation is the square. It's a bit confusing whether or not they satisfy the Adem relations, due to the lift, but hopefully the proof of the Adem relations can be externalised to a fact about iterated $\gamma_i$, and there is some diagram involving iterated $\overline{\mu}$. Moreover, the product derived in this way will coincide with the spectral sequence product that we defined earlier (which agrees with the Lie coalgebra homology product). We haven't yet extended the $\delta$ operations to higher pages.}
@@ -5373,11 +5418,32 @@ Now $\gamma_i$ and $\overline{\mu}$ commute with the cosimplicial structure maps
 Define Steenrod operations $\Sq^\textup{alg}_i:E^2_{s,t}\to E^2_{s+i+1,2t+1}$ for all $i\geq 0$ using the composite:
 \[N^s\pi_tX\overset{\Gamma^i}{\to}N^{s+i}((\pi_tX)^{\otimes2})\overset{N^{s+i}(\Delta^0)}{\to}N^{s+i}\pi_{2t}(X\wedge X)\to N^{s+i+1}\pi_{2t+1}(X)\]
 where (for want of a naming convention) $\Gamma^i$ is induced by the cochain map $N^s\pi_t(X)\to N^{s+i}(\pi_t(X)^{\otimes 2})$ defined by the following expression involving higher cosimplicial AW maps:
-\[x\mapsto \Delta_{t-i}(x\otimes x)+\Delta_{t-i+1}(x\otimes dx)\]
+\[x\mapsto D^{t-i}(x\otimes x)+D^{t-i+1}(x\otimes dx)\]
 Using the monster diagram, these are the same operations that one might define on Lie coalgebra homology. The same holds for the pairing, and the pairing here will coincide with the pairing defined in the previous subsection, which is to say that any two pairings you can think of coincide.
 \textbf{See that $\Sq^0=0$ as we're looking at Lie coalgebra homology.}
 \subsection{What remains}
 We need to deform the obvious definition of $\delta$ operations on the total complex, which is filtration doubling. The deformation will end up being the Steenrod operations. Then the unstablising differentials will presumably follow formally, and we'll presumably know how to strip off the extra $\delta$ sequences. I should try to emulate 2.7, and figure out what it implies.
+
+\subsection{Divided squares doubling filtration}
+For mixed simplicial vector spaces $X$ and $Y$, write $C(X\otimes_\textup{V}Y)$ for the double complex which in degree $(\fraks,\frakt)$ equals the direct sum $\bigoplus_{t+t'=\frakt}X_t^\fraks\otimes X_{t'}^\fraks$. Now write $K_k$ for the composite
+\[(CX\otimes CY)_{\fraks,\frakt}\overset{D^0}{\to}C(X\otimes_\textup{V}Y)_{\fraks,\frakt}\overset{\Delta_k}{\to}C(X\otimes Y)_{\fraks,\frakt-k}\]
+defined when $2k\leq \frakt$. Similarly, write $P_k$ for the composite
+\[(CX\otimes CY)_{\fraks,\frakt}\overset{D^0}{\to}C(X\otimes_\textup{V}Y)_{\fraks,\frakt}\overset{\phi_k}{\to}C(X\otimes Y)_{\fraks,\frakt-k}\]
+defined when $2k\leq \frakt$. One readily observes that
+\[K_k+TK_kT=K_{k-1}d+dK_{k-1}+P_k.\]
+Now specialising to the case $X=Y$, write $\rho:X\otimes X\to X\otimes_{\Sigma_2}X$ for the natural surjection onto $\Sigma_2$-coinvariants.
+\begin{prop}
+For $2\leq i\leq \frakt$, the function $F_\fraks CX_{\frakt-\fraks}\to F_{2\fraks}C(X\otimes_{\Sigma_2}X)_{\frakt-\fraks+i}$ defined by $x\mapsto \rho(K_{\frakt-\fraks-i}(x\otimes x))$ preserves cycles and homologies. It is linear up to homology whenever $i<\frakt$, and a quadratic refinement of the product when $i=\frakt$ \textbf{if this makes sense}.
+\end{prop}
+\begin{proof}
+Firstly we explain why this function is even defined --- as $x$ has filtration at least $\fraks$, its simplicial degree is uniformly at least $\frakt$, so that $x\otimes x$ has simplicial degree at least $2t$. Thus, in order that the expression $K_{\frakt-\fraks-i}(x\otimes x)$ is defined, we only need that $2(\frakt-\fraks-i)\leq 2\frakt$. In fact, the stronger inequality $2(\frakt-\fraks-i-2)\leq 2\frakt$ holds.
+
+In order to check that cycles are preserved, we calculate $d\rho(K_{\frakt-\fraks-i}(x\otimes x))$ to be
+\[\rho(K_{\frakt-\fraks-i+1}((1+T)(x\otimes x)))+\rho K_{\frakt-\fraks-i}(d(x\otimes x))+\rho P_{\frakt-\fraks-i+1}(x\otimes x).\]
+The first two of the three terms obviously vanish. As the simplicial degree of $x$ is uniformly at least $\frakt$, which exceeds $\frakt-\fraks-i+1$, the third term also vanishes.
+
+\textbf{More to check, I guess.}
+\end{proof}
 \end{Adams sseq operations}
 \begin{KoszulComplexes_n>1}
 \section{Unstable Koszul complexes for $\derived\Ind{\nontop{}}$} \label{sectionOnUnstableKoszulComplexes}
