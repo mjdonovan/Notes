@@ -5358,16 +5358,16 @@ For cosimplicial vectorspaces $R,S$, let $\{D^k\}$ be a collection of higher cos
 \[D^k:(CR\otimes CS)^{i+k}\to N(R\otimes S)^i\textup{\ \ for $i,k\geq0$}\]
 such that $dD^k+D^kd=D^{k-1}+TD^{k-1}T$ for $k>1$, and $D^0$ is a chain homotopy equivalence inducing the identity in dimension zero. It is a useful convention to define $D^i=0$ for $i<0$.
 \subsubsection*{Higher simplicial Eilenberg-Zilber maps}
-For simplicial vectorspaces $U,V$, let $\{\Delta_k\}$ be a collection of higher cosimplicial Alexander-Whitney maps, i.e.\ maps
+For simplicial vectorspaces $U,V$, let $\{\Delta_k\}$ be a collection of higher simplicial Eilenberg-Zilber maps, i.e.\ maps
 \[\Delta_k:(CU\otimes CV)_{i+k}\to N(U\otimes V)_i\textup{\ \ for $0\leq k\leq i$}\]
 such that
 \[\Delta_k+T\Delta_kT=\phi_k+\begin{cases}
 \Delta_{k-1}\partial+\partial\Delta_{k-1},&\textup{if }k\geq1;\\
-D,&\textup{if }k=0.
+\Delta,&\textup{if }k=0.
 %\\,&\textup{if }
 \end{cases}
 \]
-where $D:CU\otimes CV\to C(U\times V)$ is a chain homotopy equivalence inducing the identity in dimension zero, and $\phi_k$ is the map $(CU\otimes CV)_{i+k}\to C(U\otimes V)_i$ which vanishes except on $U_k\otimes V_k$, where its value is just the projection $U_k\otimes V_k\to N(U\times V)_k$. It is not wise to define $\Delta_i$ for $i<0$.
+where $\Delta:CU\otimes CV\to C(U\times V)$ is a chain homotopy equivalence inducing the identity in dimension zero, and $\phi_k$ is the map $(CU\otimes CV)_{i+k}\to C(U\otimes V)_i$ which vanishes except on $U_k\otimes V_k$, where its value is just the projection $U_k\otimes V_k\to N(U\times V)_k$. It is not wise to define $\Delta_i$ for $i<0$.
 \[\mathclap{\xymatrix@R=4mm{
 \pi_t(X)\otimes \pi_{t'}(X)\ar[dd]^-{h\otimes h}
 \ar[r]^-{\textup{sEZ}}
@@ -5416,7 +5416,7 @@ Now $\gamma_i$ and $\overline{\mu}$ commute with the cosimplicial structure maps
 \textbf{It should be formal now that the top $\delta^\textup{alg}$ operation is the square. It's a bit confusing whether or not they satisfy the Adem relations, due to the lift, but hopefully the proof of the Adem relations can be externalised to a fact about iterated $\gamma_i$, and there is some diagram involving iterated $\overline{\mu}$. Moreover, the product derived in this way will coincide with the spectral sequence product that we defined earlier (which agrees with the Lie coalgebra homology product). We haven't yet extended the $\delta$ operations to higher pages.}
 \subsection{Steenrod operations algebraically defined on $E^2$}
 Define Steenrod operations $\Sq^\textup{alg}_i:E^2_{s,t}\to E^2_{s+i+1,2t+1}$ for all $i\geq 0$ using the composite:
-\[N^s\pi_tX\overset{\Gamma^i}{\to}N^{s+i}((\pi_tX)^{\otimes2})\overset{N^{s+i}(\Delta^0)}{\to}N^{s+i}\pi_{2t}(X\wedge X)\to N^{s+i+1}\pi_{2t+1}(X)\]
+\[N^s\pi_tX\overset{\Gamma^i}{\to}N^{s+i}((\pi_tX)^{\otimes2})\overset{N^{s+i}(\Delta)}{\to}N^{s+i}\pi_{2t}(X\wedge X)\to N^{s+i+1}\pi_{2t+1}(X)\]
 where (for want of a naming convention) $\Gamma^i$ is induced by the cochain map $N^s\pi_t(X)\to N^{s+i}(\pi_t(X)^{\otimes 2})$ defined by the following expression involving higher cosimplicial AW maps:
 \[x\mapsto D^{t-i}(x\otimes x)+D^{t-i+1}(x\otimes dx)\]
 Using the monster diagram, these are the same operations that one might define on Lie coalgebra homology. The same holds for the pairing, and the pairing here will coincide with the pairing defined in the previous subsection, which is to say that any two pairings you can think of coincide.
@@ -5425,20 +5425,42 @@ Using the monster diagram, these are the same operations that one might define o
 We need to deform the obvious definition of $\delta$ operations on the total complex, which is filtration doubling. The deformation will end up being the Steenrod operations. Then the unstablising differentials will presumably follow formally, and we'll presumably know how to strip off the extra $\delta$ sequences. I should try to emulate 2.7, and figure out what it implies.
 
 \subsection{Divided squares doubling filtration}
-For mixed simplicial vector spaces $X$ and $Y$, write $C(X\otimes_\textup{V}Y)$ for the double complex which in degree $(\fraks,\frakt)$ equals the direct sum $\bigoplus_{t+t'=\frakt}X_t^\fraks\otimes X_{t'}^\fraks$. Now write $K_k$ for the composite
-\[(CX\otimes CY)_{\fraks,\frakt}\overset{D^0}{\to}C(X\otimes_\textup{V}Y)_{\fraks,\frakt}\overset{\Delta_k}{\to}C(X\otimes Y)_{\fraks,\frakt-k}\]
-defined when $2k\leq \frakt$. Similarly, write $P_k$ for the composite
-\[(CX\otimes CY)_{\fraks,\frakt}\overset{D^0}{\to}C(X\otimes_\textup{V}Y)_{\fraks,\frakt}\overset{\phi_k}{\to}C(X\otimes Y)_{\fraks,\frakt-k}\]
-defined when $2k\leq \frakt$. One readily observes that
-\[K_k+TK_kT=K_{k-1}d+dK_{k-1}+P_k.\]
-Now specialising to the case $X=Y$, write $\rho:X\otimes X\to X\otimes_{\Sigma_2}X$ for the natural surjection onto $\Sigma_2$-coinvariants.
+For mixed simplicial vector spaces $X$ and $Y$, write $C(X\otimes_\textup{v}Y)$ for the double complex which in degree $(\fraks,\frakt)$ equals the direct sum $\bigoplus_{t+t'=\frakt}X_t^\fraks\otimes X_{t'}^\fraks$. The following bicomplex maps are given by prolonging $D^k$, $\Delta$, $\Delta_k$ and $\psi_k$:
+\begin{align*}
+\overline{D}^k:(CX\otimes CY)_{\fraks+k,\frakt}&\to C(X\otimes_\textup{v}Y)_{\fraks,\frakt}\\
+\overline{\Delta}:C(X\otimes_\textup{v} Y)_{\fraks,\frakt}&\to C(X\otimes Y)_{\fraks,\frakt}\\
+\overline{\Delta}_k:C(X\otimes_\textup{v} Y)_{\fraks,\frakt+k}&\to C(X\otimes Y)_{\fraks,\frakt}\textup{\quad for $0\leq k\leq \frakt$}\\
+\overline{\phi}_k:C(X\otimes_\textup{v} Y)_{\fraks,\frakt+k}&\to C(X\otimes Y)_{\fraks,\frakt}\textup{\quad for $0\leq k\leq \frakt$}
+\end{align*}
+%COMMENTED OUT INTERMEDIATE STEPS
+%\[\overline{\Delta}_k:C(X\otimes_\textup{v} Y)_{\fraks,\frakt}\to C(X\otimes Y)_{\fraks,\frakt-k}\textup{\quad for $0\leq k\leq \frakt-k$}\]
+%\[\overline{\Delta}_k:C(X\otimes_\textup{v} Y)_{\fraks,n+\fraks}\to C(X\otimes Y)_{\fraks,n+\fraks-k}\textup{\quad for $0\leq k\leq n+\fraks-k$}\]
+We may rewrite them with a focus on filtration, along with two further functions in the case $Y=X$:
+\begin{align*}
+\overline{D}^k:F_{p}(CX\otimes CY)_{n}&\to F_{p-k}C(X\otimes_\textup{v}Y)_{n+k}\\
+\overline{\Delta}:F_{p}C(X\otimes_\textup{v} Y)_{n}&\to F_{p}C(X\otimes Y)_{n}\\
+\overline{\Delta}_k:F_{p}C(X\otimes_\textup{v} Y)_{n}&\to F_{p}C(X\otimes Y)_{n-k}\textup{\quad for $p\geq 2k-n$,\,$k\geq0$}\\
+\overline{\phi}_k:F_{p}C(X\otimes_\textup{v} Y)_{n}&\to F_{p}C(X\otimes Y)_{n-k}\textup{\quad for $p\geq 2k-n$,\,$k\geq0$}\\
+\rho:F_{p}C(X\otimes X)_{n}&\to F_{p}C(X\otimes_{\Sigma_2} X)_{n}\\
+\tau:F_{p}CX_n&\to F_{2p}(CX\otimes CX)_n
+\end{align*}
+where $\rho$ the projection onto $\Sigma_2$ coinvariants, a chain map, and $\tau:x\mapsto x\otimes x$ the self-tensor-square, which is of course not even linear. 
+
+Note that $\overline{\psi}_k$ vanishes on $F_{2k-n+1}C(X\otimes_\textup{v} Y)_n$.
+% Now write $K_k$ for the composite
+%\[(CX\otimes CY)_{\fraks,\frakt}\overset{D^0}{\to}C(X\otimes_\textup{v}Y)_{\fraks,\frakt}\overset{\Delta_k}{\to}C(X\otimes Y)_{\fraks,\frakt-k}\]
+%defined when $2k\leq \frakt$. Similarly, write $P_k$ for the composite
+%\[(CX\otimes CY)_{\fraks,\frakt}\overset{D^0}{\to}C(X\otimes_\textup{v}Y)_{\fraks,\frakt}\overset{\phi_k}{\to}C(X\otimes Y)_{\fraks,\frakt-k}\]
+%defined when $2k\leq \frakt$. One readily observes that
+%\[K_k+TK_kT=K_{k-1}d+dK_{k-1}+P_k.\]
+%Now specialising to the case $X=Y$, write $\rho:X\otimes X\to X\otimes_{\Sigma_2}X$ for the natural surjection onto $\Sigma_2$-coinvariants.
 \begin{prop}
-For $2\leq i\leq \frakt$, the function $F_\fraks CX_{\frakt-\fraks}\to F_{2\fraks}C(X\otimes_{\Sigma_2}X)_{\frakt-\fraks+i}$ defined by $x\mapsto \rho(K_{\frakt-\fraks-i}(x\otimes x))$ preserves cycles and homologies. It is linear up to homology whenever $i<\frakt$, and a quadratic refinement of the product when $i=\frakt$ \textbf{if this makes sense}.
+For $2\leq i\leq n$, the composite function $\rho\overline{\Delta}_{n-i}\overline{D}^0\tau$:
+\[\mathclap{F_p CX_{n}\overset{\tau}{\to} F_{2p}(CX\otimes CX)_{2n}\overset{\overline{D}^0}{\to}F_{2p}C(X\otimes_\textup{v} X)_{2n}\overset{\overline{\Delta}_{n-i}}{\to}F_{2p}C(X\otimes X)_{n+i}\overset{\rho}{\to}F_{2p}C(X\otimes_{\Sigma_2} X)_{n+i}}\]
+is well defined and preserves cycles and homologies between cycles. It is linear up to homology whenever $i<n$, and a quadratic refinement of the product when $i=n$ \textbf{if this makes sense}.
 \end{prop}
 \begin{proof}
-Firstly we explain why this function is even defined --- as $x$ has filtration at least $\fraks$, its simplicial degree is uniformly at least $\frakt$, so that $x\otimes x$ has simplicial degree at least $2t$. Thus, in order that the expression $K_{\frakt-\fraks-i}(x\otimes x)$ is defined, we only need that $2(\frakt-\fraks-i)\leq 2\frakt$. In fact, the stronger inequality $2(\frakt-\fraks-i-2)\leq 2\frakt$ holds.
-
-In order to check that cycles are preserved, we calculate $d\rho(K_{\frakt-\fraks-i}(x\otimes x))$ to be
+Firstly, to check that this function is defined is to check that $2p\geq2(n-i)-2n$, which is true. In order to check that cycles are preserved, we calculate $d\rho(K_{\frakt-\fraks-i}(x\otimes x))$ to be
 \[\rho(K_{\frakt-\fraks-i+1}((1+T)(x\otimes x)))+\rho K_{\frakt-\fraks-i}(d(x\otimes x))+\rho P_{\frakt-\fraks-i+1}(x\otimes x).\]
 The first two of the three terms obviously vanish. As the simplicial degree of $x$ is uniformly at least $\frakt$, which exceeds $\frakt-\fraks-i+1$, the third term also vanishes.
 
