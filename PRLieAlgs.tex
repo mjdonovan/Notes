@@ -16,7 +16,7 @@
 \excludeversion{Thoughts on Adams Multiplicativity II}
 \excludeversion{prereqs for Thoughts III}
 \excludeversion{Thoughts on Adams Multiplicativity III}
-\def\excludeversion#1{\includeversion{#1}}
+%\def\excludeversion#1{\includeversion{#1}}
 \excludeversion{Frontmatters}
 \excludeversion{Endmatter}
 \excludeversion{AdamsDerivation}
@@ -2738,7 +2738,7 @@ The image of $\textup{elt}$ is then $j(\textup{cr}(g^0_{i_1})(h^1_{i_1i_2}))$, w
 g^0_{i_1}\left(\overline{h^1_{i_1i_2}} +\overline{\overline{h^1_{i_1i_2}}}\right)
 -\overline{g^0_{i_1}(h^1_{i_1i_2})}- \overline{\overline{g^0_{i_1}(h^1_{i_1i_2})}}.\]
 Now $j:Q(A\wedge B)\to QA\otimes QB$ picks out the simple brackets $[a,b]$ for $a\in A$ and $b\in B$, and in the expression $\textup{cr}(g^0_{i_1})(h^1_{i_1i_2})$, there are only two sources for such brackets. Firstly, if $g^0_{i_1}$ contains a bracket $[h^1_{i_1i_2},h^1_{i_1i'_2}]$ then $\textup{cr}(g^0_{i_1})(h^1_{i_1i_2})$ contains terms
-\[[\overline{h^1_{i_1i_2}},\overline{\overline{h^1_{i_1i'_2}}}]+[\overline{\overline{h^1_{i_1i_2}}},\overline{h^1_{i_1i'_2}}]\overset{j}{\mapsto}h^1_{i_1i_2}\otimes h^1_{i_1i'_2}+h^1_{i_1i'_2}\otimes h^1_{i_1i_2}.\]
+\[[\overline{h^1_{i_1i_2}},\overline{\overline{h^1_{i_1i'_2}}}]+ [\overline{\overline{h^1_{i_1i_2}}},\overline{h^1_{i_1i'_2}}]\overset{j}{\mapsto}h^1_{i_1i_2}\otimes h^1_{i_1i'_2}+h^1_{i_1i'_2}\otimes h^1_{i_1i_2}.\]
 Secondly, if $g^0_{i_1}$ contains a restriction $(h^1_{i_1i_2})^{[2]}$, then $\textup{cr}(g^0_{i_1})(h^1_{i_1i_2})$ contains
 \[(\overline{h^1_{i_1i_2}}+\overline{\overline{h^1_{i_1i_2}}})^{[2]}-
 (\overline{h^1_{i_1i_2}})^{[2]}
@@ -5352,7 +5352,6 @@ This confirms that $\partial_\textup{conn}(\textup{dot}(\alpha,\beta))$ is the i
 \end{Adams Muliplicativity}
 \begin{Adams sseq operations}
 \section{Operations in the Adams spectral sequence}
-Let's list the various maps we'll need.
 \subsubsection*{Higher cosimplicial Alexander-Whitney maps}
 For cosimplicial vectorspaces $R,S$, let $\{D^k\}$ be a collection of higher cosimplicial Alexander-Whitney maps, i.e.\ maps
 \[D^k:(CR\otimes CS)^{i+k}\to N(R\otimes S)^i\textup{\ \ for $i,k\geq0$}\]
@@ -5368,6 +5367,34 @@ such that
 \end{cases}
 \]
 where $\Delta:CU\otimes CV\to C(U\times V)$ is a chain homotopy equivalence inducing the identity in dimension zero, and $\phi_k$ is the map $(CU\otimes CV)_{i+k}\to C(U\otimes V)_i$ which vanishes except on $U_k\otimes V_k$, where its value is just the projection $U_k\otimes V_k\to N(U\times V)_k$. It is not wise to define $\Delta_i$ for $i<0$.
+
+
+
+For mixed simplicial vector spaces $X$ and $Y$, write $C(X\otimes_\textup{v}Y)$ for the double complex which in degree $(\fraks,\frakt)$ equals the direct sum $\bigoplus_{t+t'=\frakt}X_t^\fraks\otimes X_{t'}^\fraks$. The following bicomplex maps are given by prolonging $D^k$, $\Delta$, $\Delta_k$ and $\psi_k$:
+\begin{align*}
+\overline{D}^k:(CX\otimes CY)_{\fraks+k,\frakt}&\to C(X\otimes_\textup{v}Y)_{\fraks,\frakt}\\
+\overline{\Delta}:C(X\otimes_\textup{v} Y)_{\fraks,\frakt}&\to C(X\otimes Y)_{\fraks,\frakt}\\
+\overline{\Delta}_k:C(X\otimes_\textup{v} Y)_{\fraks,\frakt+k}&\to C(X\otimes Y)_{\fraks,\frakt}\textup{\quad for $0\leq k\leq \frakt$}\\
+\overline{\phi}_k:C(X\otimes_\textup{v} Y)_{\fraks,\frakt+k}&\to C(X\otimes Y)_{\fraks,\frakt}\textup{\quad for $0\leq k\leq \frakt$}
+\end{align*}
+%COMMENTED OUT INTERMEDIATE STEPS
+%\[\overline{\Delta}_k:C(X\otimes_\textup{v} Y)_{\fraks,\frakt}\to C(X\otimes Y)_{\fraks,\frakt-k}\textup{\quad for $0\leq k\leq \frakt-k$}\]
+%\[\overline{\Delta}_k:C(X\otimes_\textup{v} Y)_{\fraks,n+\fraks}\to C(X\otimes Y)_{\fraks,n+\fraks-k}\textup{\quad for $0\leq k\leq n+\fraks-k$}\]
+We may rewrite them with a focus on filtration, along with two further functions in the case $Y=X$:
+\begin{align*}
+\overline{D}^k:F_{p}(CX\otimes CY)_{n}&\to F_{p-k}C(X\otimes_\textup{v}Y)_{n+k}\\
+\overline{\Delta}:F_{p}C(X\otimes_\textup{v} Y)_{n}&\to F_{p}C(X\otimes Y)_{n}\\
+\overline{\Delta}_k:F_{p}C(X\otimes_\textup{v} Y)_{n}&\to F_{p}C(X\otimes Y)_{n-k}\textup{\quad for $p\geq 2k-n$,\,$k\geq0$}\\
+\overline{\phi}_k:F_{p}C(X\otimes_\textup{v} Y)_{n}&\to F_{p}C(X\otimes Y)_{n-k}\textup{\quad for $p\geq 2k-n$,\,$k\geq0$}\\
+\rho:F_{p}C(X\otimes X)_{n}&\to F_{p}C(X\otimes_{\Sigma_2} X)_{n}\\
+\tau:F_{p}CX_n&\to F_{2p}(CX\otimes CX)_{2n}
+\end{align*}
+where $\rho$ the projection onto $\Sigma_2$ coinvariants, a chain map, and $\tau:x\mapsto x\otimes x$ the self-tensor-square, which is of course not even linear. 
+
+Note that $\overline{\psi}_k$ vanishes on $F_{2k-n+1}C(X\otimes_\textup{v} Y)_n$.
+
+
+
 \[\mathclap{\xymatrix@R=4mm{
 \pi_t(X)\otimes \pi_{t'}(X)\ar[dd]^-{h\otimes h}
 \ar[r]^-{\textup{sEZ}}
@@ -5417,40 +5444,45 @@ where $\gamma_i:\pi_t(X^s)\to\pi_{t+i}(X^s\wedge_{\Sigma_2} X^s)$ is induced by 
 The map $\gamma_i$ is well defined, is linear when $i<t$, and is a quadratic refinement of the product pairing when $i=n$ (c.f.\ \cite[4.1,4.2]{DwyerHtpyOpsSimpComAlg.pdf}).
 Now $\gamma_i$ and $\overline{\mu}$ commute with the cosimplicial structure maps, and the final isomorphism is a chain map, so that the whole composite is a chain map, and so defines operations one $E^2$ as hoped.
 
-\textbf{It should be formal now that the top $\delta^\textup{alg}$ operation is the square. It's a bit confusing whether or not they satisfy the Adem relations, due to the lift, but hopefully the proof of the Adem relations can be externalised to a fact about iterated $\gamma_i$, and there is some diagram involving iterated $\overline{\mu}$. Moreover, the product derived in this way will coincide with the spectral sequence product that we defined earlier (which agrees with the Lie coalgebra homology product). We haven't yet extended the $\delta$ operations to higher pages.}
+If you want to shoehorn this into a more familiar format, it might look like
+\[CX_{s,t}\overset{\textup{``}\overline{p}^{s}_\textup{cos}\circ \tau\textup{''}}{\to} (CX\otimes_\textup{v}CX)_{s,2t} \overset{\overline{\Delta}_{t-i}}{\to}C(X\otimes X)_{s,t+i}\overset{\rho}{\to}C(X\otimes_{\Sigma_2} X)_{s,t+i}\]
+[{It should be formal now that the top $\delta^\textup{alg}$ operation is the square. It's a bit confusing whether or not they satisfy the Adem relations, due to the lift, but hopefully the proof of the Adem relations can be externalised to a fact about iterated $\gamma_i$, and there is some diagram involving iterated $\overline{\mu}$. Moreover, the product derived in this way will coincide with the spectral sequence product that we defined earlier (which agrees with the Lie coalgebra homology product). We haven't yet extended the $\delta$ operations to higher pages.}]
+
+Actually, let's choose the $D^k$ to be a \textbf{special} cosimplicial Eilenberg-Zilber map (using the terminology that Turner uses, and that Dwyer  and Singer use), as in \cite[5.2]{turner_opns_and_sseqs_I.pdf}. Then there is a commuting diagram
+\[\mathclap{\xymatrix@R=4mm{
+(CX)_{\fraks,\frakt}\ar[r]^-{\tau}
+\ar[dr]_-{\tau}
+&%r1c1
+(CX\otimes CX)_{2\fraks,2\frakt}\ar[r]^-{\overline{D}^\fraks}
+&%r1c2
+C(X\otimes_\textup{v}X)_{s,2t}
+\ar[r]^-{\rho\overline{\Delta}_{\frakt-i}}
+&
+C(X\otimes_{\Sigma_2} X)_{\fraks,\frakt+i}\\%r1c3
+&%r2c1
+(CX)_{s,t}\otimes (CX)_{s,t}\ar@{ >->}[u]
+\ar@{=}[r]
+&%r2c2
+C(X^s)_{t}\otimes C(X^s)_{t}\ar@{ >->}[u]\ar[r]^-{\Delta_{t-i}}
+&%r2c3
+C(X^\fraks\otimes_{\Sigma_2} X^\fraks)_{\frakt+i}
+\ar@{ >->}[u]
+}}\]
+The composite to $C(X^\fraks\otimes_{\Sigma_2}X^\fraks)_{\frakt+i}$ is the defintion of $\delta$ operations on the simplicial algebras which form each cosimplicial level. The diagram shows that we may replace it with the top composite, $\rho\overline{\Delta}_{t-i}\overline{D^s}\tau$, which will be more suitable for our purposes.
 \subsection{Steenrod operations algebraically defined on $E^2$}
 Define Steenrod operations $\Sq^\textup{alg}_i:E^2_{s,t}\to E^2_{s+i+1,2t+1}$ for all $i\geq 0$ using the composite:
-\[N^s\pi_tX\overset{\Gamma^i}{\to}N^{s+i}((\pi_tX)^{\otimes2})\overset{N^{s+i}(\Delta)}{\to}N^{s+i}\pi_{2t}(X\wedge X)\to N^{s+i+1}\pi_{2t+1}(X)\]
+\[N^s\pi_tX\overset{\textup{``}\overline{D}^{s-i}\circ\tau\textup{''}}{\to}N^{s+i}((\pi_tX)^{\otimes2})\overset{N^{s+i}(\Delta)}{\to}N^{s+i}\pi_{2t}(X\wedge X)\to N^{s+i+1}\pi_{2t+1}(X)\]
 where (for want of a naming convention) $\Gamma^i$ is induced by the cochain map $N^s\pi_t(X)\to N^{s+i}(\pi_t(X)^{\otimes 2})$ defined by the following expression involving higher cosimplicial AW maps:
-\[x\mapsto D^{t-i}(x\otimes x)+D^{t-i+1}(x\otimes dx)\]
+\[x\mapsto D^{s-i}(x\otimes x)+D^{s-i+1}(x\otimes dx)\]
 Using the monster diagram, these are the same operations that one might define on Lie coalgebra homology. The same holds for the pairing, and the pairing here will coincide with the pairing defined in the previous subsection, which is to say that any two pairings you can think of coincide.
-\textbf{See that $\Sq^0=0$ as we're looking at Lie coalgebra homology.}
+[{See that $\Sq^0=0$ as we're looking at Lie coalgebra homology.}]
+Again with the shoehorn:
+\[CX_{s,t}\overset{\textup{``}\overline{D}^{s-i}\circ\tau\textup{''}}{\to} (CX\otimes_\textup{v}CX)_{s+i,2t} \overset{\overline{\Delta}}{\to}C(X\otimes X)_{s+i,2t}\overset{\rho}{\to}C(X\otimes_{\Sigma_2} X)_{s+i,2t}\]
+
 %\subsection{What remains}
 %We need to deform the obvious definition of $\delta$ operations on the total complex, which is filtration doubling. The deformation will end up being the Steenrod operations. Then the unstablising differentials will presumably follow formally, and we'll presumably know how to strip off the extra $\delta$ sequences. I should try to emulate 2.7, and figure out what it implies.
 
 \subsection{Divided squares doubling filtration}
-For mixed simplicial vector spaces $X$ and $Y$, write $C(X\otimes_\textup{v}Y)$ for the double complex which in degree $(\fraks,\frakt)$ equals the direct sum $\bigoplus_{t+t'=\frakt}X_t^\fraks\otimes X_{t'}^\fraks$. The following bicomplex maps are given by prolonging $D^k$, $\Delta$, $\Delta_k$ and $\psi_k$:
-\begin{align*}
-\overline{D}^k:(CX\otimes CY)_{\fraks+k,\frakt}&\to C(X\otimes_\textup{v}Y)_{\fraks,\frakt}\\
-\overline{\Delta}:C(X\otimes_\textup{v} Y)_{\fraks,\frakt}&\to C(X\otimes Y)_{\fraks,\frakt}\\
-\overline{\Delta}_k:C(X\otimes_\textup{v} Y)_{\fraks,\frakt+k}&\to C(X\otimes Y)_{\fraks,\frakt}\textup{\quad for $0\leq k\leq \frakt$}\\
-\overline{\phi}_k:C(X\otimes_\textup{v} Y)_{\fraks,\frakt+k}&\to C(X\otimes Y)_{\fraks,\frakt}\textup{\quad for $0\leq k\leq \frakt$}
-\end{align*}
-%COMMENTED OUT INTERMEDIATE STEPS
-%\[\overline{\Delta}_k:C(X\otimes_\textup{v} Y)_{\fraks,\frakt}\to C(X\otimes Y)_{\fraks,\frakt-k}\textup{\quad for $0\leq k\leq \frakt-k$}\]
-%\[\overline{\Delta}_k:C(X\otimes_\textup{v} Y)_{\fraks,n+\fraks}\to C(X\otimes Y)_{\fraks,n+\fraks-k}\textup{\quad for $0\leq k\leq n+\fraks-k$}\]
-We may rewrite them with a focus on filtration, along with two further functions in the case $Y=X$:
-\begin{align*}
-\overline{D}^k:F_{p}(CX\otimes CY)_{n}&\to F_{p-k}C(X\otimes_\textup{v}Y)_{n+k}\\
-\overline{\Delta}:F_{p}C(X\otimes_\textup{v} Y)_{n}&\to F_{p}C(X\otimes Y)_{n}\\
-\overline{\Delta}_k:F_{p}C(X\otimes_\textup{v} Y)_{n}&\to F_{p}C(X\otimes Y)_{n-k}\textup{\quad for $p\geq 2k-n$,\,$k\geq0$}\\
-\overline{\phi}_k:F_{p}C(X\otimes_\textup{v} Y)_{n}&\to F_{p}C(X\otimes Y)_{n-k}\textup{\quad for $p\geq 2k-n$,\,$k\geq0$}\\
-\rho:F_{p}C(X\otimes X)_{n}&\to F_{p}C(X\otimes_{\Sigma_2} X)_{n}\\
-\tau:F_{p}CX_n&\to F_{2p}(CX\otimes CX)_n
-\end{align*}
-where $\rho$ the projection onto $\Sigma_2$ coinvariants, a chain map, and $\tau:x\mapsto x\otimes x$ the self-tensor-square, which is of course not even linear. 
-
-Note that $\overline{\psi}_k$ vanishes on $F_{2k-n+1}C(X\otimes_\textup{v} Y)_n$.
 % Now write $K_k$ for the composite
 %\[(CX\otimes CY)_{\fraks,\frakt}\overset{D^0}{\to}C(X\otimes_\textup{v}Y)_{\fraks,\frakt}\overset{\Delta_k}{\to}C(X\otimes Y)_{\fraks,\frakt-k}\]
 %defined when $2k\leq \frakt$. Similarly, write $P_k$ for the composite
@@ -5469,10 +5501,9 @@ Firstly, to check that this function is defined is to check that $2p\geq2(n-i)-2
 The first two of the three terms obviously vanish. As the simplicial degree of $x$ is uniformly at least $\frakt$, which exceeds $\frakt-\fraks-i+1$, the third term also vanishes.
 
 \textbf{More to check, I guess.}
-
 \end{proof}
-\subsection{Attempted homotopy of $\rho\Delta D^{t-i}\tau$}
-Since we want the steenrod operations to be the target of the differential, and the not-so-unstable $\delta$ operations to be the source, we really want something like $\textup{`steen'}(x)\equiv \Sigma dx+d\Sigma x$ modulo high filtration for some cycle function $\Sigma$. Here's a clumsy and thoughtless attempt to homotope $\rho\Delta D^{t-i}\tau y$. The equations
+\subsection{Attempted homotopy of $\rho\Delta D^{s-i}\tau$ ($E_2$ Steenrod)}
+Since we want the steenrod operations to be the target of the differential, and the not-so-unstable $\delta$ operations to be the source, we really want something like $\textup{`steen'}(x)\equiv \Sigma dx+d\Sigma x$ modulo high filtration for some function $\Sigma$. Here's a clumsy and thoughtless attempt to homotope $\rho\Delta D^{s-i}\tau y$. The equations
 \[\rho(d_\textup{co}\Delta_k+\Delta_kd_\textup{co})= \rho(\phi_{k+1}+\Delta_{k+1}(1+T))\]
 \[(1+T)D^{j}\tau y=(d_\textup{si}D^{j+1}+D^{j+1}d_\textup{si})\tau y\]
 show that the homotopy $(d_\textup{bi}(\rho\Delta_kD^{j+1}\tau)+(\rho\Delta_kD^{j+1}\tau) d_\textup{bi}) y$ is
@@ -5480,23 +5511,23 @@ show that the homotopy $(d_\textup{bi}(\rho\Delta_kD^{j+1}\tau)+(\rho\Delta_kD^{
 \[\rho(\phi_{k+1}D^{j+1}+\Delta_{k+1}(1+T)D^{j+1}+\Delta_k(1+T)D^{j})\tau y\]
 Now the following equations hold if you swap out each entry `$\textup{exp}$' for $\rho(\textup{exp})\tau y$:
 \begin{alignat*}{2}
-\Delta D^{t-i}
+\Delta D^{s-i}
 &=
-(\Delta_0(1+T)+\phi_0)D^{t-i}%
+(\Delta_0(1+T)+\phi_0)D^{s-i}%
 \\
 &\sim
-\Delta_1(1+T)D^{t-i+1}+\phi_1D^{t-i+1}+\phi_0D^{t-i}%
+\Delta_1(1+T)D^{s-i+1}+\phi_1D^{s-i+1}+\phi_0D^{s-i}%
 \\
 % Left hand side
 % Relation
 &\sim
 % Right hand side
-\Delta_r(1+T)D^{t-i+r}+\phi_rD^{t-i+r}+\cdots+\phi_0D^{t-i}%
+\Delta_r(1+T)D^{s-i+r}+\phi_rD^{s-i+r}+\cdots+\phi_0D^{s-i}%
 % Comment
 \end{alignat*}
 where the homotopy used was
-\[\Delta_0D^{t-i+1}+\cdots +\Delta_{r-1}D^{t-i+r}\]
-I guess that if we push this all the way to $r=t-i$, you've used a homotopy with leading term $\Delta_{t-i-1}D^0$, which recalls the formula for $\delta_{i+1}$ on an element of $E^2_{t,s}$, so that $\delta_{i+i}$ has a differential to whatever Steenrod operation we were thinking about. Who knows?
+\[\Delta_0D^{s-i+1}+\cdots +\Delta_{r-1}D^{s-i+r}\]
+I guess that if we push this all the way to $r=s-i$, you've used a homotopy with leading term $\Delta_{s-i-1}D^0$, which recalls the formula for $\delta_{i+1}$ on an element of $E^2_{t,s}$, so that $\delta_{i+i}$ has a differential to whatever Steenrod operation we were thinking about. Who knows?
 
 
 \end{Adams sseq operations}
@@ -5632,7 +5663,7 @@ Now we are in a position to describe a complex calculating $(\derived\Ind{\nonto
 \begin{prop}\label{KoszulComplexN>2}
 %Suppose instead that $X$ is any object in $\nontop{n}$, 
 The Koszul complex $\Koverline_*X$ is a subcomplex of $\Boverline_*X$, whose inclusion is a homology equivalence. The differential of $\Koverline_*X$ is given by the following formula:
-\[\partial(\Q(I)x)=\Q((i_{\ell},\ldots,i_2))(\Q^{i_1}x)+\!\!\!\!\!\!\!\!\!\!\!\!\!\!\!\!\!\sum_{\substack{\produces{J}{I}{\SqShift}\\(j_{\ell},\ldots,j_2)\in\admis{\SqShift}}}\!\!\!\!\!\!\!\!\!\!\!\! \Q((j_{\ell},\ldots,j_2))(\Q^{j_1}x),\]
+\[\partial(\Q(I)x)=\Q((i_{\ell},\ldots,i_2))(\Q^{i_1}x)+ \!\!\!\!\!\!\!\!\!\!\!\!\!\!\!\!\!\sum_{\substack{\produces{J}{I}{\SqShift}\\(j_{\ell},\ldots,j_2)\in\admis{\SqShift}}}\!\!\!\!\!\!\!\!\!\!\!\! \Q((j_{\ell},\ldots,j_2))(\Q^{j_1}x),\]
 where the sum is taken over those $J=(j_{\ell},\ldots,j_1)$ such that $(j_{\ell},\ldots,j_2)$ is $\SqShift$-admissible, and yet $\produces{J}{I}{\SqShift}$.
 \end{prop}
 \begin{proof}
@@ -6827,7 +6858,7 @@ As an object of $\LL{3}$, all the structure maps are trivial except for $\Q^0$, 
 \begin{proof}
 The Koszul complex, as a vector space, is \[\left\langle \Q(I^2)P(I^1)\imath\ \middle|\ (I^2,I^1)\textup{ satisfies \textup{(A)}-\textup{(C)}}\right\rangle.\] % --- as $H^{(1)}$ is an object of $\LL{2}$, it supports no $\Q^0$ operations, explaining why $I^2$ mustn't contain zero. 
 Now to calculate the differential, we use the formula from \ref{KoszulComplexN>2}, setting $x=P(I^1)\imath$ and $I^2=(i_{\ell^2},\ldots,i_2,i_1)$
-\[\partial(\Q(I^2)x)=\Q((i_{\ell^2},\ldots,i_2))(\Q^{i_1}x)+\!\!\!\!\!\!\!\!\!\!\!\!\!\!\!\!\!\sum_{\substack{\produces{J}{I^2}{\SqShift}\\(j_{\ell^2},\ldots,j_2)\in\admis{\SqShift}}}\!\!\!\!\!\!\!\!\!\!\!\! \Q((j_{\ell^2},\ldots,j_2))(\Q^{j_1}x).\]
+\[\partial(\Q(I^2)x)=\Q((i_{\ell^2},\ldots,i_2))(\Q^{i_1}x)+ \!\!\!\!\!\!\!\!\!\!\!\!\!\!\!\!\!\sum_{\substack{\produces{J}{I^2}{\SqShift}\\(j_{\ell^2},\ldots,j_2)\in\admis{\SqShift}}}\!\!\!\!\!\!\!\!\!\!\!\! \Q((j_{\ell^2},\ldots,j_2))(\Q^{j_1}x).\]
 Now the format of the $\SqShift$-Adem relations shows that in each summand, $j_1$ exceeds $i_1$. As $i_1$ cannot be zero, $j_1$ must then be at least two, so that $Q^{j_1}x=0$ by our calculation of the $\LL{2}$ structure of $H^{(1)}$. Thus, only the first term can be nonzero, and even this term vanishes if $i_1>1$. If $i_1=1$, then $\Q^{i_1}x=\Q^1x=P(t_dI^1)\imath$, so that the differential is
 \[\Q((i^2_{\ell^2},i^2_{\ell^2-1},\ldots,i^2_{2},1))P(I^1)\imath\mapsto \Q((i^2_{\ell^2},i^2_{\ell^2-1},\ldots,i^2_{2}))P(t_dI^1)\imath,\]
 where any $\Q(I^2)P(I^1)\imath$ in which $I^2$ does not end in 1 is sent to zero. As all of these images are linearly independent (when nonzero), the kernel of $\partial$ is spanned by those basis elements in which $I^2$ contains no 1, explaining the presence of condition \textup{(D)} in the numerator.
@@ -7043,7 +7074,7 @@ which is to say that $E^{2,N}_{a_{N+2},0,*,*,\ldots}$ is calculated by monomials
 \begin{proof} %For the course of this proof, we will supress the $(N-1)$ superscripts that normally appear on the $\calS^{(N-1)}$, and also the parentheses that usually appear in $b(S)$.
 In this proof, write $\overline{t}_d:\calS_1^{(N)}\to\calS^{(N)}_2$ for the bijection $(\emptyset,\ldots,\emptyset,I^1)\mapsto (\emptyset,\ldots,\emptyset,t_dI^1)$. 
 As a vector space, the Eilenberg-Cartan-May complex is \[E\langle \imath\rangle\otimes \Gamma\left\langle bS\ \middle|\ S\in \calS_1^{(N-1)}\cup\calS_2^{(N-1)}\cup\calS_3^{(N-1)}\right\rangle.\] As so few operations are nonzero, it splits into a tensor product of complexes
-\[E\langle \imath\rule{0mm}{\heightof{$\calS_1^{(N)}$}}\rangle\otimes \!\!\!\!\!\bigotimes_{S\in\calS_1^{(N-1)}}\!\!\!\!\!\Gamma\langle\rule{0mm}{\heightof{$\calS_1^{(N)}$}} bS,b\overline{t}_dS\rangle\otimes \Gamma\left\langle bS\ \middle|\ S\in \calS_3^{(N-1)}\right\rangle\]
+\[E\langle \imath\rule{0mm}{\heightof{$\calS_1^{(N)}$}}\rangle\otimes \!\!\!\!\!\bigotimes_{S\in \calS_1^{(N-1)}}\!\!\!\!\!\Gamma\langle\rule{0mm}{\heightof{$\calS_1^{(N)}$}} bS,b\overline{t}_dS\rangle\otimes \Gamma\left\langle bS\ \middle|\ S\in \calS_3^{(N-1)}\right\rangle\]
 where only the factors $\Gamma\langle bS,b\overline{t}_dS\rangle$ have nonzero differential. The differential on $\Gamma\langle bS,b\overline{t}_dS\rangle$ is
 \[\gamma_i( bS)\cdot\gamma_j(b\overline{t}_dS)\mapsto\gamma_{i-2}( bS)\cdot b\overline{t}_dS\cdot\gamma_j(b\overline{t}_dS)=\begin{cases}
 \gamma_{i-2}(bS)\cdot\gamma_{j+1}(b\overline{t}_dS),&\textup{if }j\textup{ is even};\\
@@ -7585,7 +7616,7 @@ It's $r-1$ that does the doubling, as $r-1=\Delta t$.
 %\item With $r=2^{2}(d+\ell^1-e^1-1)+1$:
 %\[\SqShift^0\SqShift^j\delta_{m_\ell,\ldots,m_1}\imath\mapsto\SqShift^0\SqShift^{j-1-(d+\ell-e),d+\ell-e}\delta_{m_{\ell-1},\ldots,m_1}\imath\]
 %\item With $r=2^{3}(d+\ell^1-e^1-1)+1$:
-%\[\left(\SqShift^0\SqShift^j\delta_{m_\ell,\ldots,m_1}\imath\right)^2\mapsto\SqShift^0\SqShift^0\SqShift^{j-1-(d+\ell-e),d+\ell-e}\delta_{m_{\ell-1},\ldots,m_1}\imath\]
+%\[\left(\SqShift^0\SqShift^j\delta_{m_\ell,\ldots,m_1}\imath\right)^2 \mapsto\SqShift^0\SqShift^0\SqShift^{j-1-(d+\ell-e),d+\ell-e}\delta_{m_{\ell-1},\ldots,m_1}\imath\]
 %\item With $r=2^{3}(d+\ell^1-e^1-1)+1$ (all in excess notation):
 %\[\SqShift^0\SqShift^0\SqShift^j\delta_{m_\ell,\ldots,m_1}\imath\mapsto\SqShift^{1,0}\SqShift^{j-1-(d+\ell-e),d+\ell-e}\delta_{m_{\ell-1},\ldots,m_1}\imath\]
 %\item When $j=4$ and $\ell^1>5$ you seem to get ($r=2^{2}(d+\ell^1-e^1-1)+1$)
