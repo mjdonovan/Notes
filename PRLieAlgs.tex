@@ -30,7 +30,8 @@
 \excludeversion{GrothendieckSpectralSequences}
 \excludeversion{Grothendieck Multiplicativity}
 \excludeversion{Adams Muliplicativity}
-\includeversion{Adams sseq operations}
+\includeversion{letter to Dwyer}
+\excludeversion{Adams sseq operations}
 \excludeversion{KoszulComplexes_n>1}
 \excludeversion{KoszulComplexes1}
 \excludeversion{DerivedFunctorsLowDimension}
@@ -5390,7 +5391,7 @@ We may rewrite them with a focus on filtration, along with two further functions
 \tau:F_{p}CX_n&\to F_{2p}(CX\otimes CX)_{2n}
 \end{align*}
 where $\rho$ the projection onto $\Sigma_2$ coinvariants, a chain map, and $\tau:x\mapsto x\otimes x$ the self-tensor-square, which is of course not even linear. \textbf{Actually}, I think it's better to define these maps everywhere, and just have them zero whenever the non-underlined map is not defined. In fact, in this case we have the equation
-\[d\]
+\[\textup{put in the equations}\]
 
 
 Note that $\overline{\psi}_k$ vanishes on $F_{2k-n+1}C(X\otimes_\textup{v} Y)_n$.
@@ -5555,6 +5556,166 @@ I guess that if we push this all the way to $r=s-i$, you've used a homotopy with
 
 
 \end{Adams sseq operations}
+
+\begin{letter to Dwyer}
+\section{Operations in the Adams spectral sequence}
+\subsubsection*{Cosimplicial Eilenberg-Zilber map}
+Let $\{D^k\}$ be a special cosimplicial Eilenberg-Zilber map, i.e.\ natural maps
+\[D^k:(CR\otimes CS)^{i+k}\to N(R\otimes S)^i\textup{\ \ for $i,k\geq0$}\]
+with the properties:
+\begin{itemise}
+\setlength{\parindent}{.25in}
+\item $dD^k+D^kd=D^{k-1}+TD^{k-1}T$ for $k>1$;
+\item $D^0$ is a chain homotopy equivalence inducing the identity in dimension zero;
+\item the restriction of $D^k$ to $C^iR\otimes C^jS$ is zero unless $i\geq k$ and $j\geq k$; and
+\item the restriction of $D^k$ to $C^kR\otimes C^kS$ is the identity mapping onto $C^kR\otimes C^kS=C^k(R\otimes S)$.
+\end{itemise}
+%It is a useful convention to define $D^i=0$ for $i<0$.
+\subsubsection*{Higher simplicial Eilenberg-Mac Lane maps}
+For simplicial vectorspaces $U,V$, let $\{\Delta_k\}$ be a collection of higher simplicial Eilenberg-Mac Lane maps, i.e.\ maps
+\[\Delta_k:(CU\otimes CV)_{i+k}\to N(U\otimes V)_i\textup{\ \ for $0\leq k\leq i$}\]
+such that
+\[\Delta_k+T\Delta_kT=\phi_k+\begin{cases}
+\Delta_{k-1}\partial+\partial\Delta_{k-1},&\textup{if }k\geq1;\\
+\Delta,&\textup{if }k=0.
+%\\,&\textup{if }
+\end{cases}
+\]
+where $\Delta:CU\otimes CV\to C(U\times V)$ is a chain homotopy equivalence inducing the identity in dimension zero, and $\phi_k$ is the map $(CU\otimes CV)_{i+k}\to C(U\otimes V)_i$ which vanishes except on $U_k\otimes V_k$, where its value is just the projection $U_k\otimes V_k\to N(U\times V)_k$. Note that $\Delta$ necessarily commutes with symmetry isomorphisms.
+
+\subsubsection*{Mixed simplicial algebras over $\F_2$}
+For mixed simplicial vector spaces $X$ and $Y$, write $C(X\otimes_\textup{v}Y)$ for the double complex which in degree $(\fraks,\frakt)$ equals the direct sum $\bigoplus_{t+t'=\frakt}X_t^\fraks\otimes X_{t'}^\fraks$. The following vectorspace maps are given by prolonging $D^k$, $\Delta$, $\Delta_k$ and $\psi_k$:
+\begin{align*}
+\overline{D}^k:(CX\otimes CY)_{\fraks+k,\frakt}&\to C(X\otimes_\textup{v}Y)_{\fraks,\frakt}&\quad&\textup{(zero unless $k\leq \fraks$)}\\
+\overline{\Delta}:C(X\otimes_\textup{v} Y)_{\fraks,\frakt}&\to C(X\otimes Y)_{\fraks,\frakt}\\
+\overline{\Delta}_k:C(X\otimes_\textup{v} Y)_{\fraks,\frakt+k}&\to C(X\otimes Y)_{\fraks,\frakt}&\quad&\textup{for $0\leq k\leq \frakt$}\\
+\overline{\phi}_k:C(X\otimes_\textup{v} Y)_{\fraks,\frakt+k}&\to C(X\otimes Y)_{\fraks,\frakt}&\quad&\textup{for $0\leq k\leq \frakt$}\\
+\overline{\rho}:C(X\otimes X)_{\fraks,\frakt}&\to C(X\otimes_{\Sigma_2} X)_{\fraks,\frakt}&\quad&\textup{(proj onto coinvariants)}\\
+\end{align*}
+From now on, let $X$ be a mixed simplicial commutative non-unital $\F_2$-algebra. We'll be in the business of constructing spectral sequence operations, which I'd like to think of as maps $E^r(X)\to E^r(X\otimes_{\Sigma_2}X)$.
+
+
+\subsection{Steenrod operations algebraically defined on $E^2$}
+In this case, the `surprising' operations are easy to define. That is, define Steenrod operations $\Sq^i_\textup{alg}:E^2_{s,t}(X)\to E^2_{s+i,2t}(X\otimes_{\Sigma_2}X)$ for all $i\geq 0$ using the chain-level formula:
+\[S^i_\textup{alg}:x\mapsto \rho\Delta (D^{s-i}(x\otimes x)+D^{s-i+1}(x\otimes dx)).\]
+The usual trick, along with the fact that $\Delta$ is a symmetric chain map, shows that $d(S^i_\textup{alg}(x))=\rho\Delta D^{s-i+1}(dx\otimes dx)$, so that if $x\in E^r_{s,t}$, $S^i_\textup{alg}(x)\in E^{2r-1}_{s+i,2t}$. To examine the indeterminacy, $x\in E^r_{s,t}$ is determined up to boundaries of $y\in E^{r-1}_{s-r+1,t+r+2}$, and the following equation%footnote:
+\footnote{Here's how:
+\begin{alignat*}{2}
+\textup{RHS}
+&=
+d\rho\Delta [D^{s-i-1}(y\otimes y)+D^{s-i}(y\otimes dy)+D^{s-i+1}(dy\otimes x)]%
+\\
+&=
+\rho\Delta [D^{s-i-1}(dy\otimes y+y\otimes dy)+D^{s-i}(dy\otimes dy)+D^{s-i+1}(dy\otimes dx)]%
+\\
+&\ \ \ +
+\rho\Delta [0+D^{s-i-1}(y\otimes dy+dy\otimes y)+D^{s-i}(dy\otimes x+x\otimes dy)]%
+\\
+&=
+\rho\Delta [D^{s-i}(dy\otimes x+x\otimes dy+dy\otimes dy)
++D^{s-i+1}(dy\otimes dx)]=\textup{LHS}%
+\end{alignat*}} shows how this affects the value of $S^i_\textup{alg}$:
+\[S^i_\textup{alg}(x)-S^i_\textup{alg}(x+dy)=d\rho\Delta [D^{s-i-1}(y\otimes y)+D^{s-i}(y\otimes dy)+D^{s-i+1}(dy\otimes x)].\]
+The filtration of this bounding cycle is at least $2(s-r+1)-(s-i-1)=(s+i)-(2r-3)$, so that $\Sq_\textup{alg}^i$ has indeterminacy $2r-2$ (phew).
+
+
+
+
+ and the analogues of \cite[(1.111),(1.112)]{MR2245560} still hold, which is to say that 
+
+\[N^s\pi_tX\overset{\textup{``}\overline{D}^{s-i}\circ\tau\textup{''}}{\to}N^{s+i}((\pi_tX)^{\otimes2})\overset{N^{s+i}(\Delta)}{\to}N^{s+i}\pi_{2t}(X\wedge X)\to N^{s+i+1}\pi_{2t+1}(X)\]
+where (for want of a naming convention) $\Gamma^i$ is induced by the cochain map $N^s\pi_t(X)\to N^{s+i}(\pi_t(X)^{\otimes 2})$ defined by the following expression involving higher cosimplicial AW maps:
+\[x\mapsto D^{s-i}(x\otimes x)+D^{s-i+1}(x\otimes dx)\]
+Using the monster diagram, these are the same operations that one might define on Lie coalgebra homology. The same holds for the pairing, and the pairing here will coincide with the pairing defined in the previous subsection, which is to say that any two pairings you can think of coincide.
+[{See that $\Sq^0=0$ as we're looking at Lie coalgebra homology.} Maybe $\Sq^1=0$, reflecting that it's hit by a $d_1$, but maybe not, expecially since there are $\SqShift^0$ terms in the Koszul sequences.]
+Again with the shoehorn:
+\[CX_{s,t}\overset{\textup{``}\overline{D}^{s-i}\circ\tau\textup{''}}{\to} (CX\otimes_\textup{v}CX)_{s+i,2t} \overset{\overline{\Delta}}{\to}C(X\otimes X)_{s+i,2t}\overset{\rho}{\to}C(X\otimes_{\Sigma_2} X)_{s+i,2t}\]
+
+
+
+
+\subsection{Divided squares algebraically defined on $E^2$}
+The formula for the $E^2$ page is $E^2_{st}=\pi^s\pi_t(X)$. We'll now define divided square operations $\delta_i^\textup{alg}:E^2_{s,t}\to E^2_{s+1,t+i+1}$ defined when $2\leq i \leq t$. Indeed, we may define these by the formula
+\[N^s\pi_t(X)\overset{N^s(\gamma_i)}{\to}N^s\pi_{t+i}(X\wedge_{\Sigma_2} X)\overset{N^s(\overline{\mu})}{\to}N^s\pi_{t+i}(\overline{D}^1X)\cong N^{s+1}\pi_{t+i+1}(X)\]
+where $\gamma_i:\pi_t(X^s)\to\pi_{t+i}(X^s\wedge_{\Sigma_2} X^s)$ is induced by the function on cycles $ZN_t(X^s)\to ZN_{t+i}(X^s\wedge_{\Sigma_2} X^s)$ defined by
+\[x\mapsto\Delta_{t-i}(x\otimes x).\]
+The map $\gamma_i$ is well defined, is linear when $i<t$, and is a quadratic refinement of the product pairing when $i=n$ (c.f.\ \cite[4.1,4.2]{DwyerHtpyOpsSimpComAlg.pdf}).
+Now $\gamma_i$ and $\overline{\mu}$ commute with the cosimplicial structure maps, and the final isomorphism is a chain map, so that the whole composite is a chain map, and so defines operations on $E^2$ as hoped, when $i<t$. Note that there's no operation when $i=t$, since the top operation is not linear. Maybe that is to say that it supports a $d_1$.
+
+In order to shoehorn this into a more usable format, choose the $D^k$ to be a \textbf{special} cosimplicial Eilenberg-Zilber map (using the terminology that Turner uses, and that Dwyer  and Singer use), as in \cite[5.2]{turner_opns_and_sseqs_I.pdf}. Then there is a commuting diagram
+\[\mathclap{\xymatrix@R=4mm{
+(CX)_{\fraks,\frakt}\ar[r]^-{\tau}
+\ar[dr]_-{\tau}
+&%r1c1
+(CX\otimes CX)_{2\fraks,2\frakt}\ar[r]^-{\overline{D}^\fraks}
+&%r1c2
+C(X\otimes_\textup{v}X)_{s,2t}
+\ar[r]^-{\rho\overline{\Delta}_{\frakt-i}}
+&
+C(X\otimes_{\Sigma_2} X)_{\fraks,\frakt+i}\\%r1c3
+&%r2c1
+(CX)_{s,t}\otimes (CX)_{s,t}\ar@{ >->}[u]
+\ar@{=}[r]
+&%r2c2
+C(X^s)_{t}\otimes C(X^s)_{t}\ar@{ >->}[u]\ar[r]^-{\rho\Delta_{t-i}}
+&%r2c3
+C(X^\fraks\otimes_{\Sigma_2} X^\fraks)_{\frakt+i}
+\ar@{ >->}[u]
+}}\]
+The composite to $C(X^\fraks\otimes_{\Sigma_2}X^\fraks)_{\frakt+i}$ is the definition of $\delta$ operations on the simplicial algebras which form each cosimplicial level. The diagram shows that we may replace it with the top composite, $\rho\overline{\Delta}_{t-i}\overline{D^s}\tau$, which will be more suitable for our purposes.
+
+
+Actually, let's upgrade this a little bit. We can define the $\delta$ operations on a simplicial algebra by the formula $a\mapsto \Delta^{n-i}(a\otimes a)+\Delta^{n-i-1}(a\otimes \partial a)$, where we use the convention (which I once advised against) that $\Delta_\textup{negative}=0$. This is a chain map as long as we're away from the top operation.
+
+Now we propose the map
+\[x\mapsto \rho\overline{\Delta}_{\frakt-i}\overline{D}^\fraks(x\otimes x)+\rho\overline{\Delta}_{\frakt-i+1}\overline{D}^\fraks(x\otimes dx)\]
+as a version of the $E^2$ $\delta$ structure. Indeed, this is supposed to preserve filtration (when mapping into the symmetric square spectral sequence), but the part of $dx$ coming from the cosimplicial differential has filtration one higher, and can thus be ignored at $E^2$. Then the remaining two summands, $\rho\overline{\Delta}_{\frakt-i}\overline{D}^\fraks(x\otimes x)+\rho\overline{\Delta}_{\frakt-i+1}\overline{D}^\fraks(x\otimes d_\textup{sim}x)$ pass happily through a commuting diagram like the one above, using the properties of the \emph{special} EZ map.
+
+{\tiny[It's strange to wonder whether the top $\delta^\textup{alg}$ operation is the square, since it's not even \emph{defined}, and since the square has different filtration. It's a bit confusing whether or not they satisfy the Adem relations, due to the lift, but hopefully the proof of the Adem relations can be externalised to a fact about iterated $\gamma_i$, and there is some diagram involving iterated $\overline{\mu}$. Moreover, the product derived in this way will coincide with the spectral sequence product that we defined earlier (which agrees with the Lie coalgebra homology product). We haven't yet extended the $\delta$ operations to higher pages.]}
+
+
+
+%\subsection{What remains}
+%We need to deform the obvious definition of $\delta$ operations on the total complex, which is filtration doubling. The deformation will end up being the Steenrod operations. Then the unstablising differentials will presumably follow formally, and we'll presumably know how to strip off the extra $\delta$ sequences. I should try to emulate 2.7, and figure out what it implies.
+
+
+\subsection{Correct formula for $\delta$-ops}
+\newcommand{\twist}{\sigma}
+Write $\twist F$ as shorthand for the function $TFT$. Then we have equations:
+\[d_\textup{co}\Delta_{k-1}+\Delta_{k-1}d_\textup{co}= \phi_{k}+(1+\twist)\Delta_{k}\]
+\[d_\textup{si}D^{j}+D^{j}d_\textup{si}=(1+\twist)D^{j-1}\]
+showing that the chain homotopy $d_\textup{bi}(\Delta_{k}\sigma^kD^{j})+(\Delta_{k}\sigma^kD^{j}) d_\textup{bi}$ equals
+\[\phi_{k+1}\sigma^kD^{j}+(1+\twist)\Delta_{k+1}\sigma^kD^{j}+ \Delta_{k}(1+\twist)\sigma^kD^{j-1}.\]
+Now write $\mathbb{D}_r$ for the sum
+\[J_r=\sum_{\beta-\alpha=r}\Delta_\alpha\twist^\alpha D^\beta.\]
+Let's calculate $dJ_{r}+J_{r}d$ (when $r\geq0\textbf{?}1$). Write
+\[J_{r}=\sum_{j\geq0}\Delta_{j}\twist^{j}D^{j+r}\]
+\begin{alignat*}{2}
+d\mathbb{D}_r
+&+
+\mathbb{D}_rd-\sum_{j\geq0} \phi_{j+1}\sigma^jD^{j+r}-(1+\twist)\Delta_0\sigma D^{r-1}%
+\\
+&=
+\sum_{j\geq-1} 
+(1+\twist)\Delta_{j+1}\sigma^jD^{j+r}+ \sum_{j\geq0}\Delta_{j}(1+\twist)\sigma^jD^{j+r-1}
+\\
+&=
+\sum_{j\geq0} 
+\left[(1+\twist)\Delta_{j}\sigma\sigma^jD^{j+r-1}+ \Delta_{j}(1+\twist)\sigma^jD^{j+r-1}\right]
+\\
+% Left hand side
+% Relation
+&=
+% Right hand side
+(1+\twist)\mathbb{D}_{r-1}
+% Comment
+\end{alignat*}
+using the observation that $(1+\twist)F\twist G+F(1+\twist)G=(1+\twist)(FG)$. Now using the fact that $(1+\twist)\Delta_0=\Delta+\phi_0$:
+\[d\mathbb{D}_r+\mathbb{D}_rd=(1+\twist)\mathbb{D}_{r-1}+\Delta\sigma D^{r-1}+ \sum_{j\geq0} \phi_{j}\sigma^{j-1}D^{j+r-1}\]
+
+
+\end{letter to Dwyer}
+
 \begin{KoszulComplexes_n>1}
 \section{Unstable Koszul complexes for $\derived\Ind{\nontop{}}$} \label{sectionOnUnstableKoszulComplexes}
 \subsection{Koszul complexes for $\derived\Ind{\nontop{}}$ for $n\geq2$}
