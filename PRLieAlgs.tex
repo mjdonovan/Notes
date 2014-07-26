@@ -5640,7 +5640,66 @@ Now suppose that $x\in E^r_{-s,t}$. Let's try to define $\delta_i(x)$ for $n<i<t
 \subsubsection*{Exhibit A:}
 Let's calculate the leading term of $\textup{DEL}_{i}^\textup{alg}(x)$. Write $x=x^s_t+x^{>s}_{<t}$, where $x^s_t\in X^s_t$, and $x^{>s}_{<t}$ lies in filtration $s+1$. The the leading term will be $\rho\Delta_{t-i}\twist^{t-i}D^s (x^s_t\otimes x^s_t)$. Moreover, as $D$ is \emph{special}, this equals $\rho\overline{\Delta}_{t-i}(x^s_t\otimes x^s_t)\in C(X\otimes_{\Sigma_2} X)_{-s,t+i}$ (where we think of $(x^s_t\otimes x^s_t)$ as an element of $C(X\otimes_\textup{v}X)_{-s,2t}$), so that `$x^s_t\mapsto D^s(x^s_t\otimes x^s_t)$' implements the assignment `$z\mapsto z\otimes z$' at the $E^1$-level, and we're getting a representative for the obvious $E^2$-level $\delta_i$ operation.
 
+\newcommand{\twolinesum}[2]{\mathop{\sum_{\mathclap{#1}}}_{\mathclap{#2}}}
+\newcommand{\onelinesum}[1]{\sum_{\mathclap{#1}}}
 \subsubsection*{Exhibit B:}
+\begin{lem}
+For all $r$, positive or otherwise:
+\[d\mathbb{D}_r+\mathbb{D}_rd=(1+\twist)\mathbb{D}_{r+1}+\Delta\sigma D^{-r-1}+\Delta_{r+1}(1+\twist)D^0+\sum_{\mathclap{\alpha-\beta=r+1}} \phi_{\alpha}\sigma^{\alpha-1}D^{\beta}\]
+\end{lem}
+\begin{proof}
+\begin{alignat*}{2}
+\textup{LHS}
+&=
+\onelinesum{\alpha-\beta=r}\left(d\Delta_\alpha\twist^\alpha D^\beta+\Delta_\alpha\twist^\alpha D^\beta d\right)%
+\\
+&=
+\twolinesum{\alpha-\beta=r}{\alpha\geq0,\,\beta\geq0}\left(((1+\twist)\Delta_{\alpha+1}+\phi_{\alpha+1})\twist^\alpha D^\beta+\Delta_\alpha(1+\twist)\twist^\alpha D^{\beta-1}\right)%
+\\
+&=
+\onelinesum{\alpha-\beta=r+1}\left(((1+\twist)\Delta_{\alpha}+ \phi_{\alpha})\twist^{\alpha-1} D^\beta+\Delta_\alpha(1+\twist)\twist^\alpha D^{\beta}\right) + {}%
+\\
+&\ \ \ \ \ \ \ \ \ \ \ +
+((1+\twist)\Delta_{0}+\phi_{0})\twist D^{-r-1}+\Delta_{r+1}(1+\twist)\twist^\alpha D^{0}%
+\end{alignat*}
+which equals the $\textup{RHS}$, using the identity $(1+\twist)\Delta_{0}+\phi_{0}=\Delta$, and the observations that $(1+\twist)\twist^\alpha F=(1+\twist)F$ and $(1+\twist)F\twist G+F(1+\twist)G=(1+\twist)(FG)$.
+\end{proof}
+\begin{cor}
+For $2\leq i<t$ and $x\in Z^1_{-s,t}$:
+\[d(\textup{DEL}^\textup{alg}_i(x))+ \textup{DEL}^\textup{alg}_i(dx)=S_\textup{alg}^{t-i+1,s}(x)+\cancel{\textup{error}}\]
+\end{cor}
+\begin{proof}
+\begin{alignat*}{2}
+\textup{LHS}
+&=
+\rho d(\mathbb{D}_{n-i}(x\otimes x)+\mathbb{D}_{n-i-1}(dx\otimes x))+\rho\mathbb{D}_{n-i-1}(dx\otimes dx)%
+\\
+&=
+\rho\Bigl\{d\mathbb{D}_{n-i}(x\otimes x)\Bigr\}+\rho\Bigl\{d\mathbb{D}_{n-i-1}(dx\otimes x))+\mathbb{D}_{n-i-1}(d(dx\otimes x))\Bigr\}%
+\\
+% Left hand side
+% Relation
+&=
+% Right hand side
+\rho\Bigl\{\mathbb{D}_{n-i}(dx\otimes x+x\otimes dx)+(1+\twist)\mathbb{D}_{n-i+1}(x\otimes x)+{}
+\\
+&\ \ \ \ \ \ \ \ \ +\bigl(\Delta\sigma D^{i-n-1}+\Delta_{n-i+1}(1+\twist)D^0+\sum_{\mathclap{\alpha-\beta=n-i+1}} \phi_{\alpha}\sigma^{\alpha-1}D^{\beta}\bigr)(x\otimes x)\Bigr\}+{}%
+\\
+&\ \ +\rho\Bigl\{(1+\twist)\mathbb{D}_{n-i}(dx\otimes x)+{}
+\\
+&\ \ \ \ \ \ \ \ \ +\bigl(\Delta\sigma D^{i-n}+\Delta_{n-i}(1+\twist)D^0+\sum_{\mathclap{\alpha-\beta=n-i}} \phi_{\alpha}\sigma^{\alpha-1}D^{\beta}\bigr)(dx\otimes x)\Bigr\}
+\\
+&=
+\rho\Delta(D^{i-n-1}(x\otimes x)+D^{i-n}(x\otimes dx))+\\
+&\ \ +\rho\Delta_{n-i+1}(1+\twist)D^0(x\otimes x)+\rho\Delta_{n-i}(1+\twist)D^0(dx\otimes x)+\\
+&\ \ +\sum_{\mathclap{\alpha-\beta=n-i+1}} \rho\phi_{\alpha}\sigma^{\alpha-1}D^{\beta}(x\otimes x)+\sum_{\mathclap{\alpha-\beta=n-i}} \rho\phi_{\alpha}\sigma^{\alpha-1}D^{\beta}(dx\otimes x).
+\end{alignat*}
+Now the bottom line of this expression is actually zero, since it can be written as a sum of linear functions of the expressions
+\[\sigma^{\alpha-1}D^{\alpha-n+(i-1)}(x_\alpha^{\alpha-n}\otimes x_\alpha^{\alpha-n})\textup{ and }\sigma^{\alpha-1}D^{\alpha-n+i}((dx)_\alpha^{\alpha-n+1}\otimes x_\alpha^{\alpha-n})\]
+which all vanish, since the $D^k$ are special and $i\geq2$.
+\end{proof}
+\pagebreak
+
 It's not too hard to check%footnote: 
 \footnote{
 We'll need the equations:
