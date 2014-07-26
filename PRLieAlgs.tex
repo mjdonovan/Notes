@@ -31,7 +31,7 @@
 \excludeversion{Grothendieck Multiplicativity}
 \excludeversion{Adams Muliplicativity}
 \includeversion{letter to Dwyer}
-\includeversion{Adams sseq operations}
+\excludeversion{Adams sseq operations}
 \excludeversion{KoszulComplexes_n>1}
 \excludeversion{KoszulComplexes1}
 \excludeversion{DerivedFunctorsLowDimension}
@@ -5567,7 +5567,7 @@ with the properties:
 \setlength{\parindent}{.25in}
 \item $dD^k+D^kd=D^{k-1}+TD^{k-1}T$ for $k>1$;
 \item $D^0$ is a chain homotopy equivalence inducing the identity in dimension zero;
-\item the restriction of $D^k$ to $C_{-i}R\otimes C^{-j}S$ is zero unless $i\geq k$ and $j\geq k$; and
+\item the restriction of $D^k$ to $C_{-i}R\otimes C_{-j}S$ is zero unless $i\geq k$ and $j\geq k$; and
 \item $D^k$ maps $C_{-k}R\otimes C_{-k}S$ identically onto $C_{-k}(R\otimes S)$.
 \end{itemise}
 %It is a useful convention to define $D^i=0$ for $i<0$.
@@ -5628,8 +5628,13 @@ The filtration of this bounding cycle is at least $2(s-r+1)-(s-i-1)=(s+i)-(2r-3)
 \subsection{$\delta$ operations}
 \newcommand{\twist}{\sigma}
 Write $\twist F$ as somewhat ambiguous shorthand for the function $TFT$. 
-Now write $\mathbb{D}_r$ for the sum (for $r\geq0$):
-\[\mathbb{D}_r=\sum_{\beta-\alpha=r}\Delta_\alpha\twist^\alpha D^\beta=\sum_{j\geq0}\Delta_{j}\twist^{j}D^{j+r}.\]
+Now write $\mathbb{D}_r$ for the sum (for any $r$, positive or otherwise):
+\[\mathbb{D}_r=\sum_{\alpha-\beta=r}\Delta_\alpha\twist^\alpha D^\beta=\begin{cases}
+\sum_{j\geq0}\Delta_{j}\twist^{j}D^{j-r},&\textup{if }r\leq0;\\
+\sum_{j\geq0}\Delta_{j+r}\twist^{j+r}D^{j},&\textup{if }r\geq0.
+%\\,&\textup{if }
+\end{cases}
+.\]
 Now suppose that $x\in E^r_{-s,t}$. Let's try to define $\delta_i(x)$ for $n<i<t$, where $n=t-s=|x|$. I believe that the correct formula may be
 \[x\mapsto \textup{DEL}_{i}^\textup{alg}(x):=\mathbb{D}_{i-n}(x\otimes x)+\mathbb{D}_{i-n+1}(dx\otimes x).\]
 \subsubsection*{Exhibit A:}
@@ -5667,10 +5672,13 @@ d\mathbb{D}_r
 using the observation that $(1+\twist)F\twist G+F(1+\twist)G=(1+\twist)(FG)$. Then use the fact that $(1+\twist)\Delta_0=\Delta+\phi_0$.} that for $r\geq1$:
 \[d\mathbb{D}_r+\mathbb{D}_rd=(1+\twist)\mathbb{D}_{r-1}+\Delta\sigma D^{r-1}+ \sum_{j\geq0} \phi_{j}\sigma^{j-1}D^{j+r-1},\]
 from which it's a formality to derive that
-\[d(\textup{DEL}^\textup{alg}_i(x))= \textup{DEL}^\textup{alg}_i(dx)+S_\textup{alg}^{t-i+1,s}(x)+\textup{error}\]
-where the error term is
-\[\sum_{j\geq0}\phi_j\sigma^{j-1}D^{j+i-n-1}(x\otimes x)+\sum_{j\geq0}\phi_j\sigma^{j-1}D^{j+i-n}(dx\otimes x)).\]
-But each error term is in fact zero. Let's show that the summand $\phi_j\sigma^{j-1}D^{j+i-n-1}(x\otimes x)$ is zero. Write $x=\sum x_{j}^{j-n}$ as the sum of its various homogeneous parts. Then $\sum\phi_j\sigma^{j-1}D^{j+i-n-1}(x\otimes x)=\sum\phi_j\sigma^{j-1}D^{j+i-n-1}(x_j^{j-n}\otimes x_j^{j-n})=0$, as $D^{j+i-n-1}(x_j^{j-n}\otimes x_j^{j-n})=0$ for dimension reasons.
+\[d(\textup{DEL}^\textup{alg}_i(x))= \textup{DEL}^\textup{alg}_i(dx)+S_\textup{alg}^{t-i+1,s}(x)+\cancel{\textup{error}}\]
+where the crossed out error term,
+\[\sum_{j\geq0}\phi_j\sigma^{j-1}D^{j+i-n-1}(x\otimes x)+\sum_{j\geq0}\phi_j\sigma^{j-1}D^{j+i-n}(dx\otimes x))\]
+is in fact zero%footnote:
+\footnote{Write $x=\sum x_{j}^{j-n}$ as the sum of its various homogeneous parts. Then 
+\[\sum\phi_j\sigma^{j-1}D^{j+i-n-1}(x\otimes x)=\sum\phi_j\sigma^{j-1}D^{j+i-n-1}(x_j^{j-n}\otimes x_j^{j-n})=0,\]
+as $D^{j-n+(i-1)}(x_j^{j-n}\otimes x_j^{j-n})=0$ (since $i\geq2$, and the $D^k$ are special). This shows that the first summand is zero. For the second, we end up considering terms $D^{j-n+i}(T^{j-1}((dx)_{j}^{j-n+1}\otimes x_j^{j-n}))$, which vanish as before.}.
 
 
 \end{letter to Dwyer}
