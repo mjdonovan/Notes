@@ -5636,9 +5636,9 @@ Now write $\mathbb{D}_r$ for the sum (for any $r$, positive or otherwise):
 \end{cases}
 .\]
 Now suppose that $x\in E^r_{-s,t}$. Let's try to define $\delta_i(x)$ for $n<i<t$, where $n=t-s=|x|$. I believe that the correct formula may be
-\[x\mapsto \textup{DEL}_{i}^\textup{alg}(x):=\mathbb{D}_{i-n}(x\otimes x)+\mathbb{D}_{i-n+1}(dx\otimes x).\]
+\[x\mapsto \textup{DEL}_{i}^\textup{alg}(x):=\mathbb{D}_{n-i}(x\otimes x)+\mathbb{D}_{n-i-1}(dx\otimes x).\]
 \subsubsection*{Exhibit A:}
-Let's calculate the leading term of $\textup{DEL}_{i}^\textup{alg}(x)$. Write $x=x_s+x_{>s}$, where $x_s\in X^s_t$, and $x_{>s}$ lies in filtration $s+1$. The the leading term will be $\rho\Delta_{t-i}\twist^{t-i}D^s (x_s\otimes x_s)$. Moreover, as $D$ is \emph{special}, this equals $\rho\overline{\Delta}_{t-i}(x_s\otimes x_s)\in C(X\otimes_{\Sigma_2} X)_{-s,t+i}$ (where we think of $(x_s\otimes x_s)$ as an element of $C(X\otimes_\textup{v}X)_{-s,2t}$), so that `$x_s\mapsto D^s(x_s\otimes x_s)$' implements the assignment `$z\mapsto z\otimes z$' at the $E^1$-level, and we're getting a representative for the obvious $E^2$-level $\delta_i$ operation.
+Let's calculate the leading term of $\textup{DEL}_{i}^\textup{alg}(x)$. Write $x=x^s_t+x^{>s}_{<t}$, where $x^s_t\in X^s_t$, and $x^{>s}_{<t}$ lies in filtration $s+1$. The the leading term will be $\rho\Delta_{t-i}\twist^{t-i}D^s (x^s_t\otimes x^s_t)$. Moreover, as $D$ is \emph{special}, this equals $\rho\overline{\Delta}_{t-i}(x^s_t\otimes x^s_t)\in C(X\otimes_{\Sigma_2} X)_{-s,t+i}$ (where we think of $(x^s_t\otimes x^s_t)$ as an element of $C(X\otimes_\textup{v}X)_{-s,2t}$), so that `$x^s_t\mapsto D^s(x^s_t\otimes x^s_t)$' implements the assignment `$z\mapsto z\otimes z$' at the $E^1$-level, and we're getting a representative for the obvious $E^2$-level $\delta_i$ operation.
 
 \subsubsection*{Exhibit B:}
 It's not too hard to check%footnote:
@@ -5648,30 +5648,30 @@ We'll need the equations:
 \[dD^{j}+D^{j}d=(1+\twist)D^{j-1}\]
 showing that the chain homotopy $d(\Delta_{k}\sigma^kD^{j})+(\Delta_{k}\sigma^kD^{j}) d$ equals
 \[\phi_{k+1}\sigma^kD^{j}+(1+\twist)\Delta_{k+1}\sigma^kD^{j}+ \Delta_{k}(1+\twist)\sigma^kD^{j-1}.\]
-Let's calculate $d\mathbb{D}_{r}+\mathbb{D}_{r}d$ (when $r\geq1$).
+Let's calculate $d\mathbb{D}_{r}+\mathbb{D}_{r}d$ (when $r\leq-1$).
 \begin{alignat*}{2}
 d\mathbb{D}_r
 &+
-\mathbb{D}_rd-\sum_{j\geq0} \phi_{j+1}\sigma^jD^{j+r}-(1+\twist)\Delta_0\sigma D^{r-1}%
+\mathbb{D}_rd-\sum_{j\geq0} \phi_{j+1}\sigma^jD^{j-r}-(1+\twist)\Delta_0\sigma D^{-r-1}%
 \\
 &=
 \sum_{j\geq-1} 
-(1+\twist)\Delta_{j+1}\sigma^jD^{j+r}+ \sum_{j\geq0}\Delta_{j}(1+\twist)\sigma^jD^{j+r-1}
+(1+\twist)\Delta_{j+1}\sigma^jD^{j-r}+ \sum_{j\geq0}\Delta_{j}(1+\twist)\sigma^jD^{j-r-1}
 \\
 &=
 \sum_{j\geq0} 
-\left[(1+\twist)\Delta_{j}\sigma\sigma^jD^{j+r-1}+ \Delta_{j}(1+\twist)\sigma^jD^{j+r-1}\right]
+\left[(1+\twist)\Delta_{j}\sigma\sigma^jD^{j-r-1}+ \Delta_{j}(1+\twist)\sigma^jD^{j-r-1}\right]
 \\
 % Left hand side
 % Relation
 &=
 % Right hand side
-(1+\twist)\mathbb{D}_{r-1}
+(1+\twist)\mathbb{D}_{r+1}
 % Comment
 \end{alignat*}
-using the observation that $(1+\twist)F\twist G+F(1+\twist)G=(1+\twist)(FG)$. Then use the fact that $(1+\twist)\Delta_0=\Delta+\phi_0$.} that for $r\geq1$:
-\[d\mathbb{D}_r+\mathbb{D}_rd=(1+\twist)\mathbb{D}_{r-1}+\Delta\sigma D^{r-1}+ \sum_{j\geq0} \phi_{j}\sigma^{j-1}D^{j+r-1},\]
-from which it's a formality to derive that
+using the observation that $(1+\twist)F\twist G+F(1+\twist)G=(1+\twist)(FG)$. Then use the fact that $(1+\twist)\Delta_0=\Delta+\phi_0$.} that for $r\leq-1$:
+\[d\mathbb{D}_r+\mathbb{D}_rd=(1+\twist)\mathbb{D}_{r+1}+\Delta\sigma D^{-r-1}+ \sum_{j\geq0} \phi_{j}\sigma^{j-1}D^{j-r-1},\]
+from which it's a formality to derive that for $i>|x|$
 \[d(\textup{DEL}^\textup{alg}_i(x))= \textup{DEL}^\textup{alg}_i(dx)+S_\textup{alg}^{t-i+1,s}(x)+\cancel{\textup{error}}\]
 where the crossed out error term,
 \[\sum_{j\geq0}\phi_j\sigma^{j-1}D^{j+i-n-1}(x\otimes x)+\sum_{j\geq0}\phi_j\sigma^{j-1}D^{j+i-n}(dx\otimes x))\]
