@@ -99,6 +99,7 @@
 \newcommand{\algCat}{\calA}
 \newcommand{\trip}[3]{{#1}_{\smash{#2}}^{\smash{#3}}}
 
+\newcommand{\twist}{\sigma}
 
 \DeclareMathOperator{\Constant}{con}
 
@@ -5592,7 +5593,7 @@ For mixed simplicial vector spaces $X$ and $Y$, write $C(X\otimes_\textup{v}Y)$ 
 {\phi}_k:C(X\otimes_\textup{v} Y)_{-\fraks,\frakt+k}&\to C(X\otimes Y)_{-\fraks,\frakt}&\quad&\textup{for $0\leq k\leq \frakt$}\\
 {\rho}:C(X\otimes X)_{-\fraks,\frakt}&\to C(X\otimes_{\Sigma_2} X)_{-\fraks,\frakt}&\quad&\textup{(proj onto coinvariants)}\\
 \end{align*}
-Actually, let's define these on the entire double complex by just defining them to be zero in dimensions they aren't supposed to be defined.
+Actually, let's define these on the entire double complex by just defining them to be zero in dimensions they aren't supposed to be defined. Also, we'll always write $T$ for symmetry isomorphisms, and write ``$\twist F$'' as shorthand for the function $TFT$. Although this notation has potential to be ambiguous, whenever we write $\sigma FG$, for functions $F$ and $G$, we mean $(\sigma F)G$, not $\sigma(FG)$.
 
 From now on, let $X$ be a mixed simplicial commutative non-unital $\F_2$-algebra. We'll be in the business of constructing spectral sequence operations, which I'd like to think of as maps $E^r(X)\to E^r(X\otimes_{\Sigma_2}X)$.
 
@@ -5601,7 +5602,7 @@ From now on, let $X$ be a mixed simplicial commutative non-unital $\F_2$-algebra
 In this case, the `surprising' operations are easy to define. That is, we can define Steenrod operations $\Sq^i_\textup{alg}:E^r_{-s,t}(X)\to E^r_{-s-i,2t}(X\otimes_{\Sigma_2}X)$ for all $i\geq 0$ and $r\geq2$, which survive to $E^{2r-1}$ and have indeterminacy vanishing by $E^{2r-2}$, using the chain-level formula:
 \[S^{i,s}_\textup{alg}:x\mapsto \rho\Delta (D^{s-i}(x\otimes x)+D^{s-i+1}(x\otimes dx)).\]
 The usual trick, along with the fact that $\Delta$ is a symmetric chain map, shows that $d(S^{i,s}_\textup{alg}(x))=\rho\Delta D^{s-i+1}(dx\otimes dx)$, so that if $x\in E^r_{-s,t}$, $S^{i,s}_\textup{alg}(x)\in E^{2r-1}_{-s-i,2t}$. To examine the indeterminacy, $x\in E^r_{-s,t}$ is determined up to boundaries of $y\in E^{r-1}_{-(s-r+1),t+r+2}$, and the following equation%footnote:
-\footnote{Here's how, using analogues of \cite[(1.111),(1.112)]{MR2245560}:
+\footnote{Here's how to prove said equation, using analogues of \cite[(1.111),(1.112)]{MR2245560}:
 \begin{alignat*}{2}
 \textup{RHS}
 &=
@@ -5622,12 +5623,30 @@ The filtration of this bounding cycle is at least $2(s-r+1)-(s-i-1)=(s+i)-(2r-3)
 
 
 
-
-
+\subsection{$\delta$ operations doubling filtration}
+Define $\textup{DUB}_i(x):=\rho\Delta_{n-i}D^0(x\otimes x)+\rho\Delta_{n-i-1}D^0(x\otimes dx)$.
+\begin{lem}
+\[d(\textup{DUB}_i(x))+\textup{DUB}_i(dx)=\rho\Delta_{n-i+1}(1+\twist)D^0(x\otimes x)+\rho\Delta_{n-i}(1+\twist)D^0(dx\otimes x)\]
+\end{lem}
+\begin{proof}
+In light of the fact that $D^0$ is a chain map,
+\begin{alignat*}{2}
+d(\textup{DUB}_i(x))
+&=
+\rho\Delta_{n-i}D^0d(x\otimes x)+\rho (\phi_{n-i+1}+(1+\twist)\Delta_{n-i+1})D^0(x\otimes x)+{}%
+\\
+&\ \ +\rho\Delta_{n-i-1}D^0d(x\otimes dx)+\rho (\phi_{n-i}+(1+\twist)\Delta_{n-i})D^0(x\otimes dx)
+\end{alignat*}
+As ever the $\phi$ terms dissappear, and $d(\textup{DUB}_i(x))+\textup{DUB}_i(dx)$ equals
+\begin{alignat*}{2}
+\rho&(\Delta_{n-i}D^0d(x\otimes x)+(1+\twist)\Delta_{n-i+1}D^0(x\otimes x)+(1+\twist)\Delta_{n-i}D^0(x\otimes dx))\\
+&=\rho(\Delta_{n-i}D^0(1+T)(x\otimes dx)+\Delta_{n-i+1}(1+\twist)D^0(x\otimes x)+\Delta_{n-i}(1+T)D^0(x\otimes dx))
+\end{alignat*}
+which equals the desired result, as $(1+T)F+F(1+T)=(1+\twist)FT$.
+\end{proof}
 
 \subsection{$\delta$ operations}
-\newcommand{\twist}{\sigma}
-Write $\twist F$ as somewhat ambiguous shorthand for the function $TFT$. 
+
 Now write $\mathbb{D}_r$ for the sum (for any $r$, positive or otherwise):
 \[\mathbb{D}_r=\sum_{\alpha-\beta=r}\Delta_\alpha\twist^\alpha D^\beta=\begin{cases}
 \sum_{j\geq0}\Delta_{j}\twist^{j}D^{j-r},&\textup{if }r\leq0;\\
@@ -5637,12 +5656,12 @@ Now write $\mathbb{D}_r$ for the sum (for any $r$, positive or otherwise):
 .\]
 Now suppose that $x\in E^r_{-s,t}$. Let's try to define $\delta_i(x)$ for $n<i<t$, where $n=t-s=|x|$. I believe that the correct formula may be
 \[x\mapsto \textup{DEL}_{i}^\textup{alg}(x):=\mathbb{D}_{n-i}(x\otimes x)+\mathbb{D}_{n-i-1}(dx\otimes x).\]
-\subsubsection*{Exhibit A:}
+\subsubsection*{Correctness at $E^2$}
 Let's calculate the leading term of $\textup{DEL}_{i}^\textup{alg}(x)$. Write $x=x^s_t+x^{>s}_{<t}$, where $x^s_t\in X^s_t$, and $x^{>s}_{<t}$ lies in filtration $s+1$. The the leading term will be $\rho\Delta_{t-i}\twist^{t-i}D^s (x^s_t\otimes x^s_t)$. Moreover, as $D$ is \emph{special}, this equals $\rho\overline{\Delta}_{t-i}(x^s_t\otimes x^s_t)\in C(X\otimes_{\Sigma_2} X)_{-s,t+i}$ (where we think of $(x^s_t\otimes x^s_t)$ as an element of $C(X\otimes_\textup{v}X)_{-s,2t}$), so that `$x^s_t\mapsto D^s(x^s_t\otimes x^s_t)$' implements the assignment `$z\mapsto z\otimes z$' at the $E^1$-level, and we're getting a representative for the obvious $E^2$-level $\delta_i$ operation.
 
 \newcommand{\twolinesum}[2]{\mathop{\sum_{\mathclap{#1}}}_{\mathclap{#2}}}
 \newcommand{\onelinesum}[1]{\sum_{\mathclap{#1}}}
-\subsubsection*{Exhibit B:}
+\subsubsection*{Clean formula for the boundary}
 \begin{lem}
 For all $r$, positive or otherwise:
 \[d\mathbb{D}_r+\mathbb{D}_rd=(1+\twist)\mathbb{D}_{r+1}+\Delta\sigma D^{-r-1}+\Delta_{r+1}(1+\twist)D^0+\sum_{\mathclap{\alpha-\beta=r+1}} \phi_{\alpha}\sigma^{\alpha-1}D^{\beta}\]
@@ -5666,7 +5685,7 @@ which equals the $\textup{RHS}$, using the identity $(1+\twist)\Delta_{0}+\phi_{
 \end{proof}
 \begin{cor}
 For $2\leq i<t$ and $x\in Z^1_{-s,t}$:
-\[d(\textup{DEL}^\textup{alg}_i(x))+ \textup{DEL}^\textup{alg}_i(dx)=S_\textup{alg}^{t-i+1,s}(x)+\cancel{\textup{error}}\]
+\[d(\textup{DEL}^\textup{alg}_i(x))+ \textup{DEL}^\textup{alg}_i(dx)=S_\textup{alg}^{t-i+1,s}(x)+d(\textup{DUB}_i(x))+\textup{DUB}_i(dx)\]
 \end{cor}
 \begin{proof}
 \begin{alignat*}{2}
@@ -5696,48 +5715,66 @@ For $2\leq i<t$ and $x\in Z^1_{-s,t}$:
 \end{alignat*}
 Now the bottom line of this expression is actually zero, since it can be written as a sum of linear functions of the expressions
 \[\sigma^{\alpha-1}D^{\alpha-n+(i-1)}(x_\alpha^{\alpha-n}\otimes x_\alpha^{\alpha-n})\textup{ and }\sigma^{\alpha-1}D^{\alpha-n+i}((dx)_\alpha^{\alpha-n+1}\otimes x_\alpha^{\alpha-n})\]
-which all vanish, since the $D^k$ are special and $i\geq2$.
+which all vanish, since the $D^k$ are special and $i\geq2$. 
+%As for the middle line, supposing that $i\leq n$ we manipulate:
+%\begin{alignat*}{2}
+%\rho\Delta_{n-i+1}(1+\twist)D^0(x\otimes x)
+%&=
+%\rho(1+\twist)\Delta_{n-i+1}D^0(x\otimes x)%
+%\\
+%&=
+%\rho(\phi_{n-i+1}+d\Delta_{n-i}+\Delta_{n-i}d)D^0(x\otimes x)%
+%\\
+%% Left hand side
+%% Relation
+%&=
+%% Right hand side
+%d\rho\Delta_{n-i}(x\otimes x)+\rho\Delta_{n-i}(1+\twist)D^0(dx\otimes x)%
+%% Comment
+%\end{alignat*}
+%where the term corresponding to $\phi_{n-i+1}$ vanished for dimension reasons, and we used the fact that $D^0$ is a chain map.
+%\[\rho\Delta_{n-i+1}(1+\twist)D^0(x\otimes x)=\rho(1+\twist)\Delta_{n-i+1}D^0(x\otimes x)\]
+The middle line is our formula derived for $d(\textup{DUB}_i(x))+\textup{DUB}_i(dx)$ (\textbf{at least when $i<<n$}).
 \end{proof}
-\pagebreak
-
-It's not too hard to check%footnote: 
-\footnote{
-We'll need the equations:
-\[d\Delta_{k-1}+\Delta_{k-1}d= \phi_{k}+(1+\twist)\Delta_{k}\]
-\[dD^{j}+D^{j}d=(1+\twist)D^{j-1}\]
-showing that the chain homotopy $d(\Delta_{k}\sigma^kD^{j})+(\Delta_{k}\sigma^kD^{j}) d$ equals
-\[\phi_{k+1}\sigma^kD^{j}+(1+\twist)\Delta_{k+1}\sigma^kD^{j}+ \Delta_{k}(1+\twist)\sigma^kD^{j-1}.\]
-Let's calculate $d\mathbb{D}_{r}+\mathbb{D}_{r}d$ (when $r\leq-1$).
-\begin{alignat*}{2}
-d\mathbb{D}_r
-&+
-\mathbb{D}_rd-\sum_{j\geq0} \phi_{j+1}\sigma^jD^{j-r}-(1+\twist)\Delta_0\sigma D^{-r-1}%
-\\
-&=
-\sum_{j\geq-1} 
-(1+\twist)\Delta_{j+1}\sigma^jD^{j-r}+ \sum_{j\geq0}\Delta_{j}(1+\twist)\sigma^jD^{j-r-1}
-\\
-&=
-\sum_{j\geq0} 
-\left[(1+\twist)\Delta_{j}\sigma\sigma^jD^{j-r-1}+ \Delta_{j}(1+\twist)\sigma^jD^{j-r-1}\right]
-\\
-% Left hand side
-% Relation
-&=
-% Right hand side
-(1+\twist)\mathbb{D}_{r+1}
-% Comment
-\end{alignat*}
-using the observation that $(1+\twist)F\twist G+F(1+\twist)G=(1+\twist)(FG)$. Then use the fact that $(1+\twist)\Delta_0=\Delta+\phi_0$.} that for $r\leq-1$:
-\[d\mathbb{D}_r+\mathbb{D}_rd=(1+\twist)\mathbb{D}_{r+1}+\Delta\sigma D^{-r-1}+ \sum_{j\geq0} \phi_{j}\sigma^{j-1}D^{j-r-1},\]
-from which it's a formality to derive that for $i>|x|$
-\[d(\textup{DEL}^\textup{alg}_i(x))= \textup{DEL}^\textup{alg}_i(dx)+S_\textup{alg}^{t-i+1,s}(x)+\cancel{\textup{error}}\]
-where the crossed out error term,
-\[\sum_{j\geq0}\phi_j\sigma^{j-1}D^{j+i-n-1}(x\otimes x)+\sum_{j\geq0}\phi_j\sigma^{j-1}D^{j+i-n}(dx\otimes x))\]
-is in fact zero%footnote:
-\footnote{Write $x=\sum x_{j}^{j-n}$ as the sum of its various homogeneous parts. Then 
-\[\sum\phi_j\sigma^{j-1}D^{j+i-n-1}(x\otimes x)=\sum\phi_j\sigma^{j-1}D^{j+i-n-1}(x_j^{j-n}\otimes x_j^{j-n})=0,\]
-as $D^{j-n+(i-1)}(x_j^{j-n}\otimes x_j^{j-n})=0$ (since $i\geq2$, and the $D^k$ are special). This shows that the first summand is zero. For the second, we end up considering terms $D^{j-n+i}(T^{j-1}((dx)_{j}^{j-n+1}\otimes x_j^{j-n}))$, which vanish as before.}.
+%%%AN EARLY, SIMPLISTIC CALCULATION
+%It's not too hard to check%footnote: 
+%\footnote{
+%We'll need the equations:
+%\[d\Delta_{k-1}+\Delta_{k-1}d= \phi_{k}+(1+\twist)\Delta_{k}\]
+%\[dD^{j}+D^{j}d=(1+\twist)D^{j-1}\]
+%showing that the chain homotopy $d(\Delta_{k}\sigma^kD^{j})+(\Delta_{k}\sigma^kD^{j}) d$ equals
+%\[\phi_{k+1}\sigma^kD^{j}+(1+\twist)\Delta_{k+1}\sigma^kD^{j}+ \Delta_{k}(1+\twist)\sigma^kD^{j-1}.\]
+%Let's calculate $d\mathbb{D}_{r}+\mathbb{D}_{r}d$ (when $r\leq-1$).
+%\begin{alignat*}{2}
+%d\mathbb{D}_r
+%&+
+%\mathbb{D}_rd-\sum_{j\geq0} \phi_{j+1}\sigma^jD^{j-r}-(1+\twist)\Delta_0\sigma D^{-r-1}%
+%\\
+%&=
+%\sum_{j\geq-1} 
+%(1+\twist)\Delta_{j+1}\sigma^jD^{j-r}+ \sum_{j\geq0}\Delta_{j}(1+\twist)\sigma^jD^{j-r-1}
+%\\
+%&=
+%\sum_{j\geq0} 
+%\left[(1+\twist)\Delta_{j}\sigma\sigma^jD^{j-r-1}+ \Delta_{j}(1+\twist)\sigma^jD^{j-r-1}\right]
+%\\
+%% Left hand side
+%% Relation
+%&=
+%% Right hand side
+%(1+\twist)\mathbb{D}_{r+1}
+%% Comment
+%\end{alignat*}
+%using the observation that $(1+\twist)F\twist G+F(1+\twist)G=(1+\twist)(FG)$. Then use the fact that $(1+\twist)\Delta_0=\Delta+\phi_0$.} that for $r\leq-1$:
+%\[d\mathbb{D}_r+\mathbb{D}_rd=(1+\twist)\mathbb{D}_{r+1}+\Delta\sigma D^{-r-1}+ \sum_{j\geq0} \phi_{j}\sigma^{j-1}D^{j-r-1},\]
+%from which it's a formality to derive that for $i>|x|$
+%\[d(\textup{DEL}^\textup{alg}_i(x))= \textup{DEL}^\textup{alg}_i(dx)+S_\textup{alg}^{t-i+1,s}(x)+\cancel{\textup{error}}\]
+%where the crossed out error term,
+%\[\sum_{j\geq0}\phi_j\sigma^{j-1}D^{j+i-n-1}(x\otimes x)+\sum_{j\geq0}\phi_j\sigma^{j-1}D^{j+i-n}(dx\otimes x))\]
+%is in fact zero%footnote:
+%\footnote{Write $x=\sum x_{j}^{j-n}$ as the sum of its various homogeneous parts. Then 
+%\[\sum\phi_j\sigma^{j-1}D^{j+i-n-1}(x\otimes x)=\sum\phi_j\sigma^{j-1}D^{j+i-n-1}(x_j^{j-n}\otimes x_j^{j-n})=0,\]
+%as $D^{j-n+(i-1)}(x_j^{j-n}\otimes x_j^{j-n})=0$ (since $i\geq2$, and the $D^k$ are special). This shows that the first summand is zero. For the second, we end up considering terms $D^{j-n+i}(T^{j-1}((dx)_{j}^{j-n+1}\otimes x_j^{j-n}))$, which vanish as before.}.
 
 
 \end{letter to Dwyer}
