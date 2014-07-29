@@ -228,7 +228,7 @@ By the proof Dold's theorem, it's enough to look at the homotopy of $F^{s/s+1}$ 
 %%%%\pi_s(IX),&\textup{if }t=0;\\
 %%%%0,&\textup{otherwise}.
 %%%%\end{cases}
-%%%%\end{alignat*}
+%%%%\end{alignat*
 %%%%The isomorphism $\tau$ is induced, for each $s$, by the augmentation in the $t$ direction, $(I(\textup{id},d_0)):IUX_s\to IX_s$ %$I\rho:IUX_s\to IX_s$, where $\rho$ is the structure morphism $UX_s\to X_s$. 
 %%%%The edge homomorphism sends the class of an $s$-cycle in $\Tot CIA$, say,
 %%%%\[\sum_{i=0}^s z_{i,s-i},\textup{ where }z_{i,s-i}\in IA_{i,s-i}\]
@@ -5597,6 +5597,8 @@ Actually, let's define these on the entire double complex by just defining them 
 
 From now on, let $X$ be a mixed simplicial commutative non-unital $\F_2$-algebra. We'll be in the business of constructing spectral sequence operations, which I'd like to think of as maps $E^r(X)\to E^r(X\otimes_{\Sigma_2}X)$.
 
+\subsubsection*{On the equation $d\Delta_k+\Delta_kd=\phi_{k+1}+(1+\twist)\Delta_{k+1}$}
+This equation holds on classes of simplicial dimension at least $2(k+1)$. It also holds trivially on classes of dimension less than $2k$. Thus it only fails in dimensions $2k$ and $2k+1$.
 
 \subsection{Steenrod operations}
 In this case, the `surprising' operations are easy to define. That is, we can define Steenrod operations $\Sq^i_\textup{alg}:E^r_{-s,t}(X)\to E^r_{-s-i,2t}(X\otimes_{\Sigma_2}X)$ for all $i\geq 0$ and $r\geq2$, which survive to $E^{2r-1}$ and have indeterminacy vanishing by $E^{2r-2}$, using the chain-level formula:
@@ -5624,12 +5626,19 @@ The filtration of this bounding cycle is at least $2(s-r+1)-(s-i-1)=(s+i)-(2r-3)
 
 
 \subsection{$\delta$ operations doubling filtration}
-Define $\textup{DUB}_i(x):=\rho\Delta_{n-i}D^0(x\otimes x)+\rho\Delta_{n-i-1}D^0(x\otimes dx)$.
-\begin{lem}For $2\leq i<<n$:
-\[d(\textup{DUB}_i(x))+\textup{DUB}_i(dx)=\rho\Delta_{n-i+1}(1+\twist)D^0(x\otimes x)+\rho\Delta_{n-i}(1+\twist)D^0(dx\otimes x)\]
+For $x\in CX_{n}$, define
+\[\textup{DUB}_i(x):=\rho(\Delta_{n-i}D^0(x\otimes x)+\Delta_{n-i-1}D^0(x\otimes dx))\textup{\quad for $i<n$}\]
+and (setting $i=n$) define 
+\[\textup{DUB}_n(x):=\rho\Delta_{0}D^0(x\otimes x).\]
+This gives operations on the total complex which are compatible with the $\delta$-operations on the target. Unfortunately, these double filtration, and are \textbf{presumably} zero on $E^2_{-s,t}$ when $s>0$.
+\begin{lem}\label{htpyInducedByBUB}
+For $2\leq i<n$:
+\[d(\textup{DUB}_i(x))+\textup{DUB}_i(dx)=\rho(\Delta_{n-i+1}(1+\twist)D^0(x\otimes x)+\Delta_{n-i}(1+\twist)D^0(dx\otimes x))\]
+and (setting $i=n$):
+\[d(\textup{DUB}_i(x))+\rho\Delta D^0(x\otimes dx)=\rho(\Delta_{1}(1+\twist)D^0(x\otimes x)+\Delta_{0}(1+\twist)D^0(dx\otimes x))\]
 \end{lem}
 \begin{proof}
-In light of the fact that $D^0$ is a chain map,
+Suppose that $i<n$. Before calculating $(d\Delta_{n-i}+\Delta_{n-i} d)(D^0(x\otimes x))$, we note that the simplicial dimension of $D^0(x\otimes x)$ is $2t\geq2n>2(n-i+1)$. Similarly, the simplicial dimension of $D^0(x\otimes dx)$ is at least $2t-1>2((n-i-1)+1)$. Thus we may use the formula commuting $d$ and $\Delta_k$. In light of the fact that $D^0$ is a chain map,
 \begin{alignat*}{2}
 d(\textup{DUB}_i(x))
 &=
@@ -5643,6 +5652,9 @@ As ever the $\phi$ terms dissappear, and $d(\textup{DUB}_i(x))+\textup{DUB}_i(dx
 &=\rho(\Delta_{n-i}D^0(1+T)(x\otimes dx)+\Delta_{n-i+1}(1+\twist)D^0(x\otimes x)+\Delta_{n-i}(1+T)D^0(x\otimes dx))
 \end{alignat*}
 which equals the desired result, as $(1+T)F+F(1+T)=(1+\twist)FT$.
+
+In the case $i=n$, the second line in the expression for $d(\textup{DUB}_i(x))$ does not appear. The first term therein is the vestigial ``$\textup{DUB}_n(dx)$'', while the second term
+$\rho (\phi_{n-i}+(1+\twist)\Delta_{n-i})D^0(x\otimes dx)$ equals $\rho\Delta D^0(x\otimes dx)$.
 \end{proof}
 
 \subsection{$\delta$ operations}
@@ -5655,18 +5667,22 @@ Now write $\mathbb{D}_r$ for the sum (for any $r$, positive or otherwise):
 \end{cases}
 .\]
 Now suppose that $x\in E^r_{-s,t}$. Let's try to define $\delta_i^\textup{alg}(x)$ for $n<i<t$, where $n=t-s=|x|$. I believe that the correct formula may be
-\[x\mapsto \textup{DEL}_{i}(x):=\mathbb{D}_{n-i}(x\otimes x)+\mathbb{D}_{n-i-1}(dx\otimes x).\]
+\[x\mapsto \textup{DEL}_{i}(x):=\rho(\mathbb{D}_{n-i}(x\otimes x)+\mathbb{D}_{n-i-1}(dx\otimes x)).\]
 \subsubsection*{Correctness at $E^2$}
 Let's calculate the leading term of $\textup{DEL}_{i}(x)$ whenever $2\leq i<n$. Write $x=x^s_t+x^{>s}_{<t}$, where $x^s_t\in X^s_t$, and $x^{>s}_{<t}$ lies in filtration $s+1$. The the leading term will be $\rho\Delta_{t-i}\twist^{t-i}D^s (x^s_t\otimes x^s_t)$. Moreover, as $D$ is \emph{special}, this equals $\rho\overline{\Delta}_{t-i}(x^s_t\otimes x^s_t)\in C(X\otimes_{\Sigma_2} X)_{-s,t+i}$ (where we think of $(x^s_t\otimes x^s_t)$ as an element of $C(X\otimes_\textup{v}X)_{-s,2t}$), so that `$x^s_t\mapsto D^s(x^s_t\otimes x^s_t)$' implements the assignment `$z\mapsto z\otimes z$' at the $E^1$-level, and we're getting a representative for the obvious $E^2$-level $\delta_i$ operation.
 
 \newcommand{\twolinesum}[2]{\mathop{\sum_{\mathclap{#1}}}_{\mathclap{#2}}}
 \newcommand{\onelinesum}[1]{\sum_{\mathclap{#1}}}
 \subsubsection*{Clean formula for the boundary}
-\begin{lem}
-For all $r$, positive or otherwise:
+\begin{lem}\label{boundaryVsBBD}
+For all $r$, positive or otherwise, the equation:
 \[d\mathbb{D}_r+\mathbb{D}_rd=(1+\twist)\mathbb{D}_{r+1}+\Delta\sigma D^{-r-1}+\Delta_{r+1}(1+\twist)D^0+\sum_{\mathclap{\alpha-\beta=r+1}} \phi_{\alpha}\sigma^{\alpha-1}D^{\beta}\]
+holds when applied to an element $z$ of $(CX\otimes CX)_{-s,t}$ with $t-s\geq 2(r+1)$.
 \end{lem}
-\begin{proof}
+\begin{proof}We'll need to use our formula for $d\Delta_\alpha+\Delta_\alpha d$ applied to $\twist^\alpha D^\beta(z)$. %, where $z\in (CX\otimes CX)_{-s,t}$ is the element to which we're applying the above equation.
+The formula holds unless $t=2\alpha+e$, where $e\in\{0,1\}$, in which case $\beta=(t-e)/2-r$. However, $D^\beta(z)$ is zero unless $\beta\leq s/2$, so the formula can only fail if $(t-e)/2-r\leq s/2$. As we've assumed that $t-s\geq2(r+1)$, this does not occur.
+%
+% Now $D^\beta(z)$ is zero unless $\beta\leq 2s$, so that the term can be ignored unless $\alpha=\beta+r\leq 2s+r$. As $t\geq 2(2s+r+1)\geq 2(\alpha+1)$, we can apply the rule.
 \begin{alignat*}{2}
 \textup{LHS}
 &=
@@ -5688,6 +5704,7 @@ For $2\leq i<t$ and $x\in Z^1_{-s,t}$:
 \[d(\textup{DEL}_i(x))+ \textup{DEL}_i(dx)=\textup{SQ}^{t-i+1,s}(x)+d(\textup{DUB}_i(x))+\textup{DUB}_i(dx)\]
 \end{cor}
 \begin{proof}
+We may apply \ref{boundaryVsBBD} to calculate $d\mathbb{D}_{n-i}(x\otimes x)$ and $d\mathbb{D}_{n-i-1}(dx\otimes x)$, since $|x\otimes x|=2n> 2(n-i+1)$ and $|dx\otimes x|=2n-1> 2(n-i-1+1)$. Thus:
 \begin{alignat*}{2}
 \textup{LHS}
 &=
@@ -5696,45 +5713,81 @@ For $2\leq i<t$ and $x\in Z^1_{-s,t}$:
 &=
 \rho\Bigl\{d\mathbb{D}_{n-i}(x\otimes x)\Bigr\}+\rho\Bigl\{d\mathbb{D}_{n-i-1}(dx\otimes x))+\mathbb{D}_{n-i-1}(d(dx\otimes x))\Bigr\}%
 \\
-% Left hand side
-% Relation
 &=
-% Right hand side
 \rho\Bigl\{\mathbb{D}_{n-i}(dx\otimes x+x\otimes dx)+(1+\twist)\mathbb{D}_{n-i+1}(x\otimes x)+{}
 \\
-&\ \ \ \ \ \ \ \ \ +\bigl(\Delta\sigma D^{i-n-1}+\Delta_{n-i+1}(1+\twist)D^0+\sum_{\mathclap{\alpha-\beta=n-i+1}} \phi_{\alpha}\sigma^{\alpha-1}D^{\beta}\bigr)(x\otimes x)\Bigr\}+{}%
+&\ \ \ \ \ \ \ \ \ +\bigl(\Delta\sigma D^{i-n-1}+\Delta_{n-i+1}(1+\twist)D^0+\smash{\sum_{\mathclap{\alpha-\beta=n-i+1}}}\  \phi_{\alpha}\sigma^{\alpha-1}D^{\beta}\bigr)(x\otimes x)\Bigr\}+{}%
 \\
 &\ \ +\rho\Bigl\{(1+\twist)\mathbb{D}_{n-i}(dx\otimes x)+{}
 \\
-&\ \ \ \ \ \ \ \ \ +\bigl(\Delta\sigma D^{i-n}+\Delta_{n-i}(1+\twist)D^0+\sum_{\mathclap{\alpha-\beta=n-i}} \phi_{\alpha}\sigma^{\alpha-1}D^{\beta}\bigr)(dx\otimes x)\Bigr\}
+&\ \ \ \ \ \ \ \ \ +\bigl(\Delta\sigma D^{i-n}+\Delta_{n-i}(1+\twist)D^0+\smash{\sum_{\mathclap{\alpha-\beta=n-i}}}\ \phi_{\alpha}\sigma^{\alpha-1}D^{\beta}\bigr)(dx\otimes x)\Bigr\}
+\end{alignat*}
+%The term $\rho(1+\twist)\mathbb{D}_{n-i+1}(x\otimes x)$ is zero, and the first terms of each of the first and third line cancel. What remains is the following sum:
+The contents of the first and third lines cancel, and what remains is a sum of three summands:
+\begin{alignat*}{2}
+\textup{term A }
+&=\ 
+\sum_{\mathclap{\alpha-\beta=n-i+1}} \rho\phi_{\alpha}\sigma^{\alpha-1}D^{\beta}(x\otimes x)+\sum_{\mathclap{\alpha-\beta=n-i}} \rho\phi_{\alpha}\sigma^{\alpha-1}D^{\beta}(dx\otimes x)%
+\\
+&=\ 
+\sum_{\mathclap{\alpha-\beta=n-i+1}} \rho\phi_{\alpha}\sigma^{\alpha-1}D^{\alpha-n+(i-1)}(x_\alpha^{\alpha-n}\otimes x_\alpha^{\alpha-n})+\textit{similar}%
+\end{alignat*}
+and everything here vanishes, as the $D^k$ are special and $i\geq2$.
+\begin{alignat*}{2}
+\textup{term B}
+&=
+\rho\Delta(D^{i-n-1}(x\otimes x)+D^{i-n}(x\otimes dx))%
 \\
 &=
-\rho\Delta(D^{i-n-1}(x\otimes x)+D^{i-n}(x\otimes dx))+\\
-&\ \ +\rho\Delta_{n-i+1}(1+\twist)D^0(x\otimes x)+\rho\Delta_{n-i}(1+\twist)D^0(dx\otimes x)+\\
-&\ \ +\sum_{\mathclap{\alpha-\beta=n-i+1}} \rho\phi_{\alpha}\sigma^{\alpha-1}D^{\beta}(x\otimes x)+\sum_{\mathclap{\alpha-\beta=n-i}} \rho\phi_{\alpha}\sigma^{\alpha-1}D^{\beta}(dx\otimes x).
+\begin{cases}
+\textup{SQ}^{t-i+1,s}(x),&\textup{if }n+1\leq i \leq t-1;\\
+\rho\Delta D^0(x\otimes dx),&\textup{if }i=n;\\
+0,&\textup{if }2\leq i\leq n-1.
+\end{cases}
 \end{alignat*}
-Now the bottom line of this expression is actually zero, since it can be written as a sum of linear functions of the expressions
-\[\sigma^{\alpha-1}D^{\alpha-n+(i-1)}(x_\alpha^{\alpha-n}\otimes x_\alpha^{\alpha-n})\textup{ and }\sigma^{\alpha-1}D^{\alpha-n+i}((dx)_\alpha^{\alpha-n+1}\otimes x_\alpha^{\alpha-n})\]
-which all vanish, since the $D^k$ are special and $i\geq2$. 
-%As for the middle line, supposing that $i\leq n$ we manipulate:
+And finally, using \ref{htpyInducedByBUB}, we have
+\begin{alignat*}{2}
+\textup{term C}
+&:=
+\rho\Delta_{n-i+1}(1+\twist)D^0(x\otimes x)+\rho\Delta_{n-i}(1+\twist)D^0(dx\otimes x)%
+\\
+&=
+\begin{cases}
+0,&\textup{if }n+2\leq i \leq t-1;\\
+\rho\Delta_{0}(1+\twist)D^0(x\otimes x),&\textup{if }i=n+1;\\
+d(\textup{DUB}_i(x))+\rho\Delta D^0(x\otimes dx),&\textup{if }i=n;\\
+d(\textup{DUB}_i(x))+\textup{DUB}_i(dx),&\textup{if }2\leq i\leq n-1.
+\end{cases}
+Now the term appearing here when $i=n+1$ is actually zero, as it equals $\rho\phi_0D^0(x\otimes x)$, which vanishes, as $t>i\geq2$.
+\end{alignat*}
 %\begin{alignat*}{2}
-%\rho\Delta_{n-i+1}(1+\twist)D^0(x\otimes x)
-%&=
-%\rho(1+\twist)\Delta_{n-i+1}D^0(x\otimes x)%
-%\\
-%&=
-%\rho(\phi_{n-i+1}+d\Delta_{n-i}+\Delta_{n-i}d)D^0(x\otimes x)%
-%\\
-%% Left hand side
-%% Relation
-%&=
-%% Right hand side
-%d\rho\Delta_{n-i}(x\otimes x)+\rho\Delta_{n-i}(1+\twist)D^0(dx\otimes x)%
-%% Comment
+%&
+%\rho\Delta(D^{i-n-1}(x\otimes x)+D^{i-n}(x\otimes dx))+\\
+%&\ \ +\rho\Delta_{n-i+1}(1+\twist)D^0(x\otimes x)+\rho\Delta_{n-i}(1+\twist)D^0(dx\otimes x)+\\
+%&\ \ +\sum_{\mathclap{\alpha-\beta=n-i+1}} \rho\phi_{\alpha}\sigma^{\alpha-1}D^{\beta}(x\otimes x)+\sum_{\mathclap{\alpha-\beta=n-i}} \rho\phi_{\alpha}\sigma^{\alpha-1}D^{\beta}(dx\otimes x).
 %\end{alignat*}
-%where the term corresponding to $\phi_{n-i+1}$ vanished for dimension reasons, and we used the fact that $D^0$ is a chain map.
-%\[\rho\Delta_{n-i+1}(1+\twist)D^0(x\otimes x)=\rho(1+\twist)\Delta_{n-i+1}D^0(x\otimes x)\]
-The middle line is our formula derived for $d(\textup{DUB}_i(x))+\textup{DUB}_i(dx)$ (\textbf{at least when $i<<n$}).
+%Now the bottom line of this expression is actually zero, since it can be written as a sum of linear functions of the expressions
+%\[\sigma^{\alpha-1}D^{\alpha-n+(i-1)}(x_\alpha^{\alpha-n}\otimes x_\alpha^{\alpha-n})\textup{ and }\sigma^{\alpha-1}D^{\alpha-n+i}((dx)_\alpha^{\alpha-n+1}\otimes x_\alpha^{\alpha-n})\]
+%which all vanish, since the $D^k$ are special and $i\geq2$. 
+%%As for the middle line, supposing that $i\leq n$ we manipulate:
+%%\begin{alignat*}{2}
+%%\rho\Delta_{n-i+1}(1+\twist)D^0(x\otimes x)
+%%&=
+%%\rho(1+\twist)\Delta_{n-i+1}D^0(x\otimes x)%
+%%\\
+%%&=
+%%\rho(\phi_{n-i+1}+d\Delta_{n-i}+\Delta_{n-i}d)D^0(x\otimes x)%
+%%\\
+%%% Left hand side
+%%% Relation
+%%&=
+%%% Right hand side
+%%d\rho\Delta_{n-i}(x\otimes x)+\rho\Delta_{n-i}(1+\twist)D^0(dx\otimes x)%
+%%% Comment
+%%\end{alignat*}
+%%where the term corresponding to $\phi_{n-i+1}$ vanished for dimension reasons, and we used the fact that $D^0$ is a chain map.
+%%\[\rho\Delta_{n-i+1}(1+\twist)D^0(x\otimes x)=\rho(1+\twist)\Delta_{n-i+1}D^0(x\otimes x)\]
+%The middle line is our formula derived for $d(\textup{DUB}_i(x))+\textup{DUB}_i(dx)$ (\textbf{at least when $i<<n$}).
 \end{proof}
 %%%AN EARLY, SIMPLISTIC CALCULATION
 %It's not too hard to check%footnote: 
