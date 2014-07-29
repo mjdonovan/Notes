@@ -5559,10 +5559,47 @@ I guess that if we push this all the way to $r=s-i$, you've used a homotopy with
 \end{Adams sseq operations}
 
 \begin{letter to Dwyer}
-\section{Operations in the Adams spectral sequence}
-\subsubsection*{Cosimplicial Eilenberg-Zilber map}
-Let $\{D^k\}$ be a special cosimplicial Eilenberg-Zilber map, i.e.\ natural maps
-\[D^k:(CR\otimes CS)_{-i-k}\to N(R\otimes S)_{-i}\textup{\ \ for $i,k\geq0$}\]
+
+\noindent Dear Bill,
+
+I'm sorry to have taken a while to put this stuff into writing. I figured out a few details since our last correspondence, and I thought that it made sense for me to make my calculations precise.
+
+Let me explain the situation, as I've understood it. If $X$ is a mixed simplicial vectorspace, filtered by cosimplicial degree, there are three different types of operations $E^r_{-s,t}(X)\to E^?_{-?,?}(X\otimes_{\Sigma_2}X)$:
+\begin{itemise}
+\setlength{\parindent}{.25in}
+\item \textbf{Steenrod operations:} $\Sq^i_\textup{alg}:E^?_{-s,t}(X)\to E^?_{-s-i,2t}(X\otimes_{\Sigma_2}X)$ (with certain indeterminacy and survival properties), represented on the $s$-line by a function $\textup{SQ}^{i,s}$, defined for all $i\geq0$ but zero unless $i\leq s$ (I think), and given by the correct formula on $E^2$;
+\item \textbf{higher divided square operations doubling filtration:} $\delta_i^\textup{dub}:E^?_{-s,t}(X)\to E^?_{-2s,t+s+i}(X\otimes_{\Sigma_2}X)$, defined for $i\leq t-s$, which I presume are zero for $s>0$, but agree with the `target' homotopy operations $\pi_*(X^{-1})\to \pi_*(X^{-1}\otimes_{\Sigma_2}X^{-1})$ when $X$ is coaugmented. The operation $\delta_i^\textup{dub}$ is represented by a function `$\textup{DUB}_i$'
+\item \textbf{higher divided square operations preserving filtration:}
+$\delta_i^\textup{alg}:E^?_{-s,t}(X)\to E^?_{-s,t+i}(X\otimes_{\Sigma_2}X)$, defined for $i<t$ (with indeterminacy and survival properties unstudied), represented by a function $\textup{DEL}_{i}$.
+\end{itemise}
+The chain-level calculation which tells you about differentials on $\delta_i^\textup{alg}x$ is:
+\begin{prop*}
+For $2\leq i<t$ and $x\in Z^1_{-s,t}$:
+\[d(\textup{DEL}_i(x))+ \textup{DEL}_i(dx)=\begin{cases}
+\textup{SQ}^{t-i+1,s}(x),&\textup{if }n+1\leq i \leq t-1;\\
+d(\textup{DUB}_i(x)),&\textup{if }i=n;\\
+d(\textup{DUB}_i(x))+\textup{DUB}_i(dx),&\textup{if }2\leq i\leq n-1.
+\end{cases}\]
+\end{prop*}
+This implies, for example, that if $x$ is a permanent cycle of dimension $n=t-s$, and $n<i\leq t-1$ (so that $x$ should support $\delta_i$ on $E^2$ but not on the target), then $d_{t-i+1}(\delta_i^\textup{alg}x)=\Sq^{t-i+1}_\textup{alg}x$. This gives a span of differentials from `excess $\delta^\textup{alg}$'-operations to steenrod operations like one might have hoped.
+
+If $dx$ is in filtration too low, it appears that $\delta_i^\textup{alg}x$ will support an earlier differential to $\delta_i^\textup{alg}(d_rx)$, and I'm guessing that in that case the Steenrod operation will end up supporting a differential.
+
+This has all been rather fun, but here's my current problem: I haven't been able to find a homotopy between $\textup{DEL}_i$ and $\textup{DUB}_i$. It would only be important to prove that $\textup{DEL}_i(x)$ is homologous to $\textup{DUB}_i(x)$ for permanent cycles $x$ (satisfying $i\leq n$), but this evades me. It seems like \ref{boundaryVsBBD} below is providing ``twice'' the required null-homology of $\textup{DEL}_i(x)-\textup{DUB}_i(x)$, when $dx=0$. To be explicit, when $dx=0$, $\textup{DEL}_i(x)=\mathbb{D}_{n-i}(x\otimes x)$, and $\textup{DUB}_i(x)=\Delta_{n-i}D^0(x\otimes x)$, and one has an equation
+\[d\mathbb{D}_{n-i-1}+\mathbb{D}_{n-i-1}d=\mathbb{D}_{n-i}+T\mathbb{D}_{n-i}T +\Delta_{n-i}D^0+\Delta_{n-i}TD^0T,\]
+where $T$ is always the available symmetry isomorphism. Applying this equation to $x\otimes x$, and passing to $\Sigma_2$-coinvariants via the map $\rho:C(X\otimes X)\to C(X\otimes_{\Sigma_2} X)$, we have
+\[(d\mathbb{D}_{n-i-1}+\mathbb{D}_{n-i-1}d)(x\otimes x)=(\mathbb{D}_{n-i}+\mathbb{D}_{n-i}T)(x\otimes x)+\Delta_{n-i}(D^0+T D^0 T)(x\otimes x).\]
+Almost, but not quite! Do you have any words of wisdom? Do you think I have the right operations?
+
+Cheers,
+
+ Michael.
+
+\section*{Operations in the Adams spectral sequence}
+\subsubsection*{Higher cosimplicial Eilenberg-Zilber map}
+Let $\{D^k\}$ be a special cosimplicial Eilenberg-Zilber map, i.e.\  maps
+\[D^k:(CR\otimes CS)_{-i-k}\to N(R\otimes S)_{-i}\textup{\ \ for $i,k\geq0$},\]
+natural in cosimplicial vectorspaces $R,S$,
 with the properties:
 \begin{itemise}
 \setlength{\parindent}{.25in}
@@ -5571,20 +5608,30 @@ with the properties:
 \item the restriction of $D^k$ to $C_{-i}R\otimes C_{-j}S$ is zero unless $i\geq k$ and $j\geq k$; and
 \item $D^k$ maps $C_{-k}R\otimes C_{-k}S$ identically onto $C_{-k}(R\otimes S)$.
 \end{itemise}
-%It is a useful convention to define $D^i=0$ for $i<0$.
-\subsubsection*{Higher simplicial Eilenberg-Mac Lane maps}
-For simplicial vectorspaces $U,V$, let $\{\Delta_k\}$ be a collection of higher simplicial Eilenberg-Mac Lane maps, i.e.\ maps
+It is a natural convention to define $D^k=0$ for $k<0$.
+\subsubsection*{Higher simplicial Eilenberg-Mac Lane map}
+Let $\{\Delta_k\}$ be a higher simplicial Eilenberg-Mac Lane map, i.e.\ maps
 \[\Delta_k:(CU\otimes CV)_{i+k}\to N(U\otimes V)_i\textup{\ \ for $0\leq k\leq i$}\]
-such that
+such that the identities
 \[\Delta_k+T\Delta_kT=\phi_k+\begin{cases}
 \Delta_{k-1}\partial+\partial\Delta_{k-1},&\textup{if }k\geq1;\\
 \Delta,&\textup{if }k=0.
 %\\,&\textup{if }
 \end{cases}
 \]
-where $\Delta:CU\otimes CV\to C(U\times V)$ is a chain homotopy equivalence inducing the identity in dimension zero, and $\phi_k$ is the map $(CU\otimes CV)_{i+k}\to C(U\otimes V)_i$ which vanishes except on $U_k\otimes V_k$, where its value is just the projection $U_k\otimes V_k\to N(U\times V)_k$. Note that $\Delta$ necessarily commutes with symmetry isomorphisms.
+hold on classes of dimension at least $2k$, and:
+\begin{itemise}
+\setlength{\parindent}{.25in}
+\item $\Delta:CU\otimes CV\to C(U\times V)$ is a chain homotopy equivalence inducing the identity in dimension zero; and
+\item $\phi_k$ is the map $(CU\otimes CV)_{i+k}\to C(U\otimes V)_i$ which vanishes except on $U_k\otimes V_k$, where its value is just the projection $U_k\otimes V_k\to N(U\times V)_k$.
+\end{itemise}
+Note that $\phi$ commutes with symmetry isomorphisms, and thus so must $\Delta$.
 
-\subsubsection*{Mixed simplicial algebras over $\F_2$}
+It is not a natural convention to regard $\Delta_k$ as zero where it is not defined, however, we will perform this abuse shortly for notational convenience. In this case, we will be able to use the equation
+\[(d\Delta_k+\Delta_kd)z=(\phi_{k+1}+(1+\twist)\Delta_{k+1})z\]
+whenever $k\geq0$ and the simplicial dimension of $z$ does not equal either of $2k$ and $2k+1$.
+
+\subsubsection*{Mixed simplicial vectorspaces over $\F_2$}
 For mixed simplicial vector spaces $X$ and $Y$, write $C(X\otimes_\textup{v}Y)$ for the double complex which in degree $(\fraks,\frakt)$ equals the direct sum $\bigoplus_{t+t'=\frakt}X_t^\fraks\otimes X_{t'}^\fraks$. The following vectorspace maps are given by prolonging $D^k$, $\Delta$, $\Delta_k$ and $\psi_k$:
 \begin{align*}
 {D}^k:(CX\otimes CY)_{-\fraks-k,\frakt}&\to C(X\otimes_\textup{v}Y)_{-\fraks,\frakt}&\quad&\textup{(zero unless $k\leq \fraks$)}\\
@@ -5593,12 +5640,10 @@ For mixed simplicial vector spaces $X$ and $Y$, write $C(X\otimes_\textup{v}Y)$ 
 {\phi}_k:C(X\otimes_\textup{v} Y)_{-\fraks,\frakt+k}&\to C(X\otimes Y)_{-\fraks,\frakt}&\quad&\textup{for $0\leq k\leq \frakt$}\\
 {\rho}:C(X\otimes X)_{-\fraks,\frakt}&\to C(X\otimes_{\Sigma_2} X)_{-\fraks,\frakt}&\quad&\textup{(proj onto coinvariants)}\\
 \end{align*}
-Actually, let's define these on the entire double complex by just defining them to be zero in dimensions they aren't supposed to be defined. Also, we'll always write $T$ for symmetry isomorphisms, and write ``$\twist F$'' as shorthand for the function $TFT$. Although this notation has potential to be ambiguous, whenever we write $\sigma FG$, for functions $F$ and $G$, we mean $(\sigma F)G$, not $\sigma(FG)$.
+Actually, let's define these on the entire double complex by just defining them to be zero in dimensions they aren't supposed to be defined. Also, we'll always write $T$ for symmetry isomorphisms, and write ``$\twist F$'' as shorthand for the function $TFT$. Although this notation is potentially ambiguous, whenever we write $\sigma FG$, for functions $F$ and $G$, we mean $(\sigma F)G$, not $\sigma(FG)$.
 
-From now on, let $X$ be a mixed simplicial commutative non-unital $\F_2$-algebra. We'll be in the business of constructing spectral sequence operations, which I'd like to think of as maps $E^r(X)\to E^r(X\otimes_{\Sigma_2}X)$.
-
-\subsubsection*{On the equation $d\Delta_k+\Delta_kd=\phi_{k+1}+(1+\twist)\Delta_{k+1}$}
-This equation holds on classes of simplicial dimension at least $2(k+1)$. It also holds trivially on classes of dimension less than $2k$. Thus it only fails in dimensions $2k$ and $2k+1$.
+\subsubsection*{Instead of mixed simplicial algebras over $\F_2$}
+Instead of letting $X$ be a mixed simplicial commutative non-unital $\F_2$-algebra, I'd prefer to constructing spectral sequence operations as maps $E^r_{-s,t}(X)\to E^?_{?,?}(X\otimes_{\Sigma_2}X)$, for $X$ simply a mixed simplicial vectorspace.
 
 \subsection{Steenrod operations}
 In this case, the `surprising' operations are easy to define. That is, we can define Steenrod operations $\Sq^i_\textup{alg}:E^r_{-s,t}(X)\to E^r_{-s-i,2t}(X\otimes_{\Sigma_2}X)$ for all $i\geq 0$ and $r\geq2$, which survive to $E^{2r-1}$ and have indeterminacy vanishing by $E^{2r-2}$, using the chain-level formula:
@@ -5673,14 +5718,14 @@ Let's calculate the leading term of $\textup{DEL}_{i}(x)$ whenever $2\leq i<n$. 
 
 \newcommand{\twolinesum}[2]{\mathop{\sum_{\mathclap{#1}}}_{\mathclap{#2}}}
 \newcommand{\onelinesum}[1]{\sum_{\mathclap{#1}}}
-\subsubsection*{Clean formula for the boundary}
+\subsubsection*{Formula for the boundary}
 \begin{lem}\label{boundaryVsBBD}
 For all $r$, positive or otherwise, the equation:
-\[d\mathbb{D}_r+\mathbb{D}_rd=(1+\twist)\mathbb{D}_{r+1}+\Delta\sigma D^{-r-1}+\Delta_{r+1}(1+\twist)D^0+\sum_{\mathclap{\alpha-\beta=r+1}} \phi_{\alpha}\sigma^{\alpha-1}D^{\beta}\]
-holds when applied to an element $z$ of $(CX\otimes CX)_{-s,t}$ with $t-s\geq 2(r+1)$.
+\[d\mathbb{D}_r+\mathbb{D}_rd=(1+\twist)\mathbb{D}_{r+1}+\Delta\sigma D^{-r-1}+\Delta_{r+1}(1+\twist)D^0\]
+holds when applied to an element $z$ of $(CX\otimes CX)_{n}$ with $n> 2(r+1)$.
 \end{lem}
 \begin{proof}We'll need to use our formula for $d\Delta_\alpha+\Delta_\alpha d$ applied to $\twist^\alpha D^\beta(z)$. %, where $z\in (CX\otimes CX)_{-s,t}$ is the element to which we're applying the above equation.
-The formula holds unless $t=2\alpha+e$, where $e\in\{0,1\}$, in which case $\beta=(t-e)/2-r$. However, $D^\beta(z)$ is zero unless $\beta\leq s/2$, so the formula can only fail if $(t-e)/2-r\leq s/2$. As we've assumed that $t-s\geq2(r+1)$, this does not occur.
+The formula holds unless $t=2\alpha+e$, where $e\in\{0,1\}$, in which case $\beta=(t-e)/2-r$. However, $D^\beta(z)$ is zero unless $\beta\leq s/2$, so the formula can only fail if $(t-e)/2-r\leq s/2$. As we've assumed that $n=t-s>2(r+1)$, this does not occur.
 %
 % Now $D^\beta(z)$ is zero unless $\beta\leq 2s$, so that the term can be ignored unless $\alpha=\beta+r\leq 2s+r$. As $t\geq 2(2s+r+1)\geq 2(\alpha+1)$, we can apply the rule.
 \begin{alignat*}{2}
@@ -5697,7 +5742,9 @@ The formula holds unless $t=2\alpha+e$, where $e\in\{0,1\}$, in which case $\bet
 &\ \ \ \ \ \ \ \ \ \ \ +
 ((1+\twist)\Delta_{0}+\phi_{0})\twist D^{-r-1}+\Delta_{r+1}(1+\twist)\twist^\alpha D^{0}%
 \end{alignat*}
-which equals the $\textup{RHS}$, using the identity $(1+\twist)\Delta_{0}+\phi_{0}=\Delta$, and the observations that $(1+\twist)\twist^\alpha F=(1+\twist)F$ and $(1+\twist)F\twist G+F(1+\twist)G=(1+\twist)(FG)$.
+Using the identity $(1+\twist)\Delta_{0}+\phi_{0}=\Delta$, and the observations that $(1+\twist)\twist^\alpha F=(1+\twist)F$ and $(1+\twist)F\twist G+F(1+\twist)G=(1+\twist)(FG)$, one sees that this differs from the desired value only by the term
+\[\sum_{\mathclap{\alpha-\beta=r+1}} \phi_{\alpha}\sigma^{\alpha-1}D^{\beta}(z)=\sum_{\mathclap{\alpha-\beta=r+1}} \phi_{\alpha}\sigma^{\alpha-1}D^{\alpha-r-1}(z_{2\alpha}^{2\alpha-n})\]
+but the cosimplicial degree $2\alpha-n$ is less than $2(\alpha-r-1)$, and $\{D^k\}$ is special, so that these terms vanish.
 \end{proof}
 \begin{cor}
 For $2\leq i<t$ and $x\in Z^1_{-s,t}$:
@@ -5720,25 +5767,25 @@ We may apply \ref{boundaryVsBBD} to calculate $d\mathbb{D}_{n-i}(x\otimes x)$ an
 &=
 \rho\Bigl\{\mathbb{D}_{n-i}d(x\otimes x)+(1+\twist)\mathbb{D}_{n-i+1}(x\otimes x)+{}
 \\
-&\ \ \ \ \ \ \ \ \ +\bigl(\Delta\sigma D^{i-n-1}+\Delta_{n-i+1}(1+\twist)D^0+\smash{\sum_{\mathclap{\alpha-\beta=n-i+1}}}\  \phi_{\alpha}\sigma^{\alpha-1}D^{\beta}\bigr)(x\otimes x)\Bigr\}+{}%
+&\ \ \ \ \ \ \ \ \ +\bigl(\Delta\sigma D^{i-n-1}+\Delta_{n-i+1}(1+\twist)D^0\bigr)(x\otimes x)\Bigr\}+{}%
 \\
 &\ \ +\rho\Bigl\{(1+\twist)\mathbb{D}_{n-i}(dx\otimes x)+{}
 \\
-&\ \ \ \ \ \ \ \ \ +\bigl(\Delta\sigma D^{i-n}+\Delta_{n-i}(1+\twist)D^0+\smash{\sum_{\mathclap{\alpha-\beta=n-i}}}\ \phi_{\alpha}\sigma^{\alpha-1}D^{\beta}\bigr)(dx\otimes x)\Bigr\}
+&\ \ \ \ \ \ \ \ \ +\bigl(\Delta\sigma D^{i-n}+\Delta_{n-i}(1+\twist)D^0\bigr)(dx\otimes x)\Bigr\}
 \end{alignat*}
 %The term $\rho(1+\twist)\mathbb{D}_{n-i+1}(x\otimes x)$ is zero, and the first terms of each of the first and third line cancel. What remains is the following sum:
-The contents of the first and third lines cancel, and what remains is a sum of three summands:
+The contents of the first and third lines cancel, leaving the sum of:
+%\begin{alignat*}{2}
+%\textup{term A }
+%&=\ 
+%\sum_{\mathclap{\alpha-\beta=n-i+1}} \rho\phi_{\alpha}\sigma^{\alpha-1}D^{\beta}(x\otimes x)+\sum_{\mathclap{\alpha-\beta=n-i}} \rho\phi_{\alpha}\sigma^{\alpha-1}D^{\beta}(dx\otimes x)%
+%\\
+%&=\ 
+%\sum_{\mathclap{\alpha-\beta=n-i+1}} \rho\phi_{\alpha}\sigma^{\alpha-1}D^{\alpha-n+(i-1)}(x_\alpha^{\alpha-n}\otimes x_\alpha^{\alpha-n})+\textit{similar}%
+%\end{alignat*}
+%and everything here vanishes, as the $D^k$ are special and $i\geq2$.
 \begin{alignat*}{2}
-\textup{term A }
-&=\ 
-\sum_{\mathclap{\alpha-\beta=n-i+1}} \rho\phi_{\alpha}\sigma^{\alpha-1}D^{\beta}(x\otimes x)+\sum_{\mathclap{\alpha-\beta=n-i}} \rho\phi_{\alpha}\sigma^{\alpha-1}D^{\beta}(dx\otimes x)%
-\\
-&=\ 
-\sum_{\mathclap{\alpha-\beta=n-i+1}} \rho\phi_{\alpha}\sigma^{\alpha-1}D^{\alpha-n+(i-1)}(x_\alpha^{\alpha-n}\otimes x_\alpha^{\alpha-n})+\textit{similar}%
-\end{alignat*}
-and everything here vanishes, as the $D^k$ are special and $i\geq2$.
-\begin{alignat*}{2}
-\textup{term B}
+\textup{summand A}
 &=
 \rho\Delta(D^{i-n-1}(x\otimes x)+D^{i-n}(x\otimes dx))%
 \\
@@ -5746,13 +5793,13 @@ and everything here vanishes, as the $D^k$ are special and $i\geq2$.
 \begin{cases}
 \textup{SQ}^{t-i+1,s}(x),&\textup{if }n+1\leq i \leq t-1;\\
 \rho\Delta D^0(x\otimes dx),&\textup{if }i=n;\\
-0,&\textup{if }2\leq i\leq n-1.
-\end{cases}
-\end{alignat*}
-And finally, using \ref{htpyInducedByBUB}, we have
-\begin{alignat*}{2}
-\textup{term C}
-&:=
+0,&\textup{if }2\leq i\leq n-1,
+\end{cases}\\
+%\end{alignat*}
+%And finally, using \ref{htpyInducedByBUB}, we have
+%\begin{alignat*}{2}
+\textup{summand B}
+&=
 \rho\Delta_{n-i+1}(1+\twist)D^0(x\otimes x)+\rho\Delta_{n-i}(1+\twist)D^0(dx\otimes x)%
 \\
 &=
@@ -5763,7 +5810,7 @@ d(\textup{DUB}_i(x))+\rho\Delta D^0(x\otimes dx),&\textup{if }i=n;\\
 d(\textup{DUB}_i(x))+\textup{DUB}_i(dx),&\textup{if }2\leq i\leq n-1.
 \end{cases}
 \end{alignat*}
-Now the term appearing here when $i=n+1$ is actually zero, as it equals $\rho\phi_0D^0(x\otimes x)$, which vanishes, as $t>i\geq2$.
+Now the term appearing in summand B when $i=n+1$ is actually zero, as it equals $\rho\phi_0D^0(x\otimes x)$, which vanishes, as $t>i\geq2$.
 %\begin{alignat*}{2}
 %&
 %\rho\Delta(D^{i-n-1}(x\otimes x)+D^{i-n}(x\otimes dx))+\\
