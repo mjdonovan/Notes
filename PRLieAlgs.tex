@@ -5711,10 +5711,14 @@ Now write $\mathbb{D}_r$ for the sum (for any $r$, positive or otherwise):
 %\\,&\textup{if }
 \end{cases}
 \]
-Now suppose that $x\in E^r_{-s,t}$. Let's try to define $\delta_i^\textup{alg}(x)$ for $n<i<t$, where $n=t-s=|x|$. I believe that the correct formula may be
+Now suppose that $x\in E^r_{-s,t}$. One may try to define $\delta_i(x)\in E^?_{-s,t+i}$ for $2\leq i<t$, writing $n=t-s=|x|$. I believe that the correct formula may be
 \[x\mapsto \textup{DEL}_{i}(x):=\rho(\mathbb{D}_{n-i}(x\otimes x)+\mathbb{D}_{n-i-1}(dx\otimes x)).\]
 \subsubsection*{Correctness at $E^2$}
-Let's calculate the leading term of $\textup{DEL}_{i}(x)$ whenever $2\leq i<n$. Write $x=x^s_t+x^{>s}_{>t}$, where $x^s_t\in X^s_t$, and $x^{>s}_{>t}$ lies in filtration $s+1$. Then the leading term will be $\rho\Delta_{t-i}\twist^{t-i}D^s (x^s_t\otimes x^s_t)$. Moreover, as $D$ is \emph{special}, this equals $\rho\overline{\Delta}_{t-i}(x^s_t\otimes x^s_t)\in C(X\otimes_{\Sigma_2} X)_{-s,t+i}$ (where we think of $(x^s_t\otimes x^s_t)$ as an element of $C(X\otimes_\textup{v}X)_{-s,2t}$), so that `$x^s_t\mapsto D^s(x^s_t\otimes x^s_t)$' implements the assignment `$z\mapsto z\otimes z$' at the $E^1$-level, and we're getting a representative for the obvious $E^2$-level $\delta_i$ operation.
+As $E^1$ is obtained from $E^0$ by taking homology in the simplicial direction, there are $\delta$-operations on $E^1$. They are unstable with respect to internal degree $t$, not with respect to total degree $n$. All of these operations are linear except for the top operation, and commute with the differentials in the cosimplicial direction. Thus, we obtain operations $\delta_i^\textup{alg}:E^2_{-s,t}(X)\to E^2_{-s,t+i}(X\otimes_{\Sigma_2}X)$ for $2\leq i<t$.
+
+At the chain level, what we're doing here is taking a `bidirectional cycle', i.e.\ $z\in C_{-s,t}X$ such that $\partial_\textup{sim}z=0$ and $d_\textup{cos}z=0$, and forming $\rho\Delta_{t-i}(z\otimes z)$ after viewing $z\otimes z$ as lying in $C(X\otimes_\textup{v}X)_{-s,2t}$.
+
+Let's calculate the leading term of $\textup{DEL}_{i}(x)$ whenever $2\leq i<n$. Write $x=x^s_t+x^{>s}_{>t}$, where $x^s_t\in X^s_t$, and $x^{>s}_{>t}$ lies in filtration $s+1$. Then the leading term will be $\rho\Delta_{t-i}\twist^{t-i}D^s (x^s_t\otimes x^s_t)$. Moreover, as $D$ is \emph{special}, this equals $\rho{\Delta}_{t-i}(x^s_t\otimes x^s_t)\in C(X\otimes_{\Sigma_2} X)_{-s,t+i}$, where we indeed think of $(x^s_t\otimes x^s_t)$ as an element of $C(X\otimes_\textup{v}X)_{-s,2t}$. Thus `$x^s_t\mapsto \twist^{t-i}D^s(x^s_t\otimes x^s_t)$' implements the assignment `$z\mapsto z\otimes z$' discussed above, and we're getting a representative for $\delta_i^\textup{alg}(x)$.
 
 \newcommand{\twolinesum}[2]{\mathop{\sum_{\mathclap{#1}}}_{\mathclap{#2}}}
 \newcommand{\onelinesum}[1]{\sum_{\mathclap{#1}}}
@@ -5880,10 +5884,23 @@ Now the term appearing in summand B when $i=n+1$ is actually zero, as it equals 
 %\[\sum\phi_j\sigma^{j-1}D^{j+i-n-1}(x\otimes x)=\sum\phi_j\sigma^{j-1}D^{j+i-n-1}(x_j^{j-n}\otimes x_j^{j-n})=0,\]
 %as $D^{j-n+(i-1)}(x_j^{j-n}\otimes x_j^{j-n})=0$ (since $i\geq2$, and the $D^k$ are special). This shows that the first summand is zero. For the second, we end up considering terms $D^{j-n+i}(T^{j-1}((dx)_{j}^{j-n+1}\otimes x_j^{j-n}))$, which vanish as before.}.
 
+\subsection{Rewriting $d\textup{DEL}_i+\textup{DEL}_id$}
+Let's examine the quantity $\rho\Delta_{n-i+1}(1+\twist)D^0(x\otimes x)+\rho\Delta_{n-i}(1+\twist)D^0(dx\otimes x)$
+\begin{alignat*}{2}
+&
+\rho\Delta_{n-i+1}(1{+}\twist)D^0(x\otimes x)+\rho\Delta_{n-i}(1{+}\twist)D^0(dx\otimes x)\\
+=&\rho(1{+}\twist)\Delta_{n-i+1}D^0(x\otimes x)+\rho\Delta_{n-i}(1{+}\twist)D^0(dx\otimes x)\\
+=&\rho(\Delta_{n-i}d+d\Delta_{n-i}+\psi_{n-i+1})D^0(x\otimes x)+\rho\Delta_{n-i}(1{+}\twist)D^0(dx\otimes x)\\
+=&\rho\Delta_{n-i}D^0(dx\otimes x+x\otimes dx) + d\Delta_{n-i}D^0(x\otimes x)+\Delta_{n-i}D^0(dx\otimes x)+\Delta_{n-i}\twist D^0(dx\otimes x)\\
+=&\rho\Delta_{n-i}D^0(x\otimes dx) + d\Delta_{n-i}D^0(x\otimes x)+\Delta_{n-i}\twist D^0(dx\otimes x)\\
+=&d\Delta_{n-i}D^0(x\otimes x)+\rho(1{+}\twist)\Delta_{n-i}D^0(x\otimes dx)  \\
+=&d\Delta_{n-i}D^0(x\otimes x)+\rho d\Delta_{n-i-1}D^0(x\otimes dx)+\Delta_{n-i-1}dD^0(x\otimes dx)\\
+=&d(\Delta_{n-i}D^0(x\otimes x)+\Delta_{n-i-1}D^0(x\otimes dx))+\Delta_{n-i-1}D^0(dx\otimes dx)
+\end{alignat*}
+which is exactly what we expected. This was just a tedious back-verification.
 
 
-
-\subsection{$\textup{DEL}+\textup{DUB}$}
+\subsection{$\textup{DEL}+\textup{DUB}$ preserves homologies of cycles}
 Suppose that $x$ is a permanent cycle of dimension $n$, and $y$ has dimension $n+1$.
 \begin{prop}
 $\textup{DpD}_i(x)\sim \textup{DpD}_i(x+dy)$ for $i<n$.
@@ -5921,8 +5938,6 @@ d\Delta_{n-i}\twist D^0(y\cdot y)&=
 \[\textup{A3}+\textup{B2}=\textup{A6}+\textup{B5}+\textup{C2}= \textup{B6}+\textup{C3}=0\]
 \end{proof}
 
-\pagebreak
-
 \subsection{Alternating $\delta$ operations doubling filtration}
 For $x\in CX_{n}$, define
 \[\textup{DUB}'_i(x):=\rho(\Delta_{n-i}\twist^{n-i}D^0(x\otimes x)+\Delta_{n-i-1}\twist^{n-i-1}D^0(x\otimes dx))\textup{\quad for $i<n$}\]
@@ -5956,7 +5971,46 @@ In the case $i=n$, the second line in the expression for $d(\textup{DUB}'_i(x))$
 $\rho (\phi_{n-i}+(1+\twist)\Delta_{n-i})\twist^{n-i-1}D^0(x\otimes dx)$ equals $\rho\Delta D^0(dx\otimes x)$.
 \end{proof}
 
+\subsection{$\textup{DEL}+\textup{DUB}'$ preserves homologies of cycles}
+Suppose that $x$ is a permanent cycle of dimension $n$, and $y$ has dimension $n+1$.
+\begin{prop}
+$\textup{DpD}'_i(x)\sim \textup{DpD}'_i(x+dy)$ for $i<n$.
+\end{prop}
+\begin{proof}
+{\small
+\begin{alignat*}{4}
+d\mathbb{D}_{n-i-1}(x\cdot dy)&=
+\cancel{\mathbb{D}_{n-i-1}(dx\cdot dy)}&&+
+(1{+}\twist)\mathbb{D}_{n-i}(x\cdot dy)&&+
+\Delta_{n-i}(1{+}\sigma)D^0(x\cdot dy)\\
+d\mathbb{D}_{n-i}(dy\cdot y)&=
+\mathbb{D}_{n-i}(dy\cdot dy)&&+
+(1{+}\twist)\mathbb{D}_{n-i+1}(dy\cdot y)&&+
+\Delta_{n-i+1}(1{+}\sigma)D^0(dy\cdot y)\\
+d\mathbb{D}_{n-i+1}(y\cdot y)&=
+\mathbb{D}_{n-i+1}d(y\cdot y)&&+
+\cancel{(1{+}\twist)\mathbb{D}_{n-i+2}(y\cdot y)}&&+
+\Delta_{n-i+2}(1{+}\sigma)D^0(y\cdot y)\\
+d\Delta_{n-i-1}\twist^{n-i-1} D^0(x\cdot dy)&=
+\cancel{\Delta_{n-i-1}\twist^{n-i-1} D^0(dx\cdot dy)}&&+
+(1{+}\twist)\Delta_{n-i}\twist^{n-i-1} D^0(x\cdot dy)&&+
+\cancel{\phi_{n-i}\twist^{n-i-1} D^0(x\cdot dy)}\\
+d\Delta_{n-i}\twist^{n-i}D^0(dy\cdot y)&=
+\Delta_{n-i}\twist^{n-i}D^0(dy\cdot dy)&&+
+(1{+}\twist)\Delta_{n-i+1}\twist^{n-i}D^0(dy\cdot y)&&+
+\cancel{\phi_{n-i+1}\twist^{n-i}D^0(dy\cdot y)}\\
+d\Delta_{n-i}\twist^{n-i-1} D^0(y\cdot y)&=
+\Delta_{n-i}\twist^{n-i-1} D^0d(y\cdot y)&&+
+(1{+}\twist)\Delta_{n-i+2}\twist^{n-i-1} D^0(y\cdot y)&&+
+\cancel{\phi_{n-i+2}\twist^{n-i-1} D^0(y\cdot y)}
+\end{alignat*}}
+\[\textup{A2}+\textup{B1}=\mathbb{D}_{n-i}((x+dy)\cdot(x+dy)-x\cdot x)\]
+\[\textup{A5}+\textup{B4}+\textup{C1}=\Delta_{n-i}\twist^{n-i}D^0((x+dy)\cdot(x+dy)-x\cdot x)\]
+\[\textup{A3}+\textup{B2}=\textup{A6}+\textup{B5}+\textup{C2}= \textup{B6}+\textup{C3}=0\]
+\end{proof}
 
+\subsection{Thought}
+Could it be that we can define the operations differently on the image of cycles in homotopy, and the operations I'm defining all over the place really do converge to zero? Then the way to recover the homotopy of the sphere would be to do it in the sseq of an iterated symmetric square, then finally to map out to the underlying sseq with an iterated shift.
 
 
 
