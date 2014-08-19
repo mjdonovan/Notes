@@ -5643,7 +5643,26 @@ For mixed simplicial vector spaces $X$ and $Y$, write $C(X\otimes_\textup{v}Y)$ 
 Also, we'll always write $T$ for symmetry isomorphisms, and write ``$\twist F$'' as shorthand for the function $TFT$. Although this notation is potentially ambiguous, whenever we write $\sigma FG$, for functions $F$ and $G$, we mean $(\sigma F)G$, not $\sigma(FG)$.
 
 \subsubsection*{Instead of mixed simplicial algebras over $\F_2$}
-Instead of letting $X$ be a mixed simplicial commutative non-unital $\F_2$-algebra, I'd prefer to construct spectral sequence operations as maps $E^r_{-s,t}(X)\to E^?_{?,?}(X\otimes_{\Sigma_2}X)$, for $X$ simply a mixed simplicial vectorspace.
+Instead of letting $X$ be a mixed simplicial commutative non-unital $\F_2$-algebra, I'd prefer to construct spectral sequence operations as maps $E^r_{-s,t}(X)\to E^?_{?,?}(X\otimes_{\Sigma_2}X)$, for $X$ simply a mixed simplicial vectorspace. I'll also assume that $X$ admits a coaugmentation $X^{-1}_\bullet\to X^\bullet_\bullet$ from a simplicial algebra $X^{-1}_\bullet$, and that this coaugmentation induces an isomorphism on total homology.
+
+\subsection{Products}
+We can define products in the spectral sequence using the chain-level formula
+\[x\otimes y\mapsto\rho\Delta D^0(x\otimes y).\]
+As both $\Delta$ and $D^0$ are chain maps preserving filtration, this constructs operations $E^t_{-s,t}(X)\otimes E^r_{-s',t'}(X)\to E^r_{-s-s',t+t'}(X\otimes_{\Sigma_2}X)$ satisfying a Liebnitz formula.
+\begin{prop}
+Suppose that $x\in E^r_{-s,t}(X)$ is a permanent cycle such that $t-s>0$. Then $x\times x$ is eventually hit by a differential. That is, $x\times x\in E^r_{-2s,2t}(X\otimes_{\Sigma_2}X)$ is a permanent cycle which becomes zero by $E^\infty$.
+\end{prop}
+\begin{proof}
+Since the spectral sequence converges, $x$ can be written as $x_0+dy$ for $x_0\in NX_{0,n}$ such that $dx_0=0$ and $y\in NX_{n+1}$. Now $x\times x$ is represented by
+\[\rho\Delta D^0(x_0\otimes x_0)+\rho\Delta D^0(dy\otimes x_0+x_0\otimes dy+dy\otimes dy).\]
+Now the first term here vanishes, as
+\[\rho\Delta D^0(x_0\otimes x_0)=\rho(\phi_0 D^0(x_0\otimes x_0)+\Delta_0 D^0(x_0\otimes x_0)+\Delta_0 TD^0(x_0\otimes x_0)),\]
+and $\phi_0D^0(x_0\otimes x_0)=0$ as $n>0$, and $TD^0(x_0\otimes x_0)=D^0(x_0\otimes x_0)$ since $\{D^k\}$ is special. The remaining term may be expressed as the boundary
+\[d(\rho\Delta(D^0(y\otimes dy)+D^1(dy\otimes x))).\qedhere\]
+
+
+\end{proof}
+
 
 \subsection{Steenrod operations}
 In this case, the Steenrod operations are the `surprising' operations, and they are are easy to define. We will use the chain-level formula:
@@ -5679,11 +5698,11 @@ The filtration of this bounding cycle is at least $2(s-r+1)-(s-i-1)=(s+i)-(2r-3)
 
 
 \subsection{Chain level operations doubling filtration}
-For $x\in CX_{n}$, define
-\[\textup{DUB}_i(x):=\rho(\Delta_{n-i}D^0(x\otimes x)+\Delta_{n-i-1}D^0(x\otimes dx))\textup{\quad for $i<n$}\]
-and (setting $i=n$) define 
-\[\textup{DUB}_n(x):=\rho\Delta_{0}D^0(x\otimes x).\]
-These may or may not give operations on the total complex which are compatible with the $\delta$-operations on the target... These double filtration, and are \textbf{presumably} zero on $E^2_{-s,t}$ when $s>0$.
+For $x\in CX_{n}$, and any $i\geq2$, define
+\[\textup{DUB}_i(x):=\rho(\Delta_{n-i}D^0(x\otimes x)+\Delta_{n-i-1}D^0(x\otimes dx)).\]
+%and (setting $i=n$) define 
+%\[\textup{DUB}_n(x):=\rho\Delta_{0}D^0(x\otimes x).\]
+These chain level operations vanish whenever $i>n$. %may or may not give operations on the total complex which are compatible with the $\delta$-operations on the target... These double filtration, and are \textbf{presumably} zero on $E^2_{-s,t}$ when $s>0$.
 \begin{lem}\label{htpyInducedByBUB}
 For $2\leq i<n$:
 \[d(\textup{DUB}_i(x))+\textup{DUB}_i(dx)=\rho(\Delta_{n-i+1}(1+\twist)D^0(x\otimes x)+\Delta_{n-i}(1+\twist)D^0(dx\otimes x))\]
