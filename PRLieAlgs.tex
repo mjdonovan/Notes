@@ -5646,9 +5646,15 @@ Also, we'll always write $T$ for symmetry isomorphisms, and write ``$\twist F$''
 Instead of letting $X$ be a mixed simplicial commutative non-unital $\F_2$-algebra, I'd prefer to construct spectral sequence operations as maps $E^r_{-s,t}(X)\to E^?_{?,?}(X\otimes_{\Sigma_2}X)$, for $X$ simply a mixed simplicial vectorspace.
 
 \subsection{Steenrod operations}
-In this case, the `surprising' operations are easy to define. That is, we can define Steenrod operations $\Sq^i_\textup{alg}:E^r_{-s,t}(X)\to E^r_{-s-i,2t}(X\otimes_{\Sigma_2}X)$ for all $i\geq 0$ and $r\geq2$, which survive to $E^{2r-1}$ and have indeterminacy vanishing by $E^{2r-2}$, using the chain-level formula:
+In this case, the Steenrod operations are the `surprising' operations, and they are are easy to define. We will use the chain-level formula:
 \[\textup{SQ}^{i,s}:x\mapsto \rho\Delta (D^{s-i}(x\otimes x)+D^{s-i+1}(x\otimes dx)).\]
-The usual trick, along with the fact that $\Delta$ is a symmetric chain map, shows that $d(\textup{SQ}^{i,s}(x))=\rho\Delta D^{s-i+1}(dx\otimes dx)$, so that if $x\in Z^r_{-s,t}$, $\textup{SQ}^{i,s}(x)\in Z^{2r-1}_{-s-i,2t}$. To examine the indeterminacy, $x\in E^r_{-s,t}$ is determined up to boundaries of $y\in Z^{r-1}_{-(s-r+1),t-r+2}$, and the following equation%footnote:
+\begin{prop}
+For any chosen $i,s\geq0$ and $r\geq2$, the chain level operation $\textup{SQ}^{i,s}$ defines a Steenrod operation $\Sq^i_\textup{alg}:E^r_{-s,t}(X)\to E^r_{-s-i,2t}(X\otimes_{\Sigma_2}X)$, with indeterminacy vanishing by $E^{2r-2}$. For $x\in E^r_{-s,t}(X)$, $\Sq^i_\textup{alg}(x)$ survives to $E^{2r-1}$, and moreover, $d_{2r-1}(\Sq^ix)=\Sq^{i+r-1}(d_rx)$ modulo indeterminacy.
+\end{prop}
+\begin{proof}
+A calculation shows that $d(\textup{SQ}^{i,s}(x))=\rho\Delta D^{s-i+1}(dx\otimes dx)$, so that if $x\in Z^r_{-s,t}$, $\textup{SQ}^{i,s}(x)\in Z^{2r-1}_{-s-i,2t}$. This demonstrates the survival property, along with the formula commuting the $\Sq^i$ with spectral sequence differentials.
+
+To examine the indeterminacy, $x\in E^r_{-s,t}$ is determined up to boundaries of $y\in Z^{r-1}_{-(s-r+1),t-r+2}$, and the following equation%footnote:
 \footnote{Here's how to prove said equation, using analogues of \cite[(1.111),(1.112)]{MR2245560}:
 \begin{alignat*}{2}
 \textup{RHS}
@@ -5666,7 +5672,9 @@ d\rho\Delta [D^{s-i-1}(y\otimes y)+D^{s-i}(y\otimes dy)+D^{s-i+1}(dy\otimes x)]%
 +D^{s-i+1}(dy\otimes dx)]=\textup{LHS}%
 \end{alignat*}} shows how this affects $\Sq^{i}_\textup{alg}$:
 \[\textup{SQ}^{i,s}(x)-\textup{SQ}^{i,s}(x+dy)=d\rho\Delta [D^{s-i-1}(y\otimes y)+D^{s-i}(y\otimes dy)+D^{s-i+1}(dy\otimes x)].\]
-The filtration of this bounding cycle is at least $2(s-r+1)-(s-i-1)=(s+i)-(2r-3)$, so that $\Sq_\textup{alg}^i$ has indeterminacy $2r-2$ (phew).
+The filtration of this bounding cycle is at least $2(s-r+1)-(s-i-1)=(s+i)-(2r-3)$, so that $\Sq_\textup{alg}^i$ has indeterminacy vanishing by $E^{2r-2}$.
+\end{proof}
+
 
 
 
@@ -5761,9 +5769,15 @@ but the cosimplicial degree $2\alpha-n$ is less than $2(\alpha-r-1)$, and $\{D^k
 For $2\leq i\leq t-1$ and $x\in Z^1_{-s,t}$:
 \[d(\textup{DEL}_i(x))+ \textup{DEL}_i(dx)=\begin{cases}
 \textup{SQ}^{t-i+1,s}(x),&\textup{if }n+2\leq i \leq t-1;\\
-\textup{SQ}^{t-i+1,s}(x)+\rho\Delta D^0(x\otimes x),&\textup{if }i=n+1;\\
+\rho\Delta D^1(x\otimes dx),&\textup{if }i=n+1;\\
 d(\textup{DUB}_i(x)),&\textup{if }i=n;\\
 d(\textup{DUB}_i(x))+\textup{DUB}_i(dx),&\textup{if }2\leq i\leq n-1.
+\end{cases}\]
+If, moreover, $x\in Z^r_{-s,t}$:
+\[d(\underbrace{\textup{DpD}_i(x)}_{\in F_s})+ \underbrace{\textup{DpD}_i(dx)}_{\in F_{s+r}}=\begin{cases}
+\textup{SQ}^{t-i+1,s}(x)\in F_{s+(t-i+1)},&\textup{if }n+2\leq i \leq t-1;\\
+\rho\Delta D^1(x\otimes dx)\in F_{s+(s+r-1)},&\textup{if }i=n+1;\\
+0,&\textup{if }2\leq i\leq n.
 \end{cases}\]
 \end{cor}
 \begin{proof}
@@ -5824,7 +5838,7 @@ d(\textup{DUB}_i(x))+\textup{DUB}_i(dx),&\textup{if }2\leq i\leq n-1.
 \end{alignat*}
 Finally, when $i=n+1$, summand B equals 
 \[\rho\Delta_0(1+T)D^0(x\otimes x)=\rho(1+\twist)\Delta_0D^0(x\otimes x)=\rho\Delta D^0(x\otimes x),\]
-since $\rho\phi_0D^0(x\otimes x)$ vanishes as $t>i\geq2$.
+since $\rho\phi_0D^0(x\otimes x)$ vanishes as $t>i\geq2$. This cancels with the first summand in the definition of $\textup{SQ}^{t-i+1,s}(x)=\textup{SQ}^{s,s}(x)$, and the result follows.
 %\begin{alignat*}{2}
 %&
 %\rho\Delta(D^{i-n-1}(x\otimes x)+D^{i-n}(x\otimes dx))+\\
