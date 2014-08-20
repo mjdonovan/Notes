@@ -29,8 +29,8 @@
 \excludeversion{DiagramOfFunctors}
 \excludeversion{GrothendieckSpectralSequences}
 \excludeversion{Grothendieck Multiplicativity}
-\excludeversion{Adams Muliplicativity}
-\includeversion{letter to Dwyer}
+\includeversion{Adams Muliplicativity}
+\excludeversion{letter to Dwyer}
 \excludeversion{Adams sseq operations}
 \excludeversion{KoszulComplexes_n>1}
 \excludeversion{KoszulComplexes1}
@@ -4574,7 +4574,7 @@ Let $X^n:=c(K\overline{Q})^{n+1}A$, for $A$ a simplicial algebra. Then $X$ is a 
 \[\pi_*(X)\overset{\simeq}{\to}P\pi_*(QX)\overset{}{\to}\pi_*(QX)\]
 so that the $E^2$ term is derived primitives on $H_*(A)$. As such, it should admit a product. In fact, the product should shift both gradings by 1, the internal grading $*$ and the filtration grading $\bullet$.
 
-\subsection{Multiplicativity via the $D^1$-construction}
+\subsection{Filtration shift via the $D^1$-construction}
 We'll use the construction of Bousfield-Kan \cite{BK_pairings_products.pdf,BK_pairings.pdf}, applied to cosimplicial simplicial algebras $Z$:
 \[\xymatrix@R=4mm{
 D^1Z\ar[r]
@@ -4598,7 +4598,7 @@ This discussion leads us to define $\overline{D}^1X$ to be the pullback of the f
 &%r1c2
 \Lambda \overline{V}X\ar[d]^-{\lambda}
 &%r1c3
-\Lambda \overline{V}X\ar[l]^-{\Lambda(\epsilon)}
+\Lambda VX\ar[l]^-{\Lambda(\epsilon)}
 \ar[d]^-{\lambda}
 \\%r1c4
 X\wedge X\ar[ur]^-{0}
@@ -4632,6 +4632,167 @@ is an isomorphism, where we note that the condition to lie in $N^{s+1}(O)\subset
 \[\pi_{\frakt+1}(X^{\fraks+1})\overset{d^0}{\to}\pi_{\frakt+1}(X^{\fraks+2})\overset{\partial_\textup{conn}}{\to}\pi_\frakt((D^1X)^{\fraks+1})\]
 is zero, which is clear, as we're just looking at adjacent maps in the homotopy LES.
 
+It is in fact possible to iterate this construction, to naturally lift `products of products' two steps higher in filtration, even $\Sigma_4$-equivariantly. That is, there is a diagram
+\[\xymatrix@R=4mm{
+X^{\otimes4}_{\Sigma_4}\ar@{..>}[rr]
+&%r1c1
+&%r1c2
+D^1\overline{D}^1X\ar[d]^-{\delta}
+\\%r1c3
+&%r2c1
+\overline{D}^1X\otimes \overline{D}^1X\ar[d]^-{\delta\otimes\delta}
+\ar@{-->}[ru]
+\ar[dru]_{\ \ \mu}
+&%r2c2
+\overline{D}^1X\ar[d]^-{\delta}
+\\%r2c3
+X^{\otimes2}\otimes X^{\otimes2}\ar[ru]
+\ar[udr]_-{\mu\otimes\mu}
+\ar@{->>}[uu]
+&%r3c1
+X\otimes X\ar[dru]^{\ \ \mu}
+&%r3c2
+X%r3c3
+}\]
+The dashed arrow is the map to be constructed, while the dotted arrow is to demonstrate that the composite $X^{\otimes4}\to D^1\overline{D}^1X$ is $\Sigma_4$-equivariant. In order to construct the dashed arrow, one starts with the commuting diagram
+\[\xymatrix@R=10mm@C=20mm@!0{
+&%r1c1
+(\Lambda\overline{V}X)^{\otimes2}\ar[rrrd]|-(.7){0}
+\ar[d]_-{\lambda^{\otimes2}}
+\ar[dddr]|-(.8){\mu}
+&%r1c2
+&%r1c3
+&%r1c4
+\\%r1c5
+X^{\otimes2}\ar[rrrd]|-(.8){?}
+\ar[r]^-{\overline{v}^{\otimes2}}
+\ar[dddr]|-(.8){\mu}
+&%r2c1
+(\overline{V}X)^{\otimes2}\ar[rrrd]|-(.7){0}
+\ar[dddr]|-(.8){\mu}
+&%r2c2
+&%r2c3
+&%r2c4
+\Lambda V\Lambda\overline{V}X\ar[d]_-{\Lambda V(\lambda)}
+\ar[dddr]|-(.8){\lambda}
+\\%r2c5
+&%r3c1
+&%r3c2
+&%r3c3
+\Lambda VX\ar[r]_-{\Lambda V(\overline{v})}
+\ar[dddr]|-(.8){\lambda}
+&%r3c4
+\Lambda V\overline{V}X
+\ar[dddr]|-(.8){\lambda}
+\\%r3c5
+&
+&%r1c1
+\Lambda\overline{V}X\ar[rrrd]|-(.8){v}
+\ar[d]^-{\lambda}
+&%r1c2
+&%r1c3
+&%r1c4
+\\%r1c5
+&
+X\ar[rrrd]|-(.8){v}
+\ar[r]^-{\overline{v}}
+&%r2c1
+\overline{V}X\ar[rrrd]|-(.8){v}
+&%r2c2
+&%r2c3
+&%r2c4
+V\Lambda\overline{V}X\ar[d]^-{V(\lambda)}
+\\%r2c5
+&
+&%r3c1
+&
+&%r3c2
+VX\ar[r]_-{V(\overline{v})}
+&%r3c3
+V\overline{V}X
+}\]
+
+
+\[\xymatrix@R=9mm@C=14mm@!0{
+X^{\otimes 4}\ar[d]^-{\mu\otimes\mu}
+\ar[drrrr]^-{0}
+&%r1c1
+&%r1c2
+&%r1c3
+&%r1c4
+&%r1c5
+\\%r1c6
+X^{\otimes2}\ar[dr]^-{0}
+\ar[dddr]_-{\mu}
+\ar[rr]^-{\overline{v}^{\otimes2}}
+&%r2c1
+&%r2c2
+(\overline{V}X)^{\otimes2}\ar[dr]^-{0}
+\ar[dddr]_-{0}
+&%r2c3
+&%r2c4
+(\Lambda\overline{V}X)^{\otimes2}\ar[dr]^-{0}\ar[ll]^-{\lambda^{\otimes2}}
+\ar[dddr]_-{0}
+&%r2c5
+\\%r2c6
+&%r3c1
+\Lambda \overline{V}X\ar[d]^-{\lambda}
+\ar[rr]^-{\Lambda (v)}
+&%r3c2
+&%r3c3
+\Lambda V\overline{V}X\ar[d]^-{\lambda}
+&%r3c4
+&%r3c5
+\Lambda V\Lambda\overline{V}X\ar[ll]_-{\Lambda (V(\lambda))}
+\ar[d]^-{\lambda ? \Lambda(\lambda)}
+&\textup{(r1)}
+\\%r3c6
+&%r3c1
+\overline{V}X
+\ar[rr]^-{v}
+&%r3c2
+&%r3c3
+V\overline{V}X
+&%r3c4
+&%r3c5
+V\Lambda\overline{V}X\ar[ll]_-{V(\lambda)}
+&\textup{(r2)}
+\\%r3c6
+&%r3c1
+X\ar[u]_-{\overline{v}}
+\ar[rr]^-{\overline{v}}
+&%r3c2
+&%r3c3
+\overline{V}X\ar[u]_-{v}
+&%r3c4
+&%r3c5
+\Lambda\overline{V}X\ar[ll]_-{\lambda}
+\ar[u]_-{v}
+&\textup{(r3)}
+\\%r3c6
+&%r3c1
+X\ar@{=}[u]
+\ar[rr]^-{v}
+&%r3c2
+&%r3c3
+VX\ar[u]_-{\epsilon}
+&%r3c4
+&%r3c5
+\Lambda VX\ar[ll]_-{\lambda}
+\ar[u]_-{\Lambda(\epsilon)}
+&\textup{(r4)}\\
+&\textup{(A)}&&\textup{(B)}&&\textup{(C)}
+}\]
+\begin{enumerate}\squishlist
+\setlength{\parindent}{.25in}
+\item A124 calculates $\overline{D}^1X$
+\item B124 calculates $V\overline{D}^1X$
+\item C124 calculates $\Lambda V\overline{D}^1X$.. if we mean $\Lambda(\lambda)$ near (r1) and (r2)!
+\item ABC1 calculates $\Lambda D^1(\overline{V}X)$
+\end{enumerate}
+
+
+\pagebreak 
 
 \subsection{A chain-level construction $\xi_\textup{res}$ of $\xi_\textup{alg}$}
 We'll here construct the algebraically defined map $\xi_\textup{alg}$ at the chain level. Note that this map is \emph{not} a cosimplicial map $(HX^\bullet)^{\times2}\to HVX^\bullet$, however it \emph{does} induce a chain map on the normalised complexes of primitives.
@@ -5631,7 +5792,7 @@ It is not a natural convention to regard $\Delta_k$ as zero where it is not defi
 \[(d\Delta_k+\Delta_kd)z=(\phi_{k+1}+\Delta_{k+1}+T\Delta_{k+1}T)z\]
 whenever $k\geq0$ and the simplicial dimension of $z$ does not equal either of $2k$ and $2k+1$.
 
-\subsubsection*{Mixed simplicial vectorspaces over $\F_2$}
+\subsubsection*{Resulting maps of mixed simplicial vectorspaces}
 For mixed simplicial vector spaces $X$ and $Y$, write $C(X\otimes_\textup{v}Y)$ for the double complex which in degree $(\fraks,\frakt)$ equals the direct sum $\bigoplus_{t+t'=\frakt}X_t^\fraks\otimes X_{t'}^\fraks$. The following vectorspace maps are given by prolonging $D^k$, $\Delta$, $\Delta_k$ and $\psi_k$, wherever these maps are defined, and by zero elsewhere:
 \begin{align*}
 {D}^k:(CX\otimes CY)_{-\fraks-k,\frakt}&\to C(X\otimes_\textup{v}Y)_{-\fraks,\frakt}&\quad&\textup{(zero unless $k\leq \fraks$)}\\
@@ -5642,13 +5803,13 @@ For mixed simplicial vector spaces $X$ and $Y$, write $C(X\otimes_\textup{v}Y)$ 
 \end{align*}
 Also, we'll always write $T$ for symmetry isomorphisms, and write ``$\twist F$'' as shorthand for the function $TFT$. Although this notation is potentially ambiguous, whenever we write $\sigma FG$, for functions $F$ and $G$, we mean $(\sigma F)G$, not $\sigma(FG)$.
 
-\subsubsection*{Instead of mixed simplicial algebras over $\F_2$}
-Instead of letting $X$ be a mixed simplicial commutative non-unital $\F_2$-algebra, I'd prefer to construct spectral sequence operations as maps $E^r_{-s,t}(X)\to E^?_{?,?}(X\otimes_{\Sigma_2}X)$, for $X$ simply a mixed simplicial vectorspace. I'll also assume that $X$ admits a coaugmentation $X^{-1}_\bullet\to X^\bullet_\bullet$ from a simplicial algebra $X^{-1}_\bullet$, and that this coaugmentation induces an isomorphism on total homology.
+\subsubsection*{The context}
+Let $X$ be a mixed simplicial commutative non-unital $\F_2$-algebra. I'd prefer to construct spectral sequence operations externally, as maps $E^r_{-s,t}(X)\to E^?_{?,?}(X\otimes_{\Sigma_2}X)$. I'll also assume that $X$ admits a coaugmentation $X^{-1}_\bullet\to X^\bullet_\bullet$ from a simplicial algebra $X^{-1}_\bullet$, and that this coaugmentation induces an isomorphism on total homology.
 
 \subsection{Products}
 We can define products in the spectral sequence using the chain-level formula
 \[x\otimes y\mapsto\rho\Delta D^0(x\otimes y).\]
-As both $\Delta$ and $D^0$ are chain maps preserving filtration, this constructs operations $E^t_{-s,t}(X)\otimes E^r_{-s',t'}(X)\to E^r_{-s-s',t+t'}(X\otimes_{\Sigma_2}X)$ satisfying a Liebnitz formula.
+As both $\Delta$ and $D^0$ are chain maps preserving filtration, this constructs operations $E^r_{-s,t}(X)\otimes E^r_{-s',t'}(X)\to E^r_{-s-s',t+t'}(X\otimes_{\Sigma_2}X)$ satisfying a Liebnitz formula.
 \begin{prop}
 Suppose that $x\in E^r_{-s,t}(X)$ is a permanent cycle such that $t-s>0$. Then $x\times x$ is eventually hit by a differential. That is, $x\times x\in E^r_{-2s,2t}(X\otimes_{\Sigma_2}X)$ is a permanent cycle which becomes zero by $E^\infty$.
 \end{prop}
@@ -5665,7 +5826,7 @@ and $\phi_0D^0(x_0\otimes x_0)=0$ as $n>0$, and $TD^0(x_0\otimes x_0)=D^0(x_0\ot
 
 
 \subsection{Steenrod operations}
-In this case, the Steenrod operations are the `surprising' operations, and they are are easy to define. We will use the chain-level formula:
+In this case, the Steenrod operations are the `surprising' operations, and they are easy to define. We will use the chain-level formula:
 \[\textup{SQ}^{i,s}:x\mapsto \rho\Delta (D^{s-i}(x\otimes x)+D^{s-i+1}(x\otimes dx)).\]
 \begin{prop}
 For any chosen $i,s\geq0$ and $r\geq2$, the chain level operation $\textup{SQ}^{i,s}$ defines a Steenrod operation $\Sq^i_\textup{alg}:E^r_{-s,t}(X)\to E^r_{-s-i,2t}(X\otimes_{\Sigma_2}X)$, with indeterminacy vanishing by $E^{2r-2}$. For $x\in E^r_{-s,t}(X)$, $\Sq^i_\textup{alg}(x)$ survives to $E^{2r-1}$, and moreover, $d_{2r-1}(\Sq^ix)=\Sq^{i+r-1}(d_rx)$ modulo indeterminacy. The top Steenrod square, $\Sq^s(x)$, is equal to the product-square $x\times x$, and $\Sq^i(x)=0$ for $i>s$. The squares at $E^2$ equal those arising from the fact that $E^2$ is [intended to be] the cohomotopy of a cosimplicial algebra.
@@ -5693,11 +5854,13 @@ d\rho\Delta [D^{s-i-1}(y\otimes y)+D^{s-i}(y\otimes dy)+D^{s-i+1}(dy\otimes x)]%
 \[\textup{SQ}^{i,s}(x)-\textup{SQ}^{i,s}(x+dy)=d\rho\Delta [D^{s-i-1}(y\otimes y)+D^{s-i}(y\otimes dy)+D^{s-i+1}(dy\otimes x)].\]
 The filtration of this bounding cycle is at least $2(s-r+1)-(s-i-1)=(s+i)-(2r-3)$, so that $\Sq_\textup{alg}^i$ has indeterminacy vanishing by $E^{2r-2}$.
 \end{proof}
-In fact, there's an extra operation stemming from this analysis, whose role is to be the source of a differential which hits the top steenrod operation applied to the image of some other differential:
-\begin{prop}
-The chain-level operation $\textup{SQ}^{s+1,s}$ defines an operation $\Sq^{s+1}_\textup{over}:E^r_{-s,t}(X)\to E^r_{-2s-r,???}(X\otimes_{\Sigma_2}X)$, with indeterminacy vanishing by $E^{???}$. For $x\in E^r_{-s,t}(X)$, $\Sq^{s+1}_\textup{over}(x)$ survives to $E^{???}$, and moreover, $d_{r}(\Sq^{s+1}_\textup{over}x)=\Sq^{s+r}(d_rx)=d_rx\times d_rx$ modulo indeterminacy.
-\end{prop}
-
+In fact, there is an extra nonzero Steenrod operation coming from the chain level operation $\textup{SQ}^{s+1,s}$, which vanishes by $E^\infty$. On $E^r$ it's just the operation $x\mapsto x\times d_rx$.
+%\begin{prop}
+%The chain-level operation $\textup{SQ}^{s+1,s}$ defines an operation $\Sq^{s+1}_\textup{over}:E^r_{-s,t}(X)\to E^r_{-2s-r,2t+r-1}(X\otimes_{\Sigma_2}X)$, with indeterminacy vanishing by $E^{???}$. For $x\in E^r_{-s,t}(X)$, $\Sq^{s+1}_\textup{over}(x)$ survives to $E^{???}$, and moreover, $d_{r}(\Sq^{s+1}_\textup{over}x)=\Sq^{s+r}(d_rx)=d_rx\times d_rx$ modulo indeterminacy.
+%\end{prop}
+%\begin{proof}
+%$\textup{Sq}^{s+1,s}x=\rho\Delta D^0(x\otimes dx)\in F_{2s+r}$ has boundary $\rho\Delta D^0(dx\otimes dx)\in F_{2s+2r}$, so we're getting a $d_r$.
+%\end{proof}
 
 
 \subsection{Chain level operations doubling filtration}
