@@ -5857,11 +5857,11 @@ As both $\Delta$ and $D^0$ are chain maps preserving filtration, this constructs
 Suppose that $x\in E^r_{-s,t}(X)$ is a permanent cycle such that $t-s>0$. Then $x\times x$ is eventually hit by a differential. That is, $x\times x\in E^r_{-2s,2t}(X\otimes_{\Sigma_2}X)$ is a permanent cycle which becomes zero by $E^\infty$.
 \end{prop}
 \begin{proof}
-Since the spectral sequence converges, $x$ can be written as $x_0+dy$ for $x_0\in NX_{0,n}$ such that $dx_0=0$ and $y\in NX_{n+1}$. Now $x\times x$ is represented by
-\[\rho\Delta D^0(x_0\otimes x_0)+\rho\Delta D^0(dy\otimes x_0+x_0\otimes dy+dy\otimes dy).\]
+Since the spectral sequence converges, $x$ can be written as $x^0+dy$ for $x^0\in NX_{0,n}$ such that $dx^0=0$ and $y\in NX_{n+1}$. Now $x\times x$ is represented by
+\[\rho\Delta D^0(x^0\otimes x^0)+\rho\Delta D^0(dy\otimes x^0+x^0\otimes dy+dy\otimes dy).\]
 Now the first term here vanishes, as
-\[\rho\Delta D^0(x_0\otimes x_0)=\rho(\phi_0 D^0(x_0\otimes x_0)+\Delta_0 D^0(x_0\otimes x_0)+\Delta_0 TD^0(x_0\otimes x_0)),\]
-and $\phi_0D^0(x_0\otimes x_0)=0$ as $n>0$, and $TD^0(x_0\otimes x_0)=D^0(x_0\otimes x_0)$ since $\{D^k\}$ is special. The remaining term may be expressed as the boundary
+\[\rho\Delta D^0(x^0\otimes x^0)=\rho(\phi_0 D^0(x^0\otimes x^0)+\Delta_0 D^0(x^0\otimes x^0)+\Delta_0 TD^0(x^0\otimes x^0)),\]
+and $\phi_0D^0(x^0\otimes x^0)=0$ as $n>0$, and $TD^0(x^0\otimes x^0)=D^0(x^0\otimes x^0)$ since $\{D^k\}$ is special. The remaining term may be expressed as the boundary
 \[d(\rho\Delta(D^0(y\otimes dy)+D^1(dy\otimes x))).\qedhere\]
 
 
@@ -5993,7 +5993,7 @@ Using the identity $(1+\twist)\Delta_{0}+\phi_{0}=\Delta$, and the observations 
 \[\sum_{\mathclap{\alpha-\beta=r+1}} \phi_{\alpha}\sigma^{\alpha-1}D^{\beta}(z)=\sum_{\mathclap{\alpha-\beta=r+1}} \phi_{\alpha}\sigma^{\alpha-1}D^{\alpha-r-1}(z_{2\alpha}^{2\alpha-n})\]
 but the cosimplicial degree $2\alpha-n$ is less than $2(\alpha-r-1)$, and $\{D^k\}$ is special, so that each term $D^{\alpha-r-1}(z_{2\alpha}^{2\alpha-n})$ vanishes.
 \end{proof}
-\begin{cor}
+\begin{cor}\label{dvsDEL}
 For $2\leq i\leq t-1$ and $x\in Z^1_{-s,t}$:
 \[d(\textup{DEL}_i(x))+ \textup{DEL}_i(dx)=\begin{cases}
 \textup{SQ}^{t-i+1,s}(x),&\textup{if }n+2\leq i \leq t-1;\\
@@ -6002,11 +6002,11 @@ d(\textup{DUB}_i(x)),&\textup{if }i=n;\\
 d(\textup{DUB}_i(x))+\textup{DUB}_i(dx),&\textup{if }2\leq i\leq n-1.
 \end{cases}\]
 If, moreover, $x\in Z^r_{-s,t}$:
-\[d(\underbrace{\textup{DpD}_i(x)}_{\in F_s})+ \underbrace{\textup{DpD}_i(dx)}_{\in F_{s+r}}=\begin{cases}
+\[d(\underbrace{\textup{DpD}'_i(x)}_{\in F_s})+ \underbrace{\textup{DpD}'_i(dx)}_{\in F_{s+r}}=\begin{cases}
 \textup{SQ}^{t-i+1,s}(x)\in F_{s+(t-i+1)},&\textup{if }n+2\leq i \leq t-1;\\
 \rho\Delta D^1(x\otimes dx)\in F_{s+(s+r-1)},&\textup{if }i=n+1;\\
 0,&\textup{if }2\leq i\leq n.
-\end{cases}\]
+\end{cases}\]\textbf{Check that it still works with the primes.}
 \end{cor}
 \begin{proof}
 We may apply \ref{boundaryVsBBD} to calculate $d\mathbb{D}_{n-i}(x\otimes x)$ and $d\mathbb{D}_{n-i-1}(dx\otimes x)$, since $|x\otimes x|=2n> 2(n-i+1)$ and $|dx\otimes x|=2n-1> 2(n-i-1+1)$. Thus:
@@ -6267,9 +6267,28 @@ d\Delta_{n-i+1}\twist \widetilde{\twist}D^0(y\cdot y)&=
 \textup{A3}+\textup{B2}=\textup{A6}+\textup{B5}+\textup{C2}= \textup{B6}+\textup{C3}=0.\qedhere
 \end{gather*}
 \end{proof}
+\subsection{Some observations on $\textup{DpD}'$}
+\begin{alignat*}{2}
+\textup{DpD}'(x)
+&=
+\rho(\mathbb{D}_{n-i}(x\otimes x)+\mathbb{D}_{n-i-1}(dx\otimes x))\\
+&\ \quad {}+\rho(\Delta_{n-i}\twist^{n-i}D^0(x\otimes x)+\Delta_{n-i-1}\twist^{n-i-1}D^0(x\otimes dx))%
+\\
+&=
+\sum_{j\geq1}\Delta_{n-i+j}\sigma^{n-i+j}D^j(x\otimes x)+\sum_{j\geq1}\Delta_{n-i-1+j}\sigma^{n-i-1+j}D^j(dx\otimes x)\\
+&\ \quad {}+\Delta_{n-i-1}\twist^{n-i-1}D^0d(x\otimes x)
+\end{alignat*}
+This calculation shows that if $x^0\in X^{0}_n$ is a cycle, (i.e.\ if $d^h(x^0)=0$ and $d^v(x^0)=0$), then $\textup{DpD}'(x^0)=0$.
 
-\subsection{Thought}
-Could it be that we can define the operations differently on the image of cycles in homotopy, and the operations I'm defining all over the place really do converge to zero? Then the way to recover the homotopy of the sphere would be to do the nice, unstable $\delta$ operations in the sseq of an iterated symmetric square, then finally to map them out to the underlying sseq with an iterated shift. I'm not sure if the final step could work.
+Suppose now that $x$ is a permanent cycle, and $i<n$. Then since the spectral sequence is convergent, one can write $x=x^0+dy$, for $x^0\in X^0_n$ a cycle, and some $y\in CX_{n+1}$. Now the previous calculations show that $0=\textup{DpD}'_i(x^0)$ and $\textup{DpD}'_i(x^0+dy)$ differ by a boundary, namely the sum of the boundaries of the following three quantities:
+\[(\mathbb{D}_{n-i-1}+\Delta_{n-i-1}\twist^{n-i-1}D^0)(x^0\cdot dy)=0;\]
+\[(\mathbb{D}_{(n+1-i)-1}+\Delta_{(n+1-i)-1}\twist^{(n+1-i)-1}D^0)(dy\cdot y);\]
+\[(\mathbb{D}_{n+1-i}+\Delta_{n+1-i}\twist^{n+1-i}D^0)(y\cdot y).\]
+The first quantity equals zero since $\{D^k\}$ is special, and the sum of the other two quantities is \textbf{similar to} $\textup{DpD}'_i(y)$, lying in filtration at least 1. Thus $\textup{DpD}'_i(x)$ is hit by some differential.
+
+On the other hand, if $d_rx\neq0$ and $i\leq n$, then \ref{dvsDEL} shows that $d_r\delta_ix=\delta_id_rx$. In case $i>n$, something similar happens. Basically all the $\delta$ and $\Sq$ operations are doomed! They're all correct at $E^2$ except on the 0-line, where they're all messed up.
+%\subsection{Thought}
+%Could it be that we can define the operations differently on the image of cycles in homotopy, and the operations I'm defining all over the place really do converge to zero? Then the way to recover the homotopy of the sphere would be to do the nice, unstable $\delta$ operations in the sseq of an iterated symmetric square, then finally to map them out to the underlying sseq with an iterated shift. I'm not sure if the final step could work.
 
 
 
