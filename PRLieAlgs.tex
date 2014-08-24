@@ -5851,7 +5851,7 @@ For mixed simplicial vector spaces $X$ and $Y$, write $C(X\otimes_\textup{v}Y)$ 
 Also, we'll always write $T$ for symmetry isomorphisms, and write ``$\twist F$'' as shorthand for the function $TFT$. Although this notation is potentially ambiguous, whenever we write $\sigma FG$, for functions $F$ and $G$, we mean $(\sigma F)G$, not $\sigma(FG)$.
 
 \subsubsection*{The context}
-Let $X$ be a mixed simplicial commutative non-unital $\F_2$-algebra. I'd prefer to construct spectral sequence operations externally, as maps $E^r_{-s,t}(X)\to E^?_{?,?}(X\otimes_{\Sigma_2}X)$. I'll also assume that $X$ admits a coaugmentation $X^{-1}_\bullet\to X^\bullet_\bullet$ from a simplicial algebra $X^{-1}_\bullet$, and that this coaugmentation induces an isomorphism on total homology.
+Let $X$ be a mixed simplicial commutative non-unital $\F_2$-algebra. I'd prefer to construct spectral sequence operations externally, as maps $E^r_{-s,t}(X)\to E^r_{?,?}(X\otimes_{\Sigma_2}X)$, which may sometimes be multivalued. I'll also assume that $X$ admits a coaugmentation $X^{-1}_\bullet\to X^\bullet_\bullet$ from a simplicial algebra $X^{-1}_\bullet$, and that this coaugmentation induces an isomorphism on total homology.
 
 \subsection{Products and Steenrod operations}
 We can define products in the spectral sequence using the chain-level formula
@@ -5945,7 +5945,7 @@ holds when applied to an element $z$ of $(CX\otimes CX)_{n}$ with $n\geq 2(k+1)$
 \newcommand{\twolinesum}[2]{\mathop{\sum_{\mathclap{#1}}}_{\mathclap{#2}}}
 \newcommand{\onelinesum}[1]{\sum_{\mathclap{#1}}}
 We'll need to apply the formula for $d\Delta_\alpha+\Delta_\alpha d$ to $\twist^\alpha D^\beta(z)$, for $\alpha$, $\beta$ such that $\alpha-\beta=k$. %, where $z\in (CX\otimes CX)_{-s,t}$ is the element to which we're applying the above equation.
-It holds unless $t=2\alpha+e$, where $e\in\{0,1\}$, in which case $\beta=(t-e)/2-k$. However, $D^\beta(z)$ is zero unless $\beta\leq s/2$, so the formula is valid unless $(t-e)/2-k\leq s/2$. As we've assumed that $n=t-s\geq2(k+1)$, it is always valid.
+It holds unless $t=2\alpha+e$, where $e\in\{0,1\}$, in which case $\beta=(t-e)/2-k$. However, $D^\beta(z)$ is zero unless $\beta\leq s/2$, so the formula is valid unless $(t-e)/2-k\leq s/2$. As we've assumed that $n=t-s\geq2(k+1)$, the formula is always valid.
 
 After these observations and under the our conventions on the $\Delta_\alpha$ and $D^\beta$, all but one of the following manipulations is formal, where the sums are meant to be taken over all pairs $(\alpha,\beta)$ of integers with appropriate difference. The only sticking point is that $d\Delta_{-1}+\Delta_{-1}d$ equals $0$, as opposed to $(1{+}\twist)\Delta_0+\phi_0$, and at this point we take extra care:
 %
@@ -5984,24 +5984,21 @@ but the cosimplicial degree $2\alpha-n$ is less than $2(\alpha-k-1)$, and $\{D^k
 
 
 
-We'd like to define operations $\delta_i:E^r_{-s,t}\to E^r_{-s,t+i}$ for $i$ satisfying $2\leq i<t-(r-2)$, using the chain-level formula (writing $n=t-s=|x|$):
+
+
+
+
+
+
+\subsection{Spectral sequence operations $\delta_i$}
+We'd be able to define operations $\delta_i:E^r_{-s,t}\to E^r_{-s,t+i}$ for $i$ satisfying $2\leq i<t-(r-2)$, using the chain-level formula (writing $n=t-s=|x|$):
 \[x\mapsto \textup{DEL}_{i}(x):=\rho(\mathbb{D}_{n-i}(x\otimes x)+\mathbb{D}_{n-i-1}(dx\otimes x)).\]
-\textbf{Let's ignore for now the question of well-definedness.}
-\subsubsection*{Correctness at $E^2$}
-As $E^1$ is obtained from $E^0$ by taking homology in the simplicial direction, there are $\delta$-operations on $E^1$, i.e.\ $E^1_{-s,t}(X)\to E^1_{-s,t+i}(X\otimes_{\Sigma_2}X)$. They are unstable with respect to internal degree $t$, not with respect to total degree $n$. All of these operations are linear except for the top operation \cite[4.2]{DwyerHtpyOpsSimpComAlg.pdf}, and commute with the differentials in the cosimplicial direction. Thus, we obtain operations $\delta_i^\textup{alg}:E^2_{-s,t}(X)\to E^2_{-s,t+i}(X\otimes_{\Sigma_2}X)$ for $2\leq i<t$.
-
-At the chain level, what we're doing here is taking a representative $z\in C_{-s,t}X$ such that $\partial_\textup{sim}z=0$, and forming $\rho\Delta_{t-i}(z\otimes_\textup{v} z)$, where $z\otimes_\textup{v} z$ denotes the element of $C(X\otimes_\textup{v}X)_{-s,2t}$.
-
-Let's calculate the leading term of $\textup{DEL}_{i}(x)$ whenever $2\leq i<n$. Write $x=x^s_t+x^{>s}_{>t}$, where $x^s_t\in X^s_t$, and $x^{>s}_{>t}$ lies in filtration $s+1$. Then the leading term will be $\rho\Delta_{t-i}\twist^{t-i}D^s (x^s_t\otimes x^s_t)$. Moreover, as $\{D^k\}$ is \emph{special}, this equals $\rho{\Delta}_{t-i}(x^s_t\otimes_\textup{v} x^s_t)\in C(X\otimes_{\Sigma_2} X)_{-s,t+i}$, where $(x^s_t\otimes_\textup{v} x^s_t)$ denotes the element of $C(X\otimes_\textup{v}X)_{-s,2t}$. Thus `$x^s_t\mapsto \twist^{t-i}D^s(x^s_t\otimes x^s_t)$' implements the assignment `$z\mapsto z\otimes_\textup{v} z$' discussed above, and we're getting a representative for $\delta_i^\textup{alg}(x)$.
-
-
-\subsubsection*{Formula for the boundary}
-
+To proceed, we'll need a formula for the boundary of $\textup{DEL}_i(x)$:
 \begin{prop}
 \label{dvsDEL}
 For $2\leq i\leq t$ and $x\in Z^1_{-s,t}$:
 \[d(\textup{DEL}_i(x))+ \textup{DEL}_i(dx)=\begin{cases}
-\textup{SQ}^{t-i+1,s}(x),&\textup{if }n+1\leq i \leq t-1;\\
+\textup{SQ}^{t-i+1,s}(x),&\textup{if }n+1\leq i \leq t;\\
 \rho\Delta D^0(x\otimes dx),&\textup{if }i=n;\\
 0,&\textup{if }2\leq i\leq n.
 \end{cases}\]
@@ -6023,12 +6020,10 @@ We may apply \ref{boundaryVsBBD} to calculate $d\mathbb{D}_{n-i}(x\otimes x)$ an
 \end{alignat*}
 Everything here cancels except for $\rho\Delta(D^{i-n-1}(x\otimes x)+D^{i-n}(x\otimes dx))$ which equals $\textup{SQ}^{t-i+1,s}(x)$.
 \end{proof}
-
-
-\subsection{Well definedness of $\delta_i$}
-Suppose that $x\in E^r_{-s,t}$. The purpose of $\delta_i(x)$, when $n<i<t$, is to support a $d_{t-i+1}$-differential to $\Sq^{t-i+1}(x)$. Thus, we would not expect to be able to define $\delta_i(x)$ when $t-i+1<r$; indeed, the following result will construct $\delta_i(x)$ whenever $i<t-(r-2)$. Moreover, the Steenrod operation $\Sq^{t-i+1}(x)$ has indeterminacy vanishing by $E^{2(r-1)}$, and one might expect that whenever $t-i+1<2(r-1)$, $\delta_i(x)$ will be multivalued, but that the set of values for $\delta_i(x)$ will map onto the set of values for $\Sq^{t-i+1}(x)$ under $d_{t-i+1}$. Note that it is not correct to say in general that the indeterminacy of $\delta_i(x)$ vanishes by a certain page, but rather that one expects that the various values for $\delta_i(x)$ will all fail to be permanent cycles together.
+Suppose now that $x\in E^r_{-s,t}$. In light of the above calculation, when $n<i\leq t$, the purpose of $\delta_i(x)$ must be to support a $d_{t-i+1}$-differential to $\Sq^{t-i+1}(x)$. Thus, we would not expect to be able to define $\delta_i(x)$ when $t-i+1<r$; indeed, the following result will construct $\delta_i(x)$ whenever $i<t-(r-2)$. Moreover, the Steenrod operation $\Sq^{t-i+1}(x)$ has indeterminacy vanishing by $E^{2(r-1)}$, and one should expect that whenever $t-i+1<2(r-1)$, $\delta_i(x)$ will be multivalued, but that the set of values for $\delta_i(x)$ will map onto the set of values for $\Sq^{t-i+1}(x)$ under $d_{t-i+1}$.%footnote:
+\footnote{Note that it is not correct to say in general that the indeterminacy of $\delta_i(x)$ vanishes by a certain page, but rather that one expects that the various values for $\delta_i(x)$ will all fail to be permanent cycles together.}
 \begin{prop}
-The chain-level map $\textup{DEL}_i$ produces well defined $\delta$-operations $E^r_{-s,t}\to E^r_{-s,t+i}$ whenever $r\geq2$, $i<t$ and either $i\leq n+1$ or $i<t-2(r-2)$. When $t-2(r-2)\leq i<t-(r-2)$, the operations are multivalued.
+The chain-level map $\textup{DEL}_i$ produces well defined operations $\delta_i:E^r_{-s,t}\to E^r_{-s,t+i}$ whenever $r\geq1$, $i<t-(r-2)$ and either $i\leq n+1$ or $i<t-2(r-2)$. If $i\geq t-2(r-2)$, the operations may still be defined, but are multivalued.
 \end{prop}
 \begin{proof}
 Suppose that $x\in Z^r_{-s,t}$. Then the calculation \ref{dvsDEL} shows that $\textup{DEL}_i(x)\in F_{s+r}$ as long as $i<t-(r-2)$. We must now examine whether this map is well defined on $E^r$, which is to examine the difference $\textup{DEL}_i(x)-\textup{DEL}_i(x+dy)$, for $y\in Z^{r-1}_{-s+r-1,t+r}$. We should only expect to be successful whien $i\leq t-2(r-2)$.
@@ -6049,9 +6044,7 @@ d\mathbb{D}_{n-i+1}(y\cdot y)&=
 \Delta\twist D^{-(n-i+2)}(y\cdot y)
 \end{alignat*}
 \normalsize
-Now by \ref{DkIsNiceToFiltration},
-\[H:=\rho(\mathbb{D}_{n-i-1}(x\cdot dy)+\mathbb{D}_{n-i}(dy\cdot y)+\mathbb{D}_{n-i+1}(y\cdot y))\in F_{s-r+1}.\]
-The above calculations show that $H$ has boundary
+Now write $H:=\rho(\mathbb{D}_{n-i-1}(x\cdot dy)+\mathbb{D}_{n-i}(dy\cdot y)+\mathbb{D}_{n-i+1}(y\cdot y))$. By \ref{DkIsNiceToFiltration}, $H\in F_{s-r+1}$, and the above calculations show that $H$ has boundary
 \small
 %\[(\textup{DEL}_i(x)-\textup{DEL}_i(x+dy))+\rho\Delta(D^{i-n-2}(y\cdot y)+D^{i-n-1}(y\cdot dy)+D^{i-n}(dy\cdot x))+\rho\mathbb{D}_{n-i-1}(dx\cdot dy).\]
 \[dH=\textup{DEL}_i(x)-\textup{DEL}_i(x+dy) +\rho\mathbb{D}_{n-i-1}(dx\cdot dy)+T_1+T_2+T_3,\]
@@ -6082,7 +6075,15 @@ If, however, $i\geq n+2$, then $T_1+T_2$ need not be zero, and can be assured to
 %\textbf{The following is an observation that I thought might improve this result, but which doesn't seem to - the idea was to leave out the third row of stuff. Maybe it could still be good if we leave out some number of the summands from the third row, but it sounds pretty dicey. Should try it in order to extend rande of definition. Also should check whether one should expect the operations to be defined all the way up to $i\leq t-r+1$. ``Now suppose that $x\in F_s$, and $y\in F_{s-r+1}$. Let's look at $\mathbb{D}_{n-i+1}(dy\cdot y)$. As $dy$ has filtration $s$, each term $\Delta_{\alpha}\sigma^{\alpha}D^\beta(dy\cdot y)$ with $\beta>s$ vanishes, and each term with $\beta<s$ has filtration higher than $dy$. Thus, modulo $F_{s+1}$, $\mathbb{D}_{n-i+1}(dy\cdot y)\equiv\Delta_{t-i+1}\twist^{t-i+1}D^s((dy)^s_{t}\cdot y^{s}_{t+1})$.''}
 \end{proof}
 
+As $E^1$ is obtained from $E^0$ by taking homology in the simplicial direction, there are $\delta$-operations on $E^1$, i.e.\ $E^1_{-s,t}(X)\to E^1_{-s,t+i}(X\otimes_{\Sigma_2}X)$. They are unstable with respect to internal degree $t$, not with respect to total degree $n$. All of these operations are linear except for the top operation \cite[4.2]{DwyerHtpyOpsSimpComAlg.pdf}, and commute with the differentials in the cosimplicial direction. Thus, we obtain operations $\delta_i^\textup{alg}:E^2_{-s,t}(X)\to E^2_{-s,t+i}(X\otimes_{\Sigma_2}X)$ for $2\leq i<t$.
+\begin{prop}
+On $E^2$, for $i<t$, the spectral sequence operations $\delta_i$ defined by $\textup{DEL}_i$ equal the operations $\delta_i^\textup{alg}$. On $E^1$, setting $t=i$, the spectral sequence operation $\delta_t:E^1_{-s,t}\to E^1_{-s,2t}$ equals $\delta_t^\textup{alg}$.
+\end{prop}
+\begin{proof}
+The operations $\delta_i^\textup{alg}$ are constructed by taking a representative $z\in C_{-s,t}X$ such that $\partial_\textup{sim}z=0$, and forming $\rho\Delta_{t-i}(z\otimes_\textup{v} z)$, where $z\otimes_\textup{v} z$ denotes the element of $C(X\otimes_\textup{v}X)_{-s,2t}$.
 
+Let's calculate the leading term of $\textup{DEL}_{i}(x)$ whenever $2\leq i\leq t$. Write $x=x^s_t+x^{>s}_{>t}$, where $x^s_t\in X^s_t$, and $x^{>s}_{>t}$ lies in filtration $s+1$. Then the leading term will be $\rho\Delta_{t-i}\twist^{t-i}D^s (x^s_t\otimes x^s_t)$. Moreover, as $\{D^k\}$ is \emph{special}, this equals $\rho{\Delta}_{t-i}(x^s_t\otimes_\textup{v} x^s_t)\in C(X\otimes_{\Sigma_2} X)_{-s,t+i}$, where $(x^s_t\otimes_\textup{v} x^s_t)$ denotes the element of $C(X\otimes_\textup{v}X)_{-s,2t}$. Thus `$x^s_t\mapsto \twist^{t-i}D^s(x^s_t\otimes x^s_t)$' implements the assignment `$z\mapsto z\otimes_\textup{v} z$' discussed above, and we're getting a representative for $\delta_i^\textup{alg}(x)$.
+\end{proof}
 
 
 \end{AdamsSSEQ operations final}
