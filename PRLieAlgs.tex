@@ -5925,32 +5925,25 @@ In fact, there is an extra nonzero Steenrod operation coming from the chain leve
 
 \subsection{The maps $\mathbb{D}_k$}
 
-Write $\mathbb{D}_r$ for the sum (for any $r$, positive or otherwise):
-\[\mathbb{D}_r=\sum_{\alpha-\beta=r}\Delta_\alpha\twist^\alpha D^\beta=\begin{cases}
+For any $k$, positive or otherwise, write $\mathbb{D}_k:(C(X)\otimes C(Y))_i\to C(X\otimes Y)_{i-k}$ for the map:
+\[\mathbb{D}_r(z)=\sum_{\alpha-\beta=r}\Delta_\alpha\twist^\alpha D^\beta(z)=\begin{cases}
 \sum_{j\geq0}\Delta_{j}\twist^{j}D^{j-r},&\textup{if }r\leq0;\\
 \sum_{j\geq0}\Delta_{j+r}\twist^{j+r}D^{j},&\textup{if }r\geq0.
 %\\,&\textup{if }
 \end{cases}
 \]
-We'd like to define operations $\delta_i:E^r_{-s,t}\to E^r_{-s,t+i}$ for $i$ satisfying $2\leq i<t-(r-2)$, using the chain-level formula (writing $n=t-s=|x|$):
-\[x\mapsto \textup{DEL}_{i}(x):=\rho(\mathbb{D}_{n-i}(x\otimes x)+\mathbb{D}_{n-i-1}(dx\otimes x)).\]
-\textbf{Let's ignore for now the question of well-definedness.}
-\subsubsection*{Correctness at $E^2$}
-As $E^1$ is obtained from $E^0$ by taking homology in the simplicial direction, there are $\delta$-operations on $E^1$, i.e.\ $E^1_{-s,t}(X)\to E^1_{-s,t+i}(X\otimes_{\Sigma_2}X)$. They are unstable with respect to internal degree $t$, not with respect to total degree $n$. All of these operations are linear except for the top operation \cite[4.2]{DwyerHtpyOpsSimpComAlg.pdf}, and commute with the differentials in the cosimplicial direction. Thus, we obtain operations $\delta_i^\textup{alg}:E^2_{-s,t}(X)\to E^2_{-s,t+i}(X\otimes_{\Sigma_2}X)$ for $2\leq i<t$.
-
-At the chain level, what we're doing here is taking a representative $z\in C_{-s,t}X$ such that $\partial_\textup{sim}z=0$, and forming $\rho\Delta_{t-i}(z\otimes_\textup{v} z)$, where $z\otimes_\textup{v} z$ denotes the element of $C(X\otimes_\textup{v}X)_{-s,2t}$.
-
-Let's calculate the leading term of $\textup{DEL}_{i}(x)$ whenever $2\leq i<n$. Write $x=x^s_t+x^{>s}_{>t}$, where $x^s_t\in X^s_t$, and $x^{>s}_{>t}$ lies in filtration $s+1$. Then the leading term will be $\rho\Delta_{t-i}\twist^{t-i}D^s (x^s_t\otimes x^s_t)$. Moreover, as $\{D^k\}$ is \emph{special}, this equals $\rho{\Delta}_{t-i}(x^s_t\otimes_\textup{v} x^s_t)\in C(X\otimes_{\Sigma_2} X)_{-s,t+i}$, where $(x^s_t\otimes_\textup{v} x^s_t)$ denotes the element of $C(X\otimes_\textup{v}X)_{-s,2t}$. Thus `$x^s_t\mapsto \twist^{t-i}D^s(x^s_t\otimes x^s_t)$' implements the assignment `$z\mapsto z\otimes_\textup{v} z$' discussed above, and we're getting a representative for $\delta_i^\textup{alg}(x)$.
-
-\newcommand{\twolinesum}[2]{\mathop{\sum_{\mathclap{#1}}}_{\mathclap{#2}}}
-\newcommand{\onelinesum}[1]{\sum_{\mathclap{#1}}}
-\subsubsection*{Formula for the boundary}
+\begin{lem}\label{DkIsNiceToFiltration}
+If $x\in F_s$ and $y\in F_{s'}$, then $\mathbb{D}_k(x\cdot y)\in F_s\cap F_{s'}$.
+\end{lem}
 \begin{lem}\label{boundaryVsBBD}
 For all $r$, positive or otherwise, the equation:
 \[d\mathbb{D}_r+\mathbb{D}_rd=(1+\twist)\mathbb{D}_{r+1}+\Delta\sigma D^{-r-1}\]
 holds when applied to an element $z$ of $(CX\otimes CX)_{n}$ with $n> 2(r+1)$.
 \end{lem}
-\begin{proof}We'll need to apply the formula for $d\Delta_\alpha+\Delta_\alpha d$ to $\twist^\alpha D^\beta(z)$, for $\alpha$, $\beta$ such that $\alpha-\beta=r$. %, where $z\in (CX\otimes CX)_{-s,t}$ is the element to which we're applying the above equation.
+\begin{proof}
+\newcommand{\twolinesum}[2]{\mathop{\sum_{\mathclap{#1}}}_{\mathclap{#2}}}
+\newcommand{\onelinesum}[1]{\sum_{\mathclap{#1}}}
+We'll need to apply the formula for $d\Delta_\alpha+\Delta_\alpha d$ to $\twist^\alpha D^\beta(z)$, for $\alpha$, $\beta$ such that $\alpha-\beta=r$. %, where $z\in (CX\otimes CX)_{-s,t}$ is the element to which we're applying the above equation.
 It holds unless $t=2\alpha+e$, where $e\in\{0,1\}$, in which case $\beta=(t-e)/2-r$. However, $D^\beta(z)$ is zero unless $\beta\leq s/2$, so the formula is valid unless $(t-e)/2-r\leq s/2$. As we've assumed that $n=t-s>2(r+1)$, it is always valid.
 
 After these observations and under the our conventions on the $\Delta_\alpha$ and $D^\beta$, all but one of the following manipulations is formal, where the sums are meant to be taken over all pairs $(\alpha,\beta)$ of integers with appropriate difference. The only sticking point is that $d\Delta_{-1}+\Delta_{-1}d$ equals $0$, as opposed to $(1{+}\twist)\Delta_0+\phi_0$, and at this point we take extra care:
@@ -5980,14 +5973,38 @@ Using the identity $(1+\twist)\Delta_{0}+\phi_{0}=\Delta$, and the observations 
 \[\sum_{\mathclap{\alpha-\beta=r+1}} \phi_{\alpha}\sigma^{\alpha-1}D^{\beta}(z)=\sum_{\mathclap{\alpha-\beta=r+1}} \phi_{\alpha}\sigma^{\alpha-1}D^{\alpha-r-1}(z_{2\alpha}^{2\alpha-n})\]
 but the cosimplicial degree $2\alpha-n$ is less than $2(\alpha-r-1)$, and $\{D^k\}$ is special, so that each term $D^{\alpha-r-1}(z_{2\alpha}^{2\alpha-n})$ vanishes.
 \end{proof}
-\begin{cor}\label{dvsDEL}
+
+
+
+
+
+
+
+
+
+
+We'd like to define operations $\delta_i:E^r_{-s,t}\to E^r_{-s,t+i}$ for $i$ satisfying $2\leq i<t-(r-2)$, using the chain-level formula (writing $n=t-s=|x|$):
+\[x\mapsto \textup{DEL}_{i}(x):=\rho(\mathbb{D}_{n-i}(x\otimes x)+\mathbb{D}_{n-i-1}(dx\otimes x)).\]
+\textbf{Let's ignore for now the question of well-definedness.}
+\subsubsection*{Correctness at $E^2$}
+As $E^1$ is obtained from $E^0$ by taking homology in the simplicial direction, there are $\delta$-operations on $E^1$, i.e.\ $E^1_{-s,t}(X)\to E^1_{-s,t+i}(X\otimes_{\Sigma_2}X)$. They are unstable with respect to internal degree $t$, not with respect to total degree $n$. All of these operations are linear except for the top operation \cite[4.2]{DwyerHtpyOpsSimpComAlg.pdf}, and commute with the differentials in the cosimplicial direction. Thus, we obtain operations $\delta_i^\textup{alg}:E^2_{-s,t}(X)\to E^2_{-s,t+i}(X\otimes_{\Sigma_2}X)$ for $2\leq i<t$.
+
+At the chain level, what we're doing here is taking a representative $z\in C_{-s,t}X$ such that $\partial_\textup{sim}z=0$, and forming $\rho\Delta_{t-i}(z\otimes_\textup{v} z)$, where $z\otimes_\textup{v} z$ denotes the element of $C(X\otimes_\textup{v}X)_{-s,2t}$.
+
+Let's calculate the leading term of $\textup{DEL}_{i}(x)$ whenever $2\leq i<n$. Write $x=x^s_t+x^{>s}_{>t}$, where $x^s_t\in X^s_t$, and $x^{>s}_{>t}$ lies in filtration $s+1$. Then the leading term will be $\rho\Delta_{t-i}\twist^{t-i}D^s (x^s_t\otimes x^s_t)$. Moreover, as $\{D^k\}$ is \emph{special}, this equals $\rho{\Delta}_{t-i}(x^s_t\otimes_\textup{v} x^s_t)\in C(X\otimes_{\Sigma_2} X)_{-s,t+i}$, where $(x^s_t\otimes_\textup{v} x^s_t)$ denotes the element of $C(X\otimes_\textup{v}X)_{-s,2t}$. Thus `$x^s_t\mapsto \twist^{t-i}D^s(x^s_t\otimes x^s_t)$' implements the assignment `$z\mapsto z\otimes_\textup{v} z$' discussed above, and we're getting a representative for $\delta_i^\textup{alg}(x)$.
+
+
+\subsubsection*{Formula for the boundary}
+
+\begin{prop}
+\label{dvsDEL}
 For $2\leq i\leq t$ and $x\in Z^1_{-s,t}$:
 \[d(\textup{DEL}_i(x))+ \textup{DEL}_i(dx)=\begin{cases}
 \textup{SQ}^{t-i+1,s}(x),&\textup{if }n+1\leq i \leq t-1;\\
 \rho\Delta D^0(x\otimes dx),&\textup{if }i=n;\\
 0,&\textup{if }2\leq i\leq n.
 \end{cases}\]
-\end{cor}
+\end{prop}
 \begin{proof}
 We may apply \ref{boundaryVsBBD} to calculate $d\mathbb{D}_{n-i}(x\otimes x)$ and $d\mathbb{D}_{n-i-1}(dx\otimes x)$, since $|x\otimes x|=2n> 2(n-i+1)$ and $|dx\otimes x|=2n-1> 2(n-i-1+1)$. Thus:
 \begin{alignat*}{2}
@@ -6031,7 +6048,7 @@ d\mathbb{D}_{n-i+1}(y\cdot y)&=
 \Delta\twist D^{-(n-i+2)}(y\cdot y)
 \end{alignat*}
 \normalsize
-Now one may observe that if $a\in F_s$ and $b\in F_{s'}$, then $\mathbb{D}_k(a\cdot b)\in F_s\cap F_{s'}$, so
+Now by \ref{DkIsNiceToFiltration},
 \[H:=\rho(\mathbb{D}_{n-i-1}(x\cdot dy)+\mathbb{D}_{n-i}(dy\cdot y)+\mathbb{D}_{n-i+1}(y\cdot y))\in F_{s-r+1}.\]
 The above calculations show that $H$ has boundary
 \small
