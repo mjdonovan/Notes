@@ -7,6 +7,8 @@
 url=false,doi=false,isbn=false,eprint=false]{biblatex}%
 \newcommand{\NOFULLPAGE}{\relax}
 
+\newcommand{\Sq}{\mathrm{Sq}}
+
 \bibliography{../../Dropbox/logbook/_LOGBOOK/papers}
 \begin{document}
 
@@ -23,15 +25,53 @@ This is the analogue of the topological fact that simply-connected spaces are $R
 \begin{cor}
 If $X$ is a simplicial $\F_2$-algebra, the Adams spectral sequence converges strongly to the homotopy $\pi_*(X)$ of $X$.
 \end{cor}
-\section{Homotopical algebra for unstable Lie coalgebras}
-We will soon be faced with the task of calculating $E^2_{-s,t}(X)=\Ext^s(\F_2[t],H_*^Q(X))$, the $E^2$ page of the Adams spectral sequence for $X$. Before attempting such a calculation one should be equipped with certain homotopical tools.
+\section{Structure on the homology of unstable Lie coalgebras over $\F_2$}
+We will soon be faced with the task of calculating $E^2_{-s,t}(X)=\Ext^s(\F_2[t],H_*^Q(X))$, the $E^2$ page of the unstable Adams spectral sequence for $X$. Before attempting such a calculation one should be equipped with certain homotopical tools.
 
 \subsection{Past work}
-For simplicity, I restrict to the case where $X$ is connected. Then, omitting certain details, work of Goerss [] shows that $H:=H^Q_*X$ is an object in a certain comonadic category $\calC^1$ of Lie coalgebras which are compatibly coalgebras for the algebra of $P$-operations [\textbf{or something}]. It's in this category that we're calculating $\Ext$. Write $\calV^1$ for the category of graded vector spaces. Write $\textup{Pr}:\calC^1\to \calV^1$ for the functor whose value in dimension $t$ is $\Hom(\F_2[t],\DASH)$, so that $E^2_{-s,t}(X)=\mathbb{R}^s\textup{Pr}_t(X)$.
+For simplicity, I restrict to the case where $X$ is connected. Then, omitting certain details, work of Goerss [] shows that $H:=H^Q_*X$ is an object in a certain comonadic category $\calC^1$ of Lie coalgebras which are compatibly coalgebras for the algebra of $P$-operations [\textbf{or something}]. It's in this category that we're calculating $\Ext$. Write $\calV^1$ for the category of graded vector spaces. Write $\textup{Pr}:\calC^1\to \calV^1$ for the functor whose value in dimension $t$ is $\Hom(\F_2[t],\DASH)$, so that $E^2_{-s,t}(X)=\mathbb{R}^s\textup{Pr}_t(H_*X)$.
 
-Talk about the function $\xi_\textup{alg}$. Creates a pairing on $E^2$, as well as Steenrod operations (without an Adem relation).
+In general, let $W$ be any object of $\calC^1$. In the style of the construction of Goerss, one defines a function $\xi_\textup{alg}:(C^{s+1}W)^{\wedge2}\to C^{s+2}W$, writing $C$ for the cofree construction in $\calC^1$, and $\wedge $ for the cokernel of the natural map from coproduct to product. One may combine this with a natural map $j:(\textup{Pr}(C^{s+1}W))^{\otimes2}\to \textup{Pr}((C^{s+1}W)^{\wedge 2})$, to obtain a pairing
+\[\mathbb{R}^s\textup{Pr}(W)\otimes \mathbb{R}^{s'}\textup{Pr}(W)\to \mathbb{R}^{s+s'+1}\textup{Pr}(W)\textup{ given by }[x]\otimes [y]\mapsto [\xi_{\textup{alg}}j(D^0(x\otimes y))]\]
+along with `Steenrod operations'
+\[\Sq^{i+1}:\mathbb{R}^s\textup{Pr}(W)\to \mathbb{R}^{s+i+1}\textup{Pr}(W)\textup{ given by }[x]\mapsto [\xi_{\textup{alg}}j(D^{s-i}(x\otimes x))]\]
+where $\{D^k\}$ is a \emph{special cosimplicial Eilenberg-Zilber map} (c.f.\ \cite[5.2]{turner_opns_and_sseqs_I.pdf}).
+
+Moreover, by virtue of the algebra of $\delta$-operations being Koszul dual to the algebra of $P$-operations, [\textbf{approximately}], the derived functors admit a left action of the $\delta$-operations:
+\[\delta_i:\mathbb{R}^s\textup{Pr}(W)_t\to \mathbb{R}^{s+1}\textup{Pr}(W)_{t+i+1},\textup{ for $2\leq i<t$}.\]
+When attempting to calculate $\mathbb{R}^*\textup{Pr}_*(W)$, one should also attempt to describe the action of these operations.
 
 
+\subsection{Future progress}
+In the future I hope to show that the `Steenrod operations' in fact satisfy the Adem relations --- a claim analogous to results \cite[5.3]{PriddySimplicialLie.pdf} of Priddy, but a little more difficult, since in this context the Eilenberg-Mac Lane functor $\overline{W}$ is rather less useful.
+
+
+\section{Pairings and operations in the Adams spectral sequence for $\F_2$-algebras}
+If $X$ is a simplicial $\F_2$-algebra, then $\pi_*(X)$ is itself a commutative algebra, of which $\oplus_{t>0}\pi_{t}X$ is a divided power ideal. Moreover, $\pi_*(X)$ exhibits higher divided square operations $\delta_i:\pi_t(X)\to \pi_{t+i}(X)$, for $2\leq i \leq t$, which satisfy an Adem relation, and the unstability relation $\delta_ix=\gamma_2(x)$. One would hope to be able to find products and $\delta$-operations on the whole spectral sequence, compatible at $E^\infty$ with those on $\pi_*(X)$.
+
+Now we'll use the canonical double complex, $E^0_{-s,t}=c(KQc)^{s+1}X$, in which case we have 
+\[E^1_{-s,t}=\pi_t(c(KQc)^{s+1}X)\cong \textup{Pr}(H_t^Q(c(KQc)^{s+1}X))\cong \textup{Pr}(C^{s+1}H_*^Q(X))\cong \Hom(H_*^QS^t,C^{s+1}(H^Q_*(X))).\]
+We are then deriving the Adams spectral sequence as the spectral sequence of a cosimplicial simplicial algebra, filtered by cosimplicial degree. Dwyer \cite{DwyerHigherDividedSquares.pdf} has investigated the products and unary operations available in the spectral sequence of a cosimplicial simplicial coalgebra, filtered by cosimplicial degree. This is not the linear dual of the situation of interest for the Adams spectral sequence I investigate, and so, using analogous constructions, I prove:
+\begin{thm}
+Denote by $E^r_{-s,t}$ the spectral sequence of a cosimplicial simplicial nonuital $\F_2$-algebra $X$. Then one can construct a product pairing, Steenrod operations $\Sq^i:E^r_{-s,t}\to E^r_{-s-i,2t}$ (for $i\geq0$), and $\delta$ operations $\delta_i:E^r_{-s,t}\to E^r_{-s,t+i}$ (for $i$ satisfying $2\leq i<t-(r-2)$). The Steenrod operations have indeterminacy vanishing by $E^{2r-2}$, survive to $E^{2r-1}$, and commute with differentials, in the sense that $d_{2r-1}(\Sq^ix)=\Sq^{i+r-1}(d_rx)$ modulo indeterminacy. The $\delta$-operations may be multivalued when $i\geq \textup{max}(t-2(r-2),n+1)$ (so that at $E^2$, all the operations are well defined except for $\delta_t$, which is not defined at all).
+\begin{enumerate}\squishlist
+\setlength{\parindent}{.25in}
+\item When $i<t-s$, $d_r\delta_i(x)=\delta_i(d_rx)$.
+\item When $i=t-s$, $d_r\delta_i(x)=\begin{cases}
+\delta_i(d_rx),&\textup{if }s>0;\\
+\delta_i(d_rx)+x\times d_rx,&\textup{if }s=0.
+%\\,&\textup{if }
+\end{cases}$
+\item When $i>t-s$, $d_r\delta_i(x)=\begin{cases}
+\delta_i(d_rx),&\textup{if }r<t-i+1;\\
+\delta_i(d_rx)+\Sq^{t-i+1}(x),&\textup{if }r=t-i+1;\\
+\Sq^{t-i+1}(x),&\textup{if }r>t-i+1.\\
+%\\,&\textup{if }
+\end{cases}$
+\end{enumerate}
+Broadly speaking then, the $\delta_i$ operations for $i>t-s$ support a differential hitting a Steenrod operation. If $X$ admits a coaugmentation from a simplicial algebra $X$, then the $\delta$-operations 
+\end{thm}
+\section{Iterative calculation of the homology of unstable Lie coalgebras}
 \begin{prop}
 The functor $\textup{Pr}$ factors through the category $\calL^1$ of Lie coalgebras:
 \[\xymatrix@R=4mm@1{
@@ -43,18 +83,6 @@ The functor $\textup{Pr}$ factors through the category $\calL^1$ of Lie coalgebr
 }\]
 \end{prop}
 At this point, we may apply the machinery of 
-\subsection{Future progress}
-Demonstrate that the Steenrod operations satisfy the Adem relations. Don't have $\Sigma_4$-equivariance, but may not matter --- see Priddy.
-
-Extend the delta which lives inside the derived functors to one on all of $E^2$, ABSTRACTLY! JUST FROM THE FACT THAT IT'S DERIVED FUNCTORS!
-
-
-\section{Pairings and operations in the Adams spectral sequence for $\F_2$-algebras}
-If $X$ is a simplicial $\F_2$-algebra, then $\pi_*(X)$ is itself a commutative algebra, of which $\oplus_{t>0}\pi_{t}X$ is a divided power ideal. Moreover, $\pi_*(X)$ exhibits higher divided square operations $\delta_i:\pi_t(X)\to \pi_{t+i}(X)$, for $2\leq i \leq t$, which satisfy an Adem relation, and the unstability relation $\delta_ix=\gamma_2(x)$. One would hope to be able to find products and $\delta$-operations on the whole spectral sequence, compatible at $E^\infty$ with those on $\pi_*(X)$.
-
-Now we'll use the canonical double complex, $E^0_{-s,t}=c(KQc)^{s+1}_t$, in which case we have $E^1_{-s,t}=\Hom(\F_2[t],C^{s+1}(H^Q_*(X)))$, where $C$ is the cofree comonad for the target category for Andre-Quillen homology $H^Q_*$.
-
-
 
 \printbibliography
 
