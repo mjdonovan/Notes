@@ -17,10 +17,12 @@
 \excludeversion{prereqs for Thoughts III}
 \excludeversion{Thoughts on Adams Multiplicativity III}
 \excludeversion{Adams sseq operations old version}
-\def\excludeversion#1{\includeversion{#1}}
+\excludeversion{letter to Dwyer}
+%\def\excludeversion#1{\includeversion{#1}}
 \excludeversion{Frontmatters}
 \excludeversion{Endmatter}
-\excludeversion{AdamsDerivation}
+\Ixcludeversion{cofreeFunctors}
+\Ixcludeversion{AdamsDerivation}
 \excludeversion{TotalisationInSAlg}
 \excludeversion{convergence}
 \excludeversion{iteratedBarConstructions}
@@ -30,9 +32,8 @@
 \excludeversion{DiagramOfFunctors}
 \excludeversion{GrothendieckSpectralSequences}
 \excludeversion{Grothendieck Multiplicativity}
-\excludeversion{Adams Muliplicativity}
-\excludeversion{letter to Dwyer}
-\Ixcludeversion{AdamsSSEQ operations final}
+\Ixcludeversion{Adams Muliplicativity}
+\excludeversion{AdamsSSEQ operations final}
 \excludeversion{KoszulComplexes_n>1}
 \excludeversion{KoszulComplexes1}
 \excludeversion{DerivedFunctorsLowDimension}
@@ -46,7 +47,7 @@
 \excludeversion{DimZeroPart}
 \excludeversion{AxisComputationSummary}
 \excludeversion{VanishingLines}
-\Ixcludeversion{conjectured differentials}
+\excludeversion{conjectured differentials}
 \excludeversion{grothendieck collapse}
 
 \newcommand{\GS}[1]{\scrE^{#1}}
@@ -158,8 +159,41 @@
 
 
 
+\begin{cofreeFunctors}
+\begin{lem}
+For $X$ a simplicial algebra, the map $QcX\to QcKQcX$ induces the coalgebra structure map $HX\to C(HX)$.
+\end{lem}
+\begin{proof}
+The composite $QcX\to QcKQcX\to QKQcX=KQcX$ is the identity, and so, therefore, is the induced composite $HX\to C(HX)\to HX$. Then one just has to check that $C(HX)\to HX$ is the projection onto generators. That's just to check that (with $V=QcX$) the map $QcKV\to KV$ is projection onto generators (counit), which must surely be the point of Goerss' theorem I.
+\end{proof}
+\end{cofreeFunctors}
+The homology of the injection is $\pi$ applied to
+\[
+\vcenter{
+\def\labelstyle{\scriptstyle}
+\xymatrix@C=1.5cm@1{
+QcX\,
+\ar[r]
+&
+\,QcKQcX\,
+\ar[r];[]
+&
+\,Qc(KQc)^2X\,
+\ar@<-1ex>[l];[]
+\ar@<+1ex>[l];[]
+\ar@<+1ex>[r];[]
+\ar@<-1ex>[r];[]
+&
+\,Qc(KQc)^3X\,\makebox[0cm][l]{\,$\cdots $}
+\ar[l];[]
+\ar@<-2ex>[l];[]
+\ar@<+2ex>[l];[]
+}}\]
+and we've just analysed the cofaces. For the codegeneracies, we need to look at the collapses $QcK V\to V$, which induce the counit maps $C\pi V\to \pi V$.
 
+So what \emph{is} C? Well, I guess that the dual, free functor sends a vector space to the free unstable $\calP$-module (with all $P^i$ defined) on the free bad Lie algebra, then quotients by the relation `$P^\textup{top}$ is the self-square'. I guess then that $CV$ is a subspace of $\check\calP\otimes\Gamma(\check\scrL)(V)$. There's a distributive law telling you the comonad structure, which preserves this subspace.
 
+The element $\check P^i\otimes v$ can hopefully be singled out by properties like $(\check P^i\otimes v)P^i=v$ and $(\check P^i\otimes v)P^j=0$ if $j\neq i$ and $\textup{cobrac}(\check P^i\otimes v)=0$, where we're using the right-down action of $\calP$ that you must get.
 
 
 \begin{hiltonMilnorQuestionable}
@@ -5106,7 +5140,7 @@ It's enough to check that the composite $c(X\sqcup X)\to  V$ is null. However, a
 
 
 \subsection{A chain level construction of $j$}
-Write $S^n$ for (the free construction on) $\Delta^n/\partial\Delta^n$, and $CS^n$ for (the free construction on) the reduced cone thereupon. Now there's a map $S^{n+m}\to S^n\sqcup S^m$ sending the fundamental class to the Eilenberg-Zilber formula. That is, if $\mu:(S^n\sqcup S^m)^{\otimes 2}\to S^n\sqcup S^m$ is multiplication, the map we are describing sends $\imath_{n+m}\mapsto \mu(\textup{EZ}(\imath_n,\imath_m))$. Now consider the complex $C_{n,m}$ formed by coning off the corresponding homotopy class:
+Write $S^n$ for (the free construction on) $\Delta^n/\partial\Delta^n$, and $CS^n$ for (the free construction on) the reduced cone thereupon. Now there's a map $S^{n+m}\to S^n\sqcup S^m$ sending the fundamental class to the Eilenberg-Zilber formula. That is, if $\mu:(S^n\sqcup S^m)^{\otimes 2}\to S^n\sqcup S^m$ is multiplication, the map we are describing sends $\imath_{n+m}\mapsto \mu(\Delta(\imath_n,\imath_m))$. Now consider the complex $C_{n,m}$ formed by coning off the corresponding homotopy class:
 \[\xymatrix@R=4mm{
 S^{n+m}\ar[r]
 \ar@{ >->}[d]
@@ -5122,23 +5156,19 @@ Now $C_{n,m}$ has an $n+m+1$-dimensional generator $g$, the image of the cone on
 The diagonal of $g$ is $\imath_n\otimes\imath_m+\imath_m\otimes\imath_n$.
 \end{prop}
 \begin{proof}
-The representative $g$ has the property that $d_0(g)=\mu(\textup{EZ}(\imath_n,\imath_m))$ and $d_i(g)=0$ for $i>0$. We calculate 
+The representative $g$ has the property that $d_0(g)=\mu(\Delta(\imath_n\otimes\imath_m))$ and $d_i(g)=0$ for $i>0$. We calculate 
 \begin{alignat*}{2}
 \psi(d_0(g))
 &=
-\mu(\textup{EZ}(\overline{\imath_n}+\overline{\overline{\imath_n}},\overline{\imath_m}+\overline{\overline{\imath_m}}))%
+\mu(\Delta((\overline{\imath_n}+\overline{\overline{\imath_n}})\otimes (\overline{\imath_m}+\overline{\overline{\imath_m}})))%
 \\
 \xi(g)
 &=
-\mu(\textup{EZ}(\overline{\imath_n},\overline{\overline{\imath_m}})+\textup{EZ}(\overline{\overline{\imath_n}},\overline{\imath_m}))\in Q((C_{n,m})_{n+m}^{\wedge 2})%
+\mu(\Delta(\overline{\imath_n}\otimes\overline{\overline{\imath_m}})+ \Delta(\overline{\overline{\imath_n}}\otimes\overline{\imath_m}))\in Q((C_{n,m})_{n+m}^{\wedge 2})%
 \\
-% Left hand side
 j(\xi(g))
-% Relation
 &=
-% Right hand side
-\textup{EZ}^\otimes ({\imath_n},{{\imath_m}})+\textup{EZ}^\otimes ({\imath_m},{{\imath_n}})\in (Q((C_{n,m})_{n+m}))^{\otimes 2}%
-% Comment
+\Delta^\otimes ({\imath_n}\otimes{{\imath_m}})+\Delta^\otimes ({\imath_m}\otimes{{\imath_n}})\in (Q((C_{n,m})_{n+m}))^{\otimes 2}%
 \end{alignat*}
 This class represents $\imath_n\otimes\imath_m+\imath_m\otimes\imath_n$.
 \end{proof}
@@ -5288,6 +5318,44 @@ c(\overline{V}X^{\fraks-1})\makebox[0cm][l]{\,$=X^\fraks$}\phantom{=}%r2c4
 %Starting with the straight arrows, we need to justify the rightmost curved arrow. 
 The naturality of $\overline{F}$ allows us to see the bottom curved arrow, then the definition of $\overline{F}$ gives the next curved arrow, and naturality of the standard lift gives the third curved arrow.
 \end{proof}
+\subsection{A two-cell complex for the Koszul $\delta$ operations}
+In this section, we give a construction of a two-cell complex whose cohomology has a $P^i$ connecting the two cells.
+
+Choose $n\geq2$ and $i$ satisfying $2\leq i\leq n$. There's a map $S^{n+i}\to S^n$ sending the fundamental class $\imath_{n+m}$ to the class $\mu\Delta_{n-i}(\imath_n\otimes\imath_n)$. Now consider the complex $C_n^i$ formed by coning off the corresponding homotopy class:
+\[\xymatrix@R=4mm{
+S^{n+i}\ar[r]
+\ar@{ >->}[d]
+&%r1c1
+S^n\ar@{ >->}[d]
+\\%r1c2
+CS^{n+i}\ar[r]
+&%r2c1
+C_n^i%r2c2
+}\]
+Now $C_n^i$ has an $n+i+1$-dimensional generator $h$, the image of the cone on the fundamental class of $S^{n+i}$, and the homology LES shows that $H_*(C_n^i)$ is two-dimensional, containing classes $\imath_n$ and $h$. We'll show that $\imath_n=h P^i$. For this we recall Goerss' definition of the right action of the $P^i$ on homology: given a cycle $x\in N_nQX$, we consider the class of $j\xi(x)$ in $\pi_*(S^2(QX))$. By \cite[prop 3.7, lem 3.9]{MR1089001}, the classes $xP^i$ are determined as the unique classes for which there is an equation
+\[(j\xi)_*(x)=\sum_{j}\pi_*(1+T)(y_j\otimes z_j)+\sum_i\sigma_i(xP^i)\]
+for classes $y_j$ and $z_j$ in $\pi_*(QX)$. Here, $\sigma_i:\pi_nQX\to \pi_{n+i}S^2(QX)$ is an operator that in fact equals $\textup{tr}_*\delta_i$ whenever $2\leq i\leq n$. After this, the coproduct on $\pi_*(QX)$ can be recovered as the quantity
+\[x P^{n/2}\otimes x P^{n/2}+\sum_j(1+T)(y_j\otimes z_j)\in \pi_*(QX)\otimes \pi_*(QX).\]
+
+In order to determine $(j\xi)_*(h)$, as the representative $h$ has the property that $d_0(h)=\mu(\Delta_{n-i}(\imath_n,\imath_n))$ and $d_i(g)=0$ for $i>0$, we calculate 
+\begin{alignat*}{2}
+\psi(d_0(h))
+&=
+\mu(\Delta_{n-i}((\overline{\imath_n}+\overline{\overline{\imath_n}})\otimes (\overline{\imath_n}+\overline{\overline{\imath_n}})))%
+\\
+\xi(h)
+&=
+\mu(\Delta_{n-i}(\overline{\imath_n}\otimes\overline{\overline{\imath_n}})+\Delta_{n-i}(\overline{\overline{\imath_n}}\otimes\overline{\imath_n}))\in Q((C_n^i)_{n+i}^{\wedge 2})%
+\\
+j(\xi(h))
+&=
+(1+T)\Delta_{n-i}^\otimes ({\imath_n}\otimes{{\imath_n}})\in (Q((C_n^i)_{n+i}))^{\otimes 2}%
+\end{alignat*}
+which represents $\sigma_i(\imath_n)$. Thus the defining equation becomes simply
+\[\sigma_i(\imath_n)=\sum_i\sigma_i(hP^i)\]
+and the result is proven: $P^ih=\imath_n$.
+
+
 \subsection{A left inverse for the Hurewicz}
 Suppose that $Y$ is an abelian (i.e.\ zero-square)  simplicial algebra. Then $QY=Y$, giving a commuting diagram
 \[\xymatrix@R=4mm{
