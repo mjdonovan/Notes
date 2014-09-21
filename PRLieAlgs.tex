@@ -167,7 +167,7 @@ For $X$ a simplicial algebra, the map $QcX\to QcKQcX$ induces the coalgebra stru
 The composite $QcX\to QcKQcX\to QKQcX=KQcX$ is the identity, and so, therefore, is the induced composite $HX\to C(HX)\to HX$. Then one just has to check that $C(HX)\to HX$ is the projection onto generators. That's just to check that (with $V=QcX$) the map $QcKV\to KV$ is projection onto generators (counit), which must surely be the point of Goerss' theorem I.
 \end{proof}
 \end{cofreeFunctors}
-The homology of the injection is $\pi$ applied to
+The homology of the resolution is $\pi$ applied to
 \[
 \vcenter{
 \def\labelstyle{\scriptstyle}
@@ -5200,7 +5200,7 @@ This class represents $\imath_n\otimes\imath_m+\imath_m\otimes\imath_n$.
 %where the outer rectangle commutes since in $L^{\times2}$, $(a,0)\cdot(0,b)=(0,0)$. This gives a map $C_{n,m}\to c_2(L^{\times2})$ whose restriction to the subcomplex $S^n\sqcup S^m$ gives the homotopy classes $\alpha$ and $\beta$. The image $g_{\alpha,\beta}$ of the class $g\in(C_{n,m})_{n+m+1}$ is then an explicit representative for the homology class sought.
 We can use this cofibration to build a chain level construction of the map $j:\textup{Pr}_t(HY)\otimes \textup{Pr}_{t'}(HZ)\to \textup{Pr}_{t+t'+1}(HY\wedge HZ)$ on spherical homology classes:
 \begin{prop}
-There is a function, natural in $X,Y\in s\Comm$
+There is a function, natural in $Y,Z\in s\Comm$
 \[\overline{F}:\hom_{s\Comm}(S^t,Y)\times\hom_{s\Comm}(S^{t'},Z)\to \hom_{s\Comm}(C_{t,t'},c(Y\times Z))\]
 such that the function
 \[F:\hom_{s\Comm}(S^t,Y)\times\hom_{s\Comm}(S^{t'},Z)\to \pi_{\frakt+1}(Qc(Y\times Z)):=H_{\frakt+1}(Y\times Z)\]
@@ -5233,6 +5233,7 @@ H_{\frakt+1}(Y\times Z)\ar[r]%\ar[l]_-{\Delta}
 }}\]
 \end{prop}
 \begin{proof}
+\textbf{Maybe I can get rid of the use of \emph{canonical} lifts.} [Was I only using them because I was nervous?]
 The value of $\overline{F}$ on $(\alpha,\beta)$ is defined as follows. Corresponding to the commuting diagrams
 \[\xymatrix@R=4mm{
 0\ar[r]
@@ -5266,7 +5267,7 @@ S^t\sqcup S^{t'}\ar@{ >->}[d]
 \\%r1c2
 CS^{\frakt}\ar[r]\ar@/_1em/[rr]_-{0}
 &%r2c1
-C{t,t'}\ar@{..>}[r]
+C_{t,t'}\ar@{..>}[r]
 %r2c2
 &Y\times Z}\]
 Corresponding to the right square is a map $C_{t,t'}\to c_2(Y\times Z)$, and the composite with the cofibration $c_2(Y\times Z)\to c(Y\times Z)$ is $\overline{F}(\alpha,\beta)$. This function $\overline{F}$ is evidently natural in $Y$ and $Z$, and so then is $F$.
@@ -5316,7 +5317,7 @@ c(\overline{V}X^{\fraks-1}\Times \overline{V}X^{\fraks-1})\ar[r]_-{c(\textup{add
 c(\overline{V}X^{\fraks-1})\makebox[0cm][l]{\,$=X^\fraks$}\phantom{=}%r2c4
 }\]
 %Starting with the straight arrows, we need to justify the rightmost curved arrow. 
-The naturality of $\overline{F}$ allows us to see the bottom curved arrow, then the definition of $\overline{F}$ gives the next curved arrow, and naturality of the standard lift gives the third curved arrow.
+To see this, we verify the veracity of the three curved arrows, bottom to top. The naturality of $\overline{F}$ allows us to see the bottom curved arrow, then the definition of $\overline{F}$ gives the next curved arrow, and naturality of the standard lift gives the third curved arrow.
 \end{proof}
 \subsection{A two-cell complex for the Koszul $\delta$ operations}
 In this section, we give a construction of a two-cell complex whose cohomology has a $P^i$ connecting the two cells.
@@ -5353,7 +5354,7 @@ j(\xi(h))
 \end{alignat*}
 which represents $\sigma_i(\imath_n)$. Thus the defining equation becomes simply
 \[\sigma_i(\imath_n)=\sum_i\sigma_i(hP^i)\]
-and the result is proven: $P^ih=\imath_n$.
+and the result is proven: $P^ih=\imath_n$. \textbf{Note that the coproduct} is zero unless we're at the top, in which case it's $\imath_n\otimes\imath_n$.
 
 
 \subsection{A left inverse for the Hurewicz}
@@ -5594,8 +5595,104 @@ Moreover, at the right of this diagram we see exactly the maps needed in order t
 %\[0\to\overline{D}^1X^\fraks\to X^\fraks\overset{\overline{v}}{\to} \overline{V}X^\fraks\to 0,\]
 This confirms that $\partial_\textup{conn}(\textup{dot}(\alpha,\beta))$ is the image under $\widetilde{(\epsilon\alpha)} \sqcup \widetilde{(\epsilon\beta)}$ of $\textup{EZ}^\mu(\imath_t,\imath_t')$. As $\alpha\sim \widetilde{(\epsilon\alpha)}$ and $\beta\sim \widetilde{(\epsilon\beta)}$, this completes the proof.
 \end{proof}
+\subsection{$E^1$-level identification of the $\delta$-operations}
+\begin{prop}\label{propOnKoszulDelta}
+There is a function, natural in $W\in s\calV$
+\[\overline{G}:\hom_{s\calV}(S^t,W)\to \hom_{s\Comm}(C_t^i,cKW)\]
+such that the function
+\[G:\hom_{s\Comm}(S^t,W)\to \pi_{t+i+1}(QcKW):=H_{t+i+1}(KW)\]
+defined by $F(\alpha):=H_*(\overline{G}(\alpha)(h)$ makes the following diagram commute:
+\[\mathclap{\xymatrix@R=4mm{
+\hom_{s\calV}(S^t,W)\ar[d]^-{G}
+\ar[r]^-{\textup{hur}}
+&%r1c1
+\pi_t W\ar[d]^-{\check P^i\otimes(\DASH)\textbf{???? when $i=t$}}
+\\
+H_{t+i+1}(KW)\ar@{=}[r]
+&%r2c1
+(C\pi V)_{t+i+1}
+}}\]
+Moreover, $\overline{G}(\alpha)(\imath_t)=\widetilde{\alpha}$, the canonical lift of $\alpha$.
+\end{prop}
+\begin{proof}
+The value of $\overline{G}$ on $\alpha$ is defined as follows. Corresponding to the commuting diagram
+\[\xymatrix@R=4mm{
+0\ar[r]
+\ar@{ >->}[d]
+&%r1c1
+0\ar[d]
+\\%r1c2
+S^t\ar[r]^-{\alpha}
+&%r2c1
+KW%r2c2
+}
+\]
+is a map $\widetilde{\alpha}:S^t\to c_1(KW)$, and there is a commuting diagram %(since in $Y\times Z$, products of the form $(a,0)(0,b)$ vanish):
+\[\xymatrix@R=4mm@C=15mm{
+S^{t+i}\ar@{->}[r]_-{\mu\Delta_{t-i}(\imath_t\otimes\imath_{t})}
+\ar@{ >->}[d]
+&%r1c1
+S^t\ar@{ >->}[d]
+\ar[r]^{\widetilde{\alpha}}
+&c_1(KW)\ar[d]
+\\%r1c2
+CS^{t+i}\ar[r]\ar@/_1em/[rr]_-{0}
+&%r2c1
+C_t^i\ar@{..>}[r]
+%r2c2
+&KW}\]
+Corresponding to the right square is a map $C_t^i\to c_2(KW)$, and the composite with the cofibration $c_2(KW)\to c(KW)$ is $\overline{G}(\alpha)$. This function $\overline{G}$ is evidently natural in $W$, and so then is $G$.
 
+Now under the homology coalgebra map $\overline{G}(\alpha)_*:HC_t^i\to HKW$, we have $h\mapsto G(\alpha)$ and $\imath_t\mapsto\textup{hur}(\alpha)$. \textbf{Hopefully we can figure out enough about cofree homology coalgebras and their right $P$-action to see that $G(\alpha)$ can only equal the Koszul operation on $\textup{hur}(\alpha)$.} In the non-top case, we have zero coproduct and only $(\DASH)P^i$ firing, while in the top case we have coproduct $\textup{hur}(\alpha)\otimes \textup{hur}(\alpha)$ instead.
+\end{proof}
 
+Now to get to the point, we have a commuting diagram
+\[\xymatrix@R=4mm{
+\hom_{s\Comm}(S^t,X)\ar[r]^-{\delta_i}
+\ar[d]^-{\epsilon_*}
+&%r1c1
+\pi_{t+i}(X\wedge_{\Sigma_2} X)\ar[r]^-{\mu}
+&
+\pi_{t+i}(\overline{D}^1X)
+\\%r1c2
+\hom_{s\calV}(S^t,\overline{X})\ar[r]^-{G}&%r2c1
+\pi_{t+i+1}(Qc\overline{X})\ar@{=}[r]
+&
+\pi_{t+i+1}(\overline{V}X)
+\ar[u]^-{\partial_\textup{conn}}
+}\]
+and the induced map $\pi_t(X)\to \pi_{t+i+1}(VX)$ is the Koszul $\delta_i$ operation, by \ref{propOnKoszulDelta}, while the top path, using the `inverse' of $\partial_\textup{conn}$ is the algebraically defined $\delta_i$ operation.
+\begin{proof}[Proof that this diagram commutes]
+It follows from the diagram:
+\[\xymatrix@R=4mm{
+X_{t+i}&%r1c1
+X_{t+i+1}\ar[l]_-{d_0}
+\ar[r]^-{\overline{v}}
+&%r1c2
+(\overline{V}X)_{t+i+1}\\%r1c3
+(C_t^i)_{t+i}\ar[u]^-{\overline{G}(\epsilon\alpha)}
+&%r2c1
+(C_t^i)_{t+i+1}\ar[u]^-{\overline{G}(\epsilon\alpha)}\ar[r]^-{\eta}
+\ar[l]_-{d_0}
+&%r2c2
+(KQC_t^i)_{t+i+1}\ar[u]_-{KQ\overline{G}(\epsilon\alpha)}%r2c3
+}\]
+Propagating the element $h\in (C_t^i)_{t+i+1}$, these groups contain the following elements:
+\[\xymatrix@R=4mm{
+\mu\Delta_{t-i}(\widetilde{\epsilon\alpha}\otimes \widetilde{\epsilon\alpha})&%r1c1
+G(\epsilon\alpha)\ar@{|->}[l]_-{d_0}
+\ar@{|->}[r]^-{\overline{v}}
+&%r1c2
+KQG(\epsilon\alpha)\\%r1c3
+\mu\Delta_{t-i}(\imath_t\otimes\imath_t)\ar@{|->}[u]^-{\overline{G}(\epsilon\alpha)}
+&%r2c1
+h\ar@{|->}[u]^-{\overline{G}(\epsilon\alpha)}\ar@{|->}[r]^-{\eta}
+\ar@{|->}[l]_-{d_0}
+&%r2c2
+h\ar@{|->}[u]_-{KQ\overline{G}(\epsilon\alpha)}%r2c3
+}\]
+As the element we have written as $KQG(\alpha)$ is a representative for $(G\circ\epsilon_*)(\alpha)\in\pi_{t+i+1}(\overline{V}X)$, the class $(\partial_\textup{conn}\circ G\circ\epsilon_*)(\alpha)$ is represented by $\mu\Delta_{t-i}(\widetilde{\epsilon\alpha}\otimes \widetilde{\epsilon\alpha})$. Of course this is homotopic to $\mu\Delta_{t-i}(\alpha\otimes \alpha)$, which represents $\mu\delta_i(\alpha)$.
+\end{proof}
 \end{Adams Muliplicativity}
 \begin{Adams sseq operations old version}
 \section{Operations in the Adams spectral sequence}
