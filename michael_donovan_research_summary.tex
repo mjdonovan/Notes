@@ -1,0 +1,554 @@
+% !TEX root = z_output/michael_donovan_research_summary.tex
+\documentclass[11pt]{article}
+\input{../macros.tex}
+\usepackage{framed}
+%\usepackage{biblatex} 
+\usepackage[style=alphabetic,citestyle=alphabetic,
+url=false,doi=false,isbn=false,eprint=false]{biblatex}%
+\newcommand{\NOFULLPAGE}{\relax}
+
+\newcommand{\Sq}{\mathrm{Sq}}
+
+\bibliography{../../Dropbox/logbook/_LOGBOOK/papers}
+\begin{document}
+
+\section*{\huge Research statement [draft]\hfill\normalsize Michael Donovan} 
+
+In defining the notion of a model category, Daniel Quillen \cite{QuillenHomAlg.pdf} formulated the notion of homotopy theory in a variety of contexts. The context of primary interest in this statement is that of simplicial commutative rings. Quillen's advance allowed him to define a notion of the (co)homology of commutative rings, and put this definition in a common framework with the (co)homology of topological spaces. The resulting theory, now known as Andr\'e-Quillen (co)homology, is of inherent interest in algebraic topology, appearing for example in the proof of the Sullivan conjecture \cite{MillerSullivanConjecture.pdf}. It is of interest also to commutative algebraists, for example Michel Andr\'e, after whom the theory is also named for his development of a parallel theory of the simplicial resolution of rings.
+
+My primary research goal has been to advance our understanding of the homotopy theory of simplicial commutative rings. By virtue of the fact that this homotopy theory fits into the same framework as the homotopy theory of spaces, one expects our understanding of one homotopy theory to shed light on the other. However, our understanding of simplicial algebras lags behind our knowledge of topological spaces.
+
+My research has so far focused on the (unstable) Adams spectral sequence for simplicial commutative algebras (ASSsa). The Adams spectral sequence for topological spaces (ASSts) was introduced by Adams in 1958 \cite{MR0096219}, while the ASSsa was constructed by Radelescu-Banu only in 2006 \cite{radelescuBanu.pdf}. Further study of the ASSts was performed by Bousfield and Kan in a series \cite{BousKanSSeq.pdf,BK_pairings.pdf,BK_pairings_products.pdf} of papers. One part of my research has been to produce analogous results for the ASSsa: completion and convergence results, along with spectral sequence operations (when the base ring is $\F_2$).
+
+The May spectral sequence \cite{MayRestLie.pdf} is a further spectral sequence converging to the $E^2$ page of the ASSts. A further component of my research has been to develop a composite functor spectral sequence with target the $E^2$ page of the ASSsa. In fact, I develop an infinite series of such composite functor spectral sequences, each converging to the $E^2$ page of the previous. Using these spectral sequences, and Koszul methods following \cite{PriddyKoszul.pdf}, we can produce effective upper bounds on the size of the Adams $E^2$ page, including a vanishing line result.
+
+Now even the $E^2$ page of the ASSts is notoriously difficult to compute, say, with input a sphere, and the homotopy groups of a topological sphere are notoriously difficult to calculate. On the other hand, over $\F_2$, the homotopy groups of a simplicial algebra sphere are known \cite{DwyerHtpyOpsSimpComAlg.pdf}, and one might expect the ASSca to be simple. Calculations I have made of the $E^2$-page show that this is quite untrue, and the spectral sequence is very far from degenerate. 
+
+The tools and techniques I have developed appear to put within reach the complete calculation of the ASSsa for a simplicial $\F_2$-algebra sphere. I have made certain computer calculations which have led to a system of conjectured differentials, which if correct, would be all of the differentials in the spectral sequence. The work on verifying that these differentials are correct is ongoing, and seems certain to depend on understanding the various operations which can be defined on the composite functor spectral sequences I have developed.
+
+If this work is completed, it will be possible to combine the understanding we have obtained of the $E^2$ term for spheres, in order to define a single `Koszul' spectral sequence converging to the $E^2$ term for any connected simplicial algebra.
+
+%Completion of this analysis of the ASS for a simplicial algebra sphere may shed some light
+To be (improved and) continued...
+
+
+\textup{}
+
+\noindent The following six sections detail the various aspects of my research so far.
+
+
+
+\section{The unstable Adams spectral sequence for simplicial $k$-algebras}
+In \cite{radelescuBanu.pdf}, Radelescu-Banu shows how to form a homotopically correct Adams resolution for a simplicial commutative algebra $X$. He equips the cofibrant replacement functor $c$ with the structure of a comonad, after which the sequence
+\[\frakX^s:=c(KQc)^{s+1}X\]
+is a coaugmented cosimplicial object --- the comonad diagonal map is needed in order to define the coface maps. Then we call $\hat X:=\textup{Tot}\frakX$ \emph{the completion of $X$ with respect to abelianization}, a homotopical functor of $X$. The Adams spectral sequence is the spectral sequence of the mixed simplicial vectorspace $\frakX^\bullet_\bullet$, and we may regard its target as $\pi_*(\hat X)$.
+
+\subsection{Completed work}
+We prove a conjecture of Radelescu-Banu:
+\begin{thm}
+If $X$ is a connected simplicial algebra, then the completion map $X\to \hat X$ is an equivalence.
+\end{thm}
+This is the analogue of the topological fact that simply-connected spaces are $R$-complete. Combining this with theorem \ref{vanishing-line-theorem} (to follow), one has:
+\begin{cor}
+If $X$ is a connected simplicial $\F_2$-algebra, the Adams spectral sequence converges strongly to the homotopy $\pi_*(X)$ of $X$.
+\end{cor}
+\section{The homology of unstable Lie coalgebras over $\F_2$}
+We will soon be faced with the task of calculating $E^2_{-s,t}(X)=\Ext^s(\F_2[t],H_*^Q(X))$, the $E^2$ page of the unstable Adams spectral sequence for $X$. This $\Ext$ group is taken in the category $\calC^1$ which is the target of the Andre-Quillen homology functor $H_*^Q$, a category of `unstable Lie coalgebras'. Omitting certain details, objects of this category are graded coalgebras which are compatibly unstable comodules for the coalgebra dual to the algebra $P$ generated by $P^i$ ($i\geq2$), subject to the Adem relation of \cite[p.17]{MR1089001}. There are degree shifts in these (co)operations, so that the cobracket has degree $-1$, and the dual of $P^i$ has degree $i+1$.
+
+Write $\calV^1$ for the category of graded vector spaces, and $\textup{Pr}:\calC^1\to \calV^1$ for the functor whose value in dimension $t$ is $\Hom(\F_2[t],\DASH)$, so that $E^2_{-s,t}(X)=\mathbb{R}^s\textup{Pr}_t(H_*X)$. We refer to these derived functors as the homology of the unstable Lie coalgebra $H_*^QX$. For simplicity, we restrict to the case of connected simplicial algebras $X$.
+
+\subsection{Completed work}\label{PastWorkOnE2LevelStructure}
+%For simplicity, I restrict to the case where $X$ is connected. Then, omitting certain details, work of Goerss [] shows that $H:=H^Q_*X$ is an object in a certain comonadic category $\calC^1$ of Lie coalgebras which are compatibly coalgebras for the algebra of $P$-operations [\textbf{or something}]. It's in this category that we're calculating $\Ext$. 
+In general, let $W$ be any object of $\calC^1$. In the style of the construction of Goerss  \cite[\S5]{MR1089001}, one defines a function $\xi_\textup{alg}:((C^{s+1}W)^{\wedge2})_{t}\to (C^{s+2}W)_{t+1}$, writing $C$ for the cofree construction in $\calC^1$, and $\wedge $ for the cokernel of the natural map from coproduct to product. One may combine this with a natural map $j:(\textup{Pr}(C^{s+1}W))^{\otimes2}\to \textup{Pr}((C^{s+1}W)^{\wedge 2})$, to obtain a pairing
+\[\mathbb{R}^s\textup{Pr}_t(W)\otimes \mathbb{R}^{s'}\textup{Pr}_{t'}(W)\to \mathbb{R}^{s+s'+1}\textup{Pr}_{t+t'+1}(W)\textup{ given by }[x]\otimes [y]\mapsto [\xi_{\textup{alg}}j(D^0(x\otimes y))]\]
+along with `Steenrod operations'
+\[\Sq^{i+1}:\mathbb{R}^s\textup{Pr}_t(W)\to \mathbb{R}^{s+i+1}\textup{Pr}_{2t+1}(W)\textup{ given by }[x]\mapsto [\xi_{\textup{alg}}j(D^{s-i}(x\otimes x))]\]
+where $\{D^k\}$ is a \emph{special cosimplicial Eilenberg-Zilber map} (c.f.\ \cite[5.2]{turner_opns_and_sseqs_I.pdf}). Note that $\Sq^0$ is zero, $\Sq^{i+1}$ is the self-square operation coming from the pairing, and $\Sq^{i+1}$ is zero when $i>s$.
+
+Moreover, by virtue of the algebra of $\delta$-operations being Koszul dual to the algebra $P$, the derived functors admit (again omitting certain details) a left action of the $\delta$-operations:
+\[\delta_i:\mathbb{R}^s\textup{Pr}(W)_t\to \mathbb{R}^{s+1}\textup{Pr}(W)_{t+i+1},\textup{ for $2\leq i<t$}.\]
+When attempting to calculate $\mathbb{R}^*\textup{Pr}_*(W)$, one should also attempt to describe the action of these operations.
+
+
+\subsection{Future progress}
+It remains to prove that:
+\begin{conjecture}
+The `Steenrod operations' $\Sq^{i+1}$ satisfy the Adem relations suggested by their name and notation.
+\end{conjecture}
+\noindent This conjecture is analogous to results \cite[5.3]{PriddySimplicialLie.pdf} of Priddy. Unfortunately we need another mode of proof, since in this context the Eilenberg-Mac Lane functor $\overline{W}$ is rather less useful.
+
+It also remains to find a commutation relation between the $\Sq^i$ and the $\delta_i$.
+
+\section{Pairings and operations in the Adams spectral sequence for $\F_2$-algebras}
+If $X$ is a simplicial $\F_2$-algebra, then $\pi_*(X)$ is itself a commutative algebra, of which $\bigoplus_{t>0}\pi_{t}(X)$ is a divided power ideal. Moreover, $\pi_*(X)$ exhibits higher divided square operations $\delta_i:\pi_t(X)\to \pi_{t+i}(X)$, for $2\leq i \leq t$, which satisfy an Adem relation, and the unstability relation $\delta_ix=\gamma_2(x)$. One would hope to be able to find products and $\delta$-operations on the whole spectral sequence, compatible at $E^\infty$ with those on $\pi_*(X)$.
+
+We may use the canonical double complex, $E^0_{-s,t}=\frakX^s_t=(c(KQc)^{s+1}X)_t$, in which case we have 
+\[E^1_{-s,t}=\pi_t(c(KQc)^{s+1}X)\cong \textup{Pr}(H_t^Q(c(KQc)^{s+1}X))\cong \textup{Pr}(C^{s+1}H_*^Q(X))\cong \Hom(H_*^QS^t,C^{s+1}(H^Q_*(X))).\]
+One should not forget that we are derive the Adams spectral sequence as the spectral sequence of a cosimplicial simplicial algebra, filtered by cosimplicial degree. Dwyer \cite{DwyerHigherDividedSquares.pdf} has investigated the products and unary operations available in the spectral sequence of a cosimplicial simplicial coalgebra, filtered by cosimplicial degree. Unfortunately, this is not the linear dual of the situation of interest for the Adams spectral sequence I investigate.
+\subsection{Completed work}
+Using analogous constructions to Dwyer's, I prove:
+\begin{thm}\label{adamsOperationsOmnibus}
+Denote by $E^r_{-s,t}$ the spectral sequence of a cosimplicial simplicial nonuital $\F_2$-algebra $X$. Then one can construct a product pairing, Steenrod operations $\Sq^i:E^r_{-s,t}\to E^r_{-s-i,2t}$ (for $i\geq0$), and $\delta$ operations $\delta_i:E^r_{-s,t}\to E^r_{-s,t+i}$ (for $i$ satisfying $2\leq i<t-(r-2)$). The Steenrod operations have indeterminacy vanishing by $E^{2r-2}$, survive to $E^{2r-1}$, and commute with differentials, in the sense that $d_{2r-1}(\Sq^ix)=\Sq^{i+r-1}(d_rx)$ modulo indeterminacy. The $\delta$-operations may be multivalued when $i\geq \textup{max}(t-2(r-2),n+1)$ (so that at $E^2$, all the operations are well defined except for $\delta_t$, which is not defined at all). The Steenrod operations vanish whenever $i<r$, after all:
+\begin{enumerate}\squishlist
+\setlength{\parindent}{.25in}
+\item When $i<t-s$, $d_r\delta_i(x)=\delta_i(d_rx)$.
+\item When $i=t-s$, $d_r\delta_i(x)=\begin{cases}
+\delta_i(d_rx),&\textup{if }s>0;\\
+\delta_i(d_rx)+x\times d_rx,&\textup{if }s=0.
+%\\,&\textup{if }
+\end{cases}$
+\item When $i>t-s$, $d_r\delta_i(x)=\begin{cases}
+\delta_i(d_rx),&\textup{if }r<t-i+1;\\
+\delta_i(d_rx)+\Sq^{t-i+1}(x),&\textup{if }r=t-i+1;\\
+\Sq^{t-i+1}(x),&\textup{if }r>t-i+1.\\
+%\\,&\textup{if }
+\end{cases}$
+\end{enumerate}
+Broadly speaking then, the $\delta_i$ operations for $i>t-s$ support a differential hitting either a Steenrod operation or another $\delta_i$ operation, and all Steenrod operations applied to permanent cycles are hit in this way. If $X$ admits a coaugmentation from a simplicial algebra $X$, then the $\delta$-operations with $i\leq n$ at $E^\infty$ agree with the $\delta$-operations on the target of the spectral sequence. The $\delta$-operations (resp.\ Steenrod operations)  at $E^2$ agree with those following from the observation that $E^1$ is the normalization of a cosimplicial $\textup{Com}$-$\Pi$-algebra (resp.\ algebra). The operations may be externalized to operations $E^r(X)\to E^r(X\otimes_{\Sigma_2} X)$.
+\end{thm}
+It happens, however, that in the Adams spectral sequence of interest, all of these operations can and must be lifted to higher filtration. We'll use the same $D^1$ construction as Bousfield and Kan use to construct Whitehead squares in the topological Adams spectral sequence in \cite{BK_pairings_products.pdf}.
+\begin{prop}
+If $\frakX$ is the Radelescu-Banu resolution of a simplicial algebra, the multiplication $\mu:\frakX\otimes \frakX\to \frakX$ factors as in the commuting diagram
+\[\xymatrix@R=4mm{
+\frakX\otimes_{\Sigma_2}\frakX
+\ar[r]
+\ar[drr]_-{\mu}
+&
+\overline{D}^1\frakX
+\ar[dr]^-(.7){\overline{\delta}}
+&%r1c1
+&%r1c2
+{D}^1\frakX\ar[ll]_-{\sim}
+\ar[dl]^-{{\delta}}\\%r1c3
+&&%r2c1
+\frakX&%r2c2
+%r2c3
+}\]
+\end{prop}
+Here, $\overline{D}^1\frakX$ is a version of the $D^1$-construction modified using our knowledge of the structure of $\frakX$, the crucial point being that each cosimplicial level of $\frakX$ bears a weak equivalence to an abelian object in the category of simplicial algebras.
+\begin{cor}\label{liftedOperations}
+The externalized operations of theorem \ref{adamsOperationsOmnibus} may be lifted to:
+\begin{enumerate}\squishlist
+\setlength{\parindent}{.25in}
+\item a pairing $E^r_{-s,t}\otimes E^r_{-s',t'}\to E^r_{-s-s'-1,t+t'+1}$;
+\item horizontal `Steenrod operations' $\underline{\Sq}^i_\textup{h}:E^r_{-s,t}\to E^r_{-s-i-1,2t+1}$; and
+\item vertical `$\delta$-operations' $\underline{\delta}_i^\textup{v}:E^r_{-s,t}\to E^r_{-s-1,t+i+1}$
+\end{enumerate}
+\end{cor}
+These symbols representing these new operations have been underlined, as it's not clear at present what relation they bear to the relations mentioned above, nor what Adem relations they will satisfy. However:
+\begin{thm}
+There is a commuting diagram
+\[\mathclap{\xymatrix@R=4mm{
+\pi_t(X^s)\otimes \pi_{t'}(X^s)\ar[d]^-{h\otimes h}
+\ar[r]^-{\textup{sEZ}}
+&%r1c1
+\pi_{\frakt}(X^s\otimes X^s)\ar[r]^{\textup{(zig-zag)}}
+&%r1c2
+\pi_{\frakt}({D}^1X^s)&%r1c3
+\pi_{\frakt+1}(X^{s+1})
+\ar[l]^-{\cong\textup{-ish}}_-{\partial_\textup{conn}}
+\ar[d]^-{h}
+%\\%r1c4
+%&%r2c1
+%&%r2c2
+%\pi_{\frakt}(D^1X)\ar@{-}[u]^-{\textup{zig-zag}}_-{\cong}
+%&%r2c3
+%\pi_{\frakt+1}(VX)\ar[u]_-{\cong}
+%\ar[l]^-{\cong\textup{-ish}}_-{\partial_\textup{conn}}
+%\ar[d]^-{\cong}
+\\%r2c4
+\textup{Pr}_t(HX^s)\otimes \textup{Pr}_{t'}(HX^s)\ar[r]^-{j}
+&%r3c1
+\textup{Pr}_{\frakt+1}(HX^s\otimes HX^s)\ar[rr]^-{\xi_\textup{alg}}
+&%r3c2
+&%r3c3
+\textup{Pr}_{\frakt+1}(HX^{s+1})%r3c4
+}}\]
+so that the pairing of \ref{liftedOperations} coincides with the pairing on $E^2$ described in \S\ref{PastWorkOnE2LevelStructure}, and the Steenrod operation $\underline{\Sq}^i$ equals the operation $\Sq^{i+1}$ of \S\ref{PastWorkOnE2LevelStructure}.
+\end{thm}
+\subsection{Future work}
+It remains to prove
+\begin{conjecture}\label{vert-equals-koszul-n=1}
+The operations $\underline{\delta}_i^\textup{v}$ coincide at $E^2$ with the $\delta_i$ of \S\ref{PastWorkOnE2LevelStructure}.
+\end{conjecture}
+%I as yet do not know if $\underline{\delta}_i$ coincides with $\delta_i$, although I really hope that it does. It might be false, or difficult, since the previous commuting diagram might not be as useful in this case.
+
+\section{Iterative calculation of the homology of unstable Lie coalgebras}
+The work summarised so far does not give us sufficient power to calculate the $E^2$-page of interest. However, I observe that the calculation of the homology of unstable Lie coalgebras can be performed iteratively, in a sense I will now explain.
+\subsection{Completed work}\label{Iterative-calculation}
+\begin{prop}
+The functor $\textup{Pr}=\textup{Pr}_{\calC^1}$ factors through the category $\calL^1$ of Lie coalgebras:
+\[\xymatrix@R=4mm@1{
+\calC^1\ar[r]^-{\textup{Pr}_P}
+&%r1c1
+\calL^1\ar[r]^-{\textup{Pr}_\calL}
+&%r1c2
+\calV^1%r1c3
+}\]
+\end{prop}
+We may thus construct a (triply-graded) Grothendieck spectral sequence calculating $(\mathbb{R}^*\textup{Pr})W$, for $W\in\calC^1$, using the techniques of \cite{Blanc_Stover-Groth_SS.pdf}. It would be too great an oversimplification to say that the $E^2$-page of the spectral sequence is given by $(\mathbb{R}^{s_2}\textup{Pr}_{\scrL^1\textup{-$\Pi$-coalg}})(\mathbb{R}^{s_1}\textup{Pr}_P)(W)_t$. 
+More carefully, denote by $\calC^2$ the target category for the cohomotopy functor with domain $c(\calC^1)$, the category of $\calC^1$-cohomotopy-coalgebras (dual to the notion of $\Pi$-algebras in \cite{Blanc_Stover-Groth_SS.pdf}). Objects of $\calC^2$ are doubly graded, having a homological grading $t$ like that of elements of $\calC^1$, and a cohomological grading $s$, coming from cosimplicial degree. Moreover, $\mathbb{R}^*\textup{Pr}_P(W)$ is an object of $\calC^2$. We are finally equipped to write:
+\[E^2_{-s_2,-s_1,t}=((\mathbb{R}^{s_2}\textup{Pr}_{\calC^2})(\mathbb{R}^*\textup{Pr}_P)W)_{-s_1,t}\implies E^2_{-s_2-s_1,t}.\]
+Now work of the six authors of \cite{6Author.pdf} serves to demonstrate that the category $\calC^2$ is itself a category of unstable Lie coalgebras, this time with (approximately) an unstable right coaction of the $\Lambda$-algebra. Moreover,
+\begin{prop}
+The functor $\textup{Pr}_{\calC^2}$ factors through a category $\calL^2$ of Lie coalgebras:
+\[\xymatrix@R=4mm@1{
+\calC^2\ar[r]^-{\textup{Pr}_\Lambda}
+&%r1c1
+\calL^2\ar[r]^-{\textup{Pr}_\calL}
+&%r1c2
+\calV^2%r1c3
+}\]
+yielding a Grothendieck spectral sequence 
+\[E^2_{-s_3,-s_2,-s_1,t}=((\mathbb{R}^{s_3}\textup{Pr}_{\calC^2})(\mathbb{R}^*\textup{Pr}_\Lambda)(\mathbb{R}^*\textup{Pr}_P)W)_{-s_2,-s_1,t}\implies E^2_{-s_3-s_2,-s_1,t}.\]
+\end{prop}
+This is the sense in which an iterative calculation of $\mathbb{R}^*\textup{Pr}_{\calC^1}$ is possible. In order to simplify exposition, suppose that $Y$ is an object of $\calC^N$, with $\calC^N$ a category of Lie coalgebras with unstable right coaction of the dual $\Lambda$-algebra. 
+\begin{prop}
+There are sequences of categories $\calC^N$ and $\calL^N$ ($N\geq1$), such that for each $N\geq2$, 
+\begin{enumerate}\squishlist
+\setlength{\parindent}{.25in}
+\item $\calC^N$ is a category of $N$-graded Lie coalgebras with unstable right coaction of the dual $\Lambda$-algebra;
+\item $\calL^N$ is a category of $N$-graded Lie coalgebras;
+\item $\textup{Pr}_{\calC^N}:\calC^N\to\calV^N$ factors as $\xymatrix@R=4mm@1{
+\calC^N\ar[r]^-{\textup{Pr}_\Lambda}
+&%r1c1
+\calL^N\ar[r]^-{\textup{Pr}_\calL}
+&%r1c2
+\calV^N%r1c3
+}$;
+\item $\calC^N$ is the category of $\calL^{N-1}$-cohomotopy-coalgebras.
+\end{enumerate}
+For $Y\in\calC^N$ ($N\geq2$), $(\mathbb{R}^*\textup{Pr}_\Lambda)Y$ is an object of $\calC^{N+1}$, and there is a Grothendieck spectral sequence
+\[E^2=((\mathbb{R}^{*}\textup{Pr}_{\calC^{N+1}})(\mathbb{R}^*\textup{Pr}_\Lambda)Y)_{-s_{N+1},-s_N,\ldots,-s_1,t}\implies ((\mathbb{R}^{*}\textup{Pr}_{\calC^{N}})Y)_{-s_{N+1}-s_N,-s_{N-1},\ldots,-s_1,t}.\]
+%
+%
+%
+%The functor $\textup{Pr}_{\calC^N}$ factors as $\xymatrix@R=4mm@1{
+%\calC^N\ar[r]^-{\textup{Pr}_\Lambda}
+%&%r1c1
+%\calL^N\ar[r]^-{\textup{Pr}_\calL}
+%&%r1c2
+%\calV^N%r1c3
+%}$ through a category $\calL^N$ of Lie coalgebras; $\mathbb{R}^*\textup{Pr}_\Lambda$ is an object of a category $\calC^{N+1}$ which is a new category of unstable Lie coalgebras with of $\calL^n$-$\Pi$-coalgebras:
+%\[\xymatrix@R=4mm@1{
+%\calC^N\ar[r]^-{\textup{Pr}_\Lambda}
+%&%r1c1
+%\calL^N\ar[r]^-{\textup{Pr}_\calL}
+%&%r1c2
+%\calV^N%r1c3
+%}\]
+%yielding a Grothendieck spectral sequence 
+%\[E^2_{-s_{N+1},-s_N,\ldots,-s_1,t}=((\mathbb{R}^{s_3}\textup{Pr}_{\calC^2})(\mathbb{R}^*\textup{Pr}_\Lambda)(\mathbb{R}^*\textup{Pr}_P)W)_{-s_2,-s_1,t}\implies E^2_{-s_3-s_2,-s_1,t}.\]
+%There is a Grothendieck spectral sequence
+\end{prop}
+As in \S\ref{PastWorkOnE2LevelStructure}, we can define a pairing on the $\mathbb{R}^*\textup{Pr}_{\calC^N}$:
+\[\mathbb{R}^*\textup{Pr}_{\calC^N}(Y)_{-s_{N},\ldots,t}\otimes \mathbb{R}^*\textup{Pr}_{\calC^N}(Y)_{-s_{N}',\ldots,t'}\to \mathbb{R}^*\textup{Pr}_{\calC^N}(Y)_{-s_{N}-s_{N}'-1,-s_{N-1}-s_{N-1}',\ldots,-s_1-s_1',t+t'+1}\]
+along with horizontal `Steenrod operations'
+\[\Sq^{i+1}_\textup{h}:\mathbb{R}^*\textup{Pr}_{\calC^N}(Y)_{-s_{N},\ldots,t} \to \mathbb{R}^*\textup{Pr}_{\calC^N}(Y)_{-s_{N}-i-1,-2s_{N-1},\ldots,-2s_1,2t+1}\]
+Moreover, as the opposite of the $\Lambda$-algebra is Koszul dual to the Steenrod algebra for Lie algebras (via $\lambda_i\leftrightarrow \Sq^{i+1}$, with $\Sq^0=0$), we may define vertical (left) Steenrod operations (satisfying the Adem relations):
+\[\Sq^{i+1}_\textup{K}:\mathbb{R}^*\textup{Pr}_{\calC^N}(Y)_{-s_{N},\ldots,t} \to \mathbb{R}^*\textup{Pr}_{\calC^N}(Y)_{-s_{N}-1,-s_{N-1}-i,-2s_{N-2},\ldots,-2s_1,2t+1}\]
+\subsection{Future work}
+We would like to prove:
+\begin{conjecture}
+The horizontal steenrod operations $\Sq_\textup{h}^{i+1}$ satisfy the Adem relation suggested by their name and notation.
+\end{conjecture}
+
+\section{Pairings and operations in the Grothendieck spectral sequences for the homology of unstable Lie coalgebras}
+We are now faced with the question of how the pairing and operations at the $E^2$ page of the above Grothendieck spectral sequence relate to those at $E^\infty$. In \cite{SingerSteen1.pdf} (etc.), Singer constructs both vertical and horizontal Steenrod operations in the spectral sequence of a bicosimplicial algebra, abutting to the Steenrod operations on the target. We would like to do something similar in the Grothendieck spectral sequence, explaining the operations described in the previous section.
+\subsection{Completed work}
+Now if $Y\in\calC^N$, one can form a cosimplicial fibrant replacement $Y_\textup{f}$ using the cobar construction $Y_\textup{f}^\bullet=C^{\bullet+1}Y$. Then Blanc and Stover produce a monad $W$ on $c\calL^N$, allowing us to produce a bicosimplicial object $\scrW(\textup{Pr}_{\Lambda}Y_\textup{f})^{\bullet\bullet}:= (W^{\bullet+1}Y_\textup{f})^\bullet$. It's the bicosimplicial vectorspace $\textup{Pr}_{\calL^N} \scrW(\textup{Pr}_{\Lambda}Y_\textup{f})^{\bullet\bullet}$ whose spectral sequence is the Grothendieck spectral sequence calculating $(\mathbb{R}^*\textup{Pr}_{\calC^N})Y$. We are able to produce extra structure on the functor $W$:
+\begin{prop}
+$WY$ is naturally a (strict) commutative group object, with the functor $\hom(\DASH,WY)$ taking values in $\ensuremath{\F_2}$-vectorspaces.
+\end{prop}
+Using this structure, we may again follow the protocol of \cite[\S5]{MR1089001} to define a pairing $\xi_\textup{ch}:(\scrW^{\bullet} (\textup{Pr}_\Lambda Y_\textup{f})^\bullet)^{\wedge 2}\to \scrW^{\bullet+1} (\textup{Pr}_\Lambda Y_\textup{f})^\bullet$, and one can prove:
+\begin{prop}
+The map $\textup{Pr}_{\calL^N}\xi_\textup{ch}$ induces a degree $(-1,0)$ chain map after taking double normalizations
+\[ N_*N_*((\textup{Pr}_{\calL^N}\scrW\textup{Pr}_\Lambda Y)^{\otimes2}_{\Sigma_2})\to N_*N_*(\textup{Pr}_{\calL^N}\scrW\textup{Pr}_\Lambda Y).\]
+\end{prop}
+Now Singer's operations can be externalised, so that if $A^{\bullet\bullet}$ is any bicosimplicial vectorspace, one obtains horizontal and vertical operations $E^r(A)\to E^r(A\otimes_{\Sigma_2}A)$, and a pairing $E^r(A)\otimes_{\Sigma_2}E^r(A)\to E^r(A\otimes_{\Sigma_2}A)$. Thus
+\begin{cor}\label{opns-on-whole-gss}
+There are operations
+\begin{enumerate}\squishlist
+\setlength{\parindent}{.25in}
+\item a pairing $E^r_{-s_{n+1},\ldots,t}\otimes E^r_{-s_{n+1}',\ldots,t'}\to E^r_{-s_{n+1}-s_{n+1}'-1,\ldots,t+t'+1}$;
+\item horizontal `Steenrod operations' $\underline{\Sq}^i_\textup{h}:E^r_{-s_{n+1},\ldots,t}\to E^r_{-s_{n+1}-i-1,-2s_{n},\ldots,2t+1}$; and
+\item vertical `Steenrod operations' $\underline{\Sq}^i_\textup{v}:E^r_{-s_{n+1},\ldots,t}\to E^r_{-s_{n+1}-1,-s_{n}-i,-2s_{n-1},\ldots,2t+1}$.
+\end{enumerate}
+\end{cor}
+
+
+\begin{thm}
+The pairings of \ref{opns-on-whole-gss} and \S\ref{Iterative-calculation} coincide. The horizontal operations $\underline{\Sq}_\textup{h}^i$ of \ref{opns-on-whole-gss} coincide on $E^2$ with the horizontal operations ${\Sq}_\textup{h}^{i+1}$ of \S\ref{Iterative-calculation}. The operations $\underline{\Sq}_\textup{h}^i$ and $\underline{\Sq}_\textup{v}^i$ converge, in the style of \cite{SingerSteen1.pdf}, to the horizontal operations ${\Sq}_\textup{h}^{i+1}$ on the target.
+\end{thm}
+\subsection{Future work}\label{work-on-kos-opns-n>1}
+In the future we should understand the way that the vertical operations $\underline{\Sq}_\textup{v}^i$ relate with the Koszul operations $\Sq_\textup{v}^{i+1}$.
+If we can succeed in this analysis, then we'll likely be able to prove:
+\begin{conjecture}\label{basis-of-derived-prims}
+Suppose that $Y\in\calC^N$ is a one-dimensional unstable Lie coalgebra with all cooperations zero. Then each spectral sequence in the hierarchy of Grothendieck spectral sequences calculating $\mathbb{R}\textup{Pr}_{\calC^N}Y$ collapses, and we can specify a basis for $\mathbb{R}\textup{Pr}_{\calC^N}Y$ consisting of certain monomials in the iterated vertical Steenrod operations on the `fundamental class'.
+\end{conjecture}
+
+\section{The Adams spectral sequence for a sphere; vanishing lines}
+\subsection{Completed work}
+It is possible to form a bound on the size of the $E^2$ page of the Adams spectral sequence, written in terms of the Koszul operations, even without proving conjectures \ref{vert-equals-koszul-n=1} and \ref{basis-of-derived-prims}, and without the work proposed in \S\ref{work-on-kos-opns-n>1}. From this observation follows
+\begin{thm}\label{vanishing-line-theorem}
+Suppose that $X$ is a connected simplicial commutative algebra of finite type. % which is connected, and is of finite type in dimension 1. That is, $H^0_Q(X)=0$ and $H^1_Q(X)$ is a finite dimensional $\F_2$-vector space. 
+Then the Adams spectral sequence for $X$ has a vanishing line of slope $T-1$:
+\[E^2_{s,t}=0\textup{\ unless $s\leq\tfrac{1}{T-1}(t-s)+1$,}\]
+where $T$ is the constant $2$, or $9/4$ if $X$ is the sphere $S^d$ for $d\geq2$.
+\end{thm}
+Now assume that conjecture \ref{basis-of-derived-prims} holds with $Y=H^Q_* S^d$ (for $d\geq2$). Then using computer simulations, I was able to conjecture a (very large) system of differentials which, if correct, would be all of the differentials in the Adams spectral sequence for the sphere $S^d$ for $d\geq2$.
+
+\subsection{Future work}
+It remains to verify that these conjectured differentials are correct. For this, I will probably need to prove all of the above conjectures, and then perform a calculation using the differentials provided by \ref{adamsOperationsOmnibus}.
+
+If this work is completed, it will be possible to combine the understanding we have obtained of the $E^2$ term for spheres, in order to define a single `Koszul' spectral sequence converging to the $E^2$ term for any connected simplicial algebra.
+
+
+
+\printbibliography
+
+\end{document}
+
+Quillen \cite{QuillenHomAlg.pdf} has formulated the notion of homotopy theory in a variety of algebraic contexts. In particular, there is a homotopy theory of any given type of universal algebra. The homotopy theory of augmented \ensuremath{\F_2}-algebras is an important and interesting example. It is of interest both to topologists at least insofar as it appears in the proofs of such interesting results as the Sullivan conjecture \cite{MillerSullivanConjecture.pdf}. This homotopy theory is of interest in commutative algebra, as Andr\'e and Quillen's definition of the cohomology of an augmented $\F_2$-algebra coincides with the Quillen homology of said algebra using the homotopical definitions of \cite{QuillenHomAlg.pdf}.
+
+We are thus amply justified in considering the homotopy theory of augmented \ensuremath{\F_2}-algebras worthy of study. Interestingly, however, it is not well understood at present --- there is much progress to be made, including a number of unproven potential theorems analogous to long-standing results in the homotopy theory of spaces. I thus propose an investigation into a number of elements of this homotopy theory, with scope for either broadening or specialisation.
+Present research has focused on the definition and study of an analogue of the Adams spectral sequence, while the hope is to turn to applications as soon as possible.
+%Recently, it was suggested by my advisor that I should develop and study an Adams spectral sequence in the category $s\calA$ of simplicial augmented $\F_2$-algebras. Since that time, I have enjoyed studying the work relevant to this research, and have found the various challenges associated with understanding the resulting spectral sequence to be of interest. Thus, I make the following proposal.
+
+\section*{Background}
+Let $\calA$ be any category of universal algebras. Quillen developed in \cite{QuillenHomAlg.pdf} a model structure on the category $s\calA$ of simplicial objects in $\calA$, and introduced the notion of the Quillen homology of objects of $s\calA$.
+An \emph{abelian object of $s\calA$} is an object $A\in s\calA$ along with a natural abelian group structure on $s\calA(\DASH,A)$. There is an evident category $\mathsf{ab}(s\calA)$ of abelian objects, and a left adjoint to the forgetful functor yielding an adjunction $s\calA\rightleftarrows\mathsf{ab}(s\calA)$. Quillen homology is then defined to be the left derived functors of \emph{abelianization}, this left adjoint.
+
+At this point we specialise, letting $\calA$ be the category of augmented commutative \ensuremath{\F_2}-algebras.
+%Let $\calA$ be the category of augmented commutative \ensuremath{\F_2}-algebras (or more generally any category of universal algebras). Quillen developed in \cite{QuillenHomAlg.pdf} a model structure on the category $s\calA$ of simplicial objects in $\calA$, and introduced the notion of the Andre-Quillen (co)homology of objects of $s\calA$. Quillen (co)homology appears to be of interest to the algebraists.
+%An \emph{abelian object of $s\calA$} is an object $A\in s\calA$ along with a natural abelian group structure on $s\calA(\DASH,A)$. There is an evident category $\mathsf{ab}(s\calA)$ of abelian objects, and a left adjoint to the forgetful functor yielding an adjunction $s\calA\rightleftarrows\mathsf{ab}(s\calA)$. Andre-Quillen homology is supposed (in some generality) to be the left derived functors of \emph{abelianisation}, this left adjoint.
+There, an analysis \cite[\S4]{MR1089001} of $\mathsf{ab}(s\calA)$ reveals that the abelian objects of $s\calA$ are precisely those simplicial algebras with levelwise trivial multiplication, and we can model the above adjunction as 
+\[Q:s\calA\rightleftarrows s(v\ensuremath{\F_2}):K\]
+where $v\ensuremath{\F_2}$ is the category of $\F_2$-vector spaces, $Q$ prolongs the indecomposables functor $Q:\calA\to v\ensuremath{\F_2}$, and $K$ prolongs the `square-zero' functor $K:v\ensuremath{\F_2}\to \calA$, under which $V$ maps to $\ensuremath{\F_2}\oplus V$ with trivial multiplication. Thus in our context, the Quillen homology $H_*^Q(A)$ of an object $A\in s\calA$ is $\mathbb{L}_*Q(A)=\pi_*Q(cA)$, where $c$ denotes a cofibrant replacement in $s\calA$. This coincides with those older definitions of Andr\'e-Quillen homology of interest in commutative algebra, and will be central in the following exposition.
+
+\subsection*{Structure on cohomology and homotopy}
+Let $S$ be the 
+`symmetric algebra' monad on $v\ensuremath{\F_2}$, arising from the adjunction $\calA\rightleftarrows v\ensuremath{\F_2}$. Then objects of $\calA$ are precisely algebras for this monad. Now Dold's theorem \cite{DoldHomologySPs.pdf} shows that there is an endofunctor $\frakS$ of $n\ensuremath{\F_2}$ creating a commuting diagram
+\[\xymatrix@R=4mm{
+s(v\ensuremath{\F_2})\ar[r]^-{S}
+\ar[d]^-{\pi_*}
+&%r1c1
+s(v\ensuremath{\F_2})\ar[d]^-{\pi_*}
+\\%r1c2
+n\ensuremath{\F_2}\ar[r]^-{\frakS}
+&%r2c1
+n\ensuremath{\F_2}%r2c2
+}\]
+Moreover, the naturality of Dold's result shows that $\frakS$ is also a monad, and $\pi_*$ sends (simplicial) $S$-algebras to $\frakS$-algebras. Thus the homotopy of an object of $\ensuremath{s\calA}$ is naturally an $\frakS$-algebra, and the category of $\frakS$-algebras is the richest value category for $\pi_*$ on $\ensuremath{s\calA}$. To justify this last claim, one calculates the homotopy of the `spheres' in $s\calA$, which represent homotopy --- the sphere `$S(n)\in\ensuremath{s\calA}$' (representing $I\pi_n:\ensuremath{s\calA}\to v\ensuremath{\F_2}$) is the image under $S$ of a $K(\ensuremath{\F_2},n)$: the free simplicial $F_2$-vector space on the standard sphere $S^n\in s\mathsf{Set}_*$. One finds that an $\frakS$-algebra is precisely a graded vector space with an action of the divided square operations of Bousfield \cite{BousOpnsDerFun.pdf,BousHomogFunctors.pdf}, Cartan \cite{CartanDivSquares} and Dwyer \cite{DwyerHtpyOpsSimpComAlg.pdf}.
+
+One may next wonder what natural algebraic structure exists on $H^Q_*(A)$. It is more convenient to discuss the AQ cohomology $H_Q^*(A):=(H^Q_*(A))^*$. There are Eilenberg-Mac Lane objects in $ s\calA$ which represent AQ cohomology, and an analysis of the cohomology of products thereof, as performed in \cite{MR1089001}, reveals that the richest value category for $H_Q^*$ is $\calW$, whose definition we now recall.
+An object of $\calW$ is a non-negatively graded \ensuremath{\F_2}-vector space $W^*$, along with:
+\begin{enumerate}\squishlist
+\setlength{\parindent}{.25in}
+\item a Lie bracket $[\DASH,\DASH]:{W^n}\otimes{W^m}\to W^{n+m+1}$;
+\item linear operations $P^i:W^n\to W^{n+i+1}$, satisfying certain `unstableness' axioms and `Adem relations'; and
+\item a quadratic operation $\beta:W^0\to W^1$, which is a (partially defined) restriction for $[\DASH,\DASH]$; it satisfies those axioms which `$x\mapsto x^2 = \frac{1}{2}[x,x]$' might, were any of this to make sense.
+\end{enumerate}
+
+\subsection*{Quillen's spectral sequence}
+In \cite{QuillenHCommRings.pdf} Quillen introduced a spectral sequence whose $E^1$ page depends functorially on the homology $H_*^QA$, converging to the homotopy groups $\pi_*A$.  More precisely:
+\[E^1_{st}=\frakS_s(H_*^QA)\Rightarrow\pi_tA,\]
+where we use the decomposition $\frakS=\bigoplus_{s\geq0}{\frakS_s}$ corresponding to the decomposition $S=\bigoplus_{s\geq0}{S_s}$ of the free symmetric algebra into lengths $s$.
+
+This spectral sequence is straightforward to define. Take $A$ to be cofibrant, and filter by powers of the augmentation ideal, obtaining a filtered simplicial vector space. The associated graded simplicial vector space can be identified with $S_*(QA)$, and the definitions of $\frakS_*$ and $H_*^Q$ show that the associated spectral sequence has the desired $E^1$-term.
+
+This spectral sequence is convergent when $A$ is connected (i.e.\ $\pi_0A\simeq\ensuremath{\F_2}$), and supports divided square operations (modulo indeterminacy) which reflect both those on $\pi_*A$ and those on $\frakS_s(H^Q_*A)_t$. It is the direct analogue of Curtis' unstable lower central series spectral sequence \cite{MR0184231}, which leaves us the task of defining an Adams spectral sequence.
+
+\section*{An Adams spectral sequence}
+One can form a classical unstable Adams spectral sequence using the Bousfield-Kan completion tower. This is the homotopy spectral sequence (cf.\ \cite{Bousfield-htpySS.pdf})   of the cosimplicial space $\F_2^\bullet X$ \cite{MR0365573} whose totalization is the \ensuremath{\F_2}-completion of $X$.
+
+One might first ask how to replace $A\in \ensuremath{s\calA}$ with an appropriate cosimplicial object in $\ensuremath{s\calA}$, in order to imitate this process.  One could use the monad of the adjunction $Q:\ensuremath{s\calA}\rightleftarrows s(v\ensuremath{\F_2}):K$, but as the image of $K$ does not land within the cofibrant objects of \ensuremath{s\calA}, we would not be able to identify any resulting $E_2$-page with a functor of the (co)homology. [This problem was not present for the BK tower, as every simplicial set is cofibrant.]
+
+In order to produce a homotopically correct resolution, one must mix intelligent cofibrant replacements into the iteration of this monad. This process is the subject of recent work of Blumberg and Riehl \cite{BlumRiehlResolutions.pdf}. They show that if one can choose a functorial cofibrant replacement $c$ on $\ensuremath{s\calA}$ which has the additional structure of a comonad%footnote:
+\footnote{As every object of $s(v\ensuremath{\F_2})$ is fibrant, we need not mention a monadic fibrant replacement on that category, although there is no such asymmetry in the treatment of \cite{BlumRiehlResolutions.pdf}.}, then one can give a homotopically correct cosimplicial resolution of the type we desire. Precisely, they produce an augmented cosimplicial endofunctor of $\ensuremath{s\calA}$ (writing $\overline{Q}$ for $Qc:\ensuremath{s\calA}\to s(v\ensuremath{\F_2})$):
+\[
+\vcenter{
+\def\labelstyle{\scriptstyle}
+\xymatrix@C=1.5cm@1{
+c\,
+\ar[r]
+&
+\,cK\overline{Q}\,
+\ar[r];[]
+&
+\,c(K\overline{Q})^2\,
+\ar@<-1ex>[l];[]
+\ar@<+1ex>[l];[]
+\ar@<+1ex>[r];[]
+\ar@<-1ex>[r];[]
+&
+\,c(K\overline{Q})^3\,
+\ar[l];[]
+\ar@<-2ex>[l];[]
+\ar@<+2ex>[l];[]
+\ar[r];[]
+\ar@<+2ex>[r];[]
+\ar@<-2ex>[r];[]
+&
+\,c(K\overline{Q})^4\,\makebox[0cm][l]{\,$\cdots $}
+\ar@<-3ex>[l];[]
+\ar@<-1ex>[l];[]
+\ar@<+1ex>[l];[]
+\ar@<+3ex>[l];[]
+}}\]
+For $A\in\ensuremath{s\calA}$, write $\underline{A}^\bullet$ for the cosimplicial object $c(K\overline{Q})^\bullet A$.
+The Blumberg-Riehl approach augments Bousfield's work on cosimplicial resolutions \cite{BousCosimpResnHtpySS.pdf},  allowing us to define a homotopical `derived completion' endofunctor on $\ensuremath{s\calA}$ by $A\mapsto\hat A:=\textup{Tot}((\underline{A}^\bullet)^{\textup{rf}})$, where `$\textup{rf}$' denotes a Reedy fibrant replacement.
+
+Bousfield shows how to obtain a spectral sequence $\pi^s\pi_t(\underline{A}^\bullet;S^0)\Rightarrow\pi_{t-s}(\hat A;S^0)$ by applying the well established Bousfield-Kan spectral sequence to the evident cosimplicial space of Dwyer-Kan mapping complexes. It serves our purposes best to dualize, and rewrite:
+\[\pi_s\pi^t((Ic(K\overline{Q})^\bullet A)^*)\Rightarrow \pi^{t-s}((I\hat A)^*)\]
+A complete derivation would at this point include a detailed examination of the dual Hurewicz homomorphism $H^*_Q(X)\to \pi^*((IX)^*)$, in particular when $X$ is an abelian object. One shows that:
+\begin{prop*}
+When $H^*_Q(A)$ is of finite type (for example when $A$ is connected and of finite type) the spectral sequence has $E_2^{st}=(\mathbb{L}_s\textup{Ind}_\calW)(H_Q^*A)^t=(\Ext^s_{\calW}(H_Q^*A,H_Q^*S^t))^*$.
+\end{prop*}
+\noindent I have not yet considered whether or not this spectral sequence converges.
+
+One should be clear what is meant by the derived functors $\mathbb{L}_s\textup{Ind}_\calW$. $\calW$ is an example of what Blanc-Stover call a \emph{category of universal graded commutative algebras}, or `CUGA' \cite{Blanc_Stover-Groth_SS.pdf}. One notes that there is a free-forgetful adjunction $n\mathsf{Set}_*\rightleftarrows \calW$ ($n\mathsf{Set}_*$ being graded pointed sets), and the free objects provide enough projectives, so that $s\calW$ is a Quillen model category. Moreover, there is an evident `indecomposables' functor
+\[\textup{Ind}_\calW:\calW\to n\ensuremath{\F_2}\]
+which sends an object of $\calW$ to its vector space quotient by the image therein of all nontrivial operations. We mean the derived functors%footnote:
+\footnote{Note that as every object in a CUGA is fibrant, any prolongation will preserve weak equivalence between cofibrant objects (which are just simplicial homotopy equivalences), so that any functor from a CUGA is left derivable.} of this functor.
+
+
+\section*{A Grothendieck spectral sequence}
+It was first noted by Haynes Miller in \cite{MillerSullivanConjecture.pdf} that composite functor spectral sequences can be of some utility in contexts such as ours. Thus one is led to consider a factorisation of the functor $\textup{Ind}_\calW$ through a third category, $\calL$, of graded Lie algebras.%footnote:
+\footnote{An object of $\calL$ is a non-negatively graded \ensuremath{\F_2}-vector space $W^*$, with a Lie bracket ${W^n}\otimes{W^m}\to W^{n+m+1}$ satisfying the (non-redundant) axiom `$[x,x]=0$'.}
+
+It is simply a matter of examining the definition (cf.\ \cite[p.17]{MR1089001}) of $\calW$ to see that $\textup{Ind}_\calW$ factors as
+\[\calW\overset{\textup{Ind}_\textbf{P$\beta$}}{\to}\calL\overset{\textup{Ind}_{[]}}{\to}n\F_2\]
+where $\textup{Ind}_\textbf{P$\beta$}$ and $\textup{Ind}_{[]}$ are the evident `indecomposables' functors killing $P^i$ and $\beta$ operations and Lie brackets respectively.%footnote:
+\footnote{The factorisation $\textup{Ind}_{[]}\circ\textup{Ind}_{\textbf{P$\beta$}}$ represents a choice that I made some time ago, which may not be the most natural or most useful. Another alternative is to factor as $\textup{Ind}_{[]\beta}\circ\textup{Ind}_{\textbf{P}}$ through a category of Lie algebras with partially defined restriction.}
+
+The category $\calL$ is itself a CUGA, and $\textup{Ind}_\textbf{P$\beta$}$ sends free objects in $\calW$ to free objects in $\calL$. In this context, Blanc and Stover have developed in \cite{Blanc_Stover-Groth_SS.pdf} a Grothendieck spectral sequence calculating $\mathbb{L}_*\textup{Ind}_\calW$. Before stating this spectral sequence, we must describe a little more of the Blanc-Stover theory.
+
+\subsection*{Categories of $\Pi$-algebras}
+Given a CUGA $\calC$, Blanc-Stover define a category $\calC'$ (which they denote $\calC$-$\Pi$-$\textup{Alg}$), which is the natural value category for the functor $\pi_*$ on $s\calC$. We may be more explicit as follows.
+
+Observe that the homotopy groups of $X\in s\calC$ are in fact \textbf{bi}graded --- write $G_k\pi_nX$ for the $k^{\textup{th}}$ internally graded part of the $n^{\textup{th}}$ homotopy group of $X\in s\calC$. Then $G_k\pi_n$ is represented (in $\ho(s\calC)$) by $F(S^n(k))$, where the `sphere' $S^n(k)\in n(s\mathsf{Set}_*)$ is the graded pointed simplicial set which has a standard $n$-sphere in grading $k$ and a point in all other gradings.
+
+As ever, the homotopy groups of $r$-fold wedges of spheres dictate the natural $r$-ary operations on the homotopy groups of objects of $s\calC$. These operations are subject to relations dictated by the data of various equations of maps under various compositions. Now an object of $\calC'$ is a bigraded vector space with an $r$-ary operation for every homotopy class in an $r$-fold wedge of spheres. Of course, we demand that the operations satisfy the appropriate relations.
+
+Now if $T: \calC\to\calB$ is a functor between CUGAs, one can define a functor $\overline{T}:\calC'\to\calB'$. This is, of course, analogous to Dold's theorem. In the case where $\calC=\calB=v\ensuremath{\F_2}$, $\calC'=\calB'=n\ensuremath{\F_2}$, and $\overline{T}$ is precisely the functor associated with $T$ by Dold's theorem. We are now in position to present the promised Grothendieck spectral sequence.
+\begin{prop*}
+For any $W\in \calW$ there is a convergent spectral sequence:
+\[(\mathbb{L}_p\overline{\textup{Ind}_{[]}}_q)(\mathbb{L}_*\textup{Ind}_\textbf{P$\beta$})(W)\Rightarrow (\mathbb{L}_{p+q}\textup{Ind}_\calW)(W).\]
+\end{prop*}
+\noindent 
+The RHS is bigraded, while the LHS is trigraded.
+The indices may seem a little confusing, but they needn't be. When interpreting the LHS, one thinks ``we're deriving a functor $\overline{\textup{Ind}_{[]}}:\calL'\to nn\ensuremath{\F_2}$ between categories of bigraded objects''.
+
+\subsection*{The functor $\overline{\textup{Ind}_{[]}}:\calL'\to nn\ensuremath{\F_2}$}
+\newcommand{\uLLa}{\mathsf{u}\Lambda\!^{+\!}\mathsf{La}}
+Before making sense of the above spectral sequence, we must understand $\calL'$, and the functor $\overline{\textup{Ind}_{[]}}$. For this we introduce the category $\uLLa$ of `unstable $\Lambda^+$-Lie algebras'. An object of this category is a graded Lie algebra $L_*$ over \ensuremath{\F_2} (with axiom $[[x,x]]=0$, and no $+1$ shift in grading), along with right operations $\lambda_i:L_n\to L_{n+i}$ for $1\leq i\leq n$ (written $x\mapsto x\lambda_i$), such that:
+\begin{enumerate}\squishlist
+\setlength{\parindent}{.25in}
+\item $\lambda_{\textup{top}}:=\lambda_n:L_n\to L_{2n}$ is a restriction for ($n>0$):
+\begin{enumerate}\squishlist
+\setlength{\parindent}{.25in}
+\item $[[x\lambda_{\textup{top}},z]]=[[x,[[x,z]]]]$ for $|x|>0$, $|z|\geq0$
+\item $\lambda_{\textup{top}}(x+y)=\lambda_{\textup{top}}(x)+\lambda_{\textup{top}}(y)+[[x,y]]$ for $|x|=|y|>0$
+\end{enumerate}
+\item the $\lambda_i:L_n\to L_{n+i}$ for $1\leq i< n$ are linear;
+\item the $[[x\lambda_i,z]]=0$ for $1\leq i<|x|$.
+\item the $\lambda_i$ operations satisfy the Adem relations of \cite{6Author.pdf}.
+\end{enumerate}
+One is able to see that in fact there is a Hilton-Milnor theorem%footnote:
+\footnote{This comes from an essentially formal Hilton-Milnor decomposition for the coproduct of a finite number of free Lie algebras, where by `Lie algebra' we mean `Lie algebra over $\ensuremath{\F_2}$ subject to the extra axiom $[x,x]=0$'.} for homotopy groups of wedges of spheres in $s\calL$. This, along with the description of the homotopy groups of the free unrestricted Lie algebra given in \cite{6Author.pdf} can be used to demonstrate that $\calL'$ is a category of $+1$-shifted graded objects in $\uLLa$ (thus bigraded \ensuremath{\F_2}-Lie algebras with one of the gradings yielding a $+1$ shift, etc.).
+
+%Moreover, the homotopy groups of a given sphere are essentially calculated by the six authors of \cite{6Author.pdf}. In particular, the elements of the homotopy groups of wedges of spheres are of the form ``$\lambda_{i_1}\lambda_{i_2}\cdots\lambda_{i_r}\ell$'' for $\ell$ an iterated Lie bracket of fundamental classes. Here the Lie bracket is $[[\DASH,\DASH]]$, the Eilenberg-Zilber Lie bracket on the homotopy of a simplicial Lie algebra.
+%
+%The details here haven't been worked out precisely. In particular, I don't know what an admissible sequence is supposed to be yet, and I don't know how the $\lambda$ operations squeeze outside the Lie brackets. However, one knows enough already to say that $\calL'$ is a category of bigraded objects subject to a bigraded Lie bracket%footnote:
+%\footnote{(with a $+1$ shift in the internal grading)} and certain $\lambda_i$ operations.
+
+At this point, it is not completely obvious what $\overline{\textup{Ind}_{[]}}$ will turn out to be, as demanded by the definitions of \cite{Blanc_Stover-Groth_SS.pdf}. However, it can be calculated that it simply kills the image of $[[\DASH,\DASH]]$ and of each $\lambda_i$ operation.
+
+\subsection*{A third spectral sequence computing $\mathbb{L}_*\overline{\textup{Ind}_{[]}}$}
+We have seen that $\calL'$ is the category of unstable $\Lambda^+$-Lie algebras with an internal grading, and $\overline{\textup{Ind}_{[]}}$ is the functor $\calL'\to nn\ensuremath{\F_2}$ which kills all $\lambda$ operations and brackets. In particular, we can factor this functor as
+\[\calL'\overset{\textup{Ind}_{\lambda}}{\to}\textup{gr}{\calL}\overset{\textup{Ind}_{[[,]]}}{\to}nn\F_2\]
+where (for present lack of notation) $\textup{gr}{\calL}$ is the category of bigraded Lie algebras with one of the gradings $+1$-shifted. Again, since $\textup{Ind}_\lambda$ preserves free objects, we obtain a convergent spectral sequence
+\[(\mathbb{L}_p\overline{\textup{Ind}_{[[,]]}}_q)(\mathbb{L}_*\textup{Ind}_\lambda)(\Omega)\Rightarrow (\mathbb{L}_{p+q}\overline{\textup{Ind}_{[]}})(\Omega),\]
+for any $\Omega\in\calL'$, for example $\Omega=(\mathbb{L}_*\textup{Ind}_\textbf{P$\beta$})(W)$. Now $\overline{\textup{Ind}_{[[,]]}}$ is no more difficult than $\overline{\textup{Ind}_{[]}}$, and this process can be iterated. One wonders if this has any potential use.
+
+
+%It seems just possible at this moment that there is another Blanc-Stover-Grothendieck spectral sequence calculating the derived functors of $\overline{\textup{Ind}_{[]}}$. After all, given that the $\lambda_i$ can move out the the left, $\overline{\textup{Ind}_{[]}}$ \emph{may} factor as a composite in which the $\Lambda$ operations are killed first, and then the Lie brackets. If so, there \emph{may} be another Grothendieck spectral sequence. One of the terms in this \emph{third} spectral sequence would be Quillen homology of Lie algebras (I suspect), and thus conceptually easy to calculate. I suppose that if this worked out, this could be iterated literally forever. It's a strange thought.
+\section*{Future directions}
+\subsection*{A Koszul approach to the Grothendieck spectral sequence}
+There may be a second approach to defining the above composite functor spectral sequence.
+%
+%
+%Another question to be investigated was raised by Haynes some weeks ago, but hasn't been allocated much processor time up to this point. The question is whether or not the following can be made reality.
+There is a commuting diagram:
+\[\xymatrix@R=4mm{
+\calW
+\ar[r]^-{\textup{Ind}_{\textbf{P$\beta$}}}
+\ar[d]
+&%r1c1
+\calL
+\ar[r]
+\ar[d]
+&%r1c2
+n\ensuremath{\F_2}
+\\%r1c3
+\calP
+\ar[r]^-{\textup{Ind}_{\calP}}
+&%r2c1
+n\ensuremath{\F_2}
+&%r2c2
+%r2c3
+}\]
+Here, the category $\calP$ is obtained from $\calW$ by forgetting the Lie structure, and supports $P$ operations and the $\beta$ operation.
+
+Now the derived functors of $\textup{Ind}_\calP$ might be thought of as $\Tor_\calP$ with a trivial object in $\calP$, and although some structure operations in $\calP$ are quadratic, not linear, one may hope that there is a Koszul calculation of these derived functors. Further, that some Koszul resolution can be naturally enriched with a Lie bracket and filtered in such a way that the required spectral sequence is just that associated with said filtration.
+
+
+\subsection*{Operations in the Adams spectral sequence}
+The Adams spectral sequence defined here converges to $(\pi_*(I\hat A))^*$, which is (modulo augmentations) dual to the homotopy of $\hat A$. As such, at least the abutment contains operations dual to the divided square operations, and a coalgebra structure. One wonders whether this structure can be extended to the $E^r$ pages for $r\geq2$. If so, it would be rather aesthetic if the structure on $E^2$ could be induced by some natural structure on $\mathbb{L}_*\textup{Ind}_{\calW}$ groups. We have yet to perform this investigation.
+%The question comes up of how the coalgebra structure and dual $\delta$ operations to be found on the abutment of the Adams spectral sequence might be reflected on the Adams $E_2$, and moreover how this reflection might be reflected in the Grothendieck spectral sequence! 
+%
+%Question of how the resulting $\Lambda$ operations act on the $E_2$ page --- they should exhibit some duality with the $\delta$ operations. Hrrrrrmmmmmm... That's funny... Don't we kill the $\Lambda$ operations by applying $IndP$? Maybe this works just fine if you use the $\Lambda$-algebra approach ------ that's probably the point: use a filtration of the $\Lambda$ thing which gives what you want in homotopy AND whose filtered parts also do the right thing.
+
+\subsection*{Possible applications}
+As indicated above, there are a number of possible directions for this research, many of which I am at present unaware. Here I'll indicate a few possibilities.
+
+In \cite{MR0413089}, Kan and Thurston show that every connected simplicial complex admits a homology isomorphism from a $K(G,1)$. An analogue in our context would replace $K(G,1)$ with `constant object of \ensuremath{s\calA}', and is yet to be investigated.
+
+In \cite{PiAlgModuli.pdf}, Blanc, Dwyer and Goerss give an obstruction theory for the realisation of a $\Pi$-algebra as the homotopy $\Pi$-algebra of a topological space. One may search in this context for a similar theory, either for the realisation of a $\frakS$-algebra as the homotopy, or of an element of $\calW$ as the cohomology, of an element of $\ensuremath{s\calA}$. Again, this is work yet to be performed.
+
+Interest (c.f.\ \cite{MR896094,MR733698}) has been shown in non-vanishing results for the cohomology of objects of \ensuremath{s\calA} with homotopy in only finitely many simplicial degrees, but various questions remain open for investigation.
+
+It is possible to form a stable model category of `spectra in \ensuremath{s\calA}'. Having done this, one may be able to define a stable Adams spectral sequence, and a stable version of Quillen's fundamental spectral sequence. The topological analogues coincide up to a grading shift in the stable case, although the relationship between the unstable spectral sequences is not well understood. The corresponding investigation in the \ensuremath{\F_2}-algebra context to be more straightforward, but said analysis is yet to be performed.
+
+Recent work of Haugseng and Miller \cite{RuneMillerCohomLoopSpace.pdf} contains a spectral for the cohomology of an infinite loop space, starting with certain derived functors applied to the stable cohomology. This spectral sequence may be related to the Adams spectral sequence via a map from the Dyer-Lashov algebra to the $\Lambda$ algebra. It would be interesting to see if this analysis has analogues in our context.
+
+\subsection*{To do}
+\begin{enumerate}\squishlist
+\setlength{\parindent}{.25in}
+\item Do all of Goerss' book in a more general context, including:
+\item Check out Quillen's fundamental spectral sequence --- its $(E_1,d_1)$ depends on the homology, and maybe can be dualised to get something more comparable to the Adams SS I'm working on. In particular, I need to understand the $\frakS$ construction's interactions with dualisation in order to rewrite Goerss' formula for $d_1$, and then think a little about what in $E_1$ is hit by $d_1$, especially in the case of a sphere, where the two abutments are so well known. \textbf{Question:} I would think that the Quillen SS is degenerate for a sphere, from $E_1$. What about the Adams SS? It would be AMAZING if it had no differentials.
+\end{enumerate}
+
+\subsection*{Simplicial Lie algebras}
+Do all this for simplicial Lie algebras, of the type I like. There should be an Adams SS defined in basically the same way, and a Quillen SS to compare it to. Note that I'll need to calculate (like Goerss on simplicial commutative algebras) the cohomology of Eilenberg-Mac Lane objects, in order to talk meaningfully about factorisations of the Hurewicz.
+
+
+
+\printbibliography
+
+\end{document}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
