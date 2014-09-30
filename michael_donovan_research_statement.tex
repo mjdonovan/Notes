@@ -18,20 +18,139 @@ In defining the notion of a model category, Daniel Quillen \cite{QuillenHomAlg.p
 
 My primary research goal has been to advance our understanding of the homotopy theory of simplicial commutative rings. By virtue of the fact that this homotopy theory fits into the same framework as the homotopy theory of spaces, one expects our understanding of one homotopy theory to shed light on the other. However, our understanding of simplicial algebras lags behind our knowledge of topological spaces.
 
-My research has so far focused on the (unstable) Adams spectral sequence for simplicial commutative algebras (ASSsa). The Adams spectral sequence for topological spaces (ASSts) was introduced by Adams in 1958 \cite{MR0096219}, while the ASSsa was constructed by Radelescu-Banu only in 2006 \cite{radelescuBanu.pdf}. Further study of the ASSts was performed by Bousfield and Kan in a series \cite{BousKanSSeq.pdf,BK_pairings.pdf,BK_pairings_products.pdf} of papers. One part of my research has been to produce analogous results for the ASSsa: completion and convergence results, along with spectral sequence operations (when the base ring is $\F_2$).
+My research has so far focused on the unstable Adams spectral sequence for simplicial commutative algebras (uASSsa). The stable Adams spectral sequence for topological spaces (sASSts) was introduced by Adams in 1958 \cite{MR0096219}, and its unstable counterpart was introduced by [who] in [when?]. On the other hand, the uASSsa was constructed by Radelescu-Banu only in 2006 \cite{radelescuBanu.pdf}. Further study of the uASSts was performed by Bousfield and Kan in a series \cite{BousKanSSeq.pdf,BK_pairings.pdf, BK_pairings_products.pdf} of papers, while such study of the uASSsa had not been performed.
+\subsection*{Background on spectral sequences}
+\emph{Spectral sequences} are a powerful theoretical and computational tool, common in algebraic topology. However, they have a reputation for being complicated, and so we will record here the details of the kinds of spectral sequences needed in this note, namely multiply graded `second quadrant' spectral sequences.
 
-The May spectral sequence \cite{MayRestLie.pdf} is a further spectral sequence converging to the $E^2$ page of the ASSts. A further component of my research has been to develop a composite functor spectral sequence with target the $E^2$ page of the ASSsa. In fact, I develop an infinite series of such composite functor spectral sequences, each converging to the $E^2$ page of the previous. Using these spectral sequences, and Koszul methods following \cite{PriddyKoszul.pdf}, we can produce effective upper bounds on the size of the Adams $E^2$ page, including a vanishing line result.
+Such a spectral sequence will have the following form, for some fixed $n\geq1$. It will be a sequence of \emph{pages}, $E^r$, for $2\leq r< \infty$, with each page an $(n+1)$-graded $\F_2$-vector space $E^r_{-s_n,\ldots,-s_1,t}$ which may only be nonzero when all of $s_n,\ldots,s_1,t$ are nonnegative. Moreover, $E^r$ has a differential:
+\[d^r:E^r_{-s_n,-s_{n-1},\ldots,-s_1,t}\to E^r_{-s_n-r,-s_{n-1}+r-1,\ldots,-s_1,t}.\]
+The relationship between the various pages is that $E^{r+1}$ is isomorphic to the homology of $E^r$ for all $r\geq2$. It will always happen that in each multidegree $(-s_n,\ldots,-s_1,t)$, the sequence $E^r_{-s_n,\ldots,-s_1,t}$ stabilizes, so that we may define an $E^\infty$ page by requiring that $E^\infty_{-s_n,\ldots,-s_1,t}:=E^r_{-s_n,\ldots,-s_1,t}$ for $r\gg0$.
 
-Now even the $E^2$ page of the ASSts is notoriously difficult to compute, say, with input a sphere, and the homotopy groups of a topological sphere are notoriously difficult to calculate. On the other hand, over $\F_2$, the homotopy groups of a simplicial algebra sphere are known \cite{DwyerHtpyOpsSimpComAlg.pdf}, and one might expect the ASSca to be simple. Calculations I have made of the $E^2$-page show that this is quite untrue, and the spectral sequence is very far from degenerate. 
+Now the spectral sequence above \emph{computes} or \emph{converges to} an $n$-times graded vector space $W$, denoted $E^2\implies W$, if $W$ in fact has an exhaustive, decreasing filtration:
+\[W=F^0W\supseteq F^1W\supseteq F^2W\supseteq \cdots\ \ \ \textup{(with $\textstyle\bigcap_{s\geq0}F^sW=0$)}\]
+and there are isomorphisms between the terms of the $E^\infty$ page and the filtration quotients
+\[E^\infty_{-s_n,-s_{n-1},\ldots,-s_1,t}=\begin{cases}
+(F^{s_n}/F^{s_n+1})W_{-s_n-s_{n-1},-s_{n-2},\ldots,-s_1,t},&\textup{if }n>1;\\
+(F^{s_n}/F^{s_n+1})W_{-s_1+t},&\textup{if }n=1.
+%\\,&\textup{if }
+\end{cases}
+\]
+There are almost always two main obstructions to the calculation of a spectral sequence $E^2\implies W$. Firstly, one must determine $E^2$ itself, which is typically given as a collection of derived functors. Secondly, one must determine the differentials $d^r$ for $r\geq2$ in whatever range of degrees $E^2$ can be determined.
+\subsection*{The classical unstable Adams spectral sequence}
+We'll explain further by the example of the unstable Adams spectral sequence for topological spaces, which indeed motivated the present work. It was introduced as a tool for computing the homotopy groups of spheres. Given a connected topological space $X$, the homotopy groups $\pi_*(\hat X_2)$ of the $2$-completion of $X$ have a natural decreasing filtration, and the $E^r_{-s,t}\implies \pi_{t-s}(\hat X_2)$, i.e.\ 
+\[E^\infty_{-s,t}=F_s\pi_{t-s}(\hat X_2)/F_{s+1}\pi_{t-s}(\hat X_2).\]
+It is standard to use the shorthand $E^2_{-s,t}\implies \pi_{t-s}(\hat X_2)$ to indicate this fact. Moreover, Bousfield and Kan describe the $E^2$ page homotopically, as the derived functors
+\[E^2_{-s,t}=\Ext^s(\F_2[t],H_*X),\]
+taken in the category of unstable coalgebras over the Steenrod algebra [ref]. The question of how the homotopy groups of the completion $\hat X_2$ determine those of $X$ has been answered in particular when $X$ is a nilpotent space with finitely generated homotopy groups, in which case $\pi_*(\hat X_2)=\pi_*(X)\hat{_2}$ is the group-theoretic $2$-completion, allowing us to recover the $2$-component of $\pi_*(X)$. In particular, a full calculation of this spectral sequence for each sphere $X=S^d$ would yield a full calculation of the 2-torsion in the homotopy groups of spheres.
 
-The tools and techniques I have developed appear to put within reach the complete calculation of the ASSsa for a simplicial $\F_2$-algebra sphere. I have made certain computer calculations which have led to a system of conjectured differentials, which if correct, would be all of the differentials in the spectral sequence. The work on verifying that these differentials are correct is ongoing, and seems certain to depend on understanding the various operations which can be defined on the composite functor spectral sequences I have developed.
+Both of the standard obstructions to calculation with spectral sequences apply in this setting: the derived functors defining $E^2$ are notoriously difficult to calculate, and the determination of the differential $d^r$ is diabolically challenging. 
+
+
+
+
+
+Miller [ref] approached the calculation of the Adams $E^2$ by developing a composite functor spectral sequence to calculate $E^2_{-s,t}$ itself, which one may denote $E^2_{-s_2,-s_1,t}\implies E^2_{-s_2-s_1,t}$. However useful this spectral sequence was in proving the Sullivan conjecture, the new, trigraded $E^2$ term, given in terms of Andre-Quillen homology, is very difficult to calculate, as may be the differentials in Miller's spectral sequence. Nevertheless, we may draw a `master diagram' consisting of the two spectral sequences:
+\[\pi_{t-s_1-s_2}(\hat X_2)\overset{\textup{Adams}}{\impliedby}E^2_{-s_2-s_1,t}\overset{\textup{Miller}}{\impliedby} E^2_{-s_2,-s_1,t}.\]
+
+For the problem of calculating the Adams differentials (in ranges where $E^2_{-s,t}$ is known), one useful tool is due to Bousfield and Kan [ref]. They observe that the spectral sequence is in fact a spectral sequence of Lie algebras, so that each $E^r$ supports a Lie bracket compatible with the differential, and the resulting bracket on $E^\infty$ is compatible with the Whitehead bracket on $\pi_*(\hat X_2)$.
+
+Motivated and inspired by this and other work, I have taken on the task of performing all of this for the Adams spectral sequence for simplicial algebras.
+\subsection*{offcuts}
+
+
+ of bigraded differential abelian groups, with $E^r$ referred to as the \emph{$E^r$ page}, such that $E^{r+1}$ is the homology of $E^r$. The $E^2$ page can typically be described as a homological object. Typically it happens that the sequence of pages $E^r_{-s,t}$ stabilizes in each bidegree $(-s,t)$, in which case we may define an $E^\infty$ page by requiring that $E^\infty_{-s,t}:=E^r_{-s,t}$ for $r\gg0$. The $E^\infty$ page typically calculates some homotopy groups of interest, in the sense that these homotopy groups are filtered, and $E^\infty$ is the associated graded object.
+
+
+
+
+is a sequence $E^r$ ($2\leq r< \infty$) of bigraded differential abelian groups, with $E^r$ referred to as the \emph{$E^r$ page}, such that $E^{r+1}$ is the homology of $E^r$. The $E^2$ page can typically be described as a homological object. Typically it happens that the sequence of pages $E^r_{-s,t}$ stabilizes in each bidegree $(-s,t)$, in which case we may define an $E^\infty$ page by requiring that $E^\infty_{-s,t}:=E^r_{-s,t}$ for $r\gg0$. The $E^\infty$ page typically calculates some homotopy groups of interest, in the sense that these homotopy groups are filtered, and $E^\infty$ is the associated graded object.
+
+\subsection*{The unstable Adams spectral sequence}
+Now Goerss [ref] gave a full calculation of the operations on the Andr\'e-Quillen cohomology of simplicial algebras over $\F_2$. Resulting from his description, one finds that the Andre-Quillen homology $HX:=H_*^\textup{AQ}(X)$ is compatibly a Lie coalgebra and an unstable comodule over a certain bigraded coalgebra $\calP\hat{\,}$.
+
+Radelescu-Banu constructed in [ref] an Adams spectral sequence for a simplicial algebra $X$:
+\[E^2_{-s,t}=\Ext^s_{\calL\hat{\,}\calP\hat{\,}}(\F_2[t],HX)\implies \pi_{t-s}(\hat X_\textup{AQ}).\]
+Here, the simplicial algebra $\hat X_\textup{AQ}$ might be called the completion of $X$ with respect to Andr\'e-Quillen homology. I prove the following conjecture of Radelescu-Banu, the analogue of the classical fact that simply-connected spaces are $R$-complete:
+\begin{thm}
+If $X$ is a connected simplicial algebra, then the completion map $X\to \hat X$ is an equivalence.
+\end{thm}
+Combining this with theorem \ref{vanishing-line-theorem} (to follow), one has:
+\begin{cor}
+If $X$ is a connected simplicial $\F_2$-algebra, the Adams spectral sequence converges strongly to the homotopy $\pi_*(X)$ of $X$.
+\end{cor}
+\subsection*{Operations in the Adams spectral sequence}
+Given the extreme difficulty of calculating any of the three terms in the master diagram for topological spaces, one might expect the calculation of this spectral sequence for simplicial algebras to be unfeasable. However, we have a significant advantage in this context, which is that the homotopy operations for simplicial algebras are completely determined, by work of Bousfield, Cartan and Dwyer [refs]. In particular, the homotopy of `simplicial algebra spheres' is \emph{known}. The work of these authors shows that there are homotopy operations $\delta_i:\pi_{n}\to\pi_{n+i}$ defined for $2\leq i\leq n$.
+One goal must then be to define compatible operations on the whole Adams spectral sequence.
+
+ I define `vertical' $\delta$-operations $\delta_i^\textup{v}:E^2_{-s,t}\to E^2_{-s-1,t+i+1}$ for $2\leq i<t$, and show that those $\delta_i^{\textup{v}}$ for which $i\leq t-s$ extend to the whole spectral sequence and are compatible with the $\delta_i$ on homotopy. One notes immediately that there is a disagreement between the unstable conditions on $\pi_*$ and on $E^2$, with more $\delta_i^\textup{v}$ being defined on $E^2_{-s,t}$ than there are $\delta_i$ defined on $\pi_{t-s}$. The remedy here is that whenever $t-s<i<t$, there is a canonical differential $d^{t-i+1}:\delta_i^\textup{v}x\mapsto \Sq_\textup{h}^{t-i+2}x$ for each $x\in E^2_{-s,t}$. The image of this differential we also define, being an example of a `horizontal' Steenrod operation $\Sq^j_\textup{h}:E^2_{-s,t}\to E^2_{-s-j,2t+1}$. These are zero unless $3\leq j\leq s+1$.
+
+This work is inspired by Dwyer's beautiful calculation in [ref], but differs from it in two ways. Firstly, Dwyer studies the opposite filtration on a cosimplicial simplicial algebra, so that his results, while formally dual, do not apply. Secondly, in this Adams spectral sequence, all of the operations must be adjusted up to homotopy into filtration one higher than one might anticipate.
+
+These operations allow us to populate the $E^2$ page of the Adams spectral sequence for $X=S^d$ (a simplicial algebra sphere), given only the fundamental class $\imath\in E^2_{0,d}$. After constructing a commutative product on $E^2_{**}$, we have products of terms $\Sq^{j_b}_\textup{h}\cdots \Sq^{j_1}_\textup{h}\delta_{i_a}^\textup{v}\cdots \delta_{i_1}^\textup{v}\imath$ (with the sequences involved suitably unstable and admissible). I conjecture that further combinations are unneccesary due to relations between the $\Sq$ and $\delta$-operations, and I conjecture many differentials between the (products of) classes $\Sq^{j_b}_\textup{h}\cdots \Sq^{j_1}_\textup{h}\delta_{i_a}^\textup{v}\cdots \delta_{i_1}^\textup{v}\imath$. However, at this point one cannot show that a given set of such classes is linearly independent, nor does it give a sense of what proportion of the $E^2$ page is built of such classes.
+
+It happens, however, that the calculations can be taken much further for simplicial algebras over $\F_2$ than they can for topological spaces. Indeed, I construct the following greatly extended master diagram, for $X$ a simplicial $\F_2$-algebra
+\[\xymatrix@R=4mm{
+\pi_{*}(\hat X_\textup{AQ})&%r1c1
+\ar@{=>}[l]_-{\textup{Ass}}
+E^2_{**}&%r1c2
+\ar@{=>}[l]_-{\textup{CFss}}
+E^2_{***}
+&%r1c3
+E^2_{****}
+\ar@{=>}[l]_-{\textup{CFss}}&%r1c4
+\cdots
+\ar@{=>}[l]_-{\textup{CFss}}%r1c5
+}\]
+That is, a sequence of composite functor spectral sequences, each calculating the $E^2$-term of the previous, and finally, the Adams spectral sequence in place of the `zeroth' composite functor spectral sequence. Indeed, my work includes the following enrichment of the master diagram:
+\[\xymatrix@R=2mm{
+\pi_{*}(\hat X_\textup{AQ})&%r1c1
+\ar@{=>}[l]_-{\textup{Ass}}
+E^2_{**}&%r1c2
+\ar@{=>}[l]_-{\textup{CFss}}
+E^2_{***}
+&%r1c3
+E^2_{****}
+\ar@{=>}[l]_-{\textup{CFss}}&%r1c4
+\cdots
+\ar@{=>}[l]_-{\textup{CFss}}%r1c5
+\\
+\textup{com}&
+\textup{com}\ar@{=>}[l]&
+\textup{com}\ar@{=>}[l]&
+\textup{com}\ar@{=>}[l]&
+\cdots \ar@{=>}[l]\\
+\delta_i&
+\Sq^i_\textup{h}&
+\Sq^i_\textup{h}\ar@{=>}[l]_-{\ \textup{sh.}}&
+\Sq^i_\textup{h}\ar@{=>}[l]_-{\ \textup{sh.}}&
+\cdots \ar@{=>}[l]_-{\ \textup{sh.}}\\
+&
+\delta^\textup{v}_i\ar@{=>}[ul]\ar[u]_-d
+&
+\Sq_\textup{v}^i\ar@{=>}[ul]&
+\Sq_\textup{v}^i\ar@{=>}[ul]&
+\cdots \ar@{=>}[ul]&
+}\]
+We'll explain this diagram one section at a time. The second row is intended to indicate that the homotopy $\pi_*$ and each of the infinite sequence of $E^2$ pages may be endowed with the structure of commutative algebra, that each of the spectral sequences is indeed a spectral sequence of commutative algebras, and indeed, the products are compatible from one spectral sequence to the next. The operations $\delta_i$ on homotopy, and the operations $\delta_i^\textup{v}$ and $\Sq_\textup{h}$ on $E^2_{**}$ were discussed above.
+
+Do the $E_{***}$ steenrods
+
+\pagebreak
+
+One part of my research has been to produce analogous results for the uASSsa: completion and convergence results, along with spectral sequence operations when the base field is $\F_2$.
+
+A further component of my research has been to develop a composite functor spectral sequence with target the $E^2$ page of the uASSsa. This spectral sequence is analogous to Miller's spectral sequence in ???, rather than the May spectral sequence \cite{MayRestLie.pdf}. In fact, I develop an infinite series of such composite functor spectral sequences, each converging to the $E^2$ page of the previous. Using these spectral sequences, and Koszul methods following \cite{PriddyKoszul.pdf}, we can produce effective upper bounds on the size of the Adams $E^2$ page, including a vanishing line result.
+
+Now even the $E^2$ page of the uASSts is notoriously difficult to compute, say, with input a sphere, and the homotopy groups of a topological sphere are notoriously difficult to calculate. On the other hand, over $\F_2$, the homotopy groups of a simplicial algebra sphere are known \cite{DwyerHtpyOpsSimpComAlg.pdf}, and one might expect the uASSca to be simple. Calculations I have made of the $E^2$-page show that this is quite untrue, and the spectral sequence is very far from degenerate. Indeed, it serves at this point to include a diagram of the various spectral sequences I have studied.
+
+The tools and techniques I have developed appear to put within reach the complete calculation of the uASSsa for a simplicial $\F_2$-algebra sphere. I have made certain computer calculations which have led to a system of conjectured differentials, which if correct, would be all of the differentials in the spectral sequence. The work on verifying that these differentials are correct is ongoing, and seems certain to depend on understanding the various operations which can be defined on the composite functor spectral sequences I have developed.
 
 If this work is completed, it will be possible to combine the understanding we have obtained of the $E^2$ term for spheres, in order to define a single `Koszul' spectral sequence converging to the $E^2$ term for any connected simplicial algebra.
 
 %Completion of this analysis of the ASS for a simplicial algebra sphere may shed some light
 To be (improved and) continued...
 
-
+%\end{document}
 \textup{}
 
 \noindent The following six sections detail the various aspects of my research so far.
