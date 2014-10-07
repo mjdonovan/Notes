@@ -32,6 +32,7 @@
 \excludeversion{DiagramOfFunctors}
 \excludeversion{GrothendieckSpectralSequences}
 \excludeversion{Grothendieck Multiplicativity}
+\Ixcludeversion{Koszul Actions}
 \excludeversion{Adams Muliplicativity}
 \excludeversion{AdamsSSEQ operations final}
 \excludeversion{KoszulComplexes_n>1}
@@ -47,7 +48,7 @@
 \excludeversion{DimZeroPart}
 \excludeversion{AxisComputationSummary}
 \excludeversion{VanishingLines}
-\Ixcludeversion{CompressingSequencesOfSteenrodOperations}
+\excludeversion{CompressingSequencesOfSteenrodOperations}
 \excludeversion{conjectured differentials}
 \excludeversion{grothendieck collapse}
 
@@ -2630,6 +2631,7 @@ The stuff in here is what I wrote after a brief chat with Haynes about the inclu
 %\end{proof}
 \end{ConversationWithHaynes_InclusionOfBarConstructions}
 
+
 \begin{Grothendieck Multiplicativity}
 \section{Multiplicativity of the Grothendieck spectral sequence}
 \subsection{Smash products}
@@ -4576,6 +4578,55 @@ Moreover, at the right of this diagram we see exactly the maps needed in order t
 \end{proof}
 \end{Thoughts on Adams Multiplicativity III}
 
+
+\begin{Koszul Actions}
+\section{Koszul action on derived primitives}
+We can hopefully describe the Koszul coaction on derived indecomposables instead, and then redualise well after the fact. After all, one can map the bar construction into $\pi_*\calW^\bullet$, and doing the dual thing sounds pretty scary. So, we need, for $K\in\LL{n}$, some maps $Q_{u+i}B_{s+1}K\to Q_uB_{s}K$ which represent the composite
+\[\mathbb{Q}_{s+1,y+i-1}K\to\calA_*\hat\otimes\mathbb{Q}_{*}K\to \{\hat{\Sq^i}\}\otimes\mathbb{Q}_{s,u}K.\]
+This is supposed to be obtained by stripping off $\lambda_{i-1}$ ($1\leq i\leq u$). Indeed, let's define maps
+\[(\Sq^i)^*:Q_{u+i-1}B_{s+1}K\to Q_{u}B_{s}K\]
+by equivalently defining the map $F^{s+1}K_{u+i-1}\to F^{s}K_{u}$ by
+\[\lambda_{i-1}x\mapsto x\textup{ for }x\in (F^{s}K)_{i}\]
+and sending anything else to zero. This works if we think of the free functor as the composite $\textup{nt$\lambda$}\circ\textup{pr$\calL$}$ of monads, where $\textup{pr$\calL$}$ is $\Gamma(\calL)$ in dimensions other than $(0,\ldots,0,t)$, and the image of $S(\calL)$ in $\Gamma(\calL)$ in dimensions $(0,\ldots,0,t)$.
+
+Given this understanding of the free funtor, we can also project $FV$ onto the part inside $\Gamma_2(\calL)V\cong S^2V$. That is, we obtain a map
+\[\psi:QB_{s+1}K_u\to S^2(QB_{s}K)_u\]
+which is the composite 
+\[F^{s+1}K=(\textup{nt$\lambda$}\circ\textup{pr$\calL$})F^sK \to\Gamma_2(\calL)(F^sK)\cong S^2(F^sK).\]
+These are the maps that create the Koszul commutative product and the Koszul Steenrod action.
+
+Now let's consider the map $\Delta_\textup{ch}=j\circ Q(\xi_\textup{ch}):Q\scrW^{s+1}\to S^2(Q\scrW^{s})$, which is defined by 
+\[k_{e(s_{\alpha_1}k_{a_1},\ldots,s_{\alpha_m}k_{a_m})}\overset{\Delta_\textup{ch}}{\mapsto}q(e)(s_{\alpha_1}k_{a_1},\ldots,s_{\alpha_m}k_{a_m}).\]
+In order to determine the maps on homotopy 
+\[\pi_*(Q\scrW^{s+1})\overset{(\Sq^i)^*}{\to} \pi_*(Q\scrW^{s})\textup{ and }\pi_*(Q\scrW^{s+1})\overset{\mu^*}{\to} \pi_*(Q\scrW^{s})\otimes \pi_*(Q\scrW^{s})\]
+dual to the Steenrod operations and product on cohomotopy of the dual object using this coproduct. Goerss explains how to do this. Indeed, for $x\in \pi_*(Q\scrW^{s+1})$ one can write $(\Delta_\textup{ch})(x)\in S^2(Q\scrW^s)$ as
+\[(\Delta_\textup{ch})(x)=\sum_j\pi_*(1+T)(y_j\otimes z_j)+\sum_{i=1}^{*/2+1}\sigma_{i-1}((\Sq^i)^*x)\]
+for unique classes $(\Sq^i)^*x\in\pi_{*-(i-1)}(Q\scrW^s)$, and further we can determine $\mu^*(x)$ by mapping into $\pi_*(Q\scrW^s)\otimes\pi_*(Q\scrW^s)$. Our plan then will be to choose a map $\chi:B_{\bullet}\pi X\to \pi_*\scrW^{\bullet}$, and then consider the resulting map
+\[QB_{s+1}\pi_* X\overset{\chi}{\to}\pi_*Q\scrW^{s+1}X\to \pi_*S^2(Q\scrW^{s}X)\]
+One must show that it is the sum of the composites
+\[QB_{s+1}\pi_* X\overset{(\Sq^i)^*}{\to} QB_{s}\pi_* X\overset{\chi}{\to} \pi_*Q\scrW^{s}X\overset{\sigma_{i-1}}{\to} \pi_*S^2(Q\scrW^{s}X)\]
+including the composite $(\Sq^i)^*$ when $i$ is top, which admittedly is not dual to anything whatsoever, and also the composite which sorts out the products:
+\[QB_{s+1}\pi_* X\overset{\mu^*}{\to}(QB_{s}\pi_* X)^{\otimes2}\overset{\chi^{\otimes2}}{\to}(\pi_*Q\scrW^{s}X)^{\otimes2}\overset{\pi_*(1+T)}{\to}\pi_*S^2(Q\scrW^{s}X)\]
+
+\begin{shaded}
+Now let's recall some notation, remembering
+\begin{prop}
+The coproduct $\Delta_\textup{ch}:N_*^\textup{int}(QW^{s+1}X)\to N_*^\textup{int}((QW^{s}X)^{\otimes2})$ is given by the formula
+\[k_{e(s_{\alpha_1}k_{a_1},\ldots,s_{\alpha_m}k_{a_m})}\overset{\Delta_\textup{ch}}{\mapsto}q(e)(s_{\alpha_1}k_{a_1},\ldots,s_{\alpha_m}k_{a_m}).\]
+\end{prop}
+To explain this notation, the $a_j$ are elements of $N_*(W^{s-1}X)$, and each $k_{a_j}\in W^sX$ are each either a sphere or cone class corresponding to $a_j$. The $s_{\alpha_j}$ are degeneracies (so that all of the $s_{\alpha_j}k_{a_j}$ are in the same simplicial degree). Finally, $e$ is some Lie operator applied to these classes, so that $e(\cdots )\in N_*(W^sX)$, and we can write $k_{e(\cdots )}$ to mean either a sphere or cone class in $W^{s+1}X$.
+\end{shaded}
+
+Now let's discuss mapping $B_\bullet\pi_*X \to \pi_*\scrW_\bullet X$. One does this by skeleta of the bar construction, writing
+\[\textup{sk}_kB_s(\pi_*X)\subseteq B_s\pi_*X=F^{s+1}(\pi_*X)\]
+for the subset consisting of degeneracies from levels at most $k$, i.e.\ expressions in which at most $k$ of the internal free constructions are used. One should think of these as augmented simplicial objects \textbf{any point?}, and we'll construct a map $\chi:\textup{sk}_kB_\bullet(\pi_*X)\to \pi_*\scrW_\bullet X$ recursively in $k$. The map $\textup{sk}_0B\pi X\to\pi\scrW X$ is determined by the map $F\pi X\to \pi WX$, and that'll be built by choosing a representative for every element of a basis of $\pi X$, in order that the relevant expressions in these basis vectors can be sent to the same combination of the formalised $k_\sigma$ in $\pi WX$. That is, $e_0(\sigma_1,\ldots,\sigma_n)$ maps to $e_0(k_{\sigma_1},\ldots,k_{\sigma_n})$. Now, any extension from the $0$-skeleton to the whole thing will be the desired weak equivalence. In order to extend from the $(k-1)$-skeleton to the $k$-skeleton, we must only say where the nondegenerate generators of $B_k\pi X$ go, the compatibility being that the face maps must commute. One chooses a formalization of their $d_0$.
+
+
+
+
+\end{Koszul Actions}
+
+
 \begin{Adams Muliplicativity}
 \section{Multiplicativity of the Adams sseq}
 %\section{Adams multiplicativity}
@@ -5389,7 +5440,7 @@ H_*Y%r3c5
 }\]
 which is to say that $\pi_*(Q\epsilon)$ provides a left inverse for the Hurewicz.
 
-\subsection{$E^1$-level identification of the product}
+\subsection{$E^1$-level identification of the product and Steenrod operations}
 Throughout, I'll continue with the above abbreviations, and write $\frakt=t+t'$. We're going to need the following commutative diagram of vector spaces:
 \[\mathclap{\xymatrix@R=4mm{
 \pi_t(X)\otimes \pi_{t'}(X)\ar[dd]^-{h\otimes h}
@@ -8330,6 +8381,7 @@ Choose $x\in E^{a}$. Let $\textbf{IJ}$ be the set of pairs $(I,J)$ of positive, 
 \begin{prop}
 Then there is a bijection $\textup{\textbf{IJ}}\to\textup{\textbf{K}}$ which sends $(I,J)$ to the concatenation $\Phi_{a+n^J-\ell^J}(I)\star J$, where 
 \[\Phi_q(I)=(\ldots,i_3+4q,i_2+2q,i_1+q).\]
+Moreover, if we restrict this bijection to those $(I,J)$ such that $J$ is nonempty, then those $(I,J)$ such that every entry of $J$ is at least $m$ correspond to those $K$ in which every entry is at least $m$.
 %\begin{itemise}
 %\setlength{\parindent}{.25in}
 %\item $2i_n\leq i_{n+1}\leq s+i_1+\cdots+i_{n}$ for all $n$
