@@ -4619,7 +4619,30 @@ To explain this notation, the $a_j$ are elements of $N_*(W^{s-1}X)$, and each $k
 
 Now let's discuss mapping $B_\bullet\pi_*X \to \pi_*\scrW_\bullet X$. One does this by skeleta of the bar construction, writing
 \[\textup{sk}_kB_s(\pi_*X)\subseteq B_s\pi_*X=F^{s+1}(\pi_*X)\]
-for the subset consisting of degeneracies from levels at most $k$, i.e.\ expressions in which at most $k$ of the internal free constructions are used. One should think of these as augmented simplicial objects \textbf{any point?}, and we'll construct a map $\chi:\textup{sk}_kB_\bullet(\pi_*X)\to \pi_*\scrW_\bullet X$ recursively in $k$. The map $\textup{sk}_0B\pi X\to\pi\scrW X$ is determined by the map $F\pi X\to \pi WX$, and that'll be built by choosing a representative for every element of a basis of $\pi X$, in order that the relevant expressions in these basis vectors can be sent to the same combination of the formalised $k_\sigma$ in $\pi WX$. That is, $e_0(\sigma_1,\ldots,\sigma_n)$ maps to $e_0(k_{\sigma_1},\ldots,k_{\sigma_n})$. Now, any extension from the $0$-skeleton to the whole thing will be the desired weak equivalence. In order to extend from the $(k-1)$-skeleton to the $k$-skeleton, we must only say where the nondegenerate generators of $B_k\pi X$ go, the compatibility being that the face maps must commute. One chooses a formalization of their $d_0$.
+for the subset consisting of degeneracies from levels at most $k$, i.e.\ expressions in which at most $k$ of the internal free constructions are used. One should think of these as augmented simplicial objects \textbf{any point?}, and we'll construct a map $\chi:\textup{sk}_kB_\bullet(\pi_*X)\to \pi_*\scrW_\bullet X$ recursively in $k$. The map $\textup{sk}_0B\pi X\to\pi\scrW X$ is determined by the map $F\pi X\to \pi WX$, and that'll be built by choosing a representative for every element of a basis of $\pi X$, in order that the relevant expressions in these basis vectors can be sent to the same combination of the formalised $k_\sigma$ in $\pi WX$. That is, $e_0(\sigma_1,\ldots,\sigma_n)$ maps to $e_0(k_{\sigma_1},\ldots,k_{\sigma_n})$. Now, any extension from the $0$-skeleton to the whole thing will be the desired weak equivalence. In order to extend from the $(k-1)$-skeleton to the $k$-skeleton, we must only say where the nondegenerate generators of $B_k\pi X$ go, the compatibility being that the face maps must commute. The trick here, coming from Miller's proof [], is that you must choose generators which have all face maps zero except $d_0$ (available via normalisation). Then you can define $\chi(g):=s_{\chi(d_0g)}$, a formalisation of their $d_0$. Now in order to use this, we might need to describe the method of compressing things into that kernel of $d_1,\ldots,d_n$ normalisation. The method is this:
+\[\textup{if }x\in V_n,\textup{ then }(1+s_0d_1)(1+s_1d_2)\cdots (1+s_{n-1}d_n)x\in N_nV.\]
+Note that when this product is expanded, none of the $2^n$ terms need cancel. Now what elements of $QB_{s+1}\pi_*X$ do we need to test on? I guess we need all elements, but we can go from $x$ to this above expression for nothing, discarding degenerate elements willy-nilly.
+
+Now suppose we have an expression 
+\[e:=f^{s+1}_{s+1}\cdots f^1_1x_0\in F^{s+1}\pi_*X\cong QB_{s+1}\pi_*X.\]
+%We can probably assue $f_{s+1}$ has no unit part.
+We replace it with $\textup{comp}(e)$, so that it vanishes under all maps but $d_0$ (and we do this in $B_{s+1}\pi_*X$ without the $Q$). We should calculate $\Delta_\textup{ch}(\chi(e))$, and 
+\[\chi(e)=k_{\chi(d_0^\textup{h}e)}\textup{\quad ($d_0^\textup{h}e\in B_s\pi_*X$)}
+\textup{\quad ($\chi(d_0^\textup{h}e)\in W^{s+1}X$)}.\]
+\[\xymatrix@R=4mm{
+f^{s+1}_{s+1}\cdots f^1_1x_0\ar@{|->}[d]^-{d_0}
+\ar@{|-->}[r]^-{\chi}
+&%r1c1
+k_{f^\textup{rep}_{s+1}\chi(f_s^s\cdots f^1_1x_0)}\ar@{|->}[d]^-{d_0}
+\\%r1c2
+f_{s+1}f_s^s\cdots f^1_1x_0\ar@{|->}[r]^-{\chi}&%r2c1
+f_{s+1}\chi(f_s^s\cdots f^1_1x_0)%r2c2
+}\]
+Where by $f^\textup{rep}_{s+1}$ we mean to use the actual chain level constructions of the operations $f_{s+1}$. Thus, by the above theoremy formula, 
+\[\Delta_\textup{ch}(\chi(e))=q(f^\textup{rep}_{s+1})(\chi(f_s^s\cdots f^1_1x_0))\]
+\textbf{unless $\chi(f_s^s\cdots f^1_1x_0)$ itself has some quadratic part!}%footnote:
+\footnote{But surely we can just prove that this doesn't happen directly...}
+And $q(f^\textup{rep}_{s+1})$ only picks up the monomials $\lambda_{i-1}$ and the single products in $f_{s+1}$. That's exactly the stuff that we get as we scan through all the $(\Sq^i)^*$ and $\mu^*$. Moreover, we'll get each simply from the relevant parts of $\chi(f^s_s\cdots f^1_1x_0)$, when we use $\sigma_{i-1}$ and $\pi_*(1+T)$.
 
 
 
