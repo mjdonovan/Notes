@@ -19,6 +19,7 @@ url=false,doi=false,isbn=false,eprint=false]{biblatex}%
 \newcommand{\NOFULLPAGE}{\relax}
 
 \newcommand{\Sq}{\mathrm{Sq}}
+\newcommand{\Comm}{\calC}
 
 \bibliography{../../Dropbox/logbook/_LOGBOOK/papers}
 
@@ -39,7 +40,7 @@ In this paper, we will work in the category $s\calC$ of simplicial non-unital al
 \[X^{\hat\,}:=\textup{Tot}(\calX^\bullet),\]
 and defines the absolute Bousfield-Kan spectral sequence of $X$ to be the spectral sequence of the cosimplicial object $\calX^\bullet$. Its target is $\pi_*X^{\hat\,}$. 
 
-More precisely, Radulescu-Banu constructs a comonad structure on the cofibrant replacement functor $c:s\calC\to s\calC$ arising from Quillen's small object argument, and mixes $c$ into the standard cobar construction arising from the adjunction $Q:s\calC\leftrightarrows s\calV:K$, obtaining a coaugmented cosimplicial object 
+More precisely, Radulescu-Banu constructs a comonad structure on the cofibrant replacement functor $c:s\calC\to s\calC$ arising from Quillen's small object argument, and mixes $c$ into the standard cobar construction arising from the adjunction $Q:s\calC\rightleftarrows s\calV:K$, obtaining a coaugmented cosimplicial object 
 \[
 \vcenter{
 \def\labelstyle{\scriptstyle}
@@ -66,12 +67,12 @@ For background, general theory, and another approach, see Blum-Riehl and Bous03.
 \begin{theorem}\label{completenesstheorem}
 Suppose that $k$ is a field, and that $X$ is a connected simplicial $k$-algebra. Then the completion map $X\to X{\hat{\,}_\textup{\!\!AQ}}$ is an equivalence.
 \end{theorem}
-In order to analyse the failure of the completion map $X\to \pi_*X^{\hat\,}$ to be an equivalence,
+The failure of the completion map $X\to \pi_*X^{\hat\,}$ to be an equivalence is tied to a construction of an Adams tower over $X$, analogous to Bousfield and Kan's original construction in classical topology. However, just as in Radulescu-Banu's work, we must be careful to ensure that our constructions are homotopically correct, as not all simplicial algebras are cofibrant. In section \ref{sec:derWRTab} we will define the Adams tower analogous to Bousfield and Kan's. In section \ref{sec:relnWithRB} we explain the relationship between the Adams tower and Radulescu-Banu's cosimplicial resolution. In section \ref{sec:connectivityAnalysis} we perform a connectivity analysis, analogous to Bousfield and Kan's in the classical case, confirming theorem \ref{completenesstheorem}.
 
+
+\begin{shaded}
+\tiny
 an Adams spectral sequence for simplicial algebras, by finding an appropriate cosimplicial resolution of a simplicial algebra with respect to Andr\'e-Quillen homology. Thus, he obtained a spectral sequence with target the homotopy of a certain completion $X{\hat\,}$ of $X$.
-
-
-
 \begin{itemise}
 \setlength{\parindent}{.25in}
 \item The classical unstable Adams spectral sequence was defined in two ways by Bousfield and Kan. In \cite{BousKanSSeq.pdf} they define an Adams tower for a reduced simplicial set, and define the Adams spectral sequence to be the homotopy spectral sequence of this tower. The tower is built by \emph{deriving functors with respect to $R$}.
@@ -82,15 +83,344 @@ an Adams spectral sequence for simplicial algebras, by finding an appropriate co
 The purpose of this paper is to analyse the completion map $X\to X{\hat\,}$ by reconstructing Radulescu-Banu's spectral sequence by a method analogous to Bousfield and Kan's first method in the classical case. That is, by \emph{deriving functors with respect to Andr\'e-Quillen homology}. We will be able to prove theorem \ref{completenesstheorem}, conjectured by Radelescu-Banu. We will also prove that three different ways to define the spectral sequence coincide.
 \end{itemise}
 
+\end{shaded}
 
-\begin{theorem}\label{completenesstheorem}
-Suppose that $k$ is a field, and that $X$ is a connected simplicial $k$-algebra. Then the completion map $X\to X{\hat{\,}_\textup{\!\!AQ}}$ is an equivalence.
-\end{theorem}
 
-\section{Functors derived with respect to abelianisation and the Adams tower}
+\section{Functors derived with respect to abelianisation and the Adams tower}\label{sec:derWRTab}
+In this paper we work in the category $\calC$ of nonunital commutative algebras over a field $k$. These are simply $k$-vector spaces $A$ equipped with a commutative and associative pairing $A\otimes A\to A$. The category $s\calC$ of simplicial algebras is a model category (cf.\ [quillen]), and we let $c:s\calC\to s\calC$ be a functorial cofibrant replacement produced by Quillen's small object argument.
 
-\section{Relationship with Radulescu-Banu's cosimplicial resolution}
-In this paper we work in the category $\calC$ of nonunital commutative algebras over a field $k$. These are simply $k$-vector spaces $A$ equipped with a commutative and associative pairing $A\otimes A\to A$.
+%\newcommand{\dupdown}[2]{D^{\smash{#1}}_{\smash{#2}}}
+\newcommand{\dupdown}[2]{D_{\smash{#1}}}
+\newcommand{\caldup}[1]{\calD_{\smash{#1}}}
+\newcommand{\caldupdown}[2]{\calD^{\smash{#1}}_{\smash{#2}}}
+
+
+
+For any functor $F:s\calC\to s\calC$, we'll now define the $r^\textup{th}$ derivation $\dupdown{r}{b}F$ of $F$ with respect to Andr\'e-Quillen homology. The definition is recursive:
+\begin{alignat*}{2}
+(\dupdown{0}{b}F)(X)
+&:=
+F(cX)%
+\\
+(\dupdown{s}{b}F)(X)
+&:=
+\hofib((\dupdown{s-1}{c}F)(cX)\xrightarrow{(\dupdown{s-1}{c}F)(\eta_{cX})} (\dupdown{s-1}{c}F)(KQcX))
+\end{alignat*}
+where $\eta$ is the unit of the adjunction $Q\dashv K$, i.e.\ the natural surjection onto indecomposables, and $\hofib$ is any fixed  functorial construction of the homotopy fiber. These functors fit into a tower, via the following composite natural transformation:
+\[(\dupdown{s}{c}F)(X)\to (\dupdown{s-1}{c}F)(cX)\overset{(\dupdown{s-1}{c}F)(\epsilon)}{\to} (\dupdown{s-1}{c}F)(X).\]
+For clarity, we'll record the construction of $(\dupdown{1}{c}F)(X)$, $(\dupdown{2}{c}F)(X)$ and the map between them in the following diagram in which every composable pair of parallel arrows is defined to be a homotopy fiber sequence.
+
+
+%@=50pt
+\[\def\labelstyle{\scriptstyle}
+\xymatrix@!0@R=30pt@C=50pt{
+(\dupdown{2}{c}F)(X)\ar[dr]\ar[dd]\\
+&(\dupdown{1}{c}F)(cX) \ar[rr]\ar[rd]\ar[dd]         &           &FcccX \ar[rr]\ar[rd]\ar'[d][dd]^{Fcc\epsilon}         &           &   FcQccX \ar'[d][dd]^{FcQc\epsilon}           \ar[dr]  &                  \\
+(\dupdown{1}{c}F)(X)\ar[dr]&        &  (\dupdown{1}{c}F)(QcX) \ar[rr] \ar[dd]  &                     &  FccQcX \ar[rr] \ar[dd]  &             & FcQcQcX
+         \ar[dd] \\
+&(\dupdown{1}{c}F)(X) \ar'[r][rr] \ar[dr] &        &   FccX \ar'[r][rr] \ar[dr] &        &   FcQcX
+\ar[dr] &                   \\
+&        &   0 \ar[rr]      &               &   0 \ar[rr]      &                    &
+0
+}\]
+We have thus constructed a tower
+\[\xymatrix@R=4mm{
+\cdots 
+\ar[r]
+&%r1c1
+(\dupdown{2}{c}F)X
+\ar[r]
+&%r1c3
+%r1c4
+(\dupdown{1}{c}F)X
+\ar[r]&%r1c5
+(\dupdown{0}{c}F)X=FcX,
+}\]
+which is natural in in the object $X$ and the functor $F$.
+The functors $\dupdown{r}{c}F$ are homotopical as long as $F$ preserves weak equivalences between cofibrant objects. Employing the shorthand
+\[\dupdown{s}{c}X:=(\dupdown{s}{c}I)X,\]
+we define \emph{the Adams tower of $X$} to be the tower
+\[\xymatrix@R=4mm{
+\cdots 
+\ar[r]
+&%r1c1
+\dupdown{2}{c}X
+\ar[r]
+&%r1c3
+%r1c4
+\dupdown{1}{c}X
+\ar[r]&%r1c5
+\dupdown{0}{c}X=cX.
+}\]
+
+
+\begin{shaded}\tiny
+Finally, given a morphism $(c,\epsilon)\to (c',\epsilon')$ of cofibrant replacements, one obtains natural weak equivalences $(\dupdown{t}{c})X\to(\dupdown{t}{c'})X$ for $t\geq0$.
+
+Suppose that $(c,\epsilon)$ and $(c',\epsilon')$ are any two competing cofibrant replacement functors. Then we can form a third cofibrant replacement, $(cc',\epsilon\circ c\epsilon')$, which maps to each of $(c,\epsilon)$ and $(c',\epsilon')$, via the natural transformations $c\epsilon$ and $\epsilon'$ respectively. Thus we have natural weak equivalences of towers:
+\[\xymatrix@R=4mm{
+\cdots 
+\ar[r]
+&%r1c1
+(\dupdown{2}{c}F)X
+\ar[r]
+&%r1c3
+%r1c4
+(\dupdown{1}{c}F)X
+\ar[r]&%r1c5
+(\dupdown{0}{c}F)X\makebox[0pt][l]{$\mbox{}=FcX$}\\
+\cdots 
+\ar[r]
+&%r1c1
+(\dupdown{2}{cc'}F)X
+\ar[u]_-{\sim}
+\ar[d]^-{\sim}
+\ar[r]
+&%r1c3
+%r1c4
+(\dupdown{1}{cc'}F)X
+\ar[u]_-{\sim}
+\ar[d]^-{\sim}
+\ar[r]&%r1c5
+(\dupdown{0}{cc'}F)X\makebox[0pt][l]{$\mbox{}=Fcc'X$}
+\ar[u]_-{\sim}
+\ar[d]^-{\sim}\\
+\cdots 
+\ar[r]
+&%r1c1
+(\dupdown{2}{c'}F)X
+\ar[r]
+&%r1c3
+%r1c4
+(\dupdown{1}{c'}F)X
+\ar[r]&%r1c5
+(\dupdown{0}{c'}F)X\makebox[0pt][l]{$\mbox{}=Fc'X$}
+}\]
+It is in this sense that the tower is independent of the cofibrant replacement used.
+
+\end{shaded}
+Now write $b:s\calC\to s\calC$ for the standard simplicial bar construction. This is an alternative cofibrant replacement functor to the functor $c$ given by the small object argument.
+
+We'll now define a somewhat less homotopical version $\caldup{s}F$ of the derivations $\dupdown{s}{b}F$ of $F$. There will three differences: in the definition of $(\caldup{s}F)(X)$ there will be one fewer cofibrant replacement applied, we will use the bar construction $b$ instead of the SOA functor $c$, and we will take \emph{strict} fibers, not \emph{homotopy} fibers. Again, the definition is recursive:
+\begin{alignat*}{2}
+(\caldup{0}F)(X)
+&:=
+F(X)%
+\\
+(\caldup{s}F)(X)
+&:=
+\ker((\caldup{s-1}F)(bX)\xrightarrow{(\caldup{s-1}F)(\eta_{bX})} (\caldup{s-1}F)(KQbX))
+\end{alignat*}
+These functors will not be homotopical unless $F$ is homotopical itself. We define \emph{the modified Adams tower of $X$} to be the tower
+\[\xymatrix@R=4mm{
+\cdots 
+\ar[r]
+&%r1c1
+\caldup{2}X
+\ar[r]
+&%r1c3
+%r1c4
+\caldup{1}X
+\ar[r]&%r1c5
+\caldup{0}X=X,
+}\]
+where $\caldup{s}X$ is again shorthand for $(\caldup{s}I)X$.
+\begin{prop}
+There's a natural zig-zag of weak equivalences of towers between the Adams tower of $X$ and the modified Adams tower of $X$.
+\end{prop}
+\begin{proof}
+Let $\mathsf{CR(s\calC)}$ be the category of cofibrant replacement functors in $s\calC$. That is, an object of $\mathsf{CR(s\calC)}$ is a pair, $(f,\epsilon)$, such that $f:s\calC\to s\calC$ is a functor whose image consists only of cofibrant objects, and $\epsilon:f\Rightarrow I$ is a natural acyclic fibration. Morphisms in $\mathsf{CR(s\calC)}$ are natural transformations which commute with the augmentations. Then we may define, for any $(f,\epsilon)\in\mathsf{CR(s\calC)}$ and $F:s\calC\to s\calC$, the derivations of $F$ \emph{using replacement $f$}:
+\begin{alignat*}{2}
+(D_{\smash{0}}^{\smash{f}}F)(X)
+:=
+F(fX),\quad %
+(D_{\smash{s}}^{\smash{f}}F)(X)
+:=
+\hofib((D_{\smash{s-1}}^{\smash{f}}F)(fX)\to (D_{\smash{s-1}}^{\smash{f}}F)(KQfX)).
+\end{alignat*}
+These functors are natural in $f$, so that a morphism in $\mathsf{CR(s\calC)}$ induces a weak equivalence of towers. Our proposed zig-zag of towers is: %Now there is a zig-zag in $\mathsf{CR(s\calC)}$ from the SOA functor $c$ to the bar construction $b$, as both receive a map from the cofibrant replacement $b\circ c$. Thus we need only produce a zig-zag between the towers $\{(D_{\smash{s}}^{\smash{b}}I)X\}$ and $\{(\caldup{s}I)X\}$
+\[D_{\smash{s}}= D_{\smash{s}}^{\smash{c}}I\overset{\alpha}{\from}D_{\smash{s}}^{\smash{b\circ c}}\!I\overset{\beta}{\to}D_{\smash{s}}^{\smash{b}}I\overset{\gamma}{\from}\caldup{s}b\overset{\caldup{s}\epsilon}{\to}\caldup{s}I=\caldup{s}\]
+The map $\caldup{s}\epsilon$ is a natural weak equivalence, as are the maps $\alpha$ and $\beta$, which are induced by the evident maps of cofibrant replacements. 
+
+The remaining map $\gamma$ is defined recursively using the inclusion of the strict fiber in the homotopy fiber. That is, $\gamma_s:(\caldup{s}b)X\to D_{\smash{s}}^{\smash{b}}X$ is the identity of $bX$ when $s=0$, and for $s>0$, it is:
+\[\xymatrix@R=4mm{
+\makebox[0cm][r]{$(\caldup{s}b)X:=\,$}\ker((\caldup{s-1}b)(bX)\to (\caldup{s-1}b)(KQbX))\ar[d]^-{\textup{incl.}}
+\\%r1c1
+\hofib((\caldup{s-1}b)(bX)\to(\caldup{s-1}b)(KQbX))\ar[d]^-{\hofib(\gamma_{s-1},\gamma_{s-1})}
+\\%r2c1
+\hofib((D_{\smash{s-1}}^{\smash{b}}I)(bX)\to (D_{\smash{s-1}}^{\smash{b}}I)(KQbX))\makebox[0cm][l]{$\,=:D_{\smash{s}}^{\smash{b}}X$}%r3c1
+}\]
+We will prove that $\gamma_s$ is a weak equivalence by induction on $s$. The base case is trivial as $\gamma_0$ is an identity map. To complete the induction step, it will suffice to show that the inclusion above is a weak equivalence, which will follow from lemma \ref{towerWithPowers}, as all epimorphisms are fibrations [miller?] and the unit map $\eta:I\to KQ$ is an epimorphism.
+\end{proof}
+Now let $P^s:s\calC\to s\calC$ be the ``$s^\textup{th}$ power'' functor, the prolongation of the endofunctor $Y\mapsto Y^s$ of $\calC$, where $Y^s=\textup{im}(\textup{mult}:Y^{\otimes s}\to Y)$.
+\begin{lem}\label{towerWithPowers}
+The functors $(\caldup{r}I)$, $(\caldup{r}b)$ and $(\caldup{r}P^{s})$ preserve surjective maps and there is a commuting diagram of functors:
+\[\xymatrix@R=4mm{
+\cdots 
+\ar[r]
+&%r1c1
+(\caldup{r}I)
+\ar[r]
+\ar[d]
+&%r1c2
+\cdots \ar[r]
+&%r1c4
+(\caldup{2}I)
+\ar[r]
+\ar[d]
+&%r1c4
+(\caldup{1}I)
+\ar[r]
+\ar[d]&%r1c5
+(\caldup{0}I)
+\ar@{=}[d]
+\\%r1c6
+\cdots
+\ar[r]
+&%r2c1
+P^{r+1}
+\ar[r]
+&%r2c3
+\cdots 
+\ar[r]&%r2c4
+P^3
+\ar[r]
+&P^2
+\ar[r]
+&%r2c5
+I%r2c6
+}\]
+\end{lem}
+\begin{shaded}\tiny
+\begin{proof}
+Before we give this proof, we'll need a little notation.
+If $F$ is the prolongation \textbf{almost} of a functor $\calC\to\calC$, one notes that $(\caldup{s}F)$ can be defined one level at a time. That is,  we may define functors $(\caldupdown{s}{n}F):\calC\to\calC$ such that $(\caldup{s}F)(X)_n=(\caldupdown{s}{n}F)(X_n)$, by defining $(\caldupdown{0}{n}F):=F$, and
+\[(\caldupdown{s}{n}F)(Y):=\ker((\caldupdown{s-1}{n}F)(T^{n+1}Y)\to (\caldupdown{s-1}{n}F)(QT^{n+1}Y)).\]
+The claims of the lemma follow from the following facts, which hold for any $Y\in\calC$, and integers $r,n\geq0$ and $s>0$:
+\begin{enumerate}
+\squishlist
+\setlength{\parindent}{.25in}
+\item[a)] $(\caldupdown{r}{n}I)Y\subset (\calT_1T^n_1)\cdots (\calT_rT^n_r)Y$ is the subset consisting of those mega\-monomials which have a doubling in each of the $\calT_1,\ldots,\calT_r$ functors.
+\item[b)] $(\caldupdown{r}{n}b)Y\subset (\calT T^n)(\calT_1T^n_1)\cdots (\calT_rT^n_r)Y$ is the subset consisting of those mega\-monomials which have a doubling in each of the $\calT_1,\ldots,\calT_r$ functors.
+\item[c)] $(\caldupdown{r}{n}P^{s})Y\subset (\calT_1T^n_1)\cdots (\calT_rT^n_r)Y$ is the subset consisting of those mega\-monomials which have a doubling in each of the $\calT_2,\ldots,\calT_r$ functors, and a power of $s$ in the $\calT_1$ functor.
+\end{enumerate}
+(a) is trivial when $r=0$. Supposing an inductive hypothesis:
+\begin{alignat*}{2}
+(\caldupdown{r}{n}I)(Y)
+&:=
+\ker((\caldupdown{r-1}{n}I)(\calT_r T_r^n Y)\to (\caldupdown{r-1}{n}I) (Q\calT_rT_r^n X_n))%
+\\
+&=
+(\caldupdown{r-1}{n}I)(\calT_r T_r^n Y)\cap\langle \textup{meganomials with a doubling in $\calT_r$}\rangle\\
+&=
+\langle \textup{meganomials with a doubling in $\calT_1,\ldots,\calT_{r-1}$}\rangle\cap\langle \textup{doubling in $\calT_r$}\rangle\\
+&=
+\langle \textup{meganomials with a doubling in $\calT_1,\ldots,\calT_{r-1},\calT_{r}$}\rangle
+\end{alignat*}
+The proofs of (b) and (c) are essentially the same as the proof of (a).
+\end{proof}
+\end{shaded}
+\begin{lem}\label{connectivityOfDerivedPowers}
+For $A\in s\Comm$ connected, and any $t\geq1$ and $s\geq2$, $(\caldup{t}P^{s})(A)$ is $(s-t)$-connected.
+\end{lem}
+\begin{proof}
+We'll prove this by induction on $t$. When $t=1$ we have:
+\[(\caldup{1}P^{s})A:=\ker(P^{s}(bA)\to P^{s}(QbA))=P^{s}(bA),\]
+so we must show that $P^s(bA)$ is $(s-1)$-connected. For this we use a truncation of Quillen's fundamental spectral sequence, as presented in \cite[thm 6.2]{MR1089001}. That is, filter $P^s(bA)$ by the ideals $P^{s+p}(bA)$ for $p\geq0$. Then there is a convergent spectral sequence:
+\[E^1_{p,q}= \pi_q\bigl((QbA)^{\otimes (s+p)}_{\Sigma_{s+p}}\bigr)\implies \pi_q(P^s(bA))\]
+Now the simplicial vector space $QbA$ is connected, as $\pi_0(QbA):=H_0A=Q(\pi_0A)=0$. The $t=1$ case now follows from the general fact that if $V$ is a connected simplicial vector space then $V^{n}_{\Sigma_n}$ is $(n-1)$-connected. (Bousfield? Obvious? Whatever.)
+
+Now let $t\geq2$ and suppose by induction that $(\caldup{t-1}P^{s})(B)$ is $(s-(t-1))$-connected for any connected $B$ and any $s\geq2$. Then by \ref{towerWithPowers}, there's a short exact sequence:
+\[\xymatrix{
+0\ar[r]&
+(\caldup{t}P^{s})(A)\ar[r]&
+(\caldup{t-1}P^{s})(cA)\ar[r]&
+(\caldup{t-1}P^{s})(QcA)\ar[r]&
+0
+}\]
+in which the rightmost two objects are each $(s-t+1)$-connected. The associated long exact sequence shows that $(\caldup{t}P^{s})(A)$ is $(s-t)$-connected.
+\end{proof}
+
+\textbf{``Now we can state the desired connectivity bound.'' or similar}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\begin{prop}\label{convergenceProp}
+%%%The functors $(\caldup{s}I):s\Comm\to s\Comm$ preserve weak equivalences.
+%%%For $X\in s\Comm$ a connected simplicial algebra, consider the tower:
+%%%\[\xymatrix@R=4mm{
+%%%\cdots 
+%%%\ar[r]
+%%%&%r1c1
+%%%(\caldup{t}I)X
+%%%\ar[r]
+%%%&%r1c3
+%%%\cdots \ar[r]
+%%%&%r1c4
+%%%(\caldup{1}I)X
+%%%\ar[r]&%r1c5
+%%%(\caldup{0}I)X=X.
+%%%}\]
+For integers $t\geq2$ and $q\geq0$, the map $\pi_q(\caldup{2t+q-1}I)X\to\pi_q(\caldup{t}I)X$ is zero.
+\end{prop}
+\begin{proof}%[Proof of \ref{convergenceProp}]
+%The first claim is \ref{towerIsHomotopical}. 
+Apply $(\caldup{t}\DASH)X$ to the diagram of functors constructed in \ref{towerWithPowers}. In light of \ref{DsDt=Dt+s}, one obtains the following homotopy commuting diagram in $s\Comm$:
+\[\xymatrix@R=4mm{
+\cdots 
+\ar[r]
+&%r1c1
+(\caldup{2t+q-1}I)X
+\ar[r]
+\ar[d]
+&
+\cdots \ar[r]
+&%r1c4
+(\caldup{t+1}I)X
+\ar[r]
+\ar[d]&%r1c5
+(\caldup{t}I)X
+\ar@{=}[d]
+\\%r1c6
+\cdots
+\ar[r]
+&%r2c1
+(\caldup{t}P^{t+q})X
+\ar[r]
+&%r2c3
+\cdots 
+\ar[r]&%r2c4
+(\caldup{t}P^2)X
+\ar[r]
+&%r2c5
+(\caldup{t}I)X%r2c6
+}\]
+By \ref{connectivityOfDerivedPowers}, $(\caldup{t}P^{t+q})(A)$ is $q$-connected, and the result follows.
+\end{proof}
+
+
+
+\textbf{TWISTING LEMMA HERE}
+
+\section{Relationship with Radulescu-Banu's cosimplicial resolution}\label{sec:relnWithRB}
+\begin{shaded}
+\tiny
 \begin{itemise}
 \setlength{\parindent}{.25in}
 \item Explain RB's resolution.
@@ -99,11 +429,6 @@ In this paper we work in the category $\calC$ of nonunital commutative algebras 
 \item It converges to the totalisation of the resolution, which we make the definition of $X{\hat\,}$.
 \item Explain that Blum-Riehl and Bousfield together give a partial description of the $E^2$.
 \end{itemise}
-
-
-
-
-\section{The Tot tower and functors derived with respect to Andr\'e-Quillen homology}
 \begin{itemise}
 \setlength{\parindent}{.25in}
 \item As explained by Sinha, we can model the Tot tower of the Radulescu-Banu resolution by the tower of homotopy limits induced by the inclusions
@@ -111,8 +436,13 @@ In this paper we work in the category $\calC$ of nonunital commutative algebras 
 \item Then we can pull back the tower under $\scrX^{-1}$ to a tower over $\scrX^{-1}$, and the terms are a definition of the total homotopy fiber of a cube.
 \item Define derived functors wrt Quillen homology, and note that they coincide with the alternative definition of the total homotopy fiber. That's the point, really.
 \item rejig it to have fewer cofibrant replacements and then prove a connectivity result. Call it a twisting lemma. Does it follow from the $n=1$ case just like for B\&K? Eh probably screw it.
-
 \end{itemise}
+\end{shaded}
+
+\section{Connectivity in the Adams tower}
+\label{sec:connectivityAnalysis}
+
+
 
 
 
