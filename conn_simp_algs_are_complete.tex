@@ -49,7 +49,7 @@ In this paper, we will work in the category $s\calC$ of simplicial non-unital al
 \[X^{\hat\,}:=\textup{Tot}(\calX^\bullet),\]
 and defines the absolute Bousfield-Kan spectral sequence of $X$ to be the spectral sequence of the cosimplicial object $\calX^\bullet$. Its target is $\pi_*X^{\hat\,}$. 
 
-More precisely, Radulescu-Banu constructs a comonad structure on the cofibrant replacement functor $c:s\calC\to s\calC$ arising from Quillen's small object argument, and mixes $c$ into the standard cobar construction arising from the adjunction $Q:s\calC\rightleftarrows s\calV:K$, obtaining a coaugmented cosimplicial object 
+More precisely, Radulescu-Banu constructs a comonad structure on the cofibrant replacement functor $c:s\calC\to s\calC$ arising from Quillen's small object argument, and mixes $c$ into the standard cobar construction arising from the adjunction $Q:s\calC\rightleftarrows s\calV:K$, obtaining a coaugmented cosimplicial object $cX\to\calX^\bullet$:
 \[
 \vcenter{
 \def\labelstyle{\scriptstyle}
@@ -70,7 +70,7 @@ cX\,
 \ar[l];[]
 \ar@<-2ex>[l];[]
 \ar@<+2ex>[l];[]
-}}.\]
+}}\]
 In particular, there is a natural completion map $cX\to\textup{Tot}(\calX^\bullet)$, and we say that $X$ is \emph{complete with respect to Andr\'e-Quillen homology} when this map is an equivalence.
 For background, general theory, and another approach, see Blum-Riehl and Bous03. The purpose of this paper is to prove the following
 \begin{completenesstheorem}\label{completenesstheorem}
@@ -78,6 +78,7 @@ Suppose that $k$ is a field, and that $X$ is a connected simplicial $k$-algebra.
 \end{completenesstheorem}
 The failure of the completion map $X\to X^{\hat\,}$ to be an equivalence is tied to a construction we give in section \ref{sec:derWRTab} of an Adams tower over $X$. Although this construction is analogous to Bousfield and Kan's original construction in classical topology, just as in Radulescu-Banu's work, we must be careful to ensure that our constructions are homotopically correct, as not all simplicial algebras are cofibrant. In section \ref{sec:relnWithRB} we explain the relationship between this Adams tower and Radulescu-Banu's cosimplicial resolution. In section \ref{sec:connectivityAnalysis} we perform a connectivity analysis, analogous to Bousfield and Kan's in the classical case, confirming the completeness theorem. Appendix \ref{sec:ItSimpBar} contains a construction required for the connectivity analysis of section \ref{sec:connectivityAnalysis}.
 
+\textbf{acknowledge Harper for useful discussion on the use of cubical diagrams in this context}
 
 \begin{shaded}
 \tiny
@@ -161,22 +162,103 @@ we define \emph{the Adams tower of $X$} to be the tower
 }\]
 
 \section{Relationship with Radulescu-Banu's cosimplicial resolution}\label{sec:relnWithRB}
-\begin{itemise}
-\setlength{\parindent}{.25in}
-\item Explain RB's resolution.
-\item The spectral sequence may be defined to be either the spectral sequence of the bicomplex or the spectral sequence of the Tot tower, thanks to \cite[Lemma 2.2]{BousfieldHSSCS.pdf}.
-\item By results of \cite[{X.4.9}]{YellowMonster}, all (truncated) cosimplicial groups are Reedy fibrant.
-\item It converges to the totalisation of the resolution, which we make the definition of $X{\hat\,}$.
-\item Explain that Blum-Riehl and Bousfield together give a partial description of the $E^2$.
-\end{itemise}
-\begin{itemise}
-\setlength{\parindent}{.25in}
-\item As explained by Sinha, we can model the Tot tower of the Radulescu-Banu resolution by the tower of homotopy limits induced by the inclusions
-\[\cdots\to P_0[n-1]\to P_0[n]\to P_0[n+1]\to\cdots \to P_0[\infty]\]
-\item Then we can pull back the tower under $\scrX^{-1}$ to a tower over $\scrX^{-1}$, and the terms are a definition of the total homotopy fiber of a cube.
-\item Note that the derived functors wrt Quillen homology coincide with the alternative definition of the total homotopy fiber. That's the point, really.
-\end{itemise}
 
+Radulescu-Banu constructs a comonad structure on the cofibrant replacement functor $c:s\calC\to s\calC$ arising from Quillen's small object argument, and mixes $c$ into the standard cobar construction arising from the adjunction $Q:s\calC\rightleftarrows s\calV:K$, obtaining a coaugmented cosimplicial object $cX\to\calX^\bullet$:
+\[
+\vcenter{
+\def\labelstyle{\scriptstyle}
+\xymatrix@C=1.5cm@1{
+cX\,
+\ar[r]
+&
+\,cKQcX\,
+\ar[r];[]
+&
+\,c(KQc)^2X\,
+\ar@<-1ex>[l];[]
+\ar@<+1ex>[l];[]
+\ar@<+1ex>[r];[]
+\ar@<-1ex>[r];[]
+&
+\,c(KQc)^3X\,\makebox[0cm][l]{\,$\cdots $}
+\ar[l];[]
+\ar@<-2ex>[l];[]
+\ar@<+2ex>[l];[]
+}}\]
+He defines the completion $X{\,\hat{}}$ to be the totalisation
+\[X{\,\hat{}}:=\textup{Tot}(\calX^\bullet)=\lim \textup{Tot}_n(\calX^\bullet),\]
+and the Adams spectral sequence to be the spectral sequence of the tower
+\[\cdots \to\textup{Tot}_n(\calX^\bullet)\to \textup{Tot}_{n-1}(\calX^\bullet)\to\cdots \]
+under $cX$. Our goal in this section is to explain
+\begin{prop}\label{towerIdentification}
+The tower $\hofib(cX\to\textup{Tot}_n(\calX^\bullet))$ is naturally equivalent to the Adams tower for $X$.
+\end{prop}
+\begin{proof}
+%Let $\calP_0[n]$ be the poset of nonempty subsets of the set
+For $n\geq0$ let $[n]=\{0,\ldots,n\}$ and define:
+\begin{alignat*}{2}
+\calP_0[n]
+&=
+\left\{S\subset [n]\,\middle|\, S\neq\emptyset\right\}%
+\\
+\calP[n]
+&=
+\left\{S\subset [n]\right\}%
+\end{alignat*}
+These sets are partially ordered by inclusion, and we think of them as poset categories. The category $\calP_0[n]$ indexes punctured $(n+1)$-cubical diagrams, and $\calP_0[n]$ indexes $(n+1)$-cubical diagrams (see Goodwillie or Munson-Voli\'c). There are inclusion functors:
+\begin{alignat*}{2}
+\tau
+&:
+\calP_0[n-1]\to \calP_0[n]%
+\\
+g_n
+&:
+\calP_0[n]\to \Delta
+\\
+\tau
+&:
+\calP[n-1]\to \calP[n]%
+\\
+h_n
+&:
+\calP[n]\to \Delta_+
+\end{alignat*}
+satisfying $g_n\circ \tau=g_{n-1}$ and $h_n\circ \tau=h_{n-1}$, and with the $g_n$, $h_n$ and $\tau$ compatible with the inclusions $\calP_0[n]\to \calP[n]$ and $\Delta\to\Delta_+$. Here, $\Delta$ is the simplex category (nonempty finite ordinals) and $\Delta_+$ is the augmented simplex category (finite ordinals). We may view $\calX^\bullet$ as a functor $\Delta_+\to s\calC$. There's a commutative diagram of inclusions of categories:
+\[\xymatrix@R=4mm{
+&%r1c1
+\calP_0[0]\ar[r]^-{\tau}\ar[d]
+&%r1c2
+\calP_0[1]\ar[r]^-{\tau}\ar[d]
+&%r1c3
+\calP_0[2]\ar[r]^-{\tau}\ar[d]
+&%r1c4
+\cdots \ar[r]
+&%r1c5
+\Delta\ar[d]\\
+\calP[-1]\ar[r]^-{\tau}
+&%r1c1
+\calP[0]\ar[r]^-{\tau}
+&%r1c2
+\calP[1]\ar[r]^-{\tau}
+&%r1c3
+\calP[2]\ar[r]^-{\tau}
+&%r1c4
+\cdots \ar[r]
+&%r1c5
+\Delta_+
+}\]
+in which the horizontal maps to $\Delta$ are the $g_n$ and the horizontal maps to $\Delta_+$ are the $h_n$. The relevance of these definitions was expalined by Sinha in \cite[Theorem 6.5]{SinhaSpacesOfKnots.pdf}: for $Y$ a Reedy fibrant cosimplicial object, the $\textup{Tot}$ tower of $Y$ is weak equivalent to the tower
+\[\cdots \to \holim(g_n^*Y) \to \holim(g_{n-1}^*Y)\to\cdots \]
+and we are interested in the $\textup{Tot}$ tower of $\calX^\bullet$, which is already Reedy fibrant, being a cosimplicial simplicial abelian group (cf.\ \cite[{X.4.9}]{YellowMonster}).
+More specifically, we wish to calculate the homotopy fiber of the augmentation map $cX\to\textup{Tot}_n(\calX^\bullet)$. This map is exactly the homotopy comparison map for the $n+1$-cubical diagram $h_n^*\calX^\bullet$ (cf.\ \cite[\S3]{LuisGoodwillie.pdf}). The homotopy fiber of this map, the total homotopy fiber, can be computed iteratively \cite[Proposition 3.8]{LuisGoodwillie.pdf}, and the iterative definition \emph{nearly coincides} with our definition of $\dupdown{n}{c}X$. \textbf{We have to go up to a given dimension and fill in the cofibrant replacements!}
+\end{proof}
+\begin{shaded}\tiny
+\begin{itemise}
+\setlength{\parindent}{.25in}
+\item The spectral sequence may be defined to be either the spectral sequence of the bicomplex or the spectral sequence of the Tot tower, thanks to \cite[Lemma 2.2]{BousfieldHSSCS.pdf}.
+\item It converges to the totalisation of the resolution, which we make the definition of $X{\hat\,}$.
+\end{itemise}
+\end{shaded}
 
 
 \section{Connectivity estimates in the Adams tower}
@@ -185,12 +267,16 @@ We wish to prove the following connectivity result for the Adams tower:
 \begin{prop}\label{convergenceProp}
 For integers $t\geq2$ and $q\geq0$, the map $\pi_q(\dupdown{2t+q-1}{c}X)\to\pi_q(\dupdown{t}{c}X)$ is zero.
 \end{prop}
-Indeed, in light of the results of section \ref{sec:relnWithRB}, proposition \ref{convergenceProp} implies the completeness theorem:
+\noindent Indeed, in light of proposition \ref{towerIdentification}, proposition \ref{convergenceProp} implies the completeness theorem:
 \begin{proof}[Proof of completeness theorem]
-If you take the fibers of the maps from $cX$ to the Tot tower you'll get the Adams tower. Nothing gets down to $\pi_*(cX)$ because of proposition \ref{convergenceProp}.
+The fiber sequences $\dupdown{n}{c}X\to cX\to \textup{Tot}_n\calX^\bullet$ fit together into a tower of fiber sequences. Taking homotopy limits, one obtains a fiber sequence
+\[\holim (\dupdown{n}{c}X)\to cX\to X{\,\hat{}}.\]
+We need to show that $\holim \dupdown{n}{c}X$ has zero homotopy groups.
+Now the tower $\dupdown{n}{c}X$ is a tower of fibrations in $s\calC$, so that the homotopy limit is equivalent to the set-theoretic inverse limit. By \cite[Proposition 6.14]{goerss-jardine.pdf}, there is a short exact sequence
+\[0\to \textup{lim}^1\pi_{q+1}(\dupdown{n}{c}X)\to \pi_q(\holim (\dupdown{n}{c}X))\to \textup{lim}\,\pi_{q}(\dupdown{n}{c}X)\to 0.\]
+Proposition \ref{convergenceProp} implies that for each $q$, the tower $\{\pi_{q}(\dupdown{n}{c}X)\}$ has zero inverse limit, and satisfies the Mittag-Leffler condition (cf.\ \cite[p.264]{YellowMonster}), so that the $\textup{lim}^1$ groups appearing also vanish.
 \end{proof}
-
-For this purpose we now define a somewhat less homotopical version $\caldup{s}F$ of the derivations $\dupdown{s}{b}F$ of $F$. There will three differences: in the definition of $(\caldup{s}F)(X)$ there will be one fewer cofibrant replacement applied, we will use the standard simplicial bar construction $b$ instead of the SOA functor $c$, and we will take \emph{strict} fibers, not \emph{homotopy} fibers. Again, the definition is recursive:
+With an eye to proving proposition \ref{convergenceProp}, we now define a somewhat less homotopical version $\caldup{s}F$ of the derivations $\dupdown{s}{b}F$ of $F$. There will three differences: in the definition of $(\caldup{s}F)(X)$ there will be one fewer cofibrant replacement applied, we will use the standard simplicial bar construction $b$ instead of the SOA functor $c$, and we will take \emph{strict} fibers, not \emph{homotopy} fibers. Again, the definition is recursive:
 \begin{alignat*}{2}
 (\caldup{0}F)(X)
 &:=
@@ -317,7 +403,8 @@ We'll prove this by induction on $t$. When $t=1$ we have:
 \[(\caldup{1}P^{s})A:=\ker(P^{s}(bA)\to P^{s}(QbA))=P^{s}(bA),\]
 so we must show that $P^s(bA)$ is $(s-1)$-connected. For this we use a truncation of Quillen's fundamental spectral sequence, as presented in \cite[thm 6.2]{MR1089001}. That is, filter $P^s(bA)$ by the ideals $P^{s+p}(bA)$ for $p\geq0$. Then there is a convergent spectral sequence:
 \[E^1_{p,q}= \pi_q\bigl((QbA)^{\otimes (s+p)}_{\Sigma_{s+p}}\bigr)\implies \pi_q(P^s(bA))\]
-Now the simplicial vector space $QbA$ is connected, as $\pi_0(QbA)=Q(\pi_0bA)=Q(0)=0$. The $t=1$ case now follows from the general fact that if $V$ is a connected simplicial vector space then $V^{\otimes n}_{\Sigma_n}$ is $(n-1)$-connected. (Bousfield? Obvious? Whatever.)
+Now the simplicial vector space $QbA$ is connected, as $\pi_0(QbA)=Q(\pi_0bA)=Q(0)=0$. The $t=1$ case now follows from \cite[Satz 12.1]{DoldPuppeSuspension.pdf}: if $V$ is a connected simplicial vector space then $V^{\otimes n}_{\Sigma_n}$ is $(n-1)$-connected. 
+%(Bousfield? Obvious? Whatever.) \textbf{You know the proof. You only need to do it for spheres, and then you end up getting $k\otimes ((S^1)^{\wedge n}_{\Sigma_n})$, which is the homology of something that's not too bad.}
 
 Now let $t\geq2$ and suppose by induction that $(\caldup{t-1}P^{s})(B)$ is $(s-(t-1))$-connected for any connected $B$ and any $s\geq2$. Then by lemma \ref{towerWithPowers}, there's a short exact sequence:
 \[\xymatrix{
