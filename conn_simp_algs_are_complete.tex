@@ -191,7 +191,7 @@ and the Adams spectral sequence to be the spectral sequence of the tower
 \[\cdots \to\textup{Tot}_n(\calX^\bullet)\to \textup{Tot}_{n-1}(\calX^\bullet)\to\cdots \]
 under $cX$. Our goal in this section is to explain
 \begin{prop}\label{towerIdentification}
-There is a natural equivalence  $D_{n}X\sim\hofib(cX\to\textup{Tot}_{n-1}(\calX^\bullet))$ for all $n\geq0$, compatible with the tower maps. That is, the $\textup{Tot}$ tower induces the Adams tower by taking fibers.
+There is a natural equivalence  $D_{n+1}X\sim\hofib(cX\to\textup{Tot}_{n}(\calX^\bullet))$ for all $n\geq-1$, compatible with the tower maps. That is, the $\textup{Tot}$ tower induces the Adams tower by taking fibers.
 \end{prop}
 \begin{proof}
 %Let $\calP_0[n]$ be the poset of nonempty subsets of the set
@@ -247,32 +247,60 @@ satisfying $g_n\circ \tau=g_{n-1}$ and $h_n\circ \tau=h_{n-1}$, and with the $g_
 &%r1c5
 \Delta_+
 }\]
-in which the horizontal maps to $\Delta$ are the $g_n$ and the horizontal maps to $\Delta_+$ are the $h_n$. The relevance of these definitions was expalined by Sinha in \cite[Theorem 6.5]{SinhaSpacesOfKnots.pdf}: for $Y$ a Reedy fibrant cosimplicial object, the $\textup{Tot}$ tower of $Y$ is weak equivalent to the tower
-\[\cdots \to \holim(g_n^*Y) \to \holim(g_{n-1}^*Y)\to\cdots \]
-and we are interested in the $\textup{Tot}$ tower of $\calX^\bullet$, which is already Reedy fibrant, being a cosimplicial simplicial abelian group (cf.\ \cite[{X.4.9}]{YellowMonster}).
-More specifically, we wish to calculate the homotopy fiber of the augmentation map $cX\to\textup{Tot}_{n-1}(\calX^\bullet)$. This map is exactly the homotopy comparison map for the $n$-cubical diagram $h_{n-1}^*\calX^\bullet$ (cf.\ \cite[\S3]{LuisGoodwillie.pdf}). The homotopy fiber of this map, the total homotopy fiber, can be computed iteratively \cite[Proposition 3.8]{LuisGoodwillie.pdf}, and the iterative definition \emph{nearly coincides} with our definition of $\dupdown{n}{c}X$. For example, when $n=2$, we have defined $\dupdown{2}{c}X$ to be the homotopy total fiber of the 2-cube
-\[\xymatrix@R=4mm{
-cccX\ar[r]
-\ar[d]
-&%r1c1
-cKQccX\ar[d]
-\\%r1c2
-ccKQcX\ar[r]
-&%r2c1
-cKQcKQcX%r2c2
-}\]
-which receives a weak equivalence from the 2-cube
-\[\xymatrix@R=4mm{
-cX\ar[r]
-\ar[d]
-&%r1c1
-cKQcX\ar[d]
-\\%r1c2
-cKQcX\ar[r]
-&%r2c1
-cKQcKQcX%r2c2
-}\]
-which defines the homotopy total fiber of $\textup{hototfib}(h_1^*\calX^\bullet)\sim \hofib(cX\to\textup{Tot}_1(\calX^\bullet))$. The weak equivalence of cubes is given by applying the diagonal map $c\to cc$ as appropriate. The final result will commute, even for large $n$, due to the coassociativity of the diagonal.
+in which the horizontal maps to $\Delta$ are the $g_n$ and the horizontal maps to $\Delta_+$ are the $h_n$. The relevance of these definitions was expalined by Sinha in \cite[Theorem 6.5]{SinhaSpacesOfKnots.pdf}: for $Y$ a Reedy fibrant cosimplicial object, $\textup{Tot}_nY$ is weakly equivalent to $\holim(g_n^*Y)$, and these weak equivalences are compatible with the fibrations $\tau^*$ and the fibrations in the $\textup{Tot}$ tower.
+We are interested in the $\textup{Tot}$ tower of $\calX^\bullet$, which is already Reedy fibrant, being a cosimplicial simplicial abelian group (cf.\ \cite[{X.4.9}]{YellowMonster}).
+More specifically, we wish to calculate the homotopy fiber of the augmentation map $cX\to\textup{Tot}_{n}(\calX^\bullet)$. This map is exactly the homotopy comparison map for the $(n+1)$-cubical diagram $h_{n}^*\calX^\bullet$ (cf.\ \cite[\S3]{LuisGoodwillie.pdf}). The homotopy fiber of this map, the total homotopy fiber, can be computed iteratively \cite[Proposition 3.8]{LuisGoodwillie.pdf}, and the iterative definition \emph{nearly coincides} with our definition of $\dupdown{n+1}{c}X$.
+
+Indeed, the definition of $D_{n+1}X$ is simply the (iterative definition of the) homotopy total fiber of the following $(n+1)$-cubical diagram $\underline{D}_{n+1}X:\calP[n]\to s\calC$:
+\[(\underline{D}_{n+1}X)(S):= c(KQ)^{\chi_{n}}c(KQ)^{\chi_{n-1}}c\cdots c(KQ)^{\chi_0}cX\quad \textup{where}\quad \chi_i:=\begin{cases}
+1,&\textup{if }i\in S;\\
+0,&\textup{if }i\notin S,
+%\\,&\textup{if }
+\end{cases}
+\]
+where for $S\subset S'$, the map $(\underline{D}_{n+1}X)(S)\to (\underline{D}_{n+1}X)(S')$ is given by applying the counit $\eta:1\to KQ$ in those locations indexed by $S'\setminus S$. On the other hand, the $h_n^*\calX^\bullet$ is the $(n+1)$-cubical diagram
+\[(h_n^*\calX^\bullet)(S):= c(KQc)^{\chi_{n}}(KQc)^{\chi_{n-1}}\cdots (KQc)^{\chi_0}X\quad \textup{where}\quad \chi_i:=\begin{cases}
+1,&\textup{if }i\in S;\\
+0,&\textup{if }i\notin S,
+%\\,&\textup{if }
+\end{cases}
+\]
+where we describe the map $(h_n^*\calX^\bullet)(S)\to (h_n^*\calX^\bullet)(S\sqcup\{i\})$, for $i\notin S$, as follows. Let $j$ be the smallest element of $S\sqcup\{n+1\}$ exceeding $i$, so that
+\[(h_n^*\calX^\bullet)(S):= \begin{cases}
+c(KQc)^{\chi_{n}}\cdots (KQc)^{\chi_{j+1}}(KQ\underline{c})(KQc)^{\chi_{i-1}}\cdots (KQc)^{\chi_0}X,&\textup{if }j\leq n;\\
+\underline{c}(KQc)^{\chi_{i-1}}\cdots (KQc)^{\chi_0}X,&\textup{if }j=n+1.
+%\\,&\textup{if }
+\end{cases}
+\]
+In the expression for either case, we have distinguished one of the applications of $c$ with an underline, and the map to $(h_n^*\calX^\bullet)(S\sqcup\{i\})$ is induced by the composite $\underline{c}\to cc\to cKQc$ of the diagonal of the comonad $c$ with the unit of the monad $KQ$. The reason that this cube commutes is (of course) the same as the reason that the cosimplicial relation $d^j\circ d^i=d^i\circ d^{j-1}$ ($i<j$) is satisfied in $\calX^\bullet$. That is, $c$ is a comonad, and as such its diagonal map is coassociative. For the same reason, the maps $(h_n^*\calX^\bullet)(S)\to (\underline{D}_{n+1}X)(S)$ which we now define assemble to a weak equivalence of $n+1$-cubes. Suppose that $S=\{j_0<j_1<\cdots<j_r\}\subset\{0,\ldots,n\}$. 
+The only difference between the domain and codomain is that in $(\underline{D}_{n+1}X)(S)$, all $n+2$ applications of $c$ are present, whereas in $(h_n^*\calX^\bullet)(S)$, only $r+1$ appear. The map is then
+\[\psi^{n-j_r}KQ\psi^{j_r-j_{r-1}-1}KQ\psi^{j_{r-1}-j_{r-2}-1}KQ\cdots KQ\psi^{j_{1}-j_0-1}KQ\psi^{j_0}X\]
+which is to say that we apply the iterated diagonal (unambiguously since the diagonal is coassociative) the appropriate number of times in each $c$ appearing in the domain.
+
+
+%For example, when $n=2$, we have defined $\dupdown{2}{c}X$ to be the homotopy total fiber of the 2-cube
+%\[\xymatrix@R=4mm{
+%cccX\ar[r]
+%\ar[d]
+%&%r1c1
+%cKQccX\ar[d]
+%\\%r1c2
+%ccKQcX\ar[r]
+%&%r2c1
+%cKQcKQcX%r2c2
+%}\]
+%which receives a weak equivalence from the 2-cube
+%\[\xymatrix@R=4mm{
+%cX\ar[r]
+%\ar[d]
+%&%r1c1
+%cKQcX\ar[d]
+%\\%r1c2
+%cKQcX\ar[r]
+%&%r2c1
+%cKQcKQcX%r2c2
+%}\]
+%which defines the homotopy total fiber of $\textup{hototfib}(h_1^*\calX^\bullet)\sim \hofib(cX\to\textup{Tot}_1(\calX^\bullet))$. The weak equivalence of cubes is given by applying the diagonal map $c\to cc$ as appropriate. The final result will commute, even for large $n$, due to the coassociativity of the diagonal.
 \end{proof}
 \begin{shaded}\tiny
 \begin{itemise}
@@ -448,34 +476,36 @@ We may reindex the twisting lemma as follows: the maps
 \[\caldup{s}\delta,\caldup{s-1}\delta:\caldup{s+t}X\to \caldup{s+t-1}X\]
 are homotopic whenever $s,t\geq1$. Now $\caldup{s+t}X$ is constructed as the subalgebra
 \[\caldup{s+t}X:= \bigcap_{i=1}^{s+t}\ker\!\left(b^{s+t-i}\eta b^{i}:b^{s+t}X\to b^{s+t-i}KQb^{i}X\right)\]
-of the iterated bar construction $b^{s+t}X$, and there are commuting squares
-\[\xymatrix@R=7mm{
-b^{s+t}X
-\ar[r]_-{b^s\epsilon b^{t-1}}
-&%r1c1
-b^{s+t-1}X\\%r1c2
-\caldup{s+t}X
-\ar[r]^-{\caldup{s}\delta}
-\ar[u]
-&%r2c1
-\caldup{s+t-1}X
-\ar[u]
-%r2c2
-}\raisebox{-6mm}{\textup{\quad and\quad }}
-\xymatrix@R=7mm{
-b^{s+t}X
-\ar[r]_-{b^{s-1}\epsilon b^{t}}
-&%r1c1
-b^{s+t-1}X\\%r1c2
-\caldup{s+t}X
-\ar[r]^-{\caldup{s-1}\delta}
-\ar[u]
-&%r2c1
-\caldup{s+t-1}X
-\ar[u]
-%r2c2
-}\]
-Our method is to construct an explicit simplicial homotopy between the maps $b^s\epsilon b^{t-1}$ and $b^{s-1}\epsilon b^{t}$, and to simply note that the homotopy restricts to a homotopy between $\caldup{s}\delta$ and $\caldup{s-1}\delta$. We defer the construction of this homotopy until proposition \ref{IteratedBarConstructionHomotopy}.
+of the iterated bar construction $b^{s+t}X$, and for $0\leq i<s+t$, $\caldup{i}\delta$ is the restriction of the map $b^i\epsilon b^{s+t-i-1}:b^{s+t}X\to b^{s+t-1}X$.
+%
+% there are commuting squares
+%\[\xymatrix@R=7mm{
+%b^{s+t}X
+%\ar[r]_-{b^s\epsilon b^{t-1}}
+%&%r1c1
+%b^{s+t-1}X\\%r1c2
+%\caldup{s+t}X
+%\ar[r]^-{\caldup{s}\delta}
+%\ar[u]
+%&%r2c1
+%\caldup{s+t-1}X
+%\ar[u]
+%%r2c2
+%}\raisebox{-6mm}{\textup{\quad and\quad }}
+%\xymatrix@R=7mm{
+%b^{s+t}X
+%\ar[r]_-{b^{s-1}\epsilon b^{t}}
+%&%r1c1
+%b^{s+t-1}X\\%r1c2
+%\caldup{s+t}X
+%\ar[r]^-{\caldup{s-1}\delta}
+%\ar[u]
+%&%r2c1
+%\caldup{s+t-1}X
+%\ar[u]
+%%r2c2
+%}\]
+Proposition \ref{IteratedBarConstructionHomotopy} gives an explicit simplicial homotopy between the maps $b^s\epsilon b^{t-1}$ and $b^{s-1}\epsilon b^{t}$. Moreover, the naturality of the construction of proposition \ref{IteratedBarConstructionHomotopy} implies that this homotopy does indeed restrict to a homotopy of maps $\caldup{s+t}X\to \caldup{s+t-1}X$.%, and to simply note that the homotopy restricts to a homotopy between $\caldup{s}\delta$ and $\caldup{s-1}\delta$. Indeed, the homotopy between $b^s\epsilon b^{t-1}$ and $b^{s-1}\epsilon b^t$ is provided by proposition \ref{IteratedBarConstructionHomotopy}, and the naturality of its construction implies that it does indeed restrict as desired.
 \end{proof}
 
 
@@ -573,97 +603,115 @@ The simplicial bar construction is the cofibrant replacement functor $(b,\epsilo
 \[\trip{d}{i,q}{bX}:=[\frakd_{i,q}]\trip{d}{i,q}{X}.\]
 The augmentation $\epsilon:b\to I$ is defined on level $q$ by 
 \[\epsilon_q=\frakd_{0,0}\frakd_{0,1}\cdots \frakd_{0,q}:T^{q+1}\to I\]
+%\begin{prop}\label{IteratedBarConstructionHomotopy}
+%For any integers $s,t\geq1$, there is a simplicial homotopy $b^{s-1}\epsilon_{(b^{t}X)}\simeq b^{s}\epsilon_{(b^{t-1}X)}$ of maps $b^{s+t}X\to b^{s+t-1}X$, natural in $X\in s\algCat$, such that whenever $0\leq i\leq s-1$ or $1\leq k<t$ there are commuting squares
+%\[\xymatrix@R=4mm@C=15mm{
+%(b^iKQb^{s+t-i}X)_q\ar@{..>}[d]
+%&%r1c1
+%(b^{s+t}X)_q\ar[d]^-{h_{jq}}
+%\ar[l]_-{b^i\eta b^{s+t-i}}
+%\ar[r]^-{b^{s+t-k}\eta b^{k}}
+%&%r1c2
+%(b^{s+t-k}KQb^kX)_q\ar@{..>}[d]\\%r1c3
+%(b^iKQb^{s+t-i}X)_{q+1}&%r2c1
+%(b^{s+t-1}X)_{q+1}
+%\ar[l]_-{b^i\eta b^{s+t-1-i}}
+%\ar[r]^-{b^{s+t-1-k}\eta b^{k}}&%r2c2
+%(b^{s+t-1-k}KQb^kX)_{q+1}%r2c3
+%}\]
+%\end{prop}
 \begin{prop}\label{IteratedBarConstructionHomotopy}
-For any integers $s,t\geq1$, there is a simplicial homotopy $b^{s-1}\epsilon_{(b^{t}X)}\simeq b^{s}\epsilon_{(b^{t-1}X)}$ of maps $b^{s+t}X\to b^{s+t-1}X$, natural in $X\in s\algCat$.
+The natural transformations $\epsilon$ and $b\epsilon$ from $b^2:s\calA\to s\calA$ to $b:s\calA\to s\calA$ are naturally simplicially homotopic.
 \end{prop}
+
 \begin{proof}
-Write $K=b^{s+t}X$ and $L=b^{s+t-1}X$ for the source and target of these maps respectively. Noting the formulae
+Write $K=b^{2}X$ and $L=bX$ for the source and target of these maps respectively. Noting the formulae
 \[[\frakd_{iq}]^2= [\frakd_{q+i,2q}\circ\frakd_{i,2q+1}]\ \textup{and}\  [\fraks_{iq}]^2= [\fraks_{q+i+2,2q+2}\circ\fraks_{i,2q+1}],\]
 we can describe the simplicial structure maps in $K$ and $L$ as follows:
 \begin{alignat*}{2}
-\trip{d}{iq}{L}&=[\frakd_{iq}]^{s+t-1}\trip{d}{iq}{X}\\
-\trip{s}{iq}{L}&=[\fraks_{iq}]^{s+t-1}\trip{s}{iq}{X}\\
-\trip{d}{iq}{K}&=[\frakd_{iq}]^{s-1}[\frakd_{q+i,2q}\circ\frakd_{i,2q+1}][\frakd_{iq}]^{t-1}\trip{d}{iq}{X}\\
-\trip{s}{iq}{K}&=[\fraks_{iq}]^{s-1}[\fraks_{q+i+2,2q+2}\circ\fraks_{i,2q+1}][\fraks_{iq}]^{t-1}\trip{s}{iq}{X}
+\trip{d}{iq}{L}&=[\frakd_{iq}]\trip{d}{iq}{X}\\
+\trip{s}{iq}{L}&=[\fraks_{iq}]\trip{s}{iq}{X}\\
+\trip{d}{iq}{K}&=[\frakd_{q+i,2q}\circ\frakd_{i,2q+1}]\trip{d}{iq}{X}\\
+\trip{s}{iq}{K}&=[\fraks_{q+i+2,2q+2}\circ\fraks_{i,2q+1}]\trip{s}{iq}{X}
 \end{alignat*}
-We can now state an explicit simplicial homotopy between the two maps of interest. Using precisely the notation of \cite[\S5]{MaySimpObj.pdf}, we define $\trip{h}{jq}{}:K_q\to L_{q+1}$, for $0\leq i\leq q$, by the formula
-\[\trip{h}{jq}{}:=[\fraks_{jq}]^{s-1}[\frakd_{j+1,q+2}\circ\cdots \circ\frakd_{j+1,2q+1}][\fraks_{jq}]^{t-1}\trip{s}{jq}{X}\]
-If the $\trip{h}{jq}{}$ in fact form a valid homotopy $f\simeq g$, then: %$f_q=\trip{d}{0,q+1}{L}\trip{h}{0,q}{}$, and $f_q=\trip{d}{q+1,q+1}{L}\trip{h}{q,q}{}$. We may calculate these composites as follows:
-\begin{alignat*}{2}
-f_q&=\trip{d}{0,q+1}{L}\trip{h}{0,q}{}\\
-&=
-[\frakd_{0,q+1}\fraks_{0q}]^{s-1}[\frakd_{0,q+1}\frakd_{1,q+2}\circ\cdots \circ\frakd_{1,2q+1}][\frakd_{0,q+1}\fraks_{0q}]^{t-1}(\trip{d}{0,q+1}{X}\trip{s}{0q}{X})%
-\\
-&=
-[\trip{\textup{id}}{T^{q+1}}{}]^{s-1}[\frakd_{0,q+1}\frakd_{0,q+2}\circ\cdots \circ\frakd_{0,2q+1}][\trip{\textup{id}}{T^{q+1}}{}]^{t-1}\trip{\textup{id}}{X_q}{}%
-\end{alignat*}
-which is exactly the action of  $b^{s-1}\epsilon_{(b^{t}X)}$ in level $q$. Similarly,
-\begin{alignat*}{2}
-g_q&=\trip{d}{q+1,q+1}{L}\trip{h}{q,q}{}\\
-&=
-[\frakd_{q+1,q+1}\fraks_{qq}]^{s-1}[\frakd_{q+1,q+1}\frakd_{q+1,q+2}\circ\cdots \circ\frakd_{q+1,2q+1}][\frakd_{q+1,q+1}\fraks_{qq}]^{t-1}(\trip{d}{q+1,q+1}{X}\trip{s}{qq}{X})
-\\
-&=
-[\trip{\textup{id}}{T^{q+1}}{}]^{s-1}[\frakd_{q+1,q+1}\frakd_{q+1,q+2}\circ\cdots \circ\frakd_{q+1,2q+1}][\trip{\textup{id}}{T^{q+1}}{}]^{t-1}\trip{\textup{id}}{X_q}{}%
-\end{alignat*}
-is exactly the action of $b^{s}\epsilon_{(b^{t-1}X)}$ in level $q$.
-All that remains is to verify that the $h_{i,q}$ satisfy the defining identities for the notion of simplicial homotopy. While forming each of the composites of interest, none of the groupings provided by the square brackets are disturbed. Thus, each identity (labeled 1-5) can be checked one piece (labeled a-b) at a time:
+We can now state an explicit simplicial homotopy between the two maps of interest. Using precisely the notation of \cite[\S5]{MaySimpObj.pdf}, we define $\trip{h}{jq}{}:K_q\to L_{q+1}$, for $0\leq j\leq q$, by the formula
+\[\trip{h}{jq}{}:=[\frakd_{j+1,q+2}\circ\cdots \circ\frakd_{j+1,2q+1}]\trip{s}{jq}{X}.\]
+We first check that these maps satisfy the defining identities for the notion of simplicial homotopy, numbered (1)-(5) as in \cite[\S5]{MaySimpObj.pdf}. Each identity can be checked in two parts (a)-(b):
 {\renewcommand{\circ}{\relax}
 \begin{enumerate}\squishlist
 \setlength{\parindent}{.25in}
-\item $\trip{d}{i,q+1}{L}\circ \trip{h}{j,q}{}=\trip{h}{j-1,q-1}{}\circ \trip{d}{i,q}{K}$ whenever $0\leq i<j\leq q$
+\item We must check that $\trip{d}{i,q+1}{L}\circ \trip{h}{j,q}{}=\trip{h}{j-1,q-1}{}\circ \trip{d}{i,q}{K}$ whenever $0\leq i<j\leq q$. Equivalently:
 \begin{enumerate}\squishlist
 \setlength{\parindent}{.25in}
-\item $\trip{d}{i,q+1}{X}\circ \trip{s}{j,q}{X}=\trip{s}{j-1,q-1}{X}\circ \trip{d}{i,q}{X}$ and $\trip{\frakd}{i,q+1}{}\circ \trip{\fraks}{j,q}{}=\trip{\fraks}{j-1,q-1}{}\circ \trip{\frakd}{i,q}{}$
-\item 
+\item[({\makebox[.51em][c]{a}})] $\trip{d}{i,q+1}{X}\circ \trip{s}{j,q}{X}=\trip{s}{j-1,q-1}{X}\circ \trip{d}{i,q}{X}$,\textup{ and}%$\trip{\frakd}{i,q+1}{}\circ \trip{\fraks}{j,q}{}=\trip{\fraks}{j-1,q-1}{}\circ \trip{\frakd}{i,q}{}$
+\item[({\makebox[.51em][c]{b}})]
 $\frakd_{i,q+1}\circ
 \frakd_{j+1,q+2}\circ\cdots \circ\frakd_{j+1,2q+1}=
 \frakd_{j,q+1}\circ\cdots \circ\frakd_{j,2q-1}\circ
-\frakd_{q+i,2q}\circ\frakd_{i,2q+1}$
+\frakd_{q+i,2q}\circ\frakd_{i,2q+1}$.
 \end{enumerate}
-\item $\trip{d}{j+1,q+1}{L}\circ \trip{h}{j,q}{}=\trip{d}{j+1,q+1}{L}\circ \trip{h}{j+1,q}{}$ whenever $0\leq j\leq q-1$
+\item We must check that $\trip{d}{j+1,q+1}{L}\circ \trip{h}{j,q}{}=\trip{d}{j+1,q+1}{L}\circ \trip{h}{j+1,q}{}$ whenever $0\leq j\leq q-1$. Equivalently:
 \begin{enumerate}\squishlist
 \setlength{\parindent}{.25in}
-\item $\trip{d}{j+1,q+1}{X}\circ \trip{s}{j,q}{X}=\trip{d}{j+1,q+1}{X}\circ \trip{s}{j+1,q}{X}$ and $\trip{\frakd}{j+1,q+1}{}\circ \trip{\fraks}{j,q}{}=\trip{\frakd}{j+1,q+1}{}\circ \trip{\fraks}{j+1,q}{}$
-\item 
+\item[({\makebox[.51em][c]{a}})] $\trip{d}{j+1,q+1}{X}\circ \trip{s}{j,q}{X}=\trip{d}{j+1,q+1}{X}\circ \trip{s}{j+1,q}{X}$,\textup{ and}%$\trip{\frakd}{j+1,q+1}{}\circ \trip{\fraks}{j,q}{}=\trip{\frakd}{j+1,q+1}{}\circ \trip{\fraks}{j+1,q}{}$
+\item[({\makebox[.51em][c]{b}})]
 $\frakd_{j+1,q+1}\circ
 \frakd_{j+1,q+2}\circ\cdots \circ\frakd_{j+1,2q+1}=
 \frakd_{j+1,q+1}\circ
-\frakd_{j+2,q+2}\circ\cdots \circ\frakd_{j+2,2q+1}$
+\frakd_{j+2,q+2}\circ\cdots \circ\frakd_{j+2,2q+1}$.
 \end{enumerate}
-\item $\trip{d}{i,q+1}{L}\circ \trip{h}{j,q}{}=\trip{h}{j,q-1}{}\circ \trip{d}{i-1,q}{K}$ whenever $0\leq j<i-1\leq q$
+\item We must check that $\trip{d}{i,q+1}{L}\circ \trip{h}{j,q}{}=\trip{h}{j,q-1}{}\circ \trip{d}{i-1,q}{K}$ whenever $0\leq j<i-1\leq q$. Equivalently:
 \begin{enumerate}\squishlist
 \setlength{\parindent}{.25in}
-\item $\trip{d}{i,q+1}{X}\circ \trip{s}{j,q}{X}=\trip{s}{j,q-1}{X}\circ \trip{d}{i-1,q}{X}$ and $\trip{\frakd}{i,q+1}{}\circ \trip{\fraks}{j,q}{}=\trip{\fraks}{j,q-1}{}\circ \trip{\frakd}{i-1,q}{}$
-\item 
+\item[({\makebox[.51em][c]{a}})] $\trip{d}{i,q+1}{X}\circ \trip{s}{j,q}{X}=\trip{s}{j,q-1}{X}\circ \trip{d}{i-1,q}{X}$,\textup{ and}%$\trip{\frakd}{i,q+1}{}\circ \trip{\fraks}{j,q}{}=\trip{\fraks}{j,q-1}{}\circ \trip{\frakd}{i-1,q}{}$
+\item[({\makebox[.51em][c]{b}})] 
 $\frakd_{i,q+1}\circ
 \frakd_{j+1,q+2}\circ\cdots \circ\frakd_{j+1,2q+1}=
 \frakd_{j+1,q+1}\circ\cdots \circ\frakd_{j+1,2q-1}\circ
-\frakd_{q+i-1,2q}\circ\frakd_{i-1,2q+1}$
+\frakd_{q+i-1,2q}\circ\frakd_{i-1,2q+1}$.
 \end{enumerate}
-\item $\trip{s}{i,q+1}{L}\circ \trip{h}{j,q}{}=\trip{h}{j+1,q+1}{}\circ \trip{s}{i,q}{K}$ whenever $0\leq i\leq j\leq q$
+\item We must check that $\trip{s}{i,q+1}{L}\circ \trip{h}{j,q}{}=\trip{h}{j+1,q+1}{}\circ \trip{s}{i,q}{K}$ whenever $0\leq i\leq j\leq q$. Equivalently:
 \begin{enumerate}\squishlist
 \setlength{\parindent}{.25in}
-\item $\trip{s}{i,q+1}{X}\circ \trip{s}{j,q}{X}=\trip{s}{j+1,q+1}{X}\circ \trip{s}{i,q}{X}$ and $\trip{\fraks}{i,q+1}{}\circ \trip{\fraks}{j,q}{}=\trip{\fraks}{j+1,q+1}{}\circ \trip{\fraks}{i,q}{}$
-\item 
+\item[({\makebox[.51em][c]{a}})] $\trip{s}{i,q+1}{X}\circ \trip{s}{j,q}{X}=\trip{s}{j+1,q+1}{X}\circ \trip{s}{i,q}{X}$,\textup{ and}%$\trip{\fraks}{i,q+1}{}\circ \trip{\fraks}{j,q}{}=\trip{\fraks}{j+1,q+1}{}\circ \trip{\fraks}{i,q}{}$
+\item[({\makebox[.51em][c]{b}})] 
 $\fraks_{i,q+1}\circ
 \frakd_{j+1,q+2}\circ\cdots \circ\frakd_{j+1,2q+1}=
 \frakd_{j+2,q+3}\circ\cdots \circ\frakd_{j+2,2q+3}\circ
-\fraks_{q+i+2,2q+2}\circ\fraks_{i,2q+1}$
+\fraks_{q+i+2,2q+2}\circ\fraks_{i,2q+1}$.
 \end{enumerate}
-\item $\trip{s}{i,q+1}{L}\circ \trip{h}{j,q}{}=\trip{h}{j,q+1}{}\circ \trip{s}{i-1,q}{K}$ whenever $0\leq j<i\leq q+1$
+\item We must check that $\trip{s}{i,q+1}{L}\circ \trip{h}{j,q}{}=\trip{h}{j,q+1}{}\circ \trip{s}{i-1,q}{K}$ whenever $0\leq j<i\leq q+1$. Equivalently:
 \begin{enumerate}\squishlist
 \setlength{\parindent}{.25in}
-\item $\trip{s}{i,q+1}{X}\circ \trip{s}{j,q}{X}=\trip{s}{j,q+1}{X}\circ \trip{s}{i-1,q}{X}$ and $\trip{\fraks}{i,q+1}{}\circ \trip{\fraks}{j,q}{}=\trip{\fraks}{j,q+1}{}\circ \trip{\fraks}{i-1,q}{}$
-\item 
+\item[({\makebox[.51em][c]{a}})] $\trip{s}{i,q+1}{X}\circ \trip{s}{j,q}{X}=\trip{s}{j,q+1}{X}\circ \trip{s}{i-1,q}{X}$,\textup{ and}%$\trip{\fraks}{i,q++1}{}\circ \trip{\fraks}{j,q}{}=\trip{\fraks}{j,q+1}{}\circ \trip{\fraks}{i-1,q}{}$
+\item[({\makebox[.51em][c]{b}})] 
 $\fraks_{i,q+1}\circ
 \frakd_{j+1,q+2}\circ\cdots \circ\frakd_{j+1,2q+1}=
 \frakd_{j+1,q+3}\circ\cdots \circ\frakd_{j+1,2q+3}\circ
-\fraks_{q+i+1,2q+2}\circ\fraks_{i-1,2q+1}$
+\fraks_{q+i+1,2q+2}\circ\fraks_{i-1,2q+1}$.
 \end{enumerate}
 \end{enumerate}
-}
-\noindent Each of these equations follows from the simplicial identities.
+\noindent Each of these equations follows from the simplicial identities, proving that the $h_{jq}$ form a homotopy. 
+Finally, we check that this homotopy is indeed a homotopy between the two maps of interest:
+\begin{alignat*}{2}
+\trip{d}{0,q+1}{L}\trip{h}{0,q}{}
+&=
+[\frakd_{0,q+1}\frakd_{1,q+2}\circ\cdots \circ\frakd_{1,2q+1}](\trip{d}{0,q+1}{X}\trip{s}{0q}{X})%
+\\
+&=
+[\frakd_{0,q+1}\frakd_{0,q+2}\circ\cdots \circ\frakd_{0,2q+1}]\trip{\textup{id}}{X_q}{}%
+\end{alignat*}
+is the action of  $\epsilon_{(bX)}$ in level $q$, and similarly,
+\begin{alignat*}{2}
+\trip{d}{q+1,q+1}{L}\trip{h}{q,q}{}
+&=
+[\frakd_{q+1,q+1}\frakd_{q+1,q+2}\circ\cdots \circ\frakd_{q+1,2q+1}](\trip{d}{q+1,q+1}{X}\trip{s}{qq}{X})
+\\
+&=
+[\frakd_{q+1,q+1}\frakd_{q+1,q+2}\circ\cdots \circ\frakd_{q+1,2q+1}]\trip{\textup{id}}{X_q}{}%
+\end{alignat*}
+is the action of $b\epsilon_{X}$ in level $q$.
+}%end "don't print \circ"
 \end{proof}
 
 
