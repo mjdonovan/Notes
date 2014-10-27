@@ -105,6 +105,10 @@ url=false,doi=false,isbn=false,eprint=false]{biblatex}%
 \newcommand{\restn}[2][]{\ifblank{#1}{\xi{#2}}{\xi_{#1}{#2}}}%{\xi{#1}}
 
 
+\newcommand{\dupdown}[2]{D^{\smash{#1}}_{\smash{#2}}}
+\newcommand{\caldup}[1]{\calD^{\smash{#1}}}
+\newcommand{\caldupdown}[2]{\calD^{\smash{#1}}_{\smash{#2}}}
+
 \newcommand{\algCat}{\calA}
 \newcommand{\trip}[3]{{#1}_{\smash{#2}}^{\smash{#3}}}
 
@@ -419,6 +423,59 @@ Suppose that $X$ is a connected element of $s\Comm$. Then the Adams spectral seq
 
 \subsection{Cosimplicial objects and cubical diagrams}
 
+\begin{shaded}\tiny
+
+There are inclusion functors:
+\begin{alignat*}{2}
+\tau
+&:
+\calP_0[n-1]\to \calP_0[n]%
+\\
+g_n
+&:
+\calP_0[n]\to \Delta
+\\
+\tau
+&:
+\calP[n-1]\to \calP[n]%
+\\
+h_n
+&:
+\calP[n]\to \Delta_+
+\end{alignat*}
+satisfying $g_n\circ \tau=g_{n-1}$ and $h_n\circ \tau=h_{n-1}$, and with the $g_n$, $h_n$ and $\tau$ compatible with the inclusions $\calP_0[n]\to \calP[n]$ and $\Delta\to\Delta_+$. Here, $\Delta$ is the simplex category (nonempty finite ordinals) and $\Delta_+$ is the augmented simplex category (finite ordinals). We may view $\calX^\bullet$ as a functor $\Delta_+\to s\calC$. There's a commutative diagram of inclusions of categories:
+\[\xymatrix@R=4mm{
+&%r1c1
+\calP_0[0]\ar[r]^-{\tau}\ar[d]
+&%r1c2
+\calP_0[1]\ar[r]^-{\tau}\ar[d]
+&%r1c3
+\calP_0[2]\ar[r]^-{\tau}\ar[d]
+&%r1c4
+\cdots \ar[r]
+&%r1c5
+\Delta\ar[d]\\
+\calP[-1]\ar[r]^-{\tau}
+&%r1c1
+\calP[0]\ar[r]^-{\tau}
+&%r1c2
+\calP[1]\ar[r]^-{\tau}
+&%r1c3
+\calP[2]\ar[r]^-{\tau}
+&%r1c4
+\cdots \ar[r]
+&%r1c5
+\Delta_+
+}\]
+in which the horizontal maps to $\Delta$ are the $g_n$ and the horizontal maps to $\Delta_+$ are the $h_n$. The relevance of these definitions was explained by Sinha in \cite[Theorem 6.5]{SinhaSpacesOfKnots.pdf}, and expanded on by Munson-Voli\'c\textbf{(?)}: for $Y$ a Reedy fibrant cosimplicial object, $\textup{Tot}_nY$ is weakly equivalent to $\holim(g_n^*Y)$, and these weak equivalences are compatible with the fibrations $\tau^*$ and the fibrations in the $\textup{Tot}$ tower.
+\end{shaded}
+
+\begin{shaded}\tiny
+We are interested in the $\textup{Tot}$ tower of $\calX^\bullet$, which is already Reedy fibrant, being a cosimplicial simplicial abelian group (cf.\ \cite[{X.4.9}]{YellowMonster}).
+More specifically, we wish to calculate the homotopy fiber of the augmentation map $cX\to\textup{Tot}_{n}(\calX^\bullet)$. This map is exactly the homotopy comparison map for the $(n+1)$-cubical diagram $h_{n}^*\calX^\bullet$ (cf.\ \cite[\S3]{LuisGoodwillie.pdf}). The homotopy fiber of this map, the total homotopy fiber, can be computed iteratively \cite[Proposition 3.8]{LuisGoodwillie.pdf}, and the iterative definition \emph{nearly coincides} with our definition of $\dupdown{n+1}{c}X$. Indeed, we will shortly define a weak equivalence of $(n+1)$-cubes $h_n^*\calX^\bullet\to (D_n^{\smash{\square}}I)(X)$.
+\end{shaded}
+
+
 There is a diagram of inclusions of categories
 \[\xymatrix@R=4mm{
 \Delta&%r1c1
@@ -562,9 +619,7 @@ and the tower map coincides with the fiber inclusion.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%\textbf{Maybe I should sweep the stuff with comparing the tot tower to the tower of holimits under the rug, given that it's well known. Instead, work with the injective model structure on diagrams.}
 
 
-\newcommand{\dupdown}[2]{D^{\smash{#1}}_{\smash{#2}}}
-\newcommand{\caldup}[1]{\calD^{\smash{#1}}}
-\newcommand{\caldupdown}[2]{\calD^{\smash{#1}}_{\smash{#2}}}
+
 \subsection{Functors derived with respect to Quillen homology}
 Let $\mathsf{CR(s\Comm)}$ be the category of cofibrant replacement functors in $s\Comm$. That is, an object of $\mathsf{CR(s\Comm)}$ is a pair, $(c,\epsilon)$, such that $c:s\Comm\to s\Comm$ is a functor whose image consists only of cofibrant objects, and $\epsilon:c\Rightarrow I$ is a natural acyclic fibration. Morphisms in $\mathsf{CR(s\Comm)}$ are to be natural transformations which commute with the augmentations.
 
