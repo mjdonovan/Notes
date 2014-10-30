@@ -1,8 +1,250 @@
 % !TEX root = z_output/conn_simp_algs_are_complete.tex
 \documentclass[11pt]{amsart}
-\input{../../Dropbox/logbook/_LOGBOOK/macros.tex}
+\usepackage{amsmath,amsthm,amssymb}
+\usepackage{eucal}
+\usepackage{mathrsfs,nicefrac}
+\usepackage{amssymb}
+\usepackage[all]{xy}
+\usepackage{cancel}
+\usepackage{color}
+\usepackage{enumerate}
+
+\usepackage[bookmarks=false,pdftex,pdfborder={0 0 0 [1 1]}]{hyperref}
+
+\headheight=8pt
+\topmargin=0pt
+\textheight=610pt
+\textwidth=432pt
+\oddsidemargin=18pt
+\evensidemargin=18pt
+\footskip=25pt
+
+
+%>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+%<<<  Theorem Environments  <<<
+%>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+\theoremstyle{plain}
+\newtheorem{thm}{Theorem}[section]
+\newtheorem*{thm*}{Theorem}
+\newtheorem{lem}[thm]{Lemma}
+\newtheorem*{lem*}{Lemma}
+\newtheorem{prop}[thm]{Proposition}
+\newtheorem*{prop*}{Proposition}
+\newtheorem{cor}[thm]{Corollary}
+\newtheorem*{cor*}{Corollary}
+\newtheorem{defprop}[thm]{Definition-Proposition}
+\newtheorem*{punchline}{Punchline}
+\newtheorem{conjecture}{Conjecture}
+\newtheorem*{conjecture*}{Conjecture}
+\newtheorem*{claim}{Claim}
+
+\theoremstyle{definition}
+\newtheorem{defn}{Definition}[section]
+\newtheorem*{defn*}{Definition}
+
+
+%>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+%<<<       Operators        <<<
+%>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+\DeclareMathOperator{\ad}{\textbf{ad}}
+\DeclareMathOperator{\coker}{coker}
+\renewcommand{\ker}{\textup{ker}\,}
+\DeclareMathOperator{\End}{End}
+\DeclareMathOperator{\Aut}{Aut}
+\DeclareMathOperator{\Hom}{Hom}
+\DeclareMathOperator{\Maps}{Maps}
+\DeclareMathOperator{\Mor}{Mor}
+\DeclareMathOperator{\Gal}{Gal}
+\DeclareMathOperator{\Ext}{Ext}
+\DeclareMathOperator{\Tor}{Tor}
+\DeclareMathOperator{\Cotor}{Cotor}
+\DeclareMathOperator{\Prim}{Prim}
+\DeclareMathOperator{\Tot}{Tot}
+\DeclareMathOperator{\Map}{Map}
+\DeclareMathOperator{\Der}{Der}
+\DeclareMathOperator{\Rad}{Rad}
+\DeclareMathOperator{\rank}{rank}
+\DeclareMathOperator{\ArfInvariant}{Arf}
+\DeclareMathOperator{\KervaireInvariant}{Ker}
+\DeclareMathOperator{\im}{im}
+\DeclareMathOperator{\coim}{coim}
+\DeclareMathOperator{\trace}{tr}
+\DeclareMathOperator{\supp}{supp}
+\DeclareMathOperator{\ann}{ann}
+\DeclareMathOperator{\spec}{Spec}
+\DeclareMathOperator{\SPEC}{\textbf{Spec}}
+\DeclareMathOperator{\proj}{Proj}
+\DeclareMathOperator{\PROJ}{\textbf{Proj}}
+\DeclareMathOperator{\fiber}{fib}
+\DeclareMathOperator{\cofiber}{cof}
+\DeclareMathOperator{\cone}{cone}
+\DeclareMathOperator{\skel}{sk}
+\DeclareMathOperator{\coskel}{cosk}
+\DeclareMathOperator{\conn}{conn}
+\DeclareMathOperator*{\colim}{colim}
+\DeclareMathOperator*{\limit}{lim}
+\DeclareMathOperator*{\hocolim}{hocolim}
+\DeclareMathOperator*{\holimit}{holim}
+\DeclareMathOperator*{\holim}{holim}
+\DeclareMathOperator*{\hofib}{hofib}
+\DeclareMathOperator*{\hotfib}{thofib}
+\DeclareMathOperator*{\equaliser}{eq}
+\DeclareMathOperator*{\coequaliser}{coeq}
+\DeclareMathOperator{\ch}{ch}
+\DeclareMathOperator{\Thom}{Th}
+\DeclareMathOperator{\GrthGrp}{GrthGp}
+\DeclareMathOperator{\Sym}{Sym}
+\DeclareMathOperator{\Prob}{\mathbb{P}}
+\DeclareMathOperator{\Exp}{\mathbb{E}}
+\DeclareMathOperator{\GeomMean}{\mathbb{G}}
+\DeclareMathOperator{\Var}{Var}
+\DeclareMathOperator{\Cov}{Cov}
+\DeclareMathOperator{\Sp}{Sp}
+\DeclareMathOperator{\Seq}{Seq}
+\DeclareMathOperator{\Cyl}{Cyl}
+\DeclareMathOperator{\Ev}{Ev}
+\DeclareMathOperator{\sh}{sh}
+\DeclareMathOperator{\intHom}{\underline{Hom}}
+\DeclareMathOperator{\Frac}{frac}
+
+
+%>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+%<<<  Mathematical Symbols  <<<
+%>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+\newcommand{\DASH}{\textup{--}}
+
+%>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+%<<<     Greek Letters      <<<
+%>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+\let\oldphi\phi
+\let\phi\varphi
+\renewcommand{\to}{\longrightarrow}
+\newcommand{\from}{\longleftarrow}
+\newcommand{\eps}{\varepsilon}
+
+%%>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+%%<<<     Environments       <<<
+%%>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+\newcommand{\squishlist}{
+  \setlength{\itemsep}{.5pt}
+  \setlength{\parskip}{0pt}
+  \setlength{\parsep}{0pt}}
+%>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+%<<<     Script Letters     <<<
+%>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+\newcommand{\scrQ}{\mathscr{Q}}
+\newcommand{\scrW}{\mathscr{W}}
+\newcommand{\scrE}{\mathscr{E}}
+\newcommand{\scrR}{\mathscr{R}}
+\newcommand{\scrT}{\mathscr{T}}
+\newcommand{\scrY}{\mathscr{Y}}
+\newcommand{\scrU}{\mathscr{U}}
+\newcommand{\scrI}{\mathscr{I}}
+\newcommand{\scrO}{\mathscr{O}}
+\newcommand{\scrP}{\mathscr{P}}
+\newcommand{\scrA}{\mathscr{A}}
+\newcommand{\scrS}{\mathscr{S}}
+\newcommand{\scrD}{\mathscr{D}}
+\newcommand{\scrF}{\mathscr{F}}
+\newcommand{\scrG}{\mathscr{G}}
+\newcommand{\scrH}{\mathscr{H}}
+\newcommand{\scrJ}{\mathscr{J}}
+\newcommand{\scrK}{\mathscr{K}}
+\newcommand{\scrL}{\mathscr{L}}
+\newcommand{\scrZ}{\mathscr{Z}}
+\newcommand{\scrX}{\mathscr{X}}
+\newcommand{\scrC}{\mathscr{C}}
+\newcommand{\scrV}{\mathscr{V}}
+\newcommand{\scrB}{\mathscr{B}}
+\newcommand{\scrN}{\mathscr{N}}
+\newcommand{\scrM}{\mathscr{M}}
+
+
+\newcommand{\frakq}{\mathfrak{q}}
+\newcommand{\frakw}{\mathfrak{w}}
+\newcommand{\frake}{\mathfrak{e}}
+\newcommand{\frakr}{\mathfrak{r}}
+\newcommand{\frakt}{\mathfrak{t}}
+\newcommand{\fraky}{\mathfrak{y}}
+\newcommand{\fraku}{\mathfrak{u}}
+\newcommand{\fraki}{\mathfrak{i}}
+\newcommand{\frako}{\mathfrak{o}}
+\newcommand{\frakp}{\mathfrak{p}}
+\newcommand{\fraka}{\mathfrak{a}}
+\newcommand{\fraks}{\mathfrak{s}}
+\newcommand{\frakd}{\mathfrak{d}}
+\newcommand{\frakf}{\mathfrak{f}}
+\newcommand{\frakg}{\mathfrak{g}}
+\newcommand{\frakh}{\mathfrak{h}}
+\newcommand{\frakj}{\mathfrak{j}}
+\newcommand{\frakk}{\mathfrak{k}}
+\newcommand{\frakl}{\mathfrak{l}}
+\newcommand{\frakz}{\mathfrak{z}}
+\newcommand{\frakx}{\mathfrak{x}}
+\newcommand{\frakc}{\mathfrak{c}}
+\newcommand{\frakv}{\mathfrak{v}}
+\newcommand{\frakb}{\mathfrak{b}}
+\newcommand{\frakn}{\mathfrak{n}}
+\newcommand{\frakm}{\mathfrak{m}}
+
+%>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+%<<<  Caligraphic Letters   <<<
+%>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+\newcommand{\calQ}{\mathcal{Q}}
+\newcommand{\calW}{\mathcal{W}}
+\newcommand{\calE}{\mathcal{E}}
+\newcommand{\calR}{\mathcal{R}}
+\newcommand{\calT}{\mathcal{T}}
+\newcommand{\calY}{\mathcal{Y}}
+\newcommand{\calU}{\mathcal{U}}
+\newcommand{\calI}{\mathcal{I}}
+\newcommand{\calO}{\mathcal{O}}
+\newcommand{\calP}{\mathcal{P}}
+\newcommand{\calA}{\mathcal{A}}
+\newcommand{\calS}{\mathcal{S}}
+\newcommand{\calD}{\mathcal{D}}
+\newcommand{\calF}{\mathcal{F}}
+\newcommand{\calG}{\mathcal{G}}
+\newcommand{\calH}{\mathcal{H}}
+\newcommand{\calJ}{\mathcal{J}}
+\newcommand{\calK}{\mathcal{K}}
+\newcommand{\calL}{\mathcal{L}}
+\newcommand{\calZ}{\mathcal{Z}}
+\newcommand{\calX}{\mathcal{X}}
+\newcommand{\calC}{\mathcal{C}}
+\newcommand{\calV}{\mathcal{V}}
+\newcommand{\calB}{\mathcal{B}}
+\newcommand{\calN}{\mathcal{N}}
+\newcommand{\calM}{\mathcal{M}}
+
+\newcommand{\calq}{\mathcal{Q}}
+\newcommand{\calw}{\mathcal{W}}
+\newcommand{\cale}{\mathcal{E}}
+\newcommand{\calr}{\mathcal{R}}
+\newcommand{\calt}{\mathcal{T}}
+\newcommand{\caly}{\mathcal{Y}}
+\newcommand{\calu}{\mathcal{U}}
+\newcommand{\cali}{\mathcal{I}}
+\newcommand{\calo}{\mathcal{O}}
+\newcommand{\calp}{\mathcal{P}}
+\newcommand{\cala}{\mathcal{A}}
+\newcommand{\cals}{\mathcal{S}}
+\newcommand{\cald}{\mathcal{D}}
+\newcommand{\calf}{\mathcal{F}}
+\newcommand{\calg}{\mathcal{G}}
+\newcommand{\calh}{\mathcal{H}}
+\newcommand{\calj}{\mathcal{J}}
+\newcommand{\calk}{\mathcal{K}}
+\newcommand{\call}{\mathcal{L}}
+\newcommand{\calz}{\mathcal{Z}}
+\newcommand{\calx}{\mathcal{X}}
+\newcommand{\calc}{\mathcal{C}}
+\newcommand{\calv}{\mathcal{V}}
+\newcommand{\calb}{\mathcal{B}}
+\newcommand{\caln}{\mathcal{N}}
+\newcommand{\calm}{\mathcal{M}}
+
 \usepackage{framed}
-%\usepackage{biblatex} 
 \usepackage[style=numeric,%citestyle=numeric,
 url=false,doi=false,isbn=false,eprint=false]{biblatex}%
 \hypersetup{colorlinks=false,pdfborder={0 0 0}}
@@ -29,30 +271,36 @@ url=false,doi=false,isbn=false,eprint=false]{biblatex}%
 \newcommand{\Sq}{\mathrm{Sq}}
 \newcommand{\Comm}{\calC}
 
+%\bibliography{papers}
 \bibliography{../../Dropbox/logbook/_LOGBOOK/papers}
 
 
 
 
-\title{Connected simplicial algebras are Andr\'e-Quillen complete}
-\author{Michael Donovan}
+\title{Connected simplicial algebras are\\Andr\'e-Quillen complete}
+\author[M.\ Donovan]{Michael Donovan}
+
+\address{Department of Mathematics \\ Massachusetts Institute of Technology}
+\email{mdono@math.mit.edu}
 
 
 
-
-
-%\newcommand{\dupdown}[2]{D^{\smash{#1}}_{\smash{#2}}}
 \newcommand{\dupdown}[2]{D_{\smash{#1}}}
 \newcommand{\caldup}[1]{\calD_{\smash{#1}}}
 \newcommand{\caldupdown}[2]{\calD^{\smash{#1}}_{\smash{#2}}}
 
 \begin{document}
 
-\maketitle
+
 
 \begin{abstract}
 We modify a classical construction of Bousfield and Kan \cite{BousKanSSeq.pdf} to define the Adams tower of a simplicial nonunital commutative algebra over a field $k$. We relate this construction to Radulescu-Banu's cosimplicial resolution \cite{Radulescu-Banu.pdf}, and prove that all connected simplicial algebras are complete with respect to Andr\'e-Quillen homology. This is a convergence result for the unstable Adams spectral sequence for commutative algebras over $k$.
 \end{abstract}
+
+
+\maketitle
+
+
 
 Let $s\calC$ denote the simplicial model category \cite{QuillenHomAlg.pdf} of simplicial non-unital commutative algebras over a field $k$, and let $X$ be an object of $s\calC$. Radulescu-Banu \cite{Radulescu-Banu.pdf} constructed a cosimplicial resolution $\calX^\bullet$ of $X$ by generalised Eilenberg-Mac Lane objects, and defined the \emph{completion of $X$ with respect to Andr\'e-Quillen homology} to be the totalization $X\hat{\ }:=\textup{Tot}(\calX^\bullet)$. The purpose of the present work is to prove the following conjecture of Radulescu-Banu:
 \begin{completenesstheorem}\label{completenesstheorem}
@@ -62,9 +310,7 @@ Radulescu-Banu's completion functor $X\mapsto X\hat{\ }$ is the analogue of Bous
 
 In fact, Bousfield and Kan have defined the unstable Adams spectral sequence of a simplicial set in two different ways. Their earlier approach \cite{BK_pairings.pdf} was to define the \emph{derivation of a functor with respect to a ring}. This approach constructs the \emph{Adams tower} over the simplicial set in question, and lends itself well to connectivity analyses. Their latter approach, \cite{BousKanSSeq.pdf}, to give a cosimplicial resolution of a simplicial set by simplicial $R$-modules, lends itself more to the analysis of the $E^2$ page, and is directly analogous to Radulescu-Banu's construction.
 
-Since the release of \cite{BK_pairings.pdf} and \cite{BousKanSSeq.pdf}, the relationship between the two approaches has been clarified by the introduction of the theory of cubical diagrams to homotopy theory \cite{GoodwillieCalcII}. %Our calculation will rely on a relationship between cosimplicial objects and cubical diagrams first noted by Sinha,[Munson-Voli\'c]. 
-Our approach to proving the completeness theorem will be to define the Adams tower of a simplicial algebra using a construction analogous to Bousfield and Kan in \cite{BK_pairings.pdf} (Section \ref{sec:derWRTab}), and to use the theory of cubical diagrams %(cf.\ \cite[\S6]{SinhaSpacesOfKnots.pdf}, \cite{CubicalHomotopyTheory.pdf}) 
-to relate it to Radulescu-Banu's construction (Section \ref{sec:relnWithRB}). In Section \ref{sec:connectivityAnalysis}, we perform the necessary connectivity estimates in the Adams tower in order to prove the completeness theorem. 
+Since the release of \cite{BK_pairings.pdf} and \cite{BousKanSSeq.pdf}, the relationship between the two approaches has been clarified by the introduction of the theory of cubical diagrams to homotopy theory \cite{GoodwillieCalcII}. Our approach to proving the completeness theorem will be to define the Adams tower of a simplicial algebra using a construction analogous to Bousfield and Kan in \cite{BK_pairings.pdf} (Section \ref{sec:derWRTab}), and to use the theory of cubical diagrams to relate it to Radulescu-Banu's construction (Section \ref{sec:relnWithRB}). In Section \ref{sec:connectivityAnalysis}, we perform the necessary connectivity estimates in the Adams tower in order to prove the completeness theorem. 
 
 As Radulescu-Banu observed, there is an additional difficulty in constructing the Bousfield-Kan cosimplicial resolution of a simplicial algebra which is not present in the classical context. Namely, since not all simplicial algebras are cofibrant, the naive cosimplicial resolution will not be homotopically correct. Radulescu-Banu's innovation was to explain that the cofibrant replacement functor $c:s\calC\to s\calC$ constructed by Quillen's small object argument \cite{QuillenHomAlg.pdf} admits a comonad diagonal $\psi:c\to cc$, and can thus be mixed into the cosimplicial resolution, making it homotopically correct. 
 
@@ -72,7 +318,7 @@ Accordingly, we must mix Quillen's cofibrant replacement functor $c$ into our de
 
 In Section \ref{introToRBwork} we will introduce Radulescu-Banu's cosimplicial resolution and explain a little terminology. In the appendix we will state and prove a useful result on iterated simplicial bar constructions.
 
-The author would like to thank Haynes Miller, under whose supervision this research was performed, for his unerring advice and guidance, and John Harper for sharing helpful insights into the use of cubical diagrams in connectivity analyses such as that of Section \ref{sec:connectivityAnalysis}.
+This research will form part of the author's PhD thesis. The author would like to thank his advisor, Haynes Miller, for his support and guidance, and John Harper, for sharing helpful insights into the use of cubical diagrams in connectivity analyses such as that of Section \ref{sec:connectivityAnalysis}.
 
 
 \section{Radulescu-Banu's completion functor}\label{introToRBwork}
@@ -109,52 +355,7 @@ The construction is explained and generalized by Blumberg and Riehl \cite{BlumRi
 
 Denote by $X\hat{\ }$ the totalization of $\calX^\bullet$, naming $X\hat{\ }$ the \emph{completion of $X$ with respect to Andr\'e-Quillen homology}. There is a natural zig-zag $X\overset{\sim}{\from} cX\to X\hat{\ }$, and one says that $X$ is \emph{complete with respect to Andr\'e-Quillen homology} when the map $cX\to X\hat{\ }$ is an equivalence. We will prove that this occurs whenever $X$ is connected. In order to understand the name of the completion functor, note that levelwise application of Andr\'e-Quillen homology to $\calX^\bullet$ yields a cosimplicial vector space $H_*\calX^\bullet$ which is weakly equivalent to its coaugmentation $H_*X$ (cf. \cite{BlumRiehlResolutions.pdf}).
 
-
-
-
-
-
-%
-%
-%\section*{leftovers}
-%
-%
-% $Q$ is the functor $QX=X/X^2$, and $KV$ is the zero-square algebra on the vector space $V$.
-%
-%a group object of  The group objects of $\calC$ are all abelian, and The simplicial model category $s\calC$
-%
-%
-%Above, and in what follows, the functor $c$ denotes the cofibrant replacement functor produced by Quillen's small object argument \cite{QuillenHomAlg.pdf}. Radulescu-Banu's innovation was to mix the cofibrant replacement functor $c$ into the naive cosimplicial resolution of a simplicial algebra obtained from the abelianization adjunction $Q:s\calC\rightleftarrows s\mathsf{Vect}:K$, in which $QX=X/X^2$, and $KV$ is the zero-square algebra on the vector space $V$. The Andr\'e-Quillen homology of simplicial algebras is defined as the left derived functors of $Q$, which explains the title `completion with respect to Andr\'e-Quillen homology'. Goerss gives in \cite[\S4]{MR1089001} an excellent introduction to Andr\'e-Quillen homology.
-%
-%More precisely, he constructs a comonad diagonal $c\to cc$ (with counit the augmentation $\epsilon: c\to I$) in order to construct coface maps in the coaugmented cosimplicial object
-%\[\makebox[0cm][r]{\,$\calX^\bullet:\qquad $}\vcenter{
-%\def\labelstyle{\scriptstyle}
-%\xymatrix@C=1.5cm@1{
-%cX\,
-%\ar[r]
-%&
-%\,cKQcX\,
-%\ar[r];[]
-%&
-%\,c(KQc)^2X\,
-%\ar@<-1ex>[l];[]
-%\ar@<+1ex>[l];[]
-%\ar@<+1ex>[r];[]
-%\ar@<-1ex>[r];[]
-%&
-%\,c(KQc)^3X\,\makebox[0cm][l]{\,$\cdots. $}
-%\ar[l];[]
-%\ar@<-2ex>[l];[]
-%\ar@<+2ex>[l];[]
-%}}\]
-%Blumberg and Riehl \cite{BlumRiehlResolutions.pdf} have extended this approach, building on Bousfield's general theory of completions \cite{BousCosimpResnHtpySS.pdf}.
-
-
 \section{The Adams tower}\label{sec:derWRTab}
-%In this paper we work in the category $\calC$ of nonunital commutative algebras over a field $k$. These are simply $k$-vector spaces $A$ equipped with a commutative and associative pairing $A\otimes A\to A$. The category $s\calC$ of simplicial algebras is a model category (cf.\ \cite{QuillenHomAlg.pdf}), and we let $c:s\calC\to s\calC$ be a functorial cofibrant replacement produced by Quillen's small object argument.
-
-
-
 
 For any functor $F:s\calC\to s\calC$, we define the $r^\textup{th}$ derivation $\dupdown{r}{b}F$ of $F$ with respect to Andr\'e-Quillen homology. The definition is recursive:
 \begin{alignat*}{2}
@@ -197,19 +398,6 @@ we define \emph{the Adams tower of $X$} to be the tower
 \ar[r]&%r1c5
 \dupdown{0}{c}X=cX.
 }\]
-%For clarity, we'll depict the construction of $(\dupdown{1}{c}F)(X)$, $(\dupdown{2}{c}F)(X)$ and the map between them in the following diagram. Here, every composable pair of parallel arrows is \emph{defined} to be a homotopy fiber sequence. The upper horizontal plane defines $(\dupdown{2}{c}F)(X)$.....
-%%@=50pt
-%\[\def\labelstyle{\scriptstyle}
-%\xymatrix@!0@R=30pt@C=50pt{
-%(\dupdown{2}{c}F)(X)\ar[dr]\ar[dd]_\delta\\
-%&(\dupdown{1}{c}F)(cX) \ar[rr]\ar[rd]\ar[dd]^(.75){(\dupdown{1}{c}F)(\epsilon)}         &           &FcccX \ar[rr]\ar[rd]\ar'[d][dd]^{Fcc\epsilon}         &           &   FcKQccX \ar'[d][dd]^{FcKQc\epsilon}           \ar[dr]  &                  \\
-%(\dupdown{1}{c}F)(X)\ar[dr]&        &  (\dupdown{1}{c}F)(KQcX) \ar[rr] \ar[dd]  &                     &  FccKQcX \ar[rr] \ar[dd]  &             & FcKQcKQcX
-%         \ar[dd] \\
-%&(\dupdown{1}{c}F)(X) \ar'[r][rr] \ar[dr] &        &   FccX \ar'[r][rr] \ar[dr] &        &   FcKQcX
-%\ar[dr] &                   \\
-%&        &   0 \ar[rr]      &               &   0 \ar[rr]      &                    &
-%0
-%}\]
 
 For example, $(\dupdown{2}{c}F)(X)$ is constructed by the following diagram in which every composable pair of parallel arrows is \emph{defined} to be a homotopy fiber sequence.
 \[\def\labelstyle{\scriptstyle}
@@ -220,14 +408,7 @@ For example, $(\dupdown{2}{c}F)(X)$ is constructed by the following diagram in w
 }\]
 In general, $(\dupdown{n+1}{c}F)(X)$ is the homotopy total fiber of an $(n+1)$-cubical diagram:
 \[(\dupdown{n+1}{c}F)(X):=\textup{hototfib} \bigl(({D}_{n+1}^{\smash{\square}}F)X\bigr).\]
-See \cite{GoodwillieCalcII}, \cite{LuisGoodwillie.pdf} or \cite{CubicalHomotopyTheory.pdf} for the general theory of cubical diagrams. Before defining the cubical diagram $({D}_{n+1}^{\smash{\square}}F)X$, we set notation: for $n\geq0$ let $[n]=\{0,\ldots,n\}$, and define $\calP[n]=\left\{S\subseteq [n]\right\}$ to be the poset category whose morphisms are the inclusions $S\subseteq S'$.
-%\[\calP_0[n]
-%=
-%\left\{S\subseteq [n]\,\middle|\, %S\neq\emptyset\right\}\quad \textup{and}\quad \calP[n]=\left\{S\subseteq [n]\right\}.\]
-%These sets are partially ordered by inclusion, and we think of them as poset categories,
-Then an $(n+1)$-cube in $s\calC$ is a functor $\calP[n]\to s\calC$, and the % the category indexing $(n+1)$-cubical diagrams.
-%We may observe that $(D_{n+1}F)X$ is simply (the iterative definition of) the homotopy total fiber of 
-$(n+1)$-cubical diagram $({D}_{n+1}^{\smash{\square}}F)X:\calP[n]\to s\calC$ is the functor:
+See \cite{GoodwillieCalcII}, \cite{LuisGoodwillie.pdf} or \cite{CubicalHomotopyTheory.pdf} for the general theory of cubical diagrams. Before defining the cubical diagram $({D}_{n+1}^{\smash{\square}}F)X$, we set notation: for $n\geq0$ let $[n]=\{0,\ldots,n\}$, and define $\calP[n]=\left\{S\subseteq [n]\right\}$ to be the poset category whose morphisms are the inclusions $S\subseteq S'$. Then an $(n+1)$-cube in $s\calC$ is a functor $\calP[n]\to s\calC$, and the $(n+1)$-cubical diagram $({D}_{n+1}^{\smash{\square}}F)X:\calP[n]\to s\calC$ is the functor:
 \[S\mapsto Fc(KQ)^{\chi_{n}}c(KQ)^{\chi_{n-1}}c\cdots c(KQ)^{\chi_0}cX\quad \textup{where}\quad \chi_i:=\begin{cases}
 1,&\textup{if }i\in S;\\
 0,&\textup{if }i\notin S,
@@ -235,10 +416,6 @@ $(n+1)$-cubical diagram $({D}_{n+1}^{\smash{\square}}F)X:\calP[n]\to s\calC$ is 
 \end{cases}
 \]
 where for $S\subseteq S'$, the map $(({D}_{n+1}^{\smash{\square}}F)X)(S)\to (({D}_{n+1}^{\smash{\square}}F)X)(S')$ is given by applying the counit $\eta:1\to KQ$ in those locations indexed by $S'\setminus S$.
-
-%Although $(D_{n+1}F)X=\textup{hototfib}({D}_{n+1}^{\smash{\square}}F)X$ under an iterative definition of the homotopy total fiber, by \cite[Prop 3.6]{LuisGoodwillie.pdf} the Adams tower is homotopy equivalent to the tower with terms:
-%\[({D}_{n+1}^{\smash{\square}}F)X:= \hofib(({D}_{n+1}^{\smash{\square}}F)(\emptyset)\to\holim(({D}_{n+1}^{\smash{\square}}F)|_{\calP_0[n]}))\]
-
 
 \section{Relationship between the Adams tower and Radulescu-Banu's resolution}\label{sec:relnWithRB}
 
@@ -272,9 +449,8 @@ As $\calX^{-1}$ equals $cX$, the tower $\hofib(\calX^{-1}\to\textup{Tot}_n\calX^
 \begin{proof}[Proof of Proposition \ref{towerIdentification}] 
 It will suffice to construct a weak equivalence $h_n^*\calX^\bullet\to (D_n^{\smash{\square}}I)(X)$ of $(n+1)$-cubes. The $(n+1)$-cubical diagram $h_n^*\calX^\bullet$ is defined by
 \[(h_n^*\calX^\bullet)(S):= c(KQc)^{\chi_{n}}(KQc)^{\chi_{n-1}}\cdots (KQc)^{\chi_0}X\quad \textup{where}\quad \chi_i:=\begin{cases}
-1,&\textup{if }i\in S;\\
+1,&\textup{if }i\in S,\\
 0,&\textup{if }i\notin S,
-%\\,&\textup{if }
 \end{cases}
 \]
 where we describe the map $(h_n^*\calX^\bullet)(S)\to (h_n^*\calX^\bullet)(S\sqcup\{i\})$, for $i\notin S$, as follows. Let $j$ be the smallest element of $S\sqcup\{n+1\}$ exceeding $i$, so that
@@ -284,45 +460,13 @@ c(KQc)^{\chi_{n}}\cdots (KQc)^{\chi_{j+1}}(KQ\underline{c})(KQc)^{\chi_{i-1}}\cd
 %\\,&\textup{if }
 \end{cases}
 \]
-In the expression for either case, we have distinguished one of the applications of $c$ with an underline, and the map to $(h_n^*\calX^\bullet)(S\sqcup\{i\})$ is induced by the composite $\underline{c}\to cc\to cKQc$ of the diagonal of the comonad $c$ with the unit of the monad $KQ$. %This cube only commutes due to the coassociativity of the diagonal $\psi$.
-
-%The reason that this cube commutes is (of course) the same as the reason that the cosimplicial relation $d^j\circ d^i=d^i\circ d^{j-1}$ ($i<j$) is satisfied in $\calX^\bullet$. That is, $c$ is a comonad, and as such its diagonal map is coassociative.
+In the expression for either case, we have distinguished one of the applications of $c$ with an underline, and the map to $(h_n^*\calX^\bullet)(S\sqcup\{i\})$ is induced by the composite $\underline{c}\to cc\to cKQc$ of the diagonal of the comonad $c$ with the unit of the monad $KQ$. 
 
 We now define maps $(h_n^*\calX^\bullet)(S)\to (({D}_{n+1}^{\smash{\square}}I)X)(S)$ for $S=\{j_0<j_1<\cdots<j_r\}\subset\{0,\ldots,n\}$. 
 The only difference between the domain and codomain is that in $(({D}_{n+1}^{\smash{\square}}I)X)(S)$, all $n+2$ applications of $c$ are present, whereas in $(h_n^*\calX^\bullet)(S)$, only $r+2$ appear. The map is then
 \[\psi^{n-j_r}KQ\psi^{j_r-j_{r-1}-1}KQ\psi^{j_{r-1}-j_{r-2}-1}KQ\cdots KQ\psi^{j_{1}-j_0-1}KQ\psi^{j_0}X\]
 which is to say that we apply the iterated diagonal the appropriate number of times in each $c$ appearing in the domain. As $\psi$ is coassociative, this definition is unambiguous, and the resulting maps assemble to a weak equivalence of $(n+1)$-cubes. 
-%For example, when $n=2$, we have defined $\dupdown{2}{c}X$ to be the homotopy total fiber of the 2-cube
-%\[\xymatrix@R=4mm{
-%cccX\ar[r]
-%\ar[d]
-%&%r1c1
-%cKQccX\ar[d]
-%\\%r1c2
-%ccKQcX\ar[r]
-%&%r2c1
-%cKQcKQcX%r2c2
-%}\]
-%which receives a weak equivalence from the 2-cube
-%\[\xymatrix@R=4mm{
-%cX\ar[r]
-%\ar[d]
-%&%r1c1
-%cKQcX\ar[d]
-%\\%r1c2
-%cKQcX\ar[r]
-%&%r2c1
-%cKQcKQcX%r2c2
-%}\]
-%which defines the homotopy total fiber of $\textup{hototfib}(h_1^*\calX^\bullet)\sim \hofib(cX\to\textup{Tot}_1(\calX^\bullet))$. The weak equivalence of cubes is given by applying the diagonal map $c\to cc$ as appropriate. The final result will commute, even for large $n$, due to the coassociativity of the diagonal.
 \end{proof}
-%\begin{shaded}\tiny
-%\begin{itemise}
-%\setlength{\parindent}{.25in}
-%\item The spectral sequence may be defined to be either the spectral sequence of the bicomplex or the spectral sequence of the Tot tower, thanks to \cite[Lemma 2.2]{BousfieldHSSCS.pdf}.
-%\item It converges to the totalization of the resolution, which we make the definition of $X\hat{\ }$.
-%\end{itemise}
-%\end{shaded}
 
 \section{Connectivity estimates in the Adams tower}
 \label{sec:connectivityAnalysis}
@@ -330,7 +474,7 @@ We wish to prove the following connectivity result for the Adams tower:
 \begin{prop}\label{convergenceProp}
 For integers $t\geq2$ and $q\geq0$, the map $\pi_q(\dupdown{2t+q-1}{c}X)\to\pi_q(\dupdown{t}{c}X)$ is zero.
 \end{prop}
-\noindent We defer the the proof until the end of this section. Note that proposition \ref{towerIdentification} and \ref{convergenceProp} together imply the completeness theorem:
+\noindent We defer the proof until the end of this section. Note that proposition \ref{towerIdentification} and \ref{convergenceProp} together imply the completeness theorem:
 \begin{proof}[Proof of completeness theorem]
 The fiber sequences $\dupdown{n+1}{c}X\to cX\to \textup{Tot}_n\calX^\bullet$ fit together into a tower of fiber sequences. Taking homotopy limits, one obtains a fiber sequence
 \[\holim (\dupdown{n}{c}X)\to cX\to X\hat{\ }.\]
@@ -377,7 +521,7 @@ F(fX),\quad %
 :=
 \hofib((D_{\smash{s-1}}^{\smash{f}}F)(fX)\to (D_{\smash{s-1}}^{\smash{f}}F)(KQfX)).
 \end{alignat*}
-These functors are natural in $f$, so that a morphism in $\mathsf{CR(s\calC)}$ induces a weak equivalence of towers. Our proposed zig-zag of towers is: %Now there is a zig-zag in $\mathsf{CR(s\calC)}$ from the SOA functor $c$ to the bar construction $b$, as both receive a map from the cofibrant replacement $b\circ c$. Thus we need only produce a zig-zag between the towers $\{(D_{\smash{s}}^{\smash{b}}I)X\}$ and $\{(\caldup{s}I)X\}$
+These functors are natural in $f$, so that a morphism in $\mathsf{CR(s\calC)}$ induces a weak equivalence of towers. Our proposed zig-zag of towers is: 
 \[D_{\smash{s}}= D_{\smash{s}}^{\smash{c}}I\overset{}{\from}D_{\smash{s}}^{\smash{b\circ c}}\!I\overset{}{\to}D_{\smash{s}}^{\smash{b}}I\overset{\gamma_s}{\from}\caldup{s}b\overset{\caldup{s}\epsilon}{\to}\caldup{s}I=\caldup{s}\]
 The maps with domain $D_{\smash{s}}^{\smash{b\circ c}}I$ are induced by the maps $\epsilon c:b\circ c\to c$ and $b\epsilon:b\circ c\to b$ and are evidently natural weak equivalences of towers. The map $\gamma_0:(\caldup{0}b)X\to (D_{\smash{0}}^{\smash{b}}I)X$ is the identity of $bX$, and the map $\caldup{0}\epsilon:(\caldup{0}b)X\to (D_{\smash{0}}^{\smash{b}}I)X$ is $\epsilon:bX\to X$. Thereafter, $\gamma_s$ and $\caldup{s}\epsilon$ are defined recursively:
 \[\qquad \quad \xymatrix@R=4mm{
@@ -390,9 +534,6 @@ The maps with domain $D_{\smash{s}}^{\smash{b\circ c}}I$ are induced by the maps
 \makebox[0cm][r]{$(D_{\smash{s+1}}^{\smash{b}})X:=\,$}\makebox[5cm][l]{$\,\hofib((D_{\smash{s}}^{\smash{b}}I)(bX)\to (D_{\smash{s}}^{\smash{b}}I)(KQbX))$}%r3c1
 }\]
 \noindent Lemma \ref{towerWithPowers} shows that the kernels taken are actually kernels of surjective maps, and by induction on $s$, the maps $\gamma_s$ and $\caldup{s}\epsilon$ are weak equivalences.
-% The base case is trivial, and for $s\geq0$, the maps are defined recursively as follows:
-%
-%\noindent where the kernels taken are actually kernels of surjective maps, by lemma \ref{towerWithPowers}. Thus $m_2$ is an equivalence. Assuming the inductive hypothesis, the 5-lemma confirms that $m_1$ is an equivalence, and $m_3$ is an equivalence as $\hofib$ is homotopical.
 \end{proof}
 The connectivity result will rely on the observation that any element in the $s^\textup{th}$ level of the modified tower maps down to an $(s+1)$-fold product in $X$. In order to formalise this, let $P^s:s\calC\to s\calC$ be the ``$s^\textup{th}$ power'' functor, the prolongation of the endofunctor $Y\mapsto Y^s$ of $\calC$, where $Y^s=\textup{im}(\textup{mult}:Y^{\otimes s}\to Y)$. Then we have:
 \begin{lem}\label{towerWithPowers}
@@ -455,20 +596,8 @@ We will prove this by induction on $t$. When $t=1$:
 so we must show that $P^s(bA)$ is $(s-1)$-connected. For this we use a truncation of Quillen's fundamental spectral sequence, as presented in \cite[Thm 6.2]{MR1089001}: the filtration
 \[P^s(bA)\supset P^{s+1}(bA)\supset P^{s+2}(bA)\supset\cdots \]
 of $P^s(bA)$ yields a convergent spectral sequence  $E^0_{p,q}\implies \pi_q(P^s(ba))$, with:
-%\[E^0_{p,q}=\begin{cases}
-%N_q\bigl(P^{p}(bA)/P^{p+1}(bA)\bigr),&\textup{if }{p\geq s};\\
-%0,&\textup{o.w.}
-%%\\,&\textup{if }
-%\end{cases}\]
 \[E^0_{p,q}=N_q\bigl(P^{p}(bA)/P^{p+1}(bA)\bigr)\textup{ if $p\geq s$, and }E^0_{p,q}=0\textup{ if $p<s$.}\]
-%N_q\bigl(\coker(P^{p+1}(bA)\to P^{p}(bA))\bigr)\cong N_q\bigl((QbA)^{\otimes (s+p)}_{\Sigma_{s+p}}\bigr).\]
 Examination of the structure of $bA$ reveals that $P^{p}(bA)/P^{p+1}(bA)\cong (QbA)^{\otimes p}_{\Sigma_p}$, and moreover, $QbA$ is a connected simplicial vector space, as $\pi_0(QbA)=Q(\pi_0bA)=Q(0)=0$. The $t=1$ case now follows from \cite[Satz 12.1]{DoldPuppeSuspension.pdf}: if $V$ is a connected simplicial vector space then $V^{\otimes p}_{\Sigma_p}$ is $(p-1)$-connected. 
-
-%
-%
-%\[E^1_{p,q}= \pi_q\bigl((QbA)^{\otimes (s+p)}_{\Sigma_{s+p}}\bigr)\implies \pi_q(P^s(bA)).\]
-%The simplicial vector space $QbA$ is connected, as $\pi_0(QbA)=Q(\pi_0bA)=Q(0)=0$. The $t=1$ case now follows from \cite[Satz 12.1]{DoldPuppeSuspension.pdf}: if $V$ is a connected simplicial vector space then $V^{\otimes n}_{\Sigma_n}$ is $(n-1)$-connected. 
-%%(Bousfield? Obvious? Whatever.) \textbf{You know the proof. You only need to do it for spheres, and then you end up getting $k\otimes ((S^1)^{\wedge n}_{\Sigma_n})$, which is the homology of something that's not too bad.}
 
 Now let $t\geq2$ and suppose by induction that $(\caldup{t-1}P^{s})(B)$ is $(s-(t-1))$-connected for any connected $B$ and any $s\geq2$. Then by lemma \ref{towerWithPowers}, there's a short exact sequence:
 \[\xymatrix{
@@ -491,41 +620,12 @@ We may reindex the twisting lemma as follows: the maps
 are homotopic whenever $s,t\geq1$. Now $\caldup{s+t}X$ is constructed as the subalgebra
 \[\caldup{s+t}X:= \bigcap_{i=1}^{s+t}\ker\!\left(b^{s+t-i}\eta b^{i}:b^{s+t}X\to b^{s+t-i}KQb^{i}X\right)\]
 of the iterated bar construction $b^{s+t}X$, and for $0\leq i<s+t$, $\caldup{i}\delta$ is the restriction of the map $b^i\epsilon b^{s+t-i-1}:b^{s+t}X\to b^{s+t-1}X$.
-%
-% there are commuting squares
-%\[\xymatrix@R=7mm{
-%b^{s+t}X
-%\ar[r]_-{b^s\epsilon b^{t-1}}
-%&%r1c1
-%b^{s+t-1}X\\%r1c2
-%\caldup{s+t}X
-%\ar[r]^-{\caldup{s}\delta}
-%\ar[u]
-%&%r2c1
-%\caldup{s+t-1}X
-%\ar[u]
-%%r2c2
-%}\raisebox{-6mm}{\textup{\quad and\quad }}
-%\xymatrix@R=7mm{
-%b^{s+t}X
-%\ar[r]_-{b^{s-1}\epsilon b^{t}}
-%&%r1c1
-%b^{s+t-1}X\\%r1c2
-%\caldup{s+t}X
-%\ar[r]^-{\caldup{s-1}\delta}
-%\ar[u]
-%&%r2c1
-%\caldup{s+t-1}X
-%\ar[u]
-%%r2c2
-%}\]
-Proposition \ref{IteratedBarConstructionHomotopy} gives an explicit simplicial homotopy between the maps $b^s\epsilon b^{t-1}$ and $b^{s-1}\epsilon b^{t}$. Moreover, the naturality of the construction of proposition \ref{IteratedBarConstructionHomotopy} implies that this homotopy does indeed restrict to a homotopy of maps $\caldup{s+t}X\to \caldup{s+t-1}X$.%, and to simply note that the homotopy restricts to a homotopy between $\caldup{s}\delta$ and $\caldup{s-1}\delta$. Indeed, the homotopy between $b^s\epsilon b^{t-1}$ and $b^{s-1}\epsilon b^t$ is provided by proposition \ref{IteratedBarConstructionHomotopy}, and the naturality of its construction implies that it does indeed restrict as desired. 
+Proposition \ref{IteratedBarConstructionHomotopy} gives an explicit simplicial homotopy between the maps $b^s\epsilon b^{t-1}$ and $b^{s-1}\epsilon b^{t}$. Moreover, the naturality of the construction of proposition \ref{IteratedBarConstructionHomotopy} implies that this homotopy does indeed restrict to a homotopy of maps $\caldup{s+t}X\to \caldup{s+t-1}X$.
 \end{proof}
 
 
 Now that we have the twisting lemma, Proposition \ref{convergenceProp} follows:
 \begin{proof}[Proof of Proposition \ref{convergenceProp}]
-%The first claim is \ref{towerIsHomotopical}. 
 By proposition \ref{prop:modifiedAdamsTower}, it is enough to prove that $\pi_q(\caldup{2t+q-1}X)\to\pi_q(\caldup{t}X)$ is zero.
 Apply $\caldup{t}\DASH$ to the diagram of functors constructed in \ref{towerWithPowers} and apply the result to $X$ to obtain a commuting diagram of functors
 \[\xymatrix@R=4mm{
@@ -616,23 +716,6 @@ The \emph{simplicial bar construction} is the cofibrant replacement functor $(b,
 \[\trip{d}{i,q}{bX}:=[\frakd_{i,q}]\trip{d}{i,q}{X}.\]
 The augmentation $\epsilon:b\to I$ is defined on level $q$ by 
 \[\epsilon_q=\frakd_{0,0}\frakd_{0,1}\cdots \frakd_{0,q}:T^{q+1}\to I\]
-%\begin{prop}\label{IteratedBarConstructionHomotopy}
-%For any integers $s,t\geq1$, there is a simplicial homotopy $b^{s-1}\epsilon_{(b^{t}X)}\simeq b^{s}\epsilon_{(b^{t-1}X)}$ of maps $b^{s+t}X\to b^{s+t-1}X$, natural in $X\in s\algCat$, such that whenever $0\leq i\leq s-1$ or $1\leq k<t$ there are commuting squares
-%\[\xymatrix@R=4mm@C=15mm{
-%(b^iKQb^{s+t-i}X)_q\ar@{..>}[d]
-%&%r1c1
-%(b^{s+t}X)_q\ar[d]^-{h_{jq}}
-%\ar[l]_-{b^i\eta b^{s+t-i}}
-%\ar[r]^-{b^{s+t-k}\eta b^{k}}
-%&%r1c2
-%(b^{s+t-k}KQb^kX)_q\ar@{..>}[d]\\%r1c3
-%(b^iKQb^{s+t-i}X)_{q+1}&%r2c1
-%(b^{s+t-1}X)_{q+1}
-%\ar[l]_-{b^i\eta b^{s+t-1-i}}
-%\ar[r]^-{b^{s+t-1-k}\eta b^{k}}&%r2c2
-%(b^{s+t-1-k}KQb^kX)_{q+1}%r2c3
-%}\]
-%\end{prop}
 We can now construct the simplicial homotopy needed for the twisting lemma, \ref{DsDt=Dt+s}.
 \begin{prop}\label{IteratedBarConstructionHomotopy}
 The natural transformations $\epsilon_b$ and $b\epsilon$ from $b^2:s\calA\to s\calA$ to $b:s\calA\to s\calA$ are naturally simplicially homotopic.
@@ -654,7 +737,7 @@ We first check that these maps satisfy the defining identities for the notion of
 {\renewcommand{\circ}{\relax}
 \begin{enumerate}\squishlist
 \setlength{\parindent}{.25in}
-\item We must check that $\trip{d}{i,q+1}{L}\circ \trip{h}{j,q}{}=\trip{h}{j-1,q-1}{}\circ \trip{d}{i,q}{K}$ whenever $0\leq i<j\leq q$. Equivalently:
+\item We must check that $\trip{d}{i,q+1}{L}\circ \trip{h}{j,q}{}=\trip{h}{j-1,q-1}{}\circ \trip{d}{i,q}{K}$ whenever $0\leq i<j\leq q$, i.e.:
 \begin{enumerate}\squishlist
 \setlength{\parindent}{.25in}
 \item[({\makebox[.51em][c]{a}})] $\trip{d}{i,q+1}{X}\circ \trip{s}{j,q}{X}=\trip{s}{j-1,q-1}{X}\circ \trip{d}{i,q}{X}$,\textup{ and}%$\trip{\frakd}{i,q+1}{}\circ \trip{\fraks}{j,q}{}=\trip{\fraks}{j-1,q-1}{}\circ \trip{\frakd}{i,q}{}$
@@ -664,7 +747,7 @@ $\frakd_{i,q+1}\circ
 \frakd_{j,q+1}\circ\cdots \circ\frakd_{j,2q-1}\circ
 \frakd_{q+i,2q}\circ\frakd_{i,2q+1}$.
 \end{enumerate}
-\item We must check that $\trip{d}{j+1,q+1}{L}\circ \trip{h}{j,q}{}=\trip{d}{j+1,q+1}{L}\circ \trip{h}{j+1,q}{}$ whenever $0\leq j\leq q-1$. Equivalently:
+\item We must check that $\trip{d}{j+1,q+1}{L}\circ \trip{h}{j,q}{}=\trip{d}{j+1,q+1}{L}\circ \trip{h}{j+1,q}{}$ whenever $0\leq j\leq q-1$, i.e.:
 \begin{enumerate}\squishlist
 \setlength{\parindent}{.25in}
 \item[({\makebox[.51em][c]{a}})] $\trip{d}{j+1,q+1}{X}\circ \trip{s}{j,q}{X}=\trip{d}{j+1,q+1}{X}\circ \trip{s}{j+1,q}{X}$,\textup{ and}%$\trip{\frakd}{j+1,q+1}{}\circ \trip{\fraks}{j,q}{}=\trip{\frakd}{j+1,q+1}{}\circ \trip{\fraks}{j+1,q}{}$
@@ -674,7 +757,7 @@ $\frakd_{j+1,q+1}\circ
 \frakd_{j+1,q+1}\circ
 \frakd_{j+2,q+2}\circ\cdots \circ\frakd_{j+2,2q+1}$.
 \end{enumerate}
-\item We must check that $\trip{d}{i,q+1}{L}\circ \trip{h}{j,q}{}=\trip{h}{j,q-1}{}\circ \trip{d}{i-1,q}{K}$ whenever $0\leq j<i-1\leq q$. Equivalently:
+\item We must check that $\trip{d}{i,q+1}{L}\circ \trip{h}{j,q}{}=\trip{h}{j,q-1}{}\circ \trip{d}{i-1,q}{K}$ whenever $0\leq j<i-1\leq q$, i.e.:
 \begin{enumerate}\squishlist
 \setlength{\parindent}{.25in}
 \item[({\makebox[.51em][c]{a}})] $\trip{d}{i,q+1}{X}\circ \trip{s}{j,q}{X}=\trip{s}{j,q-1}{X}\circ \trip{d}{i-1,q}{X}$,\textup{ and}%$\trip{\frakd}{i,q+1}{}\circ \trip{\fraks}{j,q}{}=\trip{\fraks}{j,q-1}{}\circ \trip{\frakd}{i-1,q}{}$
@@ -684,7 +767,7 @@ $\frakd_{i,q+1}\circ
 \frakd_{j+1,q+1}\circ\cdots \circ\frakd_{j+1,2q-1}\circ
 \frakd_{q+i-1,2q}\circ\frakd_{i-1,2q+1}$.
 \end{enumerate}
-\item We must check that $\trip{s}{i,q+1}{L}\circ \trip{h}{j,q}{}=\trip{h}{j+1,q+1}{}\circ \trip{s}{i,q}{K}$ whenever $0\leq i\leq j\leq q$. Equivalently:
+\item We must check that $\trip{s}{i,q+1}{L}\circ \trip{h}{j,q}{}=\trip{h}{j+1,q+1}{}\circ \trip{s}{i,q}{K}$ whenever $0\leq i\leq j\leq q$, i.e.:
 \begin{enumerate}\squishlist
 \setlength{\parindent}{.25in}
 \item[({\makebox[.51em][c]{a}})] $\trip{s}{i,q+1}{X}\circ \trip{s}{j,q}{X}=\trip{s}{j+1,q+1}{X}\circ \trip{s}{i,q}{X}$,\textup{ and}%$\trip{\fraks}{i,q+1}{}\circ \trip{\fraks}{j,q}{}=\trip{\fraks}{j+1,q+1}{}\circ \trip{\fraks}{i,q}{}$
@@ -694,7 +777,7 @@ $\fraks_{i,q+1}\circ
 \frakd_{j+2,q+3}\circ\cdots \circ\frakd_{j+2,2q+3}\circ
 \fraks_{q+i+2,2q+2}\circ\fraks_{i,2q+1}$.
 \end{enumerate}
-\item We must check that $\trip{s}{i,q+1}{L}\circ \trip{h}{j,q}{}=\trip{h}{j,q+1}{}\circ \trip{s}{i-1,q}{K}$ whenever $0\leq j<i\leq q+1$. Equivalently:
+\item We must check that $\trip{s}{i,q+1}{L}\circ \trip{h}{j,q}{}=\trip{h}{j,q+1}{}\circ \trip{s}{i-1,q}{K}$ whenever $0\leq j<i\leq q+1$, i.e.:
 \begin{enumerate}\squishlist
 \setlength{\parindent}{.25in}
 \item[({\makebox[.51em][c]{a}})] $\trip{s}{i,q+1}{X}\circ \trip{s}{j,q}{X}=\trip{s}{j,q+1}{X}\circ \trip{s}{i-1,q}{X}$,\textup{ and}%$\trip{\fraks}{i,q++1}{}\circ \trip{\fraks}{j,q}{}=\trip{\fraks}{j,q+1}{}\circ \trip{\fraks}{i-1,q}{}$
