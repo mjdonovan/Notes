@@ -1,0 +1,336 @@
+% !TEX root = z_output/adams_operations.tex
+\documentclass[11pt]{amsart}
+\usepackage{amsmath,amsthm,amssymb}
+\usepackage{eucal}
+\usepackage{mathrsfs,nicefrac}
+\usepackage{amssymb}
+\usepackage[all]{xy}
+\usepackage{cancel}
+\usepackage{color}
+\usepackage{enumerate}
+
+\usepackage[bookmarks=false,pdftex,pdfborder={0 0 0 [1 1]}]{hyperref}
+
+\headheight=8pt
+\topmargin=0pt
+\textheight=610pt
+\textwidth=432pt
+\oddsidemargin=18pt
+\evensidemargin=18pt
+\footskip=25pt
+
+
+%>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+%<<<  Theorem Environments  <<<
+%>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+\theoremstyle{plain}
+\newtheorem{thm}{Theorem}[section]
+\newtheorem*{thm*}{Theorem}
+\newtheorem{lem}[thm]{Lemma}
+\newtheorem*{lem*}{Lemma}
+\newtheorem{prop}[thm]{Proposition}
+\newtheorem*{prop*}{Proposition}
+\newtheorem{cor}[thm]{Corollary}
+\newtheorem*{cor*}{Corollary}
+\newtheorem{defprop}[thm]{Definition-Proposition}
+\newtheorem*{punchline}{Punchline}
+\newtheorem{conjecture}{Conjecture}
+\newtheorem*{conjecture*}{Conjecture}
+\newtheorem*{claim}{Claim}
+
+\theoremstyle{definition}
+\newtheorem{defn}{Definition}[section]
+\newtheorem*{defn*}{Definition}
+
+
+%>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+%<<<       Operators        <<<
+%>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+\DeclareMathOperator{\ad}{\textbf{ad}}
+\DeclareMathOperator{\coker}{coker}
+\renewcommand{\ker}{\textup{ker}\,}
+\DeclareMathOperator{\End}{End}
+\DeclareMathOperator{\Aut}{Aut}
+\DeclareMathOperator{\Hom}{Hom}
+\DeclareMathOperator{\Maps}{Maps}
+\DeclareMathOperator{\Mor}{Mor}
+\DeclareMathOperator{\Gal}{Gal}
+\DeclareMathOperator{\Ext}{Ext}
+\DeclareMathOperator{\Tor}{Tor}
+\DeclareMathOperator{\Cotor}{Cotor}
+\DeclareMathOperator{\Prim}{Prim}
+\DeclareMathOperator{\Tot}{Tot}
+\DeclareMathOperator{\Map}{Map}
+\DeclareMathOperator{\Der}{Der}
+\DeclareMathOperator{\Rad}{Rad}
+\DeclareMathOperator{\rank}{rank}
+\DeclareMathOperator{\ArfInvariant}{Arf}
+\DeclareMathOperator{\KervaireInvariant}{Ker}
+\DeclareMathOperator{\im}{im}
+\DeclareMathOperator{\coim}{coim}
+\DeclareMathOperator{\trace}{tr}
+\DeclareMathOperator{\supp}{supp}
+\DeclareMathOperator{\ann}{ann}
+\DeclareMathOperator{\spec}{Spec}
+\DeclareMathOperator{\SPEC}{\textbf{Spec}}
+\DeclareMathOperator{\proj}{Proj}
+\DeclareMathOperator{\PROJ}{\textbf{Proj}}
+\DeclareMathOperator{\fiber}{fib}
+\DeclareMathOperator{\cofiber}{cof}
+\DeclareMathOperator{\cone}{cone}
+\DeclareMathOperator{\skel}{sk}
+\DeclareMathOperator{\coskel}{cosk}
+\DeclareMathOperator{\conn}{conn}
+\DeclareMathOperator*{\colim}{colim}
+\DeclareMathOperator*{\limit}{lim}
+\DeclareMathOperator*{\hocolim}{hocolim}
+\DeclareMathOperator*{\holimit}{holim}
+\DeclareMathOperator*{\holim}{holim}
+\DeclareMathOperator*{\hofib}{hofib}
+\DeclareMathOperator*{\hotfib}{thofib}
+\DeclareMathOperator*{\equaliser}{eq}
+\DeclareMathOperator*{\coequaliser}{coeq}
+\DeclareMathOperator{\ch}{ch}
+\DeclareMathOperator{\Thom}{Th}
+\DeclareMathOperator{\GrthGrp}{GrthGp}
+\DeclareMathOperator{\Sym}{Sym}
+\DeclareMathOperator{\Prob}{\mathbb{P}}
+\DeclareMathOperator{\Exp}{\mathbb{E}}
+\DeclareMathOperator{\GeomMean}{\mathbb{G}}
+\DeclareMathOperator{\Var}{Var}
+\DeclareMathOperator{\Cov}{Cov}
+\DeclareMathOperator{\Sp}{Sp}
+\DeclareMathOperator{\Seq}{Seq}
+\DeclareMathOperator{\Cyl}{Cyl}
+\DeclareMathOperator{\Ev}{Ev}
+\DeclareMathOperator{\sh}{sh}
+\DeclareMathOperator{\intHom}{\underline{Hom}}
+\DeclareMathOperator{\Frac}{frac}
+
+
+%>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+%<<<  Mathematical Symbols  <<<
+%>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+\newcommand{\DASH}{\textup{--}}
+
+%>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+%<<<     Greek Letters      <<<
+%>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+\let\oldphi\phi
+\let\phi\varphi
+\renewcommand{\to}{\longrightarrow}
+\newcommand{\from}{\longleftarrow}
+\newcommand{\eps}{\varepsilon}
+
+%%>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+%%<<<     Environments       <<<
+%%>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+\newcommand{\squishlist}{
+  \setlength{\itemsep}{.5pt}
+  \setlength{\parskip}{0pt}
+  \setlength{\parsep}{0pt}}
+%>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+%<<<     Script Letters     <<<
+%>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+\newcommand{\scrQ}{\mathscr{Q}}
+\newcommand{\scrW}{\mathscr{W}}
+\newcommand{\scrE}{\mathscr{E}}
+\newcommand{\scrR}{\mathscr{R}}
+\newcommand{\scrT}{\mathscr{T}}
+\newcommand{\scrY}{\mathscr{Y}}
+\newcommand{\scrU}{\mathscr{U}}
+\newcommand{\scrI}{\mathscr{I}}
+\newcommand{\scrO}{\mathscr{O}}
+\newcommand{\scrP}{\mathscr{P}}
+\newcommand{\scrA}{\mathscr{A}}
+\newcommand{\scrS}{\mathscr{S}}
+\newcommand{\scrD}{\mathscr{D}}
+\newcommand{\scrF}{\mathscr{F}}
+\newcommand{\scrG}{\mathscr{G}}
+\newcommand{\scrH}{\mathscr{H}}
+\newcommand{\scrJ}{\mathscr{J}}
+\newcommand{\scrK}{\mathscr{K}}
+\newcommand{\scrL}{\mathscr{L}}
+\newcommand{\scrZ}{\mathscr{Z}}
+\newcommand{\scrX}{\mathscr{X}}
+\newcommand{\scrC}{\mathscr{C}}
+\newcommand{\scrV}{\mathscr{V}}
+\newcommand{\scrB}{\mathscr{B}}
+\newcommand{\scrN}{\mathscr{N}}
+\newcommand{\scrM}{\mathscr{M}}
+
+
+\newcommand{\frakq}{\mathfrak{q}}
+\newcommand{\frakw}{\mathfrak{w}}
+\newcommand{\frake}{\mathfrak{e}}
+\newcommand{\frakr}{\mathfrak{r}}
+\newcommand{\frakt}{\mathfrak{t}}
+\newcommand{\fraky}{\mathfrak{y}}
+\newcommand{\fraku}{\mathfrak{u}}
+\newcommand{\fraki}{\mathfrak{i}}
+\newcommand{\frako}{\mathfrak{o}}
+\newcommand{\frakp}{\mathfrak{p}}
+\newcommand{\fraka}{\mathfrak{a}}
+\newcommand{\fraks}{\mathfrak{s}}
+\newcommand{\frakd}{\mathfrak{d}}
+\newcommand{\frakf}{\mathfrak{f}}
+\newcommand{\frakg}{\mathfrak{g}}
+\newcommand{\frakh}{\mathfrak{h}}
+\newcommand{\frakj}{\mathfrak{j}}
+\newcommand{\frakk}{\mathfrak{k}}
+\newcommand{\frakl}{\mathfrak{l}}
+\newcommand{\frakz}{\mathfrak{z}}
+\newcommand{\frakx}{\mathfrak{x}}
+\newcommand{\frakc}{\mathfrak{c}}
+\newcommand{\frakv}{\mathfrak{v}}
+\newcommand{\frakb}{\mathfrak{b}}
+\newcommand{\frakn}{\mathfrak{n}}
+\newcommand{\frakm}{\mathfrak{m}}
+
+%>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+%<<<  Caligraphic Letters   <<<
+%>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+\newcommand{\calQ}{\mathcal{Q}}
+\newcommand{\calW}{\mathcal{W}}
+\newcommand{\calE}{\mathcal{E}}
+\newcommand{\calR}{\mathcal{R}}
+\newcommand{\calT}{\mathcal{T}}
+\newcommand{\calY}{\mathcal{Y}}
+\newcommand{\calU}{\mathcal{U}}
+\newcommand{\calI}{\mathcal{I}}
+\newcommand{\calO}{\mathcal{O}}
+\newcommand{\calP}{\mathcal{P}}
+\newcommand{\calA}{\mathcal{A}}
+\newcommand{\calS}{\mathcal{S}}
+\newcommand{\calD}{\mathcal{D}}
+\newcommand{\calF}{\mathcal{F}}
+\newcommand{\calG}{\mathcal{G}}
+\newcommand{\calH}{\mathcal{H}}
+\newcommand{\calJ}{\mathcal{J}}
+\newcommand{\calK}{\mathcal{K}}
+\newcommand{\calL}{\mathcal{L}}
+\newcommand{\calZ}{\mathcal{Z}}
+\newcommand{\calX}{\mathcal{X}}
+\newcommand{\calC}{\mathcal{C}}
+\newcommand{\calV}{\mathcal{V}}
+\newcommand{\calB}{\mathcal{B}}
+\newcommand{\calN}{\mathcal{N}}
+\newcommand{\calM}{\mathcal{M}}
+
+\newcommand{\calq}{\mathcal{Q}}
+\newcommand{\calw}{\mathcal{W}}
+\newcommand{\cale}{\mathcal{E}}
+\newcommand{\calr}{\mathcal{R}}
+\newcommand{\calt}{\mathcal{T}}
+\newcommand{\caly}{\mathcal{Y}}
+\newcommand{\calu}{\mathcal{U}}
+\newcommand{\cali}{\mathcal{I}}
+\newcommand{\calo}{\mathcal{O}}
+\newcommand{\calp}{\mathcal{P}}
+\newcommand{\cala}{\mathcal{A}}
+\newcommand{\cals}{\mathcal{S}}
+\newcommand{\cald}{\mathcal{D}}
+\newcommand{\calf}{\mathcal{F}}
+\newcommand{\calg}{\mathcal{G}}
+\newcommand{\calh}{\mathcal{H}}
+\newcommand{\calj}{\mathcal{J}}
+\newcommand{\calk}{\mathcal{K}}
+\newcommand{\call}{\mathcal{L}}
+\newcommand{\calz}{\mathcal{Z}}
+\newcommand{\calx}{\mathcal{X}}
+\newcommand{\calc}{\mathcal{C}}
+\newcommand{\calv}{\mathcal{V}}
+\newcommand{\calb}{\mathcal{B}}
+\newcommand{\caln}{\mathcal{N}}
+\newcommand{\calm}{\mathcal{M}}
+
+\usepackage{framed}
+\usepackage[style=numeric,%citestyle=numeric,
+url=false,doi=false,isbn=false,eprint=false]{biblatex}%
+\hypersetup{colorlinks=false,pdfborder={0 0 0}}
+
+
+
+\makeatletter
+\renewcommand{\@seccntformat}[1]{\csname the#1\endcsname.\quad}
+\makeatother
+
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}
+\newtheorem*{completenesstheorem}{Completeness Theorem}
+\newtheorem{twistinglemma}[thm]{Twisting Lemma}
+\renewcommand*{\thetheorem}{\Alph{theorem}}
+\newtheorem{conjectureAlpha}{Conjecture}
+\renewcommand*{\theconjectureAlpha}{\Alph{conjectureAlpha}}
+
+
+
+\newcommand{\NOFULLPAGE}{\relax}
+
+\newcommand{\Sq}{\mathrm{Sq}}
+\newcommand{\Comm}{\calC}
+\newcommand{\F}{\mathbb{F}}
+
+%\bibliography{papers}
+\bibliography{../../Dropbox/logbook/_LOGBOOK/papers}
+
+
+
+
+\title[Operations in the Adams spectral sequence for a simplicial $\F_2$-algebra]{Operations in the Adams spectral sequence for a simplicial $\F_2$-algebra}
+%\author[M.\ Donovan]{Michael Donovan}
+
+%\address{Department of Mathematics \\ Massachusetts Institute of Technology}
+%\email{mdono@math.mit.edu}
+
+
+
+\newcommand{\dupdown}[2]{D_{\smash{#1}}}
+\newcommand{\caldup}[1]{\calD_{\smash{#1}}}
+\newcommand{\caldupdown}[2]{\calD^{\smash{#1}}_{\smash{#2}}}
+
+\begin{document}
+
+
+
+\begin{abstract}
+\end{abstract}
+
+
+\maketitle
+
+
+\section{The cohomology of unstable Lie algebras}
+\subsection{The (co)bar construction}
+\begin{itemize}\squishlist
+\setlength{\parindent}{.25in}
+\item Say what an unstable Lie algebra is.
+\item We don't need to worry about dualization. Why?
+\item Describe the bar construction in terms of trees. Reference \cite{FresseKoszulDuality.pdf} for the origin of this construction. Note however that since the category is not operadic (as top=self), fresse's material doesn't apply immediately. Moreover, even if it did, we'd be obstructed by the observation that in positive characteristic, Fresse's comparison map needn't be an equivalence. Thus, we're just looking at the cotriple complex.
+
+Our purpose for using this tree representation is to use an idea of Priddy, and maybe some ideas of Fresse. Actually, let's use Fresse's treewise tensor module precisely, however, we better replace the levels of the operad with the free object on as many generators.
+\item Use Priddy's compression formula to bring it down to those that are unit in all but one vertex per level, as in Fresse's \S4.6.1. For simplicity of exposition just use connected objects, although Fresse's paper \cite{FresseSimplicialAlgs.pdf} shows how to modify. And dualize the whole bar construction by dualizing in each tensor part. The finiteness holds in various ways.
+\end{itemize}
+\subsection{Operations on cohomology}
+\begin{itemize}\squishlist
+\setlength{\parindent}{.25in}
+\item You can define a map from the elegible part of the cobar construction to itself by simply sticking a $(P^i)^*$ on the back. That preserves cocycles, I guess, and cohomologies, I guess. Call this the $\delta_i$ operation.
+\item Prove that these operations have an Adem relation.
+\item Also, stick a pairing on the complex, by putting things on either side of a bracket. Define a pairing and Steenrod operations by the (shifted) formulae.
+\item Check the Adem relations, Commutativity, and Steen/Comm compatibilities by a comparison with usual Lie cohomology.
+\end{itemize}
+\section{Spectral sequence operations}
+\begin{itemize}\squishlist
+\setlength{\parindent}{.25in}
+\item Stick in the section on the subject! That is the operations $E(X)\to E(X\otimes_{\Sigma_2}X)$.
+\item Next, construct the lifting as in the previous section of prliealgs
+\item Finally, do the proofs in that section, that the operations equal the E2 level operations, in some sensible variance.
+\end{itemize}
+
+
+
+
+\end{document}
+
+
