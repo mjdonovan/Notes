@@ -302,7 +302,35 @@ url=false,doi=false,isbn=false,eprint=false]{biblatex}%
 
 
 \section{The cohomology of unstable Lie algebras}
+An unstable Lie algebra is, for now, a connected object of Goerss' category $\calW$. Actually, we'll write such objects as negatively graded vector spaces $W^{-t}$ (zero if $t\leq0$).
+
+ We're interested in them because the Adams spectral sequence for connected $X$ takes the form
+\[E^2_{-s,t}=\Ext_\calW^s(H^*X,H^*S^t)\implies \pi_{t-s}X.\]
+Define a functor $Q_\calW:\calW\to \calV^1$, and give the adjunction $F:\calV^1\rightleftarrows \calW:U$.
+%Define ${_s}H^{-t}:\calW\to \calV^2$ to be the homology functor for unstable Lie algebras, which is the left derived functors in Quillen's `almost free' sense. It can be calculated as the homotopy groups of $Q_\calW$ applied to a monadic bar construction, or to any almost free simplicial resolution of $\calW$. Define $H_{-s,t}^\calW$ to be the vectorspace dual, the monadic cohomology.
+Define a functor
+\[H^{-s}_t:\calW \to \calV^1_1\]
+by the formula
+\[H^{-s}_t(W)=\Hom(\pi_s(Q_\calW B_{\bullet}W)^{-t},\F_2)\]
+Then the Adams spectral sequence is
+\[E^2_{-s,t}=H_{t}^{-s}(H^*_\calC X)\implies\pi_{t-s}X.\]
+
+
+
+
+
 \subsection{The (co)bar construction}
+Write $B_sW$ for the bar construction on $W\in\calW$:
+\[B_sW=F^{s+1}W.\]
+Then we can represent $QB_sW$ by a level treewise tensor construction in which there are $s$ nontrivial levels. We'll have to keep everything homogeneous, and also keep track of internal degrees. What can go at a vertex is a homogeneous element of the free construction on a bunch of homogeneous generators of the appropriate degree. The constructions at each vertex are graded by quadratic filtration in the free construction, and we'll call a vertex quadratic if it is homogeneous of quadratic filtration 2. Call a tree quadratic if it has all unit vertices in each level except for one, which is quadratic.
+
+Borrowing from Priddy, the monad is Koszul in the sense that you can compress down to the quadratic trees. Of course, it's not that every homotopy class is a product of elements of $H^{-1}_t$, as trees grow in number so much faster than lists.
+Let
+\[C^{-s}_{t}=\Hom(N_s(Q_\calW B_{\bullet}W)^{-t},\F_2).\]
+
+
+
+{\tiny
 \begin{itemize}\squishlist
 \setlength{\parindent}{.25in}
 \item Say what an unstable Lie algebra is.
@@ -310,16 +338,23 @@ url=false,doi=false,isbn=false,eprint=false]{biblatex}%
 \item Describe the bar construction in terms of trees. Reference \cite{FresseKoszulDuality.pdf} for the origin of this construction. Note however that since the category is not operadic (as top=self), fresse's material doesn't apply immediately. Moreover, even if it did, we'd be obstructed by the observation that in positive characteristic, Fresse's comparison map needn't be an equivalence. Thus, we're just looking at the cotriple complex.
 
 Our purpose for using this tree representation is to use an idea of Priddy, and maybe some ideas of Fresse. Actually, let's use Fresse's treewise tensor module precisely, however, we better replace the levels of the operad with the free object on as many generators.
-\item Use Priddy's compression formula to bring it down to those that are unit in all but one vertex per level, as in Fresse's \S4.6.1. For simplicity of exposition just use connected objects, although Fresse's paper \cite{FresseSimplicialAlgs.pdf} shows how to modify. And dualize the whole bar construction by dualizing in each tensor part. The finiteness holds in various ways.
-\end{itemize}
+\item Use Priddy's compression formula to bring it down to those that are unit in all but one vertex per level, as in Fresse's \S4.6.1. For simplicity of exposition just use connected objects, although Fresse's paper \cite{FresseSimplicialAlgs.pdf} shows how to modify. And dualize the whole bar construction by dualizing in each tensor part. The finiteness holds in various ways. Importantly, it holds in each part of a tree.
+\end{itemize}}
 \subsection{Operations on cohomology}
-\begin{itemize}\squishlist
+Putting a $(P^i)*$ on the back is a really easy way to define the $\delta$ operations. Prove that it's well defined. That it satisfies the $\Delta$-Adem relations is very easy. Careful about degrees, bro.
+
+Putting a $([x_1,y_1])^*$ on the back is a little bit more difficult. I guess it gives a commutative pairing 
+\[C_{t_1}^{-s_1}\otimes C_{t_2}^{-s_2}\to C_{t_1+t_2+1}^{-s_1-s_2-1}\]
+which will allow us to define Steenrod operations by the appropriate (shifted!) formula, and of course, a paring. We won't see yet any axioms that this stuff satisfies, but we do see right away that it has the right relationship with the $\delta$-operations (both the squares and the deltas, right?).
+
+At this point, give the proof that uses standard Lie cohomology, to understand the relationships between the squares and the product.
+{\tiny\begin{itemize}\squishlist
 \setlength{\parindent}{.25in}
 \item You can define a map from the elegible part of the cobar construction to itself by simply sticking a $(P^i)^*$ on the back. That preserves cocycles, I guess, and cohomologies, I guess. Call this the $\delta_i$ operation.
 \item Prove that these operations have an Adem relation.
 \item Also, stick a pairing on the complex, by putting things on either side of a bracket. Define a pairing and Steenrod operations by the (shifted) formulae.
 \item Check the Adem relations, Commutativity, and Steen/Comm compatibilities by a comparison with usual Lie cohomology.
-\end{itemize}
+\end{itemize}}
 \section{Spectral sequence operations}
 \begin{itemize}\squishlist
 \setlength{\parindent}{.25in}
@@ -327,6 +362,7 @@ Our purpose for using this tree representation is to use an idea of Priddy, and 
 \item Next, construct the lifting as in the previous section of prliealgs
 \item Finally, do the proofs in that section, that the operations equal the E2 level operations, in some sensible variance.
 \end{itemize}
+\section{Convergence to homotopy operations}
 
 
 
