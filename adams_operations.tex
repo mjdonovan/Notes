@@ -8,6 +8,7 @@
 \usepackage{cancel}
 \usepackage{color}
 \usepackage{enumerate}
+\usepackage{mathtools}%used for mathclap
 
 \usepackage[bookmarks=false,pdftex,pdfborder={0 0 0 [1 1]}]{hyperref}
 
@@ -244,6 +245,8 @@
 \newcommand{\caln}{\mathcal{N}}
 \newcommand{\calm}{\mathcal{M}}
 
+\newcommand{\twist}{\sigma}
+
 \usepackage{framed}
 \usepackage[style=numeric,%citestyle=numeric,
 url=false,doi=false,isbn=false,eprint=false]{biblatex}%
@@ -306,23 +309,20 @@ An unstable Lie algebra is, for now, a connected object of Goerss' category $\ca
 
  We're interested in them because the Adams spectral sequence for connected $X$ takes the form
 \[E^2_{-s,t}=\Ext_\calW^s(H^*X,H^*S^t)\implies \pi_{t-s}X.\]
-Define a functor $Q_\calW:\calW\to \calV^1$, and give the adjunction $F:\calV^1\rightleftarrows \calW:U$.
+Define a functor $Q_\calW:\calW\to \calV^1$, and give the adjunction $U:\calV^1\rightleftarrows \calW$ (this is Goerss' notation).
 %Define ${_s}H^{-t}:\calW\to \calV^2$ to be the homology functor for unstable Lie algebras, which is the left derived functors in Quillen's `almost free' sense. It can be calculated as the homotopy groups of $Q_\calW$ applied to a monadic bar construction, or to any almost free simplicial resolution of $\calW$. Define $H_{-s,t}^\calW$ to be the vectorspace dual, the monadic cohomology.
 Define a functor
 \[H^{-s}_t:\calW \to \calV^1_1\]
 by the formula
-\[H^{-s}_t(W)=\Hom(\pi_s(Q_\calW B_{\bullet}W)^{-t},\F_2)\]
+\[H^{-s}_t(W)=\Hom(\pi_s(Q_\calW B_{\bullet}W)^{-t},\F_2),\]
+where by $B_\bullet W$ we mean the bar construction in $\calW$: $U^{s+1}W$.
 Then the Adams spectral sequence is
 \[E^2_{-s,t}=H_{t}^{-s}(H^*_\calC X)\implies\pi_{t-s}X.\]
 
 
 
-
-
-\subsection{The (co)bar construction}
-Write $B_sW$ for the bar construction on $W\in\calW$:
-\[B_sW=F^{s+1}W.\]
-Then we can represent $QB_sW$ by a level treewise tensor construction in which there are $s$ nontrivial levels. We'll have to keep everything homogeneous, and also keep track of internal degrees. What can go at a vertex is a homogeneous element of the free construction on a bunch of homogeneous generators of the appropriate degree. The constructions at each vertex are graded by quadratic filtration in the free construction, and we'll call a vertex quadratic if it is homogeneous of quadratic filtration 2. Call a tree quadratic if it has all unit vertices in each level except for one, which is quadratic.
+\subsection{The bar construction in $\calW$}
+[We can represent $QB_sW$ by a level treewise tensor construction in which there are $s$ nontrivial levels.] We'll have to keep everything homogeneous, and also keep track of internal degrees. What can go at a vertex is a homogeneous element of the free construction on a bunch of homogeneous generators of the appropriate degree. The constructions at each vertex are graded by quadratic filtration in the free construction, and we'll call a vertex quadratic if it is homogeneous of quadratic filtration 2. Call a tree quadratic if it has all unit vertices in each level except for one, which is quadratic.
 
 Borrowing from Priddy, the monad is Koszul in the sense that you can compress down to the quadratic trees. Of course, it's not that every homotopy class is a product of elements of $H^{-1}_t$, as trees grow in number so much faster than lists.
 Let
@@ -341,13 +341,13 @@ Our purpose for using this tree representation is to use an idea of Priddy, and 
 \item Use Priddy's compression formula to bring it down to those that are unit in all but one vertex per level, as in Fresse's \S4.6.1. For simplicity of exposition just use connected objects, although Fresse's paper \cite{FresseSimplicialAlgs.pdf} shows how to modify. And dualize the whole bar construction by dualizing in each tensor part. The finiteness holds in various ways. Importantly, it holds in each part of a tree.
 \end{itemize}}
 \subsection{Operations on cohomology}
-Putting a $(P^i)*$ on the back is a really easy way to define the $\delta$ operations. Prove that it's well defined. That it satisfies the $\Delta$-Adem relations is very easy. Careful about degrees, bro.
+[Putting a $(P^i)^*$ on the back is a really easy way to define the $\delta$ operations. Prove that it's well defined. That it satisfies the $\Delta$-Adem relations is very easy. Careful about degrees, bro.
 
 Putting a $([x_1,y_1])^*$ on the back is a little bit more difficult. I guess it gives a commutative pairing 
 \[C_{t_1}^{-s_1}\otimes C_{t_2}^{-s_2}\to C_{t_1+t_2+1}^{-s_1-s_2-1}\]
 which will allow us to define Steenrod operations by the appropriate (shifted!) formula, and of course, a paring. We won't see yet any axioms that this stuff satisfies, but we do see right away that it has the right relationship with the $\delta$-operations (both the squares and the deltas, right?).
 
-At this point, give the proof that uses standard Lie cohomology, to understand the relationships between the squares and the product.
+At this point, give the proof that uses standard Lie cohomology, to understand the relationships between the squares and the product.]
 {\tiny\begin{itemize}\squishlist
 \setlength{\parindent}{.25in}
 \item You can define a map from the elegible part of the cobar construction to itself by simply sticking a $(P^i)^*$ on the back. That preserves cocycles, I guess, and cohomologies, I guess. Call this the $\delta_i$ operation.
@@ -355,16 +355,418 @@ At this point, give the proof that uses standard Lie cohomology, to understand t
 \item Also, stick a pairing on the complex, by putting things on either side of a bracket. Define a pairing and Steenrod operations by the (shifted) formulae.
 \item Check the Adem relations, Commutativity, and Steen/Comm compatibilities by a comparison with usual Lie cohomology.
 \end{itemize}}
+
+
+
+\section{Cohomology operations}
+In this section, we'll give the definition of certain operations on the cohomology of an object $W\in\calL$. We will use the standard simplicial bar construction as our simplicial resolution of $W$, writing $B_sW=U^{s+1}W$. Then we are looking for natural operations on $H^{-s}_t(W)$, which is the cohomology of the cochain complex
+\[C^{-s}_{t}=\Hom(N_s(Q_\calW B_{\bullet}W)^{-t},\F_2).\]
+We'll use the identification $Q_UB_{s}W=U^{s}W$.
+
+\subsection{$\delta$ operations}
+Suppose that $V^{*}$ is a non-positively graded vector space. Then we will define natural homomorphisms
+\[\gamma^i:(UV)^{-n-i-1}\to V^{-n}, \textup{ for $2\leq i<n$}.\]
+Indeed, there are natural maps
+\begin{align*}
+P^i:V^{-n}&\to UV^{-n-i-1}, \textup{ for $2\leq i<n$}\\
+[,]:V^{-n_1}\otimes V^{-n_2}&\to UV^{-n_1-n_2-1},
+\end{align*}
+whose images are linearly independent and span the quadratic filtration 2 part of $UV^*$, and this restricted $P^i$ is an injection. We define $\gamma^i$ to be the composite
+\[(UV)^{-n-i-1}\to (UV)^{-n-i-1,(2)}\to \textup{Im}(P^i)\overset{(P^i)^{-1}}{\to}V^{-n}.\]
+
+
+\begin{prop}
+There are natural operations $\delta_i:H^{-s}_tW\to H^{-s-1}_{t+i+1}W$ defined whenever $2\leq i <n$. If $\alpha\in C^{-s}_t$ is a cocycle, $\delta_i\alpha$ is the composite
+\[N_{s+1}(Q_U B_{\bullet}W)^{-t-i-1}\overset{\gamma^i}{\to}N_s(Q_U B_{\bullet}W)^{-t}\overset{\alpha}{\to}\F_2,\]
+after identifying $Q_U B_{s+1}W$ with $U^{s}W$ and $Q_U B_{s}W$ with $U^{s+1}W$. These operations satisfy the Adem relation (see Dwyer) for $\delta$ operations.
+\end{prop}
+\begin{proof}
+One needs to see that $\gamma_i$ is a chain homomorphism respecting the normalisation functor:\[\xymatrix@R=4mm{
+N_{s+1}(Q_U B_{\bullet}W)^{-t-i-1}\ar[r]^-{\gamma^i}
+\ar[d]^-{\partial}&%r1c1
+N_s(Q_U B_{\bullet}W)^{-t}
+\ar[d]^-{\partial}
+\\%r1c2
+N_{s}(Q_U B_{\bullet}W)^{-t-i-1}\ar[r]^-{\gamma^i}&%r2c1
+N_{s-1}(Q_U B_{\bullet}W)^{-t}%r2c2
+}\]
+For this, it is enough to produce commuting squares:
+\[\xymatrix@R=4mm{
+(U^sW)^{-t-i-1}\ar[r]^-{\gamma^i}
+\ar[d]^-{d_0+d_1}&%r1c1
+(U^{s-1}W)^{-t}
+\ar[d]^-{d_0}
+\\%r1c2
+(U^{s-1}W)^{-t-i-1}\ar[r]^-{\gamma^i}&%r2c1
+(U^{s-2}W)^{-t}%r2c2
+}\]
+and for $j\geq1$:
+\[\xymatrix@R=4mm{
+(U^sW)^{-t-i-1}\ar[r]^-{\gamma^i}
+\ar[d]^-{d_{j+1}}&%r1c1
+(U^{s-1}W)^{-t}
+\ar[d]^-{d_j}
+\\%r1c2
+(U^{s-1}W)^{-t-i-1}\ar[r]^-{\gamma^i}&%r2c1
+(U^{s-2}W)^{-t}%r2c2
+}\]
+The later squares are easy, and and for the first one, starting with $f_{(s)}g_{(s-1)}h_{(s-2)}\in U^sW$, we find $\gamma^i d_0=u(f)\gamma^i (g)(h_{(s-2)})$,
+$\gamma^i d_1=\gamma^i (fg)(h_{(s-2)})$, and
+$d_0\gamma^i =\gamma^i (f)u(g)(h_{(s-2)})$. These three quanitities sum to zero, as the single operation $P^i$ is indecomposable. This proves the well-definedness of these operations.
+
+\textbf{To do:} What remains is to check that the Adem relations are satisfied. For this, show that we can compress to the terms in which there is quadratic grading 2 in each construction. Then the Adem relation is the image under the differential of something obvious.
+\end{proof}
+
+\subsection{Products and Steenrod operations}
+
+We need to model
+\[B_sW=U^{s+1}W.\]
+where $U$ is the monad for unstable algebras. Write $P$ for the monad for unstable modules (in which everything is defined, but you set various P to zero). Write $S(\calL)$ for the free bad lie algebra monad (following FresseSimplicialAlgs.pdf and his posets paper, 1.2.16). Then
+\[U=(P\circ S(\calL))/(P^\textup{top}x=[x,x]),\]
+and there is a natural isomorphism $Q_P\circ U=\Lambda(\calL)$. Then $U,P,S(\calL),\Lambda(\calL)$ are monads on graded vector spaces, however, they do carry another grading, the quadratic grading. We can identify
+\[Q_UB_sW=Q_{\Lambda(\calL)}\Lambda(\calL)U^sW\]
+as $Q_{\Lambda(\calL)}$ applied to an almost free simplicial Lie algebra. As such, its homotopy has operations induced by the map
+\[\xi_\calL:\left(Q_{\Lambda(\calL)}\Lambda(\calL)U^{s+1}W
+\overset{Q(d_0\sqcup d_0\psi+\psi d_0)}{\to}
+Q_{\Lambda(\calL)}((\Lambda(\calL)U^sW)^{\wedge2})\overset{j}{\to}
+(Q_{\Lambda(\calL)}\Lambda(\calL)U^sW)^{\otimes2}\right)\]
+where by $d_0$ we mean the map $\Lambda(\calL)(P\circ S(\calL)/\sim)\to \Lambda(\calL)$ arising from killing the $P$ part and identifying all the Lie stuff together. This only sees the Lie stuff, not the part that has any $P$ in it. Thus it could be written as $f(g)\mapsto q^\calL(f)(g)$.
+
+The operations $\Sq^j:H_t^{-s}W\to H_{2t+1}^{-s-j}W$ are defined as follows. Suppose that $\alpha\in C_t^{-s}$ is a cocycle. Then we define $\Sq^j\alpha$ as the composite
+\[N_{s+j}(Q_UB_{\bullet}W)^{-2t-1}\overset{\xi_\calL}{\to}N_{s+j-1}((Q_UB_{\bullet}W)^{\otimes2})^{-2t}\overset{\mathbb{D}_{s-j+1}}{\to}
+((N_*Q_UB_{\bullet}W)^{\otimes2})^{-2t}_{2s}\overset{\alpha\otimes\alpha}{\to}\F_2.
+\]
+Another way to say this, in the style of Goerss (and others), is to define a function
+\[\Theta^j:C_{t}^{-s}\to C_{2t+1}^{-s-j-1},\ \ \Theta^j(\alpha)=\phi^*_\calL\mathbb{D}_{s-j+1}^*(\alpha\otimes\alpha)+ \phi^*_\calL\mathbb{D}_{s-j+2}^*(\alpha\otimes d\alpha).\]
+Then, (like Goerss shows), $d\Theta^j\alpha=\Theta^jd\alpha$, and we can define $\Sq^j$ to be the map on cohomotopy defined by $\Theta^j$. Similarly, we can define a cochain complex homomorphism
+\[\Psi:C_t^{-s}\otimes C_{t'}^{-s'}\to C_{t+t'+1}^{-s-s'-1}\]
+by the formula $\psi^*_\calL\mathbb{D}_0^*$, and use this to define a pairing of cohomology.
+\begin{prop}
+There are natural homomorphisms
+\[\Sq^j:H_t^{-s}W\to H_{2t+1}^{-s-j}W,\]
+zero unless $3\leq j\leq s+1$, and satisfying the Adem relations for the Steenrod algebra. There is a natural nonunital commutative algebra pairing
+\[H_t^{-s}W\otimes H_{t'}^{-s'}W\to H_{t+t'+1}^{-s-s'-1}W.\]
+These satisfy an unstableness condition:
+\[x^2=\Sq^{s+1}x\text{ for }x\in H^{-s}_tW\]
+and the standard Cartan formula:
+\[\Sq^k(xy)=\sum_{i=0}^k(\Sq^ix)(\Sq^{k-i}y).\]
+\end{prop}
+\begin{proof}
+\textbf{To do:} Insert the proof of the Steenrod relations from prliealgs.tex, citing Priddy or really Singer.
+\end{proof}
+\subsection{Relations between the $\delta$ operations and the product and Steenrod operations}
+
+Do a Steenrod or product operation, and then a $\delta_i$, and you're using the composite of this map with
+\[Q_UU^{s+3}W=U^{s+2}W\to U^{s+1}W=Q_UU^{s+2}W\]
+which all boils down to
+\[P^i_{(s+2)}f_{(s+1)}g\mapsto q^{\calL}(f)(g)\]
+Anyway, I have a nullhomotopy of this map, which might be called $((P^i)^{-1}q^{\calL})$, and is stuck on the wall in the upper right corner.
+
 \section{Spectral sequence operations}
-\begin{itemize}\squishlist
+\subsubsection*{Higher cosimplicial Eilenberg-Zilber map}
+Let $\{D^k\}$ be a special cosimplicial Eilenberg-Zilber map \cite[5.2]{turner_opns_and_sseqs_I.pdf}, i.e.\  maps
+\[D^k:(CR\otimes CS)_{-i-k}\to N(R\otimes S)_{-i}\textup{\ \ for $i,k\geq0$},\]
+natural in cosimplicial vectorspaces $R,S$,
+with the properties:
+\begin{itemize}
+\setlength{\parindent}{.25in}
+\item $dD^k+D^kd=D^{k-1}+TD^{k-1}T$ for $k\geq1$;
+\item $D^0$ is a chain homotopy equivalence inducing the identity in dimension zero;
+\item the restriction of $D^k$ to $C_{-i}R\otimes C_{-j}S$ is zero unless $i\geq k$ and $j\geq k$; and
+\item $D^k$ maps $C_{-k}R\otimes C_{-k}S$ identically onto $C_{-k}(R\otimes S)$.
+\end{itemize}
+It is a natural convention to define $D^k=0$ for whenever either $k<0$ or $i<0$, in which case the relation $dD^k+D^kd=D^{k-1}+TD^{k-1}T$ holds for any $k$.
+\subsubsection*{Higher simplicial Eilenberg-Mac Lane map}
+Let $\{\Delta_k\}$ be a higher simplicial Eilenberg-Mac Lane map \cite[\S3]{DwyerHtpyOpsSimpComAlg.pdf}, i.e.\ maps
+\[\Delta_k:(CU\otimes CV)_{i+k}\to N(U\otimes V)_i\textup{\ \ for $0\leq k\leq i$}\]
+such that the identities
+\[\Delta_k+T\Delta_kT=\phi_k+\begin{cases}
+\Delta_{k-1}\partial+\partial\Delta_{k-1},&\textup{if }k\geq1;\\
+\Delta,&\textup{if }k=0.
+%\\,&\textup{if }
+\end{cases}
+\]
+hold on classes of dimension at least $2k$, and:
+\begin{itemize}
+\setlength{\parindent}{.25in}
+\item $\Delta:CU\otimes CV\to N(U\times V)$ is a chain homotopy equivalence inducing the identity in dimension zero; and
+\item $\phi_k$ is the map $(CU\otimes CV)_{i+k}\to N(U\otimes V)_i$ which vanishes except on $U_k\otimes V_k$, where its value is just the projection $U_k\otimes V_k\to N(U\times V)_k$.
+\end{itemize}
+Note that $\phi$ commutes with symmetry isomorphisms, and thus so must $\Delta$.
+
+It is not a natural convention to regard $\Delta_k$ as zero where it is not defined, however, we will perform this abuse shortly for notational convenience. Under this convention we will be able to use the equation
+\[(d\Delta_k+\Delta_kd)z=(\phi_{k+1} +\Delta_{k+1}+T\Delta_{k+1}T)z\]
+whenever $k\geq0$ and the simplicial dimension of $z$ does not equal either of $2k$ and $2k+1$.
+
+\subsubsection*{Resulting maps of mixed simplicial vectorspaces}
+For mixed simplicial vector spaces $X$ and $Y$, write $C(X\otimes_\textup{v}Y)$ for the double complex which in degree $(\fraks,\frakt)$ equals the direct sum $\bigoplus_{t+t'=\frakt}X_t^\fraks\otimes X_{t'}^\fraks$. The following vectorspace maps are given by prolonging $D^k$, $\Delta$, $\Delta_k$ and $\psi_k$, wherever these maps are defined, and by zero elsewhere:
+\begin{align*}
+{D}^k:(CX\otimes CY)_{-\fraks-k,\frakt}&\to C(X\otimes_\textup{v}Y)_{-\fraks,\frakt}&\quad&\textup{(zero unless $k\leq \fraks$)}\\
+{\Delta}:C(X\otimes_\textup{v} Y)_{-\fraks,\frakt}&\to C(X\otimes Y)_{-\fraks,\frakt}\\
+{\Delta}_k:C(X\otimes_\textup{v} Y)_{-\fraks,\frakt+k}&\to C(X\otimes Y)_{-\fraks,\frakt}&\quad&\textup{(zero unless $0\leq k\leq \frakt$)}\\
+{\phi}_k:C(X\otimes_\textup{v} Y)_{-\fraks,\frakt+k}&\to C(X\otimes Y)_{-\fraks,\frakt}&\quad&\textup{(zero unless $0\leq k\leq \frakt$)}\\
+{\rho}:C(X\otimes X)_{-\fraks,\frakt}&\to C(X\otimes_{\Sigma_2} X)_{-\fraks,\frakt}&\quad&\textup{(proj onto coinvariants)}
+\end{align*}
+Also, we'll always write $T$ for symmetry isomorphisms, and write ``$\twist F$'' as shorthand for the function $TFT$. Although this notation is potentially ambiguous, whenever we write $\sigma FG$, for functions $F$ and $G$, we mean $(\sigma F)G$, not $\sigma(FG)$.
+
+\subsubsection*{The context}
+Let $X$ be a mixed simplicial commutative non-unital $\F_2$-algebra. I'd prefer to construct spectral sequence operations externally, as maps $E^r_{-s,t}(X)\to E^r_{?,?}(X\otimes_{\Sigma_2}X)$, which may sometimes be multivalued. I'll also assume that $X$ admits a coaugmentation $X^{-1}_\bullet\to X^\bullet_\bullet$ from a simplicial algebra $X^{-1}_\bullet$, and that this coaugmentation induces an isomorphism on total homology.
+
+\subsection{Products and Steenrod operations}
+We can define products in the spectral sequence using the chain-level formula
+\[x\otimes y\mapsto\rho\Delta D^0(x\otimes y).\]
+As both $\Delta$ and $D^0$ are chain maps preserving filtration, this constructs operations $E^r_{-s,t}(X)\otimes E^r_{-s',t'}(X)\to E^r_{-s-s',t+t'}(X\otimes_{\Sigma_2}X)$ satisfying a Liebnitz formula.
+\begin{prop}
+Suppose that $x\in E^r_{-s,t}(X)$ is a permanent cycle such that $t-s>0$. Then $x\times x$ is eventually hit by a differential. That is, $x\times x\in E^r_{-2s,2t}(X\otimes_{\Sigma_2}X)$ is a permanent cycle which represents zero on $E^\infty$.
+\end{prop}
+\begin{proof}
+Since the spectral sequence converges, $x$ can be written as $x^0+dy$ for $x^0\in NX_{0,n}$ such that $dx^0=0$ and $y\in NX_{n+1}$. Now $x\times x$ is represented by
+\[\rho\Delta D^0(x^0\otimes x^0)+\rho\Delta D^0(dy\otimes x^0+x^0\otimes dy+dy\otimes dy).\]
+Now the first term here vanishes, as
+\[\rho\Delta D^0(x^0\otimes x^0)=\rho(\phi_0 D^0(x^0\otimes x^0)+\Delta_0 D^0(x^0\otimes x^0)+\Delta_0 TD^0(x^0\otimes x^0)),\]
+and $\phi_0D^0(x^0\otimes x^0)=0$ as $n>0$, and $TD^0(x^0\otimes x^0)=D^0(x^0\otimes x^0)$ since $\{D^k\}$ is special. The remaining term may be expressed as the boundary
+\[d(\rho\Delta(D^0(y\otimes dy)+D^1(dy\otimes x))).\qedhere\]
+\end{proof}
+
+In this case, the Steenrod operations are the `surprising' operations, and they are easy to define. We will use the chain-level formula:
+\[\textup{SQ}^{i,s}:x\mapsto \rho\Delta (D^{s-i}(x\otimes x)+D^{s-i+1}(x\otimes dx)).\]
+\begin{prop}
+For any chosen $i,s\geq0$ and $r\geq2$, the chain level operation $\textup{SQ}^{i,s}$ defines a Steenrod operation $\Sq^i:E^r_{-s,t}(X)\to E^r_{-s-i,2t}(X\otimes_{\Sigma_2}X)$, with indeterminacy vanishing by $E^{2r-2}$. For $x\in E^r_{-s,t}(X)$, $\Sq^i(x)$ survives to $E^{2r-1}$, and moreover, $d_{2r-1}(\Sq^ix)=\Sq^{i+r-1}(d_rx)$ modulo indeterminacy. The top operation, $\Sq^s(x)$, is equal to the product-square $x\times x$, and $\Sq^i(x)=0$ for $i>s$. The bottom operation, $\Sq^0(x)$, is zero whenever $t>0$, and $\Sq^1(x)=0$ for all $t$. The squares at $E^2$ equal those arising from the fact that $E^2$ is [intended to be] the cohomotopy of a cosimplicial algebra.
+\end{prop}
+\begin{proof}
+A calculation shows that $d(\textup{SQ}^{i,s}(x))=\rho\Delta D^{s-i+1}(dx\otimes dx)$, so that if $x\in Z^r_{-s,t}$, $\textup{SQ}^{i,s}(x)\in Z^{2r-1}_{-s-i,2t}$. This demonstrates the survival property, along with the formula commuting the $\Sq^i$ with spectral sequence differentials.
+
+To examine the indeterminacy, $x\in E^r_{-s,t}$ is determined up to boundaries of $y\in Z^{r-1}_{-(s-r+1),t-r+2}$, and the following equation%footnote:
+\footnote{Here's how to prove said equation, using analogues of \cite[(1.111),(1.112)]{MR2245560}:
+\begin{alignat*}{2}
+\textup{RHS}
+&=
+d\rho\Delta [D^{s-i-1}(y\otimes y)+D^{s-i}(y\otimes dy)+D^{s-i+1}(dy\otimes x)]%
+\\
+&=
+\rho\Delta [D^{s-i-1}(dy\otimes y+y\otimes dy)+D^{s-i}(dy\otimes dy)+D^{s-i+1}(dy\otimes dx)]%
+\\
+&\ \ \ +
+\rho\Delta [0+D^{s-i-1}(y\otimes dy+dy\otimes y)+D^{s-i}(dy\otimes x+x\otimes dy)]%
+\\
+&=
+\rho\Delta [D^{s-i}(dy\otimes x+x\otimes dy+dy\otimes dy)
++D^{s-i+1}(dy\otimes dx)]=\textup{LHS}%
+\end{alignat*}} shows how this affects $\Sq^{i}$:
+\[\textup{SQ}^{i,s}(x)-\textup{SQ}^{i,s}(x+dy)=d\rho\Delta [D^{s-i-1}(y\otimes y)+D^{s-i}(y\otimes dy)+D^{s-i+1}(dy\otimes x)].\]
+The filtration of this bounding chain is at least $2(s-r+1)-(s-i-1)=(s+i)-(2r-3)$, so that $\Sq^i$ has indeterminacy vanishing by $E^{2r-2}$.
+
+For the statement about the top operation, one calculates
+\[\textup{SQ}^{s,s}(x)-x\times x=\rho D^{1}(x\otimes dx)\in F_{2s+r-1}.\]
+For the statement about $\Sq^0(x)$:
+\[\textup{SQ}^{0,s}(x)-\rho\Delta D^s(x\otimes x)=\rho D^{s+1}(x\otimes dx)\in F_{s+r-1},\]
+so that (using the fact that $\{D^k\}$ is special):
+\begin{alignat*}{2}
+\textup{SQ}^{0,s}(x)
+&\equiv
+\rho\Delta D^s(x^s_t\otimes x^s_t)\pmod{F_{s+r-1}}%
+\\
+&\quad =
+\rho(\phi_0+(1{+}\twist)\Delta_0)(x^s_t\otimes_\textup{v} x^s_t)%
+\quad\text{($x^s_t\otimes_\textup{v} x^s_t\in C(X\otimes_\textup{v}X)_{-s,2t}$)}\\
+&\quad =
+\rho\phi_0(x^s_t\otimes_\textup{v} x^s_t)\in C(X\otimes_{\Sigma_2} X)_{-s,t}.
+\end{alignat*}
+Finally, that $\Sq^1(x)=0$ on $E^2$ follows since it is the image of a $d_1$, namely $d_1(\delta_t(x))$, where $\delta_t(x)$ will be defined shortly.
+\end{proof}
+It may seem that there is an extra nonzero Steenrod operation coming from the chain level operation $\textup{SQ}^{s+1,s}$, but one notes that on $E^r$ it's just the operation $x\mapsto x\times d_rx$.
+%\begin{prop}
+%The chain-level operation $\textup{SQ}^{s+1,s}$ defines an operation $\Sq^{s+1}_\textup{over}:E^r_{-s,t}(X)\to E^r_{-2s-r,2t+r-1}(X\otimes_{\Sigma_2}X)$, with indeterminacy vanishing by $E^{???}$. For $x\in E^r_{-s,t}(X)$, $\Sq^{s+1}_\textup{over}(x)$ survives to $E^{???}$, and moreover, $d_{r}(\Sq^{s+1}_\textup{over}x)=\Sq^{s+r}(d_rx)=d_rx\times d_rx$ modulo indeterminacy.
+%\end{prop}
+%\begin{proof}
+%$\textup{Sq}^{s+1,s}x=\rho\Delta D^0(x\otimes dx)\in F_{2s+r}$ has boundary $\rho\Delta D^0(dx\otimes dx)\in F_{2s+2r}$, so we're getting a $d_r$.
+%\end{proof}
+
+\subsection{The maps $\mathbb{D}_k$}
+
+For any $k$, positive or otherwise, write $\mathbb{D}_k:(C(X)\otimes C(Y))_i\to C(X\otimes Y)_{i-k}$ for the map:
+\[\mathbb{D}_r(z)= \sum_{\alpha-\beta=r}\Delta_\alpha\twist^\alpha D^\beta(z).
+%=\begin{cases}
+%\sum_{j\geq0}\Delta_{j}\twist^{j}D^{j-r},&\textup{if }r\leq0;\\
+%\sum_{j\geq0}\Delta_{j+r}\twist^{j+r}D^{j},&\textup{if }r\geq0.
+%%\\,&\textup{if }
+%\end{cases}
+\]
+\begin{lem}\label{DkIsNiceToFiltration}
+If $x\in F_s$ and $y\in F_{s'}$, then $\mathbb{D}_k(x\cdot y)\in F_s\cap F_{s'}$.
+\end{lem}
+\begin{lem}\label{boundaryVsBBD}
+For all $k$, positive or otherwise, the equation:
+\[d\mathbb{D}_k+\mathbb{D}_kd= (1+\twist)\mathbb{D}_{k+1}+\Delta\sigma D^{-k-1}\]
+holds when applied to an element $z$ of $(CX\otimes CX)_{n}$ with $n\geq 2(k+1)$.
+\end{lem}
+\begin{proof}
+\newcommand{\twolinesum}[2]{\mathop{\sum_{\mathclap{#1}}}_{\mathclap{#2}}}
+\newcommand{\onelinesum}[1]{\sum_{\mathclap{#1}}}
+We'll need to apply the formula for $d\Delta_\alpha+\Delta_\alpha d$ to $\twist^\alpha D^\beta(z)$, for $\alpha$, $\beta$ such that $\alpha-\beta=k$. %, where $z\in (CX\otimes CX)_{-s,t}$ is the element to which we're applying the above equation.
+It holds unless $t=2\alpha+e$, where $e\in\{0,1\}$, in which case $\beta=(t-e)/2-k$. However, $D^\beta(z)$ is zero unless $\beta\leq s/2$, so the formula is valid unless $(t-e)/2-k\leq s/2$. As we've assumed that $n=t-s\geq2(k+1)$, the formula is always valid.
+
+After these observations and under the our conventions on the $\Delta_\alpha$ and $D^\beta$, all but one of the following manipulations is formal, where the sums are meant to be taken over all pairs $(\alpha,\beta)$ of integers with appropriate difference. The only sticking point is that $d\Delta_{-1}+\Delta_{-1}d$ equals $0$, as opposed to $(1{+}\twist)\Delta_0+\phi_0$, and at this point we take extra care:
+%
+% Now $D^\beta(z)$ is zero unless $\beta\leq 2s$, so that the term can be ignored unless $\alpha=\beta+k\leq 2s+k$. As $t\geq 2(2s+k+1)\geq 2(\alpha+1)$, we can apply the rule.
+\begin{alignat*}{2}
+\textup{LHS}(z)
+&=
+\onelinesum{\alpha-\beta=k}\left(d\Delta_\alpha\twist^\alpha D^\beta+\Delta_\alpha\twist^\alpha D^\beta d\right)(z)%
+\\
+&=
+\onelinesum{\alpha-\beta=k}\left((d\Delta_\alpha+
+\Delta_\alpha d)\twist^\alpha D^\beta+
+\Delta_\alpha\twist^\alpha (dD^\beta+
+D^\beta d)\right)(z)%
+\\
+&=
+\onelinesum{\alpha-\beta=k,\ \alpha\geq0}((1{+}\twist)\Delta_{\alpha+1}+\phi_{\alpha+1})\twist^\alpha D^\beta(z)+ \onelinesum{\alpha-\beta=k} \Delta_\alpha\twist^\alpha(1{+}\twist) D^{\beta-1}(z)%
+\\
+&=
+\onelinesum{\alpha-\beta=k+1} \left(((1+\twist)\Delta_{\alpha}+ \phi_{\alpha})\twist\twist^{\alpha} D^\beta+\Delta_\alpha(1+\twist)\twist^\alpha D^{\beta}\right)(z) + {}%
+\\
+&\ \ \ \ \ \ \ \ \ \ \ +
+((1+\twist)\Delta_{0}+\phi_{0})\twist D^{-k-1}(z)
+\end{alignat*}
+Using the identity $(1+\twist)\Delta_{0}+\phi_{0}=\Delta$, and the observations that $(1+\twist)\twist^\alpha F=(1+\twist)F$ and $(1+\twist)F\twist G+F(1+\twist)G=(1+\twist)(FG)$, one sees that $\textup{LHS}(z)$ differs from $\textup{RHS}(z)$ only by the term
+\[\sum_{\mathclap{\alpha-\beta=k+1}} \phi_{\alpha}\sigma^{\alpha-1}D^{\beta}(z)=\sum_{\mathclap{\alpha-\beta=k+1}} \phi_{\alpha}\sigma^{\alpha-1}D^{\alpha-k-1}(z_{2\alpha}^{2\alpha-n})\]
+but the cosimplicial degree $2\alpha-n$ is less than $2(\alpha-k-1)$, and $\{D^k\}$ is special, so that each term $D^{\alpha-k-1}(z_{2\alpha}^{2\alpha-n})$ vanishes.
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\subsection{Spectral sequence operations $\delta_i$}
+We'd be able to define operations $\delta_i:E^r_{-s,t}\to E^r_{-s,t+i}$ for $i$ satisfying $2\leq i<t-(r-2)$, using the chain-level formula (writing $n=t-s=|x|$):
+\[x\mapsto \textup{DEL}_{i}(x):=\rho(\mathbb{D}_{n-i}(x\otimes x)+\mathbb{D}_{n-i-1}(dx\otimes x)).\]
+To proceed, we'll need a formula for the boundary of $\textup{DEL}_i(x)$:
+\begin{prop}
+\label{dvsDEL}
+For $2\leq i\leq t$ and $x\in Z^1_{-s,t}$:
+\[d(\textup{DEL}_i(x))+ \textup{DEL}_i(dx)=\begin{cases}
+\textup{SQ}^{t-i+1,s}(x),&\textup{if }n+1\leq i \leq t;\\
+\rho\Delta D^0(x\otimes dx),&\textup{if }i=n;\\
+0,&\textup{if }2< i\leq n.
+\end{cases}\]
+\end{prop}
+\begin{proof}
+We may apply \ref{boundaryVsBBD} to calculate $d\mathbb{D}_{n-i}(x\otimes x)$ and $d\mathbb{D}_{n-i-1}(dx\otimes x)$, since $|x\otimes x|=2n> 2(n-i+1)$ and $|dx\otimes x|=2n-1> 2(n-i-1+1)$. Thus:
+\begin{alignat*}{2}
+\textup{LHS}
+&=
+\rho d(\mathbb{D}_{n-i}(x\otimes x)+\mathbb{D}_{n-i-1}(dx\otimes x))+\rho\mathbb{D}_{n-i-1}(dx\otimes dx)%
+\\
+&=
+\rho\Bigl\{d\mathbb{D}_{n-i}(x\otimes x)\Bigr\}+\rho\Bigl\{d\mathbb{D}_{n-i-1}(dx\otimes x))+\mathbb{D}_{n-i-1}(d(dx\otimes x))\Bigr\}%
+\\
+&=
+\rho\Bigl\{\mathbb{D}_{n-i}d(x\otimes x)+(1+\twist)\mathbb{D}_{n-i+1}(x\otimes x)+\Delta\sigma D^{i-n-1}(x\otimes x)\Bigr\}
+\\
+&\ \ +\rho\Bigl\{(1+\twist)\mathbb{D}_{n-i}(dx\otimes x)+\Delta\sigma D^{i-n}(dx\otimes x)\Bigr\}
+\end{alignat*}
+Everything here cancels except for $\rho\Delta(D^{i-n-1}(x\otimes x)+D^{i-n}(x\otimes dx))$ which equals $\textup{SQ}^{t-i+1,s}(x)$.
+\end{proof}
+Suppose now that $x\in E^r_{-s,t}$. In light of the above calculation, when $n<i\leq t$, the purpose of $\delta_i(x)$ must be to support a $d_{t-i+1}$-differential to $\Sq^{t-i+1}(x)$. Thus, we would not expect to be able to define $\delta_i(x)$ when $t-i+1<r$; indeed, the following result will construct $\delta_i(x)$ whenever $i<t-(r-2)$. Moreover, the Steenrod operation $\Sq^{t-i+1}(x)$ has indeterminacy vanishing by $E^{2(r-1)}$, and one should expect that whenever $t-i+1<2(r-1)$, $\delta_i(x)$ will be multivalued, but that the set of values for $\delta_i(x)$ will map onto the set of values for $\Sq^{t-i+1}(x)$ under $d_{t-i+1}$.%footnote:
+\footnote{Note that it is not correct to say in general that the indeterminacy of $\delta_i(x)$ vanishes by a certain page, but rather that one expects that the various values for $\delta_i(x)$ will all fail to be permanent cycles together.}
+\begin{prop}
+The chain-level map $\textup{DEL}_i$ produces (potentially multivalued) operations $\delta_i:E^r_{-s,t}\to E^r_{-s,t+i}$ whenever $r\geq1$ and $i<t-(r-2)$. If either $i\leq n+1$ or $i<t-2(r-2)$, the operations are single-valued.
+\end{prop}
+\begin{proof}
+Suppose that $x\in Z^r_{-s,t}$. Then the calculation \ref{dvsDEL} shows that $\textup{DEL}_i(x)\in F_{s+r}$ as long as $i<t-(r-2)$. We must now examine whether this map is well defined on $E^r$, which is to examine the difference $\textup{DEL}_i(x)-\textup{DEL}_i(x+dy)$, for $y\in Z^{r-1}_{-s+r-1,t+r}$. We should only expect to be successful when $i\leq t-2(r-2)$.
+Using the symbol `$\cdot$' to abbreviate `$\otimes$':
+\small
+\begin{alignat*}{4}
+d\mathbb{D}_{n-i-1}(x\cdot dy)&=
+{\mathbb{D}_{n-i-1}(dx\cdot dy)}&&+
+(1{+}\twist)\mathbb{D}_{n-i}(x\cdot dy)&&+
+\Delta\twist D^{-(n-i)}(x\cdot dy)\\
+d\mathbb{D}_{n-i}(dy\cdot y)&=
+\mathbb{D}_{n-i}(dy\cdot dy)&&+
+(1{+}\twist)\mathbb{D}_{n-i+1}(dy\cdot y)&&+
+\Delta\twist D^{-(n-i+1)}(dy\cdot y)\\
+d\mathbb{D}_{n-i+1}(y\cdot y)&=
+\mathbb{D}_{n-i+1}d(y\cdot y)&&+
+{(1{+}\twist)\mathbb{D}_{n-i+2}(y\cdot y)}&&+
+\Delta\twist D^{-(n-i+2)}(y\cdot y)
+\end{alignat*}
+\normalsize
+Now write $H:=\rho(\mathbb{D}_{n-i-1}(x\cdot dy)+\mathbb{D}_{n-i}(dy\cdot y)+\mathbb{D}_{n-i+1}(y\cdot y))$. By \ref{DkIsNiceToFiltration}, $H\in F_{s-r+1}$, and the above calculations show that $H$ has boundary
+\small
+%\[(\textup{DEL}_i(x)-\textup{DEL}_i(x+dy))+\rho\Delta(D^{i-n-2}(y\cdot y)+D^{i-n-1}(y\cdot dy)+D^{i-n}(dy\cdot x))+\rho\mathbb{D}_{n-i-1}(dx\cdot dy).\]
+\[dH=\textup{DEL}_i(x)-\textup{DEL}_i(x+dy)+T_1+T_2+T_3,\]
+\normalsize
+where $\textup{DEL}_i(x)-\textup{DEL}_i(x+dy)\in F_s$ is the quantity of interest, and
+\begin{align*}
+T_1:=\rho\Delta(D^{i-n-2}(y\cdot y))&\begin{cases}
+\in F_{s+(t-i)-2(r-2)},&\textup{if }n+2\leq i\leq t-1;\\
+=0,&\textup{if }i\leq n+1.
+%\\,&\textup{if }
+\end{cases}
+\\
+T_2:=\rho\Delta(D^{i-n-1}(y\cdot dy))&\begin{cases}
+\in F_{s+(t-i)-(r-2)},&\textup{if }n+1\leq i\leq t-1;\\
+=0,&\textup{if }i\leq n.
+%\\,&\textup{if }
+\end{cases}
+\\
+T_3:=\rho\Delta(D^{i-n}(dy\cdot x))&\begin{cases}
+\in F_{s+(t-i)},&\textup{if }n\leq i\leq t-1;\\
+=0,&\textup{if }i\leq n-1.
+%\\,&\textup{if }
+\end{cases}
+\end{align*}
+Now as we have $i<t$, $T_3\in F_{s+1}$, and can be ignored. If $i\leq n$, then $T_1=T_2=0$, and we've shown that the operation is well defined. If $i=n+1$, then $T_2$ may be nonzero, but it lies in $F_{s+1+s-r}$, and as we may take $r\leq s$, the operation is again well defined.
+
+If, however, $i\geq n+2$, then $T_1+T_2$ need not be zero, and can be assured to lie in filtration above $s$ only when $i<t-2(r-2)$.
+%\textbf{The following is an observation that I thought might improve this result, but which doesn't seem to - the idea was to leave out the third row of stuff. Maybe it could still be good if we leave out some number of the summands from the third row, but it sounds pretty dicey. Should try it in order to extend rande of definition. Also should check whether one should expect the operations to be defined all the way up to $i\leq t-r+1$. ``Now suppose that $x\in F_s$, and $y\in F_{s-r+1}$. Let's look at $\mathbb{D}_{n-i+1}(dy\cdot y)$. As $dy$ has filtration $s$, each term $\Delta_{\alpha}\sigma^{\alpha}D^\beta(dy\cdot y)$ with $\beta>s$ vanishes, and each term with $\beta<s$ has filtration higher than $dy$. Thus, modulo $F_{s+1}$, $\mathbb{D}_{n-i+1}(dy\cdot y)\equiv\Delta_{t-i+1}\twist^{t-i+1}D^s((dy)^s_{t}\cdot y^{s}_{t+1})$.''}
+
+To summarise: there is some $H$ in filtration at least that of $y$, such that
+%\[dH=\textup{DEL}_i(x)-\textup{DEL}_i(x+dy)+T, \textup{ where } dT=\textup{SQ}^{i,s}(x)-\textup{SQ}^{i,s}(x+dy)\]
+\begin{alignat*}{2}
+dH
+&=
+\textup{DEL}_i(x)-\textup{DEL}_i(x+dy)+T, \textup{ and }%
+\\
+dT
+&=
+\textup{SQ}^{t-i+1,s}(x)-\textup{SQ}^{t-i+1,s}(x+dy)
+\end{alignat*}
+%%%%%%%%%%%%\usepackage[amsmath,amsthm,thmmarks]{ntheorem}
+So that, in particular, 
+\[d\textup{DEL}_i(x+dy)-\textup{SQ}^{t-i+1,s}(x+dy)=d\textup{DEL}_i(x)-\textup{SQ}^{t-i+1,s}(x)\qedhere\]
+\end{proof}
+
+As $E^1$ is obtained from $E^0$ by taking homology in the simplicial direction, there are $\delta$-operations on $E^1$, i.e.\ $E^1_{-s,t}(X)\to E^1_{-s,t+i}(X\otimes_{\Sigma_2}X)$. They are unstable with respect to internal degree $t$, not with respect to total degree $n$. All of these operations are linear except for the top operation \cite[4.2]{DwyerHtpyOpsSimpComAlg.pdf}, and commute with the differentials in the cosimplicial direction. Thus, we obtain operations $\delta_i^\textup{alg}:E^2_{-s,t}(X)\to E^2_{-s,t+i}(X\otimes_{\Sigma_2}X)$ for $2\leq i<t$.
+\begin{prop}
+On $E^2$, for $i<t$, the spectral sequence operations $\delta_i$ defined by $\textup{DEL}_i$ equal the operations $\delta_i^\textup{alg}$. The same holds on $E^1$ when $2\leq i\leq t$. In particular, the $\delta$-operations on the spectral sequence satisfy the $\delta$-Adem relations.
+\end{prop}
+\begin{proof}
+The operations $\delta_i^\textup{alg}$ are constructed by taking a representative $z\in C_{-s,t}X$ such that $\partial_\textup{sim}z=0$, and forming $\rho\Delta_{t-i}(z\otimes_\textup{v} z)$, where $z\otimes_\textup{v} z$ denotes the element of $C(X\otimes_\textup{v}X)_{-s,2t}$.
+
+Let's calculate the leading term of $\textup{DEL}_{i}(x)$ whenever $2\leq i\leq t$. Write $x=x^s_t+x^{>s}_{>t}$, where $x^s_t\in X^s_t$, and $x^{>s}_{>t}$ lies in filtration $s+1$. Then the leading term will be $\rho\Delta_{t-i}\twist^{t-i}D^s (x^s_t\otimes x^s_t)$. Moreover, as $\{D^k\}$ is \emph{special}, this equals $\rho{\Delta}_{t-i}(x^s_t\otimes_\textup{v} x^s_t)\in C(X\otimes_{\Sigma_2} X)_{-s,t+i}$, where $(x^s_t\otimes_\textup{v} x^s_t)$ denotes the element of $C(X\otimes_\textup{v}X)_{-s,2t}$. Thus `$x^s_t\mapsto \twist^{t-i}D^s(x^s_t\otimes x^s_t)$' implements the assignment `$z\mapsto z\otimes_\textup{v} z$' discussed above, and we're getting a representative for $\delta_i^\textup{alg}(x)$.
+\end{proof}
+
+
+{\tiny\begin{itemize}\squishlist
 \setlength{\parindent}{.25in}
 \item Stick in the section on the subject! That is the operations $E(X)\to E(X\otimes_{\Sigma_2}X)$.
 \item Next, construct the lifting as in the previous section of prliealgs
-\item Finally, do the proofs in that section, that the operations equal the E2 level operations, in some sensible variance.
-\end{itemize}
-\section{Convergence to homotopy operations}
-
-
+\item Do the proofs in that section, that the operations equal the E2 level operations, in some sensible variance.
+\item Finally, note that these operations converge to the homotopy operations on the target.
+\end{itemize}}
 
 
 \end{document}
