@@ -281,7 +281,7 @@ url=false,doi=false,isbn=false,eprint=false]{biblatex}%
 
 
 
-\title[Operations in the Adams spectral sequence for a simplicial $\F_2$-algebra]{Operations in the Adams spectral sequence for a simplicial $\F_2$-algebra}
+\title[Operations in the Bousfield-Kan spectral sequence for a simplicial $\F_2$-algebra]{Operations in the Bousfield-Kan spectral sequence for a simplicial $\F_2$-algebra}
 %\author[M.\ Donovan]{Michael Donovan}
 
 %\address{Department of Mathematics \\ Massachusetts Institute of Technology}
@@ -294,15 +294,7 @@ url=false,doi=false,isbn=false,eprint=false]{biblatex}%
 \newcommand{\caldupdown}[2]{\calD^{\smash{#1}}_{\smash{#2}}}
 
 \begin{document}
-
-
-
-\begin{abstract}
-\end{abstract}
-
-
-\maketitle
-
+%\begin{abstract}\end{abstract}\maketitle
 
 \section{The cohomology of unstable Lie algebras}
 An unstable Lie algebra is, for now, a connected object of Goerss' category $\calW$. Actually, we'll write such objects as negatively graded vector spaces $W^{-t}$ (zero if $t\leq0$).
@@ -463,7 +455,16 @@ which all boils down to
 Anyway, I have a nullhomotopy of this map, which might be called $((P^i)^{-1}q^{\calL})$, and is stuck on the wall in the upper right corner.
 
 \section{Spectral sequence operations}
-\subsubsection*{Higher cosimplicial Eilenberg-Zilber map}
+In this section, we'll give the construction necessary to extend the operations above to the Bousfield-Kan spectral sequence as appropriate. In order to do this, we'll first produce maps between spectral sequences arising from certain cosimplicial simplicial vector spaces. These spectral sequences are those obtained by filtering in the cosimplicial direction. Namely, we produce, for $X$ a cosimplicial simplicial vector space, an external commutative pairing
+\[\times:E^r_{-st}(X)\otimes E^r_{-s't'}(X)\to E^r_{-s-s',t+t'}(S_2X)\]
+and further operations:
+\[\delta_i^\textup{ext}:E^r_{-s,t}(X)\to E^r_{-s,t+i}(S_2X)\textup{\qquad (defined only when $2\leq i<t-(r-2)$)}\]
+\[\Sq^j_\textup{ext}:E^r_{-s,t}(X)\to E^r_{-s-j,2t}(S_2X)\textup{\qquad (defined up to indeterminacy)}\]
+Of course, if $X$ is a mixed simplicial algebra, then postcomposition with the product $X\otimes_{\Sigma_2}X\to X$ produces internal operations on the spectral sequence of $E^r(X)$. The resulting theory lives opposite Bill Dwyer's theory [?] of operations in the spectral sequence of a cosimplicial simplicial coalgebra. The two theories are not equivalent --- although linear dualisation interchanges (finite type) algebras and coalgebras, the symmetry is broken by the choice of filtration direction. For the interested reader, we will summarise the theory of these operations in theorem XYZ.
+
+In the present context, however, the operations of theorem XYZ are all equal to zero on $E^2$, simply because the Bousfield-Kan spectral sequence is derived from a cosimplicial object which is levelwise an Eilenberg-Mac Lane object. However, we will be able to use the external operations in section XYZ, shifting them one filtration higher in order to obtain nontrivial operations at on the Bousfield-Kan $E^2$.
+
+\subsection{Higher cosimplicial Eilenberg-Zilber map}
 Let $\{D^k\}$ be a special cosimplicial Eilenberg-Zilber map \cite[5.2]{turner_opns_and_sseqs_I.pdf}, i.e.\  maps
 \[D^k:(CR\otimes CS)_{-i-k}\to N(R\otimes S)_{-i}\textup{\ \ for $i,k\geq0$},\]
 natural in cosimplicial vectorspaces $R,S$,
@@ -476,7 +477,7 @@ with the properties:
 \item $D^k$ maps $C_{-k}R\otimes C_{-k}S$ identically onto $C_{-k}(R\otimes S)$.
 \end{itemize}
 It is a natural convention to define $D^k=0$ for whenever either $k<0$ or $i<0$, in which case the relation $dD^k+D^kd=D^{k-1}+TD^{k-1}T$ holds for any $k$.
-\subsubsection*{Higher simplicial Eilenberg-Mac Lane map}
+\subsection{Higher simplicial Eilenberg-Mac Lane map}
 Let $\{\Delta_k\}$ be a higher simplicial Eilenberg-Mac Lane map \cite[\S3]{DwyerHtpyOpsSimpComAlg.pdf}, i.e.\ maps
 \[\Delta_k:(CU\otimes CV)_{i+k}\to N(U\otimes V)_i\textup{\ \ for $0\leq k\leq i$}\]
 such that the identities
@@ -513,9 +514,11 @@ Also, we'll always write $T$ for symmetry isomorphisms, and write ``$\twist F$''
 Let $X$ be a mixed simplicial commutative non-unital $\F_2$-algebra. I'd prefer to construct spectral sequence operations externally, as maps $E^r_{-s,t}(X)\to E^r_{?,?}(X\otimes_{\Sigma_2}X)$, which may sometimes be multivalued. I'll also assume that $X$ admits a coaugmentation $X^{-1}_\bullet\to X^\bullet_\bullet$ from a simplicial algebra $X^{-1}_\bullet$, and that this coaugmentation induces an isomorphism on total homology.
 
 \subsection{Products and Steenrod operations}
-We can define products in the spectral sequence using the chain-level formula
+We will define the external product
+\[\times^\textup{ext}:E^r_{-st}(X)\otimes E^r_{-s't'}(X)\to E^r_{-s-s',t+t'}(S_2X)\]
+using the chain-level formula
 \[x\otimes y\mapsto\rho\Delta D^0(x\otimes y).\]
-As both $\Delta$ and $D^0$ are chain maps preserving filtration, this constructs operations $E^r_{-s,t}(X)\otimes E^r_{-s',t'}(X)\to E^r_{-s-s',t+t'}(X\otimes_{\Sigma_2}X)$ satisfying a Liebnitz formula.
+As both $\Delta$ and $D^0$ are chain maps preserving filtration, the operations $\times^\textup{ext}$ satisfy a Liebnitz formula.
 \begin{prop}
 Suppose that $x\in E^r_{-s,t}(X)$ is a permanent cycle such that $t-s>0$. Then $x\times x$ is eventually hit by a differential. That is, $x\times x\in E^r_{-2s,2t}(X\otimes_{\Sigma_2}X)$ is a permanent cycle which represents zero on $E^\infty$.
 \end{prop}
@@ -531,10 +534,10 @@ and $\phi_0D^0(x^0\otimes x^0)=0$ as $n>0$, and $TD^0(x^0\otimes x^0)=D^0(x^0\ot
 In this case, the Steenrod operations are the `surprising' operations, and they are easy to define. We will use the chain-level formula:
 \[\textup{SQ}^{i,s}:x\mapsto \rho\Delta (D^{s-i}(x\otimes x)+D^{s-i+1}(x\otimes dx)).\]
 \begin{prop}
-For any chosen $i,s\geq0$ and $r\geq2$, the chain level operation $\textup{SQ}^{i,s}$ defines a Steenrod operation $\Sq^i:E^r_{-s,t}(X)\to E^r_{-s-i,2t}(X\otimes_{\Sigma_2}X)$, with indeterminacy vanishing by $E^{2r-2}$. For $x\in E^r_{-s,t}(X)$, $\Sq^i(x)$ survives to $E^{2r-1}$, and moreover, $d_{2r-1}(\Sq^ix)=\Sq^{i+r-1}(d_rx)$ modulo indeterminacy. The top operation, $\Sq^s(x)$, is equal to the product-square $x\times x$, and $\Sq^i(x)=0$ for $i>s$. The bottom operation, $\Sq^0(x)$, is zero whenever $t>0$, and $\Sq^1(x)=0$ for all $t$. The squares at $E^2$ equal those arising from the fact that $E^2$ is [intended to be] the cohomotopy of a cosimplicial algebra.
+For any chosen $i,s\geq0$ and $r\geq2$, the chain level operation $\textup{SQ}^{i,s}$ defines a Steenrod operation $\Sq^i_\textup{ext}:E^r_{-s,t}(X)\to E^r_{-s-i,2t}(S_2X)$, with indeterminacy vanishing by $E^{2r-2}$. For $x\in E^r_{-s,t}(X)$, $\Sq^i_\textup{ext}(x)$ survives to $E^{2r-1}$, and moreover, $d_{2r-1}(\Sq^i_\textup{ext}x)=\Sq^{i+r-1}_\textup{ext}(d_rx)$ modulo indeterminacy. The top operation, $\Sq^s_\textup{ext}(x)$, is equal to the product-square $x\times^\textup{ext} x$, and $\Sq^i_\textup{ext}(x)=0$ for $i>s$. The bottom operation, $\Sq^0_\textup{ext}(x)$, is zero whenever $t>0$, and $\Sq^1_\textup{ext}(x)=0$ for all $t$. If $X$ is a mixed simplicial algebra, postcomposition with the product $S_2X\to X$ yields the same squares at $E^2$ as those arising from the fact that $E^2$ is the cohomotopy of a cosimplicial algebra.
 \end{prop}
 \begin{proof}
-A calculation shows that $d(\textup{SQ}^{i,s}(x))=\rho\Delta D^{s-i+1}(dx\otimes dx)$, so that if $x\in Z^r_{-s,t}$, $\textup{SQ}^{i,s}(x)\in Z^{2r-1}_{-s-i,2t}$. This demonstrates the survival property, along with the formula commuting the $\Sq^i$ with spectral sequence differentials.
+A calculation shows that $d(\textup{SQ}^{i,s}(x))=\rho\Delta D^{s-i+1}(dx\otimes dx)$, so that if $x\in Z^r_{-s,t}$, $\textup{SQ}^{i,s}(x)\in Z^{2r-1}_{-s-i,2t}$. This demonstrates the survival property, along with the formula commuting the $\Sq^i_\textup{ext}$ with spectral sequence differentials.
 
 To examine the indeterminacy, $x\in E^r_{-s,t}$ is determined up to boundaries of $y\in Z^{r-1}_{-(s-r+1),t-r+2}$, and the following equation%footnote:
 \footnote{Here's how to prove said equation, using analogues of \cite[(1.111),(1.112)]{MR2245560}:
@@ -552,12 +555,12 @@ d\rho\Delta [D^{s-i-1}(y\otimes y)+D^{s-i}(y\otimes dy)+D^{s-i+1}(dy\otimes x)]%
 &=
 \rho\Delta [D^{s-i}(dy\otimes x+x\otimes dy+dy\otimes dy)
 +D^{s-i+1}(dy\otimes dx)]=\textup{LHS}%
-\end{alignat*}} shows how this affects $\Sq^{i}$:
+\end{alignat*}} shows how this affects $\Sq^{i}_\textup{ext}$:
 \[\textup{SQ}^{i,s}(x)-\textup{SQ}^{i,s}(x+dy)=d\rho\Delta [D^{s-i-1}(y\otimes y)+D^{s-i}(y\otimes dy)+D^{s-i+1}(dy\otimes x)].\]
 The filtration of this bounding chain is at least $2(s-r+1)-(s-i-1)=(s+i)-(2r-3)$, so that $\Sq^i$ has indeterminacy vanishing by $E^{2r-2}$.
 
 For the statement about the top operation, one calculates
-\[\textup{SQ}^{s,s}(x)-x\times x=\rho D^{1}(x\otimes dx)\in F_{2s+r-1}.\]
+\[\textup{SQ}^{s,s}(x)-\rho\Delta D^0(x\otimes x)=\rho D^{1}(x\otimes dx)\in F_{2s+r-1}.\]
 For the statement about $\Sq^0(x)$:
 \[\textup{SQ}^{0,s}(x)-\rho\Delta D^s(x\otimes x)=\rho D^{s+1}(x\otimes dx)\in F_{s+r-1},\]
 so that (using the fact that $\{D^k\}$ is special):
@@ -572,7 +575,7 @@ so that (using the fact that $\{D^k\}$ is special):
 &\quad =
 \rho\phi_0(x^s_t\otimes_\textup{v} x^s_t)\in C(X\otimes_{\Sigma_2} X)_{-s,t}.
 \end{alignat*}
-Finally, that $\Sq^1(x)=0$ on $E^2$ follows since it is the image of a $d_1$, namely $d_1(\delta_t(x))$, where $\delta_t(x)$ will be defined shortly.
+Finally, that $\Sq^1_\textup{ext}(x)=0$ on $E^2$ follows since it is the image of a $d_1$, namely $d_1(\delta_t^\textup{ext}(x))$, where $\delta_t^\textup{ext}(x)$ will be defined shortly.
 \end{proof}
 It may seem that there is an extra nonzero Steenrod operation coming from the chain level operation $\textup{SQ}^{s+1,s}$, but one notes that on $E^r$ it's just the operation $x\mapsto x\times d_rx$.
 %\begin{prop}
