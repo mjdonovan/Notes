@@ -296,6 +296,99 @@ url=false,doi=false,isbn=false,eprint=false]{biblatex}%
 \begin{document}
 %\begin{abstract}\end{abstract}\maketitle
 
+\section{Coalgebras}
+According to Dold [], see also [\url{http://www3.amherst.edu/~mching/Work/homotopy_operations.pdf}, lemma 3.1], and given that the homotopy category of simplicial vector spaces is graded vector spaces, the derived functors of a weak equivalence preserving functor $F:s\calV\to s\calV$ are well defined, and there's a commuting diagram
+\[\xymatrix@R=4mm{
+s\calV\ar[r]^-{QcK}
+\ar[d]^-{\pi}
+&%r1c1
+s\calV\ar[d]^-{\pi}
+\\%r1c2
+n\calV\ar[r]^-{C}
+&%r2c1
+n\calV%r2c2
+}\]
+Now this functor $C$ is naturally a comonad on $n\calV$, with diagonal map $\Delta:C\to CC$ and counit map $\epsilon:C\to1$ induced by the natural transformations $QcK\to QccK\to QcKQcK$ and $QcK$ respectively (that these maps in fact form a comonad is verified by \cite[4.2,4.4]{BlumRiehlResolutions.pdf}). Moreover, the comonad $C$ is coaugmented, via the map $a:1\to C$ induced by the Hurewicz map $\pi_*(V)=\pi_*(cKV)\to\pi_*(QcKV)$, in the sense that $\epsilon\circ a=1$ and $a\circ a=\Delta\circ a$. In particular, the monomorphism $a$ presents $W$ as a subspace of $CW$, and if $H$ is any $C$-coalgebra, we may define the \emph{primitives} in $H$ as the equaliser (of graded vector spaces):
+\[\xymatrix@R=4mm@1{
+\textup{Pr}(H)\ar[r]
+&%r1c1
+H\ar@<.5ex>[r]^-{\textup{coact}}
+\ar@<-.5ex>[r]_-{a}
+&%r1c2
+CH%r1c3
+}.\]
+We will defer the proof of the following proposition:
+\begin{prop}
+For $W$ a graded vector space, the map $a:W\to CW$ is an isomorphism onto the primitives $\textup{Pr}(CW)$ of the cofree $C$-coalgebra $CW$.
+\end{prop}
+Moreover, the Andre-Quillen homology of any (connected) simplicial algebra is a coalgebra over $C$. Indeed, if $A\in s\calC$ is a simplicial algebra, then $H_*A=\pi_*(QcA)$ has $C$-coalgebra map induced by $QcA\to QccA\to QcKQcA$ (and the axioms are checked in the same way). On the homology of a zero-square algebra, the coalgebra map specializes to the diagonal map $C\to CC$.
+\begin{prop}
+The Hurewicz map $\pi_*A\to H_*A$ factors through $\textup{Pr}(H_*A)$, and if $A$ is a simplicial zero-square algebra the resulting map $\pi_*A\to\textup{Pr}(H_*A)$ equals the isomorphism $a:\pi_*A\to\textup{Pr}(C\pi_*A)$.
+\end{prop}
+\begin{proof}
+Represent an element $\alpha\in\pi_nA$ by a map $\alpha:S^n_\calC\to A$. Then, $h(\alpha)$ is the image of the fundamental homology class $\imath\in H_n(S^n_\calC)$ under the map $\alpha_*$. As $\imath$ is primitive, so is $h(\alpha)$.
+\end{proof}
+At this point, we examine the cosimplicial resolution of \cite[4.6]{BlumRiehlResolutions.pdf}:
+\[
+\vcenter{
+\def\labelstyle{\scriptstyle}
+\xymatrix@C=1.5cm@1{
+cX_\bullet\,
+\ar[r]
+&
+\,cKQcX_\bullet\,
+\ar[r];[]
+&
+\,c(KQc)^2X_\bullet\,
+\ar@<-1ex>[l];[]
+\ar@<+1ex>[l];[]
+\ar@<+1ex>[r];[]
+\ar@<-1ex>[r];[]
+&
+\,c(KQc)^3X_\bullet\,\makebox[0cm][l]{\,$\cdots $}
+\ar[l];[]
+\ar@<-2ex>[l];[]
+\ar@<+2ex>[l];[]
+}}\]
+Applying $\pi_*(Q\DASH)$, we obtain exactly the cobar construction of the $C$-coalgebra $H_*X_\bullet$:
+\[
+\vcenter{
+\def\labelstyle{\scriptstyle}
+\xymatrix@C=1.5cm@1{
+HX\,
+\ar[r]
+&
+\,CHX\,
+\ar[r];[]
+&
+\,CCHX\,
+\ar@<-1ex>[l];[]
+\ar@<+1ex>[l];[]
+\ar@<+1ex>[r];[]
+\ar@<-1ex>[r];[]
+&
+\,c(KQc)^3X_\bullet\,\makebox[0cm][l]{\,$\cdots $}
+\ar[l];[]
+\ar@<-2ex>[l];[]
+\ar@<+2ex>[l];[]
+}}\]
+\subsection{The values of the comonad $C$}
+Goerss' Asterisque [] has main result the determination of the target category for Andre-Quillen cohomology. We're interested in homology, although we will occasionally dualize between the two. In any case, he defines a functor $U$ on graded vector spaces, which is the richest monad which acts on cohomology. In fact, $U$ is closely related to the composite of a pair of monads:
+\[U=P\circ S(\calL)/\sim.\]
+Here $P$ is the monad whose algebras are the unstable $P$-coalgebras. That is, positively graded vector spaces with an action of operations $P^i$ which satisfy the Adem relations and unstableness relation (vanish above top or below 2) []. That is, one forms $W\mapsto P\otimes W$, and then takes a quotient according to degrees. Next, $S(\calL)$ is the \emph{bad} Lie algebra monad with shifted grading.
+
+
+
+
+\section*{BREAK}
+
+An unstable Lie coalgebra is a coalgebra over the following comonad on connected graded $\F_2$-vector spaces
+\[C:V_*\mapsto H_*(\prod K(V_n,n)).\]
+Indeed, there is an adjunction
+\[\]
+
+
+
 [State of play after talking to Haynes... Every P-coalgebra is a right P-module, but not the other way around. Thus, it's better to work with comodules. Now the cofree functor had better be
 \[C:V_*\mapsto H_*(\prod K(V_n,n)).\]
 This thing commutes with colimits (in particular the colimit of all connected subobjects with finite homotopy). Moreover, it's dual to the functor $U$, when applied to finite-type $V_*$. Finally, there are natural transformations $V_*\to CV_*$, induced by the magic lifting technique (are they linear?), which probably produce the $\delta$ operations on homotopy, and presumably also there is stuff for the products. Describe the coalgebraic pairing map $\xi_\textup{alg}$, along with $j$, and put them center-stage.]
