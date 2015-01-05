@@ -1,0 +1,364 @@
+% !TEX root = z_output/unstable_Lie_algs.tex
+\documentclass[11pt]{amsart}
+\usepackage{amsmath,amsthm,amssymb}
+\usepackage{eucal}
+\usepackage{mathrsfs,nicefrac}
+\usepackage{amssymb}
+\usepackage[all]{xy}
+\usepackage{cancel}
+\usepackage{color}
+\usepackage{enumerate}
+\usepackage{mathtools}%used for mathclap
+\usepackage{dsfont}%creates \mathds{1}
+
+\usepackage[bookmarks=false,pdftex,pdfborder={0 0 0 [1 1]}]{hyperref}
+
+\headheight=8pt
+\topmargin=0pt
+\textheight=610pt
+\textwidth=432pt
+\oddsidemargin=18pt
+\evensidemargin=18pt
+\footskip=25pt
+
+
+%>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+%<<<  Theorem Environments  <<<
+%>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+\theoremstyle{plain}
+\newtheorem{thm}{Theorem}[section]
+\newtheorem*{thm*}{Theorem}
+\newtheorem{lem}[thm]{Lemma}
+\newtheorem*{lem*}{Lemma}
+\newtheorem{prop}[thm]{Proposition}
+\newtheorem*{prop*}{Proposition}
+\newtheorem{cor}[thm]{Corollary}
+\newtheorem*{cor*}{Corollary}
+\newtheorem{defprop}[thm]{Definition-Proposition}
+\newtheorem*{punchline}{Punchline}
+\newtheorem{conjecture}{Conjecture}
+\newtheorem*{conjecture*}{Conjecture}
+\newtheorem*{claim}{Claim}
+
+\theoremstyle{definition}
+\newtheorem{defn}{Definition}[section]
+\newtheorem*{defn*}{Definition}
+
+
+%>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+%<<<       Operators        <<<
+%>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+\DeclareMathOperator{\ad}{\textbf{ad}}
+\DeclareMathOperator{\coker}{coker}
+\renewcommand{\ker}{\textup{ker}\,}
+\DeclareMathOperator{\End}{End}
+\DeclareMathOperator{\Aut}{Aut}
+\DeclareMathOperator{\Hom}{Hom}
+\DeclareMathOperator{\Maps}{Maps}
+\DeclareMathOperator{\Mor}{Mor}
+\DeclareMathOperator{\Gal}{Gal}
+\DeclareMathOperator{\Ext}{Ext}
+\DeclareMathOperator{\Tor}{Tor}
+\DeclareMathOperator{\Cotor}{Cotor}
+\DeclareMathOperator{\Prim}{Prim}
+\DeclareMathOperator{\Tot}{Tot}
+\DeclareMathOperator{\Map}{Map}
+\DeclareMathOperator{\Der}{Der}
+\DeclareMathOperator{\Rad}{Rad}
+\DeclareMathOperator{\rank}{rank}
+\DeclareMathOperator{\ArfInvariant}{Arf}
+\DeclareMathOperator{\KervaireInvariant}{Ker}
+\DeclareMathOperator{\im}{im}
+\DeclareMathOperator{\coim}{coim}
+\DeclareMathOperator{\trace}{tr}
+\DeclareMathOperator{\supp}{supp}
+\DeclareMathOperator{\ann}{ann}
+\DeclareMathOperator{\spec}{Spec}
+\DeclareMathOperator{\SPEC}{\textbf{Spec}}
+\DeclareMathOperator{\proj}{Proj}
+\DeclareMathOperator{\PROJ}{\textbf{Proj}}
+\DeclareMathOperator{\fiber}{fib}
+\DeclareMathOperator{\cofiber}{cof}
+\DeclareMathOperator{\cone}{cone}
+\DeclareMathOperator{\skel}{sk}
+\DeclareMathOperator{\coskel}{cosk}
+\DeclareMathOperator{\conn}{conn}
+\DeclareMathOperator*{\colim}{colim}
+\DeclareMathOperator*{\limit}{lim}
+\DeclareMathOperator*{\hocolim}{hocolim}
+\DeclareMathOperator*{\holimit}{holim}
+\DeclareMathOperator*{\holim}{holim}
+\DeclareMathOperator*{\hofib}{hofib}
+\DeclareMathOperator*{\hotfib}{thofib}
+\DeclareMathOperator*{\equaliser}{eq}
+\DeclareMathOperator*{\coequaliser}{coeq}
+\DeclareMathOperator{\ch}{ch}
+\DeclareMathOperator{\Thom}{Th}
+\DeclareMathOperator{\GrthGrp}{GrthGp}
+\DeclareMathOperator{\Sym}{Sym}
+\DeclareMathOperator{\Prob}{\mathbb{P}}
+\DeclareMathOperator{\Exp}{\mathbb{E}}
+\DeclareMathOperator{\GeomMean}{\mathbb{G}}
+\DeclareMathOperator{\Var}{Var}
+\DeclareMathOperator{\Cov}{Cov}
+\DeclareMathOperator{\Sp}{Sp}
+\DeclareMathOperator{\Seq}{Seq}
+\DeclareMathOperator{\Cyl}{Cyl}
+\DeclareMathOperator{\Ev}{Ev}
+\DeclareMathOperator{\sh}{sh}
+\DeclareMathOperator{\intHom}{\underline{Hom}}
+\DeclareMathOperator{\Frac}{frac}
+
+
+%>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+%<<<  Mathematical Symbols  <<<
+%>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+\newcommand{\DASH}{\textup{--}}
+
+%>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+%<<<     Greek Letters      <<<
+%>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+\let\oldphi\phi
+\let\phi\varphi
+\renewcommand{\to}{\longrightarrow}
+\newcommand{\from}{\longleftarrow}
+\newcommand{\eps}{\varepsilon}
+
+%%>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+%%<<<     Environments       <<<
+%%>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+\newcommand{\squishlist}{
+  \setlength{\itemsep}{.5pt}
+  \setlength{\parskip}{0pt}
+  \setlength{\parsep}{0pt}}
+%>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+%<<<     Script Letters     <<<
+%>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+\newcommand{\scrQ}{\mathscr{Q}}
+\newcommand{\scrW}{\mathscr{W}}
+\newcommand{\scrE}{\mathscr{E}}
+\newcommand{\scrR}{\mathscr{R}}
+\newcommand{\scrT}{\mathscr{T}}
+\newcommand{\scrY}{\mathscr{Y}}
+\newcommand{\scrU}{\mathscr{U}}
+\newcommand{\scrI}{\mathscr{I}}
+\newcommand{\scrO}{\mathscr{O}}
+\newcommand{\scrP}{\mathscr{P}}
+\newcommand{\scrA}{\mathscr{A}}
+\newcommand{\scrS}{\mathscr{S}}
+\newcommand{\scrD}{\mathscr{D}}
+\newcommand{\scrF}{\mathscr{F}}
+\newcommand{\scrG}{\mathscr{G}}
+\newcommand{\scrH}{\mathscr{H}}
+\newcommand{\scrJ}{\mathscr{J}}
+\newcommand{\scrK}{\mathscr{K}}
+\newcommand{\scrL}{\mathscr{L}}
+\newcommand{\scrZ}{\mathscr{Z}}
+\newcommand{\scrX}{\mathscr{X}}
+\newcommand{\scrC}{\mathscr{C}}
+\newcommand{\scrV}{\mathscr{V}}
+\newcommand{\scrB}{\mathscr{B}}
+\newcommand{\scrN}{\mathscr{N}}
+\newcommand{\scrM}{\mathscr{M}}
+
+
+\newcommand{\frakq}{\mathfrak{q}}
+\newcommand{\frakw}{\mathfrak{w}}
+\newcommand{\frake}{\mathfrak{e}}
+\newcommand{\frakr}{\mathfrak{r}}
+\newcommand{\frakt}{\mathfrak{t}}
+\newcommand{\fraky}{\mathfrak{y}}
+\newcommand{\fraku}{\mathfrak{u}}
+\newcommand{\fraki}{\mathfrak{i}}
+\newcommand{\frako}{\mathfrak{o}}
+\newcommand{\frakp}{\mathfrak{p}}
+\newcommand{\fraka}{\mathfrak{a}}
+\newcommand{\fraks}{\mathfrak{s}}
+\newcommand{\frakd}{\mathfrak{d}}
+\newcommand{\frakf}{\mathfrak{f}}
+\newcommand{\frakg}{\mathfrak{g}}
+\newcommand{\frakh}{\mathfrak{h}}
+\newcommand{\frakj}{\mathfrak{j}}
+\newcommand{\frakk}{\mathfrak{k}}
+\newcommand{\frakl}{\mathfrak{l}}
+\newcommand{\frakz}{\mathfrak{z}}
+\newcommand{\frakx}{\mathfrak{x}}
+\newcommand{\frakc}{\mathfrak{c}}
+\newcommand{\frakv}{\mathfrak{v}}
+\newcommand{\frakb}{\mathfrak{b}}
+\newcommand{\frakn}{\mathfrak{n}}
+\newcommand{\frakm}{\mathfrak{m}}
+
+%>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+%<<<  Caligraphic Letters   <<<
+%>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+\newcommand{\calQ}{\mathcal{Q}}
+\newcommand{\calW}{\mathcal{W}}
+\newcommand{\calE}{\mathcal{E}}
+\newcommand{\calR}{\mathcal{R}}
+\newcommand{\calT}{\mathcal{T}}
+\newcommand{\calY}{\mathcal{Y}}
+\newcommand{\calU}{\mathcal{U}}
+\newcommand{\calI}{\mathcal{I}}
+\newcommand{\calO}{\mathcal{O}}
+\newcommand{\calP}{\mathcal{P}}
+\newcommand{\calA}{\mathcal{A}}
+\newcommand{\calS}{\mathcal{S}}
+\newcommand{\calD}{\mathcal{D}}
+\newcommand{\calF}{\mathcal{F}}
+\newcommand{\calG}{\mathcal{G}}
+\newcommand{\calH}{\mathcal{H}}
+\newcommand{\calJ}{\mathcal{J}}
+\newcommand{\calK}{\mathcal{K}}
+\newcommand{\calL}{\mathcal{L}}
+\newcommand{\calZ}{\mathcal{Z}}
+\newcommand{\calX}{\mathcal{X}}
+\newcommand{\calC}{\mathcal{C}}
+\newcommand{\calV}{\mathcal{V}}
+\newcommand{\calB}{\mathcal{B}}
+\newcommand{\calN}{\mathcal{N}}
+\newcommand{\calM}{\mathcal{M}}
+
+\newcommand{\calq}{\mathcal{Q}}
+\newcommand{\calw}{\mathcal{W}}
+\newcommand{\cale}{\mathcal{E}}
+\newcommand{\calr}{\mathcal{R}}
+\newcommand{\calt}{\mathcal{T}}
+\newcommand{\caly}{\mathcal{Y}}
+\newcommand{\calu}{\mathcal{U}}
+\newcommand{\cali}{\mathcal{I}}
+\newcommand{\calo}{\mathcal{O}}
+\newcommand{\calp}{\mathcal{P}}
+\newcommand{\cala}{\mathcal{A}}
+\newcommand{\cals}{\mathcal{S}}
+\newcommand{\cald}{\mathcal{D}}
+\newcommand{\calf}{\mathcal{F}}
+\newcommand{\calg}{\mathcal{G}}
+\newcommand{\calh}{\mathcal{H}}
+\newcommand{\calj}{\mathcal{J}}
+\newcommand{\calk}{\mathcal{K}}
+\newcommand{\call}{\mathcal{L}}
+\newcommand{\calz}{\mathcal{Z}}
+\newcommand{\calx}{\mathcal{X}}
+\newcommand{\calc}{\mathcal{C}}
+\newcommand{\calv}{\mathcal{V}}
+\newcommand{\calb}{\mathcal{B}}
+\newcommand{\caln}{\mathcal{N}}
+\newcommand{\calm}{\mathcal{M}}
+
+\newcommand{\twist}{\sigma}
+
+\usepackage{framed}
+\usepackage[style=numeric,%citestyle=numeric,
+url=false,doi=false,isbn=false,eprint=false]{biblatex}%
+\hypersetup{colorlinks=false,pdfborder={0 0 0}}
+
+
+
+\makeatletter
+\renewcommand{\@seccntformat}[1]{\csname the#1\endcsname.\quad}
+\makeatother
+
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}
+\newtheorem*{completenesstheorem}{Completeness Theorem}
+\newtheorem{twistinglemma}[thm]{Twisting Lemma}
+\renewcommand*{\thetheorem}{\Alph{theorem}}
+\newtheorem{conjectureAlpha}{Conjecture}
+\renewcommand*{\theconjectureAlpha}{\Alph{conjectureAlpha}}
+
+
+
+\newcommand{\NOFULLPAGE}{\relax}
+
+\newcommand{\Sq}{\mathrm{Sq}}
+\newcommand{\Comm}{\calC}
+\newcommand{\F}{\mathbb{F}}
+
+%\bibliography{papers}
+\bibliography{../../Dropbox/logbook/_LOGBOOK/papers}
+
+
+
+
+\title[Operations in the Bousfield-Kan spectral sequence for a simplicial $\F_2$-algebra]{Operations in the Bousfield-Kan spectral sequence for a simplicial $\F_2$-algebra}
+%\author[M.\ Donovan]{Michael Donovan}
+
+%\address{Department of Mathematics \\ Massachusetts Institute of Technology}
+%\email{mdono@math.mit.edu}
+
+
+
+\newcommand{\dupdown}[2]{D_{\smash{#1}}}
+\newcommand{\caldup}[1]{\calD_{\smash{#1}}}
+\newcommand{\caldupdown}[2]{\calD^{\smash{#1}}_{\smash{#2}}}
+
+\begin{document}
+\newcommand{\todo}[2]{\begin{itemize}
+\setlength{\parindent}{.25in}
+\item[{\Large$\smash\diamondsuit$}] #1
+\ifblank{#2}{}{\tiny\begin{itemize}
+\setlength{\parindent}{.25in}
+\item #2
+\end{itemize}}
+\end{itemize}
+
+}
+%\begin{abstract}\end{abstract}
+%\maketitle
+\tableofcontents
+
+\section{Unstable Lie algebras over Goerss' $P$-algebra}
+\todo{Recall definition of Goerss' category $\calW$}{Define them to be locally finite and connected.}
+\todo{Construct monad $U$ for $\calW$}{Write in terms of monads $\calP^\textup{u}$ and $S(\scrL)$.\item Decide whether to give the distributive law.}
+\todo{Explain why $H^*_{\calC}$ is in $\calW$.}{(Give $j$ map to construct everything, along with the relevant AW/EZ.)}
+\todo{State Goerss' theorem in these terms}{talk about cohomology operations for $\calC$ and Yoneda's lemma}
+\todo{Define $Q_\calW:\calW\to \calV^1$, and thus the cohomology functor on $\calW$}{Explain significance as Adams $E^2$}
+
+
+\section{Cohomology operations for unstable Lie algebras}
+\todo{Define the operations $\gamma_i$, state and define the $\delta_i$ operations}{}
+\todo{Define and state $\Sq$ operations and products}{Need to define $j:Q(X\wedge Y)\to QX\otimes QY$}
+\todo{Give theorem relating all the given operations}{prove the $\delta$ Adem relations using Priddy compression
+\item show that the Sq-ops and products are instances of those on the cohomology of a Lie algebra (in particular that $j_\calW$ restricts to $j_\calL$), then bring in argument using spectral sequence and Singer's work.
+\item The commutation relation for $\delta$ vs $\Sq$/product is written on the wall
+\item need to figure out what happens in low dimensions}
+
+
+\section{Unstable Lie algebras over the $\Lambda$-algebra}
+\todo{Define the categories $\calW(n)$, $\calL(n)$ ($n=0$ is Goerss' case)}{need to be clear about categories of vector spaces
+\item Write $\calV(m,n)$ for the category of loc fin vecspaces with $m$ upper, $n$ lower indices
+\item Use blackboard bold symbol $\mathds{1}$ to denote only strictly positive gradings
+\item $\calW(n)$ and $\calL(n)$ are monadic over $\calV(\mathds{1},n)$, but we won't carefully describe the monads.}
+\todo{Derived functors of $Q_{\calW(n)}:\calW(n)\to \calV(\mathds{1},n)$ are $H^*_{\calW(n)}:\calW(n)\to\calV(n+1,\mathds{1})$}{and we're interested in these for $n=0$.}
+\todo{Define functors $Q_P:\calW(0)\to\calL(0)$ and $Q_{\Lambda(n)}:\calW(n)\to \calL(n)$ for $n\geq1$}{Be careful to explain that when $n>0$ you divide by nontop operations only, and the opposite for $n=0$
+\item point is that $Q_{\calW(n)}$ factors as these followed by $Q_{\calL(n)}:\calL(n)\to \calV(\mathds{1},n)$}
+\todo{Note that $\calL(n)$-$\Pi$-\textup{alg} is the category $\calW(n+1)$}{comment that this is why $\calW(n)$ will be interesting for $n>0$}
+%\todo{Define cohomology $H_{\calW(n)}^*:\calW(n)\to \calV(n+1,\mathds{1})$}{}
+\todo{Define homology $H^{\Lambda(n)}_*:\calW(n)\to \calV(\mathds{1},n+1)$ and enrich codomain to $\calW(n+1)$}{also do $n=0$ case: define homology $H^P_*:\calW(0)\to \calV(\mathds{1},1)$ and enrich codomain to $\calW(1)$}
+
+
+\section{Composite functor spectral sequences}
+\todo{Define the spectral sequence $H^*_{\calW(n)}\Longleftarrow H^*_{\calW(n+1)}$}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\end{document}
+
+
