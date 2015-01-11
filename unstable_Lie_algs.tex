@@ -277,7 +277,7 @@ url=false,doi=false,isbn=false,eprint=false]{biblatex}%
 \newcommand{\LieOperad}{{\scrL}}
 \newcommand{\restn}[1]{{#1}^{[2]}}
 \newcommand{\vect}[2]{\calV^{#1}_{#2}}
-\newcommand{\BSW}{{\scrC}}
+\newcommand{\BSW}{{\scrG}}%\scrH\scrI\scrJ\scrK\scrL\scrM\scrN\scrO\scrP\scrQ\scrR\scrS\scrT\scrY\scrZ}}
 
 \newcommand{\NOFULLPAGE}{\relax}
 
@@ -326,7 +326,46 @@ url=false,doi=false,isbn=false,eprint=false]{biblatex}%
 %\maketitle
 %\tableofcontents
 
+\section{To do/consider:}
+\begin{enumerate}\squishlist
+\setlength{\parindent}{.25in}
+\item introduce the category $\calU(n)$, uniformize notation for free constructions. Scrap Goerss' $U$ notation, instead write $F_{\calW}$.
+\item which side do you index bar constructions from?
+\item Do I insert a section of conventions, including, cugas and model category structures on cugas, free functors using standard notation $F_?$ thought of as monads without further notation, indecomposable, categories of vector spaces, good and bad Lie algebras, higher Eilenberg-Zilber maps, never substituting out stars for gradings and having all gradings at the very right,tensor products of vector spaces,\ldots?
+\item Comment that we care about derived indecomposables, not AQ homology.
+\item choose a notation for the quadratic grading? like $\textup{qu}_2V^{*}_{***}$?
+\item Monadicity over vector spaces is important and should be emphasised, especially for the diagonal on the Blanc-Stover resolution.
+\item Maybe I should keep finiteness to myself, given that the SOA might be around, or even the W comonad.
+\end{enumerate}
+
+\section{Conventions and notation}
+\subsection{Categories of universal graded algebras}
+In this paper we will be dealing with various categories of universal graded algebras [BS?,Quillen], and as such, it serves to set notation globally. The categories we will deal with are all monadic over a category of graded $\F_2$-vector spaces of finite type,
+%Indeed, for any two integers $m,n\geq0$, let $\vect{m}{n}$ be the category of finite type graded $\F_2$-vector spaces with $m$ cohomological gradings and $n$ homological gradings. That is, an object $V$ of $\vect{m}{n}$ may be written
+%\[V=\bigoplus_{p_m,\ldots,p_1,q_n,\ldots,q_1\geq0}V_{q_n,\ldots,q_1}^{p_m,\ldots,p_1},\]
+%in which each $V_{q_n,\ldots,q_1}^{p_m,\ldots,p_1}$ is a finite dimensional $\F_2$-vector space. In fact, we will restrict to 
+namely, the category of vector spaces with $r$ non-negative homological gradings and a single strictly positive cohomological grading. We will denote the category of such $\F_2$-vector spaces by the symbol $\vect{+}{r}$, so that an object $V$ of $\vect{+}{r}$ decomposes as
+\[V=\bigoplus_{s_r,\ldots,s_1\geq0,\,t\geq 1}V^{t}_{s_r,\ldots,s_1}.\]
+Similarly, we write $\vect{r}{+}$ for the category of $\F_2$-vector spaces with one positive homological grading and $r$ non-negative cohomological gradings. Lastly, we write $\vect{}{}$ for the category of (ungraded) $\F_2$-vector spaces, and  $\vect{+}{}$ for $\vect{+}{0}$.
+
+For each algebraic category $\calC$ of interest in this paper, an object $X$ of $\calC$ may be defined as a graded vector space $X\in\vect{+}{r}$ along with certain binary and unary operations on $X$. As such, there will be a forgetful functor $U_\calC:\calC\to\vect{+}{r}$, which will admit a left adjoint, always denoted $F_\calC:\vect{+}{r}\to\calC$ for notational consistency. The functor $U_{\calC}$ will always be monadic, in the sense that the natural comparison functor from $\calC$ to the category of algebras over the monad $U_{\calC}F_{\calC}$ on $\vect{+}{r}$ is an equivalence.
+
+It will also happen that for each $\calC$, there is a functor $K_\calC:\vect{+}{r}\to \calC$ which sends $V\in\vect{+}{r}$ to the `trivial object on $V$', and $K_{\calC}$ has a left adjoint, $Q_{\calC}:\calC\to\vect{+}{r}$, which sends $X\in\calC$ to `the quotient of $X$ by the image of its non-trivial operations'. In terms of free constructions, the monad $U_{\calC}F_{\calC}$ will admit an augmentation $\epsilon:U_{\calC}F_{\calC}\to\textup{id}$, and the functor $K_\calC$ sends any object $V\in\vect{+}{r}$ to the $U_{\calC}F_{\calC}$-algebra whose structure map is $\epsilon_V:U_{\calC}F_{\calC}V\to V$. Moreover, the functor $Q_{\calC}$ sends $X\in \calC$ with structure map $\rho:F_\calC U_\calC X\to X$ to the coequaliser in $\vect{+}{r}$ of the maps $U_\calC\rho$ and $\epsilon_{U_\calC X}$.
+
+\subsection{Lie algebras in characteristic 2}
+Let $\LieOperad$ be the Lie operad in characteristic 2. As explained in [Fresse], the monad $S(\LieOperad)$ on $\vect{}{}$ defined by
+\[S(\LieOperad):V\mapsto \bigoplus_{n\geq1}(\LieOperad(n)\otimes V^{\otimes n})_{\Sigma_n}\]
+does not return the free Lie algebra on $V$ in the traditional sense. Rather, an $S(\LieOperad)$-algebra is a vector space $L$ equipped with a bracket $L\otimes L\to L$ satisfying the Jacobi identity and the antisymmetry condition $[x,y]=-[y,x]$. This condition does \emph{not} imply the alternating condition $[x,x]=0$ (which is impossible to encode operadically).
+
+Fresse constructs a monad $\Gamma(\LieOperad)$ defined by
+\[\Gamma(\LieOperad):V\mapsto \bigoplus_{n\geq1}(\LieOperad(n)\otimes V^{\otimes n})^{\Sigma_n},\]
+which represents the free restricted Lie algebra. He further constructs a norm map $\textup{Tr}:S(\LieOperad)\to \Gamma(\LieOperad)$, and defines a monad $\Lambda(\LieOperad)$ by the formula
+\[\Lambda(\LieOperad)V=\textup{Im}(\textup{Tr}:S(\LieOperad)V\to \Gamma(\LieOperad)V).\]
+Then $\Lambda(\LieOperad)V$ is the free Lie algebra on $V$, subject to the standard axiom, $[x,x]=0$.
+
+
 \section{Unstable Lie algebras over Goerss' $P$-algebra}
+
 \subsection{Goerss' algebraic category $\calW$}
 \todoeasy{Recall definition of Goerss' category $\calW$}{Define them to be locally finite and connected.}
 We're interested in blah blah blah. Restrict to a subcategory, those which are connected, locally of finite type...
@@ -880,16 +919,7 @@ N_*N_*(S^2(Q_{\calL(n)}B^\BSW_{\bullet}(Q_{\calU(n)}X^c)))^{t-1}_{s_{n+2}-1,s_{n
 \todo{Explain the quadratic filtration of the bar construction}{derive a spectral sequence}
 \todo{figure out what it implies about the whole thing.}{}
 
-\section{To do/consider:}
-\begin{enumerate}\squishlist
-\setlength{\parindent}{.25in}
-\item introduce the category $\calU(n)$, uniformize notation for free constructions. Scrap Goerss' $U$ notation, instead write $F_{\calW}$.
-\item which side do you index bar constructions from?
-\item Do I insert a section of conventions, including, cugas and model category structures on cugas, free functors using standard notation $F_?$ thought of as monads without further notation, indecomposable, categories of vector spaces, good and bad Lie algebras, higher Eilenberg-Zilber maps, never substituting out stars for gradings and having all gradings at the very right,tensor products of vector spaces,\ldots?
-\item Comment that we care about derived indecomposables, not AQ homology.
-\item choose a notation for the quadratic grading? like $\textup{qu}_2V^{*}_{***}$?
-\item Monadicity over vector spaces is important and should be emphasised, especially for the diagonal on the Blanc-Stover resolution.
-\end{enumerate}
+
 
 
 
