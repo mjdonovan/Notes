@@ -278,6 +278,7 @@ url=false,doi=false,isbn=false,eprint=false]{biblatex}%
 \newcommand{\restn}[1]{{#1}^{[2]}}
 \newcommand{\vect}[2]{\calV^{#1}_{#2}}
 \newcommand{\BSW}{{\scrG}}%\scrH\scrI\scrJ\scrK\scrL\scrM\scrN\scrO\scrP\scrQ\scrR\scrS\scrT\scrY\scrZ}}
+\newcommand{\PiAlg}{\textup{-$\Pi$-Alg}}
 
 \newcommand{\NOFULLPAGE}{\relax}
 
@@ -324,7 +325,11 @@ url=false,doi=false,isbn=false,eprint=false]{biblatex}%
 }
 %\begin{abstract}\end{abstract}
 %\maketitle
-%\tableofcontents
+\tableofcontents
+
+\textup{}
+
+\vfill\pagebreak
 
 \section{Conventions and notation}
 \subsection{Categories of universal graded algebras}
@@ -350,9 +355,14 @@ The face maps are given by the formula $d_i=(F_\calC)^i\epsilon$, and the degene
 For $X\in\calC$, we define the $\calC$-\emph{homology} of $X$ by the formula:
 \[H_*^{\calC}X=\pi_*(Q_\calC B_\bullet^\calC X)=H_*N_*(Q_\calC B_\bullet^\calC X).\]
 This is well defined, as the $Q_\calC\dashv K_\calC$ adjunction is a Quillen adjunction (indeed $K_\calC$ evidently preserves fibrations and acyclic fibrations), and we are free to use any cofibrant replacement in place of $B_\bullet^\calC X$. We define the $\calC$-cohomology $H^*_\calC X$ to be the linear dual of $H_*^\calC X$. Note that if $\calC$ is monadic over $\vect{+}{r}$, then $H_*^{\calC}X\in \vect{+}{r+1}$, and $H^*_{\calC}X\in \vect{r+1}{+}$. That is, each homology group $H_s^\calC X$ retains the gradings of $X$, and a new homological grading is added (to the left of the existing homological gradings). If we dualise to obtain cohomology, the cohomological gradings and homological gradings are swapped. We will uniformly avoid substituing into the location of an upper or lower $*$, for the sake of clarity. For example, suppose that $\calC$ is monadic over $\vect{+}{2}$, then we will write $(H_*^\calC X)_{s_3,s_2,s_1}^t$, instead of $(H_{s_3}^\calC X)_{s_2,s_1}^t$
+\subsection{Diagonal maps on $F_\calC$ and cohomology operations}
+Include special EZ maps, etc.
 
+\subsection{The example of simplicial commutative $\F_2$-algebras}
+Include Goerss' theorem.
 
 \subsection{The Blanc-Stover comonad in categories monadic over $\F_2$-vector spaces}
+\textbf{MOVE ME TO THE RELEVANT CHAPTER!}
 Fix an algebraic category $\calC$, monadic over $\vect{}{}$ (more generally, monadic over some category of graded vector spaces, but for now we opt for notational simplicity). As we are working over a category of vector spaces, we can refine Blanc and Stover's definition \cite{Blanc_Stover-Groth_SS.pdf} of a useful comonad `$W$' on $s\calC$. (Did I end up changing the character for this?)
 
 It will help to fix a little notation. First, for $n\geq0$, let $\mathbb{S}^n\in \textup{ch}_+ \vect{}{}$ and $C\mathbb{S}^n\in \textup{ch}_+ \vect{}{}$ be the chain complexes
@@ -372,38 +382,38 @@ There is an evident inclusion $\imath:\mathbb{S}\to C\mathbb{S}$. For any $V\in\
 and the differential $d:N_{n+1}V\to ZN_nV$ corresponds to $\imath^*$ under these isomorphisms. If $N:s\vect{}{}\rightleftarrows \textup{ch}_+ \vect{}{}
 :\Gamma$ are the inverse equivalences of the Dold-Kan correspondence, define
 \[S^n_{\calC}:=F_{\calC}\Gamma(\mathbb{S}^n)\textup{ and }CS^n_{\calC}:=F_{\calC}\Gamma(C\mathbb{S}^n).\]
-Corresponding to the above structure, $S^n_{\calC}$ contains an element $z$ in dimension $n$, $CS^n_{\calC}$ contains an element $h$ in dimension $n+1$, there is a map $\imath:S^n_{\calC}\to CS^n_{\calC}$ sending $z$ to $d_0h$, and $\imath^*$ represents the differential under the isomorphisms
-\[\hom_{s\calC}(S_\calC^n,X)\cong ZN_nX,\textup{ and }\hom_{s\calC}(CS_\calC^n,X)\cong N_{n+1}X.\]
+Corresponding to the above structure, $S^n_{\calC}$ contains an element $z$ in dimension $n$, $CS^n_{\calC}$ contains an element $h$ in dimension $n+1$, there is a map $\imath:S^n_{\calC}\to CS^n_{\calC}$ sending $z$ to $d_0h$. For $L\in s\calC$, $\imath^*$ represents the differential under the isomorphisms
+\[\hom_{s\calC}(S_\calC^n,L)\cong ZN_nL,\textup{ and }\hom_{s\calC}(CS_\calC^n,L)\cong N_{n+1}L.\]
 
-In this context, Blanc-Stover's comonad on $s\calC$ may be written as the pushout
+In this context, Blanc-Stover's comonad $\BSW$, applied to $L\in s\calC$, may be written as the pushout
 \[\xymatrix@R=4mm{
-\bigsqcup_{n\geq0}\bigsqcup_{N_{n+1}X}S_\calC^n
+\bigsqcup_{n\geq0}\bigsqcup_{N_{n+1}L}S_\calC^n
 \ar[r]\ar[d]^-{\bigsqcup\bigsqcup\imath}
 &%r1c1
-\bigsqcup_{n\geq0}\bigsqcup_{ZN_{n}X}S_\calC^n\ar[d]\\%r1c2
-\bigsqcup_{n\geq0}\bigsqcup_{N_{n+1}X}CS_\calC^n
+\bigsqcup_{n\geq0}\bigsqcup_{ZN_{n}L}S_\calC^n\ar[d]\\%r1c2
+\bigsqcup_{n\geq0}\bigsqcup_{N_{n+1}L}CS_\calC^n
 \ar[r]&%r2c1
-\BSW X%r2c2
+\BSW L%r2c2
 }\]
-where under the top horizontal map, the copy of $S^n_\calC$ corresponding to $x\in N_{n+1}X$ maps identically onto the copy of $S^n_\calC$ corresponding to $dx=\imath^*x$. It will be useful to write $h_x$ for the element of $\BSW X$ corresponding to $h$ in the copy of $CS^n_\calC$ corresponding to $x\in N_{n+1}X$, and similarly, $z_x$ for the element of $\BSW X$ corresponding to $z$ in the copy of $S^n_\calC$ corresponding to $x\in ZN_{n}X$. The comonad structure maps $\epsilon:\BSW X\to X$ and $\Delta:\BSW X\to \BSW^2X$ are then determined by the equations
-\[\epsilon(h_x)=x,\ \epsilon(z_y)=y,\ \Delta(h_x)=h_{h_x},\textup{ and }\Delta(z_y)=z_{z_y}\textup{ for $x\in N_{n+1}X$ and $y\in ZN_nX$.}\]
+where under the top horizontal map, the copy of $S^n_\calC$ corresponding to $x\in N_{n+1}L$ maps identically onto the copy of $S^n_\calC$ corresponding to $dx=\imath^*x$. It will be useful to write $h_x$ for the element of $\BSW L$ corresponding to $h$ in the copy of $CS^n_\calC$ corresponding to $x\in N_{n+1}L$, and similarly, $z_x$ for the element of $\BSW L$ corresponding to $z$ in the copy of $S^n_\calC$ corresponding to $x\in ZN_{n}L$. The comonad structure maps $\epsilon:\BSW L\to L$ and $\Delta:\BSW L\to \BSW^2L$ are then determined by the equations
+\[\epsilon(h_x)=x,\ \epsilon(z_y)=y,\ \Delta(h_x)=h_{h_x},\textup{ and }\Delta(z_y)=z_{z_y}\textup{ for $x\in N_{n+1}L$ and $y\in ZN_nL$.}\]
 
-Moreover, $\BSW X$ is homotopy equivalent to a coproduct of spheres. Indeed, for each $n$, let $B_nX=\im (d:N_{n+1}X\to ZN_nX)$, and choose a section $h_0$ of the surjection $d:N_{n+1}X\to B_nX$. Then $\BSW X$ contains the contractible subobject $C_0:=\bigsqcup_n\bigsqcup_{h\in \im (h_0)} CS^n_{h_0(f)}$, and $\BSW X/C_0$ is homotopic to a wedge of spheres:
-%\[\BSW X/C_0\cong \left(\bigsqcup_{h\in N_{n+1}X\setminus\im (h_0)}CS^n_h/\partial(CS^n_h)\right) \sqcup\left(\bigsqcup_{f\in ZN_nX\setminus B_nX}S^n_f\right)\]
-\[\BSW X/C_0\cong \left(\bigsqcup_{N_{n+1}X\setminus\im (h_0)}F_\calC (CS^n_{\vect{}{}}/\partial(CS^n_{\vect{}{}}))\right) \sqcup\left(\bigsqcup_{f\in ZN_nX\setminus B_nX}S^n_\calC\right)\]
-We would like to find a \emph{subspace} of $\pi_*(\BSW X)$ which freely generates it as a $\calC\textup{-$\Pi$-algebra}$. Even better, we have the following rendition of [Stover? Blanc-Stover?]. We give the proof since we will need to be explicit about some parts of it in what follows.
+Moreover, $\BSW L$ is homotopy equivalent to a coproduct of spheres. Indeed, for each $n$, let $B_nL=\im (d:N_{n+1}L\to ZN_nL)$, and choose a section $h_0$ of the surjection $d:N_{n+1}L\to B_nL$. Then $\BSW L$ contains the contractible subobject $C_0:=\bigsqcup_n\bigsqcup_{h\in \im (h_0)} CS^n_{h_0(f)}$, and $\BSW L/C_0$ is homotopic to a wedge of spheres:
+%\[\BSW L/C_0\cong \left(\bigsqcup_{h\in N_{n+1}L\setminus\im (h_0)}CS^n_h/\partial(CS^n_h)\right) \sqcup\left(\bigsqcup_{f\in ZN_nL\setminus B_nL}S^n_f\right)\]
+\[\BSW L/C_0\cong \left(\bigsqcup_{N_{n+1}L\setminus\im (h_0)}F_\calC (CS^n_{\vect{}{}}/\partial(CS^n_{\vect{}{}}))\right) \sqcup\left(\bigsqcup_{f\in ZN_nL\setminus B_nL}S^n_\calC\right)\]
+We would like to find a \emph{subspace} of $\pi_*(\BSW L)$ which freely generates it as a $\calC\textup{-$\Pi$-algebra}$. Even better, we have the following rendition of [Stover? Blanc-Stover?]. We give the proof since we will need to be explicit about some parts of it in what follows.
 \begin{prop}
-For $X\in\calC$, $\pi_*(B_\bullet^{\BSW}X)$ is an almost free (monadic over $\vect{}{}$) simplicial $\calC\textup{-$\Pi$-algebra}$ weakly equivalent to $\pi_*(X)$.
+For $L\in\calC$, $\pi_*(B_\bullet^{\BSW}L)$ is an almost free (monadic over $\vect{}{}$) simplicial $\calC\textup{-$\Pi$-algebra}$ weakly equivalent to $\pi_*(L)$.
 \end{prop}
 \begin{proof}
-That the augmentation to $\pi_*(X)$ is a weak equivalence follows from Stover's result \cite[2.7]{StoverVanKampen.pdf}. The only change from Blanc-Stover is that $\pi_*(B_\bullet^{\BSW}X)$ is almost free over the category $\vect{}{}$, rather than the category of pointed sets.
-For a set $S$, write $\F_2\langle S\rangle$ for the vector space generated by the symbols $\underline{s}$ for $s\in S$. There's a natural map $\F_2\langle d\rangle :\F_2\langle N_{n+1}X\rangle \to \F_2\langle ZN_nX\rangle $, and a natural monomorphism $\alpha:\ker(\F_2\langle d\rangle)\to \pi_*(\BSW X)$, defined by
-\[\alpha(\underline{x_1}-\underline{x_0})=[h_{x_1}-h_{x_0}],\textup{ for $x_1,x_2\in N_{n+1}X$ with $dx_1=dx_2$}.\]
-Moreover, there's a natural map $\beta:\F_2[ZN_nX]\to\pi_*(\BSW X)$ (which is not monomorphic) defined by
-\[\beta(\underline{x})=[z_{x}],\textup{ for $x\in ZN_{n}X$}.\]
-From the above expression for $\BSW X/C_0$, one sees that $\im (\alpha)$ and $\im (\beta)$ are linearly independent subspaces of $\pi_*(\BSW X)$, and $\pi_*(\BSW X)$ is free on $\im (\alpha)\oplus\im (\beta)$. From this description it is clear that the generating subspaces are preserved by maps in the image of $\BSW $. Thus, every face and degeneracy map except for $s_0$ and $d_0$ preserves the generators.
+That the augmentation to $\pi_*(L)$ is a weak equivalence follows from Stover's result \cite[2.7]{StoverVanKampen.pdf}. The only change from Blanc-Stover is that $\pi_*(B_\bullet^{\BSW}L)$ is almost free over the category $\vect{}{}$, rather than the category of pointed sets.
+For a set $S$, write $\F_2\langle S\rangle$ for the vector space generated by the symbols $\underline{s}$ for $s\in S$. There's a natural map $\F_2\langle d\rangle :\F_2\langle N_{n+1}L\rangle \to \F_2\langle ZN_nL\rangle $, and a natural monomorphism $\alpha:\ker(\F_2\langle d\rangle)\to \pi_*(\BSW L)$, defined by
+\[\alpha(\underline{x_1}-\underline{x_0})=[h_{x_1}-h_{x_0}],\textup{ for $x_1,x_2\in N_{n+1}L$ with $dx_1=dx_2$}.\]
+Moreover, there's a natural map $\beta:\F_2[ZN_nL]\to\pi_*(\BSW L)$ (which is not monomorphic) defined by
+\[\beta(\underline{x})=[z_{x}],\textup{ for $x\in ZN_{n}L$}.\]
+From the above expression for $\BSW L/C_0$, one sees that $\im (\alpha)$ and $\im (\beta)$ are linearly independent subspaces of $\pi_*(\BSW L)$, and $\pi_*(\BSW L)$ is free on $\im (\alpha)\oplus\im (\beta)$. From this description it is clear that the generating subspaces are preserved by maps in the image of $\BSW $. Thus, every face and degeneracy map except for $s_0$ and $d_0$ preserves the generators.
 
-In order that $s_0$ preserves generators, we note that the diagonal of $\BSW$ sends the subspaces $\im (\alpha_X)$ and $\im (\beta_X)$ into the subspaces $\im (\alpha_{\BSW X})$ and $\im (\beta_{\BSW X})$. That $\im (\beta_X)$ maps into $\im (\beta_{\BSW X})$ is immediate. For $\im (\alpha_X)$, the image of $h_{x_1}-h_{x_0}$ under the diagonal is $h_{h_{x_1}}-h_{h_{x_0}}$, which is in $\im(\alpha_{\BSW X})$, since $dh_{x_1}=z_{dx_1}=z_{dx_0}=dh_{x_0}$.
+In order that $s_0$ preserves generators, we note that the diagonal of $\BSW$ sends the subspaces $\im (\alpha_L)$ and $\im (\beta_L)$ into the subspaces $\im (\alpha_{\BSW L})$ and $\im (\beta_{\BSW L})$. That $\im (\beta_L)$ maps into $\im (\beta_{\BSW L})$ is immediate. For $\im (\alpha_L)$, the image of $h_{x_1}-h_{x_0}$ under the diagonal is $h_{h_{x_1}}-h_{h_{x_0}}$, which is in $\im(\alpha_{\BSW L})$, since $dh_{x_1}=z_{dx_1}=z_{dx_0}=dh_{x_0}$.
 \end{proof}
 
 
@@ -417,7 +427,81 @@ In order that $s_0$ preserves generators, we note that the diagonal of $\BSW$ se
 %
 %Now the utility of the comonad structure lies in resolving an object $L_\bullet\in s\calL(n)$ by the comonadic bar construction, $B^\BSW_\bullet(L_\bullet)$. This discussion shows that, except for $d_0$, all the maps in $B_\bullet^\BSW L_\bullet$ preserve the subspaces of generators of $\pi_*(B_\bullet^\BSW L_\bullet)$, which is to say that this object of $s\calW(n+1)$ is almost free. Moreover, according to [Stover 2.6], the augmentation map $\pi_*(B_\bullet^\BSW L_\bullet)\to \pi_*(L)$ is a weak equivalence in $s\calW(n+1)$. Thus, this Blanc-Stover $\BSW $-construction provides an almost-free replacement of $\pi_*(L)$ in $s\calW(n+1)$.
 
+\subsection{A chain-level diagonal on the $\BSW $ construction}
+\todo{give the construction of the chain level diagonal}{}
+We have seen, for $L\in s\calC$, that $\pi_*(\BSW L)$ is a free object in $\calC\PiAlg$. As such, there is a diagonal
+\[\phi_{\calC\PiAlg}:\pi_*(\BSW L)\to \pi_*(\BSW L)\sqcup \pi_*(\BSW L).\]
+In this section, we'll describe how this map is the map on homotopy induced by a morphism $\phi_\BSW :\BSW L\to \BSW L\sqcup \BSW L$ in $s\calC$ (note that homotopy preserves coproducts of coproducts of spheres). 
 
+In order to construct a map $\phi_\BSW $, it is enough to construct a commuting diagram
+\[\xymatrix@R=4mm{
+S^n\ar[r]^-{\phi_1}
+\ar[d]^-{\imath}
+&%r1c1
+S^n\sqcup S^n\ar[d]^-{\imath\sqcup\imath}
+\\%r1c2
+CS^n\ar[r]^-{\phi_2}
+&%r2c1
+CS^n\sqcup CS^n%r2c2
+}\]
+The maps $\phi_1$ and $\phi_2$ can then be applied respectively to all of the sphere and cone classes appearing in $\BSW L$.
+In fact, this diagram can even be formed in $s\vect{+}{n}$, before application of $F_{\calC}:\vect{+}{n}\to\calC$, and $\phi_1$ and $\phi_2$ are just the levelwise application of the diagonal map on a simplicial vector space. To understand the effect of $\phi_{\BSW }$ on homotopy, it is enough to identify where the generators of $\pi(\BSW L)$ are sent in $\pi(\BSW L)\sqcup\pi(\BSW L)$, which is easy.
+\begin{lem}
+$\BSW L$ is naturally a (strict) commutative cogroup object, having comultiplication map $\phi_{\BSW }$, counit map $0:\BSW L\to 0$, and inverse map $\textup{id}:\BSW L\to \BSW L$. In particular, $\hom(\BSW L,\DASH)$ takes values in $\ensuremath{\F_2}$-vector spaces.
+\end{lem}
+\begin{proof}
+There are a few axioms to check, for example, left counitality: that the composite 
+\[\xymatrix@R=4mm@1{
+\BSW L\ar[r]^-{\phi_{\BSW }}
+&%r1c1
+\BSW L\sqcup \BSW L\ar[r]^-{\textup{id}\sqcup0}
+&%r1c2
+\BSW L%r1c3
+}\] is the identity. This follows since $(\textup{id}\sqcup0)\phi_1$ is the identity of $S^n$ and $(\textup{id}\sqcup0)\phi_2$ is the identity of $CS^n$. The other axioms follow similarly.
+\end{proof}
+
+Using the notation $*$ for the group operation on $\hom_{s\calC}(\BSW L,L')$, we have the following:
+\begin{lem}
+For maps $f,g:\BSW L\to L'$ we have 
+\[Q_{\calC}(f*g)=(Q_{\calC}f+Q_{\calC}g):Q_{\calC}\BSW L\to Q_{\calC}L'.\]
+\end{lem}
+\begin{proof}
+It's enough to check that $Q_{\calC}(\phi_\BSW ):Q_{\calC}\BSW L\to Q_{\calC}(\BSW L\sqcup \BSW L)$ equals the diagonal map $Q_{\calC}\BSW L\to Q_{\calC}\BSW L\oplus Q_{\calC}\BSW L$. For this, $Q_{\calC}$ converts all the colimits involved in the construction of $\BSW L$ to colimits in $s\vect{+}{n}$, and $\phi_1$ and $\phi_2$ are both precisely the diagonal map.
+\end{proof}
+
+Now let $\overline{\xi}_{\BSW }$ denote the following composite:
+%\[W^2X\overset{\phi_{\BSW }}{\to}(W^2X)^{\sqcup2}\overset{\phi_{\BSW }\sqcup \epsilon}{\to}(W^2X)^{\sqcup2}\sqcup(WX) \overset{\epsilon^{\sqcup2}\sqcup\phi_{ch}}{\to}((WX)^{\sqcup2})^{\sqcup2}\overset{\textup{fold}}{\to}(WX)^{\sqcup2}\]
+\[\makebox[0mm][r]{$\overline{\xi}_{\BSW }:\ $}\BSW^2L\overset{\phi_{\BSW }}{\to}(\BSW^2L)^{\sqcup2}\overset{a\sqcup b}{\to}(\BSW L)^{\sqcup2}\]
+where $a,b:\BSW^2L\to(\BSW L)^{\sqcup2}$ are the composites
+\[\xymatrix@R=2mm{
+\makebox[0mm][r]{$a:\ $}\BSW^2L\ar[r]^-{\phi_{\BSW }}
+&%r1c1
+(\BSW^2L)^{\sqcup2}\ar[r]^-{\epsilon^{\sqcup2}}
+&%r1c2
+(\BSW L)^{\sqcup2}\\
+\makebox[0mm][r]{$b:\ $}\BSW^2L\ar[r]^-{\epsilon}
+&%r1c1
+(\BSW L)\ar[r]^-{\phi_{\BSW }}
+&%r1c2
+(\BSW L)^{\sqcup2}
+}\]
+\begin{lem}
+The composite 
+$\BSW^2L\overset{\overline{\xi}_{\BSW }}{\to}(\BSW L)^{\sqcup2}\to(\BSW L)^{\times2}$ is zero.
+\end{lem}
+\begin{proof}
+This follows from the observation that both composites $(\textup{id}\sqcup0)\overline{\xi}_{\BSW }$ and $(0\sqcup\textup{id})\overline{\xi}_{\BSW }$ equal $\epsilon:\BSW^2L\to \BSW L$.
+\end{proof}
+In particular, $\overline{\xi}_{\BSW }$ factors through the smash product, defining a natural map $\xi_{\BSW }:\BSW^2L\to (\BSW L)^{\wedge 2}$.
+\begin{lem}
+$(d_i)^{\wedge 2}\xi_\BSW =\xi_\BSW d_{i+1}$ for $i\geq1$, and $(d_0)^{\wedge 2}\xi_\BSW = (\xi_\BSW d_{0})*(\xi_\BSW d_{1})$.
+The map $Q_{\calL(n)}\xi_\BSW $ induces a degree $(-1,0)$ bicomplex map:
+\[N_*N_*(Q_{\calL(n)}B^\BSW_{\bullet}L)^t_{s_{n+2},\ldots,s_1}\to
+  N_*N_*(Q_{\calL(n)}((B^\BSW_{\bullet}L)^{\wedge 2}))^t_{s_{n+2}-1,s_{n+1},\ldots,s_1}.\]
+\end{lem}
+\begin{proof}
+I used to say `it's just like Goerss'...
+\end{proof}
 
 \subsection{Lie algebras in characteristic 2}
 Let $\LieOperad$ be the Lie operad in characteristic 2. As explained in [Fresse], the monad $S(\LieOperad)$ on $\vect{}{}$ defined by
@@ -674,7 +758,7 @@ In preparation for our calculations of cohomology in $\calW$, we introduce here 
 \setlength{\parindent}{.25in}
 \item objects of $\calW(n)$ and $\calL(n)$ are $\vect{+}{n}$-graded;
 \item the indecomposables functor $Q_{\calW(n)}:\calW(n)\to \vect{+}{n}$ factors through the indecomposables functor $Q_{\calL(n)}:\calL(n)\to \vect{+}{n}$; and
-\item the category $\calW(n+1)$ is equivalent to the category $\calL(n)\textup{-$\Pi$-Alg}$ of algebras for the homotopy operations of an object of $s\calL(n)$.
+\item the category $\calW(n+1)$ is equivalent to the category $\calL(n)\PiAlg$ of algebras for the homotopy operations of an object of $s\calL(n)$.
 \end{itemize}
 The definitions of the categories $\calW(n)$ for $n\geq1$ are all of a similar flavor, and a little different to the definition above of $\calW(0)=\calW$. 
 
@@ -750,7 +834,7 @@ Moreover the composite $Q_{\LambdaMonad(n)}\circ F_{\calW(n)}$ equals the the fr
 \todoeasy{Derived functors of $Q^{\calW(n)}:\calW(n)\to \vect{+}{n}$ are $H^*_{\calW(n)}:\calW(n)\to \vect{n+1}{+}$}{and we're interested in these for $n=0$.}
 \todoeasy{Define functors $Q^P:\calW(0)\to\calL(0)$ and $Q^{\Lambda(n)}:\calW(n)\to \calL(n)$ for $n\geq1$}{explain that when $n>0$ you divide by nontop operations only, and the opposite for $n=0$
 \item point is that $Q^{\calW(n)}$ factors as these followed by $Q^{\calL(n)}:\calL(n)\to \vect{+}{n}$}
-\todoeasy{Note that $\calL(n)$-$\Pi$-\textup{alg} is the category $\calW(n+1)$}{comment that this is why $\calW(n)$ will be interesting for $n>0$}
+\todoeasy{Note that $\calL(n)\PiAlg$ is the category $\calW(n+1)$}{comment that this is why $\calW(n)$ will be interesting for $n>0$}
 %\todo{Define cohomology $H_{\calW(n)}^*:\calW(n)\to \vect{n+1}{+}$}{}
 \todoeasy{Define homology $H^{\Lambda(n)}_*:\calW(n)\to \vect{+}{n+1}$ and enrich codomain to $\calW(n+1)$}{also do $n=0$ case: define homology $H^P_*:\calW(0)\to \vect{+}{1}$ and enrich codomain to $\calW(1)$}
 
@@ -876,6 +960,7 @@ where $X^c$ is shorthand for the cofibrant replacement of $X$ in $s\calW(n)$ giv
 
 
 
+\begin{shaded}\tiny
 \subsection{A chain-level diagonal on the $\BSW $ construction}
 \todo{give the construction of the chain level diagonal}{}
 We have seen, for $L\in s\calL(n)$, that $\pi_*(\BSW L)$ is a free object in $\calW(n+1)$. As such, there is a diagonal
@@ -953,6 +1038,7 @@ The map $Q_{\calL(n)}\xi_\textup{ch}$ induces a degree $(-1,0)$ bicomplex map:
 \begin{proof}
 I used to say `it's just like Goerss'...
 \end{proof}
+\end{shaded}
 As in the earlier discourse, composition with $j_{\calL(n)}$ yields degree $(-1,0)$ bicomplex map:
 \[\psi_\textup{ch}:N_*N_*(Q_{\calL(n)}B^\BSW_{\bullet}L)^t_{s_{n+2},\ldots,s_1}\to
 N_*N_*(S^2(Q_{\calL(n)}B^\BSW_{\bullet}L))^{t-1}_{s_{n+2}-1,s_{n+1},\ldots,s_1}.
