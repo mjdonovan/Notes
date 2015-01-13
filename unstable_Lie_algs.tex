@@ -355,14 +355,116 @@ The face maps are given by the formula $d_i=(F_\calC)^i\epsilon$, and the degene
 For $X\in\calC$, we define the $\calC$-\emph{homology} of $X$ by the formula:
 \[H_*^{\calC}X=\pi_*(Q_\calC B_\bullet^\calC X)=H_*N_*(Q_\calC B_\bullet^\calC X).\]
 This is well defined, as the $Q_\calC\dashv K_\calC$ adjunction is a Quillen adjunction (indeed $K_\calC$ evidently preserves fibrations and acyclic fibrations), and we are free to use any cofibrant replacement in place of $B_\bullet^\calC X$. We define the $\calC$-cohomology $H^*_\calC X$ to be the linear dual of $H_*^\calC X$. Note that if $\calC$ is monadic over $\vect{+}{r}$, then $H_*^{\calC}X\in \vect{+}{r+1}$, and $H^*_{\calC}X\in \vect{r+1}{+}$. That is, each homology group $H_s^\calC X$ retains the gradings of $X$, and a new homological grading is added (to the left of the existing homological gradings). If we dualise to obtain cohomology, the cohomological gradings and homological gradings are swapped. We will uniformly avoid substituing into the location of an upper or lower $*$, for the sake of clarity. For example, suppose that $\calC$ is monadic over $\vect{+}{2}$, then we will write $(H_*^\calC X)_{s_3,s_2,s_1}^t$, instead of $(H_{s_3}^\calC X)_{s_2,s_1}^t$
-\subsection{Diagonal maps on $F_\calC$ and cohomology operations}
-Include special EZ maps, etc.
+
+
+\subsection{$\calC$-$\Pi$-algebras, free $\calC$-$\Pi$-algebras and the smash product}
+\todo{Various intro here}{Say what a $\calC$-$\Pi$-algebra is, even with all the gradings. Construct the free $\calC$-$\Pi$-algebra on a set (\textbf{what happens on a vector space?}). Say what a model is. Move the discourse on spheres in $\textup{ch}_+\vect{}{}$ to somewhere above. Also, put some discourse on the smash product into this paragraph.}
+...
+
+Now suppose that $X_0$ and $X_1$ are models in $s\calC$, which is to say that are each is almost free, and weakly equivalent to a wedge of spheres. Then the natural map $i:(\pi X_0)\sqcup (\pi X_1)\to \pi(X_0\sqcup X_1)$ is an isomorphism, since both source and target represent the free $\calC$-$\Pi$-algebra on generators corresponding to the wedge summands of $X_0$ and $X_1$ taken together. Moreover, the natural map $\pi(X_0\times X_1)\to (\pi X_0)\times (\pi X_1)$ is an isomorphism (as products of Lie algebras are taken in vector spaces). Thus we have a commuting square
+\[\xymatrix@R=4mm{
+(\pi X_0)\sqcup (\pi X_1)
+\ar[r]
+\ar[d]^-{i}_-{\cong}
+&%r1c3
+(\pi X_0)\times (\pi X_1)
+\ar[d]_-{\cong}\\
+\pi (X_0\sqcup X_1)
+\ar[r]
+&%r1c3
+\pi (X_0\times X_1)
+}\]
+This shows that the long exact sequence coming from $X_0\wedge X_1\to X_0\sqcup X_1\to X_0\times X_1$ is just a short exact sequence, and that there is a commuting diagram
+\[\xymatrix@R=4mm{
+0\ar[r]&%r1c1
+(\pi X_0)\wedge (\pi X_1)
+\ar[r]
+\ar[d]^-{i}_-{\cong}
+&%r1c2
+(\pi X_0)\sqcup (\pi X_1)
+\ar[r]
+\ar[d]^-{i}_-{\cong}
+&%r1c3
+(\pi X_0)\times (\pi X_1)
+\ar[r]
+\ar[d]_-{\cong}
+&%r1c4
+0\\%r1c5
+0\ar[r]&%r1c1
+\pi (X_0\wedge  X_1)
+\ar[r]
+&%r1c2
+\pi (X_0\sqcup X_1)
+\ar[r]
+&%r1c3
+\pi (X_0\times X_1)
+\ar[r]
+&%r1c4
+0
+}\]
+In particular, for $X_0$ and $X_1$ models, there is an isomorphism $i:(\pi X_0)\wedge (\pi X_1)\to\pi(X_0\wedge X_1)$ (natural for maps of pairs of models).
+
+For any simplicial object $A\in s\calC$, there's a natural map $\gamma:Q_{\calC\PiAlg}\pi A\to \pi Q_{\calC}A$.
+\begin{lem}
+If $A$ is a model, then $\gamma:Q\pi A\to \pi QA$ is an isomorphism.
+\end{lem}
+\begin{proof}
+$A$ is homotopic to a wedge of spheres, and $\pi A$ is free on generators in correspondence with the wedge summands.
+\end{proof}
+
+\subsection{Decomposition maps and cohomology operations}
+\emph{special} EZ maps\textbf{?}
+
+In this section, we'll give conditions under which one can define natural operations on the cohomology groups $H^*$. The method here is simply the direct generalisation of Goerss' approach in [GoerssBook,\S5].
+
+Suppose that $\calC$ is an algebraic category as above. A \emph{decomposition map} for $\calC$ is simply a natural map
+\[j_\calC:Q_\calC(X_0\wedge X_1)\to Q_\calC(X_0)\otimes Q_\calC(X_1),\]
+such that $j_\calC\circ Q_\calC( \tau)=\tau\circ j_\calC$, where $\tau$ stands for either of the two symmetry isomorphisms. \textbf{In fact, we may choose only to require that a decomposition map is defined for pairs $X_0,X_1$ of \emph{free} objects in $\calC$, right?}
+
+%We would like to provide operations on the cohomology $H^*_\calC X$ of an object of $\calC$. Instead, take
+
+Suppose that $X_\bullet\in s\calC$ is almost free, with $V_s\subset X_s$ the freely generating subspace. Then for each $s$, the functor 
+\[\Hom_\calC(X_s,\DASH)\cong \Hom_\calV(V_s,U_\calC\DASH)\]
+is naturally an $\F_2$-vector space. If $\phi_s=\F_\calC(\Delta):X_s\to X_s\sqcup X_s$ is the map induced by the vector space diagonal $\Delta:V_s\to V_s\oplus V_s$, then the addition operation `$\star$' on $\Hom_\calC(X_s,\DASH)$ is given by $f\star g= (f\sqcup g)\circ\phi_s$. Now let
+%
+%
+% Each of the $\F_2$-vector spaces $V_s$ is a co($\F_2$-vector space) object, with comultiplication map the diagonal $V_s\to V_s\oplus V_s$. Applying $F_\calC$, each $X_s$ becomes a cogroup object, with comultiplication $\phi_s:X_s\to X_s\sqcup X_s$.
+$\overline{\xi}_\calC=((d_0\sqcup d_0)\phi_s)\star(\phi_{s-1}d_0)$, the sum of maps in the $\F_2$-vector space $\textup{Hom}_\calC(X_s,X_{s-1}\sqcup X_{s-1})$. It is completely formal to check that $\overline{\xi}_\calC$ maps to zero in the group
+\[\textup{Hom}_\calC(X_s,X_{s-1}\times X_{s-1})=\textup{Hom}_\calC(X_s,X_{s-1})\times \textup{Hom}_\calC(X_s,X_{s-1}),\]
+and thus $\overline{\xi}_\calC$ factors through a unique map $\xi_\calC:X_s\to X_{s-1}\wedge X_{s-1}$. Furthermore, $\xi_\calC$ enjoys the symmetry $\tau\xi_\calC=\xi_\calC$, and it is again formal to verify:
+\begin{lem}[Goerss, Lemma 5.5]
+The map $Q_\calC\xi_\calC$ induces a chain map of degree $-1$ on normalised complexes:
+\[N_s(Q_{\calC}X_\bullet)\to N_{s-1}((Q_{\calC}(X_\bullet\wedge X_\bullet))^{\Sigma_2}).\]
+\end{lem}
+We now have access to the composite
+\[\psi_\calC:\left(N_s(Q_{\calC}X_\bullet)\overset{Q_\calC\xi_\calC}{\to} N_{s-1}((Q_{\calC}(X_\bullet\wedge X_\bullet))^{\Sigma_2})\overset{j_\calC}{\to} N_{s-1}(S^2(Q_{\calC}X_\bullet))\right),\]
+which we can use to define operations using the EZAW maps that I'll introduce here, with the specialness property. (Goerss calls them `higher EZ maps'.)
+
+
+
+
 
 \subsection{The example of simplicial commutative $\F_2$-algebras}
 Include Goerss' theorem.
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\section{Operations on Blanc-Stover's $\Pi$-algebra cohomology spectral sequence}
+
 \subsection{The Blanc-Stover comonad in categories monadic over $\F_2$-vector spaces}
-\textbf{MOVE ME TO THE RELEVANT CHAPTER!}
 Fix an algebraic category $\calC$, monadic over $\vect{}{}$ (more generally, monadic over some category of graded vector spaces, but for now we opt for notational simplicity). As we are working over a category of vector spaces, we can refine Blanc and Stover's definition \cite{Blanc_Stover-Groth_SS.pdf} of a useful comonad `$W$' on $s\calC$. (Did I end up changing the character for this?)
 
 It will help to fix a little notation. First, for $n\geq0$, let $\mathbb{S}^n\in \textup{ch}_+ \vect{}{}$ and $C\mathbb{S}^n\in \textup{ch}_+ \vect{}{}$ be the chain complexes
@@ -427,8 +529,23 @@ In order that $s_0$ preserves generators, we note that the diagonal of $\BSW$ se
 %
 %Now the utility of the comonad structure lies in resolving an object $L_\bullet\in s\calL(n)$ by the comonadic bar construction, $B^\BSW_\bullet(L_\bullet)$. This discussion shows that, except for $d_0$, all the maps in $B_\bullet^\BSW L_\bullet$ preserve the subspaces of generators of $\pi_*(B_\bullet^\BSW L_\bullet)$, which is to say that this object of $s\calW(n+1)$ is almost free. Moreover, according to [Stover 2.6], the augmentation map $\pi_*(B_\bullet^\BSW L_\bullet)\to \pi_*(L)$ is a weak equivalence in $s\calW(n+1)$. Thus, this Blanc-Stover $\BSW $-construction provides an almost-free replacement of $\pi_*(L)$ in $s\calW(n+1)$.
 
+\subsection{The $\Pi$-algebra cohomology spectral sequence}
+So you just sub it all in.
+
+\subsection{Compatible decomposition maps for $\Pi$-algebras}
+Suppose that the algebraic category $\calC$ admits a decomposition map $j_\calC$. Then we \cancel{may} construct a decomposition map for $\calC\PiAlg$ as follows. \textbf{Can we?} [I'm not sure whether or not you can get all elements. Maybe if you give everything at least one positive grading, you can express everything as a quotient of free $\Pi$-algebras, and then do something clever. I don't know. For now I'll write:]
+Then a decomposition map $j_{\calC\PiAlg}$ for $\calC\PiAlg$ is \emph{compatible} with $j_\calC$ if, whenever $X_0$ and $X_1$ are models in $s\calC$, the following diagram commutes:
+\[
+\xymatrix@C-1em@R1.5em{
+& \pi Q(X_0\wedge X_1) \ar[rr]^{\pi(j_{\calC})} && \pi(QX_0\otimes QX_1) \ar[dr]^{\textup{AW}\makebox[0cm][l]{(swap for EZ other way?)}}_{\cong} \\
+Q\pi(X_0\wedge X_1) \ar[ur]^{\gamma} &&&& (\pi QX_0)\otimes (\pi QX_1) \ar[dl];[]^{\gamma\otimes\gamma}_{\cong} \\
+& Q((\pi X_0)\wedge (\pi X_1)) \ar[ul]^{\cong}_{Q(i)} && (Q\pi X_0)\otimes (Q\pi X_1) \ar[ll];[]^{j_{\calC\PiAlg}}
+}
+\]
+%Then $j_{\calC\PiAlg}$, so far defined only on for pairs of free $\calC$-$\Pi$-algebras, has the requisite symmetry, since every other map in the diagram does.
+\emph{Meh, figure out what you wanna say here, and how you want to bring in the calculation from PRLieAlgs.tex.}
+
 \subsection{A chain-level diagonal on the $\BSW $ construction}
-\todo{give the construction of the chain level diagonal}{}
 We have seen, for $L\in s\calC$, that $\pi_*(\BSW L)$ is a free object in $\calC\PiAlg$. As such, there is a diagonal
 \[\phi_{\calC\PiAlg}:\pi_*(\BSW L)\to \pi_*(\BSW L)\sqcup \pi_*(\BSW L).\]
 In this section, we'll describe how this map is the map on homotopy induced by a morphism $\phi_\BSW :\BSW L\to \BSW L\sqcup \BSW L$ in $s\calC$ (note that homotopy preserves coproducts of coproducts of spheres). 
@@ -502,24 +619,6 @@ The map $Q_{\calL(n)}\xi_\BSW $ induces a degree $(-1,0)$ bicomplex map:
 \begin{proof}
 I used to say `it's just like Goerss'...
 \end{proof}
-
-\subsection{Lie algebras in characteristic 2}
-Let $\LieOperad$ be the Lie operad in characteristic 2. As explained in [Fresse], the monad $S(\LieOperad)$ on $\vect{}{}$ defined by
-\[S(\LieOperad)(V)=\bigoplus_{n\geq1}(\LieOperad(n)\otimes V^{\otimes n})_{\Sigma_n}\]
-does not return the free Lie algebra on $V$ in the traditional sense. Rather, an $S(\LieOperad)$-algebra is a vector space $L$ equipped with a bracket $L\otimes L\to L$ satisfying the Jacobi identity and the antisymmetry condition $[x,y]=-[y,x]$. This condition does \emph{not} imply the alternating condition $[x,x]=0$ (which is impossible to encode operadically). We will refer to structures of this type as $S(\scrL)$-algebras, to distinguish them from Lie algebras, which we demand satisfy the alternating condition.
-
-Fresse constructs a monad $\Gamma(\LieOperad)$ defined by
-\[\Gamma(\LieOperad)(V)=\bigoplus_{n\geq1}(\LieOperad(n)\otimes V^{\otimes n})^{\Sigma_n},\]
-which represents the free restricted [See Curtis or 6A or something] Lie algebra. He further constructs a norm map $\textup{Tr}:S(\LieOperad)\to \Gamma(\LieOperad)$, and defines a monad $\Lambda(\LieOperad)$ by the formula
-\[\Lambda(\LieOperad)V=\im (\textup{Tr}:S(\LieOperad)V\to \Gamma(\LieOperad)V).\]
-Then $\Lambda(\LieOperad)(V)$ is the free Lie algebra on $V$, subject to the standard axiom, $[x,x]=0$.
-
-We'll be interested in \emph{partially restricted Lie algebras}. That is, Lie algebras $L$ equipped with a decomposition $L=L_0\oplus L_1$ such that $L_1$ is a Lie ideal and a map $\restn{(\DASH)}:L_1\to L_1$ satisfying the axioms one would expect for a restriction map. Namely, for any $a,b\in L_1$ and $c\in L$, $\restn{(a+b)}=\restn{a}+\restn{b}+[a,b]$, and $[\restn{a},c]=[a,[a,c]]$. There is a free functor from $\vect{}{}\times \vect{}{}$ to partially restricted Lie algebras, sending $(V_0,V_1)$ to the algebra generated by restrictable elements $V_1$ and non-restrictable elements $V_0$. This free functor may be described as follows. There is a natural $\Sigma_n$-equivariant decomposition: %The expressions for $S(\LieOperad)(V_0\oplus V_1)$ and $\Gamma(\LieOperad)(V_0\oplus V_1)$ both contain the terms:
-\[\LieOperad(n)\otimes (V_0\oplus V_1)^{\otimes n}=\Bigl(\LieOperad(n)\otimes (V_0)^{\otimes n}\Bigr)\oplus\Bigl(\bigoplus(\LieOperad(n)\otimes V_{i_1}\otimes V_{i_2}\otimes\cdots\otimes V_{i_n})\Bigr)\]
-where the direct sum is taken over all sequences $(i_1,\ldots,i_n)\in\{0,1\}^n$ other than $(0,\ldots,0)$.
-%and this decomposition is of $\Sigma_n$-modules.
-The free partially restricted Lie algebra is the subspace of $\Gamma(\LieOperad(V_0\oplus V_1))$ given by
-\[\im \Bigl(S(\LieOperad)(V_0)\overset{\textup{Tr}}{\to}\Gamma(\LieOperad)(V_0\oplus V_1)\Bigr)\oplus\bigoplus_{n\geq1}\Bigl(\bigoplus(\LieOperad(n)\otimes V_{i_1}\otimes V_{i_2}\otimes\cdots\otimes V_{i_n})\Bigr)\]
 
 
 
@@ -1078,9 +1177,27 @@ N_*N_*(S^2(Q_{\calL(n)}B^\BSW_{\bullet}L))^{t-1}_{s_{n+2}-1,s_{n+1},\ldots,s_1}.
 \item if not locally finite, by studying gradings, can see that every coalgebra is the union of its finite type (even just `finite') subcoalgebras, and that the cobar construction respects such unions, thus get the same results in infinite case as we did from double dualisation.}
 
 
-\section{Operations on Lie algebra cohomology}
+\section{Lie algebras in characteristic 2 and their cohomology}
 \todo{Recall Priddy's definition of Lie algebra cohomology, and results}{Explain that they don't calculate everything for us already, since the actual simplicial Lie algebras we're looking at are not GEMs --- their homotopy supports nontrivial operations.}
 \todo{Modify Priddy's spectral sequence argument to identify his operations with ours}{uses Singer's work}
+
+\subsection{Lie algebras in characteristic 2}
+Let $\LieOperad$ be the Lie operad in characteristic 2. As explained in [Fresse], the monad $S(\LieOperad)$ on $\vect{}{}$ defined by
+\[S(\LieOperad)(V)=\bigoplus_{n\geq1}(\LieOperad(n)\otimes V^{\otimes n})_{\Sigma_n}\]
+does not return the free Lie algebra on $V$ in the traditional sense. Rather, an $S(\LieOperad)$-algebra is a vector space $L$ equipped with a bracket $L\otimes L\to L$ satisfying the Jacobi identity and the antisymmetry condition $[x,y]=-[y,x]$. This condition does \emph{not} imply the alternating condition $[x,x]=0$ (which is impossible to encode operadically). We will refer to structures of this type as $S(\scrL)$-algebras, to distinguish them from Lie algebras, which we demand satisfy the alternating condition.
+
+Fresse constructs a monad $\Gamma(\LieOperad)$ defined by
+\[\Gamma(\LieOperad)(V)=\bigoplus_{n\geq1}(\LieOperad(n)\otimes V^{\otimes n})^{\Sigma_n},\]
+which represents the free restricted [See Curtis or 6A or something] Lie algebra. He further constructs a norm map $\textup{Tr}:S(\LieOperad)\to \Gamma(\LieOperad)$, and defines a monad $\Lambda(\LieOperad)$ by the formula
+\[\Lambda(\LieOperad)V=\im (\textup{Tr}:S(\LieOperad)V\to \Gamma(\LieOperad)V).\]
+Then $\Lambda(\LieOperad)(V)$ is the free Lie algebra on $V$, subject to the standard axiom, $[x,x]=0$.
+
+We'll be interested in \emph{partially restricted Lie algebras}. That is, Lie algebras $L$ equipped with a decomposition $L=L_0\oplus L_1$ such that $L_1$ is a Lie ideal and a map $\restn{(\DASH)}:L_1\to L_1$ satisfying the axioms one would expect for a restriction map. Namely, for any $a,b\in L_1$ and $c\in L$, $\restn{(a+b)}=\restn{a}+\restn{b}+[a,b]$, and $[\restn{a},c]=[a,[a,c]]$. There is a free functor from $\vect{}{}\times \vect{}{}$ to partially restricted Lie algebras, sending $(V_0,V_1)$ to the algebra generated by restrictable elements $V_1$ and non-restrictable elements $V_0$. This free functor may be described as follows. There is a natural $\Sigma_n$-equivariant decomposition: %The expressions for $S(\LieOperad)(V_0\oplus V_1)$ and $\Gamma(\LieOperad)(V_0\oplus V_1)$ both contain the terms:
+\[\LieOperad(n)\otimes (V_0\oplus V_1)^{\otimes n}=\Bigl(\LieOperad(n)\otimes (V_0)^{\otimes n}\Bigr)\oplus\Bigl(\bigoplus(\LieOperad(n)\otimes V_{i_1}\otimes V_{i_2}\otimes\cdots\otimes V_{i_n})\Bigr)\]
+where the direct sum is taken over all sequences $(i_1,\ldots,i_n)\in\{0,1\}^n$ other than $(0,\ldots,0)$.
+%and this decomposition is of $\Sigma_n$-modules.
+The free partially restricted Lie algebra is the subspace of $\Gamma(\LieOperad(V_0\oplus V_1))$ given by
+\[\im \Bigl(S(\LieOperad)(V_0)\overset{\textup{Tr}}{\to}\Gamma(\LieOperad)(V_0\oplus V_1)\Bigr)\oplus\bigoplus_{n\geq1}\Bigl(\bigoplus(\LieOperad(n)\otimes V_{i_1}\otimes V_{i_2}\otimes\cdots\otimes V_{i_n})\Bigr)\]
 
 
 \section{A May spectral sequence for $H^*_{\calW}$}
