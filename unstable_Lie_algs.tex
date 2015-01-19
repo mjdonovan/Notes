@@ -18,7 +18,7 @@
 \excludeversion{Unstable Lie algebras over Goerss' P-algebra}
 \excludeversion{Cohomology operations for unstable Lie algebras over P}
 \excludeversion{Unstable Lie algebras over the Lambda-algebra}
-\excludeversion{Cohomology operations for unstable Lie algebras over Lambda}
+\includeversion{Cohomology operations for unstable Lie algebras over Lambda}
 \includeversion{Composite functor spectral sequences}
 \excludeversion{The cohomology of a trivial unstable Lie algebra over P}
 \excludeversion{appendices}
@@ -294,6 +294,10 @@ url=false,doi=false,isbn=false,eprint=false]{biblatex}%
 \newcommand{\BSWres}{{\scrG_\bullet}}
 \newcommand{\PiAlg}{\textup{-$\Pi$-Alg}}
 \newcommand{\quadratic}{\textup{qu}}
+\newcommand{\ExtCohOp}{\textup{Op}_\textup{ext}}
+\newcommand{\vExtCohOp}{\textup{Op}_\textup{v,ext}}
+\newcommand{\hExtCohOp}{\textup{Op}_\textup{h,ext}}
+\newcommand{\ExtCohProd}{\mu_\textup{ext}}
 
 \newcommand{\NOFULLPAGE}{\relax}
 
@@ -472,17 +476,37 @@ The map $Q_\calC\xi_\calC$ induces a chain map of degree $-1$ on normalised comp
 \end{lem}
 We now have access to the composite
 \[\psi_\calC:\left(N_s(Q_{\calC}X_\bullet)\overset{Q_\calC\xi_\calC}{\to} N_{s-1}((Q_{\calC}(X_\bullet\wedge X_\bullet))^{\Sigma_2})\overset{j_\calC}{\to} N_{s-1}(S^2(Q_{\calC}X_\bullet))\right),\]
-which we can use to define operations using the EZAW maps that I'll introduce here, with the specialness property. (Goerss calls them `higher EZ maps'.)
-\textbf{Go ahead and introduce them, dude.} Use the language $\Sq_\textup{ext}^k$ and $\mu_\textup{ext}$, and denote them, for $U\in s\vect{}{}$:
-\[\Sq^k_\textup{ext}:H^m((CU)^*)\to H^{m+k}((CS^2U)^*)\]
-and an exterior product
-\[\mu_\textup{ext}:H^{m_1}((CU)^*)\otimes H^{m_2}((CU)^*)\to H^{m_1}((CS^2U)^*).\]
+which we can use to define operations on $\calC$-cohomology. We will construct such operations from certain generic operations, defined for any $U\in s\calV$:
+\begin{gather*}
+\ExtCohOp^k:H^{n}((N_*U)^*)\to H^{n+k}((N_*(S^2U))^*),\textup{ zero unless $0\leq k\leq n$, and}\\
+\ExtCohProd:H^{n_1}((N_*U)^*)\otimes H^{n_2}((N_*U)^*)\to H^{n_1+n_2}((N_*(S^2U))^*).
+\end{gather*}
+These operations are defined as follows. In all that follows, let $\{D_k\}$ be a special cup-$k$ product [Singer \S1.9], and define $\oldphi:\left(C_mU\right)^*\otimes \left(C_mU\right)^*\to \left(C_m(U\otimes U)\right)^*$ by
+\[\oldphi:\left(N_mU\overset{\alpha}{\to}\F_2\right)\otimes \left(N_mU\overset{\beta}{\to}\F_2\right)\mapsto\left(N_m(U\otimes U)\overset{\alpha\otimes\beta}{\to}\F_2\otimes \F_2\overset{\cdot}{\to}\F_2\right).\]
+Then define a cochain map:
+\[m_\textup{ext}:(N_*U)^*\otimes (N_*U)^*\to (N_*S^2U)^*\]
+and functions
+\[S^k_\textup{ext}:(N_mU)^*\to (N_{m+k}S^2U)\]
+by the formulae, for $\alpha\in (N_{n_1}U)^*$ and $\alpha\in (N_{n_2}U)^*$
+\[m_\textup{ext}(\alpha\otimes\beta)=D_0^*\oldphi(\alpha\otimes\beta),\quad S^k_\textup{ext}(\alpha)=D^*_{n_1-k}\oldphi(\alpha\otimes \alpha)+D^*_{n_1-k+1}\oldphi(\alpha\otimes d\alpha),\]
+where we regard the $D^*_k$ as maps into $(N_*S^2U)^*$ by composition with the projection from $(N_*(U\otimes U))^*$. one checks that these operations are well defined by the same arguments as in [Singer \S1.12].
 
-\textbf{The following argument is wrong. Just check it in the special case of interest to us.} Anyway, we should check that these operations are in fact natural in $X$, and in particular do not depend on the almost free structure chosen. In order to give a definition that is evidently natural, for any $X$, we might define the operations as follows. For any $X\in s\calC$, let $X^c\in s\calC$ be the bar construction on $X$. Then $X^c$ is almost free, and for any map $f:X\to Y$, the map $X^c\to Y^c$ preserves the generating subspaces. If we define operations on $H^*X=\pi_*(Q_\calC X^c)^*$ using this almost free structure, then the map $H^*X\from H^*Y$ induced by $f$ will commute with these operations. All that remains is to show that when $X$ is already almost free, the operations defined above coincide with the operations just defined using the bar construction.
+Following Goerss [\S3], one notes that the linear maps $\ExtCohOp^k$ induce dual operators
+\[(\ExtCohOp^k)^*:H_*(NS^2U)\to H_{*-k}(NU)\]
+whenever these groups are locally finite dimensional. One can define the operations $(\ExtCohOp^k)^*$ directly, without the double dualisation as follows. If $\sigma_i$ and $\pi_*(1+T)$ are the maps of Goerss[\S3], then any element of $x\in H_m(NS^2U)$ can be written as a sum
+\[x=\sum_j\pi_*(1+T)(y_j\otimes z_j)+\sum_{0\leq k\leq \lfloor m/2\rfloor}\sigma_k(x_k),\]
+where $x_k\in H_{m-k}(NU)$.
+Then the map $(\ExtCohOp^k)^*$ sends $x$ to this $x_k$.
+
+
+
+
+
+{\tiny \textbf{The following argument is wrong. Just check it in the special case of interest to us.} Anyway, we should check that these operations are in fact natural in $X$, and in particular do not depend on the almost free structure chosen. In order to give a definition that is evidently natural, for any $X$, we might define the operations as follows. For any $X\in s\calC$, let $X^c\in s\calC$ be the bar construction on $X$. Then $X^c$ is almost free, and for any map $f:X\to Y$, the map $X^c\to Y^c$ preserves the generating subspaces. If we define operations on $H^*X=\pi_*(Q_\calC X^c)^*$ using this almost free structure, then the map $H^*X\from H^*Y$ induced by $f$ will commute with these operations. All that remains is to show that when $X$ is already almost free, the operations defined above coincide with the operations just defined using the bar construction.
 
 If $V_n\subseteq X_n$ is the space of generators, and if $\epsilon:X^c\to X$ is the acyclic fibration associated with the bar construction, notice that $\epsilon^{-1}(V_n)$ is contained in the generaing subspace of $(X^c)_n$. Now as $\epsilon$ is an acyclic fibration, and $X$ is cofibrant, the map $X^c\to X$ admits a section $s:X\to X^c$, and $S(V_n)$, being contained in $\epsilon^{-1}(V_n)$, consists only of generators for $(X^c)_n$. As $s:X\to X^c$ preserves generators, it induces a map on cohomology that commutes with the operations, and so its inverse $\epsilon^*$ must also commute with the operations. Thus the two modes of defining operations on $H^*_\calC X$ coincide.
 
-[\textbf{Maybe} it's better to be brief, saying --- one might be concerned that this definition depends on the choice of almost free replacement. However, if $X\in s\calC$ is almost free, although the acyclic fibration $\epsilon:B^\calC X\to X$ does not preserve the generating subspaces, any section of $\epsilon$ \emph{must} preserve the generating subspaces, and as $X$ is almost free, such a section must exist.] \textbf{Actually, for this you} \emph{need that the kernel of the augmentation of the monad $F_\calC$ is preserved by the multiplication (or similar), else it's not true that only generators map down to generators! Don't forget to include this in the discourse on $\calC$.}
+[\textbf{Maybe} it's better to be brief, saying --- one might be concerned that this definition depends on the choice of almost free replacement. However, if $X\in s\calC$ is almost free, although the acyclic fibration $\epsilon:B^\calC X\to X$ does not preserve the generating subspaces, any section of $\epsilon$ \emph{must} preserve the generating subspaces, and as $X$ is almost free, such a section must exist.] \textbf{Actually, for this you} \emph{need that the kernel of the augmentation of the monad $F_\calC$ is preserved by the multiplication (or similar), else it's not true that only generators map down to generators! Don't forget to include this in the discourse on $\calC$.}}
 
 
 
@@ -490,7 +514,7 @@ If $V_n\subseteq X_n$ is the space of generators, and if $\epsilon:X^c\to X$ is 
 \subsection{The example of simplicial commutative $\F_2$-algebras}
 Include Goerss' theorem.
 
-
+\textbf{Maybe here put the operations on simplicial algebras and also the operations on Lie cohomology.} You can prove in the appendix that they coincide with those of Priddy.
 
 
 
@@ -849,7 +873,7 @@ Moreover the composite $Q_{\LambdaMonad(n)}\circ F_{\calW(n)}$ equals the the fr
 \section{Cohomology operations for unstable Lie algebras over $\Lambda$}
 \todoeasy{Do all the same work as in the $n=0$ case, to get horizontal and vertical $\Sq$ and products}{must explain in detail what the available operations are
 \item relations between them less important}
-\subsection{Vertical steenrod operations for $H^*_{\calW(n)}$, $n\geq1$}
+\subsection{Vertical steenrod operations for $H^*_{\calW(n)}$, $n\geq1$}\label{section: vertical Koszul operations n positive}
 Fix $n\geq1$. For $V\in \vect{+}{n}$, we will define natural homomorphisms
 \[\gamma_i:(F_{\calW(n)}V)^{2t+1}_{s_n+i-1,2s_{n-1},\ldots,2s_1}\to V^{t}_{s_n,\ldots,s_1},\]
 whenever $1\leq i \leq s_n$ and not all of $i-1,s_{n-1},\ldots,s_1$ are zero.
@@ -910,7 +934,7 @@ and the differential $d:N_{n+1}V\to ZN_nV$ corresponds to $\imath^*$ under these
 Corresponding to the above structure, $S^n_{\calC}$ contains an element $z$ in dimension $n$, $CS^n_{\calC}$ contains an element $h$ in dimension $n+1$, there is a map $\imath:S^n_{\calC}\to CS^n_{\calC}$ sending $z$ to $d_0h$. For $L\in s\calC$, $\imath^*$ represents the differential under the isomorphisms
 \[\hom_{s\calC}(S_\calC^n,L)\cong ZN_nL,\textup{ and }\hom_{s\calC}(CS_\calC^n,L)\cong N_{n+1}L.\]
 
-In this context, Blanc-Stover's comonad $\BSW$, applied to $L\in s\calC$, may be written as the pushout
+In this context, Blanc-Stover's comonad $\BSW$, applied to $L\in s\calC$, is the pushout
 \[\xymatrix@R=4mm{
 \bigsqcup_{n\geq0}\bigsqcup_{N_{n+1}L}S_\calC^n
 \ar[r]\ar[d]^-{\bigsqcup\bigsqcup\imath}
@@ -1082,32 +1106,32 @@ When $V$ is a cocommutative coalgebra, the diagonal map $V\to S^2V$ induces a ma
 \begin{thm}[Singer's Book, thm 2.15-2.17,2.22]
 For all $p,q\geq0$ and all $r\geq2$, there are well-defined vector space homomorphisms:
 \begin{alignat*}{2}
-\Sq^k_\textup{ext}:E^{p,q}_r(V)&\to E^{p,q+k}_r(S^2V)&\qquad&\text{if }0\leq k \leq q,\\
-\Sq^k_\textup{ext}:E^{p,q}_r(V)&\to E^{p+k-q,2q}_{r+k-q}(S^2V)&\qquad&\text{if }q\leq k\leq q+r-2,\\
-\Sq^k_\textup{ext}:E^{p,q}_r(V)&\to E^{p+k-q,2q}_{2r-2}(S^2V)&\qquad&\text{if }q+r-2\leq k.
+\ExtCohOp^k:E^{p,q}_r(V)&\to E^{p,q+k}_r(S^2V)&\qquad&\text{if }0\leq k \leq q,\\
+\ExtCohOp^k:E^{p,q}_r(V)&\to E^{p+k-q,2q}_{r+k-q}(S^2V)&\qquad&\text{if }q\leq k\leq q+r-2,\\
+\ExtCohOp^k:E^{p,q}_r(V)&\to E^{p+k-q,2q}_{2r-2}(S^2V)&\qquad&\text{if }q+r-2\leq k.
 \end{alignat*}
-The operations $\Sq^k_\textup{ext}$ are all defined at $E_2$, and determine the operations at each $E_r$, $r>2$. The operations $\Sq^k_\textup{ext}$ commute with differentials. Finally, the $\Sq^k_\textup{ext}$ converge to well defined maps on $E_\infty$, and there is a commuting diagram
+The operations $\ExtCohOp^k$ are all defined at $E_2$, and determine the operations at each $E_r$, $r>2$. The operations $\ExtCohOp^k$ commute with differentials. Finally, the $\ExtCohOp^k$ converge to well defined maps on $E_\infty$, and there is a commuting diagram
 \[\xymatrix@R=4mm{
-E^{p,q}_\infty(V)\ar[r]^-{\Sq_\textup{ext}^k}\ar[d]^-{\pi}
+E^{p,q}_\infty(V)\ar[r]^-{\ExtCohOp^k}\ar[d]^-{\pi}
 &%r1c1
 E^{p,q+k}_\infty(S^2V)\ar[d]^-{\pi}
 \\%r1c2
-E_0^{p,q}H^*((CV)^*)\ar[r]^-{\Sq_\textup{ext}^k}&%r2c1
+E_0^{p,q}H^*((CV)^*)\ar[r]^-{\ExtCohOp^k}&%r2c1
 E_0^{p,q+k}H^*((CS^2V)^*)%r2c2
 }\]
 whenever $0\leq k\leq q$, and a commuting diagram
 \[\xymatrix@R=4mm{
-E^{p,q}_\infty(V)\ar[r]^-{\Sq_\textup{ext}^k}\ar[d]^-{\pi}
+E^{p,q}_\infty(V)\ar[r]^-{\ExtCohOp^k}\ar[d]^-{\pi}
 &%r1c1
 E^{p+k-q,2q}_\infty(S^2V)\ar[d]^-{\pi}
 \\%r1c2
-E_0^{p,q}H^*((CV)^*)\ar[r]^-{\Sq_\textup{ext}^k}&%r2c1
+E_0^{p,q}H^*((CV)^*)\ar[r]^-{\ExtCohOp^k}&%r2c1
 E_0^{p+k-q,2q}H^*((CS^2V)^*)%r2c2
 }\]
-whenever $q\leq k$ (which summarises also Singer's computation of how the $\Sq^k_\textup{ext}$ interact with the filtation on cohomology).
+whenever $q\leq k$ (which summarises also Singer's computation of how the $\ExtCohOp^k$ interact with the filtation on cohomology).
 
 Similar theory holds for an exterior product operation
-\[\mu_\textup{ext}:E_r^{p_1,q_1}(V)\otimes E_r^{p_2,q_2}(V)\to E_r^{p_1+p_2,q_1+p_2}(S^2V)\]
+\[\ExtCohProd:E_r^{p_1,q_1}(V)\otimes E_r^{p_2,q_2}(V)\to E_r^{p_1+p_2,q_1+p_2}(S^2V)\]
 %Moreover, for $r\geq2$ and $p,q,k\geq0$ given, if $\alpha\in E_r^{p,q}$, then $\Sq_\textup{ext}^k\alpha$ and $\Sq_\textup{ext}^kd_r\alpha$ both survive to $E_t$, where
 %\[t=\begin{cases}
 %r,&\textup{if }0\leq k \leq q-r+1;\\
@@ -1120,32 +1144,32 @@ Similar theory holds for an exterior product operation
 Moreover, if the bisimplicial object $V$ admits an augmentation $\lambda:V_{0\bullet}\to U_{\bullet}$, then %such that the natural map $\lambda_*:CV\to CU$ is a weak equivalence,
 Singer proves the following relationship between the spectral sequence operations and the operations of \S\ref{quadratic part section}:
 \begin{thm}[Proposition 2.1]
-The $\Sq^k_\textup{ext}$ and $\mu_\textup{ext}$ commute with $\lambda^*$, so that there are commuting diagrams
+The $\ExtCohOp^k$ and $\ExtCohProd$ commute with $\lambda^*$, so that there are commuting diagrams
 \[\xymatrix@R=4mm{
-H^{m}((CU)^*)\ar[r]^-{\Sq^k_\textup{ext}}
+H^{m}((CU)^*)\ar[r]^-{\ExtCohOp^k}
 \ar[d]^-{\lambda^*}
 &%r1c1
 H^{m+k}((CS^2U)^*)\ar[d]^-{(S^2\lambda)^*}
 &%r1c3
-H^{m_1}((CU)^*)\otimes H^{m_2}((CU)^*)\ar[r]^-{\mu_\textup{ext}}
+H^{m_1}((CU)^*)\otimes H^{m_2}((CU)^*)\ar[r]^-{\ExtCohProd}
 \ar[d]^-{\lambda^*}
 &%r1c1
 H^{m_1+m_2}((CS^2U)^*)\ar[d]^-{(S^2\lambda)^*}
 \\%r1c5
-H^{m}((CV)^*)\ar[r]^-{\Sq^k_\textup{ext}}
+H^{m}((CV)^*)\ar[r]^-{\ExtCohOp^k}
 &%r2c1
 H^{m+k}((CS^2V)^*)
 &%r2c3
-H^{m_1}((CV)^*)\otimes H^{m_2}((CV)^*)\ar[r]^-{\mu_\textup{ext}}
+H^{m_1}((CV)^*)\otimes H^{m_2}((CV)^*)\ar[r]^-{\ExtCohProd}
 &%r2c1
 H^{m_1+m_2}((CS^2V)^*)
 }\]
 \end{thm}
 
-Singer separates the operations $\Sq^k_\textup{ext}:E^{p,q}_2\to E_{2}$ according to the pattern of change in the spectral sequence coordinates of their output. Indeed, define
+Singer separates the operations $\ExtCohOp^k:E^{p,q}_2\to E_{2}$ according to the pattern of change in the spectral sequence coordinates of their output. Indeed, define
 \begin{alignat*}{2}
-\Sq^k_\textup{v,ext}=\Sq^k_\textup{ext}:E^{p,q}_2(V)&\to E^{p,q+k}_2(S^2V)&\qquad&\text{if }0\leq k \leq q,\\
-\Sq^k_\textup{h,ext}=\Sq^{q+k}_\textup{ext}:E^{p,q}_2(V)&\to E^{p+k,2q}_2(S^2V)&\qquad&\text{if }0\leq k \leq p,
+\vExtCohOp^k=\ExtCohOp^k:E^{p,q}_2(V)&\to E^{p,q+k}_2(S^2V)&\qquad&\text{if }0\leq k \leq q,\\
+\hExtCohOp^k=\ExtCohOp^{q+k}:E^{p,q}_2(V)&\to E^{p+k,2q}_2(S^2V)&\qquad&\text{if }0\leq k \leq p,
 \end{alignat*}
 and gives explicit formulae for these $E_2$ operations, and for the product at $E_2$ [Singer 2.23].
 
@@ -1156,18 +1180,18 @@ to define a spectral sequence map
 \[E_2^{p,q}(S^2(Q_{\calL(n)}\BSWres L))^{s_n,\ldots,s_1}_t\overset{(\psi_\BSW)^*}{\to} E_2^{p+1,q}(Q_{\calL(n)}\BSWres L)^{s_n,\ldots,s_1}_{t+1}\]
 We may then define internal spectral sequence operations
 \begin{alignat*}{2}
-\Sq^k=\psi_{\BSW}^*\circ\Sq^{k-1}_\textup{ext}:(E^{p,q}_r)^{s_n,\ldots,s_1}_t&\to (E^{p+1,q+k-1}_r)^{2s_n,\ldots,2s_1}_{2t+1}&\qquad&\text{if }0\leq k-1 \leq q,\\
-\Sq^k=\psi_{\BSW}^*\circ\Sq^{k-1}_\textup{ext}:(E^{p,q}_r)^{s_n,\ldots,s_1}_t&\to (E^{p+k-q,2q}_{r+k-q-1})^{2s_n,\ldots,2s_1}_{2t+1}&\qquad&\text{if }q\leq k-1\leq q+r-2,\\
-\Sq^k=\psi_{\BSW}^*\circ\Sq^{k-1}_\textup{ext}:(E^{p,q}_r)^{s_n,\ldots,s_1}_t&\to (E^{p+k-q,2q}_{2r-2})^{2s_n,\ldots,2s_1}_{2t+1}&\qquad&\text{if }q+r-2\leq k-1.
+\Sq^k=\psi_{\BSW}^*\circ\ExtCohOp^{k-1}:(E^{p,q}_r)^{s_n,\ldots,s_1}_t&\to (E^{p+1,q+k-1}_r)^{2s_n,\ldots,2s_1}_{2t+1}&\qquad&\text{if }0\leq k-1 \leq q,\\
+\Sq^k=\psi_{\BSW}^*\circ\ExtCohOp^{k-1}:(E^{p,q}_r)^{s_n,\ldots,s_1}_t&\to (E^{p+k-q,2q}_{r+k-q-1})^{2s_n,\ldots,2s_1}_{2t+1}&\qquad&\text{if }q\leq k-1\leq q+r-2,\\
+\Sq^k=\psi_{\BSW}^*\circ\ExtCohOp^{k-1}:(E^{p,q}_r)^{s_n,\ldots,s_1}_t&\to (E^{p+k-q,2q}_{2r-2})^{2s_n,\ldots,2s_1}_{2t+1}&\qquad&\text{if }q+r-2\leq k-1.
 \end{alignat*}
 Which, at $E_2$, we may write (dropping internal degrees) as \textbf{(precisely?:)}
 \begin{alignat*}{2}
-\Sq^k_\textup{v}=\psi_{\BSW}^*\circ\Sq^{k-1}_\textup{v,ext}=\psi_{\BSW}^*\circ\Sq^{k-1}_\textup{ext}:E^{p,q}_2&\to E^{p+1,q+k-1}_2&\qquad&\text{if }0\leq k-1 \leq q,\\
-\Sq^k_\textup{h}=\psi_{\BSW}^*\circ\Sq^{k-1}_\textup{h,ext}=\psi_{\BSW}^*\circ\Sq^{q+k-1}_\textup{ext}:E^{p,q}_2&\to E^{p+k,2q}_2&\qquad&\text{if }0\leq k-1 \leq p,
+\Sq^k_\textup{v}=\psi_{\BSW}^*\circ\vExtCohOp^{k-1}=\psi_{\BSW}^*\circ\ExtCohOp^{k-1}:E^{p,q}_2&\to E^{p+1,q+k-1}_2&\qquad&\text{if }0\leq k-1 \leq q,\\
+\Sq^k_\textup{h}=\psi_{\BSW}^*\circ\hExtCohOp^{k-1}=\psi_{\BSW}^*\circ\ExtCohOp^{q+k-1}:E^{p,q}_2&\to E^{p+k,2q}_2&\qquad&\text{if }0\leq k-1 \leq p,
 \end{alignat*}
 
 And similarly, a pairing
-\[\mu=\psi_{\BSW}^*\circ\mu_\textup{ext}:(E^{p,q}_r)^{s_n,\ldots,s_1}_t\otimes (E^{p',q'}_r)^{s'_n,\ldots,s'_1}_{t'}\to (E^{p+p'+1,q+q'}_r)^{s_n+s'_n,\ldots,s_1+s'_1}_{t+t'+1}\]
+\[\mu=\psi_{\BSW}^*\circ\ExtCohProd:(E^{p,q}_r)^{s_n,\ldots,s_1}_t\otimes (E^{p',q'}_r)^{s'_n,\ldots,s'_1}_{t'}\to (E^{p+p'+1,q+q'}_r)^{s_n+s'_n,\ldots,s_1+s'_1}_{t+t'+1}\]
 The reader might now guess the next results:
 \begin{thm}\label{E2CompFuncOperationsID}
 At $E_2$, the operations $\Sq_\textup{h}^k$, $\Sq_\textup{v}^k$ and $\mu$ are equal to the $H^*_{\calW(n+1)}$-cohomology operations on $E_2=H^*_{\calW(n+1)}H_*^{\calU(n)}X$ of the same name, as defined in [\S?].
@@ -1320,14 +1344,15 @@ Q(\pi( \BSW^{p+k+1}L))
 \ar[uu]_-{Q(\xi_{\calW(n+1)})}
 \ar[lll]_-{=}
 }\]
-The bottom left square commutes simply by naturality of $\gamma$, while the bottom right square is an instance of lemma \ref{LemmaOn xi}. What remains is to check that the hexagon commutes. For notational convenience, write $A=\BSW^{p+k}L$, $\textup{br}:(\pi_* A)^{\otimes 2}\to (\pi_* A)^{\wedge 2}$ for the bracket $a\otimes b\mapsto [a,b]$ on homotopy, and similarly write $\textup{br}:A^{\otimes 2}\to A^{\wedge 2}$ for the chain level bracket. Now any element of $Q((\pi_* A)^{\wedge 2})$ is the class of an expression $\textup{br}(\overline{x}\otimes\overline{y})+E$ where $\overline{x},\overline{y}\in\pi_* A$ are represented by $x,y\in N_*A$, and $E\in(\pi_* A)^{\wedge 2}$ is a sum of terms which are $\lambda$-operations applied to 3-fold brackets of elements of $\pi_* A$. The map $Q(i)$ is induced by the Eilenberg-Zilber formula, and
-\[\textup{br}(\overline{x}\otimes\overline{y})\overset{\gamma\circ Q(i)}{\mapsto}\overline{\textup{br}(\textup{EZ}(x\otimes y))}\overset{\pi_*(j)}{\mapsto}\overline{(\textup{EZ}(x\otimes y))}\overset{D_0}{\mapsto}\overline{x}\otimes \overline{y}.\]
-The last mapping follows from the fact that $D_0\circ\textup{EZ}=\textup{id}$. \textbf{Need notation for EZ.}
+The bottom left square commutes simply by naturality of $\gamma$, while the bottom right square is an instance of lemma \ref{LemmaOn xi}. What remains is to check that the hexagon commutes. For notational convenience, write $A=\BSW^{p+k}L$, $\textup{br}:(\pi_* A)^{\otimes 2}\to (\pi_* A)^{\wedge 2}$ for the bracket $a\otimes b\mapsto [a,b]$ on homotopy, and similarly write $\textup{br}:A^{\otimes 2}\to A^{\wedge 2}$ for the chain level bracket. Now any element of $Q((\pi_* A)^{\wedge 2})$ is the class of an expression $\textup{br}(\overline{x}\otimes\overline{y})+E$ where $\overline{x},\overline{y}\in\pi_* A$ are represented by $x,y\in N_*A$, and $E\in(\pi_* A)^{\wedge 2}$ is a sum of terms which are $\lambda$-operations applied to 3-fold brackets of elements of $\pi_* A$. The map $Q(i)$ is induced by the Eilenberg-MacLane map shuffle map $\nabla$ [](\textbf{what exactly?}), and
+\[\textup{br}(\overline{x}\otimes\overline{y})\overset{\gamma\circ Q(i)}{\mapsto}\overline{\textup{br}(\nabla(x\otimes y))}\overset{\pi_*(j)}{\mapsto}\overline{(\nabla(x\otimes y))}\overset{D_0}{\mapsto}\overline{x}\otimes \overline{y}.\]
+The last mapping follows from the fact that $D_0\circ\nabla=\textup{id}$, as $\{D_k\}$ is special.
 Similarly, our understanding of the construction of $\lambda$-operations and iterated brackets shows that $E$ is annihilated by $\pi_*(j)\circ\gamma\circ Q(i)$. As $E$ is also annihilated by $j$, and $j(\textup{br}(\overline{x}\otimes\overline{y})) =\overline{x}\otimes\overline{y}$, the hexagon commutes. \textbf{This is poorly written.}
 
 \vfil\pagebreak
 
-\textbf{Still need to do Koszul operations.}
+\textbf{Koszul operations:}
+Next, we must identify the operations $\Sq_\textup{v}^i$ defined using $\psi_{\BSW}$ with the operations $\Sq_v^i$ defined in \S\ref{section: vertical Koszul operations n positive} using the map $\gamma_i$.
 \end{proof}
 
 \vfil\pagebreak
@@ -1709,7 +1734,7 @@ having all gradings at the very right, tensor products of vector spaces,\ldots?
 \item change all $\calW$'s to $\calK$'s?
 \item choose a consistent set of sub/superscript conventions for the categories you're using.
 \item Change the notations $i$ and $\gamma$ for $\Pi$-algebra stuff.
-\item Uniformize notation for the total complex of a double complex.
+\item Uniformize notation for the total complex of a double complex, and for the cohomotopy of the dual of a simplicial vector space.
 \item In bit about quadratic decomposition, say ``I'll just prove well definedness in specific cases.''
 \item Uniformize bracketing and other notation for quadratic decompositions.
 \item Need a bit of theory about splittings of monads, homogeneity, and unital part of an expression.
