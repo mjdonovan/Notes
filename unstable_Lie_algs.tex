@@ -14,11 +14,11 @@
 
 \excludeversion{comp func sseq old version}
 %\renewcommand{\excludeversion}[1]{\includeversion{#1}}
-\includeversion{Conventions and notation}
+\excludeversion{Conventions and notation}
 \excludeversion{Unstable Lie algebras over Goerss' P-algebra}
 \excludeversion{Cohomology operations for unstable Lie algebras over P}
 \excludeversion{Unstable Lie algebras over the Lambda-algebra}
-\includeversion{Cohomology operations for unstable Lie algebras over Lambda}
+\excludeversion{Cohomology operations for unstable Lie algebras over Lambda}
 \includeversion{Composite functor spectral sequences}
 \excludeversion{The cohomology of a trivial unstable Lie algebra over P}
 \excludeversion{appendices}
@@ -1193,13 +1193,16 @@ Which, at $E_2$, we may write (dropping internal degrees) as \textbf{(precisely?
 And similarly, a pairing
 \[\mu=\psi_{\BSW}^*\circ\ExtCohProd:(E^{p,q}_r)^{s_n,\ldots,s_1}_t\otimes (E^{p',q'}_r)^{s'_n,\ldots,s'_1}_{t'}\to (E^{p+p'+1,q+q'}_r)^{s_n+s'_n,\ldots,s_1+s'_1}_{t+t'+1}\]
 The reader might now guess the next results:
-\begin{thm}\label{E2CompFuncOperationsID}
-At $E_2$, the operations $\Sq_\textup{h}^k$, $\Sq_\textup{v}^k$ and $\mu$ are equal to the $H^*_{\calW(n+1)}$-cohomology operations on $E_2=H^*_{\calW(n+1)}H_*^{\calU(n)}X$ of the same name, as defined in [\S?].
+\begin{thm}\label{E2CompFuncLieOperationsID}
+At $E_2$, the operations $\Sq_\textup{h}^k$ and $\mu$ are equal to the $H^*_{\calW(n+1)}$-cohomology operations on $E_2=H^*_{\calW(n+1)}H_*^{\calU(n)}X$ of the same name, as defined in [\S?].
+\end{thm}
+\begin{thm}\label{E2CompFuncKosOperationsID}
+At $E_2$, the operations $\Sq_\textup{v}^k$ are equal to the $H^*_{\calW(n+1)}$-cohomology operations on $E_2=H^*_{\calW(n+1)}H_*^{\calU(n)}X$ of the same name, as defined in [\S?].
 \end{thm}
 \begin{thm}\label{EInftyCompFuncOperationsID}
 At $E_\infty$, the operations $\Sq^k$ are compatible with the operations $\Sq^k_\textup{h}$ defined on the target $H^*_{\calW(n)}(X)$, as defined in [\S?].
 \end{thm} 
-\begin{proof}[Proof of \ref{E2CompFuncOperationsID}]
+\begin{proof}[Proof of \ref{E2CompFuncLieOperationsID}]
 We will prove this theorem in various parts. Firstly, we'll work on the operations $\Sq_\textup{h}^k$ and $\mu$ at $E_2$.
 For this we will rely on a commuting diagram, where we write $L=Q_{\calU(n)}X^c\in s\calL(n)$ and $Y=\BSWres L\in ss\calL(n)$:
 \[\xymatrix@C=13mm@R=4mm{
@@ -1348,11 +1351,75 @@ The bottom left square commutes simply by naturality of $\gamma$, while the bott
 \[\textup{br}(\overline{x}\otimes\overline{y})\overset{\gamma\circ Q(i)}{\mapsto}\overline{\textup{br}(\nabla(x\otimes y))}\overset{\pi_*(j)}{\mapsto}\overline{(\nabla(x\otimes y))}\overset{D_0}{\mapsto}\overline{x}\otimes \overline{y}.\]
 The last mapping follows from the fact that $D_0\circ\nabla=\textup{id}$, as $\{D_k\}$ is special.
 Similarly, our understanding of the construction of $\lambda$-operations and iterated brackets shows that $E$ is annihilated by $\pi_*(j)\circ\gamma\circ Q(i)$. As $E$ is also annihilated by $j$, and $j(\textup{br}(\overline{x}\otimes\overline{y})) =\overline{x}\otimes\overline{y}$, the hexagon commutes. \textbf{This is poorly written.}
-
+\end{proof}
 \vfil\pagebreak
+\begin{proof}[Proof of \ref{E2CompFuncKosOperationsID}]
+We must identify the operations $\Sq_\textup{v}^i=\psi_{\BSW}^*\circ\vExtCohOp^{i-1}$ with the $\calW(n+1)$-cohomology operations $\Sq_\textup{v}^i$ defined in \S\ref{section: vertical Koszul operations n positive} using the map $\gamma_i$. Recall that the operations of \S\ref{section: vertical Koszul operations n positive} are the maps induced on cohomology by the \textbf{chain map?}
+\[\gamma_i:N_{s_{n+1}+1}(Q_{\calW(n+1)} B^{\calW(n+2)}_{\bullet}\pi_*L)^{2t+1}_{s_{n+1}+i-1,\ldots}\to N_{s_{n+1}}(Q_{\calW(n+1)} B^{\calW(n+2)}_{\bullet}\pi_*L)^{t}_{s_{n+1},\ldots},\]
+which we can see on $E^2$ via a morphism
+\[\chi:B^{\calW(n+1)}_{\bullet}\pi_*L\to \pi_*(G_\bullet L)\]
+of resolutions of $\pi_*L$. 
+We will define $\chi$ shortly. If we write $V=Q_{\calL(n)}G_\bullet L$ for the double complex yielding the spectral sequence, this map induces a weak equivalence (in $s\calV$)
+\[Q_{\calW(n+1)}(\chi):Q_{\calW(n+1)}B^{\calW(n+1)}_{\bullet}\pi_*L\to \pi_*(V).\]
+Now, $\gamma_i$ induces a map on $\calW(n+1)$-homology, whose dual we would like to identify with the composite:
+\[\psi_{\BSW}^*\circ\vExtCohOp^{i-1}:\left(E^{p,q}_2(V)\overset{\vExtCohOp^{i-1}}{\to} E^{p,q+i-1}_2(S^2V)\overset{\psi_{\BSW}^*}{\to}E^{p+1,q+i-1}_2(V)\right).\]
+However, this composite is itself the dual of an operator:
+\[\left(E_{p,q}^2(V)\overset{(\vExtCohOp^{i-1})^*}{\from} E_{p,q+i-1}^2(S^2V)\overset{\psi_{\BSW}}{\from}E_{p+1,q+i-1}^2(V)\right),\]
+as Singer gives the formula on $E^2$ \textbf{and it's easy} for vertical operations, and we talked about the dual operations $(\vExtCohOp^{i-1})^*$ like this in []. Thus, what we are to prove is equivalent to a commuting diagram
+\[\xymatrix@R=4mm{
+N_{p+1}(QB_\bullet\pi_*L)_{q+i-1}\ar[rr]^-{(\gamma_i)_*}
+\ar[d]^-{Q\chi}
+&%r1c1
+&%r1c2
+N_p(QB_\bullet\pi_*L)_q\ar[d]^-{Q\chi}
+\\%r1c3
+N_{p+1}(\pi_*(V))_{q+i-1}\ar[r]^-{\psi_{\BSW}}
+&%r2c1
+N_{p}(\pi_*(S^2V))_{q+i-1}\ar[r]^-{(\vExtCohOp^{i-1})^*}
+&%r2c2
+N_p(\pi_*(V))_q%r2c3
+}\]
+Given the description of the operations $(\vExtCohOp^{i-1})^*$, it will suffice to show that the composite
+\[(QB_{p+1}\pi_*L)_{q+i-1}\overset{Q\chi}{\to}(\pi_*(Q_{\calL(n)}G_{p+1}L))_{q+i-1}\overset{\psi_{\BSW}}{\to}(\pi_*(S^2(Q_{\calL(n)}G_pL)))_{q+i-1}\]
+equals the sum of the composites
+\[(QB_{p+1}\pi_* L)_{q+i-1}\overset{(\gamma_i)_*}{\to} (QB_{p}\pi_* L)_q\overset{Q\chi}{\to} (\pi_*QG_{p}L)_q\overset{\sigma_{i-1}}{\to} (\pi_*(S^2(Q_{\calL(n)}G_{p}L)))_{q+i-1}\]
+[\textbf{residual question:} what's going on with the phrase: ``including the composite $(\Sq^i)^*=(\gamma_i)_*$ when $i$ is top, which admittedly is not dual to anything whatsoever'' \textbf{answer} nothing probably, as you get top lambda from $q:\textup{PRL}\overset{onto}{\to}S^2$], and also the composite which sorts out the products:
+\[(QB_{p+1}\pi_* L)_{q+i-1}\overset{\mu^*\textbf{rename}}{\to}((QB_{p}\pi_* L)^{\otimes2})_{q+i-1}\overset{\pi_*(1+T)\circ(Q\chi)^{\otimes2}}{\to}(\pi_*(S^2(Q_{\calL(n)}G_{p}L)))_{q+i-1}\]
 
-\textbf{Koszul operations:}
-Next, we must identify the operations $\Sq_\textup{v}^i$ defined using $\psi_{\BSW}$ with the operations $\Sq_v^i$ defined in \S\ref{section: vertical Koszul operations n positive} using the map $\gamma_i$.
+\vfil\pagebreak 
+
+So now, let's define the map $\chi$. We'll use Miller's techniques [Miller p. 55] to define $\chi$ explicitly. For brevity, write $\mathbb{B}$ for the object $B_i^{\calW(n+1)}\pi_*L\in s\calW(n+1)$. Write $V_i$ for the subspace $(F_{\calW(n+1)})^{i}\subset \mathbb{B}$ of generators. For each $m\geq0$, write $F_mV_i$ for the subspace of $V_i$ consisting of degeneracies of elements of $V_j$ for $j\leq m$. Then write $F_m\mathbb{B}$ for the subobject of $\mathbb{B}$ which is almost free on the subspaces $F_mV_i$.
+
+Now for each $m$, $V_m$ splits into a direct sum
+\[V_m=V'_m\oplus F_{m-1}V_m,\]
+where $V'_m\subset N_m^\textup{h}\mathbb{B}$. To make this classical insight explicit, consider the endomorphism
+\[\textup{comp}=(1+s_0d_1)(1+s_1d_2)\cdots (1+s_{n-1}d_n):\mathbb{B}_m\to \mathbb{B}_m.\]
+Then, in light of the fact that all the simplicial operators but $d_0$ preserve the subspaces $V_i$, $\textup{comp}$ preserves $V_m$, and for $x\in V_m$, $x-\textup{comp}(x)\in F_{m-1}V_m$. Moreover, by the simplicial identities, $\textup{comp}$ has image inside $N_m^\textup{h}\mathbb{B}$, so we may define $V'_m=\textup{comp}(V_m)$.
+
+In order to define $\chi$, we recursively define its restriction to the skeleta $F_mB$. In order to extend a map $\chi_{m-1}:F_{m-1}\mathbb{B}\to \pi_*(G_\bullet L)$ to a map $\chi_m:F_m\mathbb{B}\to \pi_*(G_\bullet L)$, we need only to specify the values of $\chi_m$ on $V'_m$, which is to choose a lift in the diagram
+\[\xymatrix@R=4mm{
+V'_m\ar@{-->}[r]^-{\chi_m}
+\ar[d]^-{d_0^\textup{h}}
+&%r1c1
+N^\textup{h}_m\pi_*(G_\bullet L)\ar[d]^-{d_0^\textup{h}}
+\\%r1c2
+ZN^h_{m-1}\mathbb{B}\ar[r]^-{\chi_{m-1}}
+&%r2c1
+\pi_*(G_{m-1}L)%r2c2
+}\]
+However, we'll record a little more information than this. Rather, for each $m$, we'll construct a function $\overline{\chi}_m:V'_m\to N^\textup{h}_m ZN^\textup{v}_*G_\bullet L$.
+
+In order to do this, one may choose a basis of $V'_m$, and then for each basis element $v$, choose a $\calW(n+1)$-expression $e(s^\textup{h}_{\alpha_j}w_j)$ for $v$, with $w_j\in V'_{n_j}$ for $n_j\leq m-1$ and $s_{\alpha_j}$ some degeneracy operator from $n_j$ to $m-1$. Then we'll define
+\[\overline{\chi}_m(v):=z_{e^\textup{rep}(s_{\alpha_j}\overline{\chi}_{n_j}(w_j))}\]
+ $d_0^\textup{h}(v)=e(w_1,\ldots)$ maps under $\chi_{m-1}$ to $e(\chi_{m-1}w_1,\ldots)$, which can be lifted to $z_{e^\textup{rep}}$
+
+
+
+
+
+
+
+
 \end{proof}
 
 \vfil\pagebreak
