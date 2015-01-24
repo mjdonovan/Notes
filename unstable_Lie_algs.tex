@@ -14,12 +14,14 @@
 
 \excludeversion{comp func sseq old version}
 %\renewcommand{\excludeversion}[1]{\includeversion{#1}}
-\excludeversion{Conventions and notation}
+\excludeversion{Contents Page}
+\includeversion{Conventions and notation}
 \excludeversion{Unstable Lie algebras over Goerss' P-algebra}
 \excludeversion{Cohomology operations for unstable Lie algebras over P}
+\excludeversion{Categories of graded Lie algebras and their homotopy operations}%Seems depreciated
 \excludeversion{Unstable Lie algebras over the Lambda-algebra}
 \excludeversion{Cohomology operations for unstable Lie algebras over Lambda}
-\includeversion{Composite functor spectral sequences}
+\excludeversion{Composite functor spectral sequences}
 \excludeversion{The cohomology of a trivial unstable Lie algebra over P}
 \excludeversion{appendices}
 
@@ -299,6 +301,7 @@ url=false,doi=false,isbn=false,eprint=false]{biblatex}%
 \newcommand{\hExtCohOp}{\textup{Op}_\textup{h,ext}}
 \newcommand{\ExtCohProd}{\mu_\textup{ext}}
 
+
 \newcommand{\NOFULLPAGE}{\relax}
 
 \newcommand{\Sq}{\mathrm{Sq}}
@@ -342,10 +345,12 @@ url=false,doi=false,isbn=false,eprint=false]{biblatex}%
 \end{itemize}}
 \end{itemize}\end{shaded}
 }
+
+\begin{Contents Page}
 %\begin{abstract}\end{abstract}
 %\maketitle
 \tableofcontents
-
+\end{Contents Page}
 
 \begin{Conventions and notation}
 \vfil\pagebreak
@@ -362,6 +367,88 @@ Similarly, we write $\vect{r}{+}$ for the category of $\F_2$-vector spaces with 
 For each algebraic category $\calC$ of interest in this paper, an object $X$ of $\calC$ may be defined as a graded vector space $X\in\vect{+}{r}$ along with certain binary and unary operations on $X$ (and without any nullary operations). As such, there will be a forgetful functor $U_\calC:\calC\to\vect{+}{r}$, which will admit a left adjoint, always denoted $F_\calC:\vect{+}{r}\to\calC$ for notational consistency. The functor $U_{\calC}$ will always be monadic, in the sense that the natural comparison functor from $\calC$ to the category of algebras over the monad $U_{\calC}F_{\calC}$ on $\vect{+}{r}$ is an equivalence.
 
 It will also happen that for each $\calC$, there is a functor $K_\calC:\vect{+}{r}\to \calC$ which sends $V\in\vect{+}{r}$ to the `trivial object on $V$', and $K_{\calC}$ has a left adjoint, $Q_{\calC}:\calC\to\vect{+}{r}$, which sends $X\in\calC$ to `the quotient of $X$ by the image of its non-trivial operations'. In terms of free constructions, the monad $U_{\calC}F_{\calC}$ will admit an augmentation $\epsilon:U_{\calC}F_{\calC}\to\textup{id}$, and the functor $K_\calC$ sends any object $V\in\vect{+}{r}$ to the $U_{\calC}F_{\calC}$-algebra whose structure map is $\epsilon_V:U_{\calC}F_{\calC}V\to V$. Moreover, the functor $Q_{\calC}$ sends $X\in \calC$ with structure map $\rho:F_\calC U_\calC X\to X$ to the coequaliser in $\vect{+}{r}$ of the maps $U_\calC\rho$ and $\epsilon_{U_\calC X}$.
+
+\subsection{Lie algebras in characteristic 2}
+As we work in characteristic 2, there is more than one available notion of a Lie algebra. An $S(\LieOperad)$-algebra is a vector space $L$ equipped with a bracket $L\otimes L\to L$ satisfying the Jacobi identity and the (anti)-symmetry condition $[x,y]=[y,x]$. A \emph{Lie algebra} (or $\Lambda(\LieOperad)$-algebra) is a vector space $L$ equipped with a bracket $L\otimes L\to L$ satisfying the Jacobi identity and the alternating condition $[x,x]=0$. Finally, a \emph{restricted Lie algebra} [See Curtis or 6A or something] (or $\Gamma(\LieOperad)$-algebra) is a Lie algebra equipped with a \emph{squaring} or \emph{restriction} function $\restn{(\DASH)}:L\to L$, satisfying the axioms
+\[\restn{(x_1+x_2)}=\restn{x_1}+\restn{x_2}+[x_1,x_2]\textup{ \ and \ }[\restn{x_1},x_2]=[x_1,[x_1,x_2]].\]
+The alternating condition implies the (anti)-symmetry condition, and these three types of Lie algebras form a heirarchy: a restricted Lie algebra is in particular a Lie algebra, and a Lie algebra is in particular an $S(\LieOperad)$-algebra.
+
+Fresse [] explains how to construct the monads $S(\LieOperad)$, $\Lambda(\LieOperad)$ and $\Gamma(\LieOperad)$ which give rise to this structure, starting with the Lie operad $\LieOperad$. For a vector space $V$, it is standard that the functor
+\[S(\LieOperad):V\mapsto \bigoplus_{n\geq1}(\LieOperad(n)\otimes V^{\otimes n})_{\Sigma_n}\]
+inherits the structure of a monad from the composition maps of $\LieOperad$. Fresse observes that the functor
+\[\Gamma(\LieOperad):V\mapsto \bigoplus_{n\geq1}(\LieOperad(n)\otimes V^{\otimes n})^{\Sigma_n}\]
+may also be equipped with a monad structure, and that the trace map
+\[\trace:S(\LieOperad)(V)\to \Gamma(\LieOperad)(V)\]
+is a map of monads. Then, he defines a third monad
+\[\Lambda(\LieOperad):V\mapsto\im(\trace:S(\LieOperad)(V)\to \Gamma(\LieOperad)(V)).\]
+These monads give rise to the three indicated forms of Lie algebras in characteristic 2. Now each of these functors supports an extra grading, the \emph{quadratic grading}, so named because \textbf{why?}. Indeed, we'll write
+\[\Gamma(\LieOperad)^{(k)}V:=(\LieOperad(k)\otimes V^{\otimes k})^{\Sigma_k},\textup{ etc}.\]
+Each of these three monads is generated by the operations contained in quadratic grading 2. That is, an $S(\LieOperad)$-algebra is a map $S_2L\to L$, a $\Lambda(\LieOperad)$-algebra is a map $\Lambda^2L\to L$, and a $\Gamma(\LieOperad)$-algebra is a map $S^2L\to L$, where in each case we demand the necessary compatibilities that these maps extend to the full monad. Here, we used the analogous definitions $S_2V:=(V^{\otimes2})_{\Sigma_2}$, $S^2V:=(V^{\otimes2})_{\Sigma_2}$ and $\Lambda^2V:=\im(\trace:S_2V\to S^2V)$.
+
+\subsection{Graded and partially restricted Lie algebras}
+We'll be interested in certain categories of Lie algebras whose underlying objects lie in $\vect{+}{n}$. For example, a $\vect{+}{n}$-graded Lie algebra is an element $L\in\vect{+}{n}$ with a structure map $\Lambda^2 L\to L$ which treats gradings as follows
+\[L^{t}_{s_n,\ldots,s_1}\otimes L^{t'}_{s'_n,\ldots,s'_1}\to L^{t+t'+1}_{s_n+s'_n,\ldots,s_1+s'_1}.\]
+In other words, we view the Lie operad as an operad in $\vect{+}{n}$, such that
+\[\LieOperad(r)=(\LieOperad(r))^{r-1}_{0,\ldots,0},\]
+and then a $\vect{+}{n}$-graded Lie algebra is an algebra over the corresponding monad $\Lambda(\LieOperad)$ on $\vect{+}{n}$.
+
+A $\vect{+}{n}$-graded \emph{partially} restricted Lie algebra is to be graded Lie algebras such that certain graded parts admit a restriction operation. Specifically, there is to be defined a restriction operation
+\[\restn{(\DASH)}:L^t_{s_n,\ldots,s_1}\to L^{2t+1}_{2s_n,\ldots,2s_1}\]
+whenever not all of $s_n,\ldots,s_{1}$ are zero. We will denote the category of such objects $\calL(n)$. It is monadic over $\vect{+}{n}$, with an adjunction
+\[F_{\calL(n)}:\vect{+}{n}\rightleftarrows \calL(n):U_{\calL(n)}.\]
+The monad of this adjunction is the appropriately chosen submonad $\Gamma'(\LieOperad)$ of $\Gamma(\LieOperad):\vect{+}{n}\to \vect{+}{n}$. As before, the free construction $F_{\calL(n)}V$ admits a quadratic grading, which we denote $F_{\calL(n)}^{(k)}V$ or $\Gamma'(\LieOperad)^{(k)}V$.
+%To describe the free functor, if $V\in\vect{+}{n}$, write:
+%\[V_-=\bigoplus_{t\geq1}V^t_{0,\ldots,0},\textup{ and }V_+=\bigoplus_{t\geq1}\bigoplus_{\exists\,i\textup{\,s.t.\,}s_i\neq0}V^t_{s_n,\ldots,s_1}.\]
+%There is a natural $\Sigma_n$-equivariant decomposition: 
+%\[\LieOperad(n)\otimes (V_0\oplus V_1)^{\otimes n}=\Bigl(\LieOperad(n)\otimes (V_0)^{\otimes n}\Bigr)\oplus\Bigl(\bigoplus(\LieOperad(n)\otimes V_{i_1}\otimes V_{i_2}\otimes\cdots\otimes V_{i_n})\Bigr)\]
+%where the direct sum is taken over all sequences $(i_1,\ldots,i_n)\in\{0,1\}^n$ other than $(0,\ldots,0)$.
+%The free partially restricted Lie algebra is the subspace of $\Gamma(\LieOperad(V_0\oplus V_1))$ given by
+%\[\im \Bigl(S(\LieOperad)(V_0)\overset{\textup{Tr}}{\to}\Gamma(\LieOperad)(V_0\oplus V_1)\Bigr)\oplus\bigoplus_{n\geq1}\Bigl(\bigoplus(\LieOperad(n)\otimes V_{i_1}\otimes V_{i_2}\otimes\cdots\otimes V_{i_n})\Bigr)^{\Sigma_n}\]
+
+\vfil\pagebreak
+
+\subsection{Homotopy operations for simplicial Lie algebras}
+We'll now give an account of the (\textbf{some?}) homotopy operations on the homotopy of a simplicial (ungraded) $S(\LieOperad)$-, $\Lambda(\LieOperad)$- or $\Gamma(\LieOperad)$-algebra. \textbf{Actually}, let's do a simplicial object of $\calL(n)$.
+
+The homotopy operations we'll present will be in the form of a natural transformation, for $V\in s\vect{+}{n}$:
+\[\widetilde{\nabla}:F^{(2)}_{\calL(n+1)}(\pi_*V)\to \pi_*(F^{(2)}_{\calL(n)}V)\]
+This map is nothing more than the Eilenberg-Mac Lane shuffle map $\nabla$ disguised. This is a symmetric natural chain map $\nabla:N_*(V)\otimes N_*(V)\to N_*(V\otimes V)$. Then, for cycles $x,y,z\in ZN_*(V)$, we define
+\[\widetilde{\nabla}([x]\otimes[y]+[y]\otimes [x])=[\nabla(x\otimes y+y\otimes x)]\textup{, and }\widetilde{\nabla}([x]\otimes[x])=[\nabla(x\otimes x)].\]
+\textbf{Actually I don't really see why this should be well defined.}
+
+
+
+
+
+\vfil\pagebreak
+
+Now for a vector space $V$, define
+\[S_2V:=(V^{\otimes 2})_{\Sigma_2}\qquad \textup{and}\qquad S^2V:=(V^{\otimes 2})^{\Sigma_2},\]
+define $\trace:S_2V\to S^2V$ by the formula $v\otimes w\mapsto v\otimes w+w\otimes v$.
+
+
+One can codify the difference 
+
+These different levels of structure will play a central role in what follows. 
+
+
+Let $\LieOperad$ be the Lie operad in characteristic 2. As explained in [Fresse], the monad $S(\LieOperad)$ on $\vect{}{}$ defined by
+\[S(\LieOperad)(V)=\bigoplus_{n\geq1}(\LieOperad(n)\otimes V^{\otimes n})_{\Sigma_n}\]
+does not return the free Lie algebra on $V$ in the traditional sense. Rather, an $S(\LieOperad)$-algebra is a vector space $L$ equipped with a bracket $L\otimes L\to L$ satisfying the Jacobi identity and the antisymmetry condition $[x,y]=-[y,x]$. This condition does \emph{not} imply the alternating condition $[x,x]=0$ (which is impossible to encode operadically). We will refer to structures of this type as $S(\scrL)$-algebras, to distinguish them from Lie algebras, which we demand satisfy the alternating condition.
+
+Fresse constructs a monad $\Gamma(\LieOperad)$ defined by
+\[\Gamma(\LieOperad)(V)=\bigoplus_{n\geq1}(\LieOperad(n)\otimes V^{\otimes n})^{\Sigma_n},\]
+which represents the free restricted [See Curtis or 6A or something] Lie algebra. He further constructs a norm map $\textup{Tr}:S(\LieOperad)\to \Gamma(\LieOperad)$, and defines a monad $\Lambda(\LieOperad)$ by the formula
+\[\Lambda(\LieOperad)V=\im (\textup{Tr}:S(\LieOperad)V\to \Gamma(\LieOperad)V).\]
+Then $\Lambda(\LieOperad)(V)$ is the free Lie algebra on $V$, subject to the standard axiom, $[x,x]=0$.
+
+We'll be interested in \emph{partially restricted Lie algebras}. That is, Lie algebras $L$ equipped with a decomposition $L=L_0\oplus L_1$ such that $L_1$ is a Lie ideal and a map $\restn{(\DASH)}:L_1\to L_1$ satisfying the axioms one would expect for a restriction map. Namely, for any $a,b\in L_1$ and $c\in L$, $\restn{(a+b)}=\restn{a}+\restn{b}+[a,b]$, and $[\restn{a},c]=[a,[a,c]]$. There is a free functor from $\vect{}{}\times \vect{}{}$ to partially restricted Lie algebras, sending $(V_0,V_1)$ to the algebra generated by restrictable elements $V_1$ and non-restrictable elements $V_0$. This free functor may be described as follows. There is a natural $\Sigma_n$-equivariant decomposition: %The expressions for $S(\LieOperad)(V_0\oplus V_1)$ and $\Gamma(\LieOperad)(V_0\oplus V_1)$ both contain the terms:
+\[\LieOperad(n)\otimes (V_0\oplus V_1)^{\otimes n}=\Bigl(\LieOperad(n)\otimes (V_0)^{\otimes n}\Bigr)\oplus\Bigl(\bigoplus(\LieOperad(n)\otimes V_{i_1}\otimes V_{i_2}\otimes\cdots\otimes V_{i_n})\Bigr)\]
+where the direct sum is taken over all sequences $(i_1,\ldots,i_n)\in\{0,1\}^n$ other than $(0,\ldots,0)$.
+%and this decomposition is of $\Sigma_n$-modules.
+The free partially restricted Lie algebra is the subspace of $\Gamma(\LieOperad(V_0\oplus V_1))$ given by
+\[\im \Bigl(S(\LieOperad)(V_0)\overset{\textup{Tr}}{\to}\Gamma(\LieOperad)(V_0\oplus V_1)\Bigr)\oplus\bigoplus_{n\geq1}\Bigl(\bigoplus(\LieOperad(n)\otimes V_{i_1}\otimes V_{i_2}\otimes\cdots\otimes V_{i_n})\Bigr)^{\Sigma_n}\]
+
 
 \subsection{Quillen's model structure on $s\calC$ and $\calC$-homology}
 For any of the algebraic categories $\calC$ herein we use Quillen's simplicial model category structure on the category $s\calC$. In this structure, the weak equivalences (fibrations) are the maps which are weak equivalences (fibrations) of simplicial abelian groups (so that every object is fibrant), and every cofibrant object is a retract of an \emph{almost free} object. A simplicial object $X_\bullet$ is almost free if there are subspaces $V_n\subseteq X_n$ for each $n\geq0$ such that the structure map $F_{\calC}U_\calC V_n\to X_n$ is an isomorphism for all $n$, and such that these subspaces are preserved by all of the degeneracies and face maps of $X_\bullet$ except for $d_0$.
@@ -436,12 +523,12 @@ $A$ is homotopic to a wedge of spheres, and $\pi A$ is free on generators in cor
 \subsection{Quadratic part, quadratic decomposition maps and cohomology operations}\label{quadratic part section}
 \emph{special} EZ maps\textbf{?}
 
-In this section, we'll give conditions under which one can define natural operations on the cohomology groups $H^*$. The method here is simply the direct generalisation of Goerss' approach in [GoerssBook,\S5].
+In this section, we'll give conditions under which one can define natural operations on the cohomology groups $H^*$. The method here is simply the direct generalisation of Goerss' approach in [GoerssBook,\S5]. \textbf{Pull back from this.} Instead say ``avoid excessive generality''.
 
 Suppose that $\calC$ is an algebraic category as above. Then we may define a map of vector spaces:
 \[\quadratic:F_\calC V\to (F_\calC V)\wedge (F_\calC V)\]
 to be the unique factorisation of $\overline{\quadratic}:F_\calC V\to (F_\calC V)\sqcup (F_\calC V)$ through the smash product, where
-$\overline{\quadratic}=F_\calC(\Delta)+i_0+i_1$. \textbf{Is that what I mean?}
+$\overline{\quadratic}=F_\calC(\Delta)+i_0+i_1$. \textbf{(Is that what I mean?)}
 
 Suppose now that we are given a natural map 
 \[j_\calC:Q_\calC(X_0\wedge X_1)\to Q_\calC(X_0)\otimes Q_\calC(X_1).\]
@@ -494,9 +581,13 @@ where we regard the $D^*_k$ as maps into $(N_*S^2U)^*$ by composition with the p
 Following Goerss [\S3], one notes that the linear maps $\ExtCohOp^k$ induce dual operators
 \[(\ExtCohOp^k)^*:H_*(NS^2U)\to H_{*-k}(NU)\]
 whenever these groups are locally finite dimensional. One can define the operations $(\ExtCohOp^k)^*$ directly, without the double dualisation as follows. If $\sigma_i$ and $\pi_*(1+T)$ are the maps of Goerss[\S3], then any element of $x\in H_m(NS^2U)$ can be written as a sum
-\[x=\sum_j\pi_*(1+T)(y_j\otimes z_j)+\sum_{0\leq k\leq \lfloor m/2\rfloor}\sigma_k(x_k),\]
-where $x_k\in H_{m-k}(NU)$.
-Then the map $(\ExtCohOp^k)^*$ sends $x$ to this $x_k$.
+\[x=\sum_j\pi_*(1+T)(y_j\otimes z_j)+\sum_{0\leq k\leq \lfloor m/2\rfloor}\sigma_k(w_k),\]
+where $w_k\in H_{m-k}(NU)$ ($0\leq k\leq\lfloor m/2\rfloor$), and $y_j,z_j\in H_{*}(NU)$.
+Then the map $(\ExtCohOp^k)^*$ sends $x$ to this $x_k$. If we only wish to determine the $(\ExtCohOp^k)^*$ for $k<m/2$ (and not the dual of the top operation $(\ExtCohOp^{m/2})^*$ when $m$ is even), we can rewrite this equation as 
+\[x=\theta(v)+\sum_{0\leq k< m/2}\sigma_k(w_k),\]
+where $v\in(S^2(H_*(NU)))_{m}$ and $w_k\in H_{m-k}(NU)$ ($0\leq k<m/2$). Here, $\theta:S^2\pi_*(V)\to\pi_*(S^2V)$ is the map induced by the Eilenberg-Mac Lane shuffle map $\nabla$:
+\[\theta([x]\otimes [y]+[y]\otimes[x])=[\nabla(x\otimes y+y\otimes x)],\ \ \theta([x]\otimes[x])=[\nabla(x\otimes x)],\]
+where brackets denote the homotopy class of a cycle. These formulae are well defined as $\nabla$ is symmetric.
 
 
 
@@ -777,6 +868,31 @@ which all boils down to
 Anyway, I have a nullhomotopy of this map, which might be called $((P^i)^{-1}q^{\calL})$, and is stuck on the wall in the upper right corner.
 \end{Cohomology operations for unstable Lie algebras over P}
 
+\begin{Categories of graded Lie algebras and their homotopy operations}
+\vfil\pagebreak
+\section{Categories of graded Lie algebras and their homotopy operations}
+
+\subsection{Lie algebras in characteristic 2}
+Let $\LieOperad$ be the Lie operad in characteristic 2. As explained in [Fresse], the monad $S(\LieOperad)$ on $\vect{}{}$ defined by
+\[S(\LieOperad)(V)=\bigoplus_{n\geq1}(\LieOperad(n)\otimes V^{\otimes n})_{\Sigma_n}\]
+does not return the free Lie algebra on $V$ in the traditional sense. Rather, an $S(\LieOperad)$-algebra is a vector space $L$ equipped with a bracket $L\otimes L\to L$ satisfying the Jacobi identity and the antisymmetry condition $[x,y]=-[y,x]$. This condition does \emph{not} imply the alternating condition $[x,x]=0$ (which is impossible to encode operadically). We will refer to structures of this type as $S(\scrL)$-algebras, to distinguish them from Lie algebras, which we demand satisfy the alternating condition.
+
+Fresse constructs a monad $\Gamma(\LieOperad)$ defined by
+\[\Gamma(\LieOperad)(V)=\bigoplus_{n\geq1}(\LieOperad(n)\otimes V^{\otimes n})^{\Sigma_n},\]
+which represents the free restricted [See Curtis or 6A or something] Lie algebra. He further constructs a norm map $\textup{Tr}:S(\LieOperad)\to \Gamma(\LieOperad)$, and defines a monad $\Lambda(\LieOperad)$ by the formula
+\[\Lambda(\LieOperad)V=\im (\textup{Tr}:S(\LieOperad)V\to \Gamma(\LieOperad)V).\]
+Then $\Lambda(\LieOperad)(V)$ is the free Lie algebra on $V$, subject to the standard axiom, $[x,x]=0$.
+
+We'll be interested in \emph{partially restricted Lie algebras}. That is, Lie algebras $L$ equipped with a decomposition $L=L_0\oplus L_1$ such that $L_1$ is a Lie ideal and a map $\restn{(\DASH)}:L_1\to L_1$ satisfying the axioms one would expect for a restriction map. Namely, for any $a,b\in L_1$ and $c\in L$, $\restn{(a+b)}=\restn{a}+\restn{b}+[a,b]$, and $[\restn{a},c]=[a,[a,c]]$. There is a free functor from $\vect{}{}\times \vect{}{}$ to partially restricted Lie algebras, sending $(V_0,V_1)$ to the algebra generated by restrictable elements $V_1$ and non-restrictable elements $V_0$. This free functor may be described as follows. There is a natural $\Sigma_n$-equivariant decomposition: %The expressions for $S(\LieOperad)(V_0\oplus V_1)$ and $\Gamma(\LieOperad)(V_0\oplus V_1)$ both contain the terms:
+\[\LieOperad(n)\otimes (V_0\oplus V_1)^{\otimes n}=\Bigl(\LieOperad(n)\otimes (V_0)^{\otimes n}\Bigr)\oplus\Bigl(\bigoplus(\LieOperad(n)\otimes V_{i_1}\otimes V_{i_2}\otimes\cdots\otimes V_{i_n})\Bigr)\]
+where the direct sum is taken over all sequences $(i_1,\ldots,i_n)\in\{0,1\}^n$ other than $(0,\ldots,0)$.
+%and this decomposition is of $\Sigma_n$-modules.
+The free partially restricted Lie algebra is the subspace of $\Gamma(\LieOperad(V_0\oplus V_1))$ given by
+\[\im \Bigl(S(\LieOperad)(V_0)\overset{\textup{Tr}}{\to}\Gamma(\LieOperad)(V_0\oplus V_1)\Bigr)\oplus\bigoplus_{n\geq1}\Bigl(\bigoplus(\LieOperad(n)\otimes V_{i_1}\otimes V_{i_2}\otimes\cdots\otimes V_{i_n})\Bigr)^{\Sigma_n}\]
+
+\end{Categories of graded Lie algebras and their homotopy operations}
+
+
 \begin{Unstable Lie algebras over the Lambda-algebra}
 \vfil\pagebreak
 \section{Unstable Lie algebras over the $\Lambda$-algebra}
@@ -903,7 +1019,7 @@ Say `it follows as in the $n=0$ case'
 \begin{Composite functor spectral sequences}
 \vfil\pagebreak
 \section{Composite functor spectral sequences}
-The subject of this paper is to identify the derived functors $H^*_{\calW(0)}X:=(\mathbb{L}_*Q_{\calW(0)}X)^*$, for $X\in\calW(0)$. More generally, we'll now present a spectral sequence that may be used to calculate $H^*_{\calW(n)}X$ for $X\in\calW(n)$. This will a composite functor spectral sequence analogous to Miller's spectral sequence in []. The factorization of $Q_{\calW(n)}$ we will use is of course 
+The subject of this paper is to identify the derived functors $H^*_{\calW(0)}X:=(\mathbb{L}_*Q_{\calW(0)}X)^*$, for $X\in\calW(0)$. More generally, we'll now present a spectral sequence whose goal is to calculate $H^*_{\calW(n)}X$ for $X\in\calW(n)$. This will a composite functor spectral sequence analogous to Miller's spectral sequence in []. The factorization of $Q_{\calW(n)}$ we will use is of course 
 \[Q_{\calW(n)}=\left(\calW(n)\overset{Q_{\calU(n)}}{\to}\calL(n)\overset{Q_{\calL(n)}}{\to}\vect{+}{n}\right)\]
 There is an added challenge in this context --- indeed, the available factorization of $Q_{\calW(n)}$ is through a non-abelian category. Thus, the standard technology for composite functor spectral sequences does not apply, and we must use Blanc and Stover's methods []. They observe that the left derived functors $\mathbb{L}_*Q_{\calU(n)}X$ are calculated as the homotopy groups of a simplicial object in $\calL(n)$, namely $Q_{\calU(n)}B_\bullet^{\calW(n)}X$. As such, they have the structure of a $\calL(n)\textup{-$\Pi$-algebra}$, i.e.\ they form an object of $\calW(n+1)$.  After verifying that the functor $Q_{\calU(n)}$ satisfies the requisite acyclicity condition (indeed it preserves free objects), one may apply [relevant BS theorem]: there is a spectral sequence, with $E_r\in\vect{+}{n+2}$,
 \[(E_2)_{s_{n+2},\ldots,s_1}^t=((H_*^{\calW(n+1)})(\mathbb{L}_*Q_{\calU(n)})X)_{s_{n+2},\ldots,s_1}^t\implies ((H_*^{\calW(n)})X)_{s_{n+2}+s_{n+1},s_n,\ldots,s_1}^t\]
@@ -1352,20 +1468,52 @@ The bottom left square commutes simply by naturality of $\gamma$, while the bott
 The last mapping follows from the fact that $D_0\circ\nabla=\textup{id}$, as $\{D_k\}$ is special.
 Similarly, our understanding of the construction of $\lambda$-operations and iterated brackets shows that $E$ is annihilated by $\pi_*(j)\circ\gamma\circ Q(i)$. As $E$ is also annihilated by $j$, and $j(\textup{br}(\overline{x}\otimes\overline{y})) =\overline{x}\otimes\overline{y}$, the hexagon commutes. \textbf{This is poorly written.}
 \end{proof}
-\vfil\pagebreak
 \begin{proof}[Proof of \ref{E2CompFuncKosOperationsID}]
-We must identify the operations $\Sq_\textup{v}^i=\psi_{\BSW}^*\circ\vExtCohOp^{i-1}$ with the $\calW(n+1)$-cohomology operations $\Sq_\textup{v}^i$ defined in \S\ref{section: vertical Koszul operations n positive} using the map $\gamma_i$. Recall that the operations of \S\ref{section: vertical Koszul operations n positive} are the maps induced on cohomology by the \textbf{chain map?}
-\[\gamma_i:N_{s_{n+1}+1}(Q_{\calW(n+1)} B^{\calW(n+2)}_{\bullet}\pi_*L)^{2t+1}_{s_{n+1}+i-1,\ldots}\to N_{s_{n+1}}(Q_{\calW(n+1)} B^{\calW(n+2)}_{\bullet}\pi_*L)^{t}_{s_{n+1},\ldots},\]
-which we can see on $E^2$ via a morphism
-\[\chi:B^{\calW(n+1)}_{\bullet}\pi_*L\to \pi_*(G_\bullet L)\]
-of resolutions of $\pi_*L$. 
-We will define $\chi$ shortly. If we write $V=Q_{\calL(n)}G_\bullet L$ for the double complex yielding the spectral sequence, this map induces a weak equivalence (in $s\calV$)
+We must identify the operations $\Sq_\textup{v}^i=\psi_{\BSW}^*\circ\vExtCohOp^{i-1}$ with the $\calW(n+1)$-cohomology operations $\Sq_\textup{v}^i$ defined in \S\ref{section: vertical Koszul operations n positive} using the map $\gamma_i$. However, the $\gamma_i$ are defined on the bar construction, while $\psi_{\BSW}^*$ is defined on the Blanc-Stover resolution. In order to make the comparison, we will need to choose a weak equivalence of resolutions of $\pi_* L$ in $s\calW(n+1)$
+\[\chi:B^{\calW(n+1)}_{\bullet}\pi_*L\to \pi_*(G_\bullet L).\]
+We'll use Miller's techniques [Miller p. 55] to define such a $\chi$ explicitly. For brevity, write $\mathbb{B}$ for the object $B_i^{\calW(n+1)}\pi_*L\in s\calW(n+1)$. Write $V_i$ for the subspace $(F_{\calW(n+1)})^{i}\subset \mathbb{B}$ of generators. For each $m\geq0$, write $F_mV_i$ for the subspace of $V_i$ consisting of degeneracies of elements of $V_j$ for $j\leq m$. Then write $F_m\mathbb{B}$ for the subobject of $\mathbb{B}$ which is almost free on the subspaces $F_mV_i$.
+
+Now for each $m$, $V_m$ splits into a direct sum
+\[V_m=V'_m\oplus F_{m-1}V_m,\]
+where $V'_m\subset N_m^\textup{h}\mathbb{B}$. To make this classical insight explicit, consider the endomorphism
+\[c=(1+s_0d_1)(1+s_1d_2)\cdots (1+s_{m-1}d_m):\mathbb{B}_m\to \mathbb{B}_m.\]
+By the simplicial identities, $c$ has image inside $N_m^\textup{h}\mathbb{B}$, and by further inspection, $c$ is an idempotent.
+In light of the fact that all the simplicial operators but $d_0$ preserve the subspaces $V_i$, $c$ restricts to an idempotent on $V_m$, and moreover $\im((\textup{id}-c)|_{V_m})\subset F_{m-1}V_m$, so we may define $V'_m=c(V_m)$.
+
+In order to define $\chi$, we recursively define its restriction to the skeleta $F_m\mathbb{B}$. In order to extend a map $\chi_{m-1}:F_{m-1}\mathbb{B}\to \pi_*(G_\bullet L)$ to a map $\chi_m:F_m\mathbb{B}\to \pi_*(G_\bullet L)$, we need only to specify the values of $\chi_m$ on $V'_m$, which is to choose a lift in the diagram
+\[\xymatrix@R=4mm{
+V'_m\ar@{-->}[r]^-{\chi_m}
+\ar[d]^-{d_0^\textup{h}}
+&%r1c1
+N^\textup{h}_m\pi_*(G_\bullet L)\ar[d]^-{d_0^\textup{h}}
+\\%r1c2
+ZN^\textup{h}_{m-1}\mathbb{B}\ar[r]^-{\chi_{m-1}}
+&%r2c1
+ZN^\textup{h}_{m-1}\pi_*(G_\bullet L)%r2c2
+}\]
+However, we'll need to record some chain level information for what follows. Recursively for $m\geq-1$ [\textbf{say} ``view these as augmented simplicial objects, and start with $\chi_{-1}$ the identity''], we'll construct functions $\overline{\chi}_m:V'_m\to ZN^\textup{v}_*G_m L$, with the property that $\im(\overline{\chi}_m)$ is contained in the span of the classes $z_{w}$ for $w\in ZN^\textup{v}_*G_{m-1}L$. In order to do this, one may choose a basis of $V'_m$, and then for each basis element $v$, choose a $\calW(n+1)$-expression $e(s^\textup{h}_{\alpha_j}w_j)$ for $v$, with $w_j\in V'_{n_j}$ for integers $n_j\leq m-1$ and degeneracy operators $s_{\alpha_j}:V'_{n_j}\to V_{m-1}$. Then we'll define
+\[\overline{\chi}_m(v)=z_{e^\textup{rep}(s^\textup{h}_{\alpha_j}\overline{\chi}_{n_j}(w_j))},\]
+where by $e^\textup{rep}$, we mean the cycle in $ZN_*^\textup{v}(G_mL)$ obtained from the cycles $s^\textup{h}_{\alpha_j}\overline{\chi}_{n_j}(w_j)\in ZN_*G_{m-1}L$ using the formulae of [Curtis' explicit formulae], according to the chosen expression $e$ for $v$.
+Now the class of $\overline{\chi}_m(v)$ in $\pi_*(G_mL)$ is in fact in $N^\textup{h}_m\pi_*(G_\bullet L)$, since (c.f.\ [Stover lemma 2.7]) for $1\leq i \leq m$:
+\[d_i^\textup{h}\overline{\chi}_m(v)=z_{d^\textup{h}_{i-1}e^\textup{rep}(s^\textup{h}_{\alpha_j}\overline{\chi}_{n_j}(w_j))}\]
+where by construction $e^\textup{rep}(s^\textup{h}_{\alpha_j}\overline{\chi}_{n_j}(w_j))\in ZN^\textup{v}_*(G_{m-1} L)$ represents $\chi_{m-1}(d_{0}^\textup{h}(v))\in ZN_{m-1}^\textup{h}\pi_*(G_{\bullet} L)$. As such, the subscript $d^\textup{h}_{i-1}e^\textup{rep}(s^\textup{h}_{\alpha_j}\overline{\chi}_{n_j}(w_j))\in ZN^\textup{v}_*(G_{m-2} L)$ represents $0\in\pi_*(G_{m-2}L)$. Choosing a nullhomotopy $H\in N^\textup{v}_{*+1}(G_{m-2}L)$, $h_H$ is a null-homotopy of $d_i^\textup{h}\overline{\chi}_m(v)$, showing that the class of  $\overline{\chi}_m(v)$ lies in $N^\textup{h}_m\pi_*(H_\bullet L)$.
+%\[e^\textup{rep}(s^\textup{h}_{\alpha_j}\overline{\chi}_{n_j}(w_j))=\chi_{m-1}(d_{0}^\textup{h}(v))\in ZN^\textup{v}_*\]
+Thus $\overline{\chi}_m$ does induce a map $\chi_m:V'_m\to N_m^\textup{h}\pi_*(G_\bullet L)$, completing the construction of $\chi$.
+
+
+
+
+
+
+Recall that the operations of \S\ref{section: vertical Koszul operations n positive} are the maps induced on cohomology by the \textbf{chain map?}
+\[\gamma_i:N_{s_{n+1}+1}(Q_{\calW(n+1)} B^{\calW(n+1)}_{\bullet}\pi_*L)^{2t+1}_{s_{n+1}+i-1,\ldots}\to N_{s_{n+1}}(Q_{\calW(n+1)} B^{\calW(n+1)}_{\bullet}\pi_*L)^{t}_{s_{n+1},\ldots}.\]
+If we write $V=Q_{\calL(n)}G_\bullet L$ for the double complex yielding the spectral sequence, then there is a weak equivalence (in $s\calV$)
 \[Q_{\calW(n+1)}(\chi):Q_{\calW(n+1)}B^{\calW(n+1)}_{\bullet}\pi_*L\to \pi_*(V).\]
 Now, $\gamma_i$ induces a map on $\calW(n+1)$-homology, whose dual we would like to identify with the composite:
 \[\psi_{\BSW}^*\circ\vExtCohOp^{i-1}:\left(E^{p,q}_2(V)\overset{\vExtCohOp^{i-1}}{\to} E^{p,q+i-1}_2(S^2V)\overset{\psi_{\BSW}^*}{\to}E^{p+1,q+i-1}_2(V)\right).\]
 However, this composite is itself the dual of an operator:
 \[\left(E_{p,q}^2(V)\overset{(\vExtCohOp^{i-1})^*}{\from} E_{p,q+i-1}^2(S^2V)\overset{\psi_{\BSW}}{\from}E_{p+1,q+i-1}^2(V)\right),\]
-as Singer gives the formula on $E^2$ \textbf{and it's easy} for vertical operations, and we talked about the dual operations $(\vExtCohOp^{i-1})^*$ like this in []. Thus, what we are to prove is equivalent to a commuting diagram
+as Singer gives the formula on $E^2$ \textbf{and it's easy} for vertical operations, and we talked about the dual operations $(\vExtCohOp^{i-1})^*$ like this in []. Thus, what we are to prove is equivalent to a commuting diagram, for $1\leq i\leq q$:
 \[\xymatrix@R=4mm{
 N_{p+1}(QB_\bullet\pi_*L)_{q+i-1}\ar[rr]^-{(\gamma_i)_*}
 \ar[d]^-{Q\chi}
@@ -1379,51 +1527,43 @@ N_{p}(\pi_*(S^2V))_{q+i-1}\ar[r]^-{(\vExtCohOp^{i-1})^*}
 &%r2c2
 N_p(\pi_*(V))_q%r2c3
 }\]
+
 Given the description of the operations $(\vExtCohOp^{i-1})^*$, it will suffice to show that the composite
 \[(QB_{p+1}\pi_*L)_{q+i-1}\overset{Q\chi}{\to}(\pi_*(Q_{\calL(n)}G_{p+1}L))_{q+i-1}\overset{\psi_{\BSW}}{\to}(\pi_*(S^2(Q_{\calL(n)}G_pL)))_{q+i-1}\]
-equals the sum of the composites
-\[(QB_{p+1}\pi_* L)_{q+i-1}\overset{(\gamma_i)_*}{\to} (QB_{p}\pi_* L)_q\overset{Q\chi}{\to} (\pi_*QG_{p}L)_q\overset{\sigma_{i-1}}{\to} (\pi_*(S^2(Q_{\calL(n)}G_{p}L)))_{q+i-1}\]
-[\textbf{residual question:} what's going on with the phrase: ``including the composite $(\Sq^i)^*=(\gamma_i)_*$ when $i$ is top, which admittedly is not dual to anything whatsoever'' \textbf{answer} nothing probably, as you get top lambda from $q:\textup{PRL}\overset{onto}{\to}S^2$], and also the composite which sorts out the products:
-\[(QB_{p+1}\pi_* L)_{q+i-1}\overset{\mu^*\textbf{rename}}{\to}((QB_{p}\pi_* L)^{\otimes2})_{q+i-1}\overset{\pi_*(1+T)\circ(Q\chi)^{\otimes2}}{\to}(\pi_*(S^2(Q_{\calL(n)}G_{p}L)))_{q+i-1}\]
+equals the sum of the composites, for $1\leq i \leq q$ (and not all of ... are zero?): (these are the nontop)
+\[(QB_{p+1}\pi_* L)_{q+i-1}\overset{(\gamma_i)_*}{\to} (QB_{p}\pi_* L)_q\overset{Q\chi}{\to} (\pi_*QG_{p}L)_q\overset{\sigma_{i-1}}{\to} (\pi_*(S^2(Q_{\calL(n)}G_{p}L)))_{q+i-1},\]
+added to the composite:
+\[(QB_{p+1}\pi_* L)_{q+i-1}\overset{j_{\calW(n+1)}\circ Q_{\calW(n+1)}\xi_{\calW(n+1)}}{\to}(S^2(QB_{p}\pi_* L))_{q+i-1}\overset{S^2(Q\chi)}{\to}
+(S^2(\pi_*QG_pL))_{q+i-1}\overset{\theta}{\to}
+(\pi_*(S^2(Q_{\calL(n)}G_{p}L)))_{q+i-1},\]
 
-\vfil\pagebreak 
 
-So now, let's define the map $\chi$. We'll use Miller's techniques [Miller p. 55] to define $\chi$ explicitly. For brevity, write $\mathbb{B}$ for the object $B_i^{\calW(n+1)}\pi_*L\in s\calW(n+1)$. Write $V_i$ for the subspace $(F_{\calW(n+1)})^{i}\subset \mathbb{B}$ of generators. For each $m\geq0$, write $F_mV_i$ for the subspace of $V_i$ consisting of degeneracies of elements of $V_j$ for $j\leq m$. Then write $F_m\mathbb{B}$ for the subobject of $\mathbb{B}$ which is almost free on the subspaces $F_mV_i$.
+Anyway, let's start with an element of $V_{p+1,q+i-1}\cong (QB^{\calW(n+1)}_{p+1}\pi_*L)_{q+i-1}$. We may apply $c:V_{p+1}\to V_{p+1}$ to this element, in order to obtain an element of $V'_{p+1}$ which represents the homology class of interest (\textbf{explain}). We name the element in question:
+\[e:=f^{p+1}_{p+1}(u_j)\in V'_{p+1}\textup{ for various }u_j\in V_{p}\]
+and calculate:
+\begin{alignat*}{2}
+%e&:=f^{p+1}_{p+1}\cdots f^1_1x_0\in V'_{p+1}\\
+\chi(e)&=z_{f_{p+1}^\textup{rep}\chi(u_j)}\\
+\psi_{\BSW}(\chi(e))&=\quadratic(f_{p+1}^\textup{rep})(\chi(u_j))
+\end{alignat*}
+since $\chi(u_j)$ may be taken (by the construction above) to be contained in the span of the $z$ classes. Now $f_{p+1}^\textup{rep}$ is a $\calL(n)$-expression which implements the $\calW(n+1)$-expression $f_{p+1}$ at the chain level. Taking $\quadratic(f_{p+1}^\textup{rep})$, we extract the part of $f_{p+1}^\textup{rep}$ corresponding to the quadratic grading 2 part of $f_{p+1}$. That is, we may write
+\[f_{p+1}=\textstyle\sum_j \lambda_{n_j}(x_j) + \textup{TOPOPS}(y(u_j))+w,\]
+where $x_j\in \{u_j\}$, $y\in S^2_\textup{pr?}(\textup{these classes})$ with $n_j<|x_j|$, $e$ is a $\calL(n+1)$-expression of quadratic grading 2, and $w\in F_{\calW(n+1)}$ is the quadratic grading$\makebox[0cm][l]{}\neq2$ part of $f_{p+1}$. Then
+\[\quadratic(f_{p+1}^\textup{rep})(\chi(u_k ))=\sum_j \quadratic(\lambda^\textup{rep}_{n_j})(\chi(x_j))+\quadratic (\textup{TOPOPS}^\textup{rep}(y(\chi(u_k))))\]
+Now in this context, $\quadratic:F_{\calL(n)}V\to S^2V$ really just means the projection onto the quadratic grading 2 part of $F_{\calL(n)}V$, which is by definition contained in $(\LieOperad(2)\otimes V^{\otimes 2})^{\Sigma_2}$. Moreover, appealing to the fact [see Dwyer remark 4.4 taken with Goerss' comments \S3] that the operation $\lambda_{i-1}$ on $\pi_*(M)$ (for $M\in s\calL(n)$) is defined by the composite
+\[\pi_*(M)_\textup{restrictable part of $M$}\overset{\sigma_{i-1}}{\to}\pi_{*+i-1}(S^2_\textup{pr}M)\to \pi_{*+i-1}(M),\]
+the summands $\sum_j \quadratic(\lambda^\textup{rep}_{n_j})(\chi(x_j))$ precisely equal the sum of the maps $\sigma_{i-1}\circ Q\chi\circ(\gamma_i)_* $.
+Similarly, appealing to the fact that the ``top operations'' $S^2_\textup{pr?}\pi_*M\to \pi_*M$ are
+\[S^2_\textup{pr?}(\pi_*(M))\overset{\nabla}{\to}\pi_{*}(S^2_\textup{pr}M)\to \pi_{*}(M),\]
+we find
+\[\quadratic (\textup{TOPOPS}^\textup{rep}(y(\chi(u_k))))=\nabla(y)(\gamma(u_k))=\theta S^2(Q\chi)(jQ\xi)\]
 
-Now for each $m$, $V_m$ splits into a direct sum
-\[V_m=V'_m\oplus F_{m-1}V_m,\]
-where $V'_m\subset N_m^\textup{h}\mathbb{B}$. To make this classical insight explicit, consider the endomorphism
-\[\textup{comp}=(1+s_0d_1)(1+s_1d_2)\cdots (1+s_{n-1}d_n):\mathbb{B}_m\to \mathbb{B}_m.\]
-Then, in light of the fact that all the simplicial operators but $d_0$ preserve the subspaces $V_i$, $\textup{comp}$ preserves $V_m$, and for $x\in V_m$, $x-\textup{comp}(x)\in F_{m-1}V_m$. Moreover, by the simplicial identities, $\textup{comp}$ has image inside $N_m^\textup{h}\mathbb{B}$, so we may define $V'_m=\textup{comp}(V_m)$.
-
-In order to define $\chi$, we recursively define its restriction to the skeleta $F_mB$. In order to extend a map $\chi_{m-1}:F_{m-1}\mathbb{B}\to \pi_*(G_\bullet L)$ to a map $\chi_m:F_m\mathbb{B}\to \pi_*(G_\bullet L)$, we need only to specify the values of $\chi_m$ on $V'_m$, which is to choose a lift in the diagram
-\[\xymatrix@R=4mm{
-V'_m\ar@{-->}[r]^-{\chi_m}
-\ar[d]^-{d_0^\textup{h}}
-&%r1c1
-N^\textup{h}_m\pi_*(G_\bullet L)\ar[d]^-{d_0^\textup{h}}
-\\%r1c2
-ZN^h_{m-1}\mathbb{B}\ar[r]^-{\chi_{m-1}}
-&%r2c1
-\pi_*(G_{m-1}L)%r2c2
-}\]
-However, we'll need to record a little more information than this: recursively for $m\geq-1$ [\textbf{say} ``view these as augmented simplicial objects, and start with $\chi_{-1}$ the identity''], we'll construct a function $\overline{\chi}_m:V'_m\to ZN^\textup{v}_*G_m L$, whose image lies in the span of the classes $z_{w}$ for $w\in ZN_*G_{m-1}L$. In order to do this, one may choose a basis of $V'_m$, and then for each basis element $v$, choose a $\calW(n+1)$-expression $e(s^\textup{h}_{\alpha_j}w_j)$ for $v$, with $w_j\in V'_{n_j}$ for $n_j\leq m-1$ and $s_{\alpha_j}$ some degeneracy operator from $n_j$ to $m-1$. Then we'll define
-\[\overline{\chi}_m(v)=z_{e^\textup{rep}(s^\textup{h}_{\alpha_j}\overline{\chi}_{n_j}(w_j))},\]
-where by $e^\textup{rep}$, we mean the cycle in $ZN_*^\textup{v}(G_mL)$ obtained from the cycles $s^\textup{h}_{\alpha_j}\overline{\chi}_{n_j}(w_j)\in ZN_*G_{m-1}L$ using the formulae of [Curtis' explicit formulae], according to the chosen expression $e$ for $v$.
-Now the class of $\overline{\chi}_m(v)$ in $\pi_*(G_mL)$ is in fact in $N^\textup{h}_m\pi_*(G_\bullet L)$, since (c.f.\ [Stover lemma 2.7]) for $i>0$,
-\[d_i^\textup{h}\overline{\chi}_m(v)=z_{d^\textup{h}_{i-1}e^\textup{rep}(s^\textup{h}_{\alpha_j}\overline{\chi}_{n_j}(w_j))}\]
-where $e^\textup{rep}(s^\textup{h}_{\alpha_j}\overline{\chi}_{n_j}(w_j))\in ZN^\textup{v}_*(G_{m-1} L)$ represents $\chi_{m-1}(d_{0}^\textup{h}(v))\in ZN_{m-1}^\textup{h}\pi_*(G_{\bullet} L)$. As such, the subscript $d^\textup{h}_{i-1}e^\textup{rep}(s^\textup{h}_{\alpha_j}\overline{\chi}_{n_j}(w_j))\in ZN^\textup{v}_*(G_{m-2} L)$ represents $0\in\pi_*(G_{m-2}L)$. Choosing a nullhomotopy $H\in N^\textup{v}_{*+1}(G_{m-2}L)$, $h_H$ is a null-homotopy of $d_i^\textup{h}\overline{\chi}_m(v)$, showing that the class of  $\overline{\chi}_m(v)$ lies in $N^\textup{h}_m\pi_*(H_\bullet L)$.
-%\[e^\textup{rep}(s^\textup{h}_{\alpha_j}\overline{\chi}_{n_j}(w_j))=\chi_{m-1}(d_{0}^\textup{h}(v))\in ZN^\textup{v}_*\]
-Thus $\overline{\chi}_m$ does induce a map $\chi_m:V'_m\to N_m^\textup{h}\pi_*(G_\bullet L)$. The above square commutes by construction.
+%other than terms $\lambda_i(x)$ and simple brackets $[x,y]$ has no contribution to $\quadratic(f_{p+1}^\textup{rep})$ (as each generating $\calW(n+1)$-operation is built at the chain level from a quadratic operation using the partially restricted Lie algebra structure $\calL(n)$). More precisely, $f_{p+1}^\textup{rep}$ may be written \[f_{p+1}^\textup{rep}=\sum_i\sum\]
 
 
 
-
-
-
+So we're there, mod notation!
 \end{proof}
-
-\vfil\pagebreak
 
 \begin{proof}[Proof of \ref{EInftyCompFuncOperationsID}]
 Given the general theory of Singer's external operations, we only need to show that the diagram of chain complexes
@@ -1758,27 +1898,11 @@ There may be a wrinkle here answering the well definedness vs vanishing question
 \item if not locally finite, by studying gradings, can see that every coalgebra is the union of its finite type (even just `finite') subcoalgebras, and that the cobar construction respects such unions, thus get the same results in infinite case as we did from double dualisation.}
 
 
-\section{Lie algebras in characteristic 2 and their cohomology}
+\section{On Lie algebra cohomology operations}
 \todo{Recall Priddy's definition of Lie algebra cohomology, and results}{Explain that they don't calculate everything for us already, since the actual simplicial Lie algebras we're looking at are not GEMs --- their homotopy supports nontrivial operations.}
 \todo{Modify Priddy's spectral sequence argument to identify his operations with ours}{uses Singer's work}
 
-\subsection{Lie algebras in characteristic 2}
-Let $\LieOperad$ be the Lie operad in characteristic 2. As explained in [Fresse], the monad $S(\LieOperad)$ on $\vect{}{}$ defined by
-\[S(\LieOperad)(V)=\bigoplus_{n\geq1}(\LieOperad(n)\otimes V^{\otimes n})_{\Sigma_n}\]
-does not return the free Lie algebra on $V$ in the traditional sense. Rather, an $S(\LieOperad)$-algebra is a vector space $L$ equipped with a bracket $L\otimes L\to L$ satisfying the Jacobi identity and the antisymmetry condition $[x,y]=-[y,x]$. This condition does \emph{not} imply the alternating condition $[x,x]=0$ (which is impossible to encode operadically). We will refer to structures of this type as $S(\scrL)$-algebras, to distinguish them from Lie algebras, which we demand satisfy the alternating condition.
 
-Fresse constructs a monad $\Gamma(\LieOperad)$ defined by
-\[\Gamma(\LieOperad)(V)=\bigoplus_{n\geq1}(\LieOperad(n)\otimes V^{\otimes n})^{\Sigma_n},\]
-which represents the free restricted [See Curtis or 6A or something] Lie algebra. He further constructs a norm map $\textup{Tr}:S(\LieOperad)\to \Gamma(\LieOperad)$, and defines a monad $\Lambda(\LieOperad)$ by the formula
-\[\Lambda(\LieOperad)V=\im (\textup{Tr}:S(\LieOperad)V\to \Gamma(\LieOperad)V).\]
-Then $\Lambda(\LieOperad)(V)$ is the free Lie algebra on $V$, subject to the standard axiom, $[x,x]=0$.
-
-We'll be interested in \emph{partially restricted Lie algebras}. That is, Lie algebras $L$ equipped with a decomposition $L=L_0\oplus L_1$ such that $L_1$ is a Lie ideal and a map $\restn{(\DASH)}:L_1\to L_1$ satisfying the axioms one would expect for a restriction map. Namely, for any $a,b\in L_1$ and $c\in L$, $\restn{(a+b)}=\restn{a}+\restn{b}+[a,b]$, and $[\restn{a},c]=[a,[a,c]]$. There is a free functor from $\vect{}{}\times \vect{}{}$ to partially restricted Lie algebras, sending $(V_0,V_1)$ to the algebra generated by restrictable elements $V_1$ and non-restrictable elements $V_0$. This free functor may be described as follows. There is a natural $\Sigma_n$-equivariant decomposition: %The expressions for $S(\LieOperad)(V_0\oplus V_1)$ and $\Gamma(\LieOperad)(V_0\oplus V_1)$ both contain the terms:
-\[\LieOperad(n)\otimes (V_0\oplus V_1)^{\otimes n}=\Bigl(\LieOperad(n)\otimes (V_0)^{\otimes n}\Bigr)\oplus\Bigl(\bigoplus(\LieOperad(n)\otimes V_{i_1}\otimes V_{i_2}\otimes\cdots\otimes V_{i_n})\Bigr)\]
-where the direct sum is taken over all sequences $(i_1,\ldots,i_n)\in\{0,1\}^n$ other than $(0,\ldots,0)$.
-%and this decomposition is of $\Sigma_n$-modules.
-The free partially restricted Lie algebra is the subspace of $\Gamma(\LieOperad(V_0\oplus V_1))$ given by
-\[\im \Bigl(S(\LieOperad)(V_0)\overset{\textup{Tr}}{\to}\Gamma(\LieOperad)(V_0\oplus V_1)\Bigr)\oplus\bigoplus_{n\geq1}\Bigl(\bigoplus(\LieOperad(n)\otimes V_{i_1}\otimes V_{i_2}\otimes\cdots\otimes V_{i_n})\Bigr)^{\Sigma_n}\]
 
 
 \section{A May spectral sequence for $H^*_{\calW}$}
@@ -1809,6 +1933,10 @@ having all gradings at the very right, tensor products of vector spaces,\ldots?
 \item delete all pagebreaks
 \item At present the notation $\gamma$ is repeated all over the place.
 \item make a note about the difference between AQ homology and derived indecomposables.
+\item Either use or lose the $\quadratic$ notation --- in general, sort out a consistent use for it.
+\item $\gamma_i$ and $\gamma^i$ notations must go.
+\item Need a cogent section on stuff like: $S^2_\textup{pr?}\pi_*M\to \pi_*M$. What's a restricted Lie algebra, what's are the "top operations" $S^2\pi_*(L)\to \pi_*(S^2L)\to \pi_*(L)$ - are they defined by $\nabla$? (yes). Use $\theta$ for the top ops.
+\item Uniform notation for the class represented by $x$... $[x]$?
 \end{enumerate}
 
 
