@@ -410,12 +410,35 @@ The monad of this adjunction is the appropriately chosen submonad $\Gamma'(\LieO
 \subsection{Homotopy operations for simplicial Lie algebras}
 We'll now give an account of the (\textbf{some?}) homotopy operations on the homotopy of a simplicial (ungraded) $S(\LieOperad)$-, $\Lambda(\LieOperad)$- or $\Gamma(\LieOperad)$-algebra. \textbf{Actually}, let's do a simplicial object of $\calL(n)$.
 
-The homotopy operations we'll present will be in the form of a natural transformation, for $V\in s\vect{+}{n}$:
+The homotopy operations we'll present will be in the form of a natural transformation of functors $s\vect{+}{n}\to \vect{+}{n+1}$, which will be induced by the Eilenberg-Mac Lane shuffle map $\nabla:N_*(V)\otimes N_*(V)\to N_*(V\otimes V)$.
+\begin{prop}[Various authors]
+There is a natural map
 \[\widetilde{\nabla}:F^{(2)}_{\calL(n+1)}(\pi_*V)\to \pi_*(F^{(2)}_{\calL(n)}V)\]
-This map is nothing more than the Eilenberg-Mac Lane shuffle map $\nabla$ disguised. This is a symmetric natural chain map $\nabla:N_*(V)\otimes N_*(V)\to N_*(V\otimes V)$. Then, for cycles $x,y,z\in ZN_*(V)$, we define
+defined by the formulae (for cycles $x,y,z\in ZN_*(V)$):
 \[\widetilde{\nabla}([x]\otimes[y]+[y]\otimes [x])=[\nabla(x\otimes y+y\otimes x)]\textup{, and }\widetilde{\nabla}([x]\otimes[x])=[\nabla(x\otimes x)].\]
-\textbf{Actually I don't really see why this should be well defined.}
-
+\end{prop}
+\begin{proof}
+Since $\nabla$ symmetric, the formulae given for $\widetilde{\nabla}$ do indeed return homotopy classes in $\pi_*(F^{(2)}_{\calL(n)}V)$. Although it is not clear that $\widetilde{\nabla}$ is well defined, $\widetilde{\nabla}$ will prove to be the unique lift in a diagram: %We will construct it as the unique lift (dotted) of an analogous map $\widetilde{\nabla}'$:
+\[\xymatrix@R=4mm{
+F^{(2)}_{\calL(n+1)}(\pi_*V)\ar@{-->}[r]^-{\widetilde{\nabla}}
+\ar[d]^-{\textup{incl}}
+&%r1c1
+\pi_*(F^{(2)}_{\calL(n)}V)\ar[d]^-{\pi_*(\textup{incl})}
+\\%r1c2
+S^2(\pi_*V)\ar[r]^-{\widetilde{\nabla}'}&%r2c1
+\pi_*(S^2V)%r2c2
+}\]
+in which the map $\pi_*(\textup{incl})$ is a monomorphism (by \cite[Prop 5.6]{BousOpnsDerFun.pdf}). Now $\widetilde{\nabla}'$ will be defined by the same formulae as $\widetilde{\nabla}$. By general observations on natural transformations out of the endofunctor $S^2$ of $\vect{}{}$, in order to construct $\widetilde{\nabla}'$, it suffices to construct a natural linear map $p:S_2(\pi_*(V))\to \pi_*(S^2V)$ and a natural function $\restn{(\DASH)}:\pi_n(V)\to \pi_{2n}(S^2V)$ satisfying $\restn{(x+y)}=\restn{(x)}+\restn{(y)}+p(x\otimes y)$. Then $\widetilde{\nabla}'$ is the unique natural map such that $\widetilde{\nabla}\circ\trace=p$ and $\widetilde{\nabla}(a)=p(a\otimes a)$ for $a\in\pi_*\left(V\right)$.
+%\[p=\left(S_2\pi_*(V)\overset{\trace}{\to} S^2\pi_*(V)\overset{\widetilde{\nabla}'}{\to} \pi_*(S^2V)\right)\textup{ and }\restn{(\DASH)}=\left(\pi_*(V)\overset{v\mapsto v\otimes v}{\to} S^2\pi_*(V)\overset{\widetilde{\nabla}'}{\to} \pi_*(S^2V)\right).\]
+We define $\widetilde{\nabla}'$ in this way, with
+\[p=\pi_*(\trace)\circ\nabla:\left(S_2(\pi_*(V))\overset{\nabla}{\to}\pi_*(S_2(V))\overset{\pi_*(\trace)}{\to}\pi_*(S^2(V))\right)\]
+and with $\restn{(\DASH)}$ the operation $\sigma_n:\pi_n(V)\to \pi_{2n}(S^2V)$ detailed in [Goerss\S3].
+%In general, to construct a natural map $g$ from $S^2$ to any other endofunctor $G$ of the category of $\F_2$-vectorspaces, it is enough to define a natural linear map $p:S_2V\to GV$ and natural function $\restn{(\DASH)}:V\to GV$ satisfying $\restn{(x+y)}=\restn{(x)}+\restn{(y)}+p(x\otimes y)$. Then there is a unique natural map $g:S^2\to G$ such that we have
+%\[p=\left(S_2V\overset{\trace}{\to} S^2V\to GV\right)\textup{ and }\restn{(\DASH)}=\left(V\overset{v\mapsto v\otimes v}{\to} S^2V\to GV\right).\]
+%The map $\widetilde{\nabla}'$ is exactly obtained by this method, using 
+%
+%\[p([x]\otimes [y])=[\nabla(x\otimes y+y\otimes x)],\textup{ and }\restn{([x])}=[\nabla(x\otimes x)].\qedhere\]
+\end{proof}
 
 
 
