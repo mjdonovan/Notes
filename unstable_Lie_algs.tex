@@ -11,18 +11,17 @@
 \usepackage{enumerate}
 \usepackage{mathtools}%used for mathclap
 \usepackage{dsfont}%creates \mathds{1}
-
 \excludeversion{comp func sseq old version}
+
 %\renewcommand{\excludeversion}[1]{\includeversion{#1}}
 \excludeversion{Contents Page}
 \includeversion{Conventions and notation}
-\includeversion{Lie algebras in characteristic 2 and their homotopy operations}
-%\includeversion{Unstable Lie algebras over Goerss' P-algebra}
+\excludeversion{Lie algebras in characteristic 2 and their homotopy operations}
 \excludeversion{Cohomology operations for unstable Lie algebras over P}
 \excludeversion{Categories of graded Lie algebras and their homotopy operations}%Seems depreciated
 \excludeversion{Unstable Lie algebras over the Lambda-algebra}
 \excludeversion{Cohomology operations for unstable Lie algebras over Lambda}
-\excludeversion{Composite functor spectral sequences}
+\includeversion{Composite functor spectral sequences}
 \excludeversion{The cohomology of a trivial unstable Lie algebra over P}
 \excludeversion{appendices}
 
@@ -297,6 +296,7 @@ url=false,doi=false,isbn=false,eprint=false]{biblatex}%
 \newcommand{\BSWres}{{\scrG_\bullet}}
 \newcommand{\PiAlg}{\textup{-$\Pi$-Alg}}
 \newcommand{\quadratic}{\textup{qu}}
+\newcommand{\crossterms}{\textup{cr}}
 \newcommand{\ExtCohOp}{\textup{Op}_\textup{ext}}
 \newcommand{\vExtCohOp}{\textup{Op}_\textup{v,ext}}
 \newcommand{\hExtCohOp}{\textup{Op}_\textup{h,ext}}
@@ -372,11 +372,6 @@ It will also happen that for each $\calC$, there is a functor $K_\calC:\vect{+}{
 
 
 
-\vfil\pagebreak
-
-
-
-
 
 \subsection{Quillen's model structure on $s\calC$ and $\calC$-homology}
 For any of the algebraic categories $\calC$ herein we use Quillen's simplicial model category structure on the category $s\calC$. In this structure, the weak equivalences (fibrations) are the maps which are weak equivalences (fibrations) of simplicial abelian groups (so that every object is fibrant), and every cofibrant object is a retract of an \emph{almost free} object. A simplicial object $X_\bullet$ is almost free if there are subspaces $V_n\subseteq X_n$ for each $n\geq0$ such that the structure map $F_{\calC}U_\calC V_n\to X_n$ is an isomorphism for all $n$, and such that these subspaces are preserved by all of the degeneracies and face maps of $X_\bullet$ except for $d_0$.
@@ -387,7 +382,7 @@ The face maps are given by the formula $d_i=(F_\calC)^i\epsilon$, and the degene
 
 For $X\in\calC$, we define the $\calC$-\emph{homology} of $X$ by the formula:
 \[H_*^{\calC}X=\pi_*(Q_\calC B_\bullet^\calC X)=H_*N_*(Q_\calC B_\bullet^\calC X).\]
-This is well defined, as the $Q_\calC\dashv K_\calC$ adjunction is a Quillen adjunction (indeed $K_\calC$ evidently preserves fibrations and acyclic fibrations), and we are free to use any cofibrant replacement in place of $B_\bullet^\calC X$. We define the $\calC$-cohomology $H^*_\calC X$ to be the linear dual of $H_*^\calC X$. Note that if $\calC$ is monadic over $\vect{+}{r}$, then $H_*^{\calC}X\in \vect{+}{r+1}$, and $H^*_{\calC}X\in \vect{r+1}{+}$. That is, each homology group $H_s^\calC X$ retains the gradings of $X$, and a new homological grading is added (to the left of the existing homological gradings). If we dualise to obtain cohomology, the cohomological gradings and homological gradings are swapped. We will uniformly avoid substituing into the location of an upper or lower $*$, for the sake of clarity. For example, suppose that $\calC$ is monadic over $\vect{+}{2}$, then we will write $(H_*^\calC X)_{s_3,s_2,s_1}^t$, instead of $(H_{s_3}^\calC X)_{s_2,s_1}^t$
+This is well defined, as the $Q_\calC\dashv K_\calC$ adjunction is a Quillen adjunction (indeed $K_\calC$ evidently preserves fibrations and acyclic fibrations), and we are free to use any cofibrant replacement in place of $B_\bullet^\calC X$. We define the $\calC$-cohomology $H^*_\calC X$ to be the linear dual of $H_*^\calC X$. Note that if $\calC$ is monadic over $\vect{+}{r}$, then $H_*^{\calC}X\in \vect{+}{r+1}$, and $H^*_{\calC}X\in \vect{r+1}{+}$. That is, each homology group $H_s^\calC X$ retains the gradings of $X$, and a new homological grading is added (to the left of the existing homological gradings). If we dualise to obtain cohomology, the cohomological gradings and homological gradings are swapped. We will uniformly avoid substituing into the location of an upper or lower $*$, for the sake of clarity. For example, suppose that $\calC$ is monadic over $\vect{+}{2}$, then we will write $(H_*^\calC X)_{s_3,s_2,s_1}^t$, instead of $(H_{s_3}^\calC X)_{s_2,s_1}^t$.
 
 
 \subsection{$\calC$-$\Pi$-algebras, free $\calC$-$\Pi$-algebras and the smash product}
@@ -447,51 +442,40 @@ If $A$ is a model, then $\gamma:Q\pi A\to \pi QA$ is an isomorphism.
 $A$ is homotopic to a wedge of spheres, and $\pi A$ is free on generators in correspondence with the wedge summands.
 \end{proof}
 
-\vfil\pagebreak
 \subsection{Quadratic part, quadratic decomposition maps and cohomology operations}\label{quadratic part section}
-\emph{special} EZ maps\textbf{?}
+In this paper, we'll often use a method of constructing cohomology operations used by Goerss in [GoerssBook,\S5], and we'll set up that framework here.
 
-In this section, we'll give conditions under which one can define natural operations on the cohomology groups $H^*$. The method here is simply the direct generalisation of Goerss' approach in [GoerssBook,\S5]. \textbf{Pull back from this.} Instead say ``avoid excessive generality''.
+Suppose that $\calC$ is an algebraic category, monadic over $\vect{}{}$, and let $V\in\vect{}{}$. The diagonal map $\Delta:V\to V\oplus V$ of $V$ induces a `diagonal map' $F_\calC V\to F_\calC (V\oplus V)\cong (F_\calC (V))^{\sqcup 2}$, and writing $i_1$ and $i_2$ for the two summand inclusions $F_\calC (V)\to (F_\calC (V))^{\sqcup 2}$, consider the map
+\[(F_\calC(\Delta)+i_1+i_2):F_\calC V\to (F_\calC V)^{\sqcup2}.\]
+This map evidently factors through $(F_\calC V)^{\wedge 2}$, and is symmetric. We name this factoring the `cross terms':
+\[\crossterms:F_\calC V\to (F_\calC V)\wedge^{\Sigma_2} (F_\calC V),\]
+as it measures the nonlinearity in an expression in $F_\calC V$. For example, if $\calC$ is the category of non-unital commutative algebras over $\F_2$, then for $v,w\in V$, using dashes to denote the generators coming from second copy of $V$:
+\[\crossterms(vw)=(v+v')(w+w')+vw+v'w'=vw'+wv'.\]
 
-Suppose that $\calC$ is an algebraic category as above. Then we may define a map of vector spaces:
-\[\quadratic:F_\calC V\to (F_\calC V)\wedge (F_\calC V)\]
-to be the unique factorisation of $\overline{\quadratic}:F_\calC V\to (F_\calC V)\sqcup (F_\calC V)$ through the smash product, where
-$\overline{\quadratic}=F_\calC(\Delta)+i_0+i_1$. \textbf{(Is that what I mean?)}
+In the cases of interest to us, there is a map, natural and symmetric in $X_1,X_2\in\calC$,
+\[j_\calC:Q_\calC(X_0\wedge X_1)\to Q_\calC(X_0)\otimes Q_\calC(X_1),\]
+In the example of commutative algebras, the map $j_\calC$ is defined by $x_1x_2\mapsto x_1\otimes x_2$, for $x_i\in X_i$. We'll write $\quadratic_\calC$ for the composite
+\[\quadratic_\calC:\left(F_\calC V\overset{\crossterms}{\to}(F_\calC V)^{\wedge 2}\to Q_\calC((F_\calC V)\wedge^{\Sigma_2} (F_\calC V))\overset{j_\calC}{\to}S^2V\right),\]
+and in our running example $\quadratic_\calC$ is the composite $F_\calC V\to F_\calC^{(2)} V=S_2V\overset{\trace}{\to}S^2V$.
 
-Suppose now that we are given a natural map 
-\[j_\calC:Q_\calC(X_0\wedge X_1)\to Q_\calC(X_0)\otimes Q_\calC(X_1).\]
-Then we'll write $j_\calC\quadratic$ for the composite
-\[F_\calC V\overset{\quadratic}{\to}(F_\calC V)^{\wedge 2}\to Q_\calC((F_\calC V)^{\wedge 2})\overset{j_\calC}{\to}V^{\otimes 2}.\]
-We'll say that $j_\calC$ is a \emph{quadratic decomposition map} for $\calC$ if $j_\calC\circ Q_\calC( \tau)=\tau\circ j_\calC$, where $\tau$ stands for either of the two symmetry isomorphisms, and if the following equation of maps $F_\calC F_\calC V\to V\otimes V$ is satisfied:
-\[j_\calC\quadratic\circ(u_{F_\calC V} + {F_\calC u_V})=j_\calC\quadratic\circ\mu_V,\]
-(where $\mu$ here stands for the multiplication map of the monad $F_\calC U_\calC$). \textbf{housekeeping:} order of exposition. \textbf{relate to next lemma!}
-%\[F_\calC F_\calC V\overset{u_{F_\calC V}}{\to}F_\calC V\overset{j_\calC\quadratic}{\to}V^{\wedge 2}\]
-%\[F_\calC F_\calC V\overset{{F_\calC u_V}}{\to}F_\calC V\overset{j_\calC\quadratic}{\to}V^{\wedge 2}\]
-%\[F_\calC F_\calC V\overset{{\mu}}{\to}F_\calC V\overset{j_\calC\quadratic}{\to}V^{\wedge 2}\]
-%(where $\mu$ here stands for the multiplication map of the monad $F_\calC U_\calC$).
+In our examples, the following equation of maps $F_\calC F_\calC V\to V\otimes V$ will always be satisfied:
+\[\quadratic_\calC\circ u_{F_\calC V} +\quadratic_\calC\circ {F_\calC u_V}=\quadratic_\calC\circ\mu_V,\]
+where $\mu$ here stands for the multiplication map of the monad $U_\calC F_\calC $, which is to say that for $\calC$-expressions $f$ and $g$ we have $\quadratic(fg)(v)=\quadratic(f)u(g)(v)+u(f)\quadratic(g)(v)$.
 
-
-
-
-
-%We would like to provide operations on the cohomology $H^*_\calC X$ of an object of $\calC$. Instead, take
-
-Suppose that $X_\bullet\in s\calC$ is almost free, with $V_s\subset X_s$ the freely generating subspace. Then for each $s$, the functor 
+To relate this to Goerss' constructions [Goerss\S5], suppose that $X_\bullet\in s\calC$ is almost free, with $V_s\subset X_s$ the freely generating subspace. Then for each $s$, the functor 
 \[\Hom_\calC(X_s,\DASH)\cong \Hom_\calV(V_s,U_\calC\DASH)\]
-is naturally an $\F_2$-vector space. If $\phi_s=\F_\calC(\Delta):X_s\to X_s\sqcup X_s$ is the map induced by the vector space diagonal $\Delta:V_s\to V_s\oplus V_s$, then the addition operation `$\star$' on $\Hom_\calC(X_s,\DASH)$ is given by $f\star g= (f\sqcup g)\circ\phi_s$. Now let
-%
-%
-% Each of the $\F_2$-vector spaces $V_s$ is a co($\F_2$-vector space) object, with comultiplication map the diagonal $V_s\to V_s\oplus V_s$. Applying $F_\calC$, each $X_s$ becomes a cogroup object, with comultiplication $\phi_s:X_s\to X_s\sqcup X_s$.
+is naturally an $\F_2$-vector space. Writing $\phi_s=\F_\calC(\Delta):X_s\to X_s\sqcup X_s$, the addition operation `$\star$' on $\Hom_\calC(X_s,\DASH)$ is given by $f\star g= (f\sqcup g)\circ\phi_s$. Now let
 $\overline{\xi}_\calC=((d_0\sqcup d_0)\phi_s)\star(\phi_{s-1}d_0)$, the sum of maps in the $\F_2$-vector space $\textup{Hom}_\calC(X_s,X_{s-1}\sqcup X_{s-1})$. It is completely formal to check that $\overline{\xi}_\calC$ maps to zero in the group
 \[\textup{Hom}_\calC(X_s,X_{s-1}\times X_{s-1})=\textup{Hom}_\calC(X_s,X_{s-1})\times \textup{Hom}_\calC(X_s,X_{s-1}),\]
-and thus $\overline{\xi}_\calC$ factors through a unique map $\xi_\calC:X_s\to X_{s-1}\wedge X_{s-1}$. Furthermore, $\xi_\calC$ enjoys the symmetry $\tau\xi_\calC=\xi_\calC$, and it is again formal to verify:
-\begin{lem}[Goerss, Lemma 5.5]
+and thus $\overline{\xi}_\calC$ factors through a unique map $\xi_\calC:X_s\to X_{s-1}\wedge X_{s-1}$. Furthermore, $\xi_\calC$ enjoys the symmetry $\tau\xi_\calC=\xi_\calC$, and it is again formal to verify the analogue of [Goerss, Lemma 5.5]:
+\begin{lem}
 The map $Q_\calC\xi_\calC$ induces a chain map of degree $-1$ on normalised complexes:
 \[N_s(Q_{\calC}X_\bullet)\to N_{s-1}((Q_{\calC}(X_\bullet\wedge X_\bullet))^{\Sigma_2}).\]
-\end{lem}
-We now have access to the composite
+The composite
 \[\psi_\calC:\left(N_s(Q_{\calC}X_\bullet)\overset{Q_\calC\xi_\calC}{\to} N_{s-1}((Q_{\calC}(X_\bullet\wedge X_\bullet))^{\Sigma_2})\overset{j_\calC}{\to} N_{s-1}(S^2(Q_{\calC}X_\bullet))\right),\]
-which we can use to define operations on $\calC$-cohomology. We will construct such operations from certain generic operations, defined for any $U\in s\calV$:
+is essentially $\quadratic_\calC$, in that if $v\in V_s\cap N_sX$ \textbf{(explain?)} represents an element of $N_sQ_\calC X$, writing $d_0v=f(w_j)$ for $w_j\in V_{s-1}$, we have $\psi_\calC(v)=\quadratic_\calC(f)(w_j)\in S^2(V_{s-1})$.
+\end{lem}
+We will use $\psi_\calC$ to define operations on $\calC$-cohomology. We will construct such operations from certain generic operations, defined for any $U\in s\calV$:
 \begin{gather*}
 \ExtCohOp^k:H^{n}((N_*U)^*)\to H^{n+k}((N_*(S^2U))^*),\textup{ zero unless $0\leq k\leq n$, and}\\
 \ExtCohProd:H^{n_1}((N_*U)^*)\otimes H^{n_2}((N_*U)^*)\to H^{n_1+n_2}((N_*(S^2U))^*).
@@ -501,10 +485,17 @@ These operations are defined as follows. In all that follows, let $\{D_k\}$ be a
 Then define a cochain map:
 \[m_\textup{ext}:(N_*U)^*\otimes (N_*U)^*\to (N_*S^2U)^*\]
 and functions
-\[S^k_\textup{ext}:(N_mU)^*\to (N_{m+k}S^2U)\]
-by the formulae, for $\alpha\in (N_{n_1}U)^*$ and $\alpha\in (N_{n_2}U)^*$
+\[S^k_\textup{ext}:(N_mU)^*\to (N_{m+k}S^2U)^*\]
+by the formulae, for $\alpha\in (N_{n_1}U)^*$ and $\beta\in (N_{n_2}U)^*$
 \[m_\textup{ext}(\alpha\otimes\beta)=D_0^*\oldphi(\alpha\otimes\beta),\quad S^k_\textup{ext}(\alpha)=D^*_{n_1-k}\oldphi(\alpha\otimes \alpha)+D^*_{n_1-k+1}\oldphi(\alpha\otimes d\alpha),\]
 where we regard the $D^*_k$ as maps into $(N_*S^2U)^*$ by composition with the projection from $(N_*(U\otimes U))^*$. one checks that these operations are well defined by the same arguments as in [Singer \S1.12].
+
+Given these external operations, we can define natural $\calC$-cohomology operations on $H^*_\calC X$ (for $X\in s\calC$), by setting $U:=Q_\calC B_\bullet^\calC X$, the standard bar construction, and using the composites
+\begin{gather*}
+(N_{n_1}U)^*\otimes (N_{n_2}U)^*\overset{m_\textup{ext}}{\to} (N_{n_1+n_2}S^2U)^*\overset{\psi_\calC^*}{\to} (N_{n_1+n_2+1}U)^*,\textup{ and }\\
+(N_mU)^*\overset{S^k_\textup{ext}}{\to} (N_{m+k}S^2U)^*\overset{\psi_\calC^*}{\to}(N_{m+k+1}U)^*
+\end{gather*}
+Note the shift introduced by $\psi_\calC^*$. We \textbf{need to choose notation} for this section.
 
 Following Goerss [\S3], one notes that the linear maps $\ExtCohOp^k$ induce dual operators
 \[(\ExtCohOp^k)^*:H_*(NS^2U)\to H_{*-k}(NU)\]
@@ -512,20 +503,8 @@ whenever these groups are locally finite dimensional. One can define the operati
 \[x=\sum_j\pi_*(1+T)(y_j\otimes z_j)+\sum_{0\leq k\leq \lfloor m/2\rfloor}\sigma_k(w_k),\]
 where $w_k\in H_{m-k}(NU)$ ($0\leq k\leq\lfloor m/2\rfloor$), and $y_j,z_j\in H_{*}(NU)$.
 Then the map $(\ExtCohOp^k)^*$ sends $x$ to this $x_k$. If we only wish to determine the $(\ExtCohOp^k)^*$ for $k<m/2$ (and not the dual of the top operation $(\ExtCohOp^{m/2})^*$ when $m$ is even), we can rewrite this equation as 
-\[x=\theta(v)+\sum_{0\leq k< m/2}\sigma_k(w_k),\]
-where $v\in(S^2(H_*(NU)))_{m}$ and $w_k\in H_{m-k}(NU)$ ($0\leq k<m/2$). Here, $\theta:S^2\pi_*(V)\to\pi_*(S^2V)$ is the map induced by the Eilenberg-Mac Lane shuffle map $\nabla$:
-\[\theta([x]\otimes [y]+[y]\otimes[x])=[\nabla(x\otimes y+y\otimes x)],\ \ \theta([x]\otimes[x])=[\nabla(x\otimes x)],\]
-where brackets denote the homotopy class of a cycle. These formulae are well defined as $\nabla$ is symmetric.
-
-
-
-
-
-{\tiny \textbf{The following argument is wrong. Just check it in the special case of interest to us.} Anyway, we should check that these operations are in fact natural in $X$, and in particular do not depend on the almost free structure chosen. In order to give a definition that is evidently natural, for any $X$, we might define the operations as follows. For any $X\in s\calC$, let $X^c\in s\calC$ be the bar construction on $X$. Then $X^c$ is almost free, and for any map $f:X\to Y$, the map $X^c\to Y^c$ preserves the generating subspaces. If we define operations on $H^*X=\pi_*(Q_\calC X^c)^*$ using this almost free structure, then the map $H^*X\from H^*Y$ induced by $f$ will commute with these operations. All that remains is to show that when $X$ is already almost free, the operations defined above coincide with the operations just defined using the bar construction.
-
-If $V_n\subseteq X_n$ is the space of generators, and if $\epsilon:X^c\to X$ is the acyclic fibration associated with the bar construction, notice that $\epsilon^{-1}(V_n)$ is contained in the generaing subspace of $(X^c)_n$. Now as $\epsilon$ is an acyclic fibration, and $X$ is cofibrant, the map $X^c\to X$ admits a section $s:X\to X^c$, and $S(V_n)$, being contained in $\epsilon^{-1}(V_n)$, consists only of generators for $(X^c)_n$. As $s:X\to X^c$ preserves generators, it induces a map on cohomology that commutes with the operations, and so its inverse $\epsilon^*$ must also commute with the operations. Thus the two modes of defining operations on $H^*_\calC X$ coincide.
-
-[\textbf{Maybe} it's better to be brief, saying --- one might be concerned that this definition depends on the choice of almost free replacement. However, if $X\in s\calC$ is almost free, although the acyclic fibration $\epsilon:B^\calC X\to X$ does not preserve the generating subspaces, any section of $\epsilon$ \emph{must} preserve the generating subspaces, and as $X$ is almost free, such a section must exist.] \textbf{Actually, for this you} \emph{need that the kernel of the augmentation of the monad $F_\calC$ is preserved by the multiplication (or similar), else it's not true that only generators map down to generators! Don't forget to include this in the discourse on $\calC$.}}
+\[x=\widetilde{\nabla}(v)+\sum_{0\leq k< m/2}\sigma_k(w_k),\]
+where $v\in(S^2(H_*(NU)))_{m}$ and $w_k\in H_{m-k}(NU)$ ($0\leq k<m/2$). Here, $\widetilde{\nabla}:S^2\pi_*V\to \pi_*S^2V$ is the map that we discuss in \ref{the top homotopy operations for Lie algebras}.
 
 
 
@@ -587,22 +566,10 @@ The functor $U$ becomes a monad using the commutation relations given by Goerss,
 \textbf{Maybe here put the operations on simplicial algebras and also the operations on Lie cohomology.} You can prove in the appendix that they coincide with those of Priddy.
 
 
-
-
-
-
-
-
-
-
-
-
-
 \end{Conventions and notation}
 
-
-
 \begin{Lie algebras in characteristic 2 and their homotopy operations}
+
 \section{Lie algebras in characteristic 2}
 As we work in characteristic 2, there is more than one available notion of a Lie algebra. An $S(\LieOperad)$-algebra is a vector space $L$ equipped with a bracket $L\otimes L\to L$ satisfying the Jacobi identity and the (anti)-symmetry condition $[x,y]=[y,x]$. A \emph{Lie algebra} (or $\Lambda(\LieOperad)$-algebra) is a vector space $L$ equipped with a bracket $L\otimes L\to L$ satisfying the Jacobi identity and the alternating condition $[x,x]=0$. Finally, a \emph{restricted Lie algebra} [See Curtis or 6A or something] (or $\Gamma(\LieOperad)$-algebra) is a Lie algebra equipped with a \emph{squaring} or \emph{restriction} function $\restn{(\DASH)}:L\to L$, satisfying the axioms
 \[\restn{(x_1+x_2)}=\restn{x_1}+\restn{x_2}+[x_1,x_2]\textup{ \ and \ }[\restn{x_1},x_2]=[x_1,[x_1,x_2]].\]
@@ -661,26 +628,37 @@ The monad of this adjunction is the appropriately chosen submonad $\Gamma'(\LieO
 We'll now give an account of the natural operations on the homotopy of a simplicial object of $\calL(n)$.
 
 The homotopy operations we'll present will be in the form of a natural transformation of functors $s\vect{+}{n}\to \vect{+}{n+1}$, which will be induced by the Eilenberg-Mac Lane shuffle map $\nabla:N_*(V)\otimes N_*(V)\to N_*(V\otimes V)$.
-\begin{prop}[Various authors]
-There is a natural map
-\[\widetilde{\nabla}:F^{(2)}_{\calL(n+1)}(\pi_*V)\to \pi_*(F^{(2)}_{\calL(n)}V)\]
-defined by the formulae (for cycles $x,y,z\in ZN_*(V)$):
-\[\widetilde{\nabla}([x]\otimes[y]+[y]\otimes [x])=[\nabla(x\otimes y+y\otimes x)]\textup{, and }\widetilde{\nabla}([x]\otimes[x])=[\nabla(x\otimes x)].\]
-\end{prop}
-\begin{proof}
-Since $\nabla$ symmetric, the formulae given for $\widetilde{\nabla}$ do indeed return homotopy classes in $\pi_*(F^{(2)}_{\calL(n)}V)$. Although it is not clear that $\widetilde{\nabla}$ is well defined, $\widetilde{\nabla}$ will prove to be the unique lift in a diagram: %We will construct it as the unique lift (dotted) of an analogous map $\widetilde{\nabla}'$:
+\begin{prop}[Various authors]\label{the top homotopy operations for Lie algebras}
+There is a natural commuting diagram:
 \[\xymatrix@R=4mm{
 F^{(2)}_{\calL(n+1)}(\pi_*V)\ar@{-->}[r]^-{\widetilde{\nabla}}
 \ar[d]^-{\textup{incl}}
 &%r1c1
 \pi_*(F^{(2)}_{\calL(n)}V)\ar[d]^-{\pi_*(\textup{incl})}
 \\%r1c2
-S^2(\pi_*V)\ar[r]^-{\widetilde{\nabla}'}&%r2c1
+S^2(\pi_*V)\ar[r]^-{\widetilde{\nabla}}&%r2c1
 \pi_*(S^2V)%r2c2
 }\]
-in which the map $\pi_*(\textup{incl})$ is a monomorphism (by \cite[Prop 5.6]{BousOpnsDerFun.pdf}). Now $\widetilde{\nabla}'$ will be defined by the same formulae as $\widetilde{\nabla}$. By general observations on natural transformations out of the endofunctor $S^2$ of $\vect{}{}$, in order to construct $\widetilde{\nabla}'$, it suffices to construct a natural linear map $p:S_2(\pi_*(V))\to \pi_*(S^2V)$ and a natural function $\restn{(\DASH)}:\pi_n(V)\to \pi_{2n}(S^2V)$ satisfying $\restn{(x+y)}=\restn{(x)}+\restn{(y)}+p(x\otimes y)$. Then $\widetilde{\nabla}'$ is the unique natural map such that $\widetilde{\nabla}\circ\trace=p$ and $\widetilde{\nabla}(a)=p(a\otimes a)$ for $a\in\pi_*\left(V\right)$.
+%\[\widetilde{\nabla}:F^{(2)}_{\calL(n+1)}(\pi_*V)\to \pi_*(F^{(2)}_{\calL(n)}V)\]
+with horizontal maps defined by the formulae (for cycles $x,y,z\in ZN_*(V)$):
+\[\widetilde{\nabla}([x]\otimes[y]+[y]\otimes [x])=[\nabla(x\otimes y+y\otimes x)]\textup{, and }\widetilde{\nabla}([x]\otimes[x])=[\nabla(x\otimes x)].\]
+\end{prop}
+\begin{proof}
+Since $\nabla$ symmetric, the formulae given for $\widetilde{\nabla}$ do indeed return homotopy classes in either $\pi_*(F^{(2)}_{\calL(n)}V)$ or $\pi_*(S^V)$. It is not clear that either $\widetilde{\nabla}$ is well defined. However, after checking that the lower map is well defined, as $\pi_*(\textup{incl})$ is a monomorphism (by \cite[Prop 5.6]{BousOpnsDerFun.pdf}), it will follow that the upper map is well defined. 
+%Although it is not clear that $\widetilde{\nabla}$ is well defined, $\widetilde{\nabla}$ will prove to be the unique lift in a diagram: %We will construct it as the unique lift (dotted) of an analogous map $\widetilde{\nabla}'$:
+%\[\xymatrix@R=4mm{
+%F^{(2)}_{\calL(n+1)}(\pi_*V)\ar@{-->}[r]^-{\widetilde{\nabla}}
+%\ar[d]^-{\textup{incl}}
+%&%r1c1
+%\pi_*(F^{(2)}_{\calL(n)}V)\ar[d]^-{\pi_*(\textup{incl})}
+%\\%r1c2
+%S^2(\pi_*V)\ar[r]^-{\widetilde{\nabla}'}&%r2c1
+%\pi_*(S^2V)%r2c2
+%}\]
+%in which the map $\pi_*(\textup{incl})$ is a monomorphism (by \cite[Prop 5.6]{BousOpnsDerFun.pdf}). Now $\widetilde{\nabla}'$ will be defined by the same formulae as $\widetilde{\nabla}$. 
+By general observations on natural transformations out of the endofunctor $S^2$ of $\vect{}{}$, in order to construct the lower $\widetilde{\nabla}$, it suffices to construct a natural linear map $p:S_2(\pi_*(V))\to \pi_*(S^2V)$ and a natural function $\restn{(\DASH)}:\pi_n(V)\to \pi_{2n}(S^2V)$ satisfying $\restn{(x+y)}=\restn{(x)}+\restn{(y)}+p(x\otimes y)$. Then $\widetilde{\nabla}$ is the unique natural map such that $\widetilde{\nabla}\circ\trace=p$ and $\widetilde{\nabla}(a)=p(a\otimes a)$ for $a\in\pi_*\left(V\right)$.
 %\[p=\left(S_2\pi_*(V)\overset{\trace}{\to} S^2\pi_*(V)\overset{\widetilde{\nabla}'}{\to} \pi_*(S^2V)\right)\textup{ and }\restn{(\DASH)}=\left(\pi_*(V)\overset{v\mapsto v\otimes v}{\to} S^2\pi_*(V)\overset{\widetilde{\nabla}'}{\to} \pi_*(S^2V)\right).\]
-We define $\widetilde{\nabla}'$ in this way, with
+We define $\widetilde{\nabla}$ in this way, with
 \[p=\pi_*(\trace)\circ\nabla:\left(S_2(\pi_*(V))\overset{\nabla}{\to}\pi_*(S_2(V))\overset{\pi_*(\trace)}{\to}\pi_*(S^2(V))\right)\]
 and with $\restn{(\DASH)}$ the operation $\sigma_n:\pi_n(V)\to \pi_{2n}(S^2V)$ detailed in [Goerss\S3].
 %In general, to construct a natural map $g$ from $S^2$ to any other endofunctor $G$ of the category of $\F_2$-vectorspaces, it is enough to define a natural linear map $p:S_2V\to GV$ and natural function $\restn{(\DASH)}:V\to GV$ satisfying $\restn{(x+y)}=\restn{(x)}+\restn{(y)}+p(x\otimes y)$. Then there is a unique natural map $g:S^2\to G$ such that we have
@@ -724,35 +702,33 @@ For $n\geq0$, let $\calW(n+1)$ denote the algebraic category of $\vect{+}{n+1}$-
 \begin{prop}[6-Author]\hfil
 \begin{enumerate}\squishlist
 \setlength{\parindent}{.25in}
-\item The category $\calW{n+1}$ is isomorphic to the category $\calL(n)\PiAlg$ of $\calL(n)$-$\Pi$-algebras, so that the operations defined above exhaust the set of natural operations on the homotopy of simplicial objects of $\calL(n)$.
+\item The category $\calW(n+1)$ is isomorphic to the category $\calL(n)\PiAlg$ of $\calL(n)$-$\Pi$-algebras, so that the operations defined above exhaust the set of natural operations on the homotopy of simplicial objects of $\calL(n)$.
 \item The monad $UF_{\calW(n+1)}$ is naturally isomorphic to the composite of the monads $UF_{\calU(n+1)}\circ UF_{\calL(n+1)}$, with monad structure induced by the distributive law (c.f.\ [Beck's chapter]) $UF_{\calL(n+1)}\circ UF_{\calU(n+1)}\to UF_{\calU(n+1)}\circ UF_{\calL(n+1)}$ suggested by \ref{compatibilities between U and L in W}.
-\item Blah blah blah.
+\item \textbf{Blah blah blah}. (Bracket well defined after killing $\calU(n+1)$, $Q_{\calU(n+1)}$ preserves frees,\ldots)
 \end{enumerate}
 \end{prop}
 
 \subsection{Decomposition maps for $\calW(n)$ and $\calL(n)$}
 \todo{Describe the composition maps for these categories}{show the compatibility under $\calL(n)\PiAlg\cong \calW(n+1)$
 \item show that the $j$ are \emph{quadratic decomposition maps}, if that language is still around}
-Here we'll introduce decomposition maps for the categories $\calL(n)$ and $\calW(n)$, and prove a certain compatibility between them. The definition is simple enough, and the reader can verify that it is well defined. Let $\calC$ be any of the categories $\calW(n)$ for $n\geq1$, or $\calL(n)$ for $n\geq0$. Then for $X,Y\in\calC$ we define $j:Q(X\wedge Y)\to QX\otimes QY$ by
-\[[z_1,\cdots ,z_a]\lambda_{i_1}\cdots \lambda_{i_r}\overset{j}{\mapsto}\begin{cases}
+Here we'll introduce decomposition maps for the categories $\calL(n)$ and $\calW(n)$, and prove a certain compatibility between them. The definition is simple enough, and the reader can verify that it is well defined. Let $\calC$ be any of the categories $\calW(n)$ for $n\geq1$, or $\calL(n)$ for $n\geq0$. Then for $X,Y\in\calC$ we define $j_\calC:Q(X\wedge Y)\to QX\otimes QY$ by
+\[[z_1,\cdots ,z_a]\lambda_{i_1}\cdots \lambda_{i_r}\overset{j_\calC}{\mapsto}\begin{cases}
 %0,&\textup{if }r>0\textup{ or }s>2;\\
 z_1\otimes z_2,&\textup{if }r=0,\,a=2,\,z_1\in X\textup{ and } z_2\in Y,
 \\0,&\textup{otherwise.}
 \end{cases}
 \]
-Here, each of $z_1,\ldots,z_a$ is an element of either $X$ or $Y$, and $[z_1,\ldots,z_s]$ represents some choice of bracketing. The $\lambda$-operations must of course all be the top operation (the restriction) if we are working in $\calL(n)$, where no $\calU(n)$-operations are defined. The map $j_{\calW(0)}$ is defined similarly, replacing right $\lambda$-operations with left $P$-operations. [\textbf{or uniformize} all this using the phrase $\calU(n)$-operations.]
+Here, each of $z_1,\ldots,z_a$ is an element of either $X$ or $Y$, and $[z_1,\ldots,z_s]$ represents some choice of bracketing. If we are working in $\calL(n)$ then all of the $\lambda$-operations must be the top operation (the restriction), as where no $\calU(n)$-operations are defined. The map $j_{\calW(0)}$ is defined similarly, replacing right $\lambda$-operations with left $P$-operations. [\textbf{or uniformize} all this using the phrase $\calU(n)$-operations.]
 \begin{prop}
-For any $V\in\vect{+}{n}$, writing $\calC$ for $\calL(n)$, the composite
-\[j_\calC\quadratic:\left(F_\calC V\overset{\quadratic}{\to}(F_\calC V)^{\wedge 2}\to Q_\calC((F_\calC V)^{\wedge 2})\overset{j_\calC}{\to}V^{\otimes 2}\right)\]
-equals the composite $F_{\calL(n)} V\to F^{(2)}_{\calL(n)} V\subseteq V^{\otimes 2}$. If $\calC$ stands instead for $\calW(n)$, then $j_\calC\quadratic$ equals the composite $F_{\calW(n)} V\to F_{\calL(n)} V\to F^{(2)}_{\calL(n)} V\subseteq V^{\otimes 2}$.
+For any $V\in\vect{+}{n}$, then $\quadratic_{\calL(n)}$ equals the composite $F_{\calL(n)} V\to F^{(2)}_{\calL(n)} V\subseteq S^2V$, and $\quadratic_{\calW(n)}$ equals the composite $F_{\calW(n)} V\to F_{\calL(n)} V\to F^{(2)}_{\calL(n)} V\subseteq S^2V$.
 \end{prop}
 \begin{proof}
-Consider the case $\calW(n)$ for $n\geq1$. One observes that $j_\calC\quadratic$ vanishes except on quadratic grading 2, and checks the result on terms $[x,y]$, $x\lambda_i$ (for $i<|x|$) and $\restn{x}$:
+Consider the case $\calW(n)$ for $n\geq1$. One observes that $\quadratic_\calC$ vanishes except on quadratic grading 2, and checks the result on terms $[x,y]$, $x\lambda_i$ (for $i<|x|$) and $\restn{x}$:
 \begin{alignat*}{2}
-j_\calC\quadratic([x,y])&=j_\calC([\overline{x}+\overline{\overline{x}},\overline{y}+\overline{\overline{y}}]+[\overline{x},\overline{y}]+[\overline{\overline{x}},\overline{\overline{y}}])\\
-&=j_\calC([\overline{x},\overline{\overline{y}}]+[\overline{\overline{x}},\overline{y}])=x\otimes y+y\otimes x,
+\quadratic_{\calW(n)}([x,y])&=j_{\calW(n)}([\overline{x}+\overline{\overline{x}},\overline{y}+\overline{\overline{y}}]+[\overline{x},\overline{y}]+[\overline{\overline{x}},\overline{\overline{y}}])\\
+&=j_{\calW(n)}([\overline{x},\overline{\overline{y}}]+[\overline{\overline{x}},\overline{y}])=x\otimes y+y\otimes x,
 \end{alignat*}
-which is precisely the representation of $[x,y]$ in $F^{(2)}_{\calC}V\subseteq V^{\otimes2}$. Similarly, $j_\calC\quadratic(x\lambda_i)$ vanishes (as $(\DASH)\lambda_i$ is linear), while $j_\calC\quadratic(\restn{x})$ equals $x\otimes x$ as desired. The other cases, including that of $\calW(0)$, are barely any different.
+which is precisely the representation of $[x,y]$ in $F^{(2)}_{\calC}V\subseteq V^{\otimes2}$. Similarly, $\quadratic_{\calW(n)}(x\lambda_i)$ vanishes (as $(\DASH)\lambda_i$ is linear), while $\quadratic_{\calW(n)}(\restn{x})$ equals $x\otimes x$ as desired. The other cases, including that of $\calW(0)$, are barely any different.
 \end{proof}
 \end{Lie algebras in characteristic 2 and their homotopy operations}
 
@@ -1602,8 +1578,8 @@ Given the description of the operations $(\vExtCohOp^{i-1})^*$, it will suffice 
 equals the sum of the composites, for $1\leq i \leq q$ (and not all of ... are zero?): (these are the nontop)
 \[(QB_{p+1}\pi_* L)_{q+i-1}\overset{(\gamma_i)_*}{\to} (QB_{p}\pi_* L)_q\overset{Q\chi}{\to} (\pi_*QG_{p}L)_q\overset{\sigma_{i-1}}{\to} (\pi_*(S^2(Q_{\calL(n)}G_{p}L)))_{q+i-1},\]
 added to the composite:
-\[(QB_{p+1}\pi_* L)_{q+i-1}\overset{j_{\calW(n+1)}\circ Q_{\calW(n+1)}\xi_{\calW(n+1)}}{\to}(S^2(QB_{p}\pi_* L))_{q+i-1}\overset{S^2(Q\chi)}{\to}
-(S^2(\pi_*QG_pL))_{q+i-1}\overset{\theta}{\to}
+\[(QB_{p+1}\pi_* L)_{q+i-1}\overset{\psi_{\calW(n+1)}}{\to}(S^2(QB_{p}\pi_* L))_{q+i-1}\overset{S^2(Q\chi)}{\to}
+(S^2(\pi_*QG_pL))_{q+i-1}\overset{\widetilde{\nabla}}{\to}
 (\pi_*(S^2(Q_{\calL(n)}G_{p}L)))_{q+i-1},\]
 
 
@@ -1625,7 +1601,7 @@ the summands $\sum_j \quadratic(\lambda^\textup{rep}_{n_j})(\chi(x_j))$ precisel
 Similarly, appealing to the fact that the ``top operations'' $S^2_\textup{pr?}\pi_*M\to \pi_*M$ are
 \[S^2_\textup{pr?}(\pi_*(M))\overset{\nabla}{\to}\pi_{*}(S^2_\textup{pr}M)\to \pi_{*}(M),\]
 we find
-\[\quadratic (\textup{TOPOPS}^\textup{rep}(y(\chi(u_k))))=\nabla(y)(\gamma(u_k))=\theta S^2(Q\chi)(jQ\xi)\]
+\[\quadratic (\textup{TOPOPS}^\textup{rep}(y(\chi(u_k))))=\nabla(y)(\gamma(u_k))=\widetilde{\nabla} S^2(Q\chi)(jQ\xi)\]
 
 %other than terms $\lambda_i(x)$ and simple brackets $[x,y]$ has no contribution to $\quadratic(f_{p+1}^\textup{rep})$ (as each generating $\calW(n+1)$-operation is built at the chain level from a quadratic operation using the partially restricted Lie algebra structure $\calL(n)$). More precisely, $f_{p+1}^\textup{rep}$ may be written \[f_{p+1}^\textup{rep}=\sum_i\sum\]
 
@@ -2004,9 +1980,11 @@ having all gradings at the very right, tensor products of vector spaces,\ldots?
 \item make a note about the difference between AQ homology and derived indecomposables.
 \item Either use or lose the $\quadratic$ notation --- in general, sort out a consistent use for it.
 \item $\gamma_i$ and $\gamma^i$ notations must go.
-\item Need a cogent section on stuff like: $S^2_\textup{pr?}\pi_*M\to \pi_*M$. What's a restricted Lie algebra, what's are the "top operations" $S^2\pi_*(L)\to \pi_*(S^2L)\to \pi_*(L)$ - are they defined by $\nabla$? (yes). Use $\theta$ for the top ops.
+\item Need a cogent section on stuff like: $S^2_\textup{pr?}\pi_*M\to \pi_*M$. What's a restricted Lie algebra, what's are the "top operations" $S^2\pi_*(L)\to \pi_*(S^2L)\to \pi_*(L)$ - are they defined by $\nabla$? (yes). Use $\widetilde{\nabla}$ for the top ops.
 \item Uniform notation for the class represented by $x$... $[x]$?
 \item get an arrow for epimorphisms and one for monomorphisms, and use them
+\item vector space vs vectorspace
+\item upper and lower scripts for algebraic structure - sort it out! E.g. $Q_\calC$ and $H_*^\calC$.
 \end{enumerate}
 
 
