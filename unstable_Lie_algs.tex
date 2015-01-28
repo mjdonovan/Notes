@@ -13,15 +13,14 @@
 \usepackage{dsfont}%creates \mathds{1}
 \excludeversion{comp func sseq old version}
 
-\renewcommand{\excludeversion}[1]{\includeversion{#1}}
+%\renewcommand{\excludeversion}[1]{\includeversion{#1}}
 \excludeversion{Contents Page}
 \includeversion{Conventions and notation}
-\excludeversion{Lie algebras in characteristic 2 and their homotopy operations}
+\includeversion{Lie algebras in characteristic 2 and their homotopy operations}
 \excludeversion{Cohomology operations for unstable Lie algebras over P}
-\excludeversion{Categories of graded Lie algebras and their homotopy operations}%Seems depreciated
 \excludeversion{Unstable Lie algebras over the Lambda-algebra}
 \excludeversion{Cohomology operations for unstable Lie algebras over Lambda}
-\includeversion{Composite functor spectral sequences}
+\excludeversion{Composite functor spectral sequences}
 \excludeversion{The cohomology of a trivial unstable Lie algebra over P}
 \excludeversion{appendices}
 
@@ -301,6 +300,7 @@ url=false,doi=false,isbn=false,eprint=false]{biblatex}%
 \newcommand{\vExtCohOp}{\textup{Op}_\textup{v,ext}}
 \newcommand{\hExtCohOp}{\textup{Op}_\textup{h,ext}}
 \newcommand{\ExtCohProd}{\mu_\textup{ext}}
+\newcommand{\epi}{\to\to}
 
 
 \newcommand{\NOFULLPAGE}{\relax}
@@ -356,33 +356,86 @@ url=false,doi=false,isbn=false,eprint=false]{biblatex}%
 \begin{Conventions and notation}
 \vfil\pagebreak
 \section{Conventions and notation}
-\subsection{Categories of universal graded algebras}
-In this paper we will be dealing with various categories of universal graded algebras [BS?,Quillen], and as such, it serves to set notation globally. The categories we will deal with are all monadic over a category of graded $\F_2$-vector spaces (of finite type ??),
-%Indeed, for any two integers $m,n\geq0$, let $\vect{m}{n}$ be the category of finite type graded $\F_2$-vector spaces with $m$ cohomological gradings and $n$ homological gradings. That is, an object $V$ of $\vect{m}{n}$ may be written
-%\[V=\bigoplus_{p_m,\ldots,p_1,q_n,\ldots,q_1\geq0}V_{q_n,\ldots,q_1}^{p_m,\ldots,p_1},\]
-%in which each $V_{q_n,\ldots,q_1}^{p_m,\ldots,p_1}$ is a finite dimensional $\F_2$-vector space. In fact, we will restrict to 
-namely, the category of vector spaces with $r$ non-negative homological gradings and a single strictly positive cohomological grading. We will denote the category of such $\F_2$-vector spaces by the symbol $\vect{+}{r}$, so that an object $V$ of $\vect{+}{r}$ decomposes as
+\subsection{Categories of $\F_2$-vector spaces}
+
+In this paper we will deal with numerous categories monadic over a category of graded $\F_2$-vector spaces. We will write $\vect{}{}$ for a generic category of $\F_2$-vector spaces, either graded or ungraded. We will write $\vect{+}{r}$ for the category of vector spaces with $r$ non-negative homological gradings and a single strictly positive cohomological grading, so that an object $V$ of $\vect{+}{r}$ decomposes as
 \[V=\bigoplus_{s_r,\ldots,s_1\geq0,\,t\geq 1}V^{t}_{s_r,\ldots,s_1}.\]
-Similarly, we write $\vect{r}{+}$ for the category of $\F_2$-vector spaces with one positive homological grading and $r$ non-negative cohomological gradings. Lastly, we write $\vect{}{}$ for the category of (ungraded) $\F_2$-vector spaces, and  $\vect{+}{}$ for $\vect{+}{0}$.
+Similarly, we write $\vect{r}{+}$ for the category of $\F_2$-vector spaces with one positive homological grading and $r$ non-negative cohomological gradings. We follow the convention that (graded) dualization $V\mapsto V^*$ interchanges homological and cohomological gradings, and is thus a contravariant functor $\vect{+}{r}\to\vect{r}{+}$ defined by $(V^*)^{s_r,\ldots,s_1}_{t}:=(V_{s_r,\ldots,s_1}^{t})^*$.
 
-For each algebraic category $\calC$ of interest in this paper, an object $X$ of $\calC$ may be defined as a graded vector space $X\in\vect{+}{r}$ along with certain binary and unary operations on $X$ (and without any nullary operations). As such, there will be a forgetful functor $U_\calC:\calC\to\vect{+}{r}$, which will admit a left adjoint, always denoted $F_\calC:\vect{+}{r}\to\calC$ for notational consistency. The functor $U_{\calC}$ will always be monadic, in the sense that the natural comparison functor from $\calC$ to the category of algebras over the monad $U_{\calC}F_{\calC}$ on $\vect{+}{r}$ is an equivalence.
+The category $\vect{+}{r}$ is equipped with a tensor product:
+\[(U\otimes V)^t_{s_r,\ldots,s_1}=\bigoplus_{s'_i+s''_i=s_i,\,t'+t''=t}U^{t'}_{s'_r,\ldots,s'_1}\otimes V^{t''}_{s''_r,\ldots,s''_1},\]
+and if $V\in \vect{+}{r}$, then $V\otimes V$ has an action of $\Sigma_2$ given by the map $T$ interchanging the two factors. We'll write $S_2V$ for the coinvariants and $S^2V$ for the invariants of this action, and $\Lambda^2V$ for the image in $S^2V$ of the trace map $\trace=(1+T):S_2V\to S^2V$.
 
-It will also happen that for each $\calC$, there is a functor $K_\calC:\vect{+}{r}\to \calC$ which sends $V\in\vect{+}{r}$ to the `trivial object on $V$', and $K_{\calC}$ has a left adjoint, $Q_{\calC}:\calC\to\vect{+}{r}$, which sends $X\in\calC$ to `the quotient of $X$ by the image of its non-trivial operations'. In terms of free constructions, the monad $U_{\calC}F_{\calC}$ will admit an augmentation $\epsilon:U_{\calC}F_{\calC}\to\textup{id}$, and the functor $K_\calC$ sends any object $V\in\vect{+}{r}$ to the $U_{\calC}F_{\calC}$-algebra whose structure map is $\epsilon_V:U_{\calC}F_{\calC}V\to V$. Moreover, the functor $Q_{\calC}$ sends $X\in \calC$ with structure map $\rho:F_\calC U_\calC X\to X$ to the coequaliser in $\vect{+}{r}$ of the maps $U_\calC\rho$ and $\epsilon_{U_\calC X}$.
+\subsection{Categories of universal graded algebras}
+In this paper we will be dealing with various categories of universal graded algebras [BS?,Quillen], and as such, it serves to set notation globally. Until \S\ref{The example of simplicial commutative F2-algebras}, our comments will apply to any of the algebraic categories $\calL(n)$ or $\calW(n)$ to be defined below. Let $\calC$ be any of these categories, monadic over $\vect{+}{r}$.
+
+An object $X$ of $\calC$ may be defined as a graded vector space $X\in\vect{+}{r}$ along with certain binary and unary operations on $X$ (and without any nullary operations). As such, there will be a forgetful functor $U_\calC:\calC\to\vect{+}{r}$, which will admit a left adjoint, always denoted $F_\calC:\vect{+}{r}\to\calC$ for notational consistency. The functor $U_{\calC}$ will always be monadic, in the sense that the natural comparison functor from $\calC$ to the category of algebras over the monad $U_{\calC}F_{\calC}$ on $\vect{+}{r}$ is an equivalence.
+
+For the categories of interest in this paper, the monad $U_{\calC}F_{\calC}$ will admit an augmentation $\epsilon:U_{\calC}F_{\calC}\to\textup{id}$, reflecting homogeneity in the relations defining $\calC$. This augmentation has the monad unit $\textup{id}\to U_{\calC}F_{\calC}$ as a section, and may be thought of as projection back onto generators.
+
+We will often refer to elements of a free construction $F_\calC V$ using notation such as $f(v_i)$, thought of as a composite $f$ of $\calC$-structure maps applied to generators $v_i\in V\subseteq F_\calC(V)$. We will say that $f(v_i)$ is a \emph{$\calC$-expression}.
 
 
 
+\subsection{Quillen's model structure on $s\calC$}
+We are interested in $s\calC$, the category of simplicial objects in $\calC$. The forgetful functor $U_\calC$ allows us to consider an object $X\in s\calC$ as a simplicial abelian group in $s\vect{+}{r}$. As such, we may define the homotopy groups of $X$, written $\pi_*X\in \vect{+}{r+1}$, to be $H_*N_*X$, where $N_*$ is one of the inverse equivalences appearing in the Dold-Kan correspondence [somewhere]: \[N:s\vect{+}{r}\rightleftarrows \textup{ch}_+ \vect{+}{r}
+:\Gamma.\]
+We will always use the description of $N_nX$ as the mutual kernel of $d_1,\ldots,d_n$ in $X_n$, with differential $d_0$ (rather than the equivalent definition as a quotient), and write $ZN_nX$ for the mutual kernel of $d_0,\ldots,d_n$.
 
+Now fix $n\geq0$, $s_r,\ldots,s_1\geq0$ and $t\geq1$. Writing $z$, $h$ and $dh$ for classes all in internal cohomological grading $t$ and homological grading $s_r,\ldots,s_1$ , define
+%Let $\mathbb{S}_{n,s_r,\ldots,s_1}^t$ and $C\mathbb{S}_{n,s_r,\ldots,s_1}^t$ be the $\in \textup{ch}_+ \vect{+}{r}$ be the chain complexes, with $z$, $h$ and $dh$ all having internal gradings $t,s_r,\ldots,s_1$:
+\begin{gather*}
+\phantom{C\mathbb{S}_{n,s_r,\ldots,s_1}^t=\Gamma\Bigl(}\xymatrix@R=1.5mm@1@!C{
+&{\smash{(n-1)}}&{\smash{(n)}}&{\smash{(n+1)}}&{\smash{(n+2)}}\\
+{\makebox[0cm][r]{$\,\mathbb{S}_{n,s_r,\ldots,s_1}^t=\Gamma\Bigl($}\cdots\,} &%r1c1
+{\,0\,}\ar[l]
+&%r1c2
+\F_2\langle z\rangle\ar[l]
+&%r1c3
+{\,0\,}\ar[l]
+&{\,0\,}\ar[l]
+&{\,\cdots\Bigr),} \ar[l]
+\\
+%&{\smash{(n-1)}}&{\smash{(n)}} &{\smash{(n+1)}}&{\smash{(n+2)}}\\
+{\makebox[0cm][r]{$\,C\mathbb{S}_{n,s_r,\ldots,s_1}^t=\Gamma\Bigl($}\cdots\,} &%r1c1
+{\,0\,}\ar[l]
+&%r1c2
+\F_2\langle dh\rangle\ar[l]
+&%r1c3
+\F_2\langle h\rangle\ar[l]
+&{\,0\,}\ar[l]
+&{\,\cdots\Bigr).} \ar[l]
+}
+\end{gather*}
+There is an evident inclusion $\imath:\mathbb{S}_{n,s_r,\ldots,s_1}^t\to C\mathbb{S}_{n,s_r,\ldots,s_1}^t$. For any $V\in s\vect{+}{r}$, we have
+\[\hom_{s\vect{+}{r}}(\mathbb{S}^t_{s_r,\ldots,s_1},V)\cong (ZN_nV)_{n,s_r,\ldots,s_1}^t\textup{ and }\hom_{s\vect{+}{r}}(\mathbb{S}^t_{n,s_r,\ldots,s_1},V)\cong (N_{n+1}V)_{s_r,\ldots,s_1}^t,\]
+and under these isomorphisms the differential $d:N_{n+1}V\to ZN_nV$ corresponds to $\imath^*$.
+By adjunction, for any $X\in s\calC$
+\[\hom_{s\calC}(F_\calC\mathbb{S}^t_{n,s_r,\ldots,s_1},X)\cong (ZN_nX)_{s_r,\ldots,s_1}^t\textup{ and }\hom_{s\calC}(\mathbb{S}^t_{n,s_r,\ldots,s_1},X)\cong (N_{n+1}X)_{s_r,\ldots,s_1}^t,\]
+and in the homotopy category corresponding to the model structure introduced below, $F_\calC\mathbb{S}^t_{n,s_r,\ldots,s_1}$ represents $\pi_n(\DASH)^t_{s_r,\ldots,s_1}$ [goerss? Blanc-Stover?].
 
-\subsection{Quillen's model structure on $s\calC$ and $\calC$-homology}
-For any of the algebraic categories $\calC$ herein we use Quillen's simplicial model category structure on the category $s\calC$. In this structure, the weak equivalences (fibrations) are the maps which are weak equivalences (fibrations) of simplicial abelian groups (so that every object is fibrant), and every cofibrant object is a retract of an \emph{almost free} object. A simplicial object $X_\bullet$ is almost free if there are subspaces $V_n\subseteq X_n$ for each $n\geq0$ such that the structure map $F_{\calC}U_\calC V_n\to X_n$ is an isomorphism for all $n$, and such that these subspaces are preserved by all of the degeneracies and face maps of $X_\bullet$ except for $d_0$.
+For any of the algebraic categories $\calC$ herein we use Quillen's simplicial model category structure on the category $s\calC$. In this structure, the weak equivalences (fibrations) are the maps which are weak equivalences (fibrations) of simplicial abelian groups, so that every object is fibrant. Moreover, every cofibrant object is a retract of an \emph{almost free} object [miller]. A simplicial object $X_\bullet$ is almost free if there are subspaces $V_n\subseteq X_n$ for each $n\geq0$ such that the structure map $F_{\calC}U_\calC V_n\to X_n$ is an isomorphism for all $n$, and such that these subspaces are preserved by all of the degeneracies and face maps of $X_\bullet$ except for $d_0$.
 
-For a simplicial resolution functor $\calC\to s\calC$, we'll often use the standard simplicial bar construction arising from the $F_\calC\dashv U_\calC$ adjunction [cite?]. More explicitly, given $X\in\calC$, we define $B_\bullet^\calC X\in s\calC$ by iteration of the comonad $F_\calC U_\calC$, although we will tend to supress the $U_\calC$ in our notation:
+For a simplicial resolution functor $\calC\to s\calC$, we'll often use the standard simplicial bar construction arising from the $F_\calC\dashv U_\calC$ adjunction [cite?]. More explicitly, given $X\in\calC$, we define $B_\bullet^\calC X\in s\calC$ by iteration of the comonad $F_\calC U_\calC$, although we will tend to supress the $U_\calC$ in our notation: \textbf{mention} diagonal of bisimp resolution
 \[B_s^\calC X=(F_\calC)^{s+1}X.\]
 The face maps are given by the formula $d_i=(F_\calC)^i\epsilon$, and the degeneracies by $s_i=(F_\calC)^i\beta$, where $\epsilon$ and $\beta$ are respectively the counit and diagonal of the comonad $F_\calC U_\calC$. This object is almost free, with $B_s^\calC X$ generated by its subspace $(F_{\calC})^sX$. It is standard that the augmentation $B_\bullet^\calC X\to X$ is an acyclic fibration.
 
-For $X\in\calC$, we define the $\calC$-\emph{homology} of $X$ by the formula:
+
+\subsection{The $\calC$-homology functor $H^{\calC}_*$}
+There is a functor $K_\calC:\vect{+}{r}\to \calC$ which sends $V\in\vect{+}{r}$ to the `trivial object on $V$'. This functor $K_{\calC}$ has a left adjoint, $Q_{\calC}:\calC\to\vect{+}{r}$, which sends $X\in\calC$ to `the quotient of $X$ by the image of its non-trivial operations'. More precisely, $K_\calC$ sends any object $V\in\vect{+}{r}$ to the $U_{\calC}F_{\calC}$-algebra whose structure map is $\epsilon_V:U_{\calC}F_{\calC}V\to V$. Moreover, the functor $Q_{\calC}$ sends $X\in \calC$ with structure map $\rho:F_\calC U_\calC X\to X$ to the coequaliser in $\vect{+}{r}$ of the maps $U_\calC\rho$ and $\epsilon_{U_\calC X}$.
+
+It need not be true that the $Q_\calC\dashv K_\calC$ adjunction models the abelianisation functor of [quillen]. Nevertheless, we define the $\calC$-\emph{homology} of $X\in\calC$ by the formula:
 \[H_*^{\calC}X=\pi_*(Q_\calC B_\bullet^\calC X)=H_*N_*(Q_\calC B_\bullet^\calC X).\]
-This is well defined, as the $Q_\calC\dashv K_\calC$ adjunction is a Quillen adjunction (indeed $K_\calC$ evidently preserves fibrations and acyclic fibrations), and we are free to use any cofibrant replacement in place of $B_\bullet^\calC X$. We define the $\calC$-cohomology $H^*_\calC X$ to be the linear dual of $H_*^\calC X$. Note that if $\calC$ is monadic over $\vect{+}{r}$, then $H_*^{\calC}X\in \vect{+}{r+1}$, and $H^*_{\calC}X\in \vect{r+1}{+}$. That is, each homology group $H_s^\calC X$ retains the gradings of $X$, and a new homological grading is added (to the left of the existing homological gradings). If we dualise to obtain cohomology, the cohomological gradings and homological gradings are swapped. We will uniformly avoid substituing into the location of an upper or lower $*$, for the sake of clarity. For example, suppose that $\calC$ is monadic over $\vect{+}{2}$, then we will write $(H_*^\calC X)_{s_3,s_2,s_1}^t$, instead of $(H_{s_3}^\calC X)_{s_2,s_1}^t$.
+This is well defined, as the $Q_\calC\dashv K_\calC$ adjunction is a Quillen adjunction (indeed $K_\calC$ evidently preserves fibrations and acyclic fibrations), and we are free to use any cofibrant replacement in place of $B_\bullet^\calC X$.
+\begin{lem}\label{lemma on homology class repd by normalised generator}
+Suppose that $X$ is almost free with generating subspaces $V_n\subseteq X_n$. Then any homology class in $H_n^{\calC}X\cong \pi_nQ_{\calC}X$ can be represented by the image in $Q_{\calC}X_n$ of an element of $V_n\cap N_nX$.
+\end{lem}
+\begin{proof}
+Choose a representative $w\in ZN_nQ_\calC X$. As the composite $V_n\subseteq X_n\epi Q_\calC X_n$ is an isomorphism, one can find some $v\in V_n$ such that the image of $v$ in $Q_\calC X_n$ is $w$, yet $v$ needn't lie in $N_nX$. Consider the endomorphism
+\[c=(1+s_0d_1)(1+s_1d_2)\cdots (1+s_{n-1}d_n):Q_\calC X_n\to Q_\calC X_n.\]
+By the simplicial identities, $c$ has image inside $N_n Q_\calC X$, and therefore acts as the identity on $N_nQ_\calC X$. The similarly defined operator on $X_n$ has image inside $N_n X$, and, in light of the fact that all the simplicial operators but $d_0$ preserve the subspaces $V_i$, preserves $V_n$. Thus the image in $Q_\calC X_n$ of $cv\in V_n\cap N_n X$ is $cw=w$.
+\end{proof}
+ We define the $\calC$-cohomology $H^*_\calC X$ to be the linear dual of $H_*^\calC X$. Note that if $\calC$ is monadic over $\vect{+}{r}$, then $H_*^{\calC}X\in \vect{+}{r+1}$, and $H^*_{\calC}X\in \vect{r+1}{+}$. That is, each homology group $H_s^\calC X$ retains the gradings of $X$, and a new homological grading is added (to the left of the existing homological gradings). If we dualise to obtain cohomology, the cohomological gradings and homological gradings are swapped. We will uniformly avoid substituing into the location of an upper or lower $*$, for the sake of clarity. For example, suppose that $\calC$ is monadic over $\vect{+}{2}$, then we will write $(H_*^\calC X)_{s_3,s_2,s_1}^t$, instead of $(H_{s_3}^\calC X)_{s_2,s_1}^t$.
 
 
 \subsection{$\calC$-$\Pi$-algebras, free $\calC$-$\Pi$-algebras and the smash product}
@@ -509,7 +562,7 @@ where $v\in(S^2(H_*(NU)))_{m}$ and $w_k\in H_{m-k}(NU)$ ($0\leq k<m/2$). Here, $
 
 
 
-\subsection{The example of simplicial commutative $\F_2$-algebras}
+\subsection{The example of simplicial commutative $\F_2$-algebras}\label{The example of simplicial commutative F2-algebras}
 Include Goerss' theorem.
 
 \todoeasy{Recall definition of Goerss' category $\calW$}{Define them to be locally finite and connected.}
@@ -570,7 +623,7 @@ The functor $U$ becomes a monad using the commutation relations given by Goerss,
 
 \begin{Lie algebras in characteristic 2 and their homotopy operations}
 
-\section{Lie algebras in characteristic 2}
+\section{Graded Lie algebras and their homotopy operations in characteristic 2}
 As we work in characteristic 2, there is more than one available notion of a Lie algebra. An $S(\LieOperad)$-algebra is a vector space $L$ equipped with a bracket $L\otimes L\to L$ satisfying the Jacobi identity and the (anti)-symmetry condition $[x,y]=[y,x]$. A \emph{Lie algebra} (or $\Lambda(\LieOperad)$-algebra) is a vector space $L$ equipped with a bracket $L\otimes L\to L$ satisfying the Jacobi identity and the alternating condition $[x,x]=0$. Finally, a \emph{restricted Lie algebra} [See Curtis or 6A or something] (or $\Gamma(\LieOperad)$-algebra) is a Lie algebra equipped with a \emph{squaring} or \emph{restriction} function $\restn{(\DASH)}:L\to L$, satisfying the axioms
 \[\restn{(x_1+x_2)}=\restn{x_1}+\restn{x_2}+[x_1,x_2]\textup{ \ and \ }[\restn{x_1},x_2]=[x_1,[x_1,x_2]].\]
 The alternating condition implies the (anti)-symmetry condition, and these three types of Lie algebras form a heirarchy: a restricted Lie algebra is in particular a Lie algebra, and a Lie algebra is in particular an $S(\LieOperad)$-algebra.
@@ -588,7 +641,7 @@ These monads give rise to the three indicated forms of Lie algebras in character
 Each of these three monads is generated by the operations contained in quadratic grading 2. That is, an $S(\LieOperad)$-algebra is a map $S_2L\to L$, a $\Lambda(\LieOperad)$-algebra is a map $\Lambda^2L\to L$, and a $\Gamma(\LieOperad)$-algebra is a map $S^2L\to L$, where in each case we demand the necessary compatibilities that these maps extend to the full monad. Here, we used the analogous definitions $S_2V:=(V^{\otimes2})_{\Sigma_2}$, $S^2V:=(V^{\otimes2})_{\Sigma_2}$ and $\Lambda^2V:=\im(\trace:S_2V\to S^2V)$.
 
 \subsection{Graded and partially restricted Lie algebras}
-[Old version of spiel on PRLie algs commented out here.%
+[\textbf{Old version} of spiel on PRLie algs commented out here.%
 %Let $\LieOperad$ be the Lie operad in characteristic 2. As explained in [Fresse], the monad $S(\LieOperad)$ on $\vect{}{}$ defined by
 %\[S(\LieOperad)(V)=\bigoplus_{n\geq1}(\LieOperad(n)\otimes V^{\otimes n})_{\Sigma_n}\]
 %does not return the free Lie algebra on $V$ in the traditional sense. Rather, an $S(\LieOperad)$-algebra is a vector space $L$ equipped with a bracket $L\otimes L\to L$ satisfying the Jacobi identity and the antisymmetry condition $[x,y]=-[y,x]$. This condition does \emph{not} imply the alternating condition $[x,x]=0$ (which is impossible to encode operadically). We will refer to structures of this type as $S(\scrL)$-algebras, to distinguish them from Lie algebras, which we demand satisfy the alternating condition.
@@ -611,7 +664,7 @@ In other words, we view the Lie operad as an operad in $\vect{+}{n}$, such that
 \[\LieOperad(r)=(\LieOperad(r))^{r-1}_{0,\ldots,0},\]
 and then a $\vect{+}{n}$-graded Lie algebra is an algebra over the corresponding monad $\Lambda(\LieOperad)$ on $\vect{+}{n}$.
 
-A $\vect{+}{n}$-graded \emph{partially} restricted Lie algebra is to be graded Lie algebras such that certain graded parts admit a restriction operation. Specifically, there is to be defined a restriction operation
+A $\vect{+}{n}$-graded \emph{partially restricted} Lie algebra is to be graded Lie algebras such that certain graded parts admit a restriction operation. Specifically, there is to be defined a restriction operation
 \[\restn{(\DASH)}:L^t_{s_n,\ldots,s_1}\to L^{2t+1}_{2s_n,\ldots,2s_1}\]
 whenever not all of $s_n,\ldots,s_{1}$ are zero. We will denote the category of such objects $\calL(n)$. It is monadic over $\vect{+}{n}$, with an adjunction
 \[F_{\calL(n)}:\vect{+}{n}\rightleftarrows \calL(n):U_{\calL(n)}.\]
@@ -685,8 +738,8 @@ If $L\in s\calL(n)$ has structure map $\rho:F_{\calL(n)}L\to L$, then there are 
 \[(\DASH)\lambda_i:(\pi_{s_{n+1}}L)_{s_n,\ldots,s_1}^t\to (\pi_{s_{n+1}+i}L)_{2s_n,\ldots,2s_1}^{2t+1}\]
 defined whenever $0\leq i<s_{n+1}$ and not all of $i,s_n,\ldots,s_1$ equal zero by the composite
 \[(\pi_{s_{n+1}}L)_{s_n,\ldots,s_1}^t\overset{\sigma_i}{\to}(\pi_{s_{n+1}+i}(F^{(2)}_{\calL(n)}L))_{2s_n,\ldots,2s_1}^{2t}\overset{\pi_*(\rho)}{\to}(\pi_{s_{n+1}+i}(L))_{2s_n,\ldots,2s_1}^{2t+1}.\]
-These operations are linear, and satisfy the Adem relations for the $\Lambda$-algebra. That is, whenever $i>2j$, and $x$ is a homogeneous element of $\pi_*L$ such that $((x)\lambda_j)\lambda_i$ is defined:
-\[((x)\lambda_j)\lambda_i=\sum_{k=0}^{(i-2j)/2-1}{i-2j-2-k\choose k}((x)\lambda_{i-j-1-k})\lambda_{2j+1+k}.\]
+These operations are linear, and satisfy the Adem relations for the $\Lambda$-algebra. That is, whenever $i>2j$, and $x$ is a homogeneous element of $\pi_*L$ such that $x\lambda_j\lambda_i$ is defined:
+\[x\lambda_j\lambda_i=\sum_{k=0}^{(i-2j)/2-1}{i-2j-2-k\choose k}x\lambda_{i-j-1-k}\lambda_{2j+1+k}.\]
 \end{prop}
 \begin{proof}
 As in the previous proposition, we only need to identify the operations defined with those given by Curtis in the case of a (fully) restricted Lie algebra. This is verified in the case $i\geq1$ using [Dwyer, 4.4], and in the case $i=0$ as $\sigma_0:\pi_*L\to \pi_*(S^2L)$ is the map $[x]\mapsto[x\otimes x]$.
@@ -695,8 +748,8 @@ For $n\geq0$, let $\calU(n+1)$ denote the algebraic category of $\vect{+}{n+1}$-
 \[(\DASH)\lambda_{s_{n+1}}=\restn{(\DASH)}:(\pi_{s_{n+1}}L)_{s_n,\ldots,s_1}^t\to (\pi_{2s_{n+1}}L)_{2s_n,\ldots,2s_1}^{2t+1}\]
 whenever not all of $s_{n+1},s_n,\ldots,s_1$ equal zero. This \emph{top} lambda operation is not part of the definition of the algebraic category $\calU(n+1)$, rather it is another symbol for the partial restriction on an object of $\calL(n+1)$. This is consistent with the standard convention, and as in [Curtis], we have:
 \begin{prop}\label{compatibilities between U and L in W}
-For $L\in s\calL(n)$, the homotopy groups $\pi_*(L)$ are simultaneously an object of $\calL(n+1)$ and of $\calU(n+1)$. The $\calU(n+1)$-operations are annihilated by the bracket. That is, for $i<s_{n+1}$, $x\in\pi_{s_{n+1}}L$ and $y\in \pi_*L$ such that $(x)\lambda_i$ is defined, we have $[(x)\lambda_i,y]=0$. The collection of all $\lambda$-operations (the $\calU(n+1)$-operations along with the restriction) together satisfy the $\lambda$-Adem relations whenever possible. That is, whenever $i>2j$, and $x$ is a homogeneous element of $X$ with $((x)\lambda_j)\lambda_i$ defined:
-\[((x)\lambda_j)\lambda_i=\sum_{k=0}^{(i-2j)/2-1}{i-2j-2-k\choose k}((x)\lambda_{i-j-1-k})\lambda_{2j+1+k}.\]
+For $L\in s\calL(n)$, the homotopy groups $\pi_*(L)$ are simultaneously an object of $\calL(n+1)$ and of $\calU(n+1)$. The $\calU(n+1)$-operations are annihilated by the bracket. That is, for $i<s_{n+1}$, $x\in\pi_{s_{n+1}}L$ and $y\in \pi_*L$ such that $x\lambda_i$ is defined, we have $[x\lambda_i,y]=0$. The collection of all $\lambda$-operations (the $\calU(n+1)$-operations along with the restriction) together satisfy the $\lambda$-Adem relations whenever possible. That is, whenever $i>2j$, and $x$ is a homogeneous element of $X$ with $x\lambda_j\lambda_i$ defined:
+\[x\lambda_j\lambda_i=\sum_{k=0}^{(i-2j)/2-1}{i-2j-2-k\choose k}x\lambda_{i-j-1-k}\lambda_{2j+1+k}.\]
 \end{prop}
 For $n\geq0$, let $\calW(n+1)$ denote the algebraic category of $\vect{+}{n+1}$-graded vectorspaces which are simultaneously an object of $\calU(n+1)$ and $\calL(n+1)$, such that the compatibilities of \ref{compatibilities between U and L in W} are satisfied. This category has a number of useful properties, following from the calculations of [6Author!]:
 \begin{prop}[6-Author]\hfil
@@ -746,7 +799,7 @@ We will use the standard simplicial bar construction as our simplicial resolutio
 We'll frequently use the identification $Q_\calW B_{s}X=U^{s}X$.
 
 
-\subsection{$\delta$ operations on $H^*_{\calW}$}
+\subsection{$\delta$ operations on $H^*_{\calW}$ and $H^*_{\calU}$}
 \todoeasy{Define the operations $\gamma_i$, state and define the $\delta_i$ operations}{still need to clarify the end of the proof of the relations.}
 For $V^{*}\in \vect{+}{0}$, we will define natural homomorphisms
 \[\gamma^i:(UV)^{n+i+1}\to V^{n}, \textup{ for $2\leq i<n$}.\]
@@ -803,10 +856,12 @@ $d_0\gamma^i =\gamma^i (f)u(g)(h_{(s-2)})$. These three quanitities sum to zero,
 
 What remains is to check that the Adem relations are satisfied. The necessary argument is a modification of that given in Priddy's work [Koszul], which accommodates for the presence of the extra operations. As the algebra of $\delta$-operations is Koszul dual (in Priddy's sense) to $\Palg$, the Adem relations follow. [$\diamondsuit$ Should I include the compression to the quadratic grading 2 parts?]% For this, show that we can compress to the terms in which there is quadratic grading 2 in each construction. Then the Adem relation is the image under the differential of something obvious.
 \end{proof}
+\todo{Note that the same method defines operations on $H^*_{\calU(n)}$}{}
 
-\subsection{Steenrod operations and a commutative product for $H^*_{\calW}$}
-\todoeasy{Define and state $\Sq$ operations and products}{Need to define $j:Q(X\wedge Y)\to QX\otimes QY$}
-We'll now give a construction of operations on the homology $H^*_{\calW}$ which arise from the Lie structure on elements of $\calW$. We'll follow the framework set out by Goerss in the derivation [] of the $\calW$ structure operations on Andre-Quillen homology. The first construction is that of the smash product of objects $X_1,X_2\in\calW$, which is defined to be the kernel of the natural map from the coproduct $X_1\sqcup X_2$ to the product $X_1\times X_2$, so that there is a short exact sequence:
+
+
+\subsection{Horizontal Steenrod operations and a commutative product for $H^*_{\calW}$}
+We'll now give a construction of operations on the homology $H^*_{\calW}$ which arise from the Lie structure on elements of $\calW$. {\tiny\textbf{This section made tiny since it duplicates the more general derivation above, although I'll still need to be explicit, especially about the shift.} We'll follow the framework set out by Goerss in the derivation [] of the $\calW$ structure operations on Andre-Quillen homology. The first construction is that of the smash product of objects $X_1,X_2\in\calW$, which is defined to be the kernel of the natural map from the coproduct $X_1\sqcup X_2$ to the product $X_1\times X_2$, so that there is a short exact sequence:
 \[\xymatrix@R=4mm{
 0\ar[r]
 &%r1c1
@@ -847,7 +902,7 @@ Another way to say this, in the style of Goerss (and others), is to define a fun
 Note the shift of one in the indices in this formula, as compared with similar formulae [Goerss or Dwyer].
 Then, (like Goerss shows), $d\Theta^j\alpha=\Theta^jd\alpha$, and we can define $\Sq^j$ to be the map on cohomotopy defined by $\Theta^j$. Similarly, we can define a cochain complex homomorphism
 \[\Psi:C_t^{s}\otimes C_{t'}^{s'}\to C_{t+t'+1}^{s+s'+1}\]
-by the formula $\psi^*_\calW\mathbb{D}_0^*$, and use this to define a pairing of cohomology.
+by the formula $\psi^*_\calW\mathbb{D}_0^*$, and use this to define a pairing of cohomology.}
 \begin{thm}
 These operations satisfy the Axioms *write them out*.
 \end{thm}
@@ -864,12 +919,12 @@ One checks that the bracket is well defined in the quotient, and that taking the
 %The functor $Q_\calW:\calW\to \vect{+}{0}$ may be written as a composite of two functors:
 %\[\calW\overset{Q_\Palg}{\to}\Lambda(\LieOperad)\textup{-mod}\overset{Q_{\LieOperad}}{\to}\vect{+}{0},\]
 %where the functor $Q_\Palg$ takes the quotient by the image of every $P$-operation. It follows from the axioms in $\calW$ that this quotient bears the structure of a (good) Lie algebra. 
-Moreover, the simplicial Lie algebra $Q_\PMonad B_\bullet X$ is an almost free simplicial Lie algebra, so that the dual homotopy of $Q_\calW B_\bullet X=Q_{\LieOperad} Q_\PMonad B_\bullet X$ is an instance of Lie algebra cohomology. \textbf{Is this exactly true? It doesn't matter much if not... just need to give extensive enough calculation in the appendix}
+Moreover, the simplicial Lie algebra $Q_\PMonad B_\bullet X$ is an almost free simplicial Lie algebra, so that the dual homotopy of $Q_\calW B_\bullet X=Q_{\LieOperad} Q_\PMonad B_\bullet X$ is an instance of Lie algebra cohomology. [\textbf{Is this exactly true?} It doesn't matter much if not... just need to give extensive enough calculation in the appendix, and modify the text around this comment accordingly]
 
 By [Priddy's prim coh ops], Lie algebra cohomology has Steenrod operations and a product. However, the formulae given by Priddy (involving the $\overline{W}$-construction) are not obviously equivalent to what we have given here. However, it is not hard to check that the definition we have given using $\psi_\calW$ is equivalent to an analogous definition for Lie algebra cohomology (given in [placemarker in appendix]), and theorem [BLAH again] identifies these operations with Priddy's.
 
 {\tiny
-We can identify the bar construction $Q_UB_sX$ with
+\textbf{This section tiny because it contains some duplication, although the typesetting of the proposition may end up useful. Maybe it'd be better to make it lokk more like Priddy's format, though.} We can identify the bar construction $Q_UB_sX$ with
 $Q_{\Lambda(\LieOperad)}\Lambda(\LieOperad)U^sX$,
 which is $Q_{\Lambda(\LieOperad)}$ applied to the almost free simplicial Lie algebra $\Lambda(\LieOperad)U^sX$. As such, its homotopy has operations induced by the map
 \[\xi_\LieOperad:\left(Q_{\Lambda(\LieOperad)}\Lambda(\LieOperad)U^{s+1}X
@@ -905,37 +960,14 @@ $\Sq^k(xy)=\sum_{i=0}^k(\Sq^ix)(\Sq^{k-i}y)$.
 \item show that the Sq-ops and products are instances of those on the cohomology of a Lie algebra (in particular that $j_\calW$ restricts to $j_\calL$), then quote the appendix
 \item The commutation relation for $\delta$ vs $\Sq$/product is written on the wall
 \item need to figure out what happens in low dimensions}
+\subsection{Relations between the horizontal and vertical operations}
+
 Do a Steenrod or product operation, and then a $\delta_i$, and you're using the composite of this map with
 \[Q_\calW U^{s+3}X=U^{s+2}X\to U^{s+1}X=Q_\calW U^{s+2}X\]
 which all boils down to
 \[P^i_{(s+2)}f_{(s+1)}g\mapsto q^{\calL}(f)(g)\]
 Anyway, I have a nullhomotopy of this map, which might be called $((P^i)^{-1}q^{\calL})$, and is stuck on the wall in the upper right corner.
 \end{Cohomology operations for unstable Lie algebras over P}
-
-\begin{Categories of graded Lie algebras and their homotopy operations}
-\vfil\pagebreak
-\section{Categories of graded Lie algebras and their homotopy operations}
-
-\subsection{Lie algebras in characteristic 2}
-Let $\LieOperad$ be the Lie operad in characteristic 2. As explained in [Fresse], the monad $S(\LieOperad)$ on $\vect{}{}$ defined by
-\[S(\LieOperad)(V)=\bigoplus_{n\geq1}(\LieOperad(n)\otimes V^{\otimes n})_{\Sigma_n}\]
-does not return the free Lie algebra on $V$ in the traditional sense. Rather, an $S(\LieOperad)$-algebra is a vector space $L$ equipped with a bracket $L\otimes L\to L$ satisfying the Jacobi identity and the antisymmetry condition $[x,y]=-[y,x]$. This condition does \emph{not} imply the alternating condition $[x,x]=0$ (which is impossible to encode operadically). We will refer to structures of this type as $S(\scrL)$-algebras, to distinguish them from Lie algebras, which we demand satisfy the alternating condition.
-
-Fresse constructs a monad $\Gamma(\LieOperad)$ defined by
-\[\Gamma(\LieOperad)(V)=\bigoplus_{n\geq1}(\LieOperad(n)\otimes V^{\otimes n})^{\Sigma_n},\]
-which represents the free restricted [See Curtis or 6A or something] Lie algebra. He further constructs a norm map $\textup{Tr}:S(\LieOperad)\to \Gamma(\LieOperad)$, and defines a monad $\Lambda(\LieOperad)$ by the formula
-\[\Lambda(\LieOperad)V=\im (\textup{Tr}:S(\LieOperad)V\to \Gamma(\LieOperad)V).\]
-Then $\Lambda(\LieOperad)(V)$ is the free Lie algebra on $V$, subject to the standard axiom, $[x,x]=0$.
-
-We'll be interested in \emph{partially restricted Lie algebras}. That is, Lie algebras $L$ equipped with a decomposition $L=L_0\oplus L_1$ such that $L_1$ is a Lie ideal and a map $\restn{(\DASH)}:L_1\to L_1$ satisfying the axioms one would expect for a restriction map. Namely, for any $a,b\in L_1$ and $c\in L$, $\restn{(a+b)}=\restn{a}+\restn{b}+[a,b]$, and $[\restn{a},c]=[a,[a,c]]$. There is a free functor from $\vect{}{}\times \vect{}{}$ to partially restricted Lie algebras, sending $(V_0,V_1)$ to the algebra generated by restrictable elements $V_1$ and non-restrictable elements $V_0$. This free functor may be described as follows. There is a natural $\Sigma_n$-equivariant decomposition: %The expressions for $S(\LieOperad)(V_0\oplus V_1)$ and $\Gamma(\LieOperad)(V_0\oplus V_1)$ both contain the terms:
-\[\LieOperad(n)\otimes (V_0\oplus V_1)^{\otimes n}=\Bigl(\LieOperad(n)\otimes (V_0)^{\otimes n}\Bigr)\oplus\Bigl(\bigoplus(\LieOperad(n)\otimes V_{i_1}\otimes V_{i_2}\otimes\cdots\otimes V_{i_n})\Bigr)\]
-where the direct sum is taken over all sequences $(i_1,\ldots,i_n)\in\{0,1\}^n$ other than $(0,\ldots,0)$.
-%and this decomposition is of $\Sigma_n$-modules.
-The free partially restricted Lie algebra is the subspace of $\Gamma(\LieOperad(V_0\oplus V_1))$ given by
-\[\im \Bigl(S(\LieOperad)(V_0)\overset{\textup{Tr}}{\to}\Gamma(\LieOperad)(V_0\oplus V_1)\Bigr)\oplus\bigoplus_{n\geq1}\Bigl(\bigoplus(\LieOperad(n)\otimes V_{i_1}\otimes V_{i_2}\otimes\cdots\otimes V_{i_n})\Bigr)^{\Sigma_n}\]
-
-\end{Categories of graded Lie algebras and their homotopy operations}
-
 
 \begin{Unstable Lie algebras over the Lambda-algebra}
 \vfil\pagebreak
@@ -967,9 +999,9 @@ Building on this definition, an object $X$ of the category $\calW(n)$ is to be a
 When $i=s_n$ (and $\lambda_i$ is defined) it is required to equal the restriction:
 \[(\DASH)\lambda_{s_n}=\restn{(\DASH)}:X^t_{s_n,\ldots,s_1}\to X^{2t+1}_{2s_n,2s_{n-1},\ldots,2s_1}.\]
 In particular, we have already specified that this top $\lambda$-operation is a quadratic refinement \textbf{(acceptable language?)} of the bracket, and how the two operations interact [label that equation]. Contrastingly, the non-top operations are required to be linear, and to be killed by the bracket, so that for any $x,y\in X^t_{s_n,\ldots,s_1}$ and $i<s_n$ (with not all of $i,s_{n-1},\ldots,s_{1}$ being zero) and homogeneous $z\in L$:
-\[(x+y)\lambda_i=(x)\lambda_i+(y)\lambda_i\textup{ and }[(x)\lambda_i,z]=0.\]
-Finally, these right operations satisfy the $\lambda$-Adem relations. That is, whenever $i>2j$, and $x$ is a homogeneous element of $X$ with $((x)\lambda_j)\lambda_i$ defined:
-\[((x)\lambda_j)\lambda_i=\sum_{k=0}^{(i-2j)/2-1}{i-2j-2-k\choose k}((x)\lambda_{i-j-1-k})\lambda_{2j+1+k}.\]
+\[(x+y)\lambda_i=x\lambda_i+y\lambda_i\textup{ and }[x\lambda_i,z]=0.\]
+Finally, these right operations satisfy the $\lambda$-Adem relations. That is, whenever $i>2j$, and $x$ is a homogeneous element of $X$ with $x\lambda_j\lambda_i$ defined:
+\[x\lambda_j\lambda_i=\sum_{k=0}^{(i-2j)/2-1}{i-2j-2-k\choose k}x\lambda_{i-j-1-k}\lambda_{2j+1+k}.\]
 
 Next, we'll define another category, $\LambdaMonad(n)$, whose objects are $\vect{+}{n}$-graded vector spaces with certain unstable $\lambda$ operations. An object $X$ of $\LambdaMonad(n)$ is simply an object of $\vect{+}{n}$ with operations
 \[(\DASH)\lambda_i:X^t_{s_n,\ldots,s_1}\to X^{2t+1}_{s_n+i,2s_{n-1},\ldots,2s_1}\]
@@ -1034,7 +1066,7 @@ Moreover the composite $Q_{\LambdaMonad(n)}\circ F_{\calW(n)}$ equals the the fr
 \section{Cohomology operations for unstable Lie algebras over $\Lambda$}
 \todoeasy{Do all the same work as in the $n=0$ case, to get horizontal and vertical $\Sq$ and products}{must explain in detail what the available operations are
 \item relations between them less important}
-\subsection{Vertical steenrod operations for $H^*_{\calW(n)}$, $n\geq1$}\label{section: vertical Koszul operations n positive}
+\subsection{Vertical steenrod operations for $H^*_{\calW(n)}$ and $H^*_{\calU(n)}$, $n\geq1$}\label{section: vertical Koszul operations n positive}
 Fix $n\geq1$. For $V\in \vect{+}{n}$, we will define natural homomorphisms
 \[\gamma_i:(F_{\calW(n)}V)^{2t+1}_{s_n+i-1,2s_{n-1},\ldots,2s_1}\to V^{t}_{s_n,\ldots,s_1},\]
 whenever $1\leq i \leq s_n$ and not all of $i-1,s_{n-1},\ldots,s_1$ are zero.
@@ -1055,7 +1087,7 @@ after identifying $Q_U B_{s+1}X$ with $U^{s}X$ and $Q_U B_{s}X$ with $U^{s+1}X$.
 \begin{proof}
 The proof here is obtained by modification of the corresponding proof in the $n=0$ case. Note that we use the Koszul duality between the Steenrod and $\Lambda$ algebras (Priddy Koszul Resolutions). \textbf{One might} make a note of the fact that all of the necessary relation terms are actually available --- nothing is ruled out due to dimension issues.
 \end{proof}
-
+\todo{Note that the same method defines operations on $H^*_{\calU(n)}$}{}
 \subsection{Horizontal steenrod operations and a commutative product for $H^*_{\calW}$}
 Say `it follows as in the $n=0$ case'
 
@@ -1075,6 +1107,7 @@ These are the homology and cohomology spectral sequences for a bisimplicial abel
 \subsection{The Blanc-Stover comonad in categories monadic over $\F_2$-vector spaces}
 Fix an algebraic category $\calC$, monadic over $\vect{}{}$ (more generally, monadic over some category of graded vector spaces, but for now we opt for notational simplicity). As we are working over a category of vector spaces, we can refine Blanc and Stover's definition \cite{Blanc_Stover-Groth_SS.pdf} of a useful comonad `$W$' on $s\calC$. (Did I end up changing the character for this?)
 
+\begin{shaded}\tiny
 It will help to fix a little notation. First, for $n\geq0$, let $\mathbb{S}^n\in \textup{ch}_+ \vect{}{}$ and $C\mathbb{S}^n\in \textup{ch}_+ \vect{}{}$ be the chain complexes
 \[(\mathbb{S}^n)_j=\begin{cases}
 \F_2\langle z\rangle,&\textup{if }j=n;\\
@@ -1094,6 +1127,7 @@ and the differential $d:N_{n+1}V\to ZN_nV$ corresponds to $\imath^*$ under these
 \[S^n_{\calC}:=F_{\calC}\Gamma(\mathbb{S}^n)\textup{ and }CS^n_{\calC}:=F_{\calC}\Gamma(C\mathbb{S}^n).\]
 Corresponding to the above structure, $S^n_{\calC}$ contains an element $z$ in dimension $n$, $CS^n_{\calC}$ contains an element $h$ in dimension $n+1$, there is a map $\imath:S^n_{\calC}\to CS^n_{\calC}$ sending $z$ to $d_0h$. For $L\in s\calC$, $\imath^*$ represents the differential under the isomorphisms
 \[\hom_{s\calC}(S_\calC^n,L)\cong ZN_nL,\textup{ and }\hom_{s\calC}(CS_\calC^n,L)\cong N_{n+1}L.\]
+\end{shaded}
 
 In this context, Blanc-Stover's comonad $\BSW$, applied to $L\in s\calC$, is the pushout
 \[\xymatrix@R=4mm{
@@ -1519,11 +1553,8 @@ We must identify the operations $\Sq_\textup{v}^i=\psi_{\BSW}^*\circ\vExtCohOp^{
 We'll use Miller's techniques [Miller p. 55] to define such a $\chi$ explicitly. For brevity, write $\mathbb{B}$ for the object $B_i^{\calW(n+1)}\pi_*L\in s\calW(n+1)$. Write $V_i$ for the subspace $(F_{\calW(n+1)})^{i}\subset \mathbb{B}$ of generators. For each $m\geq0$, write $F_mV_i$ for the subspace of $V_i$ consisting of degeneracies of elements of $V_j$ for $j\leq m$. Then write $F_m\mathbb{B}$ for the subobject of $\mathbb{B}$ which is almost free on the subspaces $F_mV_i$.
 
 Now for each $m$, $V_m$ splits into a direct sum
-\[V_m=V'_m\oplus F_{m-1}V_m,\]
-where $V'_m\subset N_m^\textup{h}\mathbb{B}$. To make this classical insight explicit, consider the endomorphism
-\[c=(1+s_0d_1)(1+s_1d_2)\cdots (1+s_{m-1}d_m):\mathbb{B}_m\to \mathbb{B}_m.\]
-By the simplicial identities, $c$ has image inside $N_m^\textup{h}\mathbb{B}$, and by further inspection, $c$ is an idempotent.
-In light of the fact that all the simplicial operators but $d_0$ preserve the subspaces $V_i$, $c$ restricts to an idempotent on $V_m$, and moreover $\im((\textup{id}-c)|_{V_m})\subset F_{m-1}V_m$, so we may define $V'_m=c(V_m)$.
+$V_m=V'_m\oplus F_{m-1}V_m$,
+where $V'_m\subset N_m^\textup{h}\mathbb{B}$. To make this classical insight explicit, consider the endomorphism $c:\mathbb{B}_m\to \mathbb{B}_m$ introduced in the proof of lemma \ref{lemma on homology class repd by normalised generator}, an idempotent with image $N_m^\textup{h}\mathbb{B}$, preserving the subspace $V_m$. As $\im((\textup{id}-c)|_{V_m})\subset F_{m-1}V_m$, we may define $V'_m=c(V_m)$. \textbf{(read this paragraph sometime)}
 
 In order to define $\chi$, we recursively define its restriction to the skeleta $F_m\mathbb{B}$. In order to extend a map $\chi_{m-1}:F_{m-1}\mathbb{B}\to \pi_*(G_\bullet L)$ to a map $\chi_m:F_m\mathbb{B}\to \pi_*(G_\bullet L)$, we need only to specify the values of $\chi_m$ on $V'_m$, which is to choose a lift in the diagram
 \[\xymatrix@R=4mm{
@@ -1585,7 +1616,7 @@ added to the composite:
 (\pi_*(S^2(Q_{\calL(n)}G_{p}L)))_{q+i-1},\]
 
 
-Anyway, let's start with an element of $V_{p+1,q+i-1}\cong (QB^{\calW(n+1)}_{p+1}\pi_*L)_{q+i-1}$. We may apply $c:V_{p+1}\to V_{p+1}$ to this element, in order to obtain an element of $V'_{p+1}$ which represents the homology class of interest (\textbf{explain}). We name the element in question:
+By lemma \ref{lemma on homology class repd by normalised generator}, we may represent any homology class of interest by an element $e\in V'_{p+1}$. We name the element in question:
 \[e:=f^{p+1}_{p+1}(u_j)\in (V'_{p+1})_{q+i-1}\subset F_{\calW(n+1)}V_p\textup{ for various }u_j\in V_{p}\]
 and if $f_{p+1}^\textup{rep}$ is a $\calL(n)$-expression which implements the $\calW(n+1)$-expression $f_{p+1}$ at the chain level:
 \begin{alignat*}{2}
@@ -1706,15 +1737,6 @@ To explain further the third equality,  the expression $\sum e_j(s_{\cdots }k_{\
 
 
 
-%Using Singer's techniques [ ], special EZAW maps, etc, there are bicomplex maps $K_k:C(A\otimes B)\to CA\otimes CB$, satisfying $dK_k+K_kd=K_{k-1}+TK_{k-1}T$. This map, on dual cochain complexes
-%\[K^*_k:(CX\otimes CY)^*\to C(X\otimes Y)^*\]
-%
-%has the property that $K^*_k(F^p)\subseteq F^{\textup{min}\{p-k,\lceil p/2\rceil\}}$ \textbf{(or is it max?)}
-%
-%has the property that $K^*_{n-k}(F^p)\subseteq F^{\textup{min}\{p-n+k=k-q,\lceil p/2\rceil\}}$ \textbf{(or is it max?)}
-%
-%
-%this structure defines operations on the spectral sequence as follows. Let $ $
 
 \end{Composite functor spectral sequences}
 
@@ -1900,12 +1922,11 @@ N_*N_*(S^2(Q_{\calL(n)}B^\BSW_{\bullet}L))^{t-1}_{s_{n+2}-1,s_{n+1},\ldots,s_1}.
 \]
 \end{comp func sseq old version}
 
+\subsection{The edge homomorphism}
 
-
-\todo{use Singer's techniques to give spectral sequence operations}{prove compatibility at $E^2$ for horizontal $\Sq$ and product
-\item prove compatibility at $E^2$ for vertical $\Sq$ with Koszul operation
-\item prove compatibility at $E^\infty$ for all $\Sq$ and product}
 \todo{Discuss the edge homomorphism $e:\left(E^2(n)\to\!\!\!\!\!\!\!\!\!\to E^\infty(n+1)\subseteq E^2_{0}(n+1)\right)$}{figure out what the relevant theorem here should be (goerss \S11-15)}
+
+\hfil
 
 \begin{The cohomology of a trivial unstable Lie algebra over P}
 \vfil\pagebreak
