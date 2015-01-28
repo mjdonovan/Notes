@@ -13,7 +13,7 @@
 \usepackage{dsfont}%creates \mathds{1}
 \excludeversion{comp func sseq old version}
 
-%\renewcommand{\excludeversion}[1]{\includeversion{#1}}
+\renewcommand{\excludeversion}[1]{\includeversion{#1}}
 \excludeversion{Contents Page}
 \includeversion{Conventions and notation}
 \includeversion{Lie algebras in characteristic 2 and their homotopy operations}
@@ -289,7 +289,7 @@ url=false,doi=false,isbn=false,eprint=false]{biblatex}%
 \newcommand{\LambdaMonad}{\Lambda^\textup{u}}
 \newcommand{\Palg}{{\calP}}
 \newcommand{\LieOperad}{{\scrL}}
-\newcommand{\restn}[1]{{#1}^{[2]}}
+\newcommand{\restn}[1]{#1^{[2]}}
 \newcommand{\vect}[2]{\calV^{#1}_{#2}}
 \newcommand{\BSW}{{\scrG}}%\scrH\scrI\scrJ\scrK\scrL\scrM\scrN\scrO\scrP\scrQ\scrR\scrS\scrT\scrY\scrZ}}
 \newcommand{\BSWres}{{\scrG_\bullet}}
@@ -710,7 +710,7 @@ with horizontal maps defined by the formulae (for cycles $x,y,z\in ZN_*(V)$):
 \[\widetilde{\nabla}([x]\otimes[y]+[y]\otimes [x])=[\nabla(x\otimes y+y\otimes x)]\textup{, and }\widetilde{\nabla}([x]\otimes[x])=[\nabla(x\otimes x)].\]
 \end{prop}
 \begin{proof}
-Since $\nabla$ symmetric, the formulae given for $\widetilde{\nabla}$ do indeed return homotopy classes in either $\pi_*(F^{(2)}_{\calL(n)}V)$ or $\pi_*(S^V)$. It is not clear that either $\widetilde{\nabla}$ is well defined. However, after checking that the lower map is well defined, as $\pi_*(\textup{incl})$ is a monomorphism (by \cite[Prop 5.6]{BousOpnsDerFun.pdf}), it will follow that the upper map is well defined. 
+Since $\nabla$ is symmetric, the formulae given for $\widetilde{\nabla}$ do indeed return homotopy classes in either $\pi_*(F^{(2)}_{\calL(n)}V)$ or $\pi_*(S^2V)$, however, it is not clear that either $\widetilde{\nabla}$ is well defined. We'll only need to check that the lower map is well defined: as $\pi_*(\textup{incl})$ is a monomorphism (by \cite[Prop 5.6]{BousOpnsDerFun.pdf}), it will follow that the upper map is well defined. 
 %Although it is not clear that $\widetilde{\nabla}$ is well defined, $\widetilde{\nabla}$ will prove to be the unique lift in a diagram: %We will construct it as the unique lift (dotted) of an analogous map $\widetilde{\nabla}'$:
 %\[\xymatrix@R=4mm{
 %F^{(2)}_{\calL(n+1)}(\pi_*V)\ar@{-->}[r]^-{\widetilde{\nabla}}
@@ -722,7 +722,7 @@ Since $\nabla$ symmetric, the formulae given for $\widetilde{\nabla}$ do indeed 
 %\pi_*(S^2V)%r2c2
 %}\]
 %in which the map $\pi_*(\textup{incl})$ is a monomorphism (by \cite[Prop 5.6]{BousOpnsDerFun.pdf}). Now $\widetilde{\nabla}'$ will be defined by the same formulae as $\widetilde{\nabla}$. 
-By general observations on natural transformations out of the endofunctor $S^2$ of $\vect{}{}$, in order to construct the lower $\widetilde{\nabla}$, it suffices to construct a natural linear map $p:S_2(\pi_*(V))\to \pi_*(S^2V)$ and a natural function $\restn{(\DASH)}:\pi_n(V)\to \pi_{2n}(S^2V)$ satisfying $\restn{(x+y)}=\restn{(x)}+\restn{(y)}+p(x\otimes y)$. Then $\widetilde{\nabla}$ is the unique natural map such that $\widetilde{\nabla}\circ\trace=p$ and $\widetilde{\nabla}(a)=p(a\otimes a)$ for $a\in\pi_*\left(V\right)$.
+By general observations on natural transformations out of the endofunctor $S^2$ of $\vect{}{}$, to construct a natural map $\widetilde{\nabla}:S^2(\pi_*V)\to\pi_*(S^2V)$ is to give a natural linear map $p:S_2(\pi_*(V))\to \pi_*(S^2V)$ and a natural function $\restn{(\DASH)}:\pi_n(V)\to \pi_{2n}(S^2V)$ satisfying $\restn{(x+y)}=\restn{x}+\restn{y}+p(x\otimes y)$. Then $\widetilde{\nabla}$ is the unique natural map such that $\widetilde{\nabla}\circ\trace=p$ and $\widetilde{\nabla}(a)=p(a\otimes a)$ for $a\in\pi_*\left(V\right)$.
 %\[p=\left(S_2\pi_*(V)\overset{\trace}{\to} S^2\pi_*(V)\overset{\widetilde{\nabla}'}{\to} \pi_*(S^2V)\right)\textup{ and }\restn{(\DASH)}=\left(\pi_*(V)\overset{v\mapsto v\otimes v}{\to} S^2\pi_*(V)\overset{\widetilde{\nabla}'}{\to} \pi_*(S^2V)\right).\]
 We define $\widetilde{\nabla}$ in this way, with
 \[p=\pi_*(\trace)\circ\nabla:\left(S_2(\pi_*(V))\overset{\nabla}{\to}\pi_*(S_2(V))\overset{\pi_*(\trace)}{\to}\pi_*(S^2(V))\right)\]
@@ -734,45 +734,50 @@ and with $\restn{(\DASH)}$ the operation $\sigma_n:\pi_n(V)\to \pi_{2n}(S^2V)$ d
 %\[p([x]\otimes [y])=[\nabla(x\otimes y+y\otimes x)],\textup{ and }\restn{([x])}=[\nabla(x\otimes x)].\qedhere\]
 \end{proof}
 It is classical that via this map, the homotopy of a simplicial object $L\in s\calL(n)$ obtains the structure of an object of $\calL(n+1)$:
-\begin{prop}[Curtis, 6-A]
-If $L\in s\calL(n)$ has structure map $\rho:F_{\calL(n)}L\to L$, then $\pi_*(L)\in\calL(n+1)$, with structure map induced by $\pi_*(\rho)\circ\widetilde{\nabla}:F^{(2)}_{\calL(n+1)}(\pi_*L)\to \pi_*L$.
+\begin{prop}[Curtis, 6-A]\label{prop on top operations}
+If $L\in s\calL(n)$ has structure map $\rho:F_{\calL(n)}L\to L$, then $\pi_*(L)\in\calL(n+1)$, with structure map extending $\pi_*(\rho)\circ\widetilde{\nabla}:F^{(2)}_{\calL(n+1)}(\pi_*L)\to \pi_*L$.
 \end{prop}
 \begin{proof}
-This theorem follows from the analogous theorem for fully restricted simplicial Lie algebras $L$, once the operations $\widetilde{\nabla}$ have been identified as the operations of [Curtis, \S8.5]. In the proposed structure, the bracket $[x,y]$ of elements $[x],[y]\in\pi_*L$ is given by
-\[[\rho(\nabla(x\otimes y+y\otimes x))]=[\rho(1+T)\nabla(x\otimes y)]=[\textup{br}\nabla(x\otimes y)],\]
+This theorem follows from the analogous theorem for fully restricted simplicial Lie algebras $L$, once the operations $\widetilde{\nabla}$ have been identified as the operations of [Curtis, \S8.5]. In the proposed $\calL(n+1)$-structure, for $x,y
+\in N_*L$ the bracket of $[x],[y]\in\pi_*L$ is given by
+\[[\rho(\nabla(x\otimes y+y\otimes x))]=[\rho(\trace(\nabla(x\otimes y)))]=[\textup{br}(\nabla(x\otimes y))],\]
 and if $n>0$, the restriction of an element $[x]\in\pi_nL$ is given by
-\[[\rho(\nabla(x\otimes x))]=[\rho(1+T)\nabla^0(x\otimes x)]=[\textup{br}\nabla^0(x\otimes x)],\]
-and these two formulae coincide with those of, say, Curtis. The point here was that both before and after taking homotopy groups, brackets are defined using the trace. We should also check that in the proposed structure, the proposed restriction $\pi_0L\to \pi_0L$ is given on the chain level by the restriction $L_0\to L_0$, as in [Curtis]. As $\nabla^0:N_0L\otimes N_0L\to N_0(L\otimes L)$ is the identity, for $[x]\in\pi_*L$:
-\[(\pi_*(\rho)\circ\widetilde{\nabla})([x])=[\rho(\nabla(x\otimes x))]=[\rho(x\otimes x)]=[\restn{(x)}].\qedhere\]
+\[[\rho(\nabla(x\otimes x))]=[\rho(\trace(\nabla^0(x\otimes x)))]=[\textup{br}(\nabla^0(x\otimes x))],\]
+and these two formulae coincide with those of, say, [Curtis]. The point here was that both before and after taking homotopy groups, brackets are defined using the trace. We should also check that in the proposed structure, the proposed restriction $\pi_0L\to \pi_0L$ is given on the chain level by the restriction $L_0\to L_0$, as in [Curtis]. As $\nabla^0:N_0L\otimes N_0L\to N_0(L\otimes L)$ is the identity, for $[x]\in\pi_*L$:
+\[(\pi_*(\rho)\circ\widetilde{\nabla})([x])=[\rho(\nabla(x\otimes x))]=[\rho(x\otimes x)]=[\restn{x}].\qedhere\]
 \end{proof}
 We'll now turn to some further operations defined on the homotopy of an object of $s\calL(n)$.
 \begin{prop}[Curtis, 6-A]\label{linear operations on homotopy of lie alg}
 If $L\in s\calL(n)$ has structure map $\rho:F_{\calL(n)}L\to L$, then there are right operations
 \[(\DASH)\lambda_i:(\pi_{s_{n+1}}L)_{s_n,\ldots,s_1}^t\to (\pi_{s_{n+1}+i}L)_{2s_n,\ldots,2s_1}^{2t+1}\]
-defined whenever $0\leq i<s_{n+1}$ and not all of $i,s_n,\ldots,s_1$ equal zero by the composite
+defined whenever $0\leq i\leq s_{n+1}$ and not all of $i,s_n,\ldots,s_1$ equal zero by the composite
 \[(\pi_{s_{n+1}}L)_{s_n,\ldots,s_1}^t\overset{\sigma_i}{\to}(\pi_{s_{n+1}+i}(F^{(2)}_{\calL(n)}L))_{2s_n,\ldots,2s_1}^{2t}\overset{\pi_*(\rho)}{\to}(\pi_{s_{n+1}+i}(L))_{2s_n,\ldots,2s_1}^{2t+1}.\]
-These operations are linear, and satisfy the Adem relations for the $\Lambda$-algebra. That is, whenever $i>2j$, and $x$ is a homogeneous element of $\pi_*L$ such that $x\lambda_j\lambda_i$ is defined:
+The operation $\lambda_i$ is linear when $i<s_{n+1}$, while the top operation $\lambda_{s_{n+1}}$ equals the restriction defined in proposition \ref{prop on top operations}. The operations satisfy the Adem relations for the $\Lambda$-algebra. That is, whenever $i>2j$, and $x$ is a homogeneous element of $\pi_*L$ such that $x\lambda_j\lambda_i$ is defined:
 \[x\lambda_j\lambda_i=\sum_{k=0}^{(i-2j)/2-1}{i-2j-2-k\choose k}x\lambda_{i-j-1-k}\lambda_{2j+1+k}.\]
 \end{prop}
 \begin{proof}
-As in the previous proposition, we only need to identify the operations defined with those given by Curtis in the case of a (fully) restricted Lie algebra. This is verified in the case $i\geq1$ using [Dwyer, 4.4], and in the case $i=0$ as $\sigma_0:\pi_*L\to \pi_*(S^2L)$ is the map $[x]\mapsto[x\otimes x]$.
+As in the previous proposition, we only need to identify the operations defined with those given by Curtis in the case of a (fully) restricted Lie algebra. This is verified when $i\geq1$ using [Dwyer, 4.4], and when $i=0$ using the fact that $\sigma_0:\pi_*L\to \pi_*(S^2L)$ is the map $[x]\mapsto[x\otimes x]$.
 \end{proof}
-For $n\geq0$, let $\calU(n+1)$ denote the algebraic category of $\vect{+}{n+1}$-graded vectorspaces $V$ equipped with right $\lambda$-operations defined as in proposition \ref{linear operations on homotopy of lie alg}, and satisfying the same relations. We have seen then that for $L\in s\calL(n)$, $\pi_*L$ is simultaneously an object of both $\calL(n+1)$ and of $\calU(n+1)$. In order to explain how the two structures interact, as in the standard case, define
-\[(\DASH)\lambda_{s_{n+1}}=\restn{(\DASH)}:(\pi_{s_{n+1}}L)_{s_n,\ldots,s_1}^t\to (\pi_{2s_{n+1}}L)_{2s_n,\ldots,2s_1}^{2t+1}\]
-whenever not all of $s_{n+1},s_n,\ldots,s_1$ equal zero. This \emph{top} lambda operation is not part of the definition of the algebraic category $\calU(n+1)$, rather it is another symbol for the partial restriction on an object of $\calL(n+1)$. This is consistent with the standard convention, and as in [Curtis], we have:
+For $n\geq0$, let $\calU(n+1)$ denote the algebraic category of $\vect{+}{n+1}$-graded vectorspaces $V$ equipped with only those right $\lambda$-operations in proposition \ref{linear operations on homotopy of lie alg} that are \emph{linear}. That is, linear operations 
+\[(\DASH)\lambda_i:V_{s_{n+1},s_n,\ldots,s_1}^t\to V_{s_{n+1}+i,2s_n,\ldots,2s_1}^{2t+1}\]
+defined whenever $0\leq i< s_{n+1}$ and not all of $i,s_{n},\ldots,s_{1}$ are zero, satisfying the Adem relations of proposition \ref{linear operations on homotopy of lie alg}. Summarizing classical results: to be found in [curtis]
+
 \begin{prop}\label{compatibilities between U and L in W}
-For $L\in s\calL(n)$, the homotopy groups $\pi_*(L)$ are simultaneously an object of $\calL(n+1)$ and of $\calU(n+1)$. The $\calU(n+1)$-operations are annihilated by the bracket. That is, for $i<s_{n+1}$, $x\in\pi_{s_{n+1}}L$ and $y\in \pi_*L$ such that $x\lambda_i$ is defined, we have $[x\lambda_i,y]=0$. The collection of all $\lambda$-operations (the $\calU(n+1)$-operations along with the restriction) together satisfy the $\lambda$-Adem relations whenever possible. That is, whenever $i>2j$, and $x$ is a homogeneous element of $X$ with $x\lambda_j\lambda_i$ defined:
-\[x\lambda_j\lambda_i=\sum_{k=0}^{(i-2j)/2-1}{i-2j-2-k\choose k}x\lambda_{i-j-1-k}\lambda_{2j+1+k}.\]
+For $L\in s\calL(n)$, the homotopy groups $\pi_*(L)$ are simultaneously an object of $\calL(n+1)$ and of $\calU(n+1)$. The $\calU(n+1)$-operations are annihilated by the bracket. That is, for $i<s_{n+1}$, $x\in\pi_{s_{n+1}}L$ and $y\in \pi_*L$ such that $x\lambda_i$ is defined, we have $[x\lambda_i,y]=0$.
 \end{prop}
-For $n\geq0$, let $\calW(n+1)$ denote the algebraic category of $\vect{+}{n+1}$-graded vectorspaces which are simultaneously an object of $\calU(n+1)$ and $\calL(n+1)$, such that the compatibilities of \ref{compatibilities between U and L in W} are satisfied. This category has a number of useful properties, following from the calculations of [6Author!]:
-\begin{prop}[6-Author]\hfil
-\begin{enumerate}\squishlist
-\setlength{\parindent}{.25in}
-\item The category $\calW(n+1)$ is isomorphic to the category $\calL(n)\PiAlg$ of $\calL(n)$-$\Pi$-algebras, so that the operations defined above exhaust the set of natural operations on the homotopy of simplicial objects of $\calL(n)$.
-\item The monad $UF_{\calW(n+1)}$ is naturally isomorphic to the composite of the monads $UF_{\calU(n+1)}\circ UF_{\calL(n+1)}$, with monad structure induced by the distributive law (c.f.\ [Beck's chapter]) $UF_{\calL(n+1)}\circ UF_{\calU(n+1)}\to UF_{\calU(n+1)}\circ UF_{\calL(n+1)}$ suggested by \ref{compatibilities between U and L in W}.
-\item \textbf{Blah blah blah}. (Bracket well defined after killing $\calU(n+1)$, $Q_{\calU(n+1)}$ preserves frees,\ldots)
-\end{enumerate}
+For $n\geq0$, let $\calW(n+1)$ denote the algebraic category of $\vect{+}{n+1}$-graded vectorspaces which are simultaneously an object of $\calU(n+1)$ and $\calL(n+1)$, such that the compatibilities of \ref{compatibilities between U and L in W} are satisfied. This category has a number of useful properties, following from the calculations of [6Author!], primarily:
+\begin{prop}[6-Author]
+The category $\calW(n+1)$ is isomorphic to the category $\calL(n)\PiAlg$ of $\calL(n)$-$\Pi$-algebras, so that the operations defined above exhaust the set of natural operations on the homotopy of simplicial objects of $\calL(n)$.
 \end{prop}
+It is not difficult to show that (supprossing forgetful functors) the monad $F_{\calW(n+1)}$ factors as a composite
+\[F_{\calW(n+1)}=F_{\calW(n+1)}\circ F_{\calL(n+1)}:\vect{+}{n+1}\to \vect{+}{n+1},\]
+and that the monad structure on $F_{\calW(n+1)}$ arises from a distributive law [{\tiny Beck Dist Laws in seminar on triples and cat homology thy}]. It is important to note that this is monadic down only as far as $\vect{+}{n+1}$.\textbf{clarify!} In particular, we may define a functor $Q_{\calU(n+1)}:\calW(n+1)\to\vect{+}{n+1}$, by quotienting by the image of the \emph{non-top} $\lambda$-operations (which, fortunately, are linear). It follows from the axioms in $\calW(n+1)$ that:
+\begin{lem}
+For $X\in\calW(n)$, the vector space $Q_{\LambdaMonad(n)}(X)$ inherits the structure of an object of $\calL(n)$ from the bracket and restriction of $X$, yielding a factorization:% of indecomposable functors, $Q_{\calW(n)}=Q_{\calL(n)}\circ Q_{\LambdaMonad(n)}$
+\[Q_{\calW(n)}=Q_{\calL(n)}\circ Q_{\LambdaMonad(n)}:\left(\calW(n)\to \calL(n)\to \vect{+}{n}\right).\]
+Moreover the composite $Q_{\LambdaMonad(n)}\circ F_{\calW(n)}$ equals the the free construction $F_{\calL(n)}$.
+\end{lem}
+
 
 \subsection{Decomposition maps for $\calW(n)$ and $\calL(n)$}
 \todo{Describe the composition maps for these categories}{show the compatibility under $\calL(n)\PiAlg\cong \calW(n+1)$
@@ -1002,7 +1007,7 @@ For $n\geq1$, $\calL(n)$ is a category of (good) Lie algebras, with a restrictio
 (satisfying the Jacobi identity and $[x,x]=0$ for all $x$), and restriction operations
 \[\restn{(\DASH)}:Y_{s_n,\ldots,s_1}^t\to Y_{2s_n,\ldots,2s_1}^{2t+1}\]
 defined whenever not all of $s_n,\ldots,s_{1}$ are zero.
-For $x,y\in Y^t_{s_n,\ldots,s_1}$ and $z\in Y$ homogeneous, the restriction operations satisfy \[\restn{(x+y)}=\restn{(x)}+\restn{(y)}+[x,y]\textup{ and }[\restn{(x)},z]=[x,[x,z]].\]
+For $x,y\in Y^t_{s_n,\ldots,s_1}$ and $z\in Y$ homogeneous, the restriction operations satisfy \[\restn{(x+y)}=\restn{x}+\restn{y}+[x,y]\textup{ and }[\restn{x},z]=[x,[x,z]].\]
 We have defined the bracket and restrictions on homogeneous elements only, but there is no problem extending these operations to non-homogeneous elements using the bilinearity of the bracket and the above formula for the restriction of a sum.
 
 
@@ -1016,7 +1021,7 @@ In particular, we have already specified that this top $\lambda$-operation is a 
 Finally, these right operations satisfy the $\lambda$-Adem relations. That is, whenever $i>2j$, and $x$ is a homogeneous element of $X$ with $x\lambda_j\lambda_i$ defined:
 \[x\lambda_j\lambda_i=\sum_{k=0}^{(i-2j)/2-1}{i-2j-2-k\choose k}x\lambda_{i-j-1-k}\lambda_{2j+1+k}.\]
 
-Next, we'll define another category, $\LambdaMonad(n)$, whose objects are $\vect{+}{n}$-graded vector spaces with certain unstable $\lambda$ operations. An object $X$ of $\LambdaMonad(n)$ is simply an object of $\vect{+}{n}$ with operations
+{\tiny[Moved]Next, we'll define another category, $\LambdaMonad(n)$, whose objects are $\vect{+}{n}$-graded vector spaces with certain unstable $\lambda$ operations. An object $X$ of $\LambdaMonad(n)$ is simply an object of $\vect{+}{n}$ with operations
 \[(\DASH)\lambda_i:X^t_{s_n,\ldots,s_1}\to X^{2t+1}_{s_n+i,2s_{n-1},\ldots,2s_1}\]
 defined whenever $0\leq i< s_n$ and not all of $i,s_{n-1},\ldots,s_{1}$ are zero. Note the strict inequality $i<s_n$, so that we define all the $\lambda$ operations except for the top $\lambda$ operation. These operations are all assumed to be linear and to satisfy the same $\lambda$-Adem relation.
 
@@ -1028,6 +1033,7 @@ For $X\in\calW(n)$, the vector space $Q_{\LambdaMonad(n)}(X)$ inherits the struc
 \[Q_{\calW(n)}=Q_{\calL(n)}\circ Q_{\LambdaMonad(n)}:\left(\calW(n)\to \calL(n)\to \vect{+}{n}\right).\]
 Moreover the composite $Q_{\LambdaMonad(n)}\circ F_{\calW(n)}$ equals the the free construction $F_{\calL(n)}$.
 \end{lem}
+}
 
 
 
@@ -1933,13 +1939,17 @@ As in the earlier discourse, composition with $j_{\calL(n)}$ yields degree $(-1,
 \[\psi_\textup{ch}:N_*N_*(Q_{\calL(n)}B^\BSW_{\bullet}L)^t_{s_{n+2},\ldots,s_1}\to
 N_*N_*(S^2(Q_{\calL(n)}B^\BSW_{\bullet}L))^{t-1}_{s_{n+2}-1,s_{n+1},\ldots,s_1}.
 \]
-\end{comp func sseq old version}
+
 
 \subsection{The edge homomorphism}
 
-\todo{Discuss the edge homomorphism $e:\left(E^2(n)\to\!\!\!\!\!\!\!\!\!\to E^\infty(n+1)\subseteq E^2_{0}(n+1)\right)$}{figure out what the relevant theorem here should be (goerss \S11-15)}
+\todo{Discuss the edge homomorphism $e:\left(E^2(n)\to\!\!\!\!\!\!\!\!\!\to E^\infty(n+1)\subseteq E^2_{0}(n+1)\right)$}{figure out what the relevant theorem here should be (goerss \S11-15)
+\item Look inside the hom - what happens with the Koszul differential?}
 
 \hfil
+
+\end{comp func sseq old version}
+
 
 \begin{The cohomology of a trivial unstable Lie algebra over P}
 \vfil\pagebreak
