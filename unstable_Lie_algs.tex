@@ -300,7 +300,7 @@ url=false,doi=false,isbn=false,eprint=false]{biblatex}%
 \newcommand{\vExtCohOp}{\textup{Op}_\textup{v,ext}}
 \newcommand{\hExtCohOp}{\textup{Op}_\textup{h,ext}}
 \newcommand{\ExtCohProd}{\mu_\textup{ext}}
-\newcommand{\epi}{\to\to}
+\newcommand{\epi}{{\,\makebox[0cm][l]{\ensuremath\to}\to}}
 
 
 \newcommand{\NOFULLPAGE}{\relax}
@@ -380,7 +380,7 @@ We will often refer to elements of a free construction $F_\calC V$ using notatio
 \subsection{Quillen's model structure on $s\calC$}
 We are interested in $s\calC$, the category of simplicial objects in $\calC$. The forgetful functor $U_\calC$ allows us to consider an object $X\in s\calC$ as a simplicial abelian group in $s\vect{+}{r}$. As such, we may define the homotopy groups of $X$, written $\pi_*X\in \vect{+}{r+1}$, to be $H_*N_*X$, where $N_*$ is one of the inverse equivalences appearing in the Dold-Kan correspondence [somewhere]: \[N:s\vect{+}{r}\rightleftarrows \textup{ch}_+ \vect{+}{r}
 :\Gamma.\]
-We will always use the description of $N_nX$ as the mutual kernel of $d_1,\ldots,d_n$ in $X_n$, with differential $d_0$ (rather than the equivalent definition as a quotient), and write $ZN_nX$ for the mutual kernel of $d_0,\ldots,d_n$.
+We will always use the description of $N_nX$ as the mutual kernel of $d_1,\ldots,d_n$ in $X_n$, with differential $d_0$ (rather than the equivalent definition as a quotient of the unnormalized complex $C_nX=X_n$), and write $ZN_nX$ for the mutual kernel of $d_0,\ldots,d_n$. In this paper we will often write $[x]$ for the homotopy class of a cycle $x\in ZN_nX$. \textbf{really?}
 
 Now fix $n\geq0$, $s_r,\ldots,s_1\geq0$ and $t\geq1$. Writing $z$, $h$ and $dh$ for classes all in internal cohomological grading $t$ and homological grading $s_r,\ldots,s_1$ , define
 %Let $\mathbb{S}_{n,s_r,\ldots,s_1}^t$ and $C\mathbb{S}_{n,s_r,\ldots,s_1}^t$ be the $\in \textup{ch}_+ \vect{+}{r}$ be the chain complexes, with $z$, $h$ and $dh$ all having internal gradings $t,s_r,\ldots,s_1$:
@@ -435,7 +435,7 @@ Choose a representative $w\in ZN_nQ_\calC X$. As the composite $V_n\subseteq X_n
 \[c=(1+s_0d_1)(1+s_1d_2)\cdots (1+s_{n-1}d_n):Q_\calC X_n\to Q_\calC X_n.\]
 By the simplicial identities, $c$ has image inside $N_n Q_\calC X$, and therefore acts as the identity on $N_nQ_\calC X$. The similarly defined operator on $X_n$ has image inside $N_n X$, and, in light of the fact that all the simplicial operators but $d_0$ preserve the subspaces $V_i$, preserves $V_n$. Thus the image in $Q_\calC X_n$ of $cv\in V_n\cap N_n X$ is $cw=w$.
 \end{proof}
- We define the $\calC$-cohomology $H^*_\calC X$ to be the linear dual of $H_*^\calC X$. Note that if $\calC$ is monadic over $\vect{+}{r}$, then $H_*^{\calC}X\in \vect{+}{r+1}$, and $H^*_{\calC}X\in \vect{r+1}{+}$. That is, each homology group $H_s^\calC X$ retains the gradings of $X$, and a new homological grading is added (to the left of the existing homological gradings). If we dualise to obtain cohomology, the cohomological gradings and homological gradings are swapped. We will uniformly avoid substituing into the location of an upper or lower $*$, for the sake of clarity. For example, suppose that $\calC$ is monadic over $\vect{+}{2}$, then we will write $(H_*^\calC X)_{s_3,s_2,s_1}^t$, instead of $(H_{s_3}^\calC X)_{s_2,s_1}^t$.
+ We define the $\calC$-cohomology $H^*_\calC X$ to be the linear dual of $H_*^\calC X$, or equivalently the cohomotopy groups $\pi^*(Q_\calC X)^*$ of the dual cosimplicial object. Note that if $\calC$ is monadic over $\vect{+}{r}$, then $H_*^{\calC}X\in \vect{+}{r+1}$, and $H^*_{\calC}X\in \vect{r+1}{+}$. That is, each homology group $H_s^\calC X$ retains the gradings of $X$, and a new homological grading is added (to the left of the existing homological gradings). If we dualise to obtain cohomology, the cohomological gradings and homological gradings are swapped. We will often avoid substituing into the location of an upper or lower $*$, for the sake of claritywriting expressions such as $(H_*^\calC X)_{s_3,s_2,s_1}^t$ in place of $(H_{s_3}^\calC X)_{s_2,s_1}^t$.
 
 
 \subsection{$\calC$-$\Pi$-algebras, free $\calC$-$\Pi$-algebras and the smash product}
@@ -495,25 +495,35 @@ If $A$ is a model, then $\gamma:Q\pi A\to \pi QA$ is an isomorphism.
 $A$ is homotopic to a wedge of spheres, and $\pi A$ is free on generators in correspondence with the wedge summands.
 \end{proof}
 
-\subsection{Quadratic part, quadratic decomposition maps and cohomology operations}\label{quadratic part section}
+\subsection{The quadratic part of a $\calC$-expression}\label{quadratic part section}
 In this paper, we'll often use a method of constructing cohomology operations used by Goerss in [GoerssBook,\S5], and we'll set up that framework here.
 
 Suppose that $\calC$ is an algebraic category, monadic over $\vect{}{}$, and let $V\in\vect{}{}$. The diagonal map $\Delta:V\to V\oplus V$ of $V$ induces a `diagonal map' $F_\calC V\to F_\calC (V\oplus V)\cong (F_\calC (V))^{\sqcup 2}$, and writing $i_1$ and $i_2$ for the two summand inclusions $F_\calC (V)\to (F_\calC (V))^{\sqcup 2}$, consider the map
 \[(F_\calC(\Delta)+i_1+i_2):F_\calC V\to (F_\calC V)^{\sqcup2}.\]
 This map evidently factors through $(F_\calC V)^{\wedge 2}$, and is symmetric. We name this factoring the `cross terms':
 \[\crossterms:F_\calC V\to (F_\calC V)\wedge^{\Sigma_2} (F_\calC V),\]
-as it measures the nonlinearity in an expression in $F_\calC V$. For example, if $\calC$ is the category of non-unital commutative algebras over $\F_2$, then for $v,w\in V$, using dashes to denote the generators coming from second copy of $V$:
-\[\crossterms(vw)=(v+v')(w+w')+vw+v'w'=vw'+wv'.\]
+as it measures the nonlinearity in an expression in $F_\calC V$. For example, if $\calC$ is the category of non-unital commutative algebras over $\F_2$, then for $v,w\in V$, using subscripts to denote membership in the first or second copy of $V$:
+\[\crossterms(vw)=(v_1+v_2)(w_1+w_2)+v_1w_1+v_2w_2=v_1w_2+w_1v_2.\]
 
 In the cases of interest to us, there is a map, natural and symmetric in $X_1,X_2\in\calC$,
 \[j_\calC:Q_\calC(X_0\wedge X_1)\to Q_\calC(X_0)\otimes Q_\calC(X_1),\]
-In the example of commutative algebras, the map $j_\calC$ is defined by $x_1x_2\mapsto x_1\otimes x_2$, for $x_i\in X_i$. We'll write $\quadratic_\calC$ for the composite
-\[\quadratic_\calC:\left(F_\calC V\overset{\crossterms}{\to}(F_\calC V)^{\wedge 2}\to Q_\calC((F_\calC V)\wedge^{\Sigma_2} (F_\calC V))\overset{j_\calC}{\to}S^2V\right),\]
-and in our running example $\quadratic_\calC$ is the composite $F_\calC V\to F_\calC^{(2)} V=S_2V\overset{\trace}{\to}S^2V$.
+and we'll write $\quadratic_\calC$ for the composite
+\[\quadratic_\calC:\left(F_\calC V\overset{\crossterms}{\to}(F_\calC V)^{\wedge 2}\to Q_\calC((F_\calC V)\wedge^{\Sigma_2} (F_\calC V))\overset{j_\calC}{\to}S^2V\right).\]
+In the example of commutative algebras, the map $j_\calC$ is defined by $x_1x_2\mapsto x_1\otimes x_2$ when $x_i\in X_i$, and $\quadratic_\calC$ is the composite $F_\calC V\epi S_2V\overset{\trace}{\to}S^2V$.
 
-In our examples, the following equation of maps $F_\calC F_\calC V\to V\otimes V$ will always be satisfied:
-\[\quadratic_\calC\circ u_{F_\calC V} +\quadratic_\calC\circ {F_\calC u_V}=\quadratic_\calC\circ\mu_V,\]
-where $\mu$ here stands for the multiplication map of the monad $U_\calC F_\calC $, which is to say that for $\calC$-expressions $f$ and $g$ we have $\quadratic(fg)(v)=\quadratic(f)u(g)(v)+u(f)\quadratic(g)(v)$.
+In our examples, the following equation of maps $F_\calC F_\calC V\to S^2 V$ will always be satisfied:
+\[\quadratic_\calC\circ\mu_V=\quadratic_\calC\circ \epsilon_{F_\calC V} +\quadratic_\calC\circ {F_\calC \epsilon_V},\]
+where $\mu$ here stands for the multiplication map of the monad $U_\calC F_\calC $, which is to say that for if  $f(g_i)$ is a $\calC$-expression in various $\calC$-expressions $g_i(v_{ij})$, we have 
+\[\quadratic(fg_i)(v_{ij})=\quadratic(f\epsilon(g_i))(v_{ij})+\epsilon(f)(\quadratic(g_i)(v_{ij})).\]
+This is another expression of homogeneity in the relations defining $\calC$. In our example, one might set $f(g_1,g_2,g_3):=g_1g_2+g_3$, and then $g_i:=v_{i1}v_{i2}+v_{i3}$ for each $i=1,2,3$. Then
+{\small
+\begin{alignat*}{2}
+\quadratic(fg_i)(v_{ij})&=\quadratic((v_{11}v_{12}+v_{13})(v_{21}v_{22}+v_{23})+(v_{31}v_{32}+v_{33}))=\trace(v_{13}\otimes v_{23}+v_{31}\otimes v_{32}),\\
+\quadratic(f\epsilon(g_i))(v_{ij})&=\quadratic((v_{13})(v_{23})+(v_{33}))=\trace(v_{13}\otimes v_{23}),\textup{ and}\\
+\epsilon(f)(\quadratic(g_i)(v_{ij}))&=\quadratic(v_{31}v_{32}+v_{33})=\trace(v_{31}\otimes v_{32}).
+\end{alignat*}
+}
+
 
 To relate this to Goerss' constructions [Goerss\S5], suppose that $X_\bullet\in s\calC$ is almost free, with $V_s\subset X_s$ the freely generating subspace. Then for each $s$, the functor 
 \[\Hom_\calC(X_s,\DASH)\cong \Hom_\calV(V_s,U_\calC\DASH)\]
@@ -526,38 +536,40 @@ The map $Q_\calC\xi_\calC$ induces a chain map of degree $-1$ on normalised comp
 \[N_s(Q_{\calC}X_\bullet)\to N_{s-1}((Q_{\calC}(X_\bullet\wedge X_\bullet))^{\Sigma_2}).\]
 The composite
 \[\psi_\calC:\left(N_s(Q_{\calC}X_\bullet)\overset{Q_\calC\xi_\calC}{\to} N_{s-1}((Q_{\calC}(X_\bullet\wedge X_\bullet))^{\Sigma_2})\overset{j_\calC}{\to} N_{s-1}(S^2(Q_{\calC}X_\bullet))\right),\]
-is essentially $\quadratic_\calC$, in that if $v\in V_s\cap N_sX$ \textbf{(explain?)} represents an element of $N_sQ_\calC X$, writing $d_0v=f(w_j)$ for $w_j\in V_{s-1}$, we have $\psi_\calC(v)=\quadratic_\calC(f)(w_j)\in S^2(V_{s-1})$.
+is essentially $\quadratic_\calC$, in that if $v\in V_s\cap N_sX$ represents an element of $N_sQ_\calC X$, writing $d_0v=f(w_j)$ for $w_j\in V_{s-1}$, we have $\psi_\calC(v)=\quadratic_\calC(f)(w_j)\in S^2(V_{s-1})$.
 \end{lem}
-We will use $\psi_\calC$ to define operations on $\calC$-cohomology. We will construct such operations from certain generic operations, defined for any $U\in s\calV$:
+\subsection{$\calC$-cohomology operations}\label{generic coh ops section}
+We will use $\psi_\calC$ to define operations on $\calC$-cohomology, employing certain generic operations, defined for any $U\in s\calV$:
 \begin{gather*}
-\ExtCohOp^k:H^{n}((N_*U)^*)\to H^{n+k}((N_*(S^2U))^*),\textup{ zero unless $0\leq k\leq n$, and}\\
-\ExtCohProd:H^{n_1}((N_*U)^*)\otimes H^{n_2}((N_*U)^*)\to H^{n_1+n_2}((N_*(S^2U))^*).
+\ExtCohProd:\pi^{n_1}(U^*)\otimes \pi^{n_2}(U^*)\to \pi^{n_1+n_2}((S^2U)^*),\textup{ and}\\
+\ExtCohOp^k:\pi^{n}(U^*)\to \pi^{n+k}((S^2U)^*),\textup{ (zero unless $0\leq k\leq n$).}
 \end{gather*}
-These operations are defined as follows. In all that follows, let $\{D_k\}$ be a special cup-$k$ product [Singer \S1.9], and define $\oldphi:\left(C_mU\right)^*\otimes \left(C_mU\right)^*\to \left(C_m(U\otimes U)\right)^*$ by
-\[\oldphi:\left(N_mU\overset{\alpha}{\to}\F_2\right)\otimes \left(N_mU\overset{\beta}{\to}\F_2\right)\mapsto\left(N_m(U\otimes U)\overset{\alpha\otimes\beta}{\to}\F_2\otimes \F_2\overset{\cdot}{\to}\F_2\right).\]
+These operations are defined as follows. In all that follows, let $\{D_k\}$ be a special cup-$k$ product [Singer \S1.9]. As the normalized complex is naturally a retract of the unnormalized complex, we may define $\oldphi:\left(N_mU\right)^*\otimes \left(N_mU\right)^*\to \left(N_m(U\otimes U)\right)^*$ using the map
+\[\left(C_mU\overset{\alpha}{\to}\F_2\right)\otimes \left(C_mU\overset{\beta}{\to}\F_2\right)\mapsto\left(C_m(U\otimes U)\overset{\alpha\otimes\beta}{\to}\F_2\otimes \F_2\overset{\textup{mult}}{\to}\F_2\right).\]
 Then define a cochain map:
-\[m_\textup{ext}:(N_*U)^*\otimes (N_*U)^*\to (N_*S^2U)^*\]
+\[m_\textup{ext}:(N_*U)^*\otimes (N_*U)^*\to (N_*(S^2U))^*\]
 and functions
-\[S^k_\textup{ext}:(N_mU)^*\to (N_{m+k}S^2U)^*\]
+\[S^k_\textup{ext}:(N_mU)^*\to (N_{m+k}(S^2U))^*\]
 by the formulae, for $\alpha\in (N_{n_1}U)^*$ and $\beta\in (N_{n_2}U)^*$
 \[m_\textup{ext}(\alpha\otimes\beta)=D_0^*\oldphi(\alpha\otimes\beta),\quad S^k_\textup{ext}(\alpha)=D^*_{n_1-k}\oldphi(\alpha\otimes \alpha)+D^*_{n_1-k+1}\oldphi(\alpha\otimes d\alpha),\]
-where we regard the $D^*_k$ as maps into $(N_*S^2U)^*$ by composition with the projection from $(N_*(U\otimes U))^*$. one checks that these operations are well defined by the same arguments as in [Singer \S1.12].
+where we regard the $D^*_k$ as maps into $(N_*(S^2U))^*$ by composition with the projection from $(N_*(U\otimes U))^*$. One checks that these operations induce well defined operations $\ExtCohProd$ and $\ExtCohOp^k$ by the same arguments as in [Singer \S1.12].
 
-Given these external operations, we can define natural $\calC$-cohomology operations on $H^*_\calC X$ (for $X\in s\calC$), by setting $U:=Q_\calC B_\bullet^\calC X$, the standard bar construction, and using the composites
+Given these external operations, we can define $\calC$-cohomology operations, natural in $X\in s\calC$, on $H^*_\calC X=\pi^*((Q_\calC B_\bullet^\calC X)^*)$, by the composites:
 \begin{gather*}
-(N_{n_1}U)^*\otimes (N_{n_2}U)^*\overset{m_\textup{ext}}{\to} (N_{n_1+n_2}S^2U)^*\overset{\psi_\calC^*}{\to} (N_{n_1+n_2+1}U)^*,\textup{ and }\\
-(N_mU)^*\overset{S^k_\textup{ext}}{\to} (N_{m+k}S^2U)^*\overset{\psi_\calC^*}{\to}(N_{m+k+1}U)^*
+H_\calC^{n_1}(X)\otimes H_\calC^{n_2}(X)\overset{\ExtCohProd}{\to} \pi^{n_1+n_2}((S^2(Q_\calC B_\bullet^\calC X))^*)\overset{\psi_\calC^*}{\to} H_\calC^{n_1+n_2+1}(X),\\
+H_\calC^{n}(X)\overset{\ExtCohOp^k}{\to} \pi^{n+k}((S^2(Q_\calC B_\bullet^\calC X))^*)\overset{\psi_\calC^*}{\to} H_\calC^{n+k+1}(X).
 \end{gather*}
-Note the shift introduced by $\psi_\calC^*$. We \textbf{need to choose notation} for this section.
+\subsection{Dual $\calC$-homology operations}
+The linear maps $\ExtCohOp^k$ induce dual operators
+\[(\ExtCohOp^k)^*:\pi_*(S^2U)\to \pi_{*-k}(U)\]
+whenever these groups are locally finite dimensional. Following Goerss [\S3], one can define the operations $(\ExtCohOp^k)^*$ directly, without the double dualisation as described below. Setting $U=Q_{\calC}B_\bullet^{\calC}X$ and precomposing with the map $(\psi_\calC)_*:\pi_*(U)\to\pi_{*-1}(S^2U)$ yields homology operations on $H_*^\calC$ whose duals are the cohomology operations of \S\ref{generic coh ops section}.
 
-Following Goerss [\S3], one notes that the linear maps $\ExtCohOp^k$ induce dual operators
-\[(\ExtCohOp^k)^*:H_*(NS^2U)\to H_{*-k}(NU)\]
-whenever these groups are locally finite dimensional. One can define the operations $(\ExtCohOp^k)^*$ directly, without the double dualisation as follows. If $\sigma_i$ and $\pi_*(1+T)$ are the maps of Goerss[\S3], then any element of $x\in H_m(NS^2U)$ can be written as a sum
+If $\sigma_i$ and $\pi_*(1+T)$ are the maps of Goerss[\S3], then any element of $x\in \pi_m(S^2U)$ can be written as a sum
 \[x=\sum_j\pi_*(1+T)(y_j\otimes z_j)+\sum_{0\leq k\leq \lfloor m/2\rfloor}\sigma_k(w_k),\]
-where $w_k\in H_{m-k}(NU)$ ($0\leq k\leq\lfloor m/2\rfloor$), and $y_j,z_j\in H_{*}(NU)$.
-Then the map $(\ExtCohOp^k)^*$ sends $x$ to this $x_k$. If we only wish to determine the $(\ExtCohOp^k)^*$ for $k<m/2$ (and not the dual of the top operation $(\ExtCohOp^{m/2})^*$ when $m$ is even), we can rewrite this equation as 
+where $w_k\in \pi_{m-k}(U)$ ($0\leq k\leq\lfloor m/2\rfloor$), and $y_j,z_j\in \pi_{*}(U)$.
+Then the map $(\ExtCohOp^k)^*$ sends $x$ to this $w_k$. Alternatively, if we only wish to determine the $(\ExtCohOp^k)^*$ for $k<m/2$ (and not the dual of the top operation $(\ExtCohOp^{m/2})^*$ when $m$ is even), we can rewrite this equation: 
 \[x=\widetilde{\nabla}(v)+\sum_{0\leq k< m/2}\sigma_k(w_k),\]
-where $v\in(S^2(H_*(NU)))_{m}$ and $w_k\in H_{m-k}(NU)$ ($0\leq k<m/2$). Here, $\widetilde{\nabla}:S^2\pi_*V\to \pi_*S^2V$ is the map that we discuss in \ref{the top homotopy operations for Lie algebras}.
+where $v\in(S^2(\pi_*(U)))_{m}$ and $w_k\in \pi_{m-k}(U)$ ($0\leq k<m/2$). Here, $\widetilde{\nabla}:S^2\pi_*V\to \pi_*S^2V$ is the map that we discuss in \S\ref{the top homotopy operations for Lie algebras}.
 
 
 
@@ -628,17 +640,17 @@ As we work in characteristic 2, there is more than one available notion of a Lie
 \[\restn{(x_1+x_2)}=\restn{x_1}+\restn{x_2}+[x_1,x_2]\textup{ \ and \ }[\restn{x_1},x_2]=[x_1,[x_1,x_2]].\]
 The alternating condition implies the (anti)-symmetry condition, and these three types of Lie algebras form a heirarchy: a restricted Lie algebra is in particular a Lie algebra, and a Lie algebra is in particular an $S(\LieOperad)$-algebra.
 
-Fresse [] explains how to construct the monads $S(\LieOperad)$, $\Lambda(\LieOperad)$ and $\Gamma(\LieOperad)$ which give rise to this structure, starting with the Lie operad $\LieOperad$. For a vector space $V$, it is standard that the functor
+Fresse [] explains how to construct the monads $S(\LieOperad)$, $\Lambda(\LieOperad)$ and $\Gamma(\LieOperad)$ on $\vect{}{}$ which give rise to these structures, starting with the Lie operad $\LieOperad$. For $V\in\vect{}{}$, it is standard that the functor
 \[S(\LieOperad):V\mapsto \bigoplus_{n\geq1}(\LieOperad(n)\otimes V^{\otimes n})_{\Sigma_n}\]
 inherits the structure of a monad from the composition maps of $\LieOperad$. Fresse observes that the functor
 \[\Gamma(\LieOperad):V\mapsto \bigoplus_{n\geq1}(\LieOperad(n)\otimes V^{\otimes n})^{\Sigma_n}\]
-may also be equipped with a monad structure, and that the trace map
-\[\trace:S(\LieOperad)(V)\to \Gamma(\LieOperad)(V)\]
-is a map of monads. Then, he defines a third monad
+may also be equipped with a monad structure, such that the trace map $S(\LieOperad)\to \Gamma(\LieOperad)$
+%\[\trace:S(\LieOperad)(V)\to \Gamma(\LieOperad)(V)\]
+is a map of monads, and an intermediate monad may be defined by
 \[\Lambda(\LieOperad):V\mapsto\im(\trace:S(\LieOperad)(V)\to \Gamma(\LieOperad)(V)).\]
 These monads give rise to the three indicated forms of Lie algebras in characteristic 2. Now each of these functors supports an extra grading, the \emph{quadratic grading}, so named because \textbf{why?}. Indeed, we'll write
 \[\Gamma(\LieOperad)^{(k)}V:=(\LieOperad(k)\otimes V^{\otimes k})^{\Sigma_k},\textup{ etc}.\]
-Each of these three monads is generated by the operations contained in quadratic grading 2. That is, an $S(\LieOperad)$-algebra is a map $S_2L\to L$, a $\Lambda(\LieOperad)$-algebra is a map $\Lambda^2L\to L$, and a $\Gamma(\LieOperad)$-algebra is a map $S^2L\to L$, where in each case we demand the necessary compatibilities that these maps extend to the full monad. Here, we used the analogous definitions $S_2V:=(V^{\otimes2})_{\Sigma_2}$, $S^2V:=(V^{\otimes2})_{\Sigma_2}$ and $\Lambda^2V:=\im(\trace:S_2V\to S^2V)$.
+Each of these three monads is generated by a single binary operation contained in quadratic grading 2. That is, an $S(\LieOperad)$-algebra is a map $S_2L\to L$, a $\Lambda(\LieOperad)$-algebra is a map $\Lambda^2L\to L$, and a $\Gamma(\LieOperad)$-algebra is a map $S^2L\to L$, where in each case we demand the necessary compatibilities that these maps extend to the full monad. %Here, we used the analogous definitions $S_2V:=(V^{\otimes2})_{\Sigma_2}$, $S^2V:=(V^{\otimes2})_{\Sigma_2}$ and $\Lambda^2V:=\im(\trace:S_2V\to S^2V)$.
 
 \subsection{Graded and partially restricted Lie algebras}
 [\textbf{Old version} of spiel on PRLie algs commented out here.%
@@ -658,17 +670,18 @@ Each of these three monads is generated by the operations contained in quadratic
 %%and this decomposition is of $\Sigma_n$-modules.
 %The free partially restricted Lie algebra is the subspace of $\Gamma(\LieOperad(V_0\oplus V_1))$ given by
 %\[\im \Bigl(S(\LieOperad)(V_0)\overset{\textup{Tr}}{\to}\Gamma(\LieOperad)(V_0\oplus V_1)\Bigr)\oplus\bigoplus_{n\geq1}\Bigl(\bigoplus(\LieOperad(n)\otimes V_{i_1}\otimes V_{i_2}\otimes\cdots\otimes V_{i_n})\Bigr)^{\Sigma_n}\]
-] For each $n\geq0$, we'll be interested in certain categories of Lie algebras whose underlying objects lie in $\vect{+}{n}$. For example, a $\vect{+}{n}$-graded Lie algebra is an element $L\in\vect{+}{n}$ with a structure map $\Lambda^2 L\to L$ which treats gradings as follows
+]%END commented out old material
+For each $n\geq0$, we'll be interested in certain categories of Lie algebras monadic over $\vect{+}{n}$, with a grading shift. Broadly, a $\vect{+}{n}$-graded Lie algebra is an element $L\in\vect{+}{n}$ with a structure map $\Lambda^2 L\to L$ which treats gradings as follows
 \[L^{t}_{s_n,\ldots,s_1}\otimes L^{t'}_{s'_n,\ldots,s'_1}\to L^{t+t'+1}_{s_n+s'_n,\ldots,s_1+s'_1}.\]
-In other words, we view the Lie operad as an operad in $\vect{+}{n}$, such that
+More precisely, we view the Lie operad as an operad in $\vect{+}{n}$, such that
 \[\LieOperad(r)=(\LieOperad(r))^{r-1}_{0,\ldots,0},\]
-and then a $\vect{+}{n}$-graded Lie algebra is an algebra over the corresponding monad $\Lambda(\LieOperad)$ on $\vect{+}{n}$.
+and then a $\vect{+}{n}$-graded Lie algebra is an algebra over the corresponding monad $\Lambda(\LieOperad)$ on $\vect{+}{n}$. In our context, the Lie operad arises as the Koszul dual of the commutative operad [Goerss's stuff], explaining the grading shift [Fresse, where?]. See [Fresse] for a discussion of Koszul duality of operads in positive characteristic.
 
 A $\vect{+}{n}$-graded \emph{partially restricted} Lie algebra is to be graded Lie algebras such that certain graded parts admit a restriction operation. Specifically, there is to be defined a restriction operation
 \[\restn{(\DASH)}:L^t_{s_n,\ldots,s_1}\to L^{2t+1}_{2s_n,\ldots,2s_1}\]
 whenever not all of $s_n,\ldots,s_{1}$ are zero. We will denote the category of such objects $\calL(n)$. It is monadic over $\vect{+}{n}$, with an adjunction
 \[F_{\calL(n)}:\vect{+}{n}\rightleftarrows \calL(n):U_{\calL(n)}.\]
-The monad of this adjunction is the appropriately chosen submonad $\Gamma'(\LieOperad)$ of $\Gamma(\LieOperad):\vect{+}{n}\to \vect{+}{n}$. As before, the free construction $F_{\calL(n)}V$ admits a quadratic grading, which we denote $F_{\calL(n)}^{(k)}V$ or $\Gamma'(\LieOperad)^{(k)}V$.
+The monad of this adjunction may be constructed as an appropriately chosen submonad of $\Gamma(\LieOperad):\vect{+}{n}\to \vect{+}{n}$ ($\LieOperad$ shifted as above), containing $\Lambda(\LieOperad)$. As such, the free construction $F_{\calL(n)}V$ admits a quadratic grading, which we denote $F_{\calL(n)}^{(k)}V$.
 %To describe the free functor, if $V\in\vect{+}{n}$, write:
 %\[V_-=\bigoplus_{t\geq1}V^t_{0,\ldots,0},\textup{ and }V_+=\bigoplus_{t\geq1}\bigoplus_{\exists\,i\textup{\,s.t.\,}s_i\neq0}V^t_{s_n,\ldots,s_1}.\]
 %There is a natural $\Sigma_n$-equivariant decomposition: 
@@ -1337,7 +1350,7 @@ Similar theory holds for an exterior product operation
 %and in $E_t$ we have the relation $d_t\Sq^k_textup{ext}\alpha=\Sq^k_textup{ext}d_r\alpha$.
 \end{thm}
 Moreover, if the bisimplicial object $V$ admits an augmentation $\lambda:V_{0\bullet}\to U_{\bullet}$, then %such that the natural map $\lambda_*:CV\to CU$ is a weak equivalence,
-Singer proves the following relationship between the spectral sequence operations and the operations of \S\ref{quadratic part section}:
+Singer proves the following relationship between the spectral sequence operations and the operations of \S\ref{generic coh ops section}:
 \begin{thm}[Proposition 2.1]
 The $\ExtCohOp^k$ and $\ExtCohProd$ commute with $\lambda^*$, so that there are commuting diagrams
 \[\xymatrix@R=4mm{
