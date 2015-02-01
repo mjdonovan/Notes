@@ -12,18 +12,19 @@
 \usepackage{mathtools}%used for mathclap
 \usepackage{dsfont}%creates \mathds{1}
 \excludeversion{comp func sseq old version}
-
-%\renewcommand{\excludeversion}[1]{\includeversion{#1}}
-\excludeversion{Contents Page}
-\excludeversion{Intro}
-\includeversion{Conventions and notation}
-\includeversion{Lie algebras in characteristic 2 and their homotopy operations}
-\excludeversion{Cohomology operations for unstable Lie algebras over P}
-\excludeversion{Unstable Lie algebras over the Lambda-algebra}
-\excludeversion{Cohomology operations for unstable Lie algebras over Lambda}
-\excludeversion{Composite functor spectral sequences}
-\excludeversion{The cohomology of a trivial unstable Lie algebra over P}
-\excludeversion{appendices}
+\newcommand{\xclude}[1]{\excludeversion{#1}} \newcommand{\nclude}[1]{\includeversion{#1}}
+%\renewcommand{\excludeversion}[1]{\includeversion{#1}}% <---------------
+\xclude{Contents Page}
+\xclude{Intro}
+\nclude{Conventions and notation}
+\xclude{Lie algebras in characteristic 2 and their homotopy operations}
+\nclude{Cohomology operations for unstable Lie algebras over P}
+\xclude{Unstable Lie algebras over the Lambda-algebra}
+\nclude{Cohomology operations for unstable Lie algebras over Lambda}
+\xclude{Composite functor spectral sequences}
+\xclude{The cohomology of a trivial unstable Lie algebra over P}
+\xclude{appendices}
+\xclude{todolist}
 
 
 \usepackage[bookmarks=false,pdftex,pdfborder={0 0 0 [1 1]}]{hyperref}
@@ -442,7 +443,7 @@ Choose a representative $w\in ZN_nQ_\calC X$. As the composite $V_n\subseteq X_n
 \[c=(1+s_0d_1)(1+s_1d_2)\cdots (1+s_{n-1}d_n):Q_\calC X_n\to Q_\calC X_n.\]
 By the simplicial identities, $c$ has image inside $N_n Q_\calC X$, and therefore acts as the identity on $N_nQ_\calC X$. The similarly defined operator on $X_n$ has image inside $N_n X$, and, in light of the fact that all the simplicial operators but $d_0$ preserve the subspaces $V_i$, preserves $V_n$. Thus the image in $Q_\calC X_n$ of $cv\in V_n\cap N_n X$ is $cw=w$.
 \end{proof}
- We define the $\calC$-cohomology $H^*_\calC X$ to be the linear dual of $H_*^\calC X$, or equivalently the cohomotopy groups $\pi^*(Q_\calC X)^*$ of the dual cosimplicial object. Note that if $\calC$ is monadic over $\vect{+}{r}$, then $H_*^{\calC}X\in \vect{+}{r+1}$, and $H^*_{\calC}X\in \vect{r+1}{+}$. That is, each homology group $H_s^\calC X$ retains the gradings of $X$, and a new homological grading is added (to the left of the existing homological gradings). If we dualise to obtain cohomology, the cohomological gradings and homological gradings are swapped. We will often avoid substituing into the location of an upper or lower $*$, for the sake of claritywriting expressions such as $(H_*^\calC X)_{s_3,s_2,s_1}^t$ in place of $(H_{s_3}^\calC X)_{s_2,s_1}^t$.
+ We define the $\calC$-cohomology $H^*_\calC X$ to be the linear dual of $H_*^\calC X$, or equivalently the cohomotopy groups $\pi^*(Q_\calC X)^*$ of the dual cosimplicial object. Note that if $\calC$ is monadic over $\vect{+}{r}$, then $H_*^{\calC}X\in \vect{+}{r+1}$, and $H^*_{\calC}X\in \vect{r+1}{+}$. That is, each homology group $H_s^\calC X$ retains the gradings of $X$, and a new homological grading is added (to the left of the existing homological gradings). If we dualise to obtain cohomology, the cohomological gradings and homological gradings are swapped. We will often avoid substituing into the location of an upper or lower $*$, for the sake of clarity, writing expressions such as $(H_*^\calC X)_{s_3,s_2,s_1}^t$ in place of $(H_{s_3}^\calC X)_{s_2,s_1}^t$.
 
 
 \subsection{$\calC$-$\Pi$-algebras, free $\calC$-$\Pi$-algebras and the smash product}
@@ -545,6 +546,58 @@ The composite
 \[\psi_\calC:\left(N_s(Q_{\calC}X_\bullet)\overset{Q_\calC\xi_\calC}{\to} N_{s-1}((Q_{\calC}(X_\bullet\wedge X_\bullet))^{\Sigma_2})\overset{j_\calC}{\to} N_{s-1}(S^2(Q_{\calC}X_\bullet))\right),\]
 is essentially $\quadratic_\calC$, in that if $v\in V_s\cap N_sX$ represents an element of $N_sQ_\calC X$, writing $d_0v=f(w_j)$ for $w_j\in V_{s-1}$, we have $\psi_\calC(v)=\quadratic_\calC(f)(w_j)\in S^2(V_{s-1})$.
 \end{lem}
+We may reproduce this result somewhat more generally:
+\begin{prop}
+Suppose that $\theta:F_\calC V\to GV$ is a natural transformation from $F_\calC$ to another endofunctor $G$ of $\vect{}{}$. Suppose further that $\theta$ satisfies the equation:
+\[\theta\circ\mu_V=\theta\circ \epsilon_{F_\calC V} +\theta\circ {F_\calC \epsilon_V}:F_\calC F_\calC V\to G V.\]
+Write $\widetilde{\theta}:Q_{\calC}X_s\to G(Q_{\calC}X_{s-1})$ for the following composite, depending on the almost free structure chosen:
+\[Q_{\calC}X_s\overset{\cong}{\to} V_s\overset{d_0}{\to}F_{\calC}V_{s-1}\overset{\theta}{\to}GV_{s-1}\overset{\cong}{\to}G(Q_{\calC}X_{s-1})\]
+Then $d_0\circ\widetilde{\theta}=\widetilde{\theta}\circ(d_0+d_1)$, and $d_j\circ\widetilde{\theta}=\widetilde{\theta}\circ d_{j+1}$ for $j\geq1$, so that $\widetilde{\theta}$ restricts to a degree $-1$ chain map $N_sQ_\calC X\to N_{s-1}Q_\calC X$.
+%For $v\in V_s$, write $d_0v=g(v_i)$ as an expression in certain $v_i\in V_{s-1}$. Then $\widetilde{\theta}(v):=\theta(g)(v_i)$. Here, we view the $g(v_i)$ as lying in $F_\calC V_{s-1}\cong X_{s-1}$, so that $\theta(g(v_i))\in G V_{s-1}\cong G(Q_\calC X_{s-1})$. Then $\widetilde{\theta}$ is a chain map, even descending to the subspace $N_*Q_\calC X_\bullet$.
+\end{prop}
+\begin{proof}
+In order to see that $d_j\circ\widetilde{\theta}=\widetilde{\theta}\circ d_{j+1}$ for $j\geq1$, we examine the diagram
+\[\xymatrix@R=4mm{
+V_s\ar[r]^-{d_0}
+\ar@{..>}[d]^-{d_{j+1}}
+&%r1c1
+F_\calC V_{s-1}\ar[r]^-{\theta}
+\ar[d]^-{d_j}
+&GV_{s-1}\ar[r]^-{\cong}
+\ar@{..>}[d]^-{d_j}
+&%r2c2
+GQ_{\calC}X_{s-1}\ar[d]^-{GQ_{\calC}(d_j)}
+\\%r1c3
+V_{s-1}\ar[r]^-{d_0}
+&%r2c1
+F_\calC V_{s-2}\ar[r]^-{\theta}
+&GV_{s-2}\ar[r]^-{\cong}
+&%r2c2
+GQ_{\calC}X_{s-2}
+}\]
+The dotted verticals are available since $X$ is almost free. The left square commutes by the simplicial identities, and the center square commutes by naturality of $\theta$. For the other relationship, we use the following diagram, which commutes except for the leftmost square:
+\[\xymatrix@R=4mm{
+V_s\ar[r]^-{d_0}
+\ar@{..>}[d]_-{d_{1}+\epsilon\circ d_0}
+&%r1c1
+F_\calC V_{s-1}\ar[r]^-{\theta}
+\ar[d]^-{F_{\calC}(\epsilon\circ d_0)}
+&GV_{s-1}\ar[r]^-{\cong}
+\ar@{..>}[d]^-{G(\epsilon\circ d_0)}
+&%r2c2
+GQ_{\calC}X_{s-1}\ar[d]^-{GQ_{\calC}(d_0)}
+\\%r1c3
+V_{s-1}\ar[r]^-{d_0}
+&%r2c1
+F_\calC V_{s-2}\ar[r]^-{\theta}
+&GV_{s-2}\ar[r]^-{\cong}
+&%r2c2
+GQ_{\calC}X_{s-2}
+}\]
+Now the rightmost two squares both commute, so to show that the outer rectange commutes, it is enough to see that the two paths around the leftmost square are coequalized by $\theta:F_\calC V_{s-2}\to G V_{s-2}$. Using the simplicial identity $d_0 d_1=d_0d_0$, we are trying to show that $\theta d_0d_0+\theta d_0\epsilon d_0$ and $\theta F_{\calC}(\epsilon d_0) d_0$ are the same map from $V_s$ to $GV_{s-2}$. Even more, we will show that $\theta d_0+\theta d_0\epsilon$ and $\theta F_{\calC}(\epsilon d_0)$ are the same map $F_\calC V_{s-1}$ to $GV_{s-2}$.
+
+Starting with an expression $f(v_i)$ with $v_i\in V_{s-1}$, we calculate $\theta d_0 f(v_i)=\theta (fd_0v_i)$, $\theta d_0\epsilon f(v_i)=\theta (\epsilon (f)(d_0v_i))$ and $\theta F_{\calC}(\epsilon d_0)(f(v_i))=\theta(f)(\epsilon(d_0v_i))$. That these three terms add to zero was the requirement specified for $\theta$.
+\end{proof}
 \subsection{$\calC$-cohomology operations}\label{generic coh ops section}
 We will use $\psi_\calC$ to define operations on $\calC$-cohomology, employing certain generic operations, defined for any $U\in s\calV$:
 \begin{gather*}
@@ -880,8 +933,8 @@ If $V\in\vect{+}{n}$ then $\quadratic_{\calL(n)}$ equals the composite $F_{\calL
 \begin{proof}
 Consider the case $\calW(n+1)$ for $n\geq1$. As $\quadratic_\calC$ vanishes except on quadratic grading 2, one only checks terms $[x,y]$, $\restn{x}$, and $x\lambda_i$ (a $\calU(n+1)$-operation, not the restriction):
 \begin{alignat*}{2}
-\quadratic_{\calW(n+1)}([x,y])&=j_{\calW(n+1)}([\overline{x}+\overline{\overline{x}},\overline{y}+\overline{\overline{y}}]+[\overline{x},\overline{y}]+[\overline{\overline{x}},\overline{\overline{y}}])\\
-&=j_{\calW(n+1)}([\overline{x},\overline{\overline{y}}]+[\overline{\overline{x}},\overline{y}])=x\otimes y+y\otimes x,\textbf{Overlines ok?}
+\quadratic_{\calW(n+1)}([x,y])&=j_{\calW(n+1)}([{x_1}+{{x_2}},{y_1}+{{y_2}}]+[{x_1},{y_1}]+[{{x_2}},{{y_2}}])\\
+&=j_{\calW(n+1)}([{x_1},{{y_2}}]+[{{x_2}},{y_1}])=x\otimes y+y\otimes x,
 \end{alignat*}
 which is precisely the representation of $[x,y]$ in $F^{(2)}_{\calL(n+1)}V\subseteq V^{\otimes2}$. Similarly, $\quadratic_{\calW(n+1)}(x\lambda_i)$ vanishes (as $\calU(n+1)$-operations are linear), while $\quadratic_{\calW(n+1)}(\restn{x})$ equals $x\otimes x$ as desired. The other cases, including the case of $\calW(0)$, are barely any different.
 \end{proof}
@@ -899,72 +952,80 @@ which is precisely the representation of $[x,y]$ in $F^{(2)}_{\calL(n+1)}V\subse
 
 \begin{Cohomology operations for unstable Lie algebras over P}
 \vfil\pagebreak
-\section{Cohomology operations for unstable Lie algebras over $P$}
+\section{Cohomology operations for unstable Lie algebras over $P$}\label{Koszul delta opns}
 
 %\subsection{Cohomology for objects of $\calW$}
-\todoeasy{Define $Q^\calW:\calW\to \vect{+}{0}$, and thus the cohomology functor on $\calW$}{Give the bar construction $B_\bullet^{\calW}$
+\tododone{Define $Q^\calW:\calW\to \vect{+}{0}$, and thus the cohomology functor on $\calW$}{Give the bar construction $B_\bullet^{\calW}$
 \item Explain significance as Adams $E^2$}
-We will use the standard simplicial bar construction as our simplicial resolution of $X\in\calW$, writing $B^\calW_sX=U^{s+1}X$. Then the cohomology of $X$, $H^{s}_t(X)\in\vect{1}{+}$, is the cohomology of the cochain complex
-\[C^{s}_{t}=\Hom(N_s(Q_\calW B_{\bullet}X)^{t},\F_2).\]
-We'll frequently use the identification $Q_\calW B_{s}X=U^{s}X$.
+%We will use the standard simplicial bar construction as our simplicial resolution of $X\in\calW$, writing $B^\calW_sX=U^{s+1}X$. Then the cohomology of $X$, $H^{s}_t(X)\in\vect{1}{+}$, is the cohomology of the cochain complex
+%\[C^{s}_{t}=\Hom(N_s(Q_\calW B_{\bullet}X)^{t},\F_2).\]
+%We'll frequently use the identification $Q_\calW B_{s}X=U^{s}X$.
 
 
-\subsection{$\delta$ operations on $H^*_{\calW}$ and $H^*_{\calU}$}
-\todoeasy{Define the operations $\gamma_i$, state and define the $\delta_i$ operations}{still need to clarify the end of the proof of the relations.}
-For $V^{*}\in \vect{+}{0}$, we will define natural homomorphisms
-\[\gamma^i:(UV)^{n+i+1}\to V^{n}, \textup{ for $2\leq i<n$}.\]
-Indeed, there are natural maps
+\subsection{$\delta$ operations on $H^*_{\calW(0)}$ and $H^*_{\calU(0)}$}
+\tododone{Define the operations $\gamma^i$, state and define the $\delta_i$ operations}{still need to clarify the end of the proof of the relations.}
+For $V\in \vect{+}{0}$, we will define natural homomorphisms
+\[\theta^i:(F_{\calW(0)}V)^{n+i+1}\to V^{n}, \textup{ for $2\leq i<n$}.\]
+Indeed, there are natural homomorphisms into the quadratic grading 2 part of $F_{\calW(0)}V$:
 \begin{align*}
-P^i:V^{n}&\to UV^{n+i+1,(2)}, \textup{\quad  for $2\leq i<n$}\\
-[\,,]:V^{n_1}\otimes V^{n_2}&\to UV^{n_1+n_2+1,(2)},
+P^i:V^{n}&\to F_{\calW(0)}^{(2)}V^{n+i+1}, \textup{\quad  for $2\leq i<n$}\\
+[\,,]:(S_2V)^{n}&\to F_{\calW(0)}^{(2)}V^{n+1},
 \end{align*}
-and for given $m\geq1$, the quadratic grading 2 part of $UV^m$ decomposes as
+and for given $m\geq1$, the degree $m$, quadratic grading 2 part $F_{\calW(0)}^{(2)}V^m$ decomposes as
 %\[UV^{m,(2)}=\left(\bigoplus_{n_1+n_2=m-1}\im ([\,,]_{n_1,n_2})\right) \oplus\left(\bigoplus_{2\leq i< (m-1)/2}\im (P^i_{m-i-1})\right)\]
 %
-\[UV^{m,(2)}=\left(\bigoplus_{n_1+n_2=m-1}\im (V^{n_1}\otimes V^{n_2}\overset{[,]}{\to} UV)\right) \oplus\left(\bigoplus_{2\leq i< (m-1)/2}\im (V_{m-i-1}\overset{P^i}{\to}UV)\right).\]
-Moreover, the map $P^i:V^n\to UV^{n+i+1,(2)}$ is an isomorphism onto its image, so that for $2\leq i <n$ we may construct $\gamma^i$ as the composite
-\[\gamma^i:\left((UV)^{n+i+1}\overset{\textup{proj}}{\makebox[.06ex][l]{$\to$}\to} (UV)^{n+i+1,(2)}\overset{\textup{proj}}{\makebox[.06ex][l]{$\to$}\to} \im (P^i)\overset{(P^i)^{-1}}{\to}V^{n}\right).\]
-Here we have projected onto the quadratic filtration 2 part, and then further onto the relevant summand in its natural decomposition. Note that although $P^n:V^n\to UV^{2n+1}$ is a nontrivial map, its image is entangled with the image of the bracket, and we are not able to split it off. Thus we are not able to improve on the bounds $2\leq i< n$.
+\[F_{\calW(0)}^{(2)}V^{m}=%\left(\bigoplus_{n_1+n_2=m-1}
+\im \bigl((S_2V)^{m-1}\overset{[,]}{\to} F_{\calW(0)}^{(2)}V\bigr)%\right) 
+\oplus\bigoplus_{\!\!\!\!\!\!2\leq i< (m-1)/2\!\!\!\!\!\!}\im \bigl(V^{m-i-1}\overset{P^i}{\to}F_{\calW(0)}^{(2)}V\bigr).\]
+Moreover, each map $P^i:V^n\to F_{\calW(0)}^{(2)}V^{n+i+1}$ appearing in this decomposition is an isomorphism onto its image, so that for $2\leq i <n$ we may construct $\theta^i$ as the composite
+\[\theta^i:\left((F_{\calW(0)}V)^{n+i+1}\overset{\textup{proj}}{\makebox[.06ex][l]{$\to$}\to} (F_{\calW(0)}^{(2)}V)^{n+i+1}\overset{\textup{proj}}{\makebox[.06ex][l]{$\to$}\to} \im (P^i)\overset{(P^i)^{-1}}{\to}V^{n}\right).\]
+Here we have projected onto the quadratic filtration 2 part, and then further onto the relevant summand in its natural decomposition. Note that although $P^n:V^n\to F_{\calW(0)}^{(2)}V^{2n+1}$ is a nontrivial linear map when $n\geq2$, its image is entangled with the image of the bracket, and we are not able to split it off. Thus we are not able to improve on the bounds $2\leq i< n$.
+
+Now suppose that $X\in\calW(0)$, and consider the bar construction $Q_{\calW(0)}B_\bullet^{\calW(0)}X$ whose cohomotopy is $H^*_{\calW(0)}X$. Until the end of \S\ref{Koszul delta opns}, we'll write $Q\mathbb{B}_\bullet$ for this simplicial object, write $F$ for $F_{\calW(0)}$, and identify $Q\mathbb{B}_s$ with $F^sX$.
 \begin{prop}
-There are natural operations $\delta_i:H^{s}_tW\to H^{s+1}_{t+i+1}W$ defined whenever $2\leq i <t$. If $\alpha\in C^{s}_t$ is a cocycle, $\delta_i\alpha$ is the composite
-\[N_{s+1}(Q_U B_{\bullet}W)^{t+i+1}\overset{\gamma^i}{\to}N_s(Q_U B_{\bullet}W)^{t}\overset{\alpha}{\to}\F_2,\]
-after identifying $Q_U B_{s+1}W$ with $U^{s}W$ and $Q_U B_{s}W$ with $U^{s+1}W$. These operations satisfy the Adem relation (see Dwyer) for $\delta$ operations.
+For any $i$ and $t$ such that $2\leq i <t$, the map $\theta^i:(F^{s+1}X)^{t+i+1}\to (F^sX)^{t}$ induces a degree $-1$ chain map $N_{s+1}(Q\mathbb{B}^{t+i+1})\to N_{s}(Q\mathbb{B}^{t})$. These chain maps induce a natural linear operations
+\[\delta_i=(\theta^i)^*:(H^*_{\calW(0)}X)^{s}_t\to (H^*_{\calW(0)}X)^{s+1}_{t+i+1}\textup{\ \ whenever\ \ }2\leq i <t,\] 
+which satisfy the Adem relation [Dwyer] for $\delta$ operations.
 \end{prop}
 \begin{proof}
-One needs to see that $\gamma^i$ is a chain homomorphism respecting the normalisation functor:\[\xymatrix@R=4mm{
-N_{s+1}(Q_U B_{\bullet}W)^{t+i+1}\ar[r]^-{\gamma^i}
-\ar[d]^-{\partial}&%r1c1
-N_s(Q_U B_{\bullet}W)^{t}
-\ar[d]^-{\partial}
-\\%r1c2
-N_{s}(Q_U B_{\bullet}W)^{t+i+1}\ar[r]^-{\gamma^i}&%r2c1
-N_{s-1}(Q_U B_{\bullet}W)^{t}%r2c2
-}\]
+One needs to see that $\theta^i$ is a chain homomorphism respecting the normalisation functor.
+%\[\xymatrix@R=4mm{
+%N_{s+1}(Q_U B_{\bullet}W)^{t+i+1}\ar[r]^-{\theta^i}
+%\ar[d]^-{\partial}&%r1c1
+%N_s(Q_U B_{\bullet}W)^{t}
+%\ar[d]^-{\partial}
+%\\%r1c2
+%N_{s}(Q_U B_{\bullet}W)^{t+i+1}\ar[r]^-{\theta^i}&%r2c1
+%N_{s-1}(Q_U B_{\bullet}W)^{t}%r2c2
+%}\]
 For this, it is enough to produce commuting squares:
 \[\xymatrix@R=4mm{
-(U^sW)^{t+i+1}\ar[r]^-{\gamma^i}
+(F^sX)^{t+i+1}\ar[r]^-{\theta^i}
 \ar[d]^-{d_0+d_1}&%r1c1
-(U^{s-1}W)^{t}
+(F^{s-1}X)^{t}
 \ar[d]^-{d_0}
 \\%r1c2
-(U^{s-1}W)^{t+i+1}\ar[r]^-{\gamma^i}&%r2c1
-(U^{s-2}W)^{t}%r2c2
-}\]
-and for $j\geq1$:
-\[\xymatrix@R=4mm{
-(U^sW)^{t+i+1}\ar[r]^-{\gamma^i}
+(F^{s-1}X)^{t+i+1}\ar[r]^-{\theta^i}&%r2c1
+(F^{s-2}X)^{t}%r2c2
+}
+\raisebox{-5mm}{\ \ and\ \ }
+\xymatrix@R=4mm{
+(F^sX)^{t+i+1}\ar[r]^-{\theta^i}
 \ar[d]^-{d_{j+1}}&%r1c1
-(U^{s-1}W)^{t}
+(F^{s-1}X)^{t}
 \ar[d]^-{d_j}
 \\%r1c2
-(U^{s-1}W)^{t+i+1}\ar[r]^-{\gamma^i}&%r2c1
-(U^{s-2}W)^{t}%r2c2
-}\]
-The later squares are easy, and and for the first one, starting with $f_{(s)}g_{(s-1)}h_{(s-2)}\in U^sW$, we find $\gamma^i d_0=u(f)\gamma^i (g)(h_{(s-2)})$,
-$\gamma^i d_1=\gamma^i (fg)(h_{(s-2)})$, and
-$d_0\gamma^i =\gamma^i (f)u(g)(h_{(s-2)})$. These three quanitities sum to zero, as the single operation $P^i$ is indecomposable. This proves the well-definedness of these operations.
+(F^{s-1}X)^{t+i+1}\ar[r]^-{\theta^i}&%r2c1
+(F^{s-2}X)^{t}%r2c2
+}\raisebox{-5mm}{\ \ for $j\geq 1$.}\]
+The later squares are easy. We'll check the first square on an expression $e=f(g_j(h_{jk}))$, for certain expressions $g_j(h_{jk})\in F^{s-1}X$ on certain $h_{jk}$ in $F^{s-2}X$. We find
+\[\theta^i d_0e=\epsilon(f)\theta^i (g_j)(h_{jk}),\quad \theta^i d_1e=\theta^i (f(g_j))(h_{jk}),\quad d_0\theta^i e=\theta^i (f)\epsilon(g_j)(h_{jk}).\]
+% and and for the first one, starting with $f_{(s)}g_{(s-1)}h_{(s-2)}\in F^sW$, we find $\theta^i d_0=u(f)\theta^i (g)(h_{(s-2)})$,
+$\theta^i d_1=\theta^i (fg)(h_{(s-2)})$, and
+$d_0\theta^i =\theta^i (f)u(g)(h_{(s-2)})$. 
+These three quanitities sum to zero, as the single operation $P^i$ is indecomposable. This proves that $\theta^i$ induces a chain map on normalized complexes, and established that the $\delta$-operations are well-defined.
 
-What remains is to check that the Adem relations are satisfied. The necessary argument is a modification of that given in Priddy's work [Koszul], which accommodates for the presence of the extra operations. As the algebra of $\delta$-operations is Koszul dual (in Priddy's sense) to $\Palg$, the Adem relations follow. [$\diamondsuit$ Should I include the compression to the quadratic grading 2 parts?]% For this, show that we can compress to the terms in which there is quadratic grading 2 in each construction. Then the Adem relation is the image under the differential of something obvious.
+What remains is to check that the Adem relations are satisfied. The necessary argument is a modification of that given in Priddy's work [Koszul], which accommodates for the presence of the extra operations. As the algebra of $\delta$-operations is Koszul dual (in Priddy's sense) to $\Palg$, the Adem relations follow. [$\diamondsuit$ \textbf{Should I include} the compression to the quadratic grading 2 parts?]% For this, show that we can compress to the terms in which there is quadratic grading 2 in each construction. Then the Adem relation is the image under the differential of something obvious.
 \end{proof}
 \todo{Note that the same method defines operations on $H^*_{\calU(n)}$}{}
 
@@ -2077,6 +2138,7 @@ There may be a wrinkle here answering the well definedness vs vanishing question
 \todo{figure out what it implies about the whole thing.}{}
 \end{appendices}
 
+\begin{todolist}
 \section{To do/consider:}
 \begin{enumerate}\squishlist
 \setlength{\parindent}{.25in}
@@ -2111,7 +2173,7 @@ having all gradings at the very right, tensor products of vector spaces,\ldots?
 \item Need discourse on that grading on $\calW(n)$.
 \item Point out that $F_{\calU(n+1)}^{(2)}(V)\oplus F_{\calL(n+1)}^{(2)}(V)=F_{\calW(n+1)}^{(2)}(V)$, and that the two monoids both include as subs of $F_{\calW(n+1)}$, and one is a quotient monoid. Broadly just need to fully explain all this grading stuff in all of the free constructions.
 \end{enumerate}
-
+\end{todolist}
 
 \end{document}
 
