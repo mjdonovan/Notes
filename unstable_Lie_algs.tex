@@ -13,7 +13,7 @@
 \usepackage{dsfont}%creates \mathds{1}
 \excludeversion{comp func sseq old version}
 
-\renewcommand{\excludeversion}[1]{\includeversion{#1}}
+%\renewcommand{\excludeversion}[1]{\includeversion{#1}}
 \excludeversion{Contents Page}
 \excludeversion{Intro}
 \includeversion{Conventions and notation}
@@ -291,6 +291,7 @@ url=false,doi=false,isbn=false,eprint=false]{biblatex}%
 \newcommand{\Palg}{{\calP}}
 \newcommand{\LieOperad}{{\scrL}}
 \newcommand{\restn}[1]{#1^{[2]}}
+\newcommand{\restnRepeated}[2]{#1^{[2^{#2}]}}
 \newcommand{\vect}[2]{\calV^{#1}_{#2}}
 \newcommand{\BSW}{{\scrG}}%\scrH\scrI\scrJ\scrK\scrL\scrM\scrN\scrO\scrP\scrQ\scrR\scrS\scrT\scrY\scrZ}}
 \newcommand{\BSWres}{{\scrG_\bullet}}
@@ -338,6 +339,7 @@ url=false,doi=false,isbn=false,eprint=false]{biblatex}%
 \end{itemize}}
 \end{itemize}\end{shaded}
 }
+\newcommand{\tododone}[2]{}
 \newcommand{\todoeasy}[2]{\begin{shaded}\begin{itemize}
 \setlength{\parindent}{.25in}
 \item[{\Large$\smash\spadesuit$}] #1
@@ -664,7 +666,58 @@ The monad of this adjunction may be constructed as an appropriately chosen submo
 %The free partially restricted Lie algebra is the subspace of $\Gamma(\LieOperad(V_0\oplus V_1))$ given by
 %\[\im \Bigl(S(\LieOperad)(V_0)\overset{\textup{Tr}}{\to}\Gamma(\LieOperad)(V_0\oplus V_1)\Bigr)\oplus\bigoplus_{n\geq1}\Bigl(\bigoplus(\LieOperad(n)\otimes V_{i_1}\otimes V_{i_2}\otimes\cdots\otimes V_{i_n})\Bigr)^{\Sigma_n}\]
 
-\subsection{Homotopy operations for simplicial Lie algebras}
+\subsection{Construction of the monads $F_{\calW(0)}$ and $F_{\calU(0)}$}\label{Construction of the monads}
+\tododone{Construct monad $U$ for $\calW$}{Write in terms of monads $\PMonad$ and $S(\scrL)$.\item Decide whether to give the distributive law.
+}
+Denote by $\Palg$ the algebra arising in Goerss' work, defined as a quotient of a free unital associative algebra:
+\[\Palg=F_{\textup{ass}}(P_0,P_1,P_2,\ldots)/\left(P_0=P_1=0,\ \textup{$P$-Adem relation}\right)\]
+This associative algebra can be $\vect{+}{0}$-graded, by thinking of the generator $P^i$ as having grading $i+1$ (\textbf{or} even in $\vect{1}{1}$, taking $P^i\in(\Palg)^{i+1}_1$). For any $x\in\Palg$, there is a homomorphism, \emph{right multiplication} by $x$:
+\[\textup{m}_x:\Palg\to \Palg,\quad y\mapsto yx.\]
+Moreover, $\Palg$ has an \emph{admissible basis}, consisting of those monomials
+\[P^I:=P^{i_\ell}P^{i_{\ell-1}}\cdots P^{i_1}\]
+for which $I=(i_\ell,\ldots,i_1)$ is a sequence of integers such that each $i_j\geq2$, and  each comparison $i_{j+1}< 2i_j$ holds. Moreover, $\Palg$ has a decreasing filtration $\Palg\supset F^1\Palg\supset F^2\Palg\supset\cdots $, where
+\[F^n\Palg=\F_2\left[P^I\,:\,\textup{$I$ nonempty and admissible, }i_j+\cdots +i_1\geq n+j\textup{ for some $j\geq 1$}\right].\]
+By examining the $P$-Adem relation, one can determine that this is a filtration by left ideals. For a vectorspace $V\in\vect{+}{0}$, we have
+\[F_{\calU(0)}V=\Palg\otimes V/\bigoplus_{i\geq1}(F^n\Palg\otimes V^n)\]
+Next, writing $S(\LieOperad)$ for the monad on $\vect{+}{0}$ with cohomological grading shifted, we may construct the monad $F_{\calW(0)}$ (the restriction of the monad $U$ in [Goerss, p18]), by coequalizing two maps $\Palg\otimes S(\LieOperad)V\to F_{\calU(0)} (S(\LieOperad)V)$. The first map is the composite:
+\[\xymatrix@R=4mm{
+\Palg\otimes S(\LieOperad)V\ar[r]^-{\textup{id}\otimes \textup{frob}}
+&%r1c1
+\Palg\otimes S(\LieOperad)V\ar@{->>}[r]&%r1c2
+F_{\calU(0)}(S(\LieOperad)V).%r1c3
+}\]
+The second map restricts to each subset $\Palg\otimes (S(\LieOperad)V)^r$ to the composite:
+\[\xymatrix@R=4mm{
+\Palg\otimes (S(\LieOperad)V)^r\ar[r]^-{\textup{m}_{P^r}\otimes\textup{id}}
+&
+\Palg\otimes (S(\LieOperad)V)^r\ar@{^{(}->}[r]
+&%r1c1
+\Palg\otimes S(\LieOperad)V\ar@{->>}[r]&%r1c2
+F_{\calU(0)}(S(\LieOperad)V).%r1c3
+}\]
+One can check, using [Goerss, p18] the following is a coequaliser in $\vect{+}{0}$:
+\[\xymatrix@R=4mm{
+\Palg\otimes S(\LieOperad)V\ar@<.5ex>[r]\ar@<-.5ex>[r]
+&%r1c1
+F_{\calU(0)}(S(\LieOperad)V)\ar@{->>}[r]
+&%r1c2
+F_{\calW(0)}V%r1c3
+}\]
+The monad $F_{\calW(0)}$ posesses a quadratic grading, as do the $\calW(n)$ for $n\geq1$. One views $V\subset F_{\calW(0)}V$ as lying in quadratic grading 1, and demands that quadratic grading adds under taking brackets and doubles when applying $P$-operations.
+
+
+An object of $\calW(0)$ is in particular an object of $\calU(0)$, and (as all of the $P$ operations are linear), we can define a functor $Q_{\calU(0)}:\calW(0)\to\vect{+}{0}$ by quotienting by the image of these operations. One may check:
+\begin{lem}\label{Kill P ops gives lie alg}
+For $X\in\calW(0)$, the vector space $Q_{\calU(0)}(X)$ inherits the structure of an object of $\calL(0)$ from the bracket of $X$, yielding a factorization:% of indecomposable functors, $Q_{\calW(n)}=Q_{\calL(n)}\circ Q_{\calU(n)}$
+\[Q_{\calW(0)}=Q_{\calL(0)}\circ Q_{\calU(0)}:\left(\calW(0)\to \calL(0)\to \vect{+}{0}\right).\]
+Moreover the composite $Q_{\calU(0)}\circ F_{\calW(0)}$ equals the the free construction $F_{\calL(0)}$.
+\end{lem}
+\begin{proof}
+One checks that the bracket is well defined in the quotient, and that taking the quotient by the top $P$ operation imposes the relation $[x,x]=0$, to create a $\Lambda(\LieOperad)$-algebra from the pre-existing $S(\LieOperad)$-algebra structure. The final claim follows from [Goerss p18].
+\end{proof}
+
+
+\subsection{Homotopy operations for partially restricted Lie algebras}
 We'll now give an account of the natural operations on the homotopy of a simplicial object of $\calL(n)$.
 
 The homotopy operations we'll present will be in the form of a natural transformation of functors $s\vect{+}{n}\to \vect{+}{n+1}$, which will be induced by the Eilenberg-Mac Lane shuffle map $\nabla:N_*(V)\otimes N_*(V)\to N_*(V\otimes V)$. \textbf{Need to clarify what's meant by quad grading.}
@@ -740,82 +793,97 @@ defined whenever $0\leq i< s_{n+1}$ and not all of $i,s_{n},\ldots,s_{1}$ are ze
 For $L\in s\calL(n)$, the homotopy groups $\pi_*(L)$ are simultaneously an object of $\calL(n+1)$ and of $\calU(n+1)$. The $\calU(n+1)$-operations are annihilated by the bracket. That is, for $i<s_{n+1}$, $x\in\pi_{s_{n+1}}L$ and $y\in \pi_*L$ such that $x\lambda_i$ is defined, we have $[x\lambda_i,y]=0$.
 \end{prop}
 For $n\geq0$, let $\calW(n+1)$ denote the algebraic category of $\vect{+}{n+1}$-graded vectorspaces which are simultaneously an object of $\calU(n+1)$ and $\calL(n+1)$, such that the compatibilities of \ref{compatibilities between U and L in W} are satisfied. This category has a number of useful properties, following from the calculations of [6Author!], primarily:
-\begin{prop}[6-Author]
+\begin{prop}\label{prop on Wnplus1 being the pialgs for Wn}
 The category $\calW(n+1)$ is isomorphic to the category $\calL(n)\PiAlg$ of $\calL(n)$-$\Pi$-algebras, so that the operations defined above exhaust the set of natural operations on the homotopy of simplicial objects of $\calL(n)$.
+The monad $F_{\calW(n+1)}$ on $\vect{+}{n+1}$ factors as a composite $F_{\calU(n+1)}\circ F_{\calL(n+1)}$, with monad structure arising from a distributive law of monads on $\vect{+}{n+1}$ [{\tiny Beck Dist Laws in seminar on triples and cat homology thy}].
 \end{prop}
-It is not difficult to show that (suppressing forgetful functors) the monad $F_{\calW(n+1)}$ factors as a composite
-\[F_{\calW(n+1)}=F_{\calW(n+1)}\circ F_{\calL(n+1)}:\vect{+}{n+1}\to \vect{+}{n+1},\]
-and that the monad structure on $F_{\calW(n+1)}$ arises from a distributive law [{\tiny Beck Dist Laws in seminar on triples and cat homology thy}]. It is important to note that this is monadic down only as far as $\vect{+}{n+1}$.
+\begin{proof}
+All of these facts are easy to prove after observing that, for $W\in s\calV$ a wedge of spheres, $\pi_*(F_{\calL(n)}W)$ embeds in $\pi_*(F_{\Gamma(\LieOperad)}W)$, which, along with $\pi_*(F_{\Lambda(\LieOperad)}W)$, is well studied [6-author]. In order to make this observation, let write $W^\textup{z}$ for $\bigoplus_{t\geq1}W_{0,\ldots,0}^t$, the non-restrictable part of $W$. This is actually a subwedge of $W$, the wedge of those summands of $W$ which lie in homological dimension $(0,\ldots,0)$. Now there is a commuting diagram of simplicial vector spaces, containing two short exact sequences:
+\[\xymatrix@R=-2mm{
+0
+\ar[r]
+&%r1c1
+F_{\calL(n)}W
+\ar[r]^{\alpha}
+&%r1c2
+F_{\Gamma(\LieOperad)}W
+\ar[dr]^-(.4){\rho\gamma}\ar@{->>}[dd]^-{\gamma}
+&%r1c3
+%\Fr{\RestLie{n}}W/\Fr{\PRLie{n}}W
+%\ar[r]
+%\ar[d]^-{\cong}
+%&%r1c4
+\\%r1c5
+&&&\frac{\displaystyle F_{\Gamma(\LieOperad)}W^\textup{z}}{\displaystyle F_{\Lambda(\LieOperad)}W^\textup{z}}
+\ar[r]
+&
+0
+\\
+0
+\ar[r]
+&%r1c1
+F_{\Lambda(\LieOperad)}W^\textup{z}
+\ar[r]^{\beta}
+&%r1c2
+F_{\Gamma(\LieOperad)}W^\textup{z}
+\ar[ru]^-(.4){\rho}&%r1c3
+%\Fr{\RestLie{n}}W^\textup{z}/ F_{\Lambda(\LieOperad)}W^\textup{z}
+%\ar[r]
+%&%r1c4
+%0
+}\]
+On homotopy groups: $\beta_*$ is injective (its source and target are well understood), so that $\rho_*$ is surjective. $\gamma_*$ is surjective (after all, $\gamma$ is an isomorphism in those internal degrees in which its codomain in nonzero), so that $(\rho\gamma)_*$ is surjective. Thus $\alpha_*$ is injective.
+\end{proof}
+It is important(\textbf{really?}) to note that this is monadic down only as far as $\vect{+}{n+1}$.
 
 The monad $F_{\calW(n+1)}$ posesses a quadratic grading, by viewing $V\subset F_{\calW(n+1)}V$ as lying in quadratic grading 1, and demanding that quadratic grading adds under taking brackets and doubles when applying $\lambda$-operations.
 
-Moreover, we may define a functor $Q_{\calU(n+1)}:\calW(n+1)\to\vect{+}{n+1}$, by quotienting by the image of the \emph{non-top} $\lambda$-operations (which, fortunately, are linear), and it follows from the axioms in $\calW(n+1)$ that:
-\begin{lem}
-For $X\in\calW(n)$, the vector space $Q_{\LambdaMonad(n)}(X)$ inherits the structure of an object of $\calL(n)$ from the bracket and restriction of $X$, yielding a factorization:% of indecomposable functors, $Q_{\calW(n)}=Q_{\calL(n)}\circ Q_{\LambdaMonad(n)}$
-\[Q_{\calW(n)}=Q_{\calL(n)}\circ Q_{\LambdaMonad(n)}:\left(\calW(n)\to \calL(n)\to \vect{+}{n}\right).\]
-Moreover the composite $Q_{\LambdaMonad(n)}\circ F_{\calW(n)}$ equals the the free construction $F_{\calL(n)}$.
+Moreover, we may define a functor $Q_{\calU(n+1)}:\calW(n+1)\to\vect{+}{n+1}$, by quotienting by the image of the \emph{non-top} $\lambda$-operations (which, fortunately, are linear), and one can prove the following lemma, the direct analogue of \ref{Kill P ops gives lie alg}:
+\begin{lem}\label{Kill lambda ops gives lie alg}
+For $X\in\calW(n+1)$, the vector space $Q_{\calU(n+1)}(X)$ inherits the structure of an object of $\calL(n+1)$ from the bracket and partial restriction of $X$, yielding a factorization:% of indecomposable functors, $Q_{\calW(n)}=Q_{\calL(n)}\circ Q_{\calU(n)}$
+\[Q_{\calW(n+1)}=Q_{\calL(n+1)}\circ Q_{\calU(n+1)}:\left(\calW(n+1)\to \calL(n+1)\to \vect{+}{n+1}\right).\]
+Moreover the composite $Q_{\calU(n+1)}\circ F_{\calW(n+1)}$ equals the the free construction $F_{\calL(n+1)}$.
 \end{lem}
+\begin{proof}
+Similar to the proof of lemma \ref{Kill P ops gives lie alg}, using the observation from the proof of proposition \ref{prop on Wnplus1 being the pialgs for Wn}.
+\end{proof}
 
-\subsection{Construction of the monads $F_{\calW(0)}$ and $F_{\calU(0)}$}\label{Construction of the monads}
-\todoeasy{Construct monad $U$ for $\calW$}{Write in terms of monads $\PMonad$ and $S(\scrL)$.\item Decide whether to give the distributive law.
-}
-Denote by $\Palg$ the algebra arising in Goerss' work, defined as a quotient of a free unital associative algebra:
-\[\Palg=F_{\textup{ass}}(P_0,P_1,P_2,\ldots)/\left(P_0=P_1=0,\ \textup{$P$-Adem relation}\right)\]
-This associative algebra can be $\vect{+}{0}$-graded, by thinking of the generator $P^i$ as having grading $i+1$ (\textbf{or} even in $\vect{1}{1}$, taking $P^i\in(\Palg)^{i+1}_1$). For any $x\in\Palg$, there is a homomorphism, \emph{right multiplication} by $x$:
-\[\textup{m}_x:\Palg\to \Palg,\quad y\mapsto yx.\]
-Moreover, $\Palg$ has an \emph{admissible basis}, consisting of those monomials
-\[P^I:=P^{i_\ell}P^{i_{\ell-1}}\cdots P^{i_1}\]
-for which $I=(i_\ell,\ldots,i_1)$ is a sequence of integers such that each $i_j\geq2$, and  each comparison $i_{j+1}< 2i_j$ holds. Moreover, $\Palg$ has a decreasing filtration $\Palg\supset F^1\Palg\supset F^2\Palg\supset\cdots $, where
-\[F^n\Palg=\F_2\left[P^I\,:\,\textup{$I$ nonempty and admissible, }i_j+\cdots +i_1\geq n+j\textup{ for some $j\geq 1$}\right].\]
-By examining the $P$-Adem relation, one can determine that this is a filtration by left ideals. For a vectorspace $V\in\vect{+}{0}$, we have
-\[F_{\calU(0)}V=\Palg\otimes V/\bigoplus_{i\geq1}(F^n\Palg\otimes V^n)\]
-Next, writing $S(\LieOperad)$ for the monad on $\vect{+}{0}$ with cohomological grading shifted, we may construct the monad $F_{\calW(0)}$ (the restriction of the monad $U$ in [Goerss, p18]), by coequalizing two maps $\Palg\otimes S(\LieOperad)V\to F_{\calU(0)} (S(\LieOperad)V)$. The first map is the composite:
-\[\xymatrix@R=4mm{
-\Palg\otimes S(\LieOperad)V\ar[r]^-{\textup{id}\otimes \textup{frob}}
-&%r1c1
-\Palg\otimes S(\LieOperad)V\ar@{->>}[r]&%r1c2
-F_{\calU(0)}(S(\LieOperad)V).%r1c3
-}\]
-The second map restricts to each subset $\Palg\otimes (S(\LieOperad)V)^r$ to the composite:
-\[\xymatrix@R=4mm{
-\Palg\otimes (S(\LieOperad)V)^r\ar[r]^-{\textup{m}_{P^r}\otimes\textup{id}}
-&
-\Palg\otimes (S(\LieOperad)V)^r\ar@{^{(}->}[r]
-&%r1c1
-\Palg\otimes S(\LieOperad)V\ar@{->>}[r]&%r1c2
-F_{\calU(0)}(S(\LieOperad)V).%r1c3
-}\]
-One can check, using [Goerss, p18] the following is a coequaliser in $\vect{+}{0}$:
-\[\xymatrix@R=4mm{
-\Palg\otimes S(\LieOperad)V\ar@<.5ex>[r]\ar@<-.5ex>[r]
-&%r1c1
-F_{\calU(0)}(S(\LieOperad)V)\ar@{->>}[r]
-&%r1c2
-F_{\calW(0)}V%r1c3
-}\]
-Finally, we note that the monad $F_{\calW(0)}$ posesses a quadratic grading, as do the $\calW(n)$ for $n\geq1$. One views $V\subset F_{\calW(0)}V$ as lying in quadratic grading 1, and demands that quadratic grading adds under taking brackets and doubles when applying $P$-operations.
 
-\subsection{Decomposition maps for $\calW(n)$ and $\calL(n)$}
+
+\subsection{Decomposition maps for $\calL(n)$ and $\calW(n)$}
 \todo{Describe the composition maps for these categories}{show the compatibility under $\calL(n)\PiAlg\cong \calW(n+1)$
 \item show that the $j$ are \emph{quadratic decomposition maps}, if that language is still around}
-Here we'll introduce decomposition maps for the categories $\calL(n)$ and $\calW(n)$, and prove a certain compatibility between them. The definition is simple enough, and the reader can verify that it is well defined. Let $\calC$ be any of the categories $\calW(n)$ for $n\geq1$, or $\calL(n)$ for $n\geq0$. Then for $X,Y\in\calC$ we define $j_\calC:Q(X\wedge Y)\to QX\otimes QY$ by
-\[[z_1,\cdots ,z_a]\lambda_{i_1}\cdots \lambda_{i_r}\overset{j_\calC}{\mapsto}\begin{cases}
-%0,&\textup{if }r>0\textup{ or }s>2;\\
-z_1\otimes z_2,&\textup{if }r=0,\,a=2,\,z_1\in X\textup{ and } z_2\in Y,
+Here we'll introduce decomposition maps for the categories $\calL(n)$ and $\calW(n)$, and prove a certain compatibility between them. The definitions are simple enough, and the reader can verify that each is well defined. Choose $n\geq0$, then we define decomposition maps $\calC:Q(X\wedge Y)\to QX\otimes QY$:
+\begin{alignat*}{2}
+%\calW(0):&\quad &
+j_{\calW(0)}:P^{i_\ell}\cdots P^{i_1}[z_1,\cdots ,z_a]&\longmapsto\begin{cases}
+z_1\otimes z_2,&\textup{if }\ell=0,\,a=2,\,z_1\in X,\,z_2\in Y,
 \\0,&\textup{otherwise.}
 \end{cases}
-\]
-Here, each of $z_1,\ldots,z_a$ is an element of either $X$ or $Y$, and $[z_1,\ldots,z_s]$ represents some choice of bracketing. If we are working in $\calL(n)$ then all of the $\lambda$-operations must be the top operation (the restriction), as where no $\calU(n)$-operations are defined. The map $j_{\calW(0)}$ is defined similarly, replacing right $\lambda$-operations with left $P$-operations. [\textbf{or uniformize} all this using the phrase $\calU(n)$-operations.]
+\\
+%\calW(n+1):&&
+j_{\calW(n+1)}:[z_1,\cdots ,z_a]\lambda_{i_1}\cdots \lambda_{i_\ell}&\longmapsto\begin{cases}
+z_1\otimes z_2,&\textup{if }\ell=0,\,a=2,\,z_1\in X,\,z_2\in Y,
+\\0,&\textup{otherwise.}
+\end{cases}
+\\
+%\calL(n):&&
+j_{\calL(n)}:\restnRepeated{[z_1,\cdots ,z_a]}{r}&\longmapsto\begin{cases}
+z_1\otimes z_2,&\textup{if }r=0,\,a=2,\,z_1\in X,\,z_2\in Y,
+\\0,&\textup{otherwise.}
+\end{cases}
+\end{alignat*}
+[or \textbf{uniformize} all this using the phrase $\calU(n)$-operations.]
 \begin{prop}
-For any $V\in\vect{+}{n}$, then $\quadratic_{\calL(n)}$ equals the composite $F_{\calL(n)} V\to F^{(2)}_{\calL(n)} V\subseteq S^2V$, and $\quadratic_{\calW(n)}$ equals the composite $F_{\calW(n)} V\to F_{\calL(n)} V\to F^{(2)}_{\calL(n)} V\subseteq S^2V$.
+If $V\in\vect{+}{n}$ then $\quadratic_{\calL(n)}$ equals the composite $F_{\calL(n)} V\epi F^{(2)}_{\calL(n)} V\subseteq S^2V$, and $\quadratic_{\calW(n)}$ equals the composite $F_{\calW(n)} V\epi F_{\calL(n)} V\epi F^{(2)}_{\calL(n)} V\subseteq S^2V$.
 \end{prop}
 \begin{proof}
-Consider the case $\calW(n)$ for $n\geq1$. One observes that $\quadratic_\calC$ vanishes except on quadratic grading 2, and checks the result on terms $[x,y]$, $x\lambda_i$ (for $i<|x|$) and $\restn{x}$:
+Consider the case $\calW(n+1)$ for $n\geq1$. As $\quadratic_\calC$ vanishes except on quadratic grading 2, one only checks terms $[x,y]$, $\restn{x}$, and $x\lambda_i$ (a $\calU(n+1)$-operation, not the restriction):
 \begin{alignat*}{2}
-\quadratic_{\calW(n)}([x,y])&=j_{\calW(n)}([\overline{x}+\overline{\overline{x}},\overline{y}+\overline{\overline{y}}]+[\overline{x},\overline{y}]+[\overline{\overline{x}},\overline{\overline{y}}])\\
-&=j_{\calW(n)}([\overline{x},\overline{\overline{y}}]+[\overline{\overline{x}},\overline{y}])=x\otimes y+y\otimes x,
+\quadratic_{\calW(n+1)}([x,y])&=j_{\calW(n+1)}([\overline{x}+\overline{\overline{x}},\overline{y}+\overline{\overline{y}}]+[\overline{x},\overline{y}]+[\overline{\overline{x}},\overline{\overline{y}}])\\
+&=j_{\calW(n+1)}([\overline{x},\overline{\overline{y}}]+[\overline{\overline{x}},\overline{y}])=x\otimes y+y\otimes x,\textbf{Overlines ok?}
 \end{alignat*}
-which is precisely the representation of $[x,y]$ in $F^{(2)}_{\calC}V\subseteq V^{\otimes2}$. Similarly, $\quadratic_{\calW(n)}(x\lambda_i)$ vanishes (as $(\DASH)\lambda_i$ is linear), while $\quadratic_{\calW(n)}(\restn{x})$ equals $x\otimes x$ as desired. The other cases, including that of $\calW(0)$, are barely any different.
+which is precisely the representation of $[x,y]$ in $F^{(2)}_{\calL(n+1)}V\subseteq V^{\otimes2}$. Similarly, $\quadratic_{\calW(n+1)}(x\lambda_i)$ vanishes (as $\calU(n+1)$-operations are linear), while $\quadratic_{\calW(n+1)}(\restn{x})$ equals $x\otimes x$ as desired. The other cases, including the case of $\calW(0)$, are barely any different.
 \end{proof}
 
 
@@ -948,20 +1016,11 @@ by the formula $\psi^*_\calW\mathbb{D}_0^*$, and use this to define a pairing of
 \begin{thm}
 These operations satisfy the Axioms *write them out*.
 \end{thm}
-This theorem follows from theorem [BLAH] in the appendix, after the following observation. 
-
-An object of $\calW$ is in particular a $\PMonad$-module, and (as all of the $P$ operations are linear), we can define a functor $Q_{\PMonad}:\calW\to\vect{+}{0}$ by quotienting by the image of these operations. Writing $\calL$ for the category of (good) Lie algebras in $\vect{+}{0}$, one may check:
-\begin{lem}
-For $X\in\calW$, the vector space $Q_{\PMonad}(X)$ inherits the structure of an object of $\calL$ from the bracket of $X$, yielding a factorization:% of indecomposable functors, $Q_{\calW(n)}=Q_{\calL(n)}\circ Q_{\LambdaMonad(n)}$
-\[Q_{\calW}=Q_{\calL}\circ Q_{\PMonad}:\left(\calW\to \calL\to \vect{+}{0}\right).\]
-\end{lem}
-\begin{proof}
-One checks that the bracket is well defined in the quotient, and that taking the quotient by the top $P$ operation imposes the relation $[x,x]=0$ in the resulting Lie algebra, which is thus a good Lie algebra.
-\end{proof}
+This theorem follows from theorem [BLAH] in the appendix, after the observation that 
 %The functor $Q_\calW:\calW\to \vect{+}{0}$ may be written as a composite of two functors:
 %\[\calW\overset{Q_\Palg}{\to}\Lambda(\LieOperad)\textup{-mod}\overset{Q_{\LieOperad}}{\to}\vect{+}{0},\]
 %where the functor $Q_\Palg$ takes the quotient by the image of every $P$-operation. It follows from the axioms in $\calW$ that this quotient bears the structure of a (good) Lie algebra. 
-Moreover, the simplicial Lie algebra $Q_\PMonad B_\bullet X$ is an almost free simplicial Lie algebra, so that the dual homotopy of $Q_\calW B_\bullet X=Q_{\LieOperad} Q_\PMonad B_\bullet X$ is an instance of Lie algebra cohomology. [\textbf{Is this exactly true?} It doesn't matter much if not... just need to give extensive enough calculation in the appendix, and modify the text around this comment accordingly]
+the simplicial Lie algebra $Q_\PMonad B_\bullet X$ is an almost free simplicial Lie algebra, so that the dual homotopy of $Q_\calW B_\bullet X=Q_{\LieOperad} Q_\PMonad B_\bullet X$ is an instance of Lie algebra cohomology. [\textbf{Is this exactly true?} It doesn't matter much if not... just need to give extensive enough calculation in the appendix, and modify the text around this comment accordingly]
 
 By [Priddy's prim coh ops], Lie algebra cohomology has Steenrod operations and a product. However, the formulae given by Priddy (involving the $\overline{W}$-construction) are not obviously equivalent to what we have given here. However, it is not hard to check that the definition we have given using $\psi_\calW$ is equivalent to an analogous definition for Lie algebra cohomology (given in [placemarker in appendix]), and theorem [BLAH again] identifies these operations with Priddy's.
 
