@@ -11,16 +11,17 @@
 \usepackage{enumerate}
 \usepackage{mathtools}%used for mathclap
 \usepackage{dsfont}%creates \mathds{1}
-\excludeversion{comp func sseq old version}
 \newcommand{\xclude}[1]{\excludeversion{#1}} \newcommand{\nclude}[1]{\includeversion{#1}}
-%\renewcommand{\excludeversion}[1]{\includeversion{#1}}% <---------------
+\xclude{comp func sseq old version}
+\xclude{Cohomology operations for unstable Lie algebras over P}%depr
+\xclude{Unstable Lie algebras over the Lambda-algebra}%depr, with some expos
+\xclude{Cohomology operations for unstable Lie algebras over Lambda}%depr
+\renewcommand{\excludeversion}[1]{\includeversion{#1}}% <---------------
 \xclude{Contents Page}
 \xclude{Intro}
-\nclude{Conventions and notation}
+\xclude{Conventions and notation}
 \xclude{Lie algebras in characteristic 2 and their homotopy operations}
-\nclude{Cohomology operations for unstable Lie algebras over P}
-\xclude{Unstable Lie algebras over the Lambda-algebra}
-\nclude{Cohomology operations for unstable Lie algebras over Lambda}
+\nclude{Cohomology operations for all unstable Lie algebras}
 \xclude{Composite functor spectral sequences}
 \xclude{The cohomology of a trivial unstable Lie algebra over P}
 \xclude{appendices}
@@ -547,8 +548,8 @@ The composite
 is essentially $\quadratic_\calC$, in that if $v\in V_s\cap N_sX$ represents an element of $N_sQ_\calC X$, writing $d_0v=f(w_j)$ for $w_j\in V_{s-1}$, we have $\psi_\calC(v)=\quadratic_\calC(f)(w_j)\in S^2(V_{s-1})$.
 \end{lem}
 We may reproduce this result somewhat more generally:
-\begin{prop}
-Suppose that $\theta:F_\calC V\to GV$ is a natural transformation from $F_\calC$ to another endofunctor $G$ of $\vect{}{}$. Suppose further that $\theta$ satisfies the equation:
+\begin{prop}\label{general CohOpns given irreducibility}
+Suppose that $\theta:F_\calC V\to GV$ is a natural transformation from $F_\calC$ to another endofunctor $G$ of $\vect{}{}$. Suppose further that $\theta$ satisfies the condition:
 \[\theta\circ\mu_V=\theta\circ \epsilon_{F_\calC V} +\theta\circ {F_\calC \epsilon_V}:F_\calC F_\calC V\to G V.\]
 Write $\widetilde{\theta}:Q_{\calC}X_s\to G(Q_{\calC}X_{s-1})$ for the following composite, depending on the almost free structure chosen:
 \[Q_{\calC}X_s\overset{\cong}{\to} V_s\overset{d_0}{\to}F_{\calC}V_{s-1}\overset{\theta}{\to}GV_{s-1}\overset{\cong}{\to}G(Q_{\calC}X_{s-1})\]
@@ -594,7 +595,7 @@ F_\calC V_{s-2}\ar[r]^-{\theta}
 &%r2c2
 GQ_{\calC}X_{s-2}
 }\]
-Now the rightmost two squares both commute, so to show that the outer rectange commutes, it is enough to see that the two paths around the leftmost square are coequalized by $\theta:F_\calC V_{s-2}\to G V_{s-2}$. Using the simplicial identity $d_0 d_1=d_0d_0$, we are trying to show that $\theta d_0d_0+\theta d_0\epsilon d_0$ and $\theta F_{\calC}(\epsilon d_0) d_0$ are the same map from $V_s$ to $GV_{s-2}$. Even more, we will show that $\theta d_0+\theta d_0\epsilon$ and $\theta F_{\calC}(\epsilon d_0)$ are the same map $F_\calC V_{s-1}$ to $GV_{s-2}$.
+Now the rightmost two squares both commute, so to show that the outer rectangle commutes, it is enough to see that the two paths around the leftmost square are coequalized by $\theta$. Using the simplicial identity $d_0 d_1=d_0d_0$, we are trying to show that $\theta d_0d_0+\theta d_0\epsilon d_0$ and $\theta F_{\calC}(\epsilon d_0) d_0$ are the same map from $V_s$ to $GV_{s-2}$. Even more, we will show that $\theta d_0+\theta d_0\epsilon$ and $\theta F_{\calC}(\epsilon d_0)$ are the same map $F_\calC V_{s-1}$ to $GV_{s-2}$.
 
 Starting with an expression $f(v_i)$ with $v_i\in V_{s-1}$, we calculate $\theta d_0 f(v_i)=\theta (fd_0v_i)$, $\theta d_0\epsilon f(v_i)=\theta (\epsilon (f)(d_0v_i))$ and $\theta F_{\calC}(\epsilon d_0)(f(v_i))=\theta(f)(\epsilon(d_0v_i))$. That these three terms add to zero was the requirement specified for $\theta$.
 \end{proof}
@@ -904,7 +905,7 @@ Similar to the proof of lemma \ref{Kill P ops gives lie alg}, using the observat
 
 
 \subsection{Decomposition maps for $\calL(n)$ and $\calW(n)$}
-\todo{Describe the composition maps for these categories}{show the compatibility under $\calL(n)\PiAlg\cong \calW(n+1)$
+\tododone{Describe the composition maps for these categories}{show the compatibility under $\calL(n)\PiAlg\cong \calW(n+1)$
 \item show that the $j$ are \emph{quadratic decomposition maps}, if that language is still around}
 Here we'll introduce decomposition maps for the categories $\calL(n)$ and $\calW(n)$, and prove a certain compatibility between them. The definitions are simple enough, and the reader can verify that each is well defined. Choose $n\geq0$, then we define decomposition maps $\calC:Q(X\wedge Y)\to QX\otimes QY$:
 \begin{alignat*}{2}
@@ -939,14 +940,139 @@ Consider the case $\calW(n+1)$ for $n\geq1$. As $\quadratic_\calC$ vanishes exce
 which is precisely the representation of $[x,y]$ in $F^{(2)}_{\calL(n+1)}V\subseteq V^{\otimes2}$. Similarly, $\quadratic_{\calW(n+1)}(x\lambda_i)$ vanishes (as $\calU(n+1)$-operations are linear), while $\quadratic_{\calW(n+1)}(\restn{x})$ equals $x\otimes x$ as desired. The other cases, including the case of $\calW(0)$, are barely any different.
 \end{proof}
 
-
-
-
-
-
-
-
 \end{Lie algebras in characteristic 2 and their homotopy operations}
+
+
+\begin{Cohomology operations for all unstable Lie algebras}
+\vfil\pagebreak
+\section{Cohomology operations for $\calW(n)$ and $\calU(n)$}\label{Koszul delta opns new}
+
+%\subsection{Cohomology for objects of $\calW$}
+\tododone{Define $Q^\calW:\calW\to \vect{+}{0}$, and thus the cohomology functor on $\calW$}{Give the bar construction $B_\bullet^{\calW}$
+\item Explain significance as Adams $E^2$}
+%We will use the standard simplicial bar construction as our simplicial resolution of $X\in\calW$, writing $B^\calW_sX=U^{s+1}X$. Then the cohomology of $X$, $H^{s}_t(X)\in\vect{1}{+}$, is the cohomology of the cochain complex
+%\[C^{s}_{t}=\Hom(N_s(Q_\calW B_{\bullet}X)^{t},\F_2).\]
+%We'll frequently use the identification $Q_\calW B_{s}X=U^{s}X$.
+
+
+\subsection{$\delta$ operations on $H^*_{\calW(0)}$ and $H^*_{\calU(0)}$}
+\tododone{Define the operations $\gamma^i$, state and define the $\delta_i$ operations}{still need to clarify the end of the proof of the relations.}
+For $V\in \vect{+}{0}$, we will define natural homomorphisms
+\[\theta_i:(F_{\calW(0)}V)^{n+i+1}\to V^{n}, \textup{ for $2\leq i<n$}.\]
+Indeed, there are natural homomorphisms into the quadratic grading 2 part of $F_{\calW(0)}V$:
+\begin{align*}
+P^i:V^{n}&\to F_{\calW(0)}^{(2)}V^{n+i+1}, \textup{\quad  for $2\leq i<n$}\\
+[\,,]:(S_2V)^{n}&\to F_{\calW(0)}^{(2)}V^{n+1},
+\end{align*}
+and for given $m\geq1$, the degree $m$, quadratic grading 2 part $F_{\calW(0)}^{(2)}V^m$ decomposes as
+%\[UV^{m,(2)}=\left(\bigoplus_{n_1+n_2=m-1}\im ([\,,]_{n_1,n_2})\right) \oplus\left(\bigoplus_{2\leq i< (m-1)/2}\im (P^i_{m-i-1})\right)\]
+%
+\[F_{\calW(0)}^{(2)}V^{m}=%\left(\bigoplus_{n_1+n_2=m-1}
+\im \bigl((S_2V)^{m-1}\overset{[,]}{\to} F_{\calW(0)}^{(2)}V\bigr)%\right) 
+\oplus\bigoplus_{\!\!\!\!\!\!2\leq i< (m-1)/2\!\!\!\!\!\!}\im \bigl(V^{m-i-1}\overset{P^i}{\to}F_{\calW(0)}^{(2)}V\bigr).\]
+Moreover, each map $P^i:V^n\to F_{\calW(0)}^{(2)}V^{n+i+1}$ appearing in this decomposition is an isomorphism onto its image, so that for $2\leq i <n$ we may construct $\theta_i$ as the composite
+\[\theta_i:\left((F_{\calW(0)}V)^{n+i+1}\overset{\textup{proj}}{\makebox[.06ex][l]{$\to$}\to} (F_{\calW(0)}^{(2)}V)^{n+i+1}\overset{\textup{proj}}{\makebox[.06ex][l]{$\to$}\to} \im (P^i)\overset{(P^i)^{-1}}{\to}V^{n}\right).\]
+Here we have projected onto the quadratic filtration 2 part, and then further onto the relevant summand in its natural decomposition. Note that although $P^n:V^n\to F_{\calW(0)}^{(2)}V^{2n+1}$ is a nontrivial linear map when $n\geq2$, its image is entangled with the image of the bracket, and we are not able to split it off. Thus we are not able to improve on the bounds $2\leq i< n$.
+
+Now for any $X\in s\calW(0)$, the bar construction $Q_{\calW(0)}B_\bullet^{\calW(0)}X$, whose cohomotopy is $H^*_{\calW(0)}X$, has a natural almost free structure. Thus the following proposition induces natural $\calW(0)$-cohomology operations:
+%Now suppose that $X\in\calW(0)$, and consider the bar construction $Q_{\calW(0)}B_\bullet^{\calW(0)}X$ whose cohomotopy is $H^*_{\calW(0)}X$. Until the end of \S\ref{Koszul delta opns new}, we'll write $Q\mathbb{B}_\bullet$ for this simplicial object, write $F$ for $F_{\calW(0)}$, and identify $Q\mathbb{B}_s$ with $F^sX$.
+\begin{prop}
+Suppose that $X\in s\calW(0)$ is almost free. Then for $2\leq i <t$, the chain map $\widetilde{\theta_i}$ of [above] induces a linear operation
+\[\delta_i:(H^*_{\calW(0)}X)^{s}_t\to (H^*_{\calW(0)}X)^{s+1}_{t+i+1}.\] 
+These operations are natural in maps preserving the generating subspaces, and satisfy the $\delta$-Adem relation of [Dwyer].
+\end{prop}
+\begin{proof}
+The conditions of proposition \ref{general CohOpns given irreducibility} are satisfied when $\theta=\theta_i$ and $G$ the identity functor. It just remains to prove the $\delta$-Adem relations, which we will do using the technique of [priddy], the point being that the algebra of $\delta$-operations is Koszul dual to $\Palg$. For this, we define a map $\theta_{ij}$, whenever $i<2j$, $2\leq j<t$ and $2\leq i<t+j+1$:
+\[\theta_{ij}:\left((F_{\calW(0)}V)^{n+i+j+2}\overset{\textup{proj}}{\makebox[.06ex][l]{$\to$}\to} (F_{\calW(0)}^{(4)}V)^{n+i+j+2}\overset{\textup{proj}}{\makebox[.06ex][l]{$\to$}\to} \im (P^{i,j})\overset{(P^{i,j})^{-1}}{\to}V^{n}\right),\]
+where we have split off the image of 
+$P^{i,j}=P^iP^j$ %:V^n\to (F_{\calW(0)}^{(4)}V)^{n+i+j+2}\]
+as before, which is possible, since neither $P^j$ nor $P^i$ are entangled with the bracket in these ranges. We may identify $Q_{\calW(0)}X_s$ with $V_s$, at the cost of replacing $d_0$ with $\epsilon\circ d_0$. \textbf{more general note about this somewhere?} Now define $\widetilde{\theta_{ij}}$ to be the composite $V_{s+1}\overset{d_0}{\to}FV_s\overset{\theta_{ij}}{\to}V_s$. This will be the nullhomotopy giving the $\delta$-Adem relation. It'll feel easier to think of it as a nullhomotopy of the un-normalized complex. As in the proof of [], we have $d_k\circ\widetilde{\theta_{ij}}=\widetilde{\theta_{ij}}\circ d_{k+1}$ for $k\geq1$, so its nullhomotopy is the sum \[\epsilon d_0\widetilde{\theta_{ij}}+\widetilde{\theta_{ij}}(\epsilon d_0+d_1)=(\epsilon d_0\theta_{ij}+\theta_{ij}d_0\epsilon+\theta_{ij}d_0)d_0,\]
+using the simplicial identity $d_0d_1=d_0d_0$, and the $\delta$-Adem relation we desire will follow from an identity
+\[\theta_{ij}d_0=\Bigl(\epsilon d_0\theta_{ij}+\theta_{ij}d_0\epsilon+\sum\theta_\beta d_0\theta_\alpha\Bigr):FV_{s+1}\to V_s,\]
+where the sum is taken over al the combinations of $\alpha,\beta\geq2$ such that $P^{i,j}$ appears when $P^\alpha P^\beta$ is written in the $P$-admissible basis. This shows that the nullhomotopy proposed equals the sum of the maps $\widetilde{\theta_\beta}\circ\widetilde{\theta_\alpha}$, and as the $P$-algebra is Koszul dual to the algebra of $\delta$-operations [Goerss somewhere], the result is proven.
+\end{proof}
+The same constructions work in the category $s\calU(0)$, the only difference being that when we define $\theta_i$, we needn't worry about brackets, and we can define a map
+\[\theta_i:F_{\calU(0)}V^{t+i+1}\to V^t\]
+whenever $2\leq i\leq t$. Correspondingly, there is one more operation available:
+\begin{prop}
+Suppose that $X\in s\calU(0)$ is almost free. Then for $2\leq i \leq t$, the chain map $\widetilde{\theta_i}$ of [above] induces a linear operation
+\[\delta_i:(H^*_{\calU(0)}X)^{s}_t\to (H^*_{\calU(0)}X)^{s+1}_{t+i+1}.\] 
+These operations are natural in maps preserving the generating subspaces, and satisfy the $\delta$-Adem relation of [Dwyer].
+\end{prop}
+\begin{shaded}
+Note that the forgetful functor $\calW(0)\to\calU(0)$ does not preserve almost free simplicial objects! However, it does preserve levelwise free simplicial objects, which create the right homology groups (see PRLieAlgs.tex). Thus there's a disconnect in the number of available operations on the Adams $E^2$ and on the first Koszul resolution.
+\end{shaded}
+
+\subsection{Vertical Steenrod operations for $H^*_{\calW(n)}$ and $H^*_{\calU(n)}$ when $n\geq1$}\label{section: vertical Koszul operations n positive}
+For $V\in \vect{+}{n}$, we will define natural homomorphisms
+\[\theta^i:(F_{\calW(n)}V)^{2t+1}_{s_n+i-1,2s_{n-1},\ldots,2s_1}\to V^{t}_{s_n,\ldots,s_1},\]
+whenever $1\leq i \leq s_n$ and not all of $i-1,s_{n-1},\ldots,s_1$ are zero.
+{\tiny Meh: These are rather easier to define than in the $n=0$ case above, as the monad $F_{\calW(n)}$ is a simple composite of monads.}
+Indeed, there are natural monomorphisms
+\[(\DASH)\lambda_{i-1}:V^{t}_{s_n,\ldots,s_1}\to (F_{\calW(n)}V)^{2t+1,(2)}_{s_n+i-1,2s_{n-1},\ldots,2s_1}\]
+defined whenever $1\leq i\leq n$ and $i-1,s_{n-1},\ldots,s_1$ are not all zero, and an inclusion
+\[\textup{incl}:(F_{\calL(n)}V)^{*,(2)}\to F_{\calW(n)}V^{*,(2)}.\]
+As in the $n=0$ case, the images of the listed maps are linearly independent and span the quadratic grading 2 part of $F_{\calW(n)}V^*$. We define $\theta^i$ as before --- project onto the quadratic grading 2 part, then further onto the summand corresponding to the image of $\lambda_{i-1}$, and finally use the inverse of the map $\lambda_{i-1}$:
+\[\theta^i:\left((F_{\calW(n)}V)^{2t+1}_{s_n+i-1,2s_{n-1},\ldots,2s_1}\overset{\textup{proj}\circ\textup{proj}}{\makebox[.06ex][l]{$\to$}\to} \im (\lambda_{i-1})\overset{(\lambda_{i-1})^{-1}}{\to}V^{t}_{s_{n,\ldots,s_1}}\right).\]
+One can give exactly the same definitions for the free construction in $\calU(n)$.
+\begin{prop}
+Suppose that $n\geq1$ and write $\calC$ for either $\calW(n)$ or $\calU(n)$. Suppose that $X\in s\calC$ is almost free. If $1\leq i \leq s_n$ and not all of $i-1,s_{n-1},\ldots,s_1$ are zero, the chain map $\widetilde{\theta^{\smash{i}}}$ of [above] induces a linear operation
+\[\Sq_\textup{v}^i:(H^*_{\calC}X)^{s_{n+1},\ldots,s_1}_t\to (H^*_{\calC}X)^{s_{n+1}+1,s_n+i-1,2s_{n-1},\ldots,2s_1}_{2t+1}\] 
+These operations are natural in maps preserving the generating subspaces, and satisfy the $\Sq$-Adem relation for Steenrod operations of [where??].
+\end{prop}
+\textbf{give some discussion.} Point out that the nullhomotopy is unstable.
+
+\subsection{Horizontal Steenrod operations and a product for $H^*_{\calW(n)}$}
+For any $n\geq 0$, we'll construct operations on the homology $H^*_{\calW(n)}$ arising from the Lie structure.
+
+Indeed, suppose that $X\in s\calW(n)$ is almost free. Then $Q_{\calU(n)}X\in s\calL(n)$ is also almost free, on essentially the same generating subspaces. Thus, the cohomotopy of $Q_{\calW(n)}X=Q_{\calL(n)}Q_{\calU(n)}X$ is an instance of simplicial partially restricted Lie algebra cohomology. Cohomology operations of this type are discussed in appendix ???. In the present context, we have two equivalent definitions, one using $\psi_{\calL(n)}$ and one using $\psi_{\calW(n)}$. Until the appendix, we will use $\psi_{\calW(n)}$.
+
+That is, we define
+\begin{gather*}
+\mu:\left(H_{\calW(n)}^{n_1}(X)\otimes H_{\calW(n)}^{n_2}(X)\overset{\ExtCohProd}{\to} \pi^{n_1+n_2}((S^2(QX))^*)\overset{\psi_{\calW(n)}^*}{\to} H_{\calW(n)}^{n_1+n_2+1}(X)\right),\\
+\Sq^k_\textup{h}:\left(H_{\calW(n)}^{n}(X)\overset{\ExtCohOp^{k-1}}{\to} \pi^{n+k-1}((S^2(QX))^*)\overset{\psi_{\calW(n)}^*}{\to} H_{\calW(n)}^{n+k}(X)\right).
+\end{gather*}
+Being more explicit with gradings:
+\textbf{Stick in the precise operations here.}
+
+\begin{thm}
+These operations satisfy the Axioms *write them out*.
+\end{thm}
+\begin{prop}\tiny
+There are natural homomorphisms
+$\Sq^j:H_t^{s}X\to H_{2t+1}^{s+j}X$,
+zero unless $3\leq j\leq s+1$, and satisfying the Adem relations for the Steenrod algebra. There is a natural nonunital commutative algebra pairing
+$H_t^{s}X\otimes H_{t'}^{s'}X\to H_{t+t'+1}^{s+s'+1}X.$
+These satisfy an unstableness condition:
+$x^2=\Sq^{s+1}x\text{ for }x\in H^{s}_tX$
+and the standard Cartan formula:
+$\Sq^k(xy)=\sum_{i=0}^k(\Sq^ix)(\Sq^{k-i}y)$.
+\end{prop}
+\begin{proof}
+This theorem follows from theorem [BLAH] in the appendix.
+\end{proof}
+\subsection{Relations between the horizontal and vertical operations}
+\textbf{Write me.} Do a Steenrod or product operation, and then a $\delta_i$, and you're using the composite of this map with
+\[Q_\calW U^{s+3}X=U^{s+2}X\to U^{s+1}X=Q_\calW U^{s+2}X\]
+which all boils down to
+\[P^i_{(s+2)}f_{(s+1)}g\mapsto q^{\calL}(f)(g)\]
+Anyway, I have a nullhomotopy of this map, which might be called $((P^i)^{-1}q^{\calL})$, and is stuck on the wall in the upper right corner.
+
+
+
+\end{Cohomology operations for all unstable Lie algebras}
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -2129,6 +2255,8 @@ There may be a wrinkle here answering the well definedness vs vanishing question
 \section{On Lie algebra cohomology operations}
 \todo{Recall Priddy's definition of Lie algebra cohomology, and results}{Explain that they don't calculate everything for us already, since the actual simplicial Lie algebras we're looking at are not GEMs --- their homotopy supports nontrivial operations.}
 \todo{Modify Priddy's spectral sequence argument to identify his operations with ours}{uses Singer's work}
+\textbf{Old spiel from definition of operations on $H^*_{\calW(n)}$}
+By [Priddy's prim coh ops], Lie algebra cohomology has Steenrod operations and a product. However, the formulae given by Priddy (involving the $\overline{W}$-construction) are not obviously equivalent to what we have given here. However, it is not hard to check that the definition we have given using $\psi_\calW$ is equivalent to an analogous definition for Lie algebra cohomology (given in [placemarker in appendix]), and theorem [BLAH again] identifies these operations with Priddy's.
 
 
 
