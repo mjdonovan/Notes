@@ -16,6 +16,7 @@
 \xclude{Cohomology operations for unstable Lie algebras over P}%depr
 \xclude{Unstable Lie algebras over the Lambda-algebra}%depr, with some expos
 \xclude{Cohomology operations for unstable Lie algebras over Lambda}%depr
+\xclude{todolist}
 %\renewcommand{\excludeversion}[1]{\includeversion{#1}}% <---------------
 \xclude{Contents Page}
 \xclude{Intro}
@@ -25,9 +26,9 @@
 \xclude{Composite functor spectral sequences}
 \xclude{tricky proofs of operation compatibilities}
 \nclude{Koszul complexes}
-\nclude{The cohomology of a trivial unstable Lie algebra over P}
+\xclude{The cohomology of a trivial unstable Lie algebra over P}
 \xclude{appendices}
-\xclude{todolist}
+
 
 
 \usepackage[bookmarks=false,pdftex,pdfborder={0 0 0 [1 1]}]{hyperref}
@@ -293,6 +294,7 @@ url=false,doi=false,isbn=false,eprint=false]{biblatex}%
 \newcommand{\PMonad}{{\calP^\textup{u}}}
 \newcommand{\LambdaMonad}{\Lambda^\textup{u}}
 \newcommand{\Palg}{{\calP}}
+\newcommand{\deltaalg}{\Delta} %change me
 \newcommand{\LieOperad}{{\scrL}}
 \newcommand{\restn}[1]{#1^{[2]}}
 \newcommand{\restnRepeated}[2]{#1^{[2^{#2}]}}
@@ -307,7 +309,11 @@ url=false,doi=false,isbn=false,eprint=false]{biblatex}%
 \newcommand{\hExtCohOp}{\textup{Op}_\textup{h,ext}}
 \newcommand{\ExtCohProd}{\mu_\textup{ext}}
 \newcommand{\epi}{{\,\makebox[0cm][l]{\ensuremath\to}\to}}
-
+\newcommand{\minDimP}{\overline{m}}
+\newcommand{\minDimSq}{\underline{m}}
+\newcommand{\produces}[3]{#3:#1\sim #2}
+\renewcommand{\produces}[3]{#1\rightarrow_{#3} #2}%{J}{I}{P}
+\renewcommand{\produces}[3]{#1\overset{\smash{#3}}{\rightarrow} #2}%{J}{I}{P}
 
 \newcommand{\NOFULLPAGE}{\relax}
 
@@ -981,26 +987,35 @@ Now for any $X\in s\calW(0)$, the bar construction $Q^{\calW(0)}B^{\calW(0)}X$, 
 \begin{prop}\label{operations on goerss homology}
 Suppose that $X\in s\calW(0)$ is almost free. Then for $2\leq i <t$, the chain map $\widetilde{\theta_i}$ of [above] induces a linear operation
 \[\delta_i:(H^*_{\calW(0)}X)^{s}_t\to (H^*_{\calW(0)}X)^{s+1}_{t+i+1}.\] 
-These operations are natural in maps preserving the generating subspaces, and satisfy the $\delta$-Adem relation of [Dwyer].
+These operations are natural in maps preserving the generating subspaces, and satisfy the $\deltaalg$-Adem relation of [Dwyer].
 \end{prop}
 \begin{proof}
-The conditions of proposition \ref{general CohOpns given irreducibility} are satisfied when $\theta=\theta_i$ and $G$ the identity functor. It just remains to prove the $\delta$-Adem relations, which we will do using the technique of [priddy], the point being that the algebra of $\delta$-operations is Koszul dual to $\Palg$. For this, we define a map $\theta_{ij}$, whenever $i<2j$, $2\leq j<t$ and $2\leq i<t+j+1$:
+The conditions of proposition \ref{general CohOpns given irreducibility} are satisfied when $\theta=\theta_i$ and $G$ the identity functor. It just remains to prove the $\deltaalg$-Adem relations, which we will do using the technique of [priddy], the point being that the algebra of $\delta$-operations is Koszul dual to $\Palg$. For this, we define a map $\theta_{ij}$, whenever $i<2j$, $2\leq j<t$ and $2\leq i<t+j+1$:
 \[\theta_{ij}:\left((F_{\calW(0)}V)^{n+i+j+2}\overset{\textup{proj}}{\makebox[.06ex][l]{$\to$}\to} (F_{\calW(0)}^{(4)}V)^{n+i+j+2}\overset{\textup{proj}}{\makebox[.06ex][l]{$\to$}\to} \im (P^{i,j})\overset{(P^{i,j})^{-1}}{\to}V^{n}\right),\]
 where we have split off the image of 
 $P^{i,j}=P^iP^j$ %:V^n\to (F_{\calW(0)}^{(4)}V)^{n+i+j+2}\]
-as before, which is possible, since neither $P^j$ nor $P^i$ are entangled with the bracket in these ranges. We may identify $Q^{\calW(0)}X_s$ with $V_s$, at the cost of replacing $d_0$ with $\epsilon\circ d_0$. \textbf{more general note about this somewhere?} Now define $\widetilde{\theta_{ij}}$ to be the composite $V_{s+1}\overset{d_0}{\to}FV_s\overset{\theta_{ij}}{\to}V_s$. This will be the nullhomotopy giving the $\delta$-Adem relation. It'll feel easier to think of it as a nullhomotopy of the un-normalized complex. As in the proof of [], we have $d_k\circ\widetilde{\theta_{ij}}=\widetilde{\theta_{ij}}\circ d_{k+1}$ for $k\geq1$, so its nullhomotopy is the sum \[\epsilon d_0\widetilde{\theta_{ij}}+\widetilde{\theta_{ij}}(\epsilon d_0+d_1)=(\epsilon d_0\theta_{ij}+\theta_{ij}d_0\epsilon+\theta_{ij}d_0)d_0,\]
-using the simplicial identity $d_0d_1=d_0d_0$, and the $\delta$-Adem relation we desire will follow from an identity
+as before, which is possible, since neither $P^j$ nor $P^i$ are entangled with the bracket in these ranges. We may identify $Q^{\calW(0)}X_s$ with $V_s$, at the cost of replacing $d_0$ with $\epsilon\circ d_0$. \textbf{more general note about this somewhere?} Now define $\widetilde{\theta_{ij}}$ to be the composite $V_{s+1}\overset{d_0}{\to}FV_s\overset{\theta_{ij}}{\to}V_s$. This will be the nullhomotopy giving the $\deltaalg$-Adem relation. It'll feel easier to think of it as a nullhomotopy of the un-normalized complex. As in the proof of [], we have $d_k\circ\widetilde{\theta_{ij}}=\widetilde{\theta_{ij}}\circ d_{k+1}$ for $k\geq1$, so its nullhomotopy is the sum \[\epsilon d_0\widetilde{\theta_{ij}}+\widetilde{\theta_{ij}}(\epsilon d_0+d_1)=(\epsilon d_0\theta_{ij}+\theta_{ij}d_0\epsilon+\theta_{ij}d_0)d_0,\]
+using the simplicial identity $d_0d_1=d_0d_0$, and the $\deltaalg$-Adem relation we desire will follow from an identity
 \[\theta_{ij}d_0=\Bigl(\epsilon d_0\theta_{ij}+\theta_{ij}d_0\epsilon+\sum\theta_\beta d_0\theta_\alpha\Bigr):FV_{s+1}\to V_s,\]
 where the sum is taken over al the combinations of $\alpha,\beta\geq2$ such that $P^{i,j}$ appears when $P^\alpha P^\beta$ is written in the $P$-admissible basis. This shows that the nullhomotopy proposed equals the sum of the maps $\widetilde{\theta_\beta}\circ\widetilde{\theta_\alpha}$, and as the $P$-algebra is Koszul dual to the algebra of $\delta$-operations [Goerss somewhere], the result is proven.
 \end{proof}
 The same constructions work in the category $s\calU(0)$, the only difference being that when we define $\theta_i$, we needn't worry about brackets, and we can define a map
 \[\theta_i:F_{\calU(0)}V^{t+i+1}\to V^t\]
-whenever $2\leq i\leq t$. Correspondingly, there is one more operation available:
+whenever $2\leq i\leq t$, so that there is one more operation available on $H^*_{\calU(0)}$ than on $H^*_{\calW(0)}$. It will be useful to encode this structure in a definition. Write $\calM(1)$ for the algebraic category whose objects are vectorspaces $M\in\vect{1}{+}$ with left $\delta$-operations
+\[\delta_i:M^{s}_t\to M^{s+1}_{t+i+1},\textup{ defined whenever $2\leq i\leq t$,}\]
+satisfying the $\deltaalg$-Adem relations of [Dwyer].
 \begin{prop}\label{operations on untable P homology}
-Suppose that $X\in s\calU(0)$ is almost free. Then for $2\leq i \leq t$, the chain map $\widetilde{\theta_i}$ of [above] induces a linear operation
-\[\delta_i:(H^*_{\calU(0)}X)^{s}_t\to (H^*_{\calU(0)}X)^{s+1}_{t+i+1}.\] 
-These operations are natural in maps preserving the generating subspaces, and satisfy the $\delta$-Adem relation of [Dwyer].
+Suppose that $X\in s\calU(0)$ is almost free. Then the chain maps $\widetilde{\theta_i}$ of [above] give $H^*_{\calU(0)}X$ the structure of an object of $\calM(1)$, natural in maps preserving the generating subspaces.
 \end{prop}
+In order to give a basis for a free object in $\calM(1)$, for a sequence $I=(i_\ell,\ldots,i_1)$ of integers $i_j\geq2$, we define
+\[\minDimP(I):=\max\{(i_1),\,(i_2-i_1-1),\,(i_3-i_2-i_1-2),\,\ldots,\,(i_{\ell}-\cdots-i_1-\ell+1)\},
+\]
+following the convention that $\max(\emptyset)=-\infty$. Moreover, say that the sequence is \emph{$\delta$-admissible} if each $i_j\geq2$ and  $i_{j+1}\geq 2i_j$ for $1\leq j <\ell$.
+\begin{lem}\label{basis of element of M(0)}
+%For $V\in\vect{1}{+}$ with homogeneous basis $B$, a basis of $F_{\calM(1)}V$ consists of the classes $\delta_Ib$ where $b\in B\cap V^s_t$ is a basis element and $I$ is a $\delta$-admissible sequence with $t\geq\minDimP(I)$.
+For $V\in\vect{1}{+}$ with homogeneous basis $B$, a basis of $F_{\calM(1)}V$ consists of
+\[\left\{\delta_Ib\ \middle|\ b\in B^{s}_t\textup{, $I$ $\delta$-admissible with }\minDimP(I)\leq t\right\}.\]
+\end{lem}
 \begin{shaded}
 Note that the forgetful functor $\calW(0)\to\calU(0)$ does not preserve almost free simplicial objects! However, it does preserve levelwise free simplicial objects, which create the right homology groups (see PRLieAlgs.tex). Thus there's a disconnect in the number of available operations on the Adams $E^2$ and on the first Koszul resolution.
 \end{shaded}
@@ -1016,13 +1031,26 @@ defined whenever $1\leq i\leq n$ and $i-1,s_{n-1},\ldots,s_1$ are not all zero, 
 \[\textup{incl}:(F_{\calL(n)}V)^{*,(2)}\to F_{\calW(n)}V^{*,(2)}.\]
 As in the $n=0$ case, the images of the listed maps are linearly independent and span the quadratic grading 2 part of $F_{\calW(n)}V^*$. We define $\theta^i$ as before --- project onto the quadratic grading 2 part, then further onto the summand corresponding to the image of $\lambda_{i-1}$, and finally use the inverse of the map $\lambda_{i-1}$:
 \[\theta^i:\left((F_{\calW(n)}V)^{2t+1}_{s_n+i-1,2s_{n-1},\ldots,2s_1}\overset{\textup{proj}\circ\textup{proj}}{\makebox[.06ex][l]{$\to$}\to} \im (\lambda_{i-1})\overset{(\lambda_{i-1})^{-1}}{\to}V^{t}_{s_{n,\ldots,s_1}}\right).\]
-One can give exactly the same definitions for the free construction in $\calU(n)$.
+One can give exactly the same definitions for the free construction in $\calU(n)$, and in this case there will be no difference in the number of definable operations (\textbf{really we want to say \emph{nonzero} operations}, although the degree shift here in $s_n$ is confusing. Is it significant?). 
+As before, write $\calM(n+1)$ for the algebraic category whose objects are vectorspaces $M\in\vect{n+1}{+}$ with left Steenrod operations
+\[\Sq_\textup{v}^i:M^{s_{n+1},\ldots,s_1}_t\to M^{s_{n+1}+1,s_n+i-1,2s_{n-1},\ldots,2s_1}_{2t+1},\]
+which are only \textbf{nonzero/defined} when $1\leq i \leq s_n$ and not all of $i-1,s_{n-1},\ldots,s_1$ are zero, and
+satisfy the $\Sq$-Adem relations of [wherever-Priddy?].
 \begin{prop}\label{vertical steenrod operations prop}
-Suppose that $n\geq1$ and write $\calC$ for either $\calW(n)$ or $\calU(n)$. Suppose that $X\in s\calC$ is almost free. If $1\leq i \leq s_n$ and not all of $i-1,s_{n-1},\ldots,s_1$ are zero, the chain map $\widetilde{\theta^{\smash{i}}}$ of [above] induces a linear operation
-\[\Sq_\textup{v}^i:(H^*_{\calC}X)^{s_{n+1},\ldots,s_1}_t\to (H^*_{\calC}X)^{s_{n+1}+1,s_n+i-1,2s_{n-1},\ldots,2s_1}_{2t+1}\] 
-These operations are natural in maps preserving the generating subspaces, and satisfy the $\Sq$-Adem relation for Steenrod operations of [where??].
+Suppose that $X\in s\calC$ is almost free, where $\calC$ stands for either $\calW(n)$ or $\calU(n)$ with $n\geq1$. Then the chain maps $\widetilde{\theta^i}$ of [above] give $H^*_{\calC}X$ the structure of an object of $\calM(n+1)$, natural in maps preserving the generating subspaces.
 \end{prop}
 \textbf{give some discussion.} Point out that the nullhomotopy is unstable.
+
+In order to give a basis for a free object in $\calM(n+1)$, for a sequence $I=(i_\ell,\ldots,i_1)$ of integers $i_j\geq1$, we define
+\[\minDimSq(I):=\max\{(i_1),\,(i_2-i_1+1),\,(i_3-i_2-i_1+2),\,\ldots,\,(i_{\ell}-\cdots-i_1+(\ell-1))\},
+\]
+and say that $I$ is \emph{$\Sq$-admissible} if each $i_j\geq1$ and $i_{j+1}\geq 2i_j$ for $1\leq j <\ell$.
+\begin{lem}
+For $V\in\vect{n+1}{+}$ with homogeneous basis $B$, a basis of $F_{\calM(n+1)}V$ consists of
+\[\left\{\Sq^J_{\textup{v}}b\ \middle|\ \genfrac{}{}{0pt}{}{B^{s_{n+1},\ldots,s_1}_t\textup{, $J$ $\Sq$-admissible with }\minDimSq(J)\leq s_n,}{\textup{if }s_{n}\!=\!\cdots\!=\!s_1\!=\!0\textup{ then $J$ doesn't contain 0}}\right\}.\]
+
+
+\end{lem}
 
 \subsection{Horizontal Steenrod operations and a product for $H^*_{\calW(n)}$}
 For any $n\geq 0$, we'll construct operations on the homology $H^*_{\calW(n)}$ arising from the Lie structure.
@@ -1387,7 +1415,7 @@ Say `it follows as in the $n=0$ case'
 \begin{Composite functor spectral sequences}
 \vfil\pagebreak
 \section{Composite functor spectral sequences}
-The subject of this paper is to identify the derived functors $H^*_{\calW(0)}X:=(\mathbb{L}_*Q^{\calW(0)}X)^*$, for $X\in\calW(0)$. More generally, we'll now present a spectral sequence whose goal is to calculate $H^*_{\calW(n)}X$ for $X\in\calW(n)$. This will a composite functor spectral sequence analogous to Miller's spectral sequence in []. The factorization of $Q^{\calW(n)}$ we will use is of course 
+The subject of this paper is to identify the derived functors $H^*_{\calW(0)}X:=(\mathbb{L}_*Q^{\calW(0)}X)^*$, for $X\in\calW(0)$. More generally, we'll now present a spectral sequence whose goal is to calculate $H^*_{\calW(n)}X$ for $X\in\calW(n)$. This will be a composite functor spectral sequence analogous to Miller's spectral sequence in []. The factorization of $Q^{\calW(n)}$ we will use is of course 
 \[Q^{\calW(n)}=\left(\calW(n)\overset{Q^{\calU(n)}}{\to}\calL(n)\overset{Q^{\calL(n)}}{\to}\vect{+}{n}\right)\]
 There is an added challenge in this context --- indeed, the available factorization of $Q^{\calW(n)}$ is through a non-abelian category. Thus, the standard technology for composite functor spectral sequences does not apply, and we must use Blanc and Stover's methods []. They observe that the left derived functors $\mathbb{L}_*Q^{\calU(n)}X$ are calculated as the homotopy groups of a simplicial object in $\calL(n)$, namely $Q^{\calU(n)}B^{\calW(n)}X$. As such, they have the structure of a $\calL(n)\textup{-$\Pi$-algebra}$, i.e.\ they form an object of $\calW(n+1)$.  After verifying that the functor $Q^{\calU(n)}$ satisfies the requisite acyclicity condition (indeed it preserves free objects), one may apply [relevant BS theorem]: there is a spectral sequence, with $E_r\in\vect{+}{n+2}$,
 \[(E^2)_{s_{n+2},\ldots,s_1}^t=((H_*^{\calW(n+1)})(\mathbb{L}_*Q^{\calU(n)})X)_{s_{n+2},\ldots,s_1}^t\implies ((H_*^{\calW(n)})X)_{s_{n+2}+s_{n+1},s_n,\ldots,s_1}^t\]
@@ -2268,33 +2296,77 @@ N_*N_*(S^2(Q^{\calL(n)}B^\BSW_{\bullet}L))^{t-1}_{s_{n+2}-1,s_{n+1},\ldots,s_1}.
 
 \end{comp func sseq old version}
 \begin{Koszul complexes}
-\begin{prop}\label{vertical steenrod operations prop}
-Suppose that $n\geq1$ and write $\calC$ for either $\calW(n)$ or $\calU(n)$. Suppose that $X\in s\calC$ is almost free. If $1\leq i \leq s_n$ and not all of $i-1,s_{n-1},\ldots,s_1$ are zero, the chain map $\widetilde{\theta^{\smash{i}}}$ of [above] induces a linear operation
-\[\Sq_\textup{v}^i:(H^*_{\calC}X)^{s_{n+1},\ldots,s_1}_t\to (H^*_{\calC}X)^{s_{n+1}+1,s_n+i-1,2s_{n-1},\ldots,2s_1}_{2t+1}\] 
-These operations are natural in maps preserving the generating subspaces, and satisfy the $\Sq$-Adem relation for Steenrod operations of [where??].
-\end{prop}
-\begin{prop}\label{operations on untable P homology}
-Suppose that $X\in s\calU(0)$ is almost free. Then for $2\leq i \leq t$, the chain map $\widetilde{\theta_i}$ of [above] induces a linear operation
-\[\delta_i:(H^*_{\calU(0)}X)^{s}_t\to (H^*_{\calU(0)}X)^{s+1}_{t+i+1}.\] 
-These operations are natural in maps preserving the generating subspaces, and satisfy the $\delta$-Adem relation of [Dwyer].
-\end{prop}
+%\begin{prop}\label{vertical steenrod operations prop}
+%Suppose that $n\geq1$ and write $\calC$ for either $\calW(n)$ or $\calU(n)$. Suppose that $X\in s\calC$ is almost free. If $1\leq i \leq s_n$ and not all of $i-1,s_{n-1},\ldots,s_1$ are zero, the chain map $\widetilde{\theta^{\smash{i}}}$ of [above] induces a linear operation
+%\[\Sq_\textup{v}^i:(H^*_{\calC}X)^{s_{n+1},\ldots,s_1}_t\to (H^*_{\calC}X)^{s_{n+1}+1,s_n+i-1,2s_{n-1},\ldots,2s_1}_{2t+1}\] 
+%These operations are natural in maps preserving the generating subspaces, and satisfy the $\Sq$-Adem relation for Steenrod operations of [where??].
+%\end{prop}
+%\begin{prop}\label{operations on untable P homology}
+%Suppose that $X\in s\calU(0)$ is almost free. Then for $2\leq i \leq t$, the chain map $\widetilde{\theta_i}$ of [above] induces a linear operation
+%\[\delta_i:(H^*_{\calU(0)}X)^{s}_t\to (H^*_{\calU(0)}X)^{s+1}_{t+i+1}.\] 
+%These operations are natural in maps preserving the generating subspaces, and satisfy the $\deltaalg$-Adem relation of [Dwyer].
+%\end{prop}
 
 
 
 \section{Koszul complexes calculating $H_*^{\calU(n)}$}
-In this section we'll discuss the Koszul resolutions that one may use to calculate $H_*^{\calU(n)}X$ for $X$ a (non-simplicial) object of $\calU(n)$ or $\calW(n)$, using Priddy's technique [Priddy, Unstable lambda-algebra thing]. Write $N_*$ for the chain complex $N_*(Q^{\calU(n)}B^{\calU(n)}X)$, thought of as a subcomplex of the unnormalized complex. There is an increasing filtration on $N_*$, the length filtration, with $F_\ell N_s$ generated by those terms in which there are at most $\ell$ generators appearing in the $s$ free constructions in $N_s\subseteq Q^{\calU(n)}B^{\calU(n)}_sX\cong (F^{\calU(n)})^sX$.
+In this section we'll discuss the Koszul resolutions that one may use to calculate $H_*^{\calU(n)}X$ for $X$ a (non-simplicial) locally finite object of $\calU(n)$ or $\calW(n)$, using Priddy's technique [Priddy, Unstable lambda-algebra thing].
+\subsection{Some homogeneous Koszul algebras}
+\todo{introduce the four algebras}{discuss their uses: Lie/comm cohomology and homotopy
+\item give their admissible bases and admissibility conditions
+\item give their unstable stuff?
+\item \textbf{move this all to the first chapter?}}
+
+\subsection{The (co-)Koszul complex}
+
+Write $N_*$ for the chain complex $N_*(Q^{\calU(n)}B^{\calU(n)}X)$, thought of as a subcomplex of the unnormalized complex. There is an increasing filtration on $N_*$, the length filtration, with $F_\ell N_s$ generated by those terms in which there are at most $\ell$ generators appearing in the $s$ free constructions in $N_s\subseteq Q^{\calU(n)}B^{\calU(n)}_sX\cong (F^{\calU(n)})^sX$.
 
 Write $E^r_{\ell,s}$ for the associated spectral sequence, so that $E^0_{\ell,p}$ is the associated graded complex. As $F_\ell N_s=0$ when $\ell<s$, $E^0_{s,s}$ may be viewed as a subspace of $N_s$. On the other hand, Priddy shows that $E^1_{\ell,s}=0$  for $\ell>s$. Thus, the groups
 \[K_s^{\calU(n)}X:=E^1_{s,s}=d^{-1}(F_{s-1}N_{s-1})\subseteq F_sN_s\]
-form a subcomplex of $N_*$ whose inclusion is a homotopy equivalence. Rather than determining these groups directly, Priddy's theory works with their duals, $K^*_{\calU(n)}X$, which form a cochain complex with homology $H^*_{\calU(n)}X$. In fact, Priddy's theory shows that the cochain complex $K^*_{\calU(n)}X$ is actually a differential unstable left module over the same operations as its cohomology $H^*_{\calU(n)}X$, and indeed that this unstable module is \emph{free}. More precisely, there is a natural isomorphism $K_0^{\calU(n)}X\to X$, and dually $X^*\to K^0_{\calU(n)}X$, and:
-\begin{prop}
-The chain maps $\widetilde{\theta_i}$ on $N_*Q^{\calU(0)}B^{\calU(0)}X$ restrict to chain maps
-\[\widetilde{\theta_i}:K_*^{\calU(0)}\to K_{*-1}^{\calU(0)}\]
-which are dual to left operations
-\[\delta_i:(K^*_{\calU(0)}X)^{s}_t\to (K^*_{\calU(0)}X)^{s+1}_{t+i+1}\textup{ whenever $2\leq i\leq t$.}\]
-These operations satisfy the $\delta$-Adem relations. Thise co-Koszul complex is freely generated by its subspace $X^*\cong K^{0}_{\calU(0)}X$ under these operations.
-
+form a subcomplex of $N_*$ whose inclusion is a homotopy equivalence. Rather than determining these groups directly, Priddy's theory works with their duals, $K^*_{\calU(n)}X$, which form a cochain complex with homology $H^*_{\calU(n)}X$. In fact, Priddy's theory shows that the cochain complex $K^*_{\calU(n)}X$, the \emph{co-Koszul complex}, is actually a differential unstable left module over the same operations as its cohomology $H^*_{\calU(n)}X$, and indeed that this unstable module is \emph{free}. More precisely, there is a natural isomorphism $K_0^{\calU(n)}X\to X$, and a dual isomorphism $X^*\to K^0_{\calU(n)}X$, and $K^*_{\calU(n)}X$ is free on this subspace.
+\begin{prop}\label{the cokoszul complex is free}
+Suppose that $n\geq0$, and $X$ is a locally finite object of $\calU(n)$. The chain maps $\widetilde{\theta^i}$ ($\widetilde{\theta_i}$ when $n=0$) on $N_*Q^{\calU(n)}B^{\calU(n)}X$ restrict to the subcomplex $K_*^{\calU(n)}X$, and induce on $K^*_{\calU(n)}X$ the structure of an object of $\calM(n+1)$. Moreover, the inclusion $X^*\to K^0_{\calU(n)}X$ induces an isomorphism $F_{\calM(n+1)}(X^*)\to K^*_{\calU(n)}X$.
 \end{prop}
+
+
+%\subsection{The co-Koszul complex for $H_*^{\calU(0)}$}
+Although it is easier to calculate the co-Koszul complex, we will need to understand the Koszul complex itself, in order to calculate the $\calW(n+1)$-structure of $H_*^{\calU(n)}$. For this, we'll introduce a little notation. Firstly, we'll return to the convenient bar notation from which the bar construction gets its name, c.f.\ [Priddy, other spots]. Next, we'll write $\produces{J}{I}{\deltaalg}$ \cancel{whenever $J\neq I$} and the element $\delta_J\in\deltaalg$ contains the term $P^I$ when written in the admissible basis. \textbf{Clarify that $\leftarrow$.}
+
+\begin{prop}\label{propDerivedIndTrivialUobject n=0}
+Suppose that $X\in\calU(0)$ has homogenous basis $B$. Then $K_*^{\calU(0)}X$ has basis
+\[\left\{\delta(I,b)\ \middle|\ b\in B^t\textup{, $I$ $\delta$-admissible with }\minDimP(I)\leq t\right\},\]
+where we define
+\[\delta(I,x):=\cancel{\left[P^{i_\ell}\middle|\cdots\middle|P^{i_1} \right]x}+\sum_{\produces{K}{I}{\deltaalg}}\left[P^{k_\ell} \middle|\cdots\middle|P^{k_1} \right]x\textup{ for $x\in X^t$}.\]
+%Supposing that $X$ is locally finite, let $B^*\subset X^*$ represent the basis dual to $B$, and denote by $b^*\in B^*$ the element dual to $b\in B$. Then $K^*_{\calU(0)}X$ has basis $\{\delta_I(b^*)\}$, and this basis is dual to the basis just presented.
+%
+If $X$ is locally finite, there is a basis $\{\delta_I(b^*)\}$ of $K^*_{\calU(0)}X$ constructed using proposition \ref{the cokoszul complex is free}, lemma \ref{basis of element of M(0)} and the basis of $X^*$ dual to $B$. Then the bases $\{\delta_I(b^*)\}$ and $\{\delta(I,b)\}$ are dual.
+
+The differential of $K^{\calU(0)}_*X$ is given by the formula:
+\[d(\delta(I,x))=\sum_{ \substack{\produces{K}{I}{\deltaalg}\\(k_{\ell},\ldots,k_2){\,\deltaalg\textup{-admis.}}}}\!\!\!\!\!\!\!\!\!\!\!\! \delta((k_{\ell},\ldots,k_2),P^{k_1}x),\]
+summing over those $K=(k_{\ell},\ldots,k_1)$ such that $(k_{\ell},\ldots,k_2)$ is $\deltaalg$-admissible, and yet $\produces{K}{I}{\deltaalg}$.
+\end{prop}
+Note that the class $\delta(I,x)$ is still defined for $x\in X^t$ and $\minDimP(I)>t$, it is simply equal to zero. Indeed, we may further restrict the two sums appearing in this proposition be requiring that $\minDimP(K)\leq t$ in each case, but there's no need. Dually, in the coKoszul complex, the operations $\delta_i$ are \emph{undefined} when out of range!
+\begin{proof}\textbf{Need something here showing that this sum is actually well defined. Same in next proof.}
+Firstly, we may assume that $X$ is locally finite, as any object of $\calU(0)$ is the union of it's locally finite subobjects. It is enough to check that $\delta(I,b_1)$ is in fact a member of $K_*$, not just of $N_*$, as then the collection $\delta(I,b)$ will evidently be the dual basis to the $\delta_I(B^*)$: in the sum defining $\delta(I,b)$, the only $\deltaalg$-admissible sequence $K$ appearing is $K=I$. % the basis element $\delta_J(b^*_2)\in K^*$ pairs nontrivially with $\delta(I,b_1)\in K_*$ if and only if $I=J$ and $b_1=b_2$. 
+
+To check the membership condition is to check that $\delta(I,b_1)$ pairs to zero with $\im(d^*:(F_sN_{s-1})^*\to(F_sN_s)^*)$. Priddy's proof shows that $(F_sN_s)^*$ is spanned by functionals $[(P^{k_s})^*|\cdots |(P^{k_1})^*]b^*$, and this functional evaluates to zero on $\delta(I,b_2)$ unless $b=b_2$ and $\produces{K}{I}{\deltaalg}$. However, the image of $d^*$, as determined by Priddy, is spanned by the space of `$\deltaalg$-Adem relations' (see [Priddy thm 2.5 and proof]). Tautologically, these evaluate to zero on any $\delta(I,b)$: in reducing a $\deltaalg$-relation to a sum of $\delta$-admissible expressions using $\deltaalg$-relations, one obtains zero.
+
+\textbf{Alternative paragraph: }To check the membership condition is to check that $\delta(I,b_1)$ pairs to zero with $\im(d^*:(F_sN_{s-1})^*\to(F_sN_s)^*)$. Priddy's proof shows that $(F_sN_s)^*$ is spanned by functionals $[(P^{k_s})^*|\cdots |(P^{k_1})^*]b^*$. %Viewing $\delta(I,c)$ as an element of the double dual,
+\[\left([(P^{k_s})^*|\cdots |(P^{k_1})^*]b^*\right)\left(\delta(I,c)\right)=b^*(c)\cdot\left(\textup{$\delta_I$ coeff.\ of when $\delta_K\in\deltaalg$}\right).\]
+% $\delta(I,c)$ is the functional which sends, and this functional evaluates to zero on $\delta(I,b_2)$ unless $b=b_2$ and $\produces{K}{I}{\deltaalg}$. 
+However, the image of $d^*$, as determined by Priddy, is spanned by the space of `$\deltaalg$-Adem relations' (see [Priddy thm 2.5 and proof]), and these tautologically evaluate to zero on any $\delta(I,b)$.
+\end{proof}
+Now the same analysis applies in the $n\geq1$ case. Here, we write the bar construction on the right, as we have a right action. This turns back into a left action, as the Lie Steenrod algebra is Koszul dual to the opposite of the $\Lambda$-algebra, with an index shift [see above? Priddy?].
+\begin{prop}\label{propDerivedIndTrivialUobject n at least 1}
+Suppose that $n\geq1$ and $X\in\calU(n)$ has homogenous basis $B$. Then $K_*^{\calU(n)}X$ has basis
+\[\left\{\Sq_{\textup{v}}(J,b)\ \middle|\ \genfrac{}{}{0pt}{}{b\in B^{s_{n},\ldots,s_1}_t\textup{, $J$ $\Sq$-admissible with }\minDimSq(J)\leq s_n,}{\textup{if }s_{n}\!=\!\cdots\!=\!s_1\!=\!0\textup{ then $J$ doesn't contain 0}}\right\}.\]
+where we define
+\[\Sq_\textup{v}(J,b):=\cancel{\left[P^{i_\ell}\middle|\cdots\middle|P^{i_1} \right]b}+\sum_{\produces{K}{J}{\Sq}}b\left[\lambda_{k_1-1} \middle|\cdots\middle|\lambda_{k_\ell-1} \right]\textup{ \textbf{only if.....}}.\]
+If $X$ is locally finite, this basis is dual to the $\{\Sq_\textup{v}^J\}$ basis of $K^*_{\calU(n)}X$, as in proposition \ref{propDerivedIndTrivialUobject n=0}. \textbf{Fill in here the differential stuff. Boilerplate from above.}
+\end{prop}
+In this case, the condition $\produces{K}{J}{\Sq}$ forces \textbf{[look above, ineq \& nonzero]}, so that every term appearing in the sum is automatically nonzero. On the other hand, the class $\Sq_\textup{v}(J,b)$ is only defined under certain conditions. This adds up to \textbf{further evidence} that the Steenrod operations are all defined, just with some zero.
+\subsection{The $\calW(n+1)$-structure on $H_*^{\calU(n)}X$ for $X\in\calW(n)$}
+boe
 
 \end{Koszul complexes}
 \begin{The cohomology of a trivial unstable Lie algebra over P}
@@ -2383,6 +2455,8 @@ having all gradings at the very right, tensor products of vector spaces,\ldots?
 \item Point out why $F_\calC$ is a section of $Q_{\calC}$ --- compose adjunctions.
 \item maybe raise the subscripts in $F_\calC$ and in $U_\calC$ and in $K_\calC$ and in $Q_\calC$ (which is done)
 \item $E_2$ should be $E_2X$ or $E_2(X)$
+\item say what locally finite means and point out that things with a shifted degree are all the colimit of their locally finite subobjects
+\item ``$\delta$-algebra'' isn't a good name, $\delta$-admissible too!
 \end{enumerate}
 \end{todolist}
 
