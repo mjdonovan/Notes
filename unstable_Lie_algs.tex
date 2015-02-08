@@ -1,5 +1,6 @@
 % !TEX root = z_output/unstable_Lie_algs.tex
 \documentclass[11pt]{amsart}
+\usepackage[paperheight=260mm]{geometry}%remove me after editing
 \usepackage{amsmath,amsthm,amssymb}
 \usepackage{eucal}
 \usepackage{mathrsfs,nicefrac}
@@ -28,8 +29,6 @@
 \nclude{Koszul complexes}
 \xclude{The cohomology of a trivial unstable Lie algebra over P}
 \xclude{appendices}
-
-
 
 \usepackage[bookmarks=false,pdftex,pdfborder={0 0 0 [1 1]}]{hyperref}
 
@@ -297,6 +296,7 @@ url=false,doi=false,isbn=false,eprint=false]{biblatex}%
 \newcommand{\deltaalg}{\Delta} %change me
 \newcommand{\LieOperad}{{\scrL}}
 \newcommand{\restn}[1]{#1^{[2]}}
+\newcommand{\restnwithsubscript}[2]{#1^{[2]}_{#2}}
 \newcommand{\restnRepeated}[2]{#1^{[2^{#2}]}}
 \newcommand{\vect}[2]{\calV^{#1}_{#2}}
 \newcommand{\BSW}{{\scrG}}%\scrH\scrI\scrJ\scrK\scrL\scrM\scrN\scrO\scrP\scrQ\scrR\scrS\scrT\scrY\scrZ}}
@@ -314,13 +314,15 @@ url=false,doi=false,isbn=false,eprint=false]{biblatex}%
 \newcommand{\produces}[3]{#3:#1\sim #2}
 \renewcommand{\produces}[3]{#1\rightarrow_{#3} #2}%{J}{I}{P}
 \renewcommand{\produces}[3]{#1\overset{\smash{#3}}{\rightarrow} #2}%{J}{I}{P}
-
+\newcommand{\Shuffles}[2]{\textup{Sh}_{#1#2}}
+\newcommand{\HalfShuffles}[2]{\textup{Sh}_{#1#2}^{\smash{\!\div2}}}
+\newcommand{\Nop}{N^{\smash{-}}}
 \newcommand{\NOFULLPAGE}{\relax}
 
 \newcommand{\Sq}{\mathrm{Sq}}
 \newcommand{\Comm}{\calC}
 \newcommand{\F}{\mathbb{F}}
-
+\newcommand{\Id}{\textup{id}}
 %\bibliography{papers}
 \bibliography{../../Dropbox/logbook/_LOGBOOK/papers}
 
@@ -388,16 +390,28 @@ In this paper we will be dealing with various categories of universal graded alg
 
 An object $X$ of $\calC$ may be defined as a graded vector space $X\in\vect{+}{r}$ along with certain binary and unary operations on $X$ (and without any nullary operations). As such, there will be a forgetful functor $U_\calC:\calC\to\vect{+}{r}$, which will admit a left adjoint, always denoted $F_\calC:\vect{+}{r}\to\calC$ for notational consistency. The functor $U_{\calC}$ will always be monadic, in the sense that the natural comparison functor from $\calC$ to the category of algebras over the monad $U_{\calC}F_{\calC}$ on $\vect{+}{r}$ is an equivalence. We will often omit the functor $U_{\calC}$ from our notation, writing $F_{\calC}$ as shorthand for either the monad $U_{\calC}F_{\calC}$ on $\vect{+}{r}$ or the comonad $F_{\calC}U_{\calC}$ on $\calC$.
 
-For the categories of interest in this paper, the monad $U_{\calC}F_{\calC}$ will admit an augmentation $\epsilon:U_{\calC}F_{\calC}\to\textup{id}$, reflecting homogeneity in the relations defining $\calC$. This augmentation has the monad unit $\textup{id}\to U_{\calC}F_{\calC}$ as a section, and may be thought of as projection back onto generators.
+For the categories of interest in this paper, the monad $U_{\calC}F_{\calC}$ will admit an augmentation $\epsilon:U_{\calC}F_{\calC}\to\Id$, reflecting homogeneity in the relations defining $\calC$. This augmentation has the monad unit $\Id\to U_{\calC}F_{\calC}$ as a section, and may be thought of as projection back onto generators.
 
 We will often refer to elements of a free construction $F_\calC V$ using notation such as $f(v_i)$, thought of as a composite $f$ of $\calC$-structure maps applied to generators $v_i\in V\subseteq F_\calC(V)$. We will say that $f(v_i)$ is a \emph{$\calC$-expression}.
 
 
 
-\subsection{Quillen's model structure on $s\calC$}
-We are interested in $s\calC$, the category of simplicial objects in $\calC$. The forgetful functor $U_\calC$ allows us to consider an object $X\in s\calC$ as a simplicial abelian group in $s\vect{+}{r}$. As such, we may define the homotopy groups of $X$, written $\pi_*X\in \vect{+}{r+1}$, to be $H_*N_*X$, where $N_*$ is one of the inverse equivalences appearing in the Dold-Kan correspondence [somewhere]: \[N:s\vect{+}{r}\rightleftarrows \textup{ch}_+ \vect{+}{r}
-:\Gamma.\]
-We will always use the description of $N_nX$ as the mutual kernel of $d_1,\ldots,d_n$ in $X_n$, with differential $d_0$ (rather than the equivalent definition as a quotient of the unnormalized complex $C_nX=X_n$), and write $ZN_nX$ for the mutual kernel of $d_0,\ldots,d_n$. In this paper we will often write $[x]$ for the homotopy class of a cycle $x\in ZN_nX$. \textbf{really?}
+\subsection{Simplicial abelian groups}
+
+We are interested in $s\calC$, the category of simplicial objects in $\calC$. The forgetful functor $U_\calC$ allows us to consider an object $X\in s\calC$ as an object of $s\vect{+}{r}$. In this paper we will use the following four chain complexes associated with $X$:
+\begin{alignat*}{2}
+C_nX&:=X_n&& \textup{ with differential }d=\textstyle\sum_{i=0}^{n}d_i;\\
+N_nX&:=\textstyle\bigcap_{0< i\leq n}\ker(d_i:X_n\to X_{n-1})&& \textup{ with differential }d=d_0;\\
+\Nop_nX&:=\textstyle\bigcap_{0\leq i< n}\ker(d_i:X_n\to X_{n-1})&& \textup{ with differential }d=d_n;\\
+N_n^\div X&:=X_n/(\textup{degenerate $n$-simplices})&& \textup{ with differential }d=\textstyle\sum_{i=0}^{n}d_i
+\end{alignat*}
+There are evident inclusions of $N_*X$ and $\Nop_*X$ into $C_*X$, and a projection of $N_*X$ onto $N_*^\div X$, and all of these maps are weak equivalences. Moreover, the composite $N_*X\to N_*^\div X$ is an isomorphism (as is the composite from $\Nop_*X$). Each $N_nX$ retains the internal gradings of $X$, and the functor $N_*$ appears in the Dold-Kan correspondence [somewhere], an adjoint equivalence of categories:
+\[N:s\vect{+}{r}\rightleftarrows \textup{ch}_+ \vect{+}{r}:\Gamma,\]
+under which the homotopy groups of (the simplicial set) $X$ are isomorphic to the homology groups of $N_*X$.
+%
+%As such, we may define the homotopy groups of $X$, written $\pi_*X\in \vect{+}{r+1}$, to be $H_*N_*X$, where $N_*$ is one of the inverse equivalences appearing in the Dold-Kan correspondence [somewhere]: \[N:s\vect{+}{r}\rightleftarrows \textup{ch}_+ \vect{+}{r}:\Gamma.\]
+%There are three equivalent definitions of $N_*X$. We will almost always use the description of $N_nX$ as the mutual kernel of $d_1,\ldots,d_n$ in $X_n$, with differential $d_0$ (rather than the equivalent definition as a quotient of the unnormalized complex $C_nX=X_n$), and write $ZN_nX$ for the mutual kernel of $d_0,\ldots,d_n$. 
+An in $N_nX$ is an element $x\in X_n$ such that $d_ix=0$ for $0\leq i\leq n$. We write $ZN_nX$ for this group of cycles, and sometimes write $\overline{x}$ for the equivalence class of $x$ in $\pi_*X$. \textbf{remove any $[x]$'s}.
 
 Now fix $n\geq0$, $s_r,\ldots,s_1\geq0$ and $t\geq1$. Writing $z$, $h$ and $dh$ for classes all in internal cohomological grading $t$ and homological grading $s_r,\ldots,s_1$ , define
 %Let $\mathbb{S}_{n,s_r,\ldots,s_1}^t$ and $C\mathbb{S}_{n,s_r,\ldots,s_1}^t$ be the $\in \textup{ch}_+ \vect{+}{r}$ be the chain complexes, with $z$, $h$ and $dh$ all having internal gradings $t,s_r,\ldots,s_1$:
@@ -430,7 +444,7 @@ and under these isomorphisms the differential $d=d_0:N_{n+1}V\to ZN_nV$ correspo
 By adjunction, for any $X\in s\calC$:
 \[\hom_{s\calC}(F_\calC\mathbb{S}^t_{n,s_r,\ldots,s_1},X)\cong (ZN_nX)_{s_r,\ldots,s_1}^t\textup{ and }\hom_{s\calC}(F_{\calC}C\mathbb{S}^t_{n,s_r,\ldots,s_1},X)\cong (N_{n+1}X)_{s_r,\ldots,s_1}^t,\]
 $i^*$ plays the same role, and in the homotopy category corresponding to the model structure introduced below, $F_\calC\mathbb{S}^t_{n,s_r,\ldots,s_1}$ represents $\pi_n(\DASH)^t_{s_r,\ldots,s_1}$ [goerss? Blanc-Stover?].
-
+\subsection{Quillen's model structure on $s\calC$}
 For any of the algebraic categories $\calC$ herein we use Quillen's simplicial model category structure on the category $s\calC$. In this structure, the weak equivalences (fibrations) are the maps which are weak equivalences (fibrations) of simplicial abelian groups, so that every object is fibrant. Moreover, every cofibrant object is a retract of an \emph{almost free} object [miller]. A simplicial object $X$ is almost free if there are subspaces $V_n\subseteq X_n$ for each $n\geq0$ such that the structure map $F_{\calC}U_\calC V_n\to X_n$ is an isomorphism for all $n$, and such that these subspaces are preserved by all of the degeneracies and face maps of $X$ except for $d_0$.
 
 For a simplicial resolution functor $\calC\to s\calC$, we'll often use the standard simplicial bar construction arising from the $F_\calC\dashv U_\calC$ adjunction [cite?]. More explicitly, given $X\in\calC$, we define $B^\calC X\in s\calC$ by iteration of the comonad $F_\calC U_\calC$, although we will tend to supress the $U_\calC$ in our notation: \textbf{mention} diagonal of bisimp resolution, that we always apply the const:$C\to sC$ without mention
@@ -743,14 +757,14 @@ By examining the $P$-Adem relation, one can determine that this is a filtration 
 \[F_{\calU(0)}V=\Palg\otimes V/\bigoplus_{i\geq1}(F^n\Palg\otimes V^n)\]
 Next, writing $S(\LieOperad)$ for the monad on $\vect{+}{0}$ with cohomological grading shifted, we may construct the monad $F_{\calW(0)}$ (the restriction of the monad $U$ in [Goerss, p18]), by coequalizing two maps $\Palg\otimes S(\LieOperad)V\to F_{\calU(0)} (S(\LieOperad)V)$. The first map is the composite:
 \[\xymatrix@R=4mm{
-\Palg\otimes S(\LieOperad)V\ar[r]^-{\textup{id}\otimes \textup{frob}}
+\Palg\otimes S(\LieOperad)V\ar[r]^-{\Id\otimes \textup{frob}}
 &%r1c1
 \Palg\otimes S(\LieOperad)V\ar@{->>}[r]&%r1c2
 F_{\calU(0)}(S(\LieOperad)V).%r1c3
 }\]
 The second map restricts to each subset $\Palg\otimes (S(\LieOperad)V)^r$ to the composite:
 \[\xymatrix@R=4mm{
-\Palg\otimes (S(\LieOperad)V)^r\ar[r]^-{\textup{m}_{P^r}\otimes\textup{id}}
+\Palg\otimes (S(\LieOperad)V)^r\ar[r]^-{\textup{m}_{P^r}\otimes\Id}
 &
 \Palg\otimes (S(\LieOperad)V)^r\ar@{^{(}->}[r]
 &%r1c1
@@ -1010,11 +1024,11 @@ Suppose that $X\in s\calU(0)$ is almost free. Then the chain maps $\widetilde{\t
 In order to give a basis for a free object in $\calM(1)$, for a sequence $I=(i_\ell,\ldots,i_1)$ of integers $i_j\geq2$, we define
 \[\minDimP(I):=\max\{(i_1),\,(i_2-i_1-1),\,(i_3-i_2-i_1-2),\,\ldots,\,(i_{\ell}-\cdots-i_1-\ell+1)\},
 \]
-following the convention that $\max(\emptyset)=-\infty$. Moreover, say that the sequence is \emph{$\delta$-admissible} if each $i_j\geq2$ and  $i_{j+1}\geq 2i_j$ for $1\leq j <\ell$.
+following the convention that $\max(\emptyset)=-\infty$. Moreover, say that the sequence is \emph{$\deltaalg$-admissible} if each $i_j\geq2$ and  $i_{j+1}\geq 2i_j$ for $1\leq j <\ell$.
 \begin{lem}\label{basis of element of M(0)}
-%For $V\in\vect{1}{+}$ with homogeneous basis $B$, a basis of $F_{\calM(1)}V$ consists of the classes $\delta_Ib$ where $b\in B\cap V^s_t$ is a basis element and $I$ is a $\delta$-admissible sequence with $t\geq\minDimP(I)$.
+%For $V\in\vect{1}{+}$ with homogeneous basis $B$, a basis of $F_{\calM(1)}V$ consists of the classes $\delta_Ib$ where $b\in B\cap V^s_t$ is a basis element and $I$ is a $\deltaalg$-admissible sequence with $t\geq\minDimP(I)$.
 For $V\in\vect{1}{+}$ with homogeneous basis $B$, a basis of $F_{\calM(1)}V$ consists of
-\[\left\{\delta_Ib\ \middle|\ b\in B^{s}_t\textup{, $I$ $\delta$-admissible with }\minDimP(I)\leq t\right\}.\]
+\[\left\{\delta_Ib\ \middle|\ b\in B^{s}_t\textup{, $I$ $\deltaalg$-admissible with }\minDimP(I)\leq t\right\}.\]
 \end{lem}
 \begin{shaded}
 Note that the forgetful functor $\calW(0)\to\calU(0)$ does not preserve almost free simplicial objects! However, it does preserve levelwise free simplicial objects, which create the right homology groups (see PRLieAlgs.tex). Thus there's a disconnect in the number of available operations on the Adams $E^2$ and on the first Koszul resolution.
@@ -1530,17 +1544,17 @@ The maps $\phi_1$ and $\phi_2$ can then be applied respectively to all of the sp
 %In fact, this diagram can even be formed in $s\vect{+}{n}$, before application of $F_{\calC}:\vect{+}{n}\to\calC$, and $\phi_1$ and $\phi_2$ are just the levelwise application of the diagonal map on a simplicial vector space. 
 To understand the effect of $\phi_{\BSW }$ on homotopy, it is enough to identify where the generators of $\pi(\BSW L)$ are sent in $\pi(\BSW L)\sqcup\pi(\BSW L)$, which is easy.
 \begin{lem}
-$\BSW L$ is naturally a (strict) commutative cogroup object, having comultiplication map $\phi_{\BSW }$, counit map $0:\BSW L\to 0$, and inverse map $\textup{id}:\BSW L\to \BSW L$. In particular, $\hom(\BSW L,\DASH)$ takes values in $\ensuremath{\F_2}$-vector spaces.
+$\BSW L$ is naturally a (strict) commutative cogroup object, having comultiplication map $\phi_{\BSW }$, counit map $0:\BSW L\to 0$, and inverse map $\Id:\BSW L\to \BSW L$. In particular, $\hom(\BSW L,\DASH)$ takes values in $\ensuremath{\F_2}$-vector spaces.
 \end{lem}
 \begin{proof}
 There are a few axioms to check, for example, left counitality: that the composite 
 \[\xymatrix@R=4mm@1{
 \BSW L\ar[r]^-{\phi_{\BSW }}
 &%r1c1
-\BSW L\sqcup \BSW L\ar[r]^-{\textup{id}\sqcup0}
+\BSW L\sqcup \BSW L\ar[r]^-{\Id\sqcup0}
 &%r1c2
 \BSW L%r1c3
-}\] is the identity. This follows since $(\textup{id}\sqcup0)\phi_1$ is the identity of $S^n$ and $(\textup{id}\sqcup0)\phi_2$ is the identity of $CS^n$. The other axioms follow similarly.
+}\] is the identity. This follows since $(\Id\sqcup0)\phi_1$ is the identity of $S^n$ and $(\Id\sqcup0)\phi_2$ is the identity of $CS^n$. The other axioms follow similarly.
 \end{proof}
 
 Using the notation $*$ for the group operation on $\hom_{s\calC}(\BSW L,L')$, we have the following:
@@ -1573,7 +1587,7 @@ The composite
 $\BSW^2L\overset{\overline{\xi}_{\BSW }}{\to}(\BSW L)^{\sqcup2}\to(\BSW L)^{\times2}$ is zero.
 \end{lem}
 \begin{proof}
-This follows from the observation that both composites $(\textup{id}\sqcup0)\overline{\xi}_{\BSW }$ and $(0\sqcup\textup{id})\overline{\xi}_{\BSW }$ equal $\epsilon:\BSW^2L\to \BSW L$.
+This follows from the observation that both composites $(\Id\sqcup0)\overline{\xi}_{\BSW }$ and $(0\sqcup\Id)\overline{\xi}_{\BSW }$ equal $\epsilon:\BSW^2L\to \BSW L$.
 \end{proof}
 In particular, $\overline{\xi}_{\BSW }$ factors through the smash product, defining a natural map
 \[\xi_{\BSW }:\BSW^2L\to (\BSW L)^{\wedge 2}.\]
@@ -1870,7 +1884,7 @@ Q(\pi( \BSW^{p+k+1}L))
 }\]
 The bottom left square commutes simply by naturality of $\gamma$, while the bottom right square is an instance of lemma \ref{LemmaOn xi}. What remains is to check that the hexagon commutes. For notational convenience, write $A=\BSW^{p+k}L$, $\textup{br}:(\pi_* A)^{\otimes 2}\to (\pi_* A)^{\wedge 2}$ for the bracket $a\otimes b\mapsto [a,b]$ on homotopy, and similarly write $\textup{br}:A^{\otimes 2}\to A^{\wedge 2}$ for the chain level bracket. Now any element of $Q((\pi_* A)^{\wedge 2})$ is the class of an expression $\textup{br}(\overline{x}\otimes\overline{y})+E$ where $\overline{x},\overline{y}\in\pi_* A$ are represented by $x,y\in N_*A$, and $E\in(\pi_* A)^{\wedge 2}$ is a sum of terms which are $\lambda$-operations applied to 3-fold brackets of elements of $\pi_* A$. The map $Q(i)$ is induced by the Eilenberg-MacLane map shuffle map $\nabla$ [](\textbf{what exactly?}), and
 \[\textup{br}(\overline{x}\otimes\overline{y})\overset{\gamma\circ Q(i)}{\mapsto}\overline{\textup{br}(\nabla(x\otimes y))}\overset{\pi_*(j)}{\mapsto}\overline{(\nabla(x\otimes y))}\overset{D_0}{\mapsto}\overline{x}\otimes \overline{y}.\]
-The last mapping follows from the fact that $D_0\circ\nabla=\textup{id}$, as $\{D_k\}$ is special.
+The last mapping follows from the fact that $D_0\circ\nabla=\Id$, as $\{D_k\}$ is special.
 Similarly, our understanding of the construction of $\lambda$-operations and iterated brackets shows that $E$ is annihilated by $\pi_*(j)\circ\gamma\circ Q(i)$. As $E$ is also annihilated by $j$, and $j(\textup{br}(\overline{x}\otimes\overline{y})) =\overline{x}\otimes\overline{y}$, the hexagon commutes. \textbf{This is poorly written.}
 \end{proof}
 \begin{proof}[Proof of \ref{E2CompFuncKosOperationsID}]
@@ -1880,7 +1894,7 @@ We'll use Miller's techniques [Miller p. 55] to define such a $\chi$ explicitly.
 
 Now for each $m$, $V_m$ splits into a direct sum
 $V_m=V'_m\oplus F_{m-1}V_m$,
-where $V'_m\subset N_m^\textup{h}\mathbb{B}$. To make this classical insight explicit, consider the endomorphism $c:\mathbb{B}_m\to \mathbb{B}_m$ introduced in the proof of lemma \ref{lemma on homology class repd by normalised generator}, an idempotent with image $N_m^\textup{h}\mathbb{B}$, preserving the subspace $V_m$. As $\im((\textup{id}-c)|_{V_m})\subset F_{m-1}V_m$, we may define $V'_m=c(V_m)$. \textbf{(read this paragraph sometime)}
+where $V'_m\subset N_m^\textup{h}\mathbb{B}$. To make this classical insight explicit, consider the endomorphism $c:\mathbb{B}_m\to \mathbb{B}_m$ introduced in the proof of lemma \ref{lemma on homology class repd by normalised generator}, an idempotent with image $N_m^\textup{h}\mathbb{B}$, preserving the subspace $V_m$. As $\im((\Id-c)|_{V_m})\subset F_{m-1}V_m$, we may define $V'_m=c(V_m)$. \textbf{(read this paragraph sometime)}
 
 In order to define $\chi$, we recursively define its restriction to the skeleta $F_m\mathbb{B}$. In order to extend a map $\chi_{m-1}:F_{m-1}\mathbb{B}\to \pi_*(\BSWres L)$ to a map $\chi_m:F_m\mathbb{B}\to \pi_*(\BSWres L)$, we need only to specify the values of $\chi_m$ on $V'_m$, which is to choose a lift in the diagram
 \[\xymatrix@R=4mm{
@@ -2050,7 +2064,7 @@ d^\textup{fil}(K')
 &\qquad&\text{(in $N_{*-1}^\textup{int}(Q\BSW L)$)}\\
 \Phi(d^\textup{fil}(K'))&=
 \sum u(e_j)\left( q(f_{ji_0})(s_{\alpha_{ji_0}}g^1_{ji_0i_1}h^2_{ji_0i_1i_2})\right)%
-&\qquad&\text{(relevant $s_{\alpha_{ji_0}}$ are $\textup{id}$)}\\
+&\qquad&\text{(relevant $s_{\alpha_{ji_0}}$ are $\Id$)}\\
 &=
 \sum q(u(e_j)(f_{ji_0}))\left(s_{\alpha_{ji_0}} {g^1_{ji_0i_1}h^2_{ji_0i_1i_2}}\right) =\textup{RHS}.
 \end{alignat*}
@@ -2224,17 +2238,17 @@ CS^n\sqcup CS^n%r2c2
 The maps $\phi_1$ and $\phi_2$ can then be applied respectively to all of the sphere and cone classes appearing in $\BSW L$.
 In fact, this diagram can even be formed in $s\vect{+}{n}$, before application of $F_{\calL(n)}:\vect{+}{n}\to\calL(n)$, and $\phi_1$ and $\phi_2$ are just the levelwise application of the diagonal map on a simplicial vector space. To understand the effect of $\phi_{\textup{ch}}$ on homotopy, it is enough to identify where the generators of $\pi(\BSW L)$ are sent in $\pi(\BSW L)\sqcup\pi(\BSW L)$, which is easy.
 \begin{lem}
-$\BSW L$ is naturally a (strict) commutative cogroup object, having comultiplication map $\phi_{\textup{ch}}$, counit map $0:\BSW L\to 0$, and inverse map $\textup{id}:\BSW L\to \BSW L$. In particular, $\hom(\BSW L,\DASH)$ takes values in $\ensuremath{\F_2}$-vector spaces.
+$\BSW L$ is naturally a (strict) commutative cogroup object, having comultiplication map $\phi_{\textup{ch}}$, counit map $0:\BSW L\to 0$, and inverse map $\Id:\BSW L\to \BSW L$. In particular, $\hom(\BSW L,\DASH)$ takes values in $\ensuremath{\F_2}$-vector spaces.
 \end{lem}
 \begin{proof}
 There are a few axioms to check, for example, left counitality: that the composite 
 \[\xymatrix@R=4mm@1{
 \BSW L\ar[r]^-{\phi_{\textup{ch}}}
 &%r1c1
-\BSW L\sqcup \BSW L\ar[r]^-{\textup{id}\sqcup0}
+\BSW L\sqcup \BSW L\ar[r]^-{\Id\sqcup0}
 &%r1c2
 \BSW L%r1c3
-}\] is the identity. This follows since $(\textup{id}\sqcup0)\phi_1$ is the identity of $S^n$ and $(\textup{id}\sqcup0)\phi_2$ is the identity of $CS^n$. The other axioms follow similarly.
+}\] is the identity. This follows since $(\Id\sqcup0)\phi_1$ is the identity of $S^n$ and $(\Id\sqcup0)\phi_2$ is the identity of $CS^n$. The other axioms follow similarly.
 \end{proof}
 
 Using the notation $*$ for the group operation on $\hom_{s\calL(n)}(\BSW L,L')$, we have the following:
@@ -2267,7 +2281,7 @@ The composite
 $\BSW^2L\overset{\overline{\xi}_{\textup{ch}}}{\to}(\BSW L)^{\sqcup2}\to(\BSW L)^{\times2}$ is zero.
 \end{lem}
 \begin{proof}
-This follows from the easy observation that both composites $(\textup{id}\sqcup0)\overline{\xi}_{\textup{ch}}$ and $(0\sqcup\textup{id})\overline{\xi}_{\textup{ch}}$ equal $\epsilon:\BSW^2L\to \BSW L$.
+This follows from the easy observation that both composites $(\Id\sqcup0)\overline{\xi}_{\textup{ch}}$ and $(0\sqcup\Id)\overline{\xi}_{\textup{ch}}$ equal $\epsilon:\BSW^2L\to \BSW L$.
 \end{proof}
 In particular, $\overline{\xi}_{\textup{ch}}$ factors through the smash product, defining a natural map $\xi_{\textup{ch}}:\BSW^2L\to (\BSW L)^{\wedge 2}$.
 
@@ -2318,14 +2332,14 @@ In this section we'll discuss the Koszul resolutions that one may use to calcula
 \item \textbf{move this all to the first chapter?}}
 
 \subsection{The (co-)Koszul complex}
+[\textbf{Wait!} The actual situation is that the outer differential and the koszul differential live on opposite sides - there's nothing you can do about that! Better pass to the quotient!]
+Write $\Nop_*,N_*^\div,C_*$ for three of the four chain complexes associated with $Q^{\calU(n)}B^{\calU(n)}X$. Each of these complexes admits an increasing filtration, the length filtration, with $F_\ell C_s$ generated by those terms in which there are at most $\ell$ generators appearing in the $s$ free constructions in $C_s= Q^{\calU(n)}B^{\calU(n)}_sX\cong (F^{\calU(n)})^sX$, and the filtrations on $\Nop_*$ and $N^\div_*$ induced by that on $C_*$. Note that $F_{s-1}N^\div_s=0$, so that  $F_{s-1}\Nop_s=0$. Note further that $d(F_sN_s^-)\subseteq F_{s-1}N_{s-1}^-$, which is easily checked on the isomorphic filtered complex $N_*^\div$.
 
-Write $N_*$ for the chain complex $N_*(Q^{\calU(n)}B^{\calU(n)}X)$, thought of as a subcomplex of the unnormalized complex. There is an increasing filtration on $N_*$, the length filtration, with $F_\ell N_s$ generated by those terms in which there are at most $\ell$ generators appearing in the $s$ free constructions in $N_s\subseteq Q^{\calU(n)}B^{\calU(n)}_sX\cong (F^{\calU(n)})^sX$.
-
-Write $E^r_{\ell,s}$ for the associated spectral sequence, so that $E^0_{\ell,p}$ is the associated graded complex. As $F_\ell N_s=0$ when $\ell<s$, $E^0_{s,s}$ may be viewed as a subspace of $N_s$. On the other hand, Priddy shows that $E^1_{\ell,s}=0$  for $\ell>s$. Thus, the groups
-\[K_s^{\calU(n)}X:=E^1_{s,s}=d^{-1}(F_{s-1}N_{s-1})\subseteq F_sN_s\]
-form a subcomplex of $N_*$ whose inclusion is a homotopy equivalence. Rather than determining these groups directly, Priddy's theory works with their duals, $K^*_{\calU(n)}X$, which form a cochain complex with homology $H^*_{\calU(n)}X$. In fact, Priddy's theory shows that the cochain complex $K^*_{\calU(n)}X$, the \emph{co-Koszul complex}, is actually a differential unstable left module over the same operations as its cohomology $H^*_{\calU(n)}X$, and indeed that this unstable module is \emph{free}. More precisely, there is a natural isomorphism $K_0^{\calU(n)}X\to X$, and a dual isomorphism $X^*\to K^0_{\calU(n)}X$, and $K^*_{\calU(n)}X$ is free on this subspace.
+Write $E^r_{\ell,s}$ for the spectral sequence of the filtered complex $\Nop_*X$, so that $E^0_{\ell,p}$ is the associated graded complex. As $F_{s-1} \Nop_s=0$, $E^r_{\ell,s}=0$ for $\ell<s$, and $E^0_{s,s}$ is the subspace $F_s\Nop_s$ of $\Nop_s$, and the $d_0$-differential vanishes on $E^0_{s,s}$ since $d(F_sN_s^-)\subseteq F_{s-1}N_{s-1}^-$. We conclude that $E^1_{s,s}=F_s\Nop_s$, with $d^1$-differential $E^1_{s,s}\to E^1_{s-1,s-1}$ identified with the differential of $\Nop_*$. On the other hand, Priddy shows that $E^1_{\ell,s}=0$  for $\ell>s$. Thus, the groups
+\[K_s^{\calU(n)}X:=E^1_{s,s}=d^{-1}(F_{s-1}\Nop_{s-1})=F_s\Nop_s\]
+form a subcomplex of $\Nop_*$ whose inclusion is a homotopy equivalence. Rather than determining these groups directly, Priddy's theory works with their duals, $K^*_{\calU(n)}X$, which form a cochain complex with homology $H^*_{\calU(n)}X$. In fact, Priddy's theory shows that the cochain complex $K^*_{\calU(n)}X$, the \emph{co-Koszul complex}, is actually a differential unstable left module over the same operations as its cohomology $H^*_{\calU(n)}X$, and indeed that this unstable module is \emph{free}. More precisely,  $K_0^{\calU(n)}X= X$, and $K^*_{\calU(n)}X$ is free on the  subspace $X^*$.
 \begin{prop}\label{the cokoszul complex is free}
-Suppose that $n\geq0$, and $X$ is a locally finite object of $\calU(n)$. The chain maps $\widetilde{\theta^i}$ ($\widetilde{\theta_i}$ when $n=0$) on $N_*Q^{\calU(n)}B^{\calU(n)}X$ restrict to the subcomplex $K_*^{\calU(n)}X$, and induce on $K^*_{\calU(n)}X$ the structure of an object of $\calM(n+1)$. Moreover, the inclusion $X^*\to K^0_{\calU(n)}X$ induces an isomorphism $F_{\calM(n+1)}(X^*)\to K^*_{\calU(n)}X$.
+Suppose that $n\geq0$, and $X$ is a locally finite object of $\calU(n)$. The chain maps $\widetilde{\theta^i}$ ($\widetilde{\theta_i}$ when $n=0$) on $C_*Q^{\calU(n)}B^{\calU(n)}X$ restrict to the subcomplex $K_*^{\calU(n)}X$, and induce on $K^*_{\calU(n)}X$ the structure of an object of $\calM(n+1)$. Moreover, the inclusion $X^*\to K^0_{\calU(n)}X$ induces an isomorphism $F_{\calM(n+1)}(X^*)\to K^*_{\calU(n)}X$.
 \end{prop}
 
 
@@ -2334,7 +2348,7 @@ Although it is easier to calculate the co-Koszul complex, we will need to unders
 
 \begin{prop}\label{propDerivedIndTrivialUobject n=0}
 Suppose that $X\in\calU(0)$ has homogenous basis $B$. Then $K_*^{\calU(0)}X$ has basis
-\[\left\{\delta(I,b)\ \middle|\ b\in B^t\textup{, $I$ $\delta$-admissible with }\minDimP(I)\leq t\right\},\]
+\[\left\{\delta(I,b)\ \middle|\ b\in B^t\textup{, $I$ $\deltaalg$-admissible with }\minDimP(I)\leq t\right\},\]
 where we define
 \[\delta(I,x):=\cancel{\left[P^{i_\ell}\middle|\cdots\middle|P^{i_1} \right]x}+\sum_{\produces{K}{I}{\deltaalg}}\left[P^{k_\ell} \middle|\cdots\middle|P^{k_1} \right]x\textup{ for $x\in X^t$}.\]
 %Supposing that $X$ is locally finite, let $B^*\subset X^*$ represent the basis dual to $B$, and denote by $b^*\in B^*$ the element dual to $b\in B$. Then $K^*_{\calU(0)}X$ has basis $\{\delta_I(b^*)\}$, and this basis is dual to the basis just presented.
@@ -2346,14 +2360,15 @@ The differential of $K^{\calU(0)}_*X$ is given by the formula:
 summing over those $K=(k_{\ell},\ldots,k_1)$ such that $(k_{\ell},\ldots,k_2)$ is $\deltaalg$-admissible, and yet $\produces{K}{I}{\deltaalg}$.
 \end{prop}
 Note that the class $\delta(I,x)$ is still defined for $x\in X^t$ and $\minDimP(I)>t$, it is simply equal to zero. Indeed, we may further restrict the two sums appearing in this proposition be requiring that $\minDimP(K)\leq t$ in each case, but there's no need. Dually, in the coKoszul complex, the operations $\delta_i$ are \emph{undefined} when out of range!
-\begin{proof}\textbf{Need something here showing that this sum is actually well defined. Same in next proof.}
-Firstly, we may assume that $X$ is locally finite, as any object of $\calU(0)$ is the union of it's locally finite subobjects. It is enough to check that $\delta(I,b_1)$ is in fact a member of $K_*$, not just of $N_*$, as then the collection $\delta(I,b)$ will evidently be the dual basis to the $\delta_I(B^*)$: in the sum defining $\delta(I,b)$, the only $\deltaalg$-admissible sequence $K$ appearing is $K=I$. % the basis element $\delta_J(b^*_2)\in K^*$ pairs nontrivially with $\delta(I,b_1)\in K_*$ if and only if $I=J$ and $b_1=b_2$. 
+\begin{proof}\textbf{Need something here showing that this sum is actually finite. Same in next proof, need well definedness.}
+Firstly, we may assume that $X$ is locally finite, as any object of $\calU(0)$ is the union of its locally finite subobjects. It is enough to check that $\delta(I,b)$ is in fact a member of $\Nop_*$, not just of $C_*$, as then the collection $\delta(I,b)$ will evidently be the dual basis to the $\delta_I(B^*)$: in the sum defining $\delta(I,b)$, the only $\deltaalg$-admissible sequence $K$ appearing is $K=I$.  % the basis element $\delta_J(b^*_2)\in K^*$ pairs nontrivially with $\delta(I,b_1)\in K_*$ if and only if $I=J$ and $b_1=b_2$. 
 
-To check the membership condition is to check that $\delta(I,b_1)$ pairs to zero with $\im(d^*:(F_sN_{s-1})^*\to(F_sN_s)^*)$. Priddy's proof shows that $(F_sN_s)^*$ is spanned by functionals $[(P^{k_s})^*|\cdots |(P^{k_1})^*]b^*$, and this functional evaluates to zero on $\delta(I,b_2)$ unless $b=b_2$ and $\produces{K}{I}{\deltaalg}$. However, the image of $d^*$, as determined by Priddy, is spanned by the space of `$\deltaalg$-Adem relations' (see [Priddy thm 2.5 and proof]). Tautologically, these evaluate to zero on any $\delta(I,b)$: in reducing a $\deltaalg$-relation to a sum of $\delta$-admissible expressions using $\deltaalg$-relations, one obtains zero.
+Using [priddy, Lemma 3.2], to check that $\delta(I,b)\in\Nop_*$, we only need to check that $d(\delta(I,b))\in F_{s-1}C_{s-1}$.
+To check this membership condition is to check that $\delta(I,b)$ pairs to zero with $\im(d^*:(F_sC_{s-1})^*\to(F_sC_s)^*)$. Priddy's proof shows that $(F_sC_s)^*$ is spanned by functionals $[(P^{k_s})^*|\cdots |(P^{k_1})^*]f$, for $f\in X^*$.  This functional evaluates to zero on $\delta(I,b)$ unless $f(b)=1$ and $\produces{K}{I}{\deltaalg}$. However, the image of $d^*$, as determined by Priddy, is spanned by the space of `$\deltaalg$-Adem relations' (see [Priddy thm 2.5 and proof]). These evaluate to zero on any $\delta(I,b)$, tautologically: in reducing a $\deltaalg$-relation to a sum of $\deltaalg$-admissible expressions using $\deltaalg$-relations, one obtains zero.
 
-\textbf{Alternative paragraph: }To check the membership condition is to check that $\delta(I,b_1)$ pairs to zero with $\im(d^*:(F_sN_{s-1})^*\to(F_sN_s)^*)$. Priddy's proof shows that $(F_sN_s)^*$ is spanned by functionals $[(P^{k_s})^*|\cdots |(P^{k_1})^*]b^*$. %Viewing $\delta(I,c)$ as an element of the double dual,
+\textbf{Alternative ending: }To check the membership condition is to check that $\delta(I,b)$ pairs to zero with $\im(d^*:(F_sN_{s-1})^*\to(F_sN_s)^*)$. Priddy's proof shows that $(F_sN_s)^*$ is spanned by functionals $[(P^{k_s})^*|\cdots |(P^{k_1})^*]b^*$. %Viewing $\delta(I,c)$ as an element of the double dual,
 \[\left([(P^{k_s})^*|\cdots |(P^{k_1})^*]b^*\right)\left(\delta(I,c)\right)=b^*(c)\cdot\left(\textup{$\delta_I$ coeff.\ of when $\delta_K\in\deltaalg$}\right).\]
-% $\delta(I,c)$ is the functional which sends, and this functional evaluates to zero on $\delta(I,b_2)$ unless $b=b_2$ and $\produces{K}{I}{\deltaalg}$. 
+% $\delta(I,c)$ is the functional which sends, and this functional evaluates to zero on $\delta(I,b)$ unless $b=b_2$ and $\produces{K}{I}{\deltaalg}$. 
 However, the image of $d^*$, as determined by Priddy, is spanned by the space of `$\deltaalg$-Adem relations' (see [Priddy thm 2.5 and proof]), and these tautologically evaluate to zero on any $\delta(I,b)$.
 \end{proof}
 Now the same analysis applies in the $n\geq1$ case. Here, we write the bar construction on the right, as we have a right action. This turns back into a left action, as the Lie Steenrod algebra is Koszul dual to the opposite of the $\Lambda$-algebra, with an index shift [see above? Priddy?].
@@ -2366,9 +2381,73 @@ If $X$ is locally finite, this basis is dual to the $\{\Sq_\textup{v}^J\}$ basis
 \end{prop}
 In this case, the condition $\produces{K}{J}{\Sq}$ forces \textbf{[look above, ineq \& nonzero]}, so that every term appearing in the sum is automatically nonzero. On the other hand, the class $\Sq_\textup{v}(J,b)$ is only defined under certain conditions. This adds up to \textbf{further evidence} that the Steenrod operations are all defined, just with some zero.
 \subsection{The $\calW(n+1)$-structure on $H_*^{\calU(n)}X$ for $X\in\calW(n)$}
-boe
+Suppse that $X\in\calW(n)$. We now have two monomorphic quasi-isomorphisms of chain complexes with homology is $H_*^{\calU(n)}X$, and we denote their composite $\jmath$:
+\[\jmath:\left(K_*^{\calU(n)}X\subseteq \Nop_*Q^{\calU(n)}B^{\calU(n)}X\subseteq \Nop_*Q^{\calU(n)}B^{\calW(n)}X\right).\]
+Now $H^{\calU(n)}_*X$ is an element of $\calW(n+1)$, since it can be calculated as the homotopy of $Q^{\calU(n)}B^{\calW(n)}X\in s\calL(n)$, and this is the structure needed for the composite functor spectral sequences discussed above. We will go some way to calculating this structure in this section --- our method will be to take classes in the Koszul complex, map them into the large complex using $\jmath$, perform the operations in question, and then homotope the outcome back into the Koszul complex.
 
+We'll need a little notation for elements of the various bar constructions. We'll label the $s+1$ free constructions in $B^{\calW(n)}_{s}X$ with subscripts in angle brackets: 
+\[B^{\calW(n)}_{s}X= F^{\calW(n)}_{\langle -1\rangle}F^{\calW(n)}_{\langle 0\rangle}\cdots F^{\calW(n)}_{\langle s-1\rangle}X\]%corrected
+so that we can then indicate in which free construction operations are being performed. For example, when $n=0$ and $x,y\in X$, $B_2^{\calW(0)}X$ contains an element
+\[[P^i_{\langle 0\rangle}x,P^j_{\langle 1\rangle}y]_{\langle -1\rangle}:=[\eta P^i\eta^2 x,\eta^2P^j\eta y]\]%corrected
+where we write $\eta:V\to F_{\calW(n)}$ for the unit of the monad on $\vect{+}{n}$ (omitting as always the forgetful functor). That is: we apply $P^j$, not to $y\in X$, but rather to $\eta y$, the corresponding generator of $F_{\langle 1\rangle}^{\calW(n)}X$; we only apply $P^i$ to $\eta^2 x$, the generator of $F^{\calW(n)}_{\langle 0\rangle}F^{\calW(n)}_{\langle 1\rangle}X$; and finally the bracket is taken in the outermost construction.%corrected
+
+With this notation in hand, the map $\jmath$ is induced by the assignment
+\begin{alignat*}{2}
+[P^{i_s}|\cdots |P^{i_1}]x&\longmapsto P_{\langle 0\rangle}^{i_s}P_{\langle 1\rangle}^{i_s-1}\cdots P_{\langle s-1\rangle}^{i_1}x &\quad&(\textup{if }n=0),\\
+x[\lambda_{i_1}|\cdots |\lambda_{i_s}]&\longmapsto x\lambda_{i_1\langle s-1\rangle}\cdots \lambda_{i_{s-1}\langle1\rangle}\lambda_{i_s\langle 0\rangle} &\quad&(\textup{if }n\geq1).%both corrected
+\end{alignat*}
+Before making calculations, we recall the formulae for Lie algebra homotopy operations [Curtis]. Let $\Shuffles{p}{q}$ be the set of $(p,q)$-shuffles, that is, pairs $(\alpha,\beta)$ where $\alpha=(\alpha_{p-1},\ldots,\alpha_0)$ and $\beta=(\beta_{q-1},\ldots,\beta_0)$ are disjoint monotonically decreasing sequences that together partition the set $\{0,\ldots,p+q-1\}$. Let $s_{\alpha}$ denote the iterated degeneracy operator $s_{\alpha_{p-1}}\cdots s_{\alpha_0}$.
+Finally, let $\HalfShuffles{i}{i}$ denote the subset of $\Shuffles{i}{i}$ consisting of those shuffles $(\alpha,\beta)\in\Shuffles{i}{i}$ such that $\alpha_0=0$. The formulae of \cite[\S8]{CurtisSimplicialHtpy.pdf}, for $z\in ZK_p(X)$ and $w\in ZK_q(X)$ cycles representing classes $\overline{z},\overline{w}\in H_*^{\calU(n)}X$ are as follows:
+\begin{alignat*}{3}
+[\overline{z},\overline{w}]\textup{ is represented by }&&\sum_{(\alpha,\beta)\in\Shuffles{p}{q}}[s_\beta(\jmath z), s_\alpha(\jmath w)]_{\langle -1\rangle}&\in Q^{\calU(n)}B^{\calW(n)}_{p+q}X,\\
+\overline{z}\lambda_i\textup{ is represented by }&&\sum_{(\alpha,\beta)\in\HalfShuffles{i}{i}}[s_\beta(\jmath z), s_\alpha(\jmath z)]_{\langle -1\rangle}&\in Q^{\calU(n)}B^{\calW(n)}_{p+i}X,&\quad&(0<i\leq p),\\
+\overline{z}\lambda_0\textup{ is represented by }&&\restnwithsubscript{(z)}{\langle -1\rangle}&\in Q^{\calU(n)}B^{\calW(n)}_{p}X,&&(\textup{when defined}).
+\end{alignat*}%all three corrected
+It will be important to understand these sums. Suppose that $z\in ZK_p^{\calU(n)}X$ (for $n\geq1$). Then  $z$ may be written as a sum of terms of the form $x\lambda_{i_1\langle p-1\rangle}\cdots \lambda_{i_p\langle 0\rangle}$, and
+\begin{lem}\label{what degens do to iterated operations}
+If $(\alpha,\beta)\in\Shuffles{p}{q}$, then $s_\beta(x\lambda_{i_1\langle p-1\rangle}\cdots \lambda_{i_p\langle 0\rangle})=x\lambda_{i_1\langle \alpha_{p-1}\rangle}\cdots \lambda_{i_p\langle \alpha_0\rangle}$.
+\end{lem}
+We'll also need the following consequence of the simplicial identities:
+\begin{lem}\label{LemmaOnSimplicialRelations}
+Choose $i\geq0$ and $\alpha=(\alpha_p,\ldots,\alpha_1)$ with $\alpha_p>\cdots >\alpha_1\geq0$.
+\begin{enumerate}[i)]\squishlist
+\setlength{\parindent}{.25in}
+\item[i)] If neither $i$ nor $i-1$ appear in $\alpha$, then  $d_is_\alpha=s_{\alpha'}d_{i'}$ for some $\alpha'$ and $i'$.
+\item[ii)] If exactly one of $i$ and $i-1$ appears in $\alpha$, then  $d_is_\alpha$ does not depend on which of $i$ and $i-1$ appeared.
+\end{enumerate}
+\end{lem}
+\begin{prop}\label{LieBracketsTrivial}
+The Lie bracket $H_p^{\calU(n)}X\otimes H_q^{\calU(n)}X\to H_{p+q}^{\calU(n)}X$ vanishes except when $p+q=0$. 
+The Lie algebra structure on $H_0^{\calU(n)}X$ is induced by that on $X$: if $z,w\in X$ represent $\overline{z},\overline{w}\in H_0^{\calU(n)}X$, then $[\overline{x},\overline{y}]$ is represented by the cycle $[x,y]\in ZC_0(Q^{\calU(n)}B^{\calW(n)}X)$.
+\end{prop}
+\noindent This theorem shows that $H_*^{\calU(X)}$ is trivial in positive dimensions \emph{as a Lie algebra}, but the restriction need not be trivial (c.f.\ [following theorems]).
 \end{Koszul complexes}
+\begin{proof}
+We'll give the proof for $n\geq1$, but it works the same way for $n=0$. In fact, when $n=0$ we can ignore all discussion of top and non-top operations.
+
+Use the abreviation $\mathbb{B}:=Q^{\calU(n)}B^{\calW(n)}X\in s\calL(n)$. Then $\mathbb{B}$ is almost free on the subspaces $V_s=F^{\calW(n)}_{\langle 0\rangle}\cdots F^{\calW(n)}_{\langle s-1\rangle}X$. Choose representatives $z\in ZK_p^{\calU(n)}X$ and $w\in ZK_q^{\calU(n)}X$. Now  for any $(\alpha,\beta)\in\Shuffles{p}{q}$, the elements $s_{0}s_\beta(\jmath z)$ and $s_{0}s_\alpha(\jmath w)$ both lie in $V_{p+q+1}$, and it is only a minor abuse of notation to define:
+\[a:=\sum_{(\alpha,\beta)\in\Shuffles{p}{q}}[s_{0}s_\beta(\jmath z), s_{0}s_\alpha(\jmath w)]_{\langle 0\rangle}\in C_{p+q+1}\mathbb{B}.\]
+Using the simplicial identity $d_0s_0=\Id$, we have $d_{0}a=\sum [s_\beta(\jmath z), s_\alpha(\jmath w)]_{\langle -1\rangle}$, the representative given for $[\overline{z},\overline{w}]$. Moreover, we'll find that $d_ia=0$ for $i>0$, except when $p=q=0$, in which case $d_1a=[x,y]$. Thus, in either case, $a$ is the required homotopy in $C_*\mathbb{B}$.
+
+Using the simplicial identity $d_1s_0=\Id$, we have $d_{1}a=\sum [s_\beta(\jmath z), s_\alpha(\jmath w)]_{\langle 0\rangle}$. Now for every pair $(\alpha,\beta)$ indexing this sum, unless $p=q=0$, one of $\alpha$ or $\beta$, say $\beta$, will contain $0$. Then by lemma \ref{what degens do to iterated operations}, every summand in $s_{\alpha}(\jmath z)$ is in the image of some \emph{non-top} $\lambda_{i\langle 0\rangle}$, and as $[x\lambda_i,y]=0$ whenever $\lambda_i$ is not a top operation, the entire expression vanishes in the construction $F^{\calW(n)}_{\langle 0\rangle}$.
+
+For this, we'll define an involution $\rho_i$ of the set $\Shuffles{p}{q}$ indexing the sum.
+If $\alpha$ and $\beta$ do not each contain exactly one of $0$ and $1$, then $\rho_i$ fixes $(\alpha,\beta)$. Otherwise, $\rho_i$ interchanges the positions of $i$ and $i-1$ in $(\alpha,\beta)$. 
+
+If $(\alpha,\beta)$ is a fixed point of $\rho_i$, then one of $\alpha$ and $\beta$, say $\alpha$, contains neither of $i$ and $i-1$. Then by lemma \ref{LemmaOnSimplicialRelations}(i), $d_is_\alpha(\jmath w)=s_{\alpha'}d_{i'}(\jmath w)=0$, as $\jmath w$ is a cycle in $\Nop_*$, and thus lies in the kernel of all of the face maps. Thus, the summands corresponding to fixed points vanish.
+On the other hand, given a shuffle $(\alpha,\beta)$ which is not fixed by $\rho_i$, lemma \ref{LemmaOnSimplicialRelations}(ii) shows that the summand corresponding to $(\alpha,\beta)$ equals the summand corresponding to $\rho_i(\alpha,\beta)$, so these two summands cancel with each other.
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+
 \begin{The cohomology of a trivial unstable Lie algebra over P}
 \vfil\pagebreak
 \section{The cohomology of a trivial unstable Lie algebra over $P$}
@@ -2441,7 +2520,7 @@ having all gradings at the very right, tensor products of vector spaces,\ldots?
 \item Either use or lose the $\quadratic$ notation --- in general, sort out a consistent use for it.
 \item $\gamma_i$ and $\gamma^i$ notations must go.
 \item Need a cogent section on stuff like: $S^2_\textup{pr?}\pi_*M\to \pi_*M$. What's a restricted Lie algebra, what's are the ``top operations'' $S^2\pi_*(L)\to \pi_*(S^2L)\to \pi_*(L)$ - are they defined by $\nabla$? (yes). Use $\widetilde{\nabla}$ for the top ops.
-\item Uniform notation for the class represented by $x$... $[x]$?
+\item Uniform notation for the class represented by $x$... $[x]$? $\overline{x}$?
 \item get an arrow for epimorphisms and one for monomorphisms, and use them
 \item vector space vs vectorspace
 \item upper and lower scripts for algebraic structure - sort it out! E.g. $Q^\calC$ and $H_*^\calC$.
@@ -2457,6 +2536,8 @@ having all gradings at the very right, tensor products of vector spaces,\ldots?
 \item $E_2$ should be $E_2X$ or $E_2(X)$
 \item say what locally finite means and point out that things with a shifted degree are all the colimit of their locally finite subobjects
 \item ``$\delta$-algebra'' isn't a good name, $\delta$-admissible too!
+\item General principle: homotopy operations ($\delta$, $\lambda$) are partially defined, cohomology operations are sometimes zero. The two notions interchange upon taking cohomology.
+\item co-Koszul vs coKoszul.
 \end{enumerate}
 \end{todolist}
 
