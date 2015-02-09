@@ -2359,7 +2359,7 @@ The differential of $K^{\calU(0)}_*X$ is given by the formula:
 \[d(\delta(I,x))=\sum_{ \substack{\produces{K}{I}{\deltaalg}\\(k_{\ell},\ldots,k_2){\,\deltaalg\textup{-admis.}}}}\!\!\!\!\!\!\!\!\!\!\!\! \delta((k_{\ell},\ldots,k_2),P^{k_1}x),\]
 summing over those $K=(k_{\ell},\ldots,k_1)$ such that $(k_{\ell},\ldots,k_2)$ is $\deltaalg$-admissible, and yet $\produces{K}{I}{\deltaalg}$.
 \end{prop}
-Note that the class $\delta(I,x)$ is still defined for $x\in X^t$ and $\minDimP(I)>t$, it is simply equal to zero. Indeed, we may further restrict the two sums appearing in this proposition be requiring that $\minDimP(K)\leq t$ in each case, but there's no need. Dually, in the coKoszul complex, the operations $\delta_i$ are \emph{undefined} when out of range!
+Note that the class $\delta(I,x)$ is still defined for $x\in X^t$ and $\minDimP(I)>t$, it is simply equal to zero. This definition is well behaved, since $\deltaalg$-Adem relations only decrease $\minDimP$. Indeed, we may further restrict the two sums appearing in this proposition be requiring that $\minDimP(K)\leq t$ in each case, but there's no need. Dually, in the coKoszul complex, the operations $\delta_i$ are \emph{undefined} when out of range!
 \begin{proof}\textbf{Need something here showing that this sum is actually finite. Same in next proof, need well definedness.}
 Firstly, we may assume that $X$ is locally finite, as any object of $\calU(0)$ is the union of its locally finite subobjects. It is enough to check that $\delta(I,b)$ is in fact a member of $\Nop_*$, not just of $C_*$, as then the collection $\delta(I,b)$ will evidently be the dual basis to the $\delta_I(B^*)$: in the sum defining $\delta(I,b)$, the only $\deltaalg$-admissible sequence $K$ appearing is $K=I$.  % the basis element $\delta_J(b^*_2)\in K^*$ pairs nontrivially with $\delta(I,b_1)\in K_*$ if and only if $I=J$ and $b_1=b_2$. 
 
@@ -2397,7 +2397,7 @@ With this notation in hand, the map $\jmath$ is induced by the assignment
 x[\lambda_{i_1}|\cdots |\lambda_{i_s}]&\longmapsto x\lambda_{i_1\langle s-1\rangle}\cdots \lambda_{i_{s-1}\langle1\rangle}\lambda_{i_s\langle 0\rangle} &\quad&(\textup{if }n\geq1).%both corrected
 \end{alignat*}
 Before making calculations, we recall the formulae for Lie algebra homotopy operations [Curtis]. Let $\Shuffles{p}{q}$ be the set of $(p,q)$-shuffles, that is, pairs $(\alpha,\beta)$ where $\alpha=(\alpha_{p-1},\ldots,\alpha_0)$ and $\beta=(\beta_{q-1},\ldots,\beta_0)$ are disjoint monotonically decreasing sequences that together partition the set $\{0,\ldots,p+q-1\}$. Let $s_{\alpha}$ denote the iterated degeneracy operator $s_{\alpha_{p-1}}\cdots s_{\alpha_0}$.
-Finally, let $\HalfShuffles{i}{i}$ denote the subset of $\Shuffles{i}{i}$ consisting of those shuffles $(\alpha,\beta)\in\Shuffles{i}{i}$ such that $\alpha_0=0$. The formulae of \cite[\S8]{CurtisSimplicialHtpy.pdf}, for $z\in ZK_p(X)$ and $w\in ZK_q(X)$ cycles representing classes $\overline{z},\overline{w}\in H_*^{\calU(n)}X$ are as follows:
+Finally, let $\HalfShuffles{i}{i}$ denote the subset of $\Shuffles{i}{i}$ consisting of those shuffles $(\alpha,\beta)\in\Shuffles{i}{i}$ such that $\beta_{i-1}=2i-1$. The formulae of \cite[\S8]{CurtisSimplicialHtpy.pdf}, for $z\in ZK_p(X)$ and $w\in ZK_q(X)$ cycles representing classes $\overline{z},\overline{w}\in H_*^{\calU(n)}X$ are as follows:
 \begin{alignat*}{3}
 [\overline{z},\overline{w}]\textup{ is represented by }&&\sum_{(\alpha,\beta)\in\Shuffles{p}{q}}[s_\beta(\jmath z), s_\alpha(\jmath w)]_{\langle -1\rangle}&\in Q^{\calU(n)}B^{\calW(n)}_{p+q}X,\\
 \overline{z}\lambda_i\textup{ is represented by }&&\sum_{(\alpha,\beta)\in\HalfShuffles{i}{i}}[s_\beta(\jmath z), s_\alpha(\jmath z)]_{\langle -1\rangle}&\in Q^{\calU(n)}B^{\calW(n)}_{p+i}X,&\quad&(0<i\leq p),\\
@@ -2416,6 +2416,15 @@ Choose $i\geq0$ and $\alpha=(\alpha_p,\ldots,\alpha_1)$ with $\alpha_p>\cdots >\
 \item[ii)] If exactly one of $i$ and $i-1$ appears in $\alpha$, then  $d_is_\alpha$ does not depend on which of $i$ and $i-1$ appeared.
 \end{enumerate}
 \end{lem}
+\begin{lem}\label{LemmaOnSimplicialRelations}
+Choose $i\geq1$ and $\alpha=(\alpha_{p-1},\ldots,\alpha_0)$ with $\alpha_{p-1}>\cdots >\alpha_0\geq0$.
+\begin{enumerate}[i)]\squishlist
+\setlength{\parindent}{.25in}
+\item[i)] If neither $i-1$ nor $i-2$ appear in $\alpha$, then  $d_{i-1}s_\alpha=s_{\alpha'}d_{i'}$ for some $\alpha'$ and $i'$.
+\item[ii)] If exactly one of $i-1$ and $i-2$ appears in $\alpha$, then  $d_{i-1}s_\alpha$ does not depend on which of $i-1$ and $i-2$ appeared.
+\end{enumerate}
+\end{lem}
+
 \begin{prop}\label{LieBracketsTrivial}
 The Lie bracket $H_p^{\calU(n)}X\otimes H_q^{\calU(n)}X\to H_{p+q}^{\calU(n)}X$ vanishes except when $p+q=0$. 
 The Lie algebra structure on $H_0^{\calU(n)}X$ is induced by that on $X$: if $z,w\in X$ represent $\overline{z},\overline{w}\in H_0^{\calU(n)}X$, then $[\overline{x},\overline{y}]$ is represented by the cycle $[x,y]\in ZC_0(Q^{\calU(n)}B^{\calW(n)}X)$.
@@ -2431,15 +2440,52 @@ Using the simplicial identity $d_0s_0=\Id$, we have $d_{0}a=\sum [s_\beta(\jmath
 
 Using the simplicial identity $d_1s_0=\Id$, we have $d_{1}a=\sum [s_\beta(\jmath z), s_\alpha(\jmath w)]_{\langle 0\rangle}$. Now for every pair $(\alpha,\beta)$ indexing this sum, unless $p=q=0$, one of $\alpha$ or $\beta$, say $\beta$, will contain $0$. Then by lemma \ref{what degens do to iterated operations}, every summand in $s_{\alpha}(\jmath z)$ is in the image of some \emph{non-top} $\lambda_{i\langle 0\rangle}$, and as $[x\lambda_i,y]=0$ whenever $\lambda_i$ is not a top operation, the entire expression vanishes in the construction $F^{\calW(n)}_{\langle 0\rangle}$.
 
-For this, we'll define an involution $\rho_i$ of the set $\Shuffles{p}{q}$ indexing the sum.
-If $\alpha$ and $\beta$ do not each contain exactly one of $0$ and $1$, then $\rho_i$ fixes $(\alpha,\beta)$. Otherwise, $\rho_i$ interchanges the positions of $i$ and $i-1$ in $(\alpha,\beta)$. 
+What remains is to show that $d_{i}a=0$ for $2\leq i\leq p+q+1$. As $d_is_0=s_0d_{i-1}$ for $i\geq2$:
+\[d_{i}a=\sum [s_{0}d_{i-1}s_\beta(\jmath z), s_{0}d_{i-1}s_\alpha(\jmath w)]_{\langle 0\rangle}.\]
+For this, we'll define an involution $\rho_i$ of the set $\Shuffles{p}{q}$ indexing the sum, for $2\leq i\leq p+q+1$.
+If $\alpha$ and $\beta$ do not each contain exactly one of $i-1$ and $i-2$, then $\rho_i$ fixes $(\alpha,\beta)$. Otherwise, $\rho_i$ interchanges the positions of $i-1$ and $i-2$ in $(\alpha,\beta)$. To avoid confusion, we note that $\rho_{p+q+1}$ is the identity, as neither $\alpha$ nor $\beta$ ever contain $p+q$.
 
-If $(\alpha,\beta)$ is a fixed point of $\rho_i$, then one of $\alpha$ and $\beta$, say $\alpha$, contains neither of $i$ and $i-1$. Then by lemma \ref{LemmaOnSimplicialRelations}(i), $d_is_\alpha(\jmath w)=s_{\alpha'}d_{i'}(\jmath w)=0$, as $\jmath w$ is a cycle in $\Nop_*$, and thus lies in the kernel of all of the face maps. Thus, the summands corresponding to fixed points vanish.
+If $(\alpha,\beta)$ is a fixed point of $\rho_i$, then one of $\alpha$ and $\beta$, say $\alpha$, contains neither of $i$ and $i-1$. Then by lemma \ref{LemmaOnSimplicialRelations}(i), $d_{i-1}s_\alpha(\jmath w)=s_{\alpha'}d_{i'}(\jmath w)=0$, as $\jmath w\in Z\Nop_*$. Thus, the summands corresponding to fixed points vanish.
 On the other hand, given a shuffle $(\alpha,\beta)$ which is not fixed by $\rho_i$, lemma \ref{LemmaOnSimplicialRelations}(ii) shows that the summand corresponding to $(\alpha,\beta)$ equals the summand corresponding to $\rho_i(\alpha,\beta)$, so these two summands cancel with each other.
 \end{proof}
+\begin{prop}\label{QkTrivial}
+Suppose that $z\in ZK^{\calU(n)}_{s_{n+1}}(X)_{s_n,\ldots,s_1}^t$. If $n>0$, $\overline{z}\lambda_k=0$ for $1\leq k\leq {s_{n+1}}$. If $n=0$, writing $s=s_1$ we have $\overline{z}\lambda_k=0$ for $2\leq k\leq {s}$, and $\lambda_1$ may be defined at the level of the Koszul complex by the assignment
+\[z=\textstyle\sum_{j}P(i_{s}^{(j)},\ldots,i_1^{(j)})x^{(j)}{\longmapsto}\textstyle\sum_{j}P(t,i_{s}^{(j)},\ldots,i_1^{(j)})x^{(j)}\in ZK^{\calU(n)}_{s+1}(X)^{2t+1},\]
+where we have written $(i_{s}^{(j)},\ldots,i_1^{(j)})$ for the various $\deltaalg$-admissible sequences corresponding to the summands of $z$. That is, $\lambda_1$ adjoins a top operation to the left of each sequence $I^{(j)}$.
+\end{prop}
+\begin{proof}
+We'll first prepare for the calculation of $\lambda_1$ in case $n=0$.
+Write $e$ for the proposed representative $\sum_{j}P(t,i_{s}^{(j)},\ldots,i_1^{(j)})x^{(j)}$ of $\overline{z}\lambda_1$. This $e$ does in fact lie in the Koszul complex: the sequences $(t,i_{s}^{(j)},\ldots,i_1^{(j)})$ are indeed $\deltaalg$-admissible, since
+\[t=(i_{s}+1)+|P(i_{s-1},\ldots,i_1)x^{(j)}|\geq2i_{s}+1,\]
+since we have demanded that $\minDimP(i_{s},\ldots,i_1)\leq|x^{(j)}|$. Then, as long as the image $\jmath e$ in $\Nop_{s+1}Q^{\calU(n)}B^{\calW(n)}X^{2t+1}$ is homotopic to the standard representative of $\overline{z}\lambda_1$, the calculation for $\lambda_1$ is complete. This chain is given by the formula
+\[\!\!\!\!\sum_{j,\,\produces{K}{(t,i_{s}^{(j)},\ldots,i_1^{(j)})}{\deltaalg}}\!\!\!\!\left[P^{k_{s+1}} \middle|\cdots\middle|P^{k_1} \right]x^{(j)}
+ =\!\!\!\!\sum_{j,\,\produces{H}{(i_{s}^{(j)},\ldots,i_1^{(j)})}{\deltaalg}}\!\!\!\!\left[P^t\middle|P^{h_{s}} \middle|\cdots\middle|P^{h_1} \right]x^{(j)}=P^{t}_{\langle 0\rangle}s_0(\jmath z),\]
+where the equality here comes from the observation that for each $j$:
+%\[\produces{(k_{s_1+1},\ldots,k_1)}{(t,i_{s}^{(j)},\ldots,i_1^{(j)})}{\deltaalg}\textup{ iff }k_{s_1+1}=t\textup{ and }\produces{(k_{s_1},\ldots,k_1)}{(i_{s}^{(j)},\ldots,i_1^{(j)})}{\deltaalg}\]
+\[\textup{if }\produces{(k_{s+1},\ldots,k_1)}{(t,i_{s}^{(j)},\ldots,i_1^{(j)})}{\deltaalg}\textup{ and }k_{s+1}\neq t\textup{, then }\minDimP(k_{s+1},\ldots,k_1)>|x^{(j)}|.\]
+To understand this observation, as $\deltaalg$-Adem relations only decrease $\minDimP$ [above somewhere], we may reduce to the case where $(k_s,\ldots,k_1)$ is already $\deltaalg$-admissible and $\produces{(k_{s+1},k_{s})}{(t,k_{s+1}+k_{s}-t)}{\deltaalg}$. Then
+\begin{alignat*}{2}
+\minDimP(k_{s+1},\ldots)&\geq k_{s}-(k_{s-1}+1)-(k_{s-2}+1)-\cdots  \\
+&> t-(k_{s+1}+k_s-t+1)-(k_{s-1}+1)-(k_{s-2}+1)-\cdots  \\
+&=t-i^{(j)}_{s}-\cdots -s=|x^{(j)}|
+\end{alignat*}
+where: the non-strict inequality is by definition of $\minDimP$; the strict inequality follows by examining the $\deltaalg$-Adem relation for $\delta_{k_{s+1}}\delta_{k_{s}}$; the first equality holds as $\deltaalg$ is graded by the sum of the indices; and the second equality holds as $t$ is the top operation, so that the maximum $\minDimP(t,i^{(j)}_{s},\ldots)$ is attained at its final argument.
 
+With this in hand, we return the the general case, $1\leq k\leq p$ and $n\geq0$, our goal being to produce a nullhomotopy, except when $n=0$ and $k=1$, when we need a homotopy to $P^t_{\langle 0\rangle}s_0(\jmath z)$. We proceed as in the previous proof, defining
+\[a:=\sum_{(\alpha,\beta)\in\HalfShuffles{k}{k}}[s_{0}s_\beta(\jmath z), s_{0}s_\alpha(\jmath z)]_{\langle 0\rangle}\in C_{p+k+1}\mathbb{B}_{2s_n,\ldots,2s_1}^{2t+1}.\]
+Then $d_0a$ is the representative for $\overline{z}\lambda_k$, and $d_1a=0$ as in the previous proof (with no analogue of the special case $p=q=0$). Now consider the same involutions $\rho_i$ as in the previous proof, now action on $\Shuffles{k}{k}$. When $2\leq i< 2k$, these $\rho_i$ preserves $\HalfShuffles{k}{k}$. When $2k<i\leq p+k+1$, $\rho_i$ is the identity, so preserves $\HalfShuffles{k}{k}$ trivially. Thus, $d_ia=0$ for all $2\leq i\leq p+k+1$ with $i\neq2k$, as  the cancellations still all occur within the smaller sum
+\[d_{i}a=\sum_{(\alpha,\beta)\in\HalfShuffles{k}{k}} [s_{0}d_{i-1}s_\beta(\jmath z), s_{0}d_{i-1}s_\alpha(\jmath z)]_{\langle 0\rangle}.\]
+To address the question of $\rho_{2k}$, we define an alternative involution $\widetilde{\rho}_{2k}$ of $\Shuffles{k}{k}$ as follows.  If $\alpha$ and $\beta$ do not each contain exactly one of $2k-2$ and $2k-1$ each, then $\widetilde{\rho}_{2k}$ fixes $(\alpha,\beta)$. Otherwise, we define $\widetilde{\rho}_{2k}(\alpha,\beta):=\rho_{2k}(\beta,\alpha)$, which is to say that $\widetilde{\rho}_{2k}$ swaps \emph{everything but} $2k-2$ and $2k-1$.
 
+Now the summands in this formula exhibit an extra symmetry, given that $z$ is repeated. This symmetry, along with lemma \ref{LemmaOnSimplicialRelations}(ii), shows that all the summands corresponding to shuffles not fixed by $\widetilde{\rho}_{2k}$ cancel out. When $k>1$, the fixed points of $\widetilde{\rho}_{2k}$ are only those shuffles in which one of $\alpha$ and $\beta$ contains neither $2k-2$ nor $2k-1$, and these summands vanish, by \ref{LemmaOnSimplicialRelations}(i), as in previous arguments. When $k=1$, however, $\widetilde{\rho}_{2k}$ has an \emph{extra} fixed point, the shuffle $((0),(1))$, which fails to differ from its image under $\widetilde{\rho}_{2k}$.
 
+In sum, we have shown that $d_0a=0$ represents $\overline{z}\lambda_i$, and that $d_ia=0$ whenever $1\leq i\leq p+k+1$, except when $k=1$ and $i=2$. In this case, we perform the final calculation:
+\[d_2a=[s_{0}d_1s_1(\jmath z), s_{0}d_1s_0(\jmath z)]_{\langle 0\rangle}=[s_{0}(\jmath z), s_{0}(\jmath z)]_{\langle 0\rangle}=\begin{cases}
+0,&\textup{if }n\geq1,\\
+P^{t}_{\langle 0\rangle}s_0(\jmath z),&\textup{if }n=0.
+\end{cases}\]
+That is, if $n\geq1$, this self bracket vanishes (an object of $\calW(n)$ for $n\geq1$ is a Lie algebra), while if $n=0$, the self-bracket is equal to the top $P$-operation, in this case $P^t$. %Thus, for $n\geq1$, we have $\overline{z}\lambda_1=0$ as needed, and for $n=0$, we have shown that $\overline{z}\lambda_1=0$ may be represented by $P^{t}_{\langle 0\rangle}s_0(\jmath z)$, and one simply observes. %The result is then proven for $n\geq1$, as $a$ turns out to be a nullhomotopy for all $k\geq1$. When $n=0$, this only holds for $k\geq2$, and when
+\end{proof}
 
 
 
@@ -2538,6 +2584,10 @@ having all gradings at the very right, tensor products of vector spaces,\ldots?
 \item ``$\delta$-algebra'' isn't a good name, $\delta$-admissible too!
 \item General principle: homotopy operations ($\delta$, $\lambda$) are partially defined, cohomology operations are sometimes zero. The two notions interchange upon taking cohomology.
 \item co-Koszul vs coKoszul.
+\item ``goerss looked at unstable ops in the reverse adams SSeq, which is how we understand w. I do something for the forwards ass, and the story comes out rather differently.''
+\item 
+``Goerss' text explains why one might expect these dualities. (After giving the four koszul algebras in the first chapter). Put 2 algs in the example of commutative algs, and then 2 under lie algs.''
+\item Install a $\textup{v}$ in each Koszul $\delta$ operation.
 \end{enumerate}
 \end{todolist}
 
