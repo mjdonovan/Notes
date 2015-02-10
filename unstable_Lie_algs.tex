@@ -18,17 +18,17 @@
 \xclude{Unstable Lie algebras over the Lambda-algebra}%depr, with some expos
 \xclude{Cohomology operations for unstable Lie algebras over Lambda}%depr
 \xclude{todolist}
-\renewcommand{\xclude}[1]{\nclude{#1}}% <---------------
+%\renewcommand{\xclude}[1]{\nclude{#1}}% <---------------
 \xclude{Contents Page}
 \xclude{Intro}
 \xclude{Conventions and notation}
 \xclude{Lie algebras in characteristic 2 and their homotopy operations}
-\nclude{Cohomology operations for all unstable Lie algebras}
-\nclude{Koszul complexes}
+\xclude{Cohomology operations for all unstable Lie algebras}
+\xclude{Koszul complexes}
 \xclude{Composite functor spectral sequences}
 \xclude{tricky proofs of operation compatibilities}
 \xclude{The cohomology of a trivial unstable Lie algebra over P}
-\xclude{appendices}
+\nclude{appendices}
 
 \usepackage[bookmarks=false,pdftex,pdfborder={0 0 0 [1 1]}]{hyperref}
 
@@ -319,7 +319,7 @@ url=false,doi=false,isbn=false,eprint=false]{biblatex}%
 \newcommand{\HalfShuffles}[2]{\textup{Sh}_{#1#2}^{\smash{\!\div2}}}
 \newcommand{\Nop}{N^{\smash{-}}}
 \newcommand{\NOFULLPAGE}{\relax}
-
+\newcommand{\UEA}{U'}%{U^{[2]}}%if this changes, so does some text
 \newcommand{\Sq}{\mathrm{Sq}}
 \newcommand{\Comm}{\calC}
 \newcommand{\F}{\mathbb{F}}
@@ -684,6 +684,10 @@ Any object $X$ of $\calW(0)$ is in particular an object of $\calU(0)$. It is \em
 \subsection{The example of simplicial restricted Lie algebras}
 \todo{Explain the four Koszul algebras in this and the previous section}{Explain why you get the Koszul dualities
 \item refer to appendix for proof of the fact about Lie cohomology}
+
+\subsection{The example of simplicial Lie algebras}
+\textbf{Old spiel from definition of operations on $H^*_{\calW(n)}$}
+By [Priddy's prim coh ops], Lie algebra cohomology has Steenrod operations and a product. However, the formulae given by Priddy (involving the $\overline{W}$-construction) are not obviously equivalent to what we have given here. However, it is not hard to check that the definition we have given using $\psi_\calW$ is equivalent to an analogous definition for Lie algebra cohomology (given in [placemarker in appendix]), and theorem [BLAH again] identifies these operations with Priddy's.
 
 \end{Conventions and notation}
 
@@ -1448,7 +1452,7 @@ Write $E^r_{\ell,s}$ for the spectral sequence of the filtered complex $\Nop_*X$
 \[K_s^{\calU(n)}X:=E^1_{s,s}=d^{-1}(F_{s-1}\Nop_{s-1})=F_s\Nop_s\]
 form a subcomplex of $\Nop_*$ whose inclusion is a homotopy equivalence. Rather than determining these groups directly, Priddy's theory works with their duals, $K^*_{\calU(n)}X$, which form a cochain complex with homology $H^*_{\calU(n)}X$. In fact, Priddy's theory shows that the cochain complex $K^*_{\calU(n)}X$, the \emph{co-Koszul complex}, is actually a differential unstable left module over the same operations as its cohomology $H^*_{\calU(n)}X$, and indeed that this unstable module is \emph{free}. More precisely,  $K_0^{\calU(n)}X= X$, and $K^*_{\calU(n)}X$ is free on the  subspace $X^*$.
 \begin{prop}\label{the cokoszul complex is free}
-Suppose that $n\geq0$, and $X$ is a locally finite object of $\calU(n)$. The chain maps $\widetilde{\theta^i}$ ($\widetilde{\theta_i}$ when $n=0$) on $C_*Q^{\calU(n)}B^{\calU(n)}X$ restrict to the subcomplex $K_*^{\calU(n)}X$, and induce on $K^*_{\calU(n)}X$ the structure of an object of $\calM(n+1)$. Moreover, the inclusion $X^*\to K^0_{\calU(n)}X$ induces an isomorphism $F_{\calM(n+1)}(X^*)\to K^*_{\calU(n)}X$.
+Suppose that $n\geq0$, and $X$ is a locally finite object of $\calU(n)$. The chain maps $\widetilde{\theta^i}$ ($\widetilde{\theta_i}$ when $n=0$) on $C_*Q^{\calU(n)}B^{\calU(n)}X$ restrict to the subcomplex $K_*^{\calU(n)}X$, and induce an $\calM(n+1)$-structure on $K^*_{\calU(n)}X$ which commutes with the differentials. The inclusion $X^*\cong K^0_{\calU(n)}X\subseteq K^*_{\calU(n)}X$ induces an isomorphism $F_{\calM(n+1)}(X^*)\to K^*_{\calU(n)}X$. Moreover, this $\calM(n+1)$-structure on $K^*_{\calU(n)}$ induces the $\calM(n+1)$-structure on $H^*_{\calU(n)}X$ of [above]. 
 \end{prop}
 
 
@@ -2514,6 +2518,195 @@ There may be a wrinkle here answering the well definedness vs vanishing question
 \appendix
 \begin{appendices}
 \vfil\pagebreak
+
+\section{A May spectral sequence for $H^*_{\calW(0)}$}
+\todo{Explain the quadratic filtration of the bar construction}{derive a spectral sequence
+\item figure out what it implies about the whole thing
+}
+
+\section{Cohomology operations for Lie algebras}\label{appendix on Lie coh ops}
+\subsection{The partially restricted universal enveloping algebra}
+\todo{Recall Priddy's definition of Lie algebra cohomology, and results}{Explain that they don't calculate everything for us already, since the actual simplicial Lie algebras we're looking at are not GEMs --- their homotopy supports nontrivial operations.
+\item maybe compare $\overline{W}$ and the bar construction
+\item maybe not, but if you don't, point out that the operations you get come from the diagonal of the bar construction below which is a genuine simplicial coalgebra}
+In this section we will prove [????????], using an improved version of Priddy's [Proof operations coincide].
+
+Denote by $\calA(n)$ the following category of graded augmented associative algebras. An object of $\calA(n)$ is a graded vector space
+\[A=A^{-1}_{0,\ldots,0}\oplus\bigoplus_{t\geq{1}}\bigoplus_{s_n,\ldots,s_1\geq0}A^t_{s_n,\ldots,s_1},\]
+such that $A^{-1}_{0,\ldots,0}=\F_2\langle 1\rangle$ is spanned by the unit of an associative unital pairing
+\[A^{t}_{s_n,\ldots,s_1}\otimes A^{q}_{p_n,\ldots,p_1}\to A^{t+q+1}_{s_n+p_n,\ldots,s_1+p_1}.\]
+Now there is a forgetful functor $I:\calA(n)\to\calL(n)$, which sends $A$ to the partially restricted Lie algebra
+\[\bigoplus_{t\geq{1}}\bigoplus_{s_n,\ldots,s_1\geq0}A^t_{s_n,\ldots,s_1},\]
+with bracket the commutator, and restriction operation given by $x\mapsto x^2$ whenever $x\in A^t_{s_n,\ldots,s_1}$ and not all of $s_n,\ldots,s_1$ zero.
+
+The composite forgetful functor $\calA(n)\overset{I}{\to}\calL(n)\to\vect{+}{n}$ has a left adjoint, which is nothing other than the tensor algebra functor $T$ (with unit placed in $A^{-1}_{0,\ldots,0}$ as appropriate). Moreover, the functor $I$ has a left adjoint, $\UEA$, \emph{the partially restricted universal enveloping algebra} functor, with $\UEA L$ obtained as the quotient of $T(L)$ by the two-sided ideal generated by any $[x,y]-xy-yx$ and by $\restn{x}-x^2$ with $x$ of restrictable degree. Indeed, there is a composite of adjunctions
+\[\xymatrix@R=.3cm@C=1cm{
+\vect{+}{n}  \ar@<.6ex>[r]^{F_{\calL(n)}}&
+\calL(n)  \ar@<.4ex>[l]^{\textup{forget}} \ar@<.6ex>[r]^{\UEA}&
+\calA(n),  \ar@<.4ex>[l]^{I} 
+}
+\]
+showing that $\UEA\circ F^{\calL(n)}\cong T$. As in the non-restricted and fully restricted case, $\UEA L$ is naturally a Hopf algebra, having diagonal defined by the requirement $\Delta x=1\otimes x+x\otimes 1$ for $x\in L\subset \UEA L$.
+\begin{lem}
+The prolonged functor $\UEA:s\calL(n)\to s\calA(n)$ preserves weak equivalences.
+\end{lem}
+\begin{proof}
+Suppose that $X\to Y$ is a weak equivalence in $s\calL(n)$, and decompose $X$ as $X^r\oplus X^u$, the sum of its subobjects of in restrictable and unrestrictable degrees respectively. The Lie filtration [] makes $C_*(\UEA X)\to C_*(\UEA Y)$ a map of filtered commutative DGAs, so there is an induced map of the resulting spectral sequences. Assuming a straightforward partially restricted version of the PBW theorem [? or ?], the $E^0$ page of the spectral sequence for $\UEA X$ is the DGA $C_*(\F_2[X^u]\otimes E[X^r])$, where $\F_2[X^u]$ denotes a polynomial algebra, while $E[X^r]$ denotes an exterior algebra. By Dold's theorem [], the $E^1$ page is then a functor of $\pi_*(X^u)$ and $\pi_*(X^r)$. As the induced maps $\pi_*(X^u)\to\pi_*(Y^u)$ and $\pi_*(X^r)\to\pi_*(Y^r)$ are isomorphisms, the map of spectral sequences is an isomorphism from $E^1$.
+\end{proof}
+
+\subsection{The proof of [????????]}
+
+Let $\frakg_\bullet\in s\calL(n)$ be almost free on a fixed choice of subspaces $V_p\subseteq \frakg_p$.
+We're interested in using the bisimplicial vector space in $ss\vect{+}{n}$:
+\[\textbf{B}_{pq}:=\overline{B}_q \UEA\frakg_p=(\UEA\frakg_p)^{\otimes q},\]
+which in each simplicial level $p$ is the standard simplicial bar construction [Priddy early chapter] calculating $\Tor_{\UEA\frakg_p}(\F_2,\F_2)$.
+This is a cocommutative coalgebra, with diagonal:
+\[\psi:\left(\overline{B}_\bullet (\UEA\frakg_\bullet)\overset{\overline{B}(\Delta)}{\to}\overline{B}_\bullet (\UEA\frakg_\bullet\otimes \UEA\frakg_\bullet)\cong\overline{B}_\bullet (\UEA\frakg_\bullet)\otimes \overline{B}_\bullet (\UEA\frakg_\bullet)\right).\]
+We're also going to use the (somewhat artificial) simplicial chain complex
+\[\textbf{Q}_{\bullet *}:=\begin{cases}
+Q^{\calL(n)}(\frakg_\bullet),&\textup{if }*=1;\\
+\F_2,&\textup{if }*=0;
+\\0,&\textup{otherwise.}
+\end{cases}
+\]
+with zero differentials in each simplicial level.
+
+As $\frakg$ is levelwise free, the evident map $T(V_p)\to \UEA\frakg_p$ is an isomorphism for each $p$. Now there's a map of simplicial chain complexes $r:N_*^\textup{v}\textbf{B}_\bullet\to \textbf{Q}_{\bullet*}$, where in this section, \textbf{what kind of normalization is convenient?}.  This $r$ is given in level $p$ by the identification $N^\textup{v}_0\textbf{B}_p=\F_2=\textbf{Q}_{p0}$ and the composite:
+\[\textbf{B}_{p1}=I\UEA\frakg_p\epi I\UEA\frakg_p/(I\UEA\frakg_p)^2\cong Q^{\calL(n)}(\frakg_p).\]
+These maps are natural, and as such, commute with the horizontal (i.e.\ simplicial) structure maps. Finally, for each individual $p$, define a vertical homotopy $N_*^\textup{v}\textbf{B}_{p\bullet}\to N_{*+1}^\textup{v}\textbf{B}_{p\bullet}$ by the following formulae (in which the $v_{i_{j}}$ are taken to be in $V_p\subseteq \frakg_p\subseteq\UEA\frakg_p$):
+\begin{alignat*}{2}
+h_q:N^\textup{v}_q\overline{B}\UEA\frakg_p&\overset{}{\longrightarrow} N^\textup{v}_{q+1}\overline{B}\UEA\frakg_p\\
+[\smash{\underbrace{v_{i_1}|\cdots |v_{i_{k-1}}}_{\textup{length 1 bars}}}|v_{i_{k}}v_{i_{k+1}}\cdots |\cdots ]
+&\overset{}{\longmapsto}
+[v_{i_1}|\cdots |v_{i_{k}}|v_{i_{k+1}}\cdots |\cdots ]%
+\\
+[v_{i_1}|\cdots |v_{i_{q}}]
+&\overset{}{\longmapsto}0.
+\end{alignat*}
+This homotopy is of the same type as that used in \S[???????] and [Priddy], and commutes with all of the horizontal simplicial structure except $d^\textup{h}_0$, so that $d^\textup{h}h_q+h_qd^\textup{h}=d^\textup{h}_0h_q+h_qd^\textup{h}_0$.
+\begin{lem}\label{barConstNullHtpyLemma}
+Under the map $(\textup{Id}+h_{q-1}d^\textup{v}+d^\textup{v}h_{q}): N^\textup{v}_q\overline{B}\UEA\frakg_p\to N^\textup{v}_q\overline{B}\UEA\frakg_p$,
+\begin{alignat*}{2}
+[v_{i_1}\cdots |\cdots |\cdots v_{i_r}]
+&\longmapsto0\text{ unless $r=q=1$, in which case}%
+\\
+[v_{i_1}]
+&\longmapsto [v_{i_{1}}].
+\end{alignat*}
+\end{lem}
+Now Singer \cite{SingerSteen1.pdf} gives a method of defining horizontal Steenrod operations on the spectral sequence of $\textbf{B}_{\bullet\bullet}$. His method is to define a \emph{bisimplicial Eilenberg-Zilber map} $K_k:C\left(X\otimes Y\right)\to CX\otimes CY$ for each $k$, a degree $k$ map satisfying $dK_k+K_kd=K_{k-1}+TK_{k-1}T$. His formulae are given in terms of a \emph{special} simplicial Eilenberg-Zilber map. On the dual total complex, the resulting cohomology operations satisfy the Adem operations.
+
+Our method of proving [] will be to modify Singer's definition using the chain homotopy $h$, in order to shift the horizontal operations one higher in filtration. They will still satisfy the same relations at the abutment, and as the abutment filtration is trivial, they must satisfy the same relations at $E^2$. Finally, we'll note that what we have produced at $E^2$ is the definition of the Steenrod operations from \S[??????].
+\begin{lem}\label{firstCompositeLemma}
+The composite
+\[N_{p}^\textup{h}N_2^\textup{v}\textup{\textbf{B}}\overset{\psi}{\to} N_{p}^\textup{h}N_2^\textup{v}(\textup{\textbf{B}}\otimes\textup{\textbf{B}})\overset{D_0^\textup{v}}{\to} N_{p}^\textup{h}(N_1^\textup{v}\textup{\textbf{B}}\otimes N_1^\textup{v}\textup{\textbf{B}})\overset{r\otimes r}{\to}N^\textup{h}_p(\textup{\textbf{Q}}_{\bullet 1}\otimes \textup{\textbf{Q}}_{\bullet 1})\]
+vanishes except on terms $[x|y]$ where $x$ and $y$ are generators of $\frakg_p$, which have image $x\otimes y$.
+\end{lem}
+\begin{proof}
+A generic element of the source is $[x_1\cdots x_I|y_1\cdots y_J]$, where $x_1,\ldots,x_I$ and $y_1,\ldots,y_J$ are generators of $\frakg_p$. This element maps under $\psi$ to
+\[\sum_{a_1=0}^1\cdots \sum_{a_I=0}^1
+\sum_{b_1=0}^1\cdots \sum_{b_J=0}^1
+\left[\prod_{i=1}^Ix_i^{a_i}\middle|\prod_{\smash{j=1}}^Jy_j^{b_j}\right]\otimes
+\left[\prod_{i=1}^Ix_i^{1-a_i}\middle|\prod_{\smash{j=1}}^Jy_j^{1-b_j}\right]\]
+and $D_0^\textup{v}$ annihilates all terms except for those in which all $a_i$ are $1$ and all $b_j$ are $0$, leaving
+\[\left[\prod_{i=1}^Ix_i\right]\otimes
+\left[\prod_{\smash{j=1}}^Jy_j\right].\]
+Finally, $r\otimes r$ annihilates this term unless $I=J=1$.
+\end{proof}
+\begin{lem}\label{secondCompositeLemma}
+The composite
+\[N_{p+1}^\textup{h}N_1^\textup{v}\textup{\textbf{B}}\overset{\psi}{\to} N_{p+1}^\textup{h}N_1^\textup{v}(\textup{\textbf{B}}\otimes\textup{\textbf{B}})\overset{D_1^\textup{v}}{\to} N_{p+1}^\textup{h}(N_1^\textup{v}\textup{\textbf{B}}\otimes N_1^\textup{v}\textup{\textbf{B}})\overset{r\otimes r}{\to}N^\textup{h}_{p+1}(\textup{\textbf{Q}}_{\bullet 1}\otimes \textup{\textbf{Q}}_{\bullet 1})\]
+vanishes except on terms $[xy]$ where $x$ and $y$ are generators of $\frakg_{p+1}$, which have image $x\otimes y+y\otimes x$.
+\end{lem}
+\begin{proof}
+A generic element of the source is $[x_1\cdots x_I]$, where $x_1,\ldots,x_I$ are generators of $\frakg_{p+1}$. This element maps under $\psi$ to
+\[\sum_{a_1=0}^1\cdots \sum_{a_I=0}^1
+\left[\prod_{i=1}^Ix_i^{a_i}\right]\otimes
+\left[\prod_{i=1}^Ix_i^{1-a_i}\right].\]
+Now $D_1^\textup{v}$ is basically the identity, by specialness.
+Finally, $r\otimes r$ annihilates this term unless $I=2$ and $a_1\neq a_2$.
+\end{proof}
+\begin{lem}\label{commuting rectangle lemma for lie operations}
+There is a commuting diagram:
+\[\xymatrix@R=4mm@C=18mm{
+N_{n+k}^\textup{h}N_1^\textup{v}\textup{\textbf{B}} \ar[r]^-{d^\textup{h}_0h_{n+k}+h_{n+k-1}d^\textup{h}_0}
+\ar[d]^-{r}&%r1c1
+N_{n+k-1}^\textup{h}N_2^\textup{v}\textup{\textbf{B}} \ar[r]^-{D^\textup{v}_0\circ\psi}&%r1c2
+N_{n+k-1}^\textup{h}(N_1^\textup{v}\textup{\textbf{B}}\otimes N_1^\textup{v}\textup{\textbf{B}})\ar[d]^-{r\otimes r}
+\\%r1c3
+N_{n+k}^\textup{h}Q^{\calL(n)}(\frakg) \ar[r]^-{Q^{\calL(n)}(\xi_{\calL(n)})}&%r1c1
+N_{n+k-1}^\textup{h}Q^{\calL(n)}(\frakg\wedge \frakg) \ar[r]^-{j_{\calL(n)}}&%r1c2
+N_{n+k-1}^\textup{h}(Q^{\calL(n)}(\frakg)\otimes Q^{\calL(n)}(\frakg))
+}\]
+\end{lem}
+\begin{proof}
+Write
+$\textup{LHS}=(r\otimes r)\circ D^\textup{v}_0\circ\psi\circ(d_0^\textup{h}h+hd^\textup{h}_0)$ and $\textup{RHS}= \psi_{\calL(n)}\circ r$.
+Consider first an element $e=[v_1v_2\cdots v_b]$ of $N_{n+k}^\textup{h}N_1^\textup{v}\textbf{B}$ with $b\geq2$. By definition, $r$ vanishes on such an element. Lemma \ref{firstCompositeLemma} states that the map $(r\otimes r)\circ D^\textup{v}_0\circ\psi$ vanishes except on expressions of the form $[u|w]$ for $u,w\in V_{n+k-1}$. However, the expressions of this form appearing in $d^\textup{h}_0h(e)$ coincide with such expressions in $hd^\textup{h}_0(e)$, so that there is a cancellation. Thus $\textup{LHS}(e)=0=\textup{RHS}(e)$.
+
+Next, consider an element $[v]$ of $N_{n+k}^\textup{h}N_1^\textup{v}\textbf{B}$. As $h[v]=0$, and in light of lemma \ref{firstCompositeLemma}, $\textup{LHS}([v])$ equals the quadratic part of $d_0^\textup{h}v$, after writing $d_0^\textup{h}v$ as an expression in elements of $V_{n+k-1}$. This is exactly the description given in [?????? above] of $\textup{RHS}([v])=\psi_{\calL(n)}(v)$.
+%\[\textup{RHS}([v])=(j_{\calL(n)}\circ Q^{\calL(n)}(\xi_{\calL(n)}))(v)=\psi_{\calL(n)}(v).\qedhere\]
+\end{proof}
+\begin{proof}[Proof of ??????]
+%Having put in place these preparations, let's start working on the theorem. 
+Fix a cocycle $\alpha\in (N_{n}Q^{\calL(n)}(\frakg_\bullet))^*$. %We may assume without loss of generality (or are we \textbf{forced} to assume) that  $\alpha$ evaluates to zero... wait... wtf am I talking about?
+Then $\alpha$ may be viewed an a permanent cocycle at $E_2^{n,1}$ in the spectral sequence of $(\textbf{Q}_{\bullet*})^*$. We'll apply the chain-level Steenrod operation $S^k$ of Singer to the class $r^*\alpha$. As $\alpha$ is a permanent cycle, $\delta(r^*\alpha)=0$, and
+%\[S^k(r^*\alpha):=\psi^*K^*_{n+1-k}\oldphi(r^*\alpha\otimes r^*\alpha)=T_1+T_2,\textup{ where}\]
+\begin{alignat*}{2}
+S^k(r^*\alpha)&:=\psi^*K^*_{n+1-k}\oldphi(r^*\alpha\otimes r^*\alpha)=T_1+T_2,\textup{ where}
+\\
+T_1
+&=
+\psi^*(D^\textup{v}_0)^*(D^\textup{h}_{n+1-k})^*
+\oldphi(r^*\alpha\otimes r^*\alpha)\in (N^\textup{h}_{n+k-1}N^\textup{v}_2\textbf{B})^*%
+\\
+T_2
+&=
+\psi^*(D^\textup{v}_1)^*(TD^\textup{h}_{n-k}T)^*
+\oldphi(r^*\alpha\otimes r^*\alpha)\in (N^\textup{h}_{n+k}N^\textup{v}_1\textbf{B})^*
+\end{alignat*}
+%
+% $S^k(r^*\alpha)=\psi^*K^*_{n+1-k}\oldphi(r^*\alpha\otimes r^*\alpha)$, which has two terms:
+%\[\underbrace{\psi^*(D^\textup{v}_0)^*(D^\textup{h}_{n+1-k})^*\oldphi(r^*\alpha\otimes r^*\alpha)}_{\textup{$T_1$, filtration $n+k-1$}}+
+%\underbrace{\psi^*(D^\textup{v}_1)^*(TD^\textup{h}_{n-k}T)^*
+%\oldphi(r^*\alpha\otimes r^*\alpha)}_{\textup{$T_2$, filtration $n+k$}}\]
+Our method will be to compress each of these terms into filtration one higher, using the cochain homotopy $h^*$. Indeed, write 
+\[\bar{h}^*=\textstyle\sum_ph^*_p:(N^\textup{h}_*N^\textup{v}_*\textbf{B})^*\to (N^\textup{h}_*N^\textup{v}_{*-1}\textbf{B})^*.\]
+%so that $\bar{h}^*$ is zero away from the two columns $p=n+k-1$ or $p=n+k$, where it equals $h^*$. Now on these two columns,
+Using lemma \ref{barConstNullHtpyLemma}, we have two equations:
+\[(\textup{Id}+\delta^\textup{v}\bar{h}^*+ \bar{h}^*\delta^\textup{v})T_1=0\textup{ and }(\textup{Id}+\delta^\textup{v}\bar{h}^*+ \bar{h}^*\delta^\textup{v})T_2=0.\]
+The first equation holds as $(\textup{Id}+hd^\textup{v}+d^\textup{v}h)$ is zero on $N^\textup{v}_2\textbf{B}$. For the second equation, on $N^\textup{v}_1\textbf{B}$,  $(\textup{Id}+hd^\textup{v}+d^\textup{v}h)$ is the projection onto terms of the form $[v]$, yet lemma \ref{secondCompositeLemma} shows that the composite
+\[((r\otimes r)\circ(TD^\textup{h}_{n-k}T)\circ D^\textup{v}_1\circ\psi): N^\textup{h}_{n+k}N^\textup{v}_1\textbf{B}\to N^\textup{v}_{n+k}(\textbf{Q}_{\bullet1}\otimes \textbf{Q}_{\bullet1})\]
+vanishes except on terms of the form $[vw]$.
+
+
+
+
+
+
+% $\delta^\textup{v}\bar{h}^*+\bar{h}^*\delta^\textup{v}$ is the identity for $q>1$, so that:
+%\[(\textup{Id}+(\delta^\textup{v}\bar{h}^*+ \bar{h}^*\delta^\textup{v}))T_1=0\]
+%and when $q=1$, $\textup{Id}+\delta^\textup{v}\bar{h}^*+ \bar{h}^*\delta^\textup{v}$ is dual to the projection onto the subspace of generators in $\overline{B}_1$, so that by lemma \ref{secondCompositeLemma}:
+%\[(\textup{Id}+(\delta^\textup{v}\bar{h}^*+ \bar{h}^*\delta^\textup{v}))T_2=0.\]
+As $\delta^\textup{h}\bar{h}^*+ \bar{h}^*\delta^\textup{h}$ increases filtration, we have compressed $S^k(r^*\alpha)$ to the filtration $n+k$ expression $(\delta^\textup{h}\bar{h}^*+ \bar{h}^*\delta^\textup{h})T_1$, modulo even higher filtration.
+%up to even higher filtration ($n+k+1$), we have compressed $S^k(r^*\alpha)$ to the expression $(\delta^\textup{v}\bar{h}^*+ \bar{h}^*\delta^\textup{v})\textup{Term}_1$.
+Now the commuting diagram of lemma \ref{commuting rectangle lemma for lie operations} is the left square in a larger commuting diagram:
+\[\xymatrix@R=4mm@C=15mm{
+N_{n+k}^\textup{h}N_1^\textup{v}\textbf{B} \ar[d]^-{r}
+ \ar[r]^-{D^\textup{v}_0\psi (d^\textup{h}h+hd^\textup{h})}&%r1c2
+N_{n+k-1}^\textup{h}(N_1^\textup{v}\textbf{B}\otimes N_1^\textup{v}\textbf{B})\ar[d]^-{r\otimes r}\ar[r]^-{ D^\textup{h}_{n+1-k}}
+&
+N^\textup{h}_nN^\textup{v}_1\textbf{B}\otimes N^\textup{h}_nN^\textup{v}_1\textbf{B}\ar[d]^-{r\otimes r}
+\\%r1c3
+N_{n+k}^\textup{h}Q^{\calL(n)}(\frakg) \ar[r]^-{\psi_{\calL(n)}}&%r1c2
+N_{n+k-1}^\textup{h}(Q^{\calL(n)}(\frakg)\otimes Q^{\calL(n)}(\frakg))
+\ar[r]^-{ D^\textup{h}_{n+1-k}}
+&
+N^\textup{h}_nQ^{\calL(n)}(\frakg)\otimes N^\textup{h}_nQ^{\calL(n)}(\frakg)
+}\]
+Now $(N^\textup{h}_nQ^{\calL(n)}(\frakg)\otimes N^\textup{h}_nQ^{\calL(n)}(\frakg))^*$ contains the cocycle $\oldphi(\alpha\otimes\alpha)$, and pulling $\oldphi(\alpha\otimes\alpha)$ back to $(N_{n+k}^\textup{h}N_1^\textup{v}\textbf{B})^*$ along the lower composite yields $r^*\psi_{\calL(n)}^*\ExtCohOp^{k-1}(\alpha)$. Pulling back along the upper composite yields the $E^2$ representative of the shifted version of Singer's operations we've defined. As $r^*$ is an $E^2$-equivalence, and the filtrations are trivial, this proves the result. A simple modification proves the result for pairings.
+\end{proof}
+
 \section{Unstable Lie coalgebras over the dual $P$-algebra (optional)}
 \todo{Give a formal definition of these coalgebras}{goes down to level of simplicial commutative algebras, and brings in the SOA comonad structure}
 \todo{Give the construction (via equaliser diagram, etc) of the comonad}{}
@@ -2522,18 +2715,6 @@ There may be a wrinkle here answering the well definedness vs vanishing question
 \item if not locally finite, by studying gradings, can see that every coalgebra is the union of its finite type (even just `finite') subcoalgebras, and that the cobar construction respects such unions, thus get the same results in infinite case as we did from double dualisation.}
 
 
-\section{On Lie algebra cohomology operations}
-\todo{Recall Priddy's definition of Lie algebra cohomology, and results}{Explain that they don't calculate everything for us already, since the actual simplicial Lie algebras we're looking at are not GEMs --- their homotopy supports nontrivial operations.}
-\todo{Modify Priddy's spectral sequence argument to identify his operations with ours}{uses Singer's work}
-\textbf{Old spiel from definition of operations on $H^*_{\calW(n)}$}
-By [Priddy's prim coh ops], Lie algebra cohomology has Steenrod operations and a product. However, the formulae given by Priddy (involving the $\overline{W}$-construction) are not obviously equivalent to what we have given here. However, it is not hard to check that the definition we have given using $\psi_\calW$ is equivalent to an analogous definition for Lie algebra cohomology (given in [placemarker in appendix]), and theorem [BLAH again] identifies these operations with Priddy's.
-
-
-
-
-\section{A May spectral sequence for $H^*_{\calW(0)}$}
-\todo{Explain the quadratic filtration of the bar construction}{derive a spectral sequence}
-\todo{figure out what it implies about the whole thing.}{}
 \end{appendices}
 
 \begin{todolist}
@@ -2588,6 +2769,8 @@ having all gradings at the very right, tensor products of vector spaces,\ldots?
 \item Am I writing $n>0$ or $n\geq1$? Choose one.
 \item $\Sq$-admissible? Steenrod-Admissible?
 \item search all ``ref''s and check they have the right word, like ``lemma'' before them.
+\item search $F_?$, $B_?$, $Q_?$, $U_?$, $\xi_?$, $j_?$, $\psi_?$...?
+\item get a better macro for $\epi$
 \end{enumerate}
 \end{todolist}
 \end{document}
