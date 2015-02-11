@@ -320,6 +320,7 @@ url=false,doi=false,isbn=false,eprint=false]{biblatex}%
 \newcommand{\Nop}{N^{\smash{-}}}
 \newcommand{\NOFULLPAGE}{\relax}
 \newcommand{\UEA}{U'}%{U^{[2]}}%if this changes, so does some text
+\newcommand{\UEAX}{\overline{X}'}%{U^{[2]}}%if this changes, so does some text
 \newcommand{\Sq}{\mathrm{Sq}}
 \newcommand{\Comm}{\calC}
 \newcommand{\F}{\mathbb{F}}
@@ -681,12 +682,13 @@ Let $\calU(0)$ be the category whose objects are $\vect{+}{0}$-graded vector spa
 
 Any object $X$ of $\calW(0)$ is in particular an object of $\calU(0)$. It is \emph{not} true, however, that $X$ is a Lie algebra. Indeed, the relations above do not imply that $[x,x]=0$ for any $x\in X$ (see [Goerss page 18]). Rather, $X$ is an algebra over the monad $S(\LieOperad)$ discussed in \S\ref{sec on Lie algs and homotopy ops}. We will describe the construction of the monads $F_{\calW(0)}$ and $F_{\calU(0)}$ in \S\ref{Construction of the monads}.
 
-\subsection{The example of simplicial restricted Lie algebras}
-\todo{Explain the four Koszul algebras in this and the previous section}{Explain why you get the Koszul dualities
+\subsection{The example of simplicial (restricted) Lie algebras}
+\todo{Explain the four Koszul algebras in these two sections}{Explain why you get the Koszul dualities
 \item refer to appendix for proof of the fact about Lie cohomology}
 
-\subsection{The example of simplicial Lie algebras}
-\textbf{Old spiel from definition of operations on $H^*_{\calW(n)}$}
+\textbf{Probably move this to the end of the chapter on lie algs... but edit it here for convenience.}
+
+Old \textbf{spiel} from definition of operations on $H^*_{\calW(n)}$:
 By [Priddy's prim coh ops], Lie algebra cohomology has Steenrod operations and a product. However, the formulae given by Priddy (involving the $\overline{W}$-construction) are not obviously equivalent to what we have given here. However, it is not hard to check that the definition we have given using $\psi_\calW$ is equivalent to an analogous definition for Lie algebra cohomology (given in [placemarker in appendix]), and theorem [BLAH again] identifies these operations with Priddy's.
 
 \end{Conventions and notation}
@@ -2529,13 +2531,13 @@ There may be a wrinkle here answering the well definedness vs vanishing question
 \todo{Recall Priddy's definition of Lie algebra cohomology, and results}{Explain that they don't calculate everything for us already, since the actual simplicial Lie algebras we're looking at are not GEMs --- their homotopy supports nontrivial operations.
 \item maybe compare $\overline{W}$ and the bar construction
 \item maybe not, but if you don't, point out that the operations you get come from the diagonal of the bar construction below which is a genuine simplicial coalgebra}
-In this section we will prove [????????], using an improved version of Priddy's [Proof operations coincide].
-
+In this section we will prove [????????], using an improved version of Priddy's [Proof operations coincide]. We'll need one last category of graded vector spaces, $\vect{++}{n}$, an object of which is simply the direct sum of an object $V$ of $\vect{+}{n}$ and a vector space $V_{0,\ldots,0}^{-1}$:
+\[V=V^{-1}_{0,\ldots,0}\oplus\bigoplus_{t\geq{1}}\bigoplus_{s_n,\ldots,s_1\geq0}V^t_{s_n,\ldots,s_1}\in\vect{++}{n}.\]
 Denote by $\calA(n)$ the following category of graded augmented associative algebras. An object of $\calA(n)$ is a graded vector space
-\[A=A^{-1}_{0,\ldots,0}\oplus\bigoplus_{t\geq{1}}\bigoplus_{s_n,\ldots,s_1\geq0}A^t_{s_n,\ldots,s_1},\]
-such that $A^{-1}_{0,\ldots,0}=\F_2\langle 1\rangle$ is spanned by the unit of an associative unital pairing
+%\[A=A^{-1}_{0,\ldots,0}\oplus\bigoplus_{t\geq{1}}\bigoplus_{s_n,\ldots,s_1\geq0}A^t_{s_n,\ldots,s_1},\]
+$A\in \vect{++}{n}$ such that $A^{-1}_{0,\ldots,0}=\F_2\langle 1\rangle$ is spanned by the unit of an associative unital pairing
 \[A^{t}_{s_n,\ldots,s_1}\otimes A^{q}_{p_n,\ldots,p_1}\to A^{t+q+1}_{s_n+p_n,\ldots,s_1+p_1}.\]
-Now there is a forgetful functor $I:\calA(n)\to\calL(n)$, which sends $A$ to the partially restricted Lie algebra
+That is, $A_{0,\ldots,0}^{-1}$ is not part of the data of $A$, but only a graded piece added to hold the unit. Such an algebra is certainly augmented, and the augmentation ideal may be viewed as a forgetful functor $I:\calA(n)\to\calL(n)$, which sends $A$ to the partially restricted Lie algebra
 \[\bigoplus_{t\geq{1}}\bigoplus_{s_n,\ldots,s_1\geq0}A^t_{s_n,\ldots,s_1},\]
 with bracket the commutator, and restriction operation given by $x\mapsto x^2$ whenever $x\in A^t_{s_n,\ldots,s_1}$ and not all of $s_n,\ldots,s_1$ zero.
 
@@ -2547,33 +2549,41 @@ The composite forgetful functor $\calA(n)\overset{I}{\to}\calL(n)\to\vect{+}{n}$
 }
 \]
 showing that $\UEA\circ F^{\calL(n)}\cong T$. As in the non-restricted and fully restricted case, $\UEA L$ is naturally a Hopf algebra, having diagonal defined by the requirement $\Delta x=1\otimes x+x\otimes 1$ for $x\in L\subset \UEA L$.
+\begin{lem}[Partially restricted PBW theorem]\label{Partially restricted PBW theorem}
+If $L\in\calL(n)$, then there is a natural filtration of $\UEA L$ (by powers of the augmentation ideal), and the associated graded algebra is naturally isomorphic to $\F_2[L_{\textup{\textbf{0}}}]\otimes E[L_{\neq\textup{\textbf{0}}}]$.
+\end{lem}
 \begin{lem}
 The prolonged functor $\UEA:s\calL(n)\to s\calA(n)$ preserves weak equivalences.
 \end{lem}
 \begin{proof}
-Suppose that $X\to Y$ is a weak equivalence in $s\calL(n)$, and decompose $X$ as $X_{\neq\textbf{0}}\oplus X_{\textbf{0}}$, the sum of its subspaces of in restrictable and unrestrictable degrees respectively. The Lie filtration [] makes $C_*(\UEA X)\to C_*(\UEA Y)$ a map of filtered commutative DGAs, so there is an induced map of the resulting spectral sequences. Assuming a straightforward partially restricted version of the PBW theorem [? or ?], the $E^0$ page of the spectral sequence for $\UEA X$ is the DGA $C_*(\F_2[X_{\textbf{0}}]\otimes E[X_{\neq\textbf{0}}])$, where $\F_2[X_{\textbf{0}}]$ denotes a polynomial algebra, while $E[X_{\neq\textbf{0}}]$ denotes an exterior algebra. By Dold's theorem [], the $E^1$ page is then a functor of $\pi_*(X_{\textbf{0}})$ and $\pi_*(X_{\neq\textbf{0}})$. As the induced maps $\pi_*(X_{\textbf{0}})\to\pi_*(Y^u)$ and $\pi_*(X_{\neq\textbf{0}})\to\pi_*(Y^r)$ are isomorphisms, the map of spectral sequences is an isomorphism from $E^1$.
+Suppose that $X\to Y$ is a weak equivalence in $s\calL(n)$, and decompose $X$ as $X_{\neq\textbf{0}}\oplus X_{\textbf{0}}$, the sum of its subspaces of in restrictable and unrestrictable degrees respectively. The Lie filtration [] makes $C_*(\UEA X)\to C_*(\UEA Y)$ a map of filtered commutative DGAs, so there is an induced map of the resulting spectral sequences. By \ref{Partially restricted PBW theorem}, the $E^0$ page of the spectral sequence for $\UEA X$ is the DGA $C_*(\F_2[X_{\textbf{0}}]\otimes E[X_{\neq\textbf{0}}])$, where $\F_2[X_{\textbf{0}}]$ denotes a polynomial algebra, while $E[X_{\neq\textbf{0}}]$ denotes an exterior algebra. By Dold's theorem [], the $E^1$ page is then a functor of $\pi_*(X_{\textbf{0}})$ and $\pi_*(X_{\neq\textbf{0}})$. As the induced maps $\pi_*(X_{\textbf{0}})\to\pi_*(Y_{\textbf{0}})$ and $\pi_*(X_{\neq\textbf{0}})\to\pi_*(Y_{\neq\textbf{0}})$ are isomorphisms, the map of spectral sequences is an isomorphism from $E^1$.
 \end{proof}
 
 \subsection{The proof of [????????]}
 
 Let $\frakg_\bullet\in s\calL(n)$ be almost free on a fixed choice of subspaces $V_p\subseteq \frakg_p$.
 We're interested in using the bisimplicial vector space:
-\[\textbf{B}_{pq}:=\overline{B}_q \UEA\frakg_p=(\UEA\frakg_p)^{\otimes q}\in ss\vect{+}{n},\]
+\[\textbf{B}_{pq}:=\overline{B}_q \UEA\frakg_p=(\UEA\frakg_p)^{\otimes q}\in ss\vect{++}{n},\]
 which in each simplicial level $p$ is the standard simplicial bar construction [Priddy early chapter] calculating $\Tor_{\UEA\frakg_p}(\F_2,\F_2)$.
 This is a cocommutative coalgebra, with diagonal:
 \[\psi:\left(\overline{B}_\bullet (\UEA\frakg_\bullet)\overset{\overline{B}(\Delta)}{\to}\overline{B}_\bullet (\UEA\frakg_\bullet\otimes \UEA\frakg_\bullet)\cong\overline{B}_\bullet (\UEA\frakg_\bullet)\otimes \overline{B}_\bullet (\UEA\frakg_\bullet)\right).\]
-We're also going to use the (somewhat artificial) simplicial chain complex
+We're also going to use the (somewhat artificial) simplicial chain complex $\textbf{Q}\in s\,\textup{ch}_+\vect{++}{n}$
 \[\textbf{Q}_{\bullet *}:=\begin{cases}
 Q^{\calL(n)}(\frakg_\bullet),&\textup{if }*=1;\\
-\F_2,&\textup{if }*=0;
+\F_2\langle 1\rangle,&\textup{if }*=0;
 \\0,&\textup{otherwise.}
 \end{cases}
 \]
-with zero differentials in each simplicial level.
+with zero differentials in each simplicial level. Now there's a map of simplicial chain complexes $r:N_*^\textup{v}\textbf{B}_\bullet\to \textbf{Q}_{\bullet*}$ \textbf{(what kind of normalization is convenient?)}.  This $r$ is given in level $p$ by the identification $N^\textup{v}_0\textbf{B}_p=\F_2\langle 1\rangle=\textbf{Q}_{p0}$ and the composite:
+\[\textbf{B}_{p1}=I\UEA\frakg_p\epi I\UEA\frakg_p/(I\UEA\frakg_p)^2\cong Q^{\calL(n)}\frakg_p.\]
+These maps are natural, and as such, commute with the horizontal (i.e.\ simplicial) structure maps.
+We plan to show
+\begin{prop}\label{the point of the apendix} The composite
+\[N_*\Delta\textbf{B}\simeq\textup{Tot}(N^\textup{h}_*N^\textup{v}_*\textbf{B})\overset{r}{\to} \textup{Tot}(N^\textup{h}_*\textbf{Q}_{\bullet*})=\F_2\oplus \Sigma N_*Q^{\calL(n)}\frakg\]
+is a weak equivalence of chain complexes, under which the operations $\Sq^k$ and $\mu$ on $\pi^*(\Delta\textup{\textbf{B}}^*)$, which arise from the simplicial coalgebra structure of $\Delta \textup{\textbf{B}}$, correspond to the operations $\Sq^k:=\psi_{\calL(n)}\circ\ExtCohOp^{k-1}$ and $\mu:=\psi_{\calL(n)}\circ\ExtCohProd$ on $\pi^*((Q^{\calL(n)}\frakg)^*)=:H^*_{\calL(n)}\frakg$.
+\end{prop}
 
-As $\frakg$ is levelwise free, the evident map $T(V_p)\to \UEA\frakg_p$ is an isomorphism for each $p$. Now there's a map of simplicial chain complexes $r:N_*^\textup{v}\textbf{B}_\bullet\to \textbf{Q}_{\bullet*}$, where in this section, \textbf{what kind of normalization is convenient?}.  This $r$ is given in level $p$ by the identification $N^\textup{v}_0\textbf{B}_p=\F_2=\textbf{Q}_{p0}$ and the composite:
-\[\textbf{B}_{p1}=I\UEA\frakg_p\epi I\UEA\frakg_p/(I\UEA\frakg_p)^2\cong Q^{\calL(n)}(\frakg_p).\]
-These maps are natural, and as such, commute with the horizontal (i.e.\ simplicial) structure maps. Finally, for each individual $p$, define a vertical homotopy $h:N_*^\textup{v}\textbf{B}_{p\bullet}\to N_{*+1}^\textup{v}\textbf{B}_{p\bullet}$ by the following formulae (in which the $v_{i_{j}}$ are taken to be in $V_p\subseteq \frakg_p\subseteq\UEA\frakg_p$):
+As $\frakg$ is levelwise free, the evident map $T(V_p)\to \UEA\frakg_p$ is an isomorphism for each $p$ (\textbf{what's my point?}).  Finally, for each individual $p$, define a vertical homotopy $h:N_*^\textup{v}\textbf{B}_{p\bullet}\to N_{*+1}^\textup{v}\textbf{B}_{p\bullet}$ by the following formulae (in which the $v_{i_{j}}$ are taken to be in $V_p\subseteq \frakg_p\subseteq\UEA\frakg_p$):
 \begin{alignat*}{2}
 h_q:N^\textup{v}_q\overline{B}\UEA\frakg_p&\overset{}{\longrightarrow} N^\textup{v}_{q+1}\overline{B}\UEA\frakg_p\\
 [\smash{\underbrace{v_{i_1}|\cdots |v_{i_{k-1}}}_{\textup{length 1 bars}}}|v_{i_{k}}v_{i_{k+1}}\cdots |\cdots ]
@@ -2650,7 +2660,7 @@ Consider first an element $e=[v_1v_2\cdots v_b]$ of $N_{n+k}^\textup{h}N_1^\text
 Next, consider an element $[v]$ of $N_{n+k}^\textup{h}N_1^\textup{v}\textbf{B}$. As $h[v]=0$, and in light of lemma \ref{firstCompositeLemma}, $\textup{LHS}([v])$ equals the quadratic part of $d_0^\textup{h}v$, after writing $d_0^\textup{h}v$ as an expression in elements of $V_{n+k-1}$. This is exactly the description given in lemma \ref{psi is basically the quadratic part} of $\textup{RHS}([v])=\psi_{\calL(n)}(v)$.
 %\[\textup{RHS}([v])=(j_{\calL(n)}\circ Q^{\calL(n)}(\xi_{\calL(n)}))(v)=\psi_{\calL(n)}(v).\qedhere\]
 \end{proof}
-\begin{proof}[Proof of ??????]
+\begin{proof}[Proof of \ref{the point of the apendix}]
 %Having put in place these preparations, let's start working on the theorem. 
 Fix a cocycle $\alpha\in (N_{n}Q^{\calL(n)}(\frakg_\bullet))^*$. %We may assume without loss of generality (or are we \textbf{forced} to assume) that  $\alpha$ evaluates to zero... wait... wtf am I talking about?
 Then $\alpha$ may be viewed an a permanent cocycle at $E_2^{n,1}$ in the spectral sequence of $(\textbf{Q}_{\bullet*})^*$. We'll apply the chain-level Steenrod operation $S^k$ of [Singer ???], (which defines the Steenrod operation $\Sq^k$ on the cohomology of the total complex), to the class $r^*\alpha$. As $\alpha$ is a permanent cycle, $\delta(r^*\alpha)=0$, and
@@ -2700,6 +2710,20 @@ N^\textup{h}_nQ^{\calL(n)}(\frakg)\otimes N^\textup{h}_nQ^{\calL(n)}(\frakg)
 }\]
 Now $(N^\textup{h}_nQ^{\calL(n)}(\frakg)\otimes N^\textup{h}_nQ^{\calL(n)}(\frakg))^*$ contains the cocycle $\oldphi(\alpha\otimes\alpha)$, and pulling $\oldphi(\alpha\otimes\alpha)$ back to $(N_{n+k}^\textup{h}N_1^\textup{v}\textbf{B})^*$ along the lower composite yields $r^*\psi_{\calL(n)}^*\ExtCohOp^{k-1}(\alpha)$. Pulling back along the upper composite yields the $E^2$ representative of the shifted version of Singer's operations we've defined. As $r^*$ is an $E^2$-equivalence, and the filtrations are trivial, this proves the result. A simple modification proves the result for pairings.
 \end{proof}
+
+\subsection{The Chevalley-Eilenberg-May complex}
+Suppose that $L\in\calL(n)$ is locally finite dimensional. Then define a differential coalgebra, the Chevalley-Eilenberg-May complex, to be $\UEAX(L):= E(L_{\textbf{0}})\otimes \Gamma(L_{\neq\textbf{0}})$ [\textbf{motivation}: May or Priddy very directly], viewed as a subcoalgebra of the $\Gamma(L)$ with its usual coalgebra structure. As on \cite[p. 141]{MayRestLie.pdf}, the typical element of $\Gamma(L)$ is $f=\gamma_{r_1}(y_1)\cdots \gamma_{r_m}(y_m)$ for homogeneous $y_i\in L$, and $\UEAX(L)$ is defined by the restriction that $r_i\leq1$ when $y_m\in L_{\textbf{0}}$. The coalgebra structure map and differential are the restriction to $E(L_{\textbf{0}})\otimes \Gamma(L_{\textbf{0}})$ of those given on \cite[p. 141]{MayRestLie.pdf} (after tensoring the formula of [(6.19)] down to a formula on $\overline{X}(L)$, which kills the first term $\Sigma_{i=1}^nf_iy_i$).
+
+Now let $\frakg=B^{\calL(n)}L\in s\calL(n)$. Using the weak equivalence $\Delta\textbf{B}\to \overline{B}_\bullet(\UEA L)$ of simplicial coalgebras, and  May's injection [thm 18, (7.8), p.\ 145] of $\UEAX(L)$ into the bar construction, there are maps (up to a zigzag):
+\[\UEAX(L)\to N_*\overline{B}_\bullet(U'L)\simeq\textup{Tot}(N^\textup{h}_*N^\textup{v}_*\textbf{B})\overset{r}{\to} \textup{Tot}(N^\textup{h}_*\textbf{Q}_{\bullet*})=\F_2\langle 1\rangle\oplus \Sigma N_*Q^{\calL(n)}\frakg,\]
+Now the first map is a map of differential coalgebras, so that $\F_2\langle 1\rangle\oplus \Sigma N_*Q^{\calL(n)}\frakg=:\F_2\langle 1\rangle\oplus \Sigma H^*_{\calL(n)}L$ may be calculated, as an \emph{algebra}, by the DGA $(\UEAX(L))^*$. This DGA is naturally defined as the quotient $(\UEAX(L))^*=E(L^*_{\textbf{0}})\otimes\F_2[L_{\neq\textbf{0}}^*]$ of $\F_2[L^*]$.
+
+We're interested in the case that $L$ is trivial \emph{as a Lie algebra}, but may still have nonzero restriction. In this case, the restriction is in fact linear, and we may write $\sqrt[{[2]}]{\DASH}:L^*\to L^*$ for its dual (which we may consider to be everywhere defined, yet zero on $L_{\textbf{0}}$). Then examination of May's formula, [(6.19)], shows that:
+\begin{prop}
+If $L$ has bracket zero, then the differential on $(\UEAX(L))^*$ is defined on generators $\alpha\in L^*$ by the formula
+\[\alpha\longmapsto (\!\sqrt[{[2]}]{\alpha}\,)^2.\]
+
+\end{prop}
 
 \section{Unstable Lie coalgebras over the dual $P$-algebra (optional)}
 \todo{Give a formal definition of these coalgebras}{goes down to level of simplicial commutative algebras, and brings in the SOA comonad structure}
@@ -2766,6 +2790,7 @@ having all gradings at the very right, tensor products of vector spaces,\ldots?
 \item search $F_?$, $B_?$, $Q_?$, $U_?$, $\xi_?$, $j_?$, $\psi_?$...?
 \item get a better macro for $\epi$
 \item Identify and remove certain common phrases, like `Now $x=y$, but $y\neq z$...'
+\item Introduce uniform notation for connective chain complexes.
 \end{enumerate}
 \end{todolist}
 \end{document}
