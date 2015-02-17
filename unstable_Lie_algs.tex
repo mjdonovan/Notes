@@ -18,13 +18,13 @@
 \xclude{Unstable Lie algebras over the Lambda-algebra}%depr, with some expos
 \xclude{Cohomology operations for unstable Lie algebras over Lambda}%depr
 \xclude{todolist}
-\renewcommand{\xclude}[1]{\nclude{#1}}% <---------------
+%\renewcommand{\xclude}[1]{\nclude{#1}}% <---------------
 \xclude{Contents Page}
 \xclude{Intro}
 \xclude{Conventions and notation}
 \xclude{Lie algebras in characteristic 2 and their homotopy operations}
 \nclude{Cohomology operations for all unstable Lie algebras}
-\nclude{Koszul complexes}
+\xclude{Koszul complexes}
 \xclude{Composite functor spectral sequences}
 \xclude{tricky proofs of operation compatibilities}
 \nclude{Calculations of HWn for n nonzero}
@@ -324,6 +324,9 @@ url=false,doi=false,isbn=false,eprint=false]{biblatex}%
 \newcommand{\UEA}{U'}%{U^{[2]}}%if this changes, so does some text
 \newcommand{\UEAX}{\overline{X}'}%{U^{[2]}}%if this changes, so does some text
 \newcommand{\Sq}{\mathrm{Sq}}
+\newcommand{\Sqh}{\mathrm{Sq}_\textup{h}}
+\newcommand{\Sqv}{\mathrm{Sq}_\textup{v}}
+\newcommand{\Steen}{\calA}
 \newcommand{\Comm}{\calC}
 \newcommand{\F}{\mathbb{F}}
 \newcommand{\Id}{\textup{id}}
@@ -1091,7 +1094,7 @@ Being more explicit with gradings:
 \textbf{Stick in the precise operations here.}
 
 \begin{prop}
-For $X$ an object of $\calW(n)$, $H^*_{\calW(n)}X$ posesses a left action of the Lie Steenrod algebra, consisting of natural homomorphisms \textbf{fix notation}
+For $X$ an object of $\calW(n)$, $H^*_{\calW(n)}X$ posesses a left action of the Lie Steenrod algebra, consisting of natural homomorphisms
 \[\Sq^j_\textup{h}:(H^*_{\calW(n)}X)_t^{s_{n+1},\ldots,s_1}\to (H^*_{\calW(n)}X)_{2t+1}^{s_{n+1}+j,2s_{n},\ldots,2s_1},\]
 zero unless $1\leq j\leq s_{n+1}+1$ and not all of $j-1,s_{n},\ldots,s_1$ equal zero. If $n=0$, $\Sq_\textup{h}^1$ and $\Sq^2_\textup{h}$ are both zero.  Moreover, $H^*_{\calW(n)}X$ supports a nonunital commutative algebra pairing
 \[(H^*_{\calW(n)}X)_t^{s_{n+1},\ldots,s_1}\otimes (H^*_{\calW(n)}X)_q^{p_{n+1},\ldots,p_1}\to (H^*_{\calW(n)}X)_{t+q+1}^{s_{n+1}+p_{n+1}+1,s_{n}+p_{n},\ldots,s_1+p_1}.\]
@@ -1105,6 +1108,7 @@ This theorem follows from theorem [BLAH] in the appendix.
 \end{proof}
 For $n\geq0$, write $\calM_\textup{h}(n+1)$ for the algebraic category whose objects are vectorspaces $M\in\vect{n+1}{+}$ with left Steenrod operations and a commutative pairing satisfying the conditions of the proposition. We have simply shown that $H^*_{\calW(n)}$ takes values in $\calM_\textup{v}(n+1)$.
 
+Note that the unstableness condition implies that if $x\in M_t^{0,\ldots,0}$, then $x^2=0$.
 
 \subsection{Relations between the horizontal and vertical operations}
 \textbf{Write me.} Do a Steenrod or product operation, and then a $\delta_i$, and you're using the composite of this map with
@@ -1113,8 +1117,39 @@ which all boils down to
 \[P^i_{(s+2)}f_{(s+1)}g\mapsto q^{\calL}(f)(g)\]
 Anyway, I have a nullhomotopy of this map, which might be called $((P^i)^{-1}q^{\calL})$, and is stuck on the wall in the upper right corner. \textbf{See what happens in case $n\geq1$.}
 
+\subsection{Compressing sequences of Steenrod operations \textbf{(bad title)}}
+\begin{thm}\label{thm on compressing seqs of steenrod ops}
+Suppose that $n\geq1$ and $V\in \vect{n}{+}$. Then there is a decreasing filtration on $F_{\calM_\textup{h}(n)}V$ and an isomorphism
+\[ f:(F_{\calM_\textup{h}(n+1)}F_{\calM_\textup{v}(n+1)}V)^{s_{n+1},\ldots,s_1}_t\overset{\cong}{\to} E_0^{s_{n+1}}(F_{\calM_\textup{h}(n)}V)^{s_n,\ldots,s_1}_t,\]
+defined by requiring that
+$f(\Sq_\textup{v}^Iv)=\Sq_\textup{h}^Iv$ for $v\in V$, that $f(w_1w_2)=f(w_1)f(w_1)$ for $w_1,w_2\in F_{\calM_\textup{h}(n+1)}F_{\calM_\textup{v}(n+1)}V$,
+and that
+\[f(\Sq_\textup{h}^jw)=\Sq_\textup{h}^{j+s_n}f(w)\textup{ for }w\in (F_{\calM_\textup{h}(n+1)}F_{\calM_\textup{v}(n+1)}V)^{s_{n+1},\ldots,s_1}_t.\]
+\end{thm}
+\begin{proof}
+The map $f$ is not a well defined map to $F_{\calM_\textup{h}(n)}V$ since the Adem relations between the $\Sq_\textup{h}$ are not preserved by the proposed map $f$. Write $W$ for the quotient of $\F_2[\Steen\otimes F_{\calM_\textup{v}(n+1)}V]$ by the unstableness relations and Cartan formula, so that $F_{\calM_\textup{h}(n+1)}F_{\calM_\textup{v}(n+1)}V$ is obtained from $W$ by taking the quotient by Adem relations. Then $f$ as proposed is a perfectly meaningful map $W\to F_{\calM_\textup{h}(n)}V$. There is a decreasing filtration on $W$, given by 
+\[F^pW=\bigoplus_{s_{n+1}\geq p}\bigoplus_{s_n,\ldots,s_1\geq0}\bigoplus_{t\geq1}W^{s_{n+1},\ldots,s_1}_t\]
+ and we define a filtration on the target by $F^p(F_{\calM_\textup{h}(n)}V):=f(F^pW)$.
 
+The map $f$ fails to descend to a well-defined map  $F_{\calM_\textup{h}(n+1)}F_{\calM_\textup{v}(n+1)}V\to F_{\calM_\textup{h}(n)}V$, because it does not annihilate the Adem relations. However, we will show that it does send them into higher filtation, so that $f$ is well defined as advertised: if $w\in W^{s_{n+1},\ldots,s_1}_t$ and $i<2j$, then
+%\[f(\Sqh^i\Sqh^jw):=\Sqh^{i+2s_n}\Sqh^{j+s_n}f(w),\]
+%and such an assignment does not preserve the Adem relations. Indeed, the Adem relation arising when $i<2j$:
+%\[\Sqh^i\Sqh^jw-\sum_{k=0}^{\lfloor i/2\rfloor}{j-k-1\choose i-2k}\Sqh^{i+j-k}\Sqh^{k}w\]
+%is sent to
+%%\[\Sqh^{i+2s_n}\Sqh^{j+s_n}f(w)-\sum_{k=0}^{\lfloor i/2\rfloor}{j-k-1\choose i-2k}\Sqh^{i+j-k+2s_n}\Sqh^{k+s_n}f(w)\]
+\begin{alignat*}{2}
+f\Bigl(\Sqh^i&\Sqh^jw-\textstyle\sum_{k=0}^{\lfloor i/2\rfloor}{j-k-1\choose i-2k}\Sqh^{i+j-k}\Sqh^{k}w\Bigr)\\
+{}={}&\Sqh^{i+2s_n}\Sqh^{j+s_n}f(w)-\textstyle\sum_{k=0}^{\lfloor i/2\rfloor}{j-k-1\choose i-2k}\Sqh^{i+j-k+2s_n}\Sqh^{k+s_n}f(w)\\
+{}={}&
+\Sqh^{i+2s_n}\Sqh^{j+s_n}f(w)-\textstyle\sum_{k=s_n}^{\lfloor (i+2s_n)/2\rfloor}{j+s_n-k-1\choose i+2s_n-2k}\Sqh^{(i+2s_n)+(j+s_n)-k}\Sqh^{k}f(w)\\
+{}={}&\textstyle\sum_{k=0}^{s_n-1}{j+s_n-k-1\choose i+2s_n-2k}\Sqh^{(i+2s_n)+(j+s_n)-k}\Sqh^{k}f(w)\\
+{}={}&\textstyle\sum_{k=0}^{s_n-1}{j+s_n-k-1\choose i+2s_n-2k}f(\Sqh^{i+j+2(s_n-k)+1}\Sqv^{k}w),
+\end{alignat*}
+where the first equality holds by simply shifting the dummy variable $k$, and the second holds by an Adem relation in the target.
+%This quantity is nonzero, but is written as the image under $f$ of an element of filtration 
 
+What remains is to show that $f$ is an isomorphism as in the theorem statement which we approach simply by choosing a set of multiplicative generators for both the domain and codomain. The domain is generated by those expressions $\Sqh^I\Sqv^Jv$, for $v\in V^{s_{n},\ldots,s_1}_t$ running through a basis of $V$, and $J$ and $I$ $\Sq$-admissible sequences with appropriate excess. The codomain is generated by expressions $\Sqh^Kv$, for $v\in V^{s_{n},\ldots,s_1}_t$ running through a basis of $V$, and $K$ a $\Sq$-admissible sequence with appropriate excess. It is a  combinatorial  exercise in the properties of admissible sequences to show that these sets of generators are put in bijection by $f$, and this bijection sends polynomial generators to polynomial generators and exterior generators to exterior generators.
+\end{proof}
 \end{Cohomology operations for all unstable Lie algebras}
 
 
@@ -2524,11 +2559,14 @@ The isomorphism shown here follows from the observation that in internal dimensi
 Then $\textup{zero}$ induces a functor $\textup{zero}:\calW(n+1)\to \calL(n)$, such that, for $V\in\vect{n+1}{+}$, $F_{\calL(n)}(\textup{zero}(V))\cong \textup{zero}(F_{\calW(n+1)}(V))$.
 \begin{prop}For each $n\geq1$:
 \[(E_2)^{s_{n+2},0,s_n,\ldots,s_1}_{t}\cong\UEAX(V_{(n)}^*)^*,\]
-where the argument $V_{(n)}^*$ of $\UEAX$ is viewed as a (trivial) element of $\calL(n)$. When $S=0$, $\UEAX(V_{(n)}^*)^*$ is the polynomial algebra $\F_2[V_{(n)}]=\F_2[v]$ on one element. When $S\neq0$, it is the exterior quotient $E[V_{(n)}]$. There are degree shifts in each case, as in appendix [??????????].  
+where the argument $V_{(n)}^*$ of $\UEAX$ is viewed as a (trivial) element of $\calL(n)$. When $S\neq0$, $\UEAX(V_{(n)}^*)^*$ is the polynomial algebra $\F_2[V_{(n)}]$. When $S=0$, it is the exterior quotient $E[V_{(n)}]=\F_2[v]$, generated by the element $v$. There are degree shifts in each case, as in appendix [??????????].  
 \end{prop}
 \begin{proof}
 The only necessary further observation here is that if $S>0$, every element of the trivial Lie algebra $V_{(n)}$ is in restrictable degree, and that if $S=0$, each $V_{(n)}$ is one-dimensional, concentrated in a non-restrictable degree.
 \end{proof}
+\begin{thm}
+There is an isomorphism $H^*_{\calW(1)}V_{(1)}^*\cong F_{\calM_\textup{h}(2)}F_{\calM_\textup{v}(2)}V_{(1)}$, under which the filtration on $H^*_{\calW(1)}V_{(1)}^*$ arising from the composite functor spectral sequence coincides with the filtration on $F_{\calM_\textup{h}(2)}F_{\calM_\textup{v}(2)}V_{(1)}$ given in theorem \ref{thm on compressing seqs of steenrod ops}
+\end{thm}
 
 \end{Calculations of HWn for n nonzero}
 \begin{The cohomology of a trivial unstable Lie algebra over P}
@@ -2746,7 +2784,7 @@ Now $(N^\textup{h}_nQ^{\calL(n)}(\frakg)\otimes N^\textup{h}_nQ^{\calL(n)}(\frak
 \end{proof}
 
 \subsection{The Chevalley-Eilenberg-May complex}
-Suppose that $L\in\calL(n)$ is locally finite dimensional. Then define a differential coalgebra, the Chevalley-Eilenberg-May complex, to be $\UEAX(L):= E(L_{\textbf{0}})\otimes \Gamma(L_{\neq\textbf{0}})$ [\textbf{motivation}: May or Priddy very directly], viewed as a subcoalgebra of the $\Gamma(L)$ with its usual coalgebra structure. As on \cite[p. 141]{MayRestLie.pdf}, the typical element of $\Gamma(L)$ is $f=\gamma_{r_1}(y_1)\cdots \gamma_{r_m}(y_m)$ for homogeneous $y_i\in L$, and $\UEAX(L)$ is defined by the restriction that $r_i\leq1$ when $y_m\in L_{\textbf{0}}$. The coalgebra structure map and differential are the restriction to $E(L_{\textbf{0}})\otimes \Gamma(L_{\textbf{0}})$ of those given on \cite[p. 141]{MayRestLie.pdf} (after tensoring the formula of [(6.19)] down to a formula on $\overline{X}(L)$, which kills the first term $\Sigma_{i=1}^nf_iy_i$).
+Suppose that $L\in\calL(n)$ is locally finite dimensional. Then define a differential coalgebra, the Chevalley-Eilenberg-May complex, to be $\UEAX(L):= E(L_{\textbf{0}})\otimes \Gamma(L_{\neq\textbf{0}})$ [\textbf{motivation}: May or Priddy very directly], viewed as a subcoalgebra of the $\Gamma(L)$ with its usual coalgebra structure. As on \cite[p. 141]{MayRestLie.pdf}, the typical element of $\Gamma(L)$ is $f=\gamma_{r_1}(y_1)\cdots \gamma_{r_m}(y_m)$ for homogeneous $y_i\in L$, and $\UEAX(L)$ is defined by the restriction that $r_i\leq1$ when $y_m\in L_{\textbf{0}}$. The coalgebra structure map and differential are the restriction to $E(L_{\textbf{0}})\otimes \Gamma(L_{\neq\textbf{0}})$ of those given on \cite[p. 141]{MayRestLie.pdf} (after tensoring the formula of [(6.19)] down to a formula on $\overline{X}(L)$, which kills the first term $\Sigma_{i=1}^nf_iy_i$).
 
 Now let $\frakg=B^{\calL(n)}L\in s\calL(n)$. Using the weak equivalence $\Delta\textbf{B}\to \overline{B}_\bullet(\UEA L)$ of simplicial coalgebras, and  May's injection [thm 18, (7.8), p.\ 145] of $\UEAX(L)$ into the bar construction, there are maps (up to a zigzag):
 \[\UEAX(L)\to N_*\overline{B}_\bullet(U'L)\simeq\textup{Tot}(N^\textup{h}_*N^\textup{v}_*\textbf{B})\overset{r}{\to} \textup{Tot}(N^\textup{h}_*\textbf{Q}_{\bullet*})=\F_2\langle 1\rangle\oplus \Sigma N_*Q^{\calL(n)}\frakg,\]
