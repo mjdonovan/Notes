@@ -1,6 +1,6 @@
 % !TEX root = z_output/unstable_Lie_algs.tex
 \documentclass[11pt]{amsart}
-\usepackage[paperheight=230mm]{geometry}%remove me after editing
+%\usepackage[paperheight=230mm]{geometry}%remove me after editing
 \usepackage{amsmath,amsthm,amssymb}
 \usepackage{eucal}
 \usepackage{mathrsfs,nicefrac}
@@ -18,7 +18,7 @@
 \xclude{Unstable Lie algebras over the Lambda-algebra}%depr, with some expos
 \xclude{Cohomology operations for unstable Lie algebras over Lambda}%depr
 \xclude{todolist}
-%\renewcommand{\xclude}[1]{\nclude{#1}}% <---------------
+\renewcommand{\xclude}[1]{\nclude{#1}}% <---------------
 \xclude{Contents Page}
 \xclude{Intro}
 \xclude{Conventions and notation}
@@ -35,7 +35,7 @@
 
 \headheight=8pt
 \topmargin=0pt
-\topmargin=-70pt%remove me after editing
+%\topmargin=-70pt%remove me after editing
 \textheight=610pt
 \textwidth=432pt
 \oddsidemargin=18pt
@@ -2546,7 +2546,7 @@ N_*N_*(S^2(Q^{\calL(n)} B^\BSW_{\bullet}L))^{t-1}_{s_{n+2}-1,s_{n+1},\ldots,s_1}
 \end{comp func sseq old version}
 
 \begin{Calculations of HWn for n nonzero}
-\section{Calculations of $H^*_{\calW(1)}$}
+\section{Calculations of $H^*_{\calW(n)}$ for $n\geq 1$}
 In this section, we'll calculate the value of $H^*_{\calW(1)}$ on certain locally finite-dimensional objects of $\calW(1)$. We make the following definitions. In each section below we will write $V^*_{(1)}$ for an object of $\calW(1)$ whose underlying vectorspace is dual to $V_{{(1)}}\in\vect{1}{+}$, and define:
 \[V_{(k+1)}:=H^*_{\calU(k)}V^*_{(k)}\textup{ and }V^*_{(k+1)}:=H_*^{\calU(k)}V^*_{(k)}\textup{ for $k\geq1$},\]
 so that $V^*_{(k+1)}$ is an object of $\calW(k+1)$ for each $k$, vectorspace dual to $V_{(k+1)}\in\vect{k+1}{+}$.
@@ -2557,7 +2557,7 @@ The $1^{\textup{st}}$ composite functor spectral sequence, which calculates $H^{
 
 
 \subsection{A one-dimensional example}
-Let $V^*_{(1)}=(V_{(1)}^*)^T_S\in\calW(1)$ be a one dimensional object of $\calW(1)$, dual to a vector space $V_{(1)}=(V_{(1)})^S_T=\langle v\rangle\in\vect{1}{+}$, where $T\geq1$ and $S\geq0$. As every $\calW(0)$-operation changes degrees, $V_{(1)}^*$ is necessarily trivial.
+Let $V^*_{(1)}=(V_{(1)}^*)^T_S\in\calW(1)$ be a one dimensional object of $\calW(1)$, dual to a vector space $V_{(1)}=(V_{(1)})^S_T=\langle v\rangle\in\vect{1}{+}$, where $T\geq1$ and $S\geq0$. As every $\calW(1)$-operation changes degrees, $V_{(1)}^*$ is necessarily trivial.
 \begin{prop}\label{iterative calc of the Vk all trivial}
 For each $k\geq1$
 \[V_{(k)}=F_{\calM_\textup{v}(k)}F_{\calM_\textup{v}(k-1)}\cdots F_{\calM_\textup{v}(2)}V_{(1)},\]
@@ -2572,7 +2572,12 @@ The isomorphism shown here follows from the observation that in dimension $s_{k+
 \[(X_\textbf{0})^t_{s_k,\ldots,s_1}:=X^t_{0,s_k,\ldots,s_1}.\]
 Then $\DASH_\textbf{0}$ induces a functor $\DASH_\textbf{0}:\calW(k+1)\to \calL(k)$, such that, for all $X\in\calW(k+1)$:
 \[(F_{\calW(k+1)}(X))_\textbf{0}\cong F_{\calL(k)}(X_\textbf{0})\textup{ and }(Q^{\calW(k+1)}X)_\textbf{0}\cong Q^{\calL(k)}(X_\textbf{0}),\]
-so that $(Q^{\calW(k+1)}B^{\calW(k+1)}X)_{\textbf{0}}\cong(Q^{\calL(k)}B^{\calL(k)}X_{\textbf{0}})$ for any $X\in s\calW(k+1)$.
+so that $(Q^{\calW(k+1)}B^{\calW(k+1)}X)_{\textbf{0}}\cong(Q^{\calL(k)}B^{\calL(k)}X_{\textbf{0}})$ for any $X\in s\calW(k+1)$. %In fact, if we also write $\DASH_\textbf{0}:\calW(k+1)\to \calW(k+1)$
+\begin{prop}
+Suppose that $X\in\calW(k+1)$. Then
+\[(H^*_{\calW(k+1)}X)^{s_{k+2},0,s_k,\ldots,s_1}_{t}\cong (H^{s_{k+2}}_{\calL(k)}X_\textup{\textbf{0}})^{s_k,\ldots,s_1}_t.\]
+
+\end{prop}
 \begin{prop}\label{calculation in internal dimension zero}
 For each $k\geq1$:
 \[(E_{2,(k+1)})^{s_{k+2},0,s_k,\ldots,s_1}_{t}\cong\UEAX(V_{(k)}^*)^*,\]
@@ -2732,12 +2737,12 @@ is injective, which is part of proposition \ref{isomorphism rho k in some dims}.
 \end{proof}
 This is an opportune moment to prove:
 \begin{thm}
-Suppose that $X,Y\in\calW(n)$ for $n\geq0$. Then $H^*_{\calW(n)}(X\oplus Y)\cong H^*_{\calW(n)}(X)\otimes H^*_{\calW(n)}(Y)$.
+Suppose that $X,Y\in\calW(n)$ are locally finite, with $n\geq0$. Then $H^*_{\calW(n)}(X\oplus Y)\cong H^*_{\calW(n)}(X)\otimes H^*_{\calW(n)}(Y)$.
 \end{thm}
 \begin{proof}
 Basically, $H_{*}^{\calU(k)}$ is additive, and $H^*_{\calL(k)}$ turns $\oplus$ into $\otimes $. We do induction on iterated filtration.
 \end{proof}
-\subsection{A two-dimensional example}
+\subsection{A \cancel{two}-dimensional example}
 In this section, we will instead let $V^*_{(1)}\in\calW(1)$ be a two dimensional object of $\calW(1)$, spanned by classes 
 \[v^*\in (V_{(1)}^*)^T_S\textup{ and }w^*=v^*\lambda_1\in (V_{(1)}^*)^{2T+1}_{S+1}.\]
 For now, we'll take $S\geq2$ and $T\geq1$.
