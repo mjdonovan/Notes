@@ -1,8 +1,8 @@
 % !TEX root = z_output/unstable_Lie_algs.tex
 \documentclass[11pt]{amsart}
-%\newcommand{\ShrinkPages}{}% <--
 %\newcommand{\IncludeAll}{}% <--
-\ifx\ShrinkPages\undefined\else\usepackage[paperheight=220mm,paperwidth=160mm]{geometry}\fi
+\newcommand{\ShrinkPages}{}% <--
+\ifx\ShrinkPages\undefined\else\usepackage[paperheight=160mm,paperwidth=160mm]{geometry}\fi%220/160
 \usepackage{amsmath,amsthm,amssymb}
 \usepackage{eucal}
 \usepackage{mathrsfs,nicefrac}
@@ -13,7 +13,7 @@
 \usepackage{version}
 \usepackage{enumerate}
 \usepackage{mathtools}%used for mathclap
-\setcounter{tocdepth}{1}
+\setcounter{tocdepth}{2}% <--
 \newcommand{\xclude}[1]{\excludeversion{#1}} \newcommand{\nclude}[1]{\includeversion{#1}}
 \xclude{comp func sseq old version}
 \xclude{Cohomology operations for unstable Lie algebras over P}%depr
@@ -21,9 +21,11 @@
 \xclude{Cohomology operations for unstable Lie algebras over Lambda}%depr
 \xclude{todolist}
 \ifx\IncludeAll\undefined\else\renewcommand{\xclude}[1]{\nclude{#1}}\fi
-\xclude{Contents Page}
-\xclude{Intro}
+\nclude{Contents Page}
+\nclude{Intro}
 \nclude{Conventions and notation}
+\nclude{External homotopy and cohomotopy operations}
+\nclude{External spectral sequence operations}
 \nclude{Homotopy, homology and cohomology}
 \xclude{Lie algebras in characteristic 2 and their homotopy operations}
 \xclude{Cohomology operations for all unstable Lie algebras}
@@ -41,12 +43,13 @@
 \topmargin=0pt
 \oddsidemargin=18pt
 \evensidemargin=18pt
+\textheight=610pt
 \ifx\ShrinkPages\undefined\else %if you want to shrink the page while editing, do it here...
   \topmargin=-87pt
   \oddsidemargin=-60pt
   \evensidemargin=-60pt
+  \textheight=439pt %610/439
 \fi
-\textheight=610pt
 \textwidth=432pt
 \footskip=25pt
 
@@ -306,6 +309,7 @@ url=false,doi=false,isbn=false,eprint=false]{biblatex}%
 \newcommand{\Palg}{{\calP}}
 \newcommand{\deltaalg}{\Delta} %change me
 \newcommand{\LieOperad}{{\scrL}}
+\newcommand{\CommOperad}{{\scrC}}
 \newcommand{\restn}[1]{#1^{[2]}}
 \newcommand{\restnwithsubscript}[2]{#1^{[2]}_{#2}}
 \newcommand{\restnRepeated}[2]{#1^{[2^{#2}]}}
@@ -316,7 +320,7 @@ url=false,doi=false,isbn=false,eprint=false]{biblatex}%
 \newcommand{\BSWres}{B^\BSW}%didn't always remember to use
 \newcommand{\PiAlg}{\textup{-$\Pi$-Alg}}
 \newcommand{\quadratic}{\textup{qu}}
-\newcommand{\quadgrad}[1]{\textup{qg}_{#1}}
+\newcommand{\quadgrad}[1]{\textup{q}_{#1}}
 \newcommand{\crossterms}{\textup{cr}}
 \newcommand{\ExtCohOp}{\textup{Op}_\textup{ext}}
 \newcommand{\vExtCohOp}{\textup{Op}_\textup{v,ext}}
@@ -330,6 +334,8 @@ url=false,doi=false,isbn=false,eprint=false]{biblatex}%
 \newcommand{\produces}[3]{#3:#1\sim #2}
 \renewcommand{\produces}[3]{#1\rightarrow_{#3} #2}%{J}{I}{P}
 \renewcommand{\produces}[3]{#1\overset{\smash{#3}}{\rightarrow} #2}%{J}{I}{P}
+
+\newcommand{\DeltaUp}{\Delta}% <-- i changed the indices to upper, marking where I did it.
 \newcommand{\Shuffles}[2]{\textup{Sh}_{#1#2}}
 \newcommand{\HalfShuffles}[2]{\textup{Sh}_{#1#2}^{\smash{\!\div2}}}
 \newcommand{\Nop}{N^{\smash{-}}}
@@ -398,36 +404,91 @@ This paper is concerned with calculating the cohomology $H^{\calW(0)}_*X$ of $X\
 
 \begin{Conventions and notation}
 \section{Conventions and notation}
-\subsection{Categories of $\F_2$-vector spaces}
-
-In this paper we will deal with numerous categories monadic over a category of graded $\F_2$-vector spaces. We will write $\vect{}{}$ for a generic category of $\F_2$-vector spaces, either graded or ungraded. We will write $\vect{+}{r}$ for the category of vector spaces with $r$ non-negative homological gradings and a single strictly positive cohomological grading, so that an object $V$ of $\vect{+}{r}$ decomposes as
-\[V=\bigoplus_{s_r,\ldots,s_1\geq0,\,t\geq 1}V^{t}_{s_r,\ldots,s_1}.\]
-Similarly, we write $\vect{r}{+}$ for the category of $\F_2$-vector spaces with one positive homological grading and $r$ non-negative cohomological gradings. We follow the convention that (graded) dualization $V\mapsto V^*$ interchanges homological and cohomological gradings, and is thus a contravariant functor $\vect{+}{r}\to\vect{r}{+}$ defined by $(V^*)^{s_r,\ldots,s_1}_{t}:=(V_{s_r,\ldots,s_1}^{t})^*$.
-
-The category $\vect{+}{r}$ is equipped with a tensor product:
-\[(U\otimes V)^t_{s_r,\ldots,s_1}=\bigoplus_{s'_i+s''_i=s_i,\,t'+t''=t}U^{t'}_{s'_r,\ldots,s'_1}\otimes V^{t''}_{s''_r,\ldots,s''_1},\]
-and if $V\in \vect{+}{r}$, then $V\otimes V$ has an action of $\Sigma_2$ given by the map $T$ interchanging the two factors. We'll write $S_2V$ for the coinvariants and $S^2V$ for the invariants of this action, and $\Lambda^2V$ for the image in $S^2V$ of the trace map $\trace=(1+T):S_2V\to S^2V$.
-
-\subsection{Categories of universal graded algebras}
-[\textbf{repetitive}]: In this paper we will be dealing with various categories of universal graded algebras \cite[\S2.1]{Blanc_Stover-Groth_SS.pdf}, and as such, it serves to set notation globally. Until \S\ref{The example of simplicial commutative F2-algebras} [\textbf{current?}], our comments will apply to any of the algebraic categories $\calL(n)$, $\calU(n)$ or $\calW(n)$ to be defined below. Let $\calC$ be any of these categories, monadic over $\vect{+}{r}$.
-
-An object $X$ of $\calC$ may be defined as a graded vector space $X\in\vect{+}{r}$ along with certain binary and unary operations on $X$ (and without any nullary operations). As such, there will be a forgetful functor $U_\calC:\calC\to\vect{+}{r}$, which will admit a left adjoint, always denoted $F_\calC:\vect{+}{r}\to\calC$ for notational consistency. The functor $U_{\calC}$ will always be monadic, in the sense that the natural comparison functor from $\calC$ to the category of algebras over the monad $U_{\calC}F_{\calC}$ on $\vect{+}{r}$ is an equivalence.
-
-For the categories of interest in this paper, the monad $U_{\calC}F_{\calC}$ will admit an augmentation (of monads) $\epsilon:U_{\calC}F_{\calC}\to\Id$, reflecting homogeneity in the relations defining $\calC$. This augmentation has the monad unit $\Id\to U_{\calC}F_{\calC}$ as a section, and may be thought of as projection back onto generators.
 
 
-We will often omit the functor $U_{\calC}$ from our notation, writing $F_{\calC}$ as shorthand for either the monad $U_{\calC}F_{\calC}$ on $\vect{+}{r}$ or the comonad $F_{\calC}U_{\calC}$ on $\calC$. We will refer to elements of a free construction $F_\calC U$ using notation such as $f(u_i)$, thought of as a composite $f$ of $\calC$-structure maps applied to generators $u_i\in U\subseteq F_\calC(V)$. We will say that $f(v_i)$ is a \emph{$\calC$-expression}. In this language, the linear maps % for $V\in \vect{+}{r}$, we have linear maps
+\subsection{Categories of universal algebras}
+[\textbf{repetitive}]: In this paper we will be dealing with various categories of universal algebras \cite[\S2.1]{Blanc_Stover-Groth_SS.pdf} monadic over $\vect{}{}$, a category either of graded or ungraded $\F_2$-vector spaces.
+As such, it will be helpful to set notation globally. %[Until \S\ref{The example of simplicial commutative F2-algebras} [\textbf{current?}], our comments will apply to any of the algebraic categories $\calL(n)$, $\calU(n)$ or $\calW(n)$ to be defined below. Let $\calC$ be any of these categories, monadic over $\vect{+}{r}$.]
+Until \S????, let $\calC$ be such a category, monadic over $\vect{}{}$. We will make some comments that hold in complete generality, and some that hold for all of the examples that we have in mind.
+
+In our examples, an object $X$ of $\calC$ may be defined as an object $X$ of $\vect{}{}$ equipped with certain binary and unary operations on $X$ (and without any nullary operations). As such, there will be a forgetful functor $U_\calC:\calC\to\vect{}{}$, which will admit a left adjoint, always denoted $F_\calC:\vect{}{}\to\calC$ for notational consistency. The functor $U_{\calC}$ will always be monadic, in the sense that the natural comparison functor from $\calC$ to the category of algebras over the monad $U_{\calC}F_{\calC}$ on $\vect{}{}$ is an equivalence.
+
+In our examples, the monad $U_{\calC}F_{\calC}$ will admit an augmentation (of monads) $\epsilon:U_{\calC}F_{\calC}\to\Id$, reflecting homogeneity in the relations defining $\calC$. This augmentation has the monad unit $\Id\to U_{\calC}F_{\calC}$ as a section, and may be thought of as projection back onto generators.
+
+
+We will generally omit the functor $U_{\calC}$ from our notation, writing $F_{\calC}$ as shorthand for either the monad $U_{\calC}F_{\calC}$ on $\vect{}{}$ or the comonad $F_{\calC}U_{\calC}$ on $\calC$. We will refer to elements of a free construction $F_\calC U$ using notation such as $f(u_i)$, thought of as a composite $f$ of $\calC$-structure maps applied to generators $u_i\in U\subseteq F_\calC(V)$. We will say that $f(v_i)$ is a \emph{$\calC$-expression}. In this language, the linear maps % for $V\in \vect{}{}$, we have linear maps
 \[F_{\calc}F_{\calc}V\overset{\mu}{\to} F_{\calc}V,\ \ V\overset{\eta}{\to}F_{\calc}V\ \ \textup{and}\ \ F_{\calc}V\overset{\epsilon}{\to}V, \]
-constituting the monad $F_{\calc}$ on $\vect{+}{r}$ may be decribed as follows: $\mu$ collapses a $\calc$-expression  in $\calc$-expressions into a single $\calc$-expression; $\eta$ sends a vector $v$ to the unit $\calc$-expression $v$; and $\epsilon$ projects a $\calc$-expression onto those summands to which non operations have been applied.
+constituting the augmented monad $F_{\calc}$ on $\vect{}{}$ may be decribed as follows: $\mu$ collapses a $\calc$-expression  in $\calc$-expressions into a single $\calc$-expression; $\eta$ sends a vector $v$ to the unit $\calc$-expression $v$; and $\epsilon$ projects a $\calc$-expression onto those summands to which non operations have been applied.
 For $X\in \calc$, the comonad structure maps in $\calc$,
 \[F_{\calc}F_{\calc}X\overset{\Delta}{\from} F_{\calc}X\ \ \textup{and}\ \ X\overset{\rho}{\from}F_{\calc}X,\]
-are as follows: on an expression $f(x_i)$, $\Delta$ returns the same expression $f(x_i)$ in which the $x_i$ are viewed as elements of $F_{\calc}X$, and $\rho$ is the evaluation map equivalent to the $\calc$-structure on $X$.
-
+are as follows: on an expression $f(x_i)$, $\Delta$ returns the same expression $f(x_i)$ in which the $x_i\in X$ are viewed as elements of $F_{\calc}X$, and $\rho$ is the evaluation map equivalent to the $\calc$-structure on $X$.
 
 \subsection{The functor of indecomposables}
-Using the augmentation of monads $\epsilon:F_\calc\to\Id$ on $\vect{+}{r}$, any $V\in\vect{+}{r}$ becomes an $F_{\calc}$-module, i.e.\ an object of $\calc$. We denote this functor $K_\calC:\vect{+}{r}\to \calC$; it sends $V\in\vect{+}{r}$ to \emph{the trivial object on $V$}, a phrase that is meaningful  in each of our examples. In each of our examples,  $K_{\calC}$ has a left adjoint, $Q^{\calC}:\calC\to\vect{+}{r}$, which sends $X\in\calC$ to \emph{the quotient of $X$ by the image of its non-trivial operations}. %More precisely, $K_\calC$ sends any object $V\in\vect{+}{r}$ to the $U_{\calC}F_{\calC}$-algebra whose structure map is $\epsilon_V:U_{\calC}F_{\calC}V\to V$. 
+Using the augmentation $\epsilon:F_\calc\to\Id$ of monads on $\vect{+}{r}$, any $V\in\vect{+}{r}$ becomes an $F_{\calc}$-module, i.e.\ an object of $\calc$. We denote this functor $K_\calC:\vect{+}{r}\to \calC$; it sends $V\in\vect{+}{r}$ to \emph{the trivial object on $V$}, a phrase that is meaningful  in each of our examples. In each of our examples,  $K_{\calC}$ has a left adjoint, $Q^{\calC}:\calC\to\vect{+}{r}$, which sends $X\in\calC$ to \emph{the quotient of $X$ by the image of its non-trivial operations}. %More precisely, $K_\calC$ sends any object $V\in\vect{+}{r}$ to the $U_{\calC}F_{\calC}$-algebra whose structure map is $\epsilon_V:U_{\calC}F_{\calC}V\to V$. 
 %The functor $Q^{\calC}$ sends $X\in \calC$ with structure map $\rho:F_\calC U_\calC X\to X$ to the coequalizer in $\vect{+}{r}$ of the maps $U_\calC\rho$ and $\epsilon_{U_\calC X}$. \emph{or, less correctly}
 The functor $Q^{\calC}$ sends $X\in \calC$ to the coequalizer in $\vect{+}{r}$ of $\rho,\epsilon:F_{\calc}X\to X$.
+
+\subsection{Quillen's model structure on $s\calC$}
+For any of the algebraic categories $\calC$ herein we use Quillen's simplicial model category structure on the category $s\calC$. In this structure, the weak equivalences (fibrations) are the maps which are weak equivalences (fibrations) of simplicial abelian groups, so that every object is fibrant. 
+
+ A simplicial object $X$ is \emph{almost free} if there are subspaces $V_n\subseteq X_n$ for each $n\geq0$ such that the structure map $F_{\calC}U_\calC V_n\to X_n$ is an isomorphism for all $n$, and such that these subspaces are preserved by all of the degeneracies and face maps of $X$ except for $d_0$. Every cofibrant object is a retract of an almost free object \cite[\S3]{MillerSullivanConjecture.pdf}.
+
+For a simplicial resolution functor $\calC\to s\calC$, we'll often use the standard simplicial bar construction arising from the $F_\calC\dashv U_\calC$ adjunction \cite{BlumRiehlResolutions.pdf}. More explicitly, given $X\in\calC$, we define $B^\calC X\in s\calC$ by iterated application of the comonad $F_\calC$ to $X\in \calC$:
+\[B_s^\calC X=(F_\calC)^{s+1}X.\]
+The face maps are given by the formula $d_i=(F_\calC)^i\rho$, and the degeneracies by $s_i=(F_\calC)^i\Delta$. %, where $\rho$ and $\Delta$ are respectively the counit and diagonal of the comonad $F_\calC U_\calC$. 
+This object is almost free, with $B_s^\calC X$ generated by its subspace $V_s=(F_{\calC})^sX$. It is standard that the augmentation $B^\calC X\to X$ is an acyclic fibration.
+
+The construction generalizes to yield a cofibrant replacement functor $B^{\calc}$ on $s\calc$: one applies  $B^{\calc}:\calc\to s\calc$ levelwise, to obtain a bisimplicial object, and then takes its diagonal.
+
+\subsection{The trace map}
+For any vector space $V\in \vect{}{}$, the tensor power $V^{\otimes2}:=V\otimes V$ has an action of $\Sigma_2$ given by the map $T$ interchanging the two factors. We'll write $S_2V$ for the coinvariants and $S^2V$ for the invariants of this action, and $\Lambda^2V$ for the image in $S^2V$ of the trace map $\trace=(1+T):S_2V\to S^2V$. Thus, we have written $\Lambda_2V$ as a subobject of $S^2V$.
+
+On the other hand, one may view $\Lambda_2V$ as the quotient $S_2V/\ker(\trace)$, that is, the quotient of $S_2V$ by the subspace generated by elements of the form $v\otimes v$. It is convenient to define maps out of $\Lambda_2V$ by viewing it as a subobject of $S^2V$, and maps into $\Lambda_2V$ by viewing it as a quotient of $S_2V$ (itself a quotient of $V^{\otimes2}$).
+
+
+\subsection{Lie algebras}
+As we work in characteristic 2, there is more than one available notion of a Lie algebra. An \emph{$S(\LieOperad)$-algebra} is a vector space $L$ equipped with a bracket $L\otimes L\to L$ satisfying the Jacobi identity and the (anti)-symmetry condition $[x,y]=[y,x]$. A \emph{Lie algebra} (or $\Lambda(\LieOperad)$-algebra) is a vector space $L$ equipped with a bracket $L\otimes L\to L$ satisfying the Jacobi identity and the alternating condition $[x,x]=0$. Finally, a \emph{restricted Lie algebra} \cite{CurtisSimplicialHtpy.pdf,6Author.pdf} (or $\Gamma(\LieOperad)$-algebra) is a Lie algebra equipped with a \emph{squaring} or \emph{restriction} function $\restn{(\DASH)}:L\to L$, satisfying the axioms
+\[\restn{(x_1+x_2)}=\restn{x_1}+\restn{x_2}+[x_1,x_2]\textup{ \ and \ }[\restn{x_1},x_2]=[x_1,[x_1,x_2]].\]
+The alternating condition implies the (anti)-symmetry condition, and these three types of Lie algebras form a hierarchy: a restricted Lie algebra is in particular a Lie algebra, and a Lie algebra is in particular an $S(\LieOperad)$-algebra.
+
+Fresse \cite{FresseSimplicialAlgs.pdf} explains how to construct the monads $S(\LieOperad)$, $\Lambda(\LieOperad)$ and $\Gamma(\LieOperad)$ on $\vect{}{}$ which give rise to these structures, starting with the Lie operad $\LieOperad$. For $V\in\vect{}{}$, it is standard that the functor
+\[S(\LieOperad):V\mapsto \bigoplus_{n\geq1}(\LieOperad(n)\otimes V^{\otimes n})_{\Sigma_n}\]
+inherits the structure of a monad from the composition maps of $\LieOperad$. Fresse observes that the functor
+\[\Gamma(\LieOperad):V\mapsto \bigoplus_{n\geq1}(\LieOperad(n)\otimes V^{\otimes n})^{\Sigma_n}\]
+may also be equipped with a monad structure, such that the trace map $S(\LieOperad)\to \Gamma(\LieOperad)$
+%\[\trace:S(\LieOperad)(V)\to \Gamma(\LieOperad)(V)\]
+is a map of monads, and an intermediate monad may be defined by
+\[\Lambda(\LieOperad):V\mapsto\im\bigl(\trace:S(\LieOperad)(V)\to \Gamma(\LieOperad)(V)\bigr).\]
+These monads give rise to the three indicated forms of Lie algebras in characteristic 2. Now each of these functors supports an extra grading, the \emph{quadratic grading}, so named because \textbf{why?}. For any $k\geq1$, we'll say that $\Gamma(\LieOperad)V$ has quadratic grading $k$ part
+\[\quadgrad{k}(\Gamma(\LieOperad)V):=(\LieOperad(k)\otimes V^{\otimes k})^{\Sigma_k},\]
+and similarly for the other two monads.
+
+ Now $\LieOperad(2)\cong\F_2$, so that
+\[\quadgrad{2}(S(\LieOperad)V)\cong S_2V,\quad \quadgrad{2}(\Lambda(\LieOperad)V)\cong \Lambda^2V,\quad\textup{and}\quad\quadgrad{2}(\Gamma(\LieOperad)V)\cong S^2V.\]
+%Each of these three monads is generated by a single binary operation, contained in quadratic grading 2. 
+Moreover, one can view an $S(\LieOperad)$-algebra as a map $S_2L\to L$, a $\Lambda(\LieOperad)$-algebra as a map $\Lambda^2L\to L$, and a $\Gamma(\LieOperad)$-algebra as a map $S^2L\to L$, where in each case we demand the necessary compatibilities that these maps extend to the full monad. %Here, we used the analogous definitions $S_2V:=(V^{\otimes2})_{\Sigma_2}$, $S^2V:=(V^{\otimes2})_{\Sigma_2}$ and $\Lambda^2V:=\im(\trace:S_2V\to S^2V)$.
+By pulling back along the natural maps
+\[S_2V\to \Lambda_2 V\to S^2V\]
+one can demote a restricted Lie algebra to a Lie algebra, or a Lie algebra to an $S(\LieOperad)$-algebra.
+
+A \emph{restictable ideal} in a Lie algebra $L$ is a Lie ideal $I$ of $L$, equipped with a restriction function $\restn{(\DASH)}:I\to I$, satisfying the following axioms, for $x_1,x_2\in I$ and $x_3\in L$:
+\[\restn{(x_1+x_2)}=\restn{x_1}+\restn{x_2}+[x_1,x_2]\textup{ \ and \ }[\restn{x_1},x_3]=[x_1,[x_1,x_3]].\]
+In fact, let $\mathsf{PRL}$ denote the category whose objects are pairs of vector spaces $(L_+,L_0)$, equipped with a Lie algebra structure on $L_0\oplus L_+$ in which $L_+$ is a restrictable ideal, and whose maps are Lie algebra maps preserving the decomposition and commuting with the partial restrictions. This category is monadic over $\vect{}{}\times\vect{}{}$, the category of pairs of vector spaces, and the value of monad $F_{\mathsf{PRL}}$  on $(V_+,V_0)$ is just an appropriately chosen subalgebra of $\Gamma(\LieOperad)(V_+\oplus V_0)$.
+
+
+\subsection{Non-unital commutative algebras}
+In this paper we will always work with \emph{non-unital} commutative algebras, unless we specify otherwise. As for Lie algebras, there are three different notions of non-unital commutative algebra available in characteristic 2. A \emph{commutative algebra} (or $S(\CommOperad)$-algebra) is a vector space $A$ equipped with an associative commutative pairing $A\otimes A\to A$. An \emph{exterior algebra} (or $\Lambda(\CommOperad)$-algebra) is a commutative algebra $A$ with the property that $x^2=0$ for all $x\in A$. A \emph{divided power algebra} (or $\Gamma(\CommOperad)$-algebra) is a commutative algebra $A$ equipped with \emph{divided power} operations, as described in \cite[1.2.2]{FresseSimplicialAlgs.pdf} or \cite[\S2]{MR1089001}. In characteristic 2, these operations are all determined by a single operation, the \emph{divided square} $\gamma_2:A\to A$, which satisfies
+\[\gamma_2(xy)=x^2\gamma_2(y),\ \gamma_2(\lambda x)=\lambda^2\gamma_2(x)\textup{ and }\gamma_2(x+y)=\gamma_2(x)+\gamma_2(y)+xy.\]
+Note that the last condition implies that a divided power algebra is exterior. Thus, $\gamma_2(xy)=x^2\gamma_2(y)=0$.
+
+There is a notion of a \emph{divided power ideal} of a commutative algebra: an ideal $I$ of a commutative algebra $A$ equipped with a compatible divided power structure on $I$. In this case, $I$ is necessarily exterior, although for $x\in A$ and $y\in L$, $\gamma_2(xy)=x^2\gamma_2(y)$ need not be zero.
+
+Again, Fresse \cite{FresseSimplicialAlgs.pdf} explains how to construct the monads $S(\CommOperad)$, $\Lambda(\CommOperad)$ and $\Gamma(\CommOperad)$ on $\vect{}{}$ which give rise to these structures, using the commutative operad $\CommOperad$ instead of $\LieOperad$. Again, there is a quadratic grading definable on these three monads, and each monad is generated in degre 2, so that a commutative algebra may be thought of as a  map $S_2L\to L$, an exterior algebra as a map $\Lambda^2L\to L$, and a divided power algebra as a map $S^2L\to L$.
+
+
+
+
+
 
 \subsection{Smash coproducts and the quadratic part of a $\calC$-expression}\label{quadratic part section}
 In this paper, we'll often use a method of constructing cohomology operations used by Goerss in \cite[\S5]{MR1089001}, and here we'll set up a framework that can be applied to each case. Suppose that $\calC$ is an algebraic category, monadic over $\vect{}{}$, category of graded vector spaces. 
@@ -436,22 +497,25 @@ For $X_1,X_2\in\calc$, we define the \emph{smash coproduct} $X_1\wedge X_2$ to b
 
 For $V\in\vect{}{}$, the diagonal map $\Delta:V\to V\oplus V$ of $V$ induces a `diagonal map' $F_\calC V\to F_\calC (V\oplus V)\cong (F_\calC (V))^{\sqcup 2}$, and writing $i_1$ and $i_2$ for the two summand inclusions $F_\calC (V)\to (F_\calC (V))^{\sqcup 2}$, consider the map
 \[(F_\calC(\Delta)+i_1+i_2):F_\calC V\to (F_\calC V)^{\sqcup2}.\]
-This map evidently factors through $(F_\calC V)^{\wedge 2}$, and is symmetric. We name this factoring the `cross terms':
+This map evidently factors through $(F_\calC V)^{\wedge 2}$, and is symmetric. We name this factoring the \emph{cross terms}:
 \[\crossterms:F_\calC V\to (F_\calC V)\wedge^{\Sigma_2} (F_\calC V),\]
-as it measures the nonlinearity in an expression in $F_\calC V$. For example, if $\calC$ is the category of non-unital commutative algebras over $\F_2$, then for $v,w\in V$, using subscripts to denote membership in the first or second copy of $V$:
+as it measures the nonlinearity in an expression in $F_\calC V$. For example, when $\calC=S(\CommOperad)$, then for $v,w\in V$, using subscripts to denote membership of the first or second copy of $V$:
 \[\crossterms(vw)=(v_1+v_2)(w_1+w_2)+v_1w_1+v_2w_2=v_1w_2+w_1v_2.\]
 
-In the cases of interest to us, there is a map, natural and symmetric in $X_1,X_2\in\calC$,
+In each case of interest to us, we will give a map, natural and symmetric in $X_1,X_2\in\calC$,
 \[j_\calC:Q^\calC(X_1\wedge X_2)\to Q^\calC(X_1)\otimes Q^\calC(X_2),\]
-and we'll write $\quadratic_\calC$ for the composite
-\[\quadratic_\calC:\left(F_\calC V\overset{\crossterms}{\to}(F_\calC V)^{\wedge 2}\to Q^\calC((F_\calC V)\wedge^{\Sigma_2} (F_\calC V))\overset{j_\calC}{\to}S^2V\right).\]
-In the example of commutative algebras, the map $j_\calC$ is defined by $x_1x_2\mapsto x_1\otimes x_2$ when $x_i\in X_i$, and $\quadratic_\calC$ is the composite $F_\calC V\epi S_2V\overset{\trace}{\to}S^2V$.
+and we'll write $\quadratic_\calC$ for \emph{quadratic part} map, the composite
+\[\quadratic_\calC:\left(F_\calC V\overset{\crossterms}{\to}(F_\calC V)^{\wedge 2}\to Q^\calC((F_\calC V)\wedge^{\Sigma_2} (F_\calC V))\overset{j_\calC}{\to}S^2(Q_{\calc}F_{\calC}V)=S^2V\right).\]
+When $\calC=S(\CommOperad)$, the map $j_{S(\CommOperad)}$ is defined by $x_1x_2\mapsto x_1\otimes x_2$ when $x_i\in X_i$, and $\quadratic_{S(\CommOperad)}$ is the composite $F_{S(\CommOperad)} V\epi S_2V\overset{\trace}{\to}S^2V$, for example,  $\quadratic_{S(\CommOperad)}(u+vw+xy^2)$ evaluates as:
+\[j_{S(\CommOperad)}(v_1w_2+w_1v_2+x_1y_2^2+y_1^2x_2)=v\otimes w+w\otimes v+x\otimes y^2+y^2\otimes x,\]
+which equals $v\otimes w+w\otimes v$ %when evaluated in $S^2(Q^{S(\CommOperad)}F^{S(\CommOperad)}V)=S^2V$, 
+as hoped.
 
 In each category of interest to us, the following equation of maps $F_\calC F_\calC V\to S^2 V$ will always be satisfied:
 \[\quadratic_\calC\circ\mu_V=\quadratic_\calC\circ \epsilon_{F_\calC V} +\quadratic_\calC\circ {F_\calC \epsilon_V},\]
 where $\mu$ here stands for the multiplication map of the monad $U_\calC F_\calC $, which is to say that if  $f(g_i)$ is a $\calC$-expression in various $\calC$-expressions $g_i(v_{ij})$, we have 
 \[\quadratic(fg_i)(v_{ij})=\quadratic(f\epsilon(g_i))(v_{ij})+\epsilon(f)(\quadratic(g_i)(v_{ij})).\]
-This is another expression of homogeneity in the relations defining $\calC$. We can give an example in the category of commutative algebras by specifying an expression $f(g_1,g_2,g_3):=g_1g_2+g_3\in F_{\calc}F_{\calc}V$ in expressions $g_i:=v_{i1}v_{i2}+v_{i3}\in F_{\calc}V$ for each $i=1,2,3$. Then
+This is another expression of homogeneity in the relations defining $\calC$. For an example when $\calC=S(\CommOperad)$, we specify an expression $f(g_1,g_2,g_3):=g_1g_2+g_3\in F_{\calc}F_{\calc}V$ in expressions $g_i:=v_{i1}v_{i2}+v_{i3}\in F_{\calc}V$ for each $i=1,2,3$. Then
 \begin{alignat*}{2}
 \textup{\small$\quadratic(fg_i)(v_{ij})={}$}
 &
@@ -466,13 +530,24 @@ This is another expression of homogeneity in the relations defining $\calC$. We 
 \textup{\small$\quadratic(v_{31}v_{32}+v_{33})=\trace(v_{31}\otimes v_{32}).$}
 \end{alignat*}
 
-\subsection{Simplicial abelian groups}
-In this paper we will use the following four chain complexes associated with a simplicial vector-space $V$:
+
+\subsection{Categories of $\F_2$-vector spaces}
+[Repetitive:] In this paper we will deal with numerous categories monadic over a category of graded $\F_2$-vector spaces. We will write $\vect{}{}$ for a generic category of $\F_2$-vector spaces, either graded or ungraded. We will write $\vect{+}{r}$ for the category of vector spaces with $r$ non-negative homological gradings and a single strictly positive cohomological grading, so that an object $V$ of $\vect{+}{r}$ decomposes as
+\[V=\bigoplus_{s_r,\ldots,s_1\geq0,\,t\geq 1}V^{t}_{s_r,\ldots,s_1}.\]
+Similarly, we write $\vect{r}{+}$ for the category of $\F_2$-vector spaces with one positive homological grading and $r$ non-negative cohomological gradings. We follow the convention that (graded) dualization $V\mapsto V^*$ interchanges homological and cohomological gradings, and is thus a contravariant functor $\vect{+}{r}\to\vect{r}{+}$ defined by $(V^*)^{s_r,\ldots,s_1}_{t}:=(V_{s_r,\ldots,s_1}^{t})^*$.
+
+The category $\vect{+}{r}$ is equipped with a tensor product:
+\[(U\otimes V)^t_{s_r,\ldots,s_1}=\bigoplus_{s'_i+s''_i=s_i,\,t'+t''=t}U^{t'}_{s'_r,\ldots,s'_1}\otimes V^{t''}_{s''_r,\ldots,s''_1}.\]
+\textbf{Comment} here on degree shifts.
+%and if $V\in \vect{+}{r}$, then $V\otimes V$ has an action of $\Sigma_2$ given by the map $T$ interchanging the two factors. We'll write $S_2V$ for the coinvariants and $S^2V$ for the invariants of this action, and $\Lambda^2V$ for the image in $S^2V$ of the trace map $\trace=(1+T):S_2V\to S^2V$:\[S_2V\to \Lambda_2 V\to S^2V.\]
+
+\subsection{Simplicial vector spaces}
+In this paper we will use the following four chain complexes in $\complexes \vect{+}{r}$ associated with a simplicial graded vector-space $V\in s\vect{+}{r}$:
 \begin{alignat*}{2}
 C_nX&:=X_n&& \textup{ with differential }d=\textstyle\sum_{i=0}^{n}d_i;\\
 N_nX&:=\textstyle\bigcap_{0< i\leq n}\ker(d_i:X_n\to X_{n-1})&& \textup{ with differential }d=d_0;\\
 \Nop_nX&:=\textstyle\bigcap_{0\leq i< n}\ker(d_i:X_n\to X_{n-1})&& \textup{ with differential }d=d_n;\\
-N_n^\div X&:=X_n/(\textup{degenerate $n$-simplices})&& \textup{ with differential }d=\textstyle\sum_{i=0}^{n}d_i
+N_n^\div X&:=X_n/(\textup{degenerate $n$-simplices})&& \textup{ with differential }d=\textstyle\sum_{i=0}^{n}d_i.
 \end{alignat*}
 There are evident inclusions of $N_*X$ and $\Nop_*X$ into $C_*X$, and a projection of $N_*X$ onto $N_*^\div X$, and all of these maps are weak equivalences. Moreover, the composite $N_*X\to N_*^\div X$ is an isomorphism (as is the composite from $\Nop_*X$). Each $N_nX$ retains the internal gradings of $X$, and the functor $N_*$ appears in the Dold-Kan correspondence \cite[\S III.2]{goerss-jardine.pdf}, an adjoint equivalence of categories:
 \[N:s\vect{+}{r}\rightleftarrows \complexes \vect{+}{r}:\Gamma,\]
@@ -480,9 +555,11 @@ under which the homotopy groups of $X\in s\vect{+}{r}$ (as a simplicial set)  ar
 %
 %As such, we may define the homotopy groups of $X$, written $\pi_*X\in \vect{+}{r+1}$, to be $H_*N_*X$, where $N_*$ is one of the inverse equivalences appearing in the Dold-Kan correspondence [somewhere]: \[N:s\vect{+}{r}\rightleftarrows \complexes \vect{+}{r}:\Gamma.\]
 %There are three equivalent definitions of $N_*X$. We will almost always use the description of $N_nX$ as the mutual kernel of $d_1,\ldots,d_n$ in $X_n$, with differential $d_0$ (rather than the equivalent definition as a quotient of the unnormalized complex $C_nX=X_n$), and write $ZN_nX$ for the mutual kernel of $d_0,\ldots,d_n$. 
-An in $N_nX$ is an element $x\in X_n$ such that $d_ix=0$ for $0\leq i\leq n$. We write $ZN_nX$ for this group of cycles, and sometimes write $\overline{x}$ for the equivalence class of $x$ in $\pi_*X$.
+A cycle in $N_nX$ is an element $x\in X_n$ such that $d_ix=0$ for $0\leq i\leq n$. We write $ZN_nX$ for this group of cycles, and sometimes write $\overline{x}$ for the equivalence class of $x$ in $\pi_*X$.
 
-Now fix $n\geq0$, $s_r,\ldots,s_1\geq0$ and $t\geq1$. Writing $z$, $h$ and $dh$ for classes all in internal cohomological grading $t$ and homological grading $s_r,\ldots,s_1$ , define
+It will be helpful to end the notational distinction between the chain complex dimension $n$ and the other homological dimensions $s_r,\ldots,s_1$. That is, we will view $\pi_*V$ as a single object of $\vect{+}{r+1}$, defined by
+\[(\pi_*V)^t_{s_{r+1},\ldots,s_1}:=(\pi_{s_{r+1}}V)^t_{s_{r},\ldots,s_1}.\]
+Now for any collection of indices $s_{r+1},\ldots,s_1\geq0$ and $t\geq1$, define:
 %Let $\mathbb{S}_{n,s_r,\ldots,s_1}^t$ and $C\mathbb{S}_{n,s_r,\ldots,s_1}^t$ be the $\in \complexes \vect{+}{r}$ be the chain complexes, with $z$, $h$ and $dh$ all having internal gradings $t,s_r,\ldots,s_1$:
 %%%%%%\begin{gather*}
 %%%%%%\phantom{C\mathbb{S}_{n,s_r,\ldots,s_1}^t=\Gamma\Bigl(}\xymatrix@R=1.5mm@1@!C{
@@ -518,10 +595,10 @@ Now fix $n\geq0$, $s_r,\ldots,s_1\geq0$ and $t\geq1$. Writing $z$, $h$ and $dh$ 
 &{\,0\,}\ar[l]
 &{\,\cdots\Bigr),} \ar[l]
 \\
-&\raisebox{.4mm}{\tiny$\smash{(n-1)}$}
-&\raisebox{.4mm}{\tiny$\smash{( n )}$}
-&\raisebox{.4mm}{\tiny$\smash{(n+1)}$}
-&\raisebox{.4mm}{\tiny$\smash{(n+2)}$}\\
+&\raisebox{.4mm}{\tiny$\smash{(s_{r+1}\!-\!1)}$}
+&\raisebox{.4mm}{\tiny$\smash{(s_{r+1}  )}$}
+&\raisebox{.4mm}{\tiny$\smash{(s_{r+1}\!+\!1)}$}
+&\raisebox{.4mm}{\tiny$\smash{(s_{r+1}\!+\!2)}$}\\
 %&{\smash{(n)}}&{\smash{(n+1)}}&{\smash{(n+2)}}\\
 %&{\smash{(n-1)}}&{\smash{(n)}} &{\smash{(n+1)}}&{\smash{(n+2)}}\\
 {\makebox[0cm][r]{$\,C\mathbb{S}_{n,s_r,\ldots,s_1}^t=\Gamma\Bigl($}\cdots\,} &%r1c1
@@ -534,24 +611,131 @@ Now fix $n\geq0$, $s_r,\ldots,s_1\geq0$ and $t\geq1$. Writing $z$, $h$ and $dh$ 
 &{\,\cdots\Bigr).} \ar[l]
 }
 \end{gather*}
-There is an evident inclusion $\imath:\mathbb{S}_{n,s_r,\ldots,s_1}^t\to C\mathbb{S}_{n,s_r,\ldots,s_1}^t$. For any $V\in s\vect{+}{r}$:
-\[\hom_{s\vect{+}{r}}(\mathbb{S}^t_{s_r,\ldots,s_1},V)\cong (ZN_nV)_{n,s_r,\ldots,s_1}^t\textup{ and }\hom_{s\vect{+}{r}}(C\mathbb{S}^t_{n,s_r,\ldots,s_1},V)\cong (N_{n+1}V)_{s_r,\ldots,s_1}^t,\]
-and under these isomorphisms the differential $d=d_0:N_{n+1}V\to ZN_nV$ corresponds to $\imath^*$.
-
-\subsection{Quillen's model structure on $s\calC$}
-For any of the algebraic categories $\calC$ herein we use Quillen's simplicial model category structure on the category $s\calC$. In this structure, the weak equivalences (fibrations) are the maps which are weak equivalences (fibrations) of simplicial abelian groups, so that every object is fibrant. 
-
- A simplicial object $X$ is \emph{almost free} if there are subspaces $V_n\subseteq X_n$ for each $n\geq0$ such that the structure map $F_{\calC}U_\calC V_n\to X_n$ is an isomorphism for all $n$, and such that these subspaces are preserved by all of the degeneracies and face maps of $X$ except for $d_0$. Every cofibrant object is a retract of an almost free object \cite[\S3]{MillerSullivanConjecture.pdf}.
-
-For a simplicial resolution functor $\calC\to s\calC$, we'll often use the standard simplicial bar construction arising from the $F_\calC\dashv U_\calC$ adjunction \cite{BlumRiehlResolutions.pdf}. More explicitly, given $X\in\calC$, we define $B^\calC X\in s\calC$ by iterated application of the comonad $F_\calC$ to $X\in \calC$:
-\[B_s^\calC X=(F_\calC)^{s+1}X.\]
-The face maps are given by the formula $d_i=(F_\calC)^i\rho$, and the degeneracies by $s_i=(F_\calC)^i\Delta$. %, where $\rho$ and $\Delta$ are respectively the counit and diagonal of the comonad $F_\calC U_\calC$. 
-This object is almost free, with $B_s^\calC X$ generated by its subspace $V_s=(F_{\calC})^sX$. It is standard that the augmentation $B^\calC X\to X$ is an acyclic fibration.
-
-The construction generalizes to yield a cofibrant replacement functor $B^{\calc}$ on $s\calc$: one applies  $B^{\calc}:\calc\to s\calc$ levelwise, to obtain a bisimplicial object, and then takes its diagonal.
-
-
+Here $z$ and $h$ denote are both to lie in internal cohomological grading $t$ and homological gradings $s_r,\ldots,s_1$.
+There is an evident inclusion $\imath:\mathbb{S}_{s_{r+1},s_r,\ldots,s_1}^t\to C\mathbb{S}_{s_{r+1},s_r,\ldots,s_1}^t$. For any $V\in s\vect{+}{r}$, we can identify the subspaces of cycles and boundaries with hom-sets:
+\begin{alignat*}{2}
+\hom_{s\vect{+}{r}}(\mathbb{S}^t_{s_{r+1},\ldots,s_1},X)&\cong (ZN_{s_{r+1}}X)_{s_r,\ldots,s_1}^t\makebox[0cm][l]{ and}\\
+\hom_{s\vect{+}{r}}(C\mathbb{S}^t_{s_{r+1},\ldots,s_1},X)&\cong (N_{s_{r+1}+1}X)_{s_r,\ldots,s_1}^t.
+\end{alignat*}
+%\[\hom_{s\vect{+}{r}}(\mathbb{S}^t_{s_r,\ldots,s_1},V)\cong (ZN_{s_{r+1}}V)_{s_r,\ldots,s_1}^t\textup{ and }\hom_{s\vect{+}{r}}(C\mathbb{S}^t_{s_{r+1},\ldots,s_1},V)\cong (N_{s_{r+1}+1}V)_{s_r,\ldots,s_1}^t,\]
+Under these isomorphisms the differential $N_{s_{r+1}+1}V\to ZN_{s_{r+1}}V$ corresponds to $\imath^*$.
 \end{Conventions and notation}
+
+
+
+\begin{External homotopy and cohomotopy operations}
+\vfil\pagebreak
+
+
+\section{External homotopy and cohomotopy operations}
+
+\subsection{Higher simplicial Eilenberg-Mac Lane map}\textbf{$\Delta$ because it's the right symbol, should be an upper index since it decreases homological degree}.
+Let $\{\DeltaUp^k\}$ be a higher simplicial Eilenberg-Mac Lane map \cite[\S3]{DwyerHtpyOpsSimpComAlg.pdf}, i.e.\ maps
+\[\DeltaUp^k:(CU\otimes CV)_{i+k}\to N(U\otimes V)_i\textup{\ \ for $0\leq k\leq i$}\]
+such that the identities
+\[\DeltaUp^k+T\DeltaUp^kT=\oldphi^k+\begin{cases}
+\DeltaUp^{k-1}\partial+\partial\DeltaUp^{k-1},&\textup{if }k\geq1;\\
+\Delta,&\textup{if }k=0.
+%\\,&\textup{if }
+\end{cases}
+\]
+hold on classes of dimension at least $2k$, and:
+\begin{itemize}
+\setlength{\parindent}{.25in}
+\item $\Delta:CU\otimes CV\to N(U\times V)$ is a chain homotopy equivalence inducing the identity in dimension zero; and
+\item $\oldphi^k$ is the map $(CU\otimes CV)_{i+k}\to N(U\otimes V)_i$ which vanishes except on $U_k\otimes V_k$, where its value is just the projection $U_k\otimes V_k\to N(U\times V)_k$.
+\end{itemize}
+Note that as $\oldphi^0$ commutes with symmetry isomorphisms, so does $\Delta$.
+
+
+
+
+
+\subsection{External unary homotopy operations}
+In this section we recall the definition of certain homotopy operations, implicit in \cite[\S4]{DwyerHtpyOpsSimpComAlg.pdf} (or cartan or Bousfield - explicit?) and explicit in 
+\cite[\S3]{MR1089001}, of homotopy operations $\sigma_i^\textup{ext}:\pi_n(V)\to \pi_{n+i}(S^2V)$. 
+
+\begin{prop}[{\cite[Lemma 4.1]{DwyerHtpyOpsSimpComAlg.pdf},\ \cite[\S3]{MR1089001}}]
+Consider the function
+\[a\overset{f}{\mapsto }\DeltaUp^{n-i}(a\otimes a),\ \ N_nV \to N_{n+i}S_2V.\]
+For $2\leq i\leq n$, $f$ yields a well-defined homotopy operation $\sigma_i^\textup{ext}:\pi_nV\to \pi_{n+i}(S_2V)$. \\
+For $1\leq i\leq n$, $f$ yields a well-defined homotopy operation $\sigma_i^\textup{ext}:\pi_nV\to \pi_{n+i}(\Lambda^2V)$. \\
+%produces a well defined homotopy operation $\sigma_i^\textup{ext}:\pi_n(V)\to \pi_{n+i}(\Lambda^2V)$. 
+The function \[a\mapsto \oldphi^n(a\otimes a),\ \ N_nV \to N_{n}S^2V\] yields a well-defined homotopy operation $\sigma_0^\textup{ext}:\pi_nV\to \pi_{n}(S^2V)$.
+\end{prop}
+
+
+\subsection{External binary homotopy operations}
+By general observations on natural transformations out of the endofunctor $S^2$ of $\vect{}{}$, to construct a natural map $\widetilde{\nabla}:S^2(\pi_*V)\to\pi_*(S^2V)$ is to give a natural linear map $p:S_2(\pi_*(V))\to \pi_*(S^2V)$ and a natural function $\restn{(\DASH)}:\pi_n(V)\to \pi_{2n}(S^2V)$ satisfying $\restn{(x+y)}=\restn{x}+\restn{y}+p(x\otimes y)$. Then $\widetilde{\nabla}$ is the unique natural map such that $\widetilde{\nabla}\circ\trace=p$ and $\widetilde{\nabla}(a)=p(a\otimes a)$ for $a\in\pi_*\left(V\right)$.
+%\[p=\left(S_2\pi_*(V)\overset{\trace}{\to} S^2\pi_*(V)\overset{\widetilde{\nabla}'}{\to} \pi_*(S^2V)\right)\textup{ and }\restn{(\DASH)}=\left(\pi_*(V)\overset{v\mapsto v\otimes v}{\to} S^2\pi_*(V)\overset{\widetilde{\nabla}'}{\to} \pi_*(S^2V)\right).\]
+We define $\widetilde{\nabla}$ in this way, with
+\[p=\pi_*(\trace)\circ\nabla:\left(S_2(\pi_*(V))\overset{\nabla}{\to}\pi_*(S_2(V))\overset{\pi_*(\trace)}{\to}\pi_*(S^2(V))\right)\]
+and with $\restn{(\DASH)}$ the operation $\sigma_n:\pi_n(V)\to \pi_{2n}(S^2V)$.
+
+\vfil\pagebreak
+
+\subsection{Higher cosimplicial Eilenberg-Zilber map}
+Let $\{D^k\}$ be a special cosimplicial Eilenberg-Zilber map \cite[5.2]{turner_opns_and_sseqs_I.pdf}, i.e.\  maps
+\[D^k:(CR\otimes CS)_{-i-k}\to N(R\otimes S)_{-i}\textup{\ \ for $i,k\geq0$},\]
+natural in cosimplicial vectorspaces $R,S$,
+with the properties:
+\begin{itemize}
+\setlength{\parindent}{.25in}
+\item $dD^k+D^kd=D^{k-1}+TD^{k-1}T$ for $k\geq1$;
+\item $D^0$ is a chain homotopy equivalence inducing the identity in dimension zero;
+\item the restriction of $D^k$ to $C_{-i}R\otimes C_{-j}S$ is zero unless $i\geq k$ and $j\geq k$; and
+\item $D^k$ maps $C_{-k}R\otimes C_{-k}S$ identically onto $C_{-k}(R\otimes S)$.
+\end{itemize}
+It is a natural convention to define $D^k=0$ for whenever either $k<0$ or $i<0$, in which case the relation $dD^k+D^kd=D^{k-1}+TD^{k-1}T$ holds for any $k$.
+
+
+\subsection{External unary cohomotopy operations}
+
+\subsection{External binary cohomotopy operations}
+
+certain generic operations, defined for any $U\in s\calV$:
+\begin{gather*}
+\ExtCohProd:\pi^{n_1}(U^*)\otimes \pi^{n_2}(U^*)\to \pi^{n_1+n_2}((S^2U)^*),\textup{ and}\\
+\ExtCohOp^k:\pi^{n}(U^*)\to \pi^{n+k}((S^2U)^*),\textup{ (zero unless $0\leq k\leq n$).}
+\end{gather*}
+These operations are defined as follows. In all that follows, let $\{D_k\}$ be a special cup-$k$ product [Singer \S1.9]. As the normalized complex is naturally a retract of the unnormalized complex, we may define $\oldphi:\left(N_mU\right)^*\otimes \left(N_mU\right)^*\to \left(N_m(U\otimes U)\right)^*$ using the map
+\[\left(C_mU\overset{\alpha}{\to}\F_2\right)\otimes \left(C_mU\overset{\beta}{\to}\F_2\right)\mapsto\left(C_m(U\otimes U)\overset{\alpha\otimes\beta}{\to}\F_2\otimes \F_2\overset{\textup{mult}}{\to}\F_2\right).\]
+Then define a cochain map:
+\[m_\textup{ext}:(N_*U)^*\otimes (N_*U)^*\to (N_*(S^2U))^*\]
+and functions
+\[S^k_\textup{ext}:(N_mU)^*\to (N_{m+k}(S^2U))^*\]
+by the formulae, for $\alpha\in (N_{n_1}U)^*$ and $\beta\in (N_{n_2}U)^*$
+\[m_\textup{ext}(\alpha\otimes\beta)=D_0^*\oldphi(\alpha\otimes\beta),\quad S^k_\textup{ext}(\alpha)=D^*_{n_1-k}\oldphi(\alpha\otimes \alpha)+D^*_{n_1-k+1}\oldphi(\alpha\otimes d\alpha),\]
+where we regard the $D^*_k$ as maps into $(N_*(S^2U))^*$ by composition with the projection from $(N_*(U\otimes U))^*$. One checks that these operations induce well defined operations $\ExtCohProd$ and $\ExtCohOp^k$ by the same arguments as in \cite[\S1.12]{MR2245560}.
+
+\subsection{Linearly dual $\calC$-homology operations}
+The linear maps $\ExtCohOp^k$ induce dual operators
+\[(\ExtCohOp^k)^*:\pi_*(S^2U)\to \pi_{*-k}(U)\]
+whenever these groups are locally finite dimensional. Following \cite[\S3]{MR1089001}, one can define the operations $(\ExtCohOp^k)^*$ directly, without the double dualization as described below. Setting $U=Q^{\calC}B^{\calC}X$ and precomposing with the map $(\psi_\calC)_*:\pi_*(U)\to\pi_{*-1}(S^2U)$ yields homology operations on $H_*^\calC$ whose duals are the cohomology operations of \S\ref{generic coh ops section}.
+
+If $\sigma_i$ and $\pi_*(1+T)$ are the maps of \cite[\S3]{MR1089001}, then any element of $x\in \pi_m(S^2U)$ can be written as a sum
+\[x=\sum_j\pi_*(1+T)(y_j\otimes z_j)+\sum_{\smash{0\leq k\leq \lfloor m/2\rfloor}}\sigma_k(w_k),\]
+where $w_k\in \pi_{m-k}(U)$ ($0\leq k\leq\lfloor m/2\rfloor$), and $y_j,z_j\in \pi_{*}(U)$.
+Then the map $(\ExtCohOp^k)^*$ sends $x$ to this $w_k$. Alternatively, if we only wish to determine the $(\ExtCohOp^k)^*$ for $k<m/2$ (and not the dual of the top operation $(\ExtCohOp^{m/2})^*$ when $m$ is even), we can rewrite this equation: 
+\[x=\widetilde{\nabla}(v)+\sum_{\smash{0\leq k< m/2}}\sigma_k(w_k),\]
+where $v\in(S^2(\pi_*(U)))_{m}$ and $w_k\in \pi_{m-k}(U)$ ($0\leq k<m/2$). Here, $\widetilde{\nabla}:S^2\pi_*V\to \pi_*S^2V$ is the map that we discuss in \S\ref{the top homotopy operations for Lie algebras}.
+
+\end{External homotopy and cohomotopy operations}
+
+
+\begin{External spectral sequence operations}
+\section{External spectral sequence operations}
+
+[\textbf{move me} to appropriate part of spectral sequence section:] {\tiny It is not a natural convention to regard $\DeltaUp^k$ as zero where it is not defined, however, we will perform this abuse shortly for notational convenience. Under this convention we will be able to use the equation
+\[(d\DeltaUp^k+\DeltaUp^kd)z=(\oldphi^{k+1} +\DeltaUp^{k+1}+T\DeltaUp^{k+1}T)z\]
+whenever $k\geq0$ and the simplicial dimension of $z$ does not equal either of $2k$ and $2k+1$.}
+
+
+\end{External spectral sequence operations}
+
+
+
+
 
 \begin{Homotopy, homology and cohomology}
 \section{Homotopy, homology and cohomology}
@@ -560,16 +744,20 @@ Let $\calC$ be a category of universal graded algebras, monadic over $\vect{+}{r
 
 \subsection{Homotopy groups and $\calC$-$\Pi$-algebras}
 %The forgetful functor $U_\calC:\calc\to \vect{+}{r}$ used to define the weak equivalences and fibrations in $s\calc$, allows us to consider any object $X\in s\calC$ as an object of $s\vect{+}{r}$. In particular, for any $X\in s\calc$ we may define homotopy groups
-Using the forgetful functor $U_\calC:\calc\to \vect{+}{r}$, for any $X\in s\calc$ we may define the homotopy groups of $X$:
-\[(\pi_*X)_{s_{r+1},\ldots,s_1}^{t}:=\pi_{s_{r+1}}(X^t_{s_r,\ldots,s_1}),\]
+Using the forgetful functor $U_\calC:\calc\to \vect{+}{r}$, for any $X\in s\calc$ we may define the homotopy groups of $X$,
+%\[(\pi_*X)_{s_{r+1},\ldots,s_1}^{t}:=\pi_{s_{r+1}}(X^t_{s_r,\ldots,s_1}),\]
 which we view together as an object $\pi_*X$ of $\vect{+}{r+1}$. By definition of the model structure, $\pi_*$ is a homotopical functor.
-For any $X\in s\calC$:
+For any $X\in s\calC$, by adjunction:
 %\[\hom_{s\calC}(F_\calC\mathbb{S}^t_{n,s_r,\ldots,s_1},X)\cong (ZN_nX)_{s_r,\ldots,s_1}^t\textup{ and }\hom_{s\calC}(F_{\calC}C\mathbb{S}^t_{n,s_r,\ldots,s_1},X)\cong (N_{n+1}X)_{s_r,\ldots,s_1}^t,\]
-\begin{gather*}
-\hom_{s\calC}(F_\calC\mathbb{S}^t_{n,s_r,\ldots,s_1},X)\cong (ZN_nX)_{s_r,\ldots,s_1}^t\makebox[0cm][l]{ and}\\
-\hom_{s\calC}(F_{\calC}C\mathbb{S}^t_{n,s_r,\ldots,s_1},X)\cong (N_{n+1}X)_{s_r,\ldots,s_1}^t,
-\end{gather*}
-and $i^*$ plays the same role as above, representing the differential of $N_*X$. Moreover, in the homotopy category corresponding to the above model category structure, $F_\calC\mathbb{S}^t_{n,s_r,\ldots,s_1}$ represents $\pi_n(\DASH)^t_{s_r,\ldots,s_1}$, c.f.\ \cite{MR1089001} or \cite[\S3.1.1]{Blanc_Stover-Groth_SS.pdf}.
+%\begin{gather*}
+%\hom_{s\calC}(F_\calC\mathbb{S}^t_{s_{r+1},\ldots,s_1},X)\cong (ZN_{s_{r+1}}X)_{s_r,\ldots,s_1}^t\makebox[0cm][l]{ and}\\
+%\hom_{s\calC}(F_{\calC}C\mathbb{S}^t_{s_{r+1},\ldots,s_1},X)\cong (N_{s_{r+1}+1}X)_{s_r,\ldots,s_1}^t,
+%\end{gather*}
+\begin{alignat*}{2}
+\hom_{s\calC}(F_\calC\mathbb{S}^t_{s_{r+1},\ldots,s_1},X)&\cong (ZN_{s_{r+1}}X)_{s_r,\ldots,s_1}^t\makebox[0cm][l]{ and}\\
+\hom_{s\calC}(F_{\calC}C\mathbb{S}^t_{s_{r+1},\ldots,s_1},X)&\cong (N_{s_{r+1}+1}X)_{s_r,\ldots,s_1}^t,
+\end{alignat*}
+and indeed $i^*$ plays the same role as above, representing the differential of $N_*X$. Moreover, in the homotopy category corresponding to the above model category structure, $F_\calC\mathbb{S}^t_{n,s_r,\ldots,s_1}$ represents $\pi_n(\DASH)^t_{s_r,\ldots,s_1}$, c.f.\ \cite{MR1089001} or \cite[\S3.1.1]{Blanc_Stover-Groth_SS.pdf}.
 
 %In light of this fact, the homotopy groups of $X$ possess
 By virtue of the algebraic structure posessed by $X$, the homotopy groups $\pi_*X$ possess certain natural algebraic structure, that of a $\calc$-$\Pi$-algebra. Indeed, as any given homotopy group is a representable functor on the homotopy category, natural $N$-ary operations on homotopy groups
@@ -628,50 +816,51 @@ as the zeroth face map of $\{V_n\}$, and using the other structure maps of $X$, 
 \tododone{Various intro here}{Say what a $\calC$-$\Pi$-algebra is, even with all the gradings.
 \item Construct the free $\calC$-$\Pi$-algebra on a set (\textbf{what happens on a vector space?}).
 \item Say what a model is. Move the discourse on spheres in $\complexes\vect{}{}$ to somewhere above. Also, put some discourse on the smash coproduct into this paragraph.}
-
-Suppose that $X_1$ and $X_2$ are models in $s\calC$. %, which is to say that are each is almost free, and weakly equivalent to a wedge of spheres. 
-Then the natural map $i:(\pi X_1)\sqcup (\pi X_2)\to \pi(X_1\sqcup X_2)$ is an isomorphism, since both source and target represent the free $\calC$-$\Pi$-algebra on generators corresponding to the wedge summands of $X_1$ and $X_2$ taken together. Moreover, the natural map $\pi(X_1\times X_2)\to (\pi X_1)\times (\pi X_2)$ is an isomorphism, as the forgetful functor is a right adjoint, and $\pi_*$ preserves products (of vector spaces). Thus we have a commuting square
+We will find it useful to be able to express the smash coproduct of free $\calC$-$\Pi$-algebras as the homotopy groups of an object of $s\calC$.
+As every free $\calC$-$\Pi$-algebra is the homotopy of a model in $s\calc$, we start by supposing that $X_1$ and $X_2$ are such models. %, which is to say that are each is almost free, and weakly equivalent to a wedge of spheres. 
+Then the natural map $i:\pi_* X_1\sqcup \pi_* X_2\to \pi_*(X_1\sqcup X_2)$ is an isomorphism, since both source and target represent the free $\calC$-$\Pi$-algebra on generators corresponding to the wedge summands of $X_1$ and $X_2$ taken together. Moreover, the natural map $\pi_*(X_1\times X_2)\to \pi_* X_1\times \pi_* X_2$ is an isomorphism, as the forgetful functor is a right adjoint, and $\pi_*$ preserves products (of vector spaces). Thus we have a commuting square
 \[\xymatrix@R=4mm{
-(\pi X_1)\sqcup (\pi X_2)
-\ar[r]
+\pi_* X_1\sqcup \pi_* X_2
+\ar@{->>}[r]
 \ar[d]^-{i}_-{\cong}
 &%r1c3
-(\pi X_1)\times (\pi X_2)
+\pi_* X_1\times \pi_* X_2
 \ar[d]_-{\cong}\\
-\pi (X_1\sqcup X_2)
+\pi_* (X_1\sqcup X_2)
 \ar[r]
 &%r2c3
-\pi (X_1\times X_2)
+\pi_* (X_1\times X_2)
 }\]
-This shows that the long exact sequence coming from $X_1\wedge X_2\to X_1\sqcup X_2\to X_1\times X_2$ is just a short exact sequence, and that there is a commuting diagram
+and the homotopy long exact sequence of $X_1\wedge X_2\to X_1\sqcup X_2\to X_1\times X_2$ has connecting maps zero. The resulting morphism of short exact sequences
 \[\xymatrix@R=4mm{
 0\ar[r]&%r1c1
-(\pi X_1)\wedge (\pi X_2)
+\pi_* X_1\wedge \pi_* X_2
 \ar[r]
 \ar[d]^-{i}_-{\cong}
 &%r1c2
-(\pi X_1)\sqcup (\pi X_2)
+\pi_* X_1\sqcup \pi_* X_2
 \ar[r]
 \ar[d]^-{i}_-{\cong}
 &%r1c3
-(\pi X_1)\times (\pi X_2)
+\pi_* X_1\times \pi_* X_2
 \ar[r]
 \ar[d]_-{\cong}
 &%r1c4
 0\\%r1c5
 0\ar[r]&%r1c1
-\pi (X_1\wedge  X_2)
+\pi_* (X_1\wedge  X_2)
 \ar[r]
 &%r1c2
-\pi (X_1\sqcup X_2)
+\pi_* (X_1\sqcup X_2)
 \ar[r]
 &%r2c3
-\pi (X_1\times X_2)
+\pi_* (X_1\times X_2)
 \ar[r]
 &%r1c4
 0
 }\]
-In particular, there is an isomorphism $i:(\pi X_1)\wedge (\pi X_2)\to\pi(X_1\wedge X_2)$ (natural for pairs of maps of models), and the map $\pi(X_1\wedge X_2)\to \pi(X_1\sqcup X_2)$ is a monomorphism.
+provides an the desired isomorphism, natural in the models $X_1$ and $X_{2}$:
+\[i:\pi_* X_1\wedge \pi_* X_2\to\pi_*(X_1\wedge X_2).\]
 
 
 
@@ -737,7 +926,7 @@ F_\calC V_{s-2}\ar[r]^-{\theta}
 &%r2c2
 GQ^{\calC}X_{s-2}
 }\]
-Now the rightmost two squares both commute, so to show that the outer rectangle commutes, it is enough to see that the two paths around the leftmost square are coequalized by $\theta$. Using the simplicial identity $d_0 d_1=d_0d_0$, we are trying to show that $\theta d_0d_0+\theta d_0\epsilon d_0$ and $\theta F_{\calC}(\epsilon d_0) d_0$ are the same map from $V_s$ to $GV_{s-2}$. Even more, we will show that $\theta d_0+\theta d_0\epsilon$ and $\theta F_{\calC}(\epsilon d_0)$ are the same map $F_\calC V_{s-1}$ to $GV_{s-2}$.
+Now the rightmost two squares both commute, so to show that the outer rectangle commutes, it is enough to see that the two composites $V_{s}\to F_{\calc}V_{s-2}$ are coequalized by $\theta$. Using the simplicial identity $d_0 d_1=d_0d_0$, we are trying to show that $\theta d_0d_0+\theta d_0\epsilon d_0$ and $\theta F_{\calC}(\epsilon d_0) d_0$ are the same map from $V_s$ to $GV_{s-2}$. Even more, we will show that $\theta d_0+\theta d_0\epsilon$ and $\theta F_{\calC}(\epsilon d_0)$ are the same map $F_\calC V_{s-1}$ to $GV_{s-2}$.
 
 Starting with an expression $f(v_i)$ with $v_i\in V_{s-1}$, we calculate $\theta d_0 f(v_i)=\theta (fd_0v_i)$, $\theta d_0\epsilon f(v_i)=\theta (\epsilon (f)(d_0v_i))$ and $\theta F_{\calC}(\epsilon d_0)(f(v_i))=\theta(f)(\epsilon(d_0v_i))$. That these three terms add to zero was the requirement specified for $\theta$.
 \end{proof}
@@ -756,7 +945,9 @@ Starting with an expression $f(v_i)$ with $v_i\in V_{s-1}$, we calculate $\theta
 \end{shaded}
 
 \subsection{Typical $\calC$-cohomology operations}\label{generic coh ops section}
-We will use $\psi_\calC$ to define operations on $\calC$-cohomology, employing certain generic operations, defined for any $U\in s\calV$:
+We will use $\psi_\calC$ to define operations on $\calC$-cohomology, employing 
+\begin{shaded}\tiny
+certain generic operations, defined for any $U\in s\calV$:
 \begin{gather*}
 \ExtCohProd:\pi^{n_1}(U^*)\otimes \pi^{n_2}(U^*)\to \pi^{n_1+n_2}((S^2U)^*),\textup{ and}\\
 \ExtCohOp^k:\pi^{n}(U^*)\to \pi^{n+k}((S^2U)^*),\textup{ (zero unless $0\leq k\leq n$).}
@@ -770,13 +961,15 @@ and functions
 by the formulae, for $\alpha\in (N_{n_1}U)^*$ and $\beta\in (N_{n_2}U)^*$
 \[m_\textup{ext}(\alpha\otimes\beta)=D_0^*\oldphi(\alpha\otimes\beta),\quad S^k_\textup{ext}(\alpha)=D^*_{n_1-k}\oldphi(\alpha\otimes \alpha)+D^*_{n_1-k+1}\oldphi(\alpha\otimes d\alpha),\]
 where we regard the $D^*_k$ as maps into $(N_*(S^2U))^*$ by composition with the projection from $(N_*(U\otimes U))^*$. One checks that these operations induce well defined operations $\ExtCohProd$ and $\ExtCohOp^k$ by the same arguments as in \cite[\S1.12]{MR2245560}.
+\end{shaded}
 
 Given these external operations, we can define $\calC$-cohomology operations, natural in $X\in s\calC$, on $H^*_\calC X=\pi^*((Q^\calC B^\calC X)^*)$, by the composites:
 \begin{gather*}
 H_\calC^{n_1}(X)\otimes H_\calC^{n_2}(X)\overset{\ExtCohProd}{\to} \pi^{n_1+n_2}((S^2(Q^\calC B^\calC X))^*)\overset{\psi_\calC^*}{\to} H_\calC^{n_1+n_2+1}(X),\\
 H_\calC^{n}(X)\overset{\ExtCohOp^k}{\to} \pi^{n+k}((S^2(Q^\calC B^\calC X))^*)\overset{\psi_\calC^*}{\to} H_\calC^{n+k+1}(X).
 \end{gather*}
-\subsection{Linearly dual $\calC$-homology operations}
+\begin{shaded}\tiny
+\subsection*{Linearly dual $\calC$-homology operations}
 The linear maps $\ExtCohOp^k$ induce dual operators
 \[(\ExtCohOp^k)^*:\pi_*(S^2U)\to \pi_{*-k}(U)\]
 whenever these groups are locally finite dimensional. Following \cite[\S3]{MR1089001}, one can define the operations $(\ExtCohOp^k)^*$ directly, without the double dualization as described below. Setting $U=Q^{\calC}B^{\calC}X$ and precomposing with the map $(\psi_\calC)_*:\pi_*(U)\to\pi_{*-1}(S^2U)$ yields homology operations on $H_*^\calC$ whose duals are the cohomology operations of \S\ref{generic coh ops section}.
@@ -787,6 +980,7 @@ where $w_k\in \pi_{m-k}(U)$ ($0\leq k\leq\lfloor m/2\rfloor$), and $y_j,z_j\in \
 Then the map $(\ExtCohOp^k)^*$ sends $x$ to this $w_k$. Alternatively, if we only wish to determine the $(\ExtCohOp^k)^*$ for $k<m/2$ (and not the dual of the top operation $(\ExtCohOp^{m/2})^*$ when $m$ is even), we can rewrite this equation: 
 \[x=\widetilde{\nabla}(v)+\sum_{\smash{0\leq k< m/2}}\sigma_k(w_k),\]
 where $v\in(S^2(\pi_*(U)))_{m}$ and $w_k\in \pi_{m-k}(U)$ ($0\leq k<m/2$). Here, $\widetilde{\nabla}:S^2\pi_*V\to \pi_*S^2V$ is the map that we discuss in \S\ref{the top homotopy operations for Lie algebras}.
+\end{shaded}
 
 
 %\subsection{Some important algebras}
@@ -828,22 +1022,6 @@ Any object $X$ of $\calW(0)$ is in particular an object of $\calU(0)$. It is \em
 \begin{Lie algebras in characteristic 2 and their homotopy operations}
 
 \section{Graded Lie algebras in characteristic 2}\label{sec on Lie algs and homotopy ops}
-\subsection{Ungraded Lie algebras}
-As we work in characteristic 2, there is more than one available notion of a Lie algebra. An $S(\LieOperad)$-algebra is a vector space $L$ equipped with a bracket $L\otimes L\to L$ satisfying the Jacobi identity and the (anti)-symmetry condition $[x,y]=[y,x]$. A \emph{Lie algebra} (or $\Lambda(\LieOperad)$-algebra) is a vector space $L$ equipped with a bracket $L\otimes L\to L$ satisfying the Jacobi identity and the alternating condition $[x,x]=0$. Finally, a \emph{restricted Lie algebra} \cite{CurtisSimplicialHtpy.pdf,6Author.pdf} (or $\Gamma(\LieOperad)$-algebra) is a Lie algebra equipped with a \emph{squaring} or \emph{restriction} function $\restn{(\DASH)}:L\to L$, satisfying the axioms
-\[\restn{(x_1+x_2)}=\restn{x_1}+\restn{x_2}+[x_1,x_2]\textup{ \ and \ }[\restn{x_1},x_2]=[x_1,[x_1,x_2]].\]
-The alternating condition implies the (anti)-symmetry condition, and these three types of Lie algebras form a hierarchy: a restricted Lie algebra is in particular a Lie algebra, and a Lie algebra is in particular an $S(\LieOperad)$-algebra.
-
-Fresse \cite{FresseSimplicialAlgs.pdf} explains how to construct the monads $S(\LieOperad)$, $\Lambda(\LieOperad)$ and $\Gamma(\LieOperad)$ on $\vect{}{}$ which give rise to these structures, starting with the Lie operad $\LieOperad$. For $V\in\vect{}{}$, it is standard that the functor
-\[S(\LieOperad):V\mapsto \bigoplus_{n\geq1}(\LieOperad(n)\otimes V^{\otimes n})_{\Sigma_n}\]
-inherits the structure of a monad from the composition maps of $\LieOperad$. Fresse observes that the functor
-\[\Gamma(\LieOperad):V\mapsto \bigoplus_{n\geq1}(\LieOperad(n)\otimes V^{\otimes n})^{\Sigma_n}\]
-may also be equipped with a monad structure, such that the trace map $S(\LieOperad)\to \Gamma(\LieOperad)$
-%\[\trace:S(\LieOperad)(V)\to \Gamma(\LieOperad)(V)\]
-is a map of monads, and an intermediate monad may be defined by
-\[\Lambda(\LieOperad):V\mapsto\im(\trace:S(\LieOperad)(V)\to \Gamma(\LieOperad)(V)).\]
-These monads give rise to the three indicated forms of Lie algebras in characteristic 2. Now each of these functors supports an extra grading, the \emph{quadratic grading}, so named because \textbf{why?}. Indeed, we'll write
-\[\Gamma(\LieOperad)^{(k)}V:=(\LieOperad(k)\otimes V^{\otimes k})^{\Sigma_k},\textup{ etc}.\]
-Each of these three monads is generated by a single binary operation contained in quadratic grading 2. That is, an $S(\LieOperad)$-algebra is a map $S_2L\to L$, a $\Lambda(\LieOperad)$-algebra is a map $\Lambda^2L\to L$, and a $\Gamma(\LieOperad)$-algebra is a map $S^2L\to L$, where in each case we demand the necessary compatibilities that these maps extend to the full monad. %Here, we used the analogous definitions $S_2V:=(V^{\otimes2})_{\Sigma_2}$, $S^2V:=(V^{\otimes2})_{\Sigma_2}$ and $\Lambda^2V:=\im(\trace:S_2V\to S^2V)$.
 
 \subsection{Graded and partially restricted Lie algebras}
 [\textbf{Old version} of spiel on PRLie algs commented out here.%
@@ -954,7 +1132,7 @@ with horizontal maps defined by the formulae (for cycles $x,y,z\in ZN_*(V)$):
 \[\widetilde{\nabla}([x]\otimes[y]+[y]\otimes [x])=[\nabla(x\otimes y+y\otimes x)]\textup{, and }\widetilde{\nabla}([x]\otimes[x])=[\nabla(x\otimes x)].\]
 \end{prop}
 \begin{proof}
-Since $\nabla$ is symmetric, the formulae given for $\widetilde{\nabla}$ do indeed return homotopy classes in either $\pi_*(F^{(2)}_{\calL(n)}V)$ or $\pi_*(S^2V)$, however, it is not clear that either $\widetilde{\nabla}$ is well defined. We'll only need to check that the lower map is well defined: as $\pi_*(\textup{incl})$ is a monomorphism (by \cite[Prop 5.6]{BousOpnsDerFun.pdf}), it will follow that the upper map is well defined. 
+Since $\nabla$ is symmetric, the formulae given for $\widetilde{\nabla}$ do indeed return homotopy classes in either $\pi_*(F^{(2)}_{\calL(n)}V)$ or $\pi_*(S^2V)$, however, it is not clear that either of the maps $\widetilde{\nabla}$ is well defined. We'll only need to check that the lower map is well defined: as $\pi_*(\textup{incl})$ is a monomorphism (by \cite[Prop 5.6]{BousOpnsDerFun.pdf}), it will follow that the upper map is well defined. 
 %Although it is not clear that $\widetilde{\nabla}$ is well defined, $\widetilde{\nabla}$ will prove to be the unique lift in a diagram: %We will construct it as the unique lift (dotted) of an analogous map $\widetilde{\nabla}'$:
 %\[\xymatrix@R=4mm{
 %F^{(2)}_{\calL(n+1)}(\pi_*V)\ar@{-->}[r]^-{\widetilde{\nabla}}
@@ -966,11 +1144,13 @@ Since $\nabla$ is symmetric, the formulae given for $\widetilde{\nabla}$ do inde
 %\pi_*(S^2V)%r2c2
 %}\]
 %in which the map $\pi_*(\textup{incl})$ is a monomorphism (by \cite[Prop 5.6]{BousOpnsDerFun.pdf}). Now $\widetilde{\nabla}'$ will be defined by the same formulae as $\widetilde{\nabla}$. 
+\begin{shaded}\tiny
 By general observations on natural transformations out of the endofunctor $S^2$ of $\vect{}{}$, to construct a natural map $\widetilde{\nabla}:S^2(\pi_*V)\to\pi_*(S^2V)$ is to give a natural linear map $p:S_2(\pi_*(V))\to \pi_*(S^2V)$ and a natural function $\restn{(\DASH)}:\pi_n(V)\to \pi_{2n}(S^2V)$ satisfying $\restn{(x+y)}=\restn{x}+\restn{y}+p(x\otimes y)$. Then $\widetilde{\nabla}$ is the unique natural map such that $\widetilde{\nabla}\circ\trace=p$ and $\widetilde{\nabla}(a)=p(a\otimes a)$ for $a\in\pi_*\left(V\right)$.
 %\[p=\left(S_2\pi_*(V)\overset{\trace}{\to} S^2\pi_*(V)\overset{\widetilde{\nabla}'}{\to} \pi_*(S^2V)\right)\textup{ and }\restn{(\DASH)}=\left(\pi_*(V)\overset{v\mapsto v\otimes v}{\to} S^2\pi_*(V)\overset{\widetilde{\nabla}'}{\to} \pi_*(S^2V)\right).\]
 We define $\widetilde{\nabla}$ in this way, with
 \[p=\pi_*(\trace)\circ\nabla:\left(S_2(\pi_*(V))\overset{\nabla}{\to}\pi_*(S_2(V))\overset{\pi_*(\trace)}{\to}\pi_*(S^2(V))\right)\]
 and with $\restn{(\DASH)}$ the operation $\sigma_n:\pi_n(V)\to \pi_{2n}(S^2V)$ detailed in \cite[\S3]{MR1089001}.
+\end{shaded}
 %In general, to construct a natural map $g$ from $S^2$ to any other endofunctor $G$ of the category of $\F_2$-vectorspaces, it is enough to define a natural linear map $p:S_2V\to GV$ and natural function $\restn{(\DASH)}:V\to GV$ satisfying $\restn{(x+y)}=\restn{(x)}+\restn{(y)}+p(x\otimes y)$. Then there is a unique natural map $g:S^2\to G$ such that we have
 %\[p=\left(S_2V\overset{\trace}{\to} S^2V\to GV\right)\textup{ and }\restn{(\DASH)}=\left(V\overset{v\mapsto v\otimes v}{\to} S^2V\to GV\right).\]
 %The map $\widetilde{\nabla}'$ is exactly obtained by this method, using 
@@ -1842,6 +2022,10 @@ Applying these observations in the very specific circumstances of this propositi
 %Under the very specific circumstances of this proposition, each of these terms vanishes.
 \end{proof}
 \end{Koszul complexes}
+
+
+
+
 \begin{Composite functor spectral sequences}
 \vfil\pagebreak
 \section{Composite functor spectral sequences}
@@ -3638,6 +3822,7 @@ having all gradings at the very right, tensor products of vector spaces,\ldots?
 \item most $\delta$ should be $\deltav$
 \item $\smash{\widetilde{f}}$ is normally best smashed
 \item  \textbf{remove any $[x]$'s}, replace with $\overline{x}$.
+\item flesh out the looking glass by comparing unstable homotopy operations and cohomology operations using Koszul duality
 \end{enumerate}
 \end{todolist}
 \begin{bibliog}
@@ -3654,3 +3839,4 @@ having all gradings at the very right, tensor products of vector spaces,\ldots?
 %6Author.pdf
 %MillerSullivanConjecture.pdf
 %Blanc_Stover-Groth_SS.pdf
+%\cite{FresseSimplicialAlgs.pdf}
