@@ -21,7 +21,7 @@
 \xclude{Cohomology operations for unstable Lie algebras over Lambda}%depr
 \xclude{todolist}
 \ifx\IncludeAll\undefined\else\renewcommand{\xclude}[1]{\nclude{#1}}\fi
-\nclude{Contents Page}
+\xclude{Contents Page}
 \nclude{Intro}
 \nclude{Conventions and notation}
 \nclude{External homotopy and cohomotopy operations}
@@ -35,7 +35,7 @@
 \xclude{Calculations of HWn for n nonzero}
 \xclude{Calculations of HW0}
 \xclude{appendices}
-\xclude{bibliog}
+\nclude{bibliog}
 
 \usepackage[bookmarks=false,pdftex,pdfborder={0 0 0 [1 1]}]{hyperref}
 
@@ -281,7 +281,6 @@
 \newcommand{\calMv}{\mathcal{M}_\textup{v}}
 \newcommand{\calMh}{\mathcal{M}_\textup{h}}
 
-\newcommand{\twist}{\sigma}
 
 \usepackage{framed}
 \definecolor{shadecolor}{rgb}{.925,0.925,0.925}
@@ -334,7 +333,7 @@ url=false,doi=false,isbn=false,eprint=false]{biblatex}%
 \newcommand{\produces}[3]{#3:#1\sim #2}
 \renewcommand{\produces}[3]{#1\rightarrow_{#3} #2}%{J}{I}{P}
 \renewcommand{\produces}[3]{#1\overset{\smash{#3}}{\rightarrow} #2}%{J}{I}{P}
-
+\newcommand{\twist}{\omega}
 \newcommand{\DeltaUp}{\Delta}% <-- i changed the indices to upper, marking where I did it.
 \newcommand{\Shuffles}[2]{\textup{Sh}_{#1#2}}
 \newcommand{\HalfShuffles}[2]{\textup{Sh}_{#1#2}^{\smash{\!\div2}}}
@@ -629,11 +628,14 @@ Under these isomorphisms the differential $N_{s_{r+1}+1}V\to ZN_{s_{r+1}}V$ corr
 
 \section{External homotopy and cohomotopy operations}
 
-\subsection{Higher simplicial Eilenberg-Mac Lane map}\textbf{$\Delta$ because it's the right symbol, should be an upper index since it decreases homological degree}.
+\subsection{Higher simplicial Eilenberg-Mac Lane map}[\textbf{$\Delta$ because} it's the right symbol, should be an upper index since it decreases homological degree.]
+
+In what follows, we will often have a natural map $F$ whose domain and codomain both support a switch map $T$, obtained by interchanging tensor factors. Furthermore, we will so often have use for the expression $TFT$, that we introduce the shorthand $\twist F:=TFT$.
+
 Let $\{\DeltaUp^k\}$ be a higher simplicial Eilenberg-Mac Lane map \cite[\S3]{DwyerHtpyOpsSimpComAlg.pdf}, i.e.\ maps
 \[\DeltaUp^k:(CU\otimes CV)_{i+k}\to N(U\otimes V)_i\textup{\ \ for $0\leq k\leq i$}\]
 such that the identities
-\[\DeltaUp^k+T\DeltaUp^kT=\oldphi^k+\begin{cases}
+\[\DeltaUp^k+\twist\DeltaUp^k=\oldphi^k+\begin{cases}
 \DeltaUp^{k-1}\partial+\partial\DeltaUp^{k-1},&\textup{if }k\geq1;\\
 \Delta,&\textup{if }k=0.
 %\\,&\textup{if }
@@ -653,29 +655,104 @@ Note that as $\oldphi^0$ commutes with symmetry isomorphisms, so does $\Delta$.
 
 \subsection{External unary homotopy operations}
 In this section we recall the definition of certain homotopy operations, implicit in \cite[\S4]{DwyerHtpyOpsSimpComAlg.pdf} (or cartan or Bousfield - explicit?) and explicit in 
-\cite[\S3]{MR1089001}, of homotopy operations $\sigma_i^\textup{ext}:\pi_n(V)\to \pi_{n+i}(S^2V)$. 
-
-\begin{prop}[{\cite[Lemma 4.1]{DwyerHtpyOpsSimpComAlg.pdf},\ \cite[\S3]{MR1089001}}]
-Consider the function
-\[a\overset{f}{\mapsto }\DeltaUp^{n-i}(a\otimes a),\ \ N_nV \to N_{n+i}S_2V.\]
-For $2\leq i\leq n$, $f$ yields a well-defined homotopy operation $\sigma_i^\textup{ext}:\pi_nV\to \pi_{n+i}(S_2V)$. \\
-For $1\leq i\leq n$, $f$ yields a well-defined homotopy operation $\sigma_i^\textup{ext}:\pi_nV\to \pi_{n+i}(\Lambda^2V)$. \\
-%produces a well defined homotopy operation $\sigma_i^\textup{ext}:\pi_n(V)\to \pi_{n+i}(\Lambda^2V)$. 
-The function \[a\mapsto \oldphi^n(a\otimes a),\ \ N_nV \to N_{n}S^2V\] yields a well-defined homotopy operation $\sigma_0^\textup{ext}:\pi_nV\to \pi_{n}(S^2V)$.
+\cite[\S3]{MR1089001}, using the function
+\[a \mapsto \DeltaUp^{n-i}(a\otimes a),\ \ N_nV \to N_{n+i}S_2V.\]
+By postcomposing with the maps $S_2V\to \Lambda^{2}V\to S^2V$, we obtain functions from $N_nV$ to $N_{n+i}\Lambda^2V$ and $N_{n+i}S^2V$, and:
+\begin{prop}[{\cite[Lemma 4.1]{DwyerHtpyOpsSimpComAlg.pdf},\ \cite[\S3]{MR1089001}}] \label{extUnaryHomotOps}
+These functions descend to  well defined homotopy operations:
+\begin{alignat*}{2}
+\delta_i^\textup{ext}:\pi_nV&\to \pi_{n+i}(S_2V),&\quad&(2\leq i\leq n),\\
+\lambda_i^\textup{ext}:\pi_nV&\to \pi_{n+i}(\Lambda^2V),&\quad&(1\leq i\leq n),\\
+\sigma_i^\textup{ext}:\pi_nV&\to \pi_{n+i}(S^2V),&\quad&(1\leq i\leq n).
+\end{alignat*}
+The function $N_nV \to N_{n}S^2V$ given by $\overline{a}\mapsto \overline{a\otimes a}$ yields a well defined homotopy operation $\sigma_0^\textup{ext}:\pi_nV\to \pi_{n}(S^2V)$. 
+For all $n\geq0$, the map $\sigma_n^\textup{ext}:\pi_nV\to\pi_{2n}(S^2V)$ satisfies
+\[\sigma_n^\textup{ext}(\overline{x}+\overline{y})=\sigma_n^\textup{ext}(\overline{x})+\sigma_n^\textup{ext}(\overline{y})+\overline{(1+T)\Delta(x\otimes y)}\quad\text{for $x,y\in ZN_nV$}.\]
+%For $2\leq i\leq n$, the function $N_nV \to N_{n+i}S_2V$ yields a well-defined homotopy operation $\sigma_i^\textup{ext}:\pi_nV\to \pi_{n+i}(S_2V)$. 
+%For $1\leq i\leq n$, the function $N_nV \to N_{n+i}\Lambda^2V$ yields a well-defined homotopy operation $\sigma_i^\textup{ext}:\pi_nV\to \pi_{n+i}(\Lambda^2V)$. 
+%%produces a well defined homotopy operation $\sigma_i^\textup{ext}:\pi_n(V)\to \pi_{n+i}(\Lambda^2V)$. 
+%The function \[a\mapsto \oldphi^n(a\otimes a),\ \ N_nV \to N_{n}S^2V\] yields a well-defined homotopy operation $\sigma_0^\textup{ext}:\pi_nV\to \pi_{n}(S^2V)$.
 \end{prop}
+\begin{proof}
+Although all of the operations  are defined in the cited references, we will be a little more explicit about the definition $\sigma^\textup{ext}_0$, and the final equation of the proposition.
 
+As described in \cite[\S3]{MR1089001}, we might choose to define $\sigma^\textup{ext}_0$ using a universal example, for which the cycle 
+\[z\otimes z\in ZN_n(S^2\mathbb{S}_n)\cong \F_2\]
+is the only possible representative, demonstrating that the formula $\overline{a}\mapsto \overline{a\otimes a}$ yields the correct (well defined) operation. To check that $\sigma_0^\textup{ext}$ satisfies the required equation, we need only check that it holds on $z_1+z_2\in ZN_0(\mathbb{S}_0\oplus \mathbb{S}_0)\cong \F_2\oplus \F_2$. But
+\[\sigma_0^\textup{ext}(z_1+z_2)-\sigma_0^\textup{ext}(z_1)-\sigma_0^\textup{ext}(z_2)=z_1\otimes z_2+z_2\otimes z_1=(1+T)\Delta(z_1\otimes z_2),\]
+as $\Delta$ is the identity in dimension zero.
+
+To explain the equation when $n\geq1$, as $\sigma_n(\overline{x}):=\overline{(1+T)\Delta^0(x\otimes x)}$, we obtain %into the expression  $\sigma_n^\textup{ext}(x+y)-\sigma_n^\textup{ext}(x)-\sigma_n^\textup{ext}(y)$ to obtain
+\begin{alignat*}{2}
+\sigma_n^\textup{ext}(x+y)-\sigma_n^\textup{ext}(x)-\sigma_n^\textup{ext}(y)
+&=
+(1+T)\Delta^0(1+T)(x\otimes y)
+\\&=
+(1+\omega\Delta^0)(1+T)(x\otimes y)%
+\\
+&=
+(\Delta+\oldphi^0)(1+T)(x\otimes y)%
+\\
+&=
+\Delta(1+T)(x\otimes y)%
+\end{alignat*}
+where we have used the symmetry
+\[T\bigl((1+T)(x\otimes y)\bigr)=(T+T^2)(x\otimes y)=(1+T)(x\otimes y)\]
+in order to exchange $T\Delta^0$ and $\omega\Delta^0$ at the second equality.
+\end{proof}
 
 \subsection{External binary homotopy operations}
-By general observations on natural transformations out of the endofunctor $S^2$ of $\vect{}{}$, to construct a natural map $\widetilde{\nabla}:S^2(\pi_*V)\to\pi_*(S^2V)$ is to give a natural linear map $p:S_2(\pi_*(V))\to \pi_*(S^2V)$ and a natural function $\restn{(\DASH)}:\pi_n(V)\to \pi_{2n}(S^2V)$ satisfying $\restn{(x+y)}=\restn{x}+\restn{y}+p(x\otimes y)$. Then $\widetilde{\nabla}$ is the unique natural map such that $\widetilde{\nabla}\circ\trace=p$ and $\widetilde{\nabla}(a)=p(a\otimes a)$ for $a\in\pi_*\left(V\right)$.
-%\[p=\left(S_2\pi_*(V)\overset{\trace}{\to} S^2\pi_*(V)\overset{\widetilde{\nabla}'}{\to} \pi_*(S^2V)\right)\textup{ and }\restn{(\DASH)}=\left(\pi_*(V)\overset{v\mapsto v\otimes v}{\to} S^2\pi_*(V)\overset{\widetilde{\nabla}'}{\to} \pi_*(S^2V)\right).\]
-We define $\widetilde{\nabla}$ in this way, with
-\[p=\pi_*(\trace)\circ\nabla:\left(S_2(\pi_*(V))\overset{\nabla}{\to}\pi_*(S_2(V))\overset{\pi_*(\trace)}{\to}\pi_*(S^2(V))\right)\]
-and with $\restn{(\DASH)}$ the operation $\sigma_n:\pi_n(V)\to \pi_{2n}(S^2V)$.
+We'll now give an account of various natural external homotopy operations, most of which are binary operations, induced by the  Eilenberg-Mac Lane shuffle map $\nabla:N_*(V)\otimes N_*(V)\to N_*(V\otimes V)$. Namely
+%The homotopy operations we'll present will be in the form of a natural transformation of functors $s\vect{+}{n}\to \vect{+}{n+1}$, which will be induced by the Eilenberg-Mac Lane shuffle map $\nabla:N_*(V)\otimes N_*(V)\to N_*(V\otimes V)$. \textbf{Need to clarify what's meant by quad grading.}
+\begin{prop}[Various authors]\label{the top external homotopy operations}
+There is a natural commuting diagram:
+\[\xymatrix@R=4mm{
+S_2(\pi_*V)\ar[r]^-{\widetilde{\nabla}}
+\ar[d]^-{\textup{proj}}
+&%r1c1
+\pi_*(S_2V)\ar[d]^-{\pi_*(\textup{proj})}
+\\%r1c2
+\Lambda^2(\pi_*V)\ar[r]^-{\widetilde{\nabla}}
+\ar[d]^-{\textup{incl}}
+&%r1c1
+\pi_*(\Lambda^2V)\ar[d]^-{\pi_*(\textup{incl})}
+\\%r1c2
+S^2(\pi_*V)\ar[r]^-{\widetilde{\nabla}}&%r2c1
+\pi_*(S^2V)%r2c2
+}\]
+For cycles $x,y\in ZN_*(V)$ and $z\in ZN_n(V)$, the upper horizontal is determined by:
+\[\overline{x}\otimes\overline{y}\mapsto \overline{x\otimes y},\]
+and the lower horizontal is determined by:
+\[\overline{x}\otimes\overline{y}+\overline{y}\otimes \overline{x}\mapsto\overline{\nabla(x\otimes y+y\otimes x)}\textup{, and }\overline{z}\otimes\overline{z}\mapsto\sigma^\textup{ext}_n(\overline{z}).\]
+\end{prop}
+\pagebreak
+\begin{proof}
+During this proof, write $\widetilde{\nabla}_U$, $\widetilde{\nabla}_M$ and $\widetilde{\nabla}_L$ for the upper, middle and lower horizontal maps. We must see that $\widetilde{\nabla}_U$ and $\widetilde{\nabla}_L$ are well defined, that the outer rectangle commutes, and finally that 
+\[\ker(\pi_*(\textup{proj})\circ\widetilde{\nabla}_U)\supseteq\ker(\textup{proj}),\]
+in order that $\widetilde{\nabla}_U$ extends to  a unique map $\widetilde{\nabla}_M$ for which the diagram commutes.
 
-\vfil\pagebreak
+Since $\nabla$ is symmetric, the formulae given for $\widetilde{\nabla}_U$ and $\widetilde{\nabla}_L$ do indeed return homotopy classes in $\pi_*(S_2V)$ and $\pi_*(S^2V)$ respectively. If these maps are well defined, the rest is clear. %, however, it is not clear that either of the maps $\widetilde{\nabla}$ is well defined. 
+As $\nabla$ is a chain map it produces a well defined map $V^{\otimes2}\to \pi_*(V^{\otimes2})$, and its symmetry implies that this map descends to a well defined map $\nabla_U$.
+%In fact, we only need to check that  $\widetilde{\nabla}_L$ is well defined: as $\pi_*(\textup{incl})$ is a monomorphism (by \cite[Prop 5.6]{BousOpnsDerFun.pdf}), it will follow that the upper map is well defined. 
+
+By general observations on natural transformations with domain the endofunctor $S^2$ of $\vect{}{}$, in order to extend
+\[\pi_*(\trace)\circ\widetilde{\nabla}_U:S_2(\pi_*V)\to \pi_*(S^2V)\]
+to a natural map $\widetilde{\nabla}_L$, it suffices to specify a natural function $\restn{(\DASH)}:\pi_n(V)\to \pi_{2n}(S^2V)$ satisfying the equation
+\[\restn{(x+y)}=\restn{x}+\restn{y}+\pi_*(\trace)(\widetilde{\nabla}_U(x\otimes y)).\] 
+ Then $\widetilde{\nabla}_L$ is the unique extension of $\pi_*(\trace)\circ\widetilde{\nabla}_U$  such that $\widetilde{\nabla}_L(\alpha\otimes \alpha)=\restn{\alpha}$ for $\alpha\in\pi_*\left(V\right)$.
+%\[p=\left(S_2\pi_*(V)\overset{\trace}{\to} S^2\pi_*(V)\overset{\widetilde{\nabla}'}{\to} \pi_*(S^2V)\right)\textup{ and }\restn{(\DASH)}=\left(\pi_*(V)\overset{v\mapsto v\otimes v}{\to} S^2\pi_*(V)\overset{\widetilde{\nabla}'}{\to} \pi_*(S^2V)\right).\]
+We define $\widetilde{\nabla}_L$ in this way, with $\restn{(\DASH)}$ the operation $\sigma_n:\pi_n(V)\to \pi_{2n}(S^2V)$, which satisfies this equation by proposition \ref{extUnaryHomotOps}.
+%This operation does not depend on the choice of representative $x$. Indeed,
+%\[\nabla((x+dh)\otimes (x+dh))=\nabla(x\otimes x)+d\trace(x\otimes h)+d(h\otimes dh)\]
+%
+%
+%
+%When $n\geq0$, this map is defined on cycles by $z\mapsto \nabla(z\otimes z)$, and the required equation is simply the expansion
+%\[\Delta((x+y)\otimes(x+y))=\Delta(x\otimes x)+\Delta(y\otimes y)+(1+T)\Delta(x\otimes y).\]
+\end{proof}
 
 \subsection{Higher cosimplicial Eilenberg-Zilber map}
-Let $\{D^k\}$ be a special cosimplicial Eilenberg-Zilber map \cite[5.2]{turner_opns_and_sseqs_I.pdf}, i.e.\  maps
+Let $\{D^k\}$ be a special cosimplicial Eilenberg-Zilber map \cite[Proposition 5.2]{turner_opns_and_sseqs_I.pdf}, i.e.\  maps
 \[D^k:(CR\otimes CS)_{-i-k}\to N(R\otimes S)_{-i}\textup{\ \ for $i,k\geq0$},\]
 natural in cosimplicial vectorspaces $R,S$,
 with the properties:
@@ -718,7 +795,7 @@ If $\sigma_i$ and $\pi_*(1+T)$ are the maps of \cite[\S3]{MR1089001}, then any e
 where $w_k\in \pi_{m-k}(U)$ ($0\leq k\leq\lfloor m/2\rfloor$), and $y_j,z_j\in \pi_{*}(U)$.
 Then the map $(\ExtCohOp^k)^*$ sends $x$ to this $w_k$. Alternatively, if we only wish to determine the $(\ExtCohOp^k)^*$ for $k<m/2$ (and not the dual of the top operation $(\ExtCohOp^{m/2})^*$ when $m$ is even), we can rewrite this equation: 
 \[x=\widetilde{\nabla}(v)+\sum_{\smash{0\leq k< m/2}}\sigma_k(w_k),\]
-where $v\in(S^2(\pi_*(U)))_{m}$ and $w_k\in \pi_{m-k}(U)$ ($0\leq k<m/2$). Here, $\widetilde{\nabla}:S^2\pi_*V\to \pi_*S^2V$ is the map that we discuss in \S\ref{the top homotopy operations for Lie algebras}.
+where $v\in(S^2(\pi_*(U)))_{m}$ and $w_k\in \pi_{m-k}(U)$ ($0\leq k<m/2$). Here, $\widetilde{\nabla}:S^2\pi_*V\to \pi_*S^2V$ is the map that we discuss in \S\ref{the top homotopy operations for Lie algebras}.\textbf{change ref}
 
 \end{External homotopy and cohomotopy operations}
 
@@ -1113,7 +1190,7 @@ One checks that the bracket is well defined in the quotient, and that taking the
 
 
 \subsection{Homotopy operations for partially restricted Lie algebras}
-We'll now give an account of the natural operations on the homotopy of a simplicial object of $\calL(n)$.
+\textbf{much of this now moved...} We'll now give an account of the natural operations on the homotopy of a simplicial object of $\calL(n)$.
 
 The homotopy operations we'll present will be in the form of a natural transformation of functors $s\vect{+}{n}\to \vect{+}{n+1}$, which will be induced by the Eilenberg-Mac Lane shuffle map $\nabla:N_*(V)\otimes N_*(V)\to N_*(V\otimes V)$. \textbf{Need to clarify what's meant by quad grading.}
 \begin{prop}[Various authors]\label{the top homotopy operations for Lie algebras}
@@ -3773,7 +3850,7 @@ having all gradings at the very right, tensor products of vector spaces,\ldots?
 \item make a note about the difference between AQ homology and derived indecomposables.
 \item Either use or lose the $\quadratic$ notation --- in general, sort out a consistent use for it.
 \item $\gamma_i$ and $\gamma^i$ notations must go.
-\item Need a cogent section on stuff like: $S^2_\textup{pr?}\pi_*M\to \pi_*M$. What's a restricted Lie algebra, what's are the ``top operations'' $S^2\pi_*(L)\to \pi_*(S^2L)\to \pi_*(L)$ - are they defined by $\nabla$? (yes). Use $\widetilde{\nabla}$ for the top ops.
+\item Need a cogent section on stuff like: $S^2_\textup{pr?}\pi_*M\to \pi_*M$. What's a restricted Lie algebra, what's are the ``top operations'' $S^2\pi_*(L)\to \pi_*(S^2L)\to \pi_*(L)$ - are they defined by $\nabla$? (yes). Use $\widetilde{\nabla}$ for the top ops. Change them all to $\Delta$.
 \item Uniform notation for the class represented by $x$... $[x]$? $\overline{x}$?
 \item get an arrow for epimorphisms and one for monomorphisms, and use them
 \item vector space vs vectorspace
