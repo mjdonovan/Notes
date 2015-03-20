@@ -485,7 +485,7 @@ This is well defined, as the $Q^\calC\dashv K_\calC$ adjunction is a Quillen adj
 
 As $\calC$ is monadic over $\vect{+}{r}$, we may view the groups $H_*^{\calC}X$ together as an object of $\vect{+}{r+1}$. That is, each homology group $H_s^\calC X$ retains the gradings of $X$, and a new homological grading is added (to the left of the existing homological gradings). We will often avoid substituting into the location of the $*$, for the sake of clarity, writing expressions such as $(H_*^\calC X)_{s_{r+1},\ldots,s_1}^t$ in place of $(H_{s_{r+1}}^\calC X)_{s_r,\ldots,s_1}^t$.
 
-We define the \emph{$\calC$-cohomology} $H^*_\calC X$ of $X$ to be the linear dual of $H_*^\calC X$, or equivalently the cohomotopy groups $\pi^*(Q^\calC X)^*$ of the dual cosimplicial object.  If we dualize to obtain cohomology, the cohomological gradings and homological gradings are swapped, and $H^*_{\calC}X$ may be viewed as an object of $\vect{r+1}{+}$. 
+We define the \emph{$\calC$-cohomology} $H^*_\calC X$ of $X$ to be $\dual(H_*^\calC X)$, or equivalently the cohomotopy groups $\pi^*\dual(Q^\calC X)$ of the dual cosimplicial object.  If we dualize to obtain cohomology, the cohomological gradings and homological gradings are swapped, and $H^*_{\calC}X$ may be viewed as an object of $\vect{r+1}{+}$. 
 \begin{lem}\label{lemma on homology class repd by normalized generator}
 Suppose that $X$ is almost free with generating subspaces $V_n\subseteq X_n$. Then any homology class in $H_n^{\calC}X\cong \pi_nQ^{\calC}X$ can be represented by the image in $Q^{\calC}X_n$ of an element of $V_n\cap N_nX$.
 \end{lem}
@@ -691,7 +691,7 @@ Under these isomorphisms the differential $N_{s_{r+1}+1}V\to ZN_{s_{r+1}}V$ corr
 
 \subsection{Dold's theorem}
 According to Dold [], see also [\url{http://www3.amherst.edu/~mching/Work/homotopy_operations.pdf}, lemma 3.1], 
-\begin{thm}[Dold's theorem]
+\begin{thm}[Dold's theorem]\label{Dold's theorem}
 Suppose that $F:s\vect{+}{r}\to s\vect{+}{r}$ is a functor preserving weak equivalences, for example, the prolongation of an endofunctor of $\vect{+}{r}$. Then there is a functor $\calF:\vect{+}{r+1}\to\vect{+}{r+1}$ such that the following diagram commutes:
 \[\xymatrix@R=4mm{
 s\vect{+}{r}\ar[r]^-{F}
@@ -712,7 +712,7 @@ where we view $V$ as a trivial chain complex. Then $\calF$ can be constructed as
 
 
 \subsection{First quadrant cohomotopy spectral sequences}
-Suppose that $V_{s,t}$ is a bisimplicial vector space, ungraded for now. We will follow the standrad conventions, those of \cite{MR2245560}, in defining the cohomotopy spectral sequence of $V$. In particular, we will refer to $s$ as the \emph{horizontal} coordinate and $t$ as the \emph{vertical} coordinate.
+Suppose that $V_{s,t}$ is a bisimplicial vector space, ungraded for now. We will follow the standard conventions, those of \cite{MR2245560}, in defining the cohomotopy spectral sequence of $V$. In particular, we will refer to $s$ as the \emph{horizontal} coordinate and $t$ as the \emph{vertical} coordinate.
 
 There is a double chain compex $C\uhor_sC\uver_tV$, where we have decorated the $C_*$ functors in order to distinguish the coordinates. The total complex $C_*V$, along with a canonical increasing filtration, is defined by 
 \[C_n:=\bigoplus_{i=0}^{n}C\uhor_iC\uver_{n-i}V,\qquad F_pC_n:=\bigoplus_{i=0}^{p}C\uhor_iC\uver_{n-i}V.\]
@@ -723,7 +723,7 @@ There is a double chain compex $C\uhor_sC\uver_tV$, where we have decorated the 
 we will always write $\E{r}{}{V}{}{}$ for a homological or homotopical spectral sequence and $\E{}{r}{V}{}{}$ for a cohomological one.
 
 Given a bisimplicial vector space $V_{s,t}$, we obtain a double chain complex $N_sN_tV$. There is a first quadrant homotopy spectral sequence $\E{r}{}{V}{}{s,t}$, with $\E{2}{}{V}{}{s,t}=\pi\uhor_s\pi\uver_tV$, converging to $\pi_{s+t}(\diag V)$.
-There is a first quadrant cohomotopy spectral sequence $\E{}{r}{V}{s,t}{}$, with $\E{}{2}{V}{s,t}{}=(\pi\uhor_s\pi\uver_tV)^*$, converging to $(\pi_{s+t}(\diag V))^*$.
+There is a first quadrant cohomotopy spectral sequence $\E{}{r}{V}{s,t}{}$, with $\E{}{2}{V}{s,t}{}=\dual(\pi\uhor_s\pi\uver_tV)$, converging to $\dual(\pi_{s+t}(\diag V))$.
 
 Given a cosimplicial simplicial vector space  $V_{s,t}$, we obtain a mixed chain complex $N^sN_tV$.\\
 There is a second quadrant homotopy spectral sequence $\E{r}{}{V}{s}{t}$, with $\E{2}{}{V}{s}{t}=\pi\dhor^s\pi\uver_tV$, which will sometimes converge to $\pi_{t-s}\Tot V$.
@@ -784,7 +784,7 @@ Then the category of $\calc$-$\Pi$-algebras  may be defined as the category of $
 \[(U_{\calc\PiAlg}A)^t_{s_{r+1},\ldots,s_1}:=A(F_\calC\mathbb{S}_{s_{r+1},\ldots,s_{1}}^{t}),\]
 and any of the structure maps advertised above is induced by the corresponding homotopy class. %The natural compatibilities referred to above are the conditions required that a collection of structure maps extends to a functor on $\Pi^\textup{op}$.
 
-One obtains the free $\calc$-$\Pi$-algebra on a graded vector space $V\in \vect{+}{r+1}$ using Dold's theorem. That is, one views $V$ as a chain complex in $\complexes\vect{+}{r}$ with zero differential, and applies the Dold-Kan correspondence and $\calc$-free functor, obtaining an object $F_\calc\Gamma V\in s\calc$. Then:
+One obtains the free $\calc$-$\Pi$-algebra on a graded vector space $V\in \vect{+}{r+1}$ using Dold's theorem (\ref{Dold's theorem}). That is, one views $V$ as a chain complex in $\complexes\vect{+}{r}$ with zero differential, and applies the Dold-Kan correspondence and $\calc$-free functor, obtaining an object $F_\calc\Gamma V\in s\calc$. Then:
 \[F_{\calc\PiAlg}V=\pi_*(F_\calc\Gamma V).\]
 Moreover, as $F_{\calc}$ is an augmented monad, so is $F_{\calc\PiAlg}$, via the map
 \[F_{\calc\PiAlg}V=\pi_*(F_\calc\Gamma V)\overset{\pi_*\epsilon}{\to}\pi_*(\Gamma V)=H_*V=V,\]
@@ -808,7 +808,7 @@ where $\eta$ denotes the unit of the $Q^\calC\dashv K_\calC$ adjunction.
 \end{prop}
 
 \subsection{Homology groups and $\calC$-$H_*$-coalgebras}\label{homology and Hcoalgs}
-By Dold's theorem, there's a commuting diagram
+By Dold's theorem (\ref{Dold's theorem}), there's a commuting diagram
 \[\xymatrix@R=4mm@C=20mm{
 s\vect{+}{r}\ar[r]^-{Q^\calc cK^\calc }
 \ar[d]^-{\pi}
@@ -819,7 +819,7 @@ s\vect{+}{r}\ar[d]^-{\pi}
 &
 \vect{+}{r+1}
 }\]
-in which we are using Dold's theorem to \emph{define} $C_{\calc\HCoalg}$, the \emph{cofree $\calc$-$H_*$-coalgebra comonad}.
+in which we are using Dold's theorem (\ref{Dold's theorem}) to \emph{define} $C_{\calc\HCoalg}$, the \emph{cofree $\calc$-$H_*$-coalgebra comonad}.
 By the naturality of Dold's theorem, this is a comonad on $n\vect{+}{r+1}$. A $\calc$-$H_*$-coalgebra is simply a coalgebra over this monad, i.e.\ any $h\in\vect{+}{r+1}$ equipped with a coaction map $h\to C_{\calc\HCoalg}h$ satisfying the standard compatibilities. The homology $H_*^\calc X$ of $X\in s\calc$ is a $\calc$-$H_*$-coalgebra using the map
 \[\pi_*(Q^{\calc}cX)\overset{\pi_*(Q^{\calc}(\psi))}{\to}\pi_*(Q^{\calc}ccX)\overset{\pi_*(Q^{\calc}c(\eta))}{\to}\pi_*(Q^{\calc}cK^{\calc}Q^{\calc}cX)=C_{\calc\HCoalg}(\pi_*(Q^{\calc}cX)).\]
 If $X\sim K^{\calc}V$ for some $V\in s\vect{+}{r}$, then $H_*^{\calc}X\cong C_{\calc\HCoalg}(\pi_*(V))$, and the coaction map of $H_*^{\calc}X$ is none other than the diagonal map of the comonad.
@@ -1358,13 +1358,13 @@ It is a natural convention to define $D^k=0$ for whenever either $k<0$ or $i<0$,
 \end{shaded}
 
 \subsection{External unary cohomotopy operations}
-In this section we recall the definition of certain homotopy operations with domain $(\pi_*V)^*$ for any $V\in s\vect{}{}$, \textbf{reference}, using the function
-\[D^*_{n-i}\oldphi(\alpha\otimes \alpha)+D^*_{n-i+1}\oldphi(\alpha\otimes d\alpha),\ \ (N_nV)^* \to (N_{n+i}(S^2V))^*,\]
-where we regard the $D^*_k$ as maps into $(N_*(S^2V))^*$, and the map $\oldphi$ is that described in [Singer \S1.9]. Namely, [\textbf{potentially redundant:} as the normalized complex is naturally a retract of the unnormalized complex, we may define] $\oldphi:\left(N_mV\right)^*\otimes \left(N_mV\right)^*\to \left(N_m(V\otimes V)\right)^*$ to be
+In this section we recall the definition of certain homotopy operations with domain $\dual(\pi_*V)$ (or $\pi^*\dual V$) for any $V\in s\vect{}{}$, \textbf{reference}, using the function
+\[D^*_{n-i}\oldphi(\alpha\otimes \alpha)+D^*_{n-i+1}\oldphi(\alpha\otimes d\alpha),\ \ \dual(N_nV) \to \dual(N_{n+i}(S^2V)),\]
+where we regard the $D^*_k$ as maps into $\dual(N_*(S^2V))$, and the map $\oldphi$ is that described in [Singer \S1.9]. Namely, [\textbf{potentially redundant:} as the normalized complex is naturally a retract of the unnormalized complex, we may define] $\oldphi:\dual\left(N_mV\right)\otimes \dual\left(N_mV\right)\to \dual\left(N_m(V\otimes V)\right)$ to be
 \[\left(C_mV\overset{\alpha}{\to}\F_2\right)\otimes \left(C_mV\overset{\beta}{\to}\F_2\right)\mapsto\left(C_m(V\otimes V)\overset{\alpha\otimes\beta}{\to}\F_2\otimes \F_2\overset{\textup{mult}}{\to}\F_2\right).\]
 \begin{prop}[same refs, I guess] \label{extUnaryCohomotOps}
 These functions descend to  well defined cohomotopy operations:
-\[\ExtCohOp^k:(\pi_{n}V)^*\to (\pi_{n+k}(S^2V))^*,\text{ \ zero unless $0\leq k\leq n$.}\]
+\[\ExtCohOp^k:\dual(\pi_{n}V)\to \dual(\pi_{n+k}(S^2V)),\text{ \ zero unless $0\leq k\leq n$.}\]
 \end{prop}
 \begin{proof}
 One checks that these cochain operations induce well defined operations $\ExtCohProd$ and $\ExtCohOp^k$ by the same arguments as in \cite[\S1.12]{MR2245560}.
@@ -1389,11 +1389,11 @@ where $v\in(S^2(\pi_*(V)))_{m}$ and $w_k\in \pi_{m-k}(V)$ for $0\leq k<m/2$.
 
 \subsection{External binary cohomotopy operations}
 Consider the cochain level pairing
-\[\alpha\otimes\beta\mapsto D_0^*\oldphi(\alpha\otimes\beta),\quad(N_*V)^*\otimes (N_*V)^*\to (N_*(S^2V))^*.\]
+\[\alpha\otimes\beta\mapsto D_0^*\oldphi(\alpha\otimes\beta),\quad\dual(N_*V)\otimes \dual(N_*V)\to \dual(N_*(S^2V)).\]
 \begin{prop}\label{the external cohomotopy pairing}
 This pairing induces a pairing on cohomotopy,
-\[\ExtCohProd:S_2((\pi_*V)^*)\to (\pi_*(S^2V))^*,\]
-with the property that $\ExtCohProd(\alpha\otimes \alpha)=\ExtCohOp^k\alpha$ for $\alpha\in(\pi_kV)^*$.
+\[\ExtCohProd:S_2(\dual(\pi_*V))\to \dual(\pi_*(S^2V)),\]
+with the property that $\ExtCohProd(\alpha\otimes \alpha)=\ExtCohOp^k\alpha$ for $\alpha\in\dual(\pi_kV)$.
 \end{prop}
 
 
@@ -1421,10 +1421,10 @@ The composite
 \[\psi_\calC:\left(N_s(Q^{\calC}X)\overset{Q^\calC\xi_\calC}{\to} N_{s-1}((Q^{\calC}(X\wedge X))^{\Sigma_2})\overset{j_\calC}{\to} N_{s-1}(S^2(Q^{\calC}X))\right),\]
 is essentially $\quadratic_\calC$, in that if $v\in V_s\cap N_sX$ represents an element of $N_sQ^\calC X$, writing $d_0v=f(w_j)$ for $w_j\in V_{s-1}$, we have $\psi_\calC(v)=\quadratic_\calC(f)(w_j)\in S^2(V_{s-1})$.
 \end{lem}
-The typical use of this structure is to define cohomology operations using the external cohomotopy operations defined above, i.e.\ natural operations on $H^*_\calC X=\pi^*((Q^\calC B^\calC X)^*)$ defined by the composites:
+The typical use of this structure is to define cohomology operations using the external cohomotopy operations defined above, i.e.\ natural operations on $H^*_\calC X=\pi^*(\dual(Q^\calC B^\calC X))$ defined by the composites:
 \begin{gather*}
-H_\calC^{n_1}(X)\otimes H_\calC^{n_2}(X)\overset{\ExtCohProd}{\to} (\pi_{n_1+n_2}(S^2(Q^\calC B^\calC X)))^*\overset{\psi_\calC^*}{\to} H_\calC^{n_1+n_2+1}(X),\\
-H_\calC^{n}(X)\overset{\ExtCohOp^k}{\to} (\pi_{n+k}(S^2(Q^\calC B^\calC X)))^*\overset{\psi_\calC^*}{\to} H_\calC^{n+k+1}(X).
+H_\calC^{n_1}(X)\otimes H_\calC^{n_2}(X)\overset{\ExtCohProd}{\to} \dual(\pi_{n_1+n_2}(S^2(Q^\calC B^\calC X)))\overset{\psi_\calC^*}{\to} H_\calC^{n_1+n_2+1}(X),\\
+H_\calC^{n}(X)\overset{\ExtCohOp^k}{\to} \dual(\pi_{n+k}(S^2(Q^\calC B^\calC X)))\overset{\psi_\calC^*}{\to} H_\calC^{n+k+1}(X).
 \end{gather*}
 These operations are the duals of natural homology cooperations, defined using the maps of \S\ref{Linearly dual homotopy operations}:
 \begin{gather*}
@@ -1693,10 +1693,10 @@ Mention the work of Turner; of Hackney [1101.3798v3], using universal examples a
 
 \subsection{On first quadrant cohomology spectral sequences}
 
-[\textbf{This whole subsection needs} to have its notation brought into line with the rest of the document. We \textbf{also need} to mention $S^k$ somewhere, and discuss the external operations at $E_2$!] In what follows, we'll need to use Singer's techniques for deriving operations in spectral sequences. Singer defines operations in the cohomology spectral sequence of a bisimplicial cocommutative coalgebra. While the comultiplicative structure that we can define on the resolution $Q^{\calL(n)}\BSWres L$ is not that of a coalgebra, we can still use his techniques after a single simple observation. That is, for every bisimplicial vector space $V$, if we write $E_r^{**}(V)$ for the cohomology spectral sequence obtained from the double cochain complex $(N_*N_*V)^*$, then Singer's methods yield external operations of type:
+[\textbf{This whole subsection needs} to have its notation brought into line with the rest of the document. We \textbf{also need} to mention $S^k$ somewhere, and discuss the external operations at $E_2$!] In what follows, we'll need to use Singer's techniques for deriving operations in spectral sequences. Singer defines operations in the cohomology spectral sequence of a bisimplicial cocommutative coalgebra. While the comultiplicative structure that we can define on the resolution $Q^{\calL(n)}\BSWres L$ is not that of a coalgebra, we can still use his techniques after a single simple observation. That is, for every bisimplicial vector space $V$, if we write $E_r^{**}(V)$ for the cohomology spectral sequence obtained from the double cochain complex $\dual(N_*N_*V)$, then Singer's methods yield external operations of type:
 \[E_r^{**}(V)\to E_{r'}^{**}(S^2V)\textup{ and }E_r^{**}(V)\otimes E_r^{**}(V)\to E_r^{**}(S^2V),\]
 which will be compatible with external operations of type:
-\[H^{*}((CV)^*)\to H^{*}((CS^2V)^*)\textup{ and }H^{*}((CV)^*)\otimes H^{*}((CV)^*)\to H^{*}((CS^2V)^*).\]
+\[H^*(\dual(CV))\to H^*(\dual(CS^2V))\textup{ and }H^*(\dual(CV))\otimes H^*(\dual(CV))\to H^*(\dual(CS^2V)).\]
 
 When $V$ is a cocommutative coalgebra, the diagonal map $V\to S^2V$ induces a map $E_r^{**}(S^2V)\to E_r^{**}(V)$, postcomposition with which yields Singer's operations, however we will not have access to such structure in what follows. Thus, we will briefly reprise Singer's results in this \emph{external} language, in order that we have them available.
 \begin{thm}[Singer's Book, thm 2.15-2.17,2.22]
@@ -1712,8 +1712,8 @@ E^{p,q}_\infty(V)\ar[r]^-{\ExtCohOp^k}\ar[d]^-{\pi}
 &%r1c1
 E^{p,q+k}_\infty(S^2V)\ar[d]^-{\pi}
 \\%r1c2
-E_0^{p,q}H^*((CV)^*)\ar[r]^-{\ExtCohOp^k}&%r2c1
-E_0^{p,q+k}H^*((CS^2V)^*)%r2c2
+E_0^{p,q}H^*(\dual(CV))\ar[r]^-{\ExtCohOp^k}&%r2c1
+E_0^{p,q+k}H^*(\dual(CS^2V))%r2c2
 }\]
 whenever $0\leq k\leq q$, and a commuting diagram
 \[\xymatrix@R=4mm{
@@ -1721,8 +1721,8 @@ E^{p,q}_\infty(V)\ar[r]^-{\ExtCohOp^k}\ar[d]^-{\pi}
 &%r1c1
 E^{p+k-q,2q}_\infty(S^2V)\ar[d]^-{\pi}
 \\%r1c2
-E_0^{p,q}H^*((CV)^*)\ar[r]^-{\ExtCohOp^k}&%r2c1
-E_0^{p+k-q,2q}H^*((CS^2V)^*)%r2c2
+E_0^{p,q}H^*(\dual(CV))\ar[r]^-{\ExtCohOp^k}&%r2c1
+E_0^{p+k-q,2q}H^*(\dual(CS^2V))%r2c2
 }\]
 whenever $q\leq k$ (which summarises also Singer's computation of how the $\ExtCohOp^k$ interact with the filtration on cohomology).
 
@@ -1742,23 +1742,23 @@ Singer proves the following relationship between the spectral sequence operation
 \begin{thm}[Proposition 2.1]
 The $\ExtCohOp^k$ and $\ExtCohProd$ commute with $\lambda^*$, so that there are commuting diagrams
 \[\xymatrix@R=4mm{
-H^{m}((CU)^*)\ar[r]^-{\ExtCohOp^k}
+H^{m}(\dual(CU))\ar[r]^-{\ExtCohOp^k}
 \ar[d]^-{\lambda^*}
 &%r1c1
-H^{m+k}((CS^2U)^*)\ar[d]^-{(S^2\lambda)^*}
+H^{m+k}(\dual(CS^2U))\ar[d]^-{\dual(S^2\lambda)}
 &%r1c3
-H^{m_1}((CU)^*)\otimes H^{m_2}((CU)^*)\ar[r]^-{\ExtCohProd}
+H^{m_1}(\dual(CU))\otimes H^{m_2}(\dual(CU))\ar[r]^-{\ExtCohProd}
 \ar[d]^-{\lambda^*}
 &%r1c1
-H^{m_1+m_2}((CS^2U)^*)\ar[d]^-{(S^2\lambda)^*}
+H^{m_1+m_2}(\dual(CS^2U))\ar[d]^-{\dual(S^2\lambda)}
 \\%r1c5
-H^{m}((CV)^*)\ar[r]^-{\ExtCohOp^k}
+H^{m}(\dual(CV))\ar[r]^-{\ExtCohOp^k}
 &%r2c1
-H^{m+k}((CS^2V)^*)
+H^{m+k}(\dual(CS^2V))
 &%r2c3
-H^{m_1}((CV)^*)\otimes H^{m_2}((CV)^*)\ar[r]^-{\ExtCohProd}
+H^{m_1}(\dual(CV))\otimes H^{m_2}(\dual(CV))\ar[r]^-{\ExtCohProd}
 &%r2c1
-H^{m_1+m_2}((CS^2V)^*)
+H^{m_1+m_2}(\dual(CS^2V))
 }\]
 \end{thm}
 
@@ -2380,7 +2380,7 @@ Moreover, each map $P^i:V^t\to F_{\calW(0)}^{(2)}V^{t+i+1}$ appearing in this de
 \[\theta_i:\left((F_{\calW(0)}V)^{t+i+1}\overset{\textup{proj}}{\makebox[.06ex][l]{$\to$}\to} (F_{\calW(0)}^{(2)}V)^{t+i+1}\overset{\textup{proj}}{\makebox[.06ex][l]{$\to$}\to} \im (P^i)\overset{(P^i)^{-1}}{\to}V^{t}\right).\]
 Here we have projected onto the quadratic filtration 2 part, and then further onto the relevant summand in its natural decomposition. Note that although $P^t:V^t\to F_{\calW(0)}^{(2)}V^{2t+1}$ is a nontrivial linear map when $t\geq2$, its image is entangled with the image of the bracket, and we are not able to split it off. Thus we are not able to improve on the bounds $2\leq i< t$.
 \begin{prop}\label{operations on goerss homology}
-Suppose that $X\in s\calW(0)$ is almost free, so that we may identify $H^*_{\calW(0)}X$ with $(\pi_*Q^{\calw(0)}X)^*$. Then for $2\leq i <t$, the chain map $\widetilde{\theta_i}$ of proposition \ref{general CohOpns given irreducibility} induces a linear operation
+Suppose that $X\in s\calW(0)$ is almost free, so that we may identify $H^*_{\calW(0)}X$ with $\dual(\pi_*Q^{\calw(0)}X)$. Then for $2\leq i <t$, the chain map $\widetilde{\theta_i}$ of proposition \ref{general CohOpns given irreducibility} induces a linear operation
 \[\delta_i:(H^*_{\calW(0)}X)^{s}_t\to (H^*_{\calW(0)}X)^{s+1}_{t+i+1}.\] 
 These operations are natural in maps preserving the generating subspaces, and satisfy the $\delta$-Adem relation of [Dwyer].
 \end{prop}
@@ -2432,7 +2432,7 @@ Indeed, there are natural monomorphisms
 \[(\DASH)\lambda_{i-1}:V^{t}_{s_n,\ldots,s_1}\to (F^{(2)}_{\calW(n)}V)^{2t+1,(2)}_{s_n+i-1,2s_{n-1},\ldots,2s_1}\]
 defined only when   $1\leq i\leq n$ and $i-1,s_{n-1},\ldots,s_1$ are not all zero, and an inclusion
 \[\textup{incl}:F^{(2)}_{\calL(n)}V\to F^{(2)}_{\calW(n)}V.\]
-As in the $n=0$ case, the images of the listed maps are linearly independent and span the quadratic grading 2 part of $F_{\calW(n)}V^*$. We define $\theta^i$ to be zero unless $1\leq i\leq n$ and $i-1,s_{n-1},\ldots,s_1$ are not all zero, in which case we define it as the composite: %project onto the quadratic grading 2 part, then further onto the summand corresponding to the image of $\lambda_{i-1}$, and finally use the inverse of the map $\lambda_{i-1}$:
+As in the $n=0$ case, the images of the listed maps are linearly independent and span the quadratic grading 2 part of $F_{\calW(n)}V$. We define $\theta^i$ to be zero unless $1\leq i\leq n$ and $i-1,s_{n-1},\ldots,s_1$ are not all zero, in which case we define it as the composite: %project onto the quadratic grading 2 part, then further onto the summand corresponding to the image of $\lambda_{i-1}$, and finally use the inverse of the map $\lambda_{i-1}$:
 \[\theta^i:\Bigl((F_{\calW(n)}V)^{2t+1}_{s_n+i-1,2s_{n-1},\ldots,2s_1}\overset{\textup{proj}\circ\textup{proj}}{\makebox[.06ex][l]{$\to$}\to} \im (\lambda_{i-1})\overset{(\lambda_{i-1})^{-1}}{\to}V^{t}_{s_{n,\ldots,s_1}}\Bigr).\]
 One can give exactly the same definitions for the free construction in $\calU(n)$, producing functions $\theta^i:F_{\calU(n)}V\to V$ which are zero under the same conditions as for $\calW(n)$.
 Write $\calMv(n+1)$ for the algebraic category whose objects are vectorspaces $M\in\vect{n+1}{+}$ with left Steenrod operations
@@ -2462,8 +2462,8 @@ For any $n\geq 0$, we'll construct operations on the homology $H^*_{\calW(n)}$ a
 
 Indeed, suppose that $X\in s\calW(n)$ is almost free. Then $Q^{\calU(n)}X\in s\calL(n)$ is also almost free, on essentially the same generating subspaces. Thus, the cohomotopy of $Q^{\calW(n)}X=Q^{\calL(n)}Q^{\calU(n)}X$ is an instance of simplicial partially restricted Lie algebra cohomology. Cohomology operations of this type are discussed in \S\ref{section: Cohomology operations for simplicial (restricted) Lie algebras} and appendix \ref{appendix on Lie coh ops}. In the present context, we have two equivalent definitions, one using $\psi_{\calL(n)}$ and one using $\psi_{\calW(n)}$. Until the appendix, we will use $\psi_{\calW(n)}$, defining operations
 \begin{gather*}
-\mu:\left(H_{\calW(n)}^{n_1}(X)\otimes H_{\calW(n)}^{n_2}(X)\overset{\ExtCohProd}{\to} \pi^{n_1+n_2}((S^2(QX))^*)\overset{\psi_{\calW(n)}^*}{\to} H_{\calW(n)}^{n_1+n_2+1}(X)\right)\textup{ and}\\
-\Sqh^k:\left(H_{\calW(n)}^{n}(X)\overset{\ExtCohOp^{k-1}}{\to} \pi^{n+k-1}((S^2(QX))^*)\overset{\psi_{\calW(n)}^*}{\to} H_{\calW(n)}^{n+k}(X)\right).
+\mu:\left(H_{\calW(n)}^{n_1}(X)\otimes H_{\calW(n)}^{n_2}(X)\overset{\ExtCohProd}{\to} \pi^{n_1+n_2}(\dual(S^2(QX)))\overset{\psi_{\calW(n)}^*}{\to} H_{\calW(n)}^{n_1+n_2+1}(X)\right)\textup{ and}\\
+\Sqh^k:\left(H_{\calW(n)}^{n}(X)\overset{\ExtCohOp^{k-1}}{\to} \pi^{n+k-1}(\dual(S^2(QX)))\overset{\psi_{\calW(n)}^*}{\to} H_{\calW(n)}^{n+k}(X)\right).
 \end{gather*}
 More explicitly:
 \begin{prop}
@@ -2869,8 +2869,8 @@ whenever $1\leq i \leq s_n$ and not all of $i-1,s_{n-1},\ldots,s_1$ are zero.
 Indeed, there are natural monomorphisms
 \[(\DASH)\lambda_{i-1}:V^{t}_{s_n,\ldots,s_1}\to (F^{(2)}_{\calW(n)}V)^{2t+1}_{s_n+i-1,2s_{n-1},\ldots,2s_1}\]
 defined whenever $1\leq i\leq n$ and $i-1,s_{n-1},\ldots,s_1$ are not all zero, and an inclusion
-\[\textup{incl}:(F^{(2)}_{\calL(n)}V)^{*}\to F^{(2)}_{\calW(n)}V^{*}.\]
-As in the $n=0$ case, the images of the listed maps are linearly independent and span the quadratic grading 2 part of $F_{\calW(n)}V^*$. We define $\gamma_i$ as before --- project onto the quadratic grading 2 part, then further onto the summand corresponding to the image of $\lambda_{i-1}$, and finally use the inverse of the map $\lambda_{i-1}$:
+\[\textup{incl}:\dual(F^{(2)}_{\calL(n)}V)\to F^{(2)}_{\calW(n)}V^*.\]
+As in the $n=0$ case, the images of the listed maps are linearly independent and span the quadratic grading 2 part of $F_{\calW(n)}V$. We define $\gamma_i$ as before --- project onto the quadratic grading 2 part, then further onto the summand corresponding to the image of $\lambda_{i-1}$, and finally use the inverse of the map $\lambda_{i-1}$:
 \[\gamma_i:\left((F_{\calW(n)}V)^{2t+1}_{s_n+i-1,2s_{n-1},\ldots,2s_1}\overset{\textup{proj}\circ\textup{proj}}{\makebox[.06ex][l]{$\to$}\to} \im (\lambda_{i-1})\overset{(\lambda_{i-1})^{-1}}{\to}V^{t}_{s_{n,\ldots,s_1}}\right).\]
 \begin{prop}
 There are natural operations
@@ -2900,7 +2900,7 @@ Write $E^r_{\ell,s}$ for the spectral sequence of the filtered complex $\Nop_*X$
 \[K_s^{\calU(n)}X:=E^1_{s,s}=d^{-1}(F_{s-1}\Nop_{s-1})=F_s\Nop_s\]
 form a subcomplex of $\Nop_*$ whose inclusion is a homotopy equivalence. Rather than determining these groups directly, Priddy's theory works with their duals, $K^*_{\calU(n)}X$, which form a cochain complex with homology $H^*_{\calU(n)}X$. In fact, Priddy's theory shows that the cochain complex $K^*_{\calU(n)}X$, the \emph{co-Koszul complex}, is actually a differential unstable left module over the same operations as its cohomology $H^*_{\calU(n)}X$, and indeed that this unstable module is \emph{free}. More precisely,  $K_0^{\calU(n)}X= X$, and $K^*_{\calU(n)}X$ is free on the  subspace $X^*$.
 \begin{prop}\label{the cokoszul complex is free}
-Suppose that $n\geq0$, and $X$ is a locally finite object of $\calU(n)$. The chain maps $\widetilde{\theta^i}$ ($\widetilde{\theta_i}$ when $n=0$) on $C_*Q^{\calU(n)}B^{\calU(n)}X$ restrict to the subcomplex $K_*^{\calU(n)}X$, and induce an $\calMv(n+1)$-structure on $K^*_{\calU(n)}X$ which commutes with the differentials. The inclusion $X^*\cong K^0_{\calU(n)}X\subseteq K^*_{\calU(n)}X$ induces an isomorphism $F_{\calMv(n+1)}(X^*)\to K^*_{\calU(n)}X$. Moreover, this $\calMv(n+1)$-structure on $K^*_{\calU(n)}$ induces the $\calMv(n+1)$-structure on $H^*_{\calU(n)}X$ of [above]. 
+Suppose that $n\geq0$, and $X$ is a locally finite object of $\calU(n)$. The chain maps $\widetilde{\theta^i}$ ($\widetilde{\theta_i}$ when $n=0$) on $C_*Q^{\calU(n)}B^{\calU(n)}X$ restrict to the subcomplex $K_*^{\calU(n)}X$, and induce an $\calMv(n+1)$-structure on $K^*_{\calU(n)}X$ which commutes with the differentials. The inclusion $\dual X\cong K^0_{\calU(n)}X\subseteq K^*_{\calU(n)}X$ induces an isomorphism $F_{\calMv(n+1)}(\dual X)\to K^*_{\calU(n)}X$. Moreover, this $\calMv(n+1)$-structure on $K^*_{\calU(n)}$ induces the $\calMv(n+1)$-structure on $H^*_{\calU(n)}X$ of [above]. 
 \end{prop}
 
 
@@ -2916,7 +2916,7 @@ where we define
 \sum_{\produces{K}{I}{\deltaalg}}\left[P^{k_\ell} \middle|\cdots\middle|P^{k_1} \right]x\textup{ for $x\in X^t$}.\]
 %Supposing that $X$ is locally finite, let $B^*\subset X^*$ represent the basis dual to $B$, and denote by $b^*\in B^*$ the element dual to $b\in B$. Then $K^*_{\calU(0)}X$ has basis $\{\delta_I(b^*)\}$, and this basis is dual to the basis just presented.
 %
-If $X$ is locally finite, there is a basis $\{\delta_I(b^*)\}$ of $K^*_{\calU(0)}X$ constructed using proposition \ref{the cokoszul complex is free}, lemma \ref{basis of element of M(0)} and the basis of $X^*$ dual to $B$. The bases $\{\delta_I(b^*)\}$ and $\{\delta(I,b)\}$ are dual.
+If $X$ is locally finite, there is a basis $\{\delta_I(b^*)\}$ of $K^*_{\calU(0)}X$ constructed using proposition \ref{the cokoszul complex is free}, lemma \ref{basis of element of M(0)} and the basis of $\dual X$ dual to $B$. The bases $\{\delta_I(b^*)\}$ and $\{\delta(I,b)\}$ are dual.
 
 The differential of $K^{\calU(0)}_*X$ is given by the formula:
 \[d(\delta(I,x))=\sum_{ \substack{\produces{K}{I}{\deltaalg}\\(k_{\ell},\ldots,k_2){\,\deltaalg\textup{-admis.}}}}\!\!\!\!\!\!\!\!\!\!\!\! \delta((k_{\ell},\ldots,k_2),P^{k_1}x),\]
@@ -2924,12 +2924,12 @@ summing over those $K=(k_{\ell},\ldots,k_1)$ such that $(k_{\ell},\ldots,k_2)$ i
 \end{prop}
 Note that the class $\delta(I,x)$ is still defined for $x\in X^t$ and $\minDimP(I)>t$, it is simply equal to zero. This definition is well behaved, since $\delta$-Adem relations only decrease $\minDimP$. Indeed, we may further restrict the two sums appearing in this proposition be requiring that $\minDimP(K)\leq t$ in each case, but there's no need. Dually, in the coKoszul complex, the operations $\delta_i$ are \emph{undefined} when out of range!
 \begin{proof}\textbf{Need something here showing that this sum is actually finite. Same in next proof, need well definedness.}
-Firstly, we may assume that $X$ is locally finite, as any object of $\calU(0)$ is the union of its locally finite subobjects. It is enough to check that $\delta(I,b)$ is in fact a member of $\Nop_*$, not just of $C_*$, as then the collection $\delta(I,b)$ will evidently be the dual basis to the $\delta_I(B^*)$: in the sum defining $\delta(I,b)$, the only $\delta$-admissible sequence $K$ appearing is $K=I$.  % the basis element $\delta_J(b^*_2)\in K^*$ pairs nontrivially with $\delta(I,b_1)\in K_*$ if and only if $I=J$ and $b_1=b_2$. 
+Firstly, we may assume that $X$ is locally finite, as any object of $\calU(0)$ is the union of its locally finite subobjects. It is enough to check that $\delta(I,b)$ is in fact a member of $\Nop_*$, not just of $C_*$, as then the collection $\delta(I,b)$ will evidently be the dual basis to the $\delta_I(b^*)$: in the sum defining $\delta(I,b)$, the only $\delta$-admissible sequence $K$ appearing is $K=I$.  % the basis element $\delta_J(b^*_2)\in K^*$ pairs nontrivially with $\delta(I,b_1)\in K_*$ if and only if $I=J$ and $b_1=b_2$. 
 
 Using \cite[Lemma 3.2]{PriddyKoszul.pdf}, to check that $\delta(I,b)\in\Nop_*$, we only need to check that $d(\delta(I,b))\in F_{s-1}C_{s-1}$.
-To check this membership condition is to check that $\delta(I,b)$ pairs to zero with $\im(d^*:(F_sC_{s-1})^*\to(F_sC_s)^*)$. Priddy's proof shows that $(F_sC_s)^*$ is spanned by functionals $[(P^{k_s})^*|\cdots |(P^{k_1})^*]f$, for $f\in X^*$.  This functional evaluates to zero on $\delta(I,b)$ unless $f(b)=1$ and $\produces{K}{I}{\deltaalg}$. However, the image of $d^*$, as determined by Priddy, is spanned by the space of `$\delta$-Adem relations' (see \cite[Theorem 2.5 and proof]{PriddyKoszul.pdf}). These evaluate to zero on any $\delta(I,b)$, tautologically: in reducing a $\delta$-relation to a sum of $\delta$-admissible expressions using $\delta$-relations, one obtains zero.
+To check this membership condition is to check that $\delta(I,b)$ pairs to zero with $\im(d^*:\dual(F_sC_{s-1})\to\dual(F_sC_s))$. Priddy's proof shows that $\dual(F_sC_s)$ is spanned by functionals $[(P^{k_s})^*|\cdots |(P^{k_1})^*]f$, for $f\in \dual X$.  This functional evaluates to zero on $\delta(I,b)$ unless $f(b)=1$ and $\produces{K}{I}{\deltaalg}$. However, the image of $d^*$, as determined by Priddy, is spanned by the space of `$\delta$-Adem relations' (see \cite[Theorem 2.5 and proof]{PriddyKoszul.pdf}). These evaluate to zero on any $\delta(I,b)$, tautologically: in reducing a $\delta$-relation to a sum of $\delta$-admissible expressions using $\delta$-relations, one obtains zero.
 
-\textbf{Alternative ending: }To check the membership condition is to check that $\delta(I,b)$ pairs to zero with $\im(d^*:(F_sN_{s-1})^*\to(F_sN_s)^*)$. Priddy's proof shows that $(F_sN_s)^*$ is spanned by functionals $[(P^{k_s})^*|\cdots |(P^{k_1})^*]b^*$. %Viewing $\delta(I,c)$ as an element of the double dual,
+\textbf{Alternative ending: }To check the membership condition is to check that $\delta(I,b)$ pairs to zero with $\im(d^*:\dual(F_sN_{s-1})\to\dual(F_sN_s))$. Priddy's proof shows that $\dual(F_sN_s)$ is spanned by functionals $[(P^{k_s})^*|\cdots |(P^{k_1})^*]b^*$. %Viewing $\delta(I,c)$ as an element of the double dual,
 \[\left([(P^{k_s})^*|\cdots |(P^{k_1})^*]b^*\right)\left(\delta(I,c)\right)= b^*(c)\cdot\left(\textup{$\delta_I$ coeff.\ of when $\delta_K\in\deltaalg$}\right).\]
 % $\delta(I,c)$ is the functional which sends, and this functional evaluates to zero on $\delta(I,b)$ unless $b=b_2$ and $\produces{K}{I}{\deltaalg}$. 
 However, the image of $d^*$, as determined by Priddy, is spanned by the space of `$\delta$-Adem relations' (see \cite[Theorem 2.5 and proof]{PriddyKoszul.pdf}), and these tautologically evaluate to zero on any $\delta(I,b)$.
@@ -3083,7 +3083,7 @@ Applying these observations in the very specific circumstances of this propositi
 \begin{Composite functor spectral sequences}
 \vfil\pagebreak
 \section{\textbf{Composite functor spectral sequences}}
-The subject of this paper is to identify the derived functors $H^*_{\calW(0)}X:=(\mathbb{L}_*Q^{\calW(0)}X)^*$, for $X\in\calW(0)$. More generally, we'll now present a spectral sequence whose goal is to calculate $H^*_{\calW(n)}X$ for $X\in\calW(n)$. This will be a composite functor spectral sequence analogous to Miller's spectral sequence in \ref{MillerSullivanConjecture.pdf}. The factorization of $Q^{\calW(n)}$ we will use is of course 
+The subject of this paper is to identify the derived functors $H^*_{\calW(0)}X:=\dual(\mathbb{L}_*Q^{\calW(0)}X)$, for $X\in\calW(0)$. More generally, we'll now present a spectral sequence whose goal is to calculate $H^*_{\calW(n)}X$ for $X\in\calW(n)$. This will be a composite functor spectral sequence analogous to Miller's spectral sequence in \ref{MillerSullivanConjecture.pdf}. The factorization of $Q^{\calW(n)}$ we will use is of course 
 \[Q^{\calW(n)}=\left(\calW(n)\overset{Q^{\calU(n)}}{\to}\calL(n)\overset{Q^{\calL(n)}}{\to}\vect{+}{n}\right)\]
 There is an added challenge in this context --- indeed, the available factorization of $Q^{\calW(n)}$ is through a non-abelian category. Thus, the standard technology for composite functor spectral sequences does not apply, and we must use Blanc and Stover's methods \cite{Blanc_Stover-Groth_SS.pdf}. They observe that the left derived functors $\mathbb{L}_*Q^{\calU(n)}X$ are calculated as the homotopy groups of a simplicial object in $\calL(n)$, namely $Q^{\calU(n)}B^{\calW(n)}X$. As such, they have the structure of a $\calL(n)\textup{-$\Pi$-algebra}$, i.e.\ they form an object of $\calW(n+1)$.  After verifying that the functor $Q^{\calU(n)}$ satisfies the requisite acyclicity condition (indeed it preserves free objects), one may apply \cite[Theorem 4.4]{Blanc_Stover-Groth_SS.pdf}: there is a spectral sequence, with $E_r\in\vect{+}{n+2}$,
 \[(E^2)_{s_{n+2},\ldots,s_1}^t=((H_*^{\calW(n+1)})(\mathbb{L}_*Q^{\calU(n)})X)_{s_{n+2},\ldots,s_1}^t\implies ((H_*^{\calW(n)})X)_{s_{n+2}+s_{n+1},s_n,\ldots,s_1}^t\]
@@ -3599,7 +3599,7 @@ which satisfies the equation $d_1^\textup{h}(K')=0$, i.e.:
 %We may rewrite this equation as
 \[\sum_j k_{e_j(f_{ji_0})\left(s_{\alpha_{ji_0}} {g^1_{ji_0i_1}h^2_{ji_0i_1i_2}}\right)}=0\textup{ in }N_{*-1}Q^{\calL(n)}\BSW Q^{\calU(n)}B^{\calW(n)}X.\]
 Since the symbol $k$ is used in this condition, it is \emph{very} strong, implying that as $j$ varies, the subscripts 
-\[e_j(f_{ji_0})\left(s_{\alpha_{ji_0}} {g^1_{ji_0i_1}h^2_{ji_0i_1i_2}}\right)\in Q^{\calU(n)}(F_{\calW(n)})^*X\]
+\[e_j(f_{ji_0})\left(s_{\alpha_{ji_0}} {g^1_{ji_0i_1}h^2_{ji_0i_1i_2}}\right)\in Q^{\calU(n)}F_{\calW(n)}\cdots F_{\calW(n)}X\]
 each repeat an even number of times. %As the subscripts are elements of $Q^{\Lambda}[F_{\calW(n)}]^{*}M$,
 These coincidences also occur if we take quadratic parts of the $e_j(f_{ji_0})$, so that there holds the following equation in $N_{*-1}(S^2(QL))$:
 %\[\sum_j {q(e^0_j(f^0_{ji_0}))\left(s_{\alpha_{ji}} g^1_{ji_1}h^2_{ji_1i_2}\right)}=0\in N_{*-1}((QX)^{\otimes2}).\]
@@ -3646,7 +3646,7 @@ has edge homomorphism
 \[(H^*_{\calW(n)}X)^{s_{n+1},\ldots,s_{1}}_t\epi
 E_0^{0}(H^*_{\calW(n)}X)^{s_{n+1},\ldots,s_{1}}_t\cong (E_\infty)^{0,s_{n+1},\ldots,s_1}_t\subset (E_2)^{0,s_{n+1},\ldots,s_1}_t\]
 which we may compose with the inclusion
-\[(E_2)^{0,s_{n+1},\ldots,s_1}_t=((Q^{\calW(n+1)}H_*^{\calU(n)}X)^*)^{s_{n+1},\ldots,s_1}_t\subseteq (H^*_{\calU(n)}X)^{s_{n+1},\ldots,s_1}_t.\]
+\[(E_2)^{0,s_{n+1},\ldots,s_1}_t=(\dual(Q^{\calW(n+1)}H_*^{\calU(n)}X))^{s_{n+1},\ldots,s_1}_t\subseteq (H^*_{\calU(n)}X)^{s_{n+1},\ldots,s_1}_t.\]
 \textbf{to form the ``edge composite''}
 One may then ask whether this composite commutes with the operations defined in \S\ref{Cohomology Operations chapter}.
 \begin{prop}\label{edgehomproposition}
@@ -3694,7 +3694,7 @@ and the operations we are considering are easily understood in relation to this 
 \vfil\pagebreak
 \section{\textbf{Composite functor spectral sequences OLD VERSION}}
 \todo{Define the spectral sequence $H^*_{\calW(n)}\Longleftarrow H^*_{\calW(n+1)}H_*^{\Lambda(n)}$}{reference Blanc-Stover, but then give the construction of bisimplicial object (using `$W$' comonad)}
-The subject of this paper is to identify the derived functors $H^*_{\calW(0)}X:=(\mathbb{L}_*Q^{\calW(0)}X)^*$, for $X\in\calW(0)$. More generally, we'll now present a spectral sequence that may be used to calculate $H^*_{\calW(n)}X$ for $X\in\calW(n)$. This will a composite functor spectral sequence analogous to Miller's spectral sequence in []. The factorization of $Q^{\calW(n)}$ we will use is of course 
+The subject of this paper is to identify the derived functors $H^*_{\calW(0)}X:=\dual(\mathbb{L}_*Q^{\calW(0)}X)$, for $X\in\calW(0)$. More generally, we'll now present a spectral sequence that may be used to calculate $H^*_{\calW(n)}X$ for $X\in\calW(n)$. This will a composite functor spectral sequence analogous to Miller's spectral sequence in []. The factorization of $Q^{\calW(n)}$ we will use is of course 
 \[Q^{\calW(n)}=\left(\calW(n)\overset{Q^{\calU(n)}}{\to}\calL(n)\overset{Q^{\calL(n)}}{\to}\vect{+}{n}\right)\]
 There is an added challenge in this context --- indeed, the available factorization of $Q^{\calW(n)}$ is through a non-abelian category. Thus, the standard technology for composite functor spectral sequences does not apply, and we must use Blanc and Stover's methods []. They observe that the left derived functors $\mathbb{L}_*Q^{\calU(n)}X$ are calculated as the homotopy groups of a simplicial object in $\calL(n)$, namely $Q^{\calU(n)}B^{\calW(n)}X$. As such, they have the structure of a $\calL(n)\textup{-$\Pi$-algebra}$, i.e.\ they form an object of $\calW(n+1)$.  After verifying that the functor $Q^{\calU(n)}$ satisfies the requisite acyclicity condition (indeed it preserves free objects), one may apply [relevant BS theorem]: there is a spectral sequence, with $E_r\in\vect{+}{n+2}$,
 \[(E_2)_{s_{n+2},\ldots,s_1}^t=((H_*^{\calW(n+1)})(\mathbb{L}_*Q^{\calU(n)})X)_{s_{n+2},\ldots,s_1}^t\implies ((H_*^{\calW(n)})X)_{s_{n+2}+s_{n+1},s_n,\ldots,s_1}^t\]
@@ -3887,7 +3887,7 @@ so that $V^*_{(k+1)}$ is an object of $\calW(k+1)$ for each $k$, vectorspace dua
 %We will calculate $V^*_{(k+1)}$ as an object of $\calW(k+1)$ at each stage. 
 Having all of this data will allow us to draw conclusions about $H^*_{\calW(n)}V^*_{(n)}$, using, for each $k\geq n$, the $(k+1)^{\textup{st}}$ composite functor spectral sequence:
 \[(E_{2,(k+1)})^{s_{k+2},\ldots,s_1}_{t}:=(H^*_{\calW(k+1)}V^*_{(k+1)})^{s_{k+2},\ldots,s_1}_{t}\implies (H^*_{\calW(k)}V^*_{(k)})^{s_{k+2}+s_{k+1},s_k,\ldots,s_1}_{t}.\]
-The $1^{\textup{st}}$ composite functor spectral sequence, which calculates $H^{*}_{\calW(0)}$ from $H^{*}_{\calW(1)}$, will only appear [later].
+The $1^{\textup{st}}$ composite functor spectral sequence, which calculates $H^*_{\calW(0)}$ from $H^*_{\calW(1)}$, will only appear [later].
 
 
 
@@ -3897,13 +3897,13 @@ dual to a one-dimensional vector space $V_{(n)}\in\vect{n}{+}$, with nonzero ele
 \begin{prop}\label{iterative calc of the Vk all trivial}
 For each $k\geq n$
 \[V_{(k)}=F_{\calMv(k)}F_{\calMv(k-1)}\cdots F_{\calMv(n+1)}V_{(n)},\]
-and $V_{(k)}^*$ is a trivial object of $\calW(k)$.
+and $V^*_{(k)}$ is a trivial object of $\calW(k)$.
 \end{prop}
 \begin{proof}
 The proof is by induction, with the case $k=n$ simply our standing assumptions. If the statement holds for $V_{(k)}$, then proposition \ref{propDerivedIndTrivialUobject n at least 1} shows that the Koszul complex calculating $V_{(k+1)}$ has zero differentials, as $V_{(k)}$ has trivial $\calW(k)$-structure, so that $V_{(k+1)}=F_{\calM_{\textup{v}}(k+1)}V_{(k)}$. This has trivial $\calW(k+1)$-structure, by the results of \S\ref{section on structure on homology of koszul cx}.
 \end{proof}
 Our next step is to calculate, for $k\geq n$, the groups:
-\[(E_{2,(k+1)})^{s_{k+2},0,s_k,\ldots,s_1}_{t}:=(H^*_{\calW(k+1)}V^*_{(k+1)})^{s_{k+2},0,s_k,\ldots,s_1}_{t}\cong H^{s_{k+2}}_{\calL(k)}V_{(k)}^*.\]
+\[(E_{2,(k+1)})^{s_{k+2},0,s_k,\ldots,s_1}_{t}:=(H^*_{\calW(k+1)}V^*_{(k+1)})^{s_{k+2},0,s_k,\ldots,s_1}_{t}\cong H^{s_{k+2}}_{\calL(k)}V^*_{(k)}.\]
 The isomorphism shown here follows from the observation that in dimension $s_{k+1}=0$, an object of $\calW(k+1)$ is nothing more than an object of $\calL(k)$. More precisely, consider the functor $\DASH_\textbf{0}:\vect{+}{k+1}\to \vect{+}{k}$ given by
 \[(Y_\textbf{0})^t_{s_k,\ldots,s_1}:=Y^t_{0,s_k,\ldots,s_1}.\]
 Then $\DASH_\textbf{0}$ induces a functor $\DASH_\textbf{0}:\calW(k+1)\to \calL(k)$, such that, for all $Y\in\calW(k+1)$:
@@ -3916,9 +3916,9 @@ Suppose that $Y\in s\calW(k+1)$, where $k\geq0$. Then
 Returning to the calculation at hand,
 \begin{prop}\label{calculation in internal dimension zero}
 For each $k\geq n$, there is an isomorphism of commutative algebras:
-\[(E_{2,(k+1)})^{s_{k+2},0,s_k,\ldots,s_1}_{t}\cong(\UEAX(V_{(k)}^*)^*)^{s_{k+2},s_k,\ldots,s_1}_t.\]
+\[(E_{2,(k+1)})^{s_{k+2},0,s_k,\ldots,s_1}_{t}\cong(\dual\UEAX(V^*_{(k)}))^{s_{k+2},s_k,\ldots,s_1}_t.\]
 %where the argument $V_{(k)}^*=(V_{(k+1)}^*)_\textbf{\textup{0}}$ of the Chevalley-Eilenberg-May complex functor $\UEAX$ is a trivial object of $\calL(k)$. 
-When $v\in V_{(n)}$ is restrictable,  $\UEAX(V_{(k)}^*)^*$ is the polynomial algebra $\F_2[V_{(k)}]$ (with degree shifts: see appendix \ref{The Chevalley-Eilenberg-May complex}). When $v\in V_{(n)}$ is not restrictable, $V_{(k)}=\F_{2}\{v\}$ is one-dimensional, and $\UEAX(V_{(k)}^*)^*$ is the exterior quotient $E(v)$ of $\F_2[v]$, generated by the element $v$. In either case, for each individual value of the grading $t$, the group $(E_{2,(k+1)})^{s_{k+2},0,s_k,\ldots,s_1}_{t}$ is finite-dimensional.
+When $v\in V_{(n)}$ is restrictable,  $\dual\UEAX(V^*_{(k)})$ is the polynomial algebra $\F_2[V_{(k)}]$ (with degree shifts: see appendix \ref{The Chevalley-Eilenberg-May complex}). When $v\in V_{(n)}$ is not restrictable, $V_{(k)}=\F_{2}\{v\}$ is one-dimensional, and $\dual\UEAX(V^*_{(k)})$ is the exterior quotient $E(v)$ of $\F_2[v]$, generated by the element $v$. In either case, for each individual value of the grading $t$, the group $(E_{2,(k+1)})^{s_{k+2},0,s_k,\ldots,s_1}_{t}$ is finite-dimensional.
 \end{prop}
 \begin{proof}
 The only further observation necessary to prove this isomorphism is that if $v\in V_{(n)}$ is restrictable, every element of the trivial partially restricted Lie algebra $V_{(k)}$ is in restrictable degree, and that if $v\in V_{(n)}$ is not restrictable, each $V_{(k)}$ is one-dimensional, concentrated in non-restrictable degree. For the finiteness property, one simply notes that the $V_{(k)}$ have such a property, and that there is a degree shift in the algebra structure.
@@ -3935,11 +3935,11 @@ H^*_{\calW({n+2})}H_*^{\calU({n+1})}V^*_{({n+1})}\ar@{=>}[dl]^-{g_{n+2}}\ar@{=}[
 %H^*_{\calW({n+3})}H_*^{\calU({n+2})}V^*_{({n+2})}\ar@{=>}[dl]^-{g_{n+3}}\ar@{=}[d]&
 %H^*_{\calW(5)}H_*^{\calU({n+3})}V^*_{({n+3})}\ar@{=>}[dl]^-{g_5}\ar@{=}[d]
 \\
- H_{\calW(n)}^{*}V^{*}_{(n)}
-&H_{\calW({n+1})}^{*}V^{*}_{({n+1})}
-&H_{\calW({n+2})}^{*}V^{*}_{({n+2})}
-%&H_{\calW({n+3})}^{*}V^{*}_{({n+3})}
-%&H_{\calW(5)}^{*}V^{*}_{(5)}
+ H^*_{\calW(n)}V^*_{(n)}
+&H^*_{\calW({n+1})}V^*_{({n+1})}
+&H^*_{\calW({n+2})}V^*_{({n+2})}
+%&H^*_{\calW({n+3})}V^*_{({n+3})}
+%&H^*_{\calW(5)}V^*_{(5)}
 \\
 &&\makebox[5cm][r]{\,$\smash{\cdots }$}
 \\
@@ -3955,18 +3955,18 @@ H^*_{\calW({n+2})}H_*^{\calU({n+1})}V^*_{({n+1})}\ar@{=>}[dl]^-{g_{n+2}}\ar@{=}[
 %&F_{\calMh(5)}V_{(5)}
 %&F_{\calMh(6)}V_{(6)}
 }\]
-For each $k\geq n$, the map $\rho_k$ is induced by the inclusion $V_{(k)}\cong H^{0}_{\calW(k)}V_{(k)}^*\subseteq H^{*}_{\calW(k)}V_{(k)}^*$ (which exists as $V_{(k)}$ is trivial) and the $F_{\calMh(k+2)}$- and $F_{\calMv(k+2)}$-operations defined on $H^{*}_{\calW(k)}V_{(k)}$. (Note that $\rho_{k}$ is a graded map, since the effect of these operations on dimensions is the same in its domain and codomain.)
+For each $k\geq n$, the map $\rho_k$ is induced by the inclusion $V_{(k)}\cong H^{0}_{\calW(k)}V^*_{(k)}\subseteq H^*_{\calW(k)}V^*_{(k)}$ (which exists as $V_{(k)}$ is trivial) and the $F_{\calMh(k+2)}$- and $F_{\calMv(k+2)}$-operations defined on $H^*_{\calW(k)}V_{(k)}$. (Note that $\rho_{k}$ is a graded map, since the effect of these operations on dimensions is the same in its domain and codomain.)
 
 The double arrow $g_{k+1}$, representing the convergence of the $(k+1)^{\textup{st}}$ composite functor spectral sequence, is in truth shorthand for the function
-\[g_{k+1}:\left(E_{\infty,(k+1)}\to E_0(H_{\calW(k)}^{*}V^{*}_{(k)})\right)\]
-so that $g_{k+1}$ may only be defined on the permanent cycles within $H^*_{\calW(k+1)}H_*^{\calU(k)}V^*_{(k)}$, and lands in the graded object associated to the \emph{target filtration} on $H_{\calW(k)}^{*}V^{*}_{(k)}$, the filtration associated with the spectral sequence $E_{2,(k+1)}\implies H_{\calW(k)}^{*}V^{*}_{(k)}$. Similarly, we employ the double arrow $f_{k+1}$ as shorthand for the function of theorem \ref{thm on compressing seqs of steenrod ops}, which is defined on the entirety of $F_{\calM_{\textup{h}}(k+2)}F_{\calM_{\textup{v}}(k+2)}V_{(k+1)}$, but whose true codomain is the graded object $E_0(F_{\calMh(k+1)}V_{(k+1)})$ associated with the target filtration defined in theorem \ref{thm on compressing seqs of steenrod ops}.
+\[g_{k+1}:\left(E_{\infty,(k+1)}\to E_0(H^*_{\calW(k)}V^*_{(k)})\right)\]
+so that $g_{k+1}$ may only be defined on the permanent cycles within $H^*_{\calW(k+1)}H_*^{\calU(k)}V^*_{(k)}$, and lands in the graded object associated to the \emph{target filtration} on $H^*_{\calW(k)}V^*_{(k)}$, the filtration associated with the spectral sequence $E_{2,(k+1)}\implies H^*_{\calW(k)}V^*_{(k)}$. Similarly, we employ the double arrow $f_{k+1}$ as shorthand for the function of theorem \ref{thm on compressing seqs of steenrod ops}, which is defined on the entirety of $F_{\calM_{\textup{h}}(k+2)}F_{\calM_{\textup{v}}(k+2)}V_{(k+1)}$, but whose true codomain is the graded object $E_0(F_{\calMh(k+1)}V_{(k+1)})$ associated with the target filtration defined in theorem \ref{thm on compressing seqs of steenrod ops}.
 \begin{thm}\label{thm on collapsing of most sseqs}
 For each $k\geq n$, $\im(\rho_{k+1})$ consists of permanent cycles and $\rho_k$ preserves the target filtrations, so that it is possible to form the composites $g_{k+1}\circ \rho_{k+1}$ and $E_0(\rho_{k})\circ f_{k+1}$. These composites are equal, and moreover, $\rho_k$ is an isomorphism. In particular, for $k\geq n$, the  $(k+1)^{\textup{st}}$ composite functor spectral sequence collapses at $E_2$.
 \end{thm}
 Before giving the proof, we remark that in some dimensions, $\rho_k$ is already known to be an isomorphism.
 \begin{prop}\label{isomorphism rho k in some dims}
 For $k\geq n$, $\rho_k$ is an isomorphism in dimension $s_k=0$:
-\[\rho_k:(F_{\calM_{\textup{h}}(k+1)}F_{\calM_{\textup{v}}(k+1)}V_{(k)})^{s_{k+1},0,s_{k-1},\ldots,s_1}_{t} \overset{\cong}{\to}(H_{\calW(k)}^{*}V^{*}_{(k)})^{s_{k+1},0,s_{k-1},\ldots,s_1}_{t}.\]
+\[\rho_k:(F_{\calM_{\textup{h}}(k+1)}F_{\calM_{\textup{v}}(k+1)}V_{(k)})^{s_{k+1},0,s_{k-1},\ldots,s_1}_{t} \overset{\cong}{\to}(H^*_{\calW(k)}V^*_{(k)})^{s_{k+1},0,s_{k-1},\ldots,s_1}_{t}.\]
 \end{prop}
 \begin{proof}
 In this dimension, $\rho_k$ factors as
@@ -3975,18 +3975,18 @@ In this dimension, $\rho_k$ factors as
 &=
 (F_{\calM_{\textup{h}}(k+1)}F_{\calM_{\textup{v}}(k+1)}V_{(k)}^{\textbf{\textup{0}}})^{s_{k+1},0,s_{k-1},\ldots,s_1}_{t}\\
 &=(F_{\calM_{\textup{h}}(k+1)}V_{(k)}^{\textbf{\textup{0}}})^{s_{k+1},0,s_{k-1},\ldots,s_1}_{t}\\
-&\cong (\UEAX((V_{(k)}^{\textbf{\textup{0}}})^*)^*)^{s_{k+1},0,s_{k-1},\ldots,s_1}_{t}\\
-&\cong (H_{\calW(k)}^{*}V^{*}_{(k)})^{s_{k+1},0,s_{k-1},\ldots,s_1}_{t}
+&\cong (\dual\UEAX(\dual(V_{(k)}^{\textbf{\textup{0}}})))^{s_{k+1},0,s_{k-1},\ldots,s_1}_{t}\\
+&\cong (H^*_{\calW(k)}V^*_{(k)})^{s_{k+1},0,s_{k-1},\ldots,s_1}_{t}
 \end{alignat*}
-Here, we are viewing $V_{(k)}^{\textbf{\textup{0}}}$, the subspace of $V_{(k)}$ in degree $s_k=0$, as an object of $\vect{k+1}{+}$ in order to apply $F_{\calMv(k+1)}$. The inclusion $F_{\calM_{\textup{h}}(k+1)}F_{\calM_{\textup{v}}(k+1)}V_{(k)}^{\textbf{\textup{0}}}\subseteq F_{\calM_{\textup{h}}(k+1)}F_{\calM_{\textup{v}}(k+1)}V_{(k)}$ restricts to the identity in degree $s_k=0$, explaining the first equality. The second equality is similar: any nontrivial $\calMv(k+1)$-operation lands outside degree $s_k=0$. The first isomorphism follows from proposition \ref{basis of free horizontal operations algebra} --- as $V_{(k)}^{\textbf{\textup{0}}}$ is concentrated in dimension $s_{k+1}=0$, the proposition ensures that $F_{\calM_{\textup{h}}(k+1)}V_{(k)}^{\textbf{\textup{0}}}$ is a quotient of the polynomial algebra on $V_{(k)}^{\textbf{\textup{0}}}$, and indeed, the same quotient as $\UEAX((V_{(k)}^{\textbf{\textup{0}}})^*)^*$. The second isomorphism is proposition \ref{calculation in internal dimension zero}.
+Here, we are viewing $V_{(k)}^{\textbf{\textup{0}}}$, the subspace of $V_{(k)}$ in degree $s_k=0$, as an object of $\vect{k+1}{+}$ in order to apply $F_{\calMv(k+1)}$. The inclusion $F_{\calM_{\textup{h}}(k+1)}F_{\calM_{\textup{v}}(k+1)}V_{(k)}^{\textbf{\textup{0}}}\subseteq F_{\calM_{\textup{h}}(k+1)}F_{\calM_{\textup{v}}(k+1)}V_{(k)}$ restricts to the identity in degree $s_k=0$, explaining the first equality. The second equality is similar: any nontrivial $\calMv(k+1)$-operation lands outside degree $s_k=0$. The first isomorphism follows from proposition \ref{basis of free horizontal operations algebra} --- as $V_{(k)}^{\textbf{\textup{0}}}$ is concentrated in dimension $s_{k+1}=0$, the proposition ensures that $F_{\calM_{\textup{h}}(k+1)}V_{(k)}^{\textbf{\textup{0}}}$ is a quotient of the polynomial algebra on $V_{(k)}^{\textbf{\textup{0}}}$, and indeed, the same quotient as $\dual\UEAX(\dual(V_{(k)}^{\textbf{\textup{0}}}))$. The second isomorphism is proposition \ref{calculation in internal dimension zero}.
 \end{proof}
 \begin{proof}[Proof of \ref{thm on collapsing of most sseqs}]
 For each $k\geq n$, we'll use the diagram
 \[\xymatrix@R=4mm{
 %&&H_{\calW(k+1)}^{0}H_*^{\calU(k)}V_{(k)}^*\\
 %V_{(k)}\ar@{..>}[r]^-{i_0}\ar@{..>}[rd]_-{j_0}&
-H_{\calW(k)}^{*}V^{*}_{(k)}\ar@{..>}@/^1.22em/[rr]|-{\textup{\,edge composite\,}}
-&H_{\calW(k+1)}^{*}H_*^{\calU(k)}V_{(k)}^*\ar@{=>}[l]^-{g_{k+1}}%\ar@{..>}@<.35ex>[r]^-{}%\ar[u]_-{\textup{proj onto $*=0$}}
+H^*_{\calW(k)}V^*_{(k)}\ar@{..>}@/^1.22em/[rr]|-{\textup{\,edge composite\,}}
+&H^*_{\calW(k+1)}H_*^{\calU(k)}V^*_{(k)}\ar@{=>}[l]^-{g_{k+1}}%\ar@{..>}@<.35ex>[r]^-{}%\ar[u]_-{\textup{proj onto $*=0$}}
 &H^*_{\calU(k)}V^*_{(k)}\ar@{..>}[l]^-{i_1}
 &V_{(k)}\ar@{..>}[l]|-{\,i_2\,}\ar@{..>}[ld]^-{j_2}\ar@{..>}@/_1.72em/[lll]|-{\,i_0\,}
 \\
@@ -4002,8 +4002,8 @@ F_{\calM_{\textup{h}}(k+1)}F_{\calM_{\textup{v}}(k+1)}V_{(k)}\ar[u]^-{\rho_k}
 where $W(F_{\calMv(k+1)}V_{(k)})$ is the object introduced in the proof of theorem \ref{thm on compressing seqs of steenrod ops}, of which $F_{\calM_{\textup{h}}(k+2)}F_{\calM_{\textup{v}}(k+2)}F_{\calMv(k+1)}V_{(k)}$ is a quotient. Here, the maps $j_1,j_2$ are the evident inclusions of generators, while the maps $i_0,i_1,i_2$ are the inclusions arising because $V_{(k)}$ is trivial.
 
  We may define 
-\[c:=(\rho_k\circ \overline{f}_{k+1}\circ j_1):F_{\calMv(k+1)}V_{(k)}\to H_{\calW(k)}^{*}V^{*}_{(k)},\]
-without the need to pass to any associated graded objects. By construction of $\overline{f}_{k+1}$,  $c$ is induced by the inclusion $i_0$ and the $\calMv(k+1)$-structure of $H^{*}_{\calW(k)}V^{*}_{(k)}$.
+\[c:=(\rho_k\circ \overline{f}_{k+1}\circ j_1):F_{\calMv(k+1)}V_{(k)}\to H^*_{\calW(k)}V^*_{(k)},\]
+without the need to pass to any associated graded objects. By construction of $\overline{f}_{k+1}$,  $c$ is induced by the inclusion $i_0$ and the $\calMv(k+1)$-structure of $H^*_{\calW(k)}V^*_{(k)}$.
 
 The edge composite is the composite of a surjection, a monomorphism $m_1$, and an isomorphism $m_2$ (with inverse $i_1$):
 \[H^*_{\calW(k)}V^*_{(k)}\epi E_{\infty,(k+1)}^{0,*}\overset{m_1}{\to}E_{2,(k+1)}^{0,*}\overset{m_2}{\to}H^*_{\calU(k)}V^*_{(k)}.\]
@@ -4013,12 +4013,12 @@ In particular, the edge composite is a surjection, so that $m_{1}$ is an isomorp
 %The claim that $g_{k+1}\circ \rho_{k+1}=E_0(\rho_{k})\circ f_{k+1}$ is best proven together with the claim that $\rho_k$ preserves filtration.
 
 Any section of $H^*_{\calW(k)}V^*_{(k)}\epi E_{\infty,(k+1)}^{0,*}=E_{2,(k+1)}^{0,*}$ will realize, up to filtration, the restriction of $g_{k+1}$ to $E_{\infty,(k+1)}^{0,*}$, so we choose
-\[E_{2,(k+1)}^{0,*}\overset{m_2}{\to} H^*_{\calU(k)}V^*_{(k)}\cong F_{\calMv(k+1)}V_{(k)}\overset{c}{\to}H_{\calW(k)}^{*}V^{*}_{(k)}.\]
+\[E_{2,(k+1)}^{0,*}\overset{m_2}{\to} H^*_{\calU(k)}V^*_{(k)}\cong F_{\calMv(k+1)}V_{(k)}\overset{c}{\to}H^*_{\calW(k)}V^*_{(k)}.\]
 In particular, $g_{k+1}\circ \rho_{k+1}\circ j_1=g_{k+1}\circ i_1=c\circ m_2\circ i_1=c$, up to filtration. More precisely, $g_{k+1}\circ \rho_{k+1}\circ j_1$ equals the composite
 \begin{gather*}
-F_{\calMv(k+1)}V_{(k)}\overset{c}{\to} H_{\calW(k)}^{*}V^{*}_{(k)}\epi E_0^0(H_{\calW(k)}^{*}V^{*}_{(k)}).
+F_{\calMv(k+1)}V_{(k)}\overset{c}{\to} H^*_{\calW(k)}V^*_{(k)}\epi E_0^0(H^*_{\calW(k)}V^*_{(k)}).
 \end{gather*}
-Now the target filtrations on the domain and codomain of $\rho_k$ are induced by the filtrations on the domain and codomain of $\rho_{k+1}$ by cohomological dimension $s_{k+2}$, and $\rho_{k+1}$ is a graded map. Thus, for any $w\in F^pW(F_{\calMv(k+1)}V_{(k)})$, we must see that $\rho_k(\overline{f}_{k+1}(w))$ coincides with $g_{k+1}(\rho_{k+1}(w))$ modulo $F^{p+1}H_{\calW(k)}^{*}V^{*}_{(k)}$, as this will prove both that $\rho_k$ preserves target filtrations and that  $g_{k+1}\circ \rho_{k+1}=E_0(\rho_{k})\circ f_{k+1}$. However, this coincidence follows from the fact that $c=g_{k+1}\circ \rho_{k+1}\circ j_1$, as $W(F_{\calMv(k+1)}V_{(k)})$ is generated by $\im(j_1)$ under $F_{\calMh(k+2)}$- and $F_{\calMv(k+2)}$-operations, and the definition of $\overline{f}_{k+1}$ is modeled on the interaction of $g_{k+1}$ with these operations, as studied by Singer (c.f.\ \S??????).
+Now the target filtrations on the domain and codomain of $\rho_k$ are induced by the filtrations on the domain and codomain of $\rho_{k+1}$ by cohomological dimension $s_{k+2}$, and $\rho_{k+1}$ is a graded map. Thus, for any $w\in F^pW(F_{\calMv(k+1)}V_{(k)})$, we must see that $\rho_k(\overline{f}_{k+1}(w))$ coincides with $g_{k+1}(\rho_{k+1}(w))$ modulo $F^{p+1}H^*_{\calW(k)}V^*_{(k)}$, as this will prove both that $\rho_k$ preserves target filtrations and that  $g_{k+1}\circ \rho_{k+1}=E_0(\rho_{k})\circ f_{k+1}$. However, this coincidence follows from the fact that $c=g_{k+1}\circ \rho_{k+1}\circ j_1$, as $W(F_{\calMv(k+1)}V_{(k)})$ is generated by $\im(j_1)$ under $F_{\calMh(k+2)}$- and $F_{\calMv(k+2)}$-operations, and the definition of $\overline{f}_{k+1}$ is modeled on the interaction of $g_{k+1}$ with these operations, as studied by Singer (c.f.\ \S??????).
 
 What remains is to show that the maps $\rho_k$ are isomorphisms. Suppose that 
 \[x_{(k)}\in (E_{2,(k)})^{s_{k+1}^{k},\ldots,s_1^{k}}_t=(H^*_{\calW(k)}V^*_{(k)})^{s_{k+1}^{k},\ldots,s_1^{k}}_t.\]
@@ -4046,19 +4046,19 @@ By the commutativity established above, $x_{(k)}\equiv\rho_{k}f_{k+1}\cdots f_{r
 %Such products are all contained in the image of $\rho_r$, so that they are all permanent cycles. But even more, we have seen that elements in the image of some $\rho_r$ are permanent cycles that detect elements in the image of $\rho_{r-1}$ whenever $r>1$. That is, \textbf{(filtration confusing)}, there is a sequence of permanent cycles (well defined up to higher filtration each time), each detecting the next. One of these is $x_{(k)}$, if we desire. Thus each $\rho_k$ is surjective, and 
 every one of the spectral sequences is degenerate. Thus, we have shown that all of the maps $g_k$ are in fact isomorphisms, or rather that in the following commuting square, the $g_{k+1}$ are isomorphisms:
 \[\xymatrix@R=4mm{
-E_{0}(H_{\calW(k)}^{*}V^{*}_{(k)})
-&H_{\calW(k+1)}^{*}H_*^{\calU(k)}V_{(k)}^*\ar@{->}[l]^-{\cong}_-{{g}_{k+1}}
+E_{0}(H^*_{\calW(k)}V^*_{(k)})
+&H^*_{\calW(k+1)}H_*^{\calU(k)}V^*_{(k)}\ar@{->}[l]^-{\cong}_-{{g}_{k+1}}
 \\
 %V_{(k)}\ar@{..>}[r]\ar@{..>}[u]^-{\cong}&
 E_0(F_{\calM_{\textup{h}}(k+1)}V_{(k+1)})\ar@{->>}[u]^-{E_0(\rho_k)}
 &F_{\calM_{\textup{h}}(k+2)}F_{\calM_{\textup{v}}(k+2)}F_{\calMv(k+1)}V_{(k)}\ar@{->}[l]^-{\cong}_-{{f}_{k+1}}\ar@{->>}[u]_-{\rho_{k+1}}
 }\]
 For each $k$, $\rho_k$ is injective if and only if $E_0(\rho_k)$ is injective. This holds by repeated application of the snake lemma, using the fact that $\rho_k$ is surjective, and the observation that for any given value of the grading $t$, the group $(F_{\calM_{\textup{h}}(k+1)}V_{(k+1)})_t$ is finite dimensional, so that the filtrations of both the domain and codomain of $\rho_k$ are eventually zero in each degree $t$. More specifically,
-\[\rho_k:(F_{\calM_{\textup{h}}(k+1)}V_{(k+1)})_t^{s_{k+1},\ldots,s_1}\to (H_{\calW(k)}^{*}V^{*}_{(k)})_t^{s_{k+1},\ldots,s_1}\]
+\[\rho_k:(F_{\calM_{\textup{h}}(k+1)}V_{(k+1)})_t^{s_{k+1},\ldots,s_1}\to (H^*_{\calW(k)}V^*_{(k)})_t^{s_{k+1},\ldots,s_1}\]
 is injective if and only if
-\[E_0(\rho_k):E_0^{s'_{k+2}}(F_{\calM_{\textup{h}}(k+1)}V_{(k+1)})_t^{s'_{k+1},s_k,\ldots,s_1}\to E_0^{s'_{k+2}}(H_{\calW(k)}^{*}V^{*}_{(k)})_t^{s'_{k+1},s_k,\ldots,s_1}\]
+\[E_0(\rho_k):E_0^{s'_{k+2}}(F_{\calM_{\textup{h}}(k+1)}V_{(k+1)})_t^{s'_{k+1},s_k,\ldots,s_1}\to E_0^{s'_{k+2}}(H^*_{\calW(k)}V^*_{(k)})_t^{s'_{k+1},s_k,\ldots,s_1}\]
 is injective whenever $s'_{k+2}+s'_{k+1}=s_{k+1}$. As in the argument for surjectivity, in order to check that all the $\rho_k$ are injective, we now only need to check that every map
-\[(F_{\calM_{\textup{h}}(r+1)}F_{\calM_{\textup{v}}(r+1)}V_{(r)})^{s_{r+1}^{r},0,s_{r-1}^{r},\ldots,s_1^{r}}_{t} \overset{\rho_r}{\to}(H_{\calW(r)}^{*}V^{*}_{(r)})^{s_{r+1}^{r},0,s_{r-1}^{r},\ldots,s_1^{r}}_{t}\]
+\[(F_{\calM_{\textup{h}}(r+1)}F_{\calM_{\textup{v}}(r+1)}V_{(r)})^{s_{r+1}^{r},0,s_{r-1}^{r},\ldots,s_1^{r}}_{t} \overset{\rho_r}{\to}(H^*_{\calW(r)}V^*_{(r)})^{s_{r+1}^{r},0,s_{r-1}^{r},\ldots,s_1^{r}}_{t}\]
 is injective, which is part of proposition \ref{isomorphism rho k in some dims}.
 %%%%%%However, in this degree, $\rho_r$ is an isomorphism, as it factors as
 %%%%%%\begin{alignat*}{2}
@@ -4085,11 +4085,11 @@ Basically, $H_{*}^{\calU(k)}$ is additive, and $H^*_{\calL(k)}$ turns $\oplus$ i
 \subsection{A two-dimensional example in $\calW(2)$}
 In this section, we suppose that $T\geq1$, and let $X=V^*_{(2)}\in\calW(2)$ be the two-dimensional object of $\calW(2)$ spanned by non-zero classes 
 \[v_{0}^{*}\in (V^*_{(2)})^{T}_{0,1}\textup{ and }v_{1}^{*}\in (V^*_{(2)})^{2T+1}_{0,2}\]
-such that $v_{1}^*=v^*_0\lambda_{0}$, and all other operations are trivial. Note that this nontrivial operation may be written $v_{1}^*=\restn{(v^*_0)}$: the $\lambda_0$ is in fact a top operation.
+such that $v^*_{1}=v^*_0\lambda_{0}$, and all other operations are trivial. Note that this nontrivial operation may be written $v^*_{1}=\restn{(v^*_0)}$: the $\lambda_0$ is in fact a top operation.
 \begin{prop}\label{2d example in w2}
-For all $k\geq2$, $V_{(k)}^{*}$ is two-dimensional, spanned by
+For all $k\geq2$, $V^*_{(k)}$ is two-dimensional, spanned by
 \[v_{0}^{*}\in (V^*_{(k)})^{T}_{0,\ldots,0,1}\textup{ and }v_{1}^{*}\in (V^*_{(k)})^{2T+1}_{0,\ldots,0,2},\]
-with  $v_{1}^*=\restn{(v^*_0)}$ the only nontrivial operation.
+with  $v^*_{1}=\restn{(v^*_0)}$ the only nontrivial operation.
 \end{prop}
 \begin{proof}
 An induction as in the proof of proposition \ref{iterative calc of the Vk all trivial}, using the fact that at each stage, the only non-trivial $\lambda$-operation is a \emph{top} operation, and thus does not yield a differential in $K_*^{\calU(k)}V_{(k)}$. One also uses propositions \ref{LieBracketsTrivial}, \ref{QkTrivial} and \ref{Q0ZeroByPriddyAlg} to calculate the $\calW(k+1)$-structure of $V_{(k+1)}$ at each stage.
@@ -4101,13 +4101,13 @@ For each $k\geq2$,
 These groups are zero unless $s_k=\cdots =s_2=0$.
 \end{prop}
 \begin{proof}
-One performs this calculation in the Chevalley-Eilenberg-May complex $\UEAX(V_{(k)}^*)^*$, which is the differential graded algebra $\F_2[v_0,v_1]$ with differential defined by
+One performs this calculation in the Chevalley-Eilenberg-May complex $\dual\UEAX(V^*_{(k)})$, which is the differential graded algebra $\F_2[v_0,v_1]$ with differential defined by
 \[d(v_0)=(\dualrestn{v_0})^2=0,\ \ d(v_1)=(\dualrestn{v_1})^2=v_0^2.\qedhere\]
 \end{proof}
 By a greatly simplified version of the proof of theorem \ref{thm on collapsing of most sseqs}:
 \begin{cor}\label{statement of result on 2d w2 example}
-For each $k\geq2$, $(E_{2,(k+1)})^{s_{k+2},s_{k+1},\ldots,s_1}_{t}$ is zero unless $s_{k+1}=\cdots s_2=0$, so that the spectral sequence $E_{2,(k+1)}\implies H^{*}_{\calW(k)}V^*_{(k)}$ collapses, and in particular,
-\[H^*_{\calW(2)}V_{(2)}^*\cong \F_2[v_1^{2}]\otimes E(v_0).\]
+For each $k\geq2$, $(E_{2,(k+1)})^{s_{k+2},s_{k+1},\ldots,s_1}_{t}$ is zero unless $s_{k+1}=\cdots s_2=0$, so that the spectral sequence $E_{2,(k+1)}\implies H^*_{\calW(k)}V^*_{(k)}$ collapses, and in particular,
+\[H^*_{\calW(2)}V^*_{(2)}\cong \F_2[v_1^{2}]\otimes E(v_0).\]
 \end{cor}
 
 %\subsection{An infinite-dimensional example in $\calW(1)$}
@@ -4195,7 +4195,7 @@ For each $k\geq2$, $(E_{2,(k+1)})^{s_{k+2},s_{k+1},\ldots,s_1}_{t}$ is zero unle
 In this section, we suppose that $S,T\geq1$, and let $X=V^*_{(1)}\in\calW(1)$ be the infinite dimensional object of $\calW(1)$ spanned by non-zero classes
 \[v_{j}^{*}\in (V^*_{(1)})^{2^{j}(T+1)-1}_{S+j}\textup{ for $j\geq 0$},\] such that $v_{j+1}^*=v^*_j\lambda_{1}$ for $j\geq 0$, and all other operations are trivial. %(We must have $S\geq1$ for this definition to make sense: $v_0\lambda_1$ must be defined.)
 \begin{prop}\label{calc of koszul complex in inf dim example}
-The Koszul complex $K_*^{\calU(1)}V_{(1)}^*$ has basis
+The Koszul complex $K_*^{\calU(1)}V^*_{(1)}$ has basis
 \[\left\{\Sq_{\textup{v}}(J,v_j^*)\ \middle|\ \textup{$j\geq0$, $J$ is $\Sq$-admissible, $\minDimSq(J)\leq S+j$ and $1\notin J$}\right\} \]
 %\ \genfrac{}{}{0pt}{}{\textup{$J$ $\Sq$-admissible with }\minDimSq(J)\leq S+k,}{\textup{$J$ doesn't contain 1}}\right\},\]
 and all differentials zero except for:
@@ -4207,19 +4207,19 @@ The basis for the Koszul complex is just a reading of [above], but we must think
 Consider a sequence $(k_\ell,\ldots,k_2,2)$ corresponding to a summand of this formula. Supposing that $\ell\geq2$ and $\Sqv^{k_2}\Sqv^2$ is not $\Sq$-admissible, it follows that $k_2$ is either 3 or 2, so that $\Sqv^{k_2}\Sqv^2$ is either zero or $\Sqv^{3}\Sqv^1$. As $J$ does not contain 1, and the two-sided ideal in $\LieSteen$ generated by $\Sqh^1$ is spanned by those admissible sequences ending in $\Sqh^1$, it cannot happen that $\produces{(k_{\ell},\ldots,k_2,2)}{J}{\Sq}$. Thus, the only summand appearing is that in which $(k_{\ell},\ldots,k_2,2)=J$, confirming our description of the differential.
 \end{proof}
 \begin{prop}\label{Sg1 calc of V2}
-When $S\geq2$, $V^*_{(2)}:=H_*^{\calU(1)}V_{(1)}^{*}$ is the subquotient
+When $S\geq2$, $V^*_{(2)}:=H_*^{\calU(1)}V^*_{(1)}$ is the subquotient
 \[\frac{{\F_{2}\left\{\Sq_{\textup{v}}(J,v_j^*)\ \middle|\ \makebox[\widthof{$\textup{$j\geq0$}$}][c]{$\textup{$j\geq0$}$}\textup{, $J$ is $\Sq$-admissible, $\minDimSq(J)\leq S+j$ and}\makebox[\widthof{$\textup{ $1,2,3\notin J$}$}][c]{$\textup{ $1,2\notin J$}$}\right\}}}{{\F_{2}\left\{\Sq_{\textup{v}}(J,v_j^*)\ \middle|\ \makebox[\widthof{$\textup{$j\geq0$}$}][c]{$\textup{$j\geq1$}$}\textup{, $J$ is $\Sq$-admissible, $\minDimSq(J)\leq S+j$ and}\makebox[\widthof{$\textup{ $1,2,3\notin J$}$}][c]{$\textup{ $1,2,3\notin J$}$}\right\}}}\]
- of $K_*^{\calU(1)}V_{(1)}^*$. Equivalently, $V_{(2)}$ is the subquotient of $F_{\calM_v(2)}V_{(1)}$ in which we restrict to the sub-$\calMv(2)$-object generated by the elements%\textbf{{(Can some of these be 0? yes if $S=1$, at least. How does this effect the calculation here?)}}
+ of $K_*^{\calU(1)}V^*_{(1)}$. Equivalently, $V_{(2)}$ is the subquotient of $F_{\calM_v(2)}V_{(1)}$ in which we restrict to the sub-$\calMv(2)$-object generated by the elements%\textbf{{(Can some of these be 0? yes if $S=1$, at least. How does this effect the calculation here?)}}
 \[\{v_0,\Sqv^2v_{1},\Sqv^3v_{1},\Sqv^2v_{2},\Sqv^3v_{2},\Sqv^2v_{3},\Sqv^3v_{3},\ldots\}\]
-and in which we set $\Sqv^2 v_{j}$ to zero for all $j\geq0$.   As an object of $\calW(2)$, $V_{(2)}^{*}$ is trivial.
+and in which we set $\Sqv^2 v_{j}$ to zero for all $j\geq0$.   As an object of $\calW(2)$, $V^*_{(2)}$ is trivial.
 \end{prop}
 \begin{prop}\label{Se1 calc of V2}
-When $S=1$, $V^*_{(2)}:=H_*^{\calU(1)}V_{(1)}^{*}$ is the subquotient
+When $S=1$, $V^*_{(2)}:=H_*^{\calU(1)}V^*_{(1)}$ is the subquotient
 \[\frac{{\F_{2}\left\{\Sq_{\textup{v}}(J,v_j^*)\ \middle|\ \makebox[\widthof{$\textup{$j\geq2$}$}][c]{$\textup{$j\geq0$}$}\textup{, $J$ is $\Sq$-admissible, $\minDimSq(J)\leq S+j$ and}\makebox[\widthof{$\textup{ $1,2,3\notin J$}$}][c]{$\textup{ $1,2\notin J$}$}\right\}}}{{\F_{2}\left\{\Sq_{\textup{v}}(J,v_j^*)\ \middle|\ \makebox[\widthof{$\textup{$j\geq2$}$}][c]{$\textup{$j\geq2$}$}\textup{, $J$ is $\Sq$-admissible, $\minDimSq(J)\leq S+j$ and}\makebox[\widthof{$\textup{ $1,2,3\notin J$}$}][c]{$\textup{ $1,2,3\notin J$}$}\right\}}}\]
- of $K_*^{\calU(1)}V_{(1)}^*$. Equivalently, $V_{(2)}$ is the subquotient of $F_{\calM_v(2)}V_{(1)}$ in which we restrict to the sub-$\calMv(2)$-object generated by the elements%\textbf{{(Can some of these be 0? yes if $S=1$, at least. How does this effect the calculation here?)}}
+ of $K_*^{\calU(1)}V^*_{(1)}$. Equivalently, $V_{(2)}$ is the subquotient of $F_{\calM_v(2)}V_{(1)}$ in which we restrict to the sub-$\calMv(2)$-object generated by the elements%\textbf{{(Can some of these be 0? yes if $S=1$, at least. How does this effect the calculation here?)}}
 \[\{v_0,v_1,\Sqv^2v_{2},\Sqv^3v_{2},\Sqv^2v_{3},\Sqv^3v_{3},\ldots\}\]
-and in which we set $\Sqv^2 v_{j}$ to zero for all $j\geq1$.  As an object of $\calW(2)$, $V_{(2)}^{*}$ admits a single nonzero operation, $\lambda_0:v_0^*\longmapsto v_1^*$, and so decomposes as the direct sum of
-$\F_2\{v_0^*,v_1^*\}$ with a trivial object $(V'_{(2)})^*$, dual to $V'_{(2)}$, the subquotient of $F_{\calM_v(2)}V_{(1)}$ in which we restrict to the sub-$\calMv(2)$-object generated by
+and in which we set $\Sqv^2 v_{j}$ to zero for all $j\geq1$.  As an object of $\calW(2)$, $V^*_{(2)}$ admits a single nonzero operation, $\lambda_0:v_0^*\longmapsto v_1^*$, and so decomposes as the direct sum of
+$\F_2\{v_0^*,v_1^*\}$ with a trivial object $\dual(V'_{(2)})$, dual to $V'_{(2)}$, the subquotient of $F_{\calM_v(2)}V_{(1)}$ in which we restrict to the sub-$\calMv(2)$-object generated by
 $\{\Sqv^2v_{2},\Sqv^3v_{2},\Sqv^2v_{3},\Sqv^3v_{3},\ldots\}$ and set $\Sqv^2 v_{j}$ to zero for all $j\geq2$.
 \end{prop}
 %
@@ -4231,15 +4231,15 @@ $\{\Sqv^2v_{2},\Sqv^3v_{2},\Sqv^2v_{3},\Sqv^3v_{3},\ldots\}$ and set $\Sqv^2 v_{
 %% $\Sqv(\emptyset,v_0^*)\lambda_0=\Sqv(\emptyset,v_1^*)$. \textbf{fill in details on higher $V_{(k)}$}
 %\end{prop}
 \begin{proof}[Proof of \ref{Sg1 calc of V2} and \ref{Se1 calc of V2}]
-For any $S\geq1$, taking the homology of this differential provides the formula for $V_{(2)}^*$, and dualizing provides that for $V_{(2)}$.
-In order to determine $V_{(2)}^*$ as an object of $\calW(2)$, note first that \ref{LieBracketsTrivial} and \ref{QkTrivial} show that all operations are zero except perhaps for $\lambda_0$. %Now $(\Sqv(J,w^*))\lambda_0$ is evidently zero, 
-Consider the operation $\lambda_0$ applied to a cycle of the form $\Sqv(J,v_{j}^*)\in K_{*}^{\calU(1)}V^*_{(1)}$ with $J\neq\emptyset$ (so that $1,2\notin J$). As $J$ ends in an integer no less than 3, and as $\lambda_1$ is the only nonzero operation in $V_{(1)}^*$, the second part of proposition \ref{Q0ZeroByPriddyAlg} implies that $\Sqv(J,v_{j}^*)\lambda_0=0$.
+For any $S\geq1$, taking the homology of this differential provides the formula for $V^*_{(2)}$, and dualizing provides that for $V_{(2)}$.
+In order to determine $V^*_{(2)}$ as an object of $\calW(2)$, note first that \ref{LieBracketsTrivial} and \ref{QkTrivial} show that all operations are zero except perhaps for $\lambda_0$. %Now $(\Sqv(J,w^*))\lambda_0$ is evidently zero, 
+Consider the operation $\lambda_0$ applied to a cycle of the form $\Sqv(J,v_{j}^*)\in K_{*}^{\calU(1)}V^*_{(1)}$ with $J\neq\emptyset$ (so that $1,2\notin J$). As $J$ ends in an integer no less than 3, and as $\lambda_1$ is the only nonzero operation in $V^*_{(1)}$, the second part of proposition \ref{Q0ZeroByPriddyAlg} implies that $\Sqv(J,v_{j}^*)\lambda_0=0$.
 
-In the case $J=\emptyset$, proposition \ref{Q0ZeroByPriddyAlg} states that $(\Sqv(\emptyset,v_{j}^*))\lambda_0\in V_{(2)}^*$ is represented by $(\Sqv(\emptyset,v_{j}^*\lambda_{S+j}))$, which is zero unless $j=0$ and $S=1$. Thus the only nonzero operation on $V_{(2)}^*$ is $v_0^*\lambda_0=v_1^*$ in the case $S=1$.
+In the case $J=\emptyset$, proposition \ref{Q0ZeroByPriddyAlg} states that $(\Sqv(\emptyset,v_{j}^*))\lambda_0\in V^*_{(2)}$ is represented by $(\Sqv(\emptyset,v_{j}^*\lambda_{S+j}))$, which is zero unless $j=0$ and $S=1$. Thus the only nonzero operation on $V^*_{(2)}$ is $v_0^*\lambda_0=v_1^*$ in the case $S=1$.
 \end{proof}
 \begin{thm}\label{W2 to W1 collapse}
-The spectral sequence $H^*_{\calW(2)}V_{(2)}^*\implies H^*_{\calW(1)}V_{(1)}^*$ collapses, with
-\[E_2=H^*_{\calW(2)}V_{(2)}^*\cong\begin{cases}
+The spectral sequence $H^*_{\calW(2)}V^*_{(2)}\implies H^*_{\calW(1)}V^*_{(1)}$ collapses, with
+\[E_2=H^*_{\calW(2)}V^*_{(2)}\cong\begin{cases}
 F_{\calmh(3)}F_{\calmv(3)}V_{(2)},&\textup{if }S\geq2;\\
 F_{\calmh(3)}F_{\calmv(3)}V'_{(2)}\otimes \F_2[v_1^{2}]\otimes E(v_0),&\textup{if }S=1.
 %\\,&\textup{if }
@@ -4250,7 +4250,7 @@ F_{\calmh(3)}F_{\calmv(3)}V'_{(2)}\otimes \F_2[v_1^{2}]\otimes E(v_0),&\textup{i
 The calculations of $E_2$ follow from propositions \ref{Koszul-dual Hilton-Milnor theorem}, \ref{2d example in w2}, \ref{Sg1 calc of V2} and \ref{Se1 calc of V2}, theorem \ref{thm on collapsing of most sseqs} and corollary \ref{statement of result on 2d w2 example}. What remains is to prove the collapsing result in each case.
 
 Suppose that $S\geq2$. The first point is to observe that the generators $v_0$ and $\Sqv^3v_j$ ($j\geq1$) of $V_{(2)}$ are all permanent cycles in
-$(H^{*}_{\calW(2)}V_{(2)})^{0**}_{*}$. For $v_0\in (E_2)^{00S}_{T}$, this is obvious. It is less obvious for $\Sqv^3v_j$ ($j\geq1$), whose only opportunity to support a differential is
+$(H^*_{\calW(2)}V_{(2)})^{0**}_{*}$. For $v_0\in (E_2)^{00S}_{T}$, this is obvious. It is less obvious for $\Sqv^3v_j$ ($j\geq1$), whose only opportunity to support a differential is
 \[\Sqv^3v_j\in (E_2)^{0,1,2+S+j}_{2^{j+1}(T+1)-1}\overset{d_2}{\to}(E_2)^{2,0,2+S+j}_{2^{j+1}(T+1)-1}.\]
 Fortunately, this target group is zero, due to the constraint that $s_2=0$. To see this, note that this group is spanned by the products of three classes in $(E_{2})^{00*}_*$, namely:
 \[v_{j_1}v_{j_2}v_{j_3}\in (E_{2})^{2,0,3S+j_1+j_2+j_3}_{(2^{j_1}+2^{j_2}+2^{j_3})(T+1)-1},\]
@@ -4259,10 +4259,10 @@ In order that $2^{j+1}$ equals $2^{j_{1}}+2^{j_{2}}+2^{j_{3}}$ it must happen th
 
 Next, we can derive that $\Sqv^Jv_j$ is a permanent cycle for all $J,j$ such that $J$ is $\Sq$-admissible, with final entry 3 when $j>0$. For this, we'll use  proposition \ref{edgehomproposition}, that there is a commuting diagram:%as $V_{(2)}^*$ is a trivial object, there is an isomorphism $V_{(2)}\cong H^{0}_{\calW(2)}V_{(2)}^*$. In light of this isomorphism, proposition \ref{edgehomproposition} shows that the edge homomorphism itself is compatible with the action of the vertical Steenrod operations, in the sense that
 \[\xymatrix@R=4mm{
-(H^*_{\calW(1)}V_{(1)}^*)^{s_{2},s_1}_t\ar[r]^-{\Sqv^i}
+(H^*_{\calW(1)}V^*_{(1)})^{s_{2},s_1}_t\ar[r]^-{\Sqv^i}
 \ar[d]^-{\textup{edge hom}}
 &%r1c1
-(H^*_{\calW(1)}V_{(1)}^*)^{s_{2}+1,s_1+i-1}_{2t+1}\ar[d]^-{\textup{edge hom}}
+(H^*_{\calW(1)}V^*_{(1)})^{s_{2}+1,s_1+i-1}_{2t+1}\ar[d]^-{\textup{edge hom}}
 \\%r1c2
 (E_{2})^{0,s_{2},s_1}_t\ar@{=}[d]%\ar[r]^-{\Sqv^i}
 &%r1c1
@@ -4282,7 +4282,7 @@ Now as we have shown that the classes $v_0$ and $\Sqv^{3}v_j$  ($j\geq1$) are al
 %where $(V'_{(2)})^*$ is the trivial object of $\calW(2)$ dual to $V'_{(2)}$, the subquotient of $F_{\calM_v(2)}V_{(1)}$ in which we restrict to the sub-$\calMv(2)$-object generated by the elements
 %\[\{\Sqv^2v_{2},\Sqv^3v_{2},\Sqv^2v_{3},\Sqv^3v_{3},\ldots\}\]
 %an in which we set $\Sqv^2 v_{j}$ to zero for all $j\geq2$. This object is chosen so that $V_{(2)}^*$ decomposes as a direct sum $\F_2\{v_0^*,v_1^*\}\oplus (V'_{(2)})^*$ (of objects of $\calW(2)$), in light of the description given in  proposition \ref{calc of koszul complex in inf dim example}.
-Instead $E_2$ is generated by the class $v_1^{2}$  (and we no longer need to consider $\Sqv^{3}v_1$, as it is zero when $S=1$). That $v_1^2\in(H^*_{\calW(2)}V_{(2)}^*)^{1,0,4}_{4T-3}$ cannot support differentials is obvious, while for $j\geq2$, the same degree argument as before shows that $\Sqv^3v_j$ is a permanent cycle. As before, an argument with the edge homomorphism shows that every element of $V'_{(2)}$ is a permanent cycle, so $E_2$ is again generated by permanent cycles under the $\calmh(3)$- and $\calmv(3)$-operations, completing the proof.
+Instead $E_2$ is generated by the class $v_1^{2}$  (and we no longer need to consider $\Sqv^{3}v_1$, as it is zero when $S=1$). That $v_1^2\in(H^*_{\calW(2)}V^*_{(2)})^{1,0,4}_{4T-3}$ cannot support differentials is obvious, while for $j\geq2$, the same degree argument as before shows that $\Sqv^3v_j$ is a permanent cycle. As before, an argument with the edge homomorphism shows that every element of $V'_{(2)}$ is a permanent cycle, so $E_2$ is again generated by permanent cycles under the $\calmh(3)$- and $\calmv(3)$-operations, completing the proof.
 
  \textbf{Obviously we need better notation for the nested vertical constructions.}
 \end{proof}
@@ -4329,9 +4329,9 @@ the set of sequences in $\aDT$ not in the image of $t$, so that we may decompose
 \[\aDT=\bigsqcup_{\smash{I\in \aDTirr}}\left\{I,tI,t^2I,\ldots\right\}.\]
 \begin{prop}
 \label{calc of V1 from W0 sphere}
-$V^*_{(1)}:=H_*^{\calU(0)}V_{(0)}^{*}$ has basis $\{\imath^*\}\sqcup\left\{\delta(I,\imath^*)\ \middle|\ I\in\aDT\right\}$ and all $\calW(1)$-operations trivial except for $\lambda_1$, which is defined (only when $\ell(I)\geq1$) by
+$V^*_{(1)}:=H_*^{\calU(0)}V^*_{(0)}$ has basis $\{\imath^*\}\sqcup\left\{\delta(I,\imath^*)\ \middle|\ I\in\aDT\right\}$ and all $\calW(1)$-operations trivial except for $\lambda_1$, which is defined (only when $\ell(I)\geq1$) by
 \[\delta(I,\imath^*)\overset{\smash{\lambda_1}}{\longmapsto }\delta(tI,\imath^*).\]
-Thus, as an object of $\calW(1)$, $V_{(1)}^*$ decomposes as a direct sum
+Thus, as an object of $\calW(1)$, $V^*_{(1)}$ decomposes as a direct sum
 \[\F_2\{\imath^*\}\oplus\bigoplus_{\smash{I\in \aDTirr}}\F_2\left\{\delta(I,\imath^*)\lambda_1^j\ |\ j\geq0\right\}.\]
 \end{prop}
 \begin{proof}
@@ -4538,15 +4538,16 @@ The composite forgetful functor $\calA(n)\overset{I}{\to}\calL(n)\to\vect{+}{n}$
 \calA(n),  \ar@<.4ex>[l]^{I} 
 }
 \]
-showing that $\UEA\circ F^{\calL(n)}\cong T$. As in the non-restricted and fully restricted case, $\UEA L$ is naturally a Hopf algebra, having diagonal defined by the requirement $\Delta x=1\otimes x+x\otimes 1$ for $x\in L\subset \UEA L$.
+showing that $\UEA\circ F^{\calL(n)}\cong T$. As in the non-restricted and fully restricted case, $\UEA L$ is naturally a Hopf algebra, having diagonal defined by the requirement $\Delta x=1\otimes x+x\otimes 1$ for $x\in L\subset \UEA L$, and:
 \begin{lem}[Partially restricted PBW theorem]\label{Partially restricted PBW theorem}
 If $L\in\calL(n)$, then there is a natural increasing filtration of $\UEA L$, the Lie filtration (by powers of $\langle 1\rangle\oplus \im(L\to \UEA(L))$), and the associated graded algebra is naturally isomorphic to $\F_2[L_{\textup{\textbf{0}}}]\otimes E[L_{\neq\textup{\textbf{0}}}]$, where $L=L_{\textbf{\textup{0}}}\oplus L_{\neq\textbf{\textup{0}}}$ is the decomposition of $L$ into the sum of its subspaces of in non-restrictable and restrictable degrees respectively.
 \end{lem}
+Here, $\F_2[\DASH]$ and $E[\DASH]$ denote the \emph{unital} polynomial algebra and exterior algebra functors, which differ from $S(\CommOperad)$ and $\Lambda(\CommOperad)$ only by the addition of the unit in $(\F_2[\DASH])^{-1}_{0,\ldots,0}$ and $(E[\DASH])^{-1}_{0,\ldots,0}$ respectively. The unit $1\otimes1 $ of this tensor product is in $(\F_2[\DASH]\otimes E[\DASH])^{-1}_{0,\ldots,0}$, as the product has a $+1$-shift in the cohomological dimension.
 \begin{lem}
 The prolonged functor $\UEA:s\calL(n)\to s\calA(n)$ preserves weak equivalences.
 \end{lem}
 \begin{proof}
-Suppose that $L\to L'$ is a weak equivalence in $s\calL(n)$. The Lie filtration makes $C_*(\UEA L)\to C_*(\UEA L')$ a map of filtered commutative differential graded algebras, so there is an induced map of the resulting spectral sequences. By \ref{Partially restricted PBW theorem}, the $E^0$ page of the spectral sequence for $\UEA L$ is the differential graded algebra $C_*(\F_2[L_{\textbf{0}}]\otimes E[L_{\neq\textbf{0}}])$, where $\F_2[L_{\textbf{0}}]$ denotes a polynomial algebra, while $E[L_{\neq\textbf{0}}]$ denotes an exterior algebra. By Dold's theorem [], the $E^1$ page is a functor of $\pi_*(L_{\textbf{0}})$ and $\pi_*(L_{\neq\textbf{0}})$. As the induced maps $\pi_*(L_{\textbf{0}})\to\pi_*(L'_{\textbf{0}})$ and $\pi_*(L_{\neq\textbf{0}})\to\pi_*(L'_{\neq\textbf{0}})$ are isomorphisms, the map of spectral sequences is an isomorphism from $E^1$.
+Suppose that $L\to L'$ is a weak equivalence in $s\calL(n)$. The Lie filtration makes $C_*(\UEA L)\to C_*(\UEA L')$ a map of filtered commutative differential graded algebras, so there is an induced map of the resulting spectral sequences. By \ref{Partially restricted PBW theorem}, the $E^0$ page of the spectral sequence for $\UEA L$ is the differential graded algebra $C_*(\F_2[L_{\textbf{0}}]\otimes E[L_{\neq\textbf{0}}])$, where $\F_2[L_{\textbf{0}}]$ denotes a polynomial algebra, while $E[L_{\neq\textbf{0}}]$ denotes an exterior algebra. By Dold's theorem (\ref{Dold's theorem}), the $E^1$ page is a functor of $\pi_*(L_{\textbf{0}})$ and $\pi_*(L_{\neq\textbf{0}})$. As the induced maps $\pi_*(L_{\textbf{0}})\to\pi_*(L'_{\textbf{0}})$ and $\pi_*(L_{\neq\textbf{0}})\to\pi_*(L'_{\neq\textbf{0}})$ are isomorphisms, the map of spectral sequences is an isomorphism from $E^1$.
 \end{proof}
 
 \subsection{The proof of [????????]}
@@ -4569,7 +4570,7 @@ with zero differentials in each simplicial level. Now there's a map of simplicia
 In order to prove [????????], we plan to show
 \begin{prop}\label{the point of the appendix} The composite
 \[N_*\Delta\textbf{\textup{B}}\simeq\textup{Tot}(N^\textup{h}_*N^\textup{v}_*\textbf{\textup{B}})\overset{r}{\to} \textup{Tot}(N^\textup{h}_*\textbf{\textup{Q}}_{\bullet*})=\F_2\oplus \Sigma N_*Q^{\calL(n)} L\]
-is a weak equivalence of chain complexes under which the operations $\Sq^k$ and $\mu$ on $\pi^*(\Delta\textup{\textbf{B}}^*)$, which arise from the simplicial coalgebra structure $\psi_{\textup{\textbf{B}}}$ of $\Delta \textup{\textbf{B}}$, correspond to the operations $\Sq^k:=\psi_{\calL(n)}\circ\ExtCohOp^{k-1}$ and $\mu:=\psi_{\calL(n)}\circ\ExtCohProd$ on $\pi^*((Q^{\calL(n)} L)^*)=:H^*_{\calL(n)} L$.
+is a weak equivalence of chain complexes under which the operations $\Sq^k$ and $\mu$ on $\pi^*(\dual\Delta\textup{\textbf{B}})$, which arise from the simplicial coalgebra structure $\psi_{\textup{\textbf{B}}}$ of $\Delta \textup{\textbf{B}}$, correspond to the operations $\Sq^k:=\psi_{\calL(n)}\circ\ExtCohOp^{k-1}$ and $\mu:=\psi_{\calL(n)}\circ\ExtCohProd$ on $\pi^*(\dual(Q^{\calL(n)} L))=:H^*_{\calL(n)} L$.
 \end{prop}
 
 As $ L$ is levelwise free, the evident map $T(V_p)\to \UEA L_p$ is an isomorphism for each $p$, and we define a vertical homotopy $h:N_*^\textup{v}\textbf{B}_{p\bullet}\to N_{*+1}^\textup{v}\textbf{B}_{p\bullet}$ by the following formulae (in which the $v_{i_{j}}$ are taken to be in $V_p\subseteq  L_p\subseteq\UEA L_p$):
@@ -4653,8 +4654,8 @@ Next, consider an element $[v]$ of $N_{n+k}^\textup{h}N_1^\textup{v}\textbf{B}$.
 \end{proof}
 \begin{proof}[Proof of \ref{the point of the appendix}]
 %Having put in place these preparations, let's start working on the theorem. 
-Fix a cocycle $\alpha\in (N_{n}Q^{\calL(n)} L_\bullet)^*$. %We may assume without loss of generality (or are we \textbf{forced} to assume) that  $\alpha$ evaluates to zero... wait... wtf am I talking about?
-Then $\alpha$ may be viewed an a permanent cocycle at $E_2^{n,1}$ in the spectral sequence of $(\textbf{Q}_{\bullet*})^*$. We'll apply the chain-level Steenrod operation $S^k$ of [Singer ???], (which defines the Steenrod operation $\Sq^k$ on the cohomology of the total complex), to the class $r^*\alpha$. As $\alpha$ is a permanent cycle, $\delta(r^*\alpha)=0$, and
+Fix a cocycle $\alpha\in \dual(N_{n}Q^{\calL(n)} L_\bullet)$. %We may assume without loss of generality (or are we \textbf{forced} to assume) that  $\alpha$ evaluates to zero... wait... wtf am I talking about?
+Then $\alpha$ may be viewed an a permanent cocycle at $E_2^{n,1}$ in the spectral sequence of $\dual(\textbf{Q}_{\bullet*})$. We'll apply the chain-level Steenrod operation $S^k$ of [Singer ???], (which defines the Steenrod operation $\Sq^k$ on the cohomology of the total complex), to the class $r^*\alpha$. As $\alpha$ is a permanent cycle, $\delta(r^*\alpha)=0$, and
 %\[S^k(r^*\alpha):=\psi^*K^*_{n+1-k}\oldphi(r^*\alpha\otimes r^*\alpha)=T_1+T_2,\textup{ where}\]
 \begin{alignat*}{2}
 S^k(r^*\alpha):={}&\psi_{\textup{\textbf{B}}}^*K^*_{n+1-k}\oldphi(r^*\alpha\otimes r^*\alpha)=T_1+T_2,\textup{ where}
@@ -4662,19 +4663,19 @@ S^k(r^*\alpha):={}&\psi_{\textup{\textbf{B}}}^*K^*_{n+1-k}\oldphi(r^*\alpha\otim
 T_1
 ={}&
 \psi_{\textup{\textbf{B}}}^*(D^\textup{v}_0)^*(D^\textup{h}_{n+1-k})^*
-\oldphi(r^*\alpha\otimes r^*\alpha)\in (N^\textup{h}_{n+k-1}N^\textup{v}_2\textbf{B})^*%
+\oldphi(r^*\alpha\otimes r^*\alpha)\in \dual(N^\textup{h}_{n+k-1}N^\textup{v}_2\textbf{B})%
 \\
 T_2
 ={}&
 \psi_{\textup{\textbf{B}}}^*(D^\textup{v}_1)^*(TD^\textup{h}_{n-k}T)^*
-\oldphi(r^*\alpha\otimes r^*\alpha)\in (N^\textup{h}_{n+k}N^\textup{v}_1\textbf{B})^*
+\oldphi(r^*\alpha\otimes r^*\alpha)\in \dual(N^\textup{h}_{n+k}N^\textup{v}_1\textbf{B})
 \end{alignat*}
 %
 % $S^k(r^*\alpha)=\psi^*K^*_{n+1-k}\oldphi(r^*\alpha\otimes r^*\alpha)$, which has two terms:
 %\[\underbrace{\psi^*(D^\textup{v}_0)^*(D^\textup{h}_{n+1-k})^*\oldphi(r^*\alpha\otimes r^*\alpha)}_{\textup{$T_1$, filtration $n+k-1$}}+
 %\underbrace{\psi^*(D^\textup{v}_1)^*(TD^\textup{h}_{n-k}T)^*
 %\oldphi(r^*\alpha\otimes r^*\alpha)}_{\textup{$T_2$, filtration $n+k$}}\]
-Our method will be to compress each of these terms into filtration one higher, using the cochain homotopy $h^*:(N^\textup{h}_* N^\textup{v}_*\textbf{B})^*\to (N^\textup{h}_*N^\textup{v}_{*-1}\textbf{B})^*$
+Our method will be to compress each of these terms into filtration one higher, using the cochain homotopy $h^*:\dual(N^\textup{h}_* N^\textup{v}_*\textbf{B})\to \dual(N^\textup{h}_*N^\textup{v}_{*-1}\textbf{B})$
 Using lemma \ref{barConstNullHtpyLemma}:
 \[(\textup{Id}+\delta^\textup{v}h^*+ h^*\delta^\textup{v})T_1=0\textup{ and }(\textup{Id}+\delta^\textup{v}h^*+ h^*\delta^\textup{v})T_2=0.\]
 The first equation holds as $(\textup{Id}+hd^\textup{v}+d^\textup{v}h)$ is zero on $N^\textup{v}_2\textbf{B}$. For the second equation, on $N^\textup{v}_1\textbf{B}$,  $(\textup{Id}+hd^\textup{v}+d^\textup{v}h)$ is the projection onto terms of the form $[v]$, yet lemma \ref{secondCompositeLemma} shows that the composite
@@ -4697,7 +4698,7 @@ N_{n+k-1}^\textup{h}(Q^{\calL(n)} L \otimes Q^{\calL(n)} L )
 &
 N^\textup{h}_nQ^{\calL(n)} L \otimes N^\textup{h}_nQ^{\calL(n)} L 
 }\]
-Now $(N^\textup{h}_nQ^{\calL(n)} L \otimes N^\textup{h}_nQ^{\calL(n)} L )^*$ contains the cocycle $\oldphi(\alpha\otimes\alpha)$, and pulling $\oldphi(\alpha\otimes\alpha)$ back to $(N_{n+k}^\textup{h}N_1^\textup{v}\textbf{B})^*$ along the lower composite yields $r^*\psi_{\calL(n)}^*\ExtCohOp^{k-1}(\alpha)$. Pulling back along the upper composite yields the $E^2$ representative of the shifted version of Singer's operations. As $r^*$ is an $E^2$-equivalence, and the filtrations are trivial, this proves the result. A simple modification proves the result for pairings.
+Now $\dual(N^\textup{h}_nQ^{\calL(n)} L \otimes N^\textup{h}_nQ^{\calL(n)} L )$ contains the cocycle $\oldphi(\alpha\otimes\alpha)$, and pulling $\oldphi(\alpha\otimes\alpha)$ back to $\dual(N_{n+k}^\textup{h}N_1^\textup{v}\textbf{B})$ along the lower composite yields $r^*\psi_{\calL(n)}^*\ExtCohOp^{k-1}(\alpha)$. Pulling back along the upper composite yields the $E^2$ representative of the shifted version of Singer's operations. As $r^*$ is an $E^2$-equivalence, and the filtrations are trivial, this proves the result. A simple modification proves the result for pairings.
 \end{proof}
 
 \subsection{The Chevalley-Eilenberg-May complex}\label{The Chevalley-Eilenberg-May complex}
@@ -4707,11 +4708,11 @@ for homogeneous $y_i\in L$. We define $\UEAX(L)$ to be the subcoalgebra given by
 
 Now let $ L=B^{\calL(n)}L\in s\calL(n)$. Using the weak equivalence $\Delta\textbf{B}\to \overline{B}_\bullet(\UEA L)$ of simplicial coalgebras, and  May's injection \cite[Theorem 18 and  (7.8)]{MayRestLie.pdf} of $\UEAX(L)$ into the bar construction, there are maps (up to a zigzag):
 \[\UEAX(L)\to N_*\overline{B}_\bullet(U'L)\simeq\textup{Tot}(N^\textup{h}_*N^\textup{v}_*\textbf{B})\overset{r}{\to} \textup{Tot}(N^\textup{h}_*\textbf{Q}_{\bullet*})=\F_2\langle 1\rangle\oplus \Sigma N_*Q^{\calL(n)} L.\]
-Now the first map is a map of differential coalgebras, so that proposition \ref{the point of the appendix} implies that $\F_2\langle 1\rangle\oplus \Sigma H^*_{\calL(n)}L$ may be calculated, as an \emph{algebra}, by the differential graded algebra $(\UEAX(L))^*$, naturally defined as the quotient $(\UEAX(L))^*=E(L^*_{\textbf{0}}) \otimes\F_2[L_{\neq\textbf{0}}^*]$ of $\F_2[L^*]$.
+Now the first map is a map of differential coalgebras, so that proposition \ref{the point of the appendix} implies that $\F_2\langle 1\rangle\oplus \Sigma H^*_{\calL(n)}L$ may be calculated, as an \emph{algebra}, by the differential graded algebra $\dual(\UEAX(L))$, naturally defined as the quotient $\dual(\UEAX(L))=E(\dual L_{\textbf{0}}) \otimes\F_2[\dual L_{\neq\textbf{0}}]$ of $\F_2[\dual L]$.
 
-We're interested in the case that $L$ is \emph{trivial as a Lie algebra}, but may still have nonzero restriction. In this case, the restriction is in fact a \emph{linear} map, and we may write $\dualrestn{\DASH}:L^*\to L^*$ for its dual (a map which we consider to be everywhere defined, but necessarily equal to zero on $L_{\textbf{0}}$). Examination of  \cite[(6.19)]{MayRestLie.pdf} shows that:
+We're interested in the case that $L$ is \emph{trivial as a Lie algebra}, but may still have nonzero restriction. In this case, the restriction is in fact a \emph{linear} map, and we may write $\dualrestn{\DASH}:\dual L\to \dual L$ for its dual (a map which we consider to be everywhere defined, but necessarily equal to zero on $L_{\textbf{0}}$). Examination of  \cite[(6.19)]{MayRestLie.pdf} shows that:
 \begin{prop}
-If $L$ has bracket zero, then the differential on $(\UEAX(L))^*$ is defined on $\alpha\in L^*\subseteq (\UEAX(L))^*$ by the formula
+If $L$ has bracket zero, then the differential on $\dual(\UEAX(L))$ is defined on $\alpha\in \dual L\subseteq \dual(\UEAX(L))$ by the formula
 \[\alpha\longmapsto (\!\sqrt[{[2]}]{\alpha}\,)^2.\]
 
 \end{prop}
@@ -4737,7 +4738,7 @@ $F_?$ thought of as monads without further notation, %indecomposable, categories
 higher Eilenberg-Zilber maps, %never substituting out stars for gradings and
 having all gradings at the very right, tensor products of vector spaces,\ldots?
 \item Comment that we care about derived indecomposables, not AQ homology.
-\item choose a notation for the quadratic grading? like $\textup{qu}_2V^{*}_{***}$?
+\item choose a notation for the quadratic grading? like $\textup{qu}_2V^*_{***}$?
 \item Monadicity over vector spaces is important and should be emphasised, especially for the diagonal on the Blanc-Stover resolution.
 \item Maybe I should keep finiteness to myself, given that the SOA might be around, or even the W comonad.
 \item change all $\calW$'s to $\calK$'s?
@@ -4807,6 +4808,7 @@ having all gradings at the very right, tensor products of vector spaces,\ldots?
 \item probably want to make the big four algebras unital, so that they are easy to tensor with... 
 \item reassess every use of the phrase Hilton-Milnor
 \item the various steenrod algebras etc better be unital!
+\item Use cohomotopy of the dual!!!! it's classier.
 \end{enumerate}
 \end{todolist}
 \begin{bibliog}
