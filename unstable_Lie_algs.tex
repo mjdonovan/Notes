@@ -1,6 +1,6 @@
 % !TEX root = z_output/unstable_Lie_algs.tex
 \documentclass[11pt]{amsart}
-\newcommand{\IncludeAll}{}% <--
+%\newcommand{\IncludeAll}{}% <--
 \newcommand{\ShrinkPages}{}% <--
 \ifx\ShrinkPages\undefined\else\usepackage[paperheight=160mm,paperwidth=160mm]{geometry}\fi%220/160
 \usepackage{amsmath,amsthm,amssymb}
@@ -23,10 +23,11 @@
 \ifx\IncludeAll\undefined\else\renewcommand{\xclude}[1]{\nclude{#1}}\fi
 \xclude{Contents Page}
 \xclude{Intro}
-\xclude{Conventions and notation}
+\nclude{Conventions and notation}
 \xclude{CPiAlgs and CHalgs}
 \nclude{Constructing homotopy and cohomotopy operations}
-\xclude{External spectral sequence operations}
+\nclude{The Bousfield-Kan spectral sequence for simplicial algebras}
+\nclude{External spectral sequence operations}
 \xclude{Lie algebras in characteristic 2 and their homotopy operations}
 \xclude{Cohomology operations for all unstable Lie algebras}
 \xclude{Koszul complexes}
@@ -197,14 +198,14 @@
 %\newcommand{\frakw}{\mathfrak{w}}
 %\newcommand{\frake}{\mathfrak{e}}
 %\newcommand{\frakr}{\mathfrak{r}}
-%\newcommand{\frakt}{\mathfrak{t}}
+\newcommand{\frakt}{\mathfrak{t}}
 %\newcommand{\fraky}{\mathfrak{y}}
 %\newcommand{\fraku}{\mathfrak{u}}
 %\newcommand{\fraki}{\mathfrak{i}}
 %\newcommand{\frako}{\mathfrak{o}}
 %\newcommand{\frakp}{\mathfrak{p}}
 %\newcommand{\fraka}{\mathfrak{a}}
-%\newcommand{\fraks}{\mathfrak{s}}
+\newcommand{\fraks}{\mathfrak{s}}
 %\newcommand{\frakd}{\mathfrak{d}}
 %\newcommand{\frakf}{\mathfrak{f}}
 %\newcommand{\frakg}{\mathfrak{g}}
@@ -351,11 +352,10 @@ url=false,doi=false,isbn=false,eprint=false]{biblatex}%
 \newcommand{\LieSteen}{\calA}
 \newcommand{\aDT}{\textup{adm}_+(\Delta,T)}
 \newcommand{\aDTirr}{\textup{adm}_+^\textup{irr}(\Delta,T)}
-\newcommand{\Comm}{\calC}
 \newcommand{\F}{\mathbb{F}}
 \newcommand{\Id}{\textup{id}}
 \newcommand{\complexes}{\textup{ch}_+}
-\newcommand{\ALGS}{S(\CommOperad)}
+\newcommand{\algs}{\scrC\!\textit{om}}
 
 %\bibliography{papers}
 \bibliography{../../Dropbox/logbook/_LOGBOOK/papers}
@@ -557,13 +557,15 @@ In fact, let $\mathsf{PRL}$ denote the category whose objects are pairs of vecto
 
 
 \subsection{Non-unital commutative algebras}
-In this paper we will always work with \emph{non-unital} commutative algebras, unless we specify otherwise. As for Lie algebras, there are three different notions of non-unital commutative algebra available in characteristic 2. A \emph{commutative algebra} (or $\ALGS$-algebra) is a vector space $A$ equipped with an associative commutative pairing $A\otimes A\to A$. An \emph{exterior algebra} (or $\Lambda(\CommOperad)$-algebra) is a commutative algebra $A$ with the property that $x^2=0$ for all $x\in A$. A \emph{divided power algebra} (or $\Gamma(\CommOperad)$-algebra) is a commutative algebra $A$ equipped with \emph{divided power} operations, as described in \cite[1.2.2]{FresseSimplicialAlgs.pdf} or \cite[\S2]{MR1089001}. In characteristic 2, these operations are all determined by a single operation, the \emph{divided square} $\gamma_2:A\to A$, which satisfies
+In this paper we will always work with \emph{non-unital} commutative algebras, unless we specify otherwise (\textbf{do we ever?}). As for Lie algebras, there are three different notions of non-unital commutative algebra available in characteristic 2. A \emph{commutative algebra} (or $S(\CommOperad)$-algebra) is a vector space $A$ equipped with an associative commutative pairing $A\otimes A\to A$.  We will work with these often in this paper, and will write $\algs$ for the category of such algebras.
+
+An \emph{exterior algebra} (or $\Lambda(\CommOperad)$-algebra) is a commutative algebra $A$ with the property that $x^2=0$ for all $x\in A$. A \emph{divided power algebra} (or $\Gamma(\CommOperad)$-algebra) is a commutative algebra $A$ equipped with \emph{divided power} operations, as described in \cite[1.2.2]{FresseSimplicialAlgs.pdf} or \cite[\S2]{MR1089001}. In characteristic 2, these operations are all determined by a single operation, the \emph{divided square} $\gamma_2:A\to A$, which satisfies
 \[\gamma_2(xy)=x^2\gamma_2(y),\ \gamma_2(\lambda x)=\lambda^2\gamma_2(x)\textup{ and }\gamma_2(x+y)=\gamma_2(x)+\gamma_2(y)+xy.\]
-Note that the last condition implies that a divided power algebra is exterior. Thus, $\gamma_2(xy)=x^2\gamma_2(y)=0$.
+Note that the second condition is in fact extraneous over $\F_2$, and that the last condition implies that a divided power algebra is exterior. Thus, $\gamma_2(xy)=x^2\gamma_2(y)=0$.
 
 There is a notion of a \emph{divided power ideal} of a commutative algebra: an ideal $I$ of a commutative algebra $A$ equipped with a compatible divided power structure on $I$. In this case, $I$ is necessarily exterior, although for $x\in A$ and $y\in L$, $\gamma_2(xy)=x^2\gamma_2(y)$ need not be zero.
 
-Again, Fresse \cite{FresseSimplicialAlgs.pdf} explains how to construct the monads $S(\CommOperad)$, $\Lambda(\CommOperad)$ and $\Gamma(\CommOperad)$ on $\vect{}{}$ which give rise to these structures, using the commutative operad $\CommOperad$ instead of $\LieOperad$. Again, there is a quadratic grading definable on these three monads, and each monad is generated in degre 2, so that a commutative algebra may be thought of as a  map $S_2L\to L$, an exterior algebra as a map $\Lambda^2L\to L$, and a divided power algebra as a map $S^2L\to L$.
+Again, Fresse \cite{FresseSimplicialAlgs.pdf} explains how to construct the monads $S(\CommOperad)=F_{\algs}$, $\Lambda(\CommOperad)$ and $\Gamma(\CommOperad)$ on $\vect{}{}$ which give rise to these structures, using the commutative operad $\CommOperad$ instead of $\LieOperad$. Again, there is a quadratic grading definable on these three monads, and each monad is generated in degre 2, so that a commutative algebra may be thought of as a  map $S_2L\to L$, an exterior algebra as a map $\Lambda^2L\to L$, and a divided power algebra as a map $S^2L\to L$.
 
 
 
@@ -934,23 +936,23 @@ For $V\in\vect{}{}$, the diagonal map $\Delta:V\to V\oplus V$ of $V$ induces a `
 \[(F_\calC(\Delta)+i_1+i_2):F_\calC V\to (F_\calC V)^{\sqcup2}.\]
 This map evidently factors through $(F_\calC V)^{\wedge 2}$, and is symmetric. We name this factoring the \emph{cross terms}:
 \[\crossterms:F_\calC V\to (F_\calC V)\wedge^{\Sigma_2} (F_\calC V),\]
-as it measures the nonlinearity in an expression in $F_\calC V$. For example, when $\calC=\ALGS$, then for $v,w\in V$, using subscripts to denote membership of the first or second copy of $V$:
+as it measures the nonlinearity in an expression in $F_\calC V$. For example, when $\calC=\algs$, then for $v,w\in V$, using subscripts to denote membership of the first or second copy of $V$:
 \[\crossterms(vw)=(v_1+v_2)(w_1+w_2)+v_1w_1+v_2w_2=v_1w_2+w_1v_2.\]
 
 In each case of interest to us, we will give a map, natural and symmetric in $X_1,X_2\in\calC$,
 \[j_\calC:Q^\calC(X_1\wedge X_2)\to Q^\calC(X_1)\otimes Q^\calC(X_2),\]
 and we'll write $\quadratic_\calC$ for \emph{quadratic part} map, the composite
 \[\quadratic_\calC:\left(F_\calC V\overset{\crossterms}{\to}(F_\calC V)^{\wedge 2}\to Q^\calC((F_\calC V)\wedge^{\Sigma_2} (F_\calC V))\overset{j_\calC}{\to}S^2(Q_{\calc}F_{\calC}V)=S^2V\right).\]
-When $\calC=\ALGS$, the map $j_{\ALGS}$ is defined by $x_1x_2\mapsto x_1\otimes x_2$ when $x_i\in X_i$, and $\quadratic_{\ALGS}$ is the composite $F_{\ALGS} V\epi S_2V\overset{\trace}{\to}S^2V$, for example,  $\quadratic_{\ALGS}(u+vw+xy^2)$ evaluates as:
-\[j_{\ALGS}(v_1w_2+w_1v_2+x_1y_2^2+y_1^2x_2)=v\otimes w+w\otimes v+x\otimes y^2+y^2\otimes x,\]
-which equals $v\otimes w+w\otimes v$ %when evaluated in $S^2(Q^{\ALGS}F^{\ALGS}V)=S^2V$, 
+When $\calC=\algs$, the map $j_{\algs}$ is defined by $x_1x_2\mapsto x_1\otimes x_2$ when $x_i\in X_i$, and $\quadratic_{\algs}$ is the composite $F_{\algs} V\epi S_2V\overset{\trace}{\to}S^2V$, for example,  $\quadratic_{\algs}(u+vw+xy^2)$ evaluates as:
+\[j_{\algs}(v_1w_2+w_1v_2+x_1y_2^2+y_1^2x_2)=v\otimes w+w\otimes v+x\otimes y^2+y^2\otimes x,\]
+which equals $v\otimes w+w\otimes v$ %when evaluated in $S^2(Q^{\algs}F^{\algs}V)=S^2V$, 
 as hoped.
 
 In each category of interest to us, the following equation of maps $F_\calC F_\calC V\to S^2 V$ will always be satisfied:
 \[\quadratic_\calC\circ\mu_V=\quadratic_\calC\circ \epsilon_{F_\calC V} +\quadratic_\calC\circ {F_\calC \epsilon_V},\]
 where $\mu$ here stands for the multiplication map of the monad $U_\calC F_\calC $, which is to say that if  $f(g_i)$ is a $\calC$-expression in various $\calC$-expressions $g_i(v_{ij})$, we have 
 \[\quadratic(fg_i)(v_{ij})=\quadratic(f\epsilon(g_i))(v_{ij})+\epsilon(f)(\quadratic(g_i)(v_{ij})).\]
-This is another expression of homogeneity in the relations defining $\calC$. For an example when $\calC=\ALGS$, we specify an expression $f(g_1,g_2,g_3):=g_1g_2+g_3\in F_{\calc}F_{\calc}V$ in expressions $g_i:=v_{i1}v_{i2}+v_{i3}\in F_{\calc}V$ for each $i=1,2,3$. Then
+This is another expression of homogeneity in the relations defining $\calC$. For an example when $\calC=\algs$, we specify an expression $f(g_1,g_2,g_3):=g_1g_2+g_3\in F_{\calc}F_{\calc}V$ in expressions $g_i:=v_{i1}v_{i2}+v_{i3}\in F_{\calc}V$ for each $i=1,2,3$. Then
 \begin{alignat*}{2}
 \textup{\small$\quadratic(fg_i)(v_{ij})={}$}
 &
@@ -1130,7 +1132,7 @@ Finally, to extend the composite $\pi_*(\trace)\circ\widetilde{\nabla}_U$, we si
 \end{proof}
 
 \subsection{Homotopy operations for simplicial commutative algebras}\label{Homotopy operations for simplicial commutative algebras}
-Suppose that $A\in s \ALGS$ is a simplicial non-unital commutative algebra, with multiplication map $\mu:S_2A\to A$. Then by composition with the map $\pi_*(\mu):\pi_*(S_2A)\to \pi_*A$, one obtains unary operations:
+Suppose that $A\in s \algs$ is a simplicial non-unital commutative algebra, with multiplication map $\mu:S_2A\to A$. Then by composition with the map $\pi_*(\mu):\pi_*(S_2A)\to \pi_*A$, one obtains unary operations:
 \[\delta_i:=\pi_*(\mu)\circ\delta_i^\textup{ext}:\pi_nV\to \pi_{n+i}V,\textup{ defined when }2\leq i\leq n,\]
 and a pairing\[\mu:=\pi_*(\mu)\circ\widetilde{\nabla}:S_2(\pi_*V)\to \pi_{*}V.\]
 \begin{prop}[Dwyer {\cite{DwyerHtpyOpsSimpComAlg.pdf}}]\label{omnibus on htpy of simp algs}These operations have the following properties:
@@ -1181,31 +1183,31 @@ If $\produces{I}{J}{\deltaalg}$, then $\minDimDelta(I)\geq\minDimDelta(J)$.
 It is enough to show this result when $I$ and $J$ are disjoint and have length two, in light of the evident algorithm for expressing $\delta_I$ in terms of admissible composites. In the length two case it can be checked directly from the format of the $\delta$-Adem relation, and the inequality is in fact strict (unless $I$ is itself $\delta$-admissible).
 \end{proof}
 %\noindent Thus, even though $\pi_*$ is not a $\deltaalg$-module, any composite $\delta_I:\pi_nA\to \pi_mA$ that is defined may be written as a sum
-Finally, one should note that these operations generate all of the operations in the category $\ALGS\PiAlg$, and that all of the relations between the operations in $\ALGS\PiAlg$ are implied by those presented here. Goerss \cite[\S2]{MR1089001} presents this information as follows. First, he observes that there is a simple \emph{Hilton-Milnor theorem} available:
+Finally, one should note that these operations generate all of the operations in the category $\algs\PiAlg$, and that all of the relations between the operations in $\algs\PiAlg$ are implied by those presented here. Goerss \cite[\S2]{MR1089001} presents this information as follows. First, he observes that there is a simple \emph{Hilton-Milnor theorem} available:
 \begin{prop}
-Suppose that $A_1$ and $A_2$ are models in $s\ALGS$. Then $\pi_*(A_1\sqcup A_2)$, which is the coproduct of $\pi_*A_1$ and $\pi_*A_2$ in $\ALGS\PiAlg$, may be calculated as the non-unital commutative algebra coproduct of $\pi_*A_1$ and $\pi_*A_2$.
+Suppose that $A_1$ and $A_2$ are models in $s\algs$. Then $\pi_*(A_1\sqcup A_2)$, which is the coproduct of $\pi_*A_1$ and $\pi_*A_2$ in $\algs\PiAlg$, may be calculated as the non-unital commutative algebra coproduct of $\pi_*A_1$ and $\pi_*A_2$.
 \end{prop}
-%This may be read as a theorem about coproducts of free $\ALGS$-$\Pi$-algebras, since $\pi_*(A_1\sqcup A_2)$ is the coproduct in $\ALGS\PiAlg$ of $\pi_*(A_1)$ and $\pi_*(A_2)$, the theorem being that coproducts of free $\ALGS$-$\Pi$-algebras may be taken in the category $\ALGS$.
-\noindent Thus, after giving the calculation on a single sphere, the homotopy of finite models is determined, and thus the structure of $\ALGS\PiAlg$ is well understood:
+%This may be read as a theorem about coproducts of free $\algs$-$\Pi$-algebras, since $\pi_*(A_1\sqcup A_2)$ is the coproduct in $\algs\PiAlg$ of $\pi_*(A_1)$ and $\pi_*(A_2)$, the theorem being that coproducts of free $\algs$-$\Pi$-algebras may be taken in the category $\algs$.
+\noindent Thus, after giving the calculation on a single sphere, the homotopy of finite models is determined, and thus the structure of $\algs\PiAlg$ is well understood:
 \begin{prop}[{\cite[Proposition 2.7]{MR1089001}}]
-\noindent For $n\geq0$, let $\imath_n$ be the fundamental class in $\pi_n(\ALGS\mathbb{S}_n)$. There  are isomorphisms of non-unital commutative algebras:
+\noindent For $n\geq0$, let $\imath_n$ be the fundamental class in $\pi_n(F^{\algs}\mathbb{S}_n)$. There  are isomorphisms of non-unital commutative algebras:
 \begin{alignat*}{2}
-\pi_*(F^{\ALGS}\mathbb{S}_0)
+\pi_*(F^{\algs}\mathbb{S}_0)
 &\cong
-\ALGS[\imath_0];%
+S(\CommOperad)[\imath_0]=F^{\algs}[\imath_0];%
 \\
-\pi_*(F^{\ALGS}\mathbb{S}_n)
+\pi_*(F^{\algs}\mathbb{S}_n)
 &\cong
-\Lambda(\CommOperad)[\delta_I(\imath_n)\ |\ \textup{$J$ is $\Sq$-admissible, $e(I)\leq n$}]%
-&\ \ &\text{for $n\geq1$};\\
+\makebox[\widthof{$\Lambda$}][c]{$\Lambda$}(\CommOperad)[\delta_I(\imath_n)\ |\ \textup{$J$ is $\Sq$-admissible, $e(I)\leq n$}]%
+&\ \ &\makebox[\widthof{for $n\geq1$}][c]{for $n\geq1$;}\\
 % Left hand side
-\pi_*(F^{\ALGS}\mathbb{S}_n)
+\pi_*(F^{\algs}\mathbb{S}_n)
 % Relation
 &\cong
 % Right hand side
-\Gamma(\CommOperad)[\delta_I(\imath_n)\ |\ \textup{$J$ is $\Sq$-admissible, $e(I)< n$}]%
+\makebox[\widthof{$\Lambda$}][c]{$\Gamma$}(\CommOperad)[\delta_I(\imath_n)\ |\ \textup{$J$ is $\Sq$-admissible, $e(I)< n$}]%
 % Comment
-&\ \ &\text{for $n\geq2$.}
+&\ \ &\makebox[\widthof{for $n\geq1$}][c]{for $n\geq2$.}%\text{for $n\geq2$.}
 \end{alignat*}
 \end{prop}
 
@@ -1427,27 +1429,27 @@ Starting with an expression $f(v_i)$ with $v_i\in V_{s-1}$, we calculate $\theta
 
 
 \subsection{Cohomology operations for simplicial commutative $\F_2$-algebras}\label{The example of simplicial commutative F2-algebras}
-Goerss \cite[\S5]{MR1089001} defines cohomology operations, natural in $A\in s \ALGS$:
+Goerss \cite[\S5]{MR1089001} defines cohomology operations, natural in $A\in s \algs$:
 \begin{gather*}
-P^i=\psi^*_{\ALGS}\circ\ExtCohOp^i:H^n_{\ALGS}A\to H_{\ALGS}^{n+i+1}A;\textup{ and}\\
-[\,,]=\psi^*_{\ALGS}\circ\ExtCohProd :H_{\ALGS}^nA\otimes H_{\ALGS}^mA\to H_{\ALGS}^{n+m+1}A.
+P^i=\psi^*_{\algs}\circ\ExtCohOp^i:H^n_{\algs}A\to H_{\algs}^{n+i+1}A;\textup{ and}\\
+[\,,]=\psi^*_{\algs}\circ\ExtCohProd :H_{\algs}^nA\otimes H_{\algs}^mA\to H_{\algs}^{n+m+1}A.
 \end{gather*}
-He also defines a natural operation $\beta:H_{\ALGS}^0A\to H_{\ALGS}^1A$. Note that as a result of our use of $\psi^*_{\ALGS}$, these operations have a grading shift.
+He also defines a natural operation $\beta:H_{\algs}^0A\to H_{\algs}^1A$. Note that as a result of our use of $\psi^*_{\algs}$, these operations have a grading shift.
 \begin{prop}[{\cite[\S5]{MR1089001}}]\label{omnibus on coh of simp algs}These operations have the following properties:
 \begin{enumerate}
-\item the bracket gives $H^*_{\ALGS}A$ the structure of an $S(\LieOperad)$-algebra (with grading shift);
-\item the operation $\beta$ acts as a restriction defined only in dimension zero, so that for $x,y\in H^0_{\ALGS}A$ and $z\in H^*_{\ALGS}A$:
+\item the bracket gives $H^*_{\algs}A$ the structure of an $S(\LieOperad)$-algebra (with grading shift);
+\item the operation $\beta$ acts as a restriction defined only in dimension zero, so that for $x,y\in H^0_{\algs}A$ and $z\in H^*_{\algs}A$:
 \[\beta(x+y)=\beta(x)+\beta(y)=[x,y],\text{\ \ and \ }[\beta(x),z]=[x,[x,z]];\]
-\item the self-square operation on $H^*_{\ALGS}A$ equals the top $P$-operation:\[P^nx=[x,x]\text{\ \ for $x\in H^n_{\ALGS}A$};\]
-\item \label{P unstable vanishing} if $x\in H^n_{\ALGS}A$, then $P^ix=0$ unless $2\leq i\leq n$;
+\item the self-square operation on $H^*_{\algs}A$ equals the top $P$-operation:\[P^nx=[x,x]\text{\ \ for $x\in H^n_{\algs}A$};\]
+\item \label{P unstable vanishing} if $x\in H^n_{\algs}A$, then $P^ix=0$ unless $2\leq i\leq n$;
 \item every $P$-operation is linear;
-\item there holds the following \emph{Cartan formula}:  for all $x,y\in   H^n_{\ALGS}A$ and $i\geq0$,
+\item there holds the following \emph{Cartan formula}:  for all $x,y\in   H^n_{\algs}A$ and $i\geq0$,
 \[[x,P^iy]=0\]
 \item \label{yeah H is a Pmodule}the \emph{$P$-Adem relations} hold: if $i\geq 2j$, then
 \[P^iP^jx=\sum_{s=i-j+1}^{i+j-2}{2s-i-1\choose s-j}P^{i+j-s}P^sx.\]
 \end{enumerate}
 \end{prop}
-In this case, \emph{(\ref{yeah H is a Pmodule})} does state that $H^*_{\ALGS}A$ is a left module over $\Palg$, the \emph{Steenrod algebra for commutative algebras over $\F_2$}, the non-unital associative algebra generated by symbols $P^i$ for $i\geq0$, modulo the two sided ideal generated by $P^0$, $P^1$, and the evident \emph{$P$-Adem relations}.
+In this case, \emph{(\ref{yeah H is a Pmodule})} does state that $H^*_{\algs}A$ is a left module over $\Palg$, the \emph{Steenrod algebra for commutative algebras over $\F_2$}, the non-unital associative algebra generated by symbols $P^i$ for $i\geq0$, modulo the two sided ideal generated by $P^0$, $P^1$, and the evident \emph{$P$-Adem relations}.
 
 
 A sequence $I=(i_\ell,\ldots,i_1)$ of integers $i_j\geq2$ is \emph{$P$-admissible} if $i_{j+1}<2i_j$ for $1\leq j <\ell$. For any sequence $I=(i_\ell,\ldots,i_1)$, write $P^I$ for the composite $P^{i_\ell}\cdots P^{i_1}$. It follows from \cite[Theorem I]{MR1089001} that $\Palg$ has an \emph{admissible basis}, consisting of those $P^I=P^{i_\ell}\cdots P^{i_{1}}$ with $I$ a $P$-admissible sequence.  Again, we will say that \emph{$I$ produces $J$ in $\Palg$}, denoted $\produces{I}{J}{\Palg}$ if, when $P_I$ is written in the $P$-admissible basis of $\Palg$, $P_J$ appears with non-zero coefficient. In this case, $J$ must be $P$-admissible, and $I$ must be $P$-inadmissible unless $J=I$.
@@ -1455,11 +1457,11 @@ A sequence $I=(i_\ell,\ldots,i_1)$ of integers $i_j\geq2$ is \emph{$P$-admissibl
 We define
 \[\minDimP(I):=\max\{(i_1),\,(i_2-i_1-1),\,(i_3-i_2-i_1-2),\,\ldots,\,(i_{\ell}-\cdots-i_1-\ell+1)\},\]
 for a rather different purpose than in \S\ref{Homotopy operations for simplicial commutative algebras} and \S\ref{Homotopy operations for simplicial Lie algebras}: the composite 
-\[P^I:\bigl(H_{\ALGS}^{n}A\overset{P^{i_1}}{\to}H_{\ALGS}^{n+i_1+1}A\overset{P^{i_2}}{\to}\cdots \overset{P^{i_\ell}}{\to}H_{\ALGS}^{n+i_1+\cdots +i_\ell+\ell}A\bigr)\]
+\[P^I:\bigl(H_{\algs}^{n}A\overset{P^{i_1}}{\to}H_{\algs}^{n+i_1+1}A\overset{P^{i_2}}{\to}\cdots \overset{P^{i_\ell}}{\to}H_{\algs}^{n+i_1+\cdots +i_\ell+\ell}A\bigr)\]
 is \emph{forced to be zero} by \emph{(\ref{P unstable vanishing})} alone precisely when $n<\minDimDelta(I)$.
 
-As in \S\ref{Homotopy operations for simplicial commutative algebras} and \S\ref{Homotopy operations for simplicial Lie algebras}, if a non-empty sequence $I$  is \emph{$P$-admissible}, we can identify which term is largest in the maximum defining $\minDimP(I)$, namely $i_1$, so that $\minDimP(I)=i_1$. More explicitly, in a (non-vanishing) admissible expression $P^{i_\ell}\cdots P^{i_1}x$, for $x\in H^n_{\ALGS}A$, the only one of these $P$-operations that can be a top operation is $P^{i_{1}}$.
-%Unlike in \S\ref{Homotopy operations for simplicial commutative algebras} and \S\ref{Homotopy operations for simplicial Lie algebras}, having a non-empty sequence $I$  be \emph{$P$-admissible} does not allow us identify which term is largest in the maximum defining $\minDimP(I)$. More explicitly, in an admissible expression $P^{i_\ell}\cdots P^{i_1}x$, for $x\in H^n_{\ALGS}A$, top $P$-operations may be interspersed with non-top $P$-operations.
+As in \S\ref{Homotopy operations for simplicial commutative algebras} and \S\ref{Homotopy operations for simplicial Lie algebras}, if a non-empty sequence $I$  is \emph{$P$-admissible}, we can identify which term is largest in the maximum defining $\minDimP(I)$, namely $i_1$, so that $\minDimP(I)=i_1$. More explicitly, in a (non-vanishing) admissible expression $P^{i_\ell}\cdots P^{i_1}x$, for $x\in H^n_{\algs}A$, the only one of these $P$-operations that can be a top operation is $P^{i_{1}}$.
+%Unlike in \S\ref{Homotopy operations for simplicial commutative algebras} and \S\ref{Homotopy operations for simplicial Lie algebras}, having a non-empty sequence $I$  be \emph{$P$-admissible} does not allow us identify which term is largest in the maximum defining $\minDimP(I)$. More explicitly, in an admissible expression $P^{i_\ell}\cdots P^{i_1}x$, for $x\in H^n_{\algs}A$, top $P$-operations may be interspersed with non-top $P$-operations.
 
 
 %\begin{lem}\label{lemOnAdemChangeInMDeltaPlain}
@@ -1473,20 +1475,20 @@ The following result shows that whenever an expression $P^Jx$ is forced to be ze
 \begin{lem}\label{lemOnAdemChangeInMP}
 If $\produces{I}{J}{\Palg}$, then $\minDimP(J) \geq \minDimP(I)$, with strict inequality when $I$ and $J$ are distinct and of length two.
 \end{lem}
-The main theorem of Goerss' memoir is that these operations generate all of the operations in the category $\ALGS\HAlg$, and that all of the relations between the operations in $\ALGS\HAlg$ are implied by those presented here. In \cite[Chapter V]{MR1089001}, Goerss shows that the listed operations completely capture the cohomology of an object $K^{\ALGS}\mathbb{S}_n$. He proves a Hilton-Milnor theorem \cite{GoerssHiltonMilnor.pdf}, which he uses in \cite[\S11]{MR1089001} to bootstrap up to a calculation of the cohomology of any GEM in $s\ALGS$, namely \cite[Theorem I]{MR1089001}. The result states that whenever $V\in \vect{1}{}$,  is a finite-type vector space, not only is 
-$F^{\ALGS}V$
+The main theorem of Goerss' memoir is that these operations generate all of the operations in the category $\algs\HAlg$, and that all of the relations between the operations in $\algs\HAlg$ are implied by those presented here. In \cite[Chapter V]{MR1089001}, Goerss shows that the listed operations completely capture the cohomology of an object $K^{\algs}\mathbb{S}_n$. He proves a Hilton-Milnor theorem \cite{GoerssHiltonMilnor.pdf}, which he uses in \cite[\S11]{MR1089001} to bootstrap up to a calculation of the cohomology of any GEM in $s\algs$, namely \cite[Theorem I]{MR1089001}. The result states that whenever $V\in \vect{1}{}$,  is a finite-type vector space, not only is 
+$F^{\algs}V$
 generated by $V$ under the operations of proposition \ref{omnibus on coh of simp algs}, it is as large as is conceivable given the relations presented. We will present in proposition \ref{partialgoerss} a partial version of his result.
 
 It is  interesting to observe that $\Palg$, the Steenrod algebra for commutative algebras is
 in fact \emph{Koszul dual}, in the sense of \cite{PriddyKoszul.pdf}, to $\deltaalg$, the algebra which (almost) acts on the homotopy of a simplicial algebra. Indeed, Goerss \emph{calculates} $\Palg$ as the Koszul dual of $\deltaalg$, by means of calculations in a reverse Adams spectral sequence due to Miller \cite{MillerSullivanConjecture.pdf}. We will explore this relationship further when we consider the Adams spectral sequence.
 
-\subsection{Cohomology operations for connected objects in $s\ALGS$}
-Suppose that $A\in s\ALGS$. Then [??????] $H^0_{\ALGS}=0$ if and only if $\pi_*A=0$, and in either case, we say that $A$ is \emph{connected}. It is a little easier to work with the cohomology of connected objects, as we do not need to worry about the operation $\beta$. If we say that $V\in \vect{1}{}$ is \emph{connected} when $V^{0}=0$, we may identify the full subcategory of $\vect{1}{}$ on the connected objects with $\vect{+}{}$.
+\subsection{Cohomology operations for connected objects in $s\algs$}
+Suppose that $A\in s\algs$. Then [??????] $H^0_{\algs}=0$ if and only if $\pi_*A=0$, and in either case, we say that $A$ is \emph{connected}. It is a little easier to work with the cohomology of connected objects, as we do not need to worry about the operation $\beta$. If we say that $V\in \vect{1}{}$ is \emph{connected} when $V^{0}=0$, we may identify the full subcategory of $\vect{1}{}$ on the connected objects with $\vect{+}{}$.
 
 Goerss' result proves that the monad
-$F^{\ALGS\HAlg}$ on $\vect{1}{}$
+$F^{\algs\HAlg}$ on $\vect{1}{}$
 preserves $\vect{+}{}$ (and indeed it is a general fact that no non-trivial natural cohomology operations decrease dimension).
-We will write $\calW(0)$ for the category of connected $\ALGS$-$H^*$-algebras, so that the monad $F_{\calW(0)}$ on $\vect{+}{}$ is simply the restriction of $F^{\ALGS\HAlg}$. The way that we will report Goerss' result here is to explain how the monad $F_{\calW(0)}$ may be constructed on objects of $\vect{+}{}$ of finite type.
+We will write $\calW(0)$ for the category of connected $\algs$-$H^*$-algebras, so that the monad $F_{\calW(0)}$ on $\vect{+}{}$ is simply the restriction of $F^{\algs\HAlg}$. The way that we will report Goerss' result here is to explain how the monad $F_{\calW(0)}$ may be constructed on objects of $\vect{+}{}$ of finite type.
 
 Let the \emph{category of unstable $\Palg$-modules}, denoted $\calU(0)$, be the category whose objects are $\vect{+}{0}$-graded $\Palg$-modules in which $P^i$ acts with grading $i+1$, and such that $P^i:V^n\to V^{n+i+1}$ is zero unless $i\leq n$. Recall that  we have \emph{already} imposed the $P$-Adem relations and set $P^0$ and $P^1$ to be zero in $\Palg$. 
 \begin{prop}
@@ -1530,13 +1532,13 @@ Suppose that one chose a homogeneous basis of $V$, constructed from it a monomia
 %
 %\begin{prop}[{\cite[\S5]{MR1089001}}]\label{omnibus on coh of simp algs}These operations have the following properties:
 %\begin{enumerate}
-%\item the bracket gives $H^*_{\ALGS}A$ the structure of an $S(\LieOperad)$-algebra (with grading shift);
-%\item the operation $\beta$ acts as a restriction defined only in dimension zero, so that for $x,y\in H^0_{\ALGS}A$ and $z\in H^*_{\ALGS}A$:
+%\item the bracket gives $H^*_{\algs}A$ the structure of an $S(\LieOperad)$-algebra (with grading shift);
+%\item the operation $\beta$ acts as a restriction defined only in dimension zero, so that for $x,y\in H^0_{\algs}A$ and $z\in H^*_{\algs}A$:
 %\[\beta(x+y)=\beta(x)+\beta(y)=[x,y],\text{\ \ and \ }[\beta(x),z]=[x,[x,z]];\]
-%\item the self-square operation on $H^*_{\ALGS}A$ equals the top $P$-operation:\[P^nx=[x,x]\text{\ \ for $x\in H^n_{\ALGS}A$};\]
-%\item \label{P unstable vanishing} if $x\in H^n_{\ALGS}A$, then $P^ix=0$ unless $2\leq i\leq n$;
+%\item the self-square operation on $H^*_{\algs}A$ equals the top $P$-operation:\[P^nx=[x,x]\text{\ \ for $x\in H^n_{\algs}A$};\]
+%\item \label{P unstable vanishing} if $x\in H^n_{\algs}A$, then $P^ix=0$ unless $2\leq i\leq n$;
 %\item every $P$-operation is linear;
-%\item there holds the following \emph{Cartan formula}:  for all $x,y\in   H^n_{\ALGS}A$ and $i\geq0$,
+%\item there holds the following \emph{Cartan formula}:  for all $x,y\in   H^n_{\algs}A$ and $i\geq0$,
 %\[[x,P^iy]=0\]
 %\item \label{yeah H is a Pmodule}the \emph{$P$-Adem relations} hold: if $i\geq 2j$, then
 %\[P^iP^jx=\sum_{s=i-j+1}^{i+j-2}{2s-i-1\choose s-j}P^{i+j-s}P^sx.\]
@@ -1558,7 +1560,7 @@ Suppose that one chose a homogeneous basis of $V$, constructed from it a monomia
 %\[P^iP^j=\sum_{s=i-j+1}^{i+j-2}{2s-i-1\choose s-j}P^{i+j-s}P^s\textup{ whenever $i\geq 2j$.}\]
 %\end{enumerate}
 %\end{enumerate}
-%Then Goerss's results \cite[Theorem H]{MR1089001}, restricted to the full subcategory of connected objects in $s\ALGS$ (i.e.\ objects $A$ with $\pi_0A=0$, or equivalently $H^0_{\ALGS}A=0$), state that the operations $[\,,]$ and $P^i$ give $H^*A$ the structure of an element of $\calW(0)$, and moreover, that these are the only natural operations on the cohomology of connected objects of $s\ALGS$ \cite[Theorem I]{MR1089001}. That is, Goerss shows that the above relations are satisfied by the operations defined, and then calculates the cohomology of an abelian object in $s\ALGS$; neither of these two steps is straightforward.
+%Then Goerss's results \cite[Theorem H]{MR1089001}, restricted to the full subcategory of connected objects in $s\algs$ (i.e.\ objects $A$ with $\pi_0A=0$, or equivalently $H^0_{\algs}A=0$), state that the operations $[\,,]$ and $P^i$ give $H^*A$ the structure of an element of $\calW(0)$, and moreover, that these are the only natural operations on the cohomology of connected objects of $s\algs$ \cite[Theorem I]{MR1089001}. That is, Goerss shows that the above relations are satisfied by the operations defined, and then calculates the cohomology of an abelian object in $s\algs$; neither of these two steps is straightforward.
 %
 %\textbf{used:}[Let $\calU(0)$ be the category whose objects are $\vect{+}{0}$-graded vector spaces $V$ equipped with linear left $P$-operations $P^i:V^n\to V^{n+i+1}$, which are zero unless  $2\leq i\leq n$, and satisfy the $P$-Adem relation as above.]
 %
@@ -1612,24 +1614,468 @@ One checks that the bracket is well defined in the quotient, and that taking the
 
 
 \end{Constructing homotopy and cohomotopy operations}
+\begin{The Bousfield-Kan spectral sequence for simplicial algebras}
+\section{The Bousfield-Kan spectral sequence for simplicial algebras}
+
+\hfil
+
+\end{The Bousfield-Kan spectral sequence for simplicial algebras}
 
 
 \begin{External spectral sequence operations}
 \section{\textbf{External spectral sequence operations}}
+In what follows, we will always refer to the filtration degree as the \emph{horizontal direction}, and the internal degree as the \emph{vertical direction.}
 
-[\textbf{move me} to appropriate part of spectral sequence section:] {\tiny It is not a natural convention to regard $\DeltaUp^k$ as zero where it is not defined, however, we will perform this abuse shortly for notational convenience. Under this convention we will be able to use the equation
+Mention the work of Turner; of Hackney [1101.3798v3], using universal examples as in Bousfields'  original stuff.
+
+\newcommand{\E}[5]{[E^{#1}_{#2}#3]^{#4}_{#5}}
+\newcommand{\uver}{^\textup{v}}
+\newcommand{\uhor}{^\textup{h}}
+\newcommand{\dver}{_\textup{v}}
+\newcommand{\dhor}{_\textup{h}}
+\newcommand{\diag}{\Delta}
+Conventions: we will always write $\E{r}{}{V}{}{}$ for a homological or homotopical spectral sequence and $\E{}{r}{V}{}{}$ for a cohomological one.
+
+Given a bisimplicial vector space $V_{s,t}$, we obtain a double chain complex $N_sN_tV$. There is a first quadrant homotopy spectral sequence $\E{r}{}{V}{}{s,t}$, with $\E{2}{}{V}{}{s,t}=\pi\uhor_s\pi\uver_tV$, converging to $\pi_{s+t}(\diag V)$.
+There is a first quadrant cohomotopy spectral sequence $\E{}{r}{V}{s,t}{}$, with $\E{}{2}{V}{s,t}{}=(\pi\uhor_s\pi\uver_tV)^*$, converging to $(\pi_{s+t}(\diag V))^*$.
+
+Given a cosimplicial simplicial vector space  $V_{s,t}$, we obtain a mixed chain complex $N^sN_tV$.\\
+There is a second quadrant homotopy spectral sequence $\E{r}{}{V}{s}{t}$, with $\E{2}{}{V}{s}{t}=\pi\dhor^s\pi\uver_tV$, which will sometimes converge to $\pi_{t-s}\Tot V$.
+
+\hfil
+
+\noindent first quadrant homotopy --- Stover's van Kampen\\
+first quadrant cohomology --- Serre sseq, our GSSeqs\\
+second quadrant homotopy --- Adams or Bousfield-Kan spectral sequences\\
+second quadrant cohomology --- Dwyer's work Eilenberg-Moore
+
+
+\subsection{On first quadrant cohomology spectral sequences}
+
+[\textbf{This whole subsection needs} to have its notation brought into line with the rest of the document. We \textbf{also need} to mention $S^k$ somewhere, and discuss the external operations at $E_2$!] In what follows, we'll need to use Singer's techniques for deriving operations in spectral sequences. Singer defines operations in the cohomology spectral sequence of a bisimplicial cocommutative coalgebra. While the comultiplicative structure that we can define on the resolution $Q^{\calL(n)}\BSWres L$ is not that of a coalgebra, we can still use his techniques after a single simple observation. That is, for every bisimplicial vector space $V$, if we write $E_r^{**}(V)$ for the cohomology spectral sequence obtained from the double cochain complex $(N_*N_*V)^*$, then Singer's methods yield external operations of type:
+\[E_r^{**}(V)\to E_{r'}^{**}(S^2V)\textup{ and }E_r^{**}(V)\otimes E_r^{**}(V)\to E_r^{**}(S^2V),\]
+which will be compatible with external operations of type:
+\[H^{*}((CV)^*)\to H^{*}((CS^2V)^*)\textup{ and }H^{*}((CV)^*)\otimes H^{*}((CV)^*)\to H^{*}((CS^2V)^*).\]
+
+When $V$ is a cocommutative coalgebra, the diagonal map $V\to S^2V$ induces a map $E_r^{**}(S^2V)\to E_r^{**}(V)$, postcomposition with which yields Singer's operations, however we will not have access to such structure in what follows. Thus, we will briefly reprise Singer's results in this \emph{external} language, in order that we have them available.
+\begin{thm}[Singer's Book, thm 2.15-2.17,2.22]
+For all $p,q\geq0$ and all $r\geq2$, there are well-defined vector space homomorphisms:
+\begin{alignat*}{2}
+\ExtCohOp^k:E^{p,q}_r(V)&\to E^{p,q+k}_r(S^2V)&\qquad&\text{if }0\leq k \leq q,\\
+\ExtCohOp^k:E^{p,q}_r(V)&\to E^{p+k-q,2q}_{r+k-q}(S^2V)&\qquad&\text{if }q\leq k\leq q+r-2,\\
+\ExtCohOp^k:E^{p,q}_r(V)&\to E^{p+k-q,2q}_{2r-2}(S^2V)&\qquad&\text{if }q+r-2\leq k.
+\end{alignat*}
+The operations $\ExtCohOp^k$ are all defined at $E_2$, and determine the operations at each $E_r$, $r>2$. The operations $\ExtCohOp^k$ commute with differentials. Finally, the $\ExtCohOp^k$ converge to well defined maps on $E_\infty$, and there is a commuting diagram
+\[\xymatrix@R=4mm{
+E^{p,q}_\infty(V)\ar[r]^-{\ExtCohOp^k}\ar[d]^-{\pi}
+&%r1c1
+E^{p,q+k}_\infty(S^2V)\ar[d]^-{\pi}
+\\%r1c2
+E_0^{p,q}H^*((CV)^*)\ar[r]^-{\ExtCohOp^k}&%r2c1
+E_0^{p,q+k}H^*((CS^2V)^*)%r2c2
+}\]
+whenever $0\leq k\leq q$, and a commuting diagram
+\[\xymatrix@R=4mm{
+E^{p,q}_\infty(V)\ar[r]^-{\ExtCohOp^k}\ar[d]^-{\pi}
+&%r1c1
+E^{p+k-q,2q}_\infty(S^2V)\ar[d]^-{\pi}
+\\%r1c2
+E_0^{p,q}H^*((CV)^*)\ar[r]^-{\ExtCohOp^k}&%r2c1
+E_0^{p+k-q,2q}H^*((CS^2V)^*)%r2c2
+}\]
+whenever $q\leq k$ (which summarises also Singer's computation of how the $\ExtCohOp^k$ interact with the filtration on cohomology).
+
+Similar theory holds for an exterior product operation
+\[\ExtCohProd:E_r^{p_1,q_1}(V)\otimes E_r^{p_2,q_2}(V)\to E_r^{p_1+p_2,q_1+p_2}(S^2V)\]
+%Moreover, for $r\geq2$ and $p,q,k\geq0$ given, if $\alpha\in E_r^{p,q}$, then $\Sq_\textup{ext}^k\alpha$ and $\Sq_\textup{ext}^kd_r\alpha$ both survive to $E_t$, where
+%\[t=\begin{cases}
+%r,&\textup{if }0\leq k \leq q-r+1;\\
+%2r+k-q-1,&\textup{if }q-r+1\leq k\leq q;
+%\\2r-1,&\textup{if }q\leq k,
+%\end{cases}
+%\]
+%and in $E_t$ we have the relation $d_t\Sq^k_textup{ext}\alpha=\Sq^k_textup{ext}d_r\alpha$.
+\end{thm}
+Moreover, if the bisimplicial object $V$ admits an augmentation $\lambda:V_{0\bullet}\to U_{\bullet}$, (\textbf{didn't I} do away with $\bullet$?) then %such that the natural map $\lambda_*:CV\to CU$ is a weak equivalence,
+Singer proves the following relationship between the spectral sequence operations and the operations of \S\ref{generic coh ops section}:
+\begin{thm}[Proposition 2.1]
+The $\ExtCohOp^k$ and $\ExtCohProd$ commute with $\lambda^*$, so that there are commuting diagrams
+\[\xymatrix@R=4mm{
+H^{m}((CU)^*)\ar[r]^-{\ExtCohOp^k}
+\ar[d]^-{\lambda^*}
+&%r1c1
+H^{m+k}((CS^2U)^*)\ar[d]^-{(S^2\lambda)^*}
+&%r1c3
+H^{m_1}((CU)^*)\otimes H^{m_2}((CU)^*)\ar[r]^-{\ExtCohProd}
+\ar[d]^-{\lambda^*}
+&%r1c1
+H^{m_1+m_2}((CS^2U)^*)\ar[d]^-{(S^2\lambda)^*}
+\\%r1c5
+H^{m}((CV)^*)\ar[r]^-{\ExtCohOp^k}
+&%r2c1
+H^{m+k}((CS^2V)^*)
+&%r2c3
+H^{m_1}((CV)^*)\otimes H^{m_2}((CV)^*)\ar[r]^-{\ExtCohProd}
+&%r2c1
+H^{m_1+m_2}((CS^2V)^*)
+}\]
+\end{thm}
+
+Singer separates the operations $\ExtCohOp^k:E^{p,q}_2\to E_{2}$ according to the pattern of change in the spectral sequence coordinates of their output. Indeed, he defines
+\begin{alignat*}{2}
+\vExtCohOp^k=\ExtCohOp^k:E^{p,q}_2(V)&\to E^{p,q+k}_2(S^2V)&\qquad&\text{if }0\leq k \leq q,\\
+\hExtCohOp^k=\ExtCohOp^{q+k}:E^{p,q}_2(V)&\to E^{p+k,2q}_2(S^2V)&\qquad&\text{if }0\leq k \leq p,
+\end{alignat*}
+and gives explicit formulae for these $E_2$ operations, and for the product at $E_2$ [Singer 2.23].
+
+\subsection{On second quadrant cohomology spectral sequences}
+
+\hfil
+
+\subsection{On second quadrant homotopy spectral sequences}
+
+We produce, for $X$ a cosimplicial simplicial vector space, an external commutative pairing
+\[\times^\textup{ext}:(E^rX)^s_{t}\otimes (E^rX)_{t'}^{s'}\to (E^r(S_2X))^{s+s'}_{t+t'}\]
+and further operations:
+\[\delta_i^\textup{ext}:(E^rX)^s_{t}\to (E^r(S_2X))^{s}_{t+i}\textup{\qquad (defined only when $2\leq i<t-(r-2)$)}\]
+\[\Sq^j_\textup{ext}:(E^rX)^s_{t}\to (E^r(S_2X))^{s+j}_{2t}\textup{\qquad (defined up to indeterminacy)}\]
+Of course, if $X$ is a mixed simplicial algebra, then postcomposition with the product $X\otimes_{\Sigma_2}X\to X$ produces internal operations on the spectral sequence of $[E^rX]$. The resulting theory lives opposite Bill Dwyer's theory [?] of operations in the spectral sequence of a cosimplicial simplicial coalgebra. The two theories are not equivalent --- although linear dualisation interchanges (finite type) algebras and coalgebras, the symmetry is broken by the choice of filtration direction. The operations $\times^\textup{raw}$, $\delta_i^\textup{raw}$ and $\Sq^j_\textup{raw}$ may be of independent interest, and we will summarise their theory without proofs in theorem XYZ.
+
+In the present context, however, the operations of theorem XYZ are all equal to zero on $E^2$, simply because the Bousfield-Kan spectral sequence is derived from a cosimplicial object which is levelwise an Eilenberg-Mac Lane object. However, we will be able to use the external operations in section XYZ, shifting them one filtration higher in order to obtain nontrivial operations at on the Bousfield-Kan $E^2$.
+
+\subsection{Higher cosimplicial Eilenberg-Zilber map}
+Let $\{D^k\}$ be a special cosimplicial Eilenberg-Zilber map \cite[5.2]{turner_opns_and_sseqs_I.pdf}, i.e.\  maps
+\[D^k:(CR\otimes CS)_{-i-k}\to N(R\otimes S)_{-i}\textup{\ \ for $i,k\geq0$},\]
+natural in cosimplicial vectorspaces $R,S$,
+with the properties:
+\begin{itemize}
+\setlength{\parindent}{.25in}
+\item $dD^k+D^kd=D^{k-1}+TD^{k-1}T$ for $k\geq1$;
+\item $D^0$ is a chain homotopy equivalence inducing the identity in dimension zero;
+\item the restriction of $D^k$ to $C_{-i}R\otimes C_{-j}S$ is zero unless $i\geq k$ and $j\geq k$; and
+\item $D^k$ maps $C_{-k}R\otimes C_{-k}S$ identically onto $C_{-k}(R\otimes S)$.
+\end{itemize}
+It is a natural convention to define $D^k=0$ for whenever either $k<0$ or $i<0$, in which case the relation $dD^k+D^kd=D^{k-1}+TD^{k-1}T$ holds for any $k$.
+\subsection{Higher simplicial Eilenberg-Mac Lane map}
+Let $\{\Delta_k\}$ be a higher simplicial Eilenberg-Mac Lane map \cite[\S3]{DwyerHtpyOpsSimpComAlg.pdf}, i.e.\ maps
+\[\Delta_k:(CU\otimes CV)_{i+k}\to N(U\otimes V)_i\textup{\ \ for $0\leq k\leq i$}\]
+such that the identities
+\[\Delta_k+T\Delta_kT=\phi_k+\begin{cases}
+\Delta_{k-1}\partial+\partial\Delta_{k-1},&\textup{if }k\geq1;\\
+\Delta,&\textup{if }k=0.
+%\\,&\textup{if }
+\end{cases}
+\]
+hold on classes of dimension at least $2k$, and:
+\begin{itemize}
+\setlength{\parindent}{.25in}
+\item $\Delta:CU\otimes CV\to N(U\times V)$ is a chain homotopy equivalence inducing the identity in dimension zero; and
+\item $\phi_k$ is the map $(CU\otimes CV)_{i+k}\to N(U\otimes V)_i$ which vanishes except on $U_k\otimes V_k$, where its value is just the projection $U_k\otimes V_k\to N(U\times V)_k$.
+\end{itemize}
+Note that $\phi$ commutes with symmetry isomorphisms, and thus so must $\Delta$.
+
+It is not a natural convention to regard $\Delta_k$ as zero where it is not defined, however, we will perform this abuse shortly for notational convenience. Under this convention we will be able to use the equation
+\[(d\Delta_k+\Delta_kd)z=(\phi_{k+1} +\Delta_{k+1}+T\Delta_{k+1}T)z\]
+whenever $k\geq0$ and the simplicial dimension of $z$ does not equal either of $2k$ and $2k+1$.
+
+\subsubsection*{Resulting maps of mixed simplicial vectorspaces}
+For mixed simplicial vector spaces $X$ and $Y$, write $C(X\otimes_\textup{v}Y)$ for the double complex which in degree $(\fraks,\frakt)$ equals the direct sum $\bigoplus_{t+t'=\frakt}X_t^\fraks\otimes X_{t'}^\fraks$. The following vectorspace maps are given by prolonging $D^k$, $\Delta$, $\Delta_k$ and $\psi_k$, wherever these maps are defined, and by zero elsewhere:
+\begin{align*}
+{D}^k:(CX\otimes CY)_{-\fraks-k,\frakt}&\to C(X\otimes_\textup{v}Y)_{-\fraks,\frakt}&\quad&\textup{(zero unless $k\leq \fraks$)}\\
+{\Delta}:C(X\otimes_\textup{v} Y)_{-\fraks,\frakt}&\to C(X\otimes Y)_{-\fraks,\frakt}\\
+{\Delta}_k:C(X\otimes_\textup{v} Y)_{-\fraks,\frakt+k}&\to C(X\otimes Y)_{-\fraks,\frakt}&\quad&\textup{(zero unless $0\leq k\leq \frakt$)}\\
+{\phi}_k:C(X\otimes_\textup{v} Y)_{-\fraks,\frakt+k}&\to C(X\otimes Y)_{-\fraks,\frakt}&\quad&\textup{(zero unless $0\leq k\leq \frakt$)}\\
+{\rho}:C(X\otimes X)_{-\fraks,\frakt}&\to C(X\otimes_{\Sigma_2} X)_{-\fraks,\frakt}&\quad&\textup{(proj onto coinvariants)}
+\end{align*}
+Also, we'll always write $T$ for symmetry isomorphisms, and write ``$\twist F$'' as shorthand for the function $TFT$. Although this notation is potentially ambiguous, whenever we write $\sigma FG$, for functions $F$ and $G$, we mean $(\sigma F)G$, not $\sigma(FG)$.
+
+\subsubsection*{The context}
+Let $X$ be a mixed simplicial commutative non-unital $\F_2$-algebra. I'd prefer to construct spectral sequence operations externally, as maps $E^r_{-s,t}(X)\to E^r_{?,?}(X\otimes_{\Sigma_2}X)$, which may sometimes be multivalued. I'll also assume that $X$ admits a coaugmentation $X^{-1}_\bullet\to X^\bullet_\bullet$ from a simplicial algebra $X^{-1}_\bullet$, and that this coaugmentation induces an isomorphism on total homology.
+
+\subsection{Products and Steenrod operations}
+We will define the external product
+\[\times^\textup{ext}:E^r_{-st}(X)\otimes E^r_{-s't'}(X)\to E^r_{-s-s',t+t'}(S_2X)\]
+using the chain-level formula
+\[x\otimes y\mapsto\rho\Delta D^0(x\otimes y).\]
+As both $\Delta$ and $D^0$ are chain maps preserving filtration, the operations $\times^\textup{ext}$ satisfy a Liebnitz formula.
+\begin{prop}
+Suppose that $x\in E^r_{-s,t}(X)$ is a permanent cycle such that $t-s>0$. Then $x\times x$ is eventually hit by a differential. That is, $x\times x\in E^r_{-2s,2t}(X\otimes_{\Sigma_2}X)$ is a permanent cycle which represents zero on $E^\infty$.
+\end{prop}
+\begin{proof}
+Since the spectral sequence converges, $x$ can be written as $x^0+dy$ for $x^0\in NX_{0,n}$ such that $dx^0=0$ and $y\in NX_{n+1}$. Now $x\times x$ is represented by
+\[\rho\Delta D^0(x^0\otimes x^0)+\rho\Delta D^0(dy\otimes x^0+x^0\otimes dy+dy\otimes dy).\]
+Now the first term here vanishes, as
+\[\rho\Delta D^0(x^0\otimes x^0)=\rho(\phi_0 D^0(x^0\otimes x^0)+\Delta_0 D^0(x^0\otimes x^0)+\Delta_0 TD^0(x^0\otimes x^0)),\]
+and $\phi_0D^0(x^0\otimes x^0)=0$ as $n>0$, and $TD^0(x^0\otimes x^0)=D^0(x^0\otimes x^0)$ since $\{D^k\}$ is special. The remaining term may be expressed as the boundary
+\[d(\rho\Delta(D^0(y\otimes dy)+D^1(dy\otimes x))).\qedhere\]
+\end{proof}
+
+In this case, the Steenrod operations are the `surprising' operations, and they are easy to define. We will use the chain-level formula:
+\[\textup{SQ}^{i,s}:x\mapsto \rho\Delta (D^{s-i}(x\otimes x)+D^{s-i+1}(x\otimes dx)).\]
+\begin{prop}
+For any chosen $i,s\geq0$ and $r\geq2$, the chain level operation $\textup{SQ}^{i,s}$ defines a Steenrod operation $\Sq^i_\textup{ext}:E^r_{-s,t}(X)\to E^r_{-s-i,2t}(S_2X)$, with indeterminacy vanishing by $E^{2r-2}$. For $x\in E^r_{-s,t}(X)$, $\Sq^i_\textup{ext}(x)$ survives to $E^{2r-1}$, and moreover, $d_{2r-1}(\Sq^i_\textup{ext}x)=\Sq^{i+r-1}_\textup{ext}(d_rx)$ modulo indeterminacy. The top operation, $\Sq^s_\textup{ext}(x)$, is equal to the product-square $x\times^\textup{ext} x$, and $\Sq^i_\textup{ext}(x)=0$ for $i>s$. The bottom operation, $\Sq^0_\textup{ext}(x)$, is zero whenever $t>0$, and $\Sq^1_\textup{ext}(x)=0$ for all $t$. If $X$ is a mixed simplicial algebra, postcomposition with the product $S_2X\to X$ yields the same squares at $E^2$ as those arising from the fact that $E^2$ is the cohomotopy of a cosimplicial algebra.
+\end{prop}
+\begin{proof}
+A calculation shows that $d(\textup{SQ}^{i,s}(x))=\rho\Delta D^{s-i+1}(dx\otimes dx)$, so that if $x\in Z^r_{-s,t}$, $\textup{SQ}^{i,s}(x)\in Z^{2r-1}_{-s-i,2t}$. This demonstrates the survival property, along with the formula commuting the $\Sq^i_\textup{ext}$ with spectral sequence differentials.
+
+To examine the indeterminacy, $x\in E^r_{-s,t}$ is determined up to boundaries of $y\in Z^{r-1}_{-(s-r+1),t-r+2}$, and the following equation%footnote:
+\footnote{Here's how to prove said equation, using analogues of \cite[(1.111),(1.112)]{MR2245560}:
+\begin{alignat*}{2}
+\textup{RHS}
+&=
+d\rho\Delta [D^{s-i-1}(y\otimes y)+D^{s-i}(y\otimes dy)+D^{s-i+1}(dy\otimes x)]%
+\\
+&=
+\rho\Delta [D^{s-i-1}(dy\otimes y+y\otimes dy)+D^{s-i}(dy\otimes dy)+D^{s-i+1}(dy\otimes dx)]%
+\\
+&\ \ \ +
+\rho\Delta [0+D^{s-i-1}(y\otimes dy+dy\otimes y)+D^{s-i}(dy\otimes x+x\otimes dy)]%
+\\
+&=
+\rho\Delta [D^{s-i}(dy\otimes x+x\otimes dy+dy\otimes dy)
++D^{s-i+1}(dy\otimes dx)]=\textup{LHS}%
+\end{alignat*}} shows how this affects $\Sq^{i}_\textup{ext}$:
+\[\textup{SQ}^{i,s}(x)-\textup{SQ}^{i,s}(x+dy)=d\rho\Delta [D^{s-i-1}(y\otimes y)+D^{s-i}(y\otimes dy)+D^{s-i+1}(dy\otimes x)].\]
+The filtration of this bounding chain is at least $2(s-r+1)-(s-i-1)=(s+i)-(2r-3)$, so that $\Sq^i$ has indeterminacy vanishing by $E^{2r-2}$.
+
+For the statement about the top operation, one calculates
+\[\textup{SQ}^{s,s}(x)-\rho\Delta D^0(x\otimes x)=\rho D^{1}(x\otimes dx)\in F_{2s+r-1}.\]
+For the statement about $\Sq^0(x)$:
+\[\textup{SQ}^{0,s}(x)-\rho\Delta D^s(x\otimes x)=\rho D^{s+1}(x\otimes dx)\in F_{s+r-1},\]
+so that (using the fact that $\{D^k\}$ is special):
+\begin{alignat*}{2}
+\textup{SQ}^{0,s}(x)
+&\equiv
+\rho\Delta D^s(x^s_t\otimes x^s_t)\pmod{F_{s+r-1}}%
+\\
+&\quad =
+\rho(\phi_0+(1{+}\twist)\Delta_0)(x^s_t\otimes_\textup{v} x^s_t)%
+\quad\text{($x^s_t\otimes_\textup{v} x^s_t\in C(X\otimes_\textup{v}X)_{-s,2t}$)}\\
+&\quad =
+\rho\phi_0(x^s_t\otimes_\textup{v} x^s_t)\in C(X\otimes_{\Sigma_2} X)_{-s,t}.
+\end{alignat*}
+Finally, that $\Sq^1_\textup{ext}(x)=0$ on $E^2$ follows since it is the image of a $d_1$, namely $d_1(\delta_t^\textup{ext}(x))$, where $\delta_t^\textup{ext}(x)$ will be defined shortly.
+\end{proof}
+It may seem that there is an extra nonzero Steenrod operation coming from the chain level operation $\textup{SQ}^{s+1,s}$, but one notes that on $E^r$ it's just the operation $x\mapsto x\times d_rx$.
+%\begin{prop}
+%The chain-level operation $\textup{SQ}^{s+1,s}$ defines an operation $\Sq^{s+1}_\textup{over}:E^r_{-s,t}(X)\to E^r_{-2s-r,2t+r-1}(X\otimes_{\Sigma_2}X)$, with indeterminacy vanishing by $E^{???}$. For $x\in E^r_{-s,t}(X)$, $\Sq^{s+1}_\textup{over}(x)$ survives to $E^{???}$, and moreover, $d_{r}(\Sq^{s+1}_\textup{over}x)=\Sq^{s+r}(d_rx)=d_rx\times d_rx$ modulo indeterminacy.
+%\end{prop}
+%\begin{proof}
+%$\textup{Sq}^{s+1,s}x=\rho\Delta D^0(x\otimes dx)\in F_{2s+r}$ has boundary $\rho\Delta D^0(dx\otimes dx)\in F_{2s+2r}$, so we're getting a $d_r$.
+%\end{proof}
+
+\subsection{The maps $\mathbb{D}_k$}
+
+For any $k$, positive or otherwise, write $\mathbb{D}_k:(C(X)\otimes C(Y))_i\to C(X\otimes Y)_{i-k}$ for the map:
+\[\mathbb{D}_r(z)= \sum_{\alpha-\beta=r}\Delta_\alpha\twist^\alpha D^\beta(z).
+%=\begin{cases}
+%\sum_{j\geq0}\Delta_{j}\twist^{j}D^{j-r},&\textup{if }r\leq0;\\
+%\sum_{j\geq0}\Delta_{j+r}\twist^{j+r}D^{j},&\textup{if }r\geq0.
+%%\\,&\textup{if }
+%\end{cases}
+\]
+\begin{lem}\label{DkIsNiceToFiltration}
+If $x\in F_s$ and $y\in F_{s'}$, then $\mathbb{D}_k(x\cdot y)\in F_s\cap F_{s'}$.
+\end{lem}
+\begin{lem}\label{boundaryVsBBD}
+For all $k$, positive or otherwise, the equation:
+\[d\mathbb{D}_k+\mathbb{D}_kd= (1+\twist)\mathbb{D}_{k+1}+\Delta\sigma D^{-k-1}\]
+holds when applied to an element $z$ of $(CX\otimes CX)_{n}$ with $n\geq 2(k+1)$.
+\end{lem}
+\begin{proof}
+\newcommand{\twolinesum}[2]{\mathop{\sum_{\mathclap{#1}}}_{\mathclap{#2}}}
+\newcommand{\onelinesum}[1]{\sum_{\mathclap{#1}}}
+We'll need to apply the formula for $d\Delta_\alpha+\Delta_\alpha d$ to $\twist^\alpha D^\beta(z)$, for $\alpha$, $\beta$ such that $\alpha-\beta=k$. %, where $z\in (CX\otimes CX)_{-s,t}$ is the element to which we're applying the above equation.
+It holds unless $t=2\alpha+e$, where $e\in\{0,1\}$, in which case $\beta=(t-e)/2-k$. However, $D^\beta(z)$ is zero unless $\beta\leq s/2$, so the formula is valid unless $(t-e)/2-k\leq s/2$. As we've assumed that $n=t-s\geq2(k+1)$, the formula is always valid.
+
+After these observations and under the our conventions on the $\Delta_\alpha$ and $D^\beta$, all but one of the following manipulations is formal, where the sums are meant to be taken over all pairs $(\alpha,\beta)$ of integers with appropriate difference. The only sticking point is that $d\Delta_{-1}+\Delta_{-1}d$ equals $0$, as opposed to $(1{+}\twist)\Delta_0+\phi_0$, and at this point we take extra care:
+%
+% Now $D^\beta(z)$ is zero unless $\beta\leq 2s$, so that the term can be ignored unless $\alpha=\beta+k\leq 2s+k$. As $t\geq 2(2s+k+1)\geq 2(\alpha+1)$, we can apply the rule.
+\begin{alignat*}{2}
+\textup{LHS}(z)
+&=
+\onelinesum{\alpha-\beta=k}\left(d\Delta_\alpha\twist^\alpha D^\beta+\Delta_\alpha\twist^\alpha D^\beta d\right)(z)%
+\\
+&=
+\onelinesum{\alpha-\beta=k}\left((d\Delta_\alpha+
+\Delta_\alpha d)\twist^\alpha D^\beta+
+\Delta_\alpha\twist^\alpha (dD^\beta+
+D^\beta d)\right)(z)%
+\\
+&=
+\onelinesum{\alpha-\beta=k,\ \alpha\geq0}((1{+}\twist)\Delta_{\alpha+1}+\phi_{\alpha+1})\twist^\alpha D^\beta(z)+ \onelinesum{\alpha-\beta=k} \Delta_\alpha\twist^\alpha(1{+}\twist) D^{\beta-1}(z)%
+\\
+&=
+\onelinesum{\alpha-\beta=k+1} \left(((1+\twist)\Delta_{\alpha}+ \phi_{\alpha})\twist\twist^{\alpha} D^\beta+\Delta_\alpha(1+\twist)\twist^\alpha D^{\beta}\right)(z) + {}%
+\\
+&\ \ \ \ \ \ \ \ \ \ \ +
+((1+\twist)\Delta_{0}+\phi_{0})\twist D^{-k-1}(z)
+\end{alignat*}
+Using the identity $(1+\twist)\Delta_{0}+\phi_{0}=\Delta$, and the observations that $(1+\twist)\twist^\alpha F=(1+\twist)F$ and $(1+\twist)F\twist G+F(1+\twist)G=(1+\twist)(FG)$, one sees that $\textup{LHS}(z)$ differs from $\textup{RHS}(z)$ only by the term
+\[\sum_{\mathclap{\alpha-\beta=k+1}} \phi_{\alpha}\sigma^{\alpha-1}D^{\beta}(z)=\sum_{\mathclap{\alpha-\beta=k+1}} \phi_{\alpha}\sigma^{\alpha-1}D^{\alpha-k-1}(z_{2\alpha}^{2\alpha-n})\]
+but the cosimplicial degree $2\alpha-n$ is less than $2(\alpha-k-1)$, and $\{D^k\}$ is special, so that each term $D^{\alpha-k-1}(z_{2\alpha}^{2\alpha-n})$ vanishes.
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\subsection{Spectral sequence operations $\delta_i$}
+We'd be able to define operations $\delta_i:E^r_{-s,t}\to E^r_{-s,t+i}$ for $i$ satisfying $2\leq i<t-(r-2)$, using the chain-level formula (writing $n=t-s=|x|$):
+\[x\mapsto \textup{DEL}_{i}(x):=\rho(\mathbb{D}_{n-i}(x\otimes x)+\mathbb{D}_{n-i-1}(dx\otimes x)).\]
+To proceed, we'll need a formula for the boundary of $\textup{DEL}_i(x)$:
+\begin{prop}
+\label{dvsDEL}
+For $2\leq i\leq t$ and $x\in Z^1_{-s,t}$:
+\[d(\textup{DEL}_i(x))+ \textup{DEL}_i(dx)=\begin{cases}
+\textup{SQ}^{t-i+1,s}(x),&\textup{if }n+1\leq i \leq t;\\
+\rho\Delta D^0(x\otimes dx),&\textup{if }i=n;\\
+0,&\textup{if }2< i\leq n.
+\end{cases}\]
+\end{prop}
+\begin{proof}
+We may apply \ref{boundaryVsBBD} to calculate $d\mathbb{D}_{n-i}(x\otimes x)$ and $d\mathbb{D}_{n-i-1}(dx\otimes x)$, since $|x\otimes x|=2n> 2(n-i+1)$ and $|dx\otimes x|=2n-1> 2(n-i-1+1)$. Thus:
+\begin{alignat*}{2}
+\textup{LHS}
+&=
+\rho d(\mathbb{D}_{n-i}(x\otimes x)+\mathbb{D}_{n-i-1}(dx\otimes x))+\rho\mathbb{D}_{n-i-1}(dx\otimes dx)%
+\\
+&=
+\rho\Bigl\{d\mathbb{D}_{n-i}(x\otimes x)\Bigr\}+\rho\Bigl\{d\mathbb{D}_{n-i-1}(dx\otimes x))+\mathbb{D}_{n-i-1}(d(dx\otimes x))\Bigr\}%
+\\
+&=
+\rho\Bigl\{\mathbb{D}_{n-i}d(x\otimes x)+(1+\twist)\mathbb{D}_{n-i+1}(x\otimes x)+\Delta\sigma D^{i-n-1}(x\otimes x)\Bigr\}
+\\
+&\ \ +\rho\Bigl\{(1+\twist)\mathbb{D}_{n-i}(dx\otimes x)+\Delta\sigma D^{i-n}(dx\otimes x)\Bigr\}
+\end{alignat*}
+Everything here cancels except for $\rho\Delta(D^{i-n-1}(x\otimes x)+D^{i-n}(x\otimes dx))$ which equals $\textup{SQ}^{t-i+1,s}(x)$.
+\end{proof}
+Suppose now that $x\in E^r_{-s,t}$. In light of the above calculation, when $n<i\leq t$, the purpose of $\delta_i(x)$ must be to support a $d_{t-i+1}$-differential to $\Sq^{t-i+1}(x)$. Thus, we would not expect to be able to define $\delta_i(x)$ when $t-i+1<r$; indeed, the following result will construct $\delta_i(x)$ whenever $i<t-(r-2)$. Moreover, the Steenrod operation $\Sq^{t-i+1}(x)$ has indeterminacy vanishing by $E^{2(r-1)}$, and one should expect that whenever $t-i+1<2(r-1)$, $\delta_i(x)$ will be multivalued, but that the set of values for $\delta_i(x)$ will map onto the set of values for $\Sq^{t-i+1}(x)$ under $d_{t-i+1}$.%footnote:
+\footnote{Note that it is not correct to say in general that the indeterminacy of $\delta_i(x)$ vanishes by a certain page, but rather that one expects that the various values for $\delta_i(x)$ will all fail to be permanent cycles together.}
+\begin{prop}
+The chain-level map $\textup{DEL}_i$ produces (potentially multivalued) operations $\delta_i:E^r_{-s,t}\to E^r_{-s,t+i}$ whenever $r\geq1$ and $i<t-(r-2)$. If either $i\leq n+1$ or $i<t-2(r-2)$, the operations are single-valued.
+\end{prop}
+\begin{proof}
+Suppose that $x\in Z^r_{-s,t}$. Then the calculation \ref{dvsDEL} shows that $\textup{DEL}_i(x)\in F_{s+r}$ as long as $i<t-(r-2)$. We must now examine whether this map is well defined on $E^r$, which is to examine the difference $\textup{DEL}_i(x)-\textup{DEL}_i(x+dy)$, for $y\in Z^{r-1}_{-s+r-1,t+r}$. We should only expect to be successful when $i\leq t-2(r-2)$.
+Using the symbol `$\cdot$' to abbreviate `$\otimes$':
+\small
+\begin{alignat*}{4}
+d\mathbb{D}_{n-i-1}(x\cdot dy)&=
+{\mathbb{D}_{n-i-1}(dx\cdot dy)}&&+
+(1{+}\twist)\mathbb{D}_{n-i}(x\cdot dy)&&+
+\Delta\twist D^{-(n-i)}(x\cdot dy)\\
+d\mathbb{D}_{n-i}(dy\cdot y)&=
+\mathbb{D}_{n-i}(dy\cdot dy)&&+
+(1{+}\twist)\mathbb{D}_{n-i+1}(dy\cdot y)&&+
+\Delta\twist D^{-(n-i+1)}(dy\cdot y)\\
+d\mathbb{D}_{n-i+1}(y\cdot y)&=
+\mathbb{D}_{n-i+1}d(y\cdot y)&&+
+{(1{+}\twist)\mathbb{D}_{n-i+2}(y\cdot y)}&&+
+\Delta\twist D^{-(n-i+2)}(y\cdot y)
+\end{alignat*}
+\normalsize
+Now write $H:=\rho(\mathbb{D}_{n-i-1}(x\cdot dy)+\mathbb{D}_{n-i}(dy\cdot y)+\mathbb{D}_{n-i+1}(y\cdot y))$. By \ref{DkIsNiceToFiltration}, $H\in F_{s-r+1}$, and the above calculations show that $H$ has boundary
+\small
+%\[(\textup{DEL}_i(x)-\textup{DEL}_i(x+dy))+\rho\Delta(D^{i-n-2}(y\cdot y)+D^{i-n-1}(y\cdot dy)+D^{i-n}(dy\cdot x))+\rho\mathbb{D}_{n-i-1}(dx\cdot dy).\]
+\[dH=\textup{DEL}_i(x)-\textup{DEL}_i(x+dy)+T_1+T_2+T_3,\]
+\normalsize
+where $\textup{DEL}_i(x)-\textup{DEL}_i(x+dy)\in F_s$ is the quantity of interest, and
+\begin{align*}
+T_1:=\rho\Delta(D^{i-n-2}(y\cdot y))&\begin{cases}
+\in F_{s+(t-i)-2(r-2)},&\textup{if }n+2\leq i\leq t-1;\\
+=0,&\textup{if }i\leq n+1.
+%\\,&\textup{if }
+\end{cases}
+\\
+T_2:=\rho\Delta(D^{i-n-1}(y\cdot dy))&\begin{cases}
+\in F_{s+(t-i)-(r-2)},&\textup{if }n+1\leq i\leq t-1;\\
+=0,&\textup{if }i\leq n.
+%\\,&\textup{if }
+\end{cases}
+\\
+T_3:=\rho\Delta(D^{i-n}(dy\cdot x))&\begin{cases}
+\in F_{s+(t-i)},&\textup{if }n\leq i\leq t-1;\\
+=0,&\textup{if }i\leq n-1.
+%\\,&\textup{if }
+\end{cases}
+\end{align*}
+Now as we have $i<t$, $T_3\in F_{s+1}$, and can be ignored. If $i\leq n$, then $T_1=T_2=0$, and we've shown that the operation is well defined. If $i=n+1$, then $T_2$ may be nonzero, but it lies in $F_{s+1+s-r}$, and as we may take $r\leq s$, the operation is again well defined.
+
+If, however, $i\geq n+2$, then $T_1+T_2$ need not be zero, and can be assured to lie in filtration above $s$ only when $i<t-2(r-2)$.
+%\textbf{The following is an observation that I thought might improve this result, but which doesn't seem to - the idea was to leave out the third row of stuff. Maybe it could still be good if we leave out some number of the summands from the third row, but it sounds pretty dicey. Should try it in order to extend rande of definition. Also should check whether one should expect the operations to be defined all the way up to $i\leq t-r+1$. ``Now suppose that $x\in F_s$, and $y\in F_{s-r+1}$. Let's look at $\mathbb{D}_{n-i+1}(dy\cdot y)$. As $dy$ has filtration $s$, each term $\Delta_{\alpha}\sigma^{\alpha}D^\beta(dy\cdot y)$ with $\beta>s$ vanishes, and each term with $\beta<s$ has filtration higher than $dy$. Thus, modulo $F_{s+1}$, $\mathbb{D}_{n-i+1}(dy\cdot y)\equiv\Delta_{t-i+1}\twist^{t-i+1}D^s((dy)^s_{t}\cdot y^{s}_{t+1})$.''}
+
+To summarise: there is some $H$ in filtration at least that of $y$, such that
+%\[dH=\textup{DEL}_i(x)-\textup{DEL}_i(x+dy)+T, \textup{ where } dT=\textup{SQ}^{i,s}(x)-\textup{SQ}^{i,s}(x+dy)\]
+\begin{alignat*}{2}
+dH
+&=
+\textup{DEL}_i(x)-\textup{DEL}_i(x+dy)+T, \textup{ and }%
+\\
+dT
+&=
+\textup{SQ}^{t-i+1,s}(x)-\textup{SQ}^{t-i+1,s}(x+dy)
+\end{alignat*}
+%%%%%%%%%%%%\usepackage[amsmath,amsthm,thmmarks]{ntheorem}
+So that, in particular, 
+\[d\textup{DEL}_i(x+dy)-\textup{SQ}^{t-i+1,s}(x+dy)=d\textup{DEL}_i(x)-\textup{SQ}^{t-i+1,s}(x)\qedhere\]
+\end{proof}
+
+As $E^1$ is obtained from $E^0$ by taking homology in the simplicial direction, there are $\delta$-operations on $E^1$, i.e.\ $E^1_{-s,t}(X)\to E^1_{-s,t+i}(X\otimes_{\Sigma_2}X)$. They are unstable with respect to internal degree $t$, not with respect to total degree $n$. All of these operations are linear except for the top operation \cite[4.2]{DwyerHtpyOpsSimpComAlg.pdf}, and commute with the differentials in the cosimplicial direction. Thus, we obtain operations $\delta_i^\textup{alg}:E^2_{-s,t}(X)\to E^2_{-s,t+i}(X\otimes_{\Sigma_2}X)$ for $2\leq i<t$.
+\begin{prop}
+On $E^2$, for $i<t$, the spectral sequence operations $\delta_i$ defined by $\textup{DEL}_i$ equal the operations $\delta_i^\textup{alg}$. The same holds on $E^1$ when $2\leq i\leq t$. In particular, the $\delta$-operations on the spectral sequence satisfy the $\delta$-Adem relations.
+\end{prop}
+\begin{proof}
+The operations $\delta_i^\textup{alg}$ are constructed by taking a representative $z\in C_{-s,t}X$ such that $\partial_\textup{sim}z=0$, and forming $\rho\Delta_{t-i}(z\otimes_\textup{v} z)$, where $z\otimes_\textup{v} z$ denotes the element of $C(X\otimes_\textup{v}X)_{-s,2t}$.
+
+Let's calculate the leading term of $\textup{DEL}_{i}(x)$ whenever $2\leq i\leq t$. Write $x=x^s_t+x^{>s}_{>t}$, where $x^s_t\in X^s_t$, and $x^{>s}_{>t}$ lies in filtration $s+1$. Then the leading term will be $\rho\Delta_{t-i}\twist^{t-i}D^s (x^s_t\otimes x^s_t)$. Moreover, as $\{D^k\}$ is \emph{special}, this equals $\rho{\Delta}_{t-i}(x^s_t\otimes_\textup{v} x^s_t)\in C(X\otimes_{\Sigma_2} X)_{-s,t+i}$, where $(x^s_t\otimes_\textup{v} x^s_t)$ denotes the element of $C(X\otimes_\textup{v}X)_{-s,2t}$. Thus `$x^s_t\mapsto \twist^{t-i}D^s(x^s_t\otimes x^s_t)$' implements the assignment `$z\mapsto z\otimes_\textup{v} z$' discussed above, and we're getting a representative for $\delta_i^\textup{alg}(x)$.
+\end{proof}
+
+\begin{thm}
+By postcomposition with the multiplication $S_2X\to X$, the operations $\Sq^j_\textup{ext}$, $\delta_i^\textup{ext}$ and $\times^\textup{ext}$ induce operations $\Sq^j_\textup{raw}$, $\delta_i^\textup{raw}$, $\times^\textup{raw}$ on $E^r(X)$. The Steenrod operations vanish whenever $i<r$, after all:
+\begin{enumerate}\squishlist
+\setlength{\parindent}{.25in}
+\item When $i<t-s$, $d_r\delta^\textup{raw}_i(x)=\delta^\textup{raw}_i(d_rx)$.
+\item When $i=t-s$, $d_r\delta^\textup{raw}_i(x)=\begin{cases}
+\delta^\textup{raw}_i(d_rx),&\textup{if }s>0;\\
+\delta^\textup{raw}_i(d_rx)+x\times d_rx,&\textup{if }s=0.
+%\\,&\textup{if }
+\end{cases}$
+\item When $i>t-s$, $d_r\delta^\textup{raw}_i(x)=\begin{cases}
+\delta^\textup{raw}_i(d_rx),&\textup{if }r<t-i+1;\\
+\delta^\textup{raw}_i(d_rx)+\Sq_\textup{raw}^{t-i+1}(x),&\textup{if }r=t-i+1;\\
+\Sq_\textup{raw}^{t-i+1}(x),&\textup{if }r>t-i+1.\\
+%\\,&\textup{if }
+\end{cases}$
+\end{enumerate}
+Broadly speaking then, the $\delta^\textup{raw}_i$ operations for $i>t-s$ support a differential hitting either a Steenrod operation or another $\delta^\textup{raw}_i$ operation, and all Steenrod operations applied to permanent cycles are hit in this way. If $X$ admits a coaugmentation from a simplicial algebra $X$, then the $\delta^\textup{raw}$-operations with $i\leq n$ at $E^\infty$ agree with the $\delta^\textup{raw}$-operations on the target of the spectral sequence.
+
+The $\delta^\textup{raw}$-operations (resp.\ Steenrod operations)  at $E^2$ agree with those following from the observation that $E^1$ is the normalization of a cosimplicial $\textup{Com}$-$\Pi$-algebra (resp.\ algebra). As such, the $\delta_i^\textup{raw}$ and $\Sq^j_\textup{raw}$ satisfy the expected Adem relations. Finally, at $E^1$, we have the relation $\delta_i^\textup{raw}\Sq^j_\textup{raw}x=0$ (whenever $\delta_i^\textup{raw}$ is nontop). \textbf{Probably more detail needed}, for example, when is $\Sq_\textup{raw}^0=0$ or $\Sq_\textup{raw}^1=0$?
+
+[from above]: For $x\in E^r_{-s,t}(X)$, $\Sq^i_\textup{ext}(x)$ survives to $E^{2r-1}$, and moreover, $d_{2r-1}(\Sq^i_\textup{ext}x)=\Sq^{i+r-1}_\textup{ext}(d_rx)$ modulo indeterminacy. The top operation, $\Sq^s_\textup{ext}(x)$, is equal to the product-square $x\times^\textup{ext} x$, and $\Sq^i_\textup{ext}(x)=0$ for $i>s$. The bottom operation, $\Sq^0_\textup{ext}(x)$, is zero whenever $t>0$, and $\Sq^1_\textup{ext}(x)=0$ for all $t$. If $X$ is a mixed simplicial algebra, postcomposition with the product $S_2X\to X$ yields the same squares at $E^2$ as those arising from the fact that $E^2$ is the cohomotopy of a cosimplicial algebra.
+\end{thm}
+
+
+
+
+
+
+{\tiny It is not a natural convention to regard $\DeltaUp^k$ as zero where it is not defined, however, we will perform this abuse shortly for notational convenience. Under this convention we will be able to use the equation
 \[(d\DeltaUp^k+\DeltaUp^kd)z=(\oldphi^{k+1} +\DeltaUp^{k+1}+T\DeltaUp^{k+1}T)z\]
 whenever $k\geq0$ and the simplicial dimension of $z$ does not equal either of $2k$ and $2k+1$.}
 
 
 \end{External spectral sequence operations}
-
-
-
-
-
-
-
 \begin{Lie algebras in characteristic 2 and their homotopy operations}
 
 \section{\textbf{Graded Lie algebras in characteristic 2}}\label{sec on Lie algs and homotopy ops}
@@ -2787,84 +3233,9 @@ Now $L$ is an almost free object of $\calL(n)$, with $\pi_*L=H_*^{\calU(n)}X$. T
 
 %\subsection{Singer's theory of spectral sequence operations}
 \subsection{Spectral sequence operations}
-[\textbf{This whole subsection needs} to have its notation brought into line with the rest of the document. We \textbf{also need} to mention $S^k$ somewhere, and discuss the external operations at $E_2$!] In what follows, we'll need to use Singer's techniques for deriving operations in spectral sequences. He defines operations in the cohomology spectral sequence of a bisimplicial cocommutative coalgebra. While the comultiplicative structure that we can define on the resolution $Q^{\calL(n)}\BSWres L$ is not that of a coalgebra, we can still use his techniques after a single simple observation. That is, for every bisimplicial vector space $V$, if we write $E_r^{**}(V)$ for the cohomology spectral sequence obtained from the double cochain complex $(N_*N_*V)^*$, then Singer's methods yield external operations of type:
-\[E_r^{**}(V)\to E_{r'}^{**}(S^2V)\textup{ and }E_r^{**}(V)\otimes E_r^{**}(V)\to E_r^{**}(S^2V),\]
-which will be compatible with external operations of type:
-\[H^{*}((CV)^*)\to H^{*}((CS^2V)^*)\textup{ and }H^{*}((CV)^*)\otimes H^{*}((CV)^*)\to H^{*}((CS^2V)^*).\]
-
-When $V$ is a cocommutative coalgebra, the diagonal map $V\to S^2V$ induces a map $E_r^{**}(S^2V)\to E_r^{**}(V)$, postcomposition with which yields Singer's operations, however we will not have access to such structure in what follows. Thus, we will briefly reprise Singer's results in this \emph{external} language, in order that we have them available.
-\begin{thm}[Singer's Book, thm 2.15-2.17,2.22]
-For all $p,q\geq0$ and all $r\geq2$, there are well-defined vector space homomorphisms:
-\begin{alignat*}{2}
-\ExtCohOp^k:E^{p,q}_r(V)&\to E^{p,q+k}_r(S^2V)&\qquad&\text{if }0\leq k \leq q,\\
-\ExtCohOp^k:E^{p,q}_r(V)&\to E^{p+k-q,2q}_{r+k-q}(S^2V)&\qquad&\text{if }q\leq k\leq q+r-2,\\
-\ExtCohOp^k:E^{p,q}_r(V)&\to E^{p+k-q,2q}_{2r-2}(S^2V)&\qquad&\text{if }q+r-2\leq k.
-\end{alignat*}
-The operations $\ExtCohOp^k$ are all defined at $E_2$, and determine the operations at each $E_r$, $r>2$. The operations $\ExtCohOp^k$ commute with differentials. Finally, the $\ExtCohOp^k$ converge to well defined maps on $E_\infty$, and there is a commuting diagram
-\[\xymatrix@R=4mm{
-E^{p,q}_\infty(V)\ar[r]^-{\ExtCohOp^k}\ar[d]^-{\pi}
-&%r1c1
-E^{p,q+k}_\infty(S^2V)\ar[d]^-{\pi}
-\\%r1c2
-E_0^{p,q}H^*((CV)^*)\ar[r]^-{\ExtCohOp^k}&%r2c1
-E_0^{p,q+k}H^*((CS^2V)^*)%r2c2
-}\]
-whenever $0\leq k\leq q$, and a commuting diagram
-\[\xymatrix@R=4mm{
-E^{p,q}_\infty(V)\ar[r]^-{\ExtCohOp^k}\ar[d]^-{\pi}
-&%r1c1
-E^{p+k-q,2q}_\infty(S^2V)\ar[d]^-{\pi}
-\\%r1c2
-E_0^{p,q}H^*((CV)^*)\ar[r]^-{\ExtCohOp^k}&%r2c1
-E_0^{p+k-q,2q}H^*((CS^2V)^*)%r2c2
-}\]
-whenever $q\leq k$ (which summarises also Singer's computation of how the $\ExtCohOp^k$ interact with the filtration on cohomology).
-
-Similar theory holds for an exterior product operation
-\[\ExtCohProd:E_r^{p_1,q_1}(V)\otimes E_r^{p_2,q_2}(V)\to E_r^{p_1+p_2,q_1+p_2}(S^2V)\]
-%Moreover, for $r\geq2$ and $p,q,k\geq0$ given, if $\alpha\in E_r^{p,q}$, then $\Sq_\textup{ext}^k\alpha$ and $\Sq_\textup{ext}^kd_r\alpha$ both survive to $E_t$, where
-%\[t=\begin{cases}
-%r,&\textup{if }0\leq k \leq q-r+1;\\
-%2r+k-q-1,&\textup{if }q-r+1\leq k\leq q;
-%\\2r-1,&\textup{if }q\leq k,
-%\end{cases}
-%\]
-%and in $E_t$ we have the relation $d_t\Sq^k_textup{ext}\alpha=\Sq^k_textup{ext}d_r\alpha$.
-\end{thm}
-Moreover, if the bisimplicial object $V$ admits an augmentation $\lambda:V_{0\bullet}\to U_{\bullet}$, (\textbf{didn't I} do away with $\bullet$?) then %such that the natural map $\lambda_*:CV\to CU$ is a weak equivalence,
-Singer proves the following relationship between the spectral sequence operations and the operations of \S\ref{generic coh ops section}:
-\begin{thm}[Proposition 2.1]
-The $\ExtCohOp^k$ and $\ExtCohProd$ commute with $\lambda^*$, so that there are commuting diagrams
-\[\xymatrix@R=4mm{
-H^{m}((CU)^*)\ar[r]^-{\ExtCohOp^k}
-\ar[d]^-{\lambda^*}
-&%r1c1
-H^{m+k}((CS^2U)^*)\ar[d]^-{(S^2\lambda)^*}
-&%r1c3
-H^{m_1}((CU)^*)\otimes H^{m_2}((CU)^*)\ar[r]^-{\ExtCohProd}
-\ar[d]^-{\lambda^*}
-&%r1c1
-H^{m_1+m_2}((CS^2U)^*)\ar[d]^-{(S^2\lambda)^*}
-\\%r1c5
-H^{m}((CV)^*)\ar[r]^-{\ExtCohOp^k}
-&%r2c1
-H^{m+k}((CS^2V)^*)
-&%r2c3
-H^{m_1}((CV)^*)\otimes H^{m_2}((CV)^*)\ar[r]^-{\ExtCohProd}
-&%r2c1
-H^{m_1+m_2}((CS^2V)^*)
-}\]
-\end{thm}
-
-Singer separates the operations $\ExtCohOp^k:E^{p,q}_2\to E_{2}$ according to the pattern of change in the spectral sequence coordinates of their output. Indeed, he defines
-\begin{alignat*}{2}
-\vExtCohOp^k=\ExtCohOp^k:E^{p,q}_2(V)&\to E^{p,q+k}_2(S^2V)&\qquad&\text{if }0\leq k \leq q,\\
-\hExtCohOp^k=\ExtCohOp^{q+k}:E^{p,q}_2(V)&\to E^{p+k,2q}_2(S^2V)&\qquad&\text{if }0\leq k \leq p,
-\end{alignat*}
-and gives explicit formulae for these $E_2$ operations, and for the product at $E_2$ [Singer 2.23].
 
 
-In order to use these constructions in the present work, we will use the map of double complexes:
+In order to use Singer's constructions in the present work, we will use the map of double complexes:
 \[\psi_{\BSW}=j_{\calL(n)}\circ Q^{\calL(n)}\xi_\BSW:N_{p+1}N_q(Q^{\calL(n)}\BSWres L)_{s_n,\ldots,s_1}^{t+1}\to N_{p}N_q(S^2(Q^{\calL(n)}\BSWres L))_{s_n,\ldots,s_1}^{t}\]
 to define a spectral sequence map
 \[E_2^{p,q}(S^2(Q^{\calL(n)}\BSWres L))^{s_n,\ldots,s_1}_t\overset{(\psi_\BSW)^*}{\to} E_2^{p+1,q}(Q^{\calL(n)}\BSWres L)^{s_n,\ldots,s_1}_{t+1}\]
