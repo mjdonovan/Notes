@@ -710,14 +710,78 @@ Moreover, if $F\cong F_2\circ F_1$, then $\calF\cong \calF_2\circ \calF_1$.
 where we view $V$ as a trivial chain complex. Then $\calF$ can be constructed as $\calF V:=\pi_*(F\Gamma V)$.
 %given that the homotopy category of simplicial vector spaces is graded vector spaces, the derived functors of a weak equivalence preserving functor $F:s\calV\to s\calV$ are well defined, and there's a commuting diagram
 
+\vfil\pagebreak
 
 \subsection{First quadrant cohomotopy spectral sequences}
-Suppose that $V_{s,t}$ is a bisimplicial vector space, ungraded for now. We will follow the standard conventions, those of \cite{MR2245560}, in defining the cohomotopy spectral sequence of $V$. In particular, we will refer to $s$ as the \emph{horizontal} coordinate and $t$ as the \emph{vertical} coordinate.
+Suppose that $V_{p,q}$ is a bisimplicial vector space, ungraded for now. We will follow the standard conventions, those of \cite{MR2245560}, in defining the cohomotopy spectral sequence of $V$. For  more detail, see \cite[\S1.15{}]{MR2245560}.   
 
-There is a double chain compex $C\uhor_sC\uver_tV$, where we have decorated the $C_*$ functors in order to distinguish the coordinates. The total complex $C_*V$, along with a canonical increasing filtration, is defined by 
-\[C_n:=\bigoplus_{i=0}^{n}C\uhor_iC\uver_{n-i}V,\qquad F_pC_n:=\bigoplus_{i=0}^{p}C\uhor_iC\uver_{n-i}V.\]
-.
+There is a double chain complex $(C\uhor C\uver V)_{p,q}:=C\uhor_p C\uver_q V=V_{p,q}$, where we have decorated the $C$ functors in order to distinguish the coordinates --- we will always refer to $p$ as the \emph{horizontal} coordinate and $q$ as the \emph{vertical} coordinate. The total complex $CV$, along with a canonical increasing filtration, is defined by 
+\[(CV)_n:=\bigoplus_{i=0}^{n}C\uhor_iC\uver_{n-i}V,\qquad F_p(CV)_n:=\bigoplus_{i=0}^{p}C\uhor_iC\uver_{n-i}V.\]
+The dual total complex $\dual CV$ admits a decreasing filtration defined by
+\[F^p\dual CV:=\ker\bigl(\dual CV\epi \dual F_{p-1} CV\bigr).\]
+Correspondingly, $H^*(\dual CV)\cong \pi^*(\dual\diag V)$ is equipped with a decreasing filtration (which is evidently finite, exhaustive and Hausdorff), and one defines
+\[\E{}{0}{\pi^*(\dual\diag V)}{p,q}{}:=(F^{p}/F^{p+1})\pi^{p+q}(\dual\diag V).\]
+Then, there is a spectral sequence with
+\[\E{}{2}{V}{p,q}{}=\pi\dhor^{p}\pi\dver^{q}(\dual V),\]
+differential $d_r:\E{}{r}{V}{p,q}{}\to \E{}{r}{V}{p+r,q-r+1}{}$ so that $\E{}{r+1}{V}{}{}=H(\E{}{r}{V}{}{};d_r)$, and for each fixed $p$ and $q$,
+\[\E{}{r}{V}{p,q}{}\textup{ stabilizes to }\E{}{\infty}{V}{p,q}{}\cong \E{}{0}{\pi^*(\dual\diag V)}{p,q}{}\textup{ as $r\rightarrow\infty$}.\]
 
+If $V$ is instead a bisimplicial \emph{graded} vector space $V\in ss\vect{c}{h}$, then rather than having each page $\E{}{r}{V}{}{}$ bigraded, we may regard $\E{}{r}{V}{}{}$ as an element of $\vect{h+2}{c}$. That is:
+\[\E{}{r}{V}{p,q,s_h,\ldots,s_1}{t_c,\ldots,t_1}=\E{}{r}{(V^{t_c,\ldots,t_1}_{s_h,\ldots,s_1})}{p,q}{}.\]
+
+\vfil\pagebreak
+
+\subsection{Second quadrant homotopy spectral sequences}
+Suppose that $V^{s}_{t}$ is a cosimplicial simplicial (ungraded) vector space. Then there is a cochain-chain complex 
+\[(N\dhor N\uver V)^{s}_{t}:=N\dhor^{s}N\uver_{t}V=V^{s}_{t} \textup{\textbf{\ \ not quite. N or C?}},\]
+with $s$ the horizontal and $t$ the vertical coordinate. The \emph{total complex} $CV$, is a chain complex with a canonical decreasing filtration, defined by 
+\[(TV)_n=\prod_{t-s=n}N\dhor^{s}N\uver_{t}V,\qquad(F^mTV)_n=\prod_{\substack{t-s=n\\t\geq m}}N\dhor^{s}N\uver_{t}V.\]
+Correspondingly, $H_*( CV)$ is equipped with a decreasing filtration, which is exhaustive, but needn't be either hausdorff or finite, and one defines
+\[\E{0}{}{H_*( CV)}{s}{t}:=(F^{s}/F^{s+1})H_{t-s}( CV).\]
+Then, there is a spectral sequence with
+\[\E{2}{}{V}{s}{t}=\pi\dhor^{s}\pi\uver_{t}V,\]
+differential $d^r:\E{r}{}{V}{s}{t}\to \E{r}{}{V}{s+r}{t+r-1}$ so that $\E{r+1}{}{V}{}{}=H(\E{r}{}{V}{}{};d^r)$. Suppose, for simplicity, that the spectral sequence admits a \emph{vanishing line of slope $\alpha$} on the $r_{0}^\textup{th}$ page for some $r_{0}$, i.e.\ there exists a constant $c$ such that:
+\[\E{r_0}{}{V}{s}{t}=0\textup{ for }s>c+\alpha(t-s)).\]
+Then the filtration on $H_*( CV)$ \emph{is} in fact hausdorff and finite, and we can say that for each fixed $s$ and $t$:
+\[\E{r}{}{V}{s}{t}\textup{ stabilizes to }\E{\infty}{}{V}{s}{t}\cong \E{0}{}{H_*( CV)}{s}{t}\textup{ as $r\rightarrow\infty$}.\]
+
+
+
+Now if we write
+\[(T_mV)_n:=(TV/F^{m+1} TV)_n\cong\prod_{\substack{t-s=n\\t\leq m}}N^sN_tV, \]
+then the $T_mV$ form a tower of surjections of chain complexes with inverse limit $T_\infty V=TV$.  A result of Bousfield relates this to the totalization tower of $V$:
+\begin{lem}[{\cite[Lemma 2.2]{BousfieldHSSCS.pdf}}]
+There are natural chain maps $\phi_m:N_*\Tot_mV\to T_mV$ for $m\leq\infty$ which induce isomorphisms $\pi_*\Tot_mV\to H_*T_mV$ and are compatible with the tower maps $\Tot_{s}V\to\Tot_mV$ and $T_{s}V\to T_mV$ for $s\geq m$.
+\end{lem}
+That's an isomorphism of towers, and these towers have no $\lim^1$ because of the vanishing line.
+
+
+\begin{shaded}\tiny
+\hfil
+\end{shaded}
+
+
+
+
+
+\begin{cor}
+Suppose that $X^\bullet$ is a cosimplicial object in $s\algs$. Then there is a map of spectral sequences, which is an isomorphism from $E^1$ (\textbf{que?}), from the homotopy spectral sequence of the $\Tot$ tower $\{I\Tot_mX^\bullet\}$ to the spectral sequence of the bicomplex underlying $IX^\bullet$. Moreover, there is an isomorphism $\pi_*I\Tot X^\bullet\to H_*TIX^\bullet$ (to the homology of the total complex of the bicomplex), which is compatible with the map of spectral sequences.
+\end{cor}
+\begin{cor}
+Suppose that $X$ is a connected element of $s\algs$. Then the Adams spectral sequence for $X$ is the spectral sequence of the bicomplex underlying the cosimplicial simplicial vector space $I((c(K\overline{Q})^\bullet X)^{\textup{rf}})$. This spectral sequence admits a vanishing line from $E^2$, and so converges strongly to its target, $\pi_{t-s}(I\hat X)$.
+\end{cor}
+
+
+
+
+
+
+
+
+
+
+
+\subsection{Throatclearing}
 
 
 we will always write $\E{r}{}{V}{}{}$ for a homological or homotopical spectral sequence and $\E{}{r}{V}{}{}$ for a cohomological one.
@@ -1542,7 +1606,7 @@ It is  interesting to observe that $\Palg$, the Steenrod algebra for commutative
 in fact \emph{Koszul dual}, in the sense of \cite{PriddyKoszul.pdf}, to $\deltaalg$, the algebra which (almost) acts on the homotopy of a simplicial algebra. Indeed, Goerss \emph{calculates} $\Palg$ as the Koszul dual of $\deltaalg$, by means of calculations in a reverse Adams spectral sequence due to Miller \cite{MillerSullivanConjecture.pdf}. We will explore this relationship further when we consider the Adams spectral sequence.
 
 \subsection{Cohomology operations for connected simplicial algebras}
-Suppose that $A\in s\algs$. Then [??????] $H^0_{\algs}=0$ if and only if $\pi_*A=0$, and in either case, we say that $A$ is \emph{connected}. It is a little easier to work with the cohomology of connected objects, as we do not need to worry about the operation $\beta$. If we say that $V\in \vect{1}{}$ is \emph{connected} when $V^{0}=0$, we may identify the full subcategory of $\vect{1}{}$ on the connected objects with $\vect{+}{}$.
+Suppose that $A\in s\algs$ is \emph{connected}: $\pi_0A=0$. Then $H^0_{\algs}=Q^{\algs}\pi_0A=0$. It is advantageous to work with the cohomology of connected objects, as we do not need to worry about the operation $\beta$. If we say that $V\in \vect{1}{}$ is \emph{connected} when $V^{0}=0$, we may identify the full subcategory of $\vect{1}{}$ on the connected objects with $\vect{+}{}$.
 
 Goerss' result proves that the monad
 $F^{\algs\HAlg}$ on $\vect{1}{}$
