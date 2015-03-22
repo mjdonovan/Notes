@@ -1,7 +1,7 @@
 % !TEX root = z_output/unstable_Lie_algs.tex
 \documentclass[11pt]{amsart}
-\newcommand{\IncludeAll}{}% <--
-%\newcommand{\ShrinkPages}{}% <--
+%\newcommand{\IncludeAll}{}% <--
+\newcommand{\ShrinkPages}{}% <--
 \ifx\ShrinkPages\undefined\else\usepackage[paperheight=160mm,paperwidth=160mm]{geometry}\fi%220/160
 \usepackage{amsmath,amsthm,amssymb}
 \usepackage{eucal}
@@ -21,10 +21,10 @@
 \xclude{Cohomology operations for unstable Lie algebras over Lambda}%depr
 \xclude{todolist}
 \ifx\IncludeAll\undefined\else\renewcommand{\xclude}[1]{\nclude{#1}}\fi
-\xclude{Contents Page}
+\nclude{Contents Page}
 \xclude{Intro}
 \nclude{Conventions and notation}
-\xclude{CPiAlgs and CHalgs}
+\nclude{CPiAlgs and CHalgs}
 \nclude{Constructing homotopy and cohomotopy operations}
 \nclude{The Bousfield-Kan spectral sequence for simplicial algebras}
 \nclude{External spectral sequence operations}
@@ -325,8 +325,8 @@ url=false,doi=false,isbn=false,eprint=false]{biblatex}%
 \newcommand{\quadgrad}[1]{\textup{q}_{#1}}
 \newcommand{\crossterms}{\textup{cr}}
 \newcommand{\ExtCohOp}{\textup{Sq}_\textup{ext}}
-\newcommand{\vExtCohOp}{\textup{Op}_\textup{v,ext}}
-\newcommand{\hExtCohOp}{\textup{Op}_\textup{h,ext}}
+\newcommand{\vExtCohOp}{\textup{Sq}_\textup{v,ext}}
+\newcommand{\hExtCohOp}{\textup{Sq}_\textup{h,ext}}
 \newcommand{\ExtCohProd}{\mu_\textup{ext}}
 \newcommand{\epi}{{\,\makebox[0cm][l]{\ensuremath\to}\to}}
 \newcommand{\mono}{{\to}}
@@ -407,7 +407,7 @@ url=false,doi=false,isbn=false,eprint=false]{biblatex}%
 \begin{Contents Page}
 %\begin{abstract}\end{abstract}
 %\maketitle
-\tableofcontents
+%\tableofcontents - currently deferred to end of document
 \end{Contents Page}
 
 \begin{Intro}
@@ -470,9 +470,13 @@ $\dual:(\vect{q}{r})^\textup{op}\to\vect{r}{q}$ by:
 We will shortly define cohomology functors
 $H_{\calC}^*X:=\dual H^{\calC}_*X$, and we allow the position of the asterisk demonstrate which of homology and cohomology we mean: one of topology's longest traditions. This is not precisely an exception to our convention, but was worth mentioning. [\textbf{mention the subbing-in dillemma?}]
 
-Finally, a common patten for us will be to consider vector spaces with $r$ non-negative homological gradings and a single \emph{strictly positive} cohomological grading:
+\textbf{Mention} $\quadgrad{k}$, an extra grading we don't think of as (co)homological.
+
+Finally, a common pattern for us will be to consider vector spaces with $r$ non-negative homological gradings and a single \emph{strictly positive} cohomological grading:
 \[V=\bigoplus_{s_r,\ldots,s_1\geq0,\,t\geq 1}V^{t}_{s_r,\ldots,s_1}.\]
 We write $\vect{+}{r}$ for the category of such objects. Similarly, there is a category $\vect{r}{+}$, and  dualization is a functor $\dual:(\vect{+}{r})^\textup{op}\to\vect{r}{+}$.
+
+
 
 
 
@@ -610,7 +614,7 @@ Again, Fresse \cite{FresseSimplicialAlgs.pdf} explains how to construct the mona
 
 
 
-\subsection{Simplicial vector spaces}
+\subsection{The Dold-Kan correspondence}\label{The Dold-Kan correspondence}
 In this paper we will use the following four chain complexes in $\complexes \vect{+}{r}$ associated with a simplicial graded vector-space $V\in s\vect{+}{r}$:
 \begin{alignat*}{2}
 C_nX&:=X_n&& \textup{ with differential }d=\textstyle\sum_{i=0}^{n}d_i;\\
@@ -689,8 +693,9 @@ There is an evident inclusion $\imath:\mathbb{S}_{s_{r+1},s_r,\ldots,s_1}^t\to C
 %\[\hom_{s\vect{+}{r}}(\mathbb{S}^t_{s_r,\ldots,s_1},V)\cong (ZN_{s_{r+1}}V)_{s_r,\ldots,s_1}^t\textup{ and }\hom_{s\vect{+}{r}}(C\mathbb{S}^t_{s_{r+1},\ldots,s_1},V)\cong (N_{s_{r+1}+1}V)_{s_r,\ldots,s_1}^t,\]
 Under these isomorphisms the differential $N_{s_{r+1}+1}V\to ZN_{s_{r+1}}V$ corresponds to $\imath^*$.
 
+A dual theory exists for cosimplicial vector spaces.
 \subsection{Dold's theorem}
-According to Dold [], see also [\url{http://www3.amherst.edu/~mching/Work/homotopy_operations.pdf}, lemma 3.1], 
+According to Dold \cite{DoldHomologySPs.pdf}, see also \cite[Lemma 3.1]{ChingUnpublished}: 
 \begin{thm}[Dold's theorem]\label{Dold's theorem}
 Suppose that $F:s\vect{+}{r}\to s\vect{+}{r}$ is a functor preserving weak equivalences, for example, the prolongation of an endofunctor of $\vect{+}{r}$. Then there is a functor $\calF:\vect{+}{r+1}\to\vect{+}{r+1}$ such that the following diagram commutes:
 \[\xymatrix@R=4mm{
@@ -710,25 +715,41 @@ Moreover, if $F\cong F_2\circ F_1$, then $\calF\cong \calF_2\circ \calF_1$.
 where we view $V$ as a trivial chain complex. Then $\calF$ can be constructed as $\calF V:=\pi_*(F\Gamma V)$.
 %given that the homotopy category of simplicial vector spaces is graded vector spaces, the derived functors of a weak equivalence preserving functor $F:s\calV\to s\calV$ are well defined, and there's a commuting diagram
 
+\end{Conventions and notation} %return me to my home
+
+\subsection{Comparison of homotopy and cohomotopy}
+Suppose that $V\in s\vect{}{}$. Then $C^*\dual V=\dual C_*V$, and there is a natural isomorphism
+\[H^*C^*\dual V=H^*\dual C_*V\to\dual H_* C_*V,\ \ \overline{\alpha}\mapsto\textup{``$\overline{v}\mapsto\alpha(v)$''}.\]
+%where the second map sends the class of a functional $\alpha:C_nV\to\F_2$ to the functional on $H_*C_*V$ given by pairing representatives with $\alpha$.
+For any $V\in \vect{}{}$ there is a natural map
+\[S_2\dual V\to \dual S^2V,\ \ \alpha\otimes \beta\mapsto\textup{``$v\otimes w\mapsto \alpha(v)\beta(w)$''}\]
+
+
 
 \subsection{First quadrant cohomotopy spectral sequences}
 Suppose that $V_{p,q}$ is a bisimplicial vector space, ungraded for now. We will follow the standard conventions, those of \cite{MR2245560}, in defining the cohomotopy spectral sequence of $V$. For  more detail, see \cite[\S1.15{}]{MR2245560}.   
 
-There is a double chain complex $(C\uhor C\uver V)_{p,q}:=C\uhor_p C\uver_q V=V_{p,q}$, where we have decorated the $C$ functors in order to distinguish the coordinates --- we will always refer to $p$ as the \emph{horizontal} coordinate and $q$ as the \emph{vertical} coordinate. The total complex $CV$, along with a canonical increasing filtration, is defined by 
-\[(CV)_n:=\bigoplus_{i=0}^{n}C\uhor_iC\uver_{n-i}V,\qquad F_p(CV)_n:=\bigoplus_{i=0}^{p}C\uhor_iC\uver_{n-i}V.\]
-The dual total complex $\dual CV$ admits a decreasing filtration defined by
-\[F^p\dual CV:=\ker\bigl(\dual CV\epi \dual F_{p-1} CV\bigr).\]
-Correspondingly, $H^*(\dual CV)\cong \pi^*(\dual\diag V)$ is equipped with a decreasing filtration (which is evidently finite, exhaustive and Hausdorff), and one defines
+There is a double chain complex $(C\uhor C\uver V)_{p,q}:=C\uhor_p C\uver_q V=V_{p,q}$, where we have decorated the $C$ functors in order to distinguish the coordinates --- we will always refer to $p$ as the \emph{horizontal} coordinate and $q$ as the \emph{vertical} coordinate. The total complex $TV$, along with a canonical increasing filtration, is defined by 
+\[(TV)_n:=\bigoplus_{i=0}^{n}C\uhor_iC\uver_{n-i}V,\qquad F_p(TV)_n:=\bigoplus_{i=0}^{p}C\uhor_iC\uver_{n-i}V.\]
+The dual total complex $\dual TV$ admits a decreasing filtration defined by
+\[F^p\dual TV:=\ker\bigl(\dual TV\epi \dual F_{p-1} TV\bigr).\]
+Correspondingly, $H^*(\dual TV)\cong \pi^*(\dual\diag V)$ is equipped with a decreasing filtration (which is evidently finite, exhaustive and Hausdorff), and one defines
 \[\E{}{0}{\pi^*(\dual\diag V)}{p,q}{}:=(F^{p}/F^{p+1})\pi^{p+q}(\dual\diag V).\]
 Then, there is a spectral sequence with
 \[\E{}{2}{V}{p,q}{}=\pi\dhor^{p}\pi\dver^{q}(\dual V),\]
-differential $d_r:\E{}{r}{V}{p,q}{}\to \E{}{r}{V}{p+r,q-r+1}{}$ so that $\E{}{r+1}{V}{}{}=H(\E{}{r}{V}{}{};d_r)$, and for each fixed $p$ and $q$,
+differential $d_r:\E{}{r}{V}{p,q}{}\to \E{}{r}{V}{p+r,q-r+1}{}$ so that $\E{}{r+1}{V}{}{}$ is the cohomology of the cochain complex $(\E{}{r}{V}{}{};d_r)$, and for each fixed $p$ and $q$,
 \[\E{}{r}{V}{p,q}{}\textup{ stabilizes to }\E{}{\infty}{V}{p,q}{}\cong \E{}{0}{\pi^*(\dual\diag V)}{p,q}{}\textup{ as $r\rightarrow\infty$}.\]
+
+Typically, $V$ will admit an \emph{augmentation} to a simplicial object $V_{-1}\in s\vect{}{}$, \emph{inducing a weak equivalence} $\diag V\overset{\sim}{\to}V_{-1}$. All of our  augmentations are horizontal maps to a vertical object, i.e.\ an augmentation is a simplicial (in $q$) map:
+\[d\uhor_0:V_{0,q}\to V_{-1,q}\textup{ coequalizing }d\uhor_0,d\uhor_1:V_{1,q}\to V_{0,q}.\]
+In this case, we view the spectral sequence as a tool for the calculation of the cohomotopy $\pi^*(\dual V_{-1})$, via the isomorphisms
+\[\E{}{\infty}{V}{p,q}{}\cong \E{}{0}{\pi^*(\dual V_{-1})}{p,q}{}.\]
+
 
 If $V$ is instead a bisimplicial \emph{graded} vector space $V\in ss\vect{c}{h}$, then rather than having each page $\E{}{r}{V}{}{}$ bigraded, we may regard $\E{}{r}{V}{}{}$ as an element of $\vect{h+2}{c}$. That is:
 \[\E{}{r}{V}{p,q,s_h,\ldots,s_1}{t_c,\ldots,t_1}=\E{}{r}{(V^{t_c,\ldots,t_1}_{s_h,\ldots,s_1})}{p,q}{}.\]
-
-
+In our application of these conventions we will actually have $V\in \vect{+}{h}$, and will write $p=s_{c+2}$ and $q=s_{c+1}$. We will even sometimes have a quadraic grading on $V$, which will transfer to a further grading on the spectral sequence, so our spectral sequences will appear in the format
+\[\quadgrad{k}\E{}{r}{V}{s_{h+2},\ldots,s_1}{t}=\E{}{r}{(\quadgrad{k}V^{t}_{s_h,\ldots,s_1})}{s_{h+2},s_{h+1}}{}.\]
 
 \subsection{Second quadrant homotopy spectral sequences}
 Suppose that $V^{s}_{t}$ is a cosimplicial simplicial (ungraded) vector space. Then there is a cochain-chain complex 
@@ -739,8 +760,8 @@ Correspondingly, $H_*( CV)$ is equipped with a decreasing filtration, which is e
 \[\E{0}{}{H_*( CV)}{s}{t}:=(F^{s}/F^{s+1})H_{t-s}( CV).\]
 Then, there is a spectral sequence with
 \[\E{2}{}{V}{s}{t}=\pi\dhor^{s}\pi\uver_{t}V,\]
-differential $d^r:\E{r}{}{V}{s}{t}\to \E{r}{}{V}{s+r}{t+r-1}$ so that $\E{r+1}{}{V}{}{}=H(\E{r}{}{V}{}{};d^r)$. Suppose, for simplicity, that the spectral sequence admits a \emph{vanishing line of slope $\alpha$} on the $r_{0}^\textup{th}$ page for some $r_{0}$, i.e.\ there exists a constant $c$ such that:
-\[\E{r_0}{}{V}{s}{t}=0\textup{ for }s>c+\alpha(t-s)).\]
+differential $d^r:\E{r}{}{V}{s}{t}\to \E{r}{}{V}{s+r}{t+r-1}$ so that $\E{r+1}{}{V}{}{}$ is the homology of the chain complex $(\E{r}{}{V}{}{};d^r)$. From now on, we suppose that the spectral sequence admits a \emph{vanishing line of slope $\alpha$} on the $r_{0}^\textup{th}$ page for some $r_{0}$, i.e.\ there exists a constant $c$ such that:
+\[\E{r_0}{}{V}{s}{t}=0\textup{ for }s>c+\alpha(t-s).\]
 Then the filtration on $H_*( CV)$ \emph{is} in fact hausdorff and finite, and we can say that for each fixed $s$ and $t$:
 \[\E{r}{}{V}{s}{t}\textup{ stabilizes to }\E{\infty}{}{V}{s}{t}\cong \E{0}{}{H_*( CV)}{s}{t}\textup{ as $r\rightarrow\infty$}.\]
 
@@ -752,23 +773,33 @@ then the $T_mV$ form a tower of surjections of chain complexes with inverse limi
 \begin{lem}[{\cite[Lemma 2.2]{BousfieldHSSCS.pdf}}]
 There are natural chain maps $\phi_m:N_*\Tot_mV\to T_mV$ for $m\leq\infty$ which induce an isomorphism of towers $\pi_*\Tot_mV\to H_*T_mV$.
 \end{lem}
-\noindent Moreover, the vanishing line implies that there is no $\lim^1$ in either tower, so that $\pi_*\Tot V\cong H_*TV$.
+\noindent Under our assumption there is no $\lim^1$ in either tower, so that $\pi_*\Tot V\cong H_*TV$, and the spectral sequence truly calculates $\pi_{t-s} \Tot V$.
 
+Typically, $V$ will admit a \emph{coaugmentation} from a simplicial object $V_{-1}\in s\vect{}{}$.  We necessarily mean a horizontal map from a vertical object, i.e.\ a coaugmentation is a simplicial (in $t$) map:
+\[d\dhor^0:V_{-1,t}\to V_{0,t}\textup{ equalizing }d\dhor^0,d\dhor^1:V_{0,t}\to V_{1,t}.\]
+Suppose that this map \emph{induces a weak equivalence} $V_{-1}\overset{\sim}{\to}\Tot V$ (and still that $\E{}{r}{V}{s}{t}$ has a vanishing line).
+In this case, we view the spectral sequence as a tool for the calculation of the homotopy $\pi_*(V_{-1})$, via the isomorphisms
+\[\E{\infty}{}{V}{s}{t}\cong \E{}{0}{\pi_*(V_{-1})}{s}{t}.\]
 
-\begin{shaded}\tiny
-\hfil
-\end{shaded}
-
-
-
-
-
-\begin{cor}
-Suppose that $X^\bullet$ is a cosimplicial object in $s\algs$. Then there is a map of spectral sequences, which is an isomorphism from $E^1$ (\textbf{que?}), from the homotopy spectral sequence of the $\Tot$ tower $\{I\Tot_mX^\bullet\}$ to the spectral sequence of the bicomplex underlying $IX^\bullet$. Moreover, there is an isomorphism $\pi_*I\Tot X^\bullet\to H_*TIX^\bullet$ (to the homology of the total complex of the bicomplex), which is compatible with the map of spectral sequences.
-\end{cor}
-\begin{cor}
-Suppose that $X$ is a connected element of $s\algs$. Then the Adams spectral sequence for $X$ is the spectral sequence of the bicomplex underlying the cosimplicial simplicial vector space $I((c(K\overline{Q})^\bullet X)^{\textup{rf}})$. This spectral sequence admits a vanishing line from $E^2$, and so converges strongly to its target, $\pi_{t-s}(I\hat X)$.
-\end{cor}
+We can again add internal gradings, so that if $V\in cs\vect{c}{h}$, we define:
+\[\E{\infty}{}{V}{s,s_c,\ldots,s_1}{t,t_h,\ldots,t_1}=\E{\infty}{}{(V^{s_c,\ldots,s_1}_{t_h,\ldots,t_1})}{s}{t}.\]
+%In fact, \textbf{something about comparing the two sseqs........ flip across fibrations.}
+%
+%
+%\begin{shaded}\tiny
+%\hfil
+%\end{shaded}
+%
+%
+%
+%
+%
+%\begin{cor}
+%Suppose that $X^\bullet$ is a cosimplicial object in $s\algs$. Then there is a map of spectral sequences, which is an isomorphism from $E^1$ (\textbf{que?}), from the homotopy spectral sequence of the $\Tot$ tower $\{I\Tot_mX^\bullet\}$ to the spectral sequence of the bicomplex underlying $IX^\bullet$. Moreover, there is an isomorphism $\pi_*I\Tot X^\bullet\to H_*TIX^\bullet$ (to the homology of the total complex of the bicomplex), which is compatible with the map of spectral sequences.
+%\end{cor}
+%\begin{cor}
+%Suppose that $X$ is a connected element of $s\algs$. Then the Adams spectral sequence for $X$ is the spectral sequence of the bicomplex underlying the cosimplicial simplicial vector space $I((c(K\overline{Q})^\bullet X)^{\textup{rf}})$. This spectral sequence admits a vanishing line from $E^2$, and so converges strongly to its target, $\pi_{t-s}(I\hat X)$.
+%\end{cor}
 
 
 
@@ -806,7 +837,7 @@ second quadrant cohomology --- Dwyer's work Eilenberg-Moore
 
 
 
-\end{Conventions and notation}
+
 
 
 \begin{CPiAlgs and CHalgs}
@@ -1111,7 +1142,8 @@ This is another expression of homogeneity in the relations defining $\calC$. For
 \subsection{Higher simplicial Eilenberg-Mac Lane maps}[\textbf{$\Delta$ because} it's the right symbol, should be an upper index since it decreases homological degree.]
 
 
-In what follows, we will often have a natural map $F$ whose domain and codomain both support a switch map $T$, obtained by interchanging tensor factors. Furthermore, we will so often have use for the expression $TFT$, that we introduce the shorthand $\twist F:=TFT$. Although this notation has the potential for ambiguity, we will be careful to avoid confusion.
+In what follows, we will often have a natural map $F$ whose domain and codomain both support a switch map $T$, obtained by interchanging tensor factors. Furthermore, we will so often have use for the expression $TFT$, that we introduce the shorthand $\twist F:=TFT$. %Although this notation has the potential for ambiguity, we will be careful to avoid confusion.
+Although this notation is potentially ambiguous, whenever we write $\sigma FG$, for functions $F$ and $G$, we mean $(\sigma F)G$, not $\sigma(FG)$.
 
 Let $\{\DeltaUp^k\}$ be a higher simplicial Eilenberg-Mac Lane map \cite[\S3]{DwyerHtpyOpsSimpComAlg.pdf}, i.e.\ a collection of maps
 \[\DeltaUp^k:(CU\otimes CV)_{i+k}\to N(U\otimes V)_i\textup{\ \ defined for $0\leq k\leq i$}\]
@@ -1407,15 +1439,15 @@ It is \textbf{??? prob not ???} a natural convention to define $D_k=0$ for whene
 \begin{shaded}
 \textbf{Move, maybe.}
 Let $\{D^k\}$ be a special dual Alexander-Whitney map \cite[Proposition 5.2]{turner_opns_and_sseqs_I.pdf}, i.e.\  maps
-\[D^k:(CR\otimes CS)_{-i-k}\to N(R\otimes S)_{-i}\textup{\ \ for $i,k\geq0$},\]
+\[D^k:(CR\otimes CS)^{i+k}\to C(R\otimes S)^{i}\textup{\ \ for $i,k\geq0$},\]
 natural in cosimplicial vectorspaces $R,S$,
 with the properties:
 \begin{itemize}
 \setlength{\parindent}{.25in}
 \item $dD^k+D^kd=D^{k-1}+TD^{k-1}T$ for $k\geq1$;
 \item $D^0$ is a chain homotopy equivalence inducing the identity in dimension zero;
-\item the restriction of $D^k$ to $C_{-i}R\otimes C_{-j}S$ is zero unless $i\geq k$ and $j\geq k$; and
-\item $D^k$ maps $C_{-k}R\otimes C_{-k}S$ identically onto $C_{-k}(R\otimes S)$.
+\item the restriction of $D^k$ to $C^{i}R\otimes C^{j}S$ is zero unless $i\geq k$ and $j\geq k$; and
+\item $D^k$ maps $C^{k}R\otimes C^{k}S$ identically onto $C^{k}(R\otimes S)$.
 \end{itemize}
 It is a natural convention to define $D^k=0$ for whenever either $k<0$ or $i<0$, in which case the relation $dD^k+D^kd=D^{k-1}+TD^{k-1}T$ holds for any $k$.
 \end{shaded}
@@ -1432,6 +1464,22 @@ These functions descend to  well defined cohomotopy operations:
 \begin{proof}
 One checks that these cochain operations induce well defined operations $\ExtCohProd$ and $\ExtCohOp^k$ by the same arguments as in \cite[\S1.12]{MR2245560}.
 \end{proof}
+
+\begin{shaded}
+In this section we recall the definition of certain cohomotopy operations with domain $\pi^*U$ for any $U\in c\vect{}{}$, \textbf{reference}, using the function
+\[D^{n-i}(\alpha\otimes \alpha)+D^{n-i+1}(\alpha\otimes d\alpha),\ \ C^nU \to C^{n+i}(S_2U).\]
+\begin{prop}[same refs, I guess] \label{extUnaryCohomotOps}
+These functions descend to  well defined cohomotopy operations:
+\[\ExtCohOp^k:\pi^{n}U\to \pi^{n+k}(S_2U),\text{ \ zero unless $0\leq k\leq n$.}\]
+\end{prop}
+\begin{proof}
+One checks that these cochain operations induce well defined operations $\ExtCohProd$ and $\ExtCohOp^k$ by the same arguments as in \cite[\S1.12]{MR2245560}.
+\end{proof}
+Now if $U=\dual V$ for some $V\in s\vect{}{}$, then we may use the natural transformation $S_2\dual\to\dual S^2$ to form the composite
+\[\pi^n\dual V\overset{\ExtCohOp^k}{\to}\pi^nS_2\dual V\to \pi^n\dual S^2V,\]
+and under the natural isomorphism $\pi^*\dual\cong \dual\pi_*$, this operation is the operation defined before the shading.
+
+\end{shaded}
 
 \subsection{Linearly dual homotopy operations}\label{Linearly dual homotopy operations}
 The linear maps $\ExtCohOp^k$ induce dual operators
@@ -1458,7 +1506,14 @@ This pairing induces a pairing on cohomotopy,
 \[\ExtCohProd:S_2(\dual(\pi_*V))\to \dual(\pi_*(S^2V)),\]
 with the property that $\ExtCohProd(\alpha\otimes \alpha)=\ExtCohOp^k\alpha$ for $\alpha\in\dual(\pi_kV)$.
 \end{prop}
-
+\begin{shaded}
+\begin{prop}\label{the external cohomotopy pairing}
+Suppose that $U\in c\vect{}{}$. Then there is a pairing
+\[\ExtCohProd:S_2(\pi^*V)\to \pi^*(S_2V),\]
+defined by $x\otimes y\mapsto D^0(x\otimes y)$,
+with the property that $\ExtCohProd(\alpha\otimes \alpha)=\ExtCohOp^k\alpha$ for $\alpha\in \pi^kV$.
+\end{prop}
+\end{shaded}
 
 
 \subsection{Chain level structure for cohomology operations}
@@ -1752,45 +1807,83 @@ Mention the work of Turner; of Hackney [1101.3798v3], using universal examples a
 
 
 
+\subsection*{move to application of singer}
 
 
 \subsection{On first quadrant cohomology spectral sequences}
+%. While the comultiplicative structure that we can define on the resolution $Q^{\calL(n)}\BSWres L$ is not that of a coalgebra, we can still use his techniques after a single simple observation. 
 
-[\textbf{This whole subsection needs} to have its notation brought into line with the rest of the document. We \textbf{also need} to mention $S^k$ somewhere, and discuss the external operations at $E_2$!] In what follows, we'll need to use Singer's techniques for deriving operations in spectral sequences. Singer defines operations in the cohomology spectral sequence of a bisimplicial cocommutative coalgebra. While the comultiplicative structure that we can define on the resolution $Q^{\calL(n)}\BSWres L$ is not that of a coalgebra, we can still use his techniques after a single simple observation. That is, for every bisimplicial vector space $V$, if we write $E_r^{**}(V)$ for the cohomology spectral sequence obtained from the double cochain complex $\dual(N_*N_*V)$, then Singer's methods yield external operations of type:
-\[E_r^{**}(V)\to E_{r'}^{**}(S^2V)\textup{ and }E_r^{**}(V)\otimes E_r^{**}(V)\to E_r^{**}(S^2V),\]
-which will be compatible with external operations of type:
-\[H^*(\dual(CV))\to H^*(\dual(CS^2V))\textup{ and }H^*(\dual(CV))\otimes H^*(\dual(CV))\to H^*(\dual(CS^2V)).\]
+\begin{shaded}\tiny
+[\textbf{This whole subsection needs} to have its notation brought into line with the rest of the document. We \textbf{also need} to mention $S^k$ somewhere, and discuss the external operations at $E_2$!]
+\end{shaded}
+%In what follows, we'll need to use Singer's techniques \cite{MR2245560} for deriving operations in spectral sequences.
+Singer \cite{MR2245560} developed an extremely useful theory of products and Steenrod operations in the first quadrant cohomology spectral sequence arising from a bisimplicial cocommutative coalgebra. In the applications we have in mind, however, the bisimplicial object that we have to hand  will \emph{not} be a coalgebra [\textbf{analogy} with \S?]. This will not stop us from applying Singer's techniques after we make the appropriate modifications. The idea is to externalize Singer's operations, so that for every bisimplicial vector space $V$, there are  external operations of type:
+\[\E{}{r}{V}{**}{}\to \E{}{r}{S^2V}{**}{}\textup{ \ and \ }S_2\E{}{r}{V}{**}{}\to \E{}{r}{S^2V}{**}{}.\]
+These will be compatible with external operations of type: [\textbf{think about me}]
+\[H^*(\dual(TV))\to H^*(\dual(TS^2V))\textup{ and }H^*(\dual(TV))\otimes H^*(\dual(TV))\to H^*(\dual(TS^2V)).\]
 
-When $V$ is a cocommutative coalgebra, the diagonal map $V\to S^2V$ induces a map $E_r^{**}(S^2V)\to E_r^{**}(V)$, postcomposition with which yields Singer's operations, however we will not have access to such structure in what follows. Thus, we will briefly reprise Singer's results in this \emph{external} language, in order that we have them available.
-\begin{thm}[Singer's Book, thm 2.15-2.17,2.22]
+
+When $V$ is  in fact a bisimplicial cocommutative coalgebra, one recovers Singer's theory by composing with the map of spectral sequences induced by the coproduct:
+\[\E{}{r}{S^2V}{**}{}\to \E{}{r}{V}{**}{}.\]
+%When $V$ is a cocommutative coalgebra, the diagonal map $V\to S^2V$ induces a map $E_r^{**}(S^2V)\to E_r^{**}(V)$, postcomposition with which yields Singer's operations, however we will not have access to such structure in what follows. Thus, we will briefly reprise Singer's results in this \emph{external} language, in order that we have them available.
+\begin{thm}[{\cite[Theorems 2.15-2.17,2.22, Proposition 2.21]{MR2245560}}]
 For all $p,q\geq0$ and all $r\geq2$, there are well-defined vector space homomorphisms:
 \begin{alignat*}{2}
-\ExtCohOp^k:E^{p,q}_r(V)&\to E^{p,q+k}_r(S^2V)&\qquad&\text{if }0\leq k \leq q,\\
-\ExtCohOp^k:E^{p,q}_r(V)&\to E^{p+k-q,2q}_{r+k-q}(S^2V)&\qquad&\text{if }q\leq k\leq q+r-2,\\
-\ExtCohOp^k:E^{p,q}_r(V)&\to E^{p+k-q,2q}_{2r-2}(S^2V)&\qquad&\text{if }q+r-2\leq k.
+\ExtCohOp^k:\E{}{r}{V}{p,q}{}&\to \E{}{r}{S^2V}{p,q+k}{}&\qquad&\text{if }0\leq k \leq q,\\
+\ExtCohOp^k:\E{}{r}{V}{p,q}{}&\to \E{}{r+k-2}{S^2V}{p+k-q,2q}{}&\qquad&\text{if }q\leq k\leq q+r-2,\\
+\ExtCohOp^k:\E{}{r}{V}{p,q}{}&\to \E{}{2r-2}{S^2V}{p+k-q,2q}{}&\qquad&\text{if }q+r-2\leq k.
 \end{alignat*}
-The operations $\ExtCohOp^k$ are all defined at $E_2$, and determine the operations at each $E_r$, $r>2$. The operations $\ExtCohOp^k$ commute with differentials. Finally, the $\ExtCohOp^k$ converge to well defined maps on $E_\infty$, and there is a commuting diagram
+which commute with the differentials (c.f.\ \cite[Theorem 2.17]{MR2245560}), and an external (not necessarily exterior) commutative product operation which satisfies the Liebnitz rule:
+\[\ExtCohProd:\E{}{r}{V}{p_1,q_1}{}\otimes \E{}{r}{V}{p_2,q_2}{}\to \E{}{r}{S^2V}{p_1+p_2,q_1+q_2}{}.\]
+Those operation with domain $\E{}{2}{V}{}{}$ have codomain $\E{}{2}{S^2V}{}{}$, and we reindex these operations as follows: %are of the form $\E{}{2}{V}{**}{}\to \E{}{2}{S^2V}{**}{}$.
+\begin{alignat*}{3}
+\vExtCohOp^k&=\,\ExtCohOp^k&:\,&\E{}{2}{V}{p,q}{}\to \E{}{2}{S^2V}{p,q+k}{}&\qquad&\text{if }0\leq k \leq q,\\
+\vExtCohOp^k&=0&&&&\text{if }k > q,\\
+\hExtCohOp^k&=\ExtCohOp^{q+k}&:\,&\E{}{2}{V}{p,q}{}\to \E{}{2}{S^2V}{p+k,2q}{}&\qquad&\text{if }0\leq k.
+\end{alignat*}
+Under the identification $\E{}{2}{V}{**}{}=\pi\dhor^{*}\pi\dver^{*}(\dual V)$, the operations $\vExtCohOp^k$ % :\pi\dhor^{p}\pi\dver^{q}(\dual V)\to \pi\dhor^{p}\pi\dver^{q+k}(\dual S^2V)$ 
+are  obtained by applying $\pi\dhor^p$ to the linear maps of \S????:
+\[\pi\dver^{q}(\dual V)\overset{\ExtCohOp^k}{\to} \pi\dver^{q+k}(S_2\dual V)\to \pi\dver^{q+k}(\dual S^2V)\]
+On the other hand, the operation $\hExtCohOp^k$ equals the composite:
+\[\pi\dhor^p\pi\dver^q\dual V
+\overset{\ExtCohOp^k}{\to} 
+\pi\dhor^{p+k}(S_2\pi\dver^*\dual V)^{2q}
+\overset{\pi\dhor^{p+k}(\ExtCohProd)}{\to}
+\pi\dhor^{p+k}\pi\dver^{2q}S_2\dual V
+\to 
+\pi\dhor^{p+k}\pi\dver^{2q}\dual S^2 V,
+\]
+ and the pairing $\ExtCohProd:\E{}{2}{V}{**}{}\to \E{}{2}{S^2V}{**}{}$ equals:
+\[S^2\pi\dhor^*\pi\dver^*\dual V
+\overset{\ExtCohProd}{\to} 
+\pi\dhor^*(S_2\pi\dver^*\dual V)
+\overset{\pi\dhor^{*}(\ExtCohProd)}{\to}
+\pi\dhor^{*}\pi\dver^{*}S_2\dual V
+\to 
+\pi\dhor^{*}\pi\dver^{*}\dual S^2 V.
+\]
+
+These operations on $E_2$ determine the operations at each $E_r$, $r>2$. The operations $\ExtCohOp^k$ commute with differentials as appropriate. Finally, the $\ExtCohOp^k$ stabilize to well defined maps on $E_\infty$, and there is a commuting diagram
 \[\xymatrix@R=4mm{
-E^{p,q}_\infty(V)\ar[r]^-{\ExtCohOp^k}\ar[d]^-{\pi}
+\E{}{\infty}{V}{p,q}{}\ar[r]^-{\ExtCohOp^k}\ar[d]^-{\pi}
 &%r1c1
-E^{p,q+k}_\infty(S^2V)\ar[d]^-{\pi}
+\E{}{\infty}{S^2V}{p,q+k}{}
+\ar[d]^-{\pi}
 \\%r1c2
-E_0^{p,q}H^*(\dual(CV))\ar[r]^-{\ExtCohOp^k}&%r2c1
-E_0^{p,q+k}H^*(\dual(CS^2V))%r2c2
+\E{}{0}{H^*(\dual(TV))}{p,q}{}\ar[r]^-{\ExtCohOp^k}&%r2c1
+\E{}{0}{H^*(\dual(TS^2V))}{p,q+k}{}%r2c2
 }\]
 whenever $0\leq k\leq q$, and a commuting diagram
 \[\xymatrix@R=4mm{
-E^{p,q}_\infty(V)\ar[r]^-{\ExtCohOp^k}\ar[d]^-{\pi}
+\E{}{\infty}{V}{p,q}{}\ar[r]^-{\ExtCohOp^k}\ar[d]^-{\pi}
 &%r1c1
-E^{p+k-q,2q}_\infty(S^2V)\ar[d]^-{\pi}
+\E{}{\infty}{S^2V}{p+k-q,2q}{}
+\ar[d]^-{\pi}
 \\%r1c2
-E_0^{p,q}H^*(\dual(CV))\ar[r]^-{\ExtCohOp^k}&%r2c1
-E_0^{p+k-q,2q}H^*(\dual(CS^2V))%r2c2
+\E{}{0}{H^*(\dual(TV))}{p,q}{}\ar[r]^-{\ExtCohOp^k}&%r2c1
+\E{}{0}{H^*(\dual(TS^2V))}{p+k-q,2q}{}%r2c2
 }\]
 whenever $q\leq k$ (which summarises also Singer's computation of how the $\ExtCohOp^k$ interact with the filtration on cohomology).
-
-Similar theory holds for an exterior product operation
-\[\ExtCohProd:E_r^{p_1,q_1}(V)\otimes E_r^{p_2,q_2}(V)\to E_r^{p_1+p_2,q_1+p_2}(S^2V)\]
 %Moreover, for $r\geq2$ and $p,q,k\geq0$ given, if $\alpha\in E_r^{p,q}$, then $\Sq_\textup{ext}^k\alpha$ and $\Sq_\textup{ext}^kd_r\alpha$ both survive to $E_t$, where
 %\[t=\begin{cases}
 %r,&\textup{if }0\leq k \leq q-r+1;\\
@@ -1799,45 +1892,69 @@ Similar theory holds for an exterior product operation
 %\end{cases}
 %\]
 %and in $E_t$ we have the relation $d_t\Sq^k_textup{ext}\alpha=\Sq^k_textup{ext}d_r\alpha$.
-\end{thm}
-Moreover, if the bisimplicial object $V$ admits an augmentation $\lambda:V_{0\bullet}\to U_{\bullet}$, (\textbf{didn't I} do away with $\bullet$?) then %such that the natural map $\lambda_*:CV\to CU$ is a weak equivalence,
-Singer proves the following relationship between the spectral sequence operations and the operations of \S\ref{generic coh ops section}:
-\begin{thm}[Proposition 2.1]
-The $\ExtCohOp^k$ and $\ExtCohProd$ commute with $\lambda^*$, so that there are commuting diagrams
+
+If $V$ admits an augmentation $d\dhor^0:V\to V_{-1}$, then $\ExtCohOp^k$ and $\ExtCohProd$ commute with the induced maps on cohomotopy, so that there are commuting diagrams %$\dual(d\dhor^0)$
 \[\xymatrix@R=4mm{
-H^{m}(\dual(CU))\ar[r]^-{\ExtCohOp^k}
-\ar[d]^-{\lambda^*}
+\pi^{m}(\dual(V_{-1}))\ar[r]^-{\ExtCohOp^k}
+\ar[d]%^-{\lambda^*}
 &%r1c1
-H^{m+k}(\dual(CS^2U))\ar[d]^-{\dual(S^2\lambda)}
+\pi^{m+k}(\dual(S^2V_{-1}))\ar[d]%^-{\dual(S^2\lambda)}
 &%r1c3
-H^{m_1}(\dual(CU))\otimes H^{m_2}(\dual(CU))\ar[r]^-{\ExtCohProd}
-\ar[d]^-{\lambda^*}
+S_2\pi^{*}(\dual(V_{-1}))\ar[r]^-{\ExtCohProd}
+\ar[d]%^-{\lambda^*}
 &%r1c1
-H^{m_1+m_2}(\dual(CS^2U))\ar[d]^-{\dual(S^2\lambda)}
+\pi^{*}(\dual(S^2V_{-1}))\ar[d]%^-{\dual(S^2\lambda)}
 \\%r1c5
-H^{m}(\dual(CV))\ar[r]^-{\ExtCohOp^k}
+H^{m}(\dual(TV))\ar[r]^-{\ExtCohOp^k}
 &%r2c1
-H^{m+k}(\dual(CS^2V))
+H^{m+k}(\dual(TS^2V))
 &%r2c3
-H^{m_1}(\dual(CV))\otimes H^{m_2}(\dual(CV))\ar[r]^-{\ExtCohProd}
+S_2H^{*}(\dual(TV))\ar[r]^-{\ExtCohProd}
 &%r2c1
-H^{m_1+m_2}(\dual(CS^2V))
+H^{*}(\dual(TS^2V))
 }\]
 \end{thm}
-
-Singer separates the operations $\ExtCohOp^k:E^{p,q}_2\to E_{2}$ according to the pattern of change in the spectral sequence coordinates of their output. Indeed, he defines
-\begin{alignat*}{2}
-\vExtCohOp^k=\ExtCohOp^k:E^{p,q}_2(V)&\to E^{p,q+k}_2(S^2V)&\qquad&\text{if }0\leq k \leq q,\\
-\hExtCohOp^k=\ExtCohOp^{q+k}:E^{p,q}_2(V)&\to E^{p+k,2q}_2(S^2V)&\qquad&\text{if }0\leq k \leq p,
-\end{alignat*}
-and gives explicit formulae for these $E_2$ operations, and for the product at $E_2$ [Singer 2.23].
+\textbf{The key construction} is $S^k$ \textbf{(define me)}--- study its effect on filtration and leading filtration term.
+%Moreover, if the bisimplicial object $V$ admits an augmentation $\lambda:V_{0\bullet}\to U_{\bullet}$, (\textbf{didn't I} do away with $\bullet$?) then %such that the natural map $\lambda_*:CV\to CU$ is a weak equivalence,
+%Singer proves the following relationship between the spectral sequence operations and the operations of \S\ref{generic coh ops section}:
+%\begin{thm}[Proposition 2.1]
+%The $\ExtCohOp^k$ and $\ExtCohProd$ commute with $\lambda^*$, so that there are commuting diagrams
+%\[\xymatrix@R=4mm{
+%H^{m}(\dual(CU))\ar[r]^-{\ExtCohOp^k}
+%\ar[d]^-{\lambda^*}
+%&%r1c1
+%H^{m+k}(\dual(CS^2U))\ar[d]^-{\dual(S^2\lambda)}
+%&%r1c3
+%H^{m_1}(\dual(CU))\otimes H^{m_2}(\dual(CU))\ar[r]^-{\ExtCohProd}
+%\ar[d]^-{\lambda^*}
+%&%r1c1
+%H^{m_1+m_2}(\dual(CS^2U))\ar[d]^-{\dual(S^2\lambda)}
+%\\%r1c5
+%H^{m}(\dual(CV))\ar[r]^-{\ExtCohOp^k}
+%&%r2c1
+%H^{m+k}(\dual(CS^2V))
+%&%r2c3
+%H^{m_1}(\dual(CV))\otimes H^{m_2}(\dual(CV))\ar[r]^-{\ExtCohProd}
+%&%r2c1
+%H^{m_1+m_2}(\dual(CS^2V))
+%}\]
+%\end{thm}
+%
+%Singer separates the operations $\ExtCohOp^k:E^{p,q}_2\to E_{2}$ according to the pattern of change in the spectral sequence coordinates of their output. Indeed, he defines
+%\begin{alignat*}{2}
+%\vExtCohOp^k=\ExtCohOp^k:E^{p,q}_2(V)&\to E^{p,q+k}_2(S^2V)&\qquad&\text{if }0\leq k \leq q,\\
+%\hExtCohOp^k=\ExtCohOp^{q+k}:E^{p,q}_2(V)&\to E^{p+k,2q}_2(S^2V)&\qquad&\text{if }0\leq k \leq p,
+%\end{alignat*}
+%and gives explicit formulae for these $E_2$ operations, and for the product at $E_2$ [Singer 2.23].
 
 \subsection{On second quadrant cohomology spectral sequences}
 
-\hfil
+This is Dwyer's work.
 
 \subsection{On second quadrant homotopy spectral sequences}
 
+General throatclearing: 
+\begin{shaded}\tiny
 We produce, for $X$ a cosimplicial simplicial vector space, an external commutative pairing
 \[\times^\textup{ext}:(E^rX)^s_{t}\otimes (E^rX)_{t'}^{s'}\to (E^r(S_2X))^{s+s'}_{t+t'}\]
 and further operations:
@@ -1847,40 +1964,42 @@ Of course, if $X$ is a mixed simplicial algebra, then postcomposition with the p
 
 In the present context, however, the operations of theorem XYZ are all equal to zero on $E^2$, simply because the Bousfield-Kan spectral sequence is derived from a cosimplicial object which is levelwise an Eilenberg-Mac Lane object. However, we will be able to use the external operations in section XYZ, shifting them one filtration higher in order to obtain nontrivial operations at on the Bousfield-Kan $E^2$.
 
-\subsection{Higher cosimplicial Eilenberg-Zilber map}
-Let $\{D^k\}$ be a special cosimplicial Eilenberg-Zilber map \cite[5.2]{turner_opns_and_sseqs_I.pdf}, i.e.\  maps
-\[D^k:(CR\otimes CS)_{-i-k}\to N(R\otimes S)_{-i}\textup{\ \ for $i,k\geq0$},\]
-natural in cosimplicial vectorspaces $R,S$,
-with the properties:
-\begin{itemize}
-\setlength{\parindent}{.25in}
-\item $dD^k+D^kd=D^{k-1}+TD^{k-1}T$ for $k\geq1$;
-\item $D^0$ is a chain homotopy equivalence inducing the identity in dimension zero;
-\item the restriction of $D^k$ to $C_{-i}R\otimes C_{-j}S$ is zero unless $i\geq k$ and $j\geq k$; and
-\item $D^k$ maps $C_{-k}R\otimes C_{-k}S$ identically onto $C_{-k}(R\otimes S)$.
-\end{itemize}
-It is a natural convention to define $D^k=0$ for whenever either $k<0$ or $i<0$, in which case the relation $dD^k+D^kd=D^{k-1}+TD^{k-1}T$ holds for any $k$.
-\subsection{Higher simplicial Eilenberg-Mac Lane map}
-Let $\{\Delta_k\}$ be a higher simplicial Eilenberg-Mac Lane map \cite[\S3]{DwyerHtpyOpsSimpComAlg.pdf}, i.e.\ maps
-\[\Delta_k:(CU\otimes CV)_{i+k}\to N(U\otimes V)_i\textup{\ \ for $0\leq k\leq i$}\]
-such that the identities
-\[\Delta_k+T\Delta_kT=\phi_k+\begin{cases}
-\Delta_{k-1}\partial+\partial\Delta_{k-1},&\textup{if }k\geq1;\\
-\Delta,&\textup{if }k=0.
-%\\,&\textup{if }
-\end{cases}
-\]
-hold on classes of dimension at least $2k$, and:
-\begin{itemize}
-\setlength{\parindent}{.25in}
-\item $\Delta:CU\otimes CV\to N(U\times V)$ is a chain homotopy equivalence inducing the identity in dimension zero; and
-\item $\phi_k$ is the map $(CU\otimes CV)_{i+k}\to N(U\otimes V)_i$ which vanishes except on $U_k\otimes V_k$, where its value is just the projection $U_k\otimes V_k\to N(U\times V)_k$.
-\end{itemize}
-Note that $\phi$ commutes with symmetry isomorphisms, and thus so must $\Delta$.
 
-It is not a natural convention to regard $\Delta_k$ as zero where it is not defined, however, we will perform this abuse shortly for notational convenience. Under this convention we will be able to use the equation
-\[(d\Delta_k+\Delta_kd)z=(\phi_{k+1} +\Delta_{k+1}+T\Delta_{k+1}T)z\]
-whenever $k\geq0$ and the simplicial dimension of $z$ does not equal either of $2k$ and $2k+1$.
+\textbf{similar para:} Let $X$ be a mixed simplicial commutative non-unital $\F_2$-algebra. I'd prefer to construct spectral sequence operations externally, as maps $E^r_{-s,t}(X)\to E^r_{?,?}(X\otimes_{\Sigma_2}X)$, which may sometimes be multivalued. I'll also assume that $X$ admits a coaugmentation $X^{-1}_\bullet\to X^\bullet_\bullet$ from a simplicial algebra $X^{-1}_\bullet$, and that this coaugmentation induces an isomorphism on total homology.
+%
+%\subsection{Higher cosimplicial Eilenberg-Zilber map}
+%Let $\{D^k\}$ be a special cosimplicial Eilenberg-Zilber map \cite[5.2]{turner_opns_and_sseqs_I.pdf}, i.e.\  maps
+%\[D^k:(CR\otimes CS)_{-i-k}\to N(R\otimes S)_{-i}\textup{\ \ for $i,k\geq0$},\]
+%natural in cosimplicial vectorspaces $R,S$,
+%with the properties:
+%\begin{itemize}
+%\setlength{\parindent}{.25in}
+%\item $dD^k+D^kd=D^{k-1}+TD^{k-1}T$ for $k\geq1$;
+%\item $D^0$ is a chain homotopy equivalence inducing the identity in dimension zero;
+%\item the restriction of $D^k$ to $C_{-i}R\otimes C_{-j}S$ is zero unless $i\geq k$ and $j\geq k$; and
+%\item $D^k$ maps $C_{-k}R\otimes C_{-k}S$ identically onto $C_{-k}(R\otimes S)$.
+%\end{itemize}
+%It is a natural convention to define $D^k=0$ for whenever either $k<0$ or $i<0$, in which case the relation $dD^k+D^kd=D^{k-1}+TD^{k-1}T$ holds for any $k$.
+%\subsection{Higher simplicial Eilenberg-Mac Lane map}
+%Let $\{\Delta_k\}$ be a higher simplicial Eilenberg-Mac Lane map \cite[\S3]{DwyerHtpyOpsSimpComAlg.pdf}, i.e.\ maps
+%\[\Delta_k:(CU\otimes CV)_{i+k}\to N(U\otimes V)_i\textup{\ \ for $0\leq k\leq i$}\]
+%such that the identities
+%\[\Delta_k+T\Delta_kT=\phi_k+\begin{cases}
+%\Delta_{k-1}\partial+\partial\Delta_{k-1},&\textup{if }k\geq1;\\
+%\Delta,&\textup{if }k=0.
+%%\\,&\textup{if }
+%\end{cases}
+%\]
+%hold on classes of dimension at least $2k$, and:
+%\begin{itemize}
+%\setlength{\parindent}{.25in}
+%\item $\Delta:CU\otimes CV\to N(U\times V)$ is a chain homotopy equivalence inducing the identity in dimension zero; and
+%\item $\phi_k$ is the map $(CU\otimes CV)_{i+k}\to N(U\otimes V)_i$ which vanishes except on $U_k\otimes V_k$, where its value is just the projection $U_k\otimes V_k\to N(U\times V)_k$.
+%\end{itemize}
+%Note that $\phi$ commutes with symmetry isomorphisms, and thus so must $\Delta$.
+
+\end{shaded}
+
 
 \subsubsection*{Resulting maps of mixed simplicial vectorspaces}
 For mixed simplicial vector spaces $X$ and $Y$, write $C(X\otimes_\textup{v}Y)$ for the double complex which in degree $(\fraks,\frakt)$ equals the direct sum $\bigoplus_{t+t'=\frakt}X_t^\fraks\otimes X_{t'}^\fraks$. The following vectorspace maps are given by prolonging $D^k$, $\Delta$, $\Delta_k$ and $\psi_k$, wherever these maps are defined, and by zero elsewhere:
@@ -1891,10 +2010,15 @@ For mixed simplicial vector spaces $X$ and $Y$, write $C(X\otimes_\textup{v}Y)$ 
 {\phi}_k:C(X\otimes_\textup{v} Y)_{-\fraks,\frakt+k}&\to C(X\otimes Y)_{-\fraks,\frakt}&\quad&\textup{(zero unless $0\leq k\leq \frakt$)}\\
 {\rho}:C(X\otimes X)_{-\fraks,\frakt}&\to C(X\otimes_{\Sigma_2} X)_{-\fraks,\frakt}&\quad&\textup{(proj onto coinvariants)}
 \end{align*}
-Also, we'll always write $T$ for symmetry isomorphisms, and write ``$\twist F$'' as shorthand for the function $TFT$. Although this notation is potentially ambiguous, whenever we write $\sigma FG$, for functions $F$ and $G$, we mean $(\sigma F)G$, not $\sigma(FG)$.
+We have essentially just committed to regarding $\Delta_k$ as zero where it is not defined. This is certainly not the natural convention, and it results in such unpleasant statements as:
+\begin{lem}
+Suppose that $z\in C(X\otimes_\textup{v} Y)_{-\fraks,\frakt}$. Then
+\[(d\Delta_k+\Delta_kd)z=(\phi_{k+1} +\Delta_{k+1}+T\Delta_{k+1}T)z\]
+whenever $k\geq0$ and $\frakt$ does not equal either of $2k$ and $2k+1$.
+\end{lem}
+\noindent We hope that the ends justify the means.
 
-\subsubsection*{The context}
-Let $X$ be a mixed simplicial commutative non-unital $\F_2$-algebra. I'd prefer to construct spectral sequence operations externally, as maps $E^r_{-s,t}(X)\to E^r_{?,?}(X\otimes_{\Sigma_2}X)$, which may sometimes be multivalued. I'll also assume that $X$ admits a coaugmentation $X^{-1}_\bullet\to X^\bullet_\bullet$ from a simplicial algebra $X^{-1}_\bullet$, and that this coaugmentation induces an isomorphism on total homology.
+As discussed earlier, we'll write $T$ for any symmetry isomorphism, write ``$\twist F$'' as shorthand for the function $TFT$, and  whenever we write $\sigma FG$, we'll mean $(\sigma F)G$.
 
 \subsection{Products and Steenrod operations}
 We will define the external product
@@ -2170,13 +2294,6 @@ The $\delta^\textup{raw}$-operations (resp.\ Steenrod operations)  at $E^2$ agre
 \end{thm}
 
 
-
-
-
-
-{\tiny It is not a natural convention to regard $\DeltaUp^k$ as zero where it is not defined, however, we will perform this abuse shortly for notational convenience. Under this convention we will be able to use the equation
-\[(d\DeltaUp^k+\DeltaUp^kd)z=(\oldphi^{k+1} +\DeltaUp^{k+1}+T\DeltaUp^{k+1}T)z\]
-whenever $k\geq0$ and the simplicial dimension of $z$ does not equal either of $2k$ and $2k+1$.}
 
 
 \end{External spectral sequence operations}
@@ -4872,11 +4989,21 @@ having all gradings at the very right, tensor products of vector spaces,\ldots?
 \item reassess every use of the phrase Hilton-Milnor
 \item the various steenrod algebras etc better be unital!
 \item Use cohomotopy of the dual!!!! it's classier.
+\item (co) or (co-)
+\item clear warnings using ctrl-backslash
+\item clarify external and exterior
+\item all \textup{v} should be \textup{V}, for size consistency
 \end{enumerate}
 \end{todolist}
 \begin{bibliog}
 \printbibliography
 \end{bibliog}
+
+\begin{Contents Page}
+%\begin{abstract}\end{abstract}
+%\maketitle
+\tableofcontents
+\end{Contents Page}
 
 \end{document}
 
