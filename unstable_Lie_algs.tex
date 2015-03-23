@@ -1,7 +1,8 @@
 % !TEX root = z_output/unstable_Lie_algs.tex
 \documentclass[11pt]{amsart}
 \newcommand{\IncludeAll}{}% <--
-\newcommand{\ShrinkPages}{}% <--
+%\newcommand{\ShrinkPages}{}% <--
+%\newcommand{\PostponeContents}{}% <--
 \ifx\ShrinkPages\undefined\else\usepackage[paperheight=160mm,paperwidth=160mm]{geometry}\fi%220/160
 \usepackage{amsmath,amsthm,amssymb}
 \usepackage{eucal}
@@ -357,6 +358,7 @@ url=false,doi=false,isbn=false,eprint=false]{biblatex}%
 \newcommand{\Id}{\textup{id}}
 \newcommand{\complexes}{\textup{ch}_+}
 \newcommand{\algs}{{\scrC\!\textit{om}}}
+\newcommand{\algcat}{{\scrC\!\textit{om}}}%supposed to be temporary
 
 \newcommand{\E}[5]{[E^{#1}_{#2}#3]^{#4}_{#5}}
 \newcommand{\EZ}[5]{[Z^{#1}_{#2}#3]^{#4}_{#5}}
@@ -412,7 +414,7 @@ url=false,doi=false,isbn=false,eprint=false]{biblatex}%
 \begin{Contents Page}
 %\begin{abstract}\end{abstract}
 %\maketitle
-%\tableofcontents - currently deferred to end of document
+\ifx\PostponeContents\undefined\tableofcontents\else\relax\fi
 \end{Contents Page}
 
 \begin{Intro}
@@ -1423,7 +1425,7 @@ In this section we recall the definition of certain homotopy operations with dom
 \[D^*_{n-i}\oldphi(\alpha\otimes \alpha)+D^*_{n-i+1}\oldphi(\alpha\otimes d\alpha),\ \ \dual(N_nV) \to \dual(N_{n+i}(S^2V)),\]
 where we regard the $D^*_k$ as maps into $\dual(N_*(S^2V))$, and the map $\oldphi$ is that described in [Singer \S1.9]. Namely, [\textbf{potentially redundant:} as the normalized complex is naturally a retract of the unnormalized complex, we may define] $\oldphi:\dual\left(N_mV\right)\otimes \dual\left(N_mV\right)\to \dual\left(N_m(V\otimes V)\right)$ to be
 \[\left(C_mV\overset{\alpha}{\to}\F_2\right)\otimes \left(C_mV\overset{\beta}{\to}\F_2\right)\mapsto\left(C_m(V\otimes V)\overset{\alpha\otimes\beta}{\to}\F_2\otimes \F_2\overset{\textup{mult}}{\to}\F_2\right).\]
-\begin{prop}[same refs, I guess] \label{extUnaryCohomotOps}
+\begin{prop}[same refs, I guess]
 These functions descend to  well defined cohomotopy operations:
 \[\ExtCohOp^k:\dual(\pi_{n}V)\to \dual(\pi_{n+k}(S^2V)),\text{ \ zero unless $0\leq k\leq n$.}\]
 \end{prop}
@@ -1434,7 +1436,7 @@ One checks that these cochain operations induce well defined operations $\ExtCoh
 \begin{shaded}
 In this section we recall the definition of certain cohomotopy operations with domain $\pi^*U$ for any $U\in c\vect{}{}$, \textbf{reference}, using the function
 \[D^{n-i}(\alpha\otimes \alpha)+D^{n-i+1}(\alpha\otimes d\alpha),\ \ C^nU \to C^{n+i}(S_2U).\]
-\begin{prop}[same refs, I guess] \label{extUnaryCohomotOps}
+\begin{prop}[same refs, I guess] 
 These functions descend to  well defined cohomotopy operations:
 \[\ExtCohOp^k:\pi^{n}U\to \pi^{n+k}(S_2U),\text{ \ zero unless $0\leq k\leq n$.}\]
 \end{prop}
@@ -1758,7 +1760,6 @@ One checks that the bracket is well defined in the quotient, and that taking the
 
 \end{Constructing (co)homotopy operations}
 \begin{Bousfield-Kan spectral sequence}
-\newcommand{\algcat}{{\scrC\!\textit{om}}}
 \section{\textbf{The Bousfield-Kan spectral sequence for \cancel{simplicial} algebras}}\label{Bousfield-Kan spectral sequence}
 \subsection{Completion with respect to homology}
 Suppose that $X\in s\algcat$. Then Radulescu-Banu \cite{Radulescu-Banu.pdf} has constructed a cosimplicial resolution $\calX^\bullet$ of $X$ by generalised Eilenberg-Mac Lane objects, and defined the \emph{completion of $X$ with respect to Andr\'e-Quillen homology} to be the totalization $X\hat{\ }:=\textup{Tot}(\calX^\bullet)$.
@@ -1807,7 +1808,7 @@ As Radulescu-Banu observed, there is an additional difficulty in constructing th
 
 Accordingly, we must mix Quillen's cofibrant replacement functor $c$ into our definition of the Adams tower over a simplicial algebra so that it relates as desired to Radulescu-Banu's resolution. The application of these cofibrant replacement functors adds to the difficulty of proving the connectivity estimates of Section \ref{sec:connectivityAnalysis}. We circumvent this difficulty by shifting to the standard comonadic bar construction.
 
-In Section \ref{introToRBwork} we will introduce Radulescu-Banu's cosimplicial resolution and explain a little terminology. In \S\ref{sec:ItSimpBar} we will state and prove a useful result on iterated simplicial bar constructions.
+In Section ??????????? we will introduce Radulescu-Banu's cosimplicial resolution and explain a little terminology. In \S\ref{sec:ItSimpBar} we will state and prove a useful result on iterated simplicial bar constructions.
 
 This research will form part of the author's PhD thesis. The author would like to thank his advisor, Haynes Miller, for his support and guidance, and John Harper, for sharing helpful insights into the use of cubical diagrams in connectivity analyses such as that of Section \ref{sec:connectivityAnalysis}.
 \subsection{Identification of $E^1$ and $E^2$}
@@ -3245,9 +3246,21 @@ dT
 So that, in particular, [so what?]
 \[d\textup{DEL}_i(x+dy)-\textup{SQ}^{t-i+1,s}(x+dy)=d\textup{DEL}_i(x)-\textup{SQ}^{t-i+1,s}(x)\qedhere\]
 \end{proof}
+
+\subsection{Commuting $\delta$ and $\Sq$}
+\textbf{Unchecked from here...} 
+When we do not lift any classes up a filtration, at $E^1$, we have the relation $\delta_i\Sq^jx=0$ (whenever $\delta_i$ is nontop).
+\begin{proof}
+Suppose that $X\in Z^1_{-s,t}$. We can assume that $x\in X^s_t$ for this purpose, so that $d_\textup{v}x=0$. Then $\Sq^jx$ is represented by the image of $D^{s-j}(x\otimes x)+D^{s-j+1}(x\otimes d_\textup{h}x)$ under the composite
+\[N^{s+j}(N_tX\otimes N_tX)\overset{\Delta}{\to}N^{s+j}N_{2t}(X\otimes_{\Sigma_2} X)\overset{\mu}{\to}N^{s+j}N_{2t}(X)\overset{\textup{``$\delta_i$''}}{\to}N^{s+j}N_{2t+i}(X)\]
+or maybe I'd prefer to write that it's represented by the image of ``an appropriate tensor product of cofaces of $x\in (\pi_tX)^s$'', under the composite
+\[N^{s+j}(\pi_tX\otimes \pi_tX)\overset{\Delta\textup{-product}}{\to}N^{s+j}\pi_{2t}(X)\overset{\delta_i}{\to}N^{s+j}\pi_{2t+i}(X).\]
+But non-top $\delta_i$ annihilates sums of products, and we're getting zero on $E^1$.
+\end{proof}
+
 \subsection{Summary of results}
 
-\textbf{Unchecked from here...} As $E^1$ is obtained from $E^0$ by taking homology in the simplicial direction, there are $\delta^\textup{ext}$-operations on $E^1$, i.e.\ $E^1_{-s,t}(X)\to E^1_{-s,t+i}(X\otimes_{\Sigma_2}X)$. They are unstable with respect to internal degree $t$, not with respect to total degree $n$. All of these operations are linear except for the top operation \cite[4.2]{DwyerHtpyOpsSimpComAlg.pdf}, and commute with the differentials in the cosimplicial direction. Thus, we obtain operations $\delta^\textup{alg}_i:E^2_{-s,t}(X)\to E^2_{-s,t+i}(X\otimes_{\Sigma_2}X)$ for $2\leq i<t$.
+As $E^1$ is obtained from $E^0$ by taking homology in the simplicial direction, there are $\delta^\textup{ext}$-operations on $E^1$, i.e.\ $E^1_{-s,t}(X)\to E^1_{-s,t+i}(X\otimes_{\Sigma_2}X)$. They are unstable with respect to internal degree $t$, not with respect to total degree $n$. All of these operations are linear except for the top operation \cite[4.2]{DwyerHtpyOpsSimpComAlg.pdf}, and commute with the differentials in the cosimplicial direction. Thus, we obtain operations $\delta^\textup{alg}_i:E^2_{-s,t}(X)\to E^2_{-s,t+i}(X\otimes_{\Sigma_2}X)$ for $2\leq i<t$.
 \begin{prop}
 On $E^2$, for $i<t$, the spectral sequence operations $\delta^\textup{ext}_i$ defined by $\textup{DEL}_i$ equal the operations $\delta^\textup{alg}_i$. The same holds on $E^1$ when $2\leq i\leq t$. In particular, the $\delta^\textup{ext}$-operations on the spectral sequence satisfy the $\delta$-Adem relations \textbf{if there's a commutative algebra structure around}.
 \end{prop}
@@ -3256,6 +3269,9 @@ The operations $\delta^\textup{alg}_i$ are constructed by taking a representativ
 
 Let's calculate the leading term of $\textup{DEL}_{i}(x)$ whenever $2\leq i\leq t$. Write $x=x^s_t+x^{>s}_{>t}$, where $x^s_t\in X^s_t$, and $x^{>s}_{>t}$ lies in filtration $s+1$. Then the leading term will be $\rho\Delta_{t-i}\twist^{t-i}D^s (x^s_t\otimes x^s_t)$. Moreover, as $\{D^k\}$ is \emph{special}, this equals $\rho{\Delta}_{t-i}(x^s_t\otimes_\textup{v} x^s_t)\in C(X\otimes_{\Sigma_2} X)_{-s,t+i}$, where $(x^s_t\otimes_\textup{v} x^s_t)$ denotes the element of $C(X\otimes_\textup{v}X)_{-s,2t}$. Thus `$x^s_t\mapsto \twist^{t-i}D^s(x^s_t\otimes x^s_t)$' implements the assignment `$z\mapsto z\otimes_\textup{v} z$' discussed above, and we're getting a representative for $\delta^\textup{alg}_i(x)$.
 \end{proof}
+
+
+
 
 \begin{thm}
 By postcomposition with the multiplication $S_2X\to X$, the operations $\Sq^j_\textup{ext}$, $\delta_i^\textup{ext}$ and $\times^\textup{ext}$ induce operations $\Sq^j_\textup{raw}$, $\delta_i^\textup{raw}$, $\times^\textup{raw}$ on $E^r(X)$. The Steenrod operations vanish whenever $i<r$, after all:
@@ -3342,6 +3358,7 @@ is an isomorphism, where we note that the condition to lie in $N^{s+1}(O)\subset
 \[\pi_{\frakt+1}(X^{\fraks+1})\overset{d^0}{\to}\pi_{\frakt+1}(X^{\fraks+2})\overset{\partial_\textup{conn}}{\to}\pi_\frakt((D^1X)^{\fraks+1})\]
 is zero, which is clear, as we're just looking at adjacent maps in the homotopy LES.
 
+\begin{shaded}\tiny
 The next result states that the exterior operations, when lifted up one filtration level, induce the operations derived on unstable Lie coalgebra homology, albeit with a shift in the indexing of the Steenrod operations. Writing $\lambda$ for the lifting map
 \[\lambda:\left(E^r_{s,t}(X\wedge_{\Sigma_2}X)\to E^r_{s,t}(D^1X)\cong E^r_{s+1,t+1}(X)\right)\textup{$\qquad (r\geq2)$}\]
 \begin{thm}
@@ -3382,6 +3399,880 @@ The $\delta_i$ and $\Sq^j$ satisfy the expected Adem relations, and the relation
 
 For $x\in E^r_{-s,t}(X)$, $\Sq^i(x)$ survives to $E^{2r-1}$, and moreover, $d_{2r-1}(\Sq^ix)=\Sq^{i+r-1}(d_rx)$ modulo indeterminacy.  [The bottom operation, $\Sq^1(x)$, is zero whenever $t>0$\textbf{ silly if in connected case, should just say `is zero'}]. In particular, all Steenrod operations commute with $d_1$, in that $d_1\Sq^ix=\Sq^id_1x$.
 \end{thm}
+
+\end{shaded}
+
+
+
+
+
+
+
+
+
+
+\subsection{A chain-level construction $\xi_\textup{res}$ of $\xi_\textup{alg}$}
+We'll here construct the algebraically defined map $\xi_\textup{alg}$ at the chain level. Note that this map is \emph{not} a cosimplicial map $(HX^\bullet)^{\times2}\to HVX^\bullet$, however it \emph{does} induce a chain map on the normalised complexes of primitives.
+%\[\newcommand{\Times}{{\cdot}}
+%\mathclap{\xymatrix@R=0mm{
+%(HX^\fraks)^{\wedge 2}
+%\ar@{-->}@/^3em/[rrrrdd]^-(.9){\xi_\textup{alg}}
+%\\
+%&%r1c1
+%(HX^\fraks)^{\times2}
+%\ar[r]^-{Hv\times Hv}
+%\ar@{}[dd]|{\times}="timesOne"
+%&%r1c2
+%(HVX^\fraks)^{\times2}
+%\ar[r]^-{\textup{hopf}}
+%\ar@{}[dd]|{\times}="timesTwo"&%r1c3
+%\ar@{}[dd]|{\times}="timesThree"
+%HVX^\fraks&%r1c4
+%\\%r1c5
+%(HX^\fraks)^{\times2}\ar;"timesOne"_-{\textup{diag}}
+%\ar@{-->}@/^3.9em/[rrrr]^-(.1){\overline{\xi}_\textup{alg}}
+%\ar@{->>}[uu]
+%&%r2c1
+%&%r2c2
+%&%r2c3
+%&%r2c4
+%HVX^\fraks\ar"timesThree";[]^-{\textup{hopf}}
+%\\%r2c5
+%&%r3c1
+%(HX^\fraks)^{\times2}\ar[r]_-{\textup{hopf}}
+%&%r3c2
+%HX^\fraks\ar[r]_-{Hv}
+%&%r3c3
+%HVX^\fraks&%r3c4
+%\\
+%(HX^\fraks)^{\sqcup2}
+%\ar[uu]
+%\\\\
+%&&\raisebox{.5em}[0mm][0mm]{\makebox[0cm][c]{\,\textup{is $\pi(Q\DASH)$ applied to}}}
+%\\
+%\textup{cof}
+%\ar@{-->}@/^1em/[rrrrdd]^-(.9){\xi_\textup{res}}
+%\\\\%r3c5
+%\ar[uu]
+%\ar@{-->}@/^1.3em/[rrrr]^-(.1){\overline{\xi}_\textup{res}}
+%c((X^\fraks)^2)\ar[r]_-{c(\textup{diag})\circ\beta}
+%&%r4c1
+%c((X^\fraks)^2\Times c((X^\fraks)^2))\ar[r]_-{c(v^2\Times h)}
+%%\ar[ddd]
+%&%r4c2
+%c((VX^\fraks)^2\Times X^\fraks)
+%\ar[r]_-{c(h'\Times \epsilon v)}
+%%\ar[ddd]
+%&%r4c3
+%c(\overline{V}X^\fraks\Times \overline{V}X^\fraks)\ar[r]_-{h}
+%%\ar[dd]^-{\beta}
+%&%r4c4
+%VX^\fraks\\\\%r4c5
+%c((X^\fraks)^{\sqcup2})\ar[uu]
+%}}\]
+Let's abbreviate a little for the sake of compactness. Write $X$ for $X^\fraks$, $V$ for $VX^\fraks$, $\overline{V}$ for $\overline{V}X^\fraks$, dots for categorical products, and superscripts for categorical self-products.
+%\[\newcommand{\Times}{{\cdot}}
+%\mathclap{\xymatrix@R=0.5mm{
+%(HX)^{\wedge 2}
+%\ar@{-->}@/^1em/[rrrrdd]^-(.9){\xi_\textup{alg}}
+%\\\\%r3c5
+%\ar@{->>}[uu]
+%\ar@{-->}@/^1.3em/[rrrr]^-(.1){\overline{\xi}_\textup{alg}}
+%(HX)^2\ar[r]_-{(\textup{id},\textup{id})}
+%&%r4c1
+%(HX)^2\Times(HX)^2\ar[r]_-{v\Times v\Times \textup{hpf}}
+%%\ar[ddd]
+%&%r4c2
+%(HV)^2\Times HX
+%\ar[r]_-{\textup{hpf}\Times v}
+%%\ar[ddd]
+%&%r4c3
+%HV\Times HV\ar[r]_-{\textup{hpf}}
+%%\ar[dd]^-{\beta}
+%&%r4c4
+%HV\\\\%r4c5
+%HX\sqcup HX\ar@{ >->}[uu]
+%\\\\
+%&&\raisebox{.5em}[0mm][0mm]{\makebox[0cm][c]{\,\textup{is $\pi(Q\DASH)$ applied to}}}
+%\\
+%\textup{cof}
+%\ar@{-->}@/^1em/[rrrrdd]^-(.9){\xi_\textup{res}}
+%\\\\%r3c5
+%\ar[uu]
+%\ar@{-->}@/^1.3em/[rrrr]^-(.1){\overline{\xi}_\textup{res}}
+%c(X^2)\ar[r]_-{c(\epsilon,\textup{id})\circ\beta}
+%&%r4c1
+%c(X^2\Times c(X^2))\ar[r]_-{c(\overline{v}^2\Times c(\textup{add}\circ\epsilon^2))}
+%%\ar[ddd]
+%&%r4c2
+%c(\overline{V}^2\Times X)
+%\ar[r]_-{c(\textup{add}\Times \overline{v})}
+%%\ar[ddd]
+%&%r4c3
+%c(\overline{V}\Times \overline{V})\ar[r]_-{c(\textup{add})}
+%%\ar[dd]^-{\beta}
+%&%r4c4
+%V\\\\%r4c5
+%c(X\sqcup X)\ar[uu]
+%}}\]
+%
+\[\newcommand{\Times}{{\cdot}}
+\mathclap{\xymatrix@R=4mm{
+(HX)^{\wedge 2}
+\ar@{-->}@/^1em/[rrrrd]^-(.9){\xi_\textup{alg}}
+\\%r3c5
+\ar@{->>}[u]
+\ar@/^1.3em/[rrrr]^-(.1){\overline{\xi}_\textup{alg}}
+(HX)^2\ar[r]_-{(\textup{id},\textup{id})}
+&%r4c1
+(HX)^2\Times(HX)^2\ar[r]_-{v\Times v\Times \textup{hpf}}
+%\ar[ddd]
+&%r4c2
+(HV)^2\Times HX
+\ar[r]_-{\textup{hpf}\Times v}
+%\ar[ddd]
+&%r4c3
+HV\Times HV\ar[r]_-{\textup{hpf}}
+%\ar[dd]^-{\beta}
+&%r4c4
+HV\\%r4c5
+HX\sqcup HX\ar@{ >->}[u]
+\\
+\textup{cof}
+\ar@{-->}@/^1em/[rrrrd]^-(.9){\xi_\textup{res}}
+&&\raisebox{1.5em}[0mm][0mm]{\makebox[0cm][c]{\,\textup{is $\pi(Q\DASH)$ applied to\qquad }}}
+\\%r3c5
+\ar[u]
+\ar@/^1.3em/[rrrr]^-(.1){\overline{\xi}_\textup{res}}
+c(X^2)\ar[r]_-(.7){c(\epsilon,\textup{id})\circ\beta}
+\ar@{..>}[dr]_-(.8){(\epsilon,\textup{id})}
+&%r4c1
+c(X^2\Times c(X^2))\ar[r]_-{c(\overline{v}^2\Times c(\textup{add}\circ\epsilon^2))}
+\ar@{..>}[d]^-{\epsilon}
+%\ar[ddd]
+&%r4c2
+c(\overline{V}^2\Times X)
+\ar[r]_-{c(\textup{add}\Times \overline{v})}
+\ar@{..>}[d]^-{\epsilon}
+%\ar[ddd]
+&%r4c3
+c(\overline{V}\Times \overline{V})\ar[r]_-{c(\textup{add})}
+\ar@{..>}[d]^-{\epsilon}
+%\ar[dd]^-{\beta}
+&%r4c4
+V\ar@{..>}[d]^-{\epsilon}
+\\%r4c5
+c(X\sqcup X)\ar[u]
+&X^2\Times c(X^2)
+\ar@{..>}[r]^-{\overline{v}^2\Times c(\textup{add}\circ\epsilon^2)}
+&
+\overline{V}^2\Times X
+\ar@{..>}[r]^-{\textup{add}\Times \overline{v}}
+&
+\overline{V}\Times \overline{V}\ar@{..>}[r]^-{\textup{add}}
+&
+\overline{V}
+}}\]
+This map $\overline{\xi}_\textup{res}$ is very rich, but it will be important to note that postcomposition with $\epsilon$ destroys much of that richness. To understand that, the commuting diagram written with dotted maps below the definition of $\overline{\xi}_\textup{res}$ shows that $\epsilon\circ \overline{\xi}_\textup{res}$
+% Indeed, there is a commuting diagram:
+%\[\newcommand{\Times}{{\cdot}}
+%\def\labelstyle{\scriptstyle}
+%\mathclap{\xymatrix@R=4mm@C=10mm{
+%\ar@{-->}@/^1.3em/[rrrr]^-(.1){\overline{\xi}_\textup{res}}
+%c(X^2)\ar[r]%_-{Q(\cdots)}
+%%\ar[dr]_-{Q(\epsilon\pi_1)\Times Q(\epsilon\pi_2)\Times \textup{id\ \ \ }}
+%%\ar[d]^-{(Qc\pi_1,Qc\pi_2,\textup{id})}
+%\ar@/^1em/@<-.2ex>[dr]_-(.68){(\epsilon,\textup{id})\quad }
+%&%r4c1
+%c(X^2\Times cX^2)\ar[r]_-{c(\overline{v}^2\Times c(\textup{add}\circ\epsilon^2))}
+%\ar[d]^-{\epsilon}
+%&%r4c2
+%c(\overline{V}^2\Times X)
+%\ar[r]_-{c(\textup{add}\Times\overline{v})}
+%\ar[d]^-{\epsilon}
+%&%r4c3
+%c(\overline{V}\Times \overline{V})\ar[r]_-{c(\textup{add})}
+%\ar[d]^-{\epsilon}
+%&%r4c4
+%V\ar[d]^-{\epsilon}\\
+%%(cX)^2\Times c(X^2)
+%%\ar[r]_-{(\epsilon)^2\Times\textup{id}}
+%&
+%X^2\Times cX^2
+%\ar[r]^-{\overline{v}^2\Times c(\textbf{+}\circ\epsilon^2)}
+%%\ar[dr]_-{(Q(\epsilon\circ d^0))^2\Times Q(d^0\circ h)}
+%%%%%%%%%%%%%%%%%%%%%\ar@/_1em/[dr]_-(.3){(Q(\epsilon\circ d^0))^2\Times Q(d^0\circ h)\ \ \ }
+%&
+%\overline{V}^2\Times X
+%\ar[r]^-{\textup{add}\Times \overline{v}}
+%%%%%%%%%%%%%%%%%%%%%\ar[d]_-{(Q\epsilon)^2\Times Qd^0}
+%&
+%\overline{V}\Times \overline{V}\ar[r]^-{\textup{add}}
+%%\ar@{<-}@/^1em/[dl]^-(.3){\textup{add}\times Q\epsilon}
+%&
+%\overline{V}
+%%\\
+%%&
+%%&
+%%(QK_+)^2\Times QA_+%\ar[ur]_-{\textup{add}\times Q\epsilon}
+%%\ar[ur]^-{\textup{add}\Times Q\epsilon}\ar[r]^-{(\textup{id})^2\cdot Q\epsilon}
+%%&
+%%(QK_+)^3
+%%\ar@/_.5em/[ur]_-{\textup{add}}
+%}}\]
+%
+%
+%
+%
+%\[\newcommand{\Times}{{\cdot}}
+%\def\labelstyle{\scriptstyle}
+%\mathclap{\xymatrix@R=4mm@C=10mm{
+%\ar@{-->}@/^1.3em/[rrrr]^-(.1){Q\overline{\xi}_\textup{res}}
+%Qc(X^2)\ar[r]%_-{Q(\cdots)}
+%%\ar[dr]_-{Q(\epsilon\pi_1)\Times Q(\epsilon\pi_2)\Times \textup{id\ \ \ }}
+%%\ar[d]^-{(Qc\pi_1,Qc\pi_2,\textup{id})}
+%\ar@/^1em/@<-.2ex>[dr]_-(.68){(Q(\pi_1\circ\epsilon),Q(\pi_2\circ\epsilon),\textup{id})\quad }
+%&%r4c1
+%Qc(X^2\Times cX^2)\ar[r]_-{Qc(\overline{v}^2\Times c(\textup{add}\circ\epsilon^2))}
+%\ar[d]^-{Q\epsilon}
+%&%r4c2
+%Qc(\overline{V}^2\Times X)
+%\ar[r]_-{Qc(\textup{add}\Times\overline{v})}
+%\ar[d]^-{Q\epsilon}
+%&%r4c3
+%Qc(\overline{V}\Times \overline{V})\ar[r]_-{Qc(\textup{add})}
+%\ar[d]^-{Q\epsilon}
+%&%r4c4
+%QV\ar[d]^-{Q\epsilon}\\
+%%(QcX)^2\Times Qc(X^2)
+%%\ar[r]_-{(Q\epsilon)^2\Times\textup{id}}
+%&
+%(QX)^2\Times QcX^2
+%\ar[r]^-{(Q\overline{v})^2\Times Qc(\textbf{+}\circ\epsilon^2)}
+%%\ar[dr]_-{(Q(\epsilon\circ d^0))^2\Times Q(d^0\circ h)}
+%%%%%%%%%%%%%%%%%%%%%\ar@/_1em/[dr]_-(.3){(Q(\epsilon\circ d^0))^2\Times Q(d^0\circ h)\ \ \ }
+%&
+%(Q\overline{V})^2\Times QX
+%\ar[r]^-{\textup{add}\Times Q\overline{v}}
+%%%%%%%%%%%%%%%%%%%%%\ar[d]_-{(Q\epsilon)^2\Times Qd^0}
+%&
+%Q\overline{V}\Times Q\overline{V}\ar[r]^-{\textup{add}}
+%%\ar@{<-}@/^1em/[dl]^-(.3){\textup{add}\times Q\epsilon}
+%&
+%Q\overline{V}
+%%\\
+%%&
+%%&
+%%(QK_+)^2\Times QA_+%\ar[ur]_-{\textup{add}\times Q\epsilon}
+%%\ar[ur]^-{\textup{add}\Times Q\epsilon}\ar[r]^-{(\textup{id})^2\cdot Q\epsilon}
+%%&
+%%(QK_+)^3
+%%\ar@/_.5em/[ur]_-{\textup{add}}
+%}}\]
+is the sum of the three composite maps $c(X^2)\to \overline{V}$, being $\overline{v}\circ c(\textup{add})\circ c(\epsilon^2)$ and $\overline{v}\circ\pi_i\circ\epsilon$ for $i=1$ and $2$.
+%\[\xymatrix@R=4mm{
+%&%r1c1
+%QX^2\ar@/^.55em/[dr]^-{Q\pi_1}
+%&%r1c2
+%&%r1c3
+%&%r1c4
+%\\%r1c5
+%Qc(X^2)\ar[r]^-{Qc(\epsilon^2)}
+%\ar@/^.5em/[ur]^-{Q\epsilon}
+%\ar@/_.5em/[dr]_-{Q\epsilon}
+%&%r2c1
+%Qc(\overline{X}^2)\ar[r]^-{Qc(\textup{add})}
+%&%r2c2
+%QA\ar[r]^-{Q\overline{v}}
+%&%r2c3
+%QK_+\makebox[0cm][l]{$\,=K_+$}%\ar@{=}[r]
+%\\%r2c5
+%&%r3c1
+%QX^2\ar@/_.55em/[ur]_-{Q\pi_2}&%r3c2
+%&%r3c3
+%}\]
+%
+%Here dots and unadorned superscripts were used to indicate products. The cofibre `$\textup{cof}$' is that of the map $A^{\sqcup2}\to A^2$. %If we just write $k$ for the zero-square algebra $(K\overline{Q})^{n+1}A$, then the map $h:c(A^2)\to A$ is defined to be the composite:
+%%\[c(A^{2})=c((ck)^{2})\overset{c(\epsilon^{2})}{\to}c(k^2)\overset{c(\textup{add})}{\to}ck=A,\]
+%%the point being that this is an algebra map, where $\textup{add}:A^2\to A$ is not.
+%The maps $h$ and $h'$ are the composites [\textbf{notation clash with Hurewicz}]:
+%\[h:\left[c((X^\fraks)^2)\overset{c(\epsilon^2)}{\to}c((\overline{V}X^{\fraks-1})^2) \overset{c(\textup{add})}{\to}c(\overline{V}X^{\fraks-1})=X^\fraks\right]\]
+%\[h':\left[(VX^\fraks)^2\overset{\epsilon^2}{\to}(\overline{V}X^\fraks)^2\overset{\textup{add}}{\to}\overline{V}X^\fraks\right]\]
+\begin{lem}
+The map $\overline{\xi}_\textup{res}$ factors through the cofibre as shown.
+\end{lem}
+\begin{proof}
+It's enough to check that the composite $c(X\sqcup X)\to  V$ is null. However, a map into the codomain is null iff it is zero on homology, as the codomain is a GEM. Fortunately, we have already described the relevant maps on homology algebraically, the point being that their composite is zero.
+\end{proof}
+
+
+\subsection{A chain level construction of $j$}
+Write $S^n$ for (the free construction on) $\Delta^n/\partial\Delta^n$, and $CS^n$ for (the free construction on) the reduced cone thereupon. Now there's a map $S^{n+m}\to S^n\sqcup S^m$ sending the fundamental class to the Eilenberg-Zilber formula. That is, if $\mu:(S^n\sqcup S^m)^{\otimes 2}\to S^n\sqcup S^m$ is multiplication, the map we are describing sends $\imath_{n+m}\mapsto \mu(\Delta(\imath_n,\imath_m))$. Now consider the complex $C_{n,m}$ formed by coning off the corresponding homotopy class:
+\[\xymatrix@R=4mm{
+S^{n+m}\ar[r]
+\ar@{ >->}[d]
+&%r1c1
+S^n\sqcup S^m\ar@{ >->}[d]
+\\%r1c2
+CS^{n+m}\ar[r]
+&%r2c1
+C{n,m}%r2c2
+}\]
+Now $C_{n,m}$ has an $n+m+1$-dimensional generator $g$, the image of the cone on the fundamental class of $S^{n+m}$. The homology LES shows that $H_*(C_{n,m})$ is three-dimensional, containing classes $\imath_n$, $\imath_m$ and $g$.
+\begin{prop}
+The diagonal of $g$ is $\imath_n\otimes\imath_m+\imath_m\otimes\imath_n$.
+\end{prop}
+\begin{proof}
+The representative $g$ has the property that $d_0(g)=\mu(\Delta(\imath_n\otimes\imath_m))$ and $d_i(g)=0$ for $i>0$. We calculate 
+\begin{alignat*}{2}
+\psi(d_0(g))
+&=
+\mu(\Delta((\overline{\imath_n} +\overline{\overline{\imath_n}}) \otimes (\overline{\imath_m}+\overline{\overline{\imath_m}})))%
+\\
+\xi(g)
+&=
+\mu(\Delta(\overline{\imath_n} \otimes\overline{\overline{\imath_m}})+ \Delta(\overline{\overline{\imath_n}} \otimes\overline{\imath_m}))\in Q((C_{n,m})_{n+m}^{\wedge 2})%
+\\
+j(\xi(g))
+&=
+\Delta^\otimes ({\imath_n}\otimes{{\imath_m}})+\Delta^\otimes ({\imath_m}\otimes{{\imath_n}})\in (Q((C_{n,m})_{n+m}))^{\otimes 2}%
+\end{alignat*}
+This class represents $\imath_n\otimes\imath_m+\imath_m\otimes\imath_n$.
+\end{proof}
+%Now suppose that $L$ is a (not necessarily zero-square) algebra, and that $\alpha,\beta$ are homotopy classes in $\pi_n (L)$ and $\pi_m (L)$ respectively. Then we'll be able to use the complex $C_{n,m}$ to construct a homology class $g_{\alpha,\beta}\in H_{n+m+1}(L)$ whose diagonal is $\alpha\otimes\beta+\beta\otimes\alpha$ [probably just when $L$ is zero square, using the map $L\times L\to L$. Else, get a class in $H(L^2)$ with diagonal $\overline{\alpha}\otimes\overline{\overline{\beta}}+ \overline{\overline{\beta}}\otimes\overline{\alpha}$]. Firstly, note that there is a commuting diagram
+%\[\xymatrix@R=4mm{
+%0\ar[r]
+%\ar@{ >->}[d]
+%&%r1c1
+%0\ar[d]
+%\\%r1c2
+%S^n\sqcup S^m\ar[r]^-{\alpha\sqcup\beta}
+%&%r2c1
+%L^{\times2}%r2c2
+%}\]
+%which furnishes $c_1(L^{\times2})$ with a map from $S^n\sqcup S^m$. Next, there's a diagram %\newdir{ >}{{}*!/-7pt/\dir{>}}
+%\[\xymatrix@R=4mm{
+%S^{n+m}\ar@{->}[r]_-{\textup{EZ}^\mu(\imath_n,\imath_m)}
+%\ar@{ >->}[d]
+%&%r1c1
+%S^n\sqcup S^m\ar@{ >->}[d]
+%\ar[r]
+%&c_1(L^{\times2})\ar[d]
+%\\%r1c2
+%CS^{n+m}\ar[r]\ar@/_1em/[rr]_-{0}
+%&%r2c1
+%C{n,m}\ar@{..>}[r]
+%%r2c2
+%&L^{\times2}}\]
+%where the outer rectangle commutes since in $L^{\times2}$, $(a,0)\cdot(0,b)=(0,0)$. This gives a map $C_{n,m}\to c_2(L^{\times2})$ whose restriction to the subcomplex $S^n\sqcup S^m$ gives the homotopy classes $\alpha$ and $\beta$. The image $g_{\alpha,\beta}$ of the class $g\in(C_{n,m})_{n+m+1}$ is then an explicit representative for the homology class sought.
+We can use this cofibration to build a chain level construction of the map $j:\textup{Pr}_t(HY)\otimes \textup{Pr}_{t'}(HZ)\to \textup{Pr}_{t+t'+1}(HY\wedge HZ)$ on spherical homology classes:
+\begin{prop}
+There is a function, natural in $Y,Z\in s\algcat$
+\[\overline{F}:\hom_{s\algcat}(S^t,Y)\times\hom_{s\algcat}(S^{t'},Z)\to \hom_{s\algcat}(C_{t,t'},c(Y\times Z))\]
+such that the function
+\[F:\hom_{s\algcat}(S^t,Y)\times\hom_{s\algcat}(S^{t'},Z)\to \pi_{\frakt+1}(Qc(Y\times Z)):=H_{\frakt+1}(Y\times Z)\]
+defined by $F(\alpha,\beta):=H_*(\overline{F}(\alpha,\beta))(g)$ makes the following diagram commute:
+\[\mathclap{\xymatrix@R=4mm{
+%(H(Y\times Z)^{\otimes2})_\frakt\ar[d]^-{\textup{id}+\tau}
+%&
+\ar@/_2em/@<-3ex>[dd]_-{(\textup{id}+\tau)\circ \textup{hur}^{\otimes2}}
+%\ar[l]_-{\textup{hur}^{\otimes2}}
+\hom_{s\algcat}(S^t,Y)\times\hom_{s\algcat}(S^{t'},Z)\ar[d]^-{F}
+\ar[r]^-{\textup{hur}^{\otimes2}}
+&%r1c1
+\textup{Pr}_t(HY)\otimes\textup{Pr}_{t'}(HZ)\ar[r]^-{j}
+&%r1c2
+\textup{Pr}_{\frakt+1}(HY\wedge HZ)\ar@{ >->}[d]
+\\%r1c5
+%(H(Y\times Z)^{\otimes2})_\frakt
+%&
+H_{\frakt+1}(Y\times Z)\ar[r]%\ar[l]_-{\Delta}
+\ar[d]^-{\Delta}
+&%r2c1
+(HY\times HZ)_{\frakt+1}\ar@{->>}[r]
+\ar[d]^-{\Delta}
+&%r2c2
+(HY\wedge  HZ)_{\frakt+1}
+\\
+%&
+(H(Y\times Z)^{\otimes2})_\frakt\ar[r]
+&((HY\times HZ)^{\otimes2})_\frakt
+}}\]
+\end{prop}
+\begin{proof}
+\textbf{Maybe I can get rid of the use of \emph{canonical} lifts.} [Was I only using them because I was nervous?]
+The value of $\overline{F}$ on $(\alpha,\beta)$ is defined as follows. Corresponding to the commuting diagrams
+\[\xymatrix@R=4mm{
+0\ar[r]
+\ar@{ >->}[d]
+&%r1c1
+0\ar[d]
+\\%r1c2
+S^t\ar[r]^-{(\alpha,0)}
+&%r2c1
+Y\times Z%r2c2
+}
+\textup{\quad and\quad }
+\xymatrix@R=4mm{
+0\ar[r]
+\ar@{ >->}[d]
+&%r1c1
+0\ar[d]
+\\%r1c2
+S^{t'}\ar[r]^-{(0,\beta)}
+&%r2c1
+Y\times Z%r2c2
+}\]
+are maps $\widetilde{(\alpha,0)}:S^t\to c_1(Y\times Z)$ and $\widetilde{(0,\beta)}:S^{t'}\to c_1(Y\times Z)$, and there is a commuting diagram (since in $Y\times Z$, products of the form $(a,0)(0,b)$ vanish):
+\[\xymatrix@R=4mm@C=15mm{
+S^{\frakt}\ar@{->}[r]_-{\textup{EZ}^\mu(\imath_t,\imath_{t'})}
+\ar@{ >->}[d]
+&%r1c1
+S^t\sqcup S^{t'}\ar@{ >->}[d]
+\ar[r]^{\widetilde{(\alpha,0)}\sqcup\widetilde{(0,\beta)}}
+&c_1(Y\times Z)\ar[d]
+\\%r1c2
+CS^{\frakt}\ar[r]\ar@/_1em/[rr]_-{0}
+&%r2c1
+C_{t,t'}\ar@{..>}[r]
+%r2c2
+&Y\times Z}\]
+Corresponding to the right square is a map $C_{t,t'}\to c_2(Y\times Z)$, and the composite with the cofibration $c_2(Y\times Z)\to c(Y\times Z)$ is $\overline{F}(\alpha,\beta)$. This function $\overline{F}$ is evidently natural in $Y$ and $Z$, and so then is $F$.
+
+The square at the bottom of the diagram commutes as the horizontals are maps of homology Lie coalgebras, and we can see that the triangle commutes because we understand the Lie coalgebra structure of $H_*(C_{t,t'})$. As all of the maps in the six-arrow commuting diagram  are natural, we may check it on the universal example: $(\imath_t,\imath_{t'})\in\hom_{s\algcat}(S^t,S^t)\times\hom_{s\algcat}(S^{t'},S^{t'})$. That is, it's enough to check that the following diagram commutes:
+\[\mathclap{\xymatrix@R=4mm{
+\{(\imath_t,\imath_{t'})\}\ar[d]^-{F}
+\ar[r]^-{\textup{hur}^{\otimes2}}
+&%r1c1
+\textup{Pr}_t(HS^t)\otimes\textup{Pr}_{t'}(HS^{t'})\ar[r]^-{j}
+&%r1c2
+\textup{Pr}_{\frakt+1}(HS^t\wedge HS^{t'})\ar@{ >->}[d]^-{\textup{inc}}
+\\%r1c5
+H_{\frakt+1}(S^t\times S^{t'})\ar[r]^-{r}
+&%r2c1
+(HS^t\times HS^{t'})_{\frakt+1}\ar@{->>}[r]^-{\textup{proj}}
+&%r2c2
+(HS^t\wedge  HS^{t'})_{\frakt+1}
+}}\]
+The rightmost four vector spaces in this diagram are 1-dimensional, and the maps $j$, $\textup{inc}$ and $\textup{proj}$ connecting them are isomorphisms, so it's enough to check that $r(F(\imath_t,\imath_{t'}))$ is nonzero. However, using the commuting square and triangle already established, we may calculate that $\Delta(r(F(\imath_t,\imath_{t'})))=\imath_t \otimes\imath_{t'}+\imath_{t'}\otimes\imath_{t}$, which is nonzero.
+\end{proof}
+We record here a useful calculation:
+\begin{lem}
+The composite 
+\[S^t\sqcup S^{t'}\to C_{t,t'}\overset{\overline{F}(\alpha,\beta)}{\to}c(X\times X)\overset{c(\textup{add}\circ(\epsilon^2))}{\to}X\]
+equals $\widetilde{(\epsilon\alpha)}\sqcup \widetilde{(\epsilon\beta)}$.
+\end{lem}
+\begin{proof}Indeed, the following commutes:
+%Using naturality of $\overline{F}$ and the fact that $h=c(\textup{add}\circ(\epsilon\times\epsilon))$:
+\[\newcommand{\Times}{{\cdot}}
+\xymatrix@R=4mm{
+S^t\sqcup S^{t'}\ar@{ >->}[d]
+%\ar[rrd]_-{\widetilde{(\epsilon\alpha,0)}\sqcup \widetilde{(0,\epsilon\beta)}}
+\ar@/^1em/[rrd]_-{\widetilde{(\epsilon\alpha,0)}\sqcup \widetilde{(0,\epsilon\beta)}}
+\ar@/^1em/[rrrd]^-(.7){\widetilde{(\epsilon\alpha)} \sqcup \widetilde{(\epsilon\beta)}}
+&%r1c1
+&%r1c2
+&%r1c3
+\\%r1c4
+C_{t,t'}\ar[r]^-{\overline{F}(\alpha,\beta)}
+\ar@/_1em/[rr]_-{\overline{F}(\epsilon\alpha,\epsilon\beta)}
+&%r2c1
+c(X^\fraks\Times X^\fraks)\ar[r]^-{c(\epsilon\times\epsilon)}
+&%r2c2
+c(\overline{V}X^{\fraks-1}\Times \overline{V}X^{\fraks-1})\ar[r]_-{c(\textup{add})}
+&%r2c3
+c(\overline{V}X^{\fraks-1})\makebox[0cm][l]{\,$=X^\fraks$}\phantom{=}%r2c4
+}\]
+%Starting with the straight arrows, we need to justify the rightmost curved arrow. 
+To see this, we check the veracity of the three curved arrows, bottom to top. The naturality of $\overline{F}$ allows us to see the bottom curved arrow, then the definition of $\overline{F}$ gives the next curved arrow, and naturality of the standard lift gives the third curved arrow.
+\end{proof}
+\subsection{A two-cell complex for the Koszul $\delta$ operations}
+In this section, we give a construction of a two-cell complex whose cohomology has a $P^i$ connecting the two cells.
+
+Choose $n\geq2$ and $i$ satisfying $2\leq i\leq n$. There's a map $S^{n+i}\to S^n$ sending the fundamental class $\imath_{n+m}$ to the class $\mu\Delta_{n-i}(\imath_n\otimes\imath_n)$. Now consider the complex $C_n^i$ formed by coning off the corresponding homotopy class:
+\[\xymatrix@R=4mm{
+S^{n+i}\ar[r]
+\ar@{ >->}[d]
+&%r1c1
+S^n\ar@{ >->}[d]
+\\%r1c2
+CS^{n+i}\ar[r]
+&%r2c1
+C_n^i%r2c2
+}\]
+Now $C_n^i$ has an $n+i+1$-dimensional generator $h$, the image of the cone on the fundamental class of $S^{n+i}$, and the homology LES shows that $H_*(C_n^i)$ is two-dimensional, containing classes $\imath_n$ and $h$. We'll show that $\imath_n=h P^i$. For this we recall Goerss' definition of the right action of the $P^i$ on homology: given a cycle $x\in N_nQX$, we consider the class of $j\xi(x)$ in $\pi_*(S^2(QX))$. By \cite[prop 3.7, lem 3.9]{MR1089001}, the classes $xP^i$ are determined as the unique classes for which there is an equation
+\[(j\xi)_*(x)=\sum_{j}\pi_*(1+T)(y_j\otimes z_j)+\sum_i\sigma_i(xP^i)\]
+for classes $y_j$ and $z_j$ in $\pi_*(QX)$. Here, $\sigma_i:\pi_nQX\to \pi_{n+i}S^2(QX)$ is an operator that in fact equals $\textup{tr}_*\delta_i$ whenever $2\leq i\leq n$. After this, the coproduct on $\pi_*(QX)$ can be recovered as the quantity
+\[x P^{n/2}\otimes x P^{n/2}+\sum_j(1+T)(y_j\otimes z_j)\in \pi_*(QX)\otimes \pi_*(QX).\]
+
+In order to determine $(j\xi)_*(h)$, as the representative $h$ has the property that $d_0(h)=\mu(\Delta_{n-i}(\imath_n,\imath_n))$ and $d_i(g)=0$ for $i>0$, we calculate 
+\begin{alignat*}{2}
+\psi(d_0(h))
+&=
+\mu(\Delta_{n-i}((\overline{\imath_n}+\overline{\overline{\imath_n}})\otimes (\overline{\imath_n}+\overline{\overline{\imath_n}})))%
+\\
+\xi(h)
+&=
+\mu(\Delta_{n-i}(\overline{\imath_n}\otimes \overline{\overline{\imath_n}})+\Delta_{n-i}(\overline{\overline{\imath_n}} \otimes\overline{\imath_n}))\in Q((C_n^i)_{n+i}^{\wedge 2})%
+\\
+j(\xi(h))
+&=
+(1+T)\Delta_{n-i}^\otimes ({\imath_n}\otimes{{\imath_n}})\in (Q((C_n^i)_{n+i}))^{\otimes 2}%
+\end{alignat*}
+which represents $\sigma_i(\imath_n)$. Thus the defining equation becomes simply
+\[\sigma_i(\imath_n)=\sum_i\sigma_i(hP^i)\]
+and the result is proven: $P^ih=\imath_n$. \textbf{Note that the coproduct} is zero unless we're at the top, in which case it's $\imath_n\otimes\imath_n$.
+
+
+\subsection{A left inverse for the Hurewicz}
+Suppose that $Y$ is an abelian (i.e.\ zero-square)  simplicial algebra. Then $QY=Y$, giving a commuting diagram
+\[\xymatrix@R=4mm{
+Y\ar@{=}[r]
+&%r1c1
+QY&%r1c2
+&%r1c3
+\pi_*(Y)\ar@{=}[r]\ar[ddr]_-(.75){\ \ \textup{hur}}
+&%r1c1
+\pi_*(QY)\\%r1c5
+cY\ar[u]^-{\epsilon}
+\ar[r]
+&%r2c1
+QcY\ar[u]^-{Q\epsilon}
+&%r2c2
+\textup{yielding}&%r2c3
+\pi_*(cY)\ar[u]^-{\pi_*(\epsilon)}_-{\cong}
+\ar[r]
+\ar[d]^-{\cong}
+&%r2c1
+\pi_*(QcY)\ar[u]_-{\pi_*(Q\epsilon)}\ar@{=}[d]
+\\%r2c5
+&%r3c1
+&%r3c2
+&%r3c3
+\textup{Pr}(H_*Y)\ar@{ >->}[r]
+&%r3c4
+H_*Y%r3c5
+}\]
+which is to say that $\pi_*(Q\epsilon)$ provides a left inverse for the Hurewicz.
+
+\subsection{$E^1$-level identification of the product and Steenrod operations}
+Throughout, I'll continue with the above abbreviations, and write $\frakt=t+t'$. We're going to need the following commutative diagram of vector spaces \textbf{the point being that once we've got it, we'll precompose it with the relevant cosimplicial A-W or E-Z map, to get either the product or the Steenrod square, each time in either sense.}:
+\[\mathclap{\xymatrix@R=4mm{
+\pi_t(X)\otimes \pi_{t'}(X)\ar[dd]^-{h\otimes h}
+\ar[r]^-{\textup{sEZ}}
+&%r1c1
+\pi_{\frakt}(X\wedge  X)\ar[r]
+&%r1c2
+\pi_{\frakt}(\overline{D}^1X)&%r1c3
+\pi_{\frakt+1}(\overline{V}X)
+\ar[l]^-{\cong\textup{-ish}}_-{\partial_\textup{conn}}
+\\%r1c4
+&%r2c1
+&%r2c2
+\pi_{\frakt}(D^1X)\ar@{-}[u]^-{\textup{zig-zag}}_-{\cong}
+&%r2c3
+\pi_{\frakt+1}(VX)\ar[u]_-{\cong}
+\ar[l]^-{\cong\textup{-ish}}_-{\partial_\textup{conn}}
+\ar[d]^-{\cong}
+\\%r2c4
+\textup{Pr}_t(HX)\otimes \textup{Pr}_{t'}(HX)\ar[r]^-{j}
+&%r3c1
+\textup{Pr}_{\frakt+1}(HX\wedge HX)\ar[rr]^-{\xi_\textup{alg}}
+&%r3c2
+&%r3c3
+\textup{Pr}_{\frakt+1}(HVX)%r3c4
+}}\]
+It helps to modify this diagram a little. Indeed, for each $(\alpha,\beta)\in \hom_{s\algcat}(S^t,X)\times\hom_{s\algcat}(S^{t'},X)$, there is a diagram starting with the singleton set $\{(\alpha,\beta)\}$:% such that $\alpha=\widetilde{\epsilon\alpha}$ and $\alpha=\widetilde{\epsilon\alpha}$
+%\[\xymatrix@R=4mm{
+%\pi_t(X^\fraks)\otimes \pi_{t'}(X^\fraks)\ar@{~>}[drd]^-{j\circ(h\otimes h)}
+%\ar[r]^-{\textup{sEZ}}
+%\ar@{..>}[ddddr]_-(.3){A}
+%&%r1c1
+%\pi_{\frakt}(X^\fraks\otimes X^\fraks)\ar[r]
+%&%r1c2
+%\pi_{\frakt}((\overline{D}^1X)^\fraks)&%r1c3
+%\pi_{\frakt+1}(X_\textup{fl}^{\fraks+1})\ar[l]^-{\cong}_-{\partial}
+%\ar@{~}[dd]^-{\textup{zig-zag}}_-{\cong}
+%\\%r1c4
+%&%r2c1
+%&%r2c2
+%&%r2c3
+%%\pi_{\frakt+1}(X^{\fraks+1})\ar[u]_-{\cong}
+%%\ar[d]^-{\cong}
+%\\%r2c4
+%%\textup{Pr}_t(HX^{\fraks})\otimes \textup{Pr}_{t'}(HX^{\fraks})\ar[r]^-{j}
+%&%r3c1
+%\textup{Pr}_{\frakt+1}(HX^\fraks\wedge HX^\fraks)
+%\ar@{~>}[rr]_-(.82){\xi_\textup{alg}}
+%\ar@{ >->}[dl]
+%\ar@{ >->}[d]
+%&%r3c2
+%&%r3c3
+%\textup{Pr}_{\frakt+1}(HX^{\fraks+1})\ar@{ >->}[d]
+%\\%r3c4
+%(HX^\fraks\wedge HX^\fraks)_{\frakt+1}\ar@{=}[r]
+%&\pi_{\frakt+1}Q(\textup{cof})
+%\ar[rr]^-(.8){(\xi_\textup{res})_*}
+%&
+%&
+%H_{\frakt+1}X^{\fraks+1}
+%\\
+%(HX^\fraks\times HX^\fraks)_{\frakt+1}\ar@{=}[r]\ar@{->>}[u]
+%&\pi_{\frakt+1}Qc(X^\fraks\times X^\fraks)\ar@{->>}[u]
+%\ar[urr]_-(.76){(\overline{\xi}_\textup{res})_*}
+%\ar@{..>}[uuuurr]^-(.75){B}
+%\\
+%(HX^\fraks\oplus HX^\fraks)_{\frakt+1}\ar@{=}[r]\ar@{ >->}[u]
+%&\pi_{\frakt+1}Q(X^\fraks\sqcup X^\fraks)\ar@{ >->}[u]
+%}\]
+%The method will be to introduce the dotted maps $A$ and $B$ and show that the composite $B\circ A$ equals the composite of the wavy maps. Then we will be able to calculate the composite $\partial\circ B\circ A$, and compare it with the composite along the top row.
+\[\mathclap{\xymatrix@R=4mm{
+\{(\alpha,\beta)\}
+%\pi_t(X)\otimes \pi_{t'}(X)
+\ar@{~>}[dd]_-{j\circ(h\otimes h)}
+\ar[r]^-{\textup{sEZ}}
+\ar@{..>}[ddddr]^-(.2){F}
+&%r1c1
+\pi_{\frakt}(X\wedge  X)\ar[r]^-{\overline{\mu}_*}
+&%r1c2
+\pi_{\frakt}(\overline{D}^1X)&%r1c3
+\pi_{\frakt+1}(\overline{V}X)\ar[l]_-{\partial_\textup{conn}}
+\ar@{~}[dd]^-{\textup{zig-zag}}_-{\cong}
+\\%r1c4
+&%r2c1
+&%r2c2
+\pi_{\frakt+1}(Q\overline{V}X)\ar@{..>}[ur]_-{=}&%r2c3
+%\pi_{\frakt+1}(X^{\fraks+1})\ar[u]_-{\cong}
+%\ar[d]^-{\cong}
+\\%r2c4
+%\textup{Pr}_t(HX^{\fraks})\otimes \textup{Pr}_{t'}(HX^{\fraks})\ar[r]^-{j}
+%r3c1
+\textup{Pr}_{\frakt+1}(HX\wedge HX)
+\ar@{~>}[rrr]^-{\xi_\textup{alg}}
+\ar@{ >->}[d]
+%\ar@{ >->}[dr]
+&
+&%r3c2
+&%r3c3
+\textup{Pr}_{\frakt+1}(HVX)\ar@{ >->}[d]
+\\%r3c4
+(HX\wedge HX)_{\frakt+1}\ar@{=}[r]
+&\pi_{\frakt+1}Q(\textup{cof})
+\ar[r]^-{\pi_*(Q\xi_\textup{res})}
+&
+\pi_{\frakt+1}QVX\ar@{=}[r]
+\ar@{..>}[uu]_-(.75){\pi_*(Q\epsilon)}
+&
+H_{\frakt+1}VX
+\\
+(HX\times HX)_{\frakt+1}\ar@{=}[r]\ar@{->>}[u]
+&\pi_{\frakt+1}Qc(X\times X)\ar@{->>}[u]
+\ar@{..>}[ur]_-(.6){\pi_*(Q\overline{\xi}_\textup{res})}
+}}\]
+Although all of the arrows in this modified diagram have already been defined, we've decorated some of them for emphasis. It will be enough to check that all of these modified diagrams commute, since the collection of such $(\alpha,\beta)$ will exhaust all of the pure tensors in $\pi_t(X)\otimes \pi_{t'}(X)$.
+
+The composite of the dotted maps equals the composite of the wavy maps, by results above. Thus the image of $(\alpha,\beta)$ under either the wavy or dotted maps equals the image of $g\in\pi (QC_{t,t'})$ under the composite
+\[QC_{t,t'}\overset{Q\overline{F}(\alpha,\beta)}{\to}Qc(X\times X)\overset{Q\overline{\xi}_\textup{res}}{\to}QVX\overset{Q\epsilon}{\to}Q\overline{V}X=\overline{V}X,\]
+which we've seen decomposes as the sum of the three maps $\overline{v}\circ c(\textup{add})\circ c(\epsilon^2)\circ\overline{F}(\alpha,\beta)$ and $\overline{v}\circ\pi_i\circ\epsilon\circ\overline{F}(\alpha,\beta)$ for $i=1$ and $2$.
+%Indeed, write `$\textup{dot}$' for the composite of the dotted maps, and write $g\in QC_{t,t'}$ for the a representative of $g\in\pi_{\frakt+1}(QC_{t,t'})$. A representative for $\textup{dot}(\alpha,\beta)$ is given by the image of $g$ under the composite
+%\[QC_{t,t'}\overset{Q\overline{F}(\alpha,\beta)}{\to}Qc(X^\fraks\times X^\fraks)\overset{Q\overline{\xi}_\textup{res}}{\to}QX^{\fraks+1}\overset{Q\epsilon}{\to}QX^{\fraks+1}_\textup{fl}=X^{\fraks+1}_\textup{fl},\]
+%which is the sum of the images of $g$ under the three composites
+%\[\xymatrix@R=4mm{
+%&
+%&%r1c1
+%QcA\ar@/^.55em/[dr]^-{Q\epsilon}
+%&%r1c2
+%&%r1c3
+%&%r1c4
+%\\%r1c5
+%QC_{t,t'}
+%\ar[r]^-{Q\overline{F}(\alpha,\beta)}
+%&Qc(A^2)\ar[rr]^-{Qh}
+%\ar@/^.5em/[ur]^-{Qc(\pi_1)}
+%\ar@/_.5em/[dr]_-{Qc(\pi_2)}
+%&%r2c1
+%&%r2c2
+%QA\ar[r]^-{Q\eta}
+%&%r2c3
+%QK_+\makebox[0cm][l]{$\,=K_+$}%\ar@{=}[r]
+%\\%r2c5
+%&
+%&%r3c1
+%QcA\ar@/_.55em/[ur]_-{Q\epsilon}&%r3c2
+%&%r3c3
+%}\]
+The composite $\pi_1\circ \epsilon\circ\overline{F}(\alpha,\beta):C_{t,t'}\to X$ is the map out of the pushout in the diagram:
+\[\xymatrix@R=4mm@C=15mm{
+S^{\frakt}\ar@{->}[r]_-{\textup{EZ}^\mu(\imath_t,\imath_{t'})}
+\ar@{ >->}[d]
+&%r1c1
+S^t\sqcup S^{t'}\ar@{ >->}[d]
+\ar[dr]^{\alpha\sqcup0}
+\\%r1c2
+CS^{\frakt}\ar[r]\ar@/_1em/[rr]_-{0}
+&%r2c1
+C{t,t'}\ar@{..>}[r]
+%r2c2
+&X}\]
+The point then is that $g\in CS^\frakt$ is a (normalized) chain with the property that $d_0(g)$ is the image of the fundamental class in $S^\frakt$. In $C_{t,t'}$, $d_0(g)$ is identified with $EZ^\mu(\imath_t,\imath_{t'})$, which is decomposable, so that $g$ becomes a cycle in $QC_{t,t'}$, representing the $(t+t'+1)$-dimensional homology class. As this $g$ is in the image of the map $CS^\frakt\to C_{t,t'}$, it maps to $0$ in $A$, and on homology, $g$ is annihilated by the composite $\overline{v}\circ\pi_1\circ\epsilon\circ\overline{F}(\alpha,\beta)$. The same holds for $\overline{v}\circ\pi_2\circ\epsilon\circ\overline{F}(\alpha,\beta)$, so we may restrict our attention to the image of $g$ under $\overline{v}\circ c(\textup{add}\circ \epsilon^2)\circ\overline{F}(\alpha,\beta)$, and prove:
+\begin{thm}
+The modified diagram commutes.
+\end{thm}
+\begin{proof}
+We must show that $\partial_\textup{conn}(\textup{dot}(\alpha,\beta))=\overline{\mu}_*(\textup{sEZ}(\alpha,\beta))$.
+All of the previous discussion together has shown $\textup{dot}(\alpha,\beta)$ is the image in $Q\overline{V}X=\overline{V}X$ of the cycle $g\in Qc_{t,t'}$ under the top row of the following commuting diagram:
+\[\xymatrix@R=4mm@C=10mm{
+\makebox[0cm][r]{$g\in\,$}QC_{t,t'}\ar[r]^-{Q\overline{F}(\alpha,\beta)}
+&%r1c2
+Qc(X^2)\ar[r]^-{Qc(\textup{add}\circ\epsilon^2)}
+&%r1c3
+QX\ar[r]^-{Q\overline{v}}
+&%r1c4
+Q\overline{V}X\\%r1c5
+\makebox[0cm][r]{$g\in\,$}
+C_{t,t'}\ar[r]^-{\overline{F}(\alpha,\beta)}
+\ar@{->>}[u]
+\ar[d]_-{d_0}
+&%r1c2
+c(X^2)\ar[r]^-{c(\textup{add}\circ\epsilon^2)}
+\ar@{->>}[u]
+\ar[d]_-{d_0}
+&%r1c3
+X\ar@{->>}[r]^-{\overline{v}}
+\ar@{->>}[u]
+\ar[d]^-{d_0}
+&%r1c4
+\overline{V}X\makebox[0cm][l]{$\,\ni\textup{dot}(\alpha,\beta)$}\ar@{=}[u]
+\\%r2c5
+\makebox[0cm][r]{$\textup{EZ}^\mu(\imath_t,\imath_t')\in\,$}C_{t,t'}\ar[r]^-{\overline{F}(\alpha,\beta)}
+&%r1c2
+c(X^2)\ar[r]^-{c(\textup{add}\circ\epsilon^2)}
+&%r1c3
+X\makebox[0cm][l]{$\,\ni\partial_\textup{conn}(\textup{dot}(\alpha,\beta))$}
+&%r1c4
+\\%r3c5
+\makebox[0cm][r]{$\textup{EZ}^\mu(\imath_t,\imath_t')\in\,$}S^t\sqcup S^{t'}\ar[urr]_-{\widetilde{(\epsilon\alpha)} \sqcup \widetilde{(\epsilon\beta)}}
+\ar@{ >->}[u]
+&%r4c2
+&%r4c3
+&%r4c4
+%r4c5
+}\]
+Moreover, at the right of this diagram we see exactly the maps needed in order to construct the connecting homomorphism for the SES defining $\overline{D}^1X^\fraks$.
+%\[0\to\overline{D}^1X^\fraks\to X^\fraks\overset{\overline{v}}{\to} \overline{V}X^\fraks\to 0,\]
+This confirms that $\partial_\textup{conn}(\textup{dot}(\alpha,\beta))$ is the image under $\widetilde{(\epsilon\alpha)} \sqcup \widetilde{(\epsilon\beta)}$ of $\textup{EZ}^\mu(\imath_t,\imath_t')$. As $\alpha\sim \widetilde{(\epsilon\alpha)}$ and $\beta\sim \widetilde{(\epsilon\beta)}$, this completes the proof.
+\end{proof}
+\subsection{$E^1$-level identification of the $\delta$-operations}
+\begin{prop}\label{propOnKoszulDelta}
+There is a function, natural in $W\in s\calV$
+\[\overline{G}:\hom_{s\calV}(S^t,W)\to \hom_{s\algcat}(C_t^i,cKW)\]
+such that the function
+\[G:\hom_{s\algcat}(S^t,W)\to \pi_{t+i+1}(QcKW):=H_{t+i+1}(KW)\]
+defined by $F(\alpha):=H_*(\overline{G}(\alpha)(h)$ makes the following diagram commute:
+\[\mathclap{\xymatrix@R=4mm{
+\hom_{s\calV}(S^t,W)\ar[d]^-{G}
+\ar[r]^-{\textup{hur}}
+&%r1c1
+\pi_t W\ar[d]^-{\check P^i\otimes(\DASH)\textbf{???? when $i=t$}}
+\\
+H_{t+i+1}(KW)\ar@{=}[r]
+&%r2c1
+(C\pi V)_{t+i+1}
+}}\]
+Moreover, $\overline{G}(\alpha)(\imath_t)=\widetilde{\alpha}$, the canonical lift of $\alpha$.
+\end{prop}
+\begin{proof}
+The value of $\overline{G}$ on $\alpha$ is defined as follows. Corresponding to the commuting diagram
+\[\xymatrix@R=4mm{
+0\ar[r]
+\ar@{ >->}[d]
+&%r1c1
+0\ar[d]
+\\%r1c2
+S^t\ar[r]^-{\alpha}
+&%r2c1
+KW%r2c2
+}
+\]
+is a map $\widetilde{\alpha}:S^t\to c_1(KW)$, and there is a commuting diagram %(since in $Y\times Z$, products of the form $(a,0)(0,b)$ vanish):
+\[\xymatrix@R=4mm@C=15mm{
+S^{t+i}\ar@{->}[r]_-{\mu\Delta_{t-i}(\imath_t\otimes\imath_{t})}
+\ar@{ >->}[d]
+&%r1c1
+S^t\ar@{ >->}[d]
+\ar[r]^{\widetilde{\alpha}}
+&c_1(KW)\ar[d]
+\\%r1c2
+CS^{t+i}\ar[r]\ar@/_1em/[rr]_-{0}
+&%r2c1
+C_t^i\ar@{..>}[r]
+%r2c2
+&KW}\]
+Corresponding to the right square is a map $C_t^i\to c_2(KW)$, and the composite with the cofibration $c_2(KW)\to c(KW)$ is $\overline{G}(\alpha)$. This function $\overline{G}$ is evidently natural in $W$, and so then is $G$.
+
+Now under the homology coalgebra map $\overline{G}(\alpha)_*:HC_t^i\to HKW$, we have $h\mapsto G(\alpha)$ and $\imath_t\mapsto\textup{hur}(\alpha)$. \textbf{Hopefully we can figure out enough about cofree homology coalgebras and their right $P$-action to see that $G(\alpha)$ can only equal the Koszul operation on $\textup{hur}(\alpha)$.} In the non-top case, we have zero coproduct and only $(\DASH)P^i$ firing, while in the top case we have coproduct $\textup{hur}(\alpha)\otimes \textup{hur}(\alpha)$ instead.
+\end{proof}
+
+Now to get to the point, we have a commuting diagram
+\[\xymatrix@R=4mm{
+\hom_{s\algcat}(S^t,X)\ar[r]^-{\delta_i}
+\ar[d]^-{\epsilon_*}
+&%r1c1
+\pi_{t+i}(X\wedge_{\Sigma_2} X)\ar[r]^-{\mu}
+&
+\pi_{t+i}(\overline{D}^1X)
+\\%r1c2
+\hom_{s\calV}(S^t,\overline{X})\ar[r]^-{G}&%r2c1
+\pi_{t+i+1}(Qc\overline{X})\ar@{=}[r]
+&
+\pi_{t+i+1}(\overline{V}X)
+\ar[u]^-{\partial_\textup{conn}}
+}\]
+and the induced map $\pi_t(X)\to \pi_{t+i+1}(VX)$ is the Koszul $\delta_i$ operation, by \ref{propOnKoszulDelta}, while the top path, using the `inverse' of $\partial_\textup{conn}$ is the algebraically defined $\delta_i$ operation.
+\begin{proof}[Proof that this diagram commutes]
+It follows from the diagram:
+\[\xymatrix@R=4mm{
+X_{t+i}&%r1c1
+X_{t+i+1}\ar[l]_-{d_0}
+\ar[r]^-{\overline{v}}
+&%r1c2
+(\overline{V}X)_{t+i+1}\\%r1c3
+(C_t^i)_{t+i}\ar[u]^-{\overline{G}(\epsilon\alpha)}
+&%r2c1
+(C_t^i)_{t+i+1}\ar[u]^-{\overline{G}(\epsilon\alpha)}\ar[r]^-{\eta}
+\ar[l]_-{d_0}
+&%r2c2
+(KQC_t^i)_{t+i+1}\ar[u]_-{KQ\overline{G}(\epsilon\alpha)}%r2c3
+}\]
+Propagating the element $h\in (C_t^i)_{t+i+1}$, these groups contain the following elements:
+\[\xymatrix@R=4mm{
+\mu\Delta_{t-i}(\widetilde{\epsilon\alpha}\otimes \widetilde{\epsilon\alpha})&%r1c1
+G(\epsilon\alpha)\ar@{|->}[l]_-{d_0}
+\ar@{|->}[r]^-{\overline{v}}
+&%r1c2
+KQG(\epsilon\alpha)\\%r1c3
+\mu\Delta_{t-i}(\imath_t\otimes\imath_t)\ar@{|->}[u]^-{\overline{G}(\epsilon\alpha)}
+&%r2c1
+h\ar@{|->}[u]^-{\overline{G}(\epsilon\alpha)}\ar@{|->}[r]^-{\eta}
+\ar@{|->}[l]_-{d_0}
+&%r2c2
+h\ar@{|->}[u]_-{KQ\overline{G}(\epsilon\alpha)}%r2c3
+}\]
+As the element we have written as $KQG(\alpha)$ is a representative for $(G\circ\epsilon_*)(\alpha)\in\pi_{t+i+1}(\overline{V}X)$, the class $(\partial_\textup{conn}\circ G\circ\epsilon_*)(\alpha)$ is represented by $\mu\Delta_{t-i}(\widetilde{\epsilon\alpha}\otimes \widetilde{\epsilon\alpha})$. Of course this is homotopic to $\mu\Delta_{t-i}(\alpha\otimes \alpha)$, which represents $\mu\delta_i(\alpha)$.
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 \end{Operations on the Bousfield-Kan spectral sequence}
@@ -3897,7 +4788,7 @@ Applying these observations in the very specific circumstances of this propositi
 \begin{Composite functor spectral sequences}
 \vfil\pagebreak
 \section{\textbf{Composite functor spectral sequences}}
-The subject of this paper is to identify the derived functors $H^*_{\calW(0)}X:=\dual(\mathbb{L}_*Q^{\calW(0)}X)$, for $X\in\calW(0)$. More generally, we'll now present a spectral sequence whose goal is to calculate $H^*_{\calW(n)}X$ for $X\in\calW(n)$. This will be a composite functor spectral sequence analogous to Miller's spectral sequence in \ref{MillerSullivanConjecture.pdf}. The factorization of $Q^{\calW(n)}$ we will use is of course 
+The subject of this paper is to identify the derived functors $H^*_{\calW(0)}X:=\dual(\mathbb{L}_*Q^{\calW(0)}X)$, for $X\in\calW(0)$. More generally, we'll now present a spectral sequence whose goal is to calculate $H^*_{\calW(n)}X$ for $X\in\calW(n)$. This will be a composite functor spectral sequence analogous to Miller's spectral sequence in \cite{MillerSullivanConjecture.pdf}. The factorization of $Q^{\calW(n)}$ we will use is of course 
 \[Q^{\calW(n)}=\left(\calW(n)\overset{Q^{\calU(n)}}{\to}\calL(n)\overset{Q^{\calL(n)}}{\to}\vect{+}{n}\right)\]
 There is an added challenge in this context --- indeed, the available factorization of $Q^{\calW(n)}$ is through a non-abelian category. Thus, the standard technology for composite functor spectral sequences does not apply, and we must use Blanc and Stover's methods \cite{Blanc_Stover-Groth_SS.pdf}. They observe that the left derived functors $\mathbb{L}_*Q^{\calU(n)}X$ are calculated as the homotopy groups of a simplicial object in $\calL(n)$, namely $Q^{\calU(n)}B^{\calW(n)}X$. As such, they have the structure of a $\calL(n)\textup{-$\Pi$-algebra}$, i.e.\ they form an object of $\calW(n+1)$.  After verifying that the functor $Q^{\calU(n)}$ satisfies the requisite acyclicity condition (indeed it preserves free objects), one may apply \cite[Theorem 4.4]{Blanc_Stover-Groth_SS.pdf}: there is a spectral sequence, with $E_r\in\vect{+}{n+2}$,
 \[(E^2)_{s_{n+2},\ldots,s_1}^t=((H_*^{\calW(n+1)})(\mathbb{L}_*Q^{\calU(n)})X)_{s_{n+2},\ldots,s_1}^t\implies ((H_*^{\calW(n)})X)_{s_{n+2}+s_{n+1},s_n,\ldots,s_1}^t\]
@@ -5798,9 +6689,7 @@ having all gradings at the very right, tensor products of vector spaces,\ldots?
 \begin{Contents Page}
 %\begin{abstract}\end{abstract}
 %\maketitle
-\vfil\pagebreak\tiny
-
-\tableofcontents
+\ifx\PostponeContents\undefined\else\vfil\pagebreak\tiny\tableofcontents\relax\fi
 \end{Contents Page}
 
 \end{document}
