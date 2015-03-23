@@ -23,7 +23,7 @@
 \ifx\IncludeAll\undefined\else\renewcommand{\xclude}[1]{\nclude{#1}}\fi
 \nclude{Contents Page}
 \xclude{Intro}
-\xclude{Conventions and notation}
+\nclude{Conventions and notation}
 \xclude{CPiAlgs and CHalgs}
 \xclude{Constructing (co)homotopy operations}
 \nclude{Bousfield-Kan spectral sequence}
@@ -291,7 +291,7 @@
 url=false,doi=false,isbn=false,eprint=false]{biblatex}%
 \hypersetup{colorlinks=false,pdfborder={0 0 0}}
 
-
+\newdir{ >}{{}*!/-10pt/@{>}}
 
 \makeatletter
 \renewcommand{\@seccntformat}[1]{\csname the#1\endcsname.\quad}
@@ -357,7 +357,7 @@ url=false,doi=false,isbn=false,eprint=false]{biblatex}%
 \newcommand{\F}{\mathbb{F}}
 \newcommand{\Id}{\textup{id}}
 \newcommand{\complexes}{\textup{ch}_+}
-\newcommand{\algs}{\scrC\!\textit{om}}
+\newcommand{\algs}{{\scrC\!\textit{om}}}
 
 \newcommand{\E}[5]{[E^{#1}_{#2}#3]^{#4}_{#5}}
 \newcommand{\EZ}[5]{[Z^{#1}_{#2}#3]^{#4}_{#5}}
@@ -772,7 +772,7 @@ If $V$ is instead a bisimplicial \emph{graded} vector space $V\in ss\vect{c}{h}$
 In our application of these conventions we will actually have $V\in \vect{+}{h}$, and will write $p=s_{c+2}$ and $q=s_{c+1}$. We will even sometimes have a quadraic grading on $V$, which will transfer to a further grading on the spectral sequence, so our spectral sequences will appear in the format
 \[\quadgrad{k}\E{}{r}{V}{s_{h+2},\ldots,s_1}{t}=\E{}{r}{(\quadgrad{k}V^{t}_{s_h,\ldots,s_1})}{s_{h+2},s_{h+1}}{}.\]
 
-\subsection{Second quadrant homotopy spectral sequences}
+\subsection{Second quadrant homotopy spectral sequences}\label{Second quadrant homotopy spectral sequences}
 Suppose that $V^{s}_{t}$ is a cosimplicial simplicial (ungraded) vector space. Then there is a cochain-chain complex 
 \[(N\dhor N\uver V)^{s}_{t}:=N\dhor^{s}N\uver_{t}V=V^{s}_{t} \textup{\textbf{\ \ not quite. N or C?}},\]
 with $s$ the horizontal and $t$ the vertical coordinate. The \emph{total complex} $CV$, is a chain complex with a canonical decreasing filtration, defined by 
@@ -912,7 +912,7 @@ If $A$ is a model in $\calc$ then $\gamma$ is an isomorphism.
 \end{lem}
 \begin{proof}{[\textbf{what's the status of this?}]} $A$ is homotopic to a wedge of spheres, and $\pi A$ is free on generators in correspondence with the wedge summands.
 \end{proof}
-\subsection{Cofibrant replacement via the small object argument}
+\subsection{Cofibrant replacement via the small object argument}\label{Cofibrant replacement via the small object argument}
 The homotopy of an object $X$ of $s\calC$ was defined simply by application of the forgetful functor $U^{\calc}:\calc\to\vect{}{}$, a definition which is tautologically homotopically correct. On the other hand, in order to define the homology $H_*^{\calc}X$, as the left Quillen functor $Q^{\calc}$ does not preserve all weak equivalences, we must perform a cofibrant replacement before applying $Q^{\calc}$. While the comonadic bar construction $B^{\calc}$ described in \S\ref{ssec: quillen model and bar construction} suffices to define the groups $H_*^{\calc}X$, it lacks the structure that we will need at various points in this work.
 
 Radulescu-Banu's innovation \cite{Radulescu-Banu.pdf} was to explain that the cofibrant replacement functor $c:s\calC\to s\calC$ constructed by Quillen's small object argument \cite{QuillenHomAlg.pdf}, which by design already posesses a natural acyclic fibration $\epsilon:c\to\Id$, in fact admits the full structure of a comonad, with diagonal $\psi:c\to cc$. As explained by Blumberg and Riehl \cite[Remark 4.12]{BlumRiehlResolutions.pdf},
@@ -948,63 +948,9 @@ H\ar@<.5ex>[r]^-{\textup{coact}}
 &%r1c2
 CH%r1c3
 }.\]
-\begin{shaded}\small
-\textbf{Move this stuff somewhere less general:} Include a bit about colimits, as in \verb|adamsops|
-\begin{prop}
-\textbf{Move/delete me}: For $W$ a graded vector space, the map $a:W\to CW$ is an isomorphism onto the primitives $\textup{Pr}(CW)$ of the cofree $C$-coalgebra $CW$.
-\end{prop}
-\begin{prop}
-The Hurewicz map $\pi_*A\to H_*A$ factors through $\textup{Pr}(H_*A)$, and if $A$ is a simplicial zero-square algebra the resulting map $\pi_*A\to\textup{Pr}(H_*A)$ equals the isomorphism $a:\pi_*A\to\textup{Pr}(C\pi_*A)$.
-\end{prop}
-\begin{proof}
-Represent an element $\alpha\in\pi_nA$ by a map $\alpha:S^n_\calC\to A$. Then, $h(\alpha)$ is the image of the fundamental homology class $\imath\in H_n(S^n_\calC)$ under the map $\alpha_*$. As $\imath$ is primitive, so is $h(\alpha)$.
-\end{proof}
-At this point, we examine the cosimplicial resolution of \cite[4.6]{BlumRiehlResolutions.pdf}:
-\[
-\vcenter{
-\def\labelstyle{\scriptstyle}
-\xymatrix@C=1.5cm@1{
-cX_\bullet\,
-\ar[r]
-&
-\,cKQcX_\bullet\,
-\ar[r];[]
-&
-\,c(KQc)^2X_\bullet\,
-\ar@<-1ex>[l];[]
-\ar@<+1ex>[l];[]
-\ar@<+1ex>[r];[]
-\ar@<-1ex>[r];[]
-&
-\,c(KQc)^3X_\bullet\,\makebox[0cm][l]{\,$\cdots $}
-\ar[l];[]
-\ar@<-2ex>[l];[]
-\ar@<+2ex>[l];[]
-}}\]
-Applying $\pi_*(Q\DASH)$, we obtain exactly the cobar construction of the $C$-coalgebra $H_*X_\bullet$:
-\[
-\vcenter{
-\def\labelstyle{\scriptstyle}
-\xymatrix@C=1.5cm@1{
-HX\,
-\ar[r]
-&
-\,CHX\,
-\ar[r];[]
-&
-\,CCHX\,
-\ar@<-1ex>[l];[]
-\ar@<+1ex>[l];[]
-\ar@<+1ex>[r];[]
-\ar@<-1ex>[r];[]
-&
-\,c(KQc)^3X_\bullet\,\makebox[0cm][l]{\,$\cdots $}
-\ar[l];[]
-\ar@<-2ex>[l];[]
-\ar@<+2ex>[l];[]
-}}\]
+\begin{shaded}\tiny
+discourse on the Hurewicz?
 \end{shaded}
-
 \subsection{Cohomology groups and $\calC$-$H^*$-algebras}\label{cohomology and Halgs}
 It will in general be preferable to for us to consider algebraic structure on cohomology, rather than coalgebraic structure on homology. Firstly, algebra is in general a more familiar subject than coalgebra, and secondly, cohomology has the advantage that it consists of representable functors. That is, in the homotopy category of $s\calc$, the object $K_\calC\mathbb{S}^t_{n,s_r,\ldots,s_1}$ represents $H^n_{\calc}(\DASH)_t^{s_r,\ldots,s_1}$,  c.f.\ \cite[Proposition 4.3]{MR1089001}. Using cohomology groups has the disadvantages associated with double-dualisation.
 
@@ -1039,7 +985,7 @@ Moreover, $F_{\calc\HAlg}$ is an augmented monad: one applies $H^*_{\calc}$ to t
 and in particular, there is an adjunction $Q^{\calc\HAlg}\dashv K_{\calc\HAlg}$.
 %For any simplicial object $A\in s\calC$, there's a natural map $\gamma:Q^{\calC\HAlg}\pi A\to \pi Q^{\calC}A$.
 
-
+\textbf{Talk about duality.}
 \subsection{The smash coproduct}\label{subseq:The smash coproduct}
 For $X_1,X_2\in\calc$, we define the \emph{smash coproduct} $X_1\wedge X_2$ to be the kernel of the natural map $X_1\sqcup X_2\to X_1\times X_2$. When $X_1=X_2=X$, $X\wedge X$ has a natural action of $\Sigma_2$, and we write $X\wedge^{\Sigma_2} X$ for the subobject of invariant elements under this action.
 
@@ -1813,12 +1759,12 @@ One checks that the bracket is well defined in the quotient, and that taking the
 
 \end{Constructing (co)homotopy operations}
 \begin{Bousfield-Kan spectral sequence}
-\newcommand{\algcat}{\scrC\!\textit{om}}
+\newcommand{\algcat}{{\scrC\!\textit{om}}}
 \section{\textbf{The Bousfield-Kan spectral sequence for \cancel{simplicial} algebras}}\label{Bousfield-Kan spectral sequence}
 \subsection{Completion with respect to homology}
 Suppose that $X\in s\algcat$. Then Radulescu-Banu \cite{Radulescu-Banu.pdf} has constructed a cosimplicial resolution $\calX^\bullet$ of $X$ by generalised Eilenberg-Mac Lane objects, and defined the \emph{completion of $X$ with respect to Andr\'e-Quillen homology} to be the totalization $X\hat{\ }:=\textup{Tot}(\calX^\bullet)$.
 
-Indeed, Radulescu-Banu constructed \cite{Radulescu-Banu.pdf} a comonad diagonal $\psi:c\to cc$ specifically to define the coface maps in a (coaugmented) cosimplicial object:
+Indeed, Radulescu-Banu constructed \cite{Radulescu-Banu.pdf} a comonad diagonal $\psi:c\to cc$ used in \S\ref{Cofibrant replacement via the small object argument} specifically to define the coface maps in a (coaugmented) cosimplicial object:
 \[\makebox[0cm][r]{\,$\calX^\bullet:\qquad $}\vcenter{
 \def\labelstyle{\scriptstyle}
 \xymatrix@C=1.5cm@1{
@@ -1829,15 +1775,15 @@ cX\,
 \ar[r];[]
 &
 \,c(KQc)^2X\,
-\ar@<-1ex>[l];[]
-\ar@<+1ex>[l];[]
-\ar@<+1ex>[r];[]
-\ar@<-1ex>[r];[]
+\ar@<-.65ex>[l];[]
+\ar@<+.65ex>[l];[]
+\ar@<+.65ex>[r];[]
+\ar@<-.65ex>[r];[]
 &
 \,c(KQc)^3X\,\makebox[0cm][l]{\,$\cdots. $}
 \ar[l];[]
-\ar@<-2ex>[l];[]
-\ar@<+2ex>[l];[]
+\ar@<-1.3ex>[l];[]
+\ar@<+1.3ex>[l];[]
 }}\]
 The construction is explained and generalized by Blumberg and Riehl \cite{BlumRiehlResolutions.pdf}. The definition of the coface and codegeneracy maps is similar to that in the monadic resolution of $X$ using the adjunction $Q\dashv K$, however, the coface maps must create an extra copy of $c$, and the codegeneracies must destroy a copy.  Instead of simply using the unit and counit of the adjunction respectively, one uses the composites
 \[c\overset{\psi}{\to}cc\overset{c\eta c}{\to}cKQc\textup{\quad and\quad }QcK\overset{Q\epsilon K}{\to}QK\to \textup{id}.\]
@@ -1865,6 +1811,166 @@ Accordingly, we must mix Quillen's cofibrant replacement functor $c$ into our de
 In Section \ref{introToRBwork} we will introduce Radulescu-Banu's cosimplicial resolution and explain a little terminology. In \S\ref{sec:ItSimpBar} we will state and prove a useful result on iterated simplicial bar constructions.
 
 This research will form part of the author's PhD thesis. The author would like to thank his advisor, Haynes Miller, for his support and guidance, and John Harper, for sharing helpful insights into the use of cubical diagrams in connectivity analyses such as that of Section \ref{sec:connectivityAnalysis}.
+\subsection{The Adams spectral sequence}
+In light of \S\ref{Cofibrant replacement via the small object argument} and \S\ref{homology and Hcoalgs}, applying the functor $H_*^{\algcat}$ to $\calX$, one obtains precisely the monadic cobar resolution of $H_*^{\algcat}X$ obtained by repeated application of the monad on $\algcat\HCoalg$ of the adjunction 
+\[U^{\algcat\HCoalg}:\algcat\HCoalg\rightleftarrows \vect{}{1}:C^{\algcat\HCoalg}.\]
+In more detail, we have a diagram
+\[\vcenter{
+\def\labelstyle{\scriptstyle}
+\xymatrix@C=1.5cm@1{
+cX\,
+\ar[r]\ar@{->>}[d]
+&
+\,cKQcX\,
+\ar[r];[]\ar@{->>}[d]
+&
+\,c(KQc)^2X\,
+\ar@<-.65ex>[l];[]
+\ar@<+.65ex>[l];[]
+\ar@<+.65ex>[r];[]
+\ar@<-.65ex>[r];[]\ar@{->>}[d]
+&
+\,\cdots
+\ar[l];[]
+\ar@<-1.3ex>[l];[]
+\ar@<+1.3ex>[l];[]\\
+QcX\,
+\ar[r]
+&
+\,QcKQcX\,
+\ar[r];[]
+&
+\,Qc(KQc)^2X\,
+\ar@<-.65ex>[l];[]
+\ar@<+.65ex>[l];[]
+\ar@<+.65ex>[r];[]
+\ar@<-.65ex>[r];[]
+&
+\,\cdots
+\ar[l];[]
+\ar@<-1.3ex>[l];[]
+\ar@<+1.3ex>[l];[]
+}}\]
+and applying $\pi_*$, we obtain (writing `$C$' for the monad $C^{\algcat\HCoalg}U^{\algcat\HCoalg}$):
+\[\vcenter{
+\def\labelstyle{\scriptstyle}
+\xymatrix@C=1.5cm@1{
+\pi_*X\,
+\ar[r]\ar@{->>}[d]
+&
+\,\pi_*\calX^0\,
+\ar[r];[]\ar@{->>}[d]
+&
+\,\pi_*\calX^1\,
+\ar@<-.65ex>[l];[]
+\ar@<+.65ex>[l];[]
+\ar@<+.65ex>[r];[]
+\ar@<-.65ex>[r];[]\ar@{->>}[d]
+&
+\,\cdots
+\ar[l];[]
+\ar@<-1.3ex>[l];[]
+\ar@<+1.3ex>[l];[]\\
+H_*^\algcat X\,
+\ar[r]
+&
+\,CH_*^\algcat X\,
+\ar[r];[]
+&
+\,C^2H_*^\algcat X\,
+\ar@<-.65ex>[l];[]
+\ar@<+.65ex>[l];[]
+\ar@<+.65ex>[r];[]
+\ar@<-.65ex>[r];[]
+&
+\,\cdots
+\ar[l];[]
+\ar@<-1.3ex>[l];[]
+\ar@<+1.3ex>[l];[]
+}}\]
+Moreover, as each $\calX^s$ for $s\geq0$ is a GEM, \textbf{finite type if we want},
+\begin{shaded}
+``Include a bit about colimits, as in \verb|adamsops|''(?????)
+\textbf{Modify}: 
+\begin{prop}
+For $W$ a graded vector space, the map $a:W\to CW$ is an isomorphism onto the primitives $\textup{Pr}(CW)$ of the cofree $C$-coalgebra $CW$.
+\end{prop}
+\begin{prop}
+The Hurewicz map $\pi_*A\to H_*A$ factors through $\textup{Pr}(H_*A)$, and if $A$ is a simplicial zero-square algebra the resulting map $\pi_*A\to\textup{Pr}(H_*A)$ equals the isomorphism $a:\pi_*A\to\textup{Pr}(C\pi_*A)$.
+\end{prop}
+\begin{proof}
+Represent an element $\alpha\in\pi_nA$ by a map $\alpha:S^n_\calC\to A$. Then, $h(\alpha)$ is the image of the fundamental homology class $\imath\in H_n(S^n_\calC)$ under the map $\alpha_*$. As $\imath$ is primitive, so is $h(\alpha)$.
+\end{proof}
+\end{shaded}
+
+\[\vcenter{
+\def\labelstyle{\scriptstyle}
+\xymatrix@C=1.5cm@1{
+\pi_*X\,
+\ar[r]\ar@{->}[d]
+&
+\,\pi_*\calX^0\,
+\ar[r];[]\ar[d]^-{\cong}
+&
+\,\pi_*\calX^1\,
+\ar@<-.65ex>[l];[]
+\ar@<+.65ex>[l];[]
+\ar@<+.65ex>[r];[]
+\ar@<-.65ex>[r];[]\ar[d]^-{\cong}
+&
+\,\cdots
+\ar[l];[]
+\ar@<-1.3ex>[l];[]
+\ar@<+1.3ex>[l];[]
+\\
+H_*^\algcat X\,
+\ar[r]
+\ar@{ >->}[d]
+&
+\,\textup{Pr}(CH_*^\algcat X)\,
+\ar[r];[]
+\ar@{ >->}[d]
+&
+\,\textup{Pr}(C^2H_*^\algcat X)\,
+\ar@<-.65ex>[l];[]
+\ar@<+.65ex>[l];[]
+\ar@<+.65ex>[r];[]
+\ar@<-.65ex>[r];[]
+\ar@{ >->}[d]
+&
+\,\cdots
+\ar[l];[]
+\ar@<-1.3ex>[l];[]
+\ar@<+1.3ex>[l];[]
+\\
+H_*^\algcat X\,
+\ar[r]
+&
+\,CH_*^\algcat X\,
+\ar[r];[]
+&
+\,C^2H_*^\algcat X\,
+\ar@<-.65ex>[l];[]
+\ar@<+.65ex>[l];[]
+\ar@<+.65ex>[r];[]
+\ar@<-.65ex>[r];[]
+&
+\,\cdots
+\ar[l];[]
+\ar@<-1.3ex>[l];[]
+\ar@<+1.3ex>[l];[]
+}}
+\]
+Now $\calX$ has a second quadrant homotopy spectral sequences (see \S\ref{Second quadrant homotopy spectral sequences}), and:
+\begin{alignat*}{2}
+\E{1}{}{\calX}{s}{t}&\cong (\textup{Pr}C_{\algcat\HCoalg}^sH_*^{\algcat}X)_{t};\\
+\E{2}{}{\calX}{s}{t}&\cong(\mathbb{R}^s\textup{Pr})H_*^{\algcat}X\\
+&\cong (H^*_{\algcat\HAlg}H^*_{\algcat}X)^{s}_{t},&\quad&\textup{(if $H_*^{\algcat}X$ finite type)}.
+\end{alignat*}
+
+
+
+
 
 
 \subsection{The Adams tower}\label{sec:derWRTab}
@@ -2198,23 +2304,23 @@ Write $T:\algCat\to \algCat$ for the comonad of the adjunction $\textup{free}:\a
 \ar[r]|(.65){\fraks_{0,0}}
 &
 \,T^2\,
-\ar@<-1ex>[l]|(.65){\frakd_{0,1}}
-\ar@<+1ex>[l]|(.65){\frakd_{1,1}}
-\ar@<+1ex>[r]|(.65){\fraks_{0,1}}
-\ar@<-1ex>[r]|(.65){\fraks_{1,1}}
+\ar@<-.65ex>[l]|(.65){\frakd_{0,1}}
+\ar@<+.65ex>[l]|(.65){\frakd_{1,1}}
+\ar@<+.65ex>[r]|(.65){\fraks_{0,1}}
+\ar@<-.65ex>[r]|(.65){\fraks_{1,1}}
 &
 \,T^3\,
 \ar[l]|(.65){\frakd_{1,2}}
-\ar@<-2ex>[l]|(.65){\frakd_{0,2}}
-\ar@<+2ex>[l]|(.65){\frakd_{2,2}}
+\ar@<-1.3ex>[l]|(.65){\frakd_{0,2}}
+\ar@<+1.3ex>[l]|(.65){\frakd_{2,2}}
 \ar[r]|(.65){\fraks_{1,2}}
-\ar@<+2ex>[r]|(.65){\fraks_{0,2}}
-\ar@<-2ex>[r]|(.65){\fraks_{2,2}}
+\ar@<+1.3ex>[r]|(.65){\fraks_{0,2}}
+\ar@<-1.3ex>[r]|(.65){\fraks_{2,2}}
 &
 \,T^4\,\makebox[0cm][l]{\,$\cdots $}
 \ar@<-3ex>[l]|(.65){\frakd_{0,3}}
-\ar@<-1ex>[l]|(.65){\frakd_{1,3}}
-\ar@<+1ex>[l]|(.65){\frakd_{2,3}}
+\ar@<-.65ex>[l]|(.65){\frakd_{1,3}}
+\ar@<+.65ex>[l]|(.65){\frakd_{2,3}}
 \ar@<+3ex>[l]|(.65){\frakd_{3,3}}
 }}\]
 The \emph{simplicial bar construction} is the cofibrant replacement functor $(b,\epsilon)$ on $s\algCat$ which is the diagonal of the bisimplicial object obtained by application of $\frakb$ levelwise. That is, for $X\in s\algCat$, $bX$ is the simplicial object with $(bX)_q:=T^{q+1}X_q$, and with
@@ -4597,10 +4703,10 @@ Now the utility of the comonad structure lies in resolving an object $L\in s\cal
 %\ar@{-->}[l]|(.65){d_0}
 %&
 %\pi_*(W^2L)
-%\ar@<-1ex>[l]|(.65){d_0}
-%\ar@<+1ex>[l]|(.65){d_1}
-%\ar@<+1ex>[r]|(.65){s_0}
-%\ar@<-1ex>[r]|(.65){s_1}
+%\ar@<-.65ex>[l]|(.65){d_0}
+%\ar@<+.65ex>[l]|(.65){d_1}
+%\ar@<+.65ex>[r]|(.65){s_0}
+%\ar@<-.65ex>[r]|(.65){s_1}
 %&
 %\pi_*(W^3L)
 %\ar[l]|(.65){d_1}
@@ -4612,8 +4718,8 @@ Now the utility of the comonad structure lies in resolving an object $L\in s\cal
 %&
 %\pi_*(W^4L)\makebox[0cm][l]{\,$\cdots $}
 %\ar@<-3ex>[l]|(.65){d_0}
-%\ar@<-1ex>[l]|(.65){d_1}
-%\ar@<+1ex>[l]|(.65){d_2}
+%\ar@<-.65ex>[l]|(.65){d_1}
+%\ar@<+.65ex>[l]|(.65){d_2}
 %\ar@<+3ex>[l]|(.65){d_3}
 %}}\]
 %
@@ -5667,6 +5773,7 @@ having all gradings at the very right, tensor products of vector spaces,\ldots?
 \item two methods of stating indeterminacy are at odds just a little
 \item edd $\textup{ext}$ in codwyer chapter
 \item omit some words from ``complete with respect to Andr\'e-Quillen homology''
+\item deal with arrows % \ar@{>->}[d] becomes \ar@{ >->}[d]
 \end{enumerate}
 \end{todolist}
 \begin{bibliog}
