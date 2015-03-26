@@ -1,6 +1,6 @@
 % !TEX root = z_output/unstable_Lie_algs.tex
 \documentclass[11pt]{amsart}
-%\newcommand{\IncludeAll}{}% <--
+\newcommand{\IncludeAll}{}% <--
 \newcommand{\ShrinkPages}{}% <--
 \newcommand{\PostponeContents}{}% <--
 \ifx\ShrinkPages\undefined\else\usepackage[paperheight=160mm,paperwidth=160mm]{geometry}\fi%220/160
@@ -341,6 +341,7 @@ url=false,doi=false,isbn=false,eprint=false]{biblatex}%
 \renewcommand{\produces}[3]{#1\overset{\smash{#3}}{\rightarrow} #2}%{J}{I}{P}
 \newcommand{\twist}{\omega}
 \newcommand{\DeltaUp}{\Delta}% <-- i changed the indices to upper, marking where I did it.
+\newcommand{\DeltaNabla}{\nabla}
 \newcommand{\Shuffles}[2]{\textup{Sh}_{#1#2}}
 \newcommand{\HalfShuffles}[2]{\textup{Sh}_{#1#2}^{\smash{\!\div2}}}
 \newcommand{\Nop}{N^{\smash{-}}}
@@ -1178,7 +1179,7 @@ This is another expression of homogeneity in the relations defining $\calC$. For
 
 \section{\textbf{Constructing homotopy operations}}\label{sec:Constructing homotopy operations}
 
-\subsection{Higher simplicial Eilenberg-Mac Lane maps}[\textbf{$\Delta$ because} it's the right symbol, should be an upper index since it decreases homological degree.]
+\subsection{Higher simplicial Eilenberg-Mac Lane maps}[\textbf{$\DeltaNabla$ because} it's the right symbol, should be an upper index since it decreases homological degree.]
 
 
 In what follows, we will often have a natural map $F$ whose domain and codomain both support a switch map $T$, obtained by interchanging tensor factors. Furthermore, we will so often have use for the expression $TFT$, that we introduce the shorthand $\twist F:=TFT$. %Although this notation has the potential for ambiguity, we will be careful to avoid confusion.
@@ -1189,17 +1190,17 @@ Let $\{\DeltaUp^k\}$ be a higher simplicial Eilenberg-Mac Lane map \cite[\S3]{Dw
 natural in simplicial vectorspaces $U$ and $V$, such that for $k\geq0$, the identity
 \[(1+\twist) \DeltaUp^k=\oldphi^k+\begin{cases}
 \DeltaUp^{k-1}\partial+\partial\DeltaUp^{k-1},&\textup{if }k\geq1,\\
-\Delta,&\textup{if }k=0,
+\DeltaUp,&\textup{if }k=0,
 %\\,&\textup{if }
 \end{cases}
 \]
 holds on classes of dimension at least $2k$, and:
 \begin{itemize}
 \setlength{\parindent}{.25in}
-\item $\Delta:CU\otimes CV\to N(U\times V)$ is the Eilenberg-Zilber map, a chain homotopy equivalence inducing the identity in dimension zero; and
+\item $\DeltaUp:CU\otimes CV\to N(U\times V)$ is the Eilenberg-Zilber map, a chain homotopy equivalence inducing the identity in dimension zero; and
 \item $\oldphi^k$ is the map $(CU\otimes CV)_{i+k}\to N(U\otimes V)_i$ which vanishes except on $U_k\otimes V_k$, where its value is just the projection $U_k\otimes V_k\to N(U\times V)_k$.
 \end{itemize}
-Note that as $\oldphi^0$ commutes with symmetry isomorphisms, so does $\Delta$.
+Note that as $\oldphi^0$ commutes with symmetry isomorphisms, so does $\DeltaUp$.
 
 
 
@@ -1219,7 +1220,7 @@ These functions descend to  well defined homotopy operations:
 \end{alignat*}
 The function $N_nV \to N_{n}(S^2V)$ given by $\overline{a}\mapsto \overline{a\otimes a}$ yields a well defined homotopy operation $\sigma_0^\textup{ext}:\pi_nV\to \pi_{n}(S^2V)$. 
 For all $n\geq0$, the map $\sigma_n^\textup{ext}:\pi_nV\to\pi_{2n}(S^2V)$ satisfies
-\[\sigma_n^\textup{ext}(\overline{x}+\overline{y})=\sigma_n^\textup{ext}(\overline{x})+\sigma_n^\textup{ext}(\overline{y})+\overline{(1+T)\Delta(x\otimes y)}\quad\text{for $x,y\in ZN_nV$}.\]
+\[\sigma_n^\textup{ext}(\overline{x}+\overline{y})=\sigma_n^\textup{ext}(\overline{x})+\sigma_n^\textup{ext}(\overline{y})+\overline{(1+T)\DeltaNabla(x\otimes y)}\quad\text{for $x,y\in ZN_nV$}.\]
 %For $2\leq i\leq n$, the function $N_nV \to N_{n+i}S_2V$ yields a well-defined homotopy operation $\sigma_i^\textup{ext}:\pi_nV\to \pi_{n+i}(S_2V)$. 
 %For $1\leq i\leq n$, the function $N_nV \to N_{n+i}\Lambda^2V$ yields a well-defined homotopy operation $\sigma_i^\textup{ext}:\pi_nV\to \pi_{n+i}(\Lambda^2V)$. 
 %%produces a well defined homotopy operation $\sigma_i^\textup{ext}:\pi_n(V)\to \pi_{n+i}(\Lambda^2V)$. 
@@ -1231,35 +1232,35 @@ Although all of the operations  are defined in the cited references, we will be 
 As described in \cite[\S3]{MR1089001}, we might choose to define $\sigma^\textup{ext}_0$ using a universal example, for which the cycle 
 \[z\otimes z\in ZN_n(S^2\mathbb{K}_n)\cong \F_2\]
 is the only possible representative, demonstrating that the formula $\overline{a}\mapsto \overline{a\otimes a}$ yields the correct (well defined) operation. To check that $\sigma_0^\textup{ext}$ satisfies the stated equation, we need only check that it holds on $z_1+z_2\in ZN_0(\mathbb{K}_0\oplus \mathbb{K}_0)\cong \F_2\oplus \F_2$. But
-\[\sigma_0^\textup{ext}(z_1+z_2)-\sigma_0^\textup{ext}(z_1)-\sigma_0^\textup{ext}(z_2)=z_1\otimes z_2+z_2\otimes z_1=(1+T)\Delta(z_1\otimes z_2),\]
-as $\Delta$ is the identity in dimension zero.
+\[\sigma_0^\textup{ext}(z_1+z_2)-\sigma_0^\textup{ext}(z_1)-\sigma_0^\textup{ext}(z_2)=z_1\otimes z_2+z_2\otimes z_1=(1+T)\DeltaNabla(z_1\otimes z_2),\]
+as $\DeltaNabla$ is the identity in dimension zero.
 
-To explain the equation when $n\geq1$, as $\sigma_n(\overline{x}):=\overline{(1+T)\Delta^0(x\otimes x)}$, we obtain %into the expression  $\sigma_n^\textup{ext}(x+y)-\sigma_n^\textup{ext}(x)-\sigma_n^\textup{ext}(y)$ to obtain
+To explain the equation when $n\geq1$, as $\sigma_n(\overline{x}):=\overline{(1+T)\DeltaNabla^0(x\otimes x)}$, we obtain %into the expression  $\sigma_n^\textup{ext}(x+y)-\sigma_n^\textup{ext}(x)-\sigma_n^\textup{ext}(y)$ to obtain
 \[\sigma_n^\textup{ext}(\overline{x}+\overline{y})-\sigma_n^\textup{ext}(\overline{x})-\sigma_n^\textup{ext}(\overline{y})
 =
-\overline{(1+T)\Delta^0(1+T)(x\otimes y)}\]
+\overline{(1+T)\DeltaNabla^0(1+T)(x\otimes y)}\]
 and using the symmetry  $T\bigl((1+T)(x\otimes y)\bigr)=(1+T)(x\otimes y)$, and the fact that $\oldphi^0$ vanishes on $(1+T)(x\otimes y)$:
 %\begin{alignat*}{2}
-%(1+T)\Delta^0(1+T)(x\otimes y)
+%(1+T)\DeltaNabla^0(1+T)(x\otimes y)
 %&=
-%(1+\omega\Delta^0)(1+T)(x\otimes y)%
+%(1+\omega\DeltaNabla^0)(1+T)(x\otimes y)%
 %\\
 %&=
-%(\Delta+\oldphi^0)(1+T)(x\otimes y)%
+%(\DeltaNabla+\oldphi^0)(1+T)(x\otimes y)%
 %\\
 %&=
-%\Delta(1+T)(x\otimes y)%
+%\DeltaNabla(1+T)(x\otimes y)%
 %\end{alignat*}
 \[
-(1+T)\Delta^0(1+T)(x\otimes y)
+(1+T)\DeltaNabla^0(1+T)(x\otimes y)
 =
-(1+\omega\Delta^0)(1+T)(x\otimes y)
+(1+\omega\DeltaNabla^0)(1+T)(x\otimes y)
 =
-\Delta(1+T)(x\otimes y).\qedhere
+\DeltaNabla(1+T)(x\otimes y).\qedhere
 \]
 %where we have used the symmetry
 %\[T\bigl((1+T)(x\otimes y)\bigr)=(T+T^2)(x\otimes y)=(1+T)(x\otimes y)\]
-%in order to exchange $T\Delta^0$ and $\omega\Delta^0$ at the second equality.
+%in order to exchange $T\DeltaNabla^0$ and $\omega\DeltaNabla^0$ at the second equality.
 \end{proof}
 
 \subsection{External binary homotopy operations}
@@ -1321,7 +1322,7 @@ Finally, to extend the composite $\pi_*(\trace)\circ\widetilde{\nabla}_U$, we si
 %%
 %%
 %%When $n\geq0$, this map is defined on cycles by $z\mapsto \nabla(z\otimes z)$, and the required equation is simply the expansion
-%%\[\Delta((x+y)\otimes(x+y))=\Delta(x\otimes x)+\Delta(y\otimes y)+(1+T)\Delta(x\otimes y).\]
+%%\[\DeltaNabla((x+y)\otimes(x+y))=\DeltaNabla(x\otimes x)+\DeltaNabla(y\otimes y)+(1+T)\DeltaNabla(x\otimes y).\]
 \end{proof}
 
 \subsection{Homotopy operations for simplicial commutative algebras}\label{Homotopy operations for simplicial commutative algebras}
@@ -2991,39 +2992,39 @@ In the present context, however, the operations of theorem XYZ are all equal to 
 %\end{itemize}
 %It is a natural convention to define $D^k=0$ for whenever either $k<0$ or $i<0$, in which case the relation $dD^k+D^kd=D^{k-1}+TD^{k-1}T$ holds for any $k$.
 %\subsection{Higher simplicial Eilenberg-Mac Lane map}
-%Let $\{\Delta_k\}$ be a higher simplicial Eilenberg-Mac Lane map \cite[\S3]{DwyerHtpyOpsSimpComAlg.pdf}, i.e.\ maps
-%\[\Delta_k:(CU\otimes CV)_{i+k}\to N(U\otimes V)_i\textup{\ \ for $0\leq k\leq i$}\]
+%Let $\{\DeltaNabla_k\}$ be a higher simplicial Eilenberg-Mac Lane map \cite[\S3]{DwyerHtpyOpsSimpComAlg.pdf}, i.e.\ maps
+%\[\DeltaNabla_k:(CU\otimes CV)_{i+k}\to N(U\otimes V)_i\textup{\ \ for $0\leq k\leq i$}\]
 %such that the identities
-%\[\Delta_k+T\Delta_kT=\phi_k+\begin{cases}
-%\Delta_{k-1}\partial+\partial\Delta_{k-1},&\textup{if }k\geq1;\\
-%\Delta,&\textup{if }k=0.
+%\[\DeltaNabla_k+T\DeltaNabla_kT=\phi_k+\begin{cases}
+%\DeltaNabla_{k-1}\partial+\partial\DeltaNabla_{k-1},&\textup{if }k\geq1;\\
+%\DeltaNabla,&\textup{if }k=0.
 %%\\,&\textup{if }
 %\end{cases}
 %\]
 %hold on classes of dimension at least $2k$, and:
 %\begin{itemize}
 %\setlength{\parindent}{.25in}
-%\item $\Delta:CU\otimes CV\to N(U\times V)$ is a chain homotopy equivalence inducing the identity in dimension zero; and
+%\item $\DeltaNabla:CU\otimes CV\to N(U\times V)$ is a chain homotopy equivalence inducing the identity in dimension zero; and
 %\item $\phi_k$ is the map $(CU\otimes CV)_{i+k}\to N(U\otimes V)_i$ which vanishes except on $U_k\otimes V_k$, where its value is just the projection $U_k\otimes V_k\to N(U\times V)_k$.
 %\end{itemize}
-%Note that $\phi$ commutes with symmetry isomorphisms, and thus so must $\Delta$.
+%Note that $\phi$ commutes with symmetry isomorphisms, and thus so must $\DeltaNabla$.
 
 \end{shaded}
 
 \subsection{Maps of mixed simplicial vectorspaces}
 [\textbf{Introduce} an un-decorated $C$ for the double complex, not the total complex.]
-For mixed simplicial vector spaces $X$ and $Y$, write $C(X\otimes_\textup{v}Y)$ for the double complex which in degree $(\fraks,\frakt)$ equals the direct sum $\bigoplus_{t+t'=\frakt}X_t^\fraks\otimes X_{t'}^\fraks$. The following vectorspace maps are given by prolonging $D^k$, $\Delta$, $\Delta_k$ and $\phi_k$, wherever these maps are defined, and by zero elsewhere:
+For mixed simplicial vector spaces $X$ and $Y$, write $C(X\otimes_\textup{v}Y)$ for the double complex which in degree $(\fraks,\frakt)$ equals the direct sum $\bigoplus_{t+t'=\frakt}X_t^\fraks\otimes X_{t'}^\fraks$. The following vectorspace maps are given by prolonging $D^k$, $\DeltaNabla$, $\DeltaNabla_k$ and $\phi_k$, wherever these maps are defined, and by zero elsewhere:
 \begin{align*}
 {D}^k:(CX\otimes CY)^{\fraks+k}_{\frakt}&\to C(X\otimes_\textup{v}Y)^{\fraks}_{\frakt}&\quad&\textup{(zero unless $0\leq k\leq \fraks$)}\\
-{\Delta}:C(X\otimes_\textup{v} Y)^{\fraks}_{\frakt}&\to C(X\otimes Y)^{\fraks}_{\frakt}\\
-{\Delta}_k:C(X\otimes_\textup{v} Y)^{\fraks}_{\frakt+k}&\to C(X\otimes Y)^{\fraks}_{\frakt}&\quad&\textup{(zero unless $0\leq k\leq \frakt$)}\\
+{\DeltaNabla}:C(X\otimes_\textup{v} Y)^{\fraks}_{\frakt}&\to C(X\otimes Y)^{\fraks}_{\frakt}\\
+{\DeltaNabla}_k:C(X\otimes_\textup{v} Y)^{\fraks}_{\frakt+k}&\to C(X\otimes Y)^{\fraks}_{\frakt}&\quad&\textup{(zero unless $0\leq k\leq \frakt$)}\\
 {\phi}_k:C(X\otimes_\textup{v} Y)^{\fraks}_{\frakt+k}&\to C(X\otimes Y)^{\fraks}_{\frakt}&\quad&\textup{(zero unless $k= \frakt\geq0$)}\\
 {\rho}:C(X\otimes X)^{\fraks}_{\frakt}&\to C(S_2X)^{\fraks}_{\frakt}&\quad&\textup{(proj onto coinvariants)}
 \end{align*}
-We have essentially just committed to regarding $\Delta_k$ as zero where it is not defined. This is certainly not the natural convention, and it results in such unpleasant statements as:
+We have essentially just committed to regarding $\DeltaNabla_k$ as zero where it is not defined. This is certainly not the natural convention, and it results in such unpleasant statements as:
 \begin{lem}\label{unpleasant formula}
 Suppose that $z\in C(X\otimes_\textup{v} Y)^{\fraks}_{\frakt}$. Then
-\[(d\Delta_k+\Delta_kd)z=((1+\twist)\Delta_{k+1}+\phi_{k+1} )z\]
+\[(d\DeltaNabla_k+\DeltaNabla_kd)z=((1+\twist)\DeltaNabla_{k+1}+\phi_{k+1} )z\]
 whenever $k\geq0$ and $\frakt$ does not equal either of $2k$ and $2k+1$.
 \end{lem}
 \noindent We hope that the ends justify the means.
@@ -3034,22 +3035,22 @@ As discussed earlier, we'll write $T$ for any symmetry isomorphism, write ``$\tw
 We will define the external product
 \[\times^\textup{ext}:\E{r}{}{X}{s}{t}\otimes \E{r}{}{X}{s'}{t'}\to \E{r}{}{S_2X}{s+s'}{t+t'}\]
 using the chain-level formula
-\[x\otimes y\mapsto\rho\Delta D^0(x\otimes y).\]
-As both $\Delta$ and $D^0$ are chain maps preserving filtration, the operations $\times^\textup{ext}$ satisfy a Liebnitz formula.
+\[x\otimes y\mapsto\rho\DeltaNabla D^0(x\otimes y).\]
+As both $\DeltaNabla$ and $D^0$ are chain maps preserving filtration, the operations $\times^\textup{ext}$ satisfy a Liebnitz formula.
 \begin{prop}
 Suppose that $x\in \E{r}{}{X}{s}{t}$ is a permanent cycle such that $t-s>0$. Then $x\times x$ is eventually hit by a differential. That is, $x\times x\in \E{r}{}{S_2X}{2s}{2t}$ is a permanent cycle which represents zero on $\E{\infty}{}{S_2X}{}{}$.
 \end{prop}
 \begin{proof}
 \textbf{Since the spectral sequence converges}, $x$ can be written as $x^0+dy$ for $x^0\in X^{0}_{n}$ such that $dx^0=0$ and $y\in (TX)_{n+1}$. Now $x\times x$ is represented by
-\[\rho\Delta D^0(x^0\otimes x^0)+\rho\Delta D^0(dy\otimes x^0+x^0\otimes dy+dy\otimes dy).\]
+\[\rho\DeltaNabla D^0(x^0\otimes x^0)+\rho\DeltaNabla D^0(dy\otimes x^0+x^0\otimes dy+dy\otimes dy).\]
 Now the first term here vanishes, as
-\[\rho\Delta D^0(x^0\otimes x^0)=\rho(\phi_0 D^0(x^0\otimes x^0)+\Delta_0 D^0(x^0\otimes x^0)+\Delta_0 TD^0(x^0\otimes x^0)),\]
+\[\rho\DeltaNabla D^0(x^0\otimes x^0)=\rho(\phi_0 D^0(x^0\otimes x^0)+\DeltaNabla_0 D^0(x^0\otimes x^0)+\DeltaNabla_0 TD^0(x^0\otimes x^0)),\]
 and $\phi_0D^0(x^0\otimes x^0)=0$ as $n>0$, and $TD^0(x^0\otimes x^0)=D^0(x^0\otimes x^0)$ since $\{D^k\}$ is special. The remaining term may be expressed as the boundary
-\[d(\rho\Delta(D^0(y\otimes dy)+D^1(dy\otimes x))).\qedhere\]
+\[d(\rho\DeltaNabla(D^0(y\otimes dy)+D^1(dy\otimes x))).\qedhere\]
 \end{proof}
 \subsection{External Steenrod operations}
 In this case, the Steenrod operations are the `surprising' operations, and they are easy to define. We will use the chain-level formula:
-\[\textup{SQ}^{i,s}:x\mapsto \rho\Delta (D^{s-i}(x\otimes x)+D^{s-i+1}(x\otimes dx)).\]
+\[\textup{SQ}^{i,s}:x\mapsto \rho\DeltaNabla (D^{s-i}(x\otimes x)+D^{s-i+1}(x\otimes dx)).\]
 \begin{prop}
 Fix $i,s\geq0$ and $r\geq2$. The chain level operation $\textup{SQ}^{i,s}$ defines an \emph{external Steenrod operation} \[\Sq^i_\textup{ext}:\E{r}{}{X}{s}{t}\to \E{r}{}{S_2X}{s+i}{2t},\] with indeterminacy vanishing by $\E{2r-2}{}{S_2X}{s+i}{2t}$. For $x\in \E{r}{}{X}{s}{t}$, $\Sq^i_\textup{ext}(x)$ survives to $\E{2r-1}{}{S_2X}{s+i}{2t}$, and modulo indeterminacy: \[d^{2r-1}(\Sq^i_\textup{ext}x)=\Sq^{i+r-1}_\textup{ext}(d^rx).\]
  The top operation, $\Sq^s_\textup{ext}(x)$, is equal to the product-square $x\times^\textup{ext} x$, and in particular has no indeterminacy. For $i>s$, $\Sq^i_\textup{ext}(x)=0$. $\Sq^1_\textup{ext}(x)=0$ whenever $t\geq2$ [\textbf{re-examine}]. The bottom operation, $\Sq^0_\textup{ext}(x)$, is zero whenever $t>0$, and when $t=0$:
@@ -3059,26 +3060,26 @@ Fix $i,s\geq0$ and $r\geq2$. The chain level operation $\textup{SQ}^{i,s}$ defin
 \begin{proof}
 We readily check that $\textup{SQ}^{i,s}(x)$ has filtration at least $s+i$:
 \begin{align*}
-\filt(\rho\Delta (D^{s-i}(x\otimes x))&\geq s+s-(s-i)=s-i,\\\filt(\rho\Delta (D^{s-i+1}(x\otimes dx))&\geq s+(s+r)-(s-i+1)=s+i+(r-1).
+\filt(\rho\DeltaNabla (D^{s-i}(x\otimes x))&\geq s+s-(s-i)=s-i,\\\filt(\rho\DeltaNabla (D^{s-i+1}(x\otimes dx))&\geq s+(s+r)-(s-i+1)=s+i+(r-1).
 \end{align*}
 Thus, we may view $\textup{SQ}^{i,s}(x)$ as an element of $\EZ{0}{}{S_2X}{s+i}{2t}$. 
-A straightforward calculation shows that \[d(\textup{SQ}^{i,s}(x))=\rho\Delta D^{s-i+1}(dx\otimes dx),\] so that, as $x\in \EZ{r}{}{X}{s}{t}$, we calculate:
+A straightforward calculation shows that \[d(\textup{SQ}^{i,s}(x))=\rho\DeltaNabla D^{s-i+1}(dx\otimes dx),\] so that, as $x\in \EZ{r}{}{X}{s}{t}$, we calculate:
 \[\filt(\textup{SQ}^{i,s}(x))\geq (s+r)+(s+r)-(s-i+1)=(s+i)+(2r-1),\]
 so that $\EZ{2r-1}{}{S_2X}{s+i}{2t}$. This demonstrates the survival property, along with the formula commuting the $\Sq^i_\textup{ext}$ with spectral sequence differentials.
 
 To examine the indeterminacy, as a representative of a class in $\E{r}{}{X}{s}{t}$,  $x$ is only determined up to boundaries of $y\in \EZ{r-1}{}{X}{s-r+1}{t-r+2}  $, and we calculate, using analogues of \cite[(1.111),(1.112)]{MR2245560}, that
-\[\textup{BC}:=\rho\Delta [D^{s-i-1}(y\otimes y)+D^{s-i}(y\otimes dy)+D^{s-i+1}(dy\otimes x)]\]
+\[\textup{BC}:=\rho\DeltaNabla [D^{s-i-1}(y\otimes y)+D^{s-i}(y\otimes dy)+D^{s-i+1}(dy\otimes x)]\]
 has boundary
 \begin{alignat*}{2}
 d(\textup{BC})
 &=
-\rho\Delta [D^{s-i-1}(dy\otimes y+y\otimes dy)+D^{s-i}(dy\otimes dy)+D^{s-i+1}(dy\otimes dx)]%
+\rho\DeltaNabla [D^{s-i-1}(dy\otimes y+y\otimes dy)+D^{s-i}(dy\otimes dy)+D^{s-i+1}(dy\otimes dx)]%
 \\
 &\ \ \ +
-\rho\Delta [0+D^{s-i-1}(y\otimes dy+dy\otimes y)+D^{s-i}(dy\otimes x+x\otimes dy)]%
+\rho\DeltaNabla [0+D^{s-i-1}(y\otimes dy+dy\otimes y)+D^{s-i}(dy\otimes x+x\otimes dy)]%
 \\
 &=
-\rho\Delta [D^{s-i}(dy\otimes x+x\otimes dy+dy\otimes dy)
+\rho\DeltaNabla [D^{s-i}(dy\otimes x+x\otimes dy+dy\otimes dy)
 +D^{s-i+1}(dy\otimes dx)]\\
 &=\textup{SQ}^{i,s}(x)-\textup{SQ}^{i,s}(x+dy).%
 \end{alignat*} 
@@ -3087,20 +3088,20 @@ That is, $\textup{BC}$ is a bounding chain for this difference, and
 so that $\Sq^i_\textup{ext}x$ has indeterminacy vanishing by $\E{2r-2}{}{S_2X}{s+i}{2t}$ as claimed. When $i=s$, this result may be improved to $\filt(\textup{BC})\geq 2s-(r-1)$,  as in this case the lowest filtration summand in fact vanishes --- this is one explanation of why the top square has no indeterminacy.
 
 For the statement about the top operation, one calculates that
-\[\textup{SQ}^{s,s}(x)-\rho\Delta D^0(x\otimes x)=\rho D^{1}(x\otimes dx)\in F^{2s+r-1}.\]
+\[\textup{SQ}^{s,s}(x)-\rho\DeltaNabla D^0(x\otimes x)=\rho D^{1}(x\otimes dx)\in F^{2s+r-1}.\]
 When $i\geq s+2$, we have $\textup{SQ}^{i}x=0$, and even with $i=s+1$:
 \[\textup{SQ}^{s+1,s}(x)=\rho D^{0}(x\otimes dx)\in F^{2s+r},\]
 so that $\Sq^{s+1}_\textup{ext}x$ is zero in $\E{r}{}{S_2X}{2s+1}{2t+1}$ for $r\geq2$.
 For the statement about $\Sq^0(x)$:
-\[\textup{SQ}^{0,s}(x)-\rho\Delta D^s(x\otimes x)=\rho D^{s+1}(x\otimes dx)\in F^{s+r-1},\]
+\[\textup{SQ}^{0,s}(x)-\rho\DeltaNabla D^s(x\otimes x)=\rho D^{s+1}(x\otimes dx)\in F^{s+r-1},\]
 so that (using the fact that $\{D^k\}$ is special):
 \begin{alignat*}{2}
 \textup{SQ}^{0,s}(x)
 &\equiv
-\rho\Delta D^s(x^s_t\otimes x^s_t)&&\textup{(mod $F^{s+r-1}$)}%
+\rho\DeltaNabla D^s(x^s_t\otimes x^s_t)&&\textup{(mod $F^{s+r-1}$)}%
 \\
 &\quad =
-\rho(\phi_0+(1{+}\twist)\Delta_0)(x^s_t\otimes_\textup{v} x^s_t)%
+\rho(\phi_0+(1{+}\twist)\DeltaNabla_0)(x^s_t\otimes_\textup{v} x^s_t)%
 &\quad&\text{($x^s_t\otimes_\textup{v} x^s_t\in C(X\otimes_\textup{v}X)_{2t}^{s}$)}\\
 &\quad =
 \rho\phi_0(x^s_t\otimes_\textup{v} x^s_t)\in C(X\otimes_{\Sigma_2} X)_{t}^{s}.
@@ -3112,16 +3113,16 @@ It may seem that there is an extra nonzero Steenrod operation coming from the ch
 %The chain-level operation $\textup{SQ}^{s+1,s}$ defines an operation $\Sq^{s+1}_\textup{over}:E^r_{-s,t}(X)\to E^r_{-2s-r,2t+r-1}(X\otimes_{\Sigma_2}X)$, with indeterminacy vanishing by $E^{???}$. For $x\in E^r_{-s,t}(X)$, $\Sq^{s+1}_\textup{over}(x)$ survives to $E^{???}$, and moreover, $d^{r}(\Sq^{s+1}_\textup{over}x)=\Sq^{s+r}(d^rx)=d^rx\times d_rx$ modulo indeterminacy.
 %\end{prop}
 %\begin{proof}
-%$\textup{Sq}^{s+1,s}x=\rho\Delta D^0(x\otimes dx)\in F_{2s+r}$ has boundary $\rho\Delta D^0(dx\otimes dx)\in F_{2s+2r}$, so we're getting a $d_r$.
+%$\textup{Sq}^{s+1,s}x=\rho\DeltaNabla D^0(x\otimes dx)\in F_{2s+r}$ has boundary $\rho\DeltaNabla D^0(dx\otimes dx)\in F_{2s+2r}$, so we're getting a $d_r$.
 %\end{proof}
 
 \subsection{Spectral sequence operations $\delta_i$}
 
 For any $k$, positive or otherwise, write $\mathbb{D}_k:(C(X)\otimes C(Y))_i\to C(X\otimes Y)_{i-k}$ for the map:
-\[\mathbb{D}_r(z)= \sum_{\alpha-\beta=r}\Delta_\alpha\twist^\alpha D^\beta(z).
+\[\mathbb{D}_r(z)= \sum_{\alpha-\beta=r}\DeltaNabla_\alpha\twist^\alpha D^\beta(z).
 %=\begin{cases}
-%\sum_{j\geq0}\Delta_{j}\twist^{j}D^{j-r},&\textup{if }r\leq0;\\
-%\sum_{j\geq0}\Delta_{j+r}\twist^{j+r}D^{j},&\textup{if }r\geq0.
+%\sum_{j\geq0}\DeltaNabla_{j}\twist^{j}D^{j-r},&\textup{if }r\leq0;\\
+%\sum_{j\geq0}\DeltaNabla_{j+r}\twist^{j+r}D^{j},&\textup{if }r\geq0.
 %%\\,&\textup{if }
 %\end{cases}
 \]
@@ -3134,7 +3135,7 @@ We may assume that $x$ and $y$ are each homogeneous, with $x\in X^{s}_{t}$ and $
 \end{proof}
 \begin{lem}\label{boundaryVsBBD}
 For all $k$, positive or otherwise, the equation:
-\[d\mathbb{D}_k+\mathbb{D}_kd= (1+\twist)\mathbb{D}_{k+1}+\Delta\twist D^{-k-1}\]
+\[d\mathbb{D}_k+\mathbb{D}_kd= (1+\twist)\mathbb{D}_{k+1}+\DeltaNabla\twist D^{-k-1}\]
 holds when applied to an element $z$ of $(CX\otimes CX)_{n}$ with $n\geq 2(k+1)$.
 \end{lem}
 \begin{proof}
@@ -3143,45 +3144,45 @@ holds when applied to an element $z$ of $(CX\otimes CX)_{n}$ with $n\geq 2(k+1)$
 We may assume that $ z$ is homogeneous, $z\in (CX\otimes CX)_{t}^{s}$ with $n=t-s\geq2(k+1)$. Choose $\alpha$ and $\beta$ such that $\alpha-\beta=k$. Then $(\twist^\alpha D^\beta(z))\in C(X\otimes_\textup{v} Y)^{s-\beta}_{t}$.
 
 We'll need to apply lemma \ref{unpleasant formula} to calculate, for $\alpha-\beta=k$:
-\[(d\Delta_\alpha+\Delta_\alpha d)(\twist^\alpha D^\beta(z))=((1+\twist)\Delta_{\alpha+1}+\phi_{\alpha+1} )(\twist^\alpha D^\beta(z)),\]
+\[(d\DeltaNabla_\alpha+\DeltaNabla_\alpha d)(\twist^\alpha D^\beta(z))=((1+\twist)\DeltaNabla_{\alpha+1}+\phi_{\alpha+1} )(\twist^\alpha D^\beta(z)),\]
 but lemma \ref{unpleasant formula} does not apply when $t=2\alpha+e$ for $e\in\{0,1\}$. Fortunately, in that case $D^\beta(z)$ is zero, so the equation holds by default: after all, if $t=2\alpha+e$, our assumed inequality on $n$ implies:
 \[\beta=\frac{t-e}{2}-k\leq \frac{t-e}{2}-\frac{t-s-2}{2}=\frac{s+2-e}{2}>\frac{s}{2}.\]
 
-After these observations and under the our conventions on the $\Delta_\alpha$ and $D^\beta$, all but one of the following manipulations is totally formal:%. The only sticking point is that $d\Delta_{-1}+\Delta_{-1}d$ equals $0$, as opposed to $(1{+}\twist)\Delta_0+\phi_0$ --- we rectify this anomaly by adding in the term $((1+\twist)\Delta_{0}+\phi_{0})\twist D^{-k-1}(z)$:
+After these observations and under the our conventions on the $\DeltaNabla_\alpha$ and $D^\beta$, all but one of the following manipulations is totally formal:%. The only sticking point is that $d\DeltaNabla_{-1}+\DeltaNabla_{-1}d$ equals $0$, as opposed to $(1{+}\twist)\DeltaNabla_0+\phi_0$ --- we rectify this anomaly by adding in the term $((1+\twist)\DeltaNabla_{0}+\phi_{0})\twist D^{-k-1}(z)$:
 %
 % Now $D^\beta(z)$ is zero unless $\beta\leq 2s$, so that the term can be ignored unless $\alpha=\beta+k\leq 2s+k$. As $t\geq 2(2s+k+1)\geq 2(\alpha+1)$, we can apply the rule.
 \begin{alignat*}{2}
 (d\mathbb{D}_k+\mathbb{D}_kd)(z)
 :={}&
-\onelinesum{\alpha-\beta=k}\left(d\Delta_\alpha\twist^\alpha D^\beta+\Delta_\alpha\twist^\alpha D^\beta d\right)(z)%
+\onelinesum{\alpha-\beta=k}\left(d\DeltaNabla_\alpha\twist^\alpha D^\beta+\DeltaNabla_\alpha\twist^\alpha D^\beta d\right)(z)%
 \\
 ={}&
-\onelinesum{\alpha-\beta=k}\left((d\Delta_\alpha+
-\Delta_\alpha d)\twist^\alpha D^\beta+
-\Delta_\alpha\twist^\alpha (dD^\beta+
+\onelinesum{\alpha-\beta=k}\left((d\DeltaNabla_\alpha+
+\DeltaNabla_\alpha d)\twist^\alpha D^\beta+
+\DeltaNabla_\alpha\twist^\alpha (dD^\beta+
 D^\beta d)\right)(z)%
 \\
 ={}&
-\onelinesum{\alpha-\beta=k,\ \alpha\geq0}((1{+}\twist)\Delta_{\alpha+1}+\phi_{\alpha+1})\twist^\alpha D^\beta(z)+ \onelinesum{\alpha-\beta=k} \Delta_\alpha\twist^\alpha(1{+}\twist) D^{\beta-1}(z)%
+\onelinesum{\alpha-\beta=k,\ \alpha\geq0}((1{+}\twist)\DeltaNabla_{\alpha+1}+\phi_{\alpha+1})\twist^\alpha D^\beta(z)+ \onelinesum{\alpha-\beta=k} \DeltaNabla_\alpha\twist^\alpha(1{+}\twist) D^{\beta-1}(z)%
 \\
 ={}&
-\onelinesum{\alpha-\beta=k+1,\ \alpha\geq1}((1{+}\twist)\Delta_{\alpha}+\phi_{\alpha})\twist^{\alpha-1} D^\beta(z)+ \onelinesum{\alpha-\beta=k+1} \Delta_\alpha\twist^\alpha(1{+}\twist) D^{\beta}(z)%
+\onelinesum{\alpha-\beta=k+1,\ \alpha\geq1}((1{+}\twist)\DeltaNabla_{\alpha}+\phi_{\alpha})\twist^{\alpha-1} D^\beta(z)+ \onelinesum{\alpha-\beta=k+1} \DeltaNabla_\alpha\twist^\alpha(1{+}\twist) D^{\beta}(z)%
 %\\
 %={}&
-%\onelinesum{\alpha-\beta=k+1} \left(((1+\twist)\Delta_{\alpha}+ \phi_{\alpha})\twist\twist^{\alpha} D^\beta+\Delta_\alpha(1+\twist)\twist^\alpha D^{\beta}\right)(z) + {}%
+%\onelinesum{\alpha-\beta=k+1} \left(((1+\twist)\DeltaNabla_{\alpha}+ \phi_{\alpha})\twist\twist^{\alpha} D^\beta+\DeltaNabla_\alpha(1+\twist)\twist^\alpha D^{\beta}\right)(z) + {}%
 %\\
 %&\ \ \ \ \ \ \ \ \ \ \ +
-%((1+\twist)\Delta_{0}+\phi_{0})\twist D^{-k-1}(z)
+%((1+\twist)\DeltaNabla_{0}+\phi_{0})\twist D^{-k-1}(z)
 \end{alignat*}
-Using the identity $(1+\twist)\Delta_{0}+\phi_{0}=\Delta$ for the first equation, and the observation that $(1+\twist)F\twist G+F(1+\twist)G=(1+\twist)(FG)$  for the second (with $F=\Delta_\alpha$ and $G=\twist^\alpha D^\beta$):
-%\[(d\mathbb{D}_k+\mathbb{D}_kd)(z)-\Delta\twist D^{-k-1}(z)=\onelinesum{\alpha-\beta=k+1} \left(((1+\twist)\Delta_{\alpha}+ \phi_{\alpha})\twist\twist^{\alpha} D^\beta+\Delta_\alpha(1+\twist)\twist^{\alpha}D^{\beta}\right)(z)\]
+Using the identity $(1+\twist)\DeltaNabla_{0}+\phi_{0}=\DeltaNabla$ for the first equation, and the observation that $(1+\twist)F\twist G+F(1+\twist)G=(1+\twist)(FG)$  for the second (with $F=\DeltaNabla_\alpha$ and $G=\twist^\alpha D^\beta$):
+%\[(d\mathbb{D}_k+\mathbb{D}_kd)(z)-\DeltaNabla\twist D^{-k-1}(z)=\onelinesum{\alpha-\beta=k+1} \left(((1+\twist)\DeltaNabla_{\alpha}+ \phi_{\alpha})\twist\twist^{\alpha} D^\beta+\DeltaNabla_\alpha(1+\twist)\twist^{\alpha}D^{\beta}\right)(z)\]
 \begin{alignat*}{2}
-(d\mathbb{D}_k+\mathbb{D}_kd)(z)-\Delta\twist D^{-k-1}(z)
+(d\mathbb{D}_k+\mathbb{D}_kd)(z)-\DeltaNabla\twist D^{-k-1}(z)
 &=
-\onelinesum{\alpha-\beta=k+1} \left(((1+\twist)\Delta_{\alpha}+ \phi_{\alpha})\twist\twist^{\alpha} D^\beta+\Delta_\alpha(1+\twist)\twist^{\alpha}D^{\beta}\right)(z)%
+\onelinesum{\alpha-\beta=k+1} \left(((1+\twist)\DeltaNabla_{\alpha}+ \phi_{\alpha})\twist\twist^{\alpha} D^\beta+\DeltaNabla_\alpha(1+\twist)\twist^{\alpha}D^{\beta}\right)(z)%
 \\
 &=
-\onelinesum{\alpha-\beta=k+1} \left((1+\twist)(\Delta_\alpha\twist^\alpha D^\beta)+ \phi_{\alpha}\twist^{\alpha+1} D^\beta\right)(z)%
+\onelinesum{\alpha-\beta=k+1} \left((1+\twist)(\DeltaNabla_\alpha\twist^\alpha D^\beta)+ \phi_{\alpha}\twist^{\alpha+1} D^\beta\right)(z)%
 \\
 % Left hand side
 % Relation
@@ -3191,8 +3192,8 @@ Using the identity $(1+\twist)\Delta_{0}+\phi_{0}=\Delta$ for the first equation
 \end{alignat*}
 Due to the application of $\phi_{\alpha}$, each sumand $\phi_{\alpha}\twist^{\alpha+1} D^{\alpha-k-1}(z)$ is zero unless $t=2\alpha$, but in that case, $s=2\alpha-n<2(\alpha-k-1)$, and $D^{\alpha-k-1}(z)$ vanishes as $\{D^k\}$ is special.
 %
-%On the other hand, $(1+\twist)F\twist G+F(1+\twist)G=(1+\twist)(FG)$ holds for any $F$ and $G$, and in particular for $F=\Delta_\alpha$ and $G=\twist^\alpha D^\beta$, this quantity differs from
-%\[(1+\twist)\mathbb{D}_{k+1}(z)=\sum_{\alpha-\beta=k+1}(1+\twist)\Delta_\alpha\twist^\alpha D^\beta(z)\]
+%On the other hand, $(1+\twist)F\twist G+F(1+\twist)G=(1+\twist)(FG)$ holds for any $F$ and $G$, and in particular for $F=\DeltaNabla_\alpha$ and $G=\twist^\alpha D^\beta$, this quantity differs from
+%\[(1+\twist)\mathbb{D}_{k+1}(z)=\sum_{\alpha-\beta=k+1}(1+\twist)\DeltaNabla_\alpha\twist^\alpha D^\beta(z)\]
 %only by the terms
 %\[\sum_{\mathclap{\alpha-\beta=k+1}} \phi_{\alpha}\twist^{\alpha-1}D^{\beta}(z)=\sum_{\mathclap{\alpha-\beta=k+1}} \phi_{\alpha}\twist^{\alpha-1}D^{\alpha-k-1}(z_{2\alpha}^{2\alpha-n})\]
 %but the cosimplicial degree $2\alpha-n$ is less than $2(\alpha-k-1)$, and $\{D^k\}$ is special, so that each term $D^{\alpha-k-1}(z_{2\alpha}^{2\alpha-n})$ vanishes.
@@ -3225,7 +3226,7 @@ To proceed, we'll need a formula for the boundary of $\textup{DEL}_i(x)$:
 For $2\leq i\leq t$ and $x\in \EZ{1}{}{X}{s}{t}$:
 \[d(\textup{DEL}_i(x))+ \textup{DEL}_i(dx)=\begin{cases}
 \textup{SQ}^{t-i+1,s}(x),&\textup{if }n+1\leq i \leq t;\\
-\rho\Delta D^0(x\otimes dx),&\textup{if }i=n;\\
+\rho\DeltaNabla D^0(x\otimes dx),&\textup{if }i=n;\\
 0,&\textup{if }2\leq i< n.
 \end{cases}\]
 \end{prop}
@@ -3242,11 +3243,11 @@ d\bigl(\textup{DEL}_i(x)\bigr)+{}& \textup{DEL}_i(dx)
 \rho\Bigl\{d\mathbb{D}_{n-i}(x\otimes x)\Bigr\}+\rho\Bigl\{d\mathbb{D}_{n-i-1}(dx\otimes x))+\mathbb{D}_{n-i-1}(d(dx\otimes x))\Bigr\}%
 \\
 &=
-\rho\Bigl\{\mathbb{D}_{n-i}d(x\otimes x)+(1+\twist)\mathbb{D}_{n-i+1}(x\otimes x)+\Delta\twist D^{i-n-1}(x\otimes x)\Bigr\}
+\rho\Bigl\{\mathbb{D}_{n-i}d(x\otimes x)+(1+\twist)\mathbb{D}_{n-i+1}(x\otimes x)+\DeltaNabla\twist D^{i-n-1}(x\otimes x)\Bigr\}
 \\
-&\ \ \ \ +\rho\Bigl\{(1+\twist)\mathbb{D}_{n-i}(dx\otimes x)+\Delta\twist D^{i-n}(dx\otimes x)\Bigr\}
+&\ \ \ \ +\rho\Bigl\{(1+\twist)\mathbb{D}_{n-i}(dx\otimes x)+\DeltaNabla\twist D^{i-n}(dx\otimes x)\Bigr\}
 \end{alignat*}
-Everything cancels except for $\rho\Delta(D^{i-n-1}(x\otimes x)+D^{i-n}(x\otimes dx))$ which equals $\textup{SQ}^{t-i+1,s}(x)$. We have studied this expression above, explaining the three cases.
+Everything cancels except for $\rho\DeltaNabla(D^{i-n-1}(x\otimes x)+D^{i-n}(x\otimes dx))$ which equals $\textup{SQ}^{t-i+1,s}(x)$. We have studied this expression above, explaining the three cases.
 \end{proof}
 Suppose now that $x\in \E{r}{}{X}{s}{t}$. In light of the above calculation, when $n<i\leq t$, the purpose of $\delta^\textup{ext}_i(x)$ must be to support a $d^{t-i+1}$-differential to $\Sq_\textup{ext}^{t-i+1}(x)$. Thus, we would not expect to be able to define $\delta^\textup{ext}_i(x)$ when $t-i+1<r$; indeed, the following result will construct $\delta^\textup{ext}_i(x)$ whenever $i\leq t-(r-1)$. Moreover, the Steenrod operation $\Sq^{t-i+1}(x)$ has indeterminacy vanishing by $\E{2(r-1)}{}{S_2X}{s+t-i+1}{2t}$, and one should expect that whenever $t-i+1<2(r-1)$, $\delta^\textup{ext}_i(x)$ will be multivalued, but that the set of values for $\delta^\textup{ext}_i(x)$ will map onto the set of values for $\Sq_\textup{ext}^{t-i+1}(x)$ under $d^{t-i+1}$. 
 We are not saying that the indeterminacy of $\delta^\textup{ext}_i(x)$ must vanish by a certain page, but rather that one expects multiple values of $\delta^\textup{ext}_i(x)$ to all fail to be permanent cycles together.
@@ -3261,37 +3262,37 @@ Using the symbol `$\cdot$' to abbreviate `$\otimes$', with lemma \ref{boundaryVs
 d\mathbb{D}_{n-i-1}(x\cdot dy)&=
 {\mathbb{D}_{n-i-1}(dx\cdot dy)}&&+
 (1{+}\twist)\mathbb{D}_{n-i}(x\cdot dy)&&+
-\Delta\twist D^{-(n-i)}(x\cdot dy)\\
+\DeltaNabla\twist D^{-(n-i)}(x\cdot dy)\\
 d\mathbb{D}_{n-i}(dy\cdot y)&=
 \mathbb{D}_{n-i}(dy\cdot dy)&&+
 (1{+}\twist)\mathbb{D}_{n-i+1}(dy\cdot y)&&+
-\Delta\twist D^{-(n-i+1)}(dy\cdot y)\\
+\DeltaNabla\twist D^{-(n-i+1)}(dy\cdot y)\\
 d\mathbb{D}_{n-i+1}(y\cdot y)&=
 \mathbb{D}_{n-i+1}d(y\cdot y)&&+
 {(1{+}\twist)\mathbb{D}_{n-i+2}(y\cdot y)}&&+
-\Delta\twist D^{-(n-i+2)}(y\cdot y)
+\DeltaNabla\twist D^{-(n-i+2)}(y\cdot y)
 \end{alignat*}
 \normalsize
 Now write $H:=\rho(\mathbb{D}_{n-i-1}(x\cdot dy)+\mathbb{D}_{n-i}(dy\cdot y)+\mathbb{D}_{n-i+1}(y\cdot y))$. By lemma \ref{DkIsNiceToFiltration}, $H\in F^{s-r+1}$, and the above calculations show that $H$ has boundary
 \small
-%\[(\textup{DEL}_i(x)-\textup{DEL}_i(x+dy))+\rho\Delta(D^{i-n-2}(y\cdot y)+D^{i-n-1}(y\cdot dy)+D^{i-n}(dy\cdot x))+\rho\mathbb{D}_{n-i-1}(dx\cdot dy).\]
+%\[(\textup{DEL}_i(x)-\textup{DEL}_i(x+dy))+\rho\DeltaNabla(D^{i-n-2}(y\cdot y)+D^{i-n-1}(y\cdot dy)+D^{i-n}(dy\cdot x))+\rho\mathbb{D}_{n-i-1}(dx\cdot dy).\]
 \[dH=\textup{DEL}_i(x)-\textup{DEL}_i(x+dy)+T_1+T_2+T_3,\]
 \normalsize
 where $\textup{DEL}_i(x)-\textup{DEL}_i(x+dy)\in F^s$ is the quantity of interest, and
 \begin{align*}
-T_1:=\rho\Delta(D^{i-n-2}(y\cdot y))&\begin{cases}
+T_1:=\rho\DeltaNabla(D^{i-n-2}(y\cdot y))&\begin{cases}
 \in F^{s+(t-i)-2(r-2)},&\textup{if }n+2\leq i\leq t-1;\\
 =0,&\textup{if }i\leq n+1.
 %\\,&\textup{if }
 \end{cases}
 \\
-T_2:=\rho\Delta(D^{i-n-1}(y\cdot dy))&\begin{cases}
+T_2:=\rho\DeltaNabla(D^{i-n-1}(y\cdot dy))&\begin{cases}
 \in F^{s+(t-i)-(r-2)},&\textup{if }n+1\leq i\leq t-1;\\
 =0,&\textup{if }i\leq n.
 %\\,&\textup{if }
 \end{cases}
 \\
-T_3:=\rho\Delta(D^{i-n}(dy\cdot x))&\begin{cases}
+T_3:=\rho\DeltaNabla(D^{i-n}(dy\cdot x))&\begin{cases}
 \in F^{s+(t-i)},&\textup{if }n\leq i\leq t-1;\\
 =0,&\textup{if }i\leq n-1.
 %\\,&\textup{if }
@@ -3299,7 +3300,7 @@ T_3:=\rho\Delta(D^{i-n}(dy\cdot x))&\begin{cases}
 \end{align*}
 Now as we have $i<t$, $T_3\in F^{s+1}$, and can be ignored. If $i\leq n$, then $T_1=T_2=0$, and we've shown that the operation is well defined. If $i=n+1$, then $T_2$ may be nonzero, but it lies in $F^{s+1+s-r}$, and as we may take $r\leq s$ [\textbf{revisit}], the operation is again well defined.
 If, however, $i\geq n+2$, then $T_1+T_2$  can only be assured to lie in filtration above $s$ only when $i\leq t+1-2(r-1)$.
-%\textbf{The following is an observation that I thought might improve this result, but which doesn't seem to - the idea was to leave out the third row of stuff. Maybe it could still be good if we leave out some number of the summands from the third row, but it sounds pretty dicey. Should try it in order to extend rande of definition. Also should check whether one should expect the operations to be defined all the way up to $i\leq t-r+1$. ``Now suppose that $x\in F_s$, and $y\in F_{s-r+1}$. Let's look at $\mathbb{D}_{n-i+1}(dy\cdot y)$. As $dy$ has filtration $s$, each term $\Delta_{\alpha}\twist^{\alpha}D^\beta(dy\cdot y)$ with $\beta>s$ vanishes, and each term with $\beta<s$ has filtration higher than $dy$. Thus, modulo $F_{s+1}$, $\mathbb{D}_{n-i+1}(dy\cdot y)\equiv\Delta_{t-i+1}\twist^{t-i+1}D^s((dy)^s_{t}\cdot y^{s}_{t+1})$.''}
+%\textbf{The following is an observation that I thought might improve this result, but which doesn't seem to - the idea was to leave out the third row of stuff. Maybe it could still be good if we leave out some number of the summands from the third row, but it sounds pretty dicey. Should try it in order to extend rande of definition. Also should check whether one should expect the operations to be defined all the way up to $i\leq t-r+1$. ``Now suppose that $x\in F_s$, and $y\in F_{s-r+1}$. Let's look at $\mathbb{D}_{n-i+1}(dy\cdot y)$. As $dy$ has filtration $s$, each term $\DeltaNabla_{\alpha}\twist^{\alpha}D^\beta(dy\cdot y)$ with $\beta>s$ vanishes, and each term with $\beta<s$ has filtration higher than $dy$. Thus, modulo $F_{s+1}$, $\mathbb{D}_{n-i+1}(dy\cdot y)\equiv\DeltaNabla_{t-i+1}\twist^{t-i+1}D^s((dy)^s_{t}\cdot y^{s}_{t+1})$.''}
 
 To summarise: there is some $H$ in filtration at least that of $y$, such that
 %\[dH=\textup{DEL}_i(x)-\textup{DEL}_i(x+dy)+T, \textup{ where } dT=\textup{SQ}^{i,s}(x)-\textup{SQ}^{i,s}(x+dy)\]
@@ -3322,9 +3323,9 @@ So that, in particular, [so what?]
 When we do not lift any classes up a filtration, at $E^1$, we have the relation $\delta_i\Sq^jx=0$ (whenever $\delta_i$ is nontop).
 \begin{proof}
 Suppose that $X\in Z^1_{-s,t}$. We can assume that $x\in X^s_t$ for this purpose, so that $d_\textup{v}x=0$. Then $\Sq^jx$ is represented by the image of $D^{s-j}(x\otimes x)+D^{s-j+1}(x\otimes d_\textup{h}x)$ under the composite
-\[N^{s+j}(N_tX\otimes N_tX)\overset{\Delta}{\to}N^{s+j}N_{2t}(X\otimes_{\Sigma_2} X)\overset{\mu}{\to}N^{s+j}N_{2t}(X)\overset{\textup{``$\delta_i$''}}{\to}N^{s+j}N_{2t+i}(X)\]
+\[N^{s+j}(N_tX\otimes N_tX)\overset{\widetilde{\DeltaNabla}}{\to}N^{s+j}N_{2t}(X\otimes_{\Sigma_2} X)\overset{\mu}{\to}N^{s+j}N_{2t}(X)\overset{\textup{``$\delta_i$''}}{\to}N^{s+j}N_{2t+i}(X)\]
 or maybe I'd prefer to write that it's represented by the image of ``an appropriate tensor product of cofaces of $x\in (\pi_tX)^s$'', under the composite
-\[N^{s+j}(\pi_tX\otimes \pi_tX)\overset{\Delta\textup{-product}}{\to}N^{s+j}\pi_{2t}(X)\overset{\delta_i}{\to}N^{s+j}\pi_{2t+i}(X).\]
+\[N^{s+j}(\pi_tX\otimes \pi_tX)\overset{\DeltaNabla\textup{-product}}{\to}N^{s+j}\pi_{2t}(X)\overset{\delta_i}{\to}N^{s+j}\pi_{2t+i}(X).\]
 But non-top $\delta_i$ annihilates sums of products, and we're getting zero on $E^1$.
 \end{proof}
 
@@ -3335,9 +3336,9 @@ As $E^1$ is obtained from $E^0$ by taking homology in the simplicial direction, 
 On $E^2$, for $i<t$, the spectral sequence operations $\delta^\textup{ext}_i$ defined by $\textup{DEL}_i$ equal the operations $\delta^\textup{alg}_i$. The same holds on $E^1$ when $2\leq i\leq t$. In particular, the $\delta^\textup{ext}$-operations on the spectral sequence satisfy the $\delta$-Adem relations \textbf{if there's a commutative algebra structure around}.
 \end{prop}
 \begin{proof}
-The operations $\delta^\textup{alg}_i$ are constructed by taking a representative $z\in C_{-s,t}X$ such that $\partial_\textup{sim}z=0$, and forming $\rho\Delta_{t-i}(z\otimes_\textup{v} z)$, where $z\otimes_\textup{v} z$ denotes the element of $C(X\otimes_\textup{v}X)_{-s,2t}$.
+The operations $\delta^\textup{alg}_i$ are constructed by taking a representative $z\in C_{-s,t}X$ such that $\partial_\textup{sim}z=0$, and forming $\rho\DeltaNabla_{t-i}(z\otimes_\textup{v} z)$, where $z\otimes_\textup{v} z$ denotes the element of $C(X\otimes_\textup{v}X)_{-s,2t}$.
 
-Let's calculate the leading term of $\textup{DEL}_{i}(x)$ whenever $2\leq i\leq t$. Write $x=x^s_t+x^{>s}_{>t}$, where $x^s_t\in X^s_t$, and $x^{>s}_{>t}$ lies in filtration $s+1$. Then the leading term will be $\rho\Delta_{t-i}\twist^{t-i}D^s (x^s_t\otimes x^s_t)$. Moreover, as $\{D^k\}$ is \emph{special}, this equals $\rho{\Delta}_{t-i}(x^s_t\otimes_\textup{v} x^s_t)\in C(X\otimes_{\Sigma_2} X)_{-s,t+i}$, where $(x^s_t\otimes_\textup{v} x^s_t)$ denotes the element of $C(X\otimes_\textup{v}X)_{-s,2t}$. Thus `$x^s_t\mapsto \twist^{t-i}D^s(x^s_t\otimes x^s_t)$' implements the assignment `$z\mapsto z\otimes_\textup{v} z$' discussed above, and we're getting a representative for $\delta^\textup{alg}_i(x)$.
+Let's calculate the leading term of $\textup{DEL}_{i}(x)$ whenever $2\leq i\leq t$. Write $x=x^s_t+x^{>s}_{>t}$, where $x^s_t\in X^s_t$, and $x^{>s}_{>t}$ lies in filtration $s+1$. Then the leading term will be $\rho\DeltaNabla_{t-i}\twist^{t-i}D^s (x^s_t\otimes x^s_t)$. Moreover, as $\{D^k\}$ is \emph{special}, this equals $\rho{\DeltaNabla}_{t-i}(x^s_t\otimes_\textup{v} x^s_t)\in C(X\otimes_{\Sigma_2} X)_{-s,t+i}$, where $(x^s_t\otimes_\textup{v} x^s_t)$ denotes the element of $C(X\otimes_\textup{v}X)_{-s,2t}$. Thus `$x^s_t\mapsto \twist^{t-i}D^s(x^s_t\otimes x^s_t)$' implements the assignment `$z\mapsto z\otimes_\textup{v} z$' discussed above, and we're getting a representative for $\delta^\textup{alg}_i(x)$.
 \end{proof}
 
 
@@ -3802,7 +3803,7 @@ It's enough to check that the composite $c(X\sqcup X)\to  V$ is null. However, a
 
 
 \subsection{A chain level construction of $j$}\label{chain level construction of j}
-Write $S^n$ for (the free construction on) $\Delta^n/\partial\Delta^n$, and $CS^n$ for (the free construction on) the reduced cone thereupon. Now there's a map $S^{n+m}\to S^n\sqcup S^m$ sending the fundamental class to the Eilenberg-Zilber formula. That is, if $\mu:(S^n\sqcup S^m)^{\otimes 2}\to S^n\sqcup S^m$ is multiplication, the map we are describing sends $\imath_{n+m}\mapsto \mu(\Delta(\imath_n,\imath_m))$. Now consider the complex $C_{n,m}$ formed by coning off the corresponding homotopy class:
+There is a map $S^{n+m}\to S^n\sqcup S^m$ sending the fundamental class to the Eilenberg-Zilber formula. That is, if $\mu:(S^n\sqcup S^m)^{\otimes 2}\to S^n\sqcup S^m$ is multiplication, the map we are describing sends $\imath_{n+m}\mapsto \mu(\DeltaNabla(\imath_n,\imath_m))$. Now consider the complex $C_{n,m}$ formed by coning off the corresponding homotopy class:
 \[\xymatrix@R=4mm{
 S^{n+m}\ar[r]
 \ar@{ >->}[d]
@@ -3818,19 +3819,19 @@ Now $C_{n,m}$ has an $n+m+1$-dimensional generator $g$, the image of the cone on
 The diagonal of $g$ is $\imath_n\otimes\imath_m+\imath_m\otimes\imath_n$.
 \end{prop}
 \begin{proof}
-The representative $g$ has the property that $d_0(g)=\mu(\Delta(\imath_n\otimes\imath_m))$ and $d_i(g)=0$ for $i>0$. We calculate 
+The representative $g$ has the property that $d_0(g)=\mu(\DeltaNabla(\imath_n\otimes\imath_m))$ and $d_i(g)=0$ for $i>0$. We calculate 
 \begin{alignat*}{2}
 \psi(d_0(g))
 &=
-\mu(\Delta((\overline{\imath_n} +\overline{\overline{\imath_n}}) \otimes (\overline{\imath_m}+\overline{\overline{\imath_m}})))%
+\mu(\DeltaNabla((\overline{\imath_n} +\overline{\overline{\imath_n}}) \otimes (\overline{\imath_m}+\overline{\overline{\imath_m}})))%
 \\
 \xi(g)
 &=
-\mu(\Delta(\overline{\imath_n} \otimes\overline{\overline{\imath_m}})+ \Delta(\overline{\overline{\imath_n}} \otimes\overline{\imath_m}))\in Q((C_{n,m})_{n+m}^{\wedge 2})%
+\mu(\DeltaNabla(\overline{\imath_n} \otimes\overline{\overline{\imath_m}})+ \DeltaNabla(\overline{\overline{\imath_n}} \otimes\overline{\imath_m}))\in Q((C_{n,m})_{n+m}^{\wedge 2})%
 \\
 j(\xi(g))
 &=
-\Delta^\otimes ({\imath_n}\otimes{{\imath_m}})+\Delta^\otimes ({\imath_m}\otimes{{\imath_n}})\in (Q((C_{n,m})_{n+m}))^{\otimes 2}%
+\DeltaNabla^\otimes ({\imath_n}\otimes{{\imath_m}})+\DeltaNabla^\otimes ({\imath_m}\otimes{{\imath_n}})\in (Q((C_{n,m})_{n+m}))^{\otimes 2}%
 \end{alignat*}
 This class represents $\imath_n\otimes\imath_m+\imath_m\otimes\imath_n$.
 \end{proof}
@@ -3983,7 +3984,7 @@ To see this, we check the veracity of the three curved arrows, bottom to top. Th
 \subsection{A two-cell complex for the Koszul $\delta$ operations}\label{two-cell complex for the deltas}
 In this section, we give a construction of a two-cell complex whose cohomology has a $P^i$ connecting the two cells.
 
-Choose $n\geq2$ and $i$ satisfying $2\leq i\leq n$. There's a map $S^{n+i}\to S^n$ sending the fundamental class $\imath_{n+m}$ to the class $\mu\Delta_{n-i}(\imath_n\otimes\imath_n)$. Now consider the complex $C_n^i$ formed by coning off the corresponding homotopy class:
+Choose $n\geq2$ and $i$ satisfying $2\leq i\leq n$. There's a map $S^{n+i}\to S^n$ sending the fundamental class $\imath_{n+m}$ to the class $\mu\DeltaNabla_{n-i}(\imath_n\otimes\imath_n)$. Now consider the complex $C_n^i$ formed by coning off the corresponding homotopy class:
 \[\xymatrix@R=4mm{
 S^{n+i}\ar[r]
 \ar@{ >->}[d]
@@ -3999,19 +4000,19 @@ Now $C_n^i$ has an $n+i+1$-dimensional generator $h$, the image of the cone on t
 for classes $y_j$ and $z_j$ in $\pi_*(QX)$. Here, $\sigma_i:\pi_nQX\to \pi_{n+i}S^2(QX)$ is an operator that in fact equals $\textup{tr}_*\delta_i$ whenever $2\leq i\leq n$. After this, the coproduct on $\pi_*(QX)$ can be recovered as the quantity
 \[x P^{n/2}\otimes x P^{n/2}+\sum_j(1+T)(y_j\otimes z_j)\in \pi_*(QX)\otimes \pi_*(QX).\]
 
-In order to determine $(j\xi)_*(h)$, as the representative $h$ has the property that $d_0(h)=\mu(\Delta_{n-i}(\imath_n,\imath_n))$ and $d_i(g)=0$ for $i>0$, we calculate 
+In order to determine $(j\xi)_*(h)$, as the representative $h$ has the property that $d_0(h)=\mu(\DeltaNabla_{n-i}(\imath_n,\imath_n))$ and $d_i(g)=0$ for $i>0$, we calculate 
 \begin{alignat*}{2}
 \psi(d_0(h))
 &=
-\mu(\Delta_{n-i}((\overline{\imath_n}+\overline{\overline{\imath_n}})\otimes (\overline{\imath_n}+\overline{\overline{\imath_n}})))%
+\mu(\DeltaNabla_{n-i}((\overline{\imath_n}+\overline{\overline{\imath_n}})\otimes (\overline{\imath_n}+\overline{\overline{\imath_n}})))%
 \\
 \xi(h)
 &=
-\mu(\Delta_{n-i}(\overline{\imath_n}\otimes \overline{\overline{\imath_n}})+\Delta_{n-i}(\overline{\overline{\imath_n}} \otimes\overline{\imath_n}))\in Q((C_n^i)_{n+i}^{\wedge 2})%
+\mu(\DeltaNabla_{n-i}(\overline{\imath_n}\otimes \overline{\overline{\imath_n}})+\DeltaNabla_{n-i}(\overline{\overline{\imath_n}} \otimes\overline{\imath_n}))\in Q((C_n^i)_{n+i}^{\wedge 2})%
 \\
 j(\xi(h))
 &=
-(1+T)\Delta_{n-i}^\otimes ({\imath_n}\otimes{{\imath_n}})\in (Q((C_n^i)_{n+i}))^{\otimes 2}%
+(1+T)\DeltaNabla_{n-i}^\otimes ({\imath_n}\otimes{{\imath_n}})\in (Q((C_n^i)_{n+i}))^{\otimes 2}%
 \end{alignat*}
 which represents $\sigma_i(\imath_n)$. Thus the defining equation becomes simply
 \[\sigma_i(\imath_n)=\sum_i\sigma_i(hP^i)\]
@@ -4290,7 +4291,7 @@ KW%r2c2
 \]
 is a map $\widetilde{\alpha}:S^t\to c_1(KW)$, and there is a commuting diagram %(since in $Y\times Z$, products of the form $(a,0)(0,b)$ vanish):
 \[\xymatrix@R=4mm@C=15mm{
-S^{t+i}\ar@{->}[r]_-{\mu\Delta_{t-i}(\imath_t\otimes\imath_{t})}
+S^{t+i}\ar@{->}[r]_-{\mu\DeltaNabla_{t-i}(\imath_t\otimes\imath_{t})}
 \ar@{ >->}[d]
 &%r1c1
 S^t\ar@{ >->}[d]
@@ -4340,19 +4341,19 @@ X_{t+i+1}\ar[l]_-{d_0}
 }\]
 Propagating the element $h\in (C_t^i)_{t+i+1}$, these groups contain the following elements:
 \[\xymatrix@R=4mm{
-\mu\Delta_{t-i}(\widetilde{\epsilon\alpha}\otimes \widetilde{\epsilon\alpha})&%r1c1
+\mu\DeltaNabla_{t-i}(\widetilde{\epsilon\alpha}\otimes \widetilde{\epsilon\alpha})&%r1c1
 G(\epsilon\alpha)\ar@{|->}[l]_-{d_0}
 \ar@{|->}[r]^-{\overline{v}}
 &%r1c2
 KQG(\epsilon\alpha)\\%r1c3
-\mu\Delta_{t-i}(\imath_t\otimes\imath_t)\ar@{|->}[u]^-{\overline{G}(\epsilon\alpha)}
+\mu\DeltaNabla_{t-i}(\imath_t\otimes\imath_t)\ar@{|->}[u]^-{\overline{G}(\epsilon\alpha)}
 &%r2c1
 h\ar@{|->}[u]^-{\overline{G}(\epsilon\alpha)}\ar@{|->}[r]^-{\eta}
 \ar@{|->}[l]_-{d_0}
 &%r2c2
 h\ar@{|->}[u]_-{KQ\overline{G}(\epsilon\alpha)}%r2c3
 }\]
-As the element we have written as $KQG(\alpha)$ is a representative for $(G\circ\epsilon_*)(\alpha)\in\pi_{t+i+1}(\overline{V}X)$, the class $(\partial_\textup{conn}\circ G\circ\epsilon_*)(\alpha)$ is represented by $\mu\Delta_{t-i}(\widetilde{\epsilon\alpha}\otimes \widetilde{\epsilon\alpha})$. Of course this is homotopic to $\mu\Delta_{t-i}(\alpha\otimes \alpha)$, which represents $\mu\delta_i(\alpha)$.
+As the element we have written as $KQG(\alpha)$ is a representative for $(G\circ\epsilon_*)(\alpha)\in\pi_{t+i+1}(\overline{V}X)$, the class $(\partial_\textup{conn}\circ G\circ\epsilon_*)(\alpha)$ is represented by $\mu\DeltaNabla_{t-i}(\widetilde{\epsilon\alpha}\otimes \widetilde{\epsilon\alpha})$. Of course this is homotopic to $\mu\DeltaNabla_{t-i}(\alpha\otimes \alpha)$, which represents $\mu\delta_i(\alpha)$.
 \end{proof}
 
 
