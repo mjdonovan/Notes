@@ -1,6 +1,6 @@
 % !TEX root = z_output/unstable_Lie_algs.tex
 \documentclass[11pt]{amsart}
-\newcommand{\IncludeAll}{}% <--
+%\newcommand{\IncludeAll}{}% <--
 \newcommand{\ShrinkPages}{}% <--
 \newcommand{\PostponeContents}{}% <--
 \ifx\ShrinkPages\undefined\else\usepackage[paperheight=160mm,paperwidth=160mm]{geometry}\fi%220/160
@@ -26,8 +26,8 @@
 \xclude{Contents Page}
 \nclude{Conventions and notation}
 \nclude{CPiAlgs and CHalgs}
-\nclude{Constructing (co)homotopy operations}
-\xclude{Bousfield-Kan spectral sequence}
+\nclude{Bousfield-Kan spectral sequence}
+\xclude{Constructing (co)homotopy operations}
 \xclude{homotopy operations for PRLs}
 \xclude{Cohomology Operations for W and U}
 \xclude{second quadrant homotopy}%
@@ -431,7 +431,7 @@ This research will form part of the author's PhD thesis. The author would like t
 \begin{Conventions and notation}
 \section{\textbf{Background and conventions}}
 
-\subsection{Universal algebras}
+\subsection{Universal algebras}\label{Universal algebras}
 In this paper we will be dealing with various categories $\calC$ of universal graded algebras over $\F_2$. Following \cite[\S2.1]{Blanc_Stover-Groth_SS.pdf}, these are categories whose objects are $G$-graded $\F_2$-vector spaces $X=\{X_g\}_{g\in G}$, for some set $G$ of gradings, equipped with a set of operators of the form $X_{g_1}\times \cdots \times X_{g_n}\to X_k$ (with $n\geq1$)  satisfying a set identities, and whose morphisms are graded vector space maps preserving this structure. We assume that the vector space addition  maps $X_g\times X_g\to X_{g}$ are included in the set of operators, in order that the morphisms in $\calC$ are linear maps. Note that we have explicitly excluded nullary operations. 
 
 It need not  be true that all of the defining operators must be linear, but in each of our examples, $\calC$ will be monadic over the category of $G$-graded $\F_2$-vector spaces. To explain this, there is a forgetful functor $U_\calC:\calC\to\vect{}{}$, where $\vect{}{}$ is the category of $G$-graded $\F_2$-vector spaces, and $U_{\calC}$ admits a left adjoint  $F_\calC:\vect{}{}\to\calC$. %. The functor $U_{\calC}$ will always be monadic, in the sense that 
@@ -624,7 +624,7 @@ In this thesis we will always define the $\calC$-\emph{homology} of $X\in s\calC
 \[H_*^{\calC}X:=\pi_*(Q^\calC B^\calC X)=H_*N_*(Q^\calC B^\calC X).\]
 These homology functors are well defined, as the $Q^\calC\dashv K_\calC$ adjunction is a Quillen adjunction (that $K_\calC$ preserves fibrations and acyclic fibrations is immediate), and indeed we are free to use any cofibrant replacement in place of $B^\calC X$.
 
-It is not always entirely appropriate to call these functors homology. Indeed, homology is defined by Quillen to be the left derived functors of the abelianization functor of \cite[\S II.5]{QuillenHomAlg.pdf}, and it is not true in all of our examples that $Q^\calC$ models the abelianization functor. Goerss \cite[\S4]{MR1089001} explains that this does occur when $\calC$ is the category of non-unital commutative algebras, but it does not occur when $\calc$ is the category of restricted Lie algebras.
+It is not always entirely appropriate to call these functors homology. Indeed, Andr\'e-Quillen homology, as defined by Quillen, is the left derived functors of the abelianization functor of \cite[\S II.5]{QuillenHomAlg.pdf}, and it is not true in all of our examples that $Q^\calC$ models the abelianization functor. Goerss \cite[\S4]{MR1089001} explains that this does occur when $\calC$ is the category of non-unital commutative algebras, but it does not occur when $\calc$ is the category of restricted Lie algebras.
 
 When $\calC$ is monadic over $\vect{+}{r}$, we may view the groups $H_*^{\calC}X$ together as an object of $\vect{+}{r+1}$. That is, each homology group $H_s^\calC X$ retains the gradings of $X$, and a new homological grading is added (to the left of the existing homological gradings). We will sometimes avoid substituting into the asterisk, writing expressions such as $(H_*^\calC X)_{s_{r+1},\ldots,s_1}^t$ in place of $(H_{s_{r+1}}^\calC X)_{s_r,\ldots,s_1}^t$.
 
@@ -860,7 +860,7 @@ We can again add internal gradings, the richest case being that in which  $V\in 
 %Suppose that $X^\bullet$ is a cosimplicial object in $s\algs$. Then there is a map of spectral sequences, which is an isomorphism from $E^1$ (\textbf{que?}), from the homotopy spectral sequence of the $\Tot$ tower $\{I\Tot_mX^\bullet\}$ to the spectral sequence of the bicomplex underlying $IX^\bullet$. Moreover, there is an isomorphism $\pi_*I\Tot X^\bullet\to H_*TIX^\bullet$ (to the homology of the total complex of the bicomplex), which is compatible with the map of spectral sequences.
 %\end{cor}
 %\begin{cor}
-%Suppose that $X$ is a connected element of $s\algs$. Then the Adams spectral sequence for $X$ is the spectral sequence of the bicomplex underlying the cosimplicial simplicial vector space $I((c(K\overline{Q})^\bullet X)^{\textup{rf}})$. This spectral sequence admits a vanishing line from $E^2$, and so converges strongly to its target, $\pi_{t-s}(I\hat X)$.
+%Suppose that $X$ is a connected element of $s\algs$. Then the Bousfield-Kan spectral sequence for $X$ is the spectral sequence of the bicomplex underlying the cosimplicial simplicial vector space $I((c(K\overline{Q})^\bullet X)^{\textup{rf}})$. This spectral sequence admits a vanishing line from $E^2$, and so converges strongly to its target, $\pi_{t-s}(I\hat X)$.
 %\end{cor}
 
 
@@ -923,7 +923,7 @@ For any $X\in s\calC$, by adjunction:
 \hom_{s\calC}(F_\calC\mathbb{K}^t_{s_{r+1},\ldots,s_1},X)&\cong (ZN_{s_{r+1}}X)_{s_r,\ldots,s_1}^t\makebox[0cm][l]{ and}\\
 \hom_{s\calC}(F_{\calC}C\mathbb{K}^t_{s_{r+1},\ldots,s_1},X)&\cong (N_{s_{r+1}+1}X)_{s_r,\ldots,s_1}^t,
 \end{alignat*}
-and indeed $i^*$ plays the same role as above, representing the differential of $N_*X$. Moreover, in the homotopy category corresponding to the above model category structure, $F_\calC\mathbb{K}^t_{n,s_r,\ldots,s_1}$ represents $\pi_n(\DASH)^t_{s_r,\ldots,s_1}$, c.f.\ \cite[\S1]{MR1089001} or \cite[\S3.1.1]{Blanc_Stover-Groth_SS.pdf}.
+and indeed $i^*$ plays the same role as above, representing the differential of $N_*X$. Moreover, in the homotopy category corresponding to the above model category structure, $F_\calC\mathbb{K}^t_{n,s_r,\ldots,s_1}$ represents $\pi_n(\DASH)^t_{s_r,\ldots,s_1}$, c.f.\ \cite[\S1]{MR1089001} or \cite[\S3.1.1]{Blanc_Stover-Groth_SS.pdf}. For this reason we will refer to the objects $F_\calC\mathbb{K}^t_{n,s_r,\ldots,s_1}$ as the \emph{spheres} in $s\calC$.
 
 %In light of this fact, the homotopy groups of $X$ possess
 By virtue of the algebraic structure posessed by $X$, the homotopy groups $\pi_*X$ possess certain natural algebraic structure, that of a $\calc$-$\Pi$-algebra. Indeed, as any given homotopy group is a representable functor on the homotopy category, natural $N$-ary operations on homotopy groups
@@ -934,11 +934,12 @@ Blanc and Stover \cite{Blanc_Stover-Groth_SS.pdf} define a new category of grade
 \[V_{s_{r+1}^{1},\ldots,s_{1}^{1}}^{t^1}\times\cdots \times V_{s_{r+1}^{N},\ldots,s_{1}^{N}}^{t^N}\to V_{s_{r+1},\ldots,s_{1}}^{t}\]
 for every such homotopy class, satisfying certain natural compatibilities.
 
-It is a standard formalism to encode these compatibilities as follows. A \emph{model}  \cite{Blanc_Stover-Groth_SS.pdf} in $s\calc$ is an almost free object of $s\calc$ which is weakly equivalent to a coproduct of spheres. A \emph{finite model} is a model in which this coproduct is finite. Let $\Pi$  be the $\vect{}{}$-enriched category with objects the finite models in $s\calc$, and morphisms
+It is a standard formalism to encode these compatibilities as follows. A \emph{model}  \cite{Blanc_Stover-Groth_SS.pdf} in $s\calc$ is 
+an almost free object of $s\calc$ which is weakly equivalent to a coproduct of spheres (for example, $F^{\calC}\Gamma V$ for any $V\in\vect{+}{r+1}$ viewed as a chain complex with zero differential). A \emph{finite model} is a model in which this coproduct is finite. Let $\Pi$  be the $\vect{}{}$-enriched category with objects the finite models in $s\calc$, and morphisms
 \[\hom_{\Pi}(M,M'):=\hom_{\textup{ho}(s\calc)}(M,M').\]
-Then the category of $\calc$-$\Pi$-algebras  may be defined as the category of $\vect{}{}$-enriched functors $\Pi^\textup{op}\to \vect{}{}$ that send finite coproducts into products. The category of $\calc$-$\Pi$-algebras is monadic over $\vect{+}{r+1}$. The forgetful functor is defined by:%$A$ under the forget Such a functor $A$ yields an object of $U_{\calc\PiAlg}A$ of $\vect{+}{r+1}$ via
-\[(U_{\calc\PiAlg}A)^t_{s_{r+1},\ldots,s_1}:=A(F_\calC\mathbb{K}_{s_{r+1},\ldots,s_{1}}^{t}),\]
-and any of the structure maps advertised above is induced by the corresponding homotopy class. %The natural compatibilities referred to above are the conditions required that a collection of structure maps extends to a functor on $\Pi^\textup{op}$.
+Then the category of $\calc$-$\Pi$-algebras  may be defined as the category of $\vect{}{}$-enriched functors $\Pi^\textup{op}\to \vect{}{}$ that send finite coproducts into products (where by $\vect{}{}$ we mean the category of ungraded $\F_2$-vector spaces). The category of $\calc$-$\Pi$-algebras is monadic over $\vect{+}{r+1}$, with  forgetful functor $U_{\calc\PiAlg}A$ defined on a functor $A\in \calc\PiAlg$ by:%$A$ under the forget Such a functor $A$ yields an object of $U_{\calc\PiAlg}A$ of $\vect{+}{r+1}$ via
+\[(U_{\calc\PiAlg}A)^t_{s_{r+1},\ldots,s_1}:=A(F_\calC\mathbb{K}_{s_{r+1},\ldots,s_{1}}^{t}).\]
+Any operators advertised above on $U_{\calc\PiAlg}A$ is then induced by the corresponding homotopy class of a coproduct of spheres, viewed as a map in $\Pi$. %The natural compatibilities referred to above are the conditions required that a collection of structure maps extends to a functor on $\Pi^\textup{op}$.
 
 One obtains the free $\calc$-$\Pi$-algebra on a graded vector space $V\in \vect{+}{r+1}$ using Dold's theorem (\ref{Dold's theorem}). That is, one views $V$ as a chain complex in $\complexes\vect{+}{r}$ with zero differential, and applies the Dold-Kan correspondence and $\calc$-free functor, obtaining an object $F_\calc\Gamma V\in s\calc$. Then:
 \[F_{\calc\PiAlg}V=\pi_*(F_\calc\Gamma V).\]
@@ -953,10 +954,46 @@ If $A$ is a model in $\calc$ then $\gamma$ is an isomorphism.
 \end{lem}
 \begin{proof}{[\textbf{what's the status of this?}]} $A$ is homotopic to a wedge of spheres, and $\pi A$ is free on generators in correspondence with the wedge summands.
 \end{proof}
+\subsection{Cohomology groups and $\calC$-$H^*$-algebras}\label{cohomology and Halgs}
+It will in general be preferable for us to consider algebraic structure on cohomology, rather than coalgebraic structure on homology. Firstly, algebra is in general a more familiar subject than coalgebra, and secondly, cohomology has the advantage that it consists of representable functors. That is, in the homotopy category of $s\calc$, the object $K_\calC\mathbb{K}^t_{n,s_r,\ldots,s_1}$ represents $H^n_{\calc}(\DASH)_t^{s_r,\ldots,s_1}$,  c.f.\ \cite[Proposition 4.3]{MR1089001}. Using cohomology groups has the disadvantages associated with double-dualisation.
+
+
+%The forgetful functor $U_\calC:\calc\to \vect{+}{r}$ used to define the weak equivalences and fibrations in $s\calc$, allows us to consider any object $X\in s\calC$ as an object of $s\vect{+}{r}$. In particular, for any $X\in s\calc$ we may define homotopy groups
+%We have defined the cohomology of $X\in s\calc$ to be the dual left-derived functors of the indecomposables functor $Q_\calC:\calc\to \vect{+}{r}$,
+%\[(H^{s_{r+1}}_\calc X)^{s_r,\ldots,s_1}_t:=((H_{s_{r+1}}^\calc X)_{s_r,\ldots,s_1}^t)^*:=(\pi_{s_{r+1}}(Q^{\calc}B^\calc X)_{s_r,\ldots,s_1}^t)^*,\]
+%which we view together as an object of $\vect{r+1}{+}$.
+
+
+%In light of this fact, the homotopy groups of $X$ possess
+By virtue of the algebraic structure posessed by $X$, the cohomology groups $H_\calc^*X$ possess certain natural algebraic structure, that of a $\calc$-$H^*$-algebra.  As for $\calc$-$\Pi$-algebras, natural $N$-ary operations on cohomology groups
+\[(H^*_\calc X)^{s_{r+1}^{1},\ldots,s_{1}^{1}}_{t^1}\times\cdots \times(H^*_\calc X)^{s_{r+1}^{N},\ldots,s_{1}^{N}}_{t^N}\to (H^*_\calc X)^{s_{r+1},\ldots,s_{1}}_{t}\]
+are in bijective correspondence with elements of the group
+\[ H^*_\calc\Bigl(K_\calC\mathbb{K}_{s_{r+1}^{1},\ldots,s_{1}^{1}}^{t^1}\times\cdots\times K_\calC\mathbb{K}_{s_{r+1}^{N},\ldots,s_{1}^{N}}^{t^N}\Bigr)\makebox[0cm][l]{}^{s_{r+1},\ldots,s_{1}}_{t}.\]
+The category of $\calC$-$H^*$-algebras, monadic over $\vect{r+1}{+}$, has objects graded vector spaces $V\in\vect{r+1}{+}$ with a structure map 
+\[V^{s_{r+1}^{1},\ldots,s_{1}^{1}}_{t^1}\times\cdots \times V^{s_{r+1}^{N},\ldots,s_{1}^{N}}_{t^N}\to V^{s_{r+1},\ldots,s_{1}}_{t}\]
+for every such cohomology class, satisfying certain natural compatibilities.
+
+The formalism required to express these compatibilities is as follows. A \emph{generalized Eilenberg-Mac Lane object}, or \emph{GEM}, in $s\calc$ is an almost free object of $s\calc$ which is weakly equivalent to a product of objects of the form $K_\calC\mathbb{K}_{s_{r+1},\ldots,s_{1}}^{t}$. A \emph{finite GEM} is a GEM in which this product is finite. Let $K$  be the $\vect{}{}$-enriched category with objects the finite GEMs in $s\calc$, and morphisms
+\[\hom_{\Pi}(M,M'):=\hom_{\textup{ho}(s\calc)}(M,M').\]
+Then the category of $\calc$-$H^*$-algebras  may be defined as the category of $\vect{}{}$-enriched functors $\mathbb{K}\to \vect{}{}$ that preserve finite products. The category of $\calc$-$H^*$-algebras is monadic over $\vect{r+1}{+}$. The forgetful functor is defined, on $h:K\to \vect{}{}$, by:%$A$ under the forget Such a functor $A$ yields an object of $U_{\calc\HAlg}A$ of $\vect{r+1}{+}$ via
+\[(U_{\calc\HAlg}h)_t^{s_{r+1},\ldots,s_1}:=h(K_\calC\mathbb{K}_{s_{r+1},\ldots,s_{1}}^{t}),\]
+and any of the structure maps advertised above is induced by the corresponding cohomology class. %The natural compatibilities referred to above are the conditions required that a collection of structure maps extends to a functor on $\Pi^\textup{op}$.
+
+One obtains the free $\calc$-$\Pi$-algebra on a graded vector space $V\in \vect{r+1}{+}$ as follows. One views $V$ as a chain complex in $\complexes\vect{+}{r}$ with zero differential, and applies the Dold-Kan correspondence and $\calc$-free functor, obtaining an object $F_\calc\Gamma V\in s\calc$. Then:
+\[F_{\calc\HAlg}V=H^*_{\calc}K_\calc\Gamma V.\]
+Moreover, $F_{\calc\HAlg}$ is an augmented monad: one applies $H^*_{\calc}$ to the natural collapse map $F^{\calc}\Gamma V\to K^{\calc}\Gamma V$, to obtain
+\[K_{\calc\HAlg}V\cong H^*_{\calc} F^{\calc}\Gamma V\from H^*_{\calc} K^{\calc}\Gamma V=:F_{\calc\HAlg}V.\]
+
+\[F_{\calc\HAlg}V=\pi_*F_\calc\Gamma V\overset{\pi_*\epsilon}{\to}\pi_*\Gamma V=H_*V=V,\]
+and in particular, there is an adjunction $Q^{\calc\HAlg}\dashv K_{\calc\HAlg}$.
+%For any simplicial object $A\in s\calC$, there's a natural map $\gamma:Q^{\calC\HAlg}\pi A\to \pi Q^{\calC}A$.
+
+\textbf{Talk about duality.}
+
 \subsection{Cofibrant replacement via the small object argument}\label{Cofibrant replacement via the small object argument}
 The homotopy of an object $X$ of $s\calC$ was defined simply by application of the forgetful functor $U^{\calc}:\calc\to\vect{}{}$, a definition which is tautologically homotopically correct. On the other hand, in order to define the homology $H_*^{\calc}X$, as the left Quillen functor $Q^{\calc}$ does not preserve all weak equivalences, we must perform a cofibrant replacement before applying $Q^{\calc}$. While the comonadic bar construction $B^{\calc}$ described in \S\ref{ssec: quillen model and bar construction} suffices to define the groups $H_*^{\calc}X$, it lacks the structure that we will need at various points in this work.
 
-Radulescu-Banu's innovation \cite{Radulescu-Banu.pdf} was to explain that the cofibrant replacement functor $c:s\calC\to s\calC$ constructed by Quillen's small object argument (or \emph{SOA}) \cite{QuillenHomAlg.pdf}, which by design already posesses a natural acyclic fibration $\epsilon:c\to\Id$, in fact admits the full structure of a comonad, with diagonal $\beta:c\to cc$. As explained by Blumberg and Riehl \cite[Remark 4.12]{BlumRiehlResolutions.pdf},
+Radulescu-Banu's innovation \cite{Radulescu-Banu.pdf} was to explain that the cofibrant replacement functor $c:s\calC\to s\calC$ constructed by Quillen's \emph{small object argument}  \cite{QuillenHomAlg.pdf}, which by design already posesses a natural acyclic fibration $\epsilon:c\to\Id$, in fact admits the full structure of a comonad, with diagonal $\beta:c\to cc$. As explained by Blumberg and Riehl \cite[Remark 4.12]{BlumRiehlResolutions.pdf}:
 \begin{prop}
 The endofunctor $Q^\calc cK^\calc$ of $s\vect{}{}$ admits the structure of a comonad, via the maps
 \[Q^\calc cK^\calc\overset{\smash{Q^\calc (\beta)}}{\to}Q^\calc ccK^\calc \overset{\smash{Q^\calc c(\eta)}}{\to} Q^\calc cK^\calc Q^\calc cK^\calc\text{ \ and \ }Q^\calc cK^\calc\overset{\smash{Q^\calc (\epsilon)}}{\to}Q^\calc K^\calc\cong\Id,\]
@@ -965,9 +1002,9 @@ where $\eta$ denotes the unit of the $Q^\calC\dashv K_\calC$ adjunction.
 
 Now the functor $c$ of the small object argument depends on the choice of sets of generating cofibrations and acyclic cofibrations. It will be important to our applications that included in this set are certain important cofibrations, namely the inclusion of $0$ into any sphere $F_\calC\mathbb{K}^t_{s_{r+1},\ldots,s_1}$, and any of the cofibrations  defined in \S\ref{chain level construction of j} and \S\ref{two-cell complex for the deltas}.
 
-Having included these maps, all that one needs to know about the SOA functor $cX$, beyond the fact that it is a cofibrant replacement functor, is the following. It is constructed as the colimit of a (transfinite) sequence of cofibrations:
+Having included these maps, all that one needs to know about the small object argument functor $cX$, beyond the fact that it is a cofibrant replacement functor, is the following. It is constructed as the colimit of a (transfinite) sequence of cofibrations:
 \[\xymatrix@!0@R=10mm@C=13mm{
-\makebox[0cm][r]{$0={}$}c_0X\ar[rr]^-{\tau}\ar@{ >->}_-{h_{-1}}[drrr]
+\makebox[0cm][r]{$0={}$}c_0X\ar[rr] \ar@{ >->}[drrr]
 &&%r1c1
 c_1X\ar@{ >->}[rr]\ar[dr]
 &&%r1c2
@@ -996,69 +1033,110 @@ X%r2c2
 }\]
 commute. Indeed, the map $c_nX\to c_{n+1}X$ is constructed by attaching a copy of $B$ along the image of $A$ in $c_nX$, for each such commuting square.
 \subsection{Homology groups and $\calC$-$H_*$-coalgebras}\label{homology and Hcoalgs}
-By Dold's theorem (\ref{Dold's theorem}), there's a commuting diagram
+There is a commuting diagram
 \[\xymatrix@R=4mm@C=20mm{
 s\vect{+}{r}\ar[r]^-{Q^\calc cK^\calc }
-\ar[d]^-{\pi}
+\ar[d]^-{\pi_*}
 &%r1c1
-s\vect{+}{r}\ar[d]^-{\pi}
+s\vect{+}{r}\ar[d]^-{\pi_*}
 \\%r1c2
 \vect{+}{r+1}\ar[r]^-{C_{\calc\HCoalg}}
 &
 \vect{+}{r+1}
 }\]
 in which we are using Dold's theorem (\ref{Dold's theorem}) to \emph{define} $C_{\calc\HCoalg}$, the \emph{cofree $\calc$-$H_*$-coalgebra comonad}.
-By the naturality of Dold's theorem, this is a comonad on $n\vect{+}{r+1}$. A $\calc$-$H_*$-coalgebra is simply a coalgebra over this monad, i.e.\ any $h\in\vect{+}{r+1}$ equipped with a coaction map $h\to C_{\calc\HCoalg}h$ satisfying the standard compatibilities. The homology $H_*^\calc X$ of $X\in s\calc$ is a $\calc$-$H_*$-coalgebra using the map
+By the naturality of Dold's theorem, this is a comonad on $\vect{+}{r+1}$. A $\calc$-$H_*$-coalgebra is simply a coalgebra over this monad, i.e.\ any $h\in\vect{+}{r+1}$ equipped with a coaction map $h\to C_{\calc\HCoalg}h$ satisfying the standard compatibilities. The homology $H_*^\calc X$ of $X\in s\calc$ is a $\calc$-$H_*$-coalgebra using the map
 \[\pi_*(Q^{\calc}cX)\overset{\pi_*(Q^{\calc}(\beta))}{\to}\pi_*(Q^{\calc}ccX)\overset{\pi_*(Q^{\calc}c(\eta))}{\to}\pi_*(Q^{\calc}cK^{\calc}Q^{\calc}cX)=C_{\calc\HCoalg}(\pi_*(Q^{\calc}cX)).\]
 If $X\sim K^{\calc}V$ for some $V\in s\vect{+}{r}$, then $H_*^{\calc}X\cong C_{\calc\HCoalg}(\pi_*(V))$, and the coaction map of $H_*^{\calc}X$ is none other than the diagonal map of the comonad.
 
-Moreover, the comonad $C_{\calc\HCoalg}$ is coaugmented, via the map $a:\Id\to C_{\calc\HCoalg}$ induced by the Hurewicz map $\pi_*(V)\cong \pi_*(cKV)\to\pi_*(QcKV)$, in the sense that $\epsilon\circ a=1$ and $a\circ a=\Delta\circ a$. In particular, the monomorphism $a$ presents $W$ as a subspace of $CW$, and if $H$ is any $C$-coalgebra, we may define the \emph{primitives} in $H$ as the equaliser (of graded vector spaces):
+It follows from the definitions that the dual of a $\calc$-$H_*$-algebra is a $\calc$-$H^*$-algebra, but the reverse does not always hold.
+
+
+\subsection{The Hurewicz map, primitives and homology completion}\label{The Hurewicz map, primitives and homology completion}
+For any $X\in s\calC$, there is a map $\pi_*X\to H_*^{\calC}X$, the \emph{Hurewicz map}, defined as the composite
+\[\pi_*X\cong \pi_*(cX)\to \pi_*(Q^{\calC}cX).\]
+Indeed, the Hurewicz map provides a coaugmentation of the comonad $C_{\calc\HCoalg}$, the natural transformation $a:\Id\to C_{\calc\HCoalg}$ of endofunctors of $\vect{+}{r+1}$ defined by
+\[V\cong \pi_*(cK^{\calC}\Gamma  V)\to \pi_*(Q^{\calC}cK^{\calC}\Gamma  V)=F^{\calC\PiAlg}V.\]
+Given this extra structure, we may define the \emph{primitives} of a $\calC$-$H_*$-coalgebra $H$ as the equaliser (of graded vector spaces):
 \[\xymatrix@R=4mm@1{
 \textup{Pr}(H)\ar[r]
 &%r1c1
-H\ar@<.5ex>[r]^-{\textup{coact}}
-\ar@<-.5ex>[r]_-{a}
+H\ar@<.5ex>[r]^-{a}
+\ar@<-.5ex>[r]_-{\textup{coact}}
 &%r1c2
 CH%r1c3
 }.\]
-\begin{shaded}\tiny
-discourse on the Hurewicz?
-\end{shaded}
-\subsection{Cohomology groups and $\calC$-$H^*$-algebras}\label{cohomology and Halgs}
-It will in general be preferable to for us to consider algebraic structure on cohomology, rather than coalgebraic structure on homology. Firstly, algebra is in general a more familiar subject than coalgebra, and secondly, cohomology has the advantage that it consists of representable functors. That is, in the homotopy category of $s\calc$, the object $K_\calC\mathbb{K}^t_{n,s_r,\ldots,s_1}$ represents $H^n_{\calc}(\DASH)_t^{s_r,\ldots,s_1}$,  c.f.\ \cite[Proposition 4.3]{MR1089001}. Using cohomology groups has the disadvantages associated with double-dualisation.
+%$\pi_*(V)\cong \pi_*(cKV)\to\pi_*(QcKV)$, in the sense that $\epsilon\circ a=1$ and $a\circ a=\Delta\circ a$. In particular, the monomorphism $a$ presents $W$ as a subspace of $CW$, and if $H$ is any $C$-coalgebra, we may define the \emph{primitives} in $H$ 
+
+%``Include a bit about colimits, as in \verb|adamsops|''(?????)
+%\begin{prop}
+%For $W$ a graded vector space, the map $a:W\to CW$ is an isomorphism onto the primitives $\textup{Pr}(CW)$ of the cofree $C$-coalgebra $CW$.
+%\end{prop}
+We will briefly defer the proof of:
+\begin{prop}\label{hurewicz}
+The Hurewicz map $\pi_*X\to H_*^{\calc}X$ factors through $\textup{Pr}(H_*^{\calC}X)$, and if $X$ is GEM, the resulting map $\pi_*X\to\textup{Pr}(H_*^\calC X)$ is an isomorphism. In particular, for any $V\in\vect{+}{r+1}$, $\textup{Pr}(C_{\calC\HCoalg}V)\cong V$.
+\end{prop}
+%\begin{proof}
+%Represent an element $\alpha\in\pi_nA$ by a map $\alpha:S^n_\calC\to A$. Then, $h(\alpha)$ is the image of the fundamental homology class $\imath\in H_n(S^n_\calC)$ under the map $\alpha_*$. As $\imath$ is primitive, so is $h(\alpha)$.
+%\end{proof}
+
+Radulescu-Banu \cite{Radulescu-Banu.pdf} has constructed a cosimplicial resolution $\calX^\bullet$ of an object $X\in s\calc$ by GEMs, and defined the \emph{homology completion of $X$} to be the totalization $X\hat{\ }:=\textup{Tot}(\calX^\bullet)$. This construction is the analogue of Bousfield and Kan's $R$-completion functor on simplicial sets \cite{BousKanSSeq.pdf}, a construction that has proven extremely useful in classical homotopy theory.
+
+There is an additional difficulty, however,  in constructing the cosimplicial resolution $\calX^{\bullet}$, which is not present in the classical context: since not all simplicial algebras are cofibrant, the naive cosimplicial resolution (with coaugmentation dashed)
+\[\makebox[0cm][r]{\,$\qquad $}\vcenter{
+\def\labelstyle{\scriptstyle}
+\xymatrix@C=1.5cm@1{
+X\,
+\ar@{-->}[r]
+&
+\,K^{\calC}Q^{\calC}X\,
+\ar[r];[]
+&
+\,(K^{\calC}Q^{\calC})^2X\,
+\ar@<-.65ex>[l];[]
+\ar@<+.65ex>[l];[]
+\ar@<+.65ex>[r];[]
+\ar@<-.65ex>[r];[]
+&
+\,(K^{\calC}Q^{\calC})^3X\,\makebox[0cm][l]{\,$\cdots. $}
+\ar[l];[]
+\ar@<-1.3ex>[l];[]
+\ar@<+1.3ex>[l];[]
+}}\]
+fails to be homotopically correct, and  as $K^{\calC}Q^{\calC}K^{\calC}=K^{\calC}$, it is rather uniteresting. Radulescu-Banu's innovation was to explain that the cofibrant replacement functor $c:s\algcat\to s\algcat$ constructed by Quillen's small object argument \cite{QuillenHomAlg.pdf} admits a comonad diagonal $\beta:c\to cc$  (already used in \S\ref{homology and Hcoalgs}) and can thus be mixed into the cosimplicial resolution, making it homotopically correct. Specifically, the diagonal is needed in order  to define the coface maps in a coaugmented cosimplicial object:
+\[\makebox[0cm][r]{\,$\calX^\bullet:\qquad $}\vcenter{
+\def\labelstyle{\scriptstyle}
+\xymatrix@C=1.5cm@1{
+cX\,
+\ar@{-->}[r]
+&
+\,cK^{\calC}Q^{\calC}cX\,
+\ar[r];[]
+&
+\,c(K^{\calC}Q^{\calC}c)^2X\,
+\ar@<-.65ex>[l];[]
+\ar@<+.65ex>[l];[]
+\ar@<+.65ex>[r];[]
+\ar@<-.65ex>[r];[]
+&
+\,c(K^{\calC}Q^{\calC}c)^3X\,\makebox[0cm][l]{\,$\cdots. $}
+\ar[l];[]
+\ar@<-1.3ex>[l];[]
+\ar@<+1.3ex>[l];[]
+}}\]
+By an application of Dold's theorem (\ref{Dold's theorem}), if $X\to Y$ is a weak equivalence, so is $\calx^s\to\calY^s$ for each $s$.
+
+The construction is explained and generalized by Blumberg and Riehl \cite[\S4]{BlumRiehlResolutions.pdf}: instead of simply using the unit and counit of the adjunction respectively, one uses the composites discussed in \S\ref{homology and Hcoalgs}:
+\[c\overset{\beta}{\to}cc\overset{c\eta c}{\to}cKQc\textup{\quad and\quad }QcK\overset{Q\epsilon K}{\to}QK\to \textup{id}.\]
+One says that $X$ is \emph{homotopy complete} when the map $cX\to X\hat{\ }:=\textup{Tot}(\calX^\bullet)$ is an equivalence.
 
 
-%The forgetful functor $U_\calC:\calc\to \vect{+}{r}$ used to define the weak equivalences and fibrations in $s\calc$, allows us to consider any object $X\in s\calC$ as an object of $s\vect{+}{r}$. In particular, for any $X\in s\calc$ we may define homotopy groups
-%We have defined the cohomology of $X\in s\calc$ to be the dual left-derived functors of the indecomposables functor $Q_\calC:\calc\to \vect{+}{r}$,
-%\[(H^{s_{r+1}}_\calc X)^{s_r,\ldots,s_1}_t:=((H_{s_{r+1}}^\calc X)_{s_r,\ldots,s_1}^t)^*:=(\pi_{s_{r+1}}(Q^{\calc}B^\calc X)_{s_r,\ldots,s_1}^t)^*,\]
-%which we view together as an object of $\vect{r+1}{+}$.
+Note that the maps $d^0,d^1:\calX^{0}\to\calX^{1}$ induce respectively the coaugmentation and coaction maps for $\pi_*\calx^{0}=H_*^{\calc}X$ on homotopy, while $d^0:\calX^{-1}\to\calX^{0}$ induces the Hurewicz map. Thus, the very existence of this diagram shows that the the Hurewicz map factors through the primitives. The observation of \cite{BlumRiehlResolutions.pdf} that that if $X=K^\calC V$, this cosimplicial object has extra codegeneracies, completes the proof of proposition \ref{hurewicz}.
+Comments in \cite{BlumRiehlResolutions.pdf} also show that the coaugmented cosimplicial vector space $H_*^{\calc}\calX^\bullet$  is weakly equivalent to its coaugmentation $H_*^{\calc}X$.
+We will return to this construction in \S\ref{Idnt E1 E2}.
 
 
-%In light of this fact, the homotopy groups of $X$ possess
-By virtue of the algebraic structure posessed by $X$, the cohomology groups $H_\calc^*X$ possess certain natural algebraic structure, that of a $\calc$-$H^*$-algebra. It will follow from the definitions that the dual of a $\calc$-$H_*$-algebra is a $\calc$-$H^*$-algebra, but the reverse will only hold under appropriate finiteness conditions. As for $\calc$-$\Pi$-algebras, natural $N$-ary operations on cohomology groups
-\[(H^*_\calc X)^{s_{r+1}^{1},\ldots,s_{1}^{1}}_{t^1}\times\cdots \times(H^*_\calc X)^{s_{r+1}^{N},\ldots,s_{1}^{N}}_{t^N}\to (H^*_\calc X)^{s_{r+1},\ldots,s_{1}}_{t}\]
-are in bijective correspondence with elements of the group
-\[ H^*_\calc\Bigl(K_\calC\mathbb{K}_{s_{r+1}^{1},\ldots,s_{1}^{1}}^{t^1}\times\cdots\times K_\calC\mathbb{K}_{s_{r+1}^{N},\ldots,s_{1}^{N}}^{t^N}\Bigr)\makebox[0cm][l]{}^{s_{r+1},\ldots,s_{1}}_{t}.\]
-The category of $\calC$-$H^*$-algebras, monadic over $\vect{r+1}{+}$, has objects graded vector spaces $V\in\vect{r+1}{+}$ with a structure map 
-\[V^{s_{r+1}^{1},\ldots,s_{1}^{1}}_{t^1}\times\cdots \times V^{s_{r+1}^{N},\ldots,s_{1}^{N}}_{t^N}\to V^{s_{r+1},\ldots,s_{1}}_{t}\]
-for every such cohomology class, satisfying certain natural compatibilities.
 
-The formalism required to express these compatibilities is as follows. A \emph{generalized Eilenberg-Mac Lane object}, or \emph{GEM}, in $s\calc$ is an almost free object of $s\calc$ which is weakly equivalent to a product of objects of the form $K_\calC\mathbb{K}_{s_{r+1},\ldots,s_{1}}^{t}$. A \emph{finite GEM} is a GEM in which this product is finite. Let $K$  be the $\vect{}{}$-enriched category with objects the finite GEMs in $s\calc$, and morphisms
-\[\hom_{\Pi}(M,M'):=\hom_{\textup{ho}(s\calc)}(M,M').\]
-Then the category of $\calc$-$H^*$-algebras  may be defined as the category of $\vect{}{}$-enriched functors $\mathbb{K}\to \vect{}{}$ that preserve finite products. The category of $\calc$-$H^*$-algebras is monadic over $\vect{r+1}{+}$. The forgetful functor is defined, on $h:K\to \vect{}{}$, by:%$A$ under the forget Such a functor $A$ yields an object of $U_{\calc\HAlg}A$ of $\vect{r+1}{+}$ via
-\[(U_{\calc\HAlg}h)_t^{s_{r+1},\ldots,s_1}:=h(K_\calC\mathbb{K}_{s_{r+1},\ldots,s_{1}}^{t}),\]
-and any of the structure maps advertised above is induced by the corresponding cohomology class. %The natural compatibilities referred to above are the conditions required that a collection of structure maps extends to a functor on $\Pi^\textup{op}$.
-
-One obtains the free $\calc$-$\Pi$-algebra on a graded vector space $V\in \vect{r+1}{+}$ as follows. One views $V$ as a chain complex in $\complexes\vect{+}{r}$ with zero differential, and applies the Dold-Kan correspondence and $\calc$-free functor, obtaining an object $F_\calc\Gamma V\in s\calc$. Then:
-\[F_{\calc\HAlg}V=H^*_{\calc}K_\calc\Gamma V.\]
-Moreover, $F_{\calc\HAlg}$ is an augmented monad: one applies $H^*_{\calc}$ to the natural collapse map $F^{\calc}\Gamma V\to K^{\calc}\Gamma V$, to obtain
-\[K_{\calc\HAlg}V\cong H^*_{\calc} F^{\calc}\Gamma V\from H^*_{\calc} K^{\calc}\Gamma V=:F_{\calc\HAlg}V.\]
-
-\[F_{\calc\HAlg}V=\pi_*F_\calc\Gamma V\overset{\pi_*\epsilon}{\to}\pi_*\Gamma V=H_*V=V,\]
-and in particular, there is an adjunction $Q^{\calc\HAlg}\dashv K_{\calc\HAlg}$.
-%For any simplicial object $A\in s\calC$, there's a natural map $\gamma:Q^{\calC\HAlg}\pi A\to \pi Q^{\calC}A$.
-
-\textbf{Talk about duality.}
 \subsection{The smash coproduct}\label{subseq:The smash coproduct}
 For $X_1,X_2\in\calc$, we define the \emph{smash coproduct} $X_1\wedge X_2$ to be the kernel of the natural map $X_1\sqcup X_2\to X_1\times X_2$. When $X_1=X_2=X$, $X\wedge X$ has a natural action of $\Sigma_2$, and we write $X\wedge^{\Sigma_2} X$ for the subobject of invariant elements under this action.
 
@@ -1171,7 +1249,614 @@ This is another expression of homogeneity in the relations defining $\calC$. For
 
 \end{CPiAlgs and CHalgs}
 
+\begin{Bousfield-Kan spectral sequence}
+\section{\textbf{The Bousfield-Kan spectral sequence}}\label{Bousfield-Kan spectral sequence}
 
+
+
+In this chapter, we will write $\calC$ for any category of universal graded $\F_2$-algebras satisfying the standing assumptions of \S\ref{Universal algebras}. In \S\ref{sec:connectivityAnalysis} we will specialize to the case when $\calc$ is either the category $\algs$  of ungraded non-unital commutative algebras the category $\liealgs$ of ungraded Lie algebras, and prove the following conjecture of Radulescu-Banu:
+\begin{thm}\label{completenesstheorem}
+If either $\algcat=\algs$ or $\algcat=\liealgs$ and $X\in s\algcat$ is connected, then $X$ is naturally equivalent to its homology completion $X\hat{\ }$.
+\end{thm}
+We are particularly interested in this result because $\pi_*X\hat{\ }$ is the intended target of the \emph{Bousfield-Kan spectral sequence of $X\in s\calc$}, the second quadrant homotopy spectral sequence (c.f.\ \S\ref{Second quadrant homotopy spectral sequences}) of the resolution $\calX\in cs\calc$ of $X$. We will also prove the the spectral sequence supports a vanishing line at $E^2$, in \textbf{\S????}.
+
+
+\subsection{Identification of $E^1$ and $E^2$}\label{Idnt E1 E2}
+In light of \S\ref{Cofibrant replacement via the small object argument} and \S\ref{homology and Hcoalgs}, applying the functor $H_*^{\algcat}$ to $\calX$, one obtains precisely the monadic cobar resolution of $H_*^{\algcat}X$ obtained by repeated application of the monad on $\algcat\HCoalg$ of the adjunction 
+\[U^{\algcat\HCoalg}:\algcat\HCoalg\rightleftarrows \vect{}{1}:C^{\algcat\HCoalg}.\]
+In more detail, we have a Hurewicz map of coaugmented cosimplicial objects
+\[\vcenter{
+\def\labelstyle{\scriptstyle}
+\xymatrix@C=1.5cm@1{
+cX\,
+\ar@{-->}[r]\ar@{->>}[d]
+&
+\,cKQcX\,
+\ar[r];[]\ar@{->>}[d]
+&
+\,c(KQc)^2X\,
+\ar@<-.65ex>[l];[]
+\ar@<+.65ex>[l];[]
+\ar@<+.65ex>[r];[]
+\ar@<-.65ex>[r];[]\ar@{->>}[d]
+&
+\,\cdots
+\ar[l];[]
+\ar@<-1.3ex>[l];[]
+\ar@<+1.3ex>[l];[]\\
+QcX\,
+\ar@{-->}[r]
+&
+\,QcKQcX\,
+\ar[r];[]
+&
+\,Qc(KQc)^2X\,
+\ar@<-.65ex>[l];[]
+\ar@<+.65ex>[l];[]
+\ar@<+.65ex>[r];[]
+\ar@<-.65ex>[r];[]
+&
+\,\cdots
+\ar[l];[]
+\ar@<-1.3ex>[l];[]
+\ar@<+1.3ex>[l];[]
+}}\]
+Write `$C$' for the monad $C^{\algcat\HCoalg}U^{\algcat\HCoalg}$ on $\algcat\HCoalg$. Applying  $\pi_*$ to this map, we obtain:
+\[\vcenter{
+\def\labelstyle{\scriptstyle}
+\xymatrix@C=1.5cm@1{
+\pi_*X\,
+\ar@{-->}[r]\ar@{->}[d]
+&
+\,\pi_*\calX^0\,
+\ar[r];[]\ar[d]^-{\cong}
+&
+\,\pi_*\calX^1\,
+\ar@<-.65ex>[l];[]
+\ar@<+.65ex>[l];[]
+\ar@<+.65ex>[r];[]
+\ar@<-.65ex>[r];[]\ar[d]^-{\cong}
+&
+\,\cdots
+\ar[l];[]
+\ar@<-1.3ex>[l];[]
+\ar@<+1.3ex>[l];[]
+\\
+\textup{Pr}(H_*^\algcat X)\,
+\ar@{-->}[r]
+\ar@{ >->}[d]
+&
+\,\textup{Pr}(CH_*^\algcat X)\,
+\ar[r];[]
+\ar@{ >->}[d]
+&
+\,\textup{Pr}(C^2H_*^\algcat X)\,
+\ar@<-.65ex>[l];[]
+\ar@<+.65ex>[l];[]
+\ar@<+.65ex>[r];[]
+\ar@<-.65ex>[r];[]
+\ar@{ >->}[d]
+&
+\,\cdots
+\ar[l];[]
+\ar@<-1.3ex>[l];[]
+\ar@<+1.3ex>[l];[]
+\\
+H_*^\algcat X\,
+\ar@{-->}[r]
+&
+\,CH_*^\algcat X\,
+\ar[r];[]
+&
+\,C^2H_*^\algcat X\,
+\ar@<-.65ex>[l];[]
+\ar@<+.65ex>[l];[]
+\ar@<+.65ex>[r];[]
+\ar@<-.65ex>[r];[]
+&
+\,\cdots
+\ar[l];[]
+\ar@<-1.3ex>[l];[]
+\ar@<+1.3ex>[l];[]
+}}
+\]
+Where the marked maps are isomorphisms since each $\calX^s$ for $s\geq0$ is a GEM, thanks to proposition \ref{hurewicz}.
+In particular, we see that:
+\begin{alignat*}{2}
+\E{1}{}{\calX}{s}{t}&\cong (\textup{Pr}(C^sH_*^{\algcat}X))_{t};\\
+\E{2}{}{\calX}{s}{t}&\cong((\mathbb{R}^s\textup{Pr})H_*^{\algcat}X)_t\\
+&\cong (H^*_{\algcat\HAlg}H^*_{\algcat}X)^{s}_{t},&\quad&\textup{(if $H_*^{\algcat}X$ finite type)}.
+\end{alignat*}
+
+
+
+
+
+
+\subsection{The Adams tower}\label{sec:derWRTab}\label{sec:relnWithRB}
+Bousfield and Kan defined the Bousfield-Kan spectral sequence, or \emph{unstable Adams spectral sequence}, of a simplicial set in two different ways. Their earlier approach \cite{BK_pairings.pdf} was to define the \emph{derivation of a functor with respect to a ring}. This approach constructs the \emph{Adams tower} over the simplicial set in question, and lends itself well to connectivity analyses. Their latter approach, \cite{BousKanSSeq.pdf}, to give a cosimplicial resolution of a simplicial set by simplicial $R$-modules, lends itself more to the analysis of the $E^2$ page, and is directly analogous to Radulescu-Banu's construction described in \S\ref{The Hurewicz map, primitives and homology completion}.
+
+Since the release of \cite{BK_pairings.pdf} and \cite{BousKanSSeq.pdf}, the relationship between the two approaches has been clarified by the introduction of cubical homotopy theory \cite{GoodwillieCalcII}. In this section we will define the Adams tower of a simplicial algebra using a construction analogous to Bousfield and Kan in \cite{BK_pairings.pdf}, and then apply the theory of cubical diagrams to relate it to Radulescu-Banu's construction. 
+
+
+For any functor $F:s\algcat\to s\algcat$, we define the $r^\textup{th}$ derivation $\dupdown{r}{c}F$ of $F$ with respect to  homology. The definition is recursive, and again involves repeated application of the functor $c$: 
+\begin{alignat*}{2}
+(\dupdown{0}{c}F)(X)
+&:=
+F(cX)%
+\\
+(\dupdown{s}{c}F)(X)
+&:=
+\hofib\bigl((\dupdown{s-1}{c}F)(cX)\xrightarrow{(\dupdown{s-1}{c}F)(\eta_{cX})} (\dupdown{s-1}{c}F)(KQcX)\bigr)
+\end{alignat*}
+where $\eta$ is the unit of the adjunction $Q\dashv K$, i.e.\ the natural surjection onto indecomposables, and $\hofib$ is any fixed  functorial construction of the homotopy fiber. These functors fit into a tower via the following composite natural transformation:
+\[\delta:\left((\dupdown{s}{c}F)(X)\to (\dupdown{s-1}{c}F)(cX)\overset{(\dupdown{s-1}{c}F)(\epsilon)}{\to} (\dupdown{s-1}{c}F)(X)\right).\]
+We have thus constructed a tower
+\[\xymatrix@R=4mm{
+\cdots 
+\ar[r]
+&%r1c1
+(\dupdown{2}{c}F)X
+\ar[r]
+&%r1c3
+%r1c4
+(\dupdown{1}{c}F)X
+\ar[r]&%r1c5
+(\dupdown{0}{c}F)X=FcX,
+}\]
+which is natural in the object $X$ and the functor $F$.
+The functors $\dupdown{r}{c}F$ are homotopical as long as $F$ preserves weak equivalences between cofibrant objects. Employing the shorthand
+\[\dupdown{s}{c}X:=(\dupdown{s}{c}\Id )X,\]
+we define \emph{the Adams tower of $X$} to be the tower
+\[\xymatrix@R=4mm{
+\cdots 
+\ar[r]
+&%r1c1
+\dupdown{2}{c}X
+\ar[r]
+&%r1c3
+%r1c4
+\dupdown{1}{c}X
+\ar[r]&%r1c5
+\dupdown{0}{c}X=cX.
+}\]
+
+For example, $(\dupdown{2}{c}F)(X)$ is constructed by the following diagram in which every composable pair of parallel arrows is \emph{defined} to be a homotopy fiber sequence.
+\[\def\labelstyle{\scriptstyle}
+\xymatrix@!0@R=30pt@C=43pt{
+(\dupdown{2}{c}F)(X)\ar[d]\\
+(\dupdown{1}{c}F)(cX) \ar[rr]\ar[d]         &           &FcccX \ar[rr]\ar[d]         &           &   FcKQccX            \ar[d]  &                  \\
+(\dupdown{1}{c}F)(KQcX) \ar[rr] &                     &  FccKQcX \ar[rr] &             & FcKQcKQcX
+}\]
+In general, $(\dupdown{n+1}{c}F)(X)$ is the homotopy total fiber of an $(n+1)$-cubical diagram:
+\[(\dupdown{n+1}{c}F)(X):=\textup{hototfib} \bigl(({\plainD}_{n+1}^{\smash{\square}}F)X\bigr).\]
+See \cite{GoodwillieCalcII}, \cite{LuisGoodwillie.pdf} or \cite{CubicalHomotopyTheory.pdf} for the general theory of cubical diagrams. Before defining the cubical diagram $({\plainD}_{n+1}^{\smash{\square}}F)X$, we set notation: for $n\geq0$ let $[n]=\{0,\ldots,n\}$, and define $\calP[n]=\left\{S\subseteq [n]\right\}$ to be the poset category whose morphisms are the inclusions $S\subseteq S'$. Then an $(n+1)$-cube in $s\algcat$ is a functor $\calP[n]\to s\algcat$, and the $(n+1)$-cubical diagram $({\plainD}_{n+1}^{\smash{\square}}F)X:\calP[n]\to s\algcat$ is the functor:
+\[S\mapsto Fc(KQ)^{\chi_{n}}c(KQ)^{\chi_{n-1}}c\cdots c(KQ)^{\chi_0}cX\quad \textup{where}\quad \chi_i:=\begin{cases}
+1,&\textup{if }i\in S;\\
+0,&\textup{if }i\notin S,
+%\\,&\textup{if }
+\end{cases}
+\]
+where for $S\subseteq S'$, the map $(({\plainD}_{n+1}^{\smash{\square}}F)X)(S)\to (({\plainD}_{n+1}^{\smash{\square}}F)X)(S')$ is given by applying the counit $\eta:1\to KQ$ in those locations indexed by $S'\setminus S$.
+
+%\subsection{Relationship between the Adams tower and Radulescu-Banu's resolution}\label{sec:relnWithRB}
+
+Now Radulescu-Banu defines the homology completion of $X$ to be the totalization
+\[X\hat{\ }:=\textup{Tot}(\calX^\bullet)=\holim (\textup{Tot}_n(\calX^\bullet)),\]
+and the Bousfield-Kan spectral sequence to be the spectral sequence of the tower
+\[\cdots \to\textup{Tot}_n(\calX^\bullet)\to \textup{Tot}_{n-1}(\calX^\bullet)\to\cdots \]
+under $cX$. Our goal in this section is to prove
+\begin{prop}\label{towerIdentification}
+There is a natural zig-zag of weak equivalences of towers between $\plainD_{n+1}X$ and $\hofib(cX\to\textup{Tot}_{n}(\calX^\bullet))$. That is, up to homotopy, the $\textup{Tot}$ tower induces the Adams tower by taking fibers.
+\end{prop}
+Before giving the proof, we recall a useful relationship between cosimplicial objects and cubical diagrams, explained by Sinha in \cite[Theorem 6.5]{SinhaSpacesOfKnots.pdf}, and expanded on by Munson-Voli\'c \cite{CubicalHomotopyTheory.pdf}.
+We will only present that part of the theory that we need. There is a diagram of inclusions of categories
+\[\xymatrix@!0@R=10mm@C=13mm{
+\calP[-1]\ar[rr]^-{\tau}\ar_-{h_{-1}}[drrr]
+&&%r1c1
+\calP[0]\ar[rr]^-{\tau}\ar^(.65){\!h_{0}}[dr]
+&&%r1c2
+\calP[1]\ar[rr]^-{\tau}\ar_(.65){h_{1}\!}[dl]
+&&%r1c3
+\calP[2]\ar[rr]^-{\tau}\ar^-{h_{2}}[dlll]
+&&%r1c4
+\cdots \\
+&&&\Delta_+\!\!
+}\]
+As the coaugmented cosimplicial object $\calX^\bullet$ is Reedy fibrant (cf.\ \cite[{X.4.9}]{YellowMonster}), there are natural weak equivalences $\hofib(\calX^{-1}\to\textup{Tot}_n\calX^\bullet) \overset{\smash{\sim}}{\to} \textup{hototfib}(h_n^*(\calX^\bullet))$ under which the tower map 
+\[\hofib(\calX^{-1}\to\textup{Tot}_n\calX^\bullet)\to \hofib(\calX^{-1}\to\textup{Tot}_{n-1}\calX^\bullet)\]
+is identified with the map
+\[\textup{hototfib}(h_n^*(\calX^\bullet))\to \textup{hototfib}(\tau^*h_n^*(\calX^\bullet))=\textup{hototfib}(h_{n-1}^*(\calX^\bullet)).\]
+As $\calX^{-1}$ equals $cX$, the tower $\hofib(\calX^{-1}\to\textup{Tot}_n\calX^{\bullet})$ is one of the towers in proposition \ref{towerIdentification}.
+\begin{proof}[Proof of Proposition \ref{towerIdentification}] 
+It will suffice to construct a weak equivalence $h_n^*\calX^\bullet\to (\plainD_n^{\smash{\square}}\Id  )(X)$ of $(n+1)$-cubes. The $(n+1)$-cubical diagram $h_n^*\calX^\bullet$ is defined by
+\[(h_n^*\calX^\bullet)(S):= c(KQc)^{\chi_{n}}(KQc)^{\chi_{n-1}}\cdots (KQc)^{\chi_0}X\quad \textup{where}\quad \chi_i:=\begin{cases}
+1,&\textup{if }i\in S,\\
+0,&\textup{if }i\notin S,
+\end{cases}
+\]
+where we describe the map $(h_n^*\calX^\bullet)(S)\to (h_n^*\calX^\bullet)(S\sqcup\{i\})$, for $i\notin S$, as follows. Let $j$ be the smallest element of $S\sqcup\{n+1\}$ exceeding $i$, so that
+\[(h_n^*\calX^\bullet)(S):= \begin{cases}
+c(KQc)^{\chi_{n}}\cdots (KQc)^{\chi_{j+1}}(KQ\underline{c})(KQc)^{\chi_{i-1}}\cdots (KQc)^{\chi_0}X,&\textup{if }j\leq n;\\
+\underline{c}(KQc)^{\chi_{i-1}}\cdots (KQc)^{\chi_0}X,&\textup{if }j=n+1.
+%\\,&\textup{if }
+\end{cases}
+\]
+In the expression for either case, we have distinguished one of the applications of $c$ with an underline, and the map to $(h_n^*\calX^\bullet)(S\sqcup\{i\})$ is induced by the composite $\underline{c}\to cc\to cKQc$ of the diagonal of the comonad $c$ with the unit of the monad $KQ$. 
+
+We now define maps $(h_n^*\calX^\bullet)(S)\to (({\plainD}_{n+1}^{\smash{\square}}\Id )X)(S)$ for $S=\{j_0<j_1<\cdots<j_r\}\subset\{0,\ldots,n\}$. 
+The only difference between the domain and codomain is that in $(({\plainD}_{n+1}^{\smash{\square}}\Id )X)(S)$, all $n+2$ applications of $c$ are present, whereas in $(h_n^*\calX^\bullet)(S)$, only $r+2$ appear. The map is then
+\[\beta^{n-j_r}KQ\beta^{j_r-j_{r-1}-1}KQ\beta^{j_{r-1}-j_{r-2}-1}KQ\cdots KQ\beta^{j_{1}-j_0-1}KQ\beta^{j_0}X\]
+which is to say that we apply the iterated diagonal the appropriate number of times in each $c$ appearing in the domain. As $\beta$ is coassociative, this definition is unambiguous, and the resulting maps assemble to a weak equivalence of $(n+1)$-cubes. 
+\end{proof}
+
+\subsection{Connectivity estimates in the Adams tower}
+\label{sec:connectivityAnalysis}
+We'll now perform the necessary connectivity estimates in the Adams tower in order to prove theorem \ref{completenesstheorem}, namely:  
+%
+%We wish to prove the following connectivity result for the Adams tower:
+\begin{prop}\label{convergenceProp}
+For integers $t\geq2$ and $q\geq0$, the map $\pi_q(\dupdown{2t+q-1}{c}X)\to\pi_q(\dupdown{t}{c}X)$ is zero. \textbf{Lie algs}: $\pi_q(\dupdown{2^{q+t-1}+1}{c}X)\to\pi_q(\dupdown{t}{c}X)$
+\end{prop}
+\noindent Note that proposition \ref{towerIdentification} and \ref{convergenceProp} together imply theorem \ref{completenesstheorem}:
+\begin{proof}[Proof of theorem \ref{completenesstheorem}]
+The fiber sequences $\dupdown{n+1}{c}X\to cX\to \textup{Tot}_n\calX^\bullet$ fit together into a tower of fiber sequences. Taking homotopy limits, one obtains a fiber sequence
+\[\holim (\dupdown{n}{c}X)\to cX\to X\hat{\ }.\]
+We need to show that $\holim (\dupdown{n}{c}X)$ has zero homotopy groups.
+We may replace the tower $\dupdown{n}{c}X$ with a weakly equivalent tower of fibrations in $s\algcat$ whose set-theoretic inverse limit is the homotopy limit in question. Applying \cite[Proposition 6.14]{goerss-jardine.pdf} to the new tower, there is a short exact sequence
+\[0\to \textup{lim}^1\pi_{q+1}(\dupdown{n}{c}X)\to \pi_q(\holim (\dupdown{n}{c}X))\to \textup{lim}\,\pi_{q}(\dupdown{n}{c}X)\to 0.\]
+Proposition \ref{convergenceProp} implies that for each $q$, the tower $\{\pi_{q}(\dupdown{n}{c}X)\}$ has zero inverse limit, and satisfies the Mittag-Leffler condition (cf.\ \cite[p.264]{YellowMonster}), so that the $\textup{lim}^1$ groups appearing also vanish.
+\end{proof}
+The application of the complicated cofibrant replacement functor $c$ adds to the difficulty of proving the connectivity estimates of With an eye to proving proposition \ref{convergenceProp} , we circumvent the difficulty of working with the functor $c$ by shifting to the standard bar construction $B^{\algCat}$ on $s\algCat$. We'll use the abbreviation $\barConstructionMightAbbreviate $ for $B^{\algCat}$.
+
+Define recursively a somewhat less homotopical version $\caldup{s}F$ of the derivations $\dupdown{s}{}F$:
+\begin{alignat*}{2}
+(\caldup{0}F)(X)
+&:=
+F(X)%
+\\
+(\caldup{s}F)(X)
+&:=
+\ker((\caldup{s-1}F)(\barConstructionMightAbbreviate X)\xrightarrow{(\caldup{s-1}F)(\eta_{\barConstructionMightAbbreviate X})} (\caldup{s-1}F)(KQ\barConstructionMightAbbreviate X))
+\end{alignat*}
+There are three differences between this definition and that of $\plainD_sF$: here, there is one fewer cofibrant replacement applied, we use the bar construction $\barConstructionMightAbbreviate $ instead of the small object argument functor $c$, and we take \emph{strict} fibers, not homotopy fibers.
+While these functors are not generally homotopical, we define \emph{the modified Adams tower of $X$} to be the tower
+\[\xymatrix@R=4mm{
+\cdots 
+\ar[r]^{\delta}
+&%r1c1
+\caldup{2}X
+\ar[r]^{\delta}
+&%r1c3
+%r1c4
+\caldup{1}X
+\ar[r]^{\delta}&%r1c5
+\caldup{0}X\makebox[0cm][l]{${}=X$,}
+}\]
+where $\caldup{s}X$ is again shorthand for $(\caldup{s}\Id )X$, and the tower maps $\delta$ are defined as before.
+\begin{prop}\label{prop:modifiedAdamsTower}
+There's a natural zig-zag of weak equivalences of towers between the Adams tower of $X$ and the modified Adams tower of $X$. In particular, the modified Adams tower is homotopical.
+\end{prop}
+\begin{proof}
+Let $\mathsf{CR(s\algcat)}$ be the category of cofibrant replacement functors in $s\algcat$. That is, an object of $\mathsf{CR(s\algcat)}$ is a pair, $(f,\epsilon)$, such that $f:s\algcat\to s\algcat$ is a functor whose image consists only of cofibrant objects, and $\epsilon:f\Rightarrow \Id $ is a natural acyclic fibration. Morphisms in $\mathsf{CR(s\algcat)}$ are natural transformations which commute with the augmentations. For any $(f,\epsilon)\in\mathsf{CR(s\algcat)}$ we obtain an alternative definition of the derivations of a functor $F:s\algcat\to s\algcat$:
+\begin{alignat*}{2}
+(\plainD_{\smash{0}}^{\smash{f}}F)(X)
+:=
+F(fX),\quad %
+(\plainD_{\smash{s}}^{\smash{f}}F)(X)
+:=
+\hofib((\plainD_{\smash{s-1}}^{\smash{f}}F)(fX)\to (\plainD_{\smash{s-1}}^{\smash{f}}F)(KQfX)).
+\end{alignat*}
+These functors are natural in $f$, so that a morphism in $\mathsf{CR(s\algcat)}$ induces a weak equivalence of towers. Our proposed zig-zag of towers is: 
+\[\plainD_{\smash{s}}= \plainD_{\smash{s}}^{\smash{c}}\Id \overset{}{\from}\plainD_{\smash{s}}^{\smash{\barConstructionMightAbbreviate \circ c}}\Id \overset{}{\to}\plainD_{\smash{s}}^{\smash{\barConstructionMightAbbreviate }}\Id \overset{\gamma_s}{\from}\caldup{s}\barConstructionMightAbbreviate \overset{\caldup{s}\epsilon}{\to}\caldup{s}\Id =\caldup{s}\]
+The maps with domain $\plainD_{\smash{s}}^{\smash{\barConstructionMightAbbreviate \circ c}}\Id $ are induced by the maps $\epsilon c:\barConstructionMightAbbreviate \circ c\to c$ and $\barConstructionMightAbbreviate \epsilon:\barConstructionMightAbbreviate \circ c\to \barConstructionMightAbbreviate $ and are evidently natural weak equivalences of towers. The map $\gamma_0:(\caldup{0}\barConstructionMightAbbreviate )X\to (\plainD_{\smash{0}}^{\smash{\barConstructionMightAbbreviate }}\Id )X$ is the identity of $\barConstructionMightAbbreviate X$, and the map $\caldup{0}\epsilon:(\caldup{0}\barConstructionMightAbbreviate )X\to (\plainD_{\smash{0}}^{\smash{\barConstructionMightAbbreviate }}\Id )X$ is $\epsilon:\barConstructionMightAbbreviate X\to X$. Thereafter, $\gamma_s$ and $\caldup{s}\epsilon$ are defined recursively:
+\[\qquad \quad \xymatrix@R=4mm{
+\makebox[0cm][r]{$(\caldup{s+1}\Id )X:=\,$}\makebox[5cm][l]{$\,\ker((\caldup{s}\Id )(\barConstructionMightAbbreviate X)\to (\caldup{s}\Id )(KQ\barConstructionMightAbbreviate X))$}\\
+\makebox[0cm][r]{$(\caldup{s+1}\barConstructionMightAbbreviate )X:=\,$}\makebox[5cm][l]{$\,\ker((\caldup{s}\barConstructionMightAbbreviate )(\barConstructionMightAbbreviate X)\to (\caldup{s}\barConstructionMightAbbreviate )(KQ\barConstructionMightAbbreviate X))$}\ar[d]^-{\textup{incl.}}_-{}%m_2}
+\ar[u]_-{\textup{induced by }(\caldup{s}\epsilon,\caldup{s}\epsilon)}^-{}%m_1}
+\\%r1c1
+\makebox[5cm][l]{$\,\hofib((\caldup{s}\barConstructionMightAbbreviate )(\barConstructionMightAbbreviate X)\to(\caldup{s}\barConstructionMightAbbreviate )(KQ\barConstructionMightAbbreviate X))$}\ar[d]^-{\textup{induced by }(\gamma_{s},\gamma_{s})}_-{}%m_3}
+\\%r2c1
+\makebox[0cm][r]{$(\plainD_{\smash{s+1}}^{\smash{\barConstructionMightAbbreviate }})X:=\,$}\makebox[5cm][l]{$\,\hofib((\plainD_{\smash{s}}^{\smash{\barConstructionMightAbbreviate }}\Id )(\barConstructionMightAbbreviate X)\to (\plainD_{\smash{s}}^{\smash{\barConstructionMightAbbreviate }}\Id )(KQ\barConstructionMightAbbreviate X))$}%r3c1
+}\]
+\noindent Lemma \ref{towerWithPowers} shows that the kernels taken are actually kernels of surjective maps, and by induction on $s$, the maps $\gamma_s$ and $\caldup{s}\epsilon$ are weak equivalences.
+\end{proof}
+The connectivity result will rely on the observation that any element in the $s^\textup{th}$ level of the modified tower maps down to an $(s+1)$-fold product in $X$. In order to formalise this, let $P^s:s\algcat\to s\algcat$ be the ``$s^\textup{th}$ power'' functor, the prolongation of the endofunctor $Y\mapsto Y^s$ of $\algcat$, where $Y^s=\textup{im}(\textup{mult}:Y^{\otimes s}\to Y)$. [\textbf{For Lie algs}, $P^s=\Gamma^s$, the $s^\textup{th}$ term in the lower central series] Then we have:
+\begin{lem}\label{towerWithPowers}
+The functors $\caldup{r}$, $\caldup{r}\barConstructionMightAbbreviate $ and $\caldup{r}P^{s}$ preserve surjective maps and there is a commuting diagram of functors:
+\[\xymatrix@R=4mm{
+\cdots 
+\ar[r]
+&%r1c1
+\caldup{r}
+\ar[r]
+\ar[d]
+&%r1c2
+\cdots \ar[r]
+&%r1c4
+\caldup{2}
+\ar[r]
+\ar[d]
+&%r1c4
+\caldup{1}
+\ar[r]
+\ar[d]&%r1c5
+\caldup{0}
+\ar@{=}[d]
+\\%r1c6
+\cdots
+\ar@{ >->}[r]
+&%r2c1
+P^{r+1}
+\ar@{ >->}[r]
+&%r2c3
+\cdots 
+\ar@{ >->}[r]&%r2c4
+P^3
+\ar@{ >->}[r]
+&P^2
+\ar@{ >->}[r]
+&%r2c5
+\Id %r2c6
+}\]
+\end{lem}
+\begin{proof}
+
+Suppose that $X$ is a simplicial algebra. Then $\caldup{r}X$
+is constructed as the subalgebra
+\[\caldup{r}X:= \bigcap_{i=1}^{r}\ker\!\left(\barConstructionMightAbbreviate^{r-i}\eta \barConstructionMightAbbreviate^{i}:\barConstructionMightAbbreviate^{r}X\to \barConstructionMightAbbreviate^{r-i}KQ\barConstructionMightAbbreviate^{i}X\right)\]
+of $\barConstructionMightAbbreviate^rX$. In dimension $n$, this is the following subset of $(\barConstructionMightAbbreviate^rX)_n:=(F^{n+1})^rX_n$:
+\[(\caldup{r}X)_n:=\bigcap_{i=1}^{r}\ker\!\left(F^{(r-i)(n+1)}\eta F^{i(n+1)}:(F^{n+1})^rX_n\to (F^{n+1})^{r-i}KQ(F^{n+1})^iX_n\right)\]
+Where we have written $F$ for $F^{\algcat}$.
+The $r$ conditions on elements of $(\caldup{r}X)_n$ ensure that their image in $(\caldup{0}X)_n=X_n$ under the iterated tower map is a sum of $(r+1)$-fold products. This completes the construction of the tower of functors.
+
+[\textbf{Reformulate for generalizability:} isn't it just that except for simplicial structure you don't see more than a vector space?] In order to prove the surjectivity statements, we must describe the iterated free construction $F^{r(n+1)}X_n$. A basis of $FX_n$ may be given by the \emph{monomials} in a basis of $X_n$, and $F^{r(n+1)}X_n$ has basis given by taking monomials iteratively, $r(n+1)$ times. The subset $(\caldup{r}X)_n$ has basis those iterated monomials in which the monomials formed in the $((n+1)i)^\textup{th}$ iteration have degree at least two for each $1\leq i\leq r$. This simple description of a basis of $(\caldup{r}X)_n$ shows that $\caldup{r}$ preserves surjections. Similar analysis applies to $\caldup{r}\barConstructionMightAbbreviate $ and $\caldup{r}P^s$.
+\end{proof}
+We are now able to state and prove the key connectivity result:
+\begin{lem}\label{connectivityOfDerivedPowers}
+For any connected $A\in s\algs$, and any $t\geq1$ and $s\geq2$, $(\caldup{t}P^{s})(A)$ is $(s-t)$-connected.
+For any connected $A\in s\Lambda(\LieOperad)$, and any $t\geq1$ and $s\geq2$, $(\caldup{t}P^{s})(A)$ is $(\log_2(s)+1-t)$-connected.
+\end{lem}
+\begin{proof}
+We will prove this by induction on $t$. The induction step is simple: %Now let $t\geq2$ and suppose by induction that $(\caldup{t-1}P^{s})(B)$ is $(s-(t-1))$-connected for any connected $B$ and any $s\geq2$. Then 
+by lemma \ref{towerWithPowers}, there's a short exact sequence:
+\[\xymatrix{
+0\ar[r]&
+(\caldup{t}P^{s})(A)\ar[r]&
+(\caldup{t-1}P^{s})(\barConstructionMightAbbreviate A)\ar[r]&
+(\caldup{t-1}P^{s})(Q\barConstructionMightAbbreviate A)\ar[r]&
+0.
+}\]
+Now both $bA$ and $QbA$ are connected, as they have $\pi_0(bA)=\pi_*(A)$ is zero by assumption, and $\pi_0(QbA)=Q\pi_*(A)$. By induction we can bound the connectivity of $(\caldup{t-1}P^{s})(\barConstructionMightAbbreviate A)$ and $(\caldup{t-1}P^{s})(Q\barConstructionMightAbbreviate A)$, and the associated long exact sequence shows that $(\caldup{t}P^{s})(A)$ has a connectivity bound at most one degree worse.
+
+
+When $t=1$:
+\[(\caldup{1}P^{s})A:=\ker(P^{s}(\barConstructionMightAbbreviate A)\to P^{s}(Q\barConstructionMightAbbreviate A))=P^{s}(\barConstructionMightAbbreviate A),\]
+as $P^s(Q\DASH)=0$ for $s\geq2$. We must demonstrate that $P^s(\barConstructionMightAbbreviate A)$ is $(s-1)$-connected. For this we use a truncation of Quillen's fundamental spectral sequence, as presented in \cite[Thm 6.2]{MR1089001}: the filtration
+\[P^s(\barConstructionMightAbbreviate A)\supset P^{s+1}(\barConstructionMightAbbreviate A)\supset P^{s+2}(\barConstructionMightAbbreviate A)\supset\cdots \]
+of $P^s(\barConstructionMightAbbreviate A)$ yields a convergent spectral sequence  $E^0_{p,q}\implies \pi_q(P^s(\barConstructionMightAbbreviate a))$, with:
+\[E^0_{p,q}=N_q\bigl(P^{p}(\barConstructionMightAbbreviate A)/P^{p+1}(\barConstructionMightAbbreviate A)\bigr)\textup{ if $p\geq s$, and }E^0_{p,q}=0\textup{ if $p<s$.}\]
+Examination of the structure of $\barConstructionMightAbbreviate A$ reveals that $P^{p}(\barConstructionMightAbbreviate A)/P^{p+1}(\barConstructionMightAbbreviate A)\cong (Q\barConstructionMightAbbreviate A)^{\otimes p}_{\Sigma_p}$, and moreover, $Q\barConstructionMightAbbreviate A$ is a connected simplicial vector space, as $\pi_0(Q\barConstructionMightAbbreviate A)=Q(\pi_0\barConstructionMightAbbreviate A)=Q(0)=0$. The $t=1$ case now follows from \cite[Satz 12.1]{DoldPuppeSuspension.pdf}: if $V$ is a connected simplicial vector space then $V^{\otimes p}_{\Sigma_p}$ is $(p-1)$-connected. \textbf{[Lie algebras:} a modification \cite[4.3]{6Author.pdf} of a theorem of Curtis \cite[\S5]{Curtis_LCS.pdf}]
+\end{proof}
+Before we can give the proof of proposition \ref{convergenceProp}, we need the following \emph{twisting lemma}, analogous to that of \cite{BK_pairings.pdf}. Before stating it, we note that $(\caldup{s}\caldup{t})X$ and $\caldup{s+t}X$ are equal by construction.
+\begin{lem}
+\label{DsDt=Dt+s}
+The maps $\caldup{i}\delta:\caldup{n}X\to \caldup{n-1}X$ are homotopic for $0\leq i< n$.
+\end{lem}
+\begin{proof}
+We may reindex the twisting lemma as follows: the maps 
+\[\caldup{s}\delta,\caldup{s-1}\delta:\caldup{s+t}X\to \caldup{s+t-1}X\]
+are homotopic whenever $s,t\geq1$. Now $\caldup{s+t}X$ is constructed as the subalgebra
+\[\caldup{s+t}X:= \bigcap_{i=1}^{s+t}\ker\!\left(\barConstructionMightAbbreviate^{s+t-i}\eta \barConstructionMightAbbreviate^{i}:\barConstructionMightAbbreviate^{s+t}X\to \barConstructionMightAbbreviate^{s+t-i}KQ\barConstructionMightAbbreviate^{i}X\right)\]
+of the iterated bar construction $\barConstructionMightAbbreviate^{s+t}X$, and for $0\leq i<s+t$, $\caldup{i}\delta$ is the restriction of the map $\barConstructionMightAbbreviate^i\epsilon \barConstructionMightAbbreviate^{s+t-i-1}:\barConstructionMightAbbreviate^{s+t}X\to \barConstructionMightAbbreviate^{s+t-1}X$.
+Proposition \ref{IteratedBarConstructionHomotopy} gives an explicit simplicial homotopy between the maps $\barConstructionMightAbbreviate^s\epsilon \barConstructionMightAbbreviate^{t-1}$ and $\barConstructionMightAbbreviate^{s-1}\epsilon \barConstructionMightAbbreviate^{t}$. Moreover, the naturality of the construction of proposition \ref{IteratedBarConstructionHomotopy} implies that this homotopy does indeed restrict to a homotopy of maps $\caldup{s+t}X\to \caldup{s+t-1}X$.
+\end{proof}
+
+
+Now that we have the twisting lemma, Proposition \ref{convergenceProp} follows:
+\begin{proof}[Proof of Proposition \ref{convergenceProp}]
+By proposition \ref{prop:modifiedAdamsTower}, it is enough to prove that $\pi_q(\caldup{2t+q-1}X)\to\pi_q(\caldup{t}X)$ is zero.
+Apply $\caldup{t}\DASH$ to the diagram of functors constructed in \ref{towerWithPowers} and apply the result to $X$ to obtain a commuting diagram of functors
+\[\xymatrix@R=4mm{
+\caldup{2t+q-1}X
+\ar[r]^-{\caldup{t}\delta}
+\ar[d]
+&
+\cdots \ar[r]^-{\caldup{t}\delta}
+&%r1c4
+\caldup{t+1}X
+\ar[r]^-{\caldup{t}\delta}
+\ar[d]&%r1c5
+\caldup{t}X
+\ar@{=}[d]
+\\%r1c6
+\caldup{t}P^{t+q}X
+\ar[r]
+&%r2c3
+\cdots 
+\ar[r]&%r2c4
+\caldup{t}P^2X
+\ar[r]
+&%r2c5
+\caldup{t}P^1X%r2c6
+}\]\textbf{for Lie algebras:}
+\[\xymatrix@R=4mm{
+\caldup{2^{q+t-1}+1}X
+\ar[r]^-{\caldup{t}\delta}
+\ar[d]
+&
+\cdots \ar[r]^-{\caldup{t}\delta}
+&%r1c4
+\caldup{t+1}X
+\ar[r]^-{\caldup{t}\delta}
+\ar[d]&%r1c5
+\caldup{t}X
+\ar@{=}[d]
+\\%r1c6
+\caldup{t}P^{2^{q+t-1}}X
+\ar[r]
+&%r2c3
+\cdots 
+\ar[r]&%r2c4
+\caldup{t}P^2X
+\ar[r]
+&%r2c5
+\caldup{t}P^1X%r2c6
+}\]
+By the twisting lemma, \ref{DsDt=Dt+s}, the composite along the top row is homotopic to the map of interest, and factors through $(\caldup{t}P^{t+q})(A)$, which is $q$-connected by lemma \ref{connectivityOfDerivedPowers}.
+\end{proof}
+
+\subsection{Iterated simplicial bar constructions}\label{sec:ItSimpBar}
+
+
+We will state and prove a useful result on iterated simplicial bar constructions, used in the proof of the twisting lemma. The result here applies in general in the category $\calC$ of algebras over a monad. Establishing notation, for any simplicial object $X$ in $\algCat$, we'll write 
+\[\trip{d}{i,q}{X}:X_q\to X_{q-1}\textup{\ and\ }\trip{s}{i,q}{X}:X_q\to X_{q+1}\]
+for the $i^\textup{th}$ face and degeneracy maps out of $X_q$. Suppose that $G$ and $G'$ are endofunctors of $\algCat$, that $\Phi:G\to G'$ is a natural transformation, and that $C,C'\in\algCat$ are objects. Write $[\Phi]:\hom_{\algCat}(C,C')\to\hom_{\algCat}(GC,G'C')$ for the operator sending $m:C\to C'$ to the diagonal composite in the commuting square
+\[\xymatrix@R=4mm{
+GC
+\ar[r]^-{\Phi_C}
+\ar[d]_-{Gm}
+\ar[dr]|-{[\Phi]m}
+&%r1c1
+G'C
+\ar[d]^-{G'm}
+\\%r1c2
+GC'
+\ar[r]_-{\Phi_{C'}}
+&%r2c1
+G'C'
+%r2c2
+}\]
+There is an (augmented) simplicial endofunctor, $\frakb\in s({\algCat}^{\algCat})$, derived from the unit and counit of the adjunction:
+\[\vcenter{
+\def\labelstyle{\scriptstyle}
+\xymatrix@C=2cm@1{
+{\ \Id\,}
+&
+\,(F^{\algCat})^1\,
+\ar@{-->}[l]|(.65){\frakd_{0,0}}
+\ar[r]|(.65){\fraks_{0,0}}
+&
+\,(F^{\algCat})^2\,
+\ar@<-1ex>[l]|(.65){\frakd_{0,1}}
+\ar@<+1ex>[l]|(.65){\frakd_{1,1}}
+\ar@<+1ex>[r]|(.65){\fraks_{0,1}}
+\ar@<-1ex>[r]|(.65){\fraks_{1,1}}
+&
+\,(F^{\algCat})^3\,\makebox[0cm][l]{\,$\cdots $}
+\ar[l]|(.65){\frakd_{1,2}}
+\ar@<-2ex>[l]|(.65){\frakd_{0,2}}
+\ar@<+2ex>[l]|(.65){\frakd_{2,2}}
+%\ar[r]|(.65){\fraks_{1,2}}
+%\ar@<+2ex>[r]|(.65){\fraks_{0,2}}
+%\ar@<-2ex>[r]|(.65){\fraks_{2,2}}
+%&
+%\,(F^{\algCat})^4\,\makebox[0cm][l]{\,$\cdots $}
+%\ar@<-3ex>[l]|(.65){\frakd_{0,3}}
+%\ar@<-1ex>[l]|(.65){\frakd_{1,3}}
+%\ar@<+1ex>[l]|(.65){\frakd_{2,3}}
+%\ar@<+3ex>[l]|(.65){\frakd_{3,3}}
+}}\]
+The simplicial bar construction $\barConstructionMightAbbreviate =B^{\algCat}$ on $s\algCat$ is the diagonal of the bisimplicial object obtained by levelwise application of $\frakb$. That is, for $X\in s\algCat$, $\barConstructionMightAbbreviate X$ is the simplicial object with $(\barConstructionMightAbbreviate X)_q:=(F^{\algCat})^{q+1}X_q$, and with
+\[\trip{d}{i,q}{\barConstructionMightAbbreviate X}:=[\frakd_{i,q}]\trip{d}{i,q}{X}.\]
+The augmentation $\epsilon:\barConstructionMightAbbreviate \to \Id $ is defined on level $q$ by 
+\[\epsilon_q=\frakd_{0,0}\frakd_{0,1}\cdots \frakd_{0,q}:(F^{\algCat})^{q+1}\to \Id .\]
+We can now construct the simplicial homotopy needed for the twisting lemma, \ref{DsDt=Dt+s}.
+\begin{prop}\label{IteratedBarConstructionHomotopy}
+The natural transformations $\epsilon_\barConstructionMightAbbreviate $ and $\barConstructionMightAbbreviate \epsilon$ from $\barConstructionMightAbbreviate ^2:s\algcat\to s\algcat$ to $\barConstructionMightAbbreviate :s\algcat\to s\algcat$ are naturally simplicially homotopic.
+\end{prop}
+
+\begin{proof}
+Write $K=\barConstructionMightAbbreviate ^{2}X$ and $L=\barConstructionMightAbbreviate X$ for the source and target of these maps respectively. Noting the formulae
+\[[\frakd_{iq}]^2= [\frakd_{q+i,2q}\circ\frakd_{i,2q+1}]\ \textup{and}\  [\fraks_{iq}]^2= [\fraks_{q+i+2,2q+2}\circ\fraks_{i,2q+1}],\]
+we can describe the simplicial structure maps in $K$ and $L$ as follows:
+\begin{alignat*}{2}
+\trip{d}{iq}{L}&=[\frakd_{iq}]\trip{d}{iq}{X}\\
+\trip{s}{iq}{L}&=[\fraks_{iq}]\trip{s}{iq}{X}\\
+\trip{d}{iq}{K}&=[\frakd_{q+i,2q}\circ\frakd_{i,2q+1}]\trip{d}{iq}{X}\\
+\trip{s}{iq}{K}&=[\fraks_{q+i+2,2q+2}\circ\fraks_{i,2q+1}]\trip{s}{iq}{X}
+\end{alignat*}
+We can now state an explicit simplicial homotopy between the two maps of interest. Using precisely the notation of \cite[\S5]{MaySimpObj.pdf}, we define $\trip{h}{jq}{}:K_q\to L_{q+1}$, for $0\leq j\leq q$, by the formula
+\[\trip{h}{jq}{}:=[\frakd_{j+1,q+2}\circ\cdots \circ\frakd_{j+1,2q+1}]\trip{s}{jq}{X}.\]
+We first check that these maps satisfy the defining identities for the notion of simplicial homotopy, numbered (1)-(5) as in \cite[\S5]{MaySimpObj.pdf}. Each identity can be checked in two parts (a)-(b):
+{\renewcommand{\circ}{\relax}
+\begin{enumerate}\squishlist
+\setlength{\parindent}{.25in}
+\item We must check that $\trip{d}{i,q+1}{L}\circ \trip{h}{j,q}{}=\trip{h}{j-1,q-1}{}\circ \trip{d}{i,q}{K}$ whenever $0\leq i<j\leq q$, i.e.:
+\begin{enumerate}\squishlist
+\setlength{\parindent}{.25in}
+\item[({\makebox[.51em][c]{a}})] $\trip{d}{i,q+1}{X}\circ \trip{s}{j,q}{X}=\trip{s}{j-1,q-1}{X}\circ \trip{d}{i,q}{X}$,\textup{ and}%$\trip{\frakd}{i,q+1}{}\circ \trip{\fraks}{j,q}{}=\trip{\fraks}{j-1,q-1}{}\circ \trip{\frakd}{i,q}{}$
+\item[({\makebox[.51em][c]{b}})]
+$\frakd_{i,q+1}\circ
+\frakd_{j+1,q+2}\circ\cdots \circ\frakd_{j+1,2q+1}=
+\frakd_{j,q+1}\circ\cdots \circ\frakd_{j,2q-1}\circ
+\frakd_{q+i,2q}\circ\frakd_{i,2q+1}$.
+\end{enumerate}
+\item We must check that $\trip{d}{j+1,q+1}{L}\circ \trip{h}{j,q}{}=\trip{d}{j+1,q+1}{L}\circ \trip{h}{j+1,q}{}$ whenever $0\leq j\leq q-1$, i.e.:
+\begin{enumerate}\squishlist
+\setlength{\parindent}{.25in}
+\item[({\makebox[.51em][c]{a}})] $\trip{d}{j+1,q+1}{X}\circ \trip{s}{j,q}{X}=\trip{d}{j+1,q+1}{X}\circ \trip{s}{j+1,q}{X}$,\textup{ and}%$\trip{\frakd}{j+1,q+1}{}\circ \trip{\fraks}{j,q}{}=\trip{\frakd}{j+1,q+1}{}\circ \trip{\fraks}{j+1,q}{}$
+\item[({\makebox[.51em][c]{b}})]
+$\frakd_{j+1,q+1}\circ
+\frakd_{j+1,q+2}\circ\cdots \circ\frakd_{j+1,2q+1}=
+\frakd_{j+1,q+1}\circ
+\frakd_{j+2,q+2}\circ\cdots \circ\frakd_{j+2,2q+1}$.
+\end{enumerate}
+\item We must check that $\trip{d}{i,q+1}{L}\circ \trip{h}{j,q}{}=\trip{h}{j,q-1}{}\circ \trip{d}{i-1,q}{K}$ whenever $0\leq j<i-1\leq q$, i.e.:
+\begin{enumerate}\squishlist
+\setlength{\parindent}{.25in}
+\item[({\makebox[.51em][c]{a}})] $\trip{d}{i,q+1}{X}\circ \trip{s}{j,q}{X}=\trip{s}{j,q-1}{X}\circ \trip{d}{i-1,q}{X}$,\textup{ and}%$\trip{\frakd}{i,q+1}{}\circ \trip{\fraks}{j,q}{}=\trip{\fraks}{j,q-1}{}\circ \trip{\frakd}{i-1,q}{}$
+\item[({\makebox[.51em][c]{b}})] 
+$\frakd_{i,q+1}\circ
+\frakd_{j+1,q+2}\circ\cdots \circ\frakd_{j+1,2q+1}=
+\frakd_{j+1,q+1}\circ\cdots \circ\frakd_{j+1,2q-1}\circ
+\frakd_{q+i-1,2q}\circ\frakd_{i-1,2q+1}$.
+\end{enumerate}
+\item We must check that $\trip{s}{i,q+1}{L}\circ \trip{h}{j,q}{}=\trip{h}{j+1,q+1}{}\circ \trip{s}{i,q}{K}$ whenever $0\leq i\leq j\leq q$, i.e.:
+\begin{enumerate}\squishlist
+\setlength{\parindent}{.25in}
+\item[({\makebox[.51em][c]{a}})] $\trip{s}{i,q+1}{X}\circ \trip{s}{j,q}{X}=\trip{s}{j+1,q+1}{X}\circ \trip{s}{i,q}{X}$,\textup{ and}%$\trip{\fraks}{i,q+1}{}\circ \trip{\fraks}{j,q}{}=\trip{\fraks}{j+1,q+1}{}\circ \trip{\fraks}{i,q}{}$
+\item[({\makebox[.51em][c]{b}})] 
+$\fraks_{i,q+1}\circ
+\frakd_{j+1,q+2}\circ\cdots \circ\frakd_{j+1,2q+1}=
+\frakd_{j+2,q+3}\circ\cdots \circ\frakd_{j+2,2q+3}\circ
+\fraks_{q+i+2,2q+2}\circ\fraks_{i,2q+1}$.
+\end{enumerate}
+\item We must check that $\trip{s}{i,q+1}{L}\circ \trip{h}{j,q}{}=\trip{h}{j,q+1}{}\circ \trip{s}{i-1,q}{K}$ whenever $0\leq j<i\leq q+1$, i.e.:
+\begin{enumerate}\squishlist
+\setlength{\parindent}{.25in}
+\item[({\makebox[.51em][c]{a}})] $\trip{s}{i,q+1}{X}\circ \trip{s}{j,q}{X}=\trip{s}{j,q+1}{X}\circ \trip{s}{i-1,q}{X}$,\textup{ and}%$\trip{\fraks}{i,q++1}{}\circ \trip{\fraks}{j,q}{}=\trip{\fraks}{j,q+1}{}\circ \trip{\fraks}{i-1,q}{}$
+\item[({\makebox[.51em][c]{b}})] 
+$\fraks_{i,q+1}\circ
+\frakd_{j+1,q+2}\circ\cdots \circ\frakd_{j+1,2q+1}=
+\frakd_{j+1,q+3}\circ\cdots \circ\frakd_{j+1,2q+3}\circ
+\fraks_{q+i+1,2q+2}\circ\fraks_{i-1,2q+1}$.
+\end{enumerate}
+\end{enumerate}
+\noindent Each of these equations follows from the simplicial identities, proving that the $h_{jq}$ form a homotopy. 
+Finally, we check that this homotopy is indeed a homotopy between the two maps of interest:
+\begin{alignat*}{2}
+\trip{d}{0,q+1}{L}\trip{h}{0,q}{}
+&=
+[\frakd_{0,q+1}\frakd_{1,q+2}\circ\cdots \circ\frakd_{1,2q+1}](\trip{d}{0,q+1}{X}\trip{s}{0q}{X})%
+\\
+&=
+[\frakd_{0,q+1}\frakd_{0,q+2}\circ\cdots \circ\frakd_{0,2q+1}]\trip{\textup{id}}{X_q}{}%
+\end{alignat*}
+is the action of  $\epsilon_{(\barConstructionMightAbbreviate X)}$ in level $q$, and similarly,
+\begin{alignat*}{2}
+\trip{d}{q+1,q+1}{L}\trip{h}{q,q}{}
+&=
+[\frakd_{q+1,q+1}\frakd_{q+1,q+2}\circ\cdots \circ\frakd_{q+1,2q+1}](\trip{d}{q+1,q+1}{X}\trip{s}{qq}{X})
+\\
+&=
+[\frakd_{q+1,q+1}\frakd_{q+1,q+2}\circ\cdots \circ\frakd_{q+1,2q+1}]\trip{\textup{id}}{X_q}{}%
+\end{alignat*}
+is the action of $\barConstructionMightAbbreviate \epsilon_{X}$ in level $q$.
+}%end "don't print \circ"
+\end{proof}
+
+\end{Bousfield-Kan spectral sequence}
 
 \begin{Constructing (co)homotopy operations}
 \vfil\pagebreak
@@ -1697,7 +2382,7 @@ $F^{\algs}V$
 generated by $V$ under the operations of proposition \ref{omnibus on coh of simp algs}, it is as large as is conceivable given the relations presented. We will present in proposition \ref{partialgoerss} a partial version of his result.
 
 It is  interesting to observe that $\Palg$, the Steenrod algebra for commutative algebras is
-in fact \emph{Koszul dual}, in the sense of \cite{PriddyKoszul.pdf}, to $\deltaalg$, the algebra which (almost) acts on the homotopy of a simplicial algebra. Indeed, Goerss \emph{calculates} $\Palg$ as the Koszul dual of $\deltaalg$, by means of calculations in a reverse Adams spectral sequence due to Miller \cite{MillerSullivanConjecture.pdf}. We will explore this relationship further when we consider the Adams spectral sequence.
+in fact \emph{Koszul dual}, in the sense of \cite{PriddyKoszul.pdf}, to $\deltaalg$, the algebra which (almost) acts on the homotopy of a simplicial algebra. Indeed, Goerss \emph{calculates} $\Palg$ as the Koszul dual of $\deltaalg$, by means of calculations in a reverse Adams spectral sequence due to Miller \cite{MillerSullivanConjecture.pdf}. We will explore this relationship further when we consider the Bousfield-Kan spectral sequence.
 
 \subsection{The categories $\calW(0)$ and $\calU(0)$}
 Suppose that $A\in s\algs$ is \emph{connected}: $\pi_0A=0$. Then $H^0_{\algs}=Q^{\algs}\pi_0A=0$. It is advantageous to work with the cohomology of connected objects, as we do not need to worry about the operation $\beta$. If we say that $V\in \vect{1}{}$ is \emph{connected} when $V^{0}=0$, we may identify the full subcategory of $\vect{1}{}$ on the connected objects with $\vect{+}{}$.
@@ -1831,669 +2516,7 @@ One checks that the bracket is well defined in the quotient, and that taking the
 
 
 \end{Constructing (co)homotopy operations}
-\begin{Bousfield-Kan spectral sequence}
-\section{\textbf{The Bousfield-Kan spectral sequence for \cancel{simplicial} algebras}}\label{Bousfield-Kan spectral sequence}
-\subsection{Completion with respect to homology}
-Suppose that $X\in s\algcat$. Then Radulescu-Banu \cite{Radulescu-Banu.pdf} has constructed a cosimplicial resolution $\calX^\bullet$ of $X$ by generalised Eilenberg-Mac Lane objects, and defined the \emph{completion of $X$ with respect to Andr\'e-Quillen homology} to be the totalization $X\hat{\ }:=\textup{Tot}(\calX^\bullet)$.
 
-Indeed, Radulescu-Banu constructed \cite{Radulescu-Banu.pdf} the comonad diagonal $\beta:c\to cc$, already used in \S\ref{homology and Hcoalgs}, specifically to define the coface maps in a (coaugmented) cosimplicial object:
-\[\makebox[0cm][r]{\,$\calX^\bullet:\qquad $}\vcenter{
-\def\labelstyle{\scriptstyle}
-\xymatrix@C=1.5cm@1{
-cX\,
-\ar@{..>}[r]
-&
-\,cKQcX\,
-\ar[r];[]
-&
-\,c(KQc)^2X\,
-\ar@<-.65ex>[l];[]
-\ar@<+.65ex>[l];[]
-\ar@<+.65ex>[r];[]
-\ar@<-.65ex>[r];[]
-&
-\,c(KQc)^3X\,\makebox[0cm][l]{\,$\cdots. $}
-\ar[l];[]
-\ar@<-1.3ex>[l];[]
-\ar@<+1.3ex>[l];[]
-}}\]
-The construction is explained and generalized by Blumberg and Riehl \cite{BlumRiehlResolutions.pdf}. [\textbf{`better be homotopical'}]The definition of the coface and codegeneracy maps is similar to that in the monadic resolution of $X$ using the adjunction $Q\dashv K$, however, the coface maps must create an extra copy of $c$, and the codegeneracies must destroy a copy.  Instead of simply using the unit and counit of the adjunction respectively, one uses the composites discussed in \S\ref{homology and Hcoalgs}:
-\[c\overset{\beta}{\to}cc\overset{c\eta c}{\to}cKQc\textup{\quad and\quad }QcK\overset{Q\epsilon K}{\to}QK\to \textup{id}.\]
-
-
-There is a natural zig-zag $X\overset{\sim}{\from} cX\to X\hat{\ }$, and one says that $X$ is \emph{complete with respect to Andr\'e-Quillen homology} when the map $cX\to X\hat{\ }$ is an equivalence. We will prove that this occurs whenever $X$ is connected. In order to understand the name of the completion functor, note that levelwise application of Andr\'e-Quillen homology to $\calX^\bullet$ yields a cosimplicial vector space $H_*\calX^\bullet$ which is weakly equivalent to its coaugmentation $H_*X$ (cf. \cite{BlumRiehlResolutions.pdf}).
-
-
-
-
-
-Radulescu-Banu's completion functor $X\mapsto X\hat{\ }$ is the analogue of Bousfield and Kan's $R$-completion functor on simplicial sets \cite{BousKanSSeq.pdf}, a construction that has proven extremely useful in classical homotopy theory. As in the classical case, the homotopy of the completion $X\hat{\ }$ is the target of an unstable Adams spectral sequence \textbf{[define it]}. This completeness theorem may be viewed as a convergence result for this spectral sequence, which we will study in detail in forthcoming work. [\textbf{flesh out two halves to convergence in context of into to 2nd quad sseqs}, then say] For this purpose, we will prove the following conjecture of Radulescu-Banu:
-\begin{thm}\label{completenesstheorem}
-If $X\in s\algcat$ is connected, then $X$ is naturally equivalent to its completion $X\hat{\ }$.
-\end{thm}
-
-
-
-As Radulescu-Banu observed, there is an additional difficulty in constructing the Bousfield-Kan cosimplicial resolution of a simplicial algebra which is not present in the classical context. Namely, since not all simplicial algebras are cofibrant, the naive cosimplicial resolution will not be homotopically correct. Radulescu-Banu's innovation was to explain that the cofibrant replacement functor $c:s\algcat\to s\algcat$ constructed by Quillen's small object argument \cite{QuillenHomAlg.pdf} admits a comonad diagonal $\beta:c\to cc$, and can thus be mixed into the cosimplicial resolution, making it homotopically correct. 
-
-Accordingly, we must mix Quillen's cofibrant replacement functor $c$ into our definition of the Adams tower over a simplicial algebra so that it relates as desired to Radulescu-Banu's resolution. 
-
-
-
-
-
-\textbf{Note here on scope and simplified notation.}
-
-\subsection{Identification of $E^1$ and $E^2$}
-In light of \S\ref{Cofibrant replacement via the small object argument} and \S\ref{homology and Hcoalgs}, applying the functor $H_*^{\algcat}$ to $\calX$, one obtains precisely the monadic cobar resolution of $H_*^{\algcat}X$ obtained by repeated application of the monad on $\algcat\HCoalg$ of the adjunction 
-\[U^{\algcat\HCoalg}:\algcat\HCoalg\rightleftarrows \vect{}{1}:C^{\algcat\HCoalg}.\]
-In more detail, we have a map of augmented cosimplicial diagrams (with augmentations dotted)
-\[\vcenter{
-\def\labelstyle{\scriptstyle}
-\xymatrix@C=1.5cm@1{
-cX\,
-\ar@{..>}[r]\ar@{->>}[d]
-&
-\,cKQcX\,
-\ar[r];[]\ar@{->>}[d]
-&
-\,c(KQc)^2X\,
-\ar@<-.65ex>[l];[]
-\ar@<+.65ex>[l];[]
-\ar@<+.65ex>[r];[]
-\ar@<-.65ex>[r];[]\ar@{->>}[d]
-&
-\,\cdots
-\ar[l];[]
-\ar@<-1.3ex>[l];[]
-\ar@<+1.3ex>[l];[]\\
-QcX\,
-\ar@{..>}[r]
-&
-\,QcKQcX\,
-\ar[r];[]
-&
-\,Qc(KQc)^2X\,
-\ar@<-.65ex>[l];[]
-\ar@<+.65ex>[l];[]
-\ar@<+.65ex>[r];[]
-\ar@<-.65ex>[r];[]
-&
-\,\cdots
-\ar[l];[]
-\ar@<-1.3ex>[l];[]
-\ar@<+1.3ex>[l];[]
-}}\]
-If we write `$C$' for the monad $C^{\algcat\HCoalg}U^{\algcat\HCoalg}$, as  as each $\calX^s$ for $s\geq0$ is a GEM (\textbf{finite type if we want}), after applying  $\pi_*$, we obtain (writing ):
-\begin{shaded}
-\textbf{need to know a bit about the Hurewicz. Reference or do here...}
-``Include a bit about colimits, as in \verb|adamsops|''(?????)
-\textbf{Modify}: 
-\begin{prop}
-For $W$ a graded vector space, the map $a:W\to CW$ is an isomorphism onto the primitives $\textup{Pr}(CW)$ of the cofree $C$-coalgebra $CW$.
-\end{prop}
-\begin{prop}
-The Hurewicz map $\pi_*A\to H_*A$ factors through $\textup{Pr}(H_*A)$, and if $A$ is a simplicial zero-square algebra the resulting map $\pi_*A\to\textup{Pr}(H_*A)$ equals the isomorphism $a:\pi_*A\to\textup{Pr}(C\pi_*A)$.
-\end{prop}
-\begin{proof}
-Represent an element $\alpha\in\pi_nA$ by a map $\alpha:S^n_\calC\to A$. Then, $h(\alpha)$ is the image of the fundamental homology class $\imath\in H_n(S^n_\calC)$ under the map $\alpha_*$. As $\imath$ is primitive, so is $h(\alpha)$.
-\end{proof}
-\end{shaded}
-
-\[\vcenter{
-\def\labelstyle{\scriptstyle}
-\xymatrix@C=1.5cm@1{
-\pi_*X\,
-\ar@{..>}[r]\ar@{->}[d]
-&
-\,\pi_*\calX^0\,
-\ar[r];[]\ar[d]^-{\cong}
-&
-\,\pi_*\calX^1\,
-\ar@<-.65ex>[l];[]
-\ar@<+.65ex>[l];[]
-\ar@<+.65ex>[r];[]
-\ar@<-.65ex>[r];[]\ar[d]^-{\cong}
-&
-\,\cdots
-\ar[l];[]
-\ar@<-1.3ex>[l];[]
-\ar@<+1.3ex>[l];[]
-\\
-\textup{Pr}(H_*^\algcat X)\,
-\ar@{..>}[r]
-\ar@{ >->}[d]
-&
-\,\textup{Pr}(CH_*^\algcat X)\,
-\ar[r];[]
-\ar@{ >->}[d]
-&
-\,\textup{Pr}(C^2H_*^\algcat X)\,
-\ar@<-.65ex>[l];[]
-\ar@<+.65ex>[l];[]
-\ar@<+.65ex>[r];[]
-\ar@<-.65ex>[r];[]
-\ar@{ >->}[d]
-&
-\,\cdots
-\ar[l];[]
-\ar@<-1.3ex>[l];[]
-\ar@<+1.3ex>[l];[]
-\\
-H_*^\algcat X\,
-\ar@{..>}[r]
-&
-\,CH_*^\algcat X\,
-\ar[r];[]
-&
-\,C^2H_*^\algcat X\,
-\ar@<-.65ex>[l];[]
-\ar@<+.65ex>[l];[]
-\ar@<+.65ex>[r];[]
-\ar@<-.65ex>[r];[]
-&
-\,\cdots
-\ar[l];[]
-\ar@<-1.3ex>[l];[]
-\ar@<+1.3ex>[l];[]
-}}
-\]
-Now $\calX$ has a second quadrant homotopy spectral sequences (see \S\ref{Second quadrant homotopy spectral sequences}), and:
-\begin{alignat*}{2}
-\E{1}{}{\calX}{s}{t}&\cong (\textup{Pr}C_{\algcat\HCoalg}^sH_*^{\algcat}X)_{t};\\
-\E{2}{}{\calX}{s}{t}&\cong(\mathbb{R}^s\textup{Pr})H_*^{\algcat}X\\
-&\cong (H^*_{\algcat\HAlg}H^*_{\algcat}X)^{s}_{t},&\quad&\textup{(if $H_*^{\algcat}X$ finite type)}.
-\end{alignat*}
-
-
-
-
-
-
-\subsection{The Adams tower}\label{sec:derWRTab}\label{sec:relnWithRB}
-Bousfield and Kan defined the unstable Adams spectral sequence of a simplicial set in two different ways. Their earlier approach \cite{BK_pairings.pdf} was to define the \emph{derivation of a functor with respect to a ring}. This approach constructs the \emph{Adams tower} over the simplicial set in question, and lends itself well to connectivity analyses. Their latter approach, \cite{BousKanSSeq.pdf}, to give a cosimplicial resolution of a simplicial set by simplicial $R$-modules, lends itself more to the analysis of the $E^2$ page, and is directly analogous to Radulescu-Banu's construction described in \S[wherever].
-
-Since the release of \cite{BK_pairings.pdf} and \cite{BousKanSSeq.pdf}, the relationship between the two approaches has been clarified by the introduction of the theory of cubical diagrams to homotopy theory \cite{GoodwillieCalcII}. In this section we will define the Adams tower of a simplicial algebra using a construction analogous to Bousfield and Kan in \cite{BK_pairings.pdf}, and then apply the theory of cubical diagrams to relate it to Radulescu-Banu's construction. 
-
-
-For any functor $F:s\algcat\to s\algcat$, we define the $r^\textup{th}$ derivation $\dupdown{r}{c}F$ of $F$ with respect to Andr\'e-Quillen homology. The definition is recursive:
-\begin{alignat*}{2}
-(\dupdown{0}{c}F)(X)
-&:=
-F(cX)%
-\\
-(\dupdown{s}{c}F)(X)
-&:=
-\hofib\bigl((\dupdown{s-1}{c}F)(cX)\xrightarrow{(\dupdown{s-1}{c}F)(\eta_{cX})} (\dupdown{s-1}{c}F)(KQcX)\bigr)
-\end{alignat*}
-where $\eta$ is the unit of the adjunction $Q\dashv K$, i.e.\ the natural surjection onto indecomposables, and $\hofib$ is any fixed  functorial construction of the homotopy fiber. These functors fit into a tower via the following composite natural transformation:
-\[\delta:\left((\dupdown{s}{c}F)(X)\to (\dupdown{s-1}{c}F)(cX)\overset{(\dupdown{s-1}{c}F)(\epsilon)}{\to} (\dupdown{s-1}{c}F)(X)\right).\]
-We have thus constructed a tower
-\[\xymatrix@R=4mm{
-\cdots 
-\ar[r]
-&%r1c1
-(\dupdown{2}{c}F)X
-\ar[r]
-&%r1c3
-%r1c4
-(\dupdown{1}{c}F)X
-\ar[r]&%r1c5
-(\dupdown{0}{c}F)X=FcX,
-}\]
-which is natural in the object $X$ and the functor $F$.
-The functors $\dupdown{r}{c}F$ are homotopical as long as $F$ preserves weak equivalences between cofibrant objects. Employing the shorthand
-\[\dupdown{s}{c}X:=(\dupdown{s}{c}\Id )X,\]
-we define \emph{the Adams tower of $X$} to be the tower
-\[\xymatrix@R=4mm{
-\cdots 
-\ar[r]
-&%r1c1
-\dupdown{2}{c}X
-\ar[r]
-&%r1c3
-%r1c4
-\dupdown{1}{c}X
-\ar[r]&%r1c5
-\dupdown{0}{c}X=cX.
-}\]
-
-For example, $(\dupdown{2}{c}F)(X)$ is constructed by the following diagram in which every composable pair of parallel arrows is \emph{defined} to be a homotopy fiber sequence.
-\[\def\labelstyle{\scriptstyle}
-\xymatrix@!0@R=30pt@C=43pt{
-(\dupdown{2}{c}F)(X)\ar[d]\\
-(\dupdown{1}{c}F)(cX) \ar[rr]\ar[d]         &           &FcccX \ar[rr]\ar[d]         &           &   FcKQccX            \ar[d]  &                  \\
-(\dupdown{1}{c}F)(KQcX) \ar[rr] &                     &  FccKQcX \ar[rr] &             & FcKQcKQcX
-}\]
-In general, $(\dupdown{n+1}{c}F)(X)$ is the homotopy total fiber of an $(n+1)$-cubical diagram:
-\[(\dupdown{n+1}{c}F)(X):=\textup{hototfib} \bigl(({\plainD}_{n+1}^{\smash{\square}}F)X\bigr).\]
-See \cite{GoodwillieCalcII}, \cite{LuisGoodwillie.pdf} or \cite{CubicalHomotopyTheory.pdf} for the general theory of cubical diagrams. Before defining the cubical diagram $({\plainD}_{n+1}^{\smash{\square}}F)X$, we set notation: for $n\geq0$ let $[n]=\{0,\ldots,n\}$, and define $\calP[n]=\left\{S\subseteq [n]\right\}$ to be the poset category whose morphisms are the inclusions $S\subseteq S'$. Then an $(n+1)$-cube in $s\algcat$ is a functor $\calP[n]\to s\algcat$, and the $(n+1)$-cubical diagram $({\plainD}_{n+1}^{\smash{\square}}F)X:\calP[n]\to s\algcat$ is the functor:
-\[S\mapsto Fc(KQ)^{\chi_{n}}c(KQ)^{\chi_{n-1}}c\cdots c(KQ)^{\chi_0}cX\quad \textup{where}\quad \chi_i:=\begin{cases}
-1,&\textup{if }i\in S;\\
-0,&\textup{if }i\notin S,
-%\\,&\textup{if }
-\end{cases}
-\]
-where for $S\subseteq S'$, the map $(({\plainD}_{n+1}^{\smash{\square}}F)X)(S)\to (({\plainD}_{n+1}^{\smash{\square}}F)X)(S')$ is given by applying the counit $\eta:1\to KQ$ in those locations indexed by $S'\setminus S$.
-
-%\subsection{Relationship between the Adams tower and Radulescu-Banu's resolution}\label{sec:relnWithRB}
-
-Now Radulescu-Banu defines the completion of $X$ to be the totalization
-\[X\hat{\ }:=\textup{Tot}(\calX^\bullet)=\holim (\textup{Tot}_n(\calX^\bullet)),\]
-and the unstable Adams spectral sequence to be the spectral sequence of the tower
-\[\cdots \to\textup{Tot}_n(\calX^\bullet)\to \textup{Tot}_{n-1}(\calX^\bullet)\to\cdots \]
-under $cX$. Our goal in this section is to prove
-\begin{prop}\label{towerIdentification}
-There is a natural zig-zag of weak equivalences of towers between $\plainD_{n+1}X$ and $\hofib(cX\to\textup{Tot}_{n}(\calX^\bullet))$. That is, up to homotopy, the $\textup{Tot}$ tower induces the Adams tower by taking fibers.
-\end{prop}
-Before giving the proof, we recall a useful relationship between cosimplicial objects and cubical diagrams, explained by Sinha in \cite[Theorem 6.5]{SinhaSpacesOfKnots.pdf}, and expanded on by Munson-Voli\'c \cite{CubicalHomotopyTheory.pdf}.
-We will only present that part of the theory that we need. There is a diagram of inclusions of categories
-\[\xymatrix@!0@R=10mm@C=13mm{
-\calP[-1]\ar[rr]^-{\tau}\ar_-{h_{-1}}[drrr]
-&&%r1c1
-\calP[0]\ar[rr]^-{\tau}\ar^(.65){\!h_{0}}[dr]
-&&%r1c2
-\calP[1]\ar[rr]^-{\tau}\ar_(.65){h_{1}\!}[dl]
-&&%r1c3
-\calP[2]\ar[rr]^-{\tau}\ar^-{h_{2}}[dlll]
-&&%r1c4
-\cdots \\
-&&&\Delta_+\!\!
-}\]
-As the coaugmented cosimplicial object $\calX^\bullet$ is Reedy fibrant (cf.\ \cite[{X.4.9}]{YellowMonster}), there are natural weak equivalences $\hofib(\calX^{-1}\to\textup{Tot}_n\calX^\bullet) \overset{\smash{\sim}}{\to} \textup{hototfib}(h_n^*(\calX^\bullet))$ under which the tower map 
-\[\hofib(\calX^{-1}\to\textup{Tot}_n\calX^\bullet)\to \hofib(\calX^{-1}\to\textup{Tot}_{n-1}\calX^\bullet)\]
-is identified with the map
-\[\textup{hototfib}(h_n^*(\calX^\bullet))\to \textup{hototfib}(\tau^*h_n^*(\calX^\bullet))=\textup{hototfib}(h_{n-1}^*(\calX^\bullet)).\]
-As $\calX^{-1}$ equals $cX$, the tower $\hofib(\calX^{-1}\to\textup{Tot}_n\calX^{\bullet})$ is one of the towers in proposition \ref{towerIdentification}.
-\begin{proof}[Proof of Proposition \ref{towerIdentification}] 
-It will suffice to construct a weak equivalence $h_n^*\calX^\bullet\to (\plainD_n^{\smash{\square}}\Id  )(X)$ of $(n+1)$-cubes. The $(n+1)$-cubical diagram $h_n^*\calX^\bullet$ is defined by
-\[(h_n^*\calX^\bullet)(S):= c(KQc)^{\chi_{n}}(KQc)^{\chi_{n-1}}\cdots (KQc)^{\chi_0}X\quad \textup{where}\quad \chi_i:=\begin{cases}
-1,&\textup{if }i\in S,\\
-0,&\textup{if }i\notin S,
-\end{cases}
-\]
-where we describe the map $(h_n^*\calX^\bullet)(S)\to (h_n^*\calX^\bullet)(S\sqcup\{i\})$, for $i\notin S$, as follows. Let $j$ be the smallest element of $S\sqcup\{n+1\}$ exceeding $i$, so that
-\[(h_n^*\calX^\bullet)(S):= \begin{cases}
-c(KQc)^{\chi_{n}}\cdots (KQc)^{\chi_{j+1}}(KQ\underline{c})(KQc)^{\chi_{i-1}}\cdots (KQc)^{\chi_0}X,&\textup{if }j\leq n;\\
-\underline{c}(KQc)^{\chi_{i-1}}\cdots (KQc)^{\chi_0}X,&\textup{if }j=n+1.
-%\\,&\textup{if }
-\end{cases}
-\]
-In the expression for either case, we have distinguished one of the applications of $c$ with an underline, and the map to $(h_n^*\calX^\bullet)(S\sqcup\{i\})$ is induced by the composite $\underline{c}\to cc\to cKQc$ of the diagonal of the comonad $c$ with the unit of the monad $KQ$. 
-
-We now define maps $(h_n^*\calX^\bullet)(S)\to (({\plainD}_{n+1}^{\smash{\square}}\Id )X)(S)$ for $S=\{j_0<j_1<\cdots<j_r\}\subset\{0,\ldots,n\}$. 
-The only difference between the domain and codomain is that in $(({\plainD}_{n+1}^{\smash{\square}}\Id )X)(S)$, all $n+2$ applications of $c$ are present, whereas in $(h_n^*\calX^\bullet)(S)$, only $r+2$ appear. The map is then
-\[\beta^{n-j_r}KQ\beta^{j_r-j_{r-1}-1}KQ\beta^{j_{r-1}-j_{r-2}-1}KQ\cdots KQ\beta^{j_{1}-j_0-1}KQ\beta^{j_0}X\]
-which is to say that we apply the iterated diagonal the appropriate number of times in each $c$ appearing in the domain. As $\beta$ is coassociative, this definition is unambiguous, and the resulting maps assemble to a weak equivalence of $(n+1)$-cubes. 
-\end{proof}
-
-\subsection{Connectivity estimates in the Adams tower}
-\label{sec:connectivityAnalysis}
-We'll now perform the necessary connectivity estimates in the Adams tower in order to prove theorem \ref{completenesstheorem}, namely:  
-%
-%We wish to prove the following connectivity result for the Adams tower:
-\begin{prop}\label{convergenceProp}
-For integers $t\geq2$ and $q\geq0$, the map $\pi_q(\dupdown{2t+q-1}{c}X)\to\pi_q(\dupdown{t}{c}X)$ is zero. \textbf{Lie algs}: $\pi_q(\dupdown{2^{q+t-1}+1}{c}X)\to\pi_q(\dupdown{t}{c}X)$
-\end{prop}
-\noindent Note that proposition \ref{towerIdentification} and \ref{convergenceProp} together imply theorem \ref{completenesstheorem}:
-\begin{proof}[Proof of theorem \ref{completenesstheorem}]
-The fiber sequences $\dupdown{n+1}{c}X\to cX\to \textup{Tot}_n\calX^\bullet$ fit together into a tower of fiber sequences. Taking homotopy limits, one obtains a fiber sequence
-\[\holim (\dupdown{n}{c}X)\to cX\to X\hat{\ }.\]
-We need to show that $\holim (\dupdown{n}{c}X)$ has zero homotopy groups.
-We may replace the tower $\dupdown{n}{c}X$ with a weakly equivalent tower of fibrations in $s\algcat$ whose set-theoretic inverse limit is the homotopy limit in question. Applying \cite[Proposition 6.14]{goerss-jardine.pdf} to the new tower, there is a short exact sequence
-\[0\to \textup{lim}^1\pi_{q+1}(\dupdown{n}{c}X)\to \pi_q(\holim (\dupdown{n}{c}X))\to \textup{lim}\,\pi_{q}(\dupdown{n}{c}X)\to 0.\]
-Proposition \ref{convergenceProp} implies that for each $q$, the tower $\{\pi_{q}(\dupdown{n}{c}X)\}$ has zero inverse limit, and satisfies the Mittag-Leffler condition (cf.\ \cite[p.264]{YellowMonster}), so that the $\textup{lim}^1$ groups appearing also vanish.
-\end{proof}
-The application of the complicated cofibrant replacement functor $c$ adds to the difficulty of proving the connectivity estimates of With an eye to proving proposition \ref{convergenceProp} , we circumvent the difficulty of working with the functor $c$ by shifting to the standard bar construction $B^{\algCat}$ on $s\algCat$. We'll use the abbreviation $\barConstructionMightAbbreviate $ for $B^{\algCat}$.
-
-Define recursively a somewhat less homotopical version $\caldup{s}F$ of the derivations $\dupdown{s}{}F$:
-\begin{alignat*}{2}
-(\caldup{0}F)(X)
-&:=
-F(X)%
-\\
-(\caldup{s}F)(X)
-&:=
-\ker((\caldup{s-1}F)(\barConstructionMightAbbreviate X)\xrightarrow{(\caldup{s-1}F)(\eta_{\barConstructionMightAbbreviate X})} (\caldup{s-1}F)(KQ\barConstructionMightAbbreviate X))
-\end{alignat*}
-There are three differences between this definition and that of $\plainD_sF$: here, there is one fewer cofibrant replacement applied, we use the bar construction $\barConstructionMightAbbreviate $ instead of the SOA functor $c$, and we take \emph{strict} fibers, not homotopy fibers.
-While these functors are not generally homotopical, we define \emph{the modified Adams tower of $X$} to be the tower
-\[\xymatrix@R=4mm{
-\cdots 
-\ar[r]^{\delta}
-&%r1c1
-\caldup{2}X
-\ar[r]^{\delta}
-&%r1c3
-%r1c4
-\caldup{1}X
-\ar[r]^{\delta}&%r1c5
-\caldup{0}X\makebox[0cm][l]{${}=X$,}
-}\]
-where $\caldup{s}X$ is again shorthand for $(\caldup{s}\Id )X$, and the tower maps $\delta$ are defined as before.
-\begin{prop}\label{prop:modifiedAdamsTower}
-There's a natural zig-zag of weak equivalences of towers between the Adams tower of $X$ and the modified Adams tower of $X$. In particular, the modified Adams tower is homotopical.
-\end{prop}
-\begin{proof}
-Let $\mathsf{CR(s\algcat)}$ be the category of cofibrant replacement functors in $s\algcat$. That is, an object of $\mathsf{CR(s\algcat)}$ is a pair, $(f,\epsilon)$, such that $f:s\algcat\to s\algcat$ is a functor whose image consists only of cofibrant objects, and $\epsilon:f\Rightarrow \Id $ is a natural acyclic fibration. Morphisms in $\mathsf{CR(s\algcat)}$ are natural transformations which commute with the augmentations. For any $(f,\epsilon)\in\mathsf{CR(s\algcat)}$ we obtain an alternative definition of the derivations of a functor $F:s\algcat\to s\algcat$:
-\begin{alignat*}{2}
-(\plainD_{\smash{0}}^{\smash{f}}F)(X)
-:=
-F(fX),\quad %
-(\plainD_{\smash{s}}^{\smash{f}}F)(X)
-:=
-\hofib((\plainD_{\smash{s-1}}^{\smash{f}}F)(fX)\to (\plainD_{\smash{s-1}}^{\smash{f}}F)(KQfX)).
-\end{alignat*}
-These functors are natural in $f$, so that a morphism in $\mathsf{CR(s\algcat)}$ induces a weak equivalence of towers. Our proposed zig-zag of towers is: 
-\[\plainD_{\smash{s}}= \plainD_{\smash{s}}^{\smash{c}}\Id \overset{}{\from}\plainD_{\smash{s}}^{\smash{\barConstructionMightAbbreviate \circ c}}\Id \overset{}{\to}\plainD_{\smash{s}}^{\smash{\barConstructionMightAbbreviate }}\Id \overset{\gamma_s}{\from}\caldup{s}\barConstructionMightAbbreviate \overset{\caldup{s}\epsilon}{\to}\caldup{s}\Id =\caldup{s}\]
-The maps with domain $\plainD_{\smash{s}}^{\smash{\barConstructionMightAbbreviate \circ c}}\Id $ are induced by the maps $\epsilon c:\barConstructionMightAbbreviate \circ c\to c$ and $\barConstructionMightAbbreviate \epsilon:\barConstructionMightAbbreviate \circ c\to \barConstructionMightAbbreviate $ and are evidently natural weak equivalences of towers. The map $\gamma_0:(\caldup{0}\barConstructionMightAbbreviate )X\to (\plainD_{\smash{0}}^{\smash{\barConstructionMightAbbreviate }}\Id )X$ is the identity of $\barConstructionMightAbbreviate X$, and the map $\caldup{0}\epsilon:(\caldup{0}\barConstructionMightAbbreviate )X\to (\plainD_{\smash{0}}^{\smash{\barConstructionMightAbbreviate }}\Id )X$ is $\epsilon:\barConstructionMightAbbreviate X\to X$. Thereafter, $\gamma_s$ and $\caldup{s}\epsilon$ are defined recursively:
-\[\qquad \quad \xymatrix@R=4mm{
-\makebox[0cm][r]{$(\caldup{s+1}\Id )X:=\,$}\makebox[5cm][l]{$\,\ker((\caldup{s}\Id )(\barConstructionMightAbbreviate X)\to (\caldup{s}\Id )(KQ\barConstructionMightAbbreviate X))$}\\
-\makebox[0cm][r]{$(\caldup{s+1}\barConstructionMightAbbreviate )X:=\,$}\makebox[5cm][l]{$\,\ker((\caldup{s}\barConstructionMightAbbreviate )(\barConstructionMightAbbreviate X)\to (\caldup{s}\barConstructionMightAbbreviate )(KQ\barConstructionMightAbbreviate X))$}\ar[d]^-{\textup{incl.}}_-{}%m_2}
-\ar[u]_-{\textup{induced by }(\caldup{s}\epsilon,\caldup{s}\epsilon)}^-{}%m_1}
-\\%r1c1
-\makebox[5cm][l]{$\,\hofib((\caldup{s}\barConstructionMightAbbreviate )(\barConstructionMightAbbreviate X)\to(\caldup{s}\barConstructionMightAbbreviate )(KQ\barConstructionMightAbbreviate X))$}\ar[d]^-{\textup{induced by }(\gamma_{s},\gamma_{s})}_-{}%m_3}
-\\%r2c1
-\makebox[0cm][r]{$(\plainD_{\smash{s+1}}^{\smash{\barConstructionMightAbbreviate }})X:=\,$}\makebox[5cm][l]{$\,\hofib((\plainD_{\smash{s}}^{\smash{\barConstructionMightAbbreviate }}\Id )(\barConstructionMightAbbreviate X)\to (\plainD_{\smash{s}}^{\smash{\barConstructionMightAbbreviate }}\Id )(KQ\barConstructionMightAbbreviate X))$}%r3c1
-}\]
-\noindent Lemma \ref{towerWithPowers} shows that the kernels taken are actually kernels of surjective maps, and by induction on $s$, the maps $\gamma_s$ and $\caldup{s}\epsilon$ are weak equivalences.
-\end{proof}
-The connectivity result will rely on the observation that any element in the $s^\textup{th}$ level of the modified tower maps down to an $(s+1)$-fold product in $X$. In order to formalise this, let $P^s:s\algcat\to s\algcat$ be the ``$s^\textup{th}$ power'' functor, the prolongation of the endofunctor $Y\mapsto Y^s$ of $\algcat$, where $Y^s=\textup{im}(\textup{mult}:Y^{\otimes s}\to Y)$. [\textbf{For Lie algs}, $P^s=\Gamma^s$, the $s^\textup{th}$ term in the lower central series] Then we have:
-\begin{lem}\label{towerWithPowers}
-The functors $\caldup{r}$, $\caldup{r}\barConstructionMightAbbreviate $ and $\caldup{r}P^{s}$ preserve surjective maps and there is a commuting diagram of functors:
-\[\xymatrix@R=4mm{
-\cdots 
-\ar[r]
-&%r1c1
-\caldup{r}
-\ar[r]
-\ar[d]
-&%r1c2
-\cdots \ar[r]
-&%r1c4
-\caldup{2}
-\ar[r]
-\ar[d]
-&%r1c4
-\caldup{1}
-\ar[r]
-\ar[d]&%r1c5
-\caldup{0}
-\ar@{=}[d]
-\\%r1c6
-\cdots
-\ar@{ >->}[r]
-&%r2c1
-P^{r+1}
-\ar@{ >->}[r]
-&%r2c3
-\cdots 
-\ar@{ >->}[r]&%r2c4
-P^3
-\ar@{ >->}[r]
-&P^2
-\ar@{ >->}[r]
-&%r2c5
-\Id %r2c6
-}\]
-\end{lem}
-\begin{proof}
-
-Suppose that $X$ is a simplicial algebra. Then $\caldup{r}X$
-is constructed as the subalgebra
-\[\caldup{r}X:= \bigcap_{i=1}^{r}\ker\!\left(\barConstructionMightAbbreviate^{r-i}\eta \barConstructionMightAbbreviate^{i}:\barConstructionMightAbbreviate^{r}X\to \barConstructionMightAbbreviate^{r-i}KQ\barConstructionMightAbbreviate^{i}X\right)\]
-of $\barConstructionMightAbbreviate^rX$. In dimension $n$, this is the following subset of $(\barConstructionMightAbbreviate^rX)_n:=(F^{n+1})^rX_n$:
-\[(\caldup{r}X)_n:=\bigcap_{i=1}^{r}\ker\!\left(F^{(r-i)(n+1)}\eta F^{i(n+1)}:(F^{n+1})^rX_n\to (F^{n+1})^{r-i}KQ(F^{n+1})^iX_n\right)\]
-Where we have written $F$ for $F^{\algcat}$.
-The $r$ conditions on elements of $(\caldup{r}X)_n$ ensure that their image in $(\caldup{0}X)_n=X_n$ under the iterated tower map is a sum of $(r+1)$-fold products. This completes the construction of the tower of functors.
-
-[\textbf{Reformulate for generalizability:} isn't it just that except for simplicial structure you don't see more than a vector space?] In order to prove the surjectivity statements, we must describe the iterated free construction $F^{r(n+1)}X_n$. A basis of $FX_n$ may be given by the \emph{monomials} in a basis of $X_n$, and $F^{r(n+1)}X_n$ has basis given by taking monomials iteratively, $r(n+1)$ times. The subset $(\caldup{r}X)_n$ has basis those iterated monomials in which the monomials formed in the $((n+1)i)^\textup{th}$ iteration have degree at least two for each $1\leq i\leq r$. This simple description of a basis of $(\caldup{r}X)_n$ shows that $\caldup{r}$ preserves surjections. Similar analysis applies to $\caldup{r}\barConstructionMightAbbreviate $ and $\caldup{r}P^s$.
-\end{proof}
-We are now able to state and prove the key connectivity result:
-\begin{lem}\label{connectivityOfDerivedPowers}
-For any connected $A\in s\algs$, and any $t\geq1$ and $s\geq2$, $(\caldup{t}P^{s})(A)$ is $(s-t)$-connected.
-For any connected $A\in s\Lambda(\LieOperad)$, and any $t\geq1$ and $s\geq2$, $(\caldup{t}P^{s})(A)$ is $(\log_2(s)+1-t)$-connected.
-\end{lem}
-\begin{proof}
-We will prove this by induction on $t$. The induction step is simple: %Now let $t\geq2$ and suppose by induction that $(\caldup{t-1}P^{s})(B)$ is $(s-(t-1))$-connected for any connected $B$ and any $s\geq2$. Then 
-by lemma \ref{towerWithPowers}, there's a short exact sequence:
-\[\xymatrix{
-0\ar[r]&
-(\caldup{t}P^{s})(A)\ar[r]&
-(\caldup{t-1}P^{s})(\barConstructionMightAbbreviate A)\ar[r]&
-(\caldup{t-1}P^{s})(Q\barConstructionMightAbbreviate A)\ar[r]&
-0.
-}\]
-Now both $bA$ and $QbA$ are connected, as they have $\pi_0(bA)=\pi_*(A)$ is zero by assumption, and $\pi_0(QbA)=Q\pi_*(A)$. By induction we can bound the connectivity of $(\caldup{t-1}P^{s})(\barConstructionMightAbbreviate A)$ and $(\caldup{t-1}P^{s})(Q\barConstructionMightAbbreviate A)$, and the associated long exact sequence shows that $(\caldup{t}P^{s})(A)$ has a connectivity bound at most one degree worse.
-
-
-When $t=1$:
-\[(\caldup{1}P^{s})A:=\ker(P^{s}(\barConstructionMightAbbreviate A)\to P^{s}(Q\barConstructionMightAbbreviate A))=P^{s}(\barConstructionMightAbbreviate A),\]
-as $P^s(Q\DASH)=0$ for $s\geq2$. We must demonstrate that $P^s(\barConstructionMightAbbreviate A)$ is $(s-1)$-connected. For this we use a truncation of Quillen's fundamental spectral sequence, as presented in \cite[Thm 6.2]{MR1089001}: the filtration
-\[P^s(\barConstructionMightAbbreviate A)\supset P^{s+1}(\barConstructionMightAbbreviate A)\supset P^{s+2}(\barConstructionMightAbbreviate A)\supset\cdots \]
-of $P^s(\barConstructionMightAbbreviate A)$ yields a convergent spectral sequence  $E^0_{p,q}\implies \pi_q(P^s(\barConstructionMightAbbreviate a))$, with:
-\[E^0_{p,q}=N_q\bigl(P^{p}(\barConstructionMightAbbreviate A)/P^{p+1}(\barConstructionMightAbbreviate A)\bigr)\textup{ if $p\geq s$, and }E^0_{p,q}=0\textup{ if $p<s$.}\]
-Examination of the structure of $\barConstructionMightAbbreviate A$ reveals that $P^{p}(\barConstructionMightAbbreviate A)/P^{p+1}(\barConstructionMightAbbreviate A)\cong (Q\barConstructionMightAbbreviate A)^{\otimes p}_{\Sigma_p}$, and moreover, $Q\barConstructionMightAbbreviate A$ is a connected simplicial vector space, as $\pi_0(Q\barConstructionMightAbbreviate A)=Q(\pi_0\barConstructionMightAbbreviate A)=Q(0)=0$. The $t=1$ case now follows from \cite[Satz 12.1]{DoldPuppeSuspension.pdf}: if $V$ is a connected simplicial vector space then $V^{\otimes p}_{\Sigma_p}$ is $(p-1)$-connected. \textbf{[Lie algebras:} a modification \cite[4.3]{6Author.pdf} of a theorem of Curtis \cite[\S5]{Curtis_LCS.pdf}]
-\end{proof}
-Before we can give the proof of proposition \ref{convergenceProp}, we need the following \emph{twisting lemma}, analogous to that of \cite{BK_pairings.pdf}. Before stating it, we note that $(\caldup{s}\caldup{t})X$ and $\caldup{s+t}X$ are equal by construction.
-\begin{lem}
-\label{DsDt=Dt+s}
-The maps $\caldup{i}\delta:\caldup{n}X\to \caldup{n-1}X$ are homotopic for $0\leq i< n$.
-\end{lem}
-\begin{proof}
-We may reindex the twisting lemma as follows: the maps 
-\[\caldup{s}\delta,\caldup{s-1}\delta:\caldup{s+t}X\to \caldup{s+t-1}X\]
-are homotopic whenever $s,t\geq1$. Now $\caldup{s+t}X$ is constructed as the subalgebra
-\[\caldup{s+t}X:= \bigcap_{i=1}^{s+t}\ker\!\left(\barConstructionMightAbbreviate^{s+t-i}\eta \barConstructionMightAbbreviate^{i}:\barConstructionMightAbbreviate^{s+t}X\to \barConstructionMightAbbreviate^{s+t-i}KQ\barConstructionMightAbbreviate^{i}X\right)\]
-of the iterated bar construction $\barConstructionMightAbbreviate^{s+t}X$, and for $0\leq i<s+t$, $\caldup{i}\delta$ is the restriction of the map $\barConstructionMightAbbreviate^i\epsilon \barConstructionMightAbbreviate^{s+t-i-1}:\barConstructionMightAbbreviate^{s+t}X\to \barConstructionMightAbbreviate^{s+t-1}X$.
-Proposition \ref{IteratedBarConstructionHomotopy} gives an explicit simplicial homotopy between the maps $\barConstructionMightAbbreviate^s\epsilon \barConstructionMightAbbreviate^{t-1}$ and $\barConstructionMightAbbreviate^{s-1}\epsilon \barConstructionMightAbbreviate^{t}$. Moreover, the naturality of the construction of proposition \ref{IteratedBarConstructionHomotopy} implies that this homotopy does indeed restrict to a homotopy of maps $\caldup{s+t}X\to \caldup{s+t-1}X$.
-\end{proof}
-
-
-Now that we have the twisting lemma, Proposition \ref{convergenceProp} follows:
-\begin{proof}[Proof of Proposition \ref{convergenceProp}]
-By proposition \ref{prop:modifiedAdamsTower}, it is enough to prove that $\pi_q(\caldup{2t+q-1}X)\to\pi_q(\caldup{t}X)$ is zero.
-Apply $\caldup{t}\DASH$ to the diagram of functors constructed in \ref{towerWithPowers} and apply the result to $X$ to obtain a commuting diagram of functors
-\[\xymatrix@R=4mm{
-\caldup{2t+q-1}X
-\ar[r]^-{\caldup{t}\delta}
-\ar[d]
-&
-\cdots \ar[r]^-{\caldup{t}\delta}
-&%r1c4
-\caldup{t+1}X
-\ar[r]^-{\caldup{t}\delta}
-\ar[d]&%r1c5
-\caldup{t}X
-\ar@{=}[d]
-\\%r1c6
-\caldup{t}P^{t+q}X
-\ar[r]
-&%r2c3
-\cdots 
-\ar[r]&%r2c4
-\caldup{t}P^2X
-\ar[r]
-&%r2c5
-\caldup{t}P^1X%r2c6
-}\]\textbf{for Lie algebras:}
-\[\xymatrix@R=4mm{
-\caldup{2^{q+t-1}+1}X
-\ar[r]^-{\caldup{t}\delta}
-\ar[d]
-&
-\cdots \ar[r]^-{\caldup{t}\delta}
-&%r1c4
-\caldup{t+1}X
-\ar[r]^-{\caldup{t}\delta}
-\ar[d]&%r1c5
-\caldup{t}X
-\ar@{=}[d]
-\\%r1c6
-\caldup{t}P^{2^{q+t-1}}X
-\ar[r]
-&%r2c3
-\cdots 
-\ar[r]&%r2c4
-\caldup{t}P^2X
-\ar[r]
-&%r2c5
-\caldup{t}P^1X%r2c6
-}\]
-By the twisting lemma, \ref{DsDt=Dt+s}, the composite along the top row is homotopic to the map of interest, and factors through $(\caldup{t}P^{t+q})(A)$, which is $q$-connected by lemma \ref{connectivityOfDerivedPowers}.
-\end{proof}
-
-\subsection{Iterated simplicial bar constructions}\label{sec:ItSimpBar}
-
-
-We will state and prove a useful result on iterated simplicial bar constructions, used in the proof of the twisting lemma. The result here applies in general in the category $\calC$ of algebras over a monad. Establishing notation, for any simplicial object $X$ in $\algCat$, we'll write 
-\[\trip{d}{i,q}{X}:X_q\to X_{q-1}\textup{\ and\ }\trip{s}{i,q}{X}:X_q\to X_{q+1}\]
-for the $i^\textup{th}$ face and degeneracy maps out of $X_q$. Suppose that $G$ and $G'$ are endofunctors of $\algCat$, that $\Phi:G\to G'$ is a natural transformation, and that $C,C'\in\algCat$ are objects. Write $[\Phi]:\hom_{\algCat}(C,C')\to\hom_{\algCat}(GC,G'C')$ for the operator sending $m:C\to C'$ to the diagonal composite in the commuting square
-\[\xymatrix@R=4mm{
-GC
-\ar[r]^-{\Phi_C}
-\ar[d]_-{Gm}
-\ar[dr]|-{[\Phi]m}
-&%r1c1
-G'C
-\ar[d]^-{G'm}
-\\%r1c2
-GC'
-\ar[r]_-{\Phi_{C'}}
-&%r2c1
-G'C'
-%r2c2
-}\]
-There is an (augmented) simplicial endofunctor, $\frakb\in s({\algCat}^{\algCat})$, derived from the unit and counit of the adjunction:
-\[\vcenter{
-\def\labelstyle{\scriptstyle}
-\xymatrix@C=2cm@1{
-{\ \Id\,}
-&
-\,(F^{\algCat})^1\,
-\ar@{..>}[l]|(.65){\frakd_{0,0}}
-\ar[r]|(.65){\fraks_{0,0}}
-&
-\,(F^{\algCat})^2\,
-\ar@<-1ex>[l]|(.65){\frakd_{0,1}}
-\ar@<+1ex>[l]|(.65){\frakd_{1,1}}
-\ar@<+1ex>[r]|(.65){\fraks_{0,1}}
-\ar@<-1ex>[r]|(.65){\fraks_{1,1}}
-&
-\,(F^{\algCat})^3\,\makebox[0cm][l]{\,$\cdots $}
-\ar[l]|(.65){\frakd_{1,2}}
-\ar@<-2ex>[l]|(.65){\frakd_{0,2}}
-\ar@<+2ex>[l]|(.65){\frakd_{2,2}}
-%\ar[r]|(.65){\fraks_{1,2}}
-%\ar@<+2ex>[r]|(.65){\fraks_{0,2}}
-%\ar@<-2ex>[r]|(.65){\fraks_{2,2}}
-%&
-%\,(F^{\algCat})^4\,\makebox[0cm][l]{\,$\cdots $}
-%\ar@<-3ex>[l]|(.65){\frakd_{0,3}}
-%\ar@<-1ex>[l]|(.65){\frakd_{1,3}}
-%\ar@<+1ex>[l]|(.65){\frakd_{2,3}}
-%\ar@<+3ex>[l]|(.65){\frakd_{3,3}}
-}}\]
-The simplicial bar construction $\barConstructionMightAbbreviate =B^{\algCat}$ on $s\algCat$ is the diagonal of the bisimplicial object obtained by levelwise application of $\frakb$. That is, for $X\in s\algCat$, $\barConstructionMightAbbreviate X$ is the simplicial object with $(\barConstructionMightAbbreviate X)_q:=(F^{\algCat})^{q+1}X_q$, and with
-\[\trip{d}{i,q}{\barConstructionMightAbbreviate X}:=[\frakd_{i,q}]\trip{d}{i,q}{X}.\]
-The augmentation $\epsilon:\barConstructionMightAbbreviate \to \Id $ is defined on level $q$ by 
-\[\epsilon_q=\frakd_{0,0}\frakd_{0,1}\cdots \frakd_{0,q}:(F^{\algCat})^{q+1}\to \Id .\]
-We can now construct the simplicial homotopy needed for the twisting lemma, \ref{DsDt=Dt+s}.
-\begin{prop}\label{IteratedBarConstructionHomotopy}
-The natural transformations $\epsilon_\barConstructionMightAbbreviate $ and $\barConstructionMightAbbreviate \epsilon$ from $\barConstructionMightAbbreviate ^2:s\algcat\to s\algcat$ to $\barConstructionMightAbbreviate :s\algcat\to s\algcat$ are naturally simplicially homotopic.
-\end{prop}
-
-\begin{proof}
-Write $K=\barConstructionMightAbbreviate ^{2}X$ and $L=\barConstructionMightAbbreviate X$ for the source and target of these maps respectively. Noting the formulae
-\[[\frakd_{iq}]^2= [\frakd_{q+i,2q}\circ\frakd_{i,2q+1}]\ \textup{and}\  [\fraks_{iq}]^2= [\fraks_{q+i+2,2q+2}\circ\fraks_{i,2q+1}],\]
-we can describe the simplicial structure maps in $K$ and $L$ as follows:
-\begin{alignat*}{2}
-\trip{d}{iq}{L}&=[\frakd_{iq}]\trip{d}{iq}{X}\\
-\trip{s}{iq}{L}&=[\fraks_{iq}]\trip{s}{iq}{X}\\
-\trip{d}{iq}{K}&=[\frakd_{q+i,2q}\circ\frakd_{i,2q+1}]\trip{d}{iq}{X}\\
-\trip{s}{iq}{K}&=[\fraks_{q+i+2,2q+2}\circ\fraks_{i,2q+1}]\trip{s}{iq}{X}
-\end{alignat*}
-We can now state an explicit simplicial homotopy between the two maps of interest. Using precisely the notation of \cite[\S5]{MaySimpObj.pdf}, we define $\trip{h}{jq}{}:K_q\to L_{q+1}$, for $0\leq j\leq q$, by the formula
-\[\trip{h}{jq}{}:=[\frakd_{j+1,q+2}\circ\cdots \circ\frakd_{j+1,2q+1}]\trip{s}{jq}{X}.\]
-We first check that these maps satisfy the defining identities for the notion of simplicial homotopy, numbered (1)-(5) as in \cite[\S5]{MaySimpObj.pdf}. Each identity can be checked in two parts (a)-(b):
-{\renewcommand{\circ}{\relax}
-\begin{enumerate}\squishlist
-\setlength{\parindent}{.25in}
-\item We must check that $\trip{d}{i,q+1}{L}\circ \trip{h}{j,q}{}=\trip{h}{j-1,q-1}{}\circ \trip{d}{i,q}{K}$ whenever $0\leq i<j\leq q$, i.e.:
-\begin{enumerate}\squishlist
-\setlength{\parindent}{.25in}
-\item[({\makebox[.51em][c]{a}})] $\trip{d}{i,q+1}{X}\circ \trip{s}{j,q}{X}=\trip{s}{j-1,q-1}{X}\circ \trip{d}{i,q}{X}$,\textup{ and}%$\trip{\frakd}{i,q+1}{}\circ \trip{\fraks}{j,q}{}=\trip{\fraks}{j-1,q-1}{}\circ \trip{\frakd}{i,q}{}$
-\item[({\makebox[.51em][c]{b}})]
-$\frakd_{i,q+1}\circ
-\frakd_{j+1,q+2}\circ\cdots \circ\frakd_{j+1,2q+1}=
-\frakd_{j,q+1}\circ\cdots \circ\frakd_{j,2q-1}\circ
-\frakd_{q+i,2q}\circ\frakd_{i,2q+1}$.
-\end{enumerate}
-\item We must check that $\trip{d}{j+1,q+1}{L}\circ \trip{h}{j,q}{}=\trip{d}{j+1,q+1}{L}\circ \trip{h}{j+1,q}{}$ whenever $0\leq j\leq q-1$, i.e.:
-\begin{enumerate}\squishlist
-\setlength{\parindent}{.25in}
-\item[({\makebox[.51em][c]{a}})] $\trip{d}{j+1,q+1}{X}\circ \trip{s}{j,q}{X}=\trip{d}{j+1,q+1}{X}\circ \trip{s}{j+1,q}{X}$,\textup{ and}%$\trip{\frakd}{j+1,q+1}{}\circ \trip{\fraks}{j,q}{}=\trip{\frakd}{j+1,q+1}{}\circ \trip{\fraks}{j+1,q}{}$
-\item[({\makebox[.51em][c]{b}})]
-$\frakd_{j+1,q+1}\circ
-\frakd_{j+1,q+2}\circ\cdots \circ\frakd_{j+1,2q+1}=
-\frakd_{j+1,q+1}\circ
-\frakd_{j+2,q+2}\circ\cdots \circ\frakd_{j+2,2q+1}$.
-\end{enumerate}
-\item We must check that $\trip{d}{i,q+1}{L}\circ \trip{h}{j,q}{}=\trip{h}{j,q-1}{}\circ \trip{d}{i-1,q}{K}$ whenever $0\leq j<i-1\leq q$, i.e.:
-\begin{enumerate}\squishlist
-\setlength{\parindent}{.25in}
-\item[({\makebox[.51em][c]{a}})] $\trip{d}{i,q+1}{X}\circ \trip{s}{j,q}{X}=\trip{s}{j,q-1}{X}\circ \trip{d}{i-1,q}{X}$,\textup{ and}%$\trip{\frakd}{i,q+1}{}\circ \trip{\fraks}{j,q}{}=\trip{\fraks}{j,q-1}{}\circ \trip{\frakd}{i-1,q}{}$
-\item[({\makebox[.51em][c]{b}})] 
-$\frakd_{i,q+1}\circ
-\frakd_{j+1,q+2}\circ\cdots \circ\frakd_{j+1,2q+1}=
-\frakd_{j+1,q+1}\circ\cdots \circ\frakd_{j+1,2q-1}\circ
-\frakd_{q+i-1,2q}\circ\frakd_{i-1,2q+1}$.
-\end{enumerate}
-\item We must check that $\trip{s}{i,q+1}{L}\circ \trip{h}{j,q}{}=\trip{h}{j+1,q+1}{}\circ \trip{s}{i,q}{K}$ whenever $0\leq i\leq j\leq q$, i.e.:
-\begin{enumerate}\squishlist
-\setlength{\parindent}{.25in}
-\item[({\makebox[.51em][c]{a}})] $\trip{s}{i,q+1}{X}\circ \trip{s}{j,q}{X}=\trip{s}{j+1,q+1}{X}\circ \trip{s}{i,q}{X}$,\textup{ and}%$\trip{\fraks}{i,q+1}{}\circ \trip{\fraks}{j,q}{}=\trip{\fraks}{j+1,q+1}{}\circ \trip{\fraks}{i,q}{}$
-\item[({\makebox[.51em][c]{b}})] 
-$\fraks_{i,q+1}\circ
-\frakd_{j+1,q+2}\circ\cdots \circ\frakd_{j+1,2q+1}=
-\frakd_{j+2,q+3}\circ\cdots \circ\frakd_{j+2,2q+3}\circ
-\fraks_{q+i+2,2q+2}\circ\fraks_{i,2q+1}$.
-\end{enumerate}
-\item We must check that $\trip{s}{i,q+1}{L}\circ \trip{h}{j,q}{}=\trip{h}{j,q+1}{}\circ \trip{s}{i-1,q}{K}$ whenever $0\leq j<i\leq q+1$, i.e.:
-\begin{enumerate}\squishlist
-\setlength{\parindent}{.25in}
-\item[({\makebox[.51em][c]{a}})] $\trip{s}{i,q+1}{X}\circ \trip{s}{j,q}{X}=\trip{s}{j,q+1}{X}\circ \trip{s}{i-1,q}{X}$,\textup{ and}%$\trip{\fraks}{i,q++1}{}\circ \trip{\fraks}{j,q}{}=\trip{\fraks}{j,q+1}{}\circ \trip{\fraks}{i-1,q}{}$
-\item[({\makebox[.51em][c]{b}})] 
-$\fraks_{i,q+1}\circ
-\frakd_{j+1,q+2}\circ\cdots \circ\frakd_{j+1,2q+1}=
-\frakd_{j+1,q+3}\circ\cdots \circ\frakd_{j+1,2q+3}\circ
-\fraks_{q+i+1,2q+2}\circ\fraks_{i-1,2q+1}$.
-\end{enumerate}
-\end{enumerate}
-\noindent Each of these equations follows from the simplicial identities, proving that the $h_{jq}$ form a homotopy. 
-Finally, we check that this homotopy is indeed a homotopy between the two maps of interest:
-\begin{alignat*}{2}
-\trip{d}{0,q+1}{L}\trip{h}{0,q}{}
-&=
-[\frakd_{0,q+1}\frakd_{1,q+2}\circ\cdots \circ\frakd_{1,2q+1}](\trip{d}{0,q+1}{X}\trip{s}{0q}{X})%
-\\
-&=
-[\frakd_{0,q+1}\frakd_{0,q+2}\circ\cdots \circ\frakd_{0,2q+1}]\trip{\textup{id}}{X_q}{}%
-\end{alignat*}
-is the action of  $\epsilon_{(\barConstructionMightAbbreviate X)}$ in level $q$, and similarly,
-\begin{alignat*}{2}
-\trip{d}{q+1,q+1}{L}\trip{h}{q,q}{}
-&=
-[\frakd_{q+1,q+1}\frakd_{q+1,q+2}\circ\cdots \circ\frakd_{q+1,2q+1}](\trip{d}{q+1,q+1}{X}\trip{s}{qq}{X})
-\\
-&=
-[\frakd_{q+1,q+1}\frakd_{q+1,q+2}\circ\cdots \circ\frakd_{q+1,2q+1}]\trip{\textup{id}}{X_q}{}%
-\end{alignat*}
-is the action of $\barConstructionMightAbbreviate \epsilon_{X}$ in level $q$.
-}%end "don't print \circ"
-\end{proof}
-
-\end{Bousfield-Kan spectral sequence}
 
 
 
@@ -2738,7 +2761,7 @@ By Priddy's work in \cite{PriddySimplicialLie.pdf}, Lie algebra cohomology has S
 
 %\subsection{Cohomology for objects of $\calW$}
 \tododone{Define $Q^\calW:\calW\to \vect{+}{0}$, and thus the cohomology functor on $\calW$}{Give the bar construction $B^{\calW}$
-\item Explain significance as Adams $E^2$}
+\item Explain significance as Bousfield-Kan $E^2$}
 %We will use the standard simplicial bar construction as our simplicial resolution of $X\in\calW$, writing $B^\calW_sX=U^{s+1}X$. Then the cohomology of $X$, $H^{s}_t(X)\in\vect{1}{+}$, is the cohomology of the cochain complex
 %\[C^{s}_{t}=\Hom(N_s(Q^\calW B_{\bullet}X)^{t},\F_2).\]
 %We'll frequently use the identification $Q^\calW B_{s}X=U^{s}X$.
@@ -2803,7 +2826,7 @@ For $V\in\vect{1}{+}$ with homogeneous basis $B$, a basis of $F_{\calMv(1)}V$ co
 \[\left\{\delta_Ib\ \middle|\ b\in B^{s}_t\textup{, $I$ $\delta$-admissible with }\minDimP(I)\leq t\right\}.\]
 \textbf{extend to case where $V$ concentrated in Koszul deg 0}\end{lem}
 \begin{shaded}
-Note that the forgetful functor $\calW(0)\to\calU(0)$ does not preserve almost free simplicial objects! However, it does preserve levelwise free simplicial objects, which create the right homology groups (see PRLieAlgs.tex). Thus there's a disconnect in the number of available operations on the Adams $E^2$ and on the first Koszul resolution.
+Note that the forgetful functor $\calW(0)\to\calU(0)$ does not preserve almost free simplicial objects! However, it does preserve levelwise free simplicial objects, which create the right homology groups (see PRLieAlgs.tex). Thus there's a disconnect in the number of available operations on the Bousfield-Kan $E^2$ and on the first Koszul resolution.
 \end{shaded}
 
 \subsection{Vertical Steenrod operations for $H^*_{\calW(n)}$ and $H^*_{\calU(n)}$ when $n\geq1$}\label{section: vertical Koszul operations n positive}
@@ -4388,7 +4411,7 @@ As the element we have written as $KQG(\alpha)$ is a representative for $(G\circ
 
 %\subsection{Cohomology for objects of $\calW$}
 \tododone{Define $Q^\calW:\calW\to \vect{+}{0}$, and thus the cohomology functor on $\calW$}{Give the bar construction $B^{\calW}$
-\item Explain significance as Adams $E^2$}
+\item Explain significance as Bousfield-Kan $E^2$}
 %We will use the standard simplicial bar construction as our simplicial resolution of $X\in\calW$, writing $B^\calW_sX=U^{s+1}X$. Then the cohomology of $X$, $H^{s}_t(X)\in\vect{1}{+}$, is the cohomology of the cochain complex
 %\[C^{s}_{t}=\Hom(N_s(Q^\calW B_{\bullet}X)^{t},\F_2).\]
 %We'll frequently use the identification $Q^\calW B_{s}X=U^{s}X$.
@@ -4464,7 +4487,7 @@ What remains is to check that the Adem relations are satisfied. The necessary ar
 
 
 \subsection{Horizontal Steenrod operations and a commutative product for $H^*_{\calW}$}
-We'll now give a construction of operations on the homology $H^*_{\calW}$ which arise from the Lie structure on elements of $\calW$. {\tiny\textbf{This section made tiny since it duplicates the more general derivation above, although I'll still need to be explicit, especially about the shift.} We'll follow the framework set out by Goerss in the derivation [] of the $\calW$ structure operations on Andr\'e-Quillen homology. The first construction is that of the smash coproduct of objects $X_1,X_2\in\calW$, which is defined to be the kernel of the natural map from the coproduct $X_1\sqcup X_2$ to the product $X_1\times X_2$, so that there is a short exact sequence:
+We'll now give a construction of operations on the homology $H^*_{\calW}$ which arise from the Lie structure on elements of $\calW$. {\tiny\textbf{This section made tiny since it duplicates the more general derivation above, although I'll still need to be explicit, especially about the shift.} We'll follow the framework set out by Goerss in the derivation [] of the $\calW$ structure operations on Andr\'e-Quillen homology of simplicial commutative algebras. The first construction is that of the smash coproduct of objects $X_1,X_2\in\calW$, which is defined to be the kernel of the natural map from the coproduct $X_1\sqcup X_2$ to the product $X_1\times X_2$, so that there is a short exact sequence:
 \[\xymatrix@R=4mm{
 0\ar[r]
 &%r1c1
@@ -6674,7 +6697,7 @@ If $L$ has bracket zero, then the differential on $\dual(\UEAX(L))$ is defined o
 \end{prop}
 
 \section{\textbf{Unstable Lie coalgebras over the dual $P$-algebra (move me)}}
-\todo{Give a formal definition of these coalgebras}{goes down to level of simplicial commutative algebras, and brings in the SOA comonad structure}
+\todo{Give a formal definition of these coalgebras}{goes down to level of simplicial commutative algebras, and brings in the small object argument comonad structure}
 \todo{Give the construction (via equalizer diagram, etc) of the comonad}{}
 \todo{Write the maps $j$ and $\gamma_i$ in terms of maps out of $C_{ij}$ and $C_i^j$}{include generating cofibrations such as $S^{i+j}\to C_{ij}$ and $\Delta[1]\times S^{i+j}\to \Delta[1]\times C_{ij}$}
 \todo{Construct operations on homology of such coalgebras}{they agree with those in double dual construction when locally finite
@@ -6689,7 +6712,7 @@ If $L$ has bracket zero, then the differential on $\dual(\UEAX(L))$ is defined o
 \setlength{\parindent}{.25in}
 \item which side do you index bar constructions from?
 \item Monadicity over vector spaces is important and should be emphasised, especially for the diagonal on the Blanc-Stover resolution.
-\item Maybe I should keep finiteness to myself, given that the SOA might be around, or even the W comonad.
+\item Maybe I should keep finiteness to myself, given that the small object argument might be around, or even the W comonad.
 \item change all $\calW$'s to $\calK$'s?
 \item Change the notations $i$ and $\gamma$ for $\Pi$-algebra stuff.
 \item Uniformize notation for the total complex of a double complex, and for the cohomotopy of the dual of a simplicial vector space.
@@ -6764,12 +6787,14 @@ If $L$ has bracket zero, then the differential on $\dual(\UEAX(L))$ is defined o
 \item at some point say what a tensor product of chain complexes is
 \item two methods of stating indeterminacy are at odds just a little
 \item edd $\textup{ext}$ in codwyer chapter
-\item omit some words from ``complete with respect to Andr\'e-Quillen homology''
 \item deal with arrows % \ar@{>->}[d] becomes \ar@{ >->}[d]
-\item Adams $\rightarrow$ Bousfield-Kan
+%\item Adams $\rightarrow$ Bousfield-Kan
 \item reference \url{http://arxiv.org/pdf/1502.06944v1.pdf}
-\item change some $\Lambda(\LieOperad)$ to $\Lambda(\LieOperad)\textup{-alg}$
+\item change some $\Lambda(\LieOperad)$ to $\liealgs$
 \item Delta subscripts and D superscripts are bad.
+\item Remove all apostrophes, as in ``it's''
+\item use `homology completion'
+\item fix everything like $QK$
 \end{enumerate}
 \end{todolist}
 \begin{bibliog}
