@@ -25,13 +25,13 @@
 \ifx\IncludeAll\undefined\else\renewcommand{\xclude}[1]{\nclude{#1}}\fi
 \xclude{Contents Page}
 \xclude{Conventions and notation}
-\xclude{CPiAlgs and CHalgs}
-\nclude{Bousfield-Kan spectral sequence}
+\nclude{CPiAlgs and CHalgs}
+\xclude{Bousfield-Kan spectral sequence}
 \xclude{Constructing (co)homotopy operations}
 \xclude{homotopy operations for PRLs}
 \xclude{Cohomology Operations for W and U}
 \xclude{second quadrant homotopy}%
-\xclude{Operations on the Bousfield-Kan spectral sequence}%
+\nclude{Operations on the Bousfield-Kan spectral sequence}%
 \xclude{Koszul complexes}
 \xclude{Composite functor spectral sequences}
 \xclude{Operations in composite functor spectral sequences}
@@ -123,6 +123,7 @@
 \DeclareMathOperator*{\holimit}{holim}
 \DeclareMathOperator*{\holim}{holim}
 \DeclareMathOperator*{\hofib}{hofib}
+\DeclareMathOperator*{\hocof}{hocof}
 \DeclareMathOperator*{\hotfib}{thofib}
 \DeclareMathOperator*{\equaliser}{eq}
 \DeclareMathOperator*{\coequaliser}{coeq}
@@ -375,6 +376,10 @@ url=false,doi=false,isbn=false,eprint=false]{biblatex}%
 \newcommand{\dhor}{_\textup{h}}
 \newcommand{\diag}{\Delta}
 \newcommand{\dual}{\mathbf{D}}
+
+\newcommand{\smashprod}{\barwedge}%{\blacktriangle}
+\newcommand{\Lsmashprod}{\barwedge^\textup{L}}%{\blacktriangle}
+\newcommand{\smashcoprod}{\veebar}%{\blacktriangledown}
 
 %\bibliography{papers}
 \bibliography{../../Dropbox/logbook/_LOGBOOK/papers}
@@ -863,7 +868,7 @@ We can again add internal gradings, the richest case being that in which  $V\in 
 %Suppose that $X^\bullet$ is a cosimplicial object in $s\algs$. Then there is a map of spectral sequences, which is an isomorphism from $E^1$ (\textbf{que?}), from the homotopy spectral sequence of the $\Tot$ tower $\{I\Tot_mX^\bullet\}$ to the spectral sequence of the bicomplex underlying $IX^\bullet$. Moreover, there is an isomorphism $\pi_*I\Tot X^\bullet\to H_*TIX^\bullet$ (to the homology of the total complex of the bicomplex), which is compatible with the map of spectral sequences.
 %\end{cor}
 %\begin{cor}
-%Suppose that $X$ is a connected element of $s\algs$. Then the Bousfield-Kan spectral sequence for $X$ is the spectral sequence of the bicomplex underlying the cosimplicial simplicial vector space $I((c(K\overline{Q})^\bullet X)^{\textup{rf}})$. This spectral sequence admits a vanishing line from $E^2$, and so converges strongly to its target, $\pi_{t-s}(I\hat X)$.
+%Suppose that $X$ is a connected element of $s\algs$. Then the Bousfield-Kan spectral sequence for $X$ is the spectral sequence of the bicomplex underlying the cosimplicial simplicial vector space $I((c(KQ)^\bullet X)^{\textup{rf}})$. This spectral sequence admits a vanishing line from $E^2$, and so converges strongly to its target, $\pi_{t-s}(I\hat X)$.
 %\end{cor}
 
 
@@ -993,10 +998,78 @@ and in particular, there is an adjunction $Q^{\calc\HAlg}\dashv K^{\calc\HAlg}$.
 
 \textbf{Talk about duality.}
 
+\subsection{The smash coproduct}\label{subseq:The smash coproduct}
+For $X_1$ and $X_2$ objects of any algebraic category, for example $\calC$, $\calC\PiAlg$ or $\calC\HAlg$ (to be defined shortly), we define the \emph{smash coproduct} $X_1\smashcoprod X_2$ to be the kernel of the natural map $X_1\sqcup X_2\to X_1\times X_2$. When $X_1=X_2=X$, $X\smashcoprod X$ has a natural action of $\Sigma_2$, and we write $X\smashcoprod^{\Sigma_2} X$ for the subobject of invariant elements under this action.
+
+When $X_1$ and $X_2$ are  objects of $s\calc$, taking this strict fiber is in fact homotopically correct, since the map $X_1\sqcup X_2\to X_1\times X_2$ is always a fibration, and indeed:
+\begin{prop}\label{smash coprod}
+For $X_1$ and $X_2$ in $s\calc$, the natural $\calC$-$\Pi$-algebra map
+\[\pi_*(X_1\times X_2)\to \pi_* X_1\times \pi_* X_2\]
+ is an isomorphism. If $X_1$ and $X_2$ are models in $s\calc$, the natural $\calC$-$\Pi$-algebra map 
+\[\pi_* X_1\sqcup \pi_* X_2\to\pi_*(X_1\sqcup X_2)\]
+takes part in an isomorphism of short exact sequences:
+\[\xymatrix@R=4mm{
+0\ar[r]&%r1c1
+\pi_* X_1\smashcoprod \pi_* X_2
+\ar[r]\ar[d]_-{\cong}
+%\ar[d]^-{i}_-{\cong}
+&%r1c2
+\pi_* X_1\sqcup \pi_* X_2
+\ar[r]
+\ar[d]_-{\cong}\ar[d]_-{\cong}
+&%r1c3
+\pi_* X_1\times \pi_* X_2
+\ar[r]
+\ar[d]_-{\cong}
+&%r1c4
+0\\%r1c5
+0\ar[r]&%r1c1
+\pi_* (X_1\smashcoprod  X_2)
+\ar[r]
+&%r1c2
+\pi_* (X_1\sqcup X_2)
+\ar[r]
+&%r2c3
+\pi_* (X_1\times X_2)
+\ar[r]&0
+}\]
+\end{prop}
+\begin{proof}
+The first claim is easy: the forgetful functor is a right adjoint, and $\pi_*$ preserves products (of vector spaces). Consider the commuting diagram
+\[\xymatrix@R=4mm{
+0\ar[r]&%r1c1
+\pi_* X_1\smashcoprod \pi_* X_2
+\ar[r]
+%\ar[d]^-{i}_-{\cong}
+&%r1c2
+\pi_* X_1\sqcup \pi_* X_2
+\ar[r]
+\ar[d]^-{i}
+&%r1c3
+\pi_* X_1\times \pi_* X_2
+\ar[r]
+\ar[d]_-{\cong}
+&%r1c4
+0\\%r1c5
+&%r1c1
+\pi_* (X_1\smashcoprod  X_2)
+\ar[r]
+&%r1c2
+\pi_* (X_1\sqcup X_2)
+\ar[r]
+&%r2c3
+\pi_* (X_1\times X_2)
+}\]
+in which the top row is a short exact sequence, and the bottom row is just a three term excerpt of the homotopy long exact sequence of the fiber sequence defining $X_1\smashcoprod X_2$. If $i$ were an isomorphism, the bottom row would also be short exact, and a simple diagram chase would show that $i$ restricts to the isomorphism we desire.
+
+
+If $X_1$ and $X_2$ are models, the displayed map $i$ is an isomorphism, since both source and target represent the free $\calc$-$\Pi$-algebra on generators corresponding to the sphere summands of $X_1$ and $X_2$ taken together. 
+\end{proof}
+
 \subsection{Cofibrant replacement via the small object argument}\label{Cofibrant replacement via the small object argument}
 The homotopy of an object $X$ of $s\calc$ was defined simply by application of the forgetful functor $U^{\calc}:\calc\to\vect{}{}$, a definition which is tautologically homotopically correct. On the other hand, in order to define the homology $H_*^{\calc}X$, as the left Quillen functor $Q^{\calc}$ does not preserve all weak equivalences, we must perform a cofibrant replacement before applying $Q^{\calc}$. While the comonadic bar construction $B^{\calc}$ described in \S\ref{ssec: quillen model and bar construction} suffices to define the groups $H_*^{\calc}X$, it lacks the structure that we will need at various points in this work.
 
-Radulescu-Banu's innovation \cite{Radulescu-Banu.pdf} was to explain that the cofibrant replacement functor $c:s\calc\to s\calc$ constructed by Quillen's \emph{small object argument}  \cite{QuillenHomAlg.pdf}, which by design already posesses a natural acyclic fibration $\epsilon:c\to\Id$, in fact admits the full structure of a comonad, with diagonal $\beta:c\to cc$. As explained by Blumberg and Riehl \cite[Remark 4.12]{BlumRiehlResolutions.pdf}:
+Radulescu-Banu's innovation \cite{Radulescu-Banu.pdf} first explained that the cofibrant replacement functor $c:s\calc\to s\calc$ constructed by Quillen's \emph{small object argument}  \cite{QuillenHomAlg.pdf}, which by design already posesses a natural acyclic fibration $\epsilon:c\to\Id$, in fact admits the full structure of a comonad, with diagonal $\beta:c\to cc$. As explained by Blumberg and Riehl \cite[Remark 4.12]{BlumRiehlResolutions.pdf}:
 \begin{prop}
 The endofunctor $Q^\calc cK^\calc$ of $s\vect{}{}$ admits the structure of a comonad, via the maps
 \[Q^\calc cK^\calc\overset{\smash{Q^\calc (\beta)}}{\to}Q^\calc ccK^\calc \overset{\smash{Q^\calc c(\eta)}}{\to} Q^\calc cK^\calc Q^\calc cK^\calc\text{ \ and \ }Q^\calc cK^\calc\overset{\smash{Q^\calc (\epsilon)}}{\to}Q^\calc K^\calc\cong\Id,\]
@@ -1005,7 +1078,7 @@ where $\eta$ denotes the unit of the $Q^\calc\dashv K^\calc$ adjunction.
 
 Now the functor $c$ of the small object argument depends on the choice of sets of generating cofibrations and acyclic cofibrations. It will be important to our applications that included in this set are certain important cofibrations, namely the inclusion of $0$ into any sphere $F^\calc\mathbb{K}^t_{s_{r+1},\ldots,s_1}$, and any of the cofibrations  defined in \S\ref{chain level construction of j} and \S\ref{two-cell complex for the deltas}.
 
-Having included these maps, all that one needs to know about the small object argument functor $cX$, beyond the fact that it is a cofibrant replacement functor, is the following. It is constructed as the colimit of a (transfinite) sequence of cofibrations:
+It will be helpful to have included these maps, because of the following facts about the small object argument functor $cX$. It is constructed as the colimit of a (transfinite) sequence of cofibrations:
 \[\xymatrix@!0@R=10mm@C=13mm{
 \makebox[0cm][r]{$0={}$}c_0X\ar[rr] \ar@{ >->}[drrr]
 &&%r1c1
@@ -1035,6 +1108,54 @@ B\ar[r]\ar[ur]&%r2c1
 X%r2c2
 }\]
 commute. Indeed, the map $c_nX\to c_{n+1}X$ is constructed by attaching a copy of $B$ along the image of $A$ in $c_nX$, for each such commuting square.
+
+
+Finally, we note that Radulescu-Banu's construction has a convenient consequence for the construction of homotopy cofibres in $s\calc$. Quillen's small object argument actually provides a functorial factorization
+\[\xymatrix@R=4mm{
+A\ar@{ >->}[r]
+&%r1c1
+c(A\to B)\ar@{->>}[r]^-{\sim}
+& B.
+}\]
+ of any map $A\to B$, and in this notation, one might say that we have been writing $cX$ as shorthand for $c(0\to X)$. There is a commuting square
+\[\xymatrix@R=4mm{
+0\ar@{ >->}[r]\ar[d]
+&%r1c1
+cB\ar@{=}[d]
+\\%r1c2
+cA\ar[r]&%r2c1
+cB%r2c2
+}\]
+which by functoriality induces a commuting diagram (ignoring the dashed map):
+\[\xymatrix@R=4mm{
+0\ar@{ >->}[r]\ar[d]
+&
+ccB\ar@{->>}[r]^-{\epsilon_{cB}}
+\ar[d]_-{f}
+&%r1c1
+cB\ar@{=}[d]
+\\%r1c2
+cA\ar@{ >->}[r]&%r2c1
+c(cA\to cB)\ar@{->>}[r]_-{\sim}
+&
+cB\ar@{-->}[ul]|-{\beta}
+%r2c2
+}\]
+Radulescu-Banu's diagonal $\beta$ is the dotted map in this diagram, and as it is a comonad diagonal $\epsilon_{cB}\circ \beta=\Id_{cB}$, so that $f\circ \beta$ is a section of the acyclic fibration $c(cA\to cB)\overset{\sim}{\epi} cB$.
+
+Now we may define the homotopy cofiber as the pushout
+\[\xymatrix@R=4mm{
+cA\ar@{ >->}[r]\ar[d]&%r1c1
+c(cA\to cB)\ar[d]\\%r1c2
+0\ar[r]&%r2c1
+\hocof(A\to B)%r2c2
+}\]
+and by virtue of the construction just given:
+\begin{prop}\label{hocof no ziggy-zaggy}
+For any map $A\to B$, we have a canonical construction of the homotopy cofiber $\hocof(A\to B)$ at the level of $s\calc$, implemented by  natural maps
+\[cA\to cB\to \hocof(A\to B).\]
+\end{prop}
+This is in contrast to the standard situation, where there is at best a natural zig-zag from $B$ to  $\hocof(A\to B)$.
 \subsection{Homology groups and $\calc$-$H_*$-coalgebras}\label{homology and Hcoalgs}
 There is a commuting diagram
 \[\xymatrix@R=4mm@C=20mm{
@@ -1137,67 +1258,70 @@ One says that $X$ is \emph{homotopy complete} when the map $cX\to X\hat{\ }:=\te
 Note that the maps $d^0,d^1:\calX^{0}\to\calX^{1}$ induce respectively the coaugmentation and coaction maps for $\pi_*\calx^{0}=H_*^{\calc}X$ on homotopy, while $d^0:\calX^{-1}\to\calX^{0}$ induces the Hurewicz map. Thus, the very existence of this diagram shows that the the Hurewicz map factors through the primitives. The observation of \cite{BlumRiehlResolutions.pdf} that that if $X=K^\calc V$, this cosimplicial object has extra codegeneracies, completes the proof of proposition \ref{hurewicz}.
 Comments in \cite{BlumRiehlResolutions.pdf} also show that the coaugmented cosimplicial vector space $H_*^{\calc}\calX^\bullet$  is weakly equivalent to its coaugmentation $H_*^{\calc}X$.
 We will return to this construction in \S\ref{Idnt E1 E2}.
+\subsection{The smash product}\label{subseq:The smash product}
+For $X_1$ and $X_2$ objects of any coalgebraic category, in particular $\calC\HCoalg$, we define the \emph{smash product} $X_1\smashprod X_2$ to be the cokernel of the natural map $X_1\sqcup X_2\to X_1\times X_2$. 
 
+The theory changes a little in form after passing from homotopy to homology, and we must introduce the \emph{left derived smash product} in $\calc$. For $A_1$ and $A_2$ in $s\calc$, the natural map $A_1\sqcup A_2\to A_1\times A_2$ is a surjection, and so in general very far from a cofibration. We define the left derived smash product $A_1\Lsmashprod A_2$ to be the cofiber of this map.
+In light of proposition \ref{hocof no ziggy-zaggy}, there are natural maps
+\[c(A_1\sqcup A_2)\to c(A_1\times A_2)\to A_1\Lsmashprod A_2.\]
+As in \cite[Proposition 4.6]{MR1089001}, this \emph{cofiber sequence} induces  a homology long exact sequence.
+%
+%
+%Using any a functorial cofibration/acyclic fibration factorization on $s\calc$, form a natural commuting diagram
+%\[\xymatrix@R=4mm{
+%c(A_1\sqcup A_2)\ar@{ >->}[r]\ar@{->>}[d]^-{\epsilon}_-{\sim}
+%&%r1c1
+%M\ar@{ ->>}[r]^-{\sim} &%r1c2
+%c(A_1\sqcup A_2)\ar@{->>}[d]^-{\epsilon}_-{\sim}\\%r1c3
+%A_1\sqcup A_2\ar[rr]&%r2c1
+%&%r2c2
+%A_1\times A_2%r2c3
+%}\]
+%Then $A_1\Lsmashprod A_2$ is defined as the pushout in $s\calc$:
+%\[\xymatrix@R=4mm{
+%c(A_1\sqcup A_2)\ar@{ >->}[r]\ar[d]&%r1c1
+%M\ar[d]\\%r1c2
+%0\ar[r]&%r2c1
+%A_1\Lsmashprod A_2%r2c2
+%}\]
+%%There is a zigzag $c(A_1\sqcup A_2)\overset{\sim}{\from}M\to A_1\Lsmashprod A_2$. 
+%If we use Quillen's small object argument to construct the functorial factorization through $M$  (c.f.\ \cite{QuillenHomAlg.pdf}) it happens that Radulescu-Banu's construction can be extended, not only to produce a diagonal $\psi:c\to cc$, but to produce a natural map $c(A_1\sqcup A_2)$ to a commuting diagram{}
 
-
-\subsection{The smash coproduct}\label{subseq:The smash coproduct}
-For $X_1,X_2\in\calc$, we define the \emph{smash coproduct} $X_1\wedge X_2$ to be the kernel of the natural map $X_1\sqcup X_2\to X_1\times X_2$. When $X_1=X_2=X$, $X\wedge X$ has a natural action of $\Sigma_2$, and we write $X\wedge^{\Sigma_2} X$ for the subobject of invariant elements under this action.
-
-\tododone{Various intro here}{Say what a $\calc$-$\Pi$-algebra is, even with all the gradings.
-\item Construct the free $\calc$-$\Pi$-algebra on a set (\textbf{what happens on a vector space?}).
-\item Say what a model is. Move the discourse on spheres in $\complexes\vect{}{}$ to somewhere above. Also, put some discourse on the smash coproduct into this paragraph.}
-We will find it useful to be able to express the coproduct and smash coproduct of free $\calc$-$\Pi$-algebras as the homotopy groups of objects of $s\calc$.
-As every free $\calc$-$\Pi$-algebra is the homotopy of a model in $s\calc$, it will be enough to prove
-\begin{prop}
-For models $X_1$ and $X_2$ in $s\calc$, there are isomorphisms
-\[\pi_* X_1\sqcup \pi_* X_2\overset{i}{\to}\pi_*(X_1\sqcup X_2)\text{\ \ \ {and}\ \ \ }\pi_* X_1\wedge \pi_* X_2\overset{i}{\to}\pi_*(X_1\wedge X_2),\]
-natural in the models $X_1$ and $X_{2}$.
-
-\end{prop}
-\begin{proof}
-The natural map $i:\pi_* X_1\sqcup \pi_* X_2\to \pi_*(X_1\sqcup X_2)$ is an isomorphism, since both source and target represent the free $\calc$-$\Pi$-algebra on generators corresponding to the sphere summands of $X_1$ and $X_2$ taken together. Moreover, the natural map $\pi_*(X_1\times X_2)\to \pi_* X_1\times \pi_* X_2$ is an isomorphism, as the forgetful functor is a right adjoint, and $\pi_*$ preserves products (of vector spaces). Thus we have a commuting square
+The following result and its proof are dual to proposition \ref{smash coprod} and its proof.
+\begin{prop}\label{smash prod}
+For $X_1$ and $X_2$ in $s\calc$, the natural $\calC$-$H_*$-coalgebra map
+\[H^\calc_*(X_1\sqcup X_2)\from H^\calc_* X_1\sqcup H^\calc_* X_2\]
+ is an isomorphism. If $X_1$ and $X_2$ are GEMs in $s\calc$, the natural $\calC$-$H_*$-coalgebra map 
+\[H^\calc_* X_1\times H^\calc_* X_2\from H^\calc_*(X_1\times X_2)\]
+takes part in an isomorphism of short exact sequences:
 \[\xymatrix@R=4mm{
-\pi_* X_1\sqcup \pi_* X_2
-\ar@{->>}[r]
-\ar[d]^-{i}_-{\cong}
-&%r1c3
-\pi_* X_1\times \pi_* X_2
-\ar[d]_-{\cong}\\
-\pi_* (X_1\sqcup X_2)
-\ar[r]
-&%r2c3
-\pi_* (X_1\times X_2)
-}\]
-and the homotopy long exact sequence of $X_1\wedge X_2\to X_1\sqcup X_2\to X_1\times X_2$ has zero connecting maps. The resulting morphism of short exact sequences
-\[\xymatrix@R=4mm{
-0\ar[r]&%r1c1
-\pi_* X_1\wedge \pi_* X_2
-\ar[r]
-\ar[d]^-{i}_-{\cong}
+0\ar[r];[]&%r1c1
+H^\calc_* X_1\smashprod H^\calc_* X_2
+\ar[r];[]\ar[d];[]^-{\cong}
+%\ar[d];[]_-{i}_-{\cong}
 &%r1c2
-\pi_* X_1\sqcup \pi_* X_2
-\ar[r]
-\ar[d]^-{i}_-{\cong}
+H^\calc_* X_1\times H^\calc_* X_2
+\ar[r];[]
+\ar[d];[]^-{\cong}\ar[d];[]^-{\cong}
 &%r1c3
-\pi_* X_1\times \pi_* X_2
-\ar[r]
-\ar[d]_-{\cong}
+H^\calc_* X_1\sqcup H^\calc_* X_2
+\ar[r];[]
+\ar[d];[]^-{\cong}
 &%r1c4
 0\\%r1c5
-0\ar[r]&%r1c1
-\pi_* (X_1\wedge  X_2)
-\ar[r]
+0\ar[r];[]&%r1c1
+H^\calc_* (X_1\Lsmashprod X_2)
+\ar[r];[]
 &%r1c2
-\pi_* (X_1\sqcup X_2)
-\ar[r]
+H^\calc_* (X_1\times X_2)
+\ar[r];[]
 &%r2c3
-\pi_* (X_1\times X_2)
-\ar[r]
-&%r1c4
-0
+H^\calc_* (X_1\sqcup X_2)
+\ar[r];[]&0
 }\]
-provides the desired isomorphism.
-\end{proof}
+\end{prop}
+
+
 
 
 
@@ -1208,15 +1332,15 @@ In this paper, we will often use a method of constructing cohomology operations 
 
 For $V\in\vect{}{}$, the diagonal map $\Delta:V\to V\oplus V$ of $V$ induces a \emph{diagonal map} $F^\calc V\to F^\calc (V\oplus V)\cong (F^\calc (V))^{\sqcup 2}$, and writing $i_1$ and $i_2$ for the two summand inclusions $F^\calc (V)\to (F^\calc (V))^{\sqcup 2}$, consider the map
 \[(F^\calc(\Delta)+i_1+i_2):F^\calc V\to (F^\calc V)^{\sqcup2}.\]
-This map  factors through $(F^\calc V)^{\wedge 2}$, and is symmetric. We name this factoring the \emph{cross terms}:
-\[\crossterms:F^\calc V\to (F^\calc V)\wedge^{\Sigma_2} (F^\calc V),\]
+This map  factors through $(F^\calc V)^{\smashcoprod 2}$, and is symmetric. We name this factoring the \emph{cross terms}:
+\[\crossterms:F^\calc V\to (F^\calc V)\smashcoprod^{\Sigma_2} (F^\calc V),\]
 as it measures the non-linearity in an expression in $F^\calc V$. For example, when $\calc=\algs$, then for $v,w\in V$, using subscripts to denote membership of the first or second copy of $V$:
 \[\crossterms(vw)=(v_1+v_2)(w_1+w_2)+v_1w_1+v_2w_2=v_1w_2+w_1v_2.\]
 
 In each case of interest to us, we will give a map, natural and symmetric in $X_1,X_2\in\calc$,
-\[j_\calc:Q^\calc(X_1\wedge X_2)\to Q^\calc(X_1)\otimes Q^\calc(X_2),\]
+\[j_\calc:Q^\calc(X_1\smashcoprod X_2)\to Q^\calc(X_1)\otimes Q^\calc(X_2),\]
 and we will write $\quadratic_\calc$ for \emph{quadratic part} map, the composite
-\[\quadratic_\calc:\left(F^\calc V\overset{\crossterms}{\to}(F^\calc V)^{\wedge 2}\to Q^\calc((F^\calc V)\wedge^{\Sigma_2} (F^\calc V))\overset{j_\calc}{\to}S^2(Q^{\calc}F^\calc V)=S^2V\right).\]
+\[\quadratic_\calc:\left(F^\calc V\overset{\crossterms}{\to}(F^\calc V)^{\smashcoprod 2}\to Q^\calc((F^\calc V)\smashcoprod^{\Sigma_2} (F^\calc V))\overset{j_\calc}{\to}S^2(Q^{\calc}F^\calc V)=S^2V\right).\]
 When $\calc=\algs$, the map $j_{\algs}$ is defined by $x_1x_2\mapsto x_1\otimes x_2$ when $x_i\in X_i$, and $\quadratic_{\algs}$ is the composite $F^{\algs} V\epi S_2V\overset{\trace}{\to}S^2V$, for example,  $\quadratic_{\algs}(u+vw+xy^2)$ evaluates as:
 \[j_{\algs}(v_1w_2+w_1v_2+x_1y_2^2+y_1^2x_2)=v\otimes w+w\otimes v+x\otimes y^2+y^2\otimes x,\]
 which equals $v\otimes w+w\otimes v$ %when evaluated in $S^2(Q^{\algs}F^{\algs}V)=S^2V$, 
@@ -1851,7 +1975,7 @@ is the action of $\barConstructionMightAbbreviate \epsilon_{X}$ in level $q$.
 \end{Bousfield-Kan spectral sequence}
 
 \begin{Constructing (co)homotopy operations}
-\vfil\pagebreak
+
 
 
 \section{\textbf{Constructing homotopy operations}}\label{sec:Constructing homotopy operations}
@@ -2248,12 +2372,12 @@ We will now give generalisations of Goerss' constructions in \cite[\S5]{MR108900
 is naturally an $\Ftwo $-vector space. Writing $\phi_s=\F^\calc(\Delta):X_s\to X_s\sqcup X_s$, the addition operation `$\star$' on $\Hom_\calc(X_s,\DASH)$ is given by $f\star g= (f\sqcup g)\circ\phi_s$. Now let
 $\overline{\xi}_\calc=((d_0\sqcup d_0)\phi_s)\star(\phi_{s-1}d_0)$, the sum of maps in the $\Ftwo $-vector space $\textup{Hom}_\calc(X_s,X_{s-1}\sqcup X_{s-1})$. It is completely formal to check that $\overline{\xi}_\calc$ maps to zero in the group
 \[\textup{Hom}_\calc(X_s,X_{s-1}\times X_{s-1})=\textup{Hom}_\calc(X_s,X_{s-1})\times \textup{Hom}_\calc(X_s,X_{s-1}),\]
-and thus $\overline{\xi}_\calc$ factors through a unique map $\xi_\calc:X_s\to X_{s-1}\wedge X_{s-1}$. Furthermore, $\xi_\calc$ enjoys the symmetry $\tau\xi_\calc=\xi_\calc$, and it is again formal to verify the analogue of \cite[Lemma 5.5]{MR1089001}:
+and thus $\overline{\xi}_\calc$ factors through a unique map $\xi_\calc:X_s\to X_{s-1}\smashcoprod X_{s-1}$. Furthermore, $\xi_\calc$ enjoys the symmetry $\tau\xi_\calc=\xi_\calc$, and it is again formal to verify the analogue of \cite[Lemma 5.5]{MR1089001}:
 \begin{lem}\label{psi is basically the quadratic part}
 The map $Q^\calc\xi_\calc$ induces a chain map of degree $-1$ on normalized complexes:
-\[N_s(Q^{\calc}X)\to N_{s-1}((Q^{\calc}(X\wedge X))^{\Sigma_2}).\]
+\[N_s(Q^{\calc}X)\to N_{s-1}((Q^{\calc}(X\smashcoprod X))^{\Sigma_2}).\]
 The composite
-\[\psi_\calc:\left(N_s(Q^{\calc}X)\overset{Q^\calc\xi_\calc}{\to} N_{s-1}((Q^{\calc}(X\wedge X))^{\Sigma_2})\overset{j_\calc}{\to} N_{s-1}(S^2(Q^{\calc}X))\right),\]
+\[\psi_\calc:\left(N_s(Q^{\calc}X)\overset{Q^\calc\xi_\calc}{\to} N_{s-1}((Q^{\calc}(X\smashcoprod X))^{\Sigma_2})\overset{j_\calc}{\to} N_{s-1}(S^2(Q^{\calc}X))\right),\]
 is essentially $\quadratic_\calc$, in that if $v\in V_s\cap N_sX$ represents an element of $N_sQ^\calc X$, writing $d_0v=f(w_j)$ for $w_j\in V_{s-1}$, we have $\psi_\calc(v)=\quadratic_\calc(f)(w_j)\in S^2(V_{s-1})$.
 \end{lem}
 The typical use of this structure is to define cohomology operations using the external cohomotopy operations defined above, i.e.\ natural operations on $H^*_\calc X=\pi^*(\dual(Q^\calc B^\calc X))$ defined by the composites:
@@ -2421,7 +2545,6 @@ Suppose that one chose a homogeneous basis of $V$, constructed from it a monomia
 \[\left\{P^Ib\ \middle|\ b\in B,\ \minDimP(I)\leq|b|,\ \textup{$I$ is $P$-admissible}\right\}.\]
 \end{prop}
 %An object of $\calw(0)$ is simultaneously an $S(\LieOperad)$-algebra and an unstable left $\Palg$-module.
-%\vfil\pagebreak
 %
 %
 %\begin{prop}[{\cite[\S5]{MR1089001}}]\label{omnibus on coh of simp algs}These operations have the following properties:
@@ -2701,7 +2824,7 @@ Similar to the proof of lemma \ref{Kill P ops gives lie alg}, using the observat
 \subsection{Decomposition maps for $\calL(n)$ and $\calw(n)$}
 \tododone{Describe the composition maps for these categories}{show the compatibility under $\calL(n)\PiAlg\cong \calw(n+1)$
 \item show that the $j$ are \emph{quadratic decomposition maps}, if that language is still around}
-Here we will introduce decomposition maps for the categories $\calL(n)$ and $\calw(n)$, and prove a certain compatibility between them. The definitions are simple enough, and the reader can verify that each is well defined. Choose $n\geq0$, then we define decomposition maps $\calc:Q(X\wedge Y)\to QX\otimes QY$:
+Here we will introduce decomposition maps for the categories $\calL(n)$ and $\calw(n)$, and prove a certain compatibility between them. The definitions are simple enough, and the reader can verify that each is well defined. Choose $n\geq0$, then we define decomposition maps $\calc:Q(X\smashcoprod Y)\to QX\otimes QY$:
 \begin{alignat*}{2}
 %\calw(0):&\quad &
 j_{\calw(0)}:P^{i_\ell}\cdots P^{i_1}[z_1,\cdots ,z_a]&\longmapsto\begin{cases}
@@ -2748,7 +2871,6 @@ By Priddy's work in \cite{PriddySimplicialLie.pdf}, Lie algebra cohomology has S
 
 
 \begin{Cohomology Operations for W and U}
-\vfil\pagebreak
 \section{\textbf{Operations on $\calw(n)$- and $\calU(n)$-cohomology}}\label{Cohomology Operations for W and U}
 
 %\subsection{Cohomology for objects of $\calw$}
@@ -3404,8 +3526,8 @@ For $Y\in s\vect{}{}$, the standard simplicial path fibration (c.f.\ \cite[p.82]
 \[\Lambda Y_s=\ker\bigl(d_{s+1}\cdots d_1:Y_{s+1}\to Y_0\bigr).\]
 We forget the $0^\textup{th}$ face and degeneracy as before. This time the unused face map $d_0$ induces a fibration $\lambda:\Lambda Y\to Y$, and $\Lambda Y$ is  a fibration.
 
-These constructions can be prolonged as appropriate to objects in $cs\vect{}{}$. 
-The key construction, first used by Bousfield-Kan \cite{BK_pairings_products.pdf,BK_pairings.pdf}, is that of $D^1\calX $, the pullback:
+Each of these constructions can be prolonged to an endofunctor of $cs\vect{}{}$. 
+Now it is possible to recall a key construction of Bousfield and Kan \cite{BK_pairings_products.pdf,BK_pairings.pdf}. Define $D^1\calX \in cs\algs$ to be the pullback:
 \[\xymatrix@R=4mm{
 D^1\calX \ar[r]
 \ar[d]^-{\delta}
@@ -3417,48 +3539,71 @@ D^1\calX \ar[r]
 V\calX %r2c2
 }\]
 
-\textbf{Put explaination of $D^1$ here.}
+\textbf{Put explanation of $D^1$ here.}
 
-The goal will be to create a factorization of the multiplication map $\mu:\calX \wedge  \calX \to \calX $ through $\delta:D^1\calX \to \calX $. This will be possible (using a zig-zag), as $\calX^s_t=(c(K\overline{Q})^{s+1}X)_t$ is a  Radelescu-Banu resolution. In this case, not only is
-\[(V\calX)^s_t=(c(K\overline{Q})^{s+2}X)_t\in cs\algs,\]
+Our goal will be to create a factorization of the multiplication map $\mu:\calX \smashcoprod  \calX \to \calX $ through $\delta:D^1\calX \to \calX $. This will be possible (using a zig-zag), as $\calX^s_t=(c(KQc)^{s+1}X)_t$ is a  Radulescu-Banu resolution. In this case, not only does
+\[(V\calX)^s_t=(c(KQc)^{s+2}X)_t\in cs\algs\]
+have cosimplicial and simplicial structure maps,
 but there is a cosimplicial simplicial algebra structure on the object $\overline{V}\calX$ obtained by omitting the leftmost replacement $c$:
-\[(\overline{V}\calX)^s_t=(c(K\overline{Q})^{s+2}X)_t\in cs\algs.\]
-That is, we do not \emph{need} the outermost cofibrant replacement to define this object, as in passing to $V\calX$ one discards $d^0$. Of course, there is a $cs\algs$-map $\epsilon:VX\to \overline{V}X$ which is a weak equivalence in each cosimplicial level. Finally, the composite
-\[\overline{v}:=\epsilon\circ v:\left(\calX\overset{v}{\to}V\calX\overset{\epsilon}{\epi} \overline{V\calX}\right)\]
-is a levelwise fibration of simplicial algebras, as it is defined in cosimilicial degree $s$ by the formula $\overline{v}=\eta:c(K\overline{Q})^{s+2}A\to KQc(K\overline{Q})^{s+2}A$. 
+\[(\overline{V}\calX)^s_t=((KQc)^{s+2}X)_t\in cs\algs.\]
+That is, we do not \emph{need} the outermost cofibrant replacement to define $\overline{V}\calX$, as in passing from $\calX$ to $V\calX$ one discards $d^0$. Of course, there is a $cs\algs$-map $\epsilon:VX\to \overline{V}X$ which is a weak equivalence in each cosimplicial level. Finally, the composite
+\[\overline{v}:=\epsilon\circ v:\left(\calX\overset{v}{\to}V\calX\overset{\epsilon}{\epi} \overline{V}\calX\right)\]
+is a levelwise fibration of simplicial algebras, as it is defined in cosimplicial degree $s$ by the formula $\overline{v}=\eta:c(KQc)^{s+2}A\to KQc(KQc)^{s+2}A$. 
 
-This discussion leads us to define $\overline{D}^1X$ to be the pullback of the first column in the following diagram in $cs\algs$:
+This discussion leads us to define $\overline{D}^1X$ to be the strict fiber
 \[\xymatrix@R=4mm{
+D^1\calX \ar[r]
+\ar[d]^-{\delta}
+&%r1c1
+0\ar[d]\\
+\calX \ar@{->>}[r]^-{\overline{v}}
+&%r2c1
+\overline{V}\calX %r2c2
+}\]
+There is a commuting diagram in $cs\algs$ (in which double-headed arrows denote maps which are simplicial fibrations in each cosimplicial level):
+\[\xymatrix@R=4mm{
+0\ar[r]\ar[d]
 &%r1c1
 0\ar[d]
 \ar[r]
 &%r1c2
-\Lambda \overline{V}X\ar[d]^-{\lambda}
+\Lambda \overline{V}X\ar@{->>}[d]^-{\lambda}
 &%r1c3
 \Lambda VX\ar[l]^-{\Lambda(\epsilon)}
-\ar[d]^-{\lambda}
+\ar@{->>}[d]^-{\lambda}
 \\%r1c4
-X\wedge X\ar[ur]^-{0}
-\ar[dr]_-{\mu}
+0\ar[r]
+%\ar[dr]_-{\mu}
 &%r2c1
 \overline{V}X\ar@{=}[r]
 &%r2c2
 \overline{V}X&%r2c3
-VX\ar[l]^-{\epsilon}
+VX\ar@{->>}[l]^-{\epsilon}
 \\%r2c4
+X\smashcoprod_{\Sigma_2} X\ar[r]^-{\mu}\ar[u]
 &%r3c1
 X\ar@{->>}[u]_-{\overline{v}}
 \ar@{=}[r]
 &%r3c2
 X\ar@{->>}[u]_-{\overline{v}}&%r3c3
 X\ar[u]_-{v}\ar@{=}[l]%r3c4
+\\
+\makebox[0cm][r]{pullbacks:\qquad}X\smashcoprod_{\Sigma_2} X\ar[r]^-{\overline{\mu}}
+&
+\overline{D}^1X\ar[r]^-{\textup{$E_2$-eq}}
+&
+\smash{\widetilde{D}^1X}&
+\ar[l]_-{\textup{$E_2$-eq}}
+D^1X
 }\]
-In view of this diagram, there is a factorisation $\overline{\mu}:X\wedge_{\Sigma_2}  X \to \overline{D}^1X$, and a zig-zag of $E^2$-equivalences from $\overline{D}^1X$ to $D^1X$. To understand why $\overline{v}\circ\mu=0$ in this diagram, note that $\mu:X\wedge X\to X$ factors through $P_2X$, so that $\overline{v}\circ\mu$ factors through $P_2(\overline{V}X)$, which is zero, as $\overline{V}X$ is abelian. The resulting connecting homomorphisms commute:
+To understand why $\overline{v}\circ\mu=0$ in this diagram, note that $\mu:X\smashcoprod X\to X$ factors through $P^2X$, so that $\overline{v}\circ\mu$ factors through $P^2(\overline{V}X)$, which is zero, as $\overline{V}X$ is in the image of $K^{\algs}$. \textbf{Explain why they are $E_2$-equivalences}.
+
+This diagram has produced a factorisation $\overline{\mu}:X\smashcoprod_{\Sigma_2}  X \to \overline{D}^1X$ of $\mu$, and a zig-zag of $E^2$-equivalences from $\overline{D}^1X$ to $D^1X$.  In each cosimplicial level, each of the objects in the top row is contractible, yielding homotopy long exact sequences. The resulting connecting homomorphisms commute:
 \[\mathclap{\xymatrix@R=4mm{
 \pi_{\frakt}(\overline{D}^1X)&%r1c3
 \pi_{\frakt+1}(\overline{V}X)\ar[l]_-{\partial_\textup{conn}}
 \\%r1c4
-\pi_{\frakt}(D^1X)\ar@{-}[u]^-{\textup{zig-zag}}_-{\cong}
+\pi_{\frakt}(D^1X)\ar@{-}[u]^-{\textup{?????????zig-zag}}_-{\cong}
 &%r2c3
 \pi_{\frakt+1}(VX)\ar[u]_-{\cong}\makebox[0cm][l]{\ \ \ put me on prev page}
 \ar[l]_-{\partial_\textup{conn}}
@@ -3471,7 +3616,7 @@ is zero, which is clear, as we are just looking at adjacent maps in the homotopy
 
 \begin{shaded}\tiny
 The next result states that the exterior operations, when lifted up one filtration level, induce the operations derived on unstable Lie coalgebra homology, albeit with a shift in the indexing of the Steenrod operations. Writing $\lambda$ for the lifting map
-\[\lambda:\left(E^r_{s,t}(X\wedge_{\Sigma_2}X)\to E^r_{s,t}(D^1X)\cong E^r_{s+1,t+1}(X)\right)\textup{$\qquad (r\geq2)$}\]
+\[\lambda:\left(E^r_{s,t}(X\smashcoprod_{\Sigma_2}X)\to E^r_{s,t}(D^1X)\cong E^r_{s+1,t+1}(X)\right)\textup{$\qquad (r\geq2)$}\]
 \begin{thm}
 We have the following identities of operations on the Bousfield-Kan $E^2$ page:
 \[\lambda\circ\delta_i^\textup{ext}=\delta_i\]
@@ -3526,7 +3671,7 @@ For $x\in E^r_{-s,t}(X)$, $\Sq^i(x)$ survives to $E^{2r-1}$, and moreover, $d_{2
 We will here construct the algebraically defined map $\xi_\textup{alg}$ at the chain level. Note that this map is \emph{not} a cosimplicial map $(HX^\bullet)^{\times2}\to HVX^\bullet$, however it \emph{does} induce a chain map on the normalised complexes of primitives.
 %\[\newcommand{\Times}{{\cdot}}
 %\mathclap{\xymatrix@R=0mm{
-%(HX^\fraks)^{\wedge 2}
+%(HX^\fraks)^{\smashprod 2}
 %\ar@{-->}@/^3em/[rrrrdd]^-(.9){\xi_\textup{alg}}
 %\\
 %&%r1c1
@@ -3584,7 +3729,7 @@ We will here construct the algebraically defined map $\xi_\textup{alg}$ at the c
 Let us abbreviate a little for the sake of compactness. Write $X$ for $X^\fraks$, $V$ for $VX^\fraks$, $\overline{V}$ for $\overline{V}X^\fraks$, dots for categorical products, and superscripts for categorical self-products.
 %\[\newcommand{\Times}{{\cdot}}
 %\mathclap{\xymatrix@R=0.5mm{
-%(HX)^{\wedge 2}
+%(HX)^{\smashprod 2}
 %\ar@{-->}@/^1em/[rrrrdd]^-(.9){\xi_\textup{alg}}
 %\\\\%r3c5
 %\ar@{->>}[uu]
@@ -3629,7 +3774,7 @@ Let us abbreviate a little for the sake of compactness. Write $X$ for $X^\fraks$
 %
 \[\newcommand{\Times}{{\cdot}}
 \mathclap{\xymatrix@R=4mm{
-(HX)^{\wedge 2}
+(HX)^{\smashprod 2}
 \ar@{-->}@/^1em/[rrrrd]^-(.9){\xi_\textup{alg}}
 \\%r3c5
 \ar@{->>}[u]
@@ -3649,7 +3794,7 @@ HV\Times HV\ar[r]_-{\textup{hpf}}
 HV\\%r4c5
 HX\sqcup HX\ar@{ >->}[u]
 \\
-\textup{cof}
+X\Lsmashprod X
 \ar@{-->}@/^1em/[rrrrd]^-(.9){\xi_\textup{res}}
 &&\raisebox{1.5em}[0mm][0mm]{\makebox[0cm][c]{\,\textup{is $\pi(Q\DASH)$ applied to\qquad }}}
 \\%r3c5
@@ -3803,7 +3948,7 @@ is the sum of the three composite maps $c(X^2)\to \overline{V}$, being $\overlin
 %&%r3c3
 %}\]
 %
-%Here dots and unadorned superscripts were used to indicate products. The cofibre `$\textup{cof}$' is that of the map $A^{\sqcup2}\to A^2$. %If we just write $k$ for the zero-square algebra $(K\overline{Q})^{n+1}A$, then the map $h:c(A^2)\to A$ is defined to be the composite:
+%Here dots and unadorned superscripts were used to indicate products. The cofibre `$\textup{cof}$' is that of the map $A^{\sqcup2}\to A^2$. %If we just write $k$ for the zero-square algebra $(KQc)^{n+1}A$, then the map $h:c(A^2)\to A$ is defined to be the composite:
 %%\[c(A^{2})=c((ck)^{2})\overset{c(\epsilon^{2})}{\to}c(k^2)\overset{c(\textup{add})}{\to}ck=A,\]
 %%the point being that this is an algebra map, where $\textup{add}:A^2\to A$ is not.
 %The maps $h$ and $h'$ are the composites [\textbf{notation clash with Hurewicz}]:
@@ -3842,7 +3987,7 @@ The representative $g$ has the property that $d_0(g)=\mu(\Nabla(\imath_n\otimes\
 \\
 \xi(g)
 &=
-\mu(\Nabla(\overline{\imath_n} \otimes\overline{\overline{\imath_m}})+ \Nabla(\overline{\overline{\imath_n}} \otimes\overline{\imath_m}))\in Q((C_{n,m})_{n+m}^{\wedge 2})%
+\mu(\Nabla(\overline{\imath_n} \otimes\overline{\overline{\imath_m}})+ \Nabla(\overline{\overline{\imath_n}} \otimes\overline{\imath_m}))\in Q((C_{n,m})_{n+m}^{\smashcoprod 2})%
 \\
 j(\xi(g))
 &=
@@ -3876,7 +4021,7 @@ This class represents $\imath_n\otimes\imath_m+\imath_m\otimes\imath_n$.
 %%r2c2
 %&L^{\times2}}\]
 %where the outer rectangle commutes since in $L^{\times2}$, $(a,0)\cdot(0,b)=(0,0)$. This gives a map $C_{n,m}\to c_2(L^{\times2})$ whose restriction to the subcomplex $S^n\sqcup S^m$ gives the homotopy classes $\alpha$ and $\beta$. The image $g_{\alpha,\beta}$ of the class $g\in(C_{n,m})_{n+m+1}$ is then an explicit representative for the homology class sought.
-We can use this cofibration to build a chain level construction of the map $j:\textup{Pr}_t(HY)\otimes \textup{Pr}_{t'}(HZ)\to \textup{Pr}_{t+t'+1}(HY\wedge HZ)$ on spherical homology classes:
+We can use this cofibration to build a chain level construction of the map $j:\textup{Pr}_t(HY)\otimes \textup{Pr}_{t'}(HZ)\to \textup{Pr}_{t+t'+1}(HY\smashprod HZ)$ on spherical homology classes:
 \begin{prop}
 There is a function, natural in $Y,Z\in s\algs$
 \[\overline{F}:\hom_{s\algs}(S^t,Y)\times\hom_{s\algs}(S^{t'},Z)\to \hom_{s\algs}(C_{t,t'},c(Y\times Z))\]
@@ -3893,7 +4038,7 @@ defined by $F(\alpha,\beta):=H_*(\overline{F}(\alpha,\beta))(g)$ makes the follo
 &%r1c1
 \textup{Pr}_t(HY)\otimes\textup{Pr}_{t'}(HZ)\ar[r]^-{j}
 &%r1c2
-\textup{Pr}_{\frakt+1}(HY\wedge HZ)\ar@{ >->}[d]
+\textup{Pr}_{\frakt+1}(HY\smashprod HZ)\ar@{ >->}[d]
 \\%r1c5
 %(H(Y\times Z)^{\otimes2})_\frakt
 %&
@@ -3903,7 +4048,7 @@ H_{\frakt+1}(Y\times Z)\ar[r]%\ar[l]_-{\Delta}
 (HY\times HZ)_{\frakt+1}\ar@{->>}[r]
 \ar[d]^-{\Delta}
 &%r2c2
-(HY\wedge  HZ)_{\frakt+1}
+(HY\smashprod  HZ)_{\frakt+1}
 \\
 %&
 (H(Y\times Z)^{\otimes2})_\frakt\ar[r]
@@ -3956,13 +4101,13 @@ The square at the bottom of the diagram commutes as the horizontals are maps of 
 &%r1c1
 \textup{Pr}_t(HS^t)\otimes\textup{Pr}_{t'}(HS^{t'})\ar[r]^-{j}
 &%r1c2
-\textup{Pr}_{\frakt+1}(HS^t\wedge HS^{t'})\ar@{ >->}[d]^-{\textup{inc}}
+\textup{Pr}_{\frakt+1}(HS^t\smashprod HS^{t'})\ar@{ >->}[d]^-{\textup{inc}}
 \\%r1c5
 H_{\frakt+1}(S^t\times S^{t'})\ar[r]^-{r}
 &%r2c1
 (HS^t\times HS^{t'})_{\frakt+1}\ar@{->>}[r]^-{\textup{proj}}
 &%r2c2
-(HS^t\wedge  HS^{t'})_{\frakt+1}
+(HS^t\smashprod  HS^{t'})_{\frakt+1}
 }}\]
 The rightmost four vector spaces in this diagram are 1-dimensional, and the maps $j$, $\textup{inc}$ and $\textup{proj}$ connecting them are isomorphisms, so it is enough to check that $r(F(\imath_t,\imath_{t'}))$ is non-zero. However, using the commuting square and triangle already established, we may calculate that $\Delta(r(F(\imath_t,\imath_{t'})))=\imath_t \otimes\imath_{t'}+\imath_{t'}\otimes\imath_{t}$, which is non-zero.
 \end{proof}
@@ -4023,7 +4168,7 @@ In order to determine $(j\xi)_*(h)$, as the representative $h$ has the property 
 \\
 \xi(h)
 &=
-\mu(\Nabla_{n-i}(\overline{\imath_n}\otimes \overline{\overline{\imath_n}})+\Nabla_{n-i}(\overline{\overline{\imath_n}} \otimes\overline{\imath_n}))\in Q((C_n^i)_{n+i}^{\wedge 2})%
+\mu(\Nabla_{n-i}(\overline{\imath_n}\otimes \overline{\overline{\imath_n}})+\Nabla_{n-i}(\overline{\overline{\imath_n}} \otimes\overline{\imath_n}))\in Q((C_n^i)_{n+i}^{\smashcoprod 2})%
 \\
 j(\xi(h))
 &=
@@ -4071,7 +4216,7 @@ Throughout, I'll continue with the above abbreviations, and write $\frakt=t+t'$.
 \pi_t(X)\otimes \pi_{t'}(X)\ar[dd]^-{h\otimes h}
 \ar[r]^-{\textup{sEZ}}
 &%r1c1
-\pi_{\frakt}(X\wedge  X)\ar[r]
+\pi_{\frakt}(X\smashprod  X)\ar[r]
 &%r1c2
 \pi_{\frakt}(\overline{D}^1X)&%r1c3
 \pi_{\frakt+1}(\overline{V}X)
@@ -4087,7 +4232,7 @@ Throughout, I'll continue with the above abbreviations, and write $\frakt=t+t'$.
 \\%r2c4
 \textup{Pr}_t(HX)\otimes \textup{Pr}_{t'}(HX)\ar[r]^-{j}
 &%r3c1
-\textup{Pr}_{\frakt+1}(HX\wedge HX)\ar[rr]^-{\xi_\textup{alg}}
+\textup{Pr}_{\frakt+1}(HX\smashprod HX)\ar[rr]^-{\xi_\textup{alg}}
 &%r3c2
 &%r3c3
 \textup{Pr}_{\frakt+1}(HVX)%r3c4
@@ -4112,7 +4257,7 @@ It helps to modify this diagram a little. Indeed, for each $(\alpha,\beta)\in \h
 %\\%r2c4
 %%\textup{Pr}_t(HX^{\fraks})\otimes \textup{Pr}_{t'}(HX^{\fraks})\ar[r]^-{j}
 %&%r3c1
-%\textup{Pr}_{\frakt+1}(HX^\fraks\wedge HX^\fraks)
+%\textup{Pr}_{\frakt+1}(HX^\fraks\smashprod HX^\fraks)
 %\ar@{~>}[rr]_-(.82){\xi_\textup{alg}}
 %\ar@{ >->}[dl]
 %\ar@{ >->}[d]
@@ -4120,7 +4265,7 @@ It helps to modify this diagram a little. Indeed, for each $(\alpha,\beta)\in \h
 %&%r3c3
 %\textup{Pr}_{\frakt+1}(HX^{\fraks+1})\ar@{ >->}[d]
 %\\%r3c4
-%(HX^\fraks\wedge HX^\fraks)_{\frakt+1}\ar@{=}[r]
+%(HX^\fraks\smashprod HX^\fraks)_{\frakt+1}\ar@{=}[r]
 %&\pi_{\frakt+1}Q(\textup{cof})
 %\ar[rr]^-(.8){(\xi_\textup{res})_*}
 %&
@@ -4143,7 +4288,7 @@ It helps to modify this diagram a little. Indeed, for each $(\alpha,\beta)\in \h
 \ar[r]^-{\textup{sEZ}}
 \ar@{..>}[ddddr]^-(.2){F}
 &%r1c1
-\pi_{\frakt}(X\wedge  X)\ar[r]^-{\overline{\mu}_*}
+\pi_{\frakt}(X\smashcoprod  X)\ar[r]^-{\overline{\mu}_*}
 &%r1c2
 \pi_{\frakt}(\overline{D}^1X)&%r1c3
 \pi_{\frakt+1}(\overline{V}X)\ar[l]_-{\partial_\textup{conn}}
@@ -4157,7 +4302,7 @@ It helps to modify this diagram a little. Indeed, for each $(\alpha,\beta)\in \h
 \\%r2c4
 %\textup{Pr}_t(HX^{\fraks})\otimes \textup{Pr}_{t'}(HX^{\fraks})\ar[r]^-{j}
 %r3c1
-\textup{Pr}_{\frakt+1}(HX\wedge HX)
+\textup{Pr}_{\frakt+1}(HX\smashprod HX)
 \ar@{~>}[rrr]^-{\xi_\textup{alg}}
 \ar@{ >->}[d]
 %\ar@{ >->}[dr]
@@ -4166,7 +4311,7 @@ It helps to modify this diagram a little. Indeed, for each $(\alpha,\beta)\in \h
 &%r3c3
 \textup{Pr}_{\frakt+1}(HVX)\ar@{ >->}[d]
 \\%r3c4
-(HX\wedge HX)_{\frakt+1}\ar@{=}[r]
+(HX\smashprod HX)_{\frakt+1}\ar@{=}[r]
 &\pi_{\frakt+1}Q(\textup{cof})
 \ar[r]^-{\pi_*(Q\xi_\textup{res})}
 &
@@ -4328,7 +4473,7 @@ Now to get to the point, we have a commuting diagram
 \hom_{s\algs}(S^t,X)\ar[r]^-{\delta_i}
 \ar[d]^-{\epsilon_*}
 &%r1c1
-\pi_{t+i}(X\wedge_{\Sigma_2} X)\ar[r]^-{\mu}
+\pi_{t+i}(X\smashcoprod_{\Sigma_2} X)\ar[r]^-{\mu}
 &
 \pi_{t+i}(\overline{D}^1X)
 \\%r1c2
@@ -4398,7 +4543,6 @@ As the element we have written as $KQG(\alpha)$ is a representative for $(G\circ
 
 
 \begin{Cohomology operations for unstable Lie algebras over P}
-\vfil\pagebreak
 \section{Cohomology operations for unstable Lie algebras over $P$}\label{Koszul delta opns}
 
 %\subsection{Cohomology for objects of $\calw$}
@@ -4483,7 +4627,7 @@ We will now give a construction of operations on the homology $H^*_{\calw}$ whic
 \[\xymatrix@R=4mm{
 0\ar[r]
 &%r1c1
-X_1\wedge X_2\ar[r]
+X_1\smashcoprod X_2\ar[r]
 &%r1c2
 X_1\sqcup X_2\ar[r]
 &%r1c3
@@ -4491,7 +4635,7 @@ X_1\times X_2\ar[r]&0.
 }\]
 We leave the interested reader to verify:
 \begin{lem}
-There is a unique map $j_\calw:Q(X_1\wedge X_2)^t\to (QX_1\otimes QX_2)^{t-1}$ such that
+There is a unique map $j_\calw:Q(X_1\smashcoprod X_2)^t\to (QX_1\otimes QX_2)^{t-1}$ such that
 \[P^{i_1}\cdots P^{i_r}[z_1,\cdots ,z_a]\overset{j_\calw}{\mapsto}\begin{cases}
 z_1\otimes z_2,&\textup{if }r=0,\,a=2,\,z_1\in X_1\textup{ and } z_2\in X_2,
 \\0,&\textup{otherwise, }
@@ -4499,13 +4643,13 @@ z_1\otimes z_2,&\textup{if }r=0,\,a=2,\,z_1\in X_1\textup{ and } z_2\in X_2,
 \]
 where each of $z_1,\ldots,z_a$ is an element of either $X_1$ or $X_2$, and $[z_1,\ldots,z_s]$ represents some choice of bracketing. It is natural in $X_1$ and $X_2$.
 \end{lem}
-Next, if $X\in s\calw$ is an almost free simplicial object, there is a cogroup object structure $\phi_s:X_s\to X_s\sqcup X_s$ on each level $X_s$ induced by the diagonal map $V_s\to V_s\oplus V_s$ of the generating subspace $V_s$. Write $\overline{\xi}_\calw$ for the difference of the maps $(d_0\sqcup d_0)\phi_s$ and $\phi_{s-1}d_0$ in the group $\textup{Hom}_\calw(X_s,X_{s-1}\sqcup X_{s-1})$. Then $\overline{\xi}_\calw$ factors through a unique map $\xi_\calw:X_s\to X_{s-1}\wedge X_{s-1}$, and one can verify:
+Next, if $X\in s\calw$ is an almost free simplicial object, there is a cogroup object structure $\phi_s:X_s\to X_s\sqcup X_s$ on each level $X_s$ induced by the diagonal map $V_s\to V_s\oplus V_s$ of the generating subspace $V_s$. Write $\overline{\xi}_\calw$ for the difference of the maps $(d_0\sqcup d_0)\phi_s$ and $\phi_{s-1}d_0$ in the group $\textup{Hom}_\calw(X_s,X_{s-1}\sqcup X_{s-1})$. Then $\overline{\xi}_\calw$ factors through a unique map $\xi_\calw:X_s\to X_{s-1}\smashcoprod X_{s-1}$, and one can verify:
 \begin{lem}
 The map $Q^\calw\xi_\calw$ induces a chain map of (lower) degree $-1$ on normalized complexes:
-\[N_s(Q^{\calw}X)^t\to N_{s-1}(Q^{\calw}(X\wedge X))^t.\]
+\[N_s(Q^{\calw}X)^t\to N_{s-1}(Q^{\calw}(X\smashcoprod X))^t.\]
 \end{lem}
 We now have access to the composite
-\[\psi_\calw:\left(N_s(Q^{\calw}X)^t\overset{Q^\calw\xi_\calw}{\to} N_{s-1}(Q^{\calw}(X\wedge X))^t\overset{j_\calw}{\to} N_{s-1}(Q^{\calw}X\otimes Q^\calw X)^{t-1}\right),\]
+\[\psi_\calw:\left(N_s(Q^{\calw}X)^t\overset{Q^\calw\xi_\calw}{\to} N_{s-1}(Q^{\calw}(X\smashcoprod X))^t\overset{j_\calw}{\to} N_{s-1}(Q^{\calw}X\otimes Q^\calw X)^{t-1}\right),\]
 which is in fact symmetric, giving a map
 \[\psi_{\calw}:N_s(Q^{\calw}X)^t\to N_{s-1}(S^2(Q^{\calw}X))^{t-1}.\]
 
@@ -4538,7 +4682,7 @@ $Q^{\Lambda(\LieOperad)}\Lambda(\LieOperad)U^sX$,
 which is $Q^{\Lambda(\LieOperad)}$ applied to the almost free simplicial Lie algebra $\Lambda(\LieOperad)U^sX$. As such, its homotopy has operations induced by the map
 \[\xi_\LieOperad:\left(Q^{\Lambda(\LieOperad)}\Lambda(\LieOperad)U^{s+1}X
 \overset{Q(d_0\sqcup d_0\psi+\psi d_0)}{\to}
-Q^{\Lambda(\LieOperad)}((\Lambda(\LieOperad)U^sX)^{\wedge2})\overset{j}{\to}
+Q^{\Lambda(\LieOperad)}((\Lambda(\LieOperad)U^sX)^{\smashcoprod2})\overset{j}{\to}
 (Q^{\Lambda(\LieOperad)} \Lambda(\LieOperad)U^sX)^{\otimes2}\right)\]
 where by $d_0$ we mean the map $\Lambda(\LieOperad)(P\circ S(\LieOperad)/\sim)\to \Lambda(\LieOperad)$ arising from killing the $P$ part and identifying all the Lie stuff together. This only sees the Lie stuff, not the part that has any $P$ in it. Thus it could be written as $f(g)\mapsto q^\LieOperad(f)(g)$.
 
@@ -4579,7 +4723,6 @@ Anyway, I have a nullhomotopy of this map, which might be called $((P^i)^{-1}q^{
 \end{Cohomology operations for unstable Lie algebras over P}
 
 \begin{Unstable Lie algebras over the Lambda-algebra}
-\vfil\pagebreak
 \section{Unstable Lie algebras over the $\Lambda$-algebra (depreciated?)}
 \textbf{This section has probably been depreciated by the general section on lie algs in characteristic 2 and their homotopy operations.}
 \todoeasy{Define the categories $\calw(n)$, $\calL(n)$ ($n=0$ is Goerss' case)}{$\calw(n)$ and $\calL(n)$ are monadic over $\vect{+}{n}$, but we won't carefully describe the monads.
@@ -4672,7 +4815,6 @@ Moreover the composite $Q^{\LambdaMonad(n)}\circ F^{\calw(n)}$ equals the free c
 \end{Unstable Lie algebras over the Lambda-algebra}
 
 \begin{Cohomology operations for unstable Lie algebras over Lambda}
-\vfil\pagebreak
 \section{Cohomology operations for unstable Lie algebras over $\Lambda$}
 \todoeasy{Do all the same work as in the $n=0$ case, to get horizontal and vertical $\Sq$ and products}{must explain in detail what the available operations are
 \item relations between them less important}
@@ -4703,7 +4845,6 @@ Say `it follows as in the $n=0$ case'
 
 \end{Cohomology operations for unstable Lie algebras over Lambda}
 \begin{Koszul complexes}
-\vfil\pagebreak
 
 \section{\textbf{Koszul complexes calculating $\calU(n)$-homology}}
 In this section we will discuss the Koszul resolutions that one may use to calculate $H_*^{\calU(n)}X$ for $X$ a (non-simplicial) locally finite object of $\calU(n)$ or $\calw(n)$, using Priddy's technique \cite{PriddyKoszul.pdf}, adapted to an unstable context, as in \cite{CurtisSimplicialHtpy.pdf}.
@@ -4896,7 +5037,7 @@ Applying these observations in the very specific circumstances of this propositi
 
 
 \begin{Composite functor spectral sequences}
-\vfil\pagebreak
+
 \section{\textbf{Composite functor spectral sequences}}
 The subject of this paper is to identify the derived functors $H^*_{\calw(0)}X:=\dual(\mathbb{L}_*Q^{\calw(0)}X)$, for $X\in\calw(0)$. More generally, we will now present a spectral sequence whose goal is to calculate $H^*_{\calw(n)}X$ for $X\in\calw(n)$. This will be a composite functor spectral sequence analogous to Miller's spectral sequence in \cite{MillerSullivanConjecture.pdf}. The factorization of $Q^{\calw(n)}$ we will use is of course 
 \[Q^{\calw(n)}=\left(\calw(n)\overset{Q^{\calU(n)}}{\to}\calL(n)\overset{Q^{\calL(n)}}{\to}\vect{+}{n}\right)\]
@@ -5060,18 +5201,18 @@ $\BSW^2L\overset{\overline{\xi}_{\BSW }}{\to}(\BSW L)^{\sqcup2}\to(\BSW L)^{\tim
 This follows from the observation that both composites $(\Id\sqcup0)\overline{\xi}_{\BSW }$ and $(0\sqcup\Id)\overline{\xi}_{\BSW }$ equal $\epsilon:\BSW^2L\to \BSW L$.
 \end{proof}
 In particular, $\overline{\xi}_{\BSW }$ factors through the smash coproduct, defining a natural map
-\[\xi_{\BSW }:\BSW^2L\to (\BSW L)^{\wedge 2}.\]
+\[\xi_{\BSW }:\BSW^2L\to (\BSW L)^{\smashcoprod 2}.\]
 
 \begin{lem}\label{LemmaOn xi}
-We have $(i\circ \xi_{\calc\PiAlg})=\pi_*(\xi_{\BSW}):\pi_*(\BSW^{p+k+1}L)\to\pi_*((\BSW^{p+k}L)^{\wedge 2})$, where $i$ is the natural isomorphism $(\pi_*(\BSW^{p+k}))^{\wedge 2}\to \pi_*((\BSW^{p+k})^{\wedge 2})$ of \S[\textbf{whatever}].
+We have $(i\circ \xi_{\calc\PiAlg})=\pi_*(\xi_{\BSW}):\pi_*(\BSW^{p+k+1}L)\to\pi_*((\BSW^{p+k}L)^{\wedge 2})$, where $i$ is the natural isomorphism $(\pi_*(\BSW^{p+k}))^{\wedge 2}\to \pi_*((\BSW^{p+k})^{\wedge 2})$ of proposition \ref{smash coprod}.
 \end{lem}
 \begin{proof}
-Given the observation [?from above on SESs], this is equivalent to $(i\circ \overline{\xi}_{\calc\PiAlg})=\pi_*(\overline{\xi}_{\BSW}):\pi_*(\BSW^{p+k+1}L)\to\pi_*((\BSW^{p+k}L)^{\sqcup 2})$, which holds as $(i\circ\phi_{\calc\PiAlg})=\pi_*(\phi_{\BSW})$.
+In view of the short exact sequences of proposition \ref{smash coprod}, this is equivalent to $(i\circ \overline{\xi}_{\calc\PiAlg})=\pi_*(\overline{\xi}_{\BSW}):\pi_*(\BSW^{p+k+1}L)\to\pi_*((\BSW^{p+k}L)^{\sqcup 2})$, which holds as $(i\circ\phi_{\calc\PiAlg})=\pi_*(\phi_{\BSW})$.
 \end{proof}
 \begin{lem}
-$(d_i)^{\wedge 2}\xi_\BSW =\xi_\BSW d_{i+1}$ for $i\geq1$, and $(d_0)^{\wedge 2}\xi_\BSW = (\xi_\BSW d_{0})\star(\xi_\BSW d_{1})$, so that the map $Q^{\calc}\xi_\BSW $ induces a degree $(-1,0)$ bicomplex map:
+$(d_i)^{\smashcoprod 2}\xi_\BSW =\xi_\BSW d_{i+1}$ for $i\geq1$, and $(d_0)^{\smashcoprod 2}\xi_\BSW = (\xi_\BSW d_{0})\star(\xi_\BSW d_{1})$, so that the map $Q^{\calc}\xi_\BSW $ induces a degree $(-1,0)$ bicomplex map:
 \[N_*N_*(Q^{\calc}B^\BSW_{\bullet}L)_{s_2,s_1}\to
-  N_*N_*(Q^{\calc}((B^\BSW_{\bullet}L)^{\wedge 2}))_{s_2-1,s_1}.\]
+  N_*N_*(Q^{\calc}((B^\BSW_{\bullet}L)^{\smashcoprod 2}))_{s_2-1,s_1}.\]
 \end{lem}
 \begin{proof}
 I used to say `it is just like Goerss'... \textbf{give proof.}
@@ -5139,7 +5280,7 @@ and the operations we are considering are easily understood in relation to this 
 
 
 \begin{comp func sseq old version}
-\vfil\pagebreak
+
 \section{\textbf{Composite functor spectral sequences OLD VERSION}}
 \todo{Define the spectral sequence $H^*_{\calw(n)}\Longleftarrow H^*_{\calw(n+1)}H_*^{\Lambda(n)}$}{reference Blanc-Stover, but then give the construction of bisimplicial object (using `$W$' comonad)}
 The subject of this paper is to identify the derived functors $H^*_{\calw(0)}X:=\dual(\mathbb{L}_*Q^{\calw(0)}X)$, for $X\in\calw(0)$. More generally, we will now present a spectral sequence that may be used to calculate $H^*_{\calw(n)}X$ for $X\in\calw(n)$. This will a composite functor spectral sequence analogous to Miller's spectral sequence in []. The factorization of $Q^{\calw(n)}$ we will use is of course 
@@ -5300,14 +5441,14 @@ $\BSW^2L\overset{\overline{\xi}_{\textup{ch}}}{\to}(\BSW L)^{\sqcup2}\to(\BSW L)
 \begin{proof}
 This follows from the easy observation that both composites $(\Id\sqcup0)\overline{\xi}_{\textup{ch}}$ and $(0\sqcup\Id)\overline{\xi}_{\textup{ch}}$ equal $\epsilon:\BSW^2L\to \BSW L$.
 \end{proof}
-In particular, $\overline{\xi}_{\textup{ch}}$ factors through the smash coproduct, defining a natural map $\xi_{\textup{ch}}:\BSW^2L\to (\BSW L)^{\wedge 2}$.
+In particular, $\overline{\xi}_{\textup{ch}}$ factors through the smash coproduct, defining a natural map $\xi_{\textup{ch}}:\BSW^2L\to (\BSW L)^{\smashcoprod 2}$.
 
 \textbf{For the time being, write $L$ for the object $Q^{\calU(n)}X^c$ in $s\calL(n)$.}
 \begin{lem}
-$(d_i)^{\wedge 2}\xi_\textup{ch}=\xi_\textup{ch}d_{i+1}$ for $i\geq1$, and $(d_0)^{\wedge 2}\xi_\textup{ch}= (\xi_\textup{ch}d_{0})*(\xi_\textup{ch}d_{1})$.
+$(d_i)^{\smashcoprod 2}\xi_\textup{ch}=\xi_\textup{ch}d_{i+1}$ for $i\geq1$, and $(d_0)^{\smashcoprod 2}\xi_\textup{ch}= (\xi_\textup{ch}d_{0})*(\xi_\textup{ch}d_{1})$.
 The map $Q^{\calL(n)}\xi_\textup{ch}$ induces a degree $(-1,0)$ bicomplex map:
 \[N_*N_*(Q^{\calL(n)}B^\BSW_{\bullet}L)^t_{s_{n+2},\ldots,s_1}\to
-  N_*N_*(Q^{\calL(n)}((B^\BSW_{\bullet}L)^{\wedge 2}))^t_{s_{n+2}-1,s_{n+1},\ldots,s_1}.\]
+  N_*N_*(Q^{\calL(n)}((B^\BSW_{\bullet}L)^{\smashcoprod 2}))^t_{s_{n+2}-1,s_{n+1},\ldots,s_1}.\]
 \end{lem}
 \begin{proof}
 I used to say `it is just like Goerss'...
@@ -5553,16 +5694,16 @@ What remains is to prove that the bottom square commutes. It may be expanded int
 %&%r2c7
 %(Q\pi(W^{p+k}L))^{\otimes2} \ar[lll]^-{\gamma^{\otimes2}}\\\\%r2c8
 %&%r3c1
-%\pi Q((W^{p+k}L)^{\wedge 2})\ar[uu]^-{\pi(j)}
+%\pi Q((W^{p+k}L)^{\smashcoprod 2})\ar[uu]^-{\pi(j)}
 %\ar[dl]
 %&%r3c2
 %&%r3c3
 %&%r3c4
-%Q\pi((W^{p+k}L)^{\wedge 2})\ar[lll]_-{\gamma}\ar[dl]
+%Q\pi((W^{p+k}L)^{\smashcoprod 2})\ar[lll]_-{\gamma}\ar[dl]
 %&%r3c5
 %&%r3c6
 %&%r3c7
-%Q((\pi( W^{p+k}L))^{\wedge 2})\ar[dl]
+%Q((\pi( W^{p+k}L))^{\smashcoprod 2})\ar[dl]
 %\ar[uu]_-{j}
 %\ar[lll]_-{Q(i)}
 %\\
@@ -5619,15 +5760,15 @@ What remains is to prove that the bottom square commutes. It may be expanded int
 &%r2c7
 (Q\pi(\BSW^{p+k}L))^{\otimes2} \ar[lll]^-{\gamma^{\otimes2}}\\\\%r2c8
 &%r3c1
-\pi Q((\BSW^{p+k}L)^{\wedge 2})\ar[uu]^-{\pi(j)}
+\pi Q((\BSW^{p+k}L)^{\smashcoprod 2})\ar[uu]^-{\pi(j)}
 &%r3c2
 &%r3c3
 &%r3c4
-Q\pi((\BSW^{p+k}L)^{\wedge 2})\ar[lll]_-{\gamma}
+Q\pi((\BSW^{p+k}L)^{\smashcoprod 2})\ar[lll]_-{\gamma}
 &%r3c5
 &%r3c6
 &%r3c7
-Q((\pi( \BSW^{p+k}L))^{\wedge 2})
+Q((\pi( \BSW^{p+k}L))^{\smashcoprod 2})
 \ar[uu]_-{j}
 \ar[lll]_-{Q(i)}
 \\\\
@@ -5646,7 +5787,7 @@ Q(\pi( \BSW^{p+k+1}L))
 \ar[uu]_-{Q(\xi_{\calw(n+1)})}
 \ar[lll]_-{=}
 }\]
-The bottom left square commutes simply by naturality of $\gamma$, while the bottom right square is an instance of lemma \ref{LemmaOn xi}. What remains is to check that the hexagon commutes. For notational convenience, write $A=\BSW^{p+k}L$, $\textup{br}:(\pi_* A)^{\otimes 2}\to (\pi_* A)^{\wedge 2}$ for the bracket $a\otimes b\mapsto [a,b]$ on homotopy, and similarly write $\textup{br}:A^{\otimes 2}\to A^{\wedge 2}$ for the chain level bracket. Now any element of $Q((\pi_* A)^{\wedge 2})$ is the class of an expression $\textup{br}(\overline{x}\otimes\overline{y})+E$ where $\overline{x},\overline{y}\in\pi_* A$ are represented by $x,y\in N_*A$, and $E\in(\pi_* A)^{\wedge 2}$ is a sum of terms which are $\lambda$-operations applied to 3-fold brackets of elements of $\pi_* A$ \textbf{[explain this better]}. The map $Q(i)$ is induced by the Eilenberg-Mac Lane map shuffle map $\nabla$ [](\textbf{what exactly?}), and
+The bottom left square commutes simply by naturality of $\gamma$, while the bottom right square is an instance of lemma \ref{LemmaOn xi}. What remains is to check that the hexagon commutes. For notational convenience, write $A=\BSW^{p+k}L$, $\textup{br}:(\pi_* A)^{\otimes 2}\to (\pi_* A)^{\smashcoprod 2}$ for the bracket $a\otimes b\mapsto [a,b]$ on homotopy, and similarly write $\textup{br}:A^{\otimes 2}\to A^{\smashcoprod 2}$ for the chain level bracket. Now any element of $Q((\pi_* A)^{\smashcoprod 2})$ is the class of an expression $\textup{br}(\overline{x}\otimes\overline{y})+E$ where $\overline{x},\overline{y}\in\pi_* A$ are represented by $x,y\in N_*A$, and $E\in(\pi_* A)^{\smashcoprod 2}$ is a sum of terms which are $\lambda$-operations applied to 3-fold brackets of elements of $\pi_* A$ \textbf{[explain this better]}. The map $Q(i)$ is induced by the Eilenberg-Mac Lane map shuffle map $\nabla$ [](\textbf{what exactly?}), and
 \[\textup{br}(\overline{x}\otimes\overline{y})\overset{\gamma\circ Q(i)}{\mapsto}\overline{\textup{br}(\nabla(x\otimes y))}\overset{\pi_*(j)}{\mapsto}\overline{(\nabla(x\otimes y))}\overset{D_0}{\mapsto}\overline{x}\otimes \overline{y}.\]
 The last mapping follows from the fact that $D_0\circ\nabla=\Id$, as $\{D_k\}$ is special.
 Similarly, our understanding of the construction of $\lambda$-operations and iterated brackets shows that $E$ is annihilated by $\pi_*(j)\circ\gamma\circ Q(i)$. As $E$ is also annihilated by $j$, and $j(\textup{br}(\overline{x}\otimes\overline{y})) =\overline{x}\otimes\overline{y}$, the hexagon commutes. \textbf{This is poorly written.}
@@ -6268,7 +6409,7 @@ Some corollary giving full structure of $H^*_{(1)}$.
 \end{Calculations of HWn for n nonzero}
 
 \begin{Calculations of HW0}
-\vfil\pagebreak
+
 
 \section{\textbf{Calculations of ${\calw(0)}$-cohomology}}
 Let $X=V^*_{(0)}\in\calw(0)$ be a one dimensional object of $\calw(0)$, dual to a one-dimensional vector space $V_{(0)}\in\vect{0}{+}$, with non-zero element $\imath\in(V_{(0)})_T$. Write $\imath^*\in X^T$ for the non-zero element of $X$. As every $\calw(0)$-operation changes degrees, $X$ is necessarily trivial.
@@ -6329,7 +6470,7 @@ The first composite functor spectral sequence collapses at $E_2$:
 \begin{proof}
 Evidently the funcdamental class is a permanent cycle, so prove that the spectral sequence collapses, it is enough to show that no classes
 %
-%\vfil\pagebreak
+%
 %
 %
 %\[x\in (E_2)^{0,\ell I,(2^{\ell I})}_{d+nI+\ell I}\textup{ or }y\in (E_2)^{1,2+\ell I+j,(2^{1+\ell I+j})}_{2^{j+1}(d+nI+\ell I+1)-1}\]
@@ -6355,7 +6496,7 @@ Evidently the funcdamental class is a permanent cycle, so prove that the spectra
 %\[(E_2)^{3,\sum \ell C_k,(\sum2^{\ell C_k})}_{-1+\sum(d+nC_k+\ell C_k+1)}\textup{ and }(E_2)^{3,1+\ell I+j,(2^{1+\ell I+j})}_{2^{j+1}(d+nI+\ell I+1)-1}\]
 %coincide
 %
-%\vfil\pagebreak
+%
 %
 %
 \[x\in (E_2)^{0,\ell I,(2^{\ell I})}_{d+nI+\ell I}\textup{ or }y\in (E_2)^{1,2+\ell I+j,(2^{1+\ell I+j})}_{2^{j+1}(d+nI+\ell I+1)-1}\]
@@ -6459,7 +6600,7 @@ Some corollary giving full structure of $H^*_{(0)}$.
 \end{Calculations of HW0}
 
 %\begin{The cohomology of a trivial unstable Lie algebra over P}
-%\vfil\pagebreak
+%
 %\section{\textbf{The cohomology of a trivial unstable Lie algebra over $P$}}
 %There may be a wrinkle here answering the well definedness vs vanishing question --- maybe I have a mistake, and some operation is only well defined on $E^1$.
 %\todo{State interest in this calculation}{write $X=\bigoplus_\alpha \Ftwo [r_\alpha]$, a finite direct sum}
@@ -6480,7 +6621,7 @@ Some corollary giving full structure of $H^*_{(0)}$.
 %\end{The cohomology of a trivial unstable Lie algebra over P}
 \appendix
 \begin{appendices}
-\vfil\pagebreak
+
 
 \section{\textbf{A May spectral sequence for $H^*_{\calw(0)}$}}
 \todo{Explain the quadratic filtration of the bar construction}{derive a spectral sequence
@@ -6611,7 +6752,7 @@ N_{n+k-1}^\textup{h}N_2^\textup{v}\textup{\textbf{B}} \ar[r]^-{D^\textup{v}_0\ci
 N_{n+k-1}^\textup{h}(N_1^\textup{v}\textup{\textbf{B}}\otimes N_1^\textup{v}\textup{\textbf{B}})\ar[d]^-{r\otimes r}
 \\%r1c3
 N_{n+k}^\textup{h}Q^{\calL(n)} L  \ar[r]^-{Q^{\calL(n)}(\xi_{\calL(n)})}&%r1c1
-N_{n+k-1}^\textup{h}Q^{\calL(n)}( L\wedge  L) \ar[r]^-{j_{\calL(n)}}&%r1c2
+N_{n+k-1}^\textup{h}Q^{\calL(n)}( L\smashcoprod  L) \ar[r]^-{j_{\calL(n)}}&%r1c2
 N_{n+k-1}^\textup{h}(Q^{\calL(n)} L \otimes Q^{\calL(n)} L )
 }\]
 \end{lem}
