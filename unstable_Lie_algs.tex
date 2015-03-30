@@ -1,17 +1,17 @@
 % !TEX root = z_output/unstable_Lie_algs.tex
 \documentclass[11pt]{amsart}
-\newcommand{\IncludeAll}{}% <--
+\newcommand{\xIncludeAll}{}% <--
 \newcommand{\ShrinkPages}{}% <--
-%\newcommand{\PostponeContents}{}% <--
+\newcommand{\PostponeContents}{}% <--
 \ifx\ShrinkPages\undefined\else\usepackage[paperheight=160mm,paperwidth=160mm]{geometry}\fi%220/160
 \usepackage{amsmath,amsthm,amssymb} \usepackage{eucal} \usepackage{mathrsfs,nicefrac} \usepackage{amssymb} \usepackage[all]{xy} \usepackage{cancel} \usepackage{color} \usepackage{version} \usepackage{enumerate} \usepackage{mathtools} \newcommand{\xclude}[1]{\excludeversion{#1}} \newcommand{\nclude}[1]{\includeversion{#1}}%mathtools is just used for `mathclap'
 \xclude{todolist}
 \xclude{Intro}
 \ifx\IncludeAll\undefined\else\renewcommand{\xclude}[1]{\nclude{#1}}\fi
-\nclude{Contents Page}
-\nclude{Conventions and notation}
+\xclude{Contents Page}
+\xclude{Conventions and notation}
 \xclude{CPiAlgs and CHalgs}
-\xclude{Bousfield-Kan spectral sequence}
+\xclude{BK spec seq}\xclude{connectivity}
 \xclude{Constructing (co)homotopy operations}
 \xclude{homotopy operations for PRLs}
 \xclude{Cohomology Operations for W and U}
@@ -277,7 +277,8 @@
 url=false,doi=false,isbn=false,eprint=false]{biblatex}%
 \hypersetup{colorlinks=false,pdfborder={0 0 0}}
 
-\newdir{ >}{{}*!/-10pt/@{>}}
+\newdir{ >}{{}*!/-7pt/@{>}}
+\newdir{ >>}{{}*!/-14pt/@{>}}
 
 \makeatletter
 \renewcommand{\@seccntformat}[1]{\csname the#1\endcsname.\quad}
@@ -414,6 +415,35 @@ url=false,doi=false,isbn=false,eprint=false]{biblatex}%
 %\maketitle
 \ifx\PostponeContents\undefined{\tiny\tableofcontents}\else\relax\fi
 \end{Contents Page}
+
+\noindent So you start with surjections of bounded below chain complexes:
+\[T\to T_1\to T_0.\]
+Take $K_i=\ker(T\to T_i)$. Obviously $K_1\subseteq K_0$, so...
+\[K_1\to K_0 \to T\to T_1\to T_2.\]
+A crappy diagram chase reveals that 
+\[L:=\coker(K_1\to K_0)\cong \ker (T_1\to T_0)=:S.\]
+(Maybe that's a triangulated category axiom.) I.e.:
+\[\xymatrix@R=4mm{
+&L\\
+K_1\ar@{ >->}[r]& K_0 \ar@{ >->}[r]\ar@{->>}[u]& T\ar@{->>}[r]& T_1\ar@{->>}[r]& T_0\\
+&&&S\ar@{ >->}[u]
+}\]
+So we have a tonne of triangles:
+\begin{enumerate}
+\item $K_1\to K_0\to L$
+\item $S\to T_1\to T_0$
+\item $K_1\to T\to T_1$
+\item $K_0\to T\to T_0$
+\end{enumerate}
+I want to know if the following is true:
+the connecting homs of (3) and (4) and the identification $S\cong L$ amount to a morphism of homology long exact sequences, from LES(2) to LES(1).
+
+Is it? Is it the octahedral axiom? Obviously I have no idea what I'm talking about.
+
+
+
+
+
 
 \begin{Intro}
 This research will form part of the author's PhD thesis. The author would like to thank his advisor, Haynes Miller, for his support and guidance, and John Harper, for sharing helpful insights into the use of cubical diagrams in connectivity analyses such as that of Section \ref{sec:connectivityAnalysis}.
@@ -1129,53 +1159,64 @@ X%r2c2
 }\]
 commute. Indeed, the map $c_nX\to c_{n+1}X$ is constructed by attaching a copy of $B$ along the image of $A$ in $c_nX$, for each such commuting square.
 
-
-Finally, we note that Radulescu-Banu's construction has a convenient consequence for the construction of homotopy cofibres in $s\calc$. Quillen's small object argument actually provides a functorial factorization
+We will use this canonical lift later, so establish a little notation. There is a function
+\[\hom_{s\algs}(F^{\calc}\mathbb{K}_t,X)\to \hom_{s\algs}(F^{\calc}\mathbb{K}_t,c_1X)\]
+denoted $\alpha\mapsto \widetilde{\alpha}$, natural in $X\in s\calc$, and providing a section of
+\[\hom_{s\algs}(F^{\calc}\mathbb{K}_t,cX)\overset{\epsilon_*}{\to} \hom_{s\algs}(F^{\calc}\mathbb{K}_t,X)\]
+ where we define $\widetilde{\alpha}$ to be the canonical lift corresponding to the square
 \[\xymatrix@R=4mm{
-A\ar@{ >->}[r]
-&%r1c1
-c(A\to B)\ar@{->>}[r]^-{\sim}
-& B.
+0\ar[r]\ar@{ >->}[d]&%r1c1
+c_0X\makebox[0cm][l]{${}:=0$}\ar[d]\\%r1c2
+F^{\calc}\mathbb{K}_t\ar[r]^-{\alpha}&%r2c1
+X%r2c2
 }\]
- of any map $A\to B$, and in this notation, one might say that we have been writing $cX$ as shorthand for $c(0\to X)$. There is a commuting square
+
+Finally, we note that Radulescu-Banu's construction has a convenient consequence (albeit not crucial) for the construction of homotopy cofibres in $s\calc$. Quillen's small object argument actually provides a functorial factorization
+\[\xymatrix@R=4mm{
+X\ar@{ >->}[r]
+&%r1c1
+c^\textup{fac}(g)\ar@{->>}[r]^-{\sim}
+& Y.
+}\]
+ of any map $g:X\to Y$, and in this notation, one might say that we have been writing $cX$ as shorthand for $c^\textup{fac}(0\to X)$. There is a commuting square
 \[\xymatrix@R=4mm{
 0\ar@{ >->}[r]\ar[d]
 &%r1c1
-cB\ar@{=}[d]
+cY\ar@{=}[d]
 \\%r1c2
-cA\ar[r]&%r2c1
-cB%r2c2
+cX\ar[r]^{cg}&%r2c1
+cY%r2c2
 }\]
 which by functoriality induces a commuting diagram (ignoring the dashed map):
 \[\xymatrix@R=4mm{
 0\ar@{ >->}[r]\ar[d]
 &
-ccB\ar@{->>}[r]^-{\epsilon_{cB}}
-\ar[d]_-{f}
+ccY\ar@{->>}[r]^-{\epsilon_{cY}}
+\ar[d]_-{m}
 &%r1c1
-cB\ar@{=}[d]
+cY\ar@{=}[d]
 \\%r1c2
-cA\ar@{ >->}[r]&%r2c1
-c(cA\to cB)\ar@{->>}[r]_-{\sim}
+cX\ar@{ >->}[r]&%r2c1
+c^\textup{fac}(cg)\ar@{->>}[r]_-{\sim}
 &
-cB\ar@{-->}[ul]|-{\beta}
+cY\ar@{-->}[ul]|-{\beta}
 %r2c2
 }\]
-Radulescu-Banu's diagonal $\beta$ is the dotted map in this diagram, and as it is a comonad diagonal $\epsilon_{cB}\circ \beta=\Id_{cB}$, so that $f\circ \beta$ is a section of the acyclic fibration $c(cA\to cB)\overset{\sim}{\epi} cB$.
+Radulescu-Banu's diagonal $\beta$ is the dotted map in this diagram, and as it is a comonad diagonal $\epsilon_{cY}\circ \beta=\Id_{cY}$, so that $m\circ \beta$ is a section of the acyclic fibration $c^\textup{fac}(cg)\overset{\sim}{\epi} cY$.
 
 Now we may define the homotopy cofiber as the pushout
 \[\xymatrix@R=4mm{
-cA\ar@{ >->}[r]\ar[d]&%r1c1
-c(cA\to cB)\ar[d]\\%r1c2
+cX\ar@{ >->}[r]\ar[d]&%r1c1
+c^\textup{fac}(cg)\ar[d]\\%r1c2
 0\ar[r]&%r2c1
-\hocof(A\to B)%r2c2
+\hocof(g)%r2c2
 }\]
 and by virtue of the construction just given:
 \begin{prop}\label{hocof no ziggy-zaggy}
-For any map $A\to B$, we have a canonical construction of the homotopy cofiber $\hocof(A\to B)$ at the level of $s\calc$, implemented by  natural maps
-\[cA\to cB\to \hocof(A\to B).\]
+There is a natural construction in $s\calc$ of the homotopy cofiber $\hocof(g)$ of a map $g:X\to Y$, implemented by  natural maps
+\[cX\overset{cg}{\to} cY\to \hocof(g).\]
 \end{prop}
-This is in contrast to the standard situation, where there is at best a natural zig-zag from $B$ to  $\hocof(A\to B)$.
+\noindent This is in contrast to the standard situation, where there is at best a natural zig-zag, even from $cY$ to  $\hocof(g)$.
 \subsection{Homology groups and $\calc$-$H_*$-coalgebras}\label{homology and Hcoalgs}
 There is a commuting diagram
 \[\xymatrix@R=4mm@C=20mm{
@@ -1407,7 +1448,7 @@ This is another expression of homogeneity in the relations defining $\calc$. For
 
 \end{CPiAlgs and CHalgs}
 
-\begin{Bousfield-Kan spectral sequence}
+\begin{BK spec seq}
 \section{\textbf{The Bousfield-Kan spectral sequence}}\label{Bousfield-Kan spectral sequence}
 
 
@@ -1615,7 +1656,7 @@ and the Bousfield-Kan spectral sequence to be the spectral sequence of the tower
 \[\cdots \to\textup{Tot}_n(\calX^\bullet)\to \textup{Tot}_{n-1}(\calX^\bullet)\to\cdots \]
 under $cX$. Our goal in this section is to prove
 \begin{prop}\label{towerIdentification}
-There is a natural zig-zag of weak equivalences of towers between $\left\{\plainD_{n+1}X\right\}_n$ and $\left\{\hofib(cX\to\textup{Tot}_{n}(\calX^\bullet))\right\}_n$. That is, up to homotopy, the $\textup{Tot}$ tower induces the Adams tower by taking fibers.
+There is a natural zig-zag of weak equivalences of towers between $\left\{\plainD_{n+1}X\right\}_n$ and $\left\{\hofib(cX\to\textup{Tot}_{n}(\calX^\bullet))\right\}_n$. That is,  the $\textup{Tot}$ tower induces the Adams tower by taking homotopy fibers. In particular, the spectral sequence of the $\textup{Tot}$ tower coincides with the spectral sequence of the Adams tower.
 \end{prop}
 Before giving the proof, we recall a useful relationship between cosimplicial objects and cubical diagrams, explained by Sinha in \cite[Theorem 6.5]{SinhaSpacesOfKnots.pdf}, and expanded on by Munson-Voli\'c \cite{CubicalHomotopyTheory.pdf}.
 We will only present that part of the theory that we need. There is a diagram of inclusions of categories
@@ -1658,6 +1699,153 @@ The only difference between the domain and codomain is that in $(({\plainD}_{n+1
 which is to say that we apply the iterated diagonal the appropriate number of times in each $c$ appearing in the domain. As $\beta$ is coassociative, this definition is unambiguous, and the resulting maps assemble to a weak equivalence of $(n+1)$-cubes. 
 \end{proof}
 
+\subsection{An alternate definition of the Adams tower}
+We'll now give an alternate definition of the Adams tower, given in \cite{BK_pairings_products.pdf}, which is more suited for the definition of spectral sequence operations.
+
+For $Z\in (\vect{}{})^{\Delta_+}$, the category of coaugmented cosimplicial vector spaces, Bousfield and Kan write $VZ$ for a ``path-like construction'' \cite[\S3.1]{BK_pairings_products.pdf} on $Z$ obtained by shifting $Z$ down and forgetting the 0th coface and codegeneracy. That is, $(VZ)^s:=(VZ)^{s+1}$, and:
+\begin{align*}
+\bigl((VZ)^s\overset{d^i}{\to} (VZ)^{s+1}\bigr)&:=\bigl(Z^{s+1}\overset{d^{i+1}}{\to} Z^{s+2}\bigr)\\
+\bigl((VZ)^s\overset{s^i}{\to} (VZ)^{s-1}\bigr)&:=\bigl(Z^{s+1}\overset{d^{i+1}}{\to} Z^{s}\bigr)
+\end{align*}
+In fact, the unused coface $d^0$ induces a map $v:Z\to VZ$.
+
+For $Y\in s\vect{}{}$, the standard simplicial path fibration (c.f.\ \cite[p.82]{BousKanSSeq.pdf}) produces $\Lambda Y\in s\vect{}{}$ by shifting down and restricting to a kernel:
+\[\Lambda Y_s=\ker\bigl(d_{s+1}\cdots d_1:Y_{s+1}\to Y_0\bigr).\]
+We forget the $0^\textup{th}$ face and degeneracy as before. This time the unused face map $d_0$ induces a fibration $\lambda:\Lambda Y\to Y$, and $\Lambda Y$ is  contractible.
+
+
+Each of these constructions can be prolonged to an endofunctor of $(s\algs)^{\Delta_+}$, endofunctors which are  necessary for a key construction of Bousfield and Kan \cite{BK_pairings_products.pdf,BK_pairings.pdf}. Define an endofunctor $D^1$ of the category $(s\algs)^{\Delta_+}$ of augmented cosimplicial objects in $s\algs$, using the pullback (for $W\in (s\algs)^{\Delta_+}$):
+\[\xymatrix@R=4mm{
+D^1 W \ar[r]
+\ar[d]^-{\delta}
+&%r1c1
+\Lambda VW \ar[d]^-{\lambda}
+\\%r1c2
+W \ar[r]^-{v}
+&%r2c1
+VW %r2c2
+}\]
+Then one can form a tower in $(s\algs)^{\Delta_+}$, (writing $D^n=D^1\circ\cdots D^1$):
+\[\xymatrix@R=4mm{
+\cdots 
+\ar[r]
+&%r1c1
+D^2W
+\ar[r]
+&%r1c3
+%r1c4
+D^1W
+\ar[r]&%r1c5
+D^0W
+\ar@{=}[r]
+&
+W.
+}\]
+Restricting to augmentations, there is a tower of fiber sequences in $s\algs$:
+\[\xymatrix@R=4mm{
+\cdots 
+\ar[r]
+&%r1c1
+(D^2W)^{-1}
+\ar[r]\ar[d]^-{d^0}
+&%r1c3
+%r1c4
+(D^1W)^{-1}
+\ar[d]^-{d^0}\ar[r]&%r1c5
+(D^0W)^{-1}\ar[d]^-{d^0}
+\ar@{=}[r]
+&
+W^{-1}
+\\
+&
+(D^2W)^{0}
+&
+(D^1W)^{0}
+&
+(D^0W)^{0}
+}\]
+whose homotopy long exact sequences fit together to form an exact couple [reference], below which we may insert some dotted arrows to be defined:
+\[\xymatrix@R=4mm{
+\cdots 
+\ar[r]
+&%r1c1
+\pi_{t-2}((D^2W)^{-1})
+\ar[r]\ar[d]^-{d^0}
+&%r1c3
+%r1c4
+\pi_{t-1}((D^1W)^{-1})
+\ar[d]^-{d^0}\ar[r]&%r1c5
+\pi_{t}((D^0W)^{-1})\ar[d]^-{d^0}
+\ar@{=}[r]
+&
+\pi_{t}(W^{-1})
+\\
+&
+\pi_{t-2}((D^2W)^{0})\ar@{-->}[ul]^-{\partial}
+&
+\pi_{t-1}((D^1W)^{0})\ar@{-->}[ul]^-{\partial}
+&
+\pi_{t-0}((D^0W)^{0})\ar@{-->}[ul]^-{\partial}
+\\\cdots&
+N_\subset^2\pi_tW^\bullet \ar[u]_-{\partial_\textup{it}}^-{\cong} \ar@{..>}[l]_-{d^1} \ar@{ >->}[d]_-{\sim}&
+N_\subset^1\pi_tW^\bullet \ar[u]_-{\partial_\textup{it}}^-{\cong} \ar@{..>}[l]_-{d^1} \ar@{ >->}[d]_-{\sim}&
+N_\subset^0\pi_tW^\bullet \ar[u]_-{\partial_\textup{it}}^-{\cong} \ar@{..>}[l]_-{d^1} \ar@{ >->}[d]_-{\sim}&
+\\
+\cdots&
+C^2\pi_tW  \ar@{..>}[l]_-{d^1}\ar@{-->}[dl]_-{\partial}&
+C^1\pi_tW  \ar@{..>}[l]_-{d^1}\ar@{-->}[dl]_-{\partial}&
+C^0\pi_tW  \ar@{..>}[l]_-{d^1}\ar@{-->}[dl]_-{\partial}&
+%\pi_t W^{-1} \ar[l]_-{d}
+\\
+\cdots\ar[r]&
+H_t(F^2TW)\ar[r]\ar[u]&
+H_t(F^1TW)\ar[r]\ar[u]&
+H_t(F^0TW)\ar[r]\ar[u]&
+}\]
+
+
+\[\xymatrix@R=4mm{
+\cdots&
+C^2\pi_tW  \ar@{..>}[l]_-{d^1}&
+C^1\pi_tW  \ar@{..>}[l]_-{d^1}&
+C^0\pi_tW  \ar@{..>}[l]_-{d^1}
+%\pi_t W^{-1} \ar[l]_-{d}
+\\
+&
+H_{t-2}(\calK_2)\ar[d]\ar@{=}[u]
+&
+H_{t-1}(\calK_1)\ar[d]\ar@{=}[u]
+&
+H_{t}(\calK_0)\ar[d]\ar@{=}[u]
+\\
+\cdots\ar[r]&
+H_{t-2}(\calT_2W)\ar[r]\ar@{-->}[ul]_-{\partial}
+&
+H_{t-1}(\calT_1W)\ar[r]\ar@{-->}[ul]_-{\partial}
+&
+H_t(\calT_0W)\ar[r]\ar@{-->}[ul]_-{\partial}
+&0
+}\]
+
+The overwhelming virtue of this construction is the following observation of Bousfield and Kan \cite[Proposition 5.2]{BK_pairings_products.pdf}:
+\begin{prop}\label{BK D1 is awesome}
+The connecting map
+\[\pi_t(\calX^{s})=\pi_t(V\calX^{s-1})\overset{\partial }{\to}\pi_{t-1}(D^1\calX)^s\]
+in the homotopy long exact sequence of the fiber sequence $(D^1\calX)^{s-1}\to \calX^{s-1}\to V\calX^{s-1}$ induces an isomorphism of cochain complexes
+\[N^s_\subset \pi_t \calX\subseteq N^{s-1}_\subset \pi_t V\calX \to  N^{s-1}_\subset \pi_{t-1} (D^1\calX).\]
+\end{prop}
+Consequently, the connecting map induces an equivalence
+\[C^s_\subset \pi_t (D^1\calX)\to  C^s_\subset \pi_{t-1} (V\calX),\]
+and 
+
+
+Bousfield and Kan explain that the composite
+\[N^\fraks\pi_\frakt(D^1X)\overset{\partial_\textup{conn}}{\from}N^\fraks\pi_{\frakt+1}(VX)\supset N^{\fraks+1}\pi_{\frakt+1}(X)\]
+is an isomorphism, where we note that the condition to lie in $N^{s+1}(O)\subset O^{s+1}$ is stricter than the condition to lie in $N^s(VO)\subset O^{s+1}$, for $O$ a cosimplicial module. Note that this composite is a cochain map, the reason being that the extra ``$d^0$'' in the coboundary out of $N^{\fraks+1}\pi_{\frakt+1}(X)$ that does not appear in the coboundary out of $N^{\fraks}\pi_{\frakt+1}(VX)$ becomes null after application of $\partial_\textup{conn}$, which is to say that the composite
+\[\pi_{\frakt+1}(X^{\fraks+1})\overset{d^0}{\to}\pi_{\frakt+1}(X^{\fraks+2})\overset{\partial_\textup{conn}}{\to}\pi_\frakt((D^1X)^{\fraks+1})\]
+is zero, which is clear, as we are just looking at adjacent maps in the homotopy long exact sequence.
+
+\begin{connectivity}
 \subsection{Connectivity estimates in the Adams tower}
 \label{sec:connectivityAnalysis}
 We will now perform the necessary connectivity estimates in the Adams tower in order to prove theorem \ref{completenesstheorem}, namely:  
@@ -2012,8 +2200,8 @@ is the action of  $\epsilon_{(\barConstructionMightAbbreviate X)}$ in level $q$,
 is the action of $\barConstructionMightAbbreviate \epsilon_{X}$ in level $q$.
 }%end "do not print \circ"
 \end{proof}
-
-\end{Bousfield-Kan spectral sequence}
+\end{connectivity}
+\end{BK spec seq}
 
 \begin{Constructing (co)homotopy operations}
 
@@ -3560,6 +3748,7 @@ Suppose that $A\in cs\algs$, so that $A$ is equipped with a pairing $S_2A\to A$.
 \[\E{r}{}{A}{s}{t}\overset{\delta_i^\textup{ext}}{\to} \E{r}{}{S_2A}{s}{t+i}\to \E{r}{}{A}{s}{t+i}.\]
 Whenever $A=\calX$, by which we mean Radulescu-Banu's resolution of some $X\in s\algs$, the results of this chapter will show that these operations must all equal zero. Indeed, the map $\E{r}{}{S_2\calX}{s}{t+i}\to \E{r}{}{\calX}{s}{t+i}$ can be lifted up one filtration, essentially since the resolution is by GEMs. That said, we will need work with  Radulescu-Banu's resolution directly in order to make our constructions.
 
+\begin{shaded}\tiny
 For $Z\in c\vect{}{}$, Bousfield and Kan write $VZ$ for a ``path-like construction'' \cite[\S3.1]{BK_pairings_products.pdf} on $Z$ obtained by shifting $Z$ down and forgetting the 0th coface and codegeneracy. That is, $(VZ)^s:=(VZ)^{s+1}$, and:
 \begin{align*}
 \bigl((VZ)^s\overset{d^i}{\to} (VZ)^{s+1}\bigr)&:=\bigl(Z^{s+1}\overset{d^{i+1}}{\to} Z^{s+2}\bigr)\\
@@ -3569,9 +3758,9 @@ In fact, the unused coface $d^0$ induces a map $v:Z\to VZ$.
 
 For $Y\in s\vect{}{}$, the standard simplicial path fibration (c.f.\ \cite[p.82]{BousKanSSeq.pdf}) produces $\Lambda Y\in s\vect{}{}$ by shifting down and restricting to a kernel:
 \[\Lambda Y_s=\ker\bigl(d_{s+1}\cdots d_1:Y_{s+1}\to Y_0\bigr).\]
-We forget the $0^\textup{th}$ face and degeneracy as before. This time the unused face map $d_0$ induces a fibration $\lambda:\Lambda Y\to Y$, and $\Lambda Y$ is  contractible .
+We forget the $0^\textup{th}$ face and degeneracy as before. This time the unused face map $d_0$ induces a fibration $\lambda:\Lambda Y\to Y$, and $\Lambda Y$ is  contractible.
 
-\vfil\pagebreak
+
 
 Each of these constructions can be prolonged to an endofunctor of $cs\vect{}{}$. 
 Now it is possible to recall a key construction of Bousfield and Kan \cite{BK_pairings_products.pdf,BK_pairings.pdf}. Define $D^1\calX \in cs\algs$ to be the pullback:
@@ -3595,7 +3784,7 @@ in the homotopy long exact sequence of the fiber sequence $(D^1\calX)^{s-1}\to \
 Consequently, the connecting map induces an equivalence
 \[C^s_\subset \pi_t (D^1\calX)\to  C^s_\subset \pi_{t-1} (V\calX),\]
 and 
-
+\end{shaded}
 
 Our goal will be to create a factorization of the multiplication map $\mu:\calX \smashcoprod  \calX \to \calX $ through $\delta:D^1\calX \to \calX $. This will be possible (using a zig-zag), as $\calX^s_t=(c(KQc)^{s+1}X)_t$ is a  Radulescu-Banu resolution. In this case, not only does
 \[(V\calX)^s_t=(c(KQc)^{s+2}X)_t\in cs\algs\]
@@ -3671,11 +3860,13 @@ This diagram has produced a factorisation $\overline{\mu}:X\smashcoprod_{\Sigma_
 \pi_{\frakt+1}(VX)\ar[u]_-{\cong}\makebox[0cm][l]{\ \ \ put me on prev page}
 \ar[l]_-{\partial_\textup{conn}}
 }}\]
+\begin{shaded}\tiny
 Bousfield and Kan explain that the composite
 \[N^\fraks\pi_\frakt(D^1X)\overset{\partial_\textup{conn}}{\from}N^\fraks\pi_{\frakt+1}(VX)\supset N^{\fraks+1}\pi_{\frakt+1}(X)\]
 is an isomorphism, where we note that the condition to lie in $N^{s+1}(O)\subset O^{s+1}$ is stricter than the condition to lie in $N^s(VO)\subset O^{s+1}$, for $O$ a cosimplicial module. Note that this composite is a cochain map, the reason being that the extra ``$d^0$'' in the coboundary out of $N^{\fraks+1}\pi_{\frakt+1}(X)$ that does not appear in the coboundary out of $N^{\fraks}\pi_{\frakt+1}(VX)$ becomes null after application of $\partial_\textup{conn}$, which is to say that the composite
 \[\pi_{\frakt+1}(X^{\fraks+1})\overset{d^0}{\to}\pi_{\frakt+1}(X^{\fraks+2})\overset{\partial_\textup{conn}}{\to}\pi_\frakt((D^1X)^{\fraks+1})\]
 is zero, which is clear, as we are just looking at adjacent maps in the homotopy long exact sequence.
+\end{shaded}
 
 \begin{shaded}\tiny
 The next result states that the exterior operations, when lifted up one filtration level, induce the operations derived on unstable Lie coalgebra homology, albeit with a shift in the indexing of the Steenrod operations. Writing $\lambda$ for the lifting map
@@ -3876,18 +4067,20 @@ We can use this cofibration to construct, at the chain level, the image under
 of a tensor product $\alpha\otimes\beta$ of \emph{spherical} homology classes. Abbreviating $H_*^\calc$ to $H$:
 \begin{prop}
 There is a function
-\[\overline{F}:\hom_{s\algs}(S^t,Y)\times\hom_{s\algs}(S^{t'},Z)\to \hom_{s\algs}(J_{t,t'},c(Y\times Z)),\]natural in $Y,Z\in s\algs$,
+\[\overline{F}:\hom_{s\algs}(F^{\calc}\mathbb{K}_t,Y)\times\hom_{s\algs}(F^{\calc}\mathbb{K}_{t'},Z)\to \hom_{s\algs}(J_{t,t'},c(Y\times Z)),\]natural in $Y,Z\in s\algs$,
 such that the function
-\[F:\hom_{s\algs}(S^t,Y)\times\hom_{s\algs}(S^{t'},Z)\to \pi_{t+t'+1}(Qc(Y\times Z))=:H_{t+t'+1}(Y\times Z)\]
-defined by $F(\alpha,\beta):=H_*(\overline{F}(\alpha,\beta))(g)$ makes the following diagram commute:
+\[F:\hom_{s\algs}(F^{\calc}\mathbb{K}_t,Y)\times\hom_{s\algs}(F^{\calc}\mathbb{K}_{t'},Z)\to \pi_{t+t'+1}(Q^\calc  c(Y\times Z))=:H^\calc_{t+t'+1}(Y\times Z)\]
+defined by $F(\alpha,\beta):=H^\calc_*(\overline{F}(\alpha,\beta))(h_{t,t'})$ makes the following diagram commute:
 \[\mathclap{\xymatrix@R=4mm{
 %(H(Y\times Z)^{\otimes2})_{t+t'}\ar[d]^-{\textup{id}+\tau}
 %&
-\ar@/_2em/@<-3ex>[dd]_-{(\textup{id}+T)\circ \textup{hur}^{\otimes2}}
+%\ar@/_2em/@<-3ex>[dd]_-{(\textup{id}+T)\circ \textup{hur}^{\otimes2}}
+%\ar[ddr]|(.34){(\textup{id}+T)\circ \textup{hur}^{\otimes2}}
 %\ar[l]_-{\textup{hur}^{\otimes2}}
-\hom_{s\algs}(S^t,Y)\times\hom_{s\algs}(S^{t'},Z)\ar[d]^-{F}
+\hom_{s\algs}(F^{\calc}\mathbb{K}_t,Y)\times\hom_{s\algs}(F^{\calc}\mathbb{K}_{t'},Z)\ar[d]^-{F}
 \ar[r]^-{\textup{hur}^{\otimes2}}
 &%r1c1
+\ar[ddl]_(.34){\Id+T}
 \textup{Pr}(HY)_t\otimes\textup{Pr}(HZ)_{t'}\ar[r]^-{j}
 &%r1c2
 \textup{Pr}(HY\smashprod HZ)_{t+t'+1}\ar@{ >->}[d]
@@ -3903,43 +4096,46 @@ H_{t+t'+1}(Y\times Z)\ar[r]%\ar[l]_-{\Delta}
 (HY\smashprod  HZ)_{t+t'+1}
 \\
 %&
-(H(Y\times Z)^{\otimes2})_{t+t'}\ar[r]
-&((HY\times HZ)^{\otimes2})_{t+t'}
+(S^2H(Y\times Z))_{t+t'}\ar[r]
+&(S^2(HY\times HZ))_{t+t'}
 }}\]
 \end{prop}
+\noindent The map $(\Id+T)$ is the tensor product of the maps
+\[\textup{Pr}(H^\calc_*Y)_t\subset H^\calc_tY\to H^\calc_t(Y\times Z)\ \textup{and}\ \textup{Pr}(H^\calc_*Z)_t\subset H^\calc_tZ\to H^\calc_t(Y\times Z)\]
+followed by $(\Id+T):(H^\calc_*(Y\times Z))^{\otimes 2}\to S^2H^\calc_*(Y\times Z)$.
+%The $\calc$-$H_*$-coalgebra $HY\times HZ$ is calculated as the direct sum $HY\oplus HZ$, and
+%\[(HY\oplus HZ)^{\otimes 2}=(HY)^{\otimes 2}\oplus (HY\otimes HZ\oplus HZ\otimes HY)\oplus (HZ)^{\otimes 2}.\]
 \begin{proof}
-The value of $\overline{F}$ on $(\alpha,\beta)$ is defined as follows. Corresponding to the commuting diagrams
+The value of $\overline{F}$ on $(\alpha,\beta)$ is defined as follows. Construct canonical lifts (c.f.\ \S\ref{Cofibrant replacement via the small object argument}):
 \[\vcenter{\xymatrix@R=4mm{
-0\ar[r]
-\ar@{ >->}[d]
+%0\ar[r]
 &%r1c1
-0\ar[d]
+c_1(Y\times Z)\ar[d]
 \\%r1c2
-S^t\ar[r]^-{(\alpha,0)}
+F^{\calc}\mathbb{K}_t\ar[ru]^-{\widetilde{(\alpha,0)}}\ar[r]_-{(\alpha,0)}
 &%r2c1
 Y\times Z%r2c2
 }}
 \textup{\quad and\quad }
 \vcenter{\xymatrix@R=4mm{
-0\ar[r]
-\ar@{ >->}[d]
+%0\ar[r]
 &%r1c1
-0\ar[d]
+c_1(Y\times Z)\ar[d]
 \\%r1c2
-S^{t'}\ar[r]^-{(0,\beta)}
+F^{\calc}\mathbb{K}_t\ar[ru]^-{\widetilde{(0,\beta)}}\ar[r]_-{(0,\beta)}
 &%r2c1
 Y\times Z%r2c2
 }}\]
-are maps $\widetilde{(\alpha,0)}:S^t\to c_1(Y\times Z)$ and $\widetilde{(0,\beta)}:S^{t'}\to c_1(Y\times Z)$, and there is a commuting diagram (since in $Y\times Z$, products of the form $(a,0)(0,b)$ vanish):
+There is a commuting diagram (since in $Y\times Z$, products \textbf{(or brackets)} of $(a,0)$ with $(0,b)$ vanish):
 \[\xymatrix@R=4mm@C=15mm{
-S^{\frakt}\ar@{->}[r]_-{\textup{EZ}^\mu(\imath_t,\imath_{t'})}
+F^{\calc}\mathbb{K}_{\frakt}\ar@{->}[r]_-{\textup{EZ}^\mu(\imath_t,\imath_{t'})}
 \ar@{ >->}[d]
 &%r1c1
-S^t\sqcup S^{t'}\ar@{ >->}[d]
+F^{\calc}\mathbb{K}_t\sqcup F^{\calc}\mathbb{K}_{t'}\ar@{ >->}[d]
 \ar[r]^{\widetilde{(\alpha,0)}\sqcup\widetilde{(0,\beta)}}
 &c_1(Y\times Z)\ar[d]
 \\%r1c2
-CS^{\frakt}\ar[r]\ar@/_1em/[rr]_-{0}
+CF^{\calc}\mathbb{K}_{\frakt}\ar[r]\ar@/_1em/[rr]_-{0}
 &%r2c1
 J_{t,t'}\ar@{..>}[r]
 %r2c2
@@ -3947,29 +4143,31 @@ J_{t,t'}\ar@{..>}[r]
 Corresponding to the right square is a map $J_{t,t'}\to c_2(Y\times Z)$, and the composite with the cofibration $c_2(Y\times Z)\to c(Y\times Z)$ is $\overline{F}(\alpha,\beta)$. This function $\overline{F}$ is evidently natural in $Y$ and $Z$, and so then is $F$.
 
 The diagram consists of a square, a triangle and a hexagon.
-The square commutes as the horizontals are maps in $\calC\HCoalg$, and we can see that the triangle commutes because we understand the $\calC\HCoalg$ structure of $H_*(J_{t,t'})$. As all of the maps in the hexagon are natural, we may check that it commutes on the universal example alone: $(\imath_t,\imath_{t'})\in\hom_{s\algs}(S^t,S^t)\times\hom_{s\algs}(S^{t'},S^{t'})$. That is, it is enough to check that the following hexagon, with a one element set at the top left entry, commutes:
+The square commutes as the horizontals are maps in $\calC\HCoalg$, and we can see that the triangle commutes because we understand the $\calC\HCoalg$ structure of $H_*(J_{t,t'})$ (and $H^\calc_*(\overline{F}(\alpha,\beta))$ is a map of $\calc$-$H_*$-coalgebras). As all of the maps in the hexagon are natural, we may check that it commutes on the universal example alone: 
+\[(\imath_t,\imath_{t'})\in\hom_{s\algs}(F^{\calc}\mathbb{K}_t,F^{\calc}\mathbb{K}_t)\times\hom_{s\algs}(F^{\calc}\mathbb{K}_{t'},F^{\calc}\mathbb{K}_{t'}).\]
+ That is, it is enough to check that the following hexagon, with a one element set at the top left entry, commutes:
 \[\mathclap{\xymatrix@R=4mm{
 \{(\imath_t,\imath_{t'})\}\ar[d]^-{F}
 \ar[r]^-{\textup{hur}^{\otimes2}}
 &%r1c1
-\textup{Pr}_t(HS^t)\otimes\textup{Pr}_{t'}(HS^{t'})\ar[r]^-{j^\calc}
+\textup{Pr}_t(HF^{\calc}\mathbb{K}_t)\otimes\textup{Pr}_{t'}(HF^{\calc}\mathbb{K}_{t'})\ar[r]^-{j^\calc}
 &%r1c2
-\textup{Pr}_{\frakt+1}(HS^t\smashprod HS^{t'})\ar@{ >->}[d]^-{\textup{inc}}
+\textup{Pr}_{\frakt+1}(HF^{\calc}\mathbb{K}_t\smashprod HF^{\calc}\mathbb{K}_{t'})\ar@{ >->}[d]^-{\textup{inc}}
 \\%r1c5
-H_{\frakt+1}(S^t\times S^{t'})\ar[r]^-{r}
+H_{\frakt+1}(F^{\calc}\mathbb{K}_t\times F^{\calc}\mathbb{K}_{t'})\ar[r]^-{r}
 &%r2c1
-(HS^t\times HS^{t'})_{\frakt+1}\ar@{->>}[r]^-{\textup{proj}}
+(HF^{\calc}\mathbb{K}_t\times HF^{\calc}\mathbb{K}_{t'})_{\frakt+1}\ar@{->>}[r]^-{\textup{proj}}
 &%r2c2
-(HS^t\smashprod  HS^{t'})_{\frakt+1}
+(HF^{\calc}\mathbb{K}_t\smashprod  HF^{\calc}\mathbb{K}_{t'})_{\frakt+1}
 }}\]
 One finds that $j^\calc$ and $\textup{inc}$ are isomorphisms of 1-dimensional vector spaces, so it is enough to check that $r(F(\imath_t,\imath_{t'}))$ does not lie in the kernel of $\textup{proj}$, i.e.:
-\[r(F(\imath_t,\imath_{t'}))\notin(HS^t\sqcup HS^{t'})_{\frakt+1} = H_{\frakt+1}S^t\oplus H_{\frakt+1}S^{t'}=0,\]
+\[r(F(\imath_t,\imath_{t'}))\notin(HF^{\calc}\mathbb{K}_t\sqcup HF^{\calc}\mathbb{K}_{t'})_{\frakt+1} = H_{\frakt+1}F^{\calc}\mathbb{K}_t\oplus H_{\frakt+1}F^{\calc}\mathbb{K}_{t'}=0,\]
 yet $\Delta(r(F(\imath_t,\imath_{t'})))=\imath_t \otimes\imath_{t'}+\imath_{t'}\otimes\imath_{t}\neq 0$, using the commuting square and triangle already established.
 \end{proof}
 We record here a useful calculation:
 \begin{lem}
 The composite 
-\[S^t\sqcup S^{t'}\to J_{t,t'}\overset{\overline{F}(\alpha,\beta)}{\to}c(X\times X)\overset{c(\textup{add}\circ(\epsilon^2))}{\to}X\]
+\[F^{\calc}\mathbb{K}_t\sqcup F^{\calc}\mathbb{K}_{t'}\to J_{t,t'}\overset{\overline{F}(\alpha,\beta)}{\to}c(X\times X)\overset{c(\textup{add}\circ(\epsilon^2))}{\to}X\]
 equals $\widetilde{(\epsilon\alpha)}\sqcup \widetilde{(\epsilon\beta)}$.
 \end{lem}
 \begin{proof}By symmetry, we need only consider:
@@ -3977,7 +4175,7 @@ equals $\widetilde{(\epsilon\alpha)}\sqcup \widetilde{(\epsilon\beta)}$.
 \newcommand{\Times}{{\cdot}}
 \[
 \xymatrix@R=4mm{
-S^t\ar@{ >->}[r]&
+F^{\calc}\mathbb{K}_t\ar@{ >->}[r]&
 J_{t,t'}\ar[r]^-{\overline{F}(\alpha,\beta)}
 &%r2c1
 c(X^\fraks\Times X^\fraks)\ar[r]^-{c(\epsilon\times\epsilon)}
@@ -3986,7 +4184,7 @@ c(\overline{V}X^{\fraks-1}\Times \overline{V}X^{\fraks-1})\ar[r]^-{c(\textup{add
 &%r2c3
 c(\overline{V}X^{\fraks-1})\makebox[0cm][l]{\,$=X^\fraks$}\phantom{=}%r2c4
 }\]
-The composite $J_{t,t'}\to c(\overline{V}X^{\fraks-1}\Times \overline{V}X^{\fraks-1})$ equals $\overline{F}(\epsilon\alpha,\epsilon\beta)$, due to the naturality of $\overline{F}$. By definition of $F$, the composite $S^t\to c(\overline{V}X^{\fraks-1}\Times \overline{V}X^{\fraks-1})$ equals $\widetilde{(\epsilon\alpha,0)}$. The naturality of the operation $\alpha\mapsto\widetilde{\alpha} $ \textbf{defined anywhere?} provides the result.
+The composite $J_{t,t'}\to c(\overline{V}X^{\fraks-1}\Times \overline{V}X^{\fraks-1})$ equals $\overline{F}(\epsilon\alpha,\epsilon\beta)$, due to the naturality of $\overline{F}$. By definition of $F$, the composite $F^{\calc}\mathbb{K}_t\to c(\overline{V}X^{\fraks-1}\Times \overline{V}X^{\fraks-1})$ equals $\widetilde{(\epsilon\alpha,0)}$. The naturality of the operation $\alpha\mapsto\widetilde{\alpha} $ of \S\ref{Cofibrant replacement via the small object argument} provides the result.
 \end{proof}
 \subsection{A two-cell complex for the Koszul $\delta$ operations}\label{two-cell complex for the deltas}
 In this section, we give a construction of a two-cell complex whose cohomology has a $P^i$ connecting the two cells.
