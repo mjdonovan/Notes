@@ -961,12 +961,123 @@ second quadrant cohomology --- Dwyer's work Eilenberg-Moore
 
 \end{Conventions and notation} %return me to my home
 
-
+\pagebreak
 \subsection{Second quadrant homotopy spectral sequences}\label{Second quadrant homotopy spectral sequences}
 Suppose that $V^{s}_{t}$ is a cosimplicial simplicial (ungraded) vector space. Then there is a cochain-chain complex 
 \[CV^{s}_{t}:=C\dhor^{s}C\uver_{t}V=V^{s}_{t},\]
 with $s$ the horizontal and $t$ the vertical coordinate. The \emph{total complex} $TV$, is a chain complex with a canonical decreasing filtration, defined by 
 \[(TV)_n=\prod_{t-s=n}CV^{s}_{t},\qquad(F^mTV)_n=\prod_{\substack{t-s=n\\s\geq m}}CV^{s}_{t}.\]
+On the other hand, we may write
+\[(\calT_mV)_n:=(TV/F^{m+1} TV)_n\cong\prod_{\substack{t-s=n\\s\leq m}}CV^{s}_{t}, \]
+then the $\calT_mV$ form a tower of surjections of chain complexes with inverse limit $\calT_\infty V=TV$.
+
+We can summarise this situation with a diagram, abbreviating $F^mTV$ to $F^m$ and $\calT_mV$ to $\calT_m$:
+\[\cdots\ \vcenter{\xymatrix@R=4mm{\textstyle
+0
+&
+\frac{F^0}{F^1}
+&
+\frac{F^1}{F^2}
+&
+\frac{F^2}{F^3}
+&
+\frac{F^3}{F^4}
+\\
+TV\ar@{ >->}[d]\ar@{->>}[u]
+&
+F^0\ar@{ >->}[d]\ar@{=}[l]\ar@{->>}[u]
+&
+F^1\ar@{ >->}[d]\ar@{ >->}[l]\ar@{->>}[u]
+&
+F^2\ar@{ >->}[d]\ar@{ >->}[l]\ar@{->>}[u]
+&
+F^3\ar@{ >->}[d]\ar@{ >->}[l]\ar@{->>}[u]
+\\
+TV\ar@{=}[r]\ar@{->>}[d]&
+TV\ar@{=}[r]\ar@{->>}[d]&
+TV\ar@{=}[r]\ar@{->>}[d]&
+TV\ar@{=}[r]\ar@{->>}[d]&
+TV\ar@{->>}[d]
+\\
+0
+&\calT_{-1}\ar@{=}[l]
+&\calT_0\ar@{->>}[l]
+&\calT_1\ar@{->>}[l]
+&\calT_2\ar@{->>}[l]
+\\
+0\ar@{ >->}[u]
+&
+0\ar@{ >->}[u]
+&
+\frac{F^0}{F^1}\ar@{ >->}[u]
+&
+\frac{F^1}{F^2}\ar@{ >->}[u]
+&
+\frac{F^2}{F^3}\ar@{ >->}[u]
+}}\ \cdots \]
+In this diagram, any pair of composable maps consisting of a monomorphism then an epimorphism is a short exact sequence of chain complexes. Taking homology, each such pair creates a long exact sequence, and we obtain two \emph{spread out exact couples}, which we juxtapose, using wavy maps to indicate boundary homomorphisms:
+\[\cdots\ \vcenter{\xymatrix@R=4mm{\textstyle
+0
+&
+H\frac{F^0}{F^1}\ar@{~>}[dr]
+&
+H\frac{F^1}{F^2}\ar@{~>}[dr]
+&
+H\frac{F^2}{F^3}\ar@{~>}[dr]
+&
+H\frac{F^3}{F^4}
+\\
+HTV\ar[d]\ar[u]
+&
+HF^0\ar[d]\ar@{=}[l]\ar[u]
+&
+HF^1\ar[d]\ar[l]\ar[u]
+&
+HF^2\ar[d]\ar[l]\ar[u]
+&
+HF^3\ar[d]\ar[l]\ar[u]
+\\
+HTV\ar@{=}[r]\ar[d]&
+HTV\ar@{=}[r]\ar[d]&
+HTV\ar@{=}[r]\ar[d]&
+HTV\ar@{=}[r]\ar[d]&
+HTV\ar[d]
+\\
+0
+&H\calT_{-1}\ar@{=}[l]\ar@{~>}[dr]\ar@{~>}@/^2em/[uu]
+&H\calT_0\ar[l]\ar@{~>}[dr]\ar@{~>}@/^2em/[uu]
+&H\calT_1\ar[l]\ar@{~>}[dr]\ar@{~>}@/^2em/[uu]
+&H\calT_2\ar[l]\ar@{~>}@/^2em/[uu]
+\\
+0\ar[u]
+&
+0\ar[u]
+&
+H\frac{F^0}{F^1}\ar[u]
+&
+H\frac{F^1}{F^2}\ar[u]
+&
+H\frac{F^2}{F^3}\ar[u]
+}}\ \cdots \]
+The vertical connecting maps $H\calT_m\to \Sigma HF^{m+1}$ in fact form a morphism of exact couples (c.f.\ \cite{limits_and_sseq.pdf} or \cite[\S2.2]{mccleary.pdf}), as follows from Verdier's octahedron axiom (in the triangulated homotopy category of bounded below chain complexes) or a hearty diagram chase. Moreover, the two resulting spectral sequences have the same $E^1$ page, so that they are identical (c.f.\ \cite[\S6]{limits_and_sseq.pdf}). %We have made an effort to note these opposite yet equal spectral sequences, as they form a model for more homotopical
+
+This common spectral sequence is simply the spectral sequence of the filtered complex $TV$: 
+\begin{alignat*}{2}
+\E{0}{}{V}{s}{t}
+&:=
+C\dhor^sC\uver_tV,
+&\qquad&d^1=d^\textup{h};\\
+\E{1}{}{V}{s}{t}
+&:=
+C\dhor^s\pi\uver_tV,
+&\qquad&d^1=d^\textup{h};\\
+\E{2}{}{V}{s}{t}
+&:=
+\pi\dhor^s\pi\uver_tV.
+\end{alignat*}
+Note that $\E{1}{}{V}{s}{t}=H_{t-s}(F^s/F^{s+1})$
+, and
+
 Correspondingly, $H_*( TV)$ is equipped with a decreasing filtration, which is exhaustive, but need not be either hausdorff or finite, and one defines
 \[\E{0}{}{H_*( TV)}{s}{t}:=F^{s}H_{t-s}( TV)/F^{s+1}   H_{t-s}( TV).\]
 Then, there is a spectral sequence with
