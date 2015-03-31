@@ -1,22 +1,22 @@
 % !TEX root = z_output/unstable_Lie_algs.tex
 \documentclass[11pt]{amsart}
-\newcommand{\IncludeAll}{}% <-----
+\newcommand{\IncludeAllx}{}% <-----
 \newcommand{\ShrinkPages}{}%
-\newcommand{\PostponeContents}{}%
+\newcommand{\PostponeContentsx}{}%
 \ifx\ShrinkPages\undefined\else\usepackage[paperheight=160mm,paperwidth=160mm]{geometry}\fi%220/160
 \usepackage{amsmath,amsthm,amssymb} \usepackage{eucal} \usepackage{mathrsfs,nicefrac} \usepackage{amssymb} \usepackage[all]{xy} \usepackage{cancel} \usepackage{color} \usepackage{version} \usepackage{enumerate} \usepackage{mathtools} \newcommand{\xclude}[1]{\excludeversion{#1}} \newcommand{\nclude}[1]{\includeversion{#1}}%mathtools is just used for `mathclap'
 \xclude{todolist}
 \xclude{Intro}
 \ifx\IncludeAll\undefined\else\renewcommand{\xclude}[1]{\nclude{#1}}\fi
-\xclude{Contents Page}
+\nclude{Contents Page}
 \xclude{Conventions and notation}
 \xclude{CPiAlgs and CHalgs}
-\nclude{BK spec seq}\nclude{connectivity}
+\nclude{BK spec seq}\xclude{connectivity}
 \xclude{Constructing (co)homotopy operations}
 \xclude{homotopy operations for PRLs}
 \xclude{Cohomology Operations for W and U}
 \xclude{second quadrant homotopy}%
-\xclude{Operations on the Bousfield-Kan spectral sequence}%
+\nclude{Operations on the Bousfield-Kan spectral sequence}%
 \xclude{Koszul complexes}
 \xclude{Composite functor spectral sequences}
 \xclude{Operations in composite functor spectral sequences}
@@ -2027,7 +2027,7 @@ which is to say that we apply the iterated diagonal the appropriate number of ti
 \end{proof}
 
 \subsection{An alternate definition of the Adams tower}
-We'll now give an alternate definition of the Adams tower, given in \cite{BK_pairings_products.pdf}, which is more suited for the definition of spectral sequence operations.
+We'll now give an alternate definition of the Adams tower of \S\ref{sec:derWRTab}, given in \cite{BK_pairings_products.pdf}, which is more suited for the definition of spectral sequence operations in our setting.
 
 For $Z\in (\vect{}{})^{\Delta_+}$, the category of coaugmented cosimplicial vector spaces, Bousfield and Kan write $VZ$ for a ``path-like construction'' \cite[\S3.1]{BK_pairings_products.pdf} on $Z$ obtained by shifting $Z$ down and forgetting the 0th coface and codegeneracy. That is, $(VZ)^s:=(VZ)^{s+1}$, and:
 \begin{align*}
@@ -2052,7 +2052,7 @@ W \ar[r]^-{v}
 &%r2c1
 VW %r2c2
 }\]
-Then one can form a tower in $(s\algs)^{\Delta_+}$, (writing $D^n=D^1\circ\cdots D^1$):
+Then one can form a tower in $(s\algs)^{\Delta_+}$, (writing $D^n:=D^1\circ\cdots D^1$):
 \[\xymatrix@R=4mm{
 \cdots 
 \ar[r]
@@ -2091,86 +2091,132 @@ W^{-1}
 &
 (D^0W)^{0}
 }\]
-whose homotopy long exact sequences fit together to form an exact couple [reference], below which we may insert some dotted arrows to be defined:
+%whose homotopy long exact sequences fit together to form an exact couple [reference], below which we may insert some dotted arrows to be defined:
+%\[\xymatrix@R=4mm{
+%\cdots 
+%\ar[r]
+%&%r1c1
+%\pi_{t-2}((D^2W)^{-1})
+%\ar[r]\ar[d]^-{d^0}
+%&%r1c3
+%%r1c4
+%\pi_{t-1}((D^1W)^{-1})
+%\ar[d]^-{d^0}\ar[r]&%r1c5
+%\pi_{t}((D^0W)^{-1})\ar[d]^-{d^0}
+%\ar@{=}[r]
+%&
+%\pi_{t}(W^{-1})
+%\\
+%&
+%\pi_{t-2}((D^2W)^{0})\ar@{-->}[ul]^-{\partial}
+%&
+%\pi_{t-1}((D^1W)^{0})\ar@{-->}[ul]^-{\partial}
+%&
+%\pi_{t-0}((D^0W)^{0})\ar@{-->}[ul]^-{\partial}
+%\\\cdots&
+%N_\subset^2\pi_tW^\bullet \ar[u]_-{\partial_\textup{it}}^-{\cong} \ar@{..>}[l]_-{d^1} \ar@{ >->}[d]_-{\sim}&
+%N_\subset^1\pi_tW^\bullet \ar[u]_-{\partial_\textup{it}}^-{\cong} \ar@{..>}[l]_-{d^1} \ar@{ >->}[d]_-{\sim}&
+%N_\subset^0\pi_tW^\bullet \ar[u]_-{\partial_\textup{it}}^-{\cong} \ar@{..>}[l]_-{d^1} \ar@{ >->}[d]_-{\sim}&
+%\\
+%\cdots&
+%C^2\pi_tW  \ar@{..>}[l]_-{d^1}\ar@{-->}[dl]_-{\partial}&
+%C^1\pi_tW  \ar@{..>}[l]_-{d^1}\ar@{-->}[dl]_-{\partial}&
+%C^0\pi_tW  \ar@{..>}[l]_-{d^1}\ar@{-->}[dl]_-{\partial}&
+%%\pi_t W^{-1} \ar[l]_-{d}
+%\\
+%\cdots\ar[r]&
+%H_t(F^2TW)\ar[r]\ar[u]&
+%H_t(F^1TW)\ar[r]\ar[u]&
+%H_t(F^0TW)\ar[r]\ar[u]&
+%}\]
+%
+%
+%\[\xymatrix@R=4mm{
+%\cdots&
+%C^2\pi_tW  \ar@{..>}[l]_-{d^1}&
+%C^1\pi_tW  \ar@{..>}[l]_-{d^1}&
+%C^0\pi_tW  \ar@{..>}[l]_-{d^1}
+%%\pi_t W^{-1} \ar[l]_-{d}
+%\\
+%&
+%H_{t-2}(\calK_2)\ar[d]\ar@{=}[u]
+%&
+%H_{t-1}(\calK_1)\ar[d]\ar@{=}[u]
+%&
+%H_{t}(\calK_0)\ar[d]\ar@{=}[u]
+%\\
+%\cdots\ar[r]&
+%H_{t-2}(\calT_2W)\ar[r]\ar@{-->}[ul]_-{\partial}
+%&
+%H_{t-1}(\calT_1W)\ar[r]\ar@{-->}[ul]_-{\partial}
+%&
+%H_t(\calT_0W)\ar[r]\ar@{-->}[ul]_-{\partial}
+%&0
+%}\]
+Bousfield and Kan note \cite[\S3.3,4.2]{BK_pairings_products.pdf} that this tower \emph{equals} the Adams tower $R_nX$ when $W=\calX$, and explicitly perform the identification of the $E^1$ term of the spectral sequence of this tower with $N^s_\subset\pi_tW$, using iterates of the connecting map
+\[\pi_t(W^{s})=\pi_t(VW^{s-1})\overset{\partial_\textup{conn} }{\to}\pi_{t-1}(D^1W)^{s-1}\]
+of the fiber sequence $(D^1W)^{s-1}\to W^{s-1}\to VW^{s-1}$, which has the property:
+\begin{prop}[{\cite[Proposition 5.2]{BK_pairings_products.pdf}}]\label{BK D1 is awesome}
+The following composite involving the connecting map $\partial_\textup{conn}$ induces an isomorphism of cochain complexes:
+\[N^s_\subset \pi_t W\subseteq N^{s-1}_\subset \pi_t VW \overset{\partial_\textup{conn}}{\to}N^{s-1}_\subset \pi_{t-1} (D^1W).\]
+\end{prop}
+If we declare the spectral sequence an object $W\in cs\algcat$ to be the spectral sequence of the tower
 \[\xymatrix@R=4mm{
 \cdots 
 \ar[r]
 &%r1c1
-\pi_{t-2}((D^2W)^{-1})
-\ar[r]\ar[d]^-{d^0}
+(D^2W)^{-1}
+\ar[r]
 &%r1c3
 %r1c4
-\pi_{t-1}((D^1W)^{-1})
-\ar[d]^-{d^0}\ar[r]&%r1c5
-\pi_{t}((D^0W)^{-1})\ar[d]^-{d^0}
-\ar@{=}[r]
-&
-\pi_{t}(W^{-1})
-\\
-&
-\pi_{t-2}((D^2W)^{0})\ar@{-->}[ul]^-{\partial}
-&
-\pi_{t-1}((D^1W)^{0})\ar@{-->}[ul]^-{\partial}
-&
-\pi_{t-0}((D^0W)^{0})\ar@{-->}[ul]^-{\partial}
-\\\cdots&
-N_\subset^2\pi_tW^\bullet \ar[u]_-{\partial_\textup{it}}^-{\cong} \ar@{..>}[l]_-{d^1} \ar@{ >->}[d]_-{\sim}&
-N_\subset^1\pi_tW^\bullet \ar[u]_-{\partial_\textup{it}}^-{\cong} \ar@{..>}[l]_-{d^1} \ar@{ >->}[d]_-{\sim}&
-N_\subset^0\pi_tW^\bullet \ar[u]_-{\partial_\textup{it}}^-{\cong} \ar@{..>}[l]_-{d^1} \ar@{ >->}[d]_-{\sim}&
-\\
-\cdots&
-C^2\pi_tW  \ar@{..>}[l]_-{d^1}\ar@{-->}[dl]_-{\partial}&
-C^1\pi_tW  \ar@{..>}[l]_-{d^1}\ar@{-->}[dl]_-{\partial}&
-C^0\pi_tW  \ar@{..>}[l]_-{d^1}\ar@{-->}[dl]_-{\partial}&
-%\pi_t W^{-1} \ar[l]_-{d}
-\\
-\cdots\ar[r]&
-H_t(F^2TW)\ar[r]\ar[u]&
-H_t(F^1TW)\ar[r]\ar[u]&
-H_t(F^0TW)\ar[r]\ar[u]&
+(D^1W)^{-1}
+\ar[r]&%r1c5
+(D^0W)^{-1}
 }\]
-
-
+then the spectral sequence of $D^1\calX$ maps to the spectral sequence of $\calX$, with a filtration shift, via the map of towers:
 \[\xymatrix@R=4mm{
-\cdots&
-C^2\pi_tW  \ar@{..>}[l]_-{d^1}&
-C^1\pi_tW  \ar@{..>}[l]_-{d^1}&
-C^0\pi_tW  \ar@{..>}[l]_-{d^1}
-%\pi_t W^{-1} \ar[l]_-{d}
+\cdots 
+\ar[r]
+&%r1c1
+(D^2D^1\calX)^{-1}
+\ar[r]\ar[d]^{=}
+&%r1c1
+(D^1D^1\calX)^{-1}
+\ar[r]\ar[d]^{=}
+&%r1c3
+%r1c4
+(D^0D^1\calX)^{-1}
+\ar[d]^{=}
 \\
-&
-H_{t-2}(\calK_2)\ar[d]\ar@{=}[u]
-&
-H_{t-1}(\calK_1)\ar[d]\ar@{=}[u]
-&
-H_{t}(\calK_0)\ar[d]\ar@{=}[u]
-\\
-\cdots\ar[r]&
-H_{t-2}(\calT_2W)\ar[r]\ar@{-->}[ul]_-{\partial}
-&
-H_{t-1}(\calT_1W)\ar[r]\ar@{-->}[ul]_-{\partial}
-&
-H_t(\calT_0W)\ar[r]\ar@{-->}[ul]_-{\partial}
-&0
+\cdots 
+\ar[r]
+&%r1c1
+(D^3\calX)^{-1}
+\ar[r]
+&%r1c1
+(D^2\calX)^{-1}
+\ar[r]
+&%r1c3
+%r1c4
+(D^1\calX)^{-1}
+\ar[r]&%r1c5
+(D^0\calX)^{-1}
 }\]
-
-The overwhelming virtue of this construction is the following observation of Bousfield and Kan \cite[Proposition 5.2]{BK_pairings_products.pdf}:
-\begin{prop}\label{BK D1 is awesome}
-The connecting map
-\[\pi_t(\calX^{s})=\pi_t(V\calX^{s-1})\overset{\partial }{\to}\pi_{t-1}(D^1\calX)^s\]
-in the homotopy long exact sequence of the fiber sequence $(D^1\calX)^{s-1}\to \calX^{s-1}\to V\calX^{s-1}$ induces an isomorphism of cochain complexes
-\[N^s_\subset \pi_t \calX\subseteq N^{s-1}_\subset \pi_t V\calX \to  N^{s-1}_\subset \pi_{t-1} (D^1\calX).\]
-\end{prop}
-Consequently, the connecting map induces an equivalence
-\[C^s_\subset \pi_t (D^1\calX)\to  C^s_\subset \pi_{t-1} (V\calX),\]
-and 
-
-
-Bousfield and Kan explain that the composite
-\[N^\fraks\pi_\frakt(D^1X)\overset{\partial_\textup{conn}}{\from}N^\fraks\pi_{\frakt+1}(VX)\supset N^{\fraks+1}\pi_{\frakt+1}(X)\]
-is an isomorphism, where we note that the condition to lie in $N^{s+1}(O)\subset O^{s+1}$ is stricter than the condition to lie in $N^s(VO)\subset O^{s+1}$, for $O$ a cosimplicial module. Note that this composite is a cochain map, the reason being that the extra ``$d^0$'' in the coboundary out of $N^{\fraks+1}\pi_{\frakt+1}(X)$ that does not appear in the coboundary out of $N^{\fraks}\pi_{\frakt+1}(VX)$ becomes null after application of $\partial_\textup{conn}$, which is to say that the composite
-\[\pi_{\frakt+1}(X^{\fraks+1})\overset{d^0}{\to}\pi_{\frakt+1}(X^{\fraks+2})\overset{\partial_\textup{conn}}{\to}\pi_\frakt((D^1X)^{\fraks+1})\]
-is zero, which is clear, as we are just looking at adjacent maps in the homotopy long exact sequence.
+That is, there are spectral sequence maps covering maps on $E^1$ of the form
+\[\E{1}{}{D^1\calX}{s}{t}\overset{\cong}{\to} \E{1}{}{\calX}{s+1}{t+1}.\]
+Under Bousfiled and Kan's identification of $E^1$, this isomorphism is the inverse of the composite of proposition \ref{BK D1 is awesome}.
+%
+%
+%Consequently, the connecting map induces an equivalence
+%\[C^s_\subset \pi_t (D^1\calX)\to  C^s_\subset \pi_{t-1} (V\calX),\]
+%and 
+%
+%
+%Bousfield and Kan explain that the composite
+%\[N^\fraks\pi_\frakt(D^1X)\overset{\partial_\textup{conn}}{\from}N^\fraks\pi_{\frakt+1}(VX)\supset N^{\fraks+1}\pi_{\frakt+1}(X)\]
+%is an isomorphism, where we note that the condition to lie in $N^{s+1}(O)\subset O^{s+1}$ is stricter than the condition to lie in $N^s(VO)\subset O^{s+1}$, for $O$ a cosimplicial module. Note that this composite is a cochain map, the reason being that the extra ``$d^0$'' in the coboundary out of $N^{\fraks+1}\pi_{\frakt+1}(X)$ that does not appear in the coboundary out of $N^{\fraks}\pi_{\frakt+1}(VX)$ becomes null after application of $\partial_\textup{conn}$, which is to say that the composite
+%\[\pi_{\frakt+1}(X^{\fraks+1})\overset{d^0}{\to}\pi_{\frakt+1}(X^{\fraks+2})\overset{\partial_\textup{conn}}{\to}\pi_\frakt((D^1X)^{\fraks+1})\]
+%is zero, which is clear, as we are just looking at adjacent maps in the homotopy long exact sequence.
 
 \begin{connectivity}
 \subsection{Connectivity estimates in the Adams tower}
@@ -4248,7 +4294,7 @@ For $x\in E^r_{-s,t}(X)$, $\Sq^i(x)$ survives to $E^{2r-1}$, and moreover, $d_{2
 
 
 
-\subsection{A chain-level construction $\xi_\textup{res}^*$ inducing $\xi_{\calC\HAlg}$}\label{sec xires}
+\subsection{A chain-level construction $\xi_\textup{res}^\star$ inducing $\xi_{\calC\HAlg}$}\label{sec xires}
 In \S\ref{chain level structure}, we defined a map
 \[\xi_{\calc\HAlg}:B^{s+1}_{\calc\HAlg}H^*_{\calc}X\to B^{s}_{\calc\HAlg}H^*_{\calc}X\smashcoprod B^{s}_{\calc\HAlg}H^*_{\calc}X,\]
 which we used in \S\ref{Horizontal Steenrod operations and a product for HWn} to define Steenrod operations and a product on $H^{*}_{\calc\HAlg}H^*_{\calc}X$ when $\calc=\algs$.
@@ -4395,9 +4441,9 @@ The representative $g$ has the property that $d_0(g)=\mu(\Nabla(\imath_t\otimes\
 %&L^{\times2}}\]
 %where the outer rectangle commutes since in $L^{\times2}$, $(a,0)\cdot(0,b)=(0,0)$. This gives a map $C_{n,m}\to c_2(L^{\times2})$ whose restriction to the subcomplex $S^n\sqcup S^m$ gives the homotopy classes $\alpha$ and $\beta$. The image $g_{\alpha,\beta}$ of the class $g\in(C_{n,m})_{n+m+1}$ is then an explicit representative for the homology class sought.
 
-\subsection{A chain level construction of $j^*_{\calC\HAlg}$}\label{chain level construction of j}
+\subsection{A chain level construction of $j^\star_{\calC\HAlg}$}\label{chain level construction of j}
 We can use this cofibration to construct, at the chain level, the image under 
-\[j^*_{\calC\HAlg}:\textup{Pr}_t(HY)\otimes \textup{Pr}_{t'}(HZ)\to \textup{Pr}_{t+t'+1}(HY\smashprod HZ)\]
+\[j^\star_{\calC\HAlg}:\textup{Pr}_t(HY)\otimes \textup{Pr}_{t'}(HZ)\to \textup{Pr}_{t+t'+1}(HY\smashprod HZ)\]
 of a tensor product $\alpha\otimes\beta$ of \emph{spherical} homology classes. Abbreviating $H_*^\calc$ to $H$:
 \begin{prop}
 There is a function
@@ -4549,14 +4595,14 @@ which represents $\sigma_i^\textup{ext}\imath_t$. so that the defining equation
 degenerates to $\sigma_i((P^k)^*h_{t,i})=\sigma_i^\textup{ext}\imath_t$.
 \end{proof}
 
-\subsection{A chain level construction of $\theta^*_i$}
+\subsection{A chain level construction of $\theta^\star_i$}
 \begin{prop}\label{propOnKoszulDelta}
 For $2\leq i\leq t$, there is a function
 \[\overline{G}:\hom_{s\vect{}{}}(S^t,W)\to \hom_{s\algs}(\Theta_{t,i},cKW),\]
 natural in $W\in s\vect{}{}$, and satisfying $\overline{G}(\alpha)(\imath_t)=\widetilde{\alpha}$, such that the function
 \[G:\hom_{s\algs}(S^t,W)\to \pi_{t+i+1}(QcKW)=:H_{t+i+1}(KW)\]
 defined by $G(\alpha):=H_*(\overline{G}(\alpha))(h)$ equals the following composite whenever $2\leq i<t$:
-\[\hom_{s\vect{}{}}(S^t,W)\epi \pi_t W\overset{\textup{hur}}{\to} H_{t}(KW) \overset{\theta_i^*}{\to}H_{t+i+1}(KW).\]
+\[\hom_{s\vect{}{}}(S^t,W)\epi \pi_t W\overset{\textup{hur}}{\to} H_{t}(KW) \overset{\theta_i^\star}{\to}H_{t+i+1}(KW).\]
 \end{prop}
 %\begin{shaded}\tiny
 %\[{{\xymatrix@R=4mm{
@@ -4615,7 +4661,7 @@ Throughout, I'll continue with the above abbreviations, and write $\frakt=t+t'$.
 There is a commuting diagram:
 \[\mathclap{\xymatrix@R=4mm{
 \pi_t(X)\otimes \pi_{t'}(X)\ar[dd]^-{\textup{hur}^{\otimes 2}}
-\ar[r]^-{\nabla}
+\ar[r]^-{\widetilde{\nabla}}
 &%r1c1
 \pi_{\frakt}(X\smashcoprod  X)\ar[r]^-{\overline{\mu}}
 &%r1c2
@@ -4645,7 +4691,7 @@ It will help to modify and augment this diagram a little. Indeed, for each cardi
 \{(\alpha,\beta)\}
 %\pi_t(X)\otimes \pi_{t'}(X)
 \ar@{~>}[dd]_-{j\circ(\textup{hur}^{\otimes 2})}
-\ar[r]^-{\nabla}
+\ar[r]^-{\widetilde{\nabla}}
 \ar@{..>}[ddddr]^-(.2){F}
 &%r1c1
 \pi_{\frakt}(X\smashcoprod  X)\ar[r]^-{\overline{\mu}_*}
@@ -6773,7 +6819,7 @@ If $L$ has bracket zero, then the differential on $\dual(\UEAX(L))$ is defined o
 \item $\quadratic_\calc$ is down.
 \item cite all the asesome bk papers
 \item need uniform convention on the j's
-\item $\star$ for $*$-preimage - introduce that idea 
+\item $\star$ for $*$-preimage - introduce that idea . $\xi$, $\theta_i$, $P^i$, $j$, etc.
 \end{enumerate}
 \end{todolist}
 \begin{bibliog}
