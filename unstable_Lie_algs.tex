@@ -2026,197 +2026,7 @@ The only difference between the domain and codomain is that in $(({\plainD}_{n+1
 which is to say that we apply the iterated diagonal the appropriate number of times in each $c$ appearing in the domain. As $\beta$ is coassociative, this definition is unambiguous, and the resulting maps assemble to a weak equivalence of $(n+1)$-cubes. 
 \end{proof}
 
-\subsection{An alternate definition of the Adams tower}
-We'll now give an alternate definition of the Adams tower of \S\ref{sec:derWRTab}, given in \cite{BK_pairings_products.pdf}, which is more suited for the definition of spectral sequence operations in our setting.
 
-For $Z\in (\vect{}{})^{\Delta_+}$, the category of coaugmented cosimplicial vector spaces, Bousfield and Kan write $VZ$ for a ``path-like construction'' \cite[\S3.1]{BK_pairings_products.pdf} on $Z$ obtained by shifting $Z$ down and forgetting the 0th coface and codegeneracy. That is, $(VZ)^s:=(VZ)^{s+1}$, and:
-\begin{align*}
-\bigl((VZ)^s\overset{d^i}{\to} (VZ)^{s+1}\bigr)&:=\bigl(Z^{s+1}\overset{d^{i+1}}{\to} Z^{s+2}\bigr)\\
-\bigl((VZ)^s\overset{s^i}{\to} (VZ)^{s-1}\bigr)&:=\bigl(Z^{s+1}\overset{d^{i+1}}{\to} Z^{s}\bigr)
-\end{align*}
-In fact, the unused coface $d^0$ induces a map $v:Z\to VZ$.
-
-For $Y\in s\vect{}{}$, the standard simplicial path fibration (c.f.\ \cite[p.82]{BousKanSSeq.pdf}) produces $\Lambda Y\in s\vect{}{}$ by shifting down and restricting to a kernel:
-\[\Lambda Y_s=\ker\bigl(d_{s+1}\cdots d_1:Y_{s+1}\to Y_0\bigr).\]
-We forget the $0^\textup{th}$ face and degeneracy as before. This time the unused face map $d_0$ induces a fibration $\lambda:\Lambda Y\to Y$, and $\Lambda Y$ is  contractible.
-
-
-Each of these constructions can be prolonged to an endofunctor of $(s\algs)^{\Delta_+}$, endofunctors which are  necessary for a key construction of Bousfield and Kan \cite{BK_pairings_products.pdf,BK_pairings.pdf}. Define an endofunctor $D^1$ of the category $(s\algs)^{\Delta_+}$ of augmented cosimplicial objects in $s\algs$, using the pullback (for $W\in (s\algs)^{\Delta_+}$):
-\[\xymatrix@R=4mm{
-D^1 W \ar[r]
-\ar[d]^-{\delta}
-&%r1c1
-\Lambda VW \ar[d]^-{\lambda}
-\\%r1c2
-W \ar[r]^-{v}
-&%r2c1
-VW %r2c2
-}\]
-Then one can form a tower in $(s\algs)^{\Delta_+}$, (writing $D^n:=D^1\circ\cdots D^1$):
-\[\xymatrix@R=4mm{
-\cdots 
-\ar[r]
-&%r1c1
-D^2W
-\ar[r]
-&%r1c3
-%r1c4
-D^1W
-\ar[r]&%r1c5
-D^0W
-\ar@{=}[r]
-&
-W.
-}\]
-Restricting to augmentations, there is a tower of fiber sequences in $s\algs$:
-\[\xymatrix@R=4mm{
-\cdots 
-\ar[r]
-&%r1c1
-(D^2W)^{-1}
-\ar[r]\ar[d]^-{d^0}
-&%r1c3
-%r1c4
-(D^1W)^{-1}
-\ar[d]^-{d^0}\ar[r]&%r1c5
-(D^0W)^{-1}\ar[d]^-{d^0}
-\ar@{=}[r]
-&
-W^{-1}
-\\
-&
-(D^2W)^{0}
-&
-(D^1W)^{0}
-&
-(D^0W)^{0}
-}\]
-%whose homotopy long exact sequences fit together to form an exact couple [reference], below which we may insert some dotted arrows to be defined:
-%\[\xymatrix@R=4mm{
-%\cdots 
-%\ar[r]
-%&%r1c1
-%\pi_{t-2}((D^2W)^{-1})
-%\ar[r]\ar[d]^-{d^0}
-%&%r1c3
-%%r1c4
-%\pi_{t-1}((D^1W)^{-1})
-%\ar[d]^-{d^0}\ar[r]&%r1c5
-%\pi_{t}((D^0W)^{-1})\ar[d]^-{d^0}
-%\ar@{=}[r]
-%&
-%\pi_{t}(W^{-1})
-%\\
-%&
-%\pi_{t-2}((D^2W)^{0})\ar@{-->}[ul]^-{\partial}
-%&
-%\pi_{t-1}((D^1W)^{0})\ar@{-->}[ul]^-{\partial}
-%&
-%\pi_{t-0}((D^0W)^{0})\ar@{-->}[ul]^-{\partial}
-%\\\cdots&
-%N_\subset^2\pi_tW^\bullet \ar[u]_-{\partial_\textup{it}}^-{\cong} \ar@{..>}[l]_-{d^1} \ar@{ >->}[d]_-{\sim}&
-%N_\subset^1\pi_tW^\bullet \ar[u]_-{\partial_\textup{it}}^-{\cong} \ar@{..>}[l]_-{d^1} \ar@{ >->}[d]_-{\sim}&
-%N_\subset^0\pi_tW^\bullet \ar[u]_-{\partial_\textup{it}}^-{\cong} \ar@{..>}[l]_-{d^1} \ar@{ >->}[d]_-{\sim}&
-%\\
-%\cdots&
-%C^2\pi_tW  \ar@{..>}[l]_-{d^1}\ar@{-->}[dl]_-{\partial}&
-%C^1\pi_tW  \ar@{..>}[l]_-{d^1}\ar@{-->}[dl]_-{\partial}&
-%C^0\pi_tW  \ar@{..>}[l]_-{d^1}\ar@{-->}[dl]_-{\partial}&
-%%\pi_t W^{-1} \ar[l]_-{d}
-%\\
-%\cdots\ar[r]&
-%H_t(F^2TW)\ar[r]\ar[u]&
-%H_t(F^1TW)\ar[r]\ar[u]&
-%H_t(F^0TW)\ar[r]\ar[u]&
-%}\]
-%
-%
-%\[\xymatrix@R=4mm{
-%\cdots&
-%C^2\pi_tW  \ar@{..>}[l]_-{d^1}&
-%C^1\pi_tW  \ar@{..>}[l]_-{d^1}&
-%C^0\pi_tW  \ar@{..>}[l]_-{d^1}
-%%\pi_t W^{-1} \ar[l]_-{d}
-%\\
-%&
-%H_{t-2}(\calK_2)\ar[d]\ar@{=}[u]
-%&
-%H_{t-1}(\calK_1)\ar[d]\ar@{=}[u]
-%&
-%H_{t}(\calK_0)\ar[d]\ar@{=}[u]
-%\\
-%\cdots\ar[r]&
-%H_{t-2}(\calT_2W)\ar[r]\ar@{-->}[ul]_-{\partial}
-%&
-%H_{t-1}(\calT_1W)\ar[r]\ar@{-->}[ul]_-{\partial}
-%&
-%H_t(\calT_0W)\ar[r]\ar@{-->}[ul]_-{\partial}
-%&0
-%}\]
-Bousfield and Kan note \cite[\S3.3,4.2]{BK_pairings_products.pdf} that this tower \emph{equals} the Adams tower $R_nX$ when $W=\calX$, and explicitly perform the identification of the $E^1$ term of the spectral sequence of this tower with $N^s_\subset\pi_tW$, using iterates of the connecting map
-\[\pi_t(W^{s})=\pi_t(VW^{s-1})\overset{\partial_\textup{conn} }{\to}\pi_{t-1}(D^1W)^{s-1}\]
-of the fiber sequence $(D^1W)^{s-1}\to W^{s-1}\to VW^{s-1}$, which has the property:
-\begin{prop}[{\cite[Proposition 5.2]{BK_pairings_products.pdf}}]\label{BK D1 is awesome}
-The following composite involving the connecting map $\partial_\textup{conn}$ induces an isomorphism of cochain complexes:
-\[N^s_\subset \pi_t W\subseteq N^{s-1}_\subset \pi_t VW \overset{\partial_\textup{conn}}{\to}N^{s-1}_\subset \pi_{t-1} (D^1W).\]
-\end{prop}
-If we declare the spectral sequence an object $W\in cs\algcat$ to be the spectral sequence of the tower
-\[\xymatrix@R=4mm{
-\cdots 
-\ar[r]
-&%r1c1
-(D^2W)^{-1}
-\ar[r]
-&%r1c3
-%r1c4
-(D^1W)^{-1}
-\ar[r]&%r1c5
-(D^0W)^{-1}
-}\]
-then the spectral sequence of $D^1\calX$ maps to the spectral sequence of $\calX$, with a filtration shift, via the map of towers:
-\[\xymatrix@R=4mm{
-\cdots 
-\ar[r]
-&%r1c1
-(D^2D^1\calX)^{-1}
-\ar[r]\ar[d]^{=}
-&%r1c1
-(D^1D^1\calX)^{-1}
-\ar[r]\ar[d]^{=}
-&%r1c3
-%r1c4
-(D^0D^1\calX)^{-1}
-\ar[d]^{=}
-\\
-\cdots 
-\ar[r]
-&%r1c1
-(D^3\calX)^{-1}
-\ar[r]
-&%r1c1
-(D^2\calX)^{-1}
-\ar[r]
-&%r1c3
-%r1c4
-(D^1\calX)^{-1}
-\ar[r]&%r1c5
-(D^0\calX)^{-1}
-}\]
-That is, there are spectral sequence maps covering maps on $E^1$ of the form
-\[\E{1}{}{D^1\calX}{s}{t}\overset{\cong}{\to} \E{1}{}{\calX}{s+1}{t+1}.\]
-Under Bousfiled and Kan's identification of $E^1$, this isomorphism is the inverse of the composite of proposition \ref{BK D1 is awesome}.
-%
-%
-%Consequently, the connecting map induces an equivalence
-%\[C^s_\subset \pi_t (D^1\calX)\to  C^s_\subset \pi_{t-1} (V\calX),\]
-%and 
-%
-%
-%Bousfield and Kan explain that the composite
-%\[N^\fraks\pi_\frakt(D^1X)\overset{\partial_\textup{conn}}{\from}N^\fraks\pi_{\frakt+1}(VX)\supset N^{\fraks+1}\pi_{\frakt+1}(X)\]
-%is an isomorphism, where we note that the condition to lie in $N^{s+1}(O)\subset O^{s+1}$ is stricter than the condition to lie in $N^s(VO)\subset O^{s+1}$, for $O$ a cosimplicial module. Note that this composite is a cochain map, the reason being that the extra ``$d^0$'' in the coboundary out of $N^{\fraks+1}\pi_{\frakt+1}(X)$ that does not appear in the coboundary out of $N^{\fraks}\pi_{\frakt+1}(VX)$ becomes null after application of $\partial_\textup{conn}$, which is to say that the composite
-%\[\pi_{\frakt+1}(X^{\fraks+1})\overset{d^0}{\to}\pi_{\frakt+1}(X^{\fraks+2})\overset{\partial_\textup{conn}}{\to}\pi_\frakt((D^1X)^{\fraks+1})\]
-%is zero, which is clear, as we are just looking at adjacent maps in the homotopy long exact sequence.
 
 \begin{connectivity}
 \subsection{Connectivity estimates in the Adams tower}
@@ -2959,7 +2769,7 @@ with the property that $\ExtCohProd(\alpha\otimes \alpha)=\ExtCohOp^k\alpha$ for
 \end{shaded}
 
 
-\subsection{Chain level structure $\xi_\calc $ and $\psi_\calc$ for cohomology operations}\label{chain level structure}
+\subsection{Chain level structure for cohomology operations; the maps $\xi_\calc $ and $\psi_\calc$}\label{chain level structure}
 \hfil
 \begin{shaded}
 \begin{enumerate}
@@ -4116,13 +3926,15 @@ The $\delta^\textup{raw}$-operations (resp.\ Steenrod operations)  at $E^2$ agre
 \section{\textbf{Operations in the Bousfield-Kan spectral sequence}}\label{Operations on the Bousfield-Kan spectral sequence}
 \textbf{whole chapter $X\mapsto \calX$?}
 \textbf{Let $\algs$ be $\algs$ or $\liealgs$}
-\subsection{A shift in filtration}
+
 Suppose that $A\in cs\algs$, so that $A$ is equipped with a pairing $S_2A\to A$. We may employ the eternal operations of \S?????? to obtain such operations as
 \[\E{r}{}{A}{s}{t}\overset{\delta_i^\textup{ext}}{\to} \E{r}{}{S_2A}{s}{t+i}\to \E{r}{}{A}{s}{t+i}.\]
 Whenever $A=\calX$, by which we mean Radulescu-Banu's resolution of some $X\in s\algs$, the results of this chapter will show that these operations must all equal zero. Indeed, the map $\E{r}{}{S_2\calX}{s}{t+i}\to \E{r}{}{\calX}{s}{t+i}$ can be lifted up one filtration, essentially since the resolution is by GEMs. That said, we will need work with  Radulescu-Banu's resolution directly in order to make our constructions.
 
-\begin{shaded}\tiny
-For $Z\in c\vect{}{}$, Bousfield and Kan write $VZ$ for a ``path-like construction'' \cite[\S3.1]{BK_pairings_products.pdf} on $Z$ obtained by shifting $Z$ down and forgetting the 0th coface and codegeneracy. That is, $(VZ)^s:=(VZ)^{s+1}$, and:
+\subsection{An alternate definition of the Adams tower}
+We'll now give an alternate definition of the Adams tower of \S\ref{sec:derWRTab}, given in \cite{BK_pairings_products.pdf}, which is more suited for the definition of spectral sequence operations in our setting.
+
+For $Z\in {\vect{}{}}^{\Delta_+}$, the category of coaugmented cosimplicial vector spaces, Bousfield and Kan write $VZ$ for a ``path-like construction'' \cite[\S3.1]{BK_pairings_products.pdf} on $Z$ obtained by shifting $Z$ down and forgetting the 0th coface and codegeneracy. That is, $(VZ)^s:=(VZ)^{s+1}$, and:
 \begin{align*}
 \bigl((VZ)^s\overset{d^i}{\to} (VZ)^{s+1}\bigr)&:=\bigl(Z^{s+1}\overset{d^{i+1}}{\to} Z^{s+2}\bigr)\\
 \bigl((VZ)^s\overset{s^i}{\to} (VZ)^{s-1}\bigr)&:=\bigl(Z^{s+1}\overset{d^{i+1}}{\to} Z^{s}\bigr)
@@ -4134,32 +3946,227 @@ For $Y\in s\vect{}{}$, the standard simplicial path fibration (c.f.\ \cite[p.82]
 We forget the $0^\textup{th}$ face and degeneracy as before. This time the unused face map $d_0$ induces a fibration $\lambda:\Lambda Y\to Y$, and $\Lambda Y$ is  contractible.
 
 
-
-Each of these constructions can be prolonged to an endofunctor of $cs\vect{}{}$. 
-Now it is possible to recall a key construction of Bousfield and Kan \cite{BK_pairings_products.pdf,BK_pairings.pdf}. Define $D^1\calX \in cs\algs$ to be the pullback:
+Each of these constructions can be prolonged to an endofunctor of $(s\algs)^{\Delta_+}$, endofunctors which are  necessary for a key construction of Bousfield and Kan \cite{BK_pairings_products.pdf,BK_pairings.pdf}. Define an endofunctor $D^1$ of the category $(s\algs)^{\Delta_+}$ of augmented cosimplicial objects in $s\algs$, using the pullback (for $W\in (s\algs)^{\Delta_+}$):
 \[\xymatrix@R=4mm{
-D^1\calX \ar[r]
+D^1 W \ar[r]
 \ar[d]^-{\delta}
 &%r1c1
-\Lambda V\calX \ar[d]^-{\lambda}
+\Lambda VW \ar[d]^-{\lambda}
 \\%r1c2
-\calX \ar[r]^-{v}
+W \ar[r]^-{v}
 &%r2c1
-V\calX %r2c2
+VW %r2c2
 }\]
-The overwhelming virtue of this construction is the following observation of Bousfield and Kan \cite[Proposition 5.2]{BK_pairings_products.pdf}:
-\begin{prop}\label{BK D1 is awesome}
-The connecting map
-\[\pi_t(\calX^{s})=\pi_t(V\calX^{s-1})\overset{\partial }{\to}\pi_{t-1}(D^1\calX)^s\]
-in the homotopy long exact sequence of the fiber sequence $(D^1\calX)^{s-1}\to \calX^{s-1}\to V\calX^{s-1}$ induces an isomorphism of cochain complexes
-\[N^s_\subset \pi_t \calX\subseteq N^{s-1}_\subset \pi_t V\calX \to  N^{s-1}_\subset \pi_{t-1} (D^1\calX).\]
+Then one can form a tower in $(s\algs)^{\Delta_+}$, (writing $D^n:=D^1\circ\cdots D^1$):
+\[\xymatrix@R=4mm{
+\cdots 
+\ar[r]
+&%r1c1
+D^2W
+\ar[r]
+&%r1c3
+%r1c4
+D^1W
+\ar[r]&%r1c5
+D^0W
+\ar@{=}[r]
+&
+W.
+}\]
+Restricting to augmentations, there is a tower of fiber sequences in $s\algs$:
+\[\xymatrix@R=4mm{
+\cdots 
+\ar[r]
+&%r1c1
+(D^2W)^{-1}
+\ar[r]\ar[d]^-{d^0}
+&%r1c3
+%r1c4
+(D^1W)^{-1}
+\ar[d]^-{d^0}\ar[r]&%r1c5
+(D^0W)^{-1}\ar[d]^-{d^0}
+\ar@{=}[r]
+&
+W^{-1}
+\\
+&
+(D^2W)^{0}
+&
+(D^1W)^{0}
+&
+(D^0W)^{0}
+}\]
+%whose homotopy long exact sequences fit together to form an exact couple [reference], below which we may insert some dotted arrows to be defined:
+%\[\xymatrix@R=4mm{
+%\cdots 
+%\ar[r]
+%&%r1c1
+%\pi_{t-2}((D^2W)^{-1})
+%\ar[r]\ar[d]^-{d^0}
+%&%r1c3
+%%r1c4
+%\pi_{t-1}((D^1W)^{-1})
+%\ar[d]^-{d^0}\ar[r]&%r1c5
+%\pi_{t}((D^0W)^{-1})\ar[d]^-{d^0}
+%\ar@{=}[r]
+%&
+%\pi_{t}(W^{-1})
+%\\
+%&
+%\pi_{t-2}((D^2W)^{0})\ar@{-->}[ul]^-{\partial}
+%&
+%\pi_{t-1}((D^1W)^{0})\ar@{-->}[ul]^-{\partial}
+%&
+%\pi_{t-0}((D^0W)^{0})\ar@{-->}[ul]^-{\partial}
+%\\\cdots&
+%N_\subset^2\pi_tW^\bullet \ar[u]_-{\partial_\textup{it}}^-{\cong} \ar@{..>}[l]_-{d^1} \ar@{ >->}[d]_-{\sim}&
+%N_\subset^1\pi_tW^\bullet \ar[u]_-{\partial_\textup{it}}^-{\cong} \ar@{..>}[l]_-{d^1} \ar@{ >->}[d]_-{\sim}&
+%N_\subset^0\pi_tW^\bullet \ar[u]_-{\partial_\textup{it}}^-{\cong} \ar@{..>}[l]_-{d^1} \ar@{ >->}[d]_-{\sim}&
+%\\
+%\cdots&
+%C^2\pi_tW  \ar@{..>}[l]_-{d^1}\ar@{-->}[dl]_-{\partial}&
+%C^1\pi_tW  \ar@{..>}[l]_-{d^1}\ar@{-->}[dl]_-{\partial}&
+%C^0\pi_tW  \ar@{..>}[l]_-{d^1}\ar@{-->}[dl]_-{\partial}&
+%%\pi_t W^{-1} \ar[l]_-{d}
+%\\
+%\cdots\ar[r]&
+%H_t(F^2TW)\ar[r]\ar[u]&
+%H_t(F^1TW)\ar[r]\ar[u]&
+%H_t(F^0TW)\ar[r]\ar[u]&
+%}\]
+%
+%
+%\[\xymatrix@R=4mm{
+%\cdots&
+%C^2\pi_tW  \ar@{..>}[l]_-{d^1}&
+%C^1\pi_tW  \ar@{..>}[l]_-{d^1}&
+%C^0\pi_tW  \ar@{..>}[l]_-{d^1}
+%%\pi_t W^{-1} \ar[l]_-{d}
+%\\
+%&
+%H_{t-2}(\calK_2)\ar[d]\ar@{=}[u]
+%&
+%H_{t-1}(\calK_1)\ar[d]\ar@{=}[u]
+%&
+%H_{t}(\calK_0)\ar[d]\ar@{=}[u]
+%\\
+%\cdots\ar[r]&
+%H_{t-2}(\calT_2W)\ar[r]\ar@{-->}[ul]_-{\partial}
+%&
+%H_{t-1}(\calT_1W)\ar[r]\ar@{-->}[ul]_-{\partial}
+%&
+%H_t(\calT_0W)\ar[r]\ar@{-->}[ul]_-{\partial}
+%&0
+%}\]
+Bousfield and Kan note \cite[\S3.3,4.2]{BK_pairings_products.pdf} that this tower \emph{equals} the Adams tower $R_nX$ when $W=\calX$ is Radulescu-Banu's resolution of $X\in s\algcat$. They also explicitly perform the resulting identification of the $E^1$ term of the spectral sequence of this tower with $N^s_\subset\pi_tW$, using iterates of the connecting map
+\[\pi_t(W^{s})=\pi_t(VW^{s-1})\overset{\partial_\textup{conn} }{\to}\pi_{t-1}(D^1W)^{s-1}\]
+of the fiber sequence $(D^1W)^{s-1}\to W^{s-1}\to VW^{s-1}$, which has the property:
+\begin{prop}[{\cite[Proposition 5.2]{BK_pairings_products.pdf}}]\label{BK D1 is awesome}
+The following composite involving the connecting map $\partial_\textup{conn}$ induces an isomorphism of cochain complexes:
+\[N^s_\subset \pi_t W\subseteq N^{s-1}_\subset \pi_t VW \overset{\partial_\textup{conn}}{\to}N^{s-1}_\subset \pi_{t-1} (D^1W).\]
 \end{prop}
-Consequently, the connecting map induces an equivalence
-\[C^s_\subset \pi_t (D^1\calX)\to  C^s_\subset \pi_{t-1} (V\calX),\]
-and 
-\end{shaded}
+\noindent Note that the inclusion in this theorem can be strict --- the subspace $N^s_\subset \pi_t W$ of $C^s\pi_t W^s$ is defined by the vanishing of the maps $s^0,\ldots,s^{s-1}:\pi_t W^s\to \pi_t W^{s-1}$, while $ N^{s-1}_\subset \pi_t (VW)^{s-1}$ is defined by the vanishing only of $s^1,\ldots,s^{s-1}:\pi_t W^s\to \pi_t W^{s-1}$, as $s^0$ is forgotten in passing to $VW$.
 
-Our goal will be to create a factorization of the multiplication map $\mu:\calX \smashcoprod  \calX \to \calX $ through $\delta:D^1\calX \to \calX $. This will be possible (using a zig-zag), as $\calX^s_t=(c(KQc)^{s+1}X)_t$ is a  Radulescu-Banu resolution. In this case, not only does
+If we declare the spectral sequence an object $W\in cs\algcat$ to be the spectral sequence of the tower
+\[\xymatrix@R=4mm{
+\cdots 
+\ar[r]
+&%r1c1
+(D^2W)^{-1}
+\ar[r]
+&%r1c3
+%r1c4
+(D^1W)^{-1}
+\ar[r]&%r1c5
+(D^0W)^{-1}
+}\]
+then the spectral sequence of $D^1\calX$ maps to the spectral sequence of $\calX$, with a filtration shift, via the map of towers:
+\[\xymatrix@R=4mm{
+\cdots 
+\ar[r]
+&%r1c1
+(D^2D^1\calX)^{-1}
+\ar[r]\ar[d]^{=}
+&%r1c1
+(D^1D^1\calX)^{-1}
+\ar[r]\ar[d]^{=}
+&%r1c3
+%r1c4
+(D^0D^1\calX)^{-1}
+\ar[d]^{=}
+\\
+\cdots 
+\ar[r]
+&%r1c1
+(D^3\calX)^{-1}
+\ar[r]
+&%r1c1
+(D^2\calX)^{-1}
+\ar[r]
+&%r1c3
+%r1c4
+(D^1\calX)^{-1}
+\ar[r]&%r1c5
+(D^0\calX)^{-1}
+}\]
+That is, there are spectral sequence maps covering maps on $E^1$ of the form
+\[\E{1}{}{D^1\calX}{s}{t}\overset{\cong}{\to} \E{1}{}{\calX}{s+1}{t+1}.\]
+Under Bousfiled and Kan's identification of $E^1$, this isomorphism is the inverse of the composite of proposition \ref{BK D1 is awesome}.
+%
+%
+%Consequently, the connecting map induces an equivalence
+%\[C^s_\subset \pi_t (D^1\calX)\to  C^s_\subset \pi_{t-1} (V\calX),\]
+%and 
+%
+%
+%Bousfield and Kan explain that the composite
+%\[N^\fraks\pi_\frakt(D^1X)\overset{\partial_\textup{conn}}{\from}N^\fraks\pi_{\frakt+1}(VX)\supset N^{\fraks+1}\pi_{\frakt+1}(X)\]
+%is an isomorphism, where we note that the condition to lie in $N^{s+1}(O)\subset O^{s+1}$ is stricter than the condition to lie in $N^s(VO)\subset O^{s+1}$, for $O$ a cosimplicial module. Note that this composite is a cochain map, the reason being that the extra ``$d^0$'' in the coboundary out of $N^{\fraks+1}\pi_{\frakt+1}(X)$ that does not appear in the coboundary out of $N^{\fraks}\pi_{\frakt+1}(VX)$ becomes null after application of $\partial_\textup{conn}$, which is to say that the composite
+%\[\pi_{\frakt+1}(X^{\fraks+1})\overset{d^0}{\to}\pi_{\frakt+1}(X^{\fraks+2})\overset{\partial_\textup{conn}}{\to}\pi_\frakt((D^1X)^{\fraks+1})\]
+%is zero, which is clear, as we are just looking at adjacent maps in the homotopy long exact sequence.
+
+
+
+
+%\begin{shaded}\tiny
+%For $Z\in c\vect{}{}$, Bousfield and Kan write $VZ$ for a ``path-like construction'' \cite[\S3.1]{BK_pairings_products.pdf} on $Z$ obtained by shifting $Z$ down and forgetting the 0th coface and codegeneracy. That is, $(VZ)^s:=(VZ)^{s+1}$, and:
+%\begin{align*}
+%\bigl((VZ)^s\overset{d^i}{\to} (VZ)^{s+1}\bigr)&:=\bigl(Z^{s+1}\overset{d^{i+1}}{\to} Z^{s+2}\bigr)\\
+%\bigl((VZ)^s\overset{s^i}{\to} (VZ)^{s-1}\bigr)&:=\bigl(Z^{s+1}\overset{d^{i+1}}{\to} Z^{s}\bigr)
+%\end{align*}
+%In fact, the unused coface $d^0$ induces a map $v:Z\to VZ$.
+%
+%For $Y\in s\vect{}{}$, the standard simplicial path fibration (c.f.\ \cite[p.82]{BousKanSSeq.pdf}) produces $\Lambda Y\in s\vect{}{}$ by shifting down and restricting to a kernel:
+%\[\Lambda Y_s=\ker\bigl(d_{s+1}\cdots d_1:Y_{s+1}\to Y_0\bigr).\]
+%We forget the $0^\textup{th}$ face and degeneracy as before. This time the unused face map $d_0$ induces a fibration $\lambda:\Lambda Y\to Y$, and $\Lambda Y$ is  contractible.
+%
+%
+%
+%Each of these constructions can be prolonged to an endofunctor of $cs\vect{}{}$. 
+%Now it is possible to recall a key construction of Bousfield and Kan \cite{BK_pairings_products.pdf,BK_pairings.pdf}. Define $D^1\calX \in cs\algs$ to be the pullback:
+%\[\xymatrix@R=4mm{
+%D^1\calX \ar[r]
+%\ar[d]^-{\delta}
+%&%r1c1
+%\Lambda V\calX \ar[d]^-{\lambda}
+%\\%r1c2
+%\calX \ar[r]^-{v}
+%&%r2c1
+%V\calX %r2c2
+%}\]
+%The overwhelming virtue of this construction is the following observation of Bousfield and Kan \cite[Proposition 5.2]{BK_pairings_products.pdf}:
+%\begin{prop}\label{BK D1 is awesome}
+%The connecting map
+%\[\pi_t(\calX^{s})=\pi_t(V\calX^{s-1})\overset{\partial }{\to}\pi_{t-1}(D^1\calX)^s\]
+%in the homotopy long exact sequence of the fiber sequence $(D^1\calX)^{s-1}\to \calX^{s-1}\to V\calX^{s-1}$ induces an isomorphism of cochain complexes
+%\[N^s_\subset \pi_t \calX\subseteq N^{s-1}_\subset \pi_t V\calX \to  N^{s-1}_\subset \pi_{t-1} (D^1\calX).\]
+%\end{prop}
+%Consequently, the connecting map induces an equivalence
+%\[C^s_\subset \pi_t (D^1\calX)\to  C^s_\subset \pi_{t-1} (V\calX),\]
+%and 
+%\end{shaded}
+\subsection{A shift in filtration}
+Our goal will now be to create a factorization of the multiplication map $\mu:\calX \smashcoprod  \calX \to \calX $ through $\delta:D^1\calX \to \calX $. This will be possible (using a zig-zag), as $\calX^s_t=(c(KQc)^{s+1}X)_t$ is a  Radulescu-Banu resolution. In this case, not only does
 \[(V\calX)^s_t=(c(KQc)^{s+2}X)_t\in cs\algs\]
 have cosimplicial and simplicial structure maps,
 but there is a cosimplicial simplicial algebra structure on the object $\overline{V}\calX$ obtained by omitting the leftmost replacement $c$:
@@ -4228,19 +4235,19 @@ This diagram has produced a factorisation $\overline{\mu}:X\smashcoprod_{\Sigma_
 \pi_{\frakt}(\overline{D}^1X)&%r1c3
 \pi_{\frakt+1}(\overline{V}X)\ar[l]_-{\partial_\textup{conn}}
 \\%r1c4
-\pi_{\frakt}(D^1X)\ar@{-}[u]^-{\textup{?????????zig-zag}}_-{\cong}
+\pi_{\frakt}(D^1X)\ar@{-}[u]^-{\textup{zig-zag}}_-{\cong}
 &%r2c3
-\pi_{\frakt+1}(VX)\ar[u]_-{\cong}\makebox[0cm][l]{\ \ \ put me on prev page}
+\pi_{\frakt+1}(VX)\ar[u]_-{\cong}
 \ar[l]_-{\partial_\textup{conn}}
 }}\]
-\begin{shaded}\tiny
-Bousfield and Kan explain that the composite
-\[N^\fraks\pi_\frakt(D^1X)\overset{\partial_\textup{conn}}{\from}N^\fraks\pi_{\frakt+1}(VX)\supset N^{\fraks+1}\pi_{\frakt+1}(X)\]
-is an isomorphism, where we note that the condition to lie in $N^{s+1}(O)\subset O^{s+1}$ is stricter than the condition to lie in $N^s(VO)\subset O^{s+1}$, for $O$ a cosimplicial module. Note that this composite is a cochain map, the reason being that the extra ``$d^0$'' in the coboundary out of $N^{\fraks+1}\pi_{\frakt+1}(X)$ that does not appear in the coboundary out of $N^{\fraks}\pi_{\frakt+1}(VX)$ becomes null after application of $\partial_\textup{conn}$, which is to say that the composite
-\[\pi_{\frakt+1}(X^{\fraks+1})\overset{d^0}{\to}\pi_{\frakt+1}(X^{\fraks+2})\overset{\partial_\textup{conn}}{\to}\pi_\frakt((D^1X)^{\fraks+1})\]
-is zero, which is clear, as we are just looking at adjacent maps in the homotopy long exact sequence.
-\end{shaded}
-
+%\begin{shaded}\tiny
+%Bousfield and Kan explain that the composite
+%\[N^\fraks\pi_\frakt(D^1X)\overset{\partial_\textup{conn}}{\from}N^\fraks\pi_{\frakt+1}(VX)\supset N^{\fraks+1}\pi_{\frakt+1}(X)\]
+%is an isomorphism, where we note that the condition to lie in $N^{s+1}(O)\subset O^{s+1}$ is stricter than the condition to lie in $N^s(VO)\subset O^{s+1}$, for $O$ a cosimplicial module. Note that this composite is a cochain map, the reason being that the extra ``$d^0$'' in the coboundary out of $N^{\fraks+1}\pi_{\frakt+1}(X)$ that does not appear in the coboundary out of $N^{\fraks}\pi_{\frakt+1}(VX)$ becomes null after application of $\partial_\textup{conn}$, which is to say that the composite
+%\[\pi_{\frakt+1}(X^{\fraks+1})\overset{d^0}{\to}\pi_{\frakt+1}(X^{\fraks+2})\overset{\partial_\textup{conn}}{\to}\pi_\frakt((D^1X)^{\fraks+1})\]
+%is zero, which is clear, as we are just looking at adjacent maps in the homotopy long exact sequence.
+%\end{shaded}
+%
 \begin{shaded}\tiny
 The next result states that the exterior operations, when lifted up one filtration level, induce the operations derived on unstable Lie coalgebra homology, albeit with a shift in the indexing of the Steenrod operations. Writing $\lambda$ for the lifting map
 \[\lambda:\left(E^r_{s,t}(X\smashcoprod_{\Sigma_2}X)\to E^r_{s,t}(D^1X)\cong E^r_{s+1,t+1}(X)\right)\textup{$\qquad (r\geq2)$}\]
