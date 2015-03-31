@@ -11,7 +11,7 @@
 \xclude{Contents Page}
 \xclude{Conventions and notation}
 \xclude{CPiAlgs and CHalgs}
-\nclude{BK spec seq}\xclude{connectivity}
+\nclude{BK spec seq}\nclude{connectivity}
 \xclude{Constructing (co)homotopy operations}
 \xclude{homotopy operations for PRLs}
 \xclude{Cohomology Operations for W and U}
@@ -882,7 +882,7 @@ Correspondingly, $H_*( TV)$ is equipped with a decreasing filtration, which is e
 \[\E{0}{}{H_*( TV)}{s}{t}:=F^{s}H_{t-s}( TV)/F^{s+1}   H_{t-s}( TV).\]
 Then, there is a spectral sequence with
 \[\E{1}{}{V}{s}{t}=C\dhor^{s}\pi\uver_{t}V,\qquad\E{2}{}{V}{s}{t}=\pi\dhor^{s}\pi\uver_{t}V,\]
-and differential $d^r:\E{r}{}{V}{s}{t}\to \E{r}{}{V}{s+r}{t+r-1}$ so that $\E{r+1}{}{V}{}{}$ is the homology of the chain complex $(\E{r}{}{V}{}{};d^r)$. From now on, we suppose that the spectral sequence admits a \emph{vanishing line of slope $\alpha$} on $\E{}{}{}{}{}$, i.e.\ there exists a constant $c$ such that:
+and differential $d^r:\E{r}{}{V}{s}{t}\to \E{r}{}{V}{s+r}{t+r-1}$ so that $\E{r+1}{}{V}{}{}$ is the homology of the chain complex $(\E{r}{}{V}{}{};d^r)$. From now on, we suppose that the spectral sequence admits a \emph{vanishing line of slope $\alpha$} on $\E{2}{}{}{}{}$, i.e.\ there exists a constant $c$ such that:
 \[\E{2}{}{V}{s}{t}=0\textup{ for }s>c+\alpha(t-s).\]
 Then the filtration on $H_*( TV)$ \emph{is} in fact hausdorff and finite, and we can say that for each fixed $s$ and $t$:
 \[\E{r}{}{V}{s}{t}\textup{ stabilizes to }\E{\infty}{}{V}{s}{t}\cong \E{0}{}{H_*( TV)}{s}{t}\textup{ as $r\rightarrow\infty$}.\]
@@ -1060,7 +1060,6 @@ H\frac{F^1}{F^2}\ar[u]
 H\frac{F^2}{F^3}\ar[u]
 }}\ \cdots \]
 The vertical connecting maps $H\calT_m\to \Sigma HF^{m+1}$ in fact form a morphism of exact couples (c.f.\ \cite{limits_and_sseq.pdf} or \cite[\S2.2]{mccleary.pdf}), as follows from Verdier's octahedron axiom (in the triangulated homotopy category of bounded below chain complexes) or a hearty diagram chase. Moreover, the two resulting spectral sequences have the same $E^1$ page, so that they are identical (c.f.\ \cite[\S6]{limits_and_sseq.pdf}). %We have made an effort to note these opposite yet equal spectral sequences, as they form a model for more homotopical
-
 This common spectral sequence is simply the spectral sequence of the filtered complex $TV$: 
 \begin{alignat*}{2}
 \E{0}{}{V}{s}{t}
@@ -1075,14 +1074,26 @@ C\dhor^s\pi\uver_tV,
 &:=
 \pi\dhor^s\pi\uver_tV.
 \end{alignat*}
-Note that $\E{1}{}{V}{s}{t}=H_{t-s}(F^s/F^{s+1})$
-, and
+Note that $\E{1}{}{V}{s}{t}=H_{t-s}(F^s/F^{s+1})$. The intended target $HTV$ has decreasing filtration
+\[F^m(HTV):=\im(HF^m\to HTV)=\ker(HTV\to H\calT_{m-1})\]
+From now on, we will always/often?? (move down) suppose that the spectral sequence admits a \emph{vanishing line of slope $\alpha$} on $\E{2}{}{}{}{}$, i.e.\ there exists $\alpha$ and $c$ such that:
+\[\E{2}{}{V}{s}{t}=0\textup{ for }s>c+\alpha(t-s).\]
 
-Correspondingly, $H_*( TV)$ is equipped with a decreasing filtration, which is exhaustive, but need not be either hausdorff or finite, and one defines
+ Bousfield explains how this picture relates to the totalization tower of $V$:
+\begin{lem}[{\cite[Lemma 2.2]{BousfieldHSSCS.pdf}}]
+There are natural chain maps $N_*\Tot_mV\to \calT_mV$ for $m\leq\infty$ which induce an isomorphism of towers $\pi_*\Tot_mV\to H_*\calT_mV$.
+\end{lem}
+In particular, we may examine the discrepancy between $HTV$ and $\Tot V$, via the fiber sequence
+\[\lim_{m\rightarrow\infty} F^{m+1}\to TV \to \Tot V.\]
+Under the vanishing line assumption, in each fixed dimension $n$, the groups $\pi_n\calT_m$ stabilize for $m\gg0$, so that (some theorem already cited) there is a long exact sequence:
+\[\cdots \pi_{*+1}\Tot V\to\lim_{m\rightarrow\infty} \pi_*F^{m+1}\to \pi_*TV \to \pi_*\Tot V\to \lim_{m\rightarrow\infty} \pi_{*-1}F^{m+1}\cdots \]
+\textbf{so if we can get these intermittent terms to go away, lim1 style, we're good. Mention the augmentations. }
+
+If one defines
 \[\E{0}{}{H_*( TV)}{s}{t}:=F^{s}H_{t-s}( TV)/F^{s+1}   H_{t-s}( TV).\]
 Then, there is a spectral sequence with
 \[\E{1}{}{V}{s}{t}=C\dhor^{s}\pi\uver_{t}V,\qquad\E{2}{}{V}{s}{t}=\pi\dhor^{s}\pi\uver_{t}V,\]
-and differential $d^r:\E{r}{}{V}{s}{t}\to \E{r}{}{V}{s+r}{t+r-1}$ so that $\E{r+1}{}{V}{}{}$ is the homology of the chain complex $(\E{r}{}{V}{}{};d^r)$. From now on, we suppose that the spectral sequence admits a \emph{vanishing line of slope $\alpha$} on $\E{}{}{}{}{}$, i.e.\ there exists a constant $c$ such that:
+and differential $d^r:\E{r}{}{V}{s}{t}\to \E{r}{}{V}{s+r}{t+r-1}$ so that $\E{r+1}{}{V}{}{}$ is the homology of the chain complex $(\E{r}{}{V}{}{};d^r)$. From now on, we suppose that the spectral sequence admits a \emph{vanishing line of slope $\alpha$} on $\E{2}{}{}{}{}$, i.e.\ there exists a constant $c$ such that:
 \[\E{2}{}{V}{s}{t}=0\textup{ for }s>c+\alpha(t-s).\]
 Then the filtration on $H_*( TV)$ \emph{is} in fact hausdorff and finite, and we can say that for each fixed $s$ and $t$:
 \[\E{r}{}{V}{s}{t}\textup{ stabilizes to }\E{\infty}{}{V}{s}{t}\cong \E{0}{}{H_*( TV)}{s}{t}\textup{ as $r\rightarrow\infty$}.\]
@@ -1786,7 +1797,7 @@ We have thus constructed a tower
 (\dupdown{1}{c}F)X
 \ar[r]&%r1c5
 (\dupdown{0}{c}F)X=FcX,
-}\]
+}\]%reverse me
 which is natural in the object $X$ and the functor $F$.
 The functors $\dupdown{r}{c}F$ are homotopical as long as $F$ preserves weak equivalences between cofibrant objects. Employing the shorthand
 \[\dupdown{s}{c}X:=(\dupdown{s}{c}\Id )X,\]
