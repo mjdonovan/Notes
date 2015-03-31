@@ -11,12 +11,12 @@
 \xclude{Contents Page}
 \xclude{Conventions and notation}
 \xclude{CPiAlgs and CHalgs}
-\xclude{BK spec seq}\xclude{connectivity}
+\nclude{BK spec seq}\xclude{connectivity}
 \xclude{Constructing (co)homotopy operations}
 \xclude{homotopy operations for PRLs}
-\nclude{Cohomology Operations for W and U}
+\xclude{Cohomology Operations for W and U}
 \xclude{second quadrant homotopy}%
-\nclude{Operations on the Bousfield-Kan spectral sequence}%
+\xclude{Operations on the Bousfield-Kan spectral sequence}%
 \xclude{Koszul complexes}
 \xclude{Composite functor spectral sequences}
 \xclude{Operations in composite functor spectral sequences}
@@ -877,7 +877,7 @@ In our application of these conventions we will actually have $V\in \vect{+}{h}$
 Suppose that $V^{s}_{t}$ is a cosimplicial simplicial (ungraded) vector space. Then there is a cochain-chain complex 
 \[CV^{s}_{t}:=C\dhor^{s}C\uver_{t}V=V^{s}_{t},\]
 with $s$ the horizontal and $t$ the vertical coordinate. The \emph{total complex} $TV$, is a chain complex with a canonical decreasing filtration, defined by 
-\[(TV)_n=\prod_{t-s=n}CV^{s}_{t},\qquad(F^mTV)_n=\prod_{\substack{t-s=n\\t\geq m}}CV^{s}_{t}.\]
+\[(TV)_n=\prod_{t-s=n}CV^{s}_{t},\qquad(F^mTV)_n=\prod_{\substack{t-s=n\\s\geq m}}CV^{s}_{t}.\]
 Correspondingly, $H_*( TV)$ is equipped with a decreasing filtration, which is exhaustive, but need not be either hausdorff or finite, and one defines
 \[\E{0}{}{H_*( TV)}{s}{t}:=F^{s}H_{t-s}( TV)/F^{s+1}   H_{t-s}( TV).\]
 Then, there is a spectral sequence with
@@ -890,7 +890,7 @@ Then the filtration on $H_*( TV)$ \emph{is} in fact hausdorff and finite, and we
 
 
 Now if we write
-\[(\calT_mV)_n:=(TV/F^{m+1} TV)_n\cong\prod_{\substack{t-s=n\\t\leq m}}CV^{s}_{t}, \]
+\[(\calT_mV)_n:=(TV/F^{m+1} TV)_n\cong\prod_{\substack{t-s=n\\s\leq m}}CV^{s}_{t}, \]
 then the $\calT_mV$ form a tower of surjections of chain complexes with inverse limit $\calT_\infty V=TV$.  A result of Bousfield relates this to the totalization tower of $V$:
 \begin{lem}[{\cite[Lemma 2.2]{BousfieldHSSCS.pdf}}]
 There are natural chain maps $\phi_m:N_*\Tot_mV\to \calT_mV$ for $m\leq\infty$ which induce an isomorphism of towers $\pi_*\Tot_mV\to H_*\calT_mV$.
@@ -960,6 +960,64 @@ second quadrant cohomology --- Dwyer's work Eilenberg-Moore
 
 
 \end{Conventions and notation} %return me to my home
+
+
+\subsection{Second quadrant homotopy spectral sequences}\label{Second quadrant homotopy spectral sequences}
+Suppose that $V^{s}_{t}$ is a cosimplicial simplicial (ungraded) vector space. Then there is a cochain-chain complex 
+\[CV^{s}_{t}:=C\dhor^{s}C\uver_{t}V=V^{s}_{t},\]
+with $s$ the horizontal and $t$ the vertical coordinate. The \emph{total complex} $TV$, is a chain complex with a canonical decreasing filtration, defined by 
+\[(TV)_n=\prod_{t-s=n}CV^{s}_{t},\qquad(F^mTV)_n=\prod_{\substack{t-s=n\\s\geq m}}CV^{s}_{t}.\]
+Correspondingly, $H_*( TV)$ is equipped with a decreasing filtration, which is exhaustive, but need not be either hausdorff or finite, and one defines
+\[\E{0}{}{H_*( TV)}{s}{t}:=F^{s}H_{t-s}( TV)/F^{s+1}   H_{t-s}( TV).\]
+Then, there is a spectral sequence with
+\[\E{1}{}{V}{s}{t}=C\dhor^{s}\pi\uver_{t}V,\qquad\E{2}{}{V}{s}{t}=\pi\dhor^{s}\pi\uver_{t}V,\]
+and differential $d^r:\E{r}{}{V}{s}{t}\to \E{r}{}{V}{s+r}{t+r-1}$ so that $\E{r+1}{}{V}{}{}$ is the homology of the chain complex $(\E{r}{}{V}{}{};d^r)$. From now on, we suppose that the spectral sequence admits a \emph{vanishing line of slope $\alpha$} on $\E{}{}{}{}{}$, i.e.\ there exists a constant $c$ such that:
+\[\E{2}{}{V}{s}{t}=0\textup{ for }s>c+\alpha(t-s).\]
+Then the filtration on $H_*( TV)$ \emph{is} in fact hausdorff and finite, and we can say that for each fixed $s$ and $t$:
+\[\E{r}{}{V}{s}{t}\textup{ stabilizes to }\E{\infty}{}{V}{s}{t}\cong \E{0}{}{H_*( TV)}{s}{t}\textup{ as $r\rightarrow\infty$}.\]
+
+
+
+Now if we write
+\[(\calT_mV)_n:=(TV/F^{m+1} TV)_n\cong\prod_{\substack{t-s=n\\s\leq m}}CV^{s}_{t}, \]
+then the $\calT_mV$ form a tower of surjections of chain complexes with inverse limit $\calT_\infty V=TV$.  A result of Bousfield relates this to the totalization tower of $V$:
+\begin{lem}[{\cite[Lemma 2.2]{BousfieldHSSCS.pdf}}]
+There are natural chain maps $\phi_m:N_*\Tot_mV\to \calT_mV$ for $m\leq\infty$ which induce an isomorphism of towers $\pi_*\Tot_mV\to H_*\calT_mV$.
+\end{lem}
+\noindent Given a vanishing line, there is no $\lim^1$ in either tower, so that $\pi_*\Tot V\cong H_*\calT V$, and the spectral sequence truly calculates $\pi_{t-s} \Tot V$.
+
+Typically, $V$ will admit a \emph{coaugmentation} from a simplicial object $V_{-1}\in s\vect{}{}$.  We necessarily mean a horizontal map from a vertical object, i.e.\ a coaugmentation is a simplicial (in $t$) map:
+\[d\dhor^0:V_{-1,t}\to V_{0,t}\textup{ equalizing }d\dhor^0,d\dhor^1:V_{0,t}\to V_{1,t}.\]
+Suppose that this map \emph{induces a weak equivalence} $V_{-1}\overset{\sim}{\to}\Tot V$ (and still that $\E{2}{}{V}{s}{t}$ admits a vanishing line).
+In this case, we view the spectral sequence as a tool for the calculation of the homotopy $\pi_*(V_{-1})$, via  isomorphisms
+\[\E{\infty}{}{V}{s}{t}\cong \E{0}{}{\pi_*(V_{-1})}{s}{t}.\]
+
+We can again add internal gradings, the richest case being that in which  $V\in cs\vect{c}{h}$ also has a quadratic grading:
+\[\quadgrad{k}\E{r}{}{V}{s,s_c,\ldots,s_1}{t,t_h,\ldots,t_1}=\E{r}{}{(\quadgrad{k}V^{s_c,\ldots,s_1}_{t_h,\ldots,t_1})}{s}{t}.\]
+%In fact, \textbf{something about comparing the two sseqs........ flip across fibrations.}
+%
+%
+%\begin{shaded}\tiny
+%\hfil
+%\end{shaded}
+%
+%
+%
+%
+%
+%\begin{cor}
+%Suppose that $X^\bullet$ is a cosimplicial object in $s\algs$. Then there is a map of spectral sequences, which is an isomorphism from $E^1$ (\textbf{que?}), from the homotopy spectral sequence of the $\Tot$ tower $\{I\Tot_mX^\bullet\}$ to the spectral sequence of the bicomplex underlying $IX^\bullet$. Moreover, there is an isomorphism $\pi_*I\Tot X^\bullet\to H_*TIX^\bullet$ (to the homology of the total complex of the bicomplex), which is compatible with the map of spectral sequences.
+%\end{cor}
+%\begin{cor}
+%Suppose that $X$ is a connected element of $s\algs$. Then the Bousfield-Kan spectral sequence for $X$ is the spectral sequence of the bicomplex underlying the cosimplicial simplicial vector space $I((c(KQ)^\bullet X)^{\textup{rf}})$. This spectral sequence admits a vanishing line from $E^2$, and so converges strongly to its target, $\pi_{t-s}(I\hat X)$.
+%\end{cor}
+
+
+
+
+
+
+
 
 
 \begin{CPiAlgs and CHalgs}
@@ -4230,7 +4288,7 @@ degenerates to $\sigma_i((P^k)^*h_{t,i})=\sigma_i^\textup{ext}\imath_t$.
 \subsection{A chain level construction of $\theta^*_i$}
 \begin{prop}\label{propOnKoszulDelta}
 For $2\leq i\leq t$, there is a function
-\[\overline{G}:\hom_{s\vect{}{}}(S^t,W)\to \hom_{s\algs}(\Theta_t^i,cKW),\]
+\[\overline{G}:\hom_{s\vect{}{}}(S^t,W)\to \hom_{s\algs}(\Theta_{t,i},cKW),\]
 natural in $W\in s\vect{}{}$, and satisfying $\overline{G}(\alpha)(\imath_t)=\widetilde{\alpha}$, such that the function
 \[G:\hom_{s\algs}(S^t,W)\to \pi_{t+i+1}(QcKW)=:H_{t+i+1}(KW)\]
 defined by $G(\alpha):=H_*(\overline{G}(\alpha))(h)$ equals the following composite whenever $2\leq i<t$:
@@ -4269,17 +4327,17 @@ S^t\ar@{ >->}[d]
 \\%r1c2
 CS^{t+i}\ar[r]\ar@/_1em/[rr]_-{0}
 &%r2c1
-\Theta_t^i\ar@{-->}[r]
+\Theta_{t,i}\ar@{-->}[r]
 %r2c2
 &KW}\]
-Corresponding to the right square is a map $\Theta_t^i\to c_2(KW)$, and the composite with the cofibration $c_2(KW)\to c(KW)$ is $\overline{G}(\alpha)$. This function $\overline{G}$ is evidently natural in $W$, and so then is $G$.
+Corresponding to the right square is a map $\Theta_{t,i}\to c_2(KW)$, and the composite with the cofibration $c_2(KW)\to c(KW)$ is $\overline{G}(\alpha)$. This function $\overline{G}$ is evidently natural in $W$, and so then is $G$.
 
 The statement about $G$ is natural in $W\in s\vect{}{}$, so may be checked on the universal example $\imath_t\hom_{s\vect{}{}}(\mathbb{K}_t,\mathbb{K}_t)$. As $\overline{G}(\imath)$ is a map of $\algs$-$H_*$-coalgebras: $(P^i)^*G(\imath_t)=\textup{hur}(\imath_t)$; $(P^j)^*G(\imath_t)=0$ for all $j\neq i$ with $2\leq j\leq (t+i)/2$; and $\Delta G(\imath_t)$ vanishes unless $i=t$, in which case it equals $\imath\otimes \imath$. By construction, $G(\imath_t)$ lies in quadratic grading $2$ of the cofree construction:
 \[G(\imath_t)\in\quadgrad{2}H_{t+i+1}(K\mathbb{K}_t)=\quadgrad{2}C_{\algs\HCoalg}\{\imath_t\}.\]
 These conditions suffice to identify $G(\imath_t)$.
 %and it is clear that the only element of quadratic grading $2$
 %
-%Under the homology coalgebra map $\overline{G}(\alpha)_*:H\Theta_t^i\to HKW$, we have $h\mapsto G(\alpha)$ and $\imath_t\mapsto\textup{hur}(\alpha)$. \textbf{Hopefully we can figure out enough about cofree homology coalgebras and their right $P$-action to see that $G(\alpha)$ can only equal the Koszul operation on $\textup{hur}(\alpha)$.} In the non-top case, we have zero coproduct and only $(\DASH)P^i$ firing, while in the top case we have coproduct $\textup{hur}(\alpha)\otimes \textup{hur}(\alpha)$ instead.
+%Under the homology coalgebra map $\overline{G}(\alpha)_*:H\Theta_{t,i}\to HKW$, we have $h\mapsto G(\alpha)$ and $\imath_t\mapsto\textup{hur}(\alpha)$. \textbf{Hopefully we can figure out enough about cofree homology coalgebras and their right $P$-action to see that $G(\alpha)$ can only equal the Koszul operation on $\textup{hur}(\alpha)$.} In the non-top case, we have zero coproduct and only $(\DASH)P^i$ firing, while in the top case we have coproduct $\textup{hur}(\alpha)\otimes \textup{hur}(\alpha)$ instead.
 \end{proof}
 
 
@@ -4318,7 +4376,7 @@ There is a commuting diagram:
 }}\]
 \end{prop}
 \begin{proof}
-It will help to modify and augment this diagram a little. Indeed, for each $(\alpha,\beta)\in \hom_{s\algs}(S^t,X)\times\hom_{s\algs}(S^{t'},X)$, there is a diagram starting with the singleton set $\{(\alpha,\beta)\}$:
+It will help to modify and augment this diagram a little. Indeed, for each cardinality one subset $\{(\alpha,\beta)\}\subset \hom_{s\algs}(S^t,X)\times\hom_{s\algs}(S^{t'},X)$, there is a diagram:
 \[\mathclap{\xymatrix@R=4mm{
 \{(\alpha,\beta)\}
 %\pi_t(X)\otimes \pi_{t'}(X)
@@ -4469,59 +4527,79 @@ which suffices, as $\alpha\sim \widetilde{\epsilon\alpha}$ and $\beta\sim \widet
 %%%%%%%\[0\to\overline{D}^1X^\fraks\to X^\fraks\overset{\overline{v}}{\to} \overline{V}X^\fraks\to 0,\]
 %%%%%%This confirms that $\partial_\textup{conn}(\textup{dot}(\alpha,\beta))$ is the image under $\widetilde{\epsilon\alpha} \sqcup \widetilde{\epsilon\beta}$ of $\mu\nabla(\imath_t\otimes\imath_{t'})$.
 \end{proof}
+
+\pagebreak
 \subsection{$E^1$-level identification of the $\delta$-operations}
-
-
-
-Now to get to the point, we have a commuting diagram
+\begin{prop}
+Whenever $2\leq i<t$ there is a commuting diagram
 \[\xymatrix@R=4mm{
-\hom_{s\algs}(S^t,X)\ar[r]^-{\delta_i}
-\ar[d]^-{\epsilon_*}
+\pi_tX\ar[r]^-{\delta_i^\textup{ext}}
+\ar[d]^-{\textup{hur}}
 &%r1c1
-\pi_{t+i}(X\smashcoprod_{\Sigma_2} X)\ar[r]^-{\mu}
+\pi_{t+i}(S_2X)\ar[r]^-{\overline{\mu}}
 &
 \pi_{t+i}(\overline{D}^1X)
 \\%r1c2
-\hom_{s\vect{}{}}(S^t,\overline{X})\ar[r]^-{G}&%r2c1
-\pi_{t+i+1}(Qc\overline{X})\ar@{=}[r]
+H_tX\ar[r]^-{\theta^\star_i}&%r2c1
+H_{t+i+1}X\ar@{=}[r]
 &
 \pi_{t+i+1}(\overline{V}X)
 \ar[u]^-{\partial_\textup{conn}}
 }\]
-and the induced map $\pi_t(X)\to \pi_{t+i+1}(VX)$ is the Koszul $\delta_i$ operation, by \ref{propOnKoszulDelta}, while the top path, using the `inverse' of $\partial_\textup{conn}$ is the algebraically defined $\delta_i$ operation.
-\begin{proof}[Proof that this diagram commutes]
-It follows from the diagram:
-\[\xymatrix@R=4mm{
-X_{t+i}&%r1c1
-X_{t+i+1}\ar[l]_-{d_0}
+\end{prop}
+%Now to get to the point, we have a commuting diagram
+%\[\xymatrix@R=4mm{
+%\hom_{s\algs}(S^t,X)\ar[r]^-{\delta_i}
+%\ar[d]^-{\epsilon_*}
+%&%r1c1
+%\pi_{t+i}(X\smashcoprod_{\Sigma_2} X)\ar[r]^-{\mu}
+%&
+%\pi_{t+i}(\overline{D}^1X)
+%\\%r1c2
+%\hom_{s\vect{}{}}(S^t,\overline{X})\ar[r]^-{G}&%r2c1
+%\pi_{t+i+1}(Qc\overline{X})\ar@{=}[r]
+%&
+%\pi_{t+i+1}(\overline{V}X)
+%\ar[u]^-{\partial_\textup{conn}}
+%}\]
+\noindent \textbf{the point:} The lower map $\pi_t(X)\to \pi_{t+i+1}(VX)$ is the Koszul $\delta_i$ operation, by \ref{propOnKoszulDelta}, while the top path, using the `inverse' of $\partial_\textup{conn}$ is the lifter spectral sequence $\delta^\textup{v}_i$ operation.
+\begin{proof}
+Choose a representative $\alpha\in\hom_{s\calc}(S^t, X)$. Then, setting $W=\overline{X}$ in proposition \ref{propOnKoszulDelta}, we obtain a map $\overline{G}(\epsilon\alpha):\Theta_{t,i}\to X$ such that $(\theta_i^\star\circ\textup{hur})(\alpha)$ is represented by
+%\[\overline{G}(\epsilon\alpha)(h_{t,i})\in N_{t+i+1}(QX),\]
+%or equivalently,
+\[(\overline{v}\circ \overline{G}(\epsilon\alpha))(h_{t,i})
+\in N_{t+i+1}(\overline{V}).\]
+We populate the following commuting diagram using the element $h_{t,i}\in N_{t+i+1}(\Theta_{t,i})$:
+%\[\xymatrix@R=10mm@C=30mm@!0{
+%\makebox[0cm][r]{$h_{t,i}\in\,$}(\Theta_{t,i})_{t+i+1}\ar[d]_-{d_0}\ar[r]^-{\overline{G}(\epsilon\alpha)}&%r1c1
+%X_{t+i+1}\ar[d]_-{d_0}
+%\ar[r]^-{\overline{v}}
+%&%r1c2
+%(\overline{V})_{t+i+1}
+%\makebox[0cm][l]{$\,\ni (\eta\circ \overline{G}(\epsilon\alpha))(h_{t,i})$}
+%\\%r1c3
+%\makebox[0cm][r]{$\mu\Nabla_{t-i}(\imath_t\otimes \imath_t)\in\,$}(\Theta_{t,i})_{t+i}\ar[r]^-{\overline{G}(\epsilon\alpha)}
+%&%r2c1
+%X_{t+i}\makebox[0cm][l]{$\,\ni\mu\Nabla_{t-i}(\widetilde{\epsilon\alpha}\otimes \widetilde{\epsilon\alpha})$}
+%&%r2c2
+%}\]
+%
+\[\xymatrix@R=10mm@C=30mm@!0{
+\makebox[0cm][r]{$h_{t,i}\in\,$}N_{t+i+1}\Theta_{t,i}\ar[d]_-{d_0}\ar[r]^-{\overline{G}(\epsilon\alpha)}&%r1c1
+N_{t+i+1}X\ar[d]_-{d_0}
 \ar[r]^-{\overline{v}}
 &%r1c2
-(\overline{V}X)_{t+i+1}\\%r1c3
-(\Theta_t^i)_{t+i}\ar[u]^-{\overline{G}(\epsilon\alpha)}
+N_{t+i+1}(\overline{V})
+\makebox[0cm][l]{$\,\ni (\eta\circ \overline{G}(\epsilon\alpha))(h_{t,i})$}
+\\%r1c3
+\makebox[0cm][r]{$\mu\Nabla_{t-i}(\imath_t\otimes \imath_t)\in\,$}ZN_{t+i}\Theta_{t,i}\ar[r]^-{\overline{G}(\epsilon\alpha)}
 &%r2c1
-(\Theta_t^i)_{t+i+1}\ar[u]^-{\overline{G}(\epsilon\alpha)}\ar[r]^-{\eta}
-\ar[l]_-{d_0}
+ZN_{t+i}X\makebox[0cm][l]{$\,\ni\mu\Nabla_{t-i}(\widetilde{\epsilon\alpha}\otimes \widetilde{\epsilon\alpha})$}
 &%r2c2
-(KQ\Theta_t^i)_{t+i+1}\ar[u]_-{KQ\overline{G}(\epsilon\alpha)}%r2c3
 }\]
-Propagating the element $h\in (\Theta_t^i)_{t+i+1}$, these groups contain the following elements:
-\[\xymatrix@R=4mm{
-\mu\Nabla_{t-i}(\widetilde{\epsilon\alpha}\otimes \widetilde{\epsilon\alpha})&%r1c1
-G(\epsilon\alpha)\ar@{|->}[l]_-{d_0}
-\ar@{|->}[r]^-{\overline{v}}
-&%r1c2
-KQG(\epsilon\alpha)\\%r1c3
-\mu\Nabla_{t-i}(\imath_t\otimes\imath_t)\ar@{|->}[u]^-{\overline{G}(\epsilon\alpha)}
-&%r2c1
-h\ar@{|->}[u]^-{\overline{G}(\epsilon\alpha)}\ar@{|->}[r]^-{\eta}
-\ar@{|->}[l]_-{d_0}
-&%r2c2
-h\ar@{|->}[u]_-{KQ\overline{G}(\epsilon\alpha)}%r2c3
-}\]
-As the element we have written as $KQG(\alpha)$ is a representative for $(G\circ\epsilon_*)(\alpha)\in\pi_{t+i+1}(\overline{V}X)$, the class $(\partial_\textup{conn}\circ G\circ\epsilon_*)(\alpha)$ is represented by $\mu\Nabla_{t-i}(\widetilde{\epsilon\alpha}\otimes \widetilde{\epsilon\alpha})$. Of course this is homotopic to $\mu\Nabla_{t-i}(\alpha\otimes \alpha)$, which represents $\mu\delta_i(\alpha)$.
+Here, the value of $d_0h_{t,i}$ is known by definition of $\Theta_{t,i}$, 
+and the fact that $\overline{G}(\epsilon\alpha)(\imath_t)=\widetilde{\epsilon\alpha}$ (see the prop) allows us to calculate $\overline{G}(\epsilon\alpha)d_0h_{t,i}$. Finally, in order to calculate $\partial_\textup{conn}(\theta_i^\star\circ\textup{hur})(\alpha)$, we find a preimage under $N_{t+i+1}X\overset{\overline{v}}{\to}N_{t+i+1}\overline{V}$ of the representative $(\eta\circ \overline{G}(\epsilon\alpha))(h_{t,i})$, and then apply the differential $d_0$. We may use the preimage $\overline{G}(\epsilon\alpha)$, which maps to $\mu\Nabla_{t-i}(\widetilde{\epsilon\alpha}\otimes \widetilde{\epsilon\alpha})\in N_{t+i}\overline{D}^1X$ under $d_0$. This is homotopic to $\mu\Nabla_{t-i}(\alpha\otimes \alpha)$, which represents $\overline{\mu}\delta_i(\alpha)$.
 \end{proof}
-
-
 
 
 
