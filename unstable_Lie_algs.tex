@@ -10,13 +10,13 @@
 \ifx\IncludeAll\undefined\else\renewcommand{\xclude}[1]{\nclude{#1}}\fi
 \nclude{Contents Page}
 \xclude{Conventions and notation}
-\xclude{CPiAlgs and CHalgs}
+\nclude{CPiAlgs and CHalgs}
 \xclude{BK spec seq}\nclude{connectivity}
-\xclude{Constructing (co)homotopy operations}
+\nclude{Constructing (co)homotopy operations}
 \xclude{homotopy operations for PRLs}
 \xclude{Cohomology Operations for W and U}
 \xclude{second quadrant homotopy}%
-\nclude{Operations on the Bousfield-Kan spectral sequence}%
+\xclude{Operations on the Bousfield-Kan spectral sequence}%
 \xclude{Koszul complexes}
 \xclude{Composite functor spectral sequences}
 \xclude{Operations in composite functor spectral sequences}
@@ -2666,10 +2666,23 @@ The following lemma assures us that the $\lambda$-Adem relations make sense in \
 \begin{lem}\label{lemOnAdemChangeInMLambdaPlain}
 If $\produces{I}{J}{\Lambda}$, then $\minDimDelta(I)\geq\minDimDelta(J)$, and $J$ does not contain zero unless $I$ does.
 \end{lem}
-These operations generate all of the operations in each of the categories $\Lambda(\LieOperad)\PiAlg$ and $\Gamma(\LieOperad)\PiAlg$, and the relations presented here are sufficient. Indeed, although we do not have a Hilton-Milnor theorem available, from \cite[Theorem 8.8 and proof]{CurtisSimplicialHtpy.pdf} (and the original work, \cite{6Author.pdf}) we gather
-\begin{prop}
-{\textup{PRLieAlgs,Prop3.3}}... Basically, the free functor in $\Gamma(\LieOperad)\PiAlg$ takes the free restricted Lie algebra and attaches non-top $\lambda$ operations on the right.
+These operations generate all of the operations in each of the categories $\Lambda(\LieOperad)\PiAlg$ and $\Gamma(\LieOperad)\PiAlg$, and the relations presented here are sufficient. Indeed, although we do not have a Hilton-Milnor theorem available, from \cite[Theorem 8.8 and proof]{CurtisSimplicialHtpy.pdf} and the original work \cite{6Author.pdf} we gather:
+\begin{prop}\label{Lie homotopy operations}
+For $V\in\vect{}{1}$,   choose a homogeneous basis of $V$, and construct from it a monomial  basis $B$ of $\Lambda(\LieOperad)V$ (such as any choice of Hall basis). Then:
+\[F^{\liealgs\PiAlg}V=\Ftwo \left\{\lambda_Ib\ \middle|\ \genfrac{}{}{0pt}{}{b\in B_t\textup{, $I$ $\lambda$-admissible with }\minDimDelta(I)\leq t,}{\textup{$I$ does not contain 0}}\right\}\]
+\[F^{\Gamma(\LieOperad)\PiAlg}V=\Ftwo \left\{\lambda_Ib\ \middle|\ \genfrac{}{}{0pt}{}{b\in B_t\textup{, $I$ $\lambda$-admissible with }\minDimDelta(I)\leq t,}{\textup{$I$ does not contain 0 when $t=0$}}\right\}\]
+\begin{align*}
+F^{\liealgs\PiAlg}V&=\Ftwo \left\{\lambda_Ib\ \middle|\ \genfrac{}{}{0pt}{}{b\in B_t\textup{, $I$ $\lambda$-admissible with }\minDimDelta(I)\leq t,}{\textup{$I$ does not contain 0}}\right\}
+\\
+F^{\Gamma(\LieOperad)\PiAlg}V&=\Ftwo \left\{\lambda_Ib\ \middle|\ \genfrac{}{}{0pt}{}{b\in B_t\textup{, $I$ $\lambda$-admissible with }\minDimDelta(I)\leq t,}{\textup{$I$ does not contain 0 when $t=0$}}\right\}
+\\
+&=\Ftwo \left\{\lambda_I\bigl(\restnRepeated{b}{r}\bigr)\ \middle|\ \genfrac{}{}{0pt}{}{b\in B_t\textup{, $I$ $\lambda$-admissible with }\minDimDelta(I)< t,}{\textup{$r\geq0$}}\right\}
+\end{align*}
+
 \end{prop}
+\begin{cor}\label{finite type pres by FW0}
+Suppose that $V\in\vect{+}{}$ is of finite type. Then so is $F^{\calw(0)}V$. \textbf{same for Lie}
+\end{cor}
 
 \section{\textbf{Constructing cohomology operations}}\label{sec:Constructing cohomology operations}
 
@@ -2968,7 +2981,7 @@ Now an object of $\calw(0)$ is in particular an object of $\calU(0)$. It is also
 \[F^{\calU(0)}F^{S(\LieOperad)}V\to F^{\calw(0)}V.\]
 This map is not an isomorphism, but it follows from \cite[Theorem I]{MR1089001} that it is surjective. Moreover, our final reading of Goerss' result is:
 \begin{prop}\label{partialgoerss}
-For $V\in\vect{+}{}$of finite type,  $F^{\calw(0)}V\in \vect{+}{}$ is the coequalizer:
+For $V\in\vect{+}{}$ of finite type,  $F^{\calw(0)}V\in \vect{+}{}$ is the coequalizer:
 \[\textup{coeq}\left(\xymatrix@R=4mm{
 \Palg\otimes F^{S(\LieOperad)}V
 \ar@<+.5ex>[r]^-{\smash{\textup{sb}_1}}
@@ -2982,7 +2995,7 @@ F^{\calu(0)}F^{S(\LieOperad)}V%r1c2V
 }\right),\]
 where the maps $\textup{sb}_1$ and $\textup{sb}_2$ are defined on  $\Palg\otimes(F^{S(\LieOperad)}V)^{m}$ by
 \[\textup{sb}_1(P^I\otimes x)=P^I\otimes [x,x]\textup{ \ and \ }\textup{sb}_2(P^I\otimes x)=P^IP^m\otimes x.\]
-Suppose that one chose a homogeneous basis of $V$, constructed from it a monomial  basis of $\Lambda(\LieOperad)V$ (such as any choice of Hall basis), and then lifted these monomials in the evident way to a collection $B$ of elements of $S(\LieOperad)V$. Then a basis of $F^{\calw(0)}V$ would be given by
+Choose a homogeneous basis of $V$, construct from it a monomial  basis of $\Lambda(\LieOperad)V$ (such as any choice of Hall basis), and then lift these monomials in the evident way to a collection $B$ of elements of $S(\LieOperad)V$. Then a basis of $F^{\calw(0)}V$ is 
 \[\left\{P^Ib\ \middle|\ b\in B,\ \minDimP(I)\leq|b|,\ \textup{$I$ is $P$-admissible}\right\}.\]
 \end{prop}
 \begin{cor}\label{finite type pres by FW0}
@@ -5418,7 +5431,7 @@ I used to say `it is just like Goerss'... \textbf{give proof.}
 \subsection{Definition of the spectral sequence}
 \todo{Give the construction of the spectral sequence}{Do it in general, then in the specific cases
 \item Conclude with `we will now look at some constructions required to give operations on the sseq.'}
-Fix $X\in\calw(n)$, and define $L=Q^{\calU(n)}B^{\calw(n)}X$. Let $\BSWres L$ be the bisimplicial object obtained from the simplicial bar construction using the comonad $\BSW$. Then the spectral sequence we are interested in is the spectral sequence of the bisimplicial object
+Fix $X\in\calw(n)$, and define $L=Q^{\calU(n)}B^{\calw(n)}X$. Let $\BSWres L$ be the bisimplicial object obtained from the simplicial bar construction using the comonad $\BSW$. We are interested in the cohomotopy spectral sequence of the bisimplicial object
 \[Q^{\calL(n)}\BSWres L.\]
 Now $L$ is an almost free object of $\calL(n)$, with $\pi_*L=H_*^{\calU(n)}X$. Thus $\pi_*(\BSWres L)$ is an almost free resolution of $H_*^{\calU(n)}X$ in $s\calw(n+1)$. Moreover, $\pi_*(Q^{\calL(n)}\BSWres L)=Q^{\calw(n+1)}\pi_*(\BSWres L)$, so that
 \[E^2_{**}=H_*^{\calw(n+1)}H_*^{\calU(n)}X.\]
@@ -5479,9 +5492,11 @@ and the operations we are considering are easily understood in relation to this 
 
 \begin{Operations in composite functor spectral sequences}
 \section{\textbf{Operations in composite functor spectral sequences}}\label{Operations in composite functor spectral sequences}
-Singer \cite{MR2245560} developed an extremely useful theory of products and Steenrod operations in the first quadrant cohomology spectral sequence arising from a bisimplicial cocommutative coalgebra. In the applications we have in mind, however, the bisimplicial object that we have to hand  will \emph{not} be a coalgebra [\textbf{analogy} with \S?]. This will not stop us from applying Singer's techniques after we make the appropriate modifications. The idea is to externalize Singer's operations, so that for every bisimplicial vector space $V$, there are  external operations of type:
+Singer \cite{MR2245560} developed an extremely useful theory of products and Steenrod operations in the first quadrant cohomology spectral sequence arising from a bisimplicial cocommutative coalgebra. In the applications we have in mind, however, the bisimplicial object that we have to hand  will \emph{not} be a coalgebra. Instead the situation will resemble more the situation of \S\ref{chain level structure}, where we have a linear map $\psi:Q^{\calc}X^s\to S^2(Q^{\calc}X^s)$ for any almost free object $X\in s\calc$, but it is certainly not a coalgebra map.
+
+The lack of an underlying coalgebra structure will not stop us from applying Singer's techniques after we make the appropriate modifications. The idea is to externalize Singer's operations, so that for every bisimplicial vector space $V$, there are  external operations of type:
 \[\E{}{r}{V}{**}{}\to \E{}{r}{S^2V}{**}{}\textup{ \ and \ }S_2\E{}{r}{V}{**}{}\to \E{}{r}{S^2V}{**}{}.\]
-These will be compatible with external operations of type: [\textbf{think about me}]
+These will be compatible with external operations of type:
 \[H^*(\dual(TV))\to H^*(\dual(TS^2V))\textup{ and }H^*(\dual(TV))\otimes H^*(\dual(TV))\to H^*(\dual(TS^2V)).\]
 
 
