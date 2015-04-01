@@ -1,6 +1,6 @@
 % !TEX root = z_output/unstable_Lie_algs.tex
 \documentclass[11pt]{amsart}
-\newcommand{\IncludeAll}{}% <-----
+\newcommand{\xIncludeAll}{}% <-----
 \newcommand{\ShrinkPages}{}%
 \newcommand{\PostponeContents}{}%
 \ifx\ShrinkPages\undefined\else\usepackage[paperheight=160mm,paperwidth=160mm]{geometry}\fi%220/160
@@ -12,7 +12,7 @@
 \xclude{Conventions and notation}
 \xclude{CPiAlgs and CHalgs}
 \xclude{BK spec seq}\nclude{connectivity}
-\xclude{Constructing (co)homotopy operations}
+\nclude{Constructing (co)homotopy operations}
 \xclude{homotopy operations for PRLs}
 \nclude{Cohomology Operations for W and U}
 \xclude{second quadrant homotopy}%
@@ -3352,47 +3352,75 @@ and for given $m\geq1$, the degree $m$, quadratic grading 2 part $\quadgrad{2}(F
 Moreover, each map $P^i:V^t\to \quadgrad{2}(F_{\calw(0)}V)^{t+i+1}$ appearing in this decomposition is an isomorphism onto its image, so that for $2\leq i <t$ we may construct $\theta_i$ as the composite
 \[\theta_i:\left((F_{\calw(0)}V)^{t+i+1}\overset{\textup{proj}}{\makebox[.06ex][l]{$\to$}\to} (\quadgrad{2}F_{\calw(0)}V)^{t+i+1}\overset{\textup{proj}}{\makebox[.06ex][l]{$\to$}\to} \im (P^i)\overset{(P^i)^{-1}}{\to}V^{t}\right).\]
 Here we have projected onto the quadratic filtration 2 part, and then further onto the relevant summand in its natural decomposition. Note that although $P^t:V^t\to \quadgrad{2}(F_{\calw(0)}V)^{2t+1}$ is a non-trivial linear map when $t\geq2$, its image is entangled with the image of the bracket, and we are not able to split it off. Thus we are not able to improve on the bounds $2\leq i< t$.
+\begin{prop}
+There is a map $\theta_i^\star:V^t\to (C_{\algs\HCoalg}V)^{t+i+1}$, natural in $V\in\vect{}{+}$, such that the following diagram commutes:
+\[\xymatrix@R=4mm@C=20mm{
+\dual((C_{\algs\HCoalg}V)^{t+i+1})&%r1c1
+\dual V\ar[l];[]^-{(\theta_i^\star)^*}
+%\ar[dl]^-{\ExtCohOp^k}
+\\%r1c2
+(F^{\calW(0)}\dual V)^{t+i+1}\ar[u]\ar[ur]_-{\theta_i}
+%&
+%\dual V\ar[u]
+}\]
+\end{prop}
+\begin{proof}
+When $V$ is of finite type, as $F^{\calW(0)}$ preserves vector spaces of finite type, we may simply define $\theta_i^\star$ to be the dual of $\theta_i$. This is natural on vector spaces of finite type, and any vector space is the filtered colimit of such.
+\end{proof}
+
+
 \begin{prop}\label{operations on goerss homology}
 Suppose that $X\in s\calw(0)$ is almost free, so that we may identify $H^*_{\calw(0)}X$ with $\pi^*\dual Q^{\calw(0)}X$. Then for $2\leq i <t$, the chain map $\widetilde{\theta_i}$ of proposition \ref{general CohOpns given irreducibility} induces a linear operation
 \[\deltav_i:(H^*_{\calw(0)}X)^{s}_t\to (H^*_{\calw(0)}X)^{s+1}_{t+i+1}.\] 
 These operations are natural in maps preserving the generating subspaces, and satisfy the $\delta$-Adem relation of [Dwyer].
 \end{prop}
-\noindent For any $X\in s\calw(0)$, the bar construction $Q^{\calw(0)}B^{\calw(0)}X$, whose dual homotopy is $H^*_{\calw(0)}X$, has a natural almost free structure, so that proposition \ref{operations on goerss homology} constructs natural  operations on $H^*_{\calw(0)}X$ for all $X\in s\calw(0)$.
+\noindent For \emph{any} $X\in s\calw(0)$, the bar construction $Q^{\calw(0)}B^{\calw(0)}X$ calculating  $H^*_{\calw(0)}X$ has a natural almost free structure, so that proposition \ref{operations on goerss homology} constructs natural operations on $H^*_{\calw(0)}X$ for all $X\in s\calw(0)$.
 
-Note that \textbf{these are the tricky, unstable operations. Define $\theta_i^\star$.}
+Note that \textbf{these are the tricky, unstable operations.}
 %Now suppose that $X\in\calw(0)$, and consider the bar construction $Q^{\calw(0)}B^{\calw(0)}X$ whose cohomotopy is $H^*_{\calw(0)}X$. Until the end of \S\ref{Cohomology Operations for W and U}, we will write $Q\mathbb{B}$ for this simplicial object, write $F$ for $F_{\calw(0)}$, and identify $Q\mathbb{B}_s$ with $F^sX$.
-\begin{proof}[Proof of \ref{operations on goerss homology}]
-The conditions of proposition \ref{general CohOpns given irreducibility} are satisfied when $\theta=\theta_i$ and $G$ is the identity functor. It just remains to prove the $\delta$-Adem relations, which we will do using the technique of \cite{PriddyKoszul.pdf}, the point being that the algebra of $\delta$-operations is Koszul dual to $\Palg$. For this, we define a map $\theta_{ij}$, whenever $i<2j$, $2\leq j<t$ and $2\leq i<t+j+1$:
+\begin{proof}[Proof of proposition \ref{operations on goerss homology}]
+The conditions of proposition \ref{general CohOpns given irreducibility} are satisfied with $\theta=\theta_i$ and $G$ is the identity functor. The condition \[\smash{\theta\circ\mu_V=\theta\circ \epsilon_{F^\calc V} +\theta\circ {F^\calc \epsilon_V}:F^\calc F^\calc V\to V}\]
+just states that given an iterated expression in $F^\calc F^\calc V$, the two obvious ways to produce a summand of the form $P^iv$ under the map $F^\calc F^\calc V\to F^\calc V$ are the only ways, due to the homogeneity of the $P$-Adem relations.
+
+It just remains to prove the $\delta$-Adem relations, which we will do using the technique of \cite{PriddyKoszul.pdf}, the point being that the algebra of $\delta$-operations is Koszul dual to $\Palg$. For this, we define a map $\theta_{ij}$, whenever $i<2j$, $2\leq j<t$ and $2\leq i<t+j+1$:
 \[\theta_{ij}:\left((F_{\calw(0)}V)^{t+i+j+2}\overset{\textup{proj}}{\makebox[.06ex][l]{$\to$}\to} (F_{\calw(0)}^{(4)}V)^{t+i+j+2}\overset{\textup{proj}}{\makebox[.06ex][l]{$\to$}\to} \im (P^{i,j})\overset{(P^{i,j})^{-1}}{\to}V^{t}\right),\]
 where we have split off the image of 
 $P^{i,j}=P^iP^j$ %:V^n\to (F_{\calw(0)}^{(4)}V)^{n+i+j+2}\]
-as before, which is possible, since neither $P^j$ nor $P^i$ are entangled with the bracket in these ranges. We may identify $Q^{\calw(0)}X_s$ with $V_s$, at the cost of replacing $d_0$ with $\epsilon\circ d_0$, as in lemma \ref{identify almost free indecs with gens}.  Define $\widetilde{\theta_{ij}}$ to be the composite $V_{s+1}\overset{d_0}{\to}FV_s\overset{\theta_{ij}}{\to}V_s$. This will be the nullhomotopy giving the $\delta$-Adem relation. %It'll feel easier to think of it as a nullhomotopy of the un-normalized complex. 
-As in the proof of proposition \ref{general CohOpns given irreducibility}, we have $d_k\circ\widetilde{\theta_{ij}}=\widetilde{\theta_{ij}}\circ d_{k+1}$ for $k\geq1$, so its nullhomotopy is the sum
-\[\epsilon d_0\widetilde{\theta_{ij}}+\widetilde{\theta_{ij}}(\epsilon d_0+d_1)=(\epsilon d_0\theta_{ij}+\theta_{ij}d_0\epsilon+\theta_{ij}d_0)d_0,\]
-using the simplicial identity $d_0d_1=d_0d_0$, and the $\delta$-Adem relation will follow from
-\[\theta_{ij}d_0=\Bigl(\epsilon d_0\theta_{ij}+\theta_{ij}d_0\epsilon+\sum\theta_\beta d_0\theta_\alpha\Bigr):FV_{s+1}\to V_s,\]
-where the sum is taken over all the combinations of $\alpha,\beta\geq2$ such that $P^iP^j$ appears when $P^\alpha P^\beta$ is written in the $P$-admissible basis. This identity states the following: if $V\in\vect{+}{0}$, and $f(g_k)$ is a nested $\calw(0)$-expression with $g_k\in F_{\calw(0)}V$ and $f(g_k)\in F_{\calw(0)}F_{\calw(0)}V$, then if we write $d_0:F_{\calw(0)}F_{\calw(0)}V\to F_{\calw(0)}V$ for the monad product map, there are only three ways that one may obtain expressions of the form $P^iP^jv$ in $d_0(f(g_k))$: for some $k$, $g_k=P^iP^jv$, and $f $ adds no further operations to this term; $f=P^iP^jg_{k}$ for some $k$ for which $g_{k}=v$ is a unit expression; or for some $k$, $g_k=P^\beta v$, and  $f$ has $P^\alpha(g_k)$ as a summand. In this last case, after applying $d_0$, the composite $P^{\alpha}P^{\beta}v$ may need to be rearranged using the $P$-Adem relation, and we sum over those $\alpha$,$\beta$ producing a summand $P^iP^jv$.
+as before. This is possible since neither $P^j$ nor $P^i$ are entangled with the bracket in these ranges. We may identify $Q^{\calw(0)}X_s$ with $V_s$, at the cost of replacing $d_0$ with $\epsilon\circ d_0$, as in lemma \ref{identify almost free indecs with gens}.  Define $\widetilde{\theta_{ij}}$ to be the composite $V_{s+1}\overset{d_0}{\to}FV_s\overset{\theta_{ij}}{\to}V_s$. This will be the nullhomotopy giving the $\delta$-Adem relation. %It'll feel easier to think of it as a nullhomotopy of the un-normalized complex. 
+As in the proof of proposition \ref{general CohOpns given irreducibility}, we have $d_k\circ\widetilde{\theta_{ij}}=\widetilde{\theta_{ij}}\circ d_{k+1}$ for $k\geq1$, and $\widetilde{\theta_{ij}}$ has nullhomotopy the sum
+\[\epsilon d_0\widetilde{\theta_{ij}}+\widetilde{\theta_{ij}}(\epsilon d_0+d_1)=(\epsilon d_0\theta_{ij}+\theta_{ij}d_0\epsilon+\theta_{ij}d_0)d_0.\]
+The $\delta$-Adem relation will follow from
+\[\textstyle\theta_{ij}d_0=\Bigl(\epsilon d_0\theta_{ij}+\theta_{ij}d_0\epsilon+\sum_{\produces{(\alpha,\beta)}{(i,j)}{\Palg}}\theta_\beta d_0\theta_\alpha\Bigr):FV_{s+1}\to V_s,\]
+%where the sum is taken over all the combinations of $\alpha,\beta\geq2$ such that $P^iP^j$ appears when $P^\alpha P^\beta$ is written in the $P$-admissible basis. 
+This identity states the following: if $V\in\vect{+}{0}$, and $f(g_k)$ is a nested $\calw(0)$-expression with $g_k\in F_{\calw(0)}V$ and $f(g_k)\in F_{\calw(0)}F_{\calw(0)}V$, then if we write $d_0:F_{\calw(0)}F_{\calw(0)}V\to F_{\calw(0)}V$ for the monad product map, there are only three ways that one may obtain expressions of the form $P^iP^jv$ in $d_0(f(g_k))$: for some $k$, $g_k=P^iP^jv$, and $f $ adds no further operations to this term; $f=P^iP^jg_{k}$ for some $k$ for which $g_{k}=v$ is a unit expression; or for some $k$, $g_k=P^\beta v$, and  $f$ has $P^\alpha(g_k)$ as a summand. In this last case, after applying $d_0$, we may need to rearrange the composite $P^{\alpha}P^{\beta}v$ using the $P$-Adem relations, and we sum over those $(\alpha,\beta)$ producing a summand $P^iP^jv$.
 
-This shows that the nullhomotopy proposed equals the sum of the maps $\widetilde{\theta_\beta}\circ\widetilde{\theta_\alpha}$, and as Goerss \cite{MR1089001} \emph{constructs} the $P$-algebra as the Koszul dual, in the sense of \cite{PriddyKoszul.pdf}, of the algebra of $\delta$-operations, $P^{\alpha }P^{\beta}$ produces a summand $P^iP^j$ if and only if $\delta_i\delta_j$ produces a summand $\delta_{\alpha }\delta_{\beta}$. This proves the result.
+This shows that the nullhomotopy proposed equals the sum of the maps $\widetilde{\theta_\beta}\circ\widetilde{\theta_\alpha}$, and as Goerss \cite{MR1089001} \emph{constructs} the $P$-algebra as the Koszul dual, in the sense of \cite{PriddyKoszul.pdf}, of the algebra of $\delta$-operations, $P^{\alpha }P^{\beta}$ produces a summand $P^iP^j$ if and only if $\delta_i\delta_j$ produces a summand $\delta_{\alpha }\delta_{\beta}$. This proves the result. \textbf{Move Koszul observation earlier.}
 \end{proof}
-The same constructions work in the category $s\calU(0)$ of simplicial unstable \emph{modules}, the only difference being that when we define $\theta_i$, we need not worry about brackets, and we can define a map
-\[\theta_i:F_{\calU(0)}V^{t+i+1}\to V^t\]
+The same constructions work in the category $s\calU(0)$ of simplicial unstable \emph{modules}, the only difference being that when we define $\theta_i$, we need not worry about Lie algebra structures, and we can define a map
+\[\theta_i:(F_{\calU(0)}V)^{t+i+1}\to V^t\]
 whenever $2\leq i\leq t$, so that there is one more operation available on $H^*_{\calU(0)}$ than on $H^*_{\calw(0)}$. It will be useful to encode this structure in a definition. Write $\calMv(1)$ for the algebraic category whose objects are vector spaces $M\in\vect{1}{+}$ with left $\delta$-operations
 \[\deltav_i:M^{s}_t\to M^{s+1}_{t+i+1},\textup{ defined whenever $2\leq i\leq t$,}\]
-satisfying the \textbf{tricky} $\delta$-Adem relations of [Dwyer].
+satisfying unstable $\delta$-Adem relations analogous to those of \emph{(\ref{deltaademsunstable})} in proposition \ref{omnibus on htpy of simp algs}.
 \begin{prop}\label{operations on untable P homology}
-Suppose that $X\in s\calU(0)$ is almost free. Then the chain maps $\widetilde{\theta_i}$ of proposition \ref{general CohOpns given irreducibility} give $H^*_{\calU(0)}X$ the structure of an object of $\calMv(1)$, natural in maps preserving the generating subspaces.
+Suppose that $X\in s\calU(0)$ is almost free. Then the chain maps $\widetilde{\theta_i}$ of proposition \ref{general CohOpns given irreducibility} give $H^*_{\calU(0)}X$ the structure of an object of $\calMv(1)$, natural in maps preserving the generating subspaces. In fact, $\calMv(1)$ is the category of $\calU(0)$-$H^*$-algebras.
 \end{prop}
+See \S\ref{Koszul Cx section} for further discussion of this fact, and proposition \ref{the cokoszul complex is free} for a restatement.
 In order to give a basis for a free object in $\calMv(1)$, for a sequence $I=(i_\ell,\ldots,i_1)$ of integers $i_j\geq2$, we define
 \[\minDimP(I):=\max\{(i_1),\,(i_2-i_1-1),\,(i_3-i_2-i_1-2),\,\ldots,\,(i_{\ell}-\cdots-i_1-\ell+1)\},
 \]
-following the convention that $\max(\emptyset)=-\infty$. Moreover, say that the sequence is \emph{$\delta$-admissible} if each $i_j\geq2$ and  $i_{j+1}\geq 2i_j$ for $1\leq j <\ell$.
+following the convention that $\max(\emptyset)=-\infty$. Moreover, we say that the sequence is \emph{$\delta$-admissible} if each $i_j\geq2$ and  $i_{j+1}\geq 2i_j$ for $1\leq j <\ell$.
 \begin{lem}\label{basis of element of M(0)}
 %For $V\in\vect{1}{+}$ with homogeneous basis $B$, a basis of $F_{\calMv(1)}V$ consists of the classes $\delta_Ib$ where $b\in B\cap V^s_t$ is a basis element and $I$ is a $\delta$-admissible sequence with $t\geq\minDimP(I)$.
-For $V\in\vect{1}{+}$ with homogeneous basis $B$, a basis of $F_{\calMv(1)}V$ consists of
+For $V\in\vect{1}{+}$ with homogeneous basis $B$, a basis of $F_{\calMv(1)}V$ is
 \[\left\{\deltav_Ib\ \middle|\ b\in B^{s}_t\textup{, $I$ $\delta$-admissible with }\minDimP(I)\leq t\right\}.\]
-\textbf{extend to case where $V$ concentrated in Koszul deg 0}\end{lem}
-\begin{shaded}
+\end{lem}
+We will often apply such results as these when $V$ is concentrated in degrees $V_t^0$. At this point we introduce a notational abuse, identifying $\vect{}{+}$ with  the full subcategory of $\vect{1}{+}$ with objects concentrated in these degrees. The effect of this will be that we will be able to write $F^{\calMv(1)}V$ for $V\in \vect{}{+}$. In this setting, we may restrict lemma \ref{basis of element of M(0)} to:
+\begin{cor}\label{basis of element of M(0) in deg 0}
+For $V\in\vect{}{+}$ with homogeneous basis $B$, a basis of $F_{\calMv(1)}V\in\vect{1}{+}$ is
+\[\left\{\deltav_Ib\ \middle|\ b\in B_t\textup{, $I$ $\delta$-admissible with }\minDimP(I)\leq t\right\}.\]
+\end{cor}
+
+\begin{shaded}\tiny
 Note that the forgetful functor $\calw(0)\to\calU(0)$ does not preserve almost free simplicial objects! However, it does preserve levelwise free simplicial objects, which create the right homology groups (see PRLieAlgs.tex). Thus there is a disconnect in the number of available operations on the Bousfield-Kan $E^2$ and on the first Koszul resolution.
 \end{shaded}
 
@@ -3411,23 +3439,26 @@ One can give exactly the same definitions for the free construction in $\calU(n)
 Write $\calMv(n+1)$ for the algebraic category whose objects are vector spaces $M\in\vect{n+1}{+}$ with left Steenrod operations
 \[\Sqv^i:M^{s_{n+1},\ldots,s_1}_t\to M^{s_{n+1}+1,s_n+i-1,2s_{n-1},\ldots,2s_1}_{2t+1},\]
 which are zero except when $1\leq i \leq s_n$ and not all of $i-1,s_{n-1},\ldots,s_1$ are zero, and which
-satisfy the $\Sq$-Adem relations of [wherever-Priddy?].
+satisfy the $\Sq$-Adem relations.
 
 In the present case, $n\geq1$, there is no disparity between the unstableness conditions on $\calw(n)$- and $\calu(n)$-cohomology, so that we can combine the analogues of \ref{operations on goerss homology} and \ref{operations on untable P homology} into:
 \begin{prop}\label{vertical steenrod operations prop}
-Suppose that $X\in s\calc$ is almost free, where $\calc$ stands for either $\calw(n)$ or $\calU(n)$ with $n\geq1$. Then the chain maps $\smash{\widetilde{\theta^i}}$ of proposition \ref{general CohOpns given irreducibility} give $H^*_{\calc}X$ the structure of an object of $\calMv(n+1)$, natural in maps preserving the generating subspaces.
+Suppose that $X\in s\calc$ is almost free, where $\calc$ stands for either $\calw(n)$ or $\calU(n)$ with $n\geq1$. Then the chain maps $\smash{\widetilde{\theta^i}}$ of proposition \ref{general CohOpns given irreducibility} give $H^*_{\calc}X$ the structure of an object of $\calMv(n+1)$, natural in maps of almost free objects preserving the generating subspaces. Again, $\calMv(n+1)$ is the category of $\calU(n)$-$H^*$-algebras.
 \end{prop}
 \textbf{give some discussion. Point out that the nullhomotopy is unstable.}
 
 In order to give a basis for a free object in $\calMv(n+1)$, for a sequence $I=(i_\ell,\ldots,i_1)$ of integers $i_j\geq1$, we define
 \[\minDimSq(I):=\max\{(i_1),\,(i_2-i_1+1),\,(i_3-i_2-i_1+2),\,\ldots,\,(i_{\ell}-\cdots-i_1+(\ell-1))\},
 \]
-and say that $I$ is \emph{$\Sq$-admissible} if each $i_j\geq1$ and $i_{j+1}\geq 2i_j$ for $1\leq j <\ell$ \textbf{(uniformize this convention)}.
-\begin{lem}
-For $V\in\vect{n+1}{+}$ with homogeneous basis $B$, a basis of $F_{\calMv(n+1)}V$ consists of
+and say that $I$ is \emph{$\Sq$-admissible} if each $i_j\geq1$ and $i_{j+1}\geq 2i_j$ for $1\leq j <\ell$.
+\begin{lem}\label{basis of element of M(n+1)}
+For $V\in\vect{n+1}{+}$ with homogeneous basis $B$, a basis of $F_{\calMv(n+1)}V$ is
 \[\left\{\Sq^J_{\textup{v}}b\ \middle|\ \genfrac{}{}{0pt}{}{b\in B^{s_{n+1},\ldots,s_1}_t\textup{, $J$ $\Sq$-admissible with }\minDimSq(J)\leq s_n,}{\textup{if }s_{n-1}\!=\!\cdots\!=\!s_1\!=\!0\textup{ then $J$ does not contain 1}}\right\}.\]
-
-
+\end{lem}
+Performing the same abuse of notation as in corollary \ref{basis of element of M(0) in deg 0}:
+\begin{lem}\label{basis of element of M(n+1) in deg 0}
+For $V\in\vect{n}{+}$ with homogeneous basis $B$, a basis of $F_{\calMv(n+1)}V\in\vect{n+1}{+}$ is
+\[\left\{\Sq^J_{\textup{v}}b\ \middle|\ \genfrac{}{}{0pt}{}{b\in B^{s_{n},\ldots,s_1}_t\textup{, $J$ $\Sq$-admissible with }\minDimSq(J)\leq s_n,}{\textup{if }s_{n-1}\!=\!\cdots\!=\!s_1\!=\!0\textup{ then $J$ does not contain 1}}\right\}.\]
 \end{lem}
 
 \subsection{Horizontal Steenrod operations and a product for $H^*_{\calw(n)}$}\label{Horizontal Steenrod operations and a product for HWn}
@@ -3435,11 +3466,10 @@ For any $n\geq 0$, we will construct operations on the homology $H^*_{\calw(n)}$
 
 Indeed, suppose that $X\in s\calw(n)$ is almost free. Then $Q^{\calU(n)}X\in s\calL(n)$ is also almost free, on essentially the same generating subspaces. Thus, the cohomotopy of $Q^{\calw(n)}X=Q^{\calL(n)}Q^{\calU(n)}X$ is an instance of simplicial partially restricted Lie algebra cohomology. Cohomology operations of this type are discussed in \S\ref{section: Cohomology operations for simplicial (restricted) Lie algebras} and appendix \ref{appendix on Lie coh ops}. In the present context, we have two equivalent definitions, one using $\psi_{\calL(n)}$ and one using $\psi_{\calw(n)}$. Until the appendix, we will use $\psi_{\calw(n)}$, defining operations
 \begin{gather*}
-\mu:\left(H_{\calw(n)}^{n_1}(X)\otimes H_{\calw(n)}^{n_2}(X)\overset{\ExtCohProd}{\to} \pi^{n_1+n_2}(\dual(S^2(QX)))\overset{\psi_{\calw(n)}^*}{\to} H_{\calw(n)}^{n_1+n_2+1}(X)\right)\textup{ and}\\
-\Sqh^k:\left(H_{\calw(n)}^{n}(X)\overset{\ExtCohOp^{k-1}}{\to} \pi^{n+k-1}(\dual(S^2(QX)))\overset{\psi_{\calw(n)}^*}{\to} H_{\calw(n)}^{n+k}(X)\right).
+\mu:\left(H_{\calw(n)}^{n_1}(X)\otimes H_{\calw(n)}^{n_2}(X)\overset{\ExtCohProd}{\to} \pi^{n_1+n_2}\dual S^2Q^{\calw(n)}X\overset{\psi_{\calw(n)}^*}{\to} H_{\calw(n)}^{n_1+n_2+1}(X)\right)\textup{ and}\\
+\Sqh^k:\left(H_{\calw(n)}^{n}(X)\overset{\ExtCohOp^{k-1}}{\to} \pi^{n+k-1}\dual S^2Q^{\calw(n)}X\overset{\psi_{\calw(n)}^*}{\to} H_{\calw(n)}^{n+k}(X)\right).
 \end{gather*}
-More explicitly:
-\begin{prop}
+\begin{prop}\label{Wn Halg omnibus}
 For $X$ an object of $\calw(n)$, $H^*_{\calw(n)}X$ possesses a left action of the Lie Steenrod algebra, consisting of natural homomorphisms
 \[\Sqh^j:(H^*_{\calw(n)}X)_t^{s_{n+1},\ldots,s_1}\to (H^*_{\calw(n)}X)_{2t+1}^{s_{n+1}+j,2s_{n},\ldots,2s_1},\]
 zero unless $1\leq j\leq s_{n+1}+1$ and not all of $j-1,s_{n},\ldots,s_1$ equal zero (so that if $n=0$, $\Sqv^1$ is necessarily zero). %If $n=0$, $\Sqh^1$ and $\Sqh^2$ are both zero 
@@ -3451,20 +3481,24 @@ and the Cartan formula
 \[\Sqh^k(xy)=\textstyle\sum_{i=0}^k(\Sqh^ix)(\Sqh^{k-i}y).\]
 \end{prop}
 \begin{proof}
-This theorem follows from theorem [BLAH] in the appendix.
+This theorem follows from theorem [BLAH] in the \cancel{appendix} section on Lie ops.
 \end{proof}
-For $n\geq0$, write $\calMh(n+1)$ for the algebraic category whose objects are vector spaces $M\in\vect{n+1}{+}$ with left Steenrod operations and a commutative pairing satisfying the conditions of the proposition. We have simply shown that $H^*_{\calw(n)}$ takes values in $\calMv(n+1)$.
+For $n\geq0$, write $\calMh(n+1)$ for the algebraic category whose objects are vector spaces $M\in\vect{n+1}{+}$ with left Steenrod operations and a commutative pairing satisfying the conditions of proposition \ref{Wn Halg omnibus}. We have simply shown that $H^*_{\calw(n)}$ takes values in $\calMh(n+1)$ --- it is certainly not true that $\calMv(n+1)$ is the category of $\calw(n)$-$H^*$-algebras, as we have also seen that $H^*_{\calw(n)}$ takes values in $\calMv(n+1)$.
 
-Note that the unstableness condition implies that if $x\in M_t^{0,\ldots,0}$, then $x^2=0$. Indeed
+Note that the unstableness condition implies that $x^2=0$ whenever $x\in M_t^{0,\ldots,0}$. Indeed
 \begin{prop}\label{basis of free horizontal operations algebra}
 Suppose that $n\geq1$. For $V\in\vect{n+1}{+}$ with homogeneous basis $B$. Then $F_{\calMh(n+1)}V$ is the quotient of the algebra
-\[\Ftwo \left[\Sq^J_{\textup{v}}b\ \middle|\ \genfrac{}{}{0pt}{}{b\in B^{s_{n+1},\ldots,s_1}_t\textup{, $J$ $\Sq$-admissible with }\excess(J)\leq s_{n+1},}{\textup{if }s_{n}=\cdots=s_1=0\textup{ then $J$ does not contain 1}}\right]\]
-by the relation $b^2=0$ if $b\in B_t^{0,\ldots,0}$. Here, $e(J):=j_\ell-j_{\ell-1}-\cdots j_1$ is the Serre excess of $J$. \textbf{{check this!}}
+\[S(\CommOperad) \left[\Sq^J_{\textup{v}}b\ \middle|\ \genfrac{}{}{0pt}{}{b\in B^{s_{n+1},\ldots,s_1}_t\textup{, $J$ $\Sq$-admissible with }\excess(J)\leq s_{n+1},}{\textup{if }s_{n}=\cdots=s_1=0\textup{ then $J$ does not contain 1}}\right]\]
+by the relation $b^2=0$ if $b\in B_t^{0,\ldots,0}$. Here, $e(J):=j_\ell-j_{\ell-1}-\cdots j_1$ is the Serre excess of $J$.
 \end{prop}
 \begin{proof}
 By \cite[6.1]{PriddySimplicialLie.pdf}, the true free object is at worst a quotient of what we propose. It is in fact equal to what we propose, because the two-sided ideal in $\LieSteen$ generated by $\Sqh^1$ is spanned by those admissible sequences ending in $\Sqh^1$, so that forcing $\Sq^1_h=0$ in the relevant degrees has no unintended consequences. Another way to express this fact is to say that left multiplication by $\Sq^1_h$ annihilates the augmentation ideal in $\LieSteen$ (the Steenrod algebra for Lie algebras).
 \end{proof}
-
+\begin{cor}
+\label{basis of free horizontal operations algebra restricted}
+Suppose that $n\geq1$. For $V\in\vect{n}{+}$ with homogeneous basis $B$. Then $F_{\calMh(n+1)}V\in\vect{n+1}{+}$ is the algebra
+\[S(\CommOperad) \left[b\ \middle|\ \genfrac{}{}{0pt}{}{b\in B^{s_{n},\ldots,s_1}_t}{s_{n},\ldots,s_1\textup{ not all zero}}\right]\otimes \Lambda(\CommOperad) \left[b\ \middle|\ b\in B^{0,\ldots,0}_t\right].\]
+\end{cor}
 \subsection{Relations between the horizontal and vertical operations}
 %With such a broad range of available operations, 
 It will be helpful if we are able to reduce %We are interested in calculating the composite $\delta_i\Sqh^jx$, or $\delta_i(xy)$, for $x,y\in H^*_{\calw(n)}X$ \textbf{but only for $n=0$}, so that 
@@ -4998,7 +5032,7 @@ and the fact that $\overline{G}(\epsilon\alpha)(\imath_t)=\widetilde{\epsilon\al
 
 \begin{Koszul complexes}
 
-\section{\textbf{Koszul complexes calculating $\calU(n)$-homology}}
+\section{\textbf{Koszul complexes calculating $\calU(n)$-homology}}\label{Koszul Cx section}
 In this section we will discuss the Koszul resolutions that one may use to calculate $H_*^{\calU(n)}X$ for $X$ a (non-simplicial) locally finite object of $\calU(n)$ or $\calw(n)$, using Priddy's technique \cite{PriddyKoszul.pdf}, adapted to an unstable context, as in \cite{CurtisSimplicialHtpy.pdf}.
 
 \subsection{The (co-)Koszul complex}
@@ -5008,7 +5042,7 @@ Write $E^r_{\ell,s}$ for the spectral sequence of the filtered complex $\Nop_*X$
 \[K_s^{\calU(n)}X:=E^1_{s,s}=d^{-1}(F_{s-1}\Nop_{s-1})=F_s\Nop_s\]
 form a subcomplex of $\Nop_*$ whose inclusion is a homotopy equivalence. Rather than determining these groups directly, Priddy's theory works with their duals, $K^*_{\calU(n)}X$, which form a cochain complex with homology $H^*_{\calU(n)}X$. In fact, Priddy's theory shows that the cochain complex $K^*_{\calU(n)}X$, the \emph{co-Koszul complex}, is actually a differential unstable left module over the same operations as its cohomology $H^*_{\calU(n)}X$, and indeed that this unstable module is \emph{free}. More precisely,  $K_0^{\calU(n)}X= X$, and $K^*_{\calU(n)}X$ is free on the  subspace $X^*$.
 \begin{prop}\label{the cokoszul complex is free}
-Suppose that $n\geq0$, and $X$ is a locally finite object of $\calU(n)$. The chain maps $\widetilde{\theta^i}$ ($\widetilde{\theta_i}$ when $n=0$) on $C_*Q^{\calU(n)}B^{\calU(n)}X$ restrict to the subcomplex $K_*^{\calU(n)}X$, and induce an $\calMv(n+1)$-structure on $K^*_{\calU(n)}X$ which commutes with the differentials. The inclusion $\dual X\cong K^0_{\calU(n)}X\subseteq K^*_{\calU(n)}X$ induces an isomorphism $F_{\calMv(n+1)}(\dual X)\to K^*_{\calU(n)}X$. Moreover, this $\calMv(n+1)$-structure on $K^*_{\calU(n)}$ induces the $\calMv(n+1)$-structure on $H^*_{\calU(n)}X$ of [above]. 
+Suppose that $n\geq0$, and $X$ is a locally finite object of $\calU(n)$. The chain maps $\widetilde{\theta^i}$ when $n\geq1$ and $\widetilde{\theta_i}$ when $n=0$, on $C_*Q^{\calU(n)}B^{\calU(n)}X$ restrict to the subcomplex $K_*^{\calU(n)}X$, and induce an $\calMv(n+1)$-structure on $K^*_{\calU(n)}X$ which commutes with the differentials. The inclusion $\dual X\cong K^0_{\calU(n)}X\subseteq K^*_{\calU(n)}X$ induces an isomorphism $F_{\calMv(n+1)}(\dual X)\to K^*_{\calU(n)}X$. Moreover, this $\calMv(n+1)$-structure on $K^*_{\calU(n)}$ induces the $\calMv(n+1)$-structure on $H^*_{\calU(n)}X$ of propositions \textbf{?????} and \ref{operations on untable P homology}.
 \end{prop}
 
 
@@ -6797,7 +6831,7 @@ If $L$ has bracket zero, then the differential on $\dual(\UEAX(L))$ is defined o
 \section{\textbf{Unstable Lie coalgebras over the dual $P$-algebra (move me)}}
 \todo{Give a formal definition of these coalgebras}{goes down to level of simplicial commutative algebras, and brings in the small object argument comonad structure}
 \todo{Give the construction (via equalizer diagram, etc) of the comonad}{}
-\todo{Write the maps $j$ and $\gamma_i$ in terms of maps out of $C_{ij}$ and $C_i^j$}{include generating cofibrations such as $S^{i+j}\to C_{ij}$ and $\Delta[1]\times S^{i+j}\to \Delta[1]\times C_{ij}$}
+\todo{Write the maps $j$ and $\gamma_i$ in terms of maps out of $C_{ij}$ and $C_i^j$}{include generating cofibrations such as $S^{i+j}\to C_{ij}$ and $\Delta[1]\times S^{i+j}\to \Delta[1]\times C_{ij}$\textbf{ (!!!!!!!!!!!!!!!)}}
 \todo{Construct operations on homology of such coalgebras}{they agree with those in double dual construction when locally finite
 \item if not locally finite, by studying gradings, can see that every coalgebra is the union of its finite type (even just `finite') subcoalgebras, and that the cobar construction respects such unions, thus get the same results in infinite case as we did from double dualization.}
 
