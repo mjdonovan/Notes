@@ -1,7 +1,7 @@
 % !TEX root = z_output/unstable_Lie_algs.tex
-\documentclass[11pt]{amsart}
+\documentclass[12pt]{amsart}
 \newcommand{\IncludeAll}{}% <-----
-\newcommand{\ShrinkPages}{}%
+\newcommand{\xShrinkPages}{}%
 \newcommand{\PostponeContents}{}%
 \ifx\ShrinkPages\undefined\else\usepackage[paperheight=160mm,paperwidth=160mm]{geometry}\fi%220/160
 \usepackage{amsmath,amsthm,amssymb} \usepackage{eucal} \usepackage{mathrsfs,nicefrac} \usepackage{amssymb} \usepackage[all]{xy} \usepackage{cancel} \usepackage{color} \usepackage{version} \usepackage{enumerate} \usepackage{mathtools} \newcommand{\xclude}[1]{\excludeversion{#1}} \newcommand{\nclude}[1]{\includeversion{#1}}%mathtools is just used for `mathclap'
@@ -10,10 +10,11 @@
 \ifx\IncludeAll\undefined\else\renewcommand{\xclude}[1]{\nclude{#1}}\fi
 \nclude{Contents Page}
 \xclude{Conventions and notation}
-\nclude{CPiAlgs and CHalgs}
-\xclude{BK spec seq}\nclude{connectivity}
-\nclude{Constructing (co)homotopy operations}
-\xclude{homotopy operations for PRLs}
+\nclude{Pi-algebras and cohomology algebras}
+\xclude{Bousfield-Kan sseq}\nclude{connectivity results}
+\nclude{Constructing homotopy operations}
+\nclude{Constructing cohomology operations}
+\nclude{homotopy operations for PRLs}
 \xclude{Cohomology Operations for W and U}
 \xclude{second quadrant homotopy}%
 \xclude{Operations on the Bousfield-Kan spectral sequence}%
@@ -24,6 +25,8 @@
 \xclude{Calculations of HW0}
 \xclude{appendices}
 \nclude{bibliog}
+
+\renewcommand{\baselinestretch}{1.4}
 
 \usepackage[bookmarks=false,pdftex,pdfborder={0 0 0 [1 1]}]{hyperref}
 
@@ -410,7 +413,7 @@ url=false,doi=false,isbn=false,eprint=false]{biblatex}%
 \end{itemize}}
 \end{itemize}\end{shaded}
 }
-
+%\renewcommand{\baselinestretch}{2}
 \begin{Contents Page}
 %\begin{abstract}\end{abstract}
 %\maketitle
@@ -1282,7 +1285,7 @@ As $h_{-1}^*V$ is the 0-cube with value $V^{-1}$, the tower of homotopy total fi
 \end{Conventions and notation} %return me to my home
 
 
-\begin{CPiAlgs and CHalgs}
+\begin{Pi-algebras and cohomology algebras}
 
 \section{\textbf{Homotopy operations and cohomology operations}}
 Let $\calc$ be a category of universal graded algebras, monadic over $\vect{+}{r}$. Our goal is to understand construct operations on the homotopy and cohomology of an object of $s\calc$. In \S\ref{homotopy and pialgs} and \S\ref{cohomology and Halgs}, we set out dual frameworks in which these operations can be organised, and in \ref{quadratic part section} and \ref{subseq:The smash coproduct}, we will describe some useful chain level operations that we will use to construct cohomology operations in \S\ref{sec:Constructing cohomology operations}.
@@ -1731,23 +1734,75 @@ For $V\in\vect{}{}$, the diagonal map $\Delta:V\to V\oplus V$ of $V$ induces a \
 \[(F^\calc(\Delta)+i_1+i_2):F^\calc V\to (F^\calc V)^{\sqcup2}.\]
 This map  factors through $(F^\calc V)^{\smashcoprod 2}$, and is symmetric. We name this factoring the \emph{cross terms}:
 \[\crossterms:F^\calc V\to (F^\calc V)\smashcoprod^{\Sigma_2} (F^\calc V),\]
-as it measures the non-linearity in an expression in $F^\calc V$. For example, when $\calc=\algs$, then for $v,w\in V$, using subscripts to denote membership of the first or second copy of $V$:
-\[\crossterms(vw)=(v_1+v_2)(w_1+w_2)+v_1w_1+v_2w_2=v_1w_2+w_1v_2.\]
+as it measures the non-linearity in an expression in $F^\calc V$.  We'll give an example in each of the the categories $\algs$, $\liealgs$ and $\restliealgs$, in each case using subscripts to denote membership of the first or second copy of $V$.
+\begin{enumerate}
+\item[$\algs$:] $\crossterms(vw)=(v_1+v_2)(w_1+w_2)+v_1w_1+v_2w_2=v_1w_2+w_1v_2.$
+\item[$\liealgs$:] $\crossterms([v,w])=[v_1+v_2,w_1+w_2]+[v_1,w_1]+[v_2,w_2]=[v_1,w_2]+[w_1,v_2].$
+\item[$\restliealgs$:] $\crossterms(\restn{v})=\restn{v_1}+\restn{v_2}+\restn{(v_1+v_2)}=[v_1,v_2].$
+\end{enumerate}
+%
+%For example, when $\calc=\algs$, then for $v,w\in V$, :
+%\[\crossterms(vw)=(v_1+v_2)(w_1+w_2)+v_1w_1+v_2w_2=v_1w_2+w_1v_2.\]
 
-In each case of interest to us, we will give a map, natural and symmetric in $X_1,X_2\in\calc$,
-\[j_\calc:Q^\calc(X_1\smashcoprod X_2)\to Q^\calc(X_1)\otimes Q^\calc(X_2),\ \ \textup{\textbf{coalgebra?}}\]
-and we will write $\quadratic_\calc$ for \emph{quadratic part} map, the composite
+For certain categories of interest to us we will give a \emph{decomposition map}, natural and symmetric in $X_1,X_2\in\calc$:
+\[j_\calc:Q^\calc(X_1\smashcoprod X_2)\to Q^\calc(X_1)\otimes Q^\calc(X_2),\ \ \textup{\textbf{coalgebra?}}.\]
+
+When $\calc=\algs$, $X_1\smashcoprod X_2\cong X_1\otimes X_2$, and $Q(X_1\smashcoprod X_2)\cong QX_1\otimes QX_2$. We choose the identity map of this object as decomposition map $j_\algs$. In other words, the map $j_{\algs}$ is defined by $x_1x_2\mapsto x_1\otimes x_2$ whenever $x_1\in X_1$ and $x_2\in X_2$.
+%%is defined by the requirement that the following diagram commutes:
+%\[\xymatrix@R=4mm{
+%X_1\smashcoprod X_2\ar@{->>}[r]\ar@{->>}[d]
+%&%r1c1
+%QX_1\otimes QX_2\\%r1c2
+%Q(X_1\smashcoprod X_2)\ar[ur]_-{J_{\algs}}
+%&%r2c1
+%%r2c2
+%}\]
+
+When $\calc=\liealgs$ or $\calc=\restliealgs$, we define the decomposition map by 
+\[j_{\calL(n)}:\restnRepeated{[x_1,\cdots ,x_a]}{r}\longmapsto\begin{cases}
+x_1\otimes x_2,&\textup{if }r=0,\,a=2,\,z_1\in X_1,\,z_2\in X_2,
+\\0,&\textup{otherwise,}
+\end{cases}\]
+where by $\restnRepeated{[x_1,\cdots ,x_a]}{r}$ we mean the $r$-fold restriction ($r=0$ when $\calc=\liealgs$) of some bracketing of various $x_1,\ldots,x_a$ from $X_1$ and $X_2$, with at least one $z_k$ must be from each of $X_1$ and $X_2$.  Any element of the smash coproduct may be written as a sum of such expressions, so there is at most one map $j_\algs$ satisfying this equation. That this map is well defined is less obvious, but nonetheless routine.
+
+
+Finally, we define the \emph{quadratic part} map, $\quadratic_\calc$ for  the composite
 \[\quadratic_\calc:\left(F^\calc V\overset{\crossterms}{\to}(F^\calc V)^{\smashcoprod 2}\to Q^\calc((F^\calc V)\smashcoprod^{\Sigma_2} (F^\calc V))\overset{j_\calc}{\to}S^2(Q^{\calc}F^\calc V)=S^2V\right).\]
-When $\calc=\algs$, the map $j_{\algs}$ is defined by $x_1x_2\mapsto x_1\otimes x_2$ when $x_i\in X_i$, and $\quadratic_{\algs}$ is the composite $F^{\algs} V\epi S_2V\overset{\trace}{\to}S^2V$, for example,  $\quadratic_{\algs}(u+vw+xy^2)$ evaluates as:
-\[j_{\algs}(v_1w_2+w_1v_2+x_1y_2^2+y_1^2x_2)=v\otimes w+w\otimes v+x\otimes y^2+y^2\otimes x,\]
-which equals $v\otimes w+w\otimes v$ %when evaluated in $S^2(Q^{\algs}F^{\algs}V)=S^2V$, 
-as hoped. \textbf{do Lie somewhere.}
+\begin{prop}Suppose $V\in\vect{}{}$. Then:
+\begin{enumerate}
+\item \makebox[\widthof{$\quadratic_\restliealgs$}][l]{$\quadratic_\algs$} is the composite $\makebox[\widthof{$F^\restliealgs V$}][r]{$F^\algs V$}\epi S_2V\overset{\trace}{\to} S^2V$;
+\item \makebox[\widthof{$\quadratic_\restliealgs$}][l]{$\quadratic_\liealgs$} is the composite $\makebox[\widthof{$F^\restliealgs V$}][r]{$F^\liealgs V$}\epi \Lambda^2V\overset{\trace}{\to} S^2V$;
+\item \makebox[\widthof{$\quadratic_\restliealgs$}][l]{$\quadratic_\restliealgs$} is the composite $\makebox[\widthof{$F^\restliealgs V$}][r]{$F^\restliealgs V$}\epi S^2V\overset{\trace}{\to} S^2V$.
+\end{enumerate}
+\end{prop}
+\begin{proof}
+ We'll simply give an example for \emph{(1)}. That is, consider the expression $e:=u+vw+xy^2\in F^{\algs}V$ where $u,v,w,x,y$ are in $V$. Then
+\begin{align*}
+\crossterms(e)&=v_1w_2+w_1v_2+x_1y_2^2+y_1^2x_2,\ \textup{and}\\
+J_\algs(\crossterms(e))&=v_1\otimes w_2+w_1\otimes v_2+x_1\otimes y_2^2+y_1^2\otimes x_2\\
+&=v_1\otimes w_2+w_1\otimes v_2 \in S^2(Q^\algs F^{\algs}V).
+\end{align*}
+Parts \emph{(2)} and \emph{(3)} are checked later in a more general case, in proposition \ref{quadpartcalc for various W and L}.
+\end{proof}
+\vfil\pagebreak
+
+
+
+
+
+
+
+
+
+
+\vfil\pagebreak
+
 
 In each category of interest to us, the following equation of maps $F^\calc F^\calc V\to S^2 V$ will always be satisfied:
 \[\quadratic_\calc\circ\mu_V=\quadratic_\calc\circ \epsilon_{F^\calc V} +\quadratic_\calc\circ {F^\calc \epsilon_V},\]
-where $\mu$ here stands for the multiplication map of the monad $U^\calc F^\calc $, which is to say that if  $f(g_i)$ is a $\calc$-expression in various $\calc$-expressions $g_i(v_{ij})$, we have 
-\[\quadratic(fg_i)(v_{ij})=\quadratic(f\epsilon(g_i))(v_{ij})+\epsilon(f)(\quadratic(g_i)(v_{ij})).\]
-This is another expression of homogeneity in the relations defining $\calc$. For an example when $\calc=\algs$, we specify an expression $f(g_1,g_2,g_3):=g_1g_2+g_3\in F^\calc F^\calc V$ in expressions $g_i:=v_{i1}v_{i2}+v_{i3}\in F^\calc V$ for each $i=1,2,3$. Then
+where $\mu$ here stands for the multiplication map of the monad $U^\calc F^\calc $. This is to say that if  $f(g_i)$ is a $\calc$-expression in various $\calc$-expressions $g_i(v_{ij})$, we have 
+\[\quadratic(fg_i)(v_{ij})=\quadratic(f\epsilon(g_i))(v_{ij})+\epsilon(f)(\quadratic(g_i)(v_{ij})),\]
+another expression of homogeneity in the relations defining $\calc$. For an example when $\calc=\algs$, we specify an expression $f(g_1,g_2,g_3):=g_1g_2+g_3\in F^\calc F^\calc V$ in expressions $g_i:=v_{i1}v_{i2}+v_{i3}\in F^\calc V$ for each $i=1,2,3$. Then
 \begin{alignat*}{2}
 \textup{\small$\quadratic(fg_i)(v_{ij})={}$}
 &
@@ -1771,9 +1826,9 @@ This is another expression of homogeneity in the relations defining $\calc$. For
 
 
 
-\end{CPiAlgs and CHalgs}
+\end{Pi-algebras and cohomology algebras}
 
-\begin{BK spec seq}
+\begin{Bousfield-Kan sseq}
 \section{\textbf{The Bousfield-Kan spectral sequence}}\label{Bousfield-Kan spectral sequence}
 
 
@@ -2028,7 +2083,7 @@ which is to say that we apply the iterated diagonal the appropriate number of ti
 
 
 
-\begin{connectivity}
+\begin{connectivity results}
 \subsection{Connectivity estimates and completeness}
 \label{sec:connectivityAnalysis}
 We will now perform the necessary connectivity estimates in the Adams tower in order to prove theorem \ref{completenesstheorem}, namely:  
@@ -2383,10 +2438,10 @@ is the action of  $\epsilon_{(\barConstructionMightAbbreviate X)}$ in level $q$,
 is the action of $\barConstructionMightAbbreviate \epsilon_{X}$ in level $q$.
 }%end "do not print \circ"
 \end{proof}
-\end{connectivity}
-\end{BK spec seq}
+\end{connectivity results}
+\end{Bousfield-Kan sseq}
 
-\begin{Constructing (co)homotopy operations}
+\begin{Constructing homotopy operations}
 
 
 
@@ -2677,7 +2732,8 @@ F^{\Gamma(\LieOperad)\PiAlg}V&=\Ftwo \left\{\lambda_Ib\ \middle|\ \genfrac{}{}{0
 &=\Ftwo \left\{\lambda_I\bigl(\restnRepeated{b}{r}\bigr)\ \middle|\ \genfrac{}{}{0pt}{}{b\in B_t\textup{, $I$ $\lambda$-admissible with }\minDimDelta(I)< t,}{\textup{$r\geq0$}}\right\}
 \end{align*}
 \end{prop}
-
+\end{Constructing homotopy operations}
+\begin{Constructing cohomology operations}
 \section{\textbf{Constructing cohomology operations}}\label{sec:Constructing cohomology operations}
 
 \subsection{Higher cosimplicial Alexander-Whitney maps}
@@ -2730,7 +2786,7 @@ One checks that these cochain operations induce well defined operations $\ExtCoh
 
 In this section we recall the definition of certain cohomotopy operations with domain $\pi^*U$ for any $U\in c\vect{}{}$, \textbf{reference}, using the function
 \[D^{n-i}(\alpha\otimes \alpha)+D^{n-i+1}(\alpha\otimes d\alpha),\ \ C^nU \to C^{n+i}(S_2U).\]
-\begin{prop}[same refs, I guess] 
+\begin{prop}\label{external singly simplicial steenrods}[same refs, I guess] 
 These functions descend to  well defined linear operations:
 \[\ExtCohOp^k:\pi^{n}U\to \pi^{n+k}(S_2U),\text{ \ zero unless $0\leq k\leq n$.}\]
 \end{prop}
@@ -3088,9 +3144,93 @@ Moreover the composite $Q^{\calU(0)}\circ F^{\calw(0)}$ equals the free construc
 One checks that the bracket is well defined in the quotient, and that taking the quotient by the top $P$ operation imposes the relation $[x,x]=0$, to create a $\Lambda(\LieOperad)$-algebra from the pre-existing $S(\LieOperad)$-algebra structure. The final claim follows from proposition \ref{partialgoerss}.
 \end{proof}
 \subsection{Cohomology operations for simplicial (restricted) Lie algebras \textbf{(!)}}
-`homogeneous Steenrod algebra'
+\label{section: Cohomology operations for simplicial (restricted) Lie algebras}
+A standard definition for the cohomology of a simplicial Lie algebra $L\in s\liealgs$ is presented in \cite{PriddySimplicialLie.pdf} as follows. Let $UL$ be the simplicial primitively Hopf algebra obtained by applying the universal enveloping algebra functor levelwise, or the restricted universal enveloping algebra functor when working in $s\restliealgs$. \textbf{[Priddy works with restricted Lie algebras. Cutting out the restriction cuts out $Sq^1$.]} Applying the Eilenberg-Mac Lane suspension functor (\cite[\S2.3]{PriddySimplicialLie.pdf}, \cite[\S5]{MillerSullivanConjecture.pdf} or \cite[p.\ 87]{MaySimpObj.pdf}), one defines (using a subscript $\bar{W}$ to avoid confusion):
+\[H_{\bar{W}}^*L:=\begin{cases}
+\pi^*\dual\bar{W}UL,&\textup{if }*>0;\\
+0,&\textup{if }*=0.
+%\\,&\textup{if }
+\end{cases}\]
+The suspension $\bar{W}$ destroys the algebra structure but leaves a simplicial cocommutative coalgebra structure on $\bar{W}UL$. Homotopy operations for simplicial cocommutative coalgebras are well known, and indeed, the cup product and Steenrod operations on the mod two cohomology of a space arise in this way. These operations can be constructed using  propositions \ref{external singly simplicial steenrods} and \ref{the external cohomotopy pairing}:
+\begin{gather*}
+\Sq^k:\bigl(\pi^n\dual (\bar{W}UL)\overset{\ExtCohOp^k}{\to}\pi^{n+k}\dual S^2(\bar{W}UL)\overset{\Delta^*}{\to}\pi^{n+k}\dual (\bar{W}UL)\bigr);\\
+\mu:\bigl(S_2(\pi^*\dual(\bar{W}UL))\overset{\ExtCohProd}{\to} \pi^*S_2\dual(\bar{W}UL)\to \pi^*\dual S^2(\bar{W}UL)\overset{\Delta^*}{\to}\pi^*\dual (\bar{W}UL)\bigr).
+\end{gather*}
+In \cite{PriddySimplicialLie.pdf}, Priddy works out all of the natural operations on this type of cohomology and states the relations between them. Moreover, he gives a spectral sequence argument showing that the cohomology groups defined using the construction just described coincide with the groups $H^*_{\liealgs}L$, \emph{with a shift in degree}, arising from the use of the suspension. That is: $H_{\bar{W}}^nL=H^{n-1}_{\liealgs}L$ for $n\geq1$.
 
-\end{Constructing (co)homotopy operations}
+For our purposes it is better to work in the framework set out in this paper, giving an alternative definition of the operations needed. This alternative definition will fit more readily into the spectral sequence arguments we intend to make. We will check the properties of these operations by a spectral sequence argument similar to Priddy's, although we will enrich the spectral sequence with certain extra structure in order to understand its interaction with the operations. This work will be deferred until appendix \textbf{????????}.
+
+Predicatbly, our definition of the cohomology operations is by the composites
+\begin{gather*}
+H_\calc^{n_1}X\otimes H_\calc^{n_2}X\overset{\ExtCohProd}{\to} \pi^{n_1+n_2}\dual(S^2(Q^\calc B^\calc X))\overset{\psi_\calc^*}{\to} H_\calc^{n_1+n_2+1}X,\\
+H_\calc^{n}X\overset{\ExtCohOp^k}{\to} \dual(\pi_{n+k}(S^2(Q^\calc B^\calc X)))\overset{\psi_\calc^*}{\to} H_\calc^{n+k+1}X.
+\end{gather*}
+
+
+
+\textbf{just copy of algebras from here on.}
+
+By Priddy's work in \cite{PriddySimplicialLie.pdf}, Lie algebra cohomology has Steenrod operations and a product. However, the formulae given by Priddy (involving the $\overline{W}$-construction) are not obviously equivalent to what we have given here. However, it is not hard to check that the definition we have given using $\psi_\calw$ is equivalent to an analogous definition for Lie algebra cohomology (given in [placemarker in appendix]), and theorem [BLAH again] identifies these operations with Priddy's.
+
+
+
+It is possible 
+\begin{gather*}
+P^i=\psi^*_{\algs}\circ\ExtCohOp^i:H^n_{\algs}A\to H_{\algs}^{n+i+1}A;\textup{ and}\\
+[\,,]=\psi^*_{\algs}\circ\ExtCohProd :H_{\algs}^nA\otimes H_{\algs}^mA\to H_{\algs}^{n+m+1}A.
+\end{gather*}
+He also defines a natural operation $\beta:H_{\algs}^0A\to H_{\algs}^1A$. Note that as a result of the use of $\psi^*_{\algs}$, these operations have a grading shift.
+\begin{prop}[{\cite[\S5]{MR1089001}}]\label{omnibus on coh of simp algs}These operations have the following properties:
+\begin{enumerate}
+\item the bracket gives $H^*_{\algs}A$ the structure of an $S(\LieOperad)$-algebra (with grading shift);
+\item the operation $\beta$ acts as a restriction defined only in dimension zero, so that for $x,y\in H^0_{\algs}A$ and $z\in H^*_{\algs}A$:
+\[\beta(x+y)=\beta(x)+\beta(y)=[x,y],\text{\ \ and \ }[\beta(x),z]=[x,[x,z]];\]
+\item the self-square operation on $H^*_{\algs}A$ equals the \emph{top $P$-operation}:
+\[P^nx=[x,x]\text{\ \ for $x\in H^n_{\algs}A$};\]
+\item \label{P unstable vanishing} if $x\in H^n_{\algs}A$, then $P^ix=0$ unless $2\leq i\leq n$;
+\item every $P$-operation is linear;
+\item there holds the following \emph{Cartan formula}:  for all $x,y\in   H^n_{\algs}A$ and $i\geq0$,
+\[[x,P^iy]=0;\]
+\item \label{yeah H is a Pmodule}the \emph{$P$-Adem relations} hold: if $i\geq 2j$, then
+\[P^iP^jx=\sum_{s=i-j+1}^{i+j-2}{2s-i-1\choose s-j}P^{i+j-s}P^sx.\]
+\end{enumerate}
+\end{prop}
+In this case, \emph{(\ref{yeah H is a Pmodule})} \emph{does} state that $H^*_{\algs}A$ is a left module over $\Palg$, the \emph{Steenrod algebra for commutative algebras over $\Ftwo $}, the \textbf{unital} associative algebra generated by symbols $P^i$ for $i\geq0$, modulo the two sided ideal generated by $P^0$, $P^1$, and the evident \emph{$P$-Adem relations}.
+
+
+A sequence $I=(i_\ell,\ldots,i_1)$ of integers $i_j\geq2$ is \emph{$P$-admissible} if $i_{j+1}<2i_j$ for $1\leq j <\ell$. For any sequence $I=(i_\ell,\ldots,i_1)$, write $P^I$ for the monomial $P^{i_\ell}\cdots P^{i_1}$ in $\Palg$. It follows from \cite[Theorem I]{MR1089001} that $\Palg$ has an \emph{admissible basis}, consisting of those $P^I=P^{i_\ell}\cdots P^{i_{1}}$ with $I$ a $P$-admissible sequence.  Again, we will say that \emph{$I$ produces $J$ in $\Palg$}, denoted $\produces{I}{J}{\Palg}$ if, when $P_I$ is written in the $P$-admissible basis of $\Palg$, $P_J$ appears with non-zero coefficient. In this case, $J$ must be $P$-admissible, and $I$ must be $P$-inadmissible unless $J=I$.
+
+We define
+\[\minDimP(I):=\max\{(i_1),\,(i_2-i_1-1),\,(i_3-i_2-i_1-2),\,\ldots,\,(i_{\ell}-\cdots-i_1-\ell+1)\},\]
+for a rather different purpose than in \S\ref{Homotopy operations for simplicial commutative algebras} and \S\ref{Homotopy operations for simplicial Lie algebras}: although the composite 
+\[P^I:\bigl(H_{\algs}^{n}A\overset{P^{i_1}}{\to}H_{\algs}^{n+i_1+1}A\overset{P^{i_2}}{\to}\cdots \overset{P^{i_\ell}}{\to}H_{\algs}^{n+i_1+\cdots +i_\ell+\ell}A\bigr)\]
+is always defined, it is \emph{forced to be zero} by \emph{(\ref{P unstable vanishing})} alone precisely when $n<\minDimDelta(I)$.
+
+As in \S\ref{Homotopy operations for simplicial commutative algebras} and \S\ref{Homotopy operations for simplicial Lie algebras}, if a non-empty sequence $I$  is \emph{$P$-admissible}, we can identify which term is largest in the maximum defining $\minDimP(I)$ and calculate that $\minDimP(I)=i_1$. More explicitly, in a (non-vanishing) admissible expression $P^{i_\ell}\cdots P^{i_1}x$, for $x\in H^n_{\algs}A$, the only one of these $P$-operations that can be a top operation is $P^{i_{1}}$.
+%Unlike in \S\ref{Homotopy operations for simplicial commutative algebras} and \S\ref{Homotopy operations for simplicial Lie algebras}, having a non-empty sequence $I$  be \emph{$P$-admissible} does not allow us identify which term is largest in the maximum defining $\minDimP(I)$. More explicitly, in an admissible expression $P^{i_\ell}\cdots P^{i_1}x$, for $x\in H^n_{\algs}A$, top $P$-operations may be interspersed with non-top $P$-operations.
+
+
+%\begin{lem}\label{lemOnAdemChangeInMDeltaPlain}
+%Suppose that $i,j\geq2$ and $i<2j$, and $(i+1)/2\leq s\leq (i+j)/3$. Then $i+j-s\geq 2s$, $i+j-s\geq2$, $s\geq2$, so that the $\delta$-Adem relation writes $\delta_i\delta_j$ as a sum of $\delta$-admissible composites. Moreover,  $\minDimDelta(i,j)\geq \minDimDelta(i+j-s,s)$.
+%\end{lem}
+%\begin{proof}
+%The only tricky inequality is $\minDimDelta(i,j)\geq \minDimDelta(i+j-s,s)$. Now the right hand side must equal $i+j-2s$, and the left hand side is at least $j$. The result follows, since $2s\geq i+1$.
+%\end{proof}
+
+The following result shows that whenever an expression $P^Jx$ is forced to be zero by \emph{(\ref{P unstable vanishing})}  and we reduce $P^Jx$ to a sum of $P$-admissible composites, all of the summands are forced to be zero by \emph{(\ref{P unstable vanishing})}.
+\begin{lem}\label{lemOnAdemChangeInMP}
+If $\produces{I}{J}{\Palg}$, then $\minDimP(J) \geq \minDimP(I)$, with strict inequality when $I$ and $J$ are distinct and of length two.
+\end{lem}
+The main theorem of Goerss' memoir is that these operations generate all of the operations in the category $\algs\HAlg$, and that all of the relations between the operations in $\algs\HAlg$ are implied by those presented here. In \cite[Chapter V]{MR1089001}, Goerss shows that the listed operations completely capture the cohomology of an object $K^{\algs}\mathbb{K}_n$. He proves a Hilton-Milnor theorem \cite{GoerssHiltonMilnor.pdf}, which he uses in \cite[\S11]{MR1089001} to bootstrap up to a calculation of the cohomology of any GEM in $s\algs$, namely \cite[Theorem I]{MR1089001}. The result states that whenever $V\in \vect{1}{}$,  is a  vector space of finite type, not only is 
+$F^{\algs}V$
+generated by $V$ under the operations of proposition \ref{omnibus on coh of simp algs}, it is as large as is conceivable given the relations presented. We will present in proposition \ref{partialgoerss} a partial version of his result.
+
+It is  interesting to observe that $\Palg$, the Steenrod algebra for commutative algebras is
+in fact \emph{Koszul dual}, in the sense of \cite{PriddyKoszul.pdf}, to $\deltaalg$, the algebra which (almost) acts on the homotopy of a simplicial algebra. Indeed, Goerss \emph{calculates} $\Palg$ as the Koszul dual of $\deltaalg$, using a reverse Adams spectral sequence due to Miller \cite{MillerSullivanConjecture.pdf}. We will explore this relationship further when we consider the Bousfield-Kan spectral sequence.
+
+
+
+\end{Constructing cohomology operations}
 
 
 
@@ -3120,7 +3260,7 @@ One checks that the bracket is well defined in the quotient, and that taking the
 %The free partially restricted Lie algebra is the subspace of $\Gamma(\LieOperad(V_0\oplus V_1))$ given by
 %\[\im \Bigl(S(\LieOperad)(V_0)\overset{\textup{Tr}}{\to}\Gamma(\LieOperad)(V_0\oplus V_1)\Bigr)\oplus\bigoplus_{n\geq1} \Bigl(\bigoplus(\LieOperad(n)\otimes V_{i_1}\otimes V_{i_2}\otimes\cdots\otimes V_{i_n})\Bigr)^{\Sigma_n}\]
 ]%END commented out old material
-For each $n\geq0$, we will be interested in certain categories of Lie algebras monadic over $\vect{+}{n}$, with a grading shift. Broadly, a $\vect{+}{n}$-graded Lie algebra is an element $L\in\vect{+}{n}$ with a structure map $\Lambda^2 L\to L$ which treats gradings as follows
+For each $n\geq0$, we will be interested in certain categories of Lie algebras monadic over $\vect{+}{n}$, with a grading shift. Broadly, a $\vect{+}{n}$-graded Lie algebra is an element $L\in\vect{+}{n}$ with a structure map $\Lambda^2 L\to L$ which shifts gradings as follows
 \[L^{t}_{s_n,\ldots,s_1}\otimes L^{t'}_{s'_n,\ldots,s'_1}\to L^{t+t'+1}_{s_n+s'_n,\ldots,s_1+s'_1}.\]
 More precisely, we view the Lie operad as an operad in $\vect{+}{n}$, such that
 \[\LieOperad(r)=(\LieOperad(r))^{r-1}_{0,\ldots,0},\]
@@ -3281,10 +3421,11 @@ Similar to the proof of lemma \ref{Kill P ops gives lie alg}, using the observat
 
 
 
+
 \subsection{Decomposition maps for $\calL(n)$ and $\calw(n)$}
 \tododone{Describe the composition maps for these categories}{show the compatibility under $\calL(n)\PiAlg\cong \calw(n+1)$
 \item show that the $j$ are \emph{quadratic decomposition maps}, if that language is still around}
-Here we will introduce decomposition maps for the categories $\calL(n)$ and $\calw(n)$, and prove a certain compatibility between them. The definitions are simple enough, and the reader can verify that each is well defined. Choose $n\geq0$, then we define decomposition maps $\calc:Q(X\smashcoprod Y)\to QX\otimes QY$:
+Here we will introduce decomposition maps for the categories $\calL(n)$ and $\calw(n)$, and prove a certain compatibility between them. The definitions are simple enough, and the reader can verify that each is well defined. For any  $n\geq0$, the following formulae define decomposition maps $j_\calc:Q^\calc(X\smashcoprod Y)\to Q^\calc X\otimes Q^\calc Y$:
 \begin{alignat*}{2}
 %\calw(0):&\quad &
 j_{\calw(0)}:P^{i_\ell}\cdots P^{i_1}[z_1,\cdots ,z_a]&\longmapsto\begin{cases}
@@ -3304,12 +3445,14 @@ z_1\otimes z_2,&\textup{if }r=0,\,a=2,\,z_1\in X,\,z_2\in Y,
 \\0,&\textup{otherwise.}
 \end{cases}
 \end{alignat*}
-[or \textbf{uniformize} all this using the phrase $\calU(n)$-operations.]
-\begin{prop}
-If $V\in\vect{+}{n}$ then $\quadratic_{\calL(n)}$ equals the composite $F^{\calL(n)} V\epi \quadgrad{2}F^{\calL(n)} V\subseteq S^2V$, and $\quadratic_{\calw(n)}$ equals the composite $F^{\calw(n)} V\epi F^{\calL(n)} V\epi \quadgrad{2}F^{\calL(n)} V\subseteq S^2V$.
+\begin{prop}\label{quadpartcalc for various W and L}
+Suppose $V\in\vect{+}{n}$. Then:
+\begin{enumerate}
+\item \makebox[\widthof{$\quadratic_\restliealgs$}][l]{$\quadratic_{\calL(n)}$} is the composite $F^{\calL(n)} V\epi \quadgrad{2}F^{\calL(n)} V\subseteq S^2V$;
+\item \makebox[\widthof{$\quadratic_\restliealgs$}][l]{$\quadratic_{\calW(n)}$} is the composite $F^{\calw(n)} V\epi F^{\calL(n)} V\epi \quadgrad{2}F^{\calL(n)} V\subseteq S^2V$.\end{enumerate}
 \end{prop}
 \begin{proof}
-Consider the case $\calw(n+1)$ for $n\geq1$. As $\quadratic_\calc$ vanishes except on quadratic grading 2, one only checks terms $[x,y]$, $\restn{x}$, and $x\lambda_i$ (a $\calU(n+1)$-operation, not the restriction):
+Consider the case $\calw(n+1)$ for $n\geq0$. As $\quadratic_\calc$ vanishes except on quadratic grading 2, one only checks terms $[x,y]$, $\restn{x}$, and $x\lambda_i$ (a $\calU(n+1)$-operation, not the restriction):
 \begin{alignat*}{2}
 \quadratic_{\calw(n+1)}([x,y])&=j_{\calw(n+1)}([{x_1}+{{x_2}},{y_1}+{{y_2}}]+[{x_1},{y_1}]+[{{x_2}},{{y_2}}])\\
 &=j_{\calw(n+1)}([{x_1},{{y_2}}]+[{{x_2}},{y_1}])=x\otimes y+y\otimes x,
@@ -3317,14 +3460,8 @@ Consider the case $\calw(n+1)$ for $n\geq1$. As $\quadratic_\calc$ vanishes exce
 which is precisely the representation of $[x,y]$ in $\quadgrad{2}F^{\calL(n+1)}V\subseteq V^{\otimes2}$. Similarly, $\quadratic_{\calw(n+1)}(x\lambda_i)$ vanishes (as $\calU(n+1)$-operations are linear), while $\quadratic_{\calw(n+1)}(\restn{x})$ equals $x\otimes x$ as desired. The other cases, including the case of $\calw(0)$, are barely any different.
 \end{proof}
 
-\subsection{Cohomology operations for simplicial (restricted) Lie algebras}\label{section: Cohomology operations for simplicial (restricted) Lie algebras}
-\todo{Explain the four Koszul algebras in these two sections}{Explain why you get the Koszul dualities
-\item refer to appendix for proof of the fact about Lie cohomology}
 
-\textbf{Probably move this to the end of the chapter on lie algs... but edit it here for convenience.}
 
-Old \textbf{spiel} from definition of operations on $H^*_{\calw(n)}$:
-By Priddy's work in \cite{PriddySimplicialLie.pdf}, Lie algebra cohomology has Steenrod operations and a product. However, the formulae given by Priddy (involving the $\overline{W}$-construction) are not obviously equivalent to what we have given here. However, it is not hard to check that the definition we have given using $\psi_\calw$ is equivalent to an analogous definition for Lie algebra cohomology (given in [placemarker in appendix]), and theorem [BLAH again] identifies these operations with Priddy's.
 
 
 \end{homotopy operations for PRLs}
@@ -6946,6 +7083,7 @@ If $L$ has bracket zero, then the differential on $\dual(\UEAX(L))$ is defined o
 \item search ``produces'' globally
 \item search steenrod, say homogeneous steenrod
 \item locally finite to of finite type
+\item search for LieOperad and replace as needed with liealgs and restliealgs
 \end{enumerate}
 \end{todolist}
 \begin{bibliog}
