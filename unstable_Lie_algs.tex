@@ -9,8 +9,8 @@
 \ooooo{Intro}
 \ifx\IncludeAll\undefined\else\renewcommand{\ooooo}[1]{\wooooo{#1}}\fi
 \ooooo{Contents Page}
-\ooooo{Conventions and notation}
-\ooooo{Pi-algebras and cohomology algebras}
+\wooooo{Conventions and notation}
+\wooooo{Pi-algebras and cohomology algebras}
 \ooooo{Bousfield-Kan sseq}\ooooo{connectivity results}
 \ooooo{Constructing homotopy operations}
 \ooooo{Constructing cohomology operations}
@@ -18,11 +18,11 @@
 \ooooo{Cohomology Operations for W and U}
 \ooooo{second quadrant homotopy}%
 \ooooo{Operations on the Bousfield-Kan spectral sequence}%
-\wooooo{Koszul complexes}
-\ooooo{Composite functor spectral sequences}
+\ooooo{Koszul complexes}
+\wooooo{Composite functor spectral sequences}
 \ooooo{Operations in composite functor spectral sequences}
-\wooooo{Calculations of HWn for n nonzero}
-\wooooo{Calculations of HW0}
+\ooooo{Calculations of HWn for n nonzero}
+\ooooo{Calculations of HW0}
 \ooooo{appendices}
 \ooooo{bibliog}
 
@@ -272,6 +272,8 @@
 \newcommand{\calmh}{\mathcal{M}_\textup{h}}
 \newcommand{\calMv}{\mathcal{M}_\textup{v}}
 \newcommand{\calMh}{\mathcal{M}_\textup{h}}
+\newcommand{\spheres}[1]{\textup{sph}(#1)}
+\newcommand{\cones}[1]{\textup{con}(#1)}
 
 
 \usepackage{framed}
@@ -1294,12 +1296,40 @@ As $h_{-1}^*V$ is the 0-cube with value $V^{-1}$, the tower of homotopy total fi
 \section{\textbf{Homotopy operations and cohomology operations}}
 Let $\calc$ be a category of universal graded algebras, monadic over $\vect{+}{r}$. Our goal is to understand construct operations on the homotopy and cohomology of an object of $s\calc$. In \S\ref{homotopy and pialgs} and \S\ref{cohomology and Halgs}, we set out dual frameworks in which these operations can be organised, and in \ref{quadratic part section} and \ref{subseq:The smash coproduct}, we will describe some useful chain level operations that we will use to construct cohomology operations in \S\ref{sec:Constructing cohomology operations}.
 
+\subsection{The spheres in $s\calC$ and their mapping cones}
 
-\subsection{Homotopy groups and $\calc$-$\Pi$-algebras}\label{homotopy and pialgs}
+
+
 %The forgetful functor $U^\calc:\calc\to \vect{+}{r}$ used to define the weak equivalences and fibrations in $s\calc$, allows us to consider any object $X\in s\calc$ as an object of $s\vect{+}{r}$. In particular, for any $X\in s\calc$ we may define homotopy groups
 Using the forgetful functor $U^\calc:\calc\to \vect{+}{r}$, for any $X\in s\calc$ we may define the homotopy groups $\pi_*X$ of $X$,
 %\[(\pi_*X)_{s_{r+1},\ldots,s_1}^{t}:=\pi_{s_{r+1}}(X^t_{s_r,\ldots,s_1}),\]
-which we view together as an object  of $\vect{+}{r+1}$. By the definition of the model structure, $\pi_*$ is a homotopical functor.
+which we view together as an object  of $\vect{+}{r+1}$. By the definition of the model structure, $\pi_*$ is a homotopical functor. Now for any set of indices $t\geq0$ and $s_{r+1},\ldots,s_1\geq0$, write:
+\begin{alignat*}{2}
+\mathbb{S}^{\calc,t}_{s_{r+1},\ldots,s_1}
+&:=
+F^\calc\mathbb{K}^{t}_{s_{r+1},\ldots,s_1};\textup{ and}
+\\
+% Left hand side
+C\mathbb{S}^{\calc,t}_{s_{r+1},\ldots,s_1}
+% Relation
+&:=
+% Right hand side
+F^\calc C\mathbb{K}^{t}_{s_{r+1},\ldots,s_1}%
+% Comment
+\end{alignat*}
+These are the \emph{spheres in $s\calc$} and \emph{cones on spheres in $s\calc$} respectively, and we write
+\begin{alignat*}{2}
+\spheres{\calc}&:=\bigl\{\mathbb{S}^{\calc,t}_{s_{r+1},\ldots,s_1}\,|\,t\geq0,\ s_{r+1},\ldots,s_1\geq0\bigr\} \textup{ and}
+\\
+\cones{\calc}&:=\bigl\{C\mathbb{S}^{\calc,t}_{s_{r+1},\ldots,s_1}\,|\,t\geq0,\ s_{r+1},\ldots,s_1\geq0\bigr\}
+\end{alignat*}
+for the sets of spheres and cones on spheres in $\calC$. Note that we were very literal here --- the \emph{spheres} of $s\calc$ are precisely this family of objects, and not the family, say, of cofibrant objects weakly equivalent to some $F^\calc\mathbb{K}^{t}_{s_{r+1},\ldots,s_1}$. These two sets are in bijection, and for $S\in \spheres{\calc}$ we write $CS\in\cones{\calc}$ for the corresponding cone.
+
+For any $S\in\spheres{\calc}$, there is an evident cofibration $\imath :S\to CS$. Indeed, for any sphere $S=\mathbb{S}^{\calc,t}_{s_{r+1},\ldots,s_1}$, $S$ contains  a distinguished normalized cycle, the \emph{fundamental cycle}:
+\[z\in (ZN_{s_{r+1}}S)_{s_r,\ldots,s_1}^t,\]
+and the cone $CS$ contains a distinguished normalized chain, the \emph{cone on $z$}:
+\[h\in (N_{s_{r+1}+1}S)_{s_r,\ldots,s_1}^t,\]
+and $\imath$ is defined by the requirement that $\imath(z)=d_0h$.
 For any $X\in s\calc$, by adjunction:
 %\[\hom_{s\calc}(F^\calc\mathbb{K}^t_{n,s_r,\ldots,s_1},X)\cong (ZN_nX)_{s_r,\ldots,s_1}^t\textup{ and }\hom_{s\calc}(F^\calc C\mathbb{K}^t_{n,s_r,\ldots,s_1},X)\cong (N_{n+1}X)_{s_r,\ldots,s_1}^t,\]
 %\begin{gather*}
@@ -1310,9 +1340,9 @@ For any $X\in s\calc$, by adjunction:
 \hom_{s\calc}(F^\calc\mathbb{K}^t_{s_{r+1},\ldots,s_1},X)&\cong (ZN_{s_{r+1}}X)_{s_r,\ldots,s_1}^t\makebox[0cm][l]{ and}\\
 \hom_{s\calc}(F^\calc C\mathbb{K}^t_{s_{r+1},\ldots,s_1},X)&\cong (N_{s_{r+1}+1}X)_{s_r,\ldots,s_1}^t,
 \end{alignat*}
-and indeed $i^*$ plays the same role as above, representing the differential of $N_*X$. Moreover, in the homotopy category corresponding to the above model category structure, $F^\calc\mathbb{K}^t_{n,s_r,\ldots,s_1}$ represents $\pi_n(\DASH)^t_{s_r,\ldots,s_1}$, c.f.\ \cite[\S1]{MR1089001} or \cite[\S3.1.1]{Blanc_Stover-Groth_SS.pdf}. For this reason we will refer to the objects $F^\calc\mathbb{K}^t_{n,s_r,\ldots,s_1}$ as the \emph{spheres} in $s\calc$.
+and indeed $i^*$ plays the same role as above, representing the differential of $N_*X$. Moreover, in the homotopy category corresponding to the above model category structure, $F^\calc\mathbb{K}^t_{n,s_r,\ldots,s_1}$ represents $\pi_n(\DASH)^t_{s_r,\ldots,s_1}$, c.f.\ \cite[\S1]{MR1089001} or \cite[\S3.1.1]{Blanc_Stover-Groth_SS.pdf}, which is why  we will refer to the objects $F^\calc\mathbb{K}^t_{n,s_r,\ldots,s_1}$ as spheres.
 
-%In light of this fact, the homotopy groups of $X$ possess
+\subsection{Homotopy groups and $\calc$-$\Pi$-algebras}\label{homotopy and pialgs}
 By virtue of the algebraic structure posessed by $X$, the homotopy groups $\pi_*X$ possess certain natural algebraic structure, that of a $\calc$-$\Pi$-algebra. Indeed, as any given homotopy group is a representable functor on the homotopy category, natural $N$-ary operations on homotopy groups
 \[(\pi_*X)_{s_{r+1}^{1},\ldots,s_{1}^{1}}^{t^1}\times\cdots \times(\pi_*X)_{s_{r+1}^{N},\ldots,s_{1}^{N}}^{t^N}\to (\pi_*X)_{s_{r+1},\ldots,s_{1}}^{t}\]
 are in bijective correspondence with elements of the group
@@ -5447,9 +5477,9 @@ Applying these observations in the very specific circumstances of this propositi
 \begin{Composite functor spectral sequences}
 
 \section{\textbf{Composite functor spectral sequences}}\label{Composite functor spectral sequences}
-The subject of this paper is to identify the derived functors $H^*_{\calw(0)}X:=\dual(\mathbb{L}_*Q^{\calw(0)}X)$, for $X\in\calw(0)$. More generally, we will now present a spectral sequence whose goal is to calculate $H^*_{\calw(n)}X$ for $X\in\calw(n)$. This will be a composite functor spectral sequence analogous to Miller's spectral sequence in \cite{MillerSullivanConjecture.pdf}. The factorization of $Q^{\calw(n)}$ we will use is of course 
+It will be important for us to identify the derived functors $H^*_{\calw(0)}X:=\dual(\mathbb{L}_*Q^{\calw(0)}X)$ for $X\in\calw(0)$, in order to determine the  $E_2$-page of the Bousfield-Kan spectral sequence for a connected simplicial commutative algebra. More generally, we will now present a spectral sequence whose goal is to calculate $H^*_{\calw(n)}X$ for $X\in\calw(n)$. This will be a composite functor spectral sequence analogous to Miller's spectral sequence in \cite[\S2]{MillerSullivanConjecture.pdf}. The factorization of $Q^{\calw(n)}$ we will use is of course 
 \[Q^{\calw(n)}=\left(\calw(n)\overset{Q^{\calU(n)}}{\to}\calL(n)\overset{Q^{\calL(n)}}{\to}\vect{+}{n}\right)\]
-There is an added challenge in this context --- indeed, the available factorization of $Q^{\calw(n)}$ is through a non-abelian category. Thus, the standard technology for composite functor spectral sequences does not apply, and we must use Blanc and Stover's methods \cite{Blanc_Stover-Groth_SS.pdf}. They observe that the left derived functors $\mathbb{L}_*Q^{\calU(n)}X$ are calculated as the homotopy groups of a simplicial object in $\calL(n)$, namely $Q^{\calU(n)}B^{\calw(n)}X$. As such, they have the structure of a $\calL(n)\textup{-$\Pi$-algebra}$, i.e.\ they form an object of $\calw(n+1)$.  After verifying that the functor $Q^{\calU(n)}$ satisfies the requisite acyclicity condition (indeed it preserves free objects), one may apply \cite[Theorem 4.4]{Blanc_Stover-Groth_SS.pdf}: there is a spectral sequence, with $E_r\in\vect{+}{n+2}$,
+There is an added challenge in this context --- indeed, the available factorization of $Q^{\calw(n)}$ is through a non-abelian category. Thus, the standard technology for composite functor spectral sequences does not apply, and we must use Blanc and Stover's methods \cite{Blanc_Stover-Groth_SS.pdf}. They observe that the left derived functors $\mathbb{L}_*Q^{\calU(n)}X$ are calculated as the homotopy groups of a simplicial object in $\calL(n)$, namely $Q^{\calU(n)}B^{\calw(n)}X$, and as such, they have the structure of a $\calL(n)\textup{-$\Pi$-algebra}$. That is, they form an object of $\calw(n+1)$.  After verifying that the functor $Q^{\calU(n)}$ satisfies the requisite acyclicity condition (indeed it preserves free objects), one may apply \cite[Theorem 4.4]{Blanc_Stover-Groth_SS.pdf}: there is a spectral sequence, with $E_r\in\vect{+}{n+2}$,
 \[(E^2)_{s_{n+2},\ldots,s_1}^t=((H_*^{\calw(n+1)})(\mathbb{L}_*Q^{\calU(n)})X)_{s_{n+2},\ldots,s_1}^t\implies ((H_*^{\calw(n)})X)_{s_{n+2}+s_{n+1},s_n,\ldots,s_1}^t\]
 \begin{prop}
 For $X\in s\calw(n)$, the groups $\mathbb{L}_*Q^{\calU(n)}X$ are isomorphic to $H_*^{\calU(n)}X$, in which we view $X$ as an element of $s\calU(n)$.
@@ -5457,9 +5487,9 @@ For $X\in s\calw(n)$, the groups $\mathbb{L}_*Q^{\calU(n)}X$ are isomorphic to $
 \begin{proof}
 We may take $X$ to be almost free in $s\calw(n)$, and calculate $\mathbb{L}_*Q^{\calU(n)}X$ simply as $\pi_*Q^{\calU(n)}X$. Then $X$, viewed as an object of $s\calU(n)$, is levelwise free, but potentially not almost free. We need to show then that $\pi_*Q^{\calU(n)}X$ does indeed calculate $H_*^{\calU(n)}X$ whenever $X\in s\calU(n)$ is \emph{levelwise} free, which is to say that the map $Q^{\calU(n)}B^{\calU(n)}X\to Q^{\calU(n)}X$ is a weak equivalence in $s\vect{}{}$. For this, $Q^{\calU(n)}B^{\calU(n)}X$ is the diagonal of a bisimplicial vector space, say $Q^{\calU(n)}B_q^{\calU(n)}X_p$, and we use the spectral sequence arising from filtering in the $p$ direction. As $X$ is levelwise free, the $E^1$-page is concentrated in $q=0$, and is isomorphic to the chain complex $N_p(Q^{\calU(n)}X)$.
 \end{proof}
-We will prefer to work with the dual spectral sequence, (\cancel{which is} equivalent, as we have specified that elements of $\calw(n)$ are  of finite type), which has $E_r\in\vect{n+2}{+}$, and we may write as:
+We will prefer to work with the dual spectral sequence, which has $E_r\in\vect{n+2}{+}$:
 \[(E_2)^{s_{n+2},\ldots,s_1}_t=((H^*_{\calw(n+1)})(H_*^{\calU(n)})X)^{s_{n+2},\ldots,s_1}_t\implies ((H^*_{\calw(n)})X)^{s_{n+2}+s_{n+1},s_n,\ldots,s_1}_t\]
-These are the homology and cohomology spectral sequences for a bisimplicial abelian group (precisely, an object of $ss\vect{+}{n}$), and we will need to work with this object directly. Before we do, we will give some general recollections and constructions relevant to the spectral sequence.
+These two spectral sequences are respectively the homotopy and cohomotopy spectral sequences of a certain object of $ss\vect{+}{n}$, which we will need to work with directly. Before we do, we will recall Blanc and Stover's constructions, and imbue them with certain extra structure that will be reflected in the spectral sequence.
 
 \subsection{The Blanc-Stover comonad in categories monadic over $\Ftwo $-vector spaces}
 Fix an algebraic category $\calc$, monadic over a category of graded $\Ftwo $-vector spaces $\vect{}{}$. % --- although we intend to work over a category of graded vector spaces, but for now we opt for notational simplicity \textbf{do we really need to do that?}). 
