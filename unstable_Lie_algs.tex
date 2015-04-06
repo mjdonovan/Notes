@@ -1,6 +1,6 @@
 % !TEX root = z_output/unstable_Lie_algs.tex
 \documentclass[10pt]{amsart} %\renewcommand{}{1.4}
-\newcommand{\IncludeAll}{}% <-----
+\newcommand{\xIncludeAll}{}% <-----
 \newcommand{\ShrinkPages}{}%
 \newcommand{\xPostponeContents}{}%
 \ifx\ShrinkPages\undefined\else\usepackage[paperheight=160mm,paperwidth=160mm]{geometry}\fi%220/160
@@ -9,7 +9,7 @@
 \ooooo{Intro}
 \ifx\IncludeAll\undefined\else\renewcommand{\ooooo}[1]{\wooooo{#1}}\fi
 \ooooo{Contents Page}
-\wooooo{Conventions and notation}
+\ooooo{Conventions and notation}
 \wooooo{Pi-algebras and cohomology algebras}
 \ooooo{Bousfield-Kan sseq}\ooooo{connectivity results}
 \ooooo{Constructing homotopy operations}
@@ -20,7 +20,7 @@
 \ooooo{Operations on the Bousfield-Kan spectral sequence}%
 \ooooo{Koszul complexes}
 \wooooo{Composite functor spectral sequences}
-\ooooo{Operations in composite functor spectral sequences}
+\wooooo{Operations in composite functor spectral sequences}
 \ooooo{Calculations of HWn for n nonzero}
 \ooooo{Calculations of HW0}
 \ooooo{appendices}
@@ -131,7 +131,7 @@
 \DeclareMathOperator{\sh}{sh}
 \DeclareMathOperator{\intHom}{\underline{Hom}}
 \DeclareMathOperator{\Frac}{frac}
-
+\DeclareMathOperator{\homog}{hg}
 
 %>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 %<<<  Mathematical Symbols  <<<
@@ -1296,7 +1296,7 @@ As $h_{-1}^*V$ is the 0-cube with value $V^{-1}$, the tower of homotopy total fi
 \section{\textbf{Homotopy operations and cohomology operations}}
 Let $\calc$ be a category of universal graded algebras, monadic over $\vect{+}{r}$. Our goal is to understand construct operations on the homotopy and cohomology of an object of $s\calc$. In \S\ref{homotopy and pialgs} and \S\ref{cohomology and Halgs}, we set out dual frameworks in which these operations can be organised, and in \ref{quadratic part section} and \ref{subseq:The smash coproduct}, we will describe some useful chain level operations that we will use to construct cohomology operations in \S\ref{sec:Constructing cohomology operations}.
 
-\subsection{The spheres in $s\calc$ and their mapping cones}
+\subsection{The spheres in $s\calc$ and their mapping cones}\label{spheres and cones}
 
 
 
@@ -5493,8 +5493,7 @@ These two spectral sequences are respectively the homotopy and cohomotopy spectr
 
 \subsection{The Blanc-Stover comonad in categories monadic over $\Ftwo $-vector spaces}
 Fix an algebraic category $\calc$, monadic over a category of graded $\Ftwo $-vector spaces $\vect{}{}$. % --- although we intend to work over a category of graded vector spaces, but for now we opt for notational simplicity \textbf{do we really need to do that?}). 
-As we are working over a category of vector spaces, rather than a category of graded sets, we can refine Blanc and Stover's definition  of a useful comonad on $s\calc$. While Blanc and Stover use the notation `$W$' in \cite{Blanc_Stover-Groth_SS.pdf} and $\scrV$ in \cite{StoverVanKampen.pdf}, we will use the symbol $\BSW$, to avoid notational confusion in the present work. \textbf{{work on this!}}
-
+As we are working over a category of vector spaces, rather than a category of graded sets, we can find further structure on  the following comonad on $s\calc$ defined by Blanc and Stover. While they  use the notation `$W$' in \cite{Blanc_Stover-Groth_SS.pdf} and `$\scrV$' in \cite{StoverVanKampen.pdf}, we will use the symbol `$\BSW$' to avoid notational confusion in the present work.
 %\begin{shaded}\tiny
 %It will help to fix a little notation. First, for $n\geq0$, let $\commentmathbb{K}^n\in \complexes \vect{}{}$ and $C\commentmathbb{K}^n\in \complexes \vect{}{}$ be the chain complexes
 %\[(\commentmathbb{K}^n)_j=\begin{cases}
@@ -5516,34 +5515,71 @@ As we are working over a category of vector spaces, rather than a category of gr
 %Corresponding to the above structure, $S^n_{\calc}$ contains an element $z$ in dimension $n$, $CS^n_{\calc}$ contains an element $h$ in dimension $n+1$, there is a map $\imath:S^n_{\calc}\to CS^n_{\calc}$ sending $z$ to $d_0h$. For $L\in s\calc$, $\imath^*$ represents the differential under the isomorphisms
 %\[\hom_{s\calc}(S_\calc^n,L)\cong ZN_nL,\textup{ and }\hom_{s\calc}(CS_\calc^n,L)\cong N_{n+1}L.\]
 %\end{shaded}
-
-In this context [\textbf{Change} all $S_\calc^n$ to the new notation], Blanc-Stover's comonad $\BSW$, applied to $L\in s\calc$, is the pushout
+In our context, Blanc-Stover's comonad $\BSW$, applied to $L\in s\calc$, is the pushout
+%\[\xymatrix@R=4mm{
+%\bigsqcup_{n\geq0}\bigsqcup_{N_{n+1}L}S_\calc^n
+%\ar[r]\ar[d]^-{\bigsqcup\bigsqcup\imath}
+%&%r1c1
+%\bigsqcup_{n\geq0}\bigsqcup_{ZN_{n}L}S_\calc^n\ar[d]\\%r1c2
+%\bigsqcup_{n\geq0}\bigsqcup_{N_{n+1}L}CS_\calc^n
+%\ar[r]&%r2c1
+%\BSW L%r2c2
+%}\]
 \[\xymatrix@R=4mm{
-\bigsqcup_{n\geq0}\bigsqcup_{N_{n+1}L}S_\calc^n
-\ar[r]\ar[d]^-{\bigsqcup\bigsqcup\imath}
+\coprod_{\substack{S\in\spheres{\calc}\\y:CS\rightarrow L}}S_{\langle y\circ\imath\rangle}
+\ar[r]\ar[d]%^-{\bigsqcup\bigsqcup\imath}
 &%r1c1
-\bigsqcup_{n\geq0}\bigsqcup_{ZN_{n}L}S_\calc^n\ar[d]\\%r1c2
-\bigsqcup_{n\geq0}\bigsqcup_{N_{n+1}L}CS_\calc^n
+\coprod_{\substack{S\in\spheres{\calc}\\x:S\rightarrow L}}S_{\langle x\rangle}\ar[d]\\%r1c2
+\coprod_{\substack{S\in\spheres{\calc}\\y:CS\rightarrow L}}CS_{\langle y\rangle}
 \ar[r]&%r2c1
 \BSW L%r2c2
 }\]
-where under the top horizontal map, the copy of $S^n_\calc$ corresponding to $x\in N_{n+1}L$ maps identically onto the copy of $S^n_\calc$ corresponding to $dx=\imath^*x$. It will be useful to write $h_x$ for the element of $\BSW L$ corresponding to $h$ in the copy of $CS^n_\calc$ corresponding to $x\in N_{n+1}L$, and similarly, $z_x$ for the element of $\BSW L$ corresponding to $z$ in the copy of $S^n_\calc$ corresponding to $x\in ZN_{n}L$. The comonad structure maps $\epsilon:\BSW L\to L$ and $\Delta:\BSW L\to \BSW^2L$ are then determined by the equations
-\[\epsilon(h_x)=x,\ \epsilon(z_y)=y,\ \Delta(h_x)=h_{h_x},\textup{ and }\Delta(z_y)=z_{z_y}\textup{ for $x\in N_{n+1}L$ and $y\in ZN_nL$.}\]
+The subscripts are just notation to distinguish multiple copies of $S$ and $CS$ for each sphere $S\in\spheres{\calc}$.
+The top horizontal map sends the sphere $S_{\langle y\circ\imath\rangle}$ isomorphically onto \emph{itself}. The left vertical map is the coproduct of copies of the inclusion $\imath:S\to CS$. The effect of taking this pushout is to modify the coproduct $S_{\langle x\rangle}$ of spheres by attaching the  cone on $S_{\langle x\rangle}$  once for each nullhomotopy of $x\in L$.
 
-Moreover, $\BSW L$ is homotopy equivalent to a coproduct of spheres. Indeed, for each $n$, let $B_nL=\im (d:N_{n+1}L\to ZN_nL)$, and choose a section $h_0$ of the surjection $d:N_{n+1}L\to B_nL$. Then $\BSW L$ contains the contractible subobject $C_0:=\bigsqcup_n\bigsqcup_{h\in \im (h_0)} CS^n_{h_0(f)}$, and $\BSW L/C_0$ is homotopic to a wedge of spheres:
-%\[\BSW L/C_0\cong \left(\bigsqcup_{h\in N_{n+1}L\setminus\im (h_0)}CS^n_h/\partial(CS^n_h)\right) \sqcup\left(\bigsqcup_{f\in ZN_nL\setminus B_nL}S^n_f\right)\]
-\[\BSW L/C_0\cong \left(\bigsqcup_{N_{n+1}L\setminus\im (h_0)}F^\calc (CS^n_{\vect{}{}}/\partial(CS^n_{\vect{}{}}))\right) \sqcup\left(\bigsqcup_{f\in ZN_nL\setminus B_nL}S^n_\calc\right)\]
-We would like to find a \emph{subspace} of $\pi_*(\BSW L)$ which freely generates it as a $\calc\textup{-$\Pi$-algebra}$. Even better, we have the following rendition of [Stover? Blanc-Stover?]. We give the proof since we will need to be explicit about some parts of it in what follows.
+It will be useful to write $h_y$ for the image in $N_*\BSW L$ of $h\in N_*CS_{\langle y\rangle}$, and similarly, $z_x$ for image in $ZN_*\BSW L$ of $z\in ZN_*S_{\langle x\rangle}$. Indeed, recalling the discussion in \S\ref{spheres and cones}, the data of $S\in\spheres{\calc}$ with a map $S\to L$ is equivalent to the data of a homogeneous normalized cycle of $L$, and similarly, $S\in\spheres{\calc}$ with a map $CS\to L$ is equivalent to a homogeneous normalized chain of $L$ which is \emph{not in dimension zero}. From this viewpoint, if we write $\homog (ZN_*L)$ for the homogeneous normalized cycles and $\homog (N_{\geq1}L)$ for the homogeneous normalized chains of $L$ not in dimension zero, the pushout may be written as
+\[\xymatrix@R=4mm{
+\coprod_{y\in \homog (N_{\geq1}L)}S_{\langle dy\rangle}
+\ar[r]\ar[d]%^-{\bigsqcup\bigsqcup\imath}
+&%r1c1
+\coprod_{x\in \homog (ZN_*L)}S_{\langle x\rangle}\ar[d]\\%r1c2
+\coprod_{y\in \homog (N_{\geq1}L)}CS_{\langle y\rangle}
+\ar[r]&%r2c1
+\BSW L%r2c2
+}\]
+
+
+
+We'll now show that $\BSW L$ is homotopy equivalent to a coproduct of spheres. Indeed,  let \[\homog(BN_*L)=\im \bigl(d:\homog(N_{\geq1}L)\to \homog(ZN_*L)\bigr),\]
+ and choose a section $f$ of the surjection $d:\homog(N_{\geq1}L)\epi \homog(BN_*L)$. Then $\BSW L$ contains a contractible subobject, the pushout
+\[\xymatrix@R=4mm{
+\coprod_{x\in \homog(BN_*L)}S_{\langle x\rangle}
+\ar[r]\ar[d]%^-{\bigsqcup\bigsqcup\imath}
+&%r1c1
+\coprod_{x\in \homog(BN_*L)}S_{\langle x\rangle}\ar[d]\\%r1c2
+\coprod_{x\in \homog(BN_*L)}CS_{\langle f(x)\rangle}
+\ar[r]&%r2c1
+C_0%r2c2
+}\]
+whose inclusion is a cofibration.  Then
+\[\BSW L/C_0 \cong \left(\bigsqcup_{y\in \homog(N_{\geq1}L)\setminus\im (f)}CS_{\langle y\rangle}/S\right) \sqcup\left(\bigsqcup_{x\in \homog(ZN_*L)\setminus \homog(BN_*L)}S^n_\calc\right)\]
+where we have written `$A/B$' for the pushout of a cofibration $B\to A$ along the map $B\to0$, using the cofibrations $C_0\to \BSW L$ and $\imath:S\to CS_{\langle y\rangle}$.
+As $CS/S$ is \emph{isomorphic} to the  sphere of one dimension higher than $S$ (consider the construction of \S\ref{The Dold-Kan correspondence}), this shows that $\BSW L$ is homotopic to a wedge of spheres.
+
+The promised comonad structure maps $\epsilon:\BSW L\to L$ and $\Delta:\BSW L\to \BSW^2L$ are determined by:
+\[\epsilon(h_x)=x,\ \epsilon(z_y)=y,\ \Delta(h_x)=h_{h_x},\textup{ and }\Delta(z_y)=z_{z_y}\textup{ for $x\in N_{n+1}L$ and $y\in ZN_nL$.}\]
+We would like to find a sub\emph{space} of $\pi_*(\BSW L)$ which freely generates it as a $\calc\textup{-$\Pi$-algebra}$. Even better, we have the following rendition of an observation used in  \cite[Proof of theorem 4.2]{Blanc_Stover-Groth_SS.pdf}. We give the proof since we will need to be explicit about some parts of it in what follows.
 \begin{prop}
-For $L\in s\calc$ (\textbf{s, right?}), $\pi_*(B^{\BSW}L)$ is an almost free (monadic over $\vect{}{}$) simplicial $\calc\textup{-$\Pi$-algebra}$ weakly equivalent to $\pi_*(L)$.
+For $L\in s\calc$, $\pi_*(B^{\BSW}L)$ is an almost free (monadic over $\vect{}{}$) simplicial $\calc$-$\Pi$-algebra weakly equivalent to $\pi_*(L)$.
 \end{prop}
+\noindent This differs from the observation in \cite[Proof of theorem 4.2]{Blanc_Stover-Groth_SS.pdf}, in that we show that all the structure maps of $\pi_*(B^{\BSW}L)\in s\calc\PiAlg$ except for $d_0$ preserve \emph{vector spaces} of generators, rather than \emph{sets} of generators.
 \begin{proof}
 That the augmentation to $\pi_*(L)$ is a weak equivalence follows from Stover's result \cite[2.7]{StoverVanKampen.pdf}. The only change from Blanc-Stover is that $\pi_*(B^{\BSW}L)$ is almost free over the category $\vect{}{}$, rather than the category of pointed sets.
-For a set $S$, write $\Ftwo \langle S\rangle$ for the vector space generated by the symbols $\underline{s}$ for $s\in S$. There is a natural map $\Ftwo \langle d\rangle :\Ftwo \langle N_{n+1}L\rangle \to \Ftwo \langle ZN_nL\rangle $, and a natural monomorphism $\alpha:\ker(\Ftwo \langle d\rangle)\to \pi_*(\BSW L)$, defined by
-\[\alpha(\underline{x_1}-\underline{x_0})=[h_{x_1}-h_{x_0}],\textup{ for $x_1,x_2\in N_{n+1}L$ with $dx_1=dx_2$}.\]
-Moreover, there is a natural map $\beta:\Ftwo [ZN_nL]\to\pi_*(\BSW L)$ (which is not monomorphic) defined by
-\[\beta(\underline{x})=[z_{x}],\textup{ for $x\in ZN_{n}L$}.\]
-From the above expression for $\BSW L/C_0$, one sees that $\im (\alpha)$ and $\im (\beta)$ are linearly independent subspaces of $\pi_*(\BSW L)$, and $\pi_*(\BSW L)$ is free on $\im (\alpha)\oplus\im (\beta)$. From this description it is clear that the generating subspaces are preserved by maps in the image of $\BSW $. Thus, every face and degeneracy map except for $s_0$ and $d_0$ preserves the generators.
+For a set $A$, write $\Ftwo \{A\}$ for the vector space generated by the symbols $\underline{a}$ for $a\in A$. There is a natural map $d_*:\Ftwo \{\homog( N_{\geq1}L)\} \to \Ftwo \{\homog( ZN_*L)\} $, and a natural monomorphism $\alpha:\ker(d_*)\to \pi_*(\BSW L)$, defined by
+\[\alpha(\underline{x_1}-\underline{x_0})=\overline{h_{x_1}-h_{x_0}},\textup{ for $x_1,x_2\in N_{\geq1}L$ with $dx_1=dx_2$}.\]
+Moreover, there is a natural map $\beta:\Ftwo \{\homog( ZN_*L)\}\to\pi_*(\BSW L)$ (which is not monomorphic) defined by
+\[\beta(\underline{x})=\overline{z_{x}},\textup{ for $x\in \homog( ZN_*L)$}.\]
+From the above expression for $\BSW L/C_0$, one sees that $\im (\alpha)$ and $\im (\beta)$ are linearly independent subspaces of $\pi_*(\BSW L)$, and that $\pi_*(\BSW L)$ is free on $\im (\alpha)\oplus\im (\beta)$. From this description it is clear that the generating subspaces are preserved by maps in the image of $\BSW $. Thus, every face and degeneracy map except for $s_0$ and $d_0$ in $\pi_*(B^{\BSW}L)\in s\calc\PiAlg$ preserves the generators.
 
 In order that $s_0$ preserves generators, we note that the diagonal of $\BSW$ sends the subspaces $\im (\alpha_L)$ and $\im (\beta_L)$ into the subspaces $\im (\alpha_{\BSW L})$ and $\im (\beta_{\BSW L})$. That $\im (\beta_L)$ maps into $\im (\beta_{\BSW L})$ is immediate. For $\im (\alpha_L)$, the image of $h_{x_1}-h_{x_0}$ under the diagonal is $h_{h_{x_1}}-h_{h_{x_0}}$, which is in $\im(\alpha_{\BSW L})$, since $dh_{x_1}=z_{dx_1}=z_{dx_0}=dh_{x_0}$.
 \end{proof}
