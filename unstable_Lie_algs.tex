@@ -1,6 +1,6 @@
 % !TEX root = z_output/unstable_Lie_algs.tex
 \documentclass[11pt]{amsart} %\renewcommand{}{1.4}
-\newcommand{\IncludeAll}{}% <-----
+\newcommand{\xIncludeAll}{}% <-----
 \newcommand{\ShrinkPages}{}%
 \newcommand{\xPostponeContents}{}%
 \ifx\ShrinkPages\undefined\else\usepackage[paperheight=160mm,paperwidth=160mm]{geometry}\fi%220/160
@@ -2793,7 +2793,10 @@ The following lemma assures us that the $\Lambda$-Adem relations make sense in \
 \label{lemOnAdemChangeInMLambdaPlain}
 If $\produces{I}{J}{\Lambda}$, then $\minDimDelta(I)\geq\minDimDelta(J)$, and $J$ does not contain zero unless $I$ does.
 \end{lem}
-These operations generate all of the operations in each of the categories $\Lambda(\LieOperad)\PiAlg$ and $\Gamma(\LieOperad)\PiAlg$, and the relations presented here are sufficient. Indeed, although we do not have a Hilton-Milnor theorem available, from \cite[Theorem 8.8 and proof]{CurtisSimplicialHtpy.pdf} and the original work \cite{6Author.pdf} we gather:
+These operations generate all of the operations in each of the categories $\Lambda(\LieOperad)\PiAlg$ and $\Gamma(\LieOperad)\PiAlg$, and the relations presented here are sufficient. 
+
+
+From  \cite[Theorem 8.8 and proof]{CurtisSimplicialHtpy.pdf} and \cite{6Author.pdf} we gather:
 \begin{prop}
 \label{Lie homotopy operations}
 For $V\in\vect{}{1}$,   choose a homogeneous basis of $V$, and construct from it a monomial  basis $B$ of $\Lambda(\LieOperad)V$ (such as any choice of Hall basis). Then:
@@ -2805,6 +2808,28 @@ F^{\Gamma(\LieOperad)\PiAlg}V&=\Ftwo \left\{\lambda_Ib\ \middle|\ \genfrac{}{}{0
 &=\Ftwo \left\{\lambda_I\bigl(\restnRepeated{b}{r}\bigr)\ \middle|\ \genfrac{}{}{0pt}{}{b\in B_t\textup{, $I$ $\Lambda$-admissible with }\minDimDelta(I)< t,}{\textup{$r\geq0$}}\right\}.
 \end{align*}
 \end{prop}
+We'll now emulate  Goerss' method of calculating the cohomology of GEMs (c.f.\ \S\ref{The example of simplicial commutative F2-algebras}, \cite{GoerssHiltonMilnor.pdf} and \citeBOX[\S11]{MR1089001}) by giving a Hilton-Milnor decomposition for the calculation of the free $\liealgs$-$\Pi$-algebra on a finite-dimensional object of $\vect{}{1}$, using \cite[Proposition 3.1]{Schles-SimpLieRing.pdf}. For any $i\geq0$, write $\Sigma^i\Ftwo \in\vect{}{1}$ for a one-dimensional vector space concentrated in homological dimension $i$.
+
+For any finite collection of indices $i_1,\ldots,i_n\geq 0$, we would like to calculate:
+\[F^{\liealgs\PiAlg}(\Sigma^{i_1}\Ftwo\oplus\cdots \oplus\Sigma^{i_n}\Ftwo)=\pi_*F^\liealgs(\mathbb{K}_{i_1}\oplus\cdots \oplus \mathbb{K}_{i_n}).\]
+We obtain a decomposition of $\pi_*F^\liealgs(\mathbb{K}_{i_1}\oplus\cdots \oplus \mathbb{K}_{i_n})$ as follows. For any monomial $b$ is the free Lie algebra on $\{x_1,\ldots,x_n\}$ and collection of $n$ vector spaces $A_{1},\ldots,A_n$, there is a corresponding tensor product $w_b(A_{1},\ldots,A_n)$. For example, one defines
+\[w_{[[x_2,x_1],x_3]}:=A_2\otimes A_1\otimes A_3.\]
+Moreover, for each monomial $b$ there is an evident function \[w_b(A_1,\ldots,A_n)\to F^\liealgs(A_1\oplus\cdots\oplus A_n),\]
+given in our example by $a_2\otimes a_1\otimes a_3\mapsto [[a_2,a_1],a_3]$.
+
+Iteration of the procedure described in \citeBOX[\S4.3]{Neisendorfer.pdf}, using the formula of \cite[Proposition 3.1]{Schles-SimpLieRing.pdf}, we obtain a Hall basis $B$ of the free Lie algebra on $\{x_1,\ldots,x_n\}$, with the property that the resulting map
+\[\bigoplus_{b\in B}F^{\liealgs}w_b(A_1,\ldots,A_n)\to F^\liealgs(A_1\oplus\cdots\oplus A_n)\]
+is an isomorphism, natural  in $A_1,\ldots,A_n$.
+
+Returning to the calculation desired, we have an isomorphism in $s\vect{}{1}$:
+\[\bigoplus_{b\in B}F^{\liealgs}w_b(\mathbb{K}_{i_1},\ldots,\mathbb{K}_{i_n})\to F^\liealgs(\mathbb{K}_{i_1}\oplus\cdots \oplus \mathbb{K}_{i_n}).\]
+Moreover, if we follow \citeBOX[\S11]{MR1089001} by writing $j_k(b)$ for the number of appearances of $x_k$ in the monomial $b$, there is a homotopy equivalence
+\[w_b(\mathbb{K}_{i_1},\ldots,\mathbb{K}_{i_n})\simeq \mathbb{K}_{\sum_{k=1}^n J_k(b)i_k}.\]
+Thus, on homotopy there is a decomposition:
+\[\bigoplus_{b\in B}F^{\liealgs\PiAlg}\Sigma^{(\sum_{k=1}^n j_k(b)i_k)}\Ftwo\to F^{\liealgs\PiAlg}(\Sigma^{i_1}\Ftwo\oplus\cdots \oplus\Sigma^{i_n}\Ftwo),\]
+and evidently the fundamental class of a summand on the left maps to the corresponding Lie bracket of fundamental classes on the right. This proves the first part of proposition \ref{Lie homotopy operations}.
+
+
 \end{Constructing homotopy operations}
 \begin{Constructing cohomology operations}
 \section{\textbf{Constructing cohomology operations}}\label{sec:Constructing cohomology operations}
@@ -3070,7 +3095,7 @@ If $\produces{I}{J}{\Palg}$, then $\minDimP(J) \geq \minDimP(I)$, with strict in
 \end{lem}
 The main theorem of Goerss' memoir is that these operations generate all of the operations in the category $\algs\HAlg$, and that all  the relations between them  are implied by those presented here. In \cite[Chapter V]{MR1089001}, Goerss shows that the listed operations completely capture the cohomology of an object $K^{\algs}\mathbb{K}_n$. He proves a Hilton-Milnor theorem \cite{GoerssHiltonMilnor.pdf}, which he uses in \citeBOX[\S11]{MR1089001} to bootstrap up to a calculation of the cohomology of any GEM in $s\algs$, namely \cite[Theorem I]{MR1089001}. The result states that whenever $V\in \vect{1}{}$,  is a  vector space of finite type, not only is 
 $F^{\algs}V$
-generated by $V$ under the operations of proposition \ref{omnibus on coh of simp algs}, it is as large as is conceivable given the relations presented. We will present in proposition \ref{partialgoerss} a partial version of his result.
+generated by $V$ under the operations of proposition \ref{omnibus on coh of simp algs}, it is as large as is conceivable given the relations presented. We will present, in proposition \ref{partialgoerss}, a partial version of his result.
 
 It is  interesting to observe that $\Palg$, the Steenrod algebra for commutative algebras, is
 in fact \emph{Koszul dual} (c.f.\ \cite{PriddyKoszul.pdf}) to $\deltaalg$, the algebra which (almost) acts on the homotopy of a simplicial algebra. Indeed, Goerss \emph{calculates} $\Palg$ as the Koszul dual of $\deltaalg$, using a reverse Adams spectral sequence due to Miller \cite{MillerSullivanConjecture.pdf}. We will explore this relationship further when we consider the Bousfield-Kan spectral sequence.
@@ -3306,9 +3331,10 @@ is \emph{forced to be zero} by \emph{(\ref{Sq unstable vanishing})} alone except
 
 If a non-empty sequence $I$  is \emph{$\Sq$-admissible}, we have 
 \[\minDimDelta(I)=e(I)=i_\ell-i_{\ell-1}-\cdots -i_1,\]
-the Serre excess of $I$. We now have enough notation available to describe the category $\restliealgs\HAlg$, using Priddy's calculation \citeBOX[6.1]{PriddySimplicialLie.pdf}. The results are similar to those in \S\ref{Homotopy operations for simplicial commutative algebras} on the category $\algs\PiAlg$.
+the Serre excess of $I$. We now have enough notation available to describe the category $\restliealgs\HAlg$, using Priddy's calculations. The results are similar to those in \S\ref{Homotopy operations for simplicial commutative algebras} on the category $\algs\PiAlg$.
 Firstly, there is again  a simple \emph{Hilton-Milnor theorem}:
 \begin{prop}
+\label{Prop on cohomology of product of finite lie gems}
 Suppose that $K_1$ and $K_2$ are finite GEMs in $s\restliealgs$. Then $H^*_\restliealgs K_1$ and $H^*_\restliealgs K_2$ in $\restliealgs\HAlg$ are of finite type, and their coproduct
 $H^*_\restliealgs(K_1\times K_2)$ in $\restliealgs\HAlg$ may be calculated as the non-unital (grading shifted) commutative algebra coproduct of $H^*_\restliealgs K_1$ and $H^*_\restliealgs K_2$.
 \end{prop}
@@ -3332,59 +3358,16 @@ H^*_{\bar{W}}(K_1\times K_2)
 % Right hand side
 H^*_{\bar{W}}K_1\otimes H^*_{\bar{W}}K_2.
 \end{alignat*}
-This containment in in fact an equality when $H^*_{\bar{W}}K_1 $ and $H^*_{\bar{W}}K_2$ are both of finite type, in which case $H^*_{\bar{W}}(K_1\times K_2)$ is also of finite type, and the isomorphism is proved. Thus, by induction on the total number of factors $K^{\restliealgs}\mathbb{K}_n$ of $K_1$ and $K_2$, we only need to check that $H^*_{\bar{W}}K^{\restliealgs}\mathbb{K}_n$ is of finite type for any $n\geq0$. This is implied by \ref{} ???? the next calc.
+This containment in in fact an equality when $H^*_{\bar{W}}K_1 $ and $H^*_{\bar{W}}K_2$ are both of finite type, in which case $H^*_{\bar{W}}(K_1\times K_2)$ is also of finite type, and the isomorphism is proved. Thus, by induction on the total number of factors $K^{\restliealgs}\mathbb{K}_n$ of $K_1$ and $K_2$, we only need to check that $H^*_{\bar{W}}K^{\restliealgs}\mathbb{K}_n$ is of finite type for any $n\geq0$. This is implied by Priddy's calculation, proposition \ref{calc of restliecoh on single EMobject}.
 \end{proof}
-
-\vfil\pagebreak
-
-%This may be read as a theorem about coproducts of free $\algs$-$\Pi$-algebras, since $\pi_*(A_1\sqcup A_2)$ is the coproduct in $\algs\PiAlg$ of $\pi_*(A_1)$ and $\pi_*(A_2)$, the theorem being that coproducts of free $\algs$-$\Pi$-algebras may be taken in the category $\algs$.
-\noindent After giving the calculation on a single sphere, the homotopy of finite models will be determined by this theorem and the Cartan formula. The structure defining $\algs\PiAlg$ is then well understood in light of:
+\noindent After giving the calculation on a single Eilenberg-Mac Lane object, the cohomology of finite GEMs, and thus the category $\restliealgs\HAlg$ is determined by proposition \ref{Prop on cohomology of product of finite lie gems} and the Cartan formula. The structure defining $\algs\PiAlg$ is then well understood in light of:
 \begin{prop}[{\citeBOX[6.1]{PriddySimplicialLie.pdf}}]
-\noindent For $n\geq0$, let $\imath_n$ be the fundamental class in $\pi_n(\mathbb{S}^\algs_n)$. There  are isomorphisms of non-unital commutative algebras:
-\begin{alignat*}{2}
-\pi_*(\mathbb{S}^\algs_0)
-&\cong
-S(\CommOperad)[\imath_0]=F^{\algs}[\imath_0];%
-\\
-\pi_*(\mathbb{S}^\algs_n)
-&\cong
-\makebox[\widthof{$\Lambda$}][c]{$\Lambda$}(\CommOperad)[\delta_I(\imath_n)\ |\ \textup{$J$ is $\delta$-admissible, $e(I)\leq n$}]%
-&\ \ &\makebox[\widthof{for $n\geq1$}][c]{for $n\geq1$;}\\
-% Left hand side
-\pi_*(\mathbb{S}^\algs_n)
-% Relation
-&\cong
-% Right hand side
-\makebox[\widthof{$\Lambda$}][c]{$\Gamma$}(\CommOperad)[\delta_I(\imath_n)\ |\ \textup{$J$ is $\delta$-admissible, $e(I)< n$}]%
-% Comment
-&\ \ &\makebox[\widthof{for $n\geq1$}][c]{for $n\geq2$.}%\text{for $n\geq2$.}
-\end{alignat*}
+\label{calc of restliecoh on single EMobject}
+For $n\geq0$, let $\imath$ be the fundamental class in $H^n_{\restliealgs}(F^{\restliealgs}\mathbb{K}_n)$. Then, as non-unital (degree shifted) commutative algebras:
+\[H^n_{\restliealgs}(F^{\restliealgs}\mathbb{K}_n)\cong S(\CommOperad)\bigl[\Sq^I\imath\,\bigm|\,\textup{$I$ is $\Sq$-admissible, $e(I)\leq n$}\bigr].\]
 \end{prop}
 
-
-\begin{prop}
-
-\end{prop}
-Priddy calculates that for any $n\geq0$,
-\[H^*_{\restliealgs}K^{\restliealgs}\mathbb{K}_n=S(\CommOperad)\bigl[\Sq^I\imath\,\bigm|\,\textup{$I$ is $\Sq$-admissible, $e(I)\leq n$}\bigr].\]
-
-
-\vfil\pagebreak
-
-\begin{shaded}\tiny
-
-The following result shows that whenever an expression $P^Jx$ is forced to be zero by \emph{(\ref{P unstable vanishing})}  and we reduce $P^Jx$ to a sum of $P$-admissible composites, all of the summands are forced to be zero by \emph{(\ref{P unstable vanishing})}.
-\begin{lem}
-\label{lemOnAdemChangeInMP}
-If $\produces{I}{J}{\Palg}$, then $\minDimP(J) \geq \minDimP(I)$, with strict inequality when $I$ and $J$ are distinct and of length two.
-\end{lem}
-The main theorem of Goerss' memoir is that these operations generate all of the operations in the category $\algs\HAlg$, and that all of the relations between the operations in $\algs\HAlg$ are implied by those presented here. In \cite[Chapter V]{MR1089001}, Goerss shows that the listed operations completely capture the cohomology of an object $K^{\algs}\mathbb{K}_n$. He proves a Hilton-Milnor theorem \cite{GoerssHiltonMilnor.pdf}, which he uses in \citeBOX[\S11]{MR1089001} to bootstrap up to a calculation of the cohomology of any GEM in $s\algs$, namely \cite[Theorem I]{MR1089001}. The result states that whenever $V\in \vect{1}{}$,  is a  vector space of finite type, not only is 
-$F^{\algs}V$
-generated by $V$ under the operations of proposition \ref{omnibus on coh of simp algs}, it is as large as is conceivable given the relations presented. We will present in proposition \ref{partialgoerss} a partial version of his result.
-
-It is  interesting to observe that $\Palg$, the Steenrod algebra for commutative algebras is
-in fact \emph{Koszul dual}, in the sense of \cite{PriddyKoszul.pdf}, to $\deltaalg$, the algebra which (almost) acts on the homotopy of a simplicial algebra. Indeed, Goerss \emph{calculates} $\Palg$ as the Koszul dual of $\deltaalg$, using a reverse Adams spectral sequence due to Miller \cite{MillerSullivanConjecture.pdf}. We will explore this relationship further when we consider the Bousfield-Kan spectral sequence.
-\end{shaded}
+The case of simplicial Lie algebras mimics that of simplicial commutative algebras, in that the homogeneous Steenrod algebra, which acts on cohomology, is Koszul dual to the opposite of the $\Lambda$-algebra, which (almost) posesses a left action on homotopy.
 
 
 \end{Constructing cohomology operations}
