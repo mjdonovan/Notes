@@ -1,6 +1,6 @@
 % !TEX root = z_output/unstable_Lie_algs.tex
 \documentclass[11pt]{amsart} %\renewcommand{\baselinestretch}{1.4}
-\newcommand{\IncludeAll}{}% <-----
+\newcommand{\xIncludeAll}{}% <-----
 \newcommand{\ShrinkPages}{}%
 \newcommand{\xPostponeContents}{}%
 \ifx\ShrinkPages\undefined\else\usepackage[paperheight=160mm,paperwidth=160mm]{geometry}\fi%220/160
@@ -8,18 +8,18 @@
 \ooooo{todolist}
 \ooooo{Intro}
 \ifx\IncludeAll\undefined\else\renewcommand{\ooooo}[1]{\wooooo{#1}}\fi
-\wooooo{Contents Page}
-\wooooo{Conventions and notation}
-\wooooo{Pi-algebras and cohomology algebras}   %\renewcommand{\wooooo}[1]{\excludeversion{#1}}
+\ooooo{Contents Page}
+\ooooo{Conventions and notation}
+\ooooo{Pi-algebras and cohomology algebras}   %\renewcommand{\wooooo}[1]{\excludeversion{#1}}
 \ooooo{Bousfield-Kan sseq}\ooooo{connectivity results}
 \ooooo{Constructing homotopy operations}
 \ooooo{Constructing cohomology operations}
-\wooooo{homotopy operations for PRLs}
-\wooooo{Cohomology Operations for W and U}
+\ooooo{homotopy operations for PRLs}
+\ooooo{Cohomology Operations for W and U}
 \ooooo{second quadrant homotopy}
 \ooooo{Operations on the Bousfield-Kan spectral sequence}
 \ooooo{Koszul complexes}
-\wooooo{Composite functor spectral sequences}%%%
+\ooooo{Composite functor spectral sequences}%%%
 \wooooo{Operations in composite functor spectral sequences}%%%
 \ooooo{Calculations of HWn for n nonzero}
 \ooooo{Calculations of HW0}
@@ -1765,7 +1765,7 @@ One says that $X$ is \emph{homology complete} when the map $cX\to X\hat{\ }:=\te
 
 Comments in \citeBOX[\S4]{BlumRiehlResolutions.pdf}  show that the coaugmented cosimplicial $\calc$-$H_*$-coalgebra $H_*^{\calc}\calX^\bullet$  is weakly equivalent to its coaugmentation $H_*^{\calc}X$ \emph{as a vector space}. We will return to this construction in \S\ref{?????????}.
 
-\begin{proof}[Proof of proposition \ref{hurewicz}]
+\begin{proof}[Proof of \ref{hurewicz}]
 Note that the maps $d^0,d^1:\calX^{0}\to\calX^{1}$ induce respectively the coaugmentation and coaction maps for $\pi_*\calx^{0}=H_*^{\calc}X$ on homotopy, while $d^0:\calX^{-1}\to\calX^{0}$ induces the Hurewicz map. The very existence of this diagram then shows that the  Hurewicz map factors through the primitives. The following observation of \citeBOX[\S4]{BlumRiehlResolutions.pdf} completes the proof: that this cosimplicial object has extra codegeneracies  when $X=K^\calc V$.
 \end{proof}
 
@@ -1848,17 +1848,19 @@ For $V\in\vect{}{}$, the diagonal map $\Delta:V\to V\oplus V$ of $V$ induces a \
 \[(F^\calc(\Delta)+i_1+i_2):F^\calc V\to (F^\calc V)^{\sqcup2}.\]
 This map  factors through $(F^\calc V)^{\smashcoprod 2}$, and is symmetric. We name this factoring the \emph{cross terms}:
 \[\crossterms:F^\calc V\to (F^\calc V)\smashcoprod^{\Sigma_2} (F^\calc V),\]
-as it measures the non-linearity in an expression in $F^\calc V$.  We'll give an example in each of the categories $\algs$, $\liealgs$ and $\restliealgs$, in each case using subscripts to denote membership of the first or second copy of $V$. \textbf{looks untidy:}
-\begin{enumerate}
-\item[$\algs$:] $\crossterms(vw)=(v_1+v_2)(w_1+w_2)+v_1w_1+v_2w_2=v_1w_2+w_1v_2.$
-\item[$\liealgs$:] $\crossterms([v,w])=[v_1+v_2,w_1+w_2]+[v_1,w_1]+[v_2,w_2]=[v_1,w_2]+[w_1,v_2].$
-\item[$\restliealgs$:] $\crossterms(\restn{v})=\restn{v_1}+\restn{v_2}+\restn{(v_1+v_2)}=[v_1,v_2].$
-\end{enumerate}
+as it measures the non-linearity in an expression in $F^\calc V$.  We'll give an example in each of the categories $\algs$, $\liealgs$ and $\restliealgs$, in each case using subscripts to denote membership of the first or second copy of $V$:
+\begin{alignat*}{2}
+\algs:&\qquad&\crossterms(vw)&=(v_1+v_2)(w_1+w_2)+v_1w_1+v_2w_2=v_1w_2+w_1v_2;\\
+\liealgs:&\qquad&\crossterms([v,w])&=[v_1+v_2,w_1+w_2]+[v_1,w_1]+[v_2,w_2]=[v_1,w_2]+[w_1,v_2];\\
+\restliealgs:&\qquad&\crossterms(\restn{v})&=\restn{v_1}+\restn{v_2}+\restn{(v_1+v_2)}=[v_1,v_2].
+\end{alignat*}
+
+
 %
 %For example, when $\calc=\algs$, then for $v,w\in V$, :
 %\[\crossterms(vw)=(v_1+v_2)(w_1+w_2)+v_1w_1+v_2w_2=v_1w_2+w_1v_2.\]
 
-For certain categories of interest to us we will give a \emph{decomposition map}, natural and symmetric in $X_1,X_2\in\calc$:
+For certain categories of interest to us we will define a \emph{decomposition map}, natural and symmetric in $X_1,X_2\in\calc$:
 \[j_\calc:Q^\calc(X_1\smashcoprod X_2)\to Q^\calc(X_1)\otimes Q^\calc(X_2).\]
 
 When $\calc=\algs$, $X_1\smashcoprod X_2\cong X_1\otimes X_2$, and $Q(X_1\smashcoprod X_2)\cong QX_1\otimes QX_2$, and we choose the identity map of this object as decomposition map $j_\algs$. In other words, the map $j_{\algs}$ is defined by $x_1x_2\mapsto x_1\otimes x_2$ whenever $x_1\in X_1$ and $x_2\in X_2$.
@@ -1882,20 +1884,23 @@ where by $\restnRepeated{[x_1,\cdots ,x_a]}{r}$ we mean the $r$-fold restriction
 
 Finally, we define the \emph{quadratic part} map, $\quadratic_\calc$ for  the composite
 \[\quadratic_\calc:\left(F^\calc V\overset{\crossterms}{\to}(F^\calc V)^{\smashcoprod 2}\to Q^\calc((F^\calc V)\smashcoprod^{\Sigma_2} (F^\calc V))\overset{j_\calc}{\to}S^2(Q^{\calc}F^\calc V)=S^2V\right).\]
-\begin{prop}
+\begin{lem}
 Suppose $V\in\vect{}{}$. Then:
 \begin{enumerate}
-\item \makebox[\widthof{$\quadratic_\restliealgs$}][l]{$\quadratic_\algs$} is the composite $\makebox[\widthof{$F^\restliealgs V$}][r]{$F^\algs V$}\epi S_2V\overset{\trace}{\to} S^2V$;
-\item \makebox[\widthof{$\quadratic_\restliealgs$}][l]{$\quadratic_\liealgs$} is the composite $\makebox[\widthof{$F^\restliealgs V$}][r]{$F^\liealgs V$}\epi \Lambda^2V\overset{\trace}{\to} S^2V$;
-\item \makebox[\widthof{$\quadratic_\restliealgs$}][l]{$\quadratic_\restliealgs$} is the composite $\makebox[\widthof{$F^\restliealgs V$}][r]{$F^\restliealgs V$}\epi S^2V\overset{\trace}{\to} S^2V$.
+\item \makebox[\widthof{$\quadratic_\restliealgs$}][l]{$\quadratic_\algs$}\,is the 
+\makebox[\widthof{projection}][l]{composite}
+$\smash{\makebox[\widthof{$F^\restliealgs V$}][c]{$F^\algs V$}\epi \makebox[\widthof{$\Lambda^2V$}][c]{$S_2V$}\overset{\trace}{\to} S^2V}$;
+\item \makebox[\widthof{$\quadratic_\restliealgs$}][l]{$\quadratic_\liealgs$}\,is the \makebox[\widthof{projection}][l]{composite} $\smash{\makebox[\widthof{$F^\restliealgs V$}][c]{$F^\liealgs V$}\epi \Lambda^2V\overset{\trace}{\to} S^2V}$;
+\item \makebox[\widthof{$\quadratic_\restliealgs$}][l]{$\quadratic_\restliealgs$}\,is the \makebox[\widthof{projection}][l]{projection} $\makebox[\widthof{$F^\restliealgs V$}][c]{$F^\restliealgs V$}\epi S^2V$.
 \end{enumerate}
-\end{prop}
+\end{lem}
 \begin{proof}
- We'll simply give an example for \emph{(1)}. That is, consider the expression $e:=u+vw+xy^2\in F^{\algs}V$ where $u,v,w,x,y$ are in $V$. Then
+These are simple observations, and an example is more useful than a proof: consider the expression $e:=u+vw+xy^2\in F^{\algs}V$ where $u,v,w,x,y$ are in $V$. Then
 \begin{align*}
-\crossterms(e)&=v_1w_2+w_1v_2+x_1y_2^2+y_1^2x_2,\ \textup{and}\\
-J_\algs(\crossterms(e))&=v_1\otimes w_2+w_1\otimes v_2+x_1\otimes y_2^2+y_1^2\otimes x_2\\
-&=v_1\otimes w_2+w_1\otimes v_2 \in S^2(Q^\algs F^{\algs}V).
+\crossterms(e)&\phantom{:}=\smash{v_1w_2+w_1v_2+x_1y_2^2+y_1^2x_2,\ \textup{and}}\\
+\smash{\quadratic_\calc(e)}&:=\smash{j_\algs(\crossterms(e))}\\
+&\phantom{:}=\smash{v_1\otimes w_2+w_1\otimes v_2+x_1\otimes y_2^2+y_1^2\otimes x_2}\\
+&\phantom{:}=\smash{v_1\otimes w_2+w_1\otimes v_2 \in S^2(Q^\algs F^{\algs}V)}.
 \end{align*}
 Parts \emph{(2)} and \emph{(3)} are checked later in a more general case, in proposition \ref{quadpartcalc for various W and L}.
 \end{proof}
@@ -2170,7 +2175,7 @@ is identified with the map
 \[\textup{hototfib}(h_n^*(\calX^\bullet))\to \textup{hototfib}(\tau^*h_n^*(\calX^\bullet))=\textup{hototfib}(h_{n-1}^*(\calX^\bullet)).\]
 As $\calX^{-1}$ equals $cX$, the tower $\hofib(\calX^{-1}\to\textup{Tot}_n\calX^{\bullet})$ is one of the towers in proposition \ref{towerIdentification}.
 \end{shaded}
-\begin{proof}[Proof of Proposition \ref{towerIdentification}] 
+\begin{proof}[Proof of \ref{towerIdentification}] 
 It will suffice to construct a weak equivalence $h_n^*\calX^\bullet\to (\plainD_n^{\smash{\square}}\Id  )(X)$ of $(n+1)$-cubes. The $(n+1)$-cubical diagram $h_n^*\calX^\bullet$ is defined by
 \[(h_n^*\calX^\bullet)(S):= c(KQc)^{\chi_{n}}(KQc)^{\chi_{n-1}}\cdots (KQc)^{\chi_0}X\quad \textup{where}\quad \chi_i:=\begin{cases}
 1,&\textup{if }i\in S,\\
@@ -2205,7 +2210,7 @@ We will now perform the necessary connectivity estimates in the Adams tower in o
 Suppose that $\algcat$ is one of the categories $\algs$ or $\liealgs$, that $X\in s\algcat$ is connected, and that  $t\geq1$ and $q\geq2$. Then there is some $f(q,t)\geq t$ such that the map $\pi_q(\dupdown{f(q,t)}{c}X)\to\pi_q(\dupdown{t}{c}X)$ is zero.
 \end{prop}
 \noindent Note that proposition \ref{towerIdentification} and \ref{convergenceProp} together imply theorem \ref{completenesstheorem}:
-\begin{proof}[Proof of theorem \ref{completenesstheorem}]
+\begin{proof}[Proof of \ref{completenesstheorem}]
 The fiber sequences $\dupdown{n+1}{c}X\to cX\to \textup{Tot}_n\calX^\bullet$ fit together into a tower of fiber sequences. Taking homotopy limits, one obtains a fiber sequence
 \[\holim (\dupdown{n}{c}X)\to cX\to X\hat{\ }.\]
 We need to show that $\holim (\dupdown{n}{c}X)$ has zero homotopy groups.
@@ -2376,7 +2381,7 @@ Proposition \ref{IteratedBarConstructionHomotopy} gives an explicit simplicial h
 
 
 Now that we have the twisting lemma, Proposition \ref{convergenceProp} follows:
-\begin{proof}[Proof of Proposition \ref{convergenceProp}]
+\begin{proof}[Proof of \ref{convergenceProp}]
 By proposition \ref{prop:modifiedAdamsTower}, it is enough to prove that for any $q\geq0$ and $t\geq1$, $\pi_q(\caldup{f(q,t)}X)\to\pi_q(\caldup{t}X)$ is zero for some $f(q,t)\geq t$.
 Apply $\caldup{t}\DASH$ to the diagram of functors constructed in \ref{towerWithPowers} and apply the result to $X$ to obtain a commuting diagram of functors
 \[\xymatrix@R=4mm{
@@ -3770,7 +3775,7 @@ These operations are natural in maps preserving the generating subspaces, and sa
 \end{prop}
 \noindent For \emph{any} $X\in s\calw(0)$, the bar construction $Q^{\calw(0)}B^{\calw(0)}X$ calculating  $H^*_{\calw(0)}X$ has a natural almost free structure, so that proposition \ref{operations on goerss homology} constructs natural operations on $H^*_{\calw(0)}X$ for all $X\in s\calw(0)$.
 %Now suppose that $X\in\calw(0)$, and consider the bar construction $Q^{\calw(0)}B^{\calw(0)}X$ whose cohomotopy is $H^*_{\calw(0)}X$. Until the end of \S\ref{Cohomology Operations for W and U}, we will write $Q\mathbb{B}$ for this simplicial object, write $F$ for $F^{\calw(0)}$, and identify $Q\mathbb{B}_s$ with $F^sX$.
-\begin{proof}[Proof of proposition \ref{operations on goerss homology}]
+\begin{proof}[Proof of  \ref{operations on goerss homology}]
 The conditions of proposition \ref{general CohOpns given irreducibility} are satisfied with $\theta=\theta_i$ and $G$ is the identity functor. The condition \[\smash{\theta\circ\mu_V=\theta\circ \epsilon_{F^\calc V} +\theta\circ {F^\calc \epsilon_V}:F^\calc F^\calc V\to V}\]
 just states that given an iterated expression in $F^\calc F^\calc V$, the two obvious ways to produce a summand of the form $P^iv$ under the map $F^\calc F^\calc V\to F^\calc V$ are the only ways, due to the homogeneity of the $P$-Adem relations.
 
@@ -6276,7 +6281,7 @@ In order to use Singer's constructions in the present work, we will use the map 
 \[\psi_\BSW=j_{\calL(n)}\circ Q^{\calL(n)}\xi_\BSW:N_{p+1}N_q(Q^{\calL(n)}\BSWres L)_{s_n,\ldots,s_1}^{t+1}\to N_{p}N_q(S^2(Q^{\calL(n)}\BSWres L))_{s_n,\ldots,s_1}^{t}\]
 to define a spectral sequence map
 \[E_2^{p,q}(S^2(Q^{\calL(n)}\BSWres L))^{s_n,\ldots,s_1}_t\overset{(\psi_\BSW)^*}{\to} E_2^{p+1,q}(Q^{\calL(n)}\BSWres L)^{s_n,\ldots,s_1}_{t+1}.\]
-We may then define internal spectral sequence operations
+We  then define internal spectral sequence operations
 \begin{alignat*}{2}
 \Sq^k=\psi_\BSW^*\circ\ExtCohOp^{k-1}:(E^{p,q}_r)^{s_n,\ldots,s_1}_t&\to (E^{p+1,q+k-1}_r)^{2s_n,\ldots,2s_1}_{2t+1}&\qquad&\text{if }0\leq k-1 \leq q,\\
 \Sq^k=\psi_\BSW^*\circ\ExtCohOp^{k-1}:(E^{p,q}_r)^{s_n,\ldots,s_1}_t&\to (E^{p+k-q,2q}_{r+k-q-1})^{2s_n,\ldots,2s_1}_{2t+1}&\qquad&\text{if }q\leq k-1\leq q+r-2,\\
@@ -6285,10 +6290,10 @@ We may then define internal spectral sequence operations
 which at $E_2$ we may write (dropping internal degrees) as:
 \begin{alignat*}{2}
 \Sqv^k=\psi_\BSW^*\circ\vExtCohOp^{k-1}= \psi_\BSW^*\circ\ExtCohOp^{k-1}:E^{p,q}_2&\to E^{p+1,q+k-1}_2&\qquad&\text{if }0\leq k-1 \leq q,\\
-\Sqh^k=\psi_\BSW^*\circ\hExtCohOp^{k-1}= \psi_\BSW^*\circ\ExtCohOp^{q+k-1}:E^{p,q}_2&\to E^{p+k,2q}_2&\qquad&\text{if }0\leq k-1 \leq p,
+\Sqh^k=\psi_\BSW^*\circ\hExtCohOp^{k-1}= \psi_\BSW^*\circ\ExtCohOp^{q+k-1}:E^{p,q}_2&\to E^{p+k,2q}_2&\qquad&\text{if }0\leq k-1 \leq p.
 \end{alignat*}
-Similarly, we may define a pairing:
-\[\mu=\psi_\BSW^*\circ\ExtCohProd:(E^{p,q}_r)^{s_n,\ldots,s_1}_t\otimes (E^{p',q'}_r)^{s'_n,\ldots,s'_1}_{t'}\to (E^{p+p'+1,q+q'}_r)^{s_n+s'_n,\ldots,s_1+s'_1}_{t+t'+1}\]
+Similarly, we   define a pairing:
+\[\mu=\psi_\BSW^*\circ\ExtCohProd:(E^{p,q}_r)^{s_n,\ldots,s_1}_t\otimes (E^{p',q'}_r)^{s'_n,\ldots,s'_1}_{t'}\to (E^{p+p'+1,q+q'}_r)^{s_n+s'_n,\ldots,s_1+s'_1}_{t+t'+1}.\]
 
 The reader might now guess the key results:
 \begin{thm}
@@ -6312,158 +6317,93 @@ $\calMh(n+1)$-operations of the same name defined on $\calw(n)$-cohomology in
 \subsection{Proofs of theorems \ref{E2CompFuncLieOperationsID}-\ref{EInftyCompFuncOperationsID}}
 
 \begin{proof}[Proof of \ref{E2CompFuncLieOperationsID}]
-This proof relies on a commuting diagram, in which we employ the  notation $L=Q^{\calU(n)} B^\calw(n)X \in s\calL(n)$ and $Y=\BSWres L\in ss\calL(n)$:
+This proof relies on a commuting diagram, in which we employ the  notation $L=Q^{\calU(n)} B^{\calw(n)}X \in s\calL(n)$, and abbreviate using $\calL=\calL(n)$ and $\calW=\calW(n+1)$.
 \[\xymatrix@C=13mm@R=4mm{
-(N_p^\textup{h}\pi_*^{\textup{v}}Q^{\calL(n)}Y)^{\otimes2}&%r1c1
-(N_p^\textup{h}Q^{\calw(n+1)}\pi_*^{\textup{v}}Y)^{\otimes2}
-\ar[l]_-{(N^\textup{h}_*(\gamma))^{\otimes 2}}
+(N_p^\textup{h}\pi_*^{\textup{v}}Q^{\calL}\BSWres L)^{\otimes2}&%r1c1
+(N_p^\textup{h}Q^{\calw}\pi_*^{\textup{v}}\BSWres L)^{\otimes2}
+\ar[l]_-{N^\textup{h}_*(\gamma)^{\otimes 2}}
 \\%r1c2
-N_{p+k-1}^\textup{h}((\pi_*^{\textup{v}}Q^{\calL(n)}Y)^{\otimes2})
+N_{p+k-1}^\textup{h}((\pi_*^{\textup{v}}Q^{\calL}\BSWres L)^{\otimes2})
 \ar[u]^-{(D^{p-k+1}_\textup{h})^\star}
 &%r2c1
-N_{p+k-1}^\textup{h}((Q^{\calw(n+1)}\pi_*^{\textup{v}}Y)^{\otimes2})
-\ar[u]^-{(D^{p-k+1})^\star}
+N_{p+k-1}^\textup{h}((Q^{\calw}\pi_*^{\textup{v}}\BSWres L)^{\otimes2})
+\ar[u]_-{(D^{p-k+1}_\textup{h})^\star}
 \ar[l]_-{N^\textup{h}_*(\gamma^{\otimes 2})}
 \\%r2c2
-N_{p+k-1}^\textup{h}(\pi_*^{\textup{v}}((Q^{\calL(n)}Y)^{\otimes2}))
-\ar[u]^-{N^\textup{h}_*\pi_*^\textup{v}((D^0_\textup{v})^\star)}
+N_{p+k-1}^\textup{h}\pi_*^{\textup{v}}((Q^{\calL}\BSWres L)^{\otimes2})
+\ar[u]^-{N^\textup{h}_*(D^0_\textup{v})^\star}
 &%r3c1
 \\%r3c2
-N^\textup{h}_{p+k}(\pi_*^{\textup{v}} Q^{\calL(n)}Y)
+N^\textup{h}_{p+k}\pi_*^{\textup{v}} Q^{\calL}\BSWres L
 \ar[u]^-{\pi_*^\textup{v}(\psi_\BSW)}
 &%r4c1
-N^\textup{h}_{p+k}(Q^{\calw(n+1)}\pi_*^{\textup{v}} Y)
-\ar[uu]_-{\psi_{\calw(n+1)}}
+N^\textup{h}_{p+k}Q^{\calw}\pi_*^{\textup{v}} \BSWres L
+\ar[uu]_-{\psi_{\calw}}
 \ar[l]_-{N^\textup{h}_*(\gamma)}
 %r4c2
 }\]
-In this diagram, all of the horizontal maps are the isomorphisms of lemma \ref{Q of a model}, and the two vertical composites are chain maps. By \cite[Theorem 2.23]{MR2245560} (summarized in \S\ref{singer ext ops sect}),  the left hand vertical composite is that used to define the horizontal operations $\Sq^{k}_\textup{h}$ on $E_2$. On the other hand, the right vertical was used in \S\ref{Horizontal Steenrod operations and a product for HWn} to define the $\calMh(n+2)$-operations on the $\calw(n+1)$-cohomology groups with which the $E_2$-page can be identified. The same proof will apply for $\mu$, if we replace the maps $(D^j)^\star$ in the top square with $(D^0_\textup{h})^\star$, and modify the subscripts $p$ as needed.
+All of the horizontal maps are the isomorphisms of lemma \ref{Q of a model}. By \cite[Theorem 2.23]{MR2245560} (summarized in \S\ref{singer ext ops sect}),  the left hand vertical composite is that used to define the horizontal operations $\Sq^{k}_\textup{h}$ on $E_2$. On the other hand, the right vertical was used in \S\ref{Horizontal Steenrod operations and a product for HWn} to define the $\calMh(n+2)$-operations on the $\calw(n+1)$-cohomology groups with which the $E_2$-page can be identified. Thus, if the diagram commutes, we are done. If we replace the maps $(D^j_\textup{h})^\star$ in the top square with $(D^0_\textup{h})^\star$, the same proof applies for $\mu$.
 
-What remains is to prove that the bottom square commutes. It may be expanded into the \emph{outer square} in the following larger commuting diagram, which we will abbreviate by omitting the subscripts on indecomposables functors:
-%\[
-%\def\objectstyle{\scriptstyle}
-%\xymatrix@R=8mm@C=13mm@!0{
-%%&%r1c1
-%%(\pi (QW^{n+1}L))^{\otimes2}\ar[rrrrrr];[]_-{=}
-%%&%r1c2
-%%&%r1c3
-%%&%r1c4
-%%&%r1c5
-%%&%r1c6
-%%&%r1c7
-%%(\pi (QW^{n+1}L))^{\otimes2}\\\\%r1c8
-%&%r2c1
-%\pi((QW^{p+k}L)^{\otimes2}) \ar[rrr]_-{D_0^{\textup{v}}}
-%&%r2c2
-%&%r2c3
-%&%r2c4
-%(\pi (QW^{p+k}L))^{\otimes2}&%r2c5
-%&%r2c6
-%&%r2c7
-%(Q\pi(W^{p+k}L))^{\otimes2} \ar[lll]^-{\gamma^{\otimes2}}\\\\%r2c8
-%&%r3c1
-%\pi Q((W^{p+k}L)^{\smashcoprod 2})\ar[uu]^-{\pi(j)}
-%\ar[dl]
-%&%r3c2
-%&%r3c3
-%&%r3c4
-%Q\pi((W^{p+k}L)^{\smashcoprod 2})\ar[lll]_-{\gamma}\ar[dl]
-%&%r3c5
-%&%r3c6
-%&%r3c7
-%Q((\pi( W^{p+k}L))^{\smashcoprod 2})\ar[dl]
-%\ar[uu]_-{j}
-%\ar[lll]_-{Q(i)}
-%\\
-%%r3c1
-%\pi Q((W^{p+k}L)^{\sqcup 2})
-%&%r3c2
-%&%r3c3
-%&%r3c4
-%Q\pi((W^{p+k}L)^{\sqcup 2})\ar[lll]_-(.3){\gamma}
-%&%r3c5
-%&%r3c6
-%&%r3c7
-%Q((\pi( W^{p+k}L))^{\sqcup 2})
-%\ar[lll]_-(.3){Q(i)}
-%%r3c8
-%\\\\
-%&%r3c1
-%\pi Q(W^{p+k+1}L)
-%\ar@/_.5em/[uuu]_-(.25){\pi Q(\xi_{\textup{ch}})}
-%\ar[uul]^-(.65){\pi Q(\overline{\xi}_{\textup{ch}})}
-%&%r3c2
-%&%r3c3
-%&%r3c4
-%Q\pi(W^{p+k+1}L)\ar[lll]_-{\gamma}
-%\ar@/_.5em/[uuu]_-(.25){Q\pi(\xi_{\textup{ch}})}
-%\ar[uul]^-(.65){Q\pi(\overline{\xi}_{\textup{ch}})}
-%&%r3c5
-%&%r3c6
-%&%r3c7
-%Q(\pi( W^{p+k+1}L))
-%\ar@/_.5em/[uuu]_-(.25){Q(\xi_{\calw(n+1)})}
-%\ar[lll]_-{=}
-%\ar[uul]^-(.65){Q(\overline{\xi}_{\calw(n+1)})}
-%}\]
+What remains is to prove that the bottom square commutes. It may be expanded into the eight maps in the outer square of the following larger commuting diagram:
 \[
-\def\objectstyle{\scriptstyle}
-\xymatrix@R=6mm@C=13mm@!0{
-%&%r1c1
-%(\pi (QW^{n+1}L))^{\otimes2}\ar[rrrrrr];[]_-{=}
-%&%r1c2
-%&%r1c3
-%&%r1c4
-%&%r1c5
-%&%r1c6
-%&%r1c7
-%(\pi (QW^{n+1}L))^{\otimes2}\\\\%r1c8
+%\def\objectstyle{\scriptstyle}
+\xymatrix@R=6mm@C=15mm@!0{
 &%r2c1
-\pi((Q\BSW^{p+k}L)^{\otimes2}) \ar[rrr]_-{(D^0_{\textup{v}})^\star}
+\pi_*^\textup{v}((Q^{\calL}\BSW^{p+k}L)^{\otimes2}) \ar[rrr]_-{(D^0_{\textup{v}})^\star}
 &%r2c2
 &%r2c3
 &%r2c4
-(\pi (Q\BSW^{p+k}L))^{\otimes2}&%r2c5
+(\pi_*^\textup{v} Q^{\calL}\BSW^{p+k}L)^{\otimes2}&%r2c5
 &%r2c6
 &%r2c7
-(Q\pi(\BSW^{p+k}L))^{\otimes2} \ar[lll]^-{\gamma^{\otimes2}}\\\\%r2c8
+(Q^{\calw}\pi_*^\textup{v}\BSW^{p+k}L)^{\otimes2} \ar[lll]^-{\gamma^{\otimes2}}\\\\%r2c8
 &%r3c1
-\pi Q((\BSW^{p+k}L)^{\smashcoprod 2})\ar[uu]^-{\pi(j)}
+\pi_*^\textup{v} Q^{\calL}((\BSW^{p+k}L)^{\smashcoprod 2})\ar[uu]^-{\pi_*^\textup{v}(j_{\calL})}
 &%r3c2
 &%r3c3
 &%r3c4
-Q\pi((\BSW^{p+k}L)^{\smashcoprod 2})\ar[lll]_-{\gamma}
+Q^{\calw}\pi_*^\textup{v}((\BSW^{p+k}L)^{\smashcoprod 2})\ar[lll]_-{\gamma}
 &%r3c5
 &%r3c6
 &%r3c7
-Q((\pi( \BSW^{p+k}L))^{\smashcoprod 2})
-\ar[uu]_-{j}
-\ar[lll]_-{Q(i)}
+Q^{\calw}((\pi_*^\textup{v} \BSW^{p+k}L)^{\smashcoprod 2})
+\ar[uu]_-{j_{\calW}}
+\ar[lll]_-{Q^{\calw}(i)}
 \\\\
 &%r3c1
-\pi Q(\BSW^{p+k+1}L)
-\ar[uu]_-{\pi Q(\xi_{\BSW})}
+\pi_*^\textup{v} Q^{\calL}\BSW^{p+k+1}L
+\ar[uu]^-{\pi_*^\textup{v} Q^{\calL}(\xi_{\BSW})}
 &%r3c2
 &%r3c3
 &%r3c4
-Q\pi(\BSW^{p+k+1}L)\ar[lll]_-{\gamma}
-\ar[uu]_-{Q\pi(\xi_{\BSW})}
+Q^{\calw}\pi_*^\textup{v}\BSW^{p+k+1}L\ar[lll]_-{\gamma}
+\ar[uu]_-{Q^{\calw}\pi_*^\textup{v}(\xi_{\BSW})}
 &%r3c5
 &%r3c6
 &%r3c7
-Q(\pi( \BSW^{p+k+1}L))
-\ar[uu]_-{Q(\xi_{\calw(n+1)})}
+Q^{\calw}\pi_*^\textup{v} \BSW^{p+k+1}L
+\ar[uu]_-{Q^{\calw}(\xi_{\calw})}
 \ar[lll]_-{=}
 }\]
-The bottom left square commutes simply by naturality of $\gamma$, while the bottom right square is an instance of lemma \ref{LemmaOn xi}. What remains is to check that the hexagon commutes. For notational convenience, write $A=\BSW^{p+k}L$, $\textup{br}:(\pi_* A)^{\otimes 2}\to (\pi_* A)^{\smashcoprod 2}$ for the bracket $a\otimes b\mapsto [a,b]$ on homotopy, and similarly write $\textup{br}:A^{\otimes 2}\to A^{\smashcoprod 2}$ for the chain level bracket. Now any element of $Q((\pi_* A)^{\smashcoprod 2})$ is the class of an expression $\textup{br}(\overline{x}\otimes\overline{y})+E$ where $\overline{x},\overline{y}\in\pi_* A$ are represented by $x,y\in N_*A$, and $E\in(\pi_* A)^{\smashcoprod 2}$ is a sum of terms which are $\lambda$-operations applied to 3-fold brackets of elements of $\pi_* A$ \textbf{[explain this better]}. The map $Q(i)$ is induced by the Eilenberg-Mac Lane map shuffle map $\nabla$ [](\textbf{what exactly??}), and
-\[\textup{br}(\overline{x}\otimes\overline{y})\overset{\gamma\circ Q(i)}{\longmapsto}\overline{\textup{br}(\nabla(x\otimes y))}\overset{\pi_*(j)}{\longmapsto}\overline{(\nabla(x\otimes y))}\overset{(D^0)^\star}{\longmapsto}\overline{x}\otimes \overline{y}.\]
-The last mapping follows from the fact that $(D^0)^\star\circ\nabla=\Id$, as $\{D^k\}$ is special.
-Similarly, our understanding of the construction of $\lambda$-operations and iterated brackets shows that $E$ is annihilated by $\pi_*(j)\circ\gamma\circ Q(i)$. As $E$ is also annihilated by $j$, and $j(\textup{br}(\overline{x}\otimes\overline{y})) =\overline{x}\otimes\overline{y}$, the hexagon commutes. \textbf{This is poorly written.}
+The bottom left square commutes by naturality of $\gamma$, while the bottom right square is an instance of lemma \ref{LemmaOn xi}. What remains is to check that the hexagon commutes. For notational convenience, write $A=\BSW^{p+k}L\in s\calL$, $\textup{br}:A^{\otimes 2}\to A^{\smashcoprod 2}$ for the $\call$-bracket, and
+$\textup{br}:(\pi_*^\textup{v} A)^{\otimes 2}\to (\pi_*^\textup{v} A)^{\smashcoprod 2}$ for the $\calw$-bracket on homotopy.
+
+The source in the hexagon is then $Q^{\calw}((\pi_*^\textup{v}A)^{\smashcoprod2})$, the smash product being the coproduct in  $\calw=\calL\PiAlg$ of two copies of $\pi_*^\textup{v}A$. Any element of $Q^{\calw}((\pi_*^\textup{v}A)^{\smashcoprod2})$ can be represented by a sum
+$\textstyle\sum_k\textup{br}(\overline{x_k}\otimes \overline{y_k})+E$,
+with the $x_k$ (resp.\ $y_k$) representatives of elements $\overline{x_k}$ in the first (resp.\ second) copy of $\pi_*^\textup{v} A$ and, $E$ a sum of at least three-fold  brackets of elements in the two copies. This extra term $E$ is annihilated by both $j_{\calw}$ and $\pi_*^\textup{v}(j)\circ\gamma\circ Q^{\calw}(i)$, so can be ignored. One calculates: 
+\[\smash{(\gamma^{\otimes 2}\circ j_\calw)(\textstyle\sum_k\textup{br}(\overline{x_k}\otimes \overline{y_k})+E)=\textstyle\sum_k \overline{x_k}\otimes \overline{y_k}.}\]
+On the other hand,
+% Now any element of $Q^{\calw(n+1)}((\pi_*^\textup{v} A)^{\smashcoprod 2})$ is the class of an expression $\textup{br}(\overline{x}\otimes\overline{y})+E$ where $\overline{x},\overline{y}\in\pi_*^\textup{v} A$ are represented by $x,y\in N_*^\textup{v}A$, and $E\in(\pi_*^\textup{v} A)^{\smashcoprod 2}$ is a sum of terms which are $\lambda$-operations applied to 3-fold brackets of elements of $\pi_*^\textup{v} A$. 
+the map $Q^{\calw}(i)$ is induced by the Eilenberg-Mac Lane map shuffle map $\nabla_\textup{\!v}$ as in proposition \ref{the top external homotopy operations}, and
+\[\textstyle \smash{
+\sum_k\textup{br}(\overline{x_k}\otimes\overline{y_k})\overset{\gamma\circ Q^{\calw}(i)}{\longmapsto}\overline{\sum_k\textup{br}(\nabla_\textup{\!v}(x_k\otimes y_k))}\overset{\pi_*^\textup{v}(j_\call)}{\longmapsto}\overline{\sum_k(\nabla_\textup{\!v}(x_k\otimes y_k))}\overset{(D^0_\textup{v})^\star}{\longmapsto}\sum_k\overline{x_k}\otimes \overline{y_k}.
+}\]
+The last mapping follows from the fact that $(D^0_\textup{v})^\star\circ\nabla_\textup{\!v}=\Id$, as $\{D^k\}$ is special.
 \end{proof}
 \begin{proof}[Proof of \ref{E2CompFuncKosOperationsID}]
 We must identify the operations $\Sqv^i=\psi_\BSW^*\circ\vExtCohOp^{i-1}$ with the $\calw(n+1)$-cohomology operations $\Sqv^i$ defined in \S\ref{section: vertical Koszul operations n positive} using the maps $\theta^i$. However, the $\theta^i$ are defined on the bar construction, while $\psi_\BSW^*$ is defined on the Blanc-Stover resolution. In order to make the comparison, we will need to choose a weak equivalence of resolutions of $\pi_* L$ in $s\calw(n+1)$
 \[\chi:B^{\calw(n+1)}_{\bullet}\pi_*L\to \pi_*(\BSWres L).\]
-We will use Miller's techniques \citeBOX[p.~55]{MillerSullivanConjecture.pdf} to define such a $\chi$ explicitly. For brevity, write $\mathbb{B}$ for the object $B_i^{\calw(n+1)}\pi_*L\in s\calw(n+1)$. Write $V_i$ for the subspace $(F^{\calw(n+1)})^{i}\subseteq \mathbb{B}$ of generators. For each $m\geq0$, write $F_m\mathbb{B}$ for the $m$-skeleton of $\mathbb{B}$ (c.f.\ {Skeletal filtrations}), which is almost free on  subspaces $F_mV_i$.
+We will use Miller's techniques \citeBOX[p.~55]{MillerSullivanConjecture.pdf} to define such a $\chi$ explicitly. For brevity, write $\mathbb{B}$ for the object $B_i^{\calw(n+1)}\pi_*L\in s\calw(n+1)$. Write $V_i$ for the subspace $(F^{\calw(n+1)})^{i}\subseteq \mathbb{B}$ of generators. For each $m\geq0$, write $F_m\mathbb{B}$ for the $m$-skeleton of $\mathbb{B}$ (c.f.\ \ref{Skeletal filtrations}), which is almost free on  subspaces $F_mV_i\subseteq V_i$.
 
 
 %$F_mV_i$ for the subspace of $V_i$ consisting of degeneracies of elements of $V_j$ for $j\leq m$. Then write $F_m\mathbb{B}$ for the subobject of $\mathbb{B}$ which is almost free on the subspaces $F_mV_i$.
