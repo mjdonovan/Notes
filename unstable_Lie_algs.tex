@@ -1,6 +1,6 @@
 % !TEX root = z_output/unstable_Lie_algs.tex
 \documentclass[11pt]{amsart} %\renewcommand{\baselinestretch}{1.4}
-\newcommand{\xIncludeAll}{}% <-----
+\newcommand{\IncludeAll}{}% <-----
 \newcommand{\ShrinkPages}{}%
 \newcommand{\xPostponeContents}{}%
 \ifx\ShrinkPages\undefined\else\usepackage[paperheight=160mm,paperwidth=160mm]{geometry}\fi%220/160
@@ -8,21 +8,21 @@
 \ooooo{todolist}
 \ooooo{Intro}
 \ifx\IncludeAll\undefined\else\renewcommand{\ooooo}[1]{\wooooo{#1}}\fi
-\ooooo{Contents Page}
-\ooooo{Conventions and notation}
-\wooooo{Pi-algebras and cohomology algebras}
+\wooooo{Contents Page}
+\wooooo{Conventions and notation}
+\wooooo{Pi-algebras and cohomology algebras}   %\renewcommand{\wooooo}[1]{\excludeversion{#1}}
 \ooooo{Bousfield-Kan sseq}\ooooo{connectivity results}
 \ooooo{Constructing homotopy operations}
-\wooooo{Constructing cohomology operations}
+\ooooo{Constructing cohomology operations}
 \wooooo{homotopy operations for PRLs}
 \wooooo{Cohomology Operations for W and U}
 \ooooo{second quadrant homotopy}
 \ooooo{Operations on the Bousfield-Kan spectral sequence}
 \ooooo{Koszul complexes}
-\ooooo{Composite functor spectral sequences}%%%
-\ooooo{Operations in composite functor spectral sequences}%%%
-\wooooo{Calculations of HWn for n nonzero}
-\wooooo{Calculations of HW0}
+\wooooo{Composite functor spectral sequences}%%%
+\wooooo{Operations in composite functor spectral sequences}%%%
+\ooooo{Calculations of HWn for n nonzero}
+\ooooo{Calculations of HW0}
 \ooooo{appendices}
 \ooooo{bibliog}
 
@@ -434,39 +434,37 @@ url=false,doi=false,isbn=false,eprint=false]{biblatex}%
 \begin{Contents Page}
 %\begin{abstract}\end{abstract}
 %\maketitle
-\ifx\PostponeContents\undefined{\tiny\tableofcontents}\else\relax\fi
+\ifx\PostponeContents\undefined{\tiny\tableofcontents \hfil\pagebreak }\else\relax\fi
 \end{Contents Page}
-
-%\noindent So you start with surjections of bounded below chain complexes:
-%\[T\to T_1\to T_0.\]
-%Take $K_i=\ker(T\to T_i)$. Obviously $K_1\subseteq K_0$, so...
-%\[K_1\to K_0 \to T\to T_1\to T_2.\]
-%A crappy diagram chase reveals that 
-%\[L:=\coker(K_1\to K_0)\cong \ker (T_1\to T_0)=:S.\]
-%(Maybe that's a triangulated category axiom.) I.e.:
-%\[\xymatrix@R=4mm{
-%&L\\
-%K_1\ar@{ >->}[r]& K_0 \ar@{ >->}[r]\ar@{->>}[u]& T\ar@{->>}[r]& T_1\ar@{->>}[r]& T_0\\
-%&&&S\ar@{ >->}[u]
-%}\]
-%So we have a tonne of triangles:
-%\begin{enumerate}
-%\item $K_1\to K_0\to L$
-%\item $S\to T_1\to T_0$
-%\item $K_1\to T\to T_1$
-%\item $K_0\to T\to T_0$
-%\end{enumerate}
-%I want to know if the following is true:
-%the connecting homs of (3) and (4) and the identification $S\cong L$ amount to a morphism of homology long exact sequences, from LES(2) to LES(1).
-%
-%Is it? Is it the octahedral axiom? Obviously I have no idea what I'm talking about.
-%
-%
-%
-
 
 
 \begin{Intro}
+
+\subsection{Throatclearing}
+
+
+we will always write $\E{r}{}{V}{}{}$ for a homological or homotopical spectral sequence and $\E{}{r}{V}{}{}$ for a cohomological one.
+
+Given a bisimplicial vector space $V_{s,t}$, we obtain a double chain complex $N_sN_tV$. There is a first quadrant homotopy spectral sequence $\E{r}{}{V}{}{s,t}$, with $\E{2}{}{V}{}{s,t}=\pi\uhor_s\pi\uver_tV$, converging to $\pi_{s+t}\diag{ V}$.
+There is a first quadrant cohomotopy spectral sequence $\E{}{r}{V}{s,t}{}$, with $\E{}{2}{V}{s,t}{}=\dual(\pi\uhor_s\pi\uver_tV)$, converging to $\dual(\pi_{s+t}\diag{ V})$.
+
+Given a cosimplicial simplicial vector space  $V_{s,t}$, we obtain a mixed chain complex $N^sN_tV$.\\
+There is a second quadrant homotopy spectral sequence $\E{r}{}{V}{s}{t}$, with $\E{2}{}{V}{s}{t}=\pi\dhor^s\pi\uver_tV$, which will sometimes converge to $\pi_{t-s}\Tot V$.
+
+\hfil
+
+\noindent first quadrant homotopy --- Stover's van Kampen\\
+first quadrant cohomology --- Serre sseq, our GSSeqs\\
+second quadrant homotopy --- Adams or Bousfield-Kan spectral sequences\\
+second quadrant cohomology --- Dwyer's work Eilenberg-Moore
+
+
+
+
+
+
+
+
 This research will form part of the author's PhD thesis. The author would like to thank his advisor, Haynes Miller, for his support and guidance, and John Harper, for sharing helpful insights into the use of cubical diagrams in connectivity analyses such as that of Section \ref{sec:connectivityAnalysis}.
 \end{Intro}
 
@@ -516,7 +514,9 @@ Note that $F^\calc$ is a section of $Q^{\calc}$, since $Q^{\calc}\circ F^{\calc}
 \subsection{Quillen's model structure on $s\calc$ and the bar construction}\label{ssec: quillen model and bar construction}
 For any of the algebraic categories $\calc$ herein we use Quillen's simplicial model category structure on the category $s\calc$ \cite{QuillenHomAlg.pdf}, \cite{MillerSullivanConjecture.pdf}, or \cite{Blanc_Stover-Groth_SS.pdf}. In this structure, the weak equivalences (fibrations) are the maps which are weak equivalences (fibrations) of simplicial abelian groups, so that every object is fibrant. 
 
- A simplicial object $X$ is \emph{almost free} if there are subspaces $V_n\subseteq X_n$ for each $n\geq0$ such that the composite $F^\calc  V_n\to F^\calc  X_n\overset{\rho}{\to} X_n$ is an isomorphism for all $n$, and such that the subspaces $V_n$ are preserved by all of the degeneracies and face maps of $X$ except for $d_0$. An almost free object is cofibrant, and every cofibrant object is a retract of an almost free object \citeBOX[\S3]{MillerSullivanConjecture.pdf}.
+ A simplicial object $X$ is \emph{almost free} if there are subspaces $V_n\subseteq X_n$ for each $n\geq0$ such that the composite $F^\calc  V_n\to F^\calc  X_n\overset{\rho}{\to} X_n$ is an isomorphism for all $n$, and such that the subspaces $V_n$ are preserved by all of the degeneracies and face maps of $X$ except for $d_0$. An almost free object is cofibrant, and every cofibrant object is a retract of an almost free object \citeBOX[\S3]{MillerSullivanConjecture.pdf}. 
+
+There is a richer notion, that of an almost free map --- a map $X\to Y$ such that $Y_n$ contains a subspace $V_n$ for each $n$ such that the $V_n$ are preserved by all faces and degeneracies except for $d_0$, and such that the natural map $X_n\sqcup F^\calc(V_n) \to Y_n$ is an isomorphism for each $n$. An almost free map is cofibrant, and every cofibrant map is a retract of an almost free map.
 
 A \emph{cofibrant replacement functor} for $s\calc$  is an endofunctor $f$ of $s\calc$ whose image consists only of cofibrant objects equipped with  a natural acyclic fibration $\epsilon:f\Rightarrow \Id $. One classical way to define such a functor is as follows.
 
@@ -527,6 +527,9 @@ The face maps are given by the formula $d_i=(F^\calc)^i\rho$, and the degeneraci
 This object is almost free, with $B_s^\calc X$ generated by its subspace $V_s=(F^\calc )^sX$, moreover, it is standard \citeBOX[\S4]{BlumRiehlResolutions.pdf} that the augmentation $B^\calc X\to X$ is an acyclic fibration.
 
 The construction generalizes to yield a cofibrant replacement functor $B^{\calc}$ on $s\calc$: one applies  $B^{\calc}:\calc\to s\calc$ levelwise to obtain a bisimplicial object, and then takes the diagonal. A standard spectral sequence argument shows that this is a cofibrant replacement functor. We may write $B^{\calc}$ for any of the functors $\calc\to s\calc$, $s\calc\to ss\calc$ and $s\calc\to s\calc$, depending on context.
+
+
+
 
 \subsection{Categories of graded $\Ftwo $-vector spaces and linear dualization}
 In order that we can be more specific about the types of gradings we have in mind, in this section we introduce  notation for the key categories of graded vector spaces. We will still sometimes write $\vect{}{}$ for a generic category of graded vector spaces, or for the category of ungraded vector spaces, as necessary.
@@ -557,14 +560,16 @@ and we write $\vect{+}{r}$ for the category of such objects. Similarly, there is
 
 
 \subsection{The Dold-Kan correspondence}\label{The Dold-Kan correspondence}
-In this paper we will use the following four chain complexes in $\complexes \vect{+}{r}$ associated with a simplicial graded vector-space $V\in s\vect{+}{r}$:
+In this paper we will use each of the following five chain complexes in $\complexes \vect{+}{r}$ associated with a simplicial graded vector-space $V\in s\vect{+}{r}$:
 \begin{alignat*}{2}
 C_nV&:=V_n&& \textup{ with differential }d=\textstyle\sum_{i=0}^{n}d_i;\\
 N_nV&:=\textstyle\bigcap_{0< i\leq n}\ker(d_i:V_n\to V_{n-1})&& \textup{ with differential }d=d_0;\\
 \Nop_nV&:=\textstyle\bigcap_{0\leq i< n}\ker(d_i:V_n\to V_{n-1})&& \textup{ with differential }d=d_n;\\
-N_n^\div V&:=V_n/(\textup{degenerate $n$-simplices})&& \textup{ with differential }d=\textstyle\sum_{i=0}^{n}d_i.
+\textup{Deg}_n V&:=\textstyle\sum_{0\leq i< n}\im(s_i:V_{n-1}\to V_{n})
+&& \textup{ with differential }d=\textstyle\sum_{i=0}^{n}d_i.\\
+N_n^\div V&:=V_n/\textup{Deg}_n V&& \textup{ with differential }d=\textstyle\sum_{i=0}^{n}d_i.
 \end{alignat*}
-There are evident inclusions of $N_*V$ and $\Nop_*V$ into $C_*V$, and a projection of $N_*V$ onto $N_*^\div V$, and all of these maps are weak equivalences. Moreover, the composite $N_*V\to N_*^\div V$ is an isomorphism (as is the composite from $\Nop_*V$). It will be helpful to have an explicit formula for the composite
+There are evident inclusions of $N_*V$ and $\Nop_*V$ into $C_*V$, and a projection of $C_*V$ onto $N_*^\div V$, and all of these maps are weak equivalences. Moreover, the composite $N_*V\to N_*^\div V$ is an isomorphism (as is the composite from $\Nop_*V$). It will be helpful to have an explicit formula for the composite
 \[C_*V\to N_n^\div V \overset{\cong}{\to}N_nV. \]
 \begin{lem}
 \label{the map nml}
@@ -680,6 +685,31 @@ and an explicit normalization map
 \[\textup{nml}=(1+d^ns^{n-1})\cdots (1+d^2s^1)(1+d^1s^0):C^nU\to N^n_\subseteq U\]
 with properties dual to the simplicial version. The cohomology of any of these homotopy equivalent cochain complexes defines the \emph{cohomotopy} $\pi^*U$ of $U$.
 
+\subsection{Skeletal filtrations}\label{Skeletal filtrations}
+Suppose that $X\in s\calc$ is almost free on $V_s\subseteq X_s$. Miller \citeBOX[p.~55]{MillerSullivanConjecture.pdf} defines a filtration of $X$ by almost free subobjects
+\[\xymatrix@R=4mm@1{
+0\ar@{ >->}[r]
+&%r1c1
+F_0X\ar@{ >->}[r]&%r1c2
+F_1X\ar@{ >->}[r]&%r1c3
+F_2X\ar@{ >->}[r]&%r1c3
+\cdots \ar@{ >->}[r]&%r1c4
+\colim F_mX= X
+}\]
+as follows.  For each $m\geq0$, write $F_mV_i$ for the subspace of $V_i$ consisting of degeneracies of elements of $V_j$ for $j\leq m$. Then write $F_mX$ for the subobject of $X$ which is almost free on the subobjects $F_mV_i$. The inclusions of these subobjects are  almost free maps, and the colimit is evidently $X$.
+\begin{lem}\label{skeleton lemma}
+For each $m$, $V_m$ has direct sum decomposition, evidently natural in maps of almost free objects preserving the chosen almost free subspaces:
+\[V_m=(V_m\cap N_mX)\oplus(V_m\cap D_mX),\]
+with $ V_m\cap N_mX=\im\Bigl(V_m\overset{\textup{nml}}{\to}V_m\Bigr)$.
+Moreover, the map 
+\[(\textstyle\sum_{i=0}^{m-1}s_i):V_{m-1}^{\oplus m}\to F_{m-1}V_m\]
+is injective.
+\end{lem}
+\begin{proof}
+The second statement is implied by \cite[Fact 3.9]{MillerSullivanConjecture.pdf}. For the direct sum decomposition, it is enough to note that $\textup{nml}$ preserves $V_m$ (which is clear from its defining formula), as it is already known to be an idempotent on $X_m$ with image $N_mX$ and kernel the degenerate simplices $D_mX$.
+%it is clear that $\textup{nml}$ preserves $V_m$, and its purpose is to have image in $N_mX$ and kernel the degenerate elements in $C_mX$. Thus, it is an idempotent of $V_m$, with image in $V_m\cap N_mX$, and kernel the degenerate elements of $V_m$. It is also clear that $\im((\Id-\textup{nml})|_{V_m})\subseteq F_{m-1}V_m$. As $N_mX\cap F_{m-1}V_m=0$, the decomposition of $V_m$ provided by this idempotent is precisely that claimed.
+\end{proof}
+
 \subsection{Dold's theorem}
 According to Dold \cite{DoldHomologySPs.pdf}, see also \citeBOX[Lemma 3.1]{ChingUnpublished}: 
 \begin{thm}[(Dold's theorem)]
@@ -727,7 +757,7 @@ We define the \emph{$\calc$-cohomology} $H^*_\calc X$ of $X$ to be $\dual(H_*^\c
 Suppose that $X\in s\calc$ is almost free with generating subspaces $V_n\subseteq X_n$. Then any homology class in $H_n^{\calc}X\cong \pi_nQ^{\calc}X$ can be represented by the image in $Q^{\calc}X_n$ of an element of $V_n\cap N_nX$.
 \end{lem}
 \begin{proof}
-Consider the maps $\textup{nml}:C_nX\to N_nX$ and $\textup{nml}:C_nQ^\calc X\to N_nQ^\calc X$ of lemma \ref{the map nml}.
+Follows from lemma \ref{skeleton lemma}. \tiny Consider the maps $\textup{nml}:C_nX\to N_nX$ and $\textup{nml}:C_nQ^\calc X\to N_nQ^\calc X$ of lemma \ref{the map nml}.
 Choose a representative $w\in ZN_nQ^\calc X$. As the composite $V_n\subseteq X_n\epi Q^\calc X_n$ is an isomorphism, one can find some $v\in V_n$ such that the image of $v$ in $Q^\calc X_n$ is $w$. Although $v$ need not lie in $N_nX$, $\textup{nml}(v)$ must lie in $N_nX$, and maps to $\textup{nml}(w)\in ZN_nQ^\calc X$ under the quotient map.  However, as $w\in ZN_nQ^\calc X$ and $\textup{nml}$ acts as the identity on this subspace, $w=\textup{nml}(w)$, so $v$ is the element we seek.
 \end{proof}
 The previous result showed that we may find representatives for any homology class in the subobject $V_n\cap N_nX$, while for other applications it will be preferable simply to pass to the quotient: %We will sometimes wish to work directly with the generating subspaces when working with (co)-homology, and will then apply the following easy observation:
@@ -959,28 +989,6 @@ We can again add internal gradings, the richest case being that in which  $V\in 
 
 
 
-
-
-
-
-
-\subsection{Throatclearing}
-
-
-we will always write $\E{r}{}{V}{}{}$ for a homological or homotopical spectral sequence and $\E{}{r}{V}{}{}$ for a cohomological one.
-
-Given a bisimplicial vector space $V_{s,t}$, we obtain a double chain complex $N_sN_tV$. There is a first quadrant homotopy spectral sequence $\E{r}{}{V}{}{s,t}$, with $\E{2}{}{V}{}{s,t}=\pi\uhor_s\pi\uver_tV$, converging to $\pi_{s+t}\diag{ V}$.
-There is a first quadrant cohomotopy spectral sequence $\E{}{r}{V}{s,t}{}$, with $\E{}{2}{V}{s,t}{}=\dual(\pi\uhor_s\pi\uver_tV)$, converging to $\dual(\pi_{s+t}\diag{ V})$.
-
-Given a cosimplicial simplicial vector space  $V_{s,t}$, we obtain a mixed chain complex $N^sN_tV$.\\
-There is a second quadrant homotopy spectral sequence $\E{r}{}{V}{s}{t}$, with $\E{2}{}{V}{s}{t}=\pi\dhor^s\pi\uver_tV$, which will sometimes converge to $\pi_{t-s}\Tot V$.
-
-\hfil
-
-\noindent first quadrant homotopy --- Stover's van Kampen\\
-first quadrant cohomology --- Serre sseq, our GSSeqs\\
-second quadrant homotopy --- Adams or Bousfield-Kan spectral sequences\\
-second quadrant cohomology --- Dwyer's work Eilenberg-Moore
 
 
 
@@ -1416,7 +1424,7 @@ C\mathbb{K}^{\calc,t}_{s_{r+1},\ldots,s_1}
 K^\calc C\mathbb{K}^{t}_{s_{r+1},\ldots,s_1}%
 % Comment
 \end{alignat*}
-The $\mathbb{K}^{\calc,t}_{s_{r+1},\ldots,s_1}$ are the \emph{Eilenberg-Mac Lane objects in $s\calc$}. In the homotopy category of $s\calc$, the object $K^\calc\mathbb{K}^t_{n,s_r,\ldots,s_1}$ represents the contravariant functor $H^n_{\calc}(\DASH)_t^{s_r,\ldots,s_1}:s\calc\to\vect{}{}$,  c.f.\ \cite[Proposition 4.3]{MR1089001}. 
+The $\mathbb{K}^{\calc,t}_{s_{r+1},\ldots,s_1}$ are the \emph{Eilenberg-Mac Lane objects in $s\calc$}. In the homotopy category of $s\calc$, the object $\mathbb{K}^{\calc,t}_{n,s_r,\ldots,s_1}$ represents the contravariant functor $H^n_{\calc}(\DASH)_t^{s_r,\ldots,s_1}:s\calc\to\vect{}{}$,  c.f.\ \cite[Proposition 4.3]{MR1089001}. 
 
 
 %The forgetful functor $U^\calc:\calc\to \vect{+}{r}$ used to define the weak equivalences and fibrations in $s\calc$, allows us to consider any object $X\in s\calc$ as an object of $s\vect{+}{r}$. In particular, for any $X\in s\calc$ we may define homotopy groups
@@ -1429,15 +1437,15 @@ The $\mathbb{K}^{\calc,t}_{s_{r+1},\ldots,s_1}$ are the \emph{Eilenberg-Mac Lane
 By virtue of the algebraic structure possessed by $X$, the cohomology groups $H_\calc^*X$ possess certain natural algebraic structure, that of a $\calc$-$H^*$-algebra.  As for $\calc$-$\Pi$-algebras, natural $N$-ary operations on cohomology groups
 \[(H^*_\calc X)^{s_{r+1}^{1},\ldots,s_{1}^{1}}_{t^1}\times\cdots \times(H^*_\calc X)^{s_{r+1}^{N},\ldots,s_{1}^{N}}_{t^N}\to (H^*_\calc X)^{s_{r+1},\ldots,s_{1}}_{t}\]
 are in bijective correspondence with elements of the group
-\[ H^*_\calc\Bigl(K^\calc\mathbb{K}_{s_{r+1}^{1},\ldots,s_{1}^{1}}^{t^1}\times\cdots\times K^\calc\mathbb{K}_{s_{r+1}^{N},\ldots,s_{1}^{N}}^{t^N}\Bigr)\makebox[0cm][l]{}^{s_{r+1},\ldots,s_{1}}_{t}.\]
+\[ H^*_\calc\Bigl(\mathbb{K}_{s_{r+1}^{1},\ldots,s_{1}^{1}}^{\calc,t^1}\times\cdots\times \mathbb{K}_{s_{r+1}^{N},\ldots,s_{1}^{N}}^{\calc,t^N}\Bigr)\makebox[0cm][l]{}^{s_{r+1},\ldots,s_{1}}_{t}.\]
 The category of $\calc$-$H^*$-algebras, monadic over $\vect{r+1}{+}$, has objects graded vector spaces $V\in\vect{r+1}{+}$ with a structure map 
 \[V^{s_{r+1}^{1},\ldots,s_{1}^{1}}_{t^1}\times\cdots \times V^{s_{r+1}^{N},\ldots,s_{1}^{N}}_{t^N}\to V^{s_{r+1},\ldots,s_{1}}_{t}\]
 for every such cohomology class, satisfying certain natural compatibilities.
 
-The formalism required to express these compatibilities is as follows. A \emph{generalized Eilenberg-Mac Lane object}, or \emph{GEM}, in $s\calc$ is an almost free object of $s\calc$ which is weakly equivalent to a product of objects of the form $K^\calc\mathbb{K}_{s_{r+1},\ldots,s_{1}}^{t}$. A \emph{finite GEM} is a GEM in which this product is finite. Let $\mathbb{K}$  be the $\vect{}{}$-enriched category with objects the finite GEMs in $s\calc$, and morphisms
-\[\hom_{\Pi}(M,M'):=\hom_{\textup{ho}(s\calc)}(M,M').\]
-Then the category of $\calc$-$H^*$-algebras  may be defined as the category of $\vect{}{}$-enriched functors $\mathbb{K}\to \vect{}{}$ that preserve finite products. The category of $\calc$-$H^*$-algebras is monadic over $\vect{r+1}{+}$, with forgetful functor defined  on a functor $h:K\to \vect{}{}$  by:%$A$ under the forget Such a functor $A$ yields an object of $U^{\calc\HAlg}A$ of $\vect{r+1}{+}$ via
-\[(U^{\calc\HAlg}h)_t^{s_{r+1},\ldots,s_1}:=h(K^\calc\mathbb{K}_{s_{r+1},\ldots,s_{1}}^{t}),\]
+The formalism required to express these compatibilities is as follows. A \emph{generalized Eilenberg-Mac Lane object}, or \emph{GEM}, in $s\calc$ is an almost free object of $s\calc$ which is weakly equivalent to a product of Eilenberg-Mac Lane objects  $\mathbb{K}_{s_{r+1},\ldots,s_{1}}^{\calc,t}$. A \emph{finite GEM} is a GEM in which this product is finite. Let $\mathbb{K}$  be the $\vect{}{}$-enriched category with objects the finite GEMs in $s\calc$, and morphisms
+\[\hom_{\mathbb{K}}(M,M'):=\hom_{\textup{ho}(s\calc)}(M,M').\]
+Then the category of $\calc$-$H^*$-algebras  may be defined as the category of $\vect{}{}$-enriched functors $\mathbb{K}\to \vect{}{}$ that preserve finite products. The category of $\calc$-$H^*$-algebras is monadic over $\vect{r+1}{+}$, with forgetful functor defined  on a functor $h:\mathbb{K}\to \vect{}{}$  by:%$A$ under the forget Such a functor $A$ yields an object of $U^{\calc\HAlg}A$ of $\vect{r+1}{+}$ via
+\[(U^{\calc\HAlg}h)_t^{s_{r+1},\ldots,s_1}:=h(\mathbb{K}_{s_{r+1},\ldots,s_{1}}^{\calc,t}),\]
 and any of the structure maps advertised above is induced by the corresponding cohomology class. %The natural compatibilities referred to above are the conditions required that a collection of structure maps extends to a functor on $\Pi^\textup{op}$.
 
 One obtains the free $\calc$-$H^*$-algebra on a graded vector space $V\in \vect{r+1}{+}$ \emph{of finite type} as follows. One views $\dual V$ as a chain complex in $\complexes\vect{+}{r}$ with zero differential, and applies the Dold-Kan correspondence and $K^\calc$, obtaining an object $K^\calc\Gamma \dual V\in s\calc$. Then:
@@ -1448,7 +1456,7 @@ Moreover, $F^{\calc\HAlg}$ is an augmented monad: one applies $H^*_{\calc}$ to t
 and in particular, there is an adjunction $Q^{\calc\HAlg}\dashv K^{\calc\HAlg}$.
 %For any simplicial object $A\in s\calc$, there is a natural map $\gamma:Q^{\calc\HAlg}\pi A\to \pi Q^{\calc}A$.
 
-To dualize a paragraph from \S\ref{homotopy and pialgs}: the theory above has the upshot that understanding the category $\calc\HAlg$ is equivalent to calculating the cohomology groups of finite GEMs. In may cases [??examples??], this can be performed by calculating the cohomology of individual Eilenberg-Mac Lane objects, and then using a \emph{Hilton-Milnor theorem} or \emph{K\"unneth theorem} to bootstrap up to a calculation on finite GEMs.
+To dualize a paragraph from \S\ref{homotopy and pialgs}: the theory above has the upshot that understanding the category $\calc\HAlg$ is equivalent to calculating the cohomology groups of finite GEMs. In may cases (theorem \ref{Koszul-dual Hilton-Milnor theorem},[??examples??]), this can be performed by calculating the cohomology of individual Eilenberg-Mac Lane objects, and then using a \emph{Hilton-Milnor theorem} or \emph{K\"unneth theorem} to bootstrap up to a calculation on finite GEMs.
 
 \subsection{The reverse Adams spectral sequence}
 \label{reverse Adams spectral sequence}
@@ -3137,7 +3145,7 @@ The following result shows that whenever an expression $P^Jx$ is forced to be ze
 \label{lemOnAdemChangeInMP}
 If $\produces{I}{J}{\Palg}$, then $\minDimP(J) \geq \minDimP(I)$, with strict inequality when $I$ and $J$ are distinct and of length two.
 \end{lem}
-The main theorem of Goerss' memoir is that these operations generate all of the operations in the category $\algs\HAlg$, and that all  the relations between them  are implied by those presented here. In \cite[Chapter V]{MR1089001}, Goerss shows that the listed operations completely capture the cohomology of an object $K^{\algs}\mathbb{K}_n$. He proves a Hilton-Milnor theorem \cite{GoerssHiltonMilnor.pdf}, which he uses in \citeBOX[\S11]{MR1089001} to bootstrap up to a calculation of the cohomology of any GEM in $s\algs$, namely \cite[Theorem I]{MR1089001}. The result states that whenever $V\in \vect{1}{}$,  is a  vector space of finite type, not only is 
+The main theorem of Goerss' memoir is that these operations generate all of the operations in the category $\algs\HAlg$, and that all  the relations between them  are implied by those presented here. In \cite[Chapter V]{MR1089001}, Goerss shows that the listed operations completely capture the cohomology of an object $\mathbb{K}_n^{\algs}$. He proves a Hilton-Milnor theorem \cite{GoerssHiltonMilnor.pdf}, which he uses in \citeBOX[\S11]{MR1089001} to bootstrap up to a calculation of the cohomology of any GEM in $s\algs$, namely \cite[Theorem I]{MR1089001}. The result states that whenever $V\in \vect{1}{}$,  is a  vector space of finite type, not only is 
 $F^{\algs}V$
 generated by $V$ under the operations of proposition \ref{omnibus on coh of simp algs}, it is as large as is conceivable given the relations presented. We will present, in proposition \ref{partialgoerss}, a partial version of his result.
 
@@ -3365,12 +3373,9 @@ We'll also use the following calculation:
 If $\calc=\liealgs$ (as opposed to $\restliealgs$), then $\Sq^1=0$. In particular, for $x\in H^0_{\liealgs}X$, $x^2=0$.
 \end{prop}
 \begin{proof}
-It is enough to prove this for the universal example $\imath_n\in H^*_{\liealgs}K^{\liealgs}\mathbb{K}_n$. The reverse Adams spectral sequence (\S\ref{reverse Adams spectral sequence}) is of the form
-\[(H^{p}_{\liealgs\PiAlg}K^{\liealgs\PiAlg}\mathbb{K}_{0,n})^{q}\implies H^{p+q}_{\liealgs}X.\]
-
-, and the method of \cite{Andre-StepByStep}
-
-One argues as in \citeBOX[\S12]{MR1089001}, using the fact that there is no $\lambda_0$ in the homotopy of a simplicial $\Lambda(\LieOperad)$-algebra. \textbf{RIGHT??}
+It is enough to prove this for the universal example $\imath_n\in H^*_{\liealgs}\mathbb{K}_n^{\liealgs}$. The reverse Adams spectral sequence (\S\ref{reverse Adams spectral sequence}) is of the form
+\[E_2^{p,q}=(H^{p}_{\liealgs\PiAlg}\mathbb{K}_{0,n}^{\liealgs\PiAlg})^{q}\implies H^{p+q}_{\liealgs}\mathbb{K}_n^{\liealgs}.\]
+The point now is that $\mathbb{K}_{0,n}^{\liealgs\PiAlg}$, which is just a constant object in $s\liealgs\PiAlg$ with value a one-dimensional Lie algebra in internal dimension $n$, is actually free as an object of $\liealgs\PiAlg$ below internal dimension $n+1$. This is simply because there is no $\lambda_0$ operation defined in $\liealgs\PiAlg$. One may thus construct a pas-\`a-pas resolution of $\mathbb{K}_{0,n}^{\liealgs\PiAlg}$ (a process described in \cite{Andre-StepByStep}) which in positive simplicial dimension is concentrated in internal dimension at least $n+1$, implying that $E_2^{p,q}=0$ when $p\geq1$ and $q\leq n$. Moreover, $E_2^{0,q}=0$ unless $q=n$, showing that $H^{n+1}_{\liealgs}\mathbb{K}_n^{\liealgs}=0$. This group contains $\Sq^1\imath_n$.
 \end{proof}
 A sequence $I=(i_\ell,\ldots,i_1)$ of integers $i_j\geq1$ is \emph{$\Sq$-admissible} if $i_{j+1}\geq 2i_j$ for $1\leq j <\ell$. For any sequence $I=(i_\ell,\ldots,i_1)$, write $\Sq^I$ for the monomial $\Sq^{i_\ell}\cdots \Sq^{i_1}$. The homogeneous Steenrod algebra has the expected admissible basis, and we say that \emph{$I$ produces $J$ in $\LieSteen$}, denoted $\produces{I}{J}{\Sq}$ if $\Sq^J$ appears in the $\Sq$-admissible expansion of $\Sq^I$.
 
@@ -3408,17 +3413,17 @@ H^*_{\bar{W}}(K_1\times K_2)
 % Right hand side
 H^*_{\bar{W}}K_1\otimes H^*_{\bar{W}}K_2.
 \end{alignat*}
-This containment in in fact an equality when $H^*_{\bar{W}}K_1 $ and $H^*_{\bar{W}}K_2$ are both of finite type, in which case $H^*_{\bar{W}}(K_1\times K_2)$ is also of finite type, and the isomorphism is proved. Thus, by induction on the total number of factors $K^{\restliealgs}\mathbb{K}_n$ of $K_1$ and $K_2$, we only need to check that $H^*_{\bar{W}}K^{\restliealgs}\mathbb{K}_n$ is of finite type for any $n\geq0$. This is implied by Priddy's calculation, proposition \ref{calc of restliecoh on single EMobject}.
+This containment in in fact an equality when $H^*_{\bar{W}}K_1 $ and $H^*_{\bar{W}}K_2$ are both of finite type, in which case $H^*_{\bar{W}}(K_1\times K_2)$ is also of finite type, and the isomorphism is proved. Thus, by induction on the total number of factors $\mathbb{K}_n^{\restliealgs}$ of $K_1$ and $K_2$, we only need to check that $H^*_{\bar{W}}\mathbb{K}_n^{\restliealgs}$ is of finite type for any $n\geq0$. This is implied by Priddy's calculation, proposition \ref{calc of restliecoh on single EMobject}.
 \end{proof}
-\noindent After giving the calculation on a single Eilenberg-Mac Lane object, the cohomology of finite GEMs, and thus the category $\restliealgs\HAlg$ is determined by proposition \ref{Prop on cohomology of product of finite lie gems} and the Cartan formula. The structure defining $\algs\PiAlg$ is then well understood in light of:
+\noindent After giving the calculation on a single Eilenberg-Mac Lane object, the cohomology of finite GEMs, and thus the category $\restliealgs\HAlg$ is determined by proposition \ref{Prop on cohomology of product of finite lie gems} and the Cartan formula. The structure defining $\restliealgs\PiAlg$ is then well understood in light of:
 \begin{prop}[{\citeBOX[6.1]{PriddySimplicialLie.pdf}}]
 \label{calc of restliecoh on single EMobject}
-For $n\geq0$, let $\imath$ be the fundamental class in $H^n_{\restliealgs}(F^{\restliealgs}\mathbb{K}_n)$. Then, as non-unital (degree shifted) commutative algebras:
-\[H^n_{\restliealgs}(F^{\restliealgs}\mathbb{K}_n)\cong S(\CommOperad)\bigl[\Sq^I\imath\,\bigm|\,\textup{$I$ is $\Sq$-admissible, $e(I)\leq n$}\bigr].\]
+For $n\geq0$, let $\imath$ be the fundamental class in $H^n_{\restliealgs}(\mathbb{K}_n^{\restliealgs})$. Then, as non-unital (degree shifted) commutative algebras:
+\[H^n_{\restliealgs}(\mathbb{K}_n^{\restliealgs})\cong S(\CommOperad)\bigl[\Sq^I\imath\,\bigm|\,\textup{$I$ is $\Sq$-admissible, $e(I)\leq n$}\bigr].\]
 \end{prop}
 
 The case of simplicial Lie algebras mimics that of simplicial commutative algebras: for Lie algebras, the homogeneous Steenrod algebra acts on cohomology, and is Koszul dual to the opposite of the $\Lambda$-algebra, which posesses an unstable partial left action on  homotopy.
-
+\textbf{What can I do for $\Lambda(\LieOperad)$?}
 
 \end{Constructing cohomology operations}
 
@@ -3692,8 +3697,8 @@ z_1\otimes z_2,&\textup{if }r=0,\,a=2,\,z_1\in X,\,z_2\in Y,
 \label{quadpartcalc for various W and L}
 Suppose $V\in\vect{+}{n}$. Then:
 \begin{enumerate}
-\item \makebox[\widthof{$\quadratic_\restliealgs$}][l]{$\quadratic_{\calL(n)}$} is the composite $F^{\calL(n)} V\epi \quadgrad{2}F^{\calL(n)} V\subseteq S^2V$;
-\item \makebox[\widthof{$\quadratic_\restliealgs$}][l]{$\quadratic_{\calW(n)}$} is the composite $F^{\calw(n)} V\epi F^{\calL(n)} V\epi \quadgrad{2}F^{\calL(n)} V\subseteq S^2V$.\end{enumerate}
+\item \makebox[\widthof{$\quadratic_\restliealgs$}][l]{$\quadratic_{\calL(n)}$} is the composite $F^{\calL(n)} V\epi \quadgrad{2}F^{\calL(n)} V\subseteq \Sigma S^2V$;
+\item \makebox[\widthof{$\quadratic_\restliealgs$}][l]{$\quadratic_{\calW(n)}$} is the composite $F^{\calw(n)} V\epi F^{\calL(n)} V\epi \quadgrad{2}F^{\calL(n)} V\subseteq \Sigma S^2V$.\end{enumerate}
 \end{prop}
 \begin{proof}
 Consider the case $\calw(n+1)$ for $n\geq0$. As $\quadratic_\calc$ vanishes except on quadratic grading 2, one only checks terms $[x,y]$, $\restn{x}$, and $x\lambda_i$ (a $\calU(n+1)$-operation, not the restriction):
@@ -3701,7 +3706,7 @@ Consider the case $\calw(n+1)$ for $n\geq0$. As $\quadratic_\calc$ vanishes exce
 \quadratic_{\calw(n+1)}([x,y])&=j_{\calw(n+1)}([{x_1}+{{x_2}},{y_1}+{{y_2}}]+[{x_1},{y_1}]+[{{x_2}},{{y_2}}])\\
 &=j_{\calw(n+1)}([{x_1},{{y_2}}]+[{{x_2}},{y_1}])=x\otimes y+y\otimes x,
 \end{alignat*}
-which is precisely the representation of $[x,y]$ in $\quadgrad{2}F^{\calL(n+1)}V\subseteq V^{\otimes2}$. Similarly, $\quadratic_{\calw(n+1)}(x\lambda_i)$ vanishes (as $\calU(n+1)$-operations are linear), while $\quadratic_{\calw(n+1)}(\restn{x})$ equals $x\otimes x$ as desired. The other cases, including the case of $\calw(0)$, are barely any different.
+which is precisely the representation of $[x,y]$ in $\quadgrad{2}F^{\calL(n+1)}V\subseteq \Sigma (V^{\otimes2})$. Similarly, $\quadratic_{\calw(n+1)}(x\lambda_i)$ vanishes (as $\calU(n+1)$-operations are linear), while $\quadratic_{\calw(n+1)}(\restn{x})$ equals $x\otimes x$ as desired. The other cases, including the case of $\calw(0)$, are barely any different.
 \end{proof}
 
 
@@ -3741,9 +3746,9 @@ Moreover, each map $P^i:V^t\to \quadgrad{2}(F^{\calw(0)}V)^{t+i+1}$ appearing in
 \[\theta_i:\left((F^{\calw(0)}V)^{t+i+1}\overset{\textup{proj}}{\makebox[.06ex][l]{$\to$}\to} (\quadgrad{2}F^{\calw(0)}V)^{t+i+1}\overset{\textup{proj}}{\makebox[.06ex][l]{$\to$}\to} \im (P^i)\overset{(P^i)^{-1}}{\to}V^{t}\right).\]
 Here we have projected onto the quadratic filtration 2 part, and then further onto the relevant summand in its natural decomposition. Note that although $P^t:V^t\to \quadgrad{2}(F^{\calw(0)}V)^{2t+1}$ is a non-trivial linear map when $t\geq2$, its image is entangled with the image of the bracket, and we are not able to split it off. Thus we are not able to improve on the bounds $2\leq i< t$.
 \begin{prop}
-There is a map $\theta_i^\star:V^t\to (C_{\algs\HCoalg}V)^{t+i+1}$, natural in $V\in\vect{}{+}$, such that the following diagram commutes:
+There is a map $\theta_i^\star:V_t\to (C_{\algs\HCoalg}V)_{t+i+1}$, natural in $V\in\vect{}{+}$, such that the following diagram commutes:
 \[\xymatrix@R=4mm@C=20mm{
-\dual((C_{\algs\HCoalg}V)^{t+i+1})&%r1c1
+\dual((C_{\algs\HCoalg}V)_{t+i+1})&%r1c1
 \dual V\ar[l];[]^-{(\theta_i^\star)^*}
 %\ar[dl]^-{\ExtCohOp^k}
 \\%r1c2
@@ -3761,11 +3766,9 @@ When $V$ is of finite type, as $F^{\calW(0)}$ preserves vector spaces of finite 
 \label{operations on goerss homology}
 Suppose that $X\in s\calw(0)$ is almost free, so that we may identify $H^*_{\calw(0)}X$ with $\pi^*\dual Q^{\calw(0)}X$. Then for $2\leq i <t$, the chain map $\widetilde{\theta_i}$ of proposition \ref{general CohOpns given irreducibility} induces a linear operation
 \[\deltav_i:(H^*_{\calw(0)}X)^{s}_t\to (H^*_{\calw(0)}X)^{s+1}_{t+i+1}.\] 
-These operations are natural in maps preserving the generating subspaces, and satisfy the $\delta$-Adem relation of [Dwyer].
+These operations are natural in maps preserving the generating subspaces, and satisfy the unstable $\delta$-Adem relation of proposition \ref{omnibus on htpy of simp algs}\textit{(\ref{deltaademsunstable})}.
 \end{prop}
 \noindent For \emph{any} $X\in s\calw(0)$, the bar construction $Q^{\calw(0)}B^{\calw(0)}X$ calculating  $H^*_{\calw(0)}X$ has a natural almost free structure, so that proposition \ref{operations on goerss homology} constructs natural operations on $H^*_{\calw(0)}X$ for all $X\in s\calw(0)$.
-
-Note that \textbf{these are the tricky, unstable operations.}
 %Now suppose that $X\in\calw(0)$, and consider the bar construction $Q^{\calw(0)}B^{\calw(0)}X$ whose cohomotopy is $H^*_{\calw(0)}X$. Until the end of \S\ref{Cohomology Operations for W and U}, we will write $Q\mathbb{B}$ for this simplicial object, write $F$ for $F^{\calw(0)}$, and identify $Q\mathbb{B}_s$ with $F^sX$.
 \begin{proof}[Proof of proposition \ref{operations on goerss homology}]
 The conditions of proposition \ref{general CohOpns given irreducibility} are satisfied with $\theta=\theta_i$ and $G$ is the identity functor. The condition \[\smash{\theta\circ\mu_V=\theta\circ \epsilon_{F^\calc V} +\theta\circ {F^\calc \epsilon_V}:F^\calc F^\calc V\to V}\]
@@ -5127,11 +5130,11 @@ degenerates to $\sigma_i((P^k)^*h_{t,i})=\sigma_i^\textup{ext}\imath_t$.
 \begin{prop}
 \label{propOnKoszulDelta}
 For $2\leq i\leq t$, there is a function
-\[\overline{G}:\hom_{s\vect{}{}}(\mathbb{K}_t,W)\to \hom_{s\algs}(\Theta_{t,i},cKW),\]
+\[\overline{G}:\hom_{s\vect{}{}}(\mathbb{K}_t,W)\to \hom_{s\algs}(\Theta_{t,i},cK^{\algs}W),\]
 natural in $W\in s\vect{}{}$, and satisfying $\overline{G}(\alpha)(\imath_t)=\widetilde{\alpha}$, such that the function
-\[G:\hom_{s\algs}(\mathbb{K}_t,W)\to \pi_{t+i+1}(QcKW)=:H_{t+i+1}(KW)\]
+\[G:\hom_{s\vect{}{}}(\mathbb{K}_t,W)\to \pi_{t+i+1}(Q^{\algs}cK^{\algs}W)=:H_{t+i+1}(K^{\algs}W)\]
 defined by $G(\alpha):=H_*(\overline{G}(\alpha))(h)$ equals the following composite whenever $2\leq i<t$:
-\[\hom_{s\vect{}{}}(\mathbb{K}_t,W)\epi \pi_t W\overset{\textup{hur}}{\to} H_{t}(KW) \overset{\theta_i^\star}{\to}H_{t+i+1}(KW).\]
+\[\hom_{s\vect{}{}}(\mathbb{K}_t,W)\epi \pi_t W\overset{\textup{hur}}{\to} H_{t}(K^{\algs}W) \overset{\theta_i^\star}{\to}H_{t+i+1}(K^{\algs}W).\]
 \end{prop}
 %\begin{shaded}\tiny
 %\[{{\xymatrix@R=4mm{
@@ -5171,8 +5174,8 @@ C\mathbb{S}^\algs_{t+i}\ar[r]\ar@/_1em/[rr]_-{0}
 &KW}\]
 Corresponding to the right square is a map $\Theta_{t,i}\to c_2(KW)$, and the composite with the cofibration $c_2(KW)\to c(KW)$ is $\overline{G}(\alpha)$. This function $\overline{G}$ is evidently natural in $W$, and so then is $G$.
 
-The statement about $G$ is natural in $W\in s\vect{}{}$, so may be checked on the universal example $\imath_t\hom_{s\vect{}{}}(\mathbb{K}_t,\mathbb{K}_t)$. As $\overline{G}(\imath)$ is a map of $\algs$-$H_*$-coalgebras: $(P^i)^*G(\imath_t)=\textup{hur}(\imath_t)$; $(P^j)^*G(\imath_t)=0$ for all $j\neq i$ with $2\leq j\leq (t+i)/2$; and $\Delta G(\imath_t)$ vanishes unless $i=t$, in which case it equals $\imath\otimes \imath$. By construction, $G(\imath_t)$ lies in quadratic grading $2$ of the cofree construction:
-\[G(\imath_t)\in\quadgrad{2}H_{t+i+1}(K\mathbb{K}_t)=\quadgrad{2}C_{\algs\HCoalg}\{\imath_t\}.\]
+The statement about $G$ is natural in $W\in s\vect{}{}$, so may be checked on the universal example $\imath_t\in \hom_{s\vect{}{}}(\mathbb{K}_t,\mathbb{K}_t)$. As $\overline{G}(\imath)$ is a map of $\algs$-$H_*$-coalgebras: $(P^i)^*G(\imath_t)=\textup{hur}(\imath_t)$; $(P^j)^*G(\imath_t)=0$ for all $j\neq i$ with $2\leq j\leq (t+i)/2$; and $\Delta G(\imath_t)$ vanishes unless $i=t$, in which case it equals $\imath\otimes \imath$. By construction, $G(\imath_t)$ lies in quadratic grading $2$ of the cofree construction:
+\[G(\imath_t)\in\quadgrad{2}H_{t+i+1}(\mathbb{K}^{\algs}_t)=\quadgrad{2}C_{\algs\HCoalg}\{\imath_t\}.\]
 These conditions suffice to identify $G(\imath_t)$.
 %and it is clear that the only element of quadratic grading $2$
 %
@@ -5800,7 +5803,7 @@ The identification of $E_2^\BSW$ follows from lemma \ref{Q of a model} and propo
 %\[Q^{\calL(n)}\BSWres L.\]
 %Now $L$ is an almost free object of $\calL(n)$, with $\pi_*L=H_*^{\calU(n)}X$. Thus $\pi_*(\BSWres L)$ is an almost free resolution of $H_*^{\calU(n)}X$ in $s\calw(n+1)$. Moreover, $\pi_*(Q^{\calL(n)}\BSWres L)=Q^{\calw(n+1)}\pi_*(\BSWres L)$, so that
 %\[E^2_{**}=H_*^{\calw(n+1)}H_*^{\calU(n)}X.\]
-\textbf{Some comments} on the convergence target.
+
 
 
 Before we do, we will recall Blanc and Stover's constructions, and imbue them with certain extra structure that will be reflected in the spectral sequence.
@@ -6084,7 +6087,35 @@ We may model the final isomorphism as follows. Write $U^{\calw}_{\calU}:\calw\to
 and the operations we are considering are easily understood in relation to this map.
 \end{proof}
 
+\subsection{An equivalent reverse Adams spectral sequence}
+%Use the notation
+%$L:=Q^{\calU(n)}{ B^{\calw(n)}X}\in s\calL(n)$, for $X\in s\calW(n)$.
+\begin{prop}
+The composite functor spectral sequence applied to $X\in s\calW(n)$ coincides with the reverse Adams spectral sequence applied to  $L:=Q^{\calU(n)}{ B^{\calw(n)}X}\in s\calL(n)$.
+\end{prop}
+\noindent Before proving this fact, we should remove any confusion about the convergence targets of these spectral sequences. The reverse Adams  spectral sequence has target
+\[\pi^*\dual Q^{\calL(n)}B^{\calL(n)}L\cong \pi^*\dual Q^{\calL(n)}L=\pi^*\dual Q^{\calW(n)}B^{\calW(n)}X=:H^*_{\calW(n)}X,\]
+where the isomorphism follows from the same acyclicity condition needed to define the composite functor spectral sequence. Thus the targets coincide, as hoped.
+\begin{proof}
+We will use the Dwyer-Kan-Stover $E^2$ model structure on the category $ss\calc$, which originated in \cite{DKS.pdf} for bisimplicial sets, and is reinterpreted for objects of $ss\calc$ in \citeBOX[\S4.1.1]{Blanc_Stover-Groth_SS.pdf}.
 
+ Viewing $L$ as a constant object in $ss\calL(n)$, each of $B_{\langle 1\rangle}:=B^{\calL(n)}_pL_q$ and $B_{\langle 2\rangle}:=B^{\BSW}L$ admits an $E^2$-weak equivalence to $L$. Moreover, each $B_{\langle i\rangle}$ is cofibrant. Indeed, $B_{\langle 2\rangle}$ is cofibrant by construction, while we must check  that  $B_{\langle 1\rangle}$ is M-free, in the sense of \citeBOX[\S4.1.1]{Blanc_Stover-Groth_SS.pdf}.
+
+For this, we use lemma \ref{skeleton lemma}. That is, for each $q$, the horizontal simplicial object $(B_{\langle 1\rangle})_{p,q}:=B^{\calL(n)}_pL_q$ has an obvious structure of almost free simplicial (in $p$) object, and the generating subspaces are preserved by the vertical simplicial maps. Thus, lemma \ref{skeleton lemma} yields decompositions
+\[V_p=\im\Bigl(V_{p-1}\overset{s\uhor_0}{\to}V_p\Bigr)\oplus\cdots \oplus \im\Bigl(V_{p-1}\overset{s\uhor_{p-1}}{\to}V_p\Bigr)\oplus \Bigl(V_p\cap N\uhor_pB_{\langle 1\rangle}\Bigr).\]
+To show that $V_p$ is M-free, we need to decompose each $V_p$ into a coproduct of objects $\mathbb{K}_{s_{n+1},\ldots,s_1}^t\in s\vect{+}{n}$, up to homotopy, and ensure that the degeneracies are induced up to homotopy by sphere inclusions. The decompositions of $V_p$ just provided make this a simple task.
+Suppose that $V_{p-1}$ already has chosen decomposition as a sum of objects $\mathbb{K}_{s_{n+1},\ldots,s_1}^t$ up to homotopy. Then if we choose such a decomposition of $V_p\cap N\uhor_pB_{\langle 1\rangle}$, and use the $p$ inclusions $s\uhor_i:V_{p-1}\to V_p$ to induce decompositions of the other summands of $V_p$ using the decomposition of $V_{p-1}$, we have the decomposition up to homotopy that we need.
+
+Now, by factoring the map $0\to L$ by a cofibration followed by an acyclic fibration $B_{\langle 3\rangle}\to L$ in the $E^2$ model structure, we can form the solid maps in a diagram in which each $B_{\langle i\rangle}$ is cofibrant:
+\[\xymatrix@R=4mm{
+B_{\langle 3\rangle}\ar@{->>}[dr]^-{\sim}
+&%r1c1
+B_{\langle 1\rangle}\ar[d]^-{\sim}\ar@{..>}[l]_-{\sim}\\%r1c2
+B_{\langle 2\rangle}\ar[r]^-{\sim}\ar@{..>}[u]_-{\sim}&%r2c1
+L%r2c2
+}\]
+By the lifting axiom (of cofibrations against acyclic fibrations) we can find the dotted maps, weak equivalences making the diagram commute. The theory presented in \cite{DKS.pdf} then explains that the spectral sequences of $Q^{\calL(n)}B_{\langle i\rangle}$ coincide for $i=1,2,3$. When $i=1$ we obtain the unstable Adams spectral sequence of $L$ in $s\calL(n)$, and when $i=2$ we obtain the composite functor spectral sequence of $X\in s\calW(n)$.
+\end{proof}
 \end{Composite functor spectral sequences}
 
 
@@ -6281,7 +6312,7 @@ $\calMh(n+1)$-operations of the same name defined on $\calw(n)$-cohomology in
 \subsection{Proofs of theorems \ref{E2CompFuncLieOperationsID}-\ref{EInftyCompFuncOperationsID}}
 
 \begin{proof}[Proof of \ref{E2CompFuncLieOperationsID}]
-This proof relies on a commuting diagram, in which we write $L=Q^{\calU(n)}|B^\calw(n)X|\in s\calL(n)$ and $Y=\BSWres L\in ss\calL(n)$:
+This proof relies on a commuting diagram, in which we employ the  notation $L=Q^{\calU(n)} B^\calw(n)X \in s\calL(n)$ and $Y=\BSWres L\in ss\calL(n)$:
 \[\xymatrix@C=13mm@R=4mm{
 (N_p^\textup{h}\pi_*^{\textup{v}}Q^{\calL(n)}Y)^{\otimes2}&%r1c1
 (N_p^\textup{h}Q^{\calw(n+1)}\pi_*^{\textup{v}}Y)^{\otimes2}
@@ -6432,29 +6463,36 @@ Similarly, our understanding of the construction of $\lambda$-operations and ite
 \begin{proof}[Proof of \ref{E2CompFuncKosOperationsID}]
 We must identify the operations $\Sqv^i=\psi_\BSW^*\circ\vExtCohOp^{i-1}$ with the $\calw(n+1)$-cohomology operations $\Sqv^i$ defined in \S\ref{section: vertical Koszul operations n positive} using the maps $\theta^i$. However, the $\theta^i$ are defined on the bar construction, while $\psi_\BSW^*$ is defined on the Blanc-Stover resolution. In order to make the comparison, we will need to choose a weak equivalence of resolutions of $\pi_* L$ in $s\calw(n+1)$
 \[\chi:B^{\calw(n+1)}_{\bullet}\pi_*L\to \pi_*(\BSWres L).\]
-We will use Miller's techniques \citeBOX[p.~55]{MillerSullivanConjecture.pdf} to define such a $\chi$ explicitly. For brevity, write $\mathbb{B}$ for the object $B_i^{\calw(n+1)}\pi_*L\in s\calw(n+1)$. Write $V_i$ for the subspace $(F^{\calw(n+1)})^{i}\subseteq \mathbb{B}$ of generators. For each $m\geq0$, write $F_mV_i$ for the subspace of $V_i$ consisting of degeneracies of elements of $V_j$ for $j\leq m$. Then write $F_m\mathbb{B}$ for the subobject of $\mathbb{B}$ which is almost free on the subspaces $F_mV_i$.
+We will use Miller's techniques \citeBOX[p.~55]{MillerSullivanConjecture.pdf} to define such a $\chi$ explicitly. For brevity, write $\mathbb{B}$ for the object $B_i^{\calw(n+1)}\pi_*L\in s\calw(n+1)$. Write $V_i$ for the subspace $(F^{\calw(n+1)})^{i}\subseteq \mathbb{B}$ of generators. For each $m\geq0$, write $F_m\mathbb{B}$ for the $m$-skeleton of $\mathbb{B}$ (c.f.\ {Skeletal filtrations}), which is almost free on  subspaces $F_mV_i$.
 
-Now for each $m$, $V_m$ splits into a direct sum
-$V_m=V'_m\oplus F_{m-1}V_m$,
-where $V'_m\subseteq N_m^\textup{h}\mathbb{B}$. To make this classical insight explicit, consider the endomorphism $c:\mathbb{B}_m\to \mathbb{B}_m$ introduced in the proof of lemma \ref{lemma on homology class repd by normalized generator}, an idempotent with image $N_m^\textup{h}\mathbb{B}$, preserving the subspace $V_m$. As $\im((\Id-c)|_{V_m})\subseteq F_{m-1}V_m$, we may define $V'_m=c(V_m)$. \textbf{(read this paragraph sometime)}
 
-In order to define $\chi$, we recursively define its restriction to the skeleta $F_m\mathbb{B}$. In order to extend a map $\chi_{m-1}:F_{m-1}\mathbb{B}\to \pi_*(\BSWres L)$ to a map $\chi_m:F_m\mathbb{B}\to \pi_*(\BSWres L)$, we need only to specify the values of $\chi_m$ on $V'_m$, which is to choose a lift in the diagram
+%$F_mV_i$ for the subspace of $V_i$ consisting of degeneracies of elements of $V_j$ for $j\leq m$. Then write $F_m\mathbb{B}$ for the subobject of $\mathbb{B}$ which is almost free on the subspaces $F_mV_i$.
+
+%Now for each $m$, $V_m$ splits into a direct sum
+%$V_m=V'_m\oplus F_{m-1}V_m$,
+%where $V'_m\subseteq N_m^\textup{h}\mathbb{B}$. To make this classical insight explicit, consider the endomorphism $c:\mathbb{B}_m\to \mathbb{B}_m$ introduced in the proof of lemma \ref{lemma on homology class repd by normalized generator}, an idempotent with image $N_m^\textup{h}\mathbb{B}$, preserving the subspace $V_m$. As $\im((\Id-c)|_{V_m})\subseteq F_{m-1}V_m$, we may define $V'_m=c(V_m)$. \textbf{(read this paragraph sometime)}
+
+In order to define $\chi$, we recursively define its restriction to the skeleta $F_m\mathbb{B}$. Lemma \ref{skeleton lemma} implies that in order to extend a map $\chi_{m-1}:F_{m-1}\mathbb{B}\to \pi_*(\BSWres L)$ to a map $\chi_m:F_m\mathbb{B}\to \pi_*(\BSWres L)$, we need only to specify the values of $\chi_m$ on $V'_m:=V_m\cap N_m\mathbb{B}$. That is, we only need to choose a lift in the diagram
 \[\xymatrix@R=4mm{
 V'_m\ar@{-->}[r]^-{\chi_m}
 \ar[d]^-{d_0^\textup{h}}
 &%r1c1
-N^\textup{h}_m\pi_*(\BSWres L)\ar[d]^-{d_0^\textup{h}}
+N^\textup{h}_m\pi\uver_*(\BSWres L)\ar[d]^-{d_0^\textup{h}}
 \\%r1c2
 ZN^\textup{h}_{m-1}\mathbb{B}\ar[r]^-{\chi_{m-1}}
 &%r2c1
 ZN^\textup{h}_{m-1}\pi_*(\BSWres L)%r2c2
 }\]
-However, we will need to record some chain level information for what follows. Recursively for $m\geq-1$ [\textbf{say} ``view these as augmented simplicial objects, and start with $\chi_{-1}$ the identity''], we will construct functions $\overline{\chi}_m:V'_m\to ZN^\textup{v}_*\BSWres_m L$, with the property that $\im(\overline{\chi}_m)$ is contained in the span of the classes $z_{w}$ for $w\in ZN^\textup{v}_*\BSWres_{m-1}L$. In order to do this, one may choose a basis of $V'_m$, and then for each basis element $v$, choose a $\calw(n+1)$-expression $e(s^\textup{h}_{\alpha_j}w_j)$ for $v$, with $w_j\in V'_{n_j}$ for integers $n_j\leq m-1$ and degeneracy operators $s_{\alpha_j}:V'_{n_j}\to V_{m-1}$. Then we will define
+However, in order to actually carry out this process, we will need to record some chain level information, which is to say that we will need to construct maps into $N\uver_*B^{\BSW}L$, rather than just $\pi\uver_*B^{\BSW}L$. 
+
+It is best to view the domain and codomain of the proposed map $\chi$ as augmented horizontal simplicial objects, and start by defining $\chi_{-1}$ to be the identity of $\pi_*L$. Then for $m\geq0$, we recursively construct functions $\overline{\chi}_m:V'_m\to ZN^\textup{v}_*\BSWres_m L$, with the property that $\im(\overline{\chi}_m)$ is contained in the span of the classes $z_{w}$ for $w\in ZN^\textup{v}_*\BSWres_{m-1}L$. In order to do this, one may choose a basis of $V'_m$, and then for each basis element $v$, choose a $\calw(n+1)$-expression $e(s^\textup{h}_{\alpha_j}w_j)$ for $v$, with $w_j\in V'_{n_j}$ for integers $n_j\leq m-1$ and degeneracy operators $s_{\alpha_j}:V'_{n_j}\to V_{m-1}$. Then we will define
 \[\overline{\chi}_m(v)=z_{e^\textup{rep}(s^\textup{h}_{\alpha_j}\overline{\chi}_{n_j}(w_j))},\]
 where by $e^\textup{rep}$, we mean the cycle in $ZN_*^\textup{v}(\BSWres_mL)$ obtained from the cycles $s^\textup{h}_{\alpha_j}\overline{\chi}_{n_j}(w_j)\in ZN_*\BSWres_{m-1}L$ using the explicit formulae of \citeBOX[\S8]{CurtisSimplicialHtpy.pdf}, according to the chosen expression $e$ for $v$.
 Now the class of $\overline{\chi}_m(v)$ in $\pi_*(\BSWres_mL)$ is in fact in $N^\textup{h}_m\pi_*(\BSWres L)$, since (c.f.\ \cite[Lemma 2.7]{StoverVanKampen.pdf}) for $1\leq i \leq m$:
 \[d_i^\textup{h}\overline{\chi}_m(v) =z_{d^\textup{h}_{i-1}e^\textup{rep}(s^\textup{h}_{\alpha_j}\overline{\chi}_{n_j}(w_j))}\]
-where by construction $e^\textup{rep}(s^\textup{h}_{\alpha_j}\overline{\chi}_{n_j}(w_j))\in ZN^\textup{v}_*(\BSWres_{m-1} L)$ represents $\chi_{m-1}(d_{0}^\textup{h}(v))\in ZN_{m-1}^\textup{h}\pi_*(\BSWres  L)$. As such, the subscript $d^\textup{h}_{i-1}e^\textup{rep}(s^\textup{h}_{\alpha_j}\overline{\chi}_{n_j}(w_j))\in ZN^\textup{v}_*(\BSWres_{m-2} L)$ represents $0\in\pi_*(\BSWres_{m-2}L)$. Choosing a nullhomotopy $H\in N^\textup{v}_{*+1}(\BSWres_{m-2}L)$, $h_H$ is a null-homotopy of $d_i^\textup{h}\overline{\chi}_m(v)$, showing that the class of  $\overline{\chi}_m(v)$ lies in $N^\textup{h}_m\pi_*(\BSWres L)$.
+where, by construction, 
+\[e^\textup{rep}(s^\textup{h}_{\alpha_j}\overline{\chi}_{n_j}(w_j))\in ZN^\textup{v}_*(\BSWres_{m-1} L)\textup{ represents }\chi_{m-1}(d_{0}^\textup{h}(v))\in ZN_{m-1}^\textup{h}\pi_*(\BSWres  L).\]
+As such, the subscript $d^\textup{h}_{i-1}e^\textup{rep}(s^\textup{h}_{\alpha_j}\overline{\chi}_{n_j}(w_j))\in ZN^\textup{v}_*(\BSWres_{m-2} L)$ represents $0\in\pi_*(\BSWres_{m-2}L)$. Choosing a nullhomotopy $H\in N^\textup{v}_{*+1}(\BSWres_{m-2}L)$, $h_H$ is a null-homotopy of $d_i^\textup{h}\overline{\chi}_m(v)$, showing that the class of  $\overline{\chi}_m(v)$ lies in $N^\textup{h}_m\pi_*(\BSWres L)$.
 %\[e^\textup{rep}(s^\textup{h}_{\alpha_j}\overline{\chi}_{n_j}(w_j))=\chi_{m-1}(d_{0}^\textup{h}(v))\in ZN^\textup{v}_*\]
 Thus $\overline{\chi}_m$ does induce a map $\chi_m:V'_m\to N_m^\textup{h}\pi_*(\BSWres L)$, completing the construction of $\chi$.
 
@@ -6829,7 +6867,7 @@ is injective, which is part of proposition \ref{isomorphism rho k in some dims}.
 %
 %, note that on $V_{(r-1)}$, there are no non-trivial horizontal Steenrod operations except for the top Steenrod operation, the squaring operation. That is, for any $v\in (V_{(r-1)})^{0,0,s_{r-1},\ldots, s_1}_t$, suppose that $\Sqh^{i_\ell}\cdots\Sqh^{i_1}$ is an admissible sequence such that $\Sqh^{i_\ell}\cdots\Sqh^{i_1}v$ is not forced to be zero \textbf{(did we ever use the word \emph{excess}, or give a basis of $\calMh$?)}. Then we must have $i_j=2^j$ for each $j$, and  $\Sqh^{i_\ell}\cdots\Sqh^{i_1}v=v^{2^\ell}$. Note that the axiom $\Sqh^1v=0$ applies iff $s_{r-1}=\cdots =s_1=0$, i.e.\ iff $v$ is not restrictable, and so is an exterior generator in $\UEAX(V_{(r-1)}^*)^*$. That is, $F^{\calM_{\textup{h}}(r+1)}V_{(r-1)}$ and $\UEAX(V_{(r-1)}^*)^*$ are generated by $V_{(r-1)}$ using the same operations (commutative products), and these operations satisfy the same relations (only that classes in $(V_{(r-1)})_t^{0,\ldots,0}$ are exterior), proving the isomorphism. See also proposition \ref{basis of free horizontal operations algebra}.
 \end{proof}
-\subsection{A Koszul dual Hilton-Milnor theorem}
+\subsection{A K\"unneth theorem}
 This is an opportune moment to prove:
 \begin{thm}
 \label{Koszul-dual Hilton-Milnor theorem}
