@@ -8,23 +8,23 @@
 \ooooo[	do]{todolist}
 \ooooo[	in]{Intro}
 \ifx\IncludeAll\undefined\else\renewcommand{\ooooo}[2][]{\wooooo{#2}}\fi
-\ooooo[	ct]{Contents Page}
-\ooooo[	 1]{Conventions and notation}
-\ooooo[	 2]{Pi-algebras and cohomology algebras}   
-\ooooo[	 3]{Bousfield-Kan sseq}
-\ooooo[	 4]{Constructing homotopy operations}
-\ooooo[	 5]{Constructing cohomology operations} %\renewcommand{\wooooo}[2][]{\excludeversion{#2}}
-\ooooo[	 6]{homotopy operations for PRLs}
-\ooooo[	 7]{Cohomology Operations for W and U}
-\ooooo[	 8]{second quadrant homotopy}
-\ooooo[	 9]{Operations on the Bousfield-Kan spectral sequence}
+\wooooo[	ct]{Contents Page}
+\wooooo[	 1]{Conventions and notation}
+\wooooo[	 2]{Pi-algebras and cohomology algebras}   
+\wooooo[	 3]{Bousfield-Kan sseq}
+\wooooo[	 4]{Constructing homotopy operations}
+\wooooo[	 5]{Constructing cohomology operations} 
+\wooooo[	 6]{homotopy operations for PRLs}
+\wooooo[	 7]{Cohomology Operations for W and U}
+\wooooo[	 8]{second quadrant homotopy}    %\renewcommand{\wooooo}[2][]{\excludeversion{#2}}
+\wooooo[	 9]{Operations on the Bousfield-Kan spectral sequence}   
 \wooooo[	10]{Koszul complexes}
-\ooooo[	11]{Composite functor spectral sequences}%%%
-\ooooo[	12]{Operations in composite functor spectral sequences}%%%
+\wooooo[	11]{Composite functor spectral sequences}%%%
+\wooooo[	12]{Operations in composite functor spectral sequences}%%%
 \wooooo[	13]{Calculations of HWn for n nonzero}
 \wooooo[	14]{Calculations of HW0}
-\ooooo[	ap]{appendices}
-\ooooo[	bb]{bibliog}
+\wooooo[	ap]{appendices}
+\wooooo[	bb]{bibliog}
 
 
 
@@ -320,9 +320,14 @@ url=false,doi=false,isbn=false,eprint=false]{biblatex}%
 \newcommand{\vect}[2]{\calV^{#1}_{#2}}
 \newcommand{\BSW}{{\scrG}}
 \newcommand{\BSWres}{B^\BSW}%didn't always remember to use
-\newcommand{\PiAlg}{\textup{-$\Pi$-Alg}}
-\newcommand{\HAlg}{\textup{-$H^*$-Alg}}
-\newcommand{\HCoalg}{\textup{-$H_*$-Coalg}}
+%\newcommand{\PiAlg}{\textup{-$\Pi$-Alg}}
+%\newcommand{\HAlg}{\textup{-$H^*$-Alg}}
+%\newcommand{\HCoalg}{\textup{-$H_*$-Coalg}}
+
+\newcommand{\PA}[1]{\pi_*#1}
+\newcommand{\HA}[1]{H^*#1}
+\newcommand{\HC}[1]{H_*#1}
+
 \newcommand{\quadratic}{\textup{qu}}
 \newcommand{\quadgrad}[1]{\textup{q}_{#1}}
 \newcommand{\crossterms}{\textup{cr}}
@@ -1367,35 +1372,35 @@ By virtue of the algebraic structure possessed by $X$, the homotopy groups $\pi_
 \[(\pi_*X)_{s_{r+1}^{1},\ldots,s_{1}^{1}}^{t^1}\times\cdots \times(\pi_*X)_{s_{r+1}^{N},\ldots,s_{1}^{N}}^{t^N}\to (\pi_*X)_{s_{r+1},\ldots,s_{1}}^{t}\]
 are in bijective correspondence with elements of the group
 \[ \pi_*\Bigl(\mathbb{S}^{\calc,t^1}_{s_{r+1}^{1},\ldots,s_{1}^{1}}\sqcup\cdots\sqcup \mathbb{S}^{\calc,t^N}_{s_{r+1}^{N},\ldots,s_{1}^{N}}\Bigr)\makebox[0cm][l]{}_{s_{r+1},\ldots,s_{1}}^{t}.\]
-Blanc and Stover \cite{Blanc_Stover-Groth_SS.pdf} define a new category of graded universal algebras, the category of $\calc$-$\Pi$-algebras, monadic over $\vect{+}{r+1}$, whose objects are graded vector spaces $V\in\vect{+}{r+1}$ with a structure map 
+Blanc and Stover \cite{Blanc_Stover-Groth_SS.pdf} define a new category of graded universal algebras, the category $\PA{\calc}$ of $\calc$-$\Pi$-algebras, monadic over $\vect{+}{r+1}$, whose objects are graded vector spaces $V\in\vect{+}{r+1}$ with a structure map 
 \[V_{s_{r+1}^{1},\ldots,s_{1}^{1}}^{t^1}\times\cdots \times V_{s_{r+1}^{N},\ldots,s_{1}^{N}}^{t^N}\to V_{s_{r+1},\ldots,s_{1}}^{t}\]
 for every such homotopy class, satisfying certain natural compatibilities.
 
 It is a standard formalism to encode these compatibilities as follows. A \emph{model}  \cite{Blanc_Stover-Groth_SS.pdf} in $s\calc$ is 
 an almost free object of $s\calc$ which is weakly equivalent to a coproduct of spheres (for example, $F^{\calc}\Gamma V$ for any $V\in\vect{+}{r+1}$ viewed as a chain complex with zero differential). A \emph{finite model} is a model in which this coproduct is finite. Let $\Pi$  be the $\vect{}{}$-enriched category with objects the finite models in $s\calc$, and morphisms
 \[\hom_{\Pi}(M,M'):=\hom_{\textup{ho}(s\calc)}(M,M').\]
-Then the category of $\calc$-$\Pi$-algebras  may be defined as the category of $\vect{}{}$-enriched functors $\Pi^\textup{op}\to \vect{}{}$ that send finite coproducts into products (where by $\vect{}{}$ we mean the category of ungraded $\Ftwo $-vector spaces). The category of $\calc$-$\Pi$-algebras is monadic over $\vect{+}{r+1}$, with  forgetful functor $U^{\calc\PiAlg}A$ defined on a functor $A\in \calc\PiAlg$ by:%$A$ under the forget Such a functor $A$ yields an object of $U^{\calc\PiAlg}A$ of $\vect{+}{r+1}$ via
-\[(U^{\calc\PiAlg}A)^t_{s_{r+1},\ldots,s_1}:=A(\mathbb{S}^{\calc,t}_{s_{r+1},\ldots,s_{1}}).\]
-Any operators advertised above on $U^{\calc\PiAlg}A$ is then induced by the corresponding homotopy class of a coproduct of spheres, viewed as a map in $\Pi$. %The natural compatibilities referred to above are the conditions required that a collection of structure maps extends to a functor on $\Pi^\textup{op}$.
+Then the category of $\calc$-$\Pi$-algebras  may be defined as the category of $\vect{}{}$-enriched functors $\Pi^\textup{op}\to \vect{}{}$ that send finite coproducts into products (where by $\vect{}{}$ we mean the category of ungraded $\Ftwo $-vector spaces). The category of $\calc$-$\Pi$-algebras is monadic over $\vect{+}{r+1}$, with  forgetful functor $U^{\PA{\calc}}A$ defined on a functor $A\in \PA{\calc}$ by:%$A$ under the forget Such a functor $A$ yields an object of $U^{\PA{\calc}}A$ of $\vect{+}{r+1}$ via
+\[(U^{\PA{\calc}}A)^t_{s_{r+1},\ldots,s_1}:=A(\mathbb{S}^{\calc,t}_{s_{r+1},\ldots,s_{1}}).\]
+Any operators advertised above on $U^{\PA{\calc}}A$ is then induced by the corresponding homotopy class of a coproduct of spheres, viewed as a map in $\Pi$. %The natural compatibilities referred to above are the conditions required that a collection of structure maps extends to a functor on $\Pi^\textup{op}$.
 
 One obtains the free $\calc$-$\Pi$-algebra on a graded vector space $V\in \vect{+}{r+1}$ using Dold's theorem (\ref{Dold's theorem}). That is, one views $V$ as a chain complex in $\complexes\vect{+}{r}$ with zero differential, and applies the Dold-Kan correspondence and $\calc$-free functor, obtaining an object $F^\calc\Gamma V\in s\calc$. Then:
-\[F^{\calc\PiAlg}V=\pi_*(F^\calc\Gamma V).\]
-Moreover, as $F^\calc $ is an augmented monad, so is $F^{\calc\PiAlg}$, via the map
-\[F^{\calc\PiAlg}V=\pi_*(F^\calc\Gamma V)\overset{\pi_*\epsilon}{\to}\pi_*(\Gamma V)=H_*V=V,\]
-and in particular, there is an adjunction $Q^{\calc\PiAlg}\dashv K^{\calc\PiAlg}$.
-%For any simplicial object $A\in s\calc$, there is a natural map $\gamma:Q^{\calc\PiAlg}\pi A\to \pi Q^{\calc}A$.
+\[F^{\PA{\calc}}V=\pi_*(F^\calc\Gamma V).\]
+Moreover, as $F^\calc $ is an augmented monad, so is $F^{\PA{\calc}}$, via the map
+\[F^{\PA{\calc}}V=\pi_*(F^\calc\Gamma V)\overset{\pi_*\epsilon}{\to}\pi_*(\Gamma V)=H_*V=V,\]
+and in particular, there is an adjunction $Q^{\PA{\calc}}\dashv K^{\PA{\calc}}$.
+%For any simplicial object $A\in s\calc$, there is a natural map $\gamma:Q^{\PA{\calc}}\pi A\to \pi Q^{\calc}A$.
 
-The theory above has the upshot that understanding the category $\calc\PiAlg$ is equivalent to calculating the homotopy groups of the finite models. In many cases, this can be performed by calculating the homotopy of individual spheres, and then using a \emph{Hilton-Milnor theorem} (\S\ref{Homotopy operations for simplicial Lie algebras}) or \emph{K\"unneth theorem} (proposition \ref{salgs homotopy kunneth}) to bootstrap up to a calculation on all finite models.
+The theory above has the upshot that understanding the category $\PA{\calc}$ is equivalent to calculating the homotopy groups of the finite models. In many cases, this can be performed by calculating the homotopy of individual spheres, and then using a \emph{Hilton-Milnor theorem} (\S\ref{Homotopy operations for simplicial Lie algebras}) or \emph{K\"unneth theorem} (proposition \ref{salgs homotopy kunneth}) to bootstrap up to a calculation on all finite models.
 
 
 
 \begin{lem}
 \label{Q of a model}
 For any model $A$ in $s\calc$, the Hurewicz map $\pi_*A\to \pi_*Q^\calc A$ descends to an isomorphism
-\[\gamma:Q^{\calc\PiAlg}\pi_* A\to \pi_* Q^{\calc}A\cong H_*^{\calc}A.\]
+\[\gamma:Q^{\PA{\calc}}\pi_* A\to \pi_* Q^{\calc}A\cong H_*^{\calc}A.\]
 %If $A$ is a model in $s\calc$ then $\gamma$ is an isomorphism.
 \end{lem}
-\begin{proof} $A$ is (cofibrant and) homotopic to a coproduct of spheres, and as such may be taken to be equal to a coproduct of spheres. As $\pi_* A$ is free on generators in correspondence with the sphere summands, $Q^{\calc\PiAlg}\pi_* A$ is simply the vector space with basis their fundamental classes, which is isomorphic to $H_*^{\calc}A$.
+\begin{proof} $A$ is (cofibrant and) homotopic to a coproduct of spheres, and as such may be taken to be equal to a coproduct of spheres. As $\pi_* A$ is free on generators in correspondence with the sphere summands, $Q^{\PA{\calc}}\pi_* A$ is simply the vector space with basis their fundamental classes, which is isomorphic to $H_*^{\calc}A$.
 \end{proof}
 \subsection{Cohomology groups and $\calc$-$H^*$-algebras}\label{cohomology and Halgs}
 It will in general be preferable for us to consider algebraic structure on cohomology, rather than coalgebraic structure on homology: algebra is in general a more familiar subject than coalgebra, and cohomology has the advantage that it consists of representable functors. 
@@ -1435,27 +1440,27 @@ for every such cohomology class, satisfying certain natural compatibilities.
 
 The formalism required to express these compatibilities is as follows. A \emph{generalized Eilenberg-Mac Lane object}, or \emph{GEM}, in $s\calc$ is an almost free object of $s\calc$ which is weakly equivalent to a product of Eilenberg-Mac Lane objects  $\mathbb{K}_{s_{r+1},\ldots,s_{1}}^{\calc,t}$. A \emph{finite GEM} is a GEM in which this product is finite. Let $\mathbb{K}$  be the $\vect{}{}$-enriched category with objects the finite GEMs in $s\calc$, and morphisms
 \[\hom_{\mathbb{K}}(M,M'):=\hom_{\textup{ho}(s\calc)}(M,M').\]
-Then the category of $\calc$-$H^*$-algebras  may be defined as the category of $\vect{}{}$-enriched functors $\mathbb{K}\to \vect{}{}$ that preserve finite products. The category of $\calc$-$H^*$-algebras is monadic over $\vect{r+1}{+}$, with forgetful functor defined  on a functor $h:\mathbb{K}\to \vect{}{}$  by:%$A$ under the forget Such a functor $A$ yields an object of $U^{\calc\HAlg}A$ of $\vect{r+1}{+}$ via
-\[(U^{\calc\HAlg}h)_t^{s_{r+1},\ldots,s_1}:=h(\mathbb{K}_{s_{r+1},\ldots,s_{1}}^{\calc,t}),\]
+Then the category of $\calc$-$H^*$-algebras  may be defined as the category of $\vect{}{}$-enriched functors $\mathbb{K}\to \vect{}{}$ that preserve finite products. The category of $\calc$-$H^*$-algebras is monadic over $\vect{r+1}{+}$, with forgetful functor defined  on a functor $h:\mathbb{K}\to \vect{}{}$  by:%$A$ under the forget Such a functor $A$ yields an object of $U^{\HA{\calc}}A$ of $\vect{r+1}{+}$ via
+\[(U^{\HA{\calc}}h)_t^{s_{r+1},\ldots,s_1}:=h(\mathbb{K}_{s_{r+1},\ldots,s_{1}}^{\calc,t}),\]
 and any of the structure maps advertised above is induced by the corresponding cohomology class. %The natural compatibilities referred to above are the conditions required that a collection of structure maps extends to a functor on $\Pi^\textup{op}$.
 
 One obtains the free $\calc$-$H^*$-algebra on a graded vector space $V\in \vect{r+1}{+}$ \emph{of finite type} as follows. One views $\dual V$ as a chain complex in $\complexes\vect{+}{r}$ with zero differential, and applies the Dold-Kan correspondence and $K^\calc$, obtaining an object $K^\calc\Gamma \dual V\in s\calc$. Then:
-\[F^{\calc\HAlg}V=H^*_{\calc}K^\calc\Gamma\dual V.\]
-Moreover, $F^{\calc\HAlg}$ is an augmented monad: one applies $H^*_{\calc}$ to the natural collapse map $F^{\calc}\Gamma V\to K^{\calc}\Gamma V$, to obtain
-\[K^{\calc\HAlg}V\cong H^*_{\calc} F^{\calc}\Gamma \dual V\from H^*_{\calc} K^{\calc}\Gamma \dual V=:F^{\calc\HAlg}V.\]
-%\[F^{\calc\HAlg}V=\pi_*F^\calc\Gamma V\overset{\pi_*\epsilon}{\to}\pi_*\Gamma V=H_*V=V,\]
-and in particular, there is an adjunction $Q^{\calc\HAlg}\dashv K^{\calc\HAlg}$.
-%For any simplicial object $A\in s\calc$, there is a natural map $\gamma:Q^{\calc\HAlg}\pi A\to \pi Q^{\calc}A$.
+\[F^{\HA{\calc}}V=H^*_{\calc}K^\calc\Gamma\dual V.\]
+Moreover, $F^{\HA{\calc}}$ is an augmented monad: one applies $H^*_{\calc}$ to the natural collapse map $F^{\calc}\Gamma V\to K^{\calc}\Gamma V$, to obtain
+\[K^{\HA{\calc}}V\cong H^*_{\calc} F^{\calc}\Gamma \dual V\from H^*_{\calc} K^{\calc}\Gamma \dual V=:F^{\HA{\calc}}V.\]
+%\[F^{\HA{\calc}}V=\pi_*F^\calc\Gamma V\overset{\pi_*\epsilon}{\to}\pi_*\Gamma V=H_*V=V,\]
+and in particular, there is an adjunction $Q^{\HA{\calc}}\dashv K^{\HA{\calc}}$.
+%For any simplicial object $A\in s\calc$, there is a natural map $\gamma:Q^{\HA{\calc}}\pi A\to \pi Q^{\calc}A$.
 
 These definitions simplify when we apply them to the dual of a vector space $U\in\vect{+}{r+1}$ of finite type:
-\[F^{\calc\HAlg}(\dual U):= \pi^*\dual Q^{\calc}cK^\calc\Gamma \dual^{2}U\overset{\cong}{\from}\pi^*\dual Q^{\calc}cK^\calc\Gamma U\overset{\cong}{\to} \dual  \pi_*Q^{\calc}cK^\calc\Gamma U\]
-suggesting that the functor $F^{\calc\HAlg}$ is altogether of the wrong variance. It is preferable to work with the functor
-\[C_{\calc\HCoalg}U:=\pi_*Q^{\calc}cK^\calc\Gamma U\]
+\[F^{\HA{\calc}}(\dual U):= \pi^*\dual Q^{\calc}cK^\calc\Gamma \dual^{2}U\overset{\cong}{\from}\pi^*\dual Q^{\calc}cK^\calc\Gamma U\overset{\cong}{\to} \dual  \pi_*Q^{\calc}cK^\calc\Gamma U\]
+suggesting that the functor $F^{\HA{\calc}}$ is altogether of the wrong variance. It is preferable to work with the functor
+\[C_{\HC{\calc}}U:=\pi_*Q^{\calc}cK^\calc\Gamma U\]
 discussed in \S\ref{homology and Hcoalgs}.
 
 
 
-To dualize a paragraph from \S\ref{homotopy and pialgs}: the theory above has the upshot that understanding the category $\calc\HAlg$ is equivalent to calculating the cohomology groups of finite GEMs. In many cases, this can be performed by calculating the cohomology of individual Eilenberg-Mac Lane objects, and then using a \emph{Hilton-Milnor theorem} (\citeBOX[\S11]{MR1089001} and \S\ref{The example of simplicial commutative F2-algebras}) or \emph{K\"unneth theorem} (theorems \ref{Prop on cohomology of product of finite lie gems} and \ref{Koszul-dual Hilton-Milnor theorem}) to bootstrap up to a calculation on all finite GEMs.
+To dualize a paragraph from \S\ref{homotopy and pialgs}: the theory above has the upshot that understanding the category $\HA{\calc}$ is equivalent to calculating the cohomology groups of finite GEMs. In many cases, this can be performed by calculating the cohomology of individual Eilenberg-Mac Lane objects, and then using a \emph{Hilton-Milnor theorem} (\citeBOX[\S11]{MR1089001} and \S\ref{The example of simplicial commutative F2-algebras}) or \emph{K\"unneth theorem} (theorems \ref{Prop on cohomology of product of finite lie gems} and \ref{Koszul-dual Hilton-Milnor theorem}) to bootstrap up to a calculation on all finite GEMs.
 
 \subsection{The reverse Adams spectral sequence}
 \label{reverse Adams spectral sequence}
@@ -1464,21 +1469,21 @@ We'll now give a description of Miller's reverse Adams spectral sequence \citeBO
 Suppose that $X\in s\calC$, and consider the \emph{bisimplicial} object $Q^{\calc}(B^{\calc}_pX)_{q}\in ss\vect{+}{n}$. There is a first quadrant cohomotopy spectral sequence
 \[\E{}{2}{\,Q^{\calc}B^{\calc}X}{p,q,s_n,\ldots,s_1}{t}=\pi\dhor^{p}\pi\dver^{q}(\dual Q^{\calc}B^{\calc}X)^{s_n,\ldots,s_1}_{t}\]
 converging to $H^*_{\calc}X:=\pi^{p+q}\dual Q^{\calc}\diag{B^{\calc}X}$. For each fixed $p$, %lemma \ref{Q of a model} shows 
-%\[\pi\dver^{*}(\dual Q^{\calc}B^{\calc}_p X)=\dual \pi\uver_{*}(Q^{\calc}B^{\calc}_p X)=\dual Q^{\calc\PiAlg}\pi\uver_{*}(B^{\calc}_p X)\]
+%\[\pi\dver^{*}(\dual Q^{\calc}B^{\calc}_p X)=\dual \pi\uver_{*}(Q^{\calc}B^{\calc}_p X)=\dual Q^{\PA{\calc}}\pi\uver_{*}(B^{\calc}_p X)\]
 \begin{alignat*}{2}
 \pi^{*}(\dual Q^{\calc}B^{\calc}_p X)&\cong\dual \pi_{*}(Q^{\calc}B^{\calc}_p X)\\
-&\cong\dual Q^{\calc\PiAlg}\pi_{*}(B^{\calc}_p X)\\
-&\cong\dual Q^{\calc\PiAlg}B^{\calc\PiAlg}_p \pi_{*}(X),{}
+&\cong\dual Q^{\PA{\calc}}\pi_{*}(B^{\calc}_p X)\\
+&\cong\dual Q^{\PA{\calc}}B^{\PA{\calc}}_p \pi_{*}(X),{}
 \end{alignat*}
 where the second isomorphism is that of lemma \ref{Q of a model}, so that 
-\[\E{}{2}{\,Q^{\calc}B^{\calc}X}{p,q,s_n,\ldots,s_1}{t}\cong (H^{p}_{\calc\PiAlg}\pi_*X)^{q,s_n,\ldots,s_1}_{t}.\]
+\[\E{}{2}{\,Q^{\calc}B^{\calc}X}{p,q,s_n,\ldots,s_1}{t}\cong (H^{p}_{\PA{\calc}}\pi_*X)^{q,s_n,\ldots,s_1}_{t}.\]
 
 When $\calc=\algs$, this is precisely the spectral sequence used by Goerss in \cite[Chapter V]{MR1089001} to calculate the cohomology of Eilenberg-Mac Lane objects in $s\algs$. In this thesis, we will use this spectral sequence only for certain low-dimensional calculations. Goerss equipped the reverse Adams spectral sequence with certain spectral sequence operations \citeBOX[\S14]{MR1089001}, work which can be framed using the external operations, due to Singer, that we present in \S\ref{Operations in composite functor spectral sequences}. \todo[inline]{Discuss the reasons we work with the BS W-construction.} %Indeed, these operations on the reverse Adams spectral sequence make for an interesting point of comparison for the operations we present in \S\ref{Operations in composite functor spectral sequences}. \textbf{some are probably the same.}%, which arise in a composite functor spectral sequence with the same target as the unstable Adams s. We will define various spectral sequences, and construct spectral sequence operations whic
 
 A large part of this paper is devoted to studying a Bousfield-Kan spectral sequence for the category $\algs$, and operations defined in \S\ref{Operations on the Bousfield-Kan spectral sequence} for this spectral sequence make for another point of comparison. In this case, we find that the operations on the Bousfield-Kan spectral sequence are in a sense Koszul dual to the operations of the reverse Adams spectral sequence.
 
 \subsection{The smash coproduct}\label{subseq:The smash coproduct}
-For $X_1$ and $X_2$ objects of any algebraic category, for example $\calc$, $\calc\PiAlg$ or $\calc\HAlg$ (to be defined shortly), we define the \emph{smash coproduct} $X_1\smashcoprod X_2$ to be the kernel of the natural map $X_1\sqcup X_2\to X_1\times X_2$. When $X_1=X_2=X$, $X\smashcoprod X$ has a natural action of $\Sigma_2$, and we write $X\smashcoprod^{\Sigma_2} X$ for the subobject of invariant elements under this action.
+For $X_1$ and $X_2$ objects of any algebraic category, for example $\calc$, $\PA{\calc}$ or $\HA{\calc}$ (to be defined shortly), we define the \emph{smash coproduct} $X_1\smashcoprod X_2$ to be the kernel of the natural map $X_1\sqcup X_2\to X_1\times X_2$. When $X_1=X_2=X$, $X\smashcoprod X$ has a natural action of $\Sigma_2$, and we write $X\smashcoprod^{\Sigma_2} X$ for the subobject of invariant elements under this action.
 
 When $X_1$ and $X_2$ are  objects of $s\calc$, taking this strict fiber is in fact homotopically correct, since the map $X_1\sqcup X_2\to X_1\times X_2$ is always a fibration, and indeed:
 \begin{prop}
@@ -1657,22 +1662,22 @@ s\vect{+}{r}\ar[r]^-{Q^\calc cK^\calc }
 &%r1c1
 s\vect{+}{r}\ar[d]^-{\pi_*}
 \\%r1c2
-\vect{+}{r+1}\ar[r]^-{C_{\calc\HCoalg}}
+\vect{+}{r+1}\ar[r]^-{C_{\HC{\calc}}}
 &
 \vect{+}{r+1}
 }\]
-in which we are using Dold's theorem (\ref{Dold's theorem}) to \emph{define} $C_{\calc\HCoalg}$, the \emph{cofree $\calc$-$H_*$-coalgebra comonad}.
-By proposition \ref{QcK is a comonad} and the naturality of Dold's theorem, this is a comonad on $\vect{+}{r+1}$. A $\calc$-$H_*$-coalgebra is simply a coalgebra over this monad, i.e.\ any $h\in\vect{+}{r+1}$ equipped with a coaction map $h\to C_{\calc\HCoalg}h$ satisfying the standard compatibilities. The homology $H_*^\calc X$ of $X\in s\calc$ is a $\calc$-$H_*$-coalgebra using the map
-\[\pi_*(Q^{\calc}cX)\overset{\pi_*(Q^{\calc}(\beta))}{\to}\pi_*(Q^{\calc}ccX)\overset{\pi_*(Q^{\calc}c(\eta))}{\to}\pi_*(Q^{\calc}cK^{\calc}Q^{\calc}cX)=C_{\calc\HCoalg}(\pi_*(Q^{\calc}cX)).\]
-If $X\sim K^{\calc}V$ for some $V\in s\vect{+}{r}$, then $H_*^{\calc}X\cong C_{\calc\HCoalg}(\pi_*(V))$, and the coaction map of $H_*^{\calc}X$ is none other than the diagonal map of the comonad.
+in which we are using Dold's theorem (\ref{Dold's theorem}) to \emph{define} $C_{\HC{\calc}}$, the \emph{cofree $\calc$-$H_*$-coalgebra comonad}.
+By proposition \ref{QcK is a comonad} and the naturality of Dold's theorem, this is a comonad on $\vect{+}{r+1}$. A $\calc$-$H_*$-coalgebra is simply a coalgebra over this monad, i.e.\ any $h\in\vect{+}{r+1}$ equipped with a coaction map $h\to C_{\HC{\calc}}h$ satisfying the standard compatibilities. The homology $H_*^\calc X$ of $X\in s\calc$ is a $\calc$-$H_*$-coalgebra using the map
+\[\pi_*(Q^{\calc}cX)\overset{\pi_*(Q^{\calc}(\beta))}{\to}\pi_*(Q^{\calc}ccX)\overset{\pi_*(Q^{\calc}c(\eta))}{\to}\pi_*(Q^{\calc}cK^{\calc}Q^{\calc}cX)=C_{\HC{\calc}}(\pi_*(Q^{\calc}cX)).\]
+If $X\sim K^{\calc}V$ for some $V\in s\vect{+}{r}$, then $H_*^{\calc}X\cong C_{\HC{\calc}}(\pi_*(V))$, and the coaction map of $H_*^{\calc}X$ is none other than the diagonal map of the comonad.
 
 The comparison maps of \S\ref{cohomology and Halgs} give the dual of a $\calc$-$H_*$-algebra of finite type a $\calc$-$H^*$-algebra structure. 
 \begin{prop}
 \label{something about dualization}
-If $V\in \vect{}{}$ and $X,X'\in \calc\HCoalg$ are of finite type, then there are natural isomorphisms:
+If $V\in \vect{}{}$ and $X,X'\in \HC{\calc}$ are of finite type, then there are natural isomorphisms:
 \begin{gather*}
-\dual C_{\calc\HCoalg}V\cong F^{\calc\HAlg}\dual V;\\
-Q^{\calc\HAlg}\dual X\cong \dual \textup{Pr}^{\calc\HCoalg} X;\\
+\dual C_{\HC{\calc}}V\cong F^{\HA{\calc}}\dual V;\\
+Q^{\HA{\calc}}\dual X\cong \dual \textup{Pr}^{\HC{\calc}} X;\\
 \dual(X\times X')\cong \dual X\sqcup \dual X';\makebox[0cm][l]{}\\
 \dual(X\smashprod X')\cong \dual X\smashcoprod \dual X',
 \end{gather*}
@@ -1681,15 +1686,15 @@ where the smash product $X\smashprod X'$ is to be defined in \S\ref{subseq:The s
 \subsection{The Hurewicz map, primitives and homology completion}\label{The Hurewicz map, primitives and homology completion}
 For any $X\in s\calc$, there is a map $\pi_*X\to H_*^{\calc}X$, the \emph{Hurewicz map}, defined as the composite
 \[\pi_*X\cong \pi_*(cX)\to \pi_*(Q^{\calc}cX).\]
-Indeed, the Hurewicz map provides a coaugmentation of the comonad $C_{\calc\HCoalg}$, the natural transformation $a:\Id\to C_{\calc\HCoalg}$ of endofunctors of $\vect{+}{r+1}$ defined by
-\[V\cong \pi_*(cK^{\calc}\Gamma  V)\to \pi_*(Q^{\calc}cK^{\calc}\Gamma  V)=F^{\calc\PiAlg}V.\]
+Indeed, the Hurewicz map provides a coaugmentation of the comonad $C_{\HC{\calc}}$, the natural transformation $a:\Id\to C_{\HC{\calc}}$ of endofunctors of $\vect{+}{r+1}$ defined by
+\[V\cong \pi_*(cK^{\calc}\Gamma  V)\to \pi_*(Q^{\calc}cK^{\calc}\Gamma  V)=F^{\PA{\calc}}V.\]
 One reading of this observation is:
 \begin{lem}
 \label{hurewicz is a section}
 If $X\in s\calc$ is in the image of $K^\calc$, then $Q^\calc X=U^{\calc}X$, and the Hurewicz map of $X$ is a section of the composite
 \[H_*^{\calc}X:=\pi_*Q^{\calc}cX\overset{(Q\epsilon)_*}{\to}\pi_*Q^{\calc}X=\pi_*X.\]
 \end{lem}
-Given that the comonad $C_{\calc\HCoalg}$ has a coaugmentation, we may define the \emph{primitives} of a $\calc$-$H_*$-coalgebra $H$ as the equaliser (of graded vector spaces):
+Given that the comonad $C_{\HC{\calc}}$ has a coaugmentation, we may define the \emph{primitives} of a $\calc$-$H_*$-coalgebra $H$ as the equaliser (of graded vector spaces):
 \[\xymatrix@R=4mm@1{
 \textup{Pr}(H)\ar[r]
 &%r1c1
@@ -1706,7 +1711,7 @@ CH%r1c3
 We will briefly defer the proof of:
 \begin{prop}
 \label{hurewicz}
-The Hurewicz map $\pi_*X\to H_*^{\calc}X$ factors through $\textup{Pr}(H_*^{\calc}X)$, and if $X$ is GEM, the resulting map $\pi_*X\to\textup{Pr}(H_*^\calc X)$ is an isomorphism. In particular, for any $V\in\vect{+}{r+1}$, $\textup{Pr}(C_{\calc\HCoalg}V)\cong V$.
+The Hurewicz map $\pi_*X\to H_*^{\calc}X$ factors through $\textup{Pr}(H_*^{\calc}X)$, and if $X$ is GEM, the resulting map $\pi_*X\to\textup{Pr}(H_*^\calc X)$ is an isomorphism. In particular, for any $V\in\vect{+}{r+1}$, $\textup{Pr}(C_{\HC{\calc}}V)\cong V$.
 \end{prop}
 %\begin{proof}
 %Represent an element $\alpha\in\pi_nA$ by a map $\alpha:S^n_\calc\to A$. Then, $h(\alpha)$ is the image of the fundamental homology class $\imath\in H_n(S^n_\calc)$ under the map $\alpha_*$. As $\imath$ is primitive, so is $h(\alpha)$.
@@ -1775,7 +1780,7 @@ Note that the maps $d^0,d^1:\calX^{0}\to\calX^{1}$ induce respectively the coaug
 \end{proof}
 
 \subsection{The smash product of homology coalgebras}\label{subseq:The smash product}
-For $X_1$ and $X_2$ objects of  $\calc\HCoalg$, we define the \emph{smash product} $X_1\smashprod X_2$ to be the cokernel of the natural map $X_1\sqcup X_2\to X_1\times X_2$. 
+For $X_1$ and $X_2$ objects of  $\HC{\calc}$, we define the \emph{smash product} $X_1\smashprod X_2$ to be the cokernel of the natural map $X_1\sqcup X_2\to X_1\times X_2$. 
 
 The theory changes a little in form after passing from homotopy to homology, and we must introduce the \emph{left derived smash product} in $\calc$. For $A_1$ and $A_2$ in $s\calc$, the natural map $A_1\sqcup A_2\to A_1\times A_2$ is a surjection, and so in general very far from a cofibration. We define the \emph{left derived smash product} $A_1\Lsmashprod A_2$ to be the cofiber of this map.
 In light of proposition \ref{hocof no ziggy-zaggy}, there are natural maps
@@ -1962,8 +1967,8 @@ Theorem \ref{completenesstheorem} does not fully resolve the convergence questio
 
 
 \subsection{Identification of $E^1$ and $E^2$}\label{Idnt E1 E2}
-In light of \S\ref{Cofibrant replacement via the small object argument} and \S\ref{homology and Hcoalgs}, applying the functor $H_*^{\algcat}$ to $\calX$, one obtains precisely the monadic cobar resolution of $H_*^{\algcat}X$ obtained by repeated application of the monad on $\algcat\HCoalg$ of the adjunction 
-\[U^{\algcat\HCoalg}:\algcat\HCoalg\rightleftarrows \vect{}{1}:C^{\algcat\HCoalg}.\]
+In light of \S\ref{Cofibrant replacement via the small object argument} and \S\ref{homology and Hcoalgs}, applying the functor $H_*^{\algcat}$ to $\calX$, one obtains precisely the monadic cobar resolution of $H_*^{\algcat}X$ obtained by repeated application of the monad on $\HC{\algcat}$ of the adjunction 
+\[U^{\HC{\algcat}}:\HC{\algcat}\rightleftarrows \vect{}{1}:C^{\HC{\algcat}}.\]
 In more detail, we have a map of coaugmented cosimplicial objects
 \[\vcenter{
 \def\labelstyle{\scriptstyle}
@@ -2001,7 +2006,7 @@ QcX\,
 \ar@<-1.3ex>[l];[]
 \ar@<+1.3ex>[l];[]
 }}\]
-Write `$C$' for the monad $C^{\algcat\HCoalg}U^{\algcat\HCoalg}$ on $\algcat\HCoalg$. Applying  $\pi_*$, we obtain a cosimplicial Hurewicz map:
+Write `$C$' for the monad $C^{\HC{\algcat}}U^{\HC{\algcat}}$ on $\HC{\algcat}$. Applying  $\pi_*$, we obtain a cosimplicial Hurewicz map:
 \[\vcenter{
 \def\labelstyle{\scriptstyle}
 \xymatrix@R=1.2cm@C=3.3cm@!0{
@@ -2075,7 +2080,7 @@ Corollaries \ref{finite type pres by FW0} and \ref{finite type pres by F lierest
 If $\algcat$ is either $\algs$ or $\restliealgs$, and $X$ is connected with $H^*_\calc X$  of finite type, then $H^*_\calc\calX^s$ is of finite type for each $s$, and:
 \begin{alignat*}{2}
 \E{1}{}{\calX}{s}{t}&\cong (C^*\dual Q^\algcat B^\algcat H^*_{\algcat}X)^{s}_{t};\\
-\E{2}{}{\calX}{s}{t}&\cong (H^*_{\algcat\HAlg}H^*_{\algcat}X)^{s}_{t}.
+\E{2}{}{\calX}{s}{t}&\cong (H^*_{\HA{\algcat}}H^*_{\algcat}X)^{s}_{t}.
 \end{alignat*}
 \end{thm}
 
@@ -2757,13 +2762,13 @@ If $\produces{I}{J}{\deltaalg}$, then $\minDimDelta(I)\geq\minDimDelta(J)$.
 It is enough to show this result when $I$ and $J$ are distinct and have length two, in light of the evident algorithm for expressing $\delta_I$ in terms of admissible composites. In the length two case it can be checked directly from the format of the $\delta$-Adem relation, and the inequality is in fact strict (unless $I$ is itself $\delta$-admissible).
 \end{proof}
 %\noindent Thus, even though $\pi_*$ is not a $\deltaalg$-module, any composite $\delta_I:\pi_nA\to \pi_mA$ that is defined may be written as a sum
-Finally, one should note that these operations generate all of the operations in the category $\algs\PiAlg$, and that all of the relations between the operations in $\algs\PiAlg$ are implied by those presented here. Goerss \citeBOX[\S2]{MR1089001} presents this information as follows. First, he observes that there is a \emph{K\"unneth theorem} available:
+Finally, one should note that these operations generate all of the operations in the category $\PA{\algs}$, and that all of the relations between the operations in $\PA{\algs}$ are implied by those presented here. Goerss \citeBOX[\S2]{MR1089001} presents this information as follows. First, he observes that there is a \emph{K\"unneth theorem} available:
 \begin{prop}
 \label{salgs homotopy kunneth}
-Suppose that $A_1$ and $A_2$ are models in $s\algs$. Then $\pi_*(A_1\sqcup A_2)$, which is the coproduct of $\pi_*A_1$ and $\pi_*A_2$ in $\algs\PiAlg$, may be calculated as the non-unital commutative algebra coproduct of $\pi_*A_1$ and $\pi_*A_2$.
+Suppose that $A_1$ and $A_2$ are models in $s\algs$. Then $\pi_*(A_1\sqcup A_2)$, which is the coproduct of $\pi_*A_1$ and $\pi_*A_2$ in $\PA{\algs}$, may be calculated as the non-unital commutative algebra coproduct of $\pi_*A_1$ and $\pi_*A_2$.
 \end{prop}
-%This may be read as a theorem about coproducts of free $\algs$-$\Pi$-algebras, since $\pi_*(A_1\sqcup A_2)$ is the coproduct in $\algs\PiAlg$ of $\pi_*(A_1)$ and $\pi_*(A_2)$, the theorem being that coproducts of free $\algs$-$\Pi$-algebras may be taken in the category $\algs$.
-\noindent After giving the calculation on a single sphere, the homotopy of finite models will be determined by this theorem and the Cartan formula. The structure defining $\algs\PiAlg$ is then well understood in light of:
+%This may be read as a theorem about coproducts of free $\algs$-$\Pi$-algebras, since $\pi_*(A_1\sqcup A_2)$ is the coproduct in $\PA{\algs}$ of $\pi_*(A_1)$ and $\pi_*(A_2)$, the theorem being that coproducts of free $\algs$-$\Pi$-algebras may be taken in the category $\algs$.
+\noindent After giving the calculation on a single sphere, the homotopy of finite models will be determined by this theorem and the Cartan formula. The structure defining $\PA{\algs}$ is then well understood in light of:
 \begin{prop}[{\cite[Proposition 2.7]{MR1089001}}]
 \label{homotopy of comm alg sphere}
 \noindent For $n\geq0$, let $\imath_n$ be the fundamental class in $\pi_n(\mathbb{S}^\algs_n)$. There  are isomorphisms of non-unital commutative algebras:
@@ -2836,7 +2841,7 @@ The following lemma assures us that the $\Lambda$-Adem relations make sense in \
 \label{lemOnAdemChangeInMLambdaPlain}
 If $\produces{I}{J}{\Lambda}$, then $\minDimDelta(I)\geq\minDimDelta(J)$, and $J$ does not contain zero unless $I$ does.
 \end{lem}
-These operations generate all of the operations in each of the categories $\Lambda(\LieOperad)\PiAlg$ and $\Gamma(\LieOperad)\PiAlg$, and the relations presented here are sufficient. 
+These operations generate all of the operations in each of the categories $\PA{\Lambda(\LieOperad)}$ and $\PA{\Gamma(\LieOperad)}$, and the relations presented here are sufficient. 
 
 
 From  \cite[Theorem 8.8 and proof]{CurtisSimplicialHtpy.pdf} and \cite{6Author.pdf} we gather:
@@ -2844,9 +2849,9 @@ From  \cite[Theorem 8.8 and proof]{CurtisSimplicialHtpy.pdf} and \cite{6Author.p
 \label{Lie homotopy operations}
 For $V\in\vect{}{1}$,   choose a homogeneous basis of $V$, and construct from it a monomial  basis $B$ of $\Lambda(\LieOperad)V$ (such as any choice of Hall basis). Then:
 \begin{align*}
-F^{\liealgs\PiAlg}V&=\Ftwo \left\{\lambda_Ib\ \middle|\ \genfrac{}{}{0pt}{}{b\in B_t\textup{, $I$ $\Lambda$-admissible with }\minDimDelta(I)\leq t,}{\textup{$I$ does not contain 0}}\right\}\textup{ and;}
+F^{\PA{\liealgs}}V&=\Ftwo \left\{\lambda_Ib\ \middle|\ \genfrac{}{}{0pt}{}{b\in B_t\textup{, $I$ $\Lambda$-admissible with }\minDimDelta(I)\leq t,}{\textup{$I$ does not contain 0}}\right\}\textup{ and;}
 \\
-F^{\Gamma(\LieOperad)\PiAlg}V&=\Ftwo \left\{\lambda_Ib\ \middle|\ \genfrac{}{}{0pt}{}{b\in B_t\textup{, $I$ $\Lambda$-admissible with }\minDimDelta(I)\leq t,}{\textup{$I$ does not contain 0 when $t=0$}}\right\}
+F^{\PA{\Gamma(\LieOperad)}}V&=\Ftwo \left\{\lambda_Ib\ \middle|\ \genfrac{}{}{0pt}{}{b\in B_t\textup{, $I$ $\Lambda$-admissible with }\minDimDelta(I)\leq t,}{\textup{$I$ does not contain 0 when $t=0$}}\right\}
 \\
 &=\Ftwo \left\{\lambda_I\bigl(\restnRepeated{b}{r}\bigr)\ \middle|\ \genfrac{}{}{0pt}{}{b\in B_t\textup{, $I$ $\Lambda$-admissible with }\minDimDelta(I)< t,}{\textup{$r\geq0$}}\right\}.
 \end{align*}
@@ -2854,7 +2859,7 @@ F^{\Gamma(\LieOperad)\PiAlg}V&=\Ftwo \left\{\lambda_Ib\ \middle|\ \genfrac{}{}{0
 We'll now emulate  Goerss' method of calculating the cohomology of GEMs in $s\algs$ (c.f.\ \S\ref{The example of simplicial commutative F2-algebras}, \cite{GoerssHiltonMilnor.pdf} and \citeBOX[\S11]{MR1089001}) by giving a Hilton-Milnor decomposition for the calculation of the free $\liealgs$-$\Pi$-algebra on a finite-dimensional object of $\vect{}{1}$, using \cite[Proposition 3.1]{Schles-SimpLieRing.pdf}. For any $i\geq0$, write $\Sigma^i\Ftwo \in\vect{}{1}$ for a one-dimensional vector space concentrated in homological dimension $i$.
 
 For any finite collection of indices $i_1,\ldots,i_n\geq 0$, we would like to calculate:
-\[F^{\liealgs\PiAlg}(\Sigma^{i_1}\Ftwo\oplus\cdots \oplus\Sigma^{i_n}\Ftwo)=\pi_*F^\liealgs(\mathbb{K}_{i_1}\oplus\cdots \oplus \mathbb{K}_{i_n}).\]
+\[F^{\PA{\liealgs}}(\Sigma^{i_1}\Ftwo\oplus\cdots \oplus\Sigma^{i_n}\Ftwo)=\pi_*F^\liealgs(\mathbb{K}_{i_1}\oplus\cdots \oplus \mathbb{K}_{i_n}).\]
 We obtain a decomposition of $\pi_*F^\liealgs(\mathbb{K}_{i_1}\oplus\cdots \oplus \mathbb{K}_{i_n})$ as follows. For any monomial $b$ is the free Lie algebra on $\{x_1,\ldots,x_n\}$ and collection of $n$ vector spaces $A_{1},\ldots,A_n$, there is a corresponding tensor product $w_b(A_{1},\ldots,A_n)$. For example, one defines
 \[w_{[[x_2,x_1],x_3]}:=A_2\otimes A_1\otimes A_3.\]
 Moreover, for each monomial $b$ there is an evident function \[w_b(A_1,\ldots,A_n)\to F^\liealgs(A_1\oplus\cdots\oplus A_n),\]
@@ -2869,7 +2874,7 @@ Returning to the calculation desired, we have an isomorphism in $s\vect{}{1}$:
 Moreover, if we follow \citeBOX[\S11]{MR1089001} by writing $j_k(b)$ for the number of appearances of $x_k$ in the monomial $b$, there is a homotopy equivalence
 \[w_b(\mathbb{K}_{i_1},\ldots,\mathbb{K}_{i_n})\simeq \mathbb{K}_{\sum_{k=1}^n J_k(b)i_k}.\]
 Thus, on homotopy there is a decomposition:
-\[\bigoplus_{b\in B}F^{\liealgs\PiAlg}\Sigma^{(\sum_{k=1}^n j_k(b)i_k)}\Ftwo\overset{\cong}{\to} F^{\liealgs\PiAlg}(\Sigma^{i_1}\Ftwo\oplus\cdots \oplus\Sigma^{i_n}\Ftwo),\]
+\[\bigoplus_{b\in B}F^{\PA{\liealgs}}\Sigma^{(\sum_{k=1}^n j_k(b)i_k)}\Ftwo\overset{\cong}{\to} F^{\PA{\liealgs}}(\Sigma^{i_1}\Ftwo\oplus\cdots \oplus\Sigma^{i_n}\Ftwo),\]
 and evidently the fundamental class of a summand on the left maps to the corresponding Lie bracket of fundamental classes on the right. This proves the first part of proposition \ref{Lie homotopy operations}.
 
 
@@ -3128,7 +3133,7 @@ The following result shows that whenever an expression $P^Jx$ is forced to be ze
 \label{lemOnAdemChangeInMP}
 If $\produces{I}{J}{\Palg}$, then $\minDimP(J) \geq \minDimP(I)$, with strict inequality when $I$ and $J$ are distinct and of length two.
 \end{lem}
-The main theorem of Goerss' memoir is that these operations generate all of the operations in the category $\algs\HAlg$, and that all  the relations between them  are implied by those presented here. In \cite[Chapter V]{MR1089001}, Goerss shows that the listed operations completely capture the cohomology of an object $\mathbb{K}_n^{\algs}$. He proves a Hilton-Milnor theorem \cite{GoerssHiltonMilnor.pdf}, which he uses in \citeBOX[\S11]{MR1089001} to bootstrap up to a calculation of the cohomology of any GEM in $s\algs$, namely \cite[Theorem I]{MR1089001}. The result states that whenever $V\in \vect{1}{}$,  is a  vector space of finite type, not only is 
+The main theorem of Goerss' memoir is that these operations generate all of the operations in the category $\HA{\algs}$, and that all  the relations between them  are implied by those presented here. In \cite[Chapter V]{MR1089001}, Goerss shows that the listed operations completely capture the cohomology of an object $\mathbb{K}_n^{\algs}$. He proves a Hilton-Milnor theorem \cite{GoerssHiltonMilnor.pdf}, which he uses in \citeBOX[\S11]{MR1089001} to bootstrap up to a calculation of the cohomology of any GEM in $s\algs$, namely \cite[Theorem I]{MR1089001}. The result states that whenever $V\in \vect{1}{}$,  is a  vector space of finite type, not only is 
 $F^{\algs}V$
 generated by $V$ under the operations of proposition \ref{omnibus on coh of simp algs}, it is as large as is conceivable given the relations presented. We will present, in proposition \ref{partialgoerss}, a partial version of his result.
 
@@ -3139,9 +3144,9 @@ in fact \emph{Koszul dual} (c.f.\ \cite{PriddyKoszul.pdf}) to $\deltaalg$, the a
 Suppose that $A\in s\algs$ is \emph{connected}: $\pi_0A=0$. Then $H^0_{\algs}=Q^{\algs}\pi_0A=0$. It is advantageous to work with the cohomology of connected objects, as we do not need to worry about the operation $\beta$. If we say that $V\in \vect{1}{}$ is \emph{connected} when $V^{0}=0$, we may identify the full subcategory of $\vect{1}{}$ on the connected objects with $\vect{+}{}$.
 
 Goerss' result proves that the monad
-$F^{\algs\HAlg}$ on $\vect{1}{}$
+$F^{\HA{\algs}}$ on $\vect{1}{}$
 preserves $\vect{+}{}$ (and indeed it is a general fact that no non-trivial natural cohomology operations decrease dimension).
-We will write $\calw(0)$ for the category of connected $\algs$-$H^*$-algebras, so that the monad $F^{\calw(0)}$  is simply the restriction of $F^{\algs\HAlg}$ to $\vect{+}{}$. The way that we will report Goerss' result here is to explain how the monad $F^{\calw(0)}$ may be constructed on objects of $\vect{+}{}$ of finite type.
+We will write $\calw(0)$ for the category of connected $\algs$-$H^*$-algebras, so that the monad $F^{\calw(0)}$  is simply the restriction of $F^{\HA{\algs}}$ to $\vect{+}{}$. The way that we will report Goerss' result here is to explain how the monad $F^{\calw(0)}$ may be constructed on objects of $\vect{+}{}$ of finite type.
 
 Let the \emph{category of unstable $\Palg$-modules}, denoted $\calU(0)$, be the category whose objects are $\vect{+}{0}$-graded $\Palg$-modules in which $P^i$ acts with grading $i+1$, and such that $P^i:V^n\to V^{n+i+1}$ is zero unless $i\leq n$. Recall that  we have \emph{already} imposed the $P$-Adem relations and set $P^0$ and $P^1$ to be zero in $\Palg$. 
 \begin{prop}
@@ -3358,8 +3363,8 @@ If $\calc=\liealgs$ (as opposed to $\restliealgs$), then $\Sq^1=0$. In particula
 \end{prop}
 \begin{proof}
 It is enough to prove this for the universal example $\imath_n\in H^*_{\liealgs}\mathbb{K}_n^{\liealgs}$. The reverse Adams spectral sequence (\S\ref{reverse Adams spectral sequence}) is of the form
-\[E_2^{p,q}=(H^{p}_{\liealgs\PiAlg}\mathbb{K}_{0,n}^{\liealgs\PiAlg})^{q}\implies H^{p+q}_{\liealgs}\mathbb{K}_n^{\liealgs}.\]
-The point now is that $\mathbb{K}_{0,n}^{\liealgs\PiAlg}$, which is just a constant object in $s\liealgs\PiAlg$ with value a one-dimensional Lie algebra in internal dimension $n$, is actually free as an object of $\liealgs\PiAlg$ below internal dimension $n+1$. This is simply because there is no $\lambda_0$ operation defined in $\liealgs\PiAlg$. One may thus construct a pas-\`a-pas resolution of $\mathbb{K}_{0,n}^{\liealgs\PiAlg}$ (a process described in \cite{Andre-StepByStep}) which in positive simplicial dimension is concentrated in internal dimension at least $n+1$, implying that $E_2^{p,q}=0$ when $p\geq1$ and $q\leq n$. Moreover, $E_2^{0,q}=0$ unless $q=n$, showing that $H^{n+1}_{\liealgs}\mathbb{K}_n^{\liealgs}=0$. This group contains $\Sq^1\imath_n$.
+\[E_2^{p,q}=(H^{p}_{\PA{\liealgs}}\mathbb{K}_{0,n}^{\PA{\liealgs}})^{q}\implies H^{p+q}_{\liealgs}\mathbb{K}_n^{\liealgs}.\]
+The point now is that $\mathbb{K}_{0,n}^{\PA{\liealgs}}$, which is just a constant object in $s\PA{\liealgs}$ with value a one-dimensional Lie algebra in internal dimension $n$, is actually free as an object of $\PA{\liealgs}$ below internal dimension $n+1$. This is simply because there is no $\lambda_0$ operation defined in $\PA{\liealgs}$. One may thus construct a pas-\`a-pas resolution of $\mathbb{K}_{0,n}^{\PA{\liealgs}}$ (a process described in \cite{Andre-StepByStep}) which in positive simplicial dimension is concentrated in internal dimension at least $n+1$, implying that $E_2^{p,q}=0$ when $p\geq1$ and $q\leq n$. Moreover, $E_2^{0,q}=0$ unless $q=n$, showing that $H^{n+1}_{\liealgs}\mathbb{K}_n^{\liealgs}=0$. This group contains $\Sq^1\imath_n$.
 \end{proof}
 A sequence $I=(i_\ell,\ldots,i_1)$ of integers $i_j\geq1$ is \emph{$\Sq$-admissible} if $i_{j+1}\geq 2i_j$ for $1\leq j <\ell$. For any sequence $I=(i_\ell,\ldots,i_1)$, write $\Sq^I$ for the monomial $\Sq^{i_\ell}\cdots \Sq^{i_1}$. The homogeneous Steenrod algebra has the expected admissible basis, and we say that \emph{$I$ produces $J$ in $\LieSteen$}, denoted $\produces{I}{J}{\Sq}$ if $\Sq^J$ appears in the $\Sq$-admissible expansion of $\Sq^I$.
 
@@ -3370,12 +3375,12 @@ is \emph{forced to be zero} by \emph{(\ref{Sq unstable vanishing})} alone except
 
 If a non-empty sequence $I$  is \emph{$\Sq$-admissible}, we have 
 \[\minDimDelta(I)=e(I)=i_\ell-i_{\ell-1}-\cdots -i_1,\]
-the Serre excess of $I$. We now have enough notation available to describe the category $\restliealgs\HAlg$, using Priddy's calculations. The results are similar to those in \S\ref{Homotopy operations for simplicial commutative algebras} on the category $\algs\PiAlg$.
+the Serre excess of $I$. We now have enough notation available to describe the category $\HA{\restliealgs}$, using Priddy's calculations. The results are similar to those in \S\ref{Homotopy operations for simplicial commutative algebras} on the category $\PA{\algs}$.
 Firstly, there is again  a \emph{K\"unneth theorem}:
 \begin{prop}
 \label{Prop on cohomology of product of finite lie gems}
-Suppose that $K_1$ and $K_2$ are finite GEMs in $s\restliealgs$. Then $H^*_\restliealgs K_1$ and $H^*_\restliealgs K_2$ in $\restliealgs\HAlg$ are of finite type, and their coproduct
-$H^*_\restliealgs(K_1\times K_2)$ in $\restliealgs\HAlg$ may be calculated as the non-unital (grading shifted) commutative algebra coproduct of $H^*_\restliealgs K_1$ and $H^*_\restliealgs K_2$.
+Suppose that $K_1$ and $K_2$ are finite GEMs in $s\restliealgs$. Then $H^*_\restliealgs K_1$ and $H^*_\restliealgs K_2$ in $\HA{\restliealgs}$ are of finite type, and their coproduct
+$H^*_\restliealgs(K_1\times K_2)$ in $\HA{\restliealgs}$ may be calculated as the non-unital (grading shifted) commutative algebra coproduct of $H^*_\restliealgs K_1$ and $H^*_\restliealgs K_2$.
 \end{prop}
 \begin{proof}
 We rely on proposition \ref{all the lie steenrod ops are the same} and the following calculation:
@@ -3399,7 +3404,7 @@ H^*_{\bar{W}}K_1\otimes H^*_{\bar{W}}K_2.
 \end{alignat*}
 This containment in in fact an equality when $H^*_{\bar{W}}K_1 $ and $H^*_{\bar{W}}K_2$ are both of finite type, in which case $H^*_{\bar{W}}(K_1\times K_2)$ is also of finite type, and the isomorphism is proved. Thus, by induction on the total number of factors $\mathbb{K}_n^{\restliealgs}$ of $K_1$ and $K_2$, we only need to check that $H^*_{\bar{W}}\mathbb{K}_n^{\restliealgs}$ is of finite type for any $n\geq0$. This is implied by Priddy's calculation, proposition \ref{calc of restliecoh on single EMobject}.
 \end{proof}
-\noindent After giving the calculation on a single Eilenberg-Mac Lane object, the cohomology of finite GEMs, and thus the category $\restliealgs\HAlg$ is determined by proposition \ref{Prop on cohomology of product of finite lie gems} and the Cartan formula. The structure defining $\restliealgs\PiAlg$ is then well understood in light of:
+\noindent After giving the calculation on a single Eilenberg-Mac Lane object, the cohomology of finite GEMs, and thus the category $\HA{\restliealgs}$ is determined by proposition \ref{Prop on cohomology of product of finite lie gems} and the Cartan formula. The structure defining $\PA{\restliealgs}$ is then well understood in light of:
 \begin{prop}[{\citeBOX[6.1]{PriddySimplicialLie.pdf}}]
 \label{calc of restliecoh on single EMobject}
 For $n\geq0$, let $\imath$ be the fundamental class in $H^n_{\restliealgs}(\mathbb{K}_n^{\restliealgs})$. Then, as non-unital (degree shifted) commutative algebras:
@@ -3408,7 +3413,7 @@ For $n\geq0$, let $\imath$ be the fundamental class in $H^n_{\restliealgs}(\math
 
 \begin{cor}
 \label{finite type pres by F lierest halg}
-Suppose that $V\in\vect{+}{}$ is of finite type. Then so is $F^{\restliealgs\HAlg}V$. That is, the restriction of the monad $F^{\restliealgs\HAlg}V$ on $\vect{1}{}$ to $\vect{+}{}$ preserves objects of finite type.
+Suppose that $V\in\vect{+}{}$ is of finite type. Then so is $F^{\HA{\restliealgs}}V$. That is, the restriction of the monad $F^{\HA{\restliealgs}}V$ on $\vect{1}{}$ to $\vect{+}{}$ preserves objects of finite type.
 \end{cor}
 
 The case of simplicial Lie algebras mimics that of simplicial commutative algebras: for Lie algebras, the homogeneous Steenrod algebra acts on cohomology, and is Koszul dual to the opposite of the $\Lambda$-algebra, which posesses an unstable partial left action on  homotopy.
@@ -3572,7 +3577,7 @@ For $n\geq0$, let $\calU(n+1)$ denote \emph{the category  of unstable partial ri
 \[(\DASH)\lambda_i:V_{s_{n+1},s_n,\ldots,s_1}^t\to V_{s_{n+1}+i,2s_n,\ldots,2s_1}^{2t+1}\]
 defined whenever $0\leq i< s_{n+1}$ and not all of $i,s_{n},\ldots,s_{1}$ are zero, satisfying the Adem relations of proposition \ref{linear operations on homotopy of lie alg}.
 
-We have shown that an object of $\calL(n)\PiAlg$ is in particular an object of $\calU(n+1)$, indeed, the $\calU(n+1)$-structure on $\pi_*L$ consists solely of its \emph{non-top} $\lambda$-operations.
+We have shown that an object of $\PA{\calL(n)}$ is in particular an object of $\calU(n+1)$, indeed, the $\calU(n+1)$-structure on $\pi_*L$ consists solely of its \emph{non-top} $\lambda$-operations.
 %\begin{prop}
 %\label{compatibilities between U and L in W}
 %For $L\in s\calL(n)$, the homotopy groups $\pi_*(L)$ are simultaneously an object of $\calL(n+1)$ and of $\calU(n+1)$. The $\calU(n+1)$-operations are annihilated by the bracket. That is, for $i<s_{n+1}$, $x\in\pi_{s_{n+1}}L$ and $y\in \pi_*L$ such that $x\lambda_i$ is defined, we have $[x\lambda_i,y]=0$.
@@ -3583,7 +3588,7 @@ For $n\geq0$, let $\calw(n+1)$ denote \emph{the category of $\calL(n)$-$\Pi$-alg
 This category has a number of useful properties, following from the calculations of \cite{6Author.pdf}, primarily:
 \begin{prop}
 \label{prop on Wnplus1 being the pialgs for Wn}
-The category $\calw(n+1)$ is isomorphic to the category $\calL(n)\PiAlg$ of $\calL(n)$-$\Pi$-algebras, so that the operations defined above exhaust the set of natural operations on the homotopy of simplicial objects of $\calL(n)$.
+The category $\calw(n+1)$ is isomorphic to the category $\PA{\calL(n)}$ of $\calL(n)$-$\Pi$-algebras, so that the operations defined above exhaust the set of natural operations on the homotopy of simplicial objects of $\calL(n)$.
 The monad $F^{\calw(n+1)}$ on $\vect{+}{n+1}$ factors as a composite $F^{\calU(n+1)}\circ F^{\calL(n+1)}$, with monad structure arising from a distributive law \cite{BeckDistLaws} of monads on $\vect{+}{n+1}$.
 \end{prop}
 \begin{proof}
@@ -3730,9 +3735,9 @@ Moreover, each map $P^i:V^t\to \quadgrad{2}(F^{\calw(0)}V)^{t+i+1}$ appearing in
 \[\theta_i:\left((F^{\calw(0)}V)^{t+i+1}\overset{\textup{proj}}{\makebox[.06ex][l]{$\to$}\to} (\quadgrad{2}F^{\calw(0)}V)^{t+i+1}\overset{\textup{proj}}{\makebox[.06ex][l]{$\to$}\to} \im (P^i)\overset{(P^i)^{-1}}{\to}V^{t}\right).\]
 Here we have projected onto the quadratic filtration 2 part, and then further onto the relevant summand in its natural decomposition. Note that although $P^t:V^t\to \quadgrad{2}(F^{\calw(0)}V)^{2t+1}$ is a non-trivial linear map when $t\geq2$, its image is entangled with the image of the bracket, and we are not able to split it off. Thus we are not able to improve on the bounds $2\leq i< t$.
 \begin{prop}
-There is a map $\theta_i^\star:V_t\to (C_{\algs\HCoalg}V)_{t+i+1}$, natural in $V\in\vect{}{+}$, such that the following diagram commutes:
+There is a map $\theta_i^\star:V_t\to (C_{\HC{\algs}}V)_{t+i+1}$, natural in $V\in\vect{}{+}$, such that the following diagram commutes:
 \[\xymatrix@R=4mm@C=20mm{
-\dual((C_{\algs\HCoalg}V)_{t+i+1})&%r1c1
+\dual((C_{\HC{\algs}}V)_{t+i+1})&%r1c1
 \dual V\ar[l];[]^-{(\theta_i^\star)^*}
 %\ar[dl]^-{\ExtCohOp^k}
 \\%r1c2
@@ -3873,20 +3878,20 @@ with the following properties
 \end{prop}
 \begin{proof}
 Almost everything here follows from proposition \ref{the point of the appendix}, which demonstrates that the operations we are discussing here coincide with those defined on $H^*_{\bar{W}}$, as in proposition \ref{all the lie steenrod ops are the same}. The same technique used to prove proposition  \ref{prop on sq1 on lie not rest} proves the new part of \emph{(\ref{Sq unstable vanishing II})}. For \emph{(\ref{Sq unstable vanishing III})},  when $n=0$, \emph{(\ref{Sq unstable vanishing II})} shows that $\Sq^1=0$. On the other hand, to see why $\Sq^2=0$ when $t\geq2$ is more difficult, especially since we have not determined the category of $\calw(0)$-$\Pi$-algebras. Nonetheless, as in the proof of proposition  \ref{prop on sq1 on lie not rest}, we will prove this for the universal example $\imath^s_t\in H^*_{\calW(0)}\mathbb{K}_s^{\calW(0),t}$. The reverse Adams spectral sequence (\S\ref{reverse Adams spectral sequence}) can be equipped with a quadratic grading if we view the generator of $\mathbb{K}_s^{\calW(0),t}$ as lying in quadratic grading one, and is of the form
-\[\quadgrad{k}E_2^{p,q}=\quadgrad{k}(H^{p}_{\calW(0)\PiAlg}\mathbb{K}_{0,s}^{\calW(0)\PiAlg,t})^{q}_{T}\implies \quadgrad{k}(H^{p+q}_{\calW(0)}\mathbb{K}_s^{\calW(0),t})_T.\]
+\[\quadgrad{k}E_2^{p,q}=\quadgrad{k}(H^{p}_{\PA{\calW(0)}}\mathbb{K}_{0,s}^{\PA{\calW(0)},t})^{q}_{T}\implies \quadgrad{k}(H^{p+q}_{\calW(0)}\mathbb{K}_s^{\calW(0),t})_T.\]
 As $\Sq^2\imath_t^s\in \quadgrad{2}(H^{s+2}_{\calW(0)}\mathbb{K}_s^{\calW(0),t})_{2t+1}$, we need to determine
 \[
-\quadgrad{2}(H^{2}_{\calW(0)\PiAlg}\mathbb{K}_{0,s}^{\calW(0)\PiAlg,t})^{s}_{2t+1}\textup{ and }
-\quadgrad{2}(H^{1}_{\calW(0)\PiAlg}\mathbb{K}_{0,s}^{\calW(0)\PiAlg,t})^{s+1}_{2t+1},
+\quadgrad{2}(H^{2}_{\PA{\calW(0)}}\mathbb{K}_{0,s}^{\PA{\calW(0)},t})^{s}_{2t+1}\textup{ and }
+\quadgrad{2}(H^{1}_{\PA{\calW(0)}}\mathbb{K}_{0,s}^{\PA{\calW(0)},t})^{s+1}_{2t+1},
 \] 
-and as in the proof of proposition \ref{prop on sq1 on lie not rest}, we need to see how far $\Ftwo\{\imath^t_s\}$ is from being free in $\calw(0)\PiAlg$. Fortunately, we only need to answer this question in quadratic grading two, and 
-\[F^{\calW(0)\PiAlg}(\Ftwo\{\imath^t_s\})=\pi_*(\mathbb{S}_s^{\calW(0),t})=\pi_*(F^{\calw(0)} \mathbb{K}^{t}_s).\]
+and as in the proof of proposition \ref{prop on sq1 on lie not rest}, we need to see how far $\Ftwo\{\imath^t_s\}$ is from being free in $\PA{\calW(0)}$. Fortunately, we only need to answer this question in quadratic grading two, and 
+\[F^{\PA{\calW(0)}}(\Ftwo\{\imath^t_s\})=\pi_*(\mathbb{S}_s^{\calW(0),t})=\pi_*(F^{\calw(0)} \mathbb{K}^{t}_s).\]
 Now if $t\geq2$, $\quadgrad{2}F^{\calw(0)}V$ naturally decomposes as 
 \[\quadgrad{2}F^{\calw(0)}V=\quadgrad{2}F^{S(\LieOperad)}V\oplus P^2V\oplus\cdots \oplus P^{t-1}V,\]
 and
 we calculate, by proposition \ref{homotopy of comm alg sphere}:
-\[\quadgrad{2}F^{\calW(0)\PiAlg}(\Ftwo\{\imath^t_s\})^{2t+1}=\Ftwo\{\lambda_2\imath^t_s,\lambda_3\imath^t_s,\ldots,\lambda_s\imath^t_s\}\]
- That is, there are two missing $\lambda$-operations, $\lambda_0$ and $\lambda_1$, in the functor $F^{S(\LieOperad)}$, and the presence of the operations $P^2,\ldots,P^{t-1}$ do not effect $\quadgrad{2}F^{\calW(0)\PiAlg}(\Ftwo\{\imath^t_s\})$ in internal dimension $2t+1$. We now have enough information to proceed as in the proof of proposition  \ref{prop on sq1 on lie not rest}, since $\lambda_k\imath^t_s\in \quadgrad{2}F^{\calW(0)\PiAlg}(\Ftwo\{\imath^t_s\})^{2t+1}_{s+k}$ for $2\leq k\leq s$.
+\[\quadgrad{2}F^{\PA{\calW(0)}}(\Ftwo\{\imath^t_s\})^{2t+1}=\Ftwo\{\lambda_2\imath^t_s,\lambda_3\imath^t_s,\ldots,\lambda_s\imath^t_s\}\]
+ That is, there are two missing $\lambda$-operations, $\lambda_0$ and $\lambda_1$, in the functor $F^{S(\LieOperad)}$, and the presence of the operations $P^2,\ldots,P^{t-1}$ do not effect $\quadgrad{2}F^{\PA{\calW(0)}}(\Ftwo\{\imath^t_s\})$ in internal dimension $2t+1$. We now have enough information to proceed as in the proof of proposition  \ref{prop on sq1 on lie not rest}, since $\lambda_k\imath^t_s\in \quadgrad{2}F^{\PA{\calW(0)}}(\Ftwo\{\imath^t_s\})^{2t+1}_{s+k}$ for $2\leq k\leq s$.
 \end{proof}
 
 
@@ -4818,19 +4823,19 @@ For $x\in E^r_{-s,t}(X)$, $\Sq^i(x)$ survives to $E^{2r-1}$, and moreover, $d_{2
 
 
 
-\subsection{A chain-level construction $\xi_\textup{res}^\star$ inducing $\xi_{\calc\HAlg}$}\label{sec xires}
+\subsection{A chain-level construction $\xi_\textup{res}^\star$ inducing $\xi_{\HA{\calc}}$}\label{sec xires}
 In \S\ref{chain level structure}, we defined a map
-\[\xi_{\calc\HAlg}:B^{s+1}_{\calc\HAlg}H^*_{\calc}X\to B^{s}_{\calc\HAlg}H^*_{\calc}X\smashcoprod B^{s}_{\calc\HAlg}H^*_{\calc}X,\]
-which we used in \S\ref{Horizontal Steenrod operations and a product for HWn} to define Steenrod operations and a product on $H^{*}_{\calc\HAlg}H^*_{\calc}X$ when $\calc=\algs$.
+\[\xi_{\HA{\calc}}:B^{s+1}_{\HA{\calc}}H^*_{\calc}X\to B^{s}_{\HA{\calc}}H^*_{\calc}X\smashcoprod B^{s}_{\HA{\calc}}H^*_{\calc}X,\]
+which we used in \S\ref{Horizontal Steenrod operations and a product for HWn} to define Steenrod operations and a product on $H^{*}_{\HA{\calc}}H^*_{\calc}X$ when $\calc=\algs$.
 We will now construct, at the level of Radulescu-Banu's resolution, a map
 \[\xi_\textup{res}^\star:\calX^s\Lsmashprod \calX^s\to V\calX^s,\]
-which, under the isomorphisms of theorem \ref{identify E2 with derived Q} and proposition \ref{smash prod}, induces the map $\xi_{\calc\HAlg}$ on cohomology:
-%\[\bigl(B^{s}_\calc H^*_\calc X\smashcoprod B^{s}_\calc H^*_\calc X\cong H^*_{\calc}(\calX^s\Lsmashprod \calX^s)\overset{\xi_{\calc\HAlg}}{\from} H^*_{\calc}(V\calX^s)\cong B^{s+1}_\calc H^*_\calc X\bigr): (\xi_\textup{res}^\star)^*\]
+which, under the isomorphisms of theorem \ref{identify E2 with derived Q} and proposition \ref{smash prod}, induces the map $\xi_{\HA{\calc}}$ on cohomology:
+%\[\bigl(B^{s}_\calc H^*_\calc X\smashcoprod B^{s}_\calc H^*_\calc X\cong H^*_{\calc}(\calX^s\Lsmashprod \calX^s)\overset{\xi_{\HA{\calc}}}{\from} H^*_{\calc}(V\calX^s)\cong B^{s+1}_\calc H^*_\calc X\bigr): (\xi_\textup{res}^\star)^*\]
 \[\xymatrix@R=4mm@C=20mm{
 H^*_{\calc}(\calX^s\Lsmashprod \calX^s)&\ar[l]_-{(\xi_\textup{res}^\star)^*}
 H^*_{\calc}(V\calX^s)\\%r1c2
 B^{s}_\calc H^*_\calc X\smashcoprod B^{s}_\calc H^*_\calc X\ar[u]^-{\cong}&%r2c1
-B^{s+1}_\calc H^*_\calc X\ar[l]_-{\xi_{\calc\HAlg}}\ar[u]^-{\cong}%r2c2
+B^{s+1}_\calc H^*_\calc X\ar[l]_-{\xi_{\HA{\calc}}}\ar[u]^-{\cong}%r2c2
 }\]
 
 
@@ -4881,17 +4886,17 @@ c(\textup{add}\circ\epsilon^2):\bigl(c((\calX^s)^2)\overset{c(\epsilon^2)}{\to}c
 Fortunately, the fact that the diagram (without the dashed arrow) commutes is obvious: the small triangle commutes by counitality of $\beta$, and the three squares commute by naturality of $\epsilon:c\to\Id$.
 \begin{prop}
 \label{res xi induces xi}
-The map $\overline{\xi}_\textup{res}^\star$ induces the map $\overline{\xi}_{\calc\HAlg}$ on cohomology, and descends to a map ${\xi}_\textup{res}^\star:\calX\Lsmashprod\calX\to V $ as suggested by the dashed arrow above. This map induces the map ${\xi}_{\calc\HAlg}^\star$ on homology.
+The map $\overline{\xi}_\textup{res}^\star$ induces the map $\overline{\xi}_{\HA{\calc}}$ on cohomology, and descends to a map ${\xi}_\textup{res}^\star:\calX\Lsmashprod\calX\to V $ as suggested by the dashed arrow above. This map induces the map ${\xi}_{\HA{\calc}}^\star$ on homology.
 \end{prop}
 \begin{proof}
 Under the isomorphisms of propositions \ref{something about dualization} and \ref{smash prod}, if we apply $\pi^*(\dual Q^\calc(\DASH))$ to the solid maps in this diagram, we obtain (abbreviating $H^*_\calc$ to $H$):
 \[\newcommand{\Times}{{\sqcup}}
 \mathclap{\xymatrix@R=4mm{
 (H\calX)^{\smashcoprod 2}
-\ar@{->}@/_1em/[rrrrd];[]_-(.1){\xi_{\calc\HAlg}}
+\ar@{->}@/_1em/[rrrrd];[]_-(.1){\xi_{\HA{\calc}}}
 \\%r3c5
 \ar@{->>}[u];[]
-\ar@/_1.3em/[rrrr];[]_-(.91){\overline{\xi}_{\calc\HAlg}}
+\ar@/_1.3em/[rrrr];[]_-(.91){\overline{\xi}_{\HA{\calc}}}
 (H\calX)^{\sqcup2}\ar[r];[]^-{(\textup{id},\textup{id})}
 &%r4c1
 (H\calX)^{\sqcup2}\Times(H\calX)^{\sqcup2}\ar[r];[]^-{d_0\Times d_0\Times \phi_s}
@@ -4907,9 +4912,9 @@ HV\Times HV\ar[r];[]^-{\phi_{s+1}}
 HV\\%r4c5
 H\calX\times H\calX\ar@{ >->}[u];[]
 }}\]
-One observes that the horizontal composite is the very definition of $\overline{\xi}_{\calc\HAlg}$. We know from \S\ref{chain level structure} that $\overline{\xi}_{\calc\HAlg}$ factors through the smash coproduct, which is how we were able to fill in the dashed arrow on cohomology.
+One observes that the horizontal composite is the very definition of $\overline{\xi}_{\HA{\calc}}$. We know from \S\ref{chain level structure} that $\overline{\xi}_{\HA{\calc}}$ factors through the smash coproduct, which is how we were able to fill in the dashed arrow on cohomology.
 
-In order to obtain a map $\xi^\star_\textup{res}$, it is enough to check that the composite $c(\calX\sqcup \calX)\to  V$ is null. However, as $V$ is a GEM, a map into $V$ is null if and only if it is zero on cohomology. We have just stated that the map $\overline{\xi}_{\calc\HAlg}$ factors through $(H\calX)^{\smashcoprod 2}$, which is to say that the composite $HV\to H\calX\times H\calX$ is zero.
+In order to obtain a map $\xi^\star_\textup{res}$, it is enough to check that the composite $c(\calX\sqcup \calX)\to  V$ is null. However, as $V$ is a GEM, a map into $V$ is null if and only if it is zero on cohomology. We have just stated that the map $\overline{\xi}_{\HA{\calc}}$ factors through $(H\calX)^{\smashcoprod 2}$, which is to say that the composite $HV\to H\calX\times H\calX$ is zero.
 \end{proof}
 This map $\overline{\xi}_\textup{res}^\star$ is very rich, but it will be important to note that postcomposition with $\epsilon$ destroys much of that richness. That is, reading off the dotted portion of the above commuting diagram:
 \begin{lem}
@@ -4975,9 +4980,9 @@ The representative $g$ has the property that $d_0(g)=\mu(\Nabla(\imath_t\otimes\
 %&L^{\times2}}\]
 %where the outer rectangle commutes since in $L^{\times2}$, $(a,0)\cdot(0,b)=(0,0)$. This gives a map $C_{n,m}\to c_2(L^{\times2})$ whose restriction to the subcomplex $S^n\sqcup S^m$ gives the homotopy classes $\alpha$ and $\beta$. The image $g_{\alpha,\beta}$ of the class $g\in(C_{n,m})_{n+m+1}$ is then an explicit representative for the homology class sought.
 
-\subsection{A chain level construction of $j^\star_{\calc\HAlg}$}\label{chain level construction of j}
+\subsection{A chain level construction of $j^\star_{\HA{\calc}}$}\label{chain level construction of j}
 We can use this cofibration to construct, at the chain level, the image under 
-\[j^\star_{\calc\HAlg}:\textup{Pr}_t(HY)\otimes \textup{Pr}_{t'}(HZ)\to \textup{Pr}_{t+t'+1}(HY\smashprod HZ)\]
+\[j^\star_{\HA{\calc}}:\textup{Pr}_t(HY)\otimes \textup{Pr}_{t'}(HZ)\to \textup{Pr}_{t+t'+1}(HY\smashprod HZ)\]
 of a tensor product $\alpha\otimes\beta$ of \emph{spherical} homology classes. Abbreviating $H_*^\calc$ to $H$:
 \begin{prop}
 \label{prop on F and J}
@@ -4998,7 +5003,7 @@ defined by $F(\alpha,\beta):=H^\calc_*(\overline{F}(\alpha,\beta))(h_{t,t'})$ ma
 \ar[r]^-{\textup{hur}^{\otimes2}}
 &%r1c1
 \ar[ddl]_(.34){\Id+T}
-\textup{Pr}(HY)_t\otimes\textup{Pr}(HZ)_{t'}\ar[r]^-{j^\star_{\calc\HAlg}}
+\textup{Pr}(HY)_t\otimes\textup{Pr}(HZ)_{t'}\ar[r]^-{j^\star_{\HA{\calc}}}
 &%r1c2
 \textup{Pr}(HY\smashprod HZ)_{t+t'+1}\ar@{ >->}[d]
 \\%r1c5
@@ -5060,14 +5065,14 @@ J_{t,t'}\ar@{-->}[r]
 Corresponding to the right square is a map $J_{t,t'}\to c_2(Y\times Z)$, and the composite with the cofibration $c_2(Y\times Z)\to c(Y\times Z)$ is $\overline{F}(\alpha,\beta)$. This function $\overline{F}$ is evidently natural in $Y$ and $Z$, and so then is $F$.
 
 The diagram consists of a square, a triangle and a hexagon.
-The square commutes as the horizontal arrows are maps in $\calc\HCoalg$, and we can see that the triangle commutes because we understand the $\calc\HCoalg$ structure of $H_*(J_{t,t'})$ (and $H^\calc_*(\overline{F}(\alpha,\beta))$ is a map of $\calc$-$H_*$-coalgebras). As all of the maps in the hexagon are natural, we may check that it commutes on the universal example alone: 
+The square commutes as the horizontal arrows are maps in $\HC{\calc}$, and we can see that the triangle commutes because we understand the $\HC{\calc}$ structure of $H_*(J_{t,t'})$ (and $H^\calc_*(\overline{F}(\alpha,\beta))$ is a map of $\calc$-$H_*$-coalgebras). As all of the maps in the hexagon are natural, we may check that it commutes on the universal example alone: 
 \[(\imath_t,\imath_{t'})\in\hom_{s\algs}(\mathbb{S}^{\calc}_t,\mathbb{S}^{\calc}_t)\times\hom_{s\algs}(\mathbb{S}^{\calc}_{t'},\mathbb{S}^{\calc}_{t'}).\]
  That is, it is enough to check that the following hexagon, with a one element set at the top left entry, commutes:
 \[\mathclap{\xymatrix@R=4mm@C=17mm{
 \{(\imath_t,\imath_{t'})\}\ar[d]^-{F}
 \ar[r]^-{\textup{hur}^{\otimes2}}
 &%r1c1
-\textup{Pr}_t(H\mathbb{S}^{\calc}_t)\otimes\textup{Pr}_{t'}(H\mathbb{S}^{\calc}_{t'})\ar[r]^-{j^\star_{\calc\HAlg}}
+\textup{Pr}_t(H\mathbb{S}^{\calc}_t)\otimes\textup{Pr}_{t'}(H\mathbb{S}^{\calc}_{t'})\ar[r]^-{j^\star_{\HA{\calc}}}
 &%r1c2
 \textup{Pr}_{\frakt+1}(H\mathbb{S}^{\calc}_t\smashprod H\mathbb{S}^{\calc}_{t'})\ar@{ >->}[d]^-{\textup{inc}}
 \\%r1c5
@@ -5077,7 +5082,7 @@ H_{\frakt+1}(\mathbb{S}^{\calc}_t\times \mathbb{S}^{\calc}_{t'})\ar[r]^-{r}
 &%r2c2
 (H\mathbb{S}^{\calc}_t\smashprod  H\mathbb{S}^{\calc}_{t'})_{\frakt+1}
 }}\]
-In this diagram, $j^\star_{\calc\HAlg}$ and $\textup{inc}$ are isomorphisms of 1-dimensional vector spaces, so it is enough to check that $r(F(\imath_t,\imath_{t'}))$ does not lie in the kernel of $\textup{proj}$, i.e.:
+In this diagram, $j^\star_{\HA{\calc}}$ and $\textup{inc}$ are isomorphisms of 1-dimensional vector spaces, so it is enough to check that $r(F(\imath_t,\imath_{t'}))$ does not lie in the kernel of $\textup{proj}$, i.e.:
 \[r(F(\imath_t,\imath_{t'}))\notin(H\mathbb{S}^{\calc}_t\sqcup H\mathbb{S}^{\calc}_{t'})_{\frakt+1} = H_{\frakt+1}\mathbb{S}^{\calc}_t\oplus H_{\frakt+1}\mathbb{S}^{\calc}_{t'}=0,\]
 yet $\Delta(r(F(\imath_t,\imath_{t'})))=\imath_t \otimes\imath_{t'}+\imath_{t'}\otimes\imath_{t}\neq 0$, using the commuting square and triangle already established.
 \end{proof}
@@ -5182,7 +5187,7 @@ C\mathbb{S}^\algs_{t+i}\ar[r]\ar@/_1em/[rr]_-{0}
 Corresponding to the right square is a map $\Theta_{t,i}\to c_2(KW)$, and the composite with the cofibration $c_2(KW)\to c(KW)$ is $\overline{G}(\alpha)$. This function $\overline{G}$ is evidently natural in $W$, and so then is $G$.
 
 The statement about $G$ is natural in $W\in s\vect{}{}$, so may be checked on the universal example $\imath_t\in \hom_{s\vect{}{}}(\mathbb{K}_t,\mathbb{K}_t)$. As $\overline{G}(\imath)$ is a map of $\algs$-$H_*$-coalgebras: $(P^i)^*G(\imath_t)=\textup{hur}(\imath_t)$; $(P^j)^*G(\imath_t)=0$ for all $j\neq i$ with $2\leq j\leq (t+i)/2$; and $\Delta G(\imath_t)$ vanishes unless $i=t$, in which case it equals $\imath\otimes \imath$. By construction, $G(\imath_t)$ lies in quadratic grading $2$ of the cofree construction:
-\[G(\imath_t)\in\quadgrad{2}H_{t+i+1}(\mathbb{K}^{\algs}_t)=\quadgrad{2}C_{\algs\HCoalg}\{\imath_t\}.\]
+\[G(\imath_t)\in\quadgrad{2}H_{t+i+1}(\mathbb{K}^{\algs}_t)=\quadgrad{2}C_{\HC{\algs}}\{\imath_t\}.\]
 These conditions suffice to identify $G(\imath_t)$.
 %and it is clear that the only element of quadratic grading $2$
 %
@@ -5216,9 +5221,9 @@ There is a commuting diagram:
 \ar[l]_-{\partial_\textup{conn}}
 \ar[d]^-{\cong}
 \\%r2c4
-\textup{Pr}_t(HX)\otimes \textup{Pr}_{t'}(HX)\ar[r]^-{j^\star_{\calc\HAlg}}
+\textup{Pr}_t(HX)\otimes \textup{Pr}_{t'}(HX)\ar[r]^-{j^\star_{\HA{\calc}}}
 &%r3c1
-\textup{Pr}_{\frakt+1}(HX\smashprod HX)\ar[rr]^-{\xi^\star_{\calc\HAlg}}
+\textup{Pr}_{\frakt+1}(HX\smashprod HX)\ar[rr]^-{\xi^\star_{\HA{\calc}}}
 &%r3c2
 &%r3c3
 \textup{Pr}_{\frakt+1}(HVX)%r3c4
@@ -5229,7 +5234,7 @@ It will help to modify and augment this diagram a little. Indeed, for each cardi
 \[\mathclap{\xymatrix@R=4mm{
 \{(\alpha,\beta)\}
 %\pi_t(X)\otimes \pi_{t'}(X)
-\ar@{~>}[dd]_-{\makebox[0cm][r]{\,\scriptsize$j^\star_{\calc\HAlg}$\,}\circ(\textup{hur}^{\otimes 2})}
+\ar@{~>}[dd]_-{\makebox[0cm][r]{\,\scriptsize$j^\star_{\HA{\calc}}$\,}\circ(\textup{hur}^{\otimes 2})}
 \ar[r]^-{\widetilde{\nabla}}
 \ar@{..>}[ddddr]^-(.2){F}
 &%r1c1
@@ -5248,7 +5253,7 @@ It will help to modify and augment this diagram a little. Indeed, for each cardi
 %\textup{Pr}_t(HX^{\fraks})\otimes \textup{Pr}_{t'}(HX^{\fraks})\ar[r]^-{j}
 %r3c1
 \textup{Pr}_{\frakt+1}(HX\smashprod HX)
-\ar@{~>}[rrr]^-{\xi^\star_{\calc\HAlg}}
+\ar@{~>}[rrr]^-{\xi^\star_{\HA{\calc}}}
 \ar@{ >->}[d]
 %\ar@{ >->}[dr]
 &
@@ -5609,7 +5614,7 @@ Choose $i\geq1$ and $\alpha=(\alpha_{p-1},\ldots,\alpha_0)$ with $\alpha_{p-1}>\
 
 \begin{prop}
 \label{LieBracketsTrivial}
-The $\calL(n)\PiAlg$ bracket $H_p^{\calU(n)}X\otimes H_q^{\calU(n)}X\to H_{p+q}^{\calU(n)}X$ vanishes except when $p=q=0$. 
+The $\PA{\calL(n)}$ bracket $H_p^{\calU(n)}X\otimes H_q^{\calU(n)}X\to H_{p+q}^{\calU(n)}X$ vanishes except when $p=q=0$. 
 The Lie algebra structure on $H_0^{\calU(n)}X$ is induced by that on $X$: if $z,w\in X$ represent $\overline{z},\overline{w}\in H_0^{\calU(n)}X$, then $[\overline{x},\overline{y}]$ is represented by the cycle $[x,y]\in ZC_0(Q^{\calU(n)}B^{\calw(n)}X)$.
 \end{prop}
 \noindent This theorem shows that $H_*^{\calU(X)}$ is trivial in positive dimensions \emph{as a Lie algebra}, but nonetheless, the \emph{restriction} need not be trivial (c.f.\ propositions \ref{QkTrivial} and \ref{Q0ZeroByPriddyAlg}).
@@ -5909,7 +5914,7 @@ We would like to find a sub\emph{space} of $\pi_*(\BSW L)$ which freely generate
 \label{Id of E2 grothen}
 For $L\in s\calc$, $\pi_*(B^{\BSW}L)$ is an almost free (monadic over $\vect{}{}$) simplicial $\calc$-$\Pi$-algebra weakly equivalent to $\pi_*L$.
 \end{prop}
-\noindent This differs from the observation in \cite[Proof of theorem 4.2]{Blanc_Stover-Groth_SS.pdf}, in that we show that all the structure maps of $\pi_*(B^{\BSW}L)\in s\calc\PiAlg$ except for $d_0$ preserve \emph{vector spaces} of generators, rather than \emph{sets} of generators.
+\noindent This differs from the observation in \cite[Proof of theorem 4.2]{Blanc_Stover-Groth_SS.pdf}, in that we show that all the structure maps of $\pi_*(B^{\BSW}L)\in s\PA{\calc}$ except for $d_0$ preserve \emph{vector spaces} of generators, rather than \emph{sets} of generators.
 \begin{proof}
 That the augmentation to $\pi_*L$ is a weak equivalence follows from Stover's result \citeBOX[2.7]{StoverVanKampen.pdf}. The only change from Blanc-Stover is that $\pi_*(B^{\BSW}L)$ is almost free over the category $\vect{}{}$, rather than the category of pointed sets.
 
@@ -5919,7 +5924,7 @@ Moreover, there is a natural map $\beta:\Ftwo \{\homog( ZN_*M)\}\to\pi_*(\BSW M)
 \[\beta(\underline{x})=\overline{z_{x}},\textup{ for $x\in \homog( ZN_*M)$}.\]
 From the above expression for $\BSW M/C_0$, one sees that $\im (\alpha)$ and $\im (\beta)$ are linearly independent subspaces of $\pi_*(\BSW M)$, and that $\pi_*(\BSW M)$ is free on $\im (\alpha)\oplus\im (\beta)$. Moreover, if $M\to M'$ is a map in $s\calL(n)$, then the generating subspaces are preserved by the induced map $\pi_*\BSW M\to \pi_*\BSW M'$.
 
-Applying this analysis to $\pi_*B^\BSW L\in s\calc\PiAlg$, every face and degeneracy map except for $s_0$ and $d_0$ preserves the generators.
+Applying this analysis to $\pi_*B^\BSW L\in s\PA{\calc}$, every face and degeneracy map except for $s_0$ and $d_0$ preserves the generators.
 In order to check that $s_0$ preserves generators, we must see that the comonad diagonal of $\BSW$ sends the subspaces $\im (\alpha_L)$ and $\im (\beta_L)$ into the subspaces $\im (\alpha_{\BSW L})$ and $\im (\beta_{\BSW L})$. That $\im (\beta_L)$ maps into $\im (\beta_{\BSW L})$ is immediate. For $\im (\alpha_L)$, the image of $h_{x_1}-h_{x_0}$ under the diagonal is $h_{h_{x_1}}-h_{h_{x_0}}$, which is in $\im(\alpha_{\BSW L})$, since $dh_{x_1}=z_{dx_1}=z_{dx_0}=dh_{x_0}$.
 \end{proof}
 
@@ -5940,9 +5945,9 @@ In order to check that $s_0$ preserves generators, we must see that the comonad 
 
 \subsection{A chain-level diagonal on the $\BSW $ construction}
 \label{Subsection: Chain level diagonal}
-We have seen, for $M\in s\calc$, that $\pi_*(\BSW M)$ is a free object in $\calc\PiAlg$. As such, there is a diagonal
-\[\phi_{\calc\PiAlg}:\pi_*(\BSW M)\to \pi_*(\BSW M)\sqcup \pi_*(\BSW M).\]
-In this section, we will describe how $\phi_{\calc\PiAlg}$ is the map on homotopy induced by a morphism $\phi_\BSW :\BSW M\to \BSW M\sqcup \BSW M$ in $s\calc$, and construct a map $\xi_{\BSW}$ related to the map $\xi_{\calc\PiAlg}$ of \S\ref{chain level structure}. % (so that $i\circ\phi_{\calc\PiAlg}=\pi_*(\phi_{\BSW})$, where $i$ is the natural isomorphism $\pi_*(\BSW L)\sqcup\pi_*(\BSW L)\to \pi_*(\BSW L\sqcup \BSW L)$).
+We have seen, for $M\in s\calc$, that $\pi_*(\BSW M)$ is a free object in $\PA{\calc}$. As such, there is a diagonal
+\[\phi_{\PA{\calc}}:\pi_*(\BSW M)\to \pi_*(\BSW M)\sqcup \pi_*(\BSW M).\]
+In this section, we will describe how $\phi_{\PA{\calc}}$ is the map on homotopy induced by a morphism $\phi_\BSW :\BSW M\to \BSW M\sqcup \BSW M$ in $s\calc$, and construct a map $\xi_{\BSW}$ related to the map $\xi_{\PA{\calc}}$ of \S\ref{chain level structure}. % (so that $i\circ\phi_{\PA{\calc}}=\pi_*(\phi_{\BSW})$, where $i$ is the natural isomorphism $\pi_*(\BSW L)\sqcup\pi_*(\BSW L)\to \pi_*(\BSW L\sqcup \BSW L)$).
 
 In order to construct a map $\phi_\BSW $, each $S\in\spheres{\calc}$ equals $S=F^\calc\mathbb{K}$ for some $\mathbb{K}$ as in \S\ref{The Dold-Kan correspondence} (with indices omitted), and we construct a commuting diagram:
 \[\xymatrix@R=4mm{
@@ -6018,10 +6023,10 @@ This follows from the observation that both composites $(\Id\sqcup0)\overline{\x
 The desired property for $\xi_{\BSW}$ is then the following lemma (involving the natural isomorphism $i$ of proposition \ref{smash coprod}, and the almost free structure given in proposition \ref{Id of E2 grothen}). 
 \begin{lem}
 \label{LemmaOn xi}
-For $L\in s\calc$, we have $(i\circ \xi_{\calc\PiAlg})=\pi_*(\xi_{\BSW})$, i.e.\ a commuting diagram:
+For $L\in s\calc$, we have $(i\circ \xi_{\PA{\calc}})=\pi_*(\xi_{\BSW})$, i.e.\ a commuting diagram:
 \[\xymatrix@R=4mm@C=17mm{
 \pi_*(B^\BSW_s L)\ar[r]^-{\pi_*(\xi_\BSW)}
-\ar[dr]_-{\xi_{\calc\PiAlg}}
+\ar[dr]_-{\xi_{\PA{\calc}}}
 &%r1c1
 \pi_*((B^\BSW_{s-1} L)^{\smashcoprod2})\\%r1c2
 &%r2c1
@@ -6030,7 +6035,7 @@ For $L\in s\calc$, we have $(i\circ \xi_{\calc\PiAlg})=\pi_*(\xi_{\BSW})$, i.e.\
 }\]
 \end{lem}
 \begin{proof}
-In view of the short exact sequences of proposition \ref{smash coprod}, this is equivalent to $(i\circ \overline{\xi}_{\calc\PiAlg})=\pi_*(\overline{\xi}_{\BSW}):\pi_*(\BSW^{s+1}L)\to\pi_*((\BSW^{s}L)^{\sqcup 2})$, which holds as $(i\circ\phi_{\calc\PiAlg})=\pi_*(\phi_{\BSW})$.
+In view of the short exact sequences of proposition \ref{smash coprod}, this is equivalent to $(i\circ \overline{\xi}_{\PA{\calc}})=\pi_*(\overline{\xi}_{\BSW}):\pi_*(\BSW^{s+1}L)\to\pi_*((\BSW^{s}L)^{\sqcup 2})$, which holds as $(i\circ\phi_{\PA{\calc}})=\pi_*(\phi_{\BSW})$.
 \end{proof}
 \begin{lem}
 $(d_i)^{\smashcoprod 2}\xi_\BSW =\xi_\BSW d_{i+1}$ for $i\geq1$, and $(d_0)^{\smashcoprod 2}\xi_\BSW = (\xi_\BSW d_{0})\star(\xi_\BSW d_{1})$, so that the map $Q^{\calc}\xi_\BSW $ induces a degree $(-1,0)$ bicomplex map:
@@ -6405,7 +6410,7 @@ Q^{\calw}\pi_*^\textup{v} \BSW^{p+k+1}L
 The bottom left square commutes by naturality of $\gamma$, while the bottom right square is an instance of lemma \ref{LemmaOn xi}. What remains is to check that the hexagon commutes. For notational convenience, write $A=\BSW^{p+k}L\in s\calL$, $\textup{br}:A^{\otimes 2}\to A^{\smashcoprod 2}$ for the $\call$-bracket, and
 $\textup{br}:(\pi_*^\textup{v} A)^{\otimes 2}\to (\pi_*^\textup{v} A)^{\smashcoprod 2}$ for the $\calw$-bracket on homotopy.
 
-The source in the hexagon is then $Q^{\calw}((\pi_*^\textup{v}A)^{\smashcoprod2})$, the smash product being the coproduct in  $\calw=\calL\PiAlg$ of two copies of $\pi_*^\textup{v}A$. Any element of $Q^{\calw}((\pi_*^\textup{v}A)^{\smashcoprod2})$ can be represented by a sum
+The source in the hexagon is then $Q^{\calw}((\pi_*^\textup{v}A)^{\smashcoprod2})$, the smash product being the coproduct in  $\calw=\PA{\calL}$ of two copies of $\pi_*^\textup{v}A$. Any element of $Q^{\calw}((\pi_*^\textup{v}A)^{\smashcoprod2})$ can be represented by a sum
 $\textstyle\sum_k\textup{br}(\overline{x_k}\otimes \overline{y_k})+E$,
 with the $x_k$ (resp.\ $y_k$) representatives of elements $\overline{x_k}$ in the first (resp.\ second) copy of $\pi_*^\textup{v} A$ and, $E$ a sum of at least three-fold  brackets of elements in the two copies. This extra term $E$ is annihilated by both $j_{\calw}$ and $\pi_*^\textup{v}(j)\circ\gamma\circ Q^{\calw}(i)$, so can be ignored. One calculates: 
 \[\smash{(\gamma^{\otimes 2}\circ j_\calw)(\textstyle\sum_k\textup{br}(\overline{x_k}\otimes \overline{y_k})+E)=\textstyle\sum_k \overline{x_k}\otimes \overline{y_k}.}\]
