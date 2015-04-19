@@ -1,7 +1,7 @@
 % !TEX root = z_output/unstable_Lie_algs.tex
 \documentclass[11pt]{amsart} \renewcommand{\baselinestretch}{1.4}
 \newcommand{\xIncludeAll}{}%
-\newcommand{\xShrinkPages}{}%
+\newcommand{\ShrinkPages}{}%
 \newcommand{\xPostponeContents}{}%
 \ifx\ShrinkPages\undefined\else\usepackage[paperheight=160mm,paperwidth=160mm]{geometry}\fi%220/160
 \usepackage{amsmath,amsthm,amssymb} \usepackage{eucal} \usepackage{mathrsfs,nicefrac} \usepackage{amssymb} \usepackage[all]{xy} \usepackage{cancel} \usepackage[textsize=small]{todonotes} \usepackage{color} \usepackage{version} \usepackage{enumerate} \usepackage{mathtools} \newcommand{\ooooo}[2][]{\excludeversion{#2}} \newcommand{\wooooo}[2][]{\includeversion{#2}}%mathtools is just used for `mathclap'
@@ -17,7 +17,7 @@
 \ooooo[	 7]{homotopy operations for PRLs}
 \ooooo[	 8]{Cohomology Operations for W and U}
 \ooooo[	 9]{Koszul complexes}
-\wooooo[	10]{Composite functor spectral sequences}
+\ooooo[	10]{Composite functor spectral sequences}
 \ooooo[	11]{Operations in composite functor spectral sequences}
 \wooooo[	12]{Calculations of HWn for n nonzero}%\renewcommand{\wooooo}[2][]{\includeversion{#2}}
 \wooooo[	13]{Calculations of HW0}
@@ -372,7 +372,7 @@ url=false,doi=false,isbn=false,eprint=false]{biblatex}%
 \newcommand{\Ftwo}{\F_2}
 \newcommand{\TOP}{\mathfrak{T}}
 
-\newcommand{\EE}[5]{[E^{#1}_{#2}#3]^{#4}_{#5}}
+\newcommand{\Eprime}[5]{[E'_{#2}#3]^{#4}_{#5}}
 \newcommand{\E}[5]{[E^{#1}_{#2}#3]^{#4}_{#5}}
 \newcommand{\Edown}[4]{[E_{#1}#2]^{#3}_{#4}}
 \newcommand{\Edownup}[5]{[E_{#1}^{#2}#3]^{#4}_{#5}}
@@ -500,7 +500,7 @@ where we write  $\dual V$ for the linear dual of a vector space $V$, and insist 
 
 One useful idea is to search for operations which act on the spectral sequence --- spectral sequence operations can be used to produce new elements in a spectral sequence and to compute differentials on those elements. Along this line, Bousfield and Kan construct a Lie algebra pairing \cite[\S14]{BK_pairings_products.pdf}:
 \[\E{}{r}{X}{s}{t} \otimes \E{}{r}{X}{s'}{t'}\to \E{}{r}{X}{s+s'+1}{t+t'}\textup{ \ (for $1\leq r\leq \infty$)},\]
-with the bracket on $E_r$ satisfying  a Liebnitz formula and inducing the bracket on $E_{r+1}$.
+with the bracket on $E_r$ satisfying  a Liebniz formula and inducing the bracket on $E_{r+1}$.
 
 There are two reasons why one might expect such a Lie algebra structure. %, one reason at $E_2$ and one at $E_\infty$. At $E_2$: 
 The operads $\CommOperad$ and $\LieOperad$ are Koszul dual and (even though the theory of Koszul homology is complicated by the nonzero characteristic) one is not surprised to find an action of $\LieOperad$ on the derived functors calculating $E_2$. %, which might then extend to the higher pages. At $E_\infty$: 
@@ -4993,7 +4993,7 @@ For all $p,q\geq0$ and all $r\geq2$, there are well-defined vector space homomor
 \ExtCohOp^k:\Edown{r}{V}{p,q}{}&\to \Edown{r+k-2}{S^2V}{p+k-q,2q}{},&\qquad&\text{if }q\leq k\leq q+r-2,\\
 \ExtCohOp^k:\Edown{r}{V}{p,q}{}&\to \Edown{2r-2}{S^2V}{p+k-q,2q}{},&\qquad&\text{if }q+r-2\leq k.
 \end{alignat*}
-which \todo[inline]{emphasize} commute with the differentials (c.f.\ \cite[Theorem 2.17]{MR2245560}), and an external (not `exterior') commutative product operation which satisfies the Liebnitz rule:
+which \todo[inline]{emphasize} commute with the differentials (c.f.\ \cite[Theorem 2.17]{MR2245560}), and an external (not `exterior') commutative product operation which satisfies the Liebniz rule:
 \[\ExtCohProd:\Edown{r}{V}{p_1,q_1}{}\otimes \Edown{r}{V}{p_2,q_2}{}\to \Edown{r}{S^2V}{p_1+p_2,q_1+q_2}{}.\]
 Note that the second and third operations are from $E_r\to E_{r'}$, sometimes with $r'\geq r$, which is to say that these operations have indeterminacy disappearing by $E_{r'}$.
 
@@ -5967,11 +5967,11 @@ $\Sqv^2 v_{j}=0$ for all $j\geq2$. Under this isomorphism, $H^*_{(1)}V^*_{(1)}$ 
 \begin{proof}
 Suppose first that $S\geq2$. Consider the elements
 \[v_0\in (V_{(2)})^{0,S}_{T},\ \ \ \Sqv^j v_0\in (V_{(2)})^{1,S+j-1}_{2(T+1)-1}\  \textup{($j\geq2$)},\ \ \textup{and}\ \ \ \Sqv^3v_i\in (V_{(2)})^{1,S+i+2}_{2^{i+1}(T+1)-1}\ \textup{($i\geq1$)}.\]
-These elements span $(V_{(2)})^{0,*}_*$ and $(V_{(2)})^{1,*}_*$, and can all be distinguished by their internal degrees, so the restrictions of the edge composite (c.f.\ Proposition \ref{edgehomproposition})
-\[(H^*_{(1)}V^*_{(1)})^{s_2,*}_*\epi \E{(2)}{2}{}{0,s_2,*}{*}=(V_{(2)})^{s_2,*}_*\textup{ \ ($s_2$ either $0$ or $1$)}\]
-are isomorphisms. We write
+These elements span $(V_{(2)})^{0,*}_*$ and $(V_{(2)})^{1,*}_*$, and can all be distinguished by their internal degrees, so the restrictions 
+\[(H^*_{(1)}V^*_{(1)})^{0,*}_*\epi \E{(2)}{2}{}{0,0,*}{*}=(V_{(2)})^{0,*}_*,\ \ (H^*_{(1)}V^*_{(1)})^{1,*}_*\epi \E{(2)}{2}{}{0,1,*}{*}=(V_{(2)})^{1,*}_*\]
+ of the edge composite (c.f.\ Proposition \ref{edgehomproposition}) are isomorphisms. We write
 \[h:(V_{(2)})^{0,*}_*\oplus (V_{(2)})^{1,*}_*\to H^*_{(1)}V^*_{(1)}\]
-for the injection obtained by adding the inverse maps. Use the basis of $V_{(2)}$ arising from Propositions \ref{Sg1 calc of V2} and \ref{basis of element of M(n+1) in deg 0} to extend $h$ to a vector space map $H:V_{(2)}\to H^*_{(1)}V^*_{(1)}$ by the rule $H(\Sqv^jx)=\Sqv^j H(x)$. Although $H$ is not a map in $\calMv(2)$, it does induce the vector space isomorphism required for the proposition.
+for the injection obtained by adding their inverse maps. Use the basis of $V_{(2)}$ arising from Propositions \ref{Sg1 calc of V2} and \ref{basis of element of M(n+1) in deg 0} to extend $h$ to a vector space map $H:V_{(2)}\to H^*_{(1)}V^*_{(1)}$ by the rule $H(\Sqv^jx)=\Sqv^j H(x)$. Although $H$ is not a map in $\calMv(2)$, it does induce the vector space isomorphism required for the proposition.
 
 Suppose instead that $S=1$. The same argument produces a map $\mathrm{subquo}\to H^*_{(1)}V^*_{(1)}$. The difference is that we must find candidates for $v_1^2$ and $v_0$ in $H^*_{(1)}V^*_{(1)}$. We send $v_0$ to the unique non-zero element of $(H^*_{(1)}V^*_{(1)})^{0,1}_{T}$ and $v_1^{2}$ to the unique non-zero element of $(H^*_{(1)}V^*_{(1)})^{1,4}_{4(T+1)-1}$.
 \end{proof}
@@ -6079,66 +6079,69 @@ The argument is unchanged when $N=1$ or $N\geq4$, while if $2\leq N\leq3$ we may
 \[\ell I-1=\ell C_1+\ell C_2+\ell C_3,\ \  2^{\ell I}=2^{\ell C_1}+2^{\ell C_2}+2^{\ell C_3}.\]
 As in the proof of Theorem \ref{W2 to W1 collapse}, these equations imply that $\ell C_1,\ell C_2,\ell C_3$ equal $\ell I-1,\ell I-2,\ell I-2$, in some order. The first equation then implies that $\ell I=2$, implying that $\ell C_k=0$ for more than one $k$, which we have prohibited. Thus $x\in E_2$ is a permanent cycle.
 \end{proof}
-\todo[inline]{Write:}
+This theorem has the following corollary, which can not be made stronger at the present time due to potential extension problems:
 \begin{cor}
-Some corollary giving  structure of $H^*_{(0)}$.
+Suppose that $X=\mathbb{S}_{T}^{\algs}$ for $T\geq1$. Then the Bousfield-Kan $E_2$ page $\E{}{2}{\calx}{}{}\cong H^*_{\calw(0)}(H^*_\algs X)$ is isomorphic, as a vector space in $\vect{1}{+}$, to the non-unital commutative algebra coproduct of
+\[\Lambda(\CommOperad)[\imath]\sqcup \textstyle\bigsqcup_{2\leq i\leq T} \Bigl(S(\CommOperad) [(\deltav_{\TOP_T(i)}\imath)^{2}]\sqcup \Lambda(\CommOperad)[\deltav_i\imath]\Bigr)\]
+with the subquotient of $\calMh(1)\calMv(1)\{\imath\}$ generated by the elements:
+\begin{alignat}{2}
+\label{ell 2plus}
+\{\deltav_{I}\imath,
+\Sqh^2\deltav_{\TOP_T^1\!I}\imath,\Sqh^3\deltav_{\TOP_T^1\!I}\imath,
+\Sqh^2\deltav_{\TOP_T^2\!I}\imath,\Sqh^3\deltav_{\TOP_T^2\!I}\imath,
+\ldots\}\textup{ for $I\in\aDTirr$, $\ell I>1$;}
+\\
+\label{ell 1}
+\{
+\Sqh^2\deltav_{\TOP_T^2\!I}\imath,\Sqh^3\deltav_{\TOP_T^2\!I}\imath,
+\Sqh^2\deltav_{\TOP_T^3\!I}\imath,\Sqh^3\deltav_{\TOP_T^3\!I}\imath,
+\ldots\}\textup{ for $I\in\aDTirr$, $\ell I=1$;}
+\end{alignat}
+and subject to  relations generated under $\calMh(1)$-operations by
+\begin{alignat}{2}
+\label{ell 2plus}
+\{
+\Sqh^2\deltav_{I}\imath,
+\Sqh^2\deltav_{\TOP_T^1\!I}\imath,
+\Sqh^2\deltav_{\TOP_T^2\!I}\imath,
+\Sqh^2\deltav_{\TOP_T^3\!I}\imath,
+\ldots\}\textup{ for $I\in\aDTirr$, $\ell I>1$;}
+\\
+\label{ell 1}
+\{
+%\Sqh^2\deltav_{I}\imath,
+%\Sqh^2\deltav_{\TOP_T^1\!I}\imath,
+\Sqh^2\deltav_{\TOP_T^2\!I}\imath,
+\Sqh^2\deltav_{\TOP_T^3\!I}\imath,
+\ldots\}\textup{ for $I\in\aDTirr$, $\ell I=1$.}
+\end{alignat}
 \end{cor}
-%
-%\[3+\log_2(N)+\frac{1}{N}\textstyle \sum_k \left[\ell A_k+\ell B_k+\ell C_k\right]\geq -1+\textstyle\sum_{k}\left[\ell B_k+nA_{k}+1\right]+\textstyle\sum_{k}\left[2^{\ell A_k}(nB_k-\ell B_k+\ell C_k)\right]\]
-%
-%\[4+\log_2(N)+\frac{1}{N}\textstyle \sum_k \left[\ell A_k+\ell B_k+\ell C_k\right]\geq \textstyle\sum_{k}\left[\ell B_k+nA_{k}+1\right]+\textstyle\sum_{k}\left[2^{\ell A_k}(nB_k-\ell B_k+\ell C_k)\right]\]
-%
-%%\[4+\log_2(N)+\frac{1}{N}\textstyle \sum_k \left[\ell A_k+\ell C_k\right]\geq \textstyle\sum_{k}\left[\frac{N-1}{N}\ell B_k+nA_{k}+1+2^{\ell A_k}(nB_k-\ell B_k+\ell C_k)\right]\]
-%
-%\[4+\log_2(N)-N\geq \textstyle\sum_{k}\left[\frac{N-1}{N}\ell B_k+(nA_{k}-\frac{1}{N}\ell A_k)+2^{\ell A_k}(nB_k-\ell B_k)+(2^{\ell A_k}-\frac{1}{N})\ell C_k\right].\]
-%We have written the right hand side as a sum of $4k$ non-negative terms, so this is quite a strong inequality.
-%\begin{alignat*}{2}
-%3
-%&=
-%\textstyle\ell B_1+(nA_{1}-\ell A_1)+2^{\ell A_1}(nB_1-\ell B_1)+(2^{\ell A_1}-1)\ell C_1%
-%&\qquad&\text{($N=1$)}\\
-%3
-%&=
-%\textstyle\sum_{k}\left[\frac{1}{2}\ell B_k+(nA_{k}-\frac{1}{2}\ell A_k)+2^{\ell A_k}(nB_k-\ell B_k)+(2^{\ell A_k}-\frac{1}{2})\ell C_k\right]%
-%&\qquad&\text{($N=2$)}\\
-%8/3
-%&>
-%\textstyle\sum_{k}\left[\frac{2}{3}\ell B_k+(nA_{k}-\frac{1}{3}\ell A_k)+2^{\ell A_k}(nB_k-\ell B_k)+(2^{\ell A_k}-\frac{1}{3})\ell C_k\right]%
-%&\qquad&\text{($N=3$)}\\
-%2
-%&\geq
-%\textstyle\sum_{k}\left[\frac{3}{4}\ell B_k+(nA_{k}-\frac{1}{4}\ell A_k)+2^{\ell A_k}(nB_k-\ell B_k)+(2^{\ell A_k}-\frac{1}{4})\ell C_k\right]%
-%&\qquad&\text{($N\geq 4$)}
-%\end{alignat*}
-%Now we just go about checking that these inequalities show that no non-zero differential $d_r(y)$ can exist for $r\geq2$. Indeed, the requirement that $r\geq2$ reduces to the requirement
-%\[\sum(\ell B_k+nA_k)\geq4-N\]
-%which forces
-%\[\log_2(N)\geq \textstyle\sum_{k}\left[-\frac{1}{N}(\ell A_k)+[2^{\ell A_k}(nB_k-\ell B_k)-\frac{1}{N}\ell B_k]+(2^{\ell A_k}-\frac{1}{N})\ell C_k\right].\]
-%
-%N=1: $\ell B_k=0$, done.
-%
-%N=2: $\ell C_1=\ell C_2=1$
-%
-%
-%When $N=1$, demanding that $r\geq2$ implies that $\ell B_1$
-%
-%\[4\geq \textstyle\sum_{k}\left[\frac{N-1}{N}\ell B_k+(nA_{k}-\frac{1}{N}\ell A_k)+\frac{2}{5}+2^{\ell A_k}(nB_k-\ell B_k)+(2^{\ell A_k}-\frac{1}{N})\ell C_k\right]\]
-%
-%\[3= \textstyle\sum_{k}\left[\frac{1}{2}\ell B_k+(nA_{k}-\frac{1}{2}\ell A_k)+2^{\ell A_k}(nB_k-\ell B_k)+(2^{\ell A_k}-\frac{1}{2})\ell C_k\right] (\textup{N=2})\]
-%
-%\[\frac{8}{3}>1+\log_2(3)\geq \textstyle\sum_{k}\left[\frac{2}{3}\ell B_k+(nA_{k}-\frac{1}{3}\ell A_k)+2^{\ell A_k}(nB_k-\ell B_k)+(2^{\ell A_k}-\frac{1}{3})\ell C_k\right] (\textup{N=3})\]
-%
-%
-%\[2\geq4-\frac{N}{2}\geq \textstyle\sum_{k}\left[\frac{3}{4}\ell B_k+(nA_{k}-\frac{1}{4}\ell A_k)+2^{\ell A_k}(nB_k-\ell B_k)+(2^{\ell A_k}-\frac{1}{4})\ell C_k\right] (\textup{$N\geq4$})\]
-%\textup{}
-%
-%%\[4\geq\textstyle\sum_k\left[(nA_k-\ell A_k)+1+(2^{\ell A_k}-1)\ell C_k+2^{\ell A_k}(nB_k-\ell B_k)\right],\]
-%where each quantity $(nA_k-\ell A_k)$, $1$, $(2^{\ell A_k}-1)\ell C_k$ and $2^{\ell A_k}(nB_k-\ell B_k)$ is non-negative.
-%One sees readily that if any $\ell A_k$ is non-zero, the corresponding summand would exceed 4, as in this case, $B_k$ must be non-empty, so that $nB_k-\ell B_k\geq2$. Thus we may take all $A_k=0$, and the inequality becomes
-%\[4\geq\textstyle\sum_k\left[1+(nB_k-\ell B_k)\right].\]
-%Now if $\ell B_k\geq1$ then  $(nB_k-\ell B_k)\geq2$ and if $\ell B_k\geq2$ then  $(nB_k-\ell B_k)\geq7$. Thus there can be at most one term with $\ell B_k\neq0$, and for any such term, $\ell B_k=1$. In the case $\ell B_1=1$, we can have at most one other term, and the target group is either $(E_2)_*^{1,*,*}$ or $(E_2)_*^{2,*,*}$ --- neither of these groups can be the target of a $d_r$ for $r\geq2$. This leaves us investigating the case in which all $A_k$ and $B_k$ are empty, where this inequality becomes $N\leq 4$, so that  $r=N-2$ must equal 2. That is, in this case we are demanding that the gradings in
-%\[(E_2)^{3,\sum \ell C_k,(\sum2^{\ell C_k})}_{-1+\sum(d+nC_k+\ell C_k+1)}\textup{ and }(E_2)^{3,1+\ell I+j,(2^{1+\ell I+j})}_{2^{j+1}(d+nI+\ell I+1)-1}\]
-%coincide
+\subsection{A conjectural alternative $E_1$-page}
+We will now conjecture an $E_1$-page for the Bousfield-Kan spectral sequence for a  sphere  $X=\mathbb{S}_{T}^{\algs}$ for $T\geq1$. Define
+\[\Eprime{blank}{1}{\calx}{}{}:=\calMh(1)\calMv(1)\{\imath\}\]
+with differential $d_1$ determined by the requirements, for $x\in \Eprime{blank}{1}{\calx}{s}{t}$ and $y\in \Eprime{blank}{1}{\calx}{s'}{t'}$:
+\begin{alignat*}{2}
+d_1\Sqh^jx
+&=
+\Sqh^jd_1x
+%&\qquad&\text{(for $x\in \Eprime{blank}{1}{\calx}{s}{t}$)}
+\\
+d_1(xy)&=(d_1x)y+x(d_1y)
+\\
+d_1\deltav_ix
+&=
+\begin{cases}
+\deltav_id_1x,&\textup{if $2\leq i < t$};\\
+\deltav_id_1x + \Sqh^2 x,&\textup{if $2\leq i = t$}.
+%\\,&\textup{if }
+\end{cases}
+%&\qquad&\text{(for $x\in \Eprime{blank}{1}{\calx}{s}{t}$)}
+\end{alignat*}
+
+
+
+
+
 \end{Calculations of HW0}
 
 \begin{second quadrant homotopy sseq operations}
@@ -6193,7 +6196,7 @@ Define an external product
 \[\mu_\textup{ext}:\Edownup{r}{}{X}{s}{t}\otimes \Edownup{r}{}{X}{s'}{t'}\to \Edownup{r}{}{S_2X}{s+s'}{t+t'}\]
 using the chain-level formula
 \[x\otimes y\mapsto\rho\Nabla D^0(x\otimes y).\]
-As both $\Nabla$ and $D^0$ are chain maps, $\mu_\textup{ext}$ satisfies the Liebnitz formula. We will write $x\times y$ for $\mu_\textup{ext}(x\otimes y)$.
+As both $\Nabla$ and $D^0$ are chain maps, $\mu_\textup{ext}$ satisfies the Liebniz formula. We will write $x\times y$ for $\mu_\textup{ext}(x\otimes y)$.
 
 As an example of the type of result one expects, we have the following. The homotopy of a simplicial algebra is exterior in positive dimension. The $E_2$ page of this spectral sequence is not exterior, and yet:
 \begin{prop}
