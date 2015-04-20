@@ -1,6 +1,6 @@
 % !TEX root = z_output/unstable_Lie_algs.tex
-\documentclass[11pt]{amsart} \renewcommand{\baselinestretch}{1.4}
-\newcommand{\xIncludeAll}{}%
+\documentclass[11pt]{amsart} %\renewcommand{\baselinestretch}{1.4}
+\newcommand{\IncludeAll}{}%
 \newcommand{\ShrinkPages}{}%
 \newcommand{\xPostponeContents}{}%
 \ifx\ShrinkPages\undefined\else\usepackage[paperheight=160mm,paperwidth=160mm]{geometry}\fi%220/160
@@ -19,7 +19,7 @@
 \ooooo[	 9]{Koszul complexes}
 \ooooo[	10]{Composite functor spectral sequences}
 \ooooo[	11]{Operations in composite functor spectral sequences}
-\wooooo[	12]{Calculations of HWn for n nonzero}%\renewcommand{\wooooo}[2][]{\includeversion{#2}}
+\ooooo[	12]{Calculations of HWn for n nonzero}%\renewcommand{\wooooo}[2][]{\includeversion{#2}}
 \wooooo[	13]{Calculations of HW0}
 \ooooo[	14]{second quadrant homotopy sseq operations}
 \ooooo[	15]{Operations on the Bousfield-Kan spectral sequence}
@@ -362,7 +362,10 @@ url=false,doi=false,isbn=false,eprint=false]{biblatex}%
 \newcommand{\Sq}{\mathrm{Sq}}
 \newcommand{\LieSteen}{\calA}
 \newcommand{\aDT}{\mathrm{adm}_+(\Delta,T)}
+\newcommand{\aDTnoplus}{\mathrm{adm}(\Delta,T)}
 \newcommand{\aD}[1]{\mathrm{adm}_+(\Delta,#1)}
+\newcommand{\aS}[1]{\mathrm{adm}(\LieSteen_{>1},#1)}
+\newcommand{\aSirr}[1]{\mathrm{adm}^\mathrm{irr}(\LieSteen_{>1},#1)}
 \newcommand{\aDTirr}{\mathrm{adm}_+^\mathrm{irr}(\Delta,T)}
 \newcommand{\aDirr}[1]{\mathrm{adm}_+^\mathrm{irr}(\Delta,#1)}
 \newcommand{\F}{\mathbb{F}}
@@ -375,6 +378,7 @@ url=false,doi=false,isbn=false,eprint=false]{biblatex}%
 \newcommand{\algcat}{{\calc}}%supposed to be temporary - only used in adams convergence
 \newcommand{\Ftwo}{\F_2}
 \newcommand{\TOP}{\mathfrak{T}}
+\newcommand{\STOP}{\mathfrak{S}}
 
 \newcommand{\Eprime}[5]{[E'_{#2}#3]^{#4}_{#5}}
 \newcommand{\E}[5]{[E^{#1}_{#2}#3]^{#4}_{#5}}
@@ -406,6 +410,8 @@ url=false,doi=false,isbn=false,eprint=false]{biblatex}%
 \newcommand{\Lsmashprod}{\barwedge^\mathrm{L}}%{\blacktriangle}
 \newcommand{\smashcoprod}{\veebar}%{\blacktriangledown}
 \newcommand{\Dendo}{R}
+
+\newcommand{\vfpb}{\vfil\pagebreak}
 
 
 \renewcommand{\mapsto}{\longmapsto}
@@ -4224,61 +4230,49 @@ When $n\geq1$, we require, for all $x,y\in V$:
 
 By Proposition \ref{rearrange horiz and vert ops}, for $n\geq1$ and $X\in\calw(n)$, $H^*_{\calw(n)}X$ is naturally an object of $\calMhv(n+1)$. This is \emph{not true} for $n=0$.
 
-For any $n\geq0$, the monad $F^{\calMhv(n+1)}$ factors as $F^{\calMh(n+1)}F^{\calMv(n+1)}$, whose monad structure is defined using the evident distributive law of monads. Combining Corollary \ref{basis of element of M(0) in deg 0} and Proposition \ref{basis of free horizontal operations algebra}:\pagebreak
+For any $n\geq0$, the monad $F^{\calMhv(n+1)}$ factors as $F^{\calMh(n+1)}F^{\calMv(n+1)}$, with the evident distributive law of monads. Combining Corollary \ref{basis of element of M(0) in deg 0} and Proposition \ref{basis of free horizontal operations algebra}:
 
 \begin{cor}
-For $V\in\vect{}{+}$ with homogeneous basis $B$, $F^{\calMhv(1)}V$ is isomorphic to the non-unital commutative algebra coproduct
-\[S(\CommOperad) \left[\Sq\dhor^J\deltav_Ib\ \middle|\ \genfrac{}{}{0pt}{}{b\in B_t\textup{, $I$ non-empty, $\delta$-admissible with }\minDimP(I)\leq t,}{\textup{$J$ $\Sq$-admissible with }\excess(J)\leq \ell I,\ 1\notin J}\right]\sqcup \Lambda(\CommOperad)\left[b\ \middle|\ b\in B\right].\]
+\label{calMhv(1) description}
+For $V\in\vect{}{+}$ with \todo{delete me} homogeneous basis $B$, $F^{\calMhv(1)}V$ is isomorphic to the non-unital commutative algebra coproduct
+\[S(\CommOperad) \left[\Sq\dhor^J\deltav_Ib\ \middle|\ \genfrac{}{}{0pt}{}{b\in B_t\textup{, $I$ non-empty, $\delta$-admissible with }\minDimP(I)\leq t,}{\textup{$J$ $\Sq$-admissible with }\excess(J)\leq \ell I,\textup{ and }1\notin J}\right]\sqcup \Lambda(\CommOperad)\left[b\ \middle|\ b\in B\right].\]
 For elements $b_1,\ldots,b_N$ of $B$ with $b_k\in B_{t_k}$ and appropriate sequences $I_k,J_k$, we have
 \[\textstyle\prod_{k=1}^N \Sq\dhor^{J_k}\deltav_{I_k}b_k\in \left(F^{\calMhv(1)}V\right)^{-1+\sum_k(nJ_k+\ell I_k+1)}_{-1+\sum_k(2^{\ell J_k+\ell I_k}(t_k+1))}.\]
 \end{cor}
 \noindent Similarly, combining Corollary \ref{basis of element of M(n+1) in deg 0} and Proposition \ref{basis of free horizontal operations algebra}:
-
 \begin{cor}
-For $V\in\vect{n}{+}$ with homogeneous basis $B$,  $F^{\calMhv(n+1)}V$ is the quotient of the non-unital commutative algebra
+\label{calMhv(n+1) description}
+For $n\geq1$ and $V\in\vect{n}{+}$ with homogeneous basis $B$,  $F^{\calMhv(n+1)}V$ is the quotient of the non-unital commutative algebra
 %\[S(\CommOperad) \left[\Sq\dhor^J\Sq\dver^Ib\ \middle|\ \genfrac{}{}{0pt}{}{b\in B^{s_{n},\ldots,s_1}_t\textup{, $I,J$ $\Sq$-admissible with }\minDimSq(I)\leq s_n,\ \excess(J)\leq \ell I}{\textup{if }s_{n-1}\!=\!\cdots\!=\!s_1\!=\!0\textup{ then $I$ does not contain 1}}\right].\]
 %
 %
 %
 \[S(\CommOperad) \left[\Sq\dhor^J\Sq\dver^Ib\ \middle|\ \genfrac{}{}{0pt}{}{{\displaystyle\genfrac{}{}{0pt}{}{b\in B^{s_{n},\ldots,s_1}_t\textup{, $I,J$ $\Sq$-admissible with }\minDimSq(I)\leq s_n,\ \excess(J)\leq \ell I}{\textup{if }s_{n-1}\!=\!\cdots\!=\!s_1\!=\!0\textup{ then $I$ does not contain 1}}}}{
 \textup{if }s_{n}\!=\!\cdots\!=\!s_1\!=\!0\textup{ then $J$ does not contain 1}
-}\right]\]
+}
+\right]\]
 by the relation $b^2=0$ if $b\in B_t^{0,\ldots,0}$.
 \end{cor}
 
-\vfil
-
-\begin{cor}[1.8]
-For $V\in\vect{n}{+}$ with homogeneous basis $B$, a basis of $F^{\calMv(n+1)}V\in\vect{n+1}{+}$ is
-\[\left\{\Sq\dver^Jb\ \middle|\ \genfrac{}{}{0pt}{}{b\in B^{s_{n},\ldots,s_1}_t\textup{, $J$ $\Sq$-admissible with }\minDimSq(J)\leq s_n,}{\textup{if }s_{n-1}\!=\!\cdots\!=\!s_1\!=\!0\textup{ then $J$ does not contain 1}}\right\}.\]
-\end{cor}
-
-\begin{prop}[prop 10]
-Suppose that $n\geq1$. For $V\in\vect{n+1}{+}$ with homogeneous basis $B$. Then $F^{\calMh(n+1)}V$ is the quotient of the algebra
-\[S(\CommOperad) \left[\Sq\dhor^Jb\ \middle|\ \genfrac{}{}{0pt}{}{b\in B^{s_{n+1},\ldots,s_1}_t\textup{, $J$ $\Sq$-admissible with }\excess(J)\leq s_{n+1},}{\textup{if }s_{n}=\cdots=s_1=0\textup{ then $J$ does not contain 1}}\right]\]
-by the relation $b^2=0$ if $b\in B_t^{0,\ldots,0}$. Here, $e(J):=j_\ell-j_{\ell-1}-\cdots j_1$ is the Serre excess of $J$.
-\end{prop}
-\pagebreak
-
 
 \subsection{Compressing sequences of Steenrod operations}
-The following theorem creates a model for the convergence of a spectral sequence which we will discuss in \S\ref{Operations in composite functor spectral sequences}. One should think of the domain of $f$ as the $E_\infty$ page of  a first quadrant cohomotopy spectral sequence and $F^{\calMh(n)}V$ as the cohomotopy of the total complex.
+The following theorem creates a model for the convergence of a spectral sequence which we will discuss in \S\ref{Operations in composite functor spectral sequences}. One should think of $F^{\calMhv(n+1)}V$ as the $E_\infty$ page of  a first quadrant cohomotopy spectral sequence and $F^{\calMh(n)}V$ as the cohomotopy of the total complex.
 \begin{thm}
 \label{thm on compressing seqs of steenrod ops}
 Suppose that $n\geq1$ and $V\in \vect{n}{+}$. Then there is a decreasing filtration on $F^{\calMh(n)}V$, the \emph{target filtration}, and an isomorphism
-\[ f:(F^{\calMh(n+1)}F^{\calMv(n+1)}V)^{s_{n+1},\ldots,s_1}_t\overset{\cong}{\to} \Edown{0}{F^{\calMh(n)}V}{s_{n+1},\ldots,s_1}{t},\]
+\[ f:(F^{\calMhv(n+1)}V)^{s_{n+1},\ldots,s_1}_t\overset{\cong}{\to} \Edown{0}{F^{\calMh(n)}V}{s_{n+1},\ldots,s_1}{t},\]
 %E_0^{s_{n+1}}(F^{\calMh(n)}V)^{s_n,\ldots,s_1}_t,\]
 defined by requiring that
-$f(\Sqv^Iv)=\Sqh^Iv$ for $v\in V$, that $f(w_1w_2)=f(w_1)f(w_1)$ for $w_1,w_2\in F^{\calMh(n+1)}F^{\calMv(n+1)}V$,
+$f(\Sqv^Iv)=\Sqh^Iv$ for $v\in V$, that $f(w_1w_2)=f(w_1)f(w_1)$ for $w_1,w_2\in F^{\calMhv(n+1)}V$,
 and that
-\[f(\Sqh^jw)=\Sqh^{j+s_n}f(w)\textup{ for }w\in (F^{\calMh(n+1)}F^{\calMv(n+1)}V)^{s_{n+1},\ldots,s_1}_t.\]
+\[f(\Sqh^jw)=\Sqh^{j+s_n}f(w)\textup{ for }w\in (F^{\calMhv(n+1)}V)^{s_{n+1},\ldots,s_1}_t.\]
 \end{thm}
 \begin{proof}
-The proposed map $f$ is not a well defined map to $F^{\calMh(n)}V$ since the Adem relations between the $\Sqh$ are not preserved by the proposed map $f$. Write $W(V)$ for the quotient of $S(\CommOperad)[\LieSteen\otimes F^{\calMv(n+1)}V]$ by the \emph{horizontal} unstableness relations and Cartan formula, so that $F^{\calMh(n+1)}F^{\calMv(n+1)}V$ is obtained from $W(V)$ by taking the quotient by the two-sided ideal generated by the \emph{horizontal} Adem relations. Then may define a map $\overline{f}:W(V)\to F^{\calMh(n)}V$ by requiring the same of $\overline{f}$ as of $f$. There is a decreasing filtration on $W(V)$, given by 
+The proposed map $f$ is not a well defined map to $F^{\calMh(n)}V$ since the Adem relations between the $\Sqh$ are not preserved by the proposed map $f$. Write $W(V)$ for the quotient of $S(\CommOperad)[\LieSteen\otimes F^{\calMv(n+1)}V]$ by the \emph{horizontal} unstableness relations and Cartan formula, so that $F^{\calMhv(n+1)}V$ is obtained from $W(V)$ by taking the quotient by the two-sided ideal generated by the \emph{horizontal} Adem relations. Then may define a map $\overline{f}:W(V)\to F^{\calMh(n)}V$ by requiring the same of $\overline{f}$ as of $f$. There is a decreasing filtration on $W(V)$, given by 
 \[F^pW(V)=\bigoplus_{s_{n+1}\geq p}\bigoplus_{s_n,\ldots,s_1\geq0}\bigoplus_{t\geq1}W(V)^{s_{n+1},\ldots,s_1}_t\]
  and we define the \emph{target filtration} on the target by $F^p(F^{\calMh(n)}V):=\overline{f}(F^pW(V))$.
 
-The map $\overline{f}$ fails to descend to a well-defined map  $F^{\calMh(n+1)}F^{\calMv(n+1)}V\to F^{\calMh(n)}V$, because it does not annihilate the Adem relations. However, we will show that it does send them into higher filtration, so that $\overline{f}$ induces a well defined map $f$ as advertised: if $w\in W(V)^{s_{n+1},\ldots,s_1}_t$ and $i<2j$, then
+The map $\overline{f}$ fails to descend to a well-defined map  $F^{\calMhv(n+1)}V\to F^{\calMh(n)}V$, because it does not annihilate the Adem relations. However, we will show that it does send them into higher filtration, so that $\overline{f}$ induces a well defined map $f$ as advertised: if $w\in W(V)^{s_{n+1},\ldots,s_1}_t$ and $i<2j$, then
 %\[f(\Sqh^i\Sqh^jw):=\Sqh^{i+2s_n}\Sqh^{j+s_n}f(w),\]
 %and such an assignment does not preserve the Adem relations. Indeed, the Adem relation arising when $i<2j$:
 %\[\Sqh^i\Sqh^jw-\sum_{k=0}^{\lfloor i/2\rfloor}{j-k-1\choose i-2k}\Sqh^{i+j-k}\Sqh^{k}w\]
@@ -4292,7 +4286,7 @@ The map $\overline{f}$ fails to descend to a well-defined map  $F^{\calMh(n+1)}F
 {}={}&\textstyle\sum_{k=0}^{s_n-1}{j+s_n-k-1\choose i+2s_n-2k}\Sqh^{(i+2s_n)+(j+s_n)-k}\Sqh^{k}\overline{f}(w)\\
 {}=\makebox[0cm][r]{$:$}{}&\textstyle\sum_{k=0}^{s_n-1}{j+s_n-k-1\choose i+2s_n-2k}\overline{f}(\Sqh^{i+j+2(s_n-k)+1}\Sqv^{k}w),
 \end{alignat*}
-which is in filtration $s_{n+1}+i+j+2(s_n+1-k)>s_{n+1}+i+j$ (the second equality holds by simply shifting the dummy variable $k$, the third by an Adem relation in the codomain).
+which is in filtration $s_{n+1}+i+j+2(s_n+1-k)>s_{n+1}+i+j$ (the second equation holds by simply shifting the dummy variable $k$, the third by an Adem relation in the codomain).
 %This quantity is non-zero, but is written as the image under $f$ of an element of filtration 
 
 What remains is to show that $f$ is an isomorphism as in the theorem statement, which we approach simply by choosing a set of multiplicative generators for both the domain and codomain. The domain is generated by those expressions $\Sqh^I\Sqv^Jv$, for $v\in V^{s_{n},\ldots,s_1}_t$ running through a basis of $V$, and appropriate $\Sq$-admissible sequences $J$ and $I$. The codomain is generated by expressions $\Sqh^Kv$, for $v\in V^{s_{n},\ldots,s_1}_t$ running through a basis of $V$, and appropriate $\Sq$-admissible sequences $K$. It is a  combinatorial  exercise in the properties of admissible sequences to show that these sets of generators are put in bijection by $f$, and this bijection sends polynomial generators to polynomial generators and exterior generators to exterior generators.
@@ -4550,7 +4544,7 @@ To understand this observation, as $\delta$-Adem relations cannot increase $\min
 &\geq 2t-(k_{s+1}+\cdots +k_1+s)\\
 &= 2t-(t+i_{s}+\cdots +i_1+s)=t_j.
 \end{alignat*}
-where: the non-strict inequalities are by definition of $\minDimP$; the strict inequality follows from Lemma \ref{lemOnAdemChangeIn minDimP}; the first equality holds as $\deltaalg$ is graded by the sum of the indices; and the second equality holds as $t$ is the dimension of $\deltavstar_{I_j}x_j$. %, so that the maximum $\minDimP(t,i^{(j)}_{s},\ldots)$ is attained at its final argument.
+where: the two non-strict inequalities are by definition of $\minDimP$; the strict inequality follows from Lemma \ref{lemOnAdemChangeIn minDimP}; the first equation holds as $\deltaalg$ is graded by the sum of the indices; and the second equation holds as $t$ is the dimension of $\deltavstar_{I_j}x_j$. %, so that the maximum $\minDimP(t,i^{(j)}_{s},\ldots)$ is attained at its final argument.
 
 With this in hand, we return the general case, $1\leq k\leq p$ and $n\geq0$, our goal being to produce a nullhomotopy, except when $n=0$ and $k=1$, when we need a homotopy to $P^t_{\langle 0\rangle}s_0(\jmath z)$. We proceed as in the previous proof, defining
 \[a:=\sum_{(\alpha,\beta)\in\HalfShuffles{k}{k}}[s_{0}s_\beta(\jmath z), s_{0}s_\alpha(\jmath z)]_{\langle 0\rangle}\in C_{p+k+1}\mathbb{B}_{2s_n,\ldots,2s_1}^{2t+1}.\]
@@ -4607,7 +4601,7 @@ E
 % Right hand side
 \sum_{j,\,\produces{K}{I_j}{\Sq}}\sum_{\produces{(\alpha,\beta)}{(s_n+1,k_p)}{\Sq}}x_j\left[\lambda_{k_1-1} \middle|\cdots\middle| \lambda_{k_{p-1}-1} \middle|\lambda_{\beta-1}\lambda_{\alpha-1} \right],%
 \end{alignat*}
-where the second equality holds by the Koszul duality of the $\Lambda$-algebra and  the homogeneous Steenrod algebra.
+where the second equation holds by the Koszul duality of the $\Lambda$-algebra and  the homogeneous Steenrod algebra.
 As homogeneous $\Sq$-Adem relations move $\Sq$-inadmissible sequences towards $\Sq$-admissibility, when $p\geq2$ we have $k_1\geq i_{j,1}$ in each summand, and when $p=1$ we have $\beta\geq i_{j,1}$ in each summand.
 
 Dualizing Priddy's work, namely \cite[Proof of Theorem 5.3]{PriddyKoszul.pdf}, gives a sequence of homotopies which move this cycle into $F_pN_p^\div$. Indeed, given an expression
@@ -5472,7 +5466,7 @@ We calculate
 &={\quadratic_\call}(f)(g\relax _{i_1}(h^{\smash{\langle} 0\smash{\rangle}}_{i_1i_2}))\\
 &={\quadratic_\call}(f)(\epsilon(g\relax _{i_1})(h^{\smash{\langle} 0\smash{\rangle}}_{i_1i_2})),
 \end{alignat*}
-(the last equality holds as we calculate in $S^2(Q^{\call}L)$), and 
+(the last equation holds as we calculate in $S^2(Q^{\call}L)$), and 
 \begin{alignat*}{2}
 (\Phi\circ d\uver)(k_{f\relax (g^{\smash{\langle} 0\smash{\rangle}}_{i_1}(h^{\smash{\langle} 1\smash{\rangle}}_{i_1i_2}))})&=\begin{cases}
 \Phi( k_{f\relax (g\relax _{i_1})(h^{\smash{\langle} 0\smash{\rangle}}_{i_1i_2}))}),&\textup{if `$k$' stands for `$h$'},\\
@@ -5535,7 +5529,7 @@ d\uhor(K)
 &=
 \textstyle\sum_j {\quadratic_\call}(\epsilon (e_j)(f_{ji_0}))\left(s_{\alpha_{ji_0}} {g^{\smash{\langle} 0\smash{\rangle}}_{ji_0i_1}h^{\smash{\langle} 1\smash{\rangle}}_{ji_0i_1i_2}}\right) ={}\makebox[0cm][l]{\textup{RHS}}.
 \end{alignat*}
-To explain further the third equality, note that $N\uver_{m-1}Q^{\call}\BSW L$ is spanned by the classes $k_{\cdots }$, and none of  their degeneracies. Thus, all of the degeneracies $s_{\alpha_{ji_0}}$ appearing in the second line that have not already been annihilated during the application of $\epsilon$ must be the identity. Thus, they can be carried harmlessly through to the end of the calculation, as shown.
+To explain further the third equation, note that $N\uver_{m-1}Q^{\call}\BSW L$ is spanned by the classes $k_{\cdots }$, and none of  their degeneracies. Thus, all of the degeneracies $s_{\alpha_{ji_0}}$ appearing in the second line that have not already been annihilated during the application of $\epsilon$ must be the identity. Thus, they can be carried harmlessly through to the end of the calculation, as shown.
 \end{proof}
 
 
@@ -5610,7 +5604,7 @@ The only further observation necessary to prove this isomorphism is that if $v\i
 %\end{thm}
 
 Consider the diagram:
-\[\xymatrix@R=1.5mm{
+\[\qquad\xymatrix@R=1.5mm{
 &
 H^*_{\calw({n+1})}H_*^{\calU(n)}V^*_{(n)}\ar@{=>}[dl]^-{g_{n+1}}\ar@{=}[d]&
 H^*_{\calw({n+2})}H_*^{\calU({n+1})}V^*_{({n+1})}\ar@{=>}[dl]^-{g_{n+2}}\ar@{=}[d]&
@@ -5625,11 +5619,11 @@ H^*_{\calw({n+2})}H_*^{\calU({n+1})}V^*_{({n+1})}\ar@{=>}[dl]^-{g_{n+2}}\ar@{=}[
 \\
 &&\makebox[5cm][r]{\,$\smash{\cdots }$}
 \\
- F^{\calM\dhor({n+1})}F^{\calMv({n+1})}V_{(n)}\ar[uu]_-{\rho_n}\ar@{=}[d]
-&F^{\calM\dhor({n+2})}F^{\calMv({n+2})}V_{({n+1})}\ar[uu]_-{\rho_{n+1}}\ar@{=}[d]\ar@{=>}[ld]^-{f_{n+1}}
-&F^{\calM\dhor({n+3})}F^{\calMv({n+3})}V_{({n+2})}\ar[uu]_-{\rho_{n+2}}\ar@{=}[d]\ar@{=>}[ld]^-{f_{n+2}}
-%&F^{\calM\dhor(5)}F^{\calM\dhor(5)}V_{({n+3})}\ar[uu]_-{\rho_{n+3}}\ar@{=}[d]\ar@{=>}[ld]
-%&F^{\calM\dhor(6)}F^{\calM\dhor(6)}V_{(5)}\ar[uu]_-{\rho_5}\ar@{=}[d]\ar@{=>}[ld]
+ F^{\calMhv({n+1})}V_{(n)}\ar[uu]_-{\rho_n}\ar@{=}[d]
+&F^{\calMhv({n+2})}V_{({n+1})}\ar[uu]_-{\rho_{n+1}}\ar@{=}[d]\ar@{=>}[ld]^-{f_{n+1}}
+&F^{\calMhv({n+3})}V_{({n+2})}\ar[uu]_-{\rho_{n+2}}\ar@{=}[d]\ar@{=>}[ld]^-{f_{n+2}}
+%&F^{\calMhv(5)}F^{\calMh(5)}V_{({n+3})}\ar[uu]_-{\rho_{n+3}}\ar@{=}[d]\ar@{=>}[ld]
+%&F^{\calMhv(6)}F^{\calMh(6)}V_{(5)}\ar[uu]_-{\rho_5}\ar@{=}[d]\ar@{=>}[ld]
 \\
  F^{\calMh({n+1})}V_{({n+1})}
 &F^{\calMh({n+2})}V_{({n+2})}
@@ -5637,7 +5631,7 @@ H^*_{\calw({n+2})}H_*^{\calU({n+1})}V^*_{({n+1})}\ar@{=>}[dl]^-{g_{n+2}}\ar@{=}[
 %&F^{\calMh(5)}V_{(5)}
 %&F^{\calMh(6)}V_{(6)}
 }\]
-For each $k\geq n$, the map $\rho_k$ is induced by the inclusion $V_{(k)}\cong H^{0}_{\calw(k)}V^*_{(k)}\subseteq H^*_{\calw(k)}V^*_{(k)}$ (which exists as $V_{(k)}$ is trivial) and the $F^{\calMh(k+2)}$- and $F^{\calMv(k+2)}$-operations defined on $H^*_{\calw(k)}V_{(k)}$. (Note that $\rho_{k}$ is a graded map, since the effect of these operations on dimensions is the same in its domain and codomain.)
+For each $k\geq n$, the map $\rho_k$ is induced by the inclusion $V_{(k)}\cong H^{0}_{\calw(k)}V^*_{(k)}\subseteq H^*_{\calw(k)}V^*_{(k)}$ (which exists as $V_{(k)}$ is trivial) and the $F^{\calMhv(k+1)}$-operations defined on $H^*_{\calw(k)}V_{(k)}$. (Note that $\rho_{k}$ is a graded map, since the effect of these operations on dimensions is the same in its domain and codomain.)
 
 The double arrow $g_{k+1}$, representing the convergence of the $(k+1)^{\textup{st}}$ composite functor spectral sequence $\E{(k+1)}{2}{}{}{}\implies H^*_{\calw(k)}V^*_{(k)}$, is in truth shorthand for the function
 %\[g_{k+1}:\left(E_{\infty,(k+1)}\to E_0(H^*_{\calw(k)}V^*_{(k)})\right)\]
@@ -5645,7 +5639,7 @@ The double arrow $g_{k+1}$, representing the convergence of the $(k+1)^{\textup{
 so that $g_{k+1}$ may only be defined on the permanent cycles within $\E{(k+1)}{2}{}{}{}$, %=H^*_{\calw(k+1)}H_*^{\calU(k)}V^*_{(k)}$,
  and lands in the associated graded of $H^*_{\calw(k)}V^*_{(k)}$.
 
-Similarly, we employ the double arrow $f_{k+1}$ as shorthand for the function of Theorem \ref{thm on compressing seqs of steenrod ops}, which is defined on the entirety of $F^{\calM\dhor(k+2)}F^{\calMv(k+2)}V_{(k+1)}$, but whose true codomain is the graded object $E_0(F^{\calMh(k+1)}V_{(k+1)})$ associated with the target filtration defined in Theorem \ref{thm on compressing seqs of steenrod ops}.
+Similarly, we employ the double arrow $f_{k+1}$ as shorthand for the function of Theorem \ref{thm on compressing seqs of steenrod ops}, which is defined on the entirety of $F^{\calMh(k+2)}F^{\calMv(k+2)}V_{(k+1)}$, but whose true codomain is the graded object $E_0(F^{\calMh(k+1)}V_{(k+1)})$ associated with the target filtration defined in Theorem \ref{thm on compressing seqs of steenrod ops}.
 \begin{thm}
 \label{thm on collapsing of most sseqs}
 For each $k\geq n$, $\im(\rho_{k+1})$ consists of permanent cycles and $\rho_k$ preserves the target filtrations, so that it is possible to form the composites $g_{k+1}\circ \rho_{k+1}$ and $E_0(\rho_{k})\circ f_{k+1}$. These composites are equal, and moreover, $\rho_k$ is an isomorphism. In particular, for $k\geq n$, the  $(k+1)^{\textup{st}}$ composite functor spectral sequence collapses at $E_2$.
@@ -5654,21 +5648,21 @@ Before giving the proof, we remark that in some dimensions, $\rho_k$ is already 
 \begin{prop}
 \label{isomorphism rho k in some dims}
 For $k\geq n$, $\rho_k$ is an isomorphism in dimension $s_k=0$:
-\[\rho_k:(F^{\calM\dhor(k+1)}F^{\calMv(k+1)}V_{(k)})^{s_{k+1},0,s_{k-1},\ldots,s_1}_{t} \overset{\cong}{\to}(H^*_{\calw(k)}V^*_{(k)})^{s_{k+1},0,s_{k-1},\ldots,s_1}_{t}.\]
+\[\rho_k:(F^{\calMh(k+1)}F^{\calMv(k+1)}V_{(k)})^{s_{k+1},0,s_{k-1},\ldots,s_1}_{t} \overset{\cong}{\to}(H^*_{\calw(k)}V^*_{(k)})^{s_{k+1},0,s_{k-1},\ldots,s_1}_{t}.\]
 \end{prop}
 \begin{proof}
 In this dimension, $\rho_k$ factors as
 \begin{alignat*}{2}
-(F^{\calM\dhor(k+1)}F^{\calMv(k+1)}V_{(k)})^{s_{k+1},0,s_{k-1},\ldots,s_1}_{t}
+(F^{\calMh(k+1)}F^{\calMv(k+1)}V_{(k)})^{s_{k+1},0,s_{k-1},\ldots,s_1}_{t}
 &=
-(F^{\calM\dhor(k+1)} F^{\calMv(k+1)}V_{(k)}^{\textbf{\textup{0}}})^{s_{k+1},0,s_{k-1},\ldots,s_1}_{t}\\
-&=(F^{\calM\dhor(k+1)}V_{(k)}^{\textbf{\textup{0}}})^{s_{k+1},0,s_{k-1},\ldots,s_1}_{t}\\
+(F^{\calMh(k+1)} F^{\calMv(k+1)}V_{(k)}^{\textbf{\textup{0}}})^{s_{k+1},0,s_{k-1},\ldots,s_1}_{t}\\
+&=(F^{\calMh(k+1)}V_{(k)}^{\textbf{\textup{0}}})^{s_{k+1},0,s_{k-1},\ldots,s_1}_{t}\\
 %&\cong (\dual\UEAX(\dual(V_{(k)}^{\textbf{\textup{0}}})))^{s_{k+1},0,s_{k-1},\ldots,s_1}_{t}\\
 &\cong (\dual\UEAX((V^*_{(k)})_{\textbf{\textup{0}}}))^{s_{k+1},0,s_{k-1},\ldots,s_1}_{t}\\
 &\cong (H^*_{\calw(k)}V^*_{(k)})^{s_{k+1},0,s_{k-1},\ldots,s_1}_{t}
 \end{alignat*}
-Here, we are viewing $V_{(k)}^{\textbf{\textup{0}}}$, the subspace of $V_{(k)}$ in degree $s_k=0$, as an object of $\vect{k+1}{+}$ in order to apply $F^{\calMv(k+1)}$. The inclusion $F^{\calM\dhor(k+1)}F^{\calMv(k+1)}V_{(k)}^{\textbf{\textup{0}}}\subseteq F^{\calM\dhor(k+1)}F^{\calMv(k+1)}V_{(k)}$ restricts to the identity in degree $s_k=0$, explaining the first equality. The second equality is similar: any non-trivial $\calMv(k+1)$-operation lands outside degree $s_k=0$. The first isomorphism follows from Corollary \ref{basis of free horizontal operations algebra restricted}, % --- as $V_{(k)}^{\textbf{\textup{0}}}$ is concentrated in dimension $s_{k+1}=0$, the proposition 
-which ensures that $F^{\calM\dhor(k+1)}V_{(k)}^{\textbf{\textup{0}}}$ is a quotient of the polynomial algebra on $V_{(k)}^{\textbf{\textup{0}}}$, and indeed, the same quotient as $\dual\UEAX(\dual(V_{(k)}^{\textbf{\textup{0}}}))$. The second isomorphism is Proposition \ref{calculation in internal dimension zero}, since $(V^*_{(k)})_{\textbf{\textup{0}}}=V^*_{(k-1)}$.
+Here, we are viewing $V_{(k)}^{\textbf{\textup{0}}}$, the subspace of $V_{(k)}$ in degree $s_k=0$, as an object of $\vect{k+1}{+}$ in order to apply $F^{\calMv(k+1)}$. The inclusion $F^{\calMh(k+1)}F^{\calMv(k+1)}V_{(k)}^{\textbf{\textup{0}}}\subseteq F^{\calMh(k+1)}F^{\calMv(k+1)}V_{(k)}$ restricts to the identity in degree $s_k=0$, explaining the first equation. The second equation is similar: any non-trivial $\calMv(k+1)$-operation lands outside degree $s_k=0$. The first isomorphism follows from Corollary \ref{basis of free horizontal operations algebra restricted}, % --- as $V_{(k)}^{\textbf{\textup{0}}}$ is concentrated in dimension $s_{k+1}=0$, the proposition 
+which ensures that $F^{\calMh(k+1)}V_{(k)}^{\textbf{\textup{0}}}$ is a quotient of the polynomial algebra on $V_{(k)}^{\textbf{\textup{0}}}$, and indeed, the same quotient as $\dual\UEAX(\dual(V_{(k)}^{\textbf{\textup{0}}}))$. The second isomorphism is Proposition \ref{calculation in internal dimension zero}, since $(V^*_{(k)})_{\textbf{\textup{0}}}=V^*_{(k-1)}$.
 \end{proof}
 \begin{proof}[Proof of \ref{thm on collapsing of most sseqs}]
 For each $k\geq n$, we will use the diagram
@@ -5681,7 +5675,7 @@ H^*_{\calw(k)}V^*_{(k)}\ar@{..>}@/^1.22em/[rr]|-{\textup{\,edge composite\,}}
 &V_{(k)}\ar@{..>}[l]|-{\,i_2\,}\ar@{..>}[ld]^-{j_2}\ar@{..>}@/_1.72em/[lll]|-{\,i_0\,}
 \\
 %V_{(k)}\ar@{..>}[r]\ar@{..>}[u]^-{\cong}&
-F^{\calM\dhor(k+1)}F^{\calMv(k+1)}V_{(k)}\ar[u]^-{\rho_k}
+F^{\calMh(k+1)}F^{\calMv(k+1)}V_{(k)}\ar[u]^-{\rho_k}
 &W(F^{\calMv(k+1)}V_{(k)})\ar[u]\ar@{->>}[l]_-{\overline{f}_{k+1}}\ar[u]_-{\rho_{k+1}}
 &F^{\calMv(k+1)}V_{(k)}\ar@{..>}[l]_-{j_1}\ar@{=}[u]%\ar@{..>}@/^1.02em/[ll]|-{\,j_3\,}
 %&V_{(k)}\ar@{..>}[l]\ar@{..>}[u]_-{=}\ar@{..>}@/^1.52em/[lll]|-{\textup{inc}}
@@ -5690,8 +5684,8 @@ F^{\calM\dhor(k+1)}F^{\calMv(k+1)}V_{(k)}\ar[u]^-{\rho_k}
 %&F^{\calMh(k+2)}V_{(k+2)}
 }\]
 where $W(F^{\calMv(k+1)}V_{(k)})$ is the object introduced in the proof of Theorem \ref{thm on compressing seqs of steenrod ops}, so that there is a quotient map
-\[W(F^{\calMv(k+1)}V_{(k)})\epi F^{\calM\dhor(k+2)}F^{\calMv(k+2)}F^{\calMv(k+1)}V_{(k)}.\]
-%of which $F^{\calM\dhor(k+2)}F^{\calMv(k+2)}F^{\calMv(k+1)}V_{(k)}$ is a quotient. 
+\[W(F^{\calMv(k+1)}V_{(k)})\epi F^{\calMh(k+2)}F^{\calMv(k+2)}F^{\calMv(k+1)}V_{(k)}.\]
+%of which $F^{\calMh(k+2)}F^{\calMv(k+2)}F^{\calMv(k+1)}V_{(k)}$ is a quotient. 
 Here, the maps $j_1,j_2$ are the evident inclusions of generators, while the maps $i_0,i_1,i_2$ are the inclusions arising because $V_{(k)}$ is trivial.
 
  We may define 
@@ -5708,7 +5702,7 @@ The edge composite is the composite of a surjection, a monomorphism $m_1$, and a
 %E_{2,(k+1)}^{0,*}
 \overset{m_2}{\to}H^*_{\calU(k)}V^*_{(k)}.\]
 Moreover, $c$ is a section of the edge composite, since both maps are compatible with $\calMv(k+1)$-structures (Proposition \ref{edgehomproposition}), and their composite is the identity on $V_{(k)}\subseteq  F^{\calMv(k+1)}V_{(k)}$.
-In particular, the edge composite is a surjection, so that $m_{1}$ is an isomorphism. That is, every class in $\im(i_1)$ is a permanent cycle. Singer's work (c.f.\ \S\ref{singer ext ops sect}) then shows that $\im(\rho_{k+1})$ consists of permanent cycles, as permanent cycles are preserved by the $F^{\calMh(k+2)}$- and $F^{\calMv(k+2)}$-operations on $E_{2,(k+1)}$.
+In particular, the edge composite is a surjection, so that $m_{1}$ is an isomorphism. That is, every class in $\im(i_1)$ is a permanent cycle. Singer's work (c.f.\ \S\ref{singer ext ops sect}) then shows that $\im(\rho_{k+1})$ consists of permanent cycles, as permanent cycles are preserved by the $F^{\calMhv(k+2)}$-operations on $\E{(k+1)}{2}{}{}{}$.
 
 %The claim that $g_{k+1}\circ \rho_{k+1}=E_0(\rho_{k})\circ f_{k+1}$ is best proven together with the claim that $\rho_k$ preserves filtration.
 
@@ -5718,7 +5712,7 @@ In particular, $g_{k+1}\circ \rho_{k+1}\circ j_1=g_{k+1}\circ i_1=c\circ m_2\cir
 \[
 F^{\calMv(k+1)}V_{(k)}\overset{c}{\to} H^*_{\calw(k)}V^*_{(k)}\epi \E{}{0}{H^*_{\calw(k)}V^*_{(k)}}{\textbf{0}}{}.
 \]
-Now the target filtrations on the domain and codomain of $\rho_k$ are induced by the filtrations on the domain and codomain of $\rho_{k+1}$ by cohomological dimension $s_{k+2}$, and $\rho_{k+1}$ is a graded map. Thus, for any $w\in F^pW(F^{\calMv(k+1)}V_{(k)})$, we must see that $\rho_k(\overline{f}_{k+1}(w))$ coincides with $g_{k+1}(\rho_{k+1}(w))$ modulo $F^{p+1}H^*_{\calw(k)}V^*_{(k)}$, as this will prove both that $\rho_k$ preserves target filtrations and that  $g_{k+1}\circ \rho_{k+1}=E_0(\rho_{k})\circ f_{k+1}$. However, this coincidence follows from the fact that $c=g_{k+1}\circ \rho_{k+1}\circ j_1$, as $W(F^{\calMv(k+1)}V_{(k)})$ is generated by $\im(j_1)$ under $F^{\calMh(k+2)}$- and $F^{\calMv(k+2)}$-operations, and the definition of $\overline{f}_{k+1}$ is modeled on the interaction of $g_{k+1}$ with these operations, as studied by Singer (c.f.\ \S\ref{singer ext ops sect}).
+Now the target filtrations on the domain and codomain of $\rho_k$ are induced by the filtrations on the domain and codomain of $\rho_{k+1}$ by cohomological dimension $s_{k+2}$, and $\rho_{k+1}$ is a graded map. Thus, for any $w\in F^pW(F^{\calMv(k+1)}V_{(k)})$, we must see that $\rho_k(\overline{f}_{k+1}(w))$ coincides with $g_{k+1}(\rho_{k+1}(w))$ modulo $F^{p+1}H^*_{\calw(k)}V^*_{(k)}$, as this will prove both that $\rho_k$ preserves target filtrations and that  $g_{k+1}\circ \rho_{k+1}=E_0(\rho_{k})\circ f_{k+1}$. However, this coincidence follows from the fact that $c=g_{k+1}\circ \rho_{k+1}\circ j_1$, as $W(F^{\calMv(k+1)}V_{(k)})$ is generated by $\im(j_1)$ under $F^{\calMhv(k+2)}$-operations, and the definition of $\overline{f}_{k+1}$ is modeled on the interaction of $g_{k+1}$ with these operations, as studied by Singer (c.f.\ \S\ref{singer ext ops sect}).
 
 What remains is to show that the maps $\rho_k$ are isomorphisms. Suppose that 
 \[x_{(k)}\in \E{(k)}{2}{}{{s_{k+1}^{k},\ldots,s_1^{k}}}{t}=(H^*_{\calw(k)}V^*_{(k)})^{s_{k+1}^{k},\ldots,s_1^{k}}_t.\]
@@ -5729,13 +5723,13 @@ x_{(r)}\in \E{(r)}{2}{}{s_{r+1}^{r},\ldots,s_1^{r}}{t}=(H^*_{\calw(r)}V^*_{(r)})
 \end{gather*}
 We will say that $x_{(k)}$ has iterated filtration at least $(s^{k+1}_{k+2},s^{k+2}_{k+3},s^{k+3}_{k+4},\ldots)$ whenever a sequence of such classes $x_{(r)}$ exists, and partially order the set of possible iterated filtrations lexicographically. Then $x_{(r)}$ only determines $x_{(k)}$ modulo elements of $E_{2,(k)}$ of higher iterated filtration.
 
-Simply because these gradings are always non-negative, it is inevitable that $s_r^r=0$ for some $r\geq k$, so that by Proposition \ref{isomorphism rho k in some dims}, $x_{(r)}=\rho_ry_{(r)}$ for some $y_{(r)}\in F^{\calM\dhor(r+1)}F^{\calMv(r+1)}V_{(r)}$. Moreover, one only needs to examine finitely many sequences of gradings, each of the form
+Simply because these gradings are always non-negative, it is inevitable that $s_r^r=0$ for some $r\geq k$, so that by Proposition \ref{isomorphism rho k in some dims}, $x_{(r)}=\rho_ry_{(r)}$ for some $y_{(r)}\in F^{\calMh(r+1)}F^{\calMv(r+1)}V_{(r)}$. Moreover, one only needs to examine finitely many sequences of gradings, each of the form
 \[(s^r_{r+1},0,s^{r}_{r-1},\ldots, s^{r}_{k+1},s^k_{k},\ldots,s^k_1)\textup{ where }s^k_{k+1}=s^r_{r+1}+s^{r}_{r-1}+s^{r}_{r-2}+\cdots +s^{r}_{k+1}.\]
 This, along with Proposition \ref{calculation in internal dimension zero}, shows that $(H^*_{\calw(k)}V^*_{(k)})^{s_{k+1}^{k},\ldots,s_1^{k}}_t$ is finite dimensional for each given value of $t$.
 
 
 
-By the commutativity established above, $x_{(k)}\equiv\rho_{k}f_{k+1}\cdots f_{r-1}f_r(y_{(r)})$, modulo higher iterated filtration. As this equality holds in a group which is finite dimensional for each given $t$, this establishes the surjectivity of $\rho_k$, and that
+By the commutativity established above, $x_{(k)}\equiv\rho_{k}f_{k+1}\cdots f_{r-1}f_r(y_{(r)})$, modulo higher iterated filtration. As this congruence holds in a group which is finite dimensional for each given $t$, this establishes the surjectivity of $\rho_k$, and that
 %
 %
 %
@@ -5750,31 +5744,31 @@ every one of the spectral sequences is degenerate. Thus, we have shown that all 
 &H^*_{\calw(k+1)}H_*^{\calU(k)}V^*_{(k)}\ar@{->}[l]^-{\cong}_-{{g}_{k+1}}
 \\
 %V_{(k)}\ar@{..>}[r]\ar@{..>}[u]^-{\cong}&
-\E{}{0}{F^{\calM\dhor(k+1)}V_{(k+1)}}{}{}\ar@{->>}[u]^-{E_0(\rho_k)}
-&F^{\calM\dhor(k+2)}F^{\calMv(k+2)}F^{\calMv(k+1)}V_{(k)}\ar@{->}[l]^-{\cong}_-{{f}_{k+1}}\ar@{->>}[u]_-{\rho_{k+1}}
+\E{}{0}{F^{\calMh(k+1)}V_{(k+1)}}{}{}\ar@{->>}[u]^-{E_0(\rho_k)}
+&F^{\calMh(k+2)}F^{\calMv(k+2)}F^{\calMv(k+1)}V_{(k)}\ar@{->}[l]^-{\cong}_-{{f}_{k+1}}\ar@{->>}[u]_-{\rho_{k+1}}
 }\]
-For each $k$, $\rho_k$ is injective if and only if $E_0(\rho_k)$ is injective. This holds by repeated application of the snake lemma, using the fact that $\rho_k$ is surjective, and the observation that for any given value of the grading $t$, the group $(F^{\calM\dhor(k+1)}V_{(k+1)})_t$ is finite dimensional, so that the filtrations of both the domain and codomain of $\rho_k$ are eventually zero in each degree $t$. More specifically,
-\[\rho_k:(F^{\calM\dhor(k+1)}V_{(k+1)})_t^{s_{k+1},\ldots,s_1}\to (H^*_{\calw(k)}V^*_{(k)})_t^{s_{k+1},\ldots,s_1}\]
+For each $k$, $\rho_k$ is injective if and only if $E_0(\rho_k)$ is injective. This holds by repeated application of the snake lemma, using the fact that $\rho_k$ is surjective, and the observation that for any given value of the grading $t$, the group $(F^{\calMh(k+1)}V_{(k+1)})_t$ is finite dimensional, so that the filtrations of both the domain and codomain of $\rho_k$ are eventually zero in each degree $t$. More specifically,
+\[\rho_k:(F^{\calMh(k+1)}V_{(k+1)})_t^{s_{k+1},\ldots,s_1}\to (H^*_{\calw(k)}V^*_{(k)})_t^{s_{k+1},\ldots,s_1}\]
 is injective if and only if
-%\[E_0(\rho_k):E_0^{s'_{k+2}}(F^{\calM\dhor(k+1)}V_{(k+1)})_t^{s'_{k+1},s_k,\ldots,s_1}\to E_0^{s'_{k+2}}(H^*_{\calw(k)}V^*_{(k)})_t^{s'_{k+1},s_k,\ldots,s_1}\]
+%\[E_0(\rho_k):E_0^{s'_{k+2}}(F^{\calMh(k+1)}V_{(k+1)})_t^{s'_{k+1},s_k,\ldots,s_1}\to E_0^{s'_{k+2}}(H^*_{\calw(k)}V^*_{(k)})_t^{s'_{k+1},s_k,\ldots,s_1}\]
 \[E_0(\rho_k):
-\E{}{0}{F^{\calM\dhor(k+1)}V_{(k+1)}}{s'_{k+2},s'_{k+1},s_k,\ldots,s_1}{t}
+\E{}{0}{F^{\calMh(k+1)}V_{(k+1)}}{s'_{k+2},s'_{k+1},s_k,\ldots,s_1}{t}
 \to \E{}{0}{H^*_{\calw(k)}V^*_{(k)}}{s'_{k+2},s'_{k+1},s_k,\ldots,s_1}{t}\]
 %E_0^{s'_{k+2}}(H^*_{\calw(k)}V^*_{(k)})_t^{s'_{k+1},s_k,\ldots,s_1}\]
 is injective whenever $s'_{k+2}+s'_{k+1}=s_{k+1}$. As in the argument for surjectivity, in order to check that all the $\rho_k$ are injective, we now only need to check that every map
-\[(F^{\calM\dhor(r+1)}F^{\calMv(r+1)}V_{(r)})^{s_{r+1}^{r},0,s_{r-1}^{r},\ldots,s_1^{r}}_{t} \overset{\rho_r}{\to}(H^*_{\calw(r)}V^*_{(r)})^{s_{r+1}^{r},0,s_{r-1}^{r},\ldots,s_1^{r}}_{t}\]
+\[(F^{\calMh(r+1)}F^{\calMv(r+1)}V_{(r)})^{s_{r+1}^{r},0,s_{r-1}^{r},\ldots,s_1^{r}}_{t} \overset{\rho_r}{\to}(H^*_{\calw(r)}V^*_{(r)})^{s_{r+1}^{r},0,s_{r-1}^{r},\ldots,s_1^{r}}_{t}\]
 is injective, which is part of Proposition \ref{isomorphism rho k in some dims}.
 %%%%%%However, in this degree, $\rho_r$ is an isomorphism, as it factors as
 %%%%%%\begin{alignat*}{2}
-%%%%%%(F^{\calM\dhor(r+1)}F^{\calMv(r+1)}V_{(r)})^{s_{r+1}^{r},0,s_{r-1}^{r},\ldots,s_1^{r}}_{t}
+%%%%%%(F^{\calMh(r+1)}F^{\calMv(r+1)}V_{(r)})^{s_{r+1}^{r},0,s_{r-1}^{r},\ldots,s_1^{r}}_{t}
 %%%%%%&=
-%%%%%%(F^{\calM\dhor(r+1)}F^{\calMv(r+1)}V_{(r-1)})^{s_{r+1}^{r},0,s_{r-1}^{r},\ldots,s_1^{r}}_{t}\\
-%%%%%%&=(F^{\calM\dhor(r+1)}V_{(r-1)})^{s_{r+1}^{r},0,s_{r-1}^{r},\ldots,s_1^{r}}_{t}\\
+%%%%%%(F^{\calMh(r+1)}F^{\calMv(r+1)}V_{(r-1)})^{s_{r+1}^{r},0,s_{r-1}^{r},\ldots,s_1^{r}}_{t}\\
+%%%%%%&=(F^{\calMh(r+1)}V_{(r-1)})^{s_{r+1}^{r},0,s_{r-1}^{r},\ldots,s_1^{r}}_{t}\\
 %%%%%%&\cong (\UEAX(V_{(r-1)}^*)^*)^{s_{r+1}^{r},0,s_{r-1}^{r},\ldots,s_1^{r}}_{t}.
 %%%%%%\end{alignat*}
-%%%%%%Here, we have written $V_{(r-1)}$ for the subspace of $V_{(r)}$ in degree $s_r=0$, which we view as an object of $\vect{r+1}{+}$. Then the inclusion $F^{\calM\dhor(r+1)}F^{\calMv(r+1)}V_{(r-1)}\subseteq F^{\calM\dhor(r+1)}F^{\calMv(r+1)}V_{(r)}$ restricts to the identity in degree $s_r=0$, explaining the first equality. The second equality is similar: any non-trivial $\calMv(r+1)$-operation lands outside degree $s_r=0$. The final isomorphism follows from Proposition \ref{basis of free horizontal operations algebra} --- as $V_{(r-1)}$ is concentrated in dimension $s_{n+1}=0$, the proposition ensures that $F^{\calM\dhor(r+1)}V_{(r-1)}$ is a quotient of the polynomial algebra on $V_{(r-1)}$, and indeed, the same quotient as $\UEAX(V_{(r-1)}^*)^*$.
+%%%%%%Here, we have written $V_{(r-1)}$ for the subspace of $V_{(r)}$ in degree $s_r=0$, which we view as an object of $\vect{r+1}{+}$. Then the inclusion $F^{\calMh(r+1)}F^{\calMv(r+1)}V_{(r-1)}\subseteq F^{\calMh(r+1)}F^{\calMv(r+1)}V_{(r)}$ restricts to the identity in degree $s_r=0$, explaining the first equality. The second equality is similar: any non-trivial $\calMv(r+1)$-operation lands outside degree $s_r=0$. The final isomorphism follows from Proposition \ref{basis of free horizontal operations algebra} --- as $V_{(r-1)}$ is concentrated in dimension $s_{n+1}=0$, the proposition ensures that $F^{\calMh(r+1)}V_{(r-1)}$ is a quotient of the polynomial algebra on $V_{(r-1)}$, and indeed, the same quotient as $\UEAX(V_{(r-1)}^*)^*$.
 %
-%, note that on $V_{(r-1)}$, there are no non-trivial horizontal Steenrod operations except for the top Steenrod operation, the squaring operation. That is, for any $v\in (V_{(r-1)})^{0,0,s_{r-1},\ldots, s_1}_t$, suppose that $\Sqh^{i_\ell}\cdots\Sqh^{i_1}$ is an admissible sequence such that $\Sqh^{i_\ell}\cdots\Sqh^{i_1}v$ is not forced to be zero \textbf{(did we ever use the word \emph{excess}, or give a basis of $\calMh$?)}. Then we must have $i_j=2^j$ for each $j$, and  $\Sqh^{i_\ell}\cdots\Sqh^{i_1}v=v^{2^\ell}$. Note that the axiom $\Sqh^1v=0$ applies iff $s_{r-1}=\cdots =s_1=0$, i.e.\ iff $v$ is not restrictable, and so is an exterior generator in $\UEAX(V_{(r-1)}^*)^*$. That is, $F^{\calM\dhor(r+1)}V_{(r-1)}$ and $\UEAX(V_{(r-1)}^*)^*$ are generated by $V_{(r-1)}$ using the same operations (commutative products), and these operations satisfy the same relations (only that classes in $(V_{(r-1)})_t^{0,\ldots,0}$ are exterior), proving the isomorphism. See also Proposition \ref{basis of free horizontal operations algebra}.
+%, note that on $V_{(r-1)}$, there are no non-trivial horizontal Steenrod operations except for the top Steenrod operation, the squaring operation. That is, for any $v\in (V_{(r-1)})^{0,0,s_{r-1},\ldots, s_1}_t$, suppose that $\Sqh^{i_\ell}\cdots\Sqh^{i_1}$ is an admissible sequence such that $\Sqh^{i_\ell}\cdots\Sqh^{i_1}v$ is not forced to be zero \textbf{(did we ever use the word \emph{excess}, or give a basis of $\calMh$?)}. Then we must have $i_j=2^j$ for each $j$, and  $\Sqh^{i_\ell}\cdots\Sqh^{i_1}v=v^{2^\ell}$. Note that the axiom $\Sqh^1v=0$ applies iff $s_{r-1}=\cdots =s_1=0$, i.e.\ iff $v$ is not restrictable, and so is an exterior generator in $\UEAX(V_{(r-1)}^*)^*$. That is, $F^{\calMh(r+1)}V_{(r-1)}$ and $\UEAX(V_{(r-1)}^*)^*$ are generated by $V_{(r-1)}$ using the same operations (commutative products), and these operations satisfy the same relations (only that classes in $(V_{(r-1)})_t^{0,\ldots,0}$ are exterior), proving the isomorphism. See also Proposition \ref{basis of free horizontal operations algebra}.
 \end{proof}
 \subsection{A K\"unneth theorem for $\calw(n)$-cohomology}
 This is an opportune moment to prove:
@@ -5986,7 +5980,7 @@ Next, we can derive that $\Sqv^Jv_j$ is a permanent cycle for all $J,j$ such tha
 &%r1c1
 (V_{(2)})^{s_{2}+1,s_1+i-1}_{2t+1}
 }\]
-As we have shown that the classes $v_0$ and $\Sqv^{3}v_j$  ($j\geq1$) are all permanent cycles, they are in the image of the edge homomorphism. Then this diagram shows that all of $V_{(2)}$ is in the image of the edge homomorphism, so that every element  of $V_{(2)}$ is a permanent cycle. Finally, as $E_{2}$ is (freely) generated by $V_{(2)}$ under the $\calmh(3)$- and $\calmv(3)$-operations, and we understand how these operations interact with the differential, this shows that the spectral sequence collapses.
+As we have shown that the classes $v_0$ and $\Sqv^{3}v_j$  ($j\geq1$) are all permanent cycles, they are in the image of the edge homomorphism. Then this diagram shows that all of $V_{(2)}$ is in the image of the edge homomorphism, so that every element  of $V_{(2)}$ is a permanent cycle. Finally, as $E_{2}$ is (freely) generated by $V_{(2)}$ under the $\calmhv(3)$-operations, and we understand how these operations interact with the differential, this shows that the spectral sequence collapses.
 
 %%When $S=1$ we must modify this proof a little, as $E_{2}=H^*_{\calw(2)}V_{(2)}^*$ is no longer generated by $V_{(2)}$ under the $\calmh(3)$- and $\calmv(3)$-operations. Rather, propositions \ref{2d example in w2} and \ref{Koszul-dual Hilton-Milnor theorem}, Theorem \ref{thm on collapsing of most sseqs} and corollary \ref{statement of result on 2d w2 example} show that 
 %%%\[H^*_{\calw(2)}V_{(2)}^*\cong H^*_{\calw(2)}(\Ftwo \{v_0^*,v_1^*\}\oplus (V'_{(2)})^*)\cong \Ftwo [v_1^{2}]\otimes E(v_0)\otimes F^{\calmh(3)}F^{\calmv(3)}V'_{(2)} ,\]
@@ -5999,21 +5993,21 @@ As we have shown that the classes $v_0$ and $\Sqv^{3}v_j$  ($j\geq1$) are all pe
 %an in which we set $\Sqv^2 v_{j}$ to zero for all $j\geq2$. This object is chosen so that $V_{(2)}^*$ decomposes as a direct sum $\Ftwo \{v_0^*,v_1^*\}\oplus (V'_{(2)})^*$ (of objects of $\calw(2)$), in light of the description given in  Proposition \ref{calc of koszul complex in inf dim example}.
 Suppose instead that $S=1$. Then rather that having generators $v_0$ and $\Sqv^3v_j$ ($j\geq1$) as before, $E_2$ has generators $v_0$, $v_1^{2}$ and $\Sqv^3v_j$ ($j\geq2$). Note that $\Sqv^{3}v_1=0$ when $S=1$.
 % by the class $v_1^{2}$  (and we no longer need to consider $\Sqv^{3}v_1$, as it is zero when $S=1$). 
-That $v_1^2\in\E{(2)}{2}{}{1,0,4}{4T-3}$ cannot support differentials is obvious, while for $j\geq2$, the same degree argument as before shows that $\Sqv^3v_j$ is also a permanent cycle. The same argument with the edge homomorphism shows that every element of $V'_{(2)}$ is a permanent cycle, so $E_2$ is again generated by permanent cycles under the $\calmh(3)$- and $\calmv(3)$-operations, completing the proof.
+That $v_1^2\in\E{(2)}{2}{}{1,0,4}{4T-3}$ cannot support differentials is obvious, while for $j\geq2$, the same degree argument as before shows that $\Sqv^3v_j$ is also a permanent cycle. The same argument with the edge homomorphism shows that every element of $V'_{(2)}$ is a permanent cycle, so $E_2$ is again generated by permanent cycles under the $\calmhv(3)$-operations, completing the proof.
 % \todo[inline]{Obviously we need better notation for the nested vertical constructions, and to explain what we really mean by the symbols --- this object is isomorphic to a subobject of a different object. It doesn't mean that the object actually has the generators you might hope.}
 \end{proof}
 \begin{cor}
 \label{the actual statement of what H1V1 is}
 If $S\geq2$, then $H^*_{(1)}V^*_{(1)}$ is isomorphic, as a vector space in $\vect{2}{+}$, to the subquotient of $F^{\calMh(2)}F^{\calMv(2)}V_{(1)}$ generated by the elements
 \[\{v_0,\Sqv^2v_{1},\Sqv^3v_{1},\Sqv^2v_{2},\Sqv^3v_{2},\Sqv^2v_{3},\Sqv^3v_{3},\ldots\}\]
-and subject to relations generated by $\Sqv^2 v_{j}=0$ for all $j\geq0$. Under $\calMv(2)$- and $\calMh(2)$-operations, $H^*_{(1)}V^*_{(1)}$ is generated by $v_0$, $\Sqv^3 v_1$, $\Sqv^3 v_2$, etc.
+and subject to relations generated by $\Sqv^2 v_{j}=0$ for all $j\geq0$. Under $\calMhv(2)$-operations, $H^*_{(1)}V^*_{(1)}$ is generated by $v_0$, $\Sqv^3 v_1$, $\Sqv^3 v_2$, etc.
 
 If $S=1$, then $H^*_{(1)}V^*_{(1)}\in \vect{2}{+}$ is isomorphic, as a vector space in $\vect{2}{+}$, to the commutative algebra coproduct
 \[\mathrm{subquo}\sqcup S(\CommOperad) [v_1^{2}]\sqcup \Lambda(\CommOperad)[v_0],\] where $v_1^2\in(H^*_{(1)}V^*_{(1)})^{1,2^2}_{2^2(T+1)-1}$, and $\mathrm{subquo}$ is the subquotient of $F^{\calMh(2)}F^{\calMv(2)}V_{(1)}$ generated by the elements
 \[\{\Sqv^2v_{2},\Sqv^3v_{2},\Sqv^2v_{3},\Sqv^3v_{3},\ldots\}\]
 and subject to relations generated by 
 %$\Sqv^2v_1^{2}=0$ and 
-$\Sqv^2 v_{j}=0$ for all $j\geq2$. Under this isomorphism, $H^*_{(1)}V^*_{(1)}$ is generated by $v_0$, $ v_1^2$, $\Sqv^3 v_2$, $\Sqv^3 v_3$, et cetera, under the $\calMv(2)$- and $\calMh(2)$-operations.
+$\Sqv^2 v_{j}=0$ for all $j\geq2$. Under this isomorphism, $H^*_{(1)}V^*_{(1)}$ is generated by $v_0$, $ v_1^2$, $\Sqv^3 v_2$, $\Sqv^3 v_3$, et cetera, under the $\calMhv(2)$-operations.
 \end{cor}
 \begin{proof}
 Suppose first that $S\geq2$. Consider the elements
@@ -6068,7 +6062,7 @@ Now we have put considerable effort into calculating $H^*_{\calw(1)}$ of each su
 while Propositions \ref{Sg1 calc of V2} and \ref{Se1 calc of V2} calculate
 \[H^*_{\calw(1)}\left(\Ftwo \left\{(\deltavstar_I\imath^*)\lambda_1^j\ |\ j\geq0\right\}\right)\textup{ for $I\in\aDTirr$.}\]
 With a view to calculating the first composite functor spectral sequence,
-we catalogue a collection of generators of $\E{(1)}{2}{}{}{}$ under the $\calmv(2)$- and $\calmh(2)$-operations. The \emph{fundamental class} $\imath\in 
+we catalogue a collection of generators of $\E{(1)}{2}{}{}{}$ under the $\calmhv(2)$-operations. The \emph{fundamental class} $\imath\in 
 \quadgrad{1}\E{(1)}{2}{}{0,0}{T}$ is an exterior generator (arising in Theorem \ref{thm on collapsing of most sseqs}). %, as are the classes $\deltav_k\imath\in (E_2)^{0,1,(2)}_{d+k+1}$ for $2\leq k\leq d$ (denoted $v_0$ in Theorem \ref{W2 to W1 collapse} \textbf{or the corollary to that: write it)).
 Moreover, for all $I\in\aDTirr$, there are further generators, arising in Corollary \ref{the actual statement of what H1V1 is}:
 \begin{alignat*}{2}
@@ -6089,7 +6083,7 @@ The first composite functor spectral sequence collapses at $E_2$:
 \[\E{(1)}{2}{}{}{}=H^*_{\calw(1)}V^*_{(1)}\implies H^*_{\calw(0)}V^*_{(0)}.\]
 \end{thm}
 \begin{proof}
-Evidently the fundamental class is a permanent cycle, so to prove that the spectral sequence collapses, it is enough to show that no classes
+The fundamental class is a permanent cycle, so to prove that the spectral sequence collapses, it is enough to show that no classes
 %\[x\in (E_2)^{0,\ell I,(2^{\ell I})}_{T+nI+\ell I}\textup{ or }y\in (E_2)^{1,2+\ell I+j,(2^{1+\ell I+j})}_{2^{j+1}(T+nI+\ell I+1)-1}\]
 \[x\in \quadgrad{2^{\ell I}}\E{(1)}{2}{}{0,\ell I}{T+nI+\ell I}\textup{ or }y\in \quadgrad{2^{1+\ell I+j}}\E{(1)}{2}{}{1,2+\ell I+j}{2^{j+1}(T+nI+\ell I+1)-1}\]
 can support a differential, $I$ a non-empty $\delta$-admissible sequence.
@@ -6130,11 +6124,11 @@ The argument is unchanged when $N=1$ or $N\geq4$, while if $2\leq N\leq3$ we may
 \[\ell I-1=\ell C_1+\ell C_2+\ell C_3,\ \  2^{\ell I}=2^{\ell C_1}+2^{\ell C_2}+2^{\ell C_3}.\]
 As in the proof of Theorem \ref{W2 to W1 collapse}, these equations imply that $\ell C_1,\ell C_2,\ell C_3$ equal $\ell I-1,\ell I-2,\ell I-2$, in some order. The first equation then implies that $\ell I=2$, implying that $\ell C_k=0$ for more than one $k$, which we have prohibited. Thus $x\in E_2$ is a permanent cycle.
 \end{proof}
-This theorem has the following corollary, which can not be made stronger at the present time due to potential extension problems:
+This theorem has the following corollary, stated in this form due to potential hidden extensions:
 \begin{cor}
 Suppose that $X=\mathbb{S}_{T}^{\algs}$ for $T\geq1$. Then the Bousfield-Kan $E_2$ page $\E{}{2}{\calx}{}{}\cong H^*_{\calw(0)}(H^*_\algs X)$ is isomorphic, as a vector space in $\vect{1}{+}$, to the non-unital commutative algebra coproduct of
 \[\Lambda(\CommOperad)[\imath]\sqcup \textstyle\bigsqcup_{2\leq i\leq T} \Bigl(S(\CommOperad) [(\deltav_{\TOP_T(i)}\imath)^{2}]\sqcup \Lambda(\CommOperad)[\deltav_i\imath]\Bigr)\]
-with the subquotient of $F^{\calMh(1)}F^{\calMv(1)}\{\imath\}$ generated by the elements:
+with the subquotient of $F^{\calMhv(1)}\{\imath\}$ generated by the elements:
 \begin{alignat}{2}
 \label{ell 2plus}
 \{\deltav_{I}\imath,
@@ -6167,28 +6161,123 @@ and subject to  relations generated under $\calMh(1)$-operations by
 \ldots\}\textup{ for $I\in\aDTirr$, $\ell I=1$.}
 \end{alignat}
 \end{cor}
-\subsection{A conjectural alternative $E_1$-page}
-We will now conjecture an $E_1$-page for the Bousfield-Kan spectral sequence for a  sphere  $X=\mathbb{S}_{T}^{\algs}$ for $T\geq1$. Define
-\[\Eprime{blank}{1}{\calx}{}{}:=\calMh(1)\calMv(1)\{\imath\}\]
-with differential $d_1$ determined by the requirements, for $x\in \Eprime{blank}{1}{\calx}{s}{t}$ and $y\in \Eprime{blank}{1}{\calx}{s'}{t'}$:
+
+
+\subsection{An alternative Bousfield-Kan $E_1$-page}
+We will now suggest a somewhat artificial $E_1$-page for the Bousfield-Kan spectral sequence for a  sphere  $X=\mathbb{S}_{T}^{\algs}$ for $T\geq1$. 
+
+Define
 \begin{alignat*}{2}
-d_1\Sqh^jx
-&=
-\Sqh^jd_1x
-%&\qquad&\text{(for $x\in \Eprime{blank}{1}{\calx}{s}{t}$)}
-\\
-d_1(xy)&=(d_1x)y+x(d_1y)
-\\
-d_1\deltav_ix
-&=
+% Left hand side
+\aS{s}&:=\left\{J\ \middle|\ \textup{$J$ a $\Sq$-admissible sequence with }\minDimDelta(I)\leq s+1,\ 1\notin J\right\}\\
+\aSirr{s}&:=\left\{J\ \middle|\ \textup{$J$ a $\Sq$-admissible sequence with }e(I)\leq s,\ 1\notin J\right\}\\
+\aDTnoplus&:=\left\{I\ \middle|\ \textup{$I$ a $\delta$-admissible sequence with }\minDimP(I)\leq t\right\}.
+\end{alignat*}
+The difference between $\aDTnoplus$ and $\aDT$ is just that we have removed the requirement that $I$ be nonempty. The following Lemma expains the sense in which $\aSirr{s}$ is the subset of irreducible sequences in $\aS{s}$.
+\begin{lem}
+\label{lemma on the func STOPs}
+There is an injective function $\STOP_t:\aS{s}\to \aS{s}$ given by
+\[J=(j_{\ell},\ldots,j_1)\overset{\smash{\STOP_s}}{\longmapsto }(s+nJ+1,j_\ell,\ldots,j_1).\]
+Moreover, $\aSirr{s}=\aS{s}\setminus\im(\STOP_s)$, and
+\[\aS{s}=\textstyle\bigsqcup_{J\in \aSirr{s}}\{J,\STOP_s J,\STOP_s^2 J,\ldots\}.\]
+\end{lem}
+\noindent The proof is similar to that of Lemma \ref{lemma on the func TOPt}, but the outcome is a little different. Indeed, Lemma \ref{lemma on the func STOPs} shows that if a $\calMh(1)$-expression $\Sqh^{J}x$ contains a single top Steenrod operation, then all of the Steenrod operations following it are also top operations.
+
+Define
+\[\Eprime{blank}{1}{\calx}{}{}:=
+\Ftwo\left\{\textstyle\prod_{k=1}^N\Sq\dhor^{J_k}\deltav_{I_k}\imath\ \middle|\ 
+\genfrac{}{}{0pt}{}{I_k\in \aDTnoplus,\ J_k\in \aS{\ell I_k}}{(J_k,I_k)\neq (J_{k'},I_{k'})\textup{ unless }k'=k}
+\right\},\]
+and define a differential on $\Eprime{blank}{1}{\calx}{}{}$ by
+\newcounter{keepeqno}
+\setcounter{keepeqno}{\value{equation}}%
+  \begin{list}{(\theequation)}{\usecounter{equation}}%
+  \setcounter{equation}{\value{keepeqno}}
+\item \label{ITM1} $d_1\imath=0$;
+\item \label{ITM2} requiring that $d_1$ distributes across these products according to the Liebniz rule;
+\item \label{ITM3} requiring, for $x\in \Eprime{blank}{1}{\calx}{s}{t}$, that $d_1\Sqh^jx = \Sqh^jd_1x$;
+\item \label{ITM4}
+requiring, for $x\in \Eprime{blank}{1}{\calx}{s}{t}$, that $d_1\deltav_ix=
 \begin{cases}
 \deltav_id_1x,&\textup{if $2\leq i < t$};\\
-\deltav_id_1x + \Sqh^2 x,&\textup{if $2\leq i = t$}.
-%\\,&\textup{if }
-\end{cases}
-%&\qquad&\text{(for $x\in \Eprime{blank}{1}{\calx}{s}{t}$)}
-\end{alignat*}
+\deltav_id_1x + \Sqh^2 x,&\textup{if $2\leq i = t$};
+\end{cases}$
+\item \label{ITM5} enforcing the equation $\deltav_i\Sqh^j=0$;
+\item \label{ITM6} enforcing the $\Sq$-Adem relations and the identity $\Sqh^1=0$;
+\item \label{ITM7} using the equation $x^2=\Sqh^{s+1}x$ (for $x\in \Eprime{blank}{1}{\calx}{s}{t}$) whenever a summand in the image of $d_1$ violates the requirement ``$(J_k,I_k)\neq (J_{k'},I_{k'})$ unless $k'=k$''.
+\end{list}
+%%%% requiring that $d_1$ distributes across these products according to the Liebniz rule, requiring that for $x\in \Eprime{blank}{1}{\calx}{s}{t}$:
+%%%%\begin{alignat}{2}
+%%%%d_1\Sqh^jx
+%%%%&=
+%%%%\Sqh^jd_1x;
+%%%%%&\qquad&\text{(for $x\in \Eprime{blank}{1}{\calx}{s}{t}$)}
+%%%%\\
+%%%%d_1\deltav_ix
+%%%%&=
+%%%%\begin{cases}
+%%%%\deltav_id_1x,&\textup{if $2\leq i < t$};\\
+%%%%\deltav_id_1x + \Sqh^2 x,&\textup{if $2\leq i = t$};
+%%%%%\\,&\textup{if }
+%%%%\end{cases}
+%%%%%&\qquad&\text{(for $x\in \Eprime{blank}{1}{\calx}{s}{t}$)}
+%%%%%\\
+%%%%%d_1((\Sqh^J\deltav_I\imath) (\Sqh^{J'}\deltav_{I'}\imath) )&=(d_1\Sqh^J\deltav_I\imath)(\Sqh^{J'}\deltav_{I'}\imath)+(\Sqh^J\deltav_I\imath)(d_1\Sqh^{J'}\deltav_{I'}\imath)
+%%%%\end{alignat}
+%%%%and also 
+%%%%%\underline{\scr}\newcounter{keepeqno}
+%%%%\setcounter{keepeqno}{\value{equation}}%
+%%%%  \begin{list}{(\theequation)\ \ \ }{\usecounter{equation}}%
+%%%%  \setcounter{equation}{\value{keepeqno}}
+%%%%\item enforcing the equation $\deltav_i\Sqh^j=0$ 
+%%%%\item enforcing the $\Sq$-Adem relations
+%%%%\item using the equation $x^2=\Sqh^{s+1}x$ (for $x\in \Eprime{blank}{1}{\calx}{s}{t}$) whenever a summand in the image of $d_1$ violates the requirement ``$(J_k,I_k)\neq (J_{k'},I_{k'})$ unless $k'=k$''
+%%%%\end{list}
+%%THIS IS WHAT THE FREE Mhv1 is: \[S(\CommOperad) \left[\Sq\dhor^J\deltav_Ib\ \middle|\ \genfrac{}{}{0pt}{}{b\in B_t\textup{, $I$ non-empty, $\delta$-admissible with }\minDimP(I)\leq t,}{\textup{$J$ $\Sq$-admissible with }\excess(J)\leq \ell I,\textup{ and }1\notin J}\right]\sqcup \Lambda(\CommOperad)\left[b\ \middle|\ b\in B\right].\]
+A key point here is that we do not want the differential to be determined by manipulations such as:
+\[d_1(\Sqh^5\deltav_{(22,10,5,2)}\imath) = d_1((\deltav_{(22,10,5,2)}\imath)^{2})=
+2(\deltav_{(22,10,5,2)}\imath)(d_1\deltav_{(22,10,5,2)}\imath)
+%+
+%(d_1\deltav_{(22,10,5,2)}\imath)(\deltav_{(22,10,5,2)}\imath)
+=0.\]
+Indeed, when we define in \S\ref{Operations on the Bousfield-Kan spectral sequence} operations on the Bousfield-Kan spectral sequence,  the top Steenrod operation \emph{will not} equal the product square at $E_1$, but only at $E_2$, and we are mimicking  this behaviour in our definition of $\Eprime{blank}{1}{\calx}{}{}$.
 
+Let us calculate the proposed differential applied to a generator
+$\Sq\dhor^J\deltav_I\imath$ of $\Eprime{blank}{1}{\calx}{}{}$ with $I\neq\emptyset$. Suppose that $I=(i_{\ell I},\ldots,i_1)$, with $\deltav_{i_a}$ is a top operation only at indices $a={a_n},\ldots,{a_1}$. Then we calculate, 
+\begin{alignat*}{2}
+d_1\Sq\dhor^J\deltav_I\imath
+&=
+\Sq\dhor^Jd_1\deltav_I\imath%
+\\
+&=
+%\Sq\dhor^J \deltav_Id_1\imath+
+\textstyle\sum_{m=1}^{n}\Sq\dhor^J\deltav_{(i_{\ell I},\ldots,i_{a_{m}+1})} \Sqh^{2} \deltav_{(i_{a_{m}-1},\ldots,i_1)}\imath%
+\\
+% Left hand side
+% Relation
+&=
+% Right hand side
+\begin{cases}
+\smash{\Sqh^J\Sqh^2\deltav_{(i_{{\ell I}-1},\ldots,i_1)}\imath},&\textup{$\deltav_{i_{\ell I}}$ a top operation, $2,3\notin J$, $\ell I\geq2$};\\
+0,&\textup{otherwise}.
+\end{cases}
+\end{alignat*}
+The first equation holds by (\ref{ITM3}), and the second holds by (\ref{ITM1}) and (\ref{ITM3}).
+To explain the third equation, %note first that $\Sq\dhor^J \deltav_Id_1\imath$ vanishes as $\imath$ is a permanent cycle. Next, 
+all of the $n$ summands vanish by (\ref{ITM5}), 
+except perhaps for the $m=n$ summand, which need not vanish when $a_n=i_{\ell I}$. Even this summand may still vanish, as (\ref{ITM6}) implies that $\Sqh^J\Sqh^2$ vanishes unless it is already $\Sq$-admissible. Finally, the expression vanishes unless $\ell I\geq2$, for dimension reasons.
+
+Suppose that $\deltav_{i_{\ell I}}$ is a top operation, $2,3\notin J$ and $\ell I=2$, so that $
+\Sqh^2\deltav_{(i_{{\ell I}-1},\ldots,i_1)}\imath=
+(\deltav_{i_1}\imath)^2$. If $J$ is nonempty then the Cartan formula and the fact that $\Sqh^{1}=0$ implies that  $\Sqh^{J}((\deltav_{i_1}\imath)^2)$ vanishes.
+
+Now let use examine which of the polynomial generators $\Sq\dhor^J\deltav_I\imath$  are cycles. If $\ell I=1$ then $J=\emptyset$ by the excess condition, and this generator is a cycle. If instead $\ell I>1$, then
+$\Sq\dhor^J\deltav_I\imath$ is a cycle if $I \in \aDTirr$, if $J$ contains 2 or 3, or if $J\neq\emptyset$ and $\ell I=2$. If $J\neq\emptyset$ and $\ell I=2$ then $J$ must contain $2$ by the excess condition, so that 
+\[\textup{$\Sq\dhor^J\deltav_I\imath$ is a cycle if and only if $I \in \aDTirr$ or $J$ contains 2 or 3}\]
+
+
+
+\[S(\CommOperad) \left[\Sq\dhor^J\deltav_Ib\ \middle|\ \genfrac{}{}{0pt}{}{b\in B_t\textup{, $I$ non-empty, $\delta$-admissible with }\minDimP(I)\leq t,}{\textup{$J$ $\Sq$-admissible with }\excess(J)\leq \ell I,\ 1\notin J}\right]\sqcup \Lambda(\CommOperad)\left[b\ \middle|\ b\in B\right].\]
 
 
 
@@ -6270,7 +6359,7 @@ Consider the chain-level map:
 \todo[inline]{discuss indeterminacy in general}
 \begin{prop}
 Fix $i,s\geq0$ and $r\geq2$. The chain level operation $\textup{SQ}^{i,s}$ defines an \emph{external Steenrod operation} \[\Sq^i_\textup{ext}:\Edownup{r}{}{X}{s}{t}\to \Edownup{r}{}{S_2X}{s+i}{2t},\] with indeterminacy vanishing by $\Edownup{2r-2}{}{S_2X}{s+i}{2t}$. For $x\in \Edownup{r}{}{X}{s}{t}$, $\Sq^i_\textup{ext}(x)$ survives to $\Edownup{2r-1}{}{S_2X}{s+i}{2t}$, and modulo indeterminacy: \[d_{2r-1}(\Sq^i_\textup{ext}x)=\Sq^{i+r-1}_\textup{ext}(d_rx).\]
- The top operation, $\Sq^s_\textup{ext}(x)$, is equal to the product-square $x\times x$, and in particular has no indeterminacy. For $i>s$, $\Sq^i_\textup{ext}(x)=0$. Whenever $t\geq2$ and $r\geq2$, $\Sq^1_\textup{ext}(x)=0$.  The bottom operation, $\Sq^0_\textup{ext}(x)$, is zero whenever $t>0$, and when $t=0$:
+For $r\geq2$, the top operation $\Sq^s_\textup{ext}(x)$ is equal to the product-square $x\times x$, and in particular has no indeterminacy. For $i>s$, $\Sq^i_\textup{ext}(x)=0$. Whenever $t\geq2$ and $r\geq2$, $\Sq^1_\textup{ext}(x)=0$.  The bottom operation, $\Sq^0_\textup{ext}(x)$, is zero whenever $t>0$, and when $t=0$:
 \[\Sq^0_\textup{ext}:\Edownup{r}{}{X}{s}{0}\to \Edownup{r}{}{S_2X}{s}{0}\textup{ is induced by $X\overset{\textup{squaring}}{\to}S_2X$}.\]
 After composing with $\Edownup{r}{}{S_2X}{s+i}{2t}\to \Edownup{r}{}{\Lambda^2X}{s+i}{2t}$, $\Sq^0_\textup{ext}(x)=0$ for all $t$, and $\Sq^1_\textup{ext}(x)=0$ whenever $t\geq1$ and $r\geq2$.
 \end{prop}
@@ -6307,7 +6396,7 @@ That is, $\textup{BC}$ is a bounding chain for this difference, and
 so that $\Sq^i_\textup{ext}x$ has indeterminacy vanishing by $\Edownup{2r-2}{}{S_2X}{s+i}{2t}$ as claimed. When $i=s$, this result may be improved to $\filt(\textup{BC})\geq 2s-(r-1)$,  as in this case the lowest filtration summand in fact vanishes --- this is one explanation of why the top square has no indeterminacy.
 
 For the statement about the top operation, one calculates that
-\[\textup{SQ}^{s,s}(x)-\rho\Nabla D^0(x\otimes x)=\rho D^{1}(x\otimes dx)\in F^{2s+r-1}.\]
+\[\textup{SQ}^{s,s}(x)-\rho\Nabla D^0(x\otimes x)=\rho D^{1}(x\otimes dx)\in F^{2s+r-1},\] which exceeds filtration $2s$ when $r\geq2$.
 When $i\geq s+2$, we have $\textup{SQ}^{i}x=0$, and even with $i=s+1$:
 \[\textup{SQ}^{s+1,s}(x)=\rho D^{0}(x\otimes dx)\in F^{2s+r},\]
 so that $\Sq^{s+1}_\textup{ext}x$ is zero in $\Edownup{r}{}{S_2X}{2s+1}{2t+1}$ for $r\geq2$.
@@ -8051,7 +8140,7 @@ This differs by a shift from the standard definitions, given in \cite{MR0024908}
 %%\[f=\gamma_{r_1}(y_1)\cdots \gamma_{r_m}(y_m),\]
 %%for homogeneous $y_i\in L$. We define $\UEAX(L)$ to be the subcoalgebra given by the restriction that $r_i\leq1$ when $y_m\in L_{\textbf{0}}$. 
 
-Now let $ L=B^{\calL(n)}M\in s\calL(n)$. Using the equality $\diag{\textbf{B}}\to \bar{B}_\bullet(\UEA M)$ of simplicial coalgebras and  May's injection \cite[Theorem 18 and  (7.8)]{MayRestLie.pdf} of $\UEAX(M)$ into the bar construction, there are maps:
+Now let $ L=B^{\calL(n)}M\in s\calL(n)$. Using the equation $\diag{\textbf{B}}= \bar{B}_\bullet(\UEA M)$ of simplicial coalgebras and  May's injection \cite[Theorem 18 and  (7.8)]{MayRestLie.pdf} of $\UEAX(M)$ into the bar construction, there are maps:
 \[\Sigma\UEAX(M)\to N_*\bar{B}_\bullet(U'M)\simeq\textup{Tot}(N\uhor_*N\uver_*\textbf{B})\overset{r}{\to} \textup{Tot}(N\uhor_*\textbf{Q}_{\bullet*})=\Ftwo \{1\}\oplus \Sigma N_*Q^{\calL(n)} L.\]
 Now the first map, after the  suspension $\Sigma$ shift homological degree, is a degree preserving map of differential coalgebras, both of which only have a shift in the cohomological degree $t$. In light of this discussion, Proposition \ref{the point of the appendix} implies Proposition \ref{Omnibus on CEM cx} (in which we move back into the notation $S(\CommOperad)$ and $\Lambda(\CommOperad)$ for the non-unital commutative and exterior algebra monads).
 
@@ -8151,6 +8240,8 @@ If $M$ has bracket zero, then the differential on the cohomological differential
 \item search cancel --- shouldn't appear
 \item delete some ``and''
 \item `we note' is annoying
+\item Liebniz?
+\item remove `vfpb'
 \end{enumerate}
 \end{todolist}
 \begin{bibliog}
