@@ -6348,6 +6348,15 @@ To actually determine the homology of $\Eprime{blank}{1}{\calx}{}{}$, suppose th
 \section{\textbf{Operations on second quadrant homotopy spectral sequences}}
 \label{second quadrant homotopy sseq operations}
 
+%\[\pi\uver_{t}( X)\overset{\delta_i^\textup{ext}}{\to} \pi\uver_{t+i}(S_2 X).\]
+%On the other hand, the operation $\hExtCohOp^k$ equals the composite:
+%\[\pi\dhor^s\pi\uver_t X
+%\overset{\ExtCohOp^k}{\to} 
+%\pi\dhor^{s+k}S_2(\pi\uver_t X)
+%\overset{\pi\dhor^{s+k}(\widetilde{\nabla})}{\to}
+%\pi\dhor^{s+k}\pi\uver_{2t}S_2 X
+%\]
+
 In this section we will produce various external operations on second quadrant homotopy spectral sequences. That is, for $X\in cs\vect{}{}$, we will produce numerous operations
 from $\E{}{r}{X}{}{}$ to each of $\E{}{r}{S_2X}{}{}$, $\E{}{r}{\Lambda^2 X}{}{}$ any $\E{}{r}{S^2X}{}{}$. This approach leaves open a number of possibilities. If $X\in cs\algs$, then the structure map $S_2X\to X$ induces a spectral sequence map $\E{}{r}{S^2X}{}{}\to \E{}{r}{X}{}{}$, and so the external operations induce internal operations on $\E{}{r}{X}{}{}$. If $X$ is a Lie algebra or restricted simplicial Lie algebra, we may apply the analogous technique. In \S\ref{Operations on the Bousfield-Kan spectral sequence}, we will use these external operations in another way to produce operations on the Bousfield-Kan spectral sequence of a commutative algebra or Lie algebra.
 
@@ -6407,44 +6416,68 @@ As discussed earlier, we will write $T$ for any symmetry isomorphism, write ``$\
 so that $\rho$ stands for the projection onto coinvariants, et cetera. Until \S\ref{External spectral sequence operations delta}, we will form the same operations into each of $\Edownup{r}{}{S_2X}{}{}$, $\Edownup{r}{}{\Lambda^2X}{}{}$ and $\Edownup{r}{}{S^2X}{}{}$.
 
 \subsection{An external spectral sequence pairing $\mu_\mathrm{ext}$}
-Define an external product
-\[\mu_\textup{ext}:\Edownup{r}{}{X}{s}{t}\otimes \Edownup{r}{}{X}{s'}{t'}\to \Edownup{r}{}{S_2X}{s+s'}{t+t'}\]
-using the chain-level formula
+The easiest of our constructions is that of an external product, using 
+the chain-level formula
 \[x\otimes y\mapsto\rho\Nabla D^0(x\otimes y).\]
-As both $\Nabla$ and $D^0$ are chain maps, $\mu_\textup{ext}$ satisfies the Liebniz formula. We will write $x\times y$ for $\mu_\textup{ext}(x\otimes y)$.
-
-As an example of the type of result one expects, we have the following. The homotopy of a simplicial algebra is exterior in positive dimension. If $X\in cs\algs$, then the algebra structure on $\E{}{2}{X}{}{}$ (induced by $\mu_\textup{ext}$ and the structure map $S_2X\to X$) need not be exterior, and yet we discover universal differentials hitting the external self-square:
-\begin{prop}
-Suppose that $X\in (s\vect{}{})^{\Delta_+}$ and $x\in \Edownup{r}{}{X}{s}{t}$ is a permanent cycle detecting a class $\overline{w}\in \pi_{t-s}((S_2X)^{-1})$ with $t-s>0$. Then $x\times x$ is eventually hit by a differential. That is, $x\times x\in \Edownup{r}{}{S_2X}{2s}{2t}$ is a permanent cycle which represents zero on $\Edownup{\infty}{}{S_2X}{}{}$.
-\end{prop}
-\begin{proof}
-\todo{reread:}
-Let $n=t-s$. As $x$ detects $w$, $x$ can be written as $x^0+dy$, where $y\in (TX)_{n+1}$ and $x^0=d\dhor^0w\in X^{0}_{n}$. Of course, $dx^0=0$. Now $x\times x$ is represented by
-\[\rho\Nabla D^0(x^0\otimes x^0)+\rho\Nabla D^0(dy\otimes x^0+x^0\otimes dy+dy\otimes dy).\]
-The first term here vanishes, as
-\[\rho\Nabla D^0(x^0\otimes x^0)=\rho(\oldphi_0 D^0(x^0\otimes x^0)+\Nabla_0 D^0(x^0\otimes x^0)+\Nabla_0 TD^0(x^0\otimes x^0)),\]
-and $\oldphi_0D^0(x^0\otimes x^0)=0$ as $n\geq1$, and $TD^0(x^0\otimes x^0)=D^0(x^0\otimes x^0)$ since $\{D^k\}$ is special. The remaining term may be expressed as the boundary
-\[d(\rho\Nabla(D^0(y\otimes dy)+D^1(dy\otimes x^0))).\qedhere\]
-\end{proof}
+Indeed, both $\Nabla$ and $D^0$ are chain maps respecting filtration, and thus:
+\begin{lem}
+The map $\rho\Nabla D^0(x\otimes y):CX\otimes CX$ induces a pairing
+\[\mu_\textup{ext}:\Edownup{r}{}{X}{s}{t}\otimes \Edownup{r}{}{X}{s'}{t'}\to \Edownup{r}{}{S_2X}{s+s'}{t+t'}\]
+for each $r$, satisfying the Liebniz formula. Under the identifications $\Edownup{2}{}{X}{s}{t}\cong \pi\dhor^s\pi\uver_t X$ and $\Edownup{2}{}{S_2X}{s}{t}\cong \pi\dhor^s\pi\uver_t S_2X$, $\mu_\textup{ext}$ corresponds to the composite
+\[S_2\pi\dhor^*\pi\uver_* X
+\overset{\ExtCohProd}{\to} 
+\pi\dhor^*(S_2\pi\uver_* X)
+\overset{\pi\dhor^{*}(\widetilde{\nabla})}{\to}
+\pi\dhor^{*}\pi\uver_{*}S_2 X.\]
+\end{lem}
+\noindent We will write $x\times y$ for $\mu_\textup{ext}(x\otimes y)$.
+%\begin{shaded}\tiny
+%\begin{proof}
+%As both $\Nabla$ and $D^0$ are chain maps respecting filtration, proving that the operations are well defined.
+%\end{proof}
+%As both $\Nabla$ and $D^0$ are chain maps, $\mu_\textup{ext}$ satisfies the Liebniz formula. 
+%
+%As an example of the type of result one expects, we have the following. The homotopy of a simplicial algebra is exterior in positive dimension. If $X\in cs\algs$, then the algebra structure on $\E{}{2}{X}{}{}$ (induced by $\mu_\textup{ext}$ and the structure map $S_2X\to X$) need not be exterior, and yet we discover universal differentials hitting the external self-square:
+%\begin{prop}
+%Suppose that $X\in (s\vect{}{})^{\Delta_+}$ and $x\in \Edownup{r}{}{X}{s}{t}$ is a permanent cycle detecting a class $\overline{w}\in \pi_{t-s}((S_2X)^{-1})$ with $t-s>0$. Then $x\times x$ is eventually hit by a differential. That is, $x\times x\in \Edownup{r}{}{S_2X}{2s}{2t}$ is a permanent cycle which represents zero on $\Edownup{\infty}{}{S_2X}{}{}$.
+%\end{prop}
+%\begin{proof}
+%Let $n=t-s$. As $x$ detects $w$, $x$ can be written as $x^0+dy$, where $y\in (TX)_{n+1}$ and $x^0=d\dhor^0w\in X^{0}_{n}$. Of course, $dx^0=0$. Now $x\times x$ is represented by
+%\[\rho\Nabla D^0(x^0\otimes x^0)+\rho\Nabla D^0(dy\otimes x^0+x^0\otimes dy+dy\otimes dy).\]
+%The first term here vanishes, as
+%\[\rho\Nabla D^0(x^0\otimes x^0)=\rho(\oldphi_0 D^0(x^0\otimes x^0)+\Nabla_0 D^0(x^0\otimes x^0)+\Nabla_0 TD^0(x^0\otimes x^0)),\]
+%and $\oldphi_0D^0(x^0\otimes x^0)=0$ as $n\geq1$, and $TD^0(x^0\otimes x^0)=D^0(x^0\otimes x^0)$ since $\{D^k\}$ is special. The remaining term may be expressed as the boundary
+%\[d(\rho\Nabla(D^0(y\otimes dy)+D^1(dy\otimes x^0))).\qedhere\]
+%\end{proof}
+%\end{shaded}
 \subsection{External spectral sequence operations $\Sq_\mathrm{ext}^i$}
 \label{External spectral sequence operations Sq}
 Consider the chain-level map:
 \[\textup{SQ}^{i,s}:x\mapsto \rho\Nabla (D^{s-i}(x\otimes x)+D^{s-i+1}(x\otimes dx)).\]
+We will use these maps to define external Steenrod squares, the behaviour of which is rather different on $E_1$ than on later pages. Thus, we will state two separate propositions that we will prove together.
 \begin{prop}
-Fix $i,s\geq0$ and $r\geq2$. The chain level operation $\textup{SQ}^{i,s}$ defines an \emph{external Steenrod operation} \[\Sq^i_\textup{ext}:\Edownup{r}{}{X}{s}{t}\to \Edownup{r}{}{S_2X}{s+i}{2t},\] with indeterminacy vanishing by $\Edownup{2r-2}{}{S_2X}{s+i}{2t}$. For $x\in \Edownup{r}{}{X}{s}{t}$, $\Sq^i_\textup{ext}x$ survives to $\Edownup{2r-1}{}{S_2X}{s+i}{2t}$, and modulo indeterminacy: \[d_{2r-1}(\Sq^i_\textup{ext}x)=\Sq^{i+r-1}_\textup{ext}(d_rx).\]
-For $r\geq2$, the top operation $\Sq^s_\textup{ext}x$ is equal to the product-square $x\times x$, and in particular has no indeterminacy. For $i>s$, $\Sq^i_\textup{ext}x=0$. Whenever $t\geq2$ and $r\geq2$, $\Sq^1_\textup{ext}x=0$.  The bottom operation, $\Sq^0_\textup{ext}x$, is zero whenever $t>0$, and when $t=0$:
+\label{prop on e1 steens 1}
+The chain level operation $\textup{SQ}^{i,s}$ defines an \emph{external Steenrod operation} \[\Sq^i_\textup{ext}:\Edownup{r}{}{X}{s}{t}\to \Edownup{r}{}{S_2X}{s+i}{2t},\] with indeterminacy vanishing by $\Edownup{2r-2}{}{S_2X}{s+i}{2t}$. At $E_2$, there is no indeterminacy, and the operation $\hExtCohOp^k$ corresponds to the composite:
+\[\pi\dhor^s\pi\uver_t X
+\overset{\ExtCohOp^k}{\to} 
+\pi\dhor^{s+k}S_2(\pi\uver_t X)
+\overset{\pi\dhor^{s+k}(\widetilde{\nabla})}{\to}
+\pi\dhor^{s+k}\pi\uver_{2t}S_2 X.
+\]
+Suppose that $x\in \Edownup{r}{}{X}{s}{t}$ and $r\geq2$. $\Sq^i_\textup{ext}x$ survives to $\Edownup{2r-1}{}{S_2X}{s+i}{2t}$, and modulo indeterminacy: \[d_{2r-1}(\Sq^i_\textup{ext}x)=\Sq^{i+r-1}_\textup{ext}(d_rx).\]
+The top operation $\Sq^s_\textup{ext}x$ is equal to the product-square $x\times x$, and in particular has no indeterminacy. For $i>s$, $\Sq^i_\textup{ext}x=0$. Whenever $t\geq2$, $\Sq^1_\textup{ext}x=0$.  The bottom operation, $\Sq^0_\textup{ext}x$, is zero whenever $t>0$, and when $t=0$:
 \[\Sq^0_\textup{ext}:\Edownup{r}{}{X}{s}{0}\to \Edownup{r}{}{S_2X}{s}{0}\textup{ is induced by $X\overset{\textup{squaring}}{\to}S_2X$}.\]
 After composing with $\Edownup{r}{}{S_2X}{s+i}{2t}\to \Edownup{r}{}{\Lambda^2X}{s+i}{2t}$, $\Sq^0_\textup{ext}x=0$ for all $t$, and $\Sq^1_\textup{ext}x=0$ whenever $t\geq1$ and $r\geq2$.
 \end{prop}
 
 
 \begin{prop}
-Fix $i,s\geq0$ and set $r=1$. The chain level operation $\textup{SQ}^{i,s}$ defines an \emph{external Steenrod operation} \[\Sq^i_\textup{ext}:\Edownup{1}{}{X}{s}{t}\to \Edownup{1}{}{S_2X}{s+i}{2t},\] with zero indeterminacy. For each $i$, $\Sq^i_\textup{ext}$ satisfies $d_{1}(\Sq^i_\textup{ext}x)=\Sq^{i}_\textup{ext}(d_1x)$. Suppose that $x\in \Edownup{r}{}{X}{s}{t}$.
+\label{prop on e1 steens 2}
+%Fix $i,s\geq0$ and set $r=1$. The chain level operation $\textup{SQ}^{i,s}$ defines an 
+At $E_1$, the external Steenrod operations have no indeterminacy, and satisfy $\Sq^i_\textup{ext}$ satisfies $d_{1}(\Sq^i_\textup{ext}x)=\Sq^{i}_\textup{ext}(d_1x)$. Suppose that $x\in \Edownup{1}{}{X}{s}{t}$.
 The top operation $\Sq^s_\textup{ext}x$ \emph{need not} equal the product-square $x\times x$ on $E_1$, and
 $\Sq^{s+1}_\textup{ext}x$ \emph{need not} vanish, instead equalling $x\times d_1x$ on $E_1$.
-At least for $i>s+1$, $\Sq^i_\textup{ext}x=0$. The bottom operation $\Sq^0_\textup{ext}x$ is zero whenever $t>0$, and when $t=0$:
-\[\Sq^0_\textup{ext}:\Edownup{r}{}{X}{s}{0}\to \Edownup{r}{}{S_2X}{s}{0}\textup{ is induced by $X\overset{\textup{squaring}}{\to}S_2X$},\]
-so that after composing with $\Edownup{r}{}{S_2X}{s+i}{2t}\to \Edownup{r}{}{\Lambda^2X}{s+i}{2t}$, $\Sq^0_\textup{ext}x=0$ for all $t$.
+At least for $i>s+1$, $\Sq^i_\textup{ext}x=0$. The results for the operation $\Sq^0_\textup{ext}x$ are unchanged, but there are no results to report for $\Sq^{1}_\textup{ext}$.
 \end{prop}
 
 
@@ -6523,11 +6556,11 @@ For any $k$, positive or otherwise, write $\mathbb{D}_k:(C(X)\otimes C(Y))_i\to 
 \]
 \begin{lem}
 \label{DkIsNiceToFiltration}
-If $x\in F_s$ and $y\in F_{s'}$, then $\mathbb{D}_k(x\otimes  y)\in F_s\cap F_{s'}$.
+If $x\in F_s$ and $y\in F_{s'}$, then \[\mathbb{D}_k(x\otimes  y)\in F_s\cap F_{s'}\textup{ and } \mathbb{D}_k(x\otimes  y)\in F_{\lceil k/2\rceil}.\]
 \end{lem}
 \begin{proof}
 We may assume that $x$ and $y$ are each homogeneous, with $x\in X^{s}_{t}$ and $y\in Y^{s'}_{t'}$. As $\{D^k\}$ is special, $D^{\beta}(x\otimes y)=0$ unless $\beta\leq \min\{s,s'\}$, in which case
-\[\filt(D^{\beta}(x\otimes y))\geq s+s'-\beta\geq s+s'-\min\{s,s'\}=\max\{s,s'\}.\qedhere\]
+\[\filt(D^{\beta}(x\otimes y))\geq s+s'-\beta\geq s+s'-\min\{s,s'\}=\max\{s,s'\}\geq \lceil (s+s')/2\rceil.\qedhere\]
 \end{proof}
 \begin{lem}
 \label{boundaryVsBBD}
@@ -6636,7 +6669,7 @@ For $2\leq i\leq t+1$ and $x\in \EZdownup{0}{}{X}{s}{t}$:
 \rho\Nabla D^0(x\otimes dx),&\textup{if }i=n;\\
 0,&\textup{if }i< n.
 \end{cases}\]
-The same equations hold for $\textup{LAM}_i$, whenever $1\leq i<n$.
+The same equations hold for $\textup{LAM}_i$ in the extended range $1\leq i\leq t+1$.
 \end{prop}
 \begin{proof}
 We may apply Lemma \ref{boundaryVsBBD} to calculate $d\mathbb{D}_{n-i}(x\otimes x)$ and $d\mathbb{D}_{n-i-1}(dx\otimes x)$, since 
@@ -6668,104 +6701,144 @@ Suppose now that $x\in \Edownup{r}{}{X}{s}{t}$. In light of the above calculatio
 We are not saying that the indeterminacy of $\delta^\textup{ext}_i(x)$ must vanish by a certain page, but rather that one expects the  multiple values of $\delta^\textup{ext}_i(x)$ to all fail to be permanent cycles together. Note that when $r\leq 2$, there is no indeterminacy whatsoever in either set of operations.
 \begin{prop}
 \label{Prop on delta external}
-Suppose $r\geq0$. The chain-level map $\textup{DEL}_i$ produces (potentially multi-valued) operations $\delta^\textup{ext}_i:\Edownup{r}{}{X}{s}{t}\to \Edownup{r}{}{S_2X}{s}{t+i}$ whenever $2\leq i\leq \max\{n,t-(r-1)\}$. This operation is single-valued whenever $2\leq i\leq \max\{n,t+1-2(r-1)\}$.
+Suppose $r\geq0$. The chain-level map $\textup{DEL}_i$ produces (potentially multi-valued) operations $\delta^\textup{ext}_i:\Edownup{r}{}{X}{s}{t}\to \Edownup{r}{}{S_2X}{s}{t+i}$ whenever $2\leq i\leq \max\{n,t-(r-1)\}$. This operation is single-valued whenever $2\leq i\leq \max\{n,t+1-2(r-1)\}$, and at $E_1$ may be identified with the operations of \S\ref{External unary homotopy operations}:
+\[\pi\uver_{t}( X^s)\overset{\delta_i^\textup{ext}}{\to} \pi\uver_{t+i}S_2(X^s).\]
 
 Suppose that $x\in \E{}{r}{X}{s}{t}$ and $2\leq i\leq \max\{t-s,t-(r-1)\}$, so that $\delta^\textup{ext}_ix $ is defined. Then $\delta^\textup{ext}_i d_r x$ is defined, and 
 \[d_r\delta^\textup{ext}_i(x)+ \delta^\textup{ext}_i(d_rx)=\begin{cases}
 \Sq_\textup{ext}^{t-i+1}(x),&\textup{if $i>t-s$ and $r =t-i+1$}\\
-\mu^\textup{ext}(x\otimes d_rx),&\textup{if $i=t-s$ and  $s=0$};\\
+\mu^\textup{ext}(x\otimes d_rx),&\textup{if $i=t-s$,  $s=0$ and $r\geq2$};\\
 %\Sq_\textup{ext}^{t-i+1}(x),&\textup{if $t-s<i =t-(r-1)$}\\
 0,&\textup{otherwise.}
 \end{cases}\]
-If $i\leq \max\{n,t+1-2(r-1)\}$, so that $\delta^\textup{ext}_i x$ is single-valued, then so is $\delta^\textup{ext}_i d_r x$, and this equation holds exactly. Otherwise, this equation holds modulo appropriate indeterminacy. When $i>t-s$ and $r =t-i+1$ the set of values of the left hand side coincides with the set of values of the right hand side.
+If $i\leq \max\{n,t+1-2(r-1)\}$, so that $\delta^\textup{ext}_i x$ is single-valued, then so is $\delta^\textup{ext}_i d_r x$, and this equation holds exactly. Otherwise, this equation holds modulo appropriate indeterminacy. When $i>t-s$ and $r =t-i+1$ the set of values of the left hand side coincides with the set of values of the right hand side.  
+%%%%%The operations
+%%%%%$\delta^\textup{ext}_i:\Edownup{1}{}{X}{0}{t}\to \Edownup{1}{}{S_2X}{0}{t+i}$ are  the restriction to $\Edownup{1}{}{X}{0}{t} \subseteq $ of %$\Edownup{r}{}{X}{0}{t}\subset \pi\uver_*(X^{0}) $ of
+%%%%% the operations $\delta_i^\textup{ext}$ 
+
+The same conclusions hold for $\textup{LAM}_i$, producing operations $\lambda_i^\textup{ext}$, and the inequality $2\leq i$ can be replaced with $1\leq i$ in this case.
 \end{prop}
 \begin{proof}
-Suppose that $x\in \EZdownup{r}{}{X}{s}{t}$. Then Proposition \ref{dvsDEL} shows that $d\textup{DEL}_i(x)\in F^{s+r}C(S_2X)$ as long as $i\leq \max\{n,t-(r-1)\}$. We must now examine whether this map is well defined on $\Edownup{r}{}{X}{s}{t}$, which is to examine the difference $\textup{DEL}_i(x)-\textup{DEL}_i(x+dy)$, for $y\in \EZdownup{r-1}{}{X}{s-r+1}{t+r+2}$. We should only expect to be successful when $i\leq t+1-2(r-1)$.
+Suppose that $x\in \EZdownup{r}{}{X}{s}{t}$. Then Proposition \ref{dvsDEL} shows that $d\textup{DEL}_i(x)\in F^{s+r}C(S_2X)$ as long as $i\leq \max\{n,t-(r-1)\}$, so that $\textup{DEL}_i(x)\in \EZdownup{r}{}{X}{s}{t+i}$. 
+Proposition \ref{Prop on delta external} then provides the formula for 
+$d_r\delta^\textup{ext}_i(x)+ \delta^\textup{ext}_i(d_rx)$ (modulo whatever indeterminacy we identify in the rest of this proof).
+
+Let us begin with the operations $\delta^\textup{ext}_i:\Edownup{1}{}{X}{s}{t}\to \Edownup{1}{}{S_2X}{s}{t+i}$. Due to the assumption that $\{D^k\}$ is special, for any $x,y\in F^{s}CX$, $\mathbb{D}_k(x\otimes  y)\equiv \nabla_k\twist^k D^0(x\otimes y) $ modulo $F^{2s+1}X$, and due to Lemma \ref{DkIsNiceToFiltration}, we can ignore the horizontal component of the differential in calculating $dx$ applied when defining $\textup{DEL}_ix$. The resulting operations have leading term which is almost identical to the definition of the operations $\delta_i^\textup{ext}$ of \S\ref{External unary homotopy operations}. The only difference is the $\twist$ operator that appears, but this does not affect the resulting operation, by \cite[Lemma 4.1]{DwyerHtpyOpsSimpComAlg.pdf}.
+
+We will now examine, for $r\geq1$, the extent to which $\textup{DEL}_{i}$ induces a well defined operation with domain $\Edownup{r}{}{X}{s}{t}$, which is to examine the difference $\textup{DEL}_i(x)-\textup{DEL}_i(x+dy)$ for $y\in \EZdownup{r-1}{}{X}{s-r+1}{t-r+2}$.
+We may assume that $s>0$, as the operation on $E_1$ has just been shown to be well defined, and $\Edownup{r}{}{X}{0}{t}\subseteq \Edownup{1}{}{X}{0}{t}$ for $r\geq1$.
+This implies that $t-i\geq1$ whenever $i=n$. 
 By Lemma \ref{boundaryVsBBD}:
 \begin{alignat*}{4}
-d\mathbb{D}_{n-i-1}(x\otimes dy)&=
-{\mathbb{D}_{n-i-1}(dx\otimes dy)}&&+
-(1{+}\twist)\mathbb{D}_{n-i}(x\otimes dy)&&+
-\Nabla\twist D^{-(n-i)}(x\otimes dy)\\
+d\mathbb{D}_{n-i+1}(y\otimes y)&=
+\mathbb{D}_{n-i+1}d(y\otimes y)&&+
+{(1{+}\twist)\mathbb{D}_{n-i+2}(y\otimes y)}&&+
+\Nabla\twist D^{-(n-i+2)}(y\otimes y)\\
 d\mathbb{D}_{n-i}(dy\otimes y)&=
 \mathbb{D}_{n-i}(dy\otimes dy)&&+
 (1{+}\twist)\mathbb{D}_{n-i+1}(dy\otimes y)&&+
 \Nabla\twist D^{-(n-i+1)}(dy\otimes y)\\
-d\mathbb{D}_{n-i+1}(y\otimes y)&=
-\mathbb{D}_{n-i+1}d(y\otimes y)&&+
-{(1{+}\twist)\mathbb{D}_{n-i+2}(y\otimes y)}&&+
-\Nabla\twist D^{-(n-i+2)}(y\otimes y)
+d\mathbb{D}_{n-i-1}(x\otimes dy)&=
+{\mathbb{D}_{n-i-1}(dx\otimes dy)}&&+
+(1{+}\twist)\mathbb{D}_{n-i}(x\otimes dy)&&+
+\Nabla\twist D^{-(n-i)}(x\otimes dy)
 \end{alignat*}
-Now write $H:=\rho(\mathbb{D}_{n-i-1}(x\otimes dy)+\mathbb{D}_{n-i}(dy\otimes y)+\mathbb{D}_{n-i+1}(y\otimes y))$. By Lemma \ref{DkIsNiceToFiltration}, $H\in F^{s-r+1}$, and the above calculations show that $H$ has boundary
-\small
-%\[(\textup{DEL}_i(x)-\textup{DEL}_i(x+dy))+\rho\Nabla(D^{i-n-2}(y\otimes y)+D^{i-n-1}(y\cdot dy)+D^{i-n}(dy\cdot x))+\rho\mathbb{D}_{n-i-1}(dx\cdot dy).\]
-\[dH=\textup{DEL}_i(x)-\textup{DEL}_i(x+dy)+T_1+T_2+T_3,\]
-\normalsize
-where $\textup{DEL}_i(x)-\textup{DEL}_i(x+dy)\in F^s$ is the quantity of interest, and
+(As in the proof of Proposition \ref{dvsDEL}, there are extra terms which appear when $i=1$, but they are annihilated by the application of $\rho'$.)
+Write $H:=\rho(\mathbb{D}_{n-i-1}(x\otimes dy)+\mathbb{D}_{n-i}(dy\otimes y)+\mathbb{D}_{n-i+1}(y\otimes y))$. By Lemma \ref{DkIsNiceToFiltration}, $H\in F^{s-r+1}$, and the above calculations show that% $H$ has boundary
+%\small
+%%\[(\textup{DEL}_i(x)-\textup{DEL}_i(x+dy))+\rho\Nabla(D^{i-n-2}(y\otimes y)+D^{i-n-1}(y\cdot dy)+D^{i-n}(dy\cdot x))+\rho\mathbb{D}_{n-i-1}(dx\cdot dy).\]
+%\[dH=\textup{DEL}_i(x)-\textup{DEL}_i(x+dy)+T_1+T_2+T_3,\]
+%\normalsize
+%where $\textup{DEL}_i(x)-\textup{DEL}_i(x+dy)\in F^s$ is the quantity of interest, and
+%\begin{align*}
+%\textup{DEL}_i(x)-\textup{DEL}_i(x+&dy)=dH+T_1+T_2+T_3\textup{, \ where}
+%\\
+%T_1:=\rho\Nabla(D^{i-n-2}(y\otimes y))&\begin{cases}
+%\in F^{s+(t-i)-2(r-2)},&\textup{if }n+2\leq i\leq t-1;\\
+%=0,&\textup{if }i\leq n+1.
+%%\\,&\textup{if }
+%\end{cases}
+%\\
+%T_2:=\rho\Nabla(D^{i-n-1}(y\otimes dy))&\begin{cases}
+%\in F^{s+(t-i)-(r-2)},&\textup{if }n+1\leq i\leq t-1;\\
+%=0,&\textup{if }i\leq n.
+%%\\,&\textup{if }
+%\end{cases}
+%\\
+%T_3:=\rho\Nabla(D^{i-n}(dy\otimes x))&
+%\ \left\{\begin{array}{ll}
+%\smash{\in F^{s+(t-i)}},&\smash{\textup{if }n\leq i\leq t-1;}\\
+%\smash{=0,}&\smash{\textup{if }i\leq n-1.}
+%\end{array}\right.
+%\begin{cases}
+%\smash{\in F^{s+(t-i)}},&\smash{\textup{if }n\leq i\leq t-1;}\\[-.5em]
+%\smash{=0,}&\smash{\textup{if }i\leq n-1.}
+%%\\,&\textup{if }
+%\end{cases}
+%\\
+%\end{align*}
+%\begin{align*}
+%T_1:={}&\rho\Nabla(D^{i-n-2}(y\otimes y))&&\in F^{s+(t-i)-2(r-2)}\textup{\ \ equals zero if }i\leq n+1.\\
+%T_2:={}&\rho\Nabla(D^{i-n-1}(y\otimes dy))&&\in F^{s+(t-i)-(r-2)}\textup{\ \ equals zero if }i\leq n.\\
+%T_3:={}&\rho\Nabla(D^{i-n}(dy\otimes x))&&\in F^{s+(t-i)}\textup{\ \ equals zero if }i\leq n-1.\\
+%\end{align*}
 \begin{align*}
-T_1:=\rho\Nabla(D^{i-n-2}(y\otimes y))&\begin{cases}
-\in F^{s+(t-i)-2(r-2)},&\textup{if }n+2\leq i\leq t-1;\\
-=0,&\textup{if }i\leq n+1.
-%\\,&\textup{if }
-\end{cases}
-\\
-T_2:=\rho\Nabla(D^{i-n-1}(y\otimes dy))&\begin{cases}
-\in F^{s+(t-i)-(r-2)},&\textup{if }n+1\leq i\leq t-1;\\
-=0,&\textup{if }i\leq n.
-%\\,&\textup{if }
-\end{cases}
-\\
-T_3:=\rho\Nabla(D^{i-n}(dy\otimes x))&\begin{cases}
-\in F^{s+(t-i)},&\textup{if }n\leq i\leq t-1;\\
-=0,&\textup{if }i\leq n-1.
-%\\,&\textup{if }
-\end{cases}
+dH=\textup{DEL}_i(x)&-\textup{DEL}_i(x+dy)+T_1+T_2+T_3,\textup{ where:}\\
+T_1:={}&\rho\Nabla(D^{i-n-2}(y\otimes y))\in F^{s+(t-i)-2(r-2)}\textup{\ \ equals zero when }i\leq n+1;\\
+T_2:={}&\rho\Nabla(D^{i-n-1}(y\otimes dy))\in F^{s+(t-i)-(r-2)}\textup{\ \ equals zero when }i\leq n;\\
+T_3:={}&\rho\Nabla(D^{i-n}(dy\otimes x))\in F^{s+(t-i)}\textup{\ \ equals zero when }i\leq n-1.
 \end{align*}
-Now as we have $i<t$, $T_3\in F^{s+1}$, and can be ignored. If $i\leq n$, then $T_1=T_2=0$, and we've shown that the operation is well defined. If $i=n+1$, then $T_2$ may be non-zero, but it lies in $F^{s+1+s-r}$, and as we may take $r\leq s$,  the operation is again well defined.
-If, however, $i\geq n+2$, then $T_1+T_2$  can only be assured to lie in filtration above $s$ only when $i\leq t+1-2(r-1)$.
+%Now if $i=n$, except when $s=0$ (so that $i=n=t$), $T_3\in F^{s+1}$, and can be ignored. 
+If $i\leq n-1$, then $T_1=T_2=T_3=0$. If $i=n$ then $T_3$ need not vanish, but as $t-1\geq1$, $T_3\in F^{s+1}$. This shows that $\delta_i^\textup{ext}$ is single-valued if $i\leq n$.
+If $i\geq n+1$ then $T_1+T_2$  can only be assured to lie in filtration above $s$ when $i\leq t+1-2(r-1)$. This proves that the operations are single-valued when we claim. 
 %\textbf{The following is an observation that I thought might improve this result, but which does not  seem to - the idea was to leave out the third row of stuff. Maybe it could still be good if we leave out some number of the summands from the third row, but it sounds pretty dicey. Should try it in order to extend rande of definition. Also should check whether one should expect the operations to be defined all the way up to $i\leq t-r+1$. ``Now suppose that $x\in F_s$, and $y\in F_{s-r+1}$. Let us look at $\mathbb{D}_{n-i+1}(dy\cdot y)$. As $dy$ has filtration $s$, each term $\Nabla_{\alpha}\twist^{\alpha}D^\beta(dy\cdot y)$ with $\beta>s$ vanishes, and each term with $\beta<s$ has filtration higher than $dy$. Thus, modulo $F_{s+1}$, $\mathbb{D}_{n-i+1}(dy\cdot y)\equiv\Nabla_{t-i+1}\twist^{t-i+1}D^s((dy)^s_{t}\cdot y^{s}_{t+1})$.''}
 
-To summarise: there is some $H$ in filtration at least that of $y$, such that
+Even when $s=0$ or $i\leq n$, we may summarise the situation as follows. There is some $H\in F^{s-r+1}$ such that
 %\[dH=\textup{DEL}_i(x)-\textup{DEL}_i(x+dy)+T, \textup{ where } dT=\textup{SQ}^{i,s}(x)-\textup{SQ}^{i,s}(x+dy)\]
-\begin{alignat*}{2}
+\[
 dH
-&=
-\textup{DEL}_i(x)-\textup{DEL}_i(x+dy)+T,%
-\intertext{and modulo filtration exceeding $s+t-i+1$:}
-dT
-&\equiv\begin{cases}
-\textup{SQ}^{t-i+1,s}(x)-\textup{SQ}^{t-i+1,s}(x+dy),&\textup{if }n+2\leq i\leq t;\\
-0,&\textup{if }2\leq i\leq n+1.
-%\\,&\textup{if }
-\end{cases}
-%\textup{SQ}^{t-i+1,s}(x)-\textup{SQ}^{t-i+1,s}(x+dy)
-\end{alignat*}
-%%%%%%%%%%%%\usepackage[amsmath,amsthm,thmmarks]{ntheorem}
-In particular, if $n+2\leq i\leq t$, the modulo filtration exceeding $s+t-i+1$:
-\[d\textup{DEL}_i(x+dy)-d\textup{DEL}_i(x)=\textup{SQ}^{t-i+1,s}(x)-\textup{SQ}^{t-i+1,s}(x+dy),\]
-which says exactly that the indeterminacy of $\delta_i^\textup{ext}$ maps onto that of $\Sq_\textup{ext}^{t-i+1}$ under $d_{t-i+1}$.
+=
+\textup{DEL}_i(x)-\textup{DEL}_i(x+dy)+\textup{BC},%
+\]
+where $\textup{BC}=T_1+T_2+T_3$ is an example of the bounding chain appearing in the proof of Propositions \ref{prop on e1 steens 1} and \ref{prop on e1 steens 2}, so that
+modulo $F^{s+t-i+2}$:
+\[d(\textup{DEL}_i(x))-d(\textup{DEL}_i(x+dy))
+\equiv
+\textup{SQ}^{t-i+1,s}(x)-\textup{SQ}^{t-i+1,s}(x+dy).\]
+%
+%\[dT
+%\equiv\begin{cases}
+%\textup{SQ}^{t-i+1,s}(x)-\textup{SQ}^{t-i+1,s}(x+dy),&\textup{if }n+1\leq i\leq t+1;\\
+%0,&\textup{if }2\leq i\leq n.
+%%\\,&\textup{if }
+%\end{cases}
+%\]
+%(In the case that $s=0$ and $i=t$, we use the observation that $dT_3=0$ $\cdots \cdots \cdots \cdots \cdots $)
+%In particular, if $n+1\leq i\leq t$, the modulo filtration exceeding $s+t-i+1$:
+%\[d\textup{DEL}_i(x+dy)-d\textup{DEL}_i(x)=\textup{SQ}^{t-i+1,s}(x)-\textup{SQ}^{t-i+1,s}(x+dy),\]
+This says exactly that the indeterminacy of $\delta_i^\textup{ext}$ maps \emph{onto} that of $\Sq_\textup{ext}^{t-i+1}$ under $d_{t-i+1}$.
 \end{proof}
-\begin{cor}
-\label{cor on meaning of equation for ddeltai}
-Suppose that $x\in \E{}{r}{X}{s}{t}$ and $2\leq i\leq \max\{t-s,t-(r-1)\}$, so that $\delta^\textup{ext}_ix $ is defined. Then $\delta^\textup{ext}_i d_r x$ is defined, and 
-\[d_r\delta^\textup{ext}_i(x)+ \delta^\textup{ext}_i(d_rx)=\begin{cases}
-\mu^\textup{ext}(x\otimes d_rx),&\textup{if $i=t-s$ and  $s=0$};\\
-\Sq_\textup{ext}^{t-i+1}(x),&\textup{if $t-s<i =t-(r-1)$}\\
-0,&\textup{otherwise.}
-\end{cases}\]
-If $i\leq \max\{n,t+1-2(r-1)\}$, so that $\delta^\textup{ext}_i x$ is single-valued, then so is $\delta^\textup{ext}_i d_r x$, and this equation holds exactly. Otherwise, this equation holds modulo appropriate indeterminacy.
-\end{cor}
-
-\begin{cor}[ver2]
-Suppose that $x\in \E{}{r}{X}{s}{t}$ and $2\leq i\leq \max\{t-s,t-(r-1)\}$, so that $\delta^\textup{ext}_ix $ is defined.
-\[d_r\delta^\textup{ext}_i(x)=\begin{cases}
-\delta^\textup{ext}_i(d_rx),&\textup{if $i< t-s$ or $i<t-(r-1)$};\\
-\delta^\textup{ext}_i(d_rx),&\textup{if $i=t-s$ and $s>0$};\\
-\delta^\textup{ext}_i(d_rx)+\mu^\textup{ext}(x\otimes d_rx),&\textup{if $i=t-s$ and  $s=0$};\\
-\delta^\textup{ext}_i(d_rx)+\Sq_\textup{ext}^{t-i+1}(x),&\textup{if $i>t-s$ and $i=t-(r-1)$}.
-\end{cases}\]
-\end{cor}
-
+%\begin{cor}
+%\label{cor on meaning of equation for ddeltai}
+%Suppose that $x\in \E{}{r}{X}{s}{t}$ and $2\leq i\leq \max\{t-s,t-(r-1)\}$, so that $\delta^\textup{ext}_ix $ is defined. Then $\delta^\textup{ext}_i d_r x$ is defined, and 
+%\[d_r\delta^\textup{ext}_i(x)+ \delta^\textup{ext}_i(d_rx)=\begin{cases}
+%\mu^\textup{ext}(x\otimes d_rx),&\textup{if $i=t-s$ and  $s=0$};\\
+%\Sq_\textup{ext}^{t-i+1}(x),&\textup{if $t-s<i =t-(r-1)$}\\
+%0,&\textup{otherwise.}
+%\end{cases}\]
+%If $i\leq \max\{n,t+1-2(r-1)\}$, so that $\delta^\textup{ext}_i x$ is single-valued, then so is $\delta^\textup{ext}_i d_r x$, and this equation holds exactly. Otherwise, this equation holds modulo appropriate indeterminacy.
+%\end{cor}
+%
+%\begin{cor}[ver2]
+%Suppose that $x\in \E{}{r}{X}{s}{t}$ and $2\leq i\leq \max\{t-s,t-(r-1)\}$, so that $\delta^\textup{ext}_ix $ is defined.
+%\[d_r\delta^\textup{ext}_i(x)=\begin{cases}
+%\delta^\textup{ext}_i(d_rx),&\textup{if $i< t-s$ or $i<t-(r-1)$};\\
+%\delta^\textup{ext}_i(d_rx),&\textup{if $i=t-s$ and $s>0$};\\
+%\delta^\textup{ext}_i(d_rx)+\mu^\textup{ext}(x\otimes d_rx),&\textup{if $i=t-s$ and  $s=0$};\\
+%\delta^\textup{ext}_i(d_rx)+\Sq_\textup{ext}^{t-i+1}(x),&\textup{if $i>t-s$ and $i=t-(r-1)$}.
+%\end{cases}\]
+%\end{cor}
+%
 
 \subsection{The case of a cosimplicial simplicial commutative algebra}
 \label{The case of a cosimplicial simplicial commutative algebra}
@@ -6781,7 +6854,10 @@ $\Sqh^j:\left(\Edownup{r}{}{X}{s}{t}   \smash{{}\overset{\Sq^j_\textup{ext}}{\to
 $\mu:\left(\Edownup{r}{}{X}{s}{t}\otimes \Edownup{r}{}{X}{s'}{t'}\smash{{}\overset{\mu_\textup{ext}}{\to}{}} \Edownup{r}{}{\quadgrad{2}F^\calc X}{s+s'}{t+t'}\overset{\mu_*}{\to} 
 \Edownup{r}{}{X}{s+s'}{t+t'}\right)$,
 \end{tabular}\]
-with the $\deltav_i$ potentially multi-valued functions,  defined when $2\leq i\leq \max\{n,t-(r-1)\}$, and single valued whenever $i\leq\min\{n+1,t+1-2(r-1)\}$. When $\calc=\liealgs$ (resp.\ $\calc=\restliealgs$), there are operations:
+with the $\deltav_i$ potentially multi-valued functions,  defined when $2\leq i\leq \max\{n,t-(r-1)\}$, and single valued whenever $i\leq\min\{n+1,t+1-2(r-1)\}$. 
+
+\begin{shaded}\tiny
+When $\calc=\liealgs$ (resp.\ $\calc=\restliealgs$), there are operations:
 \[\begin{tabular}{cll}
 $\lambdav_i:\left(\Edownup{r}{}{X}{s}{t} \smash{{}\overset{\lambda_i^\textup{ext}}{\to}{}} \Edownup{r}{}{\quadgrad{2}F^\calc X}{s}{t+i}\smash{{}\overset{[,]_*}{\to} {}}
 \Edownup{r}{}{X}{s}{t+i}\right)$,
@@ -6792,12 +6868,11 @@ $[\,,]:\left(\Edownup{r}{}{X}{s}{t}\otimes \Edownup{r}{}{X}{s'}{t'}\smash{{}\ove
 \Edownup{r}{}{X}{s+s'}{t+t'}\right)$,
 \end{tabular}\]
 with the $\lambdav_i$ potentially multi-valued functions,  defined when $1\leq i\leq \max\{n,t-(r-1)\}$ (resp.\ $0\leq i\leq \max\{n,t-(r-1)\}$), and single valued whenever $i\leq\min\{n+1,t+1-2(r-1)\}$.
+\end{shaded}
 
-In this section, we will report the results that follow in this case, in the hope they are of some independent interest. \todo[inline]{Explain relationship with Dwyer's. Point out that this notation will not be used in rest of essay.}
+In this section, we will report the results that follow in this generic case, in the hope they are of some independent interest. These operations will not be used in rest of the essay, as they will equal zero in the case of interest to us. That is, whenever $A=\calx$ is Radulescu-Banu's resolution of some $X\in s\algs$, the results of \S\ref{Operations on the Bousfield-Kan spectral sequence} will show that  the map $\mu_*:\Edownup{r}{}{S_2\calx}{s}{t+i}\to \Edownup{r}{}{\calx}{s}{t+i}$ can be lifted up one filtration. Morally, this should occur is just that $\calx$ is a resolution by GEMs, but nonetheless we will need to work with  Radulescu-Banu's resolution directly 
 
-The reason that these operations will not be used is that they will equal zero in the case of interest to us. That is, whenever $A=\calx$ is Radulescu-Banu's resolution of some $X\in s\algs$, the results of \S\ref{Operations on the Bousfield-Kan spectral sequence} will show that  the map $\mu_*\Edownup{r}{}{S_2\calx}{s}{t+i}\to \Edownup{r}{}{\calx}{s}{t+i}$ can be lifted up one filtration. Although the moral reason that this should occur is just that $\calx$ is a resolution by GEMs,  we will need work with  Radulescu-Banu's resolution directly in order to make our constructions. 
 
-\todo[inline]{Needs revision from here...} 
 \begin{prop}
 Suppose that $X\in cs\algs$, $x\in \Edownup{1}{}{X}{s}{t}$, and $2\leq i <2t$ (so that the $\delta^\textup{ext}_i$ operation that follows is non-top).
 Then  $(\mu_*\delta^\textup{ext}_i)(\mu_*\Sq_\textup{ext}^j)x=0\in \Edownup{1}{}{X}{s+j}{2t+i}$.
