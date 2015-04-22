@@ -1,6 +1,6 @@
 % !TEX root = z_output/unstable_Lie_algs.tex
 \documentclass[11pt]{amsart} \renewcommand{\baselinestretch}{1.4}
-\newcommand{\IncludeAll}{}%
+\newcommand{\xIncludeAll}{}%
 \newcommand{\xShrinkPages}{}%
 \newcommand{\xPostponeContents}{}%
 \ifx\ShrinkPages\undefined\else\usepackage[paperheight=220mm,paperwidth=160mm]{geometry}\fi%220/160 height options
@@ -4002,6 +4002,7 @@ Moreover, each map $P^i:V^t\to \quadgrad{2}(F^{\calw(0)}V)^{t+i+1}$ appearing in
 \[\theta_i:\left((F^{\calw(0)}V)^{t+i+1}\overset{\textup{proj}}{\makebox[.06ex][l]{$\to$}\to} (\quadgrad{2}F^{\calw(0)}V)^{t+i+1}\overset{\textup{proj}}{\makebox[.06ex][l]{$\to$}\to} \im (P^i)\overset{(P^i)^{-1}}{\to}V^{t}\right).\]
 Here we have projected onto the quadratic filtration 2 part, and then further onto the relevant summand in its natural decomposition. Note that although $P^t:V^t\to \quadgrad{2}(F^{\calw(0)}V)^{2t+1}$ is a non-trivial linear map when $t\geq2$, its image is entangled with the image of the bracket, and we are not able to split it off. Thus we are not able to improve on the bounds $2\leq i< t$.
 \begin{prop}
+\label{prop on thetaistar}
 There is a map $\theta_i^\star:V_t\to (C^{\HC{\algs}}V)_{t+i+1}$, natural in $V\in\vect{}{+}$, such that the following diagram commutes:
 \[\xymatrix@R=4mm@C=20mm{
 \dual((C^{\HC{\algs}}V)_{t+i+1})&%r1c1
@@ -6031,7 +6032,7 @@ Suppose instead that $S=1$. The same argument produces a map $\mathrm{subquo}\to
 
 
 
-\subsection{\textbf{The Bousfield-Kan $E_2$-page for a sphere}}
+\subsection{The Bousfield-Kan $E_2$-page for a sphere}
 \label{Calculations of HW0}
 Let $X=V^*_{(0)}\in\calw(0)$ be a one dimensional object of $\calw(0)$, dual to a one-dimensional vector space $V_{(0)}\in\vect{0}{+}$, with non-zero element $\imath\in(V_{(0)})_T$. Write $\imath^*\in X^T$ for the non-zero element of $X$.
 
@@ -6355,7 +6356,16 @@ To actually determine the homology of $\Eprime{blank}{1}{\calx}{}{}$, suppose th
 %\]
 
 In this section we will produce various external operations on second quadrant homotopy spectral sequences. That is, for $X\in cs\vect{}{}$, we will produce numerous operations
-from $\E{}{r}{X}{}{}$ to each of $\E{}{r}{S_2X}{}{}$, $\E{}{r}{\Lambda^2 X}{}{}$ any $\E{}{r}{S^2X}{}{}$. This approach leaves open a number of possibilities. If $X\in cs\algs$, then the structure map $S_2X\to X$ induces a spectral sequence map $\E{}{r}{S^2X}{}{}\to \E{}{r}{X}{}{}$, and so the external operations induce internal operations on $\E{}{r}{X}{}{}$. If $X$ is a Lie algebra or restricted simplicial Lie algebra, we may apply the analogous technique. In \S\ref{Operations on the Bousfield-Kan spectral sequence}, we will use these external operations in another way to produce operations on the Bousfield-Kan spectral sequence of a commutative algebra or Lie algebra.
+from $\E{}{r}{X}{}{}$ to each of $\E{}{r}{S_2X}{}{}$ and $\E{}{r}{\Lambda^2 X}{}{}$. This approach leaves open a number of possibilities. If $X\in cs\algs$, then the structure map $S_2X\to X$ induces a spectral sequence map $\E{}{r}{S^2X}{}{}\to \E{}{r}{X}{}{}$, and so the external operations induce internal operations on $\E{}{r}{X}{}{}$. If $X$ is a Lie algebra  we may apply the analogous technique. In \S\ref{Operations on the Bousfield-Kan spectral sequence}, we will use these external operations in another way to produce operations on the Bousfield-Kan spectral sequence of a commutative algebra or Lie algebra.
+
+
+
+\begin{shaded}\tiny
+That is, whenever $A=\calx$ is Radulescu-Banu's resolution of some $X\in s\algs$, the results of \S\ref{Operations on the Bousfield-Kan spectral sequence} will show that  the map $\mu_*:\Edownup{r}{}{S_2\calx}{s}{t+i}\to \Edownup{r}{}{\calx}{s}{t+i}$ can be lifted up one filtration. Morally, this should occur simply because $\calx$ is a resolution by GEMs, but nonetheless we will need to work with  Radulescu-Banu's resolution directly.
+
+\end{shaded}
+
+
 
 A number of authors have written on spectral sequence operations in a variety of settings. Singer's work \cite{MR2245560} on first quadrant cohomology spectral sequences has already been used in this thesis, and has been extended by Turner \cite{turner_opns_and_sseqs_I.pdf}. 
  Perhaps the closest recent examples are \cite{2011arXiv1101.3798H} and \cite{2011arXiv1102.0020H}, where Hackney works out the operations available on the homotopy spectral sequence of a cosimplicial $E_\infty$- or $E_n$-space respectively, using Bousfield-Kan's universal examples \cite{BK_pairings.pdf}. We will be working with cosimplicial simplicial \emph{vector spaces}, and so a direct approach, mirroring Dwyer's work in second quadrant cohomotopy spectral sequences \cite{DwyerHigherDividedSquares.pdf}, is available. 
@@ -6409,9 +6419,10 @@ whenever $k\geq0$ and $t$ does not equal either of $2k$ and $2k+1$.
 \noindent 
 
 As discussed earlier, we will write $T$ for any symmetry isomorphism, write ``$\twist F$'' as shorthand for the function $TFT$, and  whenever we write $\twist FG$, we will mean $(\twist F)G$. We will also use the notation
-\[X^{\otimes2}\overset{\rho}{\to}S_2X,\qquad X^{\otimes2}\overset{\rho'}{\to}\Lambda^2X,\qquad X^{\otimes2}\overset{\rho''}{\to}S^2X,\]
-so that $\rho$ stands for the projection onto coinvariants, et cetera. Until \S\ref{External spectral sequence operations delta}, we will form the same operations into each of $\Edownup{r}{}{S_2X}{}{}$, $\Edownup{r}{}{\Lambda^2X}{}{}$ and $\Edownup{r}{}{S^2X}{}{}$.
-
+\[X^{\otimes2}\overset{\rho}{\to}S_2X\textup{\ \ and\ \ }X^{\otimes2}\overset{\rho'}{\to}\Lambda^2
+%\qquad X^{\otimes2}\overset{\rho''}{\to}S^2X,
+\]
+for the projection onto coinvariants, and further onto the exterior quotient. Until \S\ref{External spectral sequence operations delta}, the operations that we will produce into each of $\Edownup{r}{}{S_2X}{}{}$ and $\Edownup{r}{}{\Lambda^2X}{}{}$ will be essentially the same.
 \subsection{An external spectral sequence pairing $\mu_\mathrm{ext}$}
 The easiest of our constructions is that of an external product, using 
 the chain-level formula
@@ -6516,7 +6527,7 @@ For the statement about the top operation, one calculates that
 When $i\geq s+2$, we have $\textup{SQ}^{i}x=0$, and even with $i=s+1$:
 \[\textup{SQ}^{s+1,s}x=\rho D^{0}(x\otimes dx)\in F^{2s+r},\]
 so that $\Sq^{s+1}_\textup{ext}x$ is zero in $\Edownup{r}{}{S_2X}{2s+1}{2t+1}$ for $r\geq2$.
-For the statement about $\Sq_\textup{ext}^0x$, proposition \ref{dvsDEL} shows that the $E_0$-operation $\delta_{t+1}^\textup{ext}$ provides a nullhomotopy of $\Sq_\textup{ext}^0$, but in dimensions where it is defined. In dimension $t=0$ (using the specialness assumption):
+For the statement about $\Sq_\textup{ext}^0x$, Proposition \ref{dvsDEL} shows that the $E_0$-operation $\delta_{t+1}^\textup{ext}$ provides a nullhomotopy of $\Sq_\textup{ext}^0$, but in dimensions where it is defined. In dimension $t=0$ (using the specialness assumption):
 \[\textup{SQ}^{0,s}x-\rho\Nabla D^s(x\otimes x)=0 \in F^{s+r-1},\]
 so that (using the assumption that $\{D^k\}$ is special):
 \begin{alignat*}{2}
@@ -6838,7 +6849,42 @@ This says exactly that the indeterminacy of $\delta_i^\textup{ext}$ maps \emph{o
 %\end{cor}
 %
 
-\subsection{The case of a cosimplicial simplicial commutative algebra}
+\begin{prop}
+\label{Prop on einfty ops}
+Suppose that $X\in (s\vect{}{})^{\Delta_+}$, i.e.\ that $X$ admits a coaugmentation from some $X^{-1}\in s\vect{}{}$. For $2\leq i\leq t-s$, the operations $\delta^\textup{ext}_i:\E{}{\infty}{X}{s}{t}\to \E{}{\infty}{S^2X}{s+1}{t+i+1}$ agree with the homotopy operations $\delta^\textup{ext}_i:\pi_{t-s}(X^{-1})\to \pi_{t-s+i}(S^2(X^{-1}))$. Similarly, the external pairing at $S_2\E{}{\infty}{X}{}{}\to \E{}{\infty}{S_2X}{}{}$ agrees with  $\widetilde{\nabla}:S_2\pi_*(X^{-1})\to \pi_*(S_2(X^{-1}))$.
+
+The same conclusions hold for the $\lambda_i$ for $1\leq i\leq t-s$.
+\end{prop}
+\begin{proof}
+We will only prove the statement about $\delta_i^\textup{ext}$, as the statement about products is easier and more standard. We only need to show that the following diagram commutes whenever $2\leq i\leq n$:
+\[\xymatrix@R=4mm@C=21mm{
+ZC_{n}(X)
+\ar[r]^-{\textup{DEL}_i}
+\ar[d];[]^-{d\dhor^0}
+&%r1c1
+ZC_{n}(S_2X)\ar[d];[]^-{d\dhor^0}
+\\%r1c3
+ZC_{n}(X^{-1})
+\ar[r]_-{z\mapsto \rho(\nabla_{n-i}(z\otimes z))}
+&%r1c1
+ZC_{n}(S_2(X^{-1}))
+}\]
+We calculate
+\begin{alignat*}{3}
+\textup{DEL}_i(d\dhor^{0}z)
+:={}&
+\rho\mathbb{D}_{n-i}(d\dhor^{0}z\otimes d\dhor^{0}z)+\rho\mathbb{D}_{n-i-1}(d\dhor^{0}z\otimes d(d\dhor^{0}z))%
+\\
+={}&
+\rho\nabla_{n-i}\twist^{n-i}D^0(d\dhor^{0}z\otimes d\dhor^{0}z)+\rho\mathbb{D}_{n-i-1}(d\dhor^{0}z\otimes 0)\\
+={}&
+\rho\nabla_{n-i}(d\dhor^{0}z\otimes\dver d\dhor^{0}z)=d\dhor^{0}(\rho\nabla_{n-i}(z\otimes z)),
+\end{alignat*}
+where we have used the assumption that $\{D^k\}$ is special in both the second and third equations, and $d(d\dhor^{0}z)=0$ since $z\in ZC_n(X^{-1})$ is a (vertical) cycle, and $d\dhor^{0}$ equalizes $d\dhor^{0}$ and $d\dhor^{1}$.
+\end{proof}
+
+
+\subsection{Internal operations on $\E{}{r}{X}{}{}$ for $X\in cs\calc$}
 \label{The case of a cosimplicial simplicial commutative algebra}
 Suppose that $X\in cs\algs$. We may define operations:
 \begin{gather*}
@@ -6852,18 +6898,18 @@ Suppose that $X\in cs\algs$. We may define operations:
 \end{gather*}
 with the $\delta_i$ potentially multi-valued functions,  defined when $2\leq i\leq \max\{n,t-(r-1)\}$, and single valued whenever $2\leq i\leq\min\{n+1,t+1-2(r-1)\}$, and the $\Sq^j$ potentially multi-valued functions with indeterminacy vanishing by $E_{2r-2}$. 
 
-In this section, we will report the results that follow in this generic case, in the hope they are of some independent interest. These operations will not be used in rest of the essay, as they will equal zero in the case of interest to us. That is, whenever $A=\calx$ is Radulescu-Banu's resolution of some $X\in s\algs$, the results of \S\ref{Operations on the Bousfield-Kan spectral sequence} will show that  the map $\mu_*:\Edownup{r}{}{S_2\calx}{s}{t+i}\to \Edownup{r}{}{\calx}{s}{t+i}$ can be lifted up one filtration. Morally, this should occur is just that $\calx$ is a resolution by GEMs, but nonetheless we will need to work with  Radulescu-Banu's resolution directly.
+These operations will not be used in rest of the essay, as they will equal zero in the case of interest to us, namely when $X$ is a cosimplicial GEM. Nonetheless, we hope they are of some independent interest. 
+
+Numerous properties of these operations follow directly from the earlier results, namely propositions \ref{prop on basic product}, \ref{prop on e1 steens 1}, \ref{prop on e1 steens 2} \ref{Prop on delta external} and \ref{Prop on einfty ops}. In addition, we have
 
 
 \begin{prop}
 \label{final generic prop for basic sseq ops}
-The operations 
-\[\delta_i:\Edownup{1}{}{X}{s}{t}\to \Edownup{1}{}{X}{s}{t+i}\]
+The operations $\delta_i:\Edownup{1}{}{X}{s}{t}\to \Edownup{1}{}{X}{s}{t+i}$
 are (the restriction of) the homotopy operations of \S\ref{Homotopy operations for simplicial commutative algebras} applied to the homotopy of the simplicial algebra $X^{s}$. Moreover, for each $s$, $\pi\uver_*X^s$ is a graded commutative algebra (again, c.f.\ \S\ref{Homotopy operations for simplicial commutative algebras}), and the operations $\mu$ and $\Sq^j$ on $E_2$ are the standard operations on the cohomotopy of the cosimplicial commutative algebra $\pi\uver_*X^s$. As such, the operations $\Sq^j$ make $\Edownup{2}{}{X}{}{}$ is an unstable left module over the homogeneous Steenrod algebra, and satisfy the evident unstableness condition and the Cartan formula.
 
 If $x\in \Edownup{1}{}{X}{s}{t}$ and $2\leq i \leq 2t$ (so that the $\delta^\textup{ext}_i$ operation that follows is defined), then $\delta_i\Sq^jx=0\in \Edownup{1}{}{X}{s+j}{2t+i}$. If also $y\in \Edownup{1}{}{X}{s'}{t'}$, and $2\leq i <t+t'$, then $\delta_i(xy)=0$.
 \end{prop}
-\noindent Numerous other properties of these operations follow directly from the earlier results, namely propositions \ref{prop on basic product}, \ref{prop on e1 steens 1}, \ref{prop on e1 steens 2} and \ref{Prop on delta external}.
 \begin{proof}[Proof of \ref{final generic prop for basic sseq ops}]
 Everything here is straightforward, and we will present the calculation 
 $\delta_i\Sq^jx=0$ as an example.
@@ -6882,8 +6928,9 @@ P^{j-1}:\left(\Edownup{r}{}{X}{s}{t}   \smash{{}\overset{\Sq^j_\textup{ext}}{\to
 [\,,]:\left(\Edownup{r}{}{X}{s}{t}\otimes \Edownup{r}{}{X}{s'}{t'}\smash{{}\overset{\mu_\textup{ext}}{\to}{}} \Edownup{r}{}{\quadgrad{2}F^\calc X}{s+s'}{t+t'}\smash{{}\overset{[,]_*}{\to} {}}
 \Edownup{r}{}{X}{s+s'}{t+t'}\right),
 \end{gather*}
-with the $\lambda_i$ potentially multi-valued functions,  defined when $1\leq i\leq \max\{n,t-(r-1)\}$ (resp.\ $0\leq i\leq \max\{n,t-(r-1)\}$), and single valued whenever $1\leq i\leq\min\{n+1,t+1-2(r-1)\}$.
-It is possible to state versions of all of the above theorems in this case. The author guesses that the operations $P\dhor^{k}$ will form an unstable left action of the Steenrod algebra for commutative algebras, but has not worked out the details.
+with the $\lambda_i$ potentially multi-valued functions,  defined when $1\leq i\leq \max\{n,t-(r-1)\}$ %(resp.\ $0\leq i\leq \max\{n,t-(r-1)\}$), 
+and single valued whenever $1\leq i\leq\min\{n+1,t+1-2(r-1)\}$.
+It should be possible to state versions of all of the above results in this case. The author guesses that the operations $P^{k}$ will form an unstable left action of the Steenrod algebra for commutative algebras, but has not worked out the details.
 
 %As $\Edownup{1}{}{X}{s}{t}$ is obtained from $E_0$ by taking homotopy in the simplicial direction, there are $\delta^\textup{ext}$-operations on $E_1$:
 %\[\delta^\textup{ext}_i:\Edownup{1}{}{X}{s}{t} \to \Edownup{1}{}{S_2X}{s}{t+i}\textup{ for }2\leq i\leq t.\]
@@ -6928,16 +6975,15 @@ It is possible to state versions of all of the above theorems in this case. The 
 \begin{Operations on the Bousfield-Kan spectral sequence}
 \section{\textbf{Operations in the Bousfield-Kan spectral sequence}}
 \label{Operations on the Bousfield-Kan spectral sequence}
-In this chapter,
-\todo{Search through and include  $\liealgs$ and $\restliealgs$, or maybe make global comment}
-we will define operations on the Bousfield-Kan spectral sequence of an object $X\in s\calc$ whenever $\calc$ is any of the categories $\algs$, $\liealgs$ or $\restliealgs$. We will always write $\calx$ for Radulescu-Banu's resolution of $X\in s\algcat$.
+In this chapter
+we will define operations on the Bousfield-Kan spectral sequence of an object $X\in s\calc$ whenever $\calc$ is any of the categories $\algs$, $\liealgs$ or $\restliealgs$. We will always write $\calx$ for Radulescu-Banu's resolution of $X\in s\algcat$. %As we have developed homology operations for the category $\calw(0)$, but not for the categories $\HA{\liealgs}$
 
 
 \subsection{An alternate definition of the Adams tower}
 \label{An alternate definition of the Adams tower}
 We'll now give an alternate definition of the Adams tower of \S\ref{sec:derWRTab}, given in \cite{BK_pairings_products.pdf}, which is more suited for the definition of spectral sequence operations in our setting.
 
-For $Z\in {\vect{}{}}^{\Delta_+}$, the category of coaugmented cosimplicial vector spaces, Bousfield and Kan write $VZ$ for a ``path-like construction'' \citeBOX[\S3.1]{BK_pairings_products.pdf} on $Z$ obtained by shifting $Z$ down and forgetting the 0th coface and codegeneracy. That is, $(VZ)^s:=(VZ)^{s+1}$, and:
+For $Z\in {\vect{}{}}^{\Delta_+}$, the category of coaugmented cosimplicial vector spaces, Bousfield and Kan write $VZ$ for a ``path-like construction'' \citeBOX[\S3.1]{BK_pairings_products.pdf} on $Z$ obtained by shifting $Z$ down and forgetting the $0^\textup{th}$ coface and codegeneracy. That is, $(VZ)^s:=(VZ)^{s+1}$, and:
 \begin{align*}
 \bigl((VZ)^s\overset{d^i}{\to} (VZ)^{s+1}\bigr)&:=\bigl(Z^{s+1}\overset{d^{i+1}}{\to} Z^{s+2}\bigr)\\
 \bigl((VZ)^s\overset{s^i}{\to} (VZ)^{s-1}\bigr)&:=\bigl(Z^{s+1}\overset{s^{i+1}}{\to} Z^{s}\bigr)
@@ -7312,15 +7358,15 @@ and the various external spectral sequence operations from $\E{}{r}{V}{}{}$ to e
 \end{gather*}
 with the $\deltav_i$ potentially multi-valued functions,  defined when $2\leq i\leq \max\{n,t-(r-1)\}$, and single-valued whenever $i\leq\min\{n+1,t+1-2(r-1)\}$, and the $\Sq^j$ potentially multi-valued functions with indeterminacy vanishing by $E_{2r-2}$\todo{say when vanishing}.  All of the functions that are  defined on $E_2$ are single valued, so it makes sense to state 
 \begin{prop}
-\label{adams operations are right for comm} When $\calc=\algs$,
+\label{adams operations are right for comm}
+When $\calc=\algs$,
 under the identification $\E{}{2}{\calx}{s}{t}\cong H^*_{\calw(0)}H^*_{\algs}X$, the operations just defined coincide with the  ${\calw(0)}$-cohomology operations defined in \S\ref{Cohomology Operations for W and U}.
 \end{prop}
 \todo{write something about commutation, and maybe make this an $E_1$-level thing}
-\noindent We will prove this result in \S\ref{proof of prop: adams operations are right for comm}. It implies that from $E_2$ the operations just defined have the properties cataloged in propositions \ref{Wn Halg omnibus}, \ref{operations on goerss homology} and \ref{rearrange horiz and vert ops} --- the $\deltav_i$ satisfy the $\delta$-Adem relations, the $\Sqh^j$ and $\mu$ satisfy the properties of such operations on Lie algebra cohomology, and there is a commutation relation between the $\deltav$ and the $\Sqh$ and $\mu$. These relations persist to relations on the higher pages.
+\noindent We will prove this result in \S\ref{proof of prop: adams operations are right for comm}. It implies that from $E_2$ the operations just defined have the properties cataloged in propositions \ref{Wn Halg omnibus}, \ref{operations on goerss homology} and \ref{rearrange horiz and vert ops} --- the $\deltav_i$ satisfy the $\delta$-Adem relations, the $\Sqh^j$ and $\mu$ satisfy the properties of such operations on Lie algebra cohomology, and there is a commutation relation between the $\deltav$ and the $\Sqh$ and $\mu$. These relations persist to relations on the higher pages (modulo appropriate indeterminacy).
 
 
-\noindent Numerous other properties of these operations follow directly from the earlier results, namely propositions \ref{prop on basic product}, \ref{prop on e1 steens 1}, \ref{prop on e1 steens 2} and \ref{Prop on delta external}, and these are summarized in the following four corollaries:
-
+The following results follow from propositions \ref{prop on basic product}, \ref{prop on e1 steens 1}, \ref{prop on e1 steens 2}, \ref{Prop on delta external} and \ref{Prop on einfty ops} respectively, for $X\in s\algs$ and $\calx\in cs\algs$ its Radulescu-Banu resolution:
 \begin{cor}[(of \ref{prop on basic product})]
 \label{prop on basic product composed with lift}
 For each $r\geq2$, $\mu$ satisfies the Liebniz formula. \todo{Just $r\geq2$? Global thing?}
@@ -7356,24 +7402,22 @@ If $i\leq \max\{n,t+1-2(r-1)\}$, so that $\deltav_i x$ is single-valued, then so
 
 \begin{cor}[(of \ref{Prop on einfty ops})]
 \label{Prop on einfty ops composed with lift}
-\todo{Write something like this, make old version in unlifted case.}
-The operations $\deltav_i:\E{}{\infty}{\calx}{s}{t}\to \E{}{\infty}{\calx}{s+1}{t+i+1}$, for $i\leq t-s$, agree with the homotopy operations $\deltav_i:\pi_{t-s}X\hat{\ }\to \pi_{t-s+i}X\hat{\ }$ on the target of the spectral sequence, and similarly for the product at $E_\infty$.
+For $2\leq i\leq t-s$, the operations $\deltav_i:\E{}{\infty}{\calx}{s}{t}\to \E{}{\infty}{\calx}{s+1}{t+i+1}$ agree with the homotopy operations $\deltav_i:\pi_{t-s}X\to \pi_{t-s+i}X$ on the target of the spectral sequence. Similarly, the product at $\E{}{\infty}{\calx}{}{}$ agrees with the product on the target.
 \end{cor}
 
 
 
-\begin{shaded}\tiny
-When $\calc=\liealgs$ (resp.\ $\calc=\restliealgs$), there are operations:
-\[\begin{tabular}{cll}
-$\lambdav_i:\left(\Edownup{r}{}{X}{s}{t} \smash{{}\overset{\lambda_i^\textup{ext}}{\to}{}} \Edownup{r}{}{\quadgrad{2}F^\calc X}{s}{t+i}\smash{{}\overset{L}{\to} {}}
-\Edownup{r}{}{X}{s+1}{t+i+1}\right)$,
+When $\calc=\liealgs$ or $\calc=\restliealgs$ there are operations
+\begin{gather*}
+\lambdav_i:\left(\Edownup{r}{}{X}{s}{t} \smash{{}\overset{\lambda_i^\textup{ext}}{\to}{}} \Edownup{r}{}{\quadgrad{2}F^\calc X}{s}{t+i}\smash{{}\overset{L}{\to} {}}
+\Edownup{r}{}{X}{s+1}{t+i+1}\right),
 \\
-$P^{j}:\left(\Edownup{r}{}{X}{s}{t}   \smash{{}\overset{\Sq^j_\textup{ext}}{\to}{}} \Edownup{r}{}{\quadgrad{2}F^\calc X}{s+j}{2t}\smash{{}\overset{L}{\to} {}}
-\Edownup{r}{}{X}{s+j+1}{2t+1}\right)$,\\
-$[\,,]:\left(\Edownup{r}{}{X}{s}{t}\otimes \Edownup{r}{}{X}{s'}{t'}\smash{{}\overset{\mu_\textup{ext}}{\to}{}} \Edownup{r}{}{\quadgrad{2}F^\calc X}{s+s'}{t+t'}\smash{{}\overset{L}{\to} {}}
-\Edownup{r}{}{X}{s+s'+1}{t+t'+1}\right)$,
-\end{tabular}\]
-with the $\lambdav_i$ potentially multi-valued functions,  defined when $1\leq i\leq \max\{n,t-(r-1)\}$ (resp.\ $0\leq i\leq \max\{n,t-(r-1)\}$), and single valued whenever $i\leq\min\{n+1,t+1-2(r-1)\}$, and the $\Sq^j$ potentially multi-valued functions with indeterminacy vanishing by $E_{2r-2}$.
+\Ph^{j}:\left(\Edownup{r}{}{X}{s}{t}   \smash{{}\overset{\Sq^j_\textup{ext}}{\to}{}} \Edownup{r}{}{\quadgrad{2}F^\calc X}{s+j}{2t}\smash{{}\overset{L}{\to} {}}
+\Edownup{r}{}{X}{s+j+1}{2t+1}\right),\\
+[\,,]:\left(\Edownup{r}{}{X}{s}{t}\otimes \Edownup{r}{}{X}{s'}{t'}\smash{{}\overset{\mu_\textup{ext}}{\to}{}} \Edownup{r}{}{\quadgrad{2}F^\calc X}{s+s'}{t+t'}\smash{{}\overset{L}{\to} {}}
+\Edownup{r}{}{X}{s+s'+1}{t+t'+1}\right),
+\end{gather*}
+with the $\lambdav_i$ potentially multi-valued functions,  defined when $1\leq i\leq \max\{n,t-(r-1)\}$, and single valued whenever $i\leq\min\{n+1,t+1-2(r-1)\}$, and the $\Sq^j$ potentially multi-valued functions with indeterminacy vanishing by $E_{2r-2}$. We will not be able to prove a version of Proposition \ref{adams operations are right for comm} in the present work, since we have not derived a version of \S\ref{Cohomology Operations for W and U} for the categories $s\liealgs$ and $s\restliealgs$. Nonetheless, these operations will satisfy analogues of corollaries \ref{prop on basic product composed with lift}-\ref{Prop on einfty ops composed with lift}. The purpose of rest of this section is to give the necessary constructions to  prove Proposition \ref{adams operations are right for comm}, so that in the following, we will work only in the category $\calc=\algs$. However, the constructions, including of the following two- and three-cell complexes, generalize to the categories of Lie algebras.
 
 
 
@@ -7413,39 +7457,38 @@ with the $\lambdav_i$ potentially multi-valued functions,  defined when $1\leq i
 %\deltav_i(d_rx)+\Sq^{t-i+2}(x),&\textup{if $i>t-s$ and $i=t-(r-1)$}.
 %\end{cases}\]
 %
-
-\begin{cor}
-\label{cor on meaning of equation for ddeltai vert}
-Suppose that $x\in \E{}{r}{\calx}{s}{t}$ and $2\leq i\leq \max\{t-s,t-(r-1)\}$, so that $\deltav_ix $ is defined.
-\[d_r\deltav_i(x)=\begin{cases}
-\deltav_i(d_rx),&\textup{if $i< t-s$ or $i<t-(r-1)$};\\
-\deltav_i(d_rx),&\textup{if $i=t-s$ and $s>0$};\\
-\deltav_i(d_rx)+\mu(x\otimes d_rx),&\textup{if $i=t-s$ and  $s=0$};\\
-\deltav_i(d_rx)+\Sqv^{t-i+2}(x),&\textup{if $i>t-s$ and $i=t-(r-1)$}.
-\end{cases}\]
-\end{cor}
-
-\begin{thm}\hfil
-\begin{enumerate}\squishlist
-\setlength{\parindent}{.25in}
-\item When $i<t-s$, $d_r\deltav_i(x)=\deltav_i(d_rx)$.
-\item When $i=t-s$, $d_r\deltav_i(x)=\begin{cases}
-\deltav_i(d_rx),&\textup{if }s>0;\\
-\deltav_i(d_rx)+x\times d_rx,&\textup{if }s=0.
-%\\,&\textup{if }
-\end{cases}$
-\item When $i>t-s$, $d_r\deltav_i(x)=\begin{cases}
-\deltav_i(d_rx),&\textup{if }r<t-i+1;\\
-\deltav_i(d_rx)+\Sq^{t-i+2}(x),&\textup{if }r=t-i+1.
-\end{cases}$
-\end{enumerate}
-The operations $\deltav_i:E^\infty_{-s,t}\to E^\infty_{-s-1,t+i+1}$, for $i\leq t-s$, agree with the homotopy operations $\deltav_i:\pi_{t-s}\to \pi_{t-s+i}$ on the target of the spectral sequence, and similarly for the product at $E^\infty$.
-
-The $\deltav_i$ and $\Sq^j$ satisfy the expected Adem relations, and the relation $\deltav_i\Sq^jx=0$ (when?). The top Steenrod operation, $\Sq^{s+1}$, equals the squaring operation under the product. (more: identify every ingredient in \citeBOX[{?2.1}]{DwyerHtpyOpsSimpComAlg.pdf}, and in \citeBOX[{?5.3}]{PriddySimplicialLie.pdf}, including what happens on the axes.)
-
-For $x\in E^r_{-s,t}(\calx )$, $\Sq^i(x)$ survives to $E^{2r-1}$, and moreover, $d_{2r-1}(\Sq^ix)=\Sq^{i+r-1}(d_rx)$ modulo indeterminacy.  [The bottom operation, $\Sq^1(x)$, is zero whenever $t>0$\textbf{ silly if in connected case, should just say `is zero'}, or really just say exactly when everything is zero, page by page]. In particular, all Steenrod operations commute with $d_1$, in that $d_1\Sq^ix=\Sq^id_1x$.
-\end{thm}
-\end{shaded}
+%
+%\begin{cor}
+%\label{cor on meaning of equation for ddeltai vert}
+%Suppose that $x\in \E{}{r}{\calx}{s}{t}$ and $2\leq i\leq \max\{t-s,t-(r-1)\}$, so that $\deltav_ix $ is defined.
+%\[d_r\deltav_i(x)=\begin{cases}
+%\deltav_i(d_rx),&\textup{if $i< t-s$ or $i<t-(r-1)$};\\
+%\deltav_i(d_rx),&\textup{if $i=t-s$ and $s>0$};\\
+%\deltav_i(d_rx)+\mu(x\otimes d_rx),&\textup{if $i=t-s$ and  $s=0$};\\
+%\deltav_i(d_rx)+\Sqv^{t-i+2}(x),&\textup{if $i>t-s$ and $i=t-(r-1)$}.
+%\end{cases}\]
+%\end{cor}
+%
+%\begin{thm}\hfil
+%\begin{enumerate}\squishlist
+%\setlength{\parindent}{.25in}
+%\item When $i<t-s$, $d_r\deltav_i(x)=\deltav_i(d_rx)$.
+%\item When $i=t-s$, $d_r\deltav_i(x)=\begin{cases}
+%\deltav_i(d_rx),&\textup{if }s>0;\\
+%\deltav_i(d_rx)+x\times d_rx,&\textup{if }s=0.
+%%\\,&\textup{if }
+%\end{cases}$
+%\item When $i>t-s$, $d_r\deltav_i(x)=\begin{cases}
+%\deltav_i(d_rx),&\textup{if }r<t-i+1;\\
+%\deltav_i(d_rx)+\Sq^{t-i+2}(x),&\textup{if }r=t-i+1.
+%\end{cases}$
+%\end{enumerate}
+%The operations $\deltav_i:E^\infty_{-s,t}\to E^\infty_{-s-1,t+i+1}$, for $i\leq t-s$, agree with the homotopy operations $\deltav_i:\pi_{t-s}\to \pi_{t-s+i}$ on the target of the spectral sequence, and similarly for the product at $E^\infty$.
+%
+%The $\deltav_i$ and $\Sq^j$ satisfy the expected Adem relations, and the relation $\deltav_i\Sq^jx=0$ (when?). The top Steenrod operation, $\Sq^{s+1}$, equals the squaring operation under the product. (more: identify every ingredient in \citeBOX[{?2.1}]{DwyerHtpyOpsSimpComAlg.pdf}, and in \citeBOX[{?5.3}]{PriddySimplicialLie.pdf}, including what happens on the axes.)
+%
+%For $x\in E^r_{-s,t}(\calx )$, $\Sq^i(x)$ survives to $E^{2r-1}$, and moreover, $d_{2r-1}(\Sq^ix)=\Sq^{i+r-1}(d_rx)$ modulo indeterminacy.  [The bottom operation, $\Sq^1(x)$, is zero whenever $t>0$\textbf{ silly if in connected case, should just say `is zero'}, or really just say exactly when everything is zero, page by page]. In particular, all Steenrod operations commute with $d_1$, in that $d_1\Sq^ix=\Sq^id_1x$.
+%\end{thm}
 
 
 
@@ -7457,9 +7500,9 @@ For $x\in E^r_{-s,t}(\calx )$, $\Sq^i(x)$ survives to $E^{2r-1}$, and moreover, 
 
 
 \subsection{A chain-level construction $\xi_\textup{res}^\star$ inducing $\xi_{\HA{\calc}}$}\label{sec xires}
-In \S\ref{chain level structure}, we defined a map
+Let $\calc=\algs$. In \S\ref{chain level structure}, we defined
 \[\xi_{\HA{\calc}}:B^{s+1}_{\HA{\calc}}H^*_{\calc}X\to B^{s}_{\HA{\calc}}H^*_{\calc}X\smashcoprod B^{s}_{\HA{\calc}}H^*_{\calc}X,\]
-which we used in \S\ref{Horizontal Steenrod operations and a product for HWn} to define Steenrod operations and a product on $H^{*}_{\HA{\calc}}H^*_{\calc}X$ when $\calc=\algs$. \todo{No such work done in Lie case, yet.}
+and in \S\ref{Horizontal Steenrod operations and a product for HWn} we used this map to define Steenrod operations and a product on $H^{*}_{\HA{\calc}}H^*_{\calc}X$. 
 We will now construct, at the level of Radulescu-Banu's resolution, a map
 \[\xi_\textup{res}^\star:\calx^s\Lsmashprod \calx^s\to V\calx^s,\]
 which, under the isomorphisms of Theorem \ref{identify E2 with derived Q} and Proposition \ref{smash prod}, induces the map $\xi_{\HA{\calc}}$ on cohomology:
@@ -7557,10 +7600,10 @@ The map $\epsilon\circ \overline{\xi}_\textup{res}^\star$ equals the following s
 where the $\pi_i$ are the two projections $\calx^{\times2}\to \calx$.
 \end{lem}
 
-\subsection{A three-cell complex with non-trivial pairing}\label{three cell complex}
-Fix $t,t'\geq1$. There is a map $\mathbb{S}^{\calc}_{t+t'}\to \mathbb{S}^{\calc}_t\sqcup \mathbb{S}^{\calc}_{t'}$ sending the fundamental class $z_{t+t'}$ to the shuffle product of the two fundamental classes in the codomain:
+\subsection{A three-cell complex with non-trivial bracket}\label{three cell complex}
+Let $\calc=\algs$, and fix $t,t'\geq1$. There is a map $\mathbb{S}^{\calc}_{t+t'}\to \mathbb{S}^{\calc}_t\sqcup \mathbb{S}^{\calc}_{t'}$ sending the fundamental class $z_{t+t'}$ to the shuffle product of the two fundamental classes in the codomain:
 \[z_{t+t'}\mapsto \mu(\nabla(z_t\otimes z_{t'})),\]
-where $\mu$ is the structural pairing in $\calc$. Consider the complex $J_{t,t'}$ formed as the pushout:
+where $\mu$ is the structural pairing in $\algs$. Consider the complex $J_{t,t'}$ formed as the pushout:
 \[\xymatrix@R=4mm{
 \mathbb{S}^{\calc}_{t+t'}\ar[r]
 \ar@{ >->}[d]
@@ -7574,12 +7617,11 @@ J_{t,t'}%r2c2
 The left vertical is evidently almost free (and thus a cofibration), and thus constructed map $\mathbb{S}^{\calc}_t\sqcup \mathbb{S}^{\calc}_{t'}\to J_{t,t'}$ is an almost free map.
 The generating subspace $V_{t+t'+1}\subseteq (J_{t,t'})_{t+t'+1}$ has a $t+t'+1$-dimensional generator $h_{t,t'}$, the image of the cone class $h$ in $(\mathbb{S}^{\calc}_{t+t'})_{t+t'+1}$ (c.f.\ \S\ref{The Dold-Kan correspondence}). Moreover, the object $J_{t,t'}$ is cofibrant, and $h_{t,t'}$ becomes a cycle in $Q^\calc J_{t,t'}$: $d_ih_{t,t'}=0$ for $i\geq1$, and $d_0h_{t,t'}:=z_{t+t'}$, which we  have identified with the decomposable element $\mu(\nabla(z_t\otimes z_{t'}))$ in passing to the pushout.
 
-The homology long exact sequence shows that $H_*J_{t,t'}$ is three-dimensional, containing classes $ z_t$, $ z_{t'}$ and $h_{t,t'}$.
+The homology long exact sequence shows that $H_*J_{t,t'}$ is three-dimensional, containing classes $ z_t$, $ z_{t'}$ and $h_{t,t'}$. Moreover, there is a cooperation $\Delta$ on $H_{*}^{\calc}$ dual to the $S(\LieOperad)$ structure map on cohomology, and we prove:
 \begin{prop}
 \label{prop on three cell}
 Under $\Delta:H_*^{\calc}J_{t,t'}\to (S^2H_*^{\calc}J_{t,t'})_{*-1}$, $h_{t,t'}\mapsto\imath_t\otimes\imath_{t'}+\imath_{t'}\otimes\imath_t$. All other cooperations on $H_*^{\calc}J_{t,t'}$ are zero.
 \end{prop}
-\todo[inline]{ Say `works when $\calc=\algs$ and $\calc=\liealgs$'}
 \begin{proof}
 The representative $g$ has the property that $d_0(g)=\mu(\Nabla(\imath_t\otimes\imath_{t'}))$ and $d_i(g)=0$ for $i>0$. By Lemma \ref{psi is basically the quadratic part} and the description of $\quadratic_\calc$ in \S\ref{quadratic part section}:
 \[\psi_\calc(g)=
@@ -7614,7 +7656,7 @@ The representative $g$ has the property that $d_0(g)=\mu(\Nabla(\imath_t\otimes\
 %where the outer rectangle commutes since in $L^{\times2}$, $(a,0)\cdot(0,b)=(0,0)$. This gives a map $C_{n,m}\to c_2(L^{\times2})$ whose restriction to the subcomplex $S^n\sqcup S^m$ gives the homotopy classes $\alpha$ and $\beta$. The image $g_{\alpha,\beta}$ of the class $g\in(C_{n,m})_{n+m+1}$ is then an explicit representative for the homology class sought.
 
 \subsection{A chain level construction of $j^\star_{\HA{\calc}}$}\label{chain level construction of j}
-We can use this cofibration to construct, at the chain level, the image under 
+Let $\calc=\algs$. We can use the cofibration just defined to construct, at the chain level, the image under 
 \[j^\star_{\HA{\calc}}:\Prim^{\HC{\calc}}_t(HY)\otimes \Prim^{\HC{\calc}}_{t'}(HZ)\to \Prim^{\HC{\calc}}_{t+t'+1}(HY\smashprod HZ)\]
 of a tensor product $\alpha\otimes\beta$ of \emph{spherical} homology classes. Abbreviating $H_*^\calc$ to $H$ and $\Prim^{\HC{\calc}}$ to $\Prim$:
 \begin{prop}
@@ -7746,7 +7788,7 @@ c(\overline{V}\calx ^{s-1})\makebox[0cm][l]{\,$=\calx ^s.$}\phantom{=}%r2c4
 The composite $J_{t,t'}\to c(\overline{V}\calx ^{s-1}\Times \overline{V}\calx ^{s-1})$ equals $\overline{F}(\epsilon\alpha,\epsilon\beta)$, due to the naturality of $\overline{F}$. By definition of $\overline{F}$, the composite $\mathbb{S}^{\calc}_t\to c(\overline{V}\calx ^{s-1}\Times \overline{V}\calx ^{s-1})$ equals $\widetilde{(\epsilon\alpha,0)}$. The naturality of the operation $\alpha\mapsto\widetilde{\alpha} $ of \S\ref{Cofibrant replacement via the small object argument} finishes the proof.
 \end{proof}
 \subsection{A two-cell complex with non-trivial $P^i$ operation}\label{two-cell complex for the deltas}
-In this section, we give a construction of a two-cell complex whose cohomology has a $P^i$ connecting the two cells.
+Let $\calc=\algs$. In this section, we give a construction of a two-cell complex whose cohomology has a $P^i$ connecting the two cells.
 Fix $t,i$ with  $2\leq i \leq t$. There is a map $\mathbb{S}^{\calc}_{t+i}\to \mathbb{S}^{\calc}_t$ defined by
 \[z_{t+i}\mapsto \mu(\nabla_{t-i}(z_t\otimes z_t)),\]
 where $\mu$ is the structural pairing in $\calc$. Consider the complex $\Theta_{t,i}$ formed as the pushout:
@@ -7774,6 +7816,7 @@ degenerates to $\sigma_i((P^k)^*h_{t,i})=\sigma_i^\textup{ext}\imath_t$.
 \end{proof}
 
 \subsection{A chain level construction of $\theta^\star_i$}
+Let $\calc=\algs$, and recall the functions $\theta^\star_i$ of Proposition \ref{prop on thetaistar}.
 \begin{prop}
 \label{propOnKoszulDelta}
 For $2\leq i\leq t$, there is a function
@@ -7835,7 +7878,7 @@ These conditions suffice to identify $G(\imath_t)$.
 
 \subsection{Proof of Proposition \ref{adams operations are right for comm}} 
 \label{proof of prop: adams operations are right for comm}
-Proposition \ref{adams operations are right for comm} follows immediately from the following two commutative diagrams. In each, the bottom row is that used to define the cohomology operations on the derived functors with which the $E_2$-page can be identified, and the top composite is that used to define the spectral sequence operations (after applying $N\dhor^*$ and using the inverse of the composite of Proposition \ref{BK D1 is awesome}).
+Let $\calc=\algs$. Proposition \ref{adams operations are right for comm} follows immediately from the following two commutative diagrams. In each, the bottom row is that used to define the cohomology operations on the derived functors with which the $E_2$-page can be identified, and the top composite is that used to define the spectral sequence operations (after applying $N\dhor^*$ and using the inverse of the composite of Proposition \ref{BK D1 is awesome}).
 \begin{prop}
 \label{prop for product compat}
 There is a commuting diagram (writing $\frakt=t+t'$):
@@ -7884,7 +7927,7 @@ H^\calc_{t+i+1}\calx^s \ar@{=}[r]
 }\]
 \end{prop}
 In the following proofs, we will write $\calx$ for $\calx^s$, $V$ for $V\calx^s$, $\overline{V}$ for $\overline{V}\calx^s$, $\overline{\Dendo}^1\calx$ for $\overline{\Dendo}^1\calx^s$, $H$ for $H_*^{\calc}$, $\pi_*$ for $\pi\uver_*$, $Q$ for $Q^\calc$ and $\Prim$ for $\Prim^{\HC{\calc}}$.
-\begin{proof}[Proof of \ref{prop for product compat}]
+\begin{proof}[Proof of \ref{prop for product compat} and \ref{prop for delta compat}]
 It will help to modify and augment this diagram a little. Indeed, for each cardinality one subset $\{(\alpha,\beta)\}\subseteq \hom_{s\calc}(\mathbb{S}^\calc_t,\calx )\times\hom_{s\calc}(\mathbb{S}^\calc_{t'},\calx )$, there is a diagram:
 \[\mathclap{\xymatrix@R=4mm{
 \{(\alpha,\beta)\}
