@@ -1,6 +1,6 @@
 % !TEX root = z_output/unstable_Lie_algs.tex
 \documentclass[11pt]{amsart} \renewcommand{\baselinestretch}{1.4}
-\newcommand{\xIncludeAll}{}%
+\newcommand{\IncludeAll}{}%
 \newcommand{\xShrinkPages}{}%
 \newcommand{\xPostponeContents}{}%
 \ifx\ShrinkPages\undefined\else\usepackage[paperheight=220mm,paperwidth=160mm]{geometry}\fi%220/160 height options
@@ -6420,7 +6420,8 @@ The easiest of our constructions is that of an external product, using
 the chain-level formula
 \[x\otimes y\mapsto\rho\Nabla D^0(x\otimes y).\]
 Indeed, both $\Nabla$ and $D^0$ are chain maps respecting filtration, and thus:
-\begin{lem}
+\begin{prop}
+\label{prop on basic product}
 The map $\rho\Nabla D^0(x\otimes y):CX\otimes CX$ induces a pairing
 \[\mu_\textup{ext}:\Edownup{r}{}{X}{s}{t}\otimes \Edownup{r}{}{X}{s'}{t'}\to \Edownup{r}{}{S_2X}{s+s'}{t+t'}\]
 for each $r$, satisfying the Liebniz formula. Under the identifications $\Edownup{2}{}{X}{s}{t}\cong \pi\dhor^s\pi\uver_t X$ and $\Edownup{2}{}{S_2X}{s}{t}\cong \pi\dhor^s\pi\uver_t S_2X$, $\mu_\textup{ext}$ corresponds to the composite
@@ -6429,7 +6430,7 @@ for each $r$, satisfying the Liebniz formula. Under the identifications $\Edownu
 \pi\dhor^*(S_2\pi\uver_* X)
 \overset{\pi\dhor^{*}(\widetilde{\nabla})}{\to}
 \pi\dhor^{*}\pi\uver_{*}S_2 X.\]
-\end{lem}
+\end{prop}
 \noindent We will write $x\times y$ for $\mu_\textup{ext}(x\otimes y)$.
 %\begin{shaded}\tiny
 %\begin{proof}
@@ -6750,7 +6751,7 @@ Write $H:=\rho(\mathbb{D}_{n-i-1}(x\otimes dy)+\mathbb{D}_{n-i}(dy\otimes y)+\ma
 %\[dH=\textup{DEL}_i(x)-\textup{DEL}_i(x+dy)+T_1+T_2+T_3,\]
 %\normalsize
 %where $\textup{DEL}_i(x)-\textup{DEL}_i(x+dy)\in F^s$ is the quantity of interest, and
-%\begin{align*}
+%\begin+{align*}
 %\textup{DEL}_i(x)-\textup{DEL}_i(x+&dy)=dH+T_1+T_2+T_3\textup{, \ where}
 %\\
 %T_1:=\rho\Nabla(D^{i-n-2}(y\otimes y))&\begin{cases}
@@ -6800,7 +6801,7 @@ dH
 =
 \textup{DEL}_i(x)-\textup{DEL}_i(x+dy)+\textup{BC},%
 \]
-where $\textup{BC}=T_1+T_2+T_3$ is an example of the bounding chain appearing in the proof of Propositions \ref{prop on e1 steens 1} and \ref{prop on e1 steens 2}, so that
+where $\textup{BC}:=T_1+T_2+T_3$ is an example of the bounding chain appearing in the proof of Propositions \ref{prop on e1 steens 1} and \ref{prop on e1 steens 2}, so that
 modulo $F^{s+t-i+2}$:
 \[d(\textup{DEL}_i(x))-d(\textup{DEL}_i(x+dy))
 \equiv
@@ -6842,87 +6843,88 @@ This says exactly that the indeterminacy of $\delta_i^\textup{ext}$ maps \emph{o
 
 \subsection{The case of a cosimplicial simplicial commutative algebra}
 \label{The case of a cosimplicial simplicial commutative algebra}
-\hfil
-\todo[inline]{choose scope for this section}
-Suppose that $X\in cs\calc$. When $\calc=\algs$, there are operations:
-\[\begin{tabular}{cll}
-$\deltav_i:\left(\Edownup{r}{}{X}{s}{t} \smash{{}\overset{\delta_i^\textup{ext}}{\to}{}} \Edownup{r}{}{\quadgrad{2}F^\calc X}{s}{t+i}\overset{\mu_*}{\to} 
-\Edownup{r}{}{X}{s}{t+i}\right)$,
+Suppose that $X\in cs\algs$. We may define operations:
+\begin{gather*}
+\deltav_i:\left(\Edownup{r}{}{X}{s}{t} \smash{{}\overset{\delta_i^\textup{ext}}{\to}{}} \Edownup{r}{}{\quadgrad{2}F^\calc X}{s}{t+i}\overset{\mu_*}{\to} 
+\Edownup{r}{}{X}{s}{t+i}\right),
 \\
-$\Sqh^j:\left(\Edownup{r}{}{X}{s}{t}   \smash{{}\overset{\Sq^j_\textup{ext}}{\to}{}} \Edownup{r}{}{\quadgrad{2}F^\calc X}{s+j}{2t}\overset{\mu_*}{\to} 
-\Edownup{r}{}{X}{s+j}{2t}\right)$,\\
-$\mu:\left(\Edownup{r}{}{X}{s}{t}\otimes \Edownup{r}{}{X}{s'}{t'}\smash{{}\overset{\mu_\textup{ext}}{\to}{}} \Edownup{r}{}{\quadgrad{2}F^\calc X}{s+s'}{t+t'}\overset{\mu_*}{\to} 
-\Edownup{r}{}{X}{s+s'}{t+t'}\right)$,
-\end{tabular}\]
-with the $\deltav_i$ potentially multi-valued functions,  defined when $2\leq i\leq \max\{n,t-(r-1)\}$, and single valued whenever $i\leq\min\{n+1,t+1-2(r-1)\}$. 
+\Sqh^j:\left(\Edownup{r}{}{X}{s}{t}   \smash{{}\overset{\Sq^j_\textup{ext}}{\to}{}} \Edownup{r}{}{\quadgrad{2}F^\calc X}{s+j}{2t}\overset{\mu_*}{\to} 
+\Edownup{r}{}{X}{s+j}{2t}\right),\\
+\mu:\left(\Edownup{r}{}{X}{s}{t}\otimes \Edownup{r}{}{X}{s'}{t'}\smash{{}\overset{\mu_\textup{ext}}{\to}{}} \Edownup{r}{}{\quadgrad{2}F^\calc X}{s+s'}{t+t'}\overset{\mu_*}{\to} 
+\Edownup{r}{}{X}{s+s'}{t+t'}\right),
+\end{gather*}
+with the $\deltav_i$ potentially multi-valued functions,  defined when $2\leq i\leq \max\{n,t-(r-1)\}$, and single valued whenever $2\leq i\leq\min\{n+1,t+1-2(r-1)\}$. 
 
-\begin{shaded}\tiny
-When $\calc=\liealgs$ (resp.\ $\calc=\restliealgs$), there are operations:
-\[\begin{tabular}{cll}
-$\lambdav_i:\left(\Edownup{r}{}{X}{s}{t} \smash{{}\overset{\lambda_i^\textup{ext}}{\to}{}} \Edownup{r}{}{\quadgrad{2}F^\calc X}{s}{t+i}\smash{{}\overset{[,]_*}{\to} {}}
-\Edownup{r}{}{X}{s}{t+i}\right)$,
-\\
-$\Ph^{j-1}:\left(\Edownup{r}{}{X}{s}{t}   \smash{{}\overset{\Sq^j_\textup{ext}}{\to}{}} \Edownup{r}{}{\quadgrad{2}F^\calc X}{s+j}{2t}\smash{{}\overset{[,]_*}{\to} {}}
-\Edownup{r}{}{X}{s+j}{2t}\right)$,\\
-$[\,,]:\left(\Edownup{r}{}{X}{s}{t}\otimes \Edownup{r}{}{X}{s'}{t'}\smash{{}\overset{\mu_\textup{ext}}{\to}{}} \Edownup{r}{}{\quadgrad{2}F^\calc X}{s+s'}{t+t'}\smash{{}\overset{[,]_*}{\to} {}}
-\Edownup{r}{}{X}{s+s'}{t+t'}\right)$,
-\end{tabular}\]
-with the $\lambdav_i$ potentially multi-valued functions,  defined when $1\leq i\leq \max\{n,t-(r-1)\}$ (resp.\ $0\leq i\leq \max\{n,t-(r-1)\}$), and single valued whenever $i\leq\min\{n+1,t+1-2(r-1)\}$.
-\end{shaded}
-
-In this section, we will report the results that follow in this generic case, in the hope they are of some independent interest. These operations will not be used in rest of the essay, as they will equal zero in the case of interest to us. That is, whenever $A=\calx$ is Radulescu-Banu's resolution of some $X\in s\algs$, the results of \S\ref{Operations on the Bousfield-Kan spectral sequence} will show that  the map $\mu_*:\Edownup{r}{}{S_2\calx}{s}{t+i}\to \Edownup{r}{}{\calx}{s}{t+i}$ can be lifted up one filtration. Morally, this should occur is just that $\calx$ is a resolution by GEMs, but nonetheless we will need to work with  Radulescu-Banu's resolution directly 
+In this section, we will report the results that follow in this generic case, in the hope they are of some independent interest. These operations will not be used in rest of the essay, as they will equal zero in the case of interest to us. That is, whenever $A=\calx$ is Radulescu-Banu's resolution of some $X\in s\algs$, the results of \S\ref{Operations on the Bousfield-Kan spectral sequence} will show that  the map $\mu_*:\Edownup{r}{}{S_2\calx}{s}{t+i}\to \Edownup{r}{}{\calx}{s}{t+i}$ can be lifted up one filtration. Morally, this should occur is just that $\calx$ is a resolution by GEMs, but nonetheless we will need to work with  Radulescu-Banu's resolution directly.
 
 
 \begin{prop}
-Suppose that $X\in cs\algs$, $x\in \Edownup{1}{}{X}{s}{t}$, and $2\leq i <2t$ (so that the $\delta^\textup{ext}_i$ operation that follows is non-top).
-Then  $(\mu_*\delta^\textup{ext}_i)(\mu_*\Sq_\textup{ext}^j)x=0\in \Edownup{1}{}{X}{s+j}{2t+i}$.
+\label{final generic prop for basic sseq ops}
+The operations 
+\[\delta_i:\Edownup{1}{}{X}{s}{t}\to \Edownup{1}{}{X}{s}{t+i}\]
+are (the restriction of) the homotopy operations of \S\ref{Homotopy operations for simplicial commutative algebras} applied to the homotopy of the simplicial algebra $X^{s}$. Moreover, for each $s$, $\pi\uver_*X^s$ is a graded commutative algebra (again, c.f.\ \S\ref{Homotopy operations for simplicial commutative algebras}), and the operations $\mu$ and $\Sq^j$ on $E_2$ are the standard operations on the cohomotopy of the cosimplicial commutative algebra $\pi\uver_*X^s$. As such, the operations $\Sq^j$ make $\Edownup{2}{}{X}{}{}$ is an unstable left module over the homogeneous Steenrod algebra, and satisfy the evident unstableness condition and the Cartan formula.
+
+If $x\in \Edownup{1}{}{X}{s}{t}$ and $2\leq i \leq 2t$ (so that the $\delta^\textup{ext}_i$ operation that follows is defined), then $\delta_i\Sq^jx=0\in \Edownup{1}{}{X}{s+j}{2t+i}$. If also $y\in \Edownup{1}{}{X}{s'}{t'}$, and $2\leq i <t+t'$, then $\delta_i(xy)=0$.
 \end{prop}
-\begin{proof}
-Suppose that $X\in Z^1_{-s,t}$. We can assume that $x\in X^s_t$ for this purpose, so that $d\dver x=0$. Then $\Sq^j_\textup{ext}x$ is represented by the image of $D^{s-j}(x\otimes x)+D^{s-j+1}(x\otimes d\dhor x)$ under the composite
-\[N^{s+j}(N_tX\otimes N_tX)\overset{\widetilde{\Nabla}}{\to}N^{s+j}N_{2t}(X\otimes_{\Sigma_2} X)\overset{\mu}{\to}N^{s+j}N_{2t}(X)\overset{\delta^\textup{ext}_i}{\to}N^{s+j}N_{2t+i}(X)\]
-%or maybe I'd prefer to write that it is represented by the image of ``an appropriate tensor product of cofaces of $x\in (\pi_tX)^s$'', under the composite
-%\[N^{s+j}(\pi_tX\otimes \pi_tX)\overset{\Nabla\textup{-product}}{\to}N^{s+j}\pi_{2t}(X)\overset{\delta_i}{\to}N^{s+j}\pi_{2t+i}(X).\]
-but Proposition \ref{omnibus on htpy of simp algs} states that non-top $\delta$-operations annihilate products, so this composite is zero.
+\noindent Numerous other properties of these operations follow directly from the earlier results, namely Propositions \ref{prop on basic product}, \ref{prop on e1 steens 1}, \ref{prop on e1 steens 2} and \ref{Prop on delta external}.
+\begin{proof}[Proof of \ref{final generic prop for basic sseq ops}]
+Everything here is straightforward, and we will present the calculation 
+$\delta_i\Sq^jx=0$ as an example.
+Suppose that $x\in \EZdownup{1}{}{X}{s}{t}$ and $2\leq i\leq 2t$. This condition implies that $t>0$, and for our current purpose we can assume that $x\in X^s_t$, so that $d\dver x=0$.  Then $\Sq^j_\textup{ext}x$ is represented by the image of $D^{s-j}(x\otimes x)+D^{s-j+1}(x\otimes d\dhor x)$ under the composite
+\[N^{s+j}(N_tX\otimes N_tX)\overset{N^{s+j}(\widetilde{\Nabla})}{\to}N^{s+j}N_{2t}(X\otimes_{\Sigma_2} X)\overset{\mu}{\to}N^{s+j}N_{2t}(X)\overset{\delta_i}{\to}N^{s+j}N_{2t+i}(X),\]
+and Proposition \ref{omnibus on htpy of simp algs} states that the final $\delta$-operation annihilates products of positive dimensional classes, so that this composite is zero.
 \end{proof}
 
+As a final note here, suppose that $X\in s\liealgs$. We may define operations:
+\begin{gather*}
+\lambdav_i:\left(\Edownup{r}{}{X}{s}{t} \smash{{}\overset{\lambda_i^\textup{ext}}{\to}{}} \Edownup{r}{}{\quadgrad{2}F^\calc X}{s}{t+i}\smash{{}\overset{[,]_*}{\to} {}}
+\Edownup{r}{}{X}{s}{t+i}\right),
+\\
+\Ph^{j-1}:\left(\Edownup{r}{}{X}{s}{t}   \smash{{}\overset{\Sq^j_\textup{ext}}{\to}{}} \Edownup{r}{}{\quadgrad{2}F^\calc X}{s+j}{2t}\smash{{}\overset{[,]_*}{\to} {}}
+\Edownup{r}{}{X}{s+j}{2t}\right),\\
+[\,,]:\left(\Edownup{r}{}{X}{s}{t}\otimes \Edownup{r}{}{X}{s'}{t'}\smash{{}\overset{\mu_\textup{ext}}{\to}{}} \Edownup{r}{}{\quadgrad{2}F^\calc X}{s+s'}{t+t'}\smash{{}\overset{[,]_*}{\to} {}}
+\Edownup{r}{}{X}{s+s'}{t+t'}\right),
+\end{gather*}
+with the $\lambdav_i$ potentially multi-valued functions,  defined when $1\leq i\leq \max\{n,t-(r-1)\}$ (resp.\ $0\leq i\leq \max\{n,t-(r-1)\}$), and single valued whenever $1\leq i\leq\min\{n+1,t+1-2(r-1)\}$.
+It is possible to state versions ot all of the above theorems in this case. The author guesses that the operations $P\dhor^{k}$ will form an unstable left action of the Steenrod algebra for commutative algebras, but has not worked out the details.
 
-As $\Edownup{1}{}{X}{s}{t}$ is obtained from $E_0$ by taking homotopy in the simplicial direction, there are $\delta^\textup{ext}$-operations on $E_1$:
-\[\delta^\textup{ext}_i:\Edownup{1}{}{X}{s}{t} \to \Edownup{1}{}{S_2X}{s}{t+i}\textup{ for }2\leq i\leq t.\]
-These are unstable with respect to internal degree $t$, not with respect to total degree $n=t-s$, are linear \emph{except for the top operation} \citeBOX[4.2]{DwyerHtpyOpsSimpComAlg.pdf}, and commute with the $d_1$ differential. Thus, each of these operations except the top operation induces an operation on $E_2$:
-\[\delta^\textup{ext}_i:\Edownup{2}{}{X}{s}{t} \to \Edownup{2}{}{S_2X}{s}{t+i}\textup{ for }2\leq i< t.\]
-\begin{prop}
-On $E_2$, for $i<t$, the spectral sequence operations $\delta^\textup{ext}_i$ defined by $\textup{DEL}_i$ equal the operations $\delta^\textup{alg}_i$. The same holds on $E_1$ when $2\leq i\leq t$. In particular, the $\delta^\textup{ext}$-operations on the spectral sequence satisfy the $\delta$-Adem relations \textbf{if there is a commutative algebra structure around}.
-\end{prop}
-\begin{proof}
-The operations $\delta^\textup{alg}_i$ are constructed by taking a representative $z\in C_{-s,t}X$ such that $\partial_\textup{sim}z=0$, and forming $\rho\Nabla_{t-i}(z\otimes\dver z)$, where $z\otimes\dver z$ denotes the element of $C(X\otimes\dver X)_{-s,2t}$.
-
-Let us calculate the leading term of $\textup{DEL}_{i}(x)$ whenever $2\leq i\leq t$. Write $x=x^s_t+x^{>s}_{>t}$, where $x^s_t\in X^s_t$, and $x^{>s}_{>t}$ lies in filtration $s+1$. Then the leading term will be $\rho\Nabla_{t-i}\twist^{t-i}D^s (x^s_t\otimes x^s_t)$. Moreover, as $\{D^k\}$ is \emph{special}, this equals $\rho{\Nabla}_{t-i}(x^s_t\otimes\dver x^s_t)\in C(X\otimes_{\Sigma_2} X)_{-s,t+i}$, where $(x^s_t\otimes\dver x^s_t)$ denotes the element of $C(X\otimes\dver X)_{-s,2t}$. Thus `$x^s_t\mapsto \twist^{t-i}D^s(x^s_t\otimes x^s_t)$' implements the assignment `$z\mapsto z\otimes\dver z$' discussed above, and we are getting a representative for $\delta^\textup{alg}_i(x)$.
-\end{proof}
-
-
-
-
-\begin{thm}
-By postcomposition with the multiplication $S_2X\to X$, the operations $\Sq^j_\textup{ext}$, $\delta_i^\textup{ext}$ and $\mu_\textup{ext}$ induce operations $\Sq^j_\textup{raw}$, $\delta_i^\textup{raw}$, $\mu_\textup{raw}$ on $E_r(X)$. The Steenrod operations vanish whenever $i<r$, after all:
-\begin{enumerate}\squishlist
-\setlength{\parindent}{.25in}
-\item When $i<t-s$, $d_r\delta^\textup{raw}_i(x)=\delta^\textup{raw}_i(d_rx)$.
-\item When $i=t-s$, $d_r\delta^\textup{raw}_i(x)=\begin{cases}
-\delta^\textup{raw}_i(d_rx),&\textup{if }s>0;\\
-\delta^\textup{raw}_i(d_rx)+x\times d_rx,&\textup{if }s=0.
-%\\,&\textup{if }
-\end{cases}$
-\item When $i>t-s$, $d_r\delta^\textup{raw}_i(x)=\begin{cases}
-\delta^\textup{raw}_i(d_rx),&\textup{if }r<t-i+1;\\
-\delta^\textup{raw}_i(d_rx)+\Sq_\textup{raw}^{t-i+1}(x),&\textup{if }r=t-i+1.
-\end{cases}$
-\end{enumerate}
-Broadly speaking then, the $\delta^\textup{raw}_i$ operations for $i>t-s$ support a differential hitting either a Steenrod operation or another $\delta^\textup{raw}_i$ operation, and all Steenrod operations applied to permanent cycles are hit in this way. If $X$ admits a coaugmentation from a simplicial algebra $X$, then the $\delta^\textup{raw}$-operations with $i\leq n$ at $E_\infty$ agree with the $\delta^\textup{raw}$-operations on the target of the spectral sequence.
-
-The $\delta^\textup{raw}$-operations (resp.\ Steenrod operations)  at $E_2$ agree with those following from the observation that $E_1$ is the normalization of a cosimplicial $\textup{Com}$-$\Pi$-algebra (resp.\ algebra). As such, the $\delta_i^\textup{raw}$ and $\Sq^j_\textup{raw}$ satisfy the expected Adem relations. Finally, at $E_1$, we have the relation $\delta_i^\textup{raw}\Sq^j_\textup{raw}x=0$ (whenever $\delta_i^\textup{raw}$ is non-top). \todo[inline]{Probably more detail needed}, for example, when is $\Sq_\textup{raw}^0=0$ or $\Sq_\textup{raw}^1=0$?
-
-[from above]: For $x\in E_r^{-s,t}(X)$, $\Sq^i_\textup{ext}(x)$ survives to $E_{2r-1}$, and moreover, $d_{2r-1}(\Sq^i_\textup{ext}x)=\Sq^{i+r-1}_\textup{ext}(d_rx)$ modulo indeterminacy. The top operation, $\Sq^s_\textup{ext}(x)$, is equal to the product-square $\mu_\textup{ext} (x\otimes x)$, and $\Sq^i_\textup{ext}(x)=0$ for $i>s$. The bottom operation, $\Sq^0_\textup{ext}(x)$, is zero whenever $t>0$, and $\Sq^1_\textup{ext}(x)=0$ for all $t\geq2$. If $X$ is a mixed simplicial algebra, postcomposition with the product $S_2X\to X$ yields the same squares at $E_2$ as those arising from the fact that $E_2$ is the cohomotopy of a cosimplicial algebra.
-\end{thm}
+%As $\Edownup{1}{}{X}{s}{t}$ is obtained from $E_0$ by taking homotopy in the simplicial direction, there are $\delta^\textup{ext}$-operations on $E_1$:
+%\[\delta^\textup{ext}_i:\Edownup{1}{}{X}{s}{t} \to \Edownup{1}{}{S_2X}{s}{t+i}\textup{ for }2\leq i\leq t.\]
+%These are unstable with respect to internal degree $t$, not with respect to total degree $n=t-s$, are linear \emph{except for the top operation} \citeBOX[4.2]{DwyerHtpyOpsSimpComAlg.pdf}, and commute with the $d_1$ differential. Thus, each of these operations except the top operation induces an operation on $E_2$:
+%\[\delta^\textup{ext}_i:\Edownup{2}{}{X}{s}{t} \to \Edownup{2}{}{S_2X}{s}{t+i}\textup{ for }2\leq i< t.\]
+%\begin{prop}
+%On $E_2$, for $i<t$, the spectral sequence operations $\delta^\textup{ext}_i$ defined by $\textup{DEL}_i$ equal the operations $\delta^\textup{alg}_i$. The same holds on $E_1$ when $2\leq i\leq t$. In particular, the $\delta^\textup{ext}$-operations on the spectral sequence satisfy the $\delta$-Adem relations \textbf{if there is a commutative algebra structure around}.
+%\end{prop}
+%\begin{proof}
+%The operations $\delta^\textup{alg}_i$ are constructed by taking a representative $z\in C_{-s,t}X$ such that $\partial_\textup{sim}z=0$, and forming $\rho\Nabla_{t-i}(z\otimes\dver z)$, where $z\otimes\dver z$ denotes the element of $C(X\otimes\dver X)_{-s,2t}$.
+%
+%Let us calculate the leading term of $\textup{DEL}_{i}(x)$ whenever $2\leq i\leq t$. Write $x=x^s_t+x^{>s}_{>t}$, where $x^s_t\in X^s_t$, and $x^{>s}_{>t}$ lies in filtration $s+1$. Then the leading term will be $\rho\Nabla_{t-i}\twist^{t-i}D^s (x^s_t\otimes x^s_t)$. Moreover, as $\{D^k\}$ is \emph{special}, this equals $\rho{\Nabla}_{t-i}(x^s_t\otimes\dver x^s_t)\in C(X\otimes_{\Sigma_2} X)_{-s,t+i}$, where $(x^s_t\otimes\dver x^s_t)$ denotes the element of $C(X\otimes\dver X)_{-s,2t}$. Thus `$x^s_t\mapsto \twist^{t-i}D^s(x^s_t\otimes x^s_t)$' implements the assignment `$z\mapsto z\otimes\dver z$' discussed above, and we are getting a representative for $\delta^\textup{alg}_i(x)$.
+%\end{proof}
+%
+%
+%
+%
+%\begin{thm}
+%By postcomposition with the multiplication $S_2X\to X$, the operations $\Sq^j_\textup{ext}$, $\delta_i^\textup{ext}$ and $\mu_\textup{ext}$ induce operations $\Sq^j_\textup{raw}$, $\delta_i^\textup{raw}$, $\mu_\textup{raw}$ on $E_r(X)$. The Steenrod operations vanish whenever $i<r$, after all:
+%\begin{enumerate}\squishlist
+%\setlength{\parindent}{.25in}
+%\item When $i<t-s$, $d_r\delta^\textup{raw}_i(x)=\delta^\textup{raw}_i(d_rx)$.
+%\item When $i=t-s$, $d_r\delta^\textup{raw}_i(x)=\begin{cases}
+%\delta^\textup{raw}_i(d_rx),&\textup{if }s>0;\\
+%\delta^\textup{raw}_i(d_rx)+x\times d_rx,&\textup{if }s=0.
+%%\\,&\textup{if }
+%\end{cases}$
+%\item When $i>t-s$, $d_r\delta^\textup{raw}_i(x)=\begin{cases}
+%\delta^\textup{raw}_i(d_rx),&\textup{if }r<t-i+1;\\
+%\delta^\textup{raw}_i(d_rx)+\Sq_\textup{raw}^{t-i+1}(x),&\textup{if }r=t-i+1.
+%\end{cases}$
+%\end{enumerate}
+%Broadly speaking then, the $\delta^\textup{raw}_i$ operations for $i>t-s$ support a differential hitting either a Steenrod operation or another $\delta^\textup{raw}_i$ operation, and all Steenrod operations applied to permanent cycles are hit in this way. If $X$ admits a coaugmentation from a simplicial algebra $X$, then the $\delta^\textup{raw}$-operations with $i\leq n$ at $E_\infty$ agree with the $\delta^\textup{raw}$-operations on the target of the spectral sequence.
+%
+%The $\delta^\textup{raw}$-operations (resp.\ Steenrod operations)  at $E_2$ agree with those following from the observation that $E_1$ is the normalization of a cosimplicial $\textup{Com}$-$\Pi$-algebra (resp.\ algebra). As such, the $\delta_i^\textup{raw}$ and $\Sq^j_\textup{raw}$ satisfy the expected Adem relations. Finally, at $E_1$, we have the relation $\delta_i^\textup{raw}\Sq^j_\textup{raw}x=0$ (whenever $\delta_i^\textup{raw}$ is non-top). \todo[inline]{Probably more detail needed}, for example, when is $\Sq_\textup{raw}^0=0$ or $\Sq_\textup{raw}^1=0$?
+%
+%[from above]: For $x\in E_r^{-s,t}(X)$, $\Sq^i_\textup{ext}(x)$ survives to $E_{2r-1}$, and moreover, $d_{2r-1}(\Sq^i_\textup{ext}x)=\Sq^{i+r-1}_\textup{ext}(d_rx)$ modulo indeterminacy. The top operation, $\Sq^s_\textup{ext}(x)$, is equal to the product-square $\mu_\textup{ext} (x\otimes x)$, and $\Sq^i_\textup{ext}(x)=0$ for $i>s$. The bottom operation, $\Sq^0_\textup{ext}(x)$, is zero whenever $t>0$, and $\Sq^1_\textup{ext}(x)=0$ for all $t\geq2$. If $X$ is a mixed simplicial algebra, postcomposition with the product $S_2X\to X$ yields the same squares at $E_2$ as those arising from the fact that $E_2$ is the cohomotopy of a cosimplicial algebra.
+%\end{thm}
 
 \end{second quadrant homotopy sseq operations}
 
