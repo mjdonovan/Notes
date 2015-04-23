@@ -1,15 +1,15 @@
 % !TEX root = z_output/unstable_Lie_algs.tex
 \documentclass[11pt]{amsart} \renewcommand{\baselinestretch}{1.4}
-\newcommand{\xIncludeAll}{}%
+\newcommand{\IncludeAll}{}%
 \newcommand{\xShrinkPages}{}%
 \newcommand{\xPostponeContents}{}%
 \ifx\ShrinkPages\undefined\else\usepackage[paperheight=220mm,paperwidth=160mm]{geometry}\fi%220/160 height options
-\usepackage{amsmath,amsthm,amssymb} \usepackage{eucal} \usepackage{mathrsfs,nicefrac} \usepackage{amssymb} \usepackage[all]{xy} \usepackage{cancel} \usepackage[textsize=small]{todonotes} \usepackage{color} \usepackage{version} \usepackage{enumerate} \usepackage{mathtools} \newcommand{\ooooo}[2][]{\excludeversion{#2}} \newcommand{\wooooo}[2][]{\includeversion{#2}}%mathtools is just used for `mathclap'
+\usepackage{amsmath,amsthm,amssymb} \usepackage{eucal} \usepackage{mathrsfs,nicefrac} \usepackage{amssymb} \usepackage[all]{xy} \usepackage{cancel} \usepackage[textsize=small,color=green!40]{todonotes} \usepackage{color} \usepackage{version} \usepackage{enumerate} \usepackage{mathtools} \newcommand{\ooooo}[2][]{\excludeversion{#2}} \newcommand{\wooooo}[2][]{\includeversion{#2}}%mathtools is just used for `mathclap'
 \ooooo[	do]{todolist}\ooooo[]{thanks}\ooooo[]{random junk}
 \ifx\IncludeAll\undefined\else\renewcommand{\ooooo}[2][]{\wooooo{#2}}\fi
 \ooooo[	ct]{Contents Page}
 \ooooo[	 1]{Introduction}
-\wooooo[	 2]{Conventions and notation}
+\ooooo[	 2]{Conventions and notation}
 \ooooo[	 3]{Pi-algebras and cohomology algebras}
 \ooooo[	 4]{Bousfield-Kan spectral sequence}
 \ooooo[	 5]{Constructing homotopy operations}
@@ -18,8 +18,8 @@
 \ooooo[	 8]{Cohomology Operations for W and U}
 \ooooo[	 9]{Koszul complexes}
 \ooooo[	10]{Composite functor spectral sequences}
-\ooooo[	11]{Operations in composite functor spectral sequences}
-\ooooo[	12]{Calculations of HWn for n nonzero}
+\wooooo[	11]{Operations in composite functor spectral sequences}
+\ooooo[	12]{Calculations of HWn}
 \ooooo[13]{second quadrant homotopy sseq operations}
 \ooooo[	14]{Operations on the Bousfield-Kan spectral sequence}
 \ooooo[	15]{May sseq and vanishing line}
@@ -542,7 +542,7 @@ The intention of this thesis is to produce an enriched version of the theory rec
 In \S\ref{Conventions and notation} and \S\ref{Pi-algebras and cohomology algebras} we give the background on the model category $s\calc$ for $\calc$ a category of universal algebras, and present a unified treatment of homotopy and cohomology operations and of homology cooperations for such categories. In \S\ref{Constructing homotopy operations} and \S\ref{Constructing cohomology operations} we present a number of existing examples of homotopy and cohomology operations in this common framework.
 
 
-\todo[inline]{From here, the introduction gives way to a list of components of the thesis. This will be turned into prose asap, although I wanted to give my examiners at least a week with the document! After these dotpoints comes the start of said prose.}
+\todo[inline]{\tiny From here, the introduction gives way to a list of components of the thesis. This will be turned into prose asap, although I wanted to give my examiners at least a week with the document! After these dotpoints comes the start of said prose.}
 %We lay out here an overview of  the work that is to follow.
 \begin{itemize}
 \item In \S\ref{Idnt E1 E2}, we derive the expected homological description of Radulescu-Banu's Bousfield-Kan spectral sequence of $X\in s\algs$. For $X$ connected, this is denoted:
@@ -573,6 +573,7 @@ such that the derived functors $H_*^{\calu(n)}:=\mathbb{L}_*Q^{\calu(n)}$ take v
 \item We produce a May-Koszul spectral sequence calculating the $E_2$ page of the Bousfield-Kan spectral sequence, and describe its $E^1$ page (in terms of the Bousfield-Kan $E_2$ pages of spheres).
 \item We construct the Adams tower of $X\in s\algs$, and study its connectivity properties in order to prove a completeness result for connected $X$.
 \item We prove a vanishing line theorem for the Bousfield-Kan spectral sequence for a connected object in $s\algs$.
+\item In \S\ref{An alternative Bousfield-Kan E1}, we present a small model for the Bousfield-Kan $E_1$-page for a commutative algebra sphere. This is a good point of reentry for the reader bemused by \SS\ref{one-dimensional, n geq1}-\ref{Calculations of HW0}.
 \item Finally, we conjecture the full structure of the Bousfield-Kan spectral sequence for a `sphere'.
 \end{itemize}
 
@@ -632,7 +633,7 @@ For $x\in \E{}{r}{\calx}{s}{t}$ such that  $\deltav_ix $ is defined:
 \deltav_i(d_rx)+\mu(x\otimes d_rx),&\textup{if $i=t-s$ and  $s=0$};\\
 \deltav_i(d_rx)+\Sqv^{t-i+2}x,&\textup{if $i>t-s$ and $i=t-(r-1)$}.
 \end{cases}\]
-This is corollary \ref{cor on meaning of equation for ddeltai vert}. In particular, if $i>t-s$ and $x\in\E{}{t-i+1}{\calx}{s}{t}$ survives to $\E{}{t-i+2}{\calx}{s}{t}$, then $d_{t-i+1}$ maps $\deltav_ix$ to $\Sqv^{t-i+2}x$. Of course the situation is a little more nuanced than this, but these formulae explain how the $\Sqv$ serve to absorb differentials supported by the excess $\deltav$.
+This is Corollary \ref{Prop on delta external composed with lift}. In particular, if $i>t-s$ and $x\in\E{}{t-i+1}{\calx}{s}{t}$ survives to $\E{}{t-i+2}{\calx}{s}{t}$, then $d_{t-i+1}$ maps $\deltav_ix$ to $\Sqv^{t-i+2}x$. Of course the situation is a little more nuanced than this, but these formulae explain how the $\Sqv$ serve to absorb differentials supported by the excess $\deltav$.
 
 Now that we have a some theory of the operations available on the Bousfield-Kan spectral sequence, we turn to the question of calculating it. If we hope to imitate Miller's use of a composite functor spectral sequence, we have only one option for the factorization of $Q^{\calw(0)}$. That is, there are functors
 \[\calw(0)\overset{Q^{\calu(0)}}{\to}\call(0)\overset{Q^{\call(0)}}{\to}\vect{+}{},\]
@@ -701,6 +702,8 @@ Note that the forgetful functor $\calw(0)\to\calU(0)$ does not preserve almost f
 
 \begin{thanks}
 This research will form part of the author's PhD thesis. The author would like to thank his advisor, Haynes Miller, for his support and guidance, and John Harper, for sharing helpful insights into the use of cubical diagrams in connectivity analyses such as that of Section \ref{sec:connectivityAnalysis}.
+
+Paul, for the great Asterisque volume.
 \end{thanks}
 
 \begin{Conventions and notation}
@@ -1133,7 +1136,7 @@ There is a notion of a \emph{divided power ideal} of a commutative algebra: an i
 
 Again, Fresse \cite{FresseSimplicialAlgs.pdf} explains how to construct the monads $F^{\algs}:=S(\CommOperad)$, $\Lambda(\CommOperad)$ and $\Gamma(\CommOperad)$ on $\vect{}{}$ which give rise to these structures, using the commutative operad $\CommOperad$ instead of $\LieOperad$. Again, there is a quadratic grading definable on these three monads, and each monad is generated in degree 2, so that a commutative algebra may be thought of as a  map $S_2L\to L$, an exterior algebra as a map $\Lambda^2L\to L$, and a divided power algebra as a map $S^2L\to L$.
 
-The coproduct $A\sqcup B$ in the category of non-unital commutative algebras is the direct sum $A\oplus (A\otimes B)\oplus B$, with the obvious product. Moreover, the \emph{smash coproduct} to be defined in \S\ref{subseq:The smash coproduct} is simply $A\smashcoprod B:=A\otimes B$. Indeed, coproducts and smash coproducts in each of the above three categories are given by these formulae.
+The coproduct $A\sqcup B$ in the category of non-unital commutative algebras is the direct sum $A\oplus (A\otimes B)\oplus B$, with the obvious product. Moreover, the \emph{smash coproduct} (to be defined in general in \S\ref{subseq:The smash coproduct}) is simply $A\smashcoprod B:=A\otimes B$. Indeed, coproducts and smash coproducts in each of the above three categories are given by these formulae.
 
 
 
@@ -1177,7 +1180,7 @@ In our application of these conventions we will actually have $V\in \vect{+}{h}$
 \[\quadgrad{k}\Edown{r}{V}{s_{h+2},\ldots,s_1}{t}:=\Edown{r}{(\quadgrad{k}V^{t}_{s_h,\ldots,s_1})}{s_{h+2},s_{h+1}}{}.\]
 
 
-
+\todo{\tiny delete this old chapter}
 \begin{shaded}\tiny
 Suppose that $V^{s}_{t}$ is a cosimplicial simplicial (ungraded) vector space. Then there is a cochain-chain complex 
 \[CV^{s}_{t}:=C\dhor^{s}C\uver_{t}V=V^{s}_{t},\]
@@ -1246,7 +1249,7 @@ We can again add internal gradings, the richest case being that in which  $V\in 
 
 
 \subsection{Second quadrant homotopy spectral sequences}\label{Towers, exact couples and coaugmented cosimplicial objects}
-Suppose \todo{
+Suppose \todo{\tiny 
 read
 } that
 \[0=\calT_{-1}\epifrom \calT_0\epifrom \calT_1\epifrom \calT_2\epifrom \cdots \epifrom \calT_\infty\]
@@ -1405,7 +1408,7 @@ In this case, the filtration on $H_*( TV)$ is Hausdorff and finite, and  for eac
 
 
 The coaugmentation  induces a map $V^{-1}\overset{\sim}{\to}\Tot V$ where $\Tot V$ is  the totalization of $V$ in the simplicial model category $s\vect{}{}$ \citeBOX[VII.5]{goerss-jardine.pdf}. 
-Bousfield explains how this relates to the totalization tower \citeBOX[VII.5]{goerss-jardine.pdf} of $V$:\todo{enough said?}
+Bousfield explains how this relates to the totalization tower \citeBOX[VII.5]{goerss-jardine.pdf} of $V$:\todo{\tiny enough said?}
 \begin{lem}[{\cite[Lemma 2.2]{BousfieldHSSCS.pdf}}]
 There are natural chain maps $N_*\Tot_mV\to \calT_mV$ for $m\leq\infty$ which induce an isomorphism of towers $\pi_*\Tot_mV\to H_*\calT_mV$. In particular $H_*(TV)\cong \pi_*\Tot V$.
 \end{lem}
@@ -1736,9 +1739,9 @@ converging to $H^*_{\calc}X:=\pi^{p+q}\dual Q^{\calc}\diag{B^{\calc}X}$. For eac
 where the second isomorphism is that of Lemma \ref{Q of a model}, so that 
 \[\Edown{2}{\,Q^{\calc}B^{\calc}X}{p,q,s_n,\ldots,s_1}{t}\cong (H^{p}_{\PA{\calc}}\pi_*X)^{q,s_n,\ldots,s_1}_{t}.\]
 
-When $\calc=\algs$, this is precisely the spectral sequence used by Goerss in \cite[Chapter V]{MR1089001} to calculate the cohomology of Eilenberg-Mac Lane objects in $s\algs$. In this thesis, we will use this spectral sequence only for certain low-dimensional calculations. Goerss equipped the reverse Adams spectral sequence with certain spectral sequence operations \citeBOX[\S14]{MR1089001}, work which can be framed using the external operations, due to Singer, that we present in \S\ref{Operations in composite functor spectral sequences}. \todo[inline]{Discuss the reasons we work with the BS W-construction.} %Indeed, these operations on the reverse Adams spectral sequence make for an interesting point of comparison for the operations we present in \S\ref{Operations in composite functor spectral sequences}. \textbf{some are probably the same.}%, which arise in a composite functor spectral sequence with the same target as the unstable Adams s. We will define various spectral sequences, and construct spectral sequence operations whic
+When $\calc=\algs$, this is precisely the spectral sequence used by Goerss in \cite[Chapter V]{MR1089001} to calculate the cohomology of Eilenberg-Mac Lane objects in $s\algs$. In this thesis, we will use this spectral sequence only for certain low-dimensional calculations. Goerss equipped the reverse Adams spectral sequence with certain spectral sequence operations \citeBOX[\S14]{MR1089001}, work which can be framed using the external operations, due to Singer, reprised in \S\ref{Operations in composite functor spectral sequences}. %Indeed, these operations on the reverse Adams spectral sequence make for an interesting point of comparison for the operations we present in \S\ref{Operations in composite functor spectral sequences}. \textbf{some are probably the same.}%, which arise in a composite functor spectral sequence with the same target as the unstable Adams s. We will define various spectral sequences, and construct spectral sequence operations whic
 
-A large part of this paper is devoted to studying a Bousfield-Kan spectral sequence for the category $\algs$, and operations defined in \S\ref{Operations on the Bousfield-Kan spectral sequence} for this spectral sequence make for another point of comparison. In this case, we find that the operations on the Bousfield-Kan spectral sequence are in a sense Koszul dual to the operations of the reverse Adams spectral sequence.
+In this thesis we study a Bousfield-Kan spectral sequence (a.k.a.\ an unstable Adams spectral sequence) for the category $\algs$, and operations defined in \S\ref{Operations on the Bousfield-Kan spectral sequence} for this spectral sequence make for another point of comparison. Loosely, we find that the operations on the Bousfield-Kan spectral sequence are in a sense Koszul dual to the operations of the reverse Adams spectral sequence.
 
 \subsection{The smash coproduct}\label{subseq:The smash coproduct}
 For $X_1$ and $X_2$ objects of any algebraic category, for example $\calc$, $\PA{\calc}$ or $\HA{\calc}$ (to be defined shortly), we define the \emph{smash coproduct} $X_1\smashcoprod X_2$ to be the kernel of the natural map $X_1\sqcup X_2\to X_1\times X_2$. When $X_1=X_2=X$, $X\smashcoprod X$ has a natural action of $\Sigma_2$, and we write $X\smashcoprod^{\Sigma_2} X$ for the subobject of invariant elements under this action.
@@ -1820,7 +1823,7 @@ The endofunctor $Q^\calc cK^\calc$ of $s\vect{}{}$ admits the structure of a com
 where $\eta$ denotes the unit of the $Q^\calc\dashv K^\calc$ adjunction.
 \end{prop}
 
-The functor $c$ of the small object argument depends on the choice of sets of generating cofibrations and acyclic cofibrations. It will be important to our applications that included in this set are certain important cofibrations, namely the inclusion of $0$ into any sphere $\mathbb{S}^{\calc,t}_{s_{r+1},\ldots,s_1}$, and any of the cofibrations  defined in \S\ref{three cell complex} and \S\ref{two-cell complex for the deltas}. \todo[inline]{for the $\lambda$'s as well - modify the relevant section(s)}
+The functor $c$ of the small object argument depends on the choice of sets of generating cofibrations and acyclic cofibrations. It will be important to our applications that included in this set are certain important cofibrations, namely the inclusion of $0$ into any sphere $\mathbb{S}^{\calc,t}_{s_{r+1},\ldots,s_1}$, and any of the cofibrations  defined in \S\ref{three cell complex} and \S\ref{two-cell complex for the deltas}. 
 
 It will be helpful to have included these maps, because of the following facts about the small object argument functor $cX$. It is constructed as the colimit of a (transfinite) sequence of cofibrations:
 \[\xymatrix@!0@R=10mm@C=13mm{
@@ -3405,7 +3408,7 @@ $F^{\algs}V$
 generated by $V$ under the operations of Proposition \ref{omnibus on coh of simp algs}, it is as large as is conceivable given the relations presented. We will present, in Proposition \ref{partialgoerss}, a partial version of his result.
 
 It is  interesting to observe that $\Palg$, the Steenrod algebra for commutative algebras, is
-in fact \emph{Koszul dual} (c.f.\ \cite{PriddyKoszul.pdf}) to $\deltaalg$, the algebra which possesses an unstable partial left action on the homotopy of a simplicial algebra. Indeed, Goerss \emph{calculates} $\Palg$ as the Koszul dual of $\deltaalg$, using a reverse Adams spectral sequence due to Miller \cite{MillerSullivanConjecture.pdf}. We will explore this relationship further when we consider the Bousfield-Kan spectral sequence.
+in fact \emph{Koszul dual} (c.f.\ \cite{PriddyKoszul.pdf}) to $\deltaalg$, the algebra which possesses an unstable partial left action on the homotopy of a simplicial algebra. Indeed, Goerss \emph{calculates} $\Palg$ as the Koszul dual of $\deltaalg$, using a reverse Adams spectral sequence due to Miller \cite{MillerSullivanConjecture.pdf} (c.f.\ \S\ref{reverse Adams spectral sequence}). We will explore this duality further when we consider the Bousfield-Kan spectral sequence.
 
 \subsection{The categories $\calw(0)$ and $\calU(0)$}
 Suppose that $A\in s\algs$ is \emph{connected}: $\pi_0A=0$. Then $H^0_{\algs}=Q^{\algs}\pi_0A=0$. It is advantageous to work with the cohomology of connected objects, as we do not need to worry about the operation $\beta$. If we say that $V\in \vect{1}{}$ is \emph{connected} when $V^{0}=0$, we may identify the full subcategory of $\vect{1}{}$ on the connected objects with $\vect{+}{}$.
@@ -3685,7 +3688,8 @@ Suppose that $V\in\vect{+}{}$ is of finite type. Then so is $F^{\HA{\restliealgs
 
 The case of simplicial Lie algebras mimics that of simplicial commutative algebras: for Lie algebras, the homogeneous Steenrod algebra acts on cohomology, and is Koszul dual to the opposite of the $\Lambda$-algebra, which possesses an unstable partial left action on  homotopy.
 
-\todo[inline]{Say a little about $\liealgs$?}
+Further material on the cohomology of Lie algebras is deferred to Appendix \ref{appendix on Lie coh ops}.
+\todo{$\liealgs$?}
 
 \end{Constructing cohomology operations}
 
@@ -4113,7 +4117,7 @@ Recall that $I$ is \emph{$\Sq$-admissible} if each $i_j\geq1$ and $i_{j+1}\geq 2
 For $V\in\vect{n+1}{+}$ with homogeneous basis $B$, a basis of $F^{\calMv(n+1)}V$ is
 \[\left\{\Sq\dver^Jb\ \middle|\ \genfrac{}{}{0pt}{}{b\in B^{s_{n+1},\ldots,s_1}_t\textup{, $J$ $\Sq$-admissible with }\minDimSq(J)\leq s_n,}{\textup{if }s_{n-1}\!=\!\cdots\!=\!s_1\!=\!0\textup{ then $J$ does not contain 1}}\right\}.\]
 \end{lem}
-Performing the same abuse of notation as in corollary \ref{basis of element of M(0) in deg 0}:
+Performing the same abuse of notation as in Corollary \ref{basis of element of M(0) in deg 0}:
 \begin{cor}
 \label{basis of element of M(n+1) in deg 0}
 For $V\in\vect{n}{+}$ with homogeneous basis $B$, a basis of $F^{\calMv(n+1)}V\in\vect{n+1}{+}$ is
@@ -4191,7 +4195,7 @@ It will be helpful to be able to reduce %We are interested in calculating the co
 expressions in the various available operations to a standard format, namely:
 \[\prod_i \Sqh^{J_{i}}\deltav_{I_{i}}x_i\textup{ when $n=0$, or }\prod_i \Sqh^{J_{i}}\Sqv^{I_{i}}x_i\textup{ when $n\geq1$}.\]
 This is possible, thanks to:
-\todo{examine low dimensional cases}
+\todo{\tiny low dim cases}
 \begin{prop}
 \label{rearrange horiz and vert ops}
 Suppose that $x,y\in H^*_{\smash{\calw(0)}}X$. If $\Sqh^jx\in (H^*_{\smash{\calw(0)}}X)^{s}_{t}$, then $\deltav_i\Sqh^{j}x=0$ for  $2\leq i<t$, and if $xy\in (H^*_{\smash{\calw(0)}}X)^{s}_{t}$, then $\deltav_i(xy)=0$ for  $2\leq i<t$.
@@ -4230,23 +4234,14 @@ both $\alpha$ and $\beta|_{\im(\alpha)}$ are monomorphisms.
 \end{proof}
 
 \subsection{The categories $\calMhv(n+1)$}
-For any $n\geq0$, let $\calMhv(n+1)$ be the following algebraic category, monadic over $\vect{n+1}{+}$. An object of $\calMhv(n+1)$ is a vector space $V\in \vect{n+1}{+}$ which is simultaneously an object of $\calMv(n+1)$ and of $\calMh(n+1)$, and in which the following equations are satisfied. When $n=0$, we require, for all homogeneous elements $x,y\in V$ such that the following expressions are defined:
-\[\deltav_i(xy)=0\textup{ and }\deltav_i(\Sqh^j(x))=0.\]
-When $n\geq1$, we require, for all $x,y\in V$:
+For $n\geq1$, let $\calMhv(n+1)$ be the following algebraic category, monadic over $\vect{n+1}{+}$. An object of $\calMhv(n+1)$ is a vector space $V\in \vect{n+1}{+}$ which is simultaneously an object of $\calMv(n+1)$ and of $\calMh(n+1)$, and in which for all $x,y\in V$:
 \[\Sqv^i(xy)=0\textup{ and }\Sqv^i(\Sqh^j(x))=0.\]
+%the following equations are satisfied. When $n=0$, we require, for all homogeneous elements $x,y\in V$ such that the following expressions are defined:
+%\[\deltav_i(xy)=0\textup{ and }\deltav_i(\Sqh^j(x))=0.\]
+%When $n\geq1$, we require, 
+By Proposition \ref{rearrange horiz and vert ops}, for $n\geq1$ and $X\in\calw(n)$, $H^*_{\calw(n)}X$ is naturally an object of $\calMhv(n+1)$. The corresponding fact would \emph{not} be true for $n=0$, so we do not define a category $\calMhv(1)$.
 
-By Proposition \ref{rearrange horiz and vert ops}, for $n\geq1$ and $X\in\calw(n)$, $H^*_{\calw(n)}X$ is naturally an object of $\calMhv(n+1)$. This is \emph{not true} for $n=0$.
-
-For any $n\geq0$, the monad $F^{\calMhv(n+1)}$ factors as $F^{\calMh(n+1)}F^{\calMv(n+1)}$, with the evident distributive law of monads. Combining Corollary \ref{basis of element of M(0) in deg 0} and Proposition \ref{basis of free horizontal operations algebra}:
-
-\begin{cor}
-\label{calMhv(1) description}
-For $V\in\vect{}{+}$ with \todo{delete me} homogeneous basis $B$, $F^{\calMhv(1)}V$ is isomorphic to the non-unital commutative algebra coproduct
-\[S(\CommOperad) \left[\Sq\dhor^J\deltav_Ib\ \middle|\ \genfrac{}{}{0pt}{}{b\in B_t\textup{, $I$ non-empty, $\delta$-admissible with }\minDimP(I)\leq t,}{\textup{$J$ $\Sq$-admissible with }\excess(J)\leq \ell I,\textup{ and }1\notin J}\right]\sqcup \Lambda(\CommOperad)\left[b\ \middle|\ b\in B\right].\]
-For elements $b_1,\ldots,b_N$ of $B$ with $b_k\in B_{t_k}$ and appropriate sequences $I_k,J_k$, we have
-\[\textstyle\prod_{k=1}^N \Sq\dhor^{J_k}\deltav_{I_k}b_k\in \left(F^{\calMhv(1)}V\right)^{-1+\sum_k(nJ_k+\ell I_k+1)}_{-1+\sum_k(2^{\ell J_k+\ell I_k}(t_k+1))}.\]
-\end{cor}
-\noindent Similarly, combining Corollary \ref{basis of element of M(n+1) in deg 0} and Proposition \ref{basis of free horizontal operations algebra}:
+For any $n\geq1$, the monad $F^{\calMhv(n+1)}$ factors as $F^{\calMh(n+1)}F^{\calMv(n+1)}$, with the evident distributive law of monads, and combining Corollary \ref{basis of element of M(n+1) in deg 0} and Proposition \ref{basis of free horizontal operations algebra}:
 \begin{cor}
 \label{calMhv(n+1) description}
 For $n\geq1$ and $V\in\vect{n}{+}$ with homogeneous basis $B$,  $F^{\calMhv(n+1)}V$ is the quotient of the non-unital commutative algebra
@@ -4260,6 +4255,19 @@ For $n\geq1$ and $V\in\vect{n}{+}$ with homogeneous basis $B$,  $F^{\calMhv(n+1)
 \right]\]
 by the relation $b^2=0$ if $b\in B_t^{0,\ldots,0}$.
 \end{cor}
+
+
+Although we do not define $\calMhv(1)$, it will be useful to have a description of the composite $F^{\calMh(1)}F^{\calMv(1)}$.
+Combining Corollary \ref{basis of element of M(0) in deg 0} and Proposition \ref{basis of free horizontal operations algebra}:
+
+\begin{cor}
+\label{calMhv(1) description}
+For $V\in\vect{}{+}$ with homogeneous basis $B$, $F^{\calMh(1)}F^{\calMv(1)} V$ is isomorphic to the non-unital commutative algebra coproduct
+\[S(\CommOperad) \left[\Sq\dhor^J\deltav_Ib\ \middle|\ \genfrac{}{}{0pt}{}{b\in B_t\textup{, $I$ non-empty, $\delta$-admissible with }\minDimP(I)\leq t,}{\textup{$J$ $\Sq$-admissible with }\excess(J)\leq \ell I,\textup{ and }1\notin J}\right]\sqcup \Lambda(\CommOperad)\left[b\ \middle|\ b\in B\right].\]
+For elements $b_1,\ldots,b_N$ of $B$ with $b_k\in B_{t_k}$ and appropriate sequences $I_k,J_k$, we have
+\[\textstyle\prod_{k=1}^N \Sq\dhor^{J_k}\deltav_{I_k}b_k\in \left(F^{\calMh(1)}F^{\calMv(1)}V\right)^{-1+\sum_k(nJ_k+\ell I_k+1)}_{-1+\sum_k(2^{\ell J_k+\ell I_k}(t_k+1))}.\]
+\end{cor}
+
 
 
 \subsection{Compressing sequences of Steenrod operations}
@@ -4354,7 +4362,7 @@ where we define, for any $x \in X^t$ and $I$ $\delta$-admissible with $\minDimP(
 \sum_{\produces{K}{I}{\deltaalg}}\left[P^{k_\ell} \middle|\cdots\middle|P^{k_1} \right]x\textup{ for $x\in X^t$}.\]
 %Supposing that $X$ is loc fin, let $B^*\subseteq X^*$ represent the basis dual to $B$, and denote by $b^*\in B^*$ the element dual to $b\in B$. Then $K^*_{\calU(0)}X$ has basis $\{\delta_I(b^*)\}$, and this basis is dual to the basis just presented.
 %
-If $X$ is of finite type, there is a basis $\{\deltav_I(b^*)\}$ of $K^*_{\calU(0)}X$ constructed using Proposition \ref{the cokoszul complex is free}, corollary \ref{basis of element of M(0) in deg 0} and the basis $\{b^*\}$ of $\dual X$ dual to $B$. The bases $\{\deltav_I(b^*)\}$ and $\{\deltavstar_Ib\}$ are dual.
+If $X$ is of finite type, there is a basis $\{\deltav_I(b^*)\}$ of $K^*_{\calU(0)}X$ constructed using Proposition \ref{the cokoszul complex is free}, Corollary \ref{basis of element of M(0) in deg 0} and the basis $\{b^*\}$ of $\dual X$ dual to $B$. The bases $\{\deltav_I(b^*)\}$ and $\{\deltavstar_Ib\}$ are dual.
 
 The differential of $K^{\calU(0)}_*X$ is given by the formula:
 \[d(\deltavstar_Ix)=\sum_{ \substack{\produces{K}{I}{\deltaalg}\\(k_{\ell},\ldots,k_2){\,\deltaalg\textup{-admis.}}}}\!\!\!\!\!\!\!\!\!\!\!\! \deltavstar_{(k_{\ell},\ldots,k_2)}(P^{k_1}x),\]
@@ -4388,7 +4396,7 @@ where we define
 %\cAnCel{\left[P^{i_\ell}\middle|\cdots\middle|P^{i_1} \right]b}+
 \sum_{\produces{K}{J}{\Sq}}b\left[\lambda_{k_1-1} \middle|\cdots\middle|\lambda_{k_\ell-1} \right]\]
 whenever $J$ and $b$ satisfy the conditions on $\minDimSq(J)$ and on the appearance of 1 in $J$.
-If $X$ is  of finite type, this basis is dual to the $\{\Sqv^Jb^*\}$ basis of $K^*_{\calU(n)}X$   constructed using Proposition \ref{the cokoszul complex is free}, corollary \ref{basis of element of M(n+1) in deg 0} and the basis $\{b^*\}$  of $\dual X$ dual to $B$. The differential of $K^{\calU(n)}_*X$ is given by the formula:
+If $X$ is  of finite type, this basis is dual to the $\{\Sqv^Jb^*\}$ basis of $K^*_{\calU(n)}X$   constructed using Proposition \ref{the cokoszul complex is free}, Corollary \ref{basis of element of M(n+1) in deg 0} and the basis $\{b^*\}$  of $\dual X$ dual to $B$. The differential of $K^{\calU(n)}_*X$ is given by the formula:
 \[d(\Sqvstar{J}x)=\sum_{ \substack{\produces{K}{J}{\Sq}\\(k_{\ell},\ldots,k_2){\,\Sq\textup{-admis.}}}}\!\!\!\!\!\!\!\!\!\!\!\! \Sqvstar{(k_{\ell},\ldots,k_2)}(x\lambda_{k_1-1}),\]
 summing over $K=(k_{\ell},\ldots,k_1)$ such that $(k_{\ell},\ldots,k_2)$ is $\Sq$-admissible %, $K$ does not contain 1 if $s_{n-1}=\cdots s_1=0$, 
 and yet $\produces{K}{J}{\Sq}$.
@@ -4408,7 +4416,7 @@ The Koszul complex $K_*^{\calU(n)}X$ is naturally a subcomplex of $\Nop Q^{\calU
 \end{cor}
 \noindent  There are  thus two monomorphic quasi-isomorphisms of chain complexes with homology is $H_*^{\calU(n)}X$, and we denote their composite $\jmath$:
 \[\jmath:\left(K_*^{\calU(n)}X\subseteq \Nop_*Q^{\calU(n)}B^{\calU(n)}X\subseteq \Nop_*Q^{\calU(n)}B^{\calw(n)}X\right).\]
-The key upshot of corollary \ref{cycles in the Koszul complex are normalized cycles} is that cycles in the Koszul complex map to \emph{normalized} cycles under $\jmath$.
+The key upshot of Corollary \ref{cycles in the Koszul complex are normalized cycles} is that cycles in the Koszul complex map to \emph{normalized} cycles under $\jmath$.
 
 Now $H^{\calU(n)}_*X$ is an object of $\calw(n+1)$, since it can be calculated as the homotopy of $Q^{\calU(n)}B^{\calw(n)}X\in s\calL(n)$, and this  structure will be needed for the composite functor spectral sequences discussed in \S\ref{Composite functor spectral sequences}. We will go some way to calculating this structure in this section. Our method will be to take cycles in the Koszul complex, map them into the large complex using $\jmath$, perform the operations in question, and then homotope the outcome back into the Koszul complex.
 
@@ -4967,12 +4975,13 @@ and the operations we are considering are easily understood in relation to this 
 \end{proof}
 
 \subsection{An equivalent reverse Adams spectral sequence}
-%Use the notation
-%$L:=Q^{\calU(n)}{ B^{\calw(n)}X}\in s\calL(n)$, for $X\in s\calw(n)$.
+It happens that the composite functor spectral sequence recently defined actually coincides with an instance of Miller's reverse Adams spectral sequence used Goerss   \cite[Chapter V]{MR1089001} (c.f.\ \S\ref{reverse Adams spectral sequence}). This seems to the author to be somewhat of a coincidence, as in \cite{MR1089001}, the reverse Adams spectral sequence appears for quite different reasons than in the present work.
+We continue using Blanc and Stover's resolution, for two reasons. Firstly, that resolution more closely reflects out intention in constructing the spectral sequence in question, and secondly, the techniques we use here may be generalizable to other contexts in which the Blanc-Stover resolution is used.
+
 \begin{prop}
 The composite functor spectral sequence applied to $X\in s\calw(n)$ coincides with the reverse Adams spectral sequence applied to  $L:=Q^{\calU(n)}{ B^{\calw(n)}X}\in s\calL(n)$.
 \end{prop}
-\noindent Before proving this fact, we should remove any confusion about the convergence targets of these spectral sequences. The reverse Adams  spectral sequence has target
+\noindent Before proving this fact, we should remove any confusion about the convergence targets of these spectral sequences. Indeed, the reverse Adams  spectral sequence has target
 \[\pi^*\dual Q^{\calL(n)}B^{\calL(n)}L\cong \pi^*\dual Q^{\calL(n)}L=\pi^*\dual Q^{\calw(n)}B^{\calw(n)}X=:H^*_{\calw(n)}X,\]
 where the isomorphism follows from the same acyclicity condition needed to define the composite functor spectral sequence. Thus the targets coincide, as hoped.
 \begin{proof}
@@ -5002,8 +5011,10 @@ By the lifting axiom (of cofibrations against acyclic fibrations) we can find th
 \begin{Operations in composite functor spectral sequences}
 \section{\textbf{Operations in composite functor spectral sequences}}
 \label{Operations in composite functor spectral sequences}
-Singer \cite{MR2245560} developed a useful theory of products and Steenrod operations in the first quadrant cohomology spectral sequence arising from a bisimplicial cocommutative coalgebra. In the applications we have in mind, however, the bisimplicial object \[Q^{\calL(n)}\BSWres Q^{\calU(n)}{ B^{\calw(n)}X}\] 
-will \emph{not} be a coalgebra. Instead the situation will resemble more the situation of \S\ref{chain level structure}, where we had a linear map $\psi_\calc:Q^{\calc}X^s\to S^2(Q^{\calc}X^{s-1})$ for any almost free object $X\in s\calc$, but it is certainly not a coalgebra map.
+Singer \cite{MR2245560} developed a useful theory of products and Steenrod operations in the first quadrant cohomology spectral sequence arising from a bisimplicial cocommutative coalgebra. Goerss used this theory in \cite[\S14]{MR1089001} in his calculation of the category $\HA{\algs}$.
+ In the applications we have in mind, the bisimplicial object \[Q^{\calL(n)}\BSWres Q^{\calU(n)}{ B^{\calw(n)}X}\] 
+will \emph{not} be a coalgebra. Instead the situation will resemble more the situation of \S\ref{chain level structure}, where there was a linear map $\psi_\calc:Q^{\calc}X^s\to S^2(Q^{\calc}X^{s-1})$ for any almost free object $X\in s\calc$, but certainly not a coalgebra map.
+
 
 The lack of an underlying coalgebra structure will not stop us from applying Singer's techniques after we make the appropriate modifications. The idea is to externalize Singer's operations, so that for every bisimplicial vector space $V$, there are  external operations of type:
 \[\Edown{r}{V}{**}{}\to \Edown{r}{S^2V}{**}{}\textup{ \ and \ }S_2\Edown{r}{V}{**}{}\to \Edown{r}{S^2V}{**}{}.\]
@@ -5045,7 +5056,7 @@ For all $p,q\geq0$ and all $r\geq2$, there are well-defined vector space homomor
 \ExtCohOp^k:\Edown{r}{V}{p,q}{}&\to \Edown{r+k-2}{S^2V}{p+k-q,2q}{},&\qquad&\text{if }q\leq k\leq q+r-2;\\
 \ExtCohOp^k:\Edown{r}{V}{p,q}{}&\to \Edown{2r-2}{S^2V}{p+k-q,2q}{},&\qquad&\text{if }q+r-2\leq k;
 \end{alignat*}
-which \todo{find out where to emphasize this} commute with the differentials (in the appropriate, somewhat complicated sense, c.f.\ \cite[Theorem 2.17]{MR2245560}), and an external (not `exterior') commutative product operation which satisfies the Liebniz rule:
+which \todo{\tiny where to emphasize?} commute with the differentials (in the appropriate, somewhat complicated sense, c.f.\ \cite[Theorem 2.17]{MR2245560}), and an external (not `exterior') commutative product operation which satisfies the Liebniz rule:
 \[\ExtCohProd:\Edown{r}{V}{p_1,q_1}{}\otimes \Edown{r}{V}{p_2,q_2}{}\to \Edown{r}{S^2V}{p_1+p_2,q_1+q_2}{}.\]
 Note that the second and third operations are from $E_r\to E_{r'}$, sometimes with $r'\geq r$, which is to say that these operations have indeterminacy disappearing by $E_{r'}$, and the implied survival property.
 
@@ -5396,7 +5407,7 @@ equals the sum of the composite
 \end{split}\]
 and those composites, for $1\leq i \leq q$,
 \[(Q^{\calw}B^{\calw}_{p+1}\pi\uver_* L)_{q+i-1}\overset{\theta^i}{\to} (Q^{\calw}B^{\calw}_{p}\pi\uver_* L)_q\overset{Q^{\calw}\chi}{\to} (\pi\uver_*Q^{\call}\BSWres_{p}L)_q\overset{\sigma_{i-1}}{\to} (\pi\uver_*S^2Q^{\calL}\BSWres_{p}L)_{q+i-1},\]
-that are actually defined (these fail to be defined when $i=1$ in internal degrees satisfying $s_n=\cdots =s_1=0$). \todo[inline]{Or is it `non-zero when $i=1$'...?}
+that are actually defined (these fail to be defined when $i=1$ in internal degrees satisfying $s_n=\cdots =s_1=0$). \todo{`non-zero when $i=1$'?}
 
 
 By Lemma \ref{lemma on homology class repd by normalized generator}, we may represent any homology class of interest by an element $E=\sum_kv_k$, where the $v_k\in V'_{p+1}$ are elements of the basis chosen while defining $\chi$. We wrote each $v_k$ as a $\calw$-expression $e_k$ in various $u_{kj}\in V_{p}$:
@@ -5559,9 +5570,9 @@ To explain further the third equation, note that $N\uver_{m-1}Q^{\call}\BSW L$ i
 
 
 
-\begin{Calculations of HWn for n nonzero}
-\section{\textbf{Calculations of ${\calw(n)}$-cohomology for $n\geq 1$}}
-\label{Calculations of HWn for n nonzero}
+\begin{Calculations of HWn}
+\section{\textbf{Calculations of ${\calw(n)}$-cohomology}}
+\label{Calculations of HWn}
 In this section, we will calculate the value of $H^*_{\calw(n)}X$ for certain  objects $X$ of $\calw(n)$ of finite type. In each subsection, we will write $V_{(n)}=\dual X$, so that $X$ has underlying vector space dual to $V_{{(n)}}\in\vect{n}{+}$. In fact, we will reinstate the upper asterisk for linear dualization, writing $\dual V_{(n)}:=V^*_{(n)}$, and recursively define:
 \[V_{(k+1)}:=H^*_{\calU(k)}V^*_{(k)}\textup{ and }V^*_{(k+1)}:=H_*^{\calU(k)}V^*_{(k)}\textup{ for $k\geq n$}.\]
 In this way, for each $k\geq n$, $V^*_{(k+1)}$ is an object of $\calw(k+1)$, vector space dual to $V_{(k+1)}\in\vect{k+1}{+}$, which itself has the structure of an object of $\calMv(k+1)$.
@@ -5572,7 +5583,8 @@ The $1^{\textup{st}}$ composite functor spectral sequence, which calculates $H^*
 
 
 
-\subsection{When $X\in\calw(n)$ is one-dimensional}
+\subsection{When $X\in\calw(n)$ is one-dimensional and $n\geq1$}
+\label{one-dimensional, n geq1}
 Let $X=V^*_{(n)}\in\calw(n)$ be a one dimensional object of $\calw(n)$, %dual to a vector space $V_{(n)}=(V_{(n)})^S_T=\langle v\rangle\in\vect{n}{+}$, where $T\geq1$ and $S\geq0$ (\textbf{better:} 
 dual to a one-dimensional vector space $V_{(n)}\in\vect{n}{+}$, with non-zero element $v\in(V_{(n)})^{S_n,\ldots,S_1}_T$. Write $v^*\in X^T_{S_n,\ldots,S_1}$ for the non-zero element of $X$. As every $\calw(n)$-operation changes degrees, $X$ is necessarily trivial. We distinguish two cases: when $v$ is \emph{restrictable} and when $v$ is \emph{not restrictable}. Recall that $v$ is said to be restrictable when $\restn{v}$ is defined, i.e.\ when $S_n,\ldots,S_1$ are not all zero.
 \begin{prop}
@@ -5880,7 +5892,7 @@ For each $k\geq2$, $(E_{2,(k+1)})^{s_{k+2},s_{k+1},\ldots,s_1}_{t}$ is zero unle
 %}\]
 %Now as we have shown that the classes $v_0$ and $\Sqv^{3}v_j$  ($j\geq1$) are all permanent cycles, they are in the image of the edge homomorphism. Then this diagram shows that all of $V_{(2)}$ is in the image of the edge homomorphism, so that every element  of $V_{(2)}$ is a permanent cycle. Finally, as $V_{(2)}$ is a trivial object of $\calw(2)$, $E_{2}$ is (freely) generated by $V_{(2)}$ under the $\calmh(3)$- and $\calmv(3)$-operations, by Theorem \ref{thm on collapsing of most sseqs}. As we understand how these operations interact with the differential, we have shown that the spectral sequence collapses.
 %
-%When $S=1$ we must modify this proof a little. Indeed, in this case, $E_{2}=H^*_{\calw(2)}V_{(2)}^*$ is no longer generated by $V_{(2)}$ under the $\calmh(3)$- and $\calmv(3)$-operations. Rather, propositions \ref{2d example in w2} and \ref{Koszul-dual Hilton-Milnor theorem}, Theorem \ref{thm on collapsing of most sseqs} and corollary \ref{statement of result on 2d w2 example} show that 
+%When $S=1$ we must modify this proof a little. Indeed, in this case, $E_{2}=H^*_{\calw(2)}V_{(2)}^*$ is no longer generated by $V_{(2)}$ under the $\calmh(3)$- and $\calmv(3)$-operations. Rather, propositions \ref{2d example in w2} and \ref{Koszul-dual Hilton-Milnor theorem}, Theorem \ref{thm on collapsing of most sseqs} and Corollary \ref{statement of result on 2d w2 example} show that 
 %%\[H^*_{\calw(2)}V_{(2)}^*\cong H^*_{\calw(2)}(\Ftwo \{v_0^*,v_1^*\}\oplus (V'_{(2)})^*)\cong \Ftwo [v_1^{2}]\otimes E(v_0)\otimes \calmh(3)\calmv(3)V'_{(2)} ,\]
 %\begin{alignat*}{2}
 %H^*_{\calw(2)}V_{(2)}^*&=H^*_{\calw(2)}(\Ftwo \{v_0^*,v_1^*\}\oplus (V'_{(2)})^*)\\
@@ -5904,6 +5916,7 @@ For each $k\geq2$, $(E_{2,(k+1)})^{s_{k+2},s_{k+1},\ldots,s_1}_{t}$ is zero unle
 
 
 \subsection{An infinite-dimensional example in $\calw(1)$}
+\label{sec: infinite-dimensional example}
 In this section, we suppose that $S,T\geq1$, and let $X=V^*_{(1)}\in\calw(1)$ be the infinite dimensional object of $\calw(1)$ spanned by non-zero classes
 \[v_{j}^{*}\in (V^*_{(1)})^{2^{j}(T+1)-1}_{S+j}\textup{ for $j\geq 0$},\] such that $v_{j+1}^*=v^*_j\lambda_{1}$ for $j\geq 0$, and all other operations are trivial. %(We must have $S\geq1$ for this definition to make sense: $v_0\lambda_1$ must be defined.)
 \begin{prop}
@@ -5963,7 +5976,7 @@ F^{\calmh(3)}F^{\calmv(3)}V'_{(2)}\sqcup S(\CommOperad) [v_1^{2}]\sqcup \Lambda(
 \]
 \end{thm}
 \begin{proof}
-The calculations of $\E{(2)}{2}{}{}{}$ follow from  theorems \ref{thm on collapsing of most sseqs} and \ref{Koszul-dual Hilton-Milnor theorem}, propositions \ref{2d example in w2}, \ref{Sg1 calc of V2} and \ref{Se1 calc of V2}  and corollary \ref{statement of result on 2d w2 example}. What remains is to prove the collapsing result in each case.
+The calculations of $\E{(2)}{2}{}{}{}$ follow from  theorems \ref{thm on collapsing of most sseqs} and \ref{Koszul-dual Hilton-Milnor theorem}, propositions \ref{2d example in w2}, \ref{Sg1 calc of V2} and \ref{Se1 calc of V2}  and Corollary \ref{statement of result on 2d w2 example}. What remains is to prove the collapsing result in each case.
 
 Suppose that $S\geq2$. The first point is to observe that the generators $v_0$ and $\Sqv^3v_j$ ($j\geq1$) of $V_{(2)}$ under $\calMv(2)$-operations are all permanent cycles in
 $(H^*_{\calw(2)}V_{(2)})^{0**}_{*}$. For $v_0\in \E{(2)}{2}{}{00S}{T}$, this is obvious. It is less obvious for $\Sqv^3v_j$ ($j\geq1$), which has only one opportunity to support a differential:
@@ -6096,7 +6109,7 @@ can support a differential, $I$ a non-empty $\delta$-admissible sequence.
 
 To see this, all one needs to have learned about the entire $E_2$ page is that it is a subquotient (in which $\imath^2=0$) of the polynomial algebra on symbols
 \[\Sqh^A\Sqv^B\deltav_C\imath\in \quadgrad{2^{\ell A+\ell B+\ell C}}\E{(1)}{2}{}{\ell B+nA,2^{\ell A}(nB-\ell B+\ell C)}{2^{\ell A+\ell B}(T+nC+\ell C+1)-1},\]
-in which $B$ is $\Sq$-admissible, B does not contain $1$ or $2$, if $C$ is empty then so is $B$, and if $B$ is empty then so is $A$. These conditions imply that $nB-2\ell B\geq2^{\ell B}-1$. \todo{check} %Moreover, in this subquotient, $\imath^2=0$ (among other relations explained above).
+in which $B$ is $\Sq$-admissible, B does not contain $1$ or $2$, if $C$ is empty then so is $B$, and if $B$ is empty then so is $A$. These conditions imply that $nB-2\ell B\geq2^{\ell B}-1$. \todo{\tiny check} %Moreover, in this subquotient, $\imath^2=0$ (among other relations explained above).
 
 If for $r\geq2$ there is  a differential $d_r$ supported by $y$, %a class in $(E_2)^{1,2+\ell I+j,(2^{1+\ell I+j})}_{2^{j+1}(d+nI+\ell I+1)-1}$, 
 then $d_{r}y $ must be a sum of products of $N\geq1$ such classes. The generic such monomial may be written as:
@@ -6159,19 +6172,20 @@ When  $\ell I=1$: in $F^{\calMh(1)}F^{\calMv(1)}\{\imath\}$, the generators (\re
 $(\deltav_{\TOP_T I}\imath)^{2}=\Sqh^3\deltav_{\TOP_T I}\imath$, and taking the quotient by $\Sqh^2\deltav_{\TOP_T I}\imath$ ensures that these generators produce no more material in $F^{\calMh(1)}F^{\calMv(1)}\{\imath\}$ than the polynomial algebras arising in the $S=1$ case of Corollary \ref{the actual statement of what H1V1 is}.
 \end{proof}
 
-\todo{Delete this old version}
+\todo{\tiny Delete}
+\begin{shaded}\tiny
 \begin{cor}[\textbf{(!!! Old version !!!)}]
 Suppose that $X=\mathbb{S}_{T}^{\algs}$ for $T\geq1$. Then the Bousfield-Kan $E_2$ page $\E{}{2}{\calx}{}{}\cong H^*_{\calw(0)}(H^*_\algs X)$ is isomorphic, as a vector space in $\vect{1}{+}$, to the non-unital commutative algebra coproduct of
 \[\Lambda(\CommOperad)[\imath]\sqcup \textstyle\bigsqcup_{2\leq i\leq T} \Bigl(S(\CommOperad) [(\deltav_{\TOP_T(i)}\imath)^{2}]\sqcup \Lambda(\CommOperad)[\deltav_i\imath]\Bigr)\]
-with the subquotient of $F^{\calMhv(1)}\{\imath\}$ generated by the elements:
+with the subquotient of $F^{\calMhv(1)}\{\imath\}$ \textbf{outdated usage} generated by the elements:
 \begin{alignat}{2}
-\label{ell 2plus}
+%\label{ell 2plus}
 \{\deltav_{I}\imath,
 \Sqh^2\deltav_{\TOP_T^1\!I}\imath,\Sqh^3\deltav_{\TOP_T^1\!I}\imath,
 \Sqh^2\deltav_{\TOP_T^2\!I}\imath,\Sqh^3\deltav_{\TOP_T^2\!I}\imath,
 \ldots\}\textup{ for $I\in\aDTirr$, $\ell I>1$;}
 \\
-\label{ell 1}
+%\label{ell 1}
 \{
 \Sqh^2\deltav_{\TOP_T^2\!I}\imath,\Sqh^3\deltav_{\TOP_T^2\!I}\imath,
 \Sqh^2\deltav_{\TOP_T^3\!I}\imath,\Sqh^3\deltav_{\TOP_T^3\!I}\imath,
@@ -6179,7 +6193,7 @@ with the subquotient of $F^{\calMhv(1)}\{\imath\}$ generated by the elements:
 \end{alignat}
 and subject to  relations generated under $\calMh(1)$-operations by
 \begin{alignat}{2}
-\label{ell 2plus}
+%\label{ell 2plus}
 \{
 \Sqh^2\deltav_{I}\imath,
 \Sqh^2\deltav_{\TOP_T^1\!I}\imath,
@@ -6187,7 +6201,7 @@ and subject to  relations generated under $\calMh(1)$-operations by
 \Sqh^2\deltav_{\TOP_T^3\!I}\imath,
 \ldots\}\textup{ for $I\in\aDTirr$, $\ell I>1$;}
 \\
-\label{ell 1}
+%\label{ell 1}
 \{
 %\Sqh^2\deltav_{I}\imath,
 %\Sqh^2\deltav_{\TOP_T^1\!I}\imath,
@@ -6196,17 +6210,19 @@ and subject to  relations generated under $\calMh(1)$-operations by
 \ldots\}\textup{ for $I\in\aDTirr$, $\ell I=1$.}
 \end{alignat}
 \end{cor}
+\end{shaded}
 
 
 
 \subsection{An alternative Bousfield-Kan $E_1$-page}
+\label{An alternative Bousfield-Kan E1}
 We will now suggest a somewhat artificial $E_1$-page for the Bousfield-Kan spectral sequence for a  sphere  $X=\mathbb{S}_{T}^{\algs}$ for $T\geq1$. 
 
-Define
+Define:
 \begin{alignat*}{2}
 % Left hand side
-\aS{s}&:=\left\{J\ \middle|\ \textup{$J$ a $\Sq$-admissible sequence with }\minDimDelta(I)\leq s+1,\ 1\notin J\right\}\\
-\aSirr{s}&:=\left\{J\ \middle|\ \textup{$J$ a $\Sq$-admissible sequence with }e(I)\leq s,\ 1\notin J\right\}\\
+\aS{s}&:=\left\{J\ \middle|\ \textup{$J$ a $\Sq$-admissible sequence with }\minDimDelta(I)\leq s+1,\ 1\notin J\right\};\\
+\aSirr{s}&:=\left\{J\ \middle|\ \textup{$J$ a $\Sq$-admissible sequence with }e(I)\leq s,\ 1\notin J\right\};\\
 \aDTnoplus&:=\left\{I\ \middle|\ \textup{$I$ a $\delta$-admissible sequence with }\minDimP(I)\leq t\right\}.
 \end{alignat*}
 The difference between $\aDTnoplus$ and $\aDT$ is just that we have removed the requirement that $I$ be nonempty. The following Lemma expains the sense in which $\aSirr{s}$ is the subset of irreducible sequences in $\aS{s}$.
@@ -6328,7 +6344,7 @@ and if $J$ is empty but $I$ is nonempty:
 \textup{$\deltav_I\imath$ is a cycle if and only if $I \in \aDTirr$}.\end{equation}
 (Recall that $\aDTirr$ contains all of the length one sequences $(i)$ for $2\leq i \leq T$). We can combine all of this information into the following observation, valid for any $I,J$:
 \begin{equation}
-\label{cycle conditions 2}
+\label{cycle conditions 3}
 \textup{$\Sq\dhor^J\deltav_I\imath$ is a cycle if and only if $I=\emptyset$ or $I \in \aDTirr$ or $J$ contains 2 or 3}.
 \end{equation}
 To actually determine the homology of $\Eprime{blank}{1}{\calx}{}{}$, suppose that $I \in \aDTirr$, and write $\textup{SC}_{I,n}$ for the subcomplex spanned by the products of classes of the form ....
@@ -6340,7 +6356,7 @@ To actually determine the homology of $\Eprime{blank}{1}{\calx}{}{}$, suppose th
 
 
 
-\end{Calculations of HWn for n nonzero}
+\end{Calculations of HWn}
 
 \begin{second quadrant homotopy sseq operations}
 
@@ -6357,21 +6373,17 @@ To actually determine the homology of $\Eprime{blank}{1}{\calx}{}{}$, suppose th
 %\]
 
 In this section we will produce various external operations on second quadrant homotopy spectral sequences. That is, for $X\in cs\vect{}{}$, we will produce numerous operations
-from $\E{}{r}{X}{}{}$ to each of $\E{}{r}{S_2X}{}{}$ and $\E{}{r}{\Lambda^2 X}{}{}$. This approach leaves open a number of possibilities. If $X\in cs\algs$, then the structure map $S_2X\to X$ induces a spectral sequence map $\E{}{r}{S^2X}{}{}\to \E{}{r}{X}{}{}$, and so the external operations induce internal operations on $\E{}{r}{X}{}{}$. If $X$ is a Lie algebra  we may apply the analogous technique. In \S\ref{Operations on the Bousfield-Kan spectral sequence}, we will use these external operations in another way to produce operations on the Bousfield-Kan spectral sequence of a commutative algebra or Lie algebra.
+from $\E{}{r}{X}{}{}$ to each of $\E{}{r}{S_2X}{}{}$ and $\E{}{r}{\Lambda^2 X}{}{}$. This approach leaves open a number of possibilities. If $X\in cs\algs$, then the structure map $S_2X\to X$ induces a spectral sequence map $\E{}{r}{S^2X}{}{}\to \E{}{r}{X}{}{}$, and so the external operations induce internal operations on $\E{}{r}{X}{}{}$. If $X$ is a Lie algebra  we may apply the analogous technique. 
 
+In \S\ref{Operations on the Bousfield-Kan spectral sequence}, we will use these external operations in another way to produce operations on the Bousfield-Kan spectral sequence of a commutative algebra or Lie algebra --- the construction will involve a shift in filtration, which is conceivable given that  Radulescu-Banu's resolution  is a resolution by GEMs.
 
-
-\begin{shaded}\tiny
-That is, whenever $A=\calx$ is Radulescu-Banu's resolution of some $X\in s\algs$, the results of \S\ref{Operations on the Bousfield-Kan spectral sequence} will show that  the map $\mu_*:\Edownup{r}{}{S_2\calx}{s}{t+i}\to \Edownup{r}{}{\calx}{s}{t+i}$ can be lifted up one filtration. Morally, this should occur simply because $\calx$ is a resolution by GEMs, but nonetheless we will need to work with  Radulescu-Banu's resolution directly.
-
-\end{shaded}
 
 
 
 A number of authors have written on spectral sequence operations in a variety of settings. Singer's work \cite{MR2245560} on first quadrant cohomology spectral sequences has already been used in this thesis, and has been extended by Turner \cite{turner_opns_and_sseqs_I.pdf}. 
  Perhaps the closest recent examples are due to Hackney \cite{MR3019742} and \cite{MR3171258}, who works out the operations available on the homotopy spectral sequence of a cosimplicial $E_\infty$- or $E_n$-space respectively, using Bousfield-Kan's universal examples \cite{BK_pairings.pdf}. We will be working with cosimplicial simplicial \emph{vector spaces}, and so a direct approach, mirroring Dwyer's work in second quadrant cohomotopy spectral sequences \cite{DwyerHigherDividedSquares.pdf}, is available. 
 
-Dwyer's work is an interesting makes an interesting point of comparison with ours. In both cases: Steenrod operations and higher divided powers (as in \cite{DwyerHigherDividedSquares.pdf} and \S\ref{Homotopy operations for simplicial commutative algebras}) are produced; one set of operations is not present in homotopy, while the other is present in homotopy, but are fewer in number in homotopy than at $E_2$; differentials are constructed between the two varieties to simultaneously rectify these disparities. Between Dwyer's theory and the theory presented here, the roles of the two types of operations are interchanged.
+Dwyer's work makes an interesting point of comparison with ours. In both cases: Steenrod operations and higher divided powers (as in \cite{DwyerHigherDividedSquares.pdf} and \S\ref{Homotopy operations for simplicial commutative algebras}) are produced on the spectral sequence; one set of operations is not present in homotopy;  the other set of operations is present in homotopy, but fewer operations are present there than at $E_2$; differentials are constructed between the two varieties to simultaneously rectify these disparities. Between Dwyer's theory and the theory presented here, the roles of the two types of operations are interchanged.
 
 %%%
 %%%first quadrant homotopy --- Stover's van Kampen\\
@@ -6423,7 +6435,7 @@ As discussed earlier, we will write $T$ for any symmetry isomorphism, write ``$\
 \[X^{\otimes2}\overset{\rho}{\to}S_2X\textup{\ \ and\ \ }X^{\otimes2}\overset{\rho'}{\to}\Lambda^2
 %\qquad X^{\otimes2}\overset{\rho''}{\to}S^2X,
 \]
-for the projection onto coinvariants, and further onto the exterior quotient. Until \S\ref{External spectral sequence operations delta}, the operations that we will produce into each of $\Edownup{r}{}{S_2X}{}{}$ and $\Edownup{r}{}{\Lambda^2X}{}{}$ will be essentially the same.
+for the projection onto coinvariants and further onto the exterior quotient. Until \S\ref{External spectral sequence operations delta}, the operations that we will produce into each of $\Edownup{r}{}{S_2X}{}{}$ and $\Edownup{r}{}{\Lambda^2X}{}{}$ will be essentially the same.
 \subsection{An external spectral sequence pairing $\mu_\mathrm{ext}$}
 The easiest of our constructions is that of an external product, using 
 the chain-level formula
@@ -6492,7 +6504,7 @@ At least for $i>s+1$, $\Sq^i_\textup{ext}x=0$. The results for the operation $\S
 
 
 
-\begin{proof}
+\begin{proof}[Proof of \ref{prop on e1 steens 1} and \ref{prop on e1 steens 2}]
 We readily check that $\textup{SQ}^{i,s}x$ has filtration at least $s+i$:
 \begin{align*}
 \filt(\rho\Nabla (D^{s-i}(x\otimes x))&\geq s+s-(s-i)=s+i,\\
@@ -6679,6 +6691,7 @@ For $2\leq i\leq t+1$ and $x\in \EZdownup{0}{}{X}{s}{t}$:
 \rho\Nabla D^0(x\otimes dx),&\textup{if }i=n;\\
 0,&\textup{if }i< n.
 \end{cases}\]
+
 The same equations hold for $\textup{LAM}_i$ in the extended range $1\leq i\leq t+1$.
 \end{prop}
 \begin{proof}
@@ -6721,10 +6734,7 @@ Suppose that $x\in \E{}{r}{X}{s}{t}$ and $2\leq i\leq \max\{t-s,t-(r-1)\}$, so t
 %\Sq_\textup{ext}^{t-i+1}(x),&\textup{if $t-s<i =t-(r-1)$}\\
 0,&\textup{otherwise.}
 \end{cases}\]
-If $i\leq \max\{n,t+1-2(r-1)\}$, so that $\delta^\textup{ext}_i x$ is single-valued, then so is $\delta^\textup{ext}_i d_r x$, and this equation holds exactly. Otherwise, this equation holds modulo appropriate indeterminacy. When $i>t-s$ and $r =t-i+1$ the set of values of the left hand side coincides with the set of values of the right hand side.  
-%%%%%The operations
-%%%%%$\delta^\textup{ext}_i:\Edownup{1}{}{X}{0}{t}\to \Edownup{1}{}{S_2X}{0}{t+i}$ are  the restriction to $\Edownup{1}{}{X}{0}{t} \subseteq $ of %$\Edownup{r}{}{X}{0}{t}\subset \pi\uver_*(X^{0}) $ of
-%%%%% the operations $\delta_i^\textup{ext}$ 
+If $i\leq \max\{n,t+1-2(r-1)\}$, so that $\delta^\textup{ext}_i x$ is single-valued, then so is $\delta^\textup{ext}_i d_r x$, and this equation holds exactly. Otherwise, this equation holds modulo appropriate indeterminacy. When $i>t-s$ and $r =t-i+1$ the set of values of the left hand side coincides with the set of values of the right hand side.  In particular, if $x\in \E{}{\infty}{X}{s}{t}$ and $t-s>0$, then $x\times x=0\in\E{}{\infty}{S_2X}{2s+1}{2t+1}$.
 
 The same conclusions hold for $\textup{LAM}_i$, producing operations $\lambda_i^\textup{ext}$, and the inequality $2\leq i$ can be replaced with $1\leq i$ in this case.
 \end{prop}
@@ -6899,7 +6909,7 @@ Suppose that $X\in cs\algs$. We may define operations:
 \end{gather*}
 with the $\delta_i$ potentially multi-valued functions,  defined when $2\leq i\leq \max\{n,t-(r-1)\}$, and single valued whenever $2\leq i\leq\min\{n+1,t+1-2(r-1)\}$, and the $\Sq^j$ potentially multi-valued functions with indeterminacy vanishing by $E_{2r-2}$. 
 
-These operations will not be used in rest of the essay, as they will equal zero in the case of interest to us, namely when $X$ is a cosimplicial GEM. Nonetheless, we hope they are of some independent interest. 
+These operations will not be used in rest of the essay, as they will equal zero in the case of interest to us, namely when $X\in cs\calc$ is a GEM in each cosimplicial level. Nonetheless, we hope they are of some independent interest. 
 
 Numerous properties of these operations follow directly from the earlier results, namely propositions \ref{prop on basic product}, \ref{prop on e1 steens 1}, \ref{prop on e1 steens 2} \ref{Prop on delta external} and \ref{Prop on einfty ops}. In addition, we have
 
@@ -7357,20 +7367,19 @@ and the various external spectral sequence operations from $\E{}{r}{V}{}{}$ to e
 \mu:\left(\Edownup{r}{}{\calx}{s}{t}\otimes \Edownup{r}{}{\calx}{s'}{t'}\smash{{}\overset{\mu_\textup{ext}}{\to}{}} \Edownup{r}{}{\quadgrad{2}F^\calc \calx}{s+s'}{t+t'}\overset{L}{\to} 
 \Edownup{r}{}{\calx}{s+s'+1}{t+t'+1}\right),
 \end{gather*}
-with the $\deltav_i$ potentially multi-valued functions,  defined when $2\leq i\leq \max\{n,t-(r-1)\}$, and single-valued whenever $i\leq\min\{n+1,t+1-2(r-1)\}$, and the $\Sq^j$ potentially multi-valued functions with indeterminacy vanishing by $E_{2r-2}$\todo{say when vanishing}.  All of the functions that are  defined on $E_2$ are single valued, so it makes sense to state 
+with the $\deltav_i$ potentially multi-valued functions,  defined when $2\leq i\leq \max\{n,t-(r-1)\}$, and single-valued whenever $i\leq\min\{n+1,t+1-2(r-1)\}$, and the $\Sq^j$ potentially multi-valued functions with indeterminacy vanishing by $E_{2r-2}$\todo{\tiny say when vanishing}.  All of the functions that are  defined on $E_2$ are single valued, so it makes sense to state 
 \begin{prop}
 \label{adams operations are right for comm}
 When $\calc=\algs$,
 under the identification $\E{}{2}{\calx}{s}{t}\cong H^*_{\calw(0)}H^*_{\algs}X$, the operations just defined coincide with the  ${\calw(0)}$-cohomology operations defined in \S\ref{Cohomology Operations for W and U}.
 \end{prop}
-\todo{write something about commutation, and maybe make this an $E_1$-level thing}
 \noindent We will prove this result in \S\ref{proof of prop: adams operations are right for comm}. It implies that from $E_2$ the operations just defined have the properties cataloged in propositions \ref{Wn Halg omnibus}, \ref{operations on goerss homology} and \ref{rearrange horiz and vert ops} --- the $\deltav_i$ satisfy the $\delta$-Adem relations, the $\Sqh^j$ and $\mu$ satisfy the properties of such operations on Lie algebra cohomology, and there is a commutation relation between the $\deltav$ and the $\Sqh$ and $\mu$. These relations persist to relations on the higher pages (modulo appropriate indeterminacy).
 
 
 The following results follow from propositions \ref{prop on basic product}, \ref{prop on e1 steens 1}, \ref{prop on e1 steens 2}, \ref{Prop on delta external} and \ref{Prop on einfty ops} respectively, for $X\in s\algs$ and $\calx\in cs\algs$ its Radulescu-Banu resolution:
 \begin{cor}[(of \ref{prop on basic product})]
 \label{prop on basic product composed with lift}
-For each $r\geq2$, $\mu$ satisfies the Liebniz formula. \todo{Just $r\geq2$? Global thing?}
+For each $r\geq2$, $\mu$ satisfies the Liebniz formula. \todo{\tiny Just $r\geq2$? Global thing?}
 \end{cor}
 \begin{cor}[(of \ref{prop on e1 steens 1})]
 \label{prop on e1 steens 1 composed with lift}
@@ -8207,7 +8216,7 @@ so if we can prove that
 \[(H^*)^s_t:=(H^{*}_{\calw(0)}K_0^{\calw(0),T})^s_t=0 \textup{ \ whenever \ }s\geq t-s,\]
 the same will be true for $H^*_{\calw(0)}\dual W$, by Theorem \ref{Koszul-dual Hilton-Milnor theorem}. %, it is enough to prove a vanishing line for a single Eilenberg-Mac Lane object $K^{\algs}_{T}$. Note that the intercepts do not shift when applying Theorem \ref{Koszul-dual Hilton-Milnor theorem}, even though the coproducts involved shift filtration by one.
 % for $\dual W$, it is enough to prove this result when $\calX$ is a sphere.
-However, we have already calculated these groups, in Corollary \ref{the corollary on the bousfield kan e2}, and found that $(H^*)^s_t$ is spanned by the image of $\imath\in (H^*)^0_T$ under various $\calMhv(1)$-operations. As all of these operations preserve the half-plane specified by $s<t-s$, we are done.
+However, we have already calculated these groups, in Corollary \ref{the corollary on the bousfield kan e2}, and found that $(H^*)^s_t$ is spanned by the image of $\imath\in (H^*)^0_T$ under various $\calMv(1)$- and $\calMh(1)$-operations. As all of these operations preserve the half-plane specified by $s<t-s$, we are done.
 \end{proof}
 
 
@@ -8255,8 +8264,10 @@ The prolonged functor $\UEA:s\calL(n)\to s\calA(n)$ preserves weak equivalences.
 Suppose that $L\to L'$ is a weak equivalence in $s\calL(n)$. The Lie filtration makes $C_*(\UEA L)\to C_*(\UEA L')$ a map of filtered commutative differential graded algebras, so there is an induced map of the resulting spectral sequences. By Lemma \ref{Partially restricted PBW Theorem}, the $E^0$ page of the spectral sequence for $\UEA L$ is the differential graded algebra $C_*(\Ftwo [L_{\textbf{0}}]\otimes E[L_{\neq\textbf{0}}])$. By Dold's Theorem (\ref{Dold's theorem}), the $E^1$ page is a functor (determined by the results of \S\ref{Homotopy operations for simplicial commutative algebras}) of $\pi_*(L_{\textbf{0}})$ and $\pi_*(L_{\neq\textbf{0}})$. As the induced maps $\pi_*(L_{\textbf{0}})\to\pi_*(L'_{\textbf{0}})$ and $\pi_*(L_{\neq\textbf{0}})\to\pi_*(L'_{\neq\textbf{0}})$ are isomorphisms, the map of spectral sequences is an isomorphism from $E^1$.
 \end{proof}
 
+
 \subsection{The proof of Proposition \ref{all the lie steenrod ops are the same}}
-In this section we will demonstrate Proposition \ref{the point of the appendix}, which is stated for \emph{partially restricted} Lie algebras $L\in s\call(n)$, but can be reinterpreted for objects of $s\liealgs$ or $s\restliealgs$ as necessary. From this result,  propositions \ref{all the lie steenrod ops are the same} and \ref{Wn Halg omnibus} follow.
+In this
+\todo{\tiny read through} section we will demonstrate Proposition \ref{the point of the appendix}, which is stated for \emph{partially restricted} Lie algebras $L\in s\call(n)$, but can be reinterpreted for objects of $s\liealgs$ or $s\restliealgs$ as necessary. From this result,  propositions \ref{all the lie steenrod ops are the same} and \ref{Wn Halg omnibus} follow.
 
 
 Let $ L\in s\calL(n)$ be almost free on a fixed choice of subspaces $V_p\subseteq  L_p$.
@@ -8295,6 +8306,8 @@ The composite
 \[N_*\diag{\textbf{\textup{B}}}\simeq\textup{Tot}(N\uhor_*N\uver_*\textbf{\textup{B}})\overset{r}{\to} \textup{Tot}(N\uhor_*\textbf{\textup{Q}}_{\bullet*})=\Ftwo \oplus \Sigma N_*Q^{\calL(n)} L\]
 is a weak equivalence of chain complexes under which the operations on $\pi^*\dual\diag{\textup{\textbf{B}}}$ defined using  $\DeltatubfD$  correspond to the operations $\Sq^k:=\psi_{\calL(n)}\circ\ExtCohOp^{k-1}$ and $\mu:=\psi_{\calL(n)}\circ\ExtCohProd$ on $\pi^*(\dual(Q^{\calL(n)} L))=:H^*_{\calL(n)} L$.
 \end{prop}
+We will prove this proposition using the external spectral sequence operations of \S\ref{singer ext ops sect} in the spectral sequence of $\textup{\textbf{B}}$. By $E_2$, the only interesting non-zero entries of this spectral sequence lie on the horizontal line $q=1$, so that Singer's operations will prove very uniteresting without modification. Our method will be to perform such a modification by using the  chain homotopy $h$ (defined shortly) to shift the horizontal operations one higher in filtration. The shifted homotopy operations will preserve the line $q=1$, and will abut to operations on $E_\infty$ that satisfy the same relations as those on $\diag{\textbf{B}}$. As the abutment filtration is trivial, they must satisfy the same relations at $E_2$. Finally, we will note that what we have produced at $E_2$ is the definition of the Steenrod operations from \S\ref{section: Cohomology operations for simplicial (restricted) Lie algebras}.
+
 
 As $ L$ is levelwise free, the evident map $F^{\calA(n)}V_p\to \UEA L_p$ is an isomorphism for each $p$, and we define a vertical homotopy $h:N\uver_*\textbf{B}_{p}\to N\uver_{*+1}\textbf{B}_{p}$ by the following formulae (in which the $v_{i_{j}}$ are taken to be in $V_p\subseteq  L_p\subseteq\UEA L_p$):
 \begin{alignat*}{2}
@@ -8318,9 +8331,10 @@ Under the map $(\textup{Id}+h_{q-1}d\uver+d\uver h_{q}): N\uver_q\bar{B}\UEA L_p
 &\longmapsto [v_{i_{1}}].
 \end{alignat*}
 \end{lem}
-\todo[inline]{Rewrite: Singer \cite{SingerSteen1.pdf} gives a method of defining horizontal Steenrod operations on the spectral sequence of $\textbf{B}$. His method is to define a \emph{bisimplicial Eilenberg-Zilber map} $K_k:C\left(X\otimes Y\right)\to CX\otimes CY$ for each $k$, a degree $k$ map satisfying $dK_k+K_kd=K_{k-1}+TK_{k-1}T$. His formulae are given in terms of a \emph{special} simplicial Eilenberg-Zilber map. On the dual total complex, the resulting cohomology operations satisfy the Adem operations.
 
-Our method of proving [] will be to modify Singer's definition, using the chain homotopy $h$ to shift the horizontal operations one higher in filtration. They will still satisfy the same relations at the abutment, and as the abutment filtration is trivial, they must satisfy the same relations at $E_2$. Finally, we will note that what we have produced at $E_2$ is the definition of the Steenrod operations from \S\ref{section: Cohomology operations for simplicial (restricted) Lie algebras}.}
+%Singer \cite{SingerSteen1.pdf} gives a method of defining horizontal Steenrod operations on the spectral sequence of $\textbf{B}$. His method is to define a \emph{bisimplicial Eilenberg-Zilber map} $K_k:C\left(X\otimes Y\right)\to CX\otimes CY$ for each $k$, a degree $k$ map satisfying $dK_k+K_kd=K_{k-1}+TK_{k-1}T$. His formulae are given in terms of a \emph{special} simplicial Eilenberg-Zilber map. On the dual total complex, the resulting cohomology operations satisfy the Adem operations.
+
+%Our method of proving [] will be to modify Singer's definition, using the chain homotopy $h$ to shift the horizontal operations one higher in filtration. They will still satisfy the same relations at the abutment, and as the abutment filtration is trivial, they must satisfy the same relations at $E_2$. Finally, we will note that what we have produced at $E_2$ is the definition of the Steenrod operations from \S\ref{section: Cohomology operations for simplicial (restricted) Lie algebras}.
 \begin{lem}
 \label{firstCompositeLemma}
 The composite
@@ -8389,7 +8403,7 @@ Next, consider an element $[v]$ of $N\uhor_{n+k}N\uver_1\textbf{B}$. As $h[v]=0$
 Fix a cocycle $\alpha\in \dual(N_{n}Q^{\calL(n)} L)$. %We may assume without loss of generality (or are we \textbf{forced} to assume) that  $\alpha$ evaluates to zero... wait... what am I talking about?
 Then $\alpha$ may be viewed an a permanent cocycle in $\EZ{}{\infty}{\dual(\textbf{Q}_{\bullet*})}{n,1}{}$ in the spectral sequence obtained by dualizing $\textbf{Q}_{\bullet*}$. 
 
-Singer \citeBOX[(2.14)]{MR2245560} defines  an operator $S^k$ on the total cochain complex of a bisimplicial coalgebra which induces the cohomology operation $\Sq^k$.
+Singer \citeBOX[(2.14)]{MR2245560} defines  an operator $S^k$ on the total cochain complex of a bisimplicial coalgebra which induces the cohomology operation $\Sq^k_\textup{ext}$.
 We will apply the chain-level operator $S^k$  to the class $r^*\alpha\in \EZ{}{\infty}{\textbf{B}}{n,1}{}$. As $\alpha$ is a permanent cycle, $d(r^*\alpha)=0$, and Singer's expression simplifies to:
 %\[S^k(r^*\alpha):=\psi^*K^*_{n+1-k}\oldphi(r^*\alpha\otimes r^*\alpha)=T_1+T_2,\textup{ where}\]
 \begin{alignat*}{2}
@@ -8410,7 +8424,7 @@ T_2
 %\[\underbrace{\psi^*(D\uver_0)^*(D^\textup{h}_{n+1-k})^*\oldphi(r^*\alpha\otimes r^*\alpha)}_{\textup{$T_1$, filtration $n+k-1$}}+
 %\underbrace{\psi^*(D\uver_1)^*(TD^\textup{h}_{n-k}T)^*
 %\oldphi(r^*\alpha\otimes r^*\alpha)}_{\textup{$T_2$, filtration $n+k$}}\]
-Our method will be to compress each of these terms into filtration one higher, using the cochain homotopy $h^*:\dual(N\uhor_* N\uver_*\textbf{B})\to \dual(N\uhor_*N\uver_{*-1}\textbf{B})$
+Our method will be to compress each of these terms into filtration one higher, using the cochain homotopy $h^*:\dual(N\uhor_* N\uver_*\textbf{B})\to \dual(N\uhor_*N\uver_{*-1}\textbf{B})$.
 Using Lemma \ref{barConstNullHtpyLemma}:
 \[(\textup{Id}+d\uver h^*+ h^*d\uver )T_1=0\textup{ and }(\textup{Id}+d\uver h^*+ h^*d\uver)T_2=0.\]
 The first equation holds as $(\textup{Id}+hd\uver+d\uver h)$ is zero on $N\uver_2\textbf{B}$. For the second equation, on $N\uver_1\textbf{B}$,  $(\textup{Id}+hd\uver+d\uver h)$ is the projection onto terms of the form $[v]$, yet Lemma \ref{secondCompositeLemma} shows that the composite
@@ -8437,7 +8451,6 @@ Now $\dual(N\uhor_nQ^{\calL(n)} L \otimes N\uhor_nQ^{\calL(n)} L )$ contains the
 Both spectral sequences collapse at $E_2$ and induce trivial filtrations on their shared target, so that understanding the shifted operations at $E_2$ is equivalent to understanding the operations on $\pi^*\dual\diag{\textbf{B}}$, which we do: they equal Priddy's operations on $\pi^*\bar{W}\UEA L$ \cite[\S5]{PriddySimplicialLie.pdf}.
 As $r^*$ is an $E_2$-equivalence, this proves the result. A simple modification proves the result for pairings.
 \end{proof}
-\todo[inline]{that discussion seemed clumsy at the end --- can I remove some verbiage in light of what's earlier in the subsection?}
 \subsection{The Chevalley-Eilenberg-May complex}
 \label{The Chevalley-Eilenberg-May complex}
 Suppose that $M\in\calL(n)$ is a partially restricted Lie algebra of finite type (not simplicial). One can define a differential coalgebra, the \emph{Chevalley-Eilenberg-May complex}, to be the subcoalgebra $\UEAX(M):= E[M_{\textbf{0}}]\otimes \Gamma[M_{\neq\textbf{0}}]$ of the divided power Hopf algebra $\Gamma[M]$ with its usual coalgebra structure (c.f.\ \citeBOX[p.~141]{MayRestLie.pdf}), graded as follows. 
@@ -8462,8 +8475,6 @@ This differs by a shift from the standard definitions, given in \cite{MR0024908}
 Now let $ L=B^{\calL(n)}M\in s\calL(n)$. Using the equation $\diag{\textbf{B}}= \bar{B}_\bullet(\UEA M)$ of simplicial coalgebras and  May's injection \cite[Theorem 18 and  (7.8)]{MayRestLie.pdf} of $\UEAX(M)$ into the bar construction, there are maps:
 \[\Sigma\UEAX(M)\to N_*\bar{B}_\bullet(U'M)\simeq\textup{Tot}(N\uhor_*N\uver_*\textbf{B})\overset{r}{\to} \textup{Tot}(N\uhor_*\textbf{Q}_{\bullet*})=\Ftwo \{1\}\oplus \Sigma N_*Q^{\calL(n)} L.\]
 Now the first map, after the  suspension $\Sigma$ shift homological degree, is a degree preserving map of differential coalgebras, both of which only have a shift in the cohomological degree $t$. In light of this discussion, Proposition \ref{the point of the appendix} implies Proposition \ref{Omnibus on CEM cx} (in which we move back into the notation $S(\CommOperad)$ and $\Lambda(\CommOperad)$ for the non-unital commutative and exterior algebra monads).
-
-\todo[inline]{Move the following into `operations for PRLs'?}
 \begin{prop}
 \label{Omnibus on CEM cx}
 $H^*_{\calL(n)}M$ may be calculated, as a \emph{non-unital commutative algebra}, as the cohomology algebra of the differential graded algebra $\dual(\UEAX(M))$, where $\dual(\UEAX(M))$ is  the non-unital commutative algebra $\dual(\UEAX(M))=\Lambda(\CommOperad)[\dual M_{\textup{\textbf{0}}}] \sqcup S(\CommOperad)[\dual M_{\neq\textup{\textbf{0}}}]$. This algebra is $\vect{n+1}{+}$-graded, generated by its subspace
@@ -8473,7 +8484,7 @@ and has grading shifted product
 \end{prop}
 \noindent Recall that the coproduct $A\sqcup B$ of non-unital commutative algebras is the direct sum $A\oplus (A\otimes B)\oplus B$.
 
-We are particularly  interested in the case that $M$ is \emph{trivial as a Lie algebra}, but may still have non-zero restriction. In this case, the restriction is in fact a \emph{linear} map, and we may write $\dualrestn{\DASH}:\dual M\to \dual M$ for its dual (a map which we consider to be everywhere defined, but necessarily equal to zero on $M_{\textbf{0}}$). Examination of  \citeBOX[(6.19)]{MayRestLie.pdf} shows that:
+We are particularly  interested in the case that $M$ is \emph{trivial as a Lie algebra}, but may still have non-zero restriction. In this case, the restriction is in fact a \emph{linear} map, and we may write $\dualrestn{\DASH}:\dual M\to \dual M$ for its dual (a map which we consider to be everywhere defined, but necessarily equal to zero on $M_{\textbf{0}}$). Examination of  \citeBOX[(6.19)]{MayRestLie.pdf} shows:
 \begin{prop}
 \label{CEM for trivial lie bracket}
 If $M$ has bracket zero, then the differential on the cohomological differential graded algebra $\dual(\UEAX(M))$ is defined on generators $\alpha\in \dual M\subseteq \dual(\UEAX(M))$ by the formula
