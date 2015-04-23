@@ -1,5 +1,5 @@
 % !TEX root = z_output/unstable_Lie_algs.tex
-\documentclass[11pt]{amsart} \renewcommand{\baselinestretch}{1.4}
+\documentclass[11pt]{amsart} \renewcommand{\baselinestretch}{1.2}
 \newcommand{\IncludeAll}{}%
 \newcommand{\xShrinkPages}{}%
 \newcommand{\xPostponeContents}{}%
@@ -408,7 +408,8 @@ url=false,doi=false,isbn=false,eprint=false]{biblatex}%
 \newcommand{\smashcoprod}{\veebar}%{\blacktriangledown}
 \newcommand{\Dendo}{R}
 
-\newcommand{\vfpb}{\vfil\pagebreak}
+\newcommand{\vfpb}{\vfil\PAGEBREAK}
+\newcommand{\PAGEBREAK}{\vfil\pagebreak}
 
 
 \renewcommand{\mapsto}{\longmapsto}
@@ -439,7 +440,7 @@ url=false,doi=false,isbn=false,eprint=false]{biblatex}%
 \begin{Contents Page}
 %\begin{abstract}\end{abstract}
 \maketitle
-\ifx\PostponeContents\undefined{\tableofcontents \hfil\pagebreak }\else\relax\fi
+\ifx\PostponeContents\undefined{\tableofcontents \hfil\PAGEBREAK }\else\relax\fi
 \end{Contents Page}
 
 
@@ -616,22 +617,22 @@ The role of the product seems straightforward, but the role of the Steenrod oper
 This situation is quite reminiscent of that described by Dwyer \cite{DwyerHigherDividedSquares.pdf}, who works in the spectral sequence of a cosimplicial simplicial coalgebra (for example, the Eilenberg-Moore spectral sequence). In such a spectral sequence, one expects to find Steenrod operations but finds too many: Dwyer constructs $\delta$-operations and differentials mapping the excess Steenrod operations to the $\delta$ operations. In this way, the excess Steenrod operations fail to be defined at $E_\infty$, and the $\delta$-operations become zero by $E_\infty$, an excellent resolution to this problem.
 
 We cannot use Dwyer's operations directly: although under linear dualization a cosimplicial simplicial algebra becomes a cosimplicial simplicial algebra (of which the resolution $\calx$ is an example), the choice of filtration direction is transposed. Instead, we perform analogous constructions in the dual setting, and describe in \S\ref{The case of a cosimplicial simplicial commutative algebra} a theory of operations on the spectral sequence of a cosimplicial simplicial algebra, which we hope will be of some independent interest. Even these operations are not yet what we require, as it happens that they can be lifted one filtration higher at the chain level when we are working in the Bousfield-Kan spectral sequence in question. In \S\ref{second quadrant homotopy sseq operations} and \S\ref{Operations on the Bousfield-Kan spectral sequence}, we explain how to construct operations:
-\[\begin{tabular}{c}
-$\delta_i:\Edownup{r}{}{\calx}{s}{t} \to \Edownup{r}{}{\calx}{s+1}{t+i+1}$,
+\begin{gather*}
+\delta_i:\Edownup{r}{}{\calx}{s}{t} \to \Edownup{r}{}{\calx}{s+1}{t+i+1},
 \\
-$\Sq^j:\Edownup{r}{}{\calx}{s}{t}   \to
-\Edownup{r}{}{\calx}{s+j}{2t+1}$,\\
-$\mu:\Edownup{r}{}{\calx}{s}{t}\otimes \Edownup{r}{}{\calx}{s'}{t'}\to
-\Edownup{r}{}{\calx}{s+s'+1}{t+t'+1}$,
-\end{tabular}\]
+\Sq^j:\Edownup{r}{}{\calx}{s}{t}   \to
+\Edownup{r}{}{\calx}{s+j}{2t+1},\\
+\mu:\Edownup{r}{}{\calx}{s}{t}\otimes \Edownup{r}{}{\calx}{s'}{t'}\to
+\Edownup{r}{}{\calx}{s+s'+1}{t+t'+1},
+\end{gather*}
 with the $\delta_i$ potentially multi-valued functions,  defined when $2\leq i\leq \max\{n,t-(r-1)\}$, and single-valued whenever $i\leq\min\{n+1,t+1-2(r-1)\}$, and the $\Sq^j$ potentially multi-valued functions with indeterminacy vanishing by $E_{2r-2}$. All of the functions that are  defined on $E_2$ are single valued, and in fact, we show in Proposition \ref{adams operations are right for comm} that they coincide with the operations defined on $H^*_{\calw(0)}$.
 
 For $x\in \E{}{r}{\calx}{s}{t}$ such that  $\deltav_ix $ is defined:
-\[d_r\deltav_ix=\begin{cases}
-\deltav_i(d_rx),&\textup{if $i< t-s$ or $i<t-(r-1)$};\\
-\deltav_i(d_rx),&\textup{if $i=t-s$ and $s>0$};\\
-\deltav_i(d_rx)+\mu(x\otimes d_rx),&\textup{if $i=t-s$ and  $s=0$};\\
-\deltav_i(d_rx)+\Sqv^{t-i+2}x,&\textup{if $i>t-s$ and $i=t-(r-1)$}.
+\[d_r\deltav_i(x)+ \deltav_i(d_rx)=\begin{cases}
+\Sqh^{t-i+2}(x),&\textup{if $i>t-s$ and $r =t-i+1$}\\
+\mu(x\otimes d_rx),&\textup{if $i=t-s$,  $s=0$ and $r\geq2$};\\
+%\Sqh^{t-i+1}(x),&\textup{if $t-s<i =t-(r-1)$}\\
+0,&\textup{otherwise.}
 \end{cases}\]
 This is Corollary \ref{Prop on delta external composed with lift}. In particular, if $i>t-s$ and $x\in\E{}{t-i+1}{\calx}{s}{t}$ survives to $\E{}{t-i+2}{\calx}{s}{t}$, then $d_{t-i+1}$ maps $\deltav_ix$ to $\Sqv^{t-i+2}x$. Of course the situation is a little more nuanced than this, but these formulae explain how the $\Sqv$ serve to absorb differentials supported by the excess $\deltav$.
 
@@ -3769,7 +3770,7 @@ defined whenever $0\leq i\leq s_{n+1}$ and not all of $i,s_n,\ldots,s_1$ equal z
 We have written the bracket as a map from $(\pi_*L)^{\otimes 2}$ to clarify the degree shift, but nevertheless, the top $\lambda$-operation, whenever it is defined, is a restriction for this bracket whenever.
 Indeed, this set of natural operations satisfies the evident modification of Proposition \ref{omnibus on htpy of Lie algs}.
 
-%\hfil\pagebreak
+
 %
 %\textbf{(much of this now moved...)} We will now give an account of the natural operations on the homotopy of a simplicial object of $\calL(n)$.
 %
@@ -8583,7 +8584,7 @@ If $M$ has bracket zero, then the differential on the cohomological differential
 \begin{Contents Page}
 %\begin{abstract}\end{abstract}
 %\maketitle
-\ifx\PostponeContents\undefined\else\vfil\pagebreak\tiny\tableofcontents\relax\fi
+\ifx\PostponeContents\undefined\else\vfil\PAGEBREAK\tiny\tableofcontents\relax\fi
 \end{Contents Page}
 
 \end{document}
