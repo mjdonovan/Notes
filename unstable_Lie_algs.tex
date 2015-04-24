@@ -1,6 +1,6 @@
 % !TEX root = z_output/unstable_Lie_algs.tex
 \documentclass[11pt]{amsart} \renewcommand{\baselinestretch}{1.2}
-\newcommand{\IncludeAll}{}%
+\newcommand{\xIncludeAll}{}%
 \newcommand{\xShrinkPages}{}%
 \newcommand{\xPostponeContents}{}%
 \ifx\ShrinkPages\undefined\else\usepackage[paperheight=220mm,paperwidth=160mm]{geometry}\fi%220/160 height options
@@ -18,9 +18,9 @@
 \ooooo[	 8]{Cohomology Operations for W and U}
 \ooooo[	 9]{Koszul complexes}
 \ooooo[	10]{Composite functor spectral sequences}
-\wooooo[	11]{Operations in composite functor spectral sequences}
+\ooooo[	11]{Operations in composite functor spectral sequences}
 \ooooo[	12]{Calculations of HWn}
-\ooooo[13]{second quadrant homotopy sseq operations}
+\wooooo[	13]{second quadrant homotopy sseq operations}
 \ooooo[	14]{Operations on the Bousfield-Kan spectral sequence}
 \ooooo[	15]{May sseq and vanishing line}
 \ooooo[	ap]{appendices}
@@ -6488,33 +6488,39 @@ Consider the chain-level map:
 We will use these maps to define external Steenrod squares, the behaviour of which is rather different on $E_1$ than on later pages. Thus, we will state two separate propositions that we will prove together.
 \begin{prop}
 \label{prop on e1 steens 1}
-The chain level operation $\textup{SQ}^{i,s}$ defines an \emph{external Steenrod operation} \[\Sq^i_\textup{ext}:\Edownup{r}{}{X}{s}{t}\to \Edownup{r}{}{S_2X}{s+i}{2t}\textup{ \ ($r\geq1$)},\] with indeterminacy vanishing by $\Edownup{2r-2}{}{S_2X}{s+i}{2t}$. At $E_2$, there is no indeterminacy, and the operation $\hExtCohOp^k$ corresponds to the composite:
-\[\pi\dhor^s\pi\uver_t X
-\overset{\ExtCohOp^k}{\to} 
-\pi\dhor^{s+k}S_2(\pi\uver_t X)
-\overset{\pi\dhor^{s+k}(\widetilde{\nabla})}{\to}
-\pi\dhor^{s+k}\pi\uver_{2t}S_2 X.
-\]
-Suppose that $x\in \Edownup{r}{}{X}{s}{t}$ and $r\geq2$. $\Sq^i_\textup{ext}x$ survives to $\Edownup{2r-1}{}{S_2X}{s+i}{2t}$, and modulo appropriate indeterminacy: \[d_{2r-1}(\Sq^i_\textup{ext}x)=\Sq^{i+r-1}_\textup{ext}(d_rx).\]
-The top operation $\Sq^s_\textup{ext}x$ is equal to the product-square $x\times x$, and in particular has no indeterminacy. For $i>s$, $\Sq^i_\textup{ext}x=0$. Whenever $t\geq2$, $\Sq^1_\textup{ext}x=0$.  The bottom operation, $\Sq^0_\textup{ext}x$, is zero whenever $t>0$, and when $t=0$:
+For $r\geq1$, the chain level operation $\textup{SQ}^{i,s}$ defines an \emph{external Steenrod operation} with indeterminacy vanishing by $E_{2r-2}$:
+\[\Sq^i_\textup{ext}:\Edownup{r}{}{X}{s}{t}\to \Edownup{r}{}{S_2X}{s+i}{2t}.\]
+Suppose now that $r\geq 2$ and $x\in\Edownup{r}{}{X}{s}{t}$. Unless $\min\{t,r\}\leq i\leq s$, $\Sq^i_\textup{ext}x=0$ (and is well defined without indeterminacy).
+In any case, $\Sq^i_\textup{ext}x$ survives to $\Edownup{2r-1}{}{S_2X}{s+i}{2t}$, and \[d_{2r-1}(\Sq^i_\textup{ext}x)=\Sq^{i+r-1}_\textup{ext}(d_rx),\]
+modulo the indeterminacy of $\Sq^{i+r-1}_\textup{ext}(d_rx)$. %If $i<r$ and $t \geq i+1$ then $\Sq^i_\textup{ext}x=0$, and in fact $\Sq^i_\textup{ext}x$ may be taken to have no indeterminacy.
+
+The \emph{top operation} $\Sq^s_\textup{ext}x$ is equal to the product-square $x\times x$, and in particular has no indeterminacy. 
+As for the only potentially non-zero $\Sq^0_\textup{ext}$ operation:
 \[\Sq^0_\textup{ext}:\Edownup{r}{}{X}{s}{0}\to \Edownup{r}{}{S_2X}{s}{0}\textup{ is induced by $X\overset{\textup{squaring}}{\to}S_2X$}.\]
-After composing with $\Edownup{r}{}{S_2X}{s+i}{2t}\to \Edownup{r}{}{\Lambda^2X}{s+i}{2t}$, $\Sq^0_\textup{ext}x=0$ for all $t$, and $\Sq^1_\textup{ext}x=0$ whenever $t\geq1$ and $r\geq2$.
+
+At $E_2$, there is no indeterminacy, and the operation $\hExtCohOp^k$ corresponds to the composite:
+\[\pi\dhor^s\pi\uver_t X
+\overset{\ExtCohOp^i}{\to} 
+\pi\dhor^{s+i}S_2(\pi\uver_t X)
+\overset{\pi\dhor^{s+i}(\widetilde{\nabla})}{\to}
+\pi\dhor^{s+i}\pi\uver_{2t}S_2 X.
+\]
+
+The condition $\min\{t,r\}\leq i\leq s$ may be replaced with $\min\{t+1,r\}\leq i\leq s$ after composing with $\Edownup{r}{}{S_2X}{s+i}{2t}\to \Edownup{r}{}{\Lambda^2X}{s+i}{2t}$.
 \end{prop}
-
-
 \begin{prop}
 \label{prop on e1 steens 2}
 %Fix $i,s\geq0$ and set $r=1$. The chain level operation $\textup{SQ}^{i,s}$ defines an 
 At $E_1$, the external Steenrod operations have no indeterminacy, and satisfy  $d_{1}(\Sq^i_\textup{ext}x)=\Sq^{i}_\textup{ext}(d_1x)$. Suppose that $x\in \Edownup{1}{}{X}{s}{t}$.
 The top operation $\Sq^s_\textup{ext}x$ \emph{need not} equal the product-square $x\times x$ on $E_1$, and
 $\Sq^{s+1}_\textup{ext}x$ \emph{need not} vanish, instead equalling $x\times d_1x$ on $E_1$.
-At least for $i>s+1$, $\Sq^i_\textup{ext}x=0$. The results for the operation $\Sq^0_\textup{ext}x$ are unchanged, but there are no results to report for $\Sq^{1}_\textup{ext}$.
+At least for $i>s+1$, $\Sq^i_\textup{ext}x=0$. The results for $\Sq^0_\textup{ext}$ are unchanged, so that $\Sq^0_\textup{ext}$ vanishes when $t>0$ and is represented by squaring when $t=0$.
 \end{prop}
 
 
 
 \begin{proof}[Proof of \ref{prop on e1 steens 1} and \ref{prop on e1 steens 2}]
-Choose a representative $x\in \Edownup{r}{}{X}{s}{t}$ of the class of interest. We readily check that $\textup{SQ}^{i,s}x$ has filtration at least $s+i$:
+Choose a representative $x\in \EZdownup{r}{}{X}{s}{t}$ of the class of interest. We readily check that $\textup{SQ}^{i,s}x$ has filtration at least $s+i$:
 \begin{align*}
 \filt(\rho\Nabla (D^{s-i}(x\otimes x))&\geq s+s-(s-i)=s+i,\\
 \filt(\rho\Nabla (D^{s-i+1}(x\otimes dx))&\geq s+(s+r)-(s-i+1)=s+i+(r-1).
@@ -6545,18 +6551,30 @@ That is, $\textup{BC}$ is a bounding chain for this difference, and
 \[\filt(\textup{BC})\geq 2(s-r+1)-(s-i-1)=(s+i)-(2r-3),\]
 so that $\Sq^i_\textup{ext}x$ has indeterminacy vanishing by $\Edownup{2r-2}{}{S_2X}{s+i}{2t}$ as claimed. When $i=s$, this result may be improved to $\filt(\textup{BC})\geq 2s-(r-1)$,  as in this case the lowest filtration summand in fact vanishes --- this is one explanation of why the top square has no indeterminacy.
 
-For the statement about the top operation, one calculates that
-\[\textup{SQ}^{s,s}x-\rho\Nabla D^0(x\otimes x)=\rho D^{1}(x\otimes dx)\in F^{2s+r-1},\] which exceeds filtration $2s$ when $r\geq2$.
 When $i\geq s+2$, we have $\textup{SQ}^{i}x=0$, and even with $i=s+1$:
-\[\textup{SQ}^{s+1,s}x=\rho D^{0}(x\otimes dx)\in F^{2s+r},\]
-so that $\Sq^{s+1}_\textup{ext}x$ is zero in $\Edownup{r}{}{S_2X}{2s+1}{2t+1}$ for $r\geq2$.
-For the statement about $\Sq_\textup{ext}^0x$, Proposition \ref{dvsDEL} shows that the $E_0$-operation $\delta_{t+1}^\textup{ext}$ provides a nullhomotopy of $\Sq_\textup{ext}^0$, but in dimensions where it is defined. In dimension $t=0$ (using the specialness assumption):
-\[\textup{SQ}^{0,s}x-\rho\Nabla D^s(x\otimes x)=0 \in F^{s+r-1},\]
+\[\textup{SQ}^{s+1,s}x=\rho\nabla D^{0}(x\otimes dx)\in F^{2s+r},\]
+so that $\Sq^{s+1}_\textup{ext}x$ vanishes when $r\geq2$,  and $\Sq^{s+1}_\textup{ext}x=x\times d_1x$  when $r=1$, without indeterminacy in both cases. 
+
+We must also check that $\Sq^i_\textup{ext}x$ vanishes (without indeterminacy) when $i<\min\{t,r\}$. For this we use the filtration preserving operations $\textup{DEL}_i$ to be defined in \S\ref{External spectral sequence operations delta}. Suppose   Proposition \ref{dvsDEL} states that
+\[d(\textup{DEL}_{t-i+1}(x))+ \textup{DEL}_{t-i+1}(dx)=
+\textup{SQ}^{i,s}(x)\]
+as long as $2\leq t-i+1\leq t+1$ (which is satisfied whenever $i<t$). Moreover, if $i<r$, then 
+\[ \textup{DEL}_{t-i+1}(dx)\in F^{s+r}\subset F^{s+i+1}\textup{ and }\textup{DEL}_{t-i+1}(x)\in F^{s},\]
+so that this equation states that $\textup{SQ}^{i,s}(x)=0$ in $\E{}{r}{X}{s+i}{2t}$, without indeterminacy.
+
+
+For the statement about the top operation, one calculates that
+\[\textup{SQ}^{s,s}x-\rho\Nabla D^0(x\otimes x)=\rho\nabla D^{1}(x\otimes dx)\in F^{2s+r-1},\] which exceeds filtration $2s$ when $r\geq2$.
+
+
+
+For the statement about $\Sq_\textup{ext}^0x$ when $t=0$, using the specialness assumption:
+\[\textup{SQ}^{0,s}x-\rho\Nabla D^s(x\otimes x)=\rho\Nabla D^{s+1}(x\otimes dx) \in F^{s+1},\]
 so that (using the assumption that $\{D^k\}$ is special):
 \begin{alignat*}{2}
 \textup{SQ}^{0,s}x
 &\equiv
-\rho\Nabla D^s(x^s_t\otimes x^s_t)&&\textup{(mod $F^{s+r-1}$)}%
+\rho\Nabla D^s(x^s_t\otimes x^s_t)&&\textup{(mod $F^{s+1}$)}%
 \\
 &\quad =
 \rho(\oldphi_0+(1{+}\twist)\Nabla_0)(x^s_t\otimes\dver x^s_t)%
@@ -6564,11 +6582,15 @@ so that (using the assumption that $\{D^k\}$ is special):
 &\quad =
 \rho\oldphi_0(x^s_t\otimes\dver x^s_t)\in C(X\otimes_{\Sigma_2} X)_{t}^{s}.
 \end{alignat*}
-Finally, $\Sq^1_\textup{ext}x\in\Edownup{2}{}{S_2X}{}{}$ vanishes for $x\in \Edownup{2}{}{X}{s}{t}$ with $t\geq2$ since it is the image of a $d_1$, namely $d_1(\delta^\textup{ext}_tx)$, where $\delta_t^\textup{ext}x$ will be defined in Proposition \ref{Prop on delta external}.
 
-The statements about $\Edownup{r}{}{\Lambda^2X}{s+i}{2t}$ follow similarly.
-\end{proof}
-It may seem that there is an extra non-zero Steenrod operation coming from the chain level operation $\textup{SQ}^{s+1,s}$, on $E_r$, however, this operation lives as high as filtration $2s+r$ (which exceeds the expected $2s+1$ when $r\geq2$), and equals the operation $x\mapsto x\times d_rx$. Note that at $E_1$, this operation is in fact in the expected filtration.
+The statements about $\Edownup{r}{}{\Lambda^2X}{s+i}{2t}$ follow similarly, replacing  $\textup{DEL}_i$ with $\textup{LAM}_i$.\end{proof}
+%%%%%
+%%%%%Finally, $\Sq^1_\textup{ext}x\in\Edownup{2}{}{S_2X}{}{}$ vanishes for $x\in \Edownup{2}{}{X}{s}{t}$ with $t\geq2$ since it is the image of a $d_1$, namely $d_1(\delta^\textup{ext}_tx)$, where $\delta_t^\textup{ext}x$ will be defined in Proposition \cancel{\ref{Prop on delta external}}.
+%%%%%
+%%%%%
+%%%%%Proposition \ref{dvsDEL} shows that the $E_0$-operation $\delta_{t+1}^\textup{ext}$ provides a nullhomotopy of $\Sq_\textup{ext}^0$, but only in dimensions where it is defined.
+%%%%%
+%%%%%It may seem that there is an extra non-zero Steenrod operation coming from the chain level operation $\textup{SQ}^{s+1,s}$, on $E_r$, however, this operation lives as high as filtration $2s+r$ (which exceeds the expected $2s+1$ when $r\geq2$), and equals the operation $x\mapsto x\times d_rx$. Note that at $E_1$, this operation is in fact in the expected filtration.
 %\begin{prop}
 %The chain-level operation $\textup{SQ}^{s+1,s}$ defines an operation $\Sq^{s+1}_\textup{over}:E_r_{-s,t}(X)\to E_r_{-2s-r,2t+r-1}(X\otimes_{\Sigma_2}X)$, with indeterminacy vanishing by $E_{?x?x?}$. For $x\in E_r_{-s,t}(X)$, $\Sq^{s+1}_\textup{over}(x)$ survives to $E_{?x?x?}$, and moreover, $d_{r}(\Sq^{s+1}_\textup{over}x)=\Sq^{s+r}(d_rx)=d_rx\times d_rx$ modulo indeterminacy.
 %\end{prop}
@@ -6696,7 +6718,7 @@ To proceed, we will need a formula for the boundary of $\textup{DEL}_i(x)$:
 \begin{prop}
 \label{dvsDEL}
 For $2\leq i\leq t+1$ and $x\in \EZdownup{0}{}{X}{s}{t}$:
-\[d(\textup{DEL}_i(x))+ \textup{DEL}_i(dx)=\begin{cases}
+\[d(\textup{DEL}_i(x))+ \textup{DEL}_i(dx)=\textup{SQ}^{t-i+1,s}(x)=\begin{cases}
 \textup{SQ}^{t-i+1,s}(x),&\textup{if }n+1\leq i \leq t+1;\\
 \rho\Nabla D^0(x\otimes dx),&\textup{if }i=n;\\
 0,&\textup{if }i< n.
