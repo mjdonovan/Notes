@@ -8,7 +8,7 @@
 \ooooo[	do]{todolist}\ooooo[]{thanks}\ooooo[]{random junk}
 \ifx\IncludeAll\undefined\else\renewcommand{\ooooo}[2][]{\wooooo{#2}}\fi
 \ooooo[	ct]{Contents Page}
-\wooooo[	 1]{Introduction}
+\ooooo[	 1]{Introduction}
 \ooooo[	 2]{Conventions and notation}
 \ooooo[	 3]{Pi-algebras and cohomology algebras}
 \ooooo[	 4]{Bousfield-Kan spectral sequence}
@@ -22,7 +22,8 @@
 \ooooo[	12]{Calculations of HWn}
 \ooooo[	13]{second quadrant homotopy sseq operations}
 \ooooo[	14]{Operations on the Bousfield-Kan spectral sequence}
-\ooooo[	15]{May sseq and vanishing line}
+\wooooo[	15]{The Bousfield-Kan spectral sequence for a sphere}
+\ooooo[	16]{May sseq and vanishing line}
 \ooooo[	ap]{appendices}
 \ooooo[	bb]{bibliog}
 
@@ -64,7 +65,7 @@
 \newtheorem{cor}[thm]{Corollary}
 %\newtheorem*{cor*}{Corollary}
 %\newtheorem{defprop}[thm]{Definition-Proposition}
-%\newtheorem{conjecture}{Conjecture}
+\newtheorem{conjecture}{Conjecture}
 %\newtheorem*{conjecture*}{Conjecture}
 %\newtheorem*{claim}{Claim}
 
@@ -370,7 +371,7 @@ url=false,doi=false,isbn=false,eprint=false]{biblatex}%
 \newcommand{\F}{\mathbb{F}}
 \newcommand{\Id}{\mathrm{id}}
 \newcommand{\complexes}{\mathrm{ch}_+}
-\newcommand{\algs}{{\scrC\!\textit{om}}}
+\newcommand{\algs}{{\scrC\!\textit{\normalfont\textit{om}}}}
 \newcommand{\assocn}{{\scrA\!\textit{ss}(n)}}
 \newcommand{\liealgs}{{\scrL\!\textit{ie}}}
 \newcommand{\restliealgs}{{\scrL\!\textit{ie}^\textit{r}}}
@@ -421,7 +422,7 @@ url=false,doi=false,isbn=false,eprint=false]{biblatex}%
 
 
 
-\title[The Bousfield-Kan spectral sequence for simplicial algebras]{Unstable operations in the Bousfield-Kan spectral sequence for simplicial $\Ftwo$-algebras}
+\title[The Bousfield-Kan spectral sequence for simplicial algebras]{Unstable operations in the Bousfield-Kan spectral sequence for simplicial commutative $\Ftwo$-algebras}
 \author[M.\ Donovan]{Michael Donovan}
 
 %\address{Department of Mathematics \\ Massachusetts Institute of Technology}
@@ -513,7 +514,7 @@ with the bracket on $E_r$ satisfying  a Liebniz formula and inducing the bracket
 
 There are two reasons why one might expect such a Lie algebra structure. %, one reason at $E_2$ and one at $E_\infty$. At $E_2$: 
 The operads $\CommOperad$ and $\LieOperad$ are Koszul dual and (even though the theory of Koszul homology is complicated by the nonzero characteristic) one is not surprised to find an action of $\LieOperad$ on the derived functors calculating $E_2$. %, which might then extend to the higher pages. At $E_\infty$: 
-Next, there is a graded Lie algebra structure on homotopy groups given by the Whitehead bracket [ref?]:
+Next, there is a graded Lie algebra structure on homotopy groups given by the Whitehead bracket \cite{MR0004123}:
 \[[\,,]:\pi_nX\hat{\ }_{\!\!\!2}\otimes \pi_{n'}X\hat{\ }_{\!\!\!2}\to \pi_{n+n'-1}X\hat{\ }_{\!\!\!2}.\]
 One would not be surprised to find that  this action preserves the filtration and so defines a Lie algebra structure on $E_\infty$.
 In any case, Bousfield and Kan prove that the bracket at $E_\infty$ is compatible with the Whitehead bracket [] on homotopy, and give a homological description  of the bracket at $E_2$ --- the best possible scenario.
@@ -610,10 +611,10 @@ We will restrict to those $X\in s\algs$ which are connected, which simplifies va
 %The spectral sequence will be of the form
 %\[\E{}{2}{\calX}{s}{t} \implies \pi_{t-s}X\hat{\ },\]
 %where $X\hat{\ }$ is the \emph{homology completion} of $X$. 
-As in the classical case, one must know how the homotopy groups of the homology completion $X\hat{\ }$ determine those of $X$: we will demonstrate (Theorem \ref{completenesstheorem}) that $X\hat{\ }$ is equivalent to $X$ as long as $X$ is connected.
+As in the classical case, one must know how the homotopy groups of the homology completion $X\hat{\ }$ determine those of $X$: we will demonstrate (Theorem \ref{completenesstheorem}) that $X\hat{\ }$ is equivalent to $X$ as long as $X$ is connected. Moreover, we will prove in Theorem \ref{vanishing line prop} that the Bousfield-Kan spectral sequence admits a vanishing line from $E_2 $ in this case, and thus strongly converges to the homotopy of $X$.
 
-As forecast by the discussion in \S\ref{intropart1}, it will help to know a little about the natural operations on the homotopy of simplicial $\Ftwo$-algebras in advance. Fortunately, we know a \emph{lot} --- Dwyer \cite{DwyerHtpyOpsSimpComAlg.pdf} has completely calculated these operations (see also Bousfield [], Cartan []). To summarize, $\pi_*X$ is a graded non-unital commutative algebra with left operations
-\[\delta_i:=\pi_*(\mu)\circ\delta_i^\textup{ext}:\pi_nX\to \pi_{n+i}X,\textup{ defined when }2\leq i\leq n,\]
+As forecast by the discussion in \S\ref{intropart1}, it will help to know a little about the natural operations on the homotopy of simplicial $\Ftwo$-algebras in advance. Fortunately, we know a \emph{lot} --- Dwyer \cite{DwyerHtpyOpsSimpComAlg.pdf} has completely calculated these operations (which were studied earlier by Bousfield \cite{BousOpnsDerFun.pdf,BousHomogFunctors.pdf} and Cartan \cite{CartanDivSquares}). To summarize, $\pi_*X$ is a graded non-unital commutative algebra with left operations
+\[\delta_i:\pi_nX\to \pi_{n+i}X,\textup{ defined when }2\leq i\leq n,\]
 satisfying various compatibilities which we discuss in detail in \S\ref{Homotopy operations for simplicial commutative algebras}. In fact, these $\delta$-operations satisfy a $\delta$-Adem relation \emph{that is homogeneous}, and there is a corresponding unital associative algebra $\Delta$. This is the explicit description of the homotopy operations that is lacking in the category of pointed spaces.
 
 Now Goerss described the analogue for $s\algs$ of the category $\calk$, and  all of the natural operations on the Andr\'e-Quillen cohomology $H^*_\algs X$ of connected $X\in s\algs$ are determined by:
@@ -3069,14 +3070,14 @@ S(\CommOperad)[\imath_0]=F^{\algs}[\imath_0];%
 \\
 \pi_*(\mathbb{S}^\algs_n)
 &\cong
-\makebox[\widthof{$\Lambda$}][c]{$\Lambda$}(\CommOperad)[\delta_I(\imath_n)\ |\ \textup{$J$ is $\delta$-admissible, $e(I)\leq n$}]%
+\makebox[\widthof{$\Lambda$}][c]{$\Lambda$}(\CommOperad)[\delta_I(\imath_n)\ |\ \textup{$I$ is $\delta$-admissible, $e(I)\leq n$}]%
 &\ \ &\makebox[\widthof{for $n\geq1$}][c]{for $n\geq1$;}\\
 % Left hand side
 \pi_*(\mathbb{S}^\algs_n)
 % Relation
 &\cong
 % Right hand side
-\makebox[\widthof{$\Lambda$}][c]{$\Gamma$}(\CommOperad)[\delta_I(\imath_n)\ |\ \textup{$J$ is $\delta$-admissible, $e(I)< n$}]%
+\makebox[\widthof{$\Lambda$}][c]{$\Gamma$}(\CommOperad)[\delta_I(\imath_n)\ |\ \textup{$I$ is $\delta$-admissible, $e(I)< n$}]%
 % Comment
 &\ \ &\makebox[\widthof{for $n\geq1$}][c]{for $n\geq2$.}%\text{for $n\geq2$.}
 \end{alignat*}
@@ -6506,13 +6507,14 @@ for each $r$, satisfying the Liebniz formula. For $r\geq2$, this map descends to
 Consider the chain-level map:
 \[\textup{SQ}^{i,s}:x\mapsto \rho\Nabla (D^{s-i}(x\otimes x)+D^{s-i+1}(x\otimes dx)).\]
 We will use these maps to define external Steenrod squares, the behaviour of which is rather different on $E_1$ than on later pages. Thus, we will state two separate propositions that we will prove together.
+
 \begin{prop}
 \label{prop on e1 steens 1}
 For $r\geq1$, the chain level operation $\textup{SQ}^{i,s}$ defines an \emph{external Steenrod operation} with indeterminacy vanishing by $E_{2r-2}$:
 \[\Sq^i_\textup{ext}:\Edownup{r}{}{X}{s}{t}\to \Edownup{r}{}{S_2X}{s+i}{2t}.\]
-Suppose now that $r\geq 2$ and $x\in\Edownup{r}{}{X}{s}{t}$. Unless $\min\{t,r\}\leq i\leq s$, $\Sq^i_\textup{ext}x=0$ (and is well defined without indeterminacy).
-In any case, $\Sq^i_\textup{ext}x$ survives to $\Edownup{2r-1}{}{S_2X}{s+i}{2t}$, and \[d_{2r-1}(\Sq^i_\textup{ext}x)=\Sq^{i+r-1}_\textup{ext}(d_rx),\]
-modulo the indeterminacy of $\Sq^{i+r-1}_\textup{ext}(d_rx)$. %If $i<r$ and $t \geq i+1$ then $\Sq^i_\textup{ext}x=0$, and in fact $\Sq^i_\textup{ext}x$ may be taken to have no indeterminacy.
+Suppose that $r\geq 2$ and $x\in\Edownup{r}{}{X}{s}{t}$. $\Sq^i_\textup{ext}x=0$ unless $\min\{t,r\}\leq i\leq s$,  and this vanishing occurs without indeterminacy.
+In any case, $\Sq^i_\textup{ext}x$ survives to $\Edownup{2r-1}{}{S_2X}{s+i}{2t}$, and the following equation in $\Edownup{2r-1}{}{S_2X}{s+i+2r-1}{2t+2r-2}$ holds (without indeterminacy): \[d_{2r-1}(\Sq^i_\textup{ext}x)=\Sq^{i+r-1}_\textup{ext}(d_rx).\]
+%which is an equation in    neither of the two expressions here have any determinacy. %If $i<r$ and $t \geq i+1$ then $\Sq^i_\textup{ext}x=0$, and in fact $\Sq^i_\textup{ext}x$ may be taken to have no indeterminacy.
 
 The \emph{top operation} $\Sq^s_\textup{ext}x$ is equal to the product-square $x\times x$, and in particular has no indeterminacy. 
 As for the only potentially non-zero $\Sq^0_\textup{ext}$ operation:
@@ -6528,14 +6530,20 @@ At $E_2$, there is no indeterminacy, and the operation $\hExtCohOp^k$ correspond
 
 The condition $\min\{t,r\}\leq i\leq s$ may be replaced with $\min\{t+1,r\}\leq i\leq s$ after composing with $\Edownup{r}{}{S_2X}{s+i}{2t}\to \Edownup{r}{}{\Lambda^2X}{s+i}{2t}$.
 \end{prop}
+
 \begin{prop}
 \label{prop on e1 steens 2}
 %Fix $i,s\geq0$ and set $r=1$. The chain level operation $\textup{SQ}^{i,s}$ defines an 
-At $E_1$, the external Steenrod operations have no indeterminacy, and satisfy  $d_{1}(\Sq^i_\textup{ext}x)=\Sq^{i}_\textup{ext}(d_1x)$. Suppose that $x\in \Edownup{1}{}{X}{s}{t}$.
+At $E_1$, the external Steenrod operations have no indeterminacy, and $d_{1}$ commutes with $\Sq^i_\textup{ext}x $ for each $i$. Suppose that $x\in \Edownup{1}{}{X}{s}{t}$.
 The top operation $\Sq^s_\textup{ext}x$ \emph{need not} equal the product-square $x\times x$ on $E_1$, and
 $\Sq^{s+1}_\textup{ext}x$ \emph{need not} vanish, instead equalling $x\times d_1x$ on $E_1$.
-At least for $i>s+1$, $\Sq^i_\textup{ext}x=0$. The results for $\Sq^0_\textup{ext}$ are unchanged, so that $\Sq^0_\textup{ext}$ vanishes when $t>0$ and is represented by squaring when $t=0$.
+At least for $i>s+1$, $\Sq^i_\textup{ext}x=0$. $\Sqh^1x$ is zero whenever $t\geq1$. $\Sqh^0x=0$ for all $t$.
 \end{prop}
+
+
+
+
+
 
 
 
@@ -6993,7 +7001,7 @@ P^{j-1}:\left(\Edownup{r}{}{X}{s}{t}   \smash{{}\overset{\Sq^j_\textup{ext}}{\to
 \end{gather*}
 with the $\lambda_i$ potentially multi-valued functions,  defined when $1\leq i\leq \max\{n,t-(r-1)\}$ %(resp.\ $0\leq i\leq \max\{n,t-(r-1)\}$), 
 and single valued whenever $1\leq i\leq\min\{n+1,t+1-2(r-1)\}$.
-It should be possible to state versions of all of the above results in this case. The author guesses that the operations $P^{k}$ will form an unstable left action of the Steenrod algebra for commutative algebras, but has not worked out the details.
+It should be possible to state versions of all of the above results in this case. The author guesses that the operations $P^{k}$ will form an unstable left action of the $P$-algebra (the Steenrod algebra for commutative $\Ftwo$-algebras, as in \S\ref{The example of simplicial commutative F2-algebras}) but has not worked out the details.
 
 %As $\Edownup{1}{}{X}{s}{t}$ is obtained from $E_0$ by taking homotopy in the simplicial direction, there are $\delta^\textup{ext}$-operations on $E_1$:
 %\[\delta^\textup{ext}_i:\Edownup{1}{}{X}{s}{t} \to \Edownup{1}{}{S_2X}{s}{t+i}\textup{ for }2\leq i\leq t.\]
@@ -7382,6 +7390,7 @@ so that there are isomorphisms of spectral sequences (starting from $E_1$):
 %\end{shaded}
 %
 \subsection{Definition of the spectral sequence operations}
+\label{Definition of the spectral sequence operations}
 Whichever of the three categories of interest $\calc$ we are working in, there is a factorization
 \[\vcenter{\xymatrix@R=4mm{
 &%r1c1
@@ -7433,25 +7442,51 @@ The following results follow from propositions \ref{prop on basic product}, \ref
 \label{prop on basic product composed with lift}
 The pairing $\mu$ satisfies the Liebniz formula. For $r\geq2$, this map descends to the symmetric quotient $S_2\Edownup{r}{}{\calx}{}{}$.
 \end{cor}
+
+
+%\begin{shaded}\tiny
+%\begin{cor}[(of \ref{prop on e1 steens 1})]
+%%\label{prop on e1 steens 1 composed with lift}
+%The operations $\Sqh^i:\Edownup{r}{}{\calx}{s}{t}\to \Edownup{r}{}{S_2\calx}{s+i}{2t+1}$ have indeterminacy vanishing by $\Edownup{2r-2}{}{S_2\calx}{s+i}{2t+1}$, and  no indeterminacy at $E_2$.
+%Suppose that $x\in \Edownup{r}{}{\calx}{s}{t}$ and $r\geq2$. $\Sqh^ix$ survives to $\Edownup{2r-1}{}{S_2\calx}{s+i}{2t+1}$, and modulo indeterminacy: \[d_{2r-1}(\Sqh^ix)=\Sqh^{i+r-1}(d_rx).\]
+%The notion of \emph{top operation} has shifted: $\Sqh^{s+1}x$ is the top operation, and equals to the product-square $x\times x$, and in particular, it has no indeterminacy. For $i>s+1$, $\Sqh^ix=0$. Whenever $t\geq2$, $\Sqh^2x=0$. $\Sqh^1x$ is zero whenever $t>0$. $\Sqh^0x=0$ for all $t$.
+%\end{cor}
+%
+%
+%\begin{cor}[(of \ref{prop on e1 steens 2})]
+%%\label{prop on e1 steens 2 composed with lift}
+%%Fix $i,s\geq0$ and set $r=1$. The chain level operation $\textup{SQ}^{i,s}$ defines an 
+%At $E_1$, the operations $\Sq\dhor^i:\Edownup{r}{}{\calx}{s}{t}\to \Edownup{r}{}{S_2\calx}{s+i}{2t+1}$ have no indeterminacy, and satisfy  $d_{1}(\Sqh^ix)=\Sqh^{i}(d_1x)$. Suppose that $x\in \Edownup{1}{}{\calx}{s}{t}$.
+%The top operation $\Sqh^{s+1}x$ \emph{need not} equal the product-square $x\times x$ on $E_1$, and
+%$\Sqh^{s+2}x$ \emph{need not} vanish, instead equalling $x\times d_1x$ on $E_1$.
+%At least for $i>s+2$, $\Sqh^ix=0$. The results for the operations $\Sqh^0x$ and $\Sqh^{1}$ are unchanged, but there are no results to report for $\Sqh^{2}$ on $E_1$.
+%\end{cor}
+%\end{shaded}
+
+
 \begin{cor}[(of \ref{prop on e1 steens 1})]
 \label{prop on e1 steens 1 composed with lift}
-The operations $\Sqh^i:\Edownup{r}{}{\calx}{s}{t}\to \Edownup{r}{}{S_2\calx}{s+i}{2t+1}$ have indeterminacy vanishing by $\Edownup{2r-2}{}{S_2\calx}{s+i}{2t+1}$, and  no indeterminacy at $E_2$.
-Suppose that $x\in \Edownup{r}{}{\calx}{s}{t}$ and $r\geq2$. $\Sqh^ix$ survives to $\Edownup{2r-1}{}{S_2\calx}{s+i}{2t+1}$, and modulo indeterminacy: \[d_{2r-1}(\Sqh^ix)=\Sqh^{i+r-1}(d_rx).\]
-The notion of \emph{top operation} has shifted: $\Sqh^{s+1}x$ is the top operation, and equals to the product-square $x\times x$, and in particular, it has no indeterminacy. For $i>s+1$, $\Sqh^ix=0$. Whenever $t\geq2$, $\Sqh^2x=0$. $\Sqh^1x$ is zero whenever $t>0$. $\Sqh^0x=0$ for all $t$.
-\end{cor}
+The operations $\Sqh^i:\Edownup{r}{}{\calx}{s}{t}\to \Edownup{r}{}{S_2\calx}{s+i}{2t+1}$ have indeterminacy vanishing by $\Edownup{2r-2}{}{\calx}{s+i}{2t+1}$, and  no indeterminacy at $E_2$.
+Suppose that $r\geq 2$ and $x\in\Edownup{r}{}{\calX}{s}{t}$. %Unless $\min\{t,r\}\leq i-1\leq s$, $\Sqh^ix=0$ (and is well defined without indeterminacy).
+$\Sqh^ix=0$ unless $\min\{t,r\}< i\leq s+1$,  and this vanishing occurs without indeterminacy.
+In any case, $\Sqh^ix$ survives to $\Edownup{2r-1}{}{\calX}{s+i}{2t+1}$, and the following equation in $\Edownup{2r-1}{}{\calX}{s+i+2r-1}{2t+2r-1}$ holds (without indeterminacy): \[d_{2r-1}(\Sqh^ix)=\Sqh^{i+r-1}(d_rx).\]
 
+The notion of \emph{top operation} has shifted: $\Sqh^{s+1}x$ is the top operation, it equals the product-square $x\times x$, and in particular,  has no indeterminacy.
+Whenever $t\geq2$, $\Sqh^2x=0$. $\Sqh^1x$ is zero whenever $t\geq1$. $\Sqh^0x=0$ for all $t$.
+\end{cor}
 
 \begin{cor}[(of \ref{prop on e1 steens 2})]
 \label{prop on e1 steens 2 composed with lift}
 %Fix $i,s\geq0$ and set $r=1$. The chain level operation $\textup{SQ}^{i,s}$ defines an 
-At $E_1$, the operations $\Sq\dhor^i:\Edownup{r}{}{\calx}{s}{t}\to \Edownup{r}{}{S_2\calx}{s+i}{2t+1}$ have no indeterminacy, and satisfy  $d_{1}(\Sqh^ix)=\Sqh^{i}(d_1x)$. Suppose that $x\in \Edownup{1}{}{\calx}{s}{t}$.
+At $E_1$, the operations $\Sq\dhor^i:\Edownup{1}{}{\calx}{s}{t}\to \Edownup{1}{}{S_2\calx}{s+i}{2t+1}$ have no indeterminacy, and $d_{1}$ commutes with $\Sqh^ix $ for each $i$. Suppose that $x\in \Edownup{1}{}{\calx}{s}{t}$.
 The top operation $\Sqh^{s+1}x$ \emph{need not} equal the product-square $x\times x$ on $E_1$, and
 $\Sqh^{s+2}x$ \emph{need not} vanish, instead equalling $x\times d_1x$ on $E_1$.
-At least for $i>s+2$, $\Sqh^ix=0$. The results for the operation $\Sqh^0x$ and $\Sqh^{1}$ are unchanged, but there are no results to report for $\Sqh^{2}$ of $E_1$.
+At least for $i>s+2$, $\Sqh^ix=0$. The results for the operations $\Sqh^0x$ and $\Sqh^{1}$ are unchanged (so that they both vanish for $t\geq1$), but there are no results to report for $\Sqh^{2}$ on $E_1$.
 \end{cor}
 
+
 \begin{cor}[(of \ref{Prop on delta external})]
-\label{Prop on delta external composed with lift}
+%\label{Prop on delta external composed with lift}
 Suppose $r\geq1$, $x\in \E{}{r}{\calx}{s}{t}$ and $2\leq i\leq \max\{t-s,t-(r-1)\}$, so that $\deltav_ix $ is defined. Then $\deltav_i d_r x$ is defined, and 
 \[d_r\deltav_i(x)+ \deltav_i(d_rx)=\begin{cases}
 \Sqh^{t-i+2}(x),&\textup{if $i>t-s$ and $r =t-i+1$}\\
@@ -7461,6 +7496,7 @@ Suppose $r\geq1$, $x\in \E{}{r}{\calx}{s}{t}$ and $2\leq i\leq \max\{t-s,t-(r-1)
 \end{cases}\]
 If $i\leq \max\{n,t+1-2(r-1)\}$, so that $\deltav_i x$ is single-valued, then so is $\deltav_i d_r x$, and this equation holds exactly. Otherwise, this equation holds modulo the indeterminacy of the right hand side. When $i>t-s$ and $r =t-i+1$ the set of values of the left hand side coincides with the set of values of the right hand side.
 \end{cor}
+
 
 \begin{cor}[(of \ref{Prop on einfty ops})]
 \label{Prop on einfty ops composed with lift}
@@ -8206,10 +8242,149 @@ and the fact that $\overline{G}(\epsilon\alpha)(\imath_t)=\widetilde{\epsilon\al
 %\item stocktake reveals that these terms are everything we hoped}
 %\end{The cohomology of a trivial unstable Lie algebra over P}
 
+
+\begin{The Bousfield-Kan spectral sequence for a sphere}
+\section{\textbf{The Bousfield-Kan spectral sequence for $\mathbb{S}^{\algs}_T$}}
+
+\begin{shaded}\tiny
+We will now suggest a somewhat artificial $E_1$-page for the Bousfield-Kan spectral sequence for a  sphere  $X=\mathbb{S}_{T}^{\algs}$ for $T\geq1$. 
+
+Define:
+\begin{alignat*}{2}
+% Left hand side
+\aS{s}&:=\left\{J\ \middle|\ \textup{$J$ a $\Sq$-admissible sequence with }\minDimDelta(I)\leq s+1,\ 1\notin J\right\};\\
+\aSirr{s}&:=\left\{J\ \middle|\ \textup{$J$ a $\Sq$-admissible sequence with }e(I)\leq s,\ 1\notin J\right\};\\
+\aDTnoplus&:=\left\{I\ \middle|\ \textup{$I$ a $\delta$-admissible sequence with }\minDimP(I)\leq t\right\}.
+\end{alignat*}
+The difference between $\aDTnoplus$ and $\aDT$ is just that we have removed the requirement that $I$ be nonempty. The following Lemma expains the sense in which $\aSirr{s}$ is the subset of irreducible sequences in $\aS{s}$.
+\begin{lem}
+\label{lemma on the func STOPs}
+There is an injective function $\STOP_t:\aS{s}\to \aS{s}$ given by
+\[J=(j_{\ell},\ldots,j_1)\overset{\smash{\STOP_s}}{\longmapsto }(s+nJ+1,j_\ell,\ldots,j_1).\]
+Moreover, $\aSirr{s}=\aS{s}\setminus\im(\STOP_s)$, and
+\[\aS{s}=\textstyle\bigsqcup_{J\in \aSirr{s}}\{J,\STOP_s J,\STOP_s^2 J,\ldots\}.\]
+\end{lem}
+\noindent The proof is similar to that of Lemma \ref{lemma on the func TOPt}, but the outcome is a little different. Indeed, Lemma \ref{lemma on the func STOPs} shows that if a $\calMh(1)$-expression $\Sqh^{J}x$ contains a top Steenrod operation, then all of the Steenrod operations following it are also top operations.
+
+Define
+\begin{equation}\label{defining equation of Eprime}
+\Eprime{blank}{1}{\calx}{}{}:=
+\Ftwo\left\{\textstyle\prod_{k=1}^N\Sq\dhor^{J_k}\deltav_{I_k}\imath\ \middle|\ 
+\genfrac{}{}{0pt}{}{I_k\in \aDTnoplus,\ J_k\in \aS{\ell I_k}}{(J_k,I_k)\neq (J_{k'},I_{k'})\textup{ unless }k'=k}
+\right\},
+\end{equation}
+and define a differential on $\Eprime{blank}{1}{\calx}{}{}$ by:
+\newcounter{keepeqnolaksdj}
+\setcounter{keepeqnolaksdj}{\value{equation}}%
+  \begin{list}{(\theequation)}{\usecounter{equation}}%
+  \setcounter{equation}{\value{keepeqnolaksdj}}
+\item \label{ITM1} setting $d_1\imath=0$;
+\item \label{ITM2} requiring that $d_1$ distributes across the monomials in (\ref{defining equation of Eprime}) according to the Liebniz rule;
+\item \label{ITM2.5} %requiring that $\Sqh^{j}x=0$ for $x\in \Eprime{blank}{1}{\calx}{s}{t}$ and $j>s+1$;
+requiring, for $x\in \Eprime{blank}{1}{\calx}{s}{t}$, that $\Sqh^{s+2}=xd_1x$ and $\Sqh^jx=0$ for $j>s+2$;
+\item \label{ITM3} requiring, for $x\in \Eprime{blank}{1}{\calx}{s}{t}$, that $d_1\Sqh^jx = \Sqh^jd_1x$;
+\item \label{ITM4}
+requiring, for $x\in \Eprime{blank}{1}{\calx}{s}{t}$, that $d_1\deltav_ix=
+\begin{cases}
+\deltav_id_1x,&\textup{if $2\leq i < t$};\\
+\deltav_id_1x + \Sqh^2 x,&\textup{if $2\leq i = t$};
+\end{cases}$
+\item \label{ITM5} enforcing the equation $\deltav_i\Sqh^j=0$;
+\item \label{ITM6} enforcing the $\Sq$-Adem relations and the identity $\Sqh^1=0$;
+%\item \label{ITM7} using the equation $x^2=\Sqh^{s+1}x$ (for $x\in \Eprime{blank}{1}{\calx}{s}{t}$) whenever a summand in the image of $d_1$ violates the requirement ``$(J_k,I_k)\neq (J_{k'},I_{k'})$ unless $k'=k$''.
+\item \label{ITM7} 
+whenever a summand in the image of $d_1$ violates the requirement that the factors $\Sqh^{J_k}\deltav_{I_k}\imath$ be unique, applying the unstableness condition
+\[(\Sqh^{J_k}\deltav_{I_k}\imath)^{2}=\Sqh^{\smash{\STOP_{\ell I_k}J_k}}\deltav_{I_k}\imath.\]
+%s, for $x\in \Eprime{blank}{1}{\calx}{s}{t}$, $x^2=\Sqh^{s+1}x$  and $\Sqh^{j}x=0$ for $j>s+1$. 
+\end{list}
+Note that (\ref{ITM2.5}), (\ref{ITM6}) and (\ref{ITM7}) imply that $\imath^2=0$ and $\Sqh^{2}\imath=0$.
+
+A key point here is that we do not want the differential to be determined by manipulations such as:
+\[d_1(\Sqh^5\deltav_{(22,10,5,2)}\imath) = d_1((\deltav_{(22,10,5,2)}\imath)^{2})=
+2(\deltav_{(22,10,5,2)}\imath)(d_1\deltav_{(22,10,5,2)}\imath)
+%+
+%(d_1\deltav_{(22,10,5,2)}\imath)(\deltav_{(22,10,5,2)}\imath)
+=0,\]
+which is why the phrasing of (\ref{ITM2}) and (\ref{ITM7}) is so restrictive.
+Indeed, when we define in \S\ref{Operations on the Bousfield-Kan spectral sequence} operations on the Bousfield-Kan spectral sequence,  the top Steenrod operation will \emph{not} equal the product square at $E_1$, but only at $E_2$, and we are mimicking  this behaviour in our definition of $\Eprime{blank}{1}{\calx}{}{}$.
+
+Let us calculate the proposed differential applied to a generator
+$\Sq\dhor^J\deltav_I\imath$ of $\Eprime{blank}{1}{\calx}{}{}$ with $I\neq\emptyset$. Suppose that $I=(i_{\ell I},\ldots,i_1)$, with $\deltav_{i_a}$ acting as a top operation at precisely the indices $a={a_n},\ldots,{a_1}$. Then we calculate, 
+\begin{alignat*}{2}
+d_1\Sq\dhor^J\deltav_I\imath
+&=
+\Sq\dhor^Jd_1\deltav_I\imath%
+\\
+&=
+%\Sq\dhor^J \deltav_Id_1\imath+
+\textstyle\sum_{m=1}^{n}\Sq\dhor^J\deltav_{(i_{\ell I},\ldots,i_{a_{m}+1})} \Sqh^{2} \deltav_{(i_{a_{m}-1},\ldots,i_1)}\imath%
+\\
+% Left hand side
+% Relation
+&=
+% Right hand side
+\begin{cases}
+\smash{\Sqh^J\Sqh^2\deltav_{(i_{{\ell I}-1},\ldots,i_1)}\imath},&\textup{$\deltav_{i_{\ell I}}$ a top operation, $2,3\notin J$, $\ell I\geq2$};\\
+0,&\textup{otherwise}.
+\end{cases}
+\end{alignat*}
+The first equation holds by (\ref{ITM3}), and the second holds by (\ref{ITM1}) and (\ref{ITM4}).
+To explain the third equation, %note first that $\Sq\dhor^J \deltav_Id_1\imath$ vanishes as $\imath$ is a permanent cycle. Next, 
+all of the $n$ summands vanish by (\ref{ITM5}), 
+except perhaps for the $m=n$ summand, which need not vanish when $a_n=i_{\ell I}$. Even this summand may still vanish, as (\ref{ITM6}) implies that $\Sqh^J\Sqh^2$ vanishes unless it is already $\Sq$-admissible. 
+
+Although the definition of this complex seemed complicated, the differential ends up being quite simple. Indeed, one deduces that, writing $J=(j_{\ell J},\ldots,j_1)$:
+\[
+\textup{if }J\in\aS{s}\textup{ is nonempty and } 2,3\notin J,\textup{ then }(j_{\ell J},\ldots,j_1,2)\in\aSirr{s-1}.
+\]
+From this, we conclude that if $J$ is nonempty:
+\begin{equation}
+\label{cycle conditions 1}
+\textup{$\Sq\dhor^J\deltav_I\imath$ is a cycle if and only if $I \in \aDTirr$ or $J$ contains 2 or 3},
+\end{equation}
+and if $J$ is empty but $I$ is nonempty:
+\begin{equation}
+\label{cycle conditions 2}
+\textup{$\deltav_I\imath$ is a cycle if and only if $I \in \aDTirr$}.\end{equation}
+(Recall that $\aDTirr$ contains all of the length one sequences $(i)$ for $2\leq i \leq T$). We can combine all of this information into the following observation, valid for any $I,J$:
+\begin{equation}
+\label{cycle conditions 3}
+\textup{$\Sq\dhor^J\deltav_I\imath$ is a cycle if and only if $I=\emptyset$ or $I \in \aDTirr$ or $J$ contains 2 or 3}.
+\end{equation}
+To actually determine the homology of $\Eprime{blank}{1}{\calx}{}{}$, suppose that $I \in \aDTirr$, and write $\textup{SC}_{I,n}$ for the subcomplex spanned by the products of classes of the form ....
+\[\Sqh^J\otimes \deltav_{\TOP_T^k}\cdots \cdots \cdots \cdots \]
+\todo[inline]{some spectral sequence argument here... note that you can indeed get everything with a 2 in it using (\ref{ITM2.5}) if needed.}
+\subsection{More to do.}
+\end{shaded}
+
+\label{The Bousfield-Kan spectral sequence for a sphere}
+For any $T\geq1$, let $X=\mathbb{S}^{\algs}_T$, so that we may write $\E{}{r}{\calx}{}{}$ for the Bousfield-Kan spectral sequence of the sphere $\mathbb{S}^{\algs}_T$.  In this section we will conjecture a complete system of differentials in $\E{}{r}{\calx}{}{}$, that would explain the convergence of $\E{}{2}{\calx}{}{}$ (as calculated in Corollary \ref{the corollary on the bousfield kan e2}) to
+\[\pi_*(\mathbb{S}^{\algs}_T)\cong \Lambda(\CommOperad)[\delta_I\imath\ |\ \textup{$I$ is $\delta$-admissible, $e(I)\leq n$}]\]
+where $\imath\in \pi_T(\mathbb{S}^{\algs}_T)$ is the fundamental class (c.f.\ Proposition \ref{homotopy of comm alg sphere}).
+
+In order to construct all of the differentials needed, we will \emph{assume} from this point on:
+\begin{conjecture}
+\label{conjec1}
+It is possible to modify the definitions of the spectral sequence operations $\mu$, $\Sqh^j$ and $\deltav_i$ defined in \S\ref{Definition of the spectral sequence operations} in order that the $\Sq$-Adem relations and the relations $\deltav_i\Sqh^j=0$ hold on $E_1$ (without violating the existing properties of these operations, summarized in Proposition \ref{adams operations are right for comm} and Corollaries \ref{prop on basic product composed with lift}-\ref{Prop on einfty ops composed with lift}).
+\end{conjecture}
+\noindent That is, we will replace the operations defined in \S\ref{Definition of the spectral sequence operations} with their conjectural counterpart (without no change of notation).
+
+Recall the alternative Bousfield-Kan $E_1$-page defined in \S\ref{An alternative Bousfield-Kan E1}, written $\Eprime{blank}{1}{\calx}{s}{t}$. There was already a map of vector spaces $\Eprime{blank}{1}{\calx}{}{}\to \E{}{1}{\calx}{}{}$  in $\vect{1}{+}$ defined by
+\[\Eprime{blank}{1}{\calx}{}{}\ni \textstyle\prod_{k=1}^N\Sq\dhor^{J_k}\deltav_{I_k}\imath\mapsto \textstyle\prod_{k=1}^N\Sq\dhor^{J_k}\deltav_{I_k}\imath\in \E{}{1}{\calx}{}{},\]
+and using the conjectural definitions of the operations on  $\E{}{1}{\calx}{}{}$, it is a map of chain complexes. Indeed, we may calculate the differential in $\E{}{1}{\calx}{}{}$ exactly as we calculated in \S\ref{An alternative Bousfield-Kan E1}. Thus, there is an induced map $\Eprime{blank}{2}{\calx}{}{}\to \E{}{2}{\calx}{}{}$ (where we write $\Eprime{blank}{2}{\calx}{}{}$ for the homology of the chain complex $\Eprime{blank}{}{\calx}{}{}$). From now on, we will \emph{also} assume:
+\begin{conjecture}
+\label{conjec2}
+The induced map $\Eprime{blank}{2}{\calx}{}{}\to \E{}{2}{\calx}{}{}$ is an isomorphism (of vector spaces).
+\end{conjecture}
+\noindent This conjecture is not so unreasonable, since by Corollary \ref{the corollary on the bousfield kan e2} there is an isomorphism of vector spaces $\Eprime{blank}{2}{\calx}{}{}\to \E{}{2}{\calx}{}{}$ given by mapping an element of $\Eprime{blank}{2}{\calx}{}{}$ to the elements of $\E{}{2}{\calx}{}{}$ of the same name. In any case, we assume no more than the stated conjectures.
+
+\end{The Bousfield-Kan spectral sequence for a sphere}
+
+
 \begin{May sseq and vanishing line}
 \section{\textbf{A May spectral sequence for $H^*_{\calw(0)}$}}
 \label{May sseq and vanishing line}
-{Explain the quadratic filtration of the bar construction, derive a spectral sequence, explain what it implies about the whole thing}
+%{Explain the quadratic filtration of the bar construction, derive a spectral sequence, explain what it implies about the whole thing}
 
 \subsection{The quadratic filtration}
 
@@ -8251,10 +8426,11 @@ In the cohomotopy spectral sequence of the filtered simplicial object $\textup{B
 \subsection{A vanishing line on the Bousfield-Kan $E_2$-page}
 \label{A vanishing line on the Bousfield-Kan}
 Although it is possible, with more care, to obtain a vanishing line of lower slope, in the interest of brevity, we will prove
-\begin{prop}
+\begin{thm}
+\label{vanishing line prop}
 If $X\in s\algs$ is connected (with $\pi_*X$ not necessarily of finite type), the Bousfield-Kan spectral sequence admits a vanishing line on $E_2$ of slope $1$ and intercept $0$:
 \[\E{}{2}{\calx}{s}{t}=0\textup{ \ whenever \ }s\geq t-s.\]
-\end{prop}
+\end{thm}
 \begin{proof}
 We will prove that the right derived functors
 \[((\mathbb{R}^s\Prim^{\HC{\algs}})W)_t\]
