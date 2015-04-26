@@ -73,6 +73,7 @@
 %\newtheorem{defn}{Definition}[section]
 %\newtheorem*{defn*}{Definition}
 
+\numberwithin{equation}{section}
 
 %>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 %<<<       Operators        <<<
@@ -363,6 +364,9 @@ url=false,doi=false,isbn=false,eprint=false]{biblatex}%
 \newcommand{\LieSteen}{\calA}
 \newcommand{\aDT}{\mathrm{adm}_+(\Delta,T)}
 \newcommand{\aDTnoplus}{\mathrm{adm}(\Delta,T)}
+\newcommand{\aDTe}{\mathrm{adm}^{\smash{e}}(\Delta,T)}
+\newcommand{\aDTm}{\mathrm{adm}^{\smash{\minDimP}}(\Delta,T)}
+\newcommand{\aDTme}{\mathrm{adm}^{\smash{\minDimP\setminus e}}(\Delta,T)}
 \newcommand{\aD}[1]{\mathrm{adm}_+(\Delta,#1)}
 \newcommand{\aS}[1]{\mathrm{adm}(\LieSteen_{>1},#1)}
 \newcommand{\aSirr}[1]{\mathrm{adm}^\mathrm{irr}(\LieSteen_{>1},#1)}
@@ -8358,9 +8362,17 @@ To actually determine the homology of $\Eprime{blank}{1}{\calx}{}{}$, suppose th
 \end{shaded}
 
 \label{The Bousfield-Kan spectral sequence for a sphere}
-For any $T\geq1$, let $X=\mathbb{S}^{\algs}_T$, so that we may write $\E{}{r}{\calx}{}{}$ for the Bousfield-Kan spectral sequence of the sphere $\mathbb{S}^{\algs}_T$.  In this section we will conjecture a complete system of differentials in $\E{}{r}{\calx}{}{}$, that would explain the convergence of $\E{}{2}{\calx}{}{}$ (as calculated in Corollary \ref{the corollary on the bousfield kan e2}) to
-\[\pi_*(\mathbb{S}^{\algs}_T)\cong \Lambda(\CommOperad)[\delta_I\imath\ |\ \textup{$I$ is $\delta$-admissible, $e(I)\leq n$}]\]
-where $\imath\in \pi_T(\mathbb{S}^{\algs}_T)$ is the fundamental class (c.f.\ Proposition \ref{homotopy of comm alg sphere}).
+For any $T\geq1$, let $X=\mathbb{S}^{\algs}_T$, so that we may write $\E{}{r}{\calx}{}{}$ for the Bousfield-Kan spectral sequence of the sphere $\mathbb{S}^{\algs}_T$.  In this section we will give conjectures which will allows us to construct a complete system of differentials in $\E{}{r}{\calx}{}{}$, that would explain the convergence of $\E{}{2}{\calx}{}{}$ (as calculated in Corollary \ref{the corollary on the bousfield kan e2}) to
+\[\pi_*(\mathbb{S}^{\algs}_T)\cong \Lambda(\CommOperad)[\delta_I\imath\ |\ I\in \aDTe]\]
+where $\imath\in \pi_T(\mathbb{S}^{\algs}_T)$ is the fundamental class (c.f.\ Proposition \ref{homotopy of comm alg sphere}), and we write
+\[\aDTe:=\{I\ |\ \textup{$I$ is $\delta$-admissible, $e(I)\leq T$}\}.\]
+We will also use the notation
+\begin{alignat*}{2}
+\aDTm&:=\{I\ |\ \textup{$I$ is $\delta$-admissible, $\minDimP(I)\leq T$}\},\\
+\aDTme&:=\{I\ |\ \textup{$I$ is $\delta$-admissible, $\minDimP(I)\leq T<e(I)$}\}.
+\end{alignat*}
+
+\subsection{Some conjectures on the $E_1$-operations}
 
 In order to construct all of the differentials needed, we will \emph{assume} from this point on:
 \begin{conjecture}
@@ -8376,7 +8388,68 @@ and using the conjectural definitions of the operations on  $\E{}{1}{\calx}{}{}$
 \label{conjec2}
 The induced map $\Eprime{blank}{2}{\calx}{}{}\to \E{}{2}{\calx}{}{}$ is an isomorphism (of vector spaces).
 \end{conjecture}
-\noindent This conjecture is not so unreasonable, since by Corollary \ref{the corollary on the bousfield kan e2} there is an isomorphism of vector spaces $\Eprime{blank}{2}{\calx}{}{}\to \E{}{2}{\calx}{}{}$ given by mapping an element of $\Eprime{blank}{2}{\calx}{}{}$ to the elements of $\E{}{2}{\calx}{}{}$ of the same name. In any case, we assume no more than the stated conjectures.
+\noindent This conjecture is not so unreasonable, since by Corollary \ref{the corollary on the bousfield kan e2} there is an isomorphism of vector spaces $\Eprime{blank}{2}{\calx}{}{}\to \E{}{2}{\calx}{}{}$ given by mapping an element of $\Eprime{blank}{2}{\calx}{}{}$ to the element of $\E{}{2}{\calx}{}{}$ of the same name, under the calculation of $\E{}{2}{\calx}{}{}$ given by Corollary \ref{the corollary on the bousfield kan e2}. In any case, we assume no more than the stated conjectures.
+
+\subsection{Resulting differentials}
+We will now analyse the differentials $d_r$ applied to the various terms $\Sqh^J\deltav_I\imath$. Define functions
+\[\ell,n,e:\aDTm\to \{0,1,2,\ldots\}\]
+which evaluate on a sequence $I=(i_l,\ldots,i_1)$ as follows:
+\[\ell(I):=l;\ \ n(I):=i_1+\cdots +i_l;\ \ e(I):=i_l-i_{l-1}-\cdots -i_1=2i_l-n(I).\]
+Define a function
+\[a:\aDTme \to \{0,1,2,\ldots\}\]
+by $a(I):=\ell(I)-1-(e(I)-T)$. 
+
+The class $\delta_I\imath$  is a permanent cycle if $I\in\aDTe$. On the other hand, if $I\in \aDTme$, it survives to $E_{a(I)+1}$, at which point
+\begin{equation}\label{theBasicDiff}
+d_{a(I)+1}:\delta_I\imath\mapsto\Sqh^{a(I)+2}\delta_{I^{-}}\imath,
+\end{equation}
+where we write $I^-$ for the sequence $(i_{\ell(I)-1},\ldots,i_1)$ obtained by removing the outermost entry of $I$. Now for an element $J\in \aS{s}$, $J=(j_{\ell(J)},\ldots,j_1)$, and any $n\geq 0$ we will write $\Phi_nJ$ for the sequence
+\[\Phi_nJ:=(j_{\ell(J)}+2^{\ell(J)-1}n,\ldots,j_2+2n,j_1+n)\in \aS{s+n}.\]
+Then there is a differential, obtained by applying $\Sqh^J$ to the $d_{a(I)+1}$-differential (\ref{theBasicDiff}):
+\[d_{2^{\ell (J)}a(I)+1}:\Sqh^J\delta_I\imath \mapsto  \Sqh^{\Phi_{\smash{a(I)}}J}\Sqh^{a(I)+2}\delta_{I^{-}}\imath= \Sqh^{J^{+}}\delta_{I^{-}}\imath ,\]
+where $J^+:= (j_{\ell(J)}+2^{\ell(J)-1}a(I),\ldots,j_2+2a(I),j_1+a(I),a(I)+2)$.
+\begin{lem}
+If $a(I)+3-j_1\geq 0$ then $d_{2^{\ell (J)}a(I)+1}(\Sqh^J\deltav_I\imath)=0$.
+\end{lem}
+\begin{proof}
+$a(I)+3-j_1\geq 0$ if and only if  $J^{+}$ is not $\Sq$-admissible, in which case:
+\[d_{2^{\ell (J)}a(I)+1}(\Sqh^J\deltav_I\imath) = \sum_{\produces{J^{+}}{(k_{\smash{\ell(J)}},\ldots,k_1,k_0+2)}{\Sq}} d_{2^{\ell (J)}k_0+1}  \Sqh^{\Phi_{-k_0}(k_{\smash{\ell(J)}},\ldots,k_1)} \deltav_{I'}\imath=0, \]
+where the sum is taken over all sequences not containing $1$ produced by $J^+$, and in each summand we choose the correct $I'$ so that $d_{k_0+1} \deltav_{I'}\imath =\Sqh^{k_0+2}\deltav_{I^{-}}\imath$. The point is that this is possible in each summand, since necessarily, $k_0<a(I)$, and moreover, every summand is then the image of an earlier differential.
+\end{proof}
+However, in this case, we can produce $\Sqh^{J}\deltav_I\imath$ as the image of a differential. In order to do this, we will need to produce a differential
+\[d_{j_1-1}:\deltav_{I^+}\imath\mapsto \Sqh^{j_1}\deltav_I\imath\]
+with $I^{+}$ a $\delta$-admissible sequence $(i_{\ell(I)+1},i_{\ell(I)},\ldots,i_1)$. For this, we need $i_{\ell(I)+1}\geq 2i_{\ell(I)}$ (i.e.\ $e(I^{+})\geq e(I)$) and $a(I^{+})=j_1-2$, but we are otherwise unconstrained, as $j_1\geq2$, and the demand $a(I^{+})\geq0$ will ensure that the additional $\delta_{i_{\ell(I)+1}}$ is defined. Focusing on the constraint $a(I^{+})=j_1-2$:
+\[\ell(I^{+})-1-(e(I^{+})-T)=j_1-2 \iff e(I^{+})-e(I)=a(I)+3-j_1,\]
+but we have assumed that $a(I)+3-j_1$ is non-negative.
+
+Now we use the sequence $\Phi_{-a(I^{+})}J^{-}$ where $J^-:=(j_{\ell(J)},\ldots,j_2)$, producing a differential
+\[d_{2^{\ell(J)-1}a(I^{+})+1}:\Sqh^{\Phi_{\smash{-a(I^{+})}}J^{-}}\deltav_{I^{+}}\imath\to \Sqh^J\delta_I\imath.\]
+
+\begin{alignat*}{2}
+% Left hand side
+\ell(I^{+})►
+% Relation
+&=
+% Right hand side
+¿►%
+% Comment
+&\qquad&\text{(ᾮ)}©
+\end{alignat*}
+
+
+
+Then writing $J^-:=(j_{\ell(J)},\ldots,j_2)$
+\[\Sq^{\Phi_{?}J^-}\deltav_{I^+}\imath\]
+
+
+
+On the other hand, suppose that  $J^{+}$ \emph{is} $\Sq$-admissible. Then we have produced a non-zero differential.
+
+Note that for any $2\leq j <a(I)+2$, the class $\Sqh^j\delta_{I^{-}}\imath$ is zero on 
+
+
+
+
 
 \end{The Bousfield-Kan spectral sequence for a sphere}
 
