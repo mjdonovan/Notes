@@ -1,6 +1,6 @@
 % !TEX root = z_output/unstable_Lie_algs.tex
 \documentclass[11pt]{amsart} \renewcommand{\baselinestretch}{1.2}
-\newcommand{\IncludeAll}{}%
+%\newcommand{\IncludeAll}{}%
 \newcommand{\xShrinkPages}{}%
 \newcommand{\xPostponeContents}{}%
 %%%%%%%%%%%%%%%%%%% 
@@ -11,21 +11,21 @@
 \ooooo[	do]{todolist}\ooooo[]{thanks}\ooooo[]{random junk}
 \ifx\IncludeAll\undefined\else\renewcommand{\ooooo}[2][]{\wooooo{#2}}\fi
 \ooooo[	ct]{Contents Page}
-\ooooo[	 1]{Introduction}
+\wooooo[	 1]{Introduction}
 \ooooo[	 2]{Conventions and notation}
 \ooooo[	 3]{Pi-algebras and cohomology algebras}
 \ooooo[	 4]{Bousfield-Kan spectral sequence}
 \ooooo[	 5]{Constructing homotopy operations}
 \ooooo[	 6]{Constructing cohomology operations}
 \ooooo[	 7]{homotopy operations for PRLs}
-\ooooo[	 8]{Cohomology Operations for W and U}
+\wooooo[	 8]{Cohomology Operations for W and U}
 \ooooo[	 9]{Koszul complexes}
 \ooooo[	10]{Composite functor spectral sequences}
 \ooooo[	11]{Operations in composite functor spectral sequences}
 \ooooo[	12]{Calculations of HWn}
 \ooooo[	13]{second quadrant homotopy sseq operations}
 \ooooo[	14]{Operations on the Bousfield-Kan spectral sequence}
-\wooooo[	15]{The Bousfield-Kan spectral sequence for a sphere}
+\ooooo[	15]{The Bousfield-Kan spectral sequence for a sphere}
 \ooooo[	16]{May sseq and vanishing line}
 \ooooo[	ap]{appendices}
 \ooooo[	bb]{bibliog}
@@ -396,7 +396,7 @@ url=false,doi=false,isbn=false,eprint=false]{biblatex}%
 %%%%%%%%%%%%%%%%%%%End preamble for pasteover
 %%%%%%%%%%%%%%%%%%% 
 
-\newcommand{\vfpb}{\vfil\PAGEBREAK}
+\newcommand{\vfpb}{\vfil\pagebreak}
 \headheight=8pt
 \topmargin=0pt
 \oddsidemargin=18pt
@@ -482,19 +482,24 @@ The non-abelian derived functors $\Ext^s$ are calculated in the category
 %where 
 $\calk$ of non-unital unstable algebras over the Steenrod algebra []. If we write $\vect{+}{}$ for the category of graded vector spaces $W=\textstyle \bigoplus_{n\geq 1} W^n$, the objects of $\calk$ are graded non-unital $\Ftwo$-algebras
 $W\in\vect{+}{}$
-equipped with an unstable left action of the Steenrod algebra, i.e.\ linear operations:
-\[\Sq^i: W^t\to W^{t+i},\]
-with the following properties:
-\begin{enumerate}
-\item $\Sq^0$ is the identity;
-\item the squaring operation on $\overline{H}^*X$ equals the \emph{top Steenrod operation}:
-\[\Sq^{t}x=x^{2}\text{\ \ for $x\in \overline{H}^tX$};\]
-\item \label{Sq unstable vanishing intro} if $x\in \overline{H}^tX$, then $\Sq^ix=0$ unless $0\leq i\leq t$;
-\item every Steenrod operation is linear;
-\item the \emph{Cartan formula} holds:  for all $x,y\in   \overline{H}^*X$ and $i\geq0$,
-\[\Sq^i(xy)=\textstyle\sum_{k=0}^{i}(\Sq^kx)(\Sq^{i-k}y);\]
-\item the Adem relations are satisfied.
-\end{enumerate}
+equipped with an unstable left action of the Steenrod algebra, i.e.\ $W $ is equipped with:
+%\[\Sq^i: W^t\to W^{t+i},\]
+\begin{gather*}
+\Sq^i: W^t\to W^{t+i}\\
+\mu: W^t\otimes W^{t'}\to W^{t+t'}
+\end{gather*}
+satisfying the usual properties (c.f.\  \citeBOX[\S1.4]{MR1282727}) --- Adem relations, unstableness relations, and the Cartan formula.
+%with the following properties:
+%\begin{enumerate}
+%\item $\Sq^0$ is the identity;
+%\item the squaring operation on $\overline{H}^*X$ equals the \emph{top Steenrod operation}:
+%\[\Sq^{t}x=x^{2}\text{\ \ for $x\in \overline{H}^tX$};\]
+%\item \label{Sq unstable vanishing intro} if $x\in \overline{H}^tX$, then $\Sq^ix=0$ unless $0\leq i\leq t$;
+%\item every Steenrod operation is linear;
+%\item the \emph{Cartan formula} holds:  for all $x,y\in   \overline{H}^*X$ and $i\geq0$,
+%\[\Sq^i(xy)=\textstyle\sum_{k=0}^{i}(\Sq^kx)(\Sq^{i-k}y);\]
+%\item the Adem relations are satisfied.
+%\end{enumerate}
 We take a moment to set notation, defining a functor 
 \[Q^{\calk}:\calk\to \vect{+}{},\]
 where for $W\in\calk$, 
@@ -610,41 +615,47 @@ We will restrict to those $X\in s\algs$ which are connected, which simplifies va
 %where $X\hat{\ }$ is the \emph{homology completion} of $X$. 
 As in the classical case, one must know how the homotopy groups of the homology completion $X\hat{\ }$ determine those of $X$: we will demonstrate (Theorem \ref{completenesstheorem}) that $X\hat{\ }$ is equivalent to $X$ as long as $X$ is connected. Moreover, we will prove in Theorem \ref{vanishing line prop} that the Bousfield-Kan spectral sequence admits a vanishing line from $E_2 $ in this case, and thus strongly converges to the homotopy of $X$.
 
-As forecast by the discussion in \S\ref{intropart1}, it will help to know a little about the natural operations on the homotopy of simplicial $\Ftwo$-algebras in advance. Fortunately, we know a \emph{lot} --- Dwyer \cite{DwyerHtpyOpsSimpComAlg.pdf} has completely calculated these operations (which were studied earlier by Bousfield \cite{BousOpnsDerFun.pdf,BousHomogFunctors.pdf} and Cartan \cite{CartanDivSquares}). To summarize, $\pi_*X$ is a graded non-unital commutative algebra with left operations
-\[\delta_i:\pi_nX\to \pi_{n+i}X,\textup{ defined when }2\leq i\leq n,\]
-satisfying various compatibilities which we discuss in detail in \S\ref{Homotopy operations for simplicial commutative algebras}. In fact, these $\delta$-operations satisfy a $\delta$-Adem relation \emph{that is homogeneous}, and there is a corresponding unital associative algebra $\Delta$. This is the explicit description of the homotopy operations that is lacking in the category of pointed spaces.
-
-Now Goerss described the analogue for $s\algs$ of the category $\calk$, and  all of the natural operations on the Andr\'e-Quillen cohomology $H^*_\algs X$ of connected $X\in s\algs$ are determined by:
+As forecast by the discussion in \S\ref{intropart1}, it will help to know a little about the natural operations on the homotopy of simplicial $\Ftwo$-algebras in advance. Fortunately, we know a \emph{lot} --- Dwyer \cite{DwyerHtpyOpsSimpComAlg.pdf} has completely calculated these operations (which were studied earlier by Bousfield \cite{BousOpnsDerFun.pdf,BousHomogFunctors.pdf} and Cartan \cite{CartanDivSquares}). To summarize, $\pi_*X$ supports operations
 \begin{gather*}
-P^i=\psi^*_{\algs}\circ\ExtCohOp^i:H^n_{\algs}X\to H_{\algs}^{n+i+1}X;\\
-[\,,]=\psi^*_{\algs}\circ\ExtCohProd :H_{\algs}^nX\otimes H_{\algs}^mX\to H_{\algs}^{n+m+1}X.
+\delta_i:\pi_nX\to \pi_{n+i}X,\textup{ defined when }2\leq i\leq n,\\
+\mu:\pi_nX\otimes \pi_{n'}X\to \pi_{n+n'}X,
+\end{gather*}
+with $\mu$ a graded non-unital commutative algebra product, and %the top with left operations
+%\[\delta_i:\pi_nX\to \pi_{n+i}X,\textup{ defined when }2\leq i\leq n,\]
+the $\delta_i$ satisfying various compatibilities which we discuss in detail in \S\ref{Homotopy operations for simplicial commutative algebras}. In fact, these $\delta$-operations satisfy a $\delta$-Adem relation \emph{which is homogeneous}, and there is a corresponding unital associative algebra $\Delta$. This is the explicit description of the homotopy operations that is lacking in the category of pointed spaces.
+
+Goerss described the analogue for $s\algs$ of the category $\calk$, and  all of the natural operations on the Andr\'e-Quillen cohomology $H^*_\algs X$ of \emph{connected} $X\in s\algs$ are generated by:
+\begin{gather*}
+P^i:H^n_{\algs}X\to H_{\algs}^{n+i+1}X;\\
+[\,,]:H_{\algs}^nX\otimes H_{\algs}^mX\to H_{\algs}^{n+m+1}X.
 \end{gather*}
 These operations satisfy various compatibilities which we recount in detail in \S\ref{The example of simplicial commutative F2-algebras}, and we will denote by $\calw(0)$ the category whose objects are vector spaces $W\in\vect{+}{}$ equipped with such operations.
-
 The bracket satisfies the Jacobi identity but falls just short of being a Lie algebra pairing (as $[x,x]$ is not always zero), and the $P^i$ satisfy a $P$-Adem relation \emph{that is homogeneous}. The evident unital associative algebra $P$ acting on $H^{*}_{\algs}$ is a homogeneous Koszul algebra with Koszul dual the algebra $\Delta$, and indeed, this is how it was originally described by Goerss. In \S\ref{Idnt E1 E2}, we identify the $E_2$ page (for connected $X\in s\algs$) as the  non-abelian derived functors
 \[\E{}{2}{\calx}{s}{t}\cong H^{s}_{\calw(0)}(H^{*}_{\algs}X)_t.\]
-This description begets a laundry list of operations that we might hope to see on $E_2$. The cohomology of a Lie algebra enjoys a commutative product and an action of the homogeneous Steenrod algebra $\LieSteen:=E_0\cala_2$, due to Priddy \cite{PriddySimplicialLie.pdf}. We will discuss these operations in detail in \S\ref{section: Cohomology operations for simplicial (restricted) Lie algebras} and Appendix \ref{The partially restricted universal enveloping algebra}. We hope to see some version of this structure at $E_2$, and we do: we construct in Proposition \ref{Wn Halg omnibus} natural operations
-\[\Sq^j:(H^s_{\calw(n)}X)_t\to (H^{s+j}_{\calw(n)}X)_{2t+1};\]
-\[\mu:(H^s_{\calw(n)}X)_t\otimes (H^{s'}_{\calw(n)}X)_{t'}\to (H^{s+s'+1}_{\calw(n)}X)_{t+t'+1}.\]
+This description begets a laundry list of operations that we might hope to see on $E_2$. The cohomology of a Lie algebra enjoys a commutative product and an action of the homogeneous Steenrod algebra $\LieSteen:=E_0\cala_2$, due to Priddy \cite{PriddySimplicialLie.pdf}. We will discuss these operations in detail in \S\ref{section: Cohomology operations for simplicial (restricted) Lie algebras} and Appendix \ref{The partially restricted universal enveloping algebra}. We hope to see some version of this structure at $E_2$, and we do: we construct in Proposition \ref{Wn Halg omnibus} natural `horizontal' operations
+\begin{gather*}
+\Sqh^j:(H^s_{\calw(0)}X)_t\to (H^{s+j}_{\calw(0)}X)_{2t+1};\\
+\mu:(H^s_{\calw(0)}X)_t\otimes (H^{s'}_{\calw(0)}X)_{t'}\to (H^{s+s'+1}_{\calw(0)}X)_{t+t'+1}.
+\end{gather*}
 Moreover, we hope for a (partially defined) action of the Koszul dual $\Delta$ of the $P$-algebra at $E_2$, and again, we are able to perform the necessary construction, with
-Proposition \ref{operations on goerss homology} providing operations 
-\[\delta_i:(H^s_{\calw(0)}X)_t\to (H^{s+1}_{\calw(0)}X)_{t+i+1}\textup{ \ for $2\leq i <t$}.\] 
+Proposition \ref{operations on goerss homology} providing `vertical' operations 
+\[\deltav_i:(H^s_{\calw(0)}X)_t\to (H^{s+1}_{\calw(0)}X)_{t+i+1}\textup{ \ defined for $2\leq i <t$}.\]%\max\{t-s,t-1\}$}.\] 
 These operations satisfy various compatibilities (c.f.\ \S\ref{Relations between the horizontal and vertical operations} and propositions \ref{operations on goerss homology} and \ref{Wn Halg omnibus}).
 
-The role of the product seems straightforward, but the role of the Steenrod operations at $E_2$ is unclear at first. Moreover, although the $\delta$-operations on $E_2$ look encouraging, there is the following issue: if $x\in \E{}{2}{\calx}{s}{t}$ is  a permanent cycle detecting  a class $\overline{x}\in \pi_*X$, then (for $s\geq2$) there are more operations $\delta_2x,\ldots,\delta_{t-1}x$ defined on $E_2$ than there are operations $\delta_2\overline{x},\ldots,\delta_{t-s}\overline{x}$ defined on homotopy. 
+The role of the product seems straightforward, but the role of the Steenrod operations at $E_2$ is unclear at first. Moreover, although the $\delta$-operations on $E_2$ look encouraging, there is the following issue: if $x\in \E{}{2}{\calx}{s}{t}$ is  a permanent cycle detecting  a class $\overline{x}\in \pi_*X$, then (for $s\geq2$) there are more operations $\deltav_2x,\ldots,\deltav_{t-1}x$ defined on $E_2$ than there are operations $\delta_2\overline{x},\ldots,\delta_{t-s}\overline{x}$ defined on homotopy. 
 
-This situation is quite reminiscent of that described by Dwyer \cite{DwyerHigherDividedSquares.pdf}, who works in the spectral sequence of a cosimplicial simplicial coalgebra (for example, the Eilenberg-Moore spectral sequence). In such a spectral sequence, one expects to find Steenrod operations but finds too many: Dwyer constructs $\delta$-operations and differentials mapping the excess Steenrod operations to the $\delta$ operations. In this way, the excess Steenrod operations fail to be defined at $E_\infty$, and the $\delta$-operations become zero by $E_\infty$, an excellent resolution to this problem.
+This situation is quite reminiscent of that described by Dwyer \cite{DwyerHigherDividedSquares.pdf}, who works in the spectral sequence of a cosimplicial simplicial coalgebra (for example, the Eilenberg-Moore spectral sequence). In such a spectral sequence, one expects to find Steenrod operations at $E_2$ but finds too many. Dwyer constructs $\delta$-operations and differentials mapping the excess Steenrod operations to the $\delta$ operations. In this way, the excess Steenrod operations fail to be defined at $E_\infty$, and the $\delta$-operations become zero by $E_\infty$, an excellent resolution to this problem.
 
 We cannot use Dwyer's operations directly: although under linear dualization a cosimplicial simplicial algebra becomes a cosimplicial simplicial algebra (of which the resolution $\calx$ is an example), the choice of filtration direction is transposed. Instead, we perform analogous constructions in the dual setting, and describe in \S\ref{The case of a cosimplicial simplicial commutative algebra} a theory of operations on the spectral sequence of a cosimplicial simplicial algebra, which we hope will be of some independent interest. Even these operations are not yet what we require, as it happens that they can be lifted one filtration higher at the chain level when we are working in the Bousfield-Kan spectral sequence in question. In \S\ref{second quadrant homotopy sseq operations} and \S\ref{Operations on the Bousfield-Kan spectral sequence}, we explain how to construct operations:
 \begin{gather*}
-\delta_i:\Edownup{r}{}{\calx}{s}{t} \to \Edownup{r}{}{\calx}{s+1}{t+i+1},
+\deltav_i:\Edownup{r}{}{\calx}{s}{t} \to \Edownup{r}{}{\calx}{s+1}{t+i+1},
 \\
-\Sq^j:\Edownup{r}{}{\calx}{s}{t}   \to
+\Sqh^j:\Edownup{r}{}{\calx}{s}{t}   \to
 \Edownup{r}{}{\calx}{s+j}{2t+1},\\
 \mu:\Edownup{r}{}{\calx}{s}{t}\otimes \Edownup{r}{}{\calx}{s'}{t'}\to
 \Edownup{r}{}{\calx}{s+s'+1}{t+t'+1},
 \end{gather*}
-with the $\delta_i$ potentially multi-valued functions,  defined when $2\leq i\leq \max\{n,t-(r-1)\}$, and single-valued whenever $i\leq\min\{n+1,t+1-2(r-1)\}$, and the $\Sq^j$ potentially multi-valued functions with indeterminacy vanishing by $E_{2r-2}$. All of the functions that are  defined on $E_2$ are single valued, and in fact, we show in Proposition \ref{adams operations are right for comm} that they coincide with the operations defined on $H^*_{\calw(0)}$.
+with the $\deltav_i$ potentially multi-valued functions,  defined when $2\leq i\leq \max\{n,t-(r-1)\}$, and single-valued whenever $i\leq\min\{n+1,t+1-2(r-1)\}$, and the $\Sqh^j$ potentially multi-valued functions with indeterminacy vanishing by $E_{2r-2}$ \todo{SAY IT}. All of the functions that are  defined on $E_2$ are single valued, and in fact, we show in Proposition \ref{adams operations are right for comm} that they coincide with the operations defined on $H^*_{\calw(0)}$.
 
 For $x\in \E{}{r}{\calx}{s}{t}$ such that  $\deltav_ix $ is defined:
 \[d_r\deltav_i(x)+ \deltav_i(d_rx)=\begin{cases}
@@ -655,23 +666,136 @@ For $x\in \E{}{r}{\calx}{s}{t}$ such that  $\deltav_ix $ is defined:
 \end{cases}\]
 This is Corollary \ref{Prop on delta external composed with lift}. In particular, if $i>t-s$ and $x\in\E{}{t-i+1}{\calx}{s}{t}$ survives to $\E{}{t-i+2}{\calx}{s}{t}$, then $d_{t-i+1}$ maps $\deltav_ix$ to $\Sqv^{t-i+2}x$. Of course the situation is a little more nuanced than this, but these formulae explain how the $\Sqv$ serve to absorb differentials supported by the excess $\deltav$.
 
-Now that we have a some theory of the operations available on the Bousfield-Kan spectral sequence, we turn to the question of calculating it. If we hope to imitate Miller's use of a composite functor spectral sequence, we have only one option for the factorization of $Q^{\calw(0)}$. That is, there are functors
+\SubsectionOrSection{The first composite functor spectral sequence}
+\label{The first composite functor spectral sequence}
+Now that we have a theory of the operations available on the Bousfield-Kan spectral sequence, we turn to the question of calculating it. If we hope to imitate Miller's use of a composite functor spectral sequence, we have only one option for the factorization of $Q^{\calw(0)}$. That is, there are functors
 \[\calw(0)\overset{Q^{\calu(0)}}{\to}\call(0)\overset{Q^{\call(0)}}{\to}\vect{+}{},\]
 with $\call(0)$ the category whose objects are graded vector spaces $W\in\vect{+}{}$ which are Lie algebras under a bracket
 \[W^{t}\otimes W^{t'}\to W^{t+t'+1}.\]
-As the category $\calw(0)$ is not abelian, it is a more technical task to form a composite functor spectral sequence, and we use the methods of Blanc and Stover []. The key idea in their presentation is that the derived functors
-\[H_*^{\calu(0)}:=\mathbb{L}_*Q^{\calu(0)},\]
-as they are calculated as the homotopy of an object of $s\call(0)$, take values in the category  of $\call(0)$-$\Pi$-algebras, which we label $\calw(1)$. There is a spectral sequence, for $W\in\calw(0)$:
-\[\E{\textup{cf}}{2}{W}{s_2,s_1}{t}=H^{s_2}_{\calw(1)}(H_*^{\calu(0)}(W))^{s_1}_t\implies H^{s_1+s_2}_{\calw(0)} (W)_t.\]
-In fact, the categories $\calw(n)$ are similar enough in structure for $n=0$ and $n=1$ that we can recursively define algebraic categories $\calw(n)$ and $\call(n)$ for $n\geq0$, equipped with factorizations 
-\[\calw(n)\overset{Q^{\calu(n)}}{\to}\call(n)\overset{Q^{\call(n)}}{\to}\vect{+}{n},\]
-such that there are composite functor spectral sequences for $W\in\calw(n)$:
-\[\E{\textup{cf}}{2}{W}{s_{n+2},\ldots,s_1}{t}=H^{s_{n+2}}_{\calw(n+1)}(H_*^{\calu(n)}(W))^{s_{n+1},\ldots,s_1}_t\implies H^{s_{n+2}+s_{n+1}}_{\calw(n)} (W)_t^{s_n,\ldots,s_1}.\]
+We write $\calu(0)$ for the category whose objects are $\vect{+}{}$-graded vector spaces equipped with an unstable action of the $P$-algebra. This explains the use of the notation $Q^{\calu(0)}$ for the functor which takes the quotient by the image of all of the $P$-operations.
+
+As the category $\calw(0)$ is not abelian, it is a more technical task to form a composite functor spectral sequence, and we use the methods of Blanc and Stover \cite{Blanc_Stover-Groth_SS.pdf}. The key idea in their presentation is that the derived functors
+$H_*^{\calu(0)}:=\mathbb{L}_*Q^{\calu(0)}$
+take values in the category  $\calw(1)$ of $\call(0)$-$\Pi$-algebras, as they are calculated as the homotopy of an object of $s\call(0)$. Objects of the category $\calw(1)$ are certain bigraded Lie algebras with partially defined right $\lambda$-operations. These operations would form a right action of the $\Lambda$-algebra were they defined everywhere.
+
+The first composite functor spectral sequence takes the following form  for $W\in\calw(0)$:
+\[\E{\textup{cf}}{2}{W}{s_2,s_1}{t}=H^*_{\calw(1)}(H_*^{\calu(0)}W)^{s_2,s_1}_t\implies (H^*_{\calw(0)} W)_t^{s_1+s_2}.\]
+
+We calculate the structure of $H_*^{\calu(0)}$ as an object of $\calw(1)$ in \S\ref{section on structure on homology of koszul cx}, by explicit chain-level computation,
+after defining in \S\ref{The Koszul complex and co-Koszul complex} an unstable version of Priddy's Koszul resolution \cite{PriddyKoszul.pdf} of which they are the homology.
+That linear dual $H^*_{\calU(0)}W$ admits an unstable left $\Delta$-algebra action, since the algebras $\Delta$ and $P$ are Koszul dual, and by Proposition \ref{edgehomproposition} there is a commuting diagram (for $2\leq i<t$): %this commutes In fact, we can form the composite
+\[\xymatrix@R=4mm@C=17mm{
+(H^*_{\calw(0)}W)^{s}_t\ar[r]^-{\textup{edge hom}}\ar[d]_-{\deltav_i}
+&%r1c1
+\E{\textup{cf}}{2}{W}{0,s}{t}\ar@{ >->}[r]
+&%r1c2
+(H^*_{\calU(0)}W)^{s}_t\ar[d]^-{\deltav_i}
+\\
+(H^*_{\calw(0)}W)^{s+1}_{t+i+1}\ar[r]^-{\textup{edge hom}}
+&%r1c1
+\E{\textup{cf}}{2}{W}{0,s+1}{t+i+1}\ar@{ >->}[r]
+&%r1c2
+(H^*_{\calU(0)}W)^{s+1}_{t+i+1}
+}\]
+This is the sense in which the $\deltav_i$-operations on the Bousfield-Kan $E_2$-page are compatible with the composite functor spectral sequence.
+
+The Bousfield-Kan $E_2$-page also supports products and horizontal Steenrod operations, and we should attempt to identify them in the composite functor spectral sequence. The functor $H^*_{\calw(1)}$ may also be viewed as a Lie algebra cohomology functor, so that we expect horizontal Steenrod operations and products to appear in $\E{\textup{cf}}{2}{W}{s_2,s_1}{t}$. Moreover, just as we expected $\deltav_i$ operations on $H^*_{\calw(0)}$, we expect a `vertical' left action of the homogeneous Steenrod algebra on $H^*_{\calw(1)}$, as it is Koszul dual to the $\Lambda$-algebra. Indeed we are able to construct these operations on the derived functors $H^*_{\calw(1)}$ in Proposition \ref{Wn Halg omnibus}. Moreover,
+Proposition \ref{vertical steenrod operations prop} applies to $H^*_{\calw(1)}$ just as it applies to $H^*_{\calw(0)}$, constructing horizontal Steenrod operations and products, so that in total we obtain operations
+\begin{gather*}
+\Sqv^i:\E{\textup{cf}}{2}{W}{s_{2},s_1}t\to \E{\textup{cf}}{2}{W}{s_2+1,s_1+i-1}{2t+1},\\
+\Sqh^j:\E{\textup{cf}}{2}{W}{s_2,s_1}{t}\to \E{\textup{cf}}{2}{W}{s_{2}+j,2s_1}{2t+1},\\
+\mu:\E{\textup{cf}}{2}{W}{s_2,s_1}{t}\otimes \E{\textup{cf}}{2}{W}{p_2,p_1}{q}\to \E{\textup{cf}}{2}{W}{s_2+p_2+1,s_1+p_1}{t+q+1}.
+\end{gather*}
+with both the horizontal and vertical Steenrod operations having their own unstableness conditions.
+
+Now suppose that $x\in \E{\textup{cf}}{2}{W}{s_{2},s_1}{t}$ is a permanent cycle detecting an element $\overline{x}\in (H^*_{\calw(0)}W)^{s_2+s_1}_t$. The $(s_2+s_1-1)$ operations $\Sqh^3\overline{x},\ldots,\Sqh^{s_2+s_1+1}\overline{x}$ are the potentially non-zero Steenrod operations on $\overline{x}$. The $(s_1-2)$ vertical operations $\Sqv^3x,\ldots,\Sqv^{s_1}x$ and the $(s_2+1)$ horizontal operations $\Sqh^1x,\ldots,\Sqh^{s_2+1}x$ are the potentially non-zero  Steenrod operations on $x$.
+This is quite reminiscent of Singer's framework (described in \S\ref{singer ext ops sect} and set out in \cite{MR2245560}), and in \S\ref{Application to composite functor spectral sequences} we use Singer's methods  to extend the operations on $\E{\textup{cf}}{2}{W}{}{}$ to the whole composite functor spectral sequence. The upshot is that if $x\in \E{\textup{cf}}{2}{W}{s_{2},s_1}{t}$ is a permanent cycle, then so are all of the above mentioned $\Sqv^ix$ and $\Sqh^jx$, and
+\[\Sqv^ix\textup{ detects }\Sqh^i\overline{x}\ (3\leq i\leq s_1)\textup{ and }\Sqh^jx\textup{ detects }\Sqh^{s_1+i}\overline{x}\ (1\leq j\leq s_2+1).\]
+That is, the horizontal and vertical Steenrod operations \emph{combined} account for the horizontal Steenrod operations on the target.
+
+%and in \S\ref{Horizontal Steenrod operations and a product for HWn} we define operations:
+%\begin{gather*}
+%\Sqh^j:(H^*_{\calw(0)}X)_t^{s_1}\to (H^*_{\calw(n)}X)_{2t+1}^{s_{n+1}+j,2s_{n},\ldots,2s_1},\\
+%\mu:(H^*_{\calw(n)}X)_t^{s_{n+1},\ldots,s_1}\otimes (H^*_{\calw(n)}X)_q^{p_{n+1},\ldots,p_1}\to (H^*_{\calw(n)}X)_{t+q+1}^{s_{n+1}+p_{n+1}+1,s_{n}+p_{n},\ldots,s_1+p_1},
+%\end{gather*}
+%so that $\calw(n)$-cohomology is also a certain type of unstable algebra over the homogeneous Steenrod algebra, %\emph{another} action of the homogeneous Steenrod algebra on $\calw(n)$-cohomology, 
+%with the Steenrod action `horizontal'.
+
+\SubsectionOrSection{Higher composite functor spectral sequences}
+We have constructed a comprehensive theory of the operations in the composite functor spectral sequence, but it may still be that the cohomology $H^*_{\calw(1)}$ is as difficult to calculate as the cohomology $H^*_{\calw(0)}$ of primary interest. After all, the categories $\calw(0)$ and $\calW(1)$ are similar in structure: each of these categories is (close enough to) a category of Lie algebras with unstable partially defined operations of a homogeneous Koszul algebra.
+
+We will turn this similarity to our advantage by iterating our approach. In \S\ref{homotopy operations for PRLs} we extend the constructions summarized in \S\ref{The first composite functor spectral sequence}, defining for $n\geq1$ algebraic categories $\calw(n)$ and $\call(n)$ such that $\calw(n)$ is the category of $\call(n-1)$-$\Pi$-algebras, and there are factorizations 
+\[Q^{\calw(n)}=Q^{\call(n)}\circ Q^{\calu(n)}:\Bigl(\calw(n)\overset{Q^{\calu(n)}}{\to}\call(n)\overset{Q^{\call(n)}}{\to}\vect{+}{n}\Bigr).\]
+%For each $n\geq1$, $\call(n)$ is a category of $\vect{+}{n}$-graded partially restricted Lie algebras and $\calw(n)$ is a category of  $\vect{+}{n}$-graded partially restricted Lie algebras with certain unstable $\lambda$-operations. These definitions must be made carfully. Indeed, We write $\calu(n)$ for the category whose objects are the . The definition of the functor $\calU$
+There are composite functor spectral sequences for $W\in\calw(n)$:
+\[\E{\textup{cf}}{2}{W}{s_{n+2},\ldots,s_1}{t}=H^*_{\calw(n+1)}(H_*^{\calu(n)}W)^{s_{n+2},s_{n+1},\ldots,s_1}_t\implies (H^*_{\calw(n)} W)_t^{s_{n+2}+s_{n+1},s_n,\ldots,s_1},\]
+and we equip each of these spectral sequences with a theory of operations as discussed in \S\ref{The first composite functor spectral sequence}.
+
+At this point it is useful to hint at the definitions. For $n\geq1$,
+let $\calU(n)$ denote the category whose objects are vector spaces $V\in \vect{+}{n}$ equipped with  \emph{linear} right $\lambda$-operations
+\begin{equation}\label{lambdaopshighn}
+(\DASH)\lambda_i:V_{s_{n},\ldots,s_1}^t\to V_{s_{n}+i,2s_{n-1},\ldots,2s_1}^{2t+1}
+\end{equation}
+defined whenever $0\leq i< s_{n+1}$ and not all of $i,s_{n},\ldots,s_{1}$ are zero. Let $\call(n)$ denote the category whose objects are $V\in \vect{+}{n}$ equipped with a (typically non-linear) $\lambda$-operation as in (\ref{lambdaopshighn}) defined whenever $i= s_{n+1}$ and not all of $i,s_{n},\ldots,s_{1}$ are zero, which acts as a partial restriction for a Lie algebra bracket
+\[[\,,]:V^{t}_{s_n,\ldots,s_1}\otimes V^{t'}_{s'_n,\ldots,s'_1}\to V^{t+t'+1}_{s_n+s'_n,\ldots,s_1+s'_1}.\]
+Finally, let $\calw(n)$ be the category whose objects are simulteneously objects of $\calU(n)$ and $\call(n)$ subject to certain compatibilities.
+
+The functor $H_*^{\calu(n)}$ may be calculated by an unstable Koszul resolution, and each of $H^*_{\calu(n)}W$ and $H^*_{\calw(n)}W$ is naturally an object of $\calMv(n+1)$, the category whose objects are graded vector spaces $M\in\vect{n+1}{+}$ with an unstable left action of the Steenrod algebra, namely%:. Specifically
+%Write $\calMv(n+1)$ for the algebraic category whose objects are vector spaces $M\in\vect{n+1}{+}$ with left Steenrod operations
+\[\Sqv^i:M^{s_{n+1},\ldots,s_1}_t\to M^{s_{n+1}+1,s_n+i-1,2s_{n-1},\ldots,2s_1}_{2t+1},\]
+which are zero except when $1\leq i \leq s_n$ and not all of $i-1,s_{n-1},\ldots,s_1$ are zero. This structure is derived in \S\ref{section: vertical Koszul operations n positive}, using the Koszul duality between the $\Lambda$-algebra and the homogeneous Steenrod algebra.
+
+On the other hand, as in the $n=0$ case, $H^*_{\calw(n)}$ is an example of (partially restricted) Lie algebra cohomology, so that  horizontal Steenrod operations and products  appear. In \S\ref{Horizontal Steenrod operations and a product for HWn} we define these operations:
+\begin{gather*}
+\Sqh^j:(H^*_{\calw(n)}X)_t^{s_{n+1},\ldots,s_1}\to (H^*_{\calw(n)}X)_{2t+1}^{s_{n+1}+j,2s_{n},\ldots,2s_1},\\
+\mu:(H^*_{\calw(n)}X)_t^{s_{n+1},\ldots,s_1}\otimes (H^*_{\calw(n)}X)_q^{p_{n+1},\ldots,p_1}\to (H^*_{\calw(n)}X)_{t+q+1}^{s_{n+1}+p_{n+1}+1,s_{n}+p_{n},\ldots,s_1+p_1},
+\end{gather*}
+so that $\calw(n)$-cohomology is also a certain type of unstable algebra over the homogeneous Steenrod algebra, %\emph{another} action of the homogeneous Steenrod algebra on $\calw(n)$-cohomology, 
+with the Steenrod action `horizontal'. We write $\calMh(n+1)$ for the resulting category of $\vect{n+1}{+}$-graded unstable algebras over the homogeneous Steenrod algebra.
+(We use the definition of the Steenrod action and products that fits into the framework set out in \ref{Constructing cohomology operations}, and the work of showing that these operations coincide with those constructed 
+by Priddy \cite{PriddySimplicialLie.pdf} is deferred until Appendix \ref{appendix on Lie coh ops}.)
+
+We identify in \S\ref{Relations between the horizontal and vertical operations} the relations betwen the $\calMv(n+1)$ and $\calMh(n+1)$, which leads to the defintion of an algebraic category $\calMhv(n+1)$ in which $\calw(n)$-cohomology takes values, for $n\geq1$. Theorems \ref{thm on collapsing of most sseqs} and \ref{Koszul-dual Hilton-Milnor theorem} together show that this is \emph{all} of the natural structure on $\calW(n)$-cohomology for $n\geq1$.
+
+\vfpb
+. Moreover, Propositions 
+
+The idea is then to use these spectral sequences to calculate $H^{*}_{\calw(0)}$. To do this would be difficult without a theory of unstable operations for these spectral sequences as well, so this is the next work to be performed. 
+
+Before forecasting the operations to be expected on these composite functor spectral sequences, we must say a little  about the categories $\calw(n)$, defined in \S\ref{wn+1 or pialgs section}. An object of $\calw(n)$ is a vector space in $\vect{+}{n}$, equipped with certain unstable right $\lambda$-operations and a Lie bracket. The top $\Lambda$-operation, when defined, acts as a restriction for the Lie bracket. We write $\calu(n)$ for the category whose objects are graded vector spaces equipped with an action of the \emph{non-top} $\lambda$-operations alone.
+
+%The $\Lambda$-algebra does not act on such an object, given that the $\lambda$-operations are only partially defined, but nonetheless, 
+For $n\geq1$, we may hope for an action of the Koszul dual of the $\Lambda$-algebra on $H^*_{\calw(n)}$, and the Koszul dual algebra is the homogeneous Steenrod algebra. In \S\ref{section: vertical Koszul operations n positive}, for $W\in\calw(n)$ with $n\geq1$, we are indeed able to define `vertical' operations:
+\[\Sqv^i:(H^*_{\calw(n)}W)^{s_{n+1},\ldots,s_1}_t\to (H^*_{\calw(n)}W)^{s_{n+1}+1,s_n+i-1,2s_{n-1},\ldots,2s_1}_{2t+1}.\]
+These operations have their own unstableness conditions, and we write $\calMv(n+1)$ for the resulting category of $\vect{n+1}{+}$-graded unstable modules over the homogeneous Steenrod algebra.
+
+On the other hand, for $n\geq0$, $H^*_{\calw(n)}$ is an example of (partially restricted) Lie algebra cohomology, so that we expect Steenrod operations and products to appear. In \S\ref{Horizontal Steenrod operations and a product for HWn} we define these operations:
+\begin{gather*}
+\Sqh^j:(H^*_{\calw(n)}X)_t^{s_{n+1},\ldots,s_1}\to (H^*_{\calw(n)}X)_{2t+1}^{s_{n+1}+j,2s_{n},\ldots,2s_1},\\
+\mu:(H^*_{\calw(n)}X)_t^{s_{n+1},\ldots,s_1}\otimes (H^*_{\calw(n)}X)_q^{p_{n+1},\ldots,p_1}\to (H^*_{\calw(n)}X)_{t+q+1}^{s_{n+1}+p_{n+1}+1,s_{n}+p_{n},\ldots,s_1+p_1},
+\end{gather*}
+so that $\calw(n)$-cohomology is also a certain type of unstable algebra over the homogeneous Steenrod algebra, %\emph{another} action of the homogeneous Steenrod algebra on $\calw(n)$-cohomology, 
+with the Steenrod action `horizontal'. We write $\calMh(n+1)$ for the resulting category of $\vect{n+1}{+}$-graded unstable algebras over the homogeneous Steenrod algebra.
+(We use the definition of the Steenrod action and products that fits into the framework set out in \ref{Constructing cohomology operations}, and the work of showing that these operations coincide with those constructed 
+by Priddy \cite{PriddySimplicialLie.pdf} is deferred until Appendix \ref{appendix on Lie coh ops}.)
+
+We identify in \S\ref{Relations between the horizontal and vertical operations} the relations betwen the $\calMv(n+1)$ and $\calMh(n+1)$, which leads to the defintion of an algebraic category $\calMhv(n+1)$ in which $\calw(n)$-cohomology takes values, for $n\geq1$. Theorems \ref{thm on collapsing of most sseqs} and \ref{Koszul-dual Hilton-Milnor theorem} together show that for $n\geq1$, $\calMhv(n+1)$ is the category of $\calW(n)$-cohomology algebras.
+
+For the calculation of the spectral sequence
+\[\E{\textup{cf}}{2}{W}{}{}=H^{*}_{\calw(n+1)}(H_*^{\calu(n)}(W))\implies H^{*}_{\calw(n)} (W)\]
+for $W\in \calw(n)$ with $n\geq0$, we rely on the following structure. The derived functors $H_{*}^{\calu(n)}W$ are calculated in \S\ref{The Koszul complex and co-Koszul complex} using unstable Koszul resolutions, and in \S\ref{section on structure on homology of koszul cx}, we calculate their structure as objects of $\calw(n+1)$. We relate them to the vertical operations on  $H^{*}_{\calw(n)} (W)$ under the edge homomorphism. For $n\geq1$, In each case, the category of $\calU(n)$-cohomology algebras equals $\calMv()$.
+
+ On the other hand, we enrich the $\calMhv(n+2)$-structure on $H^{*}_{\calw(n+1)}(H_*^{\calu(n)}(W))$ to a theory of spectral sequence operations. The core of the method is Singer's theory \cite{MR2245560} of operations in first quadrant spectral sequences, although there is a little more work required in order to produce the operations. The $\calMhv(n+2)$-structure then converges to the $\calMh(n+1)$ structure on the target.
+
+Singer's method was developed in order to rectify the following problem ---
+\todo[inline]{introduction to be continued}
 
 
 
+, and to retain as much information as possible about its products and the $\deltav_i$- and  $\Sqh^j$-operations. 
 
-The category $\PA{(\call(0))}$ is not too difficult to determine, and we name it $\calw(1)$. Elements of $\calw(1)$ are now certain bigraded Lie algebras with partially defined right $\lambda$-operations
+
+The category $\PA{(\call(0))}$ is not too difficult to determine, and we name it $\calw(1)$. Objects of $\calw(1)$ are now certain bigraded Lie algebras with partially defined right $\lambda$-operations
 
 
 
@@ -679,7 +803,6 @@ The category $\PA{(\call(0))}$ is not too difficult to determine, and we name it
 
 An atomic example that we may seek to calculate is that of a \emph{sphere} $\mathbb{S}_n^{\algs} $ in $\algs$. This is an object of $s\algs$ which represents the functor $\pi_n$ on the homotopy category $\textup{ho}(s\algs)$. It has $H^*_{\algs}\mathbb{S}_n^{\algs}$ the trivial object of $\calw(0)$, concentrated in dimension $n$
 
-\todo[inline]{introduction to be continued}
 
 
 %\begin{enumerate}
@@ -3887,6 +4010,7 @@ We have shown that an object of $\PA{\calL(n)}$ is in particular an object of $\
 %For $L\in s\calL(n)$, the homotopy groups $\pi_*(L)$ are simultaneously an object of $\calL(n+1)$ and of $\calU(n+1)$. The $\calU(n+1)$-operations are annihilated by the bracket. That is, for $i<s_{n+1}$, $x\in\pi_{s_{n+1}}L$ and $y\in \pi_*L$ such that $x\lambda_i$ is defined, we have $[x\lambda_i,y]=0$.
 %\end{prop}
 \SubsectionOrSection{The category $\calw(n+1)$ of $\calL(n)$-$\Pi$-algebras}
+\label{wn+1 or pialgs section}
 For $n\geq0$, let $\calw(n+1)$ denote \emph{the category of $\calL(n)$-$\Pi$-algebras}. By the following proposition, this is the algebraic category whose objects are $\vect{+}{n+1}$-graded vector spaces which are simultaneously an object of $\calU(n+1)$ and of $\calL(n+1)$, such that the compatibilities of Proposition \ref{omnibus on htpy of Lie algs} are satisfied. Explained another way, an object of $\calw(n+1)$ is such a vector space with all of the $\lambda$-operations, both top and non-top, and the bracket described in \S\ref{Homotopy operations for sLn}, subject to the compatibilities of Proposition \ref{omnibus on htpy of Lie algs}.
 
 This category has a number of useful properties, following from the calculations of \cite{6Author.pdf}, primarily:
@@ -4059,7 +4183,7 @@ When $V$ is of finite type, as $F^{\calw(0)}$ preserves vector spaces of finite 
 
 \begin{prop}
 \label{operations on goerss homology}
-Suppose that $X\in s\calw(0)$ is almost free, so that we may identify $H^*_{\calw(0)}X$ with $\pi^*\dual Q^{\calw(0)}X$. Then for $2\leq i <t$, the chain map $\widetilde{\theta_i}$ of Proposition \ref{general CohOpns given irreducibility} induces a linear operation
+Suppose that $X\in s\calw(0)$ is almost free\todo{s=0?}, so that we may identify $H^*_{\calw(0)}X$ with $\pi^*\dual Q^{\calw(0)}X$. Then for $2\leq i <t$, the chain map $\widetilde{\theta_i}$ of Proposition \ref{general CohOpns given irreducibility} induces a linear operation
 \[\deltav_i:(H^*_{\calw(0)}X)^{s}_t\to (H^*_{\calw(0)}X)^{s+1}_{t+i+1}.\] 
 These operations are natural in maps preserving the generating subspaces, and satisfy the unstable $\delta$-Adem relation of Proposition \ref{omnibus on htpy of simp algs}\textit{(\ref{deltaademsunstable})}.
 \end{prop}
@@ -4169,8 +4293,10 @@ In more detail:
 \begin{prop}
 \label{Wn Halg omnibus}
 Fix $n\geq0$. For $X\in s\calw(n)$, there are natural operations
-\[\Sqh^j:(H^*_{\calw(n)}X)_t^{s_{n+1},\ldots,s_1}\to (H^*_{\calw(n)}X)_{2t+1}^{s_{n+1}+j,2s_{n},\ldots,2s_1},\text{ and}\]
-\[\mu:(H^*_{\calw(n)}X)_t^{s_{n+1},\ldots,s_1}\otimes (H^*_{\calw(n)}X)_q^{p_{n+1},\ldots,p_1}\to (H^*_{\calw(n)}X)_{t+q+1}^{s_{n+1}+p_{n+1}+1,s_{n}+p_{n},\ldots,s_1+p_1}\]
+\begin{gather*}
+\Sqh^j:(H^*_{\calw(n)}X)_t^{s_{n+1},\ldots,s_1}\to (H^*_{\calw(n)}X)_{2t+1}^{s_{n+1}+j,2s_{n},\ldots,2s_1},\\
+\mu:(H^*_{\calw(n)}X)_t^{s_{n+1},\ldots,s_1}\otimes (H^*_{\calw(n)}X)_q^{p_{n+1},\ldots,p_1}\to (H^*_{\calw(n)}X)_{t+q+1}^{s_{n+1}+p_{n+1}+1,s_{n}+p_{n},\ldots,s_1+p_1}
+\end{gather*}
 with the following properties
 \begin{enumerate}
 \item the product $\mu$ gives $H^*_{\calc}L$ the structure of a (grading shifted) $S(\CommOperad)$-algebra;
@@ -4353,6 +4479,7 @@ What remains is to show that $f$ is an isomorphism as in the theorem statement, 
 We will now discuss the Koszul resolutions that one may use to calculate $H_*^{\calU(n)}X$ for $X$ a (non-simplicial)  object of $\calU(n)$ or $\calw(n)$ of finite type, using Priddy's technique \cite{PriddyKoszul.pdf}, adapted to an unstable context, as in \cite{CurtisSimplicialHtpy.pdf}.
 
 \SubsectionOrSection{The Koszul complex and co-Koszul complex}
+\label{The Koszul complex and co-Koszul complex}
 Write $N_*^\div $ and $C_*$ for the chain complexes $N_*^\div Q^{\calU(n)}B^{\calU(n)}X$ and $C_* Q^{\calU(n)}B^{\calU(n)}X$.  We will use to the convenient bar notation after which the bar construction is named, c.f.\ \citeBOX[\S7]{grpsHPin.pdf}. Suppose that $n=0$, then the vector space  $N_s^\div$ is spanned by
 \[\left[P^{i_{k_s+\cdots +k_1}}\cdots P^{i_{k_{s-1}+\cdots +k_1+1}}
 \middle|\cdots 
@@ -5201,6 +5328,7 @@ whenever $q\leq k$ (which summarises also Singer's computation of how the $\ExtC
 
 
 \SubsectionOrSection{Application to composite functor spectral sequences}
+\label{Application to composite functor spectral sequences}
 
 
 In order to use Singer's constructions in the present work, we will use the map of double complexes:
@@ -7509,7 +7637,7 @@ If $i\leq \max\{n,t+1-2(r-1)\}$, so that $\deltav_i x$ is single-valued, then so
 
 \begin{cor}[(of Proposition \ref{Prop on einfty ops})]
 \label{Prop on einfty ops composed with lift}
-For $2\leq i\leq t-s$, the operations $\deltav_i:\E{}{\infty}{\calx}{s}{t}\to \E{}{\infty}{\calx}{s+1}{t+i+1}$ agree with the homotopy operations $\deltav_i:\pi_{t-s}X\to \pi_{t-s+i}X$ on the target of the spectral sequence. Similarly, the product at $\E{}{\infty}{\calx}{}{}$ agrees with the product on the target.
+For $2\leq i\leq t-s$, the operations $\deltav_i:\E{}{\infty}{\calx}{s}{t}\to \E{}{\infty}{\calx}{s+1}{t+i+1}$ agree with the homotopy operations $\delta_i:\pi_{t-s}X\to \pi_{t-s+i}X$ on the target of the spectral sequence. Similarly, the product at $\E{}{\infty}{\calx}{}{}$ agrees with the product on the target.
 \end{cor}
 
 
