@@ -1,6 +1,6 @@
 % !TEX root = z_output/unstable_Lie_algs.tex
 \documentclass[11pt]{amsart} \renewcommand{\baselinestretch}{1.2}
-\newcommand{\IncludeAll}{}%
+%\newcommand{\IncludeAll}{}%
 \newcommand{\xShrinkPages}{}%
 \newcommand{\xPostponeContents}{}%
 %%%%%%%%%%%%%%%%%%% 
@@ -23,10 +23,10 @@
 \ooooo[	10]{Composite functor spectral sequences}
 \ooooo[	11]{Operations in composite functor spectral sequences}
 \ooooo[	12]{Calculations of HWn}
-\wooooo[	13]{second quadrant homotopy sseq operations}
-\wooooo[	14]{Operations on the Bousfield-Kan spectral sequence}
+\ooooo[	13]{second quadrant homotopy sseq operations}
+\ooooo[	14]{Operations on the Bousfield-Kan spectral sequence}
 \ooooo[	15]{The Bousfield-Kan spectral sequence for a sphere}
-\ooooo[	16]{May sseq and vanishing line}
+\wooooo[	16]{May sseq and vanishing line}
 \ooooo[	ap]{appendices}
 \ooooo[	bb]{bibliog}
 
@@ -392,6 +392,8 @@ url=false,doi=false,isbn=false,eprint=false]{biblatex}%
 \newcommand{\trip}[3]{{#1}_{\smash{#2}}^{\smash{#3}}}
 \newcommand{\barConstructionMightAbbreviate}{b}
 
+\newcommand{\BKSS}{BKSS}
+
 %%%%%%%%%%%%%%%%%%% 
 %%%%%%%%%%%%%%%%%%%End preamble for pasteover
 %%%%%%%%%%%%%%%%%%% 
@@ -446,17 +448,20 @@ Write one of these.
 \begin{Introduction}
 \SectionOrChapter{\textbf{Introduction}}
 \label{intropart1}
-The primary object of study in this thesis is the Bousfield-Kan spectral sequence in the Quillen model category $s\algs$ of simplicial non-unital commutative  $\Ftwo$-algebras. For  $X\in s\algs$, this is a spectral sequence which calculates the homotopy groups of the homology completion $X\hat{\ }$, with $E_2$-page certain derived functors applied to the Andr\'e-Quillen cohomology groups $H^*_{\algs}X$. 
+\SubsectionOrSection{Overview}
+The primary object of study in this thesis is the Bousfield-Kan spectral sequence (\BKSS) in the Quillen model category $s\algs$ of simplicial non-unital commutative  $\Ftwo$-algebras. For  $X\in s\algs$, this is a spectral sequence which calculates the homotopy groups of the homology completion $X\hat{\ }$ of $X$, with $E_2$-page given by certain derived functors applied to the Andr\'e-Quillen cohomology groups $H^*_{\algs}X$ of $X$. 
 
 We work directly with the Adams tower defining the completion to show that it is naturally equivalent to $X$ whenever $X$ is connected, so that we understand the target of the spectral sequence.
 
-Next, we turn to the calculation of $E_2$, defining a sequence of composite functor spectral sequences which may be used to make calculations. In order that these spectral sequences are of any use, we equip them with three families of unstable spectral sequence operations. Given this rich structure, we are able to make calculations of the Bousfield-Kan $E_2$-page in the most important case, when $X$ is a \emph{sphere} in $s\algs$.
+We define and study three families unstable spectral sequence operations on the \BKSS.  Our method is to perform a generic construction of spectral sequence operations in a cosimplicial simplicial algebra, and then perform a shift in filtration using properties of Radulescu-Banu's resolution.
 
-Next, we define and study three families unstable spectral sequence operations on the Bousfield-Kan spectral sequence itself. These operations appear similar in structure to those on the composite functor spectral sequence, but technically, the derivations have little in common. Our method is to perform a generic construction of spectral sequence operations in a cosimplicial simplicial algebra, and then perform a shift in filtration using properties of Radulescu-Banu's resolution.
 
-Using the operations on the Bousfield-Kan spectral sequence we conjecture the full structure of the spectral sequence for a sphere in $s\algs$. The difficulty in proving this conjecture arises due to the implicit homotopies involved in defining the operations.
+Next, we turn to the calculation of $E_2$, defining a sequence of composite functor spectral sequences which we use to make calculations of the \BKSS\ $E_2$-page in the most important case, when $X$ is a \emph{sphere} in $s\algs$. In order that these spectral sequences are of any use, we equip them with various unstable spectral sequence operations, using techniques due to Singer. 
 
-We define a May-Koszul spectral sequence which converges to the Bousfield-Kan $E_2$-page, and describe the May-Koszul $E^1$-page using the data of the $E_2$-pages for spheres. Using this spectral sequence we are able to prove a vanishing line theorem for the Bousfield-Kan spectral sequence for connected $X\in s\algs$.
+
+Using the operations on the \BKSS\ we conjecture the full structure of the spectral sequence for a sphere in $s\algs$. The difficulty in proving this conjecture arises due to failure of certain relations between the operations at the $E_1$-page.
+
+We define a May-Koszul spectral sequence which converges to the \BKSS\ $E_2$-page, and describe the May-Koszul $E^1$-page using the data of the $E_2$-pages for spheres. Using this spectral sequence we are able to prove a vanishing line theorem for the \BKSS\ for connected $X\in s\algs$.
 
 In order to construct the  various operations needed for this thesis, it was helpful to construct a framework in which many of the classically known homotopy and cohomology operations of $s\calc$, for various categories $\calc$ of universal algebras, may be considered together. We do this after giving an introduction to the theory of homotopy and cohomology algebras and homology coalgebras.
 
@@ -464,7 +469,7 @@ In order to construct the  various operations needed for this thesis, it was hel
 %, of interest both to topologists and commutative algebraists
 \SubsectionOrSection{The classical Bousfield-Kan spectral sequence}
 \label{Classicalstuff}
-The homotopy theory $s\algs$ is in general less familiar than the homotopy theory of topological spaces, although the two theories have much in common. Before we introduce our main results, we briefly recall the analogous theory for topological spaces.
+The homotopy theory $s\algs$ has much in common with the homotopy theory of topological spaces,  and before we introduce our main results, we briefly recall the analogous classical theory.
 
 Suppose that $X$ is a pointed connected topological space with $\pi_*X$ finitely generated in each degree. 
 The (absolute) \emph{Bousfield-Kan spectral sequence of $X$} (over $\Ftwo$) is a second quadrant spectral sequence
@@ -480,15 +485,15 @@ The non-abelian derived functors $\Ext^s$ are calculated in the category
 %Although it is preferable in general to work with homology coalgebras as above, when $\pi_*X$ is of finite type, this spectral sequence may be rewritten as
 %\[\E{}{2}{X}{s}{t}\cong \Ext^s_{\calk}(\overline{H}^*(X;\Ftwo),\overline{H}^*(S^t;\Ftwo))\implies \pi_{t-s}X\hat{\ }_{\!\!\!2},\]
 %where 
-$\calk$ of non-unital unstable algebras over the Steenrod algebra []. If we write $\vect{+}{}$ for the category of graded vector spaces $W=\textstyle \bigoplus_{n\geq 1} W^n$, the objects of $\calk$ are graded non-unital $\Ftwo$-algebras
+$\calk$ of non-unital unstable algebras over the Steenrod algebra  (c.f.\  \citeBOX[\S1.4]{MR1282727}). If we write $\vect{+}{}$ for the category of graded vector spaces $W=\textstyle \bigoplus_{n\geq 1} W^n$, the objects of $\calk$ are graded non-unital $\Ftwo$-algebras
 $W\in\vect{+}{}$
-equipped with an unstable left action of the Steenrod algebra, i.e.\ $W $ is equipped with:
+equipped with an unstable left action of the Steenrod algebra, i.e.\ maps:
 %\[\Sq^i: W^t\to W^{t+i},\]
 \begin{gather*}
-\Sq^i: W^t\to W^{t+i}\\
-\mu: W^t\otimes W^{t'}\to W^{t+t'}
+\Sq^i: W^t\to W^{t+i},\\
+\mu: W^t\otimes W^{t'}\to W^{t+t'},
 \end{gather*}
-satisfying the usual properties (c.f.\  \citeBOX[\S1.4]{MR1282727}) --- Adem relations, unstableness relations, and the Cartan formula.
+satisfying the usual properties --- Adem relations, unstableness relations, and the Cartan formula.
 %with the following properties:
 %\begin{enumerate}
 %\item $\Sq^0$ is the identity;
@@ -500,35 +505,37 @@ satisfying the usual properties (c.f.\  \citeBOX[\S1.4]{MR1282727}) --- Adem rel
 %\[\Sq^i(xy)=\textstyle\sum_{k=0}^{i}(\Sq^kx)(\Sq^{i-k}y);\]
 %\item the Adem relations are satisfied.
 %\end{enumerate}
-We take a moment to set notation, defining a functor 
-\[Q^{\calk}:\calk\to \vect{+}{},\]
-where for $W\in\calk$, 
-\[Q^{\calk}W:=W/\left(\im\Bigl(W\otimes W\overset{\mu}{\rightarrow} W\Bigr)\oplus\textstyle\bigoplus_{i\geq1}\im\Bigl(W\overset{\Sq^i}{\rightarrow} W\Bigr)\right)\in\vect{+}{}.\]
-The Bousfield-Kan $E_2$ term can be further rewritten as the dual left derived functors
+We take a moment to set notation, defining the indecomposables functor 
+$Q^{\calk}:\calk\to \vect{+}{}$
+by the formula
+\[W\overset{Q^{\calk}}{\mapsto}W/\left(\im\Bigl(W\otimes W\overset{\mu}{\rightarrow} W\Bigr)\oplus\textstyle\bigoplus_{i\geq1}\im\Bigl(W\overset{\Sq^i}{\rightarrow} W\Bigr)\right)\in\vect{+}{}.\]
+The \BKSS\ $E_2$-page can be  rewritten as the dual left derived functors
 \[\E{}{2}{X}{s}{t}\cong H^s_{\calk}(\overline{H}^*(X;\Ftwo))_t:=\dual((\mathbb{L}_sQ^{\calk})(\overline{H}^*(X,\Ftwo) )^t),\]
 where we write  $\dual V$ for the linear dual of a vector space $V$, and insist that $\dual$ interchanges homological and cohomological dimensions.
 
 
 
-One useful idea is to search for operations which act on the spectral sequence --- spectral sequence operations can be used to produce new elements in a spectral sequence and to compute differentials on those elements. Along this line, Bousfield and Kan construct a Lie algebra pairing \cite[\S14]{BK_pairings_products.pdf}:
+One useful idea is to search for operations which act on the spectral sequence. Spectral sequence operations are typically used to produce new elements on the $E_2$-page and to compute differentials on those elements. Bousfield and Kan construct a Lie algebra pairing \cite[\S14]{BK_pairings_products.pdf}:
 \[\E{}{r}{X}{s}{t} \otimes \E{}{r}{X}{s'}{t'}\to \E{}{r}{X}{s+s'+1}{t+t'}\textup{ \ (for $1\leq r\leq \infty$)},\]
 with the bracket on $E_r$ satisfying  a Liebniz formula and inducing the bracket on $E_{r+1}$.
 
 There are two reasons why one might expect such a Lie algebra structure. %, one reason at $E_2$ and one at $E_\infty$. At $E_2$: 
-The operads $\CommOperad$ and $\LieOperad$ are Koszul dual and (even though the theory of Koszul homology is complicated by the non-zero characteristic) one is not surprised to find an action of $\LieOperad$ on the derived functors calculating $E_2$. %, which might then extend to the higher pages. At $E_\infty$: 
+The commutative operad $\CommOperad$ and the Lie operad $\LieOperad$ are Koszul dual, and even though the theory of Koszul homology is complicated by the non-zero characteristic, there is an action of $\LieOperad$ on the derived functors calculating $E_2$. %, which might then extend to the higher pages. At $E_\infty$: 
 Next, there is a graded Lie algebra structure on homotopy groups given by the Whitehead bracket \cite{MR0004123}:
-\[[\,,]:\pi_nX\hat{\ }_{\!\!\!2}\otimes \pi_{n'}X\hat{\ }_{\!\!\!2}\to \pi_{n+n'-1}X\hat{\ }_{\!\!\!2}.\]
-One would not be surprised to find that  this action preserves the filtration and so defines a Lie algebra structure on $E_\infty$.
-In any case, Bousfield and Kan prove that the bracket at $E_\infty$ is compatible with the Whitehead bracket [] on homotopy, and give a homological description  of the bracket at $E_2$ --- the best possible scenario.
+\[[\,,]:\pi_nX\hat{\ }_{\!\!\!2}\otimes \pi_{n'}X\hat{\ }_{\!\!\!2}\to \pi_{n+n'-1}X\hat{\ }_{\!\!\!2},\]
+and one may ask whether or not this action preserves the filtration and so defines a Lie algebra structure on $E_\infty$.
+Bousfield and Kan answer this question in the affirmative by proving that the bracket at $E_\infty$ is compatible with the Whitehead bracket, and they also show that the pairing given at $E_2$ has the correct homological description.
 
-This appears to be as far as it is possible to pursue this strategy, as at both $E_2$ and $E_\infty$ we lose hope of finding structure that can be systematically described. %We lose hope at $E_\infty$, since w
-We simply do not understand the natural operations that exist on $\pi_*$ in enough detail. After all, by the Hilton-Milnor theorem [], all natural operations on the homotopy groups of pointed spaces are composites of the Whitehead bracket and unary operations, and a natural  homotopy operation $\pi_n X\to \pi_m X$ is equivalent to an element of $\pi_m S^n$.
+This appears to be as far as it is possible to pursue this strategy, as at both $E_2$ and $E_\infty$ we lose hope of finding structure that can be readily described. %We lose hope at $E_\infty$, since w
 
-It might be useful to point out why we should not expect to extract further structure on $E_2$ using the Steenrod action, or at least none that can be described so explicitly. The Steenrod algebra $\cala_2$ suffers from the inhomogeneity $\Sq^0=1$. Were it a homogeneous Koszul algebra (in the sense of \cite{PriddyKoszul.pdf}), then its Koszul dual would at very least act on $\Ext_{\cala_2}(\Ftwo,M)$ for an $\cala_2$-module $M$, but even this is not the case. 
-%At $E_2$, there is not enough usable structure in the category $\calk$ to systematically define further operations. The Steenrod algebra $\cala_2$ suffers from the inhomogeneity $\Sq^0=1$, and in particular, it is not a homogeneous Koszul algebra in the sense of \cite{PriddyKoszul.pdf}. Although $\cala_2$ has a filtration in which $E_0\cala_2$ \emph{is} a homogeneous Koszul algebra, with Koszul dual the $\Lambda$-algebra, even if $M$ is simply a $\cala_2$-module, $\Ext_{\cala_2}(\Ftwo,M)$ does not have an action of $\Lambda$. 
+We do not expect to extract further structure on $E_2$ using the Steenrod algebra action in $\calK$, or at least not any that can be described so explicitly. The Steenrod algebra $\cala_2$ suffers from the inhomogeneity $\Sq^0=1$. Were it a homogeneous Koszul algebra (in the sense of \cite{PriddyKoszul.pdf}), then its Koszul dual would at very least act on $\Ext_{\cala_2}(\Ftwo,M)$ for an $\cala_2$-module $M$, but even this is not the case. 
 There is no particular reason to think that the situation should be any better for the non-abelian derived functors defining $E_2$.
 
-Before we break from our extended analogy, we will discuss the considerable task of calculating the $E_2$-page. Performing this calculation is at least as difficult as the calculation of the $E_2$ term for the classical (stable) Adams spectral sequence, which appears to be rather difficult. There is, however, the following strategy, due to Miller \cite{MillerSullivanConjecture.pdf}, for extracting information about the derived functors $H^*_{\calk}$. Miller  observes that there is a factorization of $Q^{\calk}$ into 
+Moreover, we simply do not understand the natural operations that exist on $\pi_*$ in enough detail to expect to see uniform structure appearing on $E_\infty$. After all, by the Hilton-Milnor theorem \citeBOX[\S4]{Neisendorfer.pdf}, all natural operations on the homotopy groups of pointed spaces are composites of the Whitehead bracket and unary operations, and a natural  homotopy operation $\pi_n X\to \pi_m X$ is equivalent to an element of $\pi_m S^n$.
+
+
+
+Before we break from our extended analogy, we will discuss the considerable task of calculating the $E_2$-page. Performing this calculation is at least as difficult as the calculation of the $E_2$-page for the classical (stable) Adams spectral sequence, which appears to be rather difficult. There is, however, the following strategy, due to Miller \cite{MillerSullivanConjecture.pdf}, for extracting information about the derived functors $H^*_{\calk}$. Miller  observes that there is a factorization of $Q^{\calk}$ into 
 \[\calk\overset{Q^{\algs}}{\to} \Sigma\calu \overset{Q^{\Sigma\calu}}{\to}\vect{+}{},\]
 where $\Sigma\calu$ is the algebraic category whose objects are vector spaces $V\in\vect{+}{}$ equipped with a left action of $\cala_2$ such that $\Sq^i:V^n\to V^{n+i}$ is zero unless $0\leq i <n$.
 This suspension is included in order that $Q^\algs$ satisfies an acyclicity condition, and  there is a composite functor spectral sequence, for $W\in\calk$:
@@ -538,20 +545,20 @@ This spectral sequence was an integral part of Miller's proof of the Sullivan co
 \SubsectionOrSection{The various categories $s\calc$}
 In this thesis will will use quite a number of categories of universal algebras, such as the category $\algs$ of non-unital commutative $\Ftwo$-algebras, or the category $\liealgs$ of Lie algebras over $\Ftwo$. While we introduce certain general notions we will write $\calc$ for any one of these categories.
 
-The category $s\calc$ of simplicial objects in $\calc$, for any category of universal algebras, is a Quillen model category \cite{QuillenHomAlg.pdf}, and these model categories have much in common with the category of topological spaces. In \S\ref{chom ccoh} we recall a notion of the homology groups $H_*^{\calc}X$ of $X\in s\calc$. It is important to note that we we use a pragmatic notion of homotopy that does not always coincide with Quillen's notion of \emph{derived abelianization}, the notion that appears in the spectral sequences that appear in this context.
+The category $s\calc$ of simplicial objects in $\calc$, for any category of universal algebras, is a Quillen model category \cite{QuillenHomAlg.pdf}, and these model categories have much in common with the category of topological spaces. For example, an  object $X\in s\calc$ posesses homotopy groups $\pi_*X$ and homology groups $H_*^{\calc}X$. We use the  pragmatic notion of homology that appears in the spectral sequences that appear in this context, and it does not always coincide with Quillen's notion of homology \emph{derived abelianization}. The cohomology groups $H^*_{\calc}X$ are defined to be the linear duals of the homology groups.
 
-The object $X$ also posesses homotopy groups $\pi_*X$ and cohomology groups $H^*_{\calc}X$. The homotopy groups are those of the underlying simplicial vector space, while that cohomology groups are defined to be linear dual to the homology. 
-In \S\ref{Pi-algebras and cohomology algebras}, we recall the  definition of  spheres and Eilenberg-Mac Lane objects in $s\calc$. These play the same role in $s\calc$ as their namesakes in the category of pointed topological spaces, representing homotopy and cohomology functors on the homotopy category of $s\calc$.
-We also present a unified treatment of homotopy and cohomology operations (and homology cooperations) for such categories. 
+%The object $X$ also posesses homotopy groups $\pi_*X$ and cohomology groups $H^*_{\calc}X$. The homotopy groups are those of the underlying simplicial vector space, while that cohomology groups are defined to be linear dual to the homology. 
+In \S\ref{Pi-algebras and cohomology algebras}, we recall the  definition of  spheres and Eilenberg-Mac Lane objects in $s\calc$. These play the same role in $s\calc$ as their namesakes in the category of pointed topological spaces, representing the homotopy and cohomology functors on the homotopy category of $s\calc$.
+We also present a unified treatment of homotopy and cohomology operations (and of homology co-operations) for such categories. 
 
 In \S\ref{Constructing homotopy operations} and \S\ref{Constructing cohomology operations} we present a number of existing examples of homotopy and cohomology operations in a common framework, with the construction of cohomology operation following Goerss' method from \cite{MR1089001}. In particular, it will be useful for us to understand the well-known cohomology operations for simplicial Lie algebras in this same framework, and in Appendix \ref{appendix on Lie coh ops}.
 
 
 
 
-In \S\ref{Bousfield-Kan spectral sequence}, we recall the construction given by Radulescu-Banu \cite{Radulescu-Banu.pdf} of a cosimplicial resolution $\calx\in cs\algs$ of $X\in s\algs$ suitable for the construction of a Bousfield-Kan spectral sequence. This construction is rather more difficult than that of Bousfield and Kan's $\Ftwo$-resolution. The naiive construction in $s\calc$ is not homtopically correct, and Radulescu-Banu explains how to form the appropriate cosimplicial resolution. 
+In \S\ref{Bousfield-Kan spectral sequence}, we recall the construction given by Radulescu-Banu \cite{Radulescu-Banu.pdf} of a cosimplicial resolution $\calx\in cs\algs$ of $X\in s\algs$ suitable for the construction of a Bousfield-Kan spectral sequence. This construction is rather more difficult than that of Bousfield and Kan's $\Ftwo$-resolution, as the na\"{\i}ve monadic cobar construction in $s\calc$ is not homotopically correct.
 
-Resulting from the cosimplicial resolution is a notion of completion, and an (absolute) Bousfield-Kan spectral sequence. In  \S\ref{Idnt E1 E2} we perform the homotopical algebra needed to identify the $E_1$ and $E_2$-pages arising from Radulescu-Banu's resolution.
+Resulting from the cosimplicial resolution $\calx$ is a notion of completion, and an (absolute) \BKSS. In  \S\ref{Idnt E1 E2} we perform the homotopical algebra needed to identify the $E_1$ and $E_2$-pages arising from Radulescu-Banu's resolution.
 %
 %
 %Quillen \cite{QuillenHomAlg.pdf} formulated the notion of homotopy theory in a variety of algebraic contexts, in particular, there is a homotopy theory of any given type of universal algebra.  
@@ -575,44 +582,46 @@ The intention of this thesis is to produce an enriched version in the model cate
 %In \S\ref{Conventions and notation} we give the background on the model category $s\calc$ for $\calc$ a category of universal algebras, and choose our conventions for the notation for spectral sequences we will use.
 
 
-We will restrict to those $X\in s\algs$ which are connected, which simplifies various aspects of our analysis.
+We will restrict to those $X\in s\algs$ which are connected,  simplifying various aspects of our analysis.
 %The spectral sequence will be of the form
 %\[\E{}{2}{\calX}{s}{t} \implies \pi_{t-s}X\hat{\ },\]
 %where $X\hat{\ }$ is the \emph{homology completion} of $X$. 
-As in the classical case, one must know how the homotopy groups of the homology completion $X\hat{\ }$ determine those of $X$: we will demonstrate (Theorem \ref{completenesstheorem}) that $X\hat{\ }$ is equivalent to $X$ as long as $X$ is connected. Moreover, we will prove in Theorem \ref{vanishing line prop} that the Bousfield-Kan spectral sequence admits a vanishing line from $E_2 $ in this case, and thus strongly converges to the homotopy of $X$.
+As in the classical case, one must know how the homotopy groups of the homology completion $X\hat{\ }$ determine those of $X$: we will demonstrate (Theorem \ref{completenesstheorem}) that $X\hat{\ }$ is equivalent to $X$ as long as $X$ is connected. Moreover, we will prove in Theorem \ref{vanishing line prop} that the \BKSS\ admits a vanishing line from $E_2 $ in this case, and thus strongly converges to the homotopy of $X$.
 
-As forecast by the discussion in \S\ref{intropart1}, it will help to know a little about the natural operations on the homotopy of simplicial $\Ftwo$-algebras in advance. Fortunately, we know a \emph{lot} --- Dwyer \cite{DwyerHtpyOpsSimpComAlg.pdf} has completely calculated these operations (which were studied earlier by Bousfield \cite{BousOpnsDerFun.pdf,BousHomogFunctors.pdf} and Cartan \cite{CartanDivSquares}). To summarize, $\pi_*X$ supports operations
+As forecast by the discussion in \S\ref{intropart1}, it will help to know a little about the natural operations on the homotopy of simplicial $\Ftwo$-algebras in advance. Fortunately, we have 
+the explicit description of homotopy operations that is lacking in the category of pointed spaces, since Dwyer \cite{DwyerHtpyOpsSimpComAlg.pdf} has completely calculated these operations (which were studied earlier by Bousfield \cite{BousOpnsDerFun.pdf,BousHomogFunctors.pdf} and Cartan \cite{CartanDivSquares}). To summarize, $\pi_*X$ supports operations
 \begin{gather*}
 \delta_i:\pi_nX\to \pi_{n+i}X,\textup{ defined when }2\leq i\leq n,\\
 \mu:\pi_nX\otimes \pi_{n'}X\to \pi_{n+n'}X,
 \end{gather*}
 with $\mu$ a graded non-unital commutative algebra product, and %the top with left operations
 %\[\delta_i:\pi_nX\to \pi_{n+i}X,\textup{ defined when }2\leq i\leq n,\]
-the $\delta_i$ satisfying various compatibilities which we discuss in detail in \S\ref{Homotopy operations for simplicial commutative algebras}. In fact, these $\delta$-operations satisfy a $\delta$-Adem relation \emph{which is homogeneous}, and there is a corresponding unital associative algebra $\Delta$. This is the explicit description of the homotopy operations that is lacking in the category of pointed spaces.
+the $\delta_i$ satisfying various compatibilities which we discuss in detail in \S\ref{Homotopy operations for simplicial commutative algebras}. In fact, these $\delta$-operations satisfy a $\delta$-Adem relation \emph{which is homogeneous}, and there is a corresponding unital associative algebra $\Delta$. Note that $\pi_*X$ is \emph{not} a left module over the algebra $\Delta$, because the operations are not always defined. This situation can not be remedied simply be defining the missing operations to be zero, as doing so is incompatible with the Adem relations on homotopy. Instead, we must adopt language for such situations, saying that $\Delta$ has a partially defined unstable left action on $\pi_*X$. In general, unstable homotopy operations will be  partially defined, whereas unstable cohomolgy operations will be everywhere defined but vanish in certain ranges.
 
-Goerss described the analogue for $s\algs$ of the category $\calk$, and  all of the natural operations on the Andr\'e-Quillen cohomology $H^*_\algs X$ of \emph{connected} $X\in s\algs$ are generated by:
+Goerss described the analogue for $s\algs$ of the category $\calk$, and  all of the natural operations on the Andr\'e-Quillen cohomology $H^*_\algs X$ of $X\in s\algs$ are generated by:
 \begin{gather*}
 P^i:H^n_{\algs}X\to H_{\algs}^{n+i+1}X;\\
-[\,,]:H_{\algs}^nX\otimes H_{\algs}^mX\to H_{\algs}^{n+m+1}X.
+[\,,]:H_{\algs}^nX\otimes H_{\algs}^mX\to H_{\algs}^{n+m+1}X;\\
+\beta:H^0_{\algs}X\to H_{\algs}^{1}X.
 \end{gather*}
+As we restrict to connect objects of $s\algs$, the operation $\beta$ can be ignored.
 These operations satisfy various compatibilities which we recount in detail in \S\ref{The example of simplicial commutative F2-algebras}, and we will denote by $\calw(0)$ the category whose objects are vector spaces $W\in\vect{+}{}$ equipped with such operations.
-The bracket satisfies the Jacobi identity but falls just short of being a Lie algebra pairing (as $[x,x]$ is not always zero), and the $P^i$ satisfy a $P$-Adem relation \emph{that is homogeneous}. The evident unital associative algebra $P$ acting on $H^{*}_{\algs}$ is a homogeneous Koszul algebra with Koszul dual the algebra $\Delta$, and indeed, this is how it was originally described by Goerss. In \S\ref{Idnt E1 E2}, we identify the $E_2$-page (for connected $X\in s\algs$) as the  non-abelian derived functors
+The bracket satisfies the Jacobi identity but falls just short of being a Lie algebra pairing as $[x,x]$ is not always zero. The $P^i$ satisfy a $P$-Adem relation \emph{that is homogeneous}. The evident unital associative algebra $P$ acting on $H^{*}_{\algs}$ is a homogeneous Koszul algebra, the \emph{$P$-algebra} with Koszul dual the algebra $\Delta$, and indeed, this is how it was originally described by Goerss. In \S\ref{Idnt E1 E2}, we identify the $E_2$-page (for connected $X\in s\algs$ with $\pi_*X$ of finite type) as the  non-abelian derived functors
 \[\E{}{2}{\calx}{s}{t}\cong H^{s}_{\calw(0)}(H^{*}_{\algs}X)_t.\]
-This description begets a laundry list of operations that we might hope to see on $E_2$. The cohomology of a Lie algebra enjoys a commutative product and an action of the homogeneous Steenrod algebra $\LieSteen:=E_0\cala_2$, due to Priddy \cite{PriddySimplicialLie.pdf}. We will discuss these operations in detail in \S\ref{section: Cohomology operations for simplicial (restricted) Lie algebras} and Appendix \ref{The partially restricted universal enveloping algebra}. We hope to see some version of this structure at $E_2$, and we do: we construct in Proposition \ref{Wn Halg omnibus} natural `horizontal' operations
+This description begets a laundry list of operations that we expect to see on $E_2$. The cohomology of a Lie algebra enjoys a commutative product and an action of the homogeneous Steenrod algebra $\LieSteen:=E_0\cala_2$, due to Priddy \cite{PriddySimplicialLie.pdf}. We will discuss these operations in detail in \S\ref{section: Cohomology operations for simplicial (restricted) Lie algebras} and Appendix \ref{The partially restricted universal enveloping algebra}. This structure is visible at $E_2$: we construct in Proposition \ref{Wn Halg omnibus} natural `horizontal' operations:
 \begin{gather*}
 \Sqh^j:(H^s_{\calw(0)}X)_t\to (H^{s+j}_{\calw(0)}X)_{2t+1};\\
 \mu:(H^s_{\calw(0)}X)_t\otimes (H^{s'}_{\calw(0)}X)_{t'}\to (H^{s+s'+1}_{\calw(0)}X)_{t+t'+1}.
 \end{gather*}
-Moreover, we hope for a (partially defined) action of the Koszul dual $\Delta$ of the $P$-algebra at $E_2$, and again, we are able to perform the necessary construction, with
-Proposition \ref{operations on goerss homology} providing `vertical' operations 
+Moreover, we construct in Proposition \ref{operations on goerss homology} natural vertical operations constituting a  (partially defined) action of the Koszul dual $\Delta$ of the $P$-algebra:
 \[\deltav_i:(H^s_{\calw(0)}X)_t\to (H^{s+1}_{\calw(0)}X)_{t+i+1}\textup{ \ defined for $2\leq i <t$}.\]%\max\{t-s,t-1\}$}.\] 
 These operations satisfy various compatibilities (c.f.\ \S\ref{Relations between the horizontal and vertical operations} and propositions \ref{operations on goerss homology} and \ref{Wn Halg omnibus}).
 
-The role of the product seems straightforward, but the role of the Steenrod operations at $E_2$ is unclear at first. Moreover, although the $\delta$-operations on $E_2$ look encouraging, there is the following issue: if $x\in \E{}{2}{\calx}{s}{t}$ is  a permanent cycle detecting  a class $\overline{x}\in \pi_*X$, then (for $s\geq2$) there are more operations $\deltav_2x,\ldots,\deltav_{t-1}x$ defined on $E_2$ than there are operations $\delta_2\overline{x},\ldots,\delta_{t-s}\overline{x}$ defined on homotopy. 
+Although the product and $\delta$-operations on $E_2$ look encouraging, there is the following issue: if $x\in \E{}{2}{\calx}{s}{t}$ is  a permanent cycle detecting  a class $\overline{x}\in \pi_*X$, then at least when $s\geq2$ there are more operations $\deltav_2x,\ldots,\deltav_{t-1}x$ defined on $E_2$ than there are operations $\delta_2\overline{x},\ldots,\delta_{t-s}\overline{x}$ defined on homotopy.  Moreover, the Steenrod operations at $E_2$ have no couterpart in homotopy.
 
-This situation is quite reminiscent of that described by Dwyer \cite{DwyerHigherDividedSquares.pdf}, who works in the spectral sequence of a cosimplicial simplicial coalgebra (for example, the Eilenberg-Moore spectral sequence). In such a spectral sequence, one expects to find Steenrod operations at $E_2$ but finds too many. Dwyer constructs $\delta$-operations and differentials mapping the excess Steenrod operations to the $\delta$ operations. In this way, the excess Steenrod operations fail to be defined at $E_\infty$, and the $\delta$-operations become zero by $E_\infty$, an excellent resolution to this problem.
+This situation is quite reminiscent of that described by Dwyer \cite{DwyerHigherDividedSquares.pdf}, who works in the spectral sequence of a cosimplicial simplicial coalgebra (such as the Eilenberg-Moore spectral sequence). In such a spectral sequence, one expects to find Steenrod operations at $E_2$ but finds too many. Dwyer constructs $\delta$-operations and differentials mapping the excess Steenrod operations to the $\delta$ operations. In this way, the excess Steenrod operations fail to be defined at $E_\infty$, and the $\delta$-operations become zero by $E_\infty$, an excellent resolution to this problem.
 
-Unfortunately, we cannot use Dwyer's operations: although under linear dualization a cosimplicial simplicial algebra becomes a cosimplicial simplicial algebra (of which the resolution $\calx$ is an example), the choice of filtration direction is transposed. Instead, we perform analogous constructions in the dual setting, and describe in \S\ref{The case of a cosimplicial simplicial commutative algebra} a theory of operations on the spectral sequence of a cosimplicial simplicial algebra, which we hope will be of some independent interest. Even these operations are not yet what we require, as it happens that they can be lifted one filtration higher at the chain level when we are working in the Bousfield-Kan spectral sequence in question. In \S\ref{second quadrant homotopy sseq operations} and \S\ref{Operations on the Bousfield-Kan spectral sequence}, we explain how to construct operations:
+Unfortunately, we cannot use Dwyer's operations: although under linear dualization a cosimplicial simplicial algebra becomes a cosimplicial simplicial algebra (of which the resolution $\calx$ is an example), the choice of filtration direction is transposed. Instead, we perform analogous constructions in the dual setting, and describe in \S\ref{The case of a cosimplicial simplicial commutative algebra} a theory of operations on the spectral sequence of a cosimplicial simplicial $\F_2$-algebra, which may be of independent interest. Even these operations are not yet what we require, as it happens that they can be lifted one filtration higher at the chain level when we are working in the \BKSS. In \S\ref{second quadrant homotopy sseq operations} and \S\ref{Operations on the Bousfield-Kan spectral sequence}, we explain how to construct operations:
 \begin{gather*}
 \deltav_i:\Edownup{r}{}{\calx}{s}{t} \to \Edownup{r}{}{\calx}{s+1}{t+i+1},
 \\
@@ -630,26 +639,32 @@ For $x\in \E{}{r}{\calx}{s}{t}$ such that  $\deltav_ix $ is defined:
 %\Sqh^{t-i+1}(x),&\textup{if $t-s<i =t-(r-1)$}\\
 0,&\textup{otherwise.}
 \end{cases}\]
-This is Corollary \ref{Prop on delta external composed with lift}. In particular, if $i>t-s$ and $x\in\E{}{t-i+1}{\calx}{s}{t}$ survives to $\E{}{t-i+2}{\calx}{s}{t}$, then $d_{t-i+1}$ maps $\deltav_ix$ to $\Sqv^{t-i+2}x$. Of course the situation is a little more nuanced than this, but these formulae explain how the $\Sqv$ serve to absorb differentials supported by the excess $\deltav$.
+This is Corollary \ref{Prop on delta external composed with lift}. In particular, if $i>t-s$ and $x\in\E{}{t-i+1}{\calx}{s}{t}$ survives to $\E{}{t-i+2}{\calx}{s}{t}$, then $d_{t-i+1}$ maps $\deltav_ix$ to $\Sqv^{t-i+2}x$. These formulae explain how the $\Sqv$ serve to absorb differentials supported by the excess $\deltav$.
 
 \SubsectionOrSection{The first composite functor spectral sequence}
 \label{The first composite functor spectral sequence}
-Now that we have a theory of the operations available on the Bousfield-Kan spectral sequence, we turn to the question of calculating it. If we hope to imitate Miller's use of a composite functor spectral sequence, we have only one option for the factorization of $Q^{\calw(0)}$. That is, there are functors
+Now that we have a theory of the operations available on the \BKSS, we turn to the question of calculating it. If we hope to imitate Miller's use of a composite functor spectral sequence, we have only one option for the factorization of $Q^{\calw(0)}$: there are functors
 \[\calw(0)\overset{Q^{\calu(0)}}{\to}\call(0)\overset{Q^{\call(0)}}{\to}\vect{+}{},\]
-with $\call(0)$ the category whose objects are graded vector spaces $W\in\vect{+}{}$ which are Lie algebras under a bracket
+where $\call(0)$ is the category whose objects are graded vector spaces $W\in\vect{+}{}$ which are Lie algebras under a bracket
 \[W^{t}\otimes W^{t'}\to W^{t+t'+1}.\]
-We write $\calu(0)$ for the category whose objects are $\vect{+}{}$-graded vector spaces equipped with an unstable action of the $P$-algebra. This explains the use of the notation $Q^{\calu(0)}$ for the functor which takes the quotient by the image of all of the $P$-operations.
+%\subsubsection{Abelian derived functors}
+We write $\calu(0)$ for the category whose objects are vector spaces $V\in \vect{+}{}$ equipped with an unstable action of the $P$-algebra given by operations
+\[P:V^t\to V^{t+i+1}\]
+which are zero unless $2\leq i\leq t$. The functor $Q^{\calu(0)}$ is defined for $W\in\calw(0)$ by
+\[W\mapsto W/\textstyle\bigoplus_{i\geq2}\im(W\overset{P^i}{\to}W).\]
 
-As the category $\calw(0)$ is not abelian, it is a more technical task to form a composite functor spectral sequence, and we use the methods of Blanc and Stover \cite{Blanc_Stover-Groth_SS.pdf}. The key idea in their presentation is that the derived functors
+As the category $\call(0)$ is not abelian, it is a more technical task to form a composite functor spectral sequence, and we use the method of Blanc and Stover \cite{Blanc_Stover-Groth_SS.pdf}. The key idea in their presentation is that the derived functors
 $H_*^{\calu(0)}:=\mathbb{L}_*Q^{\calu(0)}$
-take values in the category  $\calw(1)$ of $\call(0)$-$\Pi$-algebras, as they are calculated as the homotopy of an object of $s\call(0)$. Objects of the category $\calw(1)$ are certain bigraded Lie algebras with partially defined right $\lambda$-operations. These operations would form a right action of the $\Lambda$-algebra were they defined everywhere.
-
+take values in the category  $\calw(1)$ of $\call(0)$-$\Pi$-algebras, as they are calculated as the homotopy of an object of $s\call(0)$.
 The first composite functor spectral sequence takes the following form  for $W\in\calw(0)$:
 \[\E{\textup{cf}}{2}{W}{s_2,s_1}{t}=H^*_{\calw(1)}(H_*^{\calu(0)}W)^{s_2,s_1}_t\implies (H^*_{\calw(0)} W)_t^{s_1+s_2}.\]
+We will now unpack this somewhat dense expression, and explain how various unstable operations defined at the $E_2$-page and the target interact with the spectral sequence.
 
+Objects of the category $\calw(1)$ are certain bigraded Lie algebras with a certain partially defined right action of the $\Lambda$-algebra (c.f.\ \S\ref{Higher composite functor spectral sequences}).
 We calculate the structure of $H_*^{\calu(0)}$ as an object of $\calw(1)$ in \S\ref{section on structure on homology of koszul cx}, by explicit chain-level computation,
-after defining in \S\ref{The Koszul complex and co-Koszul complex} an unstable version of Priddy's Koszul resolution \cite{PriddyKoszul.pdf} of which they are the homology.
-That linear dual $H^*_{\calU(0)}W$ admits an unstable left $\Delta$-algebra action, since the algebras $\Delta$ and $P$ are Koszul dual, and by Proposition \ref{edgehomproposition} there is a commuting diagram (for $2\leq i<t$): %this commutes In fact, we can form the composite
+after defining in \S\ref{The Koszul complex and co-Koszul complex} an unstable version of Priddy's Koszul resolution \cite{PriddyKoszul.pdf} for the functors $H_*^{\calu(0)}$.
+
+Th linear duals $H^*_{\calU(0)}W$ admit an unstable partially defined left $\Delta$-algebra action, since the algebras $\Delta$ and $P$ are Koszul dual, and by Proposition \ref{edgehomproposition} there is a commuting diagram (for $2\leq i<t$): %this commutes In fact, we can form the composite
 \[\xymatrix@R=4mm@C=17mm{
 (H^*_{\calw(0)}W)^{s}_t\ar[r]^-{\textup{edge hom}}\ar[d]_-{\deltav_i}
 &%r1c1
@@ -663,34 +678,30 @@ That linear dual $H^*_{\calU(0)}W$ admits an unstable left $\Delta$-algebra acti
 &%r1c2
 (H^*_{\calU(0)}W)^{s+1}_{t+i+1}
 }\]
-This is the sense in which the $\deltav_i$-operations on the Bousfield-Kan $E_2$-page are compatible with the composite functor spectral sequence.
+In this  sense the $\deltav_i$-operations on the \BKSS\ $E_2$-page are compatible with the composite functor spectral sequence.
 
-The Bousfield-Kan $E_2$-page also supports products and horizontal Steenrod operations, and we should attempt to identify them in the composite functor spectral sequence. The functor $H^*_{\calw(1)}$ may also be viewed as a Lie algebra cohomology functor, so that we expect horizontal Steenrod operations and products to appear in $\E{\textup{cf}}{2}{W}{s_2,s_1}{t}$. Moreover, just as we expected $\deltav_i$ operations on $H^*_{\calw(0)}$, we expect a `vertical' left action of the homogeneous Steenrod algebra on $H^*_{\calw(1)}$, as it is Koszul dual to the $\Lambda$-algebra. Indeed we are able to construct these operations on the derived functors $H^*_{\calw(1)}$ in Proposition \ref{Wn Halg omnibus}. Moreover,
+The \BKSS\ $E_2$-page also supports products and horizontal Steenrod operations, and we should attempt to identify them in the composite functor spectral sequence. The functor $H^*_{\calw(1)}$ may also be viewed as a Lie algebra cohomology functor, so that we expect horizontal Steenrod operations and products to appear in $\E{\textup{cf}}{2}{W}{s_2,s_1}{t}$. We use a new definition of these operations that fits into the framework set out in \S\ref{Constructing cohomology operations} (defering to Appendix \ref{appendix on Lie coh ops} the work of showing that these operations coincide with those constructed by Priddy \cite{PriddySimplicialLie.pdf}.)
+
+Moreover, just as we expected $\deltav_i$ operations on $H^*_{\calw(0)}$, we expect a `vertical' left action of the homogeneous Steenrod algebra on $H^*_{\calw(1)}$, as it is Koszul dual to the $\Lambda$-algebra. Indeed we are able to construct these operations on the derived functors $H^*_{\calw(1)}$ in Proposition \ref{Wn Halg omnibus}. Moreover,
 Proposition \ref{vertical steenrod operations prop} applies to $H^*_{\calw(1)}$ just as it applies to $H^*_{\calw(0)}$, constructing horizontal Steenrod operations and products, so that in total we obtain operations
 \begin{gather*}
 \Sqv^i:\E{\textup{cf}}{2}{W}{s_{2},s_1}t\to \E{\textup{cf}}{2}{W}{s_2+1,s_1+i-1}{2t+1},\\
 \Sqh^j:\E{\textup{cf}}{2}{W}{s_2,s_1}{t}\to \E{\textup{cf}}{2}{W}{s_{2}+j,2s_1}{2t+1},\\
-\mu:\E{\textup{cf}}{2}{W}{s_2,s_1}{t}\otimes \E{\textup{cf}}{2}{W}{p_2,p_1}{q}\to \E{\textup{cf}}{2}{W}{s_2+p_2+1,s_1+p_1}{t+q+1}.
+\mu:\E{\textup{cf}}{2}{W}{s_2,s_1}{t}\otimes \E{\textup{cf}}{2}{W}{p_2,p_1}{q}\to \E{\textup{cf}}{2}{W}{s_2+p_2+1,s_1+p_1}{t+q+1},
 \end{gather*}
 with both the horizontal and vertical Steenrod operations having their own unstableness conditions.
 
-Now suppose that $x\in \E{\textup{cf}}{2}{W}{s_{2},s_1}{t}$ is a permanent cycle detecting an element $\overline{x}\in (H^*_{\calw(0)}W)^{s_2+s_1}_t$. The $(s_2+s_1-1)$ operations $\Sqh^3\overline{x},\ldots,\Sqh^{s_2+s_1+1}\overline{x}$ are the potentially non-zero Steenrod operations on $\overline{x}$. The $(s_1-2)$ vertical operations $\Sqv^3x,\ldots,\Sqv^{s_1}x$ and the $(s_2+1)$ horizontal operations $\Sqh^1x,\ldots,\Sqh^{s_2+1}x$ are the potentially non-zero  Steenrod operations on $x$.
-This is quite reminiscent of Singer's framework (described in \S\ref{singer ext ops sect} and set out in \cite{MR2245560}), and in \S\ref{Application to composite functor spectral sequences} we use Singer's methods  to extend the operations on $\E{\textup{cf}}{2}{W}{}{}$ to the whole composite functor spectral sequence. The upshot is that if $x\in \E{\textup{cf}}{2}{W}{s_{2},s_1}{t}$ is a permanent cycle, then so are all of the above mentioned $\Sqv^ix$ and $\Sqh^jx$, and
+Now suppose that $x\in \E{\textup{cf}}{2}{W}{s_{2},s_1}{t}$ is a permanent cycle detecting an element $\overline{x}\in (H^*_{\calw(0)}W)^{s_2+s_1}_t$. The $s_2{+}s_1{-}1$ operations $\Sqh^3\overline{x},\ldots,\Sqh^{s_2+s_1+1}\overline{x}$ are the potentially non-zero Steenrod operations on $\overline{x}$. The $s_1{-}2$ vertical operations $\Sqv^3x,\ldots,\Sqv^{s_1}x$ and the $s_2{+}1$ horizontal operations $\Sqh^1x,\ldots,\Sqh^{s_2+1}x$ are the potentially non-zero  Steenrod operations on $x$.
+This is quite reminiscent of Singer's framework \cite{MR2245560} (c.f.\ \S\ref{singer ext ops sect}), and in \S\ref{Application to composite functor spectral sequences} we use Singer's methods  to extend the operations on $\E{\textup{cf}}{2}{W}{}{}$ to the whole composite functor spectral sequence. The upshot is that if $x\in \E{\textup{cf}}{2}{W}{s_{2},s_1}{t}$ is a permanent cycle, then so are all of the above mentioned $\Sqv^ix$ and $\Sqh^jx$, and
 \[\Sqv^ix\textup{ detects }\Sqh^i\overline{x}\ (3\leq i\leq s_1)\textup{ and }\Sqh^jx\textup{ detects }\Sqh^{s_1+i}\overline{x}\ (1\leq j\leq s_2+1).\]
-That is, the horizontal and vertical Steenrod operations \emph{combined} account for the horizontal Steenrod operations on the target. To understand how this plays out for interated Steenrod operations, one can consult Theorem \ref{thm on compressing seqs of steenrod ops}.
+That is, the horizontal and vertical Steenrod operations \emph{combined} account for the horizontal Steenrod operations on the target. We examine how this plays out for admissible sequences of Steenrod operations in Theorem \ref{thm on compressing seqs of steenrod ops}.
 
-%and in \S\ref{Horizontal Steenrod operations and a product for HWn} we define operations:
-%\begin{gather*}
-%\Sqh^j:(H^*_{\calw(0)}X)_t^{s_1}\to (H^*_{\calw(n)}X)_{2t+1}^{s_{n+1}+j,2s_{n},\ldots,2s_1},\\
-%\mu:(H^*_{\calw(n)}X)_t^{s_{n+1},\ldots,s_1}\otimes (H^*_{\calw(n)}X)_q^{p_{n+1},\ldots,p_1}\to (H^*_{\calw(n)}X)_{t+q+1}^{s_{n+1}+p_{n+1}+1,s_{n}+p_{n},\ldots,s_1+p_1},
-%\end{gather*}
-%so that $\calw(n)$-cohomology is also a certain type of unstable algebra over the homogeneous Steenrod algebra, %\emph{another} action of the homogeneous Steenrod algebra on $\calw(n)$-cohomology, 
-%with the Steenrod action `horizontal'.
 
-\SubsectionOrSection{Higher composite functor spectral sequences}
-We have constructed a comprehensive theory of the operations in the composite functor spectral sequence, but it may still be that the cohomology $H^*_{\calw(1)}$ is as difficult to calculate as the cohomology $H^*_{\calw(0)}$ of primary interest. After all, the categories $\calw(0)$ and $\calW(1)$ are similar in structure: each of these categories is (close enough to) a category of Lie algebras with unstable partially defined operations of a homogeneous Koszul algebra.
 
-We will turn this similarity to our advantage by iterating our approach. In \S\ref{homotopy operations for PRLs} we extend the constructions summarized in \S\ref{The first composite functor spectral sequence}, defining for $n\geq1$ algebraic categories $\calw(n)$ and $\call(n)$ such that $\calw(n)$ is the category of $\call(n-1)$-$\Pi$-algebras, and there are factorizations 
+\SubsectionOrSection{Higher composite functor spectral sequences}\label{Higher composite functor spectral sequences}
+We have constructed a comprehensive theory of the operations in the first composite functor spectral sequence, but it may still be that the cohomology $H^*_{\calw(1)}$ is as difficult to calculate as the cohomology $H^*_{\calw(0)}$ of primary interest. After all, the categories $\calw(0)$ and $\calW(1)$ are similar in structure: each of these categories is (close enough to) a category of Lie algebras with unstable partially defined operations of a homogeneous Koszul algebra.
+
+Rather than being discouraged, we will turn this similarity to our advantage by iterating our approach. In \S\ref{homotopy operations for PRLs} we extend the constructions summarized in \S\ref{The first composite functor spectral sequence}, defining for $n\geq1$ algebraic categories $\calw(n)$ and $\call(n)$ such that $\calw(n)$ is the category of $\call(n-1)$-$\Pi$-algebras and there are factorizations 
 \[Q^{\calw(n)}=Q^{\call(n)}\circ Q^{\calu(n)}:\Bigl(\calw(n)\overset{Q^{\calu(n)}}{\to}\call(n)\overset{Q^{\call(n)}}{\to}\vect{+}{n}\Bigr).\]
 %For each $n\geq1$, $\call(n)$ is a category of $\vect{+}{n}$-graded partially restricted Lie algebras and $\calw(n)$ is a category of  $\vect{+}{n}$-graded partially restricted Lie algebras with certain unstable $\lambda$-operations. These definitions must be made carfully. Indeed, We write $\calu(n)$ for the category whose objects are the . The definition of the functor $\calU$
 There are composite functor spectral sequences for $W\in\calw(n)$:
@@ -706,10 +717,10 @@ defined whenever $0\leq i< s_{n+1}$ and not all of $i,s_{n},\ldots,s_{1}$ are ze
 \[[\,,]:V^{t}_{s_n,\ldots,s_1}\otimes V^{t'}_{s'_n,\ldots,s'_1}\to V^{t+t'+1}_{s_n+s'_n,\ldots,s_1+s'_1}.\]
 Finally, let $\calw(n)$ be the category whose objects are simulteneously objects of $\calU(n)$ and $\call(n)$ subject to certain compatibilities.
 
-The functor $H_*^{\calu(n)}$ may be calculated by an unstable Koszul resolution, and each of $H^*_{\calu(n)}W$ and $H^*_{\calw(n)}W$ is naturally an object of $\calMv(n+1)$, the category whose objects are graded vector spaces $M\in\vect{n+1}{+}$ with an unstable left action of the Steenrod algebra, namely%:. Specifically
+The functor $H_*^{\calu(n)}$ may be calculated by an unstable Koszul resolution, and \emph{both} of $H^*_{\calu(n)}W$ and $H^*_{\calw(n)}W$ is naturally an object of $\calMv(n+1)$, the category whose objects are graded vector spaces $M\in\vect{n+1}{+}$ with an unstable left action of the Steenrod algebra, operations%:. Specifically
 %Write $\calMv(n+1)$ for the algebraic category whose objects are vector spaces $M\in\vect{n+1}{+}$ with left Steenrod operations
 \[\Sqv^i:M^{s_{n+1},\ldots,s_1}_t\to M^{s_{n+1}+1,s_n+i-1,2s_{n-1},\ldots,2s_1}_{2t+1},\]
-which are zero except when $1\leq i \leq s_n$ and not all of $i-1,s_{n-1},\ldots,s_1$ are zero. This structure is derived in \S\ref{section: vertical Koszul operations n positive}, using the Koszul duality between the $\Lambda$-algebra and the homogeneous Steenrod algebra.
+which are zero except when $1\leq i \leq s_n$ and not all of $i-1,s_{n-1},\ldots,s_1$ are zero. This structure is derived in \S\ref{section: vertical Koszul operations n positive}, using the Koszul duality between the $\Lambda$-algebra and the homogeneous Steenrod algebra. This differs from the analogous constructions for $\calw(0)$- and $\calu(0)$-cohomology, where $H_*^{\calw(0)}$ supports one fewer vertical $\delta$-operation than $H_*^{\calu(0)}$.
 
 On the other hand, as in the $n=0$ case, $H^*_{\calw(n)}$ is an example of (partially restricted) Lie algebra cohomology, so that  horizontal Steenrod operations and products  appear. In \S\ref{Horizontal Steenrod operations and a product for HWn} we define these operations:
 \begin{gather*}
@@ -718,14 +729,14 @@ On the other hand, as in the $n=0$ case, $H^*_{\calw(n)}$ is an example of (part
 \end{gather*}
 so that $\calw(n)$-cohomology is also a certain type of unstable algebra over the homogeneous Steenrod algebra, %\emph{another} action of the homogeneous Steenrod algebra on $\calw(n)$-cohomology, 
 with the Steenrod action `horizontal'. We write $\calMh(n+1)$ for the resulting category of $\vect{n+1}{+}$-graded unstable algebras over the homogeneous Steenrod algebra.
-(We use the definition of the Steenrod action and products that fits into the framework set out in \S\ref{Constructing cohomology operations}, and the work of showing that these operations coincide with those constructed 
-by Priddy \cite{PriddySimplicialLie.pdf} is deferred until Appendix \ref{appendix on Lie coh ops}.)
 
-We identify in \S\ref{Relations between the horizontal and vertical operations} the relations betwen the $\calMv(n+1)$ and $\calMh(n+1)$, which leads to the defintion of an algebraic category $\calMhv(n+1)$ in which $\calw(n)$-cohomology takes values, for $n\geq1$.
 
-Cosider again the composite functor spectral sequence for $W\in\calw(n)$:
+We identify in \S\ref{Relations between the horizontal and vertical operations} the relations betwen the $\calMv(n+1)$- and $\calMh(n+1)$-operations, which leads to the defintion of an algebraic category $\calMhv(n+1)$ in which $\calw(n)$-cohomology takes values for $n\geq1$.
+
+Consider again the composite functor spectral sequence for $W\in\calw(n)$:
 \[\E{\textup{cf}}{2}{W}{s_{n+2},\ldots,s_1}{t}=H^*_{\calw(n+1)}(H_*^{\calu(n)}W)^{s_{n+2},s_{n+1},\ldots,s_1}_t\implies (H^*_{\calw(n)} W)_t^{s_{n+2}+s_{n+1},s_n,\ldots,s_1}.\]
-The target is an object of $\calMhv(n+1)$, while the $E_2$-page is an object of $\calMhv(n+2)$. The compatibility of the spectral sequence with the $\calMv(n+1)$-structure on the target is via the edge homomorphism. Omitting indices, we prove in Proposition \ref{edgehomproposition} that there is a commuting diagram relating the $\calMv(n+1)$-structures on $H^*_{\calw(n)}W$ and $H^*_{\calU(n)}W$ under the edge homomorphism.
+The target is an object of $\calMhv(n+1)$, while the $E_2$-page is an object of $\calMhv(n+2)$. %The compatibility of the spectral sequence with the $\calMv(n+1)$-structure on the target is again via the edge homomorphism. 
+We prove in Proposition \ref{edgehomproposition} that there is a commuting diagram relating the $\calMv(n+1)$-structures on $H^*_{\calw(n)}W$ and $H^*_{\calU(n)}W$ under the edge homomorphism.
 %\[\xymatrix@R=4mm@C=17mm{
 %(H^*_{\calw(n)}W)\ar[r]^-{\textup{edge hom}}\ar[d]_-{\Sqv^i}
 %&%r1c1
@@ -744,23 +755,23 @@ As in the $n=0$ case, after extending the $\calMhv(n+2)$-structure on $E_2$ to t
 \SubsectionOrSection{Computing with the composite functor spectral sequences}
 So far, we have not explained how the composite functor spectral sequences may be used for calculation. First, we make the following simple observation. Suppose we wish to calculate the group $(H^*_{\calw(n)} W)_t^{s_{n+1},s_n,\ldots,s_1}$ for a given choice of indices. The part of the $E_2$-page that contributes to this particular group is 
 \[\bigoplus_{s'_{n+2}+s'_{n+1}=s_{n+1}}H^*_{\calw(n+1)}(H_*^{\calu(n)}W)^{s'_{n+2},s'_{n+1},s_n,\ldots,s_1}_{t}\]
-Now in each summand, either $s'_{n+1}=0$ or $s'_{n+2}<s_{n+1}$. Except for the challenges of understanding the differentials and hidden extensions of algebraic structure, it suffices to calculate the groups
+Now in each summand, either $s'_{n+1}=0$ or $s'_{n+2}<s_{n+1}$. Except for the challenges of understanding the differentials and hidden extensions of algebraic structure, it suffices then to calculate the groups
 \[(H^{*}_{\calW(n+k)}H_*^{\calu(n+k-1)}\cdots H_*^{\calu(n)}W)^{s'_{n+k+1},\ldots,s'_{n+1},s_n,\ldots,s_1}_{t}\]
-with $k\geq1$, $s'_{n+k+1}+\cdots+s'_{n+1}=s_{n+1}$ and either $s'_{n+k+1}=0$ or $s'_{n+k}=0$. 
-It is easy to calculate these groups in either case, as long as we understand $H_*^{\calu(n+k-1)}\cdots H_*^{\calu(n)}W$. When $s'_{n+k+1}=0$ there are no derived functors being taken, and when $s'_{n+k}=0$ the derived functors may be calculated simply as the cohomology of a (constant, not simplicial) partially restricted Lie algebra. With this computation in mind, in \S\ref{The Chevalley-Eilenberg-May complex} we define the Chevalley-Eilenberg-May complex of a partially restricted Lie algebra, which lies between the Chevalley-Eilenberg complex for Lie algebra cohomology and May's $\overline{X}$ complex \cite{MayRestLie.pdf} for the cohomology of restricted Lie algebras.
+for all $k\geq1$ and for all indices $s'_{n+k+1}+\cdots+s'_{n+1}=s_{n+1}$ satisfying either $s'_{n+k+1}=0$ or $s'_{n+k}=0$. 
+It is easy to calculate these groups in either case, as long as we understand $H_*^{\calu(n+k-1)}\cdots H_*^{\calu(n)}W$ fully. When $s'_{n+k+1}=0$ there are no derived functors being taken, and when $s'_{n+k}=0$ the derived functors may be calculated simply as the cohomology of a (constant, not simplicial) partially restricted Lie algebra. With this computation in mind, in \S\ref{The Chevalley-Eilenberg-May complex} we define the Chevalley-Eilenberg-May complex of a partially restricted Lie algebra, which lies between the Chevalley-Eilenberg complex for Lie algebra cohomology and May's $\overline{X}$ complex \cite{MayRestLie.pdf} for the cohomology of restricted Lie algebras.
 %\[H^*_{\calw(n+k)}(H_*^{\calu(n+k-1)}\cdots H_*^{\calu(n)}W)^{s'_{n+k+1},\ldots,s_1}_{t}\cong (Q^{\calw(n+k)}H_*^{\calu(n+k-1)}\cdots H_*^{\calu(n)}W)^{0,s'_{n+k+1},\ldots,s_1}_{t}\]
 %and
 %\[H^*_{\calw(n+k)}(H_*^{\calu(n+k-1)}\cdots H_*^{\calu(n)}W)^{s'_{n+k+1},\ldots,s_1}_{t}\cong (Q^{\calw(n+k)}H_*^{\calu(n+k-1)}\cdots H_*^{\calu(n)}W)^{0,s'_{n+k+1},\ldots,s_1}_{t}\]
 %as long as we understand $H_*^{\calu(n)}W$.
 
-This method is employed to prove Theorems \ref{thm on collapsing of most sseqs} and \ref{Koszul-dual Hilton-Milnor theorem}, which together show that this is \emph{all} of the natural structure on $\calW(n)$-cohomology for $n\geq1$. We keep track of the iterated derived functors involved using the calculations of \S\ref{section on structure on homology of koszul cx}. Finally, we use the structure found to calculate, at least as a vector space, the Bousfield-Kan $E_2$-page for the commutative algebra $T$-sphere $\mathbb{S}^{\algs}_T$ whenever $T\geq1$. These are the derived functors $H^*_{\calw(0)}W$, where $W=H^*_{\algs}\mathbb{S}^{\algs}_T$ is a one-dimensional trivial object concentrated in dimension $T$.
+This method is employed to prove theorems \ref{thm on collapsing of most sseqs} and \ref{Koszul-dual Hilton-Milnor theorem}, which together show that this is \emph{all} of the natural structure on $\calW(n)$-cohomology for $n\geq1$, that is, that $\calMhv(n+1)$ is the category of $\calw(n)$-cohomology algebras for $n\geq1$. We explain how to keep track of the iterated abelian derived functors $H_*^{\calu(n+k-1)}\cdots H_*^{\calu(n)}W$ (as objects of $\calw(n+k)$) in \S\ref{section on structure on homology of koszul cx}. Our final use of all of this structure is to calculate, at least as a vector space, the \BKSS\ $E_2$-page for the commutative algebra $T$-sphere $\mathbb{S}^{\algs}_T$ whenever $T\geq1$. These are the derived functors $H^*_{\calw(0)}W$, where $W=H^*_{\algs}\mathbb{S}^{\algs}_T$ is a one-dimensional trivial object concentrated in dimension $T$.
 
 \SubsectionOrSection{The Bousfield-Kan spectral sequence for $\mathbb{S}^{\algs}_T$}
-In \S\ref{An alternative Bousfield-Kan E1}, we present a small model for the Bousfield-Kan $E_1$-page for a commutative algebra sphere. This is a good point of re-entry for the reader bemused by \S\S\ref{one-dimensional, n geq1}-\ref{Calculations of HW0}.
+In \S\ref{An alternative Bousfield-Kan E1}, we present a small model for the \BKSS\ $E_1$-page for a commutative algebra sphere. This is a good point of re-entry for the reader bemused by \S\S\ref{one-dimensional, n geq1}-\ref{Calculations of HW0}.
 
-Given our knowledge of the operations on the Bousfield-Kan spectral sequence, of the $E_2$-page for $\mathbb{S}^{\algs}_T$ and of the homotopy groups $\pi_*\mathbb{S}^{\algs}_T$ (c.f.\ \S\ref{Homotopy operations for simplicial commutative algebras}), a natural goal is the complete computation of the Bousfield-Kan spectral sequence for $\mathbb{S}^{\algs}_T$. In \S\ref{Some conjectures on the E1-level structure}, we make two conjectures which would together allow us to make this complete computation. It turns out that $E_2$ is not the right place to start this computation --- we need to consider classes on $E_1$ and $d_1$ differentials in order to see the full picture. The problem is that certain relations involving the $\deltav$- and $\Sqh$-operations only hold from $E_2$. The conjectures we make would overcome these problems, and would lead to the description given in \S\ref{The resulting differentials} of the full structure of the Bousfield-Kan spectral sequence for $\mathbb{S}^{\algs}_T$.
+Given our knowledge of the operations on the \BKSS, of the $E_2$-page for $\mathbb{S}^{\algs}_T$ and of the homotopy groups $\pi_*\mathbb{S}^{\algs}_T$ (c.f.\ \S\ref{Homotopy operations for simplicial commutative algebras}), a natural goal is the complete computation of the \BKSS\ for $\mathbb{S}^{\algs}_T$. In \S\ref{Some conjectures on the E1-level structure}, we make two conjectures which would together allow us to make this complete computation. It turns out that $E_2$ is not the right place to start this computation --- we need to consider classes on $E_1$ and $d_1$ differentials in order to see the full picture. The problem is that certain relations involving the $\deltav$- and $\Sqh$-operations only hold from $E_2$. The conjectures we make would overcome these problems, and would lead to the description given in \S\ref{The resulting differentials} of the full structure of the \BKSS\ for $\mathbb{S}^{\algs}_T$.
 
-Finally, we derive in \S\ref{The quadratic filtration section} a convergent spectral sequence which calculates the $E_2$-page for any connected $X\in s\algs$ of finite type, which we name the May-Koszul spectral sequence. Its $E_1$-page may be described in terms of the Bousfield-Kan $E_2$-pages of the spheres (using Theorem \ref{Koszul-dual Hilton-Milnor theorem}), and information about the $E_2$-operations in the Bousfield-Kan spectral sequence for a sphere passes over to information about the general Bousfield-Kan $E_2$-page via the May-Koszul spectral sequence.
+Finally, we derive in \S\ref{The quadratic filtration section} a convergent spectral sequence which calculates the $E_2$-page for any connected $X\in s\algs$ of finite type, which we name the May-Koszul spectral sequence. Its $E_1$-page may be described in terms of the \BKSS\ $E_2$-pages of the spheres (using Theorem \ref{Koszul-dual Hilton-Milnor theorem}), and information about the $E_2$-operations in the \BKSS\ for a sphere passes over to information about the general \BKSS\ $E_2$-page via the May-Koszul spectral sequence.
 
 
 %
@@ -827,7 +838,7 @@ Finally, we derive in \S\ref{The quadratic filtration section} a convergent spec
 %\TODOCOMMENT[inline]{\tiny From here, the introduction gives way to a list of components of the thesis. This will be turned into prose asap, although I wanted to give my examiners at least a week with the document! After these dotpoints comes the start of said prose.}
 %%We lay out here an overview of  the work that is to follow.
 %\begin{itemize}
-%\item In \S\ref{Idnt E1 E2}, we derive the expected homological description of Radulescu-Banu's Bousfield-Kan spectral sequence of $X\in s\algs$. For $X$ connected, this is denoted:
+%\item In \S\ref{Idnt E1 E2}, we derive the expected homological description of Radulescu-Banu's \BKSS\ of $X\in s\algs$. For $X$ connected, this is denoted:
 %\[\E{}{2}{\calx}{s}{t}\cong H^{s}_{\calw(0)}(H^{*}_{\algs}X)_t\implies \pi_{t-s}X\hat{\ },\]
 %where $\calw(0)$ is the category of connected objects in Goerss' category $\calw$, the natural target category for the Andr\'e-Quillen cohomology functor $H^*_\algs$ on $s\algs$.
 %\item In \S\ref{Cohomology Operations for W and U}, we construct three families of operations on the derived functors $H^*_{\calw(0)}$:
@@ -836,7 +847,7 @@ Finally, we derive in \S\ref{The quadratic filtration section} a convergent spec
 %\item a commutative product and `horizontal' Steenrod operations $\Sqh^j$ forming an action of the (homogeneous) Steenrod algebra $\LieSteen:=E_0\cala_2$.  These operations correspond to Priddy's operations \cite{PriddySimplicialLie.pdf} on the cohomology of a simplicial Lie algebra. In Appendix \ref{appendix on Lie coh ops}, we demonstrate that Priddy's operations coincide with those defined in \S\ref{section: Cohomology operations for simplicial (restricted) Lie algebras}.
 %\end{itemize}
 %\item In \S\ref{second quadrant homotopy sseq operations}, we construct a theory of homotopy operations in the spectral sequence of a cosimplicial simplicial commutative algebra. The key chain-level construction is inspired by Dwyer's work \cite{DwyerHigherDividedSquares.pdf} on the spectral sequence of a cosimplicial simplicial coalgebra, although the two settings are not equivalent  --- although linear dualization interchanges (finite type) algebras and coalgebras, this symmetry is broken by the choice of filtration direction.
-%\item In \S\ref{Operations on the Bousfield-Kan spectral sequence}, we construct three corresponding families of unstable operations on the Bousfield-Kan spectral sequence in $s\algs$. The definition of these operations requires the operations just described, along with a shift in filtration, which we can perform after shifting to a convenient model of the Adams tower in \S\ref{An alternate definition of the Adams tower}.
+%\item In \S\ref{Operations on the Bousfield-Kan spectral sequence}, we construct three corresponding families of unstable operations on the \BKSS\ in $s\algs$. The definition of these operations requires the operations just described, along with a shift in filtration, which we can perform after shifting to a convenient model of the Adams tower in \S\ref{An alternate definition of the Adams tower}.
 %\item We use two- and three-cell complexes defined in \S\ref{three cell complex} and \S\ref{two-cell complex for the deltas} to prove that the spectral sequence operations  on $E_2$ agree with those constructed on $H^*_{\calw(0)}$.
 %\item The commutative product and higher divided squares abut to those on $\pi_*X\hat{\ }$ when possible. There are, however, \emph{too many} higher divided squares  defined at each $E_r$, and we construct in \S\ref{second quadrant homotopy sseq operations} and \S\ref{Operations on the Bousfield-Kan spectral sequence} differentials from the excess divided squares to the Steenrod operations which correct for this discrepancy.
 %\item  In \S\ref{Composite functor spectral sequences}, we produce an infinite sequence of composite functor spectral sequences, each calculating the $E_2$-page of the last. That is, for $n\geq0$ we define categories and functors 
@@ -854,9 +865,9 @@ Finally, we derive in \S\ref{The quadratic filtration section} a convergent spec
 %\item We use the sequence of spectral sequences to calculate certain examples of the groups $H^*_{\calw(n)}$, including the Bousfield-Kan $E_2$-page for a sphere in $s\algs$.
 %\item We produce a May-Koszul spectral sequence calculating the $E_2$-page of the Bousfield-Kan spectral sequence, and describe its $E^1$-page (in terms of the Bousfield-Kan $E_2$-pages of spheres).
 %\item We construct the Adams tower of $X\in s\algs$, and study its connectivity properties in order to prove a completeness result for connected $X$.
-%\item We prove a vanishing line theorem for the Bousfield-Kan spectral sequence for a connected object in $s\algs$.
+%\item We prove a vanishing line theorem for the \BKSS\ for a connected object in $s\algs$.
 %\item In \S\ref{An alternative Bousfield-Kan E1}, we present a small model for the Bousfield-Kan $E_1$-page for a commutative algebra sphere. This is a good point of reentry for the reader bemused by \S\S\ref{one-dimensional, n geq1}-\ref{Calculations of HW0}.
-%\item Finally, we conjecture the full structure of the Bousfield-Kan spectral sequence for a `sphere'.
+%\item Finally, we conjecture the full structure of the \BKSS\ for a `sphere'.
 %\end{itemize}
 
 %\begin{enumerate}
@@ -1439,7 +1450,7 @@ In our application of these conventions we will actually have $V\in \vect{+}{h}$
 %Suppose that $X^\bullet$ is a cosimplicial object in $s\algs$. Then there is a map of spectral sequences, which is an isomorphism from $E_1$ (\textbf{que?}), from the homotopy spectral sequence of the $\Tot$ tower $\{I\Tot_mX^\bullet\}$ to the spectral sequence of the bicomplex underlying $IX^\bullet$. Moreover, there is an isomorphism $\pi_*I\Tot X^\bullet\to H_*TIX^\bullet$ (to the homology of the total complex of the bicomplex), which is compatible with the map of spectral sequences.
 %\end{cor}
 %\begin{cor}
-%Suppose that $X$ is a connected element of $s\algs$. Then the Bousfield-Kan spectral sequence for $X$ is the spectral sequence of the bicomplex underlying the cosimplicial simplicial vector space $I((c(KQ)^\bullet X)^{\textup{rf}})$. This spectral sequence admits a vanishing line from $E_2$, and so converges strongly to its target, $\pi_{t-s}(I\hat X)$.
+%Suppose that $X$ is a connected element of $s\algs$. Then the \BKSS\ for $X$ is the spectral sequence of the bicomplex underlying the cosimplicial simplicial vector space $I((c(KQ)^\bullet X)^{\textup{rf}})$. This spectral sequence admits a vanishing line from $E_2$, and so converges strongly to its target, $\pi_{t-s}(I\hat X)$.
 %\end{cor}
 
 
@@ -1950,7 +1961,7 @@ where the second isomorphism is that of Lemma \ref{Q of a model}, so that
 
 When $\calc=\algs$, this is precisely the spectral sequence used by Goerss in \cite[Chapter V]{MR1089001} to calculate the cohomology of Eilenberg-Mac Lane objects in $s\algs$. In this thesis, we will use this spectral sequence only for certain low-dimensional calculations. Goerss equipped the reverse Adams spectral sequence with certain spectral sequence operations \citeBOX[\S14]{MR1089001}, work which can be framed using the external operations, due to Singer, reprised in \S\ref{Operations in composite functor spectral sequences}. %Indeed, these operations on the reverse Adams spectral sequence make for an interesting point of comparison for the operations we present in \S\ref{Operations in composite functor spectral sequences}. \textbf{some are probably the same.}%, which arise in a composite functor spectral sequence with the same target as the unstable Adams s. We will define various spectral sequences, and construct spectral sequence operations whic
 
-In this thesis we study a Bousfield-Kan spectral sequence (a.k.a.\ an unstable Adams spectral sequence) for the category $\algs$, and operations defined in \S\ref{Operations on the Bousfield-Kan spectral sequence} for this spectral sequence make for another point of comparison. Loosely, we find that the operations on the Bousfield-Kan spectral sequence are in a sense Koszul dual to the operations of the reverse Adams spectral sequence.
+In this thesis we study a Bousfield-Kan spectral sequence (BKSS), which is also known as an unstable Adams spectral sequence, for the category $\algs$. The operations defined in \S\ref{Operations on the Bousfield-Kan spectral sequence} for this spectral sequence make for another point of comparison. Loosely, we find that the operations on the \BKSS\ are in a sense Koszul dual to the operations on the reverse Adams spectral sequence.
 
 \SubsectionOrSection{The smash coproduct}\label{subseq:The smash coproduct}
 For $X_1$ and $X_2$ objects of any algebraic category, for example $\calc$, $\PA{\calc}$ or $\HA{\calc}$ (to be defined shortly), we define the \emph{smash coproduct} $X_1\smashcoprod X_2$ to be the kernel of the natural map $X_1\sqcup X_2\to X_1\times X_2$. When $X_1=X_2=X$, $X\smashcoprod X$ has a natural action of $\Sigma_2$, and we write $X\smashcoprod^{\Sigma_2} X$ for the subobject of invariant elements under this action.
@@ -2190,7 +2201,7 @@ The Hurewicz map $\pi_*X\to H_*^{\calc}X$ factors through $\Prim^{\HC{\calc}}(H_
 Radulescu-Banu \cite{Radulescu-Banu.pdf} has constructed a cosimplicial resolution $\calx^\bullet$ of an object $X\in s\calc$ by GEMs, and defined the \emph{homology completion of $X$} to be the totalization $X\hat{\ }:=\textup{Tot}(\calx^\bullet)$. 
 
 This construction is the analogue of Bousfield and Kan's $R$-completion functor on simplicial sets \cite{BousKanSSeq.pdf}, a construction that has proven extremely useful in classical homotopy theory.
-There is an additional difficulty, however,  in constructing the cosimplicial resolution $\calx^{\bullet}$, which is not present in the classical context: since not all simplicial algebras are cofibrant, the naive cosimplicial resolution (with coaugmentation dashed)
+There is an additional difficulty, however,  in constructing the cosimplicial resolution $\calx^{\bullet}$, which is not present in the classical context: since not all simplicial algebras are cofibrant, the na\"{\i}ve cosimplicial resolution (with coaugmentation dashed)
 \[\makebox[0cm][r]{\,$\qquad $}\vcenter{
 \def\labelstyle{\scriptstyle}
 \xymatrix@C=1.5cm@1{
@@ -2627,14 +2638,14 @@ where for $S\subseteq S'$, the map $(({\plainD}_{n+1}^{\smash{\square}}F)X)(S)\t
 
 Now Radulescu-Banu defines the homology completion of $X$ to be the totalization
 \[X\hat{\ }:=\textup{Tot}(\calx^\bullet)=\holim (\textup{Tot}_n(\calx^\bullet)),\]
-and the Bousfield-Kan spectral sequence to be the spectral sequence of the tower
+and the \BKSS\ to be the spectral sequence of the tower
 \[\cdots \to\textup{Tot}_n(\calx^\bullet)\to \textup{Tot}_{n-1}(\calx^\bullet)\to\cdots \]
 under $cX$. Our goal in this section is to prove
 \begin{prop}
 \label{towerIdentification}
 There is a natural zig-zag of weak equivalences of towers between $\left\{\plainD_{n+1}X\right\}_n$ and $\left\{\hofib(cX\to\textup{Tot}_{n}(\calx^\bullet))\right\}_n$. That is,  the $\textup{Tot}$ tower induces the Adams tower by taking homotopy fibers. In particular, the spectral sequence of the $\textup{Tot}$ tower coincides with the spectral sequence of the Adams tower.
 \end{prop}
-\noindent As $\calx^{-1}$ equals $cX$, the tower $\hofib(\calx^{-1}\to\textup{Tot}_n\calx^{\bullet})$ appearing in \S\ref{Towers, exact couples and coaugmented cosimplicial objects} is one of the towers in Proposition \ref{towerIdentification}. This proposition explains the relevance of the Adams tower to the cosimplicial resolution, and thus its relevance to the Bousfield-Kan spectral sequence which was defined as the spectral sequence of this cosimplicial object.
+\noindent As $\calx^{-1}$ equals $cX$, the tower $\hofib(\calx^{-1}\to\textup{Tot}_n\calx^{\bullet})$ appearing in \S\ref{Towers, exact couples and coaugmented cosimplicial objects} is one of the towers in Proposition \ref{towerIdentification}. This proposition explains the relevance of the Adams tower to the cosimplicial resolution, and thus its relevance to the \BKSS\ which was defined as the spectral sequence of this cosimplicial object.
 \begin{proof}[Proof of Proposition \ref{towerIdentification}] 
 It will suffice to construct a weak equivalence $h_n^*\calx^\bullet\to (\plainD_n^{\smash{\square}}\Id  )(X)$ of $(n+1)$-cubes. The $(n+1)$-cubical diagram $h_n^*\calx^\bullet$ is defined by
 \[(h_n^*\calx^\bullet)(S):= c(KQc)^{\chi_{n}}(KQc)^{\chi_{n-1}}\cdots (KQc)^{\chi_0}X\quad \textup{where}\quad \chi_i:=\begin{cases}
@@ -3499,7 +3510,7 @@ The typical use of this structure is to define cohomology operations using the e
 H_\calc^{n_1}X\otimes H_\calc^{n_2}X\overset{\ExtCohProd}{\to} \pi^{n_1+n_2}\dual(S^2(Q^\calc B^\calc X))\overset{\psi_\calc^*}{\to} H_\calc^{n_1+n_2+1}X,\\
 H_\calc^{n}X\overset{\ExtCohOp^k}{\to} \pi^{n+k}\dual(S^2(Q^\calc B^\calc X))\overset{\psi_\calc^*}{\to} H_\calc^{n+k+1}X.
 \end{gather*}
-These operations are the duals of natural homology cooperations, defined using the maps of \S\ref{Linearly dual homotopy operations} and \S\ref{External binary homotopy operations}:
+These operations are the duals of natural homology co-operations, defined using the maps of \S\ref{Linearly dual homotopy operations} and \S\ref{External binary homotopy operations}:
 \begin{gather*}
 (S^2H^\calc_{*}X)_{n}\overset{\widetilde{\nabla}}{\from} \pi_{n}(S^2(Q^\calc B^\calc X))\overset{\psi_\calc^*}{\from} H^\calc_{n+1}X,\\
 H^\calc_{n}(X)\overset{(\ExtCohOp^k)^{\star}}{\from} \pi_{n+k}(S^2(Q^\calc B^\calc X))\overset{\psi_\calc^*}{\from} H^\calc_{n+k+1}(X).
@@ -4862,7 +4873,7 @@ Applying these observations in the very specific circumstances of this propositi
 
 \SectionOrChapter{\textbf{Composite functor spectral sequences}}
 \label{Composite functor spectral sequences}
-It will be important for us to identify the derived functors $H^*_{\calw(0)}X:=\dual(\mathbb{L}_*Q^{\calw(0)}X)$ for $X\in\calw(0)$, in order to determine the  $E_2$-page of the Bousfield-Kan spectral sequence for a connected simplicial commutative algebra. More generally, we will now present a spectral sequence whose goal is to calculate $H^*_{\calw(n)}X$ for $X\in\calw(n)$. This will be a composite functor spectral sequence analogous to Miller's spectral sequence in \citeBOX[\S2]{MillerSullivanConjecture.pdf}. The factorization of $Q^{\calw(n)}$ we will use is of course 
+It will be important for us to identify the derived functors $H^*_{\calw(0)}X:=\dual(\mathbb{L}_*Q^{\calw(0)}X)$ for $X\in\calw(0)$, in order to determine the  $E_2$-page of the \BKSS\ for a connected simplicial commutative algebra. More generally, we will now present a spectral sequence whose goal is to calculate $H^*_{\calw(n)}X$ for $X\in\calw(n)$. This will be a composite functor spectral sequence analogous to Miller's spectral sequence in \citeBOX[\S2]{MillerSullivanConjecture.pdf}. The factorization of $Q^{\calw(n)}$ we will use is of course 
 \[Q^{\calw(n)}=\left(\calw(n)\overset{Q^{\calU(n)}}{\to}\calL(n)\overset{Q^{\calL(n)}}{\to}\vect{+}{n}\right)\]
 There is an added challenge in this context --- indeed, the available factorization of $Q^{\calw(n)}$ is through a non-abelian category. Thus, the standard technology for composite functor spectral sequences does not apply, and we must use Blanc and Stover's methods \cite{Blanc_Stover-Groth_SS.pdf}. They observe that the left derived functors $\mathbb{L}_*Q^{\calU(n)}X$ are calculated as the homotopy groups of a simplicial object in $\calL(n)$, namely $Q^{\calU(n)}B^{\calw(n)}X$, and as such, they have the structure of a $\calL(n)\textup{-$\Pi$-algebra}$. That is, they form an object of $\calw(n+1)$.  After verifying that the functor $Q^{\calU(n)}$ satisfies the requisite acyclicity condition (indeed it preserves free objects), one may apply \cite[Theorem 4.4]{Blanc_Stover-Groth_SS.pdf}: there is a spectral sequence, with $E_r\in\vect{+}{n+2}$,
 \[\E{2}{\BSW}{X}{t}{s_{n+2},\ldots,s_1}=((H_*^{\calw(n+1)})(\mathbb{L}_*Q^{\calU(n)})X)_{s_{n+2},\ldots,s_1}^t\implies ((H_*^{\calw(n)})X)_{s_{n+2}+s_{n+1},s_n,\ldots,s_1}^t\]
@@ -6179,7 +6190,7 @@ $\{\Sqv^2v_{2},\Sqv^3v_{2},\Sqv^2v_{3},\Sqv^3v_{3},\ldots\}$ and set $\Sqv^2 v_{
 %\[(V_{(2)}^{*})_{0,1}^{T}\ni v_0^*\overset{\lambda_0}{\longmapsto}v_1^*\in (V_{(2)}^{*})_{0,2}^{2T+1}.\]
 %% $\Smehqv(\emptyset,v_0^*)\lambda_0=\Smehqv(\emptyset,v_1^*)$. \textbf{fill in details on higher $V_{(k)}$}
 %\end{prop}
-\begin{proof}[Proof of Propositions \ref{Sg1 calc of V2} and \ref{Se1 calc of V2}]
+\begin{proof}[Proof of propositions \ref{Sg1 calc of V2} and \ref{Se1 calc of V2}]
 For any $S\geq1$, taking the homology of this differential provides the formula for $V^*_{(2)}$, and dualizing provides that for $V_{(2)}$.
 In order to determine $V^*_{(2)}$ as an object of $\calw(2)$, note first that \ref{LieBracketsTrivial} and \ref{QkTrivial} show that all operations are zero except perhaps for $\lambda_0$. %Now $(\Sqmehv(J,w^*))\lambda_0$ is evidently zero, 
 Consider the operation $\lambda_0$ applied to a cycle of the form $\Sqvstar{J}(v_{j}^*)\in K_{*}^{\calU(1)}V^*_{(1)}$ with $J\neq\emptyset$ (so that $1,2\notin J$). As $J$ ends in an integer no less than 3, and as $\lambda_1$ is the only non-zero operation in $V^*_{(1)}$, the second part of Proposition \ref{Q0ZeroByPriddyAlg} implies that $\Sqvstar{J}(v_{j}^*)\lambda_0=0$.
@@ -6367,7 +6378,7 @@ As in the proof of Theorem \ref{W2 to W1 collapse}, these equations imply that $
 This theorem has the following corollary, stated in this form due to potential hidden extensions:
 \begin{cor}
 \label{the corollary on the bousfield kan e2}
-Suppose that $X=\mathbb{S}_{T}^{\algs}$ for $T\geq1$. Then the Bousfield-Kan $E_2$-page $\E{}{2}{\calx}{}{}\cong H^*_{\calw(0)}(H^*_\algs X)$ is isomorphic, as a vector space in $\vect{1}{+}$, to the $\calMh(1)$-subquotient of $F^{\calMh(1)}F^{\calMv(1)}\{\imath\}$ generated by 
+Suppose that $X=\mathbb{S}_{T}^{\algs}$ for $T\geq1$. Then the \BKSS\ $E_2$-page $\E{}{2}{\calx}{}{}\cong H^*_{\calw(0)}(H^*_\algs X)$ is isomorphic, as a vector space in $\vect{1}{+}$, to the $\calMh(1)$-subquotient of $F^{\calMh(1)}F^{\calMv(1)}\{\imath\}$ generated by 
 the fundamental class $\imath$ and the elements
 \[
 \{\deltav_{I}\imath,
@@ -6437,7 +6448,7 @@ $(\deltav_{\TOP_T I}\imath)^{2}=\Sqh^3\deltav_{\TOP_T I}\imath$, and taking the 
 
 \SubsectionOrSection{An alternative Bousfield-Kan $E_1$-page}
 \label{An alternative Bousfield-Kan E1}
-We will now suggest a somewhat artificial $E_1$-page for the Bousfield-Kan spectral sequence for a  sphere  $X=\mathbb{S}_{T}^{\algs}$ for $T\geq1$, but one that will be motivated by the conjectures and calculations of \S\ref{The Bousfield-Kan spectral sequence for a sphere}. 
+We will now suggest a somewhat artificial $E_1$-page for the \BKSS\ for a  sphere  $X=\mathbb{S}_{T}^{\algs}$ for $T\geq1$, but one that will be motivated by the conjectures and calculations of \S\ref{The Bousfield-Kan spectral sequence for a sphere}. 
 Define:
 \begin{alignat*}{2}
 % Left hand side
@@ -6594,7 +6605,7 @@ The isomorphism of vector spaces $H_*\Eprime{blank}{1}{\calx}{}{}\to \E{}{2}{\ca
 In this chapter we will produce various external operations on second quadrant homotopy spectral sequences. That is, for $X\in cs\vect{}{}$, we will produce numerous operations
 from $\E{}{r}{X}{}{}$ to each of $\E{}{r}{S_2X}{}{}$ and $\E{}{r}{\Lambda^2 X}{}{}$. This approach leaves open a number of possibilities. If $X\in cs\algs$, then the structure map $S_2X\to X$ induces a spectral sequence map $\E{}{r}{S^2X}{}{}\to \E{}{r}{X}{}{}$, and so the external operations induce internal operations on $\E{}{r}{X}{}{}$. If $X$ is a Lie algebra  we may apply the analogous technique. 
 
-In \S\ref{Operations on the Bousfield-Kan spectral sequence}, we will use these external operations in another way to produce operations on the Bousfield-Kan spectral sequence of a commutative algebra or Lie algebra --- the construction will involve a shift in filtration, which is conceivable given that  Radulescu-Banu's resolution  is a resolution by GEMs.
+In \S\ref{Operations on the Bousfield-Kan spectral sequence}, we will use these external operations in another way to produce operations on the \BKSS\ of a commutative algebra or Lie algebra --- the construction will involve a shift in filtration, which is conceivable given that  Radulescu-Banu's resolution  is a resolution by GEMs.
 
 
 
@@ -6736,7 +6747,7 @@ At least for $i>s+1$, $\Sq^i_\textup{ext}x=0$. $\Sqh^1x$ is zero whenever $t\geq
 
 
 
-\begin{proof}[Proof of Propositions \ref{prop on e1 steens 1} and \ref{prop on e1 steens 2}]
+\begin{proof}[Proof of propositions \ref{prop on e1 steens 1} and \ref{prop on e1 steens 2}]
 Choose a representative $x\in \EZdownup{r}{}{X}{s}{t}$ of the class of interest. We readily check that $\textup{SQ}^{i,s}x$ has filtration at least $s+i$:
 \begin{align*}
 \filt(\rho\Nabla (D^{s-i}(x\otimes x))&\geq s+s-(s-i)=s+i,\\
@@ -7236,7 +7247,7 @@ It should be possible to state versions of all of the above results in this case
 \SectionOrChapter{\textbf{Operations in the Bousfield-Kan spectral sequence}}
 \label{Operations on the Bousfield-Kan spectral sequence}
 In this chapter
-we will define operations on the Bousfield-Kan spectral sequence of an object $X\in s\calc$ whenever $\calc$ is any of the categories $\algs$, $\liealgs$ or $\restliealgs$. We will always write $\calx$ for Radulescu-Banu's resolution of $X\in s\algcat$. %As we have developed homology operations for the category $\calw(0)$, but not for the categories $\HA{\liealgs}$
+we will define operations on the \BKSS\ for an object $X\in s\calc$ whenever $\calc$ is any of the categories $\algs$, $\liealgs$ or $\restliealgs$. We will always write $\calx$ for Radulescu-Banu's resolution of $X\in s\algcat$. %As we have developed homology operations for the category $\calw(0)$, but not for the categories $\HA{\liealgs}$
 
 
 \SubsectionOrSection{An alternate definition of the Adams tower}
@@ -7367,7 +7378,7 @@ W^{-1}
 %H_t(\calT_0W)\ar[r]\ar@{-->}[ul]_-{\partial}
 %&0
 %}\]
-Bousfield and Kan note \citeBOX[\S3.3 and \S4.2]{BK_pairings_products.pdf} that this tower \emph{equals} the Adams tower $R_nX$ when $W=\calx$ is Radulescu-Banu's resolution of $X\in s\algcat$. They also explicitly perform the resulting identification of the $E_1$ term of the spectral sequence of this tower with $N^s_\subseteq\pi_tW$, using iterates of the connecting map
+Bousfield and Kan note \citeBOX[\S3.3 and \S4.2]{BK_pairings_products.pdf} that this tower \emph{equals} the Adams tower $R_nX$ when $W=\calx$ is Radulescu-Banu's resolution of $X\in s\algcat$. They also explicitly perform the resulting identification of the $E_1$-page of the spectral sequence of this tower with $N^s_\subseteq\pi_tW$, using iterates of the connecting map
 \[\pi_t(W^{s})=\pi_t(VW^{s-1})\overset{\partial_\textup{conn} }{\to}\pi_{t-1}(\Dendo^1W)^{s-1}\]
 of the fiber sequence $(\Dendo^1W)^{s-1}\to W^{s-1}\to VW^{s-1}$, which has the property:
 \begin{prop}[{\cite[Proposition 5.2]{BK_pairings_products.pdf}}]
@@ -7905,10 +7916,10 @@ J_{t,t'}%r2c2
 The left vertical is evidently almost free (and thus a cofibration), and thus constructed map $\mathbb{S}^{\calc}_t\sqcup \mathbb{S}^{\calc}_{t'}\to J_{t,t'}$ is an almost free map.
 The generating subspace $V_{t+t'+1}\subseteq (J_{t,t'})_{t+t'+1}$ has a $t+t'+1$-dimensional generator $h_{t,t'}$, the image of the cone class $h$ in $(\mathbb{S}^{\calc}_{t+t'})_{t+t'+1}$ (c.f.\ \S\ref{The Dold-Kan correspondence}). Moreover, the object $J_{t,t'}$ is cofibrant, and $h_{t,t'}$ becomes a cycle in $Q^\calc J_{t,t'}$: $d_ih_{t,t'}=0$ for $i\geq1$, and $d_0h_{t,t'}:=z_{t+t'}$, which we  have identified with the decomposable element $\mu(\nabla(z_t\otimes z_{t'}))$ in passing to the pushout.
 
-The homology long exact sequence shows that $H_*J_{t,t'}$ is three-dimensional, containing classes $ z_t$, $ z_{t'}$ and $h_{t,t'}$. Moreover, there is a cooperation $\Delta$ on $H_{*}^{\calc}$ dual to the $S(\LieOperad)$ structure map on cohomology, and we prove:
+The homology long exact sequence shows that $H_*J_{t,t'}$ is three-dimensional, containing classes $ z_t$, $ z_{t'}$ and $h_{t,t'}$. Moreover, there is a co-operation $\Delta$ on $H_{*}^{\calc}$ dual to the $S(\LieOperad)$ structure map on cohomology, and we prove:
 \begin{prop}
 \label{prop on three cell}
-Under $\Delta:H_*^{\calc}J_{t,t'}\to (S^2H_*^{\calc}J_{t,t'})_{*-1}$, $h_{t,t'}\mapsto\imath_t\otimes\imath_{t'}+\imath_{t'}\otimes\imath_t$. All other cooperations on $H_*^{\calc}J_{t,t'}$ are zero.
+Under $\Delta:H_*^{\calc}J_{t,t'}\to (S^2H_*^{\calc}J_{t,t'})_{*-1}$, $h_{t,t'}\mapsto\imath_t\otimes\imath_{t'}+\imath_{t'}\otimes\imath_t$. All other co-operations on $H_*^{\calc}J_{t,t'}$ are zero.
 \end{prop}
 \begin{proof}
 The representative $g$ has the property that $d_0(g)=\mu(\Nabla(\imath_t\otimes\imath_{t'}))$ and $d_i(g)=0$ for $i>0$. By Lemma \ref{psi is basically the quadratic part} and the description of $\quadratic_\calc$ in \S\ref{quadratic part section}:
@@ -8452,7 +8463,7 @@ Here $\imath\in \pi_T(\mathbb{S}^{\algs}_T)$ is the fundamental class (c.f.\ Pro
 In order to construct all of the differentials needed, we will \emph{assume} from this point on:
 \begin{conjecture}
 \label{conjec1}
-It is possible to modify the definitions of the spectral sequence operations $\mu$, $\Sqh^j$ and $\deltav_i$ defined in \S\ref{Definition of the spectral sequence operations} in order that the $\Sq$-Adem relations and the relations $\deltav_i\Sqh^j=0$ hold on $E_1$ (without compromising the existing properties of these operations summarized in Proposition \ref{adams operations are right for comm} and Corollaries \ref{prop on basic product composed with lift}-\ref{Prop on einfty ops composed with lift}).
+It is possible to modify the definitions of the spectral sequence operations $\mu$, $\Sqh^j$ and $\deltav_i$ defined in \S\ref{Definition of the spectral sequence operations} in order that the $\Sq$-Adem relations and the relations $\deltav_i\Sqh^j=0$ hold on $E_1$ (without compromising the existing properties of these operations summarized in Proposition \ref{adams operations are right for comm} and corollaries \ref{prop on basic product composed with lift}-\ref{Prop on einfty ops composed with lift}).
 \end{conjecture}
 \noindent That is, we will replace the operations defined in \S\ref{Definition of the spectral sequence operations} with their conjectural counterpart (without no change of notation).
 
@@ -8531,7 +8542,7 @@ as long as either $J^{-}$ is empty or  $a(I^{+})+3-(j_2-a(I^{+}))< 0$. If $J^{-}
 \end{proof}
 \begin{prop}
 \label{thats all the difls}
-Assuming Conjectures \ref{conjec1} and \ref{conjec2}, the differentials given in Proposition \ref{thereisamap...}, along with those arising from them by taking products and applying the Liebniz formula, are a complete set of differentials for the Bousfield-Kan spectral sequence of this sphere.
+Assuming Conjectures \ref{conjec1} and \ref{conjec2}, the differentials given in Proposition \ref{thereisamap...}, along with those arising from them by taking products and applying the Liebniz formula, are a complete set of differentials for the \BKSS\ for this sphere.
 \end{prop}
 \begin{proof}
 Although the $E_r$-page of the spectral sequence is not an exterior algebra for any finite $r$, we are working in a spectral sequence of commutative $\Ftwo$-algebras. As such, the differential is not sensitive to the difference between the polynomial algebra 
@@ -8543,7 +8554,7 @@ which really is isomorphic as an algebra to the target $\pi_*(\mathbb{S}^{\algs}
 \end{proof}
 Filtering the sets $\calg'$ and $\calg''$ by the length of the differentials associated with their elements, so that
 \[\calg'_r:=\{(J,I)\in\calg'\ |\ \textup{if $g(J,I)=(J',I')$ then $n(J')+\ell(I')\geq n(J)+\ell(I)+r$} \},\]
-and $\calg''_r:=\im(g|_{\calg'_r})$, the  proofs of Propositions \ref{thereisamap...} and \ref{thats all the difls} also prove:
+and $\calg''_r:=\im(g|_{\calg'_r})$, the  proofs of propositions \ref{thereisamap...} and \ref{thats all the difls} also prove:
 \begin{prop}
 \label{the description of the interim pages of the sseq}
 Assuming Conjectures \ref{conjec1} and \ref{conjec2}, there is an isomorphism of chain complexes, for $r\geq2$:
@@ -8554,7 +8565,7 @@ Assuming Conjectures \ref{conjec1} and \ref{conjec2}, there is an isomorphism of
 .\]
 \end{prop}
 
-Moreover, the complete calculation of the Bousfield-Kan spectral sequence for a finite connected model in $s\algs$ now follows simply by taking the coproduct of non-unital differential graded algebras at each page, with the appropriate grading shifts, for example:
+Moreover, the complete calculation of the \BKSS\ for a finite connected model in $s\algs$ now follows simply by taking the coproduct of non-unital differential graded algebras at each page, with the appropriate grading shifts, for example:
 \[\E{}{r}{(\mathbb{S}_{T_1}^\algs\sqcup \mathbb{S}_{T_2}^\algs)}{}{}\cong \E{}{r}{\mathbb{S}_{T_1}^\algs}{}{}\sqcup \E{}{r}{\mathbb{S}_{T_2}^\algs}{}{}.\]
 
 
@@ -8653,11 +8664,11 @@ In the cohomotopy spectral sequence of the filtered simplicial object $\textup{B
 
 \SubsectionOrSection{A vanishing line on the Bousfield-Kan $E_2$-page}
 \label{A vanishing line on the Bousfield-Kan}
-Although it is possible, with more care, to obtain a vanishing line of lower slope, in the interest of brevity, we prove:
+It is possible to obtain by the following method a vanishing line of slope $4/5$ whenever $\pi_1X$ is of finite type. In the interest of brevity however, we prove only the following:
 \begin{thm}
 \label{vanishing line prop}
-If $X\in s\algs$ is connected (with $\pi_*X$ not necessarily of finite type), the Bousfield-Kan spectral sequence admits a vanishing line on $E_2$ of slope $1$ and intercept $0$:
-\[\E{}{2}{\calx}{s}{t}=0\textup{ \ whenever \ }s\geq t-s.\]
+If $X\in s\algs$ is connected (with $\pi_*X$ not necessarily of finite type), the \BKSS\ admits a vanishing line on $E_2$ of slope $1$ and intercept $0$:
+\[\E{}{2}{\calx}{s}{t}=0\textup{ \ whenever \ }s\geq 1\cdot( t-s).\]
 \end{thm}
 \begin{proof}
 We will prove that the right derived functors
