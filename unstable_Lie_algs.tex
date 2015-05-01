@@ -1,6 +1,6 @@
 % !TEX root = z_output/unstable_Lie_algs.tex
 \documentclass[11pt]{amsart} \renewcommand{\baselinestretch}{1.2}
-%\newcommand{\IncludeAll}{}%
+\newcommand{\IncludeAll}{}%
 \newcommand{\xShrinkPages}{}%
 \newcommand{\xPostponeContents}{}%
 %%%%%%%%%%%%%%%%%%% 
@@ -8,13 +8,13 @@
 %%%%%%%%%%%%%%%%%%% 
 \ifx\ShrinkPages\undefined\else\usepackage[paperheight=220mm,paperwidth=160mm]{geometry}\fi%220/160 height options
 \usepackage{amsmath,amsthm,amssymb} \usepackage{eucal} \usepackage{mathrsfs,nicefrac} \usepackage{amssymb} \usepackage[all]{xy} \usepackage{cancel} \usepackage[textsize=small,color=green!40]{todonotes} \usepackage{color} \usepackage{version} \usepackage{enumerate} \usepackage{mathtools} \newcommand{\ooooo}[2][]{\excludeversion{#2}} \newcommand{\wooooo}[2][]{\includeversion{#2}}%mathtools is just used for `mathclap'
-\ooooo[	do]{todolist}\ooooo[]{thanks}\ooooo[]{random junk}
+\ooooo[	do]{todolist}\wooooo[]{ThankS}\ooooo[]{random junk}
 \ifx\IncludeAll\undefined\else\renewcommand{\ooooo}[2][]{\wooooo{#2}}\fi
 \ooooo[	ct]{Contents Page}
-\wooooo[	 1]{Introduction}
+\ooooo[	 1]{Introduction}
 \ooooo[	 2]{Conventions and notation}
-\wooooo[	 3]{Pi-algebras and cohomology algebras}
-\wooooo[	 4]{Bousfield-Kan spectral sequence}
+\ooooo[	 3]{Pi-algebras and cohomology algebras}
+\ooooo[	 4]{Bousfield-Kan spectral sequence}
 \ooooo[	 5]{Constructing homotopy operations}
 \ooooo[	 6]{Constructing cohomology operations}
 \ooooo[	 7]{homotopy operations for PRLs}
@@ -24,7 +24,7 @@
 \ooooo[	11]{Operations on the Bousfield-Kan spectral sequence}
 \ooooo[	12]{Comp funct sseqs}
 \ooooo[	13]{Operations in composite functor spectral sequences}
-\wooooo[	14]{Calculations of HWn}
+\ooooo[	14]{Calculations of HWn}
 \ooooo[	15]{The Bousfield-Kan spectral sequence for a sphere}
 \ooooo[	16]{May sseq and vanishing line}
 \ooooo[	ap]{appendices}
@@ -44,14 +44,24 @@
   \thmnote{ {\the\thm@notefont#3}}}
 \let\thmhead\thmhead@plain
 \makeatother
+
+\ifx\ISMITTHESIS\undefined
 \theoremstyle{plain}
 \newtheorem{thm}{Theorem}[section] %CHANGE to chapter
 \newtheorem{lem}[thm]{Lemma}
 \newtheorem{prop}[thm]{Proposition}
 \newtheorem{cor}[thm]{Corollary}
 \newtheorem{conjecture}{Conjecture}
-
 \numberwithin{equation}{section} %CHANGE to chapter
+\else
+\theoremstyle{plain}
+\newtheorem{thm}{Theorem}[chapter] %CHANGE to chapter
+\newtheorem{lem}[thm]{Lemma}
+\newtheorem{prop}[thm]{Proposition}
+\newtheorem{cor}[thm]{Corollary}
+\newtheorem{conjecture}{Conjecture}
+\numberwithin{equation}{chapter} %CHANGE to chapter
+\fi
 
 %>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 %<<<       Operators        <<<
@@ -443,6 +453,34 @@ Write one of these.
 \tableofcontents
 \end{Contents Page}
 
+
+
+
+\begin{ThankS}
+
+First and foremost, I would like to thank Haynes Miller for his ongoing support and guidance over the course of this Ph.D. Without doubt I learned more algebraic topology from my meetings with Haynes than from all other sources combined, and at every meeting he contributed materially to my intellectual development. This work owes much to his influence, and to the ideas to be found in his Sullivan Conjecture paper \cite{MillerSullivanConjecture.pdf}.
+
+I would also like to thank Paul Goerss, for visiting to take part in my examination committee, and whose Asterisque volume \cite{MR1089001} has had great influence on my work.
+Thanks too to Michael Ching, Bill Dwyer, Benoit Fresse and John Harper, for helpful conversations on various topics appearing in this thesis.
+
+I would like to thank my wonderful classmates, in particular Michael Andrews, Nate Bottman, Saul Glasman, Jiayong Li, Dana Mendelson and Alex Moll, for sharing this experience with me. I would also like to thank Michael Andrews for always being available to answer questions and share ideas.
+
+%Michael Andrews, Nate Bottman, Saul Glasman, Jiayong Li, Dana Mendelson, Alex Moll, Roberto Svaldi, Xuwen Zhu.
+
+
+
+Sonia V.\ and Eric M.\ and Bella and Gilad.
+
+Parents.
+
+%Finally, I would like to thank
+Dana for being awesome.
+
+\end{ThankS}
+
+
+
+
 %%%%%%%%%%%%%%%%%%% 
 %%%%%%%%%%%%%%%%%%%Begin thecontent for pasteover
 %%%%%%%%%%%%%%%%%%% 
@@ -644,7 +682,7 @@ For $x\in \E{}{r}{\calx}{s}{t}$ such that  $\deltav_ix $ is defined:
 %\Sqh^{t-i+1}(x),&\textup{if $t-s<i =t-(r-1)$}\\
 0,&\textup{otherwise.}
 \end{cases}\]
-This is Corollary \ref{Prop on delta external composed with lift}. In particular, if $i>t-s$ and $x\in\E{}{t-i+1}{\calx}{s}{t}$ survives to $\E{}{t-i+2}{\calx}{s}{t}$, then $d_{t-i+1}$ maps $\deltav_ix$ to $\Sqv^{t-i+2}x$. These formulae explain how the $\Sqv$ serve to absorb differentials supported by the excess $\deltav$.
+This is Corollary \ref{cor on delta external composed with lift}. In particular, if $i>t-s$ and $x\in\E{}{t-i+1}{\calx}{s}{t}$ survives to $\E{}{t-i+2}{\calx}{s}{t}$, then $d_{t-i+1}$ maps $\deltav_ix$ to $\Sqv^{t-i+2}x$. These formulae explain how the $\Sqv$ serve to absorb differentials supported by the excess $\deltav$.
 
 \SubsectionOrSection{The first composite functor spectral sequence}
 \label{The first composite functor spectral sequence}
@@ -886,55 +924,7 @@ Finally, we derive in \S\ref{The quadratic filtration section} a convergent spec
 
 \end{Introduction}
 
-\begin{random junk}
 
-\SubsectionOrSection{Throatclearing}
-
-Given a bisimplicial vector space $V_{s,t}$, we obtain a double chain complex $N_sN_tV$. There is a first quadrant homotopy spectral sequence $nope{r}{}{V}{}{s,t}$, with $nope{2}{}{V}{}{s,t}=\pi\uhor_s\pi\uver_tV$, converging to $\pi_{s+t}\diag{ V}$.
-There is a first quadrant cohomotopy spectral sequence $\Edown{r}{V}{s,t}{}$, with $\Edown{2}{V}{s,t}{}=\dual(\pi\uhor_s\pi\uver_tV)$, converging to $\dual(\pi_{s+t}\diag{ V})$.
-
-Given a cosimplicial simplicial vector space  $V_{s,t}$, we obtain a mixed chain complex $N^sN_tV$.\\
-There is a second quadrant homotopy spectral sequence $nope{r}{}{V}{s}{t}$, with $nope{2}{}{V}{s}{t}=\pi\dhor^s\pi\uver_tV$, which will sometimes converge to $\pi_{t-s}\Tot V$.
-
-
-\noindent first quadrant homotopy --- Stover's van Kampen\\
-first quadrant cohomology --- Serre sseq, our GSSeqs\\
-second quadrant homotopy --- Adams or Bousfield-Kan spectral sequences\\
-second quadrant cohomology --- Dwyer's work Eilenberg-Moore
-
-
-
-%\TODOCOMMENT[inline]{
-%Note that the forgetful functor $\calw(0)\to\calU(0)$ does not preserve almost free simplicial objects! However, it does preserve levelwise free simplicial objects, which create the right homology groups (see PRLieAlgs.tex). Thus there is a disconnect in the number of available operations on the Bousfield-Kan $E_2$ and on the first Koszul resolution.}
-
-
-%\TODOCOMMENT[inline]{examples - explain Lie stuff's Koszul duality in terms of Goerss' work}
-
-
-
-
-\end{random junk}
-
-
-\begin{thanks}
-This research will form part of the author's PhD thesis. The author would like to thank his advisor, Haynes Miller, for his support and guidance, and John Harper, for sharing helpful insights into the use of cubical diagrams in connectivity analyses such as that of Section \ref{sec:connectivityAnalysis}.
-
-Harper, Fresse, Ching, Dwyer.
-
-Paul, for the great Asterisque volume and Haynes for the Sullivan conjecture paper, where so many of the fundamental ideas for this thesis first arose.
-
-Jandr for numerous helpful and clarifying conversations
-
-Michael Andrews, Nate Bottman, K\k{e}stutis \v{C}esnavi\v{c}ius, Saul Glasman, Jiayong Li, Dana Mendelson, Alex Moll, Roberto Svaldi, Xuwen Zhu.
-
-Dana for being awesome.
-
-Sonia V.\ and Eric M.\ and Bella and Gilad.
-
-Parents, for visiting, etc...
-
-
-\end{thanks}
 
 \begin{Conventions and notation}
 \SectionOrChapter{Background and conventions}
@@ -2258,11 +2248,8 @@ By an application of Dold's theorem (\ref{Dold's theorem}), if $X\to Y$ is a wea
 This construction is explained and generalized by Blumberg and Riehl \citeBOX[\S4]{BlumRiehlResolutions.pdf}: instead of simply using the unit and counit of the adjunction respectively, one uses the composites discussed in \S\ref{homology and Hcoalgs}:
 \[c\overset{\beta}{\to}cc\overset{c\eta c}{\to}cK^{\calc}Q^{\calc}c\textup{\quad and\quad }Q^{\calc}cK^{\calc}\overset{Q\epsilon K}{\to}Q^{\calc}K^{\calc}\to \textup{id}.\]
 Comments in \citeBOX[\S4]{BlumRiehlResolutions.pdf}  show that the coaugmented cosimplicial $\calc$-$H_*$-coalgebra $H_*^{\calc}\calx^\bullet$  is weakly equivalent to its coaugmentation $H_*^{\calc}X$ \emph{as a vector space}, which starts to explain  the title \emph{homology completion}. One says that $X$ is \emph{homology complete} when the map $cX\to X\hat{\ }:=\textup{Tot}(\calx^\bullet)$ is an equivalence.
-In \S\ref{sec:connectivityAnalysis} we will specialize to the case when $\algcat$ is either the category $\algs$  of ungraded non-unital commutative algebras the category $\liealgs$ of ungraded Lie algebras, and prove that the completion $X\hat{\ } $ is weakly equivalent to $X$ when $X$ is connected.
-
-
-
-\todo[inline]{Comment on this theorem in context of Hess' \cite{2010arXiv1001.1556H} and Ching and Harper's \cite{2015arXiv150206944C}}
+In \S\ref{sec:connectivityAnalysis} we will specialize to the case when $\algcat$ is either the category $\algs$  of ungraded non-unital commutative algebras the category $\restliealgs$ of ungraded restricted Lie algebras, and prove that the completion $X\hat{\ } $ is weakly equivalent to $X$ when $X$ is connected. Analogous results for topological Quillen homology may be found in \cite{2015arXiv150206944C}.
+%\todo[inline]{Comment on this theorem in context of Hess' \cite{2010arXiv1001.1556H} and Ching and Harper's \cite{2015arXiv150206944C}}
 
 \begin{proof}[Proof of Proposition \ref{hurewicz}]
 Note that the maps $d^0,d^1:\calx^{0}\to\calx^{1}$ induce respectively the coaugmentation and coaction maps for $\pi_*\calx^{0}=H_*^{\calc}X$ on homotopy, while $d^0:\calx^{-1}\to\calx^{0}$ induces the Hurewicz map. The very existence of this diagram then shows that the  Hurewicz map factors through the primitives. The following observation of \citeBOX[\S4]{BlumRiehlResolutions.pdf} completes the proof: that this cosimplicial object has extra codegeneracies  when $X=K^\calc V$.
@@ -2701,17 +2688,17 @@ Applying \cite[Proposition 6.14]{goerss-jardine.pdf}, there is a short exact seq
 \[0\to \textup{lim}^1\pi_{q+1}(\dupdown{n}{c}X)\to \pi_q(\holim (\dupdown{n}{c}X))\to \textup{lim}\,\pi_{q}(\dupdown{n}{c}X)\to 0.\]
 Proposition \ref{convergenceProp} implies that for each $q$, the tower $\{\pi_{q}(\dupdown{n}{c}X)\}_n$ has zero inverse limit and satisfies the Mittag-Leffler condition (c.f.\ \citeBOX[p.~264]{YellowMonster}), so that the $\textup{lim}^1$ groups appearing also vanish.
 \end{proof}
-The application of the small object argument functor $c$ adds to the difficulty of proving the connectivity estimates of Proposition \ref{convergenceProp}. We circumvent the difficulty of working with $c$ by shifting to the standard bar construction $B^{\algCat}$ on $s\algCat$, for which we use the abbreviation $\barConstructionMightAbbreviate $.
+The application of the small object argument functor $c$ adds to the difficulty of proving the connectivity estimates of Proposition \ref{convergenceProp}. We circumvent the difficulty of working with $c$ by shifting to the standard bar construction $B^{\algCat}$ on $s\algCat$, which we abbreviation to $\barConstructionMightAbbreviate $.
 
-Define recursively a somewhat less homotopical version $\caldup{s}F$ of the derivations $\dupdown{s}{}F$:
+We define recursively a somewhat less homotopical version $\caldup{s}F$ of the derivations $\dupdown{s}{}F$:
 \begin{alignat*}{2}
 (\caldup{0}F)(X)
 &:=
-F(X)%
+F(X),%
 \\
 (\caldup{s}F)(X)
 &:=
-\ker((\caldup{s-1}F)(\barConstructionMightAbbreviate X)\xrightarrow{(\caldup{s-1}F)(\eta_{\barConstructionMightAbbreviate X})} (\caldup{s-1}F)(KQ\barConstructionMightAbbreviate X))
+\ker((\caldup{s-1}F)(\barConstructionMightAbbreviate X)\xrightarrow{(\caldup{s-1}F)(\eta_{\barConstructionMightAbbreviate X})} (\caldup{s-1}F)(KQ\barConstructionMightAbbreviate X)).
 \end{alignat*}
 There are three differences between this definition and that of $\plainD_sF$: here, there is one fewer cofibrant replacement applied, we use $\barConstructionMightAbbreviate $ instead of  $c$, and we take \emph{strict} fibers, not homotopy fibers.
 While these functors are not generally homotopical, we define \emph{the modified Adams tower of $X$} to be the tower
@@ -3226,7 +3213,7 @@ y^2\delta_i(x),&\text{if }m=0;\\
 \end{cases}
 \]
 \item \label{deltaademsunstable} the \emph{$\delta$-Adem relations} hold: if $\delta_i\delta_jx$ is defined, and $i<2j$, then
-\[\delta_i\delta_jx:=\sum_{s=\lceil(i+1)/2\rceil}^{\lfloor(i+j)/3\rfloor}{j+s-i-1\choose j-s}\delta_{i+j-s}\delta_sx.\]
+\[\delta_i\delta_jx:=\sum_{s=\lceil(i+1)/2\rceil}^{\lfloor(i+j)/3\rfloor}\binom{j+s-i-1}{ j-s}\delta_{i+j-s}\delta_sx.\]
 \end{enumerate}
 \end{prop}
 A few comments are in order. Firstly, the proposition distinguishes between the \emph{top} and \emph{non-top} $\delta$-operations, as they have rather different behaviour --- this will be a recurring pattern. Secondly, it is not immediately obvious that the $\delta$-Adem relations make sense, in that it is not obvious that every term in the right hand side is defined. This does indeed happen, by Lemma \ref{lemOnAdemChangeInMDeltaPlain} (to follow). 
@@ -3317,13 +3304,13 @@ For $L\in s \liealgs$, these operations satisfy:
 \end{cases}
 \]
 \item \label{meep5} the \emph{$\Lambda$-Adem relations} hold: if $x\lambda_j\lambda_i$ is defined, and $i>2j$, then
-\[x\lambda_j\lambda_i=\sum_{k=0}^{(i-2j)/2-1}{i-2j-2-k\choose k}x\lambda_{i-j-1-k}\lambda_{2j+1+k}.\]
+\[x\lambda_j\lambda_i=\sum_{k=0}^{(i-2j)/2-1}\binom{i-2j-2-k}{ k}x\lambda_{i-j-1-k}\lambda_{2j+1+k}.\]
 \end{enumerate}
 For $L\in s \restliealgs$, we may omit (\ref{meep1}), modify (\ref{meep2}) to state that the whole of $\pi_*L$ is restricted, and modify (\ref{meep3})-(\ref{meep5}) to include $\lambda_0$.
 \end{prop}
 Similar comments apply as for commutative algebras, for example, one needs Lemma \ref{lemOnAdemChangeInMLambdaPlain} (to follow) to understand why this unstable relation makes sense. 
 
-The well known \emph{$\Lambda$-algebra} is the unital associative algebra generated by $\lambda_i$ for $i\geq0$, subject to relations \[\lambda_j\lambda_i=\sum_{k=0}^{(i-2j)/2-1}{i-2j-2-k\choose k}\lambda_{i-j-1-k}\lambda_{2j+1+k}\textup{\ for $i>2j$.}\]
+The well known \emph{$\Lambda$-algebra} is the unital associative algebra generated by $\lambda_i$ for $i\geq0$, subject to relations \[\lambda_j\lambda_i=\sum_{k=0}^{(i-2j)/2-1}\binom{i-2j-2-k}{ k}\lambda_{i-j-1-k}\lambda_{2j+1+k}\textup{\ for $i>2j$.}\]
 We say that a sequence $I=(i_\ell,\ldots,i_1)$ of non-negative integers is \emph{$\Lambda$-admissible} if $i_{j+1}\leq 2i_j$ for $1\leq j <\ell$. 
 For any sequence $I=(i_\ell,\ldots,i_1)$, if we write $\lambda_I$ for the element $\lambda_{i_1}\cdots \lambda_{i_\ell}$ in $\Lambda$, then the $\Lambda$-algebra has the evident admissible basis, and we may make sense of the symbol $\produces{I}{J}{\Lambda}$. Note that the ordering of the generators in $\lambda_I$ and $\delta_I$ are opposite, for consistency with the fact that we write the $\lambda$-operations on $\pi_*L$ \emph{on the right}. Thus, we may think of $\lambda_I$ as the composite operator  
 \[\pi_{n}L\overset{\lambda_{i_1}}{\to}\pi_{n+i_1}L\overset{\lambda_{i_2}}{\to}\cdots \overset{\lambda_{i_\ell}}{\to}\pi_{n+i_1+\cdots +i_\ell}L,\]
@@ -3605,7 +3592,7 @@ He also defines a natural operation $\beta:H_{\algs}^0A\to H_{\algs}^1A$. Note t
 \item there holds the following \emph{Cartan formula}:  for all $x,y\in   H^*_{\algs}A$ and $i\geq0$,
 \[[x,P^iy]=0;\]
 \item \label{yeah H is a Pmodule}the \emph{$P$-Adem relations} hold: if $i\geq 2j$, then
-\[P^iP^jx=\sum_{s=i-j+1}^{i+j-2}{2s-i-1\choose s-j}P^{i+j-s}P^sx.\]
+\[P^iP^jx=\sum_{s=i-j+1}^{i+j-2}\binom{2s-i-1}{ s-j}P^{i+j-s}P^sx.\]
 \end{enumerate}
 \end{prop}
 In this case, \emph{(\ref{yeah H is a Pmodule})} \emph{does} state that $H^*_{\algs}A$ is a left module over $\Palg$, the \emph{Steenrod algebra for commutative algebras over $\Ftwo $} of $\Palg$-algebra. This is the unital associative algebra generated by symbols $P^i$ for $i\geq0$, modulo the two sided ideal generated by $P^0$, $P^1$, and the evident \emph{$P$-Adem relations}.
@@ -3801,7 +3788,7 @@ The suspension $\bar{W}$ destroys the associative algebra structure but leaves a
 \mu:=\Delta^*\circ\ExtCohProd:\bigl(S_2(\pi^*\dual(\bar{W}UL))^{n}\overset{\ExtCohProd}{\to} \pi^nS_2\dual(\bar{W}UL)\to \pi^n\dual S^2(\bar{W}UL)\overset{\Delta^*}{\to}\pi^n\dual (\bar{W}UL)\bigr).
 \end{gather*}
 The operations here make $H^*_{\bar{W}}L$ a module over the \emph{homogeneous Steenrod algebra}, which is the usual mod 2 Steenrod algebra `with $\Sq^0$ set to zero'. That is, the \emph{homogeneous Steenrod algebra} is the unital associative algebra $\LieSteen$ generated by symbols $\Sq^j$ for $j\geq1$, subject to the \emph{homogeneous $\Sq$-Adem relation}:
-\[\Sq^i\Sq^j=\sum_{k=1}^{\lfloor i/2\rfloor}{j-k-1\choose i-2k}\Sq^{i+j-k}\Sq^k\textup{\ for $i<2j$.}\]
+\[\Sq^i\Sq^j=\sum_{k=1}^{\lfloor i/2\rfloor}\binom{j-k-1}{ i-2k}\Sq^{i+j-k}\Sq^k\textup{\ for $i<2j$.}\]
 We will only ever work with the \emph{homogeneous} Steenrod algebra and the \emph{homogeneous} $\Sq$-Adem relation, and so may omit the word \emph{homogeneous} if we desire.
 
 This algebra is Koszul dual to the \emph{opposite} of the $\Lambda$-algebra (c.f.\ \ref{Homotopy operations for simplicial Lie algebras}). There is an index shift in this duality, so that $\Sq^i$ corresponds to $\lambda_{i-1}$ for $i\geq1$ \citeBOX[\S7.1]{PriddyKoszul.pdf}.
@@ -4450,7 +4437,7 @@ is nullhomotopic, using a similar method to that used in the proof of Propositio
 \[(S_2V)^{t-1}\underset{\smash{\alpha}}{\overset{[\,,\,]}{\to}} (\quadgrad{2}F^{\calw(0)}V)^{t}\underset{\smash{\beta}}{\overset{P^i}{\mono}} (F^{(4)}_{\calw(0)}V)^{t+i+1},\]
 whose maps we have labeled $\alpha$ and $\beta$ for convenience.
 The map $\beta|_{\im(\alpha)}$ is not a monomorphism when $i=t-1$ is even, as in this case, for any $v\in V^{i/2}$,
-\[P^i[v,v]=P^{i}P^{i/2}v=\textstyle\sum_{k=i/2+1}^{3i/2-2}{2(k-i/2)-1\choose k-i/2}P^{3i/2-k}P^kv=0,\]
+\[P^i[v,v]=P^{i}P^{i/2}v=\textstyle\sum_{k=i/2+1}^{3i/2-2}\binom{2(k-i/2)-1}{ k-i/2}P^{3i/2-k}P^kv=0,\]
 as each expression $P^kv$ in the sum vanishes by the unstableness condition.
 However, the $\ker(\beta|_{\im(\alpha)})$ is contained in $\ker(\quadratic_{\calw(0)})$, 
 and $\im(\beta\circ\alpha)$ does naturally split off as a direct summand of $(F^{(4)}_{\calw(0)}V)^{t+i+1}$.
@@ -4529,12 +4516,12 @@ The map $\overline{f}$ fails to descend to a well-defined map  $F^{\calMhv(n+1)}
 %is sent to
 %%\[\Sqh^{i+2s_n}\Sqh^{j+s_n}f(w)-\sum_{k=0}^{\lfloor i/2\rfloor}{j-k-1\choose i-2k}\Sqh^{i+j-k+2s_n}\Sqh^{k+s_n}f(w)\]
 \begin{alignat*}{2}
-\overline{f}\Bigl(\Sqh^i&\Sqh^jw-\textstyle\sum_{k=0}^{\lfloor i/2\rfloor}{j-k-1\choose i-2k}\Sqh^{i+j-k}\Sqh^{k}w\Bigr)\\
-{}:={}&\Sqh^{i+2s_n}\Sqh^{j+s_n}\overline{f}(w)-\textstyle\sum_{k=0}^{\lfloor i/2\rfloor}{j-k-1\choose i-2k}\Sqh^{i+j-k+2s_n}\Sqh^{k+s_n}\overline{f}(w)\\
+\overline{f}\Bigl(\Sqh^i&\Sqh^jw-\textstyle\sum_{k=0}^{\lfloor i/2\rfloor}\binom{j-k-1}{ i-2k}\Sqh^{i+j-k}\Sqh^{k}w\Bigr)\\
+{}:={}&\Sqh^{i+2s_n}\Sqh^{j+s_n}\overline{f}(w)-\textstyle\sum_{k=0}^{\lfloor i/2\rfloor}\binom{j-k-1}{ i-2k}\Sqh^{i+j-k+2s_n}\Sqh^{k+s_n}\overline{f}(w)\\
 {}={}&
-\Sqh^{i+2s_n}\Sqh^{j+s_n}\overline{f}(w)-\textstyle\sum_{k=s_n}^{\lfloor (i+2s_n)/2\rfloor}{j+s_n-k-1\choose i+2s_n-2k}\Sqh^{(i+2s_n)+(j+s_n)-k}\Sqh^{k}\overline{f}(w)\\
-{}={}&\textstyle\sum_{k=0}^{s_n-1}{j+s_n-k-1\choose i+2s_n-2k}\Sqh^{(i+2s_n)+(j+s_n)-k}\Sqh^{k}\overline{f}(w)\\
-{}=\makebox[0cm][r]{$:$}{}&\textstyle\sum_{k=0}^{s_n-1}{j+s_n-k-1\choose i+2s_n-2k}\overline{f}(\Sqh^{i+j+2(s_n-k)+1}\Sqv^{k}w),
+\Sqh^{i+2s_n}\Sqh^{j+s_n}\overline{f}(w)-\textstyle\sum_{k=s_n}^{\lfloor (i+2s_n)/2\rfloor}\binom{j+s_n-k-1}{ i+2s_n-2k}\Sqh^{(i+2s_n)+(j+s_n)-k}\Sqh^{k}\overline{f}(w)\\
+{}={}&\textstyle\sum_{k=0}^{s_n-1}\binom{j+s_n-k-1}{ i+2s_n-2k}\Sqh^{(i+2s_n)+(j+s_n)-k}\Sqh^{k}\overline{f}(w)\\
+{}=\makebox[0cm][r]{$:$}{}&\textstyle\sum_{k=0}^{s_n-1}\binom{j+s_n-k-1}{ i+2s_n-2k}\overline{f}(\Sqh^{i+j+2(s_n-k)+1}\Sqv^{k}w),
 \end{alignat*}
 which is in filtration $s_{n+1}+i+j+2(s_n+1-k)>s_{n+1}+i+j$ (the second equation holds by simply shifting the dummy variable $k$, the third by an Adem relation in the codomain).
 %This quantity is non-zero, but is written as the image under $f$ of an element of filtration 
@@ -5973,7 +5960,7 @@ At least for $i>s+2$, $\Sqh^ix=0$. The results for the operations $\Sqh^0x$ and 
 
 
 \begin{cor}[(of Proposition \ref{Prop on delta external})]
-%\label{Prop on delta external composed with lift}
+\label{cor on delta external composed with lift}
 Suppose $r\geq1$, $x\in \E{}{r}{\calx}{s}{t}$ and $2\leq i\leq \max\{t-s,t-(r-1)\}$, so that $\deltav_ix $ is defined. Then $\deltav_i d_r x$ is defined, and 
 \[d_r\deltav_i(x)+ \deltav_i(d_rx)=\begin{cases}
 \Sqh^{t-i+2}(x),&\textup{if $i>t-s$ and $r =t-i+1$};\\
@@ -9050,6 +9037,35 @@ If $M$ has bracket zero, then the differential on the cohomological differential
 \printbibliography
 \end{bibliog}
 
+
+\begin{random junk}
+
+\SubsectionOrSection{Throatclearing}
+
+Given a bisimplicial vector space $V_{s,t}$, we obtain a double chain complex $N_sN_tV$. There is a first quadrant homotopy spectral sequence $nope{r}{}{V}{}{s,t}$, with $nope{2}{}{V}{}{s,t}=\pi\uhor_s\pi\uver_tV$, converging to $\pi_{s+t}\diag{ V}$.
+There is a first quadrant cohomotopy spectral sequence $\Edown{r}{V}{s,t}{}$, with $\Edown{2}{V}{s,t}{}=\dual(\pi\uhor_s\pi\uver_tV)$, converging to $\dual(\pi_{s+t}\diag{ V})$.
+
+Given a cosimplicial simplicial vector space  $V_{s,t}$, we obtain a mixed chain complex $N^sN_tV$.\\
+There is a second quadrant homotopy spectral sequence $nope{r}{}{V}{s}{t}$, with $nope{2}{}{V}{s}{t}=\pi\dhor^s\pi\uver_tV$, which will sometimes converge to $\pi_{t-s}\Tot V$.
+
+
+\noindent first quadrant homotopy --- Stover's van Kampen\\
+first quadrant cohomology --- Serre sseq, our GSSeqs\\
+second quadrant homotopy --- Adams or Bousfield-Kan spectral sequences\\
+second quadrant cohomology --- Dwyer's work Eilenberg-Moore
+
+
+
+%\TODOCOMMENT[inline]{
+%Note that the forgetful functor $\calw(0)\to\calU(0)$ does not preserve almost free simplicial objects! However, it does preserve levelwise free simplicial objects, which create the right homology groups (see PRLieAlgs.tex). Thus there is a disconnect in the number of available operations on the Bousfield-Kan $E_2$ and on the first Koszul resolution.}
+
+
+%\TODOCOMMENT[inline]{examples - explain Lie stuff's Koszul duality in terms of Goerss' work}
+
+
+
+
+\end{random junk}
 
 
 \end{document}
