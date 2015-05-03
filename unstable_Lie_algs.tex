@@ -1,6 +1,6 @@
 % !TEX root = z_output/unstable_Lie_algs.tex
 \documentclass[11pt]{amsart} \renewcommand{\baselinestretch}{1.2}
-%\newcommand{\IncludeAll}{}%
+\newcommand{\IncludeAll}{}%
 \newcommand{\xShrinkPages}{}%
 \newcommand{\xPostponeContents}{}%
 %%%%%%%%%%%%%%%%%%% 
@@ -12,8 +12,8 @@
 \ifx\IncludeAll\undefined\else\renewcommand{\ooooo}[2][]{\wooooo{#2}}\fi
 \ooooo[]{ThankS}
 \ooooo[	ct]{Contents Page}
-\wooooo[	 1]{Introduction}
-\ooooo[	 2]{Conventions and notation}
+\ooooo[	 1]{Introduction}
+\wooooo[	 2]{Conventions and notation}
 \ooooo[	 3]{Pi-algebras and cohomology algebras}
 \ooooo[	 4]{Bousfield-Kan spectral sequence}
 \ooooo[	 5]{Constructing homotopy operations}
@@ -402,6 +402,7 @@ url=false,doi=false,isbn=false,eprint=false]{biblatex}%
 \newcommand{\algCat}{\calc}
 \newcommand{\trip}[3]{{#1}_{\smash{#2}}^{\smash{#3}}}
 \newcommand{\barConstructionMightAbbreviate}{b}
+\newcommand{\bdyinc}{in}
 
 \newcommand{\BKSS}{BKSS}
 \newcommand{\CFSS}{CFSS}
@@ -944,10 +945,13 @@ Using the operations on the \BKSS\ we conjecture the full structure of the spect
 
 \SubsectionOrSection{Universal algebras}
 \label{Universal algebras}
-In this thesis we will be dealing with various categories $\calc$ of universal graded algebras over $\Ftwo $. Following \citeBOX[\S2.1]{Blanc_Stover-Groth_SS.pdf}, these are categories whose objects are $G$-graded $\Ftwo $-vector spaces $X=\{X_g\}_{g\in G}$, for some set $G$ of gradings, equipped with a set of operators of the form $X_{g_1}\times \cdots \times X_{g_n}\to X_k$ (with $n\geq1$)  satisfying a set identities, and whose morphisms are graded vector space maps preserving this structure. We assume that the vector space addition  maps $X_g\times X_g\to X_{g}$ are included in the set of operators, in order that the morphisms in $\calc$ are linear maps. Note that we have explicitly excluded nullary operations. 
+In this thesis we will be dealing with various categories $\calc$ of universal graded algebras over $\Ftwo $, which we will refer to as algebraic categories. The relevant examples include a number of categories of graded associative algebras, commutative algebras and Lie algebras,  categories of graded unstable modules and unstable algebras. We'll give the background on such categories of universal algebras in this section.
 
-It need not  be true that all of the defining operators must be linear, but in each of our examples, $\calc$ will be monadic over the category of $G$-graded $\Ftwo $-vector spaces. To explain this, there is a forgetful functor $U^\calc:\calc\to\vect{}{}$, where $\vect{}{}$ is the category of $G$-graded $\Ftwo $-vector spaces, and $U^{\calc}$ admits a left adjoint  $F^\calc:\vect{}{}\to\calc$. %. The functor $U^{\calc}$ will always be monadic, in the sense that 
-When the natural comparison functor from $\calc$ to the category of algebras over the monad $U^{\calc}F^{\calc}$ on $\vect{}{}$ is an equivalence, we say that $\calc$ is monadic over $\vect{}{}$.
+
+
+For us, an \emph{algebraic category} is a category whose objects are $G$-graded $\Ftwo $-vector spaces $X=\{X_g\}_{g\in G}$, for some set $G$ of gradings, equipped with a set of operators of the form $X_{g_1}\times \cdots \times X_{g_n}\to X_k$ (with $n\geq1$)  satisfying a set identities, and whose morphisms are graded vector space maps preserving this structure. These defining maps will be referred to as the \emph{$\calc$-structure maps}. This is similar to the definition given in  \citeBOX[\S2.1]{Blanc_Stover-Groth_SS.pdf} of a \emph{category of universal graded algebras}.  %We assume that the vector space addition  maps $X_g\times X_g\to X_{g}$ are included in the set of operators, in order that the morphisms in $\calc$ are linear maps. Note that we have explicitly excluded nullary operations. 
+
+It need not  be true that all of the $\calc$-structure maps must be (multi-)linear in a given presentation of an algebraic category $\calc$, but we will always assume that  $\calc$ is monadic over the category of $G$-graded $\Ftwo $-vector spaces. That is, the forgetful functor $U^\calc:\calc\to\vect{}{}$ will admit a left adjoint  $F^\calc:\vect{}{}\to\calc$, and the natural comparison functor from $\calc$ to the category of algebras over the monad $U^{\calc}F^{\calc}$ on $\vect{}{}$ will be an equivalence.
 
 %graded vector spaces equipped with 
 %
@@ -967,44 +971,41 @@ When the natural comparison functor from $\calc$ to the category of algebras ove
 In our examples, the monad $U^{\calc}F^{\calc}$ will admit an augmentation (of monads) $\epsilon:U^{\calc}F^{\calc}\to\Id$, reflecting homogeneity in the relations defining $\calc$. This augmentation has the monad unit $\eta:\Id\to U^{\calc}F^{\calc}$ as a section, and may be thought of as \emph{projection onto generators}.
 
 
-We will generally omit the functor $U^{\calc}$ from our notation, writing $F^{\calc}$ as shorthand for either the monad $U^{\calc}F^{\calc}$ on $\vect{}{}$ or the comonad $F^{\calc}U^{\calc}$ on $\calc$. We will refer to elements of a free construction $F^\calc U$ using notation such as $f(v_i)$, thought of as a composite $f$ of $\calc$-structure maps applied to generators $v_i\in V\subseteq F^\calc(V)$. We will say that $f(v_i)$ is a \emph{$\calc$-expression}. In this language, the linear maps % for $V\in \vect{}{}$, we have linear maps
+We will generally omit the functor $U^{\calc}$ from our notation, writing $F^{\calc}$ as shorthand for either the monad $U^{\calc}F^{\calc}$ on $\vect{}{}$ or the comonad $F^{\calc}U^{\calc}$ on $\calc$. We will refer to elements of a free construction $F^\calc V$ using notation such as $f(v_i)$, thought of as a composite $f$ of $\calc$-structure maps applied to generators $v_i\in V\subseteq F^\calc(V)$. We will say that $f(v_i)$ is a \emph{$\calc$-expression}. In this language, the linear maps % for $V\in \vect{}{}$, we have linear maps
 \[F^\calc F^\calc V\overset{\mu}{\to} F^\calc V,\ \ V\overset{\eta}{\to}F^\calc V\ \ \textup{and}\ \ F^\calc V\overset{\epsilon}{\to}V, \]
 constituting the augmented monad $F^\calc $ on $\vect{}{}$ may be described as follows: $\mu$ collapses a $\calc$-expression  in $\calc$-expressions into a single $\calc$-expression; $\eta$ sends a vector $v$ to the $\calc$-expression $v$; and $\epsilon$ projects a $\calc$-expression onto those summands to which no (non-trivial) operations have been applied.
 For $X\in \calc$, the comonad structure maps in $\calc$,
 \[F^\calc F^\calc X\overset{\Delta}{\from} F^\calc X\ \ \textup{and}\ \ X\overset{\rho}{\from}F^\calc X,\]
-are as follows: on an expression $f(x_i)$, $\Delta$ returns the same expression $f(x_i)$ in which the $x_i\in X$ are viewed as elements of $F^\calc X$, and $\rho$ is the evaluation map equivalent to the $\calc$-structure on $X$.
+are as follows: on an expression $f(x_i)$, $\Delta=F^{\calc}\eta$ returns the same expression $f(x_i)$ in which the $x_i\in X$ are viewed as elements of $F^\calc X$, and $\rho$ is the evaluation map equivalent to the $\calc$-structure on $X$.
 
 \SubsectionOrSection{The functor $Q^\calc$ of indecomposables}
-Using the augmentation $\epsilon:F^\calc\to\Id$ of monads on $\vect{}{}$, any $V\in\vect{}{}$ becomes an $F^\calc $-algebra, i.e.\ an object of $\calc$. We denote this functor $K^\calc:\vect{}{}\to \calc$; it sends $V\in\vect{}{}$ to \emph{the trivial object on $V$}, which is $V$ equipped with coaction map the projection $\epsilon:F^{\calc}V\to V$. Whenever we say \emph{trivial} in what follows, we will mean \emph{having no non-zero operations}, and not \emph{equal to zero}.
+Using the augmentation $\epsilon:F^\calc\to\Id$ of monads on $\vect{}{}$, any $V\in\vect{}{}$ becomes an $F^\calc $-algebra, i.e.\ an object of $\calc$. We denote this functor $K^\calc:\vect{}{}\to \calc$; it sends $V\in\vect{}{}$ to \emph{the trivial object on $V$}, which is $V$ equipped with coaction map the projection $\epsilon:F^{\calc}V\to V$. Whenever we say \emph{trivial} in this thesis, we will mean \emph{having no non-zero operations}, and not \emph{equal to zero}.
 
 In each of our examples,  $K^{\calc}$ has a left adjoint, $Q^{\calc}:\calc\to\vect{}{}$, which sends $X\in\calc$ to \emph{the quotient of $X$ by the image of its non-trivial operations}. %More precisely, $K^\calc$ sends any object $V\in\vect{+}{r}$ to the $U^{\calc}F^\calc $-algebra whose structure map is $\epsilon_V:U^{\calc}F^\calc V\to V$. 
 %The functor $Q^{\calc}$ sends $X\in \calc$ with structure map $\rho:F^\calc U^\calc X\to X$ to the coequalizer in $\vect{+}{r}$ of the maps $U^\calc\rho$ and $\epsilon_{U^\calc X}$. \emph{or, less correctly}
 The functor $Q^{\calc}$ sends $X\in \calc$ to the coequalizer in $\vect{}{}$ of $\rho,\epsilon:F^\calc X\to X$.
 
-Note that $F^\calc$ is a section of $Q^{\calc}$, since $Q^{\calc}\circ F^{\calc}$ is adjoint to $U^\calc K^\calc$, which is obviously the identity.
+Note that $F^\calc$ is a section of $Q^{\calc}$, since $Q^{\calc} F^{\calc}$ is adjoint to $U^\calc K^\calc=\Id$.
 
 \SubsectionOrSection{Quillen's model structure on $s\calc$ and the bar construction}\label{ssec: quillen model and bar construction}
-For any of the algebraic categories $\calc$ appearing in this thesis we use Quillen's simplicial model category structure on the category $s\calc$ \cite{QuillenHomAlg.pdf}, \cite{MillerSullivanConjecture.pdf}, or \cite{Blanc_Stover-Groth_SS.pdf}. In this structure, the weak equivalences (fibrations) are the maps which are weak equivalences (fibrations) of simplicial abelian groups, so that every object is fibrant. 
+For any of the algebraic categories $\calc$ appearing in this thesis we use Quillen's simplicial model category structure on the category $s\calc$ of simplicial objects of $\calc$ \cite{QuillenHomAlg.pdf}, \cite{MillerSullivanConjecture.pdf},  \cite{Blanc_Stover-Groth_SS.pdf}. In this structure, the weak equivalences (fibrations) are the maps which are weak equivalences (fibrations) of simplicial abelian groups, so that every object is fibrant. 
 
- A simplicial object $X$ is \emph{almost free} if there are subspaces $V_n\subseteq X_n$ for each $n\geq0$ such that the composite $F^\calc  V_n\to F^\calc  X_n\overset{\rho}{\to} X_n$ is an isomorphism for all $n$, and such that the subspaces $V_n$ are preserved by all of the degeneracies and face maps of $X$ except for $d_0$. An almost free object is cofibrant, and every cofibrant object is a retract of an almost free object \citeBOX[\S3]{MillerSullivanConjecture.pdf}. 
+ A simplicial object $X\in s\calc$ is \emph{almost free} if there are subspaces $V_n\subseteq X_n$ for each $n\geq0$ such that the composite $F^\calc  V_n\to F^\calc  X_n\overset{\rho}{\to} X_n$ is an isomorphism for all $n$, and such that the subspaces $V_n$ are preserved by all of the degeneracies and face maps of $X$ except for $d_0$. An almost free object is cofibrant, and every cofibrant object is a retract of an almost free object \citeBOX[\S3]{MillerSullivanConjecture.pdf}. 
 
-There is a richer notion, that of an almost free map --- a map $X\to Y$ such that $Y_n$ contains a subspace $V_n$ for each $n$ such that the $V_n$ are preserved by all faces and degeneracies except for $d_0$, and such that the natural map $X_n\sqcup F^\calc(V_n) \to Y_n$ is an isomorphism for each $n$. An almost free map is cofibrant, and every cofibrant map is a retract of an almost free map.
+There is a richer notion, that of an \emph{almost free map}, which is  a map $X\to Y$ in $s\calc$ such that $Y_n$ contains a subspace $V_n$ for each $n$ such that the $V_n$ are preserved by all faces and degeneracies except for $d_0$, and such that the natural map $X_n\sqcup F^\calc(V_n) \to Y_n$ is an isomorphism for each $n$. An almost free map is a cofibration, and every cofibration is a retract of an almost free map.
 
-A \emph{cofibrant replacement functor} for $s\calc$  is an endofunctor $f$ of $s\calc$ whose image consists only of cofibrant objects equipped with  a natural acyclic fibration $\epsilon:f\Rightarrow \Id $. One classical way to define such a functor is as follows.
-
-%For a simplicial resolution functor $\calc\to s\calc$, we will often use 
-Consider the standard simplicial bar construction $\calc\to s\calc$ arising from the $F^\calc\dashv U^\calc$ adjunction \cite{BlumRiehlResolutions.pdf}. More explicitly, given $X\in\calc$, we define $B^\calc X\in s\calc$ by iterated application of the comonad $F^\calc$ to $X\in \calc$:
-\[B_s^\calc X=(F^\calc)^{s+1}X.\]
-The face maps are given by the formula $d_i=(F^\calc)^i\rho$, and the degeneracies by $s_i=(F^\calc)^i\Delta$. %, where $\rho$ and $\Delta$ are respectively the counit and diagonal of the comonad $F^\calc U^\calc$. 
-This object is almost free, with $B_s^\calc X$ generated by its subspace $V_s=(F^\calc )^sX$, moreover, it is standard \citeBOX[\S4]{BlumRiehlResolutions.pdf} that the augmentation $B^\calc X\to X$ is an acyclic fibration.
-
-The construction generalizes to yield a cofibrant replacement functor $B^{\calc}$ on $s\calc$: one applies  $B^{\calc}:\calc\to s\calc$ levelwise to obtain a bisimplicial object, and then takes the diagonal. A standard spectral sequence argument shows that this is a cofibrant replacement functor. We may write $B^{\calc}$ for any of the functors $\calc\to s\calc$, $s\calc\to ss\calc$ and $s\calc\to s\calc$, depending on context.
+A \emph{cofibrant replacement functor} for $s\calc$  is an endofunctor $f$ of $s\calc$ equipped with  a natural acyclic fibration $\epsilon:f\Rightarrow \Id $ such that the image of $f$ consists only of cofibrant objects. One classical such functor is the standard \emph{comonadic simplicial bar construction}  arising from the $F^\calc\dashv U^\calc$ adjunction.
+As a functor $B^\calc :\calc\to s\calc$ it is defined by iterated application of the comonad $F^\calc$ to $X\in \calc$:
+\[B_s^\calc X=(F^\calc)^{s+1}X,\]
+with face maps given by $d_i=(F^\calc)^i\rho$, and degeneracies by $s_i=(F^\calc)^i\Delta$. %, where $\rho$ and $\Delta$ are respectively the counit and diagonal of the comonad $F^\calc U^\calc$. 
+This object is almost free, with $B_s^\calc X$ generated by its subspace $V_s=(F^\calc )^sX$, moreover, it is standard \citeBOX[\S4]{BlumRiehlResolutions.pdf} that the augmentation $B^\calc X\to X$ is an acyclic fibration. This functor may be prolonged to a functor $B^\calc :s\calc\to ss\calc$, and by taking the diagonal we obtain an endofunctor $B^{\calc}$ of $s\calc$. A standard spectral sequence argument shows that this endofunctor is a cofibrant replacement functor.
+%The construction generalizes to yield a cofibrant replacement functor $B^{\calc}$ on $s\calc$: one applies  $B^{\calc}:\calc\to s\calc$ levelwise to obtain a bisimplicial object, and then takes the diagonal. A standard spectral sequence argument shows that this is a cofibrant replacement functor. We may write $B^{\calc}$ for any of the functors $\calc\to s\calc$, $s\calc\to ss\calc$ and $s\calc\to s\calc$, depending on context.
 
 
 
 
 \SubsectionOrSection{Categories of graded $\Ftwo $-vector spaces and linear dualization}
-In order that we can be more specific about the types of gradings we have in mind, in this section we introduce  notation for the key categories of graded vector spaces. We will still sometimes write $\vect{}{}$ for a generic category of graded vector spaces, or for the category of ungraded vector spaces, as necessary.
+In this section we introduce  notation for the key categories of graded vector spaces. We will write $\vect{}{}$ for a generic category of graded vector spaces or for the category of ungraded vector spaces as convenient.
 %We write $\vect{}{}$ for the category of ungraded vector spaces.
 %That said, when we are introducing general notions, we will use the symbol $\vect{}{}$ to refer either to this category or to one of the categories of graded vector spaces which we now introduce.   %We will write $\vect{}{}$ for a generic category of $\Ftwo $-vector spaces, either graded or ungraded. 
 
@@ -1014,21 +1015,23 @@ The category $\vect{q}{r}$ is equipped with a tensor product:
 \[(U\otimes V)^{t_q,\ldots,t_1}_{s_r,\ldots,s_1}=\bigoplus_{s'_i+s''_i=s_i,\,t_j'+t_j''=t_j}U^{t'_q,\ldots,t'_1}_{s'_r,\ldots,s'_1}\otimes V^{t''_q,\ldots,t''_1}_{s''_r,\ldots,s''_1}.\]
 
 We will often discuss maps between graded vector spaces which do not preserve degrees. %For a near-example from classical topology, take the whitehead product \[\pi_{t_1}X\times\pi_{t_2}X\to \pi_{t_1+t_2-1}.\] Writing $\pi_{\geq2}X$ for the graded abelian group $\bigoplus_{i\geq 2}\pi_iX$, this product produces a grading-preserving map $(\pi_{\geq2}X)^{\otimes2}\to\Sigma\pi_{\geq2}X$, for $\Sigma$ the evident suspension operator on homologically graded abelian groups.
-Although we could encode such maps as grading-preserving maps between appropriate suspensions, we will systematically avoid being so systematic. For example, we will often write $V\otimes V\to V$ for a map which in fact adds one to certain gradings of $V$, and will avoid confusion by explicitly stating the effect of such a map on degrees.
+Although we could encode such maps as grading-preserving maps between appropriate suspensions, it will not be helpful to be so systematic. For example, we will often write $V\otimes V\to V$ for a map which in fact adds one to certain gradings of $V$, and will avoid confusion by explicitly stating the effect of such a map on degrees.
 
-We will often need to consider the linear dual of a vector space $V$, and the standard symbol, $V^*$, will cause ambiguity. Indeed, we will already be using superscripts intensively, so we opt for a modifier written prefix, defining the dualization functor
+We will often need to consider the linear dual of a vector space $V$, and the standard symbol, $V^*$, will cause ambiguity, due to our already intensive use of superscripts. Instead we opt for a modifier written prefix, defining the dualization functor
 $\dual:(\vect{q}{r})^\textup{op}\to\vect{r}{q}$ by:
 \[(\dual V)_{t_q,\ldots,t_1}^{s_r,\ldots,s_1}:=\hom(V^{t_q,\ldots,t_1}_{s_r,\ldots,s_1},\Ftwo ).\]
 We will shortly define cohomology functors
-$H_{\calc}^*X:=\dual H^{\calc}_*X$, and we will use the position of the asterisk to demonstrate which of homology and cohomology we mean. This is not precisely an exception to our convention, but was worth mentioning.
+$H_{\calc}^*X:=\dual H^{\calc}_*X$, and we will use the position of the asterisk to indicate which of homology and cohomology we mean. This is not precisely an exception to our convention, but was worth mentioning.
 
-Often, the vector spaces we are interested in will support an \emph{extra} grading, the \emph{quadratic grading}, so called because certain operations derived from an underlying squaring operation tend to double this extra grading. We do not think of the quadratic grading as either homological or cohomological, so we write it prefix:
+Often, the vector spaces we are interested in will support an \emph{extra} grading, the \emph{quadratic grading}, so called because certain operations derived from an underlying quadratic operation tend to double this extra grading. We do not think of the quadratic grading as either homological or cohomological, so we write it prefix:
 \[V=\textstyle\bigoplus_{k\geq1}q_kV.\]
 We write $\quadgrad{}\vect{q}{r}$ for the category of objects of $\vect{q}{r}$ equipped with this extra grading.
 
 A common pattern for us will be to consider vector spaces with $r$ non-negative homological gradings and a single \emph{strictly positive} cohomological grading:
 \[V=\bigoplus_{s_r,\ldots,s_1\geq0,\,t\geq 1}V^{t}_{s_r,\ldots,s_1},\]
-and we write $\vect{+}{r}$ for the category of such objects. Similarly, there is a category $\vect{r}{+}$, and  dualization is a functor $\dual:(\vect{+}{r})^\textup{op}\to\vect{r}{+}$.
+and we write $\vect{+}{r}$ for the category of such objects. For the rest of this chapter we will often use gradings of this type, simply because they will be used so extensively later in the thesis.
+
+Similarly, there is a category $\vect{r}{+}$, and  dualization is a functor $\dual:(\vect{+}{r})^\textup{op}\to\vect{r}{+}$.
 
 
 \SubsectionOrSection{The Dold-Kan correspondence}\label{The Dold-Kan correspondence}
@@ -1042,11 +1045,11 @@ N_nV&:=\textstyle\bigcap_{0< i\leq n}\ker(d_i:V_n\to V_{n-1})&& \textup{ with di
 N_n^\div V&:=V_n/\textup{Deg}_n V&& \textup{ with differential }d=\textstyle\sum_{i=0}^{n}d_i.
 \end{alignat*}
 There are evident inclusions of $N_*V$ and $\Nop_*V$ into $C_*V$, and a projection of $C_*V$ onto $N_*^\div V$, and all of these maps are weak equivalences. Moreover, the composite $N_*V\to N_*^\div V$ is an isomorphism (as is the composite from $\Nop_*V$). It will be helpful to have an explicit formula for the composite
-\[C_*V\to N_n^\div V \overset{\cong}{\to}N_nV. \]
+\[C_*V\to N_n^\div V \cong N_nV. \]
 \begin{lem}
 \label{the map nml}
 The \emph{normalization} map
-\[\textup{nml}=(1+s_0d_1)(1+s_1d_2)\cdots (1+s_{n-1}d_n):V_n\to V_n\]
+\[\textup{nml}=(\Id+s_0d_1)(\Id+s_1d_2)\cdots (\Id+s_{n-1}d_n):V_n\to V_n\]
 is an idempotent chain complex endomorphism with image $N_*V$ and kernel the degenerate $n$-simplices of $V$, so that there is a commuting diagram
 \[\xymatrix@R=4mm{
 N_nV\ar@{ >->}[r]\ar@{=}[d]&%r1c1
@@ -1062,21 +1065,21 @@ N^\div_nV%r2c3
 }\]
 \end{lem}
 \begin{proof}
-It is obvious that $\textup{nml}$ restricts to the identity on $N_nV$, and that $\textup{nml}-\Id$ has image consisting of degenerate simplices. By the simplicial identities, for $1\leq i\leq n$:
-\[d_i(1+s_{i-1}d_i)=d_i+d_is_{i-1}d_i=d_i+\Id d_i=0.\]
+It is obvious that $\textup{nml}$ restricts to the identity on $N_nV$, and that $(\textup{nml}-\Id)$ has image consisting of degenerate simplices. By the simplicial identities, for $1\leq i\leq n$:
+\[d_i(\Id+s_{i-1}d_i)=d_i+d_is_{i-1}d_i=d_i+\Id \,d_i=0.\]
 As for $1\leq j<i$, we also have
-\[d_i(1+s_{j-1}d_j)%=d_i+d_is_{j-1}d_j
-=d_i+s_{j-1}d_{i-1}d_j=(1+s_{j-1}d_j)d_i,\]
+\[d_i(\Id+s_{j-1}d_j)%=d_i+d_is_{j-1}d_j
+=d_i+s_{j-1}d_{i-1}d_j=(\Id+s_{j-1}d_j)d_i,\]
 this proves that $d_i\circ\textup{nml}=0$ for $1\leq i\leq n$, or that  $\textup{nml}$ has image inside $N_n V$. Thus $\textup{nml}$ is an idempotent with image $N_nV$. As $N_nV\to  N^\div_nV$ is as isomorphism, the rest is easy.
 \end{proof}
 
 
-Each $N_nV$ retains the internal gradings of $V$, and the functor $N_*$ appears in:
-\begin{prop}[(The Dold-Kan correspondence), {\citeBOX[\S III.2]{goerss-jardine.pdf}}]
+Each $N_nV$ retains the internal gradings of $V$, and the functor $N_*$ appears in the celebrated  Dold-Kan correspondence {\citeBOX[\S III.2]{goerss-jardine.pdf}}:
+\begin{prop}[(The Dold-Kan correspondence)]
 There is an adjoint equivalence of categories:
 \[N_*:s\vect{+}{r}\rightleftarrows \complexes \vect{+}{r}:\Gamma,\]
-under which the homotopy groups of $V\in s\vect{+}{r}$ (as a simplicial set)  are isomorphic to the homology groups of $N_*V$:
-\[(\pi_n V)_{s_r,\ldots,s_1}^t=(H_n N_*V)_{s_r,\ldots,s_1}^t.\]
+under which the homotopy groups of $V\in s\vect{+}{r}$ (as a simplicial set)  are naturally isomorphic to the homology groups of $N_*V$:
+\[(\pi_n V)_{s_r,\ldots,s_1}^t\cong (H_n N_*V)_{s_r,\ldots,s_1}^t.\]
 \end{prop}
 
 
@@ -1085,7 +1088,7 @@ under which the homotopy groups of $V\in s\vect{+}{r}$ (as a simplicial set)  ar
 %There are three equivalent definitions of $N_*V$. We will almost always use the description of $N_nV$ as the mutual kernel of $d_1,\ldots,d_n$ in $V_n$, with differential $d_0$ (rather than the equivalent definition as a quotient of the unnormalized complex $C_nV=V_n$), and write $ZN_nV$ for the mutual kernel of $d_0,\ldots,d_n$. 
 A cycle in $N_nV$ is an element $x\in V_n$ such that $d_ix=0$ for $0\leq i\leq n$. We write $ZN_nV$ for this group of cycles, referring to elements of $ZN_*V$ as \emph{normalized cycles}. Note that $Z\Nop_*V=ZN_*V$ is the same group of normalized cycles.
 
-For $x$ a cycle in any of the four chain complexes associated with $V$, we will write $\overline{x}$ for the equivalence class of $x$ in $\pi_*V$.
+For $x$ a cycle in any of the four homotopy equivalent chain complexes calculating $\pi_*V$, we will write $\overline{x}$ for the equivalence class of $x$ in $\pi_*V$.
 
 It will often be helpful to remove the notational distinction between the chain complex dimension $n$ and the other homological dimensions $s_r,\ldots,s_1$. That is, we may view $\pi_*V$ as a single object of $\vect{+}{r+1}$, defined by
 \[(\pi_*V)^t_{s_{r+1},\ldots,s_1}:=(\pi_{s_{r+1}}V)^t_{s_{r},\ldots,s_1}.\]
@@ -1142,13 +1145,13 @@ Now for any collection of indices $s_{r+1},\ldots,s_1\geq0$ and $t\geq1$, define
 }
 \end{gather*}
 Here $z$ and $h$ denote are both to lie in internal cohomological grading $t$ and homological gradings $s_r,\ldots,s_1$.
-There is an evident inclusion $\imath:\mathbb{K}^{t}_{s_{r+1},s_r,\ldots,s_1}\to C\mathbb{K}^{t}_{s_{r+1},s_r,\ldots,s_1}$. For any $V\in s\vect{+}{r}$, we can identify the subspaces of cycles and boundaries with hom-sets:
+There is an evident inclusion $\bdyinc:\mathbb{K}^{t}_{s_{r+1},s_r,\ldots,s_1}\to C\mathbb{K}^{t}_{s_{r+1},s_r,\ldots,s_1}$. For any $V\in s\vect{+}{r}$, we can identify the subspaces of cycles and boundaries with hom-sets:
 \begin{alignat*}{2}
 \hom_{s\vect{+}{r}}(\mathbb{K}^t_{s_{r+1},\ldots,s_1},V)&\cong (ZN_{s_{r+1}}V)_{s_r,\ldots,s_1}^t\makebox[0cm][l]{ and}\\
 \hom_{s\vect{+}{r}}(C\mathbb{K}^t_{s_{r+1},\ldots,s_1},V)&\cong (N_{s_{r+1}+1}V)_{s_r,\ldots,s_1}^t.
 \end{alignat*}
 %\[\hom_{s\vect{+}{r}}(\commentmathbb{K}^t_{s_r,\ldots,s_1},V)\cong (ZN_{s_{r+1}}V)_{s_r,\ldots,s_1}^t\textup{ and }\hom_{s\vect{+}{r}}(C\commentmathbb{K}^t_{s_{r+1},\ldots,s_1},V)\cong (N_{s_{r+1}+1}V)_{s_r,\ldots,s_1}^t,\]
-Under these isomorphisms the chain complex differential $N_{s_{r+1}+1}V\to ZN_{s_{r+1}}V$ corresponds to $\imath^*$. In fact, $\mathbb{K}^t_{s_{r+1},\ldots,s_1}$ represents $\pi_*(\DASH)t_{s_{r+1},\ldots,s_1}$ in the homotopy category of $s\vect{+}{r}$: in a category of simplicial vector spaces, there is no distinction between spheres and Eilenberg-Mac Lane spaces.
+Under these isomorphisms the chain complex differential $N_{s_{r+1}+1}V\to ZN_{s_{r+1}}V$ corresponds to $\bdyinc^*$. In fact, $\mathbb{K}^t_{s_{r+1},\ldots,s_1}$ represents $\pi_*(\DASH)t_{s_{r+1},\ldots,s_1}$ in the homotopy category of $s\vect{+}{r}$: in a category of simplicial vector spaces, there is no distinction between spheres and Eilenberg-Mac Lane spaces.
 
 A dual theory exists for cosimplicial vector spaces $U$. We will mention the cochain complexes
 \begin{alignat*}{2}
@@ -1160,7 +1163,7 @@ N^n_\subseteq U&:=\textstyle\bigcap_{0\leq i\leq n-1}\ker(s^i:U_n\to U_{n-1})&& 
 There are chain complex maps whose leftward composite is an isomorphism:
 \[N^nU  \from C^nU\from N^n_\subseteq U,\]
 and an explicit normalization map 
-\[\textup{nml}=(1+d^ns^{n-1})\cdots (1+d^2s^1)(1+d^1s^0):C^nU\to N^n_\subseteq U\]
+\[\textup{nml}=(\Id+d^ns^{n-1})\cdots (\Id+d^2s^1)(\Id+d^1s^0):C^nU\to N^n_\subseteq U\]
 with properties dual to the simplicial version. The cohomology of any of these homotopy equivalent cochain complexes defines the \emph{cohomotopy} $\pi^*U$ of $U$.
 
 Homotopy and cohomotopy correspond under dualization as follows.
@@ -1842,11 +1845,11 @@ These are the \emph{spheres in $s\calc$} and \emph{cones on spheres in $s\calc$}
 \end{alignat*}
 for the set of spheres in $\calc$. Note that we were very literal here --- the \emph{spheres} of $s\calc$ are precisely this family of objects, and not the family, say, of cofibrant objects weakly equivalent to some $\mathbb{S}^{\calc,t}_{s_{r+1},\ldots,s_1}$. For $S\in \spheres{\calc}$ we write $CS$ for the corresponding cone.
 
-For any $S\in\spheres{\calc}$, there is an evident cofibration $\imath :S\to CS$. Indeed, for any sphere $S=\mathbb{S}^{\calc,t}_{s_{r+1},\ldots,s_1}$, $S$ contains  a distinguished normalized cycle, the \emph{fundamental cycle}:
+For any $S\in\spheres{\calc}$, there is an evident cofibration $\bdyinc :S\to CS$. Indeed, for any sphere $S=\mathbb{S}^{\calc,t}_{s_{r+1},\ldots,s_1}$, $S$ contains  a distinguished normalized cycle, the \emph{fundamental cycle}:
 \[z\in (ZN_{s_{r+1}}S)_{s_r,\ldots,s_1}^t,\]
 and the cone $CS$ contains a distinguished normalized chain, the \emph{cone on $z$}:
 \[h\in (N_{s_{r+1}+1}CS)_{s_r,\ldots,s_1}^t,\]
-and $\imath$ is defined by the requirement that $\imath(z)=d_0h$.
+and $\bdyinc$ is defined by the requirement that $\bdyinc(z)=d_0h$.
 For any $X\in s\calc$, by adjunction:
 %\[\hom_{s\calc}(F^\calc\commentmathbb{K}^t_{n,s_r,\ldots,s_1},X)\cong (ZN_nX)_{s_r,\ldots,s_1}^t\textup{ and }\hom_{s\calc}(F^\calc C\commentmathbb{K}^t_{n,s_r,\ldots,s_1},X)\cong (N_{n+1}X)_{s_r,\ldots,s_1}^t,\]
 %\begin{gather*}
@@ -1857,7 +1860,7 @@ For any $X\in s\calc$, by adjunction:
 \hom_{s\calc}(\mathbb{S}^{\calc,t}_{s_{r+1},\ldots,s_1},X)&\cong (ZN_{s_{r+1}}X)_{s_r,\ldots,s_1}^t\makebox[0cm][l]{ and}\\
 \hom_{s\calc}(C\mathbb{S}^{\calc,t}_{s_{r+1},\ldots,s_1},X)&\cong (N_{s_{r+1}+1}X)_{s_r,\ldots,s_1}^t,
 \end{alignat*}
-and indeed $i^*$ plays the same role as above, representing the differential of $N_*X$. Moreover, in the homotopy category corresponding to the above model category structure, $\mathbb{S}^{\calc,t}_{n,s_r,\ldots,s_1}$ represents $\pi_n(\DASH)^t_{s_r,\ldots,s_1}$ (c.f.\ \citeBOX[\S1]{MR1089001} or \citeBOX[\S3.1.1]{Blanc_Stover-Groth_SS.pdf}) which is why  we  refer to the objects $\mathbb{S}^{\calc,t}_{n,s_r,\ldots,s_1}$ as spheres.
+and indeed $\bdyinc^*$ plays the same role as above, representing the differential of $N_*X$. Moreover, in the homotopy category corresponding to the above model category structure, $\mathbb{S}^{\calc,t}_{n,s_r,\ldots,s_1}$ represents $\pi_n(\DASH)^t_{s_r,\ldots,s_1}$ (c.f.\ \citeBOX[\S1]{MR1089001} or \citeBOX[\S3.1.1]{Blanc_Stover-Groth_SS.pdf}) which is why  we  refer to the objects $\mathbb{S}^{\calc,t}_{n,s_r,\ldots,s_1}$ as spheres.
 
 \SubsectionOrSection{Homotopy groups and $\calc$-$\Pi$-algebras}\label{homotopy and pialgs}
 By virtue of the algebraic structure possessed by $X$, the homotopy groups $\pi_*X$ possess certain natural algebraic structure, that of a $\calc$-$\Pi$-algebra. Indeed, as any given homotopy group is a representable functor on the homotopy category, natural $N$-ary operations on homotopy groups
@@ -6206,13 +6209,13 @@ The generating subspace $V_{t+t'+1}\subseteq (J_{t,t'})_{t+t'+1}$ has a $t+t'+1$
 The homology long exact sequence shows that $H_*J_{t,t'}$ is three-dimensional, containing classes $ z_t$, $ z_{t'}$ and $h_{t,t'}$. Moreover, there is a co-operation $\Delta$ on $H_{*}^{\calc}$ dual to the $S(\LieOperad)$ structure map on cohomology, and we prove:
 \begin{prop}
 \label{prop on three cell}
-Under $\Delta:H_*^{\calc}J_{t,t'}\to (S^2H_*^{\calc}J_{t,t'})_{*-1}$, $h_{t,t'}\mapsto\imath_t\otimes\imath_{t'}+\imath_{t'}\otimes\imath_t$. All other co-operations on $H_*^{\calc}J_{t,t'}$ are zero.
+Under $\Delta:H_*^{\calc}J_{t,t'}\to (S^2H_*^{\calc}J_{t,t'})_{*-1}$, $h_{t,t'}\mapsto z_t\otimes z_{t'}+ z_{t'}\otimes z_t$. All other co-operations on $H_*^{\calc}J_{t,t'}$ are zero.
 \end{prop}
 \begin{proof}
-The representative $g$ has the property that $d_0(g)=\mu(\Nabla(\imath_t\otimes\imath_{t'}))$ and $d_i(g)=0$ for $i>0$. By Lemma \ref{psi is basically the quadratic part} and the description of $\quadratic_\calc$ in \S\ref{quadratic part section}:
+The representative $g$ has the property that $d_0(g)=\mu(\Nabla( z_t\otimes z_{t'}))$ and $d_i(g)=0$ for $i>0$. By Lemma \ref{psi is basically the quadratic part} and the description of $\quadratic_\calc$ in \S\ref{quadratic part section}:
 \[\psi_\calc(g)=
-\quadratic_\calc(\mu(\Nabla(\imath_t\otimes\imath_{t'})))=
-\trace(\Nabla(\imath_t\otimes\imath_{t'})))\in (S^2Q^\calc J_{t,t'})_{t+t'}.\qedhere\]
+\quadratic_\calc(\mu(\Nabla( z_t\otimes z_{t'})))=
+\trace(\Nabla( z_t\otimes z_{t'})))\in (S^2Q^\calc J_{t,t'})_{t+t'}.\qedhere\]
 \end{proof}
 %Now suppose that $L$ is a (not necessarily zero-square) algebra, and that $\alpha,\beta$ are homotopy classes in $\pi_n (L)$ and $\pi_m (L)$ respectively. Then we will be able to use the complex $J_{n,m}$ to construct a homology class $g_{\alpha,\beta}\in H_{n+m+1}(L)$ whose diagonal is $\alpha\otimes\beta+\beta\otimes\alpha$ [probably just when $L$ is zero square, using the map $L\times L\to L$. Else, get a class in $H(L^2)$ with diagonal $\overline{\alpha}\otimes\overline{\overline{\beta}}+ \overline{\overline{\beta}}\otimes\overline{\alpha}$]. Firstly, note that there is a commuting diagram
 %\[\xymatrix@R=4mm{
@@ -6329,10 +6332,10 @@ Corresponding to the right square is a map $J_{t,t'}\to c_2(Y\times Z)$, and the
 
 The diagram consists of a square, a triangle and a hexagon.
 The square commutes as the horizontal arrows are maps in $\HC{\calc}$, and we can see that the triangle commutes because we understand the $\HC{\calc}$ structure of $H_*(J_{t,t'})$ (and $H^\calc_*(\overline{F}(\alpha,\beta))$ is a map of $\calc$-$H_*$-coalgebras). As all of the maps in the hexagon are natural, we may check that it commutes on the universal example alone: 
-\[(\imath_t,\imath_{t'})\in\hom_{s\calc}(\mathbb{S}^{\calc}_t,\mathbb{S}^{\calc}_t)\times\hom_{s\calc}(\mathbb{S}^{\calc}_{t'},\mathbb{S}^{\calc}_{t'}).\]
+\[( z_t, z_{t'})\in\hom_{s\calc}(\mathbb{S}^{\calc}_t,\mathbb{S}^{\calc}_t)\times\hom_{s\calc}(\mathbb{S}^{\calc}_{t'},\mathbb{S}^{\calc}_{t'}).\]
  That is, it is enough to check that the following hexagon, with a one element set at the top left entry, commutes:
 \[\mathclap{\xymatrix@R=4mm@C=17mm{
-\{(\imath_t,\imath_{t'})\}\ar[d]^-{F}
+\{( z_t, z_{t'})\}\ar[d]^-{F}
 \ar[r]^-{\textup{hur}^{\otimes2}}
 &%r1c1
 \Prim_t(H\mathbb{S}^{\calc}_t)\otimes\Prim_{t'}(H\mathbb{S}^{\calc}_{t'})\ar[r]^-{j^\star_{\HA{\calc}}}
@@ -6345,16 +6348,16 @@ H_{t+t'+1}(\mathbb{S}^{\calc}_t\times \mathbb{S}^{\calc}_{t'})\ar[r]^-{r}
 &%r2c2
 (H\mathbb{S}^{\calc}_t\smashprod  H\mathbb{S}^{\calc}_{t'})_{t+t'+1}
 }}\]
-In this diagram, $j^\star_{\HA{\calc}}$ and $\textup{inc}$ are isomorphisms of 1-dimensional vector spaces, so it is enough to check that $r(F(\imath_t,\imath_{t'}))$ does not lie in the kernel of $\textup{proj}$, i.e.:
-\[r(F(\imath_t,\imath_{t'}))\notin(H\mathbb{S}^{\calc}_t\sqcup H\mathbb{S}^{\calc}_{t'})_{t+t'+1} = H_{t+t'+1}\mathbb{S}^{\calc}_t\oplus H_{t+t'+1}\mathbb{S}^{\calc}_{t'}=0,\]
-yet $\Delta(r(F(\imath_t,\imath_{t'})))=\imath_t \otimes\imath_{t'}+\imath_{t'}\otimes\imath_{t}\neq 0$, using the commuting square and triangle already established.
+In this diagram, $j^\star_{\HA{\calc}}$ and $\textup{inc}$ are isomorphisms of 1-dimensional vector spaces, so it is enough to check that $r(F( z_t, z_{t'}))$ does not lie in the kernel of $\textup{proj}$, i.e.:
+\[r(F( z_t, z_{t'}))\notin(H\mathbb{S}^{\calc}_t\sqcup H\mathbb{S}^{\calc}_{t'})_{t+t'+1} = H_{t+t'+1}\mathbb{S}^{\calc}_t\oplus H_{t+t'+1}\mathbb{S}^{\calc}_{t'}=0,\]
+yet $\Delta(r(F( z_t, z_{t'})))= z_t \otimes z_{t'}+ z_{t'}\otimes z_{t}\neq 0$, using the commuting square and triangle already established.
 \end{proof}
 We record here a useful calculation:
 \begin{lem}
 \label{handy lemma for conn hom}
 For $\alpha:\mathbb{S}^{\calc}_t\to \calx^s$ and  $\beta:\mathbb{S}^{\calc}_{t'}\to \calx^s$, the composite 
 \[\mathbb{S}^{\calc}_t\sqcup \mathbb{S}^{\calc}_{t'}\to J_{t,t'}\overset{\overline{F}(\alpha,\beta)}{\to}c(\calx^s \times \calx^s )\overset{c(\textup{add}\circ(\epsilon^2))}{\to}\calx^s \]
-equals $\widetilde{\epsilon\alpha}\sqcup \widetilde{\epsilon\beta}$. In particular, $(c(\textup{add}\circ(\epsilon^2))\circ \overline{F}(\alpha,\beta))(\mu\nabla(\imath_t\otimes \imath_{t'}))=\overline{\mu}(\nabla(\widetilde{\epsilon\alpha} \otimes\widetilde{\epsilon\beta}))$.% under the composite $J_{t,t'}\to X$.
+equals $\widetilde{\epsilon\alpha}\sqcup \widetilde{\epsilon\beta}$. In particular, $(c(\textup{add}\circ(\epsilon^2))\circ \overline{F}(\alpha,\beta))(\mu\nabla( z_t\otimes  z_{t'}))=\overline{\mu}(\nabla(\widetilde{\epsilon\alpha} \otimes\widetilde{\epsilon\beta}))$.% under the composite $J_{t,t'}\to X$.
 \end{lem}
 \begin{proof}
 We may calculate the restrictions to the two summands individually, and by symmetry, we need only consider:
@@ -6388,17 +6391,17 @@ C\mathbb{S}^{\calc}_{t+i}\ar[r]
 &%r2c1
 \Theta_{t,i}%r2c2
 }\]
-By the same observations as made in \S\ref{three cell complex}, this map is a cofibration, and $H_*^{\calc}\Theta_{t,i}$ has cohomology spanned by $\imath_t$ and $h_{t,i}$ in dimension $t+i+1$. For dimension reasons, $\imath_t$ is primitive. On the other hand:
+By the same observations as made in \S\ref{three cell complex}, this map is a cofibration, and $H_*^{\calc}\Theta_{t,i}$ has cohomology spanned by $ z_t$ and $h_{t,i}$ in dimension $t+i+1$. For dimension reasons, $ z_t$ is primitive. On the other hand:
 \begin{prop}
 \label{prop on two cell delta}
-In $H^*_{\calc}\Theta_{t,i}$, $P^i\imath_t^*=h_{t,i}^*$.
+In $H^*_{\calc}\Theta_{t,i}$, $P^i z_t^*=h_{t,i}^*$.
 \end{prop}
 \begin{proof}
 We will calculate the action of $(P^j)^*$ and $\Delta$ on $h_{t,i}$. By the same methods  as in the proof of Proposition \ref{prop on three cell}:
-\[\psi_\calc(g)=\trace(\Nabla_{t-i}(\imath_t\otimes\imath_t)))\in (S^2Q^\calc \Theta_{t,i})_{t+i},\]
-which represents $\sigma_i^\textup{ext}\imath_t$. so that the defining equation
+\[\psi_\calc(g)=\trace(\Nabla_{t-i}( z_t\otimes z_t)))\in (S^2Q^\calc \Theta_{t,i})_{t+i},\]
+which represents $\sigma_i^\textup{ext} z_t$. so that the defining equation
 \[(\psi_\calc)_*(h_{t,i})=\textstyle\sum_{j}\pi_*(1+T)(y_j\otimes z_j)+\sum_k\sigma_k((P^k)^*h_{t,i})\]
-degenerates to $\sigma_i((P^k)^*h_{t,i})=\sigma_i^\textup{ext}\imath_t$.
+degenerates to $\sigma_i((P^k)^*h_{t,i})=\sigma_i^\textup{ext} z_t$.
 \end{proof}
 
 \SubsectionOrSection{A chain level construction of $\theta^\star_i$}
@@ -6407,7 +6410,7 @@ Let $\calc=\algs$, and recall the functions $\theta^\star_i$ of Proposition \ref
 \label{propOnKoszulDelta}
 For $2\leq i\leq t$, there is a function
 \[\overline{G}:\hom_{s\vect{}{}}(\mathbb{K}_t,W)\to \hom_{s\calc}(\Theta_{t,i},cK^{\calc}W),\]
-natural in $W\in s\vect{}{}$, and satisfying $\overline{G}(\alpha)(\imath_t)=\widetilde{\alpha}$, such that the function
+natural in $W\in s\vect{}{}$, and satisfying $\overline{G}(\alpha)( z_t)=\widetilde{\alpha}$, such that the function
 \[G:\hom_{s\vect{}{}}(\mathbb{K}_t,W)\to \pi_{t+i+1}(Q^{\calc}cK^{\calc}W)=:H_{t+i+1}(K^{\calc}W)\]
 defined by $G(\alpha):=H_*(\overline{G}(\alpha))(h)$ equals the following composite whenever $2\leq i<t$:
 \[\hom_{s\vect{}{}}(\mathbb{K}_t,W)\epi \pi_t W\overset{\textup{hur}}{\to} H_{t}(K^{\calc}W) \overset{\theta_i^\star}{\to}H_{t+i+1}(K^{\calc}W).\]
@@ -6436,7 +6439,7 @@ defined by $G(\alpha):=H_*(\overline{G}(\alpha))(h)$ equals the following compos
 \begin{proof}
 The value of $\overline{G}$ on $\alpha$ is defined as follows. There is a commuting diagram %(since in $Y\times Z$, products of the form $(a,0)(0,b)$ vanish):
 \[\xymatrix@R=4mm@C=15mm{
-\mathbb{S}^\calc_{t+i}\ar@{->}[r]_-{\mu\Nabla_{t-i}(\imath_t\otimes\imath_{t})}
+\mathbb{S}^\calc_{t+i}\ar@{->}[r]_-{\mu\Nabla_{t-i}( z_t\otimes z_{t})}
 \ar@{ >->}[d]
 &%r1c1
 \mathbb{S}^\calc_t\ar@{ >->}[d]
@@ -6450,12 +6453,12 @@ C\mathbb{S}^\calc_{t+i}\ar[r]\ar@/_1em/[rr]_-{0}
 &KW}\]
 Corresponding to the right square is a map $\Theta_{t,i}\to c_2(KW)$, and the composite with the cofibration $c_2(KW)\to c(KW)$ is $\overline{G}(\alpha)$. This function $\overline{G}$ is evidently natural in $W$, and so then is $G$.
 
-The statement about $G$ is natural in $W\in s\vect{}{}$, so may be checked on the universal example $\imath_t\in \hom_{s\vect{}{}}(\mathbb{K}_t,\mathbb{K}_t)$. As $\overline{G}(\imath)$ is a map of $\calc$-$H_*$-coalgebras: $(P^i)^*G(\imath_t)=\textup{hur}(\imath_t)$; $(P^j)^*G(\imath_t)=0$ for all $j\neq i$ with $2\leq j\leq (t+i)/2$; and $\Delta G(\imath_t)$ vanishes unless $i=t$, in which case it equals $\imath\otimes \imath$. By construction, $G(\imath_t)$ lies in quadratic grading $2$ of the cofree construction:
-\[G(\imath_t)\in\quadgrad{2}H_{t+i+1}(\mathbb{K}^{\calc}_t)=\quadgrad{2}C^{\HC{\calc}}\{\imath_t\}.\]
-These conditions suffice to identify $G(\imath_t)$.
+The statement about $G$ is natural in $W\in s\vect{}{}$, so may be checked on the universal example $ z_t\in \hom_{s\vect{}{}}(\mathbb{K}_t,\mathbb{K}_t)$. As $\overline{G}( z)$ is a map of $\calc$-$H_*$-coalgebras: $(P^i)^*G( z_t)=\textup{hur}( z_t)$; $(P^j)^*G( z_t)=0$ for all $j\neq i$ with $2\leq j\leq (t+i)/2$; and $\Delta G( z_t)$ vanishes unless $i=t$, in which case it equals $ z\otimes  z$. By construction, $G( z_t)$ lies in quadratic grading $2$ of the cofree construction:
+\[G( z_t)\in\quadgrad{2}H_{t+i+1}(\mathbb{K}^{\calc}_t)=\quadgrad{2}C^{\HC{\calc}}\{ z_t\}.\]
+These conditions suffice to identify $G( z_t)$.
 %and it is clear that the only element of quadratic grading $2$
 %
-%Under the homology coalgebra map $\overline{G}(\alpha)_*:H\Theta_{t,i}\to HKW$, we have $h\mapsto G(\alpha)$ and $\imath_t\mapsto\textup{hur}(\alpha)$. \textbf{Hopefully we can figure out enough about cofree homology coalgebras and their right $P$-action to see that $G(\alpha)$ can only equal the Koszul operation on $\textup{hur}(\alpha)$.} In the non-top case, we have zero coproduct and only $(\DASH)P^i$ firing, while in the top case we have coproduct $\textup{hur}(\alpha)\otimes \textup{hur}(\alpha)$ instead.
+%Under the homology coalgebra map $\overline{G}(\alpha)_*:H\Theta_{t,i}\to HKW$, we have $h\mapsto G(\alpha)$ and $ z_t\mapsto\textup{hur}(\alpha)$. \textbf{Hopefully we can figure out enough about cofree homology coalgebras and their right $P$-action to see that $G(\alpha)$ can only equal the Koszul operation on $\textup{hur}(\alpha)$.} In the non-top case, we have zero coproduct and only $(\DASH)P^i$ firing, while in the top case we have coproduct $\textup{hur}(\alpha)\otimes \textup{hur}(\alpha)$ instead.
 \end{proof}
 
 
@@ -6594,7 +6597,7 @@ which, by Lemma \ref{lemma: epsilon is destructive},  decomposes as the sum of t
 %}\]
 The composite $\pi_1\circ \epsilon\circ\overline{F}(\alpha,\beta):J_{t,t'}\to \calx $, by construction of $\overline{F}$, is the (dashed) map out of the pushout in the diagram:
 \[\xymatrix@R=4mm@C=15mm{
-\mathbb{S}^\calc_{\frakt}\ar@{->}[r]_-{\mu\nabla(\imath_t\otimes\imath_{t'})}
+\mathbb{S}^\calc_{\frakt}\ar@{->}[r]_-{\mu\nabla( z_t\otimes z_{t'})}
 \ar@{ >->}[d]
 &%r1c1
 \mathbb{S}^\calc_t\sqcup \mathbb{S}^\calc_{t'}\ar@{ >->}[d]
@@ -6634,21 +6637,21 @@ c(\calx \times \calx )\ar[r]^-{c(\textup{add}\circ\epsilon^2)}
 &%r1c4
 \overline{V}\calx \makebox[0cm][l]{$\,\ni A$}\ar@{=}[u]
 \\%r2c5
-\makebox[0cm][r]{$\mu\nabla(\imath_t\otimes\imath_{t'})\in\,$}J_{t,t'}\ar[r]^-{\overline{F}(\alpha,\beta)}
+\makebox[0cm][r]{$\mu\nabla( z_t\otimes z_{t'})\in\,$}J_{t,t'}\ar[r]^-{\overline{F}(\alpha,\beta)}
 &%r1c2
 c(\calx \times \calx )\ar[r]^-{c(\textup{add}\circ\epsilon^2)}
 &%r1c3
 \calx \makebox[0cm][l]{$\,\ni\overline{\mu}(\nabla(\widetilde{\epsilon\alpha} \otimes\widetilde{\epsilon\beta}))$}
 &%r1c4
 %\\%r3c5
-%\makebox[0cm][r]{$\mu\nabla(\imath_t\otimes\imath_{t'})\in\,$}\mathbb{S}^\algs_t\sqcup \mathbb{S}^\algs_{t'}\ar[urr]_-{\widetilde{\epsilon\alpha} \sqcup \widetilde{\epsilon\beta}}
+%\makebox[0cm][r]{$\mu\nabla( z_t\otimes z_{t'})\in\,$}\mathbb{S}^\algs_t\sqcup \mathbb{S}^\algs_{t'}\ar[urr]_-{\widetilde{\epsilon\alpha} \sqcup \widetilde{\epsilon\beta}}
 %\ar@{ >->}[u]
 %&%r4c2
 %&%r4c3
 %&%r4c4
 %%r4c5
 }\]
-The element $h_{t,t'}\in N\uver_{\frakt+1}(J_{t,t'})$ may been used to populate the whole diagram as shown. To understand the images of $h_{t,t'}$ at either end of the bottom row, note that $d_0h_{t,t'}=\mu\nabla(\imath_t\otimes \imath_{t'})$ by construction, and Lemma \ref{handy lemma for conn hom} states that under the maps of bottom row, $\mu\nabla(\imath_t\otimes \imath_{t'})$ maps to $\overline{\mu}(\nabla(\widetilde{\epsilon\alpha} \otimes\widetilde{\epsilon\beta}))$.
+The element $h_{t,t'}\in N\uver_{\frakt+1}(J_{t,t'})$ may been used to populate the whole diagram as shown. To understand the images of $h_{t,t'}$ at either end of the bottom row, note that $d_0h_{t,t'}=\mu\nabla( z_t\otimes  z_{t'})$ by construction, and Lemma \ref{handy lemma for conn hom} states that under the maps of bottom row, $\mu\nabla( z_t\otimes  z_{t'})$ maps to $\overline{\mu}(\nabla(\widetilde{\epsilon\alpha} \otimes\widetilde{\epsilon\beta}))$.
 
 %As $\alpha\sim \widetilde{\epsilon\alpha}$ and $\beta\sim \widetilde{\epsilon\beta}$, it is enough to prove that
 The data in the bottom right corner of this diagram demonstrates that $\partial_\textup{conn}\overline{A}\in\pi_\frakt(\overline{\Dendo}^1\calx )$ is represented by ${\overline{\mu}(\nabla(\widetilde{\epsilon\alpha} \otimes\widetilde{\epsilon\beta}))}$,
@@ -6663,7 +6666,7 @@ which suffices, as $\alpha\sim \widetilde{\epsilon\alpha}$ and $\beta\sim \widet
 %%%%%%
 %%%%%%Moreover, at the right of this diagram we see exactly the maps needed in order to construct the connecting homomorphism for the short exact sequence defining $\overline{D}^1X^\fraks$.
 %%%%%%%\[0\to\overline{D}^1X^\fraks\to X^\fraks\overset{\overline{v}}{\to} \overline{V}X^\fraks\to 0,\]
-%%%%%%This confirms that $\partial_\textup{conn}(\textup{dot}(\alpha,\beta))$ is the image under $\widetilde{\epsilon\alpha} \sqcup \widetilde{\epsilon\beta}$ of $\mu\nabla(\imath_t\otimes\imath_{t'})$.
+%%%%%%This confirms that $\partial_\textup{conn}(\textup{dot}(\alpha,\beta))$ is the image under $\widetilde{\epsilon\alpha} \sqcup \widetilde{\epsilon\beta}$ of $\mu\nabla( z_t\otimes z_{t'})$.
 \end{proof}
 
 
@@ -6683,7 +6686,7 @@ We populate the following commuting diagram using the element $h_{t,i}\in N\uver
 %(\overline{V})_{t+i+1}
 %\makebox[0cm][l]{$\,\ni (\eta\circ \overline{G}(\epsilon\alpha))(h_{t,i})$}
 %\\%r1c3
-%\makebox[0cm][r]{$\mu\Nabla_{t-i}(\imath_t\otimes \imath_t)\in\,$}(\Theta_{t,i})_{t+i}\ar[r]^-{\overline{G}(\epsilon\alpha)}
+%\makebox[0cm][r]{$\mu\Nabla_{t-i}( z_t\otimes  z_t)\in\,$}(\Theta_{t,i})_{t+i}\ar[r]^-{\overline{G}(\epsilon\alpha)}
 %&%r2c1
 %\calx _{t+i}\makebox[0cm][l]{$\,\ni\mu\Nabla_{t-i}(\widetilde{\epsilon\alpha}\otimes \widetilde{\epsilon\alpha})$}
 %&%r2c2
@@ -6697,13 +6700,13 @@ N\uver_{t+i+1}\calx \ar[d]_-{d_0}
 N\uver_{t+i+1}(\overline{V}\calx)
 \makebox[0cm][l]{$\,\ni (\eta\circ \overline{G}(\epsilon\alpha))(h_{t,i})$}
 \\%r1c3
-\makebox[0cm][r]{$\mu\Nabla_{t-i}(\imath_t\otimes \imath_t)\in\,$}ZN\uver_{t+i}\Theta_{t,i}\ar[r]^-{\overline{G}(\epsilon\alpha)}
+\makebox[0cm][r]{$\mu\Nabla_{t-i}( z_t\otimes  z_t)\in\,$}ZN\uver_{t+i}\Theta_{t,i}\ar[r]^-{\overline{G}(\epsilon\alpha)}
 &%r2c1
 ZN\uver_{t+i}\calx \makebox[0cm][l]{$\,\ni\mu\Nabla_{t-i}(\widetilde{\epsilon\alpha}\otimes \widetilde{\epsilon\alpha})$}
 &%r2c2
 }\]
 Here, the value of $d_0h_{t,i}$ is known by definition of $\Theta_{t,i}$, 
-and the fact that $\overline{G}(\epsilon\alpha)(\imath_t)=\widetilde{\epsilon\alpha}$ allows us to calculate $(\overline{G}(\epsilon\alpha)\circ d_0)(h_{t,i})$. Finally, in order to calculate $\partial_\textup{conn}(\theta_i^\star\circ\textup{hur})(\alpha)$, we find a preimage under $N\uver_{t+i+1}\calx \overset{\overline{v}}{\to}N\uver_{t+i+1}\overline{V}\calx$ of the representative $(\eta\circ \overline{G}(\epsilon\alpha))(h_{t,i})$, and then apply the differential $d_0$. We may use the preimage $\overline{G}(\epsilon\alpha)$, which maps to $\mu\Nabla_{t-i}(\widetilde{\epsilon\alpha}\otimes \widetilde{\epsilon\alpha})\in N\uver_{t+i}\overline{\Dendo}^1\calx $ under $d_0$. This is homotopic to $\mu\Nabla_{t-i}(\alpha\otimes \alpha)$, which represents $\overline{\mu}\delta^\textup{ext}_i(\alpha)$.
+and the fact that $\overline{G}(\epsilon\alpha)( z_t)=\widetilde{\epsilon\alpha}$ allows us to calculate $(\overline{G}(\epsilon\alpha)\circ d_0)(h_{t,i})$. Finally, in order to calculate $\partial_\textup{conn}(\theta_i^\star\circ\textup{hur})(\alpha)$, we find a preimage under $N\uver_{t+i+1}\calx \overset{\overline{v}}{\to}N\uver_{t+i+1}\overline{V}\calx$ of the representative $(\eta\circ \overline{G}(\epsilon\alpha))(h_{t,i})$, and then apply the differential $d_0$. We may use the preimage $\overline{G}(\epsilon\alpha)$, which maps to $\mu\Nabla_{t-i}(\widetilde{\epsilon\alpha}\otimes \widetilde{\epsilon\alpha})\in N\uver_{t+i}\overline{\Dendo}^1\calx $ under $d_0$. This is homotopic to $\mu\Nabla_{t-i}(\alpha\otimes \alpha)$, which represents $\overline{\mu}\delta^\textup{ext}_i(\alpha)$.
 \end{proof}
 
 \end{Operations on the Bousfield-Kan spectral sequence}
@@ -6777,7 +6780,7 @@ In our context, Blanc-Stover's comonad $\BSW$, applied to $L\in s\calc$, is the 
 %\BSW L%r2c2
 %}\]
 \[\xymatrix@R=4mm{
-\coprod_{\substack{S\in\spheres{\calc}\\y:CS\rightarrow L}}S_{ y\circ\imath}
+\coprod_{\substack{S\in\spheres{\calc}\\y:CS\rightarrow L}}S_{ y\circ\bdyinc}
 \ar[r]\ar[d]%^-{\bigsqcup\bigsqcup\imath}
 &%r1c1
 \coprod_{\substack{S\in\spheres{\calc}\\x:S\rightarrow L}}S_{ x}\ar[d]\\%r1c2
@@ -6786,7 +6789,7 @@ In our context, Blanc-Stover's comonad $\BSW$, applied to $L\in s\calc$, is the 
 \BSW L%r2c2
 }\]
 The subscripts are just notation to distinguish multiple copies of $S$ and $CS$ for each sphere $S\in\spheres{\calc}$.
-The top horizontal map sends the sphere $S_{ y\circ\imath}$ isomorphically onto \emph{itself}. The left vertical map is the coproduct of copies of the inclusion $\imath:S\to CS$. The effect of taking this pushout is to modify the coproduct $S_{ x}$ of spheres by attaching the  cone on $S_{ x}$  once for each nullhomotopy of $x\in L$.
+The top horizontal map sends the sphere $S_{ y\circ\bdyinc}$ isomorphically onto \emph{itself}. The left vertical map is the coproduct of copies of the inclusion $\bdyinc:S\to CS$. The effect of taking this pushout is to modify the coproduct $S_{ x}$ of spheres by attaching the  cone on $S_{ x}$  once for each nullhomotopy of $x\in L$.
 
 It will be useful to write $h_y$ for the image in $N_*\BSW L$ of $h\in N_*CS_{ y}$, and similarly, $z_x$ for image in $ZN_*\BSW L$ of $z\in ZN_*S_{ x}$. Indeed, recalling the discussion in \S\ref{spheres and cones}, the data of $S\in\spheres{\calc}$ with a map $S\to L$ is equivalent to the data of a homogeneous normalized cycle of $L$, and similarly, $S\in\spheres{\calc}$ with a map $CS\to L$ is equivalent to a homogeneous normalized chain of $L$ which is \emph{not in dimension zero}. From this viewpoint, if we write $\homog (ZN_*L)$ for the homogeneous normalized cycles and $\homog (N_{\geq1}L)$ for the homogeneous normalized chains of $L$ not in dimension zero, the pushout may be written as
 \[\xymatrix@R=4mm{
@@ -6814,7 +6817,7 @@ C_0%r2c2
 }\]
 whose inclusion is a cofibration.  Then
 \[\BSW L/C_0 \cong \left(\bigsqcup_{y\in \homog(N_{\geq1}L)\setminus\im (f)}CS_{ y}/S\right) \sqcup\left(\bigsqcup_{x\in \homog(ZN_*L)\setminus \homog(BN_*L)}S_{ x}\right)\]
-where we have written `$A/B$' for the pushout of a cofibration $B\to A$ along the map $B\to0$, using the cofibrations $C_0\to \BSW L$ and $\imath:S\to CS_{ y}$.
+where we have written `$A/B$' for the pushout of a cofibration $B\to A$ along the map $B\to0$, using the cofibrations $C_0\to \BSW L$ and $\bdyinc:S\to CS_{ y}$.
 As $CS/S$ is \emph{isomorphic} to the  sphere of one dimension higher than $S$ (consider the construction of \S\ref{The Dold-Kan correspondence}), this shows that $\BSW L$ is homotopic to a coproduct of spheres.
 
 The promised comonad structure maps $\epsilon:\BSW L\to L$ and $\Delta:\BSW L\to \BSW^2L$ are determined by:
@@ -6862,18 +6865,18 @@ In this section, we will describe how $\phi_{\PA{\calc}}$ is the map on homotopy
 In order to construct a map $\phi_\BSW $, each $S\in\spheres{\calc}$ equals $S=F^\calc\mathbb{K}$ for some $\mathbb{K}$ as in \S\ref{The Dold-Kan correspondence} (with indices omitted), and we construct a commuting diagram:
 \[\xymatrix@R=4mm{
 S\ar[r]^-{\phi_1}
-\ar[d]^-{\imath}
+\ar[d]^-{\bdyinc}
 &%r1c1
-S\sqcup S\ar[d]^-{\imath\sqcup\imath}
+S\sqcup S\ar[d]^-{\bdyinc\sqcup\bdyinc}
 \\%r1c2
 CS\ar[r]^-{\phi_2}
 &%r2c1
 CS\sqcup CS%r2c2
 }\qquad \textup{\raisebox{-6mm}{by applying $F^\calc$ to }}\qquad \xymatrix@R=4mm{
 \mathbb{K}\ar[r]^-{\Delta}
-\ar[d]^-{\imath}
+\ar[d]^-{\bdyinc}
 &%r1c1
-\mathbb{K}\oplus \mathbb{K}\ar[d]^-{\imath\sqcup\imath}
+\mathbb{K}\oplus \mathbb{K}\ar[d]^-{\bdyinc\sqcup\bdyinc}
 \\%r1c2
 C\mathbb{K}\ar[r]^-{\Delta}
 &%r2c1
