@@ -1,7 +1,7 @@
 % !TEX root = z_output/unstable_Lie_algs.tex
 \documentclass[11pt]{amsart} \renewcommand{\baselinestretch}{1.2}
 %\newcommand{\IncludeAll}{}%
-\newcommand{\xShrinkPages}{}%
+\newcommand{\ShrinkPages}{}%
 \newcommand{\xPostponeContents}{}%
 %%%%%%%%%%%%%%%%%%% 
 %%%%%%%%%%%%%%%%%%%Begin preamble for pasteover
@@ -22,12 +22,12 @@
 \wooooo[	 8]{Cohomology Operations for W and U}
 \ooooo[	 9]{Koszul complexes}
 \ooooo[	10]{second quadrant homotopy sseq operations}
-\ooooo[	11]{Operations on the Bousfield-Kan spectral sequence}
+\wooooo[	11]{Operations on the Bousfield-Kan spectral sequence}
 \ooooo[	12]{Comp funct sseqs}
 \ooooo[	13]{Operations in composite functor spectral sequences}
 \ooooo[	14]{Calculations of HWn}
-\ooooo[	15]{The Bousfield-Kan spectral sequence for a sphere}
-\ooooo[	16]{May sseq and vanishing line}
+\ooooo[	15]{May sseq and vanishing line}
+\ooooo[	16]{The Bousfield-Kan spectral sequence for a sphere}
 \ooooo[	ap]{appendices}
 \ooooo[	bb]{bibliog}
 
@@ -1301,8 +1301,7 @@ The equivalent condition is that, for every collection of vectors $v_b\in V$ and
 %&=
 %% Right hand side
 %\textstyle\sum_{i<j}\alpha_i\alpha_jp(v_i\otimes v_j)+\textstyle\sum_{i}\alpha_i^2\sigma(v_i)%
-%►% Comment
-%&\qquad&\text{(ᾮ)}©
+%% Comment
 %\end{alignat*}
 %
 If $f:S^2V\to W$ is a linear map, the function
@@ -2082,7 +2081,15 @@ The endofunctor $Q^\calc cK^\calc$ of $s\vect{}{}$ admits the structure of a com
 where $\eta$ denotes the unit of the $Q^\calc\dashv K^\calc$ adjunction.
 \end{prop}
 
-The functor $c$ of the small object argument depends on the choice of sets of generating cofibrations and acyclic cofibrations. It will be important to our applications that included in the set of generating cofibrations are certain important cofibrations, namely the inclusion of $0$ into any sphere $\mathbb{S}^{\calc,t}_{s_{r+1},\ldots,s_1}$, and any of the cofibrations  defined in \S\ref{three cell complex} and \S\ref{two-cell complex for the deltas}. 
+The functor $c$ of the small object argument depends on the choice of sets of generating cofibrations and acyclic cofibrations. It will be helpful in our applications to include in the set of generating cofibrations the following important cofibrations:
+\begin{enumerate}
+\item the inclusion of $0$ into any sphere $\mathbb{S}^{\calc,t}_{s_{r+1},\ldots,s_1}$;
+\item the cofibration $\mathbb{S}^{\calc}_t\sqcup \mathbb{S}^{\calc}_{t'}\to J_{t,t'}$  defined in \S\ref{three cell complex};
+\item the cofibration 
+$\mathbb{S}^{\calc}_t\to\Theta_{t,i}$ defined in \S\ref{two-cell complex for the deltas}; and
+\item for each cofibration $A\to B$ just mentioned, the map $\Delta^1\otimes A\to \Delta^1\otimes B$ formed using the standard closed simplicial  model category structure \citeBOX[II.4]{QuillenHomAlg.pdf} on $s\calc$.
+\end{enumerate}
+
 
 It will be helpful to have included these maps, because of the following facts about the small object argument functor $cX$. It is constructed as the colimit of a (transfinite) sequence of cofibrations:
 \[\xymatrix@!0@R=10mm@C=13mm{
@@ -4273,7 +4280,7 @@ Moreover, each map $P^i:V^t\to \quadgrad{2}(F^{\calw(0)}V)^{t+i+1}$ appearing in
 Here we have projected onto the quadratic filtration 2 part, and then further onto the relevant summand in its natural decomposition. Note that although $P^t:V^t\to \quadgrad{2}(F^{\calw(0)}V)^{2t+1}$ is a non-trivial linear map when $t\geq2$, its image is entangled with the image of the bracket, and we are not able to split it off. Thus we are not able to improve on the bounds $2\leq i< t$.
 \begin{prop}
 \label{prop on thetaistar}
-There is a map $\theta_i^\star:V_t\to (C^{\HC{\algs}}V)_{t+i+1}$ for $2\leq i<t$, natural in $V\in\vect{}{+}$, such that the following diagram commutes:
+There is a linear map $\theta_i^\star:V_t\to (C^{\HC{\algs}}V)_{t+i+1}$ for $2\leq i<t$, natural in $V\in\vect{}{+}$, such that the following diagram commutes:
 \[\xymatrix@R=4mm@C=20mm{
 \dual((C^{\HC{\algs}}V)_{t+i+1})&%r1c1
 \dual V\ar[l];[]^-{(\theta_i^\star)^*}
@@ -4287,20 +4294,30 @@ There is a map $\theta_i^\star:V_t\to (C^{\HC{\algs}}V)_{t+i+1}$ for $2\leq i<t$
 \begin{proof}
 When $V$ is of finite type, as $F^{\calw(0)}$ preserves vector spaces of finite type, we may simply define $\theta_i^\star$ to be the dual of $\theta_i$. This is natural on vector spaces of finite type, and any vector space is the filtered colimit of such.
 \end{proof}
-
-
+In fact, whenever $t\geq2$ we may define a non-linear function
+\[\theta_t^\star : V_t\to (C^{\HC{\algs}}V)_{t+i+1}\]
+which completes the collection of functions $\theta_i^\star$, but not by this method: we use the upcoming Proposition \ref{propOnKoszulDelta} to \emph{define} this top $\theta_i^\star$. That we need to do this is a disadvantage of working with cohomology algebras, as opposed to homology coalgebras.
 \begin{prop}
 \label{operations on goerss homology}
-Suppose that $X\in s\calw(0)$ is almost free\todo{enhance?},  %\TODOCOMMENT{s=0?}, 
+Suppose that $X\in s\calw(0)$ is almost free,
 so that we may identify $H^*_{\calw(0)}X$ with $\pi^*\dual Q^{\calw(0)}X$. Then for $2\leq i <t$, the chain map $\widetilde{\theta_i}$ of Proposition \ref{general CohOpns given irreducibility} induces a linear operation
 \[\deltav_i:(H^*_{\calw(0)}X)^{s}_t\to (H^*_{\calw(0)}X)^{s+1}_{t+i+1}.\] 
 These operations are natural in maps preserving the generating subspaces, and satisfy the unstable $\delta$-Adem relation of Proposition \ref{omnibus on htpy of simp algs}\textit{(\ref{deltaademsunstable})}.
+
+If $X$ is of finite type, this statement may be amended to include a (potentially non-linear) operation
+\[\deltav_t:(H^*_{\calw(0)}X)^{0}_t\to (H^*_{\calw(0)}X)^{1}_{2t+1}\] 
+induced by the function $\theta^\star_t$.
 \end{prop}
-\noindent For \emph{any} $X\in s\calw(0)$, the bar construction $Q^{\calw(0)}B^{\calw(0)}X$ calculating  $H^*_{\calw(0)}X$ has a natural almost free structure, so that Proposition \ref{operations on goerss homology} constructs natural operations on $H^*_{\calw(0)}X$ for all $X\in s\calw(0)$.
+\noindent For \emph{any} $X\in s\calw(0)$, the bar construction $B^{\calw(0)}X$ of  $X$ has a natural almost free structure, so that Proposition \ref{operations on goerss homology} may be used to construct natural operations on $H^*_{\calw(0)}X$.
 %Now suppose that $X\in\calw(0)$, and consider the bar construction $Q^{\calw(0)}B^{\calw(0)}X$ whose cohomotopy is $H^*_{\calw(0)}X$. Until the end of \S\ref{Cohomology Operations for W and U}, we will write $Q\mathbb{B}$ for this simplicial object, write $F$ for $F^{\calw(0)}$, and identify $Q\mathbb{B}_s$ with $F^sX$.
 \begin{proof}[Proof of Proposition \ref{operations on goerss homology}]
+The finite type assumption is needed in order to define the operation $\deltav_t$, as it is not induced by a chain map on $N_*Q^{\calw(0)} X$. Instead, it is induced by the potentially non-linear function 
+\[\smash{\widetilde{\theta^\star_{t}}}:(N^0\Prim^{\HC{\algs}}\dual X)_{t}\to (N^1\Prim^{\HC{\algs}}\dual X)_{2t+1} \]
+%which has the definition dual to that of the functions $\smash{\widetilde{\theta}_i}$,
+using the function $\theta^\star_t$ defined using Proposition \ref{propOnKoszulDelta}. We will give the proof that the operations $\deltav_i$ with $2\leq i<t$ are well defined and satisfy the $\delta$-Adem relations, in the cohomological variance. By working with homology coalgebras, and thus avoiding double-dualization, the proof given below extends to encompass the extra operation $\deltav_t$ in dimension zero. This exercise is left to the reader.
+
 The conditions of Proposition \ref{general CohOpns given irreducibility} are satisfied with $\theta=\theta_i$ and $G$ is the identity functor. The condition \[\smash{\theta\circ\mu_V=\theta\circ \epsilon_{F^\calc V} +\theta\circ {F^\calc \epsilon_V}:F^\calc F^\calc V\to V}\]
-just states that given an iterated expression in $F^\calc F^\calc V$, the two obvious ways to produce a summand of the form $P^iv$ under the map $F^\calc F^\calc V\to F^\calc V$ are the only ways, due to the homogeneity of the $P$-Adem relations.
+just states that given an iterated expression in $F^\calc F^\calc V$, the two obvious ways to produce a summand of the form $P^iv$ under the map $\mu:F^\calc F^\calc V\to F^\calc V$ are the only ways, due to the homogeneity of the $P$-Adem relations.
 
 It just remains to prove the $\delta$-Adem relations, which we will do using the technique of \cite{PriddyKoszul.pdf}, the point being that the algebra of $\delta$-operations is Koszul dual to $\Palg$. For this, we define a map $\theta_{ij}$, whenever $i<2j$, $2\leq j<t$ and $2\leq i<t+j+1$:
 \[\theta_{ij}:\left((F^{\calw(0)}V)^{t+i+j+2}\overset{\textup{proj}}{\makebox[.06ex][l]{$\to$}\to} (\quadgrad{4}F^{\calw(0)}V)^{t+i+j+2}\overset{\textup{proj}}{\makebox[.06ex][l]{$\to$}\to} \im (P^{i,j})\overset{(P^{i,j})^{-1}}{\to}V^{t}\right),\]
@@ -4322,7 +4339,9 @@ This shows that the proposed nullhomotopy equals
 \end{proof}
 The same constructions work in the category $s\calU(0)$ of simplicial unstable $\Palg$-\emph{modules}, the only difference being that when we define $\theta_i$, we need not worry about Lie algebra structures, and we can define a map
 \[\theta_i:(F^{\calU(0)}V)^{t+i+1}\to V^t\]
-whenever $2\leq i\leq t$, so that there is one more operation available on $H^*_{\calU(0)}$ than on $H^*_{\calw(0)}$. It will be useful to encode this structure in a definition. Write $\calMv(1)$ for the algebraic category whose objects are vector spaces $M\in\vect{1}{+}$ with left $\delta$-operations
+whenever $2\leq i\leq t$, so that there is one more operation available on $H^*_{\calU(0)}$ than on $H^*_{\calw(0)}$, at least  in dimensions $s>0$.
+
+It will be useful to encode this structure in a definition. Write $\calMv(1)$ for the algebraic category whose objects are vector spaces $M\in\vect{1}{+}$ with left $\delta$-operations
 \[\deltav_i:M^{s}_t\to M^{s+1}_{t+i+1},\textup{ defined whenever $2\leq i\leq t$,}\]
 satisfying unstable $\delta$-Adem relations analogous to those of \emph{(\ref{deltaademsunstable})} in Proposition \ref{omnibus on htpy of simp algs}.
 \begin{prop}
@@ -6249,7 +6268,7 @@ C\mathbb{S}^{\calc}_{t+t'}\ar[r]
 &%r2c1
 J_{t,t'}%r2c2
 }\]
-The left vertical is evidently almost free (and thus a cofibration), and thus constructed map $\mathbb{S}^{\calc}_t\sqcup \mathbb{S}^{\calc}_{t'}\to J_{t,t'}$ is an almost free map.
+The left vertical is evidently almost free (and thus a cofibration), and thus the map $\mathbb{S}^{\calc}_t\sqcup \mathbb{S}^{\calc}_{t'}\to J_{t,t'}$ constructed is almost free.
 The generating subspace $V_{t+t'+1}\subseteq (J_{t,t'})_{t+t'+1}$ has a $t+t'+1$-dimensional generator $h_{t,t'}$, the image of the cone class $h$ in $(\mathbb{S}^{\calc}_{t+t'})_{t+t'+1}$ (c.f.\ \S\ref{The Dold-Kan correspondence}). Moreover, the object $J_{t,t'}$ is cofibrant, and $h_{t,t'}$ becomes a cycle in $Q^\calc J_{t,t'}$: $d_ih_{t,t'}=0$ for $i\geq1$, and $d_0h_{t,t'}:=z_{t+t'}$, which we  have identified with the decomposable element $\mu(\nabla(z_t\otimes z_{t'}))$ in passing to the pushout.
 
 The homology long exact sequence shows that $H_*J_{t,t'}$ is three-dimensional, containing classes $ z_t$, $ z_{t'}$ and $h_{t,t'}$. Moreover, there is a co-operation $\Delta$ on $H_{*}^{\calc}$ dual to the $S(\LieOperad)$ structure map on cohomology, and we prove:
@@ -6457,9 +6476,14 @@ Let $\calc=\algs$, and recall the functions $\theta^\star_i$ of Proposition \ref
 For $2\leq i\leq t$, there is a function
 \[\overline{G}:\hom_{s\vect{}{}}(\mathbb{K}_t,W)\to \hom_{s\calc}(\Theta_{t,i},cK^{\calc}W),\]
 natural in $W\in s\vect{}{}$, and satisfying $\overline{G}(\alpha)( z_t)=\widetilde{\alpha}$, such that the function
-\[G:\hom_{s\vect{}{}}(\mathbb{K}_t,W)\to \pi_{t+i+1}(Q^{\calc}cK^{\calc}W)=:H_{t+i+1}(K^{\calc}W)\]
-defined by $G(\alpha):=H_*(\overline{G}(\alpha))(h)$ equals the following composite whenever $2\leq i<t$:
-\[\hom_{s\vect{}{}}(\mathbb{K}_t,W)\epi \pi_t W\overset{\textup{hur}}{\to} H_{t}(K^{\calc}W) \overset{\theta_i^\star}{\to}H_{t+i+1}(K^{\calc}W).\]
+\[G:\hom_{s\vect{}{}}(\mathbb{K}_t,W)\to \pi_{t+i+1}(Q^{\calc}cK^{\calc}W)=:H_{t+i+1}(K^{\calc}W)\]%=C^{\HC{\calc}}(\pi_*W)_{t+i+1}\]
+defined by $G(\alpha):=H_*(\overline{G}(\alpha))(h)$ descends to a function
+\[G:\pi_tW\to H_{t+i+1}(K^\calc W),\]
+and, whenever $2\leq i\leq t$, $G$ equals the composite
+%\[\hom_{s\vect{}{}}(\mathbb{K}_t,W)\epi \pi_t W\overset{\textup{hur}}{\to} H_{t}(K^{\calc}W) \overset{\theta_i^\star}{\to}H_{t+i+1}(K^{\calc}W).\]
+\[\pi_t W \overset{\theta_i^\star}{\to}C^{\HC{\calc}}(\pi_*W)_{t+i+1}\cong H_{t+i+1}(K^{\calc}W).\]
+
+
 \end{prop}
 %\begin{shaded}\tiny
 %\[{{\xymatrix@R=4mm{
@@ -6497,11 +6521,19 @@ C\mathbb{S}^\calc_{t+i}\ar[r]\ar@/_1em/[rr]_-{0}
 \Theta_{t,i}\ar@{-->}[r]
 %r2c2
 &KW}\]
-Corresponding to the right square is a map $\Theta_{t,i}\to c_2(KW)$, and the composite with the cofibration $c_2(KW)\to c(KW)$ is $\overline{G}(\alpha)$. This function $\overline{G}$ is evidently natural in $W$, and so then is $G$.
+Corresponding to the right square is a map $\Theta_{t,i}\to c_2(KW)$, and the composite with the cofibration $c_2(KW)\to c(KW)$ is $\overline{G}(\alpha)$. This function $\overline{G}$ is evidently natural in $W$, and so then is $G$. In order to check that the resulting function $G$ descends to $\pi_tW$, suppose that $\alpha_1,\alpha_2\in \hom_{s\vect{}{}}(\mathbb{K}_t,W)$ are homotopic. Choose a homotopy $a:\Delta^1\otimes \mathbb{K}_t\to W$ between $\alpha_1$ and $\alpha_2$. Using the generating cofibrations included in \S\ref{Cofibrant replacement via the small object argument} and the same technique as used to define $\overline{G}(\alpha)$ produces a homotopy $\Delta^1\otimes \Theta_{t,i}\to cK^{\calc}W$ between $\overline{G}(\alpha_1)$ and $\overline{G}(\alpha_2)$.
 
-The statement about $G$ is natural in $W\in s\vect{}{}$, so may be checked on the universal example $ z_t\in \hom_{s\vect{}{}}(\mathbb{K}_t,\mathbb{K}_t)$. As $\overline{G}( z)$ is a map of $\calc$-$H_*$-coalgebras: $(P^i)^*G( z_t)=\textup{hur}( z_t)$; $(P^j)^*G( z_t)=0$ for all $j\neq i$ with $2\leq j\leq (t+i)/2$; and $\Delta G( z_t)$ vanishes unless $i=t$, in which case it equals $ z\otimes  z$. By construction, $G( z_t)$ lies in quadratic grading $2$ of the cofree construction:
-\[G( z_t)\in\quadgrad{2}H_{t+i+1}(\mathbb{K}^{\calc}_t)=\quadgrad{2}C^{\HC{\calc}}\{ z_t\}.\]
-These conditions suffice to identify $G( z_t)$.
+The calculation of $G$ is vacuous when $i=t$, since  $G$ was used to \emph{define} $\theta^\star_t$. when $2\leq i <t$ is natural in $W\in s\vect{}{}$, so may be checked on the universal example $ z_t\in \hom_{s\vect{}{}}(\mathbb{K}_t,\mathbb{K}_t)$. As $\overline{G}( z)$ is a map of $\calc$-$H_*$-coalgebras: 
+\[(P^j)^*G( z_t)=\begin{cases}
+0,&\textup{if }j\neq i,\ 2\leq j\leq (t+i)/2;\\
+\textup{hur}( z_t),&\textup{if }j=i.
+%\\,&\textup{if }
+\end{cases}
+\]
+%$(P^i)^*G( z_t)=\textup{hur}( z_t)$; $(P^j)^*G( z_t)=0$ for all $j\neq i$ with $2\leq j\leq (t+i)/2$; and 
+Moreover, $\Delta G( z_t)$ vanishes since $i<t$. %, in which case it equals $ z\otimes  z$. 
+These conditions suffice to identify $G( z_t)$, as, by construction, $G( z_t)$ lies in quadratic grading $2$ of the cofree construction:
+\[G( z_t)\in\quadgrad{2}H_{t+i+1}(\mathbb{K}^{\calc}_t)=\quadgrad{2}C^{\HC{\calc}}\{ z_t\}.\qedhere\]
 %and it is clear that the only element of quadratic grading $2$
 %
 %Under the homology coalgebra map $\overline{G}(\alpha)_*:H\Theta_{t,i}\to HKW$, we have $h\mapsto G(\alpha)$ and $ z_t\mapsto\textup{hur}(\alpha)$. \textbf{Hopefully we can figure out enough about cofree homology coalgebras and their right $P$-action to see that $G(\alpha)$ can only equal the Koszul operation on $\textup{hur}(\alpha)$.} In the non-top case, we have zero coproduct and only $(\DASH)P^i$ firing, while in the top case we have coproduct $\textup{hur}(\alpha)\otimes \textup{hur}(\alpha)$ instead.
@@ -6545,6 +6577,14 @@ There is a commuting diagram (writing $\frakt=t+t'$):
 \end{prop}
 \begin{prop}
 \label{prop for delta compat}
+\[\xymatrix@R=4mm{
+►&%r1c1
+▐▌►\\%r1c2
+▐▌►&%r2c1
+▐▌%r2c2
+}\]
+
+
 Whenever $2\leq i<t$ there is a commuting diagram
 \[\xymatrix@R=4mm{
 \pi\uver_t\calx^s \ar[r]^-{\delta_i^\textup{ext}}
@@ -7694,7 +7734,7 @@ To explain further the third equation, note that $N\uver_{m-1}Q^{\call}\BSW L$ i
 
 
 \begin{Calculations of HWn}
-\SectionOrChapter{Calculations of ${\calw(n)}$-cohomology}
+\SectionOrChapter{Calculations of ${\calw(n)}$-cohomology and the \BKSS\ $E_2$-page}
 \label{Calculations of HWn}
 In this section, we will calculate the value of $H^*_{\calw(n)}X$ for certain  objects $X$ of $\calw(n)$ of finite type. In each subsection, we will write $V_{(n)}=\dual X$, so that $X$ has underlying vector space dual to $V_{{(n)}}\in\vect{n}{+}$. In fact, we will reinstate the upper asterisk for linear dualization, writing $\dual V_{(n)}:=V^*_{(n)}$, and recursively define:
 \[V_{(k+1)}:=H^*_{\calU(k)}V^*_{(k)}\textup{ and }V^*_{(k+1)}:=H_*^{\calU(k)}V^*_{(k)}\textup{ for $k\geq n$}.\]
@@ -8507,6 +8547,72 @@ The isomorphism of vector spaces $H_*\Eprime{blank}{1}{\calx}{}{}\to \E{}{2}{\ca
 %\item stocktake reveals that these terms are everything we hoped}
 %\end{The cohomology of a trivial unstable Lie algebra over P}
 
+\begin{May sseq and vanishing line}
+\SectionOrChapter{A May-Koszul spectral sequence for ${\calw(0)}$-cohomology}
+\label{May sseq and vanishing line}
+%{Explain the quadratic filtration of the bar construction, derive a spectral sequence, explain what it implies about the whole thing}
+
+\SubsectionOrSection{The quadratic filtration and resulting spectral sequence}
+\label{The quadratic filtration section}
+Suppose that $X\in s\calw(n)$ for  $n\geq0$, and write $\textup{QBX}\in s\vect{+}{n}$ for the simplicial bar construction   calculating $H_*^{\calw(n)}X$:
+\[(Q^{\calw(n)}B^{\calw(n)}X)_s\cong (F^{\calw(n)})^{s}X_{s}.\] We may view the vector space $\calU^{\calw(n)}X$ as being quadratically graded, concentrated in quadratic grading 1, and as explained in \S\ref{Quadratic grading}, the monad $F^{\calW(n)}$ may be promoted to a monad on $\quadgrad{}\vect{+}{n}$, so that $\textup{QBX}$ is quadratically graded in each simplicial degree individually.
+
+We derive from these gradings the \emph{quadratic filtration}, the following increasing filtration of $N_*\textup{QBX}\in \complexes \vect{+}{n}$:
+\[F_mN_*\textup{QBX}=\textstyle\bigoplus_{k\leq m} \quadgrad{k}N_*\textup{QBX}. \]
+This definition is the direct analogue of Priddy's definition \cite{PriddyKoszul.pdf}. It appears difficult to use his techniques to calculate, say, $H^*_{\calw(0)}H^*_\algs\mathbb{S}^{\algs}_T$ directly, as the bar construction in $\calw(0)$ grows so much faster than the bar construction in a category of modules, and the resulting spectral sequence is not degenerate. Nonetheless, the quadratic filtration is in finite in each internal degree:
+\begin{lem}
+Suppose that $n\geq0$, $X\in s\calw(n)$, and $k\geq0$. Then for any $s_k,\ldots,s_1\geq0$ and $t\geq1$,
+\[(F_{2^{t-1}}N_*\textup{QBX})_{{s_k,\ldots,s_1}}^t=(N_*\textup{QBX})_{{s_k,\ldots,s_1}}^t.\]
+\end{lem}
+\begin{proof}
+This follows from the observation that every possible unary (resp.\ quadratic) operation increases $t$ by at least one and doubles quadratic gradings (resp. adds quadratic gradings). It is obvious in dimension $t=1$, as there can have been no non-trivial operations applied in this dimension (the grading $t$ is always non-negative). The full statement follows by induction on $t$.
+%
+%We prove it by induction on the cohomological dimension $t$. In dimension $t=1$ it is evident that no non-trivial operations can have been applied, and so the quadratic grading can only be one. 
+%
+%Assume the induction hypothesis in dimensions lower than $t$, and suppose that $x\in \textup{QBX}^t$ is homogeneous. We must show that $x\in \quadgrad{2^{t-1}}\textup{QBX}$. If $x\in \quadgrad{1}\textup{QBX}$ then we are done, and otherwise, $x$ has been formed at some stage in the bar construction using some quadratic or unary operation applied to a class or classes with cohomological dimension at most $t-1$, and by induction, quadratic grading at most $2^{t-2}$. As this operation either adds or doubles the quadratic grading(s), $x$ lies in quadratic grading at most $2\cdot 2^{t-2}$.
+\end{proof}
+Moreover, there is an isomorphism
+\[\E{0}{}{N_*\textup{QBX}}{}{}\cong N_*Q^{\calw(n)}B^{\calw(n)}K^{\calw(n)}U^{\calw(n)}X\]
+of chain complexes, so that:
+\begin{prop}
+\label{theMaySseq}
+The cohomotopy spectral sequence of the quadratic filtration is a strongly convergent spectral sequence, the \emph{May-Koszul} spectral sequence:
+\[\E{\textup{MK}}{1}{N_*\textup{QBX}}{m,s_n,\ldots,s_1}{t}\cong \quadgrad{m}(H^*_{\calw(n)}K^{\calw(n)}U^{\calw(n)}X)^{s_n,\ldots,s_1}_{t}\implies (H^*_{\calw(n)}X)^{s_n,\ldots,s_1}_{t}.\]
+If $\pi_*X$ is of finite type, the $E_1$-page may be rewritten as:
+\[\E{\textup{MK}}{1}{N_*\textup{QBX}}{m,s_n,\ldots,s_1}{t}\cong \quadgrad{m}(F^{\HA{\calw(n)}}\dual(\pi_*X))^{s_n,\ldots,s_1}_{t},\]
+which reduces when $n\geq1$ to:
+\[\E{\textup{MK}}{1}{N_*\textup{QBX}}{m,s_n,\ldots,s_1}{t}\cong \quadgrad{m}(F^{\calMhv(n+1)}\dual(\pi_*X))^{s_n,\ldots,s_1}_{t}.\]
+\end{prop}
+\noindent Notes that all of the spectral sequence operations defined in \S\ref{Cohomology Operations for W and U} respect the quadratic filtration --- the unary operations double quadratic filtrations while the pairing operations sum then. We leave it to the interested reader to derive the resulting theory of operations in the May-Koszul spectral sequence from this fact, for any $n\geq0$.
+
+\SubsectionOrSection{A vanishing line on the Bousfield-Kan $E_2$-page}
+\label{A vanishing line on the Bousfield-Kan}
+It is possible to obtain by the following method a vanishing line of slope $4/5$ whenever $\pi_1X$ is of finite type. In the interest of brevity however, we prove only the following:
+\begin{thm}
+\label{vanishing line prop}
+If $X\in s\algs$ is connected (with $\pi_*X$ not necessarily of finite type) then the \BKSS\ admits a vanishing line on $E_2$ of slope $1$ and intercept $0$:
+\[\E{}{2}{\calx}{s}{t}=0\textup{ \ whenever \ }s\geq 1\cdot( t-s).\]
+\end{thm}
+\begin{proof}
+We will prove that the right derived functors
+\[((\mathbb{R}^s\Prim^{\HC{\algs}})W)_t\]
+have such a vanishing line for any $W\in \HC{\algs}$ with $W_0=0$. Any such $W$ is the union of its finite-dimensional subobjects, as all of the structure maps in $\calw(0)$ increase the degree $t$, so it is enough to prove this Proposition for finite-dimensional $W$. Then, by passing to duals, it is enough to produce a vanishing line in the isomorphic vector space
+\[H^*_{\calw(0)}\dual W.\]
+This group is calculated by the May-Koszul spectral sequence whose $E_1$-page is given by
+\[\E{\textup{MK}}{1}{}{m,s}{t}\cong \quadgrad{m}(H^*_{\calw(0)}K^{\calw(0)}U^{\calw(0)}\dual W)^{s}_{t}.\]
+Now $K^{\calw(0)}U^{\calw(0)}\dual W$ decomposes as a product (for various $T_i\geq1$):
+\[K_{0}^{\calw(0),T_1}\times\cdots \times K_{0}^{\calw(0),T_N},\]
+so if we can prove that
+\[(H^*)^s_t:=(H^{*}_{\calw(0)}K_0^{\calw(0),T})^s_t=0 \textup{ \ whenever \ }s\geq t-s,\]
+the same will be true for $H^*_{\calw(0)}\dual W$ by Theorem \ref{Koszul-dual Hilton-Milnor theorem}. %, it is enough to prove a vanishing line for a single Eilenberg-Mac Lane object $K^{\algs}_{T}$. Note that the intercepts do not shift when applying Theorem \ref{Koszul-dual Hilton-Milnor theorem}, even though the coproducts involved shift filtration by one.
+% for $\dual W$, it is enough to prove this result when $\calX$ is a sphere.
+However, we have already calculated these groups in Corollary \ref{the corollary on the bousfield kan e2}, and found that $(H^*)^s_t$ is spanned by the image of $\imath\in (H^*)^0_T$ under various $\calMv(1)$- and $\calMh(1)$-operations. All of these operations preserve the half-plane specified by $s<t-s$.
+\end{proof}
+
+
+\end{May sseq and vanishing line}
+
+
 
 \begin{The Bousfield-Kan spectral sequence for a sphere}
 \SectionOrChapter{The Bousfield-Kan spectral sequence for $\mathbb{S}^{\algs}_T$}
@@ -8656,14 +8762,9 @@ Moreover, the complete calculation of the \BKSS\ for a finite connected model in
 %
 %\begin{alignat*}{2}
 %% Left hand side
-%\ell(I^{+})►
+%\ell(I^{+})
 %% Relation
 %&=
-%% Right hand side
-%¿►%
-%% Comment
-%&\qquad&\text{(ᾮ)}©
-%\end{alignat*}
 %
 %
 %
@@ -8683,70 +8784,6 @@ Moreover, the complete calculation of the \BKSS\ for a finite connected model in
 \end{The Bousfield-Kan spectral sequence for a sphere}
 
 
-\begin{May sseq and vanishing line}
-\SectionOrChapter{A May-Koszul spectral sequence calculating $H^*_{\calw(0)}$}
-\label{May sseq and vanishing line}
-%{Explain the quadratic filtration of the bar construction, derive a spectral sequence, explain what it implies about the whole thing}
-
-\SubsectionOrSection{The quadratic filtration and resulting spectral sequence}
-\label{The quadratic filtration section}
-Suppose that $X\in s\calw(n)$ for  $n\geq0$, and write $\textup{QBX}\in s\vect{+}{n}$ for the simplicial bar construction   calculating $H_*^{\calw(n)}X$:
-\[(Q^{\calw(n)}B^{\calw(n)}X)_s\cong (F^{\calw(n)})^{s}X_{s}.\] We may view the vector space $\calU^{\calw(n)}X$ as being quadratically graded, concentrated in quadratic grading 1, and as explained in \S\ref{Quadratic grading}, the monad $F^{\calW(n)}$ may be promoted to a monad on $\quadgrad{}\vect{+}{n}$, so that $\textup{QBX}$ is quadratically graded in each simplicial degree individually.
-
-We derive from these gradings the \emph{quadratic filtration}, the following increasing filtration of $N_*\textup{QBX}\in \complexes \vect{+}{n}$:
-\[F_mN_*\textup{QBX}=\textstyle\bigoplus_{k\leq m} \quadgrad{k}N_*\textup{QBX}. \]
-This definition is the direct analogue of Priddy's definition \cite{PriddyKoszul.pdf}. It appears difficult to use his techniques to calculate, say, $H^*_{\calw(0)}H^*_\algs\mathbb{S}^{\algs}_T$ directly, as the bar construction in $\calw(0)$ grows so much faster than the bar construction in a category of modules, and the resulting spectral sequence is not degenerate. Nonetheless, the quadratic filtration is in finite in each internal degree:
-\begin{lem}
-Suppose that $n\geq0$, $X\in s\calw(n)$, and $k\geq0$. Then for any $s_k,\ldots,s_1\geq0$ and $t\geq1$,
-\[(F_{2^{t-1}}N_*\textup{QBX})_{{s_k,\ldots,s_1}}^t=(N_*\textup{QBX})_{{s_k,\ldots,s_1}}^t.\]
-\end{lem}
-\begin{proof}
-This follows from the observation that every possible unary (resp.\ quadratic) operation increases $t$ by at least one and doubles quadratic gradings (resp. adds quadratic gradings). It is obvious in dimension $t=1$, as there can have been no non-trivial operations applied in this dimension (the grading $t$ is always non-negative). The full statement follows by induction on $t$.
-%
-%We prove it by induction on the cohomological dimension $t$. In dimension $t=1$ it is evident that no non-trivial operations can have been applied, and so the quadratic grading can only be one. 
-%
-%Assume the induction hypothesis in dimensions lower than $t$, and suppose that $x\in \textup{QBX}^t$ is homogeneous. We must show that $x\in \quadgrad{2^{t-1}}\textup{QBX}$. If $x\in \quadgrad{1}\textup{QBX}$ then we are done, and otherwise, $x$ has been formed at some stage in the bar construction using some quadratic or unary operation applied to a class or classes with cohomological dimension at most $t-1$, and by induction, quadratic grading at most $2^{t-2}$. As this operation either adds or doubles the quadratic grading(s), $x$ lies in quadratic grading at most $2\cdot 2^{t-2}$.
-\end{proof}
-Moreover, there is an isomorphism
-\[\E{0}{}{N_*\textup{QBX}}{}{}\cong N_*Q^{\calw(n)}B^{\calw(n)}K^{\calw(n)}U^{\calw(n)}X\]
-of chain complexes, so that:
-\begin{prop}
-\label{theMaySseq}
-The cohomotopy spectral sequence of the quadratic filtration is a strongly convergent spectral sequence, the \emph{May-Koszul} spectral sequence:
-\[\E{\textup{MK}}{1}{N_*\textup{QBX}}{m,s_n,\ldots,s_1}{t}\cong \quadgrad{m}(H^*_{\calw(n)}K^{\calw(n)}U^{\calw(n)}X)^{s_n,\ldots,s_1}_{t}\implies (H^*_{\calw(n)}X)^{s_n,\ldots,s_1}_{t}.\]
-If $\pi_*X$ is of finite type, the $E_1$-page may be rewritten as:
-\[\E{\textup{MK}}{1}{N_*\textup{QBX}}{m,s_n,\ldots,s_1}{t}\cong \quadgrad{m}(F^{\HA{\calw(n)}}\dual(\pi_*X))^{s_n,\ldots,s_1}_{t},\]
-which reduces when $n\geq1$ to:
-\[\E{\textup{MK}}{1}{N_*\textup{QBX}}{m,s_n,\ldots,s_1}{t}\cong \quadgrad{m}(F^{\calMhv(n+1)}\dual(\pi_*X))^{s_n,\ldots,s_1}_{t}.\]
-\end{prop}
-\noindent Notes that all of the spectral sequence operations defined in \S\ref{Cohomology Operations for W and U} respect the quadratic filtration --- the unary operations double quadratic filtrations while the pairing operations sum then. We leave it to the interested reader to derive the resulting theory of operations in the May-Koszul spectral sequence from this fact, for any $n\geq0$.
-
-\SubsectionOrSection{A vanishing line on the Bousfield-Kan $E_2$-page}
-\label{A vanishing line on the Bousfield-Kan}
-It is possible to obtain by the following method a vanishing line of slope $4/5$ whenever $\pi_1X$ is of finite type. In the interest of brevity however, we prove only the following:
-\begin{thm}
-\label{vanishing line prop}
-If $X\in s\algs$ is connected (with $\pi_*X$ not necessarily of finite type) then the \BKSS\ admits a vanishing line on $E_2$ of slope $1$ and intercept $0$:
-\[\E{}{2}{\calx}{s}{t}=0\textup{ \ whenever \ }s\geq 1\cdot( t-s).\]
-\end{thm}
-\begin{proof}
-We will prove that the right derived functors
-\[((\mathbb{R}^s\Prim^{\HC{\algs}})W)_t\]
-have such a vanishing line for any $W\in \HC{\algs}$ with $W_0=0$. Any such $W$ is the union of its finite-dimensional subobjects, as all of the structure maps in $\calw(0)$ increase the degree $t$, so it is enough to prove this Proposition for finite-dimensional $W$. Then, by passing to duals, it is enough to produce a vanishing line in the isomorphic vector space
-\[H^*_{\calw(0)}\dual W.\]
-This group is calculated by the May-Koszul spectral sequence whose $E_1$-page is given by
-\[\E{\textup{MK}}{1}{}{m,s}{t}\cong \quadgrad{m}(H^*_{\calw(0)}K^{\calw(0)}U^{\calw(0)}\dual W)^{s}_{t}.\]
-Now $K^{\calw(0)}U^{\calw(0)}\dual W$ decomposes as a product (for various $T_i\geq1$):
-\[K_{0}^{\calw(0),T_1}\times\cdots \times K_{0}^{\calw(0),T_N},\]
-so if we can prove that
-\[(H^*)^s_t:=(H^{*}_{\calw(0)}K_0^{\calw(0),T})^s_t=0 \textup{ \ whenever \ }s\geq t-s,\]
-the same will be true for $H^*_{\calw(0)}\dual W$ by Theorem \ref{Koszul-dual Hilton-Milnor theorem}. %, it is enough to prove a vanishing line for a single Eilenberg-Mac Lane object $K^{\algs}_{T}$. Note that the intercepts do not shift when applying Theorem \ref{Koszul-dual Hilton-Milnor theorem}, even though the coproducts involved shift filtration by one.
-% for $\dual W$, it is enough to prove this result when $\calX$ is a sphere.
-However, we have already calculated these groups in Corollary \ref{the corollary on the bousfield kan e2}, and found that $(H^*)^s_t$ is spanned by the image of $\imath\in (H^*)^0_T$ under various $\calMv(1)$- and $\calMh(1)$-operations. All of these operations preserve the half-plane specified by $s<t-s$.
-\end{proof}
-
-
-\end{May sseq and vanishing line}
 
 \appendix
 \begin{appendices}
