@@ -603,6 +603,7 @@ The totalization of $\calx$ is the  \emph{homology completion $X\hat{\ }$ of $X$
 %surrounding the Bousfield-Kan spectral sequence, and to perform calculations in certain examples.  More specifically, we will 
 
 \SubsectionOrSection{The Bousfield-Kan spectral sequence in $s\algs$}
+\label{The BKSS intro spiel}
 At this point we depart from generalities, turning to the homotopy theory of simplicial non-unital commutative algebras in earnest.
 % The category $s\algs$ is a one of the first examples of a Quillen model category \cite{QuillenHomAlg.pdf}, as is $s\calc$ for any category $\calc$ of universal algebras, and we will work in this model category for various categories $\calc$.
 %In \S\ref{Conventions and notation} we give the background on the model category $s\calc$ for $\calc$ a category of universal algebras, and choose our conventions for the notation for spectral sequences we will use.
@@ -3423,11 +3424,11 @@ with the properties:
 \item the restriction of $D^k$ to $C^{i}R\otimes C^{j}S$ is zero unless $i\geq k$ and $j\geq k$; and
 \item $D^k$ maps $C^{k}R\otimes C^{k}S$ identically onto $C^{k}(R\otimes S)$.
 \end{enumerate}
-It is a natural convention to define $D^k=0$ for whenever either $k<0$ or $i<0$, in which case the relation $dD^k+D^kd=(1+\twist)D^{k-1}$ holds for any $k$.
+It is a natural convention to define $D^k=0$ for all $k,i\in\mathbb{Z}$, in which case the relation $dD^k+D^kd=(1+\twist)D^{k-1}$ holds for any $k$.
 
-Maps dual to these are described in detail, under the name \emph{special cup-$k$ product}, by Singer in \cite[Definitions 1.91 and 1.94]{MR2245560}, and developed originally in \cite{DoldUber}. Indeed, we will use these maps later, and denote them
+Maps dual to these are described in detail, under the name \emph{special cup-$k$ product}, by Singer in \cite[Definitions 1.91 and 1.94]{MR2245560}, and were developed originally in \cite{DoldUber}. Indeed, we will use these maps later, and denote them
 \[(D^k)^{\star}:C(U\otimes V)_{i}\to (CU\otimes CV)_{i+k}\textup{\ \ for $i,k\geq0$},\]
-natural in $U,V\in s\vect{}{}$. The sense in which these maps are dual to the $D^k$ is as follows. Suppose that $U,V\in s\vect{}{}$. Then there is a commuting diagram (for $i,k\geq0$):
+natural in $U,V\in s\vect{}{}$. The sense in which these maps are dual to the $D^k$ is captured in the following  commuting diagram (for $i,k\geq0$):
 \[\xymatrix@R=4mm@C=17mm{
 (C\dual U\otimes C\dual V)^{i+k}\ar[r]^-{D^k}
 \ar[d]&%r1c1
@@ -3436,7 +3437,7 @@ C(\dual U\otimes\dual V)^{i}\ar[d]\\%r1c2
 &%r2c1
 (\dual C(U\otimes V))^{i}%r2c2
 }\]
-
+This is the first instance of a notational convention we will use occasionally in what follows. We consider the operations $D^k$ to be `of primary interest' in this thesis,  and so we prefer not to adorn the symbol $D^k$. However, we would like to have access to operations $(D^k)^{\star}$ \emph{of which the $D^k$ are the duals} in the sense of the above commuting square, and not the other way around. So, we use a star as opposed to an asterisk when writing $(D^k)^{\star}$.
 
 \SubsectionOrSection{External unary cohomotopy operations}\label{External unary cohomotopy operations}
 %\begin{shaded}\tiny
@@ -3452,8 +3453,8 @@ C(\dual U\otimes\dual V)^{i}\ar[d]\\%r1c2
 %One checks that these cochain operations induce well defined operations $\ExtCohProd$ and $\ExtCohOp^k$ by the same arguments as in \citeBOX[\S1.12]{MR2245560}.
 %\end{proof}
 %\end{shaded}
-In this section we recall the definition of certain cohomotopy operations with domain $\pi^*U$ for any $U\in c\vect{}{}$, using the function
-\[D^{n-i}(\alpha\otimes \alpha)+D^{n-i+1}(\alpha\otimes d\alpha),\ \ C^nU \to C^{n+i}(S_2U).\]
+In this section we recall the definition of certain cohomotopy operations with domain $\pi^*U$ for any $U\in c\vect{}{}$, using the functions
+\[\alpha\mapsto D^{n-i}(\alpha\otimes \alpha)+D^{n-i+1}(\alpha\otimes d\alpha),\ \ C^nU \to C^{n+i}(S_2U).\]
 \begin{prop}
 \label{external singly simplicial steenrods}
 These functions descend to  well defined linear operations:
@@ -3462,9 +3463,9 @@ These functions descend to  well defined linear operations:
 \begin{proof}
 One checks that these cochain operations induce well defined operations $\ExtCohProd$ and $\ExtCohOp^k$ by the same arguments as in \citeBOX[\S1.12]{MR2245560}.
 \end{proof}
-Now if $U=\dual V$ for some $V\in s\vect{}{}$, then we may use the natural transformation $S_2\dual\to\dual S^2$ to form the following composite, also denoted $\ExtCohOp^k$:
+If $U=\dual V$ for some $V\in s\vect{}{}$, then we may use the natural transformation $S_2\dual\to\dual S^2$ to form the following composite, also denoted $\ExtCohOp^k$:
 \[\pi^n\dual V\overset{\ExtCohOp^k}{\to}\pi^{n+k}S_2\dual V\to \pi^{n+k}\dual S^2V.\]
-This will be part of the process we use to define cohomology operations.
+This will be part of the process we use shortly to define cohomology operations.
 %and under the natural isomorphism $\pi^*\dual\cong \dual\pi_*$, this operation is the operation defined before the shading.
 
 
@@ -3472,9 +3473,11 @@ This will be part of the process we use to define cohomology operations.
 \SubsectionOrSection{Linearly dual homotopy operations}\label{Linearly dual homotopy operations}
 Whenever $V\in s\vect{}{}$ has $\pi_*V$ of finite type, the linear maps $\ExtCohOp^k:\pi^n\dual V\to\pi^{n+k}\dual S^2V$ induce dual operators
 \[\pi_*(S^2V)\to \pi_{*-k}V.\]
-Following \citeBOX[\S3]{MR1089001}, one can do much better than just this observation, giving a direct definition of homology operations, valid under any circumstances, whose duals are the $\ExtCohOp^k$.
+Following \citeBOX[\S3]{MR1089001}, one can do much better than just this observation, giving a direct definition of such operations, valid for any $V\in s\vect{}{}$, whose duals are the $\ExtCohOp^k$.
 
-At this point, we introduce a new notational convention. The cohomotopy operation $\ExtCohOp^k$ is of primary interest, and we prefer to allow it its standard symbol (albeit with the attached subscript). On the other hand, we are about to product a homotopy operation of which it is the dual. Our convention in this setting is to write $(\ExtCohOp^k)^\star$ for the homotopy operation, using a star, not an asterisk. That is, for \emph{any} $V\in s\vect{}{}$, there is an operation
+Again, the cohomotopy operation $\ExtCohOp^k$ is of primary interest, and we prefer to allow it its standard symbol (albeit with the attached subscript). On the other hand, we are about to produce a homotopy operation of which it is the dual, so we will use  
+%. Our convention in this setting is to write $(\ExtCohOp^k)^\star$ for the homotopy operation, using 
+a star and not an asterisk. That is, for \emph{any} $V\in s\vect{}{}$, there is an operation
 \[(\ExtCohOp^k)^\star:\pi_*(S^2V)\to \pi_{*-k}V\]
 such that the following diagram commutes:
 \[\xymatrix@R=4mm@C=20mm{
@@ -3490,7 +3493,7 @@ such that the following diagram commutes:
 %directly, without the double dualization as described below. %Setting $V=Q^{\calc}B^{\calc}X$ and precomposing with the map $(\psi_\calc)_*:\pi_*(V)\to\pi_{*-1}(S^2V)$ yields homology operations on $H_*^\calc$ whose duals are the cohomology operations of \S\ref{generic coh ops section}.
 
 In order to define these precursor homotopy operations, Goerss \cite[Proposition 3.7]{MR1089001}
-shows that any element of $x\in \pi_m(S^2V)$ can be written as a sum
+observes that any element of $x\in \pi_m(S^2V)$ can be written as a sum
 \[x=\sum_j\pi_*(1+T)(y_j\otimes z_j)+\sum_{\smash{0\leq k\leq \lfloor m/2\rfloor}}\sigma_k(w_k),\]
 where $w_k\in \pi_{m-k}V$ for $0\leq k\leq\lfloor m/2\rfloor$, and $y_j,z_j\in \pi_{*}V$, and that we may \emph{define}:
 \[(\ExtCohOp^k)^\star(x):=w_k.\]
@@ -3531,10 +3534,10 @@ We might have denoted $\widetilde{\nabla}$ by $\mu_\textup{ext}^\star$, but deci
 
 \SubsectionOrSection{Chain level structure for cohomology operations; the maps $\xi_\calc $ and $\psi_\calc$}\label{chain level structure}
 
-We will now give generalisations of Goerss' constructions in \citeBOX[\S5]{MR1089001} to yield useful structure on the complexes calculating cohomology.  Suppose that $X\in s\calc$ is almost free, with $V_s\subseteq X_s$ the freely generating subspace. Then for each $s$, the functor 
+We will now give generalisations of Goerss' constructions in \citeBOX[\S5]{MR1089001} which often yield useful structure on the complexes calculating $\calc$-cohomology.  Suppose that $X\in s\calc$ is almost free, with $V_s\subseteq X_s$ the freely generating subspace. Then for each $s$, the functor 
 \[\Hom_\calc(X_s,\DASH)\cong \Hom_{\vect{}{}}(V_s,U^\calc\DASH)\]
-is naturally an $\Ftwo $-vector space. Writing $\phi_s=F^\calc(\Delta):X_s\to X_s\sqcup X_s$, the addition operation `$\star$' on $\Hom_\calc(X_s,\DASH)$ is given by $f\star g= (f\sqcup g)\circ\phi_s$. Now let
-$\overline{\xi}_\calc=((d_0\sqcup d_0)\phi_s)\star(\phi_{s-1}d_0)$, the sum of maps in the $\Ftwo $-vector space $\textup{Hom}_\calc(X_s,X_{s-1}\sqcup X_{s-1})$. It is completely formal to check that $\overline{\xi}_\calc$ maps to zero in the group
+is naturally an $\Ftwo $-vector space. Writing $\phi_s=F^\calc(\Delta):X_s\to X_s\sqcup X_s$, the addition operation on $\Hom_\calc(X_s,\DASH)$ is given by $(f,g)\mapsto (f\sqcup g)\circ\phi_s$. Now let
+$\overline{\xi}_\calc$ be the sum of $((d_0\sqcup d_0)\phi_s)$ and $(\phi_{s-1}d_0)$ in the $\Ftwo $-vector space $\textup{Hom}_\calc(X_s,X_{s-1}\sqcup X_{s-1})$. It is completely formal to check that $\overline{\xi}_\calc$ maps to zero in the group
 \[\textup{Hom}_\calc(X_s,X_{s-1}\times X_{s-1})=\textup{Hom}_\calc(X_s,X_{s-1})\times \textup{Hom}_\calc(X_s,X_{s-1}),\]
 and thus $\overline{\xi}_\calc$ factors through a unique map $\xi_\calc:X_s\to X_{s-1}\smashcoprod X_{s-1}$. Furthermore, $\xi_\calc$ enjoys the symmetry $\tau\xi_\calc=\xi_\calc$, and it is again formal to verify the analogue of \cite[Lemma 5.5]{MR1089001}:
 \begin{lem}
@@ -3556,16 +3559,17 @@ These operations are the duals of natural homology co-operations, defined using 
 H^\calc_{n}(X)\overset{(\ExtCohOp^k)^{\star}}{\from} \pi_{n+k}(S^2(Q^\calc B^\calc X))\overset{\psi_\calc^*}{\from} H^\calc_{n+k+1}(X).
 \end{gather*}
 
-We will prove instead a somewhat more general result:
+Instead of proving Lemma \ref{psi is basically the quadratic part}, we will prove the more general:
 \begin{prop}
 \label{general CohOpns given irreducibility}
 Suppose that $\theta:F^\calc V\to GV$ is a natural transformation from $F^\calc$ to another endofunctor $G$ of $\vect{}{}$ satisfying the condition:
 \[\smash{\theta\circ\mu_V=\theta\circ \epsilon_{F^\calc V} +\theta\circ {F^\calc \epsilon_V}:F^\calc F^\calc V\to G V.}\]
-Write $\smash{\widetilde{\theta}}:Q^{\calc}X_s\to G(Q^{\calc}X_{s-1})$ for the following composite, (which depends on the almost free structure chosen):
-\[\smash{Q^{\calc}X_s\overset{\cong}{\to} V_s\overset{d_0}{\to}F^\calc V_{s-1}\overset{\theta}{\to}GV_{s-1}\overset{\cong}{\to}G(Q^{\calc}X_{s-1})}\]
-Then $d_0\circ\widetilde{\theta}=\widetilde{\theta}\circ(d_0+d_1)$, and $d_j\circ\widetilde{\theta}=\widetilde{\theta}\circ d_{j+1}$ for $j\geq1$, so that $\widetilde{\theta}$ restricts to degree $-1$ chain maps $N_sQ^\calc X\to N_{s-1}Q^\calc X$ and $C_sQ^\calc X\to C_{s-1}Q^\calc X$.
+Write $\smash{\widetilde{\theta}}:Q^{\calc}X_s\to G(Q^{\calc}X_{s-1})$ for the following 
+\[\smash{Q^{\calc}X_s\overset{\cong}{\to} V_s\overset{d_0}{\to}F^\calc V_{s-1}\overset{\theta}{\to}GV_{s-1}\overset{\cong}{\to}G(Q^{\calc}X_{s-1})}.\]
+Then $d_0\circ\widetilde{\theta}=\widetilde{\theta}\circ(d_0+d_1)$, and $d_j\circ\widetilde{\theta}=\widetilde{\theta}\circ d_{j+1}$ for $j\geq1$, so that $\widetilde{\theta}$ restricts to a degree $-1$ chain map on $N_sQ^\calc X\to N_{s-1}Q^\calc X$ and also on $C_sQ^\calc X\to C_{s-1}Q^\calc X$.
 %For $v\in V_s$, write $d_0v=g(v_i)$ as an expression in certain $v_i\in V_{s-1}$. Then $\widetilde{\theta}(v):=\theta(g)(v_i)$. Here, we view the $g(v_i)$ as lying in $F^\calc V_{s-1}\cong X_{s-1}$, so that $\theta(g(v_i))\in G V_{s-1}\cong G(Q^\calc X_{s-1})$. Then $\widetilde{\theta}$ is a chain map, even descending to the subspace $N_*Q^\calc X$.
 \end{prop}
+\noindent Note that $\smash{\widetilde{\theta}}$ depends on the almost free structure chosen.
 \begin{proof}
 In order to see that $d_j\circ\widetilde{\theta}=\widetilde{\theta}\circ d_{j+1}$ for $j\geq1$, we examine the diagram
 \[{\xymatrix@R=4mm{
@@ -3605,7 +3609,7 @@ F^\calc V_{s-2}\ar[r]^-{\theta}
 &%r2c2
 GQ^{\calc}X_{s-2}
 }\]
-Now the rightmost two squares both commute, so to show that the outer rectangle commutes, it is enough to see that the two composites $V_{s}\to F^\calc V_{s-2}$ are coequalized by $\theta$. Using the simplicial identity $d_0 d_1=d_0d_0$, we are trying to show that $\theta d_0d_0+\theta d_0\epsilon d_0$ and $\theta F^\calc (\epsilon d_0) d_0$ are the same map from $V_s$ to $GV_{s-2}$. Even more, we will show that $\theta d_0+\theta d_0\epsilon$ and $\theta F^\calc (\epsilon d_0)$ are the same map $F^\calc V_{s-1}$ to $GV_{s-2}$.
+To show that the outer rectangle commutes, it is enough to see that the two composites $V_{s}\to F^\calc V_{s-2}$ are coequalized by $\theta$. Using the simplicial identity $d_0 d_1=d_0d_0$, we are trying to show that $\theta d_0d_0+\theta d_0\epsilon d_0$ and $\theta F^\calc (\epsilon d_0) d_0$ are the same map from $V_s$ to $GV_{s-2}$. Even more, we will show that $\theta d_0+\theta d_0\epsilon$ and $\theta F^\calc (\epsilon d_0)$ are the same map $F^\calc V_{s-1}$ to $GV_{s-2}$.
 
 Starting with an expression $f(v_i)$ in various $v_i\in V_{s-1}$, we calculate $\theta d_0 f(v_i)=\theta (fd_0v_i)$, $\theta d_0\epsilon f(v_i)=\theta (\epsilon (f)(d_0v_i))$ and $\theta F^\calc (\epsilon d_0)(f(v_i))=\theta(f)(\epsilon(d_0v_i))$. That these three terms add to zero was the requirement specified for $\theta$.
 \end{proof}
@@ -3639,15 +3643,15 @@ He also defines a natural operation $\beta:H_{\algs}^0A\to H_{\algs}^1A$. Note t
 In this case, \emph{(\ref{yeah H is a Pmodule})} \emph{does} state that $H^*_{\algs}A$ is a left module over $\Palg$, the \emph{Steenrod algebra for commutative algebras over $\Ftwo $} of $\Palg$-algebra. This is the unital associative algebra generated by symbols $P^i$ for $i\geq0$, modulo the two sided ideal generated by $P^0$, $P^1$, and the evident \emph{$P$-Adem relations}.
 
 
-A sequence $I=(i_\ell,\ldots,i_1)$ of integers $i_j\geq2$ is \emph{$P$-admissible} if $i_{j+1}<2i_j$ for $1\leq j <\ell$. For any sequence $I=(i_\ell,\ldots,i_1)$, write $P^I$ for the monomial $P^{i_\ell}\cdots P^{i_1}$ in $\Palg$. It follows from \cite[Theorem I]{MR1089001} that $\Palg$ has an \emph{admissible basis}, consisting of those $P^I=P^{i_\ell}\cdots P^{i_{1}}$ with $I$ a $P$-admissible sequence.  Again, we will say that \emph{$I$ produces $J$ in $\Palg$}, denoted $\produces{I}{J}{\Palg}$ if, when $P_I$ is written in the $P$-admissible basis of $\Palg$, $P_J$ appears with non-zero coefficient. In this case, $J$ must be $P$-admissible, and $I$ must be $P$-inadmissible unless $J=I$.
+A sequence $I=(i_\ell,\ldots,i_1)$ of integers $i_j\geq2$ is \emph{$P$-admissible} if $i_{j+1}<2i_j$ for $1\leq j <\ell$. For any sequence $I=(i_\ell,\ldots,i_1)$, write $P^I$ for the monomial $P^{i_\ell}\cdots P^{i_1}$ in $\Palg$. It follows from \cite[Theorem I]{MR1089001} that $\Palg$ has an \emph{admissible basis}, consisting of those $P^I=P^{i_\ell}\cdots P^{i_{1}}$ with $I$ a $P$-admissible sequence.  Again, we will say that \emph{$I$ produces $J$ in $\Palg$}, denoted $\produces{I}{J}{\Palg}$ if, when $P_I$ is written in the $P$-admissible basis of $\Palg$, $P_J$ appears with non-zero coefficient. In this case, unless $J=I$, $J$ is $P$-admissible and $I$ is $P$-inadmissible.
 
 We define
 \[\minDimP(I):=\max\{(i_1),\,(i_2-i_1-1),\,(i_3-i_2-i_1-2),\,\ldots,\,(i_{\ell}-\cdots-i_1-\ell+1)\},\]
 for a rather different purpose than in \S\ref{Homotopy operations for simplicial commutative algebras} and \S\ref{Homotopy operations for simplicial Lie algebras}: although the composite 
 \[P^I:\bigl(H_{\algs}^{n}A\overset{P^{i_1}}{\to}H_{\algs}^{n+i_1+1}A\overset{P^{i_2}}{\to}\cdots \overset{P^{i_\ell}}{\to}H_{\algs}^{n+i_1+\cdots +i_\ell+\ell}A\bigr)\]
-is always defined, it is \emph{forced to be zero} by \emph{(\ref{P unstable vanishing})} alone except  when $n\geq\minDimP(I)$.
+is always defined, it is \emph{forced to be zero} (by \emph{(\ref{P unstable vanishing})} alone) except  when $n\geq\minDimP(I)$.
 
-As in \S\ref{Homotopy operations for simplicial commutative algebras} and \S\ref{Homotopy operations for simplicial Lie algebras}, if a non-empty sequence $I$  is \emph{$P$-admissible}, we can identify which term is largest in the maximum defining $\minDimP(I)$ and calculate that $\minDimP(I)=i_1$. More explicitly, in a (non-vanishing) admissible expression $P^{i_\ell}\cdots P^{i_1}x$, for $x\in H^n_{\algs}A$, the only one of these $P$-operations that can be a top operation is $P^{i_{1}}$.
+As in \S\ref{Homotopy operations for simplicial commutative algebras} and \S\ref{Homotopy operations for simplicial Lie algebras}, if a non-empty sequence $I$  is \emph{$P$-admissible}, we can identify which term is largest in the maximum defining $\minDimP(I)$, and calculate that $\minDimP(I)=i_1$. More explicitly, in a non-vanishing admissible expression $P^{i_\ell}\cdots P^{i_1}x$, for $x\in H^n_{\algs}A$, the only $P$-operations that can be a top operation is $P^{i_{1}}$.
 %Unlike in \S\ref{Homotopy operations for simplicial commutative algebras} and \S\ref{Homotopy operations for simplicial Lie algebras}, having a non-empty sequence $I$  be \emph{$P$-admissible} does not allow us identify which term is largest in the maximum defining $\minDimP(I)$. More explicitly, in an admissible expression $P^{i_\ell}\cdots P^{i_1}x$, for $x\in H^n_{\algs}A$, top $P$-operations may be interspersed with non-top $P$-operations.
 
 
@@ -3658,7 +3662,7 @@ As in \S\ref{Homotopy operations for simplicial commutative algebras} and \S\ref
 %The only tricky inequality is $\minDimDelta(i,j)\geq \minDimDelta(i+j-s,s)$. Now the right hand side must equal $i+j-2s$, and the left hand side is at least $j$. The result follows, since $2s\geq i+1$.
 %\end{proof}
 
-The following result shows that whenever an expression $P^Jx$ is forced to be zero by \emph{(\ref{P unstable vanishing})}  and we reduce $P^Jx$ to a sum of $P$-admissible composites, all of the summands are forced to be zero by \emph{(\ref{P unstable vanishing})}.
+The following result shows that whenever an expression $P^Jx$ is forced to be zero by \emph{(\ref{P unstable vanishing})}  and we reduce $P^Jx$ to a sum of $P$-admissible composites, then \emph{(\ref{P unstable vanishing})} forces all of the resulting summands  to be zero.
 \begin{lem}
 \label{lemOnAdemChangeInMP}
 If $\produces{I}{J}{\Palg}$, then $\minDimP(J) \geq \minDimP(I)$, with strict inequality when $I$ and $J$ are distinct and of length two.
@@ -3671,14 +3675,15 @@ It is  interesting to observe that $\Palg$, the Steenrod algebra for commutative
 in fact \emph{Koszul dual} (c.f.\ \cite{PriddyKoszul.pdf}) to $\deltaalg$, the algebra which possesses an unstable partial left action on the homotopy of a simplicial algebra. Indeed, Goerss \emph{calculates} $\Palg$ as the Koszul dual of $\deltaalg$, using a reverse Adams spectral sequence due to Miller \cite{MillerSullivanConjecture.pdf} (c.f.\ \S\ref{reverse Adams spectral sequence}). We will explore this duality further when we consider the Bousfield-Kan spectral sequence.
 
 \SubsectionOrSection{The categories $\calw(0)$ and $\calU(0)$}
-Suppose that $A\in s\algs$ is \emph{connected}: $\pi_0A=0$. Then $H^0_{\algs}=Q^{\algs}\pi_0A=0$. It is advantageous to work with the cohomology of connected objects, as we do not need to worry about the operation $\beta$. If we say that $V\in \vect{1}{}$ is \emph{connected} when $V^{0}=0$, we may identify the full subcategory of $\vect{1}{}$ on the connected objects with $\vect{+}{}$.
+Suppose that $A\in s\algs$ is \emph{connected}, i.e.\ that $\pi_0A=0$. Then $H^0_{\algs}A=Q^{\algs}\pi_0A=0$, so that the operation $\beta$ can be ignored. This is a convenient biproduct of working with the cohomology of connected objects, although the real reson that we do so is that doing so avoid completion and convergence problems. If we say that $V\in \vect{1}{}$ is \emph{connected} when $V^{0}=0$, we may identify the full subcategory of $\vect{1}{}$ on the connected objects with $\vect{+}{}$.
 
 Goerss' result proves that the monad
 $F^{\HA{\algs}}$ on $\vect{1}{}$
 preserves $\vect{+}{}$ (and indeed it is a general fact that no non-trivial natural cohomology operations decrease dimension).
 We will write $\calw(0)$ for the category of connected $\algs$-$H^*$-algebras, so that the monad $F^{\calw(0)}$  is simply the restriction of $F^{\HA{\algs}}$ to $\vect{+}{}$. The way that we will report Goerss' result here is to explain how the monad $F^{\calw(0)}$ may be constructed on objects of $\vect{+}{}$ of finite type.
 
-Let the \emph{category of unstable $\Palg$-modules}, denoted $\calU(0)$, be the category whose objects are $\vect{+}{0}$-graded $\Palg$-modules in which $P^i$ acts with grading $i+1$, and such that $P^i:V^n\to V^{n+i+1}$ is zero unless $i\leq n$. Recall that  we have \emph{already} imposed the $P$-Adem relations and set $P^0$ and $P^1$ to be zero in $\Palg$. 
+Let the \emph{category of unstable $\Palg$-modules}, denoted $\calU(0)$, be the category whose objects are $\vect{+}{0}$-graded $\Palg$-modules in which $P^i$ acts with grading $i+1$ by everywhere defined maps 
+\[P^i:V^n\to V^{n+i+1}\] which equal zero unless $2\leq i\leq n$. Recall that  we have \emph{already} imposed the $P$-Adem relations and set $P^0$ and $P^1$ to be zero in $\Palg$. 
 \begin{prop}
 The monad $F^{\calU(0)}$ may be defined by
 \begin{alignat*}{2}
@@ -3723,7 +3728,7 @@ Suppose that $V\in\vect{+}{}$ is of finite type. Then so is $F^{\calw(0)}V$.
 The following observations will be useful for the calculation of the cohomology of objects of $\calw(0)$.
 \begin{lem}
 \label{quad gradings have a chance on U0 W0}
-The monads $F^{\calU(0)}$ and $F^{\calw(0)}$ on $\vect{+}{}$ may be promoted to monads on the category $\quadgrad{}\vect{+}{}$, by insisting that quadratic gradings add under brackets and double under $P$-operations.
+The monads $F^{\calU(0)}$ and $F^{\calw(0)}$ on $\vect{+}{}$ may be promoted to monads on the category $\quadgrad{}\vect{+}{}$, by insisting that quadratic gradings add when taking brackets and double when applying $P$-operations.
 \end{lem}
 \noindent It is typical to think of $V\in\vect{+}{}$ as an object of $\quadgrad{}\vect{+}{}$ concentrated in quadratic grading one when considering $F^{\calw(0)}V$.
 
@@ -3815,7 +3820,7 @@ One checks that the bracket is well defined in the quotient, and that taking the
 \end{proof}
 \SubsectionOrSection{Cohomology operations for simplicial (restricted) Lie algebras}
 \label{section: Cohomology operations for simplicial (restricted) Lie algebras}
-A standard definition for the cohomology of a simplicial Lie algebra $L\in s\liealgs$ or $s\restliealgs$ is presented in \cite{PriddySimplicialLie.pdf} as follows. Let $UL$ be the simplicial primitively Hopf algebra obtained by applying the universal enveloping algebra functor levelwise, or the \emph{restricted} universal enveloping algebra functor when working in $s\restliealgs$. %\textbf{[Priddy works with restricted Lie algebras. Cutting out the restriction cuts out $Sq^1$.]} 
+A standard definition of the cohomology of a simplicial Lie algebra $L\in s\liealgs$ or $s\restliealgs$ is presented in \cite{PriddySimplicialLie.pdf} as follows. Let $UL$ be the simplicial primitively Hopf algebra obtained by applying the universal enveloping algebra functor levelwise, or the \emph{restricted} universal enveloping algebra functor when working in $s\restliealgs$. %\textbf{[Priddy works with restricted Lie algebras. Cutting out the restriction cuts out $Sq^1$.]} 
 Applying the Eilenberg-Mac Lane suspension functor (\citeBOX[\S2.3]{PriddySimplicialLie.pdf}, \citeBOX[\S5]{MillerSullivanConjecture.pdf} or \citeBOX[p.~87]{MaySimpObj.pdf}), one defines (using a subscript $\bar{W}$ to avoid confusion):
 \[H_{\bar{W}}^*L:=\begin{cases}
 \pi^*\dual\bar{W}UL,&\textup{if }*>0;\\
@@ -3823,27 +3828,27 @@ Applying the Eilenberg-Mac Lane suspension functor (\citeBOX[\S2.3]{PriddySimpli
 %\\,&\textup{if }
 \end{cases}\]
 We discuss universal enveloping algebra functors in Appendix \ref{The partially restricted universal enveloping algebra}.
-The suspension $\bar{W}$ destroys the associative algebra structure but leaves a simplicial cocommutative coalgebra structure on $\bar{W}UL$. Homotopy operations for simplicial cocommutative coalgebras are well known, being the mode of definition of the cup product and Steenrod operations on the mod two cohomology of a simplicial set. These operations can be constructed using  propositions \ref{external singly simplicial steenrods} and \ref{the external cohomotopy pairing}:
+The suspension $\bar{W}$ destroys the associative algebra structure but leaves a simplicial cocommutative coalgebra structure on $\bar{W}UL$, with diagonal we denote by $\Delta$. Homotopy operations for simplicial cocommutative coalgebras are well known, being the mode of definition of the cup product and Steenrod operations present in the category $\calk$ discussed in \S\ref{Classicalstuff} of unstable algebras over the Steenrod algebra, and can be constructed using  propositions \ref{external singly simplicial steenrods} and \ref{the external cohomotopy pairing}:
 \begin{gather*}
 \Sq^k:=\Delta^*\circ\ExtCohOp^k:\bigl(\pi^n\dual (\bar{W}UL)\overset{\ExtCohOp^k}{\to}\pi^{n+k}\dual S^2(\bar{W}UL)\overset{\Delta^*}{\to}\pi^{n+k}\dual (\bar{W}UL)\bigr);\\
 \mu:=\Delta^*\circ\ExtCohProd:\bigl(S_2(\pi^*\dual(\bar{W}UL))^{n}\overset{\ExtCohProd}{\to} \pi^nS_2\dual(\bar{W}UL)\to \pi^n\dual S^2(\bar{W}UL)\overset{\Delta^*}{\to}\pi^n\dual (\bar{W}UL)\bigr).
 \end{gather*}
-The operations here make $H^*_{\bar{W}}L$ a module over the \emph{homogeneous Steenrod algebra}, which is the usual mod 2 Steenrod algebra `with $\Sq^0$ set to zero'. That is, the \emph{homogeneous Steenrod algebra} is the unital associative algebra $\LieSteen$ generated by symbols $\Sq^j$ for $j\geq1$, subject to the \emph{homogeneous $\Sq$-Adem relation}:
+The operations here make $H^*_{\bar{W}}L$ a module over the homogeneous Steenrod algebra discussed in \S\ref{The BKSS intro spiel}, which is the usual mod 2 Steenrod algebra `with $\Sq^0$ set to zero'. That is, the homogeneous Steenrod algebra is the unital associative algebra $\LieSteen$ generated by symbols $\Sq^j$ for $j\geq1$, subject to the \emph{homogeneous $\Sq$-Adem relation}:
 \[\Sq^i\Sq^j=\sum_{k=1}^{\lfloor i/2\rfloor}\binom{j-k-1}{ i-2k}\Sq^{i+j-k}\Sq^k\textup{\ for $i<2j$.}\]
-We will only ever work with the \emph{homogeneous} Steenrod algebra and the \emph{homogeneous} $\Sq$-Adem relation, and so may omit the word \emph{homogeneous} if we desire.
+We only ever work with the homogeneous Steenrod algebra and the homogeneous $\Sq$-Adem relation, and so may omit the word homogeneous if we desire.
 
 This algebra is Koszul dual to the \emph{opposite} of the $\Lambda$-algebra (c.f.\ \ref{Homotopy operations for simplicial Lie algebras}). There is an index shift in this duality, so that $\Sq^i$ corresponds to $\lambda_{i-1}$ for $i\geq1$ \citeBOX[\S7.1]{PriddyKoszul.pdf}.
 
 In \cite{PriddySimplicialLie.pdf}, Priddy concentrates on simplicial \emph{restricted} Lie algebras $L$, and works out all of the natural operations on $H^*_{\bar{W}}$ and the relations between them. Moreover, he gives a spectral sequence argument showing that the two notions of cohomology are isomorphic, \emph{with a shift in degree} arising from the use of $\bar{W}$: $H_{\bar{W}}^nL\cong H^{n-1}_{\restliealgs}L$ for $n\geq1$.
 
-For our purposes it is better to work in the framework set out in this thesis, giving an alternative definition of the operations needed. This alternative definition will fit more readily into the spectral sequence arguments we intend to make. 
+For our purposes it is better to work in the framework set out in \S\ref{chain level structure}, giving an alternative definition of Priddy's operations. This alternative definition will fit more readily into the spectral sequence arguments we intend to make. 
 
 For now, let $\calc$ stand either for $\restliealgs$ or $\liealgs$. Our definition of the cohomology operations is:
 \begin{gather*}
 \Sq^k:=\psi^*_{\calc}\circ\ExtCohOp^{k-1}:H_\calc^{n}L\overset{\ExtCohOp^{k-1}}{\to} \pi^{n+k-1}\dual(S^2(Q^\calc B^\calc L))\overset{\psi_\calc^*}{\to} H_\calc^{n+k}L,\\
 \mu:=\psi^*_{\calc}\circ\ExtCohProd:(S_2 H_\calc^{*}L)^{n}\overset{\ExtCohProd}{\to} \pi^{n}\dual(S^2(Q^\calc B^\calc L))\overset{\psi_\calc^*}{\to} H_\calc^{n+1}L.
 \end{gather*}
-We will check the properties of these operations using a spectral sequence argument similar to Priddy's, although we will need to a richer construction of the spectral sequence in order to extract information about the operations. This work will be deferred until Appendix \ref{appendix on Lie coh ops}, and will prove:
+We will check the properties of these operations using a spectral sequence argument similar to Priddy's, although we will need to give a richer construction of the spectral sequence in order to extract information about the operations. This work will be deferred until Appendix \ref{appendix on Lie coh ops}, and will prove:
 \begin{prop}
 \label{all the lie steenrod ops are the same}
 %Under the isomorphisms $H^*_\calc L\cong H^{*+1}_{\bar{W}}L$ for $n\geq0$, The operations
@@ -3872,7 +3877,7 @@ H^{n_1+n_2+2}_{\bar{W}} L%r2c2
 That is, the two definitions of $\Sq^k$ coincide, as do the two definitions of $\mu$.
 \end{prop}
 
-Given the suspension, one expects the notion of \emph{top Steenrod operation} to be different to that in other settings. We say that $\Sq^{n+1}:H^n_\calc L\to H^{2n+1}_\calc L$ is the top operation.
+Given the use of suspension $\bar{W}$, one expects the notion of \emph{top Steenrod operation} to be different to that in other settings, and in this context we say that $\Sq^{n+1}:H^n_\calc L\to H^{2n+1}_\calc L$ is the top operation.
 \begin{prop}[{\citeBOX[\S5.3]{PriddySimplicialLie.pdf}}]
 \label{omnibus on coh of simp lie algs}These operations have the following properties:
 \begin{enumerate}
@@ -3894,7 +3899,7 @@ If $\calc=\liealgs$ (as opposed to $\restliealgs$), then $\Sq^1=0$. In particula
 \begin{proof}
 It is enough to prove this for the universal example $\imath_n\in H^*_{\liealgs}\mathbb{K}_n^{\liealgs}$. The reverse Adams spectral sequence (\S\ref{reverse Adams spectral sequence}) is of the form
 \[E_2^{p,q}=(H^{p}_{\PA{\liealgs}}\mathbb{K}_{0,n}^{\PA{\liealgs}})^{q}\implies H^{p+q}_{\liealgs}\mathbb{K}_n^{\liealgs}.\]
-The point now is that $\mathbb{K}_{0,n}^{\PA{\liealgs}}$, which is just a constant object in $s\PA{\liealgs}$ with value a one-dimensional Lie algebra in internal dimension $n$, is actually free as an object of $\PA{\liealgs}$ below internal dimension $n+1$. This is simply because there is no $\lambda_0$ operation defined in $\PA{\liealgs}$. One may thus construct a pas-\`a-pas resolution of $\mathbb{K}_{0,n}^{\PA{\liealgs}}$ (a process described in \cite{Andre-StepByStep}) which in positive simplicial dimension is concentrated in internal dimension at least $n+1$, implying that $E_2^{p,q}=0$ when $p\geq1$ and $q\leq n$. Moreover, $E_2^{0,q}=0$ unless $q=n$, showing that $H^{n+1}_{\liealgs}\mathbb{K}_n^{\liealgs}=0$. This group contains $\Sq^1\imath_n$.
+The point now is that $\mathbb{K}_{0,n}^{\PA{\liealgs}}$, which is just a constant object in $s(\PA{\liealgs})$ with value a one-dimensional Lie algebra in internal dimension $n$, is actually free as an object of $\PA{\liealgs}$ below internal dimension $n+1$. This is simply because there is no $\lambda_0$ operation defined in $\PA{\liealgs}$. One may thus construct pas-\`a-pas a simplicial resolution of $\mathbb{K}_{0,n}^{\PA{\liealgs}}$ (a process described in \cite{Andre-StepByStep}) which in positive simplicial dimension is concentrated in internal dimension at least $n+1$, implying that $E_2^{p,q}=0$ when $p\geq1$ and $q\leq n$. Moreover, $E_2^{0,q}=0$ unless $q=n$, showing that $H^{n+1}_{\liealgs}\mathbb{K}_n^{\liealgs}=0$. This group contains $\Sq^1\imath_n$.
 \end{proof}
 A sequence $I=(i_\ell,\ldots,i_1)$ of integers $i_j\geq1$ is \emph{$\Sq$-admissible} if $i_{j+1}\geq 2i_j$ for $1\leq j <\ell$. For any sequence $I=(i_\ell,\ldots,i_1)$, write $\Sq^I$ for the monomial $\Sq^{i_\ell}\cdots \Sq^{i_1}$. The homogeneous Steenrod algebra has the expected admissible basis, and we say that \emph{$I$ produces $J$ in $\LieSteen$}, denoted $\produces{I}{J}{\Sq}$ if $\Sq^J$ appears in the $\Sq$-admissible expansion of $\Sq^I$.
 
@@ -3906,7 +3911,7 @@ is \emph{forced to be zero} by \emph{(\ref{Sq unstable vanishing})} alone except
 If a non-empty sequence $I$  is \emph{$\Sq$-admissible}, we have 
 \[\minDimDelta(I)=e(I)=i_\ell-i_{\ell-1}-\cdots -i_1,\]
 the Serre excess of $I$. We now have enough notation available to describe the category $\HA{\restliealgs}$, using Priddy's calculations. The results are similar to those in \S\ref{Homotopy operations for simplicial commutative algebras} on the category $\PA{\algs}$.
-Firstly, there is again  a \emph{K\"unneth theorem}:
+There is again  a \emph{K\"unneth theorem}:
 \begin{prop}
 \label{Prop on cohomology of product of finite lie gems}
 Suppose that $K_1$ and $K_2$ are finite GEMs in $s\restliealgs$. Then $H^*_\restliealgs K_1$ and $H^*_\restliealgs K_2$ in $\HA{\restliealgs}$ are of finite type, and their coproduct
@@ -3932,7 +3937,7 @@ H^*_{\bar{W}}(K_1\times K_2)
 % Right hand side
 H^*_{\bar{W}}K_1\otimes H^*_{\bar{W}}K_2.
 \end{alignat*}
-This containment in in fact an equality when $H^*_{\bar{W}}K_1 $ and $H^*_{\bar{W}}K_2$ are both of finite type, in which case $H^*_{\bar{W}}(K_1\times K_2)$ is also of finite type, and the isomorphism is proved. Thus, by induction on the total number of factors $\mathbb{K}_n^{\restliealgs}$ of $K_1$ and $K_2$, we only need to check that $H^*_{\bar{W}}\mathbb{K}_n^{\restliealgs}$ is of finite type for any $n\geq0$. This is implied by Priddy's calculation, Proposition \ref{calc of restliecoh on single EMobject}.
+This containment in in fact an equality when $H^*_{\bar{W}}K_1 $ and $H^*_{\bar{W}}K_2$ are both of finite type, in which case $H^*_{\bar{W}}(K_1\times K_2)$ is also of finite type, and the isomorphism is proved. Thus, by induction on the total number of factors $\mathbb{K}_n^{\restliealgs}$ of $K_1$ and $K_2$, we only need to check that $H^*_{\bar{W}}\mathbb{K}_n^{\restliealgs}$ is of finite type for any $n\geq0$. This is implied by a calculation of Priddy \citeBOX[6.1]{PriddySimplicialLie.pdf} which we recall in Proposition \ref{calc of restliecoh on single EMobject}.
 \end{proof}
 \noindent After giving the calculation on a single Eilenberg-Mac Lane object, the cohomology of finite GEMs, and thus the category $\HA{\restliealgs}$ is determined by Proposition \ref{Prop on cohomology of product of finite lie gems} and the Cartan formula. The structure defining $\PA{\restliealgs}$ is then well understood in light of:
 \begin{prop}[{\citeBOX[6.1]{PriddySimplicialLie.pdf}}]
@@ -4165,7 +4170,7 @@ On homotopy groups: $\beta_*$ is injective (its source and target are well under
 The following two lemmas are the direct analogues of lemmas \ref{quad gradings have a chance on U0 W0} and \ref{Kill P ops gives lie alg}:
 \begin{lem}
 \label{quad gradings have a chance on Un Wn}
-For $n\geq0$, the monads $F^{\calU(n+1)}$ and $F^{\calw(n+1)}$ on $\vect{+}{n+1}$ may be promoted to monads on the category $\quadgrad{}\vect{+}{n+1}$, by insisting that quadratic gradings add under brackets and double under $\lambda$-operations. The same holds for $\call(n)$ for $n\geq0$.
+For $n\geq0$, the monads $F^{\calU(n+1)}$ and $F^{\calw(n+1)}$ on $\vect{+}{n+1}$ may be promoted to monads on the category $\quadgrad{}\vect{+}{n+1}$ by requiring that quadratic gradings add when taking brackets and double when applying $\lambda$-operations. The same holds for $\call(n)$ for $n\geq0$.
 \end{lem}
 \SubsectionOrSection{The factorization $Q^{\calL(n)}\circ Q^{\calU(n)}$ of $Q^{\calw(n)}$}
 For $n\geq0$, we define
@@ -6924,10 +6929,10 @@ $\BSW M$ is naturally a (strict) commutative cogroup object, having comultiplica
 %\BSW L%r1c3
 %}\] is the identity. This follows since $(\Id\sqcup0)\phi_1$ is the identity of $S^n$ and $(\Id\sqcup0)\phi_2$ is the identity of $CS^n$. The other axioms follow similarly.
 %\end{proof}
-Writing $\star$ for the group operation on $\hom_{s\calc}(\BSW M,M')$, we have the following:
+Writing $\boxplus$ for the group operation on $\hom_{s\calc}(\BSW M,M')$, we have the following:
 \begin{lem}
 For maps $f,g:\BSW M\to M'$ we have 
-\[Q^{\calc}(f\star g)=(Q^{\calc}f+Q^{\calc}g):Q^{\calc}(\BSW M)\to Q^{\calc}M'.\]
+\[Q^{\calc}(f\boxplus g)=(Q^{\calc}f+Q^{\calc}g):Q^{\calc}(\BSW M)\to Q^{\calc}M'.\]
 \end{lem}
 \begin{proof}
 It is enough to check that $Q^{\calc}(\phi_\BSW ):Q^{\calc}(\BSW M)\to Q^{\calc}(\BSW M\sqcup \BSW M)$ equals the diagonal map $Q^{\calc}(\BSW M)\to Q^{\calc}(\BSW M)\oplus Q^{\calc}(\BSW M)$. For this, $Q^{\calc}$ converts all the colimits involved in the construction of $\BSW M$ to direct sums of simplicial vector spaces, and $Q^{\calc}\phi_1$ and $Q^{\calc}\phi_2$ are both precisely the diagonal map.
@@ -6977,7 +6982,7 @@ For $L\in s\calc$, we have $(i\circ \xi_{\PA{\calc}})=\pi_*(\xi_{\BSW})$, i.e.\ 
 In view of the short exact sequences of Proposition \ref{smash coprod}, this is equivalent to $(i\circ \overline{\xi}_{\PA{\calc}})=\pi_*(\overline{\xi}_{\BSW}):\pi_*(\BSW^{s+1}L)\to\pi_*((\BSW^{s}L)^{\sqcup 2})$, which holds as $(i\circ\phi_{\PA{\calc}})=\pi_*(\phi_{\BSW})$.
 \end{proof}
 \begin{lem}
-$(d_i)^{\smashcoprod 2}\xi_\BSW =\xi_\BSW d_{i+1}$ for $i\geq1$, and $(d_0)^{\smashcoprod 2}\xi_\BSW = (\xi_\BSW d_{0})\star(\xi_\BSW d_{1})$, so that the map $Q^{\calc}\xi_\BSW $ induces a degree $(-1,0)$ bicomplex map:
+$(d_i)^{\smashcoprod 2}\xi_\BSW =\xi_\BSW d_{i+1}$ for $i\geq1$, and $(d_0)^{\smashcoprod 2}\xi_\BSW = (\xi_\BSW d_{0})\boxplus(\xi_\BSW d_{1})$, so that the map $Q^{\calc}\xi_\BSW $ induces a degree $(-1,0)$ bicomplex map:
 \[N_*N_*(Q^{\calc}B^\BSW_{\bullet}L)_{s_{n+2},s_{n+1}}\to
   N_*N_*(Q^{\calc}((B^\BSW_{\bullet}L)^{\smashcoprod 2}))_{s_2-1,s_1}.\]
 \end{lem}
