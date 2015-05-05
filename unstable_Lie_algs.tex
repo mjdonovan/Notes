@@ -10,7 +10,7 @@
 \usepackage{amsmath,amsthm,amssymb} \usepackage{eucal} \usepackage{mathrsfs,nicefrac} \usepackage{amssymb} \usepackage[all]{xy} \usepackage{cancel} \usepackage[textsize=small,color=green!40]{todonotes} \usepackage{color} \usepackage{version} \usepackage{enumerate} \usepackage{mathtools} \newcommand{\ooooo}[2][]{\excludeversion{#2}} \newcommand{\wooooo}[2][]{\includeversion{#2}}%mathtools is just used for `mathclap'
 \ooooo[	do]{todolist}\ooooo[]{random junk}
 \ifx\IncludeAll\undefined\else\renewcommand{\ooooo}[2][]{\wooooo{#2}}\fi
-\wooooo[]{ThankS}
+\ooooo[]{ThankS}
 \ooooo[	ct]{Contents Page}
 \ooooo[	 1]{Introduction}
 \ooooo[	 2]{Conventions and notation}
@@ -24,7 +24,7 @@
 \wooooo[	10]{second quadrant homotopy sseq operations}
 \ooooo[	11]{Operations on the Bousfield-Kan spectral sequence}
 \ooooo[	12]{Comp funct sseqs}
-\ooooo[	13]{Operations in composite functor spectral sequences}
+\wooooo[	13]{Operations in composite functor spectral sequences}
 \ooooo[	14]{Calculations of HWn}
 \ooooo[	15]{May sseq and vanishing line}
 \ooooo[	16]{The Bousfield-Kan spectral sequence for a sphere}
@@ -464,13 +464,13 @@ Firstly, I would like to thank my advisor Haynes Miller for his ongoing support 
 Thanks to Paul Goerss, for visiting to take part in my examination committee, and whose Asterisque volume \cite{MR1089001} has had great influence on my work.
 Thanks too to Michael Ching, Bill Dwyer, Benoit Fresse and John Harper, for helpful conversations on various topics appearing in this thesis. I would also like to thank Michael Andrews for always being available to answer questions and share ideas.
 
-I would like to thank my wonderful classmates, in particular Michael Andrews, Nate Bottman, Saul Glasman, Jiayong Li, Dana Mendelson and Alex Moll, for sharing this experience with me.
+I would like to thank my wonderful classmates, in particular Michael Andrews, Nate Bottman, Saul Glasman, Jiayong Li  and Alex Moll, for sharing this experience with me.
 %Michael Andrews, Nate Bottman, Saul Glasman, Jiayong Li, Dana Mendelson, Alex Moll, Roberto Svaldi, Xuwen Zhu.
 Thanks too to Sonia and Eric and to Bella and Gilad --- such wonderful friends as these are truly rare.
 
 Thanks to my parents and to Trish and Craig, for always encouraging me to pursue my interests unreservedly, and for making the long trip from Australia to visit me so often.
 
-Finally, I would like to thank my wife Dana, who I met on the first day of the graduate program at MIT. 
+Finally, I would like to thank my wife Dana for her patience, love and support. 
 %Much more formative for me than completing this Ph.D.\ has been 
 Growing together with Dana has been the most important and formative experience of the last five years of my life.
 %The only part of my adult life that has been more formative than completing this graduate program has been growing 
@@ -3461,14 +3461,12 @@ This is the first instance of a notational convention we will use occasionally i
 %\end{shaded}
 In this section we recall the definition of certain cohomotopy operations with domain $\pi^*U$ for any $U\in c\vect{}{}$, using the functions
 \[\alpha\mapsto D^{n-i}(\alpha\otimes \alpha)+D^{n-i+1}(\alpha\otimes d\alpha),\ \ C^nU \to C^{n+i}(S_2U).\]
+The same arguments as in \citeBOX[\S1.12]{MR2245560} show that
 \begin{prop}
 \label{external singly simplicial steenrods}
 These functions descend to  well defined linear operations:
 \[\ExtCohOp^k:\pi^{n}U\to \pi^{n+k}(S_2U),\text{ \ zero unless $0\leq k\leq n$.}\]
 \end{prop}
-\begin{proof}
-One checks that these cochain operations induce well defined operations $\ExtCohProd$ and $\ExtCohOp^k$ by the same arguments as in \citeBOX[\S1.12]{MR2245560}.
-\end{proof}
 If $U=\dual V$ for some $V\in s\vect{}{}$, then we may use the natural transformation $S_2\dual\to\dual S^2$ to form the following composite, also denoted $\ExtCohOp^k$:
 \[\pi^n\dual V\overset{\ExtCohOp^k}{\to}\pi^{n+k}S_2\dual V\to \pi^{n+k}\dual S^2V.\]
 This will be part of the process we use shortly to define cohomology operations.
@@ -3520,6 +3518,8 @@ where $v\in(S^2(\pi_*V))_{m}$ and $w_k\in \pi_{m-k}V$ for $0\leq k<m/2$.
 %with the property that $\ExtCohProd(\alpha\otimes \alpha)=\ExtCohOp^k\alpha$ for $\alpha\in\dual(\pi_kV)$.
 %\end{prop}
 %\end{shaded}
+
+Again, the  arguments of \citeBOX[\S1.12]{MR2245560} imply:
 \begin{prop}
 \label{the external cohomotopy pairing}
 Suppose that $U\in c\vect{}{}$. Then there is a pairing
@@ -4943,18 +4943,49 @@ Applying these observations in the very specific circumstances of this propositi
 %\pi\dhor^{s+k}\pi\uver_{2t}S_2 X
 %\]
 
-In this chapter we will produce various external operations on second quadrant homotopy spectral sequences. That is, for $X\in cs\vect{}{}$, we will produce numerous operations
-from $\E{}{r}{X}{}{}$ to each of $\E{}{r}{S_2X}{}{}$ and $\E{}{r}{\Lambda^2 X}{}{}$. This approach leaves open a number of possibilities. If $X\in cs\algs$, then the structure map $S_2X\to X$ induces a spectral sequence map $\E{}{r}{S^2X}{}{}\to \E{}{r}{X}{}{}$, and so the external operations induce internal operations on $\E{}{r}{X}{}{}$. If $X$ is a Lie algebra  we may apply the analogous technique. 
+In this chapter we will produce various external operations on second quadrant homotopy spectral sequences. That is, for $X\in cs\vect{}{}$, we will produce operations
+from $\E{}{r}{X}{}{}$ to each of $\E{}{r}{S_2X}{}{}$ and $\E{}{r}{\Lambda^2 X}{}{}$
 
+ This approach leaves open a number of possibilities. If $X\in cs\algs$, then the structure map $\mu:S_2X\to X$ induces a spectral sequence map $\E{}{r}{S^2X}{}{}\to \E{}{r}{X}{}{}$, and so the external operations induce internal operations on $\E{}{r}{X}{}{}$. If $X$ is a Lie algebra  we may apply the analogous technique $[\,,]:\Lambda^2X\to X$. 
 In \S\ref{Operations on the Bousfield-Kan spectral sequence}, we will use these external operations in another way to produce operations on the \BKSS\ of a commutative algebra or Lie algebra --- the construction will involve a shift in filtration, which is conceivable given that  Radulescu-Banu's resolution  is a resolution by GEMs.
 
 
 
 
-A number of authors have written on spectral sequence operations in a variety of settings. Singer's work \cite{MR2245560} on first quadrant cohomology spectral sequences has already been used in this thesis, and has been extended by Turner \cite{turner_opns_and_sseqs_I.pdf}. 
- Perhaps the closest recent examples are due to Hackney \cite{MR3019742} and \cite{MR3171258}, who works out the operations available on the homotopy spectral sequence of a cosimplicial $E_\infty$- or $E_n$-space respectively, using Bousfield-Kan's universal examples \cite{BK_pairings.pdf}. We will be working with cosimplicial simplicial \emph{vector spaces}, and so a direct approach, mirroring Dwyer's work in second quadrant cohomotopy spectral sequences \cite{DwyerHigherDividedSquares.pdf}, is available. 
+A number of authors have written on spectral sequence operations in a variety of settings. Singer's work \cite{MR2245560} on first quadrant cohomology spectral sequences will be used extensively in \S\ref{singer ext ops sect}, and has been extended by Turner \cite{turner_opns_and_sseqs_I.pdf}. 
+ Perhaps the closest recent examples are due to Hackney \cite{MR3019742} and \cite{MR3171258}, who works out the operations available on the homotopy spectral sequence of a cosimplicial $E_\infty$- or $E_n$-space respectively, using Bousfield-Kan's universal examples \cite{BK_pairings.pdf}. We will be working with cosimplicial simplicial \emph{vector spaces}, and so we are able to develop a direct approach, mirroring Dwyer's work in second quadrant cohomotopy spectral sequences \cite{DwyerHigherDividedSquares.pdf}. 
 
-Dwyer's work makes an interesting point of comparison with ours. In both cases: Steenrod operations and higher divided powers (as in \cite{DwyerHigherDividedSquares.pdf} and \S\ref{Homotopy operations for simplicial commutative algebras}) are produced on the spectral sequence; one set of operations is not present in homotopy;  the other set of operations is present in homotopy, but fewer operations are present there than at $E_2$; differentials are constructed between the two varieties to simultaneously rectify these disparities. Between Dwyer's theory and the theory presented here, the roles of the two types of operations are interchanged.
+Dwyer's work makes an interesting point of comparison with ours. In both cases: products, Steenrod operations and higher divided powers (as in \cite{DwyerHigherDividedSquares.pdf} and \S\ref{Homotopy operations for simplicial commutative algebras}) are produced on the spectral sequence; one set of operations is not present in the target;  the other set of operations is present in the target, but the unstableness conditions on the target and on $E_2$ do not agree; and differentials are constructed between the two varieties to simultaneously rectify these disparities. Between Dwyer's theory and the theory presented here, the roles of the two types of operations are interchanged.
+
+\SubsectionOrSection{Operations with indeterminacy}
+\label{Operations with indeterminacy}
+%When we try to define spectral sequence operations on pages higher than the $E_2$-page, there are
+On pages higher than the $E_2$-page, some of the `operations' 
+$\E{}{r}{X}{}{}\to \E{}{r}{S_2X}{}{}$
+that we would like to use will in fact fail to be well defined, and in this section we will introduce the language which we will use in such situations.
+
+We will make use of the notion of a  \emph{(potentially) multi-valued function} $f:D\to C$, which  is just a relation
+$f\subset D\times C$
+such that for all $x\in D$ there exists some $y\in C$ for which $(x,y)\in f$. We may drop the modifier \emph{potentially}, with the understanding that we do not insist that a multi-valued function fail to be a function. If a (potentially) multi-valued function turns out to be an actual function, we will call it \emph{single-valued}. For $x\in D$, the \emph{set of values} of $f(x)$ is 
+$\{y\in C\,|\,(x,y)\in f\}$. Most of the multi-valued operations that follow will be linear, in the obvious sense.
+
+%
+%
+%However, they will always be \emph{multi-valued functions}, where  a multi-valued function $f:D\to C$ is just a relation
+%\[f\subset D\times C\]
+%such that for all $x\in D$ there exists some $y\in C$ for which $(x,y)\in f$. For $x\in D$, the \emph{set of values} for $f(x)$ is 
+%$\{y\in C\,|\,(x,y)\in f\}$.
+
+In this chapter, multi-valued functions will arise in two ways. %Suppose that $\Edown{r}{V}{}{}$ and $\Edown{r}{V'}{}{}$ are spectral sequences. We will use the phrase ``
+An \emph{operation $\Edown{r}{V}{}{}\to \Edown{r}{S_2V}{}{}$ with indeterminacy disappearing by $E_{r'}$} will be an actual function 
+\[\Edown{r}{V}{}{}\to \Edown{r}{S^2V}{}{}/\EBdown{r,r'}{S^2V}{}{},\]
+where $\EBdown{r,r'}{S^2V}{}{}\subseteq \Edown{r}{S^2V}{}{}$ is the subgroup consisting of those elements which survive to $\Edown{r}{S^2V}{}{}$ and represent zero there. We view such an operation as an example of a multi-valued function
+\[\Edown{r}{V}{}{}\to \Edown{r}{S^2V}{}{}.\]
+The external Steenrod operations that we will define in \S\ref{External spectral sequence operations Sq} will be examples. On the other hand, we will define in \S\ref{External spectral sequence operations delta} external $\delta$-operations which will sometimes be multi-valued. These operations have rather different survival properties than the external Steenrod operations, and it will not be important to identify their indeterminacy precisely.
+
+%which, for $f\subset D\times C$ would mean that $f$ is to say that their domain and codomain form a group, and  The reader can supply their own interpretations of such equations as the equation for $\delta_i^\textup{ext}(x+y)$ given in Proposition \ref{Prop on delta external}. 
+ %, We will be less careful to control the indeterminacy of these operations than of the  Later in this thesis we will use the term \emph{multi-valued function} 
+%$\Edown{r}{V}{**}{}\to \Edown{r}{S^2V}{**}{}$, a clear abuse of terminology that should cause little offense.
 
 %%%
 %%%first quadrant homotopy --- Stover's van Kampen\\
@@ -4993,7 +5024,7 @@ For mixed simplicial vector spaces $X,Y\in cs\vect{}{}$, we will write $C(X\otim
 {\oldphi}_k:C(X\otimes\dver Y)^{s}_{t+k}&\to C(X\otimes Y)^{s}_{t}&\quad&\textup{(zero unless $k= t\geq0$)}
 %{\rho}:C(X\otimes X)^{s}_{t}&\to C(S_2X)^{s}_{t}&\quad&\textup{(proj onto coinvariants)}
 \end{align*}
-We have essentially just committed to regarding $\Nabla_k$ as zero where it is not defined. This is certainly not a natural convention, and we hope that the ends justify the means. It results in such unpleasant statements as:
+We have just committed to regarding $\Nabla_k$ as zero where it is not defined. This is certainly not a natural convention, and we hope that the ends justify the means. It results in such unpleasant statements as:
 \begin{lem}
 \label{unpleasant formula}
 Suppose that $z\in C(X\otimes\dver Y)^{s}_{t}$. Then
@@ -5002,16 +5033,16 @@ whenever $k\geq0$ and $t$ does not equal either of $2k$ and $2k+1$.
 \end{lem}
 \noindent 
 
-As discussed earlier, we will write $T$ for any symmetry isomorphism, write ``$\twist F$'' as shorthand for the function $TFT$, and  whenever we write $\twist FG$, we will mean $(\twist F)G$. We will also use the notation
+As discussed earlier, we will write $T$ for any symmetry isomorphism, write ``$\twist F$'' as shorthand for the function $TGT$, and  whenever we write $\twist GH$, we will mean $(\twist G)H$. We will also use the notation
 \[X^{\otimes2}\overset{\rho}{\to}S_2X\textup{\ \ and\ \ }X^{\otimes2}\overset{\rho'}{\to}\Lambda^2
 %\qquad X^{\otimes2}\overset{\rho''}{\to}S^2X,
 \]
 for the projection onto coinvariants and further onto the exterior quotient. Until \S\ref{External spectral sequence operations delta}, the operations that we will produce into each of $\Edownup{r}{}{S_2X}{}{}$ and $\Edownup{r}{}{\Lambda^2X}{}{}$ will be essentially the same.
 \SubsectionOrSection{An external spectral sequence pairing $\mu_\mathrm{ext}$}
-The easiest of our constructions is that of an external product, using 
+The easiest and most standard of our constructions is that of an external product, using 
 the chain-level formula
 \[x\otimes y\mapsto\rho\Nabla D^0(x\otimes y).\]
-Indeed, both $\Nabla$ and $D^0$ are chain maps respecting filtration, and thus:
+Both $\Nabla$ and $D^0$ are chain maps, and filtrations add under $\Nabla D^0$, and thus:
 \begin{prop}
 \label{prop on basic product}
 The map $\rho\Nabla D^0(x\otimes y):CX\otimes CX\to CX$ induces a pairing
@@ -5023,7 +5054,7 @@ for each $r$, satisfying the Liebniz formula. For $r\geq2$, this map descends to
 \overset{\pi\dhor^{*}(\widetilde{\nabla})}{\to}
 \pi\dhor^{*}\pi\uver_{*}S_2 X.\]
 \end{prop}
-\noindent We will write $x\times y$ for $\mu_\textup{ext}(x\otimes y)$.
+%\noindent We will write $x\times y$ for $\mu_\textup{ext}(x\otimes y)$.
 %\begin{shaded}\tiny
 %\begin{proof}
 %As both $\Nabla$ and $D^0$ are chain maps respecting filtration, proving that the operations are well defined.
@@ -5051,17 +5082,17 @@ We will use these maps to define external Steenrod squares, the behaviour of whi
 
 \begin{prop}
 \label{prop on e1 steens 1}
-For $r\geq1$, the chain level operation $\textup{SQ}^{i,s}$ defines an \emph{external Steenrod operation} with indeterminacy vanishing by $E_{2r-2}$:
+For $r\geq1$, the chain level operation $\textup{SQ}^{i,s}$ defines a linear operation  with indeterminacy vanishing by $E_{2r-2}$, an \emph{external Steenrod operation}:
 \[\Sq^i_\textup{ext}:\Edownup{r}{}{X}{s}{t}\to \Edownup{r}{}{S_2X}{s+i}{2t}.\]
 Suppose that $r\geq 2$ and $x\in\Edownup{r}{}{X}{s}{t}$. $\Sq^i_\textup{ext}x=0$ unless $\min\{t,r\}\leq i\leq s$,  and this vanishing occurs without indeterminacy.
 In any case, $\Sq^i_\textup{ext}x$ survives to $\Edownup{2r-1}{}{S_2X}{s+i}{2t}$, and the following equation in $\Edownup{2r-1}{}{S_2X}{s+i+2r-1}{2t+2r-2}$ holds (without indeterminacy): \[d_{2r-1}(\Sq^i_\textup{ext}x)=\Sq^{i+r-1}_\textup{ext}(d_rx).\]
 %which is an equation in    neither of the two expressions here have any determinacy. %If $i<r$ and $t \geq i+1$ then $\Sq^i_\textup{ext}x=0$, and in fact $\Sq^i_\textup{ext}x$ may be taken to have no indeterminacy.
 
-The \emph{top operation} $\Sq^s_\textup{ext}x$ is equal to the product-square $x\times x$, and in particular has no indeterminacy. 
+The \emph{top operation} $\Sq^s_\textup{ext}x$ is equal to the product-square $\mu^\textup{ext}(x\otimes x)$, and in particular has no indeterminacy. 
 As for the only potentially non-zero $\Sq^0_\textup{ext}$ operation:
 \[\Sq^0_\textup{ext}:\Edownup{r}{}{X}{s}{0}\to \Edownup{r}{}{S_2X}{s}{0}\textup{ is induced by $X\overset{\textup{squaring}}{\to}S_2X$}.\]
 
-At $E_2$, there is no indeterminacy, and the operation $\hExtCohOp^k$ corresponds to the composite:
+At $E_2$, there is no indeterminacy, and the operation $\ExtCohOp^k$ corresponds to the composite:
 \[\pi\dhor^s\pi\uver_t X
 \overset{\ExtCohOp^i}{\to} 
 \pi\dhor^{s+i}S_2(\pi\uver_t X)
@@ -5076,9 +5107,9 @@ The condition $\min\{t,r\}\leq i\leq s$ may be replaced with $\min\{t+1,r\}\leq 
 \label{prop on e1 steens 2}
 %Fix $i,s\geq0$ and set $r=1$. The chain level operation $\textup{SQ}^{i,s}$ defines an 
 At $E_1$, the external Steenrod operations have no indeterminacy, and $d_{1}$ commutes with $\Sq^i_\textup{ext}x $ for each $i$. Suppose that $x\in \Edownup{1}{}{X}{s}{t}$.
-The top operation $\Sq^s_\textup{ext}x$ \emph{need not} equal the product-square $x\times x$ on $E_1$, and
-$\Sq^{s+1}_\textup{ext}x$ \emph{need not} vanish, instead equalling $x\times d_1x$ on $E_1$.
-At least for $i>s+1$, $\Sq^i_\textup{ext}x=0$. $\Sqh^1x$ is zero whenever $t\geq1$. $\Sqh^0x=0$ for all $t$.
+The top operation $\Sq^s_\textup{ext}x$ \emph{need not} equal the product-square $\mu^\textup{ext}(x\otimes x)$ on $E_1$, and
+$\Sq^{s+1}_\textup{ext}x$ \emph{need not} vanish, instead equalling $\mu^\textup{ext}(x\otimes d_1x)$ on $E_1$.
+The operations need not be linear. At least for $i>s+1$, $\Sq^i_\textup{ext}x=0$. $\Sqh^1x$ is zero whenever $t\geq1$. $\Sqh^0x=0$ for all $t$.
 \end{prop}
 
 
@@ -5100,9 +5131,9 @@ A straightforward calculation shows that \[d(\textup{SQ}^{i,s}x)=\rho\Nabla D^{s
 so that $\EZdownup{2r-1}{}{S_2X}{s+i}{2t}$. This demonstrates the survival property, along with the formula commuting the $\Sq^i_\textup{ext}$ with spectral sequence differentials.
 
 To examine the indeterminacy, as a representative of a class in $\Edownup{r}{}{X}{s}{t}$,  $x$ is only determined up to boundaries of $y\in \EZdownup{r-1}{}{X}{s-r+1}{t-r+2}  $ and elements of $\Edownup{r-1}{}{X}{s+1}{t+1}$. The latter are irrelevant, as their effect on the value of $\textup{SQ}^{i,s}$ is restricted to high filtration because $\{D^k\}$ is special.
-We calculate, using analogues of \cite[(1.111) and (1.112)]{MR2245560}, that
+Direct analogues of \cite[(1.111) and (1.112)]{MR2245560} prove the linearity of the operation. Also analogous to \cite[(1.111) and (1.112)]{MR2245560} is the following definition of a chain
 \[\textup{BC}:=\rho\Nabla [D^{s-i-1}(y\otimes y)+D^{s-i}(y\otimes dy)+D^{s-i+1}(dy\otimes x)]\]
-has boundary
+which has boundary
 \begin{alignat*}{2}
 d(\textup{BC})
 &=
@@ -5122,7 +5153,7 @@ so that $\Sq^i_\textup{ext}x$ has indeterminacy vanishing by $\Edownup{2r-2}{}{S
 
 When $i\geq s+2$, we have $\textup{SQ}^{i}x=0$, and even with $i=s+1$:
 \[\textup{SQ}^{s+1,s}x=\rho\nabla D^{0}(x\otimes dx)\in F^{2s+r},\]
-so that $\Sq^{s+1}_\textup{ext}x$ vanishes when $r\geq2$,  and $\Sq^{s+1}_\textup{ext}x=x\times d_1x$  when $r=1$, without indeterminacy in both cases. 
+so that $\Sq^{s+1}_\textup{ext}x$ vanishes when $r\geq2$,  and $\Sq^{s+1}_\textup{ext}x=\mu^\textup{ext}(x\otimes d_1x)$  when $r=1$, without indeterminacy in both cases. 
 
 We must also check that $\Sq^i_\textup{ext}x$ vanishes (without indeterminacy) when $i<\min\{t,r\}$. For this we use the filtration preserving operations $\textup{DEL}_i$ to be defined in \S\ref{External spectral sequence operations delta}. Suppose   Proposition \ref{dvsDEL} states that
 \[d(\textup{DEL}_{t-i+1}(x))+ \textup{DEL}_{t-i+1}(dx)=
@@ -5169,7 +5200,7 @@ The statements about $\Edownup{r}{}{\Lambda^2X}{s+i}{2t}$ follow similarly, repl
 
 \SubsectionOrSection{External spectral sequence operations $\delta^\mathrm{ext}_i$}
 \label{External spectral sequence operations delta}
-For any $k$, positive or otherwise, write $\mathbb{D}_k:(C(X)\otimes C(Y))_i\to C(X\otimes Y)_{i-k}$ for the map:
+For any $k$ (positive or otherwise) write $\mathbb{D}_k:(C(X)\otimes C(Y))_i\to C(X\otimes Y)_{i-k}$ for the map:
 \[\mathbb{D}_r(z)= \sum_{\alpha-\beta=r}\Nabla_\alpha\twist^\alpha D^\beta(z).
 %=\begin{cases}
 %\sum_{j\geq0}\Nabla_{j}\twist^{j}D^{j-r},&\textup{if }r\leq0;\\
@@ -5187,7 +5218,7 @@ We may assume that $x$ and $y$ are each homogeneous, with $x\in X^{s}_{t}$ and $
 \end{proof}
 \begin{lem}
 \label{boundaryVsBBD}
-For all $k$, positive or otherwise, the equation:
+For all $k$ (positive or otherwise) the equation:
 \[(d\mathbb{D}_k+\mathbb{D}_kd)(z)= ((1+\twist)\mathbb{D}_{k+1}+\Nabla\twist D^{-k-1})(z)\]
 holds when $z\in (CX\otimes CX)_N$ with $N>2(k+1)$. When $N= 2(k+1)$, 
 \[(d\mathbb{D}_k+\mathbb{D}_kd)(z)= ((1+\twist)\mathbb{D}_{k+1}+\Nabla\twist D^{-k-1}+\textstyle\sum_{\alpha} \oldphi_{\alpha}\twist^{\alpha+1} D^{\alpha-k-1})(z).\]
@@ -5195,11 +5226,11 @@ holds when $z\in (CX\otimes CX)_N$ with $N>2(k+1)$. When $N= 2(k+1)$,
 \begin{proof}
 \newcommand{\twolinesum}[2]{\mathop{\sum_{\mathclap{#1}}}_{\mathclap{#2}}}
 \newcommand{\onelinesum}[1]{\sum_{\mathclap{#1}}}
-We may assume that $ z$ is homogeneous, $z\in (CX\otimes CX)_{t}^{s}$ with $n=t-s\geq2(k+1)$. Choose $\alpha$ and $\beta$ such that $\alpha-\beta=k$. Then $(\twist^\alpha D^\beta(z))\in C(X\otimes\dver Y)^{s-\beta}_{t}$.
+We may assume that $ z$ is homogeneous, $z\in (CX\otimes CX)_{t}^{s}$ with $N=t-s\geq2(k+1)$. Choose $\alpha$ and $\beta$ such that $\alpha-\beta=k$. Then $(\twist^\alpha D^\beta(z))\in C(X\otimes\dver Y)^{s-\beta}_{t}$.
 
 We will need to apply Lemma \ref{unpleasant formula} to calculate, for $\alpha-\beta=k$:
 \[(d\Nabla_\alpha+\Nabla_\alpha d)(\twist^\alpha D^\beta(z))=((1+\twist)\Nabla_{\alpha+1}+\oldphi_{\alpha+1} )(\twist^\alpha D^\beta(z)),\]
-but Lemma \ref{unpleasant formula} does not apply when $t=2\alpha+e$ for $e\in\{0,1\}$. Fortunately, in that case $D^\beta(z)$ is zero, so the equation holds by default: after all, if $t=2\alpha+e$, our assumed inequality on $n$ implies:
+but Lemma \ref{unpleasant formula} does not apply when $t=2\alpha+e$ for $e\in\{0,1\}$. Fortunately, in that case $D^\beta(z)$ is zero, so the equation holds by default: after all, if $t=2\alpha+e$, our assumed inequality on $N$ implies:
 \[\beta=\frac{t-e}{2}-k\geq \frac{t-e}{2}-\frac{t-s-2}{2}=\frac{s+2-e}{2}>\frac{s}{2}.\]
 
 After these observations and under our conventions on the $\Nabla_\alpha$ and $D^\beta$, all but one of the following manipulations is totally formal:%. The only sticking point is that $d\Nabla_{-1}+\Nabla_{-1}d$ equals $0$, as opposed to $(1{+}\twist)\Nabla_0+\oldphi_0$ --- we rectify this anomaly by adding in the term $((1+\twist)\Nabla_{0}+\oldphi_{0})\twist D^{-k-1}(z)$:
@@ -5244,7 +5275,7 @@ Using the identity $(1+\twist)\Nabla_{0}+\oldphi_{0}=\Nabla$ for the first equat
 % Right hand side
 (1+\twist)\mathbb{D}_{k+1}(z)+\onelinesum{\alpha} \textstyle\oldphi_{\alpha}\twist^{\alpha+1} D^{\alpha-k-1}(z)%
 \end{alignat*}
-When the strict inequality $t-s>2(k+1)$ holds, due to the application of $\oldphi_{\alpha}$, each summand $\oldphi_{\alpha}\twist^{\alpha+1} D^{\alpha-k-1}(z)$ is zero unless $t=2\alpha$, but in that case, $s=2\alpha-n<2(\alpha-k-1)$, and then $D^{\alpha-k-1}(z)$ vanishes as $\{D^k\}$ is special.
+When the strict inequality $t-s>2(k+1)$ holds, due to the application of $\oldphi_{\alpha}$, each summand $\oldphi_{\alpha}\twist^{\alpha+1} D^{\alpha-k-1}(z)$ is zero unless $t=2\alpha$, but in that case, $s=2\alpha-N<2(\alpha-k-1)$, and then $D^{\alpha-k-1}(z)$ vanishes as $\{D^k\}$ is special.
 %
 %On the other hand, $(1+\twist)F\twist G+F(1+\twist)G=(1+\twist)(FG)$ holds for any $F$ and $G$, and in particular for $F=\Nabla_\alpha$ and $G=\twist^\alpha D^\beta$, this quantity differs from
 %\[(1+\twist)\mathbb{D}_{k+1}(z)=\sum_{\alpha-\beta=k+1}(1+\twist)\Nabla_\alpha\twist^\alpha D^\beta(z)\]
@@ -5269,21 +5300,21 @@ When the strict inequality $t-s>2(k+1)$ holds, due to the application of $\oldph
 
 
 
-We will be able to define (sometimes multi-valued) operations (for $r\geq 0$)
+We will be able to define (sometimes multi-valued) operations (for $r\geq 0$):
 \begin{gather*}
-\delta^\textup{ext}_i:\Edownup{r}{}{X}{s}{t}\to \Edownup{r}{}{S_2X}{s}{t+i}\textup{\ \ \ for $2\leq i\leq\max\{n,t-(r-1)\}$}\\
-\lambda^\textup{ext}_i:\Edownup{r}{}{X}{s}{t}\to \Edownup{r}{}{\Lambda^2X}{s}{t+i}\textup{\ \ \ for $1\leq i\leq\max\{n,t-(r-1)\}$}
+\delta^\textup{ext}_i:\Edownup{r}{}{X}{s}{t}\to \Edownup{r}{}{S_2X}{s}{t+i}\textup{\ \ \ for $2\leq i\leq\max\{n,t-(r-1)\}$};\\
+\lambda^\textup{ext}_i:\Edownup{r}{}{X}{s}{t}\to \Edownup{r}{}{\Lambda^2X}{s}{t+i}\textup{\ \ \ for $1\leq i\leq\max\{n,t-(r-1)\}$};
 \end{gather*}
 using the chain-level maps $\textup{DEL}_{i}:C_*X\to C_*S_2X$ and $\textup{LAM}_{i}:C_*X\to C_*\Lambda^2X$:
 %\[x\mapsto \textup{DEL}_{i}(x):=\rho(\mathbb{D}_{n-i}(x\otimes x)+\mathbb{D}_{n-i-1}(dx\otimes x)),\]
 %\[x\mapsto \textup{LAM}_{i}(x):=\rho'(\mathbb{D}_{n-i}(x\otimes x)+\mathbb{D}_{n-i-1}(dx\otimes x)),\]
 \begin{alignat*}{2}
 % Left hand side
-\textup{DEL}_{i}(x)&:=\makebox[\widthof{$\rho'$}][l]{$\rho$}(\mathbb{D}_{n-i}(x\otimes x)+\mathbb{D}_{n-i-1}(dx\otimes x)),\\
-\textup{LAM}_{i}(x)&:=\makebox[\widthof{$\rho'$}][l]{$\rho'$}(\mathbb{D}_{n-i}(x\otimes x)+\mathbb{D}_{n-i-1}(dx\otimes x)),
+\textup{DEL}_{i}(x)&:=\makebox[\widthof{$\rho'$}][l]{$\rho$}(\mathbb{D}_{n-i}(x\otimes x)+\mathbb{D}_{n-i-1}(dx\otimes x));\\
+\textup{LAM}_{i}(x)&:=\makebox[\widthof{$\rho'$}][l]{$\rho'$}(\mathbb{D}_{n-i}(x\otimes x)+\mathbb{D}_{n-i-1}(dx\otimes x));
 \end{alignat*}
-where we write $n:=t-s$ in each formula. Except when $i<2$, we  can work just with $\textup{DEL}$, as in \S\ref{External unary homotopy operations}. Lemma \ref{DkIsNiceToFiltration} shows immediately that these maps  preserve filtration. 
-To proceed, we will need a formula for the boundary of $\textup{DEL}_i(x)$:
+where we write $n:=t-s$ in each formula. Except when $i<2$, we  can work just with the $\textup{DEL}_i$, as in \S\ref{External unary homotopy operations}. Lemma \ref{DkIsNiceToFiltration} shows immediately that these maps  preserve filtration, in the sense that  $\textup{DEL}_i(x)\in F^sC_{n+i}(X\otimes X)$ whenever $x\in F^sC_nX$. 
+Moving forward we will need a formula for the boundary of $\textup{DEL}_i(x)$:
 \begin{prop}
 \label{dvsDEL}
 For $2\leq i\leq t+1$ and $x\in \EZdownup{0}{}{X}{s}{t}$:
@@ -5321,11 +5352,13 @@ and if we write $x$ as the sum $\sum_T x_T^{T-n}$ of its homogeneous parts, as $
 \[\rho(\textstyle\sum_{\alpha} \oldphi_{\alpha}\twist^{\alpha+1} D^{\alpha-n}(x\otimes x))=\rho(\textstyle\sum_{T} x_T^{T-n}\otimes x_T^{T-n})\in S_2X.\]
 Although this term need not vanish, its image in $\Lambda^2X$ certainly does, so that $\textup{LAM}_1$ satisfies the desired equation.
 \end{proof}
-Suppose now that $x\in \Edownup{r}{}{X}{s}{t}$. In light of the above calculation, when $n<i\leq t+1$, the purpose of $\delta^\textup{ext}_i(x)$ will be to support a $d_{t-i+1}$-differential to $\Sq_\textup{ext}^{t-i+1}(x)$. Thus, we would not expect to be able to define $\delta^\textup{ext}_i(x)$ when $t-i+1<r$; indeed, the following result will construct $\delta^\textup{ext}_i(x)$ whenever $i\leq t-(r-1)$. Moreover, the Steenrod operation $\Sq^{t-i+1}(x)$ has indeterminacy vanishing by $\Edownup{2(r-1)}{}{S_2X}{s+t-i+1}{2t}$, and one should expect that whenever $t-i+1<2(r-1)$, $\delta^\textup{ext}_i(x)$ will be multi-valued, but that the set of values for $\delta^\textup{ext}_i(x)$ will map onto the set of values for $\Sq_\textup{ext}^{t-i+1}(x)$ under $d_{t-i+1}$. 
-We are not saying that the indeterminacy of $\delta^\textup{ext}_i(x)$ must vanish by a certain page, but rather that one expects the  multiple values of $\delta^\textup{ext}_i(x)$ to all fail to be permanent cycles together. Note that when $r\leq 2$, there is no indeterminacy whatsoever in either set of operations.
+Suppose now that $x\in \Edownup{r}{}{X}{s}{t}$. In light of the above calculation, when $n<i\leq t+1$, the purpose of $\delta^\textup{ext}_i(x)$ will be to support a $d_{t-i+1}$-differential to $\Sq_\textup{ext}^{t-i+1}(x)$. Thus, we would not expect to be able to define $\delta^\textup{ext}_i(x)$ when $t-i+1<r$; indeed, the following result will construct $\delta^\textup{ext}_i(x)$ whenever $i\leq t-(r-1)$.
+
+Moreover,  $\Sq^{t-i+1}_\textup{ext}(x)$ has indeterminacy vanishing by $\Edownup{2(r-1)}{}{S_2X}{s+t-i+1}{2t}$, and we should expect that whenever $t-i+1<2(r-1)$, $\delta^\textup{ext}_i(x)$ will be multi-valued, but that the set of values for $\delta^\textup{ext}_i(x)$ will map onto the set of values for $\Sq_\textup{ext}^{t-i+1}(x)$ under $d_{t-i+1}$. 
+We are not saying that we expect the indeterminacy of $\delta^\textup{ext}_i(x)$ to vanish by a certain page, but rather that we expect the  multiple values of $\delta^\textup{ext}_i(x)$ to all fail to be permanent cycles together. Note that when $r\leq 2$, there is no indeterminacy whatsoever in either set of operations.
 \begin{prop}
 \label{Prop on delta external}
-Suppose $r\geq0$. The chain-level map $\textup{DEL}_i$ produces potentially multi-valued operations $\delta^\textup{ext}_i:\Edownup{r}{}{X}{s}{t}\to \Edownup{r}{}{S_2X}{s}{t+i}$ whenever $2\leq i\leq \max\{n,t-(r-1)\}$. This operation is single-valued whenever $2\leq i\leq \max\{n,t+1-2(r-1)\}$, and at $E_1$ may be identified with the operations of \S\ref{External unary homotopy operations}:
+Suppose that $r\geq0$. The chain-level map $\textup{DEL}_i$ produces a potentially multi-valued operation $\delta^\textup{ext}_i:\Edownup{r}{}{X}{s}{t}\to \Edownup{r}{}{S_2X}{s}{t+i}$ whenever $2\leq i\leq \max\{n,t-(r-1)\}$. This operation is single-valued whenever $2\leq i\leq \max\{n,t+1-2(r-1)\}$, and at $E_1$ may be identified with the operation of \S\ref{External unary homotopy operations}:
 \[\pi\uver_{t}( X^s)\overset{\delta_i^\textup{ext}}{\to} \pi\uver_{t+i}S_2(X^s).\]
 
 Suppose that $r\geq1$, that $x,y\in \E{}{r}{X}{s}{t}$ and that $2\leq i\leq \max\{t-s,t-(r-1)\}$, so that $\delta^\textup{ext}_ix $ and $\delta^\textup{ext}_iy$ are defined. Then
@@ -5342,7 +5375,7 @@ Moreover, $\delta^\textup{ext}_i (d_r x)$ is defined, and
 %\Sq_\textup{ext}^{t-i+1}(x),&\textup{if $t-s<i =t-(r-1)$}\\
 0,&\textup{otherwise.}
 \end{cases}\]
-If $i\leq \max\{n,t+1-2(r-1)\}$, so that $\delta^\textup{ext}_i x$ is single-valued, then so is $\delta^\textup{ext}_i d_r x$, and this equation holds exactly. Otherwise, this equation holds modulo the indeterminacy of the right hand side. When $i>t-s$ and $r =t-i+1$ the set of values of the left hand side coincides with the set of values of the right hand side.  In particular, if $x\in \E{}{\infty}{X}{s}{t}$ and $t-s>0$, then $x\times x=0\in\E{}{\infty}{S_2X}{2s+1}{2t+1}$.
+If $i\leq \max\{n,t+1-2(r-1)\}$, so that $\delta^\textup{ext}_i x$ is single-valued, then so is $\delta^\textup{ext}_i d_r x$, and this equation holds exactly.  When $i>t-s$ and $r =t-i+1$ the set of values of the left hand side coincides with the set of values of the right hand side. Otherwise, this equation holds modulo the indeterminacy of the left hand side. In particular, if $x\in \E{}{\infty}{X}{s}{t}$ and $t-s>0$, then $\mu^\textup{ext}(x\otimes x)=0\in\E{}{\infty}{S_2X}{2s+1}{2t+1}$.
 
 The same conclusions hold for $\textup{LAM}_i$, producing operations $\lambda_i^\textup{ext}$, and the inequality $2\leq i$ can be replaced with $1\leq i$ in this case.
 \end{prop}
@@ -7182,12 +7215,14 @@ When $V$ is  in fact a bisimplicial cocommutative coalgebra, one recovers Singer
 \[\Edown{r}{S^2V}{**}{}\to \Edown{r}{V}{**}{}.\]
 %When $V$ is a cocommutative coalgebra, the diagonal map $V\to S^2V$ induces a map $E_r^{**}(S^2V)\to E_r^{**}(V)$, postcomposition with which yields Singer's operations, however we will not have access to such structure in what follows. Thus, we will briefly reprise Singer's results in this \emph{external} language, in order that we have them available.
 
-An (external) \emph{operation with indeterminacy disappearing by $E_{r'}$} is a function
-\[\Edown{r}{V}{**}{}\to \Edown{r}{S^2V}{**}{}/\EBdown{r,r'}{S^2V}{**}{},\]
-where $\EBdown{r,r'}{S^2V}{**}{}\subseteq \Edown{r}{S^2V}{**}{}$ is the subgroup consisting of those elements which survive to $\Edown{r}{S^2V}{**}{}$ and represent zero there. Later in this thesis we will use the term \emph{multi-valued function} 
-$\Edown{r}{V}{**}{}\to \Edown{r}{S^2V}{**}{}$, a clear abuse of terminology that should cause little offense.
-
-Some of the operations $\Edown{r}{V}{**}{}\to \Edown{r'}{S^2V}{**}{}$ to be defined shortly are between different spectral sequence pages. 
+In \S\ref{Operations with indeterminacy} we discussed spectral sequences with indeterminacy, and multi-valued functions.
+%\begin{shaded}\tiny
+%An (external) \emph{operation with indeterminacy disappearing by $E_{r'}$} is a function
+%\[\Edown{r}{V}{**}{}\to \Edown{r}{S^2V}{**}{}/\EBdown{r,r'}{S^2V}{**}{},\]
+%where $\EBdown{r,r'}{S^2V}{**}{}\subseteq \Edown{r}{S^2V}{**}{}$ is the subgroup consisting of those elements which survive to $\Edown{r}{S^2V}{**}{}$ and represent zero there. Later in this thesis we will use the term \emph{multi-valued function} 
+%$\Edown{r}{V}{**}{}\to \Edown{r}{S^2V}{**}{}$, a clear abuse of terminology that should cause little offense.
+%\end{shaded}
+They reappear in Singer's theory, as some of the operations $\Edown{r}{V}{**}{}\to \Edown{r'}{S^2V}{**}{}$ are between different spectral sequence pages. 
 Such an operation is equivalent to an external operation with indeterminacy $r'$ which also satisfies a survival property.
 
 \SubsectionOrSection{External spectral sequence operations of Singer}\label{singer ext ops sect}
