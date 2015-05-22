@@ -8890,170 +8890,7 @@ However, we have already calculated these groups in Corollary \ref{the corollary
 
 
 
-%\end{centering}
-%\end{landscape}
 
-%#1:location
-%#2:offset
-%#3:deltasequence
-%#4:sqsequence
-%#5:labelflag
-%#6:gforghost,aforabutment
-\newcommand{\mynode}[6]{
-%\draw (#1) circle (2pt) node[left,rotate=90] (d#2) {\small$\delta_{#2}$};
-\ifstrequal{#6}{dottype:g}{    \draw (#1)++(#2) circle (2pt) node[left,rotate=90] (s#4d#3) {\labelmaker{#3}{#4}{#5}};}{
-\ifstrequal{#6}{dottype:a}{\filldraw (#1)++(#2) circle (3pt) node[left,rotate=90] (s#4d#3) {\labelmaker{#3}{#4}{#5}};}{
-                   \filldraw (#1)++(#2) circle (2pt) node[left,rotate=90] (s#4d#3) {\labelmaker{#3}{#4}{#5}};
-}
-}
-}
-\newcommand{\nodename}[2]
-{
-\pgfmathparse{0}
-\edef\hasha{\pgfmathresult}
-\foreach \iIi in {#1}
-  {   
-      \pgfmathparse{int(20*\hasha+\iIi)}
-      \xdef\hasha{\pgfmathresult}
-  }
-\foreach \iIi in {#2}
-  {   
-      \pgfmathparse{int(20*\hasha+\iIi)}
-      \xdef\hasha{\pgfmathresult}
-  }
-\hasha
-}
-
-\newcommand{\goodnode}[7]{
-\def\coordlist{#1}
-\pgfmathparse{{\coordlist}[0]}
-\edef\myx{\pgfmathresult }
-\pgfmathparse{{\coordlist}[1]}
-\edef\myy{\pgfmathresult }
-\foreach \iIi in {#3}
-  {   
-      \pgfmathparse{\myx+\iIi}
-      \xdef\myx{\pgfmathresult}
-      \pgfmathparse{\myy+1}
-      \xdef\myy{\pgfmathresult}
-%      \node[circle,draw,inner sep=5 pt] at (\myx,\myy) {};
-  }
-\foreach \jJj in {#4}
-  {   
-      \pgfmathparse{2*\myx+\myy-\jJj+1}
-      \xdef\myx{\pgfmathresult}
-      \pgfmathparse{\myy+\jJj}
-      \xdef\myy{\pgfmathresult}
-%      \node[circle,draw,inner sep=5 pt] at (\myx,\myy) {};
-  }
-%\draw (#1) circle (2pt) node[left,rotate=90] (d#2) {\small$\delta_{#2}$};
-\ifstrequal{#6}{dottype:g}{    \draw (\myx,\myy)++(#2) circle (2pt) node[left,rotate=90] (#7) {\labelmaker{#3}{#4}{#5}};}{
-\ifstrequal{#6}{dottype:a}{\filldraw (\myx,\myy)++(#2) circle (3pt) node[left,rotate=90] (#7) {\labelmaker{#3}{#4}{#5}};}{
-                           \filldraw (\myx,\myy)++(#2) circle (2pt) node[left,rotate=90] (#7) {\labelmaker{#3}{#4}{#5}};
-}
-}
-}
-
-
-
-
-%\[\!\!\!\!\!\!\!\!\!\!\!\!\!\!\!\!\!\!\!\!\!\!\!\!\!\!\!\!\!\!\!\!
-%\begin{tikzpicture}[y=.6cm, x=.4cm,font=\sffamily]
-%
-% 	%axis
-%	\draw (-.5,-.5) -- (44,-.5); %coordinate (x axis mid) (44,-.5);
-%    \draw (-.5,-.5) --  (-.5,11.25);%coordinate (y axis mid)
-%
-%    \draw (16,-.5) --  (16,11.25);%coordinate (y axis mid)
-%    %ticks
-%    \foreach \x in {0,2,...,44}
-%     	\draw (\x,-.4) -- (\x,-.6)
-%		node[anchor=north] {\x};
-%    \foreach \y in {0,1,...,11}
-%     	\draw (-.4,\y) -- (-.6,\y) 
-%     		node[anchor=east] {\y}; 
-%
-%\edef\myx{2}
-%\edef\myy{0}
-%\foreach \iIi in {2,5}
-%  {   
-%      \pgfmathparse{\myx+\iIi}
-%      \xdef\myx{\pgfmathresult}
-%      \pgfmathparse{\myy+1}
-%      \xdef\myy{\pgfmathresult}
-%      \node[circle,draw,inner sep=5 pt] at (\myx,\myy) {};
-%  }
-%%\foreach \jJj in {3}
-%%  {   
-%%      \pgfmathparse{2*\myx+\myy-\jJj+1}
-%%      \xdef\myx{\pgfmathresult}
-%%      \pgfmathparse{\myy+\jJj}
-%%      \xdef\myy{\pgfmathresult}
-%%      \node[circle,draw,inner sep=5 pt] at (\myx,\myy) {};
-%%  }
-%
-%
-%\filldraw (2,0) circle (2pt);
-%\filldraw (4,1) circle (2pt) node[below] (d2) {};
-%
-%\filldraw (8,2) circle (2pt) node[below] (d42) {};
-%    \draw (9,2) circle (2pt) node[left,rotate=90] (d5,2) {\nodename{2,4}{}};
-%%\mynode{10,2}{0,0}{6,2}{}{label:y}{dottype:a}{}
-%%\goodnode{2,0}{0,0}{2,6}{}{label:y}{dottype:a}
-%%\goodnode{2,0}{0,1}{2,7}{}{label:y}{dottype:}
-%%\mynode{12,2}{0,0}{8,2}{}{label:y}{dottype:g}
-%\filldraw (16,5) circle (2pt); %sq3
-%\filldraw (18,5) circle (2pt);
-%\filldraw (32,11) circle (2pt); %sq6sq3
-%\filldraw (40,11) circle (2pt);
-%
-%
-%\filldraw (16,3) circle (2pt);
-%\filldraw (17,3) circle (2pt);
-%    \draw (18,3) circle (2pt);
-%\filldraw (19,3) circle (2pt);
-%    \draw (20,3) circle (2pt);
-%\filldraw (33,6) circle (2pt);%sq3
-%\filldraw (35,6) circle (2pt);
-%\filldraw (37,6) circle (2pt);
-%\filldraw (39,6) circle (2pt);
-%\filldraw (41,6) circle (2pt);
-%\filldraw (32,7) circle (2pt);%sq4
-%\filldraw (34,7) circle (2pt);
-%\filldraw (36,7) circle (2pt);
-%\filldraw (38,7) circle (2pt);
-%\filldraw (40,7) circle (2pt);
-%
-%
-%\filldraw (32,4) circle (2pt);
-%\filldraw (33,4) circle (2pt);
-%\filldraw (34,4) circle (2pt);
-%    \draw (34.83,4) circle (2pt);
-%
-%\filldraw (35.17,4) circle (2pt);
-%\filldraw (36,4) circle (2pt);
-%    \draw (37,4) circle (2pt);
-%
-%\filldraw (38,4) circle (2pt);
-%    \draw (38.83,4) circle (2pt);
-%
-%\filldraw (39.17,4) circle (2pt);
-%\filldraw (40,4) circle (2pt);
-%    \draw (41,4) circle (2pt);
-%
-%\filldraw (42,4) circle (2pt);
-%\filldraw (43,4) circle (2pt);
-%
-%\end{tikzpicture}
-%\]
-
-\newcommand\Square[1]{+(-#1,-#1) rectangle +(#1,#1)}
-
-%deltaseq,sqseq,labelflag
-\newcommand{\labelmaker}[3]{
-%{\small\ifstrequal{#3}{label:y}{$\ifstrequal{#2}{}{\delta_{#1}}{\Sq^{#2}\delta_{#1}}$}{}} ABLE TO DO STEENRODS
-{\tiny\ifstrequal{#3}{label:y}{$#1$}{}}
-}
 
 %#1:fund class location
 %#2:offset to avoid overlap
@@ -9061,11 +8898,11 @@ However, we have already calculated these groups in Corollary \ref{the corollary
 %#4:Sq    sequence
 %#5:label:y/n
 %#6:dottype:=normal
-%   dottype:a   =abutment
-%   dottype:g   =ghost (gone by E2)
-%   dottype:squ =gets hit since it's a square
-%   dottype:gsqu=
-\renewcommand{\goodnode}[7]{
+%   dottype:a =abutment
+%   dottype:g =ghost (gone by E2)
+%   dottype:s =any square
+%   dottype:gs=any ghostly square
+\newcommand{\goodnode}[7]{
 \def\coordlist{#1}
 \pgfmathparse{{\coordlist}[0]}
 \edef\myx{\pgfmathresult }
@@ -9092,9 +8929,6 @@ However, we have already calculated these groups in Corollary \ref{the corollary
 \edef\myy{\pgfmathresult }
 
 \coordinate (#7) at (\myx,\myy);
-%\ifstrequal{#6}{dottype:g}{    \draw (#7) circle (2pt) node[left,rotate=90] {\labelmaker{#3}{#4}{#5}};}{
-%\ifstrequal{#6}{dottype:a}{\filldraw (#7) circle (2pt) node[left,rotate=90] {\labelmaker{#3}{#4}{#5}};}{
-%                           \filldraw (#7) circle (2pt) node[left,rotate=90] {\labelmaker{#3}{#4}{#5}};}}
 \ifstrequal{#6}{dottype:g}{          \draw (#7) circle (2pt);}{
 \ifstrequal{#6}{dottype:a}{      \filldraw (#7) circle (.75pt); \draw (#7) circle (2.5pt);}{
 \ifstrequal{#6}{dottype:s}{    \filldraw (#7) \Square{2pt};}{
@@ -9105,104 +8939,15 @@ However, we have already calculated these groups in Corollary \ref{the corollary
 \node[right,rotate=-90,fill=white,outer sep=4pt,inner sep=2.4pt] at (#7)  {\tiny$#3$};
 }{}
 }
-
-
-
-
-%[fill=white,inner sep=1pt]
-
-\newcommand{\differential}[2]{\draw[shorten >=3pt,shorten <=3pt] (#1) -- (#2);}
-
-\renewcommand{\differential}[3][]{\draw[shorten >=3pt,shorten <=3pt] (#2) to[#1] (#3);}
-
-
-%\[\!\!\!\!\!\!\!\!\!\!\!\!\!\!\!\!\!\!\!\!\!\!\!\!\!\!\!\!\!\!\!\!
-%\begin{tikzpicture}[y=.6cm, x=.4cm]
-%\xdef\TminusSmax{44}
-%\xdef\Smax{11}
-%\xdef\horTickFreq{2}
-%\xdef\verTickFreq{1}
-%\xdef\tsfz{0.0}%tick separation from zero
-%%axis
-%\draw[->] (-\tsfz,-\tsfz) -- (\TminusSmax+.45,-\tsfz); %coordinate (x axis mid) (44,-.5);
-%\draw[->] (-\tsfz,-\tsfz) -- (-\tsfz,\Smax+.45);%coordinate (y axis mid)
-%%ticks
-%\foreach \x in {0,\horTickFreq,...,\TminusSmax}
-%   \draw (\x,-\tsfz+.1) -- (\x,-\tsfz-.1)
-%      node[anchor=north] {\x};
-%\foreach \y in {0,\verTickFreq,...,\Smax}
-%   \draw (-\tsfz+.1,\y) -- (-\tsfz-.1,\y) 
-%      node[anchor=east] {\y};
-%\node[anchor=west] at (-\tsfz+.1,\Smax) {$s$};
-%\node[anchor=south] at (\TminusSmax,-\tsfz+.1) {$t-s$};
-%
-%%0-line
-%\goodnode{2,0}{0,0}{}{}{label:n}{dottype:a}{fundclass}
-%
-%%1-line
-%\goodnode{2,0}{0,0}{2}{}{label:y}{dottype:a}{d2}
-%
-%%2-line
-%\goodnode{2,0}{0,0}{4,2}{}{label:y}{dottype:a}{d42}
-%\goodnode{2,0}{0,0}{5,2}{}{label:y}{dottype:g}{d52}
-%\goodnode{2,0}{0,0}{4,2}{3}{label:n}{dottype:s}{s3d42}
-%\goodnode{2,0}{0,0}{5,2}{3}{label:n}{dottype:s}{s3d52}
-%\goodnode{2,0}{0,0}{4,2}{6,3}{label:n}{dottype:s}{s63d42}
-%\goodnode{2,0}{0,0}{5,2}{6,3}{label:n}{dottype:s}{s63d52}
-%
-%%3-line
-%\goodnode{2,0}{0,0}{8,4,2}{}{label:y}{dottype:a}{d842}
-%\goodnode{2,0}{0,0}{9,4,2}{}{label:y}{dottype:}{d942}
-%\goodnode{2,0}{0,0}{10,4,2}{}{label:y}{dottype:g}{d1042}
-%\goodnode{2,0}{0,0}{10,5,2}{}{label:y}{dottype:}{d1052}
-%\goodnode{2,0}{0,0}{11,5,2}{}{label:y}{dottype:g}{d1152}
-%\goodnode{2,0}{0,0}{8,4,2}{3}{label:n}{dottype:}{s3d842}
-%\goodnode{2,0}{0,0}{9,4,2}{3}{label:n}{dottype:}{s3d942}
-%\goodnode{2,0}{0,0}{10,4,2}{3}{label:n}{dottype:}{s3d1042}
-%\goodnode{2,0}{0,0}{10,5,2}{3}{label:n}{dottype:}{s3d1052}
-%\goodnode{2,0}{0,0}{11,5,2}{3}{label:n}{dottype:}{s3d1152}
-%\goodnode{2,0}{0,0}{8,4,2}{4}{label:n}{dottype:s}{s4d842}
-%\goodnode{2,0}{0,0}{9,4,2}{4}{label:n}{dottype:s}{s4d942}
-%\goodnode{2,0}{0,0}{10,5,2}{4}{label:n}{dottype:s}{s4d1052}
-%
-%%4-line
-%\goodnode{2,0}{0,-.1}{16,8,4,2}{}{label:y}{dottype:a}{d16842}
-%\goodnode{2,0}{0,-.1}{17,8,4,2}{}{label:y}{dottype:}{d17842}
-%\goodnode{2,0}{0,-.1}{18,8,4,2}{}{label:y}{dottype:}{d18842}
-%\goodnode{2,0}{-.2012,-.1}{19,8,4,2}{}{label:n}{dottype:g}{d19842}
-%\goodnode{2,0}{.2012,.1}{18,9,4,2}{}{label:y}{dottype:}{d18942}
-%\goodnode{2,0}{0,.1}{19,9,4,2}{}{label:y}{dottype:}{d19942}
-%\goodnode{2,0}{0,.1}{20,9,4,2}{}{label:y}{dottype:g}{d20942}
-%\goodnode{2,0}{0,-.1}{20,10,4,2}{}{label:y}{dottype:}{d201042}
-%\goodnode{2,0}{-.2012,-.1}{21,10,4,2}{}{label:n}{dottype:g}{d211042}
-%\goodnode{2,0}{.2012,.1}{20,10,5,2}{}{label:y}{dottype:}{d201052}
-%\goodnode{2,0}{0,.1}{21,10,5,2}{}{label:y}{dottype:}{d211052}
-%\goodnode{2,0}{0,.1}{22,10,5,2}{}{label:y}{dottype:g}{d221052}
-%\goodnode{2,0}{0,-.1}{22,11,5,2}{}{label:y}{dottype:}{d221152}
-%\goodnode{2,0}{0,-.1}{23,11,5,2}{}{label:y}{dottype:g}{d231152}
-%
-%\differential{d942}{s3d42}
-%\differential{d1052}{s3d52}
-%\differential{d17842}{s4d842}
-%\differential{d18842}{s3d842}
-%\differential{d18942}{s4d942}
-%\differential{d19942}{s3d942}
-%\differential{d201042}{s3d1042}
-%\differential{d201052}{s4d1052}
-%\differential{d211052}{s3d1052}
-%\differential{d221152}{s3d1152}
-%
-%\end{tikzpicture}
-%\]
-%
-%\vfpb
-
+\newcommand{\differential}[3][]{\draw[shorten >=3pt,shorten <=3pt] (#2) to[#1] (#3);}
+\newcommand\Square[1]{+(-#1,-#1) rectangle +(#1,#1)}
 \newcommand{\dashedBrokenLine}[2]{
 \foreach \x/\y in {#2}
  \draw [dotted] (\x,#1+.5) -- (\y,#1+.5);
 }
 
-\eject \pdfpagewidth=12in \pdfpageheight=8.5in
+%\eject \pdfpagewidth=12in \pdfpageheight=8.5in
+\begin{landscape}
 
 \[\!\!\!\!\!\!\!\!\!\!\!\!\!\!\!\!\!\!\!\!\!\!\!\!\!\!\!\!\!\!\!\!
 \begin{tikzpicture}[y=.6cm, x=.4cm]
@@ -9341,7 +9086,7 @@ However, we have already calculated these groups in Corollary \ref{the corollary
 \end{tikzpicture}
 \]
 
-%\begin{landscape}
+
 
 \vfpb
 
@@ -9698,8 +9443,8 @@ However, we have already calculated these groups in Corollary \ref{the corollary
 
 
 \end{tikzpicture}\]
-
-\eject \pdfpageheight=12in \pdfpagewidth=8.5in
+\end{landscape}
+%\eject \pdfpageheight=12in \pdfpagewidth=8.5in
 
 
 \SectionOrChapter{The Bousfield-Kan spectral sequence for $\mathbb{S}^{\algs}_T$}
