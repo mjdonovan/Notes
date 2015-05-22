@@ -7,7 +7,7 @@
 %%%%%%%%%%%%%%%%%%% 
 \ifx\ShrinkPages\undefined\else\usepackage[paperheight=220mm,paperwidth=160mm]{geometry}\fi%220/160 height options
 \usepackage{tikz,etoolbox}
-\usetikzlibrary{calc,plotmarks}
+\usetikzlibrary{calc,plotmarks,shapes.geometric,decorations.pathreplacing}
 \usepackage{amsmath,amsthm,amssymb} \usepackage{eucal} \usepackage{mathrsfs,nicefrac} \usepackage{amssymb,lscape} \usepackage[all]{xy} \usepackage{cancel} \usepackage[textsize=small,color=green!40]{todonotes} \usepackage{color} \usepackage{version} \usepackage{enumitem} \setlist{nolistsep} \usepackage{mathtools} \newcommand{\ooooo}[2][]{\excludeversion{#2}} \newcommand{\wooooo}[2][]{\includeversion{#2}}%mathtools is just used for `mathclap'
 \ooooo[	do]{todolist}\ooooo[]{random junk}
 \ifx\IncludeAll\undefined\else\renewcommand{\ooooo}[2][]{\wooooo{#2}}\fi
@@ -8892,6 +8892,37 @@ However, we have already calculated these groups in Corollary \ref{the corollary
 
 
 
+
+\newcommand{\emptytriangle}[1]{
+\node[draw, regular polygon, regular polygon sides=3,minimum size=5pt,inner sep=0, fill=white] at (#1) {};
+}
+\newcommand{\nestedtriangle}[1]{
+\node[draw, regular polygon, regular polygon sides=3,minimum size=5pt,inner sep=0, fill=white] at (#1) {};
+\node[draw, regular polygon, regular polygon sides=3,minimum size=1pt,inner sep=0, fill] at (#1) {};
+}
+\newcommand{\fulltriangle}[1]{
+\node[draw, regular polygon, regular polygon sides=3,minimum size=5pt,inner sep=0, fill] at (#1) {};
+}
+\newcommand{\fullcircle}[1]{
+\filldraw (#1) circle (2pt);
+}
+\newcommand{\emptycircle}[1]{
+\filldraw[fill=white] (#1) circle (2pt);
+}
+\newcommand{\nestedcircle}[1]{
+\filldraw[fill=white] (#1) circle (2pt);\filldraw (#1) circle (.5pt);
+}
+\newcommand{\fullsquare}[1]{
+\filldraw (#1) \Square{1.8pt};
+}
+\newcommand{\emptysquare}[1]{
+\filldraw[fill=white] (#1) \Square{1.8pt};
+}
+\newcommand{\nestedsquare}[1]{
+\filldraw[fill=white] (#1) \Square{1.8pt};
+\filldraw (#1) \Square{.5pt};
+}
+
 %#1:fund class location
 %#2:offset to avoid overlap
 %#3:delta sequence
@@ -8929,11 +8960,14 @@ However, we have already calculated these groups in Corollary \ref{the corollary
 \edef\myy{\pgfmathresult }
 
 \coordinate (#7) at (\myx,\myy);
-\ifstrequal{#6}{dottype:g}{          \draw (#7) circle (2pt);}{
-\ifstrequal{#6}{dottype:a}{      \filldraw (#7) circle (.75pt); \draw (#7) circle (2.5pt);}{
-\ifstrequal{#6}{dottype:s}{    \filldraw (#7) \Square{2pt};}{
-\ifstrequal{#6}{dottype:gs}{       \draw (#7) \Square{2pt};}{
-                                 \filldraw (#7) circle (2pt);}}}}
+\ifstrequal{#6}{dottype:g}{      \emptycircle{#7}}{
+\ifstrequal{#6}{dottype:a}{      \fulltriangle{#7}}{
+\ifstrequal{#6}{dottype:s}{      \fullsquare{#7}}{
+\ifstrequal{#6}{dottype:gs}{     \emptysquare{#7}}{
+\ifstrequal{#6}{dottype:h}{      \nestedcircle{#7}}{
+\ifstrequal{#6}{dottype:hs}{     \nestedsquare{#7}}{
+                                 \fullcircle{#7}
+}}}}}}
 \ifstrequal{#5}{label:y}{
 \node[right,rotate=-90,fill=white,outer sep=4pt,inner sep=2.4pt] at (#7)  {\tiny$#3$};
 }{}
@@ -8945,8 +8979,15 @@ However, we have already calculated these groups in Corollary \ref{the corollary
  \draw [dotted] (\x,#1+.5) -- (\y,#1+.5);
 }
 
-%\eject \pdfpagewidth=12in \pdfpageheight=8.5in
-\begin{landscape}
+\eject \pdfpagewidth=12in \pdfpageheight=8.5in
+%\begin{landscape}
+
+%xcoord,ycoord,label
+\newcommand{\Lbrace}[3]{\draw[decorate, decoration={brace, amplitude=3pt}] (#1-.4,#2-.4) -- coordinate [left=4pt] (#3) (#1-.4,#2+.4) node {};}
+\newcommand{\Rbrace}[3]{\draw[decorate, decoration={brace, mirror, amplitude=3pt}] (#1+.4,#2-.4) -- coordinate [right=4pt] (#3) (#1+.4,#2+.4) node {};}
+\newcommand{\OperationRecord}[4][]{\draw[->,#1] (#2) to node [inner sep=.3pt, midway,fill=white] {\tiny$#4$} (#3);}
+
+
 
 \[\!\!\!\!\!\!\!\!\!\!\!\!\!\!\!\!\!\!\!\!\!\!\!\!\!\!\!\!\!\!\!\!
 \begin{tikzpicture}[y=.6cm, x=.4cm]
@@ -8968,15 +9009,16 @@ However, we have already calculated these groups in Corollary \ref{the corollary
 \node[anchor=west] at (-\tsfz+.1,\Smax) {$s$};
 
 \dashedBrokenLine{0}{-\tsfz/\TminusSmax+\lasttickbuf}
-\dashedBrokenLine{1}{-\tsfz/\TminusSmax+\lasttickbuf}
+\dashedBrokenLine{1}{-\tsfz/15.4,20.6/\TminusSmax+\lasttickbuf}
 \dashedBrokenLine{2}{-\tsfz/15.4,20.6/31.4,43.6/\TminusSmax+\lasttickbuf}
 \dashedBrokenLine{3}{-\tsfz/31.4,43.6/\TminusSmax+\lasttickbuf}
-\dashedBrokenLine{4}{-\tsfz/31.4,43.6/\TminusSmax+\lasttickbuf}
+\dashedBrokenLine{4}{-\tsfz/\TminusSmax+\lasttickbuf}
 \dashedBrokenLine{5}{-\tsfz/\TminusSmax+\lasttickbuf}
 \dashedBrokenLine{6}{-\tsfz/\TminusSmax+\lasttickbuf}
 \dashedBrokenLine{7}{-\tsfz/\TminusSmax+\lasttickbuf}
 \dashedBrokenLine{8}{-\tsfz/\TminusSmax+\lasttickbuf}
 \dashedBrokenLine{9}{-\tsfz/\TminusSmax+\lasttickbuf}
+\dashedBrokenLine{10}{-\tsfz/\TminusSmax+\lasttickbuf}
 \node[anchor=south,fill=white,outer sep=4pt,inner sep=2.4pt] at (\TminusSmax-.5,-\tsfz+.1) {$t-s$};
 
 %0-line
@@ -8998,15 +9040,15 @@ However, we have already calculated these groups in Corollary \ref{the corollary
 \goodnode{2,0}{0,-.1}{4,2}{5,2}{label:n}{dottype:gs}{s52d42}
 \goodnode{2,0}{0,.1}{5,2}{5,2}{label:n}{dottype:gs}{s52d52}
 \goodnode{2,0}{0,-.1}{4,2}{3}{label:n}{dottype:s}{s3d42}
-\goodnode{2,0}{0,.1}{5,2}{3}{label:n}{dottype:s}{s3d52}
+\goodnode{2,0}{0,.1}{5,2}{3}{label:n}{dottype:hs}{s3d52}
 \goodnode{2,0}{0,-.1}{4,2}{6,3}{label:n}{dottype:s}{s63d42}
-\goodnode{2,0}{0,.1}{5,2}{6,3}{label:n}{dottype:s}{s63d52}
+\goodnode{2,0}{0,.1}{5,2}{6,3}{label:n}{dottype:hs}{s63d52}
 
 %3-line
 \goodnode{2,0}{0,-.2}{8,4,2}{}{label:y}{dottype:a}{d842}
 \goodnode{2,0}{0,0}{9,4,2}{}{label:y}{dottype:}{d942}
 \goodnode{2,0}{0,.2}{10,4,2}{}{label:y}{dottype:g}{d1042}
-\goodnode{2,0}{0,-.1}{10,5,2}{}{label:y}{dottype:}{d1052}
+\goodnode{2,0}{0,-.1}{10,5,2}{}{label:y}{dottype:h}{d1052}
 \goodnode{2,0}{0,.1}{11,5,2}{}{label:y}{dottype:g}{d1152}
 \goodnode{2,0}{0,-.2}{8,4,2}{2}{label:n}{dottype:g}{s2d842}
 \goodnode{2,0}{0,0}{9,4,2}{2}{label:n}{dottype:g}{s2d942}
@@ -9015,13 +9057,13 @@ However, we have already calculated these groups in Corollary \ref{the corollary
 \goodnode{2,0}{0,.1}{11,5,2}{2}{label:n}{dottype:g}{s2d1152}
 \goodnode{2,0}{0,-.2}{8,4,2}{3}{label:n}{dottype:}{s3d842}
 \goodnode{2,0}{0,0}{9,4,2}{3}{label:n}{dottype:}{s3d942}
-\goodnode{2,0}{0,.2}{10,4,2}{3}{label:n}{dottype:}{s3d1042}
-\goodnode{2,0}{0,-.1}{10,5,2}{3}{label:n}{dottype:}{s3d1052}
-\goodnode{2,0}{0,.1}{11,5,2}{3}{label:n}{dottype:}{s3d1152}
+\goodnode{2,0}{0,.2}{10,4,2}{3}{label:n}{dottype:h}{s3d1042}
+\goodnode{2,0}{0,-.1}{10,5,2}{3}{label:n}{dottype:h}{s3d1052}
+\goodnode{2,0}{0,.1}{11,5,2}{3}{label:n}{dottype:h}{s3d1152}
 \goodnode{2,0}{0,-.2}{8,4,2}{4}{label:n}{dottype:s}{s4d842}
 \goodnode{2,0}{0,0}{9,4,2}{4}{label:n}{dottype:s}{s4d942}
 \goodnode{2,0}{0,.2}{10,4,2}{4}{label:n}{dottype:gs}{s4d1042}
-\goodnode{2,0}{0,-.1}{10,5,2}{4}{label:n}{dottype:s}{s4d1052}
+\goodnode{2,0}{0,-.1}{10,5,2}{4}{label:n}{dottype:hs}{s4d1052}
 \goodnode{2,0}{0,.1}{11,5,2}{4}{label:n}{dottype:gs}{s4d1152}
 
 %4-line
@@ -9032,12 +9074,12 @@ However, we have already calculated these groups in Corollary \ref{the corollary
 \goodnode{2,0}{0,-.2}{18,9,4,2}{}{label:y}{dottype:}{d18942}
 \goodnode{2,0}{0,0}{19,9,4,2}{}{label:y}{dottype:}{d19942}
 \goodnode{2,0}{0,.2}{20,9,4,2}{}{label:y}{dottype:g}{d20942}
-\goodnode{2,0}{0,0}{20,10,4,2}{}{label:y}{dottype:}{d201042}
+\goodnode{2,0}{0,0}{20,10,4,2}{}{label:y}{dottype:h}{d201042}
 \goodnode{2,0}{0,.2}{21,10,4,2}{}{label:n}{dottype:g}{d211042}
-\goodnode{2,0}{0,-.2}{20,10,5,2}{}{label:y}{dottype:}{d201052}
-\goodnode{2,0}{0,0}{21,10,5,2}{}{label:y}{dottype:}{d211052}
+\goodnode{2,0}{0,-.2}{20,10,5,2}{}{label:y}{dottype:h}{d201052}
+\goodnode{2,0}{0,0}{21,10,5,2}{}{label:y}{dottype:h}{d211052}
 \goodnode{2,0}{0,.2}{22,10,5,2}{}{label:y}{dottype:g}{d221052}
-\goodnode{2,0}{0,-.1}{22,11,5,2}{}{label:y}{dottype:}{d221152}
+\goodnode{2,0}{0,-.1}{22,11,5,2}{}{label:y}{dottype:h}{d221152}
 \goodnode{2,0}{0,.1}{23,11,5,2}{}{label:y}{dottype:g}{d231152}
 
 \differential{d942}{s3d42}
@@ -9128,14 +9170,14 @@ However, we have already calculated these groups in Corollary \ref{the corollary
 \goodnode{3,0}{0,0}{11,5,2}{}{label:}{dottype:}{d1152}
 \goodnode{3,0}{0,.2}{12,5,2}{}{label:}{dottype:g}{d1252}
 
-\goodnode{3,0}{0,0}{12,6,2}{}{label:y}{dottype:}{d1262}%
+\goodnode{3,0}{0,0}{12,6,2}{}{label:y}{dottype:h}{d1262}%
 \goodnode{3,0}{0,.2}{13,6,2}{}{label:n}{dottype:g}{d1362}
 
 \goodnode{3,0}{0,-.2}{12,6,3}{}{label:y}{dottype:a}{d1263}%
 \goodnode{3,0}{0,0}{13,6,3}{}{label:}{dottype:}{d1363}
 \goodnode{3,0}{0,.2}{14,6,3}{}{label:}{dottype:g}{d1463}
 
-\goodnode{3,0}{0,-.1}{14,7,3}{}{label:y}{dottype:}{d1473}%
+\goodnode{3,0}{0,-.1}{14,7,3}{}{label:y}{dottype:h}{d1473}%
 \goodnode{3,0}{0,.1}{15,7,3}{}{label:}{dottype:g}{d1573}
 
 %4-line
@@ -9154,7 +9196,7 @@ However, we have already calculated these groups in Corollary \ref{the corollary
 \goodnode{3,0}{0,.1}{21,10,4,2}{}{label:n}{dottype:}{d211042}
 \goodnode{3,0}{0,.3}{22,10,4,2}{}{label:n}{dottype:g}{d221042}
 
-\goodnode{3,0}{0,-.25}{22,11,4,2}{}{label:y}{dottype:}{d221142}
+\goodnode{3,0}{0,-.25}{22,11,4,2}{}{label:y}{dottype:h}{d221142}
 \goodnode{3,0}{0,-.05}{23,11,4,2}{}{label:n}{dottype:g}{d231142}
 
 \goodnode{3,0}{0,-.3}{20,10,5,2}{}{label:y}{dottype:a}{d201052}
@@ -9166,14 +9208,14 @@ However, we have already calculated these groups in Corollary \ref{the corollary
 \goodnode{3,0}{0,-.2}{23,11,5,2}{}{label:}{dottype:}{d231152}
 \goodnode{3,0}{0,0}{24,11,5,2}{}{label:}{dottype:g}{d241152}
 
-\goodnode{3,0}{0,.0}{24,12,5,2}{}{label:y}{dottype:}{d241252}
-\goodnode{3,0}{0,.2}{25,12,5,2}{}{label:}{dottype:g}{d251252}
+\goodnode{3,0}{0,-.1}{24,12,5,2}{}{label:y}{dottype:h}{d241252}
+\goodnode{3,0}{0,.1}{25,12,5,2}{}{label:}{dottype:g}{d251252}
 
-\goodnode{3,0}{0,-.15}{24,12,6,2}{}{label:y}{dottype:}{d241262}
-\goodnode{3,0}{0,.05}{25,12,6,2}{}{label:}{dottype:}{d251262}
-\goodnode{3,0}{0,.25}{26,12,6,2}{}{label:}{dottype:g}{d261262}
+\goodnode{3,0}{0,-.2}{24,12,6,2}{}{label:y}{dottype:h}{d241262}
+\goodnode{3,0}{0,0}{25,12,6,2}{}{label:}{dottype:h}{d251262}
+\goodnode{3,0}{0,.2}{26,12,6,2}{}{label:}{dottype:g}{d261262}
 
-\goodnode{3,0}{0,-.25}{26,13,6,2}{}{label:y}{dottype:}{d261362}
+\goodnode{3,0}{0,-.25}{26,13,6,2}{}{label:y}{dottype:h}{d261362}
 \goodnode{3,0}{0,-.05}{27,13,6,2}{}{label:n}{dottype:g}{d271362}
 
 \goodnode{3,0}{0,-.3}{24,12,6,3}{}{label:y}{dottype:a}{d241263}
@@ -9185,14 +9227,14 @@ However, we have already calculated these groups in Corollary \ref{the corollary
 \goodnode{3,0}{0,-.2}{27,13,6,3}{}{label:}{dottype:}{d271363}
 \goodnode{3,0}{0,0}{28,13,6,3}{}{label:}{dottype:g}{d281363}
 
-\goodnode{3,0}{0,0}{28,14,6,3}{}{label:y}{dottype:}{d281463}
-\goodnode{3,0}{0,.2}{29,14,6,3}{}{label:}{dottype:g}{d291463}
+\goodnode{3,0}{0,-.1}{28,14,6,3}{}{label:y}{dottype:h}{d281463}
+\goodnode{3,0}{0,.1}{29,14,6,3}{}{label:}{dottype:g}{d291463}
 
-\goodnode{3,0}{0,-.2}{28,14,7,3}{}{label:y}{dottype:}{d281473}
-\goodnode{3,0}{0,0}{29,14,7,3}{}{label:}{dottype:}{d291473}
+\goodnode{3,0}{0,-.2}{28,14,7,3}{}{label:y}{dottype:h}{d281473}
+\goodnode{3,0}{0,0}{29,14,7,3}{}{label:}{dottype:h}{d291473}
 \goodnode{3,0}{0,.2}{30,14,7,3}{}{label:}{dottype:g}{d301473}
 
-\goodnode{3,0}{0,-.1}{30,15,7,3}{}{label:y}{dottype:}{d301573}
+\goodnode{3,0}{0,-.1}{30,15,7,3}{}{label:y}{dottype:h}{d301573}
 \goodnode{3,0}{0,.1}{31,15,7,3}{}{label:}{dottype:g}{d311573}
 
 
@@ -9237,15 +9279,15 @@ However, we have already calculated these groups in Corollary \ref{the corollary
 
 \goodnode{3,0}{0,-.2}{4,2}{3}{label:}{dottype:s}{s3d42}
 \goodnode{3,0}{0,0}{5,2}{3}{label:}{dottype:s}{s3d52}
-\goodnode{3,0}{0,.2}{6,2}{3}{label:}{dottype:s}{s3d62}
+\goodnode{3,0}{0,.2}{6,2}{3}{label:}{dottype:hs}{s3d62}
 \goodnode{3,0}{0,-.1}{6,3}{3}{label:}{dottype:s}{s3d63}
-\goodnode{3,0}{0,.1}{7,3}{3}{label:}{dottype:s}{s3d73}
+\goodnode{3,0}{0,.1}{7,3}{3}{label:}{dottype:hs}{s3d73}
 
 \goodnode{3,0}{0,-.2}{4,2}{6,3}{label:}{dottype:s}{s63d42}
 \goodnode{3,0}{0,0}{5,2}{6,3}{label:}{dottype:s}{s63d52}
-\goodnode{3,0}{0,.2}{6,2}{6,3}{label:}{dottype:s}{s63d62}
+\goodnode{3,0}{0,.2}{6,2}{6,3}{label:}{dottype:hs}{s63d62}
 \goodnode{3,0}{0,-.1}{6,3}{6,3}{label:}{dottype:s}{s63d63}
-\goodnode{3,0}{0,.1}{7,3}{6,3}{label:}{dottype:s}{s63d73}
+\goodnode{3,0}{0,.1}{7,3}{6,3}{label:}{dottype:hs}{s63d73}
 
 %
 %%3-line
@@ -9272,21 +9314,21 @@ However, we have already calculated these groups in Corollary \ref{the corollary
 \goodnode{3,0}{0,-.3}{8,4,2}{3}{label:}{dottype:}{s3d842}
 \goodnode{3,0}{0,-.1}{9,4,2}{3}{label:}{dottype:}{s3d942}
 \goodnode{3,0}{0,.1}{10,4,2}{3}{label:}{dottype:}{s3d1042}
-\goodnode{3,0}{0,.3}{11,4,2}{3}{label:}{dottype:}{s3d1142}
+\goodnode{3,0}{0,.3}{11,4,2}{3}{label:}{dottype:h}{s3d1142}
 
 \goodnode{3,0}{0,-.2}{10,5,2}{3}{label:}{dottype:}{s3d1052}
 \goodnode{3,0}{0,0}{11,5,2}{3}{label:}{dottype:}{s3d1152}
-\goodnode{3,0}{0,.2}{12,5,2}{3}{label:}{dottype:}{s3d1252}
+\goodnode{3,0}{0,.2}{12,5,2}{3}{label:}{dottype:h}{s3d1252}
 
-\goodnode{3,0}{0,0}{12,6,2}{3}{label:}{dottype:}{s3d1262}
-\goodnode{3,0}{0,.2}{13,6,2}{3}{label:n}{dottype:}{s3d1362}
+\goodnode{3,0}{0,0}{12,6,2}{3}{label:}{dottype:h}{s3d1262}
+\goodnode{3,0}{0,.2}{13,6,2}{3}{label:n}{dottype:h}{s3d1362}
 
 \goodnode{3,0}{0,-.2}{12,6,3}{3}{label:}{dottype:}{s3d1263}
 \goodnode{3,0}{0,0}{13,6,3}{3}{label:}{dottype:}{s3d1363}
-\goodnode{3,0}{0,.2}{14,6,3}{3}{label:}{dottype:}{s3d1463}
+\goodnode{3,0}{0,.2}{14,6,3}{3}{label:}{dottype:h}{s3d1463}
 
-\goodnode{3,0}{0,-.1}{14,7,3}{3}{label:}{dottype:}{s3d1473}
-\goodnode{3,0}{0,.1}{15,7,3}{3}{label:}{dottype:}{s3d1573}
+\goodnode{3,0}{0,-.1}{14,7,3}{3}{label:}{dottype:h}{s3d1473}
+\goodnode{3,0}{0,.1}{15,7,3}{3}{label:}{dottype:h}{s3d1573}
 
 
 
@@ -9302,14 +9344,14 @@ However, we have already calculated these groups in Corollary \ref{the corollary
 \goodnode{3,0}{0,0}{11,5,2}{4}{label:}{dottype:s}{s4d1152}
 \goodnode{3,0}{0,.2}{12,5,2}{4}{label:}{dottype:gs}{s4d1252}
 
-\goodnode{3,0}{0,0}{12,6,2}{4}{label:}{dottype:s}{s4d1262}
+\goodnode{3,0}{0,0}{12,6,2}{4}{label:}{dottype:hs}{s4d1262}
 \goodnode{3,0}{0,.2}{13,6,2}{4}{label:n}{dottype:gs}{s4d1362}
 
 \goodnode{3,0}{0,-.2}{12,6,3}{4}{label:}{dottype:s}{s4d1263}
 \goodnode{3,0}{0,0}{13,6,3}{4}{label:}{dottype:s}{s4d1363}
 \goodnode{3,0}{0,.2}{14,6,3}{4}{label:}{dottype:gs}{s4d1463}
 
-\goodnode{3,0}{0,-.1}{14,7,3}{4}{label:}{dottype:s}{s4d1473}
+\goodnode{3,0}{0,-.1}{14,7,3}{4}{label:}{dottype:hs}{s4d1473}
 \goodnode{3,0}{0,.1}{15,7,3}{4}{label:}{dottype:gs}{s4d1573}
 
 \differential{d1042}{s3d42}
@@ -9380,48 +9422,14 @@ However, we have already calculated these groups in Corollary \ref{the corollary
 
 \differential{d301573}{s3d1573}
 
-%%%%%4-line
-%%%%\differential{d18842}{s3d842}
-%%%%\differential{d19842}{s4d842}
-%%%%
-%%%%\differential{d19942}{s3d942}
-%%%%\differential{d20942}{s4d942}
-%%%%
-%%%%\differential{d201042}{s3d1042}
-%%%%\differential{d211042}{s4d1042}
-%%%%
-%%%%\differential{d221142}{s3d1142}
-%%%%
-%%%%\differential{d211052}{s3d1052}
-%%%%\differential{d221052}{s4d1052}
-%%%%
-%%%%\differential{d221152}{s3d1152}
-%%%%\differential{d231152}{s4d1152}
-%%%%
-%%%%\differential{d241252}{s3d1252}
-%%%%
-%%%%\differential{d241262}{s3d1262}
-%%%%\differential{d251262}{s4d1262}
-%%%%
-%%%%\differential{d261362}{s3d1362}
-%%%%
-%%%%\differential{d251263}{s3d1263}
-%%%%\differential{d261263}{s4d1263}
-%%%%
-%%%%\differential{d261363}{s3d1363}
-%%%%\differential{d271363}{s4d1363}
-%%%%
-%%%%\differential{d281463}{s3d1463}
-%%%%
-%%%%\differential{d281473}{s3d1473}
-%%%%\differential{d291473}{s4d1473}
-%%%%
-%%%%\differential{d301573}{s3d1573}
+\Rbrace{13}{2}{2lineR}
+\Lbrace{17}{3}{3lineL}
 
+\OperationRecord{2lineR}{3lineL}{\delta}
 
 \end{tikzpicture}\]
-\end{landscape}
-%\eject \pdfpageheight=12in \pdfpagewidth=8.5in
+%\end{landscape}
+\eject \pdfpageheight=12in \pdfpagewidth=8.5in
 
 
 \SectionOrChapter{The Bousfield-Kan spectral sequence for $\mathbb{S}^{\algs}_T$}
