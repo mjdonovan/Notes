@@ -9100,10 +9100,18 @@ However, we have already calculated these groups in Corollary \ref{the corollary
 \ifstrequal{#6}{dottype:s}{    \filldraw (#7) \Square{2pt};}{
 \ifstrequal{#6}{dottype:gs}{       \draw (#7) \Square{2pt};}{
                                  \filldraw (#7) circle (2pt);}}}}
-\node[right,rotate=-90] at (#7) {\labelmaker{#3}{#4}{#5}};
+%\node[right,rotate=-90,fill=white,inner sep=-1pt] at (#7) {\labelmaker{#3}{#4}{#5}};
+\ifstrequal{#5}{label:y}{
+\node[right,rotate=-90,fill=white,outer sep=4pt,inner sep=2.4pt] at (#7)  {\tiny$#3$};
+}{}
 }
 
-\newcommand{\differential}[2]{\draw[->,shorten >=3pt,shorten <=3pt] (#1) -- (#2);}
+
+
+
+%[fill=white,inner sep=1pt]
+
+\newcommand{\differential}[2]{\draw[shorten >=3pt,shorten <=3pt] (#1) -- (#2);}%[->] removed
 %\path[dashed,<->,shorten >=5pt]
 
 
@@ -9347,10 +9355,14 @@ However, we have already calculated these groups in Corollary \ref{the corollary
 \node[anchor=west] at (-\tsfz+.1,\Smax) {$s$};
 \node[anchor=south] at (\TminusSmax-.5,-\tsfz+.1) {$t-s$};
 
-\dashedBrokenLine{0}{-\tsfz/4.4,5.6/\TminusSmax+\lasttickbuf-2.5}
-\dashedBrokenLine{1}{-\tsfz/8.4,13.6/16.4,27.6/32.4,58.6/\TminusSmax+\lasttickbuf}
-\dashedBrokenLine{2}{-\tsfz/16.4,27.6/32.4,58.6/\TminusSmax+\lasttickbuf}
-\dashedBrokenLine{3}{-\tsfz/32.4,58.6/\TminusSmax+\lasttickbuf}
+%\dashedBrokenLine{0}{-\tsfz/4.4,5.6/\TminusSmax+\lasttickbuf-2.5}
+%\dashedBrokenLine{1}{-\tsfz/8.4,13.6/16.4,27.6/32.4,58.6/\TminusSmax+\lasttickbuf}
+%\dashedBrokenLine{2}{-\tsfz/16.4,27.6/32.4,58.6/\TminusSmax+\lasttickbuf}
+%\dashedBrokenLine{3}{-\tsfz/32.4,58.6/\TminusSmax+\lasttickbuf}
+\dashedBrokenLine{0}{-\tsfz/\TminusSmax+\lasttickbuf}
+\dashedBrokenLine{1}{-\tsfz/\TminusSmax+\lasttickbuf}
+\dashedBrokenLine{2}{-\tsfz/\TminusSmax+\lasttickbuf}
+\dashedBrokenLine{3}{-\tsfz/\TminusSmax+\lasttickbuf}
 \dashedBrokenLine{4}{-\tsfz/\TminusSmax+\lasttickbuf}
 \dashedBrokenLine{5}{-\tsfz/\TminusSmax+\lasttickbuf}
 \dashedBrokenLine{6}{-\tsfz/\TminusSmax+\lasttickbuf}
@@ -9461,6 +9473,9 @@ However, we have already calculated these groups in Corollary \ref{the corollary
 \goodnode{3,0}{0,.1}{3}{4,2}{label:}{dottype:gs}{s42d3}
 \goodnode{3,0}{0,-.1}{2}{8,4,2}{label:}{dottype:gs}{s842d2}
 \goodnode{3,0}{0,.1}{3}{8,4,2}{label:}{dottype:gs}{s842d3}
+
+\differential{d62}{s2d2}
+\differential{d73}{s2d3}
 %
 %%2-line
 \goodnode{3,0}{0,-.2}{4,2}{2}{label:}{dottype:g}{s2d42}
@@ -9468,6 +9483,12 @@ However, we have already calculated these groups in Corollary \ref{the corollary
 \goodnode{3,0}{0,.2}{6,2}{2}{label:}{dottype:g}{s2d62}
 \goodnode{3,0}{0,-.1}{6,3}{2}{label:}{dottype:g}{s2d63}
 \goodnode{3,0}{0,.1}{7,3}{2}{label:}{dottype:g}{s2d73}
+
+\differential{d1142}{s2d42}
+\differential{d1252}{s2d52}
+\differential{d1362}{s2d62}
+\differential{d1463}{s2d63}
+\differential{d1573}{s2d73}
 
 \goodnode{3,0}{0,-.2}{4,2}{4,2}{label:}{dottype:g}{s42d42}
 \goodnode{3,0}{0,0}{5,2}{4,2}{label:}{dottype:g}{s42d52}
@@ -9543,6 +9564,8 @@ However, we have already calculated these groups in Corollary \ref{the corollary
 \goodnode{3,0}{0,.1}{10,4,2}{4}{label:}{dottype:s}{s4d1042}
 \goodnode{3,0}{0,.3}{11,4,2}{4}{label:}{dottype:gs}{s4d1142}
 
+
+
 \goodnode{3,0}{0,-.2}{10,5,2}{4}{label:}{dottype:s}{s4d1052}
 \goodnode{3,0}{0,0}{11,5,2}{4}{label:}{dottype:s}{s4d1152}
 \goodnode{3,0}{0,.2}{12,5,2}{4}{label:}{dottype:gs}{s4d1252}
@@ -9557,33 +9580,111 @@ However, we have already calculated these groups in Corollary \ref{the corollary
 \goodnode{3,0}{0,-.1}{14,7,3}{4}{label:}{dottype:s}{s4d1473}
 \goodnode{3,0}{0,.1}{15,7,3}{4}{label:}{dottype:gs}{s4d1573}
 
+\differential{d1042}{s3d42}
+\differential{d1152}{s3d52}
+\differential{d1262}{s3d62}
+\differential{d1363}{s3d63}
+\differential{d1473}{s3d73}
+
+\differential{s4d1142}{s42d42}
+\differential{s4d1252}{s42d52}
+\differential{s4d1362}{s42d62}
+\differential{s4d1463}{s42d63}
+\differential{s4d1573}{s42d73}
+
+
+\differential{d20842}{s2d842}
+\differential{d21942}{s2d942}
+\differential{d221042}{s2d1042}
+\differential{d231142}{s2d1142}
+\differential{d231052}{s2d1052}
+\differential{d241152}{s2d1152}
+\differential{d251252}{s2d1252}
+\differential{d261262}{s2d1262}
+\differential{d271362}{s2d1362}
+\differential{d271263}{s2d1263}
+\differential{d281363}{s2d1363}
+\differential{d291463}{s2d1463}
+\differential{d301473}{s2d1473}
+\differential{d311573}{s2d1573}
 
 
 
+%4-line
+\differential{d18842}{s4d842}
+\differential{d19842}{s3d842}
 
+\differential{d19942}{s4d942}
+\differential{d20942}{s3d942}
 
+\differential{d201042}{s4d1042}
+\differential{d211042}{s3d1042}
 
+\differential{d221142}{s3d1142}
 
-%%3-line
-%\goodnode{3,0}{0,-.3}{8,4,2}{}{label:}{dottype:}{d842}%
-%\goodnode{3,0}{0,-.1}{9,4,2}{}{label:}{dottype:}{d942}
-%\goodnode{3,0}{0,.1}{10,4,2}{}{label:}{dottype:}{d1042}
-%\goodnode{3,0}{0,.3}{11,4,2}{}{label:}{dottype:}{d1142}
-%
-%\goodnode{3,0}{0,-.2}{10,5,2}{}{label:}{dottype:}{d1052}%
-%\goodnode{3,0}{0,0}{11,5,2}{}{label:}{dottype:}{d1152}
-%\goodnode{3,0}{0,.2}{12,5,2}{}{label:}{dottype:}{d1252}
-%
-%\goodnode{3,0}{0,0}{12,6,2}{}{label:}{dottype:}{d1262}%
-%\goodnode{3,0}{0,.2}{13,6,2}{}{label:n}{dottype:}{d1362}
-%
-%\goodnode{3,0}{0,-.2}{12,6,3}{}{label:}{dottype:}{d1263}%
-%\goodnode{3,0}{0,0}{13,6,3}{}{label:}{dottype:}{d1363}
-%\goodnode{3,0}{0,.2}{14,6,3}{}{label:}{dottype:}{d1463}
-%
-%\goodnode{3,0}{0,-.1}{14,7,3}{}{label:}{dottype:}{d1473}%
-%\goodnode{3,0}{0,.1}{15,7,3}{}{label:}{dottype:}{d1573}
+\differential{d211052}{s4d1052}
+\differential{d221052}{s3d1052}
 
+\differential{d221152}{s4d1152}
+\differential{d231152}{s3d1152}
+
+\differential{d241252}{s3d1252}
+
+\differential{d241262}{s4d1262}
+\differential{d251262}{s3d1262}
+
+\differential{d261362}{s3d1362}
+
+\differential{d251263}{s4d1263}
+\differential{d261263}{s3d1263}
+
+\differential{d261363}{s4d1363}
+\differential{d271363}{s3d1363}
+
+\differential{d281463}{s3d1463}
+
+\differential{d281473}{s4d1473}
+\differential{d291473}{s3d1473}
+
+\differential{d301573}{s3d1573}
+
+%%%%%4-line
+%%%%\differential{d18842}{s3d842}
+%%%%\differential{d19842}{s4d842}
+%%%%
+%%%%\differential{d19942}{s3d942}
+%%%%\differential{d20942}{s4d942}
+%%%%
+%%%%\differential{d201042}{s3d1042}
+%%%%\differential{d211042}{s4d1042}
+%%%%
+%%%%\differential{d221142}{s3d1142}
+%%%%
+%%%%\differential{d211052}{s3d1052}
+%%%%\differential{d221052}{s4d1052}
+%%%%
+%%%%\differential{d221152}{s3d1152}
+%%%%\differential{d231152}{s4d1152}
+%%%%
+%%%%\differential{d241252}{s3d1252}
+%%%%
+%%%%\differential{d241262}{s3d1262}
+%%%%\differential{d251262}{s4d1262}
+%%%%
+%%%%\differential{d261362}{s3d1362}
+%%%%
+%%%%\differential{d251263}{s3d1263}
+%%%%\differential{d261263}{s4d1263}
+%%%%
+%%%%\differential{d261363}{s3d1363}
+%%%%\differential{d271363}{s4d1363}
+%%%%
+%%%%\differential{d281463}{s3d1463}
+%%%%
+%%%%\differential{d281473}{s3d1473}
+%%%%\differential{d291473}{s4d1473}
+%%%%
+%%%%\differential{d301573}{s3d1573}
 
 
 \end{tikzpicture}\]
