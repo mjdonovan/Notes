@@ -8976,16 +8976,28 @@ However, we have already calculated these groups in Corollary \ref{the corollary
 \newcommand\Square[1]{+(-#1,-#1) rectangle +(#1,#1)}
 \newcommand{\dashedBrokenLine}[2]{
 \foreach \x/\y in {#2}
- \draw [dotted] (\x,#1+.5) -- (\y,#1+.5);
+ \draw [loosely dotted] (\x,#1+.5) -- (\y,#1+.5);
 }
 
-\eject \pdfpagewidth=12in \pdfpageheight=8.5in
-%\begin{landscape}
+%\eject \pdfpagewidth=12in \pdfpageheight=8.5in
+\begin{landscape}
 
-%xcoord,ycoord,label
-\newcommand{\Lbrace}[3]{\draw[decorate, decoration={brace, amplitude=3pt}] (#1-.4,#2-.4) -- coordinate [left=4pt] (#3) (#1-.4,#2+.4) node {};}
-\newcommand{\Rbrace}[3]{\draw[decorate, decoration={brace, mirror, amplitude=3pt}] (#1+.4,#2-.4) -- coordinate [right=4pt] (#3) (#1+.4,#2+.4) node {};}
-\newcommand{\OperationRecord}[4][]{\draw[->,#1] (#2) to node [inner sep=.3pt, midway,fill=white] {\tiny$#4$} (#3);}
+%%xcoord,ycoord,label
+%\newcommand{\Lbrace}[3]{\draw[decorate, decoration={brace, amplitude=3pt}] (#1-.4,#2-.4) -- coordinate [left=4pt] (#3) (#1-.4,#2+.4) node {};}
+%\newcommand{\Rbrace}[3]{\draw[decorate, decoration={brace, mirror, amplitude=3pt}] (#1+.4,#2-.4) -- coordinate [right=4pt] (#3) (#1+.4,#2+.4) node {};}
+%\newcommand{\OperationRecord}[4][]{\draw[->,densely dotted,shorten <=3pt,#1] (#2) to node [inner sep=1pt, midway,fill=white] {\tiny$#4$} (#3);}
+
+%linenum,sqseq,xcoordstart,xcoordend,ycoord
+\newcommand{\MakeBraces}[5]{
+\draw[decorate, decoration={brace, amplitude=3pt}] (#3-.4,#5-.4) -- coordinate [left=4pt] (#1 L#2) (#3-.4,#5+.4) node {};
+\draw[decorate, decoration={brace, mirror, amplitude=3pt}] (#4+.4,#5-.4) -- coordinate [right=4pt] (#1 R#2) (#4+.4,#5+.4) node {};
+}
+%\renewcommand{\MakeBraces}[5]{
+%\coordinate (#1 L#2) at (#3-2.3,#5-.2);
+%\coordinate (#1 R#2) at (#4+2.3,#5+.2);
+%}
+\newcommand{\RecordOperation}[4][]{\draw[->,densely dotted,shorten <=3pt,#1] (#2 R#3) to node [inner sep=1pt, midway,fill=white] {\tiny$\Sq^{#4}$} (#2 L#4#3);}
+
 
 
 
@@ -9422,14 +9434,51 @@ However, we have already calculated these groups in Corollary \ref{the corollary
 
 \differential{d301573}{s3d1573}
 
-\Rbrace{13}{2}{2lineR}
-\Lbrace{17}{3}{3lineL}
+\MakeBraces{1}{}{5}{6}{1}
+\MakeBraces{1}{2}{10}{12}{3}
+\MakeBraces{1}{42}{20}{24}{7}
+\MakeBraces{1}{842}{40}{48}{15}
+\RecordOperation[out=75,in=180+25]{1}{}{2}
+\RecordOperation[out=75,in=180+25]{1}{2}{4}
+\RecordOperation[out=75,in=180+25]{1}{42}{8}
 
-\OperationRecord{2lineR}{3lineL}{\delta}
+\MakeBraces{2}{}{9}{13}{2}
+\MakeBraces{2}{3}{18}{26}{5}
+\MakeBraces{2}{63}{36}{52}{11}
+
+\MakeBraces{2}{2}{18.5}{27.3}{4}
+\MakeBraces{2}{42}{39}{55.5}{8}
+\MakeBraces{2}{52}{38}{54}{9}
+
+\RecordOperation[out=80,in=180+35]{2}{}{3}
+\RecordOperation[out=75,in=180+25]{2}{3}{6}
+\RecordOperation[out=65,in=180+30]{2}{}{2}
+\RecordOperation[out=70,in=180+00]{2}{2}{4}
+\RecordOperation[out=80,in=180+00]{2}{2}{5}
+
+\MakeBraces{3}{}{17}{28}{3}
+\MakeBraces{3}{2}{34.65}{58.3}{5}
+\MakeBraces{3}{3}{34}{57}{6}
+\MakeBraces{3}{4}{34}{56}{7}
+
+\RecordOperation[out=50,in=180+25]{3}{}{2}
+\RecordOperation[out=65,in=180+25]{3}{}{3}
+\RecordOperation[out=80,in=180+35]{3}{}{4}
+
+
+
+
+%\MakeBraces{4}{}{33}{59}{4}
+
+%\OperationRecord{1lineR}{1lineS2L}{\Sq^2}
+%\OperationRecord{2lineR}{2lineS2L}{\Sq^2}
+%\OperationRecord{2lineR}{2lineS3L}{\Sq^3}
+%\OperationRecord{1lineS2R}{1lineS42L}{\Sq^4}
+%\OperationRecord{1lineS42R}{1lineS842L}{\Sq^8}
 
 \end{tikzpicture}\]
-%\end{landscape}
-\eject \pdfpageheight=12in \pdfpagewidth=8.5in
+\end{landscape}
+%\eject \pdfpageheight=12in \pdfpagewidth=8.5in
 
 
 \SectionOrChapter{The Bousfield-Kan spectral sequence for $\mathbb{S}^{\algs}_T$}
