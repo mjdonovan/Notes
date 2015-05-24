@@ -27,7 +27,7 @@
 \ooooo[	13]{Operations in composite functor spectral sequences}
 \ooooo[	14]{Calculations of HWn}
 \ooooo[	15]{May sseq and vanishing line}
-\wooooo[	16]{The Bousfield-Kan spectral sequence for a sphere}
+\ooooo[	16]{The Bousfield-Kan spectral sequence for a sphere}
 \ooooo[	ap]{appendices}
 \ooooo[	bb]{bibliog}
 
@@ -8886,11 +8886,6 @@ However, we have already calculated these groups in Corollary \ref{the corollary
 
 
 
-\begin{The Bousfield-Kan spectral sequence for a sphere}
-
-
-
-
 
 \newcommand\Square[1]{+(-#1,-#1) rectangle +(#1,#1)}
 \newcommand{\emptytriangle}[1]{
@@ -8975,43 +8970,38 @@ However, we have already calculated these groups in Corollary \ref{the corollary
 }{}
 }
 \newcommand{\differential}[3][]{\draw[shorten >=3pt,shorten <=3pt] (#2) to[#1] (#3);}
-\newcommand{\dashedBrokenLine}[2]{
+%\newcommand{\dashedBrokenLine}[2]{
 %\foreach \x/\y in {#2}
 % \draw [loosely dotted] (\x,#1+.5) -- (\y,#1+.5);
-}
+%}
 
 %\begin{landscape}
 \eject \pdfpagewidth=12in \pdfpageheight=8.5in
 
-%%xcoord,ycoord,label
-%\newcommand{\Lbrace}[3]{\draw[decorate, decoration={brace, amplitude=3pt}] (#1-.4,#2-.4) -- coordinate [left=4pt] (#3) (#1-.4,#2+.4) node {};}
-%\newcommand{\Rbrace}[3]{\draw[decorate, decoration={brace, mirror, amplitude=3pt}] (#1+.4,#2-.4) -- coordinate [right=4pt] (#3) (#1+.4,#2+.4) node {};}
-%\newcommand{\OperationRecord}[4][]{\draw[->,densely dotted,shorten <=3pt,#1] (#2) to node [inner sep=1pt, midway,fill=white] {\tiny$#4$} (#3);}
 
-%linenum,sqseq,xcoordstart,xcoordend,ycoord
-\newcommand{\MakeBraces}[5]{
-\draw[decorate, decoration={brace, amplitude=3pt}] (#3-.4,#5-.4) -- coordinate [left=4pt] (#1 L#2) (#3-.4,#5+.4) node {};
-\draw[decorate, decoration={brace, mirror, amplitude=3pt}] (#4+.4,#5-.4) -- coordinate [right=4pt] (#1 R#2) (#4+.4,#5+.4) node {};
-}
 \newcommand{\RecordOperation}[4][]{
 \draw[->,densely dotted,shorten <=3pt,#1] (#2 R#3) to node [inner sep=1pt, midway,fill=white] {\tiny$\Sq^{#4}$} (#2 L#4#3);
+}
+\newcommand{\RecordOperationCutOff}[4][]{
+\draw[->,densely dotted,shorten <=3pt,#1] (#2 R#3) to node [inner sep=1pt, pos=.25,fill=white] {\tiny$\Sq^{#4}$} (#2 L#4#3);
 }
 \newcommand{\RecordOperationDelta}[4][]{
 \draw[->,densely dotted,shorten <=3pt,#1] (#2 R) to node [outer sep=0pt,inner sep=.25pt, midway,fill=white,rounded corners=2pt] {\tiny$\delta_{i_{#3}}\!$} (#3 L);
 }
-
-%linenum,sqseq,xcoordstart,xcoordend,ycoord
-\renewcommand{\MakeBraces}[5]{
+\newcommand{\MakeShading}[5]{%linenum,sqseq,xcoordstart,xcoordend,ycoord
 \coordinate (#1 L#2) at (#3-.4,#5);
 \coordinate (#1 R#2) at (#4+.4-.1,#5+.35);
-\fill [rounded corners=2pt,gray!15] (#3-.4,#5-.475) rectangle (#4+.4,#5+.475);
+\fill [rounded corners=2pt,gray!25] (#3-.4,#5-.475) rectangle (#4+.4,#5+.475);
+}
+%linenum,sqseq,xcoordstart,xcoordend,ycoord
+%\newcommand{\MakeBraces}[5]{
 %\draw[decorate, decoration={brace, amplitude=3pt}] (#3-.4,#5-.4) -- coordinate [left=4pt] (#1 L#2) (#3-.4,#5+.4) node {};
 %\draw[decorate, decoration={brace, mirror, amplitude=3pt}] (#4+.4,#5-.4) -- coordinate [right=4pt] (#1 R#2) (#4+.4,#5+.4) node {};
-}
+%}
 
 
-\[\!\!\!\!\!\!\!\!\!\!\!\!\!\!\!\!\!\!\!\!\!\!\!\!\!\!\!\!\!\!\!\!
-\begin{tikzpicture}[y=.6cm, x=.4cm]
+%\begin{figure}
+{\begin{tikzpicture}[y=1.1cm, x=.5cm]
 \xdef\TminusSmax{44}
 \xdef\Smax{11}
 \xdef\horTickFreq{2}
@@ -9019,7 +9009,49 @@ However, we have already calculated these groups in Corollary \ref{the corollary
 \xdef\lasttickbuf{.45}
 \xdef\tsfz{0.0}%tick separation from zero
 
-\draw[->] (-\tsfz,-\tsfz) -- (\TminusSmax+\lasttickbuf,-\tsfz); %axis
+\clip (-1.5,-1) rectangle (\TminusSmax+1,\Smax+.7);
+
+\MakeShading{0}{}{2}{2}{0}
+
+\MakeShading{1}{}{4}{4}{1}
+\MakeShading{1}{2}{8}{8}{3}
+\MakeShading{1}{42}{16}{16}{7}
+\MakeShading{1}{842}{32}{32}{15}
+\RecordOperation[out=65,in=180+20]{1}{}{2}
+\RecordOperation[out=65,in=180+17]{1}{2}{4}
+\RecordOperationCutOff[out=70,in=180+17]{1}{42}{8}
+
+\MakeShading{2}{}{8}{9}{2}
+\MakeShading{2}{3}{16}{18}{5}
+\MakeShading{2}{63}{32}{36}{11}
+
+\MakeShading{2}{2}{17}{19}{4}%{18.5}{27.3}{4}
+\MakeShading{2}{42}{35}{39}{8}%{39}{55.5}{8}
+\MakeShading{2}{52}{34}{38}{9}
+
+\RecordOperation[out=47,in=180+13]{2}{}{3}
+\RecordOperation[out=60,in=180+15]{2}{3}{6}
+\RecordOperation[out=30,in=180+05]{2}{}{2}
+\RecordOperation[out=37,in=180+06]{2}{2}{4}
+\RecordOperation[out=45,in=180+07]{2}{2}{5}
+
+\MakeShading{3}{}{16}{20}{3}
+\MakeShading{3}{2}{34}{42}{5}%{34.65}{58.3}{5}
+\MakeShading{3}{3}{33}{41}{6}
+\MakeShading{3}{4}{32}{40}{7}
+
+\RecordOperation[out=20,in=180+05]{3}{}{2}
+\RecordOperation[out=35,in=180+07]{3}{}{3}
+\RecordOperation[out=50,in=180+10]{3}{}{4}
+
+\MakeShading{4}{}{32}{43}{4}
+
+\RecordOperationDelta[out=55,in=180+25]{0}{1}{}
+\RecordOperationDelta[out=25,in=180+5]{1}{2}{}
+\RecordOperationDelta[out=20,in=180+2]{2}{3}{}
+\RecordOperationDelta[out=10,in=180+2]{3}{4}{}
+
+\draw[->] (-\tsfz,-\tsfz) -- (\TminusSmax+\lasttickbuf,-\tsfz); %axes
 \draw[->] (-\tsfz,-\tsfz) -- (-\tsfz,\Smax+\lasttickbuf);
 \foreach \x in {0,\horTickFreq,...,\TminusSmax} %ticks
    \draw (\x,-\tsfz+.1) -- (\x,-\tsfz-.1)
@@ -9028,20 +9060,19 @@ However, we have already calculated these groups in Corollary \ref{the corollary
    \draw (-\tsfz+.1,\y) -- (-\tsfz-.1,\y) 
       node[anchor=east] {\y};
 \node[anchor=west] at (-\tsfz+.1,\Smax) {$s$};
-
-\dashedBrokenLine{0}{-\tsfz/\TminusSmax+\lasttickbuf}
-\dashedBrokenLine{1}{-\tsfz/15.4,20.6/\TminusSmax+\lasttickbuf}
-\dashedBrokenLine{2}{-\tsfz/15.4,20.6/31.4,43.6/\TminusSmax+\lasttickbuf}
-\dashedBrokenLine{3}{-\tsfz/31.4,43.6/\TminusSmax+\lasttickbuf}
-\dashedBrokenLine{4}{-\tsfz/\TminusSmax+\lasttickbuf}
-\dashedBrokenLine{5}{-\tsfz/\TminusSmax+\lasttickbuf}
-\dashedBrokenLine{6}{-\tsfz/\TminusSmax+\lasttickbuf}
-\dashedBrokenLine{7}{-\tsfz/\TminusSmax+\lasttickbuf}
-\dashedBrokenLine{8}{-\tsfz/\TminusSmax+\lasttickbuf}
-\dashedBrokenLine{9}{-\tsfz/\TminusSmax+\lasttickbuf}
-\dashedBrokenLine{10}{-\tsfz/\TminusSmax+\lasttickbuf}
-\node[anchor=south,fill=white,outer sep=4pt,inner sep=2.4pt] at (\TminusSmax-.5,-\tsfz+.1) {$t-s$};
-
+%\dashedBrokenLine{0}{-\tsfz/\TminusSmax+\lasttickbuf}
+%\dashedBrokenLine{1}{-\tsfz/15.4,20.6/\TminusSmax+\lasttickbuf}
+%\dashedBrokenLine{2}{-\tsfz/15.4,20.6/31.4,43.6/\TminusSmax+\lasttickbuf}
+%\dashedBrokenLine{3}{-\tsfz/31.4,43.6/\TminusSmax+\lasttickbuf}
+%\dashedBrokenLine{4}{-\tsfz/\TminusSmax+\lasttickbuf}
+%\dashedBrokenLine{5}{-\tsfz/\TminusSmax+\lasttickbuf}
+%\dashedBrokenLine{6}{-\tsfz/\TminusSmax+\lasttickbuf}
+%\dashedBrokenLine{7}{-\tsfz/\TminusSmax+\lasttickbuf}
+%\dashedBrokenLine{8}{-\tsfz/\TminusSmax+\lasttickbuf}
+%\dashedBrokenLine{9}{-\tsfz/\TminusSmax+\lasttickbuf}
+%\dashedBrokenLine{10}{-\tsfz/\TminusSmax+\lasttickbuf}
+%\node[anchor=south,fill=white,outer sep=4pt,inner sep=2.4pt] at (\TminusSmax-.5,-\tsfz+.1) {$t-s$};
+\node[anchor=south] at (\TminusSmax-1,-\tsfz+.1) {$t-s$};
 %0-line
 \goodnode{2,0}{0,0}{}{}{label:n}{dottype:a}{fundclass}
 
@@ -9089,19 +9120,19 @@ However, we have already calculated these groups in Corollary \ref{the corollary
 
 %4-line
 \goodnode{2,0}{0,-.3}{16,8,4,2}{}{label:y}{dottype:a}{d16842}
-\goodnode{2,0}{0,-.1}{17,8,4,2}{}{label:y}{dottype:}{d17842}
-\goodnode{2,0}{0,.1}{18,8,4,2}{}{label:y}{dottype:}{d18842}
+\goodnode{2,0}{0,-.1}{17,8,4,2}{}{label:n}{dottype:}{d17842}
+\goodnode{2,0}{0,.1}{18,8,4,2}{}{label:n}{dottype:}{d18842}
 \goodnode{2,0}{0,.3}{19,8,4,2}{}{label:n}{dottype:g}{d19842}
 \goodnode{2,0}{0,-.2}{18,9,4,2}{}{label:y}{dottype:}{d18942}
-\goodnode{2,0}{0,0}{19,9,4,2}{}{label:y}{dottype:}{d19942}
-\goodnode{2,0}{0,.2}{20,9,4,2}{}{label:y}{dottype:g}{d20942}
+\goodnode{2,0}{0,0}{19,9,4,2}{}{label:n}{dottype:}{d19942}
+\goodnode{2,0}{0,.2}{20,9,4,2}{}{label:n}{dottype:g}{d20942}
 \goodnode{2,0}{0,0}{20,10,4,2}{}{label:y}{dottype:h}{d201042}
 \goodnode{2,0}{0,.2}{21,10,4,2}{}{label:n}{dottype:g}{d211042}
 \goodnode{2,0}{0,-.2}{20,10,5,2}{}{label:y}{dottype:h}{d201052}
-\goodnode{2,0}{0,0}{21,10,5,2}{}{label:y}{dottype:h}{d211052}
-\goodnode{2,0}{0,.2}{22,10,5,2}{}{label:y}{dottype:g}{d221052}
+\goodnode{2,0}{0,0}{21,10,5,2}{}{label:n}{dottype:h}{d211052}
+\goodnode{2,0}{0,.2}{22,10,5,2}{}{label:n}{dottype:g}{d221052}
 \goodnode{2,0}{0,-.1}{22,11,5,2}{}{label:y}{dottype:h}{d221152}
-\goodnode{2,0}{0,.1}{23,11,5,2}{}{label:y}{dottype:g}{d231152}
+\goodnode{2,0}{0,.1}{23,11,5,2}{}{label:n}{dottype:g}{d231152}
 
 \differential{d942}{s3d42}
 \differential{d1052}{s3d52}
@@ -9125,15 +9156,16 @@ However, we have already calculated these groups in Corollary \ref{the corollary
 \differential{d211042}{s2d1042}
 \differential{d20942}{s2d942}
 \differential{d19842}{s2d842}
-\end{tikzpicture}
-\]
+
+\end{tikzpicture}}
+%\caption{The \BKSS\ for $\mathbb{S}^{\algs}_2$.}
+%\label{BKSSforS2}
+%\end{figure}
 
 
 
-\vfpb
-
-\[\!\!\!\!\!\!\!\!\!\!\!\!\!\!\!\!\!\!\!
-\begin{tikzpicture}[y=.8cm, x=.4cm]
+%\begin{figure}
+{\begin{tikzpicture}[y=1.1cm, x=.37cm]
 \xdef\TminusSmax{60}
 \xdef\Smax{11}
 \xdef\horTickFreq{2}
@@ -9141,23 +9173,25 @@ However, we have already calculated these groups in Corollary \ref{the corollary
 \xdef\lasttickbuf{.45}
 \xdef\tsfz{0.0}%tick separation from zero
 
-\MakeBraces{0}{}{3}{3}{0}
+\clip (-1.5,-1) rectangle (\TminusSmax+1,\Smax+.7);
 
-\MakeBraces{1}{}{5}{6}{1}
-\MakeBraces{1}{2}{10}{12}{3}
-\MakeBraces{1}{42}{20}{24}{7}
-\MakeBraces{1}{842}{40}{48}{15}
+\MakeShading{0}{}{3}{3}{0}
+
+\MakeShading{1}{}{5}{6}{1}
+\MakeShading{1}{2}{10}{12}{3}
+\MakeShading{1}{42}{20}{24}{7}
+\MakeShading{1}{842}{40}{48}{15}
 \RecordOperation[out=70,in=180+20]{1}{}{2}
 \RecordOperation[out=70,in=180+20]{1}{2}{4}
-\RecordOperation[out=70,in=180+23]{1}{42}{8}
+\RecordOperationCutOff[out=70,in=180+23]{1}{42}{8}
 
-\MakeBraces{2}{}{9}{13}{2}
-\MakeBraces{2}{3}{18}{26}{5}
-\MakeBraces{2}{63}{36}{52}{11}
+\MakeShading{2}{}{9}{13}{2}
+\MakeShading{2}{3}{18}{26}{5}
+\MakeShading{2}{63}{36}{52}{11}
 
-\MakeBraces{2}{2}{19}{27}{4}%{18.5}{27.3}{4}
-\MakeBraces{2}{42}{39}{55}{8}%{39}{55.5}{8}
-\MakeBraces{2}{52}{38}{54}{9}
+\MakeShading{2}{2}{19}{27}{4}%{18.5}{27.3}{4}
+\MakeShading{2}{42}{39}{55}{8}%{39}{55.5}{8}
+\MakeShading{2}{52}{38}{54}{9}
 
 \RecordOperation[out=80,in=180+20]{2}{}{3}
 \RecordOperation[out=70,in=180+23]{2}{3}{6}
@@ -9165,16 +9199,16 @@ However, we have already calculated these groups in Corollary \ref{the corollary
 \RecordOperation[out=70,in=180+00]{2}{2}{4}
 \RecordOperation[out=80,in=180+07]{2}{2}{5}
 
-\MakeBraces{3}{}{17}{28}{3}
-\MakeBraces{3}{2}{36}{58}{5}%{34.65}{58.3}{5}
-\MakeBraces{3}{3}{35}{57}{6}
-\MakeBraces{3}{4}{34}{56}{7}
+\MakeShading{3}{}{17}{28}{3}
+\MakeShading{3}{2}{36}{58}{5}%{34.65}{58.3}{5}
+\MakeShading{3}{3}{35}{57}{6}
+\MakeShading{3}{4}{34}{56}{7}
 
 \RecordOperation[out=50,in=180+05]{3}{}{2}
 \RecordOperation[out=65,in=180+15]{3}{}{3}
 \RecordOperation[out=80,in=180+30]{3}{}{4}
 
-\MakeBraces{4}{}{33}{59}{4}
+\MakeShading{4}{}{33}{59}{4}
 
 \RecordOperationDelta[out=55,in=180+25]{0}{1}{}
 \RecordOperationDelta[out=55,in=180+15]{1}{2}{}
@@ -9190,22 +9224,23 @@ However, we have already calculated these groups in Corollary \ref{the corollary
    \draw (-\tsfz+.1,\y) -- (-\tsfz-.1,\y) 
       node[anchor=east] {\y};
 \node[anchor=west] at (-\tsfz+.1,\Smax) {$s$};
-%\dashedBrokenLine{0}{-\tsfz/4.4,5.6/\TminusSmax+\lasttickbuf-2.5}
-\dashedBrokenLine{1}{-\tsfz/8.4,13.6/\TminusSmax+\lasttickbuf}
-%\dashedBrokenLine{2}{-\tsfz/16.4,27.6/32.4,58.6/\TminusSmax+\lasttickbuf}
-%\dashedBrokenLine{3}{-\tsfz/32.4,58.6/\TminusSmax+\lasttickbuf}
-\dashedBrokenLine{0}{-\tsfz/\TminusSmax+\lasttickbuf}
-%\dashedBrokenLine{1}{-\tsfz/\TminusSmax+\lasttickbuf}
-\dashedBrokenLine{2}{-\tsfz/47,48/\TminusSmax+\lasttickbuf}
-\dashedBrokenLine{3}{-\tsfz/47,48/\TminusSmax+\lasttickbuf}
-\dashedBrokenLine{4}{-\tsfz/\TminusSmax+\lasttickbuf}
-\dashedBrokenLine{5}{-\tsfz/\TminusSmax+\lasttickbuf}
-\dashedBrokenLine{6}{-\tsfz/\TminusSmax+\lasttickbuf}
-\dashedBrokenLine{7}{-\tsfz/\TminusSmax+\lasttickbuf}
-\dashedBrokenLine{8}{-\tsfz/\TminusSmax+\lasttickbuf}
-\dashedBrokenLine{9}{-\tsfz/\TminusSmax+\lasttickbuf}
-\dashedBrokenLine{10}{-\tsfz/\TminusSmax+\lasttickbuf}
-\node[anchor=south,fill=white,outer sep=4pt,inner sep=2.4pt] at (\TminusSmax-.5,-\tsfz+.1) {$t-s$};
+%%\dashedBrokenLine{0}{-\tsfz/4.4,5.6/\TminusSmax+\lasttickbuf-2.5}
+%\dashedBrokenLine{1}{-\tsfz/8.4,13.6/\TminusSmax+\lasttickbuf}
+%%\dashedBrokenLine{2}{-\tsfz/16.4,27.6/32.4,58.6/\TminusSmax+\lasttickbuf}
+%%\dashedBrokenLine{3}{-\tsfz/32.4,58.6/\TminusSmax+\lasttickbuf}
+%\dashedBrokenLine{0}{-\tsfz/\TminusSmax+\lasttickbuf}
+%%\dashedBrokenLine{1}{-\tsfz/\TminusSmax+\lasttickbuf}
+%\dashedBrokenLine{2}{-\tsfz/47,48/\TminusSmax+\lasttickbuf}
+%\dashedBrokenLine{3}{-\tsfz/47,48/\TminusSmax+\lasttickbuf}
+%\dashedBrokenLine{4}{-\tsfz/\TminusSmax+\lasttickbuf}
+%\dashedBrokenLine{5}{-\tsfz/\TminusSmax+\lasttickbuf}
+%\dashedBrokenLine{6}{-\tsfz/\TminusSmax+\lasttickbuf}
+%\dashedBrokenLine{7}{-\tsfz/\TminusSmax+\lasttickbuf}
+%\dashedBrokenLine{8}{-\tsfz/\TminusSmax+\lasttickbuf}
+%\dashedBrokenLine{9}{-\tsfz/\TminusSmax+\lasttickbuf}
+%\dashedBrokenLine{10}{-\tsfz/\TminusSmax+\lasttickbuf}
+%\node[anchor=south,fill=white,outer sep=4pt,inner sep=2.4pt] at (\TminusSmax-.5,-\tsfz+.1) {$t-s$};
+\node[anchor=south] at (\TminusSmax-1,-\tsfz+.1) {$t-s$};
 
 %0-line
 \goodnode{3,0}{0,0}{}{}{label:n}{dottype:a}{fundclass}
@@ -9485,11 +9520,14 @@ However, we have already calculated these groups in Corollary \ref{the corollary
 \differential{d301573}{s3d1573}
 
 
-\end{tikzpicture}\]
+\end{tikzpicture}}
+%\caption{The \BKSS\ for $\mathbb{S}^{\algs}_3$.}
+%\label{BKSSforS3}
+%\end{figure}
 %\end{landscape}
 \eject \pdfpageheight=12in \pdfpagewidth=8.5in
 
-
+\begin{The Bousfield-Kan spectral sequence for a sphere}
 \SectionOrChapter{The Bousfield-Kan spectral sequence for $\mathbb{S}^{\algs}_T$}
 \label{The Bousfield-Kan spectral sequence for a sphere}
 For any $T\geq1$, let $X=\mathbb{S}^{\algs}_T$, so that we may write $\E{}{r}{\calx}{}{}$ for the Bousfield-Kan spectral sequence of the sphere $\mathbb{S}^{\algs}_T$.  In this chapter we will give conjectures which will allow us to construct a complete system of differentials in $\E{}{r}{\calx}{}{}$, that would explain the convergence of $\E{}{2}{\calx}{}{}$ (whose underlying vector space was calculated in Corollary \ref{the corollary on the bousfield kan e2}) to
