@@ -8892,7 +8892,7 @@ However, we have already calculated these groups in Corollary \ref{the corollary
 
 
 
-
+\newcommand\Square[1]{+(-#1,-#1) rectangle +(#1,#1)}
 \newcommand{\emptytriangle}[1]{
 \node[draw, regular polygon, regular polygon sides=3,minimum size=5pt,inner sep=0, fill=white] at (#1) {};
 }
@@ -8969,18 +8969,19 @@ However, we have already calculated these groups in Corollary \ref{the corollary
                                  \fullcircle{#7}
 }}}}}}
 \ifstrequal{#5}{label:y}{
-\node[right,rotate=-90,fill=white,outer sep=4pt,inner sep=2.4pt] at (#7)  {\tiny$#3$};
+%\node[right,rotate=-90,fill=white,outer sep=4pt,inner sep=2.4pt] at (#7)  {\tiny$#3$};
+%\node[right,rotate=-90,outer sep=0pt,inner sep=0pt] at (\myx-{\coordlist}[0],\myy-{\coordlist}[1]-.6)  {\tiny$#3$};
+\node[right,rotate=-45,outer sep=0pt,inner sep=0pt] at (\myx-{\coordlist}[0]-.1,\myy-{\coordlist}[1]-.6)  {\tiny${#3}$};
 }{}
 }
 \newcommand{\differential}[3][]{\draw[shorten >=3pt,shorten <=3pt] (#2) to[#1] (#3);}
-\newcommand\Square[1]{+(-#1,-#1) rectangle +(#1,#1)}
 \newcommand{\dashedBrokenLine}[2]{
-\foreach \x/\y in {#2}
- \draw [loosely dotted] (\x,#1+.5) -- (\y,#1+.5);
+%\foreach \x/\y in {#2}
+% \draw [loosely dotted] (\x,#1+.5) -- (\y,#1+.5);
 }
 
-%\eject \pdfpagewidth=12in \pdfpageheight=8.5in
-\begin{landscape}
+%\begin{landscape}
+\eject \pdfpagewidth=12in \pdfpageheight=8.5in
 
 %%xcoord,ycoord,label
 %\newcommand{\Lbrace}[3]{\draw[decorate, decoration={brace, amplitude=3pt}] (#1-.4,#2-.4) -- coordinate [left=4pt] (#3) (#1-.4,#2+.4) node {};}
@@ -8992,13 +8993,21 @@ However, we have already calculated these groups in Corollary \ref{the corollary
 \draw[decorate, decoration={brace, amplitude=3pt}] (#3-.4,#5-.4) -- coordinate [left=4pt] (#1 L#2) (#3-.4,#5+.4) node {};
 \draw[decorate, decoration={brace, mirror, amplitude=3pt}] (#4+.4,#5-.4) -- coordinate [right=4pt] (#1 R#2) (#4+.4,#5+.4) node {};
 }
-%\renewcommand{\MakeBraces}[5]{
-%\coordinate (#1 L#2) at (#3-2.3,#5-.2);
-%\coordinate (#1 R#2) at (#4+2.3,#5+.2);
-%}
-\newcommand{\RecordOperation}[4][]{\draw[->,densely dotted,shorten <=3pt,#1] (#2 R#3) to node [inner sep=1pt, midway,fill=white] {\tiny$\Sq^{#4}$} (#2 L#4#3);}
+\newcommand{\RecordOperation}[4][]{
+\draw[->,densely dotted,shorten <=3pt,#1] (#2 R#3) to node [inner sep=1pt, midway,fill=white] {\tiny$\Sq^{#4}$} (#2 L#4#3);
+}
+\newcommand{\RecordOperationDelta}[4][]{
+\draw[->,densely dotted,shorten <=3pt,#1] (#2 R) to node [outer sep=0pt,inner sep=.25pt, midway,fill=white,rounded corners=2pt] {\tiny$\delta_{i_{#3}}\!$} (#3 L);
+}
 
-
+%linenum,sqseq,xcoordstart,xcoordend,ycoord
+\renewcommand{\MakeBraces}[5]{
+\coordinate (#1 L#2) at (#3-.4,#5);
+\coordinate (#1 R#2) at (#4+.4-.1,#5+.35);
+\fill [rounded corners=2pt,gray!15] (#3-.4,#5-.475) rectangle (#4+.4,#5+.475);
+%\draw[decorate, decoration={brace, amplitude=3pt}] (#3-.4,#5-.4) -- coordinate [left=4pt] (#1 L#2) (#3-.4,#5+.4) node {};
+%\draw[decorate, decoration={brace, mirror, amplitude=3pt}] (#4+.4,#5-.4) -- coordinate [right=4pt] (#1 R#2) (#4+.4,#5+.4) node {};
+}
 
 
 \[\!\!\!\!\!\!\!\!\!\!\!\!\!\!\!\!\!\!\!\!\!\!\!\!\!\!\!\!\!\!\!\!
@@ -9131,7 +9140,48 @@ However, we have already calculated these groups in Corollary \ref{the corollary
 \xdef\verTickFreq{1}
 \xdef\lasttickbuf{.45}
 \xdef\tsfz{0.0}%tick separation from zero
-\draw[->] (-\tsfz,-\tsfz) -- (\TminusSmax+\lasttickbuf,-\tsfz);%axis
+
+\MakeBraces{0}{}{3}{3}{0}
+
+\MakeBraces{1}{}{5}{6}{1}
+\MakeBraces{1}{2}{10}{12}{3}
+\MakeBraces{1}{42}{20}{24}{7}
+\MakeBraces{1}{842}{40}{48}{15}
+\RecordOperation[out=70,in=180+20]{1}{}{2}
+\RecordOperation[out=70,in=180+20]{1}{2}{4}
+\RecordOperation[out=70,in=180+23]{1}{42}{8}
+
+\MakeBraces{2}{}{9}{13}{2}
+\MakeBraces{2}{3}{18}{26}{5}
+\MakeBraces{2}{63}{36}{52}{11}
+
+\MakeBraces{2}{2}{19}{27}{4}%{18.5}{27.3}{4}
+\MakeBraces{2}{42}{39}{55}{8}%{39}{55.5}{8}
+\MakeBraces{2}{52}{38}{54}{9}
+
+\RecordOperation[out=80,in=180+20]{2}{}{3}
+\RecordOperation[out=70,in=180+23]{2}{3}{6}
+\RecordOperation[out=65,in=180+05]{2}{}{2}
+\RecordOperation[out=70,in=180+00]{2}{2}{4}
+\RecordOperation[out=80,in=180+07]{2}{2}{5}
+
+\MakeBraces{3}{}{17}{28}{3}
+\MakeBraces{3}{2}{36}{58}{5}%{34.65}{58.3}{5}
+\MakeBraces{3}{3}{35}{57}{6}
+\MakeBraces{3}{4}{34}{56}{7}
+
+\RecordOperation[out=50,in=180+05]{3}{}{2}
+\RecordOperation[out=65,in=180+15]{3}{}{3}
+\RecordOperation[out=80,in=180+30]{3}{}{4}
+
+\MakeBraces{4}{}{33}{59}{4}
+
+\RecordOperationDelta[out=55,in=180+25]{0}{1}{}
+\RecordOperationDelta[out=55,in=180+15]{1}{2}{}
+\RecordOperationDelta[out=45,in=180+7]{2}{3}{}
+\RecordOperationDelta[out=40,in=180+2]{3}{4}{}
+
+\draw[->] (-\tsfz,-\tsfz) -- (\TminusSmax+\lasttickbuf,-\tsfz);%axes
 \draw[->] (-\tsfz,-\tsfz) -- (-\tsfz,\Smax+\lasttickbuf);
 \foreach \x in {0,\horTickFreq,...,\TminusSmax}%ticks
    \draw (\x,-\tsfz+.1) -- (\x,-\tsfz-.1)
@@ -9434,40 +9484,10 @@ However, we have already calculated these groups in Corollary \ref{the corollary
 
 \differential{d301573}{s3d1573}
 
-\MakeBraces{1}{}{5}{6}{1}
-\MakeBraces{1}{2}{10}{12}{3}
-\MakeBraces{1}{42}{20}{24}{7}
-\MakeBraces{1}{842}{40}{48}{15}
-\RecordOperation[out=75,in=180+25]{1}{}{2}
-\RecordOperation[out=75,in=180+25]{1}{2}{4}
-\RecordOperation[out=75,in=180+25]{1}{42}{8}
-
-\MakeBraces{2}{}{9}{13}{2}
-\MakeBraces{2}{3}{18}{26}{5}
-\MakeBraces{2}{63}{36}{52}{11}
-
-\MakeBraces{2}{2}{18.5}{27.3}{4}
-\MakeBraces{2}{42}{39}{55.5}{8}
-\MakeBraces{2}{52}{38}{54}{9}
-
-\RecordOperation[out=80,in=180+35]{2}{}{3}
-\RecordOperation[out=75,in=180+25]{2}{3}{6}
-\RecordOperation[out=65,in=180+30]{2}{}{2}
-\RecordOperation[out=70,in=180+00]{2}{2}{4}
-\RecordOperation[out=80,in=180+00]{2}{2}{5}
-
-\MakeBraces{3}{}{17}{28}{3}
-\MakeBraces{3}{2}{34.65}{58.3}{5}
-\MakeBraces{3}{3}{34}{57}{6}
-\MakeBraces{3}{4}{34}{56}{7}
-
-\RecordOperation[out=50,in=180+25]{3}{}{2}
-\RecordOperation[out=65,in=180+25]{3}{}{3}
-\RecordOperation[out=80,in=180+35]{3}{}{4}
 
 \end{tikzpicture}\]
-\end{landscape}
-%\eject \pdfpageheight=12in \pdfpagewidth=8.5in
+%\end{landscape}
+\eject \pdfpageheight=12in \pdfpagewidth=8.5in
 
 
 \SectionOrChapter{The Bousfield-Kan spectral sequence for $\mathbb{S}^{\algs}_T$}
