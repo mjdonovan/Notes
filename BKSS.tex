@@ -8,7 +8,7 @@
 \ifx\ShrinkPages\undefined\else\usepackage[paperheight=220mm,paperwidth=160mm]{geometry}\fi%220/160 height options
 \usepackage{tikz,etoolbox}
 \usetikzlibrary{calc,plotmarks,shapes.geometric,decorations.pathreplacing}
-\usepackage{amsmath,amsthm,amssymb} \usepackage{eucal} \usepackage{mathrsfs,nicefrac} \usepackage{amssymb,lscape} \usepackage[all]{xy} \usepackage{cancel} \usepackage[textsize=small,color=green!40]{todonotes} \usepackage{color} \usepackage{version} \usepackage{enumitem} \setlist{nolistsep} \usepackage{mathtools} \newcommand{\ooooo}[2][]{\excludeversion{#2}} \newcommand{\wooooo}[2][]{\includeversion{#2}}%mathtools is just used for `mathclap'
+\usepackage{amsmath,amsthm,amssymb} \usepackage{eucal} \usepackage{mathrsfs,nicefrac} \usepackage{amssymb,lscape,rotating} \usepackage[all]{xy} \usepackage{cancel} \usepackage[textsize=small,color=green!40]{todonotes} \usepackage{color} \usepackage{version} \usepackage{enumitem} \setlist{nolistsep} \usepackage{mathtools} \newcommand{\ooooo}[2][]{\excludeversion{#2}} \newcommand{\wooooo}[2][]{\includeversion{#2}}%mathtools is just used for `mathclap'
 \ooooo[	do]{todolist}\ooooo[]{random junk}
 \ifx\IncludeAll\undefined\else\renewcommand{\ooooo}[2][]{\wooooo{#2}}\fi
 \ooooo[	ct]{Contents Page}
@@ -411,6 +411,123 @@ url=false,doi=false,isbn=false,eprint=false]{biblatex}%
 \newcommand{\CFSS}{CFSS}
 \newcommand{\CFSSs}{CFSSs}
 
+\newcommand\Square[1]{+(-#1,-#1) rectangle +(#1,#1)}
+\newcommand{\emptytriangle}[1]{
+\node[draw, regular polygon, regular polygon sides=3,minimum size=5pt,inner sep=0, fill=white] at (#1) {};
+}
+\newcommand{\nestedtriangle}[1]{
+\node[draw, regular polygon, regular polygon sides=3,minimum size=5pt,inner sep=0, fill=white] at (#1) {};
+\node[draw, regular polygon, regular polygon sides=3,minimum size=1pt,inner sep=0, fill] at (#1) {};
+}
+\newcommand{\fulltriangle}[1]{
+\node[draw, regular polygon, regular polygon sides=3,minimum size=5pt,inner sep=0, fill] at (#1) {};
+}
+\newcommand{\fullcircle}[1]{
+\filldraw (#1) circle (2pt);
+}
+\newcommand{\emptycircle}[1]{
+\filldraw[fill=white] (#1) circle (2pt);
+}
+\newcommand{\nestedcircle}[1]{
+\filldraw[fill=white] (#1) circle (2pt);\filldraw (#1) circle (.5pt);
+}
+\newcommand{\fullsquare}[1]{
+\filldraw (#1) \Square{1.8pt};
+}
+\newcommand{\emptysquare}[1]{
+\filldraw[fill=white] (#1) \Square{1.8pt};
+}
+\newcommand{\nestedsquare}[1]{
+\filldraw[fill=white] (#1) \Square{1.8pt};
+\filldraw (#1) \Square{.5pt};
+}
+%#1:fund class location
+%#2:offset to avoid overlap
+%#3:delta sequence
+%#4:Sq    sequence
+%#5:label:y/n
+%#6:dottype:=normal
+%   dottype:a =abutment
+%   dottype:g =ghost (gone by E2)
+%   dottype:s =any square
+%   dottype:gs=any ghostly square
+\newcommand{\goodnode}[8][3]{
+\def\coordlist{#2}
+\pgfmathparse{{\coordlist}[0]}
+\edef\myx{\pgfmathresult }
+\pgfmathparse{{\coordlist}[1]}
+\edef\myy{\pgfmathresult }
+\foreach \iIi in {#4}
+  {   
+      \pgfmathparse{\myx+\iIi}
+      \xdef\myx{\pgfmathresult}
+      \pgfmathparse{\myy+1}
+      \xdef\myy{\pgfmathresult}
+  }
+\foreach \jJj in {#5}
+  {   
+      \pgfmathparse{2*\myx+\myy-\jJj+1}
+      \xdef\myx{\pgfmathresult}
+      \pgfmathparse{\myy+\jJj}
+      \xdef\myy{\pgfmathresult}
+  }
+\def\coordlist{#3}
+\pgfmathparse{{\coordlist}[0]+\myx}
+\edef\myx{\pgfmathresult }
+\pgfmathparse{{\coordlist}[1]+\myy}
+\edef\myy{\pgfmathresult }
+\coordinate (#8) at (\myx,\myy);
+\ifstrequal{#7}{dottype:g}{      \emptycircle{#8}}{
+\ifstrequal{#7}{dottype:a}{      \fulltriangle{#8}}{
+\ifstrequal{#7}{dottype:s}{      \fullsquare{#8}}{
+\ifstrequal{#7}{dottype:gs}{     \emptysquare{#8}}{
+\ifstrequal{#7}{dottype:h}{      \nestedcircle{#8}}{
+\ifstrequal{#7}{dottype:hs}{     \nestedsquare{#8}}{
+                                 \fullcircle{#8}
+}}}}}}
+\ifstrequal{#6}{label:y}{
+%\node[right,rotate=-90,fill=white,outer sep=4pt,inner sep=2.4pt] at (#8)  {\tiny$#4$};
+%\node[right,rotate=-90,outer sep=0pt,inner sep=0pt] at (\myx-{\coordlist}[0],\myy-{\coordlist}[1]-.6)  {\tiny$#4$};
+\node[right,rotate=-45,outer sep=0pt,inner sep=0pt] at (\myx-{\coordlist}[0]-.1,\myy-{\coordlist}[1]-.6)  {\tiny${#4}$};
+}{}
+}
+\newcommand{\differential}[3][]{\draw[shorten >=3pt,shorten <=3pt] (#2) to[#1] (#3);}
+%\renewcommand{\differential}[3][]{\ifnodedefined{#2}{\draw[shorten >=3pt,shorten <=3pt] (#2) to[#1] (#3)}{};}
+%\renewcommand{\differential}[3][]{\ifnodedefined{#2}{\ifnodedefined{#3}{\draw[shorten >=3pt,shorten <=3pt] (#2) to[#1] (#3)}{}{};}}
+
+\newcommand{\bendydifferential}[3][]{
+\draw[shorten >=3pt,shorten <=3pt] (#2) .. controls ($(#2)+(-0.5,0.3)$) and ($(#3)+(+.15,-0.4)$) .. (#3);
+}
+\newcommand{\doublebendydifferential}[3][]{
+\draw[shorten >=3pt,shorten <=3pt] (#2) .. controls ($(#2)+(-0.5,0.3)$) and ($(#3)+(+.5,-0.3)$) .. (#3);
+}
+%\newcommand{\dashedBrokenLine}[2]{
+%\foreach \x/\y in {#2}
+% \draw [loosely dotted] (\x,#1+.5) -- (\y,#1+.5);
+%}
+\newcommand{\RecordOperation}[4][]{
+\draw[->,densely dotted,shorten <=3pt,#1] (#2 R#3) to node [inner sep=1pt, midway,fill=white] {\tiny$\Sq^{#4}$} (#2 L#4#3);
+}
+\newcommand{\RecordOperationCutOff}[5][]{
+\draw[->,densely dotted,shorten <=3pt,#1] (#2 R#3) to node [inner sep=1pt, pos=#5,fill=white] {\tiny$\Sq^{#4}$} (#2 L#4#3);
+}
+\newcommand{\RecordOperationDelta}[4][]{
+\draw[->,densely dotted,shorten <=3pt,#1] (#2 R) to node [outer sep=0pt,inner sep=.25pt, midway,fill=white,rounded corners=2pt] {\tiny$\delta_{i_{#3}}\!\!$} (#3 L);
+}
+\newcommand{\RecordOperationDeltaCutOff}[5][]{
+\draw[->,densely dotted,shorten <=3pt,#1] (#2 R) to node [outer sep=0pt,inner sep=.25pt, pos=#5, midway,fill=white,rounded corners=2pt] {} (#3 L);
+}
+\newcommand{\MakeShading}[5]{%linenum,sqseq,xcoordstart,xcoordend,ycoord
+\coordinate (#1 L#2) at (#3-.4,#5);
+\coordinate (#1 R#2) at (#4+.4-.1,#5+.35);
+\fill [rounded corners=2pt,gray!25] (#3-.4,#5-.475) rectangle (#4+.4,#5+.475);
+}
+%linenum,sqseq,xcoordstart,xcoordend,ycoord
+%\newcommand{\MakeBraces}[5]{
+%\draw[decorate, decoration={brace, amplitude=3pt}] (#3-.4,#5-.4) -- coordinate [left=4pt] (#1 L#2) (#3-.4,#5+.4) node {};
+%\draw[decorate, decoration={brace, mirror, amplitude=3pt}] (#4+.4,#5-.4) -- coordinate [right=4pt] (#1 R#2) (#4+.4,#5+.4) node {};
+%}
+
 %%%%%%%%%%%%%%%%%%% 
 %%%%%%%%%%%%%%%%%%%End preamble for pasteover
 %%%%%%%%%%%%%%%%%%% 
@@ -470,6 +587,428 @@ We conclude by making two conjectures which would, together, allow for a full co
 %%%%%%%%%%%%%%%%%%% 
 %%%%%%%%%%%%%%%%%%%Begin thecontent for pasteover
 %%%%%%%%%%%%%%%%%%% 
+
+\newcommand{\AgeqB}[4][]{\ifnumgreater{#2}{#3}{#4}{#1}}
+\newcommand{\sWi}[4]{\ifstrequal{#1}{1}{#2}{}\ifstrequal{#1}{2}{#3}{}\ifstrequal{#1}{3}{#4}{}}
+
+\makeatletter
+\long\def\ifnodedefined#1#2#3{%
+    \@ifundefined{pgf@sh@ns@#1}{#3}{#2}%
+}
+\long\def\ifnodesdefined#1#2#3#4{%
+    \@ifundefined{pgf@sh@ns@#1}{%
+    \@ifundefined{pgf@sh@ns@#2}{#4}{#3}%
+}{#3}%
+}
+\makeatother
+
+
+\newcommand{\TheThreeSphere}[3]{
+\begin{figure}
+\begin{sideways}
+\begin{minipage}{7.38in}
+{\begin{tikzpicture}[y=.8cm, x=.3cm]
+\xdef\TminusSmax{60}
+\xdef\Smax{12}
+\xdef\horTickFreq{2}
+\xdef\verTickFreq{1}
+\xdef\lasttickbuf{.45}
+\xdef\tsfz{0.0}%tick separation from zero
+
+\clip (-1.7,-1) rectangle (\TminusSmax+1,\Smax+.6);
+
+\MakeShading{0}{}{3}{3}{0}
+
+\MakeShading{1}{}{5}{6}{1}
+\sWi{#1}{}{}{\MakeShading{1}{2}{10}{12}{3}}
+\sWi{#1}{}{}{\MakeShading{1}{42}{20}{24}{7}}
+\sWi{#1}{}{}{\MakeShading{1}{842}{40}{48}{15}}
+\sWi{#1}{}{}{\RecordOperation[out=75,in=180+20]{1}{}{2}}
+\sWi{#1}{}{}{\RecordOperation[out=70,in=180+20]{1}{2}{4}}
+\sWi{#1}{}{}{\RecordOperationCutOff[out=70,in=180+23]{1}{42}{8}{.25}}
+
+\sWi{#1}{\MakeShading{2}{}{9}{12}{2}}{\MakeShading{2}{}{9}{12}{2}}{\MakeShading{2}{}{9}{13}{2}}
+\sWi{#1}{\MakeShading{2}{3}{18}{24}{5}}{\MakeShading{2}{3}{18}{26}{5}}{\MakeShading{2}{3}{18}{26}{5}}
+\sWi{#1}{\MakeShading{2}{63}{36}{48}{11}}{\MakeShading{2}{63}{36}{52}{11}}{\MakeShading{2}{63}{36}{52}{11}}
+
+\sWi{#1}{}{}{\MakeShading{2}{2}{19}{27}{4}}
+\sWi{#1}{}{}{\MakeShading{2}{42}{39}{55}{8}}
+\sWi{#1}{}{}{\MakeShading{2}{52}{38}{54}{9}}
+
+\RecordOperation[out=80,in=180+20]{2}{}{3}
+\RecordOperation[out=75,in=180+23]{2}{3}{6}
+\sWi{#1}{}{}{\RecordOperation[out=65,in=180+05]{2}{}{2}}
+\sWi{#1}{}{}{\RecordOperation[out=70,in=180+00]{2}{2}{4}}
+\sWi{#1}{}{}{\RecordOperation[out=80,in=180+07]{2}{2}{5}}
+
+\sWi{#1}{\MakeShading{3}{}{17}{25}{3}}{\MakeShading{3}{}{17}{27}{3}}{\MakeShading{3}{}{17}{28}{3}}
+\sWi{#1}{}{}{\MakeShading{3}{2}{36}{58}{5}}
+\sWi{#1}{\MakeShading{3}{3}{35}{51}{6}}{\MakeShading{3}{3}{35}{57}{6}}{\MakeShading{3}{3}{35}{57}{6}}
+\sWi{#1}{\MakeShading{3}{4}{34}{50}{7}}{\MakeShading{3}{4}{34}{54}{7}}{\MakeShading{3}{4}{34}{56}{7}}
+
+\sWi{#1}{}{}{\RecordOperation[out=50,in=180+05]{3}{}{2}}
+\RecordOperation[out=65,in=180+15]{3}{}{3}
+\RecordOperation[out=75,in=180+33]{3}{}{4}
+
+\sWi{#1}{\MakeShading{4}{}{33}{52}{4}}{\MakeShading{4}{}{33}{58}{4}}{\MakeShading{4}{}{33}{59}{4}}
+
+\MakeShading{4}{5}{66}{66}{9}
+\MakeShading{4}{4}{67}{67}{8}
+\MakeShading{4}{3}{68}{68}{7}
+\MakeShading{4}{2}{69}{69}{6}
+
+\MakeShading{5}{}{65}{65}{5}
+
+\sWi{#1}{\RecordOperationCutOff[out=80,in=180+23]{4}{}{5}{.5}
+\RecordOperationCutOff[out=75,in=180+23]{4}{}{4}{.5}
+\RecordOperationCutOff[out=70,in=180+23]{4}{}{3}{.5}}{\RecordOperationCutOff[out=80,in=180+23]{4}{}{5}{.95}
+\RecordOperationCutOff[out=75,in=180+23]{4}{}{4}{.95}
+\RecordOperationCutOff[out=70,in=180+23]{4}{}{3}{.95}}{\RecordOperationCutOff[out=80,in=180+23]{4}{}{5}{.95}
+\RecordOperationCutOff[out=75,in=180+23]{4}{}{4}{.95}
+\RecordOperationCutOff[out=70,in=180+23]{4}{}{3}{.95}}
+\sWi{#1}{}{}{\RecordOperationCutOff[out=60,in=180+23]{4}{}{2}{.5}}
+
+\MakeShading{3}{62}{70}{70}{11}
+\MakeShading{3}{52}{71}{71}{10}
+\MakeShading{3}{42}{72}{72}{9}
+\sWi{#1}{}{}{\RecordOperationCutOff[out=80,in=180+23]{3}{2}{6}{.95}
+\RecordOperationCutOff[out=75,in=180+23]{3}{2}{5}{.95}
+\RecordOperationCutOff[out=70,in=180+23]{3}{2}{4}{.95}}
+
+\MakeShading{3}{73}{70}{70}{12}
+\MakeShading{3}{63}{71}{71}{11}
+\sWi{#1}{\RecordOperationCutOff[out=80,in=180+23]{3}{3}{7}{.5}
+\RecordOperationCutOff[out=75,in=180+23]{3}{3}{6}{.5}}{\RecordOperationCutOff[out=80,in=180+23]{3}{3}{7}{.95}
+\RecordOperationCutOff[out=75,in=180+23]{3}{3}{6}{.95}}{\RecordOperationCutOff[out=80,in=180+23]{3}{3}{7}{.95}
+\RecordOperationCutOff[out=75,in=180+23]{3}{3}{6}{.95}}
+
+\MakeShading{3}{84}{68}{68}{15}
+\sWi{#1}{\RecordOperationCutOff[out=80,in=180+23]{3}{4}{8}{.35}}{\RecordOperationCutOff[out=80,in=180+23]{3}{4}{8}{.85}}{\RecordOperationCutOff[out=80,in=180+23]{3}{4}{8}{.85}}
+
+\MakeShading{2}{942}{78}{78}{17}
+\MakeShading{2}{842}{79}{79}{16}
+\sWi{#1}{}{}{\RecordOperationCutOff[out=80,in=180+23]{2}{42}{9}{.5}
+\RecordOperationCutOff[out=75,in=180+23]{2}{42}{8}{.5}}
+\MakeShading{2}{1052}{76}{76}{19}
+\sWi{#1}{}{}{\RecordOperationCutOff[out=80,in=180+23]{2}{52}{10}{.5}}
+
+\MakeShading{2}{1263}{72}{72}{23}
+\sWi{#1}{\RecordOperationCutOff[out=80,in=180+23]{2}{63}{12}{.05}}{\RecordOperationCutOff[out=80,in=180+23]{2}{63}{12}{.5}}{\RecordOperationCutOff[out=80,in=180+23]{2}{63}{12}{.5}}
+%\MakeShading{1}{16842}{80}{80}{31}
+%\RecordOperationCutOff[out=80,in=180+23]{1}{842}{16}{.5}
+
+\RecordOperationDelta[out=55,in=180+25]{0}{1}{}
+\RecordOperationDelta[out=55,in=180+15]{1}{2}{}
+\RecordOperationDelta[out=45,in=180+7]{2}{3}{}
+\sWi{#1}{\RecordOperationDelta[out=25,in=180+2]{3}{4}{}}{\RecordOperationDelta[out=30,in=180+2]{3}{4}{}}{\RecordOperationDelta[out=40,in=180+2]{3}{4}{}}
+\sWi{#1}{\RecordOperationDelta[out=22,in=180+2]{4}{5}{}}{\RecordOperationDeltaCutOff[out=25,in=180+2]{4}{5}{}{1.9}}{\RecordOperationDeltaCutOff[out=28,in=180+2]{4}{5}{}{.9}}
+
+\draw[->] (-\tsfz,-\tsfz) -- (\TminusSmax+\lasttickbuf,-\tsfz);%axes
+\draw[->] (-\tsfz,-\tsfz) -- (-\tsfz,\Smax+\lasttickbuf);
+\foreach \x in {0,\horTickFreq,...,\TminusSmax}%ticks
+   \draw (\x,-\tsfz+.1) -- (\x,-\tsfz-.1)
+      node[anchor=north] {\x};
+\foreach \y in {0,\verTickFreq,...,\Smax}
+   \draw (-\tsfz+.1,\y) -- (-\tsfz-.1,\y) 
+      node[anchor=east] {\y};
+\node[anchor=west] at (-\tsfz+.1,\Smax) {$s$};
+\node[anchor=south] at (\TminusSmax-1,-\tsfz+.1) {$t-s$};
+
+%0-line
+\goodnode{3,0}{0,0}{}{}{label:n}{dottype:a}{fundclass}
+
+%1-line
+\goodnode{3,0}{0,-.1}{2}{}{label:y}{dottype:a}{d2}
+\goodnode{3,0}{0,.1}{3}{}{label:y}{dottype:a}{d3}
+
+%2-line
+\goodnode{3,0}{0,-.2}{4,2}{}{label:y}{dottype:a}{d42}
+\goodnode{3,0}{0,0}{5,2}{}{label:y}{dottype:a}{d52}
+\sWi{#1}{}{}{\goodnode{3,0}{0,.2}{6,2}{}{label:y}{dottype:g}{d62}}
+
+\goodnode{3,0}{0,-.1}{6,3}{}{label:y}{dottype:a}{d63}
+\sWi{#1}{}{}{\goodnode{3,0}{0,.1}{7,3}{}{label:y}{dottype:g}{d73}}
+
+%3-line
+\goodnode{3,0}{0,-.3}{8,4,2}{}{label:y}{dottype:a}{d842}%
+\goodnode{3,0}{0,-.1}{9,4,2}{}{label:y}{dottype:a}{d942}
+\goodnode{3,0}{0,.1}{10,4,2}{}{label:y}{dottype:}{d1042}
+\sWi{#1}{}{}{\goodnode{3,0}{0,.3}{11,4,2}{}{label:}{dottype:g}{d1142}}
+
+\goodnode{3,0}{0,-.2}{10,5,2}{}{label:y}{dottype:a}{d1052}%
+\goodnode{3,0}{0,0}{11,5,2}{}{label:y}{dottype:y}{d1152}
+\sWi{#1}{}{}{\goodnode{3,0}{0,.2}{12,5,2}{}{label:y}{dottype:g}{d1252}}
+
+\sWi{#1}{}{\goodnode{3,0}{0,0}{12,6,2}{}{label:y}{dottype:h}{d1262}}{\goodnode{3,0}{0,0}{12,6,2}{}{label:y}{dottype:h}{d1262}}%
+\sWi{#1}{}{}{\goodnode{3,0}{0,.2}{13,6,2}{}{label:n}{dottype:g}{d1362}}
+
+\goodnode{3,0}{0,-.2}{12,6,3}{}{label:y}{dottype:a}{d1263}%
+\goodnode{3,0}{0,0}{13,6,3}{}{label:y}{dottype:}{d1363}
+\sWi{#1}{}{}{\goodnode{3,0}{0,.2}{14,6,3}{}{label:y}{dottype:g}{d1463}}
+
+\sWi{#1}{}{\goodnode{3,0}{0,-.1}{14,7,3}{}{label:y}{dottype:h}{d1473}}{\goodnode{3,0}{0,-.1}{14,7,3}{}{label:y}{dottype:h}{d1473}}%
+\sWi{#1}{}{}{\goodnode{3,0}{0,.1}{15,7,3}{}{label:y}{dottype:g}{d1573}}
+
+%4-line
+\goodnode{3,0}{0,-.4}{16,8,4,2}{}{label:y}{dottype:a}{d16842}%
+\goodnode{3,0}{0,-.2}{17,8,4,2}{}{label:}{dottype:a}{d17842}%
+\goodnode{3,0}{0,0}{18,8,4,2}{}{label:}{dottype:}{d18842}%
+\goodnode{3,0}{0,.2}{19,8,4,2}{}{label:}{dottype:}{d19842}%
+\sWi{#1}{}{}{\goodnode{3,0}{0,.4}{20,8,4,2}{}{label:}{dottype:g}{d20842}}%
+
+\goodnode{3,0}{0,-.3}{18,9,4,2}{}{label:y}{dottype:a}{d18942}
+\goodnode{3,0}{0,-.1}{19,9,4,2}{}{label:}{dottype:}{d19942}
+\goodnode{3,0}{0,.1}{20,9,4,2}{}{label:}{dottype:}{d20942}
+\sWi{#1}{}{}{\goodnode{3,0}{0,.3}{21,9,4,2}{}{label:}{dottype:g}{d21942}}
+
+\goodnode{3,0}{0,-.1}{20,10,4,2}{}{label:y}{dottype:}{d201042}
+\goodnode{3,0}{0,.1}{21,10,4,2}{}{label:n}{dottype:}{d211042}
+\sWi{#1}{}{}{\goodnode{3,0}{0,.3}{22,10,4,2}{}{label:n}{dottype:g}{d221042}}
+
+\sWi{#1}{}{\goodnode{3,0}{0,-.25}{22,11,4,2}{}{label:y}{dottype:h}{d221142}}{\goodnode{3,0}{0,-.25}{22,11,4,2}{}{label:y}{dottype:h}{d221142}}
+\sWi{#1}{}{}{\goodnode{3,0}{0,-.05}{23,11,4,2}{}{label:n}{dottype:g}{d231142}}
+
+\goodnode{3,0}{0,-.3}{20,10,5,2}{}{label:y}{dottype:a}{d201052}
+\goodnode{3,0}{0,-.1}{21,10,5,2}{}{label:n}{dottype:}{d211052}
+\goodnode{3,0}{0,.1}{22,10,5,2}{}{label:n}{dottype:}{d221052}
+\sWi{#1}{}{}{\goodnode{3,0}{0,.3}{23,10,5,2}{}{label:n}{dottype:g}{d231052}}
+
+\goodnode{3,0}{0,-.4}{22,11,5,2}{}{label:y}{dottype:}{d221152}
+\goodnode{3,0}{0,-.2}{23,11,5,2}{}{label:}{dottype:}{d231152}
+\sWi{#1}{}{}{\goodnode{3,0}{0,0}{24,11,5,2}{}{label:}{dottype:g}{d241152}}
+
+\sWi{#1}{}{\goodnode{3,0}{0,-.1}{24,12,5,2}{}{label:y}{dottype:h}{d241252}}{\goodnode{3,0}{0,-.1}{24,12,5,2}{}{label:y}{dottype:h}{d241252}}
+\sWi{#1}{}{}{\goodnode{3,0}{0,.1}{25,12,5,2}{}{label:}{dottype:g}{d251252}}
+
+\sWi{#1}{}{\goodnode{3,0}{0,-.2}{24,12,6,2}{}{label:y}{dottype:h}{d241262}}{\goodnode{3,0}{0,-.2}{24,12,6,2}{}{label:y}{dottype:h}{d241262}}
+\sWi{#1}{}{\goodnode{3,0}{0,0}{25,12,6,2}{}{label:}{dottype:h}{d251262}}{\goodnode{3,0}{0,0}{25,12,6,2}{}{label:}{dottype:h}{d251262}}
+\sWi{#1}{}{}{\goodnode{3,0}{0,.2}{26,12,6,2}{}{label:}{dottype:g}{d261262}}
+
+\sWi{#1}{}{\goodnode{3,0}{0,-.25}{26,13,6,2}{}{label:y}{dottype:h}{d261362}}{\goodnode{3,0}{0,-.25}{26,13,6,2}{}{label:y}{dottype:h}{d261362}}
+\sWi{#1}{}{}{\goodnode{3,0}{0,-.05}{27,13,6,2}{}{label:n}{dottype:g}{d271362}}
+
+\goodnode{3,0}{0,-.3}{24,12,6,3}{}{label:y}{dottype:a}{d241263}
+\goodnode{3,0}{0,-.1}{25,12,6,3}{}{label:}{dottype:}{d251263}
+\goodnode{3,0}{0,.1}{26,12,6,3}{}{label:}{dottype:}{d261263}
+\sWi{#1}{}{}{\goodnode{3,0}{0,.3}{27,12,6,3}{}{label:}{dottype:g}{d271263}}
+
+\goodnode{3,0}{0,-.4}{26,13,6,3}{}{label:y}{dottype:}{d261363}
+\goodnode{3,0}{0,-.2}{27,13,6,3}{}{label:}{dottype:}{d271363}
+\sWi{#1}{}{}{\goodnode{3,0}{0,0}{28,13,6,3}{}{label:}{dottype:g}{d281363}}
+
+\sWi{#1}{}{\goodnode{3,0}{0,-.1}{28,14,6,3}{}{label:y}{dottype:h}{d281463}}{\goodnode{3,0}{0,-.1}{28,14,6,3}{}{label:y}{dottype:h}{d281463}}
+\sWi{#1}{}{}{\goodnode{3,0}{0,.1}{29,14,6,3}{}{label:}{dottype:g}{d291463}}
+
+\sWi{#1}{}{\goodnode{3,0}{0,-.2}{28,14,7,3}{}{label:y}{dottype:h}{d281473}}{\goodnode{3,0}{0,-.2}{28,14,7,3}{}{label:y}{dottype:h}{d281473}}
+\sWi{#1}{}{\goodnode{3,0}{0,0}{29,14,7,3}{}{label:}{dottype:h}{d291473}}{\goodnode{3,0}{0,0}{29,14,7,3}{}{label:}{dottype:h}{d291473}}
+\sWi{#1}{}{}{\goodnode{3,0}{0,.2}{30,14,7,3}{}{label:}{dottype:g}{d301473}}
+
+\sWi{#1}{}{\goodnode{3,0}{0,-.1}{30,15,7,3}{}{label:y}{dottype:h}{d301573}}{\goodnode{3,0}{0,-.1}{30,15,7,3}{}{label:y}{dottype:h}{d301573}}
+\sWi{#1}{}{}{\goodnode{3,0}{0,.1}{31,15,7,3}{}{label:}{dottype:g}{d311573}}
+
+
+
+
+%%1-line
+\sWi{#1}{}{}{\goodnode{3,0}{0,-.1}{2}{2}{label:}{dottype:gs}{s2d2}
+\goodnode{3,0}{0,.1}{3}{2}{label:}{dottype:gs}{s2d3}
+\goodnode{3,0}{0,-.1}{2}{4,2}{label:}{dottype:gs}{s42d2}
+\goodnode{3,0}{0,.1}{3}{4,2}{label:}{dottype:gs}{s42d3}
+\goodnode{3,0}{0,-.1}{2}{8,4,2}{label:}{dottype:gs}{s842d2}
+\goodnode{3,0}{0,.1}{3}{8,4,2}{label:}{dottype:gs}{s842d3}}
+
+\sWi{#1}{}{}{\differential{d62}{s2d2}}
+\sWi{#1}{}{}{\differential{d73}{s2d3}}
+%
+%%2-line
+\sWi{#1}{}{}{%
+\sWi{#1}{}{}{\goodnode{3,0}{0,-.2}{4,2}{2}{label:}{dottype:g}{s2d42}}
+\sWi{#1}{}{}{\goodnode{3,0}{0,0}{5,2}{2}{label:}{dottype:g}{s2d52}}
+\sWi{#1}{}{}{\goodnode{3,0}{0,.2}{6,2}{2}{label:}{dottype:g}{s2d62}}
+\sWi{#1}{}{}{\goodnode{3,0}{0,-.1}{6,3}{2}{label:}{dottype:g}{s2d63}}
+\sWi{#1}{}{}{\goodnode{3,0}{0,.1}{7,3}{2}{label:}{dottype:g}{s2d73}}}
+
+\sWi{#1}{}{}{\differential{d1142}{s2d42}}
+\sWi{#1}{}{}{\differential{d1252}{s2d52}}
+\sWi{#1}{}{}{\differential{d1362}{s2d62}}
+\sWi{#1}{}{}{\differential{d1463}{s2d63}}
+\sWi{#1}{}{}{\differential{d1573}{s2d73}}
+
+\sWi{#1}{}{}{\goodnode{3,0}{0,-.2}{4,2}{4,2}{label:}{dottype:g}{s42d42}
+\goodnode{3,0}{0,0}{5,2}{4,2}{label:}{dottype:g}{s42d52}
+\goodnode{3,0}{0,.2}{6,2}{4,2}{label:}{dottype:g}{s42d62}
+\goodnode{3,0}{0,-.1}{6,3}{4,2}{label:}{dottype:g}{s42d63}
+\goodnode{3,0}{0,.1}{7,3}{4,2}{label:}{dottype:g}{s42d73}
+
+\goodnode{3,0}{0,-.2}{4,2}{5,2}{label:}{dottype:gs}{s52d42}
+\goodnode{3,0}{0,0}{5,2}{5,2}{label:}{dottype:gs}{s52d52}
+\goodnode{3,0}{0,.2}{6,2}{5,2}{label:}{dottype:gs}{s52d62}
+\goodnode{3,0}{0,-.1}{6,3}{5,2}{label:}{dottype:gs}{s52d63}
+\goodnode{3,0}{0,.1}{7,3}{5,2}{label:}{dottype:gs}{s52d73}}
+
+
+\goodnode{3,0}{0,-.2}{4,2}{3}{label:}{dottype:s}{s3d42}
+\goodnode{3,0}{0,0}{5,2}{3}{label:}{dottype:s}{s3d52}
+\sWi{#1}{}{\goodnode{3,0}{0,.2}{6,2}{3}{label:}{dottype:hs}{s3d62}}{\goodnode{3,0}{0,.2}{6,2}{3}{label:}{dottype:hs}{s3d62}}
+\goodnode{3,0}{0,-.1}{6,3}{3}{label:}{dottype:s}{s3d63}
+\sWi{#1}{}{\goodnode{3,0}{0,.1}{7,3}{3}{label:}{dottype:hs}{s3d73}}{\goodnode{3,0}{0,.1}{7,3}{3}{label:}{dottype:hs}{s3d73}}
+
+\goodnode{3,0}{0,-.2}{4,2}{6,3}{label:}{dottype:s}{s63d42}
+\goodnode{3,0}{0,0}{5,2}{6,3}{label:}{dottype:s}{s63d52}
+\sWi{#1}{}{\goodnode{3,0}{0,.2}{6,2}{6,3}{label:}{dottype:hs}{s63d62}}{\goodnode{3,0}{0,.2}{6,2}{6,3}{label:}{dottype:hs}{s63d62}}
+\goodnode{3,0}{0,-.1}{6,3}{6,3}{label:}{dottype:s}{s63d63}
+\sWi{#1}{}{\goodnode{3,0}{0,.1}{7,3}{6,3}{label:}{dottype:hs}{s63d73}}{\goodnode{3,0}{0,.1}{7,3}{6,3}{label:}{dottype:hs}{s63d73}}
+
+%
+%%3-line
+\sWi{#1}{}{}{\goodnode{3,0}{0,-.3}{8,4,2}{2}{label:}{dottype:g}{s2d842}
+\goodnode{3,0}{0,-.1}{9,4,2}{2}{label:}{dottype:g}{s2d942}
+\goodnode{3,0}{0,.1}{10,4,2}{2}{label:}{dottype:g}{s2d1042}
+\goodnode{3,0}{0,.3}{11,4,2}{2}{label:}{dottype:g}{s2d1142}
+
+\goodnode{3,0}{0,-.2}{10,5,2}{2}{label:}{dottype:g}{s2d1052}
+\goodnode{3,0}{0,0}{11,5,2}{2}{label:}{dottype:g}{s2d1152}
+\goodnode{3,0}{0,.2}{12,5,2}{2}{label:}{dottype:g}{s2d1252}
+
+\goodnode{3,0}{0,0}{12,6,2}{2}{label:}{dottype:g}{s2d1262}
+\goodnode{3,0}{0,.2}{13,6,2}{2}{label:n}{dottype:g}{s2d1362}
+
+\goodnode{3,0}{0,-.2}{12,6,3}{2}{label:}{dottype:g}{s2d1263}
+\goodnode{3,0}{0,0}{13,6,3}{2}{label:}{dottype:g}{s2d1363}
+\goodnode{3,0}{0,.2}{14,6,3}{2}{label:}{dottype:g}{s2d1463}
+
+\goodnode{3,0}{0,-.1}{14,7,3}{2}{label:}{dottype:g}{s2d1473}
+\goodnode{3,0}{0,.1}{15,7,3}{2}{label:}{dottype:g}{s2d1573}}
+
+
+\goodnode{3,0}{0,-.3}{8,4,2}{3}{label:}{dottype:}{s3d842}
+\goodnode{3,0}{0,-.1}{9,4,2}{3}{label:}{dottype:}{s3d942}
+\goodnode{3,0}{0,.1}{10,4,2}{3}{label:}{dottype:}{s3d1042}
+\sWi{#1}{}{\goodnode{3,0}{0,.3}{11,4,2}{3}{label:}{dottype:h}{s3d1142}}{\goodnode{3,0}{0,.3}{11,4,2}{3}{label:}{dottype:h}{s3d1142}}
+
+\goodnode{3,0}{0,-.2}{10,5,2}{3}{label:}{dottype:}{s3d1052}
+\goodnode{3,0}{0,0}{11,5,2}{3}{label:}{dottype:}{s3d1152}
+\sWi{#1}{}{\goodnode{3,0}{0,.2}{12,5,2}{3}{label:}{dottype:h}{s3d1252}}{\goodnode{3,0}{0,.2}{12,5,2}{3}{label:}{dottype:h}{s3d1252}}
+
+\sWi{#1}{}{\goodnode{3,0}{0,0}{12,6,2}{3}{label:}{dottype:h}{s3d1262}}{\goodnode{3,0}{0,0}{12,6,2}{3}{label:}{dottype:h}{s3d1262}}
+\sWi{#1}{}{\goodnode{3,0}{0,.2}{13,6,2}{3}{label:n}{dottype:h}{s3d1362}}{\goodnode{3,0}{0,.2}{13,6,2}{3}{label:n}{dottype:h}{s3d1362}}
+
+\goodnode{3,0}{0,-.2}{12,6,3}{3}{label:}{dottype:}{s3d1263}
+\goodnode{3,0}{0,0}{13,6,3}{3}{label:}{dottype:}{s3d1363}
+\sWi{#1}{}{\goodnode{3,0}{0,.2}{14,6,3}{3}{label:}{dottype:h}{s3d1463}}{\goodnode{3,0}{0,.2}{14,6,3}{3}{label:}{dottype:h}{s3d1463}}
+
+\sWi{#1}{}{\goodnode{3,0}{0,-.1}{14,7,3}{3}{label:}{dottype:h}{s3d1473}}{\goodnode{3,0}{0,-.1}{14,7,3}{3}{label:}{dottype:h}{s3d1473}}
+\sWi{#1}{}{\goodnode{3,0}{0,.1}{15,7,3}{3}{label:}{dottype:h}{s3d1573}}{\goodnode{3,0}{0,.1}{15,7,3}{3}{label:}{dottype:h}{s3d1573}}
+
+
+
+
+\goodnode{3,0}{0,-.3}{8,4,2}{4}{label:}{dottype:s}{s4d842}
+\goodnode{3,0}{0,-.1}{9,4,2}{4}{label:}{dottype:s}{s4d942}
+\goodnode{3,0}{0,.1}{10,4,2}{4}{label:}{dottype:s}{s4d1042}
+\sWi{#1}{}{}{\goodnode{3,0}{0,.3}{11,4,2}{4}{label:}{dottype:gs}{s4d1142}}
+
+
+
+\goodnode{3,0}{0,-.2}{10,5,2}{4}{label:}{dottype:s}{s4d1052}
+\goodnode{3,0}{0,0}{11,5,2}{4}{label:}{dottype:s}{s4d1152}
+\sWi{#1}{}{}{\goodnode{3,0}{0,.2}{12,5,2}{4}{label:}{dottype:gs}{s4d1252}}
+
+\sWi{#1}{}{\goodnode{3,0}{0,0}{12,6,2}{4}{label:}{dottype:hs}{s4d1262}}{\goodnode{3,0}{0,0}{12,6,2}{4}{label:}{dottype:hs}{s4d1262}}
+\sWi{#1}{}{}{\goodnode{3,0}{0,.2}{13,6,2}{4}{label:n}{dottype:gs}{s4d1362}}
+
+\goodnode{3,0}{0,-.2}{12,6,3}{4}{label:}{dottype:s}{s4d1263}
+\goodnode{3,0}{0,0}{13,6,3}{4}{label:}{dottype:s}{s4d1363}
+\sWi{#1}{}{}{\goodnode{3,0}{0,.2}{14,6,3}{4}{label:}{dottype:gs}{s4d1463}}
+
+\sWi{#1}{}{\goodnode{3,0}{0,-.1}{14,7,3}{4}{label:}{dottype:hs}{s4d1473}}{\goodnode{3,0}{0,-.1}{14,7,3}{4}{label:}{dottype:hs}{s4d1473}}
+\sWi{#1}{}{}{\goodnode{3,0}{0,.1}{15,7,3}{4}{label:}{dottype:gs}{s4d1573}}
+
+\differential{d1042}{s3d42}
+\differential{d1152}{s3d52}
+\sWi{#1}{}{\differential{d1262}{s3d62}}{\differential{d1262}{s3d62}}
+\differential{d1363}{s3d63}
+\sWi{#1}{}{\differential{d1473}{s3d73}}{\differential{d1473}{s3d73}}
+
+\sWi{#1}{}{}{\differential{s4d1142}{s42d42}
+\differential{s4d1252}{s42d52}
+\differential{s4d1362}{s42d62}
+\differential{s4d1463}{s42d63}
+\differential{s4d1573}{s42d73}}
+
+
+\sWi{#1}{}{}{\differential{d20842}{s2d842}
+\differential{d21942}{s2d942}
+\differential{d221042}{s2d1042}
+\differential{d231142}{s2d1142}
+\differential{d231052}{s2d1052}
+\differential{d241152}{s2d1152}
+\differential{d251252}{s2d1252}
+\differential{d261262}{s2d1262}
+\differential{d271362}{s2d1362}
+\differential{d271263}{s2d1263}
+\differential{d281363}{s2d1363}
+\differential{d291463}{s2d1463}
+\differential{d301473}{s2d1473}
+\differential{d311573}{s2d1573}}
+
+
+
+%4-line
+\differential{d18842}{s4d842}
+\differential{d19842}{s3d842}
+
+%\differential[out=107,in=-77]{d19942}{s4d942}
+\sWi{#1}{\differential{d19942}{s4d942}}{\differential{d19942}{s4d942}}{\bendydifferential{d19942}{s4d942}}
+\differential{d20942}{s3d942}
+
+\sWi{#1}{\differential{d201042}{s4d1042}}{\differential{d201042}{s4d1042}}{\bendydifferential{d201042}{s4d1042}}
+\differential{d211042}{s3d1042}
+
+\sWi{#1}{}{\doublebendydifferential{d221142}{s3d1142}}{\doublebendydifferential{d221142}{s3d1142}}
+
+
+\sWi{#1}{\differential{d211052}{s4d1052}}{\differential{d211052}{s4d1052}}{\bendydifferential{d211052}{s4d1052}}
+\differential{d221052}{s3d1052}
+
+\sWi{#1}{\differential{d221152}{s4d1152}}{\differential{d221152}{s4d1152}}{\bendydifferential{d221152}{s4d1152}}
+\differential{d231152}{s3d1152}
+
+\sWi{#1}{}{\differential{d241252}{s3d1252}}{\differential{d241252}{s3d1252}}
+
+\sWi{#1}{}{\differential{d241262}{s4d1262}
+\differential{d251262}{s3d1262}}{\bendydifferential{d241262}{s4d1262}
+\differential{d251262}{s3d1262}}
+
+\sWi{#1}{}{\doublebendydifferential{d261362}{s3d1362}}{\doublebendydifferential{d261362}{s3d1362}}
+
+\sWi{#1}{\differential{d251263}{s4d1263}}{\differential{d251263}{s4d1263}}{\bendydifferential{d251263}{s4d1263}}
+\differential{d261263}{s3d1263}
+
+\sWi{#1}{\differential{d261363}{s4d1363}}{\differential{d261363}{s4d1363}}{\bendydifferential{d261363}{s4d1363}}
+\differential{d271363}{s3d1363}
+
+\sWi{#1}{}{\differential{d281463}{s3d1463}}{\differential{d281463}{s3d1463}}
+
+\sWi{#1}{}{\differential{d281473}{s4d1473}
+\differential{d291473}{s3d1473}}{\bendydifferential{d281473}{s4d1473}
+\differential{d291473}{s3d1473}}
+
+\sWi{#1}{}{\differential{d301573}{s3d1573}}{\differential{d301573}{s3d1573}}
+
+\end{tikzpicture}}
+\end{minipage}
+\end{sideways}
+\centering
+\caption{#2}
+\label{#3}
+\end{figure}
+}
+
+\TheThreeSphere{1}{The \BKSS\ for $\mathbb{S}^{\algs}_3$.}{BKSSforS3}
+\TheThreeSphere{2}{The \BKSS\ for $\mathbb{S}^{\algs}_3$.}{BKSSforS3}
+\TheThreeSphere{3}{The \BKSS\ for $\mathbb{S}^{\algs}_3$.}{BKSSforS3}
+
 
 \begin{Introduction}
 \SectionOrChapter{Introduction}
@@ -685,8 +1224,389 @@ These conditions alone do not explain, for $x\in \Edownup{r}{}{\calx}{s}{t}$, wh
 \deltav_i(d_rx),&\textup{$r <t-i+1$};\\
 \deltav_i(d_rx)+\Sqh^{t-i+2}(x),&\textup{$r =t-i+1$}.
 \end{cases}\]
-Generically speaking, this equation states that $\deltav_i(x)$ remains a cycle until either until $x$ supports a differential or until page $t-i+1$, when it supports a differential hitting $\Sqh^{t-i+2}(x)$. That is, the $\Sqv$ serve to absorb differentials supported by the excess $\deltav$, and these differentials precisely account for the evolving unstableness conditions.
+Generically speaking, this equation states that $\deltav_i(x)$ remains a cycle until either until $x$ supports a differential or until page $t-i+1$, when it supports a differential hitting $\Sqh^{t-i+2}(x)$. That is, the $\Sqv$ serve to absorb differentials supported by the excess $\deltav$, and these differentials account for the evolving unstableness conditions.
 %In particular, if $i>t-s$ and $x\in\E{}{t-i+1}{\calx}{s}{t}$ survives to $\E{}{t-i+2}{\calx}{s}{t}$, then $d_{t-i+1}$ maps $\deltav_ix$ to $\Sqv^{t-i+2}x$. These formulae explain how the $\Sqv$ serve to absorb differentials supported by the excess $\deltav$.
+
+
+\begin{figure}
+\begin{sideways}
+\begin{minipage}{7.38in}
+{\begin{tikzpicture}[y=.8cm, x=.3cm]
+\xdef\TminusSmax{60}
+\xdef\Smax{11}
+\xdef\horTickFreq{2}
+\xdef\verTickFreq{1}
+\xdef\lasttickbuf{.45}
+\xdef\tsfz{0.0}%tick separation from zero
+
+\clip (-1.7,-1) rectangle (\TminusSmax+1,\Smax+.6);
+
+\MakeShading{0}{}{3}{3}{0}
+
+\MakeShading{1}{}{5}{6}{1}
+\MakeShading{1}{2}{10}{12}{3}
+\MakeShading{1}{42}{20}{24}{7}
+\MakeShading{1}{842}{40}{48}{15}
+\RecordOperation[out=75,in=180+20]{1}{}{2}
+\RecordOperation[out=70,in=180+20]{1}{2}{4}
+\RecordOperationCutOff[out=70,in=180+23]{1}{42}{8}{.25}
+
+\MakeShading{2}{}{9}{13}{2}
+\MakeShading{2}{3}{18}{26}{5}
+\MakeShading{2}{63}{36}{52}{11}
+
+\MakeShading{2}{2}{19}{27}{4}%{18.5}{27.3}{4}
+\MakeShading{2}{42}{39}{55}{8}%{39}{55.5}{8}
+\MakeShading{2}{52}{38}{54}{9}
+
+\RecordOperation[out=80,in=180+20]{2}{}{3}
+\RecordOperation[out=75,in=180+23]{2}{3}{6}
+\RecordOperation[out=65,in=180+05]{2}{}{2}
+\RecordOperation[out=70,in=180+00]{2}{2}{4}
+\RecordOperation[out=80,in=180+07]{2}{2}{5}
+
+\MakeShading{3}{}{17}{28}{3}
+\MakeShading{3}{2}{36}{58}{5}%{34.65}{58.3}{5}
+\MakeShading{3}{3}{35}{57}{6}
+\MakeShading{3}{4}{34}{56}{7}
+
+\RecordOperation[out=50,in=180+05]{3}{}{2}
+\RecordOperation[out=65,in=180+15]{3}{}{3}
+\RecordOperation[out=75,in=180+33]{3}{}{4}
+
+\MakeShading{4}{}{33}{59}{4}
+
+%\MakeShading{4}{5}{66}{66}{9}
+%\MakeShading{4}{4}{67}{67}{8}
+%\MakeShading{4}{3}{68}{68}{7}
+%\MakeShading{4}{2}{69}{69}{6}
+%
+%\RecordOperationCutOff[out=70,in=180+23]{4}{}{2}{.25}
+%\RecordOperationCutOff[out=70,in=180+23]{4}{}{3}{.25}
+%\RecordOperationCutOff[out=70,in=180+23]{4}{}{4}{.25}
+%\RecordOperationCutOff[out=70,in=180+23]{4}{}{5}{.25}
+
+\RecordOperationDelta[out=55,in=180+25]{0}{1}{}
+\RecordOperationDelta[out=55,in=180+15]{1}{2}{}
+\RecordOperationDelta[out=45,in=180+7]{2}{3}{}
+\RecordOperationDelta[out=40,in=180+2]{3}{4}{}
+
+\draw[->] (-\tsfz,-\tsfz) -- (\TminusSmax+\lasttickbuf,-\tsfz);%axes
+\draw[->] (-\tsfz,-\tsfz) -- (-\tsfz,\Smax+\lasttickbuf);
+\foreach \x in {0,\horTickFreq,...,\TminusSmax}%ticks
+   \draw (\x,-\tsfz+.1) -- (\x,-\tsfz-.1)
+      node[anchor=north] {\x};
+\foreach \y in {0,\verTickFreq,...,\Smax}
+   \draw (-\tsfz+.1,\y) -- (-\tsfz-.1,\y) 
+      node[anchor=east] {\y};
+\node[anchor=west] at (-\tsfz+.1,\Smax) {$s$};
+%%\dashedBrokenLine{0}{-\tsfz/4.4,5.6/\TminusSmax+\lasttickbuf-2.5}
+%\dashedBrokenLine{1}{-\tsfz/8.4,13.6/\TminusSmax+\lasttickbuf}
+%%\dashedBrokenLine{2}{-\tsfz/16.4,27.6/32.4,58.6/\TminusSmax+\lasttickbuf}
+%%\dashedBrokenLine{3}{-\tsfz/32.4,58.6/\TminusSmax+\lasttickbuf}
+%\dashedBrokenLine{0}{-\tsfz/\TminusSmax+\lasttickbuf}
+%%\dashedBrokenLine{1}{-\tsfz/\TminusSmax+\lasttickbuf}
+%\dashedBrokenLine{2}{-\tsfz/47,48/\TminusSmax+\lasttickbuf}
+%\dashedBrokenLine{3}{-\tsfz/47,48/\TminusSmax+\lasttickbuf}
+%\dashedBrokenLine{4}{-\tsfz/\TminusSmax+\lasttickbuf}
+%\dashedBrokenLine{5}{-\tsfz/\TminusSmax+\lasttickbuf}
+%\dashedBrokenLine{6}{-\tsfz/\TminusSmax+\lasttickbuf}
+%\dashedBrokenLine{7}{-\tsfz/\TminusSmax+\lasttickbuf}
+%\dashedBrokenLine{8}{-\tsfz/\TminusSmax+\lasttickbuf}
+%\dashedBrokenLine{9}{-\tsfz/\TminusSmax+\lasttickbuf}
+%\dashedBrokenLine{10}{-\tsfz/\TminusSmax+\lasttickbuf}
+%\node[anchor=south,fill=white,outer sep=4pt,inner sep=2.4pt] at (\TminusSmax-.5,-\tsfz+.1) {$t-s$};
+\node[anchor=south] at (\TminusSmax-1,-\tsfz+.1) {$t-s$};
+
+%0-line
+\goodnode{3,0}{0,0}{}{}{label:n}{dottype:a}{fundclass}
+
+%1-line
+\goodnode{3,0}{0,-.1}{2}{}{label:y}{dottype:a}{d2}
+\goodnode{3,0}{0,.1}{3}{}{label:y}{dottype:a}{d3}
+
+%2-line
+\goodnode{3,0}{0,-.2}{4,2}{}{label:y}{dottype:a}{d42}
+\goodnode{3,0}{0,0}{5,2}{}{label:y}{dottype:a}{d52}
+\goodnode{3,0}{0,.2}{6,2}{}{label:y}{dottype:g}{d62}
+
+\goodnode{3,0}{0,-.1}{6,3}{}{label:y}{dottype:a}{d63}
+\goodnode{3,0}{0,.1}{7,3}{}{label:y}{dottype:g}{d73}
+
+%3-line
+\goodnode{3,0}{0,-.3}{8,4,2}{}{label:y}{dottype:a}{d842}%
+\goodnode{3,0}{0,-.1}{9,4,2}{}{label:}{dottype:a}{d942}
+\goodnode{3,0}{0,.1}{10,4,2}{}{label:}{dottype:}{d1042}
+\goodnode{3,0}{0,.3}{11,4,2}{}{label:}{dottype:g}{d1142}
+
+\goodnode{3,0}{0,-.2}{10,5,2}{}{label:y}{dottype:a}{d1052}%
+\goodnode{3,0}{0,0}{11,5,2}{}{label:}{dottype:}{d1152}
+\goodnode{3,0}{0,.2}{12,5,2}{}{label:}{dottype:g}{d1252}
+
+\goodnode{3,0}{0,0}{12,6,2}{}{label:y}{dottype:h}{d1262}%
+\goodnode{3,0}{0,.2}{13,6,2}{}{label:n}{dottype:g}{d1362}
+
+\goodnode{3,0}{0,-.2}{12,6,3}{}{label:y}{dottype:a}{d1263}%
+\goodnode{3,0}{0,0}{13,6,3}{}{label:}{dottype:}{d1363}
+\goodnode{3,0}{0,.2}{14,6,3}{}{label:}{dottype:g}{d1463}
+
+\goodnode{3,0}{0,-.1}{14,7,3}{}{label:y}{dottype:h}{d1473}%
+\goodnode{3,0}{0,.1}{15,7,3}{}{label:}{dottype:g}{d1573}
+
+%4-line
+\goodnode{3,0}{0,-.4}{16,8,4,2}{}{label:y}{dottype:a}{d16842}%
+\goodnode{3,0}{0,-.2}{17,8,4,2}{}{label:}{dottype:a}{d17842}%
+\goodnode{3,0}{0,0}{18,8,4,2}{}{label:}{dottype:}{d18842}%
+\goodnode{3,0}{0,.2}{19,8,4,2}{}{label:}{dottype:}{d19842}%
+\goodnode{3,0}{0,.4}{20,8,4,2}{}{label:}{dottype:g}{d20842}%
+
+\goodnode{3,0}{0,-.3}{18,9,4,2}{}{label:y}{dottype:a}{d18942}
+\goodnode{3,0}{0,-.1}{19,9,4,2}{}{label:}{dottype:}{d19942}
+\goodnode{3,0}{0,.1}{20,9,4,2}{}{label:}{dottype:}{d20942}
+\goodnode{3,0}{0,.3}{21,9,4,2}{}{label:}{dottype:g}{d21942}
+
+\goodnode{3,0}{0,-.1}{20,10,4,2}{}{label:y}{dottype:}{d201042}
+\goodnode{3,0}{0,.1}{21,10,4,2}{}{label:n}{dottype:}{d211042}
+\goodnode{3,0}{0,.3}{22,10,4,2}{}{label:n}{dottype:g}{d221042}
+
+\goodnode{3,0}{0,-.25}{22,11,4,2}{}{label:y}{dottype:h}{d221142}
+\goodnode{3,0}{0,-.05}{23,11,4,2}{}{label:n}{dottype:g}{d231142}
+
+\goodnode{3,0}{0,-.3}{20,10,5,2}{}{label:y}{dottype:a}{d201052}
+\goodnode{3,0}{0,-.1}{21,10,5,2}{}{label:n}{dottype:}{d211052}
+\goodnode{3,0}{0,.1}{22,10,5,2}{}{label:n}{dottype:}{d221052}
+\goodnode{3,0}{0,.3}{23,10,5,2}{}{label:n}{dottype:g}{d231052}
+
+\goodnode{3,0}{0,-.4}{22,11,5,2}{}{label:y}{dottype:}{d221152}
+\goodnode{3,0}{0,-.2}{23,11,5,2}{}{label:}{dottype:}{d231152}
+\goodnode{3,0}{0,0}{24,11,5,2}{}{label:}{dottype:g}{d241152}
+
+\goodnode{3,0}{0,-.1}{24,12,5,2}{}{label:y}{dottype:h}{d241252}
+\goodnode{3,0}{0,.1}{25,12,5,2}{}{label:}{dottype:g}{d251252}
+
+\goodnode{3,0}{0,-.2}{24,12,6,2}{}{label:y}{dottype:h}{d241262}
+\goodnode{3,0}{0,0}{25,12,6,2}{}{label:}{dottype:h}{d251262}
+\goodnode{3,0}{0,.2}{26,12,6,2}{}{label:}{dottype:g}{d261262}
+
+\goodnode{3,0}{0,-.25}{26,13,6,2}{}{label:y}{dottype:h}{d261362}
+\goodnode{3,0}{0,-.05}{27,13,6,2}{}{label:n}{dottype:g}{d271362}
+
+\goodnode{3,0}{0,-.3}{24,12,6,3}{}{label:y}{dottype:a}{d241263}
+\goodnode{3,0}{0,-.1}{25,12,6,3}{}{label:}{dottype:}{d251263}
+\goodnode{3,0}{0,.1}{26,12,6,3}{}{label:}{dottype:}{d261263}
+\goodnode{3,0}{0,.3}{27,12,6,3}{}{label:}{dottype:g}{d271263}
+
+\goodnode{3,0}{0,-.4}{26,13,6,3}{}{label:y}{dottype:}{d261363}
+\goodnode{3,0}{0,-.2}{27,13,6,3}{}{label:}{dottype:}{d271363}
+\goodnode{3,0}{0,0}{28,13,6,3}{}{label:}{dottype:g}{d281363}
+
+\goodnode{3,0}{0,-.1}{28,14,6,3}{}{label:y}{dottype:h}{d281463}
+\goodnode{3,0}{0,.1}{29,14,6,3}{}{label:}{dottype:g}{d291463}
+
+\goodnode{3,0}{0,-.2}{28,14,7,3}{}{label:y}{dottype:h}{d281473}
+\goodnode{3,0}{0,0}{29,14,7,3}{}{label:}{dottype:h}{d291473}
+\goodnode{3,0}{0,.2}{30,14,7,3}{}{label:}{dottype:g}{d301473}
+
+\goodnode{3,0}{0,-.1}{30,15,7,3}{}{label:y}{dottype:h}{d301573}
+\goodnode{3,0}{0,.1}{31,15,7,3}{}{label:}{dottype:g}{d311573}
+
+
+
+
+%%1-line
+\goodnode{3,0}{0,-.1}{2}{2}{label:}{dottype:gs}{s2d2}
+\goodnode{3,0}{0,.1}{3}{2}{label:}{dottype:gs}{s2d3}
+\goodnode{3,0}{0,-.1}{2}{4,2}{label:}{dottype:gs}{s42d2}
+\goodnode{3,0}{0,.1}{3}{4,2}{label:}{dottype:gs}{s42d3}
+\goodnode{3,0}{0,-.1}{2}{8,4,2}{label:}{dottype:gs}{s842d2}
+\goodnode{3,0}{0,.1}{3}{8,4,2}{label:}{dottype:gs}{s842d3}
+
+\differential{d62}{s2d2}
+\differential{d73}{s2d3}
+%
+%%2-line
+\goodnode{3,0}{0,-.2}{4,2}{2}{label:}{dottype:g}{s2d42}
+\goodnode{3,0}{0,0}{5,2}{2}{label:}{dottype:g}{s2d52}
+\goodnode{3,0}{0,.2}{6,2}{2}{label:}{dottype:g}{s2d62}
+\goodnode{3,0}{0,-.1}{6,3}{2}{label:}{dottype:g}{s2d63}
+\goodnode{3,0}{0,.1}{7,3}{2}{label:}{dottype:g}{s2d73}
+
+\differential{d1142}{s2d42}
+\differential{d1252}{s2d52}
+\differential{d1362}{s2d62}
+\differential{d1463}{s2d63}
+\differential{d1573}{s2d73}
+
+\goodnode{3,0}{0,-.2}{4,2}{4,2}{label:}{dottype:g}{s42d42}
+\goodnode{3,0}{0,0}{5,2}{4,2}{label:}{dottype:g}{s42d52}
+\goodnode{3,0}{0,.2}{6,2}{4,2}{label:}{dottype:g}{s42d62}
+\goodnode{3,0}{0,-.1}{6,3}{4,2}{label:}{dottype:g}{s42d63}
+\goodnode{3,0}{0,.1}{7,3}{4,2}{label:}{dottype:g}{s42d73}
+
+\goodnode{3,0}{0,-.2}{4,2}{5,2}{label:}{dottype:gs}{s52d42}
+\goodnode{3,0}{0,0}{5,2}{5,2}{label:}{dottype:gs}{s52d52}
+\goodnode{3,0}{0,.2}{6,2}{5,2}{label:}{dottype:gs}{s52d62}
+\goodnode{3,0}{0,-.1}{6,3}{5,2}{label:}{dottype:gs}{s52d63}
+\goodnode{3,0}{0,.1}{7,3}{5,2}{label:}{dottype:gs}{s52d73}
+
+
+\goodnode{3,0}{0,-.2}{4,2}{3}{label:}{dottype:s}{s3d42}
+\goodnode{3,0}{0,0}{5,2}{3}{label:}{dottype:s}{s3d52}
+\goodnode{3,0}{0,.2}{6,2}{3}{label:}{dottype:hs}{s3d62}
+\goodnode{3,0}{0,-.1}{6,3}{3}{label:}{dottype:s}{s3d63}
+\goodnode{3,0}{0,.1}{7,3}{3}{label:}{dottype:hs}{s3d73}
+
+\goodnode{3,0}{0,-.2}{4,2}{6,3}{label:}{dottype:s}{s63d42}
+\goodnode{3,0}{0,0}{5,2}{6,3}{label:}{dottype:s}{s63d52}
+\goodnode{3,0}{0,.2}{6,2}{6,3}{label:}{dottype:hs}{s63d62}
+\goodnode{3,0}{0,-.1}{6,3}{6,3}{label:}{dottype:s}{s63d63}
+\goodnode{3,0}{0,.1}{7,3}{6,3}{label:}{dottype:hs}{s63d73}
+
+%
+%%3-line
+\goodnode{3,0}{0,-.3}{8,4,2}{2}{label:}{dottype:g}{s2d842}
+\goodnode{3,0}{0,-.1}{9,4,2}{2}{label:}{dottype:g}{s2d942}
+\goodnode{3,0}{0,.1}{10,4,2}{2}{label:}{dottype:g}{s2d1042}
+\goodnode{3,0}{0,.3}{11,4,2}{2}{label:}{dottype:g}{s2d1142}
+
+\goodnode{3,0}{0,-.2}{10,5,2}{2}{label:}{dottype:g}{s2d1052}
+\goodnode{3,0}{0,0}{11,5,2}{2}{label:}{dottype:g}{s2d1152}
+\goodnode{3,0}{0,.2}{12,5,2}{2}{label:}{dottype:g}{s2d1252}
+
+\goodnode{3,0}{0,0}{12,6,2}{2}{label:}{dottype:g}{s2d1262}
+\goodnode{3,0}{0,.2}{13,6,2}{2}{label:n}{dottype:g}{s2d1362}
+
+\goodnode{3,0}{0,-.2}{12,6,3}{2}{label:}{dottype:g}{s2d1263}
+\goodnode{3,0}{0,0}{13,6,3}{2}{label:}{dottype:g}{s2d1363}
+\goodnode{3,0}{0,.2}{14,6,3}{2}{label:}{dottype:g}{s2d1463}
+
+\goodnode{3,0}{0,-.1}{14,7,3}{2}{label:}{dottype:g}{s2d1473}
+\goodnode{3,0}{0,.1}{15,7,3}{2}{label:}{dottype:g}{s2d1573}
+
+
+\goodnode{3,0}{0,-.3}{8,4,2}{3}{label:}{dottype:}{s3d842}
+\goodnode{3,0}{0,-.1}{9,4,2}{3}{label:}{dottype:}{s3d942}
+\goodnode{3,0}{0,.1}{10,4,2}{3}{label:}{dottype:}{s3d1042}
+\goodnode{3,0}{0,.3}{11,4,2}{3}{label:}{dottype:h}{s3d1142}
+
+\goodnode{3,0}{0,-.2}{10,5,2}{3}{label:}{dottype:}{s3d1052}
+\goodnode{3,0}{0,0}{11,5,2}{3}{label:}{dottype:}{s3d1152}
+\goodnode{3,0}{0,.2}{12,5,2}{3}{label:}{dottype:h}{s3d1252}
+
+\goodnode{3,0}{0,0}{12,6,2}{3}{label:}{dottype:h}{s3d1262}
+\goodnode{3,0}{0,.2}{13,6,2}{3}{label:n}{dottype:h}{s3d1362}
+
+\goodnode{3,0}{0,-.2}{12,6,3}{3}{label:}{dottype:}{s3d1263}
+\goodnode{3,0}{0,0}{13,6,3}{3}{label:}{dottype:}{s3d1363}
+\goodnode{3,0}{0,.2}{14,6,3}{3}{label:}{dottype:h}{s3d1463}
+
+\goodnode{3,0}{0,-.1}{14,7,3}{3}{label:}{dottype:h}{s3d1473}
+\goodnode{3,0}{0,.1}{15,7,3}{3}{label:}{dottype:h}{s3d1573}
+
+
+
+
+\goodnode{3,0}{0,-.3}{8,4,2}{4}{label:}{dottype:s}{s4d842}
+\goodnode{3,0}{0,-.1}{9,4,2}{4}{label:}{dottype:s}{s4d942}
+\goodnode{3,0}{0,.1}{10,4,2}{4}{label:}{dottype:s}{s4d1042}
+\goodnode{3,0}{0,.3}{11,4,2}{4}{label:}{dottype:gs}{s4d1142}
+
+
+
+\goodnode{3,0}{0,-.2}{10,5,2}{4}{label:}{dottype:s}{s4d1052}
+\goodnode{3,0}{0,0}{11,5,2}{4}{label:}{dottype:s}{s4d1152}
+\goodnode{3,0}{0,.2}{12,5,2}{4}{label:}{dottype:gs}{s4d1252}
+
+\goodnode{3,0}{0,0}{12,6,2}{4}{label:}{dottype:hs}{s4d1262}
+\goodnode{3,0}{0,.2}{13,6,2}{4}{label:n}{dottype:gs}{s4d1362}
+
+\goodnode{3,0}{0,-.2}{12,6,3}{4}{label:}{dottype:s}{s4d1263}
+\goodnode{3,0}{0,0}{13,6,3}{4}{label:}{dottype:s}{s4d1363}
+\goodnode{3,0}{0,.2}{14,6,3}{4}{label:}{dottype:gs}{s4d1463}
+
+\goodnode{3,0}{0,-.1}{14,7,3}{4}{label:}{dottype:hs}{s4d1473}
+\goodnode{3,0}{0,.1}{15,7,3}{4}{label:}{dottype:gs}{s4d1573}
+
+\differential{d1042}{s3d42}
+\differential{d1152}{s3d52}
+\differential{d1262}{s3d62}
+\differential{d1363}{s3d63}
+\differential{d1473}{s3d73}
+
+\differential{s4d1142}{s42d42}
+\differential{s4d1252}{s42d52}
+\differential{s4d1362}{s42d62}
+\differential{s4d1463}{s42d63}
+\differential{s4d1573}{s42d73}
+
+
+\differential{d20842}{s2d842}
+\differential{d21942}{s2d942}
+\differential{d221042}{s2d1042}
+\differential{d231142}{s2d1142}
+\differential{d231052}{s2d1052}
+\differential{d241152}{s2d1152}
+\differential{d251252}{s2d1252}
+\differential{d261262}{s2d1262}
+\differential{d271362}{s2d1362}
+\differential{d271263}{s2d1263}
+\differential{d281363}{s2d1363}
+\differential{d291463}{s2d1463}
+\differential{d301473}{s2d1473}
+\differential{d311573}{s2d1573}
+
+
+
+%4-line
+\differential{d18842}{s4d842}
+\differential{d19842}{s3d842}
+
+%\differential[out=107,in=-77]{d19942}{s4d942}
+\bendydifferential{d19942}{s4d942}
+\differential{d20942}{s3d942}
+
+\bendydifferential{d201042}{s4d1042}%\differential[out=107,in=-77]
+\differential{d211042}{s3d1042}
+
+\doublebendydifferential{d221142}{s3d1142}%\differential[out=107,in=-77]
+
+
+\bendydifferential{d211052}{s4d1052}
+\differential{d221052}{s3d1052}
+
+\bendydifferential{d221152}{s4d1152}
+\differential{d231152}{s3d1152}
+
+\differential{d241252}{s3d1252}
+
+\bendydifferential{d241262}{s4d1262}
+\differential{d251262}{s3d1262}
+
+\doublebendydifferential{d261362}{s3d1362}
+
+\bendydifferential{d251263}{s4d1263}
+\differential{d261263}{s3d1263}
+
+\bendydifferential{d261363}{s4d1363}
+\differential{d271363}{s3d1363}
+
+\differential{d281463}{s3d1463}
+
+\bendydifferential{d281473}{s4d1473}
+\differential{d291473}{s3d1473}
+
+\differential{d301573}{s3d1573}
+%[out=120,in=-60]
+
+\end{tikzpicture}}
+\end{minipage}
+\end{sideways}
+\centering
+\caption{The \BKSS\ for $\mathbb{S}^{\algs}_3$.}
+\label{BKSSforS3}
+\end{figure}
+
+
 
 \SubsectionOrSection{The first composite functor spectral sequence}
 \label{The first composite functor spectral sequence}
@@ -8887,655 +9807,554 @@ However, we have already calculated these groups in Corollary \ref{the corollary
 
 
 
-\newcommand\Square[1]{+(-#1,-#1) rectangle +(#1,#1)}
-\newcommand{\emptytriangle}[1]{
-\node[draw, regular polygon, regular polygon sides=3,minimum size=5pt,inner sep=0, fill=white] at (#1) {};
-}
-\newcommand{\nestedtriangle}[1]{
-\node[draw, regular polygon, regular polygon sides=3,minimum size=5pt,inner sep=0, fill=white] at (#1) {};
-\node[draw, regular polygon, regular polygon sides=3,minimum size=1pt,inner sep=0, fill] at (#1) {};
-}
-\newcommand{\fulltriangle}[1]{
-\node[draw, regular polygon, regular polygon sides=3,minimum size=5pt,inner sep=0, fill] at (#1) {};
-}
-\newcommand{\fullcircle}[1]{
-\filldraw (#1) circle (2pt);
-}
-\newcommand{\emptycircle}[1]{
-\filldraw[fill=white] (#1) circle (2pt);
-}
-\newcommand{\nestedcircle}[1]{
-\filldraw[fill=white] (#1) circle (2pt);\filldraw (#1) circle (.5pt);
-}
-\newcommand{\fullsquare}[1]{
-\filldraw (#1) \Square{1.8pt};
-}
-\newcommand{\emptysquare}[1]{
-\filldraw[fill=white] (#1) \Square{1.8pt};
-}
-\newcommand{\nestedsquare}[1]{
-\filldraw[fill=white] (#1) \Square{1.8pt};
-\filldraw (#1) \Square{.5pt};
-}
 
-%#1:fund class location
-%#2:offset to avoid overlap
-%#3:delta sequence
-%#4:Sq    sequence
-%#5:label:y/n
-%#6:dottype:=normal
-%   dottype:a =abutment
-%   dottype:g =ghost (gone by E2)
-%   dottype:s =any square
-%   dottype:gs=any ghostly square
-\newcommand{\goodnode}[7]{
-\def\coordlist{#1}
-\pgfmathparse{{\coordlist}[0]}
-\edef\myx{\pgfmathresult }
-\pgfmathparse{{\coordlist}[1]}
-\edef\myy{\pgfmathresult }
-\foreach \iIi in {#3}
-  {   
-      \pgfmathparse{\myx+\iIi}
-      \xdef\myx{\pgfmathresult}
-      \pgfmathparse{\myy+1}
-      \xdef\myy{\pgfmathresult}
-  }
-\foreach \jJj in {#4}
-  {   
-      \pgfmathparse{2*\myx+\myy-\jJj+1}
-      \xdef\myx{\pgfmathresult}
-      \pgfmathparse{\myy+\jJj}
-      \xdef\myy{\pgfmathresult}
-  }
-\def\coordlist{#2}
-\pgfmathparse{{\coordlist}[0]+\myx}
-\edef\myx{\pgfmathresult }
-\pgfmathparse{{\coordlist}[1]+\myy}
-\edef\myy{\pgfmathresult }
-
-\coordinate (#7) at (\myx,\myy);
-\ifstrequal{#6}{dottype:g}{      \emptycircle{#7}}{
-\ifstrequal{#6}{dottype:a}{      \fulltriangle{#7}}{
-\ifstrequal{#6}{dottype:s}{      \fullsquare{#7}}{
-\ifstrequal{#6}{dottype:gs}{     \emptysquare{#7}}{
-\ifstrequal{#6}{dottype:h}{      \nestedcircle{#7}}{
-\ifstrequal{#6}{dottype:hs}{     \nestedsquare{#7}}{
-                                 \fullcircle{#7}
-}}}}}}
-\ifstrequal{#5}{label:y}{
-%\node[right,rotate=-90,fill=white,outer sep=4pt,inner sep=2.4pt] at (#7)  {\tiny$#3$};
-%\node[right,rotate=-90,outer sep=0pt,inner sep=0pt] at (\myx-{\coordlist}[0],\myy-{\coordlist}[1]-.6)  {\tiny$#3$};
-\node[right,rotate=-45,outer sep=0pt,inner sep=0pt] at (\myx-{\coordlist}[0]-.1,\myy-{\coordlist}[1]-.6)  {\tiny${#3}$};
-}{}
-}
-\newcommand{\differential}[3][]{\draw[shorten >=3pt,shorten <=3pt] (#2) to[#1] (#3);}
-%\newcommand{\dashedBrokenLine}[2]{
-%\foreach \x/\y in {#2}
-% \draw [loosely dotted] (\x,#1+.5) -- (\y,#1+.5);
-%}
-
-\begin{landscape}
-%\eject \pdfpagewidth=12in \pdfpageheight=8.5in
-
-
-\newcommand{\RecordOperation}[4][]{
-\draw[->,densely dotted,shorten <=3pt,#1] (#2 R#3) to node [inner sep=1pt, midway,fill=white] {\tiny$\Sq^{#4}$} (#2 L#4#3);
-}
-\newcommand{\RecordOperationCutOff}[5][]{
-\draw[->,densely dotted,shorten <=3pt,#1] (#2 R#3) to node [inner sep=1pt, pos=#5,fill=white] {\tiny$\Sq^{#4}$} (#2 L#4#3);
-}
-\newcommand{\RecordOperationDelta}[4][]{
-\draw[->,densely dotted,shorten <=3pt,#1] (#2 R) to node [outer sep=0pt,inner sep=.25pt, midway,fill=white,rounded corners=2pt] {\tiny$\delta_{i_{#3}}\!$} (#3 L);
-}
-\newcommand{\MakeShading}[5]{%linenum,sqseq,xcoordstart,xcoordend,ycoord
-\coordinate (#1 L#2) at (#3-.4,#5);
-\coordinate (#1 R#2) at (#4+.4-.1,#5+.35);
-\fill [rounded corners=2pt,gray!25] (#3-.4,#5-.475) rectangle (#4+.4,#5+.475);
-}
-%linenum,sqseq,xcoordstart,xcoordend,ycoord
-%\newcommand{\MakeBraces}[5]{
-%\draw[decorate, decoration={brace, amplitude=3pt}] (#3-.4,#5-.4) -- coordinate [left=4pt] (#1 L#2) (#3-.4,#5+.4) node {};
-%\draw[decorate, decoration={brace, mirror, amplitude=3pt}] (#4+.4,#5-.4) -- coordinate [right=4pt] (#1 R#2) (#4+.4,#5+.4) node {};
-%}
-
-
-\begin{figure}
-{\begin{tikzpicture}[y=1.1cm, x=.5cm]
-\xdef\TminusSmax{44}
-\xdef\Smax{11}
-\xdef\horTickFreq{2}
-\xdef\verTickFreq{1}
-\xdef\lasttickbuf{.45}
-\xdef\tsfz{0.0}%tick separation from zero
-
-\clip (-1.5,-1) rectangle (\TminusSmax+1,\Smax+.7);
-
-\MakeShading{0}{}{2}{2}{0}
-
-\MakeShading{1}{}{4}{4}{1}
-\MakeShading{1}{2}{8}{8}{3}
-\MakeShading{1}{42}{16}{16}{7}
-\MakeShading{1}{842}{32}{32}{15}
-\RecordOperation[out=65,in=180+20]{1}{}{2}
-\RecordOperation[out=65,in=180+17]{1}{2}{4}
-\RecordOperationCutOff[out=70,in=180+17]{1}{42}{8}{.25}
-
-\MakeShading{2}{}{8}{9}{2}
-\MakeShading{2}{3}{16}{18}{5}
-\MakeShading{2}{63}{32}{36}{11}
-
-\MakeShading{2}{2}{17}{19}{4}%{18.5}{27.3}{4}
-\MakeShading{2}{42}{35}{39}{8}%{39}{55.5}{8}
-\MakeShading{2}{52}{34}{38}{9}
-
-\RecordOperation[out=57,in=180+13]{2}{}{3}
-\RecordOperation[out=70,in=180+15]{2}{3}{6}
-\RecordOperation[out=40,in=180+05]{2}{}{2}
-\RecordOperation[out=47,in=180+06]{2}{2}{4}
-\RecordOperation[out=55,in=180+07]{2}{2}{5}
-
-\MakeShading{3}{}{16}{20}{3}
-\MakeShading{3}{2}{34}{42}{5}%{34.65}{58.3}{5}
-\MakeShading{3}{3}{33}{41}{6}
-\MakeShading{3}{4}{32}{40}{7}
-
-\RecordOperation[out=25,in=180+05]{3}{}{2}
-\RecordOperation[out=40,in=180+07]{3}{}{3}
-\RecordOperation[out=55,in=180+10]{3}{}{4}
-
-\MakeShading{4}{}{32}{43}{4}
-
-\RecordOperationDelta[out=55,in=180+25]{0}{1}{}
-\RecordOperationDelta[out=35,in=180+5]{1}{2}{}
-\RecordOperationDelta[out=25,in=180+2]{2}{3}{}
-\RecordOperationDelta[out=13,in=180+2]{3}{4}{}
-
-\draw[->] (-\tsfz,-\tsfz) -- (\TminusSmax+\lasttickbuf,-\tsfz); %axes
-\draw[->] (-\tsfz,-\tsfz) -- (-\tsfz,\Smax+\lasttickbuf);
-\foreach \x in {0,\horTickFreq,...,\TminusSmax} %ticks
-   \draw (\x,-\tsfz+.1) -- (\x,-\tsfz-.1)
-      node[anchor=north] {\x};
-\foreach \y in {0,\verTickFreq,...,\Smax}
-   \draw (-\tsfz+.1,\y) -- (-\tsfz-.1,\y) 
-      node[anchor=east] {\y};
-\node[anchor=west] at (-\tsfz+.1,\Smax) {$s$};
-%\dashedBrokenLine{0}{-\tsfz/\TminusSmax+\lasttickbuf}
-%\dashedBrokenLine{1}{-\tsfz/15.4,20.6/\TminusSmax+\lasttickbuf}
-%\dashedBrokenLine{2}{-\tsfz/15.4,20.6/31.4,43.6/\TminusSmax+\lasttickbuf}
-%\dashedBrokenLine{3}{-\tsfz/31.4,43.6/\TminusSmax+\lasttickbuf}
-%\dashedBrokenLine{4}{-\tsfz/\TminusSmax+\lasttickbuf}
-%\dashedBrokenLine{5}{-\tsfz/\TminusSmax+\lasttickbuf}
-%\dashedBrokenLine{6}{-\tsfz/\TminusSmax+\lasttickbuf}
-%\dashedBrokenLine{7}{-\tsfz/\TminusSmax+\lasttickbuf}
-%\dashedBrokenLine{8}{-\tsfz/\TminusSmax+\lasttickbuf}
-%\dashedBrokenLine{9}{-\tsfz/\TminusSmax+\lasttickbuf}
-%\dashedBrokenLine{10}{-\tsfz/\TminusSmax+\lasttickbuf}
-%\node[anchor=south,fill=white,outer sep=4pt,inner sep=2.4pt] at (\TminusSmax-.5,-\tsfz+.1) {$t-s$};
-\node[anchor=south] at (\TminusSmax-1,-\tsfz+.1) {$t-s$};
-%0-line
-\goodnode{2,0}{0,0}{}{}{label:n}{dottype:a}{fundclass}
-
-%1-line
-\goodnode{2,0}{0,0}{2}{}{label:y}{dottype:a}{d2}
-\goodnode{2,0}{0,0}{2}{2}{label:n}{dottype:gs}{s2d2}
-\goodnode{2,0}{0,0}{2}{4,2}{label:n}{dottype:gs}{s42d2}
-\goodnode{2,0}{0,0}{2}{8,4,2}{label:n}{dottype:gs}{s842d2}
-
-%2-line
-\goodnode{2,0}{0,-.1}{4,2}{}{label:y}{dottype:a}{d42}
-\goodnode{2,0}{0,.1}{5,2}{}{label:y}{dottype:g}{d52}
-\goodnode{2,0}{0,-.1}{4,2}{2}{label:n}{dottype:g}{s2d42}
-\goodnode{2,0}{0,.1}{5,2}{2}{label:n}{dottype:g}{s2d52}
-\goodnode{2,0}{0,-.1}{4,2}{4,2}{label:n}{dottype:g}{s42d42}
-\goodnode{2,0}{0,.1}{5,2}{4,2}{label:n}{dottype:g}{s42d52}
-\goodnode{2,0}{0,-.1}{4,2}{5,2}{label:n}{dottype:gs}{s52d42}
-\goodnode{2,0}{0,.1}{5,2}{5,2}{label:n}{dottype:gs}{s52d52}
-\goodnode{2,0}{0,-.1}{4,2}{3}{label:n}{dottype:s}{s3d42}
-\goodnode{2,0}{0,.1}{5,2}{3}{label:n}{dottype:hs}{s3d52}
-\goodnode{2,0}{0,-.1}{4,2}{6,3}{label:n}{dottype:s}{s63d42}
-\goodnode{2,0}{0,.1}{5,2}{6,3}{label:n}{dottype:hs}{s63d52}
-
-%3-line
-\goodnode{2,0}{0,-.2}{8,4,2}{}{label:y}{dottype:a}{d842}
-\goodnode{2,0}{0,0}{9,4,2}{}{label:y}{dottype:}{d942}
-\goodnode{2,0}{0,.2}{10,4,2}{}{label:y}{dottype:g}{d1042}
-\goodnode{2,0}{0,-.1}{10,5,2}{}{label:y}{dottype:h}{d1052}
-\goodnode{2,0}{0,.1}{11,5,2}{}{label:y}{dottype:g}{d1152}
-\goodnode{2,0}{0,-.2}{8,4,2}{2}{label:n}{dottype:g}{s2d842}
-\goodnode{2,0}{0,0}{9,4,2}{2}{label:n}{dottype:g}{s2d942}
-\goodnode{2,0}{0,.2}{10,4,2}{2}{label:n}{dottype:g}{s2d1042}
-\goodnode{2,0}{0,-.1}{10,5,2}{2}{label:n}{dottype:g}{s2d1052}
-\goodnode{2,0}{0,.1}{11,5,2}{2}{label:n}{dottype:g}{s2d1152}
-\goodnode{2,0}{0,-.2}{8,4,2}{3}{label:n}{dottype:}{s3d842}
-\goodnode{2,0}{0,0}{9,4,2}{3}{label:n}{dottype:}{s3d942}
-\goodnode{2,0}{0,.2}{10,4,2}{3}{label:n}{dottype:h}{s3d1042}
-\goodnode{2,0}{0,-.1}{10,5,2}{3}{label:n}{dottype:h}{s3d1052}
-\goodnode{2,0}{0,.1}{11,5,2}{3}{label:n}{dottype:h}{s3d1152}
-\goodnode{2,0}{0,-.2}{8,4,2}{4}{label:n}{dottype:s}{s4d842}
-\goodnode{2,0}{0,0}{9,4,2}{4}{label:n}{dottype:s}{s4d942}
-\goodnode{2,0}{0,.2}{10,4,2}{4}{label:n}{dottype:gs}{s4d1042}
-\goodnode{2,0}{0,-.1}{10,5,2}{4}{label:n}{dottype:hs}{s4d1052}
-\goodnode{2,0}{0,.1}{11,5,2}{4}{label:n}{dottype:gs}{s4d1152}
-
-%4-line
-\goodnode{2,0}{0,-.3}{16,8,4,2}{}{label:y}{dottype:a}{d16842}
-\goodnode{2,0}{0,-.1}{17,8,4,2}{}{label:n}{dottype:}{d17842}
-\goodnode{2,0}{0,.1}{18,8,4,2}{}{label:n}{dottype:}{d18842}
-\goodnode{2,0}{0,.3}{19,8,4,2}{}{label:n}{dottype:g}{d19842}
-\goodnode{2,0}{0,-.2}{18,9,4,2}{}{label:y}{dottype:}{d18942}
-\goodnode{2,0}{0,0}{19,9,4,2}{}{label:n}{dottype:}{d19942}
-\goodnode{2,0}{0,.2}{20,9,4,2}{}{label:n}{dottype:g}{d20942}
-\goodnode{2,0}{0,0}{20,10,4,2}{}{label:y}{dottype:h}{d201042}
-\goodnode{2,0}{0,.2}{21,10,4,2}{}{label:n}{dottype:g}{d211042}
-\goodnode{2,0}{0,-.2}{20,10,5,2}{}{label:y}{dottype:h}{d201052}
-\goodnode{2,0}{0,0}{21,10,5,2}{}{label:n}{dottype:h}{d211052}
-\goodnode{2,0}{0,.2}{22,10,5,2}{}{label:n}{dottype:g}{d221052}
-\goodnode{2,0}{0,-.1}{22,11,5,2}{}{label:y}{dottype:h}{d221152}
-\goodnode{2,0}{0,.1}{23,11,5,2}{}{label:n}{dottype:g}{d231152}
-
-\differential{d942}{s3d42}
-\differential{d1052}{s3d52}
-\differential{d17842}{s4d842}
-\differential{d18842}{s3d842}
-\differential[out=120,in=-60]{d18942}{s4d942}
-\differential{d19942}{s3d942}
-\differential{d201042}{s3d1042}
-\differential[out=120,in=-60]{d201052}{s4d1052}
-\differential{d211052}{s3d1052}
-\differential{d221152}{s3d1152}
-
-%d1
-\differential{d52}{s2d2}
-\differential{d1042}{s2d42}
-\differential{d1152}{s2d52}
-\differential{s4d1042}{s42d42}
-\differential{s4d1152}{s42d52}
-\differential{d231152}{s2d1152}
-\differential{d221052}{s2d1052}
-\differential{d211042}{s2d1042}
-\differential{d20942}{s2d942}
-\differential{d19842}{s2d842}
-
-\end{tikzpicture}}
-\caption{The \BKSS\ for $\mathbb{S}^{\algs}_2$.}
-\label{BKSSforS2}
-\end{figure}
-
-
-
-\begin{figure}
-{\begin{tikzpicture}[y=1.1cm, x=.37cm]
-\xdef\TminusSmax{60}
-\xdef\Smax{11}
-\xdef\horTickFreq{2}
-\xdef\verTickFreq{1}
-\xdef\lasttickbuf{.45}
-\xdef\tsfz{0.0}%tick separation from zero
-
-\clip (-1.5,-1) rectangle (\TminusSmax+1,\Smax+.7);
-
-\MakeShading{0}{}{3}{3}{0}
-
-\MakeShading{1}{}{5}{6}{1}
-\MakeShading{1}{2}{10}{12}{3}
-\MakeShading{1}{42}{20}{24}{7}
-\MakeShading{1}{842}{40}{48}{15}
-\RecordOperation[out=70,in=180+20]{1}{}{2}
-\RecordOperation[out=70,in=180+20]{1}{2}{4}
-\RecordOperationCutOff[out=70,in=180+23]{1}{42}{8}{.25}
-
-\MakeShading{2}{}{9}{13}{2}
-\MakeShading{2}{3}{18}{26}{5}
-\MakeShading{2}{63}{36}{52}{11}
-
-\MakeShading{2}{2}{19}{27}{4}%{18.5}{27.3}{4}
-\MakeShading{2}{42}{39}{55}{8}%{39}{55.5}{8}
-\MakeShading{2}{52}{38}{54}{9}
-
-\RecordOperation[out=80,in=180+20]{2}{}{3}
-\RecordOperation[out=75,in=180+23]{2}{3}{6}
-\RecordOperation[out=65,in=180+05]{2}{}{2}
-\RecordOperation[out=70,in=180+00]{2}{2}{4}
-\RecordOperation[out=80,in=180+07]{2}{2}{5}
-
-\MakeShading{3}{}{17}{28}{3}
-\MakeShading{3}{2}{36}{58}{5}%{34.65}{58.3}{5}
-\MakeShading{3}{3}{35}{57}{6}
-\MakeShading{3}{4}{34}{56}{7}
-
-\RecordOperation[out=50,in=180+05]{3}{}{2}
-\RecordOperation[out=65,in=180+15]{3}{}{3}
-\RecordOperation[out=75,in=180+33]{3}{}{4}
-
-\MakeShading{4}{}{33}{59}{4}
-
-%\MakeShading{4}{5}{66}{66}{9}
-%\MakeShading{4}{4}{67}{67}{8}
-%\MakeShading{4}{3}{68}{68}{7}
-%\MakeShading{4}{2}{69}{69}{6}
-%
-%\RecordOperationCutOff[out=70,in=180+23]{4}{}{2}{.25}
-%\RecordOperationCutOff[out=70,in=180+23]{4}{}{3}{.25}
-%\RecordOperationCutOff[out=70,in=180+23]{4}{}{4}{.25}
-%\RecordOperationCutOff[out=70,in=180+23]{4}{}{5}{.25}
-
-\RecordOperationDelta[out=55,in=180+25]{0}{1}{}
-\RecordOperationDelta[out=55,in=180+15]{1}{2}{}
-\RecordOperationDelta[out=45,in=180+7]{2}{3}{}
-\RecordOperationDelta[out=40,in=180+2]{3}{4}{}
-
-\draw[->] (-\tsfz,-\tsfz) -- (\TminusSmax+\lasttickbuf,-\tsfz);%axes
-\draw[->] (-\tsfz,-\tsfz) -- (-\tsfz,\Smax+\lasttickbuf);
-\foreach \x in {0,\horTickFreq,...,\TminusSmax}%ticks
-   \draw (\x,-\tsfz+.1) -- (\x,-\tsfz-.1)
-      node[anchor=north] {\x};
-\foreach \y in {0,\verTickFreq,...,\Smax}
-   \draw (-\tsfz+.1,\y) -- (-\tsfz-.1,\y) 
-      node[anchor=east] {\y};
-\node[anchor=west] at (-\tsfz+.1,\Smax) {$s$};
-%%\dashedBrokenLine{0}{-\tsfz/4.4,5.6/\TminusSmax+\lasttickbuf-2.5}
-%\dashedBrokenLine{1}{-\tsfz/8.4,13.6/\TminusSmax+\lasttickbuf}
-%%\dashedBrokenLine{2}{-\tsfz/16.4,27.6/32.4,58.6/\TminusSmax+\lasttickbuf}
-%%\dashedBrokenLine{3}{-\tsfz/32.4,58.6/\TminusSmax+\lasttickbuf}
-%\dashedBrokenLine{0}{-\tsfz/\TminusSmax+\lasttickbuf}
-%%\dashedBrokenLine{1}{-\tsfz/\TminusSmax+\lasttickbuf}
-%\dashedBrokenLine{2}{-\tsfz/47,48/\TminusSmax+\lasttickbuf}
-%\dashedBrokenLine{3}{-\tsfz/47,48/\TminusSmax+\lasttickbuf}
-%\dashedBrokenLine{4}{-\tsfz/\TminusSmax+\lasttickbuf}
-%\dashedBrokenLine{5}{-\tsfz/\TminusSmax+\lasttickbuf}
-%\dashedBrokenLine{6}{-\tsfz/\TminusSmax+\lasttickbuf}
-%\dashedBrokenLine{7}{-\tsfz/\TminusSmax+\lasttickbuf}
-%\dashedBrokenLine{8}{-\tsfz/\TminusSmax+\lasttickbuf}
-%\dashedBrokenLine{9}{-\tsfz/\TminusSmax+\lasttickbuf}
-%\dashedBrokenLine{10}{-\tsfz/\TminusSmax+\lasttickbuf}
-%\node[anchor=south,fill=white,outer sep=4pt,inner sep=2.4pt] at (\TminusSmax-.5,-\tsfz+.1) {$t-s$};
-\node[anchor=south] at (\TminusSmax-1,-\tsfz+.1) {$t-s$};
-
-%0-line
-\goodnode{3,0}{0,0}{}{}{label:n}{dottype:a}{fundclass}
-
-%1-line
-\goodnode{3,0}{0,-.1}{2}{}{label:y}{dottype:a}{d2}
-\goodnode{3,0}{0,.1}{3}{}{label:y}{dottype:a}{d3}
-
-%2-line
-\goodnode{3,0}{0,-.2}{4,2}{}{label:y}{dottype:a}{d42}
-\goodnode{3,0}{0,0}{5,2}{}{label:y}{dottype:a}{d52}
-\goodnode{3,0}{0,.2}{6,2}{}{label:y}{dottype:g}{d62}
-
-\goodnode{3,0}{0,-.1}{6,3}{}{label:y}{dottype:a}{d63}
-\goodnode{3,0}{0,.1}{7,3}{}{label:y}{dottype:g}{d73}
-
-%3-line
-\goodnode{3,0}{0,-.3}{8,4,2}{}{label:y}{dottype:a}{d842}%
-\goodnode{3,0}{0,-.1}{9,4,2}{}{label:}{dottype:a}{d942}
-\goodnode{3,0}{0,.1}{10,4,2}{}{label:}{dottype:}{d1042}
-\goodnode{3,0}{0,.3}{11,4,2}{}{label:}{dottype:g}{d1142}
-
-\goodnode{3,0}{0,-.2}{10,5,2}{}{label:y}{dottype:a}{d1052}%
-\goodnode{3,0}{0,0}{11,5,2}{}{label:}{dottype:}{d1152}
-\goodnode{3,0}{0,.2}{12,5,2}{}{label:}{dottype:g}{d1252}
-
-\goodnode{3,0}{0,0}{12,6,2}{}{label:y}{dottype:h}{d1262}%
-\goodnode{3,0}{0,.2}{13,6,2}{}{label:n}{dottype:g}{d1362}
-
-\goodnode{3,0}{0,-.2}{12,6,3}{}{label:y}{dottype:a}{d1263}%
-\goodnode{3,0}{0,0}{13,6,3}{}{label:}{dottype:}{d1363}
-\goodnode{3,0}{0,.2}{14,6,3}{}{label:}{dottype:g}{d1463}
-
-\goodnode{3,0}{0,-.1}{14,7,3}{}{label:y}{dottype:h}{d1473}%
-\goodnode{3,0}{0,.1}{15,7,3}{}{label:}{dottype:g}{d1573}
-
-%4-line
-\goodnode{3,0}{0,-.4}{16,8,4,2}{}{label:y}{dottype:a}{d16842}%
-\goodnode{3,0}{0,-.2}{17,8,4,2}{}{label:}{dottype:a}{d17842}%
-\goodnode{3,0}{0,0}{18,8,4,2}{}{label:}{dottype:}{d18842}%
-\goodnode{3,0}{0,.2}{19,8,4,2}{}{label:}{dottype:}{d19842}%
-\goodnode{3,0}{0,.4}{20,8,4,2}{}{label:}{dottype:g}{d20842}%
-
-\goodnode{3,0}{0,-.3}{18,9,4,2}{}{label:y}{dottype:a}{d18942}
-\goodnode{3,0}{0,-.1}{19,9,4,2}{}{label:}{dottype:}{d19942}
-\goodnode{3,0}{0,.1}{20,9,4,2}{}{label:}{dottype:}{d20942}
-\goodnode{3,0}{0,.3}{21,9,4,2}{}{label:}{dottype:g}{d21942}
-
-\goodnode{3,0}{0,-.1}{20,10,4,2}{}{label:y}{dottype:}{d201042}
-\goodnode{3,0}{0,.1}{21,10,4,2}{}{label:n}{dottype:}{d211042}
-\goodnode{3,0}{0,.3}{22,10,4,2}{}{label:n}{dottype:g}{d221042}
-
-\goodnode{3,0}{0,-.25}{22,11,4,2}{}{label:y}{dottype:h}{d221142}
-\goodnode{3,0}{0,-.05}{23,11,4,2}{}{label:n}{dottype:g}{d231142}
-
-\goodnode{3,0}{0,-.3}{20,10,5,2}{}{label:y}{dottype:a}{d201052}
-\goodnode{3,0}{0,-.1}{21,10,5,2}{}{label:n}{dottype:}{d211052}
-\goodnode{3,0}{0,.1}{22,10,5,2}{}{label:n}{dottype:}{d221052}
-\goodnode{3,0}{0,.3}{23,10,5,2}{}{label:n}{dottype:g}{d231052}
-
-\goodnode{3,0}{0,-.4}{22,11,5,2}{}{label:y}{dottype:}{d221152}
-\goodnode{3,0}{0,-.2}{23,11,5,2}{}{label:}{dottype:}{d231152}
-\goodnode{3,0}{0,0}{24,11,5,2}{}{label:}{dottype:g}{d241152}
-
-\goodnode{3,0}{0,-.1}{24,12,5,2}{}{label:y}{dottype:h}{d241252}
-\goodnode{3,0}{0,.1}{25,12,5,2}{}{label:}{dottype:g}{d251252}
-
-\goodnode{3,0}{0,-.2}{24,12,6,2}{}{label:y}{dottype:h}{d241262}
-\goodnode{3,0}{0,0}{25,12,6,2}{}{label:}{dottype:h}{d251262}
-\goodnode{3,0}{0,.2}{26,12,6,2}{}{label:}{dottype:g}{d261262}
-
-\goodnode{3,0}{0,-.25}{26,13,6,2}{}{label:y}{dottype:h}{d261362}
-\goodnode{3,0}{0,-.05}{27,13,6,2}{}{label:n}{dottype:g}{d271362}
-
-\goodnode{3,0}{0,-.3}{24,12,6,3}{}{label:y}{dottype:a}{d241263}
-\goodnode{3,0}{0,-.1}{25,12,6,3}{}{label:}{dottype:}{d251263}
-\goodnode{3,0}{0,.1}{26,12,6,3}{}{label:}{dottype:}{d261263}
-\goodnode{3,0}{0,.3}{27,12,6,3}{}{label:}{dottype:g}{d271263}
-
-\goodnode{3,0}{0,-.4}{26,13,6,3}{}{label:y}{dottype:}{d261363}
-\goodnode{3,0}{0,-.2}{27,13,6,3}{}{label:}{dottype:}{d271363}
-\goodnode{3,0}{0,0}{28,13,6,3}{}{label:}{dottype:g}{d281363}
-
-\goodnode{3,0}{0,-.1}{28,14,6,3}{}{label:y}{dottype:h}{d281463}
-\goodnode{3,0}{0,.1}{29,14,6,3}{}{label:}{dottype:g}{d291463}
-
-\goodnode{3,0}{0,-.2}{28,14,7,3}{}{label:y}{dottype:h}{d281473}
-\goodnode{3,0}{0,0}{29,14,7,3}{}{label:}{dottype:h}{d291473}
-\goodnode{3,0}{0,.2}{30,14,7,3}{}{label:}{dottype:g}{d301473}
-
-\goodnode{3,0}{0,-.1}{30,15,7,3}{}{label:y}{dottype:h}{d301573}
-\goodnode{3,0}{0,.1}{31,15,7,3}{}{label:}{dottype:g}{d311573}
-
-
-
-
-%%1-line
-\goodnode{3,0}{0,-.1}{2}{2}{label:}{dottype:gs}{s2d2}
-\goodnode{3,0}{0,.1}{3}{2}{label:}{dottype:gs}{s2d3}
-\goodnode{3,0}{0,-.1}{2}{4,2}{label:}{dottype:gs}{s42d2}
-\goodnode{3,0}{0,.1}{3}{4,2}{label:}{dottype:gs}{s42d3}
-\goodnode{3,0}{0,-.1}{2}{8,4,2}{label:}{dottype:gs}{s842d2}
-\goodnode{3,0}{0,.1}{3}{8,4,2}{label:}{dottype:gs}{s842d3}
-
-\differential{d62}{s2d2}
-\differential{d73}{s2d3}
-%
-%%2-line
-\goodnode{3,0}{0,-.2}{4,2}{2}{label:}{dottype:g}{s2d42}
-\goodnode{3,0}{0,0}{5,2}{2}{label:}{dottype:g}{s2d52}
-\goodnode{3,0}{0,.2}{6,2}{2}{label:}{dottype:g}{s2d62}
-\goodnode{3,0}{0,-.1}{6,3}{2}{label:}{dottype:g}{s2d63}
-\goodnode{3,0}{0,.1}{7,3}{2}{label:}{dottype:g}{s2d73}
-
-\differential{d1142}{s2d42}
-\differential{d1252}{s2d52}
-\differential{d1362}{s2d62}
-\differential{d1463}{s2d63}
-\differential{d1573}{s2d73}
-
-\goodnode{3,0}{0,-.2}{4,2}{4,2}{label:}{dottype:g}{s42d42}
-\goodnode{3,0}{0,0}{5,2}{4,2}{label:}{dottype:g}{s42d52}
-\goodnode{3,0}{0,.2}{6,2}{4,2}{label:}{dottype:g}{s42d62}
-\goodnode{3,0}{0,-.1}{6,3}{4,2}{label:}{dottype:g}{s42d63}
-\goodnode{3,0}{0,.1}{7,3}{4,2}{label:}{dottype:g}{s42d73}
-
-\goodnode{3,0}{0,-.2}{4,2}{5,2}{label:}{dottype:gs}{s52d42}
-\goodnode{3,0}{0,0}{5,2}{5,2}{label:}{dottype:gs}{s52d52}
-\goodnode{3,0}{0,.2}{6,2}{5,2}{label:}{dottype:gs}{s52d62}
-\goodnode{3,0}{0,-.1}{6,3}{5,2}{label:}{dottype:gs}{s52d63}
-\goodnode{3,0}{0,.1}{7,3}{5,2}{label:}{dottype:gs}{s52d73}
-
-
-\goodnode{3,0}{0,-.2}{4,2}{3}{label:}{dottype:s}{s3d42}
-\goodnode{3,0}{0,0}{5,2}{3}{label:}{dottype:s}{s3d52}
-\goodnode{3,0}{0,.2}{6,2}{3}{label:}{dottype:hs}{s3d62}
-\goodnode{3,0}{0,-.1}{6,3}{3}{label:}{dottype:s}{s3d63}
-\goodnode{3,0}{0,.1}{7,3}{3}{label:}{dottype:hs}{s3d73}
-
-\goodnode{3,0}{0,-.2}{4,2}{6,3}{label:}{dottype:s}{s63d42}
-\goodnode{3,0}{0,0}{5,2}{6,3}{label:}{dottype:s}{s63d52}
-\goodnode{3,0}{0,.2}{6,2}{6,3}{label:}{dottype:hs}{s63d62}
-\goodnode{3,0}{0,-.1}{6,3}{6,3}{label:}{dottype:s}{s63d63}
-\goodnode{3,0}{0,.1}{7,3}{6,3}{label:}{dottype:hs}{s63d73}
-
-%
-%%3-line
-\goodnode{3,0}{0,-.3}{8,4,2}{2}{label:}{dottype:g}{s2d842}
-\goodnode{3,0}{0,-.1}{9,4,2}{2}{label:}{dottype:g}{s2d942}
-\goodnode{3,0}{0,.1}{10,4,2}{2}{label:}{dottype:g}{s2d1042}
-\goodnode{3,0}{0,.3}{11,4,2}{2}{label:}{dottype:g}{s2d1142}
-
-\goodnode{3,0}{0,-.2}{10,5,2}{2}{label:}{dottype:g}{s2d1052}
-\goodnode{3,0}{0,0}{11,5,2}{2}{label:}{dottype:g}{s2d1152}
-\goodnode{3,0}{0,.2}{12,5,2}{2}{label:}{dottype:g}{s2d1252}
-
-\goodnode{3,0}{0,0}{12,6,2}{2}{label:}{dottype:g}{s2d1262}
-\goodnode{3,0}{0,.2}{13,6,2}{2}{label:n}{dottype:g}{s2d1362}
-
-\goodnode{3,0}{0,-.2}{12,6,3}{2}{label:}{dottype:g}{s2d1263}
-\goodnode{3,0}{0,0}{13,6,3}{2}{label:}{dottype:g}{s2d1363}
-\goodnode{3,0}{0,.2}{14,6,3}{2}{label:}{dottype:g}{s2d1463}
-
-\goodnode{3,0}{0,-.1}{14,7,3}{2}{label:}{dottype:g}{s2d1473}
-\goodnode{3,0}{0,.1}{15,7,3}{2}{label:}{dottype:g}{s2d1573}
-
-
-\goodnode{3,0}{0,-.3}{8,4,2}{3}{label:}{dottype:}{s3d842}
-\goodnode{3,0}{0,-.1}{9,4,2}{3}{label:}{dottype:}{s3d942}
-\goodnode{3,0}{0,.1}{10,4,2}{3}{label:}{dottype:}{s3d1042}
-\goodnode{3,0}{0,.3}{11,4,2}{3}{label:}{dottype:h}{s3d1142}
-
-\goodnode{3,0}{0,-.2}{10,5,2}{3}{label:}{dottype:}{s3d1052}
-\goodnode{3,0}{0,0}{11,5,2}{3}{label:}{dottype:}{s3d1152}
-\goodnode{3,0}{0,.2}{12,5,2}{3}{label:}{dottype:h}{s3d1252}
-
-\goodnode{3,0}{0,0}{12,6,2}{3}{label:}{dottype:h}{s3d1262}
-\goodnode{3,0}{0,.2}{13,6,2}{3}{label:n}{dottype:h}{s3d1362}
-
-\goodnode{3,0}{0,-.2}{12,6,3}{3}{label:}{dottype:}{s3d1263}
-\goodnode{3,0}{0,0}{13,6,3}{3}{label:}{dottype:}{s3d1363}
-\goodnode{3,0}{0,.2}{14,6,3}{3}{label:}{dottype:h}{s3d1463}
-
-\goodnode{3,0}{0,-.1}{14,7,3}{3}{label:}{dottype:h}{s3d1473}
-\goodnode{3,0}{0,.1}{15,7,3}{3}{label:}{dottype:h}{s3d1573}
-
-
-
-
-\goodnode{3,0}{0,-.3}{8,4,2}{4}{label:}{dottype:s}{s4d842}
-\goodnode{3,0}{0,-.1}{9,4,2}{4}{label:}{dottype:s}{s4d942}
-\goodnode{3,0}{0,.1}{10,4,2}{4}{label:}{dottype:s}{s4d1042}
-\goodnode{3,0}{0,.3}{11,4,2}{4}{label:}{dottype:gs}{s4d1142}
-
-
-
-\goodnode{3,0}{0,-.2}{10,5,2}{4}{label:}{dottype:s}{s4d1052}
-\goodnode{3,0}{0,0}{11,5,2}{4}{label:}{dottype:s}{s4d1152}
-\goodnode{3,0}{0,.2}{12,5,2}{4}{label:}{dottype:gs}{s4d1252}
-
-\goodnode{3,0}{0,0}{12,6,2}{4}{label:}{dottype:hs}{s4d1262}
-\goodnode{3,0}{0,.2}{13,6,2}{4}{label:n}{dottype:gs}{s4d1362}
-
-\goodnode{3,0}{0,-.2}{12,6,3}{4}{label:}{dottype:s}{s4d1263}
-\goodnode{3,0}{0,0}{13,6,3}{4}{label:}{dottype:s}{s4d1363}
-\goodnode{3,0}{0,.2}{14,6,3}{4}{label:}{dottype:gs}{s4d1463}
-
-\goodnode{3,0}{0,-.1}{14,7,3}{4}{label:}{dottype:hs}{s4d1473}
-\goodnode{3,0}{0,.1}{15,7,3}{4}{label:}{dottype:gs}{s4d1573}
-
-\differential{d1042}{s3d42}
-\differential{d1152}{s3d52}
-\differential{d1262}{s3d62}
-\differential{d1363}{s3d63}
-\differential{d1473}{s3d73}
-
-\differential{s4d1142}{s42d42}
-\differential{s4d1252}{s42d52}
-\differential{s4d1362}{s42d62}
-\differential{s4d1463}{s42d63}
-\differential{s4d1573}{s42d73}
-
-
-\differential{d20842}{s2d842}
-\differential{d21942}{s2d942}
-\differential{d221042}{s2d1042}
-\differential{d231142}{s2d1142}
-\differential{d231052}{s2d1052}
-\differential{d241152}{s2d1152}
-\differential{d251252}{s2d1252}
-\differential{d261262}{s2d1262}
-\differential{d271362}{s2d1362}
-\differential{d271263}{s2d1263}
-\differential{d281363}{s2d1363}
-\differential{d291463}{s2d1463}
-\differential{d301473}{s2d1473}
-\differential{d311573}{s2d1573}
-
-
-
-%4-line
-\differential{d18842}{s4d842}
-\differential{d19842}{s3d842}
-
-\differential[out=120,in=-60]{d19942}{s4d942}
-\differential{d20942}{s3d942}
-
-\differential[out=120,in=-60]{d201042}{s4d1042}
-\differential{d211042}{s3d1042}
-
-\differential[out=120,in=-60]{d221142}{s3d1142}
-
-\differential[out=120,in=-60]{d211052}{s4d1052}
-\differential{d221052}{s3d1052}
-
-\differential[out=120,in=-60]{d221152}{s4d1152}
-\differential{d231152}{s3d1152}
-
-\differential{d241252}{s3d1252}
-
-\differential[out=120,in=-60]{d241262}{s4d1262}
-\differential{d251262}{s3d1262}
-
-\differential[out=120,in=-60]{d261362}{s3d1362}
-
-\differential[out=120,in=-60]{d251263}{s4d1263}
-\differential{d261263}{s3d1263}
-
-\differential[out=120,in=-60]{d261363}{s4d1363}
-\differential{d271363}{s3d1363}
-
-\differential{d281463}{s3d1463}
-
-\differential[out=120,in=-60]{d281473}{s4d1473}
-\differential{d291473}{s3d1473}
-
-\differential{d301573}{s3d1573}
-
-
-\end{tikzpicture}}
-\caption{The \BKSS\ for $\mathbb{S}^{\algs}_3$.}
-\label{BKSSforS3}
-\end{figure}
-\end{landscape}
-%\eject \pdfpageheight=12in \pdfpagewidth=8.5in
+%%%%%
+%%%%%%\begin{landscape}
+%%%%%\eject \pdfpagewidth=12in \pdfpageheight=8.5in
+%%%%%
+%%%%%%\begin{figure}
+%%%%%{\begin{tikzpicture}[y=1.1cm, x=.5cm]
+%%%%%\xdef\TminusSmax{44}
+%%%%%\xdef\Smax{11}
+%%%%%\xdef\horTickFreq{2}
+%%%%%\xdef\verTickFreq{1}
+%%%%%\xdef\lasttickbuf{.45}
+%%%%%\xdef\tsfz{0.0}%tick separation from zero
+%%%%%
+%%%%%\clip (-1.5,-1) rectangle (\TminusSmax+1,\Smax+.7);
+%%%%%
+%%%%%\MakeShading{0}{}{2}{2}{0}
+%%%%%
+%%%%%\MakeShading{1}{}{4}{4}{1}
+%%%%%\MakeShading{1}{2}{8}{8}{3}
+%%%%%\MakeShading{1}{42}{16}{16}{7}
+%%%%%\MakeShading{1}{842}{32}{32}{15}
+%%%%%\RecordOperation[out=70,in=180+20]{1}{}{2}
+%%%%%\RecordOperation[out=65,in=180+17]{1}{2}{4}
+%%%%%\RecordOperationCutOff[out=70,in=180+17]{1}{42}{8}{.25}
+%%%%%
+%%%%%\MakeShading{2}{}{8}{9}{2}
+%%%%%\MakeShading{2}{3}{16}{18}{5}
+%%%%%\MakeShading{2}{63}{32}{36}{11}
+%%%%%
+%%%%%\MakeShading{2}{2}{17}{19}{4}%{18.5}{27.3}{4}
+%%%%%\MakeShading{2}{42}{35}{39}{8}%{39}{55.5}{8}
+%%%%%\MakeShading{2}{52}{34}{38}{9}
+%%%%%
+%%%%%\RecordOperation[out=57,in=180+13]{2}{}{3}
+%%%%%\RecordOperation[out=70,in=180+15]{2}{3}{6}
+%%%%%\RecordOperation[out=40,in=180+05]{2}{}{2}
+%%%%%\RecordOperation[out=47,in=180+06]{2}{2}{4}
+%%%%%\RecordOperation[out=55,in=180+07]{2}{2}{5}
+%%%%%
+%%%%%\MakeShading{3}{}{16}{20}{3}
+%%%%%\MakeShading{3}{2}{34}{42}{5}%{34.65}{58.3}{5}
+%%%%%\MakeShading{3}{3}{33}{41}{6}
+%%%%%\MakeShading{3}{4}{32}{40}{7}
+%%%%%
+%%%%%\RecordOperation[out=25,in=180+05]{3}{}{2}
+%%%%%\RecordOperation[out=40,in=180+07]{3}{}{3}
+%%%%%\RecordOperation[out=55,in=180+10]{3}{}{4}
+%%%%%
+%%%%%\MakeShading{4}{}{32}{43}{4}
+%%%%%
+%%%%%\RecordOperationDelta[out=55,in=180+25]{0}{1}{}
+%%%%%\RecordOperationDelta[out=35,in=180+5]{1}{2}{}
+%%%%%\RecordOperationDelta[out=25,in=180+2]{2}{3}{}
+%%%%%\RecordOperationDelta[out=13,in=180+2]{3}{4}{}
+%%%%%
+%%%%%\draw[->] (-\tsfz,-\tsfz) -- (\TminusSmax+\lasttickbuf,-\tsfz); %axes
+%%%%%\draw[->] (-\tsfz,-\tsfz) -- (-\tsfz,\Smax+\lasttickbuf);
+%%%%%\foreach \x in {0,\horTickFreq,...,\TminusSmax} %ticks
+%%%%%   \draw (\x,-\tsfz+.1) -- (\x,-\tsfz-.1)
+%%%%%      node[anchor=north] {\x};
+%%%%%\foreach \y in {0,\verTickFreq,...,\Smax}
+%%%%%   \draw (-\tsfz+.1,\y) -- (-\tsfz-.1,\y) 
+%%%%%      node[anchor=east] {\y};
+%%%%%\node[anchor=west] at (-\tsfz+.1,\Smax) {$s$};
+%%%%%%\dashedBrokenLine{0}{-\tsfz/\TminusSmax+\lasttickbuf}
+%%%%%%\dashedBrokenLine{1}{-\tsfz/15.4,20.6/\TminusSmax+\lasttickbuf}
+%%%%%%\dashedBrokenLine{2}{-\tsfz/15.4,20.6/31.4,43.6/\TminusSmax+\lasttickbuf}
+%%%%%%\dashedBrokenLine{3}{-\tsfz/31.4,43.6/\TminusSmax+\lasttickbuf}
+%%%%%%\dashedBrokenLine{4}{-\tsfz/\TminusSmax+\lasttickbuf}
+%%%%%%\dashedBrokenLine{5}{-\tsfz/\TminusSmax+\lasttickbuf}
+%%%%%%\dashedBrokenLine{6}{-\tsfz/\TminusSmax+\lasttickbuf}
+%%%%%%\dashedBrokenLine{7}{-\tsfz/\TminusSmax+\lasttickbuf}
+%%%%%%\dashedBrokenLine{8}{-\tsfz/\TminusSmax+\lasttickbuf}
+%%%%%%\dashedBrokenLine{9}{-\tsfz/\TminusSmax+\lasttickbuf}
+%%%%%%\dashedBrokenLine{10}{-\tsfz/\TminusSmax+\lasttickbuf}
+%%%%%%\node[anchor=south,fill=white,outer sep=4pt,inner sep=2.4pt] at (\TminusSmax-.5,-\tsfz+.1) {$t-s$};
+%%%%%\node[anchor=south] at (\TminusSmax-1,-\tsfz+.1) {$t-s$};
+%%%%%%0-line
+%%%%%\goodnode{2,0}{0,0}{}{}{label:n}{dottype:a}{fundclass}
+%%%%%
+%%%%%%1-line
+%%%%%\goodnode{2,0}{0,0}{2}{}{label:y}{dottype:a}{d2}
+%%%%%\goodnode{2,0}{0,0}{2}{2}{label:n}{dottype:gs}{s2d2}
+%%%%%\goodnode{2,0}{0,0}{2}{4,2}{label:n}{dottype:gs}{s42d2}
+%%%%%\goodnode{2,0}{0,0}{2}{8,4,2}{label:n}{dottype:gs}{s842d2}
+%%%%%
+%%%%%%2-line
+%%%%%\goodnode{2,0}{0,-.1}{4,2}{}{label:y}{dottype:a}{d42}
+%%%%%\goodnode{2,0}{0,.1}{5,2}{}{label:y}{dottype:g}{d52}
+%%%%%\goodnode{2,0}{0,-.1}{4,2}{2}{label:n}{dottype:g}{s2d42}
+%%%%%\goodnode{2,0}{0,.1}{5,2}{2}{label:n}{dottype:g}{s2d52}
+%%%%%\goodnode{2,0}{0,-.1}{4,2}{4,2}{label:n}{dottype:g}{s42d42}
+%%%%%\goodnode{2,0}{0,.1}{5,2}{4,2}{label:n}{dottype:g}{s42d52}
+%%%%%\goodnode{2,0}{0,-.1}{4,2}{5,2}{label:n}{dottype:gs}{s52d42}
+%%%%%\goodnode{2,0}{0,.1}{5,2}{5,2}{label:n}{dottype:gs}{s52d52}
+%%%%%\goodnode{2,0}{0,-.1}{4,2}{3}{label:n}{dottype:s}{s3d42}
+%%%%%\goodnode{2,0}{0,.1}{5,2}{3}{label:n}{dottype:hs}{s3d52}
+%%%%%\goodnode{2,0}{0,-.1}{4,2}{6,3}{label:n}{dottype:s}{s63d42}
+%%%%%\goodnode{2,0}{0,.1}{5,2}{6,3}{label:n}{dottype:hs}{s63d52}
+%%%%%
+%%%%%%3-line
+%%%%%\goodnode{2,0}{0,-.2}{8,4,2}{}{label:y}{dottype:a}{d842}
+%%%%%\goodnode{2,0}{0,0}{9,4,2}{}{label:y}{dottype:}{d942}
+%%%%%\goodnode{2,0}{0,.2}{10,4,2}{}{label:y}{dottype:g}{d1042}
+%%%%%\goodnode{2,0}{0,-.1}{10,5,2}{}{label:y}{dottype:h}{d1052}
+%%%%%\goodnode{2,0}{0,.1}{11,5,2}{}{label:y}{dottype:g}{d1152}
+%%%%%\goodnode{2,0}{0,-.2}{8,4,2}{2}{label:n}{dottype:g}{s2d842}
+%%%%%\goodnode{2,0}{0,0}{9,4,2}{2}{label:n}{dottype:g}{s2d942}
+%%%%%\goodnode{2,0}{0,.2}{10,4,2}{2}{label:n}{dottype:g}{s2d1042}
+%%%%%\goodnode{2,0}{0,-.1}{10,5,2}{2}{label:n}{dottype:g}{s2d1052}
+%%%%%\goodnode{2,0}{0,.1}{11,5,2}{2}{label:n}{dottype:g}{s2d1152}
+%%%%%\goodnode{2,0}{0,-.2}{8,4,2}{3}{label:n}{dottype:}{s3d842}
+%%%%%\goodnode{2,0}{0,0}{9,4,2}{3}{label:n}{dottype:}{s3d942}
+%%%%%\goodnode{2,0}{0,.2}{10,4,2}{3}{label:n}{dottype:h}{s3d1042}
+%%%%%\goodnode{2,0}{0,-.1}{10,5,2}{3}{label:n}{dottype:h}{s3d1052}
+%%%%%\goodnode{2,0}{0,.1}{11,5,2}{3}{label:n}{dottype:h}{s3d1152}
+%%%%%\goodnode{2,0}{0,-.2}{8,4,2}{4}{label:n}{dottype:s}{s4d842}
+%%%%%\goodnode{2,0}{0,0}{9,4,2}{4}{label:n}{dottype:s}{s4d942}
+%%%%%\goodnode{2,0}{0,.2}{10,4,2}{4}{label:n}{dottype:gs}{s4d1042}
+%%%%%\goodnode{2,0}{0,-.1}{10,5,2}{4}{label:n}{dottype:hs}{s4d1052}
+%%%%%\goodnode{2,0}{0,.1}{11,5,2}{4}{label:n}{dottype:gs}{s4d1152}
+%%%%%
+%%%%%%4-line
+%%%%%\goodnode{2,0}{0,-.3}{16,8,4,2}{}{label:y}{dottype:a}{d16842}
+%%%%%\goodnode{2,0}{0,-.1}{17,8,4,2}{}{label:n}{dottype:}{d17842}
+%%%%%\goodnode{2,0}{0,.1}{18,8,4,2}{}{label:n}{dottype:}{d18842}
+%%%%%\goodnode{2,0}{0,.3}{19,8,4,2}{}{label:n}{dottype:g}{d19842}
+%%%%%\goodnode{2,0}{0,-.2}{18,9,4,2}{}{label:y}{dottype:}{d18942}
+%%%%%\goodnode{2,0}{0,0}{19,9,4,2}{}{label:n}{dottype:}{d19942}
+%%%%%\goodnode{2,0}{0,.2}{20,9,4,2}{}{label:n}{dottype:g}{d20942}
+%%%%%\goodnode{2,0}{0,0}{20,10,4,2}{}{label:y}{dottype:h}{d201042}
+%%%%%\goodnode{2,0}{0,.2}{21,10,4,2}{}{label:n}{dottype:g}{d211042}
+%%%%%\goodnode{2,0}{0,-.2}{20,10,5,2}{}{label:y}{dottype:h}{d201052}
+%%%%%\goodnode{2,0}{0,0}{21,10,5,2}{}{label:n}{dottype:h}{d211052}
+%%%%%\goodnode{2,0}{0,.2}{22,10,5,2}{}{label:n}{dottype:g}{d221052}
+%%%%%\goodnode{2,0}{0,-.1}{22,11,5,2}{}{label:y}{dottype:h}{d221152}
+%%%%%\goodnode{2,0}{0,.1}{23,11,5,2}{}{label:n}{dottype:g}{d231152}
+%%%%%
+%%%%%\differential{d942}{s3d42}
+%%%%%\differential{d1052}{s3d52}
+%%%%%\differential{d17842}{s4d842}
+%%%%%\differential{d18842}{s3d842}
+%%%%%\bendydifferential{d18942}{s4d942}%\differential[out=120,in=-60]
+%%%%%\differential{d19942}{s3d942}
+%%%%%\differential{d201042}{s3d1042}
+%%%%%\bendydifferential{d201052}{s4d1052}%\differential[out=120,in=-60]
+%%%%%\differential{d211052}{s3d1052}
+%%%%%\differential{d221152}{s3d1152}
+%%%%%
+%%%%%%d1
+%%%%%\differential{d52}{s2d2}
+%%%%%\differential{d1042}{s2d42}
+%%%%%\differential{d1152}{s2d52}
+%%%%%\differential{s4d1042}{s42d42}
+%%%%%\differential{s4d1152}{s42d52}
+%%%%%\differential{d231152}{s2d1152}
+%%%%%\differential{d221052}{s2d1052}
+%%%%%\differential{d211042}{s2d1042}
+%%%%%\differential{d20942}{s2d942}
+%%%%%\differential{d19842}{s2d842}
+%%%%%
+%%%%%\end{tikzpicture}}
+%%%%%%\caption{The \BKSS\ for $\mathbb{S}^{\algs}_2$.}
+%%%%%%\label{BKSSforS2}
+%%%%%%\end{figure}
+%%%%%%
+%%%%%%
+%%%%%\vfpb
+%%%%%%
+%%%%%\begin{figure}
+%%%%%\fbox{\begin{minipage}{7.38in}
+%%%%%\caption{The \BKSS\ for $\mathbb{S}^{\algs}_3$.}
+%%%%%\label{BKSSforS3}
+%%%%%{\begin{tikzpicture}[y=.8cm, x=.3cm]
+%%%%%\xdef\TminusSmax{60}
+%%%%%\xdef\Smax{11}
+%%%%%\xdef\horTickFreq{2}
+%%%%%\xdef\verTickFreq{1}
+%%%%%\xdef\lasttickbuf{.45}
+%%%%%\xdef\tsfz{0.0}%tick separation from zero
+%%%%%
+%%%%%\clip (-1.7,-1) rectangle (\TminusSmax+1,\Smax+.6);
+%%%%%
+%%%%%\MakeShading{0}{}{3}{3}{0}
+%%%%%
+%%%%%\MakeShading{1}{}{5}{6}{1}
+%%%%%\MakeShading{1}{2}{10}{12}{3}
+%%%%%\MakeShading{1}{42}{20}{24}{7}
+%%%%%\MakeShading{1}{842}{40}{48}{15}
+%%%%%\RecordOperation[out=75,in=180+20]{1}{}{2}
+%%%%%\RecordOperation[out=70,in=180+20]{1}{2}{4}
+%%%%%\RecordOperationCutOff[out=70,in=180+23]{1}{42}{8}{.25}
+%%%%%
+%%%%%\MakeShading{2}{}{9}{13}{2}
+%%%%%\MakeShading{2}{3}{18}{26}{5}
+%%%%%\MakeShading{2}{63}{36}{52}{11}
+%%%%%
+%%%%%\MakeShading{2}{2}{19}{27}{4}%{18.5}{27.3}{4}
+%%%%%\MakeShading{2}{42}{39}{55}{8}%{39}{55.5}{8}
+%%%%%\MakeShading{2}{52}{38}{54}{9}
+%%%%%
+%%%%%\RecordOperation[out=80,in=180+20]{2}{}{3}
+%%%%%\RecordOperation[out=75,in=180+23]{2}{3}{6}
+%%%%%\RecordOperation[out=65,in=180+05]{2}{}{2}
+%%%%%\RecordOperation[out=70,in=180+00]{2}{2}{4}
+%%%%%\RecordOperation[out=80,in=180+07]{2}{2}{5}
+%%%%%
+%%%%%\MakeShading{3}{}{17}{28}{3}
+%%%%%\MakeShading{3}{2}{36}{58}{5}%{34.65}{58.3}{5}
+%%%%%\MakeShading{3}{3}{35}{57}{6}
+%%%%%\MakeShading{3}{4}{34}{56}{7}
+%%%%%
+%%%%%\RecordOperation[out=50,in=180+05]{3}{}{2}
+%%%%%\RecordOperation[out=65,in=180+15]{3}{}{3}
+%%%%%\RecordOperation[out=75,in=180+33]{3}{}{4}
+%%%%%
+%%%%%\MakeShading{4}{}{33}{59}{4}
+%%%%%
+%%%%%%\MakeShading{4}{5}{66}{66}{9}
+%%%%%%\MakeShading{4}{4}{67}{67}{8}
+%%%%%%\MakeShading{4}{3}{68}{68}{7}
+%%%%%%\MakeShading{4}{2}{69}{69}{6}
+%%%%%%
+%%%%%%\RecordOperationCutOff[out=70,in=180+23]{4}{}{2}{.25}
+%%%%%%\RecordOperationCutOff[out=70,in=180+23]{4}{}{3}{.25}
+%%%%%%\RecordOperationCutOff[out=70,in=180+23]{4}{}{4}{.25}
+%%%%%%\RecordOperationCutOff[out=70,in=180+23]{4}{}{5}{.25}
+%%%%%
+%%%%%\RecordOperationDelta[out=55,in=180+25]{0}{1}{}
+%%%%%\RecordOperationDelta[out=55,in=180+15]{1}{2}{}
+%%%%%\RecordOperationDelta[out=45,in=180+7]{2}{3}{}
+%%%%%\RecordOperationDelta[out=40,in=180+2]{3}{4}{}
+%%%%%
+%%%%%\draw[->] (-\tsfz,-\tsfz) -- (\TminusSmax+\lasttickbuf,-\tsfz);%axes
+%%%%%\draw[->] (-\tsfz,-\tsfz) -- (-\tsfz,\Smax+\lasttickbuf);
+%%%%%\foreach \x in {0,\horTickFreq,...,\TminusSmax}%ticks
+%%%%%   \draw (\x,-\tsfz+.1) -- (\x,-\tsfz-.1)
+%%%%%      node[anchor=north] {\x};
+%%%%%\foreach \y in {0,\verTickFreq,...,\Smax}
+%%%%%   \draw (-\tsfz+.1,\y) -- (-\tsfz-.1,\y) 
+%%%%%      node[anchor=east] {\y};
+%%%%%\node[anchor=west] at (-\tsfz+.1,\Smax) {$s$};
+%%%%%%%\dashedBrokenLine{0}{-\tsfz/4.4,5.6/\TminusSmax+\lasttickbuf-2.5}
+%%%%%%\dashedBrokenLine{1}{-\tsfz/8.4,13.6/\TminusSmax+\lasttickbuf}
+%%%%%%%\dashedBrokenLine{2}{-\tsfz/16.4,27.6/32.4,58.6/\TminusSmax+\lasttickbuf}
+%%%%%%%\dashedBrokenLine{3}{-\tsfz/32.4,58.6/\TminusSmax+\lasttickbuf}
+%%%%%%\dashedBrokenLine{0}{-\tsfz/\TminusSmax+\lasttickbuf}
+%%%%%%%\dashedBrokenLine{1}{-\tsfz/\TminusSmax+\lasttickbuf}
+%%%%%%\dashedBrokenLine{2}{-\tsfz/47,48/\TminusSmax+\lasttickbuf}
+%%%%%%\dashedBrokenLine{3}{-\tsfz/47,48/\TminusSmax+\lasttickbuf}
+%%%%%%\dashedBrokenLine{4}{-\tsfz/\TminusSmax+\lasttickbuf}
+%%%%%%\dashedBrokenLine{5}{-\tsfz/\TminusSmax+\lasttickbuf}
+%%%%%%\dashedBrokenLine{6}{-\tsfz/\TminusSmax+\lasttickbuf}
+%%%%%%\dashedBrokenLine{7}{-\tsfz/\TminusSmax+\lasttickbuf}
+%%%%%%\dashedBrokenLine{8}{-\tsfz/\TminusSmax+\lasttickbuf}
+%%%%%%\dashedBrokenLine{9}{-\tsfz/\TminusSmax+\lasttickbuf}
+%%%%%%\dashedBrokenLine{10}{-\tsfz/\TminusSmax+\lasttickbuf}
+%%%%%%\node[anchor=south,fill=white,outer sep=4pt,inner sep=2.4pt] at (\TminusSmax-.5,-\tsfz+.1) {$t-s$};
+%%%%%\node[anchor=south] at (\TminusSmax-1,-\tsfz+.1) {$t-s$};
+%%%%%
+%%%%%%0-line
+%%%%%\goodnode{3,0}{0,0}{}{}{label:n}{dottype:a}{fundclass}
+%%%%%
+%%%%%%1-line
+%%%%%\goodnode{3,0}{0,-.1}{2}{}{label:y}{dottype:a}{d2}
+%%%%%\goodnode{3,0}{0,.1}{3}{}{label:y}{dottype:a}{d3}
+%%%%%
+%%%%%%2-line
+%%%%%\goodnode{3,0}{0,-.2}{4,2}{}{label:y}{dottype:a}{d42}
+%%%%%\goodnode{3,0}{0,0}{5,2}{}{label:y}{dottype:a}{d52}
+%%%%%\goodnode{3,0}{0,.2}{6,2}{}{label:y}{dottype:g}{d62}
+%%%%%
+%%%%%\goodnode{3,0}{0,-.1}{6,3}{}{label:y}{dottype:a}{d63}
+%%%%%\goodnode{3,0}{0,.1}{7,3}{}{label:y}{dottype:g}{d73}
+%%%%%
+%%%%%%3-line
+%%%%%\goodnode{3,0}{0,-.3}{8,4,2}{}{label:y}{dottype:a}{d842}%
+%%%%%\goodnode{3,0}{0,-.1}{9,4,2}{}{label:}{dottype:a}{d942}
+%%%%%\goodnode{3,0}{0,.1}{10,4,2}{}{label:}{dottype:}{d1042}
+%%%%%\goodnode{3,0}{0,.3}{11,4,2}{}{label:}{dottype:g}{d1142}
+%%%%%
+%%%%%\goodnode{3,0}{0,-.2}{10,5,2}{}{label:y}{dottype:a}{d1052}%
+%%%%%\goodnode{3,0}{0,0}{11,5,2}{}{label:}{dottype:}{d1152}
+%%%%%\goodnode{3,0}{0,.2}{12,5,2}{}{label:}{dottype:g}{d1252}
+%%%%%
+%%%%%\goodnode{3,0}{0,0}{12,6,2}{}{label:y}{dottype:h}{d1262}%
+%%%%%\goodnode{3,0}{0,.2}{13,6,2}{}{label:n}{dottype:g}{d1362}
+%%%%%
+%%%%%\goodnode{3,0}{0,-.2}{12,6,3}{}{label:y}{dottype:a}{d1263}%
+%%%%%\goodnode{3,0}{0,0}{13,6,3}{}{label:}{dottype:}{d1363}
+%%%%%\goodnode{3,0}{0,.2}{14,6,3}{}{label:}{dottype:g}{d1463}
+%%%%%
+%%%%%\goodnode{3,0}{0,-.1}{14,7,3}{}{label:y}{dottype:h}{d1473}%
+%%%%%\goodnode{3,0}{0,.1}{15,7,3}{}{label:}{dottype:g}{d1573}
+%%%%%
+%%%%%%4-line
+%%%%%\goodnode{3,0}{0,-.4}{16,8,4,2}{}{label:y}{dottype:a}{d16842}%
+%%%%%\goodnode{3,0}{0,-.2}{17,8,4,2}{}{label:}{dottype:a}{d17842}%
+%%%%%\goodnode{3,0}{0,0}{18,8,4,2}{}{label:}{dottype:}{d18842}%
+%%%%%\goodnode{3,0}{0,.2}{19,8,4,2}{}{label:}{dottype:}{d19842}%
+%%%%%\goodnode{3,0}{0,.4}{20,8,4,2}{}{label:}{dottype:g}{d20842}%
+%%%%%
+%%%%%\goodnode{3,0}{0,-.3}{18,9,4,2}{}{label:y}{dottype:a}{d18942}
+%%%%%\goodnode{3,0}{0,-.1}{19,9,4,2}{}{label:}{dottype:}{d19942}
+%%%%%\goodnode{3,0}{0,.1}{20,9,4,2}{}{label:}{dottype:}{d20942}
+%%%%%\goodnode{3,0}{0,.3}{21,9,4,2}{}{label:}{dottype:g}{d21942}
+%%%%%
+%%%%%\goodnode{3,0}{0,-.1}{20,10,4,2}{}{label:y}{dottype:}{d201042}
+%%%%%\goodnode{3,0}{0,.1}{21,10,4,2}{}{label:n}{dottype:}{d211042}
+%%%%%\goodnode{3,0}{0,.3}{22,10,4,2}{}{label:n}{dottype:g}{d221042}
+%%%%%
+%%%%%\goodnode{3,0}{0,-.25}{22,11,4,2}{}{label:y}{dottype:h}{d221142}
+%%%%%\goodnode{3,0}{0,-.05}{23,11,4,2}{}{label:n}{dottype:g}{d231142}
+%%%%%
+%%%%%\goodnode{3,0}{0,-.3}{20,10,5,2}{}{label:y}{dottype:a}{d201052}
+%%%%%\goodnode{3,0}{0,-.1}{21,10,5,2}{}{label:n}{dottype:}{d211052}
+%%%%%\goodnode{3,0}{0,.1}{22,10,5,2}{}{label:n}{dottype:}{d221052}
+%%%%%\goodnode{3,0}{0,.3}{23,10,5,2}{}{label:n}{dottype:g}{d231052}
+%%%%%
+%%%%%\goodnode{3,0}{0,-.4}{22,11,5,2}{}{label:y}{dottype:}{d221152}
+%%%%%\goodnode{3,0}{0,-.2}{23,11,5,2}{}{label:}{dottype:}{d231152}
+%%%%%\goodnode{3,0}{0,0}{24,11,5,2}{}{label:}{dottype:g}{d241152}
+%%%%%
+%%%%%\goodnode{3,0}{0,-.1}{24,12,5,2}{}{label:y}{dottype:h}{d241252}
+%%%%%\goodnode{3,0}{0,.1}{25,12,5,2}{}{label:}{dottype:g}{d251252}
+%%%%%
+%%%%%\goodnode{3,0}{0,-.2}{24,12,6,2}{}{label:y}{dottype:h}{d241262}
+%%%%%\goodnode{3,0}{0,0}{25,12,6,2}{}{label:}{dottype:h}{d251262}
+%%%%%\goodnode{3,0}{0,.2}{26,12,6,2}{}{label:}{dottype:g}{d261262}
+%%%%%
+%%%%%\goodnode{3,0}{0,-.25}{26,13,6,2}{}{label:y}{dottype:h}{d261362}
+%%%%%\goodnode{3,0}{0,-.05}{27,13,6,2}{}{label:n}{dottype:g}{d271362}
+%%%%%
+%%%%%\goodnode{3,0}{0,-.3}{24,12,6,3}{}{label:y}{dottype:a}{d241263}
+%%%%%\goodnode{3,0}{0,-.1}{25,12,6,3}{}{label:}{dottype:}{d251263}
+%%%%%\goodnode{3,0}{0,.1}{26,12,6,3}{}{label:}{dottype:}{d261263}
+%%%%%\goodnode{3,0}{0,.3}{27,12,6,3}{}{label:}{dottype:g}{d271263}
+%%%%%
+%%%%%\goodnode{3,0}{0,-.4}{26,13,6,3}{}{label:y}{dottype:}{d261363}
+%%%%%\goodnode{3,0}{0,-.2}{27,13,6,3}{}{label:}{dottype:}{d271363}
+%%%%%\goodnode{3,0}{0,0}{28,13,6,3}{}{label:}{dottype:g}{d281363}
+%%%%%
+%%%%%\goodnode{3,0}{0,-.1}{28,14,6,3}{}{label:y}{dottype:h}{d281463}
+%%%%%\goodnode{3,0}{0,.1}{29,14,6,3}{}{label:}{dottype:g}{d291463}
+%%%%%
+%%%%%\goodnode{3,0}{0,-.2}{28,14,7,3}{}{label:y}{dottype:h}{d281473}
+%%%%%\goodnode{3,0}{0,0}{29,14,7,3}{}{label:}{dottype:h}{d291473}
+%%%%%\goodnode{3,0}{0,.2}{30,14,7,3}{}{label:}{dottype:g}{d301473}
+%%%%%
+%%%%%\goodnode{3,0}{0,-.1}{30,15,7,3}{}{label:y}{dottype:h}{d301573}
+%%%%%\goodnode{3,0}{0,.1}{31,15,7,3}{}{label:}{dottype:g}{d311573}
+%%%%%
+%%%%%
+%%%%%
+%%%%%
+%%%%%%%1-line
+%%%%%\goodnode{3,0}{0,-.1}{2}{2}{label:}{dottype:gs}{s2d2}
+%%%%%\goodnode{3,0}{0,.1}{3}{2}{label:}{dottype:gs}{s2d3}
+%%%%%\goodnode{3,0}{0,-.1}{2}{4,2}{label:}{dottype:gs}{s42d2}
+%%%%%\goodnode{3,0}{0,.1}{3}{4,2}{label:}{dottype:gs}{s42d3}
+%%%%%\goodnode{3,0}{0,-.1}{2}{8,4,2}{label:}{dottype:gs}{s842d2}
+%%%%%\goodnode{3,0}{0,.1}{3}{8,4,2}{label:}{dottype:gs}{s842d3}
+%%%%%
+%%%%%\differential{d62}{s2d2}
+%%%%%\differential{d73}{s2d3}
+%%%%%%
+%%%%%%%2-line
+%%%%%\goodnode{3,0}{0,-.2}{4,2}{2}{label:}{dottype:g}{s2d42}
+%%%%%\goodnode{3,0}{0,0}{5,2}{2}{label:}{dottype:g}{s2d52}
+%%%%%\goodnode{3,0}{0,.2}{6,2}{2}{label:}{dottype:g}{s2d62}
+%%%%%\goodnode{3,0}{0,-.1}{6,3}{2}{label:}{dottype:g}{s2d63}
+%%%%%\goodnode{3,0}{0,.1}{7,3}{2}{label:}{dottype:g}{s2d73}
+%%%%%
+%%%%%\differential{d1142}{s2d42}
+%%%%%\differential{d1252}{s2d52}
+%%%%%\differential{d1362}{s2d62}
+%%%%%\differential{d1463}{s2d63}
+%%%%%\differential{d1573}{s2d73}
+%%%%%
+%%%%%\goodnode{3,0}{0,-.2}{4,2}{4,2}{label:}{dottype:g}{s42d42}
+%%%%%\goodnode{3,0}{0,0}{5,2}{4,2}{label:}{dottype:g}{s42d52}
+%%%%%\goodnode{3,0}{0,.2}{6,2}{4,2}{label:}{dottype:g}{s42d62}
+%%%%%\goodnode{3,0}{0,-.1}{6,3}{4,2}{label:}{dottype:g}{s42d63}
+%%%%%\goodnode{3,0}{0,.1}{7,3}{4,2}{label:}{dottype:g}{s42d73}
+%%%%%
+%%%%%\goodnode{3,0}{0,-.2}{4,2}{5,2}{label:}{dottype:gs}{s52d42}
+%%%%%\goodnode{3,0}{0,0}{5,2}{5,2}{label:}{dottype:gs}{s52d52}
+%%%%%\goodnode{3,0}{0,.2}{6,2}{5,2}{label:}{dottype:gs}{s52d62}
+%%%%%\goodnode{3,0}{0,-.1}{6,3}{5,2}{label:}{dottype:gs}{s52d63}
+%%%%%\goodnode{3,0}{0,.1}{7,3}{5,2}{label:}{dottype:gs}{s52d73}
+%%%%%
+%%%%%
+%%%%%\goodnode{3,0}{0,-.2}{4,2}{3}{label:}{dottype:s}{s3d42}
+%%%%%\goodnode{3,0}{0,0}{5,2}{3}{label:}{dottype:s}{s3d52}
+%%%%%\goodnode{3,0}{0,.2}{6,2}{3}{label:}{dottype:hs}{s3d62}
+%%%%%\goodnode{3,0}{0,-.1}{6,3}{3}{label:}{dottype:s}{s3d63}
+%%%%%\goodnode{3,0}{0,.1}{7,3}{3}{label:}{dottype:hs}{s3d73}
+%%%%%
+%%%%%\goodnode{3,0}{0,-.2}{4,2}{6,3}{label:}{dottype:s}{s63d42}
+%%%%%\goodnode{3,0}{0,0}{5,2}{6,3}{label:}{dottype:s}{s63d52}
+%%%%%\goodnode{3,0}{0,.2}{6,2}{6,3}{label:}{dottype:hs}{s63d62}
+%%%%%\goodnode{3,0}{0,-.1}{6,3}{6,3}{label:}{dottype:s}{s63d63}
+%%%%%\goodnode{3,0}{0,.1}{7,3}{6,3}{label:}{dottype:hs}{s63d73}
+%%%%%
+%%%%%%
+%%%%%%%3-line
+%%%%%\goodnode{3,0}{0,-.3}{8,4,2}{2}{label:}{dottype:g}{s2d842}
+%%%%%\goodnode{3,0}{0,-.1}{9,4,2}{2}{label:}{dottype:g}{s2d942}
+%%%%%\goodnode{3,0}{0,.1}{10,4,2}{2}{label:}{dottype:g}{s2d1042}
+%%%%%\goodnode{3,0}{0,.3}{11,4,2}{2}{label:}{dottype:g}{s2d1142}
+%%%%%
+%%%%%\goodnode{3,0}{0,-.2}{10,5,2}{2}{label:}{dottype:g}{s2d1052}
+%%%%%\goodnode{3,0}{0,0}{11,5,2}{2}{label:}{dottype:g}{s2d1152}
+%%%%%\goodnode{3,0}{0,.2}{12,5,2}{2}{label:}{dottype:g}{s2d1252}
+%%%%%
+%%%%%\goodnode{3,0}{0,0}{12,6,2}{2}{label:}{dottype:g}{s2d1262}
+%%%%%\goodnode{3,0}{0,.2}{13,6,2}{2}{label:n}{dottype:g}{s2d1362}
+%%%%%
+%%%%%\goodnode{3,0}{0,-.2}{12,6,3}{2}{label:}{dottype:g}{s2d1263}
+%%%%%\goodnode{3,0}{0,0}{13,6,3}{2}{label:}{dottype:g}{s2d1363}
+%%%%%\goodnode{3,0}{0,.2}{14,6,3}{2}{label:}{dottype:g}{s2d1463}
+%%%%%
+%%%%%\goodnode{3,0}{0,-.1}{14,7,3}{2}{label:}{dottype:g}{s2d1473}
+%%%%%\goodnode{3,0}{0,.1}{15,7,3}{2}{label:}{dottype:g}{s2d1573}
+%%%%%
+%%%%%
+%%%%%\goodnode{3,0}{0,-.3}{8,4,2}{3}{label:}{dottype:}{s3d842}
+%%%%%\goodnode{3,0}{0,-.1}{9,4,2}{3}{label:}{dottype:}{s3d942}
+%%%%%\goodnode{3,0}{0,.1}{10,4,2}{3}{label:}{dottype:}{s3d1042}
+%%%%%\goodnode{3,0}{0,.3}{11,4,2}{3}{label:}{dottype:h}{s3d1142}
+%%%%%
+%%%%%\goodnode{3,0}{0,-.2}{10,5,2}{3}{label:}{dottype:}{s3d1052}
+%%%%%\goodnode{3,0}{0,0}{11,5,2}{3}{label:}{dottype:}{s3d1152}
+%%%%%\goodnode{3,0}{0,.2}{12,5,2}{3}{label:}{dottype:h}{s3d1252}
+%%%%%
+%%%%%\goodnode{3,0}{0,0}{12,6,2}{3}{label:}{dottype:h}{s3d1262}
+%%%%%\goodnode{3,0}{0,.2}{13,6,2}{3}{label:n}{dottype:h}{s3d1362}
+%%%%%
+%%%%%\goodnode{3,0}{0,-.2}{12,6,3}{3}{label:}{dottype:}{s3d1263}
+%%%%%\goodnode{3,0}{0,0}{13,6,3}{3}{label:}{dottype:}{s3d1363}
+%%%%%\goodnode{3,0}{0,.2}{14,6,3}{3}{label:}{dottype:h}{s3d1463}
+%%%%%
+%%%%%\goodnode{3,0}{0,-.1}{14,7,3}{3}{label:}{dottype:h}{s3d1473}
+%%%%%\goodnode{3,0}{0,.1}{15,7,3}{3}{label:}{dottype:h}{s3d1573}
+%%%%%
+%%%%%
+%%%%%
+%%%%%
+%%%%%\goodnode{3,0}{0,-.3}{8,4,2}{4}{label:}{dottype:s}{s4d842}
+%%%%%\goodnode{3,0}{0,-.1}{9,4,2}{4}{label:}{dottype:s}{s4d942}
+%%%%%\goodnode{3,0}{0,.1}{10,4,2}{4}{label:}{dottype:s}{s4d1042}
+%%%%%\goodnode{3,0}{0,.3}{11,4,2}{4}{label:}{dottype:gs}{s4d1142}
+%%%%%
+%%%%%
+%%%%%
+%%%%%\goodnode{3,0}{0,-.2}{10,5,2}{4}{label:}{dottype:s}{s4d1052}
+%%%%%\goodnode{3,0}{0,0}{11,5,2}{4}{label:}{dottype:s}{s4d1152}
+%%%%%\goodnode{3,0}{0,.2}{12,5,2}{4}{label:}{dottype:gs}{s4d1252}
+%%%%%
+%%%%%\goodnode{3,0}{0,0}{12,6,2}{4}{label:}{dottype:hs}{s4d1262}
+%%%%%\goodnode{3,0}{0,.2}{13,6,2}{4}{label:n}{dottype:gs}{s4d1362}
+%%%%%
+%%%%%\goodnode{3,0}{0,-.2}{12,6,3}{4}{label:}{dottype:s}{s4d1263}
+%%%%%\goodnode{3,0}{0,0}{13,6,3}{4}{label:}{dottype:s}{s4d1363}
+%%%%%\goodnode{3,0}{0,.2}{14,6,3}{4}{label:}{dottype:gs}{s4d1463}
+%%%%%
+%%%%%\goodnode{3,0}{0,-.1}{14,7,3}{4}{label:}{dottype:hs}{s4d1473}
+%%%%%\goodnode{3,0}{0,.1}{15,7,3}{4}{label:}{dottype:gs}{s4d1573}
+%%%%%
+%%%%%\differential{d1042}{s3d42}
+%%%%%\differential{d1152}{s3d52}
+%%%%%\differential{d1262}{s3d62}
+%%%%%\differential{d1363}{s3d63}
+%%%%%\differential{d1473}{s3d73}
+%%%%%
+%%%%%\differential{s4d1142}{s42d42}
+%%%%%\differential{s4d1252}{s42d52}
+%%%%%\differential{s4d1362}{s42d62}
+%%%%%\differential{s4d1463}{s42d63}
+%%%%%\differential{s4d1573}{s42d73}
+%%%%%
+%%%%%
+%%%%%\differential{d20842}{s2d842}
+%%%%%\differential{d21942}{s2d942}
+%%%%%\differential{d221042}{s2d1042}
+%%%%%\differential{d231142}{s2d1142}
+%%%%%\differential{d231052}{s2d1052}
+%%%%%\differential{d241152}{s2d1152}
+%%%%%\differential{d251252}{s2d1252}
+%%%%%\differential{d261262}{s2d1262}
+%%%%%\differential{d271362}{s2d1362}
+%%%%%\differential{d271263}{s2d1263}
+%%%%%\differential{d281363}{s2d1363}
+%%%%%\differential{d291463}{s2d1463}
+%%%%%\differential{d301473}{s2d1473}
+%%%%%\differential{d311573}{s2d1573}
+%%%%%
+%%%%%
+%%%%%
+%%%%%%4-line
+%%%%%\differential{d18842}{s4d842}
+%%%%%\differential{d19842}{s3d842}
+%%%%%
+%%%%%%\differential[out=107,in=-77]{d19942}{s4d942}
+%%%%%\bendydifferential{d19942}{s4d942}
+%%%%%\differential{d20942}{s3d942}
+%%%%%
+%%%%%\bendydifferential{d201042}{s4d1042}%\differential[out=107,in=-77]
+%%%%%\differential{d211042}{s3d1042}
+%%%%%
+%%%%%\doublebendydifferential{d221142}{s3d1142}%\differential[out=107,in=-77]
+%%%%%
+%%%%%
+%%%%%\bendydifferential{d211052}{s4d1052}
+%%%%%\differential{d221052}{s3d1052}
+%%%%%
+%%%%%\bendydifferential{d221152}{s4d1152}
+%%%%%\differential{d231152}{s3d1152}
+%%%%%
+%%%%%\differential{d241252}{s3d1252}
+%%%%%
+%%%%%\bendydifferential{d241262}{s4d1262}
+%%%%%\differential{d251262}{s3d1262}
+%%%%%
+%%%%%\doublebendydifferential{d261362}{s3d1362}
+%%%%%
+%%%%%\bendydifferential{d251263}{s4d1263}
+%%%%%\differential{d261263}{s3d1263}
+%%%%%
+%%%%%\bendydifferential{d261363}{s4d1363}
+%%%%%\differential{d271363}{s3d1363}
+%%%%%
+%%%%%\differential{d281463}{s3d1463}
+%%%%%
+%%%%%\bendydifferential{d281473}{s4d1473}
+%%%%%\differential{d291473}{s3d1473}
+%%%%%
+%%%%%\differential{d301573}{s3d1573}
+%%%%%%[out=120,in=-60]
+%%%%%
+%%%%%\end{tikzpicture}}
+%%%%%\end{minipage}}
+%%%%%%\caption{The \BKSS\ for $\mathbb{S}^{\algs}_3$.}
+%%%%%%\label{BKSSforS3}
+%%%%%\end{figure}
+%%%%%%\end{landscape}
+%%%%%\eject \pdfpageheight=12in \pdfpagewidth=8.5in
 
 \begin{The Bousfield-Kan spectral sequence for a sphere}
 \SectionOrChapter{The Bousfield-Kan spectral sequence for $\mathbb{S}^{\algs}_T$}
