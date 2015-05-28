@@ -344,9 +344,12 @@ url=false,doi=false,isbn=false,eprint=false]{biblatex}%
 \newcommand{\LieSteen}{\calA}
 \newcommand{\aDT}{\mathrm{adm}_+(\Delta,T)}
 \newcommand{\aDTnoplus}{\mathrm{adm}(\Delta,T)}
+\newcommand{\aDTSnoplus}{\mathrm{adm}(\Delta,T-S)}
 \newcommand{\aDTEtwo}{\mathrm{adm}_{\!\smash{E_2}\!}(\Delta,T)}
+\newcommand{\aDTSEtwo}{\mathrm{adm}_{\!\smash{E_2}\!}(\Delta,S,T)}
 \newcommand{\calgEtwo}{\calg_{\smash{E_2}}}
 \newcommand{\aDTe}{\mathrm{adm}_{\smash{e}}(\Delta,T)}
+\newcommand{\aDTSe}{\mathrm{adm}_{\smash{e}}(\Delta,T-S)}
 \newcommand{\aDTm}{\mathrm{adm}_{\smash{\minDimP}}(\Delta,T)}
 \newcommand{\aDTme}{\mathrm{adm}_{\smash{\minDimP\setminus e}}(\Delta,T)}
 \newcommand{\aD}[1]{\mathrm{adm}_+(\Delta,#1)}
@@ -486,10 +489,22 @@ url=false,doi=false,isbn=false,eprint=false]{biblatex}%
                                  \fullcircle{#8}
 }}}}}}
 \ifstrequal{#6}{label:y}{
-%\node[right,rotate=-90,fill=white,outer sep=4pt,inner sep=2.4pt] at (#8)  {\tiny$#4$};
-%\node[right,rotate=-90,outer sep=0pt,inner sep=0pt] at (\myx-{\coordlist}[0],\myy-{\coordlist}[1]-.6)  {\tiny$#4$};
 \node[right,rotate=-45,outer sep=0pt,inner sep=0pt] at (\myx-{\coordlist}[0]-.1,\myy-{\coordlist}[1]-.6)  {\tiny${#4}$};
 }{}
+\ifstrequal{#6}{label:manual}{
+\node[below,outer sep=0pt,inner sep=0pt] at (\myx-{\coordlist}[0],\myy-{\coordlist}[1]-.2)  {\small${#1}$};
+}{}
+\ifstrequal{#6}{label:manualB}{
+\node[right,outer sep=0pt,inner sep=0pt] at (\myx-{\coordlist}[0]+.3,\myy-{\coordlist}[1])  {\small${#1}$};
+}{}
+}
+\newcommand{\manualTriangleNode}[2]{
+\fulltriangle{#1};
+\node[above,outer sep=0pt,inner sep=0pt] at ($(#1)+(0,.2)$)  {\small${#2}$};
+}
+\newcommand{\manualTriangleNodeBelow}[2]{
+\fulltriangle{#1};
+\node[below,outer sep=0pt,inner sep=0pt] at ($(#1)+(0,-.2)$)  {\small${#2}$};
 }
 \newcommand{\differential}[3][]{\draw[shorten >=3pt,shorten <=3pt] (#2) to[#1] (#3);}
 %\renewcommand{\differential}[3][]{\ifnodedefined{#2}{\draw[shorten >=3pt,shorten <=3pt] (#2) to[#1] (#3)}{};}
@@ -954,7 +969,7 @@ url=false,doi=false,isbn=false,eprint=false]{biblatex}%
 %%%%%%%%%%%%%%%%%%% 
 %%%%%%%%%%%%%%%%%%%Begin abstract for pasteover
 %%%%%%%%%%%%%%%%%%% 
-In this thesis we study the Bousfield-Kan spectral sequence (\BKSS) in the Quillen model category $s\algs$ of simplicial commutative $\F_2$-algebras. We develop a  theory of unstable operations for this \BKSS\ and relate these operations with the known unstable operations on the homotopy of the target.
+In this monograph we study the Bousfield-Kan spectral sequence (\BKSS) in the Quillen model category $s\algs$ of simplicial commutative $\F_2$-algebras. We develop a  theory of unstable operations for this \BKSS\ and relate these operations with the known unstable operations on the homotopy of the target.
 We also prove a completeness theorem  and a vanishing line theorem which, together, show that the \BKSS\ for a connected object of $s\algs$ converges strongly to the homotopy of that object.
 
 We approach the computation of the \BKSS\ by deriving a composite functor spectral sequence (\CFSS) which converges to the \BKSS\ $E_2$-page. In fact, we generalize the construction of this \CFSS\ to yield an infinite sequence of \CFSSs, with each converging to the $E_2$-page of the previous.  We equip each of these \CFSSs\ with a theory of unstable spectral sequence operations, 
@@ -981,14 +996,14 @@ We conclude by making two conjectures which would, together, allow for a full co
 \begin{Introduction}
 \SectionOrChapter{Introduction}
 \label{intropart1}
-The primary object of study in this thesis is the Bousfield-Kan spectral sequence (\BKSS) in the Quillen model category $s\algs$ of simplicial non-unital commutative  $\Ftwo$-algebras. This spectral sequence  calculates the homotopy groups of the homology completion $X\hat{\ }$ of $X\in s\algs$, with $E_2$-page given by certain derived functors applied to the Andr\'e-Quillen cohomology groups $H^*_{\algs}X$. The approach we take in this thesis is two-fold: we develop an extensive theory of spectral sequence operations on the \BKSS, and we use composite functor spectral sequences (\CFSSs) to calculate the derived functors that form the $E_2$-page.
+The primary object of study in this monograph is the Bousfield-Kan spectral sequence (\BKSS) in the Quillen model category $s\algs$ of simplicial non-unital commutative  $\Ftwo$-algebras. This spectral sequence  calculates the homotopy groups of the homology completion $X\hat{\ }$ of $X\in s\algs$, with $E_2$-page given by certain derived functors applied to the Andr\'e-Quillen cohomology groups $H^*_{\algs}X$. The approach we take is two-fold: we develop an extensive theory of spectral sequence operations on the \BKSS, and we use composite functor spectral sequences (\CFSSs) to calculate the derived functors that form the $E_2$-page.
 
-In \S\ref{Classicalstuff} we recall certain aspects of the theory of the \BKSS\ of a pointed connected topological space, including a \CFSS\ due to Miller for the computation of its $E_2$-page. There are a number of useful analogies to be drawn between this classical theory and the content of this thesis.
+In \S\ref{Classicalstuff} we recall certain aspects of the theory of the \BKSS\ of a pointed connected topological space, including a \CFSS\ due to Miller for the computation of its $E_2$-page. There are a number of useful analogies to be drawn between this classical theory and that presented here.
 We give some of the necessary algebraic and topological background for what follows  in \S\ref{various categories sc}.
 
-In \S\ref{The BKSS intro spiel} discuss the \BKSS\ in $s\algs$ in detail, and introduce the unstable spectral sequence operations referred to in the title of this thesis. There are three types of operations appearing on the \BKSS\ $E_2$-page: a commutative product, unstable higher divided power operations ($\delta$-operations), and an unstable action of the (homogeneous) Steenrod algebra. The product and $\delta$-operations arise as the operations Koszul dual to Goerss' operations on Andr\'e-Quillen cohomology, and we define them on $E_2$ using techniques of Goerss and Priddy. The Steenrod algebra action is essentially that found on the cohomology of a Lie algebra in characteristic two.
+In \S\ref{The BKSS intro spiel} discuss the \BKSS\ in $s\algs$ in detail, and introduce the unstable spectral sequence operations referred to in the title of this monograph. There are three types of operations appearing on the \BKSS\ $E_2$-page: a commutative product, unstable higher divided power operations ($\delta$-operations), and an unstable action of the (homogeneous) Steenrod algebra. The product and $\delta$-operations arise as the operations Koszul dual to Goerss' operations on Andr\'e-Quillen cohomology, and we define them on $E_2$ using techniques of Goerss and Priddy. The Steenrod algebra action is essentially that found on the cohomology of a Lie algebra in characteristic two.
 
-%In \S\ref{The BKSS intro spiel} discuss the \BKSS\ in $s\algs$ in detail, and introduce the unstable spectral sequence operations referred to in the title of this thesis. There are three types of operations appearing on the \BKSS\ $E_2$-page. A commutative product and unstable higher divided power operations ($\delta$-operations) arise as the operations Koszul dual to Goerss' operations on Andr\'e-Quillen cohomology, and we define them on $E_2$ using techniques of Goerss and Priddy. An unstable action of the Steenrod algebra emerges on $E_2$, as on the cohomology of a Lie algebra in characteristic two.
+%In \S\ref{The BKSS intro spiel} discuss the \BKSS\ in $s\algs$ in detail, and introduce the unstable spectral sequence operations referred to in the title of this monograph. There are three types of operations appearing on the \BKSS\ $E_2$-page. A commutative product and unstable higher divided power operations ($\delta$-operations) arise as the operations Koszul dual to Goerss' operations on Andr\'e-Quillen cohomology, and we define them on $E_2$ using techniques of Goerss and Priddy. An unstable action of the Steenrod algebra emerges on $E_2$, as on the cohomology of a Lie algebra in characteristic two.
 
 %Tthe $\delta$-operations and the Steenrod operations are unstable $E_2$, and w
 We are able to extend the three types of operations to the higher pages of the \BKSS, and we state in \S\ref{The BKSS intro spiel}   how the unstableness conditions evolve from one page to the next. These changing conditions are explained by the appearance of differentials from certain of the $\delta$-operations to the Steenrod operations.
@@ -1004,7 +1019,7 @@ We describe the other part of our approach in \S\S\ref{The first composite funct
 and a key aspect of our approach is to extend this rich structure into this \CFSS, producing therein a theory of unstable operations. 
 We cannot complete our computations with this structure alone, so in \S\ref{Higher composite functor spectral sequences} we generalize the construction, forming an infinite regress of \CFSSs, each calculating the $E_2$-page of the last, and each possessing a theory of unstable spectral sequence operations.
 
-In \S\ref{Computing with the composite functor spectral sequences}, we indicate how it is possible to use this immense amount of structure to make computations, including a computation of the \BKSS\ $E_2$-page for a sphere in the category $s\algs$. This special case is important for the computation of the \BKSS\ $E_2$ page in general, as it is involved in the description the $E_1$-page of a May-Koszul spectral sequence which calculates the \BKSS\ $E_2$ page for a general connected simplicial algebra.
+In \S\ref{Computing with the composite functor spectral sequences}, we indicate how it is possible to use this immense amount of structure to make computations, including a computation of the \BKSS\ $E_2$-page for a sphere in the category $s\algs$. This special case is important for the computation of the \BKSS\ $E_2$-page in general, as it is involved in the description the $E_1$-page of a May-Koszul spectral sequence which calculates the \BKSS\ $E_2$-page for a general connected simplicial algebra.
 
 Finally, in \S\ref{the BKSS for S introsection}, we discuss some conjectures which would unify the two parts of our approach. Were these conjectures verified, we would be able to give a complete description of the differentials available in the \BKSS\ of a commutative algebra sphere. These conjectures are supported by the computation we have made of the $E_2$-page.
 
@@ -1013,12 +1028,12 @@ Finally, in \S\ref{the BKSS for S introsection}, we discuss some conjectures whi
 
 
 The homotopy theory $s\algs$ has much in common with that of pointed connected topological spaces, and before we introduce our main results, we briefly recall the analogous classical theory in this section. 
-The intention of this thesis is to produce an enriched version in the model category $s\algs$ of this classical theory. 
+The intention of this work is to produce an enriched version in the model category $s\algs$ of this classical theory. 
 
 Suppose that $X$ is a pointed connected topological space with $\pi_*X$ finitely generated in each degree. 
 The (absolute) \emph{Bousfield-Kan spectral sequence of $X$} over $\Ftwo$ is a second quadrant spectral sequence
 \[\E{}{2}{X}{s}{t}\cong \Ext^s_{\calk}(\overline{H}^*(X;\Ftwo),\overline{H}^*(S^t;\Ftwo))\implies \pi_{t-s}X\hat{\ }_{\!\!\!2},\]
-where $X\hat{\ }_{\!\!\!2}$ is the completion of $X$ at the prime 2. Throughout this thesis, we use the notation $\E{}{2}{X}{s}{t}$ rather than the more standard $E_{2}^{s,t}$ for the pages of the spectral sequence.
+where $X\hat{\ }_{\!\!\!2}$ is the completion of $X$ at the prime 2. Throughout this monograph, we use the notation $\E{}{2}{X}{s}{t}$ rather than the more standard $E_{2}^{s,t}$ for the pages of the spectral sequence.
 
 
 At least when $X$ is simply connected and $\pi_*X$ is of finite type, one may view this spectral sequence as  a tool for calculating $\pi_*X$, as
@@ -1057,7 +1072,7 @@ by the formula
 \[W\overset{Q^{\calk}}{\mapsto}W/\left(\im\Bigl(W\otimes W\overset{\mu}{\rightarrow} W\Bigr)\oplus\textstyle\bigoplus_{i\geq1}\im\Bigl(W\overset{\Sq^i}{\rightarrow} W\Bigr)\right)\in\vect{+}{}.\]
 The \BKSS\ $E_2$-page can be  rewritten as the dual left derived functors
 \[\E{}{2}{X}{s}{t}\cong H^s_{\calk}(\overline{H}^*(X;\Ftwo))_t:=\dual((\mathbb{L}_sQ^{\calk})(\overline{H}^*(X,\Ftwo) )^t),\]
-where we write  $\dual V$ for the linear dual of a vector space $V$, and insist that $\dual$ interchanges homological and cohomological dimensions. We will use notation following this pattern for the rest of the thesis.
+where we write  $\dual V$ for the linear dual of a vector space $V$, and insist that $\dual$ interchanges homological and cohomological dimensions. We will use notation following this pattern for the rest of this monograph.
 
 
 
@@ -1088,9 +1103,9 @@ This spectral sequence was an integral part of Miller's proof of the Sullivan co
 
 \SubsectionOrSection{The various categories $s\calc$}
 \label{various categories sc}
-In this thesis we will use quite a number of categories of universal algebras, such as the category $\algs$ of non-unital commutative $\Ftwo$-algebras, or the category $\liealgs$ of Lie algebras over $\Ftwo$. While we introduce certain general notions we will write $\calc$ for any one of these categories.
+We will require quite a number of categories of universal algebras, such as the category $\algs$ of non-unital commutative $\Ftwo$-algebras, or the category $\liealgs$ of Lie algebras over $\Ftwo$. While we introduce certain general notions we will write $\calc$ for any one of these categories.
 
-For any category $\calc $ of universal algebras, the category $s\calc$ of simplicial objects in $\calc$ is a Quillen model category \cite{QuillenHomAlg.pdf}. These model categories have much in common with the category of topological spaces. For example, an  object $X\in s\calc$ possesses homotopy groups $\pi_*X$ and homology groups $H_*^{\calc}X$. We use the  pragmatic notion of homology that appears in the spectral sequences that appear in this context, and it does not always coincide with Quillen's notion of homology \emph{derived abelianization}. The cohomology groups $H^*_{\calc}X$ are defined to be the linear duals of the homology groups.
+For any category $\calc $ of universal algebras, the category $s\calc$ of simplicial objects in $\calc$ is a Quillen model category \cite{QuillenHomAlg.pdf}. These model categories have much in common with the category of topological spaces. For example, an  object $X\in s\calc$ possesses homotopy groups $\pi_*X$ and homology groups $H_*^{\calc}X$. We use a pragmatic notion of homology that appears in the spectral sequences that appear in this context, which does not always coincide with Quillen's notion of homology \emph{derived abelianization}. The cohomology groups $H^*_{\calc}X$ are defined to be the linear duals of the homology groups.
 
 %The object $X$ also possesses homotopy groups $\pi_*X$ and cohomology groups $H^*_{\calc}X$. The homotopy groups are those of the underlying simplicial vector space, while that cohomology groups are defined to be linear dual to the homology. 
 In \S\ref{Pi-algebras and cohomology algebras}, we recall the  definition of  spheres and Eilenberg-Mac Lane objects in $s\calc$. These play the same role in $s\calc$ as their namesakes in the category of pointed topological spaces, which is to represent the homotopy and cohomology functors on the homotopy category of $s\calc$, respectively.
@@ -1139,7 +1154,9 @@ the explicit description of homotopy operations which is lacking in the category
 \end{gather*}
 with $\mu$ a graded non-unital commutative algebra product, and %the top with left operations
 %\[\delta_i:\pi_nX\to \pi_{n+i}X,\textup{ defined when }2\leq i\leq n,\]
-the $\delta_i$ satisfying various compatibilities which we discuss in detail in \S\ref{Homotopy operations for simplicial commutative algebras}. In fact, these $\delta$-operations satisfy a $\delta$-Adem relation \emph{which is homogeneous}, and there is a corresponding unital associative algebra $\Delta$. Note that $\pi_*X$ is \emph{not} a left module over the algebra $\Delta$, because the operations are not defined in every dimension. This situation can not be remedied simply be defining the missing operations to be zero, as doing so is incompatible with the Adem relations on homotopy. Instead, we must adopt language for such situations, saying that $\Delta$ has a partially defined unstable left action on $\pi_*X$. In general, unstable homotopy operations will be  partially defined, whereas unstable cohomology operations will be everywhere defined but vanish in certain ranges.
+the $\delta_i$ satisfying various compatibilities which we discuss in detail in \S\ref{Homotopy operations for simplicial commutative algebras}. Briefly, the top $\delta$-operation $\delta_n$ is a divided square for the product whenever it is defined, so that $\pi_*X$ is a divided power algebra in dimensions at least 2, and the $\delta$-operations satisfy a $\delta$-Adem relation.
+
+Although there is a unital associative algebra $\Delta$ corresponding  to the $\delta$-operations, note that $\pi_*X$ is \emph{not} a left module over the algebra $\Delta$. This situation can not be remedied simply be defining the missing operations to be zero, as doing so is incompatible with the Adem relations. Instead, we must adopt language for such situations, saying that $\Delta$ has a partially defined unstable left action on $\pi_*X$. In general, unstable homotopy operations will be  partially defined, whereas unstable cohomology operations will be everywhere defined but vanish in certain ranges.
 
 Goerss \cite{MR1089001} described the analogue for $s\algs$ of the category $\calk$, and  all of the natural operations on the Andr\'e-Quillen cohomology $H^*_\algs X$ of $X\in s\algs$ are generated by:
 \begin{gather*}
@@ -1149,7 +1166,7 @@ P^i:H^n_{\algs}X\to H_{\algs}^{n+i+1}X;\\
 \end{gather*}
 As we restrict to connected objects of $s\algs$, the operation $\beta$ can be ignored.
 These operations satisfy various compatibilities which we recount in detail in \S\ref{The example of simplicial commutative F2-algebras}, and we will denote by $\calw(0)$ the category whose objects are vector spaces $W\in\vect{+}{}$ equipped with the $P^i$-operations and the bracket.
-The bracket satisfies the Jacobi identity but falls just short of being a Lie algebra pairing as $[x,x]$ is not always zero. The $P^i$ satisfy a $P$-Adem relation \emph{that is homogeneous}. The evident unital associative algebra $P$ acting on $H^{*}_{\algs}X$ is a homogeneous Koszul algebra, the \emph{$P$-algebra} with Koszul dual the algebra $\Delta$, and indeed, this is how it was originally described by Goerss. In \S\ref{Idnt E1 E2}, we identify the $E_2$-page (for connected $X\in s\algs$ with $\pi_*X$ of finite type) as the  non-abelian derived functors
+The bracket satisfies the Jacobi identity but falls just short of being a Lie algebra pairing as $[x,x]$ is not always zero. The $P^i$ satisfy a $P$-Adem relation \emph{that is homogeneous}. The evident unital associative algebra $P$ acting on $H^{*}_{\algs}X$ is a homogeneous Koszul algebra, the \emph{$P$-algebra}, with Koszul dual the algebra $\Delta$, and indeed, this is how it was originally described by Goerss. In \S\ref{Idnt E1 E2}, we identify the $E_2$-page (for connected $X\in s\algs$ with $\pi_*X$ of finite type) as the  non-abelian derived functors
 \[\E{}{2}{\calx}{s}{t}\cong H^{s}_{\calw(0)}(H^{*}_{\algs}X)_t.\]
 This description begets a laundry list of operations that we expect to see on $E_2$. The cohomology of a Lie algebra enjoys an action of the commutative operad (the Koszul dual of the Lie operad). As we are working in positive characteristic, they also support an action of the homogeneous Steenrod algebra $\LieSteen:=E_0\cala_2$, due to Priddy \cite{PriddySimplicialLie.pdf}. We will discuss these operations in detail in \S\ref{section: Cohomology operations for simplicial (restricted) Lie algebras} and Appendix \ref{The partially restricted universal enveloping algebra}. %This structure is visible at $E_2$ 
 We construct in Proposition \ref{Wn Halg omnibus} the corresponding natural `horizontal' operations on $E_2$:
@@ -1159,26 +1176,190 @@ We construct in Proposition \ref{Wn Halg omnibus} the corresponding natural `hor
 \end{gather*}
 Moreover, we construct in Proposition \ref{operations on goerss homology} natural vertical operations constituting a  (partially defined) action of the Koszul dual $\Delta$ of the $P$-algebra:
 \[\deltav_i:\E{}{2}{\calx}{s}{t}\to \E{}{2}{\calx}{s+1}{t+i+1}\textup{, defined when $2\leq i <t$}.\]%\max\{t-s,t-1\}$}.\] 
-These operations satisfy various compatibilities (c.f.\ \S\ref{Relations between the horizontal and vertical operations}, Proposition \ref{Wn Halg omnibus} and Proposition \ref{operations on goerss homology}, where we also discuss an extra operation $\deltav_t$ defined when $s=0$).
+These operations satisfy various compatibilities (c.f.\ \S\ref{Relations between the horizontal and vertical operations}, Proposition \ref{Wn Halg omnibus} and Proposition \ref{operations on goerss homology}, where we also discuss an extra operation $\deltav_t$ defined when $s=0$). In Figure \ref{unstable operations on E2} we illustrate these operations, as applied to an element $x\in \E{}{2}{\calx}{4}{10}$.
+
+
+\begin{figure}
+\centering
+\begin{minipage}{18.6cm}
+\fbox{\begin{tikzpicture}[y=.7cm, x=1cm]
+\xdef\TminusSmax{16}
+\xdef\Smax{9}
+\xdef\horTickFreq{1}
+\xdef\verTickFreq{1}
+\xdef\lasttickbuf{.45}
+\xdef\tsfz{-3}%tick separation from zero
+
+\clip (2,2.2) rectangle (\TminusSmax+.6,\Smax+.46);
+
+\node[anchor=east] at (3.5,6) {$\E{}{2}{\calx}{s}{t}$:};
+
+%\node at (5,8) {$\E{}{2}{\calx}{s}{t}$};
+
+\goodnode[x]{6,4}{0,0}{}{}{label:manual}{dottype:}{dD}
+\goodnode[\deltav_2x]{6,4}{0,0}{2}{}{label:manual}{dottype:}{dD2}
+\goodnode[\deltav_3x]{6,4}{0,0}{3}{}{label:manual}{dottype:}{dD3}
+\goodnode[\deltav_4x]{6,4}{0,0}{4}{}{label:manual}{dottype:}{dD4}
+\goodnode[\deltav_5x]{6,4}{0,0}{5}{}{label:manual}{dottype:}{dD5}
+\goodnode[\deltav_6x]{6,4}{0,0}{6}{}{label:manual}{dottype:}{dD6}
+\goodnode[\deltav_7x]{6,4}{0,0}{7}{}{label:manual}{dottype:}{dD7}
+\goodnode[\deltav_8x]{6,4}{0,0}{8}{}{label:manual}{dottype:}{dD8}
+\goodnode[\deltav_9x]{6,4}{0,0}{9}{}{label:manual}{dottype:}{dD9}
+
+
+
+\goodnode[\Sqh^3x]{6,4}{0,0}{}{3}{label:manualB}{dottype:}{s3dD}
+\goodnode[\Sqh^4x]{6,4}{0,0}{}{4}{label:manualB}{dottype:}{s4dD}
+\goodnode[\Sqh^5x=x^2]{6,4}{0,0}{}{5}{label:manualB}{dottype:s}{s5dD}
+
+\draw[->] (4.55,3) -- (\TminusSmax+\lasttickbuf,3);
+\foreach \x in {5,...,\TminusSmax}
+   \draw (\x,3+.1) -- (\x,3-.1)
+      node[anchor=north] {\x};
+   \draw (4.4,3-.2) -- (4.5,3+.2);
+   \draw (4.5,3-.2) -- (4.6,3+.2);
+\draw  (4,3)--(4.45,3);
+   \draw (4,3+.1) -- (4,3-.1)
+      node[anchor=north] {0};
+\node[anchor=south] at (\TminusSmax,3+.1) {$t-s$};
+
+\draw[->] (4,3.55) -- (4,\Smax+\lasttickbuf);
+\foreach \y in {4,...,\Smax}
+   \draw (4+.1,\y) -- (4-.1,\y) 
+      node[anchor=east] {\y};
+   \draw (3.8,3.5) -- (4.2,3.4);
+   \draw (3.8,3.6) -- (4.2,3.5);
+\draw  (4,3)--(4,3.45);
+   \draw (4+.1,3) -- (4-.1,3) 
+      node[anchor=east] {0};
+\node[anchor=west] at (4+.1,\Smax) {$s$};
+
+
+\end{tikzpicture}}
+\end{minipage}
+\centering
+\caption{Unstable operations on $\E{}{2}{\calx}{s}{t}\cong H^{s}_{\calw(0)}(H^{*}_{\algs}X)_t.$}
+\label{unstable operations on E2}
+\end{figure}
+
+
+
+
 
 In light of our convergence results for connected $X\in s\algs$, the spectral sequence converges strongly to the homotopy of $X$:
 \[\E{}{2}{\calx}{s}{t}\implies \pi_nX,\]
-where we write $n:=t-s$ for the topological dimension at $\E{}{2}{\calx}{s}{t}$. When considering how the $\delta$-operations and product on $\pi_*X$ might relate to the various operations on $E_2$, one encounters
-%Although the product and $\delta$-operations on $E_2$ look encouraging, t
-the following issue: if $x\in \E{}{2}{\calx}{s}{t}$ is  a permanent cycle detecting  a class $\overline{x}\in \pi_nX$, then  (for $s\geq2$) there are more operations $\deltav_2x,\ldots,\deltav_{t-1}x$ defined on $E_2$ than there are operations $\delta_2\overline{x},\ldots,\delta_{n}\overline{x}$ defined on homotopy.  Moreover, the Steenrod operations at $E_2$ have no counterpart in homotopy.
+where we write $n:=t-s$ for the topological dimension at $\E{}{2}{\calx}{s}{t}$. Suppose now that the class $x\in\E{}{2}{\calx}{4}{10}$ is a permanent cycle, detecting $\overline{x}\in \pi_6X$. One immediately notices that the operations $\delta_7$, $\delta_8$ and $\delta_9$ are not defined on $\overline{x}$, even though we have constructed classes $\delta_7x$, $\delta_8x$ and $\delta_9x$ in $\E{}{2}{\calx}{}{}$. One also notices that the classes $\Sqh^3x$, $\Sqh^4x$ and $\Sqh^5x$ have no evident counterpart in $\pi_*X$. This sentiment holds for the top operation $\Sqh^5x$ even though it satisfies the unstableness condition $\Sqh^5x=x^2$, as the commutative product on $\pi_*X$ is an exterior product in positive dimensions.
 
-This situation is quite reminiscent of that described by Dwyer \cite{DwyerHigherDividedSquares.pdf}, who works in the spectral sequence of a cosimplicial simplicial coalgebra (such as the Eilenberg-Moore spectral sequence). In such a spectral sequence, one expects to find Steenrod operations at $E_2$ but finds \emph{too many}. Dwyer constructs $\delta$-operations and differentials mapping the excess Steenrod operations to the $\delta$ operations. In this way, the excess Steenrod operations fail to be defined at $E_\infty$, and the $\delta$-operations become zero by $E_\infty$, an excellent resolution to this problem.
+%When considering how the $\delta$-operations and product on $\pi_*X$ might relate to the various operations on $E_2$, one encounters the following issue: if $x\in \E{}{2}{\calx}{s}{t}$ is  a permanent cycle detecting  a class $\overline{x}\in \pi_nX$, then  (for $s\geq2$) there are more operations $\deltav_2x,\ldots,\deltav_{t-1}x$ defined on $E_2$ than there are operations $\delta_2\overline{x},\ldots,\delta_{n}\overline{x}$ defined on homotopy.  Moreover, the Steenrod operations at $E_2$ have no counterpart in homotopy.
 
-Unfortunately, we cannot use Dwyer's operations. Indeed,  although the linear dual of a cosimplicial simplicial coalgebra is a cosimplicial simplicial algebra (of which the resolution $\calx$ is an example), the choice of filtration direction is transposed. Instead, we perform analogous constructions in the dual setting, and describe in \S\ref{The case of a cosimplicial simplicial commutative algebra} a theory of operations on the spectral sequence of a cosimplicial simplicial $\F_2$-algebra, which may be of independent interest. While defining these operations is a good first step, they are not yet what we require, as it happens that they can be lifted one filtration higher  when we are working in the \BKSS. In \S\ref{second quadrant homotopy sseq operations} and \S\ref{Operations on the Bousfield-Kan spectral sequence}, we explain how to construct operations
+\renewcommand{\BKSSdiagram}[1]{\todo{renewed out}}
+
+
+
+
+
+
+
+
+
+This situation is quite reminiscent of that described by Dwyer \cite{DwyerHigherDividedSquares.pdf}, who works in the spectral sequence of a cosimplicial simplicial coalgebra (such as the Eilenberg-Moore spectral sequence). In the spectral sequences he investigates, one finds more unstable Steenrod operations at $E_2$ than there are on the spectral sequence target. Dwyer resolves this imbalance by constructing $\delta$-operations at $E_2$, along  with differentials from the excess Steenrod operations to the $\delta$ operations. %In this way, the excess Steenrod operations fail to be defined at $E_\infty$, and the $\delta$-operations become zero by $E_\infty$, an excellent resolution to this problem.
+Unfortunately, we cannot use Dwyer's operations, as  although the linear dual of a cosimplicial simplicial coalgebra is a cosimplicial simplicial algebra (of which the resolution $\calx$ is an example), the choice of filtration direction is transposed. Nonetheless, Dwyer's results suggest that there should be differentials, depicted in Figure \ref{unstable operations comparison}, which resolve the question of the unexplained classes $\deltav_7x$, $\deltav_8x$, $\deltav_9x$, $\Sqh^3x$, $\Sqh^4x$ and $\Sqh^5x$. We use triangular nodes to indicate classes which detect classes in homotopy, and we indicate the detected classes on a juxtaposed plot of $\pi_n X$.
+\begin{figure}
+\begin{minipage}{18.6cm}
+\fbox{\begin{tikzpicture}[y=.7cm, x=1cm]
+\xdef\TminusSmax{16}
+\xdef\Smax{9}
+\xdef\horTickFreq{1}
+\xdef\verTickFreq{1}
+\xdef\lasttickbuf{.45}
+\xdef\tsfz{-3}%tick separation from zero
+
+\clip (2,1.45) rectangle (\TminusSmax+.6,\Smax+.46);
+
+\node[anchor=east] at (3.5,6) {$\E{}{2}{\calx}{s}{t}$:};
+\node[anchor=east] at (3.5,2.101) {$\pi_nX$:};
+
+\goodnode[x]{6,4}{0,0}{}{}{label:manual}{dottype:a}{dD}
+\goodnode[\deltav_2x]{6,4}{0,0}{2}{}{label:manual}{dottype:a}{dD2}
+\goodnode[\deltav_3x]{6,4}{0,0}{3}{}{label:manual}{dottype:a}{dD3}
+\goodnode[\deltav_4x]{6,4}{0,0}{4}{}{label:manual}{dottype:a}{dD4}
+\goodnode[\deltav_5x]{6,4}{0,0}{5}{}{label:manual}{dottype:a}{dD5}
+\goodnode[\deltav_6x]{6,4}{0,0}{6}{}{label:manual}{dottype:a}{dD6}
+\goodnode[\deltav_7x]{6,4}{0,0}{7}{}{label:manual}{dottype:}{dD7}
+\goodnode[\deltav_8x]{6,4}{0,0}{8}{}{label:manual}{dottype:}{dD8}
+\goodnode[\deltav_9x]{6,4}{0,0}{9}{}{label:manual}{dottype:}{dD9}
+
+
+
+\goodnode[\Sqh^3x]{6,4}{0,0}{}{3}{label:manualB}{dottype:}{s3dD}
+\goodnode[\Sqh^4x]{6,4}{0,0}{}{4}{label:manualB}{dottype:}{s4dD}
+\goodnode[\Sqh^5x=x^2]{6,4}{0,0}{}{5}{label:manualB}{dottype:s}{s5dD}
+
+\draw[->,shorten >=4pt,shorten <=4pt] (dD9) to (s3dD);
+\draw[->,shorten >=4pt,shorten <=4pt] (dD8) to (s4dD);
+\draw[->,shorten >=4pt,shorten <=4pt] (dD7) to (s5dD);
+
+%
+%\goodnode[\Sqh^2x]{6,4}{0,0}{}{2}{label:manualB}{dottype:g}{s2dD}
+%\goodnode[\deltav_{10}x]{6,4}{0,0}{10}{}{label:manual}{dottype:g}{dD10}
+%\draw[->,dashed,shorten >=3pt,shorten <=3pt] (dD10) to (s2dD);
+
+\draw[->] (4.55,3) -- (\TminusSmax+\lasttickbuf,3);
+\foreach \x in {5,...,\TminusSmax}
+   \draw (\x,3+.1) -- (\x,3-.1)
+      node[anchor=north] {\x};
+   \draw (4.4,3-.2) -- (4.5,3+.2);
+   \draw (4.5,3-.2) -- (4.6,3+.2);
+\draw  (4,3)--(4.45,3);
+   \draw (4,3+.1) -- (4,3-.1)
+      node[anchor=north] {0};
+\node[anchor=south] at (\TminusSmax,3+.1) {$t-s$};
+
+\draw[->] (4,3.55) -- (4,\Smax+\lasttickbuf);
+\foreach \y in {4,...,\Smax}
+   \draw (4+.1,\y) -- (4-.1,\y) 
+      node[anchor=east] {\y};
+   \draw (3.8,3.5) -- (4.2,3.4);
+   \draw (3.8,3.6) -- (4.2,3.5);
+\draw  (4,3)--(4,3.45);
+   \draw (4+.1,3) -- (4-.1,3) 
+      node[anchor=east] {0};
+\node[anchor=west] at (4+.1,\Smax) {$s$};
+
+\draw[->] (4.55,2.101) -- (\TminusSmax+\lasttickbuf,2.101);
+\foreach \x in {5,7,13,14,15,16}
+   \draw (\x,2.101+.1) -- (\x,2.101-.1);
+   \draw (4.4,2.101-.2) -- (4.5,2.101+.2);
+   \draw (4.5,2.101-.2) -- (4.6,2.101+.2);
+\draw  (4,2.101)--(4.45,2.101);
+   \draw (4,2.101+.1) -- (4,2.101-.1);
+
+\manualTriangleNodeBelow{6,2.101}{\!\!\!\!\!\phantom{\deltav_2}\overline{x}}
+\manualTriangleNodeBelow{8,2.101}{\delta_2\overline{x}}
+\manualTriangleNodeBelow{9,2.101}{\delta_3\overline{x}}
+\manualTriangleNodeBelow{10,2.101}{\delta_4\overline{x}}
+\manualTriangleNodeBelow{11,2.101}{\delta_5\overline{x}}
+\manualTriangleNodeBelow{12,2.101}{\delta_6\overline{x}}
+
+\node[anchor=north] at (\TminusSmax,2.101-.1) {$n$};
+
+\end{tikzpicture}}
+\end{minipage}
+\centering
+\caption{Unstable operations on a permanent cycle $x\in \E{}{1}{\calx}{4}{10}$.}
+\label{unstable operations comparison}
+\end{figure}
+
+In order to construct such differentials we perform constructions analogous to Dwyer's, describing in \S\ref{second quadrant homotopy sseq operations} a theory of operations on the spectral sequence of any cosimplicial simplicial $\F_2$-algebra. While defining these operations is a good first step, they are not yet what we require, as we show in \S\ref{Operations on the Bousfield-Kan spectral sequence} that they can be lifted one filtration higher when we are working in the \BKSS. After performing the appropriate lifting, we obtain the following unstable operations, some of which may be multi-valued:
 \begin{gather*}
-\deltav_i:\Edownup{r}{}{\calx}{s}{t} \to \Edownup{r}{}{\calx}{s+1}{t+i+1},\textup{ defined when $2\leq i\leq \max\{n,t-(r-1)\}$}
+\deltav_i:\Edownup{r}{}{\calx}{s}{t} \to \Edownup{r}{}{\calx}{s+1}{t+i+1},\textup{ defined when $2\leq i\leq \max\{n,t-(r-1)\}$};
 \\
 \Sqh^j:\Edownup{r}{}{\calx}{s}{t}   \to
-\Edownup{r}{}{\calx}{s+j}{2t+1},\textup{ zero unless $\min\{t,r\}< j\leq s+1$}\\
+\Edownup{r}{}{\calx}{s+j}{2t+1},\textup{ zero unless $\min\{t,r\}< j\leq s+1$};\\
 \mu:\Edownup{r}{}{\calx}{s}{t}\otimes \Edownup{r}{}{\calx}{s'}{t'}\to
-\Edownup{r}{}{\calx}{s+s'+1}{t+t'+1},
+\Edownup{r}{}{\calx}{s+s'+1}{t+t'+1}.
 \end{gather*}
-with the $\deltav_i$ potentially multi-valued functions,  defined when $2\leq i\leq \max\{n,t-(r-1)\}$, and single-valued whenever $2\leq i\leq\min\{n+1,t+1-2(r-1)\}$, and the $\Sqh^j$ potentially multi-valued functions with indeterminacy vanishing by $E_{2r-2}$, and which equal zero unless $\min\{t,r\}< j\leq s+1$. All of the functions that are  defined on $E_2$ are single-valued, and indeed, they coincide with the operations defined on $H^*_{\calw(0)}$, as we show in Proposition \ref{adams operations are right for comm}.
+These operations satisfy intricate unstableness conditions. The $\deltav_i$ are defined only when $2\leq i\leq \max\{n,t-(r-1)\}$ and are single-valued whenever $2\leq i\leq\min\{n+1,t+1-2(r-1)\}$. The $\Sqh^j$ have indeterminacy vanishing by $E_{2r-2}$, survive until $E_{2r-1}$, and equal zero unless $\min\{t,r\}< j\leq s+1$. All of the functions that are defined on $E_2$ are single-valued, and indeed, we show in Proposition \ref{adams operations are right for comm} that they coincide with the operations defined on the derived functors defining the $E_2$-page.
 
 Notice the dependence of the unstableness conditions on $r$, the spectral sequence page number. It is in this sense that the unstableness conditions evolve as we pass to higher pages. As $r$ increases, fewer of the $\deltav_i$ are defined, and the unstableness condition tends to
 \[\deltav_i:\Edownup{\infty}{}{\calx}{s}{t} \to \Edownup{\infty}{}{\calx}{s+1}{t+i+1},\textup{ defined when $2\leq i\leq n$},\]
@@ -1192,9 +1373,13 @@ These conditions alone do not explain, for $x\in \Edownup{r}{}{\calx}{s}{t}$, wh
 \deltav_i(d_rx),&\textup{$r <t-i+1$};\\
 \deltav_i(d_rx)+\Sqh^{t-i+2}(x),&\textup{$r =t-i+1$}.
 \end{cases}\]
+
+
+
 Generically speaking, this equation states that $\deltav_i(x)$ remains a cycle until either until $x$ supports a differential or until page $t-i+1$, when it supports a differential hitting $\Sqh^{t-i+2}(x)$. That is, the $\Sqv$ serve to absorb differentials supported by the excess $\deltav$, and these differentials account for the evolving unstableness conditions.
 %In particular, if $i>t-s$ and $x\in\E{}{t-i+1}{\calx}{s}{t}$ survives to $\E{}{t-i+2}{\calx}{s}{t}$, then $d_{t-i+1}$ maps $\deltav_ix$ to $\Sqv^{t-i+2}x$. These formulae explain how the $\Sqv$ serve to absorb differentials supported by the excess $\deltav$.
-
+\todo{Refer here to Figure \ref{BKSSdiagram1}}
+\BKSSdiagram{1}
 
 
 
@@ -1332,14 +1517,16 @@ With this computation in mind we define the Chevalley-Eilenberg-May complex of a
 
 This method is employed to prove Theorems \ref{thm on collapsing of most sseqs} and \ref{Koszul-dual Hilton-Milnor theorem}, which together imply Corollary \ref{yeah it's Wn-coh-algs}, that $\calMhv(n+1)$ is the category of $\calw(n)$-cohomology algebras for $n\geq1$. That is, the $\calMhv(n+1)$-structure is \emph{all} of the natural structure on $\calW(n)$-cohomology for $n\geq1$.
 
-Finally, we are able to use all of this structure together to calculate, at least as a vector space, the \BKSS\ $E_2$-page for the commutative algebra $T$-sphere $\mathbb{S}^{\algs}_T$ whenever $T\geq1$. That is, we calculate the derived functors $H^*_{\calw(0)}W$, where $W=H^*_{\algs}\mathbb{S}^{\algs}_T$ is a one-dimensional trivial object concentrated in dimension $T\geq1$.
+Finally, we are able to use all of this structure together to calculate, at least as a vector space, the \BKSS\ $E_2$-page for the commutative algebra $T$-sphere $\mathbb{S}^{\algs}_T$ whenever $T\geq1$. That is, we calculate the derived functors $H^*_{\calw(0)}W$, where $W=H^*_{\algs}\mathbb{S}^{\algs}_T$ is a one-dimensional trivial object concentrated in dimension $T\geq1$. \todo{Refer here to Figure \ref{BKSSdiagram2}}
+\BKSSdiagram{2}
 
 Finally, we derive in \S\ref{The quadratic filtration section} a convergent spectral sequence which calculates the $E_2$-page for any connected $X\in s\algs$ of finite type, which we name the May-Koszul spectral sequence. Its $E_1$-page may be described in terms of the \BKSS\ $E_2$-pages of the spheres (using Theorem \ref{Koszul-dual Hilton-Milnor theorem}), and information about the $E_2$-operations in the \BKSS\ for a sphere passes over to information about the general \BKSS\ $E_2$-page via the May-Koszul spectral sequence.
 
 
 \SubsectionOrSection{The Bousfield-Kan spectral sequence for $\mathbb{S}^{\algs}_T$}
 \label{the BKSS for S introsection}
-In \S\ref{An alternative Bousfield-Kan E1}, we present a small model for the \BKSS\ $E_1$-page for a commutative algebra sphere. 
+In \S\ref{An alternative Bousfield-Kan E1}, we present a small model for the \BKSS\ $E_1$-page for a commutative algebra sphere. \todo{Refer here to Figure \ref{BKSSdiagram3}}
+\BKSSdiagram{3}
 Given our knowledge of the operations on the \BKSS, of the $E_2$-page for $\mathbb{S}^{\algs}_T$ and of the homotopy groups $\pi_*\mathbb{S}^{\algs}_T$ (c.f.\ \S\ref{Homotopy operations for simplicial commutative algebras}), a natural goal is the complete computation of the \BKSS\ for $\mathbb{S}^{\algs}_T$. In \S\ref{Some conjectures on the E1-level structure}, we make two conjectures which would together allow us to make this complete computation. It turns out that $E_2$ is not the right place to start this computation, and we need to consider classes on $E_1$ and $d_1$ differentials in order to see the full picture. The problem is that certain relations involving the $\deltav$- and $\Sqh$-operations only hold from $E_2$. The conjectures we make would overcome these problems, and would lead to the description given in \S\ref{The resulting differentials} of the full structure of the \BKSS\ for $\mathbb{S}^{\algs}_T$.
 
 
@@ -1405,7 +1592,7 @@ Given our knowledge of the operations on the \BKSS, of the $E_2$-page for $\math
 %An atomic example that we may seek to calculate is that of a \emph{sphere} $\mathbb{S}_n^{\algs} $ in $\algs$. This is an object of $s\algs$ which represents the functor $\pi_n$ on the homotopy category $\textup{ho}(s\algs)$. It has $H^*_{\algs}\mathbb{S}_n^{\algs}$ the trivial object of $\calw(0)$, concentrated in dimension $n$
 %
 %
-%\TODOCOMMENT[inline]{\tiny From here, the introduction gives way to a list of components of the thesis. This will be turned into prose asap, although I wanted to give my examiners at least a week with the document! After these dotpoints comes the start of said prose.}
+%\TODOCOMMENT[inline]{\tiny From here, the introduction gives way to a list of components of the monograph. This will be turned into prose asap, although I wanted to give my examiners at least a week with the document! After these dotpoints comes the start of said prose.}
 %%We lay out here an overview of  the work that is to follow.
 %\begin{itemize}
 %\item In \S\ref{Idnt E1 E2}, we derive the expected homological description of Radulescu-Banu's \BKSS\ of $X\in s\algs$. For $X$ connected, this is denoted:
@@ -1448,8 +1635,8 @@ Given our knowledge of the operations on the \BKSS, of the $E_2$-page for $\math
 
 
 \SubsectionOrSection{Overview}
-%The primary object of study in this thesis is the Bousfield-Kan spectral sequence (\BKSS) in the Quillen model category $s\algs$ of simplicial non-unital commutative  $\Ftwo$-algebras. This spectral sequence, which we discuss in \S\ref{Bousfield-Kan spectral sequence}, calculates the homotopy groups of the homology completion $X\hat{\ }$ of $X\in s\algs$, with $E_2$-page given by certain derived functors applied to the Andr\'e-Quillen cohomology groups $H^*_{\algs}X$. \toDont{change up whole section}
-In \S\ref{Conventions and notation} we introduce the fundamental notions needed in this thesis: categories of universal algebras and their homotopy, homology and cohomology functors;  the Dold-Kan Correspondence and Dold's theorem; the various types of Lie and commutative algebras in characteristic two; and the types of spectral sequences we use most extensively.
+%The primary object of study in this monograph is the Bousfield-Kan spectral sequence (\BKSS) in the Quillen model category $s\algs$ of simplicial non-unital commutative  $\Ftwo$-algebras. This spectral sequence, which we discuss in \S\ref{Bousfield-Kan spectral sequence}, calculates the homotopy groups of the homology completion $X\hat{\ }$ of $X\in s\algs$, with $E_2$-page given by certain derived functors applied to the Andr\'e-Quillen cohomology groups $H^*_{\algs}X$. \toDont{change up whole section}
+In \S\ref{Conventions and notation} we introduce the fundamental notions needed in this work: categories of universal algebras and their homotopy, homology and cohomology functors;  the Dold-Kan Correspondence and Dold's theorem; the various types of Lie and commutative algebras in characteristic two; and the types of spectral sequences we use most extensively.
 
 
 
@@ -1509,7 +1696,7 @@ In \S\ref{The Bousfield-Kan spectral sequence for a sphere}, using the operation
 Firstly, I would like to thank my advisor Haynes Miller for his ongoing support and guidance over the course of this Ph.D. Without doubt I learned more algebraic topology from my meetings with Haynes than from all other sources combined, and at every meeting he contributed materially to my intellectual development. This work owes much to his influence, and to the ideas to be found in his Sullivan Conjecture paper \cite{MillerSullivanConjecture.pdf}.
 
 Thanks to Paul Goerss, for visiting to take part in my examination committee, and whose Ast\'erisque volume \cite{MR1089001} has had great influence on my work.
-Thanks too to Michael Ching, Bill Dwyer, Benoit Fresse and John Harper, for helpful conversations on various topics appearing in this thesis. I would also like to thank Michael Andrews for always being available to answer questions and share ideas.
+Thanks too to Michael Ching, Bill Dwyer, Benoit Fresse and John Harper, for helpful conversations on various topics appearing in this work. I would also like to thank Michael Andrews for always being available to answer questions and share ideas.
 
 I would like to thank my wonderful classmates, in particular Michael Andrews, Nate Bottman, Saul Glasman, Jiayong Li  and Alex Moll, for sharing this experience with me.
 Thanks too to Sonia and Eric and to Bella and Gilad --- such wonderful friends as these are truly rare.
@@ -1529,7 +1716,7 @@ Growing together with Dana has been the most important and formative experience 
 
 \SubsectionOrSection{Universal algebras}
 \label{Universal algebras}
-In this thesis we will be dealing with various categories $\calc$ of universal graded algebras over $\Ftwo $, which we will refer to as algebraic categories. The relevant examples include a number of categories of graded associative algebras, commutative algebras and Lie algebras,  categories of graded unstable modules and unstable algebras. We'll give the background on such categories of universal algebras in this section.
+In this work we will be dealing with various categories $\calc$ of universal graded algebras over $\Ftwo $, which we will refer to as algebraic categories. The relevant examples include a number of categories of graded associative algebras, commutative algebras and Lie algebras,  categories of graded unstable modules and unstable algebras. We'll give the background on such categories of universal algebras in this section.
 
 
 
@@ -1563,7 +1750,7 @@ For $X\in \calc$, the comonad structure maps in $\calc$,
 are as follows: on an expression $f(x_i)$, $\Delta=F^{\calc}\eta$ returns the same expression $f(x_i)$ in which the $x_i\in X$ are viewed as elements of $F^\calc X$, and $\rho$ is the evaluation map equivalent to the $\calc$-structure on $X$.
 
 \SubsectionOrSection{The functor $Q^\calc$ of indecomposables}
-Using the augmentation $\epsilon:F^\calc\to\Id$ of monads on $\vect{}{}$, any $V\in\vect{}{}$ becomes an $F^\calc $-algebra, i.e.\ an object of $\calc$. We denote this functor $K^\calc:\vect{}{}\to \calc$; it sends $V\in\vect{}{}$ to \emph{the trivial object on $V$}, which is $V$ equipped with coaction map the projection $\epsilon:F^{\calc}V\to V$. Whenever we say \emph{trivial} in this thesis, we will mean \emph{having no non-zero operations}, and not \emph{equal to zero}.
+Using the augmentation $\epsilon:F^\calc\to\Id$ of monads on $\vect{}{}$, any $V\in\vect{}{}$ becomes an $F^\calc $-algebra, i.e.\ an object of $\calc$. We denote this functor $K^\calc:\vect{}{}\to \calc$; it sends $V\in\vect{}{}$ to \emph{the trivial object on $V$}, which is $V$ equipped with coaction map the projection $\epsilon:F^{\calc}V\to V$. Whenever we say \emph{trivial}, we will mean \emph{having no non-zero operations}, and not \emph{equal to zero}.
 
 In each of our examples,  $K^{\calc}$ has a left adjoint, $Q^{\calc}:\calc\to\vect{}{}$, which sends $X\in\calc$ to \emph{the quotient of $X$ by the image of its non-trivial operations}. %More precisely, $K^\calc$ sends any object $V\in\vect{+}{r}$ to the $U^{\calc}F^\calc $-algebra whose structure map is $\epsilon_V:U^{\calc}F^\calc V\to V$. 
 %The functor $Q^{\calc}$ sends $X\in \calc$ with structure map $\rho:F^\calc U^\calc X\to X$ to the coequalizer in $\vect{+}{r}$ of the maps $U^\calc\rho$ and $\epsilon_{U^\calc X}$. \emph{or, less correctly}
@@ -1572,7 +1759,7 @@ The functor $Q^{\calc}$ sends $X\in \calc$ to the coequalizer in $\vect{}{}$ of 
 Note that $F^\calc$ is a section of $Q^{\calc}$, since $Q^{\calc} F^{\calc}$ is adjoint to $U^\calc K^\calc=\Id$.
 
 \SubsectionOrSection{Quillen's model structure on $s\calc$ and the bar construction}\label{ssec: quillen model and bar construction}
-For any of the algebraic categories $\calc$ appearing in this thesis we use Quillen's simplicial model category structure on the category $s\calc$ of simplicial objects of $\calc$ \cite{QuillenHomAlg.pdf}, \cite{MillerSullivanConjecture.pdf},  \cite{Blanc_Stover-Groth_SS.pdf}. In this structure, the weak equivalences (fibrations) are the maps which are weak equivalences (fibrations) of simplicial abelian groups, so that every object is fibrant. 
+For any of the algebraic categories $\calc$ appearing in this work we use Quillen's simplicial model category structure on the category $s\calc$ of simplicial objects of $\calc$ \cite{QuillenHomAlg.pdf}, \cite{MillerSullivanConjecture.pdf},  \cite{Blanc_Stover-Groth_SS.pdf}. In this structure, the weak equivalences (fibrations) are the maps which are weak equivalences (fibrations) of simplicial abelian groups, so that every object is fibrant. 
 
  A simplicial object $X\in s\calc$ is \emph{almost free} if there are subspaces $V_n\subseteq X_n$ for each $n\geq0$ such that the composite $F^\calc  V_n\to F^\calc  X_n\overset{\rho}{\to} X_n$ is an isomorphism for all $n$, and such that the subspaces $V_n$ are preserved by all of the degeneracies and face maps of $X$ except for $d_0$. An almost free object is cofibrant, and every cofibrant object is a retract of an almost free object \citeBOX[\S3]{MillerSullivanConjecture.pdf}. 
 
@@ -1613,13 +1800,13 @@ We write $\quadgrad{}\vect{q}{r}$ for the category of objects of $\vect{q}{r}$ e
 
 A common pattern for us will be to consider vector spaces with $r$ non-negative homological gradings and a single \emph{strictly positive} cohomological grading:
 \[V=\bigoplus_{s_r,\ldots,s_1\geq0,\,t\geq 1}V^{t}_{s_r,\ldots,s_1},\]
-and we write $\vect{+}{r}$ for the category of such objects. For the rest of this chapter we will often use gradings of this type, simply because they will be used so extensively later in the thesis.
+and we write $\vect{+}{r}$ for the category of such objects. For the rest of this chapter we will often use gradings of this type, simply because they will be used so extensively later in the sequel.
 
 Similarly, there is a category $\vect{r}{+}$, and  dualization is a functor $\dual:(\vect{+}{r})^\textup{op}\to\vect{r}{+}$.
 
 
 \SubsectionOrSection{The Dold-Kan Correspondence}\label{The Dold-Kan Correspondence}
-In this thesis we will use each of the following five chain complexes in $\complexes \vect{+}{r}$ associated with a simplicial graded vector-space $V\in s\vect{+}{r}$:
+We will use each of the following five chain complexes in $\complexes \vect{+}{r}$ associated with a simplicial graded vector-space $V\in s\vect{+}{r}$:
 \begin{alignat*}{2}
 C_nV&:=V_n&& \textup{ with differential }d=\textstyle\sum_{i=0}^{n}d_i;\\
 N_nV&:=\textstyle\bigcap_{0< i\leq n}\ker(d_i:V_n\to V_{n-1})&& \textup{ with differential }d=d_0;\\
@@ -1807,7 +1994,7 @@ where we view $V$ as a trivial chain complex. Then $\calF$ can be constructed as
 \label{chom ccoh}
 
 
-In this thesis we will always define the $\calc$-\emph{homology} of $X\in s\calc$ by the formula:
+We will always define the $\calc$-\emph{homology} of $X\in s\calc$ by the formula:
 \[H_*^{\calc}X:=\pi_*(Q^\calc B^\calc X)=H_*N_*(Q^\calc B^\calc X).\]
 These homology functors are well defined, as the $Q^\calc\dashv K^\calc$ adjunction is a Quillen adjunction (that $K^\calc$ preserves fibrations and acyclic fibrations is immediate), and indeed we are free to use any cofibrant replacement in place of $B^\calc X$.
 
@@ -1959,7 +2146,7 @@ In \S\ref{The categories Ln} we will define various categories of graded partial
 
 
 \SubsectionOrSection{Non-unital commutative algebras}
-In this thesis we will  work with \emph{non-unital} commutative algebras except when we specify otherwise. As for Lie algebras, there are three different notions of non-unital commutative algebra available in characteristic 2. A \emph{commutative algebra} (or $S(\CommOperad)$-algebra) is a vector space $A$ equipped with an associative commutative pairing $A\otimes A\to A$.  We will work with these often, and will write $\algs$ for the category of such algebras. In fact, we will so often discuss simplicial non-unital commutative algebras that we will refer to them simply as \emph{simplicial algebras}.
+We will  work with \emph{non-unital} commutative algebras except when we specify otherwise. As for Lie algebras, there are three different notions of non-unital commutative algebra available in characteristic 2. A \emph{commutative algebra} (or $S(\CommOperad)$-algebra) is a vector space $A$ equipped with an associative commutative pairing $A\otimes A\to A$.  We will work with these often, and will write $\algs$ for the category of such algebras. In fact, we will so often discuss simplicial non-unital commutative algebras that we will refer to them simply as \emph{simplicial algebras}.
 
 An \emph{exterior algebra} (or $\Lambda(\CommOperad)$-algebra) is a commutative algebra $A$ with the property that $x^2=0$ for all $x\in A$. A \emph{divided power algebra} (or $\Gamma(\CommOperad)$-algebra) is a commutative algebra $A$ equipped with \emph{divided power} operations, as described in \citeBOX[1.2.2]{FresseSimplicialAlgs.pdf} or \citeBOX[\S2]{MR1089001}. In characteristic 2, these operations are all determined by a single operation, the \emph{divided square} $\gamma_2:A\to A$, which satisfies
 \[\gamma_2(xy)=x^2\gamma_2(y),\ \gamma_2(\lambda x)=\lambda^2\gamma_2(x)\textup{ and }\gamma_2(x+y)=\gamma_2(x)+\gamma_2(y)+xy.\]
@@ -2585,8 +2772,7 @@ where the second isomorphism is that of Lemma \ref{Q of a model}, so that
 When $\calc=\algs$, Goerss equipped the reverse Adams spectral sequence with certain spectral sequence operations \citeBOX[\S14]{MR1089001}, work which can be framed using the external operations, due to Singer, which we reprise in \S\ref{Operations in composite functor spectral sequences}. We discuss Goerss' use of the reverse Adams spectral sequence further in \S\ref{An equivalent reverse Adams spectral sequence}, where we compare it to our use of composite functor spectral sequences.
 
 %Indeed, these operations on the reverse Adams spectral sequence make for an interesting point of comparison for the operations we present in \S\ref{Operations in composite functor spectral sequences}. \textbf{some are probably the same.}%, which arise in a composite functor spectral sequence with the same target as the unstable Adams s. We will define various spectral sequences, and construct spectral sequence operations whic
-In this thesis we study the Bousfield-Kan spectral sequence (c.f.\ \S\ref{Bousfield-Kan spectral sequence}), which is also known as the unstable Adams spectral sequence, for the category $s\algs$. %The operations defined in \S\ref{Operations on the Bousfield-Kan spectral sequence} for this spectral sequence make for another point of comparison. 
-Loosely, we find that certain of the operations on the \BKSS\ defined in \S\ref{Operations on the Bousfield-Kan spectral sequence} are Koszul dual to the operations identified by Goerss on the reverse Adams spectral sequence.
+In our study of the Bousfield-Kan spectral sequence (c.f.\ \S\ref{Bousfield-Kan spectral sequence}) for the category $s\algs$, which may also be referred to as the unstable Adams spectral sequence, we find that certain of the operations on the \BKSS\ defined in \S\ref{Operations on the Bousfield-Kan spectral sequence} are Koszul dual to the operations identified by Goerss on the reverse Adams spectral sequence.
 
 
 
@@ -2660,7 +2846,7 @@ If $X_1$ and $X_2$ are models, the displayed map $i$ is an isomorphism, since bo
 \end{proof}
 
 \SubsectionOrSection{Cofibrant replacement via the small object argument}\label{Cofibrant replacement via the small object argument}
-The homotopy of an object $X$ of $s\calc$ was defined simply by application of the forgetful functor $U^{\calc}:\calc\to\vect{}{}$, a definition which is tautologically homotopically correct. On the other hand, in order to define the homology $H_*^{\calc}X$, as the left Quillen functor $Q^{\calc}$ does not preserve all weak equivalences, we must perform a cofibrant replacement before applying $Q^{\calc}$. While the comonadic bar construction $B^{\calc}$ described in \S\ref{ssec: quillen model and bar construction} suffices to define the groups $H_*^{\calc}X$, it lacks the structure that we will need at various points in this thesis.
+The homotopy of an object $X$ of $s\calc$ was defined simply by application of the forgetful functor $U^{\calc}:\calc\to\vect{}{}$, a definition which is tautologically homotopically correct. On the other hand, in order to define the homology $H_*^{\calc}X$, as the left Quillen functor $Q^{\calc}$ does not preserve all weak equivalences, we must perform a cofibrant replacement before applying $Q^{\calc}$. While the comonadic bar construction $B^{\calc}$ described in \S\ref{ssec: quillen model and bar construction} suffices to define the groups $H_*^{\calc}X$, it lacks the structure that we will need at various points in this monograph.
 
 Radulescu-Banu's innovation \cite{Radulescu-Banu.pdf} was to explain that the cofibrant replacement functor $c:s\calc\to s\calc$ constructed by Quillen's \emph{small object argument}  \cite{QuillenHomAlg.pdf}, which by design already possesses a natural acyclic fibration $\epsilon:c\to\Id$, in fact admits the full structure of a comonad, with diagonal $\beta:c\to cc$. As explained by Blumberg and Riehl \cite[Remark 4.12]{BlumRiehlResolutions.pdf}:
 \begin{prop}
@@ -2969,7 +3155,7 @@ H^\calc_* (X_1\sqcup X_2)
 
 
 \SubsectionOrSection{The quadratic part of a $\calc$-expression}\label{quadratic part section}
-In this thesis, we will often use a method of constructing cohomology operations used by Goerss in \citeBOX[\S5]{MR1089001}, and here we will set up a framework that can be applied to each case. We continue to suppose that $\calc$ is an algebraic category, monadic over $\vect{}{}$, a category of graded vector spaces, satisfying the assumptions of \S\ref{Universal algebras}.
+We will often use a method of constructing cohomology operations used by Goerss in \citeBOX[\S5]{MR1089001}, and here we will set up a framework that can be applied to each case. We continue to suppose that $\calc$ is an algebraic category, monadic over $\vect{}{}$, a category of graded vector spaces, satisfying the assumptions of \S\ref{Universal algebras}.
 
 
 
@@ -3075,7 +3261,7 @@ where $\mu$  and $\epsilon$ stand for the multiplication and augmentation of the
 \label{Bousfield-Kan spectral sequence}
 
 In this chapter, we will write $\algcat$ for any category of universal graded $\Ftwo $-algebras satisfying the standing assumptions of \S\ref{Universal algebras}. The \emph{Bousfield-Kan spectral sequence of $X\in s\algcat$} is the second quadrant homotopy spectral sequence (c.f.\ \S\ref{Towers, exact couples and coaugmented cosimplicial objects}) of Radulescu-Banu's resolution $\calx\in cs\algcat$ of $X$ recalled in \S\ref{The Hurewicz map, primitives and homology completion}.
-The key objective of this thesis is to understand this spectral sequence when $\calc=\algs$.
+The key objective of this work is to understand this spectral sequence when $\calc=\algs$.
 
 Our first step, in \S\ref{Idnt E1 E2}, is to identify the $E_2$-page as appropriate derived functors. Before we turn to the calculation of these derived functors in later chapters, we consider the convergence target, $\Tot \calx=:X\hat{\ }$. From \S\ref{sec:relnWithRB} to the end of this section, we will give a proof of Theorem \ref{completenesstheorem} --- that the completion $X\hat{\ } $ is weakly equivalent to $X$ when $\calC$ is either $\algs$ or $\restliealgs$ and $X$ is connected.
 
@@ -3207,7 +3393,7 @@ If $\algcat$ is either $\algs$ or $\restliealgs$, and $X$ is connected with $H^*
 
 
 \SubsectionOrSection{The Adams tower}\label{sec:derWRTab}\label{sec:relnWithRB}
-Bousfield and Kan defined the \emph{Bousfield-Kan spectral sequence}, or \emph{unstable Adams spectral sequence}, of a simplicial set in two different ways. Their earlier approach \cite{BK_pairings.pdf} was to define the \emph{derivation of a functor with respect to a ring}. This approach constructs the \emph{Adams tower} over the simplicial set in question, and lends itself well to connectivity analyzes. Their latter approach, \cite{BousKanSSeq.pdf}, to give a cosimplicial resolution of a simplicial set by simplicial $R$-modules, lends itself more to the analysis of the $E_2$-page, and is directly analogous to Radulescu-Banu's construction described in \S\ref{The Hurewicz map, primitives and homology completion}.
+Bousfield and Kan defined the \BKSS\ (a.k.a.\ the \emph{unstable Adams spectral sequence}) of a simplicial set in two different ways. Their earlier approach \cite{BK_pairings.pdf} was to define the \emph{derivation of a functor with respect to a ring}. This approach constructs the \emph{Adams tower} over the simplicial set in question, and lends itself well to connectivity analyzes. Their latter approach, \cite{BousKanSSeq.pdf}, to give a cosimplicial resolution of a simplicial set by simplicial $R$-modules, lends itself more to the analysis of the $E_2$-page, and is directly analogous to Radulescu-Banu's construction described in \S\ref{The Hurewicz map, primitives and homology completion}.
 
 Since the release of \cite{BK_pairings.pdf} and \cite{BousKanSSeq.pdf}, the relationship between the two approaches has been clarified by the introduction of cubical homotopy theory \cite{GoodwillieCalcII}. In this section we will define the Adams tower of a simplicial algebra using a construction analogous to Bousfield and Kan in \cite{BK_pairings.pdf}, and then to relate it to Radulescu-Banu's construction using the theory of cubical diagrams. 
 
@@ -3982,9 +4168,9 @@ F^{\PA{\restliealgs}}V&=\Ftwo \left\{\lambda_Ib\ \middle|\ \genfrac{}{}{0pt}{}{b
 &=\Ftwo \left\{\lambda_I\bigl(\restnRepeated{b}{r}\bigr)\ \middle|\ \genfrac{}{}{0pt}{}{b\in B_t\textup{, $I$ $\Lambda$-admissible with }\minDimDelta(I)< t,}{\textup{$r\geq0$}}\right\}.
 \end{align*}
 \end{prop}
-For the sake of interest, we can  emulate  Goerss' method of calculating the cohomology of GEMs in $s\algs$ (c.f.\ \S\ref{The example of simplicial commutative F2-algebras}, \cite{GoerssHiltonMilnor.pdf} and \citeBOX[\S11]{MR1089001}) by giving a Hilton-Milnor decomposition for the calculation of the free $\liealgs$-$\Pi$-algebra on a finite-dimensional object of $\vect{}{1}$, using \cite[Proposition 3.1]{Schles-SimpLieRing.pdf}. For any $i\geq0$, write $\Sigma^i\Ftwo \in\vect{}{1}$ for a one-dimensional vector space concentrated in homological dimension $i$.
+For the sake of interest, we can  emulate  Goerss' method of calculating the cohomology of GEMs in $s\algs$ (c.f.\ \S\ref{The example of simplicial commutative F2-algebras}, \cite{GoerssHiltonMilnor.pdf} and \citeBOX[\S11]{MR1089001}) by giving a Hilton-Milnor decomposition for the calculation of the free $\liealgs$-$\Pi$-algebra on a finite-dimensional object of $\vect{}{1}$, using \cite[Proposition 3.1]{Schles-SimpLieRing.pdf}. For any $i\geq0$, write $\Sigma_i\Ftwo \in\vect{}{1}$ for a one-dimensional vector space concentrated in homological dimension $i$.
 For any finite collection of indices $i_1,\ldots,i_n\geq 0$, we would like to calculate:
-\[F^{\PA{\liealgs}}(\Sigma^{i_1}\Ftwo\oplus\cdots \oplus\Sigma^{i_n}\Ftwo)=\pi_*F^\liealgs(\mathbb{K}_{i_1}\oplus\cdots \oplus \mathbb{K}_{i_n}).\]
+\[F^{\PA{\liealgs}}(\Sigma_{i_1}\Ftwo\oplus\cdots \oplus\Sigma_{i_n}\Ftwo)=\pi_*F^\liealgs(\mathbb{K}_{i_1}\oplus\cdots \oplus \mathbb{K}_{i_n}).\]
 and we obtain a decomposition of $\pi_*F^\liealgs(\mathbb{K}_{i_1}\oplus\cdots \oplus \mathbb{K}_{i_n})$ as follows. For any monomial $b$ is the free Lie algebra on $\{x_1,\ldots,x_n\}$ and any collection of $n$ vector spaces $A_{1},\ldots,A_n$, there is a corresponding tensor product $w_b(A_{1},\ldots,A_n)$. For example, one defines
 \[w_{[[x_2,x_1],x_3]}:=A_2\otimes A_1\otimes A_3.\]
 Moreover, for each monomial $b$ there is an evident function \[w_b(A_1,\ldots,A_n)\to F^\liealgs(A_1\oplus\cdots\oplus A_n),\]
@@ -3998,7 +4184,7 @@ Thus, there is an isomorphism in $s\vect{}{1}$:
 Moreover, if we follow \citeBOX[\S11]{MR1089001} by writing $j_k(b)$ for the number of appearances of $x_k$ in the monomial $b$, there is a homotopy equivalence
 \[w_b(\mathbb{K}_{i_1},\ldots,\mathbb{K}_{i_n})\simeq \mathbb{K}_{\sum_{k=1}^n J_k(b)i_k}.\]
 Thus, on homotopy there is a decomposition:
-\[\bigoplus_{b\in B}F^{\PA{\liealgs}}\Sigma^{(\sum_{k=1}^n j_k(b)i_k)}\Ftwo\overset{\cong}{\to} F^{\PA{\liealgs}}(\Sigma^{i_1}\Ftwo\oplus\cdots \oplus\Sigma^{i_n}\Ftwo),\]
+\[\bigoplus_{b\in B}F^{\PA{\liealgs}}\Sigma_{(\sum_{k=1}^n j_k(b)i_k)}\Ftwo\overset{\cong}{\to} F^{\PA{\liealgs}}(\Sigma_{i_1}\Ftwo\oplus\cdots \oplus\Sigma_{i_n}\Ftwo),\]
 under which the fundamental class of a summand on the left maps to the corresponding Lie bracket of fundamental classes on the right. This proves the first part of Proposition \ref{Lie homotopy operations}.
 
 
@@ -4032,7 +4218,7 @@ C(\dual U\otimes\dual V)^{i}\ar[d]\\%r1c2
 &%r2c1
 (\dual C(U\otimes V))^{i}%r2c2
 }\]
-This is the first instance of a notational convention we will use occasionally in what follows. We consider the operations $D^k$ to be `of primary interest' in this thesis,  and so we prefer not to adorn the symbol $D^k$. However, we would like to have access to operations $(D^k)^{\star}$ \emph{of which the $D^k$ are the duals} in the sense of the above commuting square, and not the other way around. So, we use a star as opposed to an asterisk when writing $(D^k)^{\star}$.
+This is the first instance of a notational convention we will use occasionally in what follows. We consider the operations $D^k$ to be `of primary interest' in this context,  and so we prefer not to adorn the symbol $D^k$. However, we would like to have access to operations $(D^k)^{\star}$ \emph{of which the $D^k$ are the duals} in the sense of the above commuting square, and not the other way around. So, we use a star as opposed to an asterisk when writing $(D^k)^{\star}$.
 
 \SubsectionOrSection{External unary cohomotopy operations}\label{External unary cohomotopy operations}
 %\begin{shaded}\tiny
@@ -5855,8 +6041,7 @@ holds when $z\in (CX\otimes CX)_N$ with $N>2(k+1)$. When $N= 2(k+1)$,
 \[(d\mathbb{D}_k+\mathbb{D}_kd)(z)= ((1+\twist)\mathbb{D}_{k+1}+\Nabla\twist D^{-k-1}+\textstyle\sum_{\alpha} \oldphi_{\alpha}\twist^{\alpha+1} D^{\alpha-k-1})(z).\]
 \end{lem}
 \begin{proof}
-\newcommand{\twolinesum}[2]{\mathop{\sum_{\mathclap{#1}}}_{\mathclap{#2}}}
-\newcommand{\onelinesum}[1]{\sum_{\mathclap{#1}}}
+
 We may assume that $ z$ is homogeneous, $z\in (CX\otimes CX)_{t}^{s}$ with $N=t-s\geq2(k+1)$. Choose $\alpha$ and $\beta$ such that $\alpha-\beta=k$. Then $(\twist^\alpha D^\beta(z))\in C(X\otimes\dver Y)^{s-\beta}_{t}$.
 
 We will need to apply Lemma \ref{unpleasant formula} to calculate, for $\alpha-\beta=k$:
@@ -5870,41 +6055,41 @@ After these observations and under our conventions on the $\Nabla_\alpha$ and $D
 \begin{alignat*}{2}
 (d\mathbb{D}_k+\mathbb{D}_kd)(z)
 :={}&
-\onelinesum{\alpha-\beta=k}\left(d\Nabla_\alpha\twist^\alpha D^\beta+\Nabla_\alpha\twist^\alpha D^\beta d\right)(z)%
+\sum_{\mathclap{\alpha-\beta=k}}\left(d\Nabla_\alpha\twist^\alpha D^\beta+\Nabla_\alpha\twist^\alpha D^\beta d\right)(z)%
 \\
 ={}&
-\onelinesum{\alpha-\beta=k}\left((d\Nabla_\alpha+
+\sum_{\mathclap{\alpha-\beta=k}}\left((d\Nabla_\alpha+
 \Nabla_\alpha d)\twist^\alpha D^\beta+
 \Nabla_\alpha\twist^\alpha (dD^\beta+
 D^\beta d)\right)(z)%
 \\
 ={}&
-\onelinesum{\alpha-\beta=k,\ \alpha\geq0}((1{+}\twist)\Nabla_{\alpha+1}+\oldphi_{\alpha+1})\twist^\alpha D^\beta(z)+ \onelinesum{\alpha-\beta=k} \Nabla_\alpha\twist^\alpha(1{+}\twist) D^{\beta-1}(z)%
+\sum_{\mathclap{\alpha-\beta=k,\ \alpha\geq0}}((1{+}\twist)\Nabla_{\alpha+1}+\oldphi_{\alpha+1})\twist^\alpha D^\beta(z)+ \sum_{\mathclap{\alpha-\beta=k}} \Nabla_\alpha\twist^\alpha(1{+}\twist) D^{\beta-1}(z)%
 \\
 ={}&
-\onelinesum{\alpha-\beta=k+1,\ \alpha\geq1}((1{+}\twist)\Nabla_{\alpha}+\oldphi_{\alpha})\twist^{\alpha-1} D^\beta(z)+ \onelinesum{\alpha-\beta=k+1} \Nabla_\alpha\twist^\alpha(1{+}\twist) D^{\beta}(z)%
+\sum_{\mathclap{\alpha-\beta=k+1,\ \alpha\geq1}}((1{+}\twist)\Nabla_{\alpha}+\oldphi_{\alpha})\twist^{\alpha-1} D^\beta(z)+ \sum_{\mathclap{\alpha-\beta=k+1}} \Nabla_\alpha\twist^\alpha(1{+}\twist) D^{\beta}(z)%
 %\\
 %={}&
-%\onelinesum{\alpha-\beta=k+1} \left(((1+\twist)\Nabla_{\alpha}+ \phi_{\alpha})\twist\twist^{\alpha} D^\beta+\Nabla_\alpha(1+\twist)\twist^\alpha D^{\beta}\right)(z) + {}%
+%\sum_{\mathclap{\alpha-\beta=k+1}} \left(((1+\twist)\Nabla_{\alpha}+ \phi_{\alpha})\twist\twist^{\alpha} D^\beta+\Nabla_\alpha(1+\twist)\twist^\alpha D^{\beta}\right)(z) + {}%
 %\\
 %&\ \ \ \ \ \ \ \ \ \ \ +
 %((1+\twist)\Nabla_{0}+\phi_{0})\twist D^{-k-1}(z)
 \end{alignat*}
 Using the identity $(1+\twist)\Nabla_{0}+\oldphi_{0}=\Nabla$ for the first equation, and the observation that $(1+\twist)F\twist G+F(1+\twist)G=(1+\twist)(FG)$  for the second (with $F=\Nabla_\alpha$ and $G=\twist^\alpha D^\beta$):
-%\[(d\mathbb{D}_k+\mathbb{D}_kd)(z)-\Nabla\twist D^{-k-1}(z)=\onelinesum{\alpha-\beta=k+1} \left(((1+\twist)\Nabla_{\alpha}+ \phi_{\alpha})\twist\twist^{\alpha} D^\beta+\Nabla_\alpha(1+\twist)\twist^{\alpha}D^{\beta}\right)(z)\]
+%\[(d\mathbb{D}_k+\mathbb{D}_kd)(z)-\Nabla\twist D^{-k-1}(z)=\sum_{\mathclap{\alpha-\beta=k+1}} \left(((1+\twist)\Nabla_{\alpha}+ \phi_{\alpha})\twist\twist^{\alpha} D^\beta+\Nabla_\alpha(1+\twist)\twist^{\alpha}D^{\beta}\right)(z)\]
 \begin{alignat*}{2}
 (d\mathbb{D}_k+\mathbb{D}_kd)(z)-\Nabla\twist D^{-k-1}(z)
 &=
-\onelinesum{\alpha-\beta=k+1} \left(((1+\twist)\Nabla_{\alpha}+ \oldphi_{\alpha})\twist\twist^{\alpha} D^\beta+\Nabla_\alpha(1+\twist)\twist^{\alpha}D^{\beta}\right)(z)%
+\sum_{\mathclap{\alpha-\beta=k+1}} \left(((1+\twist)\Nabla_{\alpha}+ \oldphi_{\alpha})\twist\twist^{\alpha} D^\beta+\Nabla_\alpha(1+\twist)\twist^{\alpha}D^{\beta}\right)(z)%
 \\
 &=
-\onelinesum{\alpha-\beta=k+1} \left((1+\twist)(\Nabla_\alpha\twist^\alpha D^\beta)+ \oldphi_{\alpha}\twist^{\alpha+1} D^\beta\right)(z)%
+\sum_{\mathclap{\alpha-\beta=k+1}} \left((1+\twist)(\Nabla_\alpha\twist^\alpha D^\beta)+ \oldphi_{\alpha}\twist^{\alpha+1} D^\beta\right)(z)%
 \\
 % Left hand side
 % Relation
 &=
 % Right hand side
-(1+\twist)\mathbb{D}_{k+1}(z)+\onelinesum{\alpha} \textstyle\oldphi_{\alpha}\twist^{\alpha+1} D^{\alpha-k-1}(z)%
+(1+\twist)\mathbb{D}_{k+1}(z)+\sum_{\mathclap{\alpha}} \textstyle\oldphi_{\alpha}\twist^{\alpha+1} D^{\alpha-k-1}(z)%
 \end{alignat*}
 When the strict inequality $t-s>2(k+1)$ holds, due to the application of $\oldphi_{\alpha}$, each summand $\oldphi_{\alpha}\twist^{\alpha+1} D^{\alpha-k-1}(z)$ is zero unless $t=2\alpha$, but in that case, $s=2\alpha-N<2(\alpha-k-1)$, and then $D^{\alpha-k-1}(z)$ vanishes as $\{D^k\}$ is special.
 %
@@ -6216,7 +6401,7 @@ where we have used the assumption that $\{D^k\}$ is special in both the second a
 
 \SubsectionOrSection{Internal operations on $\E{}{r}{X}{}{}$ for $X\in cs\algs$}
 \label{The case of a cosimplicial simplicial commutative algebra}
-Suppose that $X\in cs\algs$ is a cosimplicial simplicial commutative non-unital $\F_2$-algebra. In this section we will define operations on  $\E{}{r}{X}{}{}$ by direct application of the structure map of $X$. Although these operations will not be used in rest of this thesis (they equal zero in the case of interest to us), we hope they are of some independent interest. 
+Suppose that $X\in cs\algs$ is a cosimplicial simplicial commutative non-unital $\F_2$-algebra. In this section we will define operations on  $\E{}{r}{X}{}{}$ by direct application of the structure map of $X$. Although these operations will not be used in rest of this monograph (as they equal zero in the case of interest to us), we hope they are of some independent interest. 
 
 We define operations:
 \begin{gather*}
@@ -6810,7 +6995,7 @@ It seems likely to the author that this is a complete description of the natural
 
 
 
-Although we do not use the following operations in this thesis (as we do not consider the \BKSS\ for simplicial Lie algebras in detail), we note that when $\calc=\liealgs$ or $\calc=\restliealgs$ there are operations:
+Although we do not use the following operations here (as we do not consider the \BKSS\ for simplicial Lie algebras in detail), we note that when $\calc=\liealgs$ or $\calc=\restliealgs$ there are operations:
 \begin{gather*}
 \lambdav_i:\left(\Edownup{r}{}{X}{s}{t} \smash{{}\overset{\lambda_i^\textup{ext}}{\to}{}} \Edownup{r}{}{\quadgrad{2}F^\calc X}{s}{t+i}\smash{{}\overset{L}{\to} {}}
 \Edownup{r}{}{X}{s+1}{t+i+1}\right),
@@ -7565,6 +7750,285 @@ and the fact that $\overline{G}(\epsilon\alpha)( z_t)=\widetilde{\epsilon\alpha}
 \end{proof}
 
 \end{Operations on the Bousfield-Kan spectral sequence}
+
+
+
+
+\SectionOrChapter{Iterated $E_2$-operations}
+\label{The Bousfield-Kan spectral sequence for a sphere}
+For any $T\geq1$ and $S\geq0$, suppose that $\imath\in\EZ{}{\infty}{\calx}{S}{T}$.  Write
+\[\aDTSe:=\{I\ |\ \textup{$I$ is $\delta$-admissible, $e(I)\leq T-S$}\}.\]
+%%We will also use the notation
+%\begin{alignat*}{2}
+%\aDTm&:=\{I\ |\ \textup{$I$ is $\delta$-admissible, $\minDimP(I)\leq T$}\},\\
+%\aDTnoplus&:=\left\{I\ \middle|\ \textup{$I$ a $\delta$-admissible sequence with }\minDimP(I)\leq t\right\}.
+%%\aDTme&:=\{I\ |\ \textup{$I$ is $\delta$-admissible, $\minDimP(I)\leq T<e(I)$}\}.
+%\end{alignat*}
+
+During this chapter we will use a number of different integer-valued functions on
+\[\aDTEtwo:=\left\{I\ \middle|\ \textup{$I$ $\delta$-admissible, can make at E2, so }\minDimP(I)\leq T\right\}.\]
+For $I=(i_l,\ldots,i_1)\in \aDTnoplus$,
+%\[\ell,n,e:\aDTnoplus\to \{0,1,2,\ldots\}\]
+%which evaluate on a sequence $I=(i_l,\ldots,i_1)$ as follows:
+\[\ell(I):=l,\ \ n(I):=i_1+\cdots +i_l,\ \ e(I):=i_l-i_{l-1}-\cdots -i_1=2i_l-n(I),\]
+and we also use the function
+\[a(I):=\ell(I)-1-(e(I)-(T-S)).\]
+One easy yet imporant observation about the function $a$ is
+\begin{lem}
+\label{funtion a doesn't grow much}
+If $I=(i_l,\ldots,i_1)$ is $\delta$-admissible and $I^{-}:=(i_{l-1},\ldots,i_1)$, then
+\[a(I)\leq a(I^{-})+1.\]
+
+\end{lem}
+
+Moreover, for $r\geq1$ and any $s\geq0$ we will write
+\[\aS[r]{s}:=\left\{J=(j_{\ell(J)},\ldots,j_1)\ \middle|\ \textup{$J$ is $\Sq$-admissible, }\minDimDelta(J)\leq s+1,\ j_1>r\right\},\]
+where the condition $j_1>r$ is to be ignored if $J$ is empty.
+For an element $J\in \aS[r]{s}$ with $J=(j_{\ell(J)},\ldots,j_1)$, and for any $n> r-j_1$ we will write $\Phi_nJ$ for the sequence
+\[\Phi_nJ:=(j_{\ell(J)}+2^{\ell(J)-1}n,\ldots,j_2+2n,j_1+n)\in \aS[r]{s+n}.\]
+
+\SubsectionOrSection{Classes unstable at $E_2$}
+\label{Classes unstable at E2}
+In this section we will analyse the part of the spectral sequence that is generated on $E_2$ by the fundamental class under the operations that are \emph{unstable at $E_2$}. In order to be more precise, we define
+\begin{alignat*}{2}
+\aDTSEtwo&:=\begin{cases}
+\left\{I\ \middle|\ \textup{$I$ is $\delta$-admissible, }2\leq i_1\leq T,
+\ \minDimP(i_{\ell},\ldots,i_2)\leq T+i_1\right\},&\textup{if }S=0;\\
+\left\{I\ \middle|\ \textup{$I$ is $\delta$-admissible, } \minDimP(i_{\ell},\ldots,i_1)\leq T\right\},&\textup{if }S>0.
+%\\,&\textup{if }
+\end{cases}
+\\
+\calgEtwo&:=\{(J,I)\ |\ I\in \aDTEtwo,\ J\in \aS[2]{S+\ell (I)}\}.
+\end{alignat*}
+where again, the conditions on $I$ are to be ignored when $I $ is empty.
+The purpose of these definitions is that for any $(J,I)\in \calgEtwo$, we can form the element
+\[\Sqh^{J}\deltav_{I}\imath\in \E{}{2}{\calx}{}{},\]
+by simply applying the $E_2$-level operations repeatedly to $\imath$, and it is not forced to be zero for dimension reasons.
+
+We will not distinguish notationally between these elements of $E_2$ and the classes that they survive to in higher pages. This is actually an important point, as we demonstate with the following example from the \BKSS\ for the 3-sphere $\mathbb{S}^\algs_3$. If $\imath \in \E{}{2}{\mathbb{S}^\algs_3}{0}{3}$ is the fundamental class, there is a differential $d_{2}:\deltav_{10,4,2}\imath\mapsto\Sqh^{3}\deltav_{4,2}\imath$, so that $\deltav_{10,4,2}\imath$ does not survive to $E_3$, after all
+\[\textup{``$\deltav_{10}$''}:\E{}{3}{\mathbb{S}^\algs_3}{2}{11}\to \E{}{3}{\mathbb{S}^\algs_3}{3}{22}\textup{ is not defined}.\]
+Nonetheless, $\deltav_{20,10,4,2}\imath\in E_2$ does survive to $E_3$ (where it supports a differential to $\Sq^{4}\deltav_{10,4,2}\imath$) and we still need to refer to this element. In this situation ?????????????? does not immediately provide a calculation of the differential of an iterated $\deltav$-operation. That is, we may compute
+\[d_2(\deltav_{20,10,4,2}\imath)=\deltav_{20}d_2\deltav_{10,4,2}\imath=\deltav_{20}\Sqh^{3}\deltav_{4,2}\imath=0,\]
+but it is does not make sense to write 
+\[d_3(\deltav_{20,10,4,2}\imath)=\deltav_{20}d_3(\deltav_{10,4,2}\imath)+\Sqh^4\deltav_{10,4,2}\imath\]
+using ??????. Instead, we must perform our calculation with a little more care, by choosing appropriate chain level representatives for the iterated operations.
+\begin{lem}
+If $I\in \aDTSEtwo \setminus\aDTSe$, then $a(I)\geq(????)$.
+There is a function $f:\aDTSEtwo\to C\calx$, such that for all $I\in \aDTSEtwo$,
+$d(f(I))$
+
+\end{lem}
+
+
+
+
+We may mimic the calculation of $d_1\Sqh^J\deltav_I\imath$ made in \S\ref{An alternative Bousfield-Kan E1} to produce a differential:
+\begin{prop}
+If $I\in \aDTEtwo \setminus\aDTe$, then $a(I)\geq1$, and $\deltav_I\imath\in E_2$  survives to $E_{a(I)+1}$, and
+\[
+d_{a(I)+1}(\deltav_I\imath)=\smash{ \overline{\Sqh^{a(I)+2}\deltav_{I^{-}}\imath}},
+\]
+the class in $E_{a(I)+1}$ of the cycle $\Sqh^{a(I)+2}\deltav_{I^{-}}\imath\in E_{a(I)}$. This is indeed a cycle, as $\deltav_{I^{-}}$ survives to $E_{a(I^-)+1}$, so that $\Sqh^{a(I)+2}\deltav_{I^{-}}\imath$ survives to $E_{2a(I^{-})+1}$, which is no earlier than $E_{a(I)+1}$.
+\end{prop}
+\begin{proof}
+We prove this result by induction on $\ell:=\ell(I)$, after noting some properties of every $I\in \aDTEtwo \setminus\aDTe$. Firstly, $I$ has length at least three, when $\ell\leq 2$, the conditions for membership of $\aDTEtwo $ reduce to the conditions for membership of $\aDTe$. Next, from the assumption that $\minDimP(i_{\ell},\ldots,i_2)\leq T+i_1$ we derive that
+\[0\leq T+i_1-\minDimP(i_{\ell},\ldots,i_2)\leq T+i_1-(i_{\ell}-\cdots-i_2-(\ell-2))=T-e(I)+\ell-2,\]
+i.e.\ that $a(I)\geq1$. Thus we are constructing differentials on the $E_2$-page or later.
+
+Suppose first that either $I^-\in \aDTe$ or $a(I^-)> a(I)$. In the former case $\deltav_{I^-}\imath$ is a permanent cycle, and in the latter case, by induction, $\deltav_{I^-}\imath$ survives at least to $E_{a(I)+2}$. Thus, the apparent tautology
+ $\deltav_I\imath = \deltav_{i_l}(\deltav_{I^-}\imath)$
+makes sense on $E_{a(I)+1}$, and by Corollary \ref{cor on delta external composed with lift}:
+\[d_{a(I)+1}(\deltav_{i_l}\deltav_{I^-}\imath)
+=
+\Sqh^{a(I)+2}\deltav_{I^-}\imath
++
+\deltav_{i_l}d_{a(I)+1}(\deltav_{I^-}\imath)
+=
+\Sqh^{a(I)+2}\deltav_{I^-}\imath
+.
+\]
+Thus, we may assume that $I^-\notin \aDTe$ and $a(I^-)$ is either $a(I)-1$ or $a(I)$.
+
+Now we should understand what is implied by the induction hypothesis. That is, there is an element $c$ in the total complex of $x$, of filtration exceeding the intended filtration of $\deltav_{I^-}\imath$, such that
+\[R:=(\textup{DEL}_{i_{\ell-1}}\circ\cdots \circ\textup{DEL}_{i_{1}})(\imath)+c\]
+satsifies a congruence
+\[dR\equiv \textup{SQ}^{a(I^-)+1,sss}(\textup{DEL}_{i_{\ell-2}}\circ\cdots \circ\textup{DEL}_{i_{1}})(\imath)\]
+
+
+
+Now $d_{a(I)+1}(\deltav_{I^-}\imath)$ vanishes unless $I^-\notin \aDTe$ and $a(I^-)= a(I)$, in which case, by induction:
+\[\deltav_{i_l}d_{a(I)+1}(\deltav_{I^-}\imath)
+=
+\deltav_{i_l}\Bigl(\smash{\overline{\Sqh^{a(I)+2}\deltav_{I^{--}}\imath}}\Bigr)
+=
+\smash{\overline{\deltav_{i_l}\Sqh^{a(I)+2}\deltav_{I^{--}}\imath}}
+\]
+
+
+, so that () Then $\deltav_{I^-}\imath$ does survive to an element of $E_{a(I)+1}$ (either by induction or)
+
+either  If $I^-\in \aDTe$ then $\deltav_{I^-}\imath$ is a permanent cycle, while if $a(I^-)>a(I)$
+Then the calculation is immediate from Corollary \ref{cor on delta external composed with lift}, as $\deltav_{I^-}\imath$ is a cycle on $E_{a(I)+1}$ either by the induction hypothesis or by the fact.
+%\[d_{a(I)+1}(\deltav_{i_l}\deltav_{I^-}\imath)=\Sqh^{a(I)+2}\deltav_{I^-}\imath\]
+
+If instead $I^-\notin \aDTe$ and $a(I^-)=a(I)$, we calculate
+%\[d_{a(I)+1}(\deltav_{i_l}\deltav_{I^-}\imath)
+%=
+%\Sqh^{a(I)+2}\deltav_{I^-}\imath
+%+
+%\deltav_{i_l}d_{a(I)+1}(\deltav_{I^-}\imath)
+%\]
+\begin{alignat*}{2}
+d_{a(I)+1}(\deltav_{i_l}\deltav_{I^-}\imath)
+&=
+\Sqh^{a(I)+2}\deltav_{I^-}\imath
++
+\deltav_{i_l}d_{a(I)+1}(\deltav_{I^-}\imath)\\
+&=
+\Sqh^{a(I)+2}\deltav_{I^-}\imath
++
+\begin{cases}
+0,&\textup{if }a(I^-)>a(I)\makebox[\widthof{ and }][c]{ or }I^- \in \aDTe;\\
+0,&\textup{if }a(I^-)=a(I)\makebox[\widthof{ and }][c]{ and }I^- \notin \aDTe.
+%\\,&\textup{if }
+\end{cases}
+\end{alignat*}
+
+%\deltav_{i_l}\Sqh^{a(I^-)+2}\deltav_{I^{--}}\imath
+%\]
+
+\[d_{a(I)+1}(\deltav_{i_l}\deltav_{I^-}\imath)
+=
+\deltav_{i_l}\Sqh^{a(I^-)+2}\deltav_{I^{--}}\imath
++
+\Sqh^{a(I)+2}\deltav_{I^-}\imath\]
+
+
+
+%\begin{shaded}\tiny
+%two, and indeed, there is only one example of length precisely two, $I=(2T+1,T)$. In this case, $a(I)=0$, and so we need to prove that 
+%\[d_1(\deltav_{2T+1}\deltav_{T}\imath)=\Sqh^2\deltav_{T}\imath.\]
+%This follows immediately from Corollary \ref{cor on delta external composed with lift}.
+%\end{shaded}
+
+By the induction hypothesis (or inspection), $\deltav_{I^-}$ survives to $E_{a(I^-)+1}$, which is at the latest the page before $E_{a(I)+1}$, by Lemma \ref{funtion a doesn't grow much}. Now we have found that 
+\[d_{a(I^-)+1}(\deltav_{I^-}\imath)=\Sqh^{a(I^-)+2}\deltav_{I^{--}}\imath\]
+
+\end{proof}
+ Nameley, for  $I\in \aDTEtwo \setminus\aDTe$, $\delta_I\imath\in E_2$  survives to $E_{a(I)+1}$, at which point
+\begin{equation}\label{theBasicDiff}
+d_{a(I)+1}:\delta_I\imath\mapsto\Sqh^{a(I)+2}\delta_{I^{-}}\imath,
+\end{equation}
+where we write $I^-$ for the sequence $(i_{\ell(I)-1},\ldots,i_1)$ obtained by removing the outermost entry of $I$. For any $(J,I)\in \calgEtwo$, there is then a differential 
+obtained by applying $\Sqh^J$ to the $d_{a(I)+1}$-differential (\ref{theBasicDiff}):
+\[d_{2^{\ell (J)}a(I)+1}:\Sqh^J\delta_I\imath \mapsto  \Sqh^{\Phi_{\smash{a(I)}}J}\Sqh^{a(I)+2}\delta_{I^{-}}\imath= \Sqh^{J^{+}}\delta_{I^{-}}\imath ,\]
+where $J^+:= (j_{\ell(J)}+2^{\ell(J)-1}a(I),\ldots,j_2+2a(I),j_1+a(I),a(I)+2)$.
+Now if $J^+$ fails to be $\Sq$-admissible  exactly when $a(I)+3-j_1\geq0$, in which case,  the format of the $\Sq$-Adem relation implies that $\Sqh^{J^{+}}\delta_{I^{-}}\imath=0$, as the rightmost index only decreases when applying the Adem relation, and the operations $\Sqh^{k}$ for $k<a(I)+2$ are not unstable, and so vanish.
+
+On the other hand, if $a(I)+3-j_1\geq0$, there is no reason that $\Sqh^{J^{+}}\delta_{I^{-}}\imath$ should vanish, as $J^+$ is already $\Sq$-admissible and unstable.
+
+
+\SubsectionOrSection{Some conjectures on the $E_1$-level structure}
+\label{Some conjectures on the E1-level structure}
+In order to construct all of the differentials needed, we will \emph{assume} from this point on:
+\begin{conjecture}
+\label{conjec1}
+It is possible to modify the definitions of the spectral sequence operations $\mu$, $\Sqh^j$ and $\deltav_i$ defined in \S\ref{Definition of the spectral sequence operations} in order that the $\Sq$-Adem relations and the relations $\deltav_i\Sqh^j=0$ hold on $E_1$ (without compromising the existing properties of these operations summarized in Proposition \ref{adams operations are right for comm} and Corollaries \ref{prop on basic product composed with lift}-\ref{Prop on einfty ops composed with lift}).
+\end{conjecture}
+\noindent From now on, we will replace the operations defined in \S\ref{Definition of the spectral sequence operations} with their conjectural counterparts (without change of notation).
+
+Recall the alternative Bousfield-Kan $E_1$-page defined in \S\ref{An alternative Bousfield-Kan E1}, written $\Eprime{blank}{1}{\calx}{s}{t}$. There was already a map of vector spaces $\Eprime{blank}{1}{\calx}{}{}\to \E{}{1}{\calx}{}{}$  in $\vect{1}{+}$ defined by
+\[\Eprime{blank}{1}{\calx}{}{}\ni \textstyle\prod_{k=1}^N\Sqh^{J_k}\deltav_{I_k}\imath\mapsto \textstyle\prod_{k=1}^N\Sqh^{J_k}\deltav_{I_k}\imath\in \E{}{1}{\calx}{}{},\]
+and using the conjectural definitions of the operations on  $\E{}{1}{\calx}{}{}$, it is a map of chain complexes. Indeed, we may calculate the differential in $\E{}{1}{\calx}{}{}$ exactly as we calculated in \S\ref{An alternative Bousfield-Kan E1}. Thus, there is an induced map $\Eprime{blank}{2}{\calx}{}{}\to \E{}{2}{\calx}{}{}$ (where we write $\Eprime{blank}{2}{\calx}{}{}$ for the homology of the chain complex $\Eprime{blank}{}{\calx}{}{}$). From now on, we will \emph{also} assume:
+\begin{conjecture}
+\label{conjec2}
+The induced map $\Eprime{blank}{2}{\calx}{}{}\to \E{}{2}{\calx}{}{}$ is an isomorphism (of vector spaces).
+\end{conjecture}
+\noindent This conjecture is not so unreasonable, since by Corollary \ref{the corollary on the bousfield kan e2} there is an isomorphism of vector spaces $\Eprime{blank}{2}{\calx}{}{}\to \E{}{2}{\calx}{}{}$ given by mapping an element of $\Eprime{blank}{2}{\calx}{}{}$ to the element of $\E{}{2}{\calx}{}{}$ of the same name, under the calculation of $\E{}{2}{\calx}{}{}$ given by Corollary \ref{the corollary on the bousfield kan e2}. In any case, we assume no more than the stated conjectures.
+
+\SubsectionOrSection{The resulting differentials}
+\label{The resulting differentials}
+We will now analyze the differentials $d_r$ applied to the various terms $\Sqh^J\deltav_I\imath$ originating on $E_1$.   Write $\calg$ for the set consisting of those pairs of sequences $(J,I)$ appearing in the definition of $\Eprime{blank}{1}{\calx}{}{}$, i.e.:
+\[\calg:=\{(J,I)\ |\ I\in \aDTnoplus,\ J\in \aS{\ell (I)}\}.\]
+We may decompose $\calg$ into three subsets:%, (with notation $J=(j_{\ell(J)},\ldots,j_1)$ implied):
+\begin{alignat*}{2}
+\calg_{e}
+&:=
+\{(\emptyset,I)\ |\ I\in \aDTe\},%
+\\
+\calg'
+&:=
+\{(J,I)\in\calg\setminus \calg_e\ |\ J=(j_{\ell(J)},\ldots,j_1),\ \ell(J)=0\textup{ \makebox[\widthof{and}][c]{or}\ }a(I)+3-j_1< 0\},%
+\\
+% Left hand side
+\calg''
+% Relation
+&:=
+% Right hand side
+\{(J,I)\in\calg\setminus \calg_e\ |\ J=(j_{\ell(J)},\ldots,j_1),\ \ell(J)>0\textup{ and\ }a(I)+3-j_1\geq 0\}.%
+% Comment
+\end{alignat*}
+Every class $\deltav_I\imath$ for $(\emptyset,I)\in\calg_e$ is a permanent cycle. On the other hand, we will prove:
+\begin{prop}\label{thereisamap...}
+Assuming Conjectures \ref{conjec1} and \ref{conjec2}, there is a bijective map $g:\calg'\to \calg''$ such that if $g(J,I)=(J',I')$ then there is a differential $d_r:\Sqh^J\deltav_I\imath\mapsto \Sqh^{J'}\deltav_{I'}\imath$.
+\end{prop}
+Using Conjecture \ref{conjec1} we may even mimic the calculation of $d_1\Sqh^J\deltav_I\imath$ made in \S\ref{An alternative Bousfield-Kan E1} at $E_1$. We find that
+if $I\in \aDTnoplus \setminus\aDTe$, $\delta_I\imath$  survives to $E_{a(I)+1}$, at which point
+\begin{equation}\label{theBasicDiff}
+d_{a(I)+1}:\delta_I\imath\mapsto\Sqh^{a(I)+2}\delta_{I^{-}}\imath,
+\end{equation}
+where we write $I^-$ for the sequence $(i_{\ell(I)-1},\ldots,i_1)$ obtained by removing the outermost entry of $I$.
+%Conjecture \ref{conjec1} is used  to obtain this formula \emph{on the nose} on $E_1$, where we would otherwise only obtain it up to homotopy on $E_1$.
+
+
+There is a differential, obtained by applying $\Sqh^J$ to the $d_{a(I)+1}$-differential (\ref{theBasicDiff}):
+\[d_{2^{\ell (J)}a(I)+1}:\Sqh^J\delta_I\imath \mapsto  \Sqh^{\Phi_{\smash{a(I)}}J}\Sqh^{a(I)+2}\delta_{I^{-}}\imath= \Sqh^{J^{+}}\delta_{I^{-}}\imath ,\]
+where $J^+:= (j_{\ell(J)}+2^{\ell(J)-1}a(I),\ldots,j_2+2a(I),j_1+a(I),a(I)+2)$.
+We define the map $g$ by requiring that $g(J,I)$ equals the pair $(J^{+},I^-)$ whenever $(J,I)\in\calg'$.
+\begin{proof}[Proof of Proposition \ref{thereisamap...}]
+Firstly, we should check that $g$ is well defined. Suppose first that $J=\emptyset$. Then we must have $e(I)>T $, so that 
+\[a(I)+2=\ell(I)-1-(e(I)-T)+2\leq \ell(I^-)+1,\]
+a condition required for $J^+$ to have any chance of lying in $\aS{\ell (I^-)}$. After this initial check, it is easy to check the condition required of $\minDimP(J^{+})$. Thus, $(J,I)\in \calg\setminus \calg_e$. We must also check that $a(I^-)+3-(a(I)+2)\geq0$, i.e.\ that $a(I^-)-a(I)\geq -1$, which reduces to the tautological condition $e(I)\geq e(I^{-})$. Thus $g$ is well defined.
+
+The injectivity of $g$ is clear, but we must check its surjectivity. Suppose for this purpose that $(J,I)\in\calg''$, so that $a(I)+3-j_1\geq 0$. We will begin by producing a differential
+\[d_{j_1-1}:\deltav_{I^+}\imath\mapsto \Sqh^{j_1}\deltav_I\imath\]
+with $I^{+}$ a $\delta$-admissible sequence $(i_{\ell(I)+1},i_{\ell(I)},\ldots,i_1)$. For this, we need $e(I^{+})\geq e(I)$ (to ensure admissibility of $I^+$) and $a(I^{+})=j_1-2$, but we are otherwise unconstrained, as $j_1\geq2$, and the demand $a(I^{+})\geq0$ will ensure that the additional $\delta_{i_{\ell(I)+1}}$ is defined. Now
+\[\ell(I^{+})-1-(e(I^{+})-T)=j_1-2 \iff e(I^{+})-e(I)=a(I)+3-j_1,\]
+but we have assumed that $a(I)+3-j_1$ is non-negative, so we have no difficulty satisfying  the constraint $a(I^{+})=j_1-2$.
+
+Next we use the sequence $\Phi_{-a(I^{+})}J^{-}$, where $J^-:=(j_{\ell(J)},\ldots,j_2)$, to produce the required differential
+\[d_{2^{\ell(J)-1}a(I^{+})+1}:\Sqh^{\Phi_{\smash{-a(I^{+})}}J^{-}}\deltav_{I^{+}}\imath\to \Sqh^J\delta_I\imath,\]
+as long as either $J^{-}$ is empty or  $a(I^{+})+3-(j_2-a(I^{+}))< 0$. If $J^{-}$ is non-empty, then the second condition reduces to the condition that the concatenation of $\Phi_{a(I^{+})}\Phi_{-a(I^{+})}J^{-}$ with the length one sequence $(a(I^{+})+2)$ is $\Sq$-admissible, but  this concatenation is $J$ itself.
+\end{proof}
+\begin{prop}
+\label{thats all the difls}
+Assuming Conjectures \ref{conjec1} and \ref{conjec2}, the differentials given in Proposition \ref{thereisamap...}, along with those arising from them by taking products (without repetition) and applying the Leibniz formula, are a complete set of differentials for the \BKSS\ for this sphere.
+\end{prop}
+\begin{proof}
+Although the $E_r$-page of the spectral sequence is not an exterior algebra for any finite $r$, we are working in a spectral sequence of commutative $\Ftwo$-algebras. As such, the differential is not sensitive to the difference between a polynomial algebra 
+$S(\CommOperad)[x]$ and an exterior algebra $\Lambda(\CommOperad)[x,x_2,x_4,x_8\ldots]$ in which $x_{2^i}$ is placed in the dimension of $x^{2^i}$. The upshot is that  the \BKSS\ $E_r$-page is isomorphic as a chain complex to an infinite coproduct of exterior algebras, starting with
+\[\Eprime{blank}{1}{}{}{}\cong\bigsqcup_{(J,I)\in\calg} \Lambda(\CommOperad)[\Sqh^{J_k}\deltav_{I_k}\imath].\]
+That is, we may rely on the properties of the Steenrod operations to allow us to deal with terms of the form $x\times x$.
+
+The differentials given in Proposition \ref{thereisamap...} are enough to eliminate all summands except for 
+\[\E{}{\infty}{}{}{}\cong\bigsqcup_{(\emptyset,I)\in\calg_e} \Lambda(\CommOperad)[\deltav_{I_k}\imath],\]
+which is isomorphic \emph{as an algebra} to the target $\pi_*(\mathbb{S}^{\algs}_T)$.
+\end{proof}
+Filtering the sets $\calg'$ and $\calg''$ by the length of the differentials associated with their elements, so that
+\[F^r\calg':=\{(J,I)\in\calg'\ |\ \textup{if $g(J,I)=(J',I')$ then $n(J')+\ell(I')\geq n(J)+\ell(I)+r$} \},\]
+and $F^r\calg'':=\im(g|_{F^r\calg'})$, the  proofs of Propositions \ref{thereisamap...} and \ref{thats all the difls} also prove:
+\begin{prop}
+\label{the description of the interim pages of the sseq}
+Assuming Conjectures \ref{conjec1} and \ref{conjec2}, there is an isomorphism of chain complexes, for $r\geq2$:
+\[\E{}{r}{}{}{}\cong 
+\bigsqcup_{(\emptyset,I)\in\calg_e} \Lambda(\CommOperad)[\deltav_{I_k}\imath]\sqcup
+\bigsqcup_{\!(J,I)\in F^r\calg'\!} \Lambda(\CommOperad)[\Sqh^{J_k}\deltav_{I_k}\imath]\sqcup
+\bigsqcup_{\!(J,I)\in F^r\calg''\!} \Lambda(\CommOperad)[\Sqh^{J_k}\deltav_{I_k}\imath]
+.\]
+\end{prop}
+
+Moreover, the complete calculation of the \BKSS\ for a finite connected model in $s\algs$ now follows simply by taking the coproduct of non-unital differential graded algebras at each page, with the appropriate grading shifts. For example:
+\[\E{}{r}{(\mathbb{S}_{T_1}^\algs\sqcup \mathbb{S}_{T_2}^\algs)}{}{}\cong \E{}{r}{\mathbb{S}_{T_1}^\algs}{}{}\sqcup \E{}{r}{\mathbb{S}_{T_2}^\algs}{}{}.\]
 
 
 \begin{Comp funct sseqs}
