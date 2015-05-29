@@ -506,15 +506,21 @@ url=false,doi=false,isbn=false,eprint=false]{biblatex}%
 \fulltriangle{#1};
 \node[below,outer sep=0pt,inner sep=0pt] at ($(#1)+(0,-.2)$)  {\small${#2}$};
 }
-\newcommand{\differential}[3][]{\draw[shorten >=3pt,shorten <=3pt] (#2) to[#1] (#3);}
-%\renewcommand{\differential}[3][]{\ifnodedefined{#2}{\draw[shorten >=3pt,shorten <=3pt] (#2) to[#1] (#3)}{};}
-%\renewcommand{\differential}[3][]{\ifnodedefined{#2}{\ifnodedefined{#3}{\draw[shorten >=3pt,shorten <=3pt] (#2) to[#1] (#3)}{}{};}}
 
+\newcommand{\manualTriangleNodeAngled}[2]{
+\fulltriangle{#1};
+\node[right,rotate=-45,outer sep=0pt,inner sep=0pt] at ($(#1)+(0,-.2)$)  {\tiny${#2}$};
+}
+
+
+\newcommand{\differential}[3][]{
+\draw[->,shorten >=3pt,shorten <=3pt] (#2) to[#1] (#3);
+}
 \newcommand{\bendydifferential}[3][]{
-\draw[shorten >=3pt,shorten <=3pt] (#2) .. controls ($(#2)+(-0.5,0.3)$) and ($(#3)+(+.15,-0.4)$) .. (#3);
+\draw[->,shorten >=3pt,shorten <=3pt] (#2) .. controls ($(#2)+(-0.5,0.3)$) and ($(#3)+(+.15,-0.4)$) .. (#3);
 }
 \newcommand{\doublebendydifferential}[3][]{
-\draw[shorten >=3pt,shorten <=3pt] (#2) .. controls ($(#2)+(-0.5,0.3)$) and ($(#3)+(+.5,-0.3)$) .. (#3);
+\draw[->,shorten >=3pt,shorten <=3pt] (#2) .. controls ($(#2)+(-0.5,0.3)$) and ($(#3)+(+.5,-0.3)$) .. (#3);
 }
 %\newcommand{\dashedBrokenLine}[2]{
 %\foreach \x/\y in {#2}
@@ -555,7 +561,10 @@ url=false,doi=false,isbn=false,eprint=false]{biblatex}%
 \xdef\lasttickbuf{.45}
 \xdef\tsfz{0.0}%tick separation from zero
 
-\clip (-1.7,-1) rectangle (\TminusSmax+1,\Smax+.6);
+\sWi{#1}%
+{\clip (-1.7,-5) rectangle (\TminusSmax+1,\Smax+.6);}
+{\clip (-1.7,-1) rectangle (\TminusSmax+1,\Smax+.6);}
+{\clip (-1.7,-1) rectangle (\TminusSmax+1,\Smax+.6);}
 
 \MakeShading{0}{}{3}{3}{0}
 \MakeShading{1}{}{5}{6}{1}
@@ -918,6 +927,37 @@ url=false,doi=false,isbn=false,eprint=false]{biblatex}%
 
 \sWi{#1}{}{\differential{d301573}{s3d1573}}{\differential{d301573}{s3d1573}}
 
+
+
+\draw[->] (0,-.901) -- (\TminusSmax+\lasttickbuf,-.901);
+\foreach \x in {0,2,8,14,16,22,26,28,30,32,38,42,44,46}
+   \draw (\x,-.901+.1) -- (\x,-.901-.1);
+\foreach \x in {50,52,...,\TminusSmax}
+   \draw (\x,-.901+.1) -- (\x,-.901-.1);
+
+\manualTriangleNodeAngled{3,-.901}{}
+\manualTriangleNodeAngled{5,-.901}{2}
+\manualTriangleNodeAngled{6,-.901}{3}
+\manualTriangleNodeAngled{9,-.901}{4,2}
+\manualTriangleNodeAngled{10,-.901}{5,2}
+\manualTriangleNodeAngled{12,-.901}{6,3}
+
+\manualTriangleNodeAngled{17,-.901}{8,4,2}
+\manualTriangleNodeAngled{18,-.901}{9,4,2}
+\manualTriangleNodeAngled{20,-.901}{10,5,2}
+\manualTriangleNodeAngled{24,-.901}{12,6,3}
+
+\manualTriangleNodeAngled{33,-.901}{16,8,4,2}
+\manualTriangleNodeAngled{34,-.901}{17,8,4,2}
+\manualTriangleNodeAngled{36,-.901}{18,9,4,2}
+\manualTriangleNodeAngled{40,-.901}{20,10,5,2}
+\manualTriangleNodeAngled{48,-.901}{24,12,6,3}
+
+
+\node[anchor=north] at (\TminusSmax,-1.701-.1) {$n$};
+
+
+
 \end{tikzpicture}}
 \end{minipage}
 \end{sideways}
@@ -1183,9 +1223,11 @@ We construct in Proposition \ref{Wn Halg omnibus} the corresponding natural `hor
 The unstableness condition for the \emph{top Steenrod operation} becomes (writing $x^2:=\mu(x\otimes x)$)
 \[\Sqh^{s+1}x=x^2\in \E{}{2}{\calx}{2s+1}{2t+1}\textup{  whenever }x\in \E{}{2}{\calx}{s}{t}.\]
 
-Moreover, we construct in Proposition \ref{operations on goerss homology} natural vertical operations constituting a  partially defined action of the Koszul dual  of the $P$-algebra. This Koszul dual is precisely the $\Delta$-algebra (which is the) and indeed, this is how $P$ was originally described by Goerss. Thus we obtain operations:
+Moreover, we construct in Proposition \ref{operations on goerss homology} natural vertical operations constituting a  partially defined action of the Koszul dual  of the $P$-algebra. This Koszul dual is precisely the $\Delta$-algebra (indeed, this is how $P$ was originally described by Goerss) and thus we obtain operations:
 \[\deltav_i:\E{}{2}{\calx}{s}{t}\to \E{}{2}{\calx}{s+1}{t+i+1}\textup{, defined when $2\leq i <t$ (or $s=0,2\leq i=t$)}.\]%\max\{t-s,t-1\}$}.\] 
-These operations satisfy a number of compatibilities (c.f.\ \S\ref{Relations between the horizontal and vertical operations}, and Propositions \ref{Wn Halg omnibus} and \ref{operations on goerss homology}). In Figure \ref{unstable operations on E2} we illustrate these operations, as applied to an element $x\in \E{}{2}{\calx}{4}{10}$.
+These operations satisfy a number of compatibilities (c.f.\ \S\ref{Relations between the horizontal and vertical operations}, and Propositions \ref{Wn Halg omnibus} and \ref{operations on goerss homology}). Importantly, they satisfy the commutation relations
+\[\Sqh^j(xy)=\textstyle\sum_{j'+j''=j}(\Sqh^{j'}x)(\Sqh^{j''}y),\ \deltav_i(xy)=0,\textup{ and }\deltav_i(\Sqh^jx)=0.\]
+In Figure \ref{unstable operations on E2} we illustrate these operations, as applied to an element $x\in \E{}{2}{\calx}{4}{10}$.
 
 
 
@@ -1403,16 +1445,29 @@ Given our newly acquired knowledge of the operations on the \BKSS, and our knowl
 Indeed, $\pi_*(\mathbb{S}^\algs_T)$ is the exterior algebra:
 \[\pi_*(\mathbb{S}^\algs_T)
 \cong
-\Lambda[\delta_I(\imath)\ |\ \textup{$I$ is a $\delta$-admissible sequence, $e(I)\leq T$}].\]
-Here, $\imath\in\pi_T(\mathbb{S}^\algs_T)$ is the fundamental class of the sphere, and the generators $\delta_I\imath$ are indexed by $\delta$-admissible sequences 
-\[I=(i_\ell,\ldots,i_1)\textup{ such that }i_1\geq2\textup{ and }i_{\ell}\geq2i_{\ell-1},\ldots,i_2\geq2i_1,\]
-satisfying a condition on the Serre excess:
+\Lambda[\delta_I(\imath)\ |\ I\in \aDTe].\]
+Here, $\imath\in\pi_T(\mathbb{S}^\algs_T)$ is the fundamental class of the sphere, and 
+\[\aDTe:=\{I=(i_\ell,\ldots,i_1)\ |\ \textup{$I$ is a $\delta$-admissible sequence, $e(I)\leq T$}\}.\]
+A sequence $I=(i_\ell,\ldots,i_1)$ of integers $i_j\geq 2$ is said to be $\delta$-admissible if $i_{j+1}\geq 2i_j$ for each $j$, and $e(I)$ is the Serre excess:
 \[e(I):=i_\ell-i_{\ell-1}-\cdots -i_1\leq T.\]
 By $\delta_I\imath$, we simply mean $\delta_{i_\ell}\cdots \delta_{i_1}\imath $.
 
-For every such sequence $I$ satisfying these conditions there is a corresponding element $\deltav_I\imath$ in the \BKSS. Moreover, by (\ref{the differential equation in intro}), each $\deltav_I\imath$ is a permanent cycle. As the $\deltav$ at $E_\infty$ detect the  $\delta$ on homotopy, we have produced permanent cycles in $\E{}{2}{\mathbb{S}^\algs_T}{}{}$ (and even in $\E{}{1}{\mathbb{S}^\algs_T}{}{}$) detecting each of the generators of $\pi_*(\mathbb{S}_T^\algs)$.
+For every such sequence $I\in\aDTe$ there is a corresponding element $\deltav_I\imath\in\E{}{2}{\mathbb{S}^\algs_T}{}{}$. Moreover, by (\ref{the differential equation in intro}), each $\deltav_I\imath$ is a permanent cycle. As the $\deltav_i$ that are defined at $E_\infty$ detect the  $\delta_i$ on homotopy, we have produced permanent cycles detecting each of the exterior generators of $\pi_*(\mathbb{S}_T^\algs)$.
 
-Nonetheless, there are still numerous questions to be answered. Are the $\deltav_I\imath$ all non-zero at $E_\infty$ (so that they are classes detecting the $\delta_I\imath$ of \emph{minimal} filtration)? Is it possible to calculate $E_2$ as a vector space? Is it possible to calculate $E_2$ along the $\delta$-operations, Steenrod operations and products? What differentials appear in the spectral sequence?
+Nonetheless, there are still numerous questions to be answered. 
+\begin{enumerate}
+\item Are the $\deltav_I\imath$ all non-zero at $E_\infty$ (so that they have \emph{minimal} filtration among  classes detecting the $\delta_I\imath$)?
+\item Is it possible to calculate $E_2$ as a vector space?
+\item If so, is it possible to calculate the $\delta$-operations, Steenrod operations and products on $E_2$?
+\item What differentials appear in the spectral sequence?
+\end{enumerate}
+In order to approach these questions, we develop a method to calculate $\E{}{2}{\mathbb{S}^\algs_T}{}{}$ which we introduce in \S\S\ref{The first composite functor spectral sequence}-\ref{Computing with the composite functor spectral sequences}. 
+
+We now present a few diagrams which give the reader a little insight into the structure available in light of the aforementioned constructions, using the 3-sphere $\mathbb{S}_3^{\algs}$ as an example.
+In Figure \ref{BKSSdiagram1}, starting with the fundamental class $\imath\in\E{}{2}{\mathbb{S}_3^{\algs}}{0}{3}$, we plot all of the classes $\Sqh^J\deltav_I\imath$ which satisfy the relevant unstableness conditions at $E_2$. We mark the 
+\BKSSdiagram{1}
+
+
 %
 %$I=(i_\ell,\ldots,i_1)$ of integers no less than two for which $i_{j+1}\geq 2i_j$ ($\delta$-admissibility) with Serre excess at least $T$ (i.e.\ $e(I):=i_\ell-i_{\ell-1}-\cdots -i_1\leq T$).
 
@@ -1421,7 +1476,7 @@ Nonetheless, there are still numerous questions to be answered. Are the $\deltav
 
 
 %In particular, if $i>t-s$ and $x\in\E{}{t-i+1}{\calx}{s}{t}$ survives to $\E{}{t-i+2}{\calx}{s}{t}$, then $d_{t-i+1}$ maps $\deltav_ix$ to $\Sqv^{t-i+2}x$. These formulae explain how the $\Sqv$ serve to absorb differentials supported by the excess $\deltav$.
-\renewcommand{\BKSSdiagram}[1]{\textbf{nopenopenope}}
+\renewcommand{\BKSSdiagram}[1]{\textbf{nope-nope-nope}}
 \todo{Refer here to Figure \ref{BKSSdiagram1}}
 \BKSSdiagram{1}
 
@@ -4729,7 +4784,7 @@ Given the use of suspension $\bar{W}$, one expects the notion of \emph{top Steen
 \item \label{Sq unstable vanishing} if $x\in H^n_{\calc}L$, then $\Sq^ix=0$ unless $1\leq i\leq n+1$;
 \item every Steenrod operation is linear;
 \item the \emph{Cartan formula} holds:  for all $x,y\in   H^*_{\calc}L$ and $i\geq0$,
-\[\Sqh^i(xy)=\textstyle\sum_{k=1}^{i-1}(\Sq^kx)(\Sq^{i-k}y);\]
+\[\Sq^i(xy)=\textstyle\sum_{k=1}^{i-1}(\Sq^kx)(\Sq^{i-k}y);\]
 \item \label{yeah H is a Stmodule} the  homogeneous $\Sq$-Adem relations hold, making $H^{*}_\calc L$ a left $\LieSteen$-module.
 \end{enumerate}
 \end{prop}
@@ -5271,7 +5326,7 @@ with the following properties
 \item \label{Sq unstable vanishing III} if $n=0$ then $\Sq^1\equiv 0$, and $\Sq^2x=0$ for $x\in (H^*_{\calw(0)}X)_t^{s_1}$ with $t\geq 2$;
 \item every Steenrod operation is linear;
 \item the \emph{Cartan formula} holds:  for all $x,y\in   H^*_{\calc}L$ and $i\geq0$,
-\[\Sqh^i(xy)=\textstyle\sum_{k=1}^{i-1}(\Sq^kx)(\Sq^{i-k}y);\]
+\[\Sqh^i(xy)=\textstyle\sum_{k=1}^{i-1}(\Sqh^kx)(\Sqh^{i-k}y);\]
 \item \label{yeah H is a Stmodule II} the  homogeneous $\Sq$-Adem relations hold, making $H^{*}_\calc L$ a left $\LieSteen$-module.
 \end{enumerate}
 \end{prop}
