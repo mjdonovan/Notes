@@ -1,6 +1,6 @@
 % !TEX root = z_output/BKSS.tex
 \documentclass[11pt]{amsart} \renewcommand{\baselinestretch}{1.2}
-%\newcommand{\IncludeAll}{}%
+\newcommand{\IncludeAll}{}%
 %\newcommand{\ShrinkPages}{}%\newcommand{\xPostponeContents}{}%
 %%%%%%%%%%%%%%%%%%% 
 %%%%%%%%%%%%%%%%%%%Begin preamble for pasteover
@@ -1359,7 +1359,7 @@ In order to construct such differentials we perform constructions analogous to D
 \mu:\Edownup{r}{}{\calx}{s}{t}\otimes \Edownup{r}{}{\calx}{s'}{t'}\to
 \Edownup{r}{}{\calx}{s+s'+1}{t+t'+1}.
 \end{gather*}
-These operations satisfy intricate unstableness conditions. The $\deltav_i$ are defined only when $2\leq i\leq \max\{n,t-(r-1)\}$ and are single-valued whenever $2\leq i\leq\min\{n+1,t+1-2(r-1)\}$. The $\Sqh^j$ have indeterminacy vanishing by $E_{2r-2}$, survive until $E_{2r-1}$, and equal zero unless $\min\{t,r\}< j\leq s+1$. All of the functions that are defined on $E_2$ are single-valued, and indeed, we show in Proposition \ref{adams operations are right for comm} that they coincide with the operations defined on the derived functors defining the $E_2$-page.
+These operations satisfy intricate unstableness conditions. The $\deltav_i$ are defined only when $2\leq i\leq \max\{n,t-(r-1)\}$ and are single-valued whenever $2\leq i\leq\min\{n+1,t+1-2(r-1)\}$. The $\Sqh^j$ have indeterminacy vanishing by $E_{2\min\{r,j\}-2}$, survive until $E_{2r-1}$, and equal zero unless $\min\{t,r\}< j\leq s+1$. All of the functions that are defined on $E_2$ are single-valued, and indeed, we show in Proposition \ref{adams operations are right for comm} that they coincide with the operations defined on the derived functors defining the $E_2$-page.
 
 Notice the dependence of the unstableness conditions on $r$, the spectral sequence page number. It is in this sense that the unstableness conditions evolve as we pass to higher pages. As $r$ increases, fewer of the $\deltav_i$ are defined, and the unstableness condition tends to
 \[\deltav_i:\Edownup{\infty}{}{\calx}{s}{t} \to \Edownup{\infty}{}{\calx}{s+1}{t+i+1},\textup{ defined when $2\leq i\leq n$},\]
@@ -5859,7 +5859,7 @@ We will use these maps to define \emph{external Steenrod operations} $\Sq^i_\tex
 
 \begin{prop}
 \label{prop on e1 steens 1}
-Suppose that  $r\geq2$. The chain level operation $\textup{SQ}^{i,s}$ defines a linear operation  with indeterminacy vanishing by $E_{2r-2}$:
+Suppose that  $r\geq2$. The chain level operation $\textup{SQ}^{i,s}$ defines a linear operation  with indeterminacy vanishing by $E_{2\min\{r-1,i\}}$:
 \[\Sq^i_\textup{ext}:\Edownup{r}{}{X}{s}{t}\to \Edownup{r}{}{S_2X}{s+i}{2t}.\]
 
 Now suppose that $x\in\Edownup{r}{}{X}{s}{t}$. $\Sq^i_\textup{ext}x=0$ unless $\min\{t,r\}\leq i\leq s$,  and this vanishing occurs without indeterminacy.
@@ -5964,9 +5964,18 @@ d(\textup{BC}(x,y))
 +D^{s-i+1}(dy\otimes dx)]\\
 &=\textup{SQ}^{i,s}(x)-\textup{SQ}^{i,s}(x+dy).%
 \end{alignat*} 
-That is, $\textup{BC}(x,y)$ is a bounding chain for this difference, and
-\[\filt(\textup{BC}(x,y))\geq 2(s-r+1)-(s-i-1)=(s+i)-(2r-3),\]
-so that $\Sq^i_\textup{ext}x$ has indeterminacy vanishing by $\Edownup{2r-2}{}{S_2X}{s+i}{2t}$ as claimed. When $i=s$, this result may be improved to $\filt(\textup{BC}(x,y))\geq 2s-(r-1)$,  as in this case the lowest filtration summand in fact vanishes --- this is one explanation of why the top square has no indeterminacy.
+That is, $\textup{BC}(x,y)$ is a bounding chain for this difference. Now we calculate
+\begin{gather*}
+% Left hand side
+\filt(D^{s-i}(y\otimes dy)),\filt(D^{s-i+1}(dy\otimes x))
+% Relation
+\geq s+i-r+1,
+\\
+\filt(D^{s-i-1}(y\otimes y))\geq 2(s-r+1)-(s-i-1)=(s+i)-2(r-1)+1.
+\end{gather*}
+Moreover, $\filt(D^{s-i-1}(y\otimes y))$ lies in filtration at least $s-i-1$, since $\{D^k\}$ is special. Thus,
+\[\filt(\textup{BC}(x,y))\geq (s+i)-2\min\{r-1,i\}+1.\]
+so that $\Sq^i_\textup{ext}x$ has indeterminacy vanishing by $E_{2\min\{r-1,i\}}$ as claimed when $r\geq2$, no no indeterminacy when $r=1$. When $i=s$, this result may be improved to $\filt(\textup{BC}(x,y))\geq 2s-(r-1)$,  as in this case the lowest filtration summand in fact vanishes, so that the top Steenrod operation has no indeterminacy.
 
 When $i\geq s+2$, we have $\textup{SQ}^{i}(x)=0$, and even with $i=s+1$:
 \[\textup{SQ}^{s+1,s}(x)=\rho\nabla D^{0}(x\otimes dx)\in F^{2s+r},\]
@@ -6170,7 +6179,8 @@ Although this term need not vanish, its image in $\Lambda^2X$ certainly does, so
 \end{proof}
 Suppose now that $x\in \Edownup{r}{}{X}{s}{t}$. In light of the above calculation, when $n<i\leq t+1$, the purpose of $\delta^\textup{ext}_i(x)$ will be to support a $d_{t-i+1}$-differential to $\Sq_\textup{ext}^{t-i+1}(x)$. Thus, we would not expect to be able to define $\delta^\textup{ext}_i(x)$ when $t-i+1<r$; indeed, the following result will construct $\delta^\textup{ext}_i(x)$ whenever $i\leq t-(r-1)$.
 
-Moreover,  $\Sq^{t-i+1}_\textup{ext}(x)$ has indeterminacy vanishing by $\Edownup{2(r-1)}{}{S_2X}{s+t-i+1}{2t}$, so we should expect that whenever $t-i+1<2(r-1)$, $\delta^\textup{ext}_i(x)$ will be multi-valued, but that the set of values for $\delta^\textup{ext}_i(x)$ will map onto the set of values for $\Sq_\textup{ext}^{t-i+1}(x)$ under $d_{t-i+1}$. 
+Moreover,  $\Sq^{t-i+1}_\textup{ext}(x)$ has indeterminacy vanishing by $E_{2\min\{r-1,t-i+1\}}$, %{}{S_2X}{s+t-i+1}{2t}$, 
+so we should expect that whenever $t-i+1<2(r-1)$, $\delta^\textup{ext}_i(x)$ will be multi-valued, but that the set of values for $\delta^\textup{ext}_i(x)$ will map onto the set of values for $\Sq_\textup{ext}^{t-i+1}(x)$ under $d_{t-i+1}$. 
 We are not saying that we expect the indeterminacy of $\delta^\textup{ext}_i(x)$ to vanish by a certain page, but rather that we expect the  multiple values of $\delta^\textup{ext}_i(x)$ to all fail to be permanent cycles together. Note that when $r\leq 2$, there is no indeterminacy whatsoever in either set of operations.
 \begin{prop}
 \label{Prop on delta external}
@@ -6413,7 +6423,7 @@ We define operations:
 \mu:\left(\Edownup{r}{}{X}{s}{t}\otimes \Edownup{r}{}{X}{s'}{t'}\smash{{}\overset{\mu_\textup{ext}}{\to}{}} \Edownup{r}{}{\quadgrad{2}F^\algs X}{s+s'}{t+t'}\overset{\mu_*}{\to} 
 \Edownup{r}{}{X}{s+s'}{t+t'}\right),
 \end{gather*}
-with the $\delta_i$  multi-valued functions,  defined when $2\leq i\leq \max\{n,t-(r-1)\}$, and single-valued whenever $2\leq i\leq\min\{n+1,t+1-2(r-1)\}$, and the $\Sq^j$  multi-valued functions with indeterminacy vanishing by $E_{2r-2}$, and which equal zero unless $\min\{t,r\}\leq j\leq s$. 
+with the $\delta_i$  multi-valued functions,  defined when $2\leq i\leq \max\{n,t-(r-1)\}$, and single-valued whenever $2\leq i\leq\min\{n+1,t+1-2(r-1)\}$, and the $\Sq^j$  multi-valued functions with indeterminacy vanishing by $E_{2\min\{r-1,j\}}$, and which equal zero unless $\min\{t,r\}\leq j\leq s$. 
 
 
 Numerous properties of these operations follow directly from the earlier results, namely Propositions \ref{prop on basic product}, \ref{prop on e1 steens 1}, \ref{prop on e1 steens 2} \ref{Prop on delta external} and \ref{Prop on einfty ops}. In addition, we have
@@ -6879,7 +6889,7 @@ and the various external spectral sequence operations from $\E{}{r}{V}{}{}$ to e
 \mu:\left(\Edownup{r}{}{\calx}{s}{t}\otimes \Edownup{r}{}{\calx}{s'}{t'}\smash{{}\overset{\mu_\textup{ext}}{\to}{}} \Edownup{r}{}{\quadgrad{2}F^\calc \calx}{s+s'}{t+t'}\overset{L}{\to} 
 \Edownup{r}{}{\calx}{s+s'+1}{t+t'+1}\right),
 \end{gather*}
-with the $\deltav_i$  multi-valued functions,  defined when $2\leq i\leq \max\{n,t-(r-1)\}$, and single-valued whenever $2\leq i\leq\min\{n+1,t+1-2(r-1)\}$, and the $\Sq^j$  multi-valued functions with indeterminacy vanishing by $E_{2r-2}$, and which equal zero unless $\min\{t,r\}< j\leq s+1$.  All of the functions that are  defined on $E_2$ are single-valued, so it makes sense to state 
+with the $\deltav_i$  multi-valued functions,  defined when $2\leq i\leq \max\{n,t-(r-1)\}$, and single-valued whenever $2\leq i\leq\min\{n+1,t+1-2(r-1)\}$, and the $\Sqh^j$  multi-valued functions with indeterminacy vanishing by $E_{2\min\{r,j\}-2}$, and which equal zero unless $\min\{t,r\}< j\leq s+1$.  All of the functions that are  defined on $E_2$ are single-valued, so it makes sense to state 
 \begin{prop}
 \label{adams operations are right for comm}
 When $\calc=\algs$,
@@ -6917,10 +6927,10 @@ The pairing $\mu$ satisfies the Leibniz formula. For $r\geq2$, $\mu$ descends to
 
 \begin{cor}[(of Proposition \ref{prop on e1 steens 1})]
 \label{prop on e1 steens 1 composed with lift}
-Suppose that $r\geq 2$. The operations \[\Sqh^i:\Edownup{r}{}{\calx}{s}{t}\to \Edownup{r}{}{S_2\calx}{s+i}{2t+1}\] have indeterminacy vanishing by $\Edownup{2r-2}{}{\calx}{s+i}{2t+1}$ (and thus no indeterminacy at $E_2$). They are linear maps with linear indeterminacy.
+Suppose that $r\geq 2$. The operations \[\Sqh^j:\Edownup{r}{}{\calx}{s}{t}\to \Edownup{r}{}{S_2\calx}{s+j}{2t+1}\] have indeterminacy vanishing by $E_{2\min\{r,j\}-2}$ (and thus no indeterminacy at $E_2$). They are linear maps with linear indeterminacy.
 Now suppose that  $x\in\Edownup{r}{}{\calX}{s}{t}$. %Unless $\min\{t,r\}\leq i-1\leq s$, $\Sqh^ix=0$ (and is well defined without indeterminacy).
-$\Sqh^ix=0$ unless $\min\{t,r\}< i\leq s+1$,  and this vanishing occurs without indeterminacy.
-In any case, $\Sqh^ix$ survives to $\Edownup{2r-1}{}{\calX}{s+i}{2t+1}$, and the following equation in $\Edownup{2r-1}{}{\calX}{s+i+2r-1}{2t+2r-1}$ holds (without indeterminacy): \[d_{2r-1}(\Sqh^ix)=\Sqh^{i+r-1}(d_rx).\]
+$\Sqh^jx=0$ unless $\min\{t,r\}< j\leq s+1$,  and this vanishing occurs without indeterminacy.
+In any case, $\Sqh^jx$ survives to $\Edownup{2r-1}{}{\calX}{s+j}{2t+1}$, and the following equation in $\Edownup{2r-1}{}{\calX}{s+j+2r-1}{2t+2r-1}$ holds (without indeterminacy): \[d_{2r-1}(\Sqh^jx)=\Sqh^{j+r-1}(d_rx).\]
 
 The notion of \emph{top operation} has shifted: $\Sqh^{s+1}x$ is the top operation, it equals the product-square $x\times x$, and in particular,  has no indeterminacy.
 Finally, $\Sqh^0x=0$, $\Sqh^{1}x=0$ when $t>0$, and $\Sqh^2x=0$ when $t>1$.
@@ -6930,10 +6940,10 @@ Finally, $\Sqh^0x=0$, $\Sqh^{1}x=0$ when $t>0$, and $\Sqh^2x=0$ when $t>1$.
 \begin{cor}[(of Proposition \ref{prop on e1 steens 2})]
 \label{prop on e1 steens 2 composed with lift}
 %Fix $i,s\geq0$ and set $r=1$. The chain level operation $\textup{SQ}^{i,s}$ defines an 
-At $E_1$, the operations $\Sqh^i:\Edownup{1}{}{\calx}{s}{t}\to \Edownup{1}{}{S_2\calx}{s+i}{2t+1}$ have no indeterminacy, and commute with $d_{1}$ for each $i$. They need not be linear. Suppose that $x\in \Edownup{1}{}{\calx}{s}{t}$.
+At $E_1$, the operations $\Sqh^j:\Edownup{1}{}{\calx}{s}{t}\to \Edownup{1}{}{S_2\calx}{s+j}{2t+1}$ have no indeterminacy, and commute with $d_{1}$ for each $j$. They need not be linear. Suppose that $x\in \Edownup{1}{}{\calx}{s}{t}$.
 The top operation $\Sqh^{s+1}x$ need not equal the product-square $x\times x$ on $E_1$, and
 $\Sqh^{s+2}x$ need not vanish, instead equalling $x\times d_1x$ on $E_1$.
-For $i>s+2$, $\Sqh^ix=0$. Finally, $\Sqh^0x=0$, and $\Sqh^{1}x=0$ when $t>0$.
+For $j>s+2$, $\Sqh^jx=0$. Finally, $\Sqh^0x=0$, and $\Sqh^{1}x=0$ when $t>0$.
 \end{cor}
 
 
@@ -7005,7 +7015,7 @@ Although we do not use the following operations here (as we do not consider the 
 [\,,]:\left(\Edownup{r}{}{X}{s}{t}\otimes \Edownup{r}{}{X}{s'}{t'}\smash{{}\overset{\mu_\textup{ext}}{\to}{}} \Edownup{r}{}{\quadgrad{2}F^\calc X}{s+s'}{t+t'}\smash{{}\overset{L}{\to} {}}
 \Edownup{r}{}{X}{s+s'+1}{t+t'+1}\right),
 \end{gather*}
-with the $\lambdav_i$  multi-valued functions,  defined when $1\leq i\leq \max\{n,t-(r-1)\}$, and single-valued whenever $1\leq i\leq\min\{n+1,t+1-2(r-1)\}$, and the $\Ph^j$  multi-valued functions with indeterminacy vanishing by $E_{2r-2}$, and which equal zero unless $\min\{t,r\}\leq j\leq s$. We will not be able to prove a version of Proposition \ref{adams operations are right for comm} in the present work, since we have not derived a version of \S\ref{Cohomology Operations for W and U} for the categories $s\liealgs$ and $s\restliealgs$. Nonetheless, these operations will satisfy analogues of Corollaries \ref{prop on basic product composed with lift}-\ref{Prop on einfty ops composed with lift}.
+with the $\lambdav_i$  multi-valued functions,  defined when $1\leq i\leq \max\{n,t-(r-1)\}$, and single-valued whenever $1\leq i\leq\min\{n+1,t+1-2(r-1)\}$, and the $\Ph^j$  multi-valued functions with indeterminacy vanishing by $E_{2\min\{r-1,j\}}$, and which equal zero unless $\min\{t,r\}\leq j\leq s$. We will not be able to prove a version of Proposition \ref{adams operations are right for comm} in the present work, since we have not derived a version of \S\ref{Cohomology Operations for W and U} for the categories $s\liealgs$ and $s\restliealgs$. Nonetheless, these operations will satisfy analogues of Corollaries \ref{prop on basic product composed with lift}-\ref{Prop on einfty ops composed with lift}.
 
 The purpose of rest of this chapter is to give the necessary constructions to  prove Proposition \ref{adams operations are right for comm}, so that in the following, we will work only in the category $\calc=\algs$. However, the constructions, including of the following two- and three-cell complexes, generalize to the categories of Lie algebras.
 
