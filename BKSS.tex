@@ -527,14 +527,18 @@ url=false,doi=false,isbn=false,eprint=false]{biblatex}%
 % \draw [loosely dotted] (\x,#1+.5) -- (\y,#1+.5);
 %}
 \newcommand{\RecordOperation}[4][]{
-\draw[->,densely dotted,shorten <=3pt,#1] (#2 R#3) to node [inner sep=1pt, midway,fill=white] {\tiny$\Sq^{#4}$} (#2 L#4#3);
+\draw[->,densely dotted,shorten <=3pt,#1] (#2 R#3) to node [inner sep=1pt, midway,fill=white] {\tiny$\Sqh^{#4}$} (#2 L#4#3);
 }
 \newcommand{\RecordOperationCutOff}[5][]{
-\draw[->,densely dotted,shorten <=3pt,#1] (#2 R#3) to node [inner sep=1pt, pos=#5,fill=white] {\tiny$\Sq^{#4}$} (#2 L#4#3);
+\draw[->,densely dotted,shorten <=3pt,#1] (#2 R#3) to node [inner sep=1pt, pos=#5,fill=white] {\tiny$\Sqh^{#4}$} (#2 L#4#3);
 }
 \newcommand{\RecordOperationDelta}[4][]{
-\draw[->,densely dotted,shorten <=3pt,#1] (#2 R) to node [outer sep=0pt,inner sep=.25pt, midway,fill=white,rounded corners=2pt] {\tiny$\delta_{i_{#3}}\!\!$} (#3 L);
+%\draw[->,densely dotted,shorten <=3pt,#1] (#2 R) to node [outer sep=0pt,inner sep=.25pt,above, midway,fill=white,rounded corners=2pt] {\tiny$\deltav_{i_{#3}}\!\!$} (#3 L);
+\ifstrequal{#3}{1}{\draw[->,densely dotted,shorten <=3pt,#1] (#2 R) to node [outer sep=1.2pt,inner sep=.25pt,above left, midway] {\tiny$\deltav_{i_{#3}}\!\!$} (#3 L);}{
+\ifstrequal{#3}{2}{\draw[->,densely dotted,shorten <=3pt,#1] (#2 R) to node [outer sep=1.2pt,inner sep=.25pt,above left, midway] {\tiny$\deltav_{i_{#3}}\!\!$} (#3 L);}{
+\draw[->,densely dotted,shorten <=3pt,#1] (#2 R) to node [outer sep=0pt,inner sep=.25pt, midway,fill=white,rounded corners=2pt] {\tiny$\deltav_{i_{#3}}\!\!$} (#3 L);
 }
+}}
 \newcommand{\RecordOperationDeltaCutOff}[5][]{
 \draw[->,densely dotted,shorten <=3pt,#1] (#2 R) to node [outer sep=0pt,inner sep=.25pt, pos=#5, midway,fill=white,rounded corners=2pt] {} (#3 L);
 }
@@ -549,11 +553,12 @@ url=false,doi=false,isbn=false,eprint=false]{biblatex}%
 %\draw[decorate, decoration={brace, mirror, amplitude=3pt}] (#4+.4,#5-.4) -- coordinate [right=4pt] (#1 R#2) (#4+.4,#5+.4) node {};
 %}
 \newcommand{\sWi}[4]{\ifstrequal{#1}{1}{#2}{}\ifstrequal{#1}{2}{#3}{}\ifstrequal{#1}{3}{#4}{}}
+\newcommand{\sWiERASED}[4]{}
 \newcommand{\BKSSdiagram}[1]{
 \begin{figure}
 \begin{sideways}
 \begin{minipage}{7.38in}
-{\begin{tikzpicture}[y=.8cm, x=.3cm]
+\fbox{\begin{tikzpicture}[y=.8cm, x=.3cm]
 \xdef\TminusSmax{60}
 \xdef\Smax{12}
 \xdef\horTickFreq{2}
@@ -562,7 +567,7 @@ url=false,doi=false,isbn=false,eprint=false]{biblatex}%
 \xdef\tsfz{0.0}%tick separation from zero
 
 \sWi{#1}%
-{\clip (-1.7,-5) rectangle (\TminusSmax+1,\Smax+.6);}
+{\clip (-1.7,-2.3) rectangle (\TminusSmax+1,\Smax+.6);}
 {\clip (-1.7,-1) rectangle (\TminusSmax+1,\Smax+.6);}
 {\clip (-1.7,-1) rectangle (\TminusSmax+1,\Smax+.6);}
 
@@ -894,7 +899,7 @@ url=false,doi=false,isbn=false,eprint=false]{biblatex}%
 \sWi{#1}{\differential{d19942}{s4d942}}{\differential{d19942}{s4d942}}{\bendydifferential{d19942}{s4d942}}
 \differential{d20942}{s3d942}
 
-\sWi{#1}{\differential{d201042}{s4d1042}}{\differential{d201042}{s4d1042}}{\bendydifferential{d201042}{s4d1042}}
+\sWiERASED{#1}{\differential{d201042}{s4d1042}}{\differential{d201042}{s4d1042}}{\bendydifferential{d201042}{s4d1042}}
 \differential{d211042}{s3d1042}
 
 \sWi{#1}{}{\doublebendydifferential{d221142}{s3d1142}}{\doublebendydifferential{d221142}{s3d1142}}
@@ -902,7 +907,7 @@ url=false,doi=false,isbn=false,eprint=false]{biblatex}%
 \sWi{#1}{\differential{d211052}{s4d1052}}{\differential{d211052}{s4d1052}}{\bendydifferential{d211052}{s4d1052}}
 \differential{d221052}{s3d1052}
 
-\sWi{#1}{\differential{d221152}{s4d1152}}{\differential{d221152}{s4d1152}}{\bendydifferential{d221152}{s4d1152}}
+\sWiERASED{#1}{\differential{d221152}{s4d1152}}{\differential{d221152}{s4d1152}}{\bendydifferential{d221152}{s4d1152}}
 \differential{d231152}{s3d1152}
 
 \sWi{#1}{}{\differential{d241252}{s3d1252}}{\differential{d241252}{s3d1252}}
@@ -916,7 +921,7 @@ url=false,doi=false,isbn=false,eprint=false]{biblatex}%
 \sWi{#1}{\differential{d251263}{s4d1263}}{\differential{d251263}{s4d1263}}{\bendydifferential{d251263}{s4d1263}}
 \differential{d261263}{s3d1263}
 
-\sWi{#1}{\differential{d261363}{s4d1363}}{\differential{d261363}{s4d1363}}{\bendydifferential{d261363}{s4d1363}}
+\sWiERASED{#1}{\differential{d261363}{s4d1363}}{\differential{d261363}{s4d1363}}{\bendydifferential{d261363}{s4d1363}}
 \differential{d271363}{s3d1363}
 
 \sWi{#1}{}{\differential{d281463}{s3d1463}}{\differential{d281463}{s3d1463}}
@@ -954,7 +959,7 @@ url=false,doi=false,isbn=false,eprint=false]{biblatex}%
 \manualTriangleNodeAngled{48,-.901}{24,12,6,3}
 
 
-\node[anchor=north] at (\TminusSmax,-1.701-.1) {$n$};
+\node[anchor=north] at (\TminusSmax,-.901-.1) {$n$};
 
 
 
@@ -1226,14 +1231,15 @@ The unstableness condition for the \emph{top Steenrod operation} becomes (writin
 Moreover, we construct in Proposition \ref{operations on goerss homology} natural vertical operations constituting a  partially defined action of the Koszul dual  of the $P$-algebra. This Koszul dual is precisely the $\Delta$-algebra (indeed, this is how $P$ was originally described by Goerss) and thus we obtain operations:
 \[\deltav_i:\E{}{2}{\calx}{s}{t}\to \E{}{2}{\calx}{s+1}{t+i+1}\textup{, defined when $2\leq i <t$ (or $s=0,2\leq i=t$)}.\]%\max\{t-s,t-1\}$}.\] 
 These operations satisfy a number of compatibilities (c.f.\ \S\ref{Relations between the horizontal and vertical operations}, and Propositions \ref{Wn Halg omnibus} and \ref{operations on goerss homology}). Importantly, they satisfy the commutation relations
-\[\Sqh^j(xy)=\textstyle\sum_{j'+j''=j}(\Sqh^{j'}x)(\Sqh^{j''}y),\ \deltav_i(xy)=0,\textup{ and }\deltav_i(\Sqh^jx)=0.\]
+\begin{equation}\label{the commutation relations in intro}
+\Sqh^j(xy)=\textstyle\sum_{j'+j''=j}(\Sqh^{j'}x)(\Sqh^{j''}y),\ \deltav_i(xy)=0,\textup{ and }\deltav_i(\Sqh^jx)=0.
+\end{equation}
 In Figure \ref{unstable operations on E2} we illustrate these operations, as applied to an element $x\in \E{}{2}{\calx}{4}{10}$.
 
 
 
 \begin{figure}
 \centering
-\begin{minipage}{18.6cm}
 \fbox{\begin{tikzpicture}[y=.7cm, x=1cm]
 \xdef\TminusSmax{16}
 \xdef\Smax{9}
@@ -1288,8 +1294,6 @@ In Figure \ref{unstable operations on E2} we illustrate these operations, as app
 
 
 \end{tikzpicture}}
-\end{minipage}
-\centering
 \caption{Unstable operations on $\E{}{2}{\calx}{s}{t}\cong H^{s}_{\calw(0)}(H^{*}_{\algs}X)_t.$}
 \label{unstable operations on E2}
 \end{figure}
@@ -1347,13 +1351,14 @@ d_r\deltav_i(x)= \begin{cases}
 \deltav_i(d_rx)+\Sqh^{t-i+2}(x),&\textup{$r =t-i+1$}.
 \end{cases}
 \end{equation}
-Generically speaking, this equation states that $\deltav_i(x)$ remains a cycle until either until $x$ supports a differential or until page $t-i+1$, when it supports a differential hitting $\Sqh^{t-i+2}(x)$. That is, the $\Sqv$ serve to absorb differentials supported by the excess $\deltav$, and these differentials account for the evolving unstableness conditions.
+Generically speaking, this equation states that $\deltav_i(x)$ remains a cycle until either until $x$ supports a differential or until page $t-i+1$, when it supports a differential hitting $\Sqh^{t-i+2}(x)$. That is, the $\Sqh$ serve to absorb differentials supported by the excess $\deltav$, and these differentials account for the evolving unstableness conditions.
 
 We can now go one page better that returning to the permanent cycle
  $x\in\E{}{2}{\calx}{4}{10}$. Suppose that $y\in\E{}{1}{\calx}{4}{10}$ is a permanent cycle, detecting $\overline{y}\in \pi_6X$.
-In Figure \ref{unstable operations comparison} we depict the $E_1$-operations just listed, display the implied differentials. We use triangular nodes to indicate the classes which detecting $\overline{y}$ and the $\delta_i\overline{y}$, and we plot these classes in $\pi_n X$. The empty nodes are the operations which are not defined on the class of the cycle $y$ in $E_2$.
+In Figure \ref{unstable operations comparison} we depict the $E_1$-operations just listed, display the implied differentials. We use triangular nodes to indicate the classes which detect $\overline{y}$ and the $\delta_i\overline{y}$, and we plot these classes in $\pi_n X$. We use empty nodes to depict operations which are not unstable at $E_2$, and square nodes to depict .
 \begin{figure}
-\begin{minipage}{18.6cm}
+\centering
+%\begin{minipage}{18.6cm}
 \fbox{\begin{tikzpicture}[y=.7cm, x=1cm]
 \xdef\TminusSmax{16}
 \xdef\Smax{9}
@@ -1432,8 +1437,7 @@ In Figure \ref{unstable operations comparison} we depict the $E_1$-operations ju
 \node[anchor=north] at (\TminusSmax,2.101-.1) {$n$};
 
 \end{tikzpicture}}
-\end{minipage}
-\centering
+%\end{minipage}
 \caption{Unstable operations on a permanent cycle $y\in \E{}{1}{\calx}{4}{10}$.}
 \label{unstable operations comparison}
 \end{figure}
@@ -1464,7 +1468,7 @@ Nonetheless, there are still numerous questions to be answered.
 In order to approach these questions, we develop a method to calculate $\E{}{2}{\mathbb{S}^\algs_T}{}{}$ which we introduce in \S\S\ref{The first composite functor spectral sequence}-\ref{Computing with the composite functor spectral sequences}. 
 
 We now present a few diagrams which give the reader a little insight into the structure available in light of the aforementioned constructions, using the 3-sphere $\mathbb{S}_3^{\algs}$ as an example.
-In Figure \ref{BKSSdiagram1}, starting with the fundamental class $\imath\in\E{}{2}{\mathbb{S}_3^{\algs}}{0}{3}$, we plot all of the classes $\Sqh^J\deltav_I\imath$ which satisfy the relevant unstableness conditions at $E_2$. We mark the 
+In Figure \ref{BKSSdiagram1}, starting with the fundamental class $\imath\in\E{}{2}{\mathbb{S}_3^{\algs}}{0}{3}$, we plot all of the classes $\Sqh^J\deltav_I\imath$ which satisfy the relevant unstableness conditions at $E_2$. We mark the exterior generators of $\pi_*(\mathbb{S}_3^\algs)$ with triangular nodes, as well as the elements that detect them. We also mark in the differentials that can be deduced immediately from (\ref{the commutation relations in intro}) and (\ref{the differential equation in intro}).
 \BKSSdiagram{1}
 
 
