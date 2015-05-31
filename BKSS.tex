@@ -1,6 +1,6 @@
 % !TEX root = z_output/BKSS.tex
 \documentclass[11pt]{amsart} \renewcommand{\baselinestretch}{1.2}
-%\newcommand{\IncludeAll}{}%
+\newcommand{\IncludeAll}{}%
 %\newcommand{\ShrinkPages}{}%\newcommand{\xPostponeContents}{}%
 %%%%%%%%%%%%%%%%%%% 
 %%%%%%%%%%%%%%%%%%%Begin preamble for pasteover
@@ -33,8 +33,7 @@
 
 
 \usepackage[bookmarks=false,pdftex,pdfborder={0 0 0 [1 1]}]{hyperref}
-
-
+\renewcommand{\fbox}[1]{#1}
 
 %>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 %<<<  Theorem Environments  <<<
@@ -413,6 +412,7 @@ url=false,doi=false,isbn=false,eprint=false]{biblatex}%
 \newcommand{\BKSS}{BKSS}
 \newcommand{\CFSS}{CFSS}
 \newcommand{\CFSSs}{CFSSs}
+\newcommand{\MKSS}{MKSS}
 
 \newcommand\Square[1]{+(-#1,-#1) rectangle +(#1,#1)}
 \newcommand{\emptytriangle}[1]{
@@ -552,7 +552,7 @@ url=false,doi=false,isbn=false,eprint=false]{biblatex}%
 \newcommand{\RecordOperationDelta}[4][]{
 %\draw[->,densely dotted,shorten <=3pt,#1] (#2 R) to node [outer sep=0pt,inner sep=.25pt,above, midway,fill=white,rounded corners=2pt] {\tiny$\deltav_{i_{#3}}\!\!$} (#3 L);
 \ifstrequal{#3}{1}{\draw[->,densely dotted,shorten <=3pt,#1] (#2 R) to node [outer sep=1.2pt,inner sep=.25pt,above left, midway] {\tiny$\deltav_{i_{#3}}\!\!$} (#3 L);}{
-\ifstrequal{#3}{2}{\draw[->,densely dotted,shorten <=3pt,#1] (#2 R) to node [outer sep=1.2pt,inner sep=.25pt,above left, midway] {\tiny$\deltav_{i_{#3}}\!\!$} (#3 L);}{
+\ifstrequal{#3}{2}{\draw[->,densely dotted,shorten <=3pt,#1] (#2 R) to node [outer sep=1.9pt,inner sep=.25pt,below, midway] {\tiny$\deltav_{i_{#3}}\!\!$} (#3 L);}{
 \draw[->,densely dotted,shorten <=3pt,#1] (#2 R) to node [outer sep=0pt,inner sep=.25pt, midway,fill=white,rounded corners=2pt] {\tiny$\deltav_{i_{#3}}\!\!$} (#3 L);
 }
 }}
@@ -571,7 +571,8 @@ url=false,doi=false,isbn=false,eprint=false]{biblatex}%
 %}
 \newcommand{\sWi}[4]{\ifstrequal{#1}{1}{#2}{}\ifstrequal{#1}{2}{#3}{}\ifstrequal{#1}{3}{#4}{}}
 \newcommand{\sWiERASED}[4]{}
-\newcommand{\BKSSdiagramSuppessed}[3]{\[\textbf{suppressed: #3}.\]}
+\newcommand{\BKSSdiagramSuppressed}[3]{ \begin{equation}\label{BKSSdiagram#1#2}\textbf{suppressed: #3}\end{equation}}
+\renewcommand{\BKSSdiagramSuppressed}[3]{\BKSSdiagram{#1}{#2}{#3}}
 \newcommand{\BKSSdiagram}[3]{
 \begin{figure}
 \begin{sideways}
@@ -1060,8 +1061,10 @@ We conclude by making two conjectures which would, together, allow for a full co
 \begin{Introduction}
 \SectionOrChapter{Introduction}
 \label{intropart1}
+\hfil 
+\todo[inline]{Need more intro here.}
 \SubsectionOrSection{Overview}
-The primary object of study in this monograph is the Bousfield-Kan spectral sequence (\BKSS) in the Quillen model category $s\algs$ of simplicial non-unital commutative  $\Ftwo$-algebras. This spectral sequence  calculates the homotopy groups of the homology completion $X\hat{\ }$ of $X\in s\algs$, with $E_2$-page given by certain derived functors applied to the Andr\'e-Quillen cohomology groups $H^*_{\algs}X$. The approach we take is two-fold: we develop an extensive theory of spectral sequence operations on the \BKSS, and we use composite functor spectral sequences (\CFSSs) to calculate the derived functors that form the $E_2$-page.
+\todo{revise me}The primary object of study in this monograph is the Bousfield-Kan spectral sequence (\BKSS) in the Quillen model category $s\algs$ of simplicial non-unital commutative  $\Ftwo$-algebras. This spectral sequence  calculates the homotopy groups of the homology completion $X\hat{\ }$ of $X\in s\algs$, with $E_2$-page given by certain derived functors applied to the Andr\'e-Quillen cohomology groups $H^*_{\algs}X$. The approach we take is two-fold: we develop an extensive theory of spectral sequence operations on the \BKSS, and we use composite functor spectral sequences (\CFSSs) to calculate the derived functors that form the $E_2$-page.
 
 In \S\ref{Classicalstuff} we recall certain aspects of the theory of the \BKSS\ of a pointed connected topological space, including a \CFSS\ due to Miller for the computation of its $E_2$-page. There are a number of useful analogies to be drawn between this classical theory and that presented here.
 We give some of the necessary algebraic and topological background for what follows  in \S\ref{various categories sc}.
@@ -1086,7 +1089,7 @@ We cannot complete our computations with this structure alone, so in \S\ref{High
 
 In \S\ref{Computing with the composite functor spectral sequences}, we indicate how it is possible to use this immense amount of structure to make computations, including a computation of the \BKSS\ $E_2$-page for a sphere in the category $s\algs$. This special case is important for the computation of the \BKSS\ $E_2$-page in general, as it is involved in the description the $E_1$-page of a May-Koszul spectral sequence which calculates the \BKSS\ $E_2$-page for a general connected simplicial algebra.
 
-Finally, in \S\ref{the BKSS conjectures section}, we discuss some conjectures which would unify the two parts of our approach. Were these conjectures verified, we would be able to give a complete description of the differentials available in the \BKSS\ of a commutative algebra sphere. These conjectures are supported by the computation we have made of the $E_2$-page.\todo{really?}
+Finally, in \S\ref{the BKSS conjectures section}, we discuss some conjectures which would unify the two parts of our approach. Were these conjectures verified, we would be able to give a complete description of the differentials available in the \BKSS\ of a commutative algebra sphere. These conjectures are supported by the computation we have made of the $E_2$-page.\todo{is this paragraph still what you mean?}
 
 \SubsectionOrSection{The classical Bousfield-Kan spectral sequence}
 \label{Classicalstuff}
@@ -1485,8 +1488,8 @@ Nonetheless, there are still numerous questions to be answered.
 In order to approach these questions, we develop a method to calculate $\E{}{2}{\mathbb{S}^\algs_T}{}{}$ which we introduce in \S\S\ref{The first composite functor spectral sequence}-\ref{Computing with the composite functor spectral sequences}. 
 
 We now present a few diagrams which give the reader a little insight into the structure available in light of the aforementioned constructions, using the 3-sphere $\mathbb{S}_3^{\algs}$ as an example.
-In Figure \ref{BKSSdiagram1}, starting with the fundamental class $\imath\in\E{}{2}{\mathbb{S}_3^{\algs}}{0}{3}$, we plot all of the classes $\Sqh^J\deltav_I\imath$ which satisfy the relevant unstableness conditions at $E_2$. We mark the exterior generators of $\pi_*(\mathbb{S}_3^\algs)$ with triangular nodes, as well as the elements that detect them. We also mark in the differentials that can be deduced immediately from (\ref{the commutation relations in intro}) and (\ref{the differential equation in intro}). The apparently haphazard positioning of the nodes in each horizontal line will become useful when we extend Figure \ref{BKSSdiagram1} to Figure \ref{BKSSdiagram3}{nodifferentials}.
-\BKSSdiagramSuppessed{1}{}{The \BKSS\ for $\mathbb{S}^{\algs}_3$: $E_2$-unstable part.}
+In Figure \ref{BKSSdiagram1}, starting with the fundamental class $\imath\in\E{}{2}{\mathbb{S}_3^{\algs}}{0}{3}$, we plot all of the classes $\Sqh^J\deltav_I\imath$ which satisfy the relevant unstableness conditions at $E_2$. We mark the exterior generators of $\pi_*(\mathbb{S}_3^\algs)$ with triangular nodes, as well as the elements that detect them. We also mark in the differentials that can be deduced immediately from (\ref{the commutation relations in intro}) and (\ref{the differential equation in intro}). The apparently haphazard positioning of the nodes in each horizontal line will become useful when we extend Figure \ref{BKSSdiagram1} to Figure \todo{\ref{BKSSdiagram3}}.
+\BKSSdiagramSuppressed{1}{}{The \BKSS\ for $\mathbb{S}^{\algs}_3$: $E_2$-unstable part.}
 There are a number of non-triangular nodes in Figure \ref{BKSSdiagram1} which are not the source or target of an arrow. Firstly, there are the three square nodes on the 11-line:
 \[\Sqh^{6,3}\deltav_{4,2}\imath=(\Sqh^{3}\deltav_{4,2}\imath)^{2},\ \Sqh^{6,3}\deltav_{5,2}\imath=(\Sqh^{3}\deltav_{5,2}\imath)^2,\ \Sqh^{6,3}\deltav_{6,3}\imath=(\Sqh^{3}\deltav_{6,3}\imath)^2.\]
 Each of these classes is the square of the target of a differential, and in general, if $d_rx=y$ then $d_r(xy)=y^2$. We omit the implied differential in such cases in order to minimise visual noise. More generally we omit all products from our diagrams except for $(2^k)^\textup{th}$ powers, which are present since the top Steenrod operation equals the square. Thus, in a diagram such as Figure \ref{BKSSdiagram1}, the product of any subset of the nodes is a valid element that we omit from the diagram.
@@ -1532,7 +1535,7 @@ $H_*^{\calu(0)}:=\mathbb{L}_*Q^{\calu(0)}$
 take values in the category  $\calw(1)$ of $\call(0)$-$\Pi$-algebras, as they are calculated as the homotopy of an object of $s\call(0)$.
 The first \CFSS\ takes the following form  for $W\in\calw(0)$:
 \[\E{\textup{cf}}{2}{W}{s_2,s_1}{t}=H^*_{\calw(1)}(H_*^{\calu(0)}W)^{s_2,s_1}_t\implies (H^*_{\calw(0)} W)_t^{s_1+s_2}.\]
-We will now unpack this somewhat dense expression, and explain how various unstable operations defined at the $E_2$-page and the target interact with the spectral sequence.
+We must now unpack this somewhat dense expression, and explain how various unstable operations defined at the $E_2$-page interact with those on the target.
 
 Objects of the category $\calw(1)$ are certain bigraded Lie algebras with a certain partially defined right action of the $\Lambda$-algebra (c.f.\ \S\ref{Higher composite functor spectral sequences}).
 In \S\ref{section on structure on homology of koszul cx} we calculate the structure of $H_*^{\calu(0)}W$ as an object of $\calw(1)$ by explicit chain-level computation,
@@ -1744,24 +1747,42 @@ With this computation in mind we define the Chevalley-Eilenberg-May complex of a
 
 This method is employed to prove that $\calMhv(n+1)$ is the category of $\calw(n)$-cohomology algebras for $n\geq1$ (c.f.\ Theorems \ref{thm on collapsing of most sseqs} and \ref{Koszul-dual Hilton-Milnor theorem} and Corollary \ref{yeah it's Wn-coh-algs}). That is, the $\calMhv(n+1)$-structure is \emph{all} of the natural structure on $\calW(n)$-cohomology for $n\geq1$.
 
-Finally, we are able to use all of this structure together to calculate, at least as a vector space, the \BKSS\ $E_2$-page for the commutative algebra $T$-sphere $\mathbb{S}^{\algs}_T$ whenever $T\geq1$. That is, we calculate the derived functors $H^*_{\calw(0)}W$, where $W=H^*_{\algs}\mathbb{S}^{\algs}_T$ is a one-dimensional trivial object concentrated in dimension $T\geq1$. \todo{Refer here to relevant Figure}
+Finally, for $T\geq1$, we are able to use all of this structure together to calculate the \BKSS\ $E_2$-page for the $T$-sphere, \emph{as a vector space}:
+\[\E{}{2}{\mathbb{S}^{\algs}_T}{s}{t}=H^*_{\calw(0)}(H^*_{\algs}\mathbb{S}^{\algs}_T).\]
+That is, we calculate the $\calw(0)$-cohomology of the one-dimensional trivial object $H^*_{\algs}\mathbb{S}^{\algs}_T$.
+
+Before we move on to discuss possible analyses of the \BKSS\ for spheres, we note that this calculation of $\E{}{2}{\mathbb{S}^{\algs}_T}{}{}$ is useful not only for understanding the \BKSS\ of a sphere. We are able to derive a  spectral sequence, the May-Koszul spectral sequence, which converges strongly to $\E{}{2}{\calx}{}{}$ for any connected $X\in s\algs$ of finite type (c.f.\ \S\ref{The quadratic filtration section}). The \MKSS\ $E_1$-page is in fact a coproduct of various copies of the commutative algebras $\E{}{2}{\mathbb{S}^{\algs}_T}{}{}$ (as we demonstrate using a K\"unneth Theorem, Theorem \ref{Koszul-dual Hilton-Milnor theorem}, for $\calw(0)$-cohomology). Using the \MKSS\ we prove the vanishing line theorem (Theorem \ref{vanishing line thm}) required for the strong convergence of the \BKSS\ for connected $X$. Moreover, information on the $E_2$-operations in the \BKSS\ for a sphere passes over to information on the general \BKSS\ $E_2$-page via the \MKSS.
 
 
-Finally, \todo{move me} we derive in \S\ref{The quadratic filtration section} a convergent spectral sequence which calculates the $E_2$-page for any connected $X\in s\algs$ of finite type, which we name the May-Koszul spectral sequence. Its $E_1$-page may be described in terms of the \BKSS\ $E_2$-pages of the spheres (using Theorem \ref{Koszul-dual Hilton-Milnor theorem}), and information on the $E_2$-operations in the \BKSS\ for a sphere passes over to information on the general \BKSS\ $E_2$-page via the May-Koszul spectral sequence.
-
-
-\SubsectionOrSection{The Bousfield-Kan spectral sequence for $\mathbb{S}^{\algs}_T$- conjectures or something}
-\label{the BKSS conjectures section}
-Using the \CFSSs\ discussed above, we are able to describe $\E{}{2}{\mathbb{S}^{\algs}_T}{}{}$, at least as a vector space. It is a certain subquotient of the algebraic object $F^{\calmh(1)}F^{\calmv(1)}\{\imath\}$ obtained by freely applying unstable $\deltav$-operations to the fundamental class $\imath$, and then freely applying $\calmh(1)$-operations, i.e.\ applying unstable Steenrod operations $\Sqh^j$ and taking products. While we describe this subquotient in detail in \todo{???????????????}, for the present discussion it will suffice to consider the representation given in Figure \ref{BKSSdiagram3nodifferentials}.
-
-Figure \ref{BKSSdiagram3nodifferentials} is a plot of $F^{\calmh(1)}F^{\calmv(1)}\{\imath\}$, with the nodes decorated to indicate their role in the subquotient. The empty nodes are the classes which either do not lie in the subquotient in question or are sent to zero in it. Of the remaining nodes, the solid nodes represent the sequences that we were able to form in Figure \ref{BKSSdiagram1}, and the dotted nodes represent elements that are missing from Figure \ref{BKSSdiagram1}.
+\subsection{The $E_2$-page for a sphere and an alternative $E_1$-page}
+Our description of the vector space $\E{}{2}{\mathbb{S}^{\algs}_T}{s}{t}$ is as a certain subquotient of an algebraic object. This object is the bigraded vector space $F^{\calmh(1)}F^{\calmv(1)}\{\imath\}$ generated by a single class $\imath$ by freely adjoining $\calmv(1)$-operations (i.e.\ unstable $\deltav$-operations) followed by $\calmh(1)$-operations (i.e.\ unstable $\Sqh$-operations and products). That is, it is spanned by products of appropriately unstable and admissible expressions $\Sqh^J\deltav_I\imath$ \todo{c.f.\ ????????}. We illustrate the result for $T=3$ in Figure \ref{BKSSdiagram2nodifferentials}, and describe this subquotient in detail in \todo{???????????????}. %, for the present discussion it will suffice to consider the representation given in Figure \ref{BKSSdiagram3nodifferentials}. 
 
 {\renewcommand{\differential}[3][]{}%
 \renewcommand{\bendydifferential}[3][]{}%
 \renewcommand{\doublebendydifferential}[3][]{}%
-\BKSSdiagram{3}{nodifferentials}{The subquotient $\E{}{2}{\mathbb{S}_3^{\algs}}{}{}$ of $F^{\calmh(1)}F^{\calmv(1)}\{\imath\}$.}}%
+\BKSSdiagramSuppressed{2}{nodifferentials}{The subquotient $\E{}{2}{\mathbb{S}_3^{\algs}}{}{}$ of $F^{\calmh(1)}F^{\calmv(1)}\{\imath\}$.}}%
 
-Now there is in fact a differential $d_1$ on $F^{\calmh(1)}F^{\calmv(1)}\{\imath\}$ of which this subquotient is the homology. Indeed, suppose that we impose the relation $\deltav_i\Sqh^j=0$ for all $i,j$, demand that $d_1\Sqh^j=\Sqh^jd_1$ and that $d_1\deltav_t=\Sqh^2$...
+In fact, there is a differential $d_1$ on $F^{\calmh(1)}F^{\calmv(1)}\{\imath\}$, of which $\E{}{2}{\mathbb{S}^{\algs}_T}{}{}$ is the homology subquotient. As such, $F^{\calmh(1)}F^{\calmv(1)}\{\imath\}$ becomes an alternative $E_1$-page for the \BKSS\ for $\mathbb{S}^{\algs}_T$. The definition of this $d_1$ is a little delicate, and we reserve it until \todo{where?}. However, it is depicted in Figure \ref{BKSSdiagram3}, the nodes of which are a plot of $F^{\calmh(1)}F^{\calmv(1)}\{\imath\}$. The differential $d_1$ consists simply of those of the differentials shown that increase filtration by exactly one.
+
+It is important that we emphasise the following point. We have just described $\E{}{2}{\mathbb{S}^{\algs}_T}{}{}$ as the homology of a differential $d_1$ on $F^{\calmh(1)}F^{\calmv(1)}\{\imath\}$. As such, we are able to identify elements on $E_2$ with the class of a cycle in this complex $F^{\calmh(1)}F^{\calmv(1)}\{\imath\}$. However, there are certain cycles $\deltav_I\imath\in F^{\calmh(1)}F^{\calmv(1)}\{\imath\}$ for which the corresponding element of $\deltav_I\imath\in\E{}{1}{\mathbb{S}^{\algs}_T}{}{}$ does not survive to $\E{}{2}{\mathbb{S}^{\algs}_T}{}{}$.
+For example, $\deltav_{12,6,2}\imath$ is a cycle in $\Eprime{blank}{1}{\mathbb{S}_3^\algs}{3}{26}$, but in $\E{}{1}{\mathbb{S}_3^\algs}{3}{26}$ we calculate:
+\[d_1(\deltav_{12,6,2}\imath)=\deltav_{12}\Sqh^2\deltav_{2}\imath\neq 0.\]
+This case is not too problematic, as the composite $\deltav_{12}\Sqh^2$ is defined and equals zero at $E_2$, and we already have to hand an explicit nullhomotopy for this relation: if we take the class of the difference between $\deltav_{12,6,2}\imath$ and this nullhomotopy, one may check that the resulting class in $\E{}{1}{\mathbb{S}_3^\algs}{3}{26}$ has the correct image under the \CFSS\ edge homomorphism.
+
+Other cases are more challenging, such as $\deltav_{26,13,6,2}\imath$... The point of the \CFSSs\ is to hide some of these chain-level difficulties!
+
+\SubsectionOrSection{The Bousfield-Kan spectral sequence for $\mathbb{S}^{\algs}_T$- conjectures or something}
+\label{the BKSS conjectures section}
+Using the \CFSSs\ discussed above, we are able to describe $\E{}{2}{\mathbb{S}^{\algs}_T}{}{}$ as a subquotient of $F^{\calmh(1)}F^{\calmv(1)}\{\imath\}$.
+
+
+ For now we refer. Moreover, we are able to conjecture a complete system $d_2,\ldots$ of differentials which 
+
+Figure \ref{BKSSdiagram3} is a plot of $F^{\calmh(1)}F^{\calmv(1)}\{\imath\}$, along with the differential $d_1$, with the nodes decorated to indicate their role in the subquotient. The empty nodes are the classes which either do not lie in the subquotient in question or are sent to zero in it. Of the remaining nodes, the solid nodes represent the sequences that we were able to form in Figure \ref{BKSSdiagram1}, and the dotted nodes represent elements that are missing from Figure \ref{BKSSdiagram1}. 
+
+\BKSSdiagram{3}{}{The $F^{\calmh(1)}F^{\calmv(1)}\{\imath\}$ and the proposed differentials $d_1,d_2,\ldots$.}
+
+ The definition of this differential is given by Indeed, suppose that we impose the relation $\deltav_i\Sqh^j=0$ for all $i,j$, demand that $d_1\Sqh^j=\Sqh^jd_1$ and that $d_1\deltav_t=\Sqh^2$...
 
 It is important to emphasize that 
 obtained by taking products of appropriately admissible and unstable expressions of the form
