@@ -507,9 +507,26 @@ url=false,doi=false,isbn=false,eprint=false]{biblatex}%
 \node[below,outer sep=0pt,inner sep=0pt] at ($(#1)+(0,-.2)$)  {\small${#2}$};
 }
 
-\newcommand{\manualTriangleNodeAngled}[2]{
-\fulltriangle{#1};
-\node[right,rotate=-45,outer sep=0pt,inner sep=0pt] at ($(#1)+(0,-.2)$)  {\tiny${#2}$};
+
+\newcommand{\manualTriangleNodeAngled}[3][]{
+\fulltriangle{#2};
+\sWi{#1}{\node[right,rotate=-45,outer sep=0pt,inner sep=0pt] at ($(#2)+(0,-.2)$)  {\tiny${#3}$};}{}{}
+}
+\newcommand{\manualCircleNodeBelowTiny}[3][]{
+\fullcircle{#2};
+\node[anchor=north,rotate=0,outer sep=4pt,inner sep=0pt] at (#2)  {\tiny${#3}$};
+}
+\newcommand{\manualCircleNodeRightTiny}[3][]{
+\fullcircle{#2};
+\node[anchor=west,rotate=0,outer sep=4pt,inner sep=0pt] at (#2)  {\tiny${#3}$};
+}
+\newcommand{\manualCircleNodeBelow}[3][]{
+\fullcircle{#2};
+\node[anchor=north,rotate=0,outer sep=4pt,inner sep=0pt] at (#2)  {\small${#3}$};
+}
+\newcommand{\manualCircleNodeRight}[3][]{
+\fullcircle{#2};
+\node[anchor=west,rotate=0,outer sep=4pt,inner sep=0pt] at (#2)  {\small${#3}$};
 }
 
 
@@ -554,7 +571,8 @@ url=false,doi=false,isbn=false,eprint=false]{biblatex}%
 %}
 \newcommand{\sWi}[4]{\ifstrequal{#1}{1}{#2}{}\ifstrequal{#1}{2}{#3}{}\ifstrequal{#1}{3}{#4}{}}
 \newcommand{\sWiERASED}[4]{}
-\newcommand{\BKSSdiagram}[1]{
+\newcommand{\BKSSdiagramSuppessed}[3]{\[\textbf{suppressed: #3}.\]}
+\newcommand{\BKSSdiagram}[3]{
 \begin{figure}
 \begin{sideways}
 \begin{minipage}{7.38in}
@@ -940,26 +958,26 @@ url=false,doi=false,isbn=false,eprint=false]{biblatex}%
 \foreach \x in {50,52,...,\TminusSmax}
    \draw (\x,-.901+.1) -- (\x,-.901-.1);
 
-\manualTriangleNodeAngled{3,-.901}{}
-\manualTriangleNodeAngled{5,-.901}{2}
-\manualTriangleNodeAngled{6,-.901}{3}
-\manualTriangleNodeAngled{9,-.901}{4,2}
-\manualTriangleNodeAngled{10,-.901}{5,2}
-\manualTriangleNodeAngled{12,-.901}{6,3}
+\manualTriangleNodeAngled[#1]{3,-.901}{}
+\manualTriangleNodeAngled[#1]{5,-.901}{2}
+\manualTriangleNodeAngled[#1]{6,-.901}{3}
+\manualTriangleNodeAngled[#1]{9,-.901}{4,2}
+\manualTriangleNodeAngled[#1]{10,-.901}{5,2}
+\manualTriangleNodeAngled[#1]{12,-.901}{6,3}
 
-\manualTriangleNodeAngled{17,-.901}{8,4,2}
-\manualTriangleNodeAngled{18,-.901}{9,4,2}
-\manualTriangleNodeAngled{20,-.901}{10,5,2}
-\manualTriangleNodeAngled{24,-.901}{12,6,3}
+\manualTriangleNodeAngled[#1]{17,-.901}{8,4,2}
+\manualTriangleNodeAngled[#1]{18,-.901}{9,4,2}
+\manualTriangleNodeAngled[#1]{20,-.901}{10,5,2}
+\manualTriangleNodeAngled[#1]{24,-.901}{12,6,3}
 
-\manualTriangleNodeAngled{33,-.901}{16,8,4,2}
-\manualTriangleNodeAngled{34,-.901}{17,8,4,2}
-\manualTriangleNodeAngled{36,-.901}{18,9,4,2}
-\manualTriangleNodeAngled{40,-.901}{20,10,5,2}
-\manualTriangleNodeAngled{48,-.901}{24,12,6,3}
+\manualTriangleNodeAngled[#1]{33,-.901}{16,8,4,2}
+\manualTriangleNodeAngled[#1]{34,-.901}{17,8,4,2}
+\manualTriangleNodeAngled[#1]{36,-.901}{18,9,4,2}
+\manualTriangleNodeAngled[#1]{40,-.901}{20,10,5,2}
+\manualTriangleNodeAngled[#1]{48,-.901}{24,12,6,3}
 
 
-\node[anchor=north] at (\TminusSmax,-.901-.1) {$n$};
+\sWi{#1}{\node[anchor=north] at (\TminusSmax,-.901-.1) {$n$};}{}{}
 
 
 
@@ -967,11 +985,12 @@ url=false,doi=false,isbn=false,eprint=false]{biblatex}%
 \end{minipage}
 \end{sideways}
 \centering
-\sWi{#1}%
-{\caption{The \BKSS\ for $\mathbb{S}^{\algs}_3$: $E_2$-unstable part.}}%
-{\caption{The \BKSS\ for $\mathbb{S}^{\algs}_3$: full $E_2$-page.}}%
-{\caption{The \BKSS\ for $\mathbb{S}^{\algs}_3$: alternate $E_1$-page.}}
-\label{BKSSdiagram#1}
+\caption{#3}
+%\sWi{#1}%
+%{\caption{The \BKSS\ for $\mathbb{S}^{\algs}_3$: $E_2$-unstable part.}}%
+%{\caption{The \BKSS\ for $\mathbb{S}^{\algs}_3$: full $E_2$-page.}}%
+%{\caption{The \BKSS\ for $\mathbb{S}^{\algs}_3$: alternate $E_1$-page.}}
+\label{BKSSdiagram#1#2}
 \end{figure}
 }
 
@@ -1230,14 +1249,12 @@ The unstableness condition for the \emph{top Steenrod operation} becomes (writin
 
 Moreover, we construct in Proposition \ref{operations on goerss homology} natural vertical operations constituting a  partially defined action of the Koszul dual  of the $P$-algebra. This Koszul dual is precisely the $\Delta$-algebra (indeed, this is how $P$ was originally described by Goerss) and thus we obtain operations:
 \[\deltav_i:\E{}{2}{\calx}{s}{t}\to \E{}{2}{\calx}{s+1}{t+i+1}\textup{, defined when $2\leq i <t$ (or $s=0,2\leq i=t$)}.\]%\max\{t-s,t-1\}$}.\] 
-These operations satisfy a number of compatibilities (c.f.\ \S\ref{Relations between the horizontal and vertical operations}, and Propositions \ref{Wn Halg omnibus} and \ref{operations on goerss homology}). Importantly, they satisfy the commutation relations
+These operations satisfy a number of compatibilities, for example:
 \begin{equation}\label{the commutation relations in intro}
 \Sqh^j(xy)=\textstyle\sum_{j'+j''=j}(\Sqh^{j'}x)(\Sqh^{j''}y),\ \deltav_i(xy)=0,\textup{ and }\deltav_i(\Sqh^jx)=0.
 \end{equation}
-In Figure \ref{unstable operations on E2} we illustrate these operations, as applied to an element $x\in \E{}{2}{\calx}{4}{10}$.
-
-
-
+In Figure \ref{unstable operations on E2} we illustrate these operations, as applied to an element $x\in \E{}{2}{\calx}{4}{10}$. We plot the \BKSS\ in $(t-s,s)$ coordinates (nonetheless, we think of the $\Sqh^j$ as \emph{horizontal} and the $\deltav_i$  as \emph{vertical}, for consistency with operations defined later,
+c.f.\ \S\ref{The first composite functor spectral sequence}-\ref{Higher composite functor spectral sequences}).
 \begin{figure}
 \centering
 \fbox{\begin{tikzpicture}[y=.7cm, x=1cm]
@@ -1250,7 +1267,7 @@ In Figure \ref{unstable operations on E2} we illustrate these operations, as app
 
 \clip (2,2.2) rectangle (\TminusSmax+.6,\Smax+.46);
 
-\node[anchor=east] at (3.5,6) {$\E{}{2}{\calx}{s}{t}$:};
+\node[anchor=east] at (3.5,6.45) {$\E{}{2}{\calx}{s}{t}$};
 
 %\node at (5,8) {$\E{}{2}{\calx}{s}{t}$};
 
@@ -1369,8 +1386,8 @@ In Figure \ref{unstable operations comparison} we depict the $E_1$-operations ju
 
 \clip (2,1.45) rectangle (\TminusSmax+.6,\Smax+.46);
 
-\node[anchor=east] at (3.5,6) {$\E{}{2}{\calx}{s}{t}$:};
-\node[anchor=east] at (3.5,2.101) {$\pi_nX$:};
+\node[anchor=east] at (3.5,6.45) {$\E{}{2}{\calx}{s}{t}$};
+\node[anchor=east] at (3.5,2.101) {$\pi_nX$};
 
 \goodnode[y]{6,4}{0,0}{}{}{label:manual}{dottype:a}{dD}
 \goodnode[\deltav_2y]{6,4}{0,0}{2}{}{label:manual}{dottype:a}{dD2}
@@ -1468,22 +1485,23 @@ Nonetheless, there are still numerous questions to be answered.
 In order to approach these questions, we develop a method to calculate $\E{}{2}{\mathbb{S}^\algs_T}{}{}$ which we introduce in \S\S\ref{The first composite functor spectral sequence}-\ref{Computing with the composite functor spectral sequences}. 
 
 We now present a few diagrams which give the reader a little insight into the structure available in light of the aforementioned constructions, using the 3-sphere $\mathbb{S}_3^{\algs}$ as an example.
-In Figure \ref{BKSSdiagram1}, starting with the fundamental class $\imath\in\E{}{2}{\mathbb{S}_3^{\algs}}{0}{3}$, we plot all of the classes $\Sqh^J\deltav_I\imath$ which satisfy the relevant unstableness conditions at $E_2$. We mark the exterior generators of $\pi_*(\mathbb{S}_3^\algs)$ with triangular nodes, as well as the elements that detect them. We also mark in the differentials that can be deduced immediately from (\ref{the commutation relations in intro}) and (\ref{the differential equation in intro}).
-\BKSSdiagram{1}
+In Figure \ref{BKSSdiagram1}, starting with the fundamental class $\imath\in\E{}{2}{\mathbb{S}_3^{\algs}}{0}{3}$, we plot all of the classes $\Sqh^J\deltav_I\imath$ which satisfy the relevant unstableness conditions at $E_2$. We mark the exterior generators of $\pi_*(\mathbb{S}_3^\algs)$ with triangular nodes, as well as the elements that detect them. We also mark in the differentials that can be deduced immediately from (\ref{the commutation relations in intro}) and (\ref{the differential equation in intro}). The apparently haphazard positioning of the nodes in each horizontal line will become useful when we extend Figure \ref{BKSSdiagram1} to Figure \ref{BKSSdiagram3}{nodifferentials}.
+\BKSSdiagramSuppessed{1}{}{The \BKSS\ for $\mathbb{S}^{\algs}_3$: $E_2$-unstable part.}
 There are a number of non-triangular nodes in Figure \ref{BKSSdiagram1} which are not the source or target of an arrow. Firstly, there are the three square nodes on the 11-line:
 \[\Sqh^{6,3}\deltav_{4,2}\imath=(\Sqh^{3}\deltav_{4,2}\imath)^{2},\ \Sqh^{6,3}\deltav_{5,2}\imath=(\Sqh^{3}\deltav_{5,2}\imath)^2,\ \Sqh^{6,3}\deltav_{6,3}\imath=(\Sqh^{3}\deltav_{6,3}\imath)^2.\]
-Each of these classes is the square of the target of a differential, and in general, if $d_rx=y$ then $d_r(xy)=y^2$. We omit the implied differential in such cases in order to minimise visual noise.
+Each of these classes is the square of the target of a differential, and in general, if $d_rx=y$ then $d_r(xy)=y^2$. We omit the implied differential in such cases in order to minimise visual noise. More generally we omit all products from our diagrams except for $(2^k)^\textup{th}$ powers, which are present since the top Steenrod operation equals the square. Thus, in a diagram such as Figure \ref{BKSSdiagram1}, the product of any subset of the nodes is a valid element that we omit from the diagram.
 
-On the other hand, there are the classes
-\[\deltav_{20,10,4,2}\imath,\Sqh^4\deltav_{10,4,2},\deltav_{22,11,5,2}\imath,\Sqh^4\deltav_{11,5,2},\deltav_{27,13,6,3}\imath,\Sqh^4\deltav_{13,6,3}\]
-shown on the 3- and 7-lines. Although ad-hoc arguments show that they are connected by three $d_4$-differentials, they are symptomatic of the following difficulty. There is a differential $d_{2}:\deltav_{10,4,2}\imath\mapsto\Sqh^{3}\deltav_{4,2}\imath$, so that $\deltav_{10,4,2}\imath$ does not survive to $E_3$.
-Nonetheless, $\deltav_{20,10,4,2}\imath\in E_2$ does survive to $E_3$ (where it supports a differential to $\Sq^{4}\deltav_{10,4,2}\imath$) and we still need to refer to this element. In this situation (\ref{the differential equation in intro}) does not immediately provide a calculation of the differential of an iterated $\deltav$-operation. That is, we may compute
-\[d_2(\deltav_{20,10,4,2}\imath)=\deltav_{20}d_2\deltav_{10,4,2}\imath=\deltav_{20}\Sqh^{3}\deltav_{4,2}\imath=0,\]
-but it is does not make sense to write 
+On the other hand, there are the following pairs of classes
+\[\deltav_{20,10,4,2}\imath\textup{ and }\Sqh^4\deltav_{10,4,2}\imath,\ \ \deltav_{22,11,5,2}\imath \textup{ and }\Sqh^4\deltav_{11,5,2}\imath,\ \ \deltav_{27,13,6,3}\imath\textup{ and }\Sqh^4\deltav_{13,6,3}\imath,\]
+shown on the 4- and 7-lines. Although ad-hoc arguments show that each of these pairs is connected by a $d_3$-differential, they are symptomatic of the following difficulty. There is a differential $d_{2}:\deltav_{10,4,2}\imath\mapsto\Sqh^{3}\deltav_{4,2}\imath$, so that $\deltav_{10,4,2}\imath$ does not survive to $E_3$.
+Nonetheless, $\deltav_{20,10,4,2}\imath\in E_2$ does survive to $E_3$, as
+\[d_2(\deltav_{20,10,4,2}\imath)=\deltav_{20}d_2\deltav_{10,4,2}\imath=\deltav_{20}\Sqh^{3}\deltav_{4,2}\imath=0.\]
+In this situation (\ref{the differential equation in intro}) does not provide a calculation of $d_3(\deltav_{20,10,4,2}\imath)$: as $\deltav_{10,4,2}\imath$ is simply not present on $E_3$, it does not make sense to write 
 \[d_3(\deltav_{20,10,4,2}\imath)=\deltav_{20}d_3(\deltav_{10,4,2}\imath)+\Sqh^4\deltav_{10,4,2}\imath\]
-using (\ref{the differential equation in intro}), as $\deltav_{10,4,2}\imath$ is simply not present on $E_3$. %This formal difficulty is indicative of a genuine difficulty in calculating such differentials as $d_3(\deltav_{20,10,4,2}\imath)$. 
-In essence, there is a nullhomotopy rendering the composite $\deltav_{20}\Sqh^{3}$ zero at $E_2$, and its use \emph{may affect} the value of $d_3(\deltav_{20,10,4,2}\imath)$.
+using (\ref{the differential equation in intro}). 
+In essence, there is a nullhomotopy rendering the composite $\deltav_{20}\Sqh^{3}$ zero at $E_2$, and its use may affect the value of $d_3(\deltav_{20,10,4,2}\imath)$.
 
+We will return to these thoughts in \todo{which section?} after our discussion of the calculation of the \BKSS\ $E_2$-page.
 %
 %$I=(i_\ell,\ldots,i_1)$ of integers no less than two for which $i_{j+1}\geq 2i_j$ ($\delta$-admissibility) with Serre excess at least $T$ (i.e.\ $e(I):=i_\ell-i_{\ell-1}-\cdots -i_1\leq T$).
 
@@ -1492,16 +1510,13 @@ In essence, there is a nullhomotopy rendering the composite $\deltav_{20}\Sqh^{3
 
 
 %In particular, if $i>t-s$ and $x\in\E{}{t-i+1}{\calx}{s}{t}$ survives to $\E{}{t-i+2}{\calx}{s}{t}$, then $d_{t-i+1}$ maps $\deltav_ix$ to $\Sqv^{t-i+2}x$. These formulae explain how the $\Sqv$ serve to absorb differentials supported by the excess $\deltav$.
-\renewcommand{\BKSSdiagram}[1]{\textbf{nope-nope-nope}}
-\todo{Refer here to Figure \ref{BKSSdiagram1}}
-\BKSSdiagram{1}
 
 
 
 
 \SubsectionOrSection{The first composite functor spectral sequence}
 \label{The first composite functor spectral sequence}
-Now that we have a theory of the operations available on the \BKSS\ in $s\algs$, we turn to the question of calculating it. If we hope to imitate Miller's use of a composite functor spectral sequence (\CFSS), %we have only one option for the factorization of $Q^{\calw(0)}$.: there are functors
+Now that we have a theory of the operations available on the \BKSS\ in $s\algs$, we turn to the question of calculating its $E_2$-page. If we hope to imitate Miller's use of a composite functor spectral sequence (\CFSS), %we have only one option for the factorization of $Q^{\calw(0)}$.: there are functors
 using the factorization
 \[Q^{\calw(0)}=Q^{\call(0)}\circ Q^{\calu(0)}  : \Bigl(\calw(0)\overset{Q^{\calu(0)}}{\to}\call(0)\overset{Q^{\call(0)}}{\to}\vect{+}{}\Bigr),\]
 where $\call(0)$ is the category whose objects are graded vector spaces $W\in\vect{+}{}$ which are Lie algebras under a bracket which shifts gradings,
@@ -1523,7 +1538,11 @@ Objects of the category $\calw(1)$ are certain bigraded Lie algebras with a cert
 In \S\ref{section on structure on homology of koszul cx} we calculate the structure of $H_*^{\calu(0)}W$ as an object of $\calw(1)$ by explicit chain-level computation,
 after defining in \S\ref{The Koszul complex and co-Koszul complex} an unstable version of Priddy's Koszul resolution \cite{PriddyKoszul.pdf} for the functors $H_*^{\calu(0)}$.
 
-The linear duals $H^*_{\calU(0)}W$ admit an unstable partially defined left $\Delta$-algebra action, since the algebras $\Delta$ and $P$ are Koszul dual, and by Proposition \ref{edgehomproposition} there is a commuting diagram (for $2\leq i<t$): %this commutes In fact, we can form the composite
+The linear duals $H^*_{\calU(0)}W$ admit an unstable partially defined left $\Delta$-algebra action, since the algebras $\Delta$ and $P$ are Koszul dual. Precisely, $H^*_{\calU(0)}W$ is naturally an object of the category $\calMv(1)$ whose objects are vector spaces $M\in\vect{1}{+}$ with operations
+\[\deltav_i:M^{s}_t\to M^{s+1}_{t+i+1},\textup{ defined whenever $2\leq i\leq t$,}\]
+satisfying the $\delta$-Adem relations. On the other hand, we have discussed $\delta$-operations
+\[\deltav_i:\E{}{2}{\calx}{s}{t}\to \E{}{2}{\calx}{s+1}{t+i+1}\textup{, defined when $2\leq i <t$ (or $s=0,2\leq i=t$)}\]
+on the \BKSS\ $E_2$-page (of which one fewer is defined when $s>0$). These two types of $\delta$-operations are compatible under the edge homomorphism of the \CFSS, in the sense that, for $2\leq i<t$, the diagram
 \begin{equation}
 \label{edge hom in intro}
 \vcenter{\xymatrix@R=4mm@C=17mm{
@@ -1539,28 +1558,121 @@ The linear duals $H^*_{\calU(0)}W$ admit an unstable partially defined left $\De
 &%r1c2
 (H^*_{\calU(0)}W)^{s+1}_{t+i+1}
 }}\end{equation}
-In this  sense the $\deltav_i$-operations on the \BKSS\ $E_2$-page are compatible with the \CFSS.
+commutes. This is Proposition \ref{edgehomproposition}.
 
 The \BKSS\ $E_2$-page also supports products and horizontal Steenrod operations, and we should attempt to identify them in the \CFSS. The functor $H^*_{\calw(1)}$ may also be viewed as a Lie algebra cohomology functor, so that we expect horizontal Steenrod operations and products to appear in $\E{\textup{cf}}{2}{W}{s_2,s_1}{t}$. We use a new definition of these operations that fits into the framework set out in \S\ref{Constructing cohomology operations} (deferring to Appendix \ref{appendix on Lie coh ops} the work of showing that these operations coincide with those constructed by Priddy \cite{PriddySimplicialLie.pdf}.)
 
-Moreover, just as we expected $\deltav_i$ operations on $H^*_{\calw(0)}$, we expect a `vertical' left action of the homogeneous Steenrod algebra on $H^*_{\calw(1)}$, as it is Koszul dual to the $\Lambda$-algebra. Indeed, we construct in Proposition \ref{Wn Halg omnibus} such operations on the derived functors $H^*_{\calw(1)}$. Moreover,
-Proposition \ref{vertical steenrod operations prop} applies to $H^*_{\calw(1)}$ just as it applies to $H^*_{\calw(0)}$, yielding horizontal Steenrod operations and products, so that ultimately we obtain operations
+Moreover, just as we expected $\deltav_i$ operations on $H^*_{\calw(0)}$, we expect a `vertical' left action of the homogeneous Steenrod algebra on $H^*_{\calw(1)}$, as it is Koszul dual to the $\Lambda$-algebra. We construct such operations in Proposition \ref{vertical steenrod operations prop}. 
+Proposition \ref{Wn Halg omnibus} applies to $H^*_{\calw(1)}$ just as it applies to $H^*_{\calw(0)}$, yielding horizontal Steenrod operations and products, so that ultimately we obtain operations:
 \begin{gather*}
-\Sqv^i:\E{\textup{cf}}{2}{W}{s_{2},s_1}t\to \E{\textup{cf}}{2}{W}{s_2+1,s_1+i-1}{2t+1},\\
-\Sqh^j:\E{\textup{cf}}{2}{W}{s_2,s_1}{t}\to \E{\textup{cf}}{2}{W}{s_{2}+j,2s_1}{2t+1},\\
-\mu:\E{\textup{cf}}{2}{W}{s_2,s_1}{t}\otimes \E{\textup{cf}}{2}{W}{p_2,p_1}{q}\to \E{\textup{cf}}{2}{W}{s_2+p_2+1,s_1+p_1}{t+q+1},
+\Sqv^i:\E{\textup{cf}}{2}{W}{s_{2},s_1}t\to \E{\textup{cf}}{2}{W}{s_2+1,s_1+i-1}{2t+1},\textup{ zero unless $3\leq i\leq s_1$};\\
+\Sqh^j:\E{\textup{cf}}{2}{W}{s_2,s_1}{t}\to \E{\textup{cf}}{2}{W}{s_{2}+j,2s_1}{2t+1},\textup{ zero unless $1\leq j\leq s_2+1$};\\
+\mu:\E{\textup{cf}}{2}{W}{s_2,s_1}{t}\otimes \E{\textup{cf}}{2}{W}{p_2,p_1}{q}\to \E{\textup{cf}}{2}{W}{s_2+p_2+1,s_1+p_1}{t+q+1}.
 \end{gather*}
-with both the horizontal and vertical Steenrod operations satisfying their own unstableness conditions.
+In fact, the unstableness condition may be strengthed: $\Sqh^1$ is zero in dimension $s_1=0$.
+%Now suppose that $x\in \E{\textup{cf}}{2}{W}{s_{2},s_1}{t}$ is a permanent cycle detecting an element $\overline{x}\in (H^*_{\calw(0)}W)^{s_2+s_1}_t$. 
+To illustrate these unstableness conditions, in Figure \ref{first cfss diagram} we depict the potentially non-zero Steenrod operations available on $x$ and $\overline{x}$, for $x\in \E{\textup{cf}}{2}{W}{3,5}{t}$ a permanent cycle detecting $\overline{x}\in (H^*_{\calw(0)}W)^{8}_t$.
+%
+%
+%The $s_2{+}s_1{-}1$ operations $\Sqh^3\overline{x},\ldots,\Sqh^{s_2+s_1+1}\overline{x}$ are the potentially non-zero Steenrod operations on $\overline{x}$, and the $s_1{-}2$ vertical operations $\Sqv^3x,\ldots,\Sqv^{s_1}x$ and the $s_2{+}1$ horizontal operations $\Sqh^1x,\ldots,\Sqh^{s_2+1}x$ are the potentially non-zero  Steenrod operations on $x$, as depicted in Figure \ref{first cfss diagram}.
+\begin{figure}
+\centering
+%\begin{minipage}{18.6cm}
+\fbox{\begin{tikzpicture}[y=.7cm, x=1cm]
+\xdef\TminusSmax{8}
+\xdef\Smax{10}
+\xdef\horTickFreq{1}
+\xdef\verTickFreq{1}
+\xdef\lasttickbuf{.25}
 
-Now suppose that $x\in \E{\textup{cf}}{2}{W}{s_{2},s_1}{t}$ is a permanent cycle detecting an element $\overline{x}\in (H^*_{\calw(0)}W)^{s_2+s_1}_t$. The $s_2{+}s_1{-}1$ operations $\Sqh^3\overline{x},\ldots,\Sqh^{s_2+s_1+1}\overline{x}$ are the potentially non-zero Steenrod operations on $\overline{x}$. The $s_1{-}2$ vertical operations $\Sqv^3x,\ldots,\Sqv^{s_1}x$ and the $s_2{+}1$ horizontal operations $\Sqh^1x,\ldots,\Sqh^{s_2+1}x$ are the potentially non-zero  Steenrod operations on $x$.
-This is quite reminiscent of Singer's framework \cite{MR2245560} (c.f.\ \S\ref{singer ext ops sect}), and in \S\ref{Application to composite functor spectral sequences} we use Singer's methods  to extend the operations on $\E{\textup{cf}}{2}{W}{}{}$ to the entire \CFSS. The upshot is that if $x\in \E{\textup{cf}}{2}{W}{s_{2},s_1}{t}$ is a permanent cycle, then so are all of the above mentioned $\Sqv^ix$ and $\Sqh^jx$, and moreover,
-\[\Sqv^ix\textup{ detects }\Sqh^i\overline{x}\ (3\leq i\leq s_1)\textup{ and }\Sqh^jx\textup{ detects }\Sqh^{s_1+i}\overline{x}\ (1\leq j\leq s_2+1).\]
-That is, the horizontal and vertical Steenrod operations \emph{combined} detect the horizontal Steenrod operations on the target. We examine how this plays out for admissible sequences of Steenrod operations in Theorem \ref{thm on compressing seqs of steenrod ops}.
+\clip (-.6,1.35) rectangle (11.68,\Smax+.26);
+
+
+\node[anchor=north] at (4.3,1.8) {$\smash{\E{\textup{cf}}{2}{W}{s_{2},s_1}{*}=H^*_{\calw(1)}(H_*^{\calu(0)}W)^{s_2,s_1}_t}$};
+\node[anchor=north] at (10.5,1.8) {$\smash{(H^*_{\calw(0)}W)^{s_{2}+s_1}_*}$};
+
+\manualCircleNodeBelow{3,5}{x}
+\manualCircleNodeBelowTiny[1]{4,7}{\Sqv^3x}
+\manualCircleNodeBelowTiny[1]{4,8}{\Sqv^4x}
+\manualCircleNodeBelowTiny[1]{4,9}{\Sqv^5x}
+\manualCircleNodeBelowTiny[1]{4,10}{\Sqh^1x}
+\manualCircleNodeBelowTiny[1]{5,10}{\Sqh^2x}
+\manualCircleNodeBelowTiny[1]{6,10}{\Sqh^3x}
+\manualCircleNodeBelowTiny[1]{7,10}{\Sqh^4x}
+
+\manualCircleNodeRight{10.5,4.5}{\overline{x}}
+\manualCircleNodeRightTiny[1]{10.5,6}{\Sqh^3\overline{x}}
+\manualCircleNodeRightTiny[1]{10.5,6.5}{\Sqh^4\overline{x}}
+\manualCircleNodeRightTiny[1]{10.5,7}{\Sqh^5\overline{x}}
+\manualCircleNodeRightTiny[1]{10.5,7.5}{\Sqh^6\overline{x}}
+\manualCircleNodeRightTiny[1]{10.5,8}{\Sqh^7\overline{x}}
+\manualCircleNodeRightTiny[1]{10.5,8.5}{\Sqh^8\overline{x}}
+\manualCircleNodeRightTiny[1]{10.5,9}{\Sqh^9\overline{x}}
+
+
+\draw[->] (0,3) -- (\TminusSmax+\lasttickbuf,3);
+\foreach \x in {0,...,\TminusSmax}
+   \draw (\x,3+.1) -- (\x,3-.1)
+      node[anchor=north] {\x};
+\node[anchor=south] at (\TminusSmax,3+.1) {$s_2$};
+
+\draw[->] (0,3.55) -- (0,\Smax+\lasttickbuf);
+\foreach \y in {4,...,\Smax}
+   \draw (0+.1,\y) -- (0-.1,\y) 
+      node[anchor=east] {\y};
+   \draw (-.2,3.5) -- (0.2,3.4);
+   \draw (-.2,3.6) -- (0.2,3.5);
+\draw  (0,3)--(0,3.45);
+   \draw (0+.1,3) -- (0-.1,3) 
+      node[anchor=east] {0};
+\node[anchor=west] at (0+.1,\Smax) {$s_1$};
+
+
+\draw[->] (10.5,.25001+3.55) -- (10.5,\Smax+\lasttickbuf);
+\foreach \y in {8,10,...,18}
+   %\draw (10.5+.1,.5+.5*\y) -- (10.5-.1,.5+.5*\y) 
+      \node[anchor=east] at (10.5-.1,.5+.5*\y) {\y};
+\foreach \y in {10,18}
+\draw (10.5+.1,.5+.5*\y) -- (10.5-.1,.5+.5*\y);
+   \draw (10.5-.2,.25001+3.5) -- (10.5+.2,.25001+3.4);
+   \draw (10.5-.2,.25001+3.6) -- (10.5+.2,.25001+3.5);
+\draw  (10.5,3)--(10.5,.25001+3.45);
+   \draw (10.5+.1,3) -- (10.5-.1,3) 
+      node[anchor=east] {0};
+\node[anchor=west] at (10.5,\Smax) {\small$s_2+s_1$};
+
+%\draw[->] (4.55,2.101) -- (\TminusSmax+\lasttickbuf,2.101);
+%\foreach \x in {5,7,13,14,15,16}
+%   \draw (\x,2.101+.1) -- (\x,2.101-.1);
+%   \draw (4.4,2.101-.2) -- (4.5,2.101+.2);
+%   \draw (4.5,2.101-.2) -- (4.6,2.101+.2);
+%\draw  (4,2.101)--(4.45,2.101);
+%   \draw (4,2.101+.1) -- (4,2.101-.1);
+
+%\manualTriangleNodeBelow{6,2.101}{\!\!\!\!\!\phantom{\deltav_2}\overline{y}}
+%\manualTriangleNodeBelow{8,2.101}{\delta_2\overline{y}}
+%\manualTriangleNodeBelow{9,2.101}{\delta_3\overline{y}}
+%\manualTriangleNodeBelow{10,2.101}{\delta_4\overline{y}}
+%\manualTriangleNodeBelow{11,2.101}{\delta_5\overline{y}}
+%\manualTriangleNodeBelow{12,2.101}{\delta_6\overline{y}}
+%
+%\node[anchor=north] at (\TminusSmax,2.101-.1) {$n$};
+
+\end{tikzpicture}}
+%\end{minipage}
+\caption{Steenrod operations in the first \CFSS.}% $y\in \E{}{1}{\calx}{4}{10}$.}
+\label{first cfss diagram}
+\end{figure}
+This situation is directly analogous to that studied by Singer in \cite{MR2245560} (we recall part of this work in \S\ref{singer ext ops sect}), and in \S\ref{Application to composite functor spectral sequences} we use Singer's method to extend the operations on $\E{\textup{cf}}{2}{W}{}{}$ to the entire \CFSS. The upshot is that if $x\in \E{\textup{cf}}{2}{W}{s_{2},s_1}{t}$ is a permanent cycle, then so are all of the above mentioned $\Sqv^ix$ and $\Sqh^jx$, and moreover,
+\[\Sqv^ix\textup{ detects }\Sqh^i\overline{x}\ (3\leq i\leq s_1)\textup{ and }\Sqh^jx\textup{ detects }\Sqh^{s_1+j}\overline{x}\ (1\leq j\leq s_2+1).\]
+That is, the horizontal and vertical Steenrod operations \emph{combined} detect the horizontal Steenrod operations on the target $H^*_{\calw(0)}W$.
 
 We extend the operations on $E_2$ to the entire spectral sequence in two steps. We first apply external versions of Singer's operations (c.f.\ \S\ref{singer ext ops sect}) and compose these operations with the spectral sequence map induced by a chain-level diagonal map (c.f.\ \S\ref{Subsection: Chain level diagonal}) on the Blanc-Stover resolution \cite{Blanc_Stover-Groth_SS.pdf} used to define the \CFSS. The methods of \S\S\ref{Comp funct sseqs}-\ref{Operations in composite functor spectral sequences} may be useful in other contexts for defining operations on composite functor spectral sequences.
 
+The theory we have just summarized differs from that summarized in \S\ref{The BKSS intro spiel} for the \BKSS\ in that the unstableness conditions do not evolve from page to page, and every vertical and horizontal Steenrod operation at $E_2$ has its counterpart on the target. Correspondingly, there are no canonical differentials analogous to those shown in Figure \ref{unstable operations comparison}. In Theorem \ref{thm on compressing seqs of steenrod ops} we examine how admissible sequences of horizontal Steenrod operations in $H^*_{\calw(0)}W$ are detected in the spectral sequence.
+
 \SubsectionOrSection{Higher composite functor spectral sequences}\label{Higher composite functor spectral sequences}
-We have constructed a comprehensive theory of the operations in the first \CFSS, but it may still be the case that the $H^*_{\calw(1)}$ is as difficult to calculate as $H^*_{\calw(0)}$, which would mean that the \CFSS\ is of little use for the calculation of $H^*_{\calw(0)}$. Rather than being discouraged, we will turn this similarity to our advantage by iterating our approach. %After all, the categories $\calw(0)$ and $\calW(1)$ are similar in structure: each of these categories is (close enough to) a category of Lie algebras with unstable partially defined operations of a homogeneous Koszul algebra.
+We have constructed a comprehensive theory of the operations in the first \CFSS, but it may still be the case that the $H^*_{\calw(1)}$ is as difficult to calculate as $H^*_{\calw(0)}$, which would mean that this \CFSS\ is of little use for the calculation of $H^*_{\calw(0)}$. Rather than being discouraged, we turn this similarity to our advantage by iterating our approach. %After all, the categories $\calw(0)$ and $\calW(1)$ are similar in structure: each of these categories is (close enough to) a category of Lie algebras with unstable partially defined operations of a homogeneous Koszul algebra.
  In \S\ref{homotopy operations for PRLs} we extend the constructions summarized in \S\ref{The first composite functor spectral sequence}, defining algebraic categories $\calw(n)$ and $\call(n)$ for $n\geq1$ such that $\calw(n)$ is the category of $\call(n-1)$-$\Pi$-algebras and there are factorizations 
 \[Q^{\calw(n)}=Q^{\call(n)}\circ Q^{\calu(n)}:\Bigl(\calw(n)\overset{Q^{\calu(n)}}{\to}\call(n)\overset{Q^{\call(n)}}{\to}\vect{+}{n}\Bigr).\]
 %For each $n\geq1$, $\call(n)$ is a category of $\vect{+}{n}$-graded partially restricted Lie algebras and $\calw(n)$ is a category of  $\vect{+}{n}$-graded partially restricted Lie algebras with certain unstable $\lambda$-operations. These definitions must be made carefully. Indeed, We write $\calu(n)$ for the category whose objects are the . The definition of the functor $\calU$
@@ -1630,18 +1742,43 @@ With this computation in mind we define the Chevalley-Eilenberg-May complex of a
 %\[H^*_{\calw(n+k)}(H_*^{\calu(n+k-1)}\cdots H_*^{\calu(n)}W)^{s'_{n+k+1},\ldots,s_1}_{t}\cong (Q^{\calw(n+k)}H_*^{\calu(n+k-1)}\cdots H_*^{\calu(n)}W)^{0,s'_{n+k+1},\ldots,s_1}_{t}\]
 %as long as we understand $H_*^{\calu(n)}W$.
 
-This method is employed to prove Theorems \ref{thm on collapsing of most sseqs} and \ref{Koszul-dual Hilton-Milnor theorem}, which together imply Corollary \ref{yeah it's Wn-coh-algs}, that $\calMhv(n+1)$ is the category of $\calw(n)$-cohomology algebras for $n\geq1$. That is, the $\calMhv(n+1)$-structure is \emph{all} of the natural structure on $\calW(n)$-cohomology for $n\geq1$.
+This method is employed to prove that $\calMhv(n+1)$ is the category of $\calw(n)$-cohomology algebras for $n\geq1$ (c.f.\ Theorems \ref{thm on collapsing of most sseqs} and \ref{Koszul-dual Hilton-Milnor theorem} and Corollary \ref{yeah it's Wn-coh-algs}). That is, the $\calMhv(n+1)$-structure is \emph{all} of the natural structure on $\calW(n)$-cohomology for $n\geq1$.
 
-Finally, we are able to use all of this structure together to calculate, at least as a vector space, the \BKSS\ $E_2$-page for the commutative algebra $T$-sphere $\mathbb{S}^{\algs}_T$ whenever $T\geq1$. That is, we calculate the derived functors $H^*_{\calw(0)}W$, where $W=H^*_{\algs}\mathbb{S}^{\algs}_T$ is a one-dimensional trivial object concentrated in dimension $T\geq1$. \todo{Refer here to Figure \ref{BKSSdiagram2}}
-\BKSSdiagram{2}
+Finally, we are able to use all of this structure together to calculate, at least as a vector space, the \BKSS\ $E_2$-page for the commutative algebra $T$-sphere $\mathbb{S}^{\algs}_T$ whenever $T\geq1$. That is, we calculate the derived functors $H^*_{\calw(0)}W$, where $W=H^*_{\algs}\mathbb{S}^{\algs}_T$ is a one-dimensional trivial object concentrated in dimension $T\geq1$. \todo{Refer here to relevant Figure}
 
-Finally, we derive in \S\ref{The quadratic filtration section} a convergent spectral sequence which calculates the $E_2$-page for any connected $X\in s\algs$ of finite type, which we name the May-Koszul spectral sequence. Its $E_1$-page may be described in terms of the \BKSS\ $E_2$-pages of the spheres (using Theorem \ref{Koszul-dual Hilton-Milnor theorem}), and information on the $E_2$-operations in the \BKSS\ for a sphere passes over to information on the general \BKSS\ $E_2$-page via the May-Koszul spectral sequence.
+
+Finally, \todo{move me} we derive in \S\ref{The quadratic filtration section} a convergent spectral sequence which calculates the $E_2$-page for any connected $X\in s\algs$ of finite type, which we name the May-Koszul spectral sequence. Its $E_1$-page may be described in terms of the \BKSS\ $E_2$-pages of the spheres (using Theorem \ref{Koszul-dual Hilton-Milnor theorem}), and information on the $E_2$-operations in the \BKSS\ for a sphere passes over to information on the general \BKSS\ $E_2$-page via the May-Koszul spectral sequence.
 
 
 \SubsectionOrSection{The Bousfield-Kan spectral sequence for $\mathbb{S}^{\algs}_T$- conjectures or something}
 \label{the BKSS conjectures section}
+Using the \CFSSs\ discussed above, we are able to describe $\E{}{2}{\mathbb{S}^{\algs}_T}{}{}$, at least as a vector space. It is a certain subquotient of the algebraic object $F^{\calmh(1)}F^{\calmv(1)}\{\imath\}$ obtained by freely applying unstable $\deltav$-operations to the fundamental class $\imath$, and then freely applying $\calmh(1)$-operations, i.e.\ applying unstable Steenrod operations $\Sqh^j$ and taking products. While we describe this subquotient in detail in \todo{???????????????}, for the present discussion it will suffice to consider the representation given in Figure \ref{BKSSdiagram3nodifferentials}.
+
+Figure \ref{BKSSdiagram3nodifferentials} is a plot of $F^{\calmh(1)}F^{\calmv(1)}\{\imath\}$, with the nodes decorated to indicate their role in the subquotient. The empty nodes are the classes which either do not lie in the subquotient in question or are sent to zero in it. Of the remaining nodes, the solid nodes represent the sequences that we were able to form in Figure \ref{BKSSdiagram1}, and the dotted nodes represent elements that are missing from Figure \ref{BKSSdiagram1}.
+
+{\renewcommand{\differential}[3][]{}%
+\renewcommand{\bendydifferential}[3][]{}%
+\renewcommand{\doublebendydifferential}[3][]{}%
+\BKSSdiagram{3}{nodifferentials}{The subquotient $\E{}{2}{\mathbb{S}_3^{\algs}}{}{}$ of $F^{\calmh(1)}F^{\calmv(1)}\{\imath\}$.}}%
+
+Now there is in fact a differential $d_1$ on $F^{\calmh(1)}F^{\calmv(1)}\{\imath\}$ of which this subquotient is the homology. Indeed, suppose that we impose the relation $\deltav_i\Sqh^j=0$ for all $i,j$, demand that $d_1\Sqh^j=\Sqh^jd_1$ and that $d_1\deltav_t=\Sqh^2$...
+
+It is important to emphasize that 
+obtained by taking products of appropriately admissible and unstable expressions of the form
+\[\Sqh^J\deltav_I\imath\]
+
+(described in detail in ???????????????) 
+
+which we now describe. Define $F^{\calmv(1)}\{\imath\}$ to be the vector space (in $\vect{1}{+}$) obtained
+It can be identified with a subquotient of $F^{\calmh(1)}F^{\calmv(1)}\{\imath\}$ shown in Figure \ref{BKSSdiagram3} (and described in ???????????????). That is,
+
+
+We present in Figure \ref{BKSSdiagram3}
+
+
+
 In \S\ref{An alternative Bousfield-Kan E1}, we present a small model for the \BKSS\ $E_1$-page for a commutative algebra sphere. \todo{Refer here to Figure \ref{BKSSdiagram3}}
-\BKSSdiagram{3}
+
 \begin{shaded}\tiny
 
 Given our knowledge of the operations on the \BKSS, of the $E_2$-page for $\mathbb{S}^{\algs}_T$ and of the homotopy groups $\pi_*\mathbb{S}^{\algs}_T$ (c.f.\ \S\ref{Homotopy operations for simplicial commutative algebras}), a natural goal is the complete computation of the \BKSS\ for $\mathbb{S}^{\algs}_T$. In \S\ref{Some conjectures on the E1-level structure}
@@ -5337,9 +5474,9 @@ with the following properties
 \begin{enumerate}\squishlist
 \item the product $\mu$ gives $H^*_{\calc}L$ the structure of a (grading shifted) $S(\CommOperad)$-algebra;
 \item the squaring operation on $H^*_{\calc}L$ equals the \emph{top Steenrod operation}:
-\[\Sq^{s_{n+1}+1}x=x^{2}\text{\ \ for $x\in (H^*_{\calw(n)}X)_t^{s_{n+1},\ldots,s_1}$};\]
-\item \label{Sq unstable vanishing II} if $x\in (H^*_{\calw(n)}X)_t^{s_{n+1},\ldots,s_1}$, then $\Sq^ix=0$ unless $1\leq i\leq s_{n+1}+1$ and not all of $i-1,s_{n},\ldots,s_1$ equal zero;
-\item \label{Sq unstable vanishing III} if $n=0$ then $\Sq^1\equiv 0$, and $\Sq^2x=0$ for $x\in (H^*_{\calw(0)}X)_t^{s_1}$ with $t\geq 2$;
+\[\Sqh^{s_{n+1}+1}x=x^{2}\text{\ \ for $x\in (H^*_{\calw(n)}X)_t^{s_{n+1},\ldots,s_1}$};\]
+\item \label{Sq unstable vanishing II} if $x\in (H^*_{\calw(n)}X)_t^{s_{n+1},\ldots,s_1}$, then $\Sqh^ix=0$ unless $1\leq i\leq s_{n+1}+1$ and not all of $i-1,s_{n},\ldots,s_1$ equal zero (in particular, $\Sqh^1\equiv 0$ when $n=0$);
+%\item \label{Sq unstable vanishing III} if $n=0$ then $\Sqh^1\equiv 0$, and $\Sqh^2x=0$ for $x\in (H^*_{\calw(0)}X)_t^{s_1}$ with $t\geq 2$;
 \item every Steenrod operation is linear;
 \item the \emph{Cartan formula} holds:  for all $x,y\in   H^*_{\calc}L$ and $i\geq0$,
 \[\Sqh^i(xy)=\textstyle\sum_{k=1}^{i-1}(\Sqh^kx)(\Sqh^{i-k}y);\]
@@ -5347,21 +5484,7 @@ with the following properties
 \end{enumerate}
 \end{prop}
 \begin{proof}
-Almost everything here follows from Proposition \ref{the point of the appendix}, which demonstrates that the operations we are discussing here coincide with those defined on $H^*_{\bar{W}}$ (c.f.\ Propositions \ref{all the lie steenrod ops are the same} and \ref{omnibus on coh of simp lie algs}). The same technique used to prove Proposition \ref{prop on sq1 on lie not rest} proves the new part of \emph{\ref{Sq unstable vanishing II}}. For \emph{\ref{Sq unstable vanishing III}},  when $n=0$, \emph{\ref{Sq unstable vanishing II}} shows that $\Sq^1x=0$. On the other hand, to see why $\Sq^2x=0$ when $t\geq2$ is more difficult, especially since we have not determined the category of $\calw(0)$-$\Pi$-algebras. Nonetheless, as in the proof of Proposition \ref{prop on sq1 on lie not rest}, we will prove this for the universal example $\imath^s_t\in H^*_{\calw(0)}\mathbb{K}_s^{\calw(0),t}$. The reverse Adams spectral sequence (\S\ref{reverse Adams spectral sequence}) can be equipped with a quadratic grading if we view the generator of $\mathbb{K}_s^{\calw(0),t}$ as lying in quadratic grading one, and is of the form
-\[\quadgrad{k}E_2^{p,q}=\quadgrad{k}(H^{p}_{\PA{\calw(0)}}\mathbb{K}_{0,s}^{\PA{\calw(0)},t})^{q}_{T}\implies \quadgrad{k}(H^{p+q}_{\calw(0)}\mathbb{K}_s^{\calw(0),t})_T.\]
-As $\Sq^2\imath_t^s\in \quadgrad{2}(H^{s+2}_{\calw(0)}\mathbb{K}_s^{\calw(0),t})_{2t+1}$, we need to determine
-\[
-\quadgrad{2}(H^{2}_{\PA{\calw(0)}}\mathbb{K}_{0,s}^{\PA{\calw(0)},t})^{s}_{2t+1}\textup{ and }
-\quadgrad{2}(H^{1}_{\PA{\calw(0)}}\mathbb{K}_{0,s}^{\PA{\calw(0)},t})^{s+1}_{2t+1},
-\] 
-and as in the proof of Proposition \ref{prop on sq1 on lie not rest}, we need to see how far $\Ftwo\{\imath^t_s\}$ is from being free in $\PA{\calw(0)}$. Fortunately, we only need to answer this question in quadratic grading two, and 
-\[F^{\PA{\calw(0)}}(\Ftwo\{\imath^t_s\})=\pi_*(\mathbb{S}_s^{\calw(0),t})=\pi_*(F^{\calw(0)} \mathbb{K}^{t}_s).\]
-Now if $t\geq2$, $\quadgrad{2}F^{\calw(0)}V$ naturally decomposes as 
-\[\quadgrad{2}F^{\calw(0)}V=\quadgrad{2}F^{S(\LieOperad)}V\oplus P^2V\oplus\cdots \oplus P^{t-1}V,\]
-and
-we calculate, by Proposition \ref{homotopy of comm alg sphere}:
-\[\quadgrad{2}F^{\PA{\calw(0)}}(\Ftwo\{\imath^t_s\})^{2t+1}=\Ftwo\{\lambda_2\imath^t_s,\lambda_3\imath^t_s,\ldots,\lambda_s\imath^t_s\}\]
- That is, there are two missing $\lambda$-operations, $\lambda_0$ and $\lambda_1$, in the functor $F^{S(\LieOperad)}$, and the presence of the operations $P^2,\ldots,P^{t-1}$ do not effect $\quadgrad{2}F^{\PA{\calw(0)}}(\Ftwo\{\imath^t_s\})$ in internal dimension $2t+1$. We now have enough information to proceed as in the proof of Proposition \ref{prop on sq1 on lie not rest}, since $\lambda_k\imath^t_s\in \quadgrad{2}F^{\PA{\calw(0)}}(\Ftwo\{\imath^t_s\})^{2t+1}_{s+k}$ for $2\leq k\leq s$.
+Almost everything here follows from Proposition \ref{the point of the appendix}, which demonstrates that the operations we are discussing here coincide with those defined on $H^*_{\bar{W}}$ (c.f.\ Propositions \ref{all the lie steenrod ops are the same} and \ref{omnibus on coh of simp lie algs}). The same technique used to prove Proposition \ref{prop on sq1 on lie not rest} proves the new part of \emph{\ref{Sq unstable vanishing II}}. For \emph{\ref{Sq unstable vanishing III}},  when $n=0$, \emph{\ref{Sq unstable vanishing II}} shows that $\Sqh^1x=0$. On the other hand, to see why $\Sqh^2x=0$ when $t\geq2$ is more difficult, especially since we have not determined the category of $\calw(0)$-$\Pi$-algebras.
 \end{proof}
 
 
@@ -5376,14 +5499,34 @@ Suppose that $n\geq1$, and that $V\in\vect{n+1}{+}$ has homogeneous basis $B$. T
 by the relation $b^2=0$ if $b\in B_t^{0,\ldots,0}$. Here, $e(J):=j_\ell-j_{\ell-1}-\cdots j_1$ is the Serre excess of $J$.
 \end{prop}
 \begin{proof}
-By \citeBOX[6.1]{PriddySimplicialLie.pdf}, the true free object is a quotient of what we propose. It is in fact equal to what we propose, because the two-sided ideal in the homogeneous Steenrod algebra $\LieSteen$ generated by $\Sqh^1$ is spanned by those admissible sequences ending in $\Sqh^1$, so that forcing $\Sq^1_h=0$ in the relevant degrees has no unintended consequences. %Another way to express this fact is to say that left multiplication by $\Sq^1_h$ annihilates the augmentation ideal in $\LieSteen$.
+By \citeBOX[6.1]{PriddySimplicialLie.pdf}, the true free object is a quotient of what we propose. It is in fact equal to what we propose, because the two-sided ideal in the homogeneous Steenrod algebra $\LieSteen$ generated by $\Sqh^1$ is spanned by those admissible sequences ending in $\Sqh^1$, so that imposing the relation $\Sqh^1=0$ in the relevant degrees has no unintended consequences. %Another way to express this fact is to say that left multiplication by $\Sq^1_h$ annihilates the augmentation ideal in $\LieSteen$.
 \end{proof}
 \begin{cor}
 \label{basis of free horizontal operations algebra restricted}
 Suppose that $n\geq1$. For $V\in\vect{n}{+}$ with homogeneous basis $B$. Then $F^{\calMh(n+1)}V\in\vect{n+1}{+}$ is the non-unital commutative algebra coproduct
 \[S(\CommOperad) \left[b\ \middle|\ \genfrac{}{}{0pt}{}{b\in B^{s_{n},\ldots,s_1}_t}{s_{n},\ldots,s_1\textup{ not all zero}}\right]\sqcup\Lambda(\CommOperad) \left[b\ \middle|\ b\in B^{0,\ldots,0}_t\right].\]
 \end{cor}
-
+Finally, we note that the Steenrod operations on $H^*_{\calw(0)}$ satisfy an extra unstableness condition, that we \emph{intentionally omitted} from the definition of $\calmv(1)$. That is
+\begin{prop}\label{Wn Halg omnibus supplement}
+The operation $\Sqh^2:(H^*_{\calw(0)}X)^{s_1}_t\to (H^*_{\calw(0)}X)^{s_1+2}_{2t+1}$ is zero when $t\geq2$.
+\end{prop}
+\begin{proof}
+As in the proof of Proposition \ref{prop on sq1 on lie not rest} we use the universal example $\imath^s_t\in H^*_{\calw(0)}\mathbb{K}_s^{\calw(0),t}$. The reverse Adams spectral sequence (\S\ref{reverse Adams spectral sequence}) can be equipped with a quadratic grading if we view the generator of $\mathbb{K}_s^{\calw(0),t}$ as lying in quadratic grading one, and is of the form
+\[\quadgrad{k}E_2^{p,q}=\quadgrad{k}(H^{p}_{\PA{\calw(0)}}\mathbb{K}_{0,s}^{\PA{\calw(0)},t})^{q}_{T}\implies \quadgrad{k}(H^{p+q}_{\calw(0)}\mathbb{K}_s^{\calw(0),t})_T.\]
+As $\Sqh^2\imath_t^s\in \quadgrad{2}(H^{s+2}_{\calw(0)}\mathbb{K}_s^{\calw(0),t})_{2t+1}$, we need to determine
+\[
+\quadgrad{2}(H^{2}_{\PA{\calw(0)}}\mathbb{K}_{0,s}^{\PA{\calw(0)},t})^{s}_{2t+1}\textup{ and }
+\quadgrad{2}(H^{1}_{\PA{\calw(0)}}\mathbb{K}_{0,s}^{\PA{\calw(0)},t})^{s+1}_{2t+1},
+\] 
+and as in the proof of Proposition \ref{prop on sq1 on lie not rest}, we must examine how far $\Ftwo\{\imath^t_s\}$ is from being free in $\PA{\calw(0)}$. Fortunately, we only need to answer this question in quadratic grading two, and 
+\[F^{\PA{\calw(0)}}(\Ftwo\{\imath^t_s\})=\pi_*(\mathbb{S}_s^{\calw(0),t})=\pi_*(F^{\calw(0)} \mathbb{K}^{t}_s).\]
+Now if $t\geq2$, $\quadgrad{2}F^{\calw(0)}V$ naturally decomposes as 
+\[\quadgrad{2}F^{\calw(0)}V=\quadgrad{2}F^{S(\LieOperad)}V\oplus P^2V\oplus\cdots \oplus P^{t-1}V,\]
+and
+we calculate, by Proposition \ref{homotopy of comm alg sphere}:
+\[\quadgrad{2}F^{\PA{\calw(0)}}(\Ftwo\{\imath^t_s\})^{2t+1}=\Ftwo\{\lambda_2\imath^t_s,\lambda_3\imath^t_s,\ldots,\lambda_s\imath^t_s\}\]
+ That is, there are two missing $\lambda$-operations, $\lambda_0$ and $\lambda_1$, in the functor $F^{\PA{S(\LieOperad)}}$, and the presence of the operations $P^2,\ldots,P^{t-1}$ does not effect $\quadgrad{2}F^{\PA{\calw(0)}}(\Ftwo\{\imath^t_s\})$ in internal dimension $2t+1$. We now have enough information to proceed as in the proof of Proposition \ref{prop on sq1 on lie not rest}, since $\lambda_k\imath^t_s\in \quadgrad{2}F^{\PA{\calw(0)}}(\Ftwo\{\imath^t_s\})^{2t+1}_{s+k}$ for $2\leq k\leq s$.
+\end{proof}
 \SubsectionOrSection{Relations between the horizontal and vertical operations}
 \label{Relations between the horizontal and vertical operations}
 %With such a broad range of available operations, 
